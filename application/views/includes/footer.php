@@ -1,6 +1,6 @@
 <footer class="main-footer">
     <div class="pull-right hidden-xs">
-        <b>Admin</b> Management panel | V1.0
+        <b>Supra Qulity Export India Pvt Ltd</b> Admin Management panel | V1.0
     </div>
     <strong>Copyright &copy; 2022
         <a href="<?php echo base_url(); ?>">Admin</a>

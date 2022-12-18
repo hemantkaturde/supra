@@ -18,12 +18,14 @@
     <![endif]-->
 </head>
 
-<body class="login-page">
+<body class="login-page" style="background-image: url('<?=base_url()?>/assets/images/login_background.jpg');background-size: 1550px 700px;background-repeat: no-repeat;">
   <div class="login-box">
     <div class="login-logo">
       <a href="#">
         <b>Admin</b>
-        <br>Supra Qulity Export India Pvt Ltd</a>
+        <p style="font-size: inherit;font-weight: lighter;">Supra Qulity Export India Pvt Ltd</p>
+    </div>
+    <div class="login-logo">
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
