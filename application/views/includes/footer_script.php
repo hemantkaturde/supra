@@ -566,7 +566,7 @@
 </script>
 <?php } ?>
 
-<?php if($pageTitle=='USP Master'){ ?>
+<?php if($pageTitle=='USP Master' || $pageTitle=='Add USP Master'){ ?>
 	<script type="text/javascript">
 		$(document).ready(function() {
             var dt = $('#view_USP').DataTable({
@@ -591,11 +591,104 @@
 	            "bProcessing": true,
 	            "serverSide": true,
 	            "ajax":{
-                    url :"<?php echo base_url();?>fetchVendor",
+                    url :"<?php echo base_url();?>fetchUSP",
                     type: "post",
 	            },
 	        });
 	    });
+
+		$(document).on('click','#savenewUSP',function(e){
+			e.preventDefault();
+			$(".loader_ajax").show();
+			var formData = new FormData($("#addnewuspform")[0]);
+
+			$.ajax({
+				url : "<?php echo base_url();?>addnewUSP",
+				type: "POST",
+				data : formData,
+				cache: false,
+		        contentType: false,
+		        processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+						$(".loader_ajax").hide();
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						swal({
+							title: "Success",
+							text: "USP Successfully Added!",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+								window.location.href = "<?php echo base_url().'uspmaster'?>";
+						});		
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			});
+			return false;
+	    });
+
+		$(document).on('click','.deletesusp',function(e){
+				var elemF = $(this);
+				e.preventDefault();
+
+				swal({
+					title: "Are you sure?",
+					text: "Delete USP",
+					type: "warning",
+					showCancelButton: true,
+					closeOnClickOutside: false,
+					confirmButtonClass: "btn-sm btn-danger",
+					confirmButtonText: "Yes, delete it!",
+					cancelButtonText: "No, cancel plz!",
+					closeOnConfirm: false,
+					closeOnCancel: false
+				}, function(isConfirm) {
+					if (isConfirm) {
+								$.ajax({
+									url : "<?php echo base_url();?>deleteUSP",
+									type: "POST",
+									data : 'id='+elemF.attr('data-id'),
+									success: function(data, textStatus, jqXHR)
+									{
+										const obj = JSON.parse(data);
+									
+										if(obj.status=='success'){
+											swal({
+												title: "Deleted!",
+												text: "USP Deleted Succesfully",
+												icon: "success",
+												button: "Ok",
+												},function(){ 
+													window.location.href = "<?php echo base_url().'uspmaster'?>";
+											});	
+										}
+
+									},
+									error: function (jqXHR, textStatus, errorThrown)
+									{
+										$(".loader_ajax").hide();
+									}
+								})
+							}
+							else {
+					swal("Cancelled", "USP deletion cancelled ", "error");
+					}
+				});
+		});
 
 	</script>
 <?php } ?>

@@ -362,6 +362,104 @@ class Admin_model extends CI_Model
            return FALSE;
         }
     }
+
+    public function getUspCount($params){
+
+        $this->db->select('*');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_USP.".usp_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_USP.".address LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_USP.".landline LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_USP.".phone1 LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_USP.".contact_person LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_USP.".email LIKE '%".$params['search']['value']."%')");
+        }
+
+        $this->db->where(TBL_USP.'.status', 1);
+        $query = $this->db->get(TBL_USP);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+    }
+
+    public function getUspdata($params){
+
+        $this->db->select('*');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_USP.".usp_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_USP.".address LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_USP.".landline LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_USP.".phone1 LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_USP.".contact_person LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_USP.".email LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_USP.'.status', 1);
+        $this->db->limit($params['length'],$params['start']);
+        $this->db->order_by(TBL_USP.'.usp_id','DESC');
+        $query = $this->db->get(TBL_USP);
+        $fetch_result = $query->result_array();
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['usp_name'] = $value['usp_name'];
+                $data[$counter]['address'] =  $value['address'];
+                $data[$counter]['email'] =  $value['email'];
+                $data[$counter]['landline'] = $value['landline'];
+                $data[$counter]['phone1'] =  $value['phone1'];
+                $data[$counter]['contact_person'] =  $value['contact_person'];
+                $data[$counter]['action'] = '';
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."updateSupplier/".$value['usp_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['usp_id']."' class='fa fa-trash-o deletesusp' aria-hidden='true'></i>"; 
+ 
+                $counter++; 
+            }
+        }
+
+        return $data;
+    }
+
+    public function checkIfexitsusp($vendor_name){
+
+        $this->db->select('*');
+        $this->db->where(TBL_USP.'.usp_name', $vendor_name);
+        $this->db->where(TBL_USP.'.status', 1);
+        $query = $this->db->get(TBL_USP);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+
+    }
+
+    public function saveUSPdata($id,$data){
+        if($id != '') {
+            $this->db->where('usp_id', $id);
+            if($this->db->update(TBL_USP, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_USP, $data)) {
+                return $this->db->insert_id();;
+            } else {
+                return FALSE;
+            }
+        }
+    }
+
+    public function deleteUSP($id){
+        $this->db->where('usp_id', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_USP)){
+           return TRUE;
+        }else{
+           return FALSE;
+        }
+    }
+
 }
 
 ?>

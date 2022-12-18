@@ -897,7 +897,7 @@ class Admin extends BaseController
 
      }
 
-      /**
+    /**
      * This function is used to Delete the Raw Material Master
      */
 
@@ -1126,6 +1126,117 @@ class Admin extends BaseController
         $this->global['pageTitle'] = 'USP Master';
         $this->loadViews("masters/uspmaster", $this->global, $data, NULL);
     }
+
+
+    /**
+     * This function is used to load the USP Master Listing
+     */
+
+     public function fetchUSP(){
+        $params = $_REQUEST;
+        $totalRecords = $this->admin_model->getUspCount($params); 
+        $queryRecords = $this->admin_model->getUspdata($params); 
+
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+        echo json_encode($json_data);
+     }
+
+     
+    /**
+     * This function is used to Add the USP Master
+     */
+
+     public function addnewUSP(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $save_usp_response = array();
+
+            $this->form_validation->set_rules('usp_name','USP Name','trim|required|max_length[128]');
+            $this->form_validation->set_rules('landline','Landline','trim|required|max_length[128]');
+            $this->form_validation->set_rules('address','Address','trim|required');
+            $this->form_validation->set_rules('phone_1','Phone 1','trim|max_length[50]');
+            $this->form_validation->set_rules('contact_person','Contact Person','trim|required|max_length[50]');
+            $this->form_validation->set_rules('mobile','Mobile','trim|required|max_length[50]');
+            $this->form_validation->set_rules('email','Email','trim|required|valid_email|max_length[50]');
+            $this->form_validation->set_rules('mobile_2','Mobile 2','trim|max_length[50]');
+            $this->form_validation->set_rules('fax','Fax','trim|max_length[50]');
+            $this->form_validation->set_rules('GSTIN','GSTIN','trim|required|max_length[50]');
+
+            if($this->form_validation->run() == FALSE)
+            {
+                $save_usp_response['status'] = 'failure';
+                $save_usp_response['error'] = array('usp_name'=>strip_tags(form_error('usp_name')), 'landline'=>strip_tags(form_error('landline')), 'address'=>strip_tags(form_error('address')), 'phone_1'=>strip_tags(form_error('phone_1')),'contact_person'=>strip_tags(form_error('contact_person')),'mobile'=>strip_tags(form_error('mobile')),'email'=>strip_tags(form_error('email')),'mobile_2'=>strip_tags(form_error('mobile_2')),'fax'=>strip_tags(form_error('fax')),'GSTIN'=>strip_tags(form_error('GSTIN')));
+            }else{
+
+                $data = array(
+                    'usp_name'   => trim($this->input->post('usp_name')),
+                    'landline'     => trim($this->input->post('landline')),
+                    'address'    => trim($this->input->post('address')),
+                    'phone1'  => trim($this->input->post('phone_1')),
+                    'contact_person' => trim($this->input->post('contact_person')),
+                    'mobile' =>   trim($this->input->post('mobile')),
+                    'email' =>    trim($this->input->post('email')),
+                    'mobile2' =>    trim($this->input->post('mobile_2')),
+                    'fax' =>    trim($this->input->post('fax')),
+                    'GSTIN' =>    trim($this->input->post('GSTIN'))
+                );
+
+                $checkIfexitsusp = $this->admin_model->checkIfexitsusp(trim($this->input->post('usp_name')));
+                if($checkIfexitsusp > 0){
+                    $save_usp_response['status'] = 'failure';
+                    $save_usp_response['error'] = array('usp_name'=>'USP Mame Alreday Exits');
+                }else{
+                    $saveUSPdata = $this->admin_model->saveUSPdata('',$data);
+                    if($saveUSPdata){
+                        $save_usp_response['status'] = 'success';
+                        $save_usp_response['error'] = array('usp_name'=>'', 'landline'=>'', 'address'=>'', 'phone_1'=>'','contact_person'=>'','mobile'=>'','email'=>'','mobile_2'=>'','fax'=>'','GSTIN'=>'');
+                    }
+                }
+            }
+            echo json_encode($save_usp_response);
+        }else{
+            $process = 'Add USP Master';
+            $processFunction = 'Admin/addnewUSP';
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Add USP Master';
+            $this->loadViews("masters/addsUSPMaster", $this->global, $data, NULL);
+        }
+     }
+
+    /**
+     * This function is used to Delete the Raw Material Master
+     */
+
+     public function deleteUSP(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->deleteUSP(trim($this->input->post('id')));
+            if ($result) {
+                        $process = 'USP Materail Delete';
+                        $processFunction = 'Admin/deleteUSP';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
+     }
 
     
 
