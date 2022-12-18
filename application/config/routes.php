@@ -84,7 +84,7 @@ $route['deleteVendor'] = "admin/deleteVendor";
 $route['uspmaster'] = "admin/uspmaster";
 $route['fetchUSP'] = "admin/fetchUSP";
 $route['addnewUSP'] = "admin/addnewUSP";
-$route['updateSupplier/(:any)'] = "admin/updateSupplier/$1";
+$route['updateUSP/(:any)'] = "admin/updateUSP/$1";
 $route['deleteUSP'] = "admin/deleteUSP";
 
 

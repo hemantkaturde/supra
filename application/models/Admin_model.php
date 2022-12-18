@@ -412,7 +412,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['phone1'] =  $value['phone1'];
                 $data[$counter]['contact_person'] =  $value['contact_person'];
                 $data[$counter]['action'] = '';
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."updateSupplier/".$value['usp_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."updateUSP/".$value['usp_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['usp_id']."' class='fa fa-trash-o deletesusp' aria-hidden='true'></i>"; 
  
                 $counter++; 
@@ -458,6 +458,30 @@ class Admin_model extends CI_Model
         }else{
            return FALSE;
         }
+    }
+
+    public function getUSPdetails($id){
+
+        $this->db->select('*');
+        $this->db->where(TBL_USP.'.usp_id', $id);
+        $this->db->where(TBL_USP.'.status', 1);
+        $query = $this->db->get(TBL_USP);
+        $data = $query->result_array();
+        return $data;
+
+    }
+
+    public function checkifexituspdate($id,$usp_name){
+
+        $this->db->select('*');
+        $this->db->where(TBL_USP.'.usp_id', $id);
+        $this->db->where(TBL_USP.'.usp_name', $usp_name);
+        $this->db->where(TBL_USP.'.status', 1);
+        $query = $this->db->get(TBL_USP);
+        $data = $query->num_rows();
+        return $data;
+
+
     }
 
 }

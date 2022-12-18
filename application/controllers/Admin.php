@@ -1219,7 +1219,7 @@ class Admin extends BaseController
      }
 
     /**
-     * This function is used to Delete the Raw Material Master
+     * This function is used to Delete the USP Master
      */
 
      public function deleteUSP(){
@@ -1236,6 +1236,86 @@ class Admin extends BaseController
         }else{
             echo(json_encode(array('status'=>'failed'))); 
         }
+     }
+
+
+    /**
+     * This function is used to Update the USP Master
+     */
+
+     public function updateUSP($id){
+        $post_submit = $this->input->post();
+        if($post_submit){
+
+            $update_supplier_response = array();
+
+            $this->form_validation->set_rules('usp_name','USP Name','trim|required|max_length[128]');
+            $this->form_validation->set_rules('landline','Landline','trim|required|max_length[128]');
+            $this->form_validation->set_rules('address','Address','trim|required');
+            $this->form_validation->set_rules('phone_1','Phone 1','trim|max_length[50]');
+            $this->form_validation->set_rules('contact_person','Contact Person','trim|required|max_length[50]');
+            $this->form_validation->set_rules('mobile','Mobile','trim|required|max_length[50]');
+            $this->form_validation->set_rules('email','Email','trim|required|valid_email|max_length[50]');
+            $this->form_validation->set_rules('mobile_2','Mobile 2','trim|max_length[50]');
+            $this->form_validation->set_rules('fax','Fax','trim|max_length[50]');
+            $this->form_validation->set_rules('GSTIN','GSTIN','trim|required|max_length[50]');
+
+            if($this->form_validation->run() == FALSE)
+            {
+                $update_supplier_response['status'] = 'failure';
+                $update_supplier_response['error'] = array('usp_name'=>strip_tags(form_error('usp_name')), 'landline'=>strip_tags(form_error('landline')), 'address'=>strip_tags(form_error('address')), 'phone_1'=>strip_tags(form_error('phone_1')),'contact_person'=>strip_tags(form_error('contact_person')),'mobile'=>strip_tags(form_error('mobile')),'email'=>strip_tags(form_error('email')),'mobile_2'=>strip_tags(form_error('mobile_2')),'fax'=>strip_tags(form_error('fax')),'GSTIN'=>strip_tags(form_error('GSTIN')));
+            }else{
+
+                $data = array(
+                    'usp_name'   => trim($this->input->post('usp_name')),
+                    'landline'     => trim($this->input->post('landline')),
+                    'address'    => trim($this->input->post('address')),
+                    'phone1'  => trim($this->input->post('phone_1')),
+                    'contact_person' => trim($this->input->post('contact_person')),
+                    'mobile' =>   trim($this->input->post('mobile')),
+                    'email' =>    trim($this->input->post('email')),
+                    'mobile2' =>    trim($this->input->post('mobile_2')),
+                    'fax' =>    trim($this->input->post('fax')),
+                    'GSTIN' =>    trim($this->input->post('GSTIN'))
+                );
+
+                $checkifexituspdate = $this->admin_model->checkifexituspdate(trim($this->input->post('usp_id')),trim($this->input->post('usp_name')));
+
+                if($checkifexituspdate > 0){
+                    $updateSupplierdata = $this->admin_model->saveUSPdata(trim($this->input->post('usp_id')),$data);
+                    if($updateSupplierdata){
+                        $update_supplier_response['status'] = 'success';
+                        $update_supplier_response['error'] = array('usp_name'=>'', 'landline'=>'', 'address'=>'', 'phone_1'=>'','contact_person'=>'','mobile'=>'','email'=>'','mobile_2'=>'','fax'=>'','GSTIN'=>'');
+                    }
+
+                }else{
+
+                    $checkIfexitsusp = $this->admin_model->checkIfexitsusp(trim($this->input->post('usp_name')));
+                    if($checkIfexitsusp > 0){
+                        $update_supplier_response['status'] = 'failure';
+                        $update_supplier_response['error'] = array('usp_name'=>'USP Alreday Exits');
+                    }else{
+                        $updateSupplierdata = $this->admin_model->saveUSPdata(trim($this->input->post('usp_id')),$data);
+                        if($updateSupplierdata){
+                           $update_supplier_response['status'] = 'success';
+                           $update_supplier_response['error'] = array('usp_name'=>'', 'landline'=>'', 'address'=>'', 'phone_1'=>'','contact_person'=>'','mobile'=>'','email'=>'','mobile_2'=>'','fax'=>'','GSTIN'=>'');
+                        }
+
+                    }
+                }
+           
+            }
+            echo json_encode($update_supplier_response);
+        }else{
+            $process = 'Edit USP Master';
+            $processFunction = 'Admin/updateUSP';
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Edit USP Master';
+            $data['getUSPdata'] = $this->admin_model->getUSPdetails($id);
+            $this->loadViews("masters/edituspMaster", $this->global, $data, NULL);
+
+        }
+
      }
 
     

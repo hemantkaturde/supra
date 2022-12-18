@@ -566,7 +566,7 @@
 </script>
 <?php } ?>
 
-<?php if($pageTitle=='USP Master' || $pageTitle=='Add USP Master'){ ?>
+<?php if($pageTitle=='USP Master' || $pageTitle=='Add USP Master' || $pageTitle=='Edit USP Master'){ ?>
 	<script type="text/javascript">
 		$(document).ready(function() {
             var dt = $('#view_USP').DataTable({
@@ -640,6 +640,50 @@
 			});
 			return false;
 	    });
+
+		$(document).on('click','#updateusp',function(e){
+			e.preventDefault();
+			$(".loader_ajax").show();
+			var formData = new FormData($("#updateuspform")[0]);
+            var usp_id = $("#usp_id").val();
+			$.ajax({
+				url : "<?php echo base_url();?>updateUSP/"+usp_id,
+				type: "POST",
+				data : formData,
+				cache: false,
+		        contentType: false,
+		        processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+						$(".loader_ajax").hide();
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						swal({
+							title: "Success",
+							text: "USP Successfully Updated!",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+								window.location.href = "<?php echo base_url().'uspmaster'?>";
+						});		
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			});
+			return false;
+	});
 
 		$(document).on('click','.deletesusp',function(e){
 				var elemF = $(this);
