@@ -81,6 +81,12 @@ $route['addnewVendor'] = "admin/addnewVendor";
 $route['updateVendor/(:any)'] = "admin/updateVendor/$1";
 $route['deleteVendor'] = "admin/deleteVendor";
 
+$route['uspmaster'] = "admin/uspmaster";
+$route['fetchSupplier'] = "admin/fetchSupplier";
+$route['addnewSupplier'] = "admin/addnewSupplier";
+$route['updateSupplier/(:any)'] = "admin/updateSupplier/$1";
+$route['deleteSupplier'] = "admin/deleteSupplier";
+
 
 
 

@@ -1116,4 +1116,17 @@ class Admin extends BaseController
             }
      }
 
+    /**
+     * This function is used to load the USP Master
+     */
+    public function uspmaster(){
+        $process = 'USP Master';
+        $processFunction = 'Admin/uspmaster';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'USP Master';
+        $this->loadViews("masters/uspmaster", $this->global, $data, NULL);
+    }
+
+    
+
 }
