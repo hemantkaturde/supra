@@ -123,7 +123,7 @@ class Admin extends BaseController
                 
                 redirect('userListing');
             }
-        }
+    }
 
      /**
      * This function is used load user edit information
@@ -477,9 +477,9 @@ class Admin extends BaseController
                 $updatecompany_response = array();
 
                 $this->form_validation->set_rules('company_name','Company Name','trim|required|max_length[128]');
-                $this->form_validation->set_rules('phone_1','Phone 1','trim|required|max_length[128]');
+                $this->form_validation->set_rules('phone_1','Phone 1','trim|required|numeric|max_length[128]');
                 $this->form_validation->set_rules('company_address','Company Address','trim|required');
-                $this->form_validation->set_rules('phone_2','Phone 2','trim|max_length[50]');
+                $this->form_validation->set_rules('phone_2','Phone 2','trim|numeric|max_length[50]');
                 $this->form_validation->set_rules('Website','Website','trim|required|max_length[50]');
                 $this->form_validation->set_rules('email','Email','trim|required|valid_email|max_length[50]');
                 $this->form_validation->set_rules('GSTIN','GSTIN','trim|required|max_length[50]');
@@ -1013,7 +1013,7 @@ class Admin extends BaseController
             $processFunction = 'Admin/addnewVendor';
             $this->logrecord($process,$processFunction);
             $this->global['pageTitle'] = 'Add Vendor Master';
-            $this->loadViews("masters/addVendorMaster", $this->global, $data, NULL);
+            $this->loadViews("masters/addVendormaster", $this->global, NULL, NULL);
         }
      }
 
@@ -1358,6 +1358,320 @@ class Admin extends BaseController
 
     }
 
-    
+
+    /**
+     * This function is used to Add the Finished Goods 
+     */
+
+     public function addnewFinishedgoods(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $save_finished_goods_response = array();
+
+            $this->form_validation->set_rules('part_number','Part Number','trim|required');
+            $this->form_validation->set_rules('name','Name','trim|required');
+            $this->form_validation->set_rules('hsn_code','HSN Code','trim|required');
+            $this->form_validation->set_rules('gross_weight','Gross Weight','trim|required');
+            $this->form_validation->set_rules('net_weight','Net Weight','trim|required');
+            $this->form_validation->set_rules('sac','SAC','trim|required');
+            $this->form_validation->set_rules('drawing_number','Drawing Number','trim|required');
+            $this->form_validation->set_rules('description_1','description_1','trim');
+            $this->form_validation->set_rules('description_2','description_2','trim');
+
+            if($this->form_validation->run() == FALSE)
+            {
+                $save_finished_goods_response['status'] = 'failure';
+                $save_finished_goods_response['error'] = array('part_number'=>strip_tags(form_error('part_number')), 'name'=>strip_tags(form_error('name')), 'hsn_code'=>strip_tags(form_error('hsn_code')), 'gross_weight'=>strip_tags(form_error('gross_weight')),'net_weight'=>strip_tags(form_error('net_weight')),'sac'=>strip_tags(form_error('sac')),'drawing_number'=>strip_tags(form_error('drawing_number')),'description_1'=>strip_tags(form_error('description_1')),'description_2'=>strip_tags(form_error('description_2')));
+            }else{
+
+                $data = array(
+                    'part_number'   => trim($this->input->post('part_number')),
+                    'name'     => trim($this->input->post('name')),
+                    'hsn_code'    => trim($this->input->post('hsn_code')),
+                    'groass_weight'  => trim($this->input->post('gross_weight')),
+                    'net_weight' => trim($this->input->post('net_weight')),
+                    'sac' =>   trim($this->input->post('sac')),
+                    'drawing_number' =>    trim($this->input->post('drawing_number')),
+                    'description_1' =>    trim($this->input->post('description_1')),
+                    'description_2' =>    trim($this->input->post('description_2'))
+                );
+
+                $checkIfexitsFinishedgoods = $this->admin_model->checkIfexitsFinishedgoods(trim($this->input->post('name')));
+                if($checkIfexitsFinishedgoods > 0){
+                    $save_finished_goods_response['status'] = 'failure';
+                    $save_finished_goods_response['error'] = array('name'=>'Name Alreday Exits');
+                }else{
+                    $saveFinishedgoodsdata = $this->admin_model->saveFinishedgoodsdata('',$data);
+                    if($saveFinishedgoodsdata){
+                        $save_finished_goods_response['status'] = 'success';
+                        $save_finished_goods_response['error'] = array('part_number'=>'', 'name'=>'', 'hsn_code'=>'', 'gross_weight'=>'','net_weight'=>'','sac'=>'','drawing_number'=>'','description_1'=>'','description_2'=>'');
+                    }
+                }
+            }
+            echo json_encode($save_finished_goods_response);
+        }else{
+            $process = 'Add Finished Goods';
+            $processFunction = 'Admin/addnewFinishedgoods';
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Add Finished Goods';
+            $this->loadViews("masters/addsFinishedgoodsmaster", $this->global, NULL, NULL);
+        }
+     }
+
+
+    /**
+     * This function is used to Delete the USP Master
+     */
+
+     public function deletefinishedgoods(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->deletefinishedgoods(trim($this->input->post('id')));
+            if ($result) {
+                        $process = 'USP Materail Delete';
+                        $processFunction = 'Admin/deleteUSP';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
+     }
+
+
+    /**
+     * This function is used to Add the Finished Goods 
+     */
+
+     public function updateFinishedgoods($id){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $update_finished_goods_response = array();
+
+            $this->form_validation->set_rules('part_number','Part Number','trim|required');
+            $this->form_validation->set_rules('name','Name','trim|required');
+            $this->form_validation->set_rules('hsn_code','HSN Code','trim|required');
+            $this->form_validation->set_rules('gross_weight','Gross Weight','trim|required');
+            $this->form_validation->set_rules('net_weight','Net Weight','trim|required');
+            $this->form_validation->set_rules('sac','SAC','trim|required');
+            $this->form_validation->set_rules('drawing_number','Drawing Number','trim|required');
+            $this->form_validation->set_rules('description_1','description_1','trim');
+            $this->form_validation->set_rules('description_2','description_2','trim');
+
+            if($this->form_validation->run() == FALSE)
+            {
+                $update_finished_goods_response['status'] = 'failure';
+                $update_finished_goods_response['error'] = array('part_number'=>strip_tags(form_error('part_number')), 'name'=>strip_tags(form_error('name')), 'hsn_code'=>strip_tags(form_error('hsn_code')), 'gross_weight'=>strip_tags(form_error('gross_weight')),'net_weight'=>strip_tags(form_error('net_weight')),'sac'=>strip_tags(form_error('sac')),'drawing_number'=>strip_tags(form_error('drawing_number')),'description_1'=>strip_tags(form_error('description_1')),'description_2'=>strip_tags(form_error('description_2')));
+            }else{
+
+                $data = array(
+                    'part_number'   => trim($this->input->post('part_number')),
+                    'name'     => trim($this->input->post('name')),
+                    'hsn_code'    => trim($this->input->post('hsn_code')),
+                    'groass_weight'  => trim($this->input->post('gross_weight')),
+                    'net_weight' => trim($this->input->post('net_weight')),
+                    'sac' =>   trim($this->input->post('sac')),
+                    'drawing_number' =>    trim($this->input->post('drawing_number')),
+                    'description_1' =>    trim($this->input->post('description_1')),
+                    'description_2' =>    trim($this->input->post('description_2'))
+                );
+
+               
+                $checkifexitfinishedgoodsupdate = $this->admin_model->checkifexitfinishedgoodsupdate(trim($this->input->post('fin_id')),trim($this->input->post('name')));
+
+                if($checkifexitfinishedgoodsupdate > 0){
+                    $updatefinishedgoodsdata = $this->admin_model->saveFinishedgoodsdata(trim($this->input->post('fin_id')),$data);
+                    if($updatefinishedgoodsdata){
+                        $update_finished_goods_response['status'] = 'success';
+                        $update_finished_goods_response['error'] = array('part_number'=>'', 'name'=>'', 'hsn_code'=>'', 'gross_weight'=>'','net_weight'=>'','sac'=>'','drawing_number'=>'','description_1'=>'','description_2'=>'');
+                    }
+
+                }else{
+
+                    $checkifexitsfinished = $this->admin_model->checkIfexitsFinishedgoods(trim($this->input->post('name')));
+                    if($checkifexitsfinished > 0){
+                        $update_finished_goods_response['status'] = 'failure';
+                        $update_finished_goods_response['error'] = array('name'=>'Finished Alreday Exits');
+                    }else{
+                        $updatedata = $this->admin_model->saveFinishedgoodsdata(trim($this->input->post('fin_id')),$data);
+                        if($updatedata){
+                           $update_finished_goods_response['status'] = 'success';
+                           $update_finished_goods_response['error'] = array('part_number'=>'', 'name'=>'', 'hsn_code'=>'', 'gross_weight'=>'','net_weight'=>'','sac'=>'','drawing_number'=>'','description_1'=>'','description_2'=>'');
+                        }
+
+                    }
+                }
+
+            }
+            echo json_encode($update_finished_goods_response);
+        }else{
+            $process = 'Update Finished Goods';
+            $processFunction = 'Admin/updateFinishedgoods';
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Update Finished Goods';
+            $data['getFinishedgoodsdata'] = $this->admin_model->getFinishedgoodsdata($id);
+
+            $this->loadViews("masters/editFinishedgoodsmaster", $this->global, $data, NULL);
+        }
+     }
+
+
+    /**
+     * This function is used to load the Supplier Master
+     */
+    public function plattingmaster(){
+        $process = 'Platting Master';
+        $processFunction = 'Admin/plattingmaster';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Platting Master';
+        $this->loadViews("masters/plattingmaster", $this->global, $data, NULL);
+    }
+
+
+    /**
+     * This function is used to load the Platting Master Data
+     */
+    public function fetchplattinglist(){
+        $params = $_REQUEST;
+        $totalRecords = $this->admin_model->getPlattingCount($params); 
+        $queryRecords = $this->admin_model->getPlattingdata($params); 
+
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+        echo json_encode($json_data);
+
+    }
+  
+
+     /**
+     * This function is used to load the Platting Master Data
+     */
+
+    public function addnewPlatting(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $new_plattimg_response = array();
+
+            $this->form_validation->set_rules('type_of_raw_material','Type of Raw Material','trim|required');
+            $this->form_validation->set_rules('type_of_platting','Type of Platting','trim|required');
+
+            if($this->form_validation->run() == FALSE)
+            {
+                $new_plattimg_response['status'] = 'failure';
+                $new_plattimg_response['error'] = array('type_of_raw_material'=>strip_tags(form_error('type_of_raw_material')), 'type_of_platting'=>strip_tags(form_error('type_of_platting')));
+            }else{
+
+                $data = array(
+                    'type_of_raw_material'   => trim($this->input->post('type_of_raw_material')),
+                    'type_of_platting'     => trim($this->input->post('type_of_platting'))
+                );
+
+                $checkifexitsplatting = $this->admin_model->checkifexitsplatting(trim($this->input->post('type_of_raw_material')));
+                if($checkifexitsplatting > 0){
+                    $new_plattimg_response['status'] = 'failure';
+                    $new_plattimg_response['error'] = array('type_of_raw_material'=>'Type of Raw Material Alreday Exits');
+                }else{
+                    $saveplattingdata = $this->admin_model->saveplattingdata('',$data);
+                    if($saveplattingdata){
+                        $new_plattimg_response['status'] = 'success';
+                        $new_plattimg_response['error'] = array('type_of_raw_material'=>'', 'type_of_platting'=>'');
+                    }
+                }
+            }
+            echo json_encode($new_plattimg_response);
+        }else{
+            $process = 'Add Platting Master';
+            $processFunction = 'Admin/addnewPlatting';
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Add Platting Master';
+            $this->loadViews("masters/addPlattingmaster", $this->global, NULL, NULL);
+        }
+    }
+
+
+    /**
+     * This function is used to Delete the USP Master
+     */
+
+     public function deleteplatting(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->deleteplatting(trim($this->input->post('id')));
+            if ($result) {
+                        $process = 'Platting Delete';
+                        $processFunction = 'Admin/deleteplatting';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
+     }
+
+
+     /**
+     * This function is used to load the Platting Master Data
+     */
+
+    public function updatePlatting(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $new_plattimg_response = array();
+
+            $this->form_validation->set_rules('type_of_raw_material','Type of Raw Material','trim|required');
+            $this->form_validation->set_rules('type_of_platting','Type of Platting','trim|required');
+
+            if($this->form_validation->run() == FALSE)
+            {
+                $new_plattimg_response['status'] = 'failure';
+                $new_plattimg_response['error'] = array('type_of_raw_material'=>strip_tags(form_error('type_of_raw_material')), 'type_of_platting'=>strip_tags(form_error('type_of_platting')));
+            }else{
+
+                $data = array(
+                    'type_of_raw_material'   => trim($this->input->post('type_of_raw_material')),
+                    'type_of_platting'     => trim($this->input->post('type_of_platting'))
+                );
+
+                $checkifexitsplatting = $this->admin_model->checkifexitsplatting(trim($this->input->post('type_of_raw_material')));
+                if($checkifexitsplatting > 0){
+                    $new_plattimg_response['status'] = 'failure';
+                    $new_plattimg_response['error'] = array('type_of_raw_material'=>'Type of Raw Material Alreday Exits');
+                }else{
+                    $saveplattingdata = $this->admin_model->saveplattingdata('',$data);
+                    if($saveplattingdata){
+                        $new_plattimg_response['status'] = 'success';
+                        $new_plattimg_response['error'] = array('type_of_raw_material'=>'', 'type_of_platting'=>'');
+                    }
+                }
+            }
+            echo json_encode($new_plattimg_response);
+        }else{
+            $process = 'Update Platting Master';
+            $processFunction = 'Admin/addnewPlatting';
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Update Platting Master';
+            $this->loadViews("masters/updatePlattingmaster", $this->global, NULL, NULL);
+        }
+    }
+
+
+
+
 
 }

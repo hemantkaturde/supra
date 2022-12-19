@@ -489,16 +489,17 @@ class Admin_model extends CI_Model
         $this->db->select('*');
         if($params['search']['value'] != "") 
         {
-            $this->db->where("(".TBL_SUPPLIER.".supplier_name LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_SUPPLIER.".address LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_SUPPLIER.".landline LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_SUPPLIER.".phone1 LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_SUPPLIER.".contact_person LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_SUPPLIER.".email LIKE '%".$params['search']['value']."%')");
+            $this->db->where("(".TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FINISHED_GOODS.".name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FINISHED_GOODS.".hsn_code LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FINISHED_GOODS.".groass_weight LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FINISHED_GOODS.".net_weight LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FINISHED_GOODS.".drawing_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FINISHED_GOODS.".sac LIKE '%".$params['search']['value']."%')");
         }
 
-        $this->db->where(TBL_SUPPLIER.'.status', 1);
-        $query = $this->db->get(TBL_SUPPLIER);
+        $this->db->where(TBL_FINISHED_GOODS.'.status', 1);
+        $query = $this->db->get(TBL_FINISHED_GOODS);
         $rowcount = $query->num_rows();
         return $rowcount;
     }
@@ -508,17 +509,18 @@ class Admin_model extends CI_Model
         $this->db->select('*');
         if($params['search']['value'] != "") 
         {
-            $this->db->where("(".TBL_SUPPLIER.".supplier_name LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_SUPPLIER.".address LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_SUPPLIER.".landline LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_SUPPLIER.".phone1 LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_SUPPLIER.".contact_person LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_SUPPLIER.".email LIKE '%".$params['search']['value']."%')");
+            $this->db->where("(".TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FINISHED_GOODS.".name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FINISHED_GOODS.".hsn_code LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FINISHED_GOODS.".groass_weight LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FINISHED_GOODS.".net_weight LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FINISHED_GOODS.".drawing_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FINISHED_GOODS.".sac LIKE '%".$params['search']['value']."%')");
         }
-        $this->db->where(TBL_SUPPLIER.'.status', 1);
+        $this->db->where(TBL_FINISHED_GOODS.'.status', 1);
         $this->db->limit($params['length'],$params['start']);
-        $this->db->order_by(TBL_SUPPLIER.'.sup_id','DESC');
-        $query = $this->db->get(TBL_SUPPLIER);
+        $this->db->order_by(TBL_FINISHED_GOODS.'.fin_id','DESC');
+        $query = $this->db->get(TBL_FINISHED_GOODS);
         $fetch_result = $query->result_array();
         $data = array();
         $counter = 0;
@@ -526,15 +528,16 @@ class Admin_model extends CI_Model
         {
             foreach ($fetch_result as $key => $value)
             {
-                $data[$counter]['supplier_name'] = $value['supplier_name'];
-                $data[$counter]['address'] =  $value['address'];
-                $data[$counter]['email'] =  $value['email'];
-                $data[$counter]['landline'] = $value['landline'];
-                $data[$counter]['phone1'] =  $value['phone1'];
-                $data[$counter]['contact_person'] =  $value['contact_person'];
+                $data[$counter]['part_number'] = $value['part_number'];
+                $data[$counter]['name'] =  $value['name'];
+                $data[$counter]['hsn_code'] =  $value['hsn_code'];
+                $data[$counter]['groass_weight'] = $value['groass_weight'];
+                $data[$counter]['net_weight'] =  $value['net_weight'];
+                $data[$counter]['sac'] =  $value['sac'];
+                $data[$counter]['drawing_number'] =  $value['drawing_number'];
                 $data[$counter]['action'] = '';
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."updateSupplier/".$value['sup_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";
-                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['sup_id']."' class='fa fa-trash-o deletesupplier' aria-hidden='true'></i>"; 
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."updateFinishedgoods/".$value['fin_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['fin_id']."' class='fa fa-trash-o deletefinishedgoodsdata' aria-hidden='true'></i>"; 
  
                 $counter++; 
             }
@@ -542,6 +545,154 @@ class Admin_model extends CI_Model
 
         return $data;
     }
+
+    public function checkIfexitsFinishedgoods($name){
+
+        $this->db->select('*');
+        $this->db->where(TBL_FINISHED_GOODS.'.name', $name);
+        $this->db->where(TBL_FINISHED_GOODS.'.status', 1);
+        $query = $this->db->get(TBL_FINISHED_GOODS);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+
+    }
+
+    public function saveFinishedgoodsdata($id,$data){
+        if($id != '') {
+            $this->db->where('fin_id', $id);
+            if($this->db->update(TBL_FINISHED_GOODS, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_FINISHED_GOODS, $data)) {
+                return $this->db->insert_id();;
+            } else {
+                return FALSE;
+            }
+        }
+    }
+
+    public function deletefinishedgoods($id){
+        $this->db->where('fin_id', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_FINISHED_GOODS)){
+           return TRUE;
+        }else{
+           return FALSE;
+        }
+    }
+
+    public function getFinishedgoodsdata($id){
+        $this->db->select('*');
+        $this->db->where(TBL_FINISHED_GOODS.'.fin_id', $id);
+        $this->db->where(TBL_FINISHED_GOODS.'.status', 1);
+        $query = $this->db->get(TBL_FINISHED_GOODS);
+        $data = $query->result_array();
+        return $data;
+    }
+
+    public function checkifexitfinishedgoodsupdate($id,$name){
+        $this->db->select('*');
+        $this->db->where(TBL_FINISHED_GOODS.'.fin_id', $id);
+        $this->db->where(TBL_FINISHED_GOODS.'.name', $name);
+        $this->db->where(TBL_FINISHED_GOODS.'.status', 1);
+        $query = $this->db->get(TBL_FINISHED_GOODS);
+        $data = $query->num_rows();
+        return $data;
+
+    }
+
+    public function getPlattingCount($params){
+
+        $this->db->select('*');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_PLATTING_MASTER.".type_of_raw_material LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_PLATTING_MASTER.".type_of_platting LIKE '%".$params['search']['value']."%')");
+        }
+
+        $this->db->where(TBL_PLATTING_MASTER.'.status', 1);
+        $query = $this->db->get(TBL_PLATTING_MASTER);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+
+    }
+    
+    public function getPlattingdata($params){
+
+        $this->db->select('*');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_PLATTING_MASTER.".type_of_raw_material LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_PLATTING_MASTER.".type_of_platting LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_PLATTING_MASTER.'.status', 1);
+        $this->db->limit($params['length'],$params['start']);
+        $this->db->order_by(TBL_PLATTING_MASTER.'.id','DESC');
+        $query = $this->db->get(TBL_PLATTING_MASTER);
+        $fetch_result = $query->result_array();
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['type_of_raw_material'] = $value['type_of_raw_material'];
+                $data[$counter]['type_of_platting'] =  $value['type_of_platting'];
+                $data[$counter]['action'] = '';
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."updatePlattingmaster/".$value['id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['id']."' class='fa fa-trash-o deleteplattingmaster' aria-hidden='true'></i>"; 
+                $counter++; 
+            }
+        }
+
+        return $data;
+        
+    }
+
+    public function checkifexitsplatting($type_of_raw_material){
+
+        $this->db->select('*');
+        $this->db->where(TBL_PLATTING_MASTER.'.type_of_raw_material', $type_of_raw_material);
+        $this->db->where(TBL_PLATTING_MASTER.'.status', 1);
+        $query = $this->db->get(TBL_PLATTING_MASTER);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+    }
+
+    public function saveplattingdata($id,$data){
+        if($id != '') {
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_PLATTING_MASTER, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_PLATTING_MASTER, $data)) {
+                return $this->db->insert_id();;
+            } else {
+                return FALSE;
+            }
+        }
+
+
+    }
+
+    public function deleteplatting($id){
+        $this->db->where('id', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_PLATTING_MASTER)){
+           return TRUE;
+        }else{
+           return FALSE;
+        }
+    }
+
+
+
 
 }
 

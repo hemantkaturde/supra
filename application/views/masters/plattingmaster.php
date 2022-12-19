@@ -2,7 +2,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            <i class="fa fa-users"></i> Finished Goods Master
+            <i class="fa fa-users"></i> Platting Master
             <small>Add,Edit,Delete</small>
         </h1>
     </section>
@@ -11,13 +11,13 @@
             <div class="col-xs-6 text-left">
                 <ul class="breadcrumb" style="background-color:#ecf0f5 !important">
                     <li class="completed"><a href="javascript:void(0);">Masters</a></li>
-                    <li class="active"><a href="javascript:void(0);"> Finished Goods Masterr</a></li>
+                    <li class="active"><a href="javascript:void(0);">Platting Master</a></li>
                 </ul>
             </div>
             <div class="col-xs-6 text-right">
                 <div class="form-group">
-                    <a class="btn btn-primary" href="<?php echo base_url(); ?>addnewFinishedgoods">
-                        <i class="fa fa-plus"></i>  Add Finished Goods</a>
+                    <a class="btn btn-primary" href="<?php echo base_url(); ?>addnewPlatting">
+                        <i class="fa fa-plus"></i> Add Platting</a>
                 </div>
             </div>
         </div>
@@ -26,16 +26,11 @@
                 <div class="box">
                     <div class="box-body">   
                         <div class="panel-body">
-                            <table width="100%" class="table table-striped table-bordered table-hover" id="view_finished_goods_master">
+                            <table width="100%" class="table table-striped table-bordered table-hover" id="view_paltting_master">
                                 <thead>
                                     <tr style="background-color:#3c8dbc !important;color:#fff">
-                                        <th>Part Number</th>
-                                        <th>Name</th>
-                                        <th>HSN Code</th>
-                                        <th>Gross Weight</th>
-                                        <th>Net Weight</th>
-                                        <th>SAC</th>
-                                        <th>Drawing Number</th>
+                                        <th>Type Of Row Material</th>
+                                        <th>Type Of Platting</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>

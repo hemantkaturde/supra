@@ -84,13 +84,20 @@ $route['fetchUSP'] = "admin/fetchUSP";
 $route['addnewUSP'] = "admin/addnewUSP";
 $route['updateUSP/(:any)'] = "admin/updateUSP/$1";
 $route['deleteUSP'] = "admin/deleteUSP";
-
-
 $route['finishedgoodsmaster'] = "admin/finishedgoodsmaster";
 $route['fetchfinishedgoods'] = "admin/fetchfinishedgoods";
-$route['addnewUSP'] = "admin/addnewUSP";
-$route['updateUSP/(:any)'] = "admin/updateUSP/$1";
-$route['deleteUSP'] = "admin/deleteUSP";
+$route['addnewFinishedgoods'] = "admin/addnewFinishedgoods";
+$route['updateFinishedgoods/(:any)'] = "admin/updateFinishedgoods/$1";
+$route['deletefinishedgoods'] = "admin/deletefinishedgoods";
+
+
+$route['plattingmaster'] = "admin/plattingmaster";
+$route['fetchplattinglist'] = "admin/fetchplattinglist";
+$route['addnewPlatting'] = "admin/addnewPlatting";
+$route['updatePlatting/(:any)'] = "admin/updatePlatting/$1";
+$route['deleteplatting'] = "admin/deleteplatting";
+
+
 
 
 

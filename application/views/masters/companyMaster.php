@@ -7,7 +7,6 @@
         </h1>
     </section>
 
-
     <section class="content">
         <div class="row">
             <div class="col-xs-8">
@@ -33,7 +32,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="phone_1">Phone 1 (10 Digit Number)<span class="required">*</span></label>
-                                            <input type="number" class="form-control" maxlength="10" id="phone_1" value="<?=$getCompanyInfo->phone_1?>" name="phone_1" required>
+                                            <input type="text" class="form-control" maxlength="10" id="phone_1" value="<?=$getCompanyInfo->phone_1?>" name="phone_1" required>
                                             <p class="error phone_1_error"></p>
                                         </div>
                                     </div>
@@ -50,7 +49,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="phone_2">Phone 2 (10 Digit Number)</label>
-                                            <input type="number" class="form-control"  maxlength="10" id="phone_2" name="phone_2"  value="<?=$getCompanyInfo->phone_2?>">
+                                            <input type="text" class="form-control"  maxlength="10" id="phone_2" name="phone_2"  value="<?=$getCompanyInfo->phone_2?>">
                                             <p class="error phone_2_error"></p>
                                         </div>
                                     </div>
@@ -87,7 +86,7 @@
                             <!-- /.box-body -->
                             <div class="box-footer">
                                 <input type="submit" id="updateCompanyInfo" class="btn btn-primary" value="Update" />
-                                <input type="reset" class="btn btn-default" value="Reset" />
+                                <input type="button" onclick="location.href = '<?php echo base_url() ?>dashboard'" class="btn btn-default" value="Back" />
                             </div>
                         </form>
                     </div>
