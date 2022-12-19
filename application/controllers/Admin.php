@@ -1318,6 +1318,46 @@ class Admin extends BaseController
 
      }
 
+
+     /**
+     * This function is used to load the USP Master
+     */
+    public function finishedgoodsmaster(){
+        $process = 'Finished Goods Master';
+        $processFunction = 'Admin/finishedgoodsmaster';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Finished Goods Master';
+        $this->loadViews("masters/finishedgoodsmaster", $this->global, $data, NULL);
+    }
+
+     /**
+     * This function is used to load the Finished Goods Master Data
+     */
+    public function fetchfinishedgoods(){
+        $params = $_REQUEST;
+        $totalRecords = $this->admin_model->getfinishedCount($params); 
+        $queryRecords = $this->admin_model->getfinisheddata($params); 
+
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+        echo json_encode($json_data);
+
+    }
+
     
 
 }

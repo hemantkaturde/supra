@@ -115,3 +115,4 @@ define('TBL_SUPPLIER','tbl_supplier');
 define('TBL_RAWMATERIAL','tbl_rawmaterial');
 define('TBL_VENDOR','tbl_vendor');
 define('TBL_USP','tbl_usp');
+define('TBL_FINISHED_GOODS','tbl_finished_goods');

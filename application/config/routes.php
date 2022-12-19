@@ -74,15 +74,20 @@ $route['fetchRowmaterial'] = "admin/fetchRowmaterial";
 $route['addnewmaterialdata'] = "admin/addnewmaterialdata";
 $route['updateRawmaterial/(:any)'] = "admin/updateRawmaterial/$1";
 $route['deleteRawmaterial'] = "admin/deleteRawmaterial";
-
 $route['vendormaster'] = "admin/vendormaster";
 $route['fetchVendor'] = "admin/fetchVendor";
 $route['addnewVendor'] = "admin/addnewVendor";
 $route['updateVendor/(:any)'] = "admin/updateVendor/$1";
 $route['deleteVendor'] = "admin/deleteVendor";
-
 $route['uspmaster'] = "admin/uspmaster";
 $route['fetchUSP'] = "admin/fetchUSP";
+$route['addnewUSP'] = "admin/addnewUSP";
+$route['updateUSP/(:any)'] = "admin/updateUSP/$1";
+$route['deleteUSP'] = "admin/deleteUSP";
+
+
+$route['finishedgoodsmaster'] = "admin/finishedgoodsmaster";
+$route['fetchfinishedgoods'] = "admin/fetchfinishedgoods";
 $route['addnewUSP'] = "admin/addnewUSP";
 $route['updateUSP/(:any)'] = "admin/updateUSP/$1";
 $route['deleteUSP'] = "admin/deleteUSP";
