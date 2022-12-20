@@ -799,7 +799,6 @@ class Admin_model extends CI_Model
         }
     }
 
-
     public function getRejectiongmasterdata($id){
         $this->db->select('*');
         $this->db->where(TBL_REJECTION_MASTER.'.rejec_id', $id);
@@ -824,10 +823,69 @@ class Admin_model extends CI_Model
     }
 
 
+    public function getBuyerCount($params){
+
+        $this->db->select('*');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_MASTER.".address LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_MASTER.".landline LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_MASTER.".mobile LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_MASTER.".contact_person LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_MASTER.".email LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_MASTER.".GSTIN LIKE '%".$params['search']['value']."%')");
+        }
+
+        $this->db->where(TBL_BUYER_MASTER.'.status', 1);
+        $query = $this->db->get(TBL_BUYER_MASTER);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+
+    }
     
+    public function getBuyerdata($params){
 
+        $this->db->select('*');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_MASTER.".address LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_MASTER.".landline LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_MASTER.".mobile LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_MASTER.".contact_person LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_MASTER.".email LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_MASTER.".GSTIN LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_BUYER_MASTER.'.status', 1);
+        $this->db->limit($params['length'],$params['start']);
+        $this->db->order_by(TBL_BUYER_MASTER.'.buyer_id','DESC');
+        $query = $this->db->get(TBL_BUYER_MASTER);
+        $fetch_result = $query->result_array();
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['buyer_name'] = $value['buyer_name'];
+                $data[$counter]['address'] = $value['address'];
+                $data[$counter]['email'] = $value['email'];
+                $data[$counter]['landline'] = $value['landline'];
+                $data[$counter]['mobile'] = $value['mobile'];
+                $data[$counter]['contact_person'] = $value['contact_person'];
+                $data[$counter]['GSTIN'] = $value['GSTIN'];
+                $data[$counter]['action'] = '';
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."updateRejectionmaster/".$value['rejec_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['rejec_id']."' class='fa fa-trash-o deleteRejection' aria-hidden='true'></i>"; 
+                $counter++; 
+            }
+        }
 
-
+        return $data;
+        
+    }
+    
 }
 
 ?>

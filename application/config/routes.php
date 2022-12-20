@@ -103,6 +103,9 @@ $route['deleteRejection'] = "admin/deleteRejection";
 
 
 $route['buyermaster'] = "admin/buyermaster";
+$route['fetchrBuyerlist'] = "admin/fetchrBuyerlist";
+
+
 
 
 
