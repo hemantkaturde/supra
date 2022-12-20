@@ -117,7 +117,7 @@
                             <!-- /.box-body -->
                             <div class="box-footer">
                                 <input type="submit" id="updatesupplier" class="btn btn-primary" value="Update" />
-                                <input type="reset" class="btn btn-default" value="Reset" />
+                                <input type="button" onclick="location.href = '<?php echo base_url() ?>suppliermaster'" class="btn btn-default" value="Back" />
                             </div>
                         </form>
                     </div>
