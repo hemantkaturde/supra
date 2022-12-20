@@ -173,8 +173,8 @@ class Admin_model extends CI_Model
             {
                 $data[$counter]['part_number'] = $value['part_number'];
                 $data[$counter]['type_of_raw_material'] =  $value['type_of_raw_material'];
-                $data[$counter]['HSN_code'] =  $value['HSN_code'];
                 $data[$counter]['sitting_size'] =  $value['sitting_size'];
+                $data[$counter]['HSN_code'] =  $value['HSN_code'];
                 $data[$counter]['length'] = $value['length'];
                 $data[$counter]['action'] = '';
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."updateRawmaterial/".$value['raw_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";

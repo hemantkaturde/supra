@@ -31,7 +31,7 @@
                                     <tr style="background-color:#3c8dbc !important;color:#fff">
                                         <th>Part Number</th>
                                         <th>Type Of Raw Material</th>
-                                        <th>Sitting Size</th>
+                                        <th>Slitting Size</th>
                                         <!-- <th>Diameter</th>
                                         <th>Hex A/F</th>
                                         <th>Thickness</th> -->

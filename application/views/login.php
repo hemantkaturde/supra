@@ -23,7 +23,7 @@
     <div class="login-logo">
       <a href="#">
         <b>Admin</b>
-        <p style="font-size: inherit;font-weight: lighter;">Supra Qulity Export India Pvt Ltd</p>
+        <p style="font-size: inherit;font-weight: lighter;">Supra Quality Export India Pvt Ltd</p>
     </div>
     <div class="login-logo">
     </div>

@@ -48,7 +48,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="daimeter">Daimeter<span class="required">*</span></label>
+                                            <label for="daimeter">Diameter<span class="required">*</span></label>
                                             <input type="text" class="form-control" value="<?=$data['diameter']?>" id="daimeter" name="daimeter">
                                             <p class="error daimeter_error"></p>
                                         </div>
@@ -118,6 +118,17 @@
                                             <label for="net_weight">Net Weight <span class="required">*</span></label>
                                             <input type="text" class="form-control" value="<?=$data['net_weight']?>" id="net_weight" name="net_weight">
                                             <p class="error net_weight_error"></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="sac">SAC <span class="required">*</span></label>
+                                            <input type="text" class="form-control" value="<?=$data['sac']?>" id="sac" name="sac">
+                                            <p class="error sac_error"></p>
                                         </div>
                                     </div>
                                 </div>

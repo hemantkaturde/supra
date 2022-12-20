@@ -37,7 +37,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="landline">Landline</label>
-                                            <input type="text" class="form-control" id="landline" value="<?=$data['landline']?>" name="landline" required>
+                                            <input type="text" class="form-control" maxlength="12" id="landline" value="<?=$data['landline']?>" name="landline" required>
                                             <p class="error landline_error"></p>
                                         </div>
                                     </div>

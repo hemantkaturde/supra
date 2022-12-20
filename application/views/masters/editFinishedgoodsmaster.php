@@ -58,7 +58,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="gross_weight">Groass Weight <span class="required">*</span></label>
+                                            <label for="gross_weight">Gross Weight <span class="required">*</span></label>
                                             <input type="text" class="form-control" value="<?=$data['groass_weight']?>" id="gross_weight" name="gross_weight">
                                             <p class="error contact_person_error"></p>
                                         </div>

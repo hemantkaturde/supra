@@ -565,11 +565,11 @@ class Admin extends BaseController
             $this->form_validation->set_rules('supplier_name','Supplier Name','trim|required|max_length[128]');
             $this->form_validation->set_rules('landline','Landline','trim|required|max_length[128]');
             $this->form_validation->set_rules('address','Address','trim|required');
-            $this->form_validation->set_rules('phone_1','Phone 1','trim|max_length[50]');
+            $this->form_validation->set_rules('phone_1','Phone 1','trim|numeric|max_length[50]');
             $this->form_validation->set_rules('contact_person','Contact Person','trim|required|max_length[50]');
-            $this->form_validation->set_rules('mobile','Mobile','trim|required|max_length[50]');
+            $this->form_validation->set_rules('mobile','Mobile','trim|required|numeric|max_length[50]');
             $this->form_validation->set_rules('email','Email','trim|required|valid_email|max_length[50]');
-            $this->form_validation->set_rules('mobile_2','Mobile 2','trim|max_length[50]');
+            $this->form_validation->set_rules('mobile_2','Mobile 2','trim|numeric|max_length[50]');
             $this->form_validation->set_rules('fax','Fax','trim|max_length[50]');
             $this->form_validation->set_rules('GSTIN','GSTIN','trim|required|max_length[50]');
 
@@ -627,11 +627,11 @@ class Admin extends BaseController
             $this->form_validation->set_rules('supplier_name','Supplier Name','trim|required|max_length[128]');
             $this->form_validation->set_rules('landline','Landline','trim|required|max_length[128]');
             $this->form_validation->set_rules('address','Address','trim|required');
-            $this->form_validation->set_rules('phone_1','Phone 1','trim|max_length[50]');
+            $this->form_validation->set_rules('phone_1','Phone 1','trim|numeric|max_length[50]');
             $this->form_validation->set_rules('contact_person','Contact Person','trim|required|max_length[50]');
-            $this->form_validation->set_rules('mobile','Mobile','trim|required|max_length[50]');
+            $this->form_validation->set_rules('mobile','Mobile','trim|required|numeric|max_length[50]');
             $this->form_validation->set_rules('email','Email','trim|required|valid_email|max_length[50]');
-            $this->form_validation->set_rules('mobile_2','Mobile 2','trim|max_length[50]');
+            $this->form_validation->set_rules('mobile_2','Mobile 2','trim|numeric|max_length[50]');
             $this->form_validation->set_rules('fax','Fax','trim|max_length[50]');
             $this->form_validation->set_rules('GSTIN','GSTIN','trim|required|max_length[50]');
 
@@ -774,11 +774,12 @@ class Admin extends BaseController
             $this->form_validation->set_rules('length','Length','trim|required|max_length[50]');
             $this->form_validation->set_rules('gross_weight','Gross Weight','trim|required|max_length[50]');
             $this->form_validation->set_rules('net_weight','Net Weight','trim|required|max_length[50]');
+            $this->form_validation->set_rules('sac','SAC','trim|required|max_length[50]');
 
             if($this->form_validation->run() == FALSE)
             {
                 $save_rawmatrial_response['status'] = 'failure';
-                $save_rawmatrial_response['error'] = array('part_number'=>strip_tags(form_error('part_number')), 'type_of_raw_material'=>strip_tags(form_error('type_of_raw_material')), 'daimeter'=>strip_tags(form_error('daimeter')), 'sitting_size'=>strip_tags(form_error('sitting_size')),'thickness'=>strip_tags(form_error('thickness')),'hex_a_f'=>strip_tags(form_error('hex_a_f')),'hsn_code'=>strip_tags(form_error('hsn_code')),'length'=>strip_tags(form_error('length')),'gross_weight'=>strip_tags(form_error('gross_weight')),'net_weight'=>strip_tags(form_error('net_weight')));
+                $save_rawmatrial_response['error'] = array('part_number'=>strip_tags(form_error('part_number')), 'type_of_raw_material'=>strip_tags(form_error('type_of_raw_material')), 'daimeter'=>strip_tags(form_error('daimeter')), 'sitting_size'=>strip_tags(form_error('sitting_size')),'thickness'=>strip_tags(form_error('thickness')),'hex_a_f'=>strip_tags(form_error('hex_a_f')),'hsn_code'=>strip_tags(form_error('hsn_code')),'length'=>strip_tags(form_error('length')),'gross_weight'=>strip_tags(form_error('gross_weight')),'net_weight'=>strip_tags(form_error('net_weight')),'sac'=>strip_tags(form_error('sac')));
             }else{
 
                 $data = array(
@@ -791,6 +792,7 @@ class Admin extends BaseController
                     'hsn_code' =>    trim($this->input->post('hsn_code')),
                     'length' =>    trim($this->input->post('length')),
                     'gross_weight' =>    trim($this->input->post('gross_weight')),
+                    'sac' =>    trim($this->input->post('sac')),
                     'net_weight' =>    trim($this->input->post('net_weight'))
                 );
 
@@ -836,12 +838,12 @@ class Admin extends BaseController
             $this->form_validation->set_rules('length','Length','trim|required|max_length[50]');
             $this->form_validation->set_rules('gross_weight','Gross Weight','trim|required|max_length[50]');
             $this->form_validation->set_rules('net_weight','Net Weight','trim|required|max_length[50]');
-
+            $this->form_validation->set_rules('sac','SAC','trim|required|max_length[50]');
 
             if($this->form_validation->run() == FALSE)
             {
                 $update_rawmaterial_response['status'] = 'failure';
-                $update_rawmaterial_response['error'] = array('part_number'=>strip_tags(form_error('part_number')), 'type_of_raw_material'=>strip_tags(form_error('type_of_raw_material')), 'daimeter'=>strip_tags(form_error('daimeter')), 'sitting_size'=>strip_tags(form_error('sitting_size')),'thickness'=>strip_tags(form_error('thickness')),'hex_a_f'=>strip_tags(form_error('hex_a_f')),'hsn_code'=>strip_tags(form_error('hsn_code')),'length'=>strip_tags(form_error('length')),'gross_weight'=>strip_tags(form_error('gross_weight')),'net_weight'=>strip_tags(form_error('net_weight')));
+                $update_rawmaterial_response['error'] = array('part_number'=>strip_tags(form_error('part_number')), 'type_of_raw_material'=>strip_tags(form_error('type_of_raw_material')), 'daimeter'=>strip_tags(form_error('daimeter')), 'sitting_size'=>strip_tags(form_error('sitting_size')),'thickness'=>strip_tags(form_error('thickness')),'hex_a_f'=>strip_tags(form_error('hex_a_f')),'hsn_code'=>strip_tags(form_error('hsn_code')),'length'=>strip_tags(form_error('length')),'gross_weight'=>strip_tags(form_error('gross_weight')),'net_weight'=>strip_tags(form_error('net_weight')),'sac'=>strip_tags(form_error('sac')));
             }else{
 
                 $data = array(
@@ -854,7 +856,8 @@ class Admin extends BaseController
                     'hsn_code' =>    trim($this->input->post('hsn_code')),
                     'length' =>    trim($this->input->post('length')),
                     'gross_weight' =>    trim($this->input->post('gross_weight')),
-                    'net_weight' =>    trim($this->input->post('net_weight'))
+                    'net_weight' =>    trim($this->input->post('net_weight')),
+                    'sac' =>    trim($this->input->post('sac'))
                 );
 
                 $checkifexitsupdaterawmaterial = $this->admin_model->checkifexitsupdaterawmaterial(trim($this->input->post('rawmaetrial_id')),trim($this->input->post('part_number')),trim($this->input->post('type_of_raw_material')));
@@ -966,13 +969,13 @@ class Admin extends BaseController
             $save_vendor_response = array();
 
             $this->form_validation->set_rules('vendor_name','Supplier Name','trim|required|max_length[128]');
-            $this->form_validation->set_rules('landline','Landline','trim|required|max_length[128]');
+            $this->form_validation->set_rules('landline','Landline','trim|required|numeric|max_length[128]');
             $this->form_validation->set_rules('address','Address','trim|required');
-            $this->form_validation->set_rules('phone_1','Phone 1','trim|max_length[50]');
+            $this->form_validation->set_rules('phone_1','Phone 1','trim|numeric|max_length[50]');
             $this->form_validation->set_rules('contact_person','Contact Person','trim|required|max_length[50]');
-            $this->form_validation->set_rules('mobile','Mobile','trim|required|max_length[50]');
+            $this->form_validation->set_rules('mobile','Mobile','trim|required|numeric|max_length[50]');
             $this->form_validation->set_rules('email','Email','trim|required|valid_email|max_length[50]');
-            $this->form_validation->set_rules('mobile_2','Mobile 2','trim|max_length[50]');
+            $this->form_validation->set_rules('mobile_2','Mobile 2','trim|numeric|max_length[50]');
             $this->form_validation->set_rules('fax','Fax','trim|max_length[50]');
             $this->form_validation->set_rules('GSTIN','GSTIN','trim|required|max_length[50]');
 
@@ -1028,13 +1031,13 @@ class Admin extends BaseController
             $update_vendor_response = array();
 
             $this->form_validation->set_rules('vendor_name','Vendor Name','trim|required|max_length[128]');
-            $this->form_validation->set_rules('landline','Landline','trim|required|max_length[128]');
+            $this->form_validation->set_rules('landline','Landline','trim|required|numeric|max_length[128]');
             $this->form_validation->set_rules('address','Address','trim|required');
-            $this->form_validation->set_rules('phone_1','Phone 1','trim|max_length[50]');
+            $this->form_validation->set_rules('phone_1','Phone 1','trim|numeric|max_length[50]');
             $this->form_validation->set_rules('contact_person','Contact Person','trim|required|max_length[50]');
-            $this->form_validation->set_rules('mobile','Mobile','trim|required|max_length[50]');
+            $this->form_validation->set_rules('mobile','Mobile','trim|required|numeric|max_length[50]');
             $this->form_validation->set_rules('email','Email','trim|required|valid_email|max_length[50]');
-            $this->form_validation->set_rules('mobile_2','Mobile 2','trim|max_length[50]');
+            $this->form_validation->set_rules('mobile_2','Mobile 2','trim|numeric|max_length[50]');
             $this->form_validation->set_rules('fax','Fax','trim|max_length[50]');
             $this->form_validation->set_rules('GSTIN','GSTIN','trim|required|max_length[50]');
 
@@ -1478,10 +1481,10 @@ class Admin extends BaseController
                 );
 
                
-                $checkifexitfinishedgoodsupdate = $this->admin_model->checkifexitfinishedgoodsupdate(trim($this->input->post('fin_id')),trim($this->input->post('name')));
+                $checkifexitfinishedgoodsupdate = $this->admin_model->checkifexitfinishedgoodsupdate(trim($this->input->post('finished_goods_id')),trim($this->input->post('name')));
 
                 if($checkifexitfinishedgoodsupdate > 0){
-                    $updatefinishedgoodsdata = $this->admin_model->saveFinishedgoodsdata(trim($this->input->post('fin_id')),$data);
+                    $updatefinishedgoodsdata = $this->admin_model->saveFinishedgoodsdata(trim($this->input->post('finished_goods_id')),$data);
                     if($updatefinishedgoodsdata){
                         $update_finished_goods_response['status'] = 'success';
                         $update_finished_goods_response['error'] = array('part_number'=>'', 'name'=>'', 'hsn_code'=>'', 'gross_weight'=>'','net_weight'=>'','sac'=>'','drawing_number'=>'','description_1'=>'','description_2'=>'');
@@ -1494,7 +1497,7 @@ class Admin extends BaseController
                         $update_finished_goods_response['status'] = 'failure';
                         $update_finished_goods_response['error'] = array('name'=>'Finished Alreday Exits');
                     }else{
-                        $updatedata = $this->admin_model->saveFinishedgoodsdata(trim($this->input->post('fin_id')),$data);
+                        $updatedata = $this->admin_model->saveFinishedgoodsdata(trim($this->input->post('finished_goods_id')),$data);
                         if($updatedata){
                            $update_finished_goods_response['status'] = 'success';
                            $update_finished_goods_response['error'] = array('part_number'=>'', 'name'=>'', 'hsn_code'=>'', 'gross_weight'=>'','net_weight'=>'','sac'=>'','drawing_number'=>'','description_1'=>'','description_2'=>'');
