@@ -35,7 +35,7 @@
 
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="type_of_raw_material">Type Of Row Material <span class="required">*</span></label>
+                                            <label for="type_of_raw_material">Type Of Raw Material <span class="required">*</span></label>
                                             <input type="text" class="form-control" id="type_of_raw_material" name="type_of_raw_material">
                                             <p class="error type_of_raw_material_error"></p>
 
@@ -46,7 +46,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="daimeter">Diameter<span class="required">*</span></label>
+                                            <label for="daimeter">Diameter</label>
                                             <input type="text" class="form-control" id="daimeter" name="daimeter">
                                             <p class="error daimeter_error"></p>
                                         </div>
@@ -55,7 +55,7 @@
                                     
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="sitting_size">Slitting Size <span class="required">*</span></label>
+                                            <label for="sitting_size">Slitting Size</label>
                                             <input type="text" class="form-control" id="sitting_size" name="sitting_size">
                                             <p class="error sitting_size_error"></p>
                                         </div>
@@ -66,7 +66,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="thickness">Thickness <span class="required">*</span></label>
+                                            <label for="thickness">Thickness </label>
                                             <input type="text" class="form-control" id="thickness" name="thickness">
                                             <p class="error thickness_error"></p>
                                         </div>
@@ -74,7 +74,7 @@
 
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="hex_a_f">Hex A/F <span class="required">*</span></label>
+                                            <label for="hex_a_f">Hex A/F </label>
                                             <input type="text" class="form-control" id="hex_a_f" name="hex_a_f" >
                                             <p class="error hex_a_f_error"></p>
                                         </div>
@@ -87,7 +87,7 @@
                                   <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="hsn_code">HSN Code <span class="required">*</span></label>
+                                            <label for="hsn_code">HSN Code </label>
                                             <input type="text" class="form-control" id="hsn_code" id="hsn_code"  name="hsn_code">
                                             <p class="error hsn_code_error"></p>
                                         </div>
@@ -95,7 +95,7 @@
 
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="length">Length <span class="required">*</span></label>
+                                            <label for="length">Length </label>
                                             <input type="text" class="form-control" id="length" name="length">
                                             <p class="error length_error"></p>
                                         </div>
@@ -105,7 +105,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="gross_weight">Gross Weight <span class="required">*</span></label>
+                                            <label for="gross_weight">Gross Weight </label>
                                             <input type="text" class="form-control" id="gross_weight" name="gross_weight">
                                             <p class="error gross_weight_error"></p>
                                         </div>
@@ -113,7 +113,7 @@
 
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="net_weight">Net Weight <span class="required">*</span></label>
+                                            <label for="net_weight">Net Weight </label>
                                             <input type="text" class="form-control" id="net_weight" name="net_weight">
                                             <p class="error net_weight_error"></p>
                                         </div>
@@ -123,7 +123,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="sac">SAC <span class="required">*</span></label>
+                                            <label for="sac">SAC </label>
                                             <input type="text" class="form-control" id="sac" name="sac">
                                             <p class="error sac_error"></p>
                                         </div>

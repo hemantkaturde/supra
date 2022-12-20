@@ -102,6 +102,11 @@ $route['updateRejectionmaster/(:any)'] = "admin/updateRejectionmaster/$1";
 $route['deleteRejection'] = "admin/deleteRejection";
 
 
+$route['buyermaster'] = "admin/buyermaster";
+
+
+
+
 
 
 

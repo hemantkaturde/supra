@@ -766,15 +766,15 @@ class Admin extends BaseController
 
             $this->form_validation->set_rules('part_number','Part Number','trim|required|max_length[128]');
             $this->form_validation->set_rules('type_of_raw_material','Type of Raw Material','trim|required|max_length[128]');
-            $this->form_validation->set_rules('daimeter','Daimeter','trim|required');
-            $this->form_validation->set_rules('sitting_size','Sitting size','trim|required|max_length[50]');
-            $this->form_validation->set_rules('thickness','Thickness','trim|required|max_length[50]');
-            $this->form_validation->set_rules('hex_a_f','Hex A/F','trim|required|max_length[50]');
-            $this->form_validation->set_rules('hsn_code','HSN_code','trim|required|max_length[50]');
-            $this->form_validation->set_rules('length','Length','trim|required|max_length[50]');
-            $this->form_validation->set_rules('gross_weight','Gross Weight','trim|required|max_length[50]');
-            $this->form_validation->set_rules('net_weight','Net Weight','trim|required|max_length[50]');
-            $this->form_validation->set_rules('sac','SAC','trim|required|max_length[50]');
+            $this->form_validation->set_rules('daimeter','Daimeter','trim');
+            $this->form_validation->set_rules('sitting_size','Sitting size','trim|max_length[50]');
+            $this->form_validation->set_rules('thickness','Thickness','trim|max_length[50]');
+            $this->form_validation->set_rules('hex_a_f','Hex A/F','trim|max_length[50]');
+            $this->form_validation->set_rules('hsn_code','HSN_code','trim|max_length[50]');
+            $this->form_validation->set_rules('length','Length','trim|max_length[50]');
+            $this->form_validation->set_rules('gross_weight','Gross Weight','trim|max_length[50]');
+            $this->form_validation->set_rules('net_weight','Net Weight','trim|max_length[50]');
+            $this->form_validation->set_rules('sac','SAC','trim|max_length[50]');
 
             if($this->form_validation->run() == FALSE)
             {
@@ -830,15 +830,15 @@ class Admin extends BaseController
 
             $this->form_validation->set_rules('part_number','Part Number','trim|required|max_length[128]');
             $this->form_validation->set_rules('type_of_raw_material','Type of Raw Material','trim|required|max_length[128]');
-            $this->form_validation->set_rules('daimeter','Daimeter','trim|required');
-            $this->form_validation->set_rules('sitting_size','Sitting size','trim|required|max_length[50]');
-            $this->form_validation->set_rules('thickness','Thickness','trim|required|max_length[50]');
-            $this->form_validation->set_rules('hex_a_f','Hex A/F','trim|required|max_length[50]');
-            $this->form_validation->set_rules('hsn_code','HSN_code','trim|required|max_length[50]');
-            $this->form_validation->set_rules('length','Length','trim|required|max_length[50]');
-            $this->form_validation->set_rules('gross_weight','Gross Weight','trim|required|max_length[50]');
-            $this->form_validation->set_rules('net_weight','Net Weight','trim|required|max_length[50]');
-            $this->form_validation->set_rules('sac','SAC','trim|required|max_length[50]');
+            $this->form_validation->set_rules('daimeter','Daimeter','trim');
+            $this->form_validation->set_rules('sitting_size','Sitting size','trim|max_length[50]');
+            $this->form_validation->set_rules('thickness','Thickness','trim|max_length[50]');
+            $this->form_validation->set_rules('hex_a_f','Hex A/F','trim|max_length[50]');
+            $this->form_validation->set_rules('hsn_code','HSN_code','trim|max_length[50]');
+            $this->form_validation->set_rules('length','Length','trim|max_length[50]');
+            $this->form_validation->set_rules('gross_weight','Gross Weight','trim|max_length[50]');
+            $this->form_validation->set_rules('net_weight','Net Weight','trim|max_length[50]');
+            $this->form_validation->set_rules('sac','SAC','trim|max_length[50]');
 
             if($this->form_validation->run() == FALSE)
             {
@@ -1855,6 +1855,21 @@ class Admin extends BaseController
             $data['getRejectiongmasterdata'] = $this->admin_model->getRejectiongmasterdata($id);
             $this->loadViews("masters/updateRejectionmaster", $this->global, $data, NULL);
         }
+    }
+
+
+      /**
+     * This function is used to laod Rejection Master
+     */
+
+     public function buyermaster(){
+
+        $process = 'Buyer Master';
+        $processFunction = 'Admin/buyermaster';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Buyer Master';
+        $this->loadViews("masters/buyernmaster", $this->global, $data, NULL);
+
     }
 
 }
