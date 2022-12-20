@@ -94,7 +94,7 @@ $route['deletefinishedgoods'] = "admin/deletefinishedgoods";
 $route['plattingmaster'] = "admin/plattingmaster";
 $route['fetchplattinglist'] = "admin/fetchplattinglist";
 $route['addnewPlatting'] = "admin/addnewPlatting";
-$route['updatePlatting/(:any)'] = "admin/updatePlatting/$1";
+$route['updatePlattingmaster/(:any)'] = "admin/updatePlattingmaster/$1";
 $route['deleteplatting'] = "admin/deleteplatting";
 
 

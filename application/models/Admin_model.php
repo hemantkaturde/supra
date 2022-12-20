@@ -691,7 +691,29 @@ class Admin_model extends CI_Model
         }
     }
 
+    public function getPlattingmasterdata($id){
+        $this->db->select('*');
+        $this->db->where(TBL_PLATTING_MASTER.'.id', $id);
+        $this->db->where(TBL_PLATTING_MASTER.'.status', 1);
+        $query = $this->db->get(TBL_PLATTING_MASTER);
+        $data = $query->result_array();
+        return $data;
 
+    }
+
+
+    public function checkifexitplattingupdate($id,$name){
+
+        $this->db->select('*');
+        $this->db->where(TBL_PLATTING_MASTER.'.id', $id);
+        $this->db->where(TBL_PLATTING_MASTER.'.type_of_raw_material', $name);
+        $this->db->where(TBL_PLATTING_MASTER.'.status', 1);
+        $query = $this->db->get(TBL_PLATTING_MASTER);
+        $data = $query->num_rows();
+        return $data;
+
+
+    }
 
 
 }

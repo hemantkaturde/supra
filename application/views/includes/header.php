@@ -159,7 +159,7 @@
                       </a>
                     </li> 
 
-                    <li class="treeview <?php if($pageUrl=="suppliermaster" || $pageUrl=="addnewSupplier" || $pageUrl=='updateSupplier' || $pageUrl=='rowmaterialmaster' || $pageUrl=='addnewmaterialdata' || $pageUrl=='updateRawmaterial' || $pageUrl=="vendormaster" || $pageUrl=='addnewVendor' || $pageUrl=='updateVendor' || $pageUrl=="uspmaster" || $pageUrl=="addnewUSP" || $pageUrl=="updateUSP" || $pageUrl=="finishedgoodsmaster" || $pageUrl=="addnewFinishedgoods" || $pageUrl=="updateFinishedgoods" || $pageUrl=="plattingmaster" || $pageUrl=="addnewPlatting"){echo 'active';}?>">
+                    <li class="treeview <?php if($pageUrl=="suppliermaster" || $pageUrl=="addnewSupplier" || $pageUrl=='updateSupplier' || $pageUrl=='rowmaterialmaster' || $pageUrl=='addnewmaterialdata' || $pageUrl=='updateRawmaterial' || $pageUrl=="vendormaster" || $pageUrl=='addnewVendor' || $pageUrl=='updateVendor' || $pageUrl=="uspmaster" || $pageUrl=="addnewUSP" || $pageUrl=="updateUSP" || $pageUrl=="finishedgoodsmaster" || $pageUrl=="addnewFinishedgoods" || $pageUrl=="updateFinishedgoods" || $pageUrl=="plattingmaster" || $pageUrl=="addnewPlatting" || $pageUrl=="updatePlattingmaster"){echo 'active';}?>">
                       <a href="#">
                         <i class="fa fa-bars"></i> <span class="menu_label">Masters</span>
                           <span class="pull-right-container">
@@ -171,7 +171,7 @@
                         <li class="line_height <?php if($pageUrl=="rowmaterialmaster" || $pageUrl=='addnewmaterialdata' || $pageUrl=='updateRawmaterial'){echo 'active';}?>"><a href="<?php echo base_url(); ?>rowmaterialmaster"><i class="fa fa-cubes"></i> Raw Material Master</a></li>
                         <li class="line_height <?php if($pageUrl=="vendormaster" || $pageUrl=='addnewVendor' || $pageUrl=='updateVendor'){echo 'active';}?>"><a href="<?php echo base_url(); ?>vendormaster"><i class="fa fa-cubes"></i> Vendor Master</a></li>
                         <li class="line_height <?php if($pageUrl=="uspmaster" || $pageUrl=="addnewUSP" || $pageUrl=="updateUSP"){echo 'active';}?>"><a href="<?php echo base_url();?>uspmaster"><i class="fa fa-cubes"></i> USP Master</a></li>
-                        <li class="line_height <?php if($pageUrl=="finishedgoodsmaster" || $pageUrl=="addnewFinishedgoods" || $pageUrl=="updateFinishedgoods"){echo 'active';}?>"><a href="<?php echo base_url();?>finishedgoodsmaster"><i class="fa fa-cubes"></i> Finished Goods Master</a></li>
+                        <li class="line_height <?php if($pageUrl=="finishedgoodsmaster" || $pageUrl=="addnewFinishedgoods" || $pageUrl=="updateFinishedgoods" || $pageUrl=="updatePlattingmaster"){echo 'active';}?>"><a href="<?php echo base_url();?>finishedgoodsmaster"><i class="fa fa-cubes"></i> Finished Goods Master</a></li>
                         <li class="line_height <?php if($pageUrl=="plattingmaster" || $pageUrl=="addnewPlatting"){echo 'active';}?>"><a href="<?php echo base_url();?>plattingmaster"><i class="fa fa-cubes"></i> Platting Master</a></li>
                         <li class="line_height"><a href="#"><i class="fa fa-cubes"></i> Rejection Reason Master</a></li>
                         <li class="line_height"><a href="#"><i class="fa fa-cubes"></i> Buyer Master</a></li>

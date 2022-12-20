@@ -128,7 +128,7 @@ class Login extends BaseController
             }
             else
             {
-                $this->session->set_flashdata('error', 'Email address veya Password yanlış');
+                $this->session->set_flashdata('error', 'Email address and password wrong');
                 
                 redirect('/login');
             }

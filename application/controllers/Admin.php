@@ -1632,18 +1632,18 @@ class Admin extends BaseController
      * This function is used to load the Platting Master Data
      */
 
-    public function updatePlatting(){
+    public function updatePlattingmaster($id){
         $post_submit = $this->input->post();
         if($post_submit){
-            $new_plattimg_response = array();
+            $update_plattimg_response = array();
 
             $this->form_validation->set_rules('type_of_raw_material','Type of Raw Material','trim|required');
             $this->form_validation->set_rules('type_of_platting','Type of Platting','trim|required');
 
             if($this->form_validation->run() == FALSE)
             {
-                $new_plattimg_response['status'] = 'failure';
-                $new_plattimg_response['error'] = array('type_of_raw_material'=>strip_tags(form_error('type_of_raw_material')), 'type_of_platting'=>strip_tags(form_error('type_of_platting')));
+                $update_plattimg_response['status'] = 'failure';
+                $update_plattimg_response['error'] = array('type_of_raw_material'=>strip_tags(form_error('type_of_raw_material')), 'type_of_platting'=>strip_tags(form_error('type_of_platting')));
             }else{
 
                 $data = array(
@@ -1651,25 +1651,41 @@ class Admin extends BaseController
                     'type_of_platting'     => trim($this->input->post('type_of_platting'))
                 );
 
-                $checkifexitsplatting = $this->admin_model->checkifexitsplatting(trim($this->input->post('type_of_raw_material')));
-                if($checkifexitsplatting > 0){
-                    $new_plattimg_response['status'] = 'failure';
-                    $new_plattimg_response['error'] = array('type_of_raw_material'=>'Type of Raw Material Alreday Exits');
-                }else{
-                    $saveplattingdata = $this->admin_model->saveplattingdata('',$data);
+                
+                $checkifexitplattingupdate = $this->admin_model->checkifexitplattingupdate(trim($this->input->post('platting_id')),trim($this->input->post('type_of_raw_material')));
+
+                if($checkifexitplattingupdate > 0){
+                    $saveplattingdata = $this->admin_model->saveplattingdata(trim($this->input->post('platting_id')),$data);
                     if($saveplattingdata){
-                        $new_plattimg_response['status'] = 'success';
-                        $new_plattimg_response['error'] = array('type_of_raw_material'=>'', 'type_of_platting'=>'');
+                        $update_plattimg_response['status'] = 'success';
+                        $update_plattimg_response['error'] = array('type_of_raw_material'=>'', 'type_of_platting'=>'');
+                    }
+
+                }else{
+
+                    $checkifexitsplatting = $this->admin_model->checkifexitsplatting(trim($this->input->post('type_of_raw_material')));
+                    if($checkifexitsplatting > 0){
+                        $update_plattimg_response['status'] = 'failure';
+                        $update_plattimg_response['error'] = array('type_of_raw_material'=>'Type Of Raw Material Alreday Exits', 'type_of_platting'=>'');
+                    }else{
+                        $updatedata = $this->admin_model->saveplattingdata(trim($this->input->post('platting_id')),$data);
+                        if($updatedata){
+                           $update_plattimg_response['status'] = 'success';
+                           $update_plattimg_response['error'] = array('part_number'=>'', 'name'=>'');
+                        }
+
                     }
                 }
+               
             }
-            echo json_encode($new_plattimg_response);
+            echo json_encode($update_plattimg_response);
         }else{
             $process = 'Update Platting Master';
             $processFunction = 'Admin/addnewPlatting';
             $this->logrecord($process,$processFunction);
             $this->global['pageTitle'] = 'Update Platting Master';
-            $this->loadViews("masters/updatePlattingmaster", $this->global, NULL, NULL);
+            $data['getPlattingmasterdata'] = $this->admin_model->getPlattingmasterdata($id);
+            $this->loadViews("masters/updatePlattingmaster", $this->global, $data, NULL);
         }
     }
 
