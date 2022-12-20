@@ -37,7 +37,7 @@
 
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="type_of_raw_material">Type Of Row Material <span class="required">*</span></label>
+                                            <label for="type_of_raw_material">Type Of Raw Material <span class="required">*</span></label>
                                             <input type="text" class="form-control" value="<?=$data['type_of_raw_material']?>" id="type_of_raw_material" name="type_of_raw_material">
                                             <p class="error type_of_raw_material_error"></p>
 

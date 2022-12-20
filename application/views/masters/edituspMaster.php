@@ -81,7 +81,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="email">Email <span class="required">*</span></label>
+                                            <label for="email">Email</label>
                                             <input type="text" class="form-control" value="<?=$data['email']?>" id="email" name="email">
                                             <p class="error email_error"></p>
                                         </div>
