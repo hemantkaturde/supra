@@ -1689,8 +1689,172 @@ class Admin extends BaseController
         }
     }
 
+    /**
+     * This function is used to laod Rejection Master
+     */
+
+     public function rejectionmaster(){
+
+        $process = 'Rejection Master';
+        $processFunction = 'Admin/rejectionmaster';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Rejection Master';
+        $this->loadViews("masters/rejectionmaster", $this->global, $data, NULL);
+
+    }
+
+    /**
+     * This function is used to laod Rejection Master
+     */
+
+    public function fetchrRjectionglist(){
+        
+        $params = $_REQUEST;
+        $totalRecords = $this->admin_model->getRejectionCount($params); 
+        $queryRecords = $this->admin_model->getRejectiondata($params); 
+
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+        echo json_encode($json_data);
 
 
+    }
 
+     /**
+     * This function is used to load the Rejection Master Data
+     */
+
+     public function addnewRejection(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $new_rejection_response = array();
+
+            $this->form_validation->set_rules('rejection_reason','Rejection Reason','trim|required');
+
+            if($this->form_validation->run() == FALSE)
+            {
+                $new_rejection_response['status'] = 'failure';
+                $new_rejection_response['error'] = array('rejection_reason'=>strip_tags(form_error('rejection_reason')));
+            }else{
+
+                $data = array(
+                    'rejection_reason'   => trim($this->input->post('rejection_reason'))
+                );
+
+                $checkifexitrejection = $this->admin_model->checkifexitrejection(trim($this->input->post('rejection_reason')));
+                if($checkifexitrejection > 0){
+                    $new_rejection_response['status'] = 'failure';
+                    $new_rejection_response['error'] = array('rejection_reason'=>'Rejection Reason Alreday Exits');
+                }else{
+                    $saveRejectiondata = $this->admin_model->savRejectiongdata('',$data);
+                    if($saveRejectiondata){
+                        $new_rejection_response['status'] = 'success';
+                        $new_rejection_response['error'] = array('rejection_reason'=>'');
+                    }
+                }
+            }
+            echo json_encode($new_rejection_response);
+        }else{
+            $process = 'Add Rejection Master';
+            $processFunction = 'Admin/addnewRejection';
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Add Rejection Master';
+            $this->loadViews("masters/addRejectiongmaster", $this->global, NULL, NULL);
+        }
+    }
+
+
+    /**
+     * This function is used to Delete the USP Master
+     */
+
+     public function deleteRejection(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->deleteRejection(trim($this->input->post('id')));
+            if ($result) {
+                        $process = 'Rejection Delete';
+                        $processFunction = 'Admin/deleteRejection';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
+     }
+
+
+     /**
+     * This function is used to load the Rejection Master Data
+     */
+
+     public function updateRejectionmaster($id){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $update_Rejection_response = array();
+
+            $this->form_validation->set_rules('rejection_reason','Rejection Reason','trim|required');
+
+            if($this->form_validation->run() == FALSE)
+            {
+                $update_Rejection_response['status'] = 'failure';
+                $update_Rejection_response['error'] = array('rejection_reason'=>strip_tags(form_error('rejection_reason')));
+            }else{
+
+                $data = array(
+                    'rejection_reason'   => trim($this->input->post('rejection_reason'))
+                );
+
+                $checkifexitRejectionupdate = $this->admin_model->checkifexitRejectionupdate(trim($this->input->post('rejection_reason_id')),trim($this->input->post('rejection_reason')));
+
+                if($checkifexitRejectionupdate > 0){
+                    $saverejectiondata = $this->admin_model->savRejectiongdata(trim($this->input->post('rejection_reason_id')),$data);
+                    if($saverejectiondata){
+                        $update_Rejection_response['status'] = 'success';
+                        $update_Rejection_response['error'] = array('rejection_reason'=>'');
+                    }
+
+                }else{
+
+                    $checkifexitrejection = $this->admin_model->checkifexitrejection(trim($this->input->post('rejection_reason')));
+                    if($checkifexitrejection > 0){
+                        $update_Rejection_response['status'] = 'failure';
+                        $update_Rejection_response['error'] = array('rejection_reason'=>'Rejection Reason Alreday Exits');
+                    }else{
+                        $updatedata = $this->admin_model->savRejectiongdata(trim($this->input->post('rejection_reason_id')),$data);
+                        if($updatedata){
+                           $update_Rejection_response['status'] = 'success';
+                           $update_Rejection_response['error'] = array('part_number'=>'', 'name'=>'');
+                        }
+
+                    }
+                }
+               
+            }
+            echo json_encode($update_Rejection_response);
+        }else{
+            $process = 'Update Rejection Master';
+            $processFunction = 'Admin/updateRejectionmaster';
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Update Rejection Master';
+            $data['getRejectiongmasterdata'] = $this->admin_model->getRejectiongmasterdata($id);
+            $this->loadViews("masters/updateRejectionmaster", $this->global, $data, NULL);
+        }
+    }
 
 }

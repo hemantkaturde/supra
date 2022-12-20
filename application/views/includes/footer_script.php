@@ -1025,7 +1025,7 @@
 			    }
 			});
 			return false;
-	    });
+	});
 
 	$(document).on('click','.deleteplattingmaster',function(e){
 
@@ -1073,6 +1073,175 @@
 						}
 						else {
 				swal("Cancelled", "Platting deletion cancelled ", "error");
+				}
+			});
+	});
+	
+</script>
+<?php } ?>
+
+
+
+<?php if($pageTitle=='Rejection Master' || $pageTitle=='Add Rejection Master' || $pageTitle=='Update Rejection Master'){ ?>
+<script type="text/javascript">
+	$(document).ready(function() {
+            var dt = $('#view_rejection_master').DataTable({
+	            "columnDefs": [ 
+	                 { className: "details-control", "targets": [ 0 ] },
+	                 { "width": "60%", "targets": 0 },
+	                 { "width": "10%", "targets": 1 }
+	            ],
+	            responsive: true,
+	            "oLanguage": {
+	                "sEmptyTable": "<i>No Rejection List Found.</i>",
+	            }, 
+	            "bSort" : false,
+	            "bFilter":true,
+	            "bLengthChange": true,
+	            "iDisplayLength": 10,   
+	            "bProcessing": true,
+	            "serverSide": true,
+	            "ajax":{
+                    url :"<?php echo base_url();?>fetchrRjectionglist",
+                    type: "post",
+	            },
+	        });
+	});
+
+	$(document).on('click','#savenewRejection',function(e){
+			e.preventDefault();
+			$(".loader_ajax").show();
+			var formData = new FormData($("#addnewRejectionform")[0]);
+
+			$.ajax({
+				url : "<?php echo base_url();?>addnewRejection",
+				type: "POST",
+				data : formData,
+				cache: false,
+		        contentType: false,
+		        processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+						$(".loader_ajax").hide();
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						swal({
+							title: "Success",
+							text: "Rejection Successfully Added!",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+								window.location.href = "<?php echo base_url().'rejectionmaster'?>";
+						});		
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			});
+			return false;
+	});
+
+	$(document).on('click','#updateRejection',function(e){
+			e.preventDefault();
+			$(".loader_ajax").show();
+			var formData = new FormData($("#updatenewRejectionform")[0]);
+            var rejection_reason_id = $("#rejection_reason_id").val();
+			$.ajax({
+				url : "<?php echo base_url();?>updateRejectionmaster/"+rejection_reason_id,
+				type: "POST",
+				data : formData,
+				cache: false,
+		        contentType: false,
+		        processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+						$(".loader_ajax").hide();
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						swal({
+							title: "Success",
+							text: "Rejection  Successfully Updated!",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+								window.location.href = "<?php echo base_url().'rejectionmaster'?>";
+						});		
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			});
+			return false;
+	});
+
+	$(document).on('click','.deleteRejection',function(e){
+
+		var elemF = $(this);
+		e.preventDefault();
+
+			swal({
+				title: "Are you sure?",
+				text: "Delete Rejection ",
+				type: "warning",
+				showCancelButton: true,
+				closeOnClickOutside: false,
+				confirmButtonClass: "btn-sm btn-danger",
+				confirmButtonText: "Yes, delete it!",
+				cancelButtonText: "No, cancel plz!",
+				closeOnConfirm: false,
+				closeOnCancel: false
+			}, function(isConfirm) {
+				if (isConfirm) {
+							$.ajax({
+								url : "<?php echo base_url();?>deleteRejection",
+								type: "POST",
+								data : 'id='+elemF.attr('data-id'),
+								success: function(data, textStatus, jqXHR)
+								{
+									const obj = JSON.parse(data);
+								
+									if(obj.status=='success'){
+										swal({
+											title: "Deleted!",
+											text: "Rejection Deleted Succesfully",
+											icon: "success",
+											button: "Ok",
+											},function(){ 
+												window.location.href = "<?php echo base_url().'rejectionmaster'?>";
+										});	
+									}
+
+								},
+								error: function (jqXHR, textStatus, errorThrown)
+								{
+									$(".loader_ajax").hide();
+								}
+							})
+						}
+						else {
+				swal("Cancelled", "Rejection deletion cancelled ", "error");
 				}
 			});
 	});

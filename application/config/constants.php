@@ -117,3 +117,4 @@ define('TBL_VENDOR','tbl_vendor');
 define('TBL_USP','tbl_usp');
 define('TBL_FINISHED_GOODS','tbl_finished_goods');
 define('TBL_PLATTING_MASTER','tbl_platting_master');
+define('TBL_REJECTION_MASTER','tbl_rejection_master');

@@ -701,7 +701,6 @@ class Admin_model extends CI_Model
 
     }
 
-
     public function checkifexitplattingupdate($id,$name){
 
         $this->db->select('*');
@@ -714,6 +713,119 @@ class Admin_model extends CI_Model
 
 
     }
+
+    public function getRejectionCount($params){
+
+        $this->db->select('*');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_REJECTION_MASTER.".rejection_reason LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_REJECTION_MASTER.".rejection_reason LIKE '%".$params['search']['value']."%')");
+        }
+
+        $this->db->where(TBL_REJECTION_MASTER.'.status', 1);
+        $query = $this->db->get(TBL_REJECTION_MASTER);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+
+    }
+    
+    public function getRejectiondata($params){
+
+        $this->db->select('*');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_REJECTION_MASTER.".rejection_reason LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_REJECTION_MASTER.".rejection_reason LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_REJECTION_MASTER.'.status', 1);
+        $this->db->limit($params['length'],$params['start']);
+        $this->db->order_by(TBL_REJECTION_MASTER.'.rejec_id','DESC');
+        $query = $this->db->get(TBL_REJECTION_MASTER);
+        $fetch_result = $query->result_array();
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['rejection_reason'] = $value['rejection_reason'];
+                $data[$counter]['action'] = '';
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."updateRejectionmaster/".$value['rejec_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['rejec_id']."' class='fa fa-trash-o deleteRejection' aria-hidden='true'></i>"; 
+                $counter++; 
+            }
+        }
+
+        return $data;
+        
+    }
+
+    public function checkifexitrejection($reason){
+        $this->db->select('*');
+        $this->db->where(TBL_REJECTION_MASTER.'.rejection_reason', $reason);
+        $this->db->where(TBL_REJECTION_MASTER.'.status', 1);
+        $query = $this->db->get(TBL_REJECTION_MASTER);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+
+    }
+
+    public function savRejectiongdata($id,$data){
+        if($id != '') {
+            $this->db->where('rejec_id', $id);
+            if($this->db->update(TBL_REJECTION_MASTER, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_REJECTION_MASTER, $data)) {
+                return $this->db->insert_id();;
+            } else {
+                return FALSE;
+            }
+        }
+
+    }
+
+    public function deleteRejection($id){
+        $this->db->where('rejec_id', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_REJECTION_MASTER)){
+           return TRUE;
+        }else{
+           return FALSE;
+        }
+    }
+
+
+    public function getRejectiongmasterdata($id){
+        $this->db->select('*');
+        $this->db->where(TBL_REJECTION_MASTER.'.rejec_id', $id);
+        $this->db->where(TBL_REJECTION_MASTER.'.status', 1);
+        $query = $this->db->get(TBL_REJECTION_MASTER);
+        $data = $query->result_array();
+        return $data;
+
+    }
+
+    public function checkifexitRejectionupdate($id,$name){
+
+        $this->db->select('*');
+        $this->db->where(TBL_REJECTION_MASTER.'.rejec_id', $id);
+        $this->db->where(TBL_REJECTION_MASTER.'.rejection_reason', trim($name));
+        $this->db->where(TBL_REJECTION_MASTER.'.status', 1);
+        $query = $this->db->get(TBL_REJECTION_MASTER);
+        $data = $query->num_rows();
+        return $data;
+
+
+    }
+
+
+    
+
 
 
 }

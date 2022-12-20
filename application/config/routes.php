@@ -89,13 +89,18 @@ $route['fetchfinishedgoods'] = "admin/fetchfinishedgoods";
 $route['addnewFinishedgoods'] = "admin/addnewFinishedgoods";
 $route['updateFinishedgoods/(:any)'] = "admin/updateFinishedgoods/$1";
 $route['deletefinishedgoods'] = "admin/deletefinishedgoods";
-
-
 $route['plattingmaster'] = "admin/plattingmaster";
 $route['fetchplattinglist'] = "admin/fetchplattinglist";
 $route['addnewPlatting'] = "admin/addnewPlatting";
 $route['updatePlattingmaster/(:any)'] = "admin/updatePlattingmaster/$1";
 $route['deleteplatting'] = "admin/deleteplatting";
+
+$route['rejectionmaster'] = "admin/rejectionmaster";
+$route['fetchrRjectionglist'] = "admin/fetchrRjectionglist";
+$route['addnewRejection'] = "admin/addnewRejection";
+$route['updateRejectionmaster/(:any)'] = "admin/updateRejectionmaster/$1";
+$route['deleteRejection'] = "admin/deleteRejection";
+
 
 
 
