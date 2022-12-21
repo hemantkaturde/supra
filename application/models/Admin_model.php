@@ -822,7 +822,6 @@ class Admin_model extends CI_Model
 
     }
 
-
     public function getBuyerCount($params){
 
         $this->db->select('*');
@@ -876,14 +875,73 @@ class Admin_model extends CI_Model
                 $data[$counter]['contact_person'] = $value['contact_person'];
                 $data[$counter]['GSTIN'] = $value['GSTIN'];
                 $data[$counter]['action'] = '';
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."updateRejectionmaster/".$value['rejec_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";
-                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['rejec_id']."' class='fa fa-trash-o deleteRejection' aria-hidden='true'></i>"; 
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."updateBuyer/".$value['buyer_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['buyer_id']."' class='fa fa-trash-o deleteBuyer' aria-hidden='true'></i>"; 
                 $counter++; 
             }
         }
 
         return $data;
         
+    }
+
+    public function checkIfexitsbuyer($buyer_name){
+
+        $this->db->select('*');
+        $this->db->where(TBL_BUYER_MASTER.'.buyer_name', $buyer_name);
+        $this->db->where(TBL_BUYER_MASTER.'.status', 1);
+        $query = $this->db->get(TBL_BUYER_MASTER);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+    }
+
+    public function saveBuyerdata($id,$data){
+        if($id != '') {
+            $this->db->where('buyer_id', $id);
+            if($this->db->update(TBL_BUYER_MASTER, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_BUYER_MASTER, $data)) {
+                return $this->db->insert_id();;
+            } else {
+                return FALSE;
+            }
+        }
+    }
+
+    public function deleteBuyer($id){
+        $this->db->where('buyer_id', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_BUYER_MASTER)){
+           return TRUE;
+        }else{
+           return FALSE;
+        }
+    }
+
+    public function getBuyergmasterdata($id){
+        $this->db->select('*');
+        $this->db->where(TBL_BUYER_MASTER.'.buyer_id', $id);
+        $this->db->where(TBL_BUYER_MASTER.'.status', 1);
+        $query = $this->db->get(TBL_BUYER_MASTER);
+        $data = $query->result_array();
+        return $data;
+
+    }
+
+    public function checkifexitBuyerupdate($id,$name){
+
+        $this->db->select('*');
+        $this->db->where(TBL_BUYER_MASTER.'.buyer_id', $id);
+        $this->db->where(TBL_BUYER_MASTER.'.buyer_name', trim($name));
+        $this->db->where(TBL_BUYER_MASTER.'.status', 1);
+        $query = $this->db->get(TBL_BUYER_MASTER);
+        $data = $query->num_rows();
+        return $data;
+
     }
     
 }

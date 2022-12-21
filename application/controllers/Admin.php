@@ -1738,7 +1738,7 @@ class Admin extends BaseController
      * This function is used to load the Rejection Master Data
      */
 
-     public function addnewRejection(){
+    public function addnewRejection(){
         $post_submit = $this->input->post();
         if($post_submit){
             $new_rejection_response = array();
@@ -1863,7 +1863,6 @@ class Admin extends BaseController
      */
 
      public function buyermaster(){
-
         $process = 'Buyer Master';
         $processFunction = 'Admin/buyermaster';
         $this->logrecord($process,$processFunction);
@@ -1877,7 +1876,7 @@ class Admin extends BaseController
      * This function is used to laod Buyer Master
      */
 
-     public function fetchrBuyerlist(){
+    public function fetchrBuyerlist(){
         
         $params = $_REQUEST;
         $totalRecords = $this->admin_model->getBuyerCount($params); 
@@ -1900,8 +1899,159 @@ class Admin extends BaseController
             "data"            => $data   // total data array
             );
         echo json_encode($json_data);
-
-
     }
+
+
+    /**
+     * This function is used to add Buyer Master
+     */
+
+    public function addnewBuyer(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $save_buyer_response = array();
+
+            $this->form_validation->set_rules('buyer_name','Buyer Name','trim|required|max_length[128]');
+            $this->form_validation->set_rules('currency','Currency','trim|max_length[50]');
+            $this->form_validation->set_rules('address','Address','trim|required');
+            $this->form_validation->set_rules('landline','Landline','trim|required|max_length[128]');
+            $this->form_validation->set_rules('mobile','Mobile','trim|numeric|required|max_length[50]');
+            $this->form_validation->set_rules('contact_person','Contact Person','trim|required|max_length[50]');
+            $this->form_validation->set_rules('email','Email','trim|valid_email|max_length[50]');
+            $this->form_validation->set_rules('GSTIN','GSTIN','trim|required|max_length[50]');
+
+            if($this->form_validation->run() == FALSE)
+            {
+                $save_buyer_response['status'] = 'failure';
+                $save_buyer_response['error'] = array('buyer_name'=>strip_tags(form_error('buyer_name')), 'currency'=>strip_tags(form_error('currency')), 'address'=>strip_tags(form_error('address')), 'landline'=>strip_tags(form_error('landline')),'contact_person'=>strip_tags(form_error('contact_person')),'mobile'=>strip_tags(form_error('mobile')),'email'=>strip_tags(form_error('email')),'GSTIN'=>strip_tags(form_error('GSTIN')));
+            }else{
+
+                $data = array(
+                    'buyer_name'   => trim($this->input->post('buyer_name')),
+                    'currency'     => trim($this->input->post('currency')),
+                    'address'    => trim($this->input->post('address')),
+                    'landline'  => trim($this->input->post('landline')),
+                    'mobile' =>   trim($this->input->post('mobile')),
+                    'contact_person' => trim($this->input->post('contact_person')),
+                    'email' =>    trim($this->input->post('email')),
+                    'GSTIN' =>    trim($this->input->post('GSTIN'))
+                );
+
+                $checkIfexitsbuyer = $this->admin_model->checkIfexitsbuyer(trim($this->input->post('buyer_name')));
+                if($checkIfexitsbuyer > 0){
+                    $save_buyer_response['status'] = 'failure';
+                    $save_buyer_response['error'] = array('buyer_name'=>'Buyer Mame Alreday Exits');
+                }else{
+                    $saveBuyerdata = $this->admin_model->saveBuyerdata('',$data);
+                    if($saveBuyerdata){
+                        $save_buyer_response['status'] = 'success';
+                        $save_buyer_response['error'] = array('buyer_name'=>'', 'currency'=>'', 'address'=>'', 'landline'=>'','contact_person'=>'','mobile'=>'','email'=>'','GSTIN'=>'');
+                    }
+                }
+            }
+            echo json_encode($save_buyer_response);
+        }else{
+            $process = 'Add Buyer Master';
+            $processFunction = 'Admin/addnewBuyer';
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Add Buyer Master';
+            $this->loadViews("masters/addsbuyerMaster", $this->global, $data, NULL);
+        }
+    }
+
+
+    /**
+     * This function is used to Delete the Buyer Master
+     */
+
+     public function deleteBuyer(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->deleteBuyer(trim($this->input->post('id')));
+            if ($result) {
+                        $process = 'Buyer Delete';
+                        $processFunction = 'Admin/deleteRejection';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
+     }
+
+      /**
+     * This function is used to add Buyer Master
+     */
+
+
+    public function updateBuyer($id){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $update_buyer_response = array();
+
+            $this->form_validation->set_rules('buyer_name','Buyer Name','trim|required|max_length[128]');
+            $this->form_validation->set_rules('currency','Currency','trim|max_length[50]');
+            $this->form_validation->set_rules('address','Address','trim|required');
+            $this->form_validation->set_rules('landline','Landline','trim|required|max_length[128]');
+            $this->form_validation->set_rules('mobile','Mobile','trim|numeric|required|max_length[50]');
+            $this->form_validation->set_rules('contact_person','Contact Person','trim|required|max_length[50]');
+            $this->form_validation->set_rules('email','Email','trim|valid_email|max_length[50]');
+            $this->form_validation->set_rules('GSTIN','GSTIN','trim|required|max_length[50]');
+
+            if($this->form_validation->run() == FALSE)
+            {
+                $update_buyer_response['status'] = 'failure';
+                $update_buyer_response['error'] = array('buyer_name'=>strip_tags(form_error('buyer_name')), 'currency'=>strip_tags(form_error('currency')), 'address'=>strip_tags(form_error('address')), 'landline'=>strip_tags(form_error('landline')),'contact_person'=>strip_tags(form_error('contact_person')),'mobile'=>strip_tags(form_error('mobile')),'email'=>strip_tags(form_error('email')),'GSTIN'=>strip_tags(form_error('GSTIN')));
+            }else{
+
+                $data = array(
+                    'buyer_name'   => trim($this->input->post('buyer_name')),
+                    'currency'     => trim($this->input->post('currency')),
+                    'address'    => trim($this->input->post('address')),
+                    'landline'  => trim($this->input->post('landline')),
+                    'mobile' =>   trim($this->input->post('mobile')),
+                    'contact_person' => trim($this->input->post('contact_person')),
+                    'email' =>    trim($this->input->post('email')),
+                    'GSTIN' =>    trim($this->input->post('GSTIN'))
+                );
+
+              
+                $checkifexitBuyerupdate = $this->admin_model->checkifexitBuyerupdate(trim($this->input->post('buyer_id')),trim($this->input->post('buyer_name')));
+
+                if($checkifexitBuyerupdate > 0){
+                    $saveBuyerdata = $this->admin_model->saveBuyerdata(trim($this->input->post('buyer_id')),$data);
+                    if($saveBuyerdata){
+                        $update_buyer_response['status'] = 'success';
+                        $update_buyer_response['error'] = array('buyer_name'=>'', 'currency'=>'', 'address'=>'', 'landline'=>'','contact_person'=>'','mobile'=>'','email'=>'','GSTIN'=>'');
+                    }
+
+                }else{
+
+                    $checkIfexitsbuyer = $this->admin_model->checkIfexitsbuyer(trim($this->input->post('buyer_name')));
+                    if($checkIfexitsbuyer > 0){
+                        $update_buyer_response['status'] = 'failure';
+                        $update_buyer_response['error'] = array('buyer_name'=>'Rejection Reason Alreday Exits');
+                    }else{
+                        $updatedata = $this->admin_model->saveBuyerdata(trim($this->input->post('buyer_id')),$data);
+                        if($updatedata){
+                           $update_buyer_response['status'] = 'success';
+                           $update_buyer_response['error'] = array('buyer_name'=>'', 'currency'=>'', 'address'=>'', 'landline'=>'','contact_person'=>'','mobile'=>'','email'=>'','GSTIN'=>'');
+                       }
+
+                    }
+                }
+            }
+            echo json_encode($update_buyer_response);
+        }else{
+            $process = 'Update Buyer Master';
+            $processFunction = 'Admin/updateBuyer';
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Update Buyer Master';
+            $data['getBuyergmasterdata'] = $this->admin_model->getBuyergmasterdata($id);
+            $this->loadViews("masters/editbuyerMaster", $this->global, $data, NULL);
+        }
+    }
+
 
 }

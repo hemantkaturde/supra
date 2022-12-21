@@ -1250,20 +1250,20 @@
 <?php } ?>
 
 
-<?php if($pageTitle=='Buyer Master'){ ?>
+<?php if($pageTitle=='Buyer Master' || $pageTitle=='Add Buyer Master' || $pageTitle=="Update Buyer Master"){ ?>
 	<script type="text/javascript">
 		$(document).ready(function() {
             var dt = $('#view_buyer').DataTable({
 	            "columnDefs": [ 
 	                 { className: "details-control", "targets": [ 0 ] },
 	                 { "width": "15%", "targets": 0 },
-	                 { "width": "20%", "targets": 1 },
+	                 { "width": "18%", "targets": 1 },
 					 { "width": "15%", "targets": 2 },
 	                 { "width": "10%", "targets": 3 },
 					 { "width": "10%", "targets": 4 },
 	                 { "width": "15%", "targets": 5 },
 					 { "width": "10%", "targets": 6 },
-					 { "width": "10%", "targets": 7 },
+					 { "width": "15%", "targets": 7 },
 					
 	            ],
 	            responsive: true,
@@ -1283,6 +1283,142 @@
 	        });
 	    });
 
+		$(document).on('click','#savebuyer',function(e){
+			e.preventDefault();
+			$(".loader_ajax").show();
+			var formData = new FormData($("#addbuyerform")[0]);
 
-    </script>
+			$.ajax({
+				url : "<?php echo base_url();?>addnewBuyer",
+				type: "POST",
+				data : formData,
+				cache: false,
+		        contentType: false,
+		        processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+						$(".loader_ajax").hide();
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						swal({
+							title: "Success",
+							text: "Buyer Successfully Added!",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+								window.location.href = "<?php echo base_url().'buyermaster'?>";
+						});		
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			});
+			return false;
+	    });
+
+		$(document).on('click','#updateBuyer',function(e){
+			e.preventDefault();
+			$(".loader_ajax").show();
+			var formData = new FormData($("#editebuyerform")[0]);
+            var buyer_id = $("#buyer_id").val();
+			$.ajax({
+				url : "<?php echo base_url();?>updateBuyer/"+buyer_id,
+				type: "POST",
+				data : formData,
+				cache: false,
+		        contentType: false,
+		        processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+						$(".loader_ajax").hide();
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						swal({
+							title: "Success",
+							text: "Buyer  Successfully Updated!",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+								window.location.href = "<?php echo base_url().'buyermaster'?>";
+						});		
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			});
+			return false;
+	});
+
+		$(document).on('click','.deleteBuyer',function(e){
+
+			var elemF = $(this);
+			e.preventDefault();
+				swal({
+					title: "Are you sure?",
+					text: "Delete Buyer ",
+					type: "warning",
+					showCancelButton: true,
+					closeOnClickOutside: false,
+					confirmButtonClass: "btn-sm btn-danger",
+					confirmButtonText: "Yes, delete it!",
+					cancelButtonText: "No, cancel plz!",
+					closeOnConfirm: false,
+					closeOnCancel: false
+				}, function(isConfirm) {
+					if (isConfirm) {
+								$.ajax({
+									url : "<?php echo base_url();?>deleteBuyer",
+									type: "POST",
+									data : 'id='+elemF.attr('data-id'),
+									success: function(data, textStatus, jqXHR)
+									{
+										const obj = JSON.parse(data);
+									
+										if(obj.status=='success'){
+											swal({
+												title: "Deleted!",
+												text: "Buyer Deleted Succesfully",
+												icon: "success",
+												button: "Ok",
+												},function(){ 
+													window.location.href = "<?php echo base_url().'buyermaster'?>";
+											});	
+										}
+
+									},
+									error: function (jqXHR, textStatus, errorThrown)
+									{
+										$(".loader_ajax").hide();
+									}
+								})
+							}
+							else {
+					swal("Cancelled", "Buyer deletion cancelled ", "error");
+					}
+				});
+		});
+
+</script>
 <?php } ?>

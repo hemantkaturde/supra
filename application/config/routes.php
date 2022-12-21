@@ -94,7 +94,6 @@ $route['fetchplattinglist'] = "admin/fetchplattinglist";
 $route['addnewPlatting'] = "admin/addnewPlatting";
 $route['updatePlattingmaster/(:any)'] = "admin/updatePlattingmaster/$1";
 $route['deleteplatting'] = "admin/deleteplatting";
-
 $route['rejectionmaster'] = "admin/rejectionmaster";
 $route['fetchrRjectionglist'] = "admin/fetchrRjectionglist";
 $route['addnewRejection'] = "admin/addnewRejection";
@@ -104,6 +103,10 @@ $route['deleteRejection'] = "admin/deleteRejection";
 
 $route['buyermaster'] = "admin/buyermaster";
 $route['fetchrBuyerlist'] = "admin/fetchrBuyerlist";
+$route['addnewBuyer'] = "admin/addnewBuyer";
+$route['updateBuyer/(:any)'] = "admin/updateBuyer/$1";
+$route['deleteBuyer'] = "admin/deleteBuyer";
+
 
 
 
