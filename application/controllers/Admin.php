@@ -1374,8 +1374,8 @@ class Admin extends BaseController
             $this->form_validation->set_rules('part_number','Part Number','trim|required');
             $this->form_validation->set_rules('name','Name','trim|required');
             $this->form_validation->set_rules('hsn_code','HSN Code','trim|required');
-            $this->form_validation->set_rules('gross_weight','Gross Weight','trim|required');
-            $this->form_validation->set_rules('net_weight','Net Weight','trim|required');
+            $this->form_validation->set_rules('gross_weight','Gross Weight','trim');
+            $this->form_validation->set_rules('net_weight','Net Weight','trim');
             $this->form_validation->set_rules('sac','SAC','trim|required');
             $this->form_validation->set_rules('drawing_number','Drawing Number','trim|required');
             $this->form_validation->set_rules('description_1','description_1','trim');
@@ -1455,8 +1455,8 @@ class Admin extends BaseController
             $this->form_validation->set_rules('part_number','Part Number','trim|required');
             $this->form_validation->set_rules('name','Name','trim|required');
             $this->form_validation->set_rules('hsn_code','HSN Code','trim|required');
-            $this->form_validation->set_rules('gross_weight','Gross Weight','trim|required');
-            $this->form_validation->set_rules('net_weight','Net Weight','trim|required');
+            $this->form_validation->set_rules('gross_weight','Gross Weight','trim');
+            $this->form_validation->set_rules('net_weight','Net Weight','trim');
             $this->form_validation->set_rules('sac','SAC','trim|required');
             $this->form_validation->set_rules('drawing_number','Drawing Number','trim|required');
             $this->form_validation->set_rules('description_1','description_1','trim');

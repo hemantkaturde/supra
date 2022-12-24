@@ -60,7 +60,7 @@
                                         <div class="form-group">
                                             <label for="gross_weight">Gross Weight <span class="required">*</span></label>
                                             <input type="text" class="form-control" value="<?=$data['groass_weight']?>" id="gross_weight" name="gross_weight">
-                                            <p class="error contact_person_error"></p>
+                                            <p class="error groass_weight_error"></p>
                                         </div>
                                     </div>
 
