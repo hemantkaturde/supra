@@ -119,3 +119,8 @@ define('TBL_FINISHED_GOODS','tbl_finished_goods');
 define('TBL_PLATTING_MASTER','tbl_platting_master');
 define('TBL_REJECTION_MASTER','tbl_rejection_master');
 define('TBL_BUYER_MASTER','tbl_buyer');
+define('TBL_BUYER_PO_MASTER','tbl_buyer_po');
+define('TBL_SUPPLIER_PO_MASTER','tbl_supplier_po');
+define('TBL_BUYER_PO_MASTER_ITEM','tbl_buyerpo_item');
+
+

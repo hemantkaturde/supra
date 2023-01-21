@@ -1373,11 +1373,11 @@ class Admin extends BaseController
 
             $this->form_validation->set_rules('part_number','Part Number','trim|required');
             $this->form_validation->set_rules('name','Name','trim|required');
-            $this->form_validation->set_rules('hsn_code','HSN Code','trim|required');
+            $this->form_validation->set_rules('hsn_code','HSN Code','trim');
             $this->form_validation->set_rules('gross_weight','Gross Weight','trim');
             $this->form_validation->set_rules('net_weight','Net Weight','trim');
-            $this->form_validation->set_rules('sac','SAC','trim|required');
-            $this->form_validation->set_rules('drawing_number','Drawing Number','trim|required');
+            $this->form_validation->set_rules('sac','SAC','trim');
+            $this->form_validation->set_rules('drawing_number','Drawing Number','trim');
             $this->form_validation->set_rules('description_1','description_1','trim');
             $this->form_validation->set_rules('description_2','description_2','trim');
 
@@ -1454,11 +1454,11 @@ class Admin extends BaseController
 
             $this->form_validation->set_rules('part_number','Part Number','trim|required');
             $this->form_validation->set_rules('name','Name','trim|required');
-            $this->form_validation->set_rules('hsn_code','HSN Code','trim|required');
+            $this->form_validation->set_rules('hsn_code','HSN Code','trim');
             $this->form_validation->set_rules('gross_weight','Gross Weight','trim');
             $this->form_validation->set_rules('net_weight','Net Weight','trim');
-            $this->form_validation->set_rules('sac','SAC','trim|required');
-            $this->form_validation->set_rules('drawing_number','Drawing Number','trim|required');
+            $this->form_validation->set_rules('sac','SAC','trim');
+            $this->form_validation->set_rules('drawing_number','Drawing Number','trim');
             $this->form_validation->set_rules('description_1','description_1','trim');
             $this->form_validation->set_rules('description_2','description_2','trim');
 
@@ -1912,13 +1912,13 @@ class Admin extends BaseController
             $save_buyer_response = array();
 
             $this->form_validation->set_rules('buyer_name','Buyer Name','trim|required|max_length[128]');
-            $this->form_validation->set_rules('currency','Currency','trim|max_length[50]');
+            $this->form_validation->set_rules('currency','Currency','trim|required|max_length[50]');
             $this->form_validation->set_rules('address','Address','trim|required');
-            $this->form_validation->set_rules('landline','Landline','trim|required|max_length[128]');
-            $this->form_validation->set_rules('mobile','Mobile','trim|numeric|required|max_length[50]');
-            $this->form_validation->set_rules('contact_person','Contact Person','trim|required|max_length[50]');
+            $this->form_validation->set_rules('landline','Landline','trim|max_length[128]');
+            $this->form_validation->set_rules('mobile','Mobile','trim|numeric|max_length[50]');
+            $this->form_validation->set_rules('contact_person','Contact Person','trim|max_length[50]');
             $this->form_validation->set_rules('email','Email','trim|valid_email|max_length[50]');
-            $this->form_validation->set_rules('GSTIN','GSTIN','trim|required|max_length[50]');
+            $this->form_validation->set_rules('GSTIN','GSTIN','trim|max_length[50]');
 
             if($this->form_validation->run() == FALSE)
             {
@@ -1991,13 +1991,13 @@ class Admin extends BaseController
             $update_buyer_response = array();
 
             $this->form_validation->set_rules('buyer_name','Buyer Name','trim|required|max_length[128]');
-            $this->form_validation->set_rules('currency','Currency','trim|max_length[50]');
+            $this->form_validation->set_rules('currency','Currency','trim|required|max_length[50]');
             $this->form_validation->set_rules('address','Address','trim|required');
-            $this->form_validation->set_rules('landline','Landline','trim|required|max_length[128]');
-            $this->form_validation->set_rules('mobile','Mobile','trim|numeric|required|max_length[50]');
-            $this->form_validation->set_rules('contact_person','Contact Person','trim|required|max_length[50]');
+            $this->form_validation->set_rules('landline','Landline','trim|max_length[128]');
+            $this->form_validation->set_rules('mobile','Mobile','trim|numeric|max_length[50]');
+            $this->form_validation->set_rules('contact_person','Contact Person','trim|max_length[50]');
             $this->form_validation->set_rules('email','Email','trim|valid_email|max_length[50]');
-            $this->form_validation->set_rules('GSTIN','GSTIN','trim|required|max_length[50]');
+            $this->form_validation->set_rules('GSTIN','GSTIN','trim|max_length[50]');
 
             if($this->form_validation->run() == FALSE)
             {
@@ -2052,6 +2052,390 @@ class Admin extends BaseController
             $this->loadViews("masters/editbuyerMaster", $this->global, $data, NULL);
         }
     }
+
+
+     /**
+     * This function is used to laod buyerpo
+     */
+
+     public function buyerpo(){
+        $process = 'Buyer PO Master';
+        $processFunction = 'Admin/buyerpo';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Buyer PO';
+        $this->loadViews("masters/buyerpo", $this->global, $data, NULL);
+    }
+
+
+
+    /**
+     * This function is used to laod Buyer PO Master
+     */
+
+     public function fetchrBuyerpolist(){
+        
+        $params = $_REQUEST;
+        $totalRecords = $this->admin_model->getBuyerpoCount($params); 
+        $queryRecords = $this->admin_model->getBuyerpodata($params); 
+
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+        echo json_encode($json_data);
+    }
+
+     /**
+     * This function is used to add New Buyer PO
+     */
+
+     public function addnewBuyerPO(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $save_buyerpo_response = array();
+
+            $this->form_validation->set_rules('sales_order_number','Sales Order Number','trim|required');
+            $this->form_validation->set_rules('date','Date','trim|required');
+            $this->form_validation->set_rules('buyer_po_number','Buyer PO Number','trim|required');
+            $this->form_validation->set_rules('buyer_po_date','Buyer PO Date','trim|required');
+            $this->form_validation->set_rules('buyer_name','Buyer Name','trim|required');
+            $this->form_validation->set_rules('currency','Currency','trim|required');
+            $this->form_validation->set_rules('delivery_date','Delivery Date','trim|required');
+            $this->form_validation->set_rules('remark','Remark','trim');
+
+
+            if($this->form_validation->run() == FALSE)
+            {
+                $save_buyerpo_response['status'] = 'failure';
+                $save_buyerpo_response['error'] = array('sales_order_number'=>strip_tags(form_error('sales_order_number')), 'date'=>strip_tags(form_error('date')), 'buyer_po_number'=>strip_tags(form_error('buyer_po_number')), 'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'buyer_name'=>strip_tags(form_error('buyer_name')),'currency'=>strip_tags(form_error('currency')),'rate'=>strip_tags(form_error('rate')),'value'=>strip_tags(form_error('value')),'part_number'=>strip_tags(form_error('part_number')),'order_quantity'=>strip_tags(form_error('order_quantity')),'description'=>strip_tags(form_error('description')),'delivery_date'=>strip_tags(form_error('delivery_date')),'remark'=>strip_tags(form_error('remark')));
+            }else{
+
+                $data = array(
+                    'sales_order_number'   => trim($this->input->post('sales_order_number')),
+                    'date'     => trim($this->input->post('date')),
+                    'buyer_po_number'    => trim($this->input->post('buyer_po_number')),
+                    'buyer_po_date'  => trim($this->input->post('buyer_po_date')),
+                    'buyer_name_id' =>   trim($this->input->post('buyer_name')),
+                    'currency' => trim($this->input->post('currency')),
+                    'delivery_date' =>    trim($this->input->post('delivery_date')),
+                    'remark' =>    trim($this->input->post('remark')),
+                );
+
+                $checkIfexitsbuyerpo = $this->admin_model->checkIfexitsbuyerpo(trim($this->input->post('sales_order_number')));
+                if($checkIfexitsbuyerpo > 0){
+                    $save_buyerpo_response['status'] = 'failure';
+                    $save_buyerpo_response['error'] = array('sales_order_number'=>'Buyer PO Alreday Exits (Sales Order Number Alreday Exits)');
+                }else{
+                    $saveBuyerpodata = $this->admin_model->saveBuyerpodata('',$data);
+                    if($saveBuyerpodata){
+                        $update_last_inserted_id = $this->admin_model->update_last_inserted_id($saveBuyerpodata);
+                        if($update_last_inserted_id){
+                            $save_buyerpo_response['status'] = 'success';
+                            $save_buyerpo_response['error'] = array('sales_order_number'=>strip_tags(form_error('sales_order_number')), 'date'=>strip_tags(form_error('date')), 'buyer_po_number'=>strip_tags(form_error('buyer_po_number')), 'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'buyer_name'=>strip_tags(form_error('buyer_name')),'currency'=>strip_tags(form_error('currency')),'rate'=>strip_tags(form_error('rate')),'value'=>strip_tags(form_error('value')),'part_number'=>strip_tags(form_error('part_number')),'order_quantity'=>strip_tags(form_error('order_quantity')),'description'=>strip_tags(form_error('description')),'delivery_date'=>strip_tags(form_error('delivery_date')),'remark'=>strip_tags(form_error('remark')));
+                        }
+                    }
+                }
+            }
+            echo json_encode($save_buyerpo_response);
+        }else{
+            $process = 'Add Buyer PO';
+            $processFunction = 'Admin/addnewBuyerPO';
+            $data['buyerList']= $this->admin_model->fetchAllbuyerList();
+            $data['rowMaterialList']= $this->admin_model->fetchALLrowMaterialList();
+            $data['getPreviousSalesOrderNumber']= $this->admin_model->getPreviousSalesOrderNumber()[0];
+            $data['fetchALLitemList']= $this->admin_model->fetchALLitemList();
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Add Buyer PO';
+            $this->loadViews("masters/addsbuyerpo", $this->global, $data, NULL);
+        }
+     }
+
+
+    /**
+     * This function is used to Delete the Buyer Master
+     */
+
+     public function deleteBuyerpo(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->deleteBuyerpo(trim($this->input->post('id')));
+            if ($result) {
+                        $process = 'Buyer PO Delete';
+                        $processFunction = 'Admin/deleteRejection';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
+     }
+
+
+
+    /**
+     * This function is used to laod suppllierpo
+     */
+
+     public function supplierpo(){
+
+        $process = 'Supplier PO Master';
+        $processFunction = 'Admin/suppllierpo';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Supplier PO';
+        $this->loadViews("masters/supplierpo", $this->global, $data, NULL);
+
+    }
+
+     /**
+     * This function is used to add New Supplier PO
+     */
+
+     public function addnewSupplierpo(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $save_supplierpo_response = array();
+
+            $this->form_validation->set_rules('po_number','PO Number','trim|required');
+            $this->form_validation->set_rules('date','Date','trim|required');
+            $this->form_validation->set_rules('supplier_name','Supplier Name','trim|required');
+            $this->form_validation->set_rules('type_of_row_material','Type of Row Material','trim|required');
+            $this->form_validation->set_rules('part_number','Part Number','trim|required');
+            $this->form_validation->set_rules('buyer_name','Buyer Name','trim|required');
+            $this->form_validation->set_rules('vendor_name','Vendor Name','trim|required');
+            $this->form_validation->set_rules('total_amount','Total Amount','trim|required');
+            $this->form_validation->set_rules('qt_ref_number','qt_ref_number','trim|required');
+            $this->form_validation->set_rules('quatation_date','Quatation Date','trim|required');
+            $this->form_validation->set_rules('delivery_date','Delivery Date','trim|required');
+            $this->form_validation->set_rules('delivery','Delivery','trim|required');
+            $this->form_validation->set_rules('work_order','Work Order','trim|required');
+            $this->form_validation->set_rules('remark','Remark','trim');
+            
+            if($this->form_validation->run() == FALSE)
+            {
+                $save_supplierpo_response['status'] = 'failure';
+                $save_supplierpo_response['error'] = array('po_number'=>strip_tags(form_error('po_number')),'date'=>strip_tags(form_error('date')), 'supplier_name'=>strip_tags(form_error('supplier_name')), 'type_of_row_material'=>strip_tags(form_error('type_of_row_material')),'part_number'=>strip_tags(form_error('part_number')),'buyer_name'=>strip_tags(form_error('buyer_name')),'vendor_name'=>strip_tags(form_error('vendor_name')),'total_amount'=>strip_tags(form_error('total_amount')),'qt_ref_number'=>strip_tags(form_error('qt_ref_number')),'quatation_date'=>strip_tags(form_error('quatation_date')),'delivery_date'=>strip_tags(form_error('delivery_date')),'delivery'=>strip_tags(form_error('delivery')),'work_order'=>strip_tags(form_error('work_order')),'remark'=>strip_tags(form_error('remark')));
+            }else{
+
+                $data = array(
+                    'po_number'=> trim($this->input->post('po_number')),
+                    'date'=> trim($this->input->post('date')),
+                    'supplier_name'=> trim($this->input->post('supplier_name')),
+                    'type_of_row_material'=> trim($this->input->post('type_of_row_material')),
+                    'part_number'=> trim($this->input->post('part_number')),
+                    'buyer_name'=> trim($this->input->post('buyer_name')),
+                    'vendor_name'=> trim($this->input->post('vendor_name')),
+                    'total_amount'=> trim($this->input->post('total_amount')),
+                    'qt_ref_number'=> trim($this->input->post('qt_ref_number')),
+                    'quatation_date'=> trim($this->input->post('quatation_date')),
+                    'delivery_date'=> trim($this->input->post('delivery_date')),
+                    'delivery'=> trim($this->input->post('delivery')),
+                    'work_order'=> trim($this->input->post('work_order')),
+                    'remark'=> trim($this->input->post('remark')),
+                );
+
+                $checkIfexitssupplierrpo = $this->admin_model->checkIfexitssupplierrpo(trim($this->input->post('po_number')));
+                if($checkIfexitssupplierrpo > 0){
+                    $save_supplierpo_response['status'] = 'failure';
+                    $save_supplierpo_response['error'] = array('po_number'=>'PO Alreday Exits (PO Number Alreday Exits)');
+                }else{
+                    $saveBuyerpodata = $this->admin_model->saveSupplierpodata('',$data);
+                    if($saveBuyerpodata){
+                        $save_supplierpo_response['status'] = 'success';
+                        $save_supplierpo_response['error'] = array('po_number'=>strip_tags(form_error('po_number')),'date'=>strip_tags(form_error('date')), 'supplier_name'=>strip_tags(form_error('supplier_name')), 'type_of_row_material'=>strip_tags(form_error('type_of_row_material')),'part_number'=>strip_tags(form_error('part_number')),'buyer_name'=>strip_tags(form_error('buyer_name')),'vendor_name'=>strip_tags(form_error('vendor_name')),'total_amount'=>strip_tags(form_error('total_amount')),'qt_ref_number'=>strip_tags(form_error('qt_ref_number')),'quatation_date'=>strip_tags(form_error('quatation_date')),'delivery_date'=>strip_tags(form_error('delivery_date')),'delivery'=>strip_tags(form_error('delivery')),'work_order'=>strip_tags(form_error('work_order')),'remark'=>strip_tags(form_error('remark')));
+                    }
+                }
+            }
+            echo json_encode($save_supplierpo_response);
+        }else{
+            $process = 'Add Supplier PO';
+            $processFunction = 'Admin/addnewSupplierpo';
+            $data['buyerList']= $this->admin_model->fetchAllbuyerList();
+            $data['rowMaterialList']= $this->admin_model->fetchALLrowMaterialList();
+            $data['supplierList']= $this->admin_model->fetchALLsupplierList();
+            $data['vendorList']= $this->admin_model->fetchALLvendorList();
+            //$data['getPreviousSalesOrderNumber']= $this->admin_model->getPreviousSalesOrderNumber()[0];
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Add Supplier PO';
+            $this->loadViews("masters/addSupplierpo", $this->global, $data, NULL);
+        }
+     }
+
+
+
+      /**
+     * This function is used to laod Buyer PO Master
+     */
+
+     public function fetchSupplierpolist(){
+        
+        $params = $_REQUEST;
+        $totalRecords = $this->admin_model->getSupplierpoCount($params); 
+        $queryRecords = $this->admin_model->getSupplierpodata($params); 
+
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+        echo json_encode($json_data);
+    }
+
+
+    /**
+     * This function is used to Delete the Buyer Master
+     */
+
+     public function deleteSupplierpo(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->deleteSupplierpo(trim($this->input->post('id')));
+            if ($result) {
+                        $process = 'Supplier PO Delete';
+                        $processFunction = 'Admin/deleteSupplierpo';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
+     }
+
+
+     public function addbuyeritem(){
+
+        $post_submit = $this->input->post();
+      
+        if($post_submit){
+            $save_buyerpoitem_response = array();
+
+            $this->form_validation->set_rules('part_number','Part Number','trim|required');
+            $this->form_validation->set_rules('description','Part Name','trim|required');
+            $this->form_validation->set_rules('qty','Qty','trim|numeric|required');
+            $this->form_validation->set_rules('rate','Rate','trim|required');
+            $this->form_validation->set_rules('value','Value','trim|required');
+        
+            if($this->form_validation->run() == FALSE)
+            {
+                $save_buyerpoitem_response['status'] = 'failure';
+                $save_buyerpoitem_response['error'] = array('part_number'=>strip_tags(form_error('part_number')), 'description'=>strip_tags(form_error('description')), 'qty'=>strip_tags(form_error('qty')), 'rate'=>strip_tags(form_error('rate')),'value'=>strip_tags(form_error('value')));
+            }else{
+
+                
+                $data = array(
+                    'part_number_id'   => trim($this->input->post('part_number')),
+                    'description'     => trim($this->input->post('description')),
+                    'order_oty'    => trim($this->input->post('qty')),
+                    'rate'  => trim($this->input->post('rate')),
+                    'value' =>   trim($this->input->post('value')),
+                    'pre_buyer_po_number'=>trim($this->input->post('buyer_po_number')),
+                    'pre_date'=>trim($this->input->post('date')),
+                    'pre_buyer_po_date'=>trim($this->input->post('buyer_po_date')),
+                    'pre_buyer_name' =>trim($this->input->post('buyer_name')),
+                    'pre_currency' =>trim($this->input->post('currency')),
+                    'pre_delivery_date' =>trim($this->input->post('delivery_date')),
+                    'pre_remark' =>trim($this->input->post('remark')),
+                );
+
+                // $checkIfexitsbuyerpo = $this->admin_model->checkIfexitsbuyerpo(trim($this->input->post('sales_order_number')));
+                // if($checkIfexitsbuyerpo > 0){
+                //     $save_buyerpo_response['status'] = 'failure';
+                //     $save_buyerpo_response['error'] = array('sales_order_number'=>'Buyer PO Alreday Exits (Sales Order Number Alreday Exits)');
+                // }else{
+                    $saveBuyerpoitemdata = $this->admin_model->saveBuyerpoitemdata('',$data);
+                    if($saveBuyerpoitemdata){
+                        $save_buyerpoitem_response['status'] = 'success';
+                        $save_buyerpoitem_response['error'] = array('part_number'=>'', 'description'=>'', 'qty'=>'', 'rate'=>'','value'=>'');
+                    }
+                //  }
+                
+               
+            }
+
+            echo json_encode($save_buyerpoitem_response);
+
+        }
+
+     }
+
+
+     public function deleteBuyerpoitem(){
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->deleteBuyerpoitem(trim($this->input->post('id')));
+            if ($result) {
+                        $process = 'Buyer PO Item Delete';
+                        $processFunction = 'Admin/deleteBuyerpoitem';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
+
+     }
+
+
+    public function getBuyerCurrency() {
+            if($this->input->post('buyer_name')) {
+                        $getBuyerCurrency = $this->admin_model->getBuyerCurrency($this->input->post('buyer_name'));
+                        $content = $getBuyerCurrency[0]['currency'];
+                    echo $content;
+            } else {
+                echo 'failure';
+            }
+    }
+
+
+    public function viewBuyerpo($buyerpoid){
+        $process = 'View Buyer PO';
+        $processFunction = 'Admin/viewBuyerpo';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Buyer PO View';
+        $data['getbuyerpodetails']= $this->admin_model->getbuyerpodetails($buyerpoid);
+        $data['fetchALLitemList']= $this->admin_model->fetchALLBuyeritemList($buyerpoid);
+        $this->loadViews("masters/viewbuyerpo", $this->global, $data, NULL);
+    }
+ 
+    public function getPartnumberByid(){
+
+        if($this->input->post('part_number')) {
+            $getPartNameBypartid = $this->admin_model->getPartnumberBypartnumber($this->input->post('part_number'));
+            $content = $getPartNameBypartid[0]['type_of_raw_material'];
+            echo $content;
+        } else {
+            echo 'failure';
+        }
+
+
+    }
+
 
 
 }

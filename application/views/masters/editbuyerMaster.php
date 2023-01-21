@@ -38,7 +38,7 @@
                                     
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="currency">Currency</label>
+                                            <label for="currency">Currency <span class="required">*</span></label>
                                             <input type="text" class="form-control" value="<?=$data['currency']?>"  id="currency" name="currency" required>
                                             <p class="error currency_error"></p>
                                         </div>
@@ -66,7 +66,7 @@
 
                                    <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="mobile">Mobile <span class="required">*</span></label>
+                                            <label for="mobile">Mobile</label>
                                             <input type="text" class="form-control" value="<?=$data['mobile']?>" maxlength="10" id="mobile" id="mobile"  name="mobile">
                                             <p class="error mobile_error"></p>
                                         </div>
@@ -74,7 +74,7 @@
 
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="contact_person">Contact Person <span class="required">*</span></label>
+                                            <label for="contact_person">Contact Person </label>
                                             <input type="text" class="form-control" value="<?=$data['contact_person']?>" id="contact_person" name="contact_person" required>
                                             <p class="error contact_person_error"></p>
                                         </div>

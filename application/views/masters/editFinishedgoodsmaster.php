@@ -37,7 +37,7 @@
                                     
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="name">Name <span class="required">*</span></label>
+                                            <label for="name">Part Name <span class="required">*</span></label>
                                             <input type="text" class="form-control"  value="<?=$data['name']?>" id="name" name="name">
                                             <p class="error name_error"></p>
                                         </div>
@@ -58,7 +58,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="gross_weight">Gross Weight <span class="required">*</span></label>
+                                            <label for="gross_weight">Gross Weight </label>
                                             <input type="text" class="form-control" value="<?=$data['groass_weight']?>" id="gross_weight" name="gross_weight">
                                             <p class="error groass_weight_error"></p>
                                         </div>
@@ -66,7 +66,7 @@
 
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="net_weight">Net Weight <span class="required">*</span></label>
+                                            <label for="net_weight">Net Weight </label>
                                             <input type="text" class="form-control" value="<?=$data['net_weight']?>" id="net_weight" id="net_weight"  name="net_weight">
                                             <p class="error net_weight_error"></p>
                                         </div>
@@ -76,7 +76,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="sac">SAC <span class="required">*</span></label>
+                                            <label for="sac">SAC</label>
                                             <input type="text" class="form-control" value="<?=$data['sac']?>" id="sac" name="sac">
                                             <p class="error sac_error"></p>
                                         </div>
@@ -84,7 +84,7 @@
 
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="drawing_number">Drawing Number <span class="required">*</span></label>
+                                            <label for="drawing_number">Drawing Number</label>
                                             <input type="text" class="form-control"  value="<?=$data['drawing_number']?>"   id="drawing_number" name="drawing_number">
                                             <p class="error drawing_number_error"></p>
                                         </div>

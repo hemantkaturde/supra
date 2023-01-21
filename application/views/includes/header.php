@@ -178,6 +178,29 @@
                       </ul>
                     </li>
 
+                  
+                    <li class="treeview <?php if($pageUrl=="buyerpo" || $pageUrl=="addnewBuyerpo" || $pageUrl=="supplierpo" || $pageUrl=="addnewSupplierpo" || $pageUrl=="viewBuyerpo"){echo 'active';}?>">
+                      <a href="#">
+                        <i class="fa fa-laptop"></i> <span class="menu_label">Miscellaneous</span>
+                          <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                          </span>
+                      </a>
+                      <ul class="treeview-menu" >
+                        <li class="line_height <?php if($pageUrl=="buyerpo" || $pageUrl=="addnewBuyerpo"  || $pageUrl=="viewBuyerpo"){echo 'active';}?>"><a href="<?php echo base_url(); ?>buyerpo"><i class="fa fa-cubes"></i> Buyer PO</a></li>
+                        <li class="line_height <?php if($pageUrl=="supplierpo" || $pageUrl=="addnewSupplierpo"){echo 'active';}?>"><a href="<?php echo base_url(); ?>supplierpo"><i class="fa fa-cubes"></i> Supplier PO</a></li>
+                        <li class="line_height"><a href="<?php echo base_url(); ?>log-history-upload"><i class="fa fa-cubes"></i> Bill of Material</a></li>
+                        <li class="line_height"><a href="<?php echo base_url(); ?>log-history-backup"><i class="fa fa-cubes"></i> Bill of Material 2</a></li>
+                        <li class="line_height"><a href="<?php echo base_url(); ?>log-history-backup"><i class="fa fa-cubes"></i> Vendor Bill of Material</a></li>
+                        <li class="line_height"><a href="<?php echo base_url(); ?>log-history-backup"><i class="fa fa-cubes"></i> Current Order Status</a></li>
+                        <li class="line_height"><a href="<?php echo base_url(); ?>log-history-backup"><i class="fa fa-cubes"></i> Debit Note</a></li>
+                        <li class="line_height"><a href="<?php echo base_url(); ?>log-history-backup"><i class="fa fa-cubes"></i> POD</a></li>
+                        <li class="line_height"><a href="<?php echo base_url(); ?>log-history-backup"><i class="fa fa-cubes"></i> Payment Details</a></li>
+                        <li class="line_height"><a href="<?php echo base_url(); ?>log-history-backup"><i class="fa fa-cubes"></i> PO Confirmation</a></li>
+                      </ul>
+                    </li>
+
+
                     <li class="treeview">
                       <a href="#">
                         <i class="fa fa-file-text-o"></i> <span class="menu_label">Challans</span>
@@ -190,28 +213,6 @@
                         <li class="line_height"><a href="<?php echo base_url(); ?>log-history-upload"><i class="fa fa-cubes"></i> Rework / Rejection Return</a></li>
                         <li class="line_height"><a href="<?php echo base_url(); ?>log-history-backup"><i class="fa fa-cubes"></i> Common Challan</a></li>
                         <li class="line_height"><a href="<?php echo base_url(); ?>log-history-backup"><i class="fa fa-cubes"></i> Scrap Return</a></li>
-
-                      </ul>
-                    </li>
-
-
-                    <li class="treeview">
-                      <a href="#">
-                        <i class="fa fa-laptop"></i> <span class="menu_label">Miscellaneous</span>
-                          <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                          </span>
-                      </a>
-                      <ul class="treeview-menu" >
-                        <li class="line_height"><a href="<?php echo base_url(); ?>log-history"><i class="fa fa-cubes"></i> Purchase Order</a></li>
-                        <li class="line_height"><a href="<?php echo base_url(); ?>log-history-upload"><i class="fa fa-cubes"></i> Bill of Material</a></li>
-                        <li class="line_height"><a href="<?php echo base_url(); ?>log-history-backup"><i class="fa fa-cubes"></i> Bill of Material 2</a></li>
-                        <li class="line_height"><a href="<?php echo base_url(); ?>log-history-backup"><i class="fa fa-cubes"></i> Vendor Bill of Material</a></li>
-                        <li class="line_height"><a href="<?php echo base_url(); ?>log-history-backup"><i class="fa fa-cubes"></i> Current Order Status</a></li>
-                        <li class="line_height"><a href="<?php echo base_url(); ?>log-history-backup"><i class="fa fa-cubes"></i> Debit Note</a></li>
-                        <li class="line_height"><a href="<?php echo base_url(); ?>log-history-backup"><i class="fa fa-cubes"></i> POD</a></li>
-                        <li class="line_height"><a href="<?php echo base_url(); ?>log-history-backup"><i class="fa fa-cubes"></i> Payment Details</a></li>
-                        <li class="line_height"><a href="<?php echo base_url(); ?>log-history-backup"><i class="fa fa-cubes"></i> PO Confirmation</a></li>
                       </ul>
                     </li>
 

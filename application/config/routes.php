@@ -104,6 +104,35 @@ $route['fetchrBuyerlist'] = "admin/fetchrBuyerlist";
 $route['addnewBuyer'] = "admin/addnewBuyer";
 $route['updateBuyer/(:any)'] = "admin/updateBuyer/$1";
 $route['deleteBuyer'] = "admin/deleteBuyer";
+$route['buyerpo'] = "admin/buyerpo";
+$route['addnewBuyerpo'] = "admin/addnewBuyerpo";
+$route['fetchrBuyerpolist'] = "admin/fetchrBuyerpolist";
+$route['deleteBuyerpo'] = "admin/deleteBuyerpo";
+
+$route['supplierpo'] = "admin/supplierpo";
+$route['addnewSupplierpo'] = "admin/addnewSupplierpo";
+$route['fetchSupplierpolist'] = "admin/fetchSupplierpolist";
+$route['deleteSupplierpo'] = "admin/deleteSupplierpo";
+
+$route['addbuyeritem'] = "admin/addbuyeritem";
+$route['deleteBuyerpoitem'] = "admin/deleteBuyerpoitem";
+$route['getBuyerCurrency'] = "admin/getBuyerCurrency";
+
+$route['viewBuyerpo/(:any)'] = "admin/viewBuyerpo/$1";
+$route['getPartnumberByid'] = "admin/getPartnumberByid";
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

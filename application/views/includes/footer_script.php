@@ -1369,7 +1369,7 @@
 			    }
 			});
 			return false;
-	});
+	    });
 
 		$(document).on('click','.deleteBuyer',function(e){
 
@@ -1422,3 +1422,457 @@
 
 </script>
 <?php } ?>
+
+
+<?php if($pageTitle=='Buyer PO' || $pageTitle=='Add Buyer PO'){ ?>
+	<script type="text/javascript">
+        $(document).ready(function() {
+            var dt = $('#view_buyerpo').DataTable({
+	            "columnDefs": [ 
+	                 { className: "details-control", "targets": [ 0 ] },
+	                 { "width": "15%", "targets": 0 },
+	                 { "width": "10%", "targets": 1 },
+					 { "width": "15%", "targets": 2 },
+	                 { "width": "10%", "targets": 3 },
+					 { "width": "15%", "targets": 4 },
+	                 { "width": "10%", "targets": 5 },
+					 { "width": "10%", "targets": 6 },
+					//  { "width": "15%", "targets": 7 },
+					
+	            ],
+	            responsive: true,
+	            "oLanguage": {
+	                "sEmptyTable": "<i>No Buyer Po List Found.</i>",
+	            }, 
+	            "bSort" : false,
+	            "bFilter":true,
+	            "bLengthChange": true,
+	            "iDisplayLength": 10,   
+	            "bProcessing": true,
+	            "serverSide": true,
+	            "ajax":{
+                    url :"<?php echo base_url();?>fetchrBuyerpolist",
+                    type: "post",
+	            },
+	        });
+	    });
+
+		$(document).on('click','#savenewbuyerpo',function(e){
+			e.preventDefault();
+			$(".loader_ajax").show();
+			var formData = new FormData($("#addnewbuyerform")[0]);
+
+			$.ajax({
+				url : "<?php echo base_url();?>addnewBuyerpo",
+				type: "POST",
+				data : formData,
+				cache: false,
+		        contentType: false,
+		        processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+						$(".loader_ajax").hide();
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						swal({
+							title: "Success",
+							text: "Buyer PO Successfully Added!",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+								window.location.href = "<?php echo base_url().'buyerpo'?>";
+						});		
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			});
+			return false;
+	    });
+
+		$(document).on('click','.deleteBuyerpo',function(e){
+			var elemF = $(this);
+			e.preventDefault();
+			swal({
+				title: "Are you sure?",
+				text: "Delete Buyer PO ",
+				type: "warning",
+				showCancelButton: true,
+				closeOnClickOutside: false,
+				confirmButtonClass: "btn-sm btn-danger",
+				confirmButtonText: "Yes, delete it!",
+				cancelButtonText: "No, cancel plz!",
+				closeOnConfirm: false,
+				closeOnCancel: false
+			}, function(isConfirm) {
+				if (isConfirm) {
+							$.ajax({
+								url : "<?php echo base_url();?>deleteBuyerpo",
+								type: "POST",
+								data : 'id='+elemF.attr('data-id'),
+								success: function(data, textStatus, jqXHR)
+								{
+									const obj = JSON.parse(data);
+								
+									if(obj.status=='success'){
+										swal({
+											title: "Deleted!",
+											text: "Buyer PO Deleted Succesfully",
+											icon: "success",
+											button: "Ok",
+											},function(){ 
+												window.location.href = "<?php echo base_url().'buyerpo'?>";
+										});	
+									}
+
+								},
+								error: function (jqXHR, textStatus, errorThrown)
+								{
+									$(".loader_ajax").hide();
+								}
+							})
+						}
+						else {
+				swal("Cancelled", "Buyer PO deletion cancelled ", "error");
+				}
+			});
+		});
+
+		$(document).on('click','#savebuyeritem',function(e){
+			e.preventDefault();
+			$(".loader_ajax").show();
+			   var formData = new FormData($("#addbuyeritemform")[0]);
+               var part_number =   $('#part_number').val();
+			   var description =   $('#description').val();
+			   var qty =   $('#qty').val();
+			   var rate =   $('#rate').val();
+			   var value =   $('#value').val();
+
+
+			   var sales_order_number =   $('#sales_order_number').val();
+			   var date =   $('#date').val();
+			   var buyer_po_number =   $('#buyer_po_number').val();
+			   var buyer_po_date =   $('#buyer_po_date').val();
+			   var buyer_name =   $('#buyer_name').val();
+			   var currency =   $('#currency').val();
+			   var delivery_date =   $('#delivery_date').val();
+			   var remark =   $('#remark').val();
+			 
+			$.ajax({
+				url : "<?php echo base_url();?>addbuyeritem",
+				type: "POST",
+				 //data : formData,
+				 data :{part_number:part_number,description:description,qty:qty,rate:rate,value:value,buyer_po_number:buyer_po_number,date:date,buyer_po_date:buyer_po_date,buyer_name:buyer_name,currency:currency,delivery_date:delivery_date,remark:remark},
+				// method: "POST",
+                // data :{package_id:package_id},
+                cache:false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+						$(".loader_ajax").hide();
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						swal({
+							title: "Success",
+							text: "Item Successfully Added!",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+								window.location.href = "<?php echo base_url().'addnewBuyerpo'?>";
+						});		
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			});
+			return false;
+	    });
+
+		$(document).on('click','.deleteBuyerpoitem',function(e){
+			var elemF = $(this);
+			e.preventDefault();
+			swal({
+				title: "Are you sure?",
+				text: "Delete Buyer PO Item ",
+				type: "warning",
+				showCancelButton: true,
+				closeOnClickOutside: false,
+				confirmButtonClass: "btn-sm btn-danger",
+				confirmButtonText: "Yes, delete it!",
+				cancelButtonText: "No, cancel plz!",
+				closeOnConfirm: false,
+				closeOnCancel: false
+			}, function(isConfirm) {
+				if (isConfirm) {
+							$.ajax({
+								url : "<?php echo base_url();?>deleteBuyerpoitem",
+								type: "POST",
+								data : 'id='+elemF.attr('data-id'),
+								success: function(data, textStatus, jqXHR)
+								{
+									const obj = JSON.parse(data);
+								
+									if(obj.status=='success'){
+										swal({
+											title: "Deleted!",
+											text: "Buyer PO Item Deleted Succesfully",
+											icon: "success",
+											button: "Ok",
+											},function(){ 
+												window.location.href = "<?php echo base_url().'addnewBuyerpo'?>";
+										});	
+									}
+
+								},
+								error: function (jqXHR, textStatus, errorThrown)
+								{
+									$(".loader_ajax").hide();
+								}
+							})
+						}
+						else {
+				swal("Cancelled", "Buyer PO Item deletion cancelled ", "error");
+				}
+			});
+		});
+
+		$(document).on('change','#buyer_name',function(e){  
+			e.preventDefault();
+			
+			//$(".loader_ajax").show();
+			var buyer_name = $('#buyer_name').val();
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getBuyerCurrency",
+				type: "POST",
+				data : {'buyer_name' : buyer_name},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#currency').value('');
+					}
+					else
+					{
+						$('#currency').val(data);
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#currency').html();
+					//$(".loader_ajax").hide();
+				}
+			});
+			return false;
+		});
+
+		$(document).on('blur', '#qty,#rate', function(){
+				if($("#qty").val()){
+					var qty = $("#qty").val();
+				}else{
+					var qty = 0;
+				}
+
+				if($("#rate").val()){
+					var rate = $("#rate").val();
+				}else{
+					var rate = 0;
+				}
+				
+				var total_value = rate * qty;
+				$("#value").val( Math.round(total_value));
+        });
+
+		$(document).on('click','.closebuyerpo', function(){
+			location.reload();
+        });
+
+
+		$(document).on('change','#part_number',function(e){  
+			e.preventDefault();
+			
+			//$(".loader_ajax").show();
+			var part_number = $('#part_number').val();
+			
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getPartnumberByid",
+				type: "POST",
+				data : {'part_number' : part_number},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#description').value('');
+					}
+					else
+					{
+						$('#description').val(data);
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#description').html();
+					//$(".loader_ajax").hide();
+				}
+			});
+			return false;
+		});
+
+
+
+    </script>
+<?php } ?>
+
+
+<?php if($pageTitle=='Supplier PO' || $pageTitle=='Add Supplier PO'){ ?>
+	<script type="text/javascript">
+        $(document).ready(function() {
+            var dt = $('#view_supplierpo').DataTable({
+	            "columnDefs": [ 
+	                 { className: "details-control", "targets": [ 0 ] },
+	                 { "width": "10%", "targets": 0 },
+	                 { "width": "10%", "targets": 1 },
+					 { "width": "15%", "targets": 2 },
+	                 { "width": "10%", "targets": 3 },
+					 { "width": "15%", "targets": 4 },
+	                 { "width": "10%", "targets": 5 },
+					 { "width": "10%", "targets": 6 },
+					 { "width": "10%", "targets": 7 },
+					
+	            ],
+	            responsive: true,
+	            "oLanguage": {
+	                "sEmptyTable": "<i>No Supplier PO List Found.</i>",
+	            }, 
+	            "bSort" : false,
+	            "bFilter":true,
+	            "bLengthChange": true,
+	            "iDisplayLength": 10,   
+	            "bProcessing": true,
+	            "serverSide": true,
+	            "ajax":{
+                    url :"<?php echo base_url();?>fetchSupplierpolist",
+                    type: "post",
+	            },
+	        });
+	    });
+
+		$(document).on('click','#savenewsupplierpo',function(e){
+			e.preventDefault();
+			$(".loader_ajax").show();
+			var formData = new FormData($("#addnewSupplierform")[0]);
+
+			$.ajax({
+				url : "<?php echo base_url();?>addnewSupplierpo",
+				type: "POST",
+				data : formData,
+				cache: false,
+		        contentType: false,
+		        processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+						$(".loader_ajax").hide();
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						swal({
+							title: "Success",
+							text: "Supplier PO Successfully Added!",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+								window.location.href = "<?php echo base_url().'supplierpo'?>";
+						});		
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			});
+			return false;
+	    });
+
+		$(document).on('click','.deleteSupplierpo',function(e){
+			var elemF = $(this);
+			e.preventDefault();
+			swal({
+				title: "Are you sure?",
+				text: "Delete Supplier PO ",
+				type: "warning",
+				showCancelButton: true,
+				closeOnClickOutside: false,
+				confirmButtonClass: "btn-sm btn-danger",
+				confirmButtonText: "Yes, delete it!",
+				cancelButtonText: "No, cancel plz!",
+				closeOnConfirm: false,
+				closeOnCancel: false
+			}, function(isConfirm) {
+				if (isConfirm) {
+							$.ajax({
+								url : "<?php echo base_url();?>deleteSupplierpo",
+								type: "POST",
+								data : 'id='+elemF.attr('data-id'),
+								success: function(data, textStatus, jqXHR)
+								{
+									const obj = JSON.parse(data);
+								
+									if(obj.status=='success'){
+										swal({
+											title: "Deleted!",
+											text: "Supplier PO Deleted Succesfully",
+											icon: "success",
+											button: "Ok",
+											},function(){ 
+												window.location.href = "<?php echo base_url().'supplierpo'?>";
+										});	
+									}
+
+								},
+								error: function (jqXHR, textStatus, errorThrown)
+								{
+									$(".loader_ajax").hide();
+								}
+							})
+						}
+						else {
+				swal("Cancelled", "Supplier PO deletion cancelled ", "error");
+				}
+			});
+		});
+
+    </script>
+<?php } ?>
+
+
+
