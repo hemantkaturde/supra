@@ -14,7 +14,7 @@
 
     <section class="content">
         <div class="row">
-            <div class="col-xs-8">
+            <div class="col-xs-12">
                 <div class="box">
                     <div class="box box-primary">
                         <div class="box-header">
@@ -23,33 +23,48 @@
                         <?php $this->load->helper("form"); ?>
                         <form role="form" id="addnewSupplierform" action="<?php echo base_url() ?>addnewSupplierform" method="post" role="form">
                             <div class="box-body">
-                                <div class="row">
-                                  
-                                    <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <?php
+                                        if($getPreviousPONumber['po_number']){
+                                            $arr = str_split($getPreviousPONumber['po_number']);
+                                            $i = end($arr);
+                                            $inrno= "SQPO2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                            $po_number = $inrno;
+                                        }else{
+                                            $po_number = 'SQPO23240001';
+                                        }
+                                    ?>
+                                    <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="po_number">PO Number <span class="required">*</span></label>
-                                            <input type="text" class="form-control" id="po_number" name="po_number" >
+                                            <label for="po_number">PO Number<span class="required">*</span></label>
+                                            <input type="text" class="form-control" id="po_number" name="po_number" value="<?=$po_number?>" required readonly>
                                             <p class="error po_number_error"></p>
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6">
+
+                                     <?php if($fetchALLpresupplieritemList[0]['date']){
+                                        $date= $fetchALLpresupplieritemList[0]['date'];
+                                     }else{
+                                        $date= date('Y-m-d');
+                                     } ?>
+
+                                    <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="date">Date <span class="required">*</span></label>
-                                            <input type="text" class="form-control datepicker"  id="date" name="date" required>
+                                            <input type="text" class="form-control datepicker"  value="<?=$date?>" id="date" name="date" required>
                                             <p class="error date_error"></p>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                   
-                                    <div class="col-md-6">
+
+
+                                    <div class="col-md-12">
                                         <div class="form-group">
                                                 <label for="supplier_name">Supplier Name <span class="required">*</span></label>
                                                 <select class="form-control" name="supplier_name" id="supplier_name">
                                                     <option st-id="" value="">Select Supplier Name</option>
                                                     <?php foreach ($supplierList as $key => $value) {?>
-                                                    <option value="<?php echo $value['sup_id']; ?>"><?php echo $value['supplier_name']; ?></option>
+                                                    <option value="<?php echo $value['sup_id']; ?>" <?php if($value['sup_id']==$fetchALLpresupplieritemList[0]['pre_supplier_name']){ echo 'selected';} ?> ><?php echo $value['supplier_name']; ?></option>
                                                     <?php } ?>
                                                 </select>
                                             <p class="error supplier_name_error"></p>
@@ -57,135 +72,234 @@
                                     </div>
 
 
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                                <label for="type_of_row_material">Type Of Raw Materail <span class="required">*</span></label>
-                                                <select class="form-control" name="type_of_row_material" id="type_of_row_material">
-                                                    <option st-id="" value="">Select Type Of Raw Materail</option>
-                                                    <?php foreach ($rowMaterialList as $key => $value) {?>
-                                                    <option value="<?php echo $value['raw_id']; ?>"><?php echo $value['part_number']; ?></option>
-                                                    <?php } ?>
-                                                </select>
-                                            <p class="error type_of_row_material_error"></p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-
-                                   <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="part_number">Part Number <span class="required">*</span></label>
-                                                <select class="form-control" name="part_number" id="part_number">
-                                                    <option st-id="" value="">Select Part Name</option>
-                                                    <?php foreach ($rowMaterialList as $key => $value) {?>
-                                                    <option value="<?php echo $value['raw_id']; ?>"><?php echo $value['part_number']; ?></option>
-                                                    <?php } ?>
-                                                </select>
-                                            <p class="error part_number_error"></p>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <div class="form-group">
                                                 <label for="buyer_name">Buyer Name <span class="required">*</span></label>
                                                 <select class="form-control" name="buyer_name" id="buyer_name">
                                                     <option st-id="" value="">Select Buyer Name</option>
                                                     <?php foreach ($buyerList as $key => $value) {?>
-                                                    <option value="<?php echo $value['buyer_id']; ?>"><?php echo $value['buyer_name']; ?></option>
+                                                    <option value="<?php echo $value['buyer_id']; ?>" <?php if($value['buyer_id']==$fetchALLpresupplieritemList[0]['pre_buyer_name']){ echo 'selected';} ?> ><?php echo $value['buyer_name']; ?></option>
                                                     <?php } ?>
                                                 </select>
                                             <p class="error buyer_name_error"></p>
                                         </div>
                                     </div>
-                                </div>    
 
-                                <div class="row">
-                                    <div class="col-md-6">
-                                       <div class="form-group">
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
                                                 <label for="vendor_name">Vendor Name <span class="required">*</span></label>
                                                 <select class="form-control" name="vendor_name" id="vendor_name">
                                                     <option st-id="" value="">Select Vendor Name</option>
                                                     <?php foreach ($vendorList as $key => $value) {?>
-                                                    <option value="<?php echo $value['ven_id']; ?>"><?php echo $value['vendor_name']; ?></option>
+                                                    <option value="<?php echo $value['ven_id']; ?>"  <?php if($value['ven_id']==$fetchALLpresupplieritemList[0]['pre_vendor_name']){ echo 'selected';} ?> ><?php echo $value['vendor_name']; ?></option>
                                                     <?php } ?>
                                                 </select>
                                             <p class="error vendor_name_error"></p>
                                         </div>
-                                        </div>
+                                    </div>
 
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="work_order">Total Amount <span class="required">*</span></label>
-                                                <input type="text" class="form-control"  id="total_amount" name="total_amount">
-                                                <p class="error total_amount_error"></p>
-                                            </div>
-                                        </div>
-                                </div>
-
-                                <div class="row">
-
-                                       <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="work_order">Quatation Ref.No <span class="required">*</span></label>
-                                                <input type="text" class="form-control"  id="qt_ref_number" name="qt_ref_number">
-                                                <p class="error qt_ref_number_error"></p>
-                                            </div>
-                                        </div>
-                            
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="quatation_date">Quatation Date <span class="required">*</span></label>
-                                                <input type="text" class="form-control datepicker" id="quatation_date" name="quatation_date">
-                                                <p class="error quatation_date_error"></p>
-                                            </div>
-                                        </div>
-                                </div>
-
-                                <div class="row">
-                                  
-
-                                    <div class="col-md-6">
+                                   
+                                    <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="order_quantity">Delivery Date <span class="required">*</span></label>
-                                            <input type="text" class="form-control datepicker" id="delivery_date" name="delivery_date">
+                                            <label for="quatation_ref_no">Quatation Ref No. <span class="required">*</span></label>
+                                            <input type="text" class="form-control" id="quatation_ref_no" value="<?=$fetchALLpresupplieritemList[0]['pre_quatation_ref_number'];?>" name="quatation_ref_no" >
+                                            <p class="error quatation_ref_no_error"></p>
+                                        </div>
+                                    </div>
+
+                                    <?php if($fetchALLpresupplieritemList[0]['pre_quatation_date']){
+                                        $buyer_po_date= $fetchALLpresupplieritemList[0]['pre_quatation_date'];
+                                     }else{
+                                        $buyer_po_date= date('Y-m-d');
+                                     } ?>
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="quatation_date">Quatation Date <span class="required">*</span></label>
+                                            <input type="text" class="form-control datepicker" value="<?=$buyer_po_date;?>" id="quatation_date" name="quatation_date" required>
+                                            <p class="error quatation_date_error"></p>
+                                        </div>
+                                    </div>
+
+
+                                    <?php if($fetchALLpresupplieritemList[0]['pre_delivery_date']){
+                                        $delivery_date= $fetchALLpresupplieritemList[0]['pre_delivery_date'];
+                                     }else{
+                                        $delivery_date= date('Y-m-d');
+                                     } ?>
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="delivery_date">Delivery Date <span class="required">*</span></label>
+                                            <input type="text" class="form-control datepicker"  value="<?=$delivery_date;?>" i id="delivery_date" name="delivery_date">
                                             <p class="error delivery_date_error"></p>
                                         </div>
                                     </div>
 
-                                    
-                                    <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="delivery">Delivery<span class="required">*</span></label>
-                                                <input type="text" class="form-control"  id="delivery" name="delivery">
-                                                <p class="error delivery_error"></p>
-                                            </div>
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="delivery">Delivery </label>
+                                            <input type="text" class="form-control" id="delivery" value="<?=$fetchALLpresupplieritemList[0]['pre_delivery'];?>" name="delivery">
+                                            <p class="error delivery_error"></p>
                                         </div>
-                                </div>
+                                    </div>
 
-                                <div class="row">
 
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="work_order">Work Order<span class="required">*</span></label>
-                                                <input type="text" class="form-control"  id="work_order" name="work_order">
-                                                <p class="error work_order_error"></p>
+                                                <label for="delivery_address">Delivery Address</label>
+                                                  <textarea type="text" class="form-control"  id="delivery_address"  name="delivery_address" required> <?=$fetchALLpresupplieritemList[0]['pre_deliveey_address'];?></textarea>
+                                                <p class="error delivery_address_error"></p>
                                             </div>
-                                        </div>
+                                    </div>
 
-                                    <div class="col-md-6">
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="work_order">Work Order </label>
+                                            <input type="text" class="form-control" id="work_order" value="<?=$fetchALLpresupplieritemList[0]['pre_work_order'];?>" name="work_order">
+                                            <p class="error work_order_error"></p>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="remark">Remark</label>
-                                                  <textarea type="text" class="form-control"  id="remark"  name="remark" required></textarea>
+                                                  <textarea type="text" class="form-control"  id="remark"  name="remark" required> <?=$fetchALLpresupplieritemList[0]['pre_remark'];?></textarea>
                                                 <p class="error remark_error"></p>
                                             </div>
                                     </div>
                                 </div>
-                            </div>
+
+                                <div class="col-md-6">
+                                    <div class="container">
+                                        <button type="button" class="btn btn-success btn-xl" data-toggle="modal" data-target="#addNewModal">Add New Items</button><br/><br/>
+                                            <table class="table table-bordered" style="width: 70% !important; max-width: 100%;margin-bottom: 20px;">
+                                                <thead style="background-color:#3c8dbc;color:#fff">
+                                                    <tr>
+                                                        <th>Sr No.</th>
+                                                        <th>Part Number</th>
+                                                        <th>Description</th>
+                                                        <th>Order Qty</th>
+                                                        <th>Rate</th>
+                                                        <th>Value</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php
+                                                        $count=0;
+                                                           foreach ($fetchALLpresupplieritemList as $key => $value) :
+                                                           $count++;
+                                                    ?>
+                                                    <tr>
+                                                        <td><?php echo $count;?></td>
+                                                        <td><?php echo $value['part_number'];?></td>
+                                                        <td><?php echo $value['description'];?></td>
+                                                        <td><?php echo $value['order_oty'];?></td>
+                                                        <td><?php echo $value['rate'];?></td>
+                                                        <td><?php echo $value['value'];?></td>
+                                                        <td>
+                                                        <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['id'];?>' class='fa fa-trash-o deleteSupplierpoitem' aria-hidden='true'></i>
+                                                        </td>
+                                                    </tr>
+                                                    <?php endforeach;?>
+                                                </tbody>
+                                            </table>
+                                    </div>
+
+                                      <!-- Add New Package Modal -->
+                                    <?php $this->load->helper("form"); ?>
+                                    <div class="modal fade" id="addNewModal" role="dialog" aria-labelledby="additem" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+                                      
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h3 class="modal-title" id="additem">Add New Item</h3>
+                                                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
+                                                <!-- <span aria-hidden="true">&times;</span> -->
+                                                </button>
+                                            </div>
+                                            <form role="form" id="addbuyeritemform" action="<?php echo base_url() ?>addbuyeritem" method="post" role="form">
+
+                                                <div class="modal-body">
+                                                        <div class="loader_ajax" style="display:none;">
+                                                            <div class="loader_ajax_inner"><img src="<?php echo ICONPATH;?>/preloader_ajax.gif"></div>
+                                                        </div>
+
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-3 col-form-label">Part Number <span class="required">*</span> (<small>Finished Goods Master</small>)</label>
+                                                        <div class="col-sm-9">
+                                                            <select class="form-control" name="part_number" id="part_number">
+                                                                <option st-id="" value="">Select Part Name</option>
+                                                                <?php foreach ($rowMaterialList as $key => $value) {?>        
+                                                                    <option value="<?php echo $value['raw_id']; ?>"><?php echo $value['part_number']; ?></option>
+                                                                <?php } ?>
+                                                            </select>
+                                                            <p class="error part_number_error"></p>
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-3 col-form-label">Part Name <span class="required">*</span></label>
+                                                        <div class="col-sm-9">
+                                                            <!-- <textarea type="text" class="form-control"  id="description"  name="description" required></textarea> -->
+                                                            <input type="type" class="form-control"  id="description" name="description" required readonly>
+                                                            <p class="error description_error"></p>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-3 col-form-label">Order Quantity <span class="required">*</span></label>
+                                                        <div class="col-sm-9">
+                                                            <input type="number" class="form-control"  id="qty" name="qty">
+                                                            <p class="error qty_error"></p>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-3 col-form-label">Rate <span class="required">*</span></label>
+                                                        <div class="col-sm-9">
+                                                            <input type="number" class="form-control"  id="rate" name="rate">
+                                                            <p class="error rate"></p>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-3 col-form-label">Value <span class="required">*</span></label>
+                                                        <div class="col-sm-9">
+                                                            <input type="number" class="form-control"  id="value" name="value" readonly>
+                                                            <p class="error value_error"></p>
+                                                        </div>
+                                                    </div>
+                                    
+                                                </div>
+
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary btn-xl closeSupplierpo" data-dismiss="modal">Close</button>
+                                                    <button type="submit" id="savesupplieritem" name="savesupplieritem" class="btn btn-primary" class="btn btn-success btn-xl">Save</button>
+                                                </div>
+
+                                            </form>    
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+
+                               
+
+                            </div>    
                             <!-- /.box-body -->
                             <div class="box-footer">
-                                <input type="submit" id="savenewsupplierpo" class="btn btn-primary" value="Submit" />
-                                <input type="button" onclick="location.href = '<?php echo base_url() ?>supplierpo'" class="btn btn-default" value="Back" />
+                                <div class="col-xs-8">
+                                    <input type="submit" id="savenewsupplierpo" class="btn btn-primary" value="Submit" />
+                                    <input type="button" onclick="location.href = '<?php echo base_url() ?>supplierpo'" class="btn btn-default" value="Back" />
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -205,7 +319,7 @@
 <script>
    $(function() {
 			$(".datepicker").datepicker({ 
-				minDate: 0,
+				// minDate: 0,
 				todayHighlight: true,
                 dateFormat: 'yy-mm-dd',
 				startDate: new Date()

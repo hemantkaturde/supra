@@ -2211,37 +2211,33 @@ class Admin extends BaseController
             $this->form_validation->set_rules('po_number','PO Number','trim|required');
             $this->form_validation->set_rules('date','Date','trim|required');
             $this->form_validation->set_rules('supplier_name','Supplier Name','trim|required');
-            $this->form_validation->set_rules('type_of_row_material','Type of Row Material','trim|required');
-            $this->form_validation->set_rules('part_number','Part Number','trim|required');
             $this->form_validation->set_rules('buyer_name','Buyer Name','trim|required');
             $this->form_validation->set_rules('vendor_name','Vendor Name','trim|required');
-            $this->form_validation->set_rules('total_amount','Total Amount','trim|required');
-            $this->form_validation->set_rules('qt_ref_number','qt_ref_number','trim|required');
+            $this->form_validation->set_rules('quatation_ref_no','Quatation Ref No','trim|required');
             $this->form_validation->set_rules('quatation_date','Quatation Date','trim|required');
             $this->form_validation->set_rules('delivery_date','Delivery Date','trim|required');
-            $this->form_validation->set_rules('delivery','Delivery','trim|required');
-            $this->form_validation->set_rules('work_order','Work Order','trim|required');
+            $this->form_validation->set_rules('delivery','Delivery','trim');
+            $this->form_validation->set_rules('delivery_address','Delivery Address','trim');
+            $this->form_validation->set_rules('work_order','Work Order','trim');
             $this->form_validation->set_rules('remark','Remark','trim');
             
             if($this->form_validation->run() == FALSE)
             {
                 $save_supplierpo_response['status'] = 'failure';
-                $save_supplierpo_response['error'] = array('po_number'=>strip_tags(form_error('po_number')),'date'=>strip_tags(form_error('date')), 'supplier_name'=>strip_tags(form_error('supplier_name')), 'type_of_row_material'=>strip_tags(form_error('type_of_row_material')),'part_number'=>strip_tags(form_error('part_number')),'buyer_name'=>strip_tags(form_error('buyer_name')),'vendor_name'=>strip_tags(form_error('vendor_name')),'total_amount'=>strip_tags(form_error('total_amount')),'qt_ref_number'=>strip_tags(form_error('qt_ref_number')),'quatation_date'=>strip_tags(form_error('quatation_date')),'delivery_date'=>strip_tags(form_error('delivery_date')),'delivery'=>strip_tags(form_error('delivery')),'work_order'=>strip_tags(form_error('work_order')),'remark'=>strip_tags(form_error('remark')));
+                $save_supplierpo_response['error'] = array('po_number'=>strip_tags(form_error('po_number')),'date'=>strip_tags(form_error('date')), 'supplier_name'=>strip_tags(form_error('supplier_name')),'buyer_name'=>strip_tags(form_error('buyer_name')),'vendor_name'=>strip_tags(form_error('vendor_name')),'total_amount'=>strip_tags(form_error('total_amount')),'quatation_ref_no'=>strip_tags(form_error('quatation_ref_no')),'quatation_date'=>strip_tags(form_error('quatation_date')),'delivery_date'=>strip_tags(form_error('delivery_date')),'delivery'=>strip_tags(form_error('delivery')),'work_order'=>strip_tags(form_error('work_order')),'remark'=>strip_tags(form_error('remark')));
             }else{
 
                 $data = array(
                     'po_number'=> trim($this->input->post('po_number')),
                     'date'=> trim($this->input->post('date')),
                     'supplier_name'=> trim($this->input->post('supplier_name')),
-                    'type_of_row_material'=> trim($this->input->post('type_of_row_material')),
-                    'part_number'=> trim($this->input->post('part_number')),
                     'buyer_name'=> trim($this->input->post('buyer_name')),
                     'vendor_name'=> trim($this->input->post('vendor_name')),
-                    'total_amount'=> trim($this->input->post('total_amount')),
-                    'qt_ref_number'=> trim($this->input->post('qt_ref_number')),
+                    'quatation_ref_no'=> trim($this->input->post('quatation_ref_no')),
                     'quatation_date'=> trim($this->input->post('quatation_date')),
                     'delivery_date'=> trim($this->input->post('delivery_date')),
                     'delivery'=> trim($this->input->post('delivery')),
+                    'delivery_address'=> trim($this->input->post('delivery_address')),
                     'work_order'=> trim($this->input->post('work_order')),
                     'remark'=> trim($this->input->post('remark')),
                 );
@@ -2251,10 +2247,13 @@ class Admin extends BaseController
                     $save_supplierpo_response['status'] = 'failure';
                     $save_supplierpo_response['error'] = array('po_number'=>'PO Alreday Exits (PO Number Alreday Exits)');
                 }else{
-                    $saveBuyerpodata = $this->admin_model->saveSupplierpodata('',$data);
-                    if($saveBuyerpodata){
-                        $save_supplierpo_response['status'] = 'success';
-                        $save_supplierpo_response['error'] = array('po_number'=>strip_tags(form_error('po_number')),'date'=>strip_tags(form_error('date')), 'supplier_name'=>strip_tags(form_error('supplier_name')), 'type_of_row_material'=>strip_tags(form_error('type_of_row_material')),'part_number'=>strip_tags(form_error('part_number')),'buyer_name'=>strip_tags(form_error('buyer_name')),'vendor_name'=>strip_tags(form_error('vendor_name')),'total_amount'=>strip_tags(form_error('total_amount')),'qt_ref_number'=>strip_tags(form_error('qt_ref_number')),'quatation_date'=>strip_tags(form_error('quatation_date')),'delivery_date'=>strip_tags(form_error('delivery_date')),'delivery'=>strip_tags(form_error('delivery')),'work_order'=>strip_tags(form_error('work_order')),'remark'=>strip_tags(form_error('remark')));
+                    $saveSupplierpodata = $this->admin_model->saveSupplierpodata('',$data);
+                    if($saveSupplierpodata){
+                        $update_last_inserted_id = $this->admin_model->update_last_inserted_id_supplier_po($saveSupplierpodata);
+                        if($update_last_inserted_id){
+                            $save_supplierpo_response['status'] = 'success';
+                            $save_supplierpo_response['error'] = array('po_number'=>strip_tags(form_error('po_number')),'date'=>strip_tags(form_error('date')), 'supplier_name'=>strip_tags(form_error('supplier_name')),'buyer_name'=>strip_tags(form_error('buyer_name')),'vendor_name'=>strip_tags(form_error('vendor_name')),'total_amount'=>strip_tags(form_error('total_amount')),'quatation_ref_no'=>strip_tags(form_error('quatation_ref_no')),'quatation_date'=>strip_tags(form_error('quatation_date')),'delivery_date'=>strip_tags(form_error('delivery_date')),'delivery'=>strip_tags(form_error('delivery')),'work_order'=>strip_tags(form_error('work_order')),'remark'=>strip_tags(form_error('remark')));
+                        }
                     }
                 }
             }
@@ -2266,7 +2265,8 @@ class Admin extends BaseController
             $data['rowMaterialList']= $this->admin_model->fetchALLrowMaterialList();
             $data['supplierList']= $this->admin_model->fetchALLsupplierList();
             $data['vendorList']= $this->admin_model->fetchALLvendorList();
-            //$data['getPreviousSalesOrderNumber']= $this->admin_model->getPreviousSalesOrderNumber()[0];
+            $data['getPreviousPONumber']= $this->admin_model->getPreviousPONumber()[0];
+            $data['fetchALLpresupplieritemList']= $this->admin_model->fetchALLpresupplieritemList();
             $this->logrecord($process,$processFunction);
             $this->global['pageTitle'] = 'Add Supplier PO';
             $this->loadViews("masters/addSupplierpo", $this->global, $data, NULL);
@@ -2275,7 +2275,7 @@ class Admin extends BaseController
 
 
 
-      /**
+    /**
      * This function is used to laod Buyer PO Master
      */
 
@@ -2309,7 +2309,7 @@ class Admin extends BaseController
      * This function is used to Delete the Buyer Master
      */
 
-     public function deleteSupplierpo(){
+    public function deleteSupplierpo(){
         $post_submit = $this->input->post();
         if($post_submit){
             $result = $this->admin_model->deleteSupplierpo(trim($this->input->post('id')));
@@ -2323,10 +2323,10 @@ class Admin extends BaseController
         }else{
             echo(json_encode(array('status'=>'failed'))); 
         }
-     }
+    }
 
 
-     public function addbuyeritem(){
+    public function addbuyeritem(){
 
         $post_submit = $this->input->post();
       
@@ -2380,10 +2380,9 @@ class Admin extends BaseController
 
         }
 
-     }
+    }
 
-
-     public function deleteBuyerpoitem(){
+    public function deleteBuyerpoitem(){
 
         $post_submit = $this->input->post();
         if($post_submit){
@@ -2399,8 +2398,7 @@ class Admin extends BaseController
             echo(json_encode(array('status'=>'failed'))); 
         }
 
-     }
-
+    }
 
     public function getBuyerCurrency() {
             if($this->input->post('buyer_name')) {
@@ -2412,14 +2410,13 @@ class Admin extends BaseController
             }
     }
 
-
     public function viewBuyerpo($buyerpoid){
         $process = 'View Buyer PO';
         $processFunction = 'Admin/viewBuyerpo';
         $this->logrecord($process,$processFunction);
         $this->global['pageTitle'] = 'Buyer PO View';
         $data['getbuyerpodetails']= $this->admin_model->getbuyerpodetails($buyerpoid);
-        $data['fetchALLitemList']= $this->admin_model->fetchALLBuyeritemList($buyerpoid);
+        $data['fetchALLitemList']= $this->admin_model->fetchALLSupplieritemList($buyerpoid);
         $this->loadViews("masters/viewbuyerpo", $this->global, $data, NULL);
     }
  
@@ -2436,6 +2433,94 @@ class Admin extends BaseController
 
     }
 
+    public function addSuplieritem(){
+
+        $post_submit = $this->input->post();
+      
+        if($post_submit){
+            $save_supplierpoitem_response = array();
+
+            $this->form_validation->set_rules('part_number','Part Number','trim|required');
+            $this->form_validation->set_rules('description','Part Name','trim|required');
+            $this->form_validation->set_rules('qty','Qty','trim|numeric|required');
+            $this->form_validation->set_rules('rate','Rate','trim|required');
+            $this->form_validation->set_rules('value','Value','trim|required');
+        
+            if($this->form_validation->run() == FALSE)
+            {
+                $save_supplierpoitem_response['status'] = 'failure';
+                $save_supplierpoitem_response['error'] = array('part_number'=>strip_tags(form_error('part_number')), 'description'=>strip_tags(form_error('description')), 'qty'=>strip_tags(form_error('qty')), 'rate'=>strip_tags(form_error('rate')),'value'=>strip_tags(form_error('value')));
+            }else{
+
+                
+                $data = array(
+                    'part_number_id'   => trim($this->input->post('part_number')),
+                    'description'     => trim($this->input->post('description')),
+                    'order_oty'    => trim($this->input->post('qty')),
+                    'rate'  => trim($this->input->post('rate')),
+                    'value' =>   trim($this->input->post('value')),
+                    'pre_date'=>trim($this->input->post('date')),
+                    'pre_supplier_name'=>trim($this->input->post('supplier_name')),
+                    'pre_buyer_name'=>trim($this->input->post('buyer_name')),
+                    'pre_vendor_name'=>trim($this->input->post('vendor_name')),
+                    'pre_quatation_ref_number' =>trim($this->input->post('quatation_ref_no')),
+                    'pre_quatation_date' =>trim($this->input->post('quatation_date')),
+                    'pre_delivery_date' =>trim($this->input->post('delivery_date')),
+                    'pre_delivery' =>trim($this->input->post('delivery')),
+                    'pre_deliveey_address' =>trim($this->input->post('delivery_address')),
+                    'pre_work_order' =>trim($this->input->post('work_order')),
+                    'pre_remark' =>trim($this->input->post('remark')),
+                );
+
+                // $checkIfexitsbuyerpo = $this->admin_model->checkIfexitsbuyerpo(trim($this->input->post('sales_order_number')));
+                // if($checkIfexitsbuyerpo > 0){
+                //     $save_buyerpo_response['status'] = 'failure';
+                //     $save_buyerpo_response['error'] = array('sales_order_number'=>'Buyer PO Alreday Exits (Sales Order Number Alreday Exits)');
+                // }else{
+                    $saveSupplierpoitemdata = $this->admin_model->saveSupplierpoitemdata('',$data);
+                    if($saveSupplierpoitemdata){
+                        $save_supplierpoitem_response['status'] = 'success';
+                        $save_supplierpoitem_response['error'] = array('part_number'=>'', 'description'=>'', 'qty'=>'', 'rate'=>'','value'=>'');
+                    }
+                //  }
+                
+               
+            }
+
+            echo json_encode($save_supplierpoitem_response);
+
+        }
+
+    }
+
+    public function viewSupplierpo($supplierpoid){
+
+        $process = 'View Supplier PO';
+        $processFunction = 'Admin/viewSupplierpo';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Supplier PO View';
+        $data['getbuyerpodetails']= $this->admin_model->getbuyerpodetails($buyerpoid);
+        $data['fetchALLitemList']= $this->admin_model->fetchALLSupplieritemList($buyerpoid);
+        $this->loadViews("masters/viewSupplierpo", $this->global, $data, NULL);
+
+    }
+
+    public function deleteSupplierpoitem(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->deleteSupplierpoitem(trim($this->input->post('id')));
+            if ($result) {
+                        $process = 'Supplier PO Delete';
+                        $processFunction = 'Admin/deleteSupplierpoitem';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
+
+    }
 
 
 }

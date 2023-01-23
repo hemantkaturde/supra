@@ -1139,16 +1139,15 @@ class Admin_model extends CI_Model
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id  = '.TBL_SUPPLIER_PO_MASTER.'.buyer_name');
         $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id  = '.TBL_SUPPLIER_PO_MASTER.'.supplier_name');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_SUPPLIER_PO_MASTER.'.vendor_name');
-        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_SUPPLIER_PO_MASTER.'.part_number');
         if($params['search']['value'] != "") 
         {
-            $this->db->where("(".TBL_SUPPLIER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_SUPPLIER_PO_MASTER.".buyer_po_number LIKE '%".$params['search']['value']."%'");
+            $this->db->where("(".TBL_SUPPLIER_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_SUPPLIER_PO_MASTER.".date LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_SUPPLIER_PO_MASTER.".buyer_po_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER.".supplier_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER_PO_MASTER.".quatation_date LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_SUPPLIER_PO_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_SUPPLIER_PO_MASTER.".currency LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_RAWMATERIAL.".part_number LIKE '%".$params['search']['value']."%')");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER_PO_MASTER.".quatation_ref_no LIKE '%".$params['search']['value']."%')");
         }
         $this->db->where(TBL_SUPPLIER_PO_MASTER.'.status', 1);
         $query = $this->db->get(TBL_SUPPLIER_PO_MASTER);
@@ -1163,16 +1162,15 @@ class Admin_model extends CI_Model
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id  = '.TBL_SUPPLIER_PO_MASTER.'.buyer_name');
         $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id  = '.TBL_SUPPLIER_PO_MASTER.'.supplier_name');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_SUPPLIER_PO_MASTER.'.vendor_name');
-        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_SUPPLIER_PO_MASTER.'.part_number');
         if($params['search']['value'] != "") 
         {
             $this->db->where("(".TBL_SUPPLIER_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_SUPPLIER_PO_MASTER.".date LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_SUPPLIER.".supplier_name LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_SUPPLIER_PO_MASTER.".buyer_po_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER_PO_MASTER.".quatation_date LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_SUPPLIER_PO_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_SUPPLIER_PO_MASTER.".currency LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_RAWMATERIAL.".part_number LIKE '%".$params['search']['value']."%')");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER_PO_MASTER.".quatation_ref_no LIKE '%".$params['search']['value']."%')");
         }
         $this->db->where(TBL_SUPPLIER_PO_MASTER.'.status', 1);
         $this->db->limit($params['length'],$params['start']);
@@ -1189,13 +1187,12 @@ class Admin_model extends CI_Model
                 $data[$counter]['po_number'] = $value['po_number'];
                 $data[$counter]['date'] = $value['date'];
                 $data[$counter]['sup_name'] = $value['sup_name'];
-                $data[$counter]['part_number'] = $value['part_number'];
                 $data[$counter]['buyer_name'] = $value['buyer_name'];
-                $data[$counter]['currency'] = $value['currency'];
-                $data[$counter]['part_number'] = $value['partnumber'];
-                $data[$counter]['order_quantity'] = $value['order_quantity'];
+                $data[$counter]['vendor_name'] = $value['vendor_name'];
+                $data[$counter]['quatation_ref_no'] = $value['quatation_ref_no'];
+                $data[$counter]['quatation_date'] = $value['quatation_date'];
                 $data[$counter]['action'] = '';
-                // $data[$counter]['action'] .= "<a href='".ADMIN_PATH."updateBuyer/".$value['buyer_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewSupplierpo/".$value['id']."' style='cursor: pointer;'><i style='font-size: large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['id']."' class='fa fa-trash-o deleteSupplierpo' aria-hidden='true'></i>"; 
                 $counter++; 
             }
@@ -1309,6 +1306,74 @@ class Admin_model extends CI_Model
         $query = $this->db->get(TBL_RAWMATERIAL);
         $data = $query->result_array();
         return $data;
+
+    }
+
+    public function getPreviousPONumber(){
+
+        $this->db->select('po_number');
+        $this->db->where(TBL_SUPPLIER_PO_MASTER.'.status', 1);
+        $this->db->limit(1);
+        $this->db->order_by(TBL_SUPPLIER_PO_MASTER.'.id','DESC');
+        $query = $this->db->get(TBL_SUPPLIER_PO_MASTER);
+        $rowcount = $query->result_array();
+        return $rowcount;
+    }
+
+    public function saveSupplierpoitemdata($id,$data){
+
+        if($id != '') {
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_SUPPLIER_PO_MASTER_ITEM, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_SUPPLIER_PO_MASTER_ITEM, $data)) {
+                return $this->db->insert_id();;
+            } else {
+                return FALSE;
+            }
+        }
+
+    }
+
+    public function fetchALLpresupplieritemList(){
+
+        $this->db->select('*');
+        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id');
+        // $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_BUYER_PO_MASTER_ITEM.'.pre_buyer_name','left');
+        $this->db->where(TBL_SUPPLIER_PO_MASTER_ITEM.'.supplier_po_id IS NULL');
+        $this->db->order_by(TBL_SUPPLIER_PO_MASTER_ITEM.'.id','desc');
+        $query = $this->db->get(TBL_SUPPLIER_PO_MASTER_ITEM);
+        $data = $query->result_array();
+        return $data;
+
+    }
+
+    public function update_last_inserted_id_supplier_po($last_inserted_id){
+        $data = array(
+            'supplier_po_id' => $last_inserted_id
+        );
+        $this->db->where(TBL_SUPPLIER_PO_MASTER_ITEM.'.supplier_po_id IS NULL');
+        if($this->db->update(TBL_SUPPLIER_PO_MASTER_ITEM,$data)){
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+
+    }
+
+    public function deleteSupplierpoitem($id){
+
+        $this->db->where('id', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_SUPPLIER_PO_MASTER_ITEM)){
+           return TRUE;
+        }else{
+           return FALSE;
+        }
 
     }
 

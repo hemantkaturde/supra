@@ -113,13 +113,18 @@ $route['supplierpo'] = "admin/supplierpo";
 $route['addnewSupplierpo'] = "admin/addnewSupplierpo";
 $route['fetchSupplierpolist'] = "admin/fetchSupplierpolist";
 $route['deleteSupplierpo'] = "admin/deleteSupplierpo";
-
 $route['addbuyeritem'] = "admin/addbuyeritem";
 $route['deleteBuyerpoitem'] = "admin/deleteBuyerpoitem";
 $route['getBuyerCurrency'] = "admin/getBuyerCurrency";
-
 $route['viewBuyerpo/(:any)'] = "admin/viewBuyerpo/$1";
 $route['getPartnumberByid'] = "admin/getPartnumberByid";
+$route['addSuplieritem'] = "admin/addSuplieritem";
+$route['viewSupplierpo/(:any)'] = "admin/viewSupplierpo/$1";
+$route['deleteSupplierpoitem'] = "admin/deleteSupplierpoitem";
+
+
+
+
 
 
 

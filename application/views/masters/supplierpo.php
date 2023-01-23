@@ -32,10 +32,10 @@
                                         <th>PO Number</th>
                                         <th>Date</th>
                                         <th>Supplier Name</th>
-                                        <th>Type Of Raw Materail</th>
                                         <th>Buyer Name</th>
                                         <th>Vendor Name</th>
-                                        <th>Part Number</th>
+                                        <th>Quatation Ref Number</th>
+                                        <th>Quatation Date</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
