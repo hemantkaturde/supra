@@ -1377,6 +1377,21 @@ class Admin_model extends CI_Model
 
     }
 
+    public function getAllBuyerpoNUmber($buyer_name){
+
+        $this->db->select('*');
+		$this->db->where('buyer_name_id', $buyer_name);
+        $this->db->where('status', 1);
+        $this->db->order_by('sales_order_number','ASC');
+        $query_result = $this->db->get(TBL_BUYER_PO_MASTER)->result_array();
+		
+		foreach($query_result as $key => $value) {
+			$query_result[$key]['selected'] = '';
+		}
+		
+        return $query_result;
+    }
+
 }
 
 ?>

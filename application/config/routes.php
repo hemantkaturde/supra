@@ -121,6 +121,9 @@ $route['getPartnumberByid'] = "admin/getPartnumberByid";
 $route['addSuplieritem'] = "admin/addSuplieritem";
 $route['viewSupplierpo/(:any)'] = "admin/viewSupplierpo/$1";
 $route['deleteSupplierpoitem'] = "admin/deleteSupplierpoitem";
+$route['getBuyerPonumberbyBuyerid'] = "admin/getBuyerPonumberbyBuyerid";
+
+
 
 
 

@@ -1921,7 +1921,6 @@
 				$("#value").val( Math.round(total_value));
         });
 
-
 		$(document).on('click','#savesupplieritem',function(e){
 			e.preventDefault();
 			$(".loader_ajax").show();
@@ -1984,7 +1983,6 @@
 			return false;
 	    });
 
-
 		$(document).on('click','.deleteSupplierpoitem',function(e){
 			var elemF = $(this);
 			e.preventDefault();
@@ -2034,7 +2032,37 @@
 		});
 
 
+		$(document).on('change','#buyer_name',function(e){  
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			var buyer_name = $('#buyer_name').val();
+		    $('.buyer_po_number_div').css('display','block');
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getBuyerPonumberbyBuyerid",
+				type: "POST",
+				data : {'buyer_name' : buyer_name},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#buyer_po_number').html('<option value="">Select Buyer PO Number</option>');
+					}
+					else
+					{
+						// $('#buyer_po_number').html('<option value="">Select Buyer PO Number</option>');
+						$('#buyer_po_number').html(data);
 
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#buyer_po_number').html();
+					//$(".loader_ajax").hide();
+				}
+			});
+			return false;
+		});
     </script>
 <?php } ?>
 
