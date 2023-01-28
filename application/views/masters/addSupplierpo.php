@@ -100,7 +100,7 @@
                                         </div>
                                     </div>
 
-
+                                
                                     <div class="col-md-12">
                                         <div class="form-group">
                                                 <label for="vendor_name">Vendor Name <span class="required">*</span></label>
@@ -225,6 +225,13 @@
                                                 </tbody>
                                             </table>
                                     </div>
+
+                                    <div class="container">
+                                         <div id="customers-list">
+
+                                         </div>
+                                    </div>
+
 
                                       <!-- Add New Package Modal -->
                                     <?php $this->load->helper("form"); ?>
