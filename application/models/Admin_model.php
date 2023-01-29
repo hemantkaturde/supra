@@ -1392,6 +1392,23 @@ class Admin_model extends CI_Model
         return $query_result;
     }
 
+    public function getBuyerDeatilsbyid($buyer_po_id){
+
+
+        $this->db->select('*');
+		$this->db->where('id', $buyer_po_id);
+        $this->db->where('status', 1);
+        // $this->db->order_by('sales_order_number','ASC');
+        $query_result = $this->db->get(TBL_BUYER_PO_MASTER)->result_array();
+		
+		foreach($query_result as $key => $value) {
+			$query_result[$key]['selected'] = '';
+		}
+		
+        return $query_result;
+
+    }
+
 }
 
 ?>

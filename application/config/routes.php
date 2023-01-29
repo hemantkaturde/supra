@@ -123,6 +123,8 @@ $route['viewSupplierpo/(:any)'] = "admin/viewSupplierpo/$1";
 $route['deleteSupplierpoitem'] = "admin/deleteSupplierpoitem";
 $route['getBuyerPonumberbyBuyerid'] = "admin/getBuyerPonumberbyBuyerid";
 $route['getBuyerItemsforDisplay'] = "admin/getBuyerItemsforDisplay";
+$route['getBuyerItemsforDisplayBybuyerid'] = "admin/getBuyerItemsforDisplayBybuyerid";
+
 
 
 

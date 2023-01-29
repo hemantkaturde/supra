@@ -2212,7 +2212,7 @@ class Admin extends BaseController
             $this->form_validation->set_rules('date','Date','trim|required');
             $this->form_validation->set_rules('supplier_name','Supplier Name','trim|required');
             $this->form_validation->set_rules('buyer_name','Buyer Name','trim|required');
-            $this->form_validation->set_rules('buyer_po_number','Buyer PO Number','trim|required');
+            //$this->form_validation->set_rules('buyer_po_number','Buyer PO Number','trim|required');
             $this->form_validation->set_rules('vendor_name','Vendor Name','trim|required');
             $this->form_validation->set_rules('quatation_ref_no','Quatation Ref No','trim|required');
             $this->form_validation->set_rules('quatation_date','Quatation Date','trim|required');
@@ -2233,7 +2233,7 @@ class Admin extends BaseController
                     'date'=> trim($this->input->post('date')),
                     'supplier_name'=> trim($this->input->post('supplier_name')),
                     'buyer_name'=> trim($this->input->post('buyer_name')),
-                    'buyer_po_number'=> trim($this->input->post('buyer_po_number')),
+                    //'buyer_po_number'=> trim($this->input->post('buyer_po_number')),
                     'vendor_name'=> trim($this->input->post('vendor_name')),
                     'quatation_ref_no'=> trim($this->input->post('quatation_ref_no')),
                     'quatation_date'=> trim($this->input->post('quatation_date')),
@@ -2464,6 +2464,7 @@ class Admin extends BaseController
                     'pre_date'=>trim($this->input->post('date')),
                     'pre_supplier_name'=>trim($this->input->post('supplier_name')),
                     'pre_buyer_name'=>trim($this->input->post('buyer_name')),
+                    'pre_buyer_po_number'=>trim($this->input->post('buyer_po_number')),
                     'pre_vendor_name'=>trim($this->input->post('vendor_name')),
                     'pre_quatation_ref_number' =>trim($this->input->post('quatation_ref_no')),
                     'pre_quatation_date' =>trim($this->input->post('quatation_date')),
@@ -2559,7 +2560,8 @@ class Admin extends BaseController
             $this->table->set_heading('Part Number', 'Description', 'Order Qty', 'Rate','Value');
 
             // set template
-            $style = array('table_open'  => '<table style="width: 70% !important; max-width: 100%;margin-bottom: 20px; background: burlywood;" class="table table-striped table-hover">');
+            $style = array('table_open'  => '<table style="width: 70% !important; max-width: 100%;margin-bottom: 20px;" class="table">');
+
             $this->table->set_template($style);
 
             $this->db->select(TBL_RAWMATERIAL.'.part_number,'.TBL_BUYER_PO_MASTER_ITEM.'.description,'.TBL_BUYER_PO_MASTER_ITEM.'.order_oty,'.TBL_BUYER_PO_MASTER_ITEM.'.rate,'.TBL_BUYER_PO_MASTER_ITEM.'.value');
@@ -2577,6 +2579,27 @@ class Admin extends BaseController
             }
     
        }
+    }
+
+    public function getBuyerItemsforDisplayBybuyerid(){
+
+        $buyer_po_id=$this->input->post('buyer_po_id');
+
+        if($buyer_po_id) {
+			$getbuyerdetails = $this->admin_model->getBuyerDeatilsbyid($buyer_po_id);
+			if(count($getbuyerdetails) >= 1) {
+				foreach($getbuyerdetails as $value) {
+                    // $content = $content.'<option value="">Select Buyer PO Number</option>';
+					$content = $content.'<option value="'.$value["id"].'">'.$value["sales_order_number"].'</option>';
+				}
+				echo $content;
+			} else {
+				echo 'failure';
+			}
+		} else {
+			echo 'failure';
+		}
+
     }
     
 
