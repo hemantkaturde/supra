@@ -2418,7 +2418,7 @@ class Admin extends BaseController
         $this->logrecord($process,$processFunction);
         $this->global['pageTitle'] = 'Buyer PO View';
         $data['getbuyerpodetails']= $this->admin_model->getbuyerpodetails($buyerpoid);
-        $data['fetchALLitemList']= $this->admin_model->fetchALLSupplieritemList($buyerpoid);
+        $data['fetchALLitemList']= $this->admin_model->fetchALLBuyeritemList($buyerpoid);
         $this->loadViews("masters/viewbuyerpo", $this->global, $data, NULL);
     }
  
