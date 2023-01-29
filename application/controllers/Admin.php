@@ -2212,6 +2212,7 @@ class Admin extends BaseController
             $this->form_validation->set_rules('date','Date','trim|required');
             $this->form_validation->set_rules('supplier_name','Supplier Name','trim|required');
             $this->form_validation->set_rules('buyer_name','Buyer Name','trim|required');
+            $this->form_validation->set_rules('buyer_po_number','Buyer PO Number','trim|required');
             $this->form_validation->set_rules('vendor_name','Vendor Name','trim|required');
             $this->form_validation->set_rules('quatation_ref_no','Quatation Ref No','trim|required');
             $this->form_validation->set_rules('quatation_date','Quatation Date','trim|required');
@@ -2224,7 +2225,7 @@ class Admin extends BaseController
             if($this->form_validation->run() == FALSE)
             {
                 $save_supplierpo_response['status'] = 'failure';
-                $save_supplierpo_response['error'] = array('po_number'=>strip_tags(form_error('po_number')),'date'=>strip_tags(form_error('date')), 'supplier_name'=>strip_tags(form_error('supplier_name')),'buyer_name'=>strip_tags(form_error('buyer_name')),'vendor_name'=>strip_tags(form_error('vendor_name')),'total_amount'=>strip_tags(form_error('total_amount')),'quatation_ref_no'=>strip_tags(form_error('quatation_ref_no')),'quatation_date'=>strip_tags(form_error('quatation_date')),'delivery_date'=>strip_tags(form_error('delivery_date')),'delivery'=>strip_tags(form_error('delivery')),'work_order'=>strip_tags(form_error('work_order')),'remark'=>strip_tags(form_error('remark')));
+                $save_supplierpo_response['error'] = array('po_number'=>strip_tags(form_error('po_number')),'date'=>strip_tags(form_error('date')), 'supplier_name'=>strip_tags(form_error('supplier_name')),'buyer_name'=>strip_tags(form_error('buyer_name')),'vendor_name'=>strip_tags(form_error('vendor_name')),'total_amount'=>strip_tags(form_error('total_amount')),'quatation_ref_no'=>strip_tags(form_error('quatation_ref_no')),'quatation_date'=>strip_tags(form_error('quatation_date')),'delivery_date'=>strip_tags(form_error('delivery_date')),'delivery'=>strip_tags(form_error('delivery')),'work_order'=>strip_tags(form_error('work_order')),'remark'=>strip_tags(form_error('remark')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')));
             }else{
 
                 $data = array(
@@ -2232,6 +2233,7 @@ class Admin extends BaseController
                     'date'=> trim($this->input->post('date')),
                     'supplier_name'=> trim($this->input->post('supplier_name')),
                     'buyer_name'=> trim($this->input->post('buyer_name')),
+                    'buyer_po_number'=> trim($this->input->post('buyer_po_number')),
                     'vendor_name'=> trim($this->input->post('vendor_name')),
                     'quatation_ref_no'=> trim($this->input->post('quatation_ref_no')),
                     'quatation_date'=> trim($this->input->post('quatation_date')),
@@ -2252,7 +2254,7 @@ class Admin extends BaseController
                         $update_last_inserted_id = $this->admin_model->update_last_inserted_id_supplier_po($saveSupplierpodata);
                         if($update_last_inserted_id){
                             $save_supplierpo_response['status'] = 'success';
-                            $save_supplierpo_response['error'] = array('po_number'=>strip_tags(form_error('po_number')),'date'=>strip_tags(form_error('date')), 'supplier_name'=>strip_tags(form_error('supplier_name')),'buyer_name'=>strip_tags(form_error('buyer_name')),'vendor_name'=>strip_tags(form_error('vendor_name')),'total_amount'=>strip_tags(form_error('total_amount')),'quatation_ref_no'=>strip_tags(form_error('quatation_ref_no')),'quatation_date'=>strip_tags(form_error('quatation_date')),'delivery_date'=>strip_tags(form_error('delivery_date')),'delivery'=>strip_tags(form_error('delivery')),'work_order'=>strip_tags(form_error('work_order')),'remark'=>strip_tags(form_error('remark')));
+                            $save_supplierpo_response['error'] = array('po_number'=>strip_tags(form_error('po_number')),'date'=>strip_tags(form_error('date')), 'supplier_name'=>strip_tags(form_error('supplier_name')),'buyer_name'=>strip_tags(form_error('buyer_name')),'vendor_name'=>strip_tags(form_error('vendor_name')),'total_amount'=>strip_tags(form_error('total_amount')),'quatation_ref_no'=>strip_tags(form_error('quatation_ref_no')),'quatation_date'=>strip_tags(form_error('quatation_date')),'delivery_date'=>strip_tags(form_error('delivery_date')),'delivery'=>strip_tags(form_error('delivery')),'work_order'=>strip_tags(form_error('work_order')),'remark'=>strip_tags(form_error('remark')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')));
                         }
                     }
                 }
@@ -2564,13 +2566,19 @@ class Admin extends BaseController
             $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
             $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id',$buyer_po_number);
             $query_result = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
-        
-            //$this->db->get(TBL_BUYER_PO_MASTER_ITEM);
+            $data = $query_result->result_array();
 
-            echo $this->table->generate($query_result);
+            if($data){
+                echo $this->table->generate($query_result);
 
+            }else{
+                echo '';
+
+            }
+    
        }
     }
+    
 
 
 }

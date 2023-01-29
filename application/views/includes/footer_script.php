@@ -1934,6 +1934,7 @@
 			   var date =   $('#date').val();
 			   var supplier_name =   $('#supplier_name').val();
 			   var buyer_name =   $('#buyer_name').val();
+			   var buyer_po_number =   $('#buyer_po_number').val();
 			   var vendor_name =   $('#vendor_name').val();
 			   var quatation_ref_no =   $('#quatation_ref_no').val();
 			   var quatation_date =   $('#quatation_date').val();
@@ -1947,7 +1948,7 @@
 				url : "<?php echo base_url();?>addSuplieritem",
 				type: "POST",
 				 //data : formData,
-				 data :{part_number:part_number,description:description,qty:qty,rate:rate,value:value,date:date,supplier_name:supplier_name,buyer_name:buyer_name,vendor_name:vendor_name,quatation_ref_no:quatation_ref_no,quatation_date:quatation_date,delivery_date:delivery_date,delivery:delivery,delivery_address:delivery_address,work_order:work_order,remark:remark},
+				 data :{part_number:part_number,description:description,qty:qty,rate:rate,value:value,date:date,supplier_name:supplier_name,buyer_name:buyer_name,vendor_name:vendor_name,quatation_ref_no:quatation_ref_no,quatation_date:quatation_date,delivery_date:delivery_date,delivery:delivery,delivery_address:delivery_address,work_order:work_order,remark:remark,buyer_po_number:buyer_po_number},
 				// method: "POST",
                 // data :{package_id:package_id},
                 cache:false,
@@ -2096,43 +2097,88 @@
 			return false;
 		});
 
-		$(document).ready(function() {
-			e.preventDefault();
-			//$(".loader_ajax").show();
-			var buyer_name = $('#buyer_name').val();
-		    $('.buyer_po_number_div').css('display','block');
-			$.ajax({
-				url : "<?php echo ADMIN_PATH;?>getBuyerPonumberbyBuyerid",
-				type: "POST",
-				data : {'buyer_name' : buyer_name},
-				success: function(data, textStatus, jqXHR)
-				{
-					$(".loader_ajax").hide();
-					if(data == "failure")
-					{
-						$('#buyer_po_number').html('<option value="">Select Buyer PO Number</option>');
-					}
-					else
-					{
-						// $('#buyer_po_number').html('<option value="">Select Buyer PO Number</option>');
-						$('#buyer_po_number').html(data);
+		// $(document).ready(function() {
+		// 	e.preventDefault();
+		// 	//$(".loader_ajax").show();
+		// 	var buyer_name = $('#buyer_name').val();
+		//     $('.buyer_po_number_div').css('display','block');
+		// 	$.ajax({
+		// 		url : "<?php echo ADMIN_PATH;?>getBuyerPonumberbyBuyerid",
+		// 		type: "POST",
+		// 		data : {'buyer_name' : buyer_name},
+		// 		success: function(data, textStatus, jqXHR)
+		// 		{
+		// 			$(".loader_ajax").hide();
+		// 			if(data == "failure")
+		// 			{
+		// 				$('#buyer_po_number').html('<option value="">Select Buyer PO Number</option>');
+		// 			}
+		// 			else
+		// 			{
+		// 				// $('#buyer_po_number').html('<option value="">Select Buyer PO Number</option>');
+		// 				$('#buyer_po_number').html(data);
 
-					}
-				},
-				error: function (jqXHR, textStatus, errorThrown)
-				{
-					$('#buyer_po_number').html();
-					//$(".loader_ajax").hide();
-				}
-			});
-			return false;
-		});
+		// 			}
+		// 		},
+		// 		error: function (jqXHR, textStatus, errorThrown)
+		// 		{
+		// 			$('#buyer_po_number').html();
+		// 			//$(".loader_ajax").hide();
+		// 		}
+		// 	});
+		// 	return false;
+		// });
 
 
-		$(document).ready(function() {
-			e.preventDefault();
-			//$(".loader_ajax").show();
+		// $(document).ready(function() {
+		// 	// e.preventDefault();
+		// 	//$(".loader_ajax").show();
+		// 	// var buyer_po_number = $('#buyer_po_number').val();
+
+		// 	var buyer_po_number =15;
+
+		// 	alert('ddd');
+
+			
+		// 	$.ajax({
+		// 		url : "<?php echo ADMIN_PATH;?>getBuyerItemsforDisplay",
+		// 		type: "POST",
+		// 		data : {'buyer_po_number' : buyer_po_number},
+		// 		success: function(data, textStatus, jqXHR)
+		// 		{
+		// 			$(".loader_ajax").hide();
+		// 			if(data == "failure")
+		// 			{
+		// 				//$('#buyer_po_number').html('<option value="">Select Buyer PO Number</option>');
+		// 			}
+		// 			else
+		// 			{
+		// 				// $('#buyer_po_number').html('<option value="">Select Buyer PO Number</option>');
+		// 				//$('#buyer_po_number').html(data);
+		// 				$("#customers-list").html(data);
+
+		// 			}
+		// 		},
+		// 		error: function (jqXHR, textStatus, errorThrown)
+		// 		{
+		// 			//$('#buyer_po_number').html();
+		// 			//$(".loader_ajax").hide();
+		// 		}
+		// 	});
+		// 	return false;
+		// });
+
+    </script>
+<?php } ?>
+
+
+<?php if($pageTitle=='Add Supplier PO'){ ?>
+	<script type="text/javascript">
+		$( document ).ready(function() {
+			var buyer_po_number =15;		
+			// var buyer_po_number =15;		
 			var buyer_po_number = $('#buyer_po_number').val();
+
 			$.ajax({
 				url : "<?php echo ADMIN_PATH;?>getBuyerItemsforDisplay",
 				type: "POST",
@@ -2163,6 +2209,4 @@
 
     </script>
 <?php } ?>
-
-
 
