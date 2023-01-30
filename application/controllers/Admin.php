@@ -2614,7 +2614,69 @@ class Admin extends BaseController
         $this->global['pageTitle'] = 'Buyer PO Confirmation';
         $this->loadViews("masters/buyerpoconfrimation", $this->global, $data, NULL);    
     }
-    
+
+    public function addbuyerpoconfirmation(){
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $save_buyerpo_response = array();
+
+            $this->form_validation->set_rules('sales_order_number','Sales Order Number','trim|required');
+            $this->form_validation->set_rules('date','Date','trim|required');
+            $this->form_validation->set_rules('buyer_po_number','Buyer PO Number','trim|required');
+            $this->form_validation->set_rules('buyer_po_date','Buyer PO Date','trim|required');
+            $this->form_validation->set_rules('buyer_name','Buyer Name','trim|required');
+            $this->form_validation->set_rules('currency','Currency','trim|required');
+            $this->form_validation->set_rules('delivery_date','Delivery Date','trim|required');
+            $this->form_validation->set_rules('remark','Remark','trim');
+
+
+            if($this->form_validation->run() == FALSE)
+            {
+                $save_buyerpo_response['status'] = 'failure';
+                $save_buyerpo_response['error'] = array('sales_order_number'=>strip_tags(form_error('sales_order_number')), 'date'=>strip_tags(form_error('date')), 'buyer_po_number'=>strip_tags(form_error('buyer_po_number')), 'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'buyer_name'=>strip_tags(form_error('buyer_name')),'currency'=>strip_tags(form_error('currency')),'rate'=>strip_tags(form_error('rate')),'value'=>strip_tags(form_error('value')),'part_number'=>strip_tags(form_error('part_number')),'order_quantity'=>strip_tags(form_error('order_quantity')),'description'=>strip_tags(form_error('description')),'delivery_date'=>strip_tags(form_error('delivery_date')),'remark'=>strip_tags(form_error('remark')));
+            }else{
+
+                $data = array(
+                    'sales_order_number'   => trim($this->input->post('sales_order_number')),
+                    'date'     => trim($this->input->post('date')),
+                    'buyer_po_number'    => trim($this->input->post('buyer_po_number')),
+                    'buyer_po_date'  => trim($this->input->post('buyer_po_date')),
+                    'buyer_name_id' =>   trim($this->input->post('buyer_name')),
+                    'currency' => trim($this->input->post('currency')),
+                    'delivery_date' =>    trim($this->input->post('delivery_date')),
+                    'remark' =>    trim($this->input->post('remark')),
+                );
+
+                $checkIfexitsbuyerpo = $this->admin_model->checkIfexitsbuyerpo(trim($this->input->post('sales_order_number')));
+                if($checkIfexitsbuyerpo > 0){
+                    $save_buyerpo_response['status'] = 'failure';
+                    $save_buyerpo_response['error'] = array('sales_order_number'=>'Buyer PO Alreday Exits (Sales Order Number Alreday Exits)');
+                }else{
+                    $saveBuyerpodata = $this->admin_model->saveBuyerpodata('',$data);
+                    if($saveBuyerpodata){
+                        $update_last_inserted_id = $this->admin_model->update_last_inserted_id($saveBuyerpodata);
+                        if($update_last_inserted_id){
+                            $save_buyerpo_response['status'] = 'success';
+                            $save_buyerpo_response['error'] = array('sales_order_number'=>strip_tags(form_error('sales_order_number')), 'date'=>strip_tags(form_error('date')), 'buyer_po_number'=>strip_tags(form_error('buyer_po_number')), 'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'buyer_name'=>strip_tags(form_error('buyer_name')),'currency'=>strip_tags(form_error('currency')),'rate'=>strip_tags(form_error('rate')),'value'=>strip_tags(form_error('value')),'part_number'=>strip_tags(form_error('part_number')),'order_quantity'=>strip_tags(form_error('order_quantity')),'description'=>strip_tags(form_error('description')),'delivery_date'=>strip_tags(form_error('delivery_date')),'remark'=>strip_tags(form_error('remark')));
+                        }
+                    }
+                }
+            }
+            echo json_encode($save_buyerpo_response);
+        }else{
+            $process = 'Add Buyer PO Confirmation';
+            $processFunction = 'Admin/addnewBuyerPO';
+            // $data['buyerList']= $this->admin_model->fetchAllbuyerList();
+            // $data['rowMaterialList']= $this->admin_model->fetchALLrowMaterialList();
+            // $data['getPreviousSalesOrderNumber']= $this->admin_model->getPreviousSalesOrderNumber()[0];
+            // $data['fetchALLitemList']= $this->admin_model->fetchALLitemList();
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Add Buyer PO Confirmation';
+            $this->loadViews("masters/addbuyerpoconfirmation", $this->global, $data, NULL);
+        }
+
+    }
 
 
 }
