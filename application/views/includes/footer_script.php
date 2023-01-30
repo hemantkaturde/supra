@@ -2104,11 +2104,11 @@
 <?php } ?>
 
 
-<?php if($pageTitle=='Add Supplier PO'){ ?>
+<?php if($pageTitle=='Add Supplier PO' || $pageTitle=='Supplier PO View'){ ?>
 	<script type="text/javascript">
 		
 		$( document ).ready(function() {
-				
+			
 			var buyer_po_number = $('#buyer_po_number').val();
 			$("#customers-list").html('');
 

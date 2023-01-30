@@ -2503,8 +2503,11 @@ class Admin extends BaseController
         $processFunction = 'Admin/viewSupplierpo';
         $this->logrecord($process,$processFunction);
         $this->global['pageTitle'] = 'Supplier PO View';
-        $data['getbuyerpodetails']= $this->admin_model->getbuyerpodetails($buyerpoid);
-        $data['fetchALLitemList']= $this->admin_model->fetchALLSupplieritemList($buyerpoid);
+        $data['supplierList']= $this->admin_model->fetchALLsupplierList();
+        $data['buyerList']= $this->admin_model->fetchAllbuyerList();
+        $data['vendorList']= $this->admin_model->fetchALLvendorList();
+        $data['getSuplierpodetails']= $this->admin_model->getSuplierpodetails($supplierpoid);
+        $data['fetchALLsupplieritemlistforview']= $this->admin_model->fetchALLsupplieritemlistforview($supplierpoid);
         $this->loadViews("masters/viewSupplierpo", $this->global, $data, NULL);
 
     }
@@ -2601,6 +2604,15 @@ class Admin extends BaseController
 			echo 'failure';
 		}
 
+    }
+
+    public function buyerpoconfirmation(){
+
+        $process = 'Buyer PO Confirmation';
+        $processFunction = 'Admin/buyerpoconfirmation';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Buyer PO Confirmation';
+        $this->loadViews("masters/buyerpoconfrimation", $this->global, $data, NULL);    
     }
     
 

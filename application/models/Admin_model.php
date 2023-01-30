@@ -1132,7 +1132,6 @@ class Admin_model extends CI_Model
 
     }
 
-
     public function getSupplierpoCount($params){
 
         $this->db->select('*');
@@ -1201,7 +1200,6 @@ class Admin_model extends CI_Model
         return $data;
         
     }
-
 
     public function deleteSupplierpo($id){
         $this->db->where('id', $id);
@@ -1406,6 +1404,28 @@ class Admin_model extends CI_Model
 		}
 		
         return $query_result;
+
+    }
+
+
+    public function getSuplierpodetails($supplierpoid){
+        $this->db->select('*');
+        $this->db->where(TBL_SUPPLIER_PO_MASTER.'.status',1);
+        $this->db->where(TBL_SUPPLIER_PO_MASTER.'.id',$supplierpoid);
+        $query = $this->db->get(TBL_SUPPLIER_PO_MASTER);
+        $data = $query->result_array();
+        return $data;
+
+    }
+
+
+    public function fetchALLsupplieritemlistforview($supplierpoid){
+        $this->db->select('*');
+        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id');
+        $this->db->where(TBL_SUPPLIER_PO_MASTER_ITEM.'.supplier_po_id',$supplierpoid);
+        $query = $this->db->get(TBL_SUPPLIER_PO_MASTER_ITEM);
+        $data = $query->result_array();
+        return $data;
 
     }
 

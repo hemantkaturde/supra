@@ -124,6 +124,8 @@ $route['deleteSupplierpoitem'] = "admin/deleteSupplierpoitem";
 $route['getBuyerPonumberbyBuyerid'] = "admin/getBuyerPonumberbyBuyerid";
 $route['getBuyerItemsforDisplay'] = "admin/getBuyerItemsforDisplay";
 $route['getBuyerItemsforDisplayBybuyerid'] = "admin/getBuyerItemsforDisplayBybuyerid";
+$route['buyerpoconfirmation'] = "admin/buyerpoconfirmation";
+
 
 
 
