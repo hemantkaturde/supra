@@ -2685,5 +2685,112 @@ class Admin extends BaseController
 
     }
 
+    public function vendorpo(){
+        $process = 'Vendor PO Master';
+        $processFunction = 'Admin/vendorpo';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Vendor PO Master';
+        $this->loadViews("masters/vendorpo", $this->global, $data, NULL);
+
+    }
+
+    public function fetchVendorpolist(){
+
+        $params = $_REQUEST;
+        $totalRecords = $this->admin_model->getVendorpoCount($params); 
+        $queryRecords = $this->admin_model->getVendorpodata($params); 
+
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+        echo json_encode($json_data);
+
+    }
+
+
+    public function addnewVendorpo(){
+            $post_submit = $this->input->post();
+            if($post_submit){
+                $save_supplierpo_response = array();
+    
+                $this->form_validation->set_rules('po_number','PO Number','trim|required');
+                $this->form_validation->set_rules('date','Date','trim|required');
+                $this->form_validation->set_rules('supplier_name','Supplier Name','trim|required');
+                $this->form_validation->set_rules('buyer_name','Buyer Name','trim|required');
+                //$this->form_validation->set_rules('buyer_po_number','Buyer PO Number','trim|required');
+                $this->form_validation->set_rules('vendor_name','Vendor Name','trim|required');
+                $this->form_validation->set_rules('quatation_ref_no','Quatation Ref No','trim|required');
+                $this->form_validation->set_rules('quatation_date','Quatation Date','trim|required');
+                $this->form_validation->set_rules('delivery_date','Delivery Date','trim|required');
+                $this->form_validation->set_rules('delivery','Delivery','trim');
+                $this->form_validation->set_rules('delivery_address','Delivery Address','trim');
+                $this->form_validation->set_rules('work_order','Work Order','trim');
+                $this->form_validation->set_rules('remark','Remark','trim');
+                
+                if($this->form_validation->run() == FALSE)
+                {
+                    $save_supplierpo_response['status'] = 'failure';
+                    $save_supplierpo_response['error'] = array('po_number'=>strip_tags(form_error('po_number')),'date'=>strip_tags(form_error('date')), 'supplier_name'=>strip_tags(form_error('supplier_name')),'buyer_name'=>strip_tags(form_error('buyer_name')),'vendor_name'=>strip_tags(form_error('vendor_name')),'total_amount'=>strip_tags(form_error('total_amount')),'quatation_ref_no'=>strip_tags(form_error('quatation_ref_no')),'quatation_date'=>strip_tags(form_error('quatation_date')),'delivery_date'=>strip_tags(form_error('delivery_date')),'delivery'=>strip_tags(form_error('delivery')),'work_order'=>strip_tags(form_error('work_order')),'remark'=>strip_tags(form_error('remark')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')));
+                }else{
+    
+                    $data = array(
+                        'po_number'=> trim($this->input->post('po_number')),
+                        'date'=> trim($this->input->post('date')),
+                        'supplier_name'=> trim($this->input->post('supplier_name')),
+                        'buyer_name'=> trim($this->input->post('buyer_name')),
+                        //'buyer_po_number'=> trim($this->input->post('buyer_po_number')),
+                        'vendor_name'=> trim($this->input->post('vendor_name')),
+                        'quatation_ref_no'=> trim($this->input->post('quatation_ref_no')),
+                        'quatation_date'=> trim($this->input->post('quatation_date')),
+                        'delivery_date'=> trim($this->input->post('delivery_date')),
+                        'delivery'=> trim($this->input->post('delivery')),
+                        'delivery_address'=> trim($this->input->post('delivery_address')),
+                        'work_order'=> trim($this->input->post('work_order')),
+                        'remark'=> trim($this->input->post('remark')),
+                    );
+    
+                    $checkIfexitssupplierrpo = $this->admin_model->checkIfexitssupplierrpo(trim($this->input->post('po_number')));
+                    if($checkIfexitssupplierrpo > 0){
+                        $save_supplierpo_response['status'] = 'failure';
+                        $save_supplierpo_response['error'] = array('po_number'=>'PO Alreday Exits (PO Number Alreday Exits)');
+                    }else{
+                        $saveSupplierpodata = $this->admin_model->saveSupplierpodata('',$data);
+                        if($saveSupplierpodata){
+                            $update_last_inserted_id = $this->admin_model->update_last_inserted_id_supplier_po($saveSupplierpodata);
+                            if($update_last_inserted_id){
+                                $save_supplierpo_response['status'] = 'success';
+                                $save_supplierpo_response['error'] = array('po_number'=>strip_tags(form_error('po_number')),'date'=>strip_tags(form_error('date')), 'supplier_name'=>strip_tags(form_error('supplier_name')),'buyer_name'=>strip_tags(form_error('buyer_name')),'vendor_name'=>strip_tags(form_error('vendor_name')),'total_amount'=>strip_tags(form_error('total_amount')),'quatation_ref_no'=>strip_tags(form_error('quatation_ref_no')),'quatation_date'=>strip_tags(form_error('quatation_date')),'delivery_date'=>strip_tags(form_error('delivery_date')),'delivery'=>strip_tags(form_error('delivery')),'work_order'=>strip_tags(form_error('work_order')),'remark'=>strip_tags(form_error('remark')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')));
+                            }
+                        }
+                    }
+                }
+                echo json_encode($save_supplierpo_response);
+            }else{
+                $process = 'Add Supplier PO';
+                $processFunction = 'Admin/addnewSupplierpo';
+                $data['buyerList']= $this->admin_model->fetchAllbuyerList();
+                $data['rowMaterialList']= $this->admin_model->fetchALLrowMaterialList();
+                $data['supplierList']= $this->admin_model->fetchALLsupplierList();
+                $data['vendorList']= $this->admin_model->fetchALLvendorList();
+                $data['getPreviousPONumber']= $this->admin_model->getPreviousPONumber()[0];
+                $data['fetchALLpresupplieritemList']= $this->admin_model->fetchALLpresupplieritemList();
+                $this->logrecord($process,$processFunction);
+                $this->global['pageTitle'] = 'Add Supplier PO';
+                $this->loadViews("masters/addBuyerpo", $this->global, $data, NULL);
+            }
+    }
 
 }

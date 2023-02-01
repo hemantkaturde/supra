@@ -179,7 +179,7 @@
                     </li>
 
                   
-                    <li class="treeview <?php if($pageUrl=="buyerpo" || $pageUrl=="addnewBuyerpo" || $pageUrl=="supplierpo" || $pageUrl=="addnewSupplierpo" || $pageUrl=="viewBuyerpo" || $pageUrl=="buyerpoconfirmation" || $pageUrl=="viewSupplierpo"){echo 'active';}?>">
+                    <li class="treeview <?php if($pageUrl=="buyerpo" || $pageUrl=="addnewBuyerpo" || $pageUrl=="supplierpo" || $pageUrl=="addnewSupplierpo" || $pageUrl=="viewBuyerpo" || $pageUrl=="buyerpoconfirmation" || $pageUrl=="viewSupplierpo" || $pageUrl=="vendorpo" || $pageUrl=="addnewVendorpo"){echo 'active';}?>">
                       <a href="#">
                         <i class="fa fa-laptop"></i> <span class="menu_label">Miscellaneous</span>
                           <span class="pull-right-container">
@@ -189,6 +189,9 @@
                       <ul class="treeview-menu" >
                         <li class="line_height <?php if($pageUrl=="buyerpo" || $pageUrl=="addnewBuyerpo"  || $pageUrl=="viewBuyerpo"){echo 'active';}?>"><a href="<?php echo base_url(); ?>buyerpo"><i class="fa fa-cubes"></i> Buyer PO</a></li>
                         <li class="line_height <?php if($pageUrl=="supplierpo" || $pageUrl=="addnewSupplierpo" || $pageUrl=="viewSupplierpo"){echo 'active';}?>"><a href="<?php echo base_url(); ?>supplierpo"><i class="fa fa-cubes"></i> Supplier PO</a></li>
+                        <li class="line_height <?php if($pageUrl=="vendorpo" || $pageUrl=="addnewVendorpo" || $pageUrl=="viewVendorpo"  || $pageUrl=="addnewVendorpo"){echo 'active';}?>"><a href="<?php echo base_url(); ?>vendorpo"><i class="fa fa-cubes"></i> Vendor PO</a></li>
+
+
                         <li class="line_height <?php if($pageUrl=="buyerpoconfirmation" || $pageUrl=="addbuyerpoconfirmation"){echo 'active';}?>"><a href="<?php echo base_url(); ?>buyerpoconfirmation"><i class="fa fa-cubes"></i> Buyer PO Confirmation</a></li>
                         <li class="line_height <?php if($pageUrl=="supplierpoconfirmation" || $pageUrl=="addsupplierpoconfirmation"){echo 'active';}?>"><a href="<?php echo base_url(); ?>supplier_po_confirmation"><i class="fa fa-cubes"></i> Supplier PO Confirmation</a></li>
                         <li class="line_height"><a href="<?php echo base_url(); ?>log-history-upload"><i class="fa fa-cubes"></i> Bill of Material</a></li>

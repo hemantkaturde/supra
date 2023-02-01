@@ -1429,6 +1429,77 @@ class Admin_model extends CI_Model
 
     }
 
+
+    public function getVendorpoCount($params){
+
+        $this->db->select('*');
+        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id  = '.TBL_VENDOR_PO_MASTER.'.buyer_name');
+        $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id  = '.TBL_VENDOR_PO_MASTER.'.supplier_name');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_VENDOR_PO_MASTER.'.vendor_name');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER.".supplier_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".quatation_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".quatation_ref_no LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_VENDOR_PO_MASTER.'.status', 1);
+        $query = $this->db->get(TBL_VENDOR_PO_MASTER);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+
+    }
+    
+    public function getVendorpodata($params){
+
+        $this->db->select('*,'.TBL_SUPPLIER.'.supplier_name as sup_name');
+        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id  = '.TBL_VENDOR_PO_MASTER.'.buyer_name');
+        $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id  = '.TBL_VENDOR_PO_MASTER.'.supplier_name');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_VENDOR_PO_MASTER.'.vendor_name');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER.".supplier_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".quatation_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".quatation_ref_no LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_VENDOR_PO_MASTER.'.status', 1);
+        $this->db->limit($params['length'],$params['start']);
+        $this->db->order_by(TBL_VENDOR_PO_MASTER.'.id','DESC');
+        $query = $this->db->get(TBL_VENDOR_PO_MASTER);
+        $fetch_result = $query->result_array();
+
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['po_number'] = $value['po_number'];
+                $data[$counter]['date'] = $value['date'];
+                $data[$counter]['sup_name'] = $value['sup_name'];
+                $data[$counter]['buyer_name'] = $value['buyer_name'];
+                $data[$counter]['vendor_name'] = $value['vendor_name'];
+                $data[$counter]['quatation_ref_no'] = $value['quatation_ref_no'];
+                $data[$counter]['quatation_date'] = $value['quatation_date'];
+                $data[$counter]['action'] = '';
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewSupplierpo/".$value['id']."' style='cursor: pointer;'><i style='font-size: large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['id']."' class='fa fa-trash-o deleteSupplierpo' aria-hidden='true'></i>"; 
+                $counter++; 
+            }
+        }
+
+        return $data;
+        
+    }
+
+
 }
 
 ?>

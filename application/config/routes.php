@@ -127,6 +127,15 @@ $route['getBuyerItemsforDisplayBybuyerid'] = "admin/getBuyerItemsforDisplayBybuy
 $route['buyerpoconfirmation'] = "admin/buyerpoconfirmation";
 $route['addbuyerpoconfirmation'] = "admin/addbuyerpoconfirmation";
 
+$route['vendorpo'] = "admin/vendorpo";
+$route['fetchVendorpolist'] = "admin/fetchVendorpolist";
+$route['addnewVendorpo'] = "admin/addnewVendorpo";
+
+
+
+
+
+
 
 
 
