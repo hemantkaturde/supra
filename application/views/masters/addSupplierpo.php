@@ -43,8 +43,8 @@
                                     </div>
 
 
-                                     <?php if($fetchALLpresupplieritemList[0]['date']){
-                                        $date= $fetchALLpresupplieritemList[0]['date'];
+                                     <?php if($fetchALLpresupplieritemList[0]['pre_date']){
+                                        $date= $fetchALLpresupplieritemList[0]['pre_date'];
                                      }else{
                                         $date= date('Y-m-d');
                                      } ?>
@@ -383,7 +383,7 @@
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Order Quantity</label>
+                                                        <label class="col-sm-3 col-form-label">Order Quantity <span class="required">*</span></label>
                                                         <div class="col-sm-9">
                                                             <input type="number" class="form-control"  id="qty" name="qty">
                                                             <p class="error qty_error"></p>
@@ -449,7 +449,12 @@
                             <!-- /.box-body -->
                             <div class="box-footer">
                                 <div class="col-xs-8">
-                                    <input type="submit" id="savenewsupplierpo" class="btn btn-primary" value="Submit" />
+                                    <?php if($fetchALLpresupplieritemList){
+                                        $disabled= '';
+                                    }else{ 
+                                        $disabled= 'disabled';
+                                     } ?>
+                                    <input type="submit" id="savenewsupplierpo" class="btn btn-primary" value="Submit" <?=$disabled;?> />
                                     <input type="button" onclick="location.href = '<?php echo base_url() ?>supplierpo'" class="btn btn-default" value="Back" />
                                 </div>
                             </div>
