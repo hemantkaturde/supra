@@ -2427,8 +2427,8 @@ class Admin extends BaseController
 
         if($this->input->post('part_number')) {
             $getPartNameBypartid = $this->admin_model->getPartnumberBypartnumber($this->input->post('part_number'));
-            $content = $getPartNameBypartid[0]['type_of_raw_material'];
-            echo $content;
+            $content = $getPartNameBypartid[0];
+            echo json_encode($content);
         } else {
             echo 'failure';
         }
@@ -2448,11 +2448,15 @@ class Admin extends BaseController
             $this->form_validation->set_rules('qty','Qty','trim|numeric|required');
             $this->form_validation->set_rules('rate','Rate','trim|required');
             $this->form_validation->set_rules('value','Value','trim|required');
+
+            $this->form_validation->set_rules('vendor_qty','Vendor qty','trim');
+            $this->form_validation->set_rules('unit','Unit','trim');
+            $this->form_validation->set_rules('item_remark','Item Remark','trim');
         
             if($this->form_validation->run() == FALSE)
             {
                 $save_supplierpoitem_response['status'] = 'failure';
-                $save_supplierpoitem_response['error'] = array('part_number'=>strip_tags(form_error('part_number')), 'description'=>strip_tags(form_error('description')), 'qty'=>strip_tags(form_error('qty')), 'rate'=>strip_tags(form_error('rate')),'value'=>strip_tags(form_error('value')));
+                $save_supplierpoitem_response['error'] = array('part_number'=>strip_tags(form_error('part_number')), 'description'=>strip_tags(form_error('description')), 'qty'=>strip_tags(form_error('qty')), 'rate'=>strip_tags(form_error('rate')),'value'=>strip_tags(form_error('value')),'item_remark'=>strip_tags(form_error('item_remark')),'unit'=>strip_tags(form_error('unit')),'vendor_qty'=>strip_tags(form_error('vendor_qty')));
             }else{
 
                 
@@ -2462,6 +2466,9 @@ class Admin extends BaseController
                     'order_oty'    => trim($this->input->post('qty')),
                     'rate'  => trim($this->input->post('rate')),
                     'value' =>   trim($this->input->post('value')),
+                    'vendor_qty' =>   trim($this->input->post('vendor_qty')),
+                    'unit' =>   trim($this->input->post('unit')),
+                    'item_remark' =>   trim($this->input->post('item_remark')),
                     'pre_date'=>trim($this->input->post('date')),
                     'pre_supplier_name'=>trim($this->input->post('supplier_name')),
                     'pre_buyer_name'=>trim($this->input->post('buyer_name')),

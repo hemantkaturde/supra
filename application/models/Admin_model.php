@@ -1298,7 +1298,7 @@ class Admin_model extends CI_Model
     }
 
     public function getPartnumberBypartnumber($part_number){
-        $this->db->select('type_of_raw_material');
+        $this->db->select('*');
         $this->db->where(TBL_RAWMATERIAL.'.status',1);
         $this->db->where(TBL_RAWMATERIAL.'.raw_id ',$part_number);
         $query = $this->db->get(TBL_RAWMATERIAL);

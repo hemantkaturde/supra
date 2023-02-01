@@ -1889,15 +1889,44 @@
 					if(data == "failure")
 					{
 						$('#description').value('');
+						$('#diameter').val('');
+						$('#slitting_size').val('');
+						$('#thickness').val('');
+						$('#hex_af').val('');
+						$('#hsn_code').val('');
+						$('#length').val('');
+						$('#gross_weight').val('');
+						$('#net_weight').val('');
+						$('#sac').val('');
 					}
 					else
 					{
-						$('#description').val(data);
+						var data_row_material = jQuery.parseJSON( data );
+						$('#description').val(data_row_material.type_of_raw_material);
+						$('#diameter').val(data_row_material.diameter);
+						$('#slitting_size').val(data_row_material.sitting_size);
+						$('#thickness').val(data_row_material.thickness);
+						$('#hex_af').val(data_row_material.hex_a_f);
+						$('#hsn_code').val(data_row_material.HSN_code);
+						$('#length').val(data_row_material.length);
+						$('#gross_weight').val(data_row_material.gross_weight);
+						$('#net_weight').val(data_row_material.net_weight);
+						$('#sac').val(data_row_material.sac);
+
 					}
 				},
 				error: function (jqXHR, textStatus, errorThrown)
 				{
-					$('#description').html();
+					    $('#description').value('');
+						$('#diameter').val('');
+						$('#slitting_size').val('');
+						$('#thickness').val('');
+						$('#hex_af').val('');
+						$('#hsn_code').val('');
+						$('#length').val('');
+						$('#gross_weight').val('');
+						$('#net_weight').val('');
+						$('#sac').val('');
 					//$(".loader_ajax").hide();
 				}
 			});
@@ -1931,6 +1960,10 @@
 			   var rate =   $('#rate').val();
 			   var value =   $('#value').val();
 
+			   var vendor_qty =   $('#vendor_qty').val();
+			   var unit =   $('#unit').val();
+			   var item_remark =   $('#item_remark').val();
+
 			   var date =   $('#date').val();
 			   var supplier_name =   $('#supplier_name').val();
 			   var buyer_name =   $('#buyer_name').val();
@@ -1943,12 +1976,15 @@
 			   var delivery_address =   $('#delivery_address').val();
 			   var work_order =   $('#work_order').val();
 			   var remark =   $('#remark').val();
+
+
+
 					 
 			$.ajax({
 				url : "<?php echo base_url();?>addSuplieritem",
 				type: "POST",
 				 //data : formData,
-				 data :{part_number:part_number,description:description,qty:qty,rate:rate,value:value,date:date,supplier_name:supplier_name,buyer_name:buyer_name,vendor_name:vendor_name,quatation_ref_no:quatation_ref_no,quatation_date:quatation_date,delivery_date:delivery_date,delivery:delivery,delivery_address:delivery_address,work_order:work_order,remark:remark,buyer_po_number:buyer_po_number},
+				 data :{part_number:part_number,description:description,qty:qty,rate:rate,value:value,date:date,supplier_name:supplier_name,buyer_name:buyer_name,vendor_name:vendor_name,quatation_ref_no:quatation_ref_no,quatation_date:quatation_date,delivery_date:delivery_date,delivery:delivery,delivery_address:delivery_address,work_order:work_order,remark:remark,buyer_po_number:buyer_po_number,vendor_qty:vendor_qty,unit:unit,item_remark:item_remark},
 				// method: "POST",
                 // data :{package_id:package_id},
                 cache:false,
