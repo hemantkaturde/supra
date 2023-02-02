@@ -2153,7 +2153,9 @@ class Admin extends BaseController
             $process = 'Add Buyer PO';
             $processFunction = 'Admin/addnewBuyerPO';
             $data['buyerList']= $this->admin_model->fetchAllbuyerList();
-            $data['rowMaterialList']= $this->admin_model->fetchALLrowMaterialList();
+            // $data['rowMaterialList']= $this->admin_model->fetchALLrowMaterialList();
+            $data['finishgoodList']= $this->admin_model->fetchALLFinishgoodList();
+
             $data['getPreviousSalesOrderNumber']= $this->admin_model->getPreviousSalesOrderNumber()[0];
             $data['fetchALLitemList']= $this->admin_model->fetchALLitemList();
             $this->logrecord($process,$processFunction);
@@ -2340,6 +2342,7 @@ class Admin extends BaseController
             $this->form_validation->set_rules('qty','Qty','trim|numeric|required');
             $this->form_validation->set_rules('rate','Rate','trim|required');
             $this->form_validation->set_rules('value','Value','trim|required');
+            $this->form_validation->set_rules('unit','Unit','trim');
         
             if($this->form_validation->run() == FALSE)
             {
@@ -2354,6 +2357,7 @@ class Admin extends BaseController
                     'order_oty'    => trim($this->input->post('qty')),
                     'rate'  => trim($this->input->post('rate')),
                     'value' =>   trim($this->input->post('value')),
+                    'unit' =>  trim($this->input->post('unit')),
                     'pre_buyer_po_number'=>trim($this->input->post('buyer_po_number')),
                     'pre_date'=>trim($this->input->post('date')),
                     'pre_buyer_po_date'=>trim($this->input->post('buyer_po_date')),

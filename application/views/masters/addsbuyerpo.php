@@ -134,6 +134,7 @@
                                                         <th>Part Number</th>
                                                         <th>Description</th>
                                                         <th>Order Qty</th>
+                                                        <th>Unit</th>
                                                         <th>Rate</th>
                                                         <th>Value</th>
                                                         <th>Action</th>
@@ -150,6 +151,7 @@
                                                         <td><?php echo $value['part_number'];?></td>
                                                         <td><?php echo $value['description'];?></td>
                                                         <td><?php echo $value['order_oty'];?></td>
+                                                        <td><?php echo $value['unit'];?></td>
                                                         <td><?php echo $value['rate'];?></td>
                                                         <td><?php echo $value['value'];?></td>
                                                         <td>
@@ -185,8 +187,8 @@
                                                         <div class="col-sm-9">
                                                             <select class="form-control" name="part_number" id="part_number">
                                                                 <option st-id="" value="">Select Part Name</option>
-                                                                <?php foreach ($rowMaterialList as $key => $value) {?>        
-                                                                    <option value="<?php echo $value['raw_id']; ?>"><?php echo $value['part_number']; ?></option>
+                                                                <?php foreach ($finishgoodList as $key => $value) {?>        
+                                                                    <option value="<?php echo $value['fin_id']; ?>"><?php echo $value['part_number']; ?></option>
                                                                 <?php } ?>
                                                             </select>
                                                             <p class="error part_number_error"></p>
@@ -208,6 +210,22 @@
                                                         <div class="col-sm-9">
                                                             <input type="number" class="form-control"  id="qty" name="qty">
                                                             <p class="error qty_error"></p>
+                                                        </div>
+                                                    </div>
+
+                                                    
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-3 col-form-label">Unit</label>
+                                                        <div class="col-sm-9">
+                                                             <select class="form-control" name="unit" id="unit">
+                                                                <option value="">Select Part Name</option>
+                                                                <option value="kgs">Kgs</option>
+                                                                <option value="Pcs">Pcs</option>
+                                                                <option value="Nos">Nos</option>
+                                                                <option value="Sheet">Sheet</option>
+                                                                <option value="Set">Set</option>
+                                                             </select>
+                                                            <p class="error unit_error"></p>
                                                         </div>
                                                     </div>
 

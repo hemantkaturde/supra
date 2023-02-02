@@ -1233,7 +1233,7 @@ class Admin_model extends CI_Model
     public function fetchALLitemList(){
 
         $this->db->select('*');
-        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
         // $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_BUYER_PO_MASTER_ITEM.'.pre_buyer_name','left');
         $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id IS NULL');
         $this->db->order_by(TBL_BUYER_PO_MASTER_ITEM.'.id','desc');
@@ -1289,7 +1289,7 @@ class Admin_model extends CI_Model
 
     public function fetchALLBuyeritemList($buyerpoid){
         $this->db->select('*');
-        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
         $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id',$buyerpoid);
         $query = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
         $data = $query->result_array();

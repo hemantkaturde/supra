@@ -1558,8 +1558,8 @@
 			   var qty =   $('#qty').val();
 			   var rate =   $('#rate').val();
 			   var value =   $('#value').val();
-
-
+			   var unit =   $('#unit').val();
+			   
 			   var sales_order_number =   $('#sales_order_number').val();
 			   var date =   $('#date').val();
 			   var buyer_po_number =   $('#buyer_po_number').val();
@@ -1573,7 +1573,7 @@
 				url : "<?php echo base_url();?>addbuyeritem",
 				type: "POST",
 				 //data : formData,
-				 data :{part_number:part_number,description:description,qty:qty,rate:rate,value:value,buyer_po_number:buyer_po_number,date:date,buyer_po_date:buyer_po_date,buyer_name:buyer_name,currency:currency,delivery_date:delivery_date,remark:remark},
+				 data :{part_number:part_number,description:description,qty:qty,rate:rate,value:value,buyer_po_number:buyer_po_number,date:date,buyer_po_date:buyer_po_date,buyer_name:buyer_name,currency:currency,delivery_date:delivery_date,remark:remark,unit:unit},
 				// method: "POST",
                 // data :{package_id:package_id},
                 cache:false,
@@ -1716,7 +1716,7 @@
 			var part_number = $('#part_number').val();
 			
 			$.ajax({
-				url : "<?php echo ADMIN_PATH;?>getPartnumberByid",
+				url : "<?php echo ADMIN_PATH;?>getfinishedgoodsPartnumberByid",
 				type: "POST",
 				data : {'part_number' : part_number},
 				success: function(data, textStatus, jqXHR)
@@ -1728,7 +1728,9 @@
 					}
 					else
 					{
-						$('#description').val(data);
+						var data_row_material = jQuery.parseJSON( data );
+
+						$('#description').val(data_row_material.name);
 					}
 				},
 				error: function (jqXHR, textStatus, errorThrown)
