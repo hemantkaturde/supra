@@ -34,8 +34,8 @@
                                         <th>Supplier Name</th>
                                         <th>Buyer Name</th>
                                         <th>Vendor Name</th>
-                                        <th>Quatation Ref Number</th>
-                                        <th>Quatation Date</th>
+                                        <th>Quotation Ref Number</th>
+                                        <th>Quotation Date</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>

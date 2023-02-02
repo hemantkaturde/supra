@@ -2572,14 +2572,14 @@ class Admin extends BaseController
             $this->load->library('table');
             
             // set heading
-            $this->table->set_heading('Part Number', 'Description', 'Order Qty', 'Rate','Value');
+            $this->table->set_heading('Part Number', 'Description', 'Order Qty','Unit', 'Rate','Value');
 
             // set template
             $style = array('table_open'  => '<table style="width: 70% !important; max-width: 100%;margin-bottom: 20px;" class="table">');
 
             $this->table->set_template($style);
 
-            $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_BUYER_PO_MASTER_ITEM.'.description,'.TBL_BUYER_PO_MASTER_ITEM.'.order_oty,'.TBL_BUYER_PO_MASTER_ITEM.'.rate,'.TBL_BUYER_PO_MASTER_ITEM.'.value');
+            $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_BUYER_PO_MASTER_ITEM.'.description,'.TBL_BUYER_PO_MASTER_ITEM.'.order_oty,'.TBL_BUYER_PO_MASTER_ITEM.'.unit,'.TBL_BUYER_PO_MASTER_ITEM.'.rate,'.TBL_BUYER_PO_MASTER_ITEM.'.value');
             $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
             $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id',$buyer_po_number);
             $query_result = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
