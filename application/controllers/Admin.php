@@ -2824,6 +2824,7 @@ class Admin extends BaseController
             $this->form_validation->set_rules('vendor_qty','Vendor qty','trim');
             $this->form_validation->set_rules('unit','Unit','trim');
             $this->form_validation->set_rules('item_remark','Item Remark','trim');
+            $this->form_validation->set_rules('rm_type','rm_type','trim');
         
             if($this->form_validation->run() == FALSE)
             {
@@ -2839,6 +2840,7 @@ class Admin extends BaseController
                     'rate'  => trim($this->input->post('rate')),
                     'value' =>   trim($this->input->post('value')),
                     'vendor_qty' =>   trim($this->input->post('vendor_qty')),
+                    'rm_type' =>trim($this->input->post('rm_type')),
                     'unit' =>   trim($this->input->post('unit')),
                     'item_remark' =>   trim($this->input->post('item_remark')),
                     'pre_date'=>trim($this->input->post('date')),

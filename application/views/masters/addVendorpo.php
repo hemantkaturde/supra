@@ -207,6 +207,7 @@
                                                         <th>Sr No.</th>
                                                         <th>Part Number</th>
                                                         <th>Description</th>
+                                                        <th>RM Type</th>
                                                         <th>Vendor  Qty</th>
                                                         <th>Order Qty</th>
                                                         <th>Unit</th>
@@ -225,6 +226,7 @@
                                                         <td><?php echo $count;?></td>
                                                         <td><?php echo $value['part_number'];?></td>
                                                         <td><?php echo $value['description'];?></td>
+                                                        <td><?php echo $value['rm_type'];?></td>
                                                         <td><?php echo $value['vendor_qty'];?></td>
                                                         <td><?php echo $value['order_oty'];?></td>
                                                         <td><?php echo $value['unit'];?></td>
@@ -346,10 +348,18 @@
                                                     </div>                                        
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Vendor Quantity</label>
+                                                        <label class="col-sm-3 col-form-label">Supplier Quantity</label>
                                                         <div class="col-sm-9">
                                                             <input type="number" class="form-control"  id="vendor_qty" name="vendor_qty">
                                                             <p class="error vendor_qty_error"></p>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-3 col-form-label">Rm Type</label>
+                                                        <div class="col-sm-9">
+                                                            <input type="number" class="form-control"  id="rm_type" name="rm_type">
+                                                            <p class="error rm_type_error"></p>
                                                         </div>
                                                     </div>
 
