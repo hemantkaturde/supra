@@ -157,7 +157,9 @@
                                                         <th>Sr No.</th>
                                                         <th>Part Number</th>
                                                         <th>Description</th>
+                                                        <th>RM Type</th>
                                                         <th>Order Qty</th>
+                                                        <th>Unit</th>
                                                         <th>Rate</th>
                                                         <th>Value</th>
                                                         <!-- <th>Action</th> -->
@@ -173,7 +175,9 @@
                                                         <td><?php echo $count;?></td>
                                                         <td><?php echo $value['part_number'];?></td>
                                                         <td><?php echo $value['description'];?></td>
+                                                        <td><?php echo $value['rm_type'];?></td>
                                                         <td><?php echo $value['order_oty'];?></td>
+                                                        <td><?php echo $value['unit'];?></td>
                                                         <td><?php echo $value['rate'];?></td>
                                                         <td><?php echo $value['value'];?></td>
                                                         <!-- <td>
