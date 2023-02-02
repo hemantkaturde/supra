@@ -2909,9 +2909,19 @@ class Admin extends BaseController
     }
 
 
-    public function viewVendorpo(){
+    public function viewVendorpo($vendorpoid){
 
-        
+            $process = 'View Vendor PO';
+            $processFunction = 'Admin/viewSupplierpo';
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Vendor PO View';
+            $data['supplierList']= $this->admin_model->fetchALLsupplierList();
+            $data['buyerList']= $this->admin_model->fetchAllbuyerList();
+            $data['vendorList']= $this->admin_model->fetchALLvendorList();
+            $data['getVendorpodetails']= $this->admin_model->getVendorpodetails($vendorpoid);
+            $data['fetchALLVendoritemlistforview']= $this->admin_model->fetchALLVendoritemlistforview($vendorpoid);
+            $this->loadViews("masters/viewVendorpo", $this->global, $data, NULL);
+
     }
 
 

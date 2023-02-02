@@ -135,6 +135,13 @@ $route['addVendoritem'] = "admin/addVendoritem";
 $route['deleteVendorpo'] = "admin/deleteVendorpo";
 $route['deleteVendorpoitem'] = "admin/deleteVendorpoitem";
 $route['viewVendorpo/(:any)'] = "admin/viewVendorpo/$1";
+$route['viewVendorpo'] = "admin/viewVendorpo";
+
+
+$route['addbuyerpoconfirmation'] = "admin/addbuyerpoconfirmation";
+
+
+
 
 
 
