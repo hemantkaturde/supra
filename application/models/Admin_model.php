@@ -1490,7 +1490,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['quatation_date'] = $value['quatation_date'];
                 $data[$counter]['action'] = '';
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewSupplierpo/".$value['id']."' style='cursor: pointer;'><i style='font-size: large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
-                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['id']."' class='fa fa-trash-o deleteSupplierpo' aria-hidden='true'></i>"; 
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['id']."' class='fa fa-trash-o deleteVendorpo' aria-hidden='true'></i>"; 
                 $counter++; 
             }
         }
@@ -1499,6 +1499,132 @@ class Admin_model extends CI_Model
         
     }
 
+    public function checkIfexitsvendorrpo($po_number){
+
+        $this->db->select('*');
+        $this->db->where(TBL_VENDOR_PO_MASTER.'.po_number', $po_number);
+        $this->db->where(TBL_VENDOR_PO_MASTER.'.status', 1);
+        $query = $this->db->get(TBL_VENDOR_PO_MASTER);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+    }
+
+    public function saveVensorpodata($id,$data){
+        if($id != '') {
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_VENDOR_PO_MASTER, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_VENDOR_PO_MASTER, $data)) {
+                return $this->db->insert_id();;
+            } else {
+                return FALSE;
+            }
+        }
+
+    }
+
+    public function update_last_inserted_id_vendor_po($last_inserted_id){
+        $data = array(
+            'vendor_po_id' => $last_inserted_id
+        );
+        $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id IS NULL');
+        if($this->db->update(TBL_VENDOR_PO_MASTER_ITEM,$data)){
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+    }
+
+    public function fetchALLFinishgoodList(){
+        $this->db->select('*');
+        $this->db->where(TBL_FINISHED_GOODS.'.status', 1);
+        $query = $this->db->get(TBL_FINISHED_GOODS);
+        $data = $query->result_array();
+        return $data;
+    }
+
+    public function getfinishedgoodsPartnumberByid($part_number){
+        $this->db->select('*');
+        $this->db->where(TBL_FINISHED_GOODS.'.status',1);
+        $this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
+        $query = $this->db->get(TBL_FINISHED_GOODS);
+        $data = $query->result_array();
+        return $data;
+
+    }
+
+    
+    public function saveVendorpoitemdata($id,$data){
+
+        if($id != '') {
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_VENDOR_PO_MASTER_ITEM, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_VENDOR_PO_MASTER_ITEM, $data)) {
+                return $this->db->insert_id();;
+            } else {
+                return FALSE;
+            }
+        }
+
+    }
+
+
+    public function getPreviousvendorPONumber(){
+
+        $this->db->select('po_number');
+        $this->db->where(TBL_VENDOR_PO_MASTER.'.status', 1);
+        $this->db->limit(1);
+        $this->db->order_by(TBL_VENDOR_PO_MASTER.'.id','DESC');
+        $query = $this->db->get(TBL_VENDOR_PO_MASTER);
+        $rowcount = $query->result_array();
+        return $rowcount;
+    }
+
+
+    public function fetchALLpreVendoritemList(){
+
+        $this->db->select('*');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
+        // $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_BUYER_PO_MASTER_ITEM.'.pre_buyer_name','left');
+        $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id IS NULL');
+        $this->db->order_by(TBL_VENDOR_PO_MASTER_ITEM.'.id','desc');
+        $query = $this->db->get(TBL_VENDOR_PO_MASTER_ITEM);
+        $data = $query->result_array();
+        return $data;
+
+    }
+
+    public function deleteVendorpo($id){
+
+        $this->db->where('id', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_VENDOR_PO_MASTER)){
+           return TRUE;
+        }else{
+           return FALSE;
+        }
+
+    }
+
+    public function deleteVendorpoitem($id){
+        $this->db->where('id', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_VENDOR_PO_MASTER_ITEM)){
+           return TRUE;
+        }else{
+           return FALSE;
+        }
+
+    }
 
 }
 

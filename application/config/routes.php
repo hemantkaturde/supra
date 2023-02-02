@@ -130,6 +130,12 @@ $route['addbuyerpoconfirmation'] = "admin/addbuyerpoconfirmation";
 $route['vendorpo'] = "admin/vendorpo";
 $route['fetchVendorpolist'] = "admin/fetchVendorpolist";
 $route['addnewVendorpo'] = "admin/addnewVendorpo";
+$route['getfinishedgoodsPartnumberByid'] = "admin/getfinishedgoodsPartnumberByid";
+$route['addVendoritem'] = "admin/addVendoritem";
+$route['deleteVendorpo'] = "admin/deleteVendorpo";
+$route['deleteVendorpoitem'] = "admin/deleteVendorpoitem";
+$route['viewVendorpo/(:any)'] = "admin/viewVendorpo/$1";
+
 
 
 
