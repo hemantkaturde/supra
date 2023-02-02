@@ -265,7 +265,13 @@
                             <!-- /.box-body -->
                             <div class="box-footer">
                                 <div class="col-xs-8">
-                                    <input type="submit" id="savenewbuyerpo" class="btn btn-primary" value="Submit" />
+                                    <?php if($fetchALLitemList){
+                                        $disabled= '';
+                                    }else{ 
+                                        $disabled= 'disabled';
+                                     } ?>
+
+                                    <input type="submit" id="savenewbuyerpo" class="btn btn-primary" value="Submit"   <?=$disabled;?>/>
                                     <input type="button" onclick="location.href = '<?php echo base_url() ?>buyerpo'" class="btn btn-default" value="Back" />
                                 </div>
                             </div>
