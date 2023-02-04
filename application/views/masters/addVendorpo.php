@@ -384,7 +384,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-3 col-form-label">Rm Type</label>
                                                         <div class="col-sm-9">
-                                                            <input type="text" class="form-control"  id="rm_type" name="rm_type">
+                                                            <input type="text" class="form-control"  id="rm_type" name="rm_type" readonly>
                                                             <p class="error rm_type_error"></p>
                                                         </div>
                                                     </div>

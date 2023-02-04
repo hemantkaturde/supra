@@ -2484,6 +2484,7 @@
 						$('#qty').val('');
 						$('#vendor_qty').val('');
 						$('#unit').val('');
+						$('#rm_type').val('');
 
 					}
 					else
@@ -2500,6 +2501,7 @@
 						$('#qty').val(data_row_material.order_oty);
 						$('#vendor_qty').val(data_row_material.vendor_qty);
 						$('#unit').val(data_row_material.unit);
+						$('#rm_type').val(data_row_material.type_of_raw_material);
 						
 
 					}
@@ -2517,6 +2519,7 @@
 						$('#qty').val('');
 						$('#vendor_qty').val('');
 						$('#unit').val('');
+						$('#rm_type').val('');
 					//$(".loader_ajax").hide();
 				}
 			});
