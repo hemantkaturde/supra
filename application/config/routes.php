@@ -142,6 +142,8 @@ $route['fetchBuyerpoconfirmationlist'] = "admin/fetchBuyerpoconfirmationlist";
 $route['getSupplierPonumberbySupplierid'] = "admin/getSupplierPonumberbySupplierid";
 $route['getSupplierItemsforDisplay'] = "admin/getSupplierItemsforDisplay";
 
+$route['getSuppliritemonly'] = "admin/getSuppliritemonly";
+
 
 
 

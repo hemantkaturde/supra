@@ -3028,5 +3028,26 @@ class Admin extends BaseController
        }
     }
 
+    public function getSuppliritemonly(){
+
+        $supplier_po_number=$this->input->post('supplier_po_number');
+
+        if($supplier_po_number) {
+			$getSupplieritemsonly = $this->admin_model->getSupplieritemsonly($supplier_po_number);
+			if(count($getSupplieritemsonly) >= 1) {
+                $content = $content.'<option value="">Select Part Number</option>';
+				foreach($getSupplieritemsonly as $value) {
+					$content = $content.'<option value="'.$value["fin_id"].'">'.$value["part_number"].'</option>';
+				}
+				echo $content;
+			} else {
+				echo 'failure';
+			}
+		} else {
+			echo 'failure';
+		}
+
+    }
+
 
 }

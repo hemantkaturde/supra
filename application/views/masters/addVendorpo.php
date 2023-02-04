@@ -88,7 +88,7 @@
                                     <div class="col-md-12 supplier_po_number_div" style="display:<?=$display;?>">
                                             <div class="form-group">
                                                     <label for="supplier_po_number">Select Supplier PO Number <span class="required">*</span></label>
-                                                    <select class="form-control" name="supplier_po_number" id="supplier_po_number">
+                                                    <select class="form-control supplier_po_number_for_item" name="supplier_po_number" id="supplier_po_number">
                                                     <option st-id="" value="<?=$fetchALLpreVendoritemList[0]['pre_supplier_po_number']?>" selected ><?=$selected_value_supplier_po;?></option>
                                                     </select> 
                                                 <p class="error supplier_po_number_error"></p>
@@ -296,9 +296,9 @@
                                                         <div class="col-sm-9">
                                                             <select class="form-control" name="part_number" id="part_number">
                                                                 <option st-id="" value="">Select Part Number</option>
-                                                                <?php foreach ($finishgoodList as $key => $value) {?>        
+                                                                <!-- <?php foreach ($finishgoodList as $key => $value) {?>        
                                                                     <option value="<?php echo $value['fin_id']; ?>"><?php echo $value['part_number']; ?></option>
-                                                                <?php } ?>
+                                                                <?php } ?> -->
                                                             </select>
                                                             <p class="error part_number_error"></p>
 
