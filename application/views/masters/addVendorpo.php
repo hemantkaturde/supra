@@ -150,7 +150,7 @@
                                    
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="quatation_ref_no">Quotation Ref No. <span class="required">*</span></label>
+                                            <label for="quatation_ref_no">Quotation Ref No.</label>
                                             <input type="text" class="form-control" id="quatation_ref_no" value="<?=$fetchALLpreVendoritemList[0]['pre_quatation_ref_number'];?>" name="quatation_ref_no" >
                                             <p class="error quatation_ref_no_error"></p>
                                         </div>
@@ -164,7 +164,7 @@
 
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="quatation_date">Quotation Date <span class="required">*</span></label>
+                                            <label for="quatation_date">Quotation Date </label>
                                             <input type="text" class="form-control datepicker" value="<?=$buyer_po_date;?>" id="quatation_date" name="quatation_date" required>
                                             <p class="error quatation_date_error"></p>
                                         </div>

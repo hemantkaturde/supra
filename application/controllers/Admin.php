@@ -2216,8 +2216,8 @@ class Admin extends BaseController
             $this->form_validation->set_rules('buyer_name','Buyer Name','trim|required');
             $this->form_validation->set_rules('buyer_po_number','Buyer PO Number','trim');
             $this->form_validation->set_rules('vendor_name','Vendor Name','trim|required');
-            $this->form_validation->set_rules('quatation_ref_no','Quatation Ref No','trim|required');
-            $this->form_validation->set_rules('quatation_date','Quatation Date','trim|required');
+            $this->form_validation->set_rules('quatation_ref_no','Quatation Ref No','trim');
+            $this->form_validation->set_rules('quatation_date','Quatation Date','trim');
             $this->form_validation->set_rules('delivery_date','Delivery Date','trim|required');
             $this->form_validation->set_rules('delivery','Delivery','trim');
             $this->form_validation->set_rules('delivery_address','Delivery Address','trim');
@@ -2545,8 +2545,8 @@ class Admin extends BaseController
 		if($this->input->post('buyer_name')) {
 			$getAllponumber = $this->admin_model->getAllBuyerpoNUmber($this->input->post('buyer_name'));
 			if(count($getAllponumber) >= 1) {
+                $content = $content.'<option value="">Select Buyer Number</option>';
 				foreach($getAllponumber as $value) {
-                    $content = $content.'<option value="">Select Buyer Number</option>';
 					$content = $content.'<option value="'.$value["id"].'">'.$value["sales_order_number"].'</option>';
 				}
 				echo $content;
@@ -2597,14 +2597,12 @@ class Admin extends BaseController
     }
 
     public function getBuyerItemsforDisplayBybuyerid(){
-
         $buyer_po_id=$this->input->post('buyer_po_id');
-
         if($buyer_po_id) {
 			$getbuyerdetails = $this->admin_model->getBuyerDeatilsbyid($buyer_po_id);
 			if(count($getbuyerdetails) >= 1) {
+                $content = $content.'<option value="">Select Buyer PO Number</option>';
 				foreach($getbuyerdetails as $value) {
-                    // $content = $content.'<option value="">Select Buyer PO Number</option>';
 					$content = $content.'<option value="'.$value["id"].'">'.$value["sales_order_number"].'</option>';
 				}
 				echo $content;
@@ -2614,7 +2612,6 @@ class Admin extends BaseController
 		} else {
 			echo 'failure';
 		}
-
     }
 
 
@@ -2666,8 +2663,8 @@ class Admin extends BaseController
                 $this->form_validation->set_rules('supplier_po_number','Supplier PO Number','trim|required');
                 $this->form_validation->set_rules('vendor_name','Vendor Name','trim|required');
                 $this->form_validation->set_rules('buyer_po_number','Buyer PO Number','trim|required');
-                $this->form_validation->set_rules('quatation_ref_no','Quatation Ref No','trim|required');
-                $this->form_validation->set_rules('quatation_date','Quatation Date','trim|required');
+                $this->form_validation->set_rules('quatation_ref_no','Quatation Ref No','trim');
+                $this->form_validation->set_rules('quatation_date','Quatation Date','trim');
                 $this->form_validation->set_rules('delivery_date','Delivery Date','trim|required');
                 $this->form_validation->set_rules('delivery','Delivery','trim');
                 $this->form_validation->set_rules('delivery_address','Delivery Address','trim');
@@ -2973,8 +2970,8 @@ class Admin extends BaseController
         if($supplier_name) {
 			$getSupplierdetails = $this->admin_model->getSupplierDeatilsbyid($supplier_name);
 			if(count($getSupplierdetails) >= 1) {
+                $content = $content.'<option value="">Select Supplier PO Number</option>';
 				foreach($getSupplierdetails as $value) {
-                    $content = $content.'<option value="">Select Buyer PO Number</option>';
 					$content = $content.'<option value="'.$value["id"].'">'.$value["po_number"].'</option>';
 				}
 				echo $content;

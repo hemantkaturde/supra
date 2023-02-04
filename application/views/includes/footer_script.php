@@ -2121,7 +2121,7 @@
 					}
 					else
 					{
-						// $('#buyer_po_number').html('<option value="">Select Buyer PO Number</option>');
+						//$('#buyer_po_number').html('<option value="">Select Buyer PO Number</option>');
 						//$('#buyer_po_number').html(data);
 						$("#customers-list").html(data);
 
@@ -2129,7 +2129,7 @@
 				},
 				error: function (jqXHR, textStatus, errorThrown)
 				{
-					//$('#buyer_po_number').html();
+					$('#buyer_po_number').html();
 					//$(".loader_ajax").hide();
 				}
 			});
@@ -2481,6 +2481,8 @@
 						$('#drawing_number').val('');
 						$('#description_1').val('');
 						$('#description_2').val('');
+						$('#qty').val('');
+						$('#vendor_qty').val('');
 
 					}
 					else
@@ -2494,7 +2496,8 @@
 						$('#drawing_number').val(data_row_material.drawing_number);
 						$('#description_1').val(data_row_material.description_1);
 						$('#description_2').val(data_row_material.description_2);
-
+						$('#qty').val(data_row_material.order_oty);
+						$('#vendor_qty').val(data_row_material.vendor_qty);
 
 					}
 				},
@@ -2508,6 +2511,8 @@
 						$('#drawing_number').val('');
 						$('#description_1').val('');
 						$('#description_2').val('');
+						$('#qty').val('');
+						$('#vendor_qty').val('');
 					//$(".loader_ajax").hide();
 				}
 			});
@@ -2729,7 +2734,6 @@
 			});
 			return false;
 		});
-
 
 		$(document).on('change','#supplier_po_number',function(e){  
 			e.preventDefault();
