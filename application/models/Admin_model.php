@@ -1637,7 +1637,6 @@ class Admin_model extends CI_Model
 
     }
 
-
     public function fetchALLVendoritemlistforview($vendorpoid){
         $this->db->select('*');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
@@ -1647,6 +1646,104 @@ class Admin_model extends CI_Model
         return $data;
 
     }
+
+    public function getBuyerpoconfirmationCount($params){
+
+        $this->db->select('*');
+        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id  = '.TBL_SUPPLIER_PO_CONFIRMATION.'.buyer_po_id');
+        $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id  = '.TBL_SUPPLIER_PO_CONFIRMATION.'.supplier_po_id');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_SUPPLIER_PO_CONFIRMATION.".po_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER_PO_CONFIRMATION.".date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER.".supplier_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER_PO_CONFIRMATION.".confirmed_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER_PO_CONFIRMATION.".po_confirmed LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER_PO_CONFIRMATION.".quatation_ref_no LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_SUPPLIER_PO_CONFIRMATION.'.status', 1);
+        $query = $this->db->get(TBL_SUPPLIER_PO_CONFIRMATION);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+
+    }
+    
+    public function getBuyerpoconfirmationdata($params){
+
+        $this->db->select('*,'.TBL_SUPPLIER.'.supplier_name as sup_name');
+        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id  = '.TBL_SUPPLIER_PO_CONFIRMATION.'.buyer_po_id');
+        $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id  = '.TBL_SUPPLIER_PO_CONFIRMATION.'.supplier_po_id');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_SUPPLIER_PO_CONFIRMATION.".po_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER_PO_CONFIRMATION.".date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER.".supplier_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER_PO_CONFIRMATION.".confirmed_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER_PO_CONFIRMATION.".po_confirmed LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER_PO_CONFIRMATION.".quatation_ref_no LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_SUPPLIER_PO_CONFIRMATION.'.status', 1);
+        $this->db->limit($params['length'],$params['start']);
+        $this->db->order_by(TBL_SUPPLIER_PO_CONFIRMATION.'.id','DESC');
+        $query = $this->db->get(TBL_SUPPLIER_PO_CONFIRMATION);
+        $fetch_result = $query->result_array();
+
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['po_number'] = $value['po_number'];
+                $data[$counter]['date'] = $value['date'];
+                $data[$counter]['sup_name'] = $value['sup_name'];
+                $data[$counter]['buyer_name'] = $value['buyer_name'];
+                $data[$counter]['po_confirmed'] = $value['po_confirmed'];
+                $data[$counter]['confirmed_date'] = $value['confirmed_date'];
+                $data[$counter]['confirm_with'] = $value['confirm_with'];
+                $data[$counter]['action'] = '';
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewVendorpo/".$value['id']."' style='cursor: pointer;'><i style='font-size: large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['id']."' class='fa fa-trash-o deleteVendorpo' aria-hidden='true'></i>"; 
+                $counter++; 
+            }
+        }
+
+        return $data;
+        
+    }
+
+
+    public function getSupplierDeatilsbyid($supplier_name){
+
+        $this->db->select('*');
+		$this->db->where('supplier_name', $supplier_name);
+        $this->db->where('status', 1);
+
+        $query_result = $this->db->get(TBL_SUPPLIER_PO_MASTER)->result_array();
+		
+		foreach($query_result as $key => $value) {
+			$query_result[$key]['selected'] = '';
+		}
+		
+        return $query_result;
+
+    }
+
+    public function getPreviousSupplierPoNumber(){
+
+        $this->db->select('po_number');
+        $this->db->where(TBL_SUPPLIER_PO_CONFIRMATION.'.status', 1);
+        $this->db->limit(1);
+        $this->db->order_by(TBL_SUPPLIER_PO_CONFIRMATION.'.id','DESC');
+        $query = $this->db->get(TBL_SUPPLIER_PO_CONFIRMATION);
+        $rowcount = $query->result_array();
+        return $rowcount;
+
+
+    }
+
 
 }
 

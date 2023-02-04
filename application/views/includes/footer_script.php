@@ -2209,7 +2209,6 @@
 			return false;
 		});
 
-
     </script>
 <?php } ?>
 
@@ -2516,6 +2515,7 @@
 
 			   var date =   $('#date').val();
 			   var supplier_name =   $('#supplier_name').val();
+			   var supplier_po_number =   $('#supplier_po_number').val();
 			   var buyer_name =   $('#buyer_name').val();
 			   var buyer_po_number =   $('#buyer_po_number').val();
 			   var vendor_name =   $('#vendor_name').val();
@@ -2532,7 +2532,7 @@
 				url : "<?php echo base_url();?>addVendoritem",
 				type: "POST",
 				 //data : formData,
-				 data :{part_number:part_number,description:description,qty:qty,rate:rate,value:value,date:date,supplier_name:supplier_name,buyer_name:buyer_name,vendor_name:vendor_name,quatation_ref_no:quatation_ref_no,quatation_date:quatation_date,delivery_date:delivery_date,delivery:delivery,delivery_address:delivery_address,work_order:work_order,remark:remark,buyer_po_number:buyer_po_number,vendor_qty:vendor_qty,unit:unit,item_remark:item_remark,rm_type:rm_type},
+				 data :{part_number:part_number,description:description,qty:qty,rate:rate,value:value,date:date,supplier_name:supplier_name,buyer_name:buyer_name,vendor_name:vendor_name,quatation_ref_no:quatation_ref_no,quatation_date:quatation_date,delivery_date:delivery_date,delivery:delivery,delivery_address:delivery_address,work_order:work_order,remark:remark,buyer_po_number:buyer_po_number,vendor_qty:vendor_qty,unit:unit,item_remark:item_remark,rm_type:rm_type,supplier_po_number:supplier_po_number},
 				// method: "POST",
                 // data :{package_id:package_id},
                 cache:false,
@@ -2567,7 +2567,6 @@
 			});
 			return false;
 	    });
-
 
 		$(document).on('click','.deleteVendorpo',function(e){
 			var elemF = $(this);
@@ -2617,7 +2616,6 @@
 			});
 		});
 
-
 		$(document).on('click','.deleteVendorpoitem',function(e){
 			var elemF = $(this);
 			e.preventDefault();
@@ -2666,10 +2664,224 @@
 			});
 		});
 
+		$(document).on('change','#supplier_name',function(e){  
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			// $("#customers-list").html('');
+			var supplier_name = $('#supplier_name').val();
+		    $('.supplier_po_number_div').css('display','block');
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getSupplierPonumberbySupplierid",
+				type: "POST",
+				data : {'supplier_name' : supplier_name},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#supplier_po_number').html('<option value="">Select Supplier PO Number</option>');
+					}
+					else
+					{
+						// $('#supplier_po_number').html('<option value="">Select supplier PO Number</option>');
+						$('#supplier_po_number').html(data);
 
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#supplier_po_number').html();
+					//$(".loader_ajax").hide();
+				}
+			});
+			return false;
+		});
+
+
+		$(document).on('change','#supplier_po_number',function(e){  
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			var supplier_po_number = $('#supplier_po_number').val();
+			$("#supplier_po_item_list").html('');
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getSupplierItemsforDisplay",
+				type: "POST",
+				data : {'supplier_po_number' : supplier_po_number},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						//$('#buyer_po_number').html('<option value="">Select Buyer PO Number</option>');
+					}
+					else
+					{
+						// $('#buyer_po_number').html('<option value="">Select Buyer PO Number</option>');
+						//$('#buyer_po_number').html(data);
+						$("#supplier_po_item_list").html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#supplier_po_item_list').html();
+					//$(".loader_ajax").hide();
+				}
+			});
+			return false;
+		});
 
     </script>
 <?php } ?>
 
+
+<?php  if($pageTitle=='Supplier PO Confirmation' || $pageTitle=='Add Supplier PO Confirmation'){ ?>
+	<script type="text/javascript">
+			$(document).ready(function() {
+            var dt = $('#view_supplierpoconfirmation').DataTable({
+	            "columnDefs": [ 
+	                 { className: "details-control", "targets": [ 0 ] },
+	                 { "width": "10%", "targets": 0 },
+	                 { "width": "10%", "targets": 1 },
+					 { "width": "15%", "targets": 2 },
+	                 { "width": "10%", "targets": 3 },
+					 { "width": "15%", "targets": 4 },
+	                 { "width": "10%", "targets": 5 },
+					 { "width": "10%", "targets": 6 },
+					 { "width": "10%", "targets": 7 },
+					
+	            ],
+	            responsive: true,
+	            "oLanguage": {
+	                "sEmptyTable": "<i>No Supplier PO Confirmation List Found.</i>",
+	            }, 
+	            "bSort" : false,
+	            "bFilter":true,
+	            "bLengthChange": true,
+	            "iDisplayLength": 10,   
+	            "bProcessing": true,
+	            "serverSide": true,
+	            "ajax":{
+                    url :"<?php echo base_url();?>fetchBuyerpoconfirmationlist",
+                    type: "post",
+	            },
+	        });
+	    });
+
+
+		$(document).on('change','#supplier_name',function(e){  
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			// $("#customers-list").html('');
+			var supplier_name = $('#supplier_name').val();
+		    $('.supplier_po_number_div').css('display','block');
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getSupplierPonumberbySupplierid",
+				type: "POST",
+				data : {'supplier_name' : supplier_name},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#supplier_po_number').html('<option value="">Select Supplier PO Number</option>');
+					}
+					else
+					{
+						// $('#supplier_po_number').html('<option value="">Select supplier PO Number</option>');
+						$('#supplier_po_number').html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#supplier_po_number').html();
+					//$(".loader_ajax").hide();
+				}
+			});
+			return false;
+		});
+
+		$(document).on('change','#buyer_name',function(e){  
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			$("#customers-list").html('');
+			var buyer_name = $('#buyer_name').val();
+		    $('.buyer_po_number_div').css('display','block');
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getBuyerPonumberbyBuyerid",
+				type: "POST",
+				data : {'buyer_name' : buyer_name},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#buyer_po_number').html('<option value="">Select Buyer PO Number</option>');
+					}
+					else
+					{
+						// $('#buyer_po_number').html('<option value="">Select Buyer PO Number</option>');
+						$('#buyer_po_number').html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#buyer_po_number').html();
+					//$(".loader_ajax").hide();
+				}
+			});
+			return false;
+		});
+
+		$(document).on('click','#savenewsupplierconfrimationpo',function(e){
+			e.preventDefault();
+			$(".loader_ajax").show();
+			var formData = new FormData($("#addnnewsupplierconfrimationpoform")[0]);
+
+			$.ajax({
+				url : "<?php echo base_url();?>addSupplierpoconfirmation",
+				type: "POST",
+				data : formData,
+				cache: false,
+		        contentType: false,
+		        processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+						$(".loader_ajax").hide();
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						swal({
+							title: "Success",
+							text: "Supplier PO Confirmation Successfully Added!",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+								window.location.href = "<?php echo base_url().'supplierpoconfirmation'?>";
+						});		
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			});
+			return false;
+	    });
+
+
+
+    </script>
+<?php } ?>
 
 
