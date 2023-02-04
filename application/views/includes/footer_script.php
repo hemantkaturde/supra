@@ -2463,19 +2463,6 @@
 			
 			//$(".loader_ajax").show();
 			var part_number = $('#part_number').val();
-
-			            $('#description').value('');
-						$('#HSN_Code').val('');
-						$('#gross_weight').val('');
-						$('#net_weight').val('');
-						$('#SAC').val('');
-						$('#drawing_number').val('');
-						$('#description_1').val('');
-						$('#description_2').val('');
-						$('#qty').val('');
-						$('#vendor_qty').val('');
-						$('#unit').val('');
-						$('#rm_type').val('');
 			
 			$.ajax({
 				url : "<?php echo ADMIN_PATH;?>getfinishedgoodsPartnumberByid",
