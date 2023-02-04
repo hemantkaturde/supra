@@ -72,21 +72,24 @@
                                     </div>
 
                                    
-                                    <?php if($fetchALLpresupplieritemList[0]['pre_supplier_po_number']){
+
+                                    <?php 
+                                    if($fetchALLpreVendoritemList[0]['pre_supplier_po_number']){
                                         $display='block';
-                                        $selected_value = $fetchALLpresupplieritemList[0]['pre_supplier_po_number'];
+                                        $selected_value_supplier_po = $fetchALLpreVendoritemList[0]['pre_supplier_po_number'];
 
                                     }else{
                                         $display='none';
-                                        $selected_value = 'Select Supplier PO Number';
-                                    } ?>
+                                        $selected_value_supplier_po = 'Select Supplier PO Number';
+                                    } 
+                                    ?>
 
 
                                     <div class="col-md-12 supplier_po_number_div" style="display:<?=$display;?>">
                                             <div class="form-group">
                                                     <label for="supplier_po_number">Select Supplier PO Number <span class="required">*</span></label>
                                                     <select class="form-control" name="supplier_po_number" id="supplier_po_number">
-                                                    <option st-id="" value="<?=$fetchALLpresupplieritemList[0]['pre_supplier_po_number']?>" selected ><?=$selected_value;?></option>
+                                                    <option st-id="" value="<?=$fetchALLpreVendoritemList[0]['pre_supplier_po_number']?>" selected ><?=$selected_value_supplier_po;?></option>
                                                     </select> 
                                                 <p class="error supplier_po_number_error"></p>
                                             </div>

@@ -2722,6 +2722,7 @@ class Admin extends BaseController
                 $data['vendorList']= $this->admin_model->fetchALLvendorList();
                 $data['getPreviousPONumber']= $this->admin_model->getPreviousvendorPONumber()[0];
                 $data['fetchALLpreVendoritemList']= $this->admin_model->fetchALLpreVendoritemList();
+
                 $this->logrecord($process,$processFunction);
                 $this->global['pageTitle'] = 'Add Vendor PO';
                 $this->loadViews("masters/addVendorpo", $this->global, $data, NULL);
