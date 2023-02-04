@@ -2731,8 +2731,15 @@ class Admin extends BaseController
 
             if($this->input->post('part_number')) {
                 $getPartNameBypartid = $this->admin_model->getfinishedgoodsPartnumberByid($this->input->post('part_number'));
-                $content = $getPartNameBypartid[0];
-                echo json_encode($content);
+
+                if($getPartNameBypartid){
+                    $content = $getPartNameBypartid[0];
+                    echo json_encode($content);
+
+                }else{
+                    echo 'failure';
+                }
+               
             } else {
                 echo 'failure';
             }

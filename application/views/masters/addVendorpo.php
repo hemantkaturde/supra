@@ -400,7 +400,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-3 col-form-label">Unit</label>
                                                         <div class="col-sm-9">
-                                                             <select class="form-control" name="unit" id="unit">
+                                                             <select class="form-control" name="unit" id="unit" readonly>
                                                                 <option value="">Select Part Name</option>
                                                                 <option value="kgs">Kgs</option>
                                                                 <option value="Pcs">Pcs</option>
