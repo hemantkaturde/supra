@@ -2483,6 +2483,7 @@
 						$('#description_2').val('');
 						$('#qty').val('');
 						$('#vendor_qty').val('');
+						$('#unit').val('');
 
 					}
 					else
@@ -2498,6 +2499,8 @@
 						$('#description_2').val(data_row_material.description_2);
 						$('#qty').val(data_row_material.order_oty);
 						$('#vendor_qty').val(data_row_material.vendor_qty);
+						$('#unit').val(data_row_material.unit);
+						
 
 					}
 				},
@@ -2513,6 +2516,7 @@
 						$('#description_2').val('');
 						$('#qty').val('');
 						$('#vendor_qty').val('');
+						$('#unit').val('');
 					//$(".loader_ajax").hide();
 				}
 			});
