@@ -2937,7 +2937,7 @@ class Admin extends BaseController
             $data['supplierList']= $this->admin_model->fetchALLsupplierList();
             $data['rowMaterialList']= $this->admin_model->fetchALLrowMaterialList();
             $data['getPreviousSupplierPoNumber']= $this->admin_model->getPreviousSupplierPoNumber()[0];
-            // $data['fetchALLitemList']= $this->admin_model->fetchALLitemList();
+            // $data['$fetchALLpresupplieritemList']= $this->admin_model->fetchALLitemList();
             $this->logrecord($process,$processFunction);
             $this->global['pageTitle'] = 'Add Supplier PO Confirmation';
             $this->loadViews("masters/addSupplierpoconfirmation", $this->global, $data, NULL);
@@ -3070,7 +3070,6 @@ class Admin extends BaseController
 
     }
 
-
     public function viewSupplierpoconfirmation($supplierpoconfirmationid){
 
         $process = 'View Vendor PO';
@@ -3084,7 +3083,91 @@ class Admin extends BaseController
         $data['fetchALLSupplierPOforview']= $this->admin_model->fetchALLSupplierPOforview($supplierpoconfirmationid);
         $this->loadViews("masters/viewSupplierpoconfirmation", $this->global, $data, NULL);
 
-}
+    }
+
+    public function getRowmaterialPartnumberByid(){
+
+        if($this->input->post('part_number')) {
+            $getPartNameBypartid = $this->admin_model->getRowmaterialPartnumberByid($this->input->post('part_number'));
+
+            if($getPartNameBypartid){
+                $content = $getPartNameBypartid[0];
+                echo json_encode($content);
+
+            }else{
+                echo 'failure';
+            }
+           
+        } else {
+            echo 'failure';
+        }
+    }
+
+
+    public function addSupplierpoConfirmationitem(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $save_supplierpoconfirmationitem_response = array();
+
+            $this->form_validation->set_rules('part_number','Part Number','trim|required');
+            $this->form_validation->set_rules('description','Part Name','trim|required');
+            $this->form_validation->set_rules('qty','Qty','trim|numeric|required');
+            $this->form_validation->set_rules('rate','Rate','trim|required');
+            $this->form_validation->set_rules('value','Value','trim|required');
+            $this->form_validation->set_rules('vendor_qty','Vendor qty','trim');
+            $this->form_validation->set_rules('unit','Unit','trim');
+            $this->form_validation->set_rules('item_remark','Item Remark','trim');
+            $this->form_validation->set_rules('rm_type','rm_type','trim');
+        
+            if($this->form_validation->run() == FALSE)
+            {
+                $save_supplierpoconfirmationitem_response['status'] = 'failure';
+                $save_supplierpoconfirmationitem_response['error'] = array('part_number'=>strip_tags(form_error('part_number')), 'description'=>strip_tags(form_error('description')), 'qty'=>strip_tags(form_error('qty')), 'rate'=>strip_tags(form_error('rate')),'value'=>strip_tags(form_error('value')),'item_remark'=>strip_tags(form_error('item_remark')),'unit'=>strip_tags(form_error('unit')),'vendor_qty'=>strip_tags(form_error('vendor_qty')));
+            }else{
+
+                
+                $data = array(
+                    'part_number_id'   => trim($this->input->post('part_number')),
+                    'description'     => trim($this->input->post('description')),
+                    'order_oty'    => trim($this->input->post('qty')),
+                    'rate'  => trim($this->input->post('rate')),
+                    'value' =>   trim($this->input->post('value')),
+                    'vendor_qty' =>   trim($this->input->post('vendor_qty')),
+                    'rm_type' =>trim($this->input->post('rm_type')),
+                    'unit' =>   trim($this->input->post('unit')),
+                    'item_remark' =>   trim($this->input->post('item_remark')),
+                    'pre_date'=>trim($this->input->post('date')),
+                    'pre_supplier_name'=>trim($this->input->post('supplier_name')),
+                    'pre_supplier_po_number	'=>trim($this->input->post('supplier_po_number')),
+                    'pre_buyer_name'=>trim($this->input->post('buyer_name')),
+                    'pre_buyer_po_number'=>trim($this->input->post('buyer_po_number')),
+                    'pre_vendor_name'=>trim($this->input->post('vendor_name')),
+                    'pre_quatation_ref_number' =>trim($this->input->post('quatation_ref_no')),
+                    'pre_quatation_date' =>trim($this->input->post('quatation_date')),
+                    'pre_delivery_date' =>trim($this->input->post('delivery_date')),
+                    'pre_delivery' =>trim($this->input->post('delivery')),
+                    'pre_deliveey_address' =>trim($this->input->post('delivery_address')),
+                    'pre_work_order' =>trim($this->input->post('work_order')),
+                    'pre_remark' =>trim($this->input->post('remark')),
+                );
+
+                // $checkIfexitsbuyerpo = $this->admin_model->checkIfexitsbuyerpo(trim($this->input->post('sales_order_number')));
+                // if($checkIfexitsbuyerpo > 0){
+                //     $save_buyerpo_response['status'] = 'failure';
+                //     $save_buyerpo_response['error'] = array('sales_order_number'=>'Buyer PO Alreday Exits (Sales Order Number Alreday Exits)');
+                // }else{
+                    $saveSupplierpoconfirmationitemdata = $this->admin_model->saveSupplierpoconfirmationitemdata('',$data);
+                    if($saveSupplierpoconfirmationitemdata){
+                        $save_supplierpoconfirmationitem_response['status'] = 'success';
+                        $save_supplierpoconfirmationitem_response['error'] = array('part_number'=>'', 'description'=>'', 'qty'=>'', 'rate'=>'','value'=>'');
+                    }
+                //  }
+                
+            }
+            echo json_encode($save_supplierpoconfirmationitem_response);
+        }
+
+    }
 
 
 }

@@ -143,6 +143,13 @@ $route['fetchSupplierpoconfirmationlist'] = "admin/fetchSupplierpoconfirmationli
 $route['getSupplierPonumberbySupplierid'] = "admin/getSupplierPonumberbySupplierid";
 $route['getSupplierItemsforDisplay'] = "admin/getSupplierItemsforDisplay";
 $route['deleteSupplierPoconfirmation'] = "admin/deleteSupplierPoconfirmation";
+$route['getRowmaterialPartnumberByid'] = "admin/getRowmaterialPartnumberByid";
+
+$route['addSupplierpoConfirmationitem'] = "admin/addSupplierpoConfirmationitem";
+
+
+
+
 
 
 

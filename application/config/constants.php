@@ -126,6 +126,7 @@ define('TBL_SUPPLIER_PO_MASTER_ITEM','tbl_supplierpo_item');
 define('TBL_VENDOR_PO_MASTER','tbl_vendor_po');
 define('TBL_VENDOR_PO_MASTER_ITEM','tbl_vendorpo_item');
 define('TBL_SUPPLIER_PO_CONFIRMATION','tbl_supplier_poconfirmation');
+define('TBL_SUPPLIER_PO_CONFIRMATION_ITEM','tbl_supplierpoconfirmation_item');
 
 
 

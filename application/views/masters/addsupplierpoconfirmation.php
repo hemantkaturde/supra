@@ -85,7 +85,7 @@
                                     <div class="col-md-12 supplier_po_number_div" style="display:<?=$display;?>">
                                             <div class="form-group">
                                                     <label for="supplier_po_number">Select Supplier PO Number <span class="required">*</span></label>
-                                                    <select class="form-control" name="supplier_po_number" id="supplier_po_number">
+                                                    <select class="form-control supplier_po_number_for_item" name="supplier_po_number" id="supplier_po_number">
                                                     <option st-id="" value="<?=$fetchALLpresupplieritemList[0]['pre_supplier_po_number']?>" selected ><?=$selected_value;?></option>
                                                     </select> 
                                                 <p class="error supplier_po_number_error"></p>
@@ -217,11 +217,12 @@
                                     </div>
 
                                     <div class="container">
-                                         <div id="customers-list">
+                                         <div id="supplier_po_item_list">
+                                         </div>
 
+                                         <div id="customers-list">
                                          </div>
                                     </div>
-
 
                                       <!-- Add New Package Modal -->
                                     <?php $this->load->helper("form"); ?>
@@ -235,7 +236,7 @@
                                                 <!-- <span aria-hidden="true">&times;</span> -->
                                                 </button>
                                             </div>
-                                            <form role="form" id="addbuyeritemform" action="<?php echo base_url() ?>addbuyeritem" method="post" role="form">
+                                            <form role="form" id="saveSupplierconfromationpoitem" action="<?php echo base_url() ?>saveSupplierconfromationpoitem" method="post" role="form">
 
                                                 <div class="modal-body">
                                                         <div class="loader_ajax" style="display:none;">
@@ -247,9 +248,9 @@
                                                         <div class="col-sm-9">
                                                             <select class="form-control" name="part_number" id="part_number">
                                                                 <option st-id="" value="">Select Part Name</option>
-                                                                <?php foreach ($rowMaterialList as $key => $value) {?>        
+                                                                <!-- <?php foreach ($rowMaterialList as $key => $value) {?>        
                                                                     <option value="<?php echo $value['raw_id']; ?>"><?php echo $value['part_number']; ?></option>
-                                                                <?php } ?>
+                                                                <?php } ?> -->
                                                             </select>
                                                             <p class="error part_number_error"></p>
 
@@ -259,7 +260,6 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-3 col-form-label">Part Name <span class="required">*</span></label>
                                                         <div class="col-sm-9">
-                                                            <!-- <textarea type="text" class="form-control"  id="description"  name="description" required></textarea> -->
                                                             <input type="type" class="form-control"  id="description" name="description" required readonly>
                                                             <p class="error description_error"></p>
                                                         </div>
@@ -354,7 +354,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-3 col-form-label">Vendor Quantity</label>
                                                         <div class="col-sm-9">
-                                                            <input type="number" class="form-control"  id="vendor_qty" name="vendor_qty">
+                                                            <input type="number" class="form-control"  id="vendor_qty" name="vendor_qty" readonly>
                                                             <p class="error vendor_qty_error"></p>
                                                         </div>
                                                     </div>
@@ -362,7 +362,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-3 col-form-label">Order Quantity <span class="required">*</span></label>
                                                         <div class="col-sm-9">
-                                                            <input type="number" class="form-control"  id="qty" name="qty">
+                                                            <input type="number" class="form-control"  id="qty" name="qty" readonly>
                                                             <p class="error qty_error"></p>
                                                         </div>
                                                     </div>
@@ -370,7 +370,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-3 col-form-label">Unit</label>
                                                         <div class="col-sm-9">
-                                                             <select class="form-control" name="unit" id="unit">
+                                                             <select class="form-control" name="unit" id="unit" readonly>
                                                                 <option value="">Select Part Name</option>
                                                                 <option value="kgs">Kgs</option>
                                                                 <option value="Pcs">Pcs</option>
@@ -409,8 +409,8 @@
                                                 </div>
 
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary btn-xl closeBuyerpoconfirmation" data-dismiss="modal">Close</button>
-                                                    <button type="submit" id="savebuyerconfromationpoitem" name="savebuyerconfromationpoitem" class="btn btn-primary" class="btn btn-success btn-xl">Save</button>
+                                                    <button type="button" class="btn btn-secondary btn-xl closeSupplierpoconfirmation" data-dismiss="modal">Close</button>
+                                                    <button type="submit" id="saveSupplierconfromationpoitem" name="saveSupplierconfromationpoitem" class="btn btn-primary" class="btn btn-success btn-xl">Save</button>
                                                 </div>
 
                                             </form>    
