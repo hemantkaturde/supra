@@ -33,8 +33,8 @@
                                         <th>Date</th>
                                         <th>Supplier Name</th>
                                         <th>Buyer Name</th>
-                                        <th>Vendor Name</th>
                                         <th>PO Confirmed </th>
+                                        <th>PO Confirmed Date</th>
                                         <th>Confirmed With</th>
                                         <th>Action</th>
                                     </tr>

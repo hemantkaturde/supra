@@ -2,11 +2,11 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            <i class="fa fa-users"></i> Add New Supplier PO Confirmation
+            <i class="fa fa-users"></i> View Supplier PO Confirmation
             <small>
                 <ul class="breadcrumb" style="background-color:#ecf0f5 !important">
                     <li class="completed"><a href="javascript:void(0);">Masters</a></li>
-                    <li class="active"><a href="javascript:void(0);">Supplier PO Confirmation Master</a></li>
+                    <li class="active"><a href="javascript:void(0);">View Supplier PO Confirmation Master</a></li>
                 </ul>
             </small>
         </h1>
@@ -18,36 +18,20 @@
                 <div class="box">
                     <div class="box box-primary">
                         <div class="box-header">
-                            <h3 class="box-title">Add Supplier PO Confirmation Details</h3>
+                            <h3 class="box-title">View Supplier PO Confirmation Details</h3>
                         </div>
                         <?php $this->load->helper("form"); ?>
                         <form role="form" id="addnnewsupplierconfrimationpoform" action="<?php echo base_url() ?>addnnewsupplierconfrimationpoform" method="post" role="form">
                             <div class="box-body">
                                 <div class="col-md-4">
-                                    <?php
-                                        if($getPreviousSupplierPoNumber['po_number']){
-                                            $arr = str_split($getPreviousSupplierPoNumber['po_number']);
-                                            $i = end($arr);
-                                            $inrno= "SQPC2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
-                                            $po_number = $inrno;
-                                        }else{
-                                            $po_number = 'SQPC23240001';
-                                        }
-                                    ?>
+
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="po_number">PO Number<span class="required">*</span></label>
-                                            <input type="text" class="form-control" id="po_number" name="po_number" value="<?=$po_number?>" required readonly>
+                                            <input type="text" class="form-control" id="po_number" name="po_number" value="" required readonly>
                                             <p class="error po_number_error"></p>
                                         </div>
                                     </div>
-
-
-                                     <?php if($fetchALLpresupplieritemList[0]['pre_date']){
-                                        $date= $fetchALLpresupplieritemList[0]['pre_date'];
-                                     }else{
-                                        $date= date('Y-m-d');
-                                     } ?>
 
                                     <div class="col-md-12">
                                         <div class="form-group">

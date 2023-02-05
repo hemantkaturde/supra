@@ -134,15 +134,17 @@ $route['deleteVendorpo'] = "admin/deleteVendorpo";
 $route['deleteVendorpoitem'] = "admin/deleteVendorpoitem";
 $route['viewVendorpo/(:any)'] = "admin/viewVendorpo/$1";
 $route['viewVendorpo'] = "admin/viewVendorpo";
+$route['getSuppliritemonly'] = "admin/getSuppliritemonly";
 
 
 $route['supplierpoconfirmation'] = "admin/supplierpoconfirmation";
 $route['addSupplierpoconfirmation'] = "admin/addSupplierpoconfirmation";
-$route['fetchBuyerpoconfirmationlist'] = "admin/fetchBuyerpoconfirmationlist";
+$route['fetchSupplierpoconfirmationlist'] = "admin/fetchSupplierpoconfirmationlist";
 $route['getSupplierPonumberbySupplierid'] = "admin/getSupplierPonumberbySupplierid";
 $route['getSupplierItemsforDisplay'] = "admin/getSupplierItemsforDisplay";
+$route['deleteSupplierPoconfirmation'] = "admin/deleteSupplierPoconfirmation";
 
-$route['getSuppliritemonly'] = "admin/getSuppliritemonly";
+
 
 
 

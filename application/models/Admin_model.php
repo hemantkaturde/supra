@@ -1407,7 +1407,6 @@ class Admin_model extends CI_Model
 
     }
 
-
     public function getSuplierpodetails($supplierpoid){
         $this->db->select('*');
         $this->db->where(TBL_SUPPLIER_PO_MASTER.'.status',1);
@@ -1418,7 +1417,6 @@ class Admin_model extends CI_Model
 
     }
 
-
     public function fetchALLsupplieritemlistforview($supplierpoid){
         $this->db->select('*');
         $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id');
@@ -1428,7 +1426,6 @@ class Admin_model extends CI_Model
         return $data;
 
     }
-
 
     public function getVendorpoCount($params){
 
@@ -1560,7 +1557,6 @@ class Admin_model extends CI_Model
 
     }
 
-    
     public function saveVendorpoitemdata($id,$data){
 
         if($id != '') {
@@ -1580,7 +1576,6 @@ class Admin_model extends CI_Model
 
     }
 
-
     public function getPreviousvendorPONumber(){
 
         $this->db->select('po_number');
@@ -1591,7 +1586,6 @@ class Admin_model extends CI_Model
         $rowcount = $query->result_array();
         return $rowcount;
     }
-
 
     public function fetchALLpreVendoritemList(){
 
@@ -1629,7 +1623,6 @@ class Admin_model extends CI_Model
 
     }
 
-
     public function getVendorpodetails($vendorpoid){
         $this->db->select('*');
         $this->db->where(TBL_VENDOR_PO_MASTER.'.status',1);
@@ -1650,7 +1643,7 @@ class Admin_model extends CI_Model
 
     }
 
-    public function getBuyerpoconfirmationCount($params){
+    public function getSupplierpoconfirmationCount($params){
 
         $this->db->select('*');
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id  = '.TBL_SUPPLIER_PO_CONFIRMATION.'.buyer_po_id');
@@ -1672,9 +1665,9 @@ class Admin_model extends CI_Model
 
     }
     
-    public function getBuyerpoconfirmationdata($params){
+    public function getSupplierpoconfirmationdata($params){
 
-        $this->db->select('*,'.TBL_SUPPLIER.'.supplier_name as sup_name');
+        $this->db->select('*,'.TBL_SUPPLIER.'.supplier_name as sup_name,'.TBL_BUYER_MASTER.'.buyer_name as bu_name');
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id  = '.TBL_SUPPLIER_PO_CONFIRMATION.'.buyer_po_id');
         $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id  = '.TBL_SUPPLIER_PO_CONFIRMATION.'.supplier_po_id');
         if($params['search']['value'] != "") 
@@ -1702,13 +1695,13 @@ class Admin_model extends CI_Model
                 $data[$counter]['po_number'] = $value['po_number'];
                 $data[$counter]['date'] = $value['date'];
                 $data[$counter]['sup_name'] = $value['sup_name'];
-                $data[$counter]['buyer_name'] = $value['buyer_name'];
+                $data[$counter]['buyer_name'] = $value['bu_name'];
                 $data[$counter]['po_confirmed'] = $value['po_confirmed'];
                 $data[$counter]['confirmed_date'] = $value['confirmed_date'];
-                $data[$counter]['confirm_with'] = $value['confirm_with'];
+                $data[$counter]['confirmed_with'] = $value['confirmed_with'];
                 $data[$counter]['action'] = '';
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewVendorpo/".$value['id']."' style='cursor: pointer;'><i style='font-size: large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
-                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['id']."' class='fa fa-trash-o deleteVendorpo' aria-hidden='true'></i>"; 
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewSupplierpoconfirmation/".$value['id']."' style='cursor: pointer;'><i style='font-size: large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['id']."' class='fa fa-trash-o deleteSupplierPoconfirmation' aria-hidden='true'></i>"; 
                 $counter++; 
             }
         }
@@ -1716,7 +1709,6 @@ class Admin_model extends CI_Model
         return $data;
         
     }
-
 
     public function getSupplierDeatilsbyid($supplier_name){
 
@@ -1761,6 +1753,50 @@ class Admin_model extends CI_Model
 
     }
 
+    public function checkIfexitsSupplierpoconfirmation($po_number){
+
+        $this->db->select('*');
+        $this->db->where(TBL_SUPPLIER_PO_CONFIRMATION.'.po_number', $po_number);
+        $this->db->where(TBL_SUPPLIER_PO_CONFIRMATION.'.status', 1);
+        $query = $this->db->get(TBL_SUPPLIER_PO_CONFIRMATION);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+    }
+
+    public function saveSupplierpoconfirmationdata($id,$data){
+        if($id != '') {
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_SUPPLIER_PO_CONFIRMATION, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_SUPPLIER_PO_CONFIRMATION, $data)) {
+                return $this->db->insert_id();;
+            } else {
+                return FALSE;
+            }
+        }
+    }
+
+    public function deleteSupplierPoconfirmation($id){
+
+        $this->db->where('id', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_SUPPLIER_PO_CONFIRMATION)){
+           return TRUE;
+        }else{
+           return FALSE;
+        }
+    }
+
+    public function fetchALLSupplierPOforview($supplierpoconfirmationid){
+
+        
+
+
+    }
 
 }
 
