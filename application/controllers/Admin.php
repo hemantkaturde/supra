@@ -2940,7 +2940,7 @@ class Admin extends BaseController
             // $data['$fetchALLpresupplieritemList']= $this->admin_model->fetchALLitemList();
             $this->logrecord($process,$processFunction);
             $this->global['pageTitle'] = 'Add Supplier PO Confirmation';
-            $this->loadViews("masters/addSupplierpoconfirmation", $this->global, $data, NULL);
+            $this->loadViews("masters/addsupplierpoconfirmation", $this->global, $data, NULL);
         }
 
     }
