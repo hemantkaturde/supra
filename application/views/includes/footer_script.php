@@ -3217,41 +3217,36 @@
 				$("#value").val( Math.round(total_value));
         });
 
+	
 		$(document).on('click','#saveSupplierconfromationpoitem',function(e){
 			e.preventDefault();
 			$(".loader_ajax").show();
-			   var formData = new FormData($("#saveSupplierconfromationpoitem")[0]);
+			   var formData = new FormData($("#saveSupplierconfromationpoitemform")[0]);
                var part_number =   $('#part_number').val();
 			   var description =   $('#description').val();
 			   var qty =   $('#qty').val();
 			   var rate =   $('#rate').val();
 			   var value =   $('#value').val();
-			   var rm_type =   $('#rm_type').val();
-			
-			   var vendor_qty =   $('#vendor_qty').val();
 			   var unit =   $('#unit').val();
+			   var vendor_qty =   $('#vendor_qty').val();
 			   var item_remark =   $('#item_remark').val();
 
-			   var date =   $('#date').val();
-			   var supplier_name =   $('#supplier_name').val();
-			   var supplier_po_number =   $('#supplier_po_number').val();
-			   var buyer_name =   $('#buyer_name').val();
-			   var buyer_po_number =   $('#buyer_po_number').val();
-			   var vendor_name =   $('#vendor_name').val();
-			   var quatation_ref_no =   $('#quatation_ref_no').val();
-			   var quatation_date =   $('#quatation_date').val();
-			   var delivery_date =   $('#delivery_date').val();
-			   var delivery =   $('#delivery').val();
-			   var delivery_address =   $('#delivery_address').val();
-			   var work_order =   $('#work_order').val();
-			   var remark =   $('#remark').val();
+			   var pre_date =   $('#date').val();
+			   var pre_supplier_name =   $('#supplier_name').val();
+			   var pre_supplier_po_number =   $('#supplier_po_number').val();
+			   var pre_buyer_name =   $('#buyer_name').val();
+			   var pre_buyer_po_number =   $('#buyer_po_number').val();
+			   var pre_po_confirmed =   $('#po_confirmed').val();
+			   var pre_confirmed_date =   $('#confirmed_date').val();
+			   var pre_confirmed_with =   $('#confirmed_with').val();
+			   var pre_remark =   $('#pre_remark').val();
 
-					 
+								 
 			$.ajax({
 				url : "<?php echo base_url();?>addSupplierpoConfirmationitem",
 				type: "POST",
 				 //data : formData,
-				 data :{part_number:part_number,description:description,qty:qty,rate:rate,value:value,date:date,supplier_name:supplier_name,buyer_name:buyer_name,vendor_name:vendor_name,quatation_ref_no:quatation_ref_no,quatation_date:quatation_date,delivery_date:delivery_date,delivery:delivery,delivery_address:delivery_address,work_order:work_order,remark:remark,buyer_po_number:buyer_po_number,vendor_qty:vendor_qty,unit:unit,item_remark:item_remark,rm_type:rm_type,supplier_po_number:supplier_po_number},
+				 data :{part_number:part_number,description:description,qty:qty,rate:rate,value:value,unit:unit,vendor_qty:vendor_qty,item_remark:item_remark,pre_date:pre_date,pre_supplier_name:pre_supplier_name,pre_supplier_po_number:pre_supplier_po_number,pre_buyer_name:pre_buyer_name,pre_buyer_po_number:pre_buyer_po_number,pre_po_confirmed:pre_po_confirmed,pre_confirmed_date:pre_confirmed_date,pre_confirmed_with:pre_confirmed_with,pre_remark:pre_remark},
 				// method: "POST",
                 // data :{package_id:package_id},
                 cache:false,
@@ -3274,7 +3269,7 @@
 							icon: "success",
 							button: "Ok",
 							},function(){ 
-								window.location.href = "<?php echo base_url().'addnewVendorpo'?>";
+								window.location.href = "<?php echo base_url().'addSupplierpoconfirmation'?>";
 						});		
 				    }
 					

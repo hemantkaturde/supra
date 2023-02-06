@@ -1753,7 +1753,7 @@ class Admin_model extends CI_Model
 
     }
 
-    public function getPreviousSupplierPoNumber(){
+    public function getPreviousSupplierPoconfirmationNumber(){
 
         $this->db->select('po_number');
         $this->db->where(TBL_SUPPLIER_PO_CONFIRMATION.'.status', 1);
@@ -1818,10 +1818,6 @@ class Admin_model extends CI_Model
         }
     }
 
-    public function fetchALLSupplierPOforview($supplierpoconfirmationid){
-
-    
-    }
 
     public function getRowmaterialPartnumberByid($part_number){
         $this->db->select('*');
@@ -1853,6 +1849,20 @@ class Admin_model extends CI_Model
 
 
     }
+
+    public function fetchALLpresupplierpoconfirmationitemList(){
+
+        $this->db->select('*');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.part_number_id');
+        $this->db->where(TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.supplier_po_confirmation_id IS NULL');
+        $this->db->order_by(TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.id','desc');
+        $query = $this->db->get(TBL_SUPPLIER_PO_CONFIRMATION_ITEM);
+        $data = $query->result_array();
+        return $data;
+
+    }
+
+
 
 }
 

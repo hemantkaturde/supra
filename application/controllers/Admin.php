@@ -2957,8 +2957,9 @@ class Admin extends BaseController
             $data['buyerList']= $this->admin_model->fetchAllbuyerList();
             $data['supplierList']= $this->admin_model->fetchALLsupplierList();
             $data['rowMaterialList']= $this->admin_model->fetchALLrowMaterialList();
-            $data['getPreviousSupplierPoNumber']= $this->admin_model->getPreviousSupplierPoNumber()[0];
-            // $data['$fetchALLpresupplieritemList']= $this->admin_model->fetchALLitemList();
+            $data['getPreviousSupplierPoconfirmationNumber']= $this->admin_model->getPreviousSupplierPoconfirmationNumber()[0];
+            $data['fetchALLpresupplierpoconfirmationitemList']= $this->admin_model->fetchALLpresupplierpoconfirmationitemList();
+
             $this->logrecord($process,$processFunction);
             $this->global['pageTitle'] = 'Add Supplier PO Confirmation';
             $this->loadViews("masters/addsupplierpoconfirmation", $this->global, $data, NULL);
@@ -3135,10 +3136,9 @@ class Admin extends BaseController
             $this->form_validation->set_rules('qty','Qty','trim|numeric|required');
             $this->form_validation->set_rules('rate','Rate','trim|required');
             $this->form_validation->set_rules('value','Value','trim|required');
-            $this->form_validation->set_rules('vendor_qty','Vendor qty','trim');
-            $this->form_validation->set_rules('unit','Unit','trim');
-            $this->form_validation->set_rules('item_remark','Item Remark','trim');
-            $this->form_validation->set_rules('rm_type','rm_type','trim');
+
+
+
         
             if($this->form_validation->run() == FALSE)
             {
@@ -3151,25 +3151,22 @@ class Admin extends BaseController
                     'part_number_id'   => trim($this->input->post('part_number')),
                     'description'     => trim($this->input->post('description')),
                     'order_oty'    => trim($this->input->post('qty')),
-                    'rate'  => trim($this->input->post('rate')),
+                    'rate'  =>       trim($this->input->post('rate')),
                     'value' =>   trim($this->input->post('value')),
-                    'vendor_qty' =>   trim($this->input->post('vendor_qty')),
-                    'rm_type' =>trim($this->input->post('rm_type')),
-                    'unit' =>   trim($this->input->post('unit')),
-                    'item_remark' =>   trim($this->input->post('item_remark')),
-                    'pre_date'=>trim($this->input->post('date')),
-                    'pre_supplier_name'=>trim($this->input->post('supplier_name')),
-                    'pre_supplier_po_number	'=>trim($this->input->post('supplier_po_number')),
-                    'pre_buyer_name'=>trim($this->input->post('buyer_name')),
-                    'pre_buyer_po_number'=>trim($this->input->post('buyer_po_number')),
-                    'pre_vendor_name'=>trim($this->input->post('vendor_name')),
-                    'pre_quatation_ref_number' =>trim($this->input->post('quatation_ref_no')),
-                    'pre_quatation_date' =>trim($this->input->post('quatation_date')),
-                    'pre_delivery_date' =>trim($this->input->post('delivery_date')),
-                    'pre_delivery' =>trim($this->input->post('delivery')),
-                    'pre_deliveey_address' =>trim($this->input->post('delivery_address')),
-                    'pre_work_order' =>trim($this->input->post('work_order')),
-                    'pre_remark' =>trim($this->input->post('remark')),
+                    'unit' =>    trim($this->input->post('unit')),
+                    'vendor_qty'=>  trim($this->input->post('vendor_qty')),
+                    'item_remark' => trim($this->input->post('item_remark')),
+
+
+                    'pre_date'		 => trim($this->input->post('pre_date')),
+                    'pre_supplier_name'	 => trim($this->input->post('pre_supplier_name')),
+                    'pre_supplier_po_number'	=> trim($this->input->post('pre_supplier_po_number')),
+                    'pre_buyer_name'		 => trim($this->input->post('pre_buyer_name')),
+                    'pre_buyer_po_number'		 => trim($this->input->post('pre_buyer_po_number')),
+                    'pre_po_confirmed'	=> trim($this->input->post('pre_po_confirmed')),
+                    'pre_confirmed_date'	=> trim($this->input->post('pre_confirmed_date')),
+                    'pre_confirmed_with'	=> trim($this->input->post('pre_confirmed_with')),
+                    'pre_remark'   => trim($this->input->post('pre_remark')),
                 );
 
                 // $checkIfexitsbuyerpo = $this->admin_model->checkIfexitsbuyerpo(trim($this->input->post('sales_order_number')));
@@ -3178,6 +3175,7 @@ class Admin extends BaseController
                 //     $save_buyerpo_response['error'] = array('sales_order_number'=>'Buyer PO Alreday Exits (Sales Order Number Alreday Exits)');
                 // }else{
                     $saveSupplierpoconfirmationitemdata = $this->admin_model->saveSupplierpoconfirmationitemdata('',$data);
+                    
                     if($saveSupplierpoconfirmationitemdata){
                         $save_supplierpoconfirmationitem_response['status'] = 'success';
                         $save_supplierpoconfirmationitem_response['error'] = array('part_number'=>'', 'description'=>'', 'qty'=>'', 'rate'=>'','value'=>'');

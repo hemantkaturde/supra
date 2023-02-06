@@ -25,8 +25,8 @@
                             <div class="box-body">
                                 <div class="col-md-4">
                                     <?php
-                                        if($getPreviousSupplierPoNumber['po_number']){
-                                            $arr = str_split($getPreviousSupplierPoNumber['po_number']);
+                                        if($getPreviousSupplierPoconfirmationNumber['po_number']){
+                                            $arr = str_split($getPreviousSupplierPoconfirmationNumber['po_number']);
                                             $i = end($arr);
                                             $inrno= "SQPC2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
                                             $po_number = $inrno;
@@ -143,8 +143,8 @@
                                         </div>
                                     </div>
 
-                                    <?php if($fetchALLpresupplieritemList[0]['pre_quatation_date']){
-                                        $buyer_po_date= $fetchALLpresupplieritemList[0]['pre_quatation_date'];
+                                    <?php if($fetchALLpresupplierpoconfirmationitemList[0]['pre_confirmed_date']){
+                                        $buyer_po_date= $fetchALLpresupplierpoconfirmationitemList[0]['pre_confirmed_date'];
                                      }else{
                                         $buyer_po_date= date('Y-m-d');
                                      } ?>
@@ -195,7 +195,7 @@
                                                 <tbody>
                                                     <?php
                                                         $count=0;
-                                                           foreach ($fetchALLpresupplieritemList as $key => $value) :
+                                                           foreach ($fetchALLpresupplierpoconfirmationitemList as $key => $value) :
                                                            $count++;
                                                     ?>
                                                     <tr>
@@ -236,7 +236,7 @@
                                                 <!-- <span aria-hidden="true">&times;</span> -->
                                                 </button>
                                             </div>
-                                            <form role="form" id="saveSupplierconfromationpoitem" action="<?php echo base_url() ?>saveSupplierconfromationpoitem" method="post" role="form">
+                                            <form role="form" id="saveSupplierconfromationpoitemform" action="<?php echo base_url() ?>saveSupplierconfromationpoitemform" method="post" role="form">
 
                                                 <div class="modal-body">
                                                         <div class="loader_ajax" style="display:none;">
@@ -426,10 +426,10 @@
                             <!-- /.box-body -->
                             <div class="box-footer">
                                 <div class="col-xs-8">
-                                    <?php if($fetchALLpresupplieritemList){
+                                    <?php if($fetchALLpresupplierpoconfirmationitemList){
                                         $disabled= '';
                                     }else{ 
-                                        $disabled= '';
+                                        $disabled= 'disabled';
                                      } ?>
                                     <input type="submit" id="savenewsupplierconfrimationpo" class="btn btn-primary" value="Submit" <?=$disabled;?> />
                                     <input type="button" onclick="location.href = '<?php echo base_url() ?>supplierpoconfirmation'" class="btn btn-default" value="Back" />
