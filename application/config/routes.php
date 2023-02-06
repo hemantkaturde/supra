@@ -146,6 +146,10 @@ $route['deleteSupplierPoconfirmation'] = "admin/deleteSupplierPoconfirmation";
 $route['getRowmaterialPartnumberByid'] = "admin/getRowmaterialPartnumberByid";
 
 $route['addSupplierpoConfirmationitem'] = "admin/addSupplierpoConfirmationitem";
+$route['getfinishedgoodsPartnumberByidvendor'] = "admin/getfinishedgoodsPartnumberByidvendor";
+
+
+
 
 
 
