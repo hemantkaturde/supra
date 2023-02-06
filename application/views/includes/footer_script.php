@@ -2502,8 +2502,8 @@
 									$('#drawing_number').val(data_row_material.drawing_number);
 									$('#description_1').val(data_row_material.description_1);
 									$('#description_2').val(data_row_material.description_2);
-									$('#qty').val(data_row_material.order_oty);
-									$('#vendor_qty').val(data_row_material.vendor_qty);
+									$('#qty').val(data_row_material.vendor_qty);
+									$('#vendor_qty').val(data_row_material.order_oty);
 									$('#unit').val(data_row_material.unit);
 									$('#rm_type').val(data_row_material.type_of_raw_material);
 									
