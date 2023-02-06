@@ -1205,7 +1205,13 @@ class Admin_model extends CI_Model
         $this->db->where('id', $id);
         //$this->db->delete(TBL_SUPPLIER);
         if($this->db->delete(TBL_SUPPLIER_PO_MASTER)){
-           return TRUE;
+            $this->db->where('supplier_po_id', $id);
+            //$this->db->delete(TBL_SUPPLIER);
+            if($this->db->delete(TBL_SUPPLIER_PO_MASTER_ITEM)){
+               return TRUE;
+            }else{
+               return FALSE;
+            }
         }else{
            return FALSE;
         }
@@ -1620,7 +1626,13 @@ class Admin_model extends CI_Model
         $this->db->where('id', $id);
         //$this->db->delete(TBL_SUPPLIER);
         if($this->db->delete(TBL_VENDOR_PO_MASTER)){
-           return TRUE;
+            $this->db->where('vendor_po_id', $id);
+            //$this->db->delete(TBL_SUPPLIER);
+            if($this->db->delete(TBL_VENDOR_PO_MASTER_ITEM)){
+               return TRUE;
+            }else{
+               return FALSE;
+            }
         }else{
            return FALSE;
         }

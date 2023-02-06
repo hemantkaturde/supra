@@ -2177,6 +2177,7 @@ class Admin extends BaseController
                         $process = 'Buyer PO Delete';
                         $processFunction = 'Admin/deleteRejection';
                         $this->logrecord($process,$processFunction);
+                        
                     echo(json_encode(array('status'=>'success')));
                 }
             else { echo(json_encode(array('status'=>'failed'))); }
