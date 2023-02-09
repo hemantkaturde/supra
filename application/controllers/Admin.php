@@ -2720,7 +2720,6 @@ class Admin extends BaseController
                 $data['vendorList']= $this->admin_model->fetchALLvendorList();
                 $data['getPreviousPONumber']= $this->admin_model->getPreviousvendorPONumber()[0];
                 $data['fetchALLpreVendoritemList']= $this->admin_model->fetchALLpreVendoritemList();
-
                 $this->logrecord($process,$processFunction);
                 $this->global['pageTitle'] = 'Add Vendor PO';
                 $this->loadViews("masters/addVendorpo", $this->global, $data, NULL);
@@ -2746,7 +2745,6 @@ class Admin extends BaseController
             }
     }
 
-
     
     public function getfinishedgoodsPartnumberByid(){
 
@@ -2764,7 +2762,7 @@ class Admin extends BaseController
         } else {
             echo 'failure';
         }
-}
+    }
 
 
     public function addVendoritem(){
@@ -3185,6 +3183,27 @@ class Admin extends BaseController
             }
             echo json_encode($save_supplierpoconfirmationitem_response);
         }
+
+    }
+
+
+    public function getVendorDetailsBysupplierponumber(){
+
+        $supplier_po_number=$this->input->post('supplier_po_number');
+        if($supplier_po_number) {
+			$supplier_po_number = $this->admin_model->getVendorDetailsBysupplierponumber($supplier_po_number);
+			if(count($supplier_po_number) >= 1) {
+                $content = $content.'<option value="">Select Vendor Name</option>';
+				foreach($supplier_po_number as $value) {
+					$content = $content.'<option value="'.$value["ven_id"].'">'.$value["vendor_name"].'</option>';
+				}
+				echo $content;
+			} else {
+				echo 'failure';
+			}
+		} else {
+			echo 'failure';
+		}
 
     }
 

@@ -149,6 +149,10 @@ $route['addSupplierpoConfirmationitem'] = "admin/addSupplierpoConfirmationitem";
 $route['getfinishedgoodsPartnumberByidvendor'] = "admin/getfinishedgoodsPartnumberByidvendor";
 
 
+$route['getVendorDetailsBysupplierponumber'] = "admin/getVendorDetailsBysupplierponumber";
+
+
+
 
 
 

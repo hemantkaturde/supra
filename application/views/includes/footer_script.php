@@ -2821,13 +2821,47 @@
 			return false;
 		});
 
+
+		$(document).on('change','.supplier_po_number_for_vendor_details',function(e){  
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			var supplier_po_number_for_vendor_details = $('.supplier_po_number_for_vendor_details').val();
+
+			$("#vendor_name").html('');
+		
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getVendorDetailsBysupplierponumber",
+				type: "POST",
+				data : {'supplier_po_number' : supplier_po_number_for_vendor_details},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#vendor_name').html('<option value="">Select Vendor Name</option>');
+					}
+					else
+					{
+						$('#vendor_name').html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#vendor_name').html();
+				}
+			});
+			return false;
+		});
+
+
     </script>
 <?php } ?>
 
 
 <?php  if($pageTitle=='Supplier PO Confirmation' || $pageTitle=='Add Supplier PO Confirmation'){ ?>
 	<script type="text/javascript">
-			$(document).ready(function() {
+		$(document).ready(function() {
             var dt = $('#view_supplierpoconfirmation').DataTable({
 	            "columnDefs": [ 
 	                 { className: "details-control", "targets": [ 0 ] },
@@ -3217,7 +3251,6 @@
 				$("#value").val( Math.round(total_value));
         });
 
-	
 		$(document).on('click','#saveSupplierconfromationpoitem',function(e){
 			e.preventDefault();
 			$(".loader_ajax").show();
