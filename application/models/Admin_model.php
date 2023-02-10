@@ -1610,9 +1610,11 @@ class Admin_model extends CI_Model
 
     public function fetchALLpreVendoritemList(){
 
-        $this->db->select('*');
+        $this->db->select('*,'.TBL_VENDOR_PO_MASTER_ITEM.'.id as vendoritemid');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
         // $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_BUYER_PO_MASTER_ITEM.'.pre_buyer_name','left');
+
+        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_VENDOR_PO_MASTER_ITEM.'.pre_buyer_po_number');
         $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id IS NULL');
         $this->db->order_by(TBL_VENDOR_PO_MASTER_ITEM.'.id','desc');
         $query = $this->db->get(TBL_VENDOR_PO_MASTER_ITEM);
