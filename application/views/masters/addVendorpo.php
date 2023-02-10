@@ -73,10 +73,11 @@
 
                                    
 
-                                    <?php 
+                                    <?php
+
                                     if($fetchALLpreVendoritemList[0]['pre_supplier_po_number']){
                                         $display='block';
-                                        $selected_value_supplier_po = $fetchALLpreVendoritemList[0]['pre_supplier_po_number'];
+                                        $selected_value_supplier_po = $fetchALLpreVendoritemList[0]['po_number'];
 
                                     }else{
                                         $display='none';
