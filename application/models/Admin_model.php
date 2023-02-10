@@ -1813,12 +1813,18 @@ class Admin_model extends CI_Model
         $this->db->where('id', $id);
         //$this->db->delete(TBL_SUPPLIER);
         if($this->db->delete(TBL_SUPPLIER_PO_CONFIRMATION)){
-           return TRUE;
+           //return TRUE;
+           $this->db->where('supplier_po_confirmation_id', $id);
+           //$this->db->delete(TBL_SUPPLIER);
+           if($this->db->delete(TBL_SUPPLIER_PO_CONFIRMATION_ITEM)){
+              return TRUE;
+           }else{
+              return FALSE;
+           }
         }else{
            return FALSE;
         }
     }
-
 
     public function getRowmaterialPartnumberByid($part_number){
         $this->db->select('*');
@@ -1855,6 +1861,9 @@ class Admin_model extends CI_Model
 
         $this->db->select('*');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.part_number_id');
+        $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.pre_supplier_po_number');
+        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.pre_buyer_po_number');
+
         $this->db->where(TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.supplier_po_confirmation_id IS NULL');
         $this->db->order_by(TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.id','desc');
         $query = $this->db->get(TBL_SUPPLIER_PO_CONFIRMATION_ITEM);
@@ -1877,6 +1886,32 @@ class Admin_model extends CI_Model
         return $query_result;
 
     }
+
+    public function deleteSupplierpoconfirmationitem($id){
+        $this->db->where('id', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_SUPPLIER_PO_CONFIRMATION_ITEM)){
+           return TRUE;
+        }else{
+           return FALSE;
+        }
+    }
+
+    public function update_last_inserted_id_supplier_po_confirmation($saveSupplierpoconfirmationdata){
+
+        $data = array(
+            'supplier_po_confirmation_id' => $saveSupplierpoconfirmationdata
+        );
+        $this->db->where(TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.supplier_po_confirmation_id IS NULL');
+        if($this->db->update(TBL_SUPPLIER_PO_CONFIRMATION_ITEM,$data)){
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+
+    }
+
+
 
 
 

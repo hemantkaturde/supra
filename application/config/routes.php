@@ -108,7 +108,6 @@ $route['buyerpo'] = "admin/buyerpo";
 $route['addnewBuyerpo'] = "admin/addnewBuyerpo";
 $route['fetchrBuyerpolist'] = "admin/fetchrBuyerpolist";
 $route['deleteBuyerpo'] = "admin/deleteBuyerpo";
-
 $route['supplierpo'] = "admin/supplierpo";
 $route['addnewSupplierpo'] = "admin/addnewSupplierpo";
 $route['fetchSupplierpolist'] = "admin/fetchSupplierpolist";
@@ -124,7 +123,6 @@ $route['deleteSupplierpoitem'] = "admin/deleteSupplierpoitem";
 $route['getBuyerPonumberbyBuyerid'] = "admin/getBuyerPonumberbyBuyerid";
 $route['getBuyerItemsforDisplay'] = "admin/getBuyerItemsforDisplay";
 $route['getBuyerItemsforDisplayBybuyerid'] = "admin/getBuyerItemsforDisplayBybuyerid";
-
 $route['vendorpo'] = "admin/vendorpo";
 $route['fetchVendorpolist'] = "admin/fetchVendorpolist";
 $route['addnewVendorpo'] = "admin/addnewVendorpo";
@@ -135,8 +133,6 @@ $route['deleteVendorpoitem'] = "admin/deleteVendorpoitem";
 $route['viewVendorpo/(:any)'] = "admin/viewVendorpo/$1";
 $route['viewVendorpo'] = "admin/viewVendorpo";
 $route['getSuppliritemonly'] = "admin/getSuppliritemonly";
-
-
 $route['supplierpoconfirmation'] = "admin/supplierpoconfirmation";
 $route['addSupplierpoconfirmation'] = "admin/addSupplierpoconfirmation";
 $route['fetchSupplierpoconfirmationlist'] = "admin/fetchSupplierpoconfirmationlist";
@@ -144,12 +140,12 @@ $route['getSupplierPonumberbySupplierid'] = "admin/getSupplierPonumberbySupplier
 $route['getSupplierItemsforDisplay'] = "admin/getSupplierItemsforDisplay";
 $route['deleteSupplierPoconfirmation'] = "admin/deleteSupplierPoconfirmation";
 $route['getRowmaterialPartnumberByid'] = "admin/getRowmaterialPartnumberByid";
-
 $route['addSupplierpoConfirmationitem'] = "admin/addSupplierpoConfirmationitem";
 $route['getfinishedgoodsPartnumberByidvendor'] = "admin/getfinishedgoodsPartnumberByidvendor";
-
-
 $route['getVendorDetailsBysupplierponumber'] = "admin/getVendorDetailsBysupplierponumber";
+$route['deleteSupplierpoconfirmationitem'] = "admin/deleteSupplierpoconfirmationitem";
+
+
 
 
 

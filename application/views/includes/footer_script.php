@@ -2892,6 +2892,72 @@
 	        });
 	    });
 
+		$( document ).ready(function() {
+			//e.preventDefault();
+			//$(".loader_ajax").show();
+			var supplier_po_number = $('#supplier_po_number').val();
+			$("#supplier_po_item_list").html('');
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getSupplierItemsforDisplay",
+				type: "POST",
+				data : {'supplier_po_number' : supplier_po_number},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						//$('#buyer_po_number').html('<option value="">Select Buyer PO Number</option>');
+					}
+					else
+					{
+						// $('#buyer_po_number').html('<option value="">Select Buyer PO Number</option>');
+						//$('#buyer_po_number').html(data);
+						$("#supplier_po_item_list").html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#supplier_po_item_list').html();
+					//$(".loader_ajax").hide();
+				}
+			});
+			return false;
+		});
+
+		$( document ).ready(function() {
+			
+			var buyer_po_number = $('#buyer_po_number').val();
+			$("#customers-list").html('');
+
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getBuyerItemsforDisplay",
+				type: "POST",
+				data : {'buyer_po_number' : buyer_po_number},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						//$('#buyer_po_number').html('<option value="">Select Buyer PO Number</option>');
+					}
+					else
+					{
+						// $('#buyer_po_number').html('<option value="">Select Buyer PO Number</option>');
+						//$('#buyer_po_number').html(data);
+						$("#customers-list").html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					//$('#buyer_po_number').html();
+					//$(".loader_ajax").hide();
+				}
+			});
+			return false;
+		});
+
 		$(document).on('change','#supplier_name',function(e){  
 			e.preventDefault();
 			//$(".loader_ajax").show();
@@ -3314,6 +3380,54 @@
 			});
 			return false;
 	    });
+
+		$(document).on('click','.deleteSupplierpoitem',function(e){
+			var elemF = $(this);
+			e.preventDefault();
+			swal({
+				title: "Are you sure?",
+				text: "Delete Supplier PO Confirmation Item ",
+				type: "warning",
+				showCancelButton: true,
+				closeOnClickOutside: false,
+				confirmButtonClass: "btn-sm btn-danger",
+				confirmButtonText: "Yes, delete it!",
+				cancelButtonText: "No, cancel plz!",
+				closeOnConfirm: false,
+				closeOnCancel: false
+			}, function(isConfirm) {
+				if (isConfirm) {
+							$.ajax({
+								url : "<?php echo base_url();?>deleteSupplierpoconfirmationitem",
+								type: "POST",
+								data : 'id='+elemF.attr('data-id'),
+								success: function(data, textStatus, jqXHR)
+								{
+									const obj = JSON.parse(data);
+								
+									if(obj.status=='success'){
+										swal({
+											title: "Deleted!",
+											text: "Supplier PO Confirmation Item Deleted Succesfully",
+											icon: "success",
+											button: "Ok",
+											},function(){ 
+												window.location.href = "<?php echo base_url().'addSupplierpoconfirmation'?>";
+										});	
+									}
+
+								},
+								error: function (jqXHR, textStatus, errorThrown)
+								{
+									$(".loader_ajax").hide();
+								}
+							})
+						}
+						else {
+				swal("Cancelled", "Supplier PO Item deletion cancelled ", "error");
+				}
+			});
+		});
 
     </script>
 <?php } ?>

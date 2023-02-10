@@ -2940,11 +2940,11 @@ class Admin extends BaseController
                 }else{
                     $saveSupplierpoconfirmationdata = $this->admin_model->saveSupplierpoconfirmationdata('',$data);
                     if($saveSupplierpoconfirmationdata){
-                        // $update_last_inserted_id = $this->admin_model->update_last_inserted_id($saveBuyerpodata);
-                        // if($update_last_inserted_id){
+                        $update_last_inserted_id_supplier_po_confirmation = $this->admin_model->update_last_inserted_id_supplier_po_confirmation($saveSupplierpoconfirmationdata);
+                        if($update_last_inserted_id_supplier_po_confirmation){
                              $save_supplierconfirmation_response['status'] = 'success';
                              $save_supplierconfirmation_response['error'] = array( 'po_number'=>strip_tags(form_error('po_number')),'date'=>strip_tags(form_error('date')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'po_confirmed'=>strip_tags(form_error('po_confirmed')),'confirmed_date'=>strip_tags(form_error('confirmed_date')),'confirmed_with'=>strip_tags(form_error('confirmed_with')),'remark'=>strip_tags(form_error('remark')));
-                        // }
+                         }
                     }
                 }
             }
@@ -2957,7 +2957,6 @@ class Admin extends BaseController
             $data['rowMaterialList']= $this->admin_model->fetchALLrowMaterialList();
             $data['getPreviousSupplierPoconfirmationNumber']= $this->admin_model->getPreviousSupplierPoconfirmationNumber()[0];
             $data['fetchALLpresupplierpoconfirmationitemList']= $this->admin_model->fetchALLpresupplierpoconfirmationitemList();
-
             $this->logrecord($process,$processFunction);
             $this->global['pageTitle'] = 'Add Supplier PO Confirmation';
             $this->loadViews("masters/addsupplierpoconfirmation", $this->global, $data, NULL);
@@ -3204,6 +3203,25 @@ class Admin extends BaseController
 		} else {
 			echo 'failure';
 		}
+
+    }
+
+
+    public function deleteSupplierpoconfirmationitem(){
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->deleteSupplierpoconfirmationitem(trim($this->input->post('id')));
+            if ($result) {
+                        $process = 'Supplier PO Confirmation Delete';
+                        $processFunction = 'Admin/deleteSupplierpoconfirmationitem';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
 
     }
 
