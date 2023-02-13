@@ -3099,7 +3099,7 @@ class Admin extends BaseController
         $data['buyerList']= $this->admin_model->fetchAllbuyerList();
         // $data['vendorList']= $this->admin_model->fetchALLvendorList();
         // $data['getVendorpodetails']= $this->admin_model->getVendorpodetails($supplierpoconfirmationid);
-        $data['fetchALLSupplierPOforview']= $this->admin_model->fetchALLSupplierPOforview($supplierpoconfirmationid);
+        $data['fetchALLSupplierPOforview']= $this->admin_model->fetchALLSupplierPOconfirmationforview($supplierpoconfirmationid);
         $this->loadViews("masters/viewSupplierpoconfirmation", $this->global, $data, NULL);
 
     }

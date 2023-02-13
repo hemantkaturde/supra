@@ -3245,6 +3245,7 @@
 									$('#vendor_qty').val('');
 									$('#unit').val('');
 									$('#rm_type').val('');
+									$('#vendor_name').val('');
 
 								}
 								else
@@ -3262,8 +3263,7 @@
 									$('#vendor_qty').val(data_row_material.vendor_qty);
 									$('#unit').val(data_row_material.unit);
 									$('#rm_type').val(data_row_material.type_of_raw_material);
-									
-
+									$('#vendor_name').val(data_row_material.vendor_name);
 								}
 							},
 							error: function (jqXHR, textStatus, errorThrown)
@@ -3280,6 +3280,7 @@
 									$('#vendor_qty').val('');
 									$('#unit').val('');
 									$('#rm_type').val('');
+									$('#vendor_name').val('');
 								//$(".loader_ajax").hide();
 							}
 						});
@@ -3428,6 +3429,26 @@
 				}
 			});
 		});
+
+		$(document).on('blur', '#sent_qty,#short_excess', function(){
+				
+		       $("#short_excess").val();
+		 	
+			   if($("#sent_qty").val()){
+					var sent_qty = $("#sent_qty").val();
+				}else{
+					var sent_qty = 0;
+				}
+
+				if($("#qty").val()){
+					var qty = $("#qty").val();
+				}else{
+					var qty = 0;
+				}
+				
+				var total_value = qty - sent_qty;
+				$("#short_excess").val( Math.round(total_value));
+        });
 
     </script>
 <?php } ?>
