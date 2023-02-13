@@ -3131,16 +3131,15 @@ class Admin extends BaseController
             $this->form_validation->set_rules('part_number','Part Number','trim|required');
             $this->form_validation->set_rules('description','Part Name','trim|required');
             $this->form_validation->set_rules('qty','Qty','trim|numeric|required');
-            $this->form_validation->set_rules('rate','Rate','trim|required');
-            $this->form_validation->set_rules('value','Value','trim|required');
+            $this->form_validation->set_rules('rate','Rate','trim');
+            $this->form_validation->set_rules('value','Value','trim');
+            $this->form_validation->set_rules('sent_qty','Sent Qty','trim|required');
+            $this->form_validation->set_rules('short_excess','Short Excess','trim|required');
 
-
-
-        
             if($this->form_validation->run() == FALSE)
             {
                 $save_supplierpoconfirmationitem_response['status'] = 'failure';
-                $save_supplierpoconfirmationitem_response['error'] = array('part_number'=>strip_tags(form_error('part_number')), 'description'=>strip_tags(form_error('description')), 'qty'=>strip_tags(form_error('qty')), 'rate'=>strip_tags(form_error('rate')),'value'=>strip_tags(form_error('value')),'item_remark'=>strip_tags(form_error('item_remark')),'unit'=>strip_tags(form_error('unit')),'vendor_qty'=>strip_tags(form_error('vendor_qty')));
+                $save_supplierpoconfirmationitem_response['error'] = array('part_number'=>strip_tags(form_error('part_number')), 'description'=>strip_tags(form_error('description')), 'qty'=>strip_tags(form_error('qty')), 'rate'=>strip_tags(form_error('rate')),'value'=>strip_tags(form_error('value')),'item_remark'=>strip_tags(form_error('item_remark')),'unit'=>strip_tags(form_error('unit')),'vendor_qty'=>strip_tags(form_error('vendor_qty')),'sent_qty'=>strip_tags(form_error('sent_qty')),'short_excess'=>strip_tags(form_error('short_excess')));
             }else{
 
                 
@@ -3154,6 +3153,8 @@ class Admin extends BaseController
                     'vendor_qty'=>  trim($this->input->post('vendor_qty')),
                     'item_remark' => trim($this->input->post('item_remark')),
 
+                    'sent_qty'=>  trim($this->input->post('sent_qty')),
+                    'short_excess' => trim($this->input->post('short_excess')),
 
                     'pre_date'		 => trim($this->input->post('pre_date')),
                     'pre_supplier_name'	 => trim($this->input->post('pre_supplier_name')),
@@ -3175,7 +3176,7 @@ class Admin extends BaseController
                     
                     if($saveSupplierpoconfirmationitemdata){
                         $save_supplierpoconfirmationitem_response['status'] = 'success';
-                        $save_supplierpoconfirmationitem_response['error'] = array('part_number'=>'', 'description'=>'', 'qty'=>'', 'rate'=>'','value'=>'');
+                        $save_supplierpoconfirmationitem_response['error'] = array('part_number'=>'', 'description'=>'', 'qty'=>'', 'rate'=>'','value'=>'','sent_qty'=>'','short_excess'=>'');
                     }
                 //  }
                 
