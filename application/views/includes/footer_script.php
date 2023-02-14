@@ -3454,6 +3454,38 @@
 				$("#short_excess").val( Math.round(total_value));
         });
 
+		$(document).on('change','.supplier_po_number_for_buyer_details',function(e){  
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			var supplier_po_number_for_buyer_details = $('.supplier_po_number_for_buyer_details').val();
+
+			$("#buyer_name").html('');
+		
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getBuyerDetailsBysupplierponumber",
+				type: "POST",
+				data : {'supplier_po_number' : supplier_po_number_for_buyer_details},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#buyer_name').html('<option value="">Select Buyer Name</option>');
+					}
+					else
+					{
+						$('#buyer_name').html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#buyer_name').html();
+				}
+			});
+			return false;
+		});
+
     </script>
 <?php } ?>
 

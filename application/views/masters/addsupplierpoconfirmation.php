@@ -86,7 +86,7 @@
                                     <div class="col-md-12 supplier_po_number_div" style="display:<?=$display;?>">
                                             <div class="form-group">
                                                     <label for="supplier_po_number">Select Supplier PO Number <span class="required">*</span></label>
-                                                    <select class="form-control supplier_po_number_for_item" name="supplier_po_number" id="supplier_po_number">
+                                                    <select class="form-control supplier_po_number_for_item supplier_po_number_for_buyer_details" name="supplier_po_number" id="supplier_po_number">
                                                     <option st-id="" value="<?=$fetchALLpresupplierpoconfirmationitemList[0]['pre_supplier_po_number']?>" selected ><?=$selected_value;?></option>
                                                     </select> 
                                                 <p class="error supplier_po_number_error"></p>

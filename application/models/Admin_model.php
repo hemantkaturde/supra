@@ -1986,6 +1986,20 @@ class Admin_model extends CI_Model
         return $data;
     }
 
+    public function getBuyerDetailsBysupplierponumber($supplier_po_number){
+
+        $this->db->select(TBL_BUYER_MASTER.'.*');
+        // $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_SUPPLIER_PO_MASTER.'.vendor_name');
+        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_SUPPLIER_PO_MASTER.'.buyer_name');
+		$this->db->where(TBL_SUPPLIER_PO_MASTER.'.id', $supplier_po_number);
+        $this->db->where(TBL_SUPPLIER_PO_MASTER.'.status', 1);
+        $query_result = $this->db->get(TBL_SUPPLIER_PO_MASTER)->result_array();
+		foreach($query_result as $key => $value) {
+			$query_result[$key]['selected'] = '';
+		}
+        return $query_result;
+
+    }
 
 
 }

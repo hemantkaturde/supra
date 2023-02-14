@@ -3284,5 +3284,27 @@ class Admin extends BaseController
         echo json_encode($json_data);
 
     }
+    
+
+    public function getBuyerDetailsBysupplierponumber(){
+        $supplier_po_number=$this->input->post('supplier_po_number');
+        if($supplier_po_number) {
+			$supplier_po_number = $this->admin_model->getBuyerDetailsBysupplierponumber($supplier_po_number);
+			if(count($supplier_po_number) >= 1) {
+                //$content = $content.'<option value="">Select Vendor Name</option>';
+				foreach($supplier_po_number as $value) {
+					$content = $content.'<option value="'.$value["buyer_id"].'" readonly>'.$value["buyer_name"].'</option>';
+				}
+				echo $content;
+			} else {
+				echo 'failure';
+			}
+		} else {
+			echo 'failure';
+		}
+
+    }
+
+
 
 }
