@@ -71,7 +71,7 @@
 
                                     <div class="col-md-12 buyer_po_number_div" style="display:<?=$display;?>">
                                             <div class="form-group">
-                                                    <label for="buyer_po_number">Select Buyer PO Number <span class="required">*</span></label>
+                                                    <label for="buyer_po_number">Buyer PO Number <span class="required">*</span></label>
                                                     <select class="form-control" name="buyer_po_number" id="buyer_po_number" readonly>
                                                     <option st-id="" value="<?=$fetchALLpresupplierpoconfirmationitemList[0]['pre_buyer_po_number']?>" selected ><?=$selected_value;?></option>
                                                         <option st-id="" value="">Select Buyer Name</option>
