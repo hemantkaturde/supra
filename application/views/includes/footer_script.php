@@ -3526,33 +3526,67 @@
 	        });
 	    });
 
-		$(document).on('change','#supplier_name',function(e){  
+		$(document).on('change','#vendor_name',function(e){  
 			e.preventDefault();
 			//$(".loader_ajax").show();
 			// $("#customers-list").html('');
-			var supplier_name = $('#supplier_name').val();
-		    $('.supplier_po_number_div').css('display','block');
+			var vendor_name = $('#vendor_name').val();
+		    $('.vendor_po_number_div').css('display','block');
 			$.ajax({
-				url : "<?php echo ADMIN_PATH;?>getSupplierPonumberbySupplierid",
+				url : "<?php echo ADMIN_PATH;?>getVendorPonumberbySupplierid",
 				type: "POST",
-				data : {'supplier_name' : supplier_name},
+				data : {'vendor_name' : vendor_name},
 				success: function(data, textStatus, jqXHR)
 				{
 					$(".loader_ajax").hide();
 					if(data == "failure")
 					{
-						$('#supplier_po_number').html('<option value="">Select Supplier PO Number</option>');
+						$('#vendor_po_number').html('<option value="">Select Vendor PO Number</option>');
 					}
 					else
 					{
 						// $('#supplier_po_number').html('<option value="">Select supplier PO Number</option>');
-						$('#supplier_po_number').html(data);
+						$('#vendor_po_number').html(data);
 
 					}
 				},
 				error: function (jqXHR, textStatus, errorThrown)
 				{
-					$('#supplier_po_number').html();
+					$('#vendor_po_number').html();
+					//$(".loader_ajax").hide();
+				}
+			});
+			return false;
+		});
+
+
+		$(document).on('change','.vendor_name_for_buyer_name',function(e){  
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			// $("#customers-list").html('');
+			var vendor_name_for_buyer_name = $('.vendor_name_for_buyer_name').val();
+
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getBuyerNamebySupplierid",
+				type: "POST",
+				data : {'vendor_name' : vendor_name_for_buyer_name},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#buyer_name').html('<option value="">Select Buyer Name</option>');
+					}
+					else
+					{
+						// $('#supplier_po_number').html('<option value="">Select supplier PO Number</option>');
+						$('#buyer_name').html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#buyer_name').html();
 					//$(".loader_ajax").hide();
 				}
 			});

@@ -152,6 +152,13 @@ $route['addVendorpoconfirmation'] = "admin/addVendorpoconfirmation";
 $route['fetchVendorrpoconfirmationlist'] = "admin/fetchVendorrpoconfirmationlist";
 
 
+$route['getVendorPonumberbySupplierid'] = "admin/getVendorPonumberbySupplierid";
+$route['getBuyerNamebySupplierid'] = "admin/getBuyerNamebySupplierid";
+
+
+
+
+
 
 
 

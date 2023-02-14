@@ -2013,6 +2013,26 @@ class Admin_model extends CI_Model
 
     }
 
+    public function getVendorPonumberbySupplierid($supplier_name){
+        $this->db->select('*');
+        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_VENDOR_PO_MASTER.'.buyer_name');
+        $this->db->where(TBL_VENDOR_PO_MASTER.'.vendor_name', $supplier_name);
+        $query = $this->db->get(TBL_VENDOR_PO_MASTER);
+        $data = $query->result_array();
+        return $data;
+    }
+
+    public function getBuyerNamebySupplierid($supplier_name){
+
+    
+        $this->db->select(TBL_BUYER_MASTER.'.*');
+        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_VENDOR_PO_MASTER.'.buyer_name');
+        $this->db->where(TBL_VENDOR_PO_MASTER.'.id', $supplier_name);
+        $query = $this->db->get(TBL_VENDOR_PO_MASTER);
+        $data = $query->result_array();
+        return $data;
+    }
+
 
 }
 
