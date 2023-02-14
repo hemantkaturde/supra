@@ -2907,7 +2907,7 @@ class Admin extends BaseController
             $this->form_validation->set_rules('supplier_name','Supplier Name','trim|required');
             $this->form_validation->set_rules('supplier_po_number','Supplier PO Number','trim|required');
             $this->form_validation->set_rules('buyer_name','Buyer Name','trim|required');
-            $this->form_validation->set_rules('buyer_po_number','Buyer PO Number','trim|required');
+            $this->form_validation->set_rules('buyer_po_number','Buyer PO Number','trim');
             $this->form_validation->set_rules('po_confirmed','PO Confirmed','trim|required');
             $this->form_validation->set_rules('confirmed_date','Confirmed Date','trim|required');
             $this->form_validation->set_rules('confirmed_with','Confirmed With','trim|required');
