@@ -3243,11 +3243,14 @@ class Admin extends BaseController
         }else{
             $process = 'Add Vendor PO Confirmation';
             $processFunction = 'Admin/addVendorpoconfirmation';
-            $data['buyerList']= $this->admin_model->fetchAllbuyerList();
-            $data['supplierList']= $this->admin_model->fetchALLsupplierList();
-            $data['rowMaterialList']= $this->admin_model->fetchALLrowMaterialList();
-            $data['getPreviousSupplierPoconfirmationNumber']= $this->admin_model->getPreviousSupplierPoconfirmationNumber()[0];
-            $data['fetchALLpresupplierpoconfirmationitemList']= $this->admin_model->fetchALLpresupplierpoconfirmationitemList();
+            // $data['buyerList']= $this->admin_model->fetchAllbuyerList();
+            // $data['supplierList']= $this->admin_model->fetchALLsupplierList();
+            // $data['rowMaterialList']= $this->admin_model->fetchALLrowMaterialList();
+            // $data['getPreviousSupplierPoconfirmationNumber']= $this->admin_model->getPreviousSupplierPoconfirmationNumber()[0];
+            // $data['fetchALLpresupplierpoconfirmationitemList']= $this->admin_model->fetchALLpresupplierpoconfirmationitemList();
+
+            $data['vendorList']= $this->admin_model->fetchALLvendorList();
+            
             $this->logrecord($process,$processFunction);
             $this->global['pageTitle'] = 'Add Vendor PO Confirmation';
             $this->loadViews("masters/addVendorpoconfirmation", $this->global, $data, NULL);

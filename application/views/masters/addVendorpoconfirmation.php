@@ -45,14 +45,14 @@
 
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                                <label for="supplier_name">Vendor Name <span class="required">*</span></label>
-                                                <select class="form-control" name="supplier_name" id="supplier_name">
+                                                <label for="vendor_name">Vendor Name <span class="required">*</span></label>
+                                                <select class="form-control" name="vendor_name" id="vendor_name">
                                                     <option st-id="" value="">Select Supplier Name</option>
-                                                    <?php foreach ($supplierList as $key => $value) {?>
-                                                    <option value="<?php echo $value['sup_id']; ?>" <?php if($value['sup_id']==$fetchALLpresupplierpoconfirmationitemList[0]['pre_supplier_name']){ echo 'selected';} ?> ><?php echo $value['supplier_name']; ?></option>
+                                                    <?php foreach ($vendorList as $key => $value) {?>
+                                                    <option value="<?php echo $value['ven_id']; ?>"><?php echo $value['vendor_name']; ?></option>
                                                     <?php } ?>
                                                 </select>
-                                            <p class="error supplier_name_error"></p>
+                                            <p class="error vendor_name_error"></p>
                                         </div>
                                     </div>
 
@@ -82,7 +82,7 @@
                                     </div>
 
                 
-                                    
+
                                     <div class="col-md-12">
                                         <div class="form-group">
                                                 <label for="po_confirmed">PO Confirmed<span class="required">*</span></label>
