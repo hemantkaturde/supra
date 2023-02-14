@@ -1927,21 +1927,19 @@ class Admin_model extends CI_Model
     }
 
     public function getVendorpoconfirmationCount($params){
-        $this->db->select('*');
-        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id  = '.TBL_SUPPLIER_PO_CONFIRMATION.'.buyer_po_id');
-        $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id  = '.TBL_SUPPLIER_PO_CONFIRMATION.'.supplier_po_id');
+        $this->db->select('*,'.TBL_BUYER_MASTER.'.buyer_name as bu_name');
+        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id  = '.TBL_VENDOR_PO_CONFIRMATION.'.vendor_name');
         if($params['search']['value'] != "") 
         {
-            $this->db->where("(".TBL_SUPPLIER_PO_CONFIRMATION.".po_number LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_SUPPLIER_PO_CONFIRMATION.".date LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_SUPPLIER.".supplier_name LIKE '%".$params['search']['value']."%'");
+            $this->db->where("(".TBL_VENDOR_PO_CONFIRMATION.".po_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_CONFIRMATION.".date LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_SUPPLIER_PO_CONFIRMATION.".confirmed_date LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_SUPPLIER_PO_CONFIRMATION.".po_confirmed LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_SUPPLIER_PO_CONFIRMATION.".quatation_ref_no LIKE '%".$params['search']['value']."%')");
+            $this->db->or_where(TBL_VENDOR_PO_CONFIRMATION.".confirmed_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_CONFIRMATION.".po_confirmed LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_CONFIRMATION.".quatation_ref_no LIKE '%".$params['search']['value']."%')");
         }
-        $this->db->where(TBL_SUPPLIER_PO_CONFIRMATION.'.status', 1);
-        $query = $this->db->get(TBL_SUPPLIER_PO_CONFIRMATION);
+        $this->db->where(TBL_VENDOR_PO_CONFIRMATION.'.status', 1);
+        $query = $this->db->get(TBL_VENDOR_PO_CONFIRMATION);
         $rowcount = $query->num_rows();
         return $rowcount;
 
@@ -1949,15 +1947,12 @@ class Admin_model extends CI_Model
     }
 
     public function getVendorpoconfirmationdata($params){
-
-        $this->db->select('*,'.TBL_SUPPLIER.'.supplier_name as sup_name,'.TBL_BUYER_MASTER.'.buyer_name as bu_name');
-        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id  = '.TBL_VENDOR_PO_CONFIRMATION.'.buyer_po_id');
-        $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id  = '.TBL_VENDOR_PO_CONFIRMATION.'.supplier_po_id');
+        $this->db->select('*,'.TBL_BUYER_MASTER.'.buyer_name as bu_name');
+        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id  = '.TBL_VENDOR_PO_CONFIRMATION.'.vendor_name');
         if($params['search']['value'] != "") 
         {
             $this->db->where("(".TBL_VENDOR_PO_CONFIRMATION.".po_number LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_VENDOR_PO_CONFIRMATION.".date LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_SUPPLIER.".supplier_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_VENDOR_PO_CONFIRMATION.".confirmed_date LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_VENDOR_PO_CONFIRMATION.".po_confirmed LIKE '%".$params['search']['value']."%'");

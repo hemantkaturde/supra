@@ -3526,6 +3526,41 @@
 	        });
 	    });
 
+		$(document).on('change','#supplier_name',function(e){  
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			// $("#customers-list").html('');
+			var supplier_name = $('#supplier_name').val();
+		    $('.supplier_po_number_div').css('display','block');
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getSupplierPonumberbySupplierid",
+				type: "POST",
+				data : {'supplier_name' : supplier_name},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#supplier_po_number').html('<option value="">Select Supplier PO Number</option>');
+					}
+					else
+					{
+						// $('#supplier_po_number').html('<option value="">Select supplier PO Number</option>');
+						$('#supplier_po_number').html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#supplier_po_number').html();
+					//$(".loader_ajax").hide();
+				}
+			});
+			return false;
+		});
+
+
+
 
     </script>
 <?php } ?>
