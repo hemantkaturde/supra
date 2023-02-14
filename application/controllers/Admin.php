@@ -3152,10 +3152,8 @@ class Admin extends BaseController
                     'unit' =>    trim($this->input->post('unit')),
                     'vendor_qty'=>  trim($this->input->post('vendor_qty')),
                     'item_remark' => trim($this->input->post('item_remark')),
-
                     'sent_qty'=>  trim($this->input->post('sent_qty')),
                     'short_excess' => trim($this->input->post('short_excess')),
-
                     'pre_date'		 => trim($this->input->post('pre_date')),
                     'pre_supplier_name'	 => trim($this->input->post('pre_supplier_name')),
                     'pre_supplier_po_number'	=> trim($this->input->post('pre_supplier_po_number')),
@@ -3226,5 +3224,36 @@ class Admin extends BaseController
 
     }
 
+
+    public function vendorpoconfirmation(){
+        $process = 'Vendor PO Confirmation';
+        $processFunction = 'Admin/supplierpoconfirmation';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Vendor PO Confirmation';
+        $this->loadViews("masters/vendorpoconfirmation", $this->global, $data, NULL);  
+    }
+
+
+    public function addVendorpoconfirmation(){
+     
+        $post_submit = $this->input->post();
+        if($post_submit){
+
+
+        }else{
+            $process = 'Add Vendor PO Confirmation';
+            $processFunction = 'Admin/addVendorpoconfirmation';
+            $data['buyerList']= $this->admin_model->fetchAllbuyerList();
+            $data['supplierList']= $this->admin_model->fetchALLsupplierList();
+            $data['rowMaterialList']= $this->admin_model->fetchALLrowMaterialList();
+            $data['getPreviousSupplierPoconfirmationNumber']= $this->admin_model->getPreviousSupplierPoconfirmationNumber()[0];
+            $data['fetchALLpresupplierpoconfirmationitemList']= $this->admin_model->fetchALLpresupplierpoconfirmationitemList();
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Add Vendor PO Confirmation';
+            $this->loadViews("masters/addVendorpoconfirmation", $this->global, $data, NULL);
+        }
+
+
+    }
 
 }
