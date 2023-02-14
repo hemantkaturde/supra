@@ -1913,12 +1913,18 @@ class Admin_model extends CI_Model
     }
 
 
-    public function fetchALLSupplierPOconfirmationforview(){
+    public function fetchALLSupplierPOitemsforview($supplierpoconfirmationid){
 
-        return true;
+        $this->db->select('*');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.part_number_id');
+        $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.pre_supplier_po_number');
+        //$this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.pre_buyer_po_number');
+        $this->db->where(TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.supplier_po_confirmation_id',$supplierpoconfirmationid);
+        $this->db->order_by(TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.id','desc');
+        $query = $this->db->get(TBL_SUPPLIER_PO_CONFIRMATION_ITEM);
+        $data = $query->result_array();
+        return $data;
     }
-
-
 
     public function getVendorpoconfirmationCount($params){
         $this->db->select('*');
@@ -1998,6 +2004,17 @@ class Admin_model extends CI_Model
 			$query_result[$key]['selected'] = '';
 		}
         return $query_result;
+
+    }
+
+
+    public function getSupplierpoconfirmationdetails($supplierpoconfirmationid){
+
+        $this->db->select('*');
+        $this->db->where(TBL_SUPPLIER_PO_CONFIRMATION.'.id', $supplierpoconfirmationid);
+        $query = $this->db->get(TBL_SUPPLIER_PO_CONFIRMATION);
+        $data = $query->result_array();
+        return $data;
 
     }
 
