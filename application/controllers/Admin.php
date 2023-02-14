@@ -3250,12 +3250,38 @@ class Admin extends BaseController
             // $data['fetchALLpresupplierpoconfirmationitemList']= $this->admin_model->fetchALLpresupplierpoconfirmationitemList();
 
             $data['vendorList']= $this->admin_model->fetchALLvendorList();
-            
             $this->logrecord($process,$processFunction);
             $this->global['pageTitle'] = 'Add Vendor PO Confirmation';
             $this->loadViews("masters/addVendorpoconfirmation", $this->global, $data, NULL);
         }
 
+
+    }
+
+
+    public function fetchVendorrpoconfirmationlist(){
+
+        $params = $_REQUEST;
+        $totalRecords = $this->admin_model->getVendorpoconfirmationCount($params); 
+        $queryRecords = $this->admin_model->getVendorpoconfirmationdata($params); 
+
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+        echo json_encode($json_data);
 
     }
 

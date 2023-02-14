@@ -26,7 +26,7 @@
                 <div class="box">
                     <div class="box-body">   
                         <div class="panel-body">
-                            <table width="100%" class="table table-striped table-bordered table-hover" id="view_supplierpoconfirmation">
+                            <table width="100%" class="table table-striped table-bordered table-hover" id="view_vendorpoconfirmation">
                                 <thead>
                                     <tr style="background-color:#3c8dbc !important;color:#fff">
                                         <th>PO Number</th>

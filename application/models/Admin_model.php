@@ -1920,6 +1920,72 @@ class Admin_model extends CI_Model
 
 
 
+    public function getVendorpoconfirmationCount($params){
+        $this->db->select('*');
+        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id  = '.TBL_SUPPLIER_PO_CONFIRMATION.'.buyer_po_id');
+        $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id  = '.TBL_SUPPLIER_PO_CONFIRMATION.'.supplier_po_id');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_SUPPLIER_PO_CONFIRMATION.".po_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER_PO_CONFIRMATION.".date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER.".supplier_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER_PO_CONFIRMATION.".confirmed_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER_PO_CONFIRMATION.".po_confirmed LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER_PO_CONFIRMATION.".quatation_ref_no LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_SUPPLIER_PO_CONFIRMATION.'.status', 1);
+        $query = $this->db->get(TBL_SUPPLIER_PO_CONFIRMATION);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+
+
+    }
+
+    public function getVendorpoconfirmationdata($params){
+
+        $this->db->select('*,'.TBL_SUPPLIER.'.supplier_name as sup_name,'.TBL_BUYER_MASTER.'.buyer_name as bu_name');
+        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id  = '.TBL_VENDOR_PO_CONFIRMATION.'.buyer_po_id');
+        $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id  = '.TBL_VENDOR_PO_CONFIRMATION.'.supplier_po_id');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_VENDOR_PO_CONFIRMATION.".po_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_CONFIRMATION.".date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER.".supplier_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_CONFIRMATION.".confirmed_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_CONFIRMATION.".po_confirmed LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_CONFIRMATION.".quatation_ref_no LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_VENDOR_PO_CONFIRMATION.'.status', 1);
+        $this->db->limit($params['length'],$params['start']);
+        $this->db->order_by(TBL_VENDOR_PO_CONFIRMATION.'.id','DESC');
+        $query = $this->db->get(TBL_VENDOR_PO_CONFIRMATION);
+        $fetch_result = $query->result_array();
+
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['po_number'] = $value['po_number'];
+                $data[$counter]['date'] = $value['date'];
+                $data[$counter]['sup_name'] = $value['sup_name'];
+                $data[$counter]['buyer_name'] = $value['bu_name'];
+                $data[$counter]['po_confirmed'] = $value['po_confirmed'];
+                $data[$counter]['confirmed_date'] = $value['confirmed_date'];
+                $data[$counter]['confirmed_with'] = $value['confirmed_with'];
+                $data[$counter]['action'] = '';
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewSupplierpoconfirmation/".$value['id']."' style='cursor: pointer;'><i style='font-size: large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['id']."' class='fa fa-trash-o deleteSupplierPoconfirmation' aria-hidden='true'></i>"; 
+                $counter++; 
+            }
+        }
+
+        return $data;
+    }
+
 
 
 }

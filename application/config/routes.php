@@ -149,6 +149,10 @@ $route['viewSupplierpoconfirmation/(:any)'] = "admin/viewSupplierpoconfirmation/
 
 $route['vendorpoconfirmation'] = "admin/vendorpoconfirmation";
 $route['addVendorpoconfirmation'] = "admin/addVendorpoconfirmation";
+$route['fetchVendorrpoconfirmationlist'] = "admin/fetchVendorrpoconfirmationlist";
+
+
+
 
 
 

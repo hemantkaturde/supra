@@ -24,20 +24,37 @@
                         <form role="form" id="addnnewsupplierconfrimationpoform" action="<?php echo base_url() ?>addnnewsupplierconfrimationpoform" method="post" role="form">
                             <div class="box-body">
                                 <div class="col-md-4">
+
+                                    <?php
+                                        if($getPreviousSupplierPoconfirmationNumber['po_number']){
+                                            $arr = str_split($getPreviousSupplierPoconfirmationNumber['po_number']);
+                                            $i = end($arr);
+                                            $inrno= "SQPC2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                            $po_number = $inrno;
+                                        }else{
+                                            $po_number = 'SQPC23240001';
+                                        }
+                                    ?>
                                     
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="po_number">PO Confirmation Number<span class="required">*</span></label>
-                                            <input type="text" class="form-control" id="po_number" name="po_number" value="" required readonly>
+                                            <input type="text" class="form-control" id="po_number" name="po_number" value="<?=$po_number?>" required readonly>
                                             <p class="error po_number_error"></p>
                                         </div>
                                     </div>
 
 
+                                    <?php if($fetchALLpresupplierpoconfirmationitemList[0]['pre_date']){
+                                        $date= $fetchALLpresupplierpoconfirmationitemList[0]['pre_date'];
+                                     }else{
+                                        $date= date('Y-m-d');
+                                     } ?>
+
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="date">Date <span class="required">*</span></label>
-                                            <input type="text" class="form-control datepicker"  value="" id="date" name="date" required>
+                                            <input type="text" class="form-control datepicker"  value="<?=$date?>" id="date" name="date" required>
                                             <p class="error date_error"></p>
                                         </div>
                                     </div>
@@ -55,18 +72,6 @@
                                             <p class="error vendor_name_error"></p>
                                         </div>
                                     </div>
-
-
-                                    <div class="col-md-12 supplier_po_number_div">
-                                            <div class="form-group">
-                                                    <label for="supplier_po_number">Select Supplier PO Number <span class="required">*</span></label>
-                                                    <select class="form-control supplier_po_number_for_item" name="supplier_po_number" id="supplier_po_number">
-                                                    <option st-id="" value="<?=$fetchALLpresupplierpoconfirmationitemList[0]['pre_supplier_po_number']?>" selected ><?=$selected_value;?></option>
-                                                    </select> 
-                                                <p class="error supplier_po_number_error"></p>
-                                            </div>
-                                    </div>
-
 
                                     <div class="col-md-12">
                                         <div class="form-group">
@@ -88,19 +93,17 @@
                                                 <label for="po_confirmed">PO Confirmed<span class="required">*</span></label>
                                                 <select class="form-control" name="po_confirmed" id="po_confirmed">
                                                     <option st-id="" value="">Select PO Confirmed</option>
-                                                    <option st-id="" value="YES" <?php if($fetchALLpresupplierpoconfirmationitemList[0]['pre_po_confirmed']=='YES'){ echo 'selected'; }  ?>>YES</option>
-                                                    <option st-id="" value="NO" <?php if($fetchALLpresupplierpoconfirmationitemList[0]['pre_po_confirmed']=='NO'){ echo 'selected'; }  ?>>NO</option>
+                                                    <option st-id="" value="YES">YES</option>
+                                                    <option st-id="" value="NO">NO</option>
                                                 </select>
                                             <p class="error po_confirmed_error"></p>
                                         </div>
                                     </div>
 
-                                  
-
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="confirmed_date">Confirmed Date <span class="required">*</span></label>
-                                            <input type="text" class="form-control datepicker" value="<?=$pre_confirmed_date;?>" id="confirmed_date" name="confirmed_date" required>
+                                            <input type="text" class="form-control datepicker" value="" id="confirmed_date" name="confirmed_date" required>
                                             <p class="error confirmed_date_error"></p>
                                         </div>
                                     </div>
@@ -109,7 +112,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="confirmed_with">Confirmed With <span class="required">*</span></label>
-                                            <input type="text" class="form-control" id="confirmed_with" value="<?=$fetchALLpresupplierpoconfirmationitemList[0]['pre_confirmed_with'];?>" name="confirmed_with">
+                                            <input type="text" class="form-control" id="confirmed_with" value="" name="confirmed_with">
                                             <p class="error confirmed_with_error"></p>
                                         </div>
                                     </div>
@@ -117,7 +120,7 @@
                                     <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="remark">Remark</label>
-                                                  <textarea type="text" class="form-control"  id="remark"  name="remark" required> <?=$fetchALLpresupplierpoconfirmationitemList[0]['pre_confirmed_with'];?></textarea>
+                                                  <textarea type="text" class="form-control"  id="remark"  name="remark" required></textarea>
                                                 <p class="error remark_error"></p>
                                             </div>
                                     </div>
@@ -377,7 +380,7 @@
                                     }else{ 
                                         $disabled= 'disabled';
                                      } ?>
-                                    <!-- <input type="submit" id="savenewsupplierconfrimationpo" class="btn btn-primary" value="Submit" <?=$disabled;?> /> -->
+                                    <input type="submit" id="savenewsupplierconfrimationpo" class="btn btn-primary" value="Submit" <?=$disabled;?> />
                                     <input type="button" onclick="location.href = '<?php echo base_url() ?>supplierpoconfirmation'" class="btn btn-default" value="Back" />
                                 </div>
                             </div>
