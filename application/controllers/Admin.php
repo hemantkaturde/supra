@@ -3135,6 +3135,7 @@ class Admin extends BaseController
             $this->form_validation->set_rules('value','Value','trim');
             $this->form_validation->set_rules('sent_qty','Sent Qty','trim|required');
             $this->form_validation->set_rules('short_excess','Short Excess','trim|required');
+            $this->form_validation->set_rules('sent_qty_pcs','Sent Qty PCS','trim');
 
             if($this->form_validation->run() == FALSE)
             {
@@ -3162,6 +3163,7 @@ class Admin extends BaseController
                     'pre_po_confirmed'	=> trim($this->input->post('pre_po_confirmed')),
                     'pre_confirmed_date'	=> trim($this->input->post('pre_confirmed_date')),
                     'pre_confirmed_with'	=> trim($this->input->post('pre_confirmed_with')),
+                    'sent_qty_pcs'=> trim($this->input->post('sent_qty_pcs')),
                     'pre_remark'   => trim($this->input->post('pre_remark')),
                 );
 
@@ -3293,7 +3295,7 @@ class Admin extends BaseController
 			if(count($supplier_po_number) >= 1) {
                 //$content = $content.'<option value="">Select Vendor Name</option>';
 				foreach($supplier_po_number as $value) {
-					$content = $content.'<option value="'.$value["buyer_id"].'" readonly>'.$value["buyer_name"].'</option>';
+					$content = $content.'<option value="'.$value["buyer_id"].'">'.$value["buyer_name"].'</option>';
 				}
 				echo $content;
 			} else {

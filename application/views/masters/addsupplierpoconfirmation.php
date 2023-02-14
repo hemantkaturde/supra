@@ -362,7 +362,7 @@
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Sent Quantity <span class="required">*</span></label>
+                                                        <label class="col-sm-3 col-form-label">Sent Quantity (In kgs)<span class="required">*</span></label>
                                                         <div class="col-sm-9">
                                                             <input type="number" class="form-control"  id="sent_qty" name="sent_qty">
                                                             <p class="error sent_qty_error"></p>
@@ -394,6 +394,14 @@
                                                     </div>
 
                                                     <div class="form-group row">
+                                                        <label class="col-sm-3 col-form-label">Sent Quantity (In Pcs)</label>
+                                                        <div class="col-sm-9">
+                                                            <input type="number" class="form-control"  id="sent_qty_pcs" name="sent_qty_pcs">
+                                                            <p class="error sent_qty_pcs_error"></p>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row">
                                                         <label class="col-sm-3 col-form-label">Vendor Name <span class="required">*</span></label>
                                                         <div class="col-sm-9">
                                                             <input type="text" class="form-control"  id="vendor_name" name="vendor_name" readonly>
@@ -408,6 +416,8 @@
                                                             <p class="error vendor_qty_error"></p>
                                                         </div>
                                                     </div>
+
+                                                   
 
 
                                                     <!-- <div class="form-group row">
