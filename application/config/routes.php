@@ -154,6 +154,9 @@ $route['fetchVendorrpoconfirmationlist'] = "admin/fetchVendorrpoconfirmationlist
 
 $route['getVendorPonumberbySupplierid'] = "admin/getVendorPonumberbySupplierid";
 $route['getBuyerNamebySupplierid'] = "admin/getBuyerNamebySupplierid";
+$route['addvendorpoconfirmation'] = "admin/addvendorpoconfirmation";
+$route['getVendoritemonly'] = "admin/getVendoritemonly";
+$route['getSuppliergoodsPartnumberByid'] = "admin/getSuppliergoodsPartnumberByid";
 
 
 

@@ -3242,7 +3242,56 @@ class Admin extends BaseController
         $post_submit = $this->input->post();
         if($post_submit){
 
+            $save_vendorconfirmation_response = array();
 
+            $this->form_validation->set_rules('po_number','PO Number','trim|required');
+            $this->form_validation->set_rules('date','Date','trim|required');
+            $this->form_validation->set_rules('vendor_name','Vendor Name','trim|required');
+            $this->form_validation->set_rules('vendor_po_number','Vendor PO Number','trim|required');
+            $this->form_validation->set_rules('buyer_name','Buyer Name','trim|required');
+            $this->form_validation->set_rules('po_confirmed','PO Confirmed','trim|required');
+            $this->form_validation->set_rules('confirmed_date','Confirmed Date','trim|required');
+            $this->form_validation->set_rules('confirmed_with','Confirmed With','trim|required');
+            $this->form_validation->set_rules('remark','Remark','trim');
+
+
+            if($this->form_validation->run() == FALSE)
+            {
+                $save_vendorconfirmation_response['status'] = 'failure';
+                $save_vendorconfirmation_response['error'] = array( 'po_number'=>strip_tags(form_error('po_number')),'date'=>strip_tags(form_error('date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'buyer_name'=>strip_tags(form_error('buyer_name')),'po_confirmed'=>strip_tags(form_error('po_confirmed')),'confirmed_date'=>strip_tags(form_error('confirmed_date')),'confirmed_with'=>strip_tags(form_error('confirmed_with')),'remark'=>strip_tags(form_error('remark')));
+            }else{
+
+                $data = array(
+                    'po_number'   => trim($this->input->post('po_number')),
+                    'date'     => trim($this->input->post('date')),
+                    'vendor_name'  => trim($this->input->post('vendor_name')),
+                    'vendor_po_number' => trim($this->input->post('vendor_po_number')),
+                    'buyer_name' =>    trim($this->input->post('buyer_name')),
+                    'po_confirmed' =>    trim($this->input->post('po_confirmed')),
+                    'confirmed_date' =>    trim($this->input->post('confirmed_date')),
+                    'confirmed_with' =>    trim($this->input->post('confirmed_with')),
+                    'remark' =>    trim($this->input->post('remark')),
+                );
+
+                $checkIfexitsVendorpoconfirmation = $this->admin_model->checkIfexitsVendorpoconfirmation(trim($this->input->post('po_number')));
+                if($checkIfexitsVendorpoconfirmation > 0){
+                    $save_vendorconfirmation_response['status'] = 'failure';
+                    $save_vendorconfirmation_response['error'] = array( 'po_number'=>strip_tags(form_error('po_number')),'date'=>strip_tags(form_error('date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'buyer_name'=>strip_tags(form_error('buyer_name')),'po_confirmed'=>strip_tags(form_error('po_confirmed')),'confirmed_date'=>strip_tags(form_error('confirmed_date')),'confirmed_with'=>strip_tags(form_error('confirmed_with')),'remark'=>strip_tags(form_error('remark')));
+                }else{
+
+                    $saveVendorpoconfirmationdata = $this->admin_model->saveVendorpoconfirmationdata('',$data);
+                    if($saveVendorpoconfirmationdata){
+
+                        // $update_last_inserted_id_supplier_po_confirmation = $this->admin_model->update_last_inserted_id_supplier_po_confirmation($saveSupplierpoconfirmationdata);
+                        // if($update_last_inserted_id_supplier_po_confirmation){
+                             $save_vendorconfirmation_response['status'] = 'success';
+                             $save_vendorconfirmation_response['error'] = array( 'po_number'=>strip_tags(form_error('po_number')),'date'=>strip_tags(form_error('date')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'po_confirmed'=>strip_tags(form_error('po_confirmed')),'confirmed_date'=>strip_tags(form_error('confirmed_date')),'confirmed_with'=>strip_tags(form_error('confirmed_with')),'remark'=>strip_tags(form_error('remark')));
+                        //  }
+                    }
+
+                }
+            }
+            echo json_encode($save_vendorconfirmation_response);
         }else{
             $process = 'Add Vendor PO Confirmation';
             $processFunction = 'Admin/addVendorpoconfirmation';
@@ -3348,5 +3397,44 @@ class Admin extends BaseController
 		}
     }
 
+
+    public function getVendoritemonly(){
+
+        $vendor_po_number=$this->input->post('vendor_po_number');
+
+        if($vendor_po_number) {
+			$getVendoritemsonly = $this->admin_model->getVendoritemsonly($vendor_po_number);
+			if(count($getVendoritemsonly) >= 1) {
+                $content = $content.'<option value="">Select Part Number</option>';
+				foreach($getVendoritemsonly as $value) {
+					$content = $content.'<option value="'.$value["fin_id"].'">'.$value["part_number"].'</option>';
+				}
+				echo $content;
+			} else {
+				echo 'failure';
+			}
+		} else {
+			echo 'failure';
+		}
+
+    }
+
+    public function getSuppliergoodsPartnumberByid(){
+
+        if($this->input->post('part_number')) {
+            $getPartNameBypartid = $this->admin_model->getSuppliergoodsPartnumberByid($this->input->post('part_number'));
+
+            if($getPartNameBypartid){
+                $content = $getPartNameBypartid[0];
+                echo json_encode($content);
+
+            }else{
+                echo 'failure';
+            }
+           
+        } else {
+            echo 'failure';
+        }
+    }
 
 }

@@ -21,7 +21,7 @@
                             <h3 class="box-title">Add Vendor PO Confirmation Details</h3>
                         </div>
                         <?php $this->load->helper("form"); ?>
-                        <form role="form" id="addnnewsupplierconfrimationpoform" action="<?php echo base_url() ?>addnnewsupplierconfrimationpoform" method="post" role="form">
+                        <form role="form" id="addnnewvendorconfrimationpoform" action="<?php echo base_url() ?>addnnewvendorconfrimationpoform" method="post" role="form">
                             <div class="box-body">
                                 <div class="col-md-4">
 
@@ -86,7 +86,7 @@
                                     <div class="col-md-12 vendor_po_number_div" style="display:<?=$display;?>">
                                             <div class="form-group">
                                                     <label for="vendor_po_number">Select Vendor PO Number <span class="required">*</span></label>
-                                                    <select class="form-control vendor_name_for_buyer_name" name="vendor_po_number" id="vendor_po_number">
+                                                    <select class="form-control vendor_name_for_buyer_name vendor_po_for_item" name="vendor_po_number" id="vendor_po_number">
                                                     <option st-id="" value="<?=$fetchALLpresupplierpoconfirmationitemList[0]['pre_vendor_po_number']?>" selected ><?=$selected_value;?></option>
                                                         <!-- <option st-id="" value="">Select Buyer Name</option>
                                                         <?php foreach ($buyerList as $key => $value) {?>
@@ -211,7 +211,7 @@
                                                 <!-- <span aria-hidden="true">&times;</span> -->
                                                 </button>
                                             </div>
-                                            <form role="form" id="saveSupplierconfromationpoitemform" action="<?php echo base_url() ?>saveSupplierconfromationpoitemform" method="post" role="form">
+                                            <form role="form" id="saveVendorconfromationpoitemform" action="<?php echo base_url() ?>saveVendorconfromationpoitemform" method="post" role="form">
 
                                                 <div class="modal-body">
                                                         <div class="loader_ajax" style="display:none;">
@@ -219,8 +219,8 @@
                                                         </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Part Number <span class="required">*</span> (<small>Row Material Goods Master</small>)</label>
-                                                        <div class="col-sm-9">
+                                                        <label class="col-sm-4 col-form-label">Part Number <span class="required">*</span> (<small>Row Material Goods Master</small>)</label>
+                                                        <div class="col-sm-8">
                                                             <select class="form-control" name="part_number" id="part_number">
                                                                 <option st-id="" value="">Select Part Name</option>
                                                                 <!-- <?php foreach ($rowMaterialList as $key => $value) {?>        
@@ -233,8 +233,8 @@
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Part Name <span class="required">*</span></label>
-                                                        <div class="col-sm-9">
+                                                        <label class="col-sm-4 col-form-label">Part Name <span class="required">*</span></label>
+                                                        <div class="col-sm-8">
                                                             <input type="type" class="form-control"  id="description" name="description" required readonly>
                                                             <p class="error description_error"></p>
                                                         </div>
@@ -243,47 +243,61 @@
 
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Vendor Quantity</label>
-                                                        <div class="col-sm-9">
+                                                        <label class="col-sm-4 col-form-label">Vendor Quantity</label>
+                                                        <div class="col-sm-8">
                                                             <input type="number" class="form-control"  id="vendor_qty" name="vendor_qty" readonly>
                                                             <p class="error vendor_qty_error"></p>
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Order Quantity <span class="required">*</span></label>
-                                                        <div class="col-sm-9">
-                                                            <input type="number" class="form-control"  id="qty" name="qty">
+                                                        <label class="col-sm-4 col-form-label">Order Quantity <span class="required">*</span></label>
+                                                        <div class="col-sm-8">
+                                                            <input type="number" class="form-control"  id="qty" name="qty" readonly>
                                                             <p class="error qty_error"></p>
                                                         </div>
                                                     </div>
 
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Row Material Rrecived qty <span class="required">*</span></label>
-                                                        <div class="col-sm-9">
-                                                            <input type="number" class="form-control"  id="qty" name="qty">
-                                                            <p class="error qty_error"></p>
+                                                        <label class="col-sm-4 col-form-label">Row Material Rrecived Quantity <span class="required">*</span></label>
+                                                        <div class="col-sm-8">
+                                                            <input type="number" class="form-control"  id="rmqty" name="rmqty" readonly>
+                                                            <p class="error rmqty_error"></p>
                                                         </div>
                                                     </div>
 
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Finished Good Rrecived qty <span class="required">*</span></label>
-                                                        <div class="col-sm-9">
-                                                            <input type="number" class="form-control"  id="qty" name="qty">
-                                                            <p class="error qty_error"></p>
+                                                        <label class="col-sm-4 col-form-label">Finished Good Rrecived Quantity <span class="required">*</span></label>
+                                                        <div class="col-sm-8">
+                                                            <input type="number" class="form-control"  id="finishedgoodqty" name="finishedgoodqty">
+                                                            <p class="error finishedgoodqty_error"></p>
                                                         </div>
                                                     </div>
 
-                                                    
+
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-4 col-form-label">Gross Weight <span class="required">*</span></label>
+                                                        <div class="col-sm-8">
+                                                            <input type="number" class="form-control"  id="gross_weight" name="gross_weight">
+                                                            <p class="error gross_weight_error"></p>
+                                                        </div>
+                                                    </div>
 
 
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-4 col-form-label">Expected Quantity <span class="required">*</span></label>
+                                                        <div class="col-sm-8">
+                                                            <input type="number" class="form-control"  id="expected_qty" name="expected_qty">
+                                                            <p class="error expected_qty_error"></p>
+                                                        </div>
+                                                    </div>
                                                 
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Remark</label>
-                                                        <div class="col-sm-9">
+                                                        <label class="col-sm-4 col-form-label">Remark</label>
+                                                        <div class="col-sm-8">
                                                            <textarea type="text" class="form-control"  id="item_remark"  name="item_remark"></textarea>
                                                            <p class="error item_remark_error"></p>
                                                         </div>
@@ -292,7 +306,7 @@
 
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary btn-xl closeSupplierpoconfirmation" data-dismiss="modal">Close</button>
-                                                    <button type="submit" id="saveSupplierconfromationpoitem" name="saveSupplierconfromationpoitem" class="btn btn-primary" class="btn btn-success btn-xl">Save</button>
+                                                    <button type="submit" id="saveVendorconfromationpoitem" name="saveVendorconfromationpoitem" class="btn btn-primary" class="btn btn-success btn-xl">Save</button>
                                                 </div>
 
                                             </form>    
@@ -311,8 +325,8 @@
                                     }else{ 
                                         $disabled= 'disabled';
                                      } ?>
-                                    <input type="submit" id="savenewsupplierconfrimationpo" class="btn btn-primary" value="Submit" <?=$disabled;?> />
-                                    <input type="button" onclick="location.href = '<?php echo base_url() ?>supplierpoconfirmation'" class="btn btn-default" value="Back" />
+                                    <input type="submit" id="savenewvendorconfrimationpo" class="btn btn-primary" value="Submit"/>
+                                    <input type="button" onclick="location.href = '<?php echo base_url() ?>vendorpoconfirmation'" class="btn btn-default" value="Back" />
                                 </div>
                             </div>
                         </form>
