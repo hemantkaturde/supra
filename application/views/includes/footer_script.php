@@ -3668,7 +3668,6 @@
 			return false;
 		});
 
-
 		$(document).on('change','#part_number',function(e){  
 			e.preventDefault();
 			
@@ -3700,7 +3699,8 @@
 									$('#vendor_qty').val('');
 									$('#unit').val('');
 									$('#rm_type').val('');
-									$('#vendor_name').val('');
+									$('#rmqty').val('');
+									
 
 								}
 								else
@@ -3718,7 +3718,7 @@
 									$('#vendor_qty').val(data_row_material.vendor_qty);
 									$('#unit').val(data_row_material.unit);
 									$('#rm_type').val(data_row_material.type_of_raw_material);
-									$('#vendor_name').val(data_row_material.vendor_name);
+									
 								}
 							},
 							error: function (jqXHR, textStatus, errorThrown)
@@ -3735,7 +3735,8 @@
 									$('#vendor_qty').val('');
 									$('#unit').val('');
 									$('#rm_type').val('');
-									$('#vendor_name').val('');
+									$('#rmqty').val('');
+									
 								//$(".loader_ajax").hide();
 							}
 						});
@@ -3753,7 +3754,189 @@
 		});
 	
 
+		$(document).on('blur', '#rmqty,#gross_weight', function(){
+				
+				$("#expected_qty").val();
+			  
+				if($("#rmqty").val()){
+					 var rmqty = $("#rmqty").val();
+				 }else{
+					 var rmqty = 0;
+				 }
 
+				 if($("#gross_weight").val()){
+					 var gross_weight = $("#gross_weight").val();
+				 }else{
+					 var gross_weight = 0;
+				 }
+				 
+				 var total_value = rmqty / gross_weight;
+				 $("#expected_qty").val( Math.round(total_value));
+		});
+
+
+		$(document).on('click','#saveVendorconfromationpoitem',function(e){
+			e.preventDefault();
+			$(".loader_ajax").show();
+			   var formData = new FormData($("#saveVendorconfromationpoitemform")[0]);
+               var part_number =   $('#part_number').val();
+			   var description =   $('#description').val();
+			   var vendor_qty =   $('#vendor_qty').val();
+			   var qty =   $('#qty').val();
+			   var rmqty =   $('#rmqty').val();
+			   var finishedgoodqty =   $('#finishedgoodqty').val();
+			   var gross_weight =   $('#gross_weight').val();
+			   var expected_qty =   $('#expected_qty').val();
+			   var item_remark =   $('#item_remark').val();
+
+			   var pre_vendor_name =   $('#vendor_name').val();
+			   var pre_vendor_po_number =   $('#vendor_po_number').val();
+			   var pre_buyer_name =   $('#buyer_name').val();
+			   var pre_po_confirmed =   $('#po_confirmed').val();
+			   var pre_confirmed_date =   $('#confirmed_date').val();
+			   var pre_confirmed_with =   $('#confirmed_with').val();
+			   var pre_remark =   $('#remark').val();
+			   var pre_date =   $('#date').val();
+			   
+
+								 
+			$.ajax({
+				url : "<?php echo base_url();?>saveVendorconfromationpoitem",
+				type: "POST",
+				 //data : formData,
+				 data :{part_number:part_number,description:description,vendor_qty:vendor_qty,qty:qty,rmqty:rmqty,finishedgoodqty:finishedgoodqty,gross_weight:gross_weight,expected_qty:expected_qty,item_remark:item_remark,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_buyer_name:pre_buyer_name,pre_po_confirmed:pre_po_confirmed,pre_confirmed_date:pre_confirmed_date,pre_confirmed_with:pre_confirmed_with,pre_remark:pre_remark,pre_date:pre_date},
+				// method: "POST",
+                // data :{package_id:package_id},
+                cache:false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+						$(".loader_ajax").hide();
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						swal({
+							title: "Success",
+							text: "Item Successfully Added!",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+								window.location.href = "<?php echo base_url().'addVendorpoconfirmation'?>";
+						});		
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			});
+			return false;
+	    });
+
+
+		$(document).on('click','.deleteSupplierpoitem',function(e){
+			var elemF = $(this);
+			e.preventDefault();
+			swal({
+				title: "Are you sure?",
+				text: "Delete Vendor PO Confirmation Item ",
+				type: "warning",
+				showCancelButton: true,
+				closeOnClickOutside: false,
+				confirmButtonClass: "btn-sm btn-danger",
+				confirmButtonText: "Yes, delete it!",
+				cancelButtonText: "No, cancel plz!",
+				closeOnConfirm: false,
+				closeOnCancel: false
+			}, function(isConfirm) {
+				if (isConfirm) {
+							$.ajax({
+								url : "<?php echo base_url();?>deleteVendorpoconfirmatuionitem",
+								type: "POST",
+								data : 'id='+elemF.attr('data-id'),
+								success: function(data, textStatus, jqXHR)
+								{
+									const obj = JSON.parse(data);
+								
+									if(obj.status=='success'){
+										swal({
+											title: "Deleted!",
+											text: "Vendor PO Confirmation Item Deleted Succesfully",
+											icon: "success",
+											button: "Ok",
+											},function(){ 
+												window.location.href = "<?php echo base_url().'addVendorpoconfirmation'?>";
+										});	
+									}
+
+								},
+								error: function (jqXHR, textStatus, errorThrown)
+								{
+									$(".loader_ajax").hide();
+								}
+							})
+						}
+						else {
+				swal("Cancelled", "Vendor PO Item deletion cancelled ", "error");
+				}
+			});
+		});
+
+
+		$(document).on('click','.deleteVendorPoconfirmation',function(e){
+			var elemF = $(this);
+			e.preventDefault();
+			swal({
+				title: "Are you sure?",
+				text: "Delete Vendor PO COnfirmation ",
+				type: "warning",
+				showCancelButton: true,
+				closeOnClickOutside: false,
+				confirmButtonClass: "btn-sm btn-danger",
+				confirmButtonText: "Yes, delete it!",
+				cancelButtonText: "No, cancel plz!",
+				closeOnConfirm: false,
+				closeOnCancel: false
+			}, function(isConfirm) {
+				if (isConfirm) {
+							$.ajax({
+								url : "<?php echo base_url();?>deleteVendorPoconfirmation",
+								type: "POST",
+								data : 'id='+elemF.attr('data-id'),
+								success: function(data, textStatus, jqXHR)
+								{
+									const obj = JSON.parse(data);
+								
+									if(obj.status=='success'){
+										swal({
+											title: "Deleted!",
+											text: "Vendor PO Confirmation Deleted Succesfully",
+											icon: "success",
+											button: "Ok",
+											},function(){ 
+												window.location.href = "<?php echo base_url().'vendorpoconfirmation'?>";
+										});	
+									}
+
+								},
+								error: function (jqXHR, textStatus, errorThrown)
+								{
+									$(".loader_ajax").hide();
+								}
+							})
+						}
+						else {
+				swal("Cancelled", "Supplier PO Confirmation deletion cancelled ", "error");
+				}
+			});
+		});
 
     </script>
 <?php } ?>

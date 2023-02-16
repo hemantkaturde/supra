@@ -3282,11 +3282,11 @@ class Admin extends BaseController
                     $saveVendorpoconfirmationdata = $this->admin_model->saveVendorpoconfirmationdata('',$data);
                     if($saveVendorpoconfirmationdata){
 
-                        // $update_last_inserted_id_supplier_po_confirmation = $this->admin_model->update_last_inserted_id_supplier_po_confirmation($saveSupplierpoconfirmationdata);
-                        // if($update_last_inserted_id_supplier_po_confirmation){
+                        $update_last_inserted_id_vendor_po_confirmation = $this->admin_model->update_last_inserted_id_vendor_po_confirmation($saveVendorpoconfirmationdata);
+                        if($update_last_inserted_id_vendor_po_confirmation){
                              $save_vendorconfirmation_response['status'] = 'success';
                              $save_vendorconfirmation_response['error'] = array( 'po_number'=>strip_tags(form_error('po_number')),'date'=>strip_tags(form_error('date')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'po_confirmed'=>strip_tags(form_error('po_confirmed')),'confirmed_date'=>strip_tags(form_error('confirmed_date')),'confirmed_with'=>strip_tags(form_error('confirmed_with')),'remark'=>strip_tags(form_error('remark')));
-                        //  }
+                         }
                     }
 
                 }
@@ -3298,9 +3298,8 @@ class Admin extends BaseController
             // $data['buyerList']= $this->admin_model->fetchAllbuyerList();
             // $data['supplierList']= $this->admin_model->fetchALLsupplierList();
             // $data['rowMaterialList']= $this->admin_model->fetchALLrowMaterialList();
-            // $data['getPreviousSupplierPoconfirmationNumber']= $this->admin_model->getPreviousSupplierPoconfirmationNumber()[0];
-            // $data['fetchALLpresupplierpoconfirmationitemList']= $this->admin_model->fetchALLpresupplierpoconfirmationitemList();
-
+            $data['getPreviousVendorPoconfirmationNumber']= $this->admin_model->getPreviousVendorPoconfirmationNumber()[0];
+            $data['fetchALLpreVendorpoconfirmationitemList']= $this->admin_model->fetchALLpreVendorpoconfirmationitemList();
             $data['vendorList']= $this->admin_model->fetchALLvendorList();
             $this->logrecord($process,$processFunction);
             $this->global['pageTitle'] = 'Add Vendor PO Confirmation';
@@ -3435,6 +3434,107 @@ class Admin extends BaseController
         } else {
             echo 'failure';
         }
+    }
+
+    public function saveVendorconfromationpoitem(){
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $save_buyerpoconfirmationitem_response = array();
+
+            $this->form_validation->set_rules('part_number','Part Number','trim|required');
+            $this->form_validation->set_rules('description','Part Name','trim|required');
+            $this->form_validation->set_rules('vendor_qty','Vendor Qty','trim|numeric|required');
+            $this->form_validation->set_rules('qty','Order Qty','trim|numeric|required');
+            $this->form_validation->set_rules('rmqty','Row Material Received Quantity','trim|required');
+            $this->form_validation->set_rules('finishedgoodqty','Finished Good Received Quantity','trim|required');
+            $this->form_validation->set_rules('gross_weight','Gross Weight','trim|required');
+            $this->form_validation->set_rules('expected_qty','Expected Qty','trim|required');
+            $this->form_validation->set_rules('item_remark','Item Remark','trim');
+
+            if($this->form_validation->run() == FALSE)
+            {
+                $save_buyerpoconfirmationitem_response['status'] = 'failure';
+                $save_buyerpoconfirmationitem_response['error'] = array('part_number'=>strip_tags(form_error('part_number')), 'description'=>strip_tags(form_error('description')), 'qty'=>strip_tags(form_error('qty')), 'rate'=>strip_tags(form_error('rate')),'value'=>strip_tags(form_error('value')),'item_remark'=>strip_tags(form_error('item_remark')),'unit'=>strip_tags(form_error('unit')),'vendor_qty'=>strip_tags(form_error('vendor_qty')),'sent_qty'=>strip_tags(form_error('sent_qty')),'short_excess'=>strip_tags(form_error('short_excess')));
+            }else{
+
+                
+                $data = array(
+                    'part_number_id'   => trim($this->input->post('part_number')),
+                    'description'     => trim($this->input->post('description')),
+                    'vendor_qty'=> trim($this->input->post('vendor_qty')),
+                    'order_qty'=> trim($this->input->post('qty')),
+                    'row_material_recived_qty'=> trim($this->input->post('rmqty')),
+                    'finished_good_recived_qty'=> trim($this->input->post('finishedgoodqty')),
+                    'gross_weight'=> trim($this->input->post('gross_weight')),
+                    'expected_qty'=> trim($this->input->post('expected_qty')),
+                    'item_remark'=> trim($this->input->post('item_remark')),
+                    'pre_date'=> trim($this->input->post('pre_date')),
+                    'pre_vendor_name' => trim($this->input->post('pre_vendor_name')),
+                    'pre_vendor_po_number' => trim($this->input->post('pre_vendor_po_number')),
+                    'pre_buyer_name' => trim($this->input->post('pre_buyer_name')),
+                    'pre_po_confirmed' => trim($this->input->post('pre_po_confirmed')),
+                    'pre_confirmed_date' => trim($this->input->post('pre_confirmed_date')),
+                    'pre_confirmed_with' => trim($this->input->post('pre_confirmed_with')),
+                    'pre_remark' => trim($this->input->post('item_remark')),
+                );
+
+                // $checkIfexitsbuyerpo = $this->admin_model->checkIfexitsbuyerpo(trim($this->input->post('sales_order_number')));
+                // if($checkIfexitsbuyerpo > 0){
+                //     $save_buyerpo_response['status'] = 'failure';
+                //     $save_buyerpo_response['error'] = array('sales_order_number'=>'Buyer PO Alreday Exits (Sales Order Number Alreday Exits)');
+                // }else{
+                    $saveVendorpoconfirmationitemdata = $this->admin_model->saveVendorpoconfirmationitemdata('',$data);
+                    
+                    if($saveVendorpoconfirmationitemdata){
+                        $save_buyerpoconfirmationitem_response['status'] = 'success';
+                        $save_buyerpoconfirmationitem_response['error'] = array('part_number'=>'', 'description'=>'', 'qty'=>'', 'rate'=>'','value'=>'','sent_qty'=>'','short_excess'=>'');
+                    }
+                //  }
+                
+            }
+            echo json_encode($save_buyerpoconfirmationitem_response);
+        }
+
+
+    }
+
+
+    public function deleteVendorpoconfirmatuionitem(){
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->deleteVendorpoconfirmatuionitem(trim($this->input->post('id')));
+            if ($result) {
+                        $process = 'Vendor PO Confirmation Delete';
+                        $processFunction = 'Admin/deleteVendorpoconfirmatuionitem';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
+
+    }
+
+
+    public function deleteVendorPoconfirmation(){
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->deleteVendorPoconfirmation(trim($this->input->post('id')));
+            if ($result) {
+                        $process = 'Vendor PO Confirmation Delete';
+                        $processFunction = 'Admin/deleteVendorpoitem';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
+
     }
 
 }

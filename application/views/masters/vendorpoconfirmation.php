@@ -31,7 +31,7 @@
                                     <tr style="background-color:#3c8dbc !important;color:#fff">
                                         <th>PO Number</th>
                                         <th>Date</th>
-                                        <th>Supplier Name</th>
+                                        <th>Vendor Name</th>
                                         <th>Buyer Name</th>
                                         <th>PO Confirmed </th>
                                         <th>PO Confirmed Date</th>
