@@ -3763,7 +3763,9 @@
 		});
 	
 
-		$(document).on('blur', '#rmqty,#gross_weight', function(){
+		$(document).on('change', '#rmqty,#gross_weight', function(){
+
+			alert('d');
 				
 				$("#expected_qty").val();
 			  
