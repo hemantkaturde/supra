@@ -415,6 +415,9 @@
                                                         <label class="col-sm-3 col-form-label">Vendor Name <span class="required">*</span></label>
                                                         <div class="col-sm-9">
                                                             <input type="text" class="form-control"  id="vendor_name" name="vendor_name" readonly>
+
+                                                            <input type="hidden" class="form-control"  id="vendor_id" name="vendor_id" readonly>
+                                                            
                                                             <p class="error vendor_name_error"></p>
                                                         </div>
                                                     </div>

@@ -1381,6 +1381,19 @@ class Admin_model extends CI_Model
 
     }
 
+
+    public function deleteSupplierpoconfirmationitem($id){
+
+        $this->db->where('id', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_SUPPLIER_PO_CONFIRMATION_ITEM)){
+           return TRUE;
+        }else{
+           return FALSE;
+        }
+
+    }
+
     public function getAllBuyerpoNUmber($buyer_name){
 
         $this->db->select('*');
@@ -1888,15 +1901,15 @@ class Admin_model extends CI_Model
 
     }
 
-    public function deleteSupplierpoconfirmationitem($id){
-        $this->db->where('id', $id);
-        //$this->db->delete(TBL_SUPPLIER);
-        if($this->db->delete(TBL_SUPPLIER_PO_CONFIRMATION_ITEM)){
-           return TRUE;
-        }else{
-           return FALSE;
-        }
-    }
+    // public function deleteSupplierpoconfirmationitem($id){
+    //     $this->db->where('id', $id);
+    //     //$this->db->delete(TBL_SUPPLIER);
+    //     if($this->db->delete(TBL_SUPPLIER_PO_CONFIRMATION_ITEM)){
+    //        return TRUE;
+    //     }else{
+    //        return FALSE;
+    //     }
+    // }
 
     public function update_last_inserted_id_supplier_po_confirmation($saveSupplierpoconfirmationdata){
 
@@ -2081,8 +2094,9 @@ class Admin_model extends CI_Model
         $this->db->select('*');
         $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
         $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
-        // $this->db->join(TBL_SUPPLIER_PO_CONFIRMATION_ITEM, TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.pre_vendor_name');
+        $this->db->join(TBL_SUPPLIER_PO_CONFIRMATION_ITEM, TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.vendor_id = '.TBL_VENDOR.'.ven_id');
+
         $this->db->where(TBL_FINISHED_GOODS.'.status',1);
         $this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
         //$this->db->where(TBL_RAWMATERIAL.'.raw_id',$part_number);

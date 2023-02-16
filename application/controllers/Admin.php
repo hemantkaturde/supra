@@ -2527,7 +2527,7 @@ class Admin extends BaseController
     public function deleteSupplierpoitem(){
         $post_submit = $this->input->post();
         if($post_submit){
-            $result = $this->admin_model->deleteSupplierpoitem(trim($this->input->post('id')));
+            $result = $this->admin_model->deleteSupplierpoconfirmationitem(trim($this->input->post('id')));
             if ($result) {
                         $process = 'Supplier PO Delete';
                         $processFunction = 'Admin/deleteSupplierpoitem';
@@ -3153,6 +3153,7 @@ class Admin extends BaseController
                     'value' =>   trim($this->input->post('value')),
                     'unit' =>    trim($this->input->post('unit')),
                     'vendor_qty'=>  trim($this->input->post('vendor_qty')),
+                    'vendor_id'=>  trim($this->input->post('vendor_id')),
                     'item_remark' => trim($this->input->post('item_remark')),
                     'sent_qty'=>  trim($this->input->post('sent_qty')),
                     'short_excess' => trim($this->input->post('short_excess')),

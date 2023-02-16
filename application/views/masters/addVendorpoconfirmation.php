@@ -279,7 +279,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Row Material Received Quantity <span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="number" class="form-control"  id="rmqty" name="rmqty">
+                                                            <input type="number" class="form-control"  id="rmqty" name="rmqty" readonly>
                                                             <p class="error rmqty_error"></p>
                                                         </div>
                                                     </div>
