@@ -3763,7 +3763,7 @@
 		});
 	
 
-		$(document).on('change', '#rmqty,#gross_weight', function(){
+		$(document).on('change', '#finishedgoodqty,#gross_weight', function(){
 
 			alert('d');
 				

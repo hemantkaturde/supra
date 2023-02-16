@@ -176,7 +176,7 @@
                                                         <th>Description</th>
                                                         <th>Vendor  Qty</th>
                                                         <th>Order Qty</th>
-                                                        <th>Row Material Received Quantity</th>
+                                                        <th>Raw Material Received Quantity</th>
                                                         <th>Finished Good Received Quantity</th>
                                                         <th>Gross Weight</th>
                                                         <th>Expected Quantity</th>
@@ -277,7 +277,7 @@
 
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Row Material Received Quantity <span class="required">*</span></label>
+                                                        <label class="col-sm-4 col-form-label">Raw Material Received Quantity (In Kgs / pcs)<span class="required">*</span></label>
                                                         <div class="col-sm-8">
                                                             <input type="number" class="form-control"  id="rmqty" name="rmqty" readonly>
                                                             <p class="error rmqty_error"></p>
@@ -286,7 +286,7 @@
 
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Finished Good Received Quantity <span class="required">*</span></label>
+                                                        <label class="col-sm-4 col-form-label">Finished Good Received Quantity (In Kgs / pcs)<span class="required">*</span></label>
                                                         <div class="col-sm-8">
                                                             <input type="number" class="form-control"  id="finishedgoodqty" name="finishedgoodqty">
                                                             <p class="error finishedgoodqty_error"></p>
@@ -304,7 +304,7 @@
 
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Expected Quantity <span class="required">*</span></label>
+                                                        <label class="col-sm-4 col-form-label">Expected Quantity (In pcs)<span class="required">*</span></label>
                                                         <div class="col-sm-8">
                                                             <input type="number" class="form-control"  id="expected_qty" name="expected_qty" readonly>
                                                             <p class="error expected_qty_error"></p>
