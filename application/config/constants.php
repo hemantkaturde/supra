@@ -129,7 +129,7 @@ define('TBL_SUPPLIER_PO_CONFIRMATION','tbl_supplier_poconfirmation');
 define('TBL_SUPPLIER_PO_CONFIRMATION_ITEM','tbl_supplierpoconfirmation_item');
 define('TBL_VENDOR_PO_CONFIRMATION','tbl_vendor_poconfirmation');
 define('TBL_VENDOR_PO_CONFIRMATION_ITEM','tbl_vendorpoconfirmation_item');
-
+define('TBL_JOB_WORK','tbl_jobwork');
 
 
 

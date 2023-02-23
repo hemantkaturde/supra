@@ -2167,7 +2167,6 @@ class Admin_model extends CI_Model
 
     }
 
-
     public function deleteVendorpoconfirmatuionitem($id){
 
         $this->db->where('id', $id);
@@ -2179,7 +2178,6 @@ class Admin_model extends CI_Model
         }
 
     }
-
 
     public function deleteVendorPoconfirmation($id){
 
@@ -2198,6 +2196,122 @@ class Admin_model extends CI_Model
            return FALSE;
         }
 
+    }
+
+    public function getPreviousjobworkponumber(){
+
+        $this->db->select('po_number');
+        $this->db->where(TBL_JOB_WORK.'.status', 1);
+        $this->db->limit(1);
+        $this->db->order_by(TBL_JOB_WORK.'.id','DESC');
+        $query = $this->db->get(TBL_JOB_WORK);
+        $rowcount = $query->result_array();
+        return $rowcount;
+    }
+
+
+    public function fetchALLprejobworkitemList(){
+
+        return true;
+
+    }
+
+    public function getJobworkCount($params){
+
+        $this->db->select('*');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id= '.TBL_JOB_WORK.'.vendor_name');
+
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_JOB_WORK.".po_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_JOB_WORK.".date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_JOB_WORK.".raw_material_supplier LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_JOB_WORK.'.status', 1);
+        $query = $this->db->get(TBL_JOB_WORK);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+
+    }
+
+
+    public function getJobworkdata($params){
+
+        $this->db->select('*');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id= '.TBL_JOB_WORK.'.vendor_name');
+
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_JOB_WORK.".po_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_JOB_WORK.".date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_JOB_WORK.".raw_material_supplier LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_JOB_WORK.'.status', 1);
+        $this->db->limit($params['length'],$params['start']);
+        $this->db->order_by(TBL_JOB_WORK.'.id','DESC');
+        $query = $this->db->get(TBL_JOB_WORK);
+        $fetch_result = $query->result_array();
+
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['po_number'] = $value['po_number'];
+                $data[$counter]['date'] = $value['date'];
+                $data[$counter]['vendor_name'] = $value['vendor_name'];
+                $data[$counter]['raw_material_supplier'] = $value['raw_material_supplier'];
+                $data[$counter]['action'] = '';
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewSupplierpoconfirmation/".$value['id']."' style='cursor: pointer;'><i style='font-size: large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['id']."' class='fa fa-trash-o deleteVendorPoconfirmation' aria-hidden='true'></i>"; 
+                $counter++; 
+            }
+        }
+
+        return $data;
+    }
+
+
+    public function checkIfexitsJobwork($po_number){
+
+        $this->db->select('*');
+        $this->db->where(TBL_JOB_WORK.'.po_number', $po_number);
+        $this->db->where(TBL_JOB_WORK.'.status', 1);
+        $query = $this->db->get(TBL_JOB_WORK);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+
+    }
+
+    public function saveJobworkdata($id,$data){
+        if($id != '') {
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_JOB_WORK, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_JOB_WORK, $data)) {
+                return $this->db->insert_id();;
+            } else {
+                return FALSE;
+            }
+        }
+
+    }
+
+    public function fetchALLvendorListPO(){
+
+        $this->db->select('*');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id= '.TBL_VENDOR_PO_MASTER.'.vendor_name');
+        $this->db->where(TBL_VENDOR_PO_MASTER.'.status', 1);
+        $query = $this->db->get(TBL_VENDOR_PO_MASTER);
+        $data = $query->result_array();
+        return $data;
     }
 
 }

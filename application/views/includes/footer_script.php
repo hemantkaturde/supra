@@ -3781,7 +3781,6 @@
 				 $("#expected_qty").val( Math.round(total_value));
 		});
 
-
 		$(document).on('click','#saveVendorconfromationpoitem',function(e){
 			e.preventDefault();
 			$(".loader_ajax").show();
@@ -3847,7 +3846,6 @@
 			return false;
 	    });
 
-
 		$(document).on('click','.deleteSupplierpoitem',function(e){
 			var elemF = $(this);
 			e.preventDefault();
@@ -3895,7 +3893,6 @@
 				}
 			});
 		});
-
 
 		$(document).on('click','.deleteVendorPoconfirmation',function(e){
 			var elemF = $(this);
@@ -3948,3 +3945,82 @@
     </script>
 <?php } ?>
 
+
+<?php  if($pageTitle=='Job Work' || $pageTitle=="Add Job Work"){ ?>
+	<script type="text/javascript">
+        $(document).ready(function() {
+            var dt = $('#view_Job_Work').DataTable({
+	            "columnDefs": [ 
+	                 { className: "details-control", "targets": [ 0 ] },
+	                 { "width": "10%", "targets": 0 },
+	                 { "width": "10%", "targets": 1 },
+					 { "width": "15%", "targets": 2 },
+	                 { "width": "10%", "targets": 3 },
+					 { "width": "15%", "targets": 4 },
+	                 { "width": "10%", "targets": 5 }
+					
+	            ],
+	            responsive: true,
+	            "oLanguage": {
+	                "sEmptyTable": "<i>Job Work List Not Found.</i>",
+	            }, 
+	            "bSort" : false,
+	            "bFilter":true,
+	            "bLengthChange": true,
+	            "iDisplayLength": 10,   
+	            "bProcessing": true,
+	            "serverSide": true,
+	            "ajax":{
+                    url :"<?php echo base_url();?>fetchJobworklist",
+                    type: "post",
+	            },
+	        });
+	    });
+
+		$(document).on('click','#savenewjobwork',function(e){
+			e.preventDefault();
+			$(".loader_ajax").show();
+			var formData = new FormData($("#addnnewjobworkform")[0]);
+			$.ajax({
+				url : "<?php echo base_url();?>addjobwork",
+				type: "POST",
+				data : formData,
+				cache: false,
+		        contentType: false,
+		        processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+						$(".loader_ajax").hide();
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						swal({
+							title: "Success",
+							text: "Job Work Successfully Added!",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+								window.location.href = "<?php echo base_url().'jobWork'?>";
+						});		
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			});
+			return false;
+	    });
+
+
+
+    </script>
+<?php } ?>
