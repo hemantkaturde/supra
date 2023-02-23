@@ -3538,4 +3538,31 @@ class Admin extends BaseController
 
     }
 
+    public function jobWork(){
+
+        $process = 'Job Work';
+        $processFunction = 'Admin/jobWork';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Job Work';
+        $this->loadViews("masters/jobWork", $this->global, $data, NULL);  
+    }
+
+    public function addjobwork(){
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+
+        }else{
+
+            $process = 'Add Job Work';
+            $processFunction = 'Admin/addjobwork';
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Add Job Work';
+            $this->loadViews("masters/addjobwork", $this->global, $data, NULL);
+
+        }
+
+
+    }
+
 }

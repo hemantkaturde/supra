@@ -3500,7 +3500,7 @@
 
 <?php  if($pageTitle=='Vendor PO Confirmation' || $pageTitle=='Add Vendor PO Confirmation'){ ?>
 	<script type="text/javascript">
-         $(document).ready(function() {
+        $(document).ready(function() {
             var dt = $('#view_vendorpoconfirmation').DataTable({
 	            "columnDefs": [ 
 	                 { className: "details-control", "targets": [ 0 ] },
@@ -3762,11 +3762,7 @@
 			
 		});
 	
-
-		$(document).on('change', '#finishedgoodqty,#gross_weight', function(){
-
-			alert('d');
-				
+		$(document).on('change', '#finishedgoodqty,#gross_weight', function(){	
 				$("#expected_qty").val();
 			  
 				if($("#rmqty").val()){
@@ -3948,9 +3944,6 @@
 				}
 			});
 		});
-
-
-
 
     </script>
 <?php } ?>

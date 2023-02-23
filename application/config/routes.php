@@ -159,6 +159,14 @@ $route['saveVendorconfromationpoitem'] = "admin/saveVendorconfromationpoitem";
 $route['deleteVendorpoconfirmatuionitem'] = "admin/deleteVendorpoconfirmatuionitem";
 $route['deleteVendorPoconfirmation'] = "admin/deleteVendorPoconfirmation";
 
+$route['jobWork'] = "admin/jobWork";
+$route['addjobwork'] = "admin/addjobwork";
+
+
+
+
+
+
 
 
 

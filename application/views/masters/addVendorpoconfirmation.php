@@ -268,7 +268,7 @@
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Order Quantity <span class="required">*</span></label>
+                                                        <label class="col-sm-4 col-form-label">Raw Material Order Quantity (In Kgs / pcs)<span class="required">*</span></label>
                                                         <div class="col-sm-8">
                                                             <input type="number" class="form-control"  id="qty" name="qty" readonly>
                                                             <p class="error qty_error"></p>
