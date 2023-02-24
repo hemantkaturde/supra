@@ -76,7 +76,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                                 <label for="vendor_po_number">Select Vendor PO Number <span class="required">*</span></label>
-                                                    <select class="form-control " name="vendor_po_number" id="vendor_po_number" readonly>
+                                                    <select class="form-control vendor_po_number_itam" name="vendor_po_number" id="vendor_po_number" readonly>
                                                         <option st-id="" value="">Select Vendor Name</option>
                                                     </select>
                                             <p class="error vendor_po_number_error"></p>
@@ -170,7 +170,7 @@
                                                 <!-- <span aria-hidden="true">&times;</span> -->
                                                 </button>
                                             </div>
-                                            <form role="form" id="saveVendorconfromationpoitemform" action="<?php echo base_url() ?>saveVendorconfromationpoitemform" method="post" role="form">
+                                            <form role="form" id="savejobworkitemform" action="<?php echo base_url() ?>savejobworkitemform" method="post" role="form">
 
                                                 <div class="modal-body">
                                                         <div class="loader_ajax" style="display:none;">
@@ -202,57 +202,116 @@
 
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Vendor Quantity</label>
+                                                        <label class="col-sm-4 col-form-label">SAC Code</label>
                                                         <div class="col-sm-8">
-                                                            <input type="number" class="form-control"  id="vendor_qty" name="vendor_qty" readonly>
-                                                            <p class="error vendor_qty_error"></p>
+                                                            <input type="text" class="form-control"  id="SAC" name="SAC" readonly>
+                                                            <p class="error SAC_error"></p>
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Raw Material Order Quantity (In Kgs / pcs)<span class="required">*</span></label>
+                                                        <label class="col-sm-4 col-form-label">HSN Code</label>
                                                         <div class="col-sm-8">
-                                                            <input type="number" class="form-control"  id="qty" name="qty" readonly>
-                                                            <p class="error qty_error"></p>
-                                                        </div>
-                                                    </div>
-
-
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Raw Material Received Quantity (In Kgs / pcs)<span class="required">*</span></label>
-                                                        <div class="col-sm-8">
-                                                            <input type="number" class="form-control"  id="rmqty" name="rmqty" readonly>
-                                                            <p class="error rmqty_error"></p>
+                                                            <input type="text" class="form-control"  id="HSN_Code" name="HSN_Code" readonly>
+                                                            <p class="error HSN_Code_error"></p>
                                                         </div>
                                                     </div>
 
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Finished Good Received Quantity (In Kgs / pcs)<span class="required">*</span></label>
+                                                        <label class="col-sm-4 col-form-label">Raw Material Size</label>
                                                         <div class="col-sm-8">
-                                                            <input type="number" class="form-control"  id="finishedgoodqty" name="finishedgoodqty">
-                                                            <p class="error finishedgoodqty_error"></p>
+                                                            <input type="text" class="form-control"  id="raw_material_size" name="raw_material_size" readonly>
+                                                            <p class="error raw_material_size_error"></p>
                                                         </div>
                                                     </div>
 
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Gross Weight <span class="required">*</span></label>
+                                                        <label class="col-sm-4 col-form-label">Vendor Order Qty</label>
                                                         <div class="col-sm-8">
-                                                            <input type="number" class="form-control"  id="gross_weight" name="gross_weight" readonly>
-                                                            <p class="error gross_weight_error"></p>
+                                                            <input type="number" class="form-control"  id="vendor_order_qty" name="vendor_order_qty" readonly>
+                                                            <p class="error vendor_order_qty_error"></p>
                                                         </div>
                                                     </div>
 
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Expected Quantity (In pcs)<span class="required">*</span></label>
+                                                        <label class="col-sm-4 col-form-label">RM Actual Qty <span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="number" class="form-control"  id="expected_qty" name="expected_qty" readonly>
-                                                            <p class="error expected_qty_error"></p>
+                                                            <input type="number" class="form-control"  id="rm_actual_aty" name="rm_actual_aty">
+                                                            <p class="error rm_actual_aty_error"></p>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-4 col-form-label">Unit</label>
+                                                        <div class="col-sm-8">
+                                                             <select class="form-control" name="unit" id="unit">
+                                                                <option value="">Select Unit</option>
+                                                                <option value="kgs">Kgs</option>
+                                                                <option value="Pcs">Pcs</option>
+                                                                <option value="Nos">Nos</option>
+                                                                <option value="Sheet">Sheet</option>
+                                                                <option value="Set">Set</option>
+                                                             </select>
+                                                            <p class="error unit_error"></p>
                                                         </div>
                                                     </div>
                                                 
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-4 col-form-label">R.M Rate<span class="required">*</span></label>
+                                                        <div class="col-sm-8">
+                                                            <input type="number" class="form-control"  id="rm_rate" name="rm_rate" readonly>
+                                                            <p class="error rm_rate_error"></p>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-4 col-form-label">Value<span class="required">*</span></label>
+                                                        <div class="col-sm-8">
+                                                            <input type="number" class="form-control"  id="value" name="value" readonly>
+                                                            <p class="error value_error"></p>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-4 col-form-label">Packing & Forwording<span class="required">*</span></label>
+                                                        <div class="col-sm-8">
+                                                            <input type="number" class="form-control"  id="packing_and_forwarding" name="packing_and_forwarding">
+                                                            <p class="error packing_and_forwarding_error"></p>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-4 col-form-label">Total<span class="required">*</span></label>
+                                                        <div class="col-sm-8">
+                                                            <input type="number" class="form-control"  id="total" name="total">
+                                                            <p class="error total_error"></p>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-4 col-form-label">GST<span class="required">*</span></label>
+                                                        <div class="col-sm-8">
+                                                            <input type="number" class="form-control"  id="gst" name="gst">
+                                                            <p class="error gst_error"></p>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-4 col-form-label">Grand Total<span class="required">*</span></label>
+                                                        <div class="col-sm-8">
+                                                            <input type="number" class="form-control"  id="grand_total" name="grand_total">
+                                                            <p class="error grand_total_error"></p>
+                                                        </div>
+                                                    </div>
 
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Remark</label>
@@ -264,8 +323,8 @@
                                                 </div>
 
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary btn-xl closeSupplierpoconfirmation" data-dismiss="modal">Close</button>
-                                                    <button type="submit" id="saveVendorconfromationpoitem" name="saveVendorconfromationpoitem" class="btn btn-primary" class="btn btn-success btn-xl">Save</button>
+                                                    <button type="button" class="btn btn-secondary btn-xl closejobworkmodal" data-dismiss="modal">Close</button>
+                                                    <button type="submit" id="saveJobworktem" name="saveJobworktem" class="btn btn-primary" class="btn btn-success btn-xl">Save</button>
                                                 </div>
 
                                             </form>    

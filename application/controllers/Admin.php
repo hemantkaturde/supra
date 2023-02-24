@@ -3577,39 +3577,40 @@ class Admin extends BaseController
         if($post_submit){
 
             $save_jobwork_response = array();
-            $this->form_validation->set_rules('po_number','PO Number','trim|required');
+            $this->form_validation->set_rules('job_work_no','PO Number','trim|required');
             $this->form_validation->set_rules('date','Date','trim|required');
             $this->form_validation->set_rules('vendor_name','Vendor Name','trim|required');
+            $this->form_validation->set_rules('vendor_po_number','Vendor PO  Number','trim|required');
             $this->form_validation->set_rules('raw_material_supplier_name','Raw Material Supplier Name','trim|required');
             $this->form_validation->set_rules('remark','Remark','trim');
 
             if($this->form_validation->run() == FALSE)
             {
                 $save_jobwork_response['status'] = 'failure';
-                $save_jobwork_response['error'] = array( 'po_number'=>strip_tags(form_error('po_number')),'date'=>strip_tags(form_error('date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'raw_material_supplier_name'=>strip_tags(form_error('raw_material_supplier_name')),'remark'=>strip_tags(form_error('remark')));
+                $save_jobwork_response['error'] = array( 'job_work_no'=>strip_tags(form_error('job_work_no')),'date'=>strip_tags(form_error('date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'raw_material_supplier_name'=>strip_tags(form_error('raw_material_supplier_name')),'remark'=>strip_tags(form_error('remark')));
            
             }else{
                 $data = array(
-                    'po_number'   => trim($this->input->post('po_number')),
+                    'po_number'   => trim($this->input->post('job_work_no')),
                     'date'     => trim($this->input->post('date')),
                     'vendor_name'  => trim($this->input->post('vendor_name')),
-                    'raw_material_supplier_name' =>    trim($this->input->post('raw_material_supplier_name')),
+                    'vendor_po_number'=> trim($this->input->post('vendor_po_number')),
+                    'raw_material_supplier' =>    trim($this->input->post('raw_material_supplier_name')),
                     'remark' =>    trim($this->input->post('remark')),
                 );
 
                 $checkIfexitsJobwork = $this->admin_model->checkIfexitsJobwork(trim($this->input->post('po_number')));
                 if($checkIfexitsVendorpoconfirmation > 0){
                     $save_jobwork_response['status'] = 'failure';
-                    $save_jobwork_response['error'] = array( 'po_number'=>strip_tags(form_error('po_number')),'date'=>strip_tags(form_error('date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'raw_material_supplier_name'=>strip_tags(form_error('raw_material_supplier_name')),'remark'=>strip_tags(form_error('remark')));
+                    $save_jobwork_response['error'] = array( 'job_work_no'=>strip_tags(form_error('job_work_no')),'date'=>strip_tags(form_error('date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'raw_material_supplier_name'=>strip_tags(form_error('raw_material_supplier_name')),'remark'=>strip_tags(form_error('remark')));
                 }else{
                     $saveJobworkdata = $this->admin_model->saveJobworkdata('',$data);
                     if($saveJobworkdata){
-
-                        // $update_last_inserted_id_vendor_po_confirmation = $this->admin_model->update_last_inserted_id_vendor_po_confirmation($saveVendorpoconfirmationdata);
-                        // if($update_last_inserted_id_vendor_po_confirmation){
+                        $update_last_inserted_id_job_work = $this->admin_model->update_last_inserted_id_job_work($saveJobworkdata);
+                        if($update_last_inserted_id_job_work){
                              $save_jobwork_response['status'] = 'success';
-                             $save_jobwork_response['error'] = array( 'po_number'=>strip_tags(form_error('po_number')),'date'=>strip_tags(form_error('date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'raw_material_supplier_name'=>strip_tags(form_error('raw_material_supplier_name')),'remark'=>strip_tags(form_error('remark')));
-                        //  }
+                             $save_jobwork_response['error'] = array('job_work_no'=>strip_tags(form_error('job_work_no')),'date'=>strip_tags(form_error('date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'raw_material_supplier_name'=>strip_tags(form_error('raw_material_supplier_name')),'remark'=>strip_tags(form_error('remark')));
+                          }
                     }
 
                 }
@@ -3651,5 +3652,85 @@ class Admin extends BaseController
 		}
 
     }
+
+    public function getSuppliergoodsPartnumberByidjobwork(){
+
+        if($this->input->post('part_number')) {
+            $getPartNameBypartid = $this->admin_model->getSuppliergoodsPartnumberByidjobwork($this->input->post('part_number'),$this->input->post('vendor_po_number'));
+            if($getPartNameBypartid){
+                $content = $getPartNameBypartid[0];
+                echo json_encode($content);
+
+            }else{
+                echo 'failure';
+            }
+           
+        } else {
+            echo 'failure';
+        }
+    }
+
+
+    public function saveJobworktem(){
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $save_jobwork_response = array();
+
+            $this->form_validation->set_rules('part_number','Part Number','trim|required');
+            $this->form_validation->set_rules('description','Part Name','trim|required');
+            $this->form_validation->set_rules('rm_actual_aty ','SAC No','trim|required');
+            $this->form_validation->set_rules('unit ','SAC No','trim|required');
+            $this->form_validation->set_rules('rm_rate ','SAC No','trim|required');
+            $this->form_validation->set_rules('value ','SAC No','trim|required');
+            $this->form_validation->set_rules('packing_and_forwarding_error ','SAC No','trim|required');
+            $this->form_validation->set_rules('total','SAC No','trim|required');
+            $this->form_validation->set_rules('gst','SAC No','trim|required');
+            $this->form_validation->set_rules('grand_total ','SAC No','trim|required');
+            $this->form_validation->set_rules('item_remark ','SAC No','trim|required');
+        
+
+            if($this->form_validation->run() == FALSE)
+            {
+                $save_jobwork_response['status'] = 'failure';
+                $save_jobwork_response['error'] = array('part_number'=>strip_tags(form_error('part_number')), 'description'=>strip_tags(form_error('description')),'rm_actual_aty'=>strip_tags(form_error('rm_actual_aty')),'unit'=>strip_tags(form_error('unit')),'rm_rate'=>strip_tags(form_error('rm_rate')),'value'=>strip_tags(form_error('value')),'packing_and_forwarding_error'=>strip_tags(form_error('packing_and_forwarding_error')),'total'=>strip_tags(form_error('total')),'gst'=>strip_tags(form_error('gst')),'grand_total'=>strip_tags(form_error('grand_total')));
+            }else{
+
+                
+                $data = array(
+                    'part_number_id'   => trim($this->input->post('part_number')),
+                    'description'     => trim($this->input->post('description')),
+                    'vendor_qty'=> trim($this->input->post('vendor_qty')),
+                    'order_qty'=> trim($this->input->post('qty')),
+                    'row_material_recived_qty'=> trim($this->input->post('rmqty')),
+                    'finished_good_recived_qty'=> trim($this->input->post('finishedgoodqty')),
+                    'gross_weight'=> trim($this->input->post('gross_weight')),
+                    'expected_qty'=> trim($this->input->post('expected_qty')),
+                    'item_remark'=> trim($this->input->post('item_remark')),
+
+                    'pre_date'=> trim($this->input->post('pre_date')),
+                    'pre_vendor_name' => trim($this->input->post('pre_vendor_name')),
+                    'pre_vendor_po_number' => trim($this->input->post('pre_vendor_po_number')),
+                    'pre_remark' => trim($this->input->post('item_remark')),
+                );
+
+                // $checkIfexitsbuyerpo = $this->admin_model->checkIfexitsbuyerpo(trim($this->input->post('sales_order_number')));
+                // if($checkIfexitsbuyerpo > 0){
+                //     $save_buyerpo_response['status'] = 'failure';
+                //     $save_buyerpo_response['error'] = array('sales_order_number'=>'Buyer PO Alreday Exits (Sales Order Number Alreday Exits)');
+                // }else{
+                    $saveVendorpoconfirmationitemdata = $this->admin_model->saveVendorpoconfirmationitemdata('',$data);
+                    
+                    if($saveVendorpoconfirmationitemdata){
+                        $save_jobwork_response['status'] = 'success';
+                        $save_jobwork_response['error'] = array('part_number'=>strip_tags(form_error('part_number')), 'description'=>strip_tags(form_error('description')),'rm_actual_aty'=>strip_tags(form_error('rm_actual_aty')),'unit'=>strip_tags(form_error('unit')),'rm_rate'=>strip_tags(form_error('rm_rate')),'value'=>strip_tags(form_error('value')),'packing_and_forwarding_error'=>strip_tags(form_error('packing_and_forwarding_error')),'total'=>strip_tags(form_error('total')),'gst'=>strip_tags(form_error('gst')),'grand_total'=>strip_tags(form_error('grand_total')));
+                    }
+                //  }
+                
+            }
+            echo json_encode($save_jobwork_response);
+        }
+    }
+
 
 }

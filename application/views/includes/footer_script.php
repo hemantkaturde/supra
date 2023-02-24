@@ -4053,8 +4053,6 @@
 			return false;
 		});
 
-
-
 		$(document).on('change','#vendor_po_number',function(e){  
 			e.preventDefault();
 			//$(".loader_ajax").show();
@@ -4088,6 +4086,191 @@
 			return false;
 		});
 
+		$(document).on('change','.vendor_po_number_itam',function(e){  
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			var vendor_po_number = $('#vendor_po_number').val();
+
+			$("#part_number").html('');
+		
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getVendoritemonly",
+				type: "POST",
+				data : {'vendor_po_number' : vendor_po_number},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#part_number').html('<option value="">Select Part Number</option>');
+					}
+					else
+					{
+						$('#part_number').html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#part_number').html();
+				}
+			});
+			return false;
+		});
+
+		$(document).on('change','#part_number',function(e){  
+			e.preventDefault();
+			
+			//$(".loader_ajax").show();
+			var part_number = $('#part_number').val();
+		    var vendor_po_number = $('#vendor_po_number').val();
+			var vendor_name = $('#vendor_name').val();
+
+			if(vendor_name){
+				if(vendor_po_number){
+						$.ajax({
+							url : "<?php echo ADMIN_PATH;?>getSuppliergoodsPartnumberByidjobwork",
+							type: "POST",
+							data : {'part_number' : part_number,'vendor_po_number':vendor_po_number},
+							success: function(data, textStatus, jqXHR)
+							{
+								$(".loader_ajax").hide();
+								if(data == "failure")
+								{
+									$('#description').val('');
+									$('#HSN_Code').val('');
+									$('#gross_weight').val('');
+									$('#net_weight').val('');
+									$('#SAC').val('');
+									$('#drawing_number').val('');
+									$('#description_1').val('');
+									$('#description_2').val('');
+									$('#qty').val('');
+									$('#vendor_qty').val('');
+									$('#unit').val('');
+									//$('#rm_type').val('');
+									$('#rmqty').val('');
+									
+
+								}
+								else
+								{
+									var data_row_material = jQuery.parseJSON( data );
+									$('#description').val(data_row_material.name);
+									$('#SAC').val(data_row_material.sac_no);
+									$('#HSN_Code').val(data_row_material.hsn_code);
+									$('#raw_material_size').val(data_row_material.sitting_size);
+									$('#vendor_order_qty').val(data_row_material.vendor_qty);
+									$('#unit').val(data_row_material.unit);
+									
+									$('#qty').val(data_row_material.order_oty);
+									$('#rm_type').val(data_row_material.type_of_raw_material);
+									$('#rmqty').val(data_row_material.sent_qty);
+									
+									
+									
+								}
+							},
+							error: function (jqXHR, textStatus, errorThrown)
+							{
+									$('#description').val('');
+									$('#HSN_Code').val('');
+									$('#gross_weight').val('');
+									$('#net_weight').val('');
+									$('#SAC').val('');
+									$('#drawing_number').val('');
+									$('#description_1').val('');
+									$('#description_2').val('');
+									$('#qty').val('');
+									$('#vendor_qty').val('');
+									$('#unit').val('');
+									$('#rm_type').val('');
+									$('#rmqty').val('');
+
+									
+								//$(".loader_ajax").hide();
+							}
+						});
+						return false;
+
+				}else{
+					$('.part_number_error').html('Please Select Vendor PO Number');
+				}
+
+			}else{
+
+				$('.part_number_error').html('Please Select Vendor PO');
+			}
+			
+		});
+
+
+		$(document).on('click','#saveJobworktem',function(e){
+			e.preventDefault();
+			$(".loader_ajax").show();
+			   var formData = new FormData($("#savejobworkitemform")[0]);
+              
+			   var part_number =   $('#part_number').val();
+			   var description =   $('#description').val();
+			   var SAC_no =   $('#SAC').val();
+			   var HSN_Code =   $('#HSN_Code').val();
+			   var raw_material_size =   $('#raw_material_size').val();
+			   var vendor_order_qty =   $('#vendor_order_qty').val();
+			   var rm_actual_aty =   $('#rm_actual_aty').val();
+			   var unit =   $('#unit').val();
+			   var rm_rate =   $('#rm_rate').val();
+			   var value =   $('#value').val();
+			   var packing_and_forwarding_error =   $('#packing_and_forwarding_error').val();
+			   var total =   $('#total').val();
+			   var gst =   $('#gst').val();
+			   var grand_total =   $('#grand_total').val();
+			   var item_remark =   $('#item_remark').val();
+
+			   var pre_date =   $('#date').val();
+			   var pre_vendor_name =   $('#vendor_name').val();
+			   var pre_vendor_po_number =   $('#vendor_po_number').val();
+			   var pre_raw_material_supplier_name =   $('#raw_material_supplier_name').val();
+			   var pre_remark =   $('#remark').val();
+			 
+			$.ajax({
+				url : "<?php echo base_url();?>saveJobworktem",
+				type: "POST",
+				 //data : formData,
+				 data :{part_number:part_number ,description:description,SAC_no:SAC_no,HSN_Code:HSN_Code,raw_material_size:raw_material_size,vendor_order_qty:vendor_order_qty,rm_actual_aty:rm_actual_aty,unit:unit,rm_rate:rm_rate,value:value,packing_and_forwarding_error:packing_and_forwarding_error,total:total,gst:gst,grand_total:grand_total,item_remark:item_remark,pre_date:pre_date,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_raw_material_supplier_name:pre_raw_material_supplier_name,pre_remark:pre_remark},
+				// method: "POST",
+                // data :{package_id:package_id},
+                cache:false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+						$(".loader_ajax").hide();
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						swal({
+							title: "Success",
+							text: "Item Successfully Added!",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+								window.location.href = "<?php echo base_url().'addjobwork'?>";
+						});		
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			});
+			return false;
+	    });
 
 
     </script>

@@ -163,6 +163,12 @@ $route['jobWork'] = "admin/jobWork";
 $route['addjobwork'] = "admin/addjobwork";
 $route['fetchJobworklist'] = "admin/fetchJobworklist";
 $route['getSuppliernamebyvendorpo'] = "admin/getSuppliernamebyvendorpo";
+$route['getSuppliergoodsPartnumberByidjobwork'] = "admin/getSuppliergoodsPartnumberByidjobwork";
+$route['saveJobworktem'] = "admin/saveJobworktem";
+
+
+
+
 
 
 
