@@ -3500,7 +3500,6 @@ class Admin extends BaseController
 
     }
 
-
     public function deleteVendorpoconfirmatuionitem(){
 
         $post_submit = $this->input->post();
@@ -3518,7 +3517,6 @@ class Admin extends BaseController
         }
 
     }
-
 
     public function deleteVendorPoconfirmation(){
 
@@ -3573,7 +3571,6 @@ class Admin extends BaseController
 
     }
     
-
     public function addjobwork(){
 
         $post_submit = $this->input->post();
@@ -3627,7 +3624,7 @@ class Admin extends BaseController
             $this->global['pageTitle'] = 'Add Job Work';
             $data['getPreviousjobworkponumber']= $this->admin_model->getPreviousjobworkponumber()[0];
            // $data['fetchALLprejobworkitemList']= $this->admin_model->fetchALLprejobworkitemList();
-            $data['vendorList']= $this->admin_model->fetchALLvendorListPO();
+            $data['vendorList']= $this->admin_model->fetchALLvendorList();
             $this->loadViews("masters/addjobwork", $this->global, $data, NULL);
 
         }
@@ -3635,7 +3632,24 @@ class Admin extends BaseController
 
     }
 
+    public function getSuppliernamebyvendorpo(){
 
-    
+        $vendor_po_number=$this->input->post('vendor_po_number');
+        if($vendor_po_number) {
+			$getSupplierdetails = $this->admin_model->getSuppliernamebyvendorpo($vendor_po_number);
+			if(count($getSupplierdetails) >= 1) {
+                //$content = $content.'<option value="">Select Raw Material Supplier Name</option>';
+				foreach($getSupplierdetails as $value) {
+					$content = $content.'<option value="'.$value["sup_id"].'">'.$value["supplier_name"].'</option>';
+				}
+				echo $content;
+			} else {
+				echo 'failure';
+			}
+		} else {
+			echo 'failure';
+		}
+
+    }
 
 }

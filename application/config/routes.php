@@ -162,6 +162,9 @@ $route['deleteVendorPoconfirmation'] = "admin/deleteVendorPoconfirmation";
 $route['jobWork'] = "admin/jobWork";
 $route['addjobwork'] = "admin/addjobwork";
 $route['fetchJobworklist'] = "admin/fetchJobworklist";
+$route['getSuppliernamebyvendorpo'] = "admin/getSuppliernamebyvendorpo";
+
+
 
 
 
