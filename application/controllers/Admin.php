@@ -3689,15 +3689,11 @@ class Admin extends BaseController
             $this->form_validation->set_rules('gst','SAC No','trim|required');
             $this->form_validation->set_rules('grand_total ','SAC No','trim|required');
             $this->form_validation->set_rules('item_remark ','SAC No','trim|required');
-        
-
-
+    
             if($this->form_validation->run() == FALSE)
             {
-            
-
                 $save_jobwork_response['status'] = 'failure';
-                $save_jobwork_response['error'] = array('part_number'=>strip_tags(form_error('part_number')), 'description'=>strip_tags(form_error('description')),'rm_actual_aty'=>strip_tags(form_error('rm_actual_aty')),'unit'=>strip_tags(form_error('unit')),'rm_rate'=>strip_tags(form_error('rm_rate')),'value'=>strip_tags(form_error('value')),'packing_and_forwarding_error'=>strip_tags(form_error('packing_and_forwarding_error')),'total'=>strip_tags(form_error('total')),'gst'=>strip_tags(form_error('gst')),'grand_total'=>strip_tags(form_error('grand_total')));
+                $save_jobwork_response['error'] = array('part_number'=>strip_tags(form_error('part_number')), 'description'=>strip_tags(form_error('description')),'rm_actual_aty'=>strip_tags(form_error('rm_actual_aty')),'vendor_order_qty'=>strip_tags(form_error('vendor_order_qty')),'rm_rate'=>strip_tags(form_error('rm_rate')),'value'=>strip_tags(form_error('value')),'packing_and_forwarding_error'=>strip_tags(form_error('packing_and_forwarding_error')),'total'=>strip_tags(form_error('total')),'gst'=>strip_tags(form_error('gst')),'grand_total'=>strip_tags(form_error('grand_total')));
             }else{
 
 
@@ -3729,12 +3725,11 @@ class Admin extends BaseController
                 // }else{
                     $saveJobworkitemdata = $this->admin_model->saveJobworkitemdata('',$data);
 
-                    print_r($saveJobworkitemdata);
-                    exit;
+            
                     
                     if($saveJobworkitemdata){
                         $save_jobwork_response['status'] = 'success';
-                        $save_jobwork_response['error'] = array('part_number'=>strip_tags(form_error('part_number')), 'description'=>strip_tags(form_error('description')),'rm_actual_aty'=>strip_tags(form_error('rm_actual_aty')),'unit'=>strip_tags(form_error('unit')),'rm_rate'=>strip_tags(form_error('rm_rate')),'value'=>strip_tags(form_error('value')),'packing_and_forwarding_error'=>strip_tags(form_error('packing_and_forwarding_error')),'total'=>strip_tags(form_error('total')),'gst'=>strip_tags(form_error('gst')),'grand_total'=>strip_tags(form_error('grand_total')));
+                        $save_jobwork_response['error'] = array('part_number'=>strip_tags(form_error('part_number')), 'description'=>strip_tags(form_error('description')),'rm_actual_aty'=>strip_tags(form_error('rm_actual_aty')),'vendor_order_qty'=>strip_tags(form_error('vendor_order_qty')),'rm_rate'=>strip_tags(form_error('rm_rate')),'value'=>strip_tags(form_error('value')),'packing_and_forwarding_error'=>strip_tags(form_error('packing_and_forwarding_error')),'total'=>strip_tags(form_error('total')),'gst'=>strip_tags(form_error('gst')),'grand_total'=>strip_tags(form_error('grand_total')));
                     }
                 //  }
                 
