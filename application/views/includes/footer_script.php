@@ -4274,7 +4274,7 @@
 					 var rm_rate = 0;
 				 }
 				 
-				 var total_value = rm_actual_aty * rm_rate;
+				 var total_value = parseFloat(rm_actual_aty) * parseFloat(rm_rate);
 				 $("#value").val( Math.round(total_value));
 		});
 
@@ -4293,11 +4293,19 @@
 					 var value = 0;
 				 }
 				 
-				 var total_value = packing_and_forwarding +  value;
+				 var total_value = parseFloat(packing_and_forwarding) +  parseFloat(value);
 				 $("#total").val( Math.round(total_value));
+
+				 var gst_value = parseFloat(total_value) * 18 / 100;
+
+				 $("#gst").val( Math.round(gst_value));
+
+				 $("#grand_total").val( Math.round(gst_value) + Math.round(total_value));
+
+
+				 
 		});
 
-		
 		$(document).on('click','.deleteJobwork',function(e){
 			var elemF = $(this);
 			e.preventDefault();
@@ -4345,8 +4353,6 @@
 				}
 			});
 		});
-
-
-
+		
     </script>
 <?php } ?>

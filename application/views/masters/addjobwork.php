@@ -297,9 +297,9 @@
 
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">GST<span class="required">*</span></label>
+                                                        <label class="col-sm-4 col-form-label">GST (9 + 9 or 18)<span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="number" class="form-control"  id="gst" name="gst">
+                                                            <input type="number" class="form-control"  id="gst" name="gst" readonly>
                                                             <p class="error gst_error"></p>
                                                         </div>
                                                     </div>
@@ -308,7 +308,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Grand Total<span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="number" class="form-control"  id="grand_total" name="grand_total">
+                                                            <input type="number" class="form-control"  id="grand_total" name="grand_total" readonly>
                                                             <p class="error grand_total_error"></p>
                                                         </div>
                                                     </div>
