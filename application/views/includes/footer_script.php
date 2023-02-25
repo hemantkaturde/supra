@@ -3942,6 +3942,10 @@
 			});
 		});
 
+		$(document).on('click','.closeVendorpoconfirmation', function(){
+			location.reload();
+        });
+
     </script>
 <?php } ?>
 
@@ -4138,19 +4142,12 @@
 								if(data == "failure")
 								{
 									$('#description').val('');
-									$('#HSN_Code').val('');
-									$('#gross_weight').val('');
-									$('#net_weight').val('');
 									$('#SAC').val('');
-									$('#drawing_number').val('');
-									$('#description_1').val('');
-									$('#description_2').val('');
-									$('#qty').val('');
-									$('#vendor_qty').val('');
+									$('#HSN_Code').val('');
+									$('#raw_material_size').val('');
+									$('#vendor_order_qty').val('');
 									$('#unit').val('');
-									//$('#rm_type').val('');
-									$('#rmqty').val('');
-									
+									$('#rm_rate').val('');
 
 								}
 								else
@@ -4162,33 +4159,20 @@
 									$('#raw_material_size').val(data_row_material.sitting_size);
 									$('#vendor_order_qty').val(data_row_material.vendor_qty);
 									$('#unit').val(data_row_material.unit);
-									
-									$('#qty').val(data_row_material.order_oty);
-									$('#rm_type').val(data_row_material.type_of_raw_material);
-									$('#rmqty').val(data_row_material.sent_qty);
-									
-									
+									$('#rm_rate').val(data_row_material.value);
 									
 								}
 							},
 							error: function (jqXHR, textStatus, errorThrown)
 							{
-									$('#description').val('');
-									$('#HSN_Code').val('');
-									$('#gross_weight').val('');
-									$('#net_weight').val('');
+								    $('#description').val('');
 									$('#SAC').val('');
-									$('#drawing_number').val('');
-									$('#description_1').val('');
-									$('#description_2').val('');
-									$('#qty').val('');
-									$('#vendor_qty').val('');
+									$('#HSN_Code').val('');
+									$('#raw_material_size').val('');
+									$('#vendor_order_qty').val('');
 									$('#unit').val('');
-									$('#rm_type').val('');
-									$('#rmqty').val('');
-
-									
-								//$(".loader_ajax").hide();
+									$('#rm_rate').val('');									
+								    //$(".loader_ajax").hide();
 							}
 						});
 						return false;
@@ -4203,7 +4187,6 @@
 			}
 			
 		});
-
 
 		$(document).on('click','#saveJobworktem',function(e){
 			e.preventDefault();
@@ -4271,6 +4254,98 @@
 			});
 			return false;
 	    });
+
+		$(document).on('click','.closejobworkmodal', function(){
+			location.reload();
+        });
+
+		$(document).on('change', '#rm_actual_aty,#rm_rate', function(){	
+				$("#value").val();
+			  
+				if($("#rm_actual_aty").val()){
+					 var rm_actual_aty = $("#rm_actual_aty").val();
+				 }else{
+					 var rm_actual_aty = 0;
+				 }
+
+				 if($("#rm_rate").val()){
+					 var rm_rate = $("#rm_rate").val();
+				 }else{
+					 var rm_rate = 0;
+				 }
+				 
+				 var total_value = rm_actual_aty * rm_rate;
+				 $("#value").val( Math.round(total_value));
+		});
+
+		$(document).on('change', '#packing_and_forwarding,#value', function(){	
+				$("#total").val();
+			  
+				if($("#packing_and_forwarding").val()){
+					 var packing_and_forwarding = $("#packing_and_forwarding").val();
+				 }else{
+					 var packing_and_forwarding = 0;
+				 }
+
+				 if($("#value").val()){
+					 var value = $("#value").val();
+				 }else{
+					 var value = 0;
+				 }
+				 
+				 var total_value = packing_and_forwarding +  value;
+				 $("#total").val( Math.round(total_value));
+		});
+
+		
+		$(document).on('click','.deleteJobwork',function(e){
+			var elemF = $(this);
+			e.preventDefault();
+			swal({
+				title: "Are you sure?",
+				text: "Delete Job Work",
+				type: "warning",
+				showCancelButton: true,
+				closeOnClickOutside: false,
+				confirmButtonClass: "btn-sm btn-danger",
+				confirmButtonText: "Yes, delete it!",
+				cancelButtonText: "No, cancel plz!",
+				closeOnConfirm: false,
+				closeOnCancel: false
+			}, function(isConfirm) {
+				if (isConfirm) {
+							$.ajax({
+								url : "<?php echo base_url();?>deleteJobwork",
+								type: "POST",
+								data : 'id='+elemF.attr('data-id'),
+								success: function(data, textStatus, jqXHR)
+								{
+									const obj = JSON.parse(data);
+								
+									if(obj.status=='success'){
+										swal({
+											title: "Deleted!",
+											text: "Job Work Succesfully Deleted",
+											icon: "success",
+											button: "Ok",
+											},function(){ 
+												window.location.href = "<?php echo base_url().'jobWork'?>";
+										});	
+									}
+
+								},
+								error: function (jqXHR, textStatus, errorThrown)
+								{
+									$(".loader_ajax").hide();
+								}
+							})
+						}
+						else {
+				swal("Cancelled", "Vendor PO deletion cancelled ", "error");
+				}
+			});
+		});
+
 
 
     </script>

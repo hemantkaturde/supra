@@ -3680,6 +3680,7 @@ class Admin extends BaseController
             $this->form_validation->set_rules('part_number','Part Number','trim|required');
             $this->form_validation->set_rules('description','Part Name','trim|required');
             $this->form_validation->set_rules('rm_actual_aty ','SAC No','trim|required');
+            $this->form_validation->set_rules('vendor_order_qty ','Vendor Order Qty','trim|required');
             $this->form_validation->set_rules('unit ','SAC No','trim|required');
             $this->form_validation->set_rules('rm_rate ','SAC No','trim|required');
             $this->form_validation->set_rules('value ','SAC No','trim|required');
@@ -3690,28 +3691,35 @@ class Admin extends BaseController
             $this->form_validation->set_rules('item_remark ','SAC No','trim|required');
         
 
+
             if($this->form_validation->run() == FALSE)
             {
+            
+
                 $save_jobwork_response['status'] = 'failure';
                 $save_jobwork_response['error'] = array('part_number'=>strip_tags(form_error('part_number')), 'description'=>strip_tags(form_error('description')),'rm_actual_aty'=>strip_tags(form_error('rm_actual_aty')),'unit'=>strip_tags(form_error('unit')),'rm_rate'=>strip_tags(form_error('rm_rate')),'value'=>strip_tags(form_error('value')),'packing_and_forwarding_error'=>strip_tags(form_error('packing_and_forwarding_error')),'total'=>strip_tags(form_error('total')),'gst'=>strip_tags(form_error('gst')),'grand_total'=>strip_tags(form_error('grand_total')));
             }else{
 
-                
-                $data = array(
-                    'part_number_id'   => trim($this->input->post('part_number')),
-                    'description'     => trim($this->input->post('description')),
-                    'vendor_qty'=> trim($this->input->post('vendor_qty')),
-                    'order_qty'=> trim($this->input->post('qty')),
-                    'row_material_recived_qty'=> trim($this->input->post('rmqty')),
-                    'finished_good_recived_qty'=> trim($this->input->post('finishedgoodqty')),
-                    'gross_weight'=> trim($this->input->post('gross_weight')),
-                    'expected_qty'=> trim($this->input->post('expected_qty')),
-                    'item_remark'=> trim($this->input->post('item_remark')),
 
+                $data = array(
+                    
+                    'part_number_id' => trim($this->input->post('part_number')),
+                    'description'	=>	trim($this->input->post('description')),
+                    'rm_actual_qty'	=>  trim($this->input->post('rm_actual_aty')),
+                    'vendor_qty'	=>  trim($this->input->post('vendor_order_qty')),
+                    'ram_rate'=>       trim($this->input->post('rm_rate')),
+                    'unit'=>           trim($this->input->post('unit')),
+                    'value'	=>        trim($this->input->post('value')),
+                    'packing_forwarding'	=>trim($this->input->post('packing_and_forwarding_error')),
+                    'total'	=>trim($this->input->post('total')),
+                    'gst'	=>trim($this->input->post('gst')),
+                    'grand_total'	=>trim($this->input->post('grand_total')),
+                    'item_remark' =>trim($this->input->post('item_remark')),
                     'pre_date'=> trim($this->input->post('pre_date')),
                     'pre_vendor_name' => trim($this->input->post('pre_vendor_name')),
                     'pre_vendor_po_number' => trim($this->input->post('pre_vendor_po_number')),
-                    'pre_remark' => trim($this->input->post('item_remark')),
+                    'pre_raw_material_supplier_name' => trim($this->input->post('pre_raw_material_supplier_name')),
+                    'pre_remark' => trim($this->input->post('pre_remark')),
                 );
 
                 // $checkIfexitsbuyerpo = $this->admin_model->checkIfexitsbuyerpo(trim($this->input->post('sales_order_number')));
@@ -3719,9 +3727,12 @@ class Admin extends BaseController
                 //     $save_buyerpo_response['status'] = 'failure';
                 //     $save_buyerpo_response['error'] = array('sales_order_number'=>'Buyer PO Alreday Exits (Sales Order Number Alreday Exits)');
                 // }else{
-                    $saveVendorpoconfirmationitemdata = $this->admin_model->saveVendorpoconfirmationitemdata('',$data);
+                    $saveJobworkitemdata = $this->admin_model->saveJobworkitemdata('',$data);
+
+                    print_r($saveJobworkitemdata);
+                    exit;
                     
-                    if($saveVendorpoconfirmationitemdata){
+                    if($saveJobworkitemdata){
                         $save_jobwork_response['status'] = 'success';
                         $save_jobwork_response['error'] = array('part_number'=>strip_tags(form_error('part_number')), 'description'=>strip_tags(form_error('description')),'rm_actual_aty'=>strip_tags(form_error('rm_actual_aty')),'unit'=>strip_tags(form_error('unit')),'rm_rate'=>strip_tags(form_error('rm_rate')),'value'=>strip_tags(form_error('value')),'packing_and_forwarding_error'=>strip_tags(form_error('packing_and_forwarding_error')),'total'=>strip_tags(form_error('total')),'gst'=>strip_tags(form_error('gst')),'grand_total'=>strip_tags(form_error('grand_total')));
                     }
@@ -3730,6 +3741,24 @@ class Admin extends BaseController
             }
             echo json_encode($save_jobwork_response);
         }
+    }
+
+
+    public function deleteJobwork(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->deleteJobwork(trim($this->input->post('id')));
+            if ($result) {
+                        $process = 'Job Work Delete';
+                        $processFunction = 'Admin/deleteJobwork';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
+
     }
 
 

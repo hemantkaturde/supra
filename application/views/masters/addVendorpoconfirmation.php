@@ -322,7 +322,7 @@
                                                 </div>
 
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary btn-xl closeSupplierpoconfirmation" data-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-secondary btn-xl closeVendorpoconfirmation" data-dismiss="modal">Close</button>
                                                     <button type="submit" id="saveVendorconfromationpoitem" name="saveVendorconfromationpoitem" class="btn btn-primary" class="btn btn-success btn-xl">Save</button>
                                                 </div>
 

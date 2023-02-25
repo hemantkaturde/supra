@@ -165,6 +165,10 @@ $route['fetchJobworklist'] = "admin/fetchJobworklist";
 $route['getSuppliernamebyvendorpo'] = "admin/getSuppliernamebyvendorpo";
 $route['getSuppliergoodsPartnumberByidjobwork'] = "admin/getSuppliergoodsPartnumberByidjobwork";
 $route['saveJobworktem'] = "admin/saveJobworktem";
+$route['deleteJobwork'] = "admin/deleteJobwork";
+
+
+
 
 
 

@@ -246,7 +246,7 @@
 
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Unit</label>
+                                                        <label class="col-sm-4 col-form-label">Unit <span class="required">*</span></label>
                                                         <div class="col-sm-8">
                                                              <select class="form-control" name="unit" id="unit">
                                                                 <option value="">Select Unit</option>
@@ -290,7 +290,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Total<span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="number" class="form-control"  id="total" name="total">
+                                                            <input type="number" class="form-control"  id="total" name="total" readonly>
                                                             <p class="error total_error"></p>
                                                         </div>
                                                     </div>
