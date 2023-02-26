@@ -108,7 +108,7 @@
                                 <div class="col-md-6">
                                     <div class="container">
                                         <button type="button" class="btn btn-success btn-xl" data-toggle="modal" data-target="#addNewModal">Add New Items</button><br/><br/>
-                                            <table class="table table-bordered" style="width: 70% !important; max-width: 100%;margin-bottom: 20px;">
+                                            <table class="table table-bordered" style="width: 100% !important; max-width: 100%;margin-bottom: 20px;">
                                                 <thead style="background-color:#3c8dbc;color:#fff">
                                                     <tr>
                                                         <th>Sr No.</th>
@@ -122,6 +122,7 @@
                                                         <th>Total </th>
                                                         <th>GST</th>
                                                         <th>Grand Total</th>
+                                                        <th>Remark</th>
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>
@@ -136,11 +137,14 @@
                                                         <td><?php echo $value['part_number'];?></td>
                                                         <td><?php echo $value['description'];?></td>
                                                         <td><?php echo $value['vendor_qty'];?></td>
-                                                        <td><?php echo $value['order_qty'];?></td>
-                                                        <td><?php echo $value['row_material_recived_qty'];?></td>
-                                                        <td><?php echo $value['finished_good_recived_qty'];?></td>
-                                                        <td><?php echo $value['gross_weight'];?></td>
-                                                        <td><?php echo $value['expected_qty'];?></td>
+                                                        <td><?php echo $value['rm_actual_qty'];?></td>
+                                                        <td><?php echo $value['ram_rate'];?></td>
+                                                        <td><?php echo $value['value'];?></td>
+                                                        <td><?php echo $value['packing_forwarding'];?></td>
+                                                        <td><?php echo $value['total'];?></td>
+                                                        <td><?php echo $value['gst'];?></td>
+                                                        <td><?php echo $value['grand_total'];?></td>
+                                                        <td><?php echo $value['item_remark'];?></td>
                                                         <td>
                                                         <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['id'];?>' class='fa fa-trash-o deleteSupplierpoitem' aria-hidden='true'></i>
                                                         </td>

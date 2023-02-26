@@ -1901,16 +1901,6 @@ class Admin_model extends CI_Model
 
     }
 
-    // public function deleteSupplierpoconfirmationitem($id){
-    //     $this->db->where('id', $id);
-    //     //$this->db->delete(TBL_SUPPLIER);
-    //     if($this->db->delete(TBL_SUPPLIER_PO_CONFIRMATION_ITEM)){
-    //        return TRUE;
-    //     }else{
-    //        return FALSE;
-    //     }
-    // }
-
     public function update_last_inserted_id_supplier_po_confirmation($saveSupplierpoconfirmationdata){
 
         $data = array(
@@ -2209,10 +2199,15 @@ class Admin_model extends CI_Model
         return $rowcount;
     }
 
-
     public function fetchALLprejobworkitemList(){
 
-        return true;
+        $this->db->select('*');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_JOB_WORK_ITEM.'.part_number_id');
+        $this->db->where(TBL_JOB_WORK_ITEM.'.jobwork_id IS NULL');
+        $this->db->order_by(TBL_JOB_WORK_ITEM.'.id','desc');
+        $query = $this->db->get(TBL_JOB_WORK_ITEM);
+        $data = $query->result_array();
+        return $data;
 
     }
 
@@ -2332,7 +2327,6 @@ class Admin_model extends CI_Model
         }
 
     }
-
 
     public function getSuppliergoodsPartnumberByidjobwork($part_number,$vendor_po_number){
         $this->db->select('*,'.TBL_FINISHED_GOODS.'.sac as sac_no');
