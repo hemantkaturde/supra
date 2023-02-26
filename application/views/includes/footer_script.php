@@ -4203,7 +4203,7 @@
 			   var unit =   $('#unit').val();
 			   var rm_rate =   $('#rm_rate').val();
 			   var value =   $('#value').val();
-			   var packing_and_forwarding_error =   $('#packing_and_forwarding_error').val();
+			   var packing_and_forwarding =   $('#packing_and_forwarding').val();
 			   var total =   $('#total').val();
 			   var gst =   $('#gst').val();
 			   var grand_total =   $('#grand_total').val();
@@ -4219,7 +4219,7 @@
 				url : "<?php echo base_url();?>saveJobworktem",
 				type: "POST",
 				 //data : formData,
-				 data :{part_number:part_number ,description:description,SAC_no:SAC_no,HSN_Code:HSN_Code,raw_material_size:raw_material_size,vendor_order_qty:vendor_order_qty,rm_actual_aty:rm_actual_aty,unit:unit,rm_rate:rm_rate,value:value,packing_and_forwarding_error:packing_and_forwarding_error,total:total,gst:gst,grand_total:grand_total,item_remark:item_remark,pre_date:pre_date,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_raw_material_supplier_name:pre_raw_material_supplier_name,pre_remark:pre_remark},
+				 data :{part_number:part_number ,description:description,SAC_no:SAC_no,HSN_Code:HSN_Code,raw_material_size:raw_material_size,vendor_order_qty:vendor_order_qty,rm_actual_aty:rm_actual_aty,unit:unit,rm_rate:rm_rate,value:value,packing_and_forwarding:packing_and_forwarding,total:total,gst:gst,grand_total:grand_total,item_remark:item_remark,pre_date:pre_date,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_raw_material_supplier_name:pre_raw_material_supplier_name,pre_remark:pre_remark},
 				// method: "POST",
                 // data :{package_id:package_id},
                 cache:false,

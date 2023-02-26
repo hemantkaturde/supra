@@ -3679,26 +3679,24 @@ class Admin extends BaseController
 
             $this->form_validation->set_rules('part_number','Part Number','trim|required');
             $this->form_validation->set_rules('description','Part Name','trim|required');
-            $this->form_validation->set_rules('rm_actual_aty ','SAC No','trim|required');
-            $this->form_validation->set_rules('vendor_order_qty ','Vendor Order Qty','trim|required');
-            $this->form_validation->set_rules('unit ','SAC No','trim|required');
-            $this->form_validation->set_rules('rm_rate ','SAC No','trim|required');
-            $this->form_validation->set_rules('value ','SAC No','trim|required');
-            $this->form_validation->set_rules('packing_and_forwarding_error ','SAC No','trim|required');
-            $this->form_validation->set_rules('total','SAC No','trim|required');
-            $this->form_validation->set_rules('gst','SAC No','trim|required');
-            $this->form_validation->set_rules('grand_total ','SAC No','trim|required');
-            $this->form_validation->set_rules('item_remark ','SAC No','trim|required');
+            $this->form_validation->set_rules('rm_actual_aty','RM Actual Qty','trim|required');
+            $this->form_validation->set_rules('vendor_order_qty','Vendor Order Qty','trim|required');
+            $this->form_validation->set_rules('unit','Unit','trim|required');
+            $this->form_validation->set_rules('rm_rate','Part Name','trim|required');
+            $this->form_validation->set_rules('value','value','trim|required');
+            $this->form_validation->set_rules('packing_and_forwarding','Packing And Forwarding','trim|required');
+            $this->form_validation->set_rules('total','Total','trim|required');
+            $this->form_validation->set_rules('gst','GST','trim|required');
+            $this->form_validation->set_rules('grand_total','Grand Total','trim|required');
+            //$this->form_validation->set_rules('item_remark ','Item Remark','trim|required');
     
             if($this->form_validation->run() == FALSE)
             {
                 $save_jobwork_response['status'] = 'failure';
-                $save_jobwork_response['error'] = array('part_number'=>strip_tags(form_error('part_number')), 'description'=>strip_tags(form_error('description')),'rm_actual_aty'=>strip_tags(form_error('rm_actual_aty')),'vendor_order_qty'=>strip_tags(form_error('vendor_order_qty')),'rm_rate'=>strip_tags(form_error('rm_rate')),'value'=>strip_tags(form_error('value')),'packing_and_forwarding_error'=>strip_tags(form_error('packing_and_forwarding_error')),'total'=>strip_tags(form_error('total')),'gst'=>strip_tags(form_error('gst')),'grand_total'=>strip_tags(form_error('grand_total')));
+                $save_jobwork_response['error'] = array(
+                    'part_number'=>strip_tags(form_error('part_number')),'description'=>strip_tags(form_error('description')),'rm_actual_aty'=>strip_tags(form_error('rm_actual_aty')),'vendor_order_qty'=>strip_tags(form_error('vendor_order_qty')),'unit'=>strip_tags(form_error('unit')),'rm_rate'=>strip_tags(form_error('rm_rate')),'value'=>strip_tags(form_error('value')),'packing_and_forwarding'=>strip_tags(form_error('packing_and_forwarding')),'total'=>strip_tags(form_error('total')),'gst'=>strip_tags(form_error('gst')),'grand_total'=>strip_tags(form_error('grand_total')));
             }else{
-
-
                 $data = array(
-                    
                     'part_number_id' => trim($this->input->post('part_number')),
                     'description'	=>	trim($this->input->post('description')),
                     'rm_actual_qty'	=>  trim($this->input->post('rm_actual_aty')),
@@ -3706,7 +3704,7 @@ class Admin extends BaseController
                     'ram_rate'=>       trim($this->input->post('rm_rate')),
                     'unit'=>           trim($this->input->post('unit')),
                     'value'	=>        trim($this->input->post('value')),
-                    'packing_forwarding'	=>trim($this->input->post('packing_and_forwarding_error')),
+                    'packing_forwarding'	=>trim($this->input->post('packing_and_forwarding')),
                     'total'	=>trim($this->input->post('total')),
                     'gst'	=>trim($this->input->post('gst')),
                     'grand_total'	=>trim($this->input->post('grand_total')),
@@ -3725,11 +3723,10 @@ class Admin extends BaseController
                 // }else{
                     $saveJobworkitemdata = $this->admin_model->saveJobworkitemdata('',$data);
 
-            
-                    
                     if($saveJobworkitemdata){
+
                         $save_jobwork_response['status'] = 'success';
-                        $save_jobwork_response['error'] = array('part_number'=>strip_tags(form_error('part_number')), 'description'=>strip_tags(form_error('description')),'rm_actual_aty'=>strip_tags(form_error('rm_actual_aty')),'vendor_order_qty'=>strip_tags(form_error('vendor_order_qty')),'rm_rate'=>strip_tags(form_error('rm_rate')),'value'=>strip_tags(form_error('value')),'packing_and_forwarding_error'=>strip_tags(form_error('packing_and_forwarding_error')),'total'=>strip_tags(form_error('total')),'gst'=>strip_tags(form_error('gst')),'grand_total'=>strip_tags(form_error('grand_total')));
+                        $save_jobwork_response['error'] = array('part_number'=>strip_tags(form_error('part_number')),'description'=>strip_tags(form_error('description')),'rm_actual_aty'=>strip_tags(form_error('rm_actual_aty')),'vendor_order_qty'=>strip_tags(form_error('vendor_order_qty')),'unit'=>strip_tags(form_error('unit')),'rm_rate'=>strip_tags(form_error('rm_rate')),'value'=>strip_tags(form_error('value')),'packing_and_forwarding'=>strip_tags(form_error('packing_and_forwarding')),'total'=>strip_tags(form_error('total')),'gst'=>strip_tags(form_error('gst')),'grand_total'=>strip_tags(form_error('grand_total')));
                     }
                 //  }
                 
