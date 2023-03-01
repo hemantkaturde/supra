@@ -2122,30 +2122,53 @@ class Admin extends BaseController
                 $save_buyerpo_response['error'] = array('sales_order_number'=>strip_tags(form_error('sales_order_number')), 'date'=>strip_tags(form_error('date')), 'buyer_po_number'=>strip_tags(form_error('buyer_po_number')), 'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'buyer_name'=>strip_tags(form_error('buyer_name')),'currency'=>strip_tags(form_error('currency')),'rate'=>strip_tags(form_error('rate')),'value'=>strip_tags(form_error('value')),'part_number'=>strip_tags(form_error('part_number')),'order_quantity'=>strip_tags(form_error('order_quantity')),'description'=>strip_tags(form_error('description')),'delivery_date'=>strip_tags(form_error('delivery_date')),'remark'=>strip_tags(form_error('remark')));
             }else{
 
-                $data = array(
-                    'sales_order_number'   => trim($this->input->post('sales_order_number')),
-                    'date'     => trim($this->input->post('date')),
-                    'buyer_po_number'    => trim($this->input->post('buyer_po_number')),
-                    'buyer_po_date'  => trim($this->input->post('buyer_po_date')),
-                    'buyer_name_id' =>   trim($this->input->post('buyer_name')),
-                    'currency' => trim($this->input->post('currency')),
-                    'delivery_date' =>    trim($this->input->post('delivery_date')),
-                    'remark' =>    trim($this->input->post('remark')),
-                );
+                    $po_id =  trim($this->input->post('po_id'));
+                    if(empty($po_id)){
+                        $data = array(
+                            'sales_order_number'   => trim($this->input->post('sales_order_number')),
+                            'date'     => trim($this->input->post('date')),
+                            'buyer_po_number'    => trim($this->input->post('buyer_po_number')),
+                            'buyer_po_date'  => trim($this->input->post('buyer_po_date')),
+                            'buyer_name_id' =>   trim($this->input->post('buyer_name')),
+                            'currency' => trim($this->input->post('currency')),
+                            'delivery_date' =>    trim($this->input->post('delivery_date')),
+                            'remark' =>    trim($this->input->post('remark')),
+                        );
 
-                $checkIfexitsbuyerpo = $this->admin_model->checkIfexitsbuyerpo(trim($this->input->post('sales_order_number')));
-                if($checkIfexitsbuyerpo > 0){
-                    $save_buyerpo_response['status'] = 'failure';
-                    $save_buyerpo_response['error'] = array('sales_order_number'=>'Buyer PO Alreday Exits (Sales Order Number Alreday Exits)');
-                }else{
-                    $saveBuyerpodata = $this->admin_model->saveBuyerpodata('',$data);
-                    if($saveBuyerpodata){
-                        $update_last_inserted_id = $this->admin_model->update_last_inserted_id($saveBuyerpodata);
-                        if($update_last_inserted_id){
-                            $save_buyerpo_response['status'] = 'success';
-                            $save_buyerpo_response['error'] = array('sales_order_number'=>strip_tags(form_error('sales_order_number')), 'date'=>strip_tags(form_error('date')), 'buyer_po_number'=>strip_tags(form_error('buyer_po_number')), 'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'buyer_name'=>strip_tags(form_error('buyer_name')),'currency'=>strip_tags(form_error('currency')),'rate'=>strip_tags(form_error('rate')),'value'=>strip_tags(form_error('value')),'part_number'=>strip_tags(form_error('part_number')),'order_quantity'=>strip_tags(form_error('order_quantity')),'description'=>strip_tags(form_error('description')),'delivery_date'=>strip_tags(form_error('delivery_date')),'remark'=>strip_tags(form_error('remark')));
+                        $checkIfexitsbuyerpo = $this->admin_model->checkIfexitsbuyerpo(trim($this->input->post('sales_order_number')));
+                        if($checkIfexitsbuyerpo > 0){
+                            $save_buyerpo_response['status'] = 'failure';
+                            $save_buyerpo_response['error'] = array('sales_order_number'=>'Buyer PO Alreday Exits (Sales Order Number Alreday Exits)');
+                        }else{
+                            $saveBuyerpodata = $this->admin_model->saveBuyerpodata('',$data);
+                            if($saveBuyerpodata){
+                                $update_last_inserted_id = $this->admin_model->update_last_inserted_id($saveBuyerpodata);
+                                if($update_last_inserted_id){
+                                    $save_buyerpo_response['status'] = 'success';
+                                    $save_buyerpo_response['error'] = array('sales_order_number'=>strip_tags(form_error('sales_order_number')), 'date'=>strip_tags(form_error('date')), 'buyer_po_number'=>strip_tags(form_error('buyer_po_number')), 'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'buyer_name'=>strip_tags(form_error('buyer_name')),'currency'=>strip_tags(form_error('currency')),'rate'=>strip_tags(form_error('rate')),'value'=>strip_tags(form_error('value')),'part_number'=>strip_tags(form_error('part_number')),'order_quantity'=>strip_tags(form_error('order_quantity')),'description'=>strip_tags(form_error('description')),'delivery_date'=>strip_tags(form_error('delivery_date')),'remark'=>strip_tags(form_error('remark')));
+                                }
+                            }
                         }
-                    }
+
+                }else{
+                        $data = array(
+                            'sales_order_number'   => trim($this->input->post('sales_order_number')),
+                            'date'     => trim($this->input->post('date')),
+                            'buyer_po_number'    => trim($this->input->post('buyer_po_number')),
+                            'buyer_po_date'  => trim($this->input->post('buyer_po_date')),
+                            'buyer_name_id' =>   trim($this->input->post('buyer_name')),
+                            'currency' => trim($this->input->post('currency')),
+                            'delivery_date' =>    trim($this->input->post('delivery_date')),
+                            'remark' =>    trim($this->input->post('remark')),
+                        );
+
+                        $saveBuyerpodata = $this->admin_model->saveBuyerpodata($po_id,$data);
+                        if($saveBuyerpodata){
+                                $save_buyerpo_response['status'] = 'success';
+                                $save_buyerpo_response['error'] = array('sales_order_number'=>strip_tags(form_error('sales_order_number')), 'date'=>strip_tags(form_error('date')), 'buyer_po_number'=>strip_tags(form_error('buyer_po_number')), 'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'buyer_name'=>strip_tags(form_error('buyer_name')),'currency'=>strip_tags(form_error('currency')),'rate'=>strip_tags(form_error('rate')),'value'=>strip_tags(form_error('value')),'part_number'=>strip_tags(form_error('part_number')),'order_quantity'=>strip_tags(form_error('order_quantity')),'description'=>strip_tags(form_error('description')),'delivery_date'=>strip_tags(form_error('delivery_date')),'remark'=>strip_tags(form_error('remark')));
+                          
+                        }
+
                 }
             }
             echo json_encode($save_buyerpo_response);
@@ -2351,29 +2374,50 @@ class Admin extends BaseController
                 $save_buyerpoitem_response['error'] = array('part_number'=>strip_tags(form_error('part_number')), 'description'=>strip_tags(form_error('description')), 'qty'=>strip_tags(form_error('qty')), 'rate'=>strip_tags(form_error('rate')),'value'=>strip_tags(form_error('value')));
             }else{
 
-                
-                $data = array(
-                    'part_number_id'   => trim($this->input->post('part_number')),
-                    'description'     => trim($this->input->post('description')),
-                    'order_oty'    => trim($this->input->post('qty')),
-                    'rate'  => trim($this->input->post('rate')),
-                    'value' =>   trim($this->input->post('value')),
-                    'unit' =>  trim($this->input->post('unit')),
-                    'pre_buyer_po_number'=>trim($this->input->post('buyer_po_number')),
-                    'pre_date'=>trim($this->input->post('date')),
-                    'pre_buyer_po_date'=>trim($this->input->post('buyer_po_date')),
-                    'pre_buyer_name' =>trim($this->input->post('buyer_name')),
-                    'pre_currency' =>trim($this->input->post('currency')),
-                    'pre_delivery_date' =>trim($this->input->post('delivery_date')),
-                    'pre_remark' =>trim($this->input->post('remark')),
-                );
+                    $po_id = trim($this->input->post('po_id'));
+                    if(empty($po_id)){
+
+                        $data = array(
+                            'part_number_id'   => trim($this->input->post('part_number')),
+                            'description'     => trim($this->input->post('description')),
+                            'order_oty'    => trim($this->input->post('qty')),
+                            'rate'  => trim($this->input->post('rate')),
+                            'value' =>   trim($this->input->post('value')),
+                            'unit' =>  trim($this->input->post('unit')),
+                            'pre_buyer_po_number'=>trim($this->input->post('buyer_po_number')),
+                            'pre_date'=>trim($this->input->post('date')),
+                            'pre_buyer_po_date'=>trim($this->input->post('buyer_po_date')),
+                            'pre_buyer_name' =>trim($this->input->post('buyer_name')),
+                            'pre_currency' =>trim($this->input->post('currency')),
+                            'pre_delivery_date' =>trim($this->input->post('delivery_date')),
+                            'pre_remark' =>trim($this->input->post('remark')),
+                        );
+                     }else{
+                            $data = array(
+                                'buyer_po_id'   => trim($this->input->post('po_id')),
+                                'part_number_id'   => trim($this->input->post('part_number')),
+                                'description'     => trim($this->input->post('description')),
+                                'order_oty'    => trim($this->input->post('qty')),
+                                'rate'  => trim($this->input->post('rate')),
+                                'value' =>   trim($this->input->post('value')),
+                                'unit' =>  trim($this->input->post('unit')),
+                                'pre_buyer_po_number'=>trim($this->input->post('buyer_po_number')),
+                                'pre_date'=>trim($this->input->post('date')),
+                                'pre_buyer_po_date'=>trim($this->input->post('buyer_po_date')),
+                                'pre_buyer_name' =>trim($this->input->post('buyer_name')),
+                                'pre_currency' =>trim($this->input->post('currency')),
+                                'pre_delivery_date' =>trim($this->input->post('delivery_date')),
+                                'pre_remark' =>trim($this->input->post('remark')),
+                            );
+
+                        }
 
                 // $checkIfexitsbuyerpo = $this->admin_model->checkIfexitsbuyerpo(trim($this->input->post('sales_order_number')));
                 // if($checkIfexitsbuyerpo > 0){
                 //     $save_buyerpo_response['status'] = 'failure';
                 //     $save_buyerpo_response['error'] = array('sales_order_number'=>'Buyer PO Alreday Exits (Sales Order Number Alreday Exits)');
                 // }else{
-                    $saveBuyerpoitemdata = $this->admin_model->saveBuyerpoitemdata('',$data);
+                    $saveBuyerpoitemdata = $this->admin_model->saveBuyerpoitemdata($po_id,$data);
                     if($saveBuyerpoitemdata){
                         $save_buyerpoitem_response['status'] = 'success';
                         $save_buyerpoitem_response['error'] = array('part_number'=>'', 'description'=>'', 'qty'=>'', 'rate'=>'','value'=>'');
@@ -2426,6 +2470,20 @@ class Admin extends BaseController
         $data['fetchALLitemList']= $this->admin_model->fetchALLBuyeritemList($buyerpoid);
         $data['buyerList']= $this->admin_model->fetchAllbuyerList();
         $this->loadViews("masters/viewbuyerpo", $this->global, $data, NULL);
+    }
+
+
+    public function editBuyerpo($buyerpoid){
+        $process = 'Edit Buyer PO';
+        $processFunction = 'Admin/editBuyerpo';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Edit Buyer PO';
+        $data['getbuyerpodetails']= $this->admin_model->getbuyerpodetails($buyerpoid);
+        $data['fetchALLitemList']= $this->admin_model->fetchALLBuyeritemList($buyerpoid);
+        $data['buyerList']= $this->admin_model->fetchAllbuyerList();
+        $data['finishgoodList']= $this->admin_model->fetchALLFinishgoodList();
+           
+        $this->loadViews("masters/editbuyerpo", $this->global, $data, NULL);
     }
  
     public function getPartnumberByid(){
@@ -2521,6 +2579,23 @@ class Admin extends BaseController
         $data['getSuplierpodetails']= $this->admin_model->getSuplierpodetails($supplierpoid);
         $data['fetchALLsupplieritemlistforview']= $this->admin_model->fetchALLsupplieritemlistforview($supplierpoid);
         $this->loadViews("masters/viewSupplierpo", $this->global, $data, NULL);
+
+    }
+
+
+
+    public function editSupplierpo($supplierpoid){
+
+        $process = 'Edit Supplier PO';
+        $processFunction = 'Admin/viewSupplierpo';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Edit Supplier PO';
+        $data['supplierList']= $this->admin_model->fetchALLsupplierList();
+        $data['buyerList']= $this->admin_model->fetchAllbuyerList();
+        $data['vendorList']= $this->admin_model->fetchALLvendorList();
+        $data['getSuplierpodetails']= $this->admin_model->getSuplierpodetails($supplierpoid);
+        $data['fetchALLsupplieritemlistforview']= $this->admin_model->fetchALLsupplieritemlistforview($supplierpoid);
+        $this->loadViews("masters/editSupplierpo", $this->global, $data, NULL);
 
     }
 

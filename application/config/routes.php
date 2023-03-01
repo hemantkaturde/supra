@@ -167,6 +167,9 @@ $route['getSuppliergoodsPartnumberByidjobwork'] = "admin/getSuppliergoodsPartnum
 $route['saveJobworktem'] = "admin/saveJobworktem";
 $route['deleteJobwork'] = "admin/deleteJobwork";
 
+$route['editBuyerpo/(:any)'] = "admin/editBuyerpo/$1";
+$route['editSupplierpo/(:any)'] = "admin/editSupplierpo/$1";
+
 
 
 

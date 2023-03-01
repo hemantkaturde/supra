@@ -1424,7 +1424,7 @@
 <?php } ?>
 
 
-<?php if($pageTitle=='Buyer PO' || $pageTitle=='Add Buyer PO'){ ?>
+<?php if($pageTitle=='Buyer PO' || $pageTitle=='Add Buyer PO' || $pageTitle=='Edit Buyer PO'){ ?>
 	<script type="text/javascript">
         $(document).ready(function() {
             var dt = $('#view_buyerpo').DataTable({
@@ -1461,7 +1461,7 @@
 			e.preventDefault();
 			$(".loader_ajax").show();
 			var formData = new FormData($("#addnewbuyerform")[0]);
-
+			var po_id =   $('#po_id').val();
 			$.ajax({
 				url : "<?php echo base_url();?>addnewBuyerpo",
 				type: "POST",
@@ -1482,14 +1482,26 @@
 				    }
 					else if(fetchResponse.status == 'success')
 				    {
-						swal({
+						if(po_id){
+							swal({
 							title: "Success",
-							text: "Buyer PO Successfully Added!",
+							text: "Buyer PO Successfully Updated!",
 							icon: "success",
 							button: "Ok",
 							},function(){ 
 								window.location.href = "<?php echo base_url().'buyerpo'?>";
-						});		
+						    });	
+
+						}else{
+							swal({
+								title: "Success",
+								text: "Buyer PO Successfully Added!",
+								icon: "success",
+								button: "Ok",
+								},function(){ 
+									window.location.href = "<?php echo base_url().'buyerpo'?>";
+							});
+						}		
 				    }
 					
 				},
@@ -1553,6 +1565,7 @@
 			e.preventDefault();
 			$(".loader_ajax").show();
 			   var formData = new FormData($("#addbuyeritemform")[0]);
+			   var po_id =   $('#po_id').val();
                var part_number =   $('#part_number').val();
 			   var description =   $('#description').val();
 			   var qty =   $('#qty').val();
@@ -1573,7 +1586,7 @@
 				url : "<?php echo base_url();?>addbuyeritem",
 				type: "POST",
 				 //data : formData,
-				 data :{part_number:part_number,description:description,qty:qty,rate:rate,value:value,buyer_po_number:buyer_po_number,date:date,buyer_po_date:buyer_po_date,buyer_name:buyer_name,currency:currency,delivery_date:delivery_date,remark:remark,unit:unit},
+				 data :{part_number:part_number,description:description,qty:qty,rate:rate,value:value,buyer_po_number:buyer_po_number,date:date,buyer_po_date:buyer_po_date,buyer_name:buyer_name,currency:currency,delivery_date:delivery_date,remark:remark,unit:unit,po_id:po_id},
 				// method: "POST",
                 // data :{package_id:package_id},
                 cache:false,
@@ -1590,14 +1603,28 @@
 				    }
 					else if(fetchResponse.status == 'success')
 				    {
-						swal({
-							title: "Success",
-							text: "Item Successfully Added!",
-							icon: "success",
-							button: "Ok",
-							},function(){ 
-								window.location.href = "<?php echo base_url().'addnewBuyerpo'?>";
-						});		
+
+						if(po_id){
+								swal({
+									title: "Success",
+									text: "Item Successfully Added!",
+									icon: "success",
+									button: "Ok",
+									},function(){ 
+										window.location.href = "<?php echo base_url().'editBuyerpo/'?>"+po_id;
+							   });	
+						}else{
+
+							swal({
+									title: "Success",
+									text: "Item Successfully Added!",
+									icon: "success",
+									button: "Ok",
+									},function(){ 
+										window.location.href = "<?php echo base_url().'addnewBuyerpo'?>";
+								});	
+						}
+						
 				    }
 					
 				},
@@ -1611,6 +1638,7 @@
 
 		$(document).on('click','.deleteBuyerpoitem',function(e){
 			var elemF = $(this);
+			var po_id =   $('#po_id').val();
 			e.preventDefault();
 			swal({
 				title: "Are you sure?",
@@ -1640,7 +1668,14 @@
 											icon: "success",
 											button: "Ok",
 											},function(){ 
-												window.location.href = "<?php echo base_url().'addnewBuyerpo'?>";
+
+												if(po_id){
+													window.location.href = "<?php echo base_url().'editBuyerpo/'?>"+po_id;
+
+												}else{
+													window.location.href = "<?php echo base_url().'addnewBuyerpo'?>";
+
+												}
 										});	
 									}
 
@@ -1659,6 +1694,8 @@
 
 		$(document).on('change','#buyer_name',function(e){  
 			e.preventDefault();
+
+			$('#currency').html();
 			
 			//$(".loader_ajax").show();
 			var buyer_name = $('#buyer_name').val();
@@ -1708,7 +1745,6 @@
 			location.reload();
         });
 
-
 		$(document).on('change','#part_number',function(e){  
 			e.preventDefault();
 			
@@ -1746,9 +1782,10 @@
 <?php } ?>
 
 
-<?php if($pageTitle=='Supplier PO' || $pageTitle=='Add Supplier PO'){ ?>
+<?php if($pageTitle=='Supplier PO' || $pageTitle=='Add Supplier PO' || $pageTitle=="Edit Supplier PO"){ ?>
 	<script type="text/javascript">
-        $(document).ready(function() {
+     
+	   $(document).ready(function() {
             var dt = $('#view_supplierpo').DataTable({
 	            "columnDefs": [ 
 	                 { className: "details-control", "targets": [ 0 ] },
