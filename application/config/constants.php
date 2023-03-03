@@ -131,7 +131,8 @@ define('TBL_VENDOR_PO_CONFIRMATION','tbl_vendor_poconfirmation');
 define('TBL_VENDOR_PO_CONFIRMATION_ITEM','tbl_vendorpoconfirmation_item');
 define('TBL_JOB_WORK','tbl_jobwork');
 define('TBL_JOB_WORK_ITEM','tbl_jobwork_item');
-
+define('TBL_BILL_OF_MATERIAL','tbl_bill_of_material');
+define('TBL_BILL_OF_MATERIAL_VENDOR','tbl_vendor_bill_of_material');
 
 
 

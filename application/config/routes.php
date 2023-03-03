@@ -167,8 +167,21 @@ $route['getSuppliergoodsPartnumberByidjobwork'] = "admin/getSuppliergoodsPartnum
 $route['saveJobworktem'] = "admin/saveJobworktem";
 $route['deleteJobwork'] = "admin/deleteJobwork";
 
+
 $route['editBuyerpo/(:any)'] = "admin/editBuyerpo/$1";
 $route['editSupplierpo/(:any)'] = "admin/editSupplierpo/$1";
+
+$route['billofmaterial'] = "admin/billofmaterial";
+$route['fetchBillofmaterial'] = "admin/fetchBillofmaterial";
+$route['addnewBillofmaterial'] = "admin/addnewBillofmaterial";
+$route['deleteBillofmaterial'] = "admin/deleteBillofmaterial";
+
+
+$route['vendorbillofmaterial'] = "admin/vendorbillofmaterial";
+$route['fetchvendorBillofmaterial'] = "admin/fetchvendorBillofmaterial";
+$route['addvendorBillofmaterial'] = "admin/addvendorBillofmaterial";
+$route['deletevendorBillofmaterial'] = "admin/deletevendorBillofmaterial";
+$route['getBuyerItemsforDisplaybyvendorpo'] = "admin/getBuyerItemsforDisplaybyvendorpo";
 
 
 

@@ -2392,6 +2392,252 @@ class Admin_model extends CI_Model
     }
 
 
+    public function getBillofmaterialCount($params){
+
+        $this->db->select('*');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id= '.TBL_BILL_OF_MATERIAL.'.vendor_name');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id= '.TBL_BILL_OF_MATERIAL.'.vendor_po_number');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_BILL_OF_MATERIAL.".bom_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BILL_OF_MATERIAL.".date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BILL_OF_MATERIAL.".bom_status LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BILL_OF_MATERIAL.".part_number LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_BILL_OF_MATERIAL.'.status', 1);        
+        $query = $this->db->get(TBL_BILL_OF_MATERIAL);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+
+    }
+
+    public function getBillofmaterialdata($params){
+
+        $this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_BILL_OF_MATERIAL.'.id as billofmaterialid');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id= '.TBL_BILL_OF_MATERIAL.'.vendor_name');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id= '.TBL_BILL_OF_MATERIAL.'.vendor_po_number');
+
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_BILL_OF_MATERIAL.".bom_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BILL_OF_MATERIAL.".date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BILL_OF_MATERIAL.".bom_status LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BILL_OF_MATERIAL.".part_number LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_BILL_OF_MATERIAL.'.status', 1);
+        $this->db->limit($params['length'],$params['start']);
+        $this->db->order_by(TBL_BILL_OF_MATERIAL.'.id','DESC');
+        $query = $this->db->get(TBL_BILL_OF_MATERIAL);
+        $fetch_result = $query->result_array();
+
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['bom_number'] = $value['bom_number'];
+                $data[$counter]['date'] = $value['date'];
+                $data[$counter]['part_number'] = $value['part_number'];
+                $data[$counter]['vendor_po_number'] = $value['po_number'];
+                //$data[$counter]['vendor_number'] = $value['vendor_number'];
+                $data[$counter]['vendor_name'] = $value['vendorname'];
+                $data[$counter]['bom_status'] = $value['bom_status'];
+                $data[$counter]['action'] = '';
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewSupplierpoconfirmation/".$value['billofmaterialid']."' style='cursor: pointer;'><i style='font-size: large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['billofmaterialid']."' class='fa fa-trash-o deleteBillofmaterial' aria-hidden='true'></i>"; 
+                $counter++; 
+            }
+        }
+
+        return $data;
+
+    }
+
+
+    public function getPreviousBomnumber(){
+
+        $this->db->select('bom_number');
+        $this->db->where(TBL_BILL_OF_MATERIAL.'.status', 1);
+        $this->db->limit(1);
+        $this->db->order_by(TBL_BILL_OF_MATERIAL.'.id','DESC');
+        $query = $this->db->get(TBL_BILL_OF_MATERIAL);
+        $rowcount = $query->result_array();
+        return $rowcount;
+    }
+
+
+    public function checkIfexitsBillofmaterial($bom_number){
+
+        $this->db->select('*');
+        $this->db->where(TBL_BILL_OF_MATERIAL.'.bom_number', $bom_number);
+        $this->db->where(TBL_BILL_OF_MATERIAL.'.status', 1);
+        $query = $this->db->get(TBL_BILL_OF_MATERIAL);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+
+    }
+
+
+    public function saveBillofmaterial($id,$data){
+
+        if($id != '') {
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_BILL_OF_MATERIAL, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_BILL_OF_MATERIAL, $data)) {
+                return $this->db->insert_id();;
+            } else {
+                return FALSE;
+            }
+        }
+
+    }
+
+    public function deleteBillofmaterial($id){
+
+        $this->db->where('id', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_BILL_OF_MATERIAL)){
+            // $this->db->where('jobwork_id', $id);
+            // $this->db->delete(TBL_SUPPLIER);
+            // if($this->db->delete(TBL_JOB_WORK_ITEM)){
+            //    return TRUE;
+            // }else{
+            //    return FALSE;
+            // }
+            return TRUE;
+        }else{
+           return FALSE;
+        }
+    }
+
+    public function getvendorBillofmaterialCount($params){
+
+        $this->db->select('*');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id= '.TBL_BILL_OF_MATERIAL_VENDOR.'.vendor_name');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id= '.TBL_BILL_OF_MATERIAL_VENDOR.'.vendor_po_number');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_BILL_OF_MATERIAL_VENDOR.".bom_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BILL_OF_MATERIAL_VENDOR.".date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BILL_OF_MATERIAL_VENDOR.".bom_status LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BILL_OF_MATERIAL_VENDOR.".part_number LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_BILL_OF_MATERIAL_VENDOR.'.status', 1);        
+        $query = $this->db->get(TBL_BILL_OF_MATERIAL_VENDOR);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+        
+
+    }
+
+    public function getvendorBillofmaterialdata($params){
+
+        $this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_BILL_OF_MATERIAL_VENDOR.'.id as billofmaterialid');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id= '.TBL_BILL_OF_MATERIAL_VENDOR.'.vendor_name');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id= '.TBL_BILL_OF_MATERIAL_VENDOR.'.vendor_po_number');
+
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_BILL_OF_MATERIAL_VENDOR.".bom_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BILL_OF_MATERIAL_VENDOR.".date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BILL_OF_MATERIAL_VENDOR.".po_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BILL_OF_MATERIAL_VENDOR.".bom_status LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BILL_OF_MATERIAL_VENDOR.".part_number LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_BILL_OF_MATERIAL_VENDOR.'.status', 1);
+        $this->db->limit($params['length'],$params['start']);
+        $this->db->order_by(TBL_BILL_OF_MATERIAL_VENDOR.'.id','DESC');
+        $query = $this->db->get(TBL_BILL_OF_MATERIAL_VENDOR);
+        $fetch_result = $query->result_array();
+
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['bom_number'] = $value['bom_number'];
+                $data[$counter]['date'] = $value['date'];
+                $data[$counter]['vendor_po_number'] = $value['po_number'];
+                //$data[$counter]['vendor_number'] = $value['vendor_number'];
+                $data[$counter]['vendor_name'] = $value['vendorname'];
+                $data[$counter]['bom_status'] = $value['bom_status'];
+                $data[$counter]['action'] = '';
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewSupplierpoconfirmation/".$value['billofmaterialid']."' style='cursor: pointer;'><i style='font-size: large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['billofmaterialid']."' class='fa fa-trash-o deletevendorBillofmaterial' aria-hidden='true'></i>"; 
+                $counter++; 
+            }
+        }
+
+        return $data;
+
+    }
+
+    public function checkIfexitsvendorBillofmaterial($bom_number){
+
+        $this->db->select('*');
+        $this->db->where(TBL_BILL_OF_MATERIAL_VENDOR.'.bom_number', $bom_number);
+        $this->db->where(TBL_BILL_OF_MATERIAL_VENDOR.'.status', 1);
+        $query = $this->db->get(TBL_BILL_OF_MATERIAL_VENDOR);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+
+    }
+
+
+    public function savevendorBillofmaterial($id,$data){
+
+        if($id != '') {
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_BILL_OF_MATERIAL_VENDOR, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_BILL_OF_MATERIAL_VENDOR, $data)) {
+                return $this->db->insert_id();;
+            } else {
+                return FALSE;
+            }
+        }
+
+    }
+
+    public function deletevendorBillofmaterial($id){
+
+        $this->db->where('id', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_BILL_OF_MATERIAL_VENDOR)){
+            // $this->db->where('jobwork_id', $id);
+            // $this->db->delete(TBL_SUPPLIER);
+            // if($this->db->delete(TBL_JOB_WORK_ITEM)){
+            //    return TRUE;
+            // }else{
+            //    return FALSE;
+            // }
+            return TRUE;
+        }else{
+           return FALSE;
+        }
+
+    }
+
+
+
 }
 
 ?>

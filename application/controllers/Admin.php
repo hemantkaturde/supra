@@ -2690,7 +2690,6 @@ class Admin extends BaseController
 		}
     }
 
-
     public function vendorpo(){
         $process = 'Vendor PO Master';
         $processFunction = 'Admin/vendorpo';
@@ -2820,7 +2819,6 @@ class Admin extends BaseController
             }
     }
 
-    
     public function getfinishedgoodsPartnumberByid(){
 
         if($this->input->post('part_number')) {
@@ -2838,7 +2836,6 @@ class Admin extends BaseController
             echo 'failure';
         }
     }
-
 
     public function addVendoritem(){
 
@@ -3675,7 +3672,7 @@ class Admin extends BaseController
                 );
 
                 $checkIfexitsJobwork = $this->admin_model->checkIfexitsJobwork(trim($this->input->post('po_number')));
-                if($checkIfexitsVendorpoconfirmation > 0){
+                if($checkIfexitsJobwork > 0){
                     $save_jobwork_response['status'] = 'failure';
                     $save_jobwork_response['error'] = array( 'job_work_no'=>strip_tags(form_error('job_work_no')),'date'=>strip_tags(form_error('date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'raw_material_supplier_name'=>strip_tags(form_error('raw_material_supplier_name')),'remark'=>strip_tags(form_error('remark')));
                 }else{
@@ -3828,5 +3825,243 @@ class Admin extends BaseController
 
     }
 
+
+    public function billofmaterial(){
+
+        $process = 'Bill of Material';
+        $processFunction = 'Admin/jobWork';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Bill of Material';
+        $this->loadViews("masters/billofmaterial", $this->global, $data, NULL);  
+
+    }
+
+    public function fetchBillofmaterial(){
+
+        $params = $_REQUEST;
+        $totalRecords = $this->admin_model->getBillofmaterialCount($params); 
+        $queryRecords = $this->admin_model->getBillofmaterialdata($params); 
+
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+        echo json_encode($json_data);
+    }
+
+
+    public function addnewBillofmaterial(){
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $save_Billofmaterial_response = array();
+            $this->form_validation->set_rules('bom_number','PO Number','trim|required');
+            $this->form_validation->set_rules('date','Date','trim|required');
+            $this->form_validation->set_rules('vendor_name','Vendor Name','trim|required');
+            $this->form_validation->set_rules('vendor_po_number','Vendor PO  Number','trim|required');
+            $this->form_validation->set_rules('bom_status','BOM Status','trim|required');
+            $this->form_validation->set_rules('remark','Remark','trim');
+
+            if($this->form_validation->run() == FALSE)
+            {
+                $save_Billofmaterial_response['status'] = 'failure';
+                $save_Billofmaterial_response['error'] = array( 'bom_number'=>strip_tags(form_error('bom_number')),'date'=>strip_tags(form_error('date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'bom_status'=>strip_tags(form_error('bom_status')),'remark'=>strip_tags(form_error('remark')));
+           
+            }else{
+
+                $data = array(
+                    'bom_number'   => trim($this->input->post('bom_number')),
+                    'date'     => trim($this->input->post('date')),
+                    'vendor_name'  => trim($this->input->post('vendor_name')),
+                    'vendor_po_number'=> trim($this->input->post('vendor_po_number')),
+                    'bom_status' =>    trim($this->input->post('bom_status')),
+                    'remark' =>    trim($this->input->post('remark')),
+                );
+
+                $checkIfexitsBillofmaterial = $this->admin_model->checkIfexitsBillofmaterial(trim($this->input->post('bom_number')));
+                if($checkIfexitsBillofmaterial > 0){
+                    $save_Billofmaterial_response['status'] = 'failure';
+                    $save_Billofmaterial_response['error'] = array( 'bom_number'=>strip_tags(form_error('bom_number')),'date'=>strip_tags(form_error('date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'bom_status'=>strip_tags(form_error('bom_status')),'remark'=>strip_tags(form_error('remark')));
+                }else{
+                    $saveBillofmaterial = $this->admin_model->saveBillofmaterial('',$data);
+                    if($saveBillofmaterial){
+                        // $update_last_inserted_id_job_work = $this->admin_model->update_last_inserted_id_job_work($saveJobworkdata);
+                        // if($update_last_inserted_id_job_work){
+                             $save_Billofmaterial_response['status'] = 'success';
+                             $save_Billofmaterial_response['error'] = array( 'bom_number'=>strip_tags(form_error('bom_number')),'date'=>strip_tags(form_error('date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'bom_status'=>strip_tags(form_error('bom_status')),'remark'=>strip_tags(form_error('remark')));
+                             //   }
+                    }
+
+                }
+
+            }
+
+            echo json_encode($save_Billofmaterial_response);
+
+        }else{
+
+            $process = 'Add New Bill Of Material';
+            $processFunction = 'Admin/addjobwork';
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Add New Bill Of Material';
+            $data['getPreviousBomnumber']= $this->admin_model->getPreviousBomnumber()[0];
+            //$data['fetchALLprejobworkitemList']= $this->admin_model->fetchALLprejobworkitemList();
+            $data['vendorList']= $this->admin_model->fetchALLvendorList();
+            $this->loadViews("masters/addnewBillofmaterial", $this->global, $data, NULL);
+
+        }
+
+    }
+
+    public function deleteBillofmaterial(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->deleteBillofmaterial(trim($this->input->post('id')));
+            if ($result) {
+                        $process = 'Bill Of Material Work Delete';
+                        $processFunction = 'Admin/deleteBillofmaterial';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
+
+    }
+
+
+    public function vendorbillofmaterial(){
+        $process = 'Vendor Bill of Material';
+        $processFunction = 'Admin/jobWork';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Vendor Bill of Material';
+        $this->loadViews("masters/vendorbillofmaterial", $this->global, $data, NULL);  
+    }
+
+    public function fetchvendorBillofmaterial(){
+
+        $params = $_REQUEST;
+        $totalRecords = $this->admin_model->getvendorBillofmaterialCount($params); 
+        $queryRecords = $this->admin_model->getvendorBillofmaterialdata($params); 
+
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+        echo json_encode($json_data);
+
+    }
+
+
+    public function addvendorBillofmaterial(){
+
+        $post_submit = $this->input->post();
+        if($post_submit){;
+
+            $save_vendorBillofmaterial_response = array();
+            $this->form_validation->set_rules('bom_number','PO Number','trim|required');
+            $this->form_validation->set_rules('date','Date','trim|required');
+            $this->form_validation->set_rules('vendor_name','Vendor Name','trim|required');
+            $this->form_validation->set_rules('vendor_po_number','Vendor PO  Number','trim|required');
+            $this->form_validation->set_rules('bom_status','BOM Status','trim|required');
+            $this->form_validation->set_rules('remark','Remark','trim');
+
+            if($this->form_validation->run() == FALSE)
+            {
+                $save_vendorBillofmaterial_response['status'] = 'failure';
+                $save_vendorBillofmaterial_response['error'] = array( 'bom_number'=>strip_tags(form_error('bom_number')),'date'=>strip_tags(form_error('date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'bom_status'=>strip_tags(form_error('bom_status')),'remark'=>strip_tags(form_error('remark')));
+           
+            }else{
+
+                $data = array(
+                    'bom_number'   => trim($this->input->post('bom_number')),
+                    'date'     => trim($this->input->post('date')),
+                    'vendor_name'  => trim($this->input->post('vendor_name')),
+                    'vendor_po_number'=> trim($this->input->post('vendor_po_number')),
+                    'bom_status' =>    trim($this->input->post('bom_status')),
+                    'remark' =>    trim($this->input->post('remark')),
+                );
+
+                $checkIfexitsvendorBillofmaterial = $this->admin_model->checkIfexitsvendorBillofmaterial(trim($this->input->post('bom_number')));
+                if($checkIfexitsvendorBillofmaterial > 0){
+                    $save_vendorBillofmaterial_response['status'] = 'failure';
+                    $save_vendorBillofmaterial_response['error'] = array( 'bom_number'=>strip_tags(form_error('bom_number')),'date'=>strip_tags(form_error('date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'bom_status'=>strip_tags(form_error('bom_status')),'remark'=>strip_tags(form_error('remark')));
+                }else{
+
+
+                    $savevendorBillofmaterial = $this->admin_model->savevendorBillofmaterial('',$data);
+
+                    if($savevendorBillofmaterial){
+                        // $update_last_inserted_id_job_work = $this->admin_model->update_last_inserted_id_job_work($saveJobworkdata);
+                        // if($update_last_inserted_id_job_work){
+                             $save_vendorBillofmaterial_response['status'] = 'success';
+                             $save_vendorBillofmaterial_response['error'] = array( 'bom_number'=>strip_tags(form_error('bom_number')),'date'=>strip_tags(form_error('date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'bom_status'=>strip_tags(form_error('bom_status')),'remark'=>strip_tags(form_error('remark')));
+                             //   }
+                    }
+
+                }
+            }
+
+            echo json_encode($save_vendorBillofmaterial_response);
+        }else{
+
+            $process = 'Add New Vendor Bill Of Material';
+            $processFunction = 'Admin/addjobwork';
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Add New Vendor Bill Of Material';
+            $data['getPreviousBomnumber']= $this->admin_model->getPreviousBomnumber()[0];
+            //$data['fetchALLprejobworkitemList']= $this->admin_model->fetchALLprejobworkitemList();
+            $data['vendorList']= $this->admin_model->fetchALLvendorList();
+            $this->loadViews("masters/addvendorBillofmaterial", $this->global, $data, NULL);
+
+        }
+    }
+
+
+    public function deletevendorBillofmaterial(){
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->deletevendorBillofmaterial(trim($this->input->post('id')));
+            if ($result) {
+                        $process = 'Vendor Bill Of Material Work Delete';
+                        $processFunction = 'Admin/deletevendorBillofmaterial';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
+
+    }
+
+
+    
 
 }
