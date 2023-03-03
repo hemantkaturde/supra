@@ -184,11 +184,11 @@ $route['deletevendorBillofmaterial'] = "admin/deletevendorBillofmaterial";
 $route['getBuyerItemsforDisplaybyvendorpo'] = "admin/getBuyerItemsforDisplaybyvendorpo";
 $route['getbuyerdetialsbybuyerponumber'] = "admin/getbuyerdetialsbybuyerponumber";
 $route['getVendoritemsonlyvendorBillofmaterial'] = "admin/getVendoritemsonlyvendorBillofmaterial";
-
 $route['getSuppliergoodsPartnumberByidforvendorbillofmaetrial'] = "admin/getSuppliergoodsPartnumberByidforvendorbillofmaetrial";
-
-
 $route['saveVendorbilloamaterialitems'] = "admin/saveVendorbilloamaterialitems";
+
+$route['deleteVendorbillofmaterialpoitem'] = "admin/deleteVendorbillofmaterialpoitem";
+
 
 
 

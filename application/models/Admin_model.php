@@ -2712,7 +2712,7 @@ class Admin_model extends CI_Model
 
     public function fetchALLpreVendorpoitemList(){
 
-        $this->db->select('*');
+        $this->db->select('*,'.TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.id as vendoritmid');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.part_number_id');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.pre_vendor_po_number');
         $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.pre_buyer_po_number');
@@ -2747,6 +2747,20 @@ class Admin_model extends CI_Model
         $query = $this->db->get(TBL_BILL_OF_MATERIAL_VENDOR);
         $rowcount = $query->result_array();
         return $rowcount;
+    }
+
+
+    public function deleteVendorbillofmaterialpoitem($id){
+
+        $this->db->where('id', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_BILL_OF_MATERIAL_VENDOR_ITEM)){
+           return TRUE;
+        }else{
+           return FALSE;
+        }
+
+
     }
 
 

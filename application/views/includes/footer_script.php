@@ -4586,6 +4586,40 @@
 	        });
 	    });
 
+		$(document).ready(function() {
+			//e.preventDefault();
+			//$(".loader_ajax").show();
+			var vendor_po_number = $('#vendor_po_number').val();
+			var buyer_po_number = $('#buyer_po_number').val();
+
+			$("#part_number").html('');
+		
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getVendoritemsonlyvendorBillofmaterial",
+				type: "POST",
+				data : {'vendor_po_number' : vendor_po_number,'buyer_po_number':buyer_po_number},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#part_number').html('<option value="">Select Part Number</option>');
+					}
+					else
+					{
+						$('#part_number').html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#part_number').html();
+				}
+			});
+			return false;
+
+		});
+
 		$(document).on('click','#savenewvendorBillofmaterial',function(e){
 			e.preventDefault();
 			$(".loader_ajax").show();
@@ -4912,7 +4946,6 @@
 			
 		});
 
-
 		$(document).on('change', '#vendor_received_aty,#vendor_order_qty', function(){	
 				$("#balanced_aty").val();
 			  
@@ -4931,7 +4964,6 @@
 				 var total_value = parseFloat(vendor_order_qty) - parseFloat(vendor_received_aty);
 				 $("#balanced_aty").val( Math.round(total_value));
 		});
-
 
 		$(document).on('click','#saveVendorbilloamaterialitem',function(e){
 			e.preventDefault();
@@ -4996,6 +5028,56 @@
 			});
 			return false;
 	    });
+
+		$(document).on('click','.deleteVendorbillofmaterialpoitem',function(e){
+			var elemF = $(this);
+			e.preventDefault();
+			swal({
+				title: "Are you sure?",
+				text: "Delete Vendor Bill of Material",
+				type: "warning",
+				showCancelButton: true,
+				closeOnClickOutside: false,
+				confirmButtonClass: "btn-sm btn-danger",
+				confirmButtonText: "Yes, delete it!",
+				cancelButtonText: "No, cancel plz!",
+				closeOnConfirm: false,
+				closeOnCancel: false
+			}, function(isConfirm) {
+				if (isConfirm) {
+							$.ajax({
+								url : "<?php echo base_url();?>deleteVendorbillofmaterialpoitem",
+								type: "POST",
+								data : 'id='+elemF.attr('data-id'),
+								success: function(data, textStatus, jqXHR)
+								{
+									const obj = JSON.parse(data);
+								
+									if(obj.status=='success'){
+										swal({
+											title: "Deleted!",
+											text: "Vendor Bill of Material Deleted Succesfully",
+											icon: "success",
+											button: "Ok",
+											},function(){ 
+												window.location.href = "<?php echo base_url().'addvendorBillofmaterial'?>";
+										});	
+									}
+
+								},
+								error: function (jqXHR, textStatus, errorThrown)
+								{
+									$(".loader_ajax").hide();
+								}
+							})
+						}
+						else {
+				swal("Cancelled", "Delete Vendor Bill of Material deletion cancelled ", "error");
+				}
+			});
+		});
+
+		
 
     </script>
 <?php } ?>

@@ -213,7 +213,7 @@
                                                         <td><?php echo $value['vendor_received_qty'];?></td>
                                                         <td><?php echo $value['item_remark'];?></td>
                                                         <td>
-                                                        <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['id'];?>' class='fa fa-trash-o deleteSupplierpoitem' aria-hidden='true'></i>
+                                                        <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['vendoritmid'];?>' class='fa fa-trash-o deleteVendorbillofmaterialpoitem' aria-hidden='true'></i>
                                                         </td>
                                                     </tr>
                                                     <?php endforeach;?>
