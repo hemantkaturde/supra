@@ -2472,7 +2472,6 @@ class Admin extends BaseController
         $this->loadViews("masters/viewbuyerpo", $this->global, $data, NULL);
     }
 
-
     public function editBuyerpo($buyerpoid){
         $process = 'Edit Buyer PO';
         $processFunction = 'Admin/editBuyerpo';
@@ -2581,8 +2580,6 @@ class Admin extends BaseController
         $this->loadViews("masters/viewSupplierpo", $this->global, $data, NULL);
 
     }
-
-
 
     public function editSupplierpo($supplierpoid){
 
@@ -4038,7 +4035,6 @@ class Admin extends BaseController
             $data['getPreviousBomnumber']= $this->admin_model->getPreviousBomnumbervendor()[0];
             $data['fetchALLpreVendorpoitemList']= $this->admin_model->fetchALLpreVendorpoitemList();
             $data['buyerList']= $this->admin_model->fetchAllbuyerList();
-
             $data['vendorList']= $this->admin_model->fetchALLvendorList();
             $this->loadViews("masters/addvendorBillofmaterial", $this->global, $data, NULL);
 
@@ -4186,7 +4182,6 @@ class Admin extends BaseController
     }
 
 
-
     public function deleteVendorbillofmaterialpoitem(){
         $post_submit = $this->input->post();
         if($post_submit){
@@ -4204,6 +4199,21 @@ class Admin extends BaseController
 
     }
 
+
+    public function viewVendorbillofmaterial($id){
+
+        $process = 'View Vendor Bill of Material';
+        $processFunction = 'Admin/viewVendorbillofmaterial';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'View Vendor Bill of Material';
+        $data['getVendorbillofmaterialDetails']= $this->admin_model->getVendorbillofmaterialDetails($id)[0];
+        $data['getVendorbillofmaterialitem']= $this->admin_model->getVendorbillofmaterialitem($id);
+        $data['buyerList']= $this->admin_model->fetchAllbuyerList();
+        $data['vendorList']= $this->admin_model->fetchALLvendorList();
+        $this->loadViews("masters/viewVendorbillofmaterial", $this->global, $data, NULL);
+
+
+    }
     
 
 }

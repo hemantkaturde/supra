@@ -158,7 +158,6 @@ $route['getSuppliergoodsPartnumberByid'] = "admin/getSuppliergoodsPartnumberByid
 $route['saveVendorconfromationpoitem'] = "admin/saveVendorconfromationpoitem";
 $route['deleteVendorpoconfirmatuionitem'] = "admin/deleteVendorpoconfirmatuionitem";
 $route['deleteVendorPoconfirmation'] = "admin/deleteVendorPoconfirmation";
-
 $route['jobWork'] = "admin/jobWork";
 $route['addjobwork'] = "admin/addjobwork";
 $route['fetchJobworklist'] = "admin/fetchJobworklist";
@@ -166,17 +165,12 @@ $route['getSuppliernamebyvendorpo'] = "admin/getSuppliernamebyvendorpo";
 $route['getSuppliergoodsPartnumberByidjobwork'] = "admin/getSuppliergoodsPartnumberByidjobwork";
 $route['saveJobworktem'] = "admin/saveJobworktem";
 $route['deleteJobwork'] = "admin/deleteJobwork";
-
-
 $route['editBuyerpo/(:any)'] = "admin/editBuyerpo/$1";
 $route['editSupplierpo/(:any)'] = "admin/editSupplierpo/$1";
-
 $route['billofmaterial'] = "admin/billofmaterial";
 $route['fetchBillofmaterial'] = "admin/fetchBillofmaterial";
 $route['addnewBillofmaterial'] = "admin/addnewBillofmaterial";
 $route['deleteBillofmaterial'] = "admin/deleteBillofmaterial";
-
-
 $route['vendorbillofmaterial'] = "admin/vendorbillofmaterial";
 $route['fetchvendorBillofmaterial'] = "admin/fetchvendorBillofmaterial";
 $route['addvendorBillofmaterial'] = "admin/addvendorBillofmaterial";
@@ -186,8 +180,10 @@ $route['getbuyerdetialsbybuyerponumber'] = "admin/getbuyerdetialsbybuyerponumber
 $route['getVendoritemsonlyvendorBillofmaterial'] = "admin/getVendoritemsonlyvendorBillofmaterial";
 $route['getSuppliergoodsPartnumberByidforvendorbillofmaetrial'] = "admin/getSuppliergoodsPartnumberByidforvendorbillofmaetrial";
 $route['saveVendorbilloamaterialitems'] = "admin/saveVendorbilloamaterialitems";
-
 $route['deleteVendorbillofmaterialpoitem'] = "admin/deleteVendorbillofmaterialpoitem";
+$route['viewVendorbillofmaterial/(:any)'] = "admin/viewVendorbillofmaterial/$1";
+
+
 
 
 

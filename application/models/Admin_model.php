@@ -2576,7 +2576,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['vendor_name'] = $value['vendorname'];
                 $data[$counter]['bom_status'] = $value['bom_status'];
                 $data[$counter]['action'] = '';
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewSupplierpoconfirmation/".$value['billofmaterialid']."' style='cursor: pointer;'><i style='font-size: large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewVendorbillofmaterial/".$value['billofmaterialid']."' style='cursor: pointer;'><i style='font-size: large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['billofmaterialid']."' class='fa fa-trash-o deletevendorBillofmaterial' aria-hidden='true'></i>"; 
                 $counter++; 
             }
@@ -2596,7 +2596,6 @@ class Admin_model extends CI_Model
         return $rowcount;
 
     }
-
 
     public function savevendorBillofmaterial($id,$data){
 
@@ -2749,7 +2748,6 @@ class Admin_model extends CI_Model
         return $rowcount;
     }
 
-
     public function deleteVendorbillofmaterialpoitem($id){
 
         $this->db->where('id', $id);
@@ -2762,6 +2760,31 @@ class Admin_model extends CI_Model
 
 
     }
+
+
+    public function getVendorbillofmaterialDetails($id){
+        $this->db->select('*');
+        $query = $this->db->get(TBL_BILL_OF_MATERIAL_VENDOR);
+        $data = $query->result_array();
+        return $data;
+    }
+
+    public function getVendorbillofmaterialitem($id){
+
+        $this->db->select('*,'.TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.id as vendoritmid');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.part_number_id');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.pre_vendor_po_number');
+        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.pre_buyer_po_number');
+        $this->db->where(TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.vendor_bill_of_material_id',$id);
+        $this->db->order_by(TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.id','desc');
+        $query = $this->db->get(TBL_BILL_OF_MATERIAL_VENDOR_ITEM);
+        $data = $query->result_array();
+        return $data;
+
+
+    }
+
+
 
 
 }
