@@ -2637,6 +2637,15 @@ class Admin_model extends CI_Model
     }
 
 
+    public function getbuyerdetialsbybuyerponumber($buyer_po_number){
+        $this->db->select('buyer_po_date,delivery_date');
+        $this->db->where(TBL_BUYER_PO_MASTER.'.status',1);
+        $this->db->where(TBL_BUYER_PO_MASTER.'.id',$buyer_po_number);
+        $query = $this->db->get(TBL_BUYER_PO_MASTER);
+        $data = $query->result_array();
+        return $data;
+    }
+
 
 }
 

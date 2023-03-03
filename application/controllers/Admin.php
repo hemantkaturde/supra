@@ -3195,7 +3195,6 @@ class Admin extends BaseController
         }
     }
 
-
     public function addSupplierpoConfirmationitem(){
         $post_submit = $this->input->post();
         if($post_submit){
@@ -3260,7 +3259,6 @@ class Admin extends BaseController
 
     }
 
-
     public function getVendorDetailsBysupplierponumber(){
 
         $supplier_po_number=$this->input->post('supplier_po_number');
@@ -3280,7 +3278,6 @@ class Admin extends BaseController
 		}
 
     }
-
 
     public function deleteSupplierpoconfirmationitem(){
 
@@ -3742,7 +3739,6 @@ class Admin extends BaseController
         }
     }
 
-
     public function saveJobworktem(){
 
         $post_submit = $this->input->post();
@@ -3942,7 +3938,6 @@ class Admin extends BaseController
 
     }
 
-
     public function vendorbillofmaterial(){
         $process = 'Vendor Bill of Material';
         $processFunction = 'Admin/jobWork';
@@ -3976,7 +3971,6 @@ class Admin extends BaseController
         echo json_encode($json_data);
 
     }
-
 
     public function addvendorBillofmaterial(){
 
@@ -4036,12 +4030,13 @@ class Admin extends BaseController
             $this->global['pageTitle'] = 'Add New Vendor Bill Of Material';
             $data['getPreviousBomnumber']= $this->admin_model->getPreviousBomnumber()[0];
             //$data['fetchALLprejobworkitemList']= $this->admin_model->fetchALLprejobworkitemList();
+            $data['buyerList']= $this->admin_model->fetchAllbuyerList();
+
             $data['vendorList']= $this->admin_model->fetchALLvendorList();
             $this->loadViews("masters/addvendorBillofmaterial", $this->global, $data, NULL);
 
         }
     }
-
 
     public function deletevendorBillofmaterial(){
 
@@ -4061,6 +4056,24 @@ class Admin extends BaseController
 
     }
 
+    public function getbuyerdetialsbybuyerponumber(){
+
+        if($this->input->post('buyer_po_number')) {
+            $getBuyeridbypoid = $this->admin_model->getbuyerdetialsbybuyerponumber($this->input->post('buyer_po_number'));
+            if($getBuyeridbypoid){
+                $content = $getBuyeridbypoid[0];
+                echo json_encode($content);
+
+            }else{
+                echo 'failure';
+            }
+           
+        } else {
+            echo 'failure';
+        }
+
+
+    }
 
     
 

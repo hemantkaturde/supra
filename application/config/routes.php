@@ -182,7 +182,7 @@ $route['fetchvendorBillofmaterial'] = "admin/fetchvendorBillofmaterial";
 $route['addvendorBillofmaterial'] = "admin/addvendorBillofmaterial";
 $route['deletevendorBillofmaterial'] = "admin/deletevendorBillofmaterial";
 $route['getBuyerItemsforDisplaybyvendorpo'] = "admin/getBuyerItemsforDisplaybyvendorpo";
-
+$route['getbuyerdetialsbybuyerponumber'] = "admin/getbuyerdetialsbybuyerponumber";
 
 
 

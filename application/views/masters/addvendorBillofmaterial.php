@@ -84,26 +84,46 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-12">
+
+
+                                  <div class="col-md-12">
                                         <div class="form-group">
                                                 <label for="buyer_name">Buyer Name <span class="required">*</span></label>
-                                                <select class="form-control " name="buyer_name" id="buyer_name" readonly>
-                                                    <option st-id="" value="<?php echo $fetchALLpreVendorpoconfirmationitemList['0']['buyer_name']; ?>" ><?php echo $fetchALLpreVendorpoconfirmationitemList['0']['buyer_name_master']; ?></option>
+                                                <select class="form-control" name="buyer_name" id="buyer_name">
                                                     <option st-id="" value="">Select Buyer Name</option>
+                                                    <?php foreach ($buyerList as $key => $value) {?>
+                                                    <option value="<?php echo $value['buyer_id']; ?>"><?php echo $value['buyer_name']; ?></option>
+                                                    <?php } ?>
                                                 </select>
                                             <p class="error buyer_name_error"></p>
                                         </div>
                                     </div>
 
-
                                     
                                     <div class="col-md-12">
                                         <div class="form-group">
                                                 <label for="buyer_po_number">Select Buyer PO <span class="required">*</span></label>
-                                                    <select class="form-control buyer_po_number" name="buyer_po_number" id="buyer_po_number" readonly>
+                                                    <select class="form-control buyer_po_number" name="buyer_po_number" id="buyer_po_number">
                                                         <option st-id="" value="">Select Vendor PO Number</option>
                                                     </select>
                                             <p class="error buyer_po_number_error"></p>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                                <label for="buyer_po_date">Buyer PO Date<span class="required">*</span></label>
+                                                <input type="text" class="form-control" id="buyer_po_date" name="buyer_po_date" required readonly>
+                                            <p class="error buyer_po_date_error"></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                                <label for="buyer_delivery_date">Buyer Delivery Date<span class="required">*</span></label>
+                                                <input type="text" class="form-control" id="buyer_delivery_date" name="buyer_delivery_date" required readonly>
+                                            <p class="error buyer_delivery_date_error"></p>
                                         </div>
                                     </div>
 
