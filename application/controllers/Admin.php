@@ -3803,7 +3803,6 @@ class Admin extends BaseController
         }
     }
 
-
     public function deleteJobwork(){
         $post_submit = $this->input->post();
         if($post_submit){
@@ -3820,7 +3819,6 @@ class Admin extends BaseController
         }
 
     }
-
 
     public function billofmaterial(){
 
@@ -3856,7 +3854,6 @@ class Admin extends BaseController
             );
         echo json_encode($json_data);
     }
-
 
     public function addnewBillofmaterial(){
 
@@ -3978,17 +3975,22 @@ class Admin extends BaseController
         if($post_submit){;
 
             $save_vendorBillofmaterial_response = array();
+            
             $this->form_validation->set_rules('bom_number','PO Number','trim|required');
             $this->form_validation->set_rules('date','Date','trim|required');
             $this->form_validation->set_rules('vendor_name','Vendor Name','trim|required');
             $this->form_validation->set_rules('vendor_po_number','Vendor PO  Number','trim|required');
-            $this->form_validation->set_rules('bom_status','BOM Status','trim|required');
+            $this->form_validation->set_rules('buyer_name','Buyer Name','trim|required');
+            $this->form_validation->set_rules('buyer_po_number','Buyer PO Number','trim|required');
+            $this->form_validation->set_rules('buyer_po_date','Buyer PO Date','trim|required');
+            $this->form_validation->set_rules('buyer_delivery_date','Buyer Delivery Date','trim|required');
+
             $this->form_validation->set_rules('remark','Remark','trim');
 
             if($this->form_validation->run() == FALSE)
             {
                 $save_vendorBillofmaterial_response['status'] = 'failure';
-                $save_vendorBillofmaterial_response['error'] = array( 'bom_number'=>strip_tags(form_error('bom_number')),'date'=>strip_tags(form_error('date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'bom_status'=>strip_tags(form_error('bom_status')),'remark'=>strip_tags(form_error('remark')));
+                $save_vendorBillofmaterial_response['error'] = array( 'bom_number'=>strip_tags(form_error('bom_number')),'date'=>strip_tags(form_error('date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'bom_status'=>strip_tags(form_error('bom_status')),'remark'=>strip_tags(form_error('remark')), 'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'buyer_delivery_date'=>strip_tags(form_error('buyer_delivery_date')));
            
             }else{
 
@@ -3997,6 +3999,10 @@ class Admin extends BaseController
                     'date'     => trim($this->input->post('date')),
                     'vendor_name'  => trim($this->input->post('vendor_name')),
                     'vendor_po_number'=> trim($this->input->post('vendor_po_number')),
+                    'buyer_name'=> trim($this->input->post('buyer_name')),
+                    'buyer_po_number'=> trim($this->input->post('buyer_po_number')),
+                    'buyer_po_date'=> trim($this->input->post('buyer_po_date')),
+                    'buyer_delivery_date'=> trim($this->input->post('buyer_delivery_date')),
                     'bom_status' =>    trim($this->input->post('bom_status')),
                     'remark' =>    trim($this->input->post('remark')),
                 );
@@ -4004,18 +4010,17 @@ class Admin extends BaseController
                 $checkIfexitsvendorBillofmaterial = $this->admin_model->checkIfexitsvendorBillofmaterial(trim($this->input->post('bom_number')));
                 if($checkIfexitsvendorBillofmaterial > 0){
                     $save_vendorBillofmaterial_response['status'] = 'failure';
-                    $save_vendorBillofmaterial_response['error'] = array( 'bom_number'=>strip_tags(form_error('bom_number')),'date'=>strip_tags(form_error('date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'bom_status'=>strip_tags(form_error('bom_status')),'remark'=>strip_tags(form_error('remark')));
+                    $save_vendorBillofmaterial_response['error'] = array( 'bom_number'=>strip_tags(form_error('bom_number')),'date'=>strip_tags(form_error('date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'bom_status'=>strip_tags(form_error('bom_status')),'remark'=>strip_tags(form_error('remark')), 'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'buyer_delivery_date'=>strip_tags(form_error('buyer_delivery_date')));
                 }else{
-
 
                     $savevendorBillofmaterial = $this->admin_model->savevendorBillofmaterial('',$data);
 
                     if($savevendorBillofmaterial){
-                        // $update_last_inserted_id_job_work = $this->admin_model->update_last_inserted_id_job_work($saveJobworkdata);
-                        // if($update_last_inserted_id_job_work){
+                        $update_last_inserted_id_vendor_bill_of_materil= $this->admin_model->update_last_inserted_id_vendor_bill_of_materil($savevendorBillofmaterial);
+                        if($update_last_inserted_id_vendor_bill_of_materil){
                              $save_vendorBillofmaterial_response['status'] = 'success';
-                             $save_vendorBillofmaterial_response['error'] = array( 'bom_number'=>strip_tags(form_error('bom_number')),'date'=>strip_tags(form_error('date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'bom_status'=>strip_tags(form_error('bom_status')),'remark'=>strip_tags(form_error('remark')));
-                             //   }
+                             $save_vendorBillofmaterial_response['error'] = array('bom_number'=>strip_tags(form_error('bom_number')),'date'=>strip_tags(form_error('date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'bom_status'=>strip_tags(form_error('bom_status')),'remark'=>strip_tags(form_error('remark')), 'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'buyer_delivery_date'=>strip_tags(form_error('buyer_delivery_date')));
+                        }
                     }
 
                 }
@@ -4028,8 +4033,8 @@ class Admin extends BaseController
             $processFunction = 'Admin/addjobwork';
             $this->logrecord($process,$processFunction);
             $this->global['pageTitle'] = 'Add New Vendor Bill Of Material';
-            $data['getPreviousBomnumber']= $this->admin_model->getPreviousBomnumber()[0];
-            //$data['fetchALLprejobworkitemList']= $this->admin_model->fetchALLprejobworkitemList();
+            $data['getPreviousBomnumber']= $this->admin_model->getPreviousBomnumbervendor()[0];
+            $data['fetchALLpreVendorpoitemList']= $this->admin_model->fetchALLpreVendorpoitemList();
             $data['buyerList']= $this->admin_model->fetchAllbuyerList();
 
             $data['vendorList']= $this->admin_model->fetchALLvendorList();
@@ -4075,6 +4080,108 @@ class Admin extends BaseController
 
     }
 
+
+    public function getVendoritemsonlyvendorBillofmaterial(){
+
+        $vendor_po_number=$this->input->post('vendor_po_number');
+        $buyer_po_number=$this->input->post('buyer_po_number');
+
+        if($vendor_po_number) {
+			$getVendoritemsonly = $this->admin_model->getVendoritemsonlyvendorBillofmaterial($vendor_po_number,$buyer_po_number);
+			if(count($getVendoritemsonly) >= 1) {
+                $content = $content.'<option value="">Select Part Number</option>';
+				foreach($getVendoritemsonly as $value) {
+					$content = $content.'<option value="'.$value["fin_id"].'">'.$value["part_number"].'</option>';
+				}
+				echo $content;
+			} else {
+				echo 'failure';
+			}
+		} else {
+			echo 'failure';
+		}
+
+    }
+
+
+    public function getSuppliergoodsPartnumberByidforvendorbillofmaetrial(){
+
+        if($this->input->post('part_number')) {
+            $getPartNameBypartid = $this->admin_model->getSuppliergoodsPartnumberByidforvendorbillofmaetrial($this->input->post('part_number'),$this->input->post('vendor_po_number'));
+            if($getPartNameBypartid){
+                $content = $getPartNameBypartid[0];
+                echo json_encode($content);
+
+            }else{
+                echo 'failure';
+            }
+           
+        } else {
+            echo 'failure';
+        }
+    }
+
+
+    public function saveVendorbilloamaterialitems(){
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $save_billofmaterial_response = array();
+
+            $this->form_validation->set_rules('part_number','Part Number','trim|required');
+            $this->form_validation->set_rules('description','Part Name','trim|required');
+            $this->form_validation->set_rules('buyer_order_qty','Buyer Order Qty','trim|required');
+            $this->form_validation->set_rules('vendor_order_qty','Vendor Order Qty','trim|required');
+            $this->form_validation->set_rules('vendor_received_aty','Vendor Received Qty','trim|required');
+            $this->form_validation->set_rules('balanced_aty','Balanced Qty','trim|required');
+            $this->form_validation->set_rules('item_remark','Item Remark','trim');
+
+            if($this->form_validation->run() == FALSE)
+            {
+                $save_billofmaterial_response['status'] = 'failure';
+                $save_billofmaterial_response['error'] = array('part_number'=>strip_tags(form_error('part_number')), 'description'=>strip_tags(form_error('description')), 'buyer_order_qty'=>strip_tags(form_error('buyer_order_qty')), 'vendor_order_qty'=>strip_tags(form_error('vendor_order_qty')),'vendor_received_aty'=>strip_tags(form_error('vendor_received_aty')),'balanced_aty'=>strip_tags(form_error('balanced_aty')));
+            }else{
+
+                
+                $data = array(
+                    'part_number_id'   => trim($this->input->post('part_number')),
+                    'description'     => trim($this->input->post('description')),
+                    'buyer_order_qty'=> trim($this->input->post('buyer_order_qty')),
+                    'vendor_order_qty'=> trim($this->input->post('vendor_order_qty')),
+                    'vendor_received_qty'=> trim($this->input->post('vendor_received_aty')),
+                    'balenced_qty'=> trim($this->input->post('balanced_aty')),
+                    'item_remark'=> trim($this->input->post('item_remark')),
+
+                    'pre_bom_date'=> trim($this->input->post('pre_date')),
+                    'pre_vendor_name' => trim($this->input->post('pre_vendor_name')),
+                    'pre_vendor_po_number' => trim($this->input->post('pre_vendor_po_number')),
+                    'pre_buyer_name' => trim($this->input->post('pre_buyer_name')),
+                    'pre_buyer_po_number' => trim($this->input->post('pre_buyer_po_number')),
+                    'pre_buyer_po_date' => trim($this->input->post('pre_buyer_po_date')),
+                    'pre_buyer_delivery_date' => trim($this->input->post('pre_buyer_delivery_date')),
+                    'pre_bom_status' => trim($this->input->post('pre_bom_status')),
+                    'pre_remark' => trim($this->input->post('item_remark')),
+                );
+
+                // $checkIfexitsbuyerpo = $this->admin_model->checkIfexitsbuyerpo(trim($this->input->post('sales_order_number')));
+                // if($checkIfexitsbuyerpo > 0){
+                //     $save_buyerpo_response['status'] = 'failure';
+                //     $save_buyerpo_response['error'] = array('sales_order_number'=>'Buyer PO Alreday Exits (Sales Order Number Alreday Exits)');
+                // }else{
+                    $saveVendorbillofmaterilitemdata = $this->admin_model->saveVendorbillofmaterilitemdata('',$data);
+                    
+                    if($saveVendorbillofmaterilitemdata){
+                        $save_billofmaterial_response['status'] = 'success';
+                        $save_billofmaterial_response['error'] = array('part_number'=>strip_tags(form_error('part_number')), 'description'=>strip_tags(form_error('description')), 'buyer_order_qty'=>strip_tags(form_error('buyer_order_qty')), 'vendor_order_qty'=>strip_tags(form_error('vendor_order_qty')),'vendor_received_aty'=>strip_tags(form_error('vendor_received_aty')),'balanced_aty'=>strip_tags(form_error('balanced_aty')));
+                    }
+                //  }
+                
+            }
+            echo json_encode($save_billofmaterial_response);
+        }
+
+
+    }
     
 
 }

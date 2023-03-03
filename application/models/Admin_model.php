@@ -2622,13 +2622,12 @@ class Admin_model extends CI_Model
         $this->db->where('id', $id);
         //$this->db->delete(TBL_SUPPLIER);
         if($this->db->delete(TBL_BILL_OF_MATERIAL_VENDOR)){
-            // $this->db->where('jobwork_id', $id);
-            // $this->db->delete(TBL_SUPPLIER);
-            // if($this->db->delete(TBL_JOB_WORK_ITEM)){
-            //    return TRUE;
-            // }else{
-            //    return FALSE;
-            // }
+            $this->db->where('vendor_bill_of_material_id', $id);
+            if($this->db->delete(TBL_BILL_OF_MATERIAL_VENDOR_ITEM)){
+               return TRUE;
+            }else{
+               return FALSE;
+            }
             return TRUE;
         }else{
            return FALSE;
@@ -2644,6 +2643,110 @@ class Admin_model extends CI_Model
         $query = $this->db->get(TBL_BUYER_PO_MASTER);
         $data = $query->result_array();
         return $data;
+    }
+
+
+    public function getVendoritemsonlyvendorBillofmaterial($vendor_po_number,$buyer_po_number){
+
+        $this->db->select('*');
+        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+        $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
+        $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id' .' and '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id='.TBL_FINISHED_GOODS.'.fin_id');
+        $this->db->where(TBL_FINISHED_GOODS.'.status',1);
+        $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id',$buyer_po_number);
+        //$this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
+        $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id',$vendor_po_number);
+        $query = $this->db->get(TBL_FINISHED_GOODS);
+        $data = $query->result_array();
+        return $data;
+
+    }
+
+
+    public function getSuppliergoodsPartnumberByidforvendorbillofmaetrial($part_number,$vendor_po_number){
+        // $this->db->select('*,'.TBL_FINISHED_GOODS.'.sac as sac_no');
+        // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+        // $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
+        // $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.pre_vendor_name');
+        // $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id',$vendor_po_number);
+        // $this->db->where(TBL_FINISHED_GOODS.'.status',1);
+        // $this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
+        // //$this->db->where(TBL_RAWMATERIAL.'.raw_id',$part_number);
+        // $query = $this->db->get(TBL_FINISHED_GOODS);
+        // $data = $query->result_array();
+        // return $data;
+
+        $this->db->select(TBL_FINISHED_GOODS.'.name,'.TBL_BUYER_PO_MASTER_ITEM.'.order_oty as buyer_po_qty,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_qty');
+        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+        $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
+        $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id' .' and '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id='.TBL_FINISHED_GOODS.'.fin_id');
+        $this->db->where(TBL_FINISHED_GOODS.'.status',1);
+        //$this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id',$buyer_po_number);
+        $this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
+        $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id',$vendor_po_number);
+        $query = $this->db->get(TBL_FINISHED_GOODS);
+        $data = $query->result_array();
+        return $data;
+    }
+
+
+    public function saveVendorbillofmaterilitemdata($id,$data){
+
+        if($id != '') {
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_BILL_OF_MATERIAL_VENDOR_ITEM, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_BILL_OF_MATERIAL_VENDOR_ITEM, $data)) {
+                return $this->db->insert_id();;
+            } else {
+                return FALSE;
+            }
+        }
+        
+    }
+
+
+    public function fetchALLpreVendorpoitemList(){
+
+        $this->db->select('*');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.part_number_id');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.pre_vendor_po_number');
+        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.pre_buyer_po_number');
+        $this->db->where(TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.vendor_bill_of_material_id IS NULL');
+        $this->db->order_by(TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.id','desc');
+        $query = $this->db->get(TBL_BILL_OF_MATERIAL_VENDOR_ITEM);
+        $data = $query->result_array();
+        return $data;
+
+    }
+
+
+    public function update_last_inserted_id_vendor_bill_of_materil($savevendorBillofmaterial){
+        $data = array(
+            'vendor_bill_of_material_id' => $savevendorBillofmaterial
+        );
+        $this->db->where(TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.vendor_bill_of_material_id IS NULL');
+        if($this->db->update(TBL_BILL_OF_MATERIAL_VENDOR_ITEM,$data)){
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+
+    }
+
+    public function getPreviousBomnumbervendor(){
+
+        $this->db->select('bom_number');
+        $this->db->where(TBL_BILL_OF_MATERIAL_VENDOR.'.status', 1);
+        $this->db->limit(1);
+        $this->db->order_by(TBL_BILL_OF_MATERIAL_VENDOR.'.id','DESC');
+        $query = $this->db->get(TBL_BILL_OF_MATERIAL_VENDOR);
+        $rowcount = $query->result_array();
+        return $rowcount;
     }
 
 

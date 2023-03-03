@@ -133,8 +133,7 @@ define('TBL_JOB_WORK','tbl_jobwork');
 define('TBL_JOB_WORK_ITEM','tbl_jobwork_item');
 define('TBL_BILL_OF_MATERIAL','tbl_bill_of_material');
 define('TBL_BILL_OF_MATERIAL_VENDOR','tbl_vendor_bill_of_material');
-
-
+define('TBL_BILL_OF_MATERIAL_VENDOR_ITEM','tbl_vendor_bill_of_materail_item');
 
 
 
