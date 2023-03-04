@@ -129,6 +129,32 @@
                                     </div>
 
 
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                                <label for="supplier_name">Supplier Name<span class="required">*</span></label>
+                                                <input type="text" class="form-control" id="supplier_name" value=""  name="supplier_name" required readonly>
+                                            <p class="error supplier_name_error"></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                                <label for="supplier_po_number">Supplier Name<span class="required">*</span></label>
+                                                <input type="text" class="form-control" id="supplier_po_number" value=""  name="supplier_po_number" required readonly>
+                                            <p class="error supplier_po_number_error"></p>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                                <label for="supplier_po_date">Supplier PO Date<span class="required">*</span></label>
+                                                <input type="text" class="form-control" id="supplier_po_date" value=""  name="supplier_po_date" required readonly>
+                                            <p class="error supplier_po_date_error"></p>
+                                        </div>
+                                    </div>
+
                                     <div class="col-md-12">
                                         <div class="form-group">
                                                 <label for="bom_status">Status <span class="required">*</span></label>
@@ -155,7 +181,7 @@
                                 <div class="col-md-6">
                                     <div class="container">
                                         <button type="button" class="btn btn-success btn-xl" data-toggle="modal" data-target="#addNewModal">Add New Items</button><br/><br/>
-                                            <table class="table table-bordered" style="width: 100% !important; max-width: 100%;margin-bottom: 20px;">
+                                            <table class="table table-bordered" style="width: 80% !important; max-width: 80%;margin-bottom: 20px;">
                                                 <thead style="background-color:#3c8dbc;color:#fff">
                                                     <tr>
                                                         <th>Sr No.</th>
@@ -247,33 +273,6 @@
                                                         <div class="col-sm-8">
                                                             <input type="type" class="form-control"  id="description" name="description" required readonly>
                                                             <p class="error description_error"></p>
-                                                        </div>
-                                                    </div>
-
-
-
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">RM Supplier Name</label>
-                                                        <div class="col-sm-8">
-                                                            <input type="text" class="form-control"  id="rm_supplier_name" name="rm_supplier_name" readonly>
-                                                            <p class="error rm_supplier_name_error"></p>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">RM Supplier PO Number</label>
-                                                        <div class="col-sm-8">
-                                                            <input type="text" class="form-control"  id="rm_supplier_po_number" name="rm_supplier_po_number" readonly>
-                                                            <p class="error rm_supplier_po_number_error"></p>
-                                                        </div>
-                                                    </div>
-
-
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">RM Supplier PO Date</label>
-                                                        <div class="col-sm-8">
-                                                            <input type="text" class="form-control"  id="rm_supplier_po_date" name="rm_supplier_po_date" readonly>
-                                                            <p class="error rm_supplier_po_date_error"></p>
                                                         </div>
                                                     </div>
 
@@ -455,5 +454,12 @@
 				startDate: new Date()
 			});
 		});
+
+
+        $(document).ready(function () {
+    $('.table').DataTable({
+        scrollX: true,
+    });
+});
 </script>
 
