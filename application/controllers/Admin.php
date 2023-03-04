@@ -3861,6 +3861,13 @@ class Admin extends BaseController
             $this->form_validation->set_rules('date','Date','trim|required');
             $this->form_validation->set_rules('vendor_name','Vendor Name','trim|required');
             $this->form_validation->set_rules('vendor_po_number','Vendor PO  Number','trim|required');
+            
+            $this->form_validation->set_rules('buyer_name','Buyer_name','trim|required');
+            $this->form_validation->set_rules('buyer_po_number','Buyer PO Number','trim|required');
+            $this->form_validation->set_rules('buyer_po_date','Buyer PO Date','trim|required');
+            $this->form_validation->set_rules('buyer_delivery_date','Buyer Delivery Date','trim|required');
+
+
             $this->form_validation->set_rules('bom_status','BOM Status','trim|required');
             $this->form_validation->set_rules('remark','Remark','trim');
 
@@ -3871,6 +3878,7 @@ class Admin extends BaseController
            
             }else{
 
+
                 $data = array(
                     'bom_number'   => trim($this->input->post('bom_number')),
                     'date'     => trim($this->input->post('date')),
@@ -3878,6 +3886,10 @@ class Admin extends BaseController
                     'vendor_po_number'=> trim($this->input->post('vendor_po_number')),
                     'bom_status' =>    trim($this->input->post('bom_status')),
                     'remark' =>    trim($this->input->post('remark')),
+                    'buyer_name' =>    trim($this->input->post('buyer_name')),
+                    'buyer_po_number' =>    trim($this->input->post('buyer_po_number')),
+                    'buyer_po_date' =>    trim($this->input->post('buyer_po_date')),
+                    'buyer_delivery_date' =>    trim($this->input->post('buyer_delivery_date')),
                 );
 
                 $checkIfexitsBillofmaterial = $this->admin_model->checkIfexitsBillofmaterial(trim($this->input->post('bom_number')));
@@ -3908,6 +3920,7 @@ class Admin extends BaseController
             $this->global['pageTitle'] = 'Add New Bill Of Material';
             $data['getPreviousBomnumber']= $this->admin_model->getPreviousBomnumber()[0];
             //$data['fetchALLprejobworkitemList']= $this->admin_model->fetchALLprejobworkitemList();
+            $data['buyerList']= $this->admin_model->fetchAllbuyerList();
             $data['vendorList']= $this->admin_model->fetchALLvendorList();
             $this->loadViews("masters/addnewBillofmaterial", $this->global, $data, NULL);
 

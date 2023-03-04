@@ -31,7 +31,6 @@
                                     <tr style="background-color:#3c8dbc !important;color:#fff">
                                         <th>BOM No</th>
                                         <th>Date</th>
-                                        <th>Part Number</th>
                                         <th>Vendor PO No</th>
                                         <th>Vendor Name</th>
                                         <th>Status</th>

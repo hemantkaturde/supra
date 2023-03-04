@@ -2442,7 +2442,6 @@ class Admin_model extends CI_Model
             {
                 $data[$counter]['bom_number'] = $value['bom_number'];
                 $data[$counter]['date'] = $value['date'];
-                $data[$counter]['part_number'] = $value['part_number'];
                 $data[$counter]['vendor_po_number'] = $value['po_number'];
                 //$data[$counter]['vendor_number'] = $value['vendor_number'];
                 $data[$counter]['vendor_name'] = $value['vendorname'];

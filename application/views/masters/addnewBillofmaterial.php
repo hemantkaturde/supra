@@ -77,10 +77,54 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                                 <label for="vendor_po_number">Select Vendor PO Number <span class="required">*</span></label>
-                                                    <select class="form-control vendor_po_number_itam" name="vendor_po_number" id="vendor_po_number" readonly>
+                                                    <select class="form-control vendor_po_number_itam" name="vendor_po_number" id="vendor_po_number">
                                                         <option st-id="" value="">Select Vendor Name</option>
                                                     </select>
                                             <p class="error vendor_po_number_error"></p>
+                                        </div>
+                                    </div>
+
+
+                                    
+                                  <div class="col-md-12">
+                                        <div class="form-group">
+                                                <label for="buyer_name">Buyer Name <span class="required">*</span></label>
+                                                <select class="form-control" name="buyer_name" id="buyer_name">
+                                                    <option st-id="" value="">Select Buyer Name</option>
+                                                    <?php foreach ($buyerList as $key => $value) {?>
+                                                    <option value="<?php echo $value['buyer_id']; ?>"><?php echo $value['buyer_name']; ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            <p class="error buyer_name_error"></p>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                                <label for="buyer_po_number">Select Buyer PO <span class="required">*</span></label>
+                                                    <select class="form-control buyer_po_number  buyer_po_number_for_itam_mapping" name="buyer_po_number" id="buyer_po_number">
+                                                        <option st-id="" value="">Select Buyer PO</option>
+                                                    </select>
+                                            <p class="error buyer_po_number_error"></p>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                                <label for="buyer_po_date">Buyer PO Date<span class="required">*</span></label>
+                                                <input type="text" class="form-control" id="buyer_po_date" value="<?=$pre_buyer_po_date?>" name="buyer_po_date" required readonly>
+                                            <p class="error buyer_po_date_error"></p>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                                <label for="buyer_delivery_date">Buyer Delivery Date<span class="required">*</span></label>
+                                                <input type="text" class="form-control" id="buyer_delivery_date" value="<?=$pre_buyer_delivery_date?>"  name="buyer_delivery_date" required readonly>
+                                            <p class="error buyer_delivery_date_error"></p>
                                         </div>
                                     </div>
 
@@ -177,7 +221,7 @@
                                                 <!-- <span aria-hidden="true">&times;</span> -->
                                                 </button>
                                             </div>
-                                            <form role="form" id="savejobworkitemform" action="<?php echo base_url() ?>savejobworkitemform" method="post" role="form">
+                                            <form role="form" id="saveBillofmaterialform" action="<?php echo base_url() ?>saveBillofmaterialform" method="post" role="form">
 
                                                 <div class="modal-body">
                                                         <div class="loader_ajax" style="display:none;">
@@ -209,36 +253,36 @@
 
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">SAC Code</label>
+                                                        <label class="col-sm-4 col-form-label">RM Supplier Name</label>
                                                         <div class="col-sm-8">
-                                                            <input type="text" class="form-control"  id="SAC" name="SAC" readonly>
-                                                            <p class="error SAC_error"></p>
+                                                            <input type="text" class="form-control"  id="rm_supplier_name" name="rm_supplier_name" readonly>
+                                                            <p class="error rm_supplier_name_error"></p>
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">HSN Code</label>
+                                                        <label class="col-sm-4 col-form-label">RM Supplier PO Number</label>
                                                         <div class="col-sm-8">
-                                                            <input type="text" class="form-control"  id="HSN_Code" name="HSN_Code" readonly>
-                                                            <p class="error HSN_Code_error"></p>
-                                                        </div>
-                                                    </div>
-
-
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Raw Material Size</label>
-                                                        <div class="col-sm-8">
-                                                            <input type="text" class="form-control"  id="raw_material_size" name="raw_material_size" readonly>
-                                                            <p class="error raw_material_size_error"></p>
+                                                            <input type="text" class="form-control"  id="rm_supplier_po_number" name="rm_supplier_po_number" readonly>
+                                                            <p class="error rm_supplier_po_number_error"></p>
                                                         </div>
                                                     </div>
 
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Vendor Order Qty</label>
+                                                        <label class="col-sm-4 col-form-label">RM Supplier PO Date</label>
                                                         <div class="col-sm-8">
-                                                            <input type="number" class="form-control"  id="vendor_order_qty" name="vendor_order_qty" readonly>
-                                                            <p class="error vendor_order_qty_error"></p>
+                                                            <input type="text" class="form-control"  id="rm_supplier_po_date" name="rm_supplier_po_date" readonly>
+                                                            <p class="error rm_supplier_po_date_error"></p>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-4 col-form-label">RM Order Qty</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="number" class="form-control"  id="rm_order_qty" name="rm_order_qty" readonly>
+                                                            <p class="error rm_order_qty_error"></p>
                                                         </div>
                                                     </div>
 
@@ -251,75 +295,108 @@
                                                         </div>
                                                     </div>
 
-
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Unit <span class="required">*</span></label>
+                                                        <label class="col-sm-4 col-form-label">RM Type <span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                             <select class="form-control" name="unit" id="unit">
-                                                                <option value="">Select Unit</option>
-                                                                <option value="kgs">Kgs</option>
-                                                                <option value="Pcs">Pcs</option>
-                                                                <option value="Nos">Nos</option>
-                                                                <option value="Sheet">Sheet</option>
-                                                                <option value="Set">Set</option>
-                                                             </select>
-                                                            <p class="error unit_error"></p>
-                                                        </div>
-                                                    </div>
-                                                
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">R.M Rate<span class="required">*</span></label>
-                                                        <div class="col-sm-8">
-                                                            <input type="number" class="form-control"  id="rm_rate" name="rm_rate" readonly>
-                                                            <p class="error rm_rate_error"></p>
+                                                            <input type="text" class="form-control"  id="rm_type" name="rm_type">
+                                                            <p class="error rm_type_error"></p>
                                                         </div>
                                                     </div>
 
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Value<span class="required">*</span></label>
+                                                        <label class="col-sm-4 col-form-label">Slitting Size<span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="number" class="form-control"  id="value" name="value" readonly>
-                                                            <p class="error value_error"></p>
+                                                            <input type="text" class="form-control"  id="slitting_size" name="slitting_size">
+                                                            <p class="error slitting_size_error"></p>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-4 col-form-label">Diameter<span class="required">*</span></label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" class="form-control"  id="diameter" name="diameter">
+                                                            <p class="error diameter_error"></p>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-4 col-form-label">Thickness<span class="required">*</span></label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" class="form-control"  id="thickness" name="thickness">
+                                                            <p class="error thickness_error"></p>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-4 col-form-label">Hex A/F <span class="required">*</span></label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" class="form-control"  id="hex_af" name="hex_af">
+                                                            <p class="error hex_af_error"></p>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-4 col-form-label">Gross Weight<span class="required">*</span></label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" class="form-control"  id="gross_weight" name="gross_weight">
+                                                            <p class="error gross_weight_error"></p>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-4 col-form-label">Expected Qty<span class="required">*</span></label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" class="form-control"  id="expected_qty" name="expected_qty">
+                                                            <p class="error expected_qty_error"></p>
                                                         </div>
                                                     </div>
 
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Packing & Forwording<span class="required">*</span></label>
+                                                        <label class="col-sm-4 col-form-label">Vendor Actual Received Qty<span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="number" class="form-control"  id="packing_and_forwarding" name="packing_and_forwarding">
-                                                            <p class="error packing_and_forwarding_error"></p>
+                                                            <input type="text" class="form-control"  id="vendor_actual_received_Qty" name="vendor_actual_received_Qty">
+                                                            <p class="error vendor_actual_received_Qty_error"></p>
                                                         </div>
                                                     </div>
 
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Total<span class="required">*</span></label>
+                                                        <label class="col-sm-4 col-form-label">Net Weight Per Pcs<span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="number" class="form-control"  id="total" name="total" readonly>
-                                                            <p class="error total_error"></p>
+                                                            <input type="text" class="form-control"  id="net_weight_per_pcs" name="net_weight_per_pcs">
+                                                            <p class="error net_weight_per_pcs_error"></p>
                                                         </div>
                                                     </div>
 
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">GST (9 + 9 or 18)<span class="required">*</span></label>
+                                                        <label class="col-sm-4 col-form-label">Total Net Weight<span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="number" class="form-control"  id="gst" name="gst" readonly>
-                                                            <p class="error gst_error"></p>
+                                                            <input type="text" class="form-control"  id="total_net_weight" name="total_net_weight">
+                                                            <p class="error total_net_weight_error"></p>
                                                         </div>
                                                     </div>
 
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Grand Total<span class="required">*</span></label>
+                                                        <label class="col-sm-4 col-form-label">Short Sccess<span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="number" class="form-control"  id="grand_total" name="grand_total" readonly>
-                                                            <p class="error grand_total_error"></p>
+                                                            <input type="text" class="form-control"  id="short_access" name="short_access">
+                                                            <p class="error short_access_error"></p>
                                                         </div>
                                                     </div>
 
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-4 col-form-label">Scrap<span class="required">*</span></label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" class="form-control"  id="scrap" name="scrap">
+                                                            <p class="error scrap_error"></p>
+                                                        </div>
+                                                    </div>
+
+                                          
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Remark</label>
                                                         <div class="col-sm-8">
@@ -330,8 +407,8 @@
                                                 </div>
 
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary btn-xl closejobworkmodal" data-dismiss="modal">Close</button>
-                                                    <button type="submit" id="saveJobworktem" name="saveJobworktem" class="btn btn-primary" class="btn btn-success btn-xl">Save</button>
+                                                    <button type="button" class="btn btn-secondary btn-xl closebillofmaterialmodal" data-dismiss="modal">Close</button>
+                                                    <button type="submit" id="saveBillofmaterialtem" name="saveBillofmaterialtem" class="btn btn-primary" class="btn btn-success btn-xl">Save</button>
                                                 </div>
 
                                             </form>    
