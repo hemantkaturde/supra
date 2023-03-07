@@ -1577,7 +1577,7 @@ class Admin_model extends CI_Model
     }
 
     public function getfinishedgoodsPartnumberByid($part_number){
-        $this->db->select('*');
+        $this->db->select('*,'.TBL_FINISHED_GOODS.'.net_weight as supplier_goods_net_weight,'.TBL_FINISHED_GOODS.'.sac as supplier_goods_sac');
         $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
         $this->db->join(TBL_SUPPLIER_PO_MASTER_ITEM, TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id = '.TBL_RAWMATERIAL.'.raw_id');
         $this->db->where(TBL_FINISHED_GOODS.'.status',1);

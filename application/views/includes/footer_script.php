@@ -2534,8 +2534,8 @@
 									$('#description').val(data_row_material.name);
 									$('#HSN_Code').val(data_row_material.hsn_code);
 									$('#gross_weight').val(data_row_material.groass_weight);
-									$('#net_weight').val(data_row_material.net_weight);
-									$('#SAC').val(data_row_material.sac);
+									$('#net_weight').val(data_row_material.supplier_goods_net_weight);
+									$('#SAC').val(data_row_material.supplier_goods_sac);
 									$('#drawing_number').val(data_row_material.drawing_number);
 									$('#description_1').val(data_row_material.description_1);
 									$('#description_2').val(data_row_material.description_2);
