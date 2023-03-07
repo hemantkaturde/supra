@@ -24,7 +24,9 @@
                         <form role="form" id="addnewSupplierform" action="<?php echo base_url() ?>addnewSupplierform" method="post" role="form">
                             <div class="box-body">
                                 <div class="col-md-4">
-                                  
+
+                                   <input type="hidden" class="form-control"  id="sup_id" name="sup_id"  value="<?=$getSuplierpodetails[0]['id']?>">   
+
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="po_number">PO Number<span class="required">*</span></label>
@@ -32,7 +34,6 @@
                                             <p class="error po_number_error"></p>
                                         </div>
                                     </div>
-
 
                                     <div class="col-md-12">
                                         <div class="form-group">
@@ -70,25 +71,15 @@
                                         </div>
                                     </div>
 
-                                    <?php if($fetchALLsupplieritemlistforview[0]['pre_buyer_po_number']){
-                                        $display='block';
-                                        $selected_value = $fetchALLsupplieritemlistforview[0]['sales_order_number'];
-
-                                    }else{
-                                        $display='none';
-                                        $selected_value = 'Select Buyer PO Number';
-                                    } ?>
-
-
+                                  
                                     <div class="col-md-12 buyer_po_number_div" style="display:<?=$display;?>">
                                             <div class="form-group">
                                                     <label for="buyer_po_number">Select Buyer PO Number <span class="required">*</span></label>
                                                     <select class="form-control" name="buyer_po_number" id="buyer_po_number">
-                                                    <option st-id="" value="<?=$fetchALLsupplieritemlistforview[0]['pre_buyer_po_number']?>" selected ><?=$selected_value;?></option>
-                                                        <!-- <option st-id="" value="">Select Buyer Name</option>
-                                                        <?php foreach ($buyerList as $key => $value) {?>
-                                                        <option value="<?php echo $value['buyer_id']; ?>" <?php if($value['buyer_id']==$fetchALLsupplieritemlistforview[0]['pre_buyer_name']){ echo 'selected';} ?> ><?php echo $value['buyer_name']; ?></option>
-                                                        <?php } ?> -->
+                                                        <option st-id="" value="">Select Buyer Name</option>
+                                                           <?php foreach ($buyerpoList as $key => $value) {?>
+                                                               <option value="<?php echo $value['id']; ?>" <?php if($value['id']==$fetchALLsupplieritemlistforview[0]['pre_buyer_po_number']){ echo 'selected';} ?> ><?php echo $value['sales_order_number']; ?></option>
+                                                           <?php } ?>
                                                     </select> 
                                                 <p class="error buyer_po_number_error"></p>
                                             </div>
@@ -112,7 +103,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="quatation_ref_no">Quotation Ref No.</label>
-                                            <input type="text" class="form-control" id="quatation_ref_no" value="<?=$getSuplierpodetails[0]['quatation_ref_number'];?>" name="quatation_ref_no" >
+                                            <input type="text" class="form-control" id="quatation_ref_no" value="<?=$getSuplierpodetails[0]['quatation_ref_no'];?>" name="quatation_ref_no" >
                                             <p class="error quatation_ref_no_error"></p>
                                         </div>
                                     </div>
@@ -423,7 +414,7 @@
                             <!-- /.box-body -->
                             <div class="box-footer">
                                 <div class="col-xs-8">
-                                    <?php if($fetchALLpresupplieritemList){
+                                    <?php if($fetchALLsupplieritemlistforview){
                                         $disabled= '';
                                     }else{ 
                                         $disabled= 'disabled';

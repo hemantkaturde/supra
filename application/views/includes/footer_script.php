@@ -1992,6 +1992,7 @@
 		$(document).on('click','#savesupplieritem',function(e){
 			e.preventDefault();
 			$(".loader_ajax").show();
+
 			   var formData = new FormData($("#addbuyeritemform")[0]);
                var part_number =   $('#part_number').val();
 			   var description =   $('#description').val();
@@ -2017,7 +2018,7 @@
 			   var remark =   $('#remark').val();
 
 
-
+			   var sup_id=  $('#sup_id').val();
 					 
 			$.ajax({
 				url : "<?php echo base_url();?>addSuplieritem",
@@ -2040,14 +2041,30 @@
 				    }
 					else if(fetchResponse.status == 'success')
 				    {
-						swal({
-							title: "Success",
-							text: "Item Successfully Added!",
-							icon: "success",
-							button: "Ok",
-							},function(){ 
-								window.location.href = "<?php echo base_url().'addnewSupplierpo'?>";
-						});		
+
+						if(sup_id){
+
+								swal({
+								title: "Success",
+								text: "Item Successfully Updated!",
+								icon: "success",
+								button: "Ok",
+								},function(){ 
+									window.location.href = "<?php echo base_url().'editSupplierpo'?>"+sup_id;
+								});	
+
+						}else{
+								swal({
+								title: "Success",
+								text: "Item Successfully Added!",
+								icon: "success",
+								button: "Ok",
+								},function(){ 
+									window.location.href = "<?php echo base_url().'addnewSupplierpo'?>";
+								});	
+						}
+
+							
 				    }
 					
 				},

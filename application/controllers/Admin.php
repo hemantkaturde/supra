@@ -2523,6 +2523,7 @@ class Admin extends BaseController
 
                 
                 $data = array(
+                    'supplier_po_id'  => trim($this->input->post('sup_id')),
                     'part_number_id'   => trim($this->input->post('part_number')),
                     'description'     => trim($this->input->post('description')),
                     'order_oty'    => trim($this->input->post('qty')),
@@ -2550,7 +2551,7 @@ class Admin extends BaseController
                 //     $save_buyerpo_response['status'] = 'failure';
                 //     $save_buyerpo_response['error'] = array('sales_order_number'=>'Buyer PO Alreday Exits (Sales Order Number Alreday Exits)');
                 // }else{
-                    $saveSupplierpoitemdata = $this->admin_model->saveSupplierpoitemdata('',$data);
+                    $saveSupplierpoitemdata = $this->admin_model->saveSupplierpoitemdata(trim($this->input->post('sup_id')),$data);
                     if($saveSupplierpoitemdata){
                         $save_supplierpoitem_response['status'] = 'success';
                         $save_supplierpoitem_response['error'] = array('part_number'=>'', 'description'=>'', 'qty'=>'', 'rate'=>'','value'=>'');
@@ -2588,10 +2589,12 @@ class Admin extends BaseController
         $this->logrecord($process,$processFunction);
         $this->global['pageTitle'] = 'Edit Supplier PO';
         $data['supplierList']= $this->admin_model->fetchALLsupplierList();
+        $data['rowMaterialList']= $this->admin_model->fetchALLrowMaterialList();
         $data['buyerList']= $this->admin_model->fetchAllbuyerList();
         $data['vendorList']= $this->admin_model->fetchALLvendorList();
         $data['getSuplierpodetails']= $this->admin_model->getSuplierpodetails($supplierpoid);
         $data['fetchALLsupplieritemlistforview']= $this->admin_model->fetchALLsupplieritemlistforview($supplierpoid);
+        $data['buyerpoList']= $this->admin_model->fetchAllbuyerpoList($data['fetchALLsupplieritemlistforview'][0]['pre_buyer_name']);
         $this->loadViews("masters/editSupplierpo", $this->global, $data, NULL);
 
     }
