@@ -1820,6 +1820,7 @@
 			e.preventDefault();
 			$(".loader_ajax").show();
 			var formData = new FormData($("#addnewSupplierform")[0]);
+			var sup_id = $('#sup_id').val();
 
 			$.ajax({
 				url : "<?php echo base_url();?>addnewSupplierpo",
@@ -1841,6 +1842,7 @@
 				    }
 					else if(fetchResponse.status == 'success')
 				    {
+
 						swal({
 							title: "Success",
 							text: "Supplier PO Successfully Added!",
@@ -2017,14 +2019,13 @@
 			   var work_order =   $('#work_order').val();
 			   var remark =   $('#remark').val();
 
-
 			   var sup_id=  $('#sup_id').val();
 					 
 			$.ajax({
 				url : "<?php echo base_url();?>addSuplieritem",
 				type: "POST",
 				 //data : formData,
-				 data :{part_number:part_number,description:description,qty:qty,rate:rate,value:value,date:date,supplier_name:supplier_name,buyer_name:buyer_name,vendor_name:vendor_name,quatation_ref_no:quatation_ref_no,quatation_date:quatation_date,delivery_date:delivery_date,delivery:delivery,delivery_address:delivery_address,work_order:work_order,remark:remark,buyer_po_number:buyer_po_number,vendor_qty:vendor_qty,unit:unit,item_remark:item_remark},
+				 data :{part_number:part_number,description:description,qty:qty,rate:rate,value:value,date:date,supplier_name:supplier_name,buyer_name:buyer_name,vendor_name:vendor_name,quatation_ref_no:quatation_ref_no,quatation_date:quatation_date,delivery_date:delivery_date,delivery:delivery,delivery_address:delivery_address,work_order:work_order,remark:remark,buyer_po_number:buyer_po_number,vendor_qty:vendor_qty,unit:unit,item_remark:item_remark,sup_id:sup_id},
 				// method: "POST",
                 // data :{package_id:package_id},
                 cache:false,
@@ -2050,7 +2051,7 @@
 								icon: "success",
 								button: "Ok",
 								},function(){ 
-									window.location.href = "<?php echo base_url().'editSupplierpo'?>"+sup_id;
+									window.location.href = "<?php echo base_url().'editSupplierpo/'?>"+sup_id;
 								});	
 
 						}else{

@@ -1340,12 +1340,19 @@ class Admin_model extends CI_Model
     public function saveSupplierpoitemdata($id,$data){
 
         if($id != '') {
-            $this->db->where('id', $id);
-            if($this->db->update(TBL_SUPPLIER_PO_MASTER_ITEM, $data)){
-                return TRUE;
+            // $this->db->where('id', $id);
+            // if($this->db->update(TBL_SUPPLIER_PO_MASTER_ITEM, $data)){
+            //     return TRUE;
+            // } else {
+            //     return FALSE;
+            // }
+
+            if($this->db->insert(TBL_SUPPLIER_PO_MASTER_ITEM, $data)) {
+                return $this->db->insert_id();;
             } else {
                 return FALSE;
             }
+
         } else {
             if($this->db->insert(TBL_SUPPLIER_PO_MASTER_ITEM, $data)) {
                 return $this->db->insert_id();;
