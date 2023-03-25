@@ -2300,7 +2300,10 @@ class Admin extends BaseController
             $data['rowMaterialList']= $this->admin_model->fetchALLrowMaterialList();
             $data['supplierList']= $this->admin_model->fetchALLsupplierList();
             $data['vendorList']= $this->admin_model->fetchALLvendorList();
+           
             $data['getPreviousPONumber']= $this->admin_model->getPreviousPONumber()[0];
+            $data['getPreviousvendorPONumber']= $this->admin_model->getPreviousvendorPONumber()[0];
+
             $data['fetchALLpresupplieritemList']= $this->admin_model->fetchALLpresupplieritemList();
             $this->logrecord($process,$processFunction);
             $this->global['pageTitle'] = 'Add Supplier PO';
@@ -2832,6 +2835,10 @@ class Admin extends BaseController
                 $data['supplierList']= $this->admin_model->fetchALLsupplierList();
                 $data['vendorList']= $this->admin_model->fetchALLvendorList();
                 $data['getPreviousPONumber']= $this->admin_model->getPreviousvendorPONumber()[0];
+
+                $data['getPrevioussupplierPONumber']= $this->admin_model->getPreviousPONumber()[0];
+
+
                 $data['fetchALLpreVendoritemList']= $this->admin_model->fetchALLpreVendoritemList();
                 $this->logrecord($process,$processFunction);
                 $this->global['pageTitle'] = 'Add Vendor PO';

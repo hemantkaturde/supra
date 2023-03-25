@@ -25,14 +25,62 @@
                             <div class="box-body">
                                 <div class="col-md-4">
                                     <?php
-                                        if($getPreviousPONumber['po_number']){
-                                            $arr = str_split($getPreviousPONumber['po_number']);
-                                            $i = end($arr);
-                                            $inrno= "SQPO2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
-                                            $po_number = $inrno;
+
+                                        if($getPreviousvendorPONumber['po_number']){
+
+
+
+                                            $getPreviousvendorPONumber_number = substr($getPreviousvendorPONumber['po_number'], -1);
+
+                                            $getPreviousPONumber_number = substr($getPreviousPONumber['po_number'], -1);
+
+                                            if($getPreviousvendorPONumber_number > $getPreviousPONumber_number){
+
+                                                if($getPreviousvendorPONumber_number){
+                                                    $arr = str_split($getPreviousvendorPONumber_number);
+                                                    $i = end($arr);
+                                                    $inrno= "SQPO2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                                    $po_number = $inrno;
+                                                }else{
+                                                    $po_number = 'SQPO23240001';
+                                                }     
+
+
+                                            }else{
+
+                                                if($getPreviousPONumber_number){
+                                                    $arr = str_split($getPreviousPONumber_number);
+                                                    $i = end($arr);
+                                                    $inrno= "SQPO2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                                    $po_number = $inrno;
+                                                }else{
+                                                    $po_number = 'SQPO23240001';
+                                                }   
+                                            }
+
                                         }else{
-                                            $po_number = 'SQPO23240001';
+
+    
+                                            if($getPreviousPONumber['po_number']){
+                                                $arr = str_split($getPreviousPONumber['po_number']);
+                                                $i = end($arr);
+                                                $inrno= "SQPO2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                                $po_number = $inrno;
+                                            }else{
+                                                $po_number = 'SQPO23240001';
+                                            }
+
                                         }
+
+
+                                        // if($getPreviousPONumber['po_number']){
+                                        //     $arr = str_split($getPreviousPONumber['po_number']);
+                                        //     $i = end($arr);
+                                        //     $inrno= "SQPO2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                        //     $po_number = $inrno;
+                                        // }else{
+                                        //     $po_number = 'SQPO23240001';
+                                        // }
                                     ?>
                                     <div class="col-md-12">
                                         <div class="form-group">
