@@ -47,6 +47,8 @@
                                                
                                            }else{
 
+                                                    
+
                                                     if($getPreviousPONumber_number){
                                                         $arr = str_split($getPreviousPONumber_number);
                                                         $i = end($arr);
