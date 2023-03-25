@@ -3558,7 +3558,7 @@ class Admin extends BaseController
             $this->form_validation->set_rules('rmqty','Row Material Received Quantity','trim|required');
             $this->form_validation->set_rules('finishedgoodqty','Finished Good Received Quantity','trim|required');
             $this->form_validation->set_rules('gross_weight','Gross Weight','trim|required');
-            $this->form_validation->set_rules('expected_qty','Expected Qty','trim|required');
+            $this->form_validation->set_rules('expected_qty','Expected Qty','trim');
             $this->form_validation->set_rules('item_remark','Item Remark','trim');
 
             if($this->form_validation->run() == FALSE)

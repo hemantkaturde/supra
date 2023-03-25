@@ -286,7 +286,7 @@
 
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Finished Good Received Quantity (In Kgs / pcs)<span class="required">*</span></label>
+                                                        <label class="col-sm-4 col-form-label">Finished Good Received Quantity (In Kgs / pcs)</label>
                                                         <div class="col-sm-8">
                                                             <input type="number" class="form-control"  id="finishedgoodqty" name="finishedgoodqty">
                                                             <p class="error finishedgoodqty_error"></p>

@@ -3736,6 +3736,7 @@
 		    var vendor_po_number = $('#vendor_po_number').val();
 			var vendor_name = $('#vendor_name').val();
 
+
 			if(vendor_name){
 				if(vendor_po_number){
 						$.ajax({
@@ -3760,7 +3761,7 @@
 									$('#unit').val('');
 									//$('#rm_type').val('');
 									$('#rmqty').val('');
-									
+									$("#expected_qty").val('');
 
 								}
 								else
@@ -3779,6 +3780,22 @@
 									$('#unit').val(data_row_material.unit);
 									$('#rm_type').val(data_row_material.type_of_raw_material);
 									$('#rmqty').val(data_row_material.sent_qty);
+
+
+										if($("#rmqty").val()){
+											var rmqty = $("#rmqty").val();
+										}else{
+											var rmqty = 0;
+										}
+
+										if($("#gross_weight").val()){
+											var gross_weight = $("#gross_weight").val();
+										}else{
+											var gross_weight = 0;
+										}
+										
+										var total_value = rmqty / gross_weight;
+										$("#expected_qty").val( Math.round(total_value));
 									
 									
 									
@@ -3799,8 +3816,7 @@
 									$('#unit').val('');
 									$('#rm_type').val('');
 									$('#rmqty').val('');
-
-									
+									$("#expected_qty").val('');
 								//$(".loader_ajax").hide();
 							}
 						});
