@@ -3073,9 +3073,14 @@ class Admin extends BaseController
             $data['buyerList']= $this->admin_model->fetchAllbuyerList();
             $data['supplierList']= $this->admin_model->fetchALLsupplierList();
             $data['rowMaterialList']= $this->admin_model->fetchALLrowMaterialList();
+
+
             $data['getPreviousSupplierPoconfirmationNumber']= $this->admin_model->getPreviousSupplierPoconfirmationNumber()[0];
+            $data['getPreviousVendorPoconfirmationNumber']= $this->admin_model->getPreviousVendorPoconfirmationNumber()[0];
+
+            
             $data['fetchALLpresupplierpoconfirmationitemList']= $this->admin_model->fetchALLpresupplierpoconfirmationitemList();
-            $this->logrecord($process,$processFunction);
+             $this->logrecord($process,$processFunction);
             $this->global['pageTitle'] = 'Add Supplier PO Confirmation';
             $this->loadViews("masters/addsupplierpoconfirmation", $this->global, $data, NULL);
         }
@@ -3415,6 +3420,11 @@ class Admin extends BaseController
             // $data['supplierList']= $this->admin_model->fetchALLsupplierList();
             // $data['rowMaterialList']= $this->admin_model->fetchALLrowMaterialList();
             $data['getPreviousVendorPoconfirmationNumber']= $this->admin_model->getPreviousVendorPoconfirmationNumber()[0];
+
+            $data['getPreviousSupplierPoconfirmationNumber']= $this->admin_model->getPreviousSupplierPoconfirmationNumber()[0];
+
+
+
             $data['fetchALLpreVendorpoconfirmationitemList']= $this->admin_model->fetchALLpreVendorpoconfirmationitemList();
             $data['vendorList']= $this->admin_model->fetchALLvendorList();
             $this->logrecord($process,$processFunction);

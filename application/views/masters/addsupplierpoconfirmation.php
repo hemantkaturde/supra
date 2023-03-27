@@ -25,14 +25,47 @@
                             <div class="box-body">
                                 <div class="col-md-4">
                                     <?php
-                                        if($getPreviousSupplierPoconfirmationNumber['po_number']){
-                                            $arr = str_split($getPreviousSupplierPoconfirmationNumber['po_number']);
-                                            $i = end($arr);
-                                            $inrno= "SQPC2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
-                                            $po_number = $inrno;
+
+
+                                        if($getPreviousVendorPoconfirmationNumber['po_number']){
+
+                                            $getPreviousVendorPoconfirmationNumber_number = substr($getPreviousVendorPoconfirmationNumber['po_number'], -1);
+                                            $getPreviousSupplierPoconfirmationNumber_number = substr($getPreviousSupplierPoconfirmationNumber['po_number'], -1);
+                                            if($getPreviousVendorPoconfirmationNumber_number > $getPreviousSupplierPoconfirmationNumber_number){
+
+                                                if($getPreviousVendorPoconfirmationNumber_number){
+                                                    $arr = str_split($getPreviousVendorPoconfirmationNumber_number);
+                                                    $i = end($arr);
+                                                    $inrno= "SQPO2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                                    $po_number = $inrno;
+                                                }else{
+                                                    $po_number = 'SQPO23240001';
+                                                }   
+
+                                            }else{
+
+                                                if($getPreviousSupplierPoconfirmationNumber_number){
+                                                    $arr = str_split($getPreviousSupplierPoconfirmationNumber_number);
+                                                    $i = end($arr);
+                                                    $inrno= "SQPO2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                                    $po_number = $inrno;
+                                                }else{
+                                                    $po_number = 'SQPO23240001';
+                                                }   
+                                            }
+
                                         }else{
-                                            $po_number = 'SQPC23240001';
-                                        }
+
+                                            if($getPreviousSupplierPoconfirmationNumber['po_number']){
+                                                $arr = str_split($getPreviousSupplierPoconfirmationNumber['po_number']);
+                                                $i = end($arr);
+                                                $inrno= "SQPC2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                                $po_number = $inrno;
+                                            }else{
+                                                $po_number = 'SQPC23240001';
+                                            }
+                                            
+                                        }                                       
                                     ?>
                                     <div class="col-md-12">
                                         <div class="form-group">
