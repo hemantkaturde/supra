@@ -3420,10 +3420,7 @@ class Admin extends BaseController
             // $data['supplierList']= $this->admin_model->fetchALLsupplierList();
             // $data['rowMaterialList']= $this->admin_model->fetchALLrowMaterialList();
             $data['getPreviousVendorPoconfirmationNumber']= $this->admin_model->getPreviousVendorPoconfirmationNumber()[0];
-
             $data['getPreviousSupplierPoconfirmationNumber']= $this->admin_model->getPreviousSupplierPoconfirmationNumber()[0];
-
-
 
             $data['fetchALLpreVendorpoconfirmationitemList']= $this->admin_model->fetchALLpreVendorpoconfirmationitemList();
             $data['vendorList']= $this->admin_model->fetchALLvendorList();

@@ -326,7 +326,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Raw Material Received Quantity (In Kgs / pcs)<span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="number" class="form-control"  id="rmqty" name="rmqty" readonly>
+                                                            <input type="number" class="form-control"  id="rmqty" name="rmqty"  readonly>
                                                             <p class="error rmqty_error"></p>
                                                         </div>
                                                     </div>
@@ -335,7 +335,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Finished Good Received Quantity (In Kgs / pcs)</label>
                                                         <div class="col-sm-8">
-                                                            <input type="number" class="form-control"  id="finishedgoodqty" name="finishedgoodqty">
+                                                            <input type="number" class="form-control"  id="finishedgoodqty" value="0" name="finishedgoodqty">
                                                             <p class="error finishedgoodqty_error"></p>
                                                         </div>
                                                     </div>
