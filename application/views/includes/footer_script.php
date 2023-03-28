@@ -4347,7 +4347,34 @@
 				 
 				 var total_value = parseFloat(rm_actual_aty) * parseFloat(rm_rate);
 				 $("#value").val( Math.round(total_value));
+				 $("#total").val( Math.round(total_value));
 		});
+
+
+		// $(document).on('change', '#packing_and_forwarding,#value', function(){	
+		// 		$("#total").val();
+			  
+		// 		if($("#packing_and_forwarding").val()){
+		// 			 var packing_and_forwarding = $("#packing_and_forwarding").val();
+		// 		 }else{
+		// 			 var packing_and_forwarding = 0;
+		// 		 }
+
+		// 		 if($("#value").val()){
+		// 			 var value = $("#value").val();
+		// 		 }else{
+		// 			 var value = 0;
+		// 		 }
+				 
+		// 		 var total_value = parseFloat(packing_and_forwarding) +  parseFloat(value);
+		// 		 $("#total").val( Math.round(total_value));
+
+		// 		  var gst_value = parseFloat(total_value) * 18 / 100;
+
+		// 		  $("#gst").val( Math.round(gst_value));
+
+		// 		  $("#grand_total").val( Math.round(gst_value) + Math.round(total_value)); 
+		// });
 
 		$(document).on('change', '#packing_and_forwarding,#value', function(){	
 				$("#total").val();
@@ -4367,15 +4394,60 @@
 				 var total_value = parseFloat(packing_and_forwarding) +  parseFloat(value);
 				 $("#total").val( Math.round(total_value));
 
+				//  var gst_value = parseFloat(total_value) * 18 / 100;
+
+				//  $("#gst").val( Math.round(gst_value));
+
+				//  $("#grand_total").val( Math.round(gst_value) + Math.round(total_value)); 
+		});
+
+
+		$(document).on('change', '#gst_rate', function(){	
+
+             var gst_rate_value = $("#gst_rate").val();
+
+			if(gst_rate_value=='IGST'){
+
+				 var total_value = $("#total").val();
+
 				 var gst_value = parseFloat(total_value) * 18 / 100;
+				 
+				 $(".cgst_sgst_div").attr("style", "display:none");
+				 $(".igst_div").attr("style", "display:block");
+
+				 $("#igst_rate").val( Math.round(gst_value));
+
+				 $("#gst").val( Math.round(gst_value));
+
+				 $("#grand_total").val( Math.round(gst_value) + Math.round(total_value)); 
+
+			}else{
+
+                 var total_value = $("#total").val();
+
+				 var gst_value = parseFloat(total_value) * 18 / 100;
+
+				 $(".igst_div").attr("style", "display:none");
+				 $(".cgst_sgst_div").attr("style", "display:block");
+
+				 var cgst_rate  =Math.round(gst_value)/2;
+
+				 var SGST_rate  =Math.round(gst_value)/2;
+
+				 $("#CGST_rate").val( Math.round(cgst_rate));
+				 $("#SGST_rate").val( Math.round(SGST_rate));
 
 				 $("#gst").val( Math.round(gst_value));
 
 				 $("#grand_total").val( Math.round(gst_value) + Math.round(total_value));
 
+			}
 
-				 
+				
+
 		});
+
+
 
 		$(document).on('click','.deleteJobwork',function(e){
 			var elemF = $(this);
@@ -5227,8 +5299,6 @@
 				}
 			});
 		});
-
-		
 
     </script>
 <?php } ?>

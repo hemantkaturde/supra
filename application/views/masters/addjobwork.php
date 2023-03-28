@@ -285,7 +285,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Packing & Forwording<span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="number" class="form-control"  id="packing_and_forwarding" name="packing_and_forwarding">
+                                                            <input type="number" class="form-control"  id="packing_and_forwarding"  value="0" name="packing_and_forwarding">
                                                             <p class="error packing_and_forwarding_error"></p>
                                                         </div>
                                                     </div>
@@ -299,6 +299,43 @@
                                                         </div>
                                                     </div>
 
+
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-4 col-form-label">Select GST Rate<span class="required">*</span></label>
+                                                        <div class="col-sm-8">
+                                                                <select class="form-control" name="gst_rate" id="gst_rate">
+                                                                    <option value="">Select GST Rate</option>
+                                                                    <option value="CGST_SGST">CGST + SGST ( 9% + 9% )</option>
+                                                                    <option value="IGST">IGST ( 18% )</option>
+                                                                </select>
+                                                            <p class="error gst_rate_error"></p>
+                                                        </div>
+                                                    </div>
+
+
+
+                                                    <div class="form-group row cgst_sgst_div" style="display:none">
+                                                        <label class="col-sm-2 col-form-label">SGST 9 %<span class="required">*</span></label>
+                                                        <div class="col-sm-4">
+                                                            <input type="number" class="form-control"  id="SGST_rate" name="SGST_rate" readonly>
+                                                            <p class="error SGST_rate_error"></p>
+                                                        </div>
+
+                                                        <label class="col-sm-2 col-form-label">CGST 9 %<span class="required">*</span></label>
+                                                        <div class="col-sm-4">
+                                                            <input type="number" class="form-control"  id="CGST_rate" name="CGST_rate" readonly>
+                                                            <p class="error CGST_rate_error"></p>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="form-group row igst_div" style="display:none">
+                                                        <label class="col-sm-4 col-form-label">IGST 18 %<span class="required">*</span></label>
+                                                        <div class="col-sm-8">
+                                                            <input type="number" class="form-control"  id="igst_rate" name="igst_rate" readonly>
+                                                            <p class="error igst_rate_error"></p>
+                                                        </div>
+                                                    </div>
 
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">GST (9 + 9 or 18)<span class="required">*</span></label>
