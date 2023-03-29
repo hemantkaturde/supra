@@ -2954,6 +2954,8 @@
 		$(document).on('change','.buyer_po_number_for_vendor_details',function(e){  
 			e.preventDefault();
 			//$(".loader_ajax").show();
+			var supplier_name = $('#supplier_name').val();
+			if(supplier_name==""){
 			var buyer_po_number_for_vendor_details = $('.buyer_po_number_for_vendor_details').val();
 
 			$("#vendor_name").html('');
@@ -2981,8 +2983,9 @@
 				}
 			});
 			return false;
-		});
 
+		}
+		});
 
     </script>
 <?php } ?>
