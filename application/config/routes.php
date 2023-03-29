@@ -183,6 +183,10 @@ $route['saveVendorbilloamaterialitems'] = "admin/saveVendorbilloamaterialitems";
 $route['deleteVendorbillofmaterialpoitem'] = "admin/deleteVendorbillofmaterialpoitem";
 $route['viewVendorbillofmaterial/(:any)'] = "admin/viewVendorbillofmaterial/$1";
 
+$route['getVendorDetailsBybuyerPOnumber'] = "admin/getVendorDetailsBybuyerPOnumber";
+
+
+
 
 
 

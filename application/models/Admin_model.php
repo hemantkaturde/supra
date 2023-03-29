@@ -2820,6 +2820,17 @@ class Admin_model extends CI_Model
 
     }
 
+    public function getVendorDetailsBybuyerPOnumber($supplier_po_number){
+
+        $this->db->select(TBL_VENDOR.'.*');
+        $query_result = $this->db->get(TBL_VENDOR)->result_array();
+		foreach($query_result as $key => $value) {
+			$query_result[$key]['selected'] = '';
+		}
+        return $query_result;
+
+    }
+
 
 }
 
