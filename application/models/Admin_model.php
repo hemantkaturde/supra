@@ -2152,7 +2152,7 @@ class Admin_model extends CI_Model
 
     public function fetchALLpreVendorpoconfirmationitemList(){
 
-        $this->db->select('*,'.TBL_BUYER_MASTER.'.buyer_name as buyer_name_master');
+        $this->db->select('*,'.TBL_BUYER_MASTER.'.buyer_name as buyer_name_master,'.TBL_VENDOR_PO_CONFIRMATION_ITEM.'.id as vendoritemid');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_CONFIRMATION_ITEM.'.part_number_id');
         //$this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.pre_supplier_po_number');
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_VENDOR_PO_CONFIRMATION_ITEM.'.pre_buyer_name');
@@ -2195,6 +2195,7 @@ class Admin_model extends CI_Model
 
     public function deleteVendorpoconfirmatuionitem($id){
 
+        
         $this->db->where('id', $id);
         //$this->db->delete(TBL_SUPPLIER);
         if($this->db->delete(TBL_VENDOR_PO_CONFIRMATION_ITEM)){
@@ -2274,7 +2275,7 @@ class Admin_model extends CI_Model
 
     public function getJobworkdata($params){
 
-        $this->db->select('*,'.TBL_VENDOR_PO_MASTER.'.po_number as vendorpo,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_SUPPLIER.'.supplier_name as 	suppliername,'.TBL_JOB_WORK.'.id as jobworkid');
+        $this->db->select('*,'.TBL_VENDOR_PO_MASTER.'.po_number as vendorpo,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_SUPPLIER.'.supplier_name as 	suppliername,'.TBL_JOB_WORK.'.id as jobworkid,'.TBL_JOB_WORK.'.po_number as jobworkponumber');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id= '.TBL_JOB_WORK.'.vendor_name');
         $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id= '.TBL_JOB_WORK.'.raw_material_supplier');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id= '.TBL_JOB_WORK.'.vendor_po_number');
@@ -2300,7 +2301,7 @@ class Admin_model extends CI_Model
         {
             foreach ($fetch_result as $key => $value)
             {
-                $data[$counter]['po_number'] = $value['po_number'];
+                $data[$counter]['po_number'] = $value['jobworkponumber'];
                 $data[$counter]['date'] = $value['date'];
                 $data[$counter]['vendor_name'] = $value['vendorname'];
                 $data[$counter]['vendor_po'] = $value['vendorpo'];

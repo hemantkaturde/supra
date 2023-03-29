@@ -247,7 +247,7 @@
                                                         <td><?php echo $value['gross_weight'];?></td>
                                                         <td><?php echo $value['expected_qty'];?></td>
                                                         <td>
-                                                        <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['id'];?>' class='fa fa-trash-o deleteSupplierpoitem' aria-hidden='true'></i>
+                                                        <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['vendoritemid'];?>' class='fa fa-trash-o deleteSupplierpoitem' aria-hidden='true'></i>
                                                         </td>
                                                     </tr>
                                                     <?php endforeach;?>

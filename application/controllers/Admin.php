@@ -3745,6 +3745,7 @@ class Admin extends BaseController
             $this->logrecord($process,$processFunction);
             $this->global['pageTitle'] = 'Add Job Work';
             $data['getPreviousjobworkponumber']= $this->admin_model->getPreviousjobworkponumber()[0];
+
             $data['fetchALLprejobworkitemList']= $this->admin_model->fetchALLprejobworkitemList();
             $data['vendorList']= $this->admin_model->fetchALLvendorList();
             $this->loadViews("masters/addjobwork", $this->global, $data, NULL);
