@@ -3702,7 +3702,7 @@ class Admin extends BaseController
             $this->form_validation->set_rules('date','Date','trim|required');
             $this->form_validation->set_rules('vendor_name','Vendor Name','trim|required');
             $this->form_validation->set_rules('vendor_po_number','Vendor PO  Number','trim|required');
-            $this->form_validation->set_rules('raw_material_supplier_name','Raw Material Supplier Name','trim|required');
+            $this->form_validation->set_rules('raw_material_supplier_name','Raw Material Supplier Name','trim');
             $this->form_validation->set_rules('remark','Remark','trim');
 
             if($this->form_validation->run() == FALSE)
