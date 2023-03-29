@@ -4290,7 +4290,7 @@ class Admin extends BaseController
         if($supplier_po_number) {
 			$supplier_po_number = $this->admin_model->getVendorDetailsBybuyerPOnumber($supplier_po_number);
 			if(count($supplier_po_number) >= 1) {
-                //$content = $content.'<option value="">Select Vendor Name</option>';
+                $content = $content.'<option value="">Select Vendor Name</option>';
 				foreach($supplier_po_number as $value) {
 					$content = $content.'<option value="'.$value["ven_id"].'">'.$value["vendor_name"].'</option>';
 				}
