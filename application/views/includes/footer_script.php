@@ -4355,7 +4355,7 @@
 									$('#SAC').val(data_row_material.sac_no);
 									$('#HSN_Code').val(data_row_material.hsn_code);
 									$('#raw_material_size').val(data_row_material.sitting_size);
-									$('#vendor_order_qty').val(data_row_material.order_qty);
+									$('#vendor_order_qty').val(data_row_material.order_oty);
 									$('#unit').val(data_row_material.unit);
 									$('#rm_rate').val(data_row_material.rate);
 									
