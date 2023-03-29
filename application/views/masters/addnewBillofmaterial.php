@@ -140,7 +140,7 @@
 
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                                <label for="supplier_po_number">Supplier Name<span class="required">*</span></label>
+                                                <label for="supplier_po_number">Supplier PO Number<span class="required">*</span></label>
                                                 <input type="text" class="form-control" id="supplier_po_number" value=""  name="supplier_po_number" required readonly>
                                             <p class="error supplier_po_number_error"></p>
                                         </div>
