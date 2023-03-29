@@ -440,7 +440,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-3 col-form-label">Supplier Quantity</label>
                                                         <div class="col-sm-9">
-                                                            <input type="number" class="form-control"  id="vendor_qty" name="vendor_qty" readonly>
+                                                            <input type="number" class="form-control"  id="vendor_qty" name="vendor_qty">
                                                             <p class="error vendor_qty_error"></p>
                                                         </div>
                                                     </div>
@@ -456,7 +456,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-3 col-form-label">Order (vendor) Quantity <span class="required">*</span></label>
                                                         <div class="col-sm-9">
-                                                            <input type="number" class="form-control"  id="qty" name="qty" readonly>
+                                                            <input type="number" class="form-control"  id="qty" name="qty">
                                                             <p class="error qty_error"></p>
                                                         </div>
                                                     </div>
