@@ -2779,7 +2779,7 @@ class Admin extends BaseController
                 $this->form_validation->set_rules('buyer_name','Buyer Name','trim|required');
                 $this->form_validation->set_rules('supplier_po_number','Supplier PO Number','trim|required');
                 $this->form_validation->set_rules('vendor_name','Vendor Name','trim|required');
-                $this->form_validation->set_rules('buyer_po_number','Buyer PO Number','trim|required');
+                $this->form_validation->set_rules('buyer_po_number','Buyer PO Number','trim');
                 $this->form_validation->set_rules('quatation_ref_no','Quatation Ref No','trim');
                 $this->form_validation->set_rules('quatation_date','Quatation Date','trim');
                 $this->form_validation->set_rules('delivery_date','Delivery Date','trim|required');
