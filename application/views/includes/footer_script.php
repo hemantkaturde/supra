@@ -2785,6 +2785,7 @@
 			// $("#customers-list").html('');
 			var supplier_name = $('#supplier_name').val();
 
+			if(supplier_name){
 
 		    $('.supplier_po_number_div').css('display','block');
 			$.ajax({
@@ -2813,6 +2814,37 @@
 				}
 			});
 			return false;
+		}else{
+			
+			var buyer_po_number_for_vendor_details = $('.buyer_po_number_for_vendor_details').val();
+
+			$("#vendor_name").html('');
+
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getVendorDetailsBybuyerPOnumber",
+				type: "POST",
+				data : {'supplier_po_number' : buyer_po_number_for_vendor_details},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#vendor_name').html('<option value="">Select Vendor Name</option>');
+					}
+					else
+					{
+						$('#vendor_name').html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#vendor_name').html();
+				}
+			});
+			return false;
+
+		}
 		});
 
 		$(document).on('change','#supplier_po_number',function(e){  
@@ -2956,6 +2988,7 @@
 			//$(".loader_ajax").show();
 			var supplier_name = $('#supplier_name').val();
 			if(supplier_name==""){
+
 			var buyer_po_number_for_vendor_details = $('.buyer_po_number_for_vendor_details').val();
 
 			$("#vendor_name").html('');
