@@ -2816,6 +2816,7 @@
 			return false;
 		}else{
 			
+			$('.supplier_po_number_div').css('display','none');
 			var buyer_po_number_for_vendor_details = $('.buyer_po_number_for_vendor_details').val();
 
 			$("#vendor_name").html('');
