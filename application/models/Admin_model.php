@@ -2254,7 +2254,7 @@ class Admin_model extends CI_Model
 
         $this->db->select('*,'.TBL_VENDOR_PO_MASTER.'.po_number as vendorpo,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_SUPPLIER.'.supplier_name as 	suppliername');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id= '.TBL_JOB_WORK.'.vendor_name');
-        $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id= '.TBL_JOB_WORK.'.raw_material_supplier');
+        $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id= '.TBL_JOB_WORK.'.raw_material_supplier','left');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id= '.TBL_JOB_WORK.'.vendor_po_number');
 
         if($params['search']['value'] != "") 
@@ -2277,7 +2277,7 @@ class Admin_model extends CI_Model
 
         $this->db->select('*,'.TBL_VENDOR_PO_MASTER.'.po_number as vendorpo,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_SUPPLIER.'.supplier_name as 	suppliername,'.TBL_JOB_WORK.'.id as jobworkid,'.TBL_JOB_WORK.'.po_number as jobworkponumber');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id= '.TBL_JOB_WORK.'.vendor_name');
-        $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id= '.TBL_JOB_WORK.'.raw_material_supplier');
+        $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id= '.TBL_JOB_WORK.'.raw_material_supplier','left');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id= '.TBL_JOB_WORK.'.vendor_po_number');
 
         if($params['search']['value'] != "") 
