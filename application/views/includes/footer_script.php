@@ -2518,9 +2518,25 @@
 			
 			//$(".loader_ajax").show();
 			var part_number = $('#part_number').val();
+            
+			if($('#supplier_name').val()){
+				var supplier_name = $('#supplier_name').val();
+			}else{
+				var supplier_name = $('#buyer_name').val();
+			}
 
-		    var supplier_po_number = $('#supplier_po_number').val();
-			var supplier_name = $('#supplier_name').val();
+		
+
+			if($('#supplier_po_number').val()){
+				var supplier_po_number = $('#supplier_po_number').val();
+			}else{
+				var supplier_po_number = $('#buyer_po_number').val();
+			}
+
+
+		
+
+
 
 			if(supplier_name){
 				if(supplier_po_number){
@@ -2982,7 +2998,6 @@
 			});
 			return false;
 		});
-
 
 		$(document).on('change','.buyer_po_number_for_vendor_details',function(e){  
 			e.preventDefault();
