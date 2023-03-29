@@ -2775,7 +2775,7 @@ class Admin extends BaseController
     
                 $this->form_validation->set_rules('po_number','PO Number','trim|required');
                 $this->form_validation->set_rules('date','Date','trim|required');
-                $this->form_validation->set_rules('supplier_name','Supplier Name','trim|required');
+                $this->form_validation->set_rules('supplier_name','Supplier Name','trim');
                 $this->form_validation->set_rules('buyer_name','Buyer Name','trim|required');
                 $this->form_validation->set_rules('supplier_po_number','Supplier PO Number','trim|required');
                 $this->form_validation->set_rules('vendor_name','Vendor Name','trim|required');
@@ -2835,10 +2835,7 @@ class Admin extends BaseController
                 $data['supplierList']= $this->admin_model->fetchALLsupplierList();
                 $data['vendorList']= $this->admin_model->fetchALLvendorList();
                 $data['getPreviousPONumber']= $this->admin_model->getPreviousvendorPONumber()[0];
-
                 $data['getPrevioussupplierPONumber']= $this->admin_model->getPreviousPONumber()[0];
-
-
                 $data['fetchALLpreVendoritemList']= $this->admin_model->fetchALLpreVendoritemList();
                 $this->logrecord($process,$processFunction);
                 $this->global['pageTitle'] = 'Add Vendor PO';

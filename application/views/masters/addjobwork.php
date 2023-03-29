@@ -73,22 +73,55 @@
                                         </div>
                                     </div>
 
+
+
+                                    <?php
+                                 
+                                    if($fetchALLprejobworkitemList[0]['pre_vendor_po_number']){
+                                        $display='block';
+                                        $selected_value = $fetchALLprejobworkitemList[0]['vendor_po'];
+
+                                    }else{
+                                        $display='none';
+                                        $selected_value = 'Select Buyer PO Number';
+                                    }
+                                    
+                                                
+                                    ?>
+
+
                                     <div class="col-md-12">
                                         <div class="form-group">
                                                 <label for="vendor_po_number">Select Vendor PO Number <span class="required">*</span></label>
                                                     <select class="form-control vendor_po_number_itam" name="vendor_po_number" id="vendor_po_number" readonly>
-                                                        <option st-id="" value="">Select Vendor Name</option>
+                                                        <!-- <option st-id="" value="">Select Vendor Name</option> -->
+                                                        <option st-id="" value="<?=$fetchALLprejobworkitemList[0]['pre_vendor_po_number']?>" selected="selected"><?=$selected_value?></option>
                                                     </select>
                                             <p class="error vendor_po_number_error"></p>
                                         </div>
                                     </div>
 
 
+                                    <?php
+                                 
+                                    if($fetchALLprejobworkitemList[0]['pre_raw_material_supplier_name']){
+                                        $display='block';
+                                        $selected_value = $fetchALLprejobworkitemList[0]['rowmaterialsuppliername'];
+
+                                    }else{
+                                        $display='none';
+                                        $selected_value = 'Select Raw Material Supplier Name';
+                                    }
+                                    
+                                             
+                                 ?>
+
+
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="raw_material_supplier_name">Raw Material Supplier Name<span class="required">*</span></label>
                                                     <select class="form-control " name="raw_material_supplier_name" id="raw_material_supplier_name" readonly>
-                                                        <option st-id="" value="">Raw Material Supplier Name</option>
+                                                        <option st-id="" value="<?=$fetchALLprejobworkitemList[0]['pre_raw_material_supplier_name']?>"><?=$selected_value?></option>
                                                     </select>
                                             <p class="error raw_material_supplier_name_error"></p>
                                         </div>

@@ -101,7 +101,7 @@
 
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                                <label for="supplier_name">Supplier Name <span class="required">*</span></label>
+                                                <label for="supplier_name">Supplier Name </label>
                                                 <select class="form-control" name="supplier_name" id="supplier_name">
                                                     <option st-id="" value="">Select Supplier Name</option>
                                                     <?php foreach ($supplierList as $key => $value) {?>
@@ -112,10 +112,7 @@
                                         </div>
                                     </div>
 
-                                   
-
                                     <?php
-
                                     if($fetchALLpreVendoritemList[0]['pre_supplier_po_number']){
                                         $display='block';
                                         $selected_value_supplier_po = $fetchALLpreVendoritemList[0]['po_number'];
@@ -125,7 +122,6 @@
                                         $selected_value_supplier_po = 'Select Supplier PO Number';
                                     } 
                                     ?>
-
 
                                     <div class="col-md-12 supplier_po_number_div" style="display:<?=$display;?>">
                                             <div class="form-group">
@@ -171,7 +167,7 @@
                                     <div class="col-md-12 buyer_po_number_div" style="display:<?=$display;?>">
                                             <div class="form-group">
                                                     <label for="buyer_po_number">Select Buyer PO Number <span class="required">*</span></label>
-                                                    <select class="form-control" name="buyer_po_number" id="buyer_po_number">
+                                                    <select class="form-control buyer_po_number_for_item" name="buyer_po_number" id="buyer_po_number">
                                                     <option st-id="" value="<?=$fetchALLpreVendoritemList[0]['pre_buyer_po_number']?>" selected="selected" ><?=$selected_value;?></option>
                                                         <!-- <option st-id="" value="">Select Buyer Name</option>
                                                         <?php foreach ($buyerList as $key => $value) {?>
