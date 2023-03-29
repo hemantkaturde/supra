@@ -1800,8 +1800,9 @@ class Admin_model extends CI_Model
 
     }
 
-    public function getSupplieritemsonly($supplier_po_number){
+    public function getSupplieritemsonly($supplier_po_number,$flag){
 
+      if($flag=='Supplier'){
         $this->db->select('*');
         $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
         $this->db->join(TBL_SUPPLIER_PO_MASTER_ITEM, TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id = '.TBL_RAWMATERIAL.'.raw_id');
@@ -1811,6 +1812,21 @@ class Admin_model extends CI_Model
         $query = $this->db->get(TBL_FINISHED_GOODS);
         $data = $query->result_array();
         return $data;
+      }else{
+
+
+        $this->db->select('*');
+        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+        $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
+        $this->db->where(TBL_FINISHED_GOODS.'.status',1);
+        //$this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
+        $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id',$supplier_po_number);
+        $query = $this->db->get(TBL_FINISHED_GOODS);
+        $data = $query->result_array();
+        return $data;
+
+
+      }
 
     }
 

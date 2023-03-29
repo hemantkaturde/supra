@@ -3173,8 +3173,10 @@ class Admin extends BaseController
 
         $supplier_po_number=$this->input->post('supplier_po_number');
 
+        $flag=$this->input->post('flag');
+
         if($supplier_po_number) {
-			$getSupplieritemsonly = $this->admin_model->getSupplieritemsonly($supplier_po_number);
+			$getSupplieritemsonly = $this->admin_model->getSupplieritemsonly($supplier_po_number,$flag);
 			if(count($getSupplieritemsonly) >= 1) {
                 $content = $content.'<option value="">Select Part Number</option>';
 				foreach($getSupplieritemsonly as $value) {

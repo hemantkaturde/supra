@@ -2849,12 +2849,15 @@
 			//$(".loader_ajax").show();
 			var supplier_po_number = $('.supplier_po_number_for_item').val();
 
+			var flag = 'Supplier';
+
+
 			$("#part_number").html('');
 		
 			$.ajax({
 				url : "<?php echo ADMIN_PATH;?>getSuppliritemonly",
 				type: "POST",
-				data : {'supplier_po_number' : supplier_po_number},
+				data : {'supplier_po_number' : supplier_po_number,'flag':flag},
 				success: function(data, textStatus, jqXHR)
 				{
 					$(".loader_ajax").hide();
@@ -2875,6 +2878,41 @@
 			});
 			return false;
 		});
+
+		$(document).on('change','.buyer_po_number_for_item',function(e){  
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			var buyer_po_number = $('.buyer_po_number_for_item').val();
+
+			$("#part_number").html('');
+
+			var flag = 'Buyer';
+		
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getSuppliritemonly",
+				type: "POST",
+				data : {'supplier_po_number' : buyer_po_number,'flag':flag},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#part_number').html('<option value="">Select Part Number</option>');
+					}
+					else
+					{
+						$('#part_number').html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#part_number').html();
+				}
+			});
+			return false;
+		});
+
 
 
 		$(document).on('change','.supplier_po_number_for_vendor_details',function(e){  
