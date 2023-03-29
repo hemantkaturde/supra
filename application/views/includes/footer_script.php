@@ -2784,6 +2784,8 @@
 			//$(".loader_ajax").show();
 			// $("#customers-list").html('');
 			var supplier_name = $('#supplier_name').val();
+
+
 		    $('.supplier_po_number_div').css('display','block');
 			$.ajax({
 				url : "<?php echo ADMIN_PATH;?>getSupplierPonumberbySupplierid",
@@ -2794,6 +2796,7 @@
 					$(".loader_ajax").hide();
 					if(data == "failure")
 					{
+						$('.supplier_po_number_div').css('display','none');
 						$('#supplier_po_number').html('<option value="">Select Supplier PO Number</option>');
 					}
 					else
@@ -2815,6 +2818,7 @@
 		$(document).on('change','#supplier_po_number',function(e){  
 			e.preventDefault();
 			//$(".loader_ajax").show();
+			
 			var supplier_po_number = $('#supplier_po_number').val();
 			$("#supplier_po_item_list").html('');
 			$.ajax({
