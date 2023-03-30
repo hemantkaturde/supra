@@ -4328,6 +4328,8 @@
 		    var vendor_po_number = $('#vendor_po_number').val();
 			var vendor_name = $('#vendor_name').val();
 
+			alert(vendor_po_number);
+
 			if(vendor_name){
 				if(vendor_po_number){
 						$.ajax({
