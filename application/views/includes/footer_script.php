@@ -3368,13 +3368,13 @@
 			e.preventDefault();
 			//$(".loader_ajax").show();
 			var supplier_po_number = $('.supplier_po_number_for_item').val();
-
+			var flag = 'Supplier';
 			$("#part_number").html('');
 		
 			$.ajax({
 				url : "<?php echo ADMIN_PATH;?>getSuppliritemonly",
 				type: "POST",
-				data : {'supplier_po_number' : supplier_po_number},
+				data : {'supplier_po_number' : supplier_po_number,'flag':flag},
 				success: function(data, textStatus, jqXHR)
 				{
 					$(".loader_ajax").hide();
@@ -4573,8 +4573,6 @@
 				
 
 		});
-
-
 
 		$(document).on('click','.deleteJobwork',function(e){
 			var elemF = $(this);

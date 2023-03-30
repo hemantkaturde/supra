@@ -24,15 +24,41 @@
                         <form role="form" id="addnnewbillofmaterialform" action="<?php echo base_url() ?>addnnewbillofmaterialform" method="post" role="form">
                             <div class="box-body">
                                 <div class="col-md-4">
-
                                     <?php
-                                        if($getPreviousBomnumber['bom_number']){
-                                            $arr = str_split($getPreviousBomnumber['bom_number']);
-                                            $i = end($arr);
-                                            $inrno= "SQBM2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
-                                            $po_number = $inrno;
+                                        if($getPreviousvendorBomnumber['po_number']){
+                                            $getPreviousvendorbomPONumber_number = substr($getPreviousvendorBomnumber['po_number'], -1);
+                                            $getPreviousBomnumber_number = substr($getPreviousBomnumber['po_number'], -1);
+                                            if($getPreviousvendorbomPONumber_number > $getPreviousBomnumber_number){
+
+                                                if($getPreviousvendorbomPONumber_number){
+                                                    $arr = str_split($getPreviousvendorbomPONumber_number);
+                                                    $i = end($arr);
+                                                    $inrno= "SQPO2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                                    $po_number = $inrno;
+                                                }else{
+                                                    $po_number = 'SQPO23240001';
+                                                }     
+                                            }else{
+                                                if($getPreviousBomnumber_number){
+                                                    $arr = str_split($getPreviousBomnumber_number);
+                                                    $i = end($arr);
+                                                    $inrno= "SQPO2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                                    $po_number = $inrno;
+                                                }else{
+                                                    $po_number = 'SQPO23240001';
+                                                }  
+                                            }
+
                                         }else{
-                                            $po_number = 'SQBM23240001';
+
+                                            if($getPreviousBomnumber['bom_number']){
+                                                $arr = str_split($getPreviousBomnumber['bom_number']);
+                                                $i = end($arr);
+                                                $inrno= "SQBM2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                                $po_number = $inrno;
+                                            }else{
+                                                $po_number = 'SQBM23240001';
+                                            }
                                         }
                                     ?>
                                     
@@ -44,13 +70,11 @@
                                         </div>
                                     </div>
 
-
                                     <?php if($fetchALLpresupplieritemList[0]['pre_date']){
                                         $date= $fetchALLpresupplieritemList[0]['pre_date'];
                                      }else{
                                         $date= date('Y-m-d');
                                      } ?>
-
 
                                     <div class="col-md-12">
                                         <div class="form-group">
@@ -59,7 +83,6 @@
                                             <p class="error date_error"></p>
                                         </div>
                                     </div>
-
 
                                     <div class="col-md-12">
                                         <div class="form-group">
@@ -85,6 +108,30 @@
                                     </div>
 
 
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                                <label for="supplier_name">Supplier Name</label>
+                                                <input type="text" class="form-control" id="supplier_name"  name="supplier_name" readonly>
+                                            <p class="error supplier_name_error"></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                                <label for="supplier_po_number">Supplier PO Number</label>
+                                                <input type="text" class="form-control" id="supplier_po_number"  name="supplier_po_number" readonly>
+                                            <p class="error supplier_po_number_error"></p>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                                <label for="supplier_po_date">Supplier PO Date</label>
+                                                <input type="text" class="form-control" id="supplier_po_date" name="supplier_po_date" readonly>
+                                            <p class="error supplier_po_date_error"></p>
+                                        </div>
+                                    </div>
                                     
                                   <div class="col-md-12">
                                         <div class="form-group">
@@ -99,7 +146,6 @@
                                         </div>
                                     </div>
 
-
                                     <div class="col-md-12">
                                         <div class="form-group">
                                                 <label for="buyer_po_number">Select Buyer PO <span class="required">*</span></label>
@@ -110,7 +156,6 @@
                                         </div>
                                     </div>
 
-
                                     <div class="col-md-12">
                                         <div class="form-group">
                                                 <label for="buyer_po_date">Buyer PO Date<span class="required">*</span></label>
@@ -118,7 +163,6 @@
                                             <p class="error buyer_po_date_error"></p>
                                         </div>
                                     </div>
-
 
                                     <div class="col-md-12">
                                         <div class="form-group">
@@ -128,32 +172,6 @@
                                         </div>
                                     </div>
 
-
-
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                                <label for="supplier_name">Supplier Name<span class="required">*</span></label>
-                                                <input type="text" class="form-control" id="supplier_name" value=""  name="supplier_name" required readonly>
-                                            <p class="error supplier_name_error"></p>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                                <label for="supplier_po_number">Supplier PO Number<span class="required">*</span></label>
-                                                <input type="text" class="form-control" id="supplier_po_number" value=""  name="supplier_po_number" required readonly>
-                                            <p class="error supplier_po_number_error"></p>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                                <label for="supplier_po_date">Supplier PO Date<span class="required">*</span></label>
-                                                <input type="text" class="form-control" id="supplier_po_date" value=""  name="supplier_po_date" required readonly>
-                                            <p class="error supplier_po_date_error"></p>
-                                        </div>
-                                    </div>
 
                                     <div class="col-md-12">
                                         <div class="form-group">
