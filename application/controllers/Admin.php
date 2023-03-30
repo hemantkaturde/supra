@@ -3702,7 +3702,7 @@ class Admin extends BaseController
             $this->form_validation->set_rules('date','Date','trim|required');
             $this->form_validation->set_rules('vendor_name','Vendor Name','trim|required');
             $this->form_validation->set_rules('vendor_po_number','Vendor PO  Number','trim|required');
-            $this->form_validation->set_rules('raw_material_supplier_name','Raw Material Supplier Name','trim');
+            $this->form_validation->set_rules('raw_material_supplier_name','Raw Material Supplier Name','trim|required');
             $this->form_validation->set_rules('remark','Remark','trim');
 
             if($this->form_validation->run() == FALSE)
@@ -3745,7 +3745,6 @@ class Admin extends BaseController
             $this->logrecord($process,$processFunction);
             $this->global['pageTitle'] = 'Add Job Work';
             $data['getPreviousjobworkponumber']= $this->admin_model->getPreviousjobworkponumber()[0];
-
             $data['fetchALLprejobworkitemList']= $this->admin_model->fetchALLprejobworkitemList();
             $data['vendorList']= $this->admin_model->fetchALLvendorList();
             $this->loadViews("masters/addjobwork", $this->global, $data, NULL);
@@ -3778,7 +3777,7 @@ class Admin extends BaseController
     public function getSuppliergoodsPartnumberByidjobwork(){
 
         if($this->input->post('part_number')) {
-            $getPartNameBypartid = $this->admin_model->getSuppliergoodsPartnumberByidjobwork($this->input->post('part_number'),$this->input->post('vendor_po_number'));
+            $getPartNameBypartid = $this->admin_model->getSuppliergoodsPartnumberByidjobwork($this->input->post('part_number'),$this->input->post('vendor_po_number'),$this->input->post('raw_material_supplier_name'));
             if($getPartNameBypartid){
                 $content = $getPartNameBypartid[0];
                 echo json_encode($content);

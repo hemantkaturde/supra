@@ -119,7 +119,7 @@
 
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="raw_material_supplier_name">Raw Material Supplier Name</label>
+                                            <label for="raw_material_supplier_name">Raw Material Supplier Name <span class="required">*</span></label>
                                                     <select class="form-control " name="raw_material_supplier_name" id="raw_material_supplier_name" readonly>
                                                         <option st-id="" value="<?=$fetchALLprejobworkitemList[0]['pre_raw_material_supplier_name']?>"><?=$selected_value?></option>
                                                     </select>

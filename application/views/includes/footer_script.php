@@ -4328,12 +4328,15 @@
 		    var vendor_po_number = $('#vendor_po_number').val();
 			var vendor_name = $('#vendor_name').val();
 
+
+			var raw_material_supplier_name = $('#raw_material_supplier_name').val();
+
 			if(vendor_name){
 				if(vendor_po_number){
 						$.ajax({
 							url : "<?php echo ADMIN_PATH;?>getSuppliergoodsPartnumberByidjobwork",
 							type: "POST",
-							data : {'part_number' : part_number,'vendor_po_number':vendor_po_number},
+							data : {'part_number' : part_number,'vendor_po_number':vendor_po_number,'raw_material_supplier_name':raw_material_supplier_name},
 							success: function(data, textStatus, jqXHR)
 							{
 								$(".loader_ajax").hide();
@@ -4357,7 +4360,7 @@
 									$('#raw_material_size').val(data_row_material.sitting_size);
 									$('#vendor_order_qty').val(data_row_material.order_oty);
 									$('#unit').val(data_row_material.unit);
-									$('#rm_rate').val(data_row_material.rate);
+									$('#rm_rate').val(data_row_material.supplierrate);
 									
 								}
 							},
