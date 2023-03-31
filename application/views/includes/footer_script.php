@@ -4694,6 +4694,48 @@
 			return false;
 		});
 
+
+		$(document).on('change','#vendor_po_number',function(e){  
+			e.preventDefault();
+			
+						//$(".loader_ajax").show();
+						var vendor_po_number = $('#vendor_po_number').val();
+	
+						$.ajax({
+							url : "<?php echo ADMIN_PATH;?>getSupplierdetailsbyvendorponumber",
+							type: "POST",
+							data : {'vendor_po_number' : vendor_po_number},
+							success: function(data, textStatus, jqXHR)
+							{
+								$(".loader_ajax").hide();
+								if(data == "failure")
+								{
+									$('#supplier_name').val('');
+									$('#supplier_po_number').val('');
+									$('#supplier_po_date').val('');
+								}
+								else
+								{
+									var data_row = jQuery.parseJSON( data );
+
+									$('#supplier_name').val(data_row.supplier);
+									$('#supplier_po_number').val(data_row.supplierpo);	
+									$('#supplier_po_date').val(data_row.supplierdate);								
+								}
+							},
+							error: function (jqXHR, textStatus, errorThrown)
+							{
+								   
+									$('#supplier_name').val('');
+									$('#supplier_po_number').val('');
+									$('#supplier_po_date').val('');						
+							}
+						});
+						return false;
+
+		});
+
+
 		$(document).on('click','#savenewBillofmaterail',function(e){
 			e.preventDefault();
 			$(".loader_ajax").show();

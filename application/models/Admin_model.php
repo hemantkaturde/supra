@@ -2059,6 +2059,8 @@ class Admin_model extends CI_Model
         $this->db->select('*');
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_VENDOR_PO_MASTER.'.buyer_name');
         $this->db->where(TBL_VENDOR_PO_MASTER.'.vendor_name', $supplier_name);
+        $this->db->where(TBL_VENDOR_PO_MASTER.'.supplier_name !=',"");
+        $this->db->where(TBL_VENDOR_PO_MASTER.'.supplier_po_number !=',"");
         $query = $this->db->get(TBL_VENDOR_PO_MASTER);
         $data = $query->result_array();
         return $data;
@@ -2845,6 +2847,20 @@ class Admin_model extends CI_Model
         return $query_result;
 
     }
+
+
+    public function getSupplierdetailsbyvendorponumber($vendor_po_number){
+        
+        $this->db->select(TBL_SUPPLIER.'.supplier_name as supplier,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplierpo,'.TBL_SUPPLIER_PO_MASTER.'.date as supplierdate');
+        $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id= '.TBL_VENDOR_PO_MASTER.'.supplier_po_number');
+        $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id= '.TBL_SUPPLIER_PO_MASTER.'.supplier_name');
+        $this->db->where(TBL_VENDOR_PO_MASTER.'.status',1);
+        $this->db->where(TBL_VENDOR_PO_MASTER.'.id',$vendor_po_number);
+        $query = $this->db->get(TBL_VENDOR_PO_MASTER);
+        $data = $query->result_array();
+        return $data;
+    }
+
 
 
 }

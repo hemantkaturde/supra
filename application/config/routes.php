@@ -184,6 +184,9 @@ $route['deleteVendorbillofmaterialpoitem'] = "admin/deleteVendorbillofmaterialpo
 $route['viewVendorbillofmaterial/(:any)'] = "admin/viewVendorbillofmaterial/$1";
 
 $route['getVendorDetailsBybuyerPOnumber'] = "admin/getVendorDetailsBybuyerPOnumber";
+$route['getSupplierdetailsbyvendorponumber'] = "admin/getSupplierdetailsbyvendorponumber";
+
+
 
 
 
