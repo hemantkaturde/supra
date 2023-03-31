@@ -100,7 +100,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                                 <label for="vendor_po_number">Select Vendor PO Number <span class="required">*</span></label>
-                                                    <select class="form-control vendor_po_number_itam" name="vendor_po_number" id="vendor_po_number">
+                                                    <select class="form-control vendor_po_number_itam_mapping" name="vendor_po_number" id="vendor_po_number">
                                                         <option st-id="" value="">Select Vendor Name</option>
                                                     </select>
                                             <p class="error vendor_po_number_error"></p>
