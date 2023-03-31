@@ -4735,7 +4735,6 @@
 
 		});
 
-
 		$(document).on('click','#savenewBillofmaterail',function(e){
 			e.preventDefault();
 			$(".loader_ajax").show();
@@ -4943,8 +4942,6 @@
 		// 	});
 		// 	return false;
 		// });
-
-
 		
 		$(document).on('change','.vendor_po_number_itam_mapping',function(e){  
 			e.preventDefault();
@@ -4976,6 +4973,160 @@
 				}
 			});
 			return false;
+		});
+
+
+
+	$(document).on('change','#part_number',function(e){  
+			e.preventDefault();
+		
+			//$(".loader_ajax").show();
+			var part_number = $('#part_number').val();
+		    var vendor_po_number = $('#vendor_po_number').val();
+			var vendor_name = $('#vendor_name').val();
+
+			if(vendor_name){
+				if(vendor_po_number){
+						$.ajax({
+							url : "<?php echo ADMIN_PATH;?>getItemdetailsdependonvendorpobom",
+							type: "POST",
+							data : {'part_number' : part_number,'vendor_po_number':vendor_po_number,'vendor_name':vendor_name},
+							success: function(data, textStatus, jqXHR)
+							{
+								$(".loader_ajax").hide();
+								if(data == "failure")
+								{
+									$('#description').val('');
+									$('#rm_order_qty').val('');
+									$('#rm_type').val('');
+									$('#slitting_size').val('');
+									$('#diameter').val('');
+									$('#thickness').val('');
+									$('#hex_af').val('');
+									$('#gross_weight').val('');
+									$('#net_weight_per_pcs').val('');
+
+								}
+								else
+								{
+									var data_row_material = jQuery.parseJSON( data );
+									$('#description').val(data_row_material.name);
+									$('#rm_order_qty').val(data_row_material.order_oty);
+									$('#rm_type').val(data_row_material.type_of_raw_material);
+									$('#slitting_size').val(data_row_material.sitting_size);
+									$('#diameter').val(data_row_material.diameter);
+									$('#thickness').val(data_row_material.thickness);
+									$('#hex_af').val(data_row_material.hex_a_f);
+									$('#gross_weight').val(data_row_material.gross_weight);
+									$('#net_weight_per_pcs').val(data_row_material.net_weight);
+
+
+							
+								}
+							},
+							error: function (jqXHR, textStatus, errorThrown)
+							{
+								    $('#description').val('');
+									$('#rm_order_qty').val('');
+									$('#rm_type').val('');
+									$('#slitting_size').val('');
+									$('#diameter').val('');
+									$('#thickness').val('');
+									$('#hex_af').val('');
+									$('#gross_weight').val('');
+									$('#net_weight_per_pcs').val('');
+
+							}
+						});
+						return false;
+
+				}else{
+					$('.part_number_error').html('Please Select Vendor PO Number');
+				}
+
+			}else{
+
+				$('.part_number_error').html('Please Select Vendor PO');
+			}
+			
+		});
+
+
+		$(document).on('change', '#rm_actual_aty', function(){	
+
+				$("#expected_qty").val();
+				if($("#rm_actual_aty").val()){
+					 var rm_actual_aty = $("#rm_actual_aty").val();
+				 }else{
+					 var rm_actual_aty = 0;
+				 }
+				 if($("#gross_weight").val()){
+					 var gross_weight = $("#gross_weight").val();
+				 }else{
+					 var gross_weight = 0;
+				 }
+				 
+				 var total_value = parseFloat(rm_actual_aty) /  parseFloat(gross_weight);
+				 $("#expected_qty").val( Math.round(total_value));
+	
+		});
+
+
+		$(document).on('change', '#vendor_actual_received_Qty', function(){	
+
+				$("#total_net_weight").val();
+				$("#short_access").val();
+
+
+				if($("#vendor_actual_received_Qty").val()){
+					var vendor_actual_received_Qty = $("#vendor_actual_received_Qty").val();
+				}else{
+					var vendor_actual_received_Qty = 0;
+				}
+				if($("#net_weight_per_pcs").val()){
+					var net_weight_per_pcs = $("#net_weight_per_pcs").val();
+				}else{
+					var net_weight_per_pcs = 0;
+				}
+
+
+				
+				var total_value = parseFloat(vendor_actual_received_Qty) *  parseFloat(net_weight_per_pcs);
+				$("#total_net_weight").val( Math.round(total_value));
+
+
+				if($("#expected_qty").val()){
+					var expected_qty = $("#expected_qty").val();
+				}else{
+					var expected_qty = 0;
+				}
+
+	
+				var total_short_access_value = parseFloat(expected_qty) -  parseFloat(vendor_actual_received_Qty);
+
+				$("#short_access").val( Math.round(total_short_access_value));
+
+
+
+				if($("#total_net_weight").val()){
+					var total_net_weight = $("#total_net_weight").val();
+				}else{
+					var total_net_weight = 0;
+				}
+
+				if($("#rm_actual_aty").val()){
+					 var rm_actual_aty = $("#rm_actual_aty").val();
+				 }else{
+					 var rm_actual_aty = 0;
+				 }
+
+
+
+				var total_sscrap_value = parseFloat(rm_actual_aty) -  parseFloat(total_net_weight);
+
+				$("#scrap").val( Math.round(total_sscrap_value));
+
+
 		});
 
 

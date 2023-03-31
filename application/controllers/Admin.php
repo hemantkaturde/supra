@@ -4324,4 +4324,25 @@ class Admin extends BaseController
     }
 
 
+    public function getItemdetailsdependonvendorpobom(){
+
+        if($this->input->post('part_number')) {
+            $getPartNameBypartid = $this->admin_model->getItemdetailsdependonvendorpobom($this->input->post('part_number'),$this->input->post('vendor_po_number'),$this->input->post('vendor_name'));
+        
+            if($getPartNameBypartid){
+                $content = $getPartNameBypartid[0];
+                echo json_encode($content);
+
+            }else{
+                echo 'failure';
+            }
+           
+        } else {
+            echo 'failure';
+        }
+
+    }
+
+
+
 }

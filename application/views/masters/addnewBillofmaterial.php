@@ -315,7 +315,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">RM Type <span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="text" class="form-control"  id="rm_type" name="rm_type">
+                                                            <input type="text" class="form-control"  id="rm_type" name="rm_type" readonly>
                                                             <p class="error rm_type_error"></p>
                                                         </div>
                                                     </div>
@@ -324,7 +324,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Slitting Size<span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="text" class="form-control"  id="slitting_size" name="slitting_size">
+                                                            <input type="text" class="form-control"  id="slitting_size" name="slitting_size" readonly>
                                                             <p class="error slitting_size_error"></p>
                                                         </div>
                                                     </div>
@@ -332,7 +332,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Diameter<span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="text" class="form-control"  id="diameter" name="diameter">
+                                                            <input type="text" class="form-control"  id="diameter" name="diameter" readonly>
                                                             <p class="error diameter_error"></p>
                                                         </div>
                                                     </div>
@@ -340,7 +340,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Thickness<span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="text" class="form-control"  id="thickness" name="thickness">
+                                                            <input type="text" class="form-control"  id="thickness" name="thickness" readonly>
                                                             <p class="error thickness_error"></p>
                                                         </div>
                                                     </div>
@@ -348,7 +348,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Hex A/F <span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="text" class="form-control"  id="hex_af" name="hex_af">
+                                                            <input type="text" class="form-control"  id="hex_af" name="hex_af" readonly>
                                                             <p class="error hex_af_error"></p>
                                                         </div>
                                                     </div>
@@ -356,7 +356,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Gross Weight<span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="text" class="form-control"  id="gross_weight" name="gross_weight">
+                                                            <input type="text" class="form-control"  id="gross_weight" name="gross_weight" readonly>
                                                             <p class="error gross_weight_error"></p>
                                                         </div>
                                                     </div>
@@ -364,7 +364,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Expected Qty<span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="text" class="form-control"  id="expected_qty" name="expected_qty">
+                                                            <input type="text" class="form-control"  id="expected_qty" name="expected_qty" readonly>
                                                             <p class="error expected_qty_error"></p>
                                                         </div>
                                                     </div>
@@ -382,7 +382,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Net Weight Per Pcs<span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="text" class="form-control"  id="net_weight_per_pcs" name="net_weight_per_pcs">
+                                                            <input type="text" class="form-control"  id="net_weight_per_pcs" name="net_weight_per_pcs" readonly>
                                                             <p class="error net_weight_per_pcs_error"></p>
                                                         </div>
                                                     </div>
@@ -391,7 +391,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Total Net Weight<span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="text" class="form-control"  id="total_net_weight" name="total_net_weight">
+                                                            <input type="text" class="form-control"  id="total_net_weight" name="total_net_weight" readonly>
                                                             <p class="error total_net_weight_error"></p>
                                                         </div>
                                                     </div>
@@ -400,7 +400,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Short Sccess<span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="text" class="form-control"  id="short_access" name="short_access">
+                                                            <input type="text" class="form-control"  id="short_access" name="short_access" readonly>
                                                             <p class="error short_access_error"></p>
                                                         </div>
                                                     </div>
@@ -408,8 +408,17 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Scrap<span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="text" class="form-control"  id="scrap" name="scrap">
+                                                            <input type="text" class="form-control"  id="scrap" name="scrap" readonly>
                                                             <p class="error scrap_error"></p>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-4 col-form-label">Actual Scrap Received<span class="required">*</span></label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" class="form-control"  id="actual_scrap_recived" name="actual_scrap_recived">
+                                                            <p class="error actual_scrap_recived_error"></p>
                                                         </div>
                                                     </div>
 
