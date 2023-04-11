@@ -55,7 +55,6 @@
 
 
                                 <div class="col-md-8">
-
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="part_number">Select Part Number<span class="required">*</span></label>
@@ -78,7 +77,13 @@
 
                                         <div class="form-group">
                                             <label for="buyer_invoice_date">Buyer Invoice Date <span class="required">*</span></label>
-                                            <input type="text" class="form-control" id="buyer_invoice_date" name="buyer_invoice_date" required>
+                                            <input type="text" class="form-control datepicker" id="buyer_invoice_date" name="buyer_invoice_date" required>
+                                            <p class="error buyer_invoice_date_error"></p>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="buyer_invoice_date">Buyer Invoice Qty <span class="required">*</span></label>
+                                            <input type="text" class="form-control datepicker" id="buyer_invoice_qty" name="buyer_invoice_qty" required>
                                             <p class="error buyer_invoice_date_error"></p>
                                         </div>
 
@@ -87,6 +92,12 @@
                                             <input type="text" class="form-control" id="box_qty" name="box_qty" required>
                                             <p class="error box_qty"></p>
                                         </div>
+
+                                        <div class="form-group">
+                                            <label for="fax">Remark</label>
+                                               <textarea type="text" class="form-control"  id="remark"  name="remark"> </textarea><p class="error fax_error"></p>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>  
