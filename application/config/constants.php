@@ -139,5 +139,8 @@ define('TBL_BILL_OF_MATERIAL_VENDOR_ITEM','tbl_vendor_bill_of_materail_item');
 define('TBL_INCOMING_DETAILS','tbl_incoming_details');
 
 
+define('TBL_PACKING_INSTRACTION','tbl_packing_instrauction');
+
+
 
 

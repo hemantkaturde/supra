@@ -190,9 +190,18 @@ $route['getItemdetailsdependonvendorpobom'] = "admin/getItemdetailsdependonvendo
 
 $route['packinginstaruction'] = "admin/packinginstaruction";
 $route['addnewpackinginstruction'] = "admin/addnewpackinginstruction";
+$route['fetchpackinginstartion'] = "admin/fetchpackinginstartion";
+$route['addnewPackinginstruction'] = "admin/addnewPackinginstruction";
+$route['deletepackinginstraction'] = "admin/deletepackinginstraction";
+$route['addpackinginstractiondetails/(:any)'] = "admin/addpackinginstractiondetails/$1";
+$route['editpackinginstraction/(:any)'] = "admin/editpackinginstraction/$1";
+
+$route['updatepackinginstraction'] = "admin/updatepackinginstraction";
 
 
 
+
+$route['getBuyerpoitemonly'] = "admin/getBuyerpoitemonly";
 $route['exportdetails'] = "admin/exportdetails";
 $route['challanform'] = "admin/challanform";
 $route['packagingform'] = "admin/packagingform";

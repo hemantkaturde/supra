@@ -4975,80 +4975,78 @@
 			return false;
 		});
 
+		$(document).on('change','#part_number',function(e){  
+				e.preventDefault();
+			
+				//$(".loader_ajax").show();
+				var part_number = $('#part_number').val();
+				var vendor_po_number = $('#vendor_po_number').val();
+				var vendor_name = $('#vendor_name').val();
 
-
-	$(document).on('change','#part_number',function(e){  
-			e.preventDefault();
-		
-			//$(".loader_ajax").show();
-			var part_number = $('#part_number').val();
-		    var vendor_po_number = $('#vendor_po_number').val();
-			var vendor_name = $('#vendor_name').val();
-
-			if(vendor_name){
-				if(vendor_po_number){
-						$.ajax({
-							url : "<?php echo ADMIN_PATH;?>getItemdetailsdependonvendorpobom",
-							type: "POST",
-							data : {'part_number' : part_number,'vendor_po_number':vendor_po_number,'vendor_name':vendor_name},
-							success: function(data, textStatus, jqXHR)
-							{
-								$(".loader_ajax").hide();
-								if(data == "failure")
+				if(vendor_name){
+					if(vendor_po_number){
+							$.ajax({
+								url : "<?php echo ADMIN_PATH;?>getItemdetailsdependonvendorpobom",
+								type: "POST",
+								data : {'part_number' : part_number,'vendor_po_number':vendor_po_number,'vendor_name':vendor_name},
+								success: function(data, textStatus, jqXHR)
 								{
-									$('#description').val('');
-									$('#rm_order_qty').val('');
-									$('#rm_type').val('');
-									$('#slitting_size').val('');
-									$('#diameter').val('');
-									$('#thickness').val('');
-									$('#hex_af').val('');
-									$('#gross_weight').val('');
-									$('#net_weight_per_pcs').val('');
+									$(".loader_ajax").hide();
+									if(data == "failure")
+									{
+										$('#description').val('');
+										$('#rm_order_qty').val('');
+										$('#rm_type').val('');
+										$('#slitting_size').val('');
+										$('#diameter').val('');
+										$('#thickness').val('');
+										$('#hex_af').val('');
+										$('#gross_weight').val('');
+										$('#net_weight_per_pcs').val('');
+
+									}
+									else
+									{
+										var data_row_material = jQuery.parseJSON( data );
+										$('#description').val(data_row_material.name);
+										$('#rm_order_qty').val(data_row_material.order_oty);
+										$('#rm_type').val(data_row_material.type_of_raw_material);
+										$('#slitting_size').val(data_row_material.sitting_size);
+										$('#diameter').val(data_row_material.diameter);
+										$('#thickness').val(data_row_material.thickness);
+										$('#hex_af').val(data_row_material.hex_a_f);
+										$('#gross_weight').val(data_row_material.gross_weight);
+										$('#net_weight_per_pcs').val(data_row_material.net_weight);
+
+
+								
+									}
+								},
+								error: function (jqXHR, textStatus, errorThrown)
+								{
+										$('#description').val('');
+										$('#rm_order_qty').val('');
+										$('#rm_type').val('');
+										$('#slitting_size').val('');
+										$('#diameter').val('');
+										$('#thickness').val('');
+										$('#hex_af').val('');
+										$('#gross_weight').val('');
+										$('#net_weight_per_pcs').val('');
 
 								}
-								else
-								{
-									var data_row_material = jQuery.parseJSON( data );
-									$('#description').val(data_row_material.name);
-									$('#rm_order_qty').val(data_row_material.order_oty);
-									$('#rm_type').val(data_row_material.type_of_raw_material);
-									$('#slitting_size').val(data_row_material.sitting_size);
-									$('#diameter').val(data_row_material.diameter);
-									$('#thickness').val(data_row_material.thickness);
-									$('#hex_af').val(data_row_material.hex_a_f);
-									$('#gross_weight').val(data_row_material.gross_weight);
-									$('#net_weight_per_pcs').val(data_row_material.net_weight);
+							});
+							return false;
 
-
-							
-								}
-							},
-							error: function (jqXHR, textStatus, errorThrown)
-							{
-								    $('#description').val('');
-									$('#rm_order_qty').val('');
-									$('#rm_type').val('');
-									$('#slitting_size').val('');
-									$('#diameter').val('');
-									$('#thickness').val('');
-									$('#hex_af').val('');
-									$('#gross_weight').val('');
-									$('#net_weight_per_pcs').val('');
-
-							}
-						});
-						return false;
+					}else{
+						$('.part_number_error').html('Please Select Vendor PO Number');
+					}
 
 				}else{
-					$('.part_number_error').html('Please Select Vendor PO Number');
+
+					$('.part_number_error').html('Please Select Vendor PO');
 				}
-
-			}else{
-
-				$('.part_number_error').html('Please Select Vendor PO');
-			}
-			
+				
 		});
 
 
@@ -5695,7 +5693,6 @@
 	        });
 	    });
 
-
 		$(document).on('change','#vendor_name',function(e){  
 			e.preventDefault();
 			//$(".loader_ajax").show();
@@ -5728,7 +5725,6 @@
 			});
 			return false;
 		});
-
 
 		$(document).on('click','#saveincomingdetails',function(e){
 			e.preventDefault();
@@ -5772,8 +5768,6 @@
 			});
 			return false;
 	    });
-
-
 
 		
 		$(document).on('click','.deleteIncomingDetails',function(e){
@@ -5825,5 +5819,335 @@
 		});
 
 
+		$(document).on('change','.vendor_po_number_itam_mapping',function(e){  
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			var vendor_po_number = $('#vendor_po_number').val();
+
+			$("#part_number").html('');
+		
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getVendoritemsonlyvendorBillofmaterial",
+				type: "POST",
+				data : {'vendor_po_number' : vendor_po_number},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#part_number').html('<option value="">Select Part Number</option>');
+					}
+					else
+					{
+						$('#part_number').html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#part_number').html();
+				}
+			});
+			return false;
+		});
+
+
+		$(document).on('change','#part_number',function(e){  
+			e.preventDefault();
+			
+			//$(".loader_ajax").show();
+			var part_number = $('#part_number').val();
+		    var vendor_po_number = $('#vendor_po_number').val();
+			var vendor_name = $('#vendor_name').val();
+
+			if(vendor_name){
+				if(vendor_po_number){
+						$.ajax({
+							url : "<?php echo ADMIN_PATH;?>getSuppliergoodsPartnumberByidforvendorbillofmaetrial",
+							type: "POST",
+							data : {'part_number' : part_number,'vendor_po_number':vendor_po_number},
+							success: function(data, textStatus, jqXHR)
+							{
+								$(".loader_ajax").hide();
+								if(data == "failure")
+								{
+									$('#description').val('');
+									$('#vendor_order_qty').val('');
+								
+								}
+								else
+								{
+									var data_row_material = jQuery.parseJSON( data );
+									$('#description').val(data_row_material.name);
+									$('#vendor_order_qty').val(data_row_material.vendor_qty);
+								
+								}
+							},
+							error: function (jqXHR, textStatus, errorThrown)
+							{
+								    $('#description').val('');
+									$('#vendor_order_qty').val('');					
+								    //$(".loader_ajax").hide();
+							}
+						});
+						return false;
+
+				}else{
+					$('.part_number_error').html('Please Select Vendor PO Number');
+				}
+
+			}else{
+
+				$('.part_number_error').html('Please Select Vendor PO');
+			}
+			
+		});
+
    </script>
+<?php } ?>
+
+
+
+<?php if($pageTitle=='Add New Packing Instaruction' || $pageTitle=='Packing Instaruction'  || $pageTitle=='Add Packing Instraction Details' || $pageTitle=='Edit Packing Instraction Details' ){ ?>
+	<script type="text/javascript">
+        $(document).ready(function() {
+            var dt = $('#view_Packing_Instarction').DataTable({
+	            "columnDefs": [ 
+	                 { className: "details-control", "targets": [ 0 ] },
+	                 { "width": "15%", "targets": 0 },
+	                 { "width": "15%", "targets": 1 },
+					 { "width": "15%", "targets": 2 },
+	                 { "width": "15%", "targets": 3 },
+					 { "width": "10%", "targets": 4 },
+	            ],
+	            responsive: true,
+	            "oLanguage": {
+	                "sEmptyTable": "<i>No Packing Instartion Found.</i>",
+	            }, 
+	            "bSort" : false,
+	            "bFilter":true,
+	            "bLengthChange": true,
+	            "iDisplayLength": 10,   
+	            "bProcessing": true,
+	            "serverSide": true,
+	            "ajax":{
+                    url :"<?php echo base_url();?>fetchpackinginstartion",
+                    type: "post",
+	            },
+	        });
+	    });
+
+		$(document).on('change','#buyer_name',function(e){  
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			$("#customers-list").html('');
+			var buyer_name = $('#buyer_name').val();
+		    $('.buyer_po_number_div').css('display','block');
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getBuyerPonumberbyBuyerid",
+				type: "POST",
+				data : {'buyer_name' : buyer_name},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#buyer_po_number').html('<option value="">Select Buyer PO Number</option>');
+					}
+					else
+					{
+						// $('#buyer_po_number').html('<option value="">Select Buyer PO Number</option>');
+						$('#buyer_po_number').html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#buyer_po_number').html();
+					//$(".loader_ajax").hide();
+				}
+			});
+			return false;
+		});
+
+		$(document).on('change','#buyer_po_number',function(e){  
+			e.preventDefault();
+			
+			//$(".loader_ajax").show();
+			         var buyer_po_number = $('#buyer_po_number').val();
+		
+		
+						$.ajax({
+							url : "<?php echo ADMIN_PATH;?>getbuyerdetialsbybuyerponumber",
+							type: "POST",
+							data : {'buyer_po_number' : buyer_po_number},
+							success: function(data, textStatus, jqXHR)
+							{
+								$(".loader_ajax").hide();
+								if(data == "failure")
+								{
+									$('#buyer_po_date').val('');
+									$('#buyer_delivery_date').val('');
+								}
+								else
+								{
+									var data_row_material = jQuery.parseJSON( data );
+									$('#buyer_po_date').val(data_row_material.buyer_po_date);
+							}
+							},
+							error: function (jqXHR, textStatus, errorThrown)
+							{
+								    $('#buyer_po_date').val('');
+								    //$(".loader_ajax").hide();
+							}
+						});
+						return false;
+
+	
+		
+		});
+
+
+		$(document).on('click','#savepackinginstarction',function(e){
+			e.preventDefault();
+			$(".loader_ajax").show();
+			var formData = new FormData($("#addnewpackinginstructionform")[0]);
+			$.ajax({
+				url : "<?php echo base_url();?>addnewPackinginstruction",
+				type: "POST",
+				data : formData,
+				cache: false,
+		        contentType: false,
+		        processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+						$(".loader_ajax").hide();
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						swal({
+							title: "Success",
+							text: "Packing Instructions Successfully Added!",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+								window.location.href = "<?php echo base_url().'packinginstaruction'?>";
+						});		
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			});
+			return false;
+	    });
+
+		
+		$(document).on('click','.deletepackinginstraction',function(e){
+			var elemF = $(this);
+			e.preventDefault();
+			swal({
+				title: "Are you sure?",
+				text: "Packing Instraction Succesfully Deleted",
+				type: "warning",
+				showCancelButton: true,
+				closeOnClickOutside: false,
+				confirmButtonClass: "btn-sm btn-danger",
+				confirmButtonText: "Yes, delete it!",
+				cancelButtonText: "No, cancel plz!",
+				closeOnConfirm: false,
+				closeOnCancel: false
+			}, function(isConfirm) {
+				if (isConfirm) {
+							$.ajax({
+								url : "<?php echo base_url();?>deletepackinginstraction",
+								type: "POST",
+								data : 'id='+elemF.attr('data-id'),
+								success: function(data, textStatus, jqXHR)
+								{
+									const obj = JSON.parse(data);
+								
+									if(obj.status=='success'){
+										swal({
+											title: "Deleted!",
+											text: "Packing Instraction Succesfully Deleted",
+											icon: "success",
+											button: "Ok",
+											},function(){ 
+												window.location.href = "<?php echo base_url().'packinginstaruction'?>";
+										});	
+									}
+
+								},
+								error: function (jqXHR, textStatus, errorThrown)
+								{
+									$(".loader_ajax").hide();
+								}
+							})
+						}
+						else {
+				swal("Cancelled", "Packing Instraction deletion cancelled ", "error");
+				}
+			});
+		});
+
+
+
+		$(document).on('click','#editpackinginstarction',function(e){
+			e.preventDefault();
+			$(".loader_ajax").show();
+			var formData = new FormData($("#editnewpackinginstructionform")[0]);
+			$.ajax({
+				url : "<?php echo base_url();?>updatepackinginstraction",
+				type: "POST",
+				data : formData,
+				cache: false,
+		        contentType: false,
+		        processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+						$(".loader_ajax").hide();
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						swal({
+							title: "Success",
+							text: "Packing Instructions Successfully Updated!",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+								window.location.href = "<?php echo base_url().'packinginstaruction'?>";
+						});		
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			});
+			return false;
+	    });
+		
+
+
+    
+
+		</script>
 <?php } ?>

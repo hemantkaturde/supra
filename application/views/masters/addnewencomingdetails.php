@@ -172,7 +172,7 @@
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">P.O.Qty (in Pcs) <span class="required">*</span></label>
+                                                        <label class="col-sm-3 col-form-label">P.O.Qty</label>
                                                         <div class="col-sm-9">
                                                             <input type="number" class="form-control"  id="p_o_qty" name="p_o_qty">
                                                             <p class="error p_o_qty_error"></p>
@@ -180,7 +180,7 @@
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Net weight (in Kgs) <span class="required">*</span></label>
+                                                        <label class="col-sm-3 col-form-label">Net weight</label>
                                                         <div class="col-sm-9">
                                                             <input type="number" class="form-control"  id="net_weight" name="net_weight">
                                                             <p class="error net_weight_error"></p>
@@ -205,7 +205,7 @@
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Received Date <span class="required">*</span></label>
+                                                        <label class="col-sm-3 col-form-label">Received Date</label>
                                                         <div class="col-sm-9">
                                                             <input type="number" class="form-control"  id="received_date" name="received_date">
                                                             <p class="error received_date_error"></p>
@@ -213,7 +213,7 @@
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Invoice Qty (in Pcs) <span class="required">*</span></label>
+                                                        <label class="col-sm-3 col-form-label">Invoice Qty</label>
                                                         <div class="col-sm-9">
                                                             <input type="number" class="form-control"  id="invoice_qty" name="invoice_qty">
                                                             <p class="error invoice_qty_error"></p>
@@ -221,7 +221,7 @@
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Invoice Qty (in Kgs) <span class="required">*</span></label>
+                                                        <label class="col-sm-3 col-form-label">Invoice Qty</label>
                                                         <div class="col-sm-9">
                                                             <input type="number" class="form-control"  id="invoice_qty" name="invoice_qty">
                                                             <p class="error invoice_qty_error"></p>
@@ -229,7 +229,7 @@
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Balance Qty (in Pcs) <span class="required">*</span></label>
+                                                        <label class="col-sm-3 col-form-label">Balance Qty</label>
                                                         <div class="col-sm-9">
                                                             <input type="number" class="form-control"  id="balance_qty" name="balance_qty">
                                                             <p class="error balance_qty_error"></p>
@@ -238,7 +238,7 @@
 
                                                     
                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">FG Material Gross Weight <span class="required">*</span></label>
+                                                        <label class="col-sm-3 col-form-label">FG Material Gross Weight</label>
                                                         <div class="col-sm-9">
                                                             <input type="number" class="form-control"  id="fg_material_gross_weight" name="fg_material_gross_weight">
                                                             <p class="error fg_material_gross_weight_error"></p>

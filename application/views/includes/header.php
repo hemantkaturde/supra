@@ -179,7 +179,7 @@
                     </li>
 
                   
-                    <li class="treeview <?php if($pageUrl=="buyerpo" || $pageUrl=="addnewBuyerpo" || $pageUrl=="editBuyerpo" || $pageUrl=="supplierpo" || $pageUrl=="addnewSupplierpo" || $pageUrl=="editSupplierpo" || $pageUrl=="viewBuyerpo" || $pageUrl=="buyerpoconfirmation" || $pageUrl=="viewSupplierpo" || $pageUrl=="vendorpo" || $pageUrl=="addnewVendorpo" || $pageUrl=="viewVendorpo" || $pageUrl=="supplierpoconfirmation" || $pageUrl=="addSupplierpoconfirmation" || $pageUrl=="viewSupplierpoconfirmation" || $pageUrl=="vendorpoconfirmation" || $pageUrl=="addVendorpoconfirmation" || $pageUrl=="billofmaterial" || $pageUrl=="addnewBillofmaterial" || $pageUrl=="vendorbillofmaterial" || $pageUrl=="addvendorBillofmaterial" || $pageUrl=="viewVendorbillofmaterial" || $pageUrl=="packinginstaruction" || $pageUrl=="exportdetails" || $pageUrl=="challanform" || $pageUrl=="packagingform"  || $pageUrl=="rrchallan" || $pageUrl=="addnewpackinginstruction" || $pageUrl=="incomingdetails" || $pageUrl=="addnewencomingdetails"){echo 'active';}?>">
+                    <li class="treeview <?php if($pageUrl=="buyerpo" || $pageUrl=="addnewBuyerpo" || $pageUrl=="editBuyerpo" || $pageUrl=="supplierpo" || $pageUrl=="addnewSupplierpo" || $pageUrl=="editSupplierpo" || $pageUrl=="viewBuyerpo" || $pageUrl=="buyerpoconfirmation" || $pageUrl=="viewSupplierpo" || $pageUrl=="vendorpo" || $pageUrl=="addnewVendorpo" || $pageUrl=="viewVendorpo" || $pageUrl=="supplierpoconfirmation" || $pageUrl=="addSupplierpoconfirmation" || $pageUrl=="viewSupplierpoconfirmation" || $pageUrl=="vendorpoconfirmation" || $pageUrl=="addVendorpoconfirmation" || $pageUrl=="billofmaterial" || $pageUrl=="addnewBillofmaterial" || $pageUrl=="vendorbillofmaterial" || $pageUrl=="addvendorBillofmaterial" || $pageUrl=="viewVendorbillofmaterial" || $pageUrl=="packinginstaruction" || $pageUrl=="exportdetails" || $pageUrl=="challanform" || $pageUrl=="packagingform"  || $pageUrl=="rrchallan" || $pageUrl=="addnewpackinginstruction" || $pageUrl=="incomingdetails" || $pageUrl=="addnewencomingdetails" || $pageUrl=="addpackinginstractiondetails" ||  $pageUrl=="editpackinginstraction"){echo 'active';}?>">
                       <a href="#">
                         <i class="fa fa-laptop"></i> <span class="menu_label">Miscellaneous</span>
                           <span class="pull-right-container">
@@ -197,7 +197,11 @@
 
                         <li class="line_height <?php if($pageUrl=="billofmaterial" || $pageUrl=="addnewBillofmaterial"){echo 'active';}?>"><a href="<?php echo base_url(); ?>billofmaterial"><i class="fa fa-cubes"></i> Bill of Material</a></li>
                         <li class="line_height <?php if($pageUrl=="vendorbillofmaterial" || $pageUrl=="addvendorBillofmaterial" || $pageUrl=="viewVendorbillofmaterial"){echo 'active';}?>"><a href="<?php echo base_url(); ?>vendorbillofmaterial"><i class="fa fa-cubes"></i> Vendor Bill of Material</a></li>
-                        <li class="line_height" <?php if($pageUrl=="packinginstaruction" || $pageUrl=="addnewpackinginstruction"){echo 'active';}?>><a href="<?php echo base_url(); ?>packinginstaruction"><i class="fa fa-cubes"></i> Packing Instrauction</a></li>
+
+
+                        <li class="line_height <?php if($pageUrl=="packinginstaruction" || $pageUrl=="addnewpackinginstruction" || $pageUrl=="addpackinginstractiondetails" || $pageUrl=="editpackinginstraction"){echo 'active';}?>"><a href="<?php echo base_url(); ?>packinginstaruction"><i class="fa fa-cubes"></i> Packing Instrauction</a></li>
+
+                        
                         <li class="line_height" <?php if($pageUrl=="exportdetails"){echo 'active';}?>><a href="<?php echo base_url(); ?>exportdetails"><i class="fa fa-cubes"></i> Export Details</a></li>
                         <li class="line_height" <?php if($pageUrl=="challanform"){echo 'active';}?>><a href="<?php echo base_url(); ?>challanform"><i class="fa fa-cubes"></i> Challan Form</a></li>
                         <li class="line_height" <?php if($pageUrl=="packagingform"){echo 'active';}?>><a href="<?php echo base_url(); ?>packagingform"><i class="fa fa-cubes"></i> Packaging Form</a></li>

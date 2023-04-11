@@ -30,7 +30,6 @@
                                 <thead>
                                     <tr style="background-color:#3c8dbc !important;color:#fff">
                                         <th>Packing Number</th>
-                                        <th>F.G Part Number</th>
                                         <th>Buyer Name</th>
                                         <th>Buyer PO Number</th>
                                         <th>Buyer PO Date</th>

@@ -21,38 +21,57 @@
                             <h3 class="box-title">Add New Packing Instructions</h3>
                         </div>
                         <?php $this->load->helper("form"); ?>
-                        <form role="form" id="addnewpackinginstruction" action="<?php echo base_url() ?>addnewpackinginstructionform" method="post" role="form">
+                        <form role="form" id="addnewpackinginstructionform" action="<?php echo base_url() ?>addnewpackinginstructionform" method="post" role="form">
                             <div class="box-body">
                                 <div class="row">
+
+                                    <?php
+                                        if($getpreviouspackinginstarction[0]['packing_instrauction_id']){
+                                            $arr = str_split($getpreviouspackinginstarction[0]['packing_instrauction_id']);
+                                            $i = end($arr);
+                                            $inrno= "PI2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                            $packing_instrauction_id = $inrno;
+                                        }else{
+                                            $packing_instrauction_id = 'PI23240001';
+                                        }
+                                    ?>
+
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="packing_id_number">Packing Id Number <span class="required">*</span></label>
-                                            <input type="text" class="form-control" id="packing_id_number" name="packing_id_number" required>
+                                            <input type="text" class="form-control" id="packing_id_number" name="packing_id_number"  value="<?php echo $packing_instrauction_id; ?>" required readonly>
                                             <p class="error packing_id_number_error"></p>
                                         </div>
                                     </div>
                                     
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="buyer_name">Buyer Name <span class="required">*</span></label>
-                                            <input type="text" class="form-control" id="buyer_name" name="buyer_name" required>
+                                            <label for="buyer_name">Select Buyer PO Number <span class="required">*</span></label>
+                                                <select class="form-control buyer_po_number_for_itam_mapping" name="buyer_name" id="buyer_name">
+                                                    <option st-id="" value="">Select Buyer Name</option>
+                                                        <?php foreach ($buyerList as $key => $value) {?>
+                                                                <option value="<?php echo $value['buyer_id']; ?>"><?php echo $value['buyer_name']; ?></option>
+                                                        <?php } ?>
+                                                </select> 
                                             <p class="error buyer_name_error"></p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="buyer_po">Buyer PO <span class="required">*</span></label>
-                                                <input type="text" class="form-control" id="buyer_po" name="buyer_po" required>
-                                                <p class="error buyer_po_error"></p>
-                                            </div>
+                                       <div class="col-md-6">
+                                        <div class="form-group">
+                                                <label for="buyer_po_number">PO Confirmed<span class="required">*</span></label>
+                                                    <select class="form-control" name="buyer_po_number" id="buyer_po_number">
+                                                    </select>
+                                            <p class="error buyer_po_number_error"></p>
+                                        </div>
                                     </div>
+
 
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="buyer_po_date">Buyer PO Date <span class="required">*</span></label>
-                                            <input type="text" class="form-control" id="buyer_po_date" name="buyer_po_date" required>
+                                            <input type="text" class="form-control" id="buyer_po_date" name="buyer_po_date" required readonly>
                                             <p class="error buyer_po_date_error"></p>
                                         </div>
                                     </div>
@@ -61,52 +80,16 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="buyer_invoice_number">Buyer Invoice Number <span class="required">*</span></label>
-                                            <input type="text" class="form-control" id="buyer_invoice_number" name="buyer_invoice_number" required>
-                                            <p class="error buyer_invoice_number_error"></p>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="buyer_invoice_date">Buyer Invoice Date <span class="required">*</span></label>
-                                            <input type="text" class="form-control" id="buyer_invoice_date" id="buyer_invoice_date"  name="buyer_invoice_date">
-                                            <p class="error buyer_invoice_date_error"></p>
-                                        </div>
-                                    </div>
-                                </div>    
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="buyer_invoice_qty">Buyer Invoice Qty <span class="required">*</span></label>
-                                            <input type="text" class="form-control" id="buyer_invoice_qty" id="buyer_invoice_qty"  name="buyer_invoice_qty">
-                                            <p class="error buyer_invoice_qty_error"></p>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="box_qty">Box Qty</label>
-                                            <input type="text" class="form-control" id="box_qty" name="box_qty">
-                                            <p class="error box_qty_error"></p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
                                             <label for="fax">Remarks</label>
-                                               <textarea type="text" class="form-control"  id="remark"  name="remark" required> <?=$fetchALLpresupplieritemList[0]['pre_remark'];?></textarea>                                            <p class="error fax_error"></p>
+                                               <textarea type="text" class="form-control"  id="remark"  name="remark"> </textarea><p class="error fax_error"></p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <!-- /.box-body -->
                             <div class="box-footer">
-                                <input type="submit" id="savenewUSP" class="btn btn-primary" value="Submit" />
-                                <input type="button" onclick="location.href = '<?php echo base_url() ?>uspmaster'" class="btn btn-default" value="Back" />
+                                <input type="submit" id="savepackinginstarction" class="btn btn-primary" value="Submit" />
+                                <input type="button" onclick="location.href = '<?php echo base_url() ?>packinginstaruction'" class="btn btn-default" value="Back" />
                             </div>
                         </form>
                     </div>

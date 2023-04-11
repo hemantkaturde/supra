@@ -4344,6 +4344,32 @@ class Admin extends BaseController
     }
 
 
+    public function fetchpackinginstartion(){
+
+        $params = $_REQUEST;
+        $totalRecords = $this->admin_model->getPackinginstractionCount($params); 
+        $queryRecords = $this->admin_model->getPackinginstractiondata($params); 
+
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+        echo json_encode($json_data);
+
+    }
+
 
     public function packinginstaruction(){
 
@@ -4360,60 +4386,46 @@ class Admin extends BaseController
 
         $post_submit = $this->input->post();
         if($post_submit){
-            $save_Billofmaterial_response = array();
-            $this->form_validation->set_rules('bom_number','PO Number','trim|required');
-            $this->form_validation->set_rules('date','Date','trim|required');
-            $this->form_validation->set_rules('vendor_name','Vendor Name','trim|required');
-            $this->form_validation->set_rules('vendor_po_number','Vendor PO  Number','trim|required');
-            $this->form_validation->set_rules('buyer_name','Buyer_name','trim|required');
-            $this->form_validation->set_rules('buyer_po_number','Buyer PO Number','trim|required');
+
+            $packing_instrction_response = array();
+            $this->form_validation->set_rules('packing_id_number','PO Number','trim|required');
+            $this->form_validation->set_rules('buyer_name','Date','trim|required');
+            $this->form_validation->set_rules('buyer_po_number','Vendor Name','trim|required');
             $this->form_validation->set_rules('buyer_po_date','Buyer PO Date','trim|required');
-            $this->form_validation->set_rules('buyer_delivery_date','Buyer Delivery Date','trim|required');
-
-
-            $this->form_validation->set_rules('bom_status','BOM Status','trim|required');
             $this->form_validation->set_rules('remark','Remark','trim');
 
             if($this->form_validation->run() == FALSE)
             {
-                $save_Billofmaterial_response['status'] = 'failure';
-                $save_Billofmaterial_response['error'] = array( 'bom_number'=>strip_tags(form_error('bom_number')),'date'=>strip_tags(form_error('date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'buyer_delivery_date'=>strip_tags(form_error('buyer_delivery_date')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'bom_status'=>strip_tags(form_error('bom_status')),'remark'=>strip_tags(form_error('remark')));
+                $packing_instrction_response['status'] = 'failure';
+                $packing_instrction_response['error'] = array( 'packing_id_number'=>strip_tags(form_error('packing_id_number')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'remark'=>strip_tags(form_error('remark')));
            
             }else{
 
-
                 $data = array(
-                    'bom_number'   => trim($this->input->post('bom_number')),
-                    'date'     => trim($this->input->post('date')),
-                    'vendor_name'  => trim($this->input->post('vendor_name')),
-                    'vendor_po_number'=> trim($this->input->post('vendor_po_number')),
-                    'bom_status' =>    trim($this->input->post('bom_status')),
-                    'remark' =>    trim($this->input->post('remark')),
-                    'buyer_name' =>    trim($this->input->post('buyer_name')),
-                    'buyer_po_number' =>    trim($this->input->post('buyer_po_number')),
-                    'buyer_po_date' =>    trim($this->input->post('buyer_po_date')),
-                    'buyer_delivery_date' =>    trim($this->input->post('buyer_delivery_date')),
+                    'packing_instrauction_id'   => trim($this->input->post('packing_id_number')),
+                    'buyer_name'     => trim($this->input->post('buyer_name')),
+                    'buyer_po_number'  => trim($this->input->post('buyer_po_number')),
+                    'buyer_po_date'=> trim($this->input->post('buyer_po_date')),
+                    'remark'=> trim($this->input->post('remark')),
                 );
 
-                $checkIfexitsBillofmaterial = $this->admin_model->checkIfexitsBillofmaterial(trim($this->input->post('bom_number')));
-                if($checkIfexitsBillofmaterial > 0){
-                    $save_Billofmaterial_response['status'] = 'failure';
-                    $save_Billofmaterial_response['error'] = array( 'bom_number'=>strip_tags(form_error('bom_number')),'date'=>strip_tags(form_error('date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'buyer_delivery_date'=>strip_tags(form_error('buyer_delivery_date')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'bom_status'=>strip_tags(form_error('bom_status')),'remark'=>strip_tags(form_error('remark')));
-                }else{
-                    $saveBillofmaterial = $this->admin_model->saveBillofmaterial('',$data);
-                    if($saveBillofmaterial){
-                        // $update_last_inserted_id_job_work = $this->admin_model->update_last_inserted_id_job_work($saveJobworkdata);
-                        // if($update_last_inserted_id_job_work){
-                             $save_Billofmaterial_response['status'] = 'success';
-                             $save_Billofmaterial_response['error'] = array( 'bom_number'=>strip_tags(form_error('bom_number')),'date'=>strip_tags(form_error('date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'buyer_delivery_date'=>strip_tags(form_error('buyer_delivery_date')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'bom_status'=>strip_tags(form_error('bom_status')),'remark'=>strip_tags(form_error('remark')));
-                             //   }
+                $checkIpackinginstraction = $this->admin_model->checkIpackinginstraction(trim($this->input->post('packing_id_number')));
+                if($checkIpackinginstraction > 0){
+                        $packing_instrction_response['status'] = 'failure';
+                        $packing_instrction_response['error'] = array( 'packing_id_number'=>strip_tags(form_error('packing_id_number')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'remark'=>strip_tags(form_error('remark')));
+                    }else{
+                    $savePackinginstarction = $this->admin_model->savePackinginstarction('',$data);
+                    if($savePackinginstarction){
+                             $packing_instrction_response['status'] = 'success';
+                             $packing_instrction_response['error'] = array( 'packing_id_number'=>strip_tags(form_error('packing_id_number')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'remark'=>strip_tags(form_error('remark')));
+                            
                     }
 
                 }
 
             }
 
-            echo json_encode($save_Billofmaterial_response);
+            echo json_encode($packing_instrction_response);
 
         }else{
 
@@ -4421,6 +4433,7 @@ class Admin extends BaseController
             $processFunction = 'Admin/addjobwork';
             $this->logrecord($process,$processFunction);
             $this->global['pageTitle'] = 'Add New Packing Instaruction';
+            $data['getpreviouspackinginstarction']= $this->admin_model->getpreviouspackinginstarction();
             $data['buyerList']= $this->admin_model->fetchAllbuyerList();
             $this->loadViews("masters/addNewpackinginstaruction", $this->global, $data, NULL);
 
@@ -4593,6 +4606,115 @@ class Admin extends BaseController
         }
 
     }
+
+    public function deletepackinginstraction(){
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->deletepackinginstraction(trim($this->input->post('id')));
+            if ($result) {
+                        $process = 'Delete Packing Instraction';
+                        $processFunction = 'Admin/deletepackinginstraction';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
+
+    }
+
+
+    public function addpackinginstractiondetails($buyer_po_number){
+        $process = 'Add Packing Instraction Details';
+        $processFunction = 'Admin/addpackinginstractiondetails';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Add Packing Instraction Details';
+        $this->global['main_id'] = 'Add Packing Instraction Details';
+        $data['getbuyeritemdetails'] =  $this->admin_model->getbuyeritemdetails(trim($buyer_po_number));
+        $this->loadViews("masters/addpackinginstractiondetails", $this->global, $data, NULL);  
+
+
+    }
+
+
+    public function editpackinginstraction($packinginstractionid){
+
+            $process = 'Edit Packing Instraction Details';
+            $processFunction = 'Admin/addpackinginstractiondetails';
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Edit Packing Instraction Details';
+            $this->global['packinginstarctionid'] = $packinginstractionid;
+            $data['getdetailsofpackinginsraction'] =  $this->admin_model->getdetailsofpackinginsraction(trim($packinginstractionid));
+            $data['buyerList']= $this->admin_model->fetchAllbuyerList();
+            $this->loadViews("masters/editpackinginstractiondetails", $this->global, $data, NULL);  
+
+    }
+
+
+
+    public function updatepackinginstraction(){
+
+        $post_submit = $this->input->post();
+
+    
+        if($post_submit){
+
+            $packing_instrction_response = array();
+            $this->form_validation->set_rules('packing_id_number','PO Number','trim|required');
+            $this->form_validation->set_rules('buyer_name','Date','trim|required');
+            $this->form_validation->set_rules('buyer_po_number','Vendor Name','trim');
+            $this->form_validation->set_rules('buyer_po_date','Buyer PO Date','trim');
+            $this->form_validation->set_rules('remark','Remark','trim');
+
+            if($this->form_validation->run() == FALSE)
+            {
+                $packing_instrction_response['status'] = 'failure';
+                $packing_instrction_response['error'] = array( 'packing_id_number'=>strip_tags(form_error('packing_id_number')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'remark'=>strip_tags(form_error('remark')));
+           
+            }else{
+
+                if($this->input->post('buyer_po_date')){
+                   $buyer_po_date =  $this->input->post('buyer_po_date');
+                }else{
+                   $buyer_po_date =  $this->input->post('buyer_po_date_existing');
+                }
+
+                if($this->input->post('buyer_po_number')){
+                    $buyer_po_number =  $this->input->post('buyer_po_number');
+                 }else{
+                     $buyer_po_number =  $this->input->post('buyer_po_number_existing');
+                 }
+
+
+                $data = array(
+                    'packing_instrauction_id'   => trim($this->input->post('packing_id_number')),
+                    'buyer_name'     => trim($this->input->post('buyer_name')),
+                    'buyer_po_number'  => trim($buyer_po_number),
+                    'buyer_po_date'=> trim($buyer_po_date),
+                    'remark'=> trim($this->input->post('remark')),
+                );
+
+            
+                    $savePackinginstarction = $this->admin_model->savePackinginstarction(trim($this->input->post('packinginstarctionid')),$data);
+                    if($savePackinginstarction){
+                             $packing_instrction_response['status'] = 'success';
+                             $packing_instrction_response['error'] = array( 'packing_id_number'=>strip_tags(form_error('packing_id_number')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'remark'=>strip_tags(form_error('remark')));
+                            
+                
+
+                }
+
+            }
+
+            echo json_encode($packing_instrction_response);
+
+        }
+
+     
+    }
+
 
 
 

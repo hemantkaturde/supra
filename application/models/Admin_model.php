@@ -2993,6 +2993,164 @@ class Admin_model extends CI_Model
     }
 
 
+
+
+
+
+    public function getPackinginstractionCount(){
+
+        $this->db->select('*');
+
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_PACKING_INSTRACTION.".packing_instrauction_id LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_PACKING_INSTRACTION.".buyer_po_date LIKE '%".$params['search']['value']."%')");
+        }
+
+        $this->db->where(TBL_PACKING_INSTRACTION.'.status', 1);        
+        $query = $this->db->get(TBL_PACKING_INSTRACTION);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+
+    }
+
+
+
+    public function getPackinginstractiondata(){
+
+        $this->db->select('*,'.TBL_BUYER_MASTER.'.buyer_name as buyer_name_master,'.TBL_PACKING_INSTRACTION.'.id as packinginstarctionid,'.TBL_BUYER_PO_MASTER.'.id as buyerpoid'); 
+        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_PACKING_INSTRACTION.'.buyer_name');
+        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.buyer_name_id = '.TBL_BUYER_MASTER.'.buyer_id');
+      
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_PACKING_INSTRACTION.".packing_instrauction_id LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_PACKING_INSTRACTION.".buyer_po_date LIKE '%".$params['search']['value']."%')");
+        }
+      
+        $this->db->where(TBL_PACKING_INSTRACTION.'.status', 1);
+        $this->db->limit($params['length'],$params['start']);
+        $this->db->order_by(TBL_PACKING_INSTRACTION.'.id','DESC');
+        $query = $this->db->get(TBL_PACKING_INSTRACTION);
+        $fetch_result = $query->result_array();
+
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['packing_instrauction_id'] = $value['packing_instrauction_id'];
+                $data[$counter]['buyer_name'] = $value['buyer_name_master'];
+                $data[$counter]['buyer_po'] = $value['sales_order_number'];
+                $data[$counter]['buyer_po_date'] = $value['buyer_po_date'];
+                $data[$counter]['action'] = '';
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editpackinginstraction/".$value['packinginstarctionid']."' style='cursor: pointer;'><i style='font-size: large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addpackinginstractiondetails/".$value['buyerpoid']."' style='cursor: pointer;'><i style='font-size: large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['packinginstarctionid']."' class='fa fa-trash-o deletepackinginstraction' aria-hidden='true'></i>"; 
+                $counter++; 
+            }
+        }
+
+        return $data;
+
+
+    }
+
+    public function checkIpackinginstraction($packing_instrauction_id){
+
+        $this->db->select('*');
+        $this->db->where(TBL_PACKING_INSTRACTION.'.packing_instrauction_id', $packing_instrauction_id);
+        $this->db->where(TBL_PACKING_INSTRACTION.'.status', 1);
+        $query = $this->db->get(TBL_PACKING_INSTRACTION);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+
+    }
+
+    public function getpreviouspackinginstarction(){
+
+        $this->db->select('packing_instrauction_id');
+        $this->db->where(TBL_PACKING_INSTRACTION.'.status', 1);
+        $this->db->limit(1);
+        $this->db->order_by(TBL_PACKING_INSTRACTION.'.id','DESC');
+        $query = $this->db->get(TBL_PACKING_INSTRACTION);
+        $rowcount = $query->result_array();
+        return $rowcount;
+
+
+    }
+
+
+
+    public function savePackinginstarction($id,$data){
+
+        if($id != '') {
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_PACKING_INSTRACTION, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_PACKING_INSTRACTION, $data)) {
+                return $this->db->insert_id();;
+            } else {
+                return FALSE;
+            }
+        }
+
+    }
+
+
+    public function deletepackinginstraction($id){
+
+        $this->db->where('id', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_PACKING_INSTRACTION)){
+           return TRUE;
+        }else{
+           return FALSE;
+        }
+
+    }
+
+
+    public function getbuyeritemdetails($buyer_po_number){
+        
+        $this->db->select('*');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
+        $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id',$buyer_po_number);
+        $query = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
+        $data = $query->result_array();
+        return $data;
+
+
+    }
+
+
+    public function getdetailsofpackinginsraction($packinginstractionid){
+
+        $this->db->select('*,'.TBL_BUYER_MASTER.'.buyer_name as buyer_name_master,'.TBL_PACKING_INSTRACTION.'.id as packinginstarctionid,'.TBL_BUYER_PO_MASTER.'.id as buyerpoid'); 
+        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_PACKING_INSTRACTION.'.buyer_name');
+        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.buyer_name_id = '.TBL_BUYER_MASTER.'.buyer_id');
+        $this->db->where(TBL_PACKING_INSTRACTION.'.id', $packinginstractionid);
+        $this->db->where(TBL_PACKING_INSTRACTION.'.status', 1);
+        $query = $this->db->get(TBL_PACKING_INSTRACTION);
+        $fetch_result = $query->result_array();
+
+        return $fetch_result;
+
+
+    }
+
+
+
+
 }
 
 ?>
