@@ -2862,13 +2862,9 @@ class Admin_model extends CI_Model
 
 
     public function getItemdetailsdependonvendorpobom($part_number,$vendor_po_number,$vendor_name){
-        
-
-
         $this->db->select('*,'.TBL_FINISHED_GOODS.'.sac as sac_no,'.TBL_VENDOR_PO_MASTER_ITEM.'.rate as supplierrate');
         $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
         $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
-
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.pre_vendor_name');
         $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id',$vendor_po_number);
         $this->db->where(TBL_FINISHED_GOODS.'.status',1);
@@ -2877,6 +2873,122 @@ class Admin_model extends CI_Model
         $data = $query->result_array();
         return $data;
 
+
+    }
+
+    public function getincomingdeatilscount(){
+
+        $this->db->select('*,'.TBL_INCOMING_DETAILS.'.vendor_name as vendorname');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id= '.TBL_INCOMING_DETAILS.'.vendor_name');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id= '.TBL_INCOMING_DETAILS.'.vendor_po_number');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_INCOMING_DETAILS.".bom_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_INCOMING_DETAILS.".reported_by LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_INCOMING_DETAILS.".reported_date LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_INCOMING_DETAILS.'.status', 1);        
+        $query = $this->db->get(TBL_INCOMING_DETAILS);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+
+    }
+
+    public function getincomingdeatilsdata(){
+
+        $this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_INCOMING_DETAILS.'.id as incomigid');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id= '.TBL_INCOMING_DETAILS.'.vendor_name');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id= '.TBL_INCOMING_DETAILS.'.vendor_po_number');
+        
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_INCOMING_DETAILS.".bom_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_INCOMING_DETAILS.".reported_by LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_INCOMING_DETAILS.".reported_date LIKE '%".$params['search']['value']."%')");
+        }
+   
+        $this->db->where(TBL_INCOMING_DETAILS.'.status', 1);
+        $this->db->limit($params['length'],$params['start']);
+        $this->db->order_by(TBL_INCOMING_DETAILS.'.id','DESC');
+        $query = $this->db->get(TBL_INCOMING_DETAILS);
+        $fetch_result = $query->result_array();
+
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['incoming_details_id'] = $value['incoming_details_id'];
+                $data[$counter]['vendor_name'] = $value['vendorname'];
+                $data[$counter]['vendor_po_number'] = $value['po_number'];
+                $data[$counter]['reported_by'] = $value['reported_by'];
+                $data[$counter]['reported_date'] = $value['reported_date'];
+                $data[$counter]['action'] = '';
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewSupplierpoconfirmation/".$value['incomigid']."' style='cursor: pointer;'><i style='font-size: large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['incomigid']."' class='fa fa-trash-o deleteIncomingDetails' aria-hidden='true'></i>"; 
+                $counter++; 
+            }
+        }
+
+        return $data;
+
+
+    }
+
+    public function getPreviousincomingdetails(){
+        $this->db->select('incoming_details_id');
+        $this->db->where(TBL_INCOMING_DETAILS.'.status', 1);
+        $this->db->limit(1);
+        $this->db->order_by(TBL_INCOMING_DETAILS.'.id','DESC');
+        $query = $this->db->get(TBL_INCOMING_DETAILS);
+        $rowcount = $query->result_array();
+        return $rowcount;
+
+    }
+
+    public function checkIfexitsincomingdetails($incoming_no){
+
+        $this->db->select('*');
+        $this->db->where(TBL_INCOMING_DETAILS.'.incoming_details_id', $incoming_no);
+        $this->db->where(TBL_INCOMING_DETAILS.'.status', 1);
+        $query = $this->db->get(TBL_INCOMING_DETAILS);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+
+    }
+
+    public function saveIncomingdetails($id,$data){
+        if($id != '') {
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_INCOMING_DETAILS, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_INCOMING_DETAILS, $data)) {
+                return $this->db->insert_id();;
+            } else {
+                return FALSE;
+            }
+        }
+
+    }
+
+    public function deleteIncomingDetails($id){
+
+        $this->db->where('id', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_INCOMING_DETAILS)){
+           return TRUE;
+        }else{
+           return FALSE;
+        }
 
     }
 

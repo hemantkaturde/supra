@@ -182,12 +182,28 @@ $route['getSuppliergoodsPartnumberByidforvendorbillofmaetrial'] = "admin/getSupp
 $route['saveVendorbilloamaterialitems'] = "admin/saveVendorbilloamaterialitems";
 $route['deleteVendorbillofmaterialpoitem'] = "admin/deleteVendorbillofmaterialpoitem";
 $route['viewVendorbillofmaterial/(:any)'] = "admin/viewVendorbillofmaterial/$1";
-
-
-
 $route['getVendorDetailsBybuyerPOnumber'] = "admin/getVendorDetailsBybuyerPOnumber";
 $route['getSupplierdetailsbyvendorponumber'] = "admin/getSupplierdetailsbyvendorponumber";
 $route['getItemdetailsdependonvendorpobom'] = "admin/getItemdetailsdependonvendorpobom";
+
+
+
+$route['packinginstaruction'] = "admin/packinginstaruction";
+$route['addnewpackinginstruction'] = "admin/addnewpackinginstruction";
+
+
+
+$route['exportdetails'] = "admin/exportdetails";
+$route['challanform'] = "admin/challanform";
+$route['packagingform'] = "admin/packagingform";
+$route['rrchallan'] = "admin/rrchallan";
+
+
+$route['incomingdetails'] = "admin/incomingdetails";
+$route['addnewencomingdetails'] = "admin/addnewencomingdetails";
+$route['fetchincomingdeatils'] = "admin/fetchincomingdeatils";
+$route['deleteIncomingDetails'] = "admin/deleteIncomingDetails";
+
 
 
 

@@ -179,7 +179,7 @@
                     </li>
 
                   
-                    <li class="treeview <?php if($pageUrl=="buyerpo" || $pageUrl=="addnewBuyerpo" || $pageUrl=="editBuyerpo" || $pageUrl=="supplierpo" || $pageUrl=="addnewSupplierpo" || $pageUrl=="editSupplierpo" || $pageUrl=="viewBuyerpo" || $pageUrl=="buyerpoconfirmation" || $pageUrl=="viewSupplierpo" || $pageUrl=="vendorpo" || $pageUrl=="addnewVendorpo" || $pageUrl=="viewVendorpo" || $pageUrl=="supplierpoconfirmation" || $pageUrl=="addSupplierpoconfirmation" || $pageUrl=="viewSupplierpoconfirmation" || $pageUrl=="vendorpoconfirmation" || $pageUrl=="addVendorpoconfirmation" || $pageUrl=="billofmaterial" || $pageUrl=="addnewBillofmaterial" || $pageUrl=="vendorbillofmaterial" || $pageUrl=="addvendorBillofmaterial" || $pageUrl=="viewVendorbillofmaterial"){echo 'active';}?>">
+                    <li class="treeview <?php if($pageUrl=="buyerpo" || $pageUrl=="addnewBuyerpo" || $pageUrl=="editBuyerpo" || $pageUrl=="supplierpo" || $pageUrl=="addnewSupplierpo" || $pageUrl=="editSupplierpo" || $pageUrl=="viewBuyerpo" || $pageUrl=="buyerpoconfirmation" || $pageUrl=="viewSupplierpo" || $pageUrl=="vendorpo" || $pageUrl=="addnewVendorpo" || $pageUrl=="viewVendorpo" || $pageUrl=="supplierpoconfirmation" || $pageUrl=="addSupplierpoconfirmation" || $pageUrl=="viewSupplierpoconfirmation" || $pageUrl=="vendorpoconfirmation" || $pageUrl=="addVendorpoconfirmation" || $pageUrl=="billofmaterial" || $pageUrl=="addnewBillofmaterial" || $pageUrl=="vendorbillofmaterial" || $pageUrl=="addvendorBillofmaterial" || $pageUrl=="viewVendorbillofmaterial" || $pageUrl=="packinginstaruction" || $pageUrl=="exportdetails" || $pageUrl=="challanform" || $pageUrl=="packagingform"  || $pageUrl=="rrchallan" || $pageUrl=="addnewpackinginstruction" || $pageUrl=="incomingdetails" || $pageUrl=="addnewencomingdetails"){echo 'active';}?>">
                       <a href="#">
                         <i class="fa fa-laptop"></i> <span class="menu_label">Miscellaneous</span>
                           <span class="pull-right-container">
@@ -192,12 +192,27 @@
                         <li class="line_height <?php if($pageUrl=="vendorpo" || $pageUrl=="addnewVendorpo" || $pageUrl=="viewVendorpo"  || $pageUrl=="addnewVendorpo"){echo 'active';}?>"><a href="<?php echo base_url(); ?>vendorpo"><i class="fa fa-cubes"></i> Vendor PO</a></li>
                         <li class="line_height <?php if($pageUrl=="supplierpoconfirmation" || $pageUrl=="addSupplierpoconfirmation" || $pageUrl =="viewSupplierpoconfirmation" ){echo 'active';}?>"><a href="<?php echo base_url(); ?>supplierpoconfirmation"><i class="fa fa-cubes"></i> Supplier PO Confirmation</a></li>
                         <li class="line_height <?php if($pageUrl=="vendorpoconfirmation" || $pageUrl=="addVendorpoconfirmation"){echo 'active';}?>"><a href="<?php echo base_url(); ?>vendorpoconfirmation"><i class="fa fa-cubes"></i> Vendor PO Confirmation</a></li>
+                        <li class="line_height <?php if($pageUrl=="incomingdetails" || $pageUrl=="addnewencomingdetails"){echo 'active';}?>"><a href="<?php echo base_url(); ?>incomingdetails"><i class="fa fa-cubes"></i> Incoming Details</a></li>
+
+
                         <li class="line_height <?php if($pageUrl=="billofmaterial" || $pageUrl=="addnewBillofmaterial"){echo 'active';}?>"><a href="<?php echo base_url(); ?>billofmaterial"><i class="fa fa-cubes"></i> Bill of Material</a></li>
                         <li class="line_height <?php if($pageUrl=="vendorbillofmaterial" || $pageUrl=="addvendorBillofmaterial" || $pageUrl=="viewVendorbillofmaterial"){echo 'active';}?>"><a href="<?php echo base_url(); ?>vendorbillofmaterial"><i class="fa fa-cubes"></i> Vendor Bill of Material</a></li>
+                        <li class="line_height" <?php if($pageUrl=="packinginstaruction" || $pageUrl=="addnewpackinginstruction"){echo 'active';}?>><a href="<?php echo base_url(); ?>packinginstaruction"><i class="fa fa-cubes"></i> Packing Instrauction</a></li>
+                        <li class="line_height" <?php if($pageUrl=="exportdetails"){echo 'active';}?>><a href="<?php echo base_url(); ?>exportdetails"><i class="fa fa-cubes"></i> Export Details</a></li>
+                        <li class="line_height" <?php if($pageUrl=="challanform"){echo 'active';}?>><a href="<?php echo base_url(); ?>challanform"><i class="fa fa-cubes"></i> Challan Form</a></li>
+                        <li class="line_height" <?php if($pageUrl=="packagingform"){echo 'active';}?>><a href="<?php echo base_url(); ?>packagingform"><i class="fa fa-cubes"></i> Packaging Form</a></li>
+                        <li class="line_height" <?php if($pageUrl=="rrchallan"){echo 'active';}?>><a href="<?php echo base_url(); ?>rrchallan"><i class="fa fa-cubes"></i> R R Challan</a></li>
+
+
+
+
+
                         <li class="line_height"><a href="<?php echo base_url(); ?>log-history-backup"><i class="fa fa-cubes"></i> Current Order Status</a></li>
+
+                        <!-- <li class="line_height"><a href="<?php echo base_url(); ?>log-history-backup"><i class="fa fa-cubes"></i> Current Order Status</a></li>
                         <li class="line_height"><a href="<?php echo base_url(); ?>log-history-backup"><i class="fa fa-cubes"></i> Debit Note</a></li>
                         <li class="line_height"><a href="<?php echo base_url(); ?>log-history-backup"><i class="fa fa-cubes"></i> POD</a></li>
-                        <li class="line_height"><a href="<?php echo base_url(); ?>log-history-backup"><i class="fa fa-cubes"></i> Payment Details</a></li>
+                        <li class="line_height"><a href="<?php echo base_url(); ?>log-history-backup"><i class="fa fa-cubes"></i> Payment Details</a></li> -->
                         <!-- <li class="line_height"><a href="<?php echo base_url(); ?>log-history-backup"><i class="fa fa-cubes"></i> PO Confirmation</a></li> -->
                       </ul>
                     </li>

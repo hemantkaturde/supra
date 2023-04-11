@@ -4345,4 +4345,255 @@ class Admin extends BaseController
 
 
 
+    public function packinginstaruction(){
+
+        $process = 'Packing Instaruction';
+        $processFunction = 'Admin/packinginstaruction';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Packing Instaruction';
+        $this->loadViews("masters/packinginstaruction", $this->global, $data, NULL);  
+
+    }
+
+    
+    public function addnewPackinginstruction(){
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $save_Billofmaterial_response = array();
+            $this->form_validation->set_rules('bom_number','PO Number','trim|required');
+            $this->form_validation->set_rules('date','Date','trim|required');
+            $this->form_validation->set_rules('vendor_name','Vendor Name','trim|required');
+            $this->form_validation->set_rules('vendor_po_number','Vendor PO  Number','trim|required');
+            $this->form_validation->set_rules('buyer_name','Buyer_name','trim|required');
+            $this->form_validation->set_rules('buyer_po_number','Buyer PO Number','trim|required');
+            $this->form_validation->set_rules('buyer_po_date','Buyer PO Date','trim|required');
+            $this->form_validation->set_rules('buyer_delivery_date','Buyer Delivery Date','trim|required');
+
+
+            $this->form_validation->set_rules('bom_status','BOM Status','trim|required');
+            $this->form_validation->set_rules('remark','Remark','trim');
+
+            if($this->form_validation->run() == FALSE)
+            {
+                $save_Billofmaterial_response['status'] = 'failure';
+                $save_Billofmaterial_response['error'] = array( 'bom_number'=>strip_tags(form_error('bom_number')),'date'=>strip_tags(form_error('date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'buyer_delivery_date'=>strip_tags(form_error('buyer_delivery_date')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'bom_status'=>strip_tags(form_error('bom_status')),'remark'=>strip_tags(form_error('remark')));
+           
+            }else{
+
+
+                $data = array(
+                    'bom_number'   => trim($this->input->post('bom_number')),
+                    'date'     => trim($this->input->post('date')),
+                    'vendor_name'  => trim($this->input->post('vendor_name')),
+                    'vendor_po_number'=> trim($this->input->post('vendor_po_number')),
+                    'bom_status' =>    trim($this->input->post('bom_status')),
+                    'remark' =>    trim($this->input->post('remark')),
+                    'buyer_name' =>    trim($this->input->post('buyer_name')),
+                    'buyer_po_number' =>    trim($this->input->post('buyer_po_number')),
+                    'buyer_po_date' =>    trim($this->input->post('buyer_po_date')),
+                    'buyer_delivery_date' =>    trim($this->input->post('buyer_delivery_date')),
+                );
+
+                $checkIfexitsBillofmaterial = $this->admin_model->checkIfexitsBillofmaterial(trim($this->input->post('bom_number')));
+                if($checkIfexitsBillofmaterial > 0){
+                    $save_Billofmaterial_response['status'] = 'failure';
+                    $save_Billofmaterial_response['error'] = array( 'bom_number'=>strip_tags(form_error('bom_number')),'date'=>strip_tags(form_error('date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'buyer_delivery_date'=>strip_tags(form_error('buyer_delivery_date')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'bom_status'=>strip_tags(form_error('bom_status')),'remark'=>strip_tags(form_error('remark')));
+                }else{
+                    $saveBillofmaterial = $this->admin_model->saveBillofmaterial('',$data);
+                    if($saveBillofmaterial){
+                        // $update_last_inserted_id_job_work = $this->admin_model->update_last_inserted_id_job_work($saveJobworkdata);
+                        // if($update_last_inserted_id_job_work){
+                             $save_Billofmaterial_response['status'] = 'success';
+                             $save_Billofmaterial_response['error'] = array( 'bom_number'=>strip_tags(form_error('bom_number')),'date'=>strip_tags(form_error('date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'buyer_delivery_date'=>strip_tags(form_error('buyer_delivery_date')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'bom_status'=>strip_tags(form_error('bom_status')),'remark'=>strip_tags(form_error('remark')));
+                             //   }
+                    }
+
+                }
+
+            }
+
+            echo json_encode($save_Billofmaterial_response);
+
+        }else{
+
+            $process = 'Add New Packing Instaruction';
+            $processFunction = 'Admin/addjobwork';
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Add New Packing Instaruction';
+            $data['buyerList']= $this->admin_model->fetchAllbuyerList();
+            $this->loadViews("masters/addNewpackinginstaruction", $this->global, $data, NULL);
+
+        }
+
+    }
+
+
+    public function exportdetails(){
+        $process = 'Export Details';
+        $processFunction = 'Admin/exportdetails';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Export Details';
+        $this->loadViews("masters/exportdetails", $this->global, $data, NULL);  
+    }
+
+    public function challanform(){
+
+        $process = 'Challan Form';
+        $processFunction = 'Admin/challanform';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Challan Form';
+        $this->loadViews("masters/challanform", $this->global, $data, NULL);  
+        
+    }
+
+
+    public function packagingform(){
+
+        $process = 'Packaging Form';
+        $processFunction = 'Admin/exportdetails';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Packaging Form';
+        $this->loadViews("masters/packagingform", $this->global, $data, NULL);  
+        
+    }
+
+    public function rrchallan(){
+
+        $process = 'RR Challan';
+        $processFunction = 'Admin/rrchallan';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'RR Challan';
+        $this->loadViews("masters/rrchallan", $this->global, $data, NULL);  
+        
+    }
+
+
+    public function incomingdetails(){
+
+        $process = 'Incoming Details';
+        $processFunction = 'Admin/incomingdetails';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Incoming Details';
+        $this->loadViews("masters/incomingdetails", $this->global, $data, NULL);  
+
+    }
+
+
+    public function fetchincomingdeatils(){
+
+        $params = $_REQUEST;
+        $totalRecords = $this->admin_model->getincomingdeatilscount($params); 
+        $queryRecords = $this->admin_model->getincomingdeatilsdata($params); 
+
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+        echo json_encode($json_data);
+
+    }
+
+
+    public function addnewencomingdetails(){
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+
+            $save_incoming_details = array();
+
+            $this->form_validation->set_rules('incoming_no','PO Number','trim|required');
+            $this->form_validation->set_rules('vendor_name','Date','trim|required');
+            $this->form_validation->set_rules('vendor_po_number','Vendor Name','trim|required');
+            $this->form_validation->set_rules('reported_by','Buyer_name','trim');
+            $this->form_validation->set_rules('reported_date','Buyer PO Number','trim');
+            $this->form_validation->set_rules('remark','Buyer PO Date','trim');
+
+            if($this->form_validation->run() == FALSE)
+            {
+                $save_incoming_details['status'] = 'failure';
+                $save_incoming_details['error'] = array( 'incoming_no'=>strip_tags(form_error('incoming_no')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'reported_by'=>strip_tags(form_error('reported_by')),'reported_date'=>strip_tags(form_error('reported_date')),'remark'=>strip_tags(form_error('remark')));
+           
+            }else{
+                     
+                $data = array(
+                    'incoming_details_id'   => trim($this->input->post('incoming_no')),
+                    'vendor_name'  => trim($this->input->post('vendor_name')),
+                    'vendor_po_number'=> trim($this->input->post('vendor_po_number')),
+                    'reported_by' =>    trim($this->input->post('reported_by')),
+                    'reported_date' =>    trim($this->input->post('reported_date')),
+                    'remark' =>    trim($this->input->post('remark'))
+                );
+
+                $checkIfexitsincomingdetails = $this->admin_model->checkIfexitsincomingdetails(trim($this->input->post('incoming_no')));
+
+
+                if($checkIfexitsincomingdetails > 0){
+                    $save_incoming_details['status'] = 'failure';
+                    $save_incoming_details['error'] = array( 'incoming_no'=>strip_tags(form_error('incoming_no')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'reported_by'=>strip_tags(form_error('reported_by')),'reported_date'=>strip_tags(form_error('reported_date')),'remark'=>strip_tags(form_error('remark')));
+                }else{
+                    $saveIncomingdetails= $this->admin_model->saveIncomingdetails('',$data);
+
+
+                    if($saveIncomingdetails){
+                        // $update_last_inserted_id_job_work = $this->admin_model->update_last_inserted_id_job_work($saveJobworkdata);
+                        // if($update_last_inserted_id_job_work){
+                             $save_incoming_details['status'] = 'success';
+                             $save_incoming_details['error'] = array( 'incoming_no'=>strip_tags(form_error('incoming_no')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'reported_by'=>strip_tags(form_error('reported_by')),'reported_date'=>strip_tags(form_error('reported_date')),'remark'=>strip_tags(form_error('remark')));
+                             //   }
+                    }
+
+                }
+
+            }
+
+            echo json_encode($save_incoming_details);
+            
+        }else{
+
+            $process = 'Add New Incoming Details';
+            $processFunction = 'Admin/addnewencomingdetails';
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Add New Incoming Details';
+            $data['vendorList']= $this->admin_model->fetchALLvendorList();
+            $data['getPreviousincomingdetails']= $this->admin_model->getPreviousincomingdetails();
+            //$data['getitemdetails']= $this->admin_model->getitemdetails();
+            $this->loadViews("masters/addnewencomingdetails", $this->global, $data, NULL);
+
+        }
+    }
+
+
+    public function deleteIncomingDetails(){
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->deleteIncomingDetails(trim($this->input->post('id')));
+            if ($result) {
+                        $process = 'Incoming Details Delete';
+                        $processFunction = 'Admin/deleteIncomingDetails';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
+
+    }
+
+
+
 }
