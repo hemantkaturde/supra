@@ -61,12 +61,13 @@
                                                 <select class="form-control" name="part_number" id="part_number">
                                                     <option st-id="" value="">Select Buyer Name</option>
                                                         <?php foreach ($getbuyeritemdetails as $key => $value) {?>
-                                                                <option value="<?php echo $value['buyer_id']; ?>"><?php echo $value['part_number']; ?></option>
+                                                                <option value="<?php echo $value['item_details']; ?>"><?php echo $value['part_number']; ?></option>
                                                         <?php } ?>
                                                 </select> 
                                             <p class="error part_number_error"></p>
                                         </div>
 
+                                        <input type="hidden" class="form-control" id="main_id" name="main_id" value="<?=$main_id?>" >
 
                                         <div class="form-group">
                                             <label for="buyer_po_date">Buyer Invoice Number <span class="required">*</span></label>
@@ -83,7 +84,7 @@
 
                                         <div class="form-group">
                                             <label for="buyer_invoice_date">Buyer Invoice Qty <span class="required">*</span></label>
-                                            <input type="text" class="form-control datepicker" id="buyer_invoice_qty" name="buyer_invoice_qty" required>
+                                            <input type="text" class="form-control" id="buyer_invoice_qty" name="buyer_invoice_qty" required>
                                             <p class="error buyer_invoice_date_error"></p>
                                         </div>
 
@@ -100,6 +101,7 @@
 
                                     </div>
                                 </div>
+
                             </div>  
                             <!-- /.box-body -->
                             <div class="box-footer">
@@ -109,6 +111,40 @@
                                 </div>
                             </div>
                         </form>
+                        <div class="col-md-8">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">Part Number</th>
+                                                    <th scope="col">Description</th>
+                                                    <th scope="col">Buyer Invoice Number</th>
+                                                    <th scope="col">Buyer Invoice Date</th>
+                                                    <th scope="col">Buyer Invoice Qty </th>
+                                                    <th scope="col">Box Qty</th>
+                                                    <th scope="col">Remark</th>
+                                                </tr>
+                                            </thead>
+                                            
+                                            <tbody>
+                                            <?php
+                                            $i=1;
+                                            foreach ($getpackingdetails_itemdetails as $key_details => $value_details) { 
+                                                ?>
+                                                    <tr>
+                                                        <th scope="row"><?=$i;?></th>
+                                                        <td><?=$value_details['part_number'];?></td>
+                                                        <td><?=$value_details['name'];?></td>
+                                                        <td><?=$value_details['buyer_invoice_number'];?></td>
+                                                        <td><?=$value_details['buyer_invoice_date'];?></td>
+                                                        <td><?=$value_details['buyer_invoice_qty'];?></td>
+                                                        <td><?=$value_details['box_qty'];?></td>
+                                                        <td><?=$value_details['remark'];?></td>
+                                                    </tr>
+                                            <?php } ?>  
+                                            </tbody>
+                                        </table> 
+                                </div>
                     </div>
                 </div>
                 <!-- /.box -->

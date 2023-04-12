@@ -6007,7 +6007,6 @@
 		
 		});
 
-
 		$(document).on('click','#savepackinginstarction',function(e){
 			e.preventDefault();
 			$(".loader_ajax").show();
@@ -6051,7 +6050,6 @@
 			return false;
 	    });
 
-		
 		$(document).on('click','.deletepackinginstraction',function(e){
 			var elemF = $(this);
 			e.preventDefault();
@@ -6100,8 +6098,6 @@
 			});
 		});
 
-
-
 		$(document).on('click','#editpackinginstarction',function(e){
 			e.preventDefault();
 			$(".loader_ajax").show();
@@ -6145,6 +6141,51 @@
 			return false;
 	    });
 		
+
+		$(document).on('click','#addpackinginstractiondetails',function(e){
+			e.preventDefault();
+			$(".loader_ajax").show();
+			var vendor_po_number_number = $('#main_id').val();
+			var formData = new FormData($("#addpackingdetailsform")[0]);
+			$.ajax({
+				url : "<?php echo base_url();?>addpackinginstractiondetailsaction",
+				type: "POST",
+				data : formData,
+				cache: false,
+		        contentType: false,
+		        processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+						$(".loader_ajax").hide();
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						swal({
+							title: "Success",
+							text: "Packing Instructions Details Successfully Added!",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+								window.location.href = "<?php echo base_url().'addpackinginstractiondetails/'?>"+vendor_po_number_number;
+						});		
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			});
+			return false;
+	    });
+
 
 
     

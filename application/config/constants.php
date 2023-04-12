@@ -134,12 +134,13 @@ define('TBL_JOB_WORK_ITEM','tbl_jobwork_item');
 define('TBL_BILL_OF_MATERIAL','tbl_bill_of_material');
 define('TBL_BILL_OF_MATERIAL_VENDOR','tbl_vendor_bill_of_material');
 define('TBL_BILL_OF_MATERIAL_VENDOR_ITEM','tbl_vendor_bill_of_materail_item');
-
-
 define('TBL_INCOMING_DETAILS','tbl_incoming_details');
 
 
 define('TBL_PACKING_INSTRACTION','tbl_packing_instrauction');
+define('TBL_PACKING_INSTRACTION_DETAILS','tbl_packing_instrauction_details');
+
+
 
 
 

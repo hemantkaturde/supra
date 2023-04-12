@@ -196,6 +196,10 @@ $route['deletepackinginstraction'] = "admin/deletepackinginstraction";
 $route['addpackinginstractiondetails/(:any)'] = "admin/addpackinginstractiondetails/$1";
 $route['editpackinginstraction/(:any)'] = "admin/editpackinginstraction/$1";
 $route['updatepackinginstraction'] = "admin/updatepackinginstraction";
+$route['addpackinginstractiondetailsaction'] = "admin/addpackinginstractiondetailsaction";
+
+
+
 
 
 $route['getBuyerpoitemonly'] = "admin/getBuyerpoitemonly";

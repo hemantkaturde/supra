@@ -4626,17 +4626,78 @@ class Admin extends BaseController
     }
 
 
-    public function addpackinginstractiondetails($buyer_po_number){
+    public function addpackinginstractiondetails($packinginstarctionid){
+
+        $packinginstarctionid=  $this->admin_model->getpackinginstarction_data_by_id(trim($packinginstarctionid));
+        $buyer_po_number = $packinginstarctionid[0]['buyerpoid'];
+        $main_id = $packinginstarctionid[0]['main_id'];
+
+
         $process = 'Add Packing Instraction Details';
         $processFunction = 'Admin/addpackinginstractiondetails';
         $this->logrecord($process,$processFunction);
         $this->global['pageTitle'] = 'Add Packing Instraction Details';
-        $this->global['main_id'] = 'Add Packing Instraction Details';
+        $data['main_id'] =$main_id;
         $data['getbuyeritemdetails'] =  $this->admin_model->getbuyeritemdetails(trim($buyer_po_number));
+        $data['getpackingdetails_itemdetails'] =  $this->admin_model->getpackingdetails_itemdetails(trim($main_id));
         $this->loadViews("masters/addpackinginstractiondetails", $this->global, $data, NULL);  
 
 
     }
+
+
+    public function addpackinginstractiondetailsaction(){
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+
+            $add_packing_instraction_details_response = array();
+
+
+            $this->form_validation->set_rules('part_number','Part Number','trim|required');
+            $this->form_validation->set_rules('buyer_invoice_number','Date','trim|required');
+            $this->form_validation->set_rules('buyer_invoice_date','Buyer Invoice Date','trim|required');
+            $this->form_validation->set_rules('buyer_invoice_qty','Buyer Invoice qty','trim|required');
+            $this->form_validation->set_rules('box_qty','Box qty','trim|required');
+            $this->form_validation->set_rules('remark','Buyer PO Date','trim');
+
+            if($this->form_validation->run() == FALSE)
+            {
+                $add_packing_instraction_details_response['status'] = 'failure';
+                $add_packing_instraction_details_response['error'] = array('part_number'=>strip_tags(form_error('part_number')),'buyer_invoice_number'=>strip_tags(form_error('buyer_invoice_number')),'buyer_invoice_date'=>strip_tags(form_error('buyer_invoice_date')),'buyer_invoice_qty'=>strip_tags(form_error('buyer_invoice_qty')),'box_qty'=>strip_tags(form_error('box_qty')),'remark'=>strip_tags(form_error('remark')));
+           
+            }else{
+
+
+                $data = array(
+                    'packing_instract_id'   => trim($this->input->post('main_id')),
+                    'part_number'  => trim($this->input->post('part_number')),
+                    'buyer_invoice_number'=> trim($this->input->post('buyer_invoice_number')),
+                    'buyer_invoice_date' =>    trim($this->input->post('buyer_invoice_date')),
+                    'buyer_invoice_qty' =>    trim($this->input->post('buyer_invoice_qty')),
+                    'box_qty' =>    trim($this->input->post('box_qty')),
+                    'remark' =>    trim($this->input->post('remark'))
+                );
+
+
+                $savePackinginstarction= $this->admin_model->savePackinginstarctiondetails('',$data);
+
+                if($savePackinginstarction){
+                    $add_packing_instraction_details_response['status'] = 'success';
+                    $add_packing_instraction_details_response['error'] = array( 'incoming_no'=>strip_tags(form_error('incoming_no')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'reported_by'=>strip_tags(form_error('reported_by')),'reported_date'=>strip_tags(form_error('reported_date')),'remark'=>strip_tags(form_error('remark')));
+                }
+
+
+            }
+
+            echo json_encode($add_packing_instraction_details_response);
+
+        }
+    }
+
+
+
+
 
 
     public function editpackinginstraction($packinginstractionid){
