@@ -36,7 +36,7 @@
                                     
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="buyer_name">Select Buyer PO Number <span class="required">*</span></label>
+                                            <label for="buyer_name">Select Buyer Name <span class="required">*</span></label>
                                                 <select class="form-control buyer_po_number_for_itam_mapping" name="buyer_name" id="buyer_name">
                                                     <option st-id="" value="">Select Buyer Name</option>
                                                         <?php foreach ($buyerList as $key => $value) {?>
@@ -84,7 +84,7 @@
 
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                                <label for="buyer_po_number">Buyer PO Number</label>
+                                                <label for="buyer_po_number">Select Buyer PO Number</label>
                                                     <select class="form-control" name="buyer_po_number" id="buyer_po_number">
                                                     </select>
                                             <p class="error buyer_po_number_error"></p>

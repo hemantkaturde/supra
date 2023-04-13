@@ -2,7 +2,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            <i class="fa fa-users"></i> Supplier Master
+            <i class="fa fa-users"></i> Export Details
             <small>Add,Edit,Delete</small>
         </h1>
     </section>
@@ -11,13 +11,13 @@
             <div class="col-xs-6 text-left">
                 <ul class="breadcrumb" style="background-color:#ecf0f5 !important">
                     <li class="completed"><a href="javascript:void(0);">Masters</a></li>
-                    <li class="active"><a href="javascript:void(0);">Supplier Master</a></li>
+                    <li class="active"><a href="javascript:void(0);">Export Details</a></li>
                 </ul>
             </div>
             <div class="col-xs-6 text-right">
                 <div class="form-group">
                     <a class="btn btn-primary" href="<?php echo base_url(); ?>addnewSupplier">
-                        <i class="fa fa-plus"></i> Add Supplier</a>
+                        <i class="fa fa-plus"></i> Add Export Details</a>
                 </div>
             </div>
         </div>
@@ -26,20 +26,15 @@
                 <div class="box">
                     <div class="box-body">   
                         <div class="panel-body">
-                            <table width="100%" class="table table-striped table-bordered table-hover" id="view_supplier">
+                            <table width="100%" class="table table-striped table-bordered table-hover" id="view_export_details">
                                 <thead>
                                     <tr style="background-color:#3c8dbc !important;color:#fff">
-                                        <th>Supplier Name</th>
-                                        <th>Address</th>
-                                        <th>Email</th>
-                                        <th>Landline</th>
-                                        <th>Phone 1</th>
-                                        <!-- <th>Mobile 1</th>
-                                        <th>Mobile 2</th> -->
-                                        <th>Contact Person</th>
-                                        <!-- <th>Email</th>
-                                        <th>Fax</th>
-                                        <th>GSTIN</th> -->
+                                        <th>Export ID</th>
+                                        <th>Buyer Name</th>
+                                        <th>Buyer PO Number</th>
+                                        <th>Buyer PO Date</th>
+                                        <th>Buyer Order Qty</th>
+                                        <th>Buyer Delivery Date</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>

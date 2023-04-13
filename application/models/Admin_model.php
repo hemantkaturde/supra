@@ -2729,6 +2729,8 @@ class Admin_model extends CI_Model
         return $data;
     }
 
+    
+
 
     public function saveVendorbillofmaterilitemdata($id,$data){
 
@@ -2929,7 +2931,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['reported_by'] = $value['reported_by'];
                 $data[$counter]['reported_date'] = $value['reported_date'];
                 $data[$counter]['action'] = '';
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewSupplierpoconfirmation/".$value['incomigid']."' style='cursor: pointer;'><i style='font-size: large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editincomingdetails/".$value['incomigid']."' style='cursor: pointer;'><i style='font-size: large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['incomigid']."' class='fa fa-trash-o deleteIncomingDetails' aria-hidden='true'></i>"; 
                 $counter++; 
             }
@@ -2939,6 +2941,33 @@ class Admin_model extends CI_Model
 
 
     }
+
+
+    public function getVendorpoitems($part_number,$vendor_po_number){
+    
+        $this->db->select(TBL_FINISHED_GOODS.'.name,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_qty,'.TBL_FINISHED_GOODS.'.net_weight as net_weightfg');
+        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+        $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
+        $this->db->where(TBL_FINISHED_GOODS.'.status',1);
+        //$this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id',$buyer_po_number);
+        $this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
+        $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id',$vendor_po_number);
+        $query = $this->db->get(TBL_FINISHED_GOODS);
+        $data = $query->result_array();
+        return $data;
+    }
+
+    public function getVendorPonumberbyVendorid($supplier_name){
+        $this->db->select('*');
+        // $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_VENDOR_PO_MASTER.'.buyer_name');
+        $this->db->where(TBL_VENDOR_PO_MASTER.'.vendor_name', $supplier_name);
+        // $this->db->where(TBL_VENDOR_PO_MASTER.'.supplier_name !=',"");
+        // $this->db->where(TBL_VENDOR_PO_MASTER.'.supplier_po_number !=',"");
+        $query = $this->db->get(TBL_VENDOR_PO_MASTER);
+        $data = $query->result_array();
+        return $data;
+    }
+
 
     public function getPreviousincomingdetails(){
         $this->db->select('incoming_details_id');
@@ -2993,8 +3022,35 @@ class Admin_model extends CI_Model
     }
 
 
+    public function saveIncomingdetailsitem($id,$data){
 
+        if($id != '') {
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_INCOMING_DETAILS_ITEM, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_INCOMING_DETAILS_ITEM, $data)) {
+                return $this->db->insert_id();;
+            } else {
+                return FALSE;
+            }
+        }
 
+    }
+
+    public function getAllitemdetails(){
+
+        $this->db->select('*');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number');
+        $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id',$buyer_po_number);
+        $query = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
+        $data = $query->result_array();
+        return $data;
+
+    }
 
 
     public function getPackinginstractionCount(){
@@ -3015,8 +3071,6 @@ class Admin_model extends CI_Model
         return $rowcount;
 
     }
-
-
 
     public function getPackinginstractiondata(){
 
@@ -3084,7 +3138,6 @@ class Admin_model extends CI_Model
 
 
     }
-
 
 
     public function savePackinginstarction($id,$data){

@@ -5665,7 +5665,7 @@
 
 <?php if($pageTitle=='Add New Incoming Details' || $pageTitle=='Incoming Details'){ ?>
 	<script type="text/javascript">
-       $(document).ready(function() {
+        $(document).ready(function() {
             var dt = $('#view_incomingdetailss').DataTable({
 	            "columnDefs": [ 
 	                 { className: "details-control", "targets": [ 0 ] },
@@ -5700,7 +5700,7 @@
 			var vendor_name = $('#vendor_name').val();
 		    $('.vendor_po_number_div').css('display','block');
 			$.ajax({
-				url : "<?php echo ADMIN_PATH;?>getVendorPonumberbySupplierid",
+				url : "<?php echo ADMIN_PATH;?>getVendorPonumberbyVendorid",
 				type: "POST",
 				data : {'vendor_name' : vendor_name},
 				success: function(data, textStatus, jqXHR)
@@ -5769,7 +5769,6 @@
 			return false;
 	    });
 
-		
 		$(document).on('click','.deleteIncomingDetails',function(e){
 			var elemF = $(this);
 			e.preventDefault();
@@ -5818,7 +5817,6 @@
 			});
 		});
 
-
 		$(document).on('change','.vendor_po_number_itam_mapping',function(e){  
 			e.preventDefault();
 			//$(".loader_ajax").show();
@@ -5851,7 +5849,6 @@
 			return false;
 		});
 
-
 		$(document).on('change','#part_number',function(e){  
 			e.preventDefault();
 			
@@ -5863,7 +5860,7 @@
 			if(vendor_name){
 				if(vendor_po_number){
 						$.ajax({
-							url : "<?php echo ADMIN_PATH;?>getSuppliergoodsPartnumberByidforvendorbillofmaetrial",
+							url : "<?php echo ADMIN_PATH;?>getVendorpoitems",
 							type: "POST",
 							data : {'part_number' : part_number,'vendor_po_number':vendor_po_number},
 							success: function(data, textStatus, jqXHR)
@@ -5872,21 +5869,24 @@
 								if(data == "failure")
 								{
 									$('#description').val('');
-									$('#vendor_order_qty').val('');
+									$('#p_o_qty').val('');
+									$('#net_weight').val('');
 								
 								}
 								else
 								{
 									var data_row_material = jQuery.parseJSON( data );
 									$('#description').val(data_row_material.name);
-									$('#vendor_order_qty').val(data_row_material.vendor_qty);
+									$('#p_o_qty').val(data_row_material.vendor_qty);
+									$('#net_weight').val(data_row_material.net_weightfg);
 								
 								}
 							},
 							error: function (jqXHR, textStatus, errorThrown)
 							{
 								    $('#description').val('');
-									$('#vendor_order_qty').val('');					
+									$('#p_o_qty').val('');	
+									$('#net_weight').val('');				
 								    //$(".loader_ajax").hide();
 							}
 						});
@@ -5902,6 +5902,127 @@
 			}
 			
 		});
+
+		$(document).on('click','.closeIncomingDetailsmodal', function(){
+			location.reload();
+        });
+
+		$(document).on('click','#saveincomingitem',function(e){
+			e.preventDefault();
+			$(".loader_ajax").show();
+			   var formData = new FormData($("#saveincomingitemform")[0]);
+              
+			   var part_number =   $('#part_number').val();
+			   var description =   $('#description').val();
+			   var p_o_qty =   $('#p_o_qty').val();
+			   var net_weight =   $('#net_weight').val();
+			   var invoice_no =   $('#invoice_no').val();
+			   var invoice_date =   $('#invoice_date').val();
+			   var challan_no =   $('#challan_no').val();
+			   var challan_date =   $('#challan_date').val();
+			   var received_date =   $('#received_date').val();
+			   var invoice_qty =   $('#invoice_qty').val();
+			   var invoice_qty_in_kgs =   $('#invoice_qty_in_kgs').val();
+			   var balance_qty =   $('#balance_qty').val();
+			   var fg_material_gross_weight =   $('#fg_material_gross_weight').val();
+			   var units =   $('#units').val();
+			   var boxex_goni_bundle =   $('#boxex_goni_bundle').val();
+			   var remarks =   $('#remarks').val();
+
+			   var pre_vendor_name =   $('#vendor_name').val();
+			   var pre_vendor_po_number =   $('#vendor_po_number').val();
+			   var pre_reported_by =   $('#reported_by').val();
+			   var pre_report_date =   $('#reported_date').val();
+			   var pre_remark  =   $('#remark').val();
+
+
+			$.ajax({
+				url : "<?php echo base_url();?>saveincomingitem",
+				type: "POST",
+				 //data : formData,
+				 data :{ part_number:part_number,description:description,p_o_qty:p_o_qty,net_weight:net_weight,invoice_no:invoice_no,invoice_date:invoice_date,challan_no:challan_no,challan_date:challan_date,received_date:received_date,invoice_qty:invoice_qty,invoice_qty_in_kgs:invoice_qty_in_kgs,balance_qty:balance_qty,fg_material_gross_weight:fg_material_gross_weight,units:units,boxex_goni_bundle:boxex_goni_bundle,remarks:remarks,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_reported_by:pre_reported_by,pre_report_date:pre_report_date,pre_remark:pre_remark},
+				// method: "POST",
+                // data :{package_id:package_id},
+                cache:false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+						$(".loader_ajax").hide();
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						swal({
+							title: "Success",
+							text: "Item Successfully Added!",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+								window.location.href = "<?php echo base_url().'addnewencomingdetails'?>";
+						});		
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			});
+			return false;
+	    });
+
+
+		$(document).on('change', '#invoice_qty', function(){	
+
+				$("#invoice_qty_in_kgs").val();
+			  
+				 if($("#invoice_qty").val()){
+					 var invoice_qty = $("#invoice_qty").val();
+				 }else{
+					 var invoice_qty = 0;
+				 }
+
+				 if($("#net_weight").val()){
+					 var net_weight = $("#net_weight").val();
+				 }else{
+					 var net_weight = 0;
+				 }
+
+				 var total_value = parseFloat(invoice_qty) * parseFloat(net_weight);
+				 $("#invoice_qty_in_kgs").val( Math.round(total_value));
+
+
+
+				 /*============================================================*/
+
+				 $("#balance_qty").val();
+
+
+				 if($("#p_o_qty").val()){
+					 var p_o_qty = $("#p_o_qty").val();
+				 }else{
+					 var p_o_qty = 0;
+				 }
+
+				 if($("#invoice_qty_in_kgs").val()){
+					 var invoice_qty_in_kgs = $("#invoice_qty_in_kgs").val();
+				 }else{
+					 var invoice_qty_in_kgs = 0;
+				 }
+
+				 var bal_value = parseFloat(p_o_qty) - parseFloat(invoice_qty_in_kgs);
+				 $("#balance_qty").val( Math.round(bal_value));
+
+
+
+		});
+
+
 
    </script>
 <?php } ?>
@@ -6186,9 +6307,41 @@
 			return false;
 	    });
 
-
-
-    
-
 		</script>
+<?php } ?>
+
+
+
+
+
+<?php if($pageTitle=='Export Details'){ ?>
+	<script type="text/javascript">
+       $(document).ready(function() {
+            var dt = $('#view_export_details').DataTable({
+	            "columnDefs": [ 
+	                 { className: "details-control", "targets": [ 0 ] },
+	                 { "width": "15%", "targets": 0 },
+	                 { "width": "15%", "targets": 1 },
+					 { "width": "15%", "targets": 2 },
+	                 { "width": "15%", "targets": 3 },
+					 { "width": "10%", "targets": 4 },
+	            ],
+	            responsive: true,
+	            "oLanguage": {
+	                "sEmptyTable": "<i>No Export Details Found.</i>",
+	            }, 
+	            "bSort" : false,
+	            "bFilter":true,
+	            "bLengthChange": true,
+	            "iDisplayLength": 10,   
+	            "bProcessing": true,
+	            "serverSide": true,
+	            "ajax":{
+                    url :"<?php echo base_url();?>fetchexportdetails",
+                    type: "post",
+	            },
+	        });
+	    });
+
+    </script>
 <?php } ?>

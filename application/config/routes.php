@@ -204,15 +204,26 @@ $route['addpackinginstractiondetailsaction'] = "admin/addpackinginstractiondetai
 
 $route['getBuyerpoitemonly'] = "admin/getBuyerpoitemonly";
 $route['exportdetails'] = "admin/exportdetails";
+$route['fetchexportdetails'] = "admin/fetchexportdetails";
+
+
 $route['challanform'] = "admin/challanform";
 $route['packagingform'] = "admin/packagingform";
 $route['rrchallan'] = "admin/rrchallan";
 
 
+
 $route['incomingdetails'] = "admin/incomingdetails";
+$route['getVendorpoitems'] = "admin/getVendorpoitems";
+$route['getVendorPonumberbyVendorid'] = "admin/getVendorPonumberbyVendorid";
 $route['addnewencomingdetails'] = "admin/addnewencomingdetails";
 $route['fetchincomingdeatils'] = "admin/fetchincomingdeatils";
+$route['editincomingdetails/(:any)'] = "admin/editincomingdetails/$1";
 $route['deleteIncomingDetails'] = "admin/deleteIncomingDetails";
+$route['saveincomingitem'] = "admin/saveincomingitem";
+
+
+
 
 
 

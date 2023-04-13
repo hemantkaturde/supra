@@ -4190,6 +4190,7 @@ class Admin extends BaseController
     }
 
 
+
     public function saveVendorbilloamaterialitems(){
 
         $post_submit = $this->input->post();
@@ -4450,6 +4451,36 @@ class Admin extends BaseController
         $this->loadViews("masters/exportdetails", $this->global, $data, NULL);  
     }
 
+
+
+    public function fetchexportdetails(){
+        $params = $_REQUEST;
+        $totalRecords = $this->admin_model->getExportdetailsCount($params); 
+        $queryRecords = $this->admin_model->getExportdetailsdata($params); 
+
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+        echo json_encode($json_data);
+
+    }
+
+
+
+
     public function challanform(){
 
         $process = 'Challan Form';
@@ -4489,6 +4520,45 @@ class Admin extends BaseController
         $this->logrecord($process,$processFunction);
         $this->global['pageTitle'] = 'Incoming Details';
         $this->loadViews("masters/incomingdetails", $this->global, $data, NULL);  
+
+    }
+
+
+    public function getVendorPonumberbyVendorid(){
+
+        $vendor_name=$this->input->post('vendor_name');
+        if($vendor_name) {
+			$getVendordetails = $this->admin_model->getVendorPonumberbyVendorid($vendor_name);
+			if(count($getVendordetails) >= 1) {
+                $content = $content.'<option value="">Select Vendor PO Number</option>';
+				foreach($getVendordetails as $value) {
+					$content = $content.'<option value="'.$value["id"].'">'.$value["po_number"].'</option>';
+				}
+				echo $content;
+			} else {
+				echo 'failure';
+			}
+		} else {
+			echo 'failure';
+		}
+    }
+
+    
+    public function getVendorpoitems(){
+
+        if($this->input->post('part_number')) {
+            $getPartNameBypartid = $this->admin_model->getVendorpoitems($this->input->post('part_number'),$this->input->post('vendor_po_number'));
+            if($getPartNameBypartid){
+                $content = $getPartNameBypartid[0];
+                echo json_encode($content);
+
+            }else{
+                echo 'failure';
+            }
+           
+        } else {
+            echo 'failure';
+        }
 
     }
 
@@ -4583,8 +4653,87 @@ class Admin extends BaseController
             $data['vendorList']= $this->admin_model->fetchALLvendorList();
             $data['getPreviousincomingdetails']= $this->admin_model->getPreviousincomingdetails();
             //$data['getitemdetails']= $this->admin_model->getitemdetails();
+
+            $data['getAllitemdetails']= $this->admin_model->getAllitemdetails();
             $this->loadViews("masters/addnewencomingdetails", $this->global, $data, NULL);
 
+        }
+    }
+
+
+    public function editincomingdetails($id){
+
+        $process = 'Edit Incoming Details';
+        $processFunction = 'Admin/editincomingdetails';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Edit Incoming Details';
+        // $data['vendorList']= $this->admin_model->fetchALLvendorList();
+        // $data['getPreviousincomingdetails']= $this->admin_model->getPreviousincomingdetails();
+        $this->loadViews("masters/editincomingdetails", $this->global, $data, NULL);
+
+    }
+
+
+    public function saveincomingitem(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $save_incoming_details_items = array();
+
+            $this->form_validation->set_rules('part_number','Part Number','trim|required');
+            // $this->form_validation->set_rules('description','Description','trim|required');
+            // $this->form_validation->set_rules('p_o_qty','P  O Qty','trim|required');
+            $this->form_validation->set_rules('net_weight','Net Weight','trim|required');
+            $this->form_validation->set_rules('invoice_no','Invoice No','trim|required');
+            $this->form_validation->set_rules('invoice_date','Invoice Date','trim|required');
+            $this->form_validation->set_rules('challan_no','Challan No','trim|required');
+            $this->form_validation->set_rules('challan_date','Challan Date','trim|required');
+            $this->form_validation->set_rules('received_date','Received Date','trim|required');
+            $this->form_validation->set_rules('invoice_qty','Invoice Qty','trim|required');
+            $this->form_validation->set_rules('invoice_qty_in_kgs','Invoice Qty In kgs','trim|required');
+            $this->form_validation->set_rules('balance_qty','Balance Qty','trim|required');
+            $this->form_validation->set_rules('fg_material_gross_weight','FG Material Gross Weight','trim|required');
+            $this->form_validation->set_rules('units','Units','trim|required');
+            $this->form_validation->set_rules('boxex_goni_bundle','Box Goni Bundle','trim|required');
+            $this->form_validation->set_rules('remarks','Remarks','trim');
+
+            if($this->form_validation->run() == FALSE)
+            {
+                $save_incoming_details_items['status'] = 'failure';
+                $save_incoming_details_items['error'] = array('part_number'=>strip_tags(form_error('part_number')),'description'=>strip_tags(form_error('description')),'p_o_qty'=>strip_tags(form_error('p_o_qty')),'net_weight'=>strip_tags(form_error('net_weight')),'invoice_no'=>strip_tags(form_error('invoice_no')),'invoice_date'=>strip_tags(form_error('invoice_date')),'challan_no'=>strip_tags(form_error('challan_no')),'challan_date'=>strip_tags(form_error('challan_date')),'received_date'=>strip_tags(form_error('received_date')),'invoice_qty'=>strip_tags(form_error('invoice_qty')),'invoice_qty_in_kgs'=>strip_tags(form_error('invoice_qty_in_kgs')),'balance_qty'=>strip_tags(form_error('balance_qty')),'fg_material_gross_weight'=>strip_tags(form_error('fg_material_gross_weight')),'units'=>strip_tags(form_error('units')),'boxex_goni_bundle'=>strip_tags(form_error('boxex_goni_bundle')),'remarks'=>strip_tags(form_error('remarks')));
+           
+            }else{
+
+
+                $data = array(
+                    'part_number'   => trim($this->input->post('part_number')),
+                    'invoice_no'  => trim($this->input->post('invoice_no')),
+                    'invoice_date'=> trim($this->input->post('invoice_date')),
+                    'challan_no' =>    trim($this->input->post('challan_no')),
+                    'challan_date' =>    trim($this->input->post('challan_date')),
+                    'received_date' =>    trim($this->input->post('received_date')),
+                    'invoice_qty' =>    trim($this->input->post('invoice_qty')),
+                    'invoice_qty_in_kgs' =>    trim($this->input->post('invoice_qty_in_kgs')),
+                    'balance_qty' =>    trim($this->input->post('balance_qty')),
+                    'fg_material_gross_weight' =>    trim($this->input->post('fg_material_gross_weight')),
+                    'units' =>    trim($this->input->post('units')),
+                    'boxex_goni_bundle' =>    trim($this->input->post('boxex_goni_bundle')),
+                    'remarks' =>    trim($this->input->post('remarks')),
+                    'pre_vendor_name' =>  trim($this->input->post('pre_vendor_name')),
+                    'pre_vendor_po_number' =>  trim($this->input->post('pre_vendor_po_number')),
+                    'pre_reported_by' =>  trim($this->input->post('pre_reported_by')),
+                    'pre_report_date' =>  trim($this->input->post('pre_report_date')),
+                    'pre_remark' =>  trim($this->input->post('pre_remark')),
+                );
+
+                $saveIncomingdetailsitem= $this->admin_model->saveIncomingdetailsitem('',$data);
+
+                if($saveIncomingdetailsitem){
+                    $save_incoming_details_items['status'] = 'success';
+                    $save_incoming_details_items['error'] = array('part_number'=>strip_tags(form_error('part_number')),'description'=>strip_tags(form_error('description')),'p_o_qty'=>strip_tags(form_error('p_o_qty')),'net_weight'=>strip_tags(form_error('net_weight')),'invoice_no'=>strip_tags(form_error('invoice_no')),'invoice_date'=>strip_tags(form_error('invoice_date')),'challan_no'=>strip_tags(form_error('challan_no')),'challan_date'=>strip_tags(form_error('challan_date')),'received_date'=>strip_tags(form_error('received_date')),'invoice_qty'=>strip_tags(form_error('invoice_qty')),'invoice_qty_in_kgs'=>strip_tags(form_error('invoice_qty_in_kgs')),'balance_qty'=>strip_tags(form_error('balance_qty')),'fg_material_gross_weight'=>strip_tags(form_error('fg_material_gross_weight')),'units'=>strip_tags(form_error('units')),'boxex_goni_bundle'=>strip_tags(form_error('boxex_goni_bundle')),'remarks'=>strip_tags(form_error('remarks')));
+                }
+            }
+
+            echo json_encode($save_incoming_details_items);
         }
     }
 

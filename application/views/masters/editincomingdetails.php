@@ -1,7 +1,7 @@
 <div class="content-wrapper">
     <section class="content-header">
         <h1>
-            <i class="fa fa-users"></i> Add New Incoming Details
+            <i class="fa fa-users"></i> Edit Incoming Details
             <small>
                 <ul class="breadcrumb" style="background-color:#ecf0f5 !important">
                     <li class="completed"><a href="javascript:void(0);">Masters</a></li>
@@ -17,7 +17,7 @@
                 <div class="box">
                     <div class="box box-primary">
                         <div class="box-header">
-                            <h3 class="box-title">Add Incoming Details</h3>
+                            <h3 class="box-title">Edit Incoming Details</h3>
                         </div>
                         <?php $this->load->helper("form"); ?>
                         <form role="form" id="addnewincomingdetailsform" action="<?php echo base_url() ?>addnewincomingdetailsform" method="post" role="form">
@@ -132,8 +132,7 @@
                                     </div>
 
                                       <!-- Add New Package Modal -->
-                                      <?php $this->load->helper("form"); ?>
-
+                                    <?php $this->load->helper("form"); ?>
                                     <div class="modal fade" id="addNewModal" role="dialog" aria-labelledby="additem" aria-hidden="true" data-backdrop="static" data-keyboard="false">
                                       
                                         <div class="modal-dialog" role="document">
@@ -142,7 +141,7 @@
                                                 <h3 class="modal-title" id="additem">Add New Item</h3>
                                                 </button>
                                             </div>
-                                            <form role="form" id="saveincomingitemform" action="<?php echo base_url() ?>saveincomingitemform" method="post" role="form">
+                                            <form role="form" id="addincomingitemform" action="<?php echo base_url() ?>addincomingitem" method="post" role="form">
 
                                                 <div class="modal-body">
                                                         <div class="loader_ajax" style="display:none;">
@@ -167,30 +166,30 @@
                                                         <label class="col-sm-3 col-form-label">FG Part Description<span class="required">*</span></label>
                                                         <div class="col-sm-9">
                                                             <!-- <textarea type="text" class="form-control"  id="description"  name="description" required></textarea> -->
-                                                            <input type="text" class="form-control"  id="description" name="description" required readonly>
+                                                            <input type="type" class="form-control"  id="description" name="description" required readonly>
                                                             <p class="error description_error"></p>
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">P.O.Qty <span class="required">*</span></label>
+                                                        <label class="col-sm-3 col-form-label">P.O.Qty</label>
                                                         <div class="col-sm-9">
-                                                            <input type="number" class="form-control"  id="p_o_qty" name="p_o_qty" readonly>
+                                                            <input type="number" class="form-control"  id="p_o_qty" name="p_o_qty">
                                                             <p class="error p_o_qty_error"></p>
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Net weight (In Kgs) <span class="required">*</span></label>
+                                                        <label class="col-sm-3 col-form-label">Net weight</label>
                                                         <div class="col-sm-9">
-                                                            <input type="text" class="form-control"  id="net_weight" name="net_weight" readonly>
+                                                            <input type="number" class="form-control"  id="net_weight" name="net_weight">
                                                             <p class="error net_weight_error"></p>
                                                         </div>
                                                     </div>
 
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Invoice No <span class="required">*</span></label>
+                                                        <label class="col-sm-3 col-form-label">Invoice No</label>
                                                         <div class="col-sm-9">
                                                             <input type="number" class="form-control"  id="invoice_no" name="invoice_no">
                                                             <p class="error invoice_no_error"></p>
@@ -198,16 +197,16 @@
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Invoice Date <span class="required">*</span></label>
+                                                        <label class="col-sm-3 col-form-label">Invoice Date</label>
                                                         <div class="col-sm-9">
-                                                            <input type="text" class="form-control datepicker"  id="invoice_date" name="invoice_date">
+                                                            <input type="number" class="form-control datepicker"  id="invoice_date" name="invoice_date">
                                                             <p class="error invoice_date_error"></p>
                                                         </div>
                                                     </div>
 
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Challan No <span class="required">*</span></label>
+                                                        <label class="col-sm-3 col-form-label">Challan No</label>
                                                         <div class="col-sm-9">
                                                             <input type="text" class="form-control"  id="challan_no" name="challan_no">
                                                             <p class="error challan_no_error"></p>
@@ -215,24 +214,24 @@
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Challan Date <span class="required">*</span></label>
+                                                        <label class="col-sm-3 col-form-label">Challan Date</label>
                                                         <div class="col-sm-9">
-                                                            <input type="text" class="form-control datepicker"  id="challan_date" name="challan_date">
+                                                            <input type="number" class="form-control datepicker"  id="challan_date" name="challan_date">
                                                             <p class="error challan_date_error"></p>
                                                         </div>
                                                     </div>
 
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Received Date <span class="required">*</span></label>
+                                                        <label class="col-sm-3 col-form-label">Received Date</label>
                                                         <div class="col-sm-9">
-                                                            <input type="text" class="form-control datepicker"  id="received_date" name="received_date">
+                                                            <input type="number" class="form-control"  id="received_date" name="received_date">
                                                             <p class="error received_date_error"></p>
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Invoice Qty (in Pcs) <span class="required">*</span></label>
+                                                        <label class="col-sm-3 col-form-label">Invoice Qty (in Pcs)</label>
                                                         <div class="col-sm-9">
                                                             <input type="number" class="form-control"  id="invoice_qty" name="invoice_qty">
                                                             <p class="error invoice_qty_error"></p>
@@ -240,7 +239,7 @@
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Invoice Qty (in Kgs) <span class="required">*</span></label>
+                                                        <label class="col-sm-3 col-form-label">Invoice Qty (in Kgs)</label>
                                                         <div class="col-sm-9">
                                                             <input type="number" class="form-control"  id="invoice_qty_in_kgs" name="invoice_qty_in_kgs" readonly>
                                                             <p class="error invoice_qty_in_kgs_error"></p>
@@ -248,7 +247,7 @@
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Balance Qty (in Pcs) <span class="required">*</span></label>
+                                                        <label class="col-sm-3 col-form-label">Balance Qty (in Pcs)</label>
                                                         <div class="col-sm-9">
                                                             <input type="number" class="form-control"  id="balance_qty" name="balance_qty" readonly>
                                                             <p class="error balance_qty_error"></p>
@@ -257,16 +256,16 @@
 
                                                     
                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">FG Material Gross Weight <span class="required">*</span></label>
+                                                        <label class="col-sm-3 col-form-label">FG Material Gross Weight</label>
                                                         <div class="col-sm-9">
-                                                            <input type="text" class="form-control"  id="fg_material_gross_weight" name="fg_material_gross_weight">
+                                                            <input type="number" class="form-control"  id="fg_material_gross_weight" name="fg_material_gross_weight">
                                                             <p class="error fg_material_gross_weight_error"></p>
                                                         </div>
                                                     </div>
 
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Units <span class="required">*</span></label>
+                                                        <label class="col-sm-3 col-form-label">Units</label>
                                                         <div class="col-sm-9">
                                                              <select class="form-control" name="units" id="units">
                                                                 <option value="">Select Part Name</option>
@@ -276,7 +275,7 @@
                                                                 <option value="Sheet">Sheet</option>
                                                                 <option value="Set">Set</option>
                                                              </select>
-                                                            <p class="error units_error"></p>
+                                                            <p class="error unit_error"></p>
                                                         </div>
                                                     </div>
 
@@ -299,8 +298,8 @@
                                                 </div>
 
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary btn-xl closeIncomingDetailsmodal" data-dismiss="modal">Close</button>
-                                                    <button type="submit" id="saveincomingitem" name="saveincomingitem" class="btn btn-primary" class="btn btn-success btn-xl">Save</button>
+                                                    <button type="button" class="btn btn-secondary btn-xl closebuyerpo" data-dismiss="modal">Close</button>
+                                                    <button type="submit" id="savebuyeritem" name="savebuyeritem" class="btn btn-primary" class="btn btn-success btn-xl">Save</button>
                                                 </div>
 
                                             </form>    
@@ -323,7 +322,7 @@
                                      } ?>
 
                                     <input type="submit" id="saveincomingdetails" class="btn btn-primary" value="Submit" />
-                                    <input type="button" onclick="location.href = '<?php echo base_url() ?>incomingdetails'" class="btn btn-default" value="Back" />
+                                    <input type="button" onclick="location.href = '<?php echo base_url() ?>buyerpo'" class="btn btn-default" value="Back" />
                                 </div>
                             </div>
                         </form>
