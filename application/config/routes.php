@@ -222,6 +222,9 @@ $route['editincomingdetails/(:any)'] = "admin/editincomingdetails/$1";
 $route['deleteIncomingDetails'] = "admin/deleteIncomingDetails";
 $route['saveincomingitem'] = "admin/saveincomingitem";
 
+$route['deleteIncomingDetailsitem'] = "admin/deleteIncomingDetailsitem";
+
+
 
 
 

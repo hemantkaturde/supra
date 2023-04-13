@@ -4631,11 +4631,11 @@ class Admin extends BaseController
 
 
                     if($saveIncomingdetails){
-                        // $update_last_inserted_id_job_work = $this->admin_model->update_last_inserted_id_job_work($saveJobworkdata);
-                        // if($update_last_inserted_id_job_work){
+                         $update_last_inserted_id_incoming_details = $this->admin_model->update_last_inserted_id_incoming_details($saveIncomingdetails);
+                         if($update_last_inserted_id_incoming_details){
                              $save_incoming_details['status'] = 'success';
                              $save_incoming_details['error'] = array( 'incoming_no'=>strip_tags(form_error('incoming_no')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'reported_by'=>strip_tags(form_error('reported_by')),'reported_date'=>strip_tags(form_error('reported_date')),'remark'=>strip_tags(form_error('remark')));
-                             //   }
+                         }
                     }
 
                 }
@@ -4653,11 +4653,29 @@ class Admin extends BaseController
             $data['vendorList']= $this->admin_model->fetchALLvendorList();
             $data['getPreviousincomingdetails']= $this->admin_model->getPreviousincomingdetails();
             //$data['getitemdetails']= $this->admin_model->getitemdetails();
-
             $data['getAllitemdetails']= $this->admin_model->getAllitemdetails();
+
             $this->loadViews("masters/addnewencomingdetails", $this->global, $data, NULL);
 
         }
+    }
+
+
+       public function deleteIncomingDetailsitem(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->deleteIncomingDetailsitem(trim($this->input->post('id')));
+            if ($result) {
+                        $process = 'Delete Incoming Details Item';
+                        $processFunction = 'Admin/deleteIncomingDetailsitem';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
+
     }
 
 
@@ -4667,8 +4685,9 @@ class Admin extends BaseController
         $processFunction = 'Admin/editincomingdetails';
         $this->logrecord($process,$processFunction);
         $this->global['pageTitle'] = 'Edit Incoming Details';
-        // $data['vendorList']= $this->admin_model->fetchALLvendorList();
-        // $data['getPreviousincomingdetails']= $this->admin_model->getPreviousincomingdetails();
+        $data['vendorList']= $this->admin_model->fetchALLvendorList();
+        $data['getPreviousincomingdetails']= $this->admin_model->getPreviousincomingdetails();
+        $data['getAllitemdetails']= $this->admin_model->getAllitemdetailsforedit($id);
         $this->loadViews("masters/editincomingdetails", $this->global, $data, NULL);
 
     }
@@ -4681,7 +4700,7 @@ class Admin extends BaseController
 
             $this->form_validation->set_rules('part_number','Part Number','trim|required');
             // $this->form_validation->set_rules('description','Description','trim|required');
-            // $this->form_validation->set_rules('p_o_qty','P  O Qty','trim|required');
+            $this->form_validation->set_rules('p_o_qty','P  O Qty','trim|required');
             $this->form_validation->set_rules('net_weight','Net Weight','trim|required');
             $this->form_validation->set_rules('invoice_no','Invoice No','trim|required');
             $this->form_validation->set_rules('invoice_date','Invoice Date','trim|required');
@@ -4706,6 +4725,8 @@ class Admin extends BaseController
 
                 $data = array(
                     'part_number'   => trim($this->input->post('part_number')),
+                    'p_o_qty'       => trim($this->input->post('p_o_qty')),
+                    'net_weight'    => trim($this->input->post('net_weight')),
                     'invoice_no'  => trim($this->input->post('invoice_no')),
                     'invoice_date'=> trim($this->input->post('invoice_date')),
                     'challan_no' =>    trim($this->input->post('challan_no')),
