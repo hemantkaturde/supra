@@ -4610,36 +4610,61 @@ class Admin extends BaseController
                 $save_incoming_details['error'] = array( 'incoming_no'=>strip_tags(form_error('incoming_no')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'reported_by'=>strip_tags(form_error('reported_by')),'reported_date'=>strip_tags(form_error('reported_date')),'remark'=>strip_tags(form_error('remark')));
            
             }else{
-                     
-                $data = array(
-                    'incoming_details_id'   => trim($this->input->post('incoming_no')),
-                    'vendor_name'  => trim($this->input->post('vendor_name')),
-                    'vendor_po_number'=> trim($this->input->post('vendor_po_number')),
-                    'reported_by' =>    trim($this->input->post('reported_by')),
-                    'reported_date' =>    trim($this->input->post('reported_date')),
-                    'remark' =>    trim($this->input->post('remark'))
-                );
 
-                $checkIfexitsincomingdetails = $this->admin_model->checkIfexitsincomingdetails(trim($this->input->post('incoming_no')));
+                if($this->input->post('incomingdetail_editid')){
 
+                        $data = array(
+                            'incoming_details_id'   => trim($this->input->post('incoming_no')),
+                            'vendor_name'  => trim($this->input->post('vendor_name')),
+                            'vendor_po_number'=> trim($this->input->post('vendor_po_number')),
+                            'reported_by' =>    trim($this->input->post('reported_by')),
+                            'reported_date' =>    trim($this->input->post('reported_date')),
+                            'remark' =>    trim($this->input->post('remark'))
+                        );
+        
+                        $saveIncomingdetails= $this->admin_model->saveIncomingdetails(trim($this->input->post('incomingdetail_editid')),$data);
+    
+                        if($saveIncomingdetails){
+                                $update_last_inserted_id_incoming_details = $this->admin_model->update_last_inserted_id_incoming_details($saveIncomingdetails);
+                                if($update_last_inserted_id_incoming_details){
+                                    $save_incoming_details['status'] = 'success';
+                                    $save_incoming_details['error'] = array( 'incoming_no'=>strip_tags(form_error('incoming_no')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'reported_by'=>strip_tags(form_error('reported_by')),'reported_date'=>strip_tags(form_error('reported_date')),'remark'=>strip_tags(form_error('remark')));
+                                }
+                        }
 
-                if($checkIfexitsincomingdetails > 0){
-                    $save_incoming_details['status'] = 'failure';
-                    $save_incoming_details['error'] = array( 'incoming_no'=>strip_tags(form_error('incoming_no')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'reported_by'=>strip_tags(form_error('reported_by')),'reported_date'=>strip_tags(form_error('reported_date')),'remark'=>strip_tags(form_error('remark')));
                 }else{
-                    $saveIncomingdetails= $this->admin_model->saveIncomingdetails('',$data);
 
-
-                    if($saveIncomingdetails){
-                         $update_last_inserted_id_incoming_details = $this->admin_model->update_last_inserted_id_incoming_details($saveIncomingdetails);
-                         if($update_last_inserted_id_incoming_details){
-                             $save_incoming_details['status'] = 'success';
-                             $save_incoming_details['error'] = array( 'incoming_no'=>strip_tags(form_error('incoming_no')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'reported_by'=>strip_tags(form_error('reported_by')),'reported_date'=>strip_tags(form_error('reported_date')),'remark'=>strip_tags(form_error('remark')));
-                         }
+                    $data = array(
+                        'incoming_details_id'   => trim($this->input->post('incoming_no')),
+                        'vendor_name'  => trim($this->input->post('vendor_name')),
+                        'vendor_po_number'=> trim($this->input->post('vendor_po_number')),
+                        'reported_by' =>    trim($this->input->post('reported_by')),
+                        'reported_date' =>    trim($this->input->post('reported_date')),
+                        'remark' =>    trim($this->input->post('remark'))
+                    );
+    
+                    $checkIfexitsincomingdetails = $this->admin_model->checkIfexitsincomingdetails(trim($this->input->post('incoming_no')));
+    
+    
+                    if($checkIfexitsincomingdetails > 0){
+                        $save_incoming_details['status'] = 'failure';
+                        $save_incoming_details['error'] = array( 'incoming_no'=>strip_tags(form_error('incoming_no')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'reported_by'=>strip_tags(form_error('reported_by')),'reported_date'=>strip_tags(form_error('reported_date')),'remark'=>strip_tags(form_error('remark')));
+                    }else{
+                        $saveIncomingdetails= $this->admin_model->saveIncomingdetails('',$data);
+    
+    
+                        if($saveIncomingdetails){
+                            $update_last_inserted_id_incoming_details = $this->admin_model->update_last_inserted_id_incoming_details($saveIncomingdetails);
+                            if($update_last_inserted_id_incoming_details){
+                                $save_incoming_details['status'] = 'success';
+                                $save_incoming_details['error'] = array( 'incoming_no'=>strip_tags(form_error('incoming_no')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'reported_by'=>strip_tags(form_error('reported_by')),'reported_date'=>strip_tags(form_error('reported_date')),'remark'=>strip_tags(form_error('remark')));
+                            }
+                        }
+    
                     }
-
+            
                 }
-
+               
             }
 
             echo json_encode($save_incoming_details);
@@ -4654,7 +4679,6 @@ class Admin extends BaseController
             $data['getPreviousincomingdetails']= $this->admin_model->getPreviousincomingdetails();
             //$data['getitemdetails']= $this->admin_model->getitemdetails();
             $data['getAllitemdetails']= $this->admin_model->getAllitemdetails();
-
             $this->loadViews("masters/addnewencomingdetails", $this->global, $data, NULL);
 
         }
@@ -4687,7 +4711,9 @@ class Admin extends BaseController
         $this->global['pageTitle'] = 'Edit Incoming Details';
         $data['vendorList']= $this->admin_model->fetchALLvendorList();
         $data['getPreviousincomingdetails']= $this->admin_model->getPreviousincomingdetails();
+        $data['getPreviousincomingdetailsforedit']= $this->admin_model->getPreviousincomingdetailsforedit($id);
         $data['getAllitemdetails']= $this->admin_model->getAllitemdetailsforedit($id);
+        $data['edit_id']= $id;
         $this->loadViews("masters/editincomingdetails", $this->global, $data, NULL);
 
     }
@@ -4723,34 +4749,74 @@ class Admin extends BaseController
             }else{
 
 
-                $data = array(
-                    'part_number'   => trim($this->input->post('part_number')),
-                    'p_o_qty'       => trim($this->input->post('p_o_qty')),
-                    'net_weight'    => trim($this->input->post('net_weight')),
-                    'invoice_no'  => trim($this->input->post('invoice_no')),
-                    'invoice_date'=> trim($this->input->post('invoice_date')),
-                    'challan_no' =>    trim($this->input->post('challan_no')),
-                    'challan_date' =>    trim($this->input->post('challan_date')),
-                    'received_date' =>    trim($this->input->post('received_date')),
-                    'invoice_qty' =>    trim($this->input->post('invoice_qty')),
-                    'invoice_qty_in_kgs' =>    trim($this->input->post('invoice_qty_in_kgs')),
-                    'balance_qty' =>    trim($this->input->post('balance_qty')),
-                    'fg_material_gross_weight' =>    trim($this->input->post('fg_material_gross_weight')),
-                    'units' =>    trim($this->input->post('units')),
-                    'boxex_goni_bundle' =>    trim($this->input->post('boxex_goni_bundle')),
-                    'remarks' =>    trim($this->input->post('remarks')),
-                    'pre_vendor_name' =>  trim($this->input->post('pre_vendor_name')),
-                    'pre_vendor_po_number' =>  trim($this->input->post('pre_vendor_po_number')),
-                    'pre_reported_by' =>  trim($this->input->post('pre_reported_by')),
-                    'pre_report_date' =>  trim($this->input->post('pre_report_date')),
-                    'pre_remark' =>  trim($this->input->post('pre_remark')),
-                );
+                if($this->input->post('incomingdetail_editid')){
 
-                $saveIncomingdetailsitem= $this->admin_model->saveIncomingdetailsitem('',$data);
 
-                if($saveIncomingdetailsitem){
-                    $save_incoming_details_items['status'] = 'success';
-                    $save_incoming_details_items['error'] = array('part_number'=>strip_tags(form_error('part_number')),'description'=>strip_tags(form_error('description')),'p_o_qty'=>strip_tags(form_error('p_o_qty')),'net_weight'=>strip_tags(form_error('net_weight')),'invoice_no'=>strip_tags(form_error('invoice_no')),'invoice_date'=>strip_tags(form_error('invoice_date')),'challan_no'=>strip_tags(form_error('challan_no')),'challan_date'=>strip_tags(form_error('challan_date')),'received_date'=>strip_tags(form_error('received_date')),'invoice_qty'=>strip_tags(form_error('invoice_qty')),'invoice_qty_in_kgs'=>strip_tags(form_error('invoice_qty_in_kgs')),'balance_qty'=>strip_tags(form_error('balance_qty')),'fg_material_gross_weight'=>strip_tags(form_error('fg_material_gross_weight')),'units'=>strip_tags(form_error('units')),'boxex_goni_bundle'=>strip_tags(form_error('boxex_goni_bundle')),'remarks'=>strip_tags(form_error('remarks')));
+                    $data = array(
+                        'incoming_details_id' =>  $this->input->post('incomingdetail_editid'),
+                        'part_number'   => trim($this->input->post('part_number')),
+                        'p_o_qty'       => trim($this->input->post('p_o_qty')),
+                        'net_weight'    => trim($this->input->post('net_weight')),
+                        'invoice_no'  => trim($this->input->post('invoice_no')),
+                        'invoice_date'=> trim($this->input->post('invoice_date')),
+                        'challan_no' =>    trim($this->input->post('challan_no')),
+                        'challan_date' =>    trim($this->input->post('challan_date')),
+                        'received_date' =>    trim($this->input->post('received_date')),
+                        'invoice_qty' =>    trim($this->input->post('invoice_qty')),
+                        'invoice_qty_in_kgs' =>    trim($this->input->post('invoice_qty_in_kgs')),
+                        'balance_qty' =>    trim($this->input->post('balance_qty')),
+                        'fg_material_gross_weight' =>    trim($this->input->post('fg_material_gross_weight')),
+                        'units' =>    trim($this->input->post('units')),
+                        'boxex_goni_bundle' =>    trim($this->input->post('boxex_goni_bundle')),
+                        'remarks' =>    trim($this->input->post('remarks')),
+                        'pre_vendor_name' =>  trim($this->input->post('pre_vendor_name')),
+                        'pre_vendor_po_number' =>  trim($this->input->post('pre_vendor_po_number')),
+                        'pre_reported_by' =>  trim($this->input->post('pre_reported_by')),
+                        'pre_report_date' =>  trim($this->input->post('pre_report_date')),
+                        'pre_remark' =>  trim($this->input->post('pre_remark')),
+                    );
+
+                    $saveIncomingdetailsitem= $this->admin_model->saveIncomingdetailsitem('',$data);
+
+                    if($saveIncomingdetailsitem){
+                        $save_incoming_details_items['status'] = 'success';
+                        $save_incoming_details_items['error'] = array('part_number'=>strip_tags(form_error('part_number')),'description'=>strip_tags(form_error('description')),'p_o_qty'=>strip_tags(form_error('p_o_qty')),'net_weight'=>strip_tags(form_error('net_weight')),'invoice_no'=>strip_tags(form_error('invoice_no')),'invoice_date'=>strip_tags(form_error('invoice_date')),'challan_no'=>strip_tags(form_error('challan_no')),'challan_date'=>strip_tags(form_error('challan_date')),'received_date'=>strip_tags(form_error('received_date')),'invoice_qty'=>strip_tags(form_error('invoice_qty')),'invoice_qty_in_kgs'=>strip_tags(form_error('invoice_qty_in_kgs')),'balance_qty'=>strip_tags(form_error('balance_qty')),'fg_material_gross_weight'=>strip_tags(form_error('fg_material_gross_weight')),'units'=>strip_tags(form_error('units')),'boxex_goni_bundle'=>strip_tags(form_error('boxex_goni_bundle')),'remarks'=>strip_tags(form_error('remarks')));
+                    }
+
+
+
+                }else{
+
+                        $data = array(
+                            'part_number'   => trim($this->input->post('part_number')),
+                            'p_o_qty'       => trim($this->input->post('p_o_qty')),
+                            'net_weight'    => trim($this->input->post('net_weight')),
+                            'invoice_no'  => trim($this->input->post('invoice_no')),
+                            'invoice_date'=> trim($this->input->post('invoice_date')),
+                            'challan_no' =>    trim($this->input->post('challan_no')),
+                            'challan_date' =>    trim($this->input->post('challan_date')),
+                            'received_date' =>    trim($this->input->post('received_date')),
+                            'invoice_qty' =>    trim($this->input->post('invoice_qty')),
+                            'invoice_qty_in_kgs' =>    trim($this->input->post('invoice_qty_in_kgs')),
+                            'balance_qty' =>    trim($this->input->post('balance_qty')),
+                            'fg_material_gross_weight' =>    trim($this->input->post('fg_material_gross_weight')),
+                            'units' =>    trim($this->input->post('units')),
+                            'boxex_goni_bundle' =>    trim($this->input->post('boxex_goni_bundle')),
+                            'remarks' =>    trim($this->input->post('remarks')),
+                            'pre_vendor_name' =>  trim($this->input->post('pre_vendor_name')),
+                            'pre_vendor_po_number' =>  trim($this->input->post('pre_vendor_po_number')),
+                            'pre_reported_by' =>  trim($this->input->post('pre_reported_by')),
+                            'pre_report_date' =>  trim($this->input->post('pre_report_date')),
+                            'pre_remark' =>  trim($this->input->post('pre_remark')),
+                        );
+
+                        $saveIncomingdetailsitem= $this->admin_model->saveIncomingdetailsitem('',$data);
+
+                        if($saveIncomingdetailsitem){
+                            $save_incoming_details_items['status'] = 'success';
+                            $save_incoming_details_items['error'] = array('part_number'=>strip_tags(form_error('part_number')),'description'=>strip_tags(form_error('description')),'p_o_qty'=>strip_tags(form_error('p_o_qty')),'net_weight'=>strip_tags(form_error('net_weight')),'invoice_no'=>strip_tags(form_error('invoice_no')),'invoice_date'=>strip_tags(form_error('invoice_date')),'challan_no'=>strip_tags(form_error('challan_no')),'challan_date'=>strip_tags(form_error('challan_date')),'received_date'=>strip_tags(form_error('received_date')),'invoice_qty'=>strip_tags(form_error('invoice_qty')),'invoice_qty_in_kgs'=>strip_tags(form_error('invoice_qty_in_kgs')),'balance_qty'=>strip_tags(form_error('balance_qty')),'fg_material_gross_weight'=>strip_tags(form_error('fg_material_gross_weight')),'units'=>strip_tags(form_error('units')),'boxex_goni_bundle'=>strip_tags(form_error('boxex_goni_bundle')),'remarks'=>strip_tags(form_error('remarks')));
+                        }
+
                 }
             }
 

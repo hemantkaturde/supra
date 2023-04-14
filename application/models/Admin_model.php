@@ -2980,6 +2980,19 @@ class Admin_model extends CI_Model
 
     }
 
+
+
+    public function getPreviousincomingdetailsforedit($id){
+        $this->db->select('*,'.TBL_INCOMING_DETAILS.'.remark as incomig_remark,'.TBL_INCOMING_DETAILS.'.vendor_po_number as venpo');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_INCOMING_DETAILS.'.vendor_po_number');
+        $this->db->where(TBL_INCOMING_DETAILS.'.status', 1);
+        $this->db->where(TBL_INCOMING_DETAILS.'.id', $id);
+        $query = $this->db->get(TBL_INCOMING_DETAILS);
+        $rowcount = $query->result_array();
+        return $rowcount;
+
+    }
+
     public function checkIfexitsincomingdetails($incoming_no){
 
         $this->db->select('*');

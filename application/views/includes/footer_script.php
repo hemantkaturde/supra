@@ -5663,7 +5663,7 @@
 
 
 
-<?php if($pageTitle=='Add New Incoming Details' || $pageTitle=='Incoming Details'){ ?>
+<?php if($pageTitle=='Add New Incoming Details' || $pageTitle=='Incoming Details' || $pageTitle=='Edit Incoming Details'){ ?>
 	<script type="text/javascript">
         $(document).ready(function() {
             var dt = $('#view_incomingdetailss').DataTable({
@@ -5692,6 +5692,41 @@
 	            },
 	        });
 	    });
+
+
+		$(document).ready(function() {
+			//e.preventDefault();
+			//$(".loader_ajax").show();
+			var vendor_po_number = $('#vendor_po_number').val();
+
+			$("#part_number").html('');
+		
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getVendoritemsonlyvendorBillofmaterial",
+				type: "POST",
+				data : {'vendor_po_number' : vendor_po_number},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#part_number').html('<option value="">Select Part Number</option>');
+					}
+					else
+					{
+						$('#part_number').html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#part_number').html();
+				}
+			});
+			return false;
+
+
+		});
 
 		$(document).on('change','#vendor_name',function(e){  
 			e.preventDefault();
@@ -5934,13 +5969,16 @@
 			   var pre_reported_by =   $('#reported_by').val();
 			   var pre_report_date =   $('#reported_date').val();
 			   var pre_remark  =   $('#remark').val();
+			   
+			   var incomingdetail_editid  =   $('#incomingdetail_editid').val();
 
+			
 
 			$.ajax({
 				url : "<?php echo base_url();?>saveincomingitem",
 				type: "POST",
 				 //data : formData,
-				 data :{ part_number:part_number,description:description,p_o_qty:p_o_qty,net_weight:net_weight,invoice_no:invoice_no,invoice_date:invoice_date,challan_no:challan_no,challan_date:challan_date,received_date:received_date,invoice_qty:invoice_qty,invoice_qty_in_kgs:invoice_qty_in_kgs,balance_qty:balance_qty,fg_material_gross_weight:fg_material_gross_weight,units:units,boxex_goni_bundle:boxex_goni_bundle,remarks:remarks,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_reported_by:pre_reported_by,pre_report_date:pre_report_date,pre_remark:pre_remark},
+				 data :{ part_number:part_number,description:description,p_o_qty:p_o_qty,net_weight:net_weight,invoice_no:invoice_no,invoice_date:invoice_date,challan_no:challan_no,challan_date:challan_date,received_date:received_date,invoice_qty:invoice_qty,invoice_qty_in_kgs:invoice_qty_in_kgs,balance_qty:balance_qty,fg_material_gross_weight:fg_material_gross_weight,units:units,boxex_goni_bundle:boxex_goni_bundle,remarks:remarks,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_reported_by:pre_reported_by,pre_report_date:pre_report_date,pre_remark:pre_remark,incomingdetail_editid:incomingdetail_editid},
 				// method: "POST",
                 // data :{package_id:package_id},
                 cache:false,
@@ -5963,7 +6001,17 @@
 							icon: "success",
 							button: "Ok",
 							},function(){ 
-								window.location.href = "<?php echo base_url().'addnewencomingdetails'?>";
+
+
+								if(incomingdetail_editid){
+
+									window.location.href = "<?php echo base_url().'editincomingdetails/'?>"+incomingdetail_editid;
+								}else{
+
+									window.location.href = "<?php echo base_url().'addnewencomingdetails'?>";
+								}
+
+								
 						});		
 				    }
 					

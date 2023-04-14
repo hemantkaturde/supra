@@ -22,22 +22,17 @@
                         <?php $this->load->helper("form"); ?>
                         <form role="form" id="addnewincomingdetailsform" action="<?php echo base_url() ?>addnewincomingdetailsform" method="post" role="form">
                             <div class="box-body">
-                                    <?php
-                                        if($getPreviousincomingdetails[0]['incoming_details_id']){
-                                            $arr = str_split($getPreviousincomingdetails[0]['incoming_details_id']);
-                                            $i = end($arr);
-                                            $inrno= "SQID2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
-                                            $incoming_details_id = $inrno;
-                                        }else{
-                                            $incoming_details_id = 'SQID23240001';
-                                        }
-                                    ?>
+
+
+                            
+                            
+                                <input type="hidden" class="form-control" id="incomingdetail_editid" name="incomingdetail_editid" value="<?php echo $edit_id;?>" readonly>
 
                                 <div class="col-md-4">
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="incoming_no">Incoming ID No <span class="required">*</span></label>
-                                            <input type="text" class="form-control" id="incoming_no" name="incoming_no" value="<?php echo $incoming_details_id;?>" required readonly>
+                                            <input type="text" class="form-control" id="incoming_no" name="incoming_no" value="<?=$getPreviousincomingdetailsforedit[0]['incoming_details_id']?>" required readonly>
                                             <p class="error incoming_no_error"></p>
                                         </div>
                                     </div>
@@ -48,15 +43,16 @@
                                                 <select class="form-control " name="vendor_name" id="vendor_name">
                                                     <option st-id="" value="">Select Vendor Name</option>
                                                     <?php foreach ($vendorList as $key => $value) {?>
-                                                    <option value="<?php echo $value['ven_id']; ?>" <?php if($value['ven_id']==$getAllitemdetails[0]['pre_vendor_name']){ echo 'selected';} ?>><?php echo $value['vendor_name']; ?></option>
+                                                    <option value="<?php echo $value['ven_id']; ?>" <?php if($value['ven_id']==$getPreviousincomingdetailsforedit[0]['vendor_name']){ echo 'selected';} ?>><?php echo $value['vendor_name']; ?></option>
                                                     <?php } ?>
                                                 </select>
                                             <p class="error vendor_name_error"></p>
                                         </div>
                                     </div>
 
-                                    <?php if($getAllitemdetails[0]['pre_vendor_po_number']){
-                                        $selected_value = $getAllitemdetails[0]['po_number'];
+                                    <?php 
+                                    if($getPreviousincomingdetailsforedit[0]['po_number']){
+                                        $selected_value = $getPreviousincomingdetailsforedit[0]['po_number'];
 
                                     }else{
                                         $selected_value = 'Select Buyer PO Number';
@@ -67,7 +63,7 @@
                                                 <label for="vendor_po_number">Select Vendor PO Number <span class="required">*</span></label>
                                                     <select class="form-control vendor_po_number_itam_mapping" name="vendor_po_number" id="vendor_po_number">
                                                         <option st-id="" value="">Select Vendor Name</option>
-                                                        <option st-id="" value="<?=$getAllitemdetails[0]['pre_vendor_po_number']?>" selected ><?=$selected_value;?></option>
+                                                        <option st-id="" value="<?=$getPreviousincomingdetailsforedit[0]['venpo']?>" selected ><?=$selected_value;?></option>
 
                                                     </select>
                                             <p class="error vendor_po_number_error"></p>
@@ -78,7 +74,7 @@
                                     <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="reported_by">Report By</label>
-                                                   <input type="text" class="form-control" id="reported_by" value="<?=$getAllitemdetails[0]['pre_reported_by'] ?>" name="reported_by">
+                                                   <input type="text" class="form-control" id="reported_by" value="<?=$getPreviousincomingdetailsforedit[0]['reported_by'] ?>" name="reported_by">
                                                 <p class="error reported_by_error"></p>
                                             </div>
                                     </div>
@@ -86,7 +82,7 @@
                                     <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="remark">Report Date</label>
-                                                  <input type="text" class="form-control datepicker"  value="<?=$getAllitemdetails[0]['pre_report_date'] ?>" id="reported_date" name="reported_date">
+                                                  <input type="text" class="form-control datepicker"  value="<?=$getPreviousincomingdetailsforedit[0]['reported_date'] ?>" id="reported_date" name="reported_date">
                                                 <p class="error reported_date_error"></p>
                                             </div>
                                     </div>
@@ -94,7 +90,7 @@
                                     <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="remark">Remark</label>
-                                                  <textarea type="text" class="form-control"  id="remark"  name="remark"><?=$getAllitemdetails[0]['pre_remark'] ?></textarea>
+                                                  <textarea type="text" class="form-control"  id="remark"  name="remark"><?=$getPreviousincomingdetailsforedit[0]['incomig_remark'] ?></textarea>
                                                 <p class="error remark_error"></p>
                                             </div>
                                     </div>
