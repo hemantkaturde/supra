@@ -123,6 +123,7 @@
                                                     <th scope="col">Buyer Invoice Qty </th>
                                                     <th scope="col">Box Qty</th>
                                                     <th scope="col">Remark</th>
+                                                    <th scope="col">Action</th>
                                                 </tr>
                                             </thead>
                                             
@@ -140,6 +141,7 @@
                                                         <td><?=$value_details['buyer_invoice_qty'];?></td>
                                                         <td><?=$value_details['box_qty'];?></td>
                                                         <td><?=$value_details['remark'];?></td>
+                                                        <td><i style='font-size: x-large;cursor: pointer;' data-id='<?=$value_details['id'];?>' class='fa fa-trash-o deletepackinginstractionsubitem' aria-hidden='true'></i></td>
                                                     </tr>
                                             <?php } ?>  
                                             </tbody>

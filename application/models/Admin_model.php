@@ -3223,10 +3223,26 @@ class Admin_model extends CI_Model
 
     public function deletepackinginstraction($id){
 
+        // $this->db->where('id', $id);
+
+        // if($this->db->delete(TBL_PACKING_INSTRACTION)){
+        //    return TRUE;
+        // }else{
+        //    return FALSE;
+        // }
+
         $this->db->where('id', $id);
         //$this->db->delete(TBL_SUPPLIER);
         if($this->db->delete(TBL_PACKING_INSTRACTION)){
-           return TRUE;
+
+            $this->db->where('packing_instract_id', $id);
+            //$this->db->delete(TBL_SUPPLIER);
+            if($this->db->delete(TBL_PACKING_INSTRACTION_DETAILS)){
+               return TRUE;
+            }else{
+               return FALSE;
+            }
+        //    return TRUE;
         }else{
            return FALSE;
         }
@@ -3307,6 +3323,21 @@ class Admin_model extends CI_Model
         $fetch_result = $query->result_array();
 
         return $fetch_result;
+
+    }
+
+
+
+    public function deletepackinginstractionsubitem($id){
+       
+        $this->db->where('id', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_PACKING_INSTRACTION_DETAILS)){
+           return TRUE;
+        }else{
+           return FALSE;
+        }
+
 
     }
 
