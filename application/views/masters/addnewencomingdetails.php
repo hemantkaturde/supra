@@ -220,7 +220,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-3 col-form-label">Invoice No <span class="required">*</span></label>
                                                         <div class="col-sm-9">
-                                                            <input type="number" class="form-control"  id="invoice_no" name="invoice_no">
+                                                            <input type="text" class="form-control"  id="invoice_no" name="invoice_no">
                                                             <p class="error invoice_no_error"></p>
                                                         </div>
                                                     </div>
