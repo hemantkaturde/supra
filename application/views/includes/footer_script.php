@@ -5135,7 +5135,8 @@
 				 }
 				 
 				 var total_value = parseFloat(rm_actual_aty) /  parseFloat(gross_weight);
-				 $("#expected_qty").val( Math.round(total_value));
+
+				 $("#expected_qty").val( Math.round(total_value.toFixed(2)));
 	
 		});
 
@@ -5160,7 +5161,9 @@
 
 				
 				var total_value = parseFloat(vendor_actual_received_Qty) *  parseFloat(net_weight_per_pcs);
-				$("#total_net_weight").val( Math.round(total_value));
+
+
+				$("#total_net_weight").val( total_value.toFixed(2)));
 
 
 				if($("#expected_qty").val()){
@@ -5172,7 +5175,8 @@
 	
 				var total_short_access_value = parseFloat(expected_qty) -  parseFloat(vendor_actual_received_Qty);
 
-				$("#short_access").val( Math.round(total_short_access_value));
+
+				$("#short_access").val( Math.round(total_short_access_value.toFixed(2)));
 
 
 
@@ -5192,7 +5196,7 @@
 
 				var total_sscrap_value = parseFloat(rm_actual_aty) -  parseFloat(total_net_weight);
 
-				$("#scrap").val( Math.round(total_sscrap_value));
+				$("#scrap").val( Math.round(total_sscrap_value.toFixed(2)));
 
 
 		});
