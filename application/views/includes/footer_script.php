@@ -5085,8 +5085,8 @@
 										$('#diameter').val(data_row_material.diameter);
 										$('#thickness').val(data_row_material.thickness);
 										$('#hex_af').val(data_row_material.hex_a_f);
-										$('#gross_weight').val(data_row_material.gross_weight);
-										$('#net_weight_per_pcs').val(data_row_material.net_weight);
+										$('#gross_weight').val(data_row_material.fg_gross_weight);
+										$('#net_weight_per_pcs').val(data_row_material.fg_net_weight);
 
 
 								

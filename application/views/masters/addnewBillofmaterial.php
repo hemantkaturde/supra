@@ -390,9 +390,9 @@
 
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Vendor Actual Received Qty<span class="required">*</span></label>
+                                                        <label class="col-sm-4 col-form-label">Vendor Actual Received Qty (Enter Zero If No Qty Received)</label>
                                                         <div class="col-sm-8">
-                                                            <input type="text" class="form-control"  id="vendor_actual_received_Qty" name="vendor_actual_received_Qty">
+                                                            <input type="text" class="form-control"  id="vendor_actual_received_Qty"  name="vendor_actual_received_Qty">
                                                             <p class="error vendor_actual_received_Qty_error"></p>
                                                         </div>
                                                     </div>
@@ -417,7 +417,7 @@
 
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Short Sccess<span class="required">*</span></label>
+                                                        <label class="col-sm-4 col-form-label">Short Excess<span class="required">*</span></label>
                                                         <div class="col-sm-8">
                                                             <input type="text" class="form-control"  id="short_access" name="short_access" readonly>
                                                             <p class="error short_access_error"></p>
@@ -425,7 +425,7 @@
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Scrap<span class="required">*</span></label>
+                                                        <label class="col-sm-4 col-form-label">Scrap In kgs<span class="required">*</span></label>
                                                         <div class="col-sm-8">
                                                             <input type="text" class="form-control"  id="scrap" name="scrap" readonly>
                                                             <p class="error scrap_error"></p>
@@ -434,7 +434,7 @@
 
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Actual Scrap Received<span class="required">*</span></label>
+                                                        <label class="col-sm-4 col-form-label">Actual Scrap Received In kgs<span class="required">*</span></label>
                                                         <div class="col-sm-8">
                                                             <input type="text" class="form-control"  id="actual_scrap_recived" name="actual_scrap_recived">
                                                             <p class="error actual_scrap_recived_error"></p>
