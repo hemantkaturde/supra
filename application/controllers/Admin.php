@@ -3975,10 +3975,11 @@ class Admin extends BaseController
             
             $data['getPreviousBomnumber']= $this->admin_model->getPreviousBomnumber()[0];
             $data['getPreviousvendorBomnumber']= $this->admin_model->getPreviousBomnumbervendor()[0];
-
             //$data['fetchALLprejobworkitemList']= $this->admin_model->fetchALLprejobworkitemList();
+
             $data['buyerList']= $this->admin_model->fetchAllbuyerList();
             $data['vendorList']= $this->admin_model->fetchALLvendorList();
+            $data['incoming_details']= $this->admin_model->fetchAllincomingdetailsList();
             $this->loadViews("masters/addnewBillofmaterial", $this->global, $data, NULL);
 
         }
@@ -5031,6 +5032,82 @@ class Admin extends BaseController
     }
 
 
+    public function getVendorsItemsforDisplay(){
+
+
+        $post_submit = $this->input->post();
+
+        if($post_submit){
+
+            $vendor_po_number = $this->input->post('vendor_po_number');
+        
+            // load table library
+            $this->load->library('table');
+            
+            // set heading
+            $this->table->set_heading('Part Number', 'Description', 'Order Qty','Unit', 'Rate','Value');
+
+            // set template
+            $style = array('table_open'  => '<p><b>Vendor PO Item</b></p><table style="width: 70% !important; max-width: 100%;margin-bottom: 20px;" class="table">');
+
+            $this->table->set_template($style);
+
+            $this->db->select(TBL_RAWMATERIAL.'.part_number,'.TBL_VENDOR_PO_MASTER_ITEM.'.description,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty,'.TBL_VENDOR_PO_MASTER_ITEM.'.unit,'.TBL_VENDOR_PO_MASTER_ITEM.'.rate,'.TBL_VENDOR_PO_MASTER_ITEM.'.value');
+            $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
+            $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id',$vendor_po_number);
+            $query_result = $this->db->get(TBL_VENDOR_PO_MASTER_ITEM);
+            $data = $query_result->result_array();
+
+            if($data){
+                echo $this->table->generate($query_result);
+
+            }else{
+                echo '';
+
+            }
+    
+       }
+    }
+
+
+
+    public function getincomingListforDisplay(){
+
+        $post_submit = $this->input->post();
+
+        if($post_submit){
+
+            $incoming_details = $this->input->post('incoming_details');
+        
+            // load table library
+            $this->load->library('table');
+            
+            // set heading
+            $this->table->set_heading('Part Number', 'Description', 'PO Qty (pcs)', 'invoice_qty (pcs)','invoice_qty (kgs)','Balance qty');
+
+            // set template
+            $style = array('table_open'  => '<p><b>Incoming Details Item</b></p><table style="width: 70% !important; max-width: 100%;margin-bottom: 20px;" class="table">');
+
+            $this->table->set_template($style);
+
+            $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name,'.TBL_INCOMING_DETAILS_ITEM.'.p_o_qty,'.TBL_INCOMING_DETAILS_ITEM.'.invoice_qty,'.TBL_INCOMING_DETAILS_ITEM.'.invoice_qty_in_kgs,'.TBL_INCOMING_DETAILS_ITEM.'.balance_qty');
+            
+            $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
+            $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id',$incoming_details);
+            $query_result = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
+            $data = $query_result->result_array();
+
+            if($data){
+                echo $this->table->generate($query_result);
+
+            }else{
+                echo '';
+
+            }
+    
+       }
+
+    }
 
 
 }

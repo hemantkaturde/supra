@@ -3344,10 +3344,18 @@ class Admin_model extends CI_Model
         }else{
            return FALSE;
         }
-
-
     }
 
+
+    public function fetchAllincomingdetailsList(){
+
+        $this->db->select('*');
+        $this->db->where(TBL_INCOMING_DETAILS.'.status', 1);
+        $query = $this->db->get(TBL_INCOMING_DETAILS);
+        $data = $query->result_array();
+        return $data;
+
+    }
 
 }
 

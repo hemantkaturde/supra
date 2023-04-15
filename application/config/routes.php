@@ -188,6 +188,8 @@ $route['getItemdetailsdependonvendorpobom'] = "admin/getItemdetailsdependonvendo
 
 
 
+
+
 $route['packinginstaruction'] = "admin/packinginstaruction";
 $route['addnewpackinginstruction'] = "admin/addnewpackinginstruction";
 $route['fetchpackinginstartion'] = "admin/fetchpackinginstartion";
@@ -221,6 +223,13 @@ $route['deleteIncomingDetails'] = "admin/deleteIncomingDetails";
 $route['saveincomingitem'] = "admin/saveincomingitem";
 
 $route['deleteIncomingDetailsitem'] = "admin/deleteIncomingDetailsitem";
+
+
+$route['getVendorsItemsforDisplay'] = "admin/getVendorsItemsforDisplay";
+
+$route['getincomingListforDisplay'] = "admin/getincomingListforDisplay";
+
+
 
 
 

@@ -100,7 +100,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                                 <label for="vendor_po_number">Select Vendor PO Number <span class="required">*</span></label>
-                                                    <select class="form-control vendor_po_number_itam_mapping" name="vendor_po_number" id="vendor_po_number">
+                                                    <select class="form-control vendor_po_number_itam_mapping vendor_po_number_for_view_item" name="vendor_po_number" id="vendor_po_number">
                                                         <option st-id="" value="">Select Vendor Name</option>
                                                     </select>
                                             <p class="error vendor_po_number_error"></p>
@@ -149,7 +149,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                                 <label for="buyer_po_number">Select Buyer PO <span class="required">*</span></label>
-                                                    <select class="form-control buyer_po_number  buyer_po_number_for_itam_mapping" name="buyer_po_number" id="buyer_po_number">
+                                                    <select class="form-control buyer_po_number  buyer_po_number_for_itam_mapping buyer_po_number_for_itam_display" name="buyer_po_number" id="buyer_po_number">
                                                         <option st-id="" value="">Select Buyer PO</option>
                                                     </select>
                                             <p class="error buyer_po_number_error"></p>
@@ -184,6 +184,20 @@
                                             <p class="error bom_status_error"></p>
                                         </div>
                                     </div>
+
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                                <label for="incoming_details">Incoming Details </label>
+                                                <select class="form-control  incoming_details_item_list_display" name="incoming_details" id="incoming_details">
+                                                    <option st-id="" value="">Select Incoming Details</option>
+                                                    <?php foreach ($incoming_details as $key => $value) {?>
+                                                    <option value="<?php echo $value['id']; ?>"><?php echo $value['incoming_details_id']; ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            <p class="error incoming_details_error"></p>
+                                        </div>
+                                    </div>
         
 
                                     <div class="col-md-12">
@@ -197,9 +211,9 @@
                                 </div>
 
                                 <div class="col-md-6">
-                                    <div class="container">
+                                    <div class="container" style="width: 140%;">
                                         <button type="button" class="btn btn-success btn-xl" data-toggle="modal" data-target="#addNewModal">Add New Items</button><br/><br/>
-                                            <table class="table table-bordered" style="width: 80% !important; max-width: 80%;margin-bottom: 20px;">
+                                            <table class="table table-bordered" style="">
                                                 <thead style="background-color:#3c8dbc;color:#fff">
                                                     <tr>
                                                         <th>Sr No.</th>
@@ -245,13 +259,18 @@
                                             </table>
                                     </div>
 
-                                    <!-- <div class="container">
-                                         <div id="supplier_po_item_list">
-                                         </div>
-
+                                     <div class="container">
+                                         
                                          <div id="customers-list">
                                          </div>
-                                    </div> -->
+
+                                         <div id="buyer_po_item_list">
+                                         </div>
+
+                                         <div id="incoming_details_item_list">
+                                         </div>
+
+                                    </div>
 
                                       <!-- Add New Package Modal -->
                                     <?php $this->load->helper("form"); ?>
