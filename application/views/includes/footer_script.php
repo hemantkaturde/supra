@@ -5193,7 +5193,6 @@
 				 }
 
 
-
 				var total_sscrap_value = parseFloat(rm_actual_aty) -  parseFloat(total_net_weight);
 
 				$("#scrap").val(total_sscrap_value.toFixed(2));
@@ -5300,6 +5299,78 @@
 			});
 			return false;
 		});
+
+
+		$(document).on('click','#saveBillofmaterialtem',function(e){
+			e.preventDefault();
+			$(".loader_ajax").show();
+			   var formData = new FormData($("#saveBillofmaterialform")[0]);
+              
+			   var part_number =   $('#part_number').val();
+			   var rm_actual_aty =   $('#rm_actual_aty').val();
+			   var expected_qty =  $('#expected_qty').val();
+			   var vendor_actual_received_Qty =   $('#vendor_actual_received_Qty').val();
+			   var net_weight_per_pcs =  $('#net_weight_per_pcs').val();
+			   var total_net_weight =  $('#total_net_weight').val();
+			   var short_access =  $('#short_access').val();
+			   var scrap =  $('#scrap').val();
+			   var actual_scrap_recived =  $('#actual_scrap_recived').val();
+			   var item_remark =  $('#item_remark').val();
+			
+
+			   var pre_date  =  $('#date').val();
+			   var pre_vendor_name =  $('#vendor_name').val();
+               var pre_vendor_po_number =  $('#vendor_po_number').val();
+			   var pre_supplier_name =  $('#supplier_name').val();
+               var pre_supplier_po_number =  $('#supplier_po_number').val();
+			   var pre_buyer_name =  $('#buyer_name').val();
+			   var pre_buyer_po_number =  $('#buyer_po_number').val();
+			   var pre_buyer_po_date =  $('#buyer_po_date').val();
+               var pre_buyer_delivery_date  =  $('#buyer_delivery_date').val();
+               var pre_bom_status =  $('#bom_status').val();
+			   var pre_incoming_details =  $('#incoming_details').val();
+               var pre_remark =  $('#remark').val();
+
+			$.ajax({
+				url : "<?php echo base_url();?>saveBillofmaterialtem",
+				type: "POST",
+				 //data : formData,
+				 data :{part_number:part_number,rm_actual_aty:rm_actual_aty,expected_qty:expected_qty,vendor_actual_received_Qty:vendor_actual_received_Qty,net_weight_per_pcs:net_weight_per_pcs,total_net_weight:total_net_weight,short_access:short_access,scrap:scrap,actual_scrap_recived:actual_scrap_recived,item_remark,pre_date:pre_date,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_supplier_name:pre_supplier_name,pre_supplier_po_number:pre_supplier_po_number,pre_buyer_name:pre_buyer_name,pre_buyer_po_number:pre_buyer_po_number,pre_buyer_po_date:pre_buyer_po_date,pre_buyer_delivery_date:pre_buyer_delivery_date,pre_bom_status:pre_bom_status,pre_incoming_details:pre_incoming_details,pre_remark},
+				// method: "POST",
+                // data :{package_id:package_id},
+                cache:false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+						$(".loader_ajax").hide();
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						swal({
+							title: "Success",
+							text: "Item Successfully Added!",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+								window.location.href = "<?php echo base_url().'addnewBillofmaterial'?>";
+						});		
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			});
+			return false;
+	    });
+
 
     </script>
 <?php } ?>

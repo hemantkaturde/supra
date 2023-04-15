@@ -70,8 +70,8 @@
                                         </div>
                                     </div>
 
-                                    <?php if($fetchALLpresupplieritemList[0]['pre_date']){
-                                        $date= $fetchALLpresupplieritemList[0]['pre_date'];
+                                    <?php if($fetchALLpreBillofmaterailist[0]['pre_date']){
+                                        $date= $fetchALLpreBillofmaterailist[0]['pre_date'];
                                      }else{
                                         $date= date('Y-m-d');
                                      } ?>
@@ -84,34 +84,48 @@
                                         </div>
                                     </div>
 
+
                                     <div class="col-md-12">
                                         <div class="form-group">
                                                 <label for="vendor_name">Vendor Name <span class="required">*</span></label>
                                                 <select class="form-control vendor_name" name="vendor_name" id="vendor_name">
                                                     <option st-id="" value="">Select Vendor Name</option>
                                                     <?php foreach ($vendorList as $key => $value) {?>
-                                                    <option value="<?php echo $value['ven_id']; ?>" <?php if($value['ven_id']==$fetchALLprejobworkitemList[0]['pre_vendor_name']){ echo 'selected';} ?>><?php echo $value['vendor_name']; ?></option>
+                                                    <option value="<?php echo $value['ven_id']; ?>" <?php if($value['ven_id']==$fetchALLpreBillofmaterailist[0]['pre_vendor_name']){ echo 'selected';} ?>><?php echo $value['vendor_name']; ?></option>
                                                     <?php } ?>
                                                 </select>
                                             <p class="error vendor_name_error"></p>
                                         </div>
                                     </div>
 
+
+   
+                                    <?php if($fetchALLpreBillofmaterailist[0]['pre_vendor_po_number']){
+                                        $display='block';
+                                        $selected_value = $fetchALLpreBillofmaterailist[0]['po_number'];
+
+                                    }else{
+                                        $display='none';
+                                        $selected_value = 'Select Vendor PO Number';
+                                    } ?>
+
                                     <div class="col-md-12">
                                         <div class="form-group">
                                                 <label for="vendor_po_number">Select Vendor PO Number <span class="required">*</span></label>
                                                     <select class="form-control vendor_po_number_itam_mapping vendor_po_number_for_view_item" name="vendor_po_number" id="vendor_po_number">
                                                         <option st-id="" value="">Select Vendor Name</option>
+                                                        <option st-id="" value="<?=$fetchALLpreBillofmaterailist[0]['pre_vendor_po_number']?>" Selected><?=$selected_value;?></option>
                                                     </select>
                                             <p class="error vendor_po_number_error"></p>
                                         </div>
                                     </div>
 
 
+                        
                                     <div class="col-md-12">
                                         <div class="form-group">
                                                 <label for="supplier_name">Supplier Name</label>
-                                                <input type="text" class="form-control" id="supplier_name"  name="supplier_name" readonly>
+                                                <input type="text" class="form-control" id="supplier_name" value="<?=$fetchALLpreBillofmaterailist[0]['supplierbillof']?>" name="supplier_name" readonly>
                                             <p class="error supplier_name_error"></p>
                                         </div>
                                     </div>
@@ -219,14 +233,21 @@
                                                         <th>Sr No.</th>
                                                         <th>Part Number</th>
                                                         <th>Description</th>
-                                                        <th>Vendor  Qty</th>
+                                                        <th>RM Order Qty</th>
                                                         <th>Rm Actual Qty</th>
-                                                        <th>Rm Rate</th>
-                                                        <th>Value</th>
-                                                        <th>Packing & Forwarding</th>
-                                                        <th>Total </th>
-                                                        <th>GST</th>
-                                                        <th>Grand Total</th>
+                                                        <th>RM Type</th>
+                                                        <th>Slitting Size</th>
+                                                        <th>Diameter</th>
+                                                        <th>Thickness</th>
+                                                        <th>Hex A/F </th>
+                                                        <th>Gross Weight</th>
+                                                        <th>Expected Qty</th>
+                                                        <th>Vendor Actual Received Qty</th>
+                                                        <th>Net Weight Per Pcs</th>
+                                                        <th>Total Net Weight</th>
+                                                        <th>Short Excess</th>
+                                                        <th>Scrap In kgs</th>
+                                                        <th>Actual Scrap Received In kgs</th>
                                                         <th>Remark</th>
                                                         <th>Action</th>
                                                     </tr>
@@ -234,22 +255,31 @@
                                                 <tbody>
                                                     <?php
                                                         $count=0;
-                                                           foreach ($fetchALLprejobworkitemList as $key => $value) :
+                                                           foreach ($fetchALLpreBillofmaterailist as $key => $value) :
                                                            $count++;
                                                     ?>
                                                     <tr>
                                                         <td><?php echo $count;?></td>
                                                         <td><?php echo $value['part_number'];?></td>
                                                         <td><?php echo $value['description'];?></td>
-                                                        <td><?php echo $value['vendor_qty'];?></td>
-                                                        <td><?php echo $value['rm_actual_qty'];?></td>
-                                                        <td><?php echo $value['ram_rate'];?></td>
-                                                        <td><?php echo $value['value'];?></td>
-                                                        <td><?php echo $value['packing_forwarding'];?></td>
-                                                        <td><?php echo $value['total'];?></td>
-                                                        <td><?php echo $value['gst'];?></td>
-                                                        <td><?php echo $value['grand_total'];?></td>
-                                                        <td><?php echo $value['item_remark'];?></td>
+                                                        <td><?php echo $value['order_oty'];?></td>
+                                                        <td><?php echo $value['rm_actual_aty'];?></td>
+                                                        <td><?php echo $value['type_of_raw_material'];?></td>
+                                                        <td><?php echo $value['sitting_size'];?></td>
+                                                        <td><?php echo $value['diameter'];?></td>
+                                                        <td><?php echo $value['thickness'];?></td>
+                                                        <td><?php echo $value['hex_a_f'];?></td>
+                                                        <td><?php echo $value['groass_weight'];?></td>
+                                                        <td><?php echo $value['expected_qty'];?></td>
+                                                        <td><?php echo $value['vendor_actual_recived_qty'];?></td>
+                                                        <td><?php echo $value['net_weight_per_pcs'];?></td>
+                                                        <td><?php echo $value['total_neight_weight'];?></td>
+                                                        <td><?php echo $value['short_excess'];?></td>
+                                                        <td><?php echo $value['scrap_in_kgs'];?></td>
+                                                        <td><?php echo $value['actual_scrap_received_in_kgs'];?></td>
+                                                        <td><?php echo $value['remark'];?></td>
+
+
                                                         <td>
                                                         <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['id'];?>' class='fa fa-trash-o deleteSupplierpoitem' aria-hidden='true'></i>
                                                         </td>
@@ -467,12 +497,12 @@
                             <!-- /.box-body -->
                             <div class="box-footer">
                                 <div class="col-xs-8">
-                                    <?php if($fetchALLprejobworkitemList){
+                                    <?php if($fetchALLpreBillofmaterailist){
                                         $disabled= '';
                                     }else{ 
                                         $disabled= 'disabled';
                                      } ?>
-                                    <input type="submit" id="savenewBillofmaterail" class="btn btn-primary" value="Submit">
+                                    <input type="submit" id="savenewBillofmaterail" class="btn btn-primary" value="Submit" <?php //echo //$disabled;?> >
                                     <input type="button" onclick="location.href = '<?php echo base_url() ?>billofmaterial'" class="btn btn-default" value="Back" />
                                 </div>
                             </div>

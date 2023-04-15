@@ -3357,6 +3357,90 @@ class Admin_model extends CI_Model
 
     }
 
+
+    public function saveBillofmaterialitamdata($id,$data){
+
+        if($id != '') {
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_BILL_OF_MATERIAL_ITEM, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_BILL_OF_MATERIAL_ITEM, $data)) {
+                return $this->db->insert_id();;
+            } else {
+                return FALSE;
+            }
+        }
+
+    }
+
+    public function update_last_inserted_Bill_of_material($saveBillofmaterial){
+
+        $data = array(
+            'bom_id' => $saveBillofmaterial
+        );
+        $this->db->where(TBL_BILL_OF_MATERIAL_ITEM.'.bom_id IS NULL');
+        if($this->db->update(TBL_BILL_OF_MATERIAL_ITEM,$data)){
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+
+    }
+
+
+    public function fetchALLpreBillofmaterailist(){
+
+
+        // $this->db->select('*,'.TBL_FINISHED_GOODS.'.sac as sac_no,'.TBL_VENDOR_PO_MASTER_ITEM.'.rate as supplierrate,'.TBL_FINISHED_GOODS.'.groass_weight as fg_gross_weight,'.TBL_FINISHED_GOODS.'.net_weight as fg_net_weight');
+        // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+        // $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
+        // $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.pre_vendor_name');
+        // $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id',$vendor_po_number);
+        // $this->db->where(TBL_FINISHED_GOODS.'.status',1);
+        // $this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
+        // $query = $this->db->get(TBL_FINISHED_GOODS);
+        // $data = $query->result_array();
+        // return $data;
+
+
+
+        $this->db->select('*',TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name as description,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as order_oty,'
+        .TBL_BILL_OF_MATERIAL_ITEM.'.rm_actual_aty,'
+        .TBL_BILL_OF_MATERIAL_ITEM.'.pre_supplier_name,'
+        .TBL_RAWMATERIAL.'.sitting_size,'
+        .TBL_RAWMATERIAL.'.diameter,'
+        .TBL_RAWMATERIAL.'.thickness,'
+        .TBL_RAWMATERIAL.'.hex_a_f,'
+        .TBL_FINISHED_GOODS.'.groass_weight,'
+        .TBL_BILL_OF_MATERIAL_ITEM.'.expected_qty,'
+        .TBL_BILL_OF_MATERIAL_ITEM.'.vendor_actual_recived_qty,'
+        .TBL_BILL_OF_MATERIAL_ITEM.'.net_weight_per_pcs,'
+
+        .TBL_BILL_OF_MATERIAL_ITEM.'.total_neight_weight,'
+        .TBL_BILL_OF_MATERIAL_ITEM.'.short_excess,'
+        .TBL_BILL_OF_MATERIAL_ITEM.'.scrap_in_kgs,'
+        .TBL_BILL_OF_MATERIAL_ITEM.'.actual_scrap_received_in_kgs,'
+        .TBL_BILL_OF_MATERIAL_ITEM.'.remark,'
+        .TBL_VENDOR_PO_MASTER.'.po_number as vendorponumnber,'
+       
+        
+        .TBL_RAWMATERIAL.'.type_of_raw_material');
+        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_BILL_OF_MATERIAL_ITEM.'.part_number');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.part_number = '.TBL_RAWMATERIAL.'.part_number');
+        $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_BILL_OF_MATERIAL_ITEM.'.pre_vendor_po_number');
+        $this->db->where(TBL_BILL_OF_MATERIAL_ITEM.'.bom_id is NULL');
+        $query = $this->db->get(TBL_BILL_OF_MATERIAL_ITEM);
+        $data = $query->result_array();
+        return $data;
+
+
+    }
+
 }
 
 ?>

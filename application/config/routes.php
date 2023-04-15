@@ -170,6 +170,9 @@ $route['editSupplierpo/(:any)'] = "admin/editSupplierpo/$1";
 $route['billofmaterial'] = "admin/billofmaterial";
 $route['fetchBillofmaterial'] = "admin/fetchBillofmaterial";
 $route['addnewBillofmaterial'] = "admin/addnewBillofmaterial";
+
+$route['saveBillofmaterialtem'] = "admin/saveBillofmaterialtem";
+
 $route['deleteBillofmaterial'] = "admin/deleteBillofmaterial";
 $route['vendorbillofmaterial'] = "admin/vendorbillofmaterial";
 $route['fetchvendorBillofmaterial'] = "admin/fetchvendorBillofmaterial";
@@ -221,12 +224,13 @@ $route['fetchincomingdeatils'] = "admin/fetchincomingdeatils";
 $route['editincomingdetails/(:any)'] = "admin/editincomingdetails/$1";
 $route['deleteIncomingDetails'] = "admin/deleteIncomingDetails";
 $route['saveincomingitem'] = "admin/saveincomingitem";
-
 $route['deleteIncomingDetailsitem'] = "admin/deleteIncomingDetailsitem";
 
 
-$route['getVendorsItemsforDisplay'] = "admin/getVendorsItemsforDisplay";
 
+
+
+$route['getVendorsItemsforDisplay'] = "admin/getVendorsItemsforDisplay";
 $route['getincomingListforDisplay'] = "admin/getincomingListforDisplay";
 
 
