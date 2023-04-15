@@ -2925,11 +2925,18 @@ class Admin_model extends CI_Model
         {
             foreach ($fetch_result as $key => $value)
             {
+
+                if($value['reported_date']=='0000-00-00'){
+                    $reported_date = '';
+                }else{
+                    $reported_date = $value['reported_date'];
+                }
+
                 $data[$counter]['incoming_details_id'] = $value['incoming_details_id'];
                 $data[$counter]['vendor_name'] = $value['vendorname'];
                 $data[$counter]['vendor_po_number'] = $value['po_number'];
                 $data[$counter]['reported_by'] = $value['reported_by'];
-                $data[$counter]['reported_date'] = $value['reported_date'];
+                $data[$counter]['reported_date'] = $reported_date;
                 $data[$counter]['action'] = '';
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editincomingdetails/".$value['incomigid']."' style='cursor: pointer;'><i style='font-size: large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['incomigid']."' class='fa fa-trash-o deleteIncomingDetails' aria-hidden='true'></i>"; 

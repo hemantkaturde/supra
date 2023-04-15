@@ -6042,7 +6042,8 @@
 				 }
 
 				 var total_value = parseFloat(invoice_qty) * parseFloat(net_weight);
-				 $("#invoice_qty_in_kgs").val( Math.round(total_value));
+				
+				 $("#invoice_qty_in_kgs").val(total_value.toFixed(2));
 
 
 
@@ -6057,14 +6058,15 @@
 					 var p_o_qty = 0;
 				 }
 
-				 if($("#invoice_qty_in_kgs").val()){
-					 var invoice_qty_in_kgs = $("#invoice_qty_in_kgs").val();
+				 if($("#invoice_qty").val()){
+					 var invoice_qty = $("#invoice_qty").val();
 				 }else{
-					 var invoice_qty_in_kgs = 0;
+					 var invoice_qty = 0;
 				 }
 
-				 var bal_value = parseFloat(p_o_qty) - parseFloat(invoice_qty_in_kgs);
-				 $("#balance_qty").val( Math.round(bal_value));
+				 var bal_value = parseFloat(p_o_qty) - parseFloat(invoice_qty);
+				
+				 $("#balance_qty").val( bal_value.toFixed(2));
 
 
 

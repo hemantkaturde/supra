@@ -4612,7 +4612,6 @@ class Admin extends BaseController
             }else{
 
                 if($this->input->post('incomingdetail_editid')){
-
                         $data = array(
                             'incoming_details_id'   => trim($this->input->post('incoming_no')),
                             'vendor_name'  => trim($this->input->post('vendor_name')),

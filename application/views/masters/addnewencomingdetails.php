@@ -83,10 +83,17 @@
                                             </div>
                                     </div>
 
+                                        <?php if($getAllitemdetails[0]['pre_report_date']=='0000-00-00'){
+                                                    $report_date = '';
+                                        }else{
+                                                    $report_date = $getAllitemdetails[0]['pre_report_date'];
+                                        }
+                                        ?>
+
                                     <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="remark">Report Date</label>
-                                                  <input type="text" class="form-control datepicker"  value="<?=$getAllitemdetails[0]['pre_report_date'] ?>" id="reported_date" name="reported_date">
+                                                  <input type="text" class="form-control datepicker"  value="<?=$report_date;?>" id="reported_date" name="reported_date">
                                                 <p class="error reported_date_error"></p>
                                             </div>
                                     </div>
@@ -201,7 +208,7 @@
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">P.O.Qty <span class="required">*</span></label>
+                                                        <label class="col-sm-3 col-form-label">P.O.Qty (In Pcs)<span class="required">*</span></label>
                                                         <div class="col-sm-9">
                                                             <input type="number" class="form-control"  id="p_o_qty" name="p_o_qty" readonly>
                                                             <p class="error p_o_qty_error"></p>
