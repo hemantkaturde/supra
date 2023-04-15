@@ -144,9 +144,8 @@
                                                         <td><?php echo $value['part_number'];?></td>
                                                         <td><?php echo $value['name'];?></td>
                                                         <td><?php echo $value['p_o_qty'];?></td>
-                                                        <td><?php echo $value['p_o_qty'];?></td>
+                                                        <td><?php echo $value['net_weight'];?></td>
                                                         <td><?php echo $value['invoice_no'];?></td>
-                                                        <td><?php echo $value['invoice_date'];?></td>
                                                         <td><?php echo $value['invoice_date'];?></td>
                                                         <td><?php echo $value['challan_no'];?></td>
                                                         <td><?php echo $value['challan_date'];?></td>
@@ -154,6 +153,8 @@
                                                         <td><?php echo $value['invoice_qty'];?></td>
                                                         <td><?php echo $value['invoice_qty_in_kgs'];?></td>
                                                         <td><?php echo $value['balance_qty'];?></td>
+
+                                                        <td><?php echo $value['fg_material_gross_weight'];?></td>
                                                         <td><?php echo $value['units'];?></td>
                                                         <td><?php echo $value['boxex_goni_bundle'];?></td>
                                                         <td><?php echo $value['remarks'];?></td>

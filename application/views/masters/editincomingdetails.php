@@ -79,10 +79,19 @@
                                             </div>
                                     </div>
 
+
+                                    
+                                    <?php if($getAllitemdetails[0]['pre_report_date']=='0000-00-00'){
+                                                    $report_date = '';
+                                        }else{
+                                                    $report_date = $getAllitemdetails[0]['pre_report_date'];
+                                        }
+                                        ?>
+
                                     <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="remark">Report Date</label>
-                                                  <input type="text" class="form-control datepicker"  value="<?=$getPreviousincomingdetailsforedit[0]['reported_date'] ?>" id="reported_date" name="reported_date">
+                                                  <input type="text" class="form-control datepicker"  value="<?=$report_date ?>" id="reported_date" name="reported_date">
                                                 <p class="error reported_date_error"></p>
                                             </div>
                                     </div>
@@ -133,9 +142,8 @@
                                                         <td><?php echo $value['part_number'];?></td>
                                                         <td><?php echo $value['name'];?></td>
                                                         <td><?php echo $value['p_o_qty'];?></td>
-                                                        <td><?php echo $value['p_o_qty'];?></td>
+                                                        <td><?php echo $value['net_weight'];?></td>
                                                         <td><?php echo $value['invoice_no'];?></td>
-                                                        <td><?php echo $value['invoice_date'];?></td>
                                                         <td><?php echo $value['invoice_date'];?></td>
                                                         <td><?php echo $value['challan_no'];?></td>
                                                         <td><?php echo $value['challan_date'];?></td>
@@ -143,6 +151,8 @@
                                                         <td><?php echo $value['invoice_qty'];?></td>
                                                         <td><?php echo $value['invoice_qty_in_kgs'];?></td>
                                                         <td><?php echo $value['balance_qty'];?></td>
+
+                                                        <td><?php echo $value['fg_material_gross_weight'];?></td>
                                                         <td><?php echo $value['units'];?></td>
                                                         <td><?php echo $value['boxex_goni_bundle'];?></td>
                                                         <td><?php echo $value['remarks'];?></td>
@@ -197,7 +207,7 @@
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">P.O.Qty <span class="required">*</span></label>
+                                                        <label class="col-sm-3 col-form-label">P.O.Qty (In Pcs)<span class="required">*</span></label>
                                                         <div class="col-sm-9">
                                                             <input type="number" class="form-control"  id="p_o_qty" name="p_o_qty" readonly>
                                                             <p class="error p_o_qty_error"></p>
@@ -216,7 +226,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-3 col-form-label">Invoice No <span class="required">*</span></label>
                                                         <div class="col-sm-9">
-                                                            <input type="number" class="form-control"  id="invoice_no" name="invoice_no">
+                                                            <input type="text" class="form-control"  id="invoice_no" name="invoice_no">
                                                             <p class="error invoice_no_error"></p>
                                                         </div>
                                                     </div>
