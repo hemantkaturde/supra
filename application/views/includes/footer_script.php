@@ -4731,6 +4731,39 @@
 		});
 
 
+		$(document).ready(function() {
+
+			var incoming_details = $('#incoming_details').val();
+			$("#incoming_details_item_list").html('');
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getincomingListforDisplay",
+				type: "POST",
+				data : {'incoming_details' : incoming_details},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						//$('#buyer_po_number').html('<option value="">Select Buyer PO Number</option>');
+					}
+					else
+					{
+						$("#incoming_details_item_list").html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#incoming_details_item_list').html();
+					//$(".loader_ajax").hide();
+				}
+			});
+			return false;
+
+
+		});
+
+
 		$(document).on('change','#vendor_name',function(e){  
 			e.preventDefault();
 			//$(".loader_ajax").show();

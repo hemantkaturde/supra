@@ -125,15 +125,16 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                                 <label for="supplier_name">Supplier Name</label>
-                                                <input type="text" class="form-control" id="supplier_name" value="<?=$fetchALLpreBillofmaterailist[0]['supplierbillof']?>" name="supplier_name" readonly>
+                                                <input type="text" class="form-control" id="supplier_name" value="<?=$fetchALLpreBillofmaterailist[0]['pre_supplier_name']?>" name="supplier_name" readonly>
                                             <p class="error supplier_name_error"></p>
                                         </div>
                                     </div>
 
+                                    
                                     <div class="col-md-12">
                                         <div class="form-group">
                                                 <label for="supplier_po_number">Supplier PO Number</label>
-                                                <input type="text" class="form-control" id="supplier_po_number"  name="supplier_po_number" readonly>
+                                                <input type="text" class="form-control" id="supplier_po_number" value="<?=$fetchALLpreBillofmaterailist[0]['pre_supplier_po_number']?>" name="supplier_po_number" readonly>
                                             <p class="error supplier_po_number_error"></p>
                                         </div>
                                     </div>
@@ -146,6 +147,9 @@
                                             <p class="error supplier_po_date_error"></p>
                                         </div>
                                     </div>
+
+
+                                    
                                     
                                   <div class="col-md-12">
                                         <div class="form-group">
@@ -153,22 +157,43 @@
                                                 <select class="form-control" name="buyer_name" id="buyer_name">
                                                     <option st-id="" value="">Select Buyer Name</option>
                                                     <?php foreach ($buyerList as $key => $value) {?>
-                                                    <option value="<?php echo $value['buyer_id']; ?>"><?php echo $value['buyer_name']; ?></option>
+                                                    <option value="<?php echo $value['buyer_id']; ?>" <?php if($fetchALLpreBillofmaterailist[0]['pre_buyer_name']== $value['buyer_id']){ echo 'selected'; } ?> ><?php echo $value['buyer_name']; ?></option>
                                                     <?php } ?>
                                                 </select>
                                             <p class="error buyer_name_error"></p>
                                         </div>
                                     </div>
 
+
+                                    <?php if($fetchALLpreBillofmaterailist[0]['pre_buyer_po_number']){
+                                        $display='block';
+                                        $sales_order_number = $fetchALLpreBillofmaterailist[0]['sales_order_number'];
+
+                                    }else{
+                                        $display='none';
+                                        $sales_order_number = 'Select Buyer PO Number';
+                                    } ?>
+                                    
+
                                     <div class="col-md-12">
                                         <div class="form-group">
                                                 <label for="buyer_po_number">Select Buyer PO <span class="required">*</span></label>
                                                     <select class="form-control buyer_po_number  buyer_po_number_for_itam_mapping buyer_po_number_for_itam_display" name="buyer_po_number" id="buyer_po_number">
-                                                        <option st-id="" value="">Select Buyer PO</option>
+                                                        <!-- <option st-id="" value="">Select Buyer PO</option> -->
+
+                                                        <option st-id="" value="<?=$fetchALLpreBillofmaterailist[0]['pre_buyer_po_number'] ?>"><?=$sales_order_number ?></option>
                                                     </select>
                                             <p class="error buyer_po_number_error"></p>
                                         </div>
                                     </div>
+
+
+                                    <?php if($fetchALLpreBillofmaterailist[0]['pre_buyer_po_date']){
+                                        $pre_buyer_po_date= $fetchALLpreBillofmaterailist[0]['pre_buyer_po_date'];
+                                     }else{
+                                        $pre_buyer_po_date= date('Y-m-d');
+                                     } ?>
+
 
                                     <div class="col-md-12">
                                         <div class="form-group">
@@ -177,6 +202,13 @@
                                             <p class="error buyer_po_date_error"></p>
                                         </div>
                                     </div>
+
+                                    <?php if($fetchALLpreBillofmaterailist[0]['pre_buyer_delivery_date']){
+                                        $pre_buyer_delivery_date= $fetchALLpreBillofmaterailist[0]['pre_buyer_delivery_date'];
+                                     }else{
+                                        $pre_buyer_delivery_date= date('Y-m-d');
+                                     } ?>
+
 
                                     <div class="col-md-12">
                                         <div class="form-group">
@@ -192,8 +224,8 @@
                                                 <label for="bom_status">Status <span class="required">*</span></label>
                                                 <select class="form-control bom_status" name="bom_status" id="bom_status">
                                                     <option st-id="" value="">Select Status Name</option>
-                                                    <option value="OPEN">OPEN</option>
-                                                    <option value="CLOSE">CLOSE</option>
+                                                    <option value="OPEN" <?php if($fetchALLpreBillofmaterailist[0]['pre_bom_status']== 'OPEN'){ echo 'selected'; } ?>>OPEN</option>
+                                                    <option value="CLOSE" <?php if($fetchALLpreBillofmaterailist[0]['pre_bom_status']== 'CLOSE'){ echo 'selected'; } ?>>CLOSE</option>
                                                 </select>
                                             <p class="error bom_status_error"></p>
                                         </div>
@@ -206,7 +238,7 @@
                                                 <select class="form-control  incoming_details_item_list_display" name="incoming_details" id="incoming_details">
                                                     <option st-id="" value="">Select Incoming Details</option>
                                                     <?php foreach ($incoming_details as $key => $value) {?>
-                                                    <option value="<?php echo $value['id']; ?>"><?php echo $value['incoming_details_id']; ?></option>
+                                                    <option value="<?php echo $value['id']; ?>" <?php if($fetchALLpreBillofmaterailist[0]['pre_incoming_details']== $value['id']){ echo 'selected'; } ?>><?php echo $value['incoming_details_id']; ?></option>
                                                     <?php } ?>
                                                 </select>
                                             <p class="error incoming_details_error"></p>
@@ -217,7 +249,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="remark">Remark</label>
-                                            <input type="text" class="form-control" id="remark" name="remark" value="">
+                                            <input type="text" class="form-control" id="remark" name="remark" value="<?=$fetchALLpreBillofmaterailist[0]['pre_remark'] ?>">
                                             <p class="error remark_error"></p>
                                         </div>
                                     </div>

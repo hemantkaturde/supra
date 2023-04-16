@@ -3408,7 +3408,7 @@ class Admin_model extends CI_Model
 
 
 
-        $this->db->select('*',TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name as description,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as order_oty,'
+        $this->db->select('*,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name as description,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as order_oty,'
         .TBL_BILL_OF_MATERIAL_ITEM.'.rm_actual_aty,'
         .TBL_BILL_OF_MATERIAL_ITEM.'.pre_supplier_name,'
         .TBL_RAWMATERIAL.'.sitting_size,'
@@ -3426,13 +3426,15 @@ class Admin_model extends CI_Model
         .TBL_BILL_OF_MATERIAL_ITEM.'.actual_scrap_received_in_kgs,'
         .TBL_BILL_OF_MATERIAL_ITEM.'.remark,'
         .TBL_VENDOR_PO_MASTER.'.po_number as vendorponumnber,'
-       
+        .TBL_BILL_OF_MATERIAL_ITEM.'.pre_supplier_po_number,'
+        .TBL_BUYER_PO_MASTER.'.sales_order_number,'
         
         .TBL_RAWMATERIAL.'.type_of_raw_material');
         $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_BILL_OF_MATERIAL_ITEM.'.part_number');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.part_number = '.TBL_RAWMATERIAL.'.part_number');
         $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_BILL_OF_MATERIAL_ITEM.'.pre_vendor_po_number');
+        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_BILL_OF_MATERIAL_ITEM.'.pre_buyer_po_number');
         $this->db->where(TBL_BILL_OF_MATERIAL_ITEM.'.bom_id is NULL');
         $query = $this->db->get(TBL_BILL_OF_MATERIAL_ITEM);
         $data = $query->result_array();
