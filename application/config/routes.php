@@ -206,8 +206,16 @@ $route['deletepackinginstractionsubitem'] = "admin/deletepackinginstractionsubit
 
 
 $route['getBuyerpoitemonly'] = "admin/getBuyerpoitemonly";
+
+
 $route['exportdetails'] = "admin/exportdetails";
 $route['fetchexportdetails'] = "admin/fetchexportdetails";
+$route['addnewExportDetails'] = "admin/addnewExportDetails";
+$route['editexportdetails/(:any)'] = "admin/editexportdetails/$1";
+$route['updatexportdetails'] = "admin/updatexportdetails";
+$route['deleteexportdetailsmain'] = "admin/deleteexportdetailsmain";
+
+
 
 
 $route['challanform'] = "admin/challanform";

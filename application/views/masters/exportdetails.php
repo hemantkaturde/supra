@@ -16,7 +16,7 @@
             </div>
             <div class="col-xs-6 text-right">
                 <div class="form-group">
-                    <a class="btn btn-primary" href="<?php echo base_url(); ?>addnewSupplier">
+                    <a class="btn btn-primary" href="<?php echo base_url(); ?>addnewExportDetails">
                         <i class="fa fa-plus"></i> Add Export Details</a>
                 </div>
             </div>
@@ -33,7 +33,6 @@
                                         <th>Buyer Name</th>
                                         <th>Buyer PO Number</th>
                                         <th>Buyer PO Date</th>
-                                        <th>Buyer Order Qty</th>
                                         <th>Buyer Delivery Date</th>
                                         <th>Action</th>
                                     </tr>

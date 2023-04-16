@@ -6543,7 +6543,6 @@
 
 		});
 
-
 		$(document).on('click','.deleteIncomingDetailsitem',function(e){
 			var elemF = $(this);
 			e.preventDefault();
@@ -6831,7 +6830,6 @@
 			return false;
 	    });
 		
-
 		$(document).on('click','#addpackinginstractiondetails',function(e){
 			e.preventDefault();
 			$(".loader_ajax").show();
@@ -6933,17 +6931,18 @@
 
 
 
-<?php if($pageTitle=='Export Details'){ ?>
+<?php if($pageTitle=='Export Details' || $pageTitle=='Add New Export Details' || $pageTitle=="Edit Export Details"){ ?>
 	<script type="text/javascript">
-       $(document).ready(function() {
+        $(document).ready(function() {
             var dt = $('#view_export_details').DataTable({
 	            "columnDefs": [ 
 	                 { className: "details-control", "targets": [ 0 ] },
-	                 { "width": "15%", "targets": 0 },
-	                 { "width": "15%", "targets": 1 },
-					 { "width": "15%", "targets": 2 },
+	                 { "width": "20%", "targets": 0 },
+	                 { "width": "20%", "targets": 1 },
+					 { "width": "20%", "targets": 2 },
 	                 { "width": "15%", "targets": 3 },
-					 { "width": "10%", "targets": 4 },
+					 { "width": "15%", "targets": 4 },
+					 { "width": "10%", "targets": 5 },
 	            ],
 	            responsive: true,
 	            "oLanguage": {
@@ -6961,6 +6960,218 @@
 	            },
 	        });
 	    });
+
+
+		$(document).on('click','#saveexportdetails',function(e){
+			e.preventDefault();
+			$(".loader_ajax").show();
+			var formData = new FormData($("#addnExportDetailsform")[0]);
+			$.ajax({
+				url : "<?php echo base_url();?>addnewExportDetails",
+				type: "POST",
+				data : formData,
+				cache: false,
+		        contentType: false,
+		        processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+						$(".loader_ajax").hide();
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						swal({
+							title: "Success",
+							text: "Export Details Successfully Added!",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+								window.location.href = "<?php echo base_url().'exportdetails'?>";
+						});		
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			});
+			return false;
+	    });
+
+
+		$(document).on('change','#buyer_name',function(e){  
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			$("#customers-list").html('');
+			var buyer_name = $('#buyer_name').val();
+		    $('.buyer_po_number_div').css('display','block');
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getBuyerPonumberbyBuyerid",
+				type: "POST",
+				data : {'buyer_name' : buyer_name},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#buyer_po_number').html('<option value="">Select Buyer PO Number</option>');
+					}
+					else
+					{
+						// $('#buyer_po_number').html('<option value="">Select Buyer PO Number</option>');
+						$('#buyer_po_number').html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#buyer_po_number').html();
+					//$(".loader_ajax").hide();
+				}
+			});
+			return false;
+		});
+
+
+		$(document).on('change','#buyer_po_number',function(e){  
+			e.preventDefault();
+			
+			//$(".loader_ajax").show();
+			         var buyer_po_number = $('#buyer_po_number').val();
+		
+		
+						$.ajax({
+							url : "<?php echo ADMIN_PATH;?>getbuyerdetialsbybuyerponumber",
+							type: "POST",
+							data : {'buyer_po_number' : buyer_po_number},
+							success: function(data, textStatus, jqXHR)
+							{
+								$(".loader_ajax").hide();
+								if(data == "failure")
+								{
+									$('#buyer_po_date').val('');
+									$('#buyer_delivery_date').val('');
+								}
+								else
+								{
+									var data_row_material = jQuery.parseJSON( data );
+									$('#buyer_po_date').val(data_row_material.buyer_po_date);
+							}
+							},
+							error: function (jqXHR, textStatus, errorThrown)
+							{
+								    $('#buyer_po_date').val('');
+								    //$(".loader_ajax").hide();
+							}
+						});
+						return false;
+
+	
+		
+		});
+
+
+		$(document).on('click','#editExportDetails',function(e){
+			e.preventDefault();
+			$(".loader_ajax").show();
+			var formData = new FormData($("#exitExportDetailsform")[0]);
+			$.ajax({
+				url : "<?php echo base_url();?>updatexportdetails",
+				type: "POST",
+				data : formData,
+				cache: false,
+		        contentType: false,
+		        processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+						$(".loader_ajax").hide();
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						swal({
+							title: "Success",
+							text: "Export Details Successfully Updated!",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+								window.location.href = "<?php echo base_url().'exportdetails'?>";
+						});		
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			});
+			return false;
+	    });
+		
+
+
+		$(document).on('click','.deleteexportdetailsmain',function(e){
+			var elemF = $(this);
+			e.preventDefault();
+			swal({
+				title: "Are you sure?",
+				text: "Export Details Succesfully Deleted",
+				type: "warning",
+				showCancelButton: true,
+				closeOnClickOutside: false,
+				confirmButtonClass: "btn-sm btn-danger",
+				confirmButtonText: "Yes, delete it!",
+				cancelButtonText: "No, cancel plz!",
+				closeOnConfirm: false,
+				closeOnCancel: false
+			}, function(isConfirm) {
+				if (isConfirm) {
+							$.ajax({
+								url : "<?php echo base_url();?>deleteexportdetailsmain",
+								type: "POST",
+								data : 'id='+elemF.attr('data-id'),
+								success: function(data, textStatus, jqXHR)
+								{
+									const obj = JSON.parse(data);
+								
+									if(obj.status=='success'){
+										swal({
+											title: "Deleted!",
+											text: "Export Details Succesfully Deleted",
+											icon: "success",
+											button: "Ok",
+											},function(){ 
+												window.location.href = "<?php echo base_url().'exportdetails'?>";
+										});	
+									}
+
+								},
+								error: function (jqXHR, textStatus, errorThrown)
+								{
+									$(".loader_ajax").hide();
+								}
+							})
+						}
+						else {
+				swal("Cancelled", "Export Details deletion cancelled ", "error");
+				}
+			});
+		});
+
+
 
     </script>
 <?php } ?>

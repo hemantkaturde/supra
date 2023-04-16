@@ -179,7 +179,7 @@
                     </li>
 
                   
-                    <li class="treeview <?php if($pageUrl=="buyerpo" || $pageUrl=="addnewBuyerpo" || $pageUrl=="editBuyerpo" || $pageUrl=="supplierpo" || $pageUrl=="addnewSupplierpo" || $pageUrl=="editSupplierpo" || $pageUrl=="viewBuyerpo" || $pageUrl=="buyerpoconfirmation" || $pageUrl=="viewSupplierpo" || $pageUrl=="vendorpo" || $pageUrl=="addnewVendorpo" || $pageUrl=="viewVendorpo" || $pageUrl=="supplierpoconfirmation" || $pageUrl=="addSupplierpoconfirmation" || $pageUrl=="viewSupplierpoconfirmation" || $pageUrl=="vendorpoconfirmation" || $pageUrl=="addVendorpoconfirmation" || $pageUrl=="billofmaterial" || $pageUrl=="addnewBillofmaterial" || $pageUrl=="vendorbillofmaterial" || $pageUrl=="addvendorBillofmaterial" || $pageUrl=="viewVendorbillofmaterial" || $pageUrl=="packinginstaruction" || $pageUrl=="exportdetails" || $pageUrl=="challanform" || $pageUrl=="packagingform"  || $pageUrl=="rrchallan" || $pageUrl=="addnewpackinginstruction" || $pageUrl=="incomingdetails" || $pageUrl=="addnewencomingdetails" || $pageUrl=="addpackinginstractiondetails" ||  $pageUrl=="editpackinginstraction" ||  $pageUrl=="editincomingdetails"){echo 'active';}?>">
+                    <li class="treeview <?php if($pageUrl=="buyerpo" || $pageUrl=="addnewBuyerpo" || $pageUrl=="editBuyerpo" || $pageUrl=="supplierpo" || $pageUrl=="addnewSupplierpo" || $pageUrl=="editSupplierpo" || $pageUrl=="viewBuyerpo" || $pageUrl=="buyerpoconfirmation" || $pageUrl=="viewSupplierpo" || $pageUrl=="vendorpo" || $pageUrl=="addnewVendorpo" || $pageUrl=="viewVendorpo" || $pageUrl=="supplierpoconfirmation" || $pageUrl=="addSupplierpoconfirmation" || $pageUrl=="viewSupplierpoconfirmation" || $pageUrl=="vendorpoconfirmation" || $pageUrl=="addVendorpoconfirmation" || $pageUrl=="billofmaterial" || $pageUrl=="addnewBillofmaterial" || $pageUrl=="vendorbillofmaterial" || $pageUrl=="addvendorBillofmaterial" || $pageUrl=="viewVendorbillofmaterial" || $pageUrl=="packinginstaruction" || $pageUrl=="exportdetails" || $pageUrl=="challanform" || $pageUrl=="packagingform"  || $pageUrl=="rrchallan" || $pageUrl=="addnewpackinginstruction" || $pageUrl=="incomingdetails" || $pageUrl=="addnewencomingdetails" || $pageUrl=="addpackinginstractiondetails" ||  $pageUrl=="editpackinginstraction" ||  $pageUrl=="editincomingdetails" || $pageUrl=="addnewExportDetails" || $pageUrl=="editexportdetails"){echo 'active';}?>">
                       <a href="#">
                         <i class="fa fa-laptop"></i> <span class="menu_label">Miscellaneous</span>
                           <span class="pull-right-container">
@@ -198,13 +198,7 @@
                         <li class="line_height <?php if($pageUrl=="billofmaterial" || $pageUrl=="addnewBillofmaterial"){echo 'active';}?>"><a href="<?php echo base_url(); ?>billofmaterial"><i class="fa fa-cubes"></i> Bill of Material</a></li>
                         <li class="line_height <?php if($pageUrl=="vendorbillofmaterial" || $pageUrl=="addvendorBillofmaterial" || $pageUrl=="viewVendorbillofmaterial"){echo 'active';}?>"><a href="<?php echo base_url(); ?>vendorbillofmaterial"><i class="fa fa-cubes"></i> Vendor Bill of Material</a></li>
                         <li class="line_height <?php if($pageUrl=="packinginstaruction" || $pageUrl=="addnewpackinginstruction" || $pageUrl=="addpackinginstractiondetails" || $pageUrl=="editpackinginstraction"){echo 'active';}?>"><a href="<?php echo base_url(); ?>packinginstaruction"><i class="fa fa-cubes"></i> Packing Instructions / Form</a></li>
-                        <li class="line_height" <?php if($pageUrl=="exportdetails"){echo 'active';}?>><a href="<?php echo base_url(); ?>exportdetails"><i class="fa fa-cubes"></i> Export Details</a></li>
-                        <li class="line_height" <?php if($pageUrl=="challanform"){echo 'active';}?>><a href="<?php echo base_url(); ?>challanform"><i class="fa fa-cubes"></i> Challan Form</a></li>
-                        <li class="line_height" <?php if($pageUrl=="rrchallan"){echo 'active';}?>><a href="<?php echo base_url(); ?>rrchallan"><i class="fa fa-cubes"></i> R R Challan</a></li>
-
-
-
-
+                        <li class="line_height <?php if($pageUrl=="exportdetails" || $pageUrl=="addnewExportDetails" || $pageUrl=="editexportdetails"){echo 'active';}?>"><a href="<?php echo base_url(); ?>exportdetails"><i class="fa fa-cubes"></i> Export Details</a></li>
 
                         <li class="line_height"><a href="<?php echo base_url(); ?>log-history-backup"><i class="fa fa-cubes"></i> Current Order Status</a></li>
 
@@ -226,9 +220,9 @@
                       </a>
                       <ul class="treeview-menu" >
                         <li class="line_height <?php if($pageUrl=="jobWork" || $pageUrl=="addjobwork"){echo 'active';}?>"><a href="<?php echo base_url(); ?>jobWork"><i class="fa fa-cubes"></i> Job Work</a></li>
-                        <li class="line_height"><a href="<?php echo base_url(); ?>log-history-upload"><i class="fa fa-cubes"></i> Rework / Rejection Return</a></li>
+                        <li class="line_height"><a href="<?php echo base_url(); ?>log-history-upload"><i class="fa fa-cubes"></i> Rework / Rejection Return (RR)</a></li>
                         <li class="line_height"><a href="<?php echo base_url(); ?>log-history-backup"><i class="fa fa-cubes"></i> Common Challan</a></li>
-                        <li class="line_height"><a href="<?php echo base_url(); ?>log-history-backup"><i class="fa fa-cubes"></i> Scrap Return</a></li>
+                        <li class="line_height" <?php if($pageUrl=="challanform"){echo 'active';}?>><a href="<?php echo base_url(); ?>challanform"><i class="fa fa-cubes"></i> Challan Form</a></li>                        <li class="line_height"><a href="<?php echo base_url(); ?>log-history-backup"><i class="fa fa-cubes"></i> Scrap Return</a></li>
                       </ul>
                     </li>
 

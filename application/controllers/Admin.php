@@ -5005,8 +5005,6 @@ class Admin extends BaseController
 
     }
 
-
-
     public function updatepackinginstraction(){
 
         $post_submit = $this->input->post();
@@ -5068,7 +5066,6 @@ class Admin extends BaseController
      
     }
 
-
     public function getVendorsItemsforDisplay(){
 
 
@@ -5105,8 +5102,6 @@ class Admin extends BaseController
     
        }
     }
-
-
 
     public function getincomingListforDisplay(){
 
@@ -5145,7 +5140,6 @@ class Admin extends BaseController
        }
 
     }
-
 
     public function saveBillofmaterialtem(){
 
@@ -5245,5 +5239,160 @@ class Admin extends BaseController
 
 
     }
+
+    public function addnewExportDetails(){
+
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+
+            $export_details_response = array();
+
+            $this->form_validation->set_rules('export_id_number','PO Number','trim|required');
+            $this->form_validation->set_rules('buyer_name','Date','trim|required');
+            $this->form_validation->set_rules('buyer_po_number','Vendor Name','trim|required');
+            $this->form_validation->set_rules('buyer_po_date','Buyer PO Date','trim|required');
+            $this->form_validation->set_rules('remark','Remark','trim');
+
+            if($this->form_validation->run() == FALSE)
+            {
+                $export_details_response['status'] = 'failure';
+                $export_details_response['error'] = array( 'export_id_number'=>strip_tags(form_error('export_id_number')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'remark'=>strip_tags(form_error('remark')));
+           
+            }else{
+
+                $data = array(
+                    'export_details_id'   => trim($this->input->post('export_id_number')),
+                    'buyer_name'     => trim($this->input->post('buyer_name')),
+                    'buyer_po_number'  => trim($this->input->post('buyer_po_number')),
+                    'buyer_po_date'=> trim($this->input->post('buyer_po_date')),
+                    'remark'=> trim($this->input->post('remark')),
+                );
+
+                $checkExportdetailsalredayexits = $this->admin_model->checkExportdetailsalredayexits(trim($this->input->post('export_id_number')));
+
+                if($checkExportdetailsalredayexits > 0){
+                        $export_details_response['status'] = 'failure';
+                        $export_details_response['error'] = array( 'export_id_number'=>strip_tags(form_error('packing_id_number')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'remark'=>strip_tags(form_error('remark')));
+                    }else{
+                    $saveExportdetails = $this->admin_model->saveExportdetails('',$data);
+                    if($saveExportdetails){
+                             $export_details_response['status'] = 'success';
+                             $export_details_response['error'] = array( 'export_id_number'=>strip_tags(form_error('packing_id_number')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'remark'=>strip_tags(form_error('remark')));    
+                    }
+
+                }
+            }
+
+            echo json_encode($export_details_response);
+
+        }else{
+
+            $process = 'Add New Export Details';
+            $processFunction = 'Admin/addnewExportDetails';
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Add New Export Details';
+            $data['getpreviousexportdetailsinstarction']= $this->admin_model->getpreviousexportdetailsinstarction();
+            $data['buyerList']= $this->admin_model->fetchAllbuyerList();
+            $this->loadViews("masters/addNewexportdetails", $this->global, $data, NULL);
+
+        }
+
+
+    }
+
+    public function editexportdetails($export_details_id){
+
+        $process = 'Edit Export Details';
+        $processFunction = 'Admin/editexportdetails';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Edit Export Details';
+        $this->global['exportdetailsid'] = $export_details_id;
+        $data['getexportdetailsforedit'] =  $this->admin_model->getexportdetailsforedit(trim($export_details_id));
+        $data['buyerList']= $this->admin_model->fetchAllbuyerList();
+        $this->loadViews("masters/editexportdetails", $this->global, $data, NULL); 
+
+    }
+
+
+
+    public function updatexportdetails(){
+
+        $post_submit = $this->input->post();
+
+    
+        if($post_submit){
+
+            $update_exportdetails_response = array();
+
+            $this->form_validation->set_rules('export_details_id','PO Number','trim|required');
+            $this->form_validation->set_rules('buyer_name','Date','trim|required');
+            $this->form_validation->set_rules('buyer_po_number','Vendor Name','trim');
+            $this->form_validation->set_rules('buyer_po_date','Buyer PO Date','trim');
+            $this->form_validation->set_rules('remark','Remark','trim');
+
+            if($this->form_validation->run() == FALSE)
+            {
+                $update_exportdetails_response['status'] = 'failure';
+                $update_exportdetails_response['error'] = array( 'export_details_id'=>strip_tags(form_error('export_details_id')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'remark'=>strip_tags(form_error('remark')));
+           
+            }else{
+
+                if($this->input->post('buyer_po_date')){
+                   $buyer_po_date =  $this->input->post('buyer_po_date');
+                }else{
+                   $buyer_po_date =  $this->input->post('buyer_po_date_existing');
+                }
+
+                if($this->input->post('buyer_po_number')){
+                    $buyer_po_number =  $this->input->post('buyer_po_number');
+                 }else{
+                     $buyer_po_number =  $this->input->post('buyer_po_number_existing');
+                 }
+                        $data = array(
+                            'export_details_id'   => trim($this->input->post('export_details_id')),
+                            'buyer_name'     => trim($this->input->post('buyer_name')),
+                            'buyer_po_number'  => trim($buyer_po_number),
+                            'buyer_po_date'=> trim($buyer_po_date),
+                            'remark'=> trim($this->input->post('remark')),
+                        );
+
+            
+                    $saveExportdetails = $this->admin_model->saveExportdetails(trim($this->input->post('exportdetailsid')),$data);
+                    if($saveExportdetails){
+                             $update_exportdetails_response['status'] = 'success';
+                             $update_exportdetails_response['error'] = array( 'export_details_id'=>strip_tags(form_error('export_details_id')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'remark'=>strip_tags(form_error('remark')));
+                        
+                     }
+
+            }
+
+            echo json_encode($update_exportdetails_response);
+
+        }
+
+     
+    }
+
+
+    public function deleteexportdetailsmain(){
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->deleteexportdetailsmain(trim($this->input->post('id')));
+            if ($result) {
+                        $process = 'Export Details Delete';
+                        $processFunction = 'Admin/deleteexportdetailsmain';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
+
+
+    }
+
 
 }

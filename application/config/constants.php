@@ -144,6 +144,10 @@ define('TBL_PACKING_INSTRACTION_DETAILS','tbl_packing_instrauction_details');
 
 
 
+define('TBL_EXPORT_DETAILS','tbl_export_details');
+
+
+
 
 
 

@@ -3444,6 +3444,158 @@ class Admin_model extends CI_Model
 
     }
 
+
+    public function getExportdetailsCount(){
+
+        $this->db->select('*');
+        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_EXPORT_DETAILS.'.buyer_name');
+        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_EXPORT_DETAILS.'.buyer_po_number');
+
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_EXPORT_DETAILS.".export_details_id LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_EXPORT_DETAILS.".buyer_po_date LIKE '%".$params['search']['value']."%')");
+        }
+
+        $this->db->where(TBL_EXPORT_DETAILS.'.status', 1);
+        $query = $this->db->get(TBL_EXPORT_DETAILS);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+
+    }
+
+    public function getExportdetailsdata(){
+
+        $this->db->select('*,'.TBL_BUYER_MASTER.'.buyer_name as buyer_name_master,'.TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_BUYER_PO_MASTER.'.delivery_date,'.TBL_EXPORT_DETAILS.'.id  as export_details_idauto'); 
+        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_EXPORT_DETAILS.'.buyer_name');
+        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_EXPORT_DETAILS.'.buyer_po_number');
+
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_EXPORT_DETAILS.".export_details_id LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_EXPORT_DETAILS.".buyer_po_date LIKE '%".$params['search']['value']."%')");
+        }
+
+        $this->db->where(TBL_EXPORT_DETAILS.'.status', 1);
+        $this->db->limit($params['length'],$params['start']);
+        $this->db->order_by(TBL_EXPORT_DETAILS.'.id','DESC');
+        $query = $this->db->get(TBL_EXPORT_DETAILS);
+        $fetch_result = $query->result_array();
+
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['export_details_id'] = $value['export_details_id'];
+                $data[$counter]['buyer_name'] = $value['buyer_name_master'];
+                $data[$counter]['buyer_po'] = $value['sales_order_number'];
+                $data[$counter]['buyer_po_date'] = $value['buyer_po_date'];
+                $data[$counter]['delivery_date'] = $value['delivery_date'];
+                $data[$counter]['action'] = '';
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editexportdetails/".$value['export_details_idauto']."' style='cursor: pointer;'><i style='font-size: large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addpackinginstractiondetails/".$value['export_details_idauto']."' style='cursor: pointer;'><i style='font-size: large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['export_details_idauto']."' class='fa fa-trash-o deleteexportdetailsmain' aria-hidden='true'></i>"; 
+                $counter++; 
+            }
+        }
+
+        return $data;
+
+
+    }
+
+
+    public function getpreviousexportdetailsinstarction(){
+
+        $this->db->select('export_details_id');
+        $this->db->where(TBL_EXPORT_DETAILS.'.status', 1);
+        $this->db->limit(1);
+        $this->db->order_by(TBL_EXPORT_DETAILS.'.id','DESC');
+        $query = $this->db->get(TBL_EXPORT_DETAILS);
+        $rowcount = $query->result_array();
+        return $rowcount;
+
+
+    }
+
+
+    public function checkExportdetailsalredayexits($export_id_number){
+
+        $this->db->select('*');
+        $this->db->where(TBL_EXPORT_DETAILS.'.export_details_id', $export_id_number);
+        $this->db->where(TBL_EXPORT_DETAILS.'.status', 1);
+        $query = $this->db->get(TBL_EXPORT_DETAILS);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+
+    }
+
+
+    public function saveExportdetails($id,$data){
+
+        if($id != '') {
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_EXPORT_DETAILS, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_EXPORT_DETAILS, $data)) {
+                return $this->db->insert_id();;
+            } else {
+                return FALSE;
+            }
+        }
+
+    
+    }
+
+
+    public function getexportdetailsforedit($export_details_id){
+
+        $this->db->select('*,'.TBL_BUYER_MASTER.'.buyer_name as buyer_name_master,'.TBL_EXPORT_DETAILS.'.id as exportdetails_id,'.TBL_BUYER_PO_MASTER.'.id as buyerpoid'); 
+        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_EXPORT_DETAILS.'.buyer_name');
+        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.buyer_name_id = '.TBL_BUYER_MASTER.'.buyer_id');
+        $this->db->where(TBL_EXPORT_DETAILS.'.id', $export_details_id);
+        $this->db->where(TBL_EXPORT_DETAILS.'.status', 1);
+        $query = $this->db->get(TBL_EXPORT_DETAILS);
+        $fetch_result = $query->result_array();
+
+        return $fetch_result;
+
+    }
+
+
+    public function deleteexportdetailsmain($id){
+
+        
+
+        $this->db->where('id', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_EXPORT_DETAILS)){
+
+            // $this->db->where('incoming_details_id', $id);
+            // //$this->db->delete(TBL_SUPPLIER);
+            // if($this->db->delete(TBL_INCOMING_DETAILS_ITEM)){
+            //    return TRUE;
+            // }else{
+            //    return FALSE;
+            // }
+        return TRUE;
+        }else{
+           return FALSE;
+        }
+
+    }
+
+
 }
 
 ?>
