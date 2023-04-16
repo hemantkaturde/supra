@@ -30,8 +30,8 @@
                                                     <th scope="col">Part Number</th>
                                                     <th scope="col">Description</th>
                                                     <th scope="col">Order Qty</th>
-                                                    <th scope="col">Rate</th>
-                                                    <th scope="col">Value</th>
+                                                    <!-- <th scope="col">Rate</th>
+                                                    <th scope="col">Value</th> -->
                                                 </tr>
                                             </thead>
                                             
@@ -45,8 +45,8 @@
                                                         <td><?=$value['part_number'];?></td>
                                                         <td><?=$value['description'];?></td>
                                                         <td><?=$value['order_oty'];?></td>
-                                                        <td><?=$value['rate'];?></td>
-                                                        <td><?=$value['value'];?></td>
+                                                        <!-- <td><?=$value['rate'];?></td>
+                                                        <td><?=$value['value'];?></td> -->
                                                     </tr>
                                             <?php } ?>  
                                             </tbody>
