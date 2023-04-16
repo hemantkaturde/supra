@@ -3322,7 +3322,7 @@ class Admin_model extends CI_Model
 
     public function getpackingdetails_itemdetails($main_id){
 
-        $this->db->select('*'); 
+        $this->db->select('*,'.TBL_PACKING_INSTRACTION_DETAILS.'.id as packing_instaction_details'); 
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_PACKING_INSTRACTION_DETAILS.'.part_number');
         $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id', $main_id);
         $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.status', 1);
