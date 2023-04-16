@@ -86,7 +86,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                                 <label for="vendor_po_number">Select Vendor PO Number <span class="required">*</span></label>
-                                                    <select class="form-control vendor_po_for_item vendor_name_for_buyer_name" name="vendor_po_number" id="vendor_po_number">
+                                                    <select class="form-control vendor_po_for_item vendor_name_for_buyer_name vendor_po_number_for_view_item" name="vendor_po_number" id="vendor_po_number">
                                                         <option st-id="" value="<?=$fetchALLpreVendorpoitemList[0]['pre_vendor_po_number']?>" selected><?=$selected_value;?></option>
                                                     </select>
                                             <p class="error vendor_po_number_error"></p>
@@ -122,7 +122,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                                 <label for="buyer_po_number">Select Buyer PO <span class="required">*</span></label>
-                                                    <select class="form-control buyer_po_number  buyer_po_number_for_itam_mapping" name="buyer_po_number" id="buyer_po_number">
+                                                    <select class="form-control buyer_po_number  buyer_po_number_for_itam_mapping buyer_po_number_for_itam_display" name="buyer_po_number" id="buyer_po_number">
                                                         <option st-id="" value="<?=$fetchALLpreVendorpoitemList[0]['pre_buyer_po_number']?>" selected><?=$selected_value_buyer?></option>
                                                     </select>
                                             <p class="error buyer_po_number_error"></p>
@@ -169,8 +169,19 @@
                                         </div>
                                     </div>
 
-                                
-        
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                                <label for="incoming_details">Incoming Details </label>
+                                                <select class="form-control  incoming_details_item_list_display" name="incoming_details" id="incoming_details">
+                                                    <option st-id="" value="">Select Incoming Details</option>
+                                                    <?php foreach ($incoming_details as $key => $value) {?>
+                                                    <option value="<?php echo $value['id']; ?>" <?php if($fetchALLpreVendorpoitemList[0]['pre_incoming_details']== $value['id']){ echo 'selected'; } ?>><?php echo $value['incoming_details_id']; ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            <p class="error incoming_details_error"></p>
+                                        </div>
+                                    </div>
+
 
                                     <div class="col-md-12">
                                         <div class="form-group">
@@ -221,7 +232,17 @@
                                             </table>
                                     </div>
 
-                                
+                                    <div class="container">
+
+                                         <div id="customers-list">
+                                         </div>
+
+                                         <div id="buyer_po_item_list">
+                                         </div>
+
+                                         <div id="incoming_details_item_list">
+                                         </div>
+                                    </div>
 
                                       <!-- Add New Package Modal -->
                                     <?php $this->load->helper("form"); ?>
@@ -323,12 +344,12 @@
                             <!-- /.box-body -->
                             <div class="box-footer">
                                 <div class="col-xs-8">
-                                    <?php if($fetchALLprejobworkitemList){
+                                    <?php if($fetchALLpreVendorpoitemList){
                                         $disabled= '';
                                     }else{ 
                                         $disabled= 'disabled';
                                      } ?>
-                                    <input type="submit" id="savenewvendorBillofmaterial" class="btn btn-primary" value="Submit">
+                                    <input type="submit" id="savenewvendorBillofmaterial" class="btn btn-primary" value="Submit" <?php echo $disabled;?> >
                                     <input type="button" onclick="location.href = '<?php echo base_url() ?>vendorbillofmaterial'" class="btn btn-default" value="Back" />
                                 </div>
                             </div>

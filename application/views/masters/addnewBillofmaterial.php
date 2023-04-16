@@ -249,7 +249,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="remark">Remark</label>
-                                            <input type="text" class="form-control" id="remark" name="remark" value="<?=$fetchALLpreBillofmaterailist[0]['pre_remark'] ?>">
+                                            <input type="text" class="form-control" id="remark" name="remark" value="<?=$fetchALLpreBillofmaterailist[0]['bom_remark'] ?>">
                                             <p class="error remark_error"></p>
                                         </div>
                                     </div>

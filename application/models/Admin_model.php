@@ -3428,6 +3428,7 @@ class Admin_model extends CI_Model
         .TBL_VENDOR_PO_MASTER.'.po_number as vendorponumnber,'
         .TBL_BILL_OF_MATERIAL_ITEM.'.pre_supplier_po_number,'
         .TBL_BUYER_PO_MASTER.'.sales_order_number,'
+        .TBL_BILL_OF_MATERIAL_ITEM.'.pre_remark as bom_remark,'
         
         .TBL_RAWMATERIAL.'.type_of_raw_material');
         $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_BILL_OF_MATERIAL_ITEM.'.part_number');

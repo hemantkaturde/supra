@@ -4114,6 +4114,7 @@ class Admin extends BaseController
                     'buyer_po_date'=> trim($this->input->post('buyer_po_date')),
                     'buyer_delivery_date'=> trim($this->input->post('buyer_delivery_date')),
                     'bom_status' =>    trim($this->input->post('bom_status')),
+                    'incoming_details' =>    trim($this->input->post('incoming_details')),
                     'remark' =>    trim($this->input->post('remark')),
                 );
 
@@ -4147,6 +4148,7 @@ class Admin extends BaseController
             $data['fetchALLpreVendorpoitemList']= $this->admin_model->fetchALLpreVendorpoitemList();
             $data['buyerList']= $this->admin_model->fetchAllbuyerList();
             $data['vendorList']= $this->admin_model->fetchALLvendorList();
+            $data['incoming_details']= $this->admin_model->fetchAllincomingdetailsList();
             $this->loadViews("masters/addvendorBillofmaterial", $this->global, $data, NULL);
 
         }
@@ -4234,7 +4236,8 @@ class Admin extends BaseController
 
     public function saveVendorbilloamaterialitems(){
 
-        $post_submit = $this->input->post();
+        $post_submit = $this->input->post();;
+
         if($post_submit){
             $save_billofmaterial_response = array();
 
@@ -4270,6 +4273,7 @@ class Admin extends BaseController
                     'pre_buyer_po_date' => trim($this->input->post('pre_buyer_po_date')),
                     'pre_buyer_delivery_date' => trim($this->input->post('pre_buyer_delivery_date')),
                     'pre_bom_status' => trim($this->input->post('pre_bom_status')),
+                    'pre_incoming_details' => trim($this->input->post('pre_incoming_details')),
                     'pre_remark' => trim($this->input->post('item_remark')),
                 );
 
