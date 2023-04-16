@@ -6908,7 +6908,7 @@
 											icon: "success",
 											button: "Ok",
 											},function(){ 
-												window.location.href = "<?php echo base_url().'addpackinginstractiondetails/'?>"+elemF.attr('data-id');
+												window.location.href = "<?php echo base_url().'addpackinginstractiondetails/'?>"+elemF.attr('main-id');
 										});	
 									}
 

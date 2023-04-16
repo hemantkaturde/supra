@@ -197,10 +197,9 @@
 
                         <li class="line_height <?php if($pageUrl=="billofmaterial" || $pageUrl=="addnewBillofmaterial"){echo 'active';}?>"><a href="<?php echo base_url(); ?>billofmaterial"><i class="fa fa-cubes"></i> Bill of Material</a></li>
                         <li class="line_height <?php if($pageUrl=="vendorbillofmaterial" || $pageUrl=="addvendorBillofmaterial" || $pageUrl=="viewVendorbillofmaterial"){echo 'active';}?>"><a href="<?php echo base_url(); ?>vendorbillofmaterial"><i class="fa fa-cubes"></i> Vendor Bill of Material</a></li>
-                        <li class="line_height <?php if($pageUrl=="packinginstaruction" || $pageUrl=="addnewpackinginstruction" || $pageUrl=="addpackinginstractiondetails" || $pageUrl=="editpackinginstraction"){echo 'active';}?>"><a href="<?php echo base_url(); ?>packinginstaruction"><i class="fa fa-cubes"></i> Packing Instructions</a></li>
+                        <li class="line_height <?php if($pageUrl=="packinginstaruction" || $pageUrl=="addnewpackinginstruction" || $pageUrl=="addpackinginstractiondetails" || $pageUrl=="editpackinginstraction"){echo 'active';}?>"><a href="<?php echo base_url(); ?>packinginstaruction"><i class="fa fa-cubes"></i> Packing Instructions / Form</a></li>
                         <li class="line_height" <?php if($pageUrl=="exportdetails"){echo 'active';}?>><a href="<?php echo base_url(); ?>exportdetails"><i class="fa fa-cubes"></i> Export Details</a></li>
                         <li class="line_height" <?php if($pageUrl=="challanform"){echo 'active';}?>><a href="<?php echo base_url(); ?>challanform"><i class="fa fa-cubes"></i> Challan Form</a></li>
-                        <li class="line_height" <?php if($pageUrl=="packagingform"){echo 'active';}?>><a href="<?php echo base_url(); ?>packagingform"><i class="fa fa-cubes"></i> Packaging Form</a></li>
                         <li class="line_height" <?php if($pageUrl=="rrchallan"){echo 'active';}?>><a href="<?php echo base_url(); ?>rrchallan"><i class="fa fa-cubes"></i> R R Challan</a></li>
 
 

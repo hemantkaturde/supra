@@ -141,7 +141,7 @@
                                                         <td><?=$value_details['buyer_invoice_qty'];?></td>
                                                         <td><?=$value_details['box_qty'];?></td>
                                                         <td><?=$value_details['remark'];?></td>
-                                                        <td><i style='font-size: x-large;cursor: pointer;' data-id='<?=$value_details['packing_instaction_details'];?>' class='fa fa-trash-o deletepackinginstractionsubitem' aria-hidden='true'></i></td>
+                                                        <td><i style='font-size: x-large;cursor: pointer;' main-id='<?=$main_id; ?>'   data-id='<?=$value_details['packing_instaction_details'];?>' class='fa fa-trash-o deletepackinginstractionsubitem' aria-hidden='true'></i></td>
                                                     </tr>
                                             <?php } ?>  
                                             </tbody>
