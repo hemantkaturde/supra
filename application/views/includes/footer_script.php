@@ -6931,7 +6931,7 @@
 
 
 
-<?php if($pageTitle=='Export Details' || $pageTitle=='Add New Export Details' || $pageTitle=="Edit Export Details"){ ?>
+<?php if($pageTitle=='Export Details' || $pageTitle=='Add New Export Details' || $pageTitle=="Edit Export Details" || $pageTitle=="Add Export Details Items"){ ?>
 	<script type="text/javascript">
         $(document).ready(function() {
             var dt = $('#view_export_details').DataTable({
@@ -7122,7 +7122,6 @@
 	    });
 		
 
-
 		$(document).on('click','.deleteexportdetailsmain',function(e){
 			var elemF = $(this);
 			e.preventDefault();
@@ -7169,6 +7168,42 @@
 				swal("Cancelled", "Export Details deletion cancelled ", "error");
 				}
 			});
+		});
+
+
+		$(document).on('change','#part_number',function(e){  
+			e.preventDefault();
+		
+			    var part_number = $('#part_number').val();
+				var exportdetailsid = $('#main_id').val();
+
+		
+				$.ajax({
+					url : "<?php echo ADMIN_PATH;?>getbuyeramdpackgindetails",
+					type: "POST",
+					data : {'exportdetailsid' : exportdetailsid,'part_number':part_number},
+					success: function(data, textStatus, jqXHR)
+					   {
+						    $(".loader_ajax").hide();
+								
+							if(data == "failure")
+								{
+									$('#buyer_po_date').val('');
+									$('#buyer_delivery_date').val('');
+								}
+								else
+								{
+									var data_row_material = jQuery.parseJSON( data );
+									$('#buyer_po_date').val(data_row_material.buyer_po_date);
+							    }
+					    },
+						error: function (jqXHR, textStatus, errorThrown)
+							{
+								    $('#buyer_po_date').val('');
+					        }
+				});
+				
+				return false;		
 		});
 
 

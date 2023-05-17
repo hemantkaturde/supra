@@ -5314,8 +5314,6 @@ class Admin extends BaseController
 
     }
 
-
-
     public function updatexportdetails(){
 
         $post_submit = $this->input->post();
@@ -5391,6 +5389,41 @@ class Admin extends BaseController
             echo(json_encode(array('status'=>'failed'))); 
         }
 
+
+    }
+
+
+    public function addExportdetailsitems($main_id){
+
+        $packinginstarctionid=  $this->admin_model->getexportdetailsbyid(trim($main_id));
+        $buyer_po_number = $packinginstarctionid[0]['buyerpoid'];
+        $data['getbuyeritemdetails'] =  $this->admin_model->getbuyeritemdetails(trim($buyer_po_number));
+
+        $process = 'Add Export Details Items';
+        $processFunction = 'Admin/addExportdetailsitems';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Add Export Details Items';
+        $data['main_id'] = $main_id;
+        $this->loadViews("masters/addexportdetailsitems", $this->global, $data, NULL);  
+
+    }
+
+
+    public function getbuyeramdpackgindetails(){
+
+        if($this->input->post('exportdetailsid') && $this->input->post('part_number')) {
+            $getBuyeridbypoid = $this->admin_model->getbuyeramdpackgindetails($this->input->post('exportdetailsid'),$this->input->post('part_number'));
+            if($getBuyeridbypoid){
+                $content = $getBuyeridbypoid[0];
+                echo json_encode($content);
+
+            }else{
+                echo 'failure';
+            }
+           
+        } else {
+            echo 'failure';
+        }
 
     }
 

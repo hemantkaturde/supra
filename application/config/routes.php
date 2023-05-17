@@ -214,7 +214,8 @@ $route['addnewExportDetails'] = "admin/addnewExportDetails";
 $route['editexportdetails/(:any)'] = "admin/editexportdetails/$1";
 $route['updatexportdetails'] = "admin/updatexportdetails";
 $route['deleteexportdetailsmain'] = "admin/deleteexportdetailsmain";
-
+$route['addExportdetailsitems/(:any)'] = "admin/addExportdetailsitems/$1";
+$route['getbuyeramdpackgindetails'] = "admin/getbuyeramdpackgindetails";
 
 
 

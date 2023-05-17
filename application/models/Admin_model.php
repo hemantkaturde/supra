@@ -2730,8 +2730,6 @@ class Admin_model extends CI_Model
     }
 
     
-
-
     public function saveVendorbillofmaterilitemdata($id,$data){
 
         if($id != '') {
@@ -3259,7 +3257,7 @@ class Admin_model extends CI_Model
 
     public function getbuyeritemdetails($buyer_po_number){
         
-        $this->db->select('*,'.TBL_FINISHED_GOODS.'.fin_id as item_details');
+        $this->db->select('*,'.TBL_FINISHED_GOODS.'.fin_id as item_details,'.TBL_BUYER_PO_MASTER_ITEM.'.id as poitemid');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
         $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id',$buyer_po_number);
         $query = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
@@ -3332,7 +3330,6 @@ class Admin_model extends CI_Model
         return $fetch_result;
 
     }
-
 
 
     public function deletepackinginstractionsubitem($id){
@@ -3499,7 +3496,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['delivery_date'] = $value['delivery_date'];
                 $data[$counter]['action'] = '';
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editexportdetails/".$value['export_details_idauto']."' style='cursor: pointer;'><i style='font-size: large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addpackinginstractiondetails/".$value['export_details_idauto']."' style='cursor: pointer;'><i style='font-size: large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addExportdetailsitems/".$value['export_details_idauto']."' style='cursor: pointer;'><i style='font-size: large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['export_details_idauto']."' class='fa fa-trash-o deleteexportdetailsmain' aria-hidden='true'></i>"; 
                 $counter++; 
             }
@@ -3594,6 +3591,43 @@ class Admin_model extends CI_Model
         }
 
     }
+
+
+    public function getexportdetailsbyid($main_id){
+
+        $this->db->select(TBL_EXPORT_DETAILS.'.id as main_id,'.TBL_BUYER_PO_MASTER.'.id as buyerpoid'); 
+        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_EXPORT_DETAILS.'.buyer_name');
+        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.buyer_name_id = '.TBL_BUYER_MASTER.'.buyer_id');
+        $this->db->where(TBL_EXPORT_DETAILS.'.id', $main_id);
+        $this->db->where(TBL_EXPORT_DETAILS.'.status', 1);
+        $query = $this->db->get(TBL_EXPORT_DETAILS);
+        $fetch_result = $query->result_array();
+
+        return $fetch_result;
+    }
+
+
+
+    
+    public function getbuyeramdpackgindetails($exportdetailsid,$part_number){
+        // $this->db->select('buyer_po_date,delivery_date');
+        // $this->db->where(TBL_BUYER_PO_MASTER.'.status',1);
+        // $this->db->where(TBL_BUYER_PO_MASTER.'.id',$buyer_po_number);
+        // $query = $this->db->get(TBL_BUYER_PO_MASTER);
+        // $data = $query->result_array();
+        // return $data;
+
+        $this->db->select('buyer_po_date,delivery_date');
+        $this->db->where(TBL_BUYER_PO_MASTER.'.status',1);
+        $this->db->where(TBL_BUYER_PO_MASTER.'.id',$buyer_po_number);
+        $query = $this->db->get(TBL_BUYER_PO_MASTER);
+        $data = $query->result_array();
+        return $data;
+
+
+    }
+
+
 
 
 }
