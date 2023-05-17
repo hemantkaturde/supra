@@ -2510,6 +2510,7 @@ class Admin extends BaseController
 
     public function addSuplieritem(){
 
+
         $post_submit = $this->input->post();
       
         if($post_submit){
@@ -2520,15 +2521,17 @@ class Admin extends BaseController
             $this->form_validation->set_rules('qty','Qty','trim|numeric|required');
             $this->form_validation->set_rules('rate','Rate','trim|required');
             $this->form_validation->set_rules('value','Value','trim|required');
-
             $this->form_validation->set_rules('vendor_qty','Vendor qty','trim');
             $this->form_validation->set_rules('unit','Unit','trim');
             $this->form_validation->set_rules('item_remark','Item Remark','trim');
+            $this->form_validation->set_rules('description_1','Description 1','trim');
+            $this->form_validation->set_rules('description_2','Description 2','trim');
+
         
             if($this->form_validation->run() == FALSE)
             {
                 $save_supplierpoitem_response['status'] = 'failure';
-                $save_supplierpoitem_response['error'] = array('part_number'=>strip_tags(form_error('part_number')), 'description'=>strip_tags(form_error('description')), 'qty'=>strip_tags(form_error('qty')), 'rate'=>strip_tags(form_error('rate')),'value'=>strip_tags(form_error('value')),'item_remark'=>strip_tags(form_error('item_remark')),'unit'=>strip_tags(form_error('unit')),'vendor_qty'=>strip_tags(form_error('vendor_qty')));
+                $save_supplierpoitem_response['error'] = array('part_number'=>strip_tags(form_error('part_number')), 'description'=>strip_tags(form_error('description')), 'qty'=>strip_tags(form_error('qty')), 'rate'=>strip_tags(form_error('rate')),'value'=>strip_tags(form_error('value')),'item_remark'=>strip_tags(form_error('item_remark')),'unit'=>strip_tags(form_error('unit')),'vendor_qty'=>strip_tags(form_error('vendor_qty')),'description_1'=>strip_tags(form_error('description_1')),'description_2'=>strip_tags(form_error('description_2')));
             }else{
 
               

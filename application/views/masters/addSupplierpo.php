@@ -423,6 +423,22 @@
                                                     </div>
 
                                                     <div class="form-group row">
+                                                        <label class="col-sm-3 col-form-label">Description 1</label>
+                                                        <div class="col-sm-9">
+                                                            <textarea type="text" class="form-control"  id="description_1"  name="description_1"></textarea>
+                                                            <p class="error  description_1_error"></p>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-3 col-form-label">Description 2</label>
+                                                        <div class="col-sm-9">
+                                                            <textarea type="text" class="form-control"  id="description_2"  name="description_2"></textarea>
+                                                            <p class="error  description_2_error"></p>
+                                                        </div>
+                                                    </div>       
+
+                                                    <div class="form-group row">
                                                         <label class="col-sm-3 col-form-label">Vendor Quantity</label>
                                                         <div class="col-sm-9">
                                                             <input type="number" class="form-control"  id="vendor_qty" name="vendor_qty">

@@ -2018,14 +2018,16 @@
 			   var delivery_address =   $('#delivery_address').val();
 			   var work_order =   $('#work_order').val();
 			   var remark =   $('#remark').val();
-
+			   
+			   var description_1 =   $('#description_1').val();
+			   var description_2 =   $('#description_2').val();
 			   var sup_id=  $('#sup_id').val();
 					 
 			$.ajax({
 				url : "<?php echo base_url();?>addSuplieritem",
 				type: "POST",
 				 //data : formData,
-				 data :{part_number:part_number,description:description,qty:qty,rate:rate,value:value,date:date,supplier_name:supplier_name,buyer_name:buyer_name,vendor_name:vendor_name,quatation_ref_no:quatation_ref_no,quatation_date:quatation_date,delivery_date:delivery_date,delivery:delivery,delivery_address:delivery_address,work_order:work_order,remark:remark,buyer_po_number:buyer_po_number,vendor_qty:vendor_qty,unit:unit,item_remark:item_remark,sup_id:sup_id},
+				 data :{part_number:part_number,description:description,qty:qty,rate:rate,value:value,date:date,supplier_name:supplier_name,buyer_name:buyer_name,vendor_name:vendor_name,quatation_ref_no:quatation_ref_no,quatation_date:quatation_date,delivery_date:delivery_date,delivery:delivery,delivery_address:delivery_address,work_order:work_order,remark:remark,buyer_po_number:buyer_po_number,vendor_qty:vendor_qty,unit:unit,item_remark:item_remark,sup_id:sup_id,description_1:description_1,description_2:description_2},
 				// method: "POST",
                 // data :{package_id:package_id},
                 cache:false,
