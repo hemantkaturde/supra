@@ -2534,10 +2534,10 @@ class Admin extends BaseController
                 $save_supplierpoitem_response['error'] = array('part_number'=>strip_tags(form_error('part_number')), 'description'=>strip_tags(form_error('description')), 'qty'=>strip_tags(form_error('qty')), 'rate'=>strip_tags(form_error('rate')),'value'=>strip_tags(form_error('value')),'item_remark'=>strip_tags(form_error('item_remark')),'unit'=>strip_tags(form_error('unit')),'vendor_qty'=>strip_tags(form_error('vendor_qty')),'description_1'=>strip_tags(form_error('description_1')),'description_2'=>strip_tags(form_error('description_2')));
             }else{
 
-              
                 $supplier_po_id =trim($this->input->post('sup_id'));
-               
 
+               
+            
                 if($supplier_po_id){
 
                     $data = array(
