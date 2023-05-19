@@ -38,7 +38,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="date">Date <span class="required">*</span></label>
-                                            <input type="text" class="form-control datepicker"  value="<?=$getSuplierpodetails[0]['po_number']?>" id="date" name="date" required>
+                                            <input type="text" class="form-control datepicker"  value="<?=$getSuplierpodetails[0]['date']?>" id="date" name="date" required>
                                             <p class="error date_error"></p>
                                         </div>
                                     </div>
