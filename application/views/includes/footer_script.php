@@ -2198,7 +2198,7 @@
 <?php } ?>
 
 
-<?php if($pageTitle=='Add Supplier PO' || $pageTitle=='Supplier PO View'){ ?>
+<?php if($pageTitle=='Add Supplier PO' || $pageTitle=='Supplier PO View' || $pageTitle=='Edit Vendor PO'){ ?>
 	<script type="text/javascript">
 		
 		$( document ).ready(function() {

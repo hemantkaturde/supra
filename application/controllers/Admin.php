@@ -5433,6 +5433,22 @@ class Admin extends BaseController
         }
 
     }
+    
 
+  
+    public function editVendorpo($vendorpoid){
+
+        $process = 'Edit Vendor PO';
+        $processFunction = 'Admin/editVendorpo';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Vendor PO View';
+        $data['supplierList']= $this->admin_model->fetchALLsupplierList();
+        $data['buyerList']= $this->admin_model->fetchAllbuyerList();
+        $data['vendorList']= $this->admin_model->fetchALLvendorList();
+        $data['getVendorpodetails']= $this->admin_model->getVendorpodetails($vendorpoid);
+        $data['fetchALLVendoritemlistforview']= $this->admin_model->fetchALLVendoritemlistforview($vendorpoid);
+        $this->loadViews("masters/editVendorpo", $this->global, $data, NULL);
+
+    }
 
 }

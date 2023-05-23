@@ -167,6 +167,9 @@ $route['saveJobworktem'] = "admin/saveJobworktem";
 $route['deleteJobwork'] = "admin/deleteJobwork";
 $route['editBuyerpo/(:any)'] = "admin/editBuyerpo/$1";
 $route['editSupplierpo/(:any)'] = "admin/editSupplierpo/$1";
+
+$route['editVendorpo/(:any)'] = "admin/editVendorpo/$1";
+
 $route['billofmaterial'] = "admin/billofmaterial";
 $route['fetchBillofmaterial'] = "admin/fetchBillofmaterial";
 $route['addnewBillofmaterial'] = "admin/addnewBillofmaterial";
