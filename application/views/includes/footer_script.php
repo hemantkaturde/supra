@@ -2403,7 +2403,6 @@
 				return false;
 		});
 
-
 		$(document).on('change','#buyer_name',function(e){  
 			e.preventDefault();
 			//$(".loader_ajax").show();
@@ -3078,6 +3077,57 @@
 
 		}
 		});
+
+		$(document).on('click','.deleteVendorpoitemedit',function(e){
+			var elemF = $(this);
+			e.preventDefault();
+			var vendor_id =   $('#vendor_id').val();
+			swal({
+				title: "Are you sure?",
+				text: "Delete Vendor PO Item ",
+				type: "warning",
+				showCancelButton: true,
+				closeOnClickOutside: false,
+				confirmButtonClass: "btn-sm btn-danger",
+				confirmButtonText: "Yes, delete it!",
+				cancelButtonText: "No, cancel plz!",
+				closeOnConfirm: false,
+				closeOnCancel: false
+			}, function(isConfirm) {
+				if (isConfirm) {
+							$.ajax({
+								url : "<?php echo base_url();?>deleteVendorpoitemedit",
+								type: "POST",
+								data : 'id='+elemF.attr('data-id'),
+								success: function(data, textStatus, jqXHR)
+								{
+									const obj = JSON.parse(data);
+								
+									if(obj.status=='success'){
+										swal({
+											title: "Deleted!",
+											text: "Vendor PO Item Deleted Succesfully",
+											icon: "success",
+											button: "Ok",
+											},function(){ 
+												window.location.href = "<?php echo base_url().'editVendorpo/'?>"+vendor_id;
+										});	
+									}
+
+								},
+								error: function (jqXHR, textStatus, errorThrown)
+								{
+									$(".loader_ajax").hide();
+								}
+							})
+						}
+						else {
+				swal("Cancelled", "Supplier PO Item deletion cancelled ", "error");
+				}
+			});
+		});
+		
+		
 
 
     </script>

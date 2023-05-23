@@ -170,6 +170,9 @@ $route['editSupplierpo/(:any)'] = "admin/editSupplierpo/$1";
 
 $route['editVendorpo/(:any)'] = "admin/editVendorpo/$1";
 
+$route['deleteVendorpoitemedit'] = "admin/deleteVendorpoitemedit";
+
+
 $route['billofmaterial'] = "admin/billofmaterial";
 $route['fetchBillofmaterial'] = "admin/fetchBillofmaterial";
 $route['addnewBillofmaterial'] = "admin/addnewBillofmaterial";

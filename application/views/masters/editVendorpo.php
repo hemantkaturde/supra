@@ -243,7 +243,7 @@
                                                         <td><?php echo $value['rate'];?></td>
                                                         <td><?php echo $value['value'];?></td>
                                                          <td>
-                                                            <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['id'];?>' class='fa fa-trash-o deleteSupplierpoitem' aria-hidden='true'></i>
+                                                            <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['vendor_po_item'];?>' class='fa fa-trash-o deleteVendorpoitemedit' aria-hidden='true'></i>
                                                         </td>
                                                     </tr>
                                                     <?php endforeach;?>

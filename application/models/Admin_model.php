@@ -1711,7 +1711,7 @@ class Admin_model extends CI_Model
     }
 
     public function fetchALLVendoritemlistforview($vendorpoid){
-        $this->db->select('*');
+        $this->db->select('*,'.TBL_VENDOR_PO_MASTER_ITEM.'.id as vendor_po_item');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
         $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id',$vendorpoid);
         $query = $this->db->get(TBL_VENDOR_PO_MASTER_ITEM);
@@ -3643,6 +3643,18 @@ class Admin_model extends CI_Model
 
     }
 
+
+    public function deleteVendorpoitemedit($id){
+
+        $this->db->where('id', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_VENDOR_PO_MASTER_ITEM)){
+           return TRUE;
+        }else{
+           return FALSE;
+        }
+
+    }
 
 
 
