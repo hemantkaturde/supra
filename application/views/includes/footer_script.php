@@ -2198,7 +2198,7 @@
 <?php } ?>
 
 
-<?php if($pageTitle=='Add Supplier PO' || $pageTitle=='Supplier PO View' || $pageTitle=='Edit Vendor PO'){ ?>
+<?php if($pageTitle=='Add Supplier PO' || $pageTitle=='Supplier PO View'){ ?>
 	<script type="text/javascript">
 		
 		$( document ).ready(function() {
@@ -2270,7 +2270,7 @@
 <?php } ?>
 
 
-<?php if($pageTitle=='Vendor PO Master' || $pageTitle=='Add Vendor PO'){ ?>
+<?php if($pageTitle=='Vendor PO Master' || $pageTitle=='Add Vendor PO' || $pageTitle=='Edit Vendor PO' ){ ?>
 	<script type="text/javascript">
 
 		$(document).ready(function() {
@@ -2472,6 +2472,8 @@
 			$(".loader_ajax").show();
 			var formData = new FormData($("#addnewVendorform")[0]);
 
+			var vendor_id =   $('#vendor_id').val();
+
 			$.ajax({
 				url : "<?php echo base_url();?>addnewVendorpo",
 				type: "POST",
@@ -2492,14 +2494,30 @@
 				    }
 					else if(fetchResponse.status == 'success')
 				    {
-						swal({
-							title: "Success",
-							text: "Vendor PO Successfully Added!",
-							icon: "success",
-							button: "Ok",
-							},function(){ 
-								window.location.href = "<?php echo base_url().'vendorpo'?>";
-						});		
+
+						if(vendor_id){
+
+							swal({
+								title: "Success",
+								text: "Vendor PO Successfully Updated!",
+								icon: "success",
+								button: "Ok",
+								},function(){ 
+									window.location.href = "<?php echo base_url().'vendorpo'?>";
+								});		
+
+
+						}else{
+								swal({
+								title: "Success",
+								text: "Vendor PO Successfully Added!",
+								icon: "success",
+								button: "Ok",
+								},function(){ 
+									window.location.href = "<?php echo base_url().'vendorpo'?>";
+								});		
+						}
+						
 				    }
 					
 				},
@@ -2661,12 +2679,13 @@
 			   var work_order =   $('#work_order').val();
 			   var remark =   $('#remark').val();
 
+			   var vendor_id =   $('#vendor_id').val();
 					 
 			$.ajax({
 				url : "<?php echo base_url();?>addVendoritem",
 				type: "POST",
 				 //data : formData,
-				 data :{part_number:part_number,description:description,qty:qty,rate:rate,value:value,date:date,supplier_name:supplier_name,buyer_name:buyer_name,vendor_name:vendor_name,quatation_ref_no:quatation_ref_no,quatation_date:quatation_date,delivery_date:delivery_date,delivery:delivery,delivery_address:delivery_address,work_order:work_order,remark:remark,buyer_po_number:buyer_po_number,vendor_qty:vendor_qty,unit:unit,item_remark:item_remark,rm_type:rm_type,supplier_po_number:supplier_po_number},
+				 data :{part_number:part_number,description:description,qty:qty,rate:rate,value:value,date:date,supplier_name:supplier_name,buyer_name:buyer_name,vendor_name:vendor_name,quatation_ref_no:quatation_ref_no,quatation_date:quatation_date,delivery_date:delivery_date,delivery:delivery,delivery_address:delivery_address,work_order:work_order,remark:remark,buyer_po_number:buyer_po_number,vendor_qty:vendor_qty,unit:unit,item_remark:item_remark,rm_type:rm_type,supplier_po_number:supplier_po_number,vendor_id:vendor_id},
 				// method: "POST",
                 // data :{package_id:package_id},
                 cache:false,
@@ -2683,14 +2702,32 @@
 				    }
 					else if(fetchResponse.status == 'success')
 				    {
-						swal({
-							title: "Success",
-							text: "Item Successfully Added!",
-							icon: "success",
-							button: "Ok",
-							},function(){ 
-								window.location.href = "<?php echo base_url().'addnewVendorpo'?>";
-						});		
+
+						if(vendor_id){
+
+
+							swal({
+									title: "Success",
+									text: "Item Successfully Added!",
+									icon: "success",
+									button: "Ok",
+									},function(){ 
+										window.location.href = "<?php echo base_url().'editVendorpo/'?>"+vendor_id;
+							   });	
+
+						}else{
+								swal({
+								title: "Success",
+								text: "Item Successfully Added!",
+								icon: "success",
+								button: "Ok",
+								},function(){ 
+									window.location.href = "<?php echo base_url().'addnewVendorpo'?>";
+							   });	
+
+						}
+
+							
 				    }
 					
 				},
@@ -3038,6 +3075,7 @@
 
 		}
 		});
+
 
     </script>
 <?php } ?>

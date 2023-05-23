@@ -1697,6 +1697,19 @@ class Admin_model extends CI_Model
 
     }
 
+
+    public function getVendorpodetailsedit($vendorpoid){
+        $this->db->select(TBL_VENDOR_PO_MASTER.'.*,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_po,'.TBL_BUYER_PO_MASTER.'.sales_order_number as buyer_po_number_po');
+        $this->db->join(TBL_BUYER_PO_MASTER, TBL_VENDOR_PO_MASTER.'.buyer_po_number = '.TBL_BUYER_PO_MASTER.'.id');
+        $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_VENDOR_PO_MASTER.'.supplier_po_number = '.TBL_SUPPLIER_PO_MASTER.'.id');
+        $this->db->where(TBL_VENDOR_PO_MASTER.'.status',1);
+        $this->db->where(TBL_VENDOR_PO_MASTER.'.id',$vendorpoid);
+        $query = $this->db->get(TBL_VENDOR_PO_MASTER);
+        $data = $query->result_array();
+        return $data;
+
+    }
+
     public function fetchALLVendoritemlistforview($vendorpoid){
         $this->db->select('*');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
