@@ -2337,37 +2337,6 @@
 			return false;
 		});
 
-		// $( document ).ready(function() {
-		// 	var buyer_po_id = $('#buyer_po_number').val();
-
-		// 	$.ajax({
-		// 		url : "<?php echo ADMIN_PATH;?>getBuyerItemsforDisplayBybuyerid",
-		// 		type: "POST",
-		// 		data : {'buyer_po_id' : buyer_po_id},
-		// 		success: function(data, textStatus, jqXHR)
-		// 		{
-		// 			$(".loader_ajax").hide();
-		// 			if(data == "failure")
-		// 			{
-		// 				//$('#buyer_po_number').html('<option value="">Select Buyer PO Number</option>');
-		// 			}
-		// 			else
-		// 			{
-		// 				$('#buyer_po_number').html('<option value="">Select Buyer PO Number</option>');
-		// 				$('#buyer_po_number').html(data);
-		// 				//$("#customers-list").html(data);
-
-		// 			}
-		// 		},
-		// 		error: function (jqXHR, textStatus, errorThrown)
-		// 		{
-		// 			$('#buyer_po_number').html();
-		// 			//$(".loader_ajax").hide();
-		// 		}
-		// 	});
-		// 	return false;
-		// });
-
 		$( document ).ready(function() {
 			//e.preventDefault();
 			//$(".loader_ajax").show();
@@ -2400,6 +2369,40 @@
 			});
 			return false;
 		});
+
+		$( document ).ready(function() {
+			
+			var buyer_po_number = $('.buyer_po_number_for_item').val();
+
+				$("#part_number").html('');
+
+				var flag = 'Buyer';
+
+				$.ajax({
+					url : "<?php echo ADMIN_PATH;?>getSuppliritemonly",
+					type: "POST",
+					data : {'supplier_po_number' : buyer_po_number,'flag':flag},
+					success: function(data, textStatus, jqXHR)
+					{
+						$(".loader_ajax").hide();
+						if(data == "failure")
+						{
+							$('#part_number').html('<option value="">Select Part Number</option>');
+						}
+						else
+						{
+							$('#part_number').html(data);
+
+						}
+					},
+					error: function (jqXHR, textStatus, errorThrown)
+					{
+						$('#part_number').html();
+					}
+				});
+				return false;
+		});
+
 
 		$(document).on('change','#buyer_name',function(e){  
 			e.preventDefault();
