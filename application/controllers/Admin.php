@@ -5522,4 +5522,46 @@ class Admin extends BaseController
 
     }
 
+
+    public function getBuyerDetailsBysupplierponumberforbuyer(){
+        $supplier_po_number=$this->input->post('supplier_po_number');
+        if($supplier_po_number) {
+			$supplier_po_number = $this->admin_model->getBuyerDetailsBysupplierponumberforbuyer($supplier_po_number);
+			if(count($supplier_po_number) >= 1) {
+                //$content = $content.'<option value="">Select Vendor Name</option>';
+				foreach($supplier_po_number as $value) {
+					$content = $content.'<option value="'.$value["buyer_id"].'">'.$value["buyer"].'</option>';
+				}
+				echo $content;
+			} else {
+				echo 'failure';
+			}
+		} else {
+			echo 'failure';
+		}
+
+    }
+
+
+
+    public function getBuyerDetailsBysupplierponumberforbuyerpo(){
+        $supplier_po_number=$this->input->post('supplier_po_number');
+        if($supplier_po_number) {
+			$supplier_po_number = $this->admin_model->getBuyerDetailsBysupplierponumberforbuyer($supplier_po_number);
+			if(count($supplier_po_number) >= 1) {
+                //$content = $content.'<option value="">Select Vendor Name</option>';
+				foreach($supplier_po_number as $value) {
+					$content = $content.'<option value="'.$value["id"].'">'.$value["sales_order_number"].'</option>';
+				}
+				echo $content;
+			} else {
+				echo 'failure';
+			}
+		} else {
+			echo 'failure';
+		}
+
+    }
+
+
 }

@@ -126,7 +126,7 @@
                                     <div class="col-md-12 supplier_po_number_div" style="display:<?=$display;?>">
                                             <div class="form-group">
                                                     <label for="supplier_po_number">Select Supplier PO Number <span class="required">*</span></label>
-                                                    <select class="form-control supplier_po_number_for_item supplier_po_number_for_vendor_details" name="supplier_po_number" id="supplier_po_number">
+                                                    <select class="form-control supplier_po_number_for_item supplier_po_number_for_vendor_details supplier_po_for_fetch_buyer_details" name="supplier_po_number" id="supplier_po_number">
                                                     <option st-id="" value="<?=$fetchALLpreVendoritemList[0]['pre_supplier_po_number']?>" selected ><?=$selected_value_supplier_po;?></option>
                                                     </select> 
                                                 <p class="error supplier_po_number_error"></p>
@@ -164,14 +164,30 @@
                                     ?>
 
 
-                                    <div class="col-md-12 buyer_po_number_div" style="display:<?=$display;?>">
+                                    <!-- <div class="col-md-12 buyer_po_number_div" style="display:<?=$display;?>">
                                             <div class="form-group">
                                                     <label for="buyer_po_number">Select Buyer PO Number <span class="required">*</span></label>
                                                     <select class="form-control buyer_po_number_for_item buyer_po_number_for_vendor_details" name="buyer_po_number" id="buyer_po_number">
-                                                    <option st-id="" value="<?=$fetchALLpreVendoritemList[0]['pre_buyer_po_number']?>" selected="selected" ><?=$selected_value;?></option>
+                                                    <option st-id="" value="<?=$fetchALLpreVendoritemList[0]['pre_buyer_po_number']?>" selected="selected" ><?=$selected_value;?></option>-->
                                                         <!-- <option st-id="" value="">Select Buyer Name</option>
                                                         <?php foreach ($buyerList as $key => $value) {?>
                                                         <option value="<?php echo $value['buyer_id']; ?>" <?php if($value['buyer_id']==$fetchALLpreVendoritemList[0]['pre_buyer_name']){ echo 'selected';} ?> ><?php echo $value['buyer_name']; ?></option>
+                                                        <?php } ?> -->
+                                                  <!--  </select> 
+                                                <p class="error buyer_po_number_error"></p>
+                                            </div>
+                                    </div>-->
+
+
+                                    <div class="col-md-12 buyer_po_number_div">
+                                            <div class="form-group">
+                                                    <label for="buyer_po_number">Select Buyer PO Number <span class="required">*</span></label>
+                                                    <select class="form-control buyer_po_number_for_item buyer_po_number_for_vendor_details  autobuyerpo" name="buyer_po_number" id="buyer_po_number">
+                                                    <option st-id="" value="<?=$fetchALLpreVendoritemList[0]['pre_buyer_po_number']?>" selected="selected" ><?=$selected_value;?></option>
+   
+                                                    <option st-id="" value="">Select Buyer PO Number</option>
+                                                        <!-- <?php foreach ($buyerList as $key => $value) {?>
+                                                          <option value="<?php echo $value['buyer_id']; ?>" <?php if($value['buyer_id']==$fetchALLpreVendoritemList[0]['pre_buyer_name']){ echo 'selected';} ?> ><?php echo $value['buyer_name']; ?></option>
                                                         <?php } ?> -->
                                                     </select> 
                                                 <p class="error buyer_po_number_error"></p>

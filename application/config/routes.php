@@ -143,6 +143,13 @@ $route['getRowmaterialPartnumberByid'] = "admin/getRowmaterialPartnumberByid";
 $route['addSupplierpoConfirmationitem'] = "admin/addSupplierpoConfirmationitem";
 $route['getfinishedgoodsPartnumberByidvendor'] = "admin/getfinishedgoodsPartnumberByidvendor";
 $route['getVendorDetailsBysupplierponumber'] = "admin/getVendorDetailsBysupplierponumber";
+
+$route['getBuyerDetailsBysupplierponumberforbuyer'] = "admin/getBuyerDetailsBysupplierponumberforbuyer";
+
+$route['getBuyerDetailsBysupplierponumberforbuyerpo'] = "admin/getBuyerDetailsBysupplierponumberforbuyerpo";
+
+
+
 $route['deleteSupplierpoconfirmationitem'] = "admin/deleteSupplierpoconfirmationitem";
 $route['viewSupplierpoconfirmation/(:any)'] = "admin/viewSupplierpoconfirmation/$1";
 $route['getSupplirbuyernamesupplierpo'] = "admin/getSupplirbuyernamesupplierpo";
