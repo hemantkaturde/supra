@@ -149,6 +149,9 @@ $route['getBuyerDetailsBysupplierponumberforbuyer'] = "admin/getBuyerDetailsBysu
 $route['getBuyerDetailsBysupplierponumberforbuyerpo'] = "admin/getBuyerDetailsBysupplierponumberforbuyerpo";
 
 
+$route['getbuyerpoidforshowinitems'] = "admin/getbuyerpoidforshowinitems";
+
+
 
 $route['deleteSupplierpoconfirmationitem'] = "admin/deleteSupplierpoconfirmationitem";
 $route['viewSupplierpoconfirmation/(:any)'] = "admin/viewSupplierpoconfirmation/$1";

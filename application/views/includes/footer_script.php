@@ -3117,8 +3117,81 @@
 									}
 									else
 									{
-
+ 
 										$('.autobuyerpo').html(data);
+
+
+										$.ajax({
+											url : "<?php echo ADMIN_PATH;?>getbuyerpoidforshowinitems",
+											type: "POST",
+											data : {'supplier_po_number' : supplier_po_for_fetch_buyer_details},
+											success: function(data, textStatus, jqXHR)
+											{
+												$(".loader_ajax").hide();
+												if(data == "failure")
+												{
+													//$('.autobuyerpo').html('<option value="">Select Buyer Name</option>');
+												}
+												else
+												{
+
+													//$('.autobuyerpo').html(data);
+
+														       var buyer_po_number = data;
+																$("#customers-list").html('');
+
+																$.ajax({
+																	url : "<?php echo ADMIN_PATH;?>getBuyerItemsforDisplay",
+																	type: "POST",
+																	data : {'buyer_po_number' : buyer_po_number},
+																	success: function(data, textStatus, jqXHR)
+																	{
+																		$(".loader_ajax").hide();
+																		if(data == "failure")
+																		{
+																			//$('#buyer_po_number').html('<option value="">Select Buyer PO Number</option>');
+																		}
+																		else
+																		{
+																			// $('#buyer_po_number').html('<option value="">Select Buyer PO Number</option>');
+																			//$('#buyer_po_number').html(data);
+																			$("#customers-list").html(data);
+
+																		}
+																	},
+																	error: function (jqXHR, textStatus, errorThrown)
+																	{
+																		//$('#buyer_po_number').html();
+																		//$(".loader_ajax").hide();
+																	}
+																});
+
+
+
+
+
+												}
+											},
+											error: function (jqXHR, textStatus, errorThrown)
+											{
+												$('#buyer_name').html();
+											}
+										});
+
+
+
+
+
+
+
+
+
+
+
+
+
+										
+
 
 									}
 								},
