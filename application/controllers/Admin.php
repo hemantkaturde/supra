@@ -5585,5 +5585,25 @@ class Admin extends BaseController
     }
 
 
+    public function viewexportdetails($packinginstarctionid){
+
+        $packinginstarctionid=  $this->admin_model->getpackinginstarction_data_by_id(trim($packinginstarctionid));
+        $buyer_po_number = $packinginstarctionid[0]['buyerpoid'];
+        $main_id = $packinginstarctionid[0]['main_id'];
+
+
+        $process = 'View Export Details';
+        $processFunction = 'Admin/viewexportdetails';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'View Export Details';
+        $data['main_id'] =$main_id;
+        $data['getbuyeritemdetails'] =  $this->admin_model->getbuyeritemdetails(trim($buyer_po_number));
+        $data['getpackingdetails_itemdetails'] =  $this->admin_model->getpackingdetails_itemdetails(trim($main_id));
+        $this->loadViews("masters/viewexportdetails", $this->global, $data, NULL);  
+
+
+    }
+
+
 
 }

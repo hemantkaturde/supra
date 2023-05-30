@@ -3458,22 +3458,87 @@ class Admin_model extends CI_Model
     }
 
 
+    // public function getExportdetailsCount(){
+
+    //     $this->db->select('*');
+    //     $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_EXPORT_DETAILS.'.buyer_name');
+    //     $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_EXPORT_DETAILS.'.buyer_po_number');
+
+    //     if($params['search']['value'] != "") 
+    //     {
+    //         $this->db->where("(".TBL_EXPORT_DETAILS.".export_details_id LIKE '%".$params['search']['value']."%'");
+    //         $this->db->or_where(TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
+    //         $this->db->or_where(TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
+    //         $this->db->or_where(TBL_EXPORT_DETAILS.".buyer_po_date LIKE '%".$params['search']['value']."%')");
+    //     }
+
+    //     $this->db->where(TBL_EXPORT_DETAILS.'.status', 1);
+    //     $query = $this->db->get(TBL_EXPORT_DETAILS);
+    //     $rowcount = $query->num_rows();
+    //     return $rowcount;
+
+    // }
+
+    // public function getExportdetailsdata(){
+
+    //     $this->db->select('*,'.TBL_BUYER_MASTER.'.buyer_name as buyer_name_master,'.TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_BUYER_PO_MASTER.'.delivery_date,'.TBL_EXPORT_DETAILS.'.id  as export_details_idauto'); 
+    //     $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_EXPORT_DETAILS.'.buyer_name');
+    //     $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_EXPORT_DETAILS.'.buyer_po_number');
+
+    //     if($params['search']['value'] != "") 
+    //     {
+    //         $this->db->where("(".TBL_EXPORT_DETAILS.".export_details_id LIKE '%".$params['search']['value']."%'");
+    //         $this->db->or_where(TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
+    //         $this->db->or_where(TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
+    //         $this->db->or_where(TBL_EXPORT_DETAILS.".buyer_po_date LIKE '%".$params['search']['value']."%')");
+    //     }
+
+    //     $this->db->where(TBL_EXPORT_DETAILS.'.status', 1);
+    //     $this->db->limit($params['length'],$params['start']);
+    //     $this->db->order_by(TBL_EXPORT_DETAILS.'.id','DESC');
+    //     $query = $this->db->get(TBL_EXPORT_DETAILS);
+    //     $fetch_result = $query->result_array();
+
+    //     $data = array();
+    //     $counter = 0;
+    //     if(count($fetch_result) > 0)
+    //     {
+    //         foreach ($fetch_result as $key => $value)
+    //         {
+    //             $data[$counter]['export_details_id'] = $value['export_details_id'];
+    //             $data[$counter]['buyer_name'] = $value['buyer_name_master'];
+    //             $data[$counter]['buyer_po'] = $value['sales_order_number'];
+    //             $data[$counter]['buyer_po_date'] = $value['buyer_po_date'];
+    //             $data[$counter]['delivery_date'] = $value['delivery_date'];
+    //             $data[$counter]['action'] = '';
+    //             $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editexportdetails/".$value['export_details_idauto']."' style='cursor: pointer;'><i style='font-size: large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+    //             $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addExportdetailsitems/".$value['export_details_idauto']."' style='cursor: pointer;'><i style='font-size: large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>   &nbsp ";
+    //             $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['export_details_idauto']."' class='fa fa-trash-o deleteexportdetailsmain' aria-hidden='true'></i>"; 
+    //             $counter++; 
+    //         }
+    //     }
+
+    //     return $data;
+
+
+    // }
+
+
+
     public function getExportdetailsCount(){
 
         $this->db->select('*');
-        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_EXPORT_DETAILS.'.buyer_name');
-        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_EXPORT_DETAILS.'.buyer_po_number');
 
         if($params['search']['value'] != "") 
         {
-            $this->db->where("(".TBL_EXPORT_DETAILS.".export_details_id LIKE '%".$params['search']['value']."%'");
+            $this->db->where("(".TBL_PACKING_INSTRACTION.".packing_instrauction_id LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_EXPORT_DETAILS.".buyer_po_date LIKE '%".$params['search']['value']."%')");
+            $this->db->or_where(TBL_PACKING_INSTRACTION.".buyer_po_date LIKE '%".$params['search']['value']."%')");
         }
 
-        $this->db->where(TBL_EXPORT_DETAILS.'.status', 1);
-        $query = $this->db->get(TBL_EXPORT_DETAILS);
+        $this->db->where(TBL_PACKING_INSTRACTION.'.status', 1);        
+        $query = $this->db->get(TBL_PACKING_INSTRACTION);
         $rowcount = $query->num_rows();
         return $rowcount;
 
@@ -3481,22 +3546,22 @@ class Admin_model extends CI_Model
 
     public function getExportdetailsdata(){
 
-        $this->db->select('*,'.TBL_BUYER_MASTER.'.buyer_name as buyer_name_master,'.TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_BUYER_PO_MASTER.'.delivery_date,'.TBL_EXPORT_DETAILS.'.id  as export_details_idauto'); 
-        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_EXPORT_DETAILS.'.buyer_name');
-        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_EXPORT_DETAILS.'.buyer_po_number');
-
+        $this->db->select('*,'.TBL_BUYER_MASTER.'.buyer_name as buyer_name_master,'.TBL_PACKING_INSTRACTION.'.id as packinginstarctionid,'.TBL_BUYER_PO_MASTER.'.id as buyerpoid'); 
+        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_PACKING_INSTRACTION.'.buyer_name');
+        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_PACKING_INSTRACTION.'.buyer_po_number');
+      
         if($params['search']['value'] != "") 
         {
-            $this->db->where("(".TBL_EXPORT_DETAILS.".export_details_id LIKE '%".$params['search']['value']."%'");
+            $this->db->where("(".TBL_PACKING_INSTRACTION.".packing_instrauction_id LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_EXPORT_DETAILS.".buyer_po_date LIKE '%".$params['search']['value']."%')");
+            $this->db->or_where(TBL_PACKING_INSTRACTION.".buyer_po_date LIKE '%".$params['search']['value']."%')");
         }
-
-        $this->db->where(TBL_EXPORT_DETAILS.'.status', 1);
+      
+        $this->db->where(TBL_PACKING_INSTRACTION.'.status', 1);
         $this->db->limit($params['length'],$params['start']);
-        $this->db->order_by(TBL_EXPORT_DETAILS.'.id','DESC');
-        $query = $this->db->get(TBL_EXPORT_DETAILS);
+        $this->db->order_by(TBL_PACKING_INSTRACTION.'.id','DESC');
+        $query = $this->db->get(TBL_PACKING_INSTRACTION);
         $fetch_result = $query->result_array();
 
         $data = array();
@@ -3505,15 +3570,22 @@ class Admin_model extends CI_Model
         {
             foreach ($fetch_result as $key => $value)
             {
-                $data[$counter]['export_details_id'] = $value['export_details_id'];
+
+                // if($value['packing_instrauction_id']){
+                    $arr = str_split($value['packing_instrauction_id']);
+                  
+                    $inrno= "SQID2324".str_pad((int)$counter+1, 4, 0, STR_PAD_LEFT);
+                    $export_id = $inrno;
+                // }else{
+                //     $export_id = 'SQID23240001';
+                // }
+
+                $data[$counter]['packing_instrauction_id'] = $export_id;
                 $data[$counter]['buyer_name'] = $value['buyer_name_master'];
                 $data[$counter]['buyer_po'] = $value['sales_order_number'];
                 $data[$counter]['buyer_po_date'] = $value['buyer_po_date'];
-                $data[$counter]['delivery_date'] = $value['delivery_date'];
                 $data[$counter]['action'] = '';
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editexportdetails/".$value['export_details_idauto']."' style='cursor: pointer;'><i style='font-size: large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addExportdetailsitems/".$value['export_details_idauto']."' style='cursor: pointer;'><i style='font-size: large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>   &nbsp ";
-                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['export_details_idauto']."' class='fa fa-trash-o deleteexportdetailsmain' aria-hidden='true'></i>"; 
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewexportdetails/".$value['packinginstarctionid']."' style='cursor: pointer;'><i style='font-size: large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
                 $counter++; 
             }
         }
@@ -3522,6 +3594,8 @@ class Admin_model extends CI_Model
 
 
     }
+
+
 
 
     public function getpreviousexportdetailsinstarction(){
