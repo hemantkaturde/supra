@@ -2325,7 +2325,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['vendor_po'] = $value['vendorpo'];
                 $data[$counter]['raw_material_supplier'] = $value['suppliername'];
                 $data[$counter]['action'] = '';
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewSupplierpoconfirmation/".$value['jobworkid']."' style='cursor: pointer;'><i style='font-size: large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editjobwork/".$value['jobworkid']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['jobworkid']."' class='fa fa-trash-o deleteJobwork' aria-hidden='true'></i>"; 
                 $counter++; 
             }
@@ -2346,7 +2346,10 @@ class Admin_model extends CI_Model
     }
 
     public function saveJobworkdata($id,$data){
+
         if($id != '') {
+
+
             $this->db->where('id', $id);
             if($this->db->update(TBL_JOB_WORK, $data)){
                 return TRUE;
@@ -3743,6 +3746,35 @@ class Admin_model extends CI_Model
 			$query_result[$key]['selected'] = '';
 		}
         return $query_result;
+
+    }
+
+
+    public function getalljobworkdetails($jobworkid){
+
+        $this->db->select('*,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po,'.TBL_SUPPLIER.'.supplier_name as supplier_name_sup,'.TBL_JOB_WORK.'.vendor_po_number as pre_vendor_po,'.TBL_JOB_WORK.'.remark as jobwork_remark,'.TBL_JOB_WORK.'.date as job_work_date');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_JOB_WORK.'.vendor_po_number');
+        $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_JOB_WORK.'.raw_material_supplier');
+        $this->db->where(TBL_JOB_WORK.'.status',1);
+        $this->db->where(TBL_JOB_WORK.'.id',$jobworkid);
+        $query = $this->db->get(TBL_JOB_WORK);
+        $data = $query->result_array();
+        return $data;
+
+    }
+
+
+    public function fetchALLprejobworkitemListedit($jobworkid){
+
+        $this->db->select('*,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po,'.TBL_SUPPLIER.'.supplier_name as rowmaterialsuppliername');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_JOB_WORK_ITEM.'.part_number_id');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_JOB_WORK_ITEM.'.pre_vendor_po_number');
+        $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_JOB_WORK_ITEM.'.pre_raw_material_supplier_name','left');
+        $this->db->where(TBL_JOB_WORK_ITEM.'.jobwork_id', $jobworkid);
+        $this->db->order_by(TBL_JOB_WORK_ITEM.'.id','desc');
+        $query = $this->db->get(TBL_JOB_WORK_ITEM);
+        $data = $query->result_array();
+        return $data;
 
     }
 

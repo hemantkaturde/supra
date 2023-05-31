@@ -211,7 +211,7 @@
                     </li>
 
 
-                    <li class="treeview <?php if($pageUrl=="jobWork" || $pageUrl=="addjobwork"){echo 'active';}?>">
+                    <li class="treeview <?php if($pageUrl=="jobWork" || $pageUrl=="addjobwork" || $pageUrl=="editjobwork"){echo 'active';}?>">
                       <a href="#">
                         <i class="fa fa-file-text-o"></i> <span class="menu_label">Challans</span>
                           <span class="pull-right-container">
@@ -219,7 +219,7 @@
                           </span>
                       </a>
                       <ul class="treeview-menu" >
-                        <li class="line_height <?php if($pageUrl=="jobWork" || $pageUrl=="addjobwork"){echo 'active';}?>"><a href="<?php echo base_url(); ?>jobWork"><i class="fa fa-cubes"></i> Job Work</a></li>
+                        <li class="line_height <?php if($pageUrl=="jobWork" || $pageUrl=="addjobwork" || $pageUrl=="editjobwork"){echo 'active';}?>"><a href="<?php echo base_url(); ?>jobWork"><i class="fa fa-cubes"></i> Job Work</a></li>
                         <li class="line_height"><a href="<?php echo base_url(); ?>log-history-upload"><i class="fa fa-cubes"></i> Rework / Rejection Return (RR)</a></li>
                         <li class="line_height"><a href="<?php echo base_url(); ?>log-history-backup"><i class="fa fa-cubes"></i> Common Challan</a></li>
                         <li class="line_height" <?php if($pageUrl=="challanform"){echo 'active';}?>><a href="<?php echo base_url(); ?>challanform"><i class="fa fa-cubes"></i> Challan Form</a></li>                        <li class="line_height"><a href="<?php echo base_url(); ?>log-history-backup"><i class="fa fa-cubes"></i> Scrap Return</a></li>

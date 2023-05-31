@@ -3771,30 +3771,65 @@ class Admin extends BaseController
                 $save_jobwork_response['error'] = array( 'job_work_no'=>strip_tags(form_error('job_work_no')),'date'=>strip_tags(form_error('date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'raw_material_supplier_name'=>strip_tags(form_error('raw_material_supplier_name')),'remark'=>strip_tags(form_error('remark')));
            
             }else{
-                $data = array(
-                    'po_number'   => trim($this->input->post('job_work_no')),
-                    'date'     => trim($this->input->post('date')),
-                    'vendor_name'  => trim($this->input->post('vendor_name')),
-                    'vendor_po_number'=> trim($this->input->post('vendor_po_number')),
-                    'raw_material_supplier' =>    trim($this->input->post('raw_material_supplier_name')),
-                    'remark' =>    trim($this->input->post('remark')),
-                );
 
-                $checkIfexitsJobwork = $this->admin_model->checkIfexitsJobwork(trim($this->input->post('po_number')));
-                if($checkIfexitsJobwork > 0){
-                    $save_jobwork_response['status'] = 'failure';
-                    $save_jobwork_response['error'] = array( 'job_work_no'=>strip_tags(form_error('job_work_no')),'date'=>strip_tags(form_error('date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'raw_material_supplier_name'=>strip_tags(form_error('raw_material_supplier_name')),'remark'=>strip_tags(form_error('remark')));
-                }else{
-                    $saveJobworkdata = $this->admin_model->saveJobworkdata('',$data);
-                    if($saveJobworkdata){
-                        $update_last_inserted_id_job_work = $this->admin_model->update_last_inserted_id_job_work($saveJobworkdata);
-                        if($update_last_inserted_id_job_work){
-                             $save_jobwork_response['status'] = 'success';
-                             $save_jobwork_response['error'] = array('job_work_no'=>strip_tags(form_error('job_work_no')),'date'=>strip_tags(form_error('date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'raw_material_supplier_name'=>strip_tags(form_error('raw_material_supplier_name')),'remark'=>strip_tags(form_error('remark')));
-                          }
+                $job_work_id = trim($this->input->post('job_work_id'));
+
+
+              
+                    if($job_work_id){
+
+                        $data = array(
+                            'po_number'   => trim($this->input->post('job_work_no')),
+                            'date'     => trim($this->input->post('date')),
+                            'vendor_name'  => trim($this->input->post('vendor_name')),
+                            'vendor_po_number'=> trim($this->input->post('vendor_po_number')),
+                            'raw_material_supplier' =>    trim($this->input->post('raw_material_supplier_name')),
+                            'remark' =>    trim($this->input->post('remark')),
+                        );
+
+                      
+                            $saveJobworkdata = $this->admin_model->saveJobworkdata($job_work_id,$data);
+                        
+                            if($saveJobworkdata){
+                                $update_last_inserted_id_job_work = $this->admin_model->update_last_inserted_id_job_work($saveJobworkdata);
+                                if($update_last_inserted_id_job_work){
+                                    $save_jobwork_response['status'] = 'success';
+                                    $save_jobwork_response['error'] = array('job_work_no'=>strip_tags(form_error('job_work_no')),'date'=>strip_tags(form_error('date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'raw_material_supplier_name'=>strip_tags(form_error('raw_material_supplier_name')),'remark'=>strip_tags(form_error('remark')));
+                                }
+                            }
+
+                        
+
+
+                    }else{
+
+                
+                        $data = array(
+                            'po_number'   => trim($this->input->post('job_work_no')),
+                            'date'     => trim($this->input->post('date')),
+                            'vendor_name'  => trim($this->input->post('vendor_name')),
+                            'vendor_po_number'=> trim($this->input->post('vendor_po_number')),
+                            'raw_material_supplier' =>    trim($this->input->post('raw_material_supplier_name')),
+                            'remark' =>    trim($this->input->post('remark')),
+                        );
+
+                        $checkIfexitsJobwork = $this->admin_model->checkIfexitsJobwork(trim($this->input->post('po_number')));
+                        if($checkIfexitsJobwork > 0){
+                            $save_jobwork_response['status'] = 'failure';
+                            $save_jobwork_response['error'] = array( 'job_work_no'=>strip_tags(form_error('job_work_no')),'date'=>strip_tags(form_error('date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'raw_material_supplier_name'=>strip_tags(form_error('raw_material_supplier_name')),'remark'=>strip_tags(form_error('remark')));
+                        }else{
+                            $saveJobworkdata = $this->admin_model->saveJobworkdata('',$data);
+                        
+                            if($saveJobworkdata){
+                                $update_last_inserted_id_job_work = $this->admin_model->update_last_inserted_id_job_work($saveJobworkdata);
+                                if($update_last_inserted_id_job_work){
+                                    $save_jobwork_response['status'] = 'success';
+                                    $save_jobwork_response['error'] = array('job_work_no'=>strip_tags(form_error('job_work_no')),'date'=>strip_tags(form_error('date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'raw_material_supplier_name'=>strip_tags(form_error('raw_material_supplier_name')),'remark'=>strip_tags(form_error('remark')));
+                                }
+                            }
+
+                        }
                     }
-
-                }
             }
 
            echo json_encode($save_jobwork_response);
@@ -3876,6 +3911,35 @@ class Admin extends BaseController
                 $save_jobwork_response['error'] = array(
                     'part_number'=>strip_tags(form_error('part_number')),'description'=>strip_tags(form_error('description')),'rm_actual_aty'=>strip_tags(form_error('rm_actual_aty')),'vendor_order_qty'=>strip_tags(form_error('vendor_order_qty')),'unit'=>strip_tags(form_error('unit')),'rm_rate'=>strip_tags(form_error('rm_rate')),'value'=>strip_tags(form_error('value')),'packing_and_forwarding'=>strip_tags(form_error('packing_and_forwarding')),'total'=>strip_tags(form_error('total')),'gst'=>strip_tags(form_error('gst')),'grand_total'=>strip_tags(form_error('grand_total')));
             }else{
+
+
+               $job_work_id = trim($this->input->post('job_work_id'));
+
+               if($job_work_id){
+
+                    $data = array(
+                        'part_number_id' => trim($this->input->post('part_number')),
+                        'description'	=>	trim($this->input->post('description')),
+                        'jobwork_id'	=>	$job_work_id,
+                        'rm_actual_qty'	=>  trim($this->input->post('rm_actual_aty')),
+                        'vendor_qty'	=>  trim($this->input->post('vendor_order_qty')),
+                        'ram_rate'=>       trim($this->input->post('rm_rate')),
+                        'unit'=>           trim($this->input->post('unit')),
+                        'value'	=>        trim($this->input->post('value')),
+                        'packing_forwarding'	=>trim($this->input->post('packing_and_forwarding')),
+                        'total'	=>trim($this->input->post('total')),
+                        'gst'	=>trim($this->input->post('gst')),
+                        'grand_total'	=>trim($this->input->post('grand_total')),
+                        'item_remark' =>trim($this->input->post('item_remark')),
+                        'pre_date'=> trim($this->input->post('pre_date')),
+                        'pre_vendor_name' => trim($this->input->post('pre_vendor_name')),
+                        'pre_vendor_po_number' => trim($this->input->post('pre_vendor_po_number')),
+                        'pre_raw_material_supplier_name' => trim($this->input->post('pre_raw_material_supplier_name')),
+                        'pre_remark' => trim($this->input->post('pre_remark')),
+                    );
+
+               }else{
+
                 $data = array(
                     'part_number_id' => trim($this->input->post('part_number')),
                     'description'	=>	trim($this->input->post('description')),
@@ -3895,6 +3959,12 @@ class Admin extends BaseController
                     'pre_raw_material_supplier_name' => trim($this->input->post('pre_raw_material_supplier_name')),
                     'pre_remark' => trim($this->input->post('pre_remark')),
                 );
+
+
+               }
+
+
+               
 
                 // $checkIfexitsbuyerpo = $this->admin_model->checkIfexitsbuyerpo(trim($this->input->post('sales_order_number')));
                 // if($checkIfexitsbuyerpo > 0){
@@ -5604,6 +5674,18 @@ class Admin extends BaseController
 
     }
 
+
+    public function editjobwork($jobworkid){
+        $process = 'Edit Job Work';
+        $processFunction = 'Admin/editjobwork';
+        $this->global['pageTitle'] = 'Edit Job Work';
+        $data['jobworkid'] =$jobworkid;
+        $data['fetchALLprejobworkitemList']= $this->admin_model->fetchALLprejobworkitemListedit($jobworkid);
+        $data['vendorList']= $this->admin_model->fetchALLvendorList();
+        $data['getalljobworkdetails'] =  $this->admin_model->getalljobworkdetails(trim($jobworkid));
+        $this->loadViews("masters/editjobwork", $this->global, $data, NULL);  
+
+    }
 
 
 }

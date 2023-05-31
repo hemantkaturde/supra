@@ -253,11 +253,9 @@ $route['deleteIncomingDetailsitem'] = "admin/deleteIncomingDetailsitem";
 
 $route['getVendorsItemsforDisplay'] = "admin/getVendorsItemsforDisplay";
 $route['getincomingListforDisplay'] = "admin/getincomingListforDisplay";
-
-
-
-
 $route['viewexportdetails/(:any)'] = "admin/viewexportdetails/$1";
+$route['editjobwork/(:any)'] = "admin/editjobwork/$1";
+
 
 
 
