@@ -133,16 +133,16 @@ define('TBL_JOB_WORK','tbl_jobwork');
 define('TBL_JOB_WORK_ITEM','tbl_jobwork_item');
 define('TBL_BILL_OF_MATERIAL','tbl_bill_of_material');
 define('TBL_BILL_OF_MATERIAL_ITEM','tbl_bill_of_materail_item');
-
 define('TBL_BILL_OF_MATERIAL_VENDOR','tbl_vendor_bill_of_material');
 define('TBL_BILL_OF_MATERIAL_VENDOR_ITEM','tbl_vendor_bill_of_materail_item');
 define('TBL_INCOMING_DETAILS','tbl_incoming_details');
 define('TBL_INCOMING_DETAILS_ITEM','tbl_incomingdetails_item');
-
 define('TBL_PACKING_INSTRACTION','tbl_packing_instrauction');
 define('TBL_PACKING_INSTRACTION_DETAILS','tbl_packing_instrauction_details');
-
 define('TBL_EXPORT_DETAILS','tbl_export_details');
+define('TBL_SCRAP_RETURN','tbl_scrapreturn');
+define('TBL_SCRAP_RETURN_ITEM','tbl_scrapreturn_item');
+
 
 
 

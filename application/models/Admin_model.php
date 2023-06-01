@@ -3047,9 +3047,6 @@ class Admin_model extends CI_Model
     }
 
     public function deleteIncomingDetails($id){
-
-        
-
         $this->db->where('id', $id);
         //$this->db->delete(TBL_SUPPLIER);
         if($this->db->delete(TBL_INCOMING_DETAILS)){
@@ -3531,7 +3528,6 @@ class Admin_model extends CI_Model
     public function getExportdetailsCount(){
 
         $this->db->select('*');
-
         if($params['search']['value'] != "") 
         {
             $this->db->where("(".TBL_PACKING_INSTRACTION.".packing_instrauction_id LIKE '%".$params['search']['value']."%'");
@@ -3597,8 +3593,6 @@ class Admin_model extends CI_Model
 
 
     }
-
-
 
 
     public function getpreviousexportdetailsinstarction(){
@@ -3776,6 +3770,106 @@ class Admin_model extends CI_Model
         $data = $query->result_array();
         return $data;
 
+    }
+
+    public function saveScrapreturn($id,$data){
+
+        if($id != '') {
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_SCRAP_RETURN, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_SCRAP_RETURN, $data)) {
+                return $this->db->insert_id();;
+            } else {
+                return FALSE;
+            }
+        }
+
+    }
+
+    public function getScrapreturncount($params){
+
+        $this->db->select('*');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_SCRAP_RETURN.'.vendor_id');
+        $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_SCRAP_RETURN.'.supplier_id');
+
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_SCRAP_RETURN.".challan_id LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SCRAP_RETURN.".challan_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER.".supplier_name LIKE '%".$params['search']['value']."%')");
+        }
+
+        $this->db->where(TBL_SCRAP_RETURN.'.status', 1);        
+        $query = $this->db->get(TBL_SCRAP_RETURN);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+
+    }
+
+    public function getScrapreturndata($params){
+
+        $this->db->select('*,'.TBL_SCRAP_RETURN.'.id as scrapretrunid'); 
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_SCRAP_RETURN.'.vendor_id');
+        $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_SCRAP_RETURN.'.supplier_id');
+
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_SCRAP_RETURN.".challan_id LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SCRAP_RETURN.".challan_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER.".supplier_name LIKE '%".$params['search']['value']."%')");
+        }
+      
+        $this->db->where(TBL_SCRAP_RETURN.'.status', 1);
+        $this->db->limit($params['length'],$params['start']);
+        $this->db->order_by(TBL_SCRAP_RETURN.'.id','DESC');
+        $query = $this->db->get(TBL_SCRAP_RETURN);
+        $fetch_result = $query->result_array();
+
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['challan_id'] = $value['challan_id'];
+                $data[$counter]['challan_date'] = $value['challan_date'];
+                $data[$counter]['vendor_name'] = $value['vendor_name'];
+                $data[$counter]['supplier_name'] = $value['supplier_name'];
+                $data[$counter]['action'] = '';
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editscrapreturn/".$value['scrapretrunid']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['scrapretrunid']."' class='fa fa-trash-o deletescrapreturn' aria-hidden='true'></i>"; 
+                $counter++; 
+            }
+        }
+
+        return $data;
+    }
+
+
+    public function deletescrapreturn($id){
+
+        $this->db->where('id', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_SCRAP_RETURN)){
+
+            $this->db->where('scrap_return_id', $id);
+            //$this->db->delete(TBL_SUPPLIER);
+            if($this->db->delete(TBL_SCRAP_RETURN_ITEM)){
+               return TRUE;
+            }else{
+               return FALSE;
+            }
+        //    return TRUE;
+        }else{
+           return FALSE;
+        }
     }
 
 

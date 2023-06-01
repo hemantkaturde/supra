@@ -3774,8 +3774,6 @@ class Admin extends BaseController
 
                 $job_work_id = trim($this->input->post('job_work_id'));
 
-
-              
                     if($job_work_id){
 
                         $data = array(
@@ -3787,7 +3785,6 @@ class Admin extends BaseController
                             'remark' =>    trim($this->input->post('remark')),
                         );
 
-                      
                             $saveJobworkdata = $this->admin_model->saveJobworkdata($job_work_id,$data);
                         
                             if($saveJobworkdata){
@@ -3797,9 +3794,6 @@ class Admin extends BaseController
                                     $save_jobwork_response['error'] = array('job_work_no'=>strip_tags(form_error('job_work_no')),'date'=>strip_tags(form_error('date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'raw_material_supplier_name'=>strip_tags(form_error('raw_material_supplier_name')),'remark'=>strip_tags(form_error('remark')));
                                 }
                             }
-
-                        
-
 
                     }else{
 
@@ -5684,6 +5678,103 @@ class Admin extends BaseController
         $data['vendorList']= $this->admin_model->fetchALLvendorList();
         $data['getalljobworkdetails'] =  $this->admin_model->getalljobworkdetails(trim($jobworkid));
         $this->loadViews("masters/editjobwork", $this->global, $data, NULL);  
+
+    }
+
+
+    public function scrapreturn(){
+        $process = 'Scrap Return';
+        $processFunction = 'Admin/scrapreturn';
+        $this->global['pageTitle'] = 'Scrap Return';
+        $this->loadViews("masters/scrapreturn", $this->global, $data, NULL);  
+    }
+
+
+    public function addnewScrapreturn(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $scrapreturn_response = array();
+            $this->form_validation->set_rules('challan_id','Challan Id','trim|required');
+            $this->form_validation->set_rules('challan_date','Date','trim|required');
+            $this->form_validation->set_rules('vendor_name','Vendor Name','trim');
+            $this->form_validation->set_rules('supplier_name','Supplier Name','trim');
+            $this->form_validation->set_rules('remark','Remark','trim');
+
+            if($this->form_validation->run() == FALSE)
+            {
+                $scrapreturn_response['status'] = 'failure';
+                $scrapreturn_response['error'] = array( 'challan_id'=>strip_tags(form_error('challan_id')),'challan_date'=>strip_tags(form_error('challan_date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'supplier_name'=>strip_tags(form_error('supplier_name')),'remark'=>strip_tags(form_error('remark')));
+           
+            }else{
+                $data = array(
+                    'challan_id'   => trim($this->input->post('challan_id')),
+                    'challan_date'     => trim($this->input->post('challan_date')),
+                    'vendor_id'  => trim($this->input->post('vendor_name')),
+                    'supplier_id'=> trim($this->input->post('supplier_name')),
+                    'remarks'=> trim($this->input->post('remark')),
+                );
+                $saveScrapreturn = $this->admin_model->saveScrapreturn('',$data);
+                if($saveScrapreturn){
+                    $scrapreturn_response['status'] = 'success';
+                    $scrapreturn_response['error'] = array( 'challan_id'=>strip_tags(form_error('challan_id')),'challan_date'=>strip_tags(form_error('challan_date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'supplier_name'=>strip_tags(form_error('supplier_name')),'remark'=>strip_tags(form_error('remark')));
+                }
+            }
+            echo json_encode($scrapreturn_response);
+        }else{
+            $process = 'Add New Scrap Return';
+            $processFunction = 'Admin/addnewscrapreturn';
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Add New Scrap Return';
+            $data['supplierList']= $this->admin_model->fetchALLsupplierList();
+            $data['vendorList']= $this->admin_model->fetchALLvendorList();
+            $this->loadViews("masters/addnewscrapreturn", $this->global, $data, NULL);
+        }
+
+    }
+
+
+    public function fetchscrapreturn(){
+
+        $params = $_REQUEST;
+        $totalRecords = $this->admin_model->getScrapreturncount($params); 
+        $queryRecords = $this->admin_model->getScrapreturndata($params); 
+
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+        echo json_encode($json_data);
+
+    }
+
+
+    public function deletescrapreturn(){
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->deletescrapreturn(trim($this->input->post('id')));
+            if ($result) {
+                        $process = 'Scrap Return Delete';
+                        $processFunction = 'Admin/deletescrapreturn';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
 
     }
 

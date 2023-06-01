@@ -143,16 +143,9 @@ $route['getRowmaterialPartnumberByid'] = "admin/getRowmaterialPartnumberByid";
 $route['addSupplierpoConfirmationitem'] = "admin/addSupplierpoConfirmationitem";
 $route['getfinishedgoodsPartnumberByidvendor'] = "admin/getfinishedgoodsPartnumberByidvendor";
 $route['getVendorDetailsBysupplierponumber'] = "admin/getVendorDetailsBysupplierponumber";
-
 $route['getBuyerDetailsBysupplierponumberforbuyer'] = "admin/getBuyerDetailsBysupplierponumberforbuyer";
-
 $route['getBuyerDetailsBysupplierponumberforbuyerpo'] = "admin/getBuyerDetailsBysupplierponumberforbuyerpo";
-
-
 $route['getbuyerpoidforshowinitems'] = "admin/getbuyerpoidforshowinitems";
-
-
-
 $route['deleteSupplierpoconfirmationitem'] = "admin/deleteSupplierpoconfirmationitem";
 $route['viewSupplierpoconfirmation/(:any)'] = "admin/viewSupplierpoconfirmation/$1";
 $route['getSupplirbuyernamesupplierpo'] = "admin/getSupplirbuyernamesupplierpo";
@@ -177,18 +170,12 @@ $route['saveJobworktem'] = "admin/saveJobworktem";
 $route['deleteJobwork'] = "admin/deleteJobwork";
 $route['editBuyerpo/(:any)'] = "admin/editBuyerpo/$1";
 $route['editSupplierpo/(:any)'] = "admin/editSupplierpo/$1";
-
 $route['editVendorpo/(:any)'] = "admin/editVendorpo/$1";
-
 $route['deleteVendorpoitemedit'] = "admin/deleteVendorpoitemedit";
-
-
 $route['billofmaterial'] = "admin/billofmaterial";
 $route['fetchBillofmaterial'] = "admin/fetchBillofmaterial";
 $route['addnewBillofmaterial'] = "admin/addnewBillofmaterial";
-
 $route['saveBillofmaterialtem'] = "admin/saveBillofmaterialtem";
-
 $route['deleteBillofmaterial'] = "admin/deleteBillofmaterial";
 $route['vendorbillofmaterial'] = "admin/vendorbillofmaterial";
 $route['fetchvendorBillofmaterial'] = "admin/fetchvendorBillofmaterial";
@@ -204,11 +191,6 @@ $route['viewVendorbillofmaterial/(:any)'] = "admin/viewVendorbillofmaterial/$1";
 $route['getVendorDetailsBybuyerPOnumber'] = "admin/getVendorDetailsBybuyerPOnumber";
 $route['getSupplierdetailsbyvendorponumber'] = "admin/getSupplierdetailsbyvendorponumber";
 $route['getItemdetailsdependonvendorpobom'] = "admin/getItemdetailsdependonvendorpobom";
-
-
-
-
-
 $route['packinginstaruction'] = "admin/packinginstaruction";
 $route['addnewpackinginstruction'] = "admin/addnewpackinginstruction";
 $route['fetchpackinginstartion'] = "admin/fetchpackinginstartion";
@@ -219,11 +201,7 @@ $route['editpackinginstraction/(:any)'] = "admin/editpackinginstraction/$1";
 $route['updatepackinginstraction'] = "admin/updatepackinginstraction";
 $route['addpackinginstractiondetailsaction'] = "admin/addpackinginstractiondetailsaction";
 $route['deletepackinginstractionsubitem'] = "admin/deletepackinginstractionsubitem";
-
-
 $route['getBuyerpoitemonly'] = "admin/getBuyerpoitemonly";
-
-
 $route['exportdetails'] = "admin/exportdetails";
 $route['fetchexportdetails'] = "admin/fetchexportdetails";
 $route['addnewExportDetails'] = "admin/addnewExportDetails";
@@ -232,15 +210,9 @@ $route['updatexportdetails'] = "admin/updatexportdetails";
 $route['deleteexportdetailsmain'] = "admin/deleteexportdetailsmain";
 $route['addExportdetailsitems/(:any)'] = "admin/addExportdetailsitems/$1";
 $route['getbuyeramdpackgindetails'] = "admin/getbuyeramdpackgindetails";
-
-
-
 $route['challanform'] = "admin/challanform";
 $route['packagingform'] = "admin/packagingform";
 $route['rrchallan'] = "admin/rrchallan";
-
-
-
 $route['incomingdetails'] = "admin/incomingdetails";
 $route['getVendorpoitems'] = "admin/getVendorpoitems";
 $route['getVendorPonumberbyVendorid'] = "admin/getVendorPonumberbyVendorid";
@@ -250,7 +222,6 @@ $route['editincomingdetails/(:any)'] = "admin/editincomingdetails/$1";
 $route['deleteIncomingDetails'] = "admin/deleteIncomingDetails";
 $route['saveincomingitem'] = "admin/saveincomingitem";
 $route['deleteIncomingDetailsitem'] = "admin/deleteIncomingDetailsitem";
-
 $route['getVendorsItemsforDisplay'] = "admin/getVendorsItemsforDisplay";
 $route['getincomingListforDisplay'] = "admin/getincomingListforDisplay";
 $route['viewexportdetails/(:any)'] = "admin/viewexportdetails/$1";
@@ -258,6 +229,10 @@ $route['editjobwork/(:any)'] = "admin/editjobwork/$1";
 
 
 
+$route['scrapreturn'] = "admin/scrapreturn";
+$route['addnewScrapreturn'] = "admin/addnewScrapreturn";
+$route['fetchscrapreturn'] = "admin/fetchscrapreturn";
+$route['deletescrapreturn'] = "admin/deletescrapreturn";
 
 
 
