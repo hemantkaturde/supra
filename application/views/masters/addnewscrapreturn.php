@@ -44,15 +44,15 @@
                                     </div>
 
                                     
-                                    <?php if($fetchALLpreBillofmaterailist[0]['pre_challan_date']){
-                                        $date= $fetchALLpreBillofmaterailist[0]['pre_challan_date'];
+                                    <?php if($fetchALLprescrapreturndetails[0]['pre_challan_date']){
+                                        $date= $fetchALLprescrapreturndetails[0]['pre_challan_date'];
                                      }else{
                                         $date= date('Y-m-d');
                                      } ?>
 
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="challan_date">Date <span class="required">*</span></label>
+                                            <label for="challan_date">Challan Date <span class="required">*</span></label>
                                             <input type="text" class="form-control datepicker"  value="<?=$date?>" id="challan_date" name="challan_date" required>
                                             <p class="error challan_date_error"></p>
                                         </div>
@@ -64,7 +64,7 @@
                                                     <select class="form-control" name="vendor_name" id="vendor_name">
                                                         <option st-id="" value="">Select Vendor Name</option>
                                                         <?php foreach ($vendorList as $key => $value) {?>
-                                                        <option value="<?php echo $value['ven_id']; ?>"><?php echo $value['vendor_name']; ?></option>
+                                                        <option value="<?php echo $value['ven_id']; ?>" <?php if($value['ven_id']==$fetchALLprescrapreturndetails[0]['pre_vendor_name']){ echo 'selected';} ?>><?php echo $value['vendor_name']; ?></option>
                                                         <?php } ?>
                                                     </select>
                                                 <p class="error vendor_name_error"></p>
@@ -77,7 +77,7 @@
                                                 <select class="form-control" name="supplier_name" id="supplier_name">
                                                     <option st-id="" value="">Select Supplier Name</option>
                                                     <?php foreach ($supplierList as $key => $value) {?>
-                                                    <option value="<?php echo $value['sup_id']; ?>" <?php if($value['sup_id']==$fetchALLpreVendoritemList[0]['pre_supplier_name']){ echo 'selected';} ?> ><?php echo $value['supplier_name']; ?></option>
+                                                    <option value="<?php echo $value['sup_id']; ?>" <?php if($value['sup_id']==$fetchALLprescrapreturndetails[0]['pre_supplier_name']){ echo 'selected';} ?> ><?php echo $value['supplier_name']; ?></option>
                                                     <?php } ?>
                                                 </select>
                                             <p class="error supplier_name_error"></p>
@@ -87,7 +87,7 @@
                                     <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="remark">Remark</label>
-                                                  <textarea type="text" class="form-control"  id="remark"  name="remark" required> <?=$fetchALLpreVendoritemList[0]['pre_remark'];?></textarea>
+                                                  <textarea type="text" class="form-control"  id="remark"  name="remark" required> <?=$fetchALLprescrapreturndetails[0]['pre_remark'];?></textarea>
                                                 <p class="error remark_error"></p>
                                             </div>
                                     </div>
@@ -103,10 +103,11 @@
                                                         <th>Description</th>
                                                         <th>Gross Weight (In Kgs)</th>
                                                         <th>Net Weight (In Kgs)</th>
+                                                        <th>Quantity/th>
                                                         <th>Number Of Bags</th>
                                                         <th>HSN Code</th>
                                                         <th>Estimated Value</th>
-                                                        <th>Number of Processing</th>
+                                                        <th>Nature of Processing</th>
                                                         <th>Remark</th>
                                                         <th>Action</th>
                                                     </tr>
@@ -114,21 +115,22 @@
                                                 <tbody>
                                                     <?php
                                                           $count=0;
-                                                           foreach ($fetchALLpreVendoritemList as $key => $value) :
+                                                           foreach ($fetchALLprescrapreturndetails as $key => $value) :
                                                            $count++;
                                                     ?>
                                                     <tr>
                                                         <td><?php echo $count;?></td>
-                                                        <td><?php echo $value['part_number'];?></td>
                                                         <td><?php echo $value['description'];?></td>
-                                                        <td><?php echo $value['rm_type'];?></td>
-                                                        <td><?php echo $value['vendor_qty'];?></td>
-                                                        <td><?php echo $value['order_oty'];?></td>
-                                                        <td><?php echo $value['unit'];?></td>
-                                                        <td><?php echo $value['rate'];?></td>
-                                                        <td><?php echo $value['value'];?></td>
+                                                        <td><?php echo $value['gross_weight'];?></td>
+                                                        <td><?php echo $value['net_weight'];?></td>
+                                                        <td><?php echo $value['quantity'];?></td>
+                                                        <td><?php echo $value['number_of_bags'];?></td>
+                                                        <td><?php echo $value['hsn_code'];?></td>
+                                                        <td><?php echo $value['estimated_value'];?></td>
+                                                        <td><?php echo $value['number_of_processing'];?></td>
+                                                        <td><?php echo $value['remarks'];?></td>
                                                         <td>
-                                                        <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['vendoritemid'];?>' class='fa fa-trash-o deleteVendorpoitem' aria-hidden='true'></i>
+                                                        <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['scrapreturnid'];?>' class='fa fa-trash-o deleteScrpareturnid' aria-hidden='true'></i>
                                                         </td>
                                                     </tr>
                                                     <?php endforeach;?>
@@ -148,7 +150,7 @@
                                                 <h3 class="modal-title" id="additem">Add New Item</h3>
                                                 </button>
                                             </div>
-                                            <form role="form" id="addvendoritemform" action="<?php echo base_url() ?>addvendoritemform" method="post" role="form">
+                                            <form role="form" id="addscrapreturnform" action="<?php echo base_url() ?>addscrapreturnform" method="post" role="form">
                                                 <div class="modal-body">
                                                     <div class="loader_ajax" style="display:none;">
                                                             <div class="loader_ajax_inner"><img src="<?php echo ICONPATH;?>/preloader_ajax.gif"></div>
@@ -167,7 +169,7 @@
                                                     </div>
                     
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Gross Weight (In Kgs) <span class="required">*</span></label>
+                                                        <label class="col-sm-4 col-form-label">Gross Weight (In Kgs)</label>
                                                         <div class="col-sm-8">
                                                             <input type="text" class="form-control"  id="gross_weight" name="gross_weight" required>
                                                             <p class="error gross_weight_error"></p>
@@ -176,7 +178,7 @@
 
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Net Weight (In Kgs) <span class="required">*</span></label>
+                                                        <label class="col-sm-4 col-form-label">Net Weight (In Kgs)</label>
                                                         <div class="col-sm-8">
                                                             <input type="text" class="form-control"  id="net_weight" name="net_weight" required>
                                                             <p class="error  net_weight_error"></p>
@@ -201,7 +203,7 @@
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">HSN Code <span class="required">*</span></label>
+                                                        <label class="col-sm-4 col-form-label">HSN Code</label>
                                                         <div class="col-sm-8">
                                                             <select class="form-control" name="hsn_code" id="hsn_code">
                                                                 <option st-id="" value="">Select HSN Code</option>
@@ -222,10 +224,10 @@
 
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Number of Processing <span class="required">*</span></label>
+                                                        <label class="col-sm-4 col-form-label">Nature of Processing </label>
                                                         <div class="col-sm-8">
                                                             <select class="form-control" name="number_of_processing" id="number_of_processing">
-                                                                <option st-id="" value="">Select HSN Code</option>
+                                                                <option st-id="" value="">Select Nature of Processing</option>
                                                                     <option value="Convert Into Brass" selected>Convert Into Brass</option>
                                                             </select>
                                                             <p class="error number_of_processing_error"></p>
@@ -245,7 +247,7 @@
 
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary btn-xl closeScrapreturn" data-dismiss="modal">Close</button>
-                                                    <button type="submit" id="savevenodritem" name="savevenodritem" class="btn btn-primary" class="btn btn-success btn-xl">Save</button>
+                                                    <button type="submit" id="savescrapreturnitem" name="savescrapreturnitem" class="btn btn-primary" class="btn btn-success btn-xl">Save</button>
                                                 </div>
 
                                             </form>    
@@ -261,7 +263,12 @@
                             <!-- /.box-body -->
                             <div class="box-footer">
                                 <div class="col-xs-8">
-                                    <input type="submit" id="saveScrapreturn" class="btn btn-primary" value="Submit" />
+                                <?php if($fetchALLprescrapreturndetails){
+                                        $disabled= '';
+                                    }else{ 
+                                        $disabled= 'disabled';
+                                     } ?>
+                                    <input type="submit" id="saveScrapreturn" class="btn btn-primary" value="Submit"  <?=$disabled?> />
                                     <input type="button" onclick="location.href = '<?php echo base_url() ?>scrapreturn'" class="btn btn-default" value="Back" />
                                 </div>
                             </div>

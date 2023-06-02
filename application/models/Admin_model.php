@@ -3873,6 +3873,67 @@ class Admin_model extends CI_Model
     }
 
 
+    public function  saveNewscrapreturn($id,$data){
+
+        if($id != '') {
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_SCRAP_RETURN_ITEM, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_SCRAP_RETURN_ITEM, $data)) {
+                return $this->db->insert_id();;
+            } else {
+                return FALSE;
+            }
+        }
+    }
+
+
+    public function fetchALLprescrapreturndetails(){
+
+        $this->db->select('*,'.TBL_SUPPLIER.'.supplier_name as supliername,'.TBL_VENDOR.'.vendor_name vendorname,'.TBL_SCRAP_RETURN_ITEM.'.id as scrapreturnid');
+        $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_SCRAP_RETURN_ITEM.'.pre_supplier_name','left');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_SCRAP_RETURN_ITEM.'.pre_vendor_name','left');
+        $this->db->where(TBL_SCRAP_RETURN_ITEM.'.scrap_return_id Is NULL');
+        $this->db->order_by(TBL_SCRAP_RETURN_ITEM.'.id','desc');
+        $query = $this->db->get(TBL_SCRAP_RETURN_ITEM);
+        $data = $query->result_array();
+        return $data;
+
+    }
+
+
+    public function deletescrapreturnitem($id){
+
+        $this->db->where('id', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_SCRAP_RETURN_ITEM)){
+           return TRUE;
+        }else{
+           return FALSE;
+        }
+
+    }
+
+
+    public function update_last_inserted_id_scarp_retuns($last_inserted_id){
+
+            $data = array(
+                'scrap_return_id' => $last_inserted_id
+            );
+            $this->db->where(TBL_SCRAP_RETURN_ITEM.'.scrap_return_id IS NULL');
+            if($this->db->update(TBL_SCRAP_RETURN_ITEM,$data)){
+                return TRUE;
+            }else{
+                return FALSE;
+            }
+        
+    }
+
+
 }
 
 ?>

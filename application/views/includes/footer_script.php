@@ -7163,7 +7163,6 @@
 			return false;
 	    });
 
-
 		$(document).on('click','.deletepackinginstractionsubitem',function(e){
 			var elemF = $(this);
 			e.preventDefault();
@@ -7212,7 +7211,6 @@
 			});
 		});
 
-
 		</script>
 <?php } ?>
 
@@ -7248,7 +7246,6 @@
 	            },
 	        });
 	    });
-
 
 		$(document).on('click','#saveexportdetails',function(e){
 			e.preventDefault();
@@ -7293,7 +7290,6 @@
 			return false;
 	    });
 
-
 		$(document).on('change','#buyer_name',function(e){  
 			e.preventDefault();
 			//$(".loader_ajax").show();
@@ -7326,7 +7322,6 @@
 			});
 			return false;
 		});
-
 
 		$(document).on('change','#buyer_po_number',function(e){  
 			e.preventDefault();
@@ -7364,7 +7359,6 @@
 	
 		
 		});
-
 
 		$(document).on('click','#editExportDetails',function(e){
 			e.preventDefault();
@@ -7409,7 +7403,6 @@
 			return false;
 	    });
 		
-
 		$(document).on('click','.deleteexportdetailsmain',function(e){
 			var elemF = $(this);
 			e.preventDefault();
@@ -7457,7 +7450,6 @@
 				}
 			});
 		});
-
 
 		$(document).on('change','#part_number',function(e){  
 			e.preventDefault();
@@ -7625,6 +7617,114 @@
 			location.reload();
        });
 
+	   $(document).on('click','#savescrapreturnitem',function(e){
+			e.preventDefault();
+			$(".loader_ajax").show();
+			   var formData = new FormData($("#addscrapreturnform")[0]);
+              
+			   var description =   $('#description').val();
+			   var gross_weight =   $('#gross_weight').val();
+			   var net_weight =   $('#net_weight').val();
+			   var quantity =   $('#quantity').val();
+			   var number_of_bags =   $('#number_of_bags').val();
+			   var hsn_code =   $('#hsn_code').val();
+			   var estimated_value =   $('#estimated_value').val();
+			   var number_of_processing =   $('#number_of_processing').val();
+			   var item_remark =   $('#item_remark').val();
+			   var pre_challan_date =   $('#challan_date').val();
+			   var pre_vendor_name =   $('#vendor_name').val();
+			   var pre_supplier_name =   $('#supplier_name').val();
+			   var pre_remark =   $('#remark').val();
 
+
+			$.ajax({
+				url : "<?php echo base_url();?>savescrapreturnitem",
+				type: "POST",
+				 //data : formData,
+				 data :{ description:description,gross_weight:gross_weight,net_weight:net_weight,quantity:quantity,number_of_bags:number_of_bags,hsn_code:hsn_code,estimated_value:estimated_value,number_of_processing:number_of_processing,item_remark:item_remark,pre_challan_date:pre_challan_date,pre_vendor_name:pre_vendor_name,pre_supplier_name:pre_supplier_name,pre_remark:pre_remark },
+				// method: "POST",
+                // data :{package_id:package_id},
+                cache:false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+						$(".loader_ajax").hide();
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						swal({
+							title: "Success",
+							text: "Item Successfully Added!",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+
+									window.location.href = "<?php echo base_url().'addnewScrapreturn'?>";	
+						});		
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			});
+			return false;
+	   });
+
+
+	   $(document).on('click','.deleteScrpareturnid',function(e){
+			var elemF = $(this);
+			e.preventDefault();
+			swal({
+				title: "Are you sure?",
+				text: "Delete Scrap Return Item ",
+				type: "warning",
+				showCancelButton: true,
+				closeOnClickOutside: false,
+				confirmButtonClass: "btn-sm btn-danger",
+				confirmButtonText: "Yes, delete it!",
+				cancelButtonText: "No, cancel plz!",
+				closeOnConfirm: false,
+				closeOnCancel: false
+			}, function(isConfirm) {
+				if (isConfirm) {
+							$.ajax({
+								url : "<?php echo base_url();?>deletescrapreturnitem",
+								type: "POST",
+								data : 'id='+elemF.attr('data-id'),
+								success: function(data, textStatus, jqXHR)
+								{
+									const obj = JSON.parse(data);
+								
+									if(obj.status=='success'){
+										swal({
+											title: "Deleted!",
+											text: "Scrap Return Item Deleted Succesfully",
+											icon: "success",
+											button: "Ok",
+											},function(){ 
+													window.location.href = "<?php echo base_url().'addnewScrapreturn'?>";
+										});	
+									}
+
+								},
+								error: function (jqXHR, textStatus, errorThrown)
+								{
+									$(".loader_ajax").hide();
+								}
+							})
+						}
+						else {
+				swal("Cancelled", "Scrap Return Item deletion cancelled ", "error");
+				}
+			});
+		});
     </script>
 <?php }?>

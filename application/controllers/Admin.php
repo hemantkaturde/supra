@@ -5715,8 +5715,13 @@ class Admin extends BaseController
                 );
                 $saveScrapreturn = $this->admin_model->saveScrapreturn('',$data);
                 if($saveScrapreturn){
-                    $scrapreturn_response['status'] = 'success';
-                    $scrapreturn_response['error'] = array( 'challan_id'=>strip_tags(form_error('challan_id')),'challan_date'=>strip_tags(form_error('challan_date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'supplier_name'=>strip_tags(form_error('supplier_name')),'remark'=>strip_tags(form_error('remark')));
+
+                    $update_last_inserted_id_scarp_retuns = $this->admin_model->update_last_inserted_id_scarp_retuns($saveScrapreturn);
+                    if($update_last_inserted_id_scarp_retuns){
+                        $scrapreturn_response['status'] = 'success';
+                        $scrapreturn_response['error'] = array( 'challan_id'=>strip_tags(form_error('challan_id')),'challan_date'=>strip_tags(form_error('challan_date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'supplier_name'=>strip_tags(form_error('supplier_name')),'remark'=>strip_tags(form_error('remark')));
+                    }
+
                 }
             }
             echo json_encode($scrapreturn_response);
@@ -5727,6 +5732,8 @@ class Admin extends BaseController
             $this->global['pageTitle'] = 'Add New Scrap Return';
             $data['supplierList']= $this->admin_model->fetchALLsupplierList();
             $data['vendorList']= $this->admin_model->fetchALLvendorList();
+            $data['fetchALLprescrapreturndetails']= $this->admin_model->fetchALLprescrapreturndetails();
+
             $this->loadViews("masters/addnewscrapreturn", $this->global, $data, NULL);
         }
 
@@ -5775,6 +5782,78 @@ class Admin extends BaseController
         }else{
             echo(json_encode(array('status'=>'failed'))); 
         }
+
+    }
+
+
+    public function savescrapreturnitem(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+
+            $savescrapreturnitem_response = array();
+            $this->form_validation->set_rules('description','Description','trim|required');
+            $this->form_validation->set_rules('gross_weight','Gross Weight','trim');
+            $this->form_validation->set_rules('net_weight','Net Weight','trim');
+            $this->form_validation->set_rules('quantity','Quantity','trim');
+            $this->form_validation->set_rules('number_of_bags','Number of Bags','trim');
+            $this->form_validation->set_rules('hsn_code','HSN Code','trim');
+            $this->form_validation->set_rules('estimated_value','Estimated Value','trim');
+            $this->form_validation->set_rules('number_of_processing','Number of Processing','trim');
+            $this->form_validation->set_rules('remark','Remark','trim');
+
+            if($this->form_validation->run() == FALSE)
+            {
+                $savescrapreturnitem_response['status'] = 'failure';
+                $savescrapreturnitem_response['error'] = array('description'=>strip_tags(form_error('description')),'gross_weight'=>strip_tags(form_error('gross_weight')),'net_weight'=>strip_tags(form_error('net_weight')),'quantity'=>strip_tags(form_error('quantity')),'number_of_bags'=>strip_tags(form_error('number_of_bags')),'hsn_code'=>strip_tags(form_error('hsn_code')),'estimated_value'=>strip_tags(form_error('estimated_value')),'number_of_processing'=>strip_tags(form_error('number_of_processing')),'remark'=>strip_tags(form_error('remark')));
+           
+            }else{
+
+                
+                $data = array(
+                    'description' =>  trim($this->input->post('description')),
+                    'gross_weight' =>  trim($this->input->post('gross_weight')),
+                    'net_weight' =>  trim($this->input->post('net_weight')),
+                    'quantity' =>  trim($this->input->post('quantity')),
+                    'number_of_bags' =>  trim($this->input->post('number_of_bags')),
+                    'hsn_code' =>  trim($this->input->post('hsn_code')),
+                    'estimated_value' =>  trim($this->input->post('estimated_value')),
+                    'number_of_processing' =>  trim($this->input->post('number_of_processing')),
+                    'remarks' =>  trim($this->input->post('item_remark')),
+                    'pre_challan_date' =>  trim($this->input->post('pre_challan_date')),
+                    'pre_vendor_name' =>  trim($this->input->post('pre_vendor_name')),
+                    'pre_supplier_name' =>  trim($this->input->post('pre_supplier_name')),
+                    'pre_remark' =>  trim($this->input->post('pre_remark')),
+                );
+
+                $saveIncomingdetailsitem= $this->admin_model->saveNewscrapreturn('',$data);
+
+                if($saveIncomingdetailsitem){
+                    $savescrapreturnitem_response['status'] = 'success';
+                    $savescrapreturnitem_response['error'] = array('description'=>strip_tags(form_error('description')),'gross_weight'=>strip_tags(form_error('gross_weight')),'net_weight'=>strip_tags(form_error('net_weight')),'quantity'=>strip_tags(form_error('quantity')),'number_of_bags'=>strip_tags(form_error('number_of_bags')),'hsn_code'=>strip_tags(form_error('hsn_code')),'estimated_value'=>strip_tags(form_error('estimated_value')),'number_of_processing'=>strip_tags(form_error('number_of_processing')),'remark'=>strip_tags(form_error('remark')));
+                }
+
+            }
+            echo json_encode($savescrapreturnitem_response);
+        }
+    }
+
+    public function deletescrapreturnitem(){
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->deletescrapreturnitem(trim($this->input->post('id')));
+            if ($result) {
+                        $process = 'Delete Scrap Return Item';
+                        $processFunction = 'Admin/deletescrapreturnitem';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
+
+
 
     }
 

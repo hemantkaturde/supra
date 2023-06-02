@@ -233,6 +233,8 @@ $route['scrapreturn'] = "admin/scrapreturn";
 $route['addnewScrapreturn'] = "admin/addnewScrapreturn";
 $route['fetchscrapreturn'] = "admin/fetchscrapreturn";
 $route['deletescrapreturn'] = "admin/deletescrapreturn";
+$route['savescrapreturnitem'] = "admin/savescrapreturnitem";
+$route['deletescrapreturnitem'] = "admin/deletescrapreturnitem";
 
 
 
