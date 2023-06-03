@@ -3969,7 +3969,70 @@ class Admin_model extends CI_Model
         $query = $this->db->get(TBL_SCRAP_RETURN);
         $rowcount = $query->result_array();
         return $rowcount;
+    }
 
+
+
+    public function fetchvendorBillofmaterialforcurrentorderstatusCount($params,$from_date,$to_date,$status){
+
+        $this->db->select('*');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id= '.TBL_BILL_OF_MATERIAL_VENDOR.'.vendor_name');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id= '.TBL_BILL_OF_MATERIAL_VENDOR.'.vendor_po_number');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_BILL_OF_MATERIAL_VENDOR.".bom_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BILL_OF_MATERIAL_VENDOR.".date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BILL_OF_MATERIAL_VENDOR.".bom_status LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BILL_OF_MATERIAL_VENDOR.".part_number LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_BILL_OF_MATERIAL_VENDOR.'.status', 1);        
+        $query = $this->db->get(TBL_BILL_OF_MATERIAL_VENDOR);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+        
+
+    }
+
+    public function fetchvendorBillofmaterialforcurrentorderstatusdata($params,$from_date,$to_date,$status){
+
+        $this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_BILL_OF_MATERIAL_VENDOR.'.id as billofmaterialid');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id= '.TBL_BILL_OF_MATERIAL_VENDOR.'.vendor_name');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id= '.TBL_BILL_OF_MATERIAL_VENDOR.'.vendor_po_number');
+
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_BILL_OF_MATERIAL_VENDOR.".bom_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BILL_OF_MATERIAL_VENDOR.".date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BILL_OF_MATERIAL_VENDOR.".po_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BILL_OF_MATERIAL_VENDOR.".bom_status LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BILL_OF_MATERIAL_VENDOR.".part_number LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_BILL_OF_MATERIAL_VENDOR.'.status', 1);
+        $this->db->limit($params['length'],$params['start']);
+        $this->db->order_by(TBL_BILL_OF_MATERIAL_VENDOR.'.id','DESC');
+        $query = $this->db->get(TBL_BILL_OF_MATERIAL_VENDOR);
+        $fetch_result = $query->result_array();
+
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['bom_number'] = $value['bom_number'];
+                $data[$counter]['date'] = $value['date'];
+                $data[$counter]['vendor_po_number'] = $value['po_number'];
+                //$data[$counter]['vendor_number'] = $value['vendor_number'];
+                $data[$counter]['vendor_name'] = $value['vendorname'];
+                $data[$counter]['bom_status'] = $value['bom_status'];
+                $counter++; 
+            }
+        }
+
+        return $data;
 
     }
 

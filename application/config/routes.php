@@ -239,6 +239,8 @@ $route['editscrapreturn/(:any)'] = "admin/editscrapreturn/$1";
 
 
 $route['currentorderstatus'] = "admin/currentorderstatus";
+// $route['fetchvendorBillofmaterialforcurrentorderstatus'] = "admin/fetchvendorBillofmaterialforcurrentorderstatus";
+
 
 
 

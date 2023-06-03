@@ -61,8 +61,8 @@
                                     <div class="col-md-2">
                                         <div class="form-group">
                                             <label for="email">Status</label>
-                                            <select class="form-control" name="status" id="report_type">
-                                                    <option st-id="" value="">Select Status</option>
+                                            <select class="form-control" name="status" id="status">
+                                                    <option st-id="" value="NA">Select Status</option>
                                                     <option value="open">Open </option>
                                                     <option value="close">Close</option>
                                                 </select>
@@ -92,7 +92,6 @@
                                                     <th>Vendor PO No</th>
                                                     <th>Vendor Name</th>
                                                     <th>Status</th>
-                                                    <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -114,7 +113,6 @@
                                                     <th>Vendor PO No</th>
                                                     <th>Vendor Name</th>
                                                     <th>Status</th>
-                                                    <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
