@@ -7688,7 +7688,6 @@
 			return false;
 	   });
 
-
 	   $(document).on('click','.deleteScrpareturnid',function(e){
 			var elemF = $(this);
 			e.preventDefault();
@@ -7738,3 +7737,95 @@
 		});
     </script>
 <?php }?>
+
+
+<?php if($pageTitle=='Current Order Status'){ ?>
+
+	<script type="text/javascript">
+       $(document).ready(function() {
+
+		$('#bill_of_material').css('display','none');
+		$('#vendor_bill_of_material').css('display','none');
+
+			// $("#bill_of_material").hide();
+			// $("#vendor_bill_of_material").hide();
+	   });
+
+
+	   $(document).on('change','#report_type',function(e){  
+			e.preventDefault();
+			var report_type =  $('#report_type').val();
+
+			if(report_type=='vendor_bill_of_material'){
+				$('#bill_of_material').css('display','none');
+		        $('#vendor_bill_of_material').css('display','block');
+
+				var dt = $('#view_vendorbillofmaterialVendor').DataTable({
+	            "columnDefs": [ 
+	                 { className: "details-control", "targets": [ 0 ] },
+	                 { "width": "10%", "targets": 0 },
+	                 { "width": "10%", "targets": 1 },
+					 { "width": "15%", "targets": 2 },
+	                 { "width": "10%", "targets": 3 },
+					 { "width": "15%", "targets": 4 },
+	                 { "width": "10%", "targets": 5 }					
+	            ],
+	            responsive: true,
+	            "oLanguage": {
+	                "sEmptyTable": "<i>No Vendor BOM List Not Found.</i>",
+	            }, 
+	            "bSort" : false,
+	            "bFilter":true,
+	            "bLengthChange": true,
+	            "iDisplayLength": 10,   
+	            "bProcessing": true,
+	            "serverSide": true,
+	            "ajax":{
+                    url :"<?php echo base_url();?>fetchvendorBillofmaterial",
+                    type: "post",
+	            },
+	        });
+				
+			}
+
+			if(report_type=='bill_of_material'){
+
+				$('#bill_of_material').css('display','block');
+		        $('#vendor_bill_of_material').css('display','none');
+
+				var dt = $('#view_billofmaterial').DataTable({
+	            "columnDefs": [ 
+	                 { className: "details-control", "targets": [ 0 ] },
+	                 { "width": "10%", "targets": 0 },
+	                 { "width": "10%", "targets": 1 },
+					 { "width": "15%", "targets": 2 },
+	                 { "width": "10%", "targets": 3 },
+					 { "width": "15%", "targets": 4 },
+	                 { "width": "10%", "targets": 5 },
+					
+	            ],
+	            responsive: true,
+	            "oLanguage": {
+	                "sEmptyTable": "<i>No BOM List Not Found.</i>",
+	            }, 
+	            "bSort" : false,
+	            "bFilter":true,
+	            "bLengthChange": true,
+	            "iDisplayLength": 10,   
+	            "bProcessing": true,
+	            "serverSide": true,
+	            "ajax":{
+                    url :"<?php echo base_url();?>fetchBillofmaterial",
+                    type: "post",
+	            },
+	        });
+
+
+			}
+
+		});
+
+
+
+    </script>  
+<?php } ?>
