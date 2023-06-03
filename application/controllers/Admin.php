@@ -5742,6 +5742,9 @@ class Admin extends BaseController
             $data['vendorList']= $this->admin_model->fetchALLvendorList();
             $data['fetchALLprescrapreturndetails']= $this->admin_model->fetchALLprescrapreturndetails();
 
+            $data['getpriviousscrapreturn']= $this->admin_model->getpriviousscrpareturn()[0];
+
+
             $this->loadViews("masters/addnewscrapreturn", $this->global, $data, NULL);
         }
 

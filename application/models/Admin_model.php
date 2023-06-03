@@ -3960,7 +3960,18 @@ class Admin_model extends CI_Model
         return $data;
 
     }
+    
+    public function getpriviousscrpareturn(){
+        $this->db->select('challan_id');
+        $this->db->where(TBL_SCRAP_RETURN.'.status', 1);
+        $this->db->limit(1);
+        $this->db->order_by(TBL_SCRAP_RETURN.'.id','DESC');
+        $query = $this->db->get(TBL_SCRAP_RETURN);
+        $rowcount = $query->result_array();
+        return $rowcount;
 
+
+    }
 
 }
 

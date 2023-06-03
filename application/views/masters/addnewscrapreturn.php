@@ -25,8 +25,8 @@
                             <div class="box-body">
                                 <div class="col-md-4">
                                     <?php
-                                        if($getPreviousPONumber['challan_id']){
-                                                $arr = str_split($getPreviousPONumber['challan_id']);
+                                        if($getpriviousscrapreturn['challan_id']){
+                                                $arr = str_split($getpriviousscrapreturn['challan_id']);
                                                 $i = end($arr);
                                                 $inrno= "SQSR2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
                                                 $challan_id = $inrno;
@@ -209,7 +209,7 @@
                                                                 <option st-id="" value="">Select HSN Code</option>
                                                                     <option value="74040029" selected>74040029</option>
                                                             </select>
-                                                            <p class="error description_error"></p>
+                                                            <p class="error hsn_code_error"></p>
                                                         </div>
                                                     </div>
 
