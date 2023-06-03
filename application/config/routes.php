@@ -236,6 +236,10 @@ $route['deletescrapreturn'] = "admin/deletescrapreturn";
 $route['savescrapreturnitem'] = "admin/savescrapreturnitem";
 $route['deletescrapreturnitem'] = "admin/deletescrapreturnitem";
 
+$route['editscrapreturn/(:any)'] = "admin/editscrapreturn/$1";
+
+
+
 
 
 

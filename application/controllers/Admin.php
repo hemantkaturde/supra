@@ -5713,7 +5713,15 @@ class Admin extends BaseController
                     'supplier_id'=> trim($this->input->post('supplier_name')),
                     'remarks'=> trim($this->input->post('remark')),
                 );
-                $saveScrapreturn = $this->admin_model->saveScrapreturn('',$data);
+
+                if(trim($this->input->post('challan_table_id'))){
+                    $saveScrapreturn = $this->admin_model->saveScrapreturn(trim($this->input->post('challan_table_id')),$data);
+                }else{
+
+                    $saveScrapreturn = $this->admin_model->saveScrapreturn('',$data);
+                }
+
+               
                 if($saveScrapreturn){
 
                     $update_last_inserted_id_scarp_retuns = $this->admin_model->update_last_inserted_id_scarp_retuns($saveScrapreturn);
@@ -5809,22 +5817,47 @@ class Admin extends BaseController
             }else{
 
                 
-                $data = array(
-                    'description' =>  trim($this->input->post('description')),
-                    'gross_weight' =>  trim($this->input->post('gross_weight')),
-                    'net_weight' =>  trim($this->input->post('net_weight')),
-                    'quantity' =>  trim($this->input->post('quantity')),
-                    'number_of_bags' =>  trim($this->input->post('number_of_bags')),
-                    'hsn_code' =>  trim($this->input->post('hsn_code')),
-                    'estimated_value' =>  trim($this->input->post('estimated_value')),
-                    'number_of_processing' =>  trim($this->input->post('number_of_processing')),
-                    'remarks' =>  trim($this->input->post('item_remark')),
-                    'pre_challan_date' =>  trim($this->input->post('pre_challan_date')),
-                    'pre_vendor_name' =>  trim($this->input->post('pre_vendor_name')),
-                    'pre_supplier_name' =>  trim($this->input->post('pre_supplier_name')),
-                    'pre_remark' =>  trim($this->input->post('pre_remark')),
-                );
+                $challan_table_id =  trim($this->input->post('challan_table_id'));
 
+                if($challan_table_id){
+
+                    $data = array(
+                        'description' =>  trim($this->input->post('description')),
+                        'scrap_return_id' => $challan_table_id,
+                        'gross_weight' =>  trim($this->input->post('gross_weight')),
+                        'net_weight' =>  trim($this->input->post('net_weight')),
+                        'quantity' =>  trim($this->input->post('quantity')),
+                        'number_of_bags' =>  trim($this->input->post('number_of_bags')),
+                        'hsn_code' =>  trim($this->input->post('hsn_code')),
+                        'estimated_value' =>  trim($this->input->post('estimated_value')),
+                        'number_of_processing' =>  trim($this->input->post('number_of_processing')),
+                        'remarks' =>  trim($this->input->post('item_remark')),
+                        'pre_challan_date' =>  trim($this->input->post('pre_challan_date')),
+                        'pre_vendor_name' =>  trim($this->input->post('pre_vendor_name')),
+                        'pre_supplier_name' =>  trim($this->input->post('pre_supplier_name')),
+                        'pre_remark' =>  trim($this->input->post('pre_remark')),
+                    );
+
+                }else{
+
+                    $data = array(
+                        'description' =>  trim($this->input->post('description')),
+                        'gross_weight' =>  trim($this->input->post('gross_weight')),
+                        'net_weight' =>  trim($this->input->post('net_weight')),
+                        'quantity' =>  trim($this->input->post('quantity')),
+                        'number_of_bags' =>  trim($this->input->post('number_of_bags')),
+                        'hsn_code' =>  trim($this->input->post('hsn_code')),
+                        'estimated_value' =>  trim($this->input->post('estimated_value')),
+                        'number_of_processing' =>  trim($this->input->post('number_of_processing')),
+                        'remarks' =>  trim($this->input->post('item_remark')),
+                        'pre_challan_date' =>  trim($this->input->post('pre_challan_date')),
+                        'pre_vendor_name' =>  trim($this->input->post('pre_vendor_name')),
+                        'pre_supplier_name' =>  trim($this->input->post('pre_supplier_name')),
+                        'pre_remark' =>  trim($this->input->post('pre_remark')),
+                    );
+
+                }
+                
                 $saveIncomingdetailsitem= $this->admin_model->saveNewscrapreturn('',$data);
 
                 if($saveIncomingdetailsitem){
@@ -5854,6 +5887,23 @@ class Admin extends BaseController
         }
 
 
+
+    }
+
+
+    public function editscrapreturn($scrapreturnid){
+
+        $process = 'Edit Scrap Return';
+        $processFunction = 'Admin/editscrapreturn';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Edit Scrap Return';
+
+        $data['supplierList']= $this->admin_model->fetchALLsupplierList();
+        $data['vendorList']= $this->admin_model->fetchALLvendorList();
+        $data['getScrapreturndetails']= $this->admin_model->getScrapreturndetails($scrapreturnid);
+        $data['fetchALLprescrapreturndetailsforview']= $this->admin_model->fetchALLprescrapreturndetailsforview($scrapreturnid);
+
+        $this->loadViews("masters/editscrapreturn", $this->global, $data, NULL);
 
     }
 

@@ -3934,6 +3934,34 @@ class Admin_model extends CI_Model
     }
 
 
+    
+    public function getScrapreturndetails($scrapreturnid){
+        $this->db->select('*,'.TBL_SUPPLIER.'.supplier_name as supliername,'.TBL_VENDOR.'.vendor_name vendorname');
+        $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_SCRAP_RETURN.'.supplier_id','left');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_SCRAP_RETURN.'.vendor_id','left');
+        $this->db->where(TBL_SCRAP_RETURN.'.status',1);
+        $this->db->where(TBL_SCRAP_RETURN.'.id',$scrapreturnid);
+        $query = $this->db->get(TBL_SCRAP_RETURN);
+        $data = $query->result_array();
+        return $data;
+
+    }
+
+
+    public function fetchALLprescrapreturndetailsforview($scrapreturnid){
+
+        $this->db->select('*,'.TBL_SUPPLIER.'.supplier_name as supliername,'.TBL_VENDOR.'.vendor_name vendorname,'.TBL_SCRAP_RETURN_ITEM.'.id as scrapreturnid');
+        $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_SCRAP_RETURN_ITEM.'.pre_supplier_name','left');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_SCRAP_RETURN_ITEM.'.pre_vendor_name','left');
+        $this->db->where(TBL_SCRAP_RETURN_ITEM.'.scrap_return_id',$scrapreturnid);
+        $this->db->order_by(TBL_SCRAP_RETURN_ITEM.'.id','desc');
+        $query = $this->db->get(TBL_SCRAP_RETURN_ITEM);
+        $data = $query->result_array();
+        return $data;
+
+    }
+
+
 }
 
 ?>

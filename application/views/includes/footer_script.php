@@ -7493,7 +7493,7 @@
 
 
 
-<?php if($pageTitle=='Scrap Return' || $pageTitle=="Add New Scrap Return"){ ?>
+<?php if($pageTitle=='Scrap Return' || $pageTitle=="Add New Scrap Return" || $pageTitle=="Edit Scrap Return"){ ?>
 	<script type="text/javascript">
        $(document).ready(function() {
 		    var dt = $('#view_scrap_return').DataTable({
@@ -7636,12 +7636,14 @@
 			   var pre_supplier_name =   $('#supplier_name').val();
 			   var pre_remark =   $('#remark').val();
 
+			   var challan_table_id = $('#challan_table_id').val();
+
 
 			$.ajax({
 				url : "<?php echo base_url();?>savescrapreturnitem",
 				type: "POST",
 				 //data : formData,
-				 data :{ description:description,gross_weight:gross_weight,net_weight:net_weight,quantity:quantity,number_of_bags:number_of_bags,hsn_code:hsn_code,estimated_value:estimated_value,number_of_processing:number_of_processing,item_remark:item_remark,pre_challan_date:pre_challan_date,pre_vendor_name:pre_vendor_name,pre_supplier_name:pre_supplier_name,pre_remark:pre_remark },
+				 data :{ description:description,gross_weight:gross_weight,net_weight:net_weight,quantity:quantity,number_of_bags:number_of_bags,hsn_code:hsn_code,estimated_value:estimated_value,number_of_processing:number_of_processing,item_remark:item_remark,pre_challan_date:pre_challan_date,pre_vendor_name:pre_vendor_name,pre_supplier_name:pre_supplier_name,pre_remark:pre_remark,challan_table_id:challan_table_id },
 				// method: "POST",
                 // data :{package_id:package_id},
                 cache:false,
@@ -7665,7 +7667,15 @@
 							button: "Ok",
 							},function(){ 
 
-									window.location.href = "<?php echo base_url().'addnewScrapreturn'?>";	
+								if(challan_table_id){
+									window.location.href = "<?php echo base_url().'editscrapreturn/'?>"+challan_table_id;
+
+								}else{
+									window.location.href = "<?php echo base_url().'addnewScrapreturn'?>";
+
+								}
+
+										
 						});		
 				    }
 					
