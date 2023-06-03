@@ -37,8 +37,25 @@
                                     </div>
                                 </div>
 
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="email">From Date</label>
+                                            <input type="text" class="form-control datepicker"  value="<?=$date?>" id="challan_date" name="challan_date" required>
+                                            <p class="error status_error"></p>
+                                    </div>
+                                </div>
 
-                                <div class="col-md-3">
+
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="email">To Date</label>
+                                        <input type="text" class="form-control datepicker"  value="<?=$date?>" id="challan_date" name="challan_date" required>
+                                        <p class="error status_error"></p>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-2">
                                     <div class="form-group">
                                         <label for="email">Status</label>
                                            <select class="form-control" name="status" id="report_type">
@@ -49,10 +66,18 @@
                                             <p class="error status_error"></p>
                                     </div>
                                 </div>
+
+                                
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <div style="margin-top:22px">
+                                             <input type="button"  class="btn btn-default" value="Export To Excel" />
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                                 
                                
-
                             </div>    
                             <!-- /.box-body -->
                             <div class="box-footer">
