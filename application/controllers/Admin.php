@@ -5908,4 +5908,14 @@ class Admin extends BaseController
     }
 
 
+    public function currentorderstatus(){
+
+        $process = 'Current Order Status';
+        $processFunction = 'Admin/currentorderstatus';
+        $this->global['pageTitle'] = 'Current Order Status';
+        $this->loadViews("masters/currentorderstatus", $this->global, $data, NULL);  
+
+    }
+
+
 }
