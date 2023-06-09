@@ -7970,6 +7970,51 @@
 	//    });
 
 
+	
+
+	$(document).on('click','#export_to_excel',function(e){
+			e.preventDefault();
+
+              
+			var report_type = $("#report_type").val();
+
+
+			 if(report_type=='ALL'){
+
+				$(".report_type_error").append("Please Select Report Type");
+                return true;
+
+			 }
+
+			
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>admin/downlaod_current_orderstatus",
+				type: "POST",
+				// data : {'hospitals' : hospitals, 'driver' : driver,'ride_start':ride_start,'ride_stop':ride_stop},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+				    {
+						$(".report_type_error").html("");
+				    	alert('No data fond');
+				    }
+				    else
+				    {
+						$(".report_type_error").html("");
+				    	window.location.href = "<?php echo ADMIN_PATH.'admin/downlaod_current_orderstatus';?>";
+				    }
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   		alert('No data fond');
+					$(".loader_ajax").hide();
+			    }
+			});
+		   return false;
+	});
+
+
 
     </script>  
 <?php } ?>

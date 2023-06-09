@@ -20,6 +20,7 @@ class Admin extends BaseController
         $this->load->model('user_model');
         $this->load->model('admin_model');
         $this->load->library('form_validation');
+        $this->load->library('excel');
         // Datas -> libraries ->BaseController / This function used load user sessions
         $this->datas();
         // isLoggedIn / Login control function /  This function used login control
@@ -5947,5 +5948,73 @@ class Admin extends BaseController
 
     }
 
+
+
+    public function downlaod_current_orderstatus() {
+            // create file name
+            $fileName = 'data-'.time().'.xlsx';  
+            // load excel library
+            $empInfo = $this->admin_model->getallcurrentstatusorder();
+            $objPHPExcel = new PHPExcel();
+            $objPHPExcel->setActiveSheetIndex(0);
+            // set Header
+            $objPHPExcel->getActiveSheet()->SetCellValue('A1', 'Buyer Name');
+            $objPHPExcel->getActiveSheet()->SetCellValue('B1', 'Buyer PO No');
+            $objPHPExcel->getActiveSheet()->SetCellValue('C1', 'Buyer PO Date');
+            $objPHPExcel->getActiveSheet()->SetCellValue('D1', 'Buyer Part No');
+            $objPHPExcel->getActiveSheet()->SetCellValue('E1', 'Buyer Order Qty');    
+            $objPHPExcel->getActiveSheet()->SetCellValue('F1', 'Buyer Delivery Date');
+            $objPHPExcel->getActiveSheet()->SetCellValue('G1', 'Vendor PO Number');
+            $objPHPExcel->getActiveSheet()->SetCellValue('H1', 'Vendor PO DATE');
+            $objPHPExcel->getActiveSheet()->SetCellValue('I1', 'Raw Material Supplier');   
+            $objPHPExcel->getActiveSheet()->SetCellValue('J1', 'Vendor');  
+            $objPHPExcel->getActiveSheet()->SetCellValue('K1', 'Part Description');  
+            $objPHPExcel->getActiveSheet()->SetCellValue('L1', 'Part No');  
+            $objPHPExcel->getActiveSheet()->SetCellValue('M1', 'Order Quantity');  
+            $objPHPExcel->getActiveSheet()->SetCellValue('N1', 'Delivery Date');  
+            $objPHPExcel->getActiveSheet()->SetCellValue('O1', 'Received Quantity');  
+            $objPHPExcel->getActiveSheet()->SetCellValue('P1', 'Scrap Received');  
+            $objPHPExcel->getActiveSheet()->SetCellValue('Q1', 'Current Status');  
+            $objPHPExcel->getActiveSheet()->SetCellValue('R1', 'Remarks');  
+
+            // set Row
+            $rowCount = 2;
+            foreach ($empInfo as $element) {
+                $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $element['buyer_name']);
+                $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $element['sales_order_number']);
+                $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $element['buyer_po_date']);
+                $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['part_number'] .' - '. $element['partname']);
+                $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, '');
+                $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['buyer_delivery_date']);
+                $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['vendor_po']);
+                $rowCount++;
+            }
+
+            foreach(range('A','R') as $columnID) {
+                $objPHPExcel->getActiveSheet()->getColumnDimension($columnID)->setAutoSize(true);
+			}
+			/*********************Autoresize column width depending upon contents END***********************/
+			
+            $objPHPExcel->getActiveSheet()->getStyle('A1:R1')->getFont()->setBold(true); //Make heading font bold
+			
+			/*********************Add color to heading START**********************/
+            $objPHPExcel->getActiveSheet()
+						->getStyle('A1:R1')
+						->getFill()
+						->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
+						->getStartColor()
+						->setARGB('99ff99');
+
+
+            $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
+              
+            header('Content-Type: application/vnd.ms-excel');
+			header("Content-Disposition: attachment;Filename=$fileName.xls");
+			header('Cache-Control: max-age=0');
+			$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+			$objWriter->save('php://output');
+
+    }
+        
 
 }

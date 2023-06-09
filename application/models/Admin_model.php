@@ -4036,6 +4036,39 @@ class Admin_model extends CI_Model
 
     }
 
+
+    public function getallcurrentstatusorder(){
+
+        $this->db->select(array('bom_number', TBL_BILL_OF_MATERIAL.'.date', 
+                                'vendor_po_number', 
+                                'vendor_name',
+                                'supplier_name', 
+                                 TBL_BUYER_MASTER.'.buyer_name', 
+                                 TBL_BUYER_PO_MASTER.'.buyer_po_date',
+                                 TBL_BUYER_PO_MASTER.'.sales_order_number',
+                                 TBL_FINISHED_GOODS.'.name as partname',
+                                 TBL_FINISHED_GOODS.'.part_number as part_number',
+                                 TBL_BILL_OF_MATERIAL.'.buyer_delivery_date',
+                                 TBL_VENDOR_PO_MASTER.'.po_number as vendor_po'
+                                
+                                ));
+
+        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_BILL_OF_MATERIAL.'.buyer_name');
+        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_BILL_OF_MATERIAL.'.buyer_po_number');
+        $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id = '.TBL_BUYER_PO_MASTER.'.id');
+
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
+
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_BILL_OF_MATERIAL.'.vendor_name');
+
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id  = '.TBL_BILL_OF_MATERIAL.'.vendor_po_number');
+
+
+        $this->db->from(TBL_BILL_OF_MATERIAL);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
 }
 
 ?>

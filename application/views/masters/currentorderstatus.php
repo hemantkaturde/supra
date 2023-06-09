@@ -25,11 +25,21 @@
                             <div class="box-body">
 
                                 <div class="row">
-                                    <div class="col-md-3">
+
+
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="search">Search</label>
+                                                <input type="text"  class="form-control" placeholder="Search..."  id="search" name="search" />
+                                                <p class="error search_error"></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
                                         <div class="form-group">
                                             <label for="fname">Report Type <span class="required">*</span></label>
                                                 <select class="form-control" name="report_type" id="report_type">
-                                                    <option st-id="" value="">Select Report Type</option>
+                                                    <option st-id="" value="ALL">Select Report Type</option>
                                                     <option value="bill_of_material">Bill Of Material </option>
                                                     <option value="vendor_bill_of_material">Vendor Bill Of Material</option>
                                                 </select>
@@ -63,6 +73,7 @@
                                             <label for="email">Status</label>
                                             <select class="form-control" name="status" id="status">
                                                     <option st-id="" value="NA">Select Status</option>
+                                                    <option st-id="" value="NA">ALL</option>
                                                     <option value="open">Open </option>
                                                     <option value="close">Close</option>
                                                 </select>
@@ -70,11 +81,13 @@
                                         </div>
                                     </div>
 
+
                                     
                                     <div class="col-md-2">
                                         <div class="form-group">
                                             <div style="margin-top:22px">
-                                                <input type="button"  class="btn btn-default" value="Export To Excel" />
+                                                <!-- <input type="button"  class="btn btn-primary" value="Search" id="search" name="search" /> -->
+                                                <input type="button"  class="btn btn-primary" value="Export To Excel"  id="export_to_excel" name="export_to_excel" />
                                             </div>
                                         </div>
                                     </div>
