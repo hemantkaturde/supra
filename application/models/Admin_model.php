@@ -4040,9 +4040,6 @@ class Admin_model extends CI_Model
     public function getallcurrentstatusorder(){
 
         $this->db->select(array('bom_number', TBL_BILL_OF_MATERIAL.'.date', 
-                                'vendor_po_number', 
-                                'vendor_name',
-                                'supplier_name', 
                                  TBL_BUYER_MASTER.'.buyer_name', 
                                  TBL_BUYER_PO_MASTER.'.buyer_po_date',
                                  TBL_BUYER_PO_MASTER.'.sales_order_number',
