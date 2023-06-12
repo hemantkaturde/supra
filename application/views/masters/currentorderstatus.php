@@ -29,7 +29,7 @@
                                         <div class="form-group">
                                             <label for="vendor_name">Vendor Name <span class="required">*</span></label>
                                                 <select class="form-control" name="vendor_name" id="vendor_name">
-                                                    <option st-id="" value="">Select Vendor Name</option>
+                                                    <option st-id="" value="NA">Select Vendor Name</option>
                                                     <?php foreach ($vendorList as $key => $value) {?>
                                                     <option value="<?php echo $value['ven_id']; ?>"  <?php if($value['ven_id']==$fetchALLpresupplieritemList[0]['pre_vendor_name']){ echo 'selected';} ?> ><?php echo $value['vendor_name']; ?></option>
                                                     <?php } ?>
@@ -44,8 +44,8 @@
                                             <select class="form-control" name="status" id="status">
                                                     <option st-id="" value="NA">Select Status</option>
                                                     <option st-id="" value="NA">ALL</option>
-                                                    <option value="open">Open </option>
-                                                    <option value="close">Close</option>
+                                                    <option value="OPEN">Open </option>
+                                                    <option value="CLOSE">Close</option>
                                                 </select>
                                                 <p class="error status_error"></p>
                                         </div>

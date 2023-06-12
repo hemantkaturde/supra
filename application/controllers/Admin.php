@@ -5914,9 +5914,6 @@ class Admin extends BaseController
 
     public function currentorderstatus(){
 
-
-
-        
         $process = 'Current Order Status';
         $processFunction = 'Admin/currentorderstatus';
         $this->global['pageTitle'] = 'Current Order Status';
@@ -5953,11 +5950,11 @@ class Admin extends BaseController
     }
 
 
-    public function fetchcurrentorderstatusreport(){
+    public function fetchcurrentorderstatusreport($vendor_name,$status){
 
         $params = $_REQUEST;
         $totalRecords = $this->admin_model->fetchcurrentorderstatusreportcount($params,$vendor_name,$status); 
-        $queryRecords = $this->admin_model->fetchcurrentorderstatusreportdate($params,$vendor_name,$status); 
+        $queryRecords = $this->admin_model->fetchcurrentorderstatusreportdata($params,$vendor_name,$status); 
 
         $data = array();
         foreach ($queryRecords as $key => $value)
@@ -5981,11 +5978,13 @@ class Admin extends BaseController
 
 
 
-    public function downlaod_current_orderstatus() {
+    public function downlaod_current_orderstatus($vendor_name,$status) {
+
+    
             // create file name
-            $fileName = 'data-'.time().'.xlsx';  
+            $fileName = 'Current_Order_Status_Report -'.date('d-m-Y').'.xlsx';  
             // load excel library
-            $empInfo = $this->admin_model->getallcurrentstatusorder();
+            $empInfo = $this->admin_model->getallcurrentstatusorder($vendor_name,$status);
             $objPHPExcel = new PHPExcel();
             $objPHPExcel->setActiveSheetIndex(0);
             // set Header
@@ -6015,9 +6014,21 @@ class Admin extends BaseController
                 $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $element['sales_order_number']);
                 $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $element['buyer_po_date']);
                 $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['part_number'] .' - '. $element['partname']);
-                $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, '');
+                $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['vendor_order_qty']);
                 $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['buyer_delivery_date']);
                 $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['vendor_po']);
+                $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $element['date']);
+                $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, "");
+                $objPHPExcel->getActiveSheet()->SetCellValue('J' . $rowCount, $element['vendor']);
+                $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, $element['partname']);
+                $objPHPExcel->getActiveSheet()->SetCellValue('L' . $rowCount, $element['part_number']);
+                $objPHPExcel->getActiveSheet()->SetCellValue('M' . $rowCount, $element['vendor_order_qty']);
+                $objPHPExcel->getActiveSheet()->SetCellValue('N' . $rowCount, $element['buyer_delivery_date']); 
+                $objPHPExcel->getActiveSheet()->SetCellValue('O' . $rowCount, $element['vendor_received_qty']); 
+                $objPHPExcel->getActiveSheet()->SetCellValue('P' . $rowCount, ""); 
+                $objPHPExcel->getActiveSheet()->SetCellValue('Q' . $rowCount,$element['bom_status']); 
+                $objPHPExcel->getActiveSheet()->SetCellValue('R' . $rowCount,$element['item_remark']); 
+
                 $rowCount++;
             }
 

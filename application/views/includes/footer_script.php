@@ -7742,33 +7742,110 @@
 <?php if($pageTitle=='Current Order Status'){ ?>
 
 	<script type="text/javascript">
-      $(document).ready(function() {
-		    var dt = $('#view_current_order_status').DataTable({
-	            "columnDefs": [ 
-	                 { className: "details-control", "targets": [ 0 ] },
-	                 { "width": "10%", "targets": 0 },
-	                 { "width": "10%", "targets": 1 },
-					 { "width": "10%", "targets": 2 },
-	                 { "width": "10%", "targets": 3 },
-					 { "width": "10%", "targets": 4 },
-					 { "width": "10%", "targets": 5 },
-	            ],
-	            responsive: true,
-	            "oLanguage": {
-	                "sEmptyTable": "<i>No Current Order Status Found.</i>",
-	            }, 
-	            "bSort" : false,
-	            "bFilter":true,
-	            "bLengthChange": true,
-	            "iDisplayLength": 10,   
-	            "bProcessing": true,
-	            "serverSide": true,
-	            "ajax":{
-                    url :"<?php echo base_url();?>fetchcurrentorderstatusreport",
-                    type: "post",
-	            },
-	        });
-	   });
+      
+		$(document).ready(function() {
+		    $("#view_current_order_status").dataTable().fnDestroy();
+			var vendor_name = $('#vendor_name').val();
+			var status = $('#status').val();
+			getallCurrentOrserReport($("#vendor_name").val(), $("#status").val());
+	    });
+
+		$(document).on('change','#vendor_name',function(e){  
+			$("#view_current_order_status").dataTable().fnDestroy();
+				e.preventDefault();
+				var vendor_name = $('#vendor_name').val();
+				var status = $('#status').val();
+				getallCurrentOrserReport($("#vendor_name").val(), $("#status").val());
+		});
+
+		$(document).on('change','#status',function(e){  
+			$("#view_current_order_status").dataTable().fnDestroy();
+
+			e.preventDefault();
+			var vendor_name = $('#vendor_name').val();
+			var status = $('#status').val();
+			getallCurrentOrserReport($("#vendor_name").val(), $("#status").val());
+		});
+
+		function getallCurrentOrserReport(vendor_name,status){
+
+				var dt = $('#view_current_order_status').DataTable({
+					"columnDefs": [ 
+						{ className: "details-control", "targets": [ 0 ] },
+						{ "width": "10%", "targets": 0 },
+						{ "width": "10%", "targets": 1 },
+						{ "width": "10%", "targets": 2 },
+						{ "width": "10%", "targets": 3 },
+						{ "width": "10%", "targets": 4 },
+						{ "width": "10%", "targets": 5 },
+					],
+					responsive: true,
+					"oLanguage": {
+						"sEmptyTable": "<i>No Current Order Status Found.</i>",
+					}, 
+					"bSort" : false,
+					"bFilter":true,
+					"bLengthChange": true,
+					"iDisplayLength": 10,   
+					"bProcessing": true,
+					"serverSide": true,
+					"ajax":{
+						url :"<?php echo base_url();?>admin/fetchcurrentorderstatusreport/"+vendor_name+"/"+status,
+						type: "post",
+					},
+				});
+
+		}
+
+
+		
+	    $(document).on('click','#export_to_excel',function(e){
+			e.preventDefault();
+
+			var vendor_name       =    $('#vendor_name').val();
+			var status         =    $("#status").val();
+
+			if(vendor_name){
+			    var vendor_name_value = vendor_name;
+			}else{
+				var vendor_name_value = 'NA';
+			}
+
+			if(status){
+
+				var status_value = status;
+			}else{
+
+				var status_value = 'NA';
+			}
+ 
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>admin/downlaod_current_orderstatus/"+vendor_name_value+"/"+status_value,
+				type: "POST",
+				// data : {'hospitals' : hospitals, 'driver' : driver,'ride_start':ride_start,'ride_stop':ride_stop},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+				    {
+						$(".report_type_error").html("");
+				    	alert('No data fond');
+				    }
+				    else
+				    {
+						$(".report_type_error").html("");
+				    	window.location.href = "<?php echo ADMIN_PATH;?>admin/downlaod_current_orderstatus/"+vendor_name+"/"+status;
+				    }
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   		alert('No data fond');
+					$(".loader_ajax").hide();
+			    }
+			});
+		   return false;
+	    });
+
 
 
     </script>  
