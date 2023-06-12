@@ -24,49 +24,19 @@
                         <form role="form" id="addnewScrapreturnform" action="<?php echo base_url() ?>addnewScrapreturnform" method="post" role="form">
                             <div class="box-body">
 
-                                <div class="row">
-
-
-                                    <div class="col-md-2">
+                                <div class="row" style="margin-left:4px">
+                                    <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="search">Search</label>
-                                                <input type="text"  class="form-control" placeholder="Search..."  id="search" name="search" />
-                                                <p class="error search_error"></p>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <label for="fname">Report Type <span class="required">*</span></label>
-                                                <select class="form-control" name="report_type" id="report_type">
-                                                    <option st-id="" value="ALL">Select Report Type</option>
-                                                    <option value="bill_of_material">Bill Of Material </option>
-                                                    <option value="vendor_bill_of_material">Vendor Bill Of Material</option>
+                                            <label for="vendor_name">Vendor Name <span class="required">*</span></label>
+                                                <select class="form-control" name="vendor_name" id="vendor_name">
+                                                    <option st-id="" value="">Select Vendor Name</option>
+                                                    <?php foreach ($vendorList as $key => $value) {?>
+                                                    <option value="<?php echo $value['ven_id']; ?>"  <?php if($value['ven_id']==$fetchALLpresupplieritemList[0]['pre_vendor_name']){ echo 'selected';} ?> ><?php echo $value['vendor_name']; ?></option>
+                                                    <?php } ?>
                                                 </select>
-                                                <p class="error report_type_error"></p>
+                                            <p class="error vendor_name_error"></p>
                                         </div>
                                     </div>
-
-                                    <?php  $form_date= date('Y-m-01');?>
-
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <label for="email">From Date</label>
-                                                <input type="text" class="form-control datepicker"  value="<?=$form_date?>" id="from_date" name="from_date">
-                                                <p class="error status_error"></p>
-                                        </div>
-                                    </div>
-
-                                    <?php  $to_date= date('Y-m-t');?>
-
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <label for="email">To Date</label>
-                                            <input type="text" class="form-control datepicker"  value="<?=$to_date?>" id="to_date" name="challan_date">
-                                            <p class="error status_error"></p>
-                                        </div>
-                                    </div>
-
 
                                     <div class="col-md-2">
                                         <div class="form-group">
@@ -80,8 +50,6 @@
                                                 <p class="error status_error"></p>
                                         </div>
                                     </div>
-
-
                                     
                                     <div class="col-md-2">
                                         <div class="form-group">
@@ -92,19 +60,18 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+                            
 
-                                <div id="vendor_bill_of_material" style="display:none">
-                                    <h5>Vendor Bill Of Material</h5>
                                     <div class="panel-body">
-                                            <table width="100%" class="table table-striped table-bordered table-hover" id="view_vendorbillofmaterialVendor">
+                                        <table width="100%" class="table table-striped table-bordered table-hover" id="view_current_order_status">
                                             <thead>
                                                 <tr style="background-color:#3c8dbc !important;color:#fff">
-                                                    <th>BOM No</th>
-                                                    <th>BOM Date</th>
-                                                    <th>Vendor PO No</th>
-                                                    <th>Vendor Name</th>
-                                                    <th>Status</th>
+                                                    <th>Vendor PO Number</th>
+                                                    <th>Vendor PO Date</th>
+                                                    <th>FG Part No</th>
+                                                    <th>Order Qty</th>
+                                                    <th>Received Qty</th>
+                                                    <th>Buyer Name</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -112,29 +79,7 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                </div>
-
-
-                                <div id="bill_of_material" style="display:none">
-                                    <h5> Bill Of Material</h5>
-                                    <div class="panel-body">
-                                        <table width="100%" class="table table-striped table-bordered table-hover" id="view_billofmaterial">
-                                            <thead>
-                                                <tr style="background-color:#3c8dbc !important;color:#fff">
-                                                    <th>BOM No</th>
-                                                    <th>Date</th>
-                                                    <th>Vendor PO No</th>
-                                                    <th>Vendor Name</th>
-                                                    <th>Status</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                            
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>    
+                              
                             <!-- /.box-body -->
                             <div class="box-footer">
 

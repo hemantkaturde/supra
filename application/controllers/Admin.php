@@ -5914,9 +5914,13 @@ class Admin extends BaseController
 
     public function currentorderstatus(){
 
+
+
+        
         $process = 'Current Order Status';
         $processFunction = 'Admin/currentorderstatus';
         $this->global['pageTitle'] = 'Current Order Status';
+        $data['vendorList']= $this->admin_model->fetchALLvendorList();
         $this->loadViews("masters/currentorderstatus", $this->global, $data, NULL);  
 
     }
@@ -5927,6 +5931,33 @@ class Admin extends BaseController
         $params = $_REQUEST;
         $totalRecords = $this->admin_model->fetchvendorBillofmaterialforcurrentorderstatusCount($params,$from_date,$to_date,$status); 
         $queryRecords = $this->admin_model->fetchvendorBillofmaterialforcurrentorderstatusdata($params,$from_date,$to_date,$status); 
+
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+        echo json_encode($json_data);
+
+    }
+
+
+    public function fetchcurrentorderstatusreport(){
+
+        $params = $_REQUEST;
+        $totalRecords = $this->admin_model->fetchcurrentorderstatusreportcount($params,$vendor_name,$status); 
+        $queryRecords = $this->admin_model->fetchcurrentorderstatusreportdate($params,$vendor_name,$status); 
 
         $data = array();
         foreach ($queryRecords as $key => $value)

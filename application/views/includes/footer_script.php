@@ -7742,278 +7742,33 @@
 <?php if($pageTitle=='Current Order Status'){ ?>
 
 	<script type="text/javascript">
-       $(document).ready(function() {
-		//   $('#bill_of_material').css('display','none');
-		//   $('#vendor_bill_of_material').css('display','none');
+      $(document).ready(function() {
+		    var dt = $('#view_current_order_status').DataTable({
+	            "columnDefs": [ 
+	                 { className: "details-control", "targets": [ 0 ] },
+	                 { "width": "10%", "targets": 0 },
+	                 { "width": "10%", "targets": 1 },
+					 { "width": "10%", "targets": 2 },
+	                 { "width": "10%", "targets": 3 },
+					 { "width": "10%", "targets": 4 },
+					 { "width": "10%", "targets": 5 },
+	            ],
+	            responsive: true,
+	            "oLanguage": {
+	                "sEmptyTable": "<i>No Current Order Status Found.</i>",
+	            }, 
+	            "bSort" : false,
+	            "bFilter":true,
+	            "bLengthChange": true,
+	            "iDisplayLength": 10,   
+	            "bProcessing": true,
+	            "serverSide": true,
+	            "ajax":{
+                    url :"<?php echo base_url();?>fetchcurrentorderstatusreport",
+                    type: "post",
+	            },
+	        });
 	   });
-
-
-	   $(document).on('change','#report_type',function(e){  
-			e.preventDefault();
-			
-			var report_type =  $('#report_type').val();
-			var from_date =  $('#from_date').val();
-			var to_date =  $('#to_date').val();
-			var status =  $('#status').val();
-
-
-			if(report_type=='vendor_bill_of_material'){
-
-				$("#view_vendorbillofmaterialVendor").dataTable().fnDestroy();
-				var dt = $('#view_vendorbillofmaterialVendor').DataTable({
-					"columnDefs": [ 
-						{ className: "details-control", "targets": [ 0 ] },
-						{ "width": "10%", "targets": 0 },
-						{ "width": "10%", "targets": 1 },
-						{ "width": "15%", "targets": 2 },
-						{ "width": "10%", "targets": 3 },
-						{ "width": "15%", "targets": 4 },				
-					],
-					responsive: true,
-					"oLanguage": {
-						"sEmptyTable": "<i>No Vendor BOM List Not Found.</i>",
-					}, 
-					"bSort" : false,
-					"bFilter":true,
-					"bLengthChange": true,
-					"iDisplayLength": 10,   
-					"bProcessing": true,
-					"serverSide": true,
-					"ajax":{
-						url :"<?php echo base_url();?>admin/fetchvendorBillofmaterialforcurrentorderstatus/"+from_date+"/"+to_date+"/"+status,
-						type: "post",
-					},
-				});
-
-				$('#vendor_bill_of_material').css('display','block');
-				$('#bill_of_material').css('display','none');
-
-			}else if(report_type=='bill_of_material'){
-
-				$("#view_billofmaterial").dataTable().fnDestroy();
-	            var dt = $('#view_billofmaterial').DataTable({
-					"columnDefs": [ 
-						{ className: "details-control", "targets": [ 0 ] },
-						{ "width": "10%", "targets": 0 },
-						{ "width": "10%", "targets": 1 },
-						{ "width": "15%", "targets": 2 },
-						{ "width": "10%", "targets": 3 },
-						{ "width": "8%", "targets": 4 },					
-					],
-					responsive: true,
-					"oLanguage": {
-						"sEmptyTable": "<i>No BOM List Not Found.</i>",
-					}, 
-					"bSort" : false,
-					"bFilter":true,
-					"bLengthChange": true,
-					"iDisplayLength": 10,   
-					"bProcessing": true,
-					"serverSide": true,
-					"ajax":{
-						url :"<?php echo base_url();?>fetchBillofmaterial",
-						type: "post",
-					},
-	            });
-
-				$('#vendor_bill_of_material').css('display','none');
-				$('#bill_of_material').css('display','block');
-
-			}else{
-				$('#bill_of_material').css('display','none');
-				$('#vendor_bill_of_material').css('display','none');
-			}
-
-
-			// if(report_type=='vendor_bill_of_material'){
-			// 	$('#bill_of_material').css('display','none');
-		    //     $('#vendor_bill_of_material').css('display','block');
-
-			// 	var dt = $('#view_vendorbillofmaterialVendor').DataTable({
-	        //     "columnDefs": [ 
-	        //          { className: "details-control", "targets": [ 0 ] },
-	        //          { "width": "10%", "targets": 0 },
-	        //          { "width": "10%", "targets": 1 },
-			// 		 { "width": "15%", "targets": 2 },
-	        //          { "width": "10%", "targets": 3 },
-			// 		 { "width": "15%", "targets": 4 },				
-	        //     ],
-	        //     responsive: true,
-	        //     "oLanguage": {
-	        //         "sEmptyTable": "<i>No Vendor BOM List Not Found.</i>",
-	        //     }, 
-	        //     "bSort" : false,
-	        //     "bFilter":true,
-	        //     "bLengthChange": true,
-	        //     "iDisplayLength": 10,   
-	        //     "bProcessing": true,
-	        //     "serverSide": true,
-	        //     "ajax":{
-            //         url :"<?php echo base_url();?>admin/fetchvendorBillofmaterialforcurrentorderstatus/"+from_date+"/"+to_date+"/"+status,
-            //         type: "post",
-	        //     },
-	        //    });
-				
-			// }
-
-			// if(report_type=='bill_of_material'){
-
-			// 	$('#bill_of_material').css('display','block');
-		    //     $('#vendor_bill_of_material').css('display','none');
-
-			// 	var dt = $('#view_billofmaterial').DataTable({
-	        //     "columnDefs": [ 
-	        //          { className: "details-control", "targets": [ 0 ] },
-	        //          { "width": "10%", "targets": 0 },
-	        //          { "width": "10%", "targets": 1 },
-			// 		 { "width": "15%", "targets": 2 },
-	        //          { "width": "10%", "targets": 3 },
-			// 		 { "width": "8%", "targets": 4 },					
-	        //     ],
-	        //     responsive: true,
-	        //     "oLanguage": {
-	        //         "sEmptyTable": "<i>No BOM List Not Found.</i>",
-	        //     }, 
-	        //     "bSort" : false,
-	        //     "bFilter":true,
-	        //     "bLengthChange": true,
-	        //     "iDisplayLength": 10,   
-	        //     "bProcessing": true,
-	        //     "serverSide": true,
-	        //     "ajax":{
-            //         url :"<?php echo base_url();?>fetchBillofmaterial",
-            //         type: "post",
-	        //     },
-	        //     });
-
-
-			// }
-
-
-
-
-	   });
-
-	//    $(document).on('change','#status',function(e){  
-	// 		e.preventDefault();
-	// 		var report_type =  $('#report_type').val();
-
-			
-	// 		var from_date =  $('#from_date').val();
-	// 		var to_date =  $('#to_date').val();
-	// 		var status =  $('#status').val();
-
-	// 		if(report_type=='vendor_bill_of_material'){
-	// 			$('#bill_of_material').css('display','none');
-	// 	        $('#vendor_bill_of_material').css('display','block');
-
-	// 			var dt = $('#view_vendorbillofmaterialVendor').DataTable({
-	//             "columnDefs": [ 
-	//                  { className: "details-control", "targets": [ 0 ] },
-	//                  { "width": "10%", "targets": 0 },
-	//                  { "width": "10%", "targets": 1 },
-	// 				 { "width": "15%", "targets": 2 },
-	//                  { "width": "10%", "targets": 3 },
-	// 				 { "width": "15%", "targets": 4 },				
-	//             ],
-	//             responsive: true,
-	//             "oLanguage": {
-	//                 "sEmptyTable": "<i>No Vendor BOM List Not Found.</i>",
-	//             }, 
-	//             "bSort" : false,
-	//             "bFilter":true,
-	//             "bLengthChange": true,
-	//             "iDisplayLength": 10,   
-	//             "bProcessing": true,
-	//             "serverSide": true,
-	//             "ajax":{
-    //                 url :"<?php echo base_url();?>admin/fetchvendorBillofmaterialforcurrentorderstatus/"+from_date+"/"+to_date+"/"+status,
-    //                 type: "post",
-	//             },
-	//         });
-				
-	// 		}
-
-	// 		if(report_type=='bill_of_material'){
-
-	// 			$('#bill_of_material').css('display','block');
-	// 	        $('#vendor_bill_of_material').css('display','none');
-
-	// 			var dt = $('#view_billofmaterial').DataTable({
-	//             "columnDefs": [ 
-	//                  { className: "details-control", "targets": [ 0 ] },
-	//                  { "width": "10%", "targets": 0 },
-	//                  { "width": "10%", "targets": 1 },
-	// 				 { "width": "15%", "targets": 2 },
-	//                  { "width": "10%", "targets": 3 },
-	// 				 { "width": "8%", "targets": 4 },					
-	//             ],
-	//             responsive: true,
-	//             "oLanguage": {
-	//                 "sEmptyTable": "<i>No BOM List Not Found.</i>",
-	//             }, 
-	//             "bSort" : false,
-	//             "bFilter":true,
-	//             "bLengthChange": true,
-	//             "iDisplayLength": 10,   
-	//             "bProcessing": true,
-	//             "serverSide": true,
-	//             "ajax":{
-    //                 url :"<?php echo base_url();?>fetchBillofmaterial",
-    //                 type: "post",
-	//             },
-	//         });
-
-
-	// 		}
-
-	//    });
-
-
-	
-
-	$(document).on('click','#export_to_excel',function(e){
-			e.preventDefault();
-
-              
-			var report_type = $("#report_type").val();
-
-
-			 if(report_type=='ALL'){
-
-				$(".report_type_error").append("Please Select Report Type");
-                return true;
-
-			 }
-
-			
-			$.ajax({
-				url : "<?php echo ADMIN_PATH;?>admin/downlaod_current_orderstatus",
-				type: "POST",
-				// data : {'hospitals' : hospitals, 'driver' : driver,'ride_start':ride_start,'ride_stop':ride_stop},
-				success: function(data, textStatus, jqXHR)
-				{
-					$(".loader_ajax").hide();
-					if(data == "failure")
-				    {
-						$(".report_type_error").html("");
-				    	alert('No data fond');
-				    }
-				    else
-				    {
-						$(".report_type_error").html("");
-				    	window.location.href = "<?php echo ADMIN_PATH.'admin/downlaod_current_orderstatus';?>";
-				    }
-				},
-				error: function (jqXHR, textStatus, errorThrown)
-			    {
-			   		alert('No data fond');
-					$(".loader_ajax").hide();
-			    }
-			});
-		   return false;
-	});
-
 
 
     </script>  
