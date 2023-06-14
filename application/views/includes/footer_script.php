@@ -7850,7 +7850,7 @@
 
 
 
-<?php if($pageTitle=='Rework Rejection Return Form' || $pageTitle=='Add New Rework Rejection'){ ?>
+<?php if($pageTitle=='Rework Rejection Return Form' || $pageTitle=='Add New Rework Rejection' || $pageTitle=='Edit Rework Rejection'){ ?>
 	<script type="text/javascript">
 	    $(document).ready(function() {
 		    var dt = $('#view_rework_rejection').DataTable({
@@ -7952,6 +7952,7 @@
 		$(document).on('click','#savenewreworkrejection',function(e){
 			e.preventDefault();
 			$(".loader_ajax").show();
+
 			var formData = new FormData($("#addnnewreworkrejectionform")[0]);
 			$.ajax({
 				url : "<?php echo base_url();?>addneworkrejection",
@@ -7979,6 +7980,7 @@
 							icon: "success",
 							button: "Ok",
 							},function(){ 
+
 								window.location.href = "<?php echo base_url().'reworkrejectionreturn'?>";
 						});		
 				    }

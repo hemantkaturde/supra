@@ -208,7 +208,7 @@
                     </li>
 
 
-                    <li class="treeview <?php if($pageUrl=="jobWork" || $pageUrl=="addjobwork" || $pageUrl=="editjobwork" ||  $pageUrl=="scrapreturn" || $pageUrl=="addnewScrapreturn" || $pageUrl=="editscrapreturn" || $pageUrl=="reworkrejectionreturn" || $pageUrl=="addneworkrejection"){echo 'active';}?>">
+                    <li class="treeview <?php if($pageUrl=="jobWork" || $pageUrl=="addjobwork" || $pageUrl=="editjobwork" ||  $pageUrl=="scrapreturn" || $pageUrl=="addnewScrapreturn" || $pageUrl=="editscrapreturn" || $pageUrl=="reworkrejectionreturn" || $pageUrl=="addneworkrejection" || $pageUrl=="editreworkrejection"){echo 'active';}?>">
                       <a href="#">
                         <i class="fa fa-file-text-o"></i> <span class="menu_label">Challans</span>
                           <span class="pull-right-container">
@@ -217,7 +217,7 @@
                       </a>
                       <ul class="treeview-menu" >
                         <li class="line_height <?php if($pageUrl=="jobWork" || $pageUrl=="addjobwork" || $pageUrl=="editjobwork"){echo 'active';}?>"><a href="<?php echo base_url(); ?>jobWork"><i class="fa fa-cubes"></i> Job Work</a></li>
-                        <li class="line_height <?php if($pageUrl=="reworkrejectionreturn" || $pageUrl=="addneworkrejection"){echo 'active';}?>"><a href="<?php echo base_url(); ?>reworkrejectionreturn"><i class="fa fa-cubes"></i> Rework / Rejection Return (RR)</a></li>
+                        <li class="line_height <?php if($pageUrl=="reworkrejectionreturn" || $pageUrl=="addneworkrejection" || $pageUrl=="editreworkrejection"){echo 'active';}?>"><a href="<?php echo base_url(); ?>reworkrejectionreturn"><i class="fa fa-cubes"></i> Rework / Rejection Return (RR)</a></li>
                         <li class="line_height" <?php if($pageUrl=="challanform"){echo 'active';}?>><a href="<?php echo base_url(); ?>challanform"><i class="fa fa-cubes"></i> Challan Form</a></li>                        
                         <li class="line_height <?php if($pageUrl=="scrapreturn" || $pageUrl=="addnewScrapreturn" || $pageUrl=="editscrapreturn"){echo 'active';}?>"><a href="<?php echo base_url(); ?>scrapreturn"><i class="fa fa-cubes"></i> Scrap Return</a></li>
                       </ul>
