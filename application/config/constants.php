@@ -142,6 +142,9 @@ define('TBL_PACKING_INSTRACTION_DETAILS','tbl_packing_instrauction_details');
 define('TBL_EXPORT_DETAILS','tbl_export_details');
 define('TBL_SCRAP_RETURN','tbl_scrapreturn');
 define('TBL_SCRAP_RETURN_ITEM','tbl_scrapreturn_item');
+define('TBL_REWORK_REJECTION','tbl_rework_rejection');
+
+
 
 
 

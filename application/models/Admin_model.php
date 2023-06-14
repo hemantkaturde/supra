@@ -4055,9 +4055,7 @@ class Admin_model extends CI_Model
                                  TBL_BILL_OF_MATERIAL_VENDOR.'.buyer_delivery_date as buyer_delivery_date',
                                  TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.vendor_received_qty as vendor_received_qty',   
                                  TBL_BILL_OF_MATERIAL_VENDOR.'.bom_status as bom_status',
-                                 TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.item_remark as item_remark'
-                                 
-                                ));
+                                 TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.item_remark as item_remark'));
 
 
         if($vendor_name!='NA'){
@@ -4166,6 +4164,152 @@ class Admin_model extends CI_Model
 
         return $data;
     }
+
+    public function saveNewreworkrejection($id,$data){
+
+        if($id != '') {
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_REWORK_REJECTION, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_REWORK_REJECTION, $data)) {
+                return $this->db->insert_id();;
+            } else {
+                return FALSE;
+            }
+        }
+
+    }
+
+
+    public function getreworkrejectioncount($params){
+
+        $this->db->select('*');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_REWORK_REJECTION.'.vendor_name','left');
+        $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_REWORK_REJECTION.'.supplier_name','left');
+
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_REWORK_REJECTION.".challan_no LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_REWORK_REJECTION.".challan_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER.".supplier_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_REWORK_REJECTION.'.status', 1); 
+    
+        $query = $this->db->get(TBL_REWORK_REJECTION);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+
+
+    }
+
+
+    public function getreworkrejectiondata($params){
+
+        $this->db->select('*,'.TBL_SUPPLIER.'.supplier_name as supplier,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_pomaster,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_po_master,'.TBL_REWORK_REJECTION.'.id as reworkrejectionid');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_REWORK_REJECTION.'.vendor_name','left');
+        $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_REWORK_REJECTION.'.supplier_name','left');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_REWORK_REJECTION.'.vendor_po_number','left');
+        $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_REWORK_REJECTION.'.supplier_po_number','left');
+
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_REWORK_REJECTION.".challan_no LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_REWORK_REJECTION.".challan_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER.".supplier_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%')");
+        }
+
+        $this->db->where(TBL_REWORK_REJECTION.'.status', 1);
+        $this->db->limit($params['length'],$params['start']);
+        $this->db->order_by(TBL_REWORK_REJECTION.'.id','DESC');
+        $query = $this->db->get(TBL_REWORK_REJECTION);
+        $fetch_result = $query->result_array();
+
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['challan_no'] = $value['challan_no'];
+                $data[$counter]['challan_date'] = $value['challan_date'];
+                $data[$counter]['vendor_name'] = $value['vendorname'];
+                $data[$counter]['vendor_po_number'] = $value['vendor_pomaster'];
+                $data[$counter]['supplier_name'] = $value['supplier'];
+                $data[$counter]['supplier_po_number'] = $value['supplier_po_master'];
+                $data[$counter]['action'] = '';
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editreworkrejection/".$value['reworkrejectionid']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['reworkrejectionid']."' class='fa fa-trash-o deletereworkrejection' aria-hidden='true'></i>"; 
+
+                $counter++; 
+            }
+        }
+
+        return $data;
+
+    }
+
+
+    public function deletereworkrejection($id){
+
+        $this->db->where('id', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_REWORK_REJECTION)){
+
+            // $this->db->where('scrap_return_id', $id);
+            // //$this->db->delete(TBL_SUPPLIER);
+            // if($this->db->delete(TBL_SCRAP_RETURN_ITEM)){
+            //    return TRUE;
+            // }else{
+            //    return FALSE;
+            // }
+           return TRUE;
+        }else{
+           return FALSE;
+        }
+
+
+    }
+
+
+    public function getPreviousReworkreturnnumber(){
+
+        $this->db->select('challan_no');
+        $this->db->where(TBL_REWORK_REJECTION.'.status', 1);
+        $this->db->limit(1);
+        $this->db->order_by(TBL_REWORK_REJECTION.'.id','DESC');
+        $query = $this->db->get(TBL_REWORK_REJECTION);
+        $rowcount = $query->result_array();
+        return $rowcount;
+
+    }
+
+    public function getReworkrejectiondetails($id){
+
+
+        $this->db->select('*,'.TBL_SUPPLIER.'.supplier_name as supplier,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_pomaster,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_po_master,'.TBL_REWORK_REJECTION.'.id as reworkrejectionid');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_REWORK_REJECTION.'.vendor_name','left');
+        $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_REWORK_REJECTION.'.supplier_name','left');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_REWORK_REJECTION.'.vendor_po_number','left');
+        $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_REWORK_REJECTION.'.supplier_po_number','left');
+        $this->db->where(TBL_REWORK_REJECTION.'.status', 1);
+        $this->db->where(TBL_REWORK_REJECTION.'.id', $id);
+        $query = $this->db->get(TBL_REWORK_REJECTION);
+        $fetch_result = $query->result_array();
+
+        return $fetch_result;
+
+    }
+
 
 }
 

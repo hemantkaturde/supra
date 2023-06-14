@@ -239,9 +239,16 @@ $route['editscrapreturn/(:any)'] = "admin/editscrapreturn/$1";
 
 
 $route['currentorderstatus'] = "admin/currentorderstatus";
-// $route['fetchvendorBillofmaterialforcurrentorderstatus'] = "admin/fetchvendorBillofmaterialforcurrentorderstatus";
+$route['reworkrejectionreturn'] = "admin/reworkrejectionreturn";
+$route['addneworkrejection'] = "admin/addneworkrejection";
+$route['fetchreworkrejection'] = "admin/fetchreworkrejection";
+$route['deletereworkrejection'] = "admin/deletereworkrejection";
 
-//$route['fetchcurrentorderstatusreport'] = "admin/fetchcurrentorderstatusreport";
+$route['editreworkrejection/(:any)'] = "admin/editreworkrejection/$1";
+
+
+
+
 
 
 

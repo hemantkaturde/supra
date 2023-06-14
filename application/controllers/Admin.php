@@ -5742,10 +5742,7 @@ class Admin extends BaseController
             $data['supplierList']= $this->admin_model->fetchALLsupplierList();
             $data['vendorList']= $this->admin_model->fetchALLvendorList();
             $data['fetchALLprescrapreturndetails']= $this->admin_model->fetchALLprescrapreturndetails();
-
             $data['getpriviousscrapreturn']= $this->admin_model->getpriviousscrpareturn()[0];
-
-
             $this->loadViews("masters/addnewscrapreturn", $this->global, $data, NULL);
         }
 
@@ -6058,5 +6055,141 @@ class Admin extends BaseController
 
     }
         
+
+    public function reworkrejectionreturn(){
+        $process = 'Rework Rejection Return Form';
+        $processFunction = 'Admin/reworkrejectionreturn';
+        $this->global['pageTitle'] = 'Rework Rejection Return Form';
+        $this->loadViews("masters/reworkrejectionreturn", $this->global, $data, NULL);  
+    }
+
+
+    public function fetchreworkrejection(){
+        $params = $_REQUEST;
+        $totalRecords = $this->admin_model->getreworkrejectioncount($params); 
+        $queryRecords = $this->admin_model->getreworkrejectiondata($params); 
+
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+        echo json_encode($json_data);
+
+    }
+
+
+    public function addneworkrejection(){
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+
+            $addnewreworkrejection_response = array();
+            $this->form_validation->set_rules('challan_no','Challan No','trim|required');
+            $this->form_validation->set_rules('challan_date','Challan Date','trim|required');
+            $this->form_validation->set_rules('vendor_name','Vendor Name','trim');
+            $this->form_validation->set_rules('vendor_po_number','Vendor PO Number','trim');
+            $this->form_validation->set_rules('supplier_name','Supplier Name','trim');
+            $this->form_validation->set_rules('supplier_po_number','Supplier PO Number','trim');
+            $this->form_validation->set_rules('dispath_through','Dispath Through','trim');
+            $this->form_validation->set_rules('total_weight','Total Weight','trim');
+            $this->form_validation->set_rules('remark','Remark','trim');
+
+            if($this->form_validation->run() == FALSE)
+            {
+                $addnewreworkrejection_response['status'] = 'failure';
+                $addnewreworkrejection_response['error'] = array('challan_no'=>strip_tags(form_error('challan_no')),'challan_date'=>strip_tags(form_error('challan_date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'dispath_through'=>strip_tags(form_error('dispath_through')),'total_weight'=>strip_tags(form_error('total_weight')),'total_bags'=>strip_tags(form_error('total_bags')),'remark'=>strip_tags(form_error('remark')));
+           
+            }else{
+
+                $data = array(
+                    'challan_no' =>  trim($this->input->post('challan_no')),
+                    'challan_date' => trim($this->input->post('challan_date')),
+                    'vendor_name' =>  trim($this->input->post('vendor_name')),
+                    'vendor_po_number' =>  trim($this->input->post('vendor_po_number')),
+                    'supplier_name' =>  trim($this->input->post('supplier_name')),
+                    'supplier_po_number' =>  trim($this->input->post('supplier_po_number')),
+                    'dispath_through' =>  trim($this->input->post('dispath_through')),
+                    'total_weight' =>  trim($this->input->post('total_weight')),
+                    'remark' =>  trim($this->input->post('remark')),
+                   
+                );
+
+                $saveNewreworkrejection= $this->admin_model->saveNewreworkrejection('',$data);
+
+                if($saveNewreworkrejection){
+                    $addnewreworkrejection_response['status'] = 'success';
+                    $addnewreworkrejection_response['error'] = array('challan_no'=>strip_tags(form_error('challan_no')),'challan_date'=>strip_tags(form_error('challan_date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'dispath_through'=>strip_tags(form_error('dispath_through')),'total_weight'=>strip_tags(form_error('total_weight')),'total_bags'=>strip_tags(form_error('total_bags')),'remark'=>strip_tags(form_error('remark')));
+                }
+
+            }
+
+            echo json_encode($addnewreworkrejection_response);
+
+        }else{
+
+            $process = 'Add New Rework Rejection';
+            $processFunction = 'Admin/addneworkrejection';
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Add New Rework Rejection';
+            $data['vendorList']= $this->admin_model->fetchALLvendorList();
+            $data['supplierList']= $this->admin_model->fetchALLsupplierList();
+            $data['getPreviousReworkreturnnumber']= $this->admin_model->getPreviousReworkreturnnumber();
+
+            $this->loadViews("masters/addneworkrejection", $this->global, $data, NULL);
+
+        }
+
+    }
+
+
+    public function deletereworkrejection(){
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->deletereworkrejection(trim($this->input->post('id')));
+            if ($result) {
+                        $process = 'Delete Rework Rejection';
+                        $processFunction = 'Admin/deletereworkrejection';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
+
+
+    }
+
+
+    public function editreworkrejection($id){
+
+        $process = 'Edit Rework Rejection';
+        $processFunction = 'Admin/editreworkrejection';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Edit Rework Rejection';
+
+        $data['vendorList']= $this->admin_model->fetchALLvendorList();
+        $data['supplierList']= $this->admin_model->fetchALLsupplierList();
+
+        $data['getReworkrejectiondetails']= $this->admin_model->getReworkrejectiondetails($id);
+        // $data['fetchALLprescrapreturndetailsforview']= $this->admin_model->fetchALLprescrapreturndetailsforview($scrapreturnid);
+
+        $this->loadViews("masters/editreworkrejection", $this->global, $data, NULL);
+
+    }
+
 
 }
