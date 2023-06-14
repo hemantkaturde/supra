@@ -61,6 +61,19 @@
 
                                     <div class="col-md-12">
                                         <div class="form-group">
+                                                <label for="vendor_supplier_name">Select Vendor / Supplier  Name <span class="required">*</span></label>
+                                                <select class="form-control vendor_supplier_name" name="vendor_supplier_name" id="vendor_supplier_name">
+                                                    <option st-id="" value="">Select Vendor Name</option>
+                                                    <option value="vendor" value="">Vendor</option>
+                                                    <option value="supplier" value="">Supplier</option>
+                                                </select>
+                                            <p class="error vendor_supplier_name_error"></p>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-12" id="vendor_name_div_for_hide_show" style="display:none">
+                                        <div class="form-group">
                                                 <label for="vendor_name">Vendor Name</label>
                                                 <select class="form-control vendor_name" name="vendor_name" id="vendor_name">
                                                     <option st-id="" value="">Select Vendor Name</option>
@@ -95,7 +108,7 @@
                                     </div>
 
 
-                                    <div class="col-md-12">
+                                    <div class="col-md-12" id="supplier_name_div_for_hide_show" style="display:none">
                                         <div class="form-group">
                                                 <label for="supplier_name">Supplier Name </label>
                                                 <select class="form-control" name="supplier_name" id="supplier_name">
@@ -334,8 +347,6 @@
                                                             <p class="error value_error"></p>
                                                         </div>
                                                     </div>
-
-                                                 
 
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Unit <span class="required">*</span></label>

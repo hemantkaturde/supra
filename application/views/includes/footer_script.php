@@ -8043,5 +8043,28 @@
 		});
 
 
+
+		$(document).on('change','#vendor_supplier_name',function(e){  
+				e.preventDefault();
+			
+				var vendor_supplier_name = $('#vendor_supplier_name').val();
+
+				if(vendor_supplier_name=='vendor'){
+					$('#vendor_name_div_for_hide_show').css('display','block');
+
+					$('#supplier_name_div_for_hide_show').css('display','none');
+				}
+
+				if(vendor_supplier_name=='supplier'){
+
+					$('#supplier_name_div_for_hide_show').css('display','block');
+					$('#vendor_name_div_for_hide_show').css('display','none');
+
+				}			
+		});
+
+
+
+
 	</script> 
 <?php } ?>
