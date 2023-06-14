@@ -135,7 +135,7 @@
                                     <div class="col-md-12 supplier_po_number_div" id="supplier_po_number_div" style="display: <?=$display?>">
                                         <div class="form-group">
                                                 <label for="supplier_po_number">Select Vendor PO Number</label>
-                                                    <select class="form-control supplier_po_number_item" name="supplier_po_number" id="supplier_po_number">
+                                                    <select class="form-control supplier_po_number_item supplier_po_number_for_item" name="supplier_po_number" id="supplier_po_number">
                                                         <!-- <option st-id="" value="">Select Vendor Name</option> -->
                                                         <option st-id="" value="<?=$fetchALLpreReworkReturnList[0]['pre_supplier_po_number']?>" selected="selected"><?=$selected_value?></option>
                                                     </select>
@@ -184,17 +184,17 @@
                                 <div class="col-md-6">
                                     <div class="container">
                                         <button type="button" class="btn btn-success btn-xl" data-toggle="modal" data-target="#addNewModal">Add New Items</button><br/><br/>
-                                            <table class="table table-bordered" style="width: 100% !important; max-width: 100%;margin-bottom: 20px;">
+                                            <table class="table table-bordered" style="max-width: 68%;display: block;overflow-x: auto; white-space: nowrap;">
                                                 <thead style="background-color:#3c8dbc;color:#fff">
                                                     <tr>
                                                         <th>Sr No.</th>
                                                         <th>Part Number</th>
                                                         <th>Description</th>
-                                                        <th>Vendor  Qty</th>
-                                                        <th>Rm Actual Qty</th>
-                                                        <th>Rm Rate</th>
+                                                        <th>Quantity</th>
+                                                        <th>Rate</th>
                                                         <th>Value</th>
-                                                        <th>Packing & Forwarding</th>
+                                                        <th>Row Material Cost</th>
+                                                        <th>Unit</th>     
                                                         <th>Total </th>
                                                         <th>GST</th>
                                                         <th>Grand Total</th>
