@@ -259,7 +259,7 @@
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Part Name <span class="required">*</span></label>
+                                                        <label class="col-sm-4 col-form-label">Part Name / Description <span class="required">*</span></label>
                                                         <div class="col-sm-8">
                                                             <input type="type" class="form-control"  id="description" name="description" required readonly>
                                                             <p class="error description_error"></p>
@@ -292,31 +292,50 @@
                                                 
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Raw Material Size</label>
+                                                        <label class="col-sm-4 col-form-label">Rejected Work Reason<span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="text" class="form-control"  id="raw_material_size" name="raw_material_size" readonly>
-                                                            <p class="error raw_material_size_error"></p>
+                                                            <input type="text" class="form-control"  id="rejected_work_reason" name="rejected_work_reason">
+                                                            <p class="error rejected_work_reason_error"></p>
+                                                        </div>
+                                                    </div>
+
+                                                   
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-4 col-form-label">Quantity<span class="required">*</span></label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" class="form-control"  id="quantity" name="quantity">
+                                                            <p class="error quantity_error"></p>
                                                         </div>
                                                     </div>
 
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Vendor Order Qty</label>
+                                                        <label class="col-sm-4 col-form-label">Rate<span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="number" class="form-control"  id="vendor_order_qty" name="vendor_order_qty" readonly>
-                                                            <p class="error vendor_order_qty_error"></p>
+                                                            <input type="text" class="form-control"  id="rate" name="rate">
+                                                            <p class="error rate_error"></p>
                                                         </div>
                                                     </div>
 
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">RM Actual Qty <span class="required">*</span></label>
+                                                        <label class="col-sm-4 col-form-label">Value<span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="number" class="form-control"  id="rm_actual_aty" name="rm_actual_aty">
-                                                            <p class="error rm_actual_aty_error"></p>
+                                                            <input type="text" class="form-control"  id="value" name="value">
+                                                            <p class="error value_error"></p>
                                                         </div>
                                                     </div>
 
+
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-4 col-form-label">Row Material Cost<span class="required">*</span></label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" class="form-control"  id="value" name="value">
+                                                            <p class="error value_error"></p>
+                                                        </div>
+                                                    </div>
+
+                                                 
 
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Unit <span class="required">*</span></label>
@@ -334,42 +353,6 @@
                                                     </div>
                                                 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">R.M Rate<span class="required">*</span></label>
-                                                        <div class="col-sm-8">
-                                                            <input type="number" class="form-control"  id="rm_rate" name="rm_rate" readonly>
-                                                            <p class="error rm_rate_error"></p>
-                                                        </div>
-                                                    </div>
-
-
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Value<span class="required">*</span></label>
-                                                        <div class="col-sm-8">
-                                                            <input type="number" class="form-control"  id="value" name="value" readonly>
-                                                            <p class="error value_error"></p>
-                                                        </div>
-                                                    </div>
-
-
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Packing & Forwording<span class="required">*</span></label>
-                                                        <div class="col-sm-8">
-                                                            <input type="number" class="form-control"  id="packing_and_forwarding"  value="0" name="packing_and_forwarding">
-                                                            <p class="error packing_and_forwarding_error"></p>
-                                                        </div>
-                                                    </div>
-
-
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Total<span class="required">*</span></label>
-                                                        <div class="col-sm-8">
-                                                            <input type="number" class="form-control"  id="total" name="total" readonly>
-                                                            <p class="error total_error"></p>
-                                                        </div>
-                                                    </div>
-
-
-                                                    <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Select GST Rate<span class="required">*</span></label>
                                                         <div class="col-sm-8">
                                                                 <select class="form-control" name="gst_rate" id="gst_rate">
@@ -380,8 +363,6 @@
                                                             <p class="error gst_rate_error"></p>
                                                         </div>
                                                     </div>
-
-
 
                                                     <div class="form-group row cgst_sgst_div" style="display:none">
                                                         <label class="col-sm-2 col-form-label">SGST 9 %<span class="required">*</span></label>
