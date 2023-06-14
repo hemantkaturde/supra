@@ -266,7 +266,13 @@
                                                         </div>
                                                     </div>
 
-
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-4 col-form-label">HSN Code</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" class="form-control"  id="HSN_Code" name="HSN_Code" readonly>
+                                                            <p class="error HSN_Code_error"></p>
+                                                        </div>
+                                                    </div>
 
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">SAC Code</label>
@@ -277,13 +283,13 @@
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">HSN Code</label>
+                                                        <label class="col-sm-4 col-form-label">Type Of Row Material</label>
                                                         <div class="col-sm-8">
-                                                            <input type="text" class="form-control"  id="HSN_Code" name="HSN_Code" readonly>
-                                                            <p class="error HSN_Code_error"></p>
+                                                            <input type="text" class="form-control"  id="raw_material_size" name="raw_material_size" readonly>
+                                                            <p class="error raw_material_size_error"></p>
                                                         </div>
                                                     </div>
-
+                                                
 
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Raw Material Size</label>
