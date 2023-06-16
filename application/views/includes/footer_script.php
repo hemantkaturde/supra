@@ -4387,7 +4387,6 @@
 	        });
 	    });
 
-
 		$(document).ready(function() {
 			
 			//$(".loader_ajax").show();
@@ -8195,7 +8194,6 @@
 					$('#vendor_name_div_for_hide_show').css('display','block');
 					$('#supplier_name_div_for_hide_show').css('display','none');
 
-
 					$(document).on('change','.vendor_po_number_itam',function(e){  
 							e.preventDefault();
 							//$(".loader_ajax").show();
@@ -8270,6 +8268,76 @@
 
 				}			
 		});
+
+   
+		$(document).on('change','#part_number',function(e){  
+			e.preventDefault();
+			
+			//$(".loader_ajax").show();
+			var part_number = $('#part_number').val();
+		    var vendor_po_number = $('#vendor_po_number').val();
+			var vendor_name = $('#vendor_name').val();
+
+			var raw_material_supplier_name = $('#raw_material_supplier_name').val();
+
+			if(vendor_name){
+				if(vendor_po_number){
+						$.ajax({
+							url : "<?php echo ADMIN_PATH;?>getSuppliergoodsPartnumberByidjobwork",
+							type: "POST",
+							data : {'part_number' : part_number,'vendor_po_number':vendor_po_number,'raw_material_supplier_name':raw_material_supplier_name},
+							success: function(data, textStatus, jqXHR)
+							{
+								$(".loader_ajax").hide();
+								if(data == "failure")
+								{
+									$('#description').val('');
+									$('#SAC').val('');
+									$('#HSN_Code').val('');
+									$('#raw_material_size').val('');
+									$('#vendor_order_qty').val('');
+									$('#unit').val('');
+									$('#rm_rate').val('');
+
+								}
+								else
+								{
+									var data_row_material = jQuery.parseJSON( data );
+									$('#description').val(data_row_material.name);
+									$('#SAC').val(data_row_material.sac_no);
+									$('#HSN_Code').val(data_row_material.hsn_code);
+									$('#raw_material_size').val(data_row_material.sitting_size);
+									$('#vendor_order_qty').val(data_row_material.order_oty);
+									$('#unit').val(data_row_material.unit);
+									$('#rm_rate').val(data_row_material.supplierrate);
+									
+								}
+							},
+							error: function (jqXHR, textStatus, errorThrown)
+							{
+								    $('#description').val('');
+									$('#SAC').val('');
+									$('#HSN_Code').val('');
+									$('#raw_material_size').val('');
+									$('#vendor_order_qty').val('');
+									$('#unit').val('');
+									$('#rm_rate').val('');									
+								    //$(".loader_ajax").hide();
+							}
+						});
+						return false;
+
+				}else{
+					$('.part_number_error').html('Please Select Vendor PO Number');
+				}
+
+			}else{
+
+				$('.part_number_error').html('Please Select Vendor PO');
+			}
+			
+		});
+
 
 	</script> 
 <?php } ?>
