@@ -112,7 +112,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                                 <label for="vendor_po_number">Select Vendor PO Number <span class="required">*</span></label>
-                                                    <select class="form-control vendor_po_number_itam_mapping vendor_po_number_for_view_item" name="vendor_po_number" id="vendor_po_number">
+                                                    <select class="form-control vendor_po_number_itam_mapping vendor_po_number_for_view_item vendor_po_for_buyer_details_" name="vendor_po_number" id="vendor_po_number">
                                                         <option st-id="" value="">Select Vendor Name</option>
                                                         <option st-id="" value="<?=$fetchALLpreBillofmaterailist[0]['pre_vendor_po_number']?>" Selected><?=$selected_value;?></option>
                                                     </select>
@@ -134,7 +134,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                                 <label for="supplier_po_number">Supplier PO Number</label>
-                                                <input type="text" class="form-control" id="supplier_po_number" value="<?=$fetchALLpreBillofmaterailist[0]['pre_supplier_po_number']?>" name="supplier_po_number" readonly>
+                                                <input type="text" class="form-control supplier_po_number" id="supplier_po_number" value="<?=$fetchALLpreBillofmaterailist[0]['pre_supplier_po_number']?>" name="supplier_po_number" readonly>
                                             <p class="error supplier_po_number_error"></p>
                                         </div>
                                     </div>
@@ -178,7 +178,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                                 <label for="buyer_po_number">Select Buyer PO <span class="required">*</span></label>
-                                                    <select class="form-control buyer_po_number  buyer_po_number_for_itam_mapping buyer_po_number_for_itam_display" name="buyer_po_number" id="buyer_po_number">
+                                                    <select class="form-control buyer_po_number  buyer_po_number_for_itam_mapping buyer_po_number_for_itam_display autobuyerpo" name="buyer_po_number" id="buyer_po_number">
                                                         <!-- <option st-id="" value="">Select Buyer PO</option> -->
 
                                                         <option st-id="" value="<?=$fetchALLpreBillofmaterailist[0]['pre_buyer_po_number'] ?>"><?=$sales_order_number ?></option>

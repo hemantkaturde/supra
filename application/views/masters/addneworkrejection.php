@@ -61,9 +61,9 @@
 
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                                <label for="vendor_supplier_name">Select Vendor / Supplier  Name <span class="required">*</span></label>
+                                                <label for="vendor_supplier_name">Select Vendor / Supplier <span class="required">*</span></label>
                                                 <select class="form-control vendor_supplier_name" name="vendor_supplier_name" id="vendor_supplier_name">
-                                                    <option st-id="" value="">Select Vendor Name</option>
+                                                    <option st-id="" value="">Select Vendor / Supplier</option>
                                                     <option value="vendor" value="">Vendor</option>
                                                     <option value="supplier" value="">Supplier</option>
                                                 </select>
@@ -71,76 +71,80 @@
                                         </div>
                                     </div>
 
-
-                                    <div class="col-md-12" id="vendor_name_div_for_hide_show" style="display:none">
-                                        <div class="form-group">
-                                                <label for="vendor_name">Vendor Name</label>
-                                                <select class="form-control vendor_name" name="vendor_name" id="vendor_name">
-                                                    <option st-id="" value="">Select Vendor Name</option>
-                                                    <?php foreach ($vendorList as $key => $value) {?>
-                                                    <option value="<?php echo $value['ven_id']; ?>" <?php if($value['ven_id']==$fetchALLprejobworkitemList[0]['pre_vendor_name']){ echo 'selected';} ?>><?php echo $value['vendor_name']; ?></option>
-                                                    <?php } ?>
-                                                </select>
-                                            <p class="error vendor_name_error"></p>
-                                        </div>
-                                    </div>
-
-
-                                    <?php
-                                        if($fetchALLpreReworkReturnList[0]['pre_vendor_po_number']){
-                                            $display='block';
-                                            $selected_value = $fetchALLpreReworkReturnList[0]['vendor_po'];
-                                        }else{
-                                            $display='none';
-                                            $selected_value = 'Select Buyer PO Number';
-                                        }        
-                                    ?>
-
-                                    <div class="col-md-12 vendor_po_number_div" id="vendor_po_number_div" style="display: <?=$display?>">
-                                        <div class="form-group">
-                                                <label for="vendor_po_number">Select Vendor PO Number</label>
-                                                    <select class="form-control vendor_po_number_itam" name="vendor_po_number" id="vendor_po_number">
-                                                        <!-- <option st-id="" value="">Select Vendor Name</option> -->
-                                                        <option st-id="" value="<?=$fetchALLpreReworkReturnList[0]['pre_vendor_po_number']?>" selected="selected"><?=$selected_value?></option>
+                                    <div id="vendor_name_div_for_hide_show" style="display:none">
+                                        <div class="col-md-12" >
+                                            <div class="form-group">
+                                                    <label for="vendor_name">Vendor Name</label>
+                                                    <select class="form-control vendor_name" name="vendor_name" id="vendor_name">
+                                                        <option st-id="" value="">Select Vendor Name</option>
+                                                        <?php foreach ($vendorList as $key => $value) {?>
+                                                        <option value="<?php echo $value['ven_id']; ?>" <?php if($value['ven_id']==$fetchALLprejobworkitemList[0]['pre_vendor_name']){ echo 'selected';} ?>><?php echo $value['vendor_name']; ?></option>
+                                                        <?php } ?>
                                                     </select>
-                                            <p class="error vendor_po_number_error"></p>
+                                                <p class="error vendor_name_error"></p>
+                                            </div>
+                                        </div>
+
+
+                                        <?php
+                                            if($fetchALLpreReworkReturnList[0]['pre_vendor_po_number']){
+                                                $display='block';
+                                                $selected_value = $fetchALLpreReworkReturnList[0]['vendor_po'];
+                                            }else{
+                                                $display='none';
+                                                $selected_value = 'Select Buyer PO Number';
+                                            }        
+                                        ?>
+
+                                        <div class="col-md-12 vendor_po_number_div" id="vendor_po_number_div" style="display: <?=$display?>">
+                                            <div class="form-group">
+                                                    <label for="vendor_po_number">Select Vendor PO Number</label>
+                                                        <select class="form-control vendor_po_number_itam" name="vendor_po_number" id="vendor_po_number">
+                                                            <!-- <option st-id="" value="">Select Vendor Name</option> -->
+                                                            <option st-id="" value="<?=$fetchALLpreReworkReturnList[0]['pre_vendor_po_number']?>" selected="selected"><?=$selected_value?></option>
+                                                        </select>
+                                                <p class="error vendor_po_number_error"></p>
+                                            </div>
                                         </div>
                                     </div>
 
+                                    <div id="supplier_name_div_for_hide_show" style="display:none">
 
-                                    <div class="col-md-12" id="supplier_name_div_for_hide_show" style="display:none">
-                                        <div class="form-group">
-                                                <label for="supplier_name">Supplier Name </label>
-                                                <select class="form-control" name="supplier_name" id="supplier_name">
-                                                    <option st-id="" value="">Select Supplier Name</option>
-                                                    <?php foreach ($supplierList as $key => $value) {?>
-                                                    <option value="<?php echo $value['sup_id']; ?>" <?php if($value['sup_id']==$fetchALLpreVendoritemList[0]['pre_supplier_name']){ echo 'selected';} ?> ><?php echo $value['supplier_name']; ?></option>
-                                                    <?php } ?>
-                                                </select>
-                                            <p class="error supplier_name_error"></p>
-                                        </div>
-                                    </div>
+                                            <div class="col-md-12" >
+                                                <div class="form-group">
+                                                        <label for="supplier_name">Supplier Name </label>
+                                                        <select class="form-control" name="supplier_name" id="supplier_name">
+                                                            <option st-id="" value="">Select Supplier Name</option>
+                                                            <?php foreach ($supplierList as $key => $value) {?>
+                                                            <option value="<?php echo $value['sup_id']; ?>" <?php if($value['sup_id']==$fetchALLpreVendoritemList[0]['pre_supplier_name']){ echo 'selected';} ?> ><?php echo $value['supplier_name']; ?></option>
+                                                            <?php } ?>
+                                                        </select>
+                                                    <p class="error supplier_name_error"></p>
+                                                </div>
+                                            </div>
 
-                                    <?php
-                                        if($fetchALLpreReworkReturnList[0]['pre_supplier_po_number']){
-                                            $display='block';
-                                            $selected_value = $fetchALLpreReworkReturnList[0]['supplier_po'];
-                                        }else{
-                                            $display='none';
-                                            $selected_value = 'Select Supplier PO Number';
-                                        }        
-                                    ?>
+                                            <?php
+                                                if($fetchALLpreReworkReturnList[0]['pre_supplier_po_number']){
+                                                    $display='block';
+                                                    $selected_value = $fetchALLpreReworkReturnList[0]['supplier_po'];
+                                                }else{
+                                                    $display='none';
+                                                    $selected_value = 'Select Supplier PO Number';
+                                                }        
+                                            ?>
 
 
-                                    <div class="col-md-12 supplier_po_number_div" id="supplier_po_number_div" style="display: <?=$display?>">
-                                        <div class="form-group">
-                                                <label for="supplier_po_number">Select Vendor PO Number</label>
-                                                    <select class="form-control supplier_po_number_item supplier_po_number_for_item" name="supplier_po_number" id="supplier_po_number">
-                                                        <!-- <option st-id="" value="">Select Vendor Name</option> -->
-                                                        <option st-id="" value="<?=$fetchALLpreReworkReturnList[0]['pre_supplier_po_number']?>" selected="selected"><?=$selected_value?></option>
-                                                    </select>
-                                            <p class="error supplier_po_number_error"></p>
-                                        </div>
+                                            <div class="col-md-12 supplier_po_number_div" id="supplier_po_number_div" style="display: <?=$display?>">
+                                                <div class="form-group">
+                                                        <label for="supplier_po_number">Select Vendor PO Number</label>
+                                                            <select class="form-control supplier_po_number_item supplier_po_number_for_item" name="supplier_po_number" id="supplier_po_number">
+                                                                <!-- <option st-id="" value="">Select Vendor Name</option> -->
+                                                                <option st-id="" value="<?=$fetchALLpreReworkReturnList[0]['pre_supplier_po_number']?>" selected="selected"><?=$selected_value?></option>
+                                                            </select>
+                                                    <p class="error supplier_po_number_error"></p>
+                                                </div>
+                                            </div>
+
                                     </div>
 
 

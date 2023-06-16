@@ -4358,7 +4358,6 @@ class Admin extends BaseController
     }
 
 
-
     public function saveVendorbilloamaterialitems(){
 
         $post_submit = $this->input->post();;
@@ -6154,7 +6153,6 @@ class Admin extends BaseController
             $data['vendorList']= $this->admin_model->fetchALLvendorList();
             $data['supplierList']= $this->admin_model->fetchALLsupplierList();
             $data['getPreviousReworkreturnnumber']= $this->admin_model->getPreviousReworkreturnnumber();
-
             $this->loadViews("masters/addneworkrejection", $this->global, $data, NULL);
 
         }
@@ -6196,5 +6194,48 @@ class Admin extends BaseController
 
     }
 
+
+    public function getbuyerpodetailsforvendorbillofmaterial(){
+
+        $vendor_po_number=$this->input->post('vendor_po_number');
+        if($vendor_po_number) {
+			$vendor_po_number_data = $this->admin_model->getbuyerpodetailsforvendorbillofmaterial($vendor_po_number);
+
+			if(count($vendor_po_number_data) >= 1) {
+                //$content = $content.'<option value="">Select Vendor Name</option>';
+				foreach($vendor_po_number_data as $value) {
+					$content = $content.'<option value="'.$value["buyer_id"].'">'.$value["buyer"].'</option>';
+				}
+				echo $content;
+			} else {
+				echo 'failure';
+			}
+		} else {
+			echo 'failure';
+		}
+
+        
+    }
+
+    public function getBuyerDetailsByvendorpoautofill(){
+
+        $vendor_po_number=$this->input->post('vendor_po_number');
+        if($vendor_po_number) {
+			$vendor_po_number_data = $this->admin_model->getBuyerDetailsByvendorpoautofill($vendor_po_number);
+
+			if(count($vendor_po_number_data) >= 1) {
+                //$content = $content.'<option value="">Select Vendor Name</option>';
+				foreach($vendor_po_number_data as $value) {
+					$content = $content.'<option value="'.$value["id"].'">'.$value["sales_order_number"].'</option>';
+				}
+				echo $content;
+			} else {
+				echo 'failure';
+			}
+		} else {
+			echo 'failure';
+		}
+
+    }
 
 }

@@ -4311,6 +4311,38 @@ class Admin_model extends CI_Model
     }
 
 
+    public function getbuyerpodetailsforvendorbillofmaterial($vendor_po_number){
+
+        $this->db->select(TBL_BUYER_MASTER.'.*,'.TBL_BUYER_MASTER.'.buyer_name as buyer');
+        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_VENDOR_PO_MASTER.'.buyer_po_number');
+        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_VENDOR_PO_MASTER.'.buyer_name');
+        $this->db->where(TBL_VENDOR_PO_MASTER.'.id', $vendor_po_number);
+        $this->db->where(TBL_VENDOR_PO_MASTER.'.status', 1);
+        $query_result = $this->db->get(TBL_VENDOR_PO_MASTER)->result_array();
+		foreach($query_result as $key => $value) {
+			$query_result[$key]['selected'] = '';
+		}
+        return $query_result;
+
+    }
+
+
+    public function getBuyerDetailsByvendorpoautofill($vendor_po_number){
+
+        $this->db->select(TBL_BUYER_PO_MASTER.'.*');
+        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_VENDOR_PO_MASTER.'.buyer_po_number');
+        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_VENDOR_PO_MASTER.'.buyer_name');
+        $this->db->where(TBL_VENDOR_PO_MASTER.'.id', $vendor_po_number);
+        $this->db->where(TBL_VENDOR_PO_MASTER.'.status', 1);
+        $query_result = $this->db->get(TBL_VENDOR_PO_MASTER)->result_array();
+		foreach($query_result as $key => $value) {
+			$query_result[$key]['selected'] = '';
+		}
+        return $query_result;
+
+    }
+
+
 }
 
 ?>

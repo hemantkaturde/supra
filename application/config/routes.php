@@ -226,9 +226,6 @@ $route['getVendorsItemsforDisplay'] = "admin/getVendorsItemsforDisplay";
 $route['getincomingListforDisplay'] = "admin/getincomingListforDisplay";
 $route['viewexportdetails/(:any)'] = "admin/viewexportdetails/$1";
 $route['editjobwork/(:any)'] = "admin/editjobwork/$1";
-
-
-
 $route['scrapreturn'] = "admin/scrapreturn";
 $route['addnewScrapreturn'] = "admin/addnewScrapreturn";
 $route['fetchscrapreturn'] = "admin/fetchscrapreturn";
@@ -236,14 +233,17 @@ $route['deletescrapreturn'] = "admin/deletescrapreturn";
 $route['savescrapreturnitem'] = "admin/savescrapreturnitem";
 $route['deletescrapreturnitem'] = "admin/deletescrapreturnitem";
 $route['editscrapreturn/(:any)'] = "admin/editscrapreturn/$1";
-
-
 $route['currentorderstatus'] = "admin/currentorderstatus";
 $route['reworkrejectionreturn'] = "admin/reworkrejectionreturn";
 $route['addneworkrejection'] = "admin/addneworkrejection";
 $route['fetchreworkrejection'] = "admin/fetchreworkrejection";
 $route['deletereworkrejection'] = "admin/deletereworkrejection";
 $route['editreworkrejection/(:any)'] = "admin/editreworkrejection/$1";
+$route['getbuyerpodetailsforvendorbillofmaterial'] = "admin/getbuyerpodetailsforvendorbillofmaterial";
+$route['getBuyerDetailsByvendorpoautofill'] = "admin/getBuyerDetailsByvendorpoautofill";
+
+
+
 
 
 
