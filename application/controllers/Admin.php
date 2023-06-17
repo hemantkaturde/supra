@@ -2923,6 +2923,9 @@ class Admin extends BaseController
             $this->form_validation->set_rules('unit','Unit','trim');
             $this->form_validation->set_rules('item_remark','Item Remark','trim');
             $this->form_validation->set_rules('rm_type','rm_type','trim');
+
+            $this->form_validation->set_rules('description_1','Description 1','trim');
+            $this->form_validation->set_rules('description_2','Description 2','trim');
         
             if($this->form_validation->run() == FALSE)
             {
@@ -2945,6 +2948,8 @@ class Admin extends BaseController
                         'rm_type' =>trim($this->input->post('rm_type')),
                         'unit' =>   trim($this->input->post('unit')),
                         'item_remark' =>   trim($this->input->post('item_remark')),
+                        'description_1' => trim($this->input->post('description_1')),
+                        'description_2' => trim($this->input->post('description_2')),
                         'pre_date'=>trim($this->input->post('date')),
                         'pre_supplier_name'=>trim($this->input->post('supplier_name')),
                         'pre_supplier_po_number	'=>trim($this->input->post('supplier_po_number')),
@@ -2974,6 +2979,8 @@ class Admin extends BaseController
                         'unit' =>   trim($this->input->post('unit')),
                         'item_remark' =>   trim($this->input->post('item_remark')),
                         'pre_date'=>trim($this->input->post('date')),
+                        'description_1' => trim($this->input->post('description_1')),
+                        'description_2' => trim($this->input->post('description_2')),
                         'pre_supplier_name'=>trim($this->input->post('supplier_name')),
                         'pre_supplier_po_number	'=>trim($this->input->post('supplier_po_number')),
                         'pre_buyer_name'=>trim($this->input->post('buyer_name')),
