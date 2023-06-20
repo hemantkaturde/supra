@@ -159,7 +159,7 @@
                                                             $balence_qty = $result_previous_qty[0]['balance_qty'] -$value['invoice_qty'];
 
                                                             if($count == 1){
-                                                                $balence_qty_val =  $value['invoice_qty'];
+                                                                $balence_qty_val =  $value['balance_qty'];
                                                             }else{
                                                                 $balence_qty_val =  $balence_qty;
                                                             }
