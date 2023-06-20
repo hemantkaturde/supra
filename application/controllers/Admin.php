@@ -6220,7 +6220,6 @@ class Admin extends BaseController
 		} else {
 			echo 'failure';
 		}
-
         
     }
 
@@ -6243,6 +6242,28 @@ class Admin extends BaseController
 			echo 'failure';
 		}
 
+    }
+
+
+    public function getIncomingDetailsofbillofmaterial(){
+
+        $vendor_po_number=$this->input->post('vendor_po_number');
+        if($vendor_po_number) {
+			$vendor_po_number_data = $this->admin_model->getIncomingDetailsofbillofmaterial($vendor_po_number);
+
+			if(count($vendor_po_number_data) >= 1) {
+                //$content = $content.'<option value="">Select Vendor Name</option>';
+				foreach($vendor_po_number_data as $value) {
+					$content = $content.'<option value="'.$value["id"].'">'.$value["incoming_details_id"].'</option>';
+				}
+				echo $content;
+			} else {
+				echo 'failure';
+			}
+		} else {
+			echo 'failure';
+		}
+        
     }
 
 }

@@ -4342,6 +4342,20 @@ class Admin_model extends CI_Model
     }
 
 
+    public function getIncomingDetailsofbillofmaterial($vendor_po_number){
+
+        $this->db->select(TBL_INCOMING_DETAILS.'.*');
+        $this->db->where(TBL_INCOMING_DETAILS.'.vendor_po_number', $vendor_po_number);
+        $this->db->where(TBL_INCOMING_DETAILS.'.status', 1);
+        $query_result = $this->db->get(TBL_INCOMING_DETAILS)->result_array();
+		foreach($query_result as $key => $value) {
+			$query_result[$key]['selected'] = '';
+		}
+        return $query_result;
+
+    }
+
+
 }
 
 ?>

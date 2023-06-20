@@ -86,7 +86,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                                 <label for="vendor_po_number">Select Vendor PO Number <span class="required">*</span></label>
-                                                    <select class="form-control vendor_po_for_item vendor_name_for_buyer_name vendor_po_number_for_view_item vendor_po_for_buyer_details_" name="vendor_po_number" id="vendor_po_number">
+                                                    <select class="form-control vendor_po_for_item vendor_name_for_buyer_name vendor_po_number_for_view_item vendor_po_for_buyer_details_ vendor_po_for_incoming_details" name="vendor_po_number" id="vendor_po_number">
                                                         <option st-id="" value="<?=$fetchALLpreVendorpoitemList[0]['pre_vendor_po_number']?>" selected><?=$selected_value;?></option>
                                                     </select>
                                             <p class="error vendor_po_number_error"></p>

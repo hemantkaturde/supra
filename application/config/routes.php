@@ -241,6 +241,10 @@ $route['deletereworkrejection'] = "admin/deletereworkrejection";
 $route['editreworkrejection/(:any)'] = "admin/editreworkrejection/$1";
 $route['getbuyerpodetailsforvendorbillofmaterial'] = "admin/getbuyerpodetailsforvendorbillofmaterial";
 $route['getBuyerDetailsByvendorpoautofill'] = "admin/getBuyerDetailsByvendorpoautofill";
+$route['getIncomingDetailsofbillofmaterial'] = "admin/getIncomingDetailsofbillofmaterial";
+
+
+
 
 
 
