@@ -156,12 +156,19 @@
                                                         <?php
                                                             $CI =& get_instance();
                                                             $CI->load->model('Admin_model');
-                                                            $result_previous_qty = $CI->Admin_model->getPreviousrecordforbalenceqtyadd($value['mainincoming']);
+                                                            $result_previous_qty = $CI->Admin_model->getPreviousrecordforbalenceqtyadd($value['incoming_details_item_id']);
                                                             $balence_qty = $result_previous_qty[0]['balance_qty'] -$value['invoice_qty'];
+
+                                                            
+                                                            if($count == 1){
+                                                                $balence_qty_val =  $value['balance_qty'];
+                                                            }else{
+                                                                $balence_qty_val =  $balence_qty;
+                                                            }
                                                          ?>
 
 
-                                                        <td><?php echo $balence_qty;?></td>
+                                                        <td><?php echo $balence_qty_val;?></td>
 
                                                         <td><?php echo $value['fg_material_gross_weight'];?></td>
                                                         <td><?php echo $value['units'];?></td>
