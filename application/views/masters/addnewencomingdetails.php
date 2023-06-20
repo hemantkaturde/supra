@@ -152,7 +152,16 @@
                                                         <td><?php echo $value['received_date'];?></td>
                                                         <td><?php echo $value['invoice_qty'];?></td>
                                                         <td><?php echo $value['invoice_qty_in_kgs'];?></td>
-                                                        <td><?php echo $value['balance_qty'];?></td>
+
+                                                        <?php
+                                                            $CI =& get_instance();
+                                                            $CI->load->model('Admin_model');
+                                                            $result_previous_qty = $CI->Admin_model->getPreviousrecordforbalenceqtyadd($value['mainincoming']);
+                                                            $balence_qty = $result_previous_qty[0]['balance_qty'] -$value['invoice_qty'];
+                                                         ?>
+
+
+                                                        <td><?php echo $balence_qty;?></td>
 
                                                         <td><?php echo $value['fg_material_gross_weight'];?></td>
                                                         <td><?php echo $value['units'];?></td>
