@@ -134,8 +134,12 @@
                                                 <tbody>
                                                     <?php
                                                         $count=0;
+                                                        $invoice_qty=0;
                                                            foreach ($getAllitemdetails as $key => $value) :
                                                            $count++;
+
+                                                           
+                                                           $invoice_qty += $value['invoice_qty'];
                                                     ?>
                                                     <tr>
                                                         <td><?php echo $count;?></td>
@@ -156,10 +160,10 @@
                                                             $CI =& get_instance();
                                                             $CI->load->model('Admin_model');
                                                             $result_previous_qty = $CI->Admin_model->getPreviousrecordforbalenceqtyedit($value['incoming_details_item_id'],$value['mainincoming']);
-                                                            $balence_qty = $result_previous_qty[0]['balance_qty'] -$value['invoice_qty'];
+                                                            $balence_qty = $value['p_o_qty'] -$invoice_qty;
 
                                                             if($count == 1){
-                                                                $balence_qty_val =  $value['balance_qty'];
+                                                                $balence_qty_val =  $balence_qty;
                                                             }else{
                                                                 $balence_qty_val =  $balence_qty;
                                                             }

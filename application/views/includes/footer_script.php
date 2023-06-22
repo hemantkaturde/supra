@@ -7099,8 +7099,7 @@
 				
 				 $("#balance_qty").val( bal_value.toFixed(2));
 
-
-
+				 
 		});
 
 		$(document).on('click','.deleteIncomingDetailsitem',function(e){
