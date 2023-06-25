@@ -8389,75 +8389,326 @@
 
 				}			
 		});
-
    
 		$(document).on('change','#part_number',function(e){  
 			e.preventDefault();
 			
-			//$(".loader_ajax").show();
 			var part_number = $('#part_number').val();
 		    var vendor_po_number = $('#vendor_po_number').val();
 			var vendor_name = $('#vendor_name').val();
+			var vendor_supplier_name = $('#vendor_supplier_name').val();
 
-			var raw_material_supplier_name = $('#raw_material_supplier_name').val();
+			if(vendor_supplier_name=='vendor'){
 
-			if(vendor_name){
-				if(vendor_po_number){
-						$.ajax({
-							url : "<?php echo ADMIN_PATH;?>getSuppliergoodsPartnumberByidjobwork",
-							type: "POST",
-							data : {'part_number' : part_number,'vendor_po_number':vendor_po_number,'raw_material_supplier_name':raw_material_supplier_name},
-							success: function(data, textStatus, jqXHR)
-							{
-								$(".loader_ajax").hide();
-								if(data == "failure")
+				if(vendor_name){
+					if(vendor_po_number){
+							$.ajax({
+								url : "<?php echo ADMIN_PATH;?>getSuppliergoodsreworkrejectionvendor",
+								type: "POST",
+								data : {'part_number' : part_number,'vendor_po_number':vendor_po_number},
+								success: function(data, textStatus, jqXHR)
 								{
-									$('#description').val('');
-									$('#SAC').val('');
-									$('#HSN_Code').val('');
-									$('#raw_material_size').val('');
-									$('#vendor_order_qty').val('');
-									$('#unit').val('');
-									$('#rm_rate').val('');
+									$(".loader_ajax").hide();
+									if(data == "failure")
+									{
+										$('#description').val('');
+										$('#SAC').val('');
+										$('#HSN_Code').val('');
+										$('#raw_material_size').val('');
+										//$('#quantity').val('');
+										$('#unit').val('');
+										$('#rate').val('');
 
-								}
-								else
+									}
+									else
+									{
+										var data_row_material = jQuery.parseJSON( data );
+										$('#description').val(data_row_material.name);
+										$('#SAC').val(data_row_material.sac_no);
+										$('#HSN_Code').val(data_row_material.hsn_code);
+										$('#raw_material_size').val(data_row_material.sitting_size);
+									     //	$('#quantity').val(data_row_material.vendor_qty);
+										$('#unit').val(data_row_material.unit);
+										$('#rate').val(data_row_material.vendorrate);
+										
+									}
+								},
+								error: function (jqXHR, textStatus, errorThrown)
 								{
-									var data_row_material = jQuery.parseJSON( data );
-									$('#description').val(data_row_material.name);
-									$('#SAC').val(data_row_material.sac_no);
-									$('#HSN_Code').val(data_row_material.hsn_code);
-									$('#raw_material_size').val(data_row_material.sitting_size);
-									$('#vendor_order_qty').val(data_row_material.order_oty);
-									$('#unit').val(data_row_material.unit);
-									$('#rm_rate').val(data_row_material.supplierrate);
-									
+										$('#description').val('');
+										$('#SAC').val('');
+										$('#HSN_Code').val('');
+										$('#raw_material_size').val('');
+										//$('#quantity').val('');
+										$('#unit').val('');
+										$('#rate').val('');									
+										//$(".loader_ajax").hide();
 								}
-							},
-							error: function (jqXHR, textStatus, errorThrown)
-							{
-								    $('#description').val('');
-									$('#SAC').val('');
-									$('#HSN_Code').val('');
-									$('#raw_material_size').val('');
-									$('#vendor_order_qty').val('');
-									$('#unit').val('');
-									$('#rm_rate').val('');									
-								    //$(".loader_ajax").hide();
-							}
-						});
-						return false;
+							});
+							return false;
+
+					}else{
+						$('.part_number_error').html('Please Select Vendor PO Number');
+					}
 
 				}else{
-					$('.part_number_error').html('Please Select Vendor PO Number');
+					$('.part_number_error').html('Please Select Vendor PO');
 				}
 
-			}else{
-
-				$('.part_number_error').html('Please Select Vendor PO');
 			}
-			
+
+			if(vendor_supplier_name=='supplier'){
+
+				var supplier_po_number = $('#supplier_po_number').val();
+			    var supplier_name = $('#supplier_name').val();
+				
+				if(supplier_name){
+					if(supplier_po_number){
+							$.ajax({
+								url : "<?php echo ADMIN_PATH;?>getSuppliergoodsreworkrejectionsupplier",
+								type: "POST",
+								data : {'part_number' : part_number,'supplier_po_number':supplier_po_number,'vendor_po_number':''},
+								success: function(data, textStatus, jqXHR)
+								{
+									$(".loader_ajax").hide();
+									if(data == "failure")
+									{
+										$('#description').val('');
+										$('#SAC').val('');
+										$('#HSN_Code').val('');
+										$('#raw_material_size').val('');
+										$('#vendor_order_qty').val('');
+										$('#unit').val('');
+										$('#rm_rate').val('');
+
+									}
+									else
+									{
+										var data_row_material = jQuery.parseJSON( data );
+										$('#description').val(data_row_material.name);
+										$('#SAC').val(data_row_material.sac_no);
+										$('#HSN_Code').val(data_row_material.hsn_code);
+										$('#raw_material_size').val(data_row_material.sitting_size);
+										$('#vendor_order_qty').val(data_row_material.order_oty);
+										$('#unit').val(data_row_material.unit);
+										$('#rm_rate').val(data_row_material.supplierrate);
+										
+									}
+								},
+								error: function (jqXHR, textStatus, errorThrown)
+								{
+										$('#description').val('');
+										$('#SAC').val('');
+										$('#HSN_Code').val('');
+										$('#raw_material_size').val('');
+										$('#vendor_order_qty').val('');
+										$('#unit').val('');
+										$('#rm_rate').val('');									
+										//$(".loader_ajax").hide();
+								}
+							});
+							return false;
+
+					}else{
+						$('.part_number_error').html('Please Select Vendor PO Number');
+					}
+
+				}else{
+					$('.part_number_error').html('Please Select Vendor PO');
+				}
+			}
+
 		});
+
+		$(document).on('click','.closereworkrejectionmodal', function(){
+			location.reload();
+        });
+
+		$(document).on('change', '#rate,#quantity', function(){	
+				$("#balanced_aty").val();
+			  
+				if($("#rate").val()){
+					 var rate = $("#rate").val();
+				 }else{
+					 var rate = 0;
+				 }
+
+				 if($("#quantity").val()){
+					 var quantity = $("#quantity").val();
+				 }else{
+					 var quantity = 0;
+				 }
+				 
+				 var value = parseFloat(rate) * parseFloat(quantity);
+				 $("#value").val( Math.round(value));
+		});
+
+		$(document).on('change', '#gst_rate', function(){	
+
+		    var gst_rate_value = $("#gst_rate").val();
+
+			if(gst_rate_value=='IGST'){
+
+				$(".cgst_sgst_div").attr("style", "display:none");
+				$(".igst_div").attr("style", "display:block");
+				$(".cgst_sgst_div_6").attr("style", "display:none");
+				$(".igst_div_12").attr("style", "display:none");
+
+				var base_val = $("#value").val();
+				var row_material_cost = $("#row_material_cost").val();
+				var total_value = parseFloat(base_val) + parseFloat(row_material_cost) ;
+				var gst_value = parseFloat(total_value) * 18 / 100;
+				
+				$("#igst_rate_18").val( Math.round(gst_value));
+				$("#gst").val( Math.round(gst_value));
+				$("#grand_total").val( Math.round(gst_value) + Math.round(total_value)); 
+
+
+			}else if(gst_rate_value=='CGST_SGST'){
+
+				var base_val = $("#value").val();
+				var row_material_cost = $("#row_material_cost").val();
+				var total_value = parseFloat(base_val) + parseFloat(row_material_cost) ;
+
+				var gst_value = parseFloat(total_value) * 18 / 100;
+
+				$(".igst_div").attr("style", "display:none");
+				$(".cgst_sgst_div").attr("style", "display:block");
+				$(".cgst_sgst_div_6").attr("style", "display:none");
+				$(".igst_div_12").attr("style", "display:none");
+
+				var cgst_rate  =Math.round(gst_value)/2;
+
+				var SGST_rate  =Math.round(gst_value)/2;
+
+				$("#CGST_rate_9").val( Math.round(cgst_rate));
+				$("#SGST_rate_9").val( Math.round(SGST_rate));
+
+				$("#gst").val( Math.round(gst_value));
+
+				$("#grand_total").val( Math.round(gst_value) + Math.round(total_value));
+
+			}else if(gst_rate_value=='CGST_SGST_6'){
+
+				$(".igst_div").attr("style", "display:none");
+				$(".cgst_sgst_div").attr("style", "display:none");
+				$(".cgst_sgst_div_6").attr("style", "display:block");
+				$(".igst_div_12").attr("style", "display:none");
+
+				var base_val = $("#value").val();
+				var row_material_cost = $("#row_material_cost").val();
+				var total_value = parseFloat(base_val) + parseFloat(row_material_cost) ;
+
+				var gst_value = parseFloat(total_value) * 12 / 100;
+
+				var cgst_rate  =Math.round(gst_value)/2;
+
+				var SGST_rate  =Math.round(gst_value)/2;
+
+				$("#CGST_rate_6").val( Math.round(cgst_rate));
+				$("#SGST_rate_6").val( Math.round(SGST_rate));
+
+				$("#gst").val( Math.round(gst_value));
+
+				$("#grand_total").val( Math.round(gst_value) + Math.round(total_value));
+
+			}else if(gst_rate_value=='IGST_12'){
+
+				$(".igst_div").attr("style", "display:none");
+				$(".cgst_sgst_div").attr("style", "display:none");
+				$(".cgst_sgst_div_6").attr("style", "display:none");
+				$(".igst_div_12").attr("style", "display:block");
+
+				var base_val = $("#value").val();
+				var row_material_cost = $("#row_material_cost").val();
+				var total_value = parseFloat(base_val) + parseFloat(row_material_cost) ;
+				var gst_value = parseFloat(total_value) * 12 / 100;
+				
+				$("#igst_rate_12").val( Math.round(gst_value));
+				$("#gst").val( Math.round(gst_value));
+				$("#grand_total").val( Math.round(gst_value) + Math.round(total_value)); 
+
+			}
+
+
+		});
+
+
+		$(document).on('click','#savereworkrejectiontem',function(e){
+			e.preventDefault();
+			$(".loader_ajax").show();
+			   var formData = new FormData($("#addnnewreworkrejectionitemform")[0]);
+
+			   var part_number =   $('#part_number').val();
+			   var description =   $('#description').val();
+			   var rejected_work_reason =   $('#rejected_work_reason').val();
+			   var quantity =   $('#quantity').val();
+			   var rate =   $('#rate').val();
+			   var value =   $('#value').val();
+			   var row_material_cost =   $('#row_material_cost').val();
+			   var gst_rate =   $('#gst_rate').val();
+			   var grand_total =   $('#grand_total').val();
+			   var item_remark =   $('#item_remark').val();
+
+
+			   var pre_challan_date =   $('#challan_date').val();
+			   var pre_vendor_supplier_name =   $('#vendor_supplier_name').val();
+			   var pre_vendor_name =   $('#vendor_name').val();
+			   var pre_vendor_po_number =   $('#vendor_po_number').val();
+			   var pre_supplier_name =   $('#supplier_name').val();
+			   var pre_supplier_po_number =   $('#supplier_po_number').val();
+			   var pre_dispath_through =   $('#dispath_through').val();
+			   var pre_total_weight =   $('#total_weight').val();
+			   var pre_total_bags =   $('#total_bags').val();
+			   var pre_remark =   $('#remark').val();
+
+
+
+			$.ajax({
+				url : "<?php echo base_url();?>savereworkrejectiontem",
+				type: "POST",
+				 //data : formData,
+				 data :{part_number:part_number,description:description,rejected_work_reason:rejected_work_reason,quantity:quantity,rate:rate,value:value,row_material_cost:row_material_cost,gst_rate:gst_rate,grand_total:grand_total,item_remark:item_remark,pre_challan_date:pre_challan_date,pre_vendor_supplier_name:pre_vendor_supplier_name,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_supplier_name:pre_supplier_name,pre_supplier_po_number:pre_supplier_po_number,pre_dispath_through:pre_dispath_through,pre_total_weight:pre_total_weight,pre_total_bags:pre_total_bags,pre_remark:pre_remark },
+				// method: "POST",
+                // data :{package_id:package_id},
+                cache:false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+						$(".loader_ajax").hide();
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						swal({
+							title: "Success",
+							text: "Item Successfully Added!",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+
+								// if(challan_table_id){
+								// 	window.location.href = "<?php echo base_url().'editscrapreturn/'?>"+challan_table_id;
+								// }else{
+									window.location.href = "<?php echo base_url().'addneworkrejection'?>";
+								//}		
+						});		
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			});
+			return false;
+	   });
+
 
 
 	</script> 
