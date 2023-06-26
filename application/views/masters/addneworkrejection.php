@@ -96,7 +96,7 @@
                                         <?php
                                             if($getReworkRejectionitemslist[0]['pre_vendor_po_number']){
                                                 $display='block';
-                                                $selected_value = $getReworkRejectionitemslist[0]['po_number'];
+                                                $selected_value = $getReworkRejectionitemslist[0]['vendor_po_number'];
                                             }else{
                                                 $display='none';
                                                 $selected_value = 'Select Buyer PO Number';
@@ -151,7 +151,7 @@
                                                         <label for="supplier_po_number">Select Supplier PO Number</label>
                                                             <select class="form-control supplier_po_number_item supplier_po_number_for_item" name="supplier_po_number" id="supplier_po_number">
                                                                 <!-- <option st-id="" value="">Select Vendor Name</option> -->
-                                                                <option st-id="" value="<?=$fetchALLpreReworkReturnList[0]['pre_supplier_po_number']?>" selected="selected"><?=$selected_value?></option>
+                                                                <option st-id="" value="<?=$getReworkRejectionitemslist[0]['pre_supplier_po_number']?>" selected="selected"><?=$selected_value?></option>
                                                             </select>
                                                     <p class="error supplier_po_number_error"></p>
                                                 </div>

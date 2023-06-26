@@ -8145,6 +8145,13 @@
 	        });
 	    });
 
+
+		$(document).ready(function() {
+
+
+		});
+
+
 		$(document).on('change','#vendor_name',function(e){  
 				e.preventDefault();
 				//$(".loader_ajax").show();
