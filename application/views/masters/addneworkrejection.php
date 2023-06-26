@@ -115,14 +115,21 @@
                                         </div>
                                     </div>
 
-                                        <div id="supplier_name_div_for_hide_show" style="display:none">
+
+                                    <?php if($getReworkRejectionitemslist[0]['pre_supplier_name']){
+                                      $display = 'block';
+                                     }else{ 
+                                      $display = 'none';
+                                     } ?>
+
+                                        <div id="supplier_name_div_for_hide_show" style="display:<?=$display;?>">
                                             <div class="col-md-12" >
                                                 <div class="form-group">
                                                         <label for="supplier_name">Supplier Name </label>
                                                         <select class="form-control" name="supplier_name" id="supplier_name">
                                                             <option st-id="" value="">Select Supplier Name</option>
                                                             <?php foreach ($supplierList as $key => $value) {?>
-                                                            <option value="<?php echo $value['sup_id']; ?>" <?php if($value['sup_id']==$fetchALLpreVendoritemList[0]['pre_supplier_name']){ echo 'selected';} ?> ><?php echo $value['supplier_name']; ?></option>
+                                                            <option value="<?php echo $value['sup_id']; ?>" <?php if($value['sup_id']==$getReworkRejectionitemslist[0]['pre_supplier_name']){ echo 'selected';} ?> ><?php echo $value['supplier_name']; ?></option>
                                                             <?php } ?>
                                                         </select>
                                                     <p class="error supplier_name_error"></p>
@@ -130,15 +137,14 @@
                                             </div>
 
                                             <?php
-                                                if($fetchALLpreReworkReturnList[0]['pre_supplier_po_number']){
+                                                if($getReworkRejectionitemslist[0]['pre_supplier_po_number']){
                                                     $display='block';
-                                                    $selected_value = $fetchALLpreReworkReturnList[0]['supplier_po'];
+                                                    $selected_value = $getReworkRejectionitemslist[0]['supplier_po_number'];
                                                 }else{
                                                     $display='none';
                                                     $selected_value = 'Select Supplier PO Number';
                                                 }        
                                             ?>
-
 
                                             <div class="col-md-12 supplier_po_number_div" id="supplier_po_number_div" style="display: <?=$display?>">
                                                 <div class="form-group">
