@@ -246,6 +246,9 @@ $route['getSuppliergoodsreworkrejectionvendor'] = "admin/getSuppliergoodsreworkr
 $route['getSuppliergoodsreworkrejectionsupplier'] = "admin/getSuppliergoodsreworkrejectionsupplier";
 $route['savereworkrejectiontem'] = "admin/savereworkrejectiontem";
 
+$route['deleteReworkRejectionitem'] = "admin/deleteReworkRejectionitem";
+
+
 
 
 

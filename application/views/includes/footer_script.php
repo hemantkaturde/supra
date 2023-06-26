@@ -8650,7 +8650,6 @@
 			   var grand_total =   $('#grand_total').val();
 			   var item_remark =   $('#item_remark').val();
 
-
 			   var pre_challan_date =   $('#challan_date').val();
 			   var pre_vendor_supplier_name =   $('#vendor_supplier_name').val();
 			   var pre_vendor_name =   $('#vendor_name').val();
@@ -8661,7 +8660,6 @@
 			   var pre_total_weight =   $('#total_weight').val();
 			   var pre_total_bags =   $('#total_bags').val();
 			   var pre_remark =   $('#remark').val();
-
 
 
 			$.ajax({
@@ -8707,6 +8705,55 @@
 			    }
 			});
 			return false;
+	   });
+
+
+	   $(document).on('click','.deleteReworkRejectionitem',function(e){
+			var elemF = $(this);
+			e.preventDefault();
+			swal({
+				title: "Are you sure?",
+				text: "Delete Rework Rejection Item ",
+				type: "warning",
+				showCancelButton: true,
+				closeOnClickOutside: false,
+				confirmButtonClass: "btn-sm btn-danger",
+				confirmButtonText: "Yes, delete it!",
+				cancelButtonText: "No, cancel plz!",
+				closeOnConfirm: false,
+				closeOnCancel: false
+			}, function(isConfirm) {
+				if (isConfirm) {
+							$.ajax({
+								url : "<?php echo base_url();?>deleteReworkRejectionitem",
+								type: "POST",
+								data : 'id='+elemF.attr('data-id'),
+								success: function(data, textStatus, jqXHR)
+								{
+									const obj = JSON.parse(data);
+								
+									if(obj.status=='success'){
+										swal({
+											title: "Deleted!",
+											text: "Rework Rejection Item Deleted Succesfully",
+											icon: "success",
+											button: "Ok",
+											},function(){ 
+													window.location.href = "<?php echo base_url().'addneworkrejection'?>";
+										});	
+									}
+
+								},
+								error: function (jqXHR, textStatus, errorThrown)
+								{
+									$(".loader_ajax").hide();
+								}
+							})
+						}
+						else {
+				swal("Cancelled", "Rework Rejection Item deletion cancelled ", "error");
+				}
+			});
 	   });
 
 

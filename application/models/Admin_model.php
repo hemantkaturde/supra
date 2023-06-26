@@ -4439,6 +4439,46 @@ class Admin_model extends CI_Model
 
     }
 
+    public function getReworkRejectionitemslist(){
+
+        $this->db->select('*,'.TBL_REWORK_REJECTION_ITEM.'.id as reworkrejectionid');
+        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_REWORK_REJECTION_ITEM.'.part_number');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_REWORK_REJECTION_ITEM.'.pre_vendor_po_number','left');
+        $this->db->where(TBL_REWORK_REJECTION_ITEM.'.status',1);
+        $this->db->where(TBL_REWORK_REJECTION_ITEM.'.rework_rejection_id IS NULL');
+        $query = $this->db->get(TBL_REWORK_REJECTION_ITEM);
+        $data = $query->result_array();
+        return $data;
+
+    }
+
+
+    public function deleteReworkRejectionitem($id){
+
+        $this->db->where('id', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_REWORK_REJECTION_ITEM)){
+           return TRUE;
+        }else{
+           return FALSE;
+        }
+
+    }
+
+    public function update_last_inserted_id_rework_rejection($saveNewreworkrejection){
+
+        $data = array(
+            'rework_rejection_id' => $saveNewreworkrejection
+        );
+        $this->db->where(TBL_REWORK_REJECTION_ITEM.'.rework_rejection_id IS NULL');
+        if($this->db->update(TBL_REWORK_REJECTION_ITEM,$data)){
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+    }
+
 }
 
 ?>

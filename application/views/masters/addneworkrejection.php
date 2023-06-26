@@ -43,8 +43,8 @@
                                         </div>
                                     </div>
                                     
-                                    <?php if($fetchALLpreReworkReturnList[0]['pre_date']){
-                                        $date= $fetchALLpreReworkReturnList[0]['pre_date'];
+                                    <?php if($getReworkRejectionitemslist[0]['pre_date']){
+                                        $date= $getReworkRejectionitemslist[0]['pre_date'];
                                      }else{
                                         $date= date('Y-m-d');
                                      } ?>
@@ -64,21 +64,28 @@
                                                 <label for="vendor_supplier_name">Select Vendor / Supplier <span class="required">*</span></label>
                                                 <select class="form-control vendor_supplier_name" name="vendor_supplier_name" id="vendor_supplier_name">
                                                     <option st-id="" value="">Select Vendor / Supplier</option>
-                                                    <option value="vendor" value="">Vendor</option>
-                                                    <option value="supplier" value="">Supplier</option>
+                                                    <option value="vendor" <?php if($getReworkRejectionitemslist[0]['pre_vendor_supplier_name']=='vendor'){ echo 'selected'; } ?>>Vendor</option>
+                                                    <option value="supplier" <?php if($getReworkRejectionitemslist[0]['pre_vendor_supplier_name']=='supplier'){ echo 'selected'; } ?>>Supplier</option>
                                                 </select>
                                             <p class="error vendor_supplier_name_error"></p>
                                         </div>
                                     </div>
 
-                                    <div id="vendor_name_div_for_hide_show" style="display:none">
+
+                                    <?php if($getReworkRejectionitemslist[0]['pre_vendor_name']){
+                                      $display = 'block';
+                                     }else{ 
+                                      $display = 'none';
+                                     } ?>
+
+                                    <div id="vendor_name_div_for_hide_show" style="display:<?=$display;?>">
                                         <div class="col-md-12" >
                                             <div class="form-group">
                                                     <label for="vendor_name">Vendor Name</label>
                                                     <select class="form-control vendor_name" name="vendor_name" id="vendor_name">
                                                         <option st-id="" value="">Select Vendor Name</option>
                                                         <?php foreach ($vendorList as $key => $value) {?>
-                                                        <option value="<?php echo $value['ven_id']; ?>" <?php if($value['ven_id']==$fetchALLprejobworkitemList[0]['pre_vendor_name']){ echo 'selected';} ?>><?php echo $value['vendor_name']; ?></option>
+                                                        <option value="<?php echo $value['ven_id']; ?>" <?php if($value['ven_id']==$getReworkRejectionitemslist[0]['pre_vendor_name']){ echo 'selected';} ?>><?php echo $value['vendor_name']; ?></option>
                                                         <?php } ?>
                                                     </select>
                                                 <p class="error vendor_name_error"></p>
@@ -87,9 +94,9 @@
 
 
                                         <?php
-                                            if($fetchALLpreReworkReturnList[0]['pre_vendor_po_number']){
+                                            if($getReworkRejectionitemslist[0]['pre_vendor_po_number']){
                                                 $display='block';
-                                                $selected_value = $fetchALLpreReworkReturnList[0]['vendor_po'];
+                                                $selected_value = $getReworkRejectionitemslist[0]['po_number'];
                                             }else{
                                                 $display='none';
                                                 $selected_value = 'Select Buyer PO Number';
@@ -101,15 +108,14 @@
                                                     <label for="vendor_po_number">Select Vendor PO Number</label>
                                                         <select class="form-control vendor_po_number_itam" name="vendor_po_number" id="vendor_po_number">
                                                             <!-- <option st-id="" value="">Select Vendor Name</option> -->
-                                                            <option st-id="" value="<?=$fetchALLpreReworkReturnList[0]['pre_vendor_po_number']?>" selected="selected"><?=$selected_value?></option>
+                                                            <option st-id="" value="<?=$getReworkRejectionitemslist[0]['pre_vendor_po_number']?>" selected="selected"><?=$selected_value?></option>
                                                         </select>
                                                 <p class="error vendor_po_number_error"></p>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div id="supplier_name_div_for_hide_show" style="display:none">
-
+                                        <div id="supplier_name_div_for_hide_show" style="display:none">
                                             <div class="col-md-12" >
                                                 <div class="form-group">
                                                         <label for="supplier_name">Supplier Name </label>
@@ -151,7 +157,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="dispath_through">Dispath Through </label>
-                                            <input type="text" class="form-control" id="dispath_through" value="<?=$fetchALLpreVendoritemList[0]['pre_delivery'];?>" name="dispath_through">
+                                            <input type="text" class="form-control" id="dispath_through" value="<?=$getReworkRejectionitemslist[0]['pre_dispath_through'];?>" name="dispath_through">
                                             <p class="error dispath_through_error"></p>
                                         </div>
                                     </div>
@@ -160,7 +166,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="total_weight">Total Weight </label>
-                                            <input type="text" class="form-control" id="total_weight" value="<?=$fetchALLpreVendoritemList[0]['pre_delivery'];?>" name="total_weight">
+                                            <input type="text" class="form-control" id="total_weight" value="<?=$getReworkRejectionitemslist[0]['pre_total_weight'];?>" name="total_weight">
                                             <p class="error total_weight_error"></p>
                                         </div>
                                     </div>
@@ -168,7 +174,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="total_bags">Total Bags / Boxes / Goni </label>
-                                            <input type="text" class="form-control" id="total_bags" value="<?=$fetchALLpreVendoritemList[0]['pre_delivery'];?>" name="total_bags">
+                                            <input type="text" class="form-control" id="total_bags" value="<?=$getReworkRejectionitemslist[0]['pre_total_bags'];?>" name="total_bags">
                                             <p class="error total_bags_error"></p>
                                         </div>
                                     </div>
@@ -177,7 +183,7 @@
                                     <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="remark">Remark</label>
-                                                  <textarea type="text" class="form-control"  id="remark"  name="remark" required> <?=$fetchALLpreVendoritemList[0]['pre_remark'];?></textarea>
+                                                  <textarea type="text" class="form-control"  id="remark"  name="remark" required> <?=$getReworkRejectionitemslist[0]['pre_remark'];?></textarea>
                                                 <p class="error remark_error"></p>
                                             </div>
                                     </div>
@@ -193,12 +199,10 @@
                                                     <tr>
                                                         <th>Sr No.</th>
                                                         <th>Part Number</th>
-                                                        <th>Description</th>
                                                         <th>Quantity</th>
                                                         <th>Rate</th>
                                                         <th>Value</th>
                                                         <th>Row Material Cost</th>
-                                                        <th>Unit</th>     
                                                         <th>Total </th>
                                                         <th>GST</th>
                                                         <th>Grand Total</th>
@@ -209,24 +213,23 @@
                                                 <tbody>
                                                     <?php
                                                         $count=0;
-                                                           foreach ($fetchALLprejobworkitemList as $key => $value) :
+                                                           foreach ($getReworkRejectionitemslist as $key => $value) :
                                                            $count++;
                                                     ?>
                                                     <tr>
                                                         <td><?php echo $count;?></td>
                                                         <td><?php echo $value['part_number'];?></td>
-                                                        <td><?php echo $value['description'];?></td>
-                                                        <td><?php echo $value['vendor_qty'];?></td>
-                                                        <td><?php echo $value['rm_actual_qty'];?></td>
-                                                        <td><?php echo $value['ram_rate'];?></td>
+                                                        <!-- <td><?php echo $value['description'];?></td> -->
+                                                        <td><?php echo $value['qty'];?></td>
+                                                        <td><?php echo $value['rate'];?></td>
                                                         <td><?php echo $value['value'];?></td>
-                                                        <td><?php echo $value['packing_forwarding'];?></td>
-                                                        <td><?php echo $value['total'];?></td>
-                                                        <td><?php echo $value['gst'];?></td>
+                                                        <td><?php echo $value['row_material_cost'];?></td>
+                                                        <td><?php echo $value['row_material_cost'] + $value['value'];?></td>
+                                                        <td><?php echo $value['gst_rate'];?></td>
                                                         <td><?php echo $value['grand_total'];?></td>
                                                         <td><?php echo $value['item_remark'];?></td>
                                                         <td>
-                                                        <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['id'];?>' class='fa fa-trash-o deleteSupplierpoitem' aria-hidden='true'></i>
+                                                        <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['reworkrejectionid'];?>' class='fa fa-trash-o deleteReworkRejectionitem' aria-hidden='true'></i>
                                                         </td>
                                                     </tr>
                                                     <?php endforeach;?>

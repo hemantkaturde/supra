@@ -6142,8 +6142,12 @@ class Admin extends BaseController
                 }
                 
                 if($saveNewreworkrejection){
-                    $addnewreworkrejection_response['status'] = 'success';
-                    $addnewreworkrejection_response['error'] = array('challan_no'=>strip_tags(form_error('challan_no')),'challan_date'=>strip_tags(form_error('challan_date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'dispath_through'=>strip_tags(form_error('dispath_through')),'total_weight'=>strip_tags(form_error('total_weight')),'total_bags'=>strip_tags(form_error('total_bags')),'remark'=>strip_tags(form_error('remark')));
+
+                 $update_last_inserted_id_rework_rejection = $this->admin_model->update_last_inserted_id_rework_rejection($saveNewreworkrejection);
+                    if($update_last_inserted_id_rework_rejection){
+                       $addnewreworkrejection_response['status'] = 'success';
+                       $addnewreworkrejection_response['error'] = array('challan_no'=>strip_tags(form_error('challan_no')),'challan_date'=>strip_tags(form_error('challan_date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'dispath_through'=>strip_tags(form_error('dispath_through')),'total_weight'=>strip_tags(form_error('total_weight')),'total_bags'=>strip_tags(form_error('total_bags')),'remark'=>strip_tags(form_error('remark')));
+                    }
                 }
 
             }
@@ -6159,6 +6163,7 @@ class Admin extends BaseController
             $data['vendorList']= $this->admin_model->fetchALLvendorList();
             $data['supplierList']= $this->admin_model->fetchALLsupplierList();
             $data['getPreviousReworkreturnnumber']= $this->admin_model->getPreviousReworkreturnnumber();
+            $data['getReworkRejectionitemslist']= $this->admin_model->getReworkRejectionitemslist();
             $this->loadViews("masters/addneworkrejection", $this->global, $data, NULL);
 
         }
@@ -6353,6 +6358,24 @@ class Admin extends BaseController
             }
             echo json_encode($savereworkrejectiontem_response);
         }
+
+    }
+
+    public function deleteReworkRejectionitem(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->deleteReworkRejectionitem(trim($this->input->post('id')));
+            if ($result) {
+                        $process = 'Rework Rejection  Item Delete';
+                        $processFunction = 'Admin/deleteReworkRejectionitem';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
+
 
     }
 
