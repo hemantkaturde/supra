@@ -6199,6 +6199,7 @@ class Admin extends BaseController
         $data['vendorList']= $this->admin_model->fetchALLvendorList();
         $data['supplierList']= $this->admin_model->fetchALLsupplierList();
         $data['getReworkrejectiondetails']= $this->admin_model->getReworkrejectiondetails($id);
+        $data['getReworkRejectionitemslistforedit']= $this->admin_model->getReworkRejectionitemslistforedit($id);
         // $data['fetchALLprescrapreturndetailsforview']= $this->admin_model->fetchALLprescrapreturndetailsforview($scrapreturnid);
         $this->loadViews("masters/editreworkrejection", $this->global, $data, NULL);
 
