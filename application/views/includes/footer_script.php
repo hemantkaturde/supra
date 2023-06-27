@@ -8422,6 +8422,7 @@
 										$('#SAC').val('');
 										$('#HSN_Code').val('');
 										$('#raw_material_size').val('');
+										$('#type_of_raw_material').val('');
 										//$('#quantity').val('');
 										$('#unit').val('');
 										$('#rate').val('');
@@ -8434,7 +8435,7 @@
 										$('#SAC').val(data_row_material.sac_no);
 										$('#HSN_Code').val(data_row_material.hsn_code);
 										$('#raw_material_size').val(data_row_material.sitting_size);
-									     //	$('#quantity').val(data_row_material.vendor_qty);
+									    $('#type_of_raw_material').val(data_row_material.typeofrawmaterial);
 										$('#unit').val(data_row_material.unit);
 										$('#rate').val(data_row_material.vendorrate);
 										
@@ -8446,6 +8447,7 @@
 										$('#SAC').val('');
 										$('#HSN_Code').val('');
 										$('#raw_material_size').val('');
+										$('#type_of_raw_material').val('');
 										//$('#quantity').val('');
 										$('#unit').val('');
 										$('#rate').val('');									

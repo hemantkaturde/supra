@@ -129,7 +129,7 @@
 
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="total_weight">Total Weight </label>
+                                            <label for="total_weight">Total Weight (in Kgs)</label>
                                             <input type="text" class="form-control" id="total_weight" value="<?=$getReworkrejectiondetails[0]['total_weight'];?>" name="total_weight">
                                             <p class="error total_weight_error"></p>
                                         </div>
@@ -285,7 +285,7 @@
 
                                                    
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Quantity<span class="required">*</span></label>
+                                                        <label class="col-sm-4 col-form-label">Quantity (in pcs / in Kgs)<span class="required">*</span></label>
                                                         <div class="col-sm-8">
                                                             <input type="text" class="form-control"  id="quantity" name="quantity">
                                                             <p class="error quantity_error"></p>

@@ -171,7 +171,7 @@
 
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="total_weight">Total Weight </label>
+                                            <label for="total_weight">Total Weight (in Kgs)</label>
                                             <input type="text" class="form-control" id="total_weight" value="<?=$getReworkRejectionitemslist[0]['pre_total_weight'];?>" name="total_weight">
                                             <p class="error total_weight_error"></p>
                                         </div>
@@ -311,8 +311,8 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Type Of Row Material</label>
                                                         <div class="col-sm-8">
-                                                            <input type="text" class="form-control"  id="raw_material_size" name="raw_material_size" readonly>
-                                                            <p class="error raw_material_size_error"></p>
+                                                            <input type="text" class="form-control"  id="type_of_raw_material" name="type_of_raw_material" readonly>
+                                                            <p class="error type_of_raw_material_error"></p>
                                                         </div>
                                                     </div>
                                                 
@@ -327,7 +327,7 @@
 
                                                    
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Quantity<span class="required">*</span></label>
+                                                        <label class="col-sm-4 col-form-label">Quantity (in pcs / in Kgs) <span class="required">*</span></label>
                                                         <div class="col-sm-8">
                                                             <input type="text" class="form-control"  id="quantity" name="quantity">
                                                             <p class="error quantity_error"></p>
