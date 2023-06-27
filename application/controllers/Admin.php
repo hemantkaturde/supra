@@ -6122,6 +6122,7 @@ class Admin extends BaseController
                 $data = array(
                     'challan_no' =>  trim($this->input->post('challan_no')),
                     'challan_date' => trim($this->input->post('challan_date')),
+                    'vendor_supplier_name'=>trim($this->input->post('vendor_supplier_name')),
                     'vendor_name' =>  trim($this->input->post('vendor_name')),
                     'vendor_po_number' =>  trim($this->input->post('vendor_po_number')),
                     'supplier_name' =>  trim($this->input->post('supplier_name')),

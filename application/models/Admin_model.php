@@ -4328,7 +4328,7 @@ class Admin_model extends CI_Model
     public function getReworkrejectiondetails($id){
 
 
-        $this->db->select('*,'.TBL_SUPPLIER.'.supplier_name as supplier,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_pomaster,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_po_master,'.TBL_REWORK_REJECTION.'.id as reworkrejectionid,'.TBL_REWORK_REJECTION.'.vendor_po_number as vendor_po_rework,'.TBL_REWORK_REJECTION.'.supplier_po_number as rejection_supplier_po,'.TBL_REWORK_REJECTION.'.supplier_name as reworksupplier,'.TBL_REWORK_REJECTION.'.remark as rejectionremark');
+        $this->db->select('*,'.TBL_SUPPLIER.'.supplier_name as supplier,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_pomaster,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_po_master,'.TBL_REWORK_REJECTION.'.id as reworkrejectionid,'.TBL_REWORK_REJECTION.'.vendor_po_number as vendor_po_rework,'.TBL_REWORK_REJECTION.'.supplier_po_number as rejection_supplier_po,'.TBL_REWORK_REJECTION.'.supplier_name as reworksupplier,'.TBL_REWORK_REJECTION.'.remark as rejectionremark,'.TBL_REWORK_REJECTION.'.vendor_name as venorselected');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_REWORK_REJECTION.'.vendor_name','left');
         $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_REWORK_REJECTION.'.supplier_name','left');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_REWORK_REJECTION.'.vendor_po_number','left');

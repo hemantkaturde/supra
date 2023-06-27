@@ -8148,7 +8148,75 @@
 
 		$(document).ready(function() {
 
+			var vendor_supplier_name = $('#vendor_supplier_name').val();
 
+			    if(vendor_supplier_name=='vendor'){
+				    $('#vendor_name_div_for_hide_show').css('display','block');
+					$('#supplier_name_div_for_hide_show').css('display','none');
+
+					 var vendor_po_number = $('#vendor_po_number').val();
+						$("#part_number").html('');
+							$.ajax({
+								url : "<?php echo ADMIN_PATH;?>getVendoritemonly",
+								type: "POST",
+								data : {'vendor_po_number' : vendor_po_number},
+								success: function(data, textStatus, jqXHR)
+								{
+									$(".loader_ajax").hide();
+									if(data == "failure")
+									{
+										$('#part_number').html('<option value="">Select Part Number</option>');
+									}
+									else
+									{
+										$('#part_number').html(data);
+
+									}
+								},
+								error: function (jqXHR, textStatus, errorThrown)
+								{
+									$('#part_number').html();
+								}
+							});
+						return false;
+			    }
+
+
+			    if(vendor_supplier_name=='supplier'){
+				    $('#supplier_name_div_for_hide_show').css('display','block');
+					$('#vendor_name_div_for_hide_show').css('display','none');
+
+						//$(".loader_ajax").show();
+						var supplier_po_number = $('.supplier_po_number_for_item').val();
+						var flag = 'Supplier';
+						$("#part_number").html('');
+					
+						$.ajax({
+							url : "<?php echo ADMIN_PATH;?>getSuppliritemonly",
+							type: "POST",
+							data : {'supplier_po_number' : supplier_po_number,'flag':flag},
+							success: function(data, textStatus, jqXHR)
+							{
+								$(".loader_ajax").hide();
+								if(data == "failure")
+								{
+									$('#part_number').html('<option value="">Select Part Number</option>');
+								}
+								else
+								{
+									$('#part_number').html(data);
+
+								}
+							},
+							error: function (jqXHR, textStatus, errorThrown)
+							{
+								$('#part_number').html();
+							}
+						});
+						return false;
+			        }
+
+			
 		});
 
 
@@ -8644,7 +8712,6 @@
 
 		});
 
-
 		$(document).on('click','#savereworkrejectiontem',function(e){
 			e.preventDefault();
 			$(".loader_ajax").show();
@@ -8716,58 +8783,55 @@
 			    }
 			});
 			return false;
-	   });
+	    });
 
+		$(document).on('click','.deleteReworkRejectionitem',function(e){
+				var elemF = $(this);
+				e.preventDefault();
+				swal({
+					title: "Are you sure?",
+					text: "Delete Rework Rejection Item ",
+					type: "warning",
+					showCancelButton: true,
+					closeOnClickOutside: false,
+					confirmButtonClass: "btn-sm btn-danger",
+					confirmButtonText: "Yes, delete it!",
+					cancelButtonText: "No, cancel plz!",
+					closeOnConfirm: false,
+					closeOnCancel: false
+				}, function(isConfirm) {
+					if (isConfirm) {
+								$.ajax({
+									url : "<?php echo base_url();?>deleteReworkRejectionitem",
+									type: "POST",
+									data : 'id='+elemF.attr('data-id'),
+									success: function(data, textStatus, jqXHR)
+									{
+										const obj = JSON.parse(data);
+									
+										if(obj.status=='success'){
+											swal({
+												title: "Deleted!",
+												text: "Rework Rejection Item Deleted Succesfully",
+												icon: "success",
+												button: "Ok",
+												},function(){ 
+														window.location.href = "<?php echo base_url().'addneworkrejection'?>";
+											});	
+										}
 
-	   $(document).on('click','.deleteReworkRejectionitem',function(e){
-			var elemF = $(this);
-			e.preventDefault();
-			swal({
-				title: "Are you sure?",
-				text: "Delete Rework Rejection Item ",
-				type: "warning",
-				showCancelButton: true,
-				closeOnClickOutside: false,
-				confirmButtonClass: "btn-sm btn-danger",
-				confirmButtonText: "Yes, delete it!",
-				cancelButtonText: "No, cancel plz!",
-				closeOnConfirm: false,
-				closeOnCancel: false
-			}, function(isConfirm) {
-				if (isConfirm) {
-							$.ajax({
-								url : "<?php echo base_url();?>deleteReworkRejectionitem",
-								type: "POST",
-								data : 'id='+elemF.attr('data-id'),
-								success: function(data, textStatus, jqXHR)
-								{
-									const obj = JSON.parse(data);
-								
-									if(obj.status=='success'){
-										swal({
-											title: "Deleted!",
-											text: "Rework Rejection Item Deleted Succesfully",
-											icon: "success",
-											button: "Ok",
-											},function(){ 
-													window.location.href = "<?php echo base_url().'addneworkrejection'?>";
-										});	
+									},
+									error: function (jqXHR, textStatus, errorThrown)
+									{
+										$(".loader_ajax").hide();
 									}
-
-								},
-								error: function (jqXHR, textStatus, errorThrown)
-								{
-									$(".loader_ajax").hide();
-								}
-							})
-						}
-						else {
-				swal("Cancelled", "Rework Rejection Item deletion cancelled ", "error");
-				}
-			});
-	   });
-
-
+								})
+							}
+							else {
+					swal("Cancelled", "Rework Rejection Item deletion cancelled ", "error");
+					}
+				});
+		});
 
 	</script> 
 <?php } ?>
