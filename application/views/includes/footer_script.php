@@ -8739,12 +8739,15 @@
 			   var pre_total_bags =   $('#total_bags').val();
 			   var pre_remark =   $('#remark').val();
 
+			   var reworkrejectionid =   $('#reworkrejectionid').val();
+			   
+
 
 			$.ajax({
 				url : "<?php echo base_url();?>savereworkrejectiontem",
 				type: "POST",
 				 //data : formData,
-				 data :{part_number:part_number,description:description,rejected_work_reason:rejected_work_reason,quantity:quantity,rate:rate,value:value,row_material_cost:row_material_cost,gst_rate:gst_rate,grand_total:grand_total,item_remark:item_remark,pre_challan_date:pre_challan_date,pre_vendor_supplier_name:pre_vendor_supplier_name,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_supplier_name:pre_supplier_name,pre_supplier_po_number:pre_supplier_po_number,pre_dispath_through:pre_dispath_through,pre_total_weight:pre_total_weight,pre_total_bags:pre_total_bags,pre_remark:pre_remark },
+				 data :{part_number:part_number,description:description,rejected_work_reason:rejected_work_reason,quantity:quantity,rate:rate,value:value,row_material_cost:row_material_cost,gst_rate:gst_rate,grand_total:grand_total,item_remark:item_remark,pre_challan_date:pre_challan_date,pre_vendor_supplier_name:pre_vendor_supplier_name,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_supplier_name:pre_supplier_name,pre_supplier_po_number:pre_supplier_po_number,pre_dispath_through:pre_dispath_through,pre_total_weight:pre_total_weight,pre_total_bags:pre_total_bags,pre_remark:pre_remark,reworkrejectionid:reworkrejectionid },
 				// method: "POST",
                 // data :{package_id:package_id},
                 cache:false,
@@ -8768,11 +8771,11 @@
 							button: "Ok",
 							},function(){ 
 
-								// if(challan_table_id){
-								// 	window.location.href = "<?php echo base_url().'editscrapreturn/'?>"+challan_table_id;
-								// }else{
+								if(reworkrejectionid){
+								 	window.location.href = "<?php echo base_url().'editreworkrejection/'?>"+reworkrejectionid;
+								 }else{
 									window.location.href = "<?php echo base_url().'addneworkrejection'?>";
-								//}		
+								}		
 						});		
 				    }
 					

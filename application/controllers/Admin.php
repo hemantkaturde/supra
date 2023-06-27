@@ -6328,31 +6328,57 @@ class Admin extends BaseController
            
             }else{
 
-                $data = array(
-                    'part_number' =>  trim($this->input->post('part_number')),
-                   // 'description' =>  trim($this->input->post('description')),
-                    'rejection_rework_reason' =>  trim($this->input->post('rejected_work_reason')),
-                    'qty' =>  trim($this->input->post('quantity')),
-                    'rate' =>  trim($this->input->post('rate')),
-                    'value' =>  trim($this->input->post('value')),
-                    'row_material_cost' =>  trim($this->input->post('row_material_cost')),
-                    'gst_rate' =>  trim($this->input->post('gst_rate')),
-                    'grand_total' =>  trim($this->input->post('grand_total')),
-                    'item_remark' =>  trim($this->input->post('item_remark')),
-                    'pre_challan_date' =>   trim($this->input->post('pre_challan_date')),
-                    'pre_vendor_supplier_name ' =>   trim($this->input->post('pre_vendor_supplier_name')),
-                    'pre_vendor_name' =>   trim($this->input->post('pre_vendor_name')),
-                    'pre_vendor_po_number' =>    trim($this->input->post('pre_vendor_po_number')),
-                    'pre_supplier_name' =>  trim($this->input->post('pre_supplier_name')),
-                    'pre_supplier_po_number' =>    trim($this->input->post('pre_supplier_po_number')),
-                    'pre_dispath_through' =>    trim($this->input->post('pre_dispath_through')),
-                    'pre_total_weight' =>    trim($this->input->post('pre_total_weight')),
-                    'pre_total_bags' =>    trim($this->input->post('pre_total_bags')),
-                    'pre_remark' =>    trim($this->input->post('pre_remark')),
-                );
+                $reworkrejectionid =  trim($this->input->post('reworkrejectionid'));
+                if($reworkrejectionid){
+                    $data = array(
+                        'part_number' =>  trim($this->input->post('part_number')),
+                        'rework_rejection_id' =>  $reworkrejectionid,
+                        'rejection_rework_reason' =>  trim($this->input->post('rejected_work_reason')),
+                        'qty' =>  trim($this->input->post('quantity')),
+                        'rate' =>  trim($this->input->post('rate')),
+                        'value' =>  trim($this->input->post('value')),
+                        'row_material_cost' =>  trim($this->input->post('row_material_cost')),
+                        'gst_rate' =>  trim($this->input->post('gst_rate')),
+                        'grand_total' =>  trim($this->input->post('grand_total')),
+                        'item_remark' =>  trim($this->input->post('item_remark')),
+                        'pre_challan_date' =>   trim($this->input->post('pre_challan_date')),
+                        'pre_vendor_supplier_name ' =>   trim($this->input->post('pre_vendor_supplier_name')),
+                        'pre_vendor_name' =>   trim($this->input->post('pre_vendor_name')),
+                        'pre_vendor_po_number' =>    trim($this->input->post('pre_vendor_po_number')),
+                        'pre_supplier_name' =>  trim($this->input->post('pre_supplier_name')),
+                        'pre_supplier_po_number' =>    trim($this->input->post('pre_supplier_po_number')),
+                        'pre_dispath_through' =>    trim($this->input->post('pre_dispath_through')),
+                        'pre_total_weight' =>    trim($this->input->post('pre_total_weight')),
+                        'pre_total_bags' =>    trim($this->input->post('pre_total_bags')),
+                        'pre_remark' =>    trim($this->input->post('pre_remark')),
+                    );
+                }else{
+
+                    $data = array(
+                        'part_number' =>  trim($this->input->post('part_number')),
+                         // 'description' =>  trim($this->input->post('description')),
+                        'rejection_rework_reason' =>  trim($this->input->post('rejected_work_reason')),
+                        'qty' =>  trim($this->input->post('quantity')),
+                        'rate' =>  trim($this->input->post('rate')),
+                        'value' =>  trim($this->input->post('value')),
+                        'row_material_cost' =>  trim($this->input->post('row_material_cost')),
+                        'gst_rate' =>  trim($this->input->post('gst_rate')),
+                        'grand_total' =>  trim($this->input->post('grand_total')),
+                        'item_remark' =>  trim($this->input->post('item_remark')),
+                        'pre_challan_date' =>   trim($this->input->post('pre_challan_date')),
+                        'pre_vendor_supplier_name ' =>   trim($this->input->post('pre_vendor_supplier_name')),
+                        'pre_vendor_name' =>   trim($this->input->post('pre_vendor_name')),
+                        'pre_vendor_po_number' =>    trim($this->input->post('pre_vendor_po_number')),
+                        'pre_supplier_name' =>  trim($this->input->post('pre_supplier_name')),
+                        'pre_supplier_po_number' =>    trim($this->input->post('pre_supplier_po_number')),
+                        'pre_dispath_through' =>    trim($this->input->post('pre_dispath_through')),
+                        'pre_total_weight' =>    trim($this->input->post('pre_total_weight')),
+                        'pre_total_bags' =>    trim($this->input->post('pre_total_bags')),
+                        'pre_remark' =>    trim($this->input->post('pre_remark')),
+                    );
+                }
 
                 $savereworkrejectionitemdetails= $this->admin_model->savereworkrejectionitemdetails('',$data);
-
                 if($savereworkrejectionitemdetails){
                     $savereworkrejectiontem_response['status'] = 'success';
                     $savereworkrejectiontem_response['error'] = array('part_number'=>strip_tags(form_error('part_number')),'description'=>strip_tags(form_error('description')),'rejected_work_reason'=>strip_tags(form_error('rejected_work_reason')),'quantity'=>strip_tags(form_error('quantity')),'rate'=>strip_tags(form_error('rate')),'value'=>strip_tags(form_error('value')),'row_material_cost'=>strip_tags(form_error('row_material_cost')),'gst_rate'=>strip_tags(form_error('gst_rate')),'grand_total'=>strip_tags(form_error('grand_total')),'item_remark'=>strip_tags(form_error('item_remark')));
