@@ -5277,8 +5277,6 @@ class Admin extends BaseController
      
         $post_submit = $this->input->post();
 
-
-
         if($post_submit){
 
             $saveBillofmaterialtem_response = array();
