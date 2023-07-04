@@ -3710,7 +3710,6 @@ class Admin_model extends CI_Model
 
     }
 
-
     public function getexportdetailsbyid($main_id){
 
         $this->db->select(TBL_EXPORT_DETAILS.'.id as main_id,'.TBL_BUYER_PO_MASTER.'.id as buyerpoid'); 
@@ -3724,9 +3723,6 @@ class Admin_model extends CI_Model
         return $fetch_result;
     }
 
-
-
-    
     public function getbuyeramdpackgindetails($exportdetailsid,$part_number){
         // $this->db->select('buyer_po_date,delivery_date');
         // $this->db->where(TBL_BUYER_PO_MASTER.'.status',1);
@@ -3776,7 +3772,6 @@ class Admin_model extends CI_Model
 
 
     public function getalljobworkdetails($jobworkid){
-
         $this->db->select('*,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po,'.TBL_SUPPLIER.'.supplier_name as supplier_name_sup,'.TBL_JOB_WORK.'.vendor_po_number as pre_vendor_po,'.TBL_JOB_WORK.'.remark as jobwork_remark,'.TBL_JOB_WORK.'.date as job_work_date');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_JOB_WORK.'.vendor_po_number');
         $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_JOB_WORK.'.raw_material_supplier');
@@ -3785,12 +3780,10 @@ class Admin_model extends CI_Model
         $query = $this->db->get(TBL_JOB_WORK);
         $data = $query->result_array();
         return $data;
-
     }
 
 
     public function fetchALLprejobworkitemListedit($jobworkid){
-
         $this->db->select('*,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po,'.TBL_SUPPLIER.'.supplier_name as rowmaterialsuppliername');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_JOB_WORK_ITEM.'.part_number_id');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_JOB_WORK_ITEM.'.pre_vendor_po_number');
@@ -3883,7 +3876,6 @@ class Admin_model extends CI_Model
         return $data;
     }
 
-
     public function deletescrapreturn($id){
 
         $this->db->where('id', $id);
@@ -3903,7 +3895,6 @@ class Admin_model extends CI_Model
         }
     }
 
-
     public function  saveNewscrapreturn($id,$data){
 
         if($id != '') {
@@ -3922,7 +3913,6 @@ class Admin_model extends CI_Model
         }
     }
 
-
     public function fetchALLprescrapreturndetails(){
 
         $this->db->select('*,'.TBL_SUPPLIER.'.supplier_name as supliername,'.TBL_VENDOR.'.vendor_name vendorname,'.TBL_SCRAP_RETURN_ITEM.'.id as scrapreturnid');
@@ -3936,7 +3926,6 @@ class Admin_model extends CI_Model
 
     }
 
-
     public function deletescrapreturnitem($id){
 
         $this->db->where('id', $id);
@@ -3948,7 +3937,6 @@ class Admin_model extends CI_Model
         }
 
     }
-
 
     public function update_last_inserted_id_scarp_retuns($last_inserted_id){
 
@@ -3964,8 +3952,6 @@ class Admin_model extends CI_Model
         
     }
 
-
-    
     public function getScrapreturndetails($scrapreturnid){
         $this->db->select('*,'.TBL_SUPPLIER.'.supplier_name as supliername,'.TBL_VENDOR.'.vendor_name vendorname');
         $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_SCRAP_RETURN.'.supplier_id','left');
@@ -3977,7 +3963,6 @@ class Admin_model extends CI_Model
         return $data;
 
     }
-
 
     public function fetchALLprescrapreturndetailsforview($scrapreturnid){
 
@@ -4001,72 +3986,6 @@ class Admin_model extends CI_Model
         $rowcount = $query->result_array();
         return $rowcount;
     }
-
-
-
-    // public function fetchvendorBillofmaterialforcurrentorderstatusCount($params,$from_date,$to_date,$status){
-
-    //     $this->db->select('*');
-    //     $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id= '.TBL_BILL_OF_MATERIAL_VENDOR.'.vendor_name');
-    //     $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id= '.TBL_BILL_OF_MATERIAL_VENDOR.'.vendor_po_number');
-    //     if($params['search']['value'] != "") 
-    //     {
-    //         $this->db->where("(".TBL_BILL_OF_MATERIAL_VENDOR.".bom_number LIKE '%".$params['search']['value']."%'");
-    //         $this->db->or_where(TBL_BILL_OF_MATERIAL_VENDOR.".date LIKE '%".$params['search']['value']."%'");
-    //         $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
-    //         $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
-    //         $this->db->or_where(TBL_BILL_OF_MATERIAL_VENDOR.".bom_status LIKE '%".$params['search']['value']."%'");
-    //         $this->db->or_where(TBL_BILL_OF_MATERIAL_VENDOR.".part_number LIKE '%".$params['search']['value']."%')");
-    //     }
-    //     $this->db->where(TBL_BILL_OF_MATERIAL_VENDOR.'.status', 1);        
-    //     $query = $this->db->get(TBL_BILL_OF_MATERIAL_VENDOR);
-    //     $rowcount = $query->num_rows();
-    //     return $rowcount;
-        
-
-    // }
-
-    // public function fetchvendorBillofmaterialforcurrentorderstatusdata($params,$from_date,$to_date,$status){
-
-    //     $this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_BILL_OF_MATERIAL_VENDOR.'.id as billofmaterialid');
-    //     $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id= '.TBL_BILL_OF_MATERIAL_VENDOR.'.vendor_name');
-    //     $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id= '.TBL_BILL_OF_MATERIAL_VENDOR.'.vendor_po_number');
-
-    //     if($params['search']['value'] != "") 
-    //     {
-    //         $this->db->where("(".TBL_BILL_OF_MATERIAL_VENDOR.".bom_number LIKE '%".$params['search']['value']."%'");
-    //         $this->db->or_where(TBL_BILL_OF_MATERIAL_VENDOR.".date LIKE '%".$params['search']['value']."%'");
-    //         $this->db->or_where(TBL_BILL_OF_MATERIAL_VENDOR.".po_number LIKE '%".$params['search']['value']."%'");
-    //         $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
-    //         $this->db->or_where(TBL_BILL_OF_MATERIAL_VENDOR.".bom_status LIKE '%".$params['search']['value']."%'");
-    //         $this->db->or_where(TBL_BILL_OF_MATERIAL_VENDOR.".part_number LIKE '%".$params['search']['value']."%')");
-    //     }
-    //     $this->db->where(TBL_BILL_OF_MATERIAL_VENDOR.'.status', 1);
-    //     $this->db->limit($params['length'],$params['start']);
-    //     $this->db->order_by(TBL_BILL_OF_MATERIAL_VENDOR.'.id','DESC');
-    //     $query = $this->db->get(TBL_BILL_OF_MATERIAL_VENDOR);
-    //     $fetch_result = $query->result_array();
-
-    //     $data = array();
-    //     $counter = 0;
-    //     if(count($fetch_result) > 0)
-    //     {
-    //         foreach ($fetch_result as $key => $value)
-    //         {
-    //             $data[$counter]['bom_number'] = $value['bom_number'];
-    //             $data[$counter]['date'] = $value['date'];
-    //             $data[$counter]['vendor_po_number'] = $value['po_number'];
-    //             //$data[$counter]['vendor_number'] = $value['vendor_number'];
-    //             $data[$counter]['vendor_name'] = $value['vendorname'];
-    //             $data[$counter]['bom_status'] = $value['bom_status'];
-    //             $counter++; 
-    //         }
-    //     }
-
-    //     return $data;
-
-    // }
-
 
     public function getallcurrentstatusorder($vendor_name,$status){
 
@@ -4107,7 +4026,6 @@ class Admin_model extends CI_Model
         $query = $this->db->get();
         return $query->result_array();
     }
-
 
     public function fetchcurrentorderstatusreportcount($params,$vendor_name,$status){
 
@@ -4215,7 +4133,6 @@ class Admin_model extends CI_Model
 
     }
 
-
     public function getreworkrejectioncount($params){
 
         $this->db->select('*');
@@ -4239,7 +4156,6 @@ class Admin_model extends CI_Model
 
 
     }
-
 
     public function getreworkrejectiondata($params){
 
@@ -4289,7 +4205,6 @@ class Admin_model extends CI_Model
 
     }
 
-
     public function deletereworkrejection($id){
 
         $this->db->where('id', $id);
@@ -4310,7 +4225,6 @@ class Admin_model extends CI_Model
 
 
     }
-
 
     public function getPreviousReworkreturnnumber(){
 
@@ -4341,7 +4255,6 @@ class Admin_model extends CI_Model
 
     }
 
-
     public function getbuyerpodetailsforvendorbillofmaterial($vendor_po_number){
 
         $this->db->select(TBL_BUYER_MASTER.'.*,'.TBL_BUYER_MASTER.'.buyer_name as buyer');
@@ -4356,7 +4269,6 @@ class Admin_model extends CI_Model
         return $query_result;
 
     }
-
 
     public function getBuyerDetailsByvendorpoautofill($vendor_po_number){
 
@@ -4373,7 +4285,6 @@ class Admin_model extends CI_Model
 
     }
 
-
     public function getIncomingDetailsofbillofmaterial($vendor_po_number){
 
         $this->db->select(TBL_INCOMING_DETAILS.'.*');
@@ -4386,7 +4297,6 @@ class Admin_model extends CI_Model
         return $query_result;
 
     }
-
 
     public function getSuppliergoodsreworkrejectionvendor($part_number,$vendor_po_number){
 
@@ -4402,7 +4312,6 @@ class Admin_model extends CI_Model
 
     }
 
-
     public function getSuppliergoodsreworkrejectionsupplier($part_number,$vendor_po_number,$supplier_po_number){
         $this->db->select('*,'.TBL_FINISHED_GOODS.'.sac as sac_no,'.TBL_SUPPLIER_PO_MASTER_ITEM.'.rate as supplierrate,'.TBL_RAWMATERIAL.'.type_of_raw_material as typeofrawmaterial');
         $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
@@ -4417,7 +4326,6 @@ class Admin_model extends CI_Model
 
 
     }
-
 
     public function savereworkrejectionitemdetails($id,$data){
 
@@ -4453,7 +4361,6 @@ class Admin_model extends CI_Model
 
     }
 
-
     public function deleteReworkRejectionitem($id){
 
         $this->db->where('id', $id);
@@ -4479,7 +4386,6 @@ class Admin_model extends CI_Model
         }
     }
 
-
     public function getReworkRejectionitemslistforedit($id){
 
         $this->db->select('*,'.TBL_REWORK_REJECTION_ITEM.'.id as reworkrejectionid,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_po_number,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_number');
@@ -4494,6 +4400,193 @@ class Admin_model extends CI_Model
         return $data;
 
 
+    }
+
+    public function getchallanformcount($params){
+
+        $this->db->select('*');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_CHALLAN_FORM.'.vendor_name','left');
+        $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_CHALLAN_FORM.'.supplier_name','left');
+
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_CHALLAN_FORM.".challan_no LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CHALLAN_FORM.".challan_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER.".supplier_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_CHALLAN_FORM.'.status', 1); 
+    
+        $query = $this->db->get(TBL_CHALLAN_FORM);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+
+
+    }
+
+    public function getchallanformdata($params){
+        $this->db->select('*,'.TBL_SUPPLIER.'.supplier_name as supplier,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_pomaster,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_master,'.TBL_CHALLAN_FORM.'.challan_id  as challan_id');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_CHALLAN_FORM.'.vendor_name','left');
+        $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_CHALLAN_FORM.'.supplier_name','left');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_CHALLAN_FORM.'.vendor_po_number','left');
+        $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_CHALLAN_FORM.'.supplier_po_number','left');
+
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_CHALLAN_FORM.".challan_no LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CHALLAN_FORM.".challan_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER.".supplier_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%')");
+        }
+
+        $this->db->where(TBL_CHALLAN_FORM.'.status', 1);
+        $this->db->limit($params['length'],$params['start']);
+        $this->db->order_by(TBL_CHALLAN_FORM.'.challan_id','DESC');
+        $query = $this->db->get(TBL_CHALLAN_FORM);
+        $fetch_result = $query->result_array();
+
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['challan_no'] = $value['challan_no'];
+                $data[$counter]['challan_date'] = $value['challan_date'];
+                $data[$counter]['vendor_name'] = $value['vendorname'];
+                $data[$counter]['vendor_po_number'] = $value['vendor_pomaster'];
+                $data[$counter]['supplier_name'] = $value['supplier'];
+                $data[$counter]['supplier_po_number'] = $value['supplier_master'];
+                $data[$counter]['action'] = '';
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editchallanform/".$value['challan_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['challan_id']."' class='fa fa-trash-o deletechallanform' aria-hidden='true'></i>"; 
+                $counter++; 
+            }
+        }
+        return $data;
+    }
+
+    public function getPreviousChallanform_number(){
+        $this->db->select('challan_no');
+        $this->db->where(TBL_CHALLAN_FORM.'.status', 1);
+        $this->db->limit(1);
+        $this->db->order_by(TBL_CHALLAN_FORM.'.challan_id','DESC');
+        $query = $this->db->get(TBL_CHALLAN_FORM);
+        $rowcount = $query->result_array();
+        return $rowcount;
+    }
+
+    public function savechallanformdetails($id,$data){
+
+        if($id != '') {
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_CHALLAN_FORM, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_CHALLAN_FORM, $data)) {
+                return $this->db->insert_id();
+            } else {
+                return FALSE;
+            }
+        }
+
+    }
+
+    public function deletechallanform($id){
+
+        $this->db->where('challan_id', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_CHALLAN_FORM)){
+
+            $this->db->where('challan_id', $id);
+            //$this->db->delete(TBL_SUPPLIER);
+            if($this->db->delete(TBL_CHALLAN_FORM)){
+               return TRUE;
+            }else{
+               return FALSE;
+            }
+           return TRUE;
+        }else{
+           return FALSE;
+        }
+    }
+
+    public function savechallanformitemdetails($id,$data){
+        if($id != '') {
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_CHALLAN_FORM_ITEM, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_CHALLAN_FORM_ITEM, $data)) {
+                return $this->db->insert_id();
+            } else {
+                return FALSE;
+            }
+        }
+    }
+
+    public function getChallanformlist(){
+        $this->db->select('*,'.TBL_CHALLAN_FORM_ITEM.'.id as reworkrejectionid,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_po_number,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_number');
+        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_CHALLAN_FORM_ITEM.'.part_number');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_CHALLAN_FORM_ITEM.'.pre_vendor_po_number','left');
+        $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_CHALLAN_FORM_ITEM.'.pre_supplier_po_number','left');
+        $this->db->where(TBL_CHALLAN_FORM_ITEM.'.status',1);
+        $this->db->where(TBL_CHALLAN_FORM_ITEM.'.challan_id IS NULL');
+        $query = $this->db->get(TBL_CHALLAN_FORM_ITEM);
+        $data = $query->result_array();
+        return $data;
+    }
+
+    public function update_last_inserted_id_challan_form($saveNewchallan){
+        $data = array(
+            'rework_rejection_id' => $saveNewchallan
+        );
+        $this->db->where(TBL_CHALLAN_FORM_ITEM.'.rework_rejection_id IS NULL');
+        if($this->db->update(TBL_CHALLAN_FORM_ITEM,$data)){
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+
+    }
+
+
+    public function getChallanformdetails($id){
+        $this->db->select('*,'.TBL_SUPPLIER.'.supplier_name as supplier,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_pomaster,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_po_master,'.TBL_CHALLAN_FORM.'.challan_id as challan_id,'.TBL_CHALLAN_FORM.'.vendor_po_number as vendor_po_rework,'.TBL_CHALLAN_FORM.'.supplier_po_number as rejection_supplier_po,'.TBL_CHALLAN_FORM.'.supplier_name as reworksupplier,'.TBL_CHALLAN_FORM.'.remark as rejectionremark,'.TBL_CHALLAN_FORM.'.vendor_name as venorselected');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_CHALLAN_FORM.'.vendor_name','left');
+        $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_CHALLAN_FORM.'.supplier_name','left');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_CHALLAN_FORM.'.vendor_po_number','left');
+        $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_CHALLAN_FORM.'.supplier_po_number','left');
+        $this->db->where(TBL_CHALLAN_FORM.'.status', 1);
+        $this->db->where(TBL_CHALLAN_FORM.'.challan_id', $id);
+        $query = $this->db->get(TBL_CHALLAN_FORM);
+        $fetch_result = $query->result_array();
+        return $fetch_result;
+
+    }
+
+    public function getChallanformlistedit($challan_id){
+        $this->db->select('*,'.TBL_CHALLAN_FORM_ITEM.'.id as reworkrejectionid,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_po_number,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_number');
+        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_CHALLAN_FORM_ITEM.'.part_number');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_CHALLAN_FORM_ITEM.'.pre_vendor_po_number','left');
+        $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_CHALLAN_FORM_ITEM.'.pre_supplier_po_number','left');
+        $this->db->where(TBL_CHALLAN_FORM_ITEM.'.status',1);
+        $this->db->where(TBL_CHALLAN_FORM_ITEM.'.challan_id',$challan_id);
+        $query = $this->db->get(TBL_CHALLAN_FORM_ITEM);
+        $data = $query->result_array();
+        return $data;
     }
 
 }

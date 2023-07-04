@@ -4652,17 +4652,6 @@ class Admin extends BaseController
     }
 
 
-    public function challanform(){
-
-        $process = 'Challan Form';
-        $processFunction = 'Admin/challanform';
-        $this->logrecord($process,$processFunction);
-        $this->global['pageTitle'] = 'Challan Form';
-        $this->loadViews("masters/challanform", $this->global, $data, NULL);  
-        
-    }
-
-
     public function packagingform(){
 
         $process = 'Packaging Form';
@@ -6106,6 +6095,7 @@ class Admin extends BaseController
             $this->form_validation->set_rules('dispath_through','Dispath Through','trim');
             $this->form_validation->set_rules('total_weight','Total Weight','trim');
             $this->form_validation->set_rules('remark','Remark','trim');
+            $this->form_validation->set_rules('vendor_supplier_name','vendor/supplier','trim|required');
 
             if($this->form_validation->run() == FALSE)
             {
@@ -6298,7 +6288,6 @@ class Admin extends BaseController
 
     }
 
-
     public function savereworkrejectiontem(){
 
         $post_submit = $this->input->post();
@@ -6403,6 +6392,211 @@ class Admin extends BaseController
 
     }
 
+    public function challanform(){
+        $process = 'Challan Form';
+        $processFunction = 'Admin/challanform';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Challan Form';
+        $this->loadViews("masters/challanform", $this->global, $data, NULL);  
+        
+    }
+
+    public function fetchchallanform(){
+
+        $params = $_REQUEST;
+        $totalRecords = $this->admin_model->getchallanformcount($params); 
+        $queryRecords = $this->admin_model->getchallanformdata($params); 
+
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+        echo json_encode($json_data);
+
+    }
+
+    public function addchallanform(){
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $addmewchallanform_response = array();
+            $this->form_validation->set_rules('challan_no','Challan No','trim|required');
+            $this->form_validation->set_rules('challan_date','Challan Date','trim|required');
+            $this->form_validation->set_rules('vendor_name','Vendor Name','trim');
+            $this->form_validation->set_rules('vendor_po_number','Vendor PO Number','trim');
+            $this->form_validation->set_rules('supplier_name','Supplier Name','trim');
+            $this->form_validation->set_rules('supplier_po_number','Supplier PO Number','trim');
+            $this->form_validation->set_rules('remark','Remark','trim');
+            $this->form_validation->set_rules('vendor_supplier_name','vendor/supplier','trim|required');
+
+            if($this->form_validation->run() == FALSE)
+            {
+                $addmewchallanform_response['status'] = 'failure';
+                $addmewchallanform_response['error'] = array('challan_no'=>strip_tags(form_error('challan_no')),'challan_date'=>strip_tags(form_error('challan_date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'remark'=>strip_tags(form_error('remark')));
+            }else{
+
+                $data = array(
+                    'challan_no' =>  trim($this->input->post('challan_no')),
+                    'challan_date' => trim($this->input->post('challan_date')),
+                    'vendor_supplier_type'=>trim($this->input->post('vendor_supplier_name')),
+                    'vendor_name' =>  trim($this->input->post('vendor_name')),
+                    'vendor_po_number' =>  trim($this->input->post('vendor_po_number')),
+                    'supplier_name' =>  trim($this->input->post('supplier_name')),
+                    'supplier_po_number' =>  trim($this->input->post('supplier_po_number')),
+                    'remark' =>  trim($this->input->post('remark')),
+                   
+                );
+
+                $challanformid = trim($this->input->post('challanformid'));
+                if($challanformid){
+                    $saveNewchallan= $this->admin_model->savechallanformdetails($challanformid,$data);
+                }else{
+                    $saveNewchallan= $this->admin_model->savechallanformdetails('',$data);
+                }
+                
+                if($saveNewchallan){
+                 $update_last_inserted_id_challan_form = $this->admin_model->update_last_inserted_id_challan_form($saveNewchallan);
+                    if($update_last_inserted_id_challan_form){
+                       $addmewchallanform_response['status'] = 'success';
+                       $addmewchallanform_response['error'] = array('challan_no'=>strip_tags(form_error('challan_no')),'challan_date'=>strip_tags(form_error('challan_date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'remark'=>strip_tags(form_error('remark')));
+                    }
+                }
+
+            }
+            echo json_encode($addmewchallanform_response);
+        }else{
+            $process = 'Add New Challan Form';
+            $processFunction = 'Admin/addchallanform';
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Add New Challan Form';
+            $data['vendorList']= $this->admin_model->fetchALLvendorList();
+            $data['supplierList']= $this->admin_model->fetchALLsupplierList();
+            $data['getPreviousChallanform_number']= $this->admin_model->getPreviousChallanform_number();
+            $data['getChallanformlist']= $this->admin_model->getChallanformlist();
+            $this->loadViews("masters/addnewchallanform", $this->global, $data, NULL);
+        }
+
+    }
+
+    public function deletechallanform(){
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->deletechallanform(trim($this->input->post('id')));
+            if ($result) {
+                        $process = 'Delete Challan Form';
+                        $processFunction = 'Admin/deletechallanform';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
+    }
+
+    public function saveChallanformitem(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $savechallnitem_response = array();
+            $this->form_validation->set_rules('part_number','Part Number','trim|required');
+            $this->form_validation->set_rules('description','Description','trim|required');
+            $this->form_validation->set_rules('type_of_raw_platting','Type of Raw Platting','trim|required');
+            $this->form_validation->set_rules('row_material_cost','Row Material Cost','trim|required');
+            $this->form_validation->set_rules('quantity','Quantity','trim|required');
+            $this->form_validation->set_rules('rate','Rate','trim|required');
+            $this->form_validation->set_rules('value','value','trim|required');
+            $this->form_validation->set_rules('gst_rate','gst_rate','trim|required');
+            $this->form_validation->set_rules('grand_total','gst_rate','trim|required');
+            $this->form_validation->set_rules('item_remark','Item Remark','trim');
+
+            if($this->form_validation->run() == FALSE)
+            {
+                $savechallnitem_response['status'] = 'failure';
+                $savechallnitem_response['error'] = array('part_number'=>strip_tags(form_error('part_number')),'description'=>strip_tags(form_error('description')),'type_of_raw_platting'=>strip_tags(form_error('type_of_raw_platting')),'quantity'=>strip_tags(form_error('quantity')),'rate'=>strip_tags(form_error('rate')),'value'=>strip_tags(form_error('value')),'row_material_cost'=>strip_tags(form_error('row_material_cost')),'gst_rate'=>strip_tags(form_error('gst_rate')),'grand_total'=>strip_tags(form_error('grand_total')),'item_remark'=>strip_tags(form_error('item_remark')));
+           
+            }else{
+                $challan_id =  trim($this->input->post('challan_id'));
+                if($reworkrejectionid){
+                    $data = array(
+                        'part_number' =>  trim($this->input->post('part_number')),
+                        'challan_id' =>  $challan_id,
+                        'qty' =>  trim($this->input->post('quantity')),
+                        'rate' =>  trim($this->input->post('rate')),
+                        'value' =>  trim($this->input->post('value')),
+                        'type_of_raw_platting' =>  trim($this->input->post('type_of_raw_platting')),
+                        'row_material_cost' =>  trim($this->input->post('row_material_cost')),
+                        'gst_rate' =>  trim($this->input->post('gst_rate')),
+                        'grand_total' =>  trim($this->input->post('grand_total')),
+                        'item_remark' =>  trim($this->input->post('item_remark')),
+                        'pre_challan_date' =>   trim($this->input->post('pre_challan_date')),
+                        'pre_vendor_supplier_name ' =>   trim($this->input->post('pre_vendor_supplier_name')),
+                        'pre_vendor_name' =>   trim($this->input->post('pre_vendor_name')),
+                        'pre_vendor_po_number' =>    trim($this->input->post('pre_vendor_po_number')),
+                        'pre_supplier_name' =>  trim($this->input->post('pre_supplier_name')),
+                        'pre_supplier_po_number' =>    trim($this->input->post('pre_supplier_po_number')),
+                        'pre_remark' =>    trim($this->input->post('pre_remark')),
+                    );
+                }else{
+
+                    $data = array(
+                        'part_number' =>  trim($this->input->post('part_number')),
+                         // 'description' =>  trim($this->input->post('description')),
+                        'qty' =>  trim($this->input->post('quantity')),
+                        'rate' =>  trim($this->input->post('rate')),
+                        'value' =>  trim($this->input->post('value')),
+                        'type_of_raw_platting' =>  trim($this->input->post('type_of_raw_platting')),
+                        'row_material_cost' =>  trim($this->input->post('row_material_cost')),
+                        'gst_rate' =>  trim($this->input->post('gst_rate')),
+                        'grand_total' =>  trim($this->input->post('grand_total')),
+                        'item_remark' =>  trim($this->input->post('item_remark')),
+                        'pre_challan_date' =>   trim($this->input->post('pre_challan_date')),
+                        'pre_vendor_supplier_name ' =>   trim($this->input->post('pre_vendor_supplier_name')),
+                        'pre_vendor_name' =>   trim($this->input->post('pre_vendor_name')),
+                        'pre_vendor_po_number' =>    trim($this->input->post('pre_vendor_po_number')),
+                        'pre_supplier_name' =>  trim($this->input->post('pre_supplier_name')),
+                        'pre_supplier_po_number' =>    trim($this->input->post('pre_supplier_po_number')),
+                        'pre_remark' =>    trim($this->input->post('pre_remark')),
+                    );
+                }
+
+                $savechallanformitemdetails= $this->admin_model->savechallanformitemdetails('',$data);
+                if($savechallanformitemdetails){
+                    $savechallnitem_response['status'] = 'success';
+                    $savechallnitem_response['error'] = array('part_number'=>strip_tags(form_error('part_number')),'description'=>strip_tags(form_error('description')),'type_of_raw_platting'=>strip_tags(form_error('type_of_raw_platting')),'quantity'=>strip_tags(form_error('quantity')),'rate'=>strip_tags(form_error('rate')),'value'=>strip_tags(form_error('value')),'row_material_cost'=>strip_tags(form_error('row_material_cost')),'gst_rate'=>strip_tags(form_error('gst_rate')),'grand_total'=>strip_tags(form_error('grand_total')),'item_remark'=>strip_tags(form_error('item_remark')));
+                }
+            }
+            echo json_encode($savechallnitem_response);
+        }
+
+    }
+
+
+    public Function editchallanform($id){
+        $process = 'Edit Challan Form';
+        $processFunction = 'Admin/editchallanform';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Edit Challan Form';
+        $data['vendorList']= $this->admin_model->fetchALLvendorList();
+        $data['supplierList']= $this->admin_model->fetchALLsupplierList();
+        $data['getChallanformdetails']= $this->admin_model->getChallanformdetails($id);
+
+        $data['getChallanformlistedit']= $this->admin_model->getChallanformlistedit($id);
+        $this->loadViews("masters/editchallanform", $this->global, $data, NULL);
+
+    }
 
 
 }

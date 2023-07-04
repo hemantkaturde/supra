@@ -245,8 +245,15 @@ $route['getIncomingDetailsofbillofmaterial'] = "admin/getIncomingDetailsofbillof
 $route['getSuppliergoodsreworkrejectionvendor'] = "admin/getSuppliergoodsreworkrejectionvendor";
 $route['getSuppliergoodsreworkrejectionsupplier'] = "admin/getSuppliergoodsreworkrejectionsupplier";
 $route['savereworkrejectiontem'] = "admin/savereworkrejectiontem";
-
 $route['deleteReworkRejectionitem'] = "admin/deleteReworkRejectionitem";
+$route['addchallanform'] = "admin/addchallanform";
+$route['fetchchallanform'] = "admin/fetchchallanform";
+$route['deletechallanform'] = "admin/deletechallanform";
+$route['editchallanform/(:any)'] = "admin/editchallanform/$1";
+$route['saveChallanformitem'] = "admin/saveChallanformitem";
+
+
+
 
 
 

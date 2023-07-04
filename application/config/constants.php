@@ -144,6 +144,8 @@ define('TBL_SCRAP_RETURN','tbl_scrapreturn');
 define('TBL_SCRAP_RETURN_ITEM','tbl_scrapreturn_item');
 define('TBL_REWORK_REJECTION','tbl_rework_rejection');
 define('TBL_REWORK_REJECTION_ITEM','tbl_rework_rejection_item');
+define('TBL_CHALLAN_FORM','tbl_challan_form');
+define('TBL_CHALLAN_FORM_ITEM','tbl_challanform_item');
 
 
 
