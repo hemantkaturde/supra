@@ -8839,7 +8839,7 @@
 
 
 
-<?php if($pageTitle=='Challan Form' || $pageTitle=='Add New Challan Form' ){ ?>
+<?php if($pageTitle=='Challan Form' || $pageTitle=='Add New Challan Form' || $pageTitle=='Edit Challan Form'){ ?>
 	<script type="text/javascript">
 
         $(document).ready(function() {
@@ -9505,12 +9505,16 @@
 	    });
 
 
-		$(document).on('click','.deleteReworkRejectionitem',function(e){
-				var elemF = $(this);
+		$(document).on('click','.deleteChallanformitem',function(e){
+			
+			
+			var challan_id = $("#challan_id").val();
+			
+			var elemF = $(this);
 				e.preventDefault();
 				swal({
 					title: "Are you sure?",
-					text: "Delete Rework Rejection Item ",
+					text: "Delete Challan Form Item ",
 					type: "warning",
 					showCancelButton: true,
 					closeOnClickOutside: false,
@@ -9522,7 +9526,7 @@
 				}, function(isConfirm) {
 					if (isConfirm) {
 								$.ajax({
-									url : "<?php echo base_url();?>deleteReworkRejectionitem",
+									url : "<?php echo base_url();?>deleteChallanformitem",
 									type: "POST",
 									data : 'id='+elemF.attr('data-id'),
 									success: function(data, textStatus, jqXHR)
@@ -9532,11 +9536,18 @@
 										if(obj.status=='success'){
 											swal({
 												title: "Deleted!",
-												text: "Rework Rejection Item Deleted Succesfully",
+												text: "Challan Form Item Deleted Succesfully",
 												icon: "success",
 												button: "Ok",
 												},function(){ 
-														window.location.href = "<?php echo base_url().'addneworkrejection'?>";
+
+													if(challan_id){
+														window.location.href = "<?php echo base_url().'editchallanform/'?>"+challan_id;
+													}else{
+														window.location.href = "<?php echo base_url().'addchallanform'?>";
+													}
+
+														
 											});	
 										}
 
@@ -9548,10 +9559,11 @@
 								})
 							}
 							else {
-					swal("Cancelled", "Rework Rejection Item deletion cancelled ", "error");
+					swal("Cancelled", "Challan Form Item deletion cancelled ", "error");
 					}
 				});
 		});
+
 
 
 

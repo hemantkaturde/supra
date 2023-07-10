@@ -251,6 +251,7 @@ $route['fetchchallanform'] = "admin/fetchchallanform";
 $route['deletechallanform'] = "admin/deletechallanform";
 $route['editchallanform/(:any)'] = "admin/editchallanform/$1";
 $route['saveChallanformitem'] = "admin/saveChallanformitem";
+$route['deleteChallanformitem'] = "admin/deleteChallanformitem";
 
 
 

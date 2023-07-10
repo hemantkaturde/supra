@@ -6456,7 +6456,6 @@ class Admin extends BaseController
                     'supplier_name' =>  trim($this->input->post('supplier_name')),
                     'supplier_po_number' =>  trim($this->input->post('supplier_po_number')),
                     'remark' =>  trim($this->input->post('remark')),
-                   
                 );
 
                 $challanformid = trim($this->input->post('challanformid'));
@@ -6583,7 +6582,6 @@ class Admin extends BaseController
 
     }
 
-
     public Function editchallanform($id){
         $process = 'Edit Challan Form';
         $processFunction = 'Admin/editchallanform';
@@ -6595,6 +6593,24 @@ class Admin extends BaseController
 
         $data['getChallanformlistedit']= $this->admin_model->getChallanformlistedit($id);
         $this->loadViews("masters/editchallanform", $this->global, $data, NULL);
+
+    }
+
+    public function deleteChallanformitem(){
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->deleteChallanformitem(trim($this->input->post('id')));
+            if ($result) {
+                        $process = 'Delete Rework Rejection';
+                        $processFunction = 'Admin/deleteChallanformitem';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
 
     }
 

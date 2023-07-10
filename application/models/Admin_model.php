@@ -4536,7 +4536,7 @@ class Admin_model extends CI_Model
     }
 
     public function getChallanformlist(){
-        $this->db->select('*,'.TBL_CHALLAN_FORM_ITEM.'.id as reworkrejectionid,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_po_number,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_number');
+        $this->db->select('*,'.TBL_CHALLAN_FORM_ITEM.'.id as challanformid,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_po_number,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_number');
         $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_CHALLAN_FORM_ITEM.'.part_number');
         $this->db->join(TBL_FINISHED_GOODS, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_CHALLAN_FORM_ITEM.'.pre_vendor_po_number','left');
@@ -4550,15 +4550,14 @@ class Admin_model extends CI_Model
 
     public function update_last_inserted_id_challan_form($saveNewchallan){
         $data = array(
-            'rework_rejection_id' => $saveNewchallan
+            'challan_id' => $saveNewchallan
         );
-        $this->db->where(TBL_CHALLAN_FORM_ITEM.'.rework_rejection_id IS NULL');
+        $this->db->where(TBL_CHALLAN_FORM_ITEM.'.challan_id IS NULL');
         if($this->db->update(TBL_CHALLAN_FORM_ITEM,$data)){
             return TRUE;
         }else{
             return FALSE;
         }
-
     }
 
 
@@ -4587,6 +4586,18 @@ class Admin_model extends CI_Model
         $query = $this->db->get(TBL_CHALLAN_FORM_ITEM);
         $data = $query->result_array();
         return $data;
+    }
+
+    public function deleteChallanformitem($id){
+
+        $this->db->where('id', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_CHALLAN_FORM_ITEM)){
+           return TRUE;
+        }else{
+           return FALSE;
+        }
+
     }
 
 }
