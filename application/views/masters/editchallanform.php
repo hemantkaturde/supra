@@ -42,14 +42,13 @@
                                         </div>
                                     </div>
 
-
                                     <div class="col-md-12">
                                         <div class="form-group">
                                                 <label for="vendor_supplier_name">Select Vendor / Supplier <span class="required">*</span></label>
                                                 <select class="form-control vendor_supplier_name" name="vendor_supplier_name" id="vendor_supplier_name">
                                                     <option st-id="" value="">Select Vendor / Supplier</option>
-                                                    <option value="vendor" <?php if($getChallanformdetails[0]['vendor_supplier_name']=='vendor'){ echo 'selected'; } ?>>Vendor</option>
-                                                    <option value="supplier" <?php if($getChallanformdetails[0]['vendor_supplier_name']=='supplier'){ echo 'selected'; } ?>>Supplier</option>
+                                                    <option value="vendor" <?php if($getChallanformdetails[0]['vendor_supplier_type']=='vendor'){ echo 'selected'; } ?>>Vendor</option>
+                                                    <option value="supplier" <?php if($getChallanformdetails[0]['vendor_supplier_type']=='supplier'){ echo 'selected'; } ?>>Supplier</option>
                                                 </select>
                                             <p class="error vendor_supplier_name_error"></p>
                                         </div>
@@ -393,8 +392,8 @@
                                                 </div>
 
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary btn-xl closereworkrejectionmodal" data-dismiss="modal">Close</button>
-                                                    <button type="submit" id="savereworkrejectiontem" name="savereworkrejectiontem" class="btn btn-primary" class="btn btn-success btn-xl">Save</button>
+                                                    <button type="button" class="btn btn-secondary btn-xl closechallanformmodal" data-dismiss="modal">Close</button>
+                                                    <button type="submit" id="saveChallanformitem" name="saveChallanformitem" class="btn btn-primary" class="btn btn-success btn-xl">Save</button>
                                                 </div>
 
                                             </form>    

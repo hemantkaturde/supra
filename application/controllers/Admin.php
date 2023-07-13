@@ -6528,7 +6528,7 @@ class Admin extends BaseController
            
             }else{
                 $challan_id =  trim($this->input->post('challan_id'));
-                if($reworkrejectionid){
+                if($challan_id){
                     $data = array(
                         'part_number' =>  trim($this->input->post('part_number')),
                         'challan_id' =>  $challan_id,
