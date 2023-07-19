@@ -6507,8 +6507,10 @@ class Admin extends BaseController
     }
 
     public function saveChallanformitem(){
+
         $post_submit = $this->input->post();
         if($post_submit){
+
             $savechallnitem_response = array();
             $this->form_validation->set_rules('part_number','Part Number','trim|required');
             $this->form_validation->set_rules('description','Description','trim|required');

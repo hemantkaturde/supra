@@ -238,7 +238,7 @@
                                                 <!-- <span aria-hidden="true">&times;</span> -->
                                                 </button>
                                             </div>
-                                            <form role="form" id="addnnewchallanform" action="<?php echo base_url() ?>addnnewchallanform" method="post" role="form">
+                                            <form role="form" id="saveChallanformitem_form" action="<?php echo base_url() ?>saveChallanformitem" method="post" role="form">
 
                                                 <div class="modal-body">
                                                     <div class="loader_ajax" style="display:none;">
@@ -427,7 +427,7 @@
 
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary btn-xl closechallanformmodal" data-dismiss="modal">Close</button>
-                                                    <button type="submit" id="saveChallanformitem" name="saveChallanformitem" class="btn btn-primary" class="btn btn-success btn-xl">Save</button>
+                                                    <button type="submit" id="saveChallanformpopopitem" name="saveChallanformpopopitem" class="btn btn-primary" class="btn btn-success btn-xl">Save</button>
                                                 </div>
                                             </form>    
                                             </div>

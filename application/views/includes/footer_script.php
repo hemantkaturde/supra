@@ -9432,14 +9432,14 @@
 			location.reload();
         });
 
-		$(document).on('click','#saveChallanformitem',function(e){
+		$(document).on('click','#saveChallanformpopopitem',function(e){
 			e.preventDefault();
-			$(".loader_ajax").show();
-			   var formData = new FormData($("#addnnewchallanform")[0]);
+			   $(".loader_ajax").show();
+			   var formData = new FormData($("#saveChallanformitem_form")[0]);
 
 			   var part_number =   $('#part_number').val();
 			   var description =   $('#description').val();
-			  // var type_of_raw_platting =   $('#type_of_raw_platting').val();
+			   var type_of_raw_platting =   $('#type_of_raw_platting').val();
 			   var quantity =   $('#quantity').val();
 			   var rate =   $('#rate').val();
 			   var value =   $('#value').val();
@@ -9457,13 +9457,14 @@
 			   var pre_remark =   $('#remark').val();
 
 			   var challan_id =   $('#challan_id').val();
-			
-			$.ajax({
+
+
+			   $.ajax({
 				url : "<?php echo base_url();?>saveChallanformitem",
 				type: "POST",
 				 //data : formData,
-				 data :{part_number:part_number,description:description,type_of_raw_platting:type_of_raw_platting,quantity:quantity,rate:rate,value:value,row_material_cost:row_material_cost,gst_rate:gst_rate,grand_total:grand_total,item_remark:item_remark,pre_challan_date:pre_challan_date,pre_vendor_supplier_name:pre_vendor_supplier_name,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_supplier_name:pre_supplier_name,pre_supplier_po_number:pre_supplier_po_number,pre_remark:pre_remark,challan_id:challan_id },
-				// method: "POST",
+				  data :{part_number:part_number,description:description,type_of_raw_platting:type_of_raw_platting,quantity:quantity,rate:rate,value:value,row_material_cost:row_material_cost,gst_rate:gst_rate,grand_total:grand_total,item_remark:item_remark,pre_challan_date:pre_challan_date,pre_vendor_supplier_name:pre_vendor_supplier_name,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_supplier_name:pre_supplier_name,pre_supplier_po_number:pre_supplier_po_number,pre_remark:pre_remark,challan_id:challan_id },
+				 method: "POST",
                 // data :{package_id:package_id},
                 cache:false,
 				success: function(data, textStatus, jqXHR)
@@ -9499,7 +9500,7 @@
 			    {
 			   	   $(".loader_ajax").hide();
 			    }
-			});
+			   });
 			return false;
 	    });
 
