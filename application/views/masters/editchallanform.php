@@ -413,7 +413,7 @@
                                         $disabled= 'disabled';
                                      } ?>
                                     <input type="submit" id="savenewreworkrejection" class="btn btn-primary" value="Submit">
-                                    <input type="button" onclick="location.href = '<?php echo base_url() ?>reworkrejectionreturn'" class="btn btn-default" value="Back" />
+                                    <input type="button" onclick="location.href = '<?php echo base_url() ?>challanform'" class="btn btn-default" value="Back" />
                                 </div>
                             </div>
                         </form>
