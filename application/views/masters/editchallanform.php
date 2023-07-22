@@ -24,7 +24,7 @@
                         <form role="form" id="addnnewchallanform" action="<?php echo base_url() ?>addchallanform" method="post" role="form">
                             <div class="box-body">
                                 <div class="col-md-4">
-                                <input type="hidden" class="form-control" id="challan_id " value="<?=$getChallanformdetails[0]['challan_id']?>" name="challan_id" readonly>
+                                <input type="hidden" class="form-control" id="challan_id" value="<?=$getChallanformdetails[0]['challan_id']?>" name="challan_id" readonly>
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="challan_no">Challan No<span class="required">*</span></label>
@@ -262,7 +262,7 @@
                                                             <p class="error type_of_raw_platting_error"></p>
                                                         </div>
                                                     </div>
-                                                    
+
 
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Rejected Work Reason<span class="required">*</span></label>
