@@ -255,6 +255,14 @@
                                                         </div>
                                                     </div>
                                                 
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-4 col-form-label">Type Of Row Platting<span class="required">*</span></label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" class="form-control"  id="type_of_raw_platting" name="type_of_raw_platting">
+                                                            <p class="error type_of_raw_platting_error"></p>
+                                                        </div>
+                                                    </div>
+                                                    
 
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Rejected Work Reason<span class="required">*</span></label>
@@ -392,7 +400,7 @@
 
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary btn-xl closechallanformmodal" data-dismiss="modal">Close</button>
-                                                    <button type="submit" id="saveChallanformitem" name="saveChallanformitem" class="btn btn-primary" class="btn btn-success btn-xl">Save</button>
+                                                    <button type="submit" id="saveChallanformpopopitem" name="saveChallanformpopopitem" class="btn btn-primary" class="btn btn-success btn-xl">Save</button>
                                                 </div>
 
                                             </form>    

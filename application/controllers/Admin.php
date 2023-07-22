@@ -6461,18 +6461,20 @@ class Admin extends BaseController
                 $challanformid = trim($this->input->post('challan_id'));
                 if($challanformid){
                     $saveNewchallan= $this->admin_model->savechallanformdetails($challanformid,$data);
+                    if($saveNewchallan){
+                        $addmewchallanform_response['status'] = 'success';
+                        $addmewchallanform_response['error'] = array('challan_no'=>strip_tags(form_error('challan_no')),'challan_date'=>strip_tags(form_error('challan_date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'remark'=>strip_tags(form_error('remark')));
+                    }
                 }else{
                     $saveNewchallan= $this->admin_model->savechallanformdetails('',$data);
+                    if($saveNewchallan){
+                        $update_last_inserted_id_challan_form = $this->admin_model->update_last_inserted_id_challan_form($saveNewchallan);
+                         if($update_last_inserted_id_challan_form){
+                            $addmewchallanform_response['status'] = 'success';
+                            $addmewchallanform_response['error'] = array('challan_no'=>strip_tags(form_error('challan_no')),'challan_date'=>strip_tags(form_error('challan_date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'remark'=>strip_tags(form_error('remark')));
+                         }
+                     }
                 }
-                
-                if($saveNewchallan){
-                 $update_last_inserted_id_challan_form = $this->admin_model->update_last_inserted_id_challan_form($saveNewchallan);
-                    if($update_last_inserted_id_challan_form){
-                       $addmewchallanform_response['status'] = 'success';
-                       $addmewchallanform_response['error'] = array('challan_no'=>strip_tags(form_error('challan_no')),'challan_date'=>strip_tags(form_error('challan_date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'remark'=>strip_tags(form_error('remark')));
-                    }
-                }
-
             }
             echo json_encode($addmewchallanform_response);
         }else{
