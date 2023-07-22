@@ -6458,7 +6458,7 @@ class Admin extends BaseController
                     'remark' =>  trim($this->input->post('remark')),
                 );
 
-                $challanformid = trim($this->input->post('challanformid'));
+                $challanformid = trim($this->input->post('challan_id'));
                 if($challanformid){
                     $saveNewchallan= $this->admin_model->savechallanformdetails($challanformid,$data);
                 }else{
