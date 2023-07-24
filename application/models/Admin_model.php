@@ -4605,6 +4605,112 @@ class Admin_model extends CI_Model
 
     }
 
+    public function getPreviousDebitnote_number(){
+        $this->db->select('debit_note_number');
+        $this->db->where(TBL_DEBIT_NOTE.'.status', 1);
+        $this->db->limit(1);
+        $this->db->order_by(TBL_DEBIT_NOTE.'.debit_id','DESC');
+        $query = $this->db->get(TBL_DEBIT_NOTE);
+        $rowcount = $query->result_array();
+        return $rowcount;
+    }
+
+
+    public function saveNewdebitnote($id,$data){
+
+        if($id != '') {
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_DEBIT_NOTE, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_DEBIT_NOTE, $data)) {
+                return $this->db->insert_id();;
+            } else {
+                return FALSE;
+            }
+        }
+
+    }
+
+
+    public function getdebitnotecount($params){
+
+       
+        $this->db->select('*,'.TBL_SUPPLIER.'.supplier_name as supplier,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_pomaster,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_master,'.TBL_DEBIT_NOTE.'.debit_id  as debit_id');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_DEBIT_NOTE.'.vendor_id','left');
+        $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_DEBIT_NOTE.'.supplier_id','left');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_DEBIT_NOTE.'.vendor_po','left');
+        $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_DEBIT_NOTE.'.supplier_po','left');
+
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_DEBIT_NOTE.".debit_note_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_DEBIT_NOTE.".debit_note_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER.".supplier_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%')");
+        }
+
+        $this->db->where(TBL_DEBIT_NOTE.'.status', 1);
+        $this->db->limit($params['length'],$params['start']);
+        $this->db->order_by(TBL_DEBIT_NOTE.'.debit_id','DESC');
+        $query = $this->db->get(TBL_DEBIT_NOTE);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+
+
+    }
+
+    public function getdebitnotedata($params){
+        $this->db->select('*,'.TBL_SUPPLIER.'.supplier_name as supplier,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_pomaster,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_master,'.TBL_DEBIT_NOTE.'.debit_id  as debit_id');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_DEBIT_NOTE.'.vendor_id','left');
+        $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_DEBIT_NOTE.'.supplier_id','left');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_DEBIT_NOTE.'.vendor_po','left');
+        $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_DEBIT_NOTE.'.supplier_po','left');
+
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_DEBIT_NOTE.".debit_note_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_DEBIT_NOTE.".debit_note_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER.".supplier_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%')");
+        }
+
+        $this->db->where(TBL_DEBIT_NOTE.'.status', 1);
+        $this->db->limit($params['length'],$params['start']);
+        $this->db->order_by(TBL_DEBIT_NOTE.'.debit_id','DESC');
+        $query = $this->db->get(TBL_DEBIT_NOTE);
+        $fetch_result = $query->result_array();
+
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['debit_note_number'] = $value['debit_note_number'];
+                $data[$counter]['debit_note_date'] = $value['debit_note_date'];
+                $data[$counter]['type'] = $value['type'];
+                $data[$counter]['vendor_name'] = $value['vendorname'];
+                $data[$counter]['vendor_po_number'] = $value['vendor_pomaster'];
+                $data[$counter]['supplier_name'] = $value['supplier'];
+                $data[$counter]['supplier_po_number'] = $value['supplier_master'];
+                $data[$counter]['po_date'] = $value['po_date'];
+                $data[$counter]['action'] = '';
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editdebitnoteform/".$value['debit_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['debit_id']."' class='fa fa-trash-o deletedebitnote' aria-hidden='true'></i>"; 
+                $counter++; 
+            }
+        }
+        return $data;
+    }
+
 }
 
 ?>

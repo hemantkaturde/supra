@@ -147,6 +147,8 @@ define('TBL_REWORK_REJECTION_ITEM','tbl_rework_rejection_item');
 define('TBL_CHALLAN_FORM','tbl_challan_form');
 define('TBL_CHALLAN_FORM_ITEM','tbl_challanform_item');
 
+define('TBL_DEBIT_NOTE','tbl_debit_note');
+
 
 
 

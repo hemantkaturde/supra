@@ -6624,6 +6624,100 @@ class Admin extends BaseController
         $this->logrecord($process,$processFunction);
         $this->global['pageTitle'] = 'Debit Note';
         $this->loadViews("masters/debitnote", $this->global, $data, NULL);  
+    }
+
+
+    public function addnewdebitnote(){
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+               $newdebitnote_response = array();
+
+                $this->form_validation->set_rules('debit_note_number','Debit Note Number','trim|required');
+                $this->form_validation->set_rules('debit_note_date','Debit Note Date','trim|required');
+                $this->form_validation->set_rules('select_with_po_without_po','With PO Without PO','trim|required');
+                $this->form_validation->set_rules('vendor_supplier_name','Vendor/Supplier Name','trim|required');
+                $this->form_validation->set_rules('vendor_name','Vendor Name','trim');
+                $this->form_validation->set_rules('vendor_po_number','Vendor PO Number','trim');
+                $this->form_validation->set_rules('supplier_name','Supplier Name','trim');
+                $this->form_validation->set_rules('supplier_po_number','Supplier PO Number','trim');
+                $this->form_validation->set_rules('remark','Remark','trim');
+
+                if($this->form_validation->run() == FALSE)
+                {
+                    $newdebitnote_response['status'] = 'failure';
+                    $newdebitnote_response['error'] = array('debit_note_number'=>strip_tags(form_error('debit_note_number')),'debit_note_date'=>strip_tags(form_error('debit_note_date')),'select_with_po_without_po'=>strip_tags(form_error('select_with_po_without_po')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'remark'=>strip_tags(form_error('remark')));
+                }else{
+
+                    $data = array(
+                        'debit_note_number' =>  trim($this->input->post('debit_note_number')),
+                        'debit_note_date' => trim($this->input->post('debit_note_date')),
+                        'type'=>trim($this->input->post('select_with_po_without_po')),
+                        'supplier_vendor_name' =>  trim($this->input->post('vendor_supplier_name')),
+                        'vendor_id' =>  trim($this->input->post('vendor_name')),
+                        'vendor_po' =>  trim($this->input->post('vendor_po_number')),
+                        'supplier_id' =>  trim($this->input->post('supplier_name')),
+                        'supplier_po' =>  trim($this->input->post('supplier_po_number')),
+                        'remark' =>  trim($this->input->post('remark')),
+                    );
+
+                    $challanformid = trim($this->input->post('challan_id'));
+                    if($challanformid){
+                        $saveNewdebitnote= $this->admin_model->saveNewdebitnote($challanformid,$data);
+                        if($saveNewdebitnote){
+                            $newdebitnote_response['status'] = 'success';
+                            $newdebitnote_response['error'] = array('challan_no'=>strip_tags(form_error('challan_no')),'challan_date'=>strip_tags(form_error('challan_date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'remark'=>strip_tags(form_error('remark')));
+                        }
+                    }else{
+                        $saveNewdebitnote= $this->admin_model->saveNewdebitnote('',$data);
+                        if($saveNewdebitnote){
+                            // $update_last_inserted_id_challan_form = $this->admin_model->update_last_inserted_id_challan_form($saveNewchallan);
+                            // if($update_last_inserted_id_challan_form){
+                                $newdebitnote_response['status'] = 'success';
+                                $newdebitnote_response['error'] = array('debit_note_number'=>strip_tags(form_error('debit_note_number')),'debit_note_date'=>strip_tags(form_error('debit_note_date')),'select_with_po_without_po'=>strip_tags(form_error('select_with_po_without_po')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'remark'=>strip_tags(form_error('remark')));
+                            // }
+                        }
+                    }
+                }
+             echo json_encode($newdebitnote_response);
+        }else{
+            $process = 'Add New Debit Note';
+            $processFunction = 'Admin/addnewdebitnote';
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Add New Debit Note';
+            $data['vendorList']= $this->admin_model->fetchALLvendorList();
+            $data['supplierList']= $this->admin_model->fetchALLsupplierList();
+            $getPreviousDebitnote_number = $this->admin_model->getPreviousDebitnote_number();
+            $this->loadViews("masters/addnewdebitnote", $this->global, $data, NULL);
+        }
+
+    }
+
+
+    public function fetchdebitnotedetails(){
+
+        $params = $_REQUEST;
+        $totalRecords = $this->admin_model->getdebitnotecount($params); 
+        $queryRecords = $this->admin_model->getdebitnotedata($params); 
+
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+        echo json_encode($json_data);
+
 
     }
 
