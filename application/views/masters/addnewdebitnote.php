@@ -170,6 +170,20 @@
 
                                     </div>
 
+                                    <?php if($getDebitnotedatalist[0]['pre_po_date']){
+                                        $po_date= $getDebitnotedatalist[0]['pre_po_date'];
+                                     }else{
+                                        $po_date= date('Y-m-d');
+                                     } ?>
+
+                                    <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="po_date">PO Date</label>
+                                                  <input type="text" class="form-control datepicker"  value="<?=$po_date?>" id="po_date" name="po_date" required>
+                                                <p class="error po_date_error"></p>
+                                            </div>
+                                    </div>
+
                                     <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="remark">Remark</label>
@@ -249,7 +263,7 @@
                                                 <!-- <span aria-hidden="true">&times;</span> -->
                                                 </button>
                                             </div>
-                                            <form role="form" id="saveChallanformitem_form" action="<?php echo base_url() ?>saveChallanformitem" method="post" role="form">
+                                            <form role="form" id="saveDebitnoteitem_form" action="<?php echo base_url() ?>saveChallanformitem" method="post" role="form">
 
                                                 <div class="modal-body">
                                                     <div class="loader_ajax" style="display:none;">
@@ -279,85 +293,71 @@
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">HSN Code</label>
+                                                        <label class="col-sm-4 col-form-label">Invoice No<span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="text" class="form-control"  id="HSN_Code" name="HSN_Code" readonly>
-                                                            <p class="error HSN_Code_error"></p>
+                                                            <input type="text" class="form-control"  id="invoice_no" name="invoice_no">
+                                                            <p class="error invoice_noe_error"></p>
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">SAC Code</label>
+                                                        <label class="col-sm-4 col-form-label">Invoice Date<span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="text" class="form-control"  id="SAC" name="SAC" readonly>
-                                                            <p class="error SAC_error"></p>
+                                                            <input type="text" class="form-control datepicker"  id="invoice_date" name="invoice_date">
+                                                            <p class="error invoice_date_error"></p>
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Type Of Row Material</label>
+                                                        <label class="col-sm-4 col-form-label">Invoice Qty<span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="text" class="form-control"  id="type_of_raw_material" name="type_of_raw_material" readonly>
-                                                            <p class="error type_of_raw_material_error"></p>
+                                                            <input type="number" class="form-control"  id="invoice_qty" name="invoice_qty">
+                                                            <p class="error invoice_qty_error"></p>
                                                         </div>
                                                     </div>
                                                 
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Type Of Row Platting<span class="required">*</span></label>
+                                                        <label class="col-sm-4 col-form-label">OK Qty<span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="text" class="form-control"  id="type_of_raw_platting" name="type_of_raw_platting">
-                                                            <p class="error type_of_raw_platting_error"></p>
+                                                            <input type="number" class="form-control"  id="ok_qty" name="ok_qty">
+                                                            <p class="error ok_qty_error"></p>
                                                         </div>
                                                     </div>
 
                                                    
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Quantity<span class="required">*</span></label>
+                                                        <label class="col-sm-4 col-form-label">Less Quantity<span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="text" class="form-control"  id="quantity" name="quantity">
-                                                            <p class="error quantity_error"></p>
+                                                            <input type="number" class="form-control"  id="less_quantity" name="less_quantity">
+                                                            <p class="error less_quantity_error"></p>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-4 col-form-label">Rejected Quantity<span class="required">*</span></label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" class="form-control"  id="rejected_quantity" name="rejected_quantity">
+                                                            <p class="error rejected_quantity_error"></p>
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Unit <span class="required">*</span></label>
+                                                        <label class="col-sm-4 col-form-label">Received Quantity<span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                             <select class="form-control" name="unit" id="unit">
-                                                                <option value="">Select Unit</option>
-                                                                <option value="kgs">Kgs</option>
-                                                                <option value="Pcs">Pcs</option>
-                                                                <option value="Nos">Nos</option>
-                                                                <option value="Sheet">Sheet</option>
-                                                                <option value="Set">Set</option>
-                                                             </select>
-                                                            <p class="error unit_error"></p>
+                                                            <input type="number" class="form-control"  id="received_quantity" name="received_quantity">
+                                                            <p class="error received_quantity_error"></p>
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Rate<span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="text" class="form-control"  id="rate" name="rate">
+                                                            <input type="number" class="form-control"  id="rate" name="rate" readonly>
                                                             <p class="error rate_error"></p>
                                                         </div>
-                                                    </div>
-
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Value<span class="required">*</span></label>
-                                                        <div class="col-sm-8">
-                                                            <input type="text" class="form-control"  id="value" name="value" readonly>
-                                                            <p class="error value_error"></p>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Row Material Cost<span class="required">*</span></label>
-                                                        <div class="col-sm-8">
-                                                            <input type="text" class="form-control"  id="row_material_cost" name="row_material_cost">
-                                                            <p class="error row_material_cost_error"></p>
-                                                        </div>
-                                                    </div>
+                                                    </div>                                                  
                                                 
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Select GST Rate<span class="required">*</span></label>
@@ -437,8 +437,8 @@
                                                 </div>
 
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary btn-xl closechallanformmodal" data-dismiss="modal">Close</button>
-                                                    <button type="submit" id="saveChallanformpopopitem" name="saveChallanformpopopitem" class="btn btn-primary" class="btn btn-success btn-xl">Save</button>
+                                                    <button type="button" class="btn btn-secondary btn-xl closedebitnotemodel" data-dismiss="modal">Close</button>
+                                                    <button type="submit" id="saveChallanformitem" name="saveChallanformitem" class="btn btn-primary" class="btn btn-success btn-xl">Save</button>
                                                 </div>
                                             </form>    
                                             </div>

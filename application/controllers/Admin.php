@@ -6639,12 +6639,13 @@ class Admin extends BaseController
                 $this->form_validation->set_rules('vendor_po_number','Vendor PO Number','trim');
                 $this->form_validation->set_rules('supplier_name','Supplier Name','trim');
                 $this->form_validation->set_rules('supplier_po_number','Supplier PO Number','trim');
+                $this->form_validation->set_rules('po_date','PO Date','trim');
                 $this->form_validation->set_rules('remark','Remark','trim');
 
                 if($this->form_validation->run() == FALSE)
                 {
                     $newdebitnote_response['status'] = 'failure';
-                    $newdebitnote_response['error'] = array('debit_note_number'=>strip_tags(form_error('debit_note_number')),'debit_note_date'=>strip_tags(form_error('debit_note_date')),'select_with_po_without_po'=>strip_tags(form_error('select_with_po_without_po')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'remark'=>strip_tags(form_error('remark')));
+                    $newdebitnote_response['error'] = array('debit_note_number'=>strip_tags(form_error('debit_note_number')),'debit_note_date'=>strip_tags(form_error('debit_note_date')),'select_with_po_without_po'=>strip_tags(form_error('select_with_po_without_po')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'remark'=>strip_tags(form_error('remark')),'po_date'=>strip_tags(form_error('po_date')));
                 }else{
 
                     $data = array(
@@ -6656,12 +6657,13 @@ class Admin extends BaseController
                         'vendor_po' =>  trim($this->input->post('vendor_po_number')),
                         'supplier_id' =>  trim($this->input->post('supplier_name')),
                         'supplier_po' =>  trim($this->input->post('supplier_po_number')),
+                        'po_date' =>  trim($this->input->post('po_date')),
                         'remark' =>  trim($this->input->post('remark')),
                     );
 
-                    $challanformid = trim($this->input->post('challan_id'));
-                    if($challanformid){
-                        $saveNewdebitnote= $this->admin_model->saveNewdebitnote($challanformid,$data);
+                    $debit_id = trim($this->input->post('debit_id'));
+                    if($debit_id){
+                        $saveNewdebitnote= $this->admin_model->saveNewdebitnote($debit_id,$data);
                         if($saveNewdebitnote){
                             $newdebitnote_response['status'] = 'success';
                             $newdebitnote_response['error'] = array('challan_no'=>strip_tags(form_error('challan_no')),'challan_date'=>strip_tags(form_error('challan_date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'remark'=>strip_tags(form_error('remark')));
@@ -6672,8 +6674,8 @@ class Admin extends BaseController
                             // $update_last_inserted_id_challan_form = $this->admin_model->update_last_inserted_id_challan_form($saveNewchallan);
                             // if($update_last_inserted_id_challan_form){
                                 $newdebitnote_response['status'] = 'success';
-                                $newdebitnote_response['error'] = array('debit_note_number'=>strip_tags(form_error('debit_note_number')),'debit_note_date'=>strip_tags(form_error('debit_note_date')),'select_with_po_without_po'=>strip_tags(form_error('select_with_po_without_po')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'remark'=>strip_tags(form_error('remark')));
-                            // }
+                                $newdebitnote_response['error'] = array('debit_note_number'=>strip_tags(form_error('debit_note_number')),'debit_note_date'=>strip_tags(form_error('debit_note_date')),'select_with_po_without_po'=>strip_tags(form_error('select_with_po_without_po')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'remark'=>strip_tags(form_error('remark')),'po_date'=>strip_tags(form_error('po_date')));
+                                // }
                         }
                     }
                 }
@@ -6742,9 +6744,7 @@ class Admin extends BaseController
         $this->global['pageTitle'] = 'Edit Debit Note Form';
         $data['vendorList']= $this->admin_model->fetchALLvendorList();
         $data['supplierList']= $this->admin_model->fetchALLsupplierList();
-        $data['getReworkrejectiondetails']= $this->admin_model->getReworkrejectiondetails($id);
-        $data['getReworkRejectionitemslistforedit']= $this->admin_model->getReworkRejectionitemslistforedit($id);
-        // $data['fetchALLprescrapreturndetailsforview']= $this->admin_model->fetchALLprescrapreturndetailsforview($scrapreturnid);
+        $data['getdebitnoteditailsdata']= $this->admin_model->getdebitnoteditailsdata($id);
         $this->loadViews("masters/editdebitnoteform", $this->global, $data, NULL);
     }
 

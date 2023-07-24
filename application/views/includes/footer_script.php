@@ -9567,7 +9567,7 @@
 
 
 
-<?php if($pageTitle=='Debit Note' || $pageTitle=='Add New Debit Note' ){ ?>
+<?php if($pageTitle=='Debit Note' || $pageTitle=='Add New Debit Note' || $pageTitle=='Edit Debit Note Form' ){ ?>
 	<script type="text/javascript">
 		 $(document).ready(function() {
 		    var dt = $('#view_debit_note').DataTable({
@@ -9798,7 +9798,6 @@
 			return false;
 	     });
 
-
 		 $(document).on('click','.deletedebitnote',function(e){
 					var elemF = $(this);
 					e.preventDefault();
@@ -9845,8 +9844,104 @@
 						swal("Cancelled", "Debit Note deletion cancelled ", "error");
 						}
 					});
-		});
+		 });
 
+		 $(document).on('change','#part_number',function(e){  
+			e.preventDefault();
+			
+			var part_number = $('#part_number').val();
+		    var vendor_po_number = $('#vendor_po_number').val();
+			var vendor_name = $('#vendor_name').val();
+			var vendor_supplier_name = $('#vendor_supplier_name').val();
+
+			if(vendor_supplier_name=='vendor'){
+
+				if(vendor_name){
+					if(vendor_po_number){
+							$.ajax({
+								url : "<?php echo ADMIN_PATH;?>getSuppliergoodsreworkrejectionvendor",
+								type: "POST",
+								data : {'part_number' : part_number,'vendor_po_number':vendor_po_number},
+								success: function(data, textStatus, jqXHR)
+								{
+									$(".loader_ajax").hide();
+									if(data == "failure")
+									{
+										$('#description').val('');
+										$('#rate').val('');
+									}
+									else
+									{
+										var data_row_material = jQuery.parseJSON( data );
+										$('#description').val(data_row_material.name);
+										$('#rate').val(data_row_material.vendorrate);
+									}
+								},
+								error: function (jqXHR, textStatus, errorThrown)
+								{
+										$('#description').val('');
+										$('#rate').val('');
+								}
+							});
+							return false;
+
+					}else{
+						$('.part_number_error').html('Please Select Vendor PO Number');
+					}
+
+				}else{
+					$('.part_number_error').html('Please Select Vendor PO');
+				}
+
+			}
+
+			if(vendor_supplier_name=='supplier'){
+
+				var supplier_po_number = $('#supplier_po_number').val();
+			    var supplier_name = $('#supplier_name').val();
+				
+				if(supplier_name){
+					if(supplier_po_number){
+							$.ajax({
+								url : "<?php echo ADMIN_PATH;?>getSuppliergoodsreworkrejectionsupplier",
+								type: "POST",
+								data : {'part_number' : part_number,'supplier_po_number':supplier_po_number,'vendor_po_number':''},
+								success: function(data, textStatus, jqXHR)
+								{
+									$(".loader_ajax").hide();
+									if(data == "failure")
+									{
+										$('#description').val('');
+										$('#rate').val('');
+
+									}
+									else
+									{
+										var data_row_material = jQuery.parseJSON( data );
+										$('#description').val(data_row_material.name);
+										$('#rate').val(data_row_material.supplierrate);
+										
+									}
+								},
+								error: function (jqXHR, textStatus, errorThrown)
+								{
+										$('#description').val('');
+										$('#rate').val('');									
+										//$(".loader_ajax").hide();
+								}
+							});
+							return false;
+
+					}else{
+						$('.part_number_error').html('Please Select Vendor PO Number');
+					}
+
+				}else{
+					$('.part_number_error').html('Please Select Vendor PO');
+				}
+			}
+
+		 });
 
 
     </script>

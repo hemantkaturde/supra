@@ -4617,7 +4617,7 @@ class Admin_model extends CI_Model
     public function saveNewdebitnote($id,$data){
 
         if($id != '') {
-            $this->db->where('id', $id);
+            $this->db->where('debit_id', $id);
             if($this->db->update(TBL_DEBIT_NOTE, $data)){
                 return TRUE;
             } else {
@@ -4726,6 +4726,22 @@ class Admin_model extends CI_Model
         }
 
     }
+
+    public function getdebitnoteditailsdata($id){
+
+        $this->db->select('*,'.TBL_SUPPLIER.'.supplier_name as supplier,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_pomaster,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_master,'.TBL_DEBIT_NOTE.'.debit_id  as debit_id,'.TBL_DEBIT_NOTE.'.po_date as debit_po_date,'.TBL_DEBIT_NOTE.'.remark as debit_remark');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_DEBIT_NOTE.'.vendor_id','left');
+        $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_DEBIT_NOTE.'.supplier_id','left');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_DEBIT_NOTE.'.vendor_po','left');
+        $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_DEBIT_NOTE.'.supplier_po','left');
+        $this->db->where(TBL_DEBIT_NOTE.'.status', 1);
+        $this->db->where(TBL_DEBIT_NOTE.'.debit_id',$id);
+        $query = $this->db->get(TBL_DEBIT_NOTE);
+        $fetch_result = $query->result_array();
+        return $fetch_result;
+
+    }
+
 
 }
 

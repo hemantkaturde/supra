@@ -23,47 +23,36 @@
                         <?php $this->load->helper("form"); ?>
                         <form role="form" id="addnewdebitnoteform" action="<?php echo base_url() ?>addnewdebitnoteform" method="post" role="form">
                             <div class="box-body">
-                                <div class="col-md-4">
-                                    <?php
-                                        if($getPreviousDebitnote_number[0]['debit_note_number']){
-                                            $arr = str_split($getPreviousDebitnote_number[0]['debit_note_number']);
-                                            $i = end($arr);
-                                            $inrno= "SQDN2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
-                                            $debit_note_number = $inrno;
-                                        }else{
-                                            $debit_note_number = 'SQDN23240001';
-                                        }
-                                    ?>
 
+                            
+                                <input type="hidden" class="form-control" id="debit_id" value="<?=$getdebitnoteditailsdata[0]['debit_id']?>" name="debit_id" readonly>
+
+                                <div class="col-md-4">
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="debit_note_number">Debit Note Number<span class="required">*</span></label>
-                                            <input type="text" class="form-control" id="debit_note_number" value="<?=$debit_note_number?>" name="debit_note_number" readonly>
+                                            <input type="text" class="form-control" id="debit_note_number" value="<?=$getdebitnoteditailsdata[0]['debit_note_number']?>" name="debit_note_number" readonly>
                                             <p class="error debit_note_number_error"></p>
                                         </div>
                                     </div>
-                                    
-                                    <?php if($getDebitnotedatalist[0]['pre_date']){
-                                        $date= $getDebitnotedatalist[0]['pre_date'];
-                                     }else{
-                                        $date= date('Y-m-d');
-                                     } ?>
 
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="debit_note_date">Debit Note Date <span class="required">*</span></label>
-                                            <input type="text" class="form-control datepicker"  value="<?=$date?>" id="debit_note_date" name="debit_note_date" required>
+                                            <input type="text" class="form-control datepicker"  value="<?=$getdebitnoteditailsdata[0]['debit_note_date']?>" id="debit_note_date" name="debit_note_date" required>
                                             <p class="error debit_note_date_error"></p>
                                         </div>
                                     </div>
+
+
 
                                     <div class="col-md-12">
                                         <div class="form-group">
                                                 <label for="select_with_po_without_po">Select With PO / Without PO <span class="required">*</span></label>
                                                 <select class="form-control" name="select_with_po_without_po" id="select_with_po_without_po">
                                                     <option st-id="" value="">Select With PO / Without PO</option>
-                                                    <option value="with_po" <?php if($getDebitnotedatalist[0]['pre_vendor_supplier_name']=='vendor'){ echo 'selected'; } ?>>With PO</option>
-                                                    <option value="without_po" <?php if($getDebitnotedatalist[0]['pre_vendor_supplier_name']=='supplier'){ echo 'selected'; } ?>>Without PO</option>
+                                                    <option value="with_po" <?php if($getdebitnoteditailsdata[0]['type']=='with_po'){ echo 'selected'; } ?>>With PO</option>
+                                                    <option value="without_po" <?php if($getdebitnoteditailsdata[0]['type']=='without_po'){ echo 'selected'; } ?>>Without PO</option>
                                                 </select>
                                             <p class="error select_with_po_without_po_error"></p>
                                         </div>
@@ -75,16 +64,16 @@
                                                 <label for="vendor_supplier_name">Select Vendor / Supplier <span class="required">*</span></label>
                                                 <select class="form-control vendor_supplier_name" name="vendor_supplier_name" id="vendor_supplier_name">
                                                     <option st-id="" value="">Select Vendor / Supplier</option>
-                                                    <option value="vendor" <?php if($getDebitnotedatalist[0]['pre_vendor_supplier_name']=='vendor'){ echo 'selected'; } ?>>Vendor</option>
-                                                    <option value="supplier" <?php if($getDebitnotedatalist[0]['pre_vendor_supplier_name']=='supplier'){ echo 'selected'; } ?>>Supplier</option>
+                                                    <option value="vendor" <?php if($getdebitnoteditailsdata[0]['supplier_vendor_name']=='vendor'){ echo 'selected'; } ?>>Vendor</option>
+                                                    <option value="supplier" <?php if($getdebitnoteditailsdata[0]['supplier_vendor_name']=='supplier'){ echo 'selected'; } ?>>Supplier</option>
                                                 </select>
                                             <p class="error vendor_supplier_name_error"></p>
                                         </div>
                                     </div>
 
 
-                                     <?php if($getDebitnotedatalist[0]['pre_vendor_name']){
-                                      $display = 'none';
+                                     <?php if($getdebitnoteditailsdata[0]['vendor_id']){
+                                      $display = 'block';
                                      }else{ 
                                       $display = 'none';
                                      } ?>
@@ -96,7 +85,7 @@
                                                     <select class="form-control vendor_name" name="vendor_name" id="vendor_name">
                                                         <option st-id="" value="">Select Vendor Name</option>
                                                         <?php foreach ($vendorList as $key => $value) {?>
-                                                        <option value="<?php echo $value['ven_id']; ?>" <?php if($value['ven_id']==$getDebitnotedatalist[0]['pre_vendor_name']){ echo 'selected';} ?>><?php echo $value['vendor_name']; ?></option>
+                                                        <option value="<?php echo $value['ven_id']; ?>" <?php if($value['ven_id']==$getdebitnoteditailsdata[0]['vendor_id']){ echo 'selected';} ?>><?php echo $value['vendor_name']; ?></option>
                                                         <?php } ?>
                                                     </select>
                                                 <p class="error vendor_name_error"></p>
@@ -105,9 +94,9 @@
 
 
                                         <?php
-                                            if($getDebitnotedatalist[0]['pre_vendor_po_number']){
+                                            if($getdebitnoteditailsdata[0]['vendor_po']){
                                                 $display='block';
-                                                $selected_value = $getDebitnotedatalist[0]['vendor_po_number'];
+                                                $selected_value = $getdebitnoteditailsdata[0]['vendor_pomaster'];
                                             }else{
                                                 $display='none';
                                                 $selected_value = 'Select Buyer PO Number';
@@ -119,7 +108,7 @@
                                                     <label for="vendor_po_number">Select Vendor PO Number</label>
                                                         <select class="form-control vendor_po_number_itam" name="vendor_po_number" id="vendor_po_number">
                                                             <!-- <option st-id="" value="">Select Vendor Name</option> -->
-                                                            <option st-id="" value="<?=$getDebitnotedatalist[0]['pre_vendor_po_number']?>" selected="selected"><?=$selected_value?></option>
+                                                            <option st-id="" value="<?=$getdebitnoteditailsdata[0]['vendor_po']?>" selected="selected"><?=$selected_value?></option>
                                                         </select>
                                                 <p class="error vendor_po_number_error"></p>
                                             </div>
@@ -127,8 +116,8 @@
                                     </div>
 
 
-                                    <?php if($getDebitnotedatalist[0]['pre_supplier_name']){
-                                      $display = 'none';
+                                    <?php if($getdebitnoteditailsdata[0]['supplier_id']){
+                                      $display = 'block';
                                      }else{ 
                                       $display = 'none';
                                      } ?>
@@ -140,7 +129,7 @@
                                                         <select class="form-control" name="supplier_name" id="supplier_name">
                                                             <option st-id="" value="">Select Supplier Name</option>
                                                             <?php foreach ($supplierList as $key => $value) {?>
-                                                            <option value="<?php echo $value['sup_id']; ?>" <?php if($value['sup_id']==$getDebitnotedatalist[0]['pre_supplier_name']){ echo 'selected';} ?> ><?php echo $value['supplier_name']; ?></option>
+                                                            <option value="<?php echo $value['sup_id']; ?>" <?php if($value['sup_id']==$getdebitnoteditailsdata[0]['supplier_id']){ echo 'selected';} ?> ><?php echo $value['supplier_name']; ?></option>
                                                             <?php } ?>
                                                         </select>
                                                     <p class="error supplier_name_error"></p>
@@ -148,9 +137,9 @@
                                             </div>
 
                                             <?php
-                                                if($getDebitnotedatalist[0]['pre_supplier_po_number']){
-                                                    $display='none';
-                                                    $selected_value = $getDebitnotedatalist[0]['supplier_po_number'];
+                                                if($getdebitnoteditailsdata[0]['supplier_po']){
+                                                    $display='block';
+                                                    $selected_value = $getdebitnoteditailsdata[0]['supplier_master'];
                                                 }else{
                                                     $display='none';
                                                     $selected_value = 'Select Supplier PO Number';
@@ -162,18 +151,27 @@
                                                         <label for="supplier_po_number">Select Supplier PO Number</label>
                                                             <select class="form-control supplier_po_number_item supplier_po_number_for_item" name="supplier_po_number" id="supplier_po_number">
                                                                 <!-- <option st-id="" value="">Select Vendor Name</option> -->
-                                                                <option st-id="" value="<?=$getDebitnotedatalist[0]['pre_supplier_po_number']?>" selected="selected"><?=$selected_value?></option>
+                                                                <option st-id="" value="<?=$getdebitnoteditailsdata[0]['supplier_po']?>" selected="selected"><?=$selected_value?></option>
                                                             </select>
                                                     <p class="error supplier_po_number_error"></p>
                                                 </div>
                                             </div>
+                                    </div>
 
+
+
+                                    <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="po_date">PO Date</label>
+                                                  <input type="text" class="form-control datepicker"  value="<?=$getdebitnoteditailsdata[0]['debit_po_date']?>" id="po_date" name="po_date" required>
+                                                <p class="error po_date_error"></p>
+                                            </div>
                                     </div>
 
                                     <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="remark">Remark</label>
-                                                  <textarea type="text" class="form-control"  id="remark"  name="remark" required> <?=$getDebitnotedatalist[0]['pre_remark'];?></textarea>
+                                                  <textarea type="text" class="form-control"  id="remark"  name="remark" required> <?=$getdebitnoteditailsdata[0]['debit_remark'];?></textarea>
                                                 <p class="error remark_error"></p>
                                             </div>
                                     </div>
