@@ -9943,6 +9943,209 @@
 
 		 });
 
+		 $(document).on('change', '#invoice_qty,#less_quantity,#rejected_quantity', function(){	
+				$("#received_quantity").val();
+			  
+				 if($("#invoice_qty").val()){
+					 var invoice_qty = $("#invoice_qty").val();
+				 }else{
+					 var invoice_qty = 0;
+				 }
+
+				 if($("#less_quantity").val()){
+					 var less_quantity = $("#less_quantity").val();
+				 }else{
+					 var less_quantity = 0;
+				 }
+
+				 if($("#rejected_quantity").val()){
+					 var rejected_quantity = $("#rejected_quantity").val();
+				 }else{
+					 var rejected_quantity = 0;
+				 }
+
+				 var less_qty_rejected_qty = parseFloat(less_quantity) +  parseFloat(rejected_quantity);
+ 
+				 var value = parseFloat(invoice_qty) - parseFloat(less_qty_rejected_qty);
+				 $("#received_quantity").val( Math.round(value));
+		 });
+
+		 $(document).on('change', '#gst_rate', function(){	
+			var gst_rate_value = $("#gst_rate").val();
+			if(gst_rate_value=='IGST'){
+
+				$(".cgst_sgst_div").attr("style", "display:none");
+				$(".igst_div").attr("style", "display:block");
+				$(".cgst_sgst_div_6").attr("style", "display:none");
+				$(".igst_div_12").attr("style", "display:none");
+
+		
+				if($("#invoice_qty").val()){
+					 var invoice_qty = $("#invoice_qty").val();
+				 }else{
+					 var invoice_qty = 0;
+				 }
+
+				 if($("#less_quantity").val()){
+					 var less_quantity = $("#less_quantity").val();
+				 }else{
+					 var less_quantity = 0;
+				 }
+
+				 if($("#rate").val()){
+					 var rate = $("#rate").val();
+				 }else{
+					 var rate = 0;
+				 }
+
+				var less_qty_rejected_qty = parseFloat(less_quantity) +  parseFloat(invoice_qty);
+
+				var base_val = parseFloat(less_qty_rejected_qty) * parseFloat(rate);
+
+				var total_value = parseFloat(base_val);
+				var gst_value = parseFloat(total_value) * 18 / 100;
+				
+				$("#igst_rate_18").val( Math.round(gst_value));
+				$("#gst").val( Math.round(gst_value));
+				$("#grand_total").val( Math.round(gst_value) + Math.round(total_value)); 
+
+
+			}else if(gst_rate_value=='CGST_SGST'){
+
+				
+		
+				 if($("#invoice_qty").val()){
+					 var invoice_qty = $("#invoice_qty").val();
+				 }else{
+					 var invoice_qty = 0;
+				 }
+
+				 if($("#less_quantity").val()){
+					 var less_quantity = $("#less_quantity").val();
+				 }else{
+					 var less_quantity = 0;
+				 }
+
+				 if($("#rate").val()){
+					 var rate = $("#rate").val();
+				 }else{
+					 var rate = 0;
+				 }
+
+				var less_qty_rejected_qty = parseFloat(less_quantity) +  parseFloat(invoice_qty);
+
+				var base_val = parseFloat(less_qty_rejected_qty) * parseFloat(rate);
+
+				var total_value = parseFloat(base_val);
+
+				var gst_value = parseFloat(total_value) * 18 / 100;
+
+				$(".igst_div").attr("style", "display:none");
+				$(".cgst_sgst_div").attr("style", "display:block");
+				$(".cgst_sgst_div_6").attr("style", "display:none");
+				$(".igst_div_12").attr("style", "display:none");
+
+				var cgst_rate  =Math.round(gst_value)/2;
+
+				var SGST_rate  =Math.round(gst_value)/2;
+
+				$("#CGST_rate_9").val( Math.round(cgst_rate));
+				$("#SGST_rate_9").val( Math.round(SGST_rate));
+
+				$("#gst").val( Math.round(gst_value));
+
+				$("#grand_total").val( Math.round(gst_value) + Math.round(total_value));
+
+			}else if(gst_rate_value=='CGST_SGST_6'){
+
+				$(".igst_div").attr("style", "display:none");
+				$(".cgst_sgst_div").attr("style", "display:none");
+				$(".cgst_sgst_div_6").attr("style", "display:block");
+				$(".igst_div_12").attr("style", "display:none");
+
+			
+				if($("#invoice_qty").val()){
+					 var invoice_qty = $("#invoice_qty").val();
+				 }else{
+					 var invoice_qty = 0;
+				 }
+
+				 if($("#less_quantity").val()){
+					 var less_quantity = $("#less_quantity").val();
+				 }else{
+					 var less_quantity = 0;
+				 }
+
+				 if($("#rate").val()){
+					 var rate = $("#rate").val();
+				 }else{
+					 var rate = 0;
+				 }
+
+				var less_qty_rejected_qty = parseFloat(less_quantity) +  parseFloat(invoice_qty);
+
+				var base_val = parseFloat(less_qty_rejected_qty) * parseFloat(rate);
+
+				var total_value = parseFloat(base_val);
+
+				var gst_value = parseFloat(total_value) * 12 / 100;
+
+				var cgst_rate  =Math.round(gst_value)/2;
+
+				var SGST_rate  =Math.round(gst_value)/2;
+
+				$("#CGST_rate_6").val( Math.round(cgst_rate));
+				$("#SGST_rate_6").val( Math.round(SGST_rate));
+
+				$("#gst").val( Math.round(gst_value));
+
+				$("#grand_total").val( Math.round(gst_value) + Math.round(total_value));
+
+			}else if(gst_rate_value=='IGST_12'){
+
+				$(".igst_div").attr("style", "display:none");
+				$(".cgst_sgst_div").attr("style", "display:none");
+				$(".cgst_sgst_div_6").attr("style", "display:none");
+				$(".igst_div_12").attr("style", "display:block");
+
+
+				if($("#invoice_qty").val()){
+					 var invoice_qty = $("#invoice_qty").val();
+				 }else{
+					 var invoice_qty = 0;
+				 }
+
+				 if($("#less_quantity").val()){
+					 var less_quantity = $("#less_quantity").val();
+				 }else{
+					 var less_quantity = 0;
+				 }
+
+				 if($("#rate").val()){
+					 var rate = $("#rate").val();
+				 }else{
+					 var rate = 0;
+				 }
+
+				var less_qty_rejected_qty = parseFloat(less_quantity) +  parseFloat(invoice_qty);
+
+				var base_val = parseFloat(less_qty_rejected_qty) * parseFloat(rate);
+
+				var total_value = parseFloat(base_val);
+				var gst_value = parseFloat(total_value) * 12 / 100;
+				
+				$("#igst_rate_12").val( Math.round(gst_value));
+				$("#gst").val( Math.round(gst_value));
+				$("#grand_total").val( Math.round(gst_value) + Math.round(total_value)); 
+
+			}
+         });
+
+		$(document).on('click','.closedebitnotemodel', function(){
+			location.reload();
+        });
+		 
+
 
     </script>
 <?php } ?>
