@@ -6617,7 +6617,6 @@ class Admin extends BaseController
 
     }
 
-
     public function debitnote(){
         $process = 'Debit Note';
         $processFunction = 'Admin/debitnote';
@@ -6625,7 +6624,6 @@ class Admin extends BaseController
         $this->global['pageTitle'] = 'Debit Note';
         $this->loadViews("masters/debitnote", $this->global, $data, NULL);  
     }
-
 
     public function addnewdebitnote(){
 
@@ -6693,7 +6691,6 @@ class Admin extends BaseController
 
     }
 
-
     public function fetchdebitnotedetails(){
 
         $params = $_REQUEST;
@@ -6729,13 +6726,44 @@ class Admin extends BaseController
         $this->loadViews("masters/paymentdetails", $this->global, $data, NULL);  
     }
 
-
     public function poddetails(){
         $process = 'POD Detials';
         $processFunction = 'Admin/poddetails';
         $this->logrecord($process,$processFunction);
         $this->global['pageTitle'] = 'Challan Form';
         $this->loadViews("masters/poddetails", $this->global, $data, NULL);  
+    }
+
+    public function editdebitnoteform($id){
+
+        $process = 'Edit Debit Note Form';
+        $processFunction = 'Admin/editdebitnoteform';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Edit Debit Note Form';
+        $data['vendorList']= $this->admin_model->fetchALLvendorList();
+        $data['supplierList']= $this->admin_model->fetchALLsupplierList();
+        $data['getReworkrejectiondetails']= $this->admin_model->getReworkrejectiondetails($id);
+        $data['getReworkRejectionitemslistforedit']= $this->admin_model->getReworkRejectionitemslistforedit($id);
+        // $data['fetchALLprescrapreturndetailsforview']= $this->admin_model->fetchALLprescrapreturndetailsforview($scrapreturnid);
+        $this->loadViews("masters/editdebitnoteform", $this->global, $data, NULL);
+    }
+
+
+    public function deletedebitnote(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->deletedebitnote(trim($this->input->post('id')));
+            if ($result) {
+                        $process = 'Delete Debit Note';
+                        $processFunction = 'Admin/deletedebitnote';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
+
     }
 
 }

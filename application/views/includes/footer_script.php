@@ -9753,7 +9753,6 @@
 				return false;
 		 });
 
-
          $(document).on('click','#savenewdebitnote',function(e){
 			e.preventDefault();
 			$(".loader_ajax").show();
@@ -9798,6 +9797,57 @@
 			});
 			return false;
 	     });
+
+
+		 $(document).on('click','.deletedebitnote',function(e){
+					var elemF = $(this);
+					e.preventDefault();
+					swal({
+						title: "Are you sure?",
+						text: "Delete Debit Note",
+						type: "warning",
+						showCancelButton: true,
+						closeOnClickOutside: false,
+						confirmButtonClass: "btn-sm btn-danger",
+						confirmButtonText: "Yes, delete it!",
+						cancelButtonText: "No, cancel plz!",
+						closeOnConfirm: false,
+						closeOnCancel: false
+					}, function(isConfirm) {
+						if (isConfirm) {
+									$.ajax({
+										url : "<?php echo base_url();?>deletedebitnote",
+										type: "POST",
+										data : 'id='+elemF.attr('data-id'),
+										success: function(data, textStatus, jqXHR)
+										{
+											const obj = JSON.parse(data);
+										
+											if(obj.status=='success'){
+												swal({
+													title: "Deleted!",
+													text: "Delete Debit Note Succesfully",
+													icon: "success",
+													button: "Ok",
+													},function(){ 
+															window.location.href = "<?php echo base_url().'debitnote'?>";
+												});	
+											}
+
+										},
+										error: function (jqXHR, textStatus, errorThrown)
+										{
+											$(".loader_ajax").hide();
+										}
+									})
+								}
+								else {
+						swal("Cancelled", "Debit Note deletion cancelled ", "error");
+						}
+					});
+		});
+
+
 
     </script>
 <?php } ?>

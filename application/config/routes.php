@@ -257,6 +257,11 @@ $route['deleteChallanformitem'] = "admin/deleteChallanformitem";
 $route['debitnote'] = "admin/debitnote";
 $route['addnewdebitnote'] = "admin/addnewdebitnote";
 $route['fetchdebitnotedetails'] = "admin/fetchdebitnotedetails";
+$route['editdebitnoteform/(:any)'] = "admin/editdebitnoteform/$1";
+$route['deletedebitnote'] = "admin/deletedebitnote";
+
+
+
 
 
 $route['paymentdetails'] = "admin/paymentdetails";

@@ -4563,7 +4563,6 @@ class Admin_model extends CI_Model
         }
     }
 
-
     public function getChallanformdetails($id){
         $this->db->select('*,'.TBL_SUPPLIER.'.supplier_name as supplier,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_pomaster,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_po_master,'.TBL_CHALLAN_FORM.'.challan_id as challan_id,'.TBL_CHALLAN_FORM.'.vendor_po_number as vendor_po_rework,'.TBL_CHALLAN_FORM.'.supplier_po_number as rejection_supplier_po,'.TBL_CHALLAN_FORM.'.supplier_name as reworksupplier,'.TBL_CHALLAN_FORM.'.remark as rejectionremark,'.TBL_CHALLAN_FORM.'.vendor_name as venorselected');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_CHALLAN_FORM.'.vendor_name','left');
@@ -4615,7 +4614,6 @@ class Admin_model extends CI_Model
         return $rowcount;
     }
 
-
     public function saveNewdebitnote($id,$data){
 
         if($id != '') {
@@ -4634,7 +4632,6 @@ class Admin_model extends CI_Model
         }
 
     }
-
 
     public function getdebitnotecount($params){
 
@@ -4709,6 +4706,25 @@ class Admin_model extends CI_Model
             }
         }
         return $data;
+    }
+
+    public function deletedebitnote($id){
+        
+        $this->db->where('debit_id', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_DEBIT_NOTE)){
+            $this->db->where('debit_id', $id);
+            //$this->db->delete(TBL_SUPPLIER);
+            if($this->db->delete(TBL_DEBIT_NOTE)){
+               return TRUE;
+            }else{
+               return FALSE;
+            }
+           return TRUE;
+        }else{
+           return FALSE;
+        }
+
     }
 
 }
