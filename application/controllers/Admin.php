@@ -6398,7 +6398,6 @@ class Admin extends BaseController
         $this->logrecord($process,$processFunction);
         $this->global['pageTitle'] = 'Challan Form';
         $this->loadViews("masters/challanform", $this->global, $data, NULL);  
-        
     }
 
     public function fetchchallanform(){
@@ -6618,5 +6617,31 @@ class Admin extends BaseController
 
     }
 
+
+    public function debitnote(){
+        $process = 'Debit Note';
+        $processFunction = 'Admin/debitnote';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Debit Note';
+        $this->loadViews("masters/debitnote", $this->global, $data, NULL);  
+
+    }
+
+    public function paymentdetails(){
+        $process = 'Payment Details';
+        $processFunction = 'Admin/paymentdetails';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Payment Details';
+        $this->loadViews("masters/paymentdetails", $this->global, $data, NULL);  
+    }
+
+
+    public function poddetails(){
+        $process = 'POD Detials';
+        $processFunction = 'Admin/poddetails';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Challan Form';
+        $this->loadViews("masters/poddetails", $this->global, $data, NULL);  
+    }
 
 }

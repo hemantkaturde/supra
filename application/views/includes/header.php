@@ -208,7 +208,7 @@
                     </li>
 
 
-                    <li class="treeview <?php if($pageUrl=="jobWork" || $pageUrl=="addjobwork" || $pageUrl=="editjobwork" ||  $pageUrl=="scrapreturn" || $pageUrl=="addnewScrapreturn" || $pageUrl=="editscrapreturn" || $pageUrl=="reworkrejectionreturn" || $pageUrl=="addneworkrejection" || $pageUrl=="editreworkrejection" || $pageUrl=="challanform" || $pageUrl=="addchallanform" || $pageUrl=="editchallanform"){echo 'active';}?>">
+                    <li class="treeview <?php if($pageUrl=="jobWork" || $pageUrl=="addjobwork" || $pageUrl=="editjobwork" ||  $pageUrl=="scrapreturn" || $pageUrl=="addnewScrapreturn" || $pageUrl=="editscrapreturn" || $pageUrl=="reworkrejectionreturn" || $pageUrl=="addneworkrejection" || $pageUrl=="editreworkrejection" || $pageUrl=="challanform" || $pageUrl=="addchallanform" || $pageUrl=="editchallanform" || $pageUrl=="debitnote" || $pageUrl=="paymentdetails" || $pageUrl="poddetails"){echo 'active';}?>">
                       <a href="#">
                         <i class="fa fa-file-text-o"></i> <span class="menu_label">Challans</span>
                           <span class="pull-right-container">
@@ -220,6 +220,10 @@
                         <li class="line_height <?php if($pageUrl=="reworkrejectionreturn" || $pageUrl=="addneworkrejection" || $pageUrl=="editreworkrejection"){echo 'active';}?>"><a href="<?php echo base_url(); ?>reworkrejectionreturn"><i class="fa fa-cubes"></i> Rework / Rejection Return (RR)</a></li>
                         <li class="line_height <?php if($pageUrl=="challanform" || $pageUrl=="addchallanform" || $pageUrl=="editchallanform"){echo 'active';}?>"><a href="<?php echo base_url(); ?>challanform"><i class="fa fa-cubes"></i> Challan Form</a></li>                        
                         <li class="line_height <?php if($pageUrl=="scrapreturn" || $pageUrl=="addnewScrapreturn" || $pageUrl=="editscrapreturn"){echo 'active';}?>"><a href="<?php echo base_url(); ?>scrapreturn"><i class="fa fa-cubes"></i> Scrap Return</a></li>
+
+                        <li class="line_height <?php if($pageUrl=="debitnote" || $pageUrl=="addnewScrapreturn" || $pageUrl=="editscrapreturn"){echo 'active';}?>"><a href="<?php echo base_url(); ?>debitnote"><i class="fa fa-cubes"></i> Debit Note</a></li>
+                        <li class="line_height <?php if($pageUrl=="paymentdetails" || $pageUrl=="addnewScrapreturn" || $pageUrl=="editscrapreturn"){echo 'active';}?>"><a href="<?php echo base_url(); ?>paymentdetails"><i class="fa fa-cubes"></i> Payment Details</a></li>
+                        <li class="line_height <?php if($pageUrl=="poddetails" || $pageUrl=="addnewScrapreturn" || $pageUrl=="editscrapreturn"){echo 'active';}?>"><a href="<?php echo base_url(); ?>poddetails"><i class="fa fa-cubes"></i> POD Details</a></li>
                       </ul>
                     </li>
 

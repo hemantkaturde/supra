@@ -9507,9 +9507,7 @@
 
 		$(document).on('click','.deleteChallanformitem',function(e){
 			
-			
 			var challan_id = $("#challan_id").val();
-			
 			var elemF = $(this);
 				e.preventDefault();
 				swal({
@@ -9565,4 +9563,109 @@
 		});
 
 	</script>
+<?php } ?>
+
+
+
+<?php if($pageTitle=='Debit Note'){ ?>
+	<script type="text/javascript">
+		 $(document).ready(function() {
+		    var dt = $('#view_debit_note').DataTable({
+	            "columnDefs": [ 
+	                 { className: "details-control", "targets": [ 0 ] },
+	                 { "width": "10%", "targets": 0 },
+	                 { "width": "10%", "targets": 1 },
+					 { "width": "10%", "targets": 2 },
+	                 { "width": "10%", "targets": 3 },
+					 { "width": "10%", "targets": 4 },
+					 { "width": "10%", "targets": 5 },
+					 { "width": "5%", "targets": 6 },
+	            ],
+	            responsive: true,
+	            "oLanguage": {
+	                "sEmptyTable": "<i>No Challan Form Found.</i>",
+	            }, 
+	            "bSort" : false,
+	            "bFilter":true,
+	            "bLengthChange": true,
+	            "iDisplayLength": 10,   
+	            "bProcessing": true,
+	            "serverSide": true,
+	            "ajax":{
+                    url :"<?php echo base_url();?>fetchchallanform",
+                    type: "post",
+	            },
+	        });
+	    });
+    </script>
+<?php } ?>
+
+
+
+<?php if($pageTitle=='Payment Details'){ ?>
+	<script type="text/javascript">
+		 $(document).ready(function() {
+		    var dt = $('#view_payment_details').DataTable({
+	            "columnDefs": [ 
+	                 { className: "details-control", "targets": [ 0 ] },
+	                 { "width": "10%", "targets": 0 },
+	                 { "width": "10%", "targets": 1 },
+					 { "width": "10%", "targets": 2 },
+	                 { "width": "10%", "targets": 3 },
+					 { "width": "10%", "targets": 4 },
+					 { "width": "10%", "targets": 5 },
+					 { "width": "5%", "targets": 6 },
+	            ],
+	            responsive: true,
+	            "oLanguage": {
+	                "sEmptyTable": "<i>No Challan Form Found.</i>",
+	            }, 
+	            "bSort" : false,
+	            "bFilter":true,
+	            "bLengthChange": true,
+	            "iDisplayLength": 10,   
+	            "bProcessing": true,
+	            "serverSide": true,
+	            "ajax":{
+                    url :"<?php echo base_url();?>fetchchallanform",
+                    type: "post",
+	            },
+	        });
+	    });
+
+    </script>
+<?php } ?>
+
+
+<?php if($pageTitle=='POD Detials'){ ?>
+	<script type="text/javascript">
+		 $(document).ready(function() {
+		    var dt = $('#view_POD_details').DataTable({
+	            "columnDefs": [ 
+	                 { className: "details-control", "targets": [ 0 ] },
+	                 { "width": "10%", "targets": 0 },
+	                 { "width": "10%", "targets": 1 },
+					 { "width": "10%", "targets": 2 },
+	                 { "width": "10%", "targets": 3 },
+					 { "width": "10%", "targets": 4 },
+					 { "width": "10%", "targets": 5 },
+					 { "width": "5%", "targets": 6 },
+	            ],
+	            responsive: true,
+	            "oLanguage": {
+	                "sEmptyTable": "<i>No Challan Form Found.</i>",
+	            }, 
+	            "bSort" : false,
+	            "bFilter":true,
+	            "bLengthChange": true,
+	            "iDisplayLength": 10,   
+	            "bProcessing": true,
+	            "serverSide": true,
+	            "ajax":{
+                    url :"<?php echo base_url();?>fetchchallanform",
+                    type: "post",
+	            },
+	        });
+	    });
+    </script>
 <?php } ?>

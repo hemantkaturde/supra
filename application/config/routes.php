@@ -254,6 +254,16 @@ $route['saveChallanformitem'] = "admin/saveChallanformitem";
 $route['deleteChallanformitem'] = "admin/deleteChallanformitem";
 
 
+$route['debitnote'] = "admin/debitnote";
+$route['paymentdetails'] = "admin/paymentdetails";
+$route['poddetails'] = "admin/poddetails";
+
+
+
+
+
+
+
 
 
 
