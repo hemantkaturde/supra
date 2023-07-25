@@ -9463,7 +9463,7 @@
 				url : "<?php echo base_url();?>saveChallanformitem",
 				type: "POST",
 				 //data : formData,
-				  data :{part_number:part_number,description:description,type_of_raw_platting:type_of_raw_platting,quantity:quantity,rate:rate,value:value,row_material_cost:row_material_cost,gst_rate:gst_rate,grand_total:grand_total,item_remark:item_remark,pre_challan_date:pre_challan_date,pre_vendor_supplier_name:pre_vendor_supplier_name,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_supplier_name:pre_supplier_name,pre_supplier_po_number:pre_supplier_po_number,pre_remark:pre_remark,challan_id:challan_id },
+				 data :{part_number:part_number,description:description,type_of_raw_platting:type_of_raw_platting,quantity:quantity,rate:rate,value:value,row_material_cost:row_material_cost,gst_rate:gst_rate,grand_total:grand_total,item_remark:item_remark,pre_challan_date:pre_challan_date,pre_vendor_supplier_name:pre_vendor_supplier_name,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_supplier_name:pre_supplier_name,pre_supplier_po_number:pre_supplier_po_number,pre_remark:pre_remark,challan_id:challan_id },
 				 method: "POST",
                 // data :{package_id:package_id},
                 cache:false,
@@ -9503,7 +9503,6 @@
 			   });
 			return false;
 	    });
-
 
 		$(document).on('click','.deleteChallanformitem',function(e){
 			
@@ -10141,10 +10140,159 @@
 			}
          });
 
-		$(document).on('click','.closedebitnotemodel', function(){
+		 $(document).on('click','.closedebitnotemodel', function(){
 			location.reload();
-        });
-		 
+         });
+
+		 $(document).on('click','#savedebitnoteitem',function(e){
+			e.preventDefault();
+			   $(".loader_ajax").show();
+			   var formData = new FormData($("#saveDebitnoteitem_form")[0]);
+
+			   var part_number =   $('#part_number').val();
+			   var description =   $('#description').val();
+			   var invoice_no =   $('#invoice_no').val();
+			   var invoice_date =   $('#invoice_date').val();
+			   var invoice_qty =   $('#invoice_qty').val();
+			   var ok_qty =   $('#ok_qty').val();
+			   var less_quantity =   $('#less_quantity').val();
+			   var rejected_quantity =   $('#rejected_quantity').val();
+			   var received_quantity =   $('#received_quantity').val();
+			   var rate =   $('#rate').val();
+
+			   var gst_rate =   $('#gst_rate').val();
+			 
+			   if(gst_rate=='CGST_SGST'){
+				var sgst_value =   $('#SGST_rate_9').val();
+				var cgst_value =   $('#CGST_rate_9').val();
+			   }
+
+			   if(gst_rate=='CGST_SGST_6'){
+				var sgst_value =   $('#SGST_rate_6').val();
+				var cgst_value =   $('#CGST_rate_6').val();
+			   }
+
+			   if(gst_rate=='IGST'){
+				var igst_rate =   $('#igst_rate_18').val();
+			   }
+
+			   if(gst_rate=='IGST_12'){
+				var igst_rate =   $('#igst_rate_12').val();
+			   }
+			   
+			   var grand_total =   $('#grand_total').val();
+			   var item_remark =   $('#item_remark').val();
+			   
+
+			   var pre_debit_note_date =   $('#debit_note_date').val();
+			   var pre_select_with_po_without_po =   $('#select_with_po_without_po').val();
+			   var pre_vendor_supplier_name =   $('#vendor_supplier_name').val();
+			   var pre_vendor_name =   $('#vendor_name').val();
+			   var pre_vendor_po_number =   $('#vendor_po_number').val();
+			   var pre_supplier_name =   $('#supplier_name').val();
+			   var pre_supplier_po_number =   $('#supplier_po_number').val();
+			   var pre_po_date =   $('#po_date').val();
+			   var pre_remark =   $('#remark').val();
+			
+			   $.ajax({
+				url : "<?php echo base_url();?>saveDebitnoteitem",
+				type: "POST",
+				 //data : formData,
+				 data :{part_number:part_number,invoice_no:invoice_no,invoice_date:invoice_date,invoice_qty:invoice_qty,ok_qty:ok_qty,less_quantity:less_quantity,rejected_quantity:rejected_quantity,received_quantity:received_quantity,rate:rate,gst_rate:gst_rate,sgst_value:sgst_value,cgst_value:cgst_value,igst_rate:igst_rate,grand_total:grand_total,item_remark:item_remark,pre_debit_note_date:pre_debit_note_date,pre_select_with_po_without_po:pre_select_with_po_without_po,pre_vendor_supplier_name:pre_vendor_supplier_name,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_supplier_name:pre_supplier_name,pre_supplier_po_number:pre_supplier_po_number,pre_po_date:pre_po_date,pre_remark:pre_remark},
+				 method: "POST",
+                // data :{package_id:package_id},
+                cache:false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+						$(".loader_ajax").hide();
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						swal({
+							title: "Success",
+							text: "Item Successfully Added!",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+								
+							    window.location.href = "<?php echo base_url().'addnewdebitnote'?>";
+						});		
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			   });
+			return false;
+	     });
+
+
+
+		 $(document).on('click','.deleteDebitnoteitem',function(e){
+			
+			var challan_id = $("#challan_id").val();
+			var elemF = $(this);
+				e.preventDefault();
+				swal({
+					title: "Are you sure?",
+					text: "Delete Challan Form Item ",
+					type: "warning",
+					showCancelButton: true,
+					closeOnClickOutside: false,
+					confirmButtonClass: "btn-sm btn-danger",
+					confirmButtonText: "Yes, delete it!",
+					cancelButtonText: "No, cancel plz!",
+					closeOnConfirm: false,
+					closeOnCancel: false
+				}, function(isConfirm) {
+					if (isConfirm) {
+								$.ajax({
+									url : "<?php echo base_url();?>deleteDebitnoteitem",
+									type: "POST",
+									data : 'id='+elemF.attr('data-id'),
+									success: function(data, textStatus, jqXHR)
+									{
+										const obj = JSON.parse(data);
+									
+										if(obj.status=='success'){
+											swal({
+												title: "Deleted!",
+												text: "Debit Note Item Deleted Succesfully",
+												icon: "success",
+												button: "Ok",
+												},function(){ 
+
+													if(challan_id){
+														window.location.href = "<?php echo base_url().'editchallanform/'?>"+challan_id;
+													}else{
+														window.location.href = "<?php echo base_url().'addnewdebitnote'?>";
+													}
+
+														
+											});	
+										}
+
+									},
+									error: function (jqXHR, textStatus, errorThrown)
+									{
+										$(".loader_ajax").hide();
+									}
+								})
+							}
+							else {
+					swal("Cancelled", "Debit Note Item deletion cancelled ", "error");
+					}
+				});
+		});
 
 
     </script>

@@ -259,8 +259,8 @@ $route['addnewdebitnote'] = "admin/addnewdebitnote";
 $route['fetchdebitnotedetails'] = "admin/fetchdebitnotedetails";
 $route['editdebitnoteform/(:any)'] = "admin/editdebitnoteform/$1";
 $route['deletedebitnote'] = "admin/deletedebitnote";
-
-
+$route['saveDebitnoteitem'] = "admin/saveDebitnoteitem";
+$route['deleteDebitnoteitem'] = "admin/deleteDebitnoteitem";
 
 
 

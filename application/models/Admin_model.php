@@ -4713,9 +4713,9 @@ class Admin_model extends CI_Model
         $this->db->where('debit_id', $id);
         //$this->db->delete(TBL_SUPPLIER);
         if($this->db->delete(TBL_DEBIT_NOTE)){
-            $this->db->where('debit_id', $id);
+            $this->db->where('debit_note_id', $id);
             //$this->db->delete(TBL_SUPPLIER);
-            if($this->db->delete(TBL_DEBIT_NOTE)){
+            if($this->db->delete(TBL_DEBIT_NOTE_ITEM)){
                return TRUE;
             }else{
                return FALSE;
@@ -4742,6 +4742,65 @@ class Admin_model extends CI_Model
 
     }
 
+    public function savedebitnoteitemdetails($id,$data){
+
+        if($id != '') {
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_DEBIT_NOTE_ITEM, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_DEBIT_NOTE_ITEM, $data)) {
+                return $this->db->insert_id();;
+            } else {
+                return FALSE;
+            }
+        }
+
+    }
+
+    public function update_last_inserted_id_debit_note($saveNewdebitnote){
+        $data = array(
+            'debit_note_id' =>$saveNewdebitnote
+        );
+
+        $this->db->where(TBL_DEBIT_NOTE_ITEM.'.debit_note_id IS NULL');
+        if($this->db->update(TBL_DEBIT_NOTE_ITEM,$data)){
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+    }
+
+
+    public function deleteDebitnoteitem($debit_note_id){
+
+        $this->db->where('id', $debit_note_id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_DEBIT_NOTE_ITEM)){
+           return TRUE;
+        }else{
+           return FALSE;
+        }
+
+    }
+
+
+    public function getdebitnoteitemdetails(){
+
+        $this->db->select('*,'.TBL_DEBIT_NOTE_ITEM.'.id as debit_note_id,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_po');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_DEBIT_NOTE_ITEM.'.part_number');
+        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_DEBIT_NOTE_ITEM.'.pre_vendor_po_number','left');
+        $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_DEBIT_NOTE_ITEM.'.pre_supplier_po_number','left');
+        $this->db->where(TBL_DEBIT_NOTE_ITEM.'.debit_note_id IS NULL');
+        $query = $this->db->get(TBL_DEBIT_NOTE_ITEM);
+        $data = $query->result_array();
+        return $data;
+
+    }
 
 }
 

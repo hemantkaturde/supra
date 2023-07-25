@@ -6671,11 +6671,11 @@ class Admin extends BaseController
                     }else{
                         $saveNewdebitnote= $this->admin_model->saveNewdebitnote('',$data);
                         if($saveNewdebitnote){
-                            // $update_last_inserted_id_challan_form = $this->admin_model->update_last_inserted_id_challan_form($saveNewchallan);
-                            // if($update_last_inserted_id_challan_form){
+                            $update_last_inserted_id_debit_note = $this->admin_model->update_last_inserted_id_debit_note($saveNewdebitnote);
+                            if($update_last_inserted_id_debit_note){
                                 $newdebitnote_response['status'] = 'success';
                                 $newdebitnote_response['error'] = array('debit_note_number'=>strip_tags(form_error('debit_note_number')),'debit_note_date'=>strip_tags(form_error('debit_note_date')),'select_with_po_without_po'=>strip_tags(form_error('select_with_po_without_po')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'remark'=>strip_tags(form_error('remark')),'po_date'=>strip_tags(form_error('po_date')));
-                                // }
+                             }
                         }
                     }
                 }
@@ -6687,6 +6687,7 @@ class Admin extends BaseController
             $this->global['pageTitle'] = 'Add New Debit Note';
             $data['vendorList']= $this->admin_model->fetchALLvendorList();
             $data['supplierList']= $this->admin_model->fetchALLsupplierList();
+            $data['getdebitnoteitemdetails']= $this->admin_model->getdebitnoteitemdetails();
             $getPreviousDebitnote_number = $this->admin_model->getPreviousDebitnote_number();
             $this->loadViews("masters/addnewdebitnote", $this->global, $data, NULL);
         }
@@ -6748,7 +6749,6 @@ class Admin extends BaseController
         $this->loadViews("masters/editdebitnoteform", $this->global, $data, NULL);
     }
 
-
     public function deletedebitnote(){
         $post_submit = $this->input->post();
         if($post_submit){
@@ -6765,5 +6765,95 @@ class Admin extends BaseController
         }
 
     }
+
+    public function saveDebitnoteitem(){
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+
+            $savdebitnoteitem_response = array();
+            $this->form_validation->set_rules('part_number','Part Number','trim|required');
+            $this->form_validation->set_rules('description','Description','trim');
+            $this->form_validation->set_rules('invoice_no','Invoice No','trim|required');
+            $this->form_validation->set_rules('invoice_date','Invoice Date','trim|required');
+            $this->form_validation->set_rules('invoice_qty','Invoice Qty','trim|required');
+            $this->form_validation->set_rules('ok_qty','Ok Qty','trim|required');
+            $this->form_validation->set_rules('less_quantity','Less Quantity','trim|required');
+            $this->form_validation->set_rules('rejected_quantity','Rejected Quantity','trim|required');
+            $this->form_validation->set_rules('received_quantity','Received Quantity','trim|required');
+            $this->form_validation->set_rules('rate','Rate','trim|required');
+            $this->form_validation->set_rules('gst_rate','GST Rate','trim|required');
+            $this->form_validation->set_rules('sgst_value','SGST Value','trim');
+            $this->form_validation->set_rules('cgst_value','CGST Value','trim');
+            $this->form_validation->set_rules('igst_rate','IGST Value','trim');
+            $this->form_validation->set_rules('grand_total','Grand Total','trim|required');
+            $this->form_validation->set_rules('item_remark','Item Remark','trim');
+
+            if($this->form_validation->run() == FALSE)
+            {
+                $savdebitnoteitem_response['status'] = 'failure';
+                $savdebitnoteitem_response['error'] = array('part_number'=>strip_tags(form_error('part_number')),'description'=>strip_tags(form_error('description')), 'invoice_no'=>strip_tags(form_error('invoice_no')), 'invoice_date'=>strip_tags(form_error('invoice_date')),'invoice_qty'=>strip_tags(form_error('invoice_qty')), 'ok_qty'=>strip_tags(form_error('ok_qty')), 'rejected_quantity'=>strip_tags(form_error('rejected_quantity')),'received_quantity'=>strip_tags(form_error('received_quantity')),'rate'=>strip_tags(form_error('rate')), 'gst_rate'=>strip_tags(form_error('gst_rate')),'sgst_value'=>strip_tags(form_error('sgst_value')),'cgst_value'=>strip_tags(form_error('cgst_value')),'igst_rate'=>strip_tags(form_error('igst_rate')),'grand_total'=>strip_tags(form_error('grand_total')),'item_remark'=>strip_tags(form_error('item_remark')));
+           
+            }else{
+
+                $data = array(
+                    'part_number' =>  trim($this->input->post('part_number')),
+                    'invoice_no' =>  trim($this->input->post('invoice_no')),
+                    'invoice_date' =>  trim($this->input->post('invoice_date')),
+                    'invoice_qty' =>  trim($this->input->post('invoice_qty')),
+                    'ok_qty' =>  trim($this->input->post('ok_qty')),
+                    'less_quantity' =>  trim($this->input->post('less_quantity')),
+                    'rejected_quantity' =>  trim($this->input->post('rejected_quantity')),
+                    'received_quantity' =>  trim($this->input->post('received_quantity')),
+                    'rate' =>  trim($this->input->post('rate')),
+                    'gst_rate' =>  trim($this->input->post('gst_rate')),
+                    'SGST_value' =>  trim($this->input->post('SGST_value')),
+                    'CGST_value' =>  trim($this->input->post('CGST_value')),
+                    'IGST_value' =>  trim($this->input->post('IGST_value')),
+                    'grand_total' =>  trim($this->input->post('grand_total')),
+                    'remark'=>  trim($this->input->post('remark')),
+                    'pre_debit_note_date' =>   trim($this->input->post('pre_debit_note_date')),
+                    'pre_select_with_po_without_po ' =>   trim($this->input->post('pre_select_with_po_without_po')),
+                    'pre_vendor_supplier_name' =>   trim($this->input->post('pre_vendor_supplier_name')),
+                    'pre_vendor_name' =>    trim($this->input->post('pre_vendor_name')),
+                    'pre_vendor_po_number' =>  trim($this->input->post('pre_vendor_po_number')),
+                    'pre_supplier_name' =>    trim($this->input->post('pre_supplier_name')),
+                    'pre_supplier_po_number' =>    trim($this->input->post('pre_supplier_po_number')),
+                    'pre_po_date' =>    trim($this->input->post('pre_po_date')),
+                    'pre_remark' =>    trim($this->input->post('pre_remark')),
+                );
+
+                $savedebitnoteitemdetails= $this->admin_model->savedebitnoteitemdetails('',$data);
+                if($savedebitnoteitemdetails){
+                    $savdebitnoteitem_response['status'] = 'success';
+                    $savdebitnoteitem_response['error'] = array('part_number'=>strip_tags(form_error('part_number')),'description'=>strip_tags(form_error('description')), 'invoice_no'=>strip_tags(form_error('invoice_no')), 'invoice_date'=>strip_tags(form_error('invoice_date')),'invoice_qty'=>strip_tags(form_error('invoice_qty')), 'ok_qty'=>strip_tags(form_error('ok_qty')), 'rejected_quantity'=>strip_tags(form_error('rejected_quantity')),'received_quantity'=>strip_tags(form_error('received_quantity')),'rate'=>strip_tags(form_error('rate')), 'gst_rate'=>strip_tags(form_error('gst_rate')),'sgst_value'=>strip_tags(form_error('sgst_value')),'cgst_value'=>strip_tags(form_error('cgst_value')),'igst_rate'=>strip_tags(form_error('igst_rate')),'grand_total'=>strip_tags(form_error('grand_total')),'item_remark'=>strip_tags(form_error('item_remark')));
+                }
+
+            }
+
+            echo json_encode($savdebitnoteitem_response);
+        }
+
+    }
+
+    public function deleteDebitnoteitem(){
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->deleteDebitnoteitem(trim($this->input->post('id')));
+            if ($result) {
+                        $process = 'Delete Debit Note Item';
+                        $processFunction = 'Admin/deleteDebitnoteitem';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
+
+
+    }
+
 
 }

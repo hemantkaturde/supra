@@ -43,8 +43,8 @@
                                         </div>
                                     </div>
                                     
-                                    <?php if($getDebitnotedatalist[0]['pre_date']){
-                                        $date= $getDebitnotedatalist[0]['pre_date'];
+                                    <?php if($getdebitnoteitemdetails[0]['pre_date']){
+                                        $date= $getdebitnoteitemdetails[0]['pre_date'];
                                      }else{
                                         $date= date('Y-m-d');
                                      } ?>
@@ -57,13 +57,14 @@
                                         </div>
                                     </div>
 
+
                                     <div class="col-md-12">
                                         <div class="form-group">
                                                 <label for="select_with_po_without_po">Select With PO / Without PO <span class="required">*</span></label>
                                                 <select class="form-control" name="select_with_po_without_po" id="select_with_po_without_po">
                                                     <option st-id="" value="">Select With PO / Without PO</option>
-                                                    <option value="with_po" <?php if($getDebitnotedatalist[0]['pre_vendor_supplier_name']=='vendor'){ echo 'selected'; } ?>>With PO</option>
-                                                    <option value="without_po" <?php if($getDebitnotedatalist[0]['pre_vendor_supplier_name']=='supplier'){ echo 'selected'; } ?>>Without PO</option>
+                                                    <option value="with_po" <?php if($getdebitnoteitemdetails[0]['pre_select_with_po_without_po']=='with_po'){ echo 'selected'; } ?>>With PO</option>
+                                                    <option value="without_po" <?php if($getdebitnoteitemdetails[0]['pre_select_with_po_without_po']=='without_po'){ echo 'selected'; } ?>>Without PO</option>
                                                 </select>
                                             <p class="error select_with_po_without_po_error"></p>
                                         </div>
@@ -75,16 +76,16 @@
                                                 <label for="vendor_supplier_name">Select Vendor / Supplier <span class="required">*</span></label>
                                                 <select class="form-control vendor_supplier_name" name="vendor_supplier_name" id="vendor_supplier_name">
                                                     <option st-id="" value="">Select Vendor / Supplier</option>
-                                                    <option value="vendor" <?php if($getDebitnotedatalist[0]['pre_vendor_supplier_name']=='vendor'){ echo 'selected'; } ?>>Vendor</option>
-                                                    <option value="supplier" <?php if($getDebitnotedatalist[0]['pre_vendor_supplier_name']=='supplier'){ echo 'selected'; } ?>>Supplier</option>
+                                                    <option value="vendor" <?php if($getdebitnoteitemdetails[0]['pre_vendor_supplier_name']=='vendor'){ echo 'selected'; } ?>>Vendor</option>
+                                                    <option value="supplier" <?php if($getdebitnoteitemdetails[0]['pre_vendor_supplier_name']=='supplier'){ echo 'selected'; } ?>>Supplier</option>
                                                 </select>
                                             <p class="error vendor_supplier_name_error"></p>
                                         </div>
                                     </div>
 
 
-                                     <?php if($getDebitnotedatalist[0]['pre_vendor_name']){
-                                      $display = 'none';
+                                     <?php if($getdebitnoteitemdetails[0]['pre_vendor_name']){
+                                      $display = 'block';
                                      }else{ 
                                       $display = 'none';
                                      } ?>
@@ -96,7 +97,7 @@
                                                     <select class="form-control vendor_name" name="vendor_name" id="vendor_name">
                                                         <option st-id="" value="">Select Vendor Name</option>
                                                         <?php foreach ($vendorList as $key => $value) {?>
-                                                        <option value="<?php echo $value['ven_id']; ?>" <?php if($value['ven_id']==$getDebitnotedatalist[0]['pre_vendor_name']){ echo 'selected';} ?>><?php echo $value['vendor_name']; ?></option>
+                                                        <option value="<?php echo $value['ven_id']; ?>" <?php if($value['ven_id']==$getdebitnoteitemdetails[0]['pre_vendor_name']){ echo 'selected';} ?>><?php echo $value['vendor_name']; ?></option>
                                                         <?php } ?>
                                                     </select>
                                                 <p class="error vendor_name_error"></p>
@@ -105,9 +106,9 @@
 
 
                                         <?php
-                                            if($getDebitnotedatalist[0]['pre_vendor_po_number']){
+                                            if($getdebitnoteitemdetails[0]['pre_vendor_po_number']){
                                                 $display='block';
-                                                $selected_value = $getDebitnotedatalist[0]['vendor_po_number'];
+                                                $selected_value = $getdebitnoteitemdetails[0]['vendor_po'];
                                             }else{
                                                 $display='none';
                                                 $selected_value = 'Select Buyer PO Number';
@@ -119,7 +120,7 @@
                                                     <label for="vendor_po_number">Select Vendor PO Number</label>
                                                         <select class="form-control vendor_po_number_itam" name="vendor_po_number" id="vendor_po_number">
                                                             <!-- <option st-id="" value="">Select Vendor Name</option> -->
-                                                            <option st-id="" value="<?=$getDebitnotedatalist[0]['pre_vendor_po_number']?>" selected="selected"><?=$selected_value?></option>
+                                                            <option st-id="" value="<?=$getdebitnoteitemdetails[0]['pre_vendor_po_number']?>" selected="selected"><?=$selected_value?></option>
                                                         </select>
                                                 <p class="error vendor_po_number_error"></p>
                                             </div>
@@ -127,8 +128,8 @@
                                     </div>
 
 
-                                    <?php if($getDebitnotedatalist[0]['pre_supplier_name']){
-                                      $display = 'none';
+                                     <?php if($getdebitnoteitemdetails[0]['pre_supplier_name']){
+                                      $display = 'block';
                                      }else{ 
                                       $display = 'none';
                                      } ?>
@@ -140,7 +141,7 @@
                                                         <select class="form-control" name="supplier_name" id="supplier_name">
                                                             <option st-id="" value="">Select Supplier Name</option>
                                                             <?php foreach ($supplierList as $key => $value) {?>
-                                                            <option value="<?php echo $value['sup_id']; ?>" <?php if($value['sup_id']==$getDebitnotedatalist[0]['pre_supplier_name']){ echo 'selected';} ?> ><?php echo $value['supplier_name']; ?></option>
+                                                            <option value="<?php echo $value['sup_id']; ?>" <?php if($value['sup_id']==$getdebitnoteitemdetails[0]['pre_supplier_name']){ echo 'selected';} ?> ><?php echo $value['supplier_name']; ?></option>
                                                             <?php } ?>
                                                         </select>
                                                     <p class="error supplier_name_error"></p>
@@ -148,9 +149,9 @@
                                             </div>
 
                                             <?php
-                                                if($getDebitnotedatalist[0]['pre_supplier_po_number']){
+                                                if($getdebitnoteitemdetails[0]['pre_supplier_po_number']){
                                                     $display='none';
-                                                    $selected_value = $getDebitnotedatalist[0]['supplier_po_number'];
+                                                    $selected_value = $getdebitnoteitemdetails[0]['supplier_po'];
                                                 }else{
                                                     $display='none';
                                                     $selected_value = 'Select Supplier PO Number';
@@ -162,7 +163,7 @@
                                                         <label for="supplier_po_number">Select Supplier PO Number</label>
                                                             <select class="form-control supplier_po_number_item supplier_po_number_for_item" name="supplier_po_number" id="supplier_po_number">
                                                                 <!-- <option st-id="" value="">Select Vendor Name</option> -->
-                                                                <option st-id="" value="<?=$getDebitnotedatalist[0]['pre_supplier_po_number']?>" selected="selected"><?=$selected_value?></option>
+                                                                <option st-id="" value="<?=$getdebitnoteitemdetails[0]['pre_supplier_po_number']?>" selected="selected"><?=$selected_value?></option>
                                                             </select>
                                                     <p class="error supplier_po_number_error"></p>
                                                 </div>
@@ -170,8 +171,8 @@
 
                                     </div>
 
-                                    <?php if($getDebitnotedatalist[0]['pre_po_date']){
-                                        $po_date= $getDebitnotedatalist[0]['pre_po_date'];
+                                    <?php if($getdebitnoteitemdetails[0]['pre_po_date']){
+                                        $po_date= $getdebitnoteitemdetails[0]['pre_po_date'];
                                      }else{
                                         $po_date= date('Y-m-d');
                                      } ?>
@@ -187,7 +188,7 @@
                                     <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="remark">Remark</label>
-                                                  <textarea type="text" class="form-control"  id="remark"  name="remark" required> <?=$getDebitnotedatalist[0]['pre_remark'];?></textarea>
+                                                  <textarea type="text" class="form-control"  id="remark"  name="remark" required> <?=$getdebitnoteitemdetails[0]['pre_remark'];?></textarea>
                                                 <p class="error remark_error"></p>
                                             </div>
                                     </div>
@@ -203,13 +204,17 @@
                                                     <tr>
                                                         <th>Sr No.</th>
                                                         <th>Part Number</th>
-                                                        <th>Quantity</th>
-                                                        <th>Rate</th>
+                                                        <th>Description</th>
+                                                        <th>Invoice No</th>
+                                                        <th>Invoice Qty</th>
+                                                        <th>Invoice Date</th>
+                                                        <th>OK Qty</th>
+                                                        <th>Less Quantity</th>
+                                                        <th>Rejected Quantity</th>
+                                                        <th>Received Quantity</th>
+                                                        <th>Rate </th>
+                                                        <th>Select GST Rate</th>
                                                         <th>Value</th>
-                                                        <th>Type Of Platting</th>
-                                                        <th>Row Material Cost</th>
-                                                        <th>Total </th>
-                                                        <th>GST</th>
                                                         <th>Grand Total</th>
                                                         <th>Remark</th>
                                                         <th>Action</th>
@@ -218,24 +223,27 @@
                                                 <tbody>
                                                     <?php
                                                         $count=0;
-                                                           foreach ($getChallanformlist as $key => $value) :
+                                                           foreach ($getdebitnoteitemdetails as $key => $value) :
                                                            $count++;
                                                     ?>
                                                     <tr>
                                                         <td><?php echo $count;?></td>
                                                         <td><?php echo $value['part_number'];?></td>
-                                                        <!-- <td><?php echo $value['description'];?></td> -->
-                                                        <td><?php echo $value['qty'];?></td>
+                                                        <td><?php echo $value['name'];?></td>
+                                                        <td><?php echo $value['invoice_no'];?></td>
+                                                        <td><?php echo $value['invoice_date'];?></td>
+                                                        <td><?php echo $value['invoice_qty'];?></td>
+                                                        <td><?php echo $value['ok_qty'];?></td>
+                                                        <td><?php echo $value['less_quantity'];?></td>
+                                                        <td><?php echo $value['rejected_quantity'];?></td>
+                                                        <td><?php echo $value['received_quantity'];?></td>
                                                         <td><?php echo $value['rate'];?></td>
-                                                        <td><?php echo $value['value'];?></td>
-                                                        <td><?php echo $value['type_of_raw_platting'];?></td>
-                                                        <td><?php echo $value['row_material_cost'];?></td>
-                                                        <td><?php echo $value['row_material_cost'] + $value['value'];?></td>
                                                         <td><?php echo $value['gst_rate'];?></td>
+                                                        <td><?php echo $value['SGST_value'];?></td>
                                                         <td><?php echo $value['grand_total'];?></td>
-                                                        <td><?php echo $value['item_remark'];?></td>
+                                                        <td><?php echo $value['remark'];?></td>
                                                         <td>
-                                                        <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['challanformid'];?>' class='fa fa-trash-o deleteChallanformitem' aria-hidden='true'></i>
+                                                        <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['debit_note_id'];?>' class='fa fa-trash-o deleteDebitnoteitem' aria-hidden='true'></i>
                                                         </td>
                                                     </tr>
                                                     <?php endforeach;?>
@@ -254,7 +262,6 @@
                                       <!-- Add New Package Modal -->
                                     <?php $this->load->helper("form"); ?>
                                     <div class="modal fade" id="addNewModal" role="dialog" aria-labelledby="additem" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-                                      
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                             <div class="modal-header">
@@ -263,7 +270,7 @@
                                                 <!-- <span aria-hidden="true">&times;</span> -->
                                                 </button>
                                             </div>
-                                            <form role="form" id="saveDebitnoteitem_form" action="<?php echo base_url() ?>saveChallanformitem" method="post" role="form">
+                                            <form role="form" id="saveDebitnoteitem_form" action="<?php echo base_url() ?>savedebitnoteitem" method="post" role="form">
 
                                                 <div class="modal-body">
                                                     <div class="loader_ajax" style="display:none;">
@@ -438,7 +445,7 @@
 
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary btn-xl closedebitnotemodel" data-dismiss="modal">Close</button>
-                                                    <button type="submit" id="saveChallanformitem" name="saveChallanformitem" class="btn btn-primary" class="btn btn-success btn-xl">Save</button>
+                                                    <button type="submit" id="savedebitnoteitem" name="savedebitnoteitem" class="btn btn-primary" class="btn btn-success btn-xl">Save</button>
                                                 </div>
                                             </form>    
                                             </div>
@@ -451,12 +458,12 @@
                             <!-- /.box-body -->
                             <div class="box-footer">
                                 <div class="col-xs-8">
-                                    <?php if($getReworkRejectionitemslist){
+                                    <?php if($getdebitnoteitemdetails){
                                         $disabled= '';
                                     }else{ 
                                         $disabled= 'disabled';
                                      } ?>
-                                    <input type="submit" id="savenewdebitnote" class="btn btn-primary" value="Submit">
+                                    <input type="submit" id="savenewdebitnote" class="btn btn-primary" value="Submit" <?=$disabled?>>
                                     <input type="button" onclick="location.href = '<?php echo base_url() ?>debitnote'" class="btn btn-default" value="Back" />
                                 </div>
                             </div>
