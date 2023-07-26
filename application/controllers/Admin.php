@@ -6746,6 +6746,9 @@ class Admin extends BaseController
         $data['vendorList']= $this->admin_model->fetchALLvendorList();
         $data['supplierList']= $this->admin_model->fetchALLsupplierList();
         $data['getdebitnoteditailsdata']= $this->admin_model->getdebitnoteditailsdata($id);
+
+        $data['getdebitnoteitemdetailsedit']= $this->admin_model->getdebitnoteitemdetailsedit($id);
+
         $this->loadViews("masters/editdebitnoteform", $this->global, $data, NULL);
     }
 
@@ -6786,7 +6789,7 @@ class Admin extends BaseController
             $this->form_validation->set_rules('sgst_value','SGST Value','trim');
             $this->form_validation->set_rules('cgst_value','CGST Value','trim');
             $this->form_validation->set_rules('igst_rate','IGST Value','trim');
-            $this->form_validation->set_rules('grand_total','Grand Total','trim|required');
+            //$this->form_validation->set_rules('grand_total','Grand Total','trim');
             $this->form_validation->set_rules('item_remark','Item Remark','trim');
 
             if($this->form_validation->run() == FALSE)
@@ -6796,32 +6799,81 @@ class Admin extends BaseController
            
             }else{
 
-                $data = array(
-                    'part_number' =>  trim($this->input->post('part_number')),
-                    'invoice_no' =>  trim($this->input->post('invoice_no')),
-                    'invoice_date' =>  trim($this->input->post('invoice_date')),
-                    'invoice_qty' =>  trim($this->input->post('invoice_qty')),
-                    'ok_qty' =>  trim($this->input->post('ok_qty')),
-                    'less_quantity' =>  trim($this->input->post('less_quantity')),
-                    'rejected_quantity' =>  trim($this->input->post('rejected_quantity')),
-                    'received_quantity' =>  trim($this->input->post('received_quantity')),
-                    'rate' =>  trim($this->input->post('rate')),
-                    'gst_rate' =>  trim($this->input->post('gst_rate')),
-                    'SGST_value' =>  trim($this->input->post('SGST_value')),
-                    'CGST_value' =>  trim($this->input->post('CGST_value')),
-                    'IGST_value' =>  trim($this->input->post('IGST_value')),
-                    'grand_total' =>  trim($this->input->post('grand_total')),
-                    'remark'=>  trim($this->input->post('remark')),
-                    'pre_debit_note_date' =>   trim($this->input->post('pre_debit_note_date')),
-                    'pre_select_with_po_without_po ' =>   trim($this->input->post('pre_select_with_po_without_po')),
-                    'pre_vendor_supplier_name' =>   trim($this->input->post('pre_vendor_supplier_name')),
-                    'pre_vendor_name' =>    trim($this->input->post('pre_vendor_name')),
-                    'pre_vendor_po_number' =>  trim($this->input->post('pre_vendor_po_number')),
-                    'pre_supplier_name' =>    trim($this->input->post('pre_supplier_name')),
-                    'pre_supplier_po_number' =>    trim($this->input->post('pre_supplier_po_number')),
-                    'pre_po_date' =>    trim($this->input->post('pre_po_date')),
-                    'pre_remark' =>    trim($this->input->post('pre_remark')),
-                );
+                $debit_id =  trim($this->input->post('debit_id'));
+                if($debit_id){
+                    $data = array(
+                        'part_number' =>  trim($this->input->post('part_number')),
+                        'debit_note_id' =>  trim($debit_id),
+                        'invoice_no' =>  trim($this->input->post('invoice_no')),
+                        'invoice_date' =>  trim($this->input->post('invoice_date')),
+                        'invoice_qty' =>  trim($this->input->post('invoice_qty')),
+                        'ok_qty' =>  trim($this->input->post('ok_qty')),
+                        'less_quantity' =>  trim($this->input->post('less_quantity')),
+                        'rejected_quantity' =>  trim($this->input->post('rejected_quantity')),
+                        'received_quantity' =>  trim($this->input->post('received_quantity')),
+                        'rate' =>  trim($this->input->post('rate')),
+                        'gst_rate' =>  trim($this->input->post('gst_rate')),
+                        'SGST_value' =>  trim($this->input->post('sgst_value')),
+                        'CGST_value' =>  trim($this->input->post('cgst_value')),
+                        'IGST_value' =>  trim($this->input->post('igst_rate')),
+    
+                        'SGST_value_ok_val' =>  trim($this->input->post('SGST_rate_ok')),
+                        'CGST_value_ok_val' =>  trim($this->input->post('CGST_rate_ok')),
+                        'IGST_value_ok_val' =>  trim($this->input->post('igst_rate_ok')),
+    
+                       // 'grand_total' =>  trim($this->input->post('grand_total')),
+                        'debit_amount' =>  trim($this->input->post('debit_amount')),
+                        'remark'=>  trim($this->input->post('item_remark')),
+                        'pre_debit_note_date' =>   trim($this->input->post('pre_debit_note_date')),
+                        'pre_select_with_po_without_po ' =>   trim($this->input->post('pre_select_with_po_without_po')),
+                        'pre_vendor_supplier_name' =>   trim($this->input->post('pre_vendor_supplier_name')),
+                        'pre_vendor_name' =>    trim($this->input->post('pre_vendor_name')),
+                        'pre_vendor_po_number' =>  trim($this->input->post('pre_vendor_po_number')),
+                        'pre_supplier_name' =>    trim($this->input->post('pre_supplier_name')),
+                        'pre_supplier_po_number' =>    trim($this->input->post('pre_supplier_po_number')),
+                        'pre_po_date' =>    trim($this->input->post('pre_po_date')),
+                        'pre_remark' =>    trim($this->input->post('pre_remark')),
+                    );
+
+
+                }else{
+
+                    $data = array(
+                        'part_number' =>  trim($this->input->post('part_number')),
+                        'invoice_no' =>  trim($this->input->post('invoice_no')),
+                        'invoice_date' =>  trim($this->input->post('invoice_date')),
+                        'invoice_qty' =>  trim($this->input->post('invoice_qty')),
+                        'ok_qty' =>  trim($this->input->post('ok_qty')),
+                        'less_quantity' =>  trim($this->input->post('less_quantity')),
+                        'rejected_quantity' =>  trim($this->input->post('rejected_quantity')),
+                        'received_quantity' =>  trim($this->input->post('received_quantity')),
+                        'rate' =>  trim($this->input->post('rate')),
+                        'gst_rate' =>  trim($this->input->post('gst_rate')),
+                        'SGST_value' =>  trim($this->input->post('sgst_value')),
+                        'CGST_value' =>  trim($this->input->post('cgst_value')),
+                        'IGST_value' =>  trim($this->input->post('igst_rate')),
+    
+                        'SGST_value_ok_val' =>  trim($this->input->post('SGST_rate_ok')),
+                        'CGST_value_ok_val' =>  trim($this->input->post('CGST_rate_ok')),
+                        'IGST_value_ok_val' =>  trim($this->input->post('igst_rate_ok')),
+    
+                       // 'grand_total' =>  trim($this->input->post('grand_total')),
+                        'debit_amount' =>  trim($this->input->post('debit_amount')),
+                        'remark'=>  trim($this->input->post('item_remark')),
+                        'pre_debit_note_date' =>   trim($this->input->post('pre_debit_note_date')),
+                        'pre_select_with_po_without_po ' =>   trim($this->input->post('pre_select_with_po_without_po')),
+                        'pre_vendor_supplier_name' =>   trim($this->input->post('pre_vendor_supplier_name')),
+                        'pre_vendor_name' =>    trim($this->input->post('pre_vendor_name')),
+                        'pre_vendor_po_number' =>  trim($this->input->post('pre_vendor_po_number')),
+                        'pre_supplier_name' =>    trim($this->input->post('pre_supplier_name')),
+                        'pre_supplier_po_number' =>    trim($this->input->post('pre_supplier_po_number')),
+                        'pre_po_date' =>    trim($this->input->post('pre_po_date')),
+                        'pre_remark' =>    trim($this->input->post('pre_remark')),
+                    );
+
+                }
+
+            
 
                 $savedebitnoteitemdetails= $this->admin_model->savedebitnoteitemdetails('',$data);
                 if($savedebitnoteitemdetails){

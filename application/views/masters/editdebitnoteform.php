@@ -180,6 +180,7 @@
 
 
                                 <div class="col-md-6">
+                                
                                     <div class="container">
                                         <button type="button" class="btn btn-success btn-xl" data-toggle="modal" data-target="#addNewModal">Add New Items</button><br/><br/>
                                             <table class="table table-bordered" style="max-width: 68%;display: block;overflow-x: auto; white-space: nowrap;">
@@ -187,14 +188,18 @@
                                                     <tr>
                                                         <th>Sr No.</th>
                                                         <th>Part Number</th>
-                                                        <th>Quantity</th>
-                                                        <th>Rate</th>
+                                                        <th>Description</th>
+                                                        <th>Invoice No</th>
+                                                        <th>Invoice Qty</th>
+                                                        <th>Invoice Date</th>
+                                                        <th>OK Qty</th>
+                                                        <th>Less Quantity</th>
+                                                        <th>Rejected Quantity</th>
+                                                        <th>Received Quantity</th>
+                                                        <th>Rate </th>
+                                                        <th>Select GST Rate</th>
                                                         <th>Value</th>
-                                                        <th>Type Of Platting</th>
-                                                        <th>Row Material Cost</th>
-                                                        <th>Total </th>
-                                                        <th>GST</th>
-                                                        <th>Grand Total</th>
+                                                        <th>Debit Amount</th>
                                                         <th>Remark</th>
                                                         <th>Action</th>
                                                     </tr>
@@ -202,24 +207,27 @@
                                                 <tbody>
                                                     <?php
                                                         $count=0;
-                                                           foreach ($getChallanformlist as $key => $value) :
+                                                           foreach ($getdebitnoteitemdetailsedit as $key => $value) :
                                                            $count++;
                                                     ?>
                                                     <tr>
                                                         <td><?php echo $count;?></td>
                                                         <td><?php echo $value['part_number'];?></td>
-                                                        <!-- <td><?php echo $value['description'];?></td> -->
-                                                        <td><?php echo $value['qty'];?></td>
+                                                        <td><?php echo $value['name'];?></td>
+                                                        <td><?php echo $value['invoice_no'];?></td>
+                                                        <td><?php echo $value['invoice_date'];?></td>
+                                                        <td><?php echo $value['invoice_qty'];?></td>
+                                                        <td><?php echo $value['ok_qty'];?></td>
+                                                        <td><?php echo $value['less_quantity'];?></td>
+                                                        <td><?php echo $value['rejected_quantity'];?></td>
+                                                        <td><?php echo $value['received_quantity'];?></td>
                                                         <td><?php echo $value['rate'];?></td>
-                                                        <td><?php echo $value['value'];?></td>
-                                                        <td><?php echo $value['type_of_raw_platting'];?></td>
-                                                        <td><?php echo $value['row_material_cost'];?></td>
-                                                        <td><?php echo $value['row_material_cost'] + $value['value'];?></td>
                                                         <td><?php echo $value['gst_rate'];?></td>
-                                                        <td><?php echo $value['grand_total'];?></td>
-                                                        <td><?php echo $value['item_remark'];?></td>
+                                                        <td><?php echo $value['SGST_value'] + $value['CGST_value'];?></td>
+                                                        <td><?php echo $value['debit_amount'];?></td>
+                                                        <td><?php echo $value['debit_note_remark'];?></td>
                                                         <td>
-                                                        <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['challanformid'];?>' class='fa fa-trash-o deleteChallanformitem' aria-hidden='true'></i>
+                                                        <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['debit_note_id'];?>' class='fa fa-trash-o deleteDebitnoteitem' aria-hidden='true'></i>
                                                         </td>
                                                     </tr>
                                                     <?php endforeach;?>
@@ -236,9 +244,8 @@
                                     </div> -->
 
                                       <!-- Add New Package Modal -->
-                                    <?php $this->load->helper("form"); ?>
+                                      <?php $this->load->helper("form"); ?>
                                     <div class="modal fade" id="addNewModal" role="dialog" aria-labelledby="additem" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-                                      
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                             <div class="modal-header">
@@ -247,7 +254,7 @@
                                                 <!-- <span aria-hidden="true">&times;</span> -->
                                                 </button>
                                             </div>
-                                            <form role="form" id="saveChallanformitem_form" action="<?php echo base_url() ?>saveChallanformitem" method="post" role="form">
+                                            <form role="form" id="saveDebitnoteitem_form" action="<?php echo base_url() ?>savedebitnoteitem" method="post" role="form">
 
                                                 <div class="modal-body">
                                                     <div class="loader_ajax" style="display:none;">
@@ -277,85 +284,71 @@
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">HSN Code</label>
+                                                        <label class="col-sm-4 col-form-label">Invoice No<span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="text" class="form-control"  id="HSN_Code" name="HSN_Code" readonly>
-                                                            <p class="error HSN_Code_error"></p>
+                                                            <input type="text" class="form-control"  id="invoice_no" name="invoice_no">
+                                                            <p class="error invoice_noe_error"></p>
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">SAC Code</label>
+                                                        <label class="col-sm-4 col-form-label">Invoice Date<span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="text" class="form-control"  id="SAC" name="SAC" readonly>
-                                                            <p class="error SAC_error"></p>
+                                                            <input type="text" class="form-control datepicker"  id="invoice_date" name="invoice_date">
+                                                            <p class="error invoice_date_error"></p>
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Type Of Row Material</label>
+                                                        <label class="col-sm-4 col-form-label">Invoice Qty<span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="text" class="form-control"  id="type_of_raw_material" name="type_of_raw_material" readonly>
-                                                            <p class="error type_of_raw_material_error"></p>
+                                                            <input type="number" class="form-control"  id="invoice_qty" name="invoice_qty">
+                                                            <p class="error invoice_qty_error"></p>
                                                         </div>
                                                     </div>
                                                 
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Type Of Row Platting<span class="required">*</span></label>
+                                                        <label class="col-sm-4 col-form-label">OK Qty<span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="text" class="form-control"  id="type_of_raw_platting" name="type_of_raw_platting">
-                                                            <p class="error type_of_raw_platting_error"></p>
+                                                            <input type="number" class="form-control"  id="ok_qty" name="ok_qty">
+                                                            <p class="error ok_qty_error"></p>
                                                         </div>
                                                     </div>
 
                                                    
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Quantity<span class="required">*</span></label>
+                                                        <label class="col-sm-4 col-form-label">Less Quantity<span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="text" class="form-control"  id="quantity" name="quantity">
-                                                            <p class="error quantity_error"></p>
+                                                            <input type="number" class="form-control"  id="less_quantity" name="less_quantity">
+                                                            <p class="error less_quantity_error"></p>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-4 col-form-label">Rejected Quantity<span class="required">*</span></label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" class="form-control"  id="rejected_quantity" name="rejected_quantity">
+                                                            <p class="error rejected_quantity_error"></p>
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Unit <span class="required">*</span></label>
+                                                        <label class="col-sm-4 col-form-label">Received Quantity<span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                             <select class="form-control" name="unit" id="unit">
-                                                                <option value="">Select Unit</option>
-                                                                <option value="kgs">Kgs</option>
-                                                                <option value="Pcs">Pcs</option>
-                                                                <option value="Nos">Nos</option>
-                                                                <option value="Sheet">Sheet</option>
-                                                                <option value="Set">Set</option>
-                                                             </select>
-                                                            <p class="error unit_error"></p>
+                                                            <input type="number" class="form-control"  id="received_quantity" name="received_quantity">
+                                                            <p class="error received_quantity_error"></p>
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Rate<span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="text" class="form-control"  id="rate" name="rate">
+                                                            <input type="number" class="form-control"  id="rate" name="rate" readonly>
                                                             <p class="error rate_error"></p>
                                                         </div>
-                                                    </div>
-
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Value<span class="required">*</span></label>
-                                                        <div class="col-sm-8">
-                                                            <input type="text" class="form-control"  id="value" name="value" readonly>
-                                                            <p class="error value_error"></p>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Row Material Cost<span class="required">*</span></label>
-                                                        <div class="col-sm-8">
-                                                            <input type="text" class="form-control"  id="row_material_cost" name="row_material_cost">
-                                                            <p class="error row_material_cost_error"></p>
-                                                        </div>
-                                                    </div>
+                                                    </div>                                                  
                                                 
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Select GST Rate<span class="required">*</span></label>
@@ -371,45 +364,47 @@
                                                         </div>
                                                     </div>
 
+
+
                                                     <div class="form-group row cgst_sgst_div" style="display:none">
-                                                        <label class="col-sm-2 col-form-label">SGST 9 %<span class="required">*</span></label>
+                                                        <label class="col-sm-2 col-form-label">SGST 9 % (<small> SGST Value for Debit Qty</small>)<span class="required">*</span></label>
                                                         <div class="col-sm-4">
                                                             <input type="number" class="form-control"  id="SGST_rate_9" name="SGST_rate_9" readonly>
                                                             <p class="error SGST_rate_error"></p>
                                                         </div>
 
-                                                        <label class="col-sm-2 col-form-label">CGST 9 %<span class="required">*</span></label>
+                                                        <label class="col-sm-2 col-form-label">CGST 9 % (<small> SGST Value for Debit Qty</small>)<span class="required">*</span></label>
                                                         <div class="col-sm-4">
                                                             <input type="number" class="form-control"  id="CGST_rate_9" name="CGST_rate_9" readonly>
                                                             <p class="error CGST_rate_error"></p>
                                                         </div>
                                                     </div>
-
-
-                                                    <div class="form-group row igst_div" style="display:none">
-                                                        <label class="col-sm-4 col-form-label">IGST 18 %<span class="required">*</span></label>
-                                                        <div class="col-sm-8">
-                                                            <input type="number" class="form-control"  id="igst_rate_18" name="igst_rate_18" readonly>
-                                                            <p class="error igst_rate_18_error"></p>
-                                                        </div>
-                                                    </div>
+                                                   
 
                                                     <div class="form-group row cgst_sgst_div_6" style="display:none">
-                                                        <label class="col-sm-2 col-form-label">SGST 6 %<span class="required">*</span></label>
+                                                        <label class="col-sm-2 col-form-label">SGST 6 % (<small> SGST Value for Debit Qty</small>)<span class="required">*</span></label>
                                                         <div class="col-sm-4">
                                                             <input type="number" class="form-control"  id="SGST_rate_6" name="SGST_rate_6" readonly>
                                                             <p class="error SGST_rate_error"></p>
                                                         </div>
 
-                                                        <label class="col-sm-2 col-form-label">CGST 6 %<span class="required">*</span></label>
+                                                        <label class="col-sm-2 col-form-label">CGST 6 % (<small> SGST Value for Debit Qty</small>)<span class="required">*</span></label>
                                                         <div class="col-sm-4">
                                                             <input type="number" class="form-control"  id="CGST_rate_6" name="CGST_rate_6" readonly>
                                                             <p class="error CGST_rate_6_error"></p>
                                                         </div>
                                                     </div>
 
+                                                    <div class="form-group row igst_div" style="display:none">
+                                                        <label class="col-sm-4 col-form-label">IGST 18 % (<small> IGST Value for Debit Qty</small>)<span class="required">*</span></label>
+                                                        <div class="col-sm-8">
+                                                            <input type="number" class="form-control"  id="igst_rate_18" name="igst_rate_18" readonly>
+                                                            <p class="error igst_rate_18_error"></p>
+                                                        </div>
+                                                    </div>
+
                                                     <div class="form-group row igst_div_12" style="display:none">
-                                                        <label class="col-sm-4 col-form-label">IGST 12 %<span class="required">*</span></label>
+                                                        <label class="col-sm-4 col-form-label">IGST 12 % (<small> IGST Value for Debit Qty</small>)<span class="required">*</span></label>
                                                         <div class="col-sm-8">
                                                             <input type="number" class="form-control"  id="igst_rate_12" name="igst_rate_12" readonly>
                                                             <p class="error igst_rate_12_error"></p>
@@ -417,11 +412,69 @@
                                                     </div>
 
 
-                                                    <div class="form-group row">
+                                                    <div class="form-group row cgst_sgst_ok_9_div" style="display:none">
+                                                        <label class="col-sm-2 col-form-label">SGST 9 % (<small> SGST Value for OK Qty</small>)<span class="required">*</span></label>
+                                                        <div class="col-sm-4">
+                                                            <input type="number" class="form-control"  id="SGST_rate_9_ok" name="SGST_rate_9_ok" readonly>
+                                                            <p class="error SGST_rate_error"></p>
+                                                        </div>
+
+                                                        <label class="col-sm-2 col-form-label">CGST 9 % (<small> SGST Value for OK Qty</small>)<span class="required">*</span></label>
+                                                        <div class="col-sm-4">
+                                                            <input type="number" class="form-control"  id="CGST_rate_9_ok" name="CGST_rate_9_ok" readonly>
+                                                            <p class="error CGST_rate_9_ok_error"></p>
+                                                        </div>
+                                                    </div>
+
+
+
+                                                    <div class="form-group row cgst_sgst_ok_6_div" style="display:none">
+                                                        <label class="col-sm-2 col-form-label">SGST 6 % (<small> SGST Value for Debit Qty</small>)<span class="required">*</span></label>
+                                                        <div class="col-sm-4">
+                                                            <input type="number" class="form-control"  id="SGST_rate_6_ok" name="SGST_rate_6_ok" readonly>
+                                                            <p class="error SGST_rate_error"></p>
+                                                        </div>
+
+                                                        <label class="col-sm-2 col-form-label">CGST 6 % (<small> SGST Value for Debit Qty</small>)<span class="required">*</span></label>
+                                                        <div class="col-sm-4">
+                                                            <input type="number" class="form-control"  id="CGST_rate_6_ok" name="CGST_rate_6_ok" readonly>
+                                                            <p class="error CGST_rate_6_ok_error"></p>
+                                                        </div>
+                                                    </div>
+
+                                                    
+                                                    <div class="form-group row igst_ok_qty_div" style="display:none">
+                                                        <label class="col-sm-4 col-form-label">IGST 18 % (<small> IGST Value for OK Qty</small>)<span class="required">*</span></label>
+                                                        <div class="col-sm-8">
+                                                            <input type="number" class="form-control"  id="igst_rate_ok_18" name="igst_rate_ok_18" readonly>
+                                                            <p class="error igst_rate_ok_18_error"></p>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="form-group row igst_ok_div_12_div" style="display:none">
+                                                        <label class="col-sm-4 col-form-label">IGST 12 % (<small> IGST Value for OK Qty</small>)<span class="required">*</span></label>
+                                                        <div class="col-sm-8">
+                                                            <input type="number" class="form-control"  id="igst_rate_ok_12" name="igst_rate_ok_12" readonly>
+                                                            <p class="error igst_rate_ok_12_error"></p>
+                                                        </div>
+                                                    </div>
+
+
+
+                                                    <!-- <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Grand Total<span class="required">*</span></label>
                                                         <div class="col-sm-8">
                                                             <input type="number" class="form-control"  id="grand_total" name="grand_total" readonly>
                                                             <p class="error grand_total_error"></p>
+                                                        </div>
+                                                    </div> -->
+
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-4 col-form-label">Debit Amount<span class="required">*</span></label>
+                                                        <div class="col-sm-8">
+                                                            <input type="number" class="form-control"  id="debit_amount" name="debit_amount" readonly>
+                                                            <p class="error debit_amount_error"></p>
                                                         </div>
                                                     </div>
 
@@ -435,8 +488,8 @@
                                                 </div>
 
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary btn-xl closechallanformmodal" data-dismiss="modal">Close</button>
-                                                    <button type="submit" id="saveChallanformpopopitem" name="saveChallanformpopopitem" class="btn btn-primary" class="btn btn-success btn-xl">Save</button>
+                                                    <button type="button" class="btn btn-secondary btn-xl closedebitnotemodel" data-dismiss="modal">Close</button>
+                                                    <button type="submit" id="savedebitnoteitem" name="savedebitnoteitem" class="btn btn-primary" class="btn btn-success btn-xl">Save</button>
                                                 </div>
                                             </form>    
                                             </div>

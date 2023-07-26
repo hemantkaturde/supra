@@ -168,7 +168,6 @@
                                                     <p class="error supplier_po_number_error"></p>
                                                 </div>
                                             </div>
-
                                     </div>
 
                                     <?php if($getdebitnoteitemdetails[0]['pre_po_date']){
@@ -216,7 +215,7 @@
                                                         <th>Rate </th>
                                                         <th>Select GST Rate</th>
                                                         <th>Value</th>
-                                                        <th>Grand Total</th>
+                                                        <th>Debit Amount</th>
                                                         <th>Remark</th>
                                                         <th>Action</th>
                                                     </tr>
@@ -240,9 +239,9 @@
                                                         <td><?php echo $value['received_quantity'];?></td>
                                                         <td><?php echo $value['rate'];?></td>
                                                         <td><?php echo $value['gst_rate'];?></td>
-                                                        <td><?php echo $value['SGST_value'];?></td>
-                                                        <td><?php echo $value['grand_total'];?></td>
-                                                        <td><?php echo $value['remark'];?></td>
+                                                        <td><?php echo $value['SGST_value'] + $value['CGST_value'];?></td>
+                                                        <td><?php echo $value['debit_amount'];?></td>
+                                                        <td><?php echo $value['debit_note_remark'];?></td>
                                                         <td>
                                                         <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['debit_note_id'];?>' class='fa fa-trash-o deleteDebitnoteitem' aria-hidden='true'></i>
                                                         </td>
@@ -381,45 +380,47 @@
                                                         </div>
                                                     </div>
 
+
+
                                                     <div class="form-group row cgst_sgst_div" style="display:none">
-                                                        <label class="col-sm-2 col-form-label">SGST 9 %<span class="required">*</span></label>
+                                                        <label class="col-sm-2 col-form-label">SGST 9 % (<small> SGST Value for Debit Qty</small>)<span class="required">*</span></label>
                                                         <div class="col-sm-4">
                                                             <input type="number" class="form-control"  id="SGST_rate_9" name="SGST_rate_9" readonly>
                                                             <p class="error SGST_rate_error"></p>
                                                         </div>
 
-                                                        <label class="col-sm-2 col-form-label">CGST 9 %<span class="required">*</span></label>
+                                                        <label class="col-sm-2 col-form-label">CGST 9 % (<small> SGST Value for Debit Qty</small>)<span class="required">*</span></label>
                                                         <div class="col-sm-4">
                                                             <input type="number" class="form-control"  id="CGST_rate_9" name="CGST_rate_9" readonly>
                                                             <p class="error CGST_rate_error"></p>
                                                         </div>
                                                     </div>
-
-
-                                                    <div class="form-group row igst_div" style="display:none">
-                                                        <label class="col-sm-4 col-form-label">IGST 18 %<span class="required">*</span></label>
-                                                        <div class="col-sm-8">
-                                                            <input type="number" class="form-control"  id="igst_rate_18" name="igst_rate_18" readonly>
-                                                            <p class="error igst_rate_18_error"></p>
-                                                        </div>
-                                                    </div>
+                                                   
 
                                                     <div class="form-group row cgst_sgst_div_6" style="display:none">
-                                                        <label class="col-sm-2 col-form-label">SGST 6 %<span class="required">*</span></label>
+                                                        <label class="col-sm-2 col-form-label">SGST 6 % (<small> SGST Value for Debit Qty</small>)<span class="required">*</span></label>
                                                         <div class="col-sm-4">
                                                             <input type="number" class="form-control"  id="SGST_rate_6" name="SGST_rate_6" readonly>
                                                             <p class="error SGST_rate_error"></p>
                                                         </div>
 
-                                                        <label class="col-sm-2 col-form-label">CGST 6 %<span class="required">*</span></label>
+                                                        <label class="col-sm-2 col-form-label">CGST 6 % (<small> SGST Value for Debit Qty</small>)<span class="required">*</span></label>
                                                         <div class="col-sm-4">
                                                             <input type="number" class="form-control"  id="CGST_rate_6" name="CGST_rate_6" readonly>
                                                             <p class="error CGST_rate_6_error"></p>
                                                         </div>
                                                     </div>
 
+                                                    <div class="form-group row igst_div" style="display:none">
+                                                        <label class="col-sm-4 col-form-label">IGST 18 % (<small> IGST Value for Debit Qty</small>)<span class="required">*</span></label>
+                                                        <div class="col-sm-8">
+                                                            <input type="number" class="form-control"  id="igst_rate_18" name="igst_rate_18" readonly>
+                                                            <p class="error igst_rate_18_error"></p>
+                                                        </div>
+                                                    </div>
+
                                                     <div class="form-group row igst_div_12" style="display:none">
-                                                        <label class="col-sm-4 col-form-label">IGST 12 %<span class="required">*</span></label>
+                                                        <label class="col-sm-4 col-form-label">IGST 12 % (<small> IGST Value for Debit Qty</small>)<span class="required">*</span></label>
                                                         <div class="col-sm-8">
                                                             <input type="number" class="form-control"  id="igst_rate_12" name="igst_rate_12" readonly>
                                                             <p class="error igst_rate_12_error"></p>
@@ -427,11 +428,69 @@
                                                     </div>
 
 
-                                                    <div class="form-group row">
+                                                    <div class="form-group row cgst_sgst_ok_9_div" style="display:none">
+                                                        <label class="col-sm-2 col-form-label">SGST 9 % (<small> SGST Value for OK Qty</small>)<span class="required">*</span></label>
+                                                        <div class="col-sm-4">
+                                                            <input type="number" class="form-control"  id="SGST_rate_9_ok" name="SGST_rate_9_ok" readonly>
+                                                            <p class="error SGST_rate_error"></p>
+                                                        </div>
+
+                                                        <label class="col-sm-2 col-form-label">CGST 9 % (<small> SGST Value for OK Qty</small>)<span class="required">*</span></label>
+                                                        <div class="col-sm-4">
+                                                            <input type="number" class="form-control"  id="CGST_rate_9_ok" name="CGST_rate_9_ok" readonly>
+                                                            <p class="error CGST_rate_9_ok_error"></p>
+                                                        </div>
+                                                    </div>
+
+
+
+                                                    <div class="form-group row cgst_sgst_ok_6_div" style="display:none">
+                                                        <label class="col-sm-2 col-form-label">SGST 6 % (<small> SGST Value for Debit Qty</small>)<span class="required">*</span></label>
+                                                        <div class="col-sm-4">
+                                                            <input type="number" class="form-control"  id="SGST_rate_6_ok" name="SGST_rate_6_ok" readonly>
+                                                            <p class="error SGST_rate_error"></p>
+                                                        </div>
+
+                                                        <label class="col-sm-2 col-form-label">CGST 6 % (<small> SGST Value for Debit Qty</small>)<span class="required">*</span></label>
+                                                        <div class="col-sm-4">
+                                                            <input type="number" class="form-control"  id="CGST_rate_6_ok" name="CGST_rate_6_ok" readonly>
+                                                            <p class="error CGST_rate_6_ok_error"></p>
+                                                        </div>
+                                                    </div>
+
+                                                    
+                                                    <div class="form-group row igst_ok_qty_div" style="display:none">
+                                                        <label class="col-sm-4 col-form-label">IGST 18 % (<small> IGST Value for OK Qty</small>)<span class="required">*</span></label>
+                                                        <div class="col-sm-8">
+                                                            <input type="number" class="form-control"  id="igst_rate_ok_18" name="igst_rate_ok_18" readonly>
+                                                            <p class="error igst_rate_ok_18_error"></p>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="form-group row igst_ok_div_12_div" style="display:none">
+                                                        <label class="col-sm-4 col-form-label">IGST 12 % (<small> IGST Value for OK Qty</small>)<span class="required">*</span></label>
+                                                        <div class="col-sm-8">
+                                                            <input type="number" class="form-control"  id="igst_rate_ok_12" name="igst_rate_ok_12" readonly>
+                                                            <p class="error igst_rate_ok_12_error"></p>
+                                                        </div>
+                                                    </div>
+
+
+
+                                                    <!-- <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Grand Total<span class="required">*</span></label>
                                                         <div class="col-sm-8">
                                                             <input type="number" class="form-control"  id="grand_total" name="grand_total" readonly>
                                                             <p class="error grand_total_error"></p>
+                                                        </div>
+                                                    </div> -->
+
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-4 col-form-label">Debit Amount<span class="required">*</span></label>
+                                                        <div class="col-sm-8">
+                                                            <input type="number" class="form-control"  id="debit_amount" name="debit_amount" readonly>
+                                                            <p class="error debit_amount_error"></p>
                                                         </div>
                                                     </div>
 
