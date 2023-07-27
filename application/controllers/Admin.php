@@ -6642,10 +6642,19 @@ class Admin extends BaseController
                 $this->form_validation->set_rules('po_date','PO Date','trim');
                 $this->form_validation->set_rules('remark','Remark','trim');
 
+
+                $this->form_validation->set_rules('total_debit_amount','Total Debit Amount','trim|required');
+                $this->form_validation->set_rules('total_debit_amount_ok_qty','Total Debit Amount OK Qty','trim|required');
+                $this->form_validation->set_rules('p_and_f_charges','P_And F Charges','trim|required');
+                $this->form_validation->set_rules('tds_amount','TDS Amount','trim|required');
+                $this->form_validation->set_rules('freight_amount_charge','Freight Amount Charge','trim|required');
+                $this->form_validation->set_rules('grand_total_main','Grand Total main','trim|required');
+
+
                 if($this->form_validation->run() == FALSE)
                 {
                     $newdebitnote_response['status'] = 'failure';
-                    $newdebitnote_response['error'] = array('debit_note_number'=>strip_tags(form_error('debit_note_number')),'debit_note_date'=>strip_tags(form_error('debit_note_date')),'select_with_po_without_po'=>strip_tags(form_error('select_with_po_without_po')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'remark'=>strip_tags(form_error('remark')),'po_date'=>strip_tags(form_error('po_date')));
+                    $newdebitnote_response['error'] = array('debit_note_number'=>strip_tags(form_error('debit_note_number')),'debit_note_date'=>strip_tags(form_error('debit_note_date')),'select_with_po_without_po'=>strip_tags(form_error('select_with_po_without_po')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'remark'=>strip_tags(form_error('remark')),'po_date'=>strip_tags(form_error('po_date')),'total_debit_amount'=>strip_tags(form_error('total_debit_amount')),'total_debit_amount_ok_qty'=>strip_tags(form_error('total_debit_amount_ok_qty')),'p_and_f_charges'=>strip_tags(form_error('p_and_f_charges')),'tds_amount'=>strip_tags(form_error('tds_amount')),'freight_amount_charge'=>strip_tags(form_error('freight_amount_charge')),'grand_total_main'=>strip_tags(form_error('grand_total_main')));
                 }else{
 
                     $data = array(
@@ -6659,6 +6668,13 @@ class Admin extends BaseController
                         'supplier_po' =>  trim($this->input->post('supplier_po_number')),
                         'po_date' =>  trim($this->input->post('po_date')),
                         'remark' =>  trim($this->input->post('remark')),
+                        'total_debit_amount' =>  trim($this->input->post('total_debit_amount')),
+                        'total_amount_of_ok_qty_amt' =>  trim($this->input->post('total_debit_amount_ok_qty')),
+                        'p_and_f_charges' =>  trim($this->input->post('p_and_f_charges')),
+                        'tds_amount' =>  trim($this->input->post('tds_amount')),
+                        'freight_amount_charge' =>  trim($this->input->post('freight_amount_charge')),
+                        'grand_total_main' =>  trim($this->input->post('grand_total_main')),
+
                     );
 
                     $debit_id = trim($this->input->post('debit_id'));
@@ -6666,7 +6682,7 @@ class Admin extends BaseController
                         $saveNewdebitnote= $this->admin_model->saveNewdebitnote($debit_id,$data);
                         if($saveNewdebitnote){
                             $newdebitnote_response['status'] = 'success';
-                            $newdebitnote_response['error'] = array('challan_no'=>strip_tags(form_error('challan_no')),'challan_date'=>strip_tags(form_error('challan_date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'remark'=>strip_tags(form_error('remark')));
+                            $newdebitnote_response['error'] = array('debit_note_number'=>strip_tags(form_error('debit_note_number')),'debit_note_date'=>strip_tags(form_error('debit_note_date')),'select_with_po_without_po'=>strip_tags(form_error('select_with_po_without_po')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'remark'=>strip_tags(form_error('remark')),'po_date'=>strip_tags(form_error('po_date')),'total_debit_amount'=>strip_tags(form_error('total_debit_amount')),'total_debit_amount_ok_qty'=>strip_tags(form_error('total_debit_amount_ok_qty')),'p_and_f_charges'=>strip_tags(form_error('p_and_f_charges')),'tds_amount'=>strip_tags(form_error('tds_amount')),'freight_amount_charge'=>strip_tags(form_error('freight_amount_charge')),'grand_total_main'=>strip_tags(form_error('grand_total_main')));
                         }
                     }else{
                         $saveNewdebitnote= $this->admin_model->saveNewdebitnote('',$data);
@@ -6674,8 +6690,8 @@ class Admin extends BaseController
                             $update_last_inserted_id_debit_note = $this->admin_model->update_last_inserted_id_debit_note($saveNewdebitnote);
                             if($update_last_inserted_id_debit_note){
                                 $newdebitnote_response['status'] = 'success';
-                                $newdebitnote_response['error'] = array('debit_note_number'=>strip_tags(form_error('debit_note_number')),'debit_note_date'=>strip_tags(form_error('debit_note_date')),'select_with_po_without_po'=>strip_tags(form_error('select_with_po_without_po')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'remark'=>strip_tags(form_error('remark')),'po_date'=>strip_tags(form_error('po_date')));
-                             }
+                                $newdebitnote_response['error'] = array('debit_note_number'=>strip_tags(form_error('debit_note_number')),'debit_note_date'=>strip_tags(form_error('debit_note_date')),'select_with_po_without_po'=>strip_tags(form_error('select_with_po_without_po')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'remark'=>strip_tags(form_error('remark')),'po_date'=>strip_tags(form_error('po_date')),'total_debit_amount'=>strip_tags(form_error('total_debit_amount')),'total_debit_amount_ok_qty'=>strip_tags(form_error('total_debit_amount_ok_qty')),'p_and_f_charges'=>strip_tags(form_error('p_and_f_charges')),'tds_amount'=>strip_tags(form_error('tds_amount')),'freight_amount_charge'=>strip_tags(form_error('freight_amount_charge')),'grand_total_main'=>strip_tags(form_error('grand_total_main')));
+                            }
                         }
                     }
                 }
@@ -6689,6 +6705,7 @@ class Admin extends BaseController
             $data['supplierList']= $this->admin_model->fetchALLsupplierList();
             $data['getdebitnoteitemdetails']= $this->admin_model->getdebitnoteitemdetails();
             $getPreviousDebitnote_number = $this->admin_model->getPreviousDebitnote_number();
+            $data['totalDebitAndokQty'] = $this->admin_model->getTotalDebitAndokQty()[0];
             $this->loadViews("masters/addnewdebitnote", $this->global, $data, NULL);
         }
 
@@ -6822,6 +6839,7 @@ class Admin extends BaseController
                         'IGST_value_ok_val' =>  trim($this->input->post('igst_rate_ok')),
     
                        // 'grand_total' =>  trim($this->input->post('grand_total')),
+                        'total_amount_of_ok_qty' =>trim($this->input->post('total_ok_qty_amount')),
                         'debit_amount' =>  trim($this->input->post('debit_amount')),
                         'remark'=>  trim($this->input->post('item_remark')),
                         'pre_debit_note_date' =>   trim($this->input->post('pre_debit_note_date')),
@@ -6858,6 +6876,7 @@ class Admin extends BaseController
                         'IGST_value_ok_val' =>  trim($this->input->post('igst_rate_ok')),
     
                        // 'grand_total' =>  trim($this->input->post('grand_total')),
+                        'total_amount_of_ok_qty' =>trim($this->input->post('total_ok_qty_amount')),
                         'debit_amount' =>  trim($this->input->post('debit_amount')),
                         'remark'=>  trim($this->input->post('item_remark')),
                         'pre_debit_note_date' =>   trim($this->input->post('pre_debit_note_date')),

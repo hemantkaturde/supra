@@ -10315,13 +10315,15 @@
 			   var rate =   $('#rate').val();
 
 			   var gst_rate =   $('#gst_rate').val();
-			 
+
 			   if(gst_rate=='CGST_SGST'){
 				var sgst_value =   $('#SGST_rate_9').val();
 				var cgst_value =   $('#CGST_rate_9').val();
 
 				var SGST_rate_ok =   $('#SGST_rate_9_ok').val();
 				var CGST_rate_ok =   $('#CGST_rate_9_ok').val();
+
+				var total_ok_qty_amount = parseFloat(CGST_rate_ok) + parseFloat(SGST_rate_ok) + parseFloat(rate);
 
 			   }
 
@@ -10332,18 +10334,26 @@
 				var SGST_rate_ok =   $('#SGST_rate_6_ok').val();
 				var CGST_rate_ok =   $('#CGST_rate_6_ok').val();
 
+				var total_ok_qty_amount = parseFloat(CGST_rate_ok) + parseFloat(SGST_rate_ok) + parseFloat(rate);
+
+
 			   }
 
 			   if(gst_rate=='IGST'){
 				var igst_rate =   $('#igst_rate_18').val();
 				var igst_rate_ok =   $('#igst_rate_ok_18').val();
+
+				var total_ok_qty_amount = parseFloat(igst_rate_ok) + parseFloat(rate);
 			   }
 
 			   if(gst_rate=='IGST_12'){
 				var igst_rate =   $('#igst_rate_12').val();
 				var igst_rate_ok =   $('#igst_rate_ok_12').val();
+
+				var total_ok_qty_amount = parseFloat(igst_rate_ok) + parseFloat(rate);
 			   }
-			   
+
+			
 			
 			   var grand_total =   $('#grand_total').val();
 			   var item_remark =   $('#item_remark').val();
@@ -10366,7 +10376,7 @@
 				url : "<?php echo base_url();?>saveDebitnoteitem",
 				type: "POST",
 				 //data : formData,
-				 data :{part_number:part_number,invoice_no:invoice_no,invoice_date:invoice_date,invoice_qty:invoice_qty,ok_qty:ok_qty,less_quantity:less_quantity,rejected_quantity:rejected_quantity,received_quantity:received_quantity,rate:rate,gst_rate:gst_rate,sgst_value:sgst_value,cgst_value:cgst_value,igst_rate:igst_rate,item_remark:item_remark,pre_debit_note_date:pre_debit_note_date,pre_select_with_po_without_po:pre_select_with_po_without_po,pre_vendor_supplier_name:pre_vendor_supplier_name,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_supplier_name:pre_supplier_name,pre_supplier_po_number:pre_supplier_po_number,pre_po_date:pre_po_date,pre_remark:pre_remark,sgst_value:sgst_value,cgst_value:cgst_value,SGST_rate_ok:SGST_rate_ok,CGST_rate_ok:CGST_rate_ok,igst_rate:igst_rate,igst_rate_ok:igst_rate_ok,debit_amount:debit_amount,debit_id:debit_id},
+				 data :{part_number:part_number,invoice_no:invoice_no,invoice_date:invoice_date,invoice_qty:invoice_qty,ok_qty:ok_qty,less_quantity:less_quantity,rejected_quantity:rejected_quantity,received_quantity:received_quantity,rate:rate,gst_rate:gst_rate,sgst_value:sgst_value,cgst_value:cgst_value,igst_rate:igst_rate,item_remark:item_remark,pre_debit_note_date:pre_debit_note_date,pre_select_with_po_without_po:pre_select_with_po_without_po,pre_vendor_supplier_name:pre_vendor_supplier_name,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_supplier_name:pre_supplier_name,pre_supplier_po_number:pre_supplier_po_number,pre_po_date:pre_po_date,pre_remark:pre_remark,sgst_value:sgst_value,cgst_value:cgst_value,SGST_rate_ok:SGST_rate_ok,CGST_rate_ok:CGST_rate_ok,igst_rate:igst_rate,igst_rate_ok:igst_rate_ok,debit_amount:debit_amount,total_ok_qty_amount:total_ok_qty_amount,debit_id:debit_id},
 				 method: "POST",
                 // data :{package_id:package_id},
                 cache:false,
