@@ -4822,7 +4822,7 @@ class Admin_model extends CI_Model
     public function getTotalDebitAndokQty(){
 
 
-        $this->db->select('sum(debit_amount) as total_debit_amount, sum(SGST_value) as total_SGST_value, sum(CGST_value) as total_CGST_value, sum(IGST_value) as total_IGST_value , sum(total_amount_of_ok_qty_data) as total_amount_of_ok_qty_data,sum(total_amount_of_ok_qty_data) as total_amount_of_ok_qty_data');
+        $this->db->select('sum(debit_amount) as total_debit_amount, sum(SGST_value) as total_SGST_value, sum(CGST_value) as total_CGST_value, sum(IGST_value) as total_IGST_value , sum(total_amount_of_ok_qty_data) as total_amount_of_ok_qty_data,sum(total_amount_of_ok_qty) as total_amount_of_ok_qty');
         $this->db->where(TBL_DEBIT_NOTE_ITEM.'.debit_note_id IS NULL');
         $query = $this->db->get(TBL_DEBIT_NOTE_ITEM);
         $data = $query->result_array();

@@ -10497,28 +10497,48 @@
 	     });
 
 
-		 $(document).on('change', '#invoice_qty,#less_quantity,#rejected_quantity,#ok_qty', function(){	
+		 $(document).on('change', '#p_and_f_charges,#tds_amount,#freight_amount_charge', function(){	
 				 $("#chq_amt").val();
 			  
-				 if($("#total_debit_amount_ok_qty").val()){
-					 var total_debit_amount_ok_qty = $("#total_debit_amount_ok_qty").val();
+				 if($("#total_amount_of_ok_qty_data").val()){
+					 var total_amount_of_ok_qty_data = $("#total_amount_of_ok_qty_data").val();
 				 }else{
-					 var total_debit_amount_ok_qty = 0;
+					 var total_amount_of_ok_qty_data = 0;
 				 }
 
-				 if($("#less_quantity").val()){
-					 var less_quantity = $("#less_quantity").val();
+				 if($("#value_debit_amount_ok_qty").val()){
+					 var value_debit_amount_ok_qty = $("#value_debit_amount_ok_qty").val();
 				 }else{
-					 var less_quantity = 0;
+					 var value_debit_amount_ok_qty = 0;
 				 }
 
-				 if($("#rejected_quantity").val()){
-					 var rejected_quantity = $("#rejected_quantity").val();
+				 if($("#p_and_f_charges").val()){
+					 var p_and_f_charges = $("#p_and_f_charges").val();
 				 }else{
-					 var rejected_quantity = 0;
+					 var p_and_f_charges = 0;
 				 }
 
+				 if($("#tds_amount").val()){
+					 var tds_amount = $("#tds_amount").val();
+				 }else{
+					 var tds_amount = 0;
+				 }
 
+				 if($("#freight_amount_charge").val()){
+					 var freight_amount_charge = $("#freight_amount_charge").val();
+				 }else{
+					 var freight_amount_charge = 0;
+				 }
+
+				 
+				 $total_one_group = parseFloat(total_amount_of_ok_qty_data) +  parseFloat(value_debit_amount_ok_qty) +  parseFloat(p_and_f_charges );
+
+				 $total_second_group = parseFloat(total_amount_of_ok_qty_data) +  parseFloat(value_debit_amount_ok_qty) +  parseFloat(p_and_f_charges )
+
+				 var chq_amt =  parseFloat(total_one_group) - parseFloat(total_second_group);
+
+				 $("#chq_amt").val(Math.round((chq_amt));
+			
 		 });
 
 
