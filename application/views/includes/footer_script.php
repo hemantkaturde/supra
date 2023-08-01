@@ -10059,7 +10059,7 @@
 
 				 var total_amount_ok_qty_data =  parseFloat(ok_qty) *  parseFloat(rate);
 
-                $("#total_amount_ok_qty_data").val(Math.round(total_amount_ok_qty_data));
+                 $("#total_amount_ok_qty_data").val(Math.round(total_amount_ok_qty_data));
 
 		 });
 
@@ -10337,7 +10337,9 @@
 				var SGST_rate_ok =   $('#SGST_rate_9_ok').val();
 				var CGST_rate_ok =   $('#CGST_rate_9_ok').val();
 
-				var total_ok_qty_amount = parseFloat(CGST_rate_ok) + parseFloat(SGST_rate_ok) + parseFloat(rate);
+				//var total_ok_qty_amount = parseFloat(CGST_rate_ok) + parseFloat(SGST_rate_ok) + parseFloat(rate);
+
+				var total_ok_qty_amount = parseFloat(CGST_rate_ok) + parseFloat(SGST_rate_ok);
 
 			   }
 
@@ -10348,8 +10350,8 @@
 				var SGST_rate_ok =   $('#SGST_rate_6_ok').val();
 				var CGST_rate_ok =   $('#CGST_rate_6_ok').val();
 
-				var total_ok_qty_amount = parseFloat(CGST_rate_ok) + parseFloat(SGST_rate_ok) + parseFloat(rate);
-
+				//var total_ok_qty_amount = parseFloat(CGST_rate_ok) + parseFloat(SGST_rate_ok) + parseFloat(rate);
+				var total_ok_qty_amount = parseFloat(CGST_rate_ok) + parseFloat(SGST_rate_ok);
 
 			   }
 
@@ -10357,19 +10359,22 @@
 				var igst_rate =   $('#igst_rate_18').val();
 				var igst_rate_ok =   $('#igst_rate_ok_18').val();
 
-				var total_ok_qty_amount = parseFloat(igst_rate_ok) + parseFloat(rate);
+				//var total_ok_qty_amount = parseFloat(igst_rate_ok) + parseFloat(rate);
+
+				var total_ok_qty_amount = parseFloat(igst_rate_ok);
 			   }
 
 			   if(gst_rate=='IGST_12'){
 				var igst_rate =   $('#igst_rate_12').val();
 				var igst_rate_ok =   $('#igst_rate_ok_12').val();
 
-				var total_ok_qty_amount = parseFloat(igst_rate_ok) + parseFloat(rate);
+				//var total_ok_qty_amount = parseFloat(igst_rate_ok) + parseFloat(rate);
+
+				var total_ok_qty_amount = parseFloat(igst_rate_ok);
 			   }
 
 			   var total_amount_of_ok_qty_data =   $('#total_amount_ok_qty_data').val();
 
-			
 			
 			   var grand_total =   $('#grand_total').val();
 			   var item_remark =   $('#item_remark').val();
@@ -10490,6 +10495,32 @@
 					}
 				});
 	     });
+
+
+		 $(document).on('change', '#invoice_qty,#less_quantity,#rejected_quantity,#ok_qty', function(){	
+				 $("#chq_amt").val();
+			  
+				 if($("#total_debit_amount_ok_qty").val()){
+					 var total_debit_amount_ok_qty = $("#total_debit_amount_ok_qty").val();
+				 }else{
+					 var total_debit_amount_ok_qty = 0;
+				 }
+
+				 if($("#less_quantity").val()){
+					 var less_quantity = $("#less_quantity").val();
+				 }else{
+					 var less_quantity = 0;
+				 }
+
+				 if($("#rejected_quantity").val()){
+					 var rejected_quantity = $("#rejected_quantity").val();
+				 }else{
+					 var rejected_quantity = 0;
+				 }
+
+
+		 });
+
 
     </script>
 <?php } ?>

@@ -196,6 +196,7 @@
                                             <div class="form-group">
                                                 <label for="total_debit_amount_ok_qty">Total Amount of OK Quantity <span class="required">*</span></label>
                                                   <input type="text" class="form-control"  value="<?=$totalDebitAndokQty['total_amount_of_ok_qty_data']?>" id="total_debit_amount_ok_qty" name="total_debit_amount_ok_qty" required readonly>
+                                                  <input type="text" class="form-control"  value="<?=$totalDebitAndokQty['total_amount_of_ok_qty_data']?>" id="total_debit_amount_ok_qty" name="total_debit_amount_ok_qty" required readonly>
                                                 <p class="error total_debit_amount_ok_qty_error"></p>
                                             </div>
                                     </div>
@@ -223,6 +224,15 @@
                                                 <label for="freight_amount_charge">Freight Amount charge <span class="required">*</span></label>
                                                   <input type="text" class="form-control"  value="" id="freight_amount_charge" name="freight_amount_charge" required>
                                                 <p class="error freight_amount_charge_error"></p>
+                                            </div>
+                                    </div>
+                                    
+
+                                    <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="chq_amt">Chq Amount <span class="required">*</span></label>
+                                                  <input type="text" class="form-control"  value="" id="chq_amt" name="chq_amt" required>
+                                                <p class="error chq_amt_error"></p>
                                             </div>
                                     </div>
                                     
@@ -264,9 +274,9 @@
                                                         <th>Rejected Quantity</th>
                                                         <th>Received Quantity</th>
                                                         <th>Rate </th>
-                                                        <th>Select GST Rate</th>
-                                                        <th>Value</th>
-                                                        <th>Total Ok Amount</th>
+                                                        <th>GST Rate</th>
+                                                        <th>Debit GST</th>
+                                                        <th>OK GST</th>
                                                         <th>Debit Amount</th>
                                                         <th>Remark</th>
                                                         <th>Action</th>
