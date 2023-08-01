@@ -118,7 +118,7 @@
                                         <div class="col-md-12 vendor_po_number_div" id="vendor_po_number_div">
                                             <div class="form-group">
                                                     <label for="vendor_po_number">Select Vendor PO Number</label>
-                                                        <select class="form-control vendor_po_number_itam" name="vendor_po_number" id="vendor_po_number">
+                                                        <select class="form-control vendor_po_number_itam vendor_po_get_data" name="vendor_po_number" id="vendor_po_number">
                                                             <!-- <option st-id="" value="">Select Vendor Name</option> -->
                                                             <option st-id="" value="<?=$getdebitnoteitemdetails[0]['pre_vendor_po_number']?>" selected="selected"><?=$selected_value?></option>
                                                         </select>
@@ -161,7 +161,7 @@
                                             <div class="col-md-12 supplier_po_number_div" id="supplier_po_number_div" style="display: <?=$display?>">
                                                 <div class="form-group">
                                                         <label for="supplier_po_number">Select Supplier PO Number</label>
-                                                            <select class="form-control supplier_po_number_item supplier_po_number_for_item" name="supplier_po_number" id="supplier_po_number">
+                                                            <select class="form-control supplier_po_number_item supplier_po_number_for_item supplier_po_get_data" name="supplier_po_number" id="supplier_po_number">
                                                                 <!-- <option st-id="" value="">Select Vendor Name</option> -->
                                                                 <option st-id="" value="<?=$getdebitnoteitemdetails[0]['pre_supplier_po_number']?>" selected="selected"><?=$selected_value?></option>
                                                             </select>
@@ -173,13 +173,14 @@
                                     <?php if($getdebitnoteitemdetails[0]['pre_po_date']){
                                         $po_date= $getdebitnoteitemdetails[0]['pre_po_date'];
                                      }else{
-                                        $po_date= date('Y-m-d');
+                                        //$po_date= date('Y-m-d');
+                                        $po_date= '';
                                      } ?>
 
                                     <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="po_date">PO Date <span class="required">*</span></label>
-                                                  <input type="text" class="form-control datepicker"  value="<?=$po_date?>" id="po_date" name="po_date" required>
+                                                  <input type="text" class="form-control datepicker"  value="<?=$po_date?>" id="po_date" name="po_date" required readonly>
                                                 <p class="error po_date_error"></p>
                                             </div>
                                     </div>

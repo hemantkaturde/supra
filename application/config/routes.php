@@ -270,6 +270,9 @@ $route['deletepaymentdetails'] = "admin/deletepaymentdetails";
 $route['editpaymentdetails/(:any)'] = "admin/editpaymentdetails/$1";
 $route['addpaymentdetailsdata/(:any)'] = "admin/addpaymentdetailsdata/$1";
 
+$route['get_vendorpodata'] = "admin/get_vendorpodata";
+
+$route['get_supplierpodata'] = "admin/get_supplierpodata";
 
 $route['poddetails'] = "admin/poddetails";
 $route['fetchpoddetails'] = "admin/fetchpoddetails";

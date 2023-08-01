@@ -5053,6 +5053,23 @@ class Admin_model extends CI_Model
 
     }
 
+    public function get_vendorpodata($vendor_po_id){
+
+        $this->db->select(TBL_VENDOR_PO_MASTER.'.date');
+        $this->db->where(TBL_VENDOR_PO_MASTER.'.id', $vendor_po_id);
+        $query = $this->db->get(TBL_VENDOR_PO_MASTER);
+        $data = $query->result_array();
+        return $data;
+    }
+
+    public function get_supplierpodata($supplier_po_id){
+
+        $this->db->select(TBL_SUPPLIER_PO_MASTER.'.date');
+        $this->db->where(TBL_SUPPLIER_PO_MASTER.'.id', $supplier_po_id);
+        $query = $this->db->get(TBL_SUPPLIER_PO_MASTER);
+        $data = $query->result_array();
+        return $data;
+    }
     
 
 }
