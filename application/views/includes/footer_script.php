@@ -10552,10 +10552,6 @@
 				 var total_third_group = parseFloat(total_debit_amount) +  parseFloat(tds_amount) +  parseFloat(freight_amount_charge) + parseFloat(chq_amt);
 
 				 $("#grand_total_main").val(Math.round(total_third_group));
-
-
-				 
-
 			
 		 });
 

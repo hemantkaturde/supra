@@ -6644,7 +6644,7 @@ class Admin extends BaseController
 
 
                 $this->form_validation->set_rules('total_debit_amount','Total Debit Amount','trim|required');
-                $this->form_validation->set_rules('total_debit_amount_ok_qty','Total Debit Amount OK Qty','trim|required');
+                $this->form_validation->set_rules('total_debit_amount_ok_qty','Total Debit Amount OK Qty','trim');
                 $this->form_validation->set_rules('p_and_f_charges','P_And F Charges','trim|required');
                 $this->form_validation->set_rules('tds_amount','TDS Amount','trim|required');
                 $this->form_validation->set_rules('freight_amount_charge','Freight Amount Charge','trim|required');
