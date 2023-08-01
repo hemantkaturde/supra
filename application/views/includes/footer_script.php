@@ -9923,6 +9923,7 @@
 			var vendor_name = $('#vendor_name').val();
 			var vendor_supplier_name = $('#vendor_supplier_name').val();
 
+
 			if(vendor_supplier_name=='vendor'){
 
 				if(vendor_name){
