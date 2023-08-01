@@ -150,6 +150,10 @@ define('TBL_CHALLAN_FORM_ITEM','tbl_challanform_item');
 define('TBL_DEBIT_NOTE','tbl_debit_note');
 define('TBL_DEBIT_NOTE_ITEM','tbl_debit_note_item');
 
+define('TBL_PAYMENT_DETAILS','tbl_payment_details');
+
+define('TBL_POD_DETAILS','tbl_pod_details');
+
 
 
 

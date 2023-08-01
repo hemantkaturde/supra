@@ -6746,14 +6746,6 @@ class Admin extends BaseController
         $this->loadViews("masters/paymentdetails", $this->global, $data, NULL);  
     }
 
-    public function poddetails(){
-        $process = 'POD Detials';
-        $processFunction = 'Admin/poddetails';
-        $this->logrecord($process,$processFunction);
-        $this->global['pageTitle'] = 'Challan Form';
-        $this->loadViews("masters/poddetails", $this->global, $data, NULL);  
-    }
-
     public function editdebitnoteform($id){
 
         $process = 'Edit Debit Note Form';
@@ -6927,4 +6919,203 @@ class Admin extends BaseController
     }
 
 
+    public function fetchPaymentdetails(){
+        $params = $_REQUEST;
+        $totalRecords = $this->admin_model->getPaymentcount($params); 
+        $queryRecords = $this->admin_model->getPaymentdata($params); 
+
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+        echo json_encode($json_data);
+
+    }
+
+    public function addNewpaymentdetails(){
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+               $paymentdetails_response = array();
+
+                $this->form_validation->set_rules('payment_details_number','Payment Details Number','trim|required');
+                $this->form_validation->set_rules('payment_details_date','Payment  Details Date','trim|required');
+                $this->form_validation->set_rules('select_with_po_without_po','With PO Without PO','trim|required');
+                $this->form_validation->set_rules('vendor_supplier_name','Vendor/Supplier Name','trim|required');
+                $this->form_validation->set_rules('vendor_name','Vendor Name','trim');
+                $this->form_validation->set_rules('vendor_po_number','Vendor PO Number','trim');
+                $this->form_validation->set_rules('supplier_name','Supplier Name','trim');
+                $this->form_validation->set_rules('supplier_po_number','Supplier PO Number','trim');
+                $this->form_validation->set_rules('po_date','PO Date','trim');
+                $this->form_validation->set_rules('remark','Remark','trim');
+
+                if($this->form_validation->run() == FALSE)
+                {
+                    $paymentdetails_response['status'] = 'failure';
+                    $paymentdetails_response['error'] = array('payment_details_number'=>strip_tags(form_error('payment_details_number')),'payment_details_date'=>strip_tags(form_error('payment_details_date')),'select_with_po_without_po'=>strip_tags(form_error('select_with_po_without_po')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'remark'=>strip_tags(form_error('remark')),'po_date'=>strip_tags(form_error('po_date')));
+                }else{
+
+                    $data = array(
+                        'payment_details_number' =>  trim($this->input->post('payment_details_number')),
+                        'payment_details_date' => trim($this->input->post('payment_details_date')),
+                        'type'=>trim($this->input->post('select_with_po_without_po')),
+                        'supplier_vendor_name' =>  trim($this->input->post('vendor_supplier_name')),
+                        'vendor_id' =>  trim($this->input->post('vendor_name')),
+                        'vendor_po' =>  trim($this->input->post('vendor_po_number')),
+                        'supplier_id' =>  trim($this->input->post('supplier_name')),
+                        'supplier_po' =>  trim($this->input->post('supplier_po_number')),
+                        'po_date' =>  trim($this->input->post('po_date')),
+                        'remark' =>  trim($this->input->post('remark'))
+                    );
+
+                    $saveNewdPaymentDetails= $this->admin_model->saveNewdPaymentDetails('',$data);
+
+
+                   
+
+                    if($saveNewdPaymentDetails){
+                        $paymentdetails_response['status'] = 'success';
+                        $paymentdetails_response['error'] = array('payment_details_number'=>strip_tags(form_error('payment_details_number')),'payment_details_date'=>strip_tags(form_error('payment_details_date')),'select_with_po_without_po'=>strip_tags(form_error('select_with_po_without_po')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'remark'=>strip_tags(form_error('remark')),'po_date'=>strip_tags(form_error('po_date')));
+                    }
+                    
+                }
+             echo json_encode($paymentdetails_response);
+        }else{
+            $process = 'Add New Payment Details';
+            $processFunction = 'Admin/addNewpaymentdetails';
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Add New Payment Details';
+            $data['vendorList']= $this->admin_model->fetchALLvendorList();
+            $data['supplierList']= $this->admin_model->fetchALLsupplierList();
+            $data['getdebitnoteitemdetails']= $this->admin_model->getdebitnoteitemdetails();
+            $data['getPreviousPaymentdetails_number'] = $this->admin_model->getPreviousPaymentdetails_number();
+            $this->loadViews("masters/addNewpaymentdetails", $this->global, $data, NULL);
+        }
+
+    }
+
+    public function deletepaymentdetails(){
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->deletepaymentdetails(trim($this->input->post('id')));
+            if ($result) {
+                        $process = 'Delete Payment Details';
+                        $processFunction = 'Admin/deletepaymentdetails';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
+    }
+
+
+    public function poddetails(){
+        $process = 'POD Detials';
+        $processFunction = 'Admin/poddetails';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'POD Detials';
+        $this->loadViews("masters/poddetails", $this->global, $data, NULL);  
+    }
+
+    public function fetchpoddetails(){
+        $params = $_REQUEST;
+        $totalRecords = $this->admin_model->getpoddetailscount($params); 
+        $queryRecords = $this->admin_model->getpoddetailsdata($params); 
+
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+        echo json_encode($json_data);
+
+    }
+
+
+    public function addNewPODdetails(){
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+               $PODdetails_response = array();
+
+                $this->form_validation->set_rules('POD_details_number','POD Details Number','trim|required');
+                $this->form_validation->set_rules('POD_details_date','POD Details Date','trim|required');
+                $this->form_validation->set_rules('select_with_po_without_po','With PO Without PO','trim|required');
+                $this->form_validation->set_rules('vendor_supplier_name','Vendor/Supplier Name','trim|required');
+                $this->form_validation->set_rules('vendor_name','Vendor Name','trim');
+                $this->form_validation->set_rules('vendor_po_number','Vendor PO Number','trim');
+                $this->form_validation->set_rules('supplier_name','Supplier Name','trim');
+                $this->form_validation->set_rules('supplier_po_number','Supplier PO Number','trim');
+                $this->form_validation->set_rules('po_date','PO Date','trim');
+                $this->form_validation->set_rules('remark','Remark','trim');
+
+                if($this->form_validation->run() == FALSE)
+                {
+                    $PODdetails_response['status'] = 'failure';
+                    $PODdetails_response['error'] = array('POD_details_date'=>strip_tags(form_error('POD_details_date')),'POD_details_date'=>strip_tags(form_error('POD_details_date')),'select_with_po_without_po'=>strip_tags(form_error('select_with_po_without_po')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'remark'=>strip_tags(form_error('remark')),'po_date'=>strip_tags(form_error('po_date')));
+                }else{
+
+                    $data = array(
+                        'POD_details_number' =>  trim($this->input->post('POD_details_number')),
+                        'POD_details_date' => trim($this->input->post('POD_details_date')),
+                        'type'=>trim($this->input->post('select_with_po_without_po')),
+                        'supplier_vendor_name' =>  trim($this->input->post('vendor_supplier_name')),
+                        'vendor_id' =>  trim($this->input->post('vendor_name')),
+                        'vendor_po' =>  trim($this->input->post('vendor_po_number')),
+                        'supplier_id' =>  trim($this->input->post('supplier_name')),
+                        'supplier_po' =>  trim($this->input->post('supplier_po_number')),
+                        'po_date' =>  trim($this->input->post('po_date')),
+                        'remark' =>  trim($this->input->post('remark'))
+                    );
+
+                    $saveNewdPODDetails= $this->admin_model->saveNewdPODDetails('',$data);
+
+                    if($saveNewdPODDetails){
+                        $PODdetails_response['status'] = 'success';
+                        $PODdetails_response['error'] = array('POD_details_date'=>strip_tags(form_error('POD_details_date')),'POD_details_date'=>strip_tags(form_error('POD_details_date')),'select_with_po_without_po'=>strip_tags(form_error('select_with_po_without_po')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'remark'=>strip_tags(form_error('remark')),'po_date'=>strip_tags(form_error('po_date')));
+                    }
+                    
+                }
+             echo json_encode($PODdetails_response);
+        }else{
+            $process = 'Add New POD Details';
+            $processFunction = 'Admin/addNewpaymentdetails';
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Add New POD Details';
+            $data['vendorList']= $this->admin_model->fetchALLvendorList();
+            $data['supplierList']= $this->admin_model->fetchALLsupplierList();
+            $data['getdebitnoteitemdetails']= $this->admin_model->getdebitnoteitemdetails();
+            $data['getPreviousPODdetails_number'] = $this->admin_model->getPreviousPODdetails_number();
+            $this->loadViews("masters/addnewPODdetails", $this->global, $data, NULL);
+        }
+
+    }
+    
+    
 }

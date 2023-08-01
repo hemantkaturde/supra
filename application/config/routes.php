@@ -263,10 +263,17 @@ $route['saveDebitnoteitem'] = "admin/saveDebitnoteitem";
 $route['deleteDebitnoteitem'] = "admin/deleteDebitnoteitem";
 
 
-
 $route['paymentdetails'] = "admin/paymentdetails";
-$route['poddetails'] = "admin/poddetails";
+$route['addnewpaymentdetails'] = "admin/addnewpaymentdetails";
+$route['fetchPaymentdetails'] = "admin/fetchPaymentdetails";
+$route['deletepaymentdetails'] = "admin/deletepaymentdetails";
+$route['editpaymentdetails/(:any)'] = "admin/editpaymentdetails/$1";
+$route['addpaymentdetailsdata/(:any)'] = "admin/addpaymentdetailsdata/$1";
 
+
+$route['poddetails'] = "admin/poddetails";
+$route['fetchpoddetails'] = "admin/fetchpoddetails";
+$route['addNewPODdetails'] = "admin/addNewPODdetails";
 
 
 

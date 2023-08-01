@@ -10480,23 +10480,23 @@
 
 
 
-<?php if($pageTitle=='Payment Details'){ ?>
+<?php if($pageTitle=='Payment Details' || $pageTitle=='Add New Payment Details'){ ?>
 	<script type="text/javascript">
 		 $(document).ready(function() {
 		    var dt = $('#view_payment_details').DataTable({
 	            "columnDefs": [ 
 	                 { className: "details-control", "targets": [ 0 ] },
-	                 { "width": "10%", "targets": 0 },
+	                 { "width": "15%", "targets": 0 },
 	                 { "width": "10%", "targets": 1 },
 					 { "width": "10%", "targets": 2 },
 	                 { "width": "10%", "targets": 3 },
 					 { "width": "10%", "targets": 4 },
 					 { "width": "10%", "targets": 5 },
-					 { "width": "5%", "targets": 6 },
+					 { "width": "10%", "targets": 6 },
 	            ],
 	            responsive: true,
 	            "oLanguage": {
-	                "sEmptyTable": "<i>No Challan Form Found.</i>",
+	                "sEmptyTable": "<i>No Payment Details Found.</i>",
 	            }, 
 	            "bSort" : false,
 	            "bFilter":true,
@@ -10505,17 +10505,334 @@
 	            "bProcessing": true,
 	            "serverSide": true,
 	            "ajax":{
-                    url :"<?php echo base_url();?>fetchchallanform",
+                    url :"<?php echo base_url();?>fetchPaymentdetails",
                     type: "post",
 	            },
 	        });
+	     });
+
+		$(document).ready(function() {
+			var vendor_supplier_name = $('#vendor_supplier_name').val();
+			if(vendor_supplier_name=='vendor'){
+
+				$('#vendor_name_div_for_hide_show').css('display','block');
+				$('#supplier_name_div_for_hide_show').css('display','none');
+
+				var vendor_po_number = $('#vendor_po_number').val();
+					$("#part_number").html('');
+						$.ajax({
+							url : "<?php echo ADMIN_PATH;?>getVendoritemonly",
+							type: "POST",
+							data : {'vendor_po_number' : vendor_po_number},
+							success: function(data, textStatus, jqXHR)
+							{
+								$(".loader_ajax").hide();
+								if(data == "failure")
+								{
+									$('#part_number').html('<option value="">Select Part Number</option>');
+								}
+								else
+								{
+									$('#part_number').html(data);
+
+								}
+							},
+							error: function (jqXHR, textStatus, errorThrown)
+							{
+								$('#part_number').html();
+							}
+						});
+					return false;
+			}
+
+			if(vendor_supplier_name=='supplier'){
+				$('#supplier_name_div_for_hide_show').css('display','block');
+				$('#vendor_name_div_for_hide_show').css('display','none');
+
+				//$(".loader_ajax").show();
+				var supplier_po_number = $('.supplier_po_number_for_item').val();
+				var flag = 'Supplier';
+				$("#part_number").html('');
+
+				$.ajax({
+					url : "<?php echo ADMIN_PATH;?>getSuppliritemonly",
+					type: "POST",
+					data : {'supplier_po_number' : supplier_po_number,'flag':flag},
+					success: function(data, textStatus, jqXHR)
+					{
+						$(".loader_ajax").hide();
+						if(data == "failure")
+						{
+							$('#part_number').html('<option value="">Select Part Number</option>');
+						}
+						else
+						{
+							$('#part_number').html(data);
+
+						}
+					},
+					error: function (jqXHR, textStatus, errorThrown)
+					{
+						$('#part_number').html();
+					}
+				});
+				return false;
+			}
+		});
+
+		$(document).on('change','#vendor_supplier_name',function(e){  
+			e.preventDefault();
+
+			var vendor_supplier_name = $('#vendor_supplier_name').val();
+
+			if(vendor_supplier_name=='vendor'){
+
+				$('#vendor_name_div_for_hide_show').css('display','block');
+				$('#supplier_name_div_for_hide_show').css('display','none');
+
+				$(document).on('change','.vendor_po_number_itam',function(e){  
+						e.preventDefault();
+						//$(".loader_ajax").show();
+						var vendor_po_number = $('#vendor_po_number').val();
+
+						$("#part_number").html('');
+					
+						$.ajax({
+							url : "<?php echo ADMIN_PATH;?>getVendoritemonly",
+							type: "POST",
+							data : {'vendor_po_number' : vendor_po_number},
+							success: function(data, textStatus, jqXHR)
+							{
+								$(".loader_ajax").hide();
+								if(data == "failure")
+								{
+									$('#part_number').html('<option value="">Select Part Number</option>');
+								}
+								else
+								{
+									$('#part_number').html(data);
+
+								}
+							},
+							error: function (jqXHR, textStatus, errorThrown)
+							{
+								$('#part_number').html();
+							}
+						});
+						return false;
+				});
+
+			}
+
+			if(vendor_supplier_name=='supplier'){
+
+				$('#supplier_name_div_for_hide_show').css('display','block');
+				$('#vendor_name_div_for_hide_show').css('display','none');
+
+
+				$(document).on('change','.supplier_po_number_for_item',function(e){  
+					e.preventDefault();
+					//$(".loader_ajax").show();
+					var supplier_po_number = $('.supplier_po_number_for_item').val();
+					var flag = 'Supplier';
+					$("#part_number").html('');
+				
+					$.ajax({
+						url : "<?php echo ADMIN_PATH;?>getSuppliritemonly",
+						type: "POST",
+						data : {'supplier_po_number' : supplier_po_number,'flag':flag},
+						success: function(data, textStatus, jqXHR)
+						{
+							$(".loader_ajax").hide();
+							if(data == "failure")
+							{
+								$('#part_number').html('<option value="">Select Part Number</option>');
+							}
+							else
+							{
+								$('#part_number').html(data);
+
+							}
+						},
+						error: function (jqXHR, textStatus, errorThrown)
+						{
+							$('#part_number').html();
+						}
+					});
+					return false;
+				});
+
+			}			
+		});
+
+		$(document).on('change','#vendor_name',function(e){  
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			// $("#customers-list").html('');
+			var vendor_name = $('#vendor_name').val();
+			$('.vendor_po_number_div').css('display','block');
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getVendorPonumberbyVendorid",
+				type: "POST",
+				data : {'vendor_name' : vendor_name},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#vendor_po_number').html('<option value="">Select Vendor PO Number</option>');
+					}
+					else
+					{
+						// $('#supplier_po_number').html('<option value="">Select supplier PO Number</option>');
+						$('#vendor_po_number').html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#vendor_po_number').html();
+					//$(".loader_ajax").hide();
+				}
+			});
+			return false;
+		});
+
+		$(document).on('change','#supplier_name',function(e){  
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			// $("#customers-list").html('');
+			var supplier_name = $('#supplier_name').val();
+
+			$('.supplier_po_number_div').css('display','block');
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getSupplierPonumberbySupplierid",
+				type: "POST",
+				data : {'supplier_name' : supplier_name},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						//$('.supplier_po_number_div').css('display','none');
+						$('#supplier_po_number').html('<option value="">Select Supplier PO Number</option>');
+					}
+					else
+					{
+						// $('#supplier_po_number').html('<option value="">Select supplier PO Number</option>');
+						$('#supplier_po_number').html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#supplier_po_number').html();
+					//$(".loader_ajax").hide();
+				}
+			});
+			return false;
+		});
+
+		$(document).on('click','#savenewpaymentdetails',function(e){
+
+			e.preventDefault();
+			$(".loader_ajax").show();
+
+			var formData = new FormData($("#addnewpaymentdetailsform")[0]);
+			$.ajax({
+				url : "<?php echo base_url();?>addnewpaymentdetails",
+				type: "POST",
+				data : formData,
+				cache: false,
+		        contentType: false,
+		        processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+						$(".loader_ajax").hide();
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						swal({
+							title: "Success",
+							text: "Payment Details Successfully Added!",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+
+								window.location.href = "<?php echo base_url().'paymentdetails'?>";
+						});		
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			});
+			return false;
 	    });
+
+		$(document).on('click','.deletepaymentdetails',function(e){
+					var elemF = $(this);
+					e.preventDefault();
+					swal({
+						title: "Are you sure?",
+						text: "Delete Payment Details",
+						type: "warning",
+						showCancelButton: true,
+						closeOnClickOutside: false,
+						confirmButtonClass: "btn-sm btn-danger",
+						confirmButtonText: "Yes, delete it!",
+						cancelButtonText: "No, cancel plz!",
+						closeOnConfirm: false,
+						closeOnCancel: false
+					}, function(isConfirm) {
+						if (isConfirm) {
+									$.ajax({
+										url : "<?php echo base_url();?>deletepaymentdetails",
+										type: "POST",
+										data : 'id='+elemF.attr('data-id'),
+										success: function(data, textStatus, jqXHR)
+										{
+											const obj = JSON.parse(data);
+										
+											if(obj.status=='success'){
+												swal({
+													title: "Deleted!",
+													text: "Payment Details Succesfully Deleted",
+													icon: "success",
+													button: "Ok",
+													},function(){ 
+															window.location.href = "<?php echo base_url().'paymentdetails'?>";
+												});	
+											}
+
+										},
+										error: function (jqXHR, textStatus, errorThrown)
+										{
+											$(".loader_ajax").hide();
+										}
+									})
+								}
+								else {
+						swal("Cancelled", "Payment Details deletion cancelled ", "error");
+						}
+					});
+		});
+
 
     </script>
 <?php } ?>
 
 
-<?php if($pageTitle=='POD Detials'){ ?>
+<?php if($pageTitle=='POD Detials' || $pageTitle=='Add New POD Details'){ ?>
 	<script type="text/javascript">
 		 $(document).ready(function() {
 		    var dt = $('#view_POD_details').DataTable({
@@ -10527,11 +10844,11 @@
 	                 { "width": "10%", "targets": 3 },
 					 { "width": "10%", "targets": 4 },
 					 { "width": "10%", "targets": 5 },
-					 { "width": "5%", "targets": 6 },
+					 { "width": "10%", "targets": 6 },
 	            ],
 	            responsive: true,
 	            "oLanguage": {
-	                "sEmptyTable": "<i>No Challan Form Found.</i>",
+	                "sEmptyTable": "<i>No POD Found.</i>",
 	            }, 
 	            "bSort" : false,
 	            "bFilter":true,
@@ -10540,10 +10857,306 @@
 	            "bProcessing": true,
 	            "serverSide": true,
 	            "ajax":{
-                    url :"<?php echo base_url();?>fetchchallanform",
+                    url :"<?php echo base_url();?>fetchpoddetails",
                     type: "post",
 	            },
 	        });
 	    });
+
+		$(document).on('click','#savenewpaymentdetails',function(e){
+
+			e.preventDefault();
+			$(".loader_ajax").show();
+
+			var formData = new FormData($("#addnewpaymentdetailsform")[0]);
+			$.ajax({
+				url : "<?php echo base_url();?>addnewpaymentdetails",
+				type: "POST",
+				data : formData,
+				cache: false,
+				contentType: false,
+				processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+					{
+						$.each(fetchResponse.error, function (i, v)
+						{
+							$('.'+i+'_error').html(v);
+						});
+						$(".loader_ajax").hide();
+					}
+					else if(fetchResponse.status == 'success')
+					{
+						swal({
+							title: "Success",
+							text: "Payment Details Successfully Added!",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+
+								window.location.href = "<?php echo base_url().'paymentdetails'?>";
+						});		
+					}
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$(".loader_ajax").hide();
+				}
+			});
+		  return false;
+		});
+
+		$(document).on('change','#vendor_supplier_name',function(e){  
+			e.preventDefault();
+
+			var vendor_supplier_name = $('#vendor_supplier_name').val();
+
+			if(vendor_supplier_name=='vendor'){
+
+				$('#vendor_name_div_for_hide_show').css('display','block');
+				$('#supplier_name_div_for_hide_show').css('display','none');
+
+				$(document).on('change','.vendor_po_number_itam',function(e){  
+						e.preventDefault();
+						//$(".loader_ajax").show();
+						var vendor_po_number = $('#vendor_po_number').val();
+
+						$("#part_number").html('');
+					
+						$.ajax({
+							url : "<?php echo ADMIN_PATH;?>getVendoritemonly",
+							type: "POST",
+							data : {'vendor_po_number' : vendor_po_number},
+							success: function(data, textStatus, jqXHR)
+							{
+								$(".loader_ajax").hide();
+								if(data == "failure")
+								{
+									$('#part_number').html('<option value="">Select Part Number</option>');
+								}
+								else
+								{
+									$('#part_number').html(data);
+
+								}
+							},
+							error: function (jqXHR, textStatus, errorThrown)
+							{
+								$('#part_number').html();
+							}
+						});
+						return false;
+				});
+
+			}
+
+			if(vendor_supplier_name=='supplier'){
+
+				$('#supplier_name_div_for_hide_show').css('display','block');
+				$('#vendor_name_div_for_hide_show').css('display','none');
+
+
+				$(document).on('change','.supplier_po_number_for_item',function(e){  
+					e.preventDefault();
+					//$(".loader_ajax").show();
+					var supplier_po_number = $('.supplier_po_number_for_item').val();
+					var flag = 'Supplier';
+					$("#part_number").html('');
+				
+					$.ajax({
+						url : "<?php echo ADMIN_PATH;?>getSuppliritemonly",
+						type: "POST",
+						data : {'supplier_po_number' : supplier_po_number,'flag':flag},
+						success: function(data, textStatus, jqXHR)
+						{
+							$(".loader_ajax").hide();
+							if(data == "failure")
+							{
+								$('#part_number').html('<option value="">Select Part Number</option>');
+							}
+							else
+							{
+								$('#part_number').html(data);
+
+							}
+						},
+						error: function (jqXHR, textStatus, errorThrown)
+						{
+							$('#part_number').html();
+						}
+					});
+					return false;
+				});
+
+			}			
+		});
+
+		$(document).on('change','#vendor_name',function(e){  
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			// $("#customers-list").html('');
+			var vendor_name = $('#vendor_name').val();
+			$('.vendor_po_number_div').css('display','block');
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getVendorPonumberbyVendorid",
+				type: "POST",
+				data : {'vendor_name' : vendor_name},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#vendor_po_number').html('<option value="">Select Vendor PO Number</option>');
+					}
+					else
+					{
+						// $('#supplier_po_number').html('<option value="">Select supplier PO Number</option>');
+						$('#vendor_po_number').html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#vendor_po_number').html();
+					//$(".loader_ajax").hide();
+				}
+			});
+			return false;
+		});
+
+		$(document).on('change','#supplier_name',function(e){  
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			// $("#customers-list").html('');
+			var supplier_name = $('#supplier_name').val();
+
+			$('.supplier_po_number_div').css('display','block');
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getSupplierPonumberbySupplierid",
+				type: "POST",
+				data : {'supplier_name' : supplier_name},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						//$('.supplier_po_number_div').css('display','none');
+						$('#supplier_po_number').html('<option value="">Select Supplier PO Number</option>');
+					}
+					else
+					{
+						// $('#supplier_po_number').html('<option value="">Select supplier PO Number</option>');
+						$('#supplier_po_number').html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#supplier_po_number').html();
+					//$(".loader_ajax").hide();
+				}
+			});
+			return false;
+		});
+
+		$(document).on('click','#savenewpoddetails',function(e){
+
+			e.preventDefault();
+			$(".loader_ajax").show();
+
+			var formData = new FormData($("#addnewPODform")[0]);
+			$.ajax({
+				url : "<?php echo base_url();?>addNewPODdetails",
+				type: "POST",
+				data : formData,
+				cache: false,
+		        contentType: false,
+		        processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+						$(".loader_ajax").hide();
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						swal({
+							title: "Success",
+							text: "POD Details Successfully Added!",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+
+								window.location.href = "<?php echo base_url().'poddetails'?>";
+						});		
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			});
+			return false;
+	    });
+
+		$(document).on('click','.deletepaymentdetails',function(e){
+					var elemF = $(this);
+					e.preventDefault();
+					swal({
+						title: "Are you sure?",
+						text: "Delete Payment Details",
+						type: "warning",
+						showCancelButton: true,
+						closeOnClickOutside: false,
+						confirmButtonClass: "btn-sm btn-danger",
+						confirmButtonText: "Yes, delete it!",
+						cancelButtonText: "No, cancel plz!",
+						closeOnConfirm: false,
+						closeOnCancel: false
+					}, function(isConfirm) {
+						if (isConfirm) {
+									$.ajax({
+										url : "<?php echo base_url();?>deletepaymentdetails",
+										type: "POST",
+										data : 'id='+elemF.attr('data-id'),
+										success: function(data, textStatus, jqXHR)
+										{
+											const obj = JSON.parse(data);
+										
+											if(obj.status=='success'){
+												swal({
+													title: "Deleted!",
+													text: "Payment Details Succesfully Deleted",
+													icon: "success",
+													button: "Ok",
+													},function(){ 
+															window.location.href = "<?php echo base_url().'paymentdetails'?>";
+												});	
+											}
+
+										},
+										error: function (jqXHR, textStatus, errorThrown)
+										{
+											$(".loader_ajax").hide();
+										}
+									})
+								}
+								else {
+						swal("Cancelled", "Payment Details deletion cancelled ", "error");
+						}
+					});
+		});
+
+
+
     </script>
 <?php } ?>
