@@ -10039,9 +10039,10 @@
 					 var rate = 0;
 				 }
 
+				 //var less_qty_rejected_qty = parseFloat(less_quantity) +  parseFloat(rejected_quantity);
 				 var less_qty_rejected_qty = parseFloat(less_quantity) +  parseFloat(rejected_quantity);
  
-				 var value = parseFloat(invoice_qty) - parseFloat(less_qty_rejected_qty);
+				 var value = parseFloat(invoice_qty) - parseFloat(less_quantity);
 				 $("#received_quantity").val( Math.round(value));
 
 				 var debit_amount =  parseFloat(less_qty_rejected_qty) *  parseFloat(rate);
