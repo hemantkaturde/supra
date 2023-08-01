@@ -10537,7 +10537,7 @@
 
 				 var chq_amt =  parseFloat(total_one_group) - parseFloat(total_second_group);
 
-				 $("#chq_amt").val(Math.round((chq_amt));
+				 $("#chq_amt").val(Math.round(chq_amt));
 			
 		 });
 
