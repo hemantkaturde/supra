@@ -6870,6 +6870,7 @@ class Admin extends BaseController
     
                        // 'grand_total' =>  trim($this->input->post('grand_total')),
                         'total_amount_of_ok_qty' =>trim($this->input->post('total_ok_qty_amount')),
+                        'total_amount_of_ok_qty_data' =>trim($this->input->post('total_amount_of_ok_qty_data')),
                         'debit_amount' =>  trim($this->input->post('debit_amount')),
                         'remark'=>  trim($this->input->post('item_remark')),
                         'pre_debit_note_date' =>   trim($this->input->post('pre_debit_note_date')),
