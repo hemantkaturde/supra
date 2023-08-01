@@ -360,10 +360,11 @@
                                                         </div>
                                                     </div>
 
+                                                    <?php $debit_note = date('Y-m-d'); ?>
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Invoice Date<span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="text" class="form-control datepicker" <?=date('Y-m-d'); ?> id="invoice_date" name="invoice_date">
+                                                            <input type="text" class="form-control datepicker" value='<?=$debit_note;?>' id="invoice_date" name="invoice_date">
                                                             <p class="error invoice_date_error"></p>
                                                         </div>
                                                     </div>
