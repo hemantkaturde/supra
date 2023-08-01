@@ -10533,7 +10533,7 @@
 				 
 				 var total_one_group = parseFloat(total_amount_of_ok_qty_data) +  parseFloat(value_debit_amount_ok_qty) +  parseFloat(p_and_f_charges );
 
-				 var total_second_group = parseFloat(total_amount_of_ok_qty_data) +  parseFloat(value_debit_amount_ok_qty) +  parseFloat(p_and_f_charges )
+				 var total_second_group = parseFloat(tds_amount) +  parseFloat(freight_amount_charge);
 
 				 var chq_amt =  parseFloat(total_one_group) - parseFloat(total_second_group);
 
