@@ -10532,6 +10532,12 @@
 					 var freight_amount_charge = 0;
 				 }
 
+				 if($("#total_debit_amount").val()){
+					 var total_debit_amount = $("#total_debit_amount").val();
+				 }else{
+					 var total_debit_amount = 0;
+				 }
+
 				 
 				 var total_one_group = parseFloat(total_amount_of_ok_qty_data) +  parseFloat(total_amount_of_ok_qty) +  parseFloat(p_and_f_charges);
 
@@ -10543,7 +10549,7 @@
 
 
 
-				 var total_third_group = parseFloat(total_amount_of_ok_qty_data) +  parseFloat(tds_amount) +  parseFloat(freight_amount_charge) + parseFloat(chq_amt);
+				 var total_third_group = parseFloat(total_debit_amount) +  parseFloat(tds_amount) +  parseFloat(freight_amount_charge) + parseFloat(chq_amt);
 
 				 $("#grand_total_main").val(Math.round(total_third_group));
 
