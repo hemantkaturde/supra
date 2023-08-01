@@ -421,7 +421,7 @@
                                                     </div>                                                  
                                                 
 
-                                                    <input type="hidden" class="form-control"  id="total_amount_ok_qty_data" name="total_amount_ok_qty_data" readonly>
+                                                    <input type="text" class="form-control"  id="total_amount_ok_qty_data" name="total_amount_ok_qty_data" readonly>
 
 
                                                     <div class="form-group row">
