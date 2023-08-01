@@ -7139,7 +7139,6 @@ class Admin extends BaseController
 
 
     }
-    
 
     public function get_supplierpodata(){
 
@@ -7159,6 +7158,16 @@ class Admin extends BaseController
 			echo 'failure';
 		}
 
+
+    }
+
+    public function addpaymentdetailsdata($payment_details_id){
+
+        $process = 'Add Payment Details Data';
+        $processFunction = 'Admin/addpaymentdetailsdata';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Add Payment Details Data';
+        $this->loadViews("masters/addpaymentdetailsdata", $this->global, $data, NULL);  
 
     }
     
