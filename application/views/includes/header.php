@@ -210,7 +210,7 @@
 
 
 
-                    <li class="treeview <?php if($pageUrl=="jobWork" || $pageUrl=="addjobwork" || $pageUrl=="editjobwork" ||  $pageUrl=="scrapreturn" || $pageUrl=="addnewScrapreturn" || $pageUrl=="editscrapreturn" || $pageUrl=="reworkrejectionreturn" || $pageUrl=="addneworkrejection" || $pageUrl=="editreworkrejection" || $pageUrl=="challanform" || $pageUrl=="addchallanform" || $pageUrl=="editchallanform" ||  $pageUrl=="paymentdetails" || $pageUrl=="poddetails"){echo 'active';}?>">
+                    <li class="treeview <?php if($pageUrl=="jobWork" || $pageUrl=="addjobwork" || $pageUrl=="editjobwork" ||  $pageUrl=="scrapreturn" || $pageUrl=="addnewScrapreturn" || $pageUrl=="editscrapreturn" || $pageUrl=="reworkrejectionreturn" || $pageUrl=="addneworkrejection" || $pageUrl=="editreworkrejection" || $pageUrl=="challanform" || $pageUrl=="addchallanform" || $pageUrl=="editchallanform"){echo 'active';}?>">
                       <a href="#">
                         <i class="fa fa-file-text-o"></i> <span class="menu_label">Challans</span>
                           <span class="pull-right-container">
@@ -236,7 +236,7 @@
                     </li>  -->
 
 
-                    <li class="treeview <?php if($pageUrl=="challanform" || $pageUrl=="addchallanform" || $pageUrl=="editchallanform" ||  $pageUrl=="paymentdetails" || $pageUrl=="addnewpaymentdetails" || $pageUrl=="poddetails" || $pageUrl=='addNewPODdetails'){echo 'active';}?>">
+                    <li class="treeview <?php if($pageUrl=="debitnote" || $pageUrl=="addnewdebitnote" || $pageUrl=="paymentdetails" || $pageUrl=="addnewpaymentdetails" || $pageUrl=="poddetails" || $pageUrl=='addNewPODdetails'){echo 'active';}?>">
                       <a href="#">
                         <i class="fa fa-file-text-o"></i> <span class="menu_label">Debit Note</span>
                           <span class="pull-right-container">
