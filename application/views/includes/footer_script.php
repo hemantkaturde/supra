@@ -10499,6 +10499,8 @@
 
 		 $(document).on('change', '#p_and_f_charges,#tds_amount,#freight_amount_charge', function(){	
 				 $("#chq_amt").val();
+
+				 $("#grand_total_main").val();
 			  
 				 if($("#total_amount_of_ok_qty_data").val()){
 					 var total_amount_of_ok_qty_data = $("#total_amount_of_ok_qty_data").val();
@@ -10538,6 +10540,16 @@
 				 var chq_amt =  parseFloat(total_one_group) - parseFloat(total_second_group);
 
 				 $("#chq_amt").val(Math.round(chq_amt));
+
+
+
+				 var total_third_group = parseFloat(total_amount_of_ok_qty_data) +  parseFloat(tds_amount) +  parseFloat(freight_amount_charge) + parseFloat(chq_amt);
+
+				 $("#grand_total_main").val(Math.round(total_third_group));
+
+
+				 
+
 			
 		 });
 
