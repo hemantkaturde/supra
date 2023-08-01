@@ -195,7 +195,7 @@
                                     <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="total_debit_amount_ok_qty">Total Amount of OK Quantity <span class="required">*</span></label>
-                                                  <input type="text" class="form-control"  value="<?=$totalDebitAndokQty['ok_qty'] * $totalDebitAndokQty['rate'] ; ?>" id="total_debit_amount_ok_qty" name="total_debit_amount_ok_qty" required readonly>
+                                                  <input type="text" class="form-control"  value="<?=$totalDebitAndokQty['total_amount_of_ok_qty_data']?>" id="total_debit_amount_ok_qty" name="total_debit_amount_ok_qty" required readonly>
                                                 <p class="error total_debit_amount_ok_qty_error"></p>
                                             </div>
                                     </div>
@@ -291,7 +291,7 @@
                                                         <td><?php echo $value['received_quantity'];?></td>
                                                         <td><?php echo $value['rate'];?></td>
                                                         <td><?php echo $value['gst_rate'];?></td>
-                                                        <td><?php echo $value['SGST_value'] + $value['CGST_value'];?></td>
+                                                        <td><?php echo $value['SGST_value'] + $value['CGST_value'] + $value['IGST_value'];?></td>
                                                         <td><?php echo $value['total_amount_of_ok_qty'];?></td>
                                                         <td><?php echo $value['debit_amount'];?></td>
                                                         <td><?php echo $value['debit_note_remark'];?></td>
@@ -420,6 +420,10 @@
                                                         </div>
                                                     </div>                                                  
                                                 
+
+                                                    <input type="hidden" class="form-control"  id="total_amount_ok_qty_data" name="total_amount_ok_qty_data" readonly>
+
+
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Select GST Rate<span class="required">*</span></label>
                                                         <div class="col-sm-8">
