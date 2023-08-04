@@ -6704,7 +6704,7 @@ class Admin extends BaseController
             $data['vendorList']= $this->admin_model->fetchALLvendorList();
             $data['supplierList']= $this->admin_model->fetchALLsupplierList();
             $data['getdebitnoteitemdetails']= $this->admin_model->getdebitnoteitemdetails();
-            $getPreviousDebitnote_number = $this->admin_model->getPreviousDebitnote_number();
+            $data['getPreviousDebitnote_number'] = $this->admin_model->getPreviousDebitnote_number();
             $data['totalDebitAndokQty'] = $this->admin_model->getTotalDebitAndokQty()[0];
             $this->loadViews("masters/addnewdebitnote", $this->global, $data, NULL);
         }

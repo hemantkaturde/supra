@@ -25,6 +25,7 @@
                             <div class="box-body">
                                 <div class="col-md-4">
                                     <?php
+
                                         if($getPreviousDebitnote_number[0]['debit_note_number']){
                                             $arr = str_split($getPreviousDebitnote_number[0]['debit_note_number']);
                                             $i = end($arr);

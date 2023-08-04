@@ -10177,14 +10177,14 @@
 
 				var gst_value = parseFloat(total_value) * 18 / 100;
 
-				var cgst_rate  =Math.round(gst_value)/2;
+				var cgst_rate  =gst_value/2;
 
-				var SGST_rate  =Math.round(gst_value)/2;
+				var SGST_rate  =gst_value/2;
 
-				$("#CGST_rate_9").val( Math.round(cgst_rate));
-				$("#SGST_rate_9").val( Math.round(SGST_rate));
+				$("#CGST_rate_9").val( cgst_rate);
+				$("#SGST_rate_9").val( SGST_rate);
 
-				$("#gst").val( Math.round(gst_value));
+				$("#gst").val(parseFloat(gst_value));
 
 				//$("#grand_total").val( Math.round(gst_value) + Math.round(total_value));
 
