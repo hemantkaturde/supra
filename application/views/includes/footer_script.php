@@ -10013,7 +10013,7 @@
 
 		 });
 
-		 $(document).on('change', '#invoice_qty,#less_quantity,#rejected_quantity,#ok_qty', function(){	
+		 $(document).on('change', '#invoice_qty,#less_quantity,#rejected_quantity,#ok_qty,#p_and_f_charges', function(){	
 				$("#received_quantity").val();
 			  
 				 if($("#invoice_qty").val()){
@@ -10044,11 +10044,11 @@
 				 var less_qty_rejected_qty = parseFloat(less_quantity) +  parseFloat(rejected_quantity);
  
 				 var value = parseFloat(invoice_qty) - parseFloat(less_quantity);
-				 $("#received_quantity").val( Math.round(value));
+				 $("#received_quantity").val(value);
 
 				 var debit_amount =  parseFloat(less_qty_rejected_qty) *  parseFloat(rate);
 
-				 $("#debit_amount").val(Math.round(debit_amount));
+				 $("#debit_amount").val(debit_amount);
 
 
 				 if($("#ok_qty").val()){
@@ -10067,7 +10067,7 @@
 
 				 var plus_p_n_f_charges =  parseFloat(total_amount_ok_qty_data) +  parseFloat(p_and_f_charges);
 
-                 $("#total_amount_ok_qty_data").val(Math.round(total_amount_ok_qty_data));
+                 $("#total_amount_ok_qty_data").val(total_amount_ok_qty_data);
 
 		 });
 
@@ -10107,8 +10107,8 @@
 				var total_value = parseFloat(base_val);
 				var gst_value = parseFloat(total_value) * 18 / 100;
 				
-				$("#igst_rate_18").val( Math.round(gst_value));
-				$("#gst").val( Math.round(gst_value));
+				$("#igst_rate_18").val(gst_value);
+				$("#gst").val(gst_value);
 				//$("#grand_total").val( Math.round(gst_value) + Math.round(total_value)); 
 
 
@@ -10123,11 +10123,11 @@
 					 var ok_qty = 0;
 				 }
 
-				 var total_qty_for_ok_qty = parseFloat(Math.round(ok_qty)) *  parseFloat(Math.round(rate))
+				 var total_qty_for_ok_qty = parseFloat(ok_qty) *  parseFloat(rate)
 
 				 var gst_value_ok_18 = parseFloat(total_qty_for_ok_qty) * 18 / 100;
 
-				 $("#igst_rate_ok_18").val( Math.round(gst_value_ok_18));
+				 $("#igst_rate_ok_18").val(gst_value_ok_18);
 
 
 
@@ -10190,12 +10190,12 @@
 				 }
 
 
-				var total_qty_for_ok_qty = parseFloat(Math.round(ok_qty)) *  parseFloat(Math.round(rate))
+				var total_qty_for_ok_qty = parseFloat(ok_qty) *  parseFloat(rate)
 				var gst_value_ok_9 = parseFloat(total_qty_for_ok_qty) * 18 / 100;
-				var cgst_rate_ok_9  =Math.round(gst_value_ok_9)/2;
-				var SGST_rate_ok_9  =Math.round(gst_value_ok_9)/2;
-				$("#CGST_rate_9_ok").val( Math.round(cgst_rate_ok_9));
-				$("#SGST_rate_9_ok").val( Math.round(SGST_rate_ok_9));
+				var cgst_rate_ok_9  =gst_value_ok_9/2;
+				var SGST_rate_ok_9  =gst_value_ok_9/2;
+				$("#CGST_rate_9_ok").val(cgst_rate_ok_9);
+				$("#SGST_rate_9_ok").val(SGST_rate_ok_9);
 
 
 			}else if(gst_rate_value=='CGST_SGST_6'){
@@ -10232,14 +10232,14 @@
 
 				var gst_value = parseFloat(total_value) * 12 / 100;
 
-				var cgst_rate  =Math.round(gst_value)/2;
+				var cgst_rate  =gst_value/2;
 
-				var SGST_rate  =Math.round(gst_value)/2;
+				var SGST_rate  =gst_value/2;
 
-				$("#CGST_rate_6").val( Math.round(cgst_rate));
-				$("#SGST_rate_6").val( Math.round(SGST_rate));
+				$("#CGST_rate_6").val( cgst_rate);
+				$("#SGST_rate_6").val( SGST_rate);
 
-				$("#gst").val( Math.round(gst_value));
+				$("#gst").val( gst_value);
 
 				//$("#grand_total").val( Math.round(gst_value) + Math.round(total_value));
 
@@ -10254,12 +10254,12 @@
 					 var ok_qty = 0;
 				 }
 
-				var total_qty_for_ok_qty = parseFloat(Math.round(ok_qty)) *  parseFloat(Math.round(rate))
+				var total_qty_for_ok_qty = parseFloat(ok_qty) *  parseFloat(rate)
 				var gst_value_ok_6 = parseFloat(total_qty_for_ok_qty) * 18 / 100;
-				var cgst_rate_ok_6  =Math.round(gst_value_ok_6)/2;
-				var SGST_rate_ok_6  =Math.round(gst_value_ok_6)/2;
-				$("#CGST_rate_6_ok").val( Math.round(cgst_rate_ok_6));
-				$("#SGST_rate_6_ok").val( Math.round(SGST_rate_ok_6));
+				var cgst_rate_ok_6  =gst_value_ok_6/2;
+				var SGST_rate_ok_6  =gst_value_ok_6/2;
+				$("#CGST_rate_6_ok").val( cgst_rate_ok_6);
+				$("#SGST_rate_6_ok").val( SGST_rate_ok_6);
 				
 			}else if(gst_rate_value=='IGST_12'){
 
@@ -10293,8 +10293,8 @@
 				var total_value = parseFloat(base_val);
 				var gst_value = parseFloat(total_value) * 12 / 100;
 				
-				$("#igst_rate_12").val( Math.round(gst_value));
-				$("#gst").val( Math.round(gst_value));
+				$("#igst_rate_12").val( gst_value);
+				$("#gst").val(gst_value);
 				//$("#grand_total").val( Math.round(gst_value) + Math.round(total_value)); 
 
 				$(".igst_ok_qty_div").attr("style", "display:none");
@@ -10308,11 +10308,11 @@
 					 var ok_qty = 0;
 				 }
 
-				 var total_qty_for_ok_12_qty = parseFloat(Math.round(ok_qty)) *  parseFloat(Math.round(rate))
+				 var total_qty_for_ok_12_qty = parseFloat(ok_qty) *  parseFloat(rate)
 
 				 var gst_value_ok_12 = parseFloat(total_qty_for_ok_12_qty) * 12 / 100;
 
-				 $("#igst_rate_ok_12").val( Math.round(gst_value_ok_12));
+				 $("#igst_rate_ok_12").val(gst_value_ok_12);
 			}
          });
 
