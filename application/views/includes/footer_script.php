@@ -10067,7 +10067,7 @@
 
 				 var plus_p_n_f_charges =  parseFloat(total_amount_ok_qty_data) +  parseFloat(p_and_f_charges);
 
-                 $("#total_amount_ok_qty_data").val(total_amount_ok_qty_data);
+                 $("#total_amount_ok_qty_data").val(plus_p_n_f_charges);
 
 		 });
 
