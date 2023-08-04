@@ -10065,9 +10065,9 @@
 
 				 var total_amount_ok_qty_data =  parseFloat(ok_qty) *  parseFloat(rate);
 
-				 var plus_p_n_f_charges =  parseFloat(total_amount_ok_qty_data) +  parseFloat(p_and_f_charges);
+				//  var plus_p_n_f_charges =  parseFloat(total_amount_ok_qty_data) +  parseFloat(p_and_f_charges);
 
-                 $("#total_amount_ok_qty_data").val(plus_p_n_f_charges);
+                 $("#total_amount_ok_qty_data").val(total_amount_ok_qty_data);
 
 		 });
 
@@ -10123,7 +10123,17 @@
 					 var ok_qty = 0;
 				 }
 
-				 var total_qty_for_ok_qty = parseFloat(ok_qty) *  parseFloat(rate)
+
+				 if($("#p_and_f_charges").val()){
+					 var p_and_f_charges = $("#p_and_f_charges").val();
+				 }else{
+					 var p_and_f_charges = 0;
+				 }
+
+
+				 var total_qty_for_ok_qty_plus_pnf = parseFloat(ok_qty) *  parseFloat(rate);
+
+				 var total_qty_for_ok_qty = parseFloat(total_qty_for_ok_qty_plus_pnf) +  parseFloat(p_and_f_charges);
 
 				 var gst_value_ok_18 = parseFloat(total_qty_for_ok_qty) * 18 / 100;
 
@@ -10189,8 +10199,20 @@
 					 var ok_qty = 0;
 				 }
 
+				 
+				 if($("#p_and_f_charges").val()){
+					 var p_and_f_charges = $("#p_and_f_charges").val();
+				 }else{
+					 var p_and_f_charges = 0;
+				 }
 
-				var total_qty_for_ok_qty = parseFloat(ok_qty) *  parseFloat(rate)
+
+				 var total_qty_for_ok_qty_plus_pnf = parseFloat(ok_qty) *  parseFloat(rate);
+
+				 var total_qty_for_ok_qty = parseFloat(total_qty_for_ok_qty_plus_pnf) +  parseFloat(p_and_f_charges);
+
+
+				// var total_qty_for_ok_qty = parseFloat(ok_qty) *  parseFloat(rate)
 				var gst_value_ok_9 = parseFloat(total_qty_for_ok_qty) * 18 / 100;
 				var cgst_rate_ok_9  =gst_value_ok_9/2;
 				var SGST_rate_ok_9  =gst_value_ok_9/2;
@@ -10254,7 +10276,18 @@
 					 var ok_qty = 0;
 				 }
 
-				var total_qty_for_ok_qty = parseFloat(ok_qty) *  parseFloat(rate)
+				 if($("#p_and_f_charges").val()){
+					 var p_and_f_charges = $("#p_and_f_charges").val();
+				 }else{
+					 var p_and_f_charges = 0;
+				 }
+
+
+				 var total_qty_for_ok_qty_plus_pnf = parseFloat(ok_qty) *  parseFloat(rate);
+
+				 var total_qty_for_ok_qty = parseFloat(total_qty_for_ok_qty_plus_pnf) +  parseFloat(p_and_f_charges);
+
+				// var total_qty_for_ok_qty = parseFloat(ok_qty) *  parseFloat(rate)
 				var gst_value_ok_6 = parseFloat(total_qty_for_ok_qty) * 18 / 100;
 				var cgst_rate_ok_6  =gst_value_ok_6/2;
 				var SGST_rate_ok_6  =gst_value_ok_6/2;
@@ -10308,7 +10341,19 @@
 					 var ok_qty = 0;
 				 }
 
-				 var total_qty_for_ok_12_qty = parseFloat(ok_qty) *  parseFloat(rate)
+				 if($("#p_and_f_charges").val()){
+					 var p_and_f_charges = $("#p_and_f_charges").val();
+				 }else{
+					 var p_and_f_charges = 0;
+				 }
+
+
+				 var total_qty_for_ok_qty_plus_pnf = parseFloat(ok_qty) *  parseFloat(rate);
+
+				 var total_qty_for_ok_12_qty = parseFloat(total_qty_for_ok_qty_plus_pnf) + parseFloat(p_and_f_charges);
+
+
+				//  var total_qty_for_ok_12_qty = parseFloat(ok_qty) *  parseFloat(rate)
 
 				 var gst_value_ok_12 = parseFloat(total_qty_for_ok_12_qty) * 12 / 100;
 

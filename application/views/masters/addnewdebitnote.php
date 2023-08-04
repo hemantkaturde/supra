@@ -418,7 +418,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label" for="p_and_f_charges">P and F Charges <span class="required">*</span></label>
                                                             <div class="col-sm-8">
-                                                                    <input type="number" class="form-control"  value="0" id="p_and_f_charges" name="p_and_f_charges" required>
+                                                                    <input type="number" class="form-control"  id="p_and_f_charges" name="p_and_f_charges" required>
                                                                     <p class="error p_and_f_charges_error"></p>
                                                             </div>    
                                                     </div>
