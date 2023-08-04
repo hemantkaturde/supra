@@ -58,7 +58,7 @@
                                     </div>
 
 
-                                    <div class="col-md-12">
+                                    <!-- <div class="col-md-12">
                                         <div class="form-group">
                                                 <label for="select_with_po_without_po">Select With PO / Without PO <span class="required">*</span></label>
                                                 <select class="form-control" name="select_with_po_without_po" id="select_with_po_without_po">
@@ -68,7 +68,7 @@
                                                 </select>
                                             <p class="error select_with_po_without_po_error"></p>
                                         </div>
-                                    </div>
+                                    </div> -->
 
 
                                     <div class="col-md-12">
@@ -202,14 +202,6 @@
                                             </div>
                                     </div>
 
-
-                                    <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="p_and_f_charges">P and F Charges <span class="required">*</span></label>
-                                                  <input type="text" class="form-control"  value="" id="p_and_f_charges" name="p_and_f_charges" required>
-                                                <p class="error p_and_f_charges_error"></p>
-                                            </div>
-                                    </div>
 
                                     <div class="col-md-12">
                                             <div class="form-group">
@@ -424,6 +416,15 @@
                                                     </div>
 
                                                     <div class="form-group row">
+                                                        <label class="col-sm-4 col-form-label" for="p_and_f_charges">P and F Charges <span class="required">*</span></label>
+                                                            <div class="col-sm-8">
+                                                                    <input type="number" class="form-control"  value="0" id="p_and_f_charges" name="p_and_f_charges" required>
+                                                                    <p class="error p_and_f_charges_error"></p>
+                                                            </div>    
+                                                    </div>
+                                               
+
+                                                    <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Rate<span class="required">*</span></label>
                                                         <div class="col-sm-8">
                                                             <input type="number" class="form-control"  id="rate" name="rate" readonly>
@@ -545,15 +546,8 @@
                                                         </div>
                                                     </div>
 
+            
 
-
-                                                    <!-- <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Grand Total<span class="required">*</span></label>
-                                                        <div class="col-sm-8">
-                                                            <input type="number" class="form-control"  id="grand_total" name="grand_total" readonly>
-                                                            <p class="error grand_total_error"></p>
-                                                        </div>
-                                                    </div> -->
 
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Debit Amount<span class="required">*</span></label>
@@ -562,6 +556,9 @@
                                                             <p class="error debit_amount_error"></p>
                                                         </div>
                                                     </div>
+
+
+                                                    
 
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Remark</label>

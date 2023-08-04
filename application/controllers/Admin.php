@@ -6633,7 +6633,7 @@ class Admin extends BaseController
 
                 $this->form_validation->set_rules('debit_note_number','Debit Note Number','trim|required');
                 $this->form_validation->set_rules('debit_note_date','Debit Note Date','trim|required');
-                $this->form_validation->set_rules('select_with_po_without_po','With PO Without PO','trim|required');
+                // $this->form_validation->set_rules('select_with_po_without_po','With PO Without PO','trim');
                 $this->form_validation->set_rules('vendor_supplier_name','Vendor/Supplier Name','trim|required');
                 $this->form_validation->set_rules('vendor_name','Vendor Name','trim');
                 $this->form_validation->set_rules('vendor_po_number','Vendor PO Number','trim');
@@ -6645,7 +6645,7 @@ class Admin extends BaseController
 
                 $this->form_validation->set_rules('total_debit_amount','Total Debit Amount','trim|required');
                 $this->form_validation->set_rules('total_debit_amount_ok_qty','Total Debit Amount OK Qty','trim');
-                $this->form_validation->set_rules('p_and_f_charges','P_And F Charges','trim|required');
+               // $this->form_validation->set_rules('p_and_f_charges','P_And F Charges','trim|required');
                 $this->form_validation->set_rules('tds_amount','TDS Amount','trim|required');
                 $this->form_validation->set_rules('freight_amount_charge','Freight Amount Charge','trim|required');
                 $this->form_validation->set_rules('grand_total_main','Grand Total main','trim|required');
@@ -6660,7 +6660,7 @@ class Admin extends BaseController
                     $data = array(
                         'debit_note_number' =>  trim($this->input->post('debit_note_number')),
                         'debit_note_date' => trim($this->input->post('debit_note_date')),
-                        'type'=>trim($this->input->post('select_with_po_without_po')),
+                        // 'type'=>trim($this->input->post('select_with_po_without_po')),
                         'supplier_vendor_name' =>  trim($this->input->post('vendor_supplier_name')),
                         'vendor_id' =>  trim($this->input->post('vendor_name')),
                         'vendor_po' =>  trim($this->input->post('vendor_po_number')),
@@ -6670,7 +6670,7 @@ class Admin extends BaseController
                         'remark' =>  trim($this->input->post('remark')),
                         'total_debit_amount' =>  trim($this->input->post('total_debit_amount')),
                         'total_amount_of_ok_qty_amt' =>  trim($this->input->post('total_debit_amount_ok_qty')),
-                        'p_and_f_charges' =>  trim($this->input->post('p_and_f_charges')),
+                        //'p_and_f_charges' =>  trim($this->input->post('p_and_f_charges')),
                         'tds_amount' =>  trim($this->input->post('tds_amount')),
                         'freight_amount_charge' =>  trim($this->input->post('freight_amount_charge')),
                         'grand_total_main' =>  trim($this->input->post('grand_total_main')),
@@ -6798,7 +6798,7 @@ class Admin extends BaseController
             $this->form_validation->set_rules('sgst_value','SGST Value','trim');
             $this->form_validation->set_rules('cgst_value','CGST Value','trim');
             $this->form_validation->set_rules('igst_rate','IGST Value','trim');
-            //$this->form_validation->set_rules('grand_total','Grand Total','trim');
+            $this->form_validation->set_rules('p_and_f_charges','P And F Charges','trim');
             $this->form_validation->set_rules('item_remark','Item Remark','trim');
 
             if($this->form_validation->run() == FALSE)
@@ -6829,7 +6829,7 @@ class Admin extends BaseController
                         'SGST_value_ok_val' =>  trim($this->input->post('SGST_rate_ok')),
                         'CGST_value_ok_val' =>  trim($this->input->post('CGST_rate_ok')),
                         'IGST_value_ok_val' =>  trim($this->input->post('igst_rate_ok')),
-
+                        'p_and_f_charges' =>  trim($this->input->post('p_and_f_charges')),
                         'total_amount_of_ok_qty_data' =>trim($this->input->post('total_amount_of_ok_qty_data')),
                        // 'grand_total' =>  trim($this->input->post('grand_total')),
                         'total_amount_of_ok_qty' =>trim($this->input->post('total_ok_qty_amount')),
@@ -6867,6 +6867,7 @@ class Admin extends BaseController
                         'SGST_value_ok_val' =>  trim($this->input->post('SGST_rate_ok')),
                         'CGST_value_ok_val' =>  trim($this->input->post('CGST_rate_ok')),
                         'IGST_value_ok_val' =>  trim($this->input->post('igst_rate_ok')),
+                        'p_and_f_charges' =>  trim($this->input->post('p_and_f_charges')),
     
                        // 'grand_total' =>  trim($this->input->post('grand_total')),
                         'total_amount_of_ok_qty' =>trim($this->input->post('total_ok_qty_amount')),

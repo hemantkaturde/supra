@@ -10057,7 +10057,15 @@
 					 var ok_qty = 0;
 				 }
 
+				 if($("#p_and_f_charges").val()){
+					 var p_and_f_charges = $("#p_and_f_charges").val();
+				 }else{
+					 var p_and_f_charges = 0;
+				 }
+
 				 var total_amount_ok_qty_data =  parseFloat(ok_qty) *  parseFloat(rate);
+
+				 var plus_p_n_f_charges =  parseFloat(total_amount_ok_qty_data) +  parseFloat(p_and_f_charges);
 
                  $("#total_amount_ok_qty_data").val(Math.round(total_amount_ok_qty_data));
 
@@ -10496,8 +10504,7 @@
 				});
 	     });
 
-
-		 $(document).on('change', '#p_and_f_charges,#tds_amount,#freight_amount_charge', function(){	
+		 $(document).on('change', '#tds_amount,#freight_amount_charge', function(){	
 				 $("#chq_amt").val();
 
 				 $("#grand_total_main").val();
@@ -10539,19 +10546,18 @@
 				 }
 
 				 
-				 var total_one_group = parseFloat(total_amount_of_ok_qty_data) +  parseFloat(total_amount_of_ok_qty) +  parseFloat(p_and_f_charges);
+				 var total_one_group = parseFloat(total_amount_of_ok_qty_data) +  parseFloat(total_amount_of_ok_qty);
 
 				 var total_second_group = parseFloat(tds_amount) +  parseFloat(freight_amount_charge);
 
 				 var chq_amt =  parseFloat(total_one_group) - parseFloat(total_second_group);
 
-				 $("#chq_amt").val(Math.round(chq_amt));
-
+				 $("#chq_amt").val(chq_amt);
 
 
 				 var total_third_group = parseFloat(total_debit_amount) +  parseFloat(tds_amount) +  parseFloat(freight_amount_charge) + parseFloat(chq_amt);
 
-				 $("#grand_total_main").val(Math.round(total_third_group));
+				 $("#grand_total_main").val(total_third_group);
 			
 		 });
 
@@ -10617,7 +10623,6 @@
 			});
 			return false;
 		 });
-
 
 
     </script>
