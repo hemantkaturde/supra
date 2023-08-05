@@ -10071,7 +10071,6 @@
 
 		 });
 
-
 		 $(document).on('change', '#gst_rate', function(){	
 			var gst_rate_value = $("#gst_rate").val();
 			if(gst_rate_value=='IGST'){
@@ -10590,8 +10589,15 @@
 					 var total_debit_amount = 0;
 				 }
 
+
+				 if($("#p_and_f_charges").val()){
+					 var p_and_f_charges = $("#p_and_f_charges").val();
+				 }else{
+					 var p_and_f_charges = 0;
+				 }
+
 				 
-				 var total_one_group = parseFloat(total_amount_of_ok_qty_data) +  parseFloat(total_amount_of_ok_qty);
+				 var total_one_group = parseFloat(total_amount_of_ok_qty_data) +  parseFloat(total_amount_of_ok_qty) +  parseFloat(p_and_f_charges) ;
 
 				 var total_second_group = parseFloat(tds_amount) +  parseFloat(freight_amount_charge);
 
@@ -10637,7 +10643,6 @@
 			return false;
 		 });
 
-
 		 $(document).on('change','.supplier_po_get_data',function(e){  
 			e.preventDefault();
 			//$(".loader_ajax").show();
@@ -10669,7 +10674,6 @@
 			return false;
 		 });
 
-
     </script>
 <?php } ?>
 
@@ -10677,7 +10681,7 @@
 
 <?php if($pageTitle=='Payment Details' || $pageTitle=='Add New Payment Details'){ ?>
 	<script type="text/javascript">
-		 $(document).ready(function() {
+		$(document).ready(function() {
 		    var dt = $('#view_payment_details').DataTable({
 	            "columnDefs": [ 
 	                 { className: "details-control", "targets": [ 0 ] },
@@ -10704,7 +10708,7 @@
                     type: "post",
 	            },
 	        });
-	     });
+	    });
 
 		$(document).ready(function() {
 			var vendor_supplier_name = $('#vendor_supplier_name').val();
@@ -11350,8 +11354,6 @@
 						}
 					});
 		});
-
-
 
     </script>
 <?php } ?>

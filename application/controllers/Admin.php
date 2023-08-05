@@ -6955,7 +6955,7 @@ class Admin extends BaseController
 
                 $this->form_validation->set_rules('payment_details_number','Payment Details Number','trim|required');
                 $this->form_validation->set_rules('payment_details_date','Payment  Details Date','trim|required');
-                $this->form_validation->set_rules('select_with_po_without_po','With PO Without PO','trim|required');
+                //$this->form_validation->set_rules('select_with_po_without_po','With PO Without PO','trim|required');
                 $this->form_validation->set_rules('vendor_supplier_name','Vendor/Supplier Name','trim|required');
                 $this->form_validation->set_rules('vendor_name','Vendor Name','trim');
                 $this->form_validation->set_rules('vendor_po_number','Vendor PO Number','trim');
@@ -6964,33 +6964,50 @@ class Admin extends BaseController
                 $this->form_validation->set_rules('po_date','PO Date','trim');
                 $this->form_validation->set_rules('remark','Remark','trim');
 
+                $this->form_validation->set_rules('bill_number','Bill Number','trim|required');
+                $this->form_validation->set_rules('bill_date','Bill Date','trim|required');
+                $this->form_validation->set_rules('bill_amount','Bill Amount','trim|required');
+                $this->form_validation->set_rules('cheque_number','Cheque Number','trim|required');
+                $this->form_validation->set_rules('cheque_date','Cheque Date','trim|required');
+                $this->form_validation->set_rules('amount_paid','Amount Paid','trim|required');
+                $this->form_validation->set_rules('tds','TDS','trim|required');
+                $this->form_validation->set_rules('debit_note_amount','Debit Note Amount','trim|required');
+                $this->form_validation->set_rules('debit_note_no','Debit Note No','trim|required');
+
+            
                 if($this->form_validation->run() == FALSE)
                 {
                     $paymentdetails_response['status'] = 'failure';
-                    $paymentdetails_response['error'] = array('payment_details_number'=>strip_tags(form_error('payment_details_number')),'payment_details_date'=>strip_tags(form_error('payment_details_date')),'select_with_po_without_po'=>strip_tags(form_error('select_with_po_without_po')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'remark'=>strip_tags(form_error('remark')),'po_date'=>strip_tags(form_error('po_date')));
+                    $paymentdetails_response['error'] = array('vendor_supplier_name'=>strip_tags(form_error('vendor_supplier_name')),'payment_details_number'=>strip_tags(form_error('payment_details_number')),'payment_details_date'=>strip_tags(form_error('payment_details_date')),'select_with_po_without_po'=>strip_tags(form_error('select_with_po_without_po')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'remark'=>strip_tags(form_error('remark')),'po_date'=>strip_tags(form_error('po_date')),'bill_number'=>strip_tags(form_error('bill_number')),'bill_date'=>strip_tags(form_error('bill_date')),'bill_amount'=>strip_tags(form_error('bill_amount')),'cheque_number'=>strip_tags(form_error('cheque_number')),'cheque_date'=>strip_tags(form_error('cheque_date')),'amount_paid'=>strip_tags(form_error('amount_paid')),'tds'=>strip_tags(form_error('tds')),'debit_note_amount'=>strip_tags(form_error('debit_note_amount')),'debit_note_no'=>strip_tags(form_error('debit_note_no')));
                 }else{
 
                     $data = array(
                         'payment_details_number' =>  trim($this->input->post('payment_details_number')),
                         'payment_details_date' => trim($this->input->post('payment_details_date')),
-                        'type'=>trim($this->input->post('select_with_po_without_po')),
+                      //  'type'=>trim($this->input->post('select_with_po_without_po')),
                         'supplier_vendor_name' =>  trim($this->input->post('vendor_supplier_name')),
                         'vendor_id' =>  trim($this->input->post('vendor_name')),
                         'vendor_po' =>  trim($this->input->post('vendor_po_number')),
                         'supplier_id' =>  trim($this->input->post('supplier_name')),
                         'supplier_po' =>  trim($this->input->post('supplier_po_number')),
                         'po_date' =>  trim($this->input->post('po_date')),
+                        'bill_number' =>  trim($this->input->post('bill_number')),
+                        'bill_date' =>  trim($this->input->post('bill_date')),
+                        'bill_amount' =>  trim($this->input->post('bill_amount')),
+                        'cheque_number' =>  trim($this->input->post('cheque_number')),
+                        'cheque_date' =>  trim($this->input->post('cheque_date')),
+                        'amount_paid'  =>  trim($this->input->post('amount_paid')),
+                        'tds'  =>  trim($this->input->post('tds')),
+                        'debit_note_amount'  =>  trim($this->input->post('debit_note_amount')),
+                        'debit_note_no' =>  trim($this->input->post('debit_note_amount')),
                         'remark' =>  trim($this->input->post('remark'))
                     );
 
                     $saveNewdPaymentDetails= $this->admin_model->saveNewdPaymentDetails('',$data);
 
-
-                   
-
                     if($saveNewdPaymentDetails){
                         $paymentdetails_response['status'] = 'success';
-                        $paymentdetails_response['error'] = array('payment_details_number'=>strip_tags(form_error('payment_details_number')),'payment_details_date'=>strip_tags(form_error('payment_details_date')),'select_with_po_without_po'=>strip_tags(form_error('select_with_po_without_po')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'remark'=>strip_tags(form_error('remark')),'po_date'=>strip_tags(form_error('po_date')));
+                        $paymentdetails_response['error'] = array('payment_details_number'=>strip_tags(form_error('payment_details_number')),'payment_details_date'=>strip_tags(form_error('payment_details_date')),'select_with_po_without_po'=>strip_tags(form_error('select_with_po_without_po')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'remark'=>strip_tags(form_error('remark')),'po_date'=>strip_tags(form_error('po_date')),'bill_number'=>strip_tags(form_error('bill_number')),'bill_date'=>strip_tags(form_error('bill_date')),'bill_amount'=>strip_tags(form_error('bill_amount')),'cheque_number'=>strip_tags(form_error('cheque_number')),'cheque_date'=>strip_tags(form_error('cheque_date')),'amount_paid'=>strip_tags(form_error('amount_paid')),'tds'=>strip_tags(form_error('tds')),'debit_note_amount'=>strip_tags(form_error('debit_note_amount')),'debit_note_no'=>strip_tags(form_error('debit_note_no')));
                     }
                     
                 }
@@ -7162,15 +7179,6 @@ class Admin extends BaseController
 
     }
 
-    public function addpaymentdetailsdata($payment_details_id){
-
-        $process = 'Add Payment Details Data';
-        $processFunction = 'Admin/addpaymentdetailsdata';
-        $this->logrecord($process,$processFunction);
-        $this->global['pageTitle'] = 'Add Payment Details Data';
-        $this->loadViews("masters/addpaymentdetailsdata", $this->global, $data, NULL);  
-
-    }
     
     
 }

@@ -221,7 +221,8 @@
                                             </div>
                                     </div>
                                     
-
+                                    <input type="hidden" class="form-control" value="<?=$totalDebitAndokQty['p_and_f_charges']?>"  id="p_and_f_charges" name="p_and_f_charges">
+                                    
                                     <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="chq_amt">Chq Amount <span class="required">*</span></label>

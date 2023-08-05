@@ -4822,7 +4822,7 @@ class Admin_model extends CI_Model
     public function getTotalDebitAndokQty(){
 
 
-        $this->db->select('sum(debit_amount) as total_debit_amount, sum(SGST_value) as total_SGST_value, sum(CGST_value) as total_CGST_value, sum(IGST_value) as total_IGST_value , sum(total_amount_of_ok_qty_data) as total_amount_of_ok_qty_data,sum(total_amount_of_ok_qty) as total_amount_of_ok_qty');
+        $this->db->select('sum(debit_amount) as total_debit_amount, sum(SGST_value) as total_SGST_value, sum(CGST_value) as total_CGST_value, sum(IGST_value) as total_IGST_value , sum(total_amount_of_ok_qty_data) as total_amount_of_ok_qty_data,sum(total_amount_of_ok_qty) as total_amount_of_ok_qty,sum(p_and_f_charges) as p_and_f_charges');
         $this->db->where(TBL_DEBIT_NOTE_ITEM.'.debit_note_id IS NULL');
         $query = $this->db->get(TBL_DEBIT_NOTE_ITEM);
         $data = $query->result_array();
@@ -4897,7 +4897,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['supplier_po_number'] = $value['supplier_master'];
                 $data[$counter]['po_date'] = $value['po_date'];
                 $data[$counter]['action'] = '';
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addpaymentdetailsdata/".$value['payment_details_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>   &nbsp ";
+                // $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addpaymentdetailsdata/".$value['payment_details_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editdebitnoteform/".$value['payment_details_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['payment_details_id']."' class='fa fa-trash-o deletepaymentdetails' aria-hidden='true'></i>"; 
                 $counter++; 
