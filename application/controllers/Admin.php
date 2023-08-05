@@ -7179,6 +7179,49 @@ class Admin extends BaseController
 
     }
 
+
+    public function get_vendorpodata_with_debit_data(){
+
+        $vendor_po_id=$this->input->post('vendor_po_id');
+        if($vendor_po_id) {
+			$vendor_po_number_data = $this->admin_model->get_vendorpodata_with_debit_data($vendor_po_id);
+
+			if($vendor_po_number_data) {
+
+                $content = $vendor_po_number_data[0];
+                echo json_encode($content);
+             
+			} else {
+				echo 'failure';
+			}
+		} else {
+			echo 'failure';
+		}
+
+
+    }
+
+    public function get_supplierpodata_debit_data(){
+
+        $supplier_po_id=$this->input->post('supplier_po_id');
+        if($supplier_po_id) {
+			$upplier_po_number_data = $this->admin_model->get_supplierpodata_debit_data($supplier_po_id);
+
+			if($upplier_po_number_data) {
+
+                $content = $upplier_po_number_data[0];
+                echo json_encode($content);
+             
+			} else {
+				echo 'failure';
+			}
+		} else {
+			echo 'failure';
+		}
+
+
+    }
+
     
     
 }

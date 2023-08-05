@@ -221,7 +221,7 @@
                                             </div>
                                     </div>
                                     
-                                    <input type="text" class="form-control" value="<?=$totalDebitAndokQty['p_and_f_charges']?>"  id="p_and_f_charges_main" name="p_and_f_charges_main">
+                                    <input type="hidden" class="form-control" value="<?=$totalDebitAndokQty['p_and_f_charges']?>"  id="p_and_f_charges_main" name="p_and_f_charges_main">
 
                                     <div class="col-md-12">
                                             <div class="form-group">
@@ -282,6 +282,8 @@
                                                         $count=0;
                                                            foreach ($getdebitnoteitemdetails as $key => $value) :
                                                            $count++;
+                                                           $debit_gst_value =  intval($value['SGST_value']) + intval($value['CGST_value']) + intval($value['IGST_value']);
+
                                                     ?>
                                                     <tr>
                                                         <td><?php echo $count;?></td>
@@ -296,7 +298,7 @@
                                                         <td><?php echo $value['received_quantity'];?></td>
                                                         <td><?php echo $value['rate'];?></td>
                                                         <td><?php echo $value['gst_rate'];?></td>
-                                                        <td><?php echo $value['SGST_value'] + $value['CGST_value'] + $value['IGST_value'];?></td>
+                                                        <td><?php echo $debit_gst_value;?></td>
                                                         <td><?php echo $value['total_amount_of_ok_qty'];?></td>
                                                         <td><?php echo $value['debit_amount'];?></td>
                                                         <td><?php echo $value['debit_note_remark'];?></td>

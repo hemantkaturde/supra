@@ -38,7 +38,7 @@
                                  <div class="col-md-12">
                                     <div class="form-group">
                                        <label for="payment_details_number">Payment Details Number<span class="required">*</span></label>
-                                       <input type="text" class="form-control" id="c" value="<?=$payment_details_number?>" name="payment_details_number" readonly>
+                                       <input type="text" class="form-control" id="payment_details_number" value="<?=$payment_details_number?>" name="payment_details_number" readonly>
                                        <p class="error payment_details_number_error"></p>
                                     </div>
                                  </div>
@@ -55,8 +55,8 @@
                                        <label for="vendor_supplier_name">Select Vendor / Supplier <span class="required">*</span></label>
                                        <select class="form-control vendor_supplier_name" name="vendor_supplier_name" id="vendor_supplier_name">
                                           <option st-id="" value="">Select Vendor / Supplier</option>
-                                          <option value="vendor" <?php if($getdebitnoteitemdetails[0]['pre_vendor_supplier_name']=='vendor'){ echo 'selected'; } ?>>Vendor</option>
-                                          <option value="supplier" <?php if($getdebitnoteitemdetails[0]['pre_vendor_supplier_name']=='supplier'){ echo 'selected'; } ?>>Supplier</option>
+                                          <option value="vendor">Vendor</option>
+                                          <option value="supplier">Supplier</option>
                                        </select>
                                        <p class="error vendor_supplier_name_error"></p>
                                     </div>
@@ -68,7 +68,7 @@
                                           <select class="form-control vendor_name" name="vendor_name" id="vendor_name">
                                              <option st-id="" value="">Select Vendor Name</option>
                                              <?php foreach ($vendorList as $key => $value) {?>
-                                             <option value="<?php echo $value['ven_id']; ?>" <?php if($value['ven_id']==$getdebitnoteitemdetails[0]['pre_vendor_name']){ echo 'selected';} ?>><?php echo $value['vendor_name']; ?></option>
+                                             <option value="<?php echo $value['ven_id']; ?>"><?php echo $value['vendor_name']; ?></option>
                                              <?php } ?>
                                           </select>
                                           <p class="error vendor_name_error"></p>
@@ -77,7 +77,7 @@
                                     <div class="col-md-12 vendor_po_number_div" id="vendor_po_number_div" style="display:none">
                                        <div class="form-group">
                                           <label for="vendor_po_number">Select Vendor PO Number</label>
-                                          <select class="form-control vendor_po_number_itam" name="vendor_po_number" id="vendor_po_number">
+                                          <select class="form-control vendor_po_number_itam vendor_po_get_data get_vendorpodata_with_debit_data" name="vendor_po_number" id="vendor_po_number">
                                              <!-- <option st-id="" value="">Select Vendor Name</option> -->
                                              <!-- <option st-id="" value="<?=$getdebitnoteitemdetails[0]['pre_vendor_po_number']?>" selected="selected"><?=$selected_value?></option> -->
                                           </select>
@@ -101,7 +101,7 @@
                                     <div class="col-md-12 supplier_po_number_div" id="supplier_po_number_div" style="display:none">
                                        <div class="form-group">
                                           <label for="supplier_po_number">Select Supplier PO Number</label>
-                                          <select class="form-control supplier_po_number_item supplier_po_number_for_item" name="supplier_po_number" id="supplier_po_number">
+                                          <select class="form-control supplier_po_number_item supplier_po_number_for_item supplier_po_get_data get_supplierpodata_debit_data" name="supplier_po_number" id="supplier_po_number">
                                              <!-- <option st-id="" value="">Select Vendor Name</option> -->
                                              <!-- <option st-id="" value="<?=$getdebitnoteitemdetails[0]['pre_supplier_po_number']?>" selected="selected"><?=$selected_value?></option> -->
                                           </select>
@@ -109,12 +109,36 @@
                                        </div>
                                     </div>
                                  </div>
-                                 <?php  $po_date= date('Y-m-d'); ?>
+
                                  <div class="col-md-12">
                                     <div class="form-group">
                                        <label for="po_date">PO Date <span class="required">*</span></label>
-                                       <input type="text" class="form-control datepicker"  value="<?=$po_date?>" id="po_date" name="po_date" required>
+                                       <input type="text" class="form-control datepicker" id="po_date" name="po_date" required>
                                        <p class="error po_date_error"></p>
+                                    </div>
+                                 </div>
+
+                                 <div class="col-md-12">
+                                    <div class="form-group">
+                                       <label for="tds">TDS<span class="required">*</span></label>
+                                       <input type="text" class="form-control" id="tds" name="tds" readonly>
+                                       <p class="error tds_error"></p>
+                                    </div>
+                                 </div>
+
+                                 <div class="col-md-12">
+                                    <div class="form-group">
+                                       <label for="debit_note_amount">Debit Note Amount<span class="required">*</span></label>
+                                       <input type="text" class="form-control" id="debit_note_amount" name="debit_note_amount" readonly>
+                                       <p class="error debit_note_amount_error"></p>
+                                    </div>
+                                 </div>
+
+                                 <div class="col-md-12">
+                                    <div class="form-group">
+                                       <label for="debit_note_no">Debit Note No<span class="required">*</span></label>
+                                       <input type="text" class="form-control" id="debit_note_no" name="debit_note_no" readonly>
+                                       <p class="error debit_note_no_error"></p>
                                     </div>
                                  </div>
                               </div>
@@ -173,31 +197,7 @@
                                     </div>
                                  </div>
 
-                                 <div class="col-md-12">
-                                    <div class="form-group">
-                                       <label for="tds">TDS<span class="required">*</span></label>
-                                       <input type="text" class="form-control" id="tds" name="tds">
-                                       <p class="error tds_error"></p>
-                                    </div>
-                                 </div>
-
-                                 <div class="col-md-12">
-                                    <div class="form-group">
-                                       <label for="debit_note_amount">Debit Note Amount<span class="required">*</span></label>
-                                       <input type="text" class="form-control" id="debit_note_amount" name="debit_note_amount">
-                                       <p class="error debit_note_amount_error"></p>
-                                    </div>
-                                 </div>
-
-
-                                 <div class="col-md-12">
-                                    <div class="form-group">
-                                       <label for="debit_note_no">Debit Note No<span class="required">*</span></label>
-                                       <input type="text" class="form-control" id="debit_note_no" name="debit_note_no">
-                                       <p class="error debit_note_no_error"></p>
-                                    </div>
-                                 </div>
-
+                              
                                  <div class="col-md-12">
                                     <div class="form-group">
                                        <label for="remark">Remark</label>
