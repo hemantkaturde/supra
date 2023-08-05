@@ -221,7 +221,7 @@
                                             </div>
                                     </div>
                                     
-                                    <input type="hidden" class="form-control" value="<?=$totalDebitAndokQty['p_and_f_charges']?>"  id="p_and_f_charges_main" name="p_and_f_charges_main">
+                                    <input type="text" class="form-control" value="<?=$totalDebitAndokQty['p_and_f_charges']?>"  id="p_and_f_charges_main" name="p_and_f_charges_main">
 
                                     <div class="col-md-12">
                                             <div class="form-group">
