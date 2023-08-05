@@ -121,7 +121,7 @@
                                  <div class="col-md-12">
                                     <div class="form-group">
                                        <label for="tds">TDS<span class="required">*</span></label>
-                                       <input type="text" class="form-control" id="tds" name="tds" readonly>
+                                       <input type="text" class="form-control" id="tds" name="tds">
                                        <p class="error tds_error"></p>
                                     </div>
                                  </div>
@@ -129,7 +129,7 @@
                                  <div class="col-md-12">
                                     <div class="form-group">
                                        <label for="debit_note_amount">Debit Note Amount<span class="required">*</span></label>
-                                       <input type="text" class="form-control" id="debit_note_amount" name="debit_note_amount" readonly>
+                                       <input type="text" class="form-control" id="debit_note_amount" name="debit_note_amount">
                                        <p class="error debit_note_amount_error"></p>
                                     </div>
                                  </div>
@@ -137,7 +137,7 @@
                                  <div class="col-md-12">
                                     <div class="form-group">
                                        <label for="debit_note_no">Debit Note No<span class="required">*</span></label>
-                                       <input type="text" class="form-control" id="debit_note_no" name="debit_note_no" readonly>
+                                       <input type="text" class="form-control" id="debit_note_no" name="debit_note_no">
                                        <p class="error debit_note_no_error"></p>
                                     </div>
                                  </div>
