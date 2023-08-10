@@ -277,13 +277,12 @@ $route['fetchpoddetails'] = "admin/fetchpoddetails";
 $route['addNewPODdetails'] = "admin/addNewPODdetails";
 $route['addpaymentdetailsdata/(:any)'] = "admin/addpaymentdetailsdata/$1";
 
-
 $route['get_vendorpodata_with_debit_data'] = "admin/get_vendorpodata_with_debit_data";
-
 $route['get_supplierpodata_debit_data'] = "admin/get_supplierpodata_debit_data";
 
+$route['qualityrecord'] = "admin/qualityrecord";
 
-
+$route['addNewqualityrecord'] = "admin/addNewqualityrecord";
 
 
 

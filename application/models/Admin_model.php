@@ -4896,6 +4896,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['supplier_name'] = $value['supplier'];
                 $data[$counter]['supplier_po_number'] = $value['supplier_master'];
                 $data[$counter]['po_date'] = $value['po_date'];
+                $data[$counter]['payment_status'] = $value['payment_status'];
                 $data[$counter]['action'] = '';
                 // $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addpaymentdetailsdata/".$value['payment_details_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editdebitnoteform/".$value['payment_details_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";

@@ -6963,22 +6963,21 @@ class Admin extends BaseController
                 $this->form_validation->set_rules('supplier_po_number','Supplier PO Number','trim');
                 $this->form_validation->set_rules('po_date','PO Date','trim');
                 $this->form_validation->set_rules('remark','Remark','trim');
+                $this->form_validation->set_rules('bill_number','Bill Number','trim');
+                $this->form_validation->set_rules('bill_date','Bill Date','trim');
+                $this->form_validation->set_rules('bill_amount','Bill Amount','trim');
+                $this->form_validation->set_rules('cheque_number','Cheque Number','trim');
+                $this->form_validation->set_rules('cheque_date','Cheque Date','trim');
+                $this->form_validation->set_rules('amount_paid','Amount Paid','trim');
+                $this->form_validation->set_rules('tds','TDS','trim');
+                $this->form_validation->set_rules('debit_note_amount','Debit Note Amount','trim');
+                $this->form_validation->set_rules('debit_note_no','Debit Note No','trim');
+                $this->form_validation->set_rules('payment_status','Payment Status','trim|required');
 
-                $this->form_validation->set_rules('bill_number','Bill Number','trim|required');
-                $this->form_validation->set_rules('bill_date','Bill Date','trim|required');
-                $this->form_validation->set_rules('bill_amount','Bill Amount','trim|required');
-                $this->form_validation->set_rules('cheque_number','Cheque Number','trim|required');
-                $this->form_validation->set_rules('cheque_date','Cheque Date','trim|required');
-                $this->form_validation->set_rules('amount_paid','Amount Paid','trim|required');
-                $this->form_validation->set_rules('tds','TDS','trim|required');
-                $this->form_validation->set_rules('debit_note_amount','Debit Note Amount','trim|required');
-                $this->form_validation->set_rules('debit_note_no','Debit Note No','trim|required');
-
-            
                 if($this->form_validation->run() == FALSE)
                 {
                     $paymentdetails_response['status'] = 'failure';
-                    $paymentdetails_response['error'] = array('vendor_supplier_name'=>strip_tags(form_error('vendor_supplier_name')),'payment_details_number'=>strip_tags(form_error('payment_details_number')),'payment_details_date'=>strip_tags(form_error('payment_details_date')),'select_with_po_without_po'=>strip_tags(form_error('select_with_po_without_po')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'remark'=>strip_tags(form_error('remark')),'po_date'=>strip_tags(form_error('po_date')),'bill_number'=>strip_tags(form_error('bill_number')),'bill_date'=>strip_tags(form_error('bill_date')),'bill_amount'=>strip_tags(form_error('bill_amount')),'cheque_number'=>strip_tags(form_error('cheque_number')),'cheque_date'=>strip_tags(form_error('cheque_date')),'amount_paid'=>strip_tags(form_error('amount_paid')),'tds'=>strip_tags(form_error('tds')),'debit_note_amount'=>strip_tags(form_error('debit_note_amount')),'debit_note_no'=>strip_tags(form_error('debit_note_no')));
+                    $paymentdetails_response['error'] = array('vendor_supplier_name'=>strip_tags(form_error('vendor_supplier_name')),'payment_details_number'=>strip_tags(form_error('payment_details_number')),'payment_details_date'=>strip_tags(form_error('payment_details_date')),'select_with_po_without_po'=>strip_tags(form_error('select_with_po_without_po')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'remark'=>strip_tags(form_error('remark')),'po_date'=>strip_tags(form_error('po_date')),'bill_number'=>strip_tags(form_error('bill_number')),'bill_date'=>strip_tags(form_error('bill_date')),'bill_amount'=>strip_tags(form_error('bill_amount')),'cheque_number'=>strip_tags(form_error('cheque_number')),'cheque_date'=>strip_tags(form_error('cheque_date')),'amount_paid'=>strip_tags(form_error('amount_paid')),'tds'=>strip_tags(form_error('tds')),'debit_note_amount'=>strip_tags(form_error('debit_note_amount')),'debit_note_no'=>strip_tags(form_error('debit_note_no')),'payment_status'=>strip_tags(form_error('payment_status')));
                 }else{
 
                     $data = array(
@@ -7000,6 +6999,7 @@ class Admin extends BaseController
                         'tds'  =>  trim($this->input->post('tds')),
                         'debit_note_amount'  =>  trim($this->input->post('debit_note_amount')),
                         'debit_note_no' =>  trim($this->input->post('debit_note_amount')),
+                        'payment_status' =>  trim($this->input->post('payment_status')),
                         'remark' =>  trim($this->input->post('remark'))
                     );
 
@@ -7007,7 +7007,7 @@ class Admin extends BaseController
 
                     if($saveNewdPaymentDetails){
                         $paymentdetails_response['status'] = 'success';
-                        $paymentdetails_response['error'] = array('payment_details_number'=>strip_tags(form_error('payment_details_number')),'payment_details_date'=>strip_tags(form_error('payment_details_date')),'select_with_po_without_po'=>strip_tags(form_error('select_with_po_without_po')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'remark'=>strip_tags(form_error('remark')),'po_date'=>strip_tags(form_error('po_date')),'bill_number'=>strip_tags(form_error('bill_number')),'bill_date'=>strip_tags(form_error('bill_date')),'bill_amount'=>strip_tags(form_error('bill_amount')),'cheque_number'=>strip_tags(form_error('cheque_number')),'cheque_date'=>strip_tags(form_error('cheque_date')),'amount_paid'=>strip_tags(form_error('amount_paid')),'tds'=>strip_tags(form_error('tds')),'debit_note_amount'=>strip_tags(form_error('debit_note_amount')),'debit_note_no'=>strip_tags(form_error('debit_note_no')));
+                        $paymentdetails_response['error'] = array('vendor_supplier_name'=>strip_tags(form_error('vendor_supplier_name')),'payment_details_number'=>strip_tags(form_error('payment_details_number')),'payment_details_date'=>strip_tags(form_error('payment_details_date')),'select_with_po_without_po'=>strip_tags(form_error('select_with_po_without_po')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'remark'=>strip_tags(form_error('remark')),'po_date'=>strip_tags(form_error('po_date')),'bill_number'=>strip_tags(form_error('bill_number')),'bill_date'=>strip_tags(form_error('bill_date')),'bill_amount'=>strip_tags(form_error('bill_amount')),'cheque_number'=>strip_tags(form_error('cheque_number')),'cheque_date'=>strip_tags(form_error('cheque_date')),'amount_paid'=>strip_tags(form_error('amount_paid')),'tds'=>strip_tags(form_error('tds')),'debit_note_amount'=>strip_tags(form_error('debit_note_amount')),'debit_note_no'=>strip_tags(form_error('debit_note_no')),'payment_status'=>strip_tags(form_error('payment_status')));
                     }
                     
                 }
@@ -7222,6 +7222,76 @@ class Admin extends BaseController
 
     }
 
+
+    public function qualityrecord(){
+
+        $process = 'Qulity Record';
+        $processFunction = 'Admin/qualityrecord';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Qulity Record';
+        $this->loadViews("masters/qualityrecord", $this->global, $data, NULL);  
+    }
+    
+
+
+    public function addNewqualityrecord(){
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+               $PODdetails_response = array();
+
+                $this->form_validation->set_rules('POD_details_number','POD Details Number','trim|required');
+                $this->form_validation->set_rules('POD_details_date','POD Details Date','trim|required');
+                $this->form_validation->set_rules('select_with_po_without_po','With PO Without PO','trim|required');
+                $this->form_validation->set_rules('vendor_supplier_name','Vendor/Supplier Name','trim|required');
+                $this->form_validation->set_rules('vendor_name','Vendor Name','trim');
+                $this->form_validation->set_rules('vendor_po_number','Vendor PO Number','trim');
+                $this->form_validation->set_rules('supplier_name','Supplier Name','trim');
+                $this->form_validation->set_rules('supplier_po_number','Supplier PO Number','trim');
+                $this->form_validation->set_rules('po_date','PO Date','trim');
+                $this->form_validation->set_rules('remark','Remark','trim');
+
+                if($this->form_validation->run() == FALSE)
+                {
+                    $PODdetails_response['status'] = 'failure';
+                    $PODdetails_response['error'] = array('POD_details_date'=>strip_tags(form_error('POD_details_date')),'POD_details_date'=>strip_tags(form_error('POD_details_date')),'select_with_po_without_po'=>strip_tags(form_error('select_with_po_without_po')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'remark'=>strip_tags(form_error('remark')),'po_date'=>strip_tags(form_error('po_date')));
+                }else{
+
+                    $data = array(
+                        'POD_details_number' =>  trim($this->input->post('POD_details_number')),
+                        'POD_details_date' => trim($this->input->post('POD_details_date')),
+                        'type'=>trim($this->input->post('select_with_po_without_po')),
+                        'supplier_vendor_name' =>  trim($this->input->post('vendor_supplier_name')),
+                        'vendor_id' =>  trim($this->input->post('vendor_name')),
+                        'vendor_po' =>  trim($this->input->post('vendor_po_number')),
+                        'supplier_id' =>  trim($this->input->post('supplier_name')),
+                        'supplier_po' =>  trim($this->input->post('supplier_po_number')),
+                        'po_date' =>  trim($this->input->post('po_date')),
+                        'remark' =>  trim($this->input->post('remark'))
+                    );
+
+                    $saveNewdPODDetails= $this->admin_model->saveNewdPODDetails('',$data);
+
+                    if($saveNewdPODDetails){
+                        $PODdetails_response['status'] = 'success';
+                        $PODdetails_response['error'] = array('POD_details_date'=>strip_tags(form_error('POD_details_date')),'POD_details_date'=>strip_tags(form_error('POD_details_date')),'select_with_po_without_po'=>strip_tags(form_error('select_with_po_without_po')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'remark'=>strip_tags(form_error('remark')),'po_date'=>strip_tags(form_error('po_date')));
+                    }
+                    
+                }
+             echo json_encode($PODdetails_response);
+        }else{
+            $process = 'Add New Qulity Record Form';
+            $processFunction = 'Admin/addNewqualityrecord';
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Add New Qulity Record Form';
+            $data['vendorList']= $this->admin_model->fetchALLvendorList();
+            $data['supplierList']= $this->admin_model->fetchALLsupplierList();
+            $data['getdebitnoteitemdetails']= $this->admin_model->getdebitnoteitemdetails();
+            $data['getPreviousPODdetails_number'] = $this->admin_model->getPreviousPODdetails_number();
+            $this->loadViews("masters/addnewqulityrecord", $this->global, $data, NULL);
+        }
+       
+    }
     
     
 }

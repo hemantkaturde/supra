@@ -147,7 +147,7 @@
                              <div class="col-md-8 col-sm-8 col-xs-8">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                       <label for="bill_number">Bill Number<span class="required">*</span></label>
+                                       <label for="bill_number">Bill Number</label>
                                        <input type="text" class="form-control" id="bill_number" name="bill_number">
                                        <p class="error bill_number_error"></p>
                                     </div>
@@ -157,7 +157,7 @@
 
                                  <div class="col-md-12">
                                     <div class="form-group">
-                                       <label for="bill_date">Bill Date<span class="required">*</span></label>
+                                       <label for="bill_date">Bill Date</label>
                                        <input type="text" class="form-control datepicker"  value="<?=$bill_date?>" id="bill_date" name="bill_date">
                                        <p class="error bill_date_error"></p>
                                     </div>
@@ -165,7 +165,7 @@
 
                                  <div class="col-md-12">
                                     <div class="form-group">
-                                       <label for="bill_amount">Bill Amount<span class="required">*</span></label>
+                                       <label for="bill_amount">Bill Amount</label>
                                        <input type="text" class="form-control" id="bill_amount"  name="bill_amount">
                                        <p class="error bill_amount_error"></p>
                                     </div>
@@ -173,7 +173,7 @@
 
                                  <div class="col-md-12">
                                     <div class="form-group">
-                                       <label for="cheque_number">Cheque Number<span class="required">*</span></label>
+                                       <label for="cheque_number">Cheque Number</label>
                                        <input type="text" class="form-control" id="cheque_number" name="cheque_number">
                                        <p class="error cheque_number_error"></p>
                                     </div>
@@ -183,7 +183,7 @@
 
                                  <div class="col-md-12">
                                     <div class="form-group">
-                                       <label for="cheque_date">Cheque Date<span class="required">*</span></label>
+                                       <label for="cheque_date">Cheque Date</label>
                                        <input type="text" class="form-control datepicker"  value="<?=$Cheque_date?>" id="cheque_date" name="cheque_date">
                                        <p class="error cheque_date_error"></p>
                                     </div>
@@ -191,9 +191,21 @@
 
                                  <div class="col-md-12">
                                     <div class="form-group">
-                                       <label for="amount_paid">Amount Paid<span class="required">*</span></label>
+                                       <label for="amount_paid">Amount Paid</label>
                                        <input type="text" class="form-control" id="amount_paid" name="amount_paid">
                                        <p class="error amount_paid_error"></p>
+                                    </div>
+                                 </div>
+
+                                 <div class="col-md-12">
+                                    <div class="form-group">
+                                       <label for="amount_paid">Payment Status<span class="required">*</span></label>
+                                       <select class="form-control payment_status" name="payment_status" id="payment_status">
+                                          <option st-id="" value="">Select Payment Status</option>
+                                          <option value="Paid">Paid</option>
+                                          <option value="Unpaid">Unpaid</option>
+                                       </select>
+                                       <p class="error payment_status_error"></p>
                                     </div>
                                  </div>
 

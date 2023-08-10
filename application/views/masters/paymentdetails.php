@@ -37,6 +37,7 @@
                                         <th>Supplier Name</th>
                                         <th>Supplier PO</th>
                                         <th>PO Date</th>
+                                        <th>Payment Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
