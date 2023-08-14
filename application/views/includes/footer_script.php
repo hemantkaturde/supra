@@ -11664,7 +11664,7 @@
 
 		 });
 
-		 $(document).on('change', '#tds_amount,#freight_amount_charge', function(){	
+		 $(document).on('change', '#qty_recived', function(){	
 				 
 				 $("#short_excess_qty").val();
 			  
