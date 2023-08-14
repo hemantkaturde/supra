@@ -11686,7 +11686,81 @@
 			
 		 });
 
-	
+		 
+		 $(document).on('click','#savePODitem',function(e){
+			e.preventDefault();
+			   $(".loader_ajax").show();
+			   var formData = new FormData($("#savePODitem_form")[0]);
+
+			   var part_number =   $('#part_number').val();
+			   var description =   $('#description').val();
+			   var invoice_no =   $('#invoice_no').val();
+			   var invoice_date =   $('#invoice_date').val();
+			   var invoice_qty =   $('#invoice_qty').val();
+			   var ok_qty =   $('#ok_qty').val();
+			   var less_quantity =   $('#less_quantity').val();
+			   var rejected_quantity =   $('#rejected_quantity').val();
+			   var received_quantity =   $('#received_quantity').val();
+			   var rate =   $('#rate').val();
+			
+
+			   var pre_debit_note_date =   $('#debit_note_date').val();
+			   var pre_select_with_po_without_po =   $('#select_with_po_without_po').val();
+			   var pre_vendor_supplier_name =   $('#vendor_supplier_name').val();
+			   var pre_vendor_name =   $('#vendor_name').val();
+			   var pre_vendor_po_number =   $('#vendor_po_number').val();
+			   var pre_supplier_name =   $('#supplier_name').val();
+			   var pre_supplier_po_number =   $('#supplier_po_number').val();
+			   var pre_po_date =   $('#po_date').val();
+			   var pre_remark =   $('#remark').val();
+
+		
+			
+			   $.ajax({
+				url : "<?php echo base_url();?>savepoditem",
+				type: "POST",
+				 //data : formData,
+				 data :{part_number:part_number,invoice_no:invoice_no,invoice_date:invoice_date,invoice_qty:invoice_qty,ok_qty:ok_qty,less_quantity:less_quantity,rejected_quantity:rejected_quantity,received_quantity:received_quantity,rate:rate,gst_rate:gst_rate,sgst_value:sgst_value,cgst_value:cgst_value,igst_rate:igst_rate,item_remark:item_remark,pre_debit_note_date:pre_debit_note_date,pre_select_with_po_without_po:pre_select_with_po_without_po,pre_vendor_supplier_name:pre_vendor_supplier_name,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_supplier_name:pre_supplier_name,pre_supplier_po_number:pre_supplier_po_number,pre_po_date:pre_po_date,pre_remark:pre_remark,sgst_value:sgst_value,cgst_value:cgst_value,SGST_rate_ok:SGST_rate_ok,CGST_rate_ok:CGST_rate_ok,igst_rate:igst_rate,igst_rate_ok:igst_rate_ok,debit_amount:debit_amount,total_ok_qty_amount:total_ok_qty_amount,debit_id:debit_id,total_amount_of_ok_qty_data:total_amount_of_ok_qty_data,p_and_f_charges:p_and_f_charges},
+				 method: "POST",
+                // data :{package_id:package_id},
+                cache:false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+						$(".loader_ajax").hide();
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						swal({
+							title: "Success",
+							text: "Item Successfully Added!",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+
+								if(debit_id){
+									window.location.href = "<?php echo base_url().'editdebitnoteform'?>"+debit_id;
+								}else{
+									window.location.href = "<?php echo base_url().'addnewdebitnote'?>";
+								}
+							
+						});		
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			   });
+			return false;
+	     });
 
     </script>
 <?php } ?>
