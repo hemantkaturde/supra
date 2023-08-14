@@ -7086,7 +7086,6 @@ class Admin extends BaseController
 
                 $this->form_validation->set_rules('POD_details_number','POD Details Number','trim|required');
                 $this->form_validation->set_rules('POD_details_date','POD Details Date','trim|required');
-                $this->form_validation->set_rules('select_with_po_without_po','With PO Without PO','trim|required');
                 $this->form_validation->set_rules('vendor_supplier_name','Vendor/Supplier Name','trim|required');
                 $this->form_validation->set_rules('vendor_name','Vendor Name','trim');
                 $this->form_validation->set_rules('vendor_po_number','Vendor PO Number','trim');
@@ -7104,7 +7103,6 @@ class Admin extends BaseController
                     $data = array(
                         'POD_details_number' =>  trim($this->input->post('POD_details_number')),
                         'POD_details_date' => trim($this->input->post('POD_details_date')),
-                        'type'=>trim($this->input->post('select_with_po_without_po')),
                         'supplier_vendor_name' =>  trim($this->input->post('vendor_supplier_name')),
                         'vendor_id' =>  trim($this->input->post('vendor_name')),
                         'vendor_po' =>  trim($this->input->post('vendor_po_number')),
