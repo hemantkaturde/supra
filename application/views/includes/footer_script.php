@@ -11117,13 +11117,10 @@
 					else
 					{
 						var get_vendorpodata = jQuery.parseJSON( data );
-
-
-						var total_value_of_debit_note_number =  parseFloat(debit_amount) +   parseFloat(SGST_value) + parseFloat(CGST_value) + parseFloat(IGST_value);
-
+						
 						$('#tds').val(get_vendorpodata.tds_amount);
 						$('#debit_note_amount').val(get_vendorpodata.grand_total_main);
-						$('#debit_note_no').val(total_value_of_debit_note_number);
+						$('#debit_note_no').val(get_vendorpodata.total_debit_amount);
 					}
 				},
 				error: function (jqXHR, textStatus, errorThrown)
