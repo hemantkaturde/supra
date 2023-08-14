@@ -11119,8 +11119,8 @@
 						var get_vendorpodata = jQuery.parseJSON( data );
 						
 						$('#tds').val(get_vendorpodata.tds_amount);
-						$('#debit_note_amount').val(get_vendorpodata.grand_total_main);
-						$('#debit_note_no').val(get_vendorpodata.total_debit_amount);
+						$('#debit_note_amount').val(get_vendorpodata.total_debit_amount);
+						$('#debit_note_no').val(get_vendorpodata.debit_note_number);
 					}
 				},
 				error: function (jqXHR, textStatus, errorThrown)
@@ -11155,7 +11155,7 @@
 					{
 						var get_supplierdata = jQuery.parseJSON( data );
 						$('#tds').val(get_supplierdata.tds_amount);
-						$('#debit_note_amount').val(get_supplierdata.grand_total_main);
+						$('#debit_note_amount').val(get_supplierdata.total_debit_amount);
 						$('#debit_note_no').val(get_supplierdata.debit_note_number);
 
 					}

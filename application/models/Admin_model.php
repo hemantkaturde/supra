@@ -5085,7 +5085,7 @@ class Admin_model extends CI_Model
 
     public function get_supplierpodata_debit_data($supplier_po_id){
 
-        $this->db->select(TBL_DEBIT_NOTE.'.tds_amount,'.TBL_DEBIT_NOTE.'.grand_total_main,'.TBL_DEBIT_NOTE.'.debit_note_number');
+        $this->db->select(TBL_DEBIT_NOTE.'.tds_amount,'.TBL_DEBIT_NOTE.'.total_debit_amount,'.TBL_DEBIT_NOTE.'.debit_note_number');
         $this->db->join(TBL_DEBIT_NOTE, TBL_DEBIT_NOTE.'.supplier_id = '.TBL_SUPPLIER_PO_MASTER.'.id');
         $this->db->where(TBL_SUPPLIER_PO_MASTER.'.id', $supplier_po_id);
         $query = $this->db->get(TBL_SUPPLIER_PO_MASTER);
