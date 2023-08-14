@@ -50,17 +50,6 @@
                            </div>
                            <div class="col-md-12">
                               <div class="form-group">
-                                 <label for="select_with_po_without_po">Select With PO / Without PO <span class="required">*</span></label>
-                                 <select class="form-control" name="select_with_po_without_po" id="select_with_po_without_po">
-                                    <option st-id="" value="">Select With PO / Without PO</option>
-                                    <option value="with_po" <?php if($getdebitnoteitemdetails[0]['pre_select_with_po_without_po']=='with_po'){ echo 'selected'; } ?>>With PO</option>
-                                    <option value="without_po" <?php if($getdebitnoteitemdetails[0]['pre_select_with_po_without_po']=='without_po'){ echo 'selected'; } ?>>Without PO</option>
-                                 </select>
-                                 <p class="error select_with_po_without_po_error"></p>
-                              </div>
-                           </div>
-                           <div class="col-md-12">
-                              <div class="form-group">
                                  <label for="vendor_supplier_name">Select Vendor / Supplier <span class="required">*</span></label>
                                  <select class="form-control vendor_supplier_name" name="vendor_supplier_name" id="vendor_supplier_name">
                                     <option st-id="" value="">Select Vendor / Supplier</option>
@@ -86,7 +75,7 @@
                               <div class="col-md-12 vendor_po_number_div" id="vendor_po_number_div" style="display:none">
                                  <div class="form-group">
                                     <label for="vendor_po_number">Select Vendor PO Number</label>
-                                    <select class="form-control vendor_po_number_itam" name="vendor_po_number" id="vendor_po_number">
+                                    <select class="form-control vendor_po_number_itam vendor_po_get_data" name="vendor_po_number" id="vendor_po_number">
                                        <!-- <option st-id="" value="">Select Vendor Name</option> -->
                                        <!-- <option st-id="" value="<?=$getdebitnoteitemdetails[0]['pre_vendor_po_number']?>" selected="selected"><?=$selected_value?></option> -->
                                     </select>
@@ -110,7 +99,7 @@
                               <div class="col-md-12 supplier_po_number_div" id="supplier_po_number_div" style="display:none">
                                  <div class="form-group">
                                     <label for="supplier_po_number">Select Supplier PO Number</label>
-                                    <select class="form-control supplier_po_number_item supplier_po_number_for_item" name="supplier_po_number" id="supplier_po_number">
+                                    <select class="form-control supplier_po_number_item supplier_po_number_for_item supplier_po_get_data" name="supplier_po_number" id="supplier_po_number">
                                        <!-- <option st-id="" value="">Select Vendor Name</option> -->
                                        <!-- <option st-id="" value="<?=$getdebitnoteitemdetails[0]['pre_supplier_po_number']?>" selected="selected"><?=$selected_value?></option> -->
                                     </select>
@@ -122,7 +111,7 @@
                            <div class="col-md-12">
                               <div class="form-group">
                                  <label for="po_date">PO Date <span class="required">*</span></label>
-                                 <input type="text" class="form-control datepicker"  value="<?=$po_date?>" id="po_date" name="po_date" required>
+                                 <input type="text" class="form-control datepicker"  id="po_date" name="po_date" required>
                                  <p class="error po_date_error"></p>
                               </div>
                            </div>

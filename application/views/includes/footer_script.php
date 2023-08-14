@@ -11497,6 +11497,67 @@
 					});
 		});
 
+		$(document).on('change','.vendor_po_get_data',function(e){  
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			// $("#customers-list").html('');
+			var vendor_po_id = $('.vendor_po_get_data').val();
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>get_vendorpodata",
+				type: "POST",
+				data : {'vendor_po_id' : vendor_po_id},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#po_date').val('');
+					}
+					else
+					{
+						var get_vendorpodata = jQuery.parseJSON( data );
+						$('#po_date').val(get_vendorpodata.date);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#po_date').val('');
+				}
+			});
+			return false;
+		});
+
+		 $(document).on('change','.supplier_po_get_data',function(e){  
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			// $("#customers-list").html('');
+			var supplier_po_id = $('.supplier_po_get_data').val();
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>get_supplierpodata",
+				type: "POST",
+				data : {'supplier_po_id' : supplier_po_id},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#po_date').val('');
+					}
+					else
+					{
+						var get_supplierdata = jQuery.parseJSON( data );
+						$('#po_date').val(get_supplierdata.date);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#po_date').val('');
+				}
+			});
+			return false;
+		 });
 	
 
     </script>
