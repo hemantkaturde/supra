@@ -272,7 +272,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Bill Date<span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="text" class="form-control"  id="bill_date" name="bill_date">
+                                                            <input type="text" class="form-control datepicker"  id="bill_date" name="bill_date">
                                                             <p class="error bill_date_error"></p>
                                                         </div>
                                                     </div>
