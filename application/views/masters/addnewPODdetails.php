@@ -111,7 +111,7 @@
                            <div class="col-md-12">
                               <div class="form-group">
                                  <label for="po_date">PO Date <span class="required">*</span></label>
-                                 <input type="text" class="form-control datepicker"  id="po_date" name="po_date" required>
+                                 <input type="text" class="form-control datepicker" id="po_date" name="po_date" required>
                                  <p class="error po_date_error"></p>
                               </div>
                            </div>
@@ -222,7 +222,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Order Qty<span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="text" class="form-control"  id="order_qty" name="order_qty">
+                                                            <input type="text" class="form-control"  id="order_qty" name="order_qty" readonly>
                                                             <p class="error order_qty_error"></p>
                                                         </div>
                                                     </div>

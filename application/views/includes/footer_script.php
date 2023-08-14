@@ -11558,6 +11558,134 @@
 			});
 			return false;
 		 });
+
+		 $(document).on('change','#part_number',function(e){  
+			e.preventDefault();
+			
+			var part_number = $('#part_number').val();
+		    var vendor_po_number = $('#vendor_po_number').val();
+			var vendor_name = $('#vendor_name').val();
+			var vendor_supplier_name = $('#vendor_supplier_name').val();
+
+
+			if(vendor_supplier_name=='vendor'){
+
+				if(vendor_name){
+					if(vendor_po_number){
+							$.ajax({
+								url : "<?php echo ADMIN_PATH;?>getSuppliergoodsreworkrejectionvendor",
+								type: "POST",
+								data : {'part_number' : part_number,'vendor_po_number':vendor_po_number},
+								success: function(data, textStatus, jqXHR)
+								{
+									$(".loader_ajax").hide();
+									if(data == "failure")
+									{
+										$('#description').val('');
+										$('#rate').val('');
+										$('#order_qty').val('');
+									}
+									else
+									{
+										var data_row_material = jQuery.parseJSON( data );
+										$('#description').val(data_row_material.name);
+										$('#rate').val(data_row_material.vendorrate);
+										$('#order_qty').val(data_row_material.vendor_order_qty);
+									}
+								},
+								error: function (jqXHR, textStatus, errorThrown)
+								{
+										$('#description').val('');
+										$('#rate').val('');
+										$('#order_qty').val('');
+								}
+							});
+							return false;
+
+					}else{
+						$('.part_number_error').html('Please Select Vendor PO Number');
+					}
+
+				}else{
+					$('.part_number_error').html('Please Select Vendor PO');
+				}
+
+			}
+
+			if(vendor_supplier_name=='supplier'){
+
+				var supplier_po_number = $('#supplier_po_number').val();
+			    var supplier_name = $('#supplier_name').val();
+				
+				if(supplier_name){
+					if(supplier_po_number){
+							$.ajax({
+								url : "<?php echo ADMIN_PATH;?>getSuppliergoodsreworkrejectionsupplier",
+								type: "POST",
+								data : {'part_number' : part_number,'supplier_po_number':supplier_po_number,'vendor_po_number':''},
+								success: function(data, textStatus, jqXHR)
+								{
+									$(".loader_ajax").hide();
+									if(data == "failure")
+									{
+										$('#description').val('');
+										$('#rate').val('');
+										$('#order_qty').val('');
+										
+
+									}
+									else
+									{
+										var data_row_material = jQuery.parseJSON( data );
+										$('#description').val(data_row_material.name);
+										$('#rate').val(data_row_material.supplierrate);
+										$('#order_qty').val(data_row_material.supplier_order_qty);
+										
+									}
+								},
+								error: function (jqXHR, textStatus, errorThrown)
+								{
+										$('#description').val('');
+										$('#rate').val('');		
+										$('#order_qty').val('');							
+										//$(".loader_ajax").hide();
+								}
+							});
+							return false;
+
+					}else{
+						$('.part_number_error').html('Please Select Vendor PO Number');
+					}
+
+				}else{
+					$('.part_number_error').html('Please Select Vendor PO');
+				}
+			}
+
+		 });
+
+		 $(document).on('change', '#tds_amount,#freight_amount_charge', function(){	
+				 
+				 $("#short_excess_qty").val();
+			  
+				 if($("#order_qty").val()){
+					 var order_qty = $("#order_qty").val();
+				 }else{
+					 var order_qty = 0;
+				 }
+
+				 if($("#qty_recived").val()){
+					 var qty_recived = $("#qty_recived").val();
+				 }else{
+					 var qty_recived = 0;
+				 }
+
+				 var total_short_excess_qty = parseFloat(order_qty) -  parseFloat(qty_recived);
+
+				 $("#short_excess_qty").val(total_short_excess_qty);
+			
+		 });
+
 	
 
     </script>
