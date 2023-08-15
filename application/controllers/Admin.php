@@ -6755,9 +6755,7 @@ class Admin extends BaseController
         $data['vendorList']= $this->admin_model->fetchALLvendorList();
         $data['supplierList']= $this->admin_model->fetchALLsupplierList();
         $data['getdebitnoteditailsdata']= $this->admin_model->getdebitnoteditailsdata($id);
-
         $data['getdebitnoteitemdetailsedit']= $this->admin_model->getdebitnoteitemdetailsedit($id);
-
         $this->loadViews("masters/editdebitnoteform", $this->global, $data, NULL);
     }
 
@@ -6979,6 +6977,7 @@ class Admin extends BaseController
                     $paymentdetails_response['error'] = array('vendor_supplier_name'=>strip_tags(form_error('vendor_supplier_name')),'payment_details_number'=>strip_tags(form_error('payment_details_number')),'payment_details_date'=>strip_tags(form_error('payment_details_date')),'select_with_po_without_po'=>strip_tags(form_error('select_with_po_without_po')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'remark'=>strip_tags(form_error('remark')),'po_date'=>strip_tags(form_error('po_date')),'bill_number'=>strip_tags(form_error('bill_number')),'bill_date'=>strip_tags(form_error('bill_date')),'bill_amount'=>strip_tags(form_error('bill_amount')),'cheque_number'=>strip_tags(form_error('cheque_number')),'cheque_date'=>strip_tags(form_error('cheque_date')),'amount_paid'=>strip_tags(form_error('amount_paid')),'tds'=>strip_tags(form_error('tds')),'debit_note_amount'=>strip_tags(form_error('debit_note_amount')),'debit_note_no'=>strip_tags(form_error('debit_note_no')),'payment_status'=>strip_tags(form_error('payment_status')));
                 }else{
 
+                    
                     $data = array(
                         'payment_details_number' =>  trim($this->input->post('payment_details_number')),
                         'payment_details_date' => trim($this->input->post('payment_details_date')),
@@ -7002,7 +7001,11 @@ class Admin extends BaseController
                         'remark' =>  trim($this->input->post('remark'))
                     );
 
-                    $saveNewdPaymentDetails= $this->admin_model->saveNewdPaymentDetails('',$data);
+                    if(trim($this->input->post('payment_details_id'))){
+                        $saveNewdPaymentDetails= $this->admin_model->saveNewdPaymentDetails(trim($this->input->post('payment_details_id')),$data);
+                    }else{
+                        $saveNewdPaymentDetails= $this->admin_model->saveNewdPaymentDetails('',$data);
+                    }
 
                     if($saveNewdPaymentDetails){
                         $paymentdetails_response['status'] = 'success';
@@ -7018,12 +7021,25 @@ class Admin extends BaseController
             $this->global['pageTitle'] = 'Add New Payment Details';
             $data['vendorList']= $this->admin_model->fetchALLvendorList();
             $data['supplierList']= $this->admin_model->fetchALLsupplierList();
-            $data['getdebitnoteitemdetails']= $this->admin_model->getdebitnoteitemdetails();
             $data['getPreviousPaymentdetails_number'] = $this->admin_model->getPreviousPaymentdetails_number();
             $this->loadViews("masters/addNewpaymentdetails", $this->global, $data, NULL);
         }
 
     }
+
+
+    public function editpaymentdetails($payment_details_id){
+        $process = 'Edit Payment Details';
+        $processFunction = 'Admin/editpaymentdetails';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Edit Payment Details';
+        $data['vendorList']= $this->admin_model->fetchALLvendorList();
+        $data['supplierList']= $this->admin_model->fetchALLsupplierList();
+        $data['getPaymentdetails'] = $this->admin_model->getPaymentdetails($payment_details_id);
+        $this->loadViews("masters/editpaymentdetails", $this->global, $data, NULL);
+
+    }
+
 
     public function deletepaymentdetails(){
 

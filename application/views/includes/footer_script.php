@@ -10685,7 +10685,7 @@
 
 
 
-<?php if($pageTitle=='Payment Details' || $pageTitle=='Add New Payment Details'){ ?>
+<?php if($pageTitle=='Payment Details' || $pageTitle=='Add New Payment Details' || $pageTitle=='Edit Payment Details'){ ?>
 	<script type="text/javascript">
 		$(document).ready(function() {
 		    var dt = $('#view_payment_details').DataTable({

@@ -236,7 +236,7 @@
                     </li>  -->
 
 
-                    <li class="treeview <?php if($pageUrl=="debitnote" || $pageUrl=="addnewdebitnote" || $pageUrl=="paymentdetails" || $pageUrl=="addnewpaymentdetails" || $pageUrl=="poddetails" || $pageUrl=='addNewPODdetails' || $pageUrl=='addpaymentdetailsdata' || $pageUrl=="qualityrecord" || $pageUrl=='addNewqualityrecord'){echo 'active';}?>">
+                    <li class="treeview <?php if($pageUrl=="debitnote" || $pageUrl=="addnewdebitnote" || $pageUrl=='editdebitnoteform' || $pageUrl=="paymentdetails" || $pageUrl=="addnewpaymentdetails" || $pageUrl=='editpaymentdetails' || $pageUrl=="poddetails" || $pageUrl=='addNewPODdetails' || $pageUrl=='addpaymentdetailsdata' || $pageUrl=="qualityrecord" || $pageUrl=='addNewqualityrecord'){echo 'active';}?>">
                       <a href="#">
                         <i class="fa fa-file-text-o"></i> <span class="menu_label">Debit Note</span>
                           <span class="pull-right-container">
@@ -244,18 +244,13 @@
                           </span>
                       </a>
                       <ul class="treeview-menu" >
-                        <li class="line_height <?php if($pageUrl=="debitnote" || $pageUrl=="addnewdebitnote" || $pageUrl=="editdebitnoteform"){echo 'active';}?>"><a href="<?php echo base_url(); ?>debitnote"><i class="fa fa-cubes"></i> Debit Note</a></li>
-                        <li class="line_height <?php if($pageUrl=="paymentdetails" || $pageUrl=="addnewpaymentdetails" || $pageUrl=='addpaymentdetailsdata'){echo 'active';}?>"><a href="<?php echo base_url(); ?>paymentdetails"><i class="fa fa-cubes"></i> Payment Details</a></li>
+                        <li class="line_height <?php if($pageUrl=="debitnote" || $pageUrl=="addnewdebitnote" || $pageUrl=="editdebitnoteform" || $pageUrl=='editdebitnoteform'){echo 'active';}?>"><a href="<?php echo base_url(); ?>debitnote"><i class="fa fa-cubes"></i> Debit Note</a></li>
+                        <li class="line_height <?php if($pageUrl=="paymentdetails" || $pageUrl=="addnewpaymentdetails" || $pageUrl=='addpaymentdetailsdata' || $pageUrl=='editpaymentdetails'){echo 'active';}?>"><a href="<?php echo base_url(); ?>paymentdetails"><i class="fa fa-cubes"></i> Payment Details</a></li>
                         <li class="line_height <?php if($pageUrl=="poddetails" || $pageUrl=='addNewPODdetails'){echo 'active';}?>"><a href="<?php echo base_url(); ?>poddetails"><i class="fa fa-cubes"></i> POD Details</a></li>
-                        <li class="line_height <?php if($pageUrl=="qualityrecord" || $pageUrl=='addNewqualityrecord'){echo 'active';}?>"><a href="<?php echo base_url(); ?>qualityrecord"><i class="fa fa-cubes"></i>Quality Record</a></li>
-
+                        <li class="line_height <?php if($pageUrl=="qualityrecord" || $pageUrl=='addNewqualityrecord'){echo 'active';}?>"><a href="<?php echo base_url(); ?>qualityrecord"><i class="fa fa-cubes"></i> Quality Record</a></li>
                       </ul>
                     </li>
-
-                    
-                 
-
-              
+      
                     <li class="treeview <?php if($pageUrl=="userListing" || $pageUrl=="addNew" || $pageUrl=="editOld"){echo 'active';}?>">
                         <a href="#">
                             <i class="fa fa-users "></i>
