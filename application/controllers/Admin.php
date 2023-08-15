@@ -6921,7 +6921,6 @@ class Admin extends BaseController
 
     }
 
-
     public function fetchPaymentdetails(){
         $params = $_REQUEST;
         $totalRecords = $this->admin_model->getPaymentcount($params); 
@@ -7043,7 +7042,6 @@ class Admin extends BaseController
         }
     }
 
-
     public function poddetails(){
         $process = 'POD Detials';
         $processFunction = 'Admin/poddetails';
@@ -7076,7 +7074,6 @@ class Admin extends BaseController
         echo json_encode($json_data);
 
     }
-
 
     public function addNewPODdetails(){
 
@@ -7115,8 +7112,13 @@ class Admin extends BaseController
                     $saveNewdPODDetails= $this->admin_model->saveNewdPODDetails('',$data);
 
                     if($saveNewdPODDetails){
-                        $PODdetails_response['status'] = 'success';
-                        $PODdetails_response['error'] = array('POD_details_date'=>strip_tags(form_error('POD_details_date')),'POD_details_date'=>strip_tags(form_error('POD_details_date')),'select_with_po_without_po'=>strip_tags(form_error('select_with_po_without_po')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'remark'=>strip_tags(form_error('remark')),'po_date'=>strip_tags(form_error('po_date')));
+
+                        $update_last_inserted_id_poddetails = $this->admin_model->update_last_inserted_id_poddetails($saveNewdPODDetails);
+                        if($update_last_inserted_id_poddetails){
+
+                            $PODdetails_response['status'] = 'success';
+                            $PODdetails_response['error'] = array('POD_details_date'=>strip_tags(form_error('POD_details_date')),'POD_details_date'=>strip_tags(form_error('POD_details_date')),'select_with_po_without_po'=>strip_tags(form_error('select_with_po_without_po')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'remark'=>strip_tags(form_error('remark')),'po_date'=>strip_tags(form_error('po_date')));
+                        }
                     }
                     
                 }
@@ -7128,73 +7130,48 @@ class Admin extends BaseController
             $this->global['pageTitle'] = 'Add New POD Details';
             $data['vendorList']= $this->admin_model->fetchALLvendorList();
             $data['supplierList']= $this->admin_model->fetchALLsupplierList();
-            $data['getdebitnoteitemdetails']= $this->admin_model->getdebitnoteitemdetails();
+            $data['getpoddetails']= $this->admin_model->getpoddetails();
+            
             $data['getPreviousPODdetails_number'] = $this->admin_model->getPreviousPODdetails_number();
             $this->loadViews("masters/addnewPODdetails", $this->global, $data, NULL);
         }
 
     }
 
-
     public function savepoditem(){
 
         $post_submit = $this->input->post();
         if($post_submit){
 
-            $savdebitnoteitem_response = array();
+            $savepoitem_response = array();
+
             $this->form_validation->set_rules('part_number','Part Number','trim|required');
-            $this->form_validation->set_rules('description','Description','trim');
-            $this->form_validation->set_rules('invoice_no','Invoice No','trim|required');
-            $this->form_validation->set_rules('invoice_date','Invoice Date','trim|required');
-            $this->form_validation->set_rules('invoice_qty','Invoice Qty','trim|required');
-            $this->form_validation->set_rules('ok_qty','Ok Qty','trim|required');
-            $this->form_validation->set_rules('less_quantity','Less Quantity','trim|required');
-            $this->form_validation->set_rules('rejected_quantity','Rejected Quantity','trim|required');
-            $this->form_validation->set_rules('received_quantity','Received Quantity','trim|required');
-            $this->form_validation->set_rules('rate','Rate','trim|required');
-            $this->form_validation->set_rules('gst_rate','GST Rate','trim|required');
-            $this->form_validation->set_rules('sgst_value','SGST Value','trim');
-            $this->form_validation->set_rules('cgst_value','CGST Value','trim');
-            $this->form_validation->set_rules('igst_rate','IGST Value','trim');
-            $this->form_validation->set_rules('p_and_f_charges','P And F Charges','trim');
-            $this->form_validation->set_rules('item_remark','Item Remark','trim');
+            $this->form_validation->set_rules('order_qty','Order Qty','trim|required');
+            $this->form_validation->set_rules('lot_no','Lot No','trim|required');
+            $this->form_validation->set_rules('qty_recived','Qty Recived','trim|required');
+            $this->form_validation->set_rules('unit','Unit','trim|required');
+            $this->form_validation->set_rules('bill_no','Bill No','trim|required');
+            $this->form_validation->set_rules('bill_date','Bill Date','trim|required');
+            $this->form_validation->set_rules('short_excess_qty','Short Excess Qty','trim|required');
 
             if($this->form_validation->run() == FALSE)
             {
-                $savdebitnoteitem_response['status'] = 'failure';
-                $savdebitnoteitem_response['error'] = array('part_number'=>strip_tags(form_error('part_number')),'description'=>strip_tags(form_error('description')), 'invoice_no'=>strip_tags(form_error('invoice_no')), 'invoice_date'=>strip_tags(form_error('invoice_date')),'invoice_qty'=>strip_tags(form_error('invoice_qty')), 'ok_qty'=>strip_tags(form_error('ok_qty')), 'rejected_quantity'=>strip_tags(form_error('rejected_quantity')),'received_quantity'=>strip_tags(form_error('received_quantity')),'rate'=>strip_tags(form_error('rate')), 'gst_rate'=>strip_tags(form_error('gst_rate')),'sgst_value'=>strip_tags(form_error('sgst_value')),'cgst_value'=>strip_tags(form_error('cgst_value')),'igst_rate'=>strip_tags(form_error('igst_rate')),'grand_total'=>strip_tags(form_error('grand_total')),'item_remark'=>strip_tags(form_error('item_remark')));
+                $savepoitem_response['status'] = 'failure';
+                $savepoitem_response['error'] = array('part_number'=>strip_tags(form_error('part_number')),'description'=>strip_tags(form_error('description')), 'order_qty'=>strip_tags(form_error('order_qty')), 'lot_no'=>strip_tags(form_error('lot_no')),'qty_recived'=>strip_tags(form_error('qty_recived')), 'unit'=>strip_tags(form_error('unit')), 'bill_no'=>strip_tags(form_error('bill_no')),'bill_date'=>strip_tags(form_error('bill_date')),'short_excess_qty'=>strip_tags(form_error('short_excess_qty')), 'item_remark'=>strip_tags(form_error('item_remark')));
            
             }else{
 
-                $debit_id =  trim($this->input->post('debit_id'));
-                if($debit_id){
                     $data = array(
                         'part_number' =>  trim($this->input->post('part_number')),
-                        'debit_note_id' =>  trim($debit_id),
-                        'invoice_no' =>  trim($this->input->post('invoice_no')),
-                        'invoice_date' =>  trim($this->input->post('invoice_date')),
-                        'invoice_qty' =>  trim($this->input->post('invoice_qty')),
-                        'ok_qty' =>  trim($this->input->post('ok_qty')),
-                        'less_quantity' =>  trim($this->input->post('less_quantity')),
-                        'rejected_quantity' =>  trim($this->input->post('rejected_quantity')),
-                        'received_quantity' =>  trim($this->input->post('received_quantity')),
-                        'rate' =>  trim($this->input->post('rate')),
-                        'gst_rate' =>  trim($this->input->post('gst_rate')),
-                        'SGST_value' =>  trim($this->input->post('sgst_value')),
-                        'CGST_value' =>  trim($this->input->post('cgst_value')),
-                        'IGST_value' =>  trim($this->input->post('igst_rate')),
-    
-                        'SGST_value_ok_val' =>  trim($this->input->post('SGST_rate_ok')),
-                        'CGST_value_ok_val' =>  trim($this->input->post('CGST_rate_ok')),
-                        'IGST_value_ok_val' =>  trim($this->input->post('igst_rate_ok')),
-                        'p_and_f_charges' =>  trim($this->input->post('p_and_f_charges')),
-                        'total_amount_of_ok_qty_data' =>trim($this->input->post('total_amount_of_ok_qty_data')),
-                       // 'grand_total' =>  trim($this->input->post('grand_total')),
-                        'total_amount_of_ok_qty' =>trim($this->input->post('total_ok_qty_amount')),
-                        'debit_amount' =>  trim($this->input->post('debit_amount')),
-                        'remark'=>  trim($this->input->post('item_remark')),
-                        'pre_debit_note_date' =>   trim($this->input->post('pre_debit_note_date')),
-                        'pre_select_with_po_without_po ' =>   trim($this->input->post('pre_select_with_po_without_po')),
+                        'order_qty' =>  trim($this->input->post('order_qty')),
+                        'lot_no' =>  trim($this->input->post('lot_no')),
+                        'qty_recived' =>  trim($this->input->post('qty_recived')),
+                        'unit' =>  trim($this->input->post('unit')),
+                        'bill_no' =>  trim($this->input->post('bill_no')),
+                        'bill_date' =>  trim($this->input->post('bill_date')),
+                        'short_excess_qty' =>  trim($this->input->post('short_excess_qty')),
+                        'remark' =>  trim($this->input->post('item_remark')),
+                        'pre_pod_date' =>   trim($this->input->post('pre_pod_date')),
                         'pre_vendor_supplier_name' =>   trim($this->input->post('pre_vendor_supplier_name')),
                         'pre_vendor_name' =>    trim($this->input->post('pre_vendor_name')),
                         'pre_vendor_po_number' =>  trim($this->input->post('pre_vendor_po_number')),
@@ -7204,58 +7181,15 @@ class Admin extends BaseController
                         'pre_remark' =>    trim($this->input->post('pre_remark')),
                     );
 
-
-                }else{
-
-                    $data = array(
-                        'part_number' =>  trim($this->input->post('part_number')),
-                        'invoice_no' =>  trim($this->input->post('invoice_no')),
-                        'invoice_date' =>  trim($this->input->post('invoice_date')),
-                        'invoice_qty' =>  trim($this->input->post('invoice_qty')),
-                        'ok_qty' =>  trim($this->input->post('ok_qty')),
-                        'less_quantity' =>  trim($this->input->post('less_quantity')),
-                        'rejected_quantity' =>  trim($this->input->post('rejected_quantity')),
-                        'received_quantity' =>  trim($this->input->post('received_quantity')),
-                        'rate' =>  trim($this->input->post('rate')),
-                        'gst_rate' =>  trim($this->input->post('gst_rate')),
-                        'SGST_value' =>  trim($this->input->post('sgst_value')),
-                        'CGST_value' =>  trim($this->input->post('cgst_value')),
-                        'IGST_value' =>  trim($this->input->post('igst_rate')),
-    
-                        'SGST_value_ok_val' =>  trim($this->input->post('SGST_rate_ok')),
-                        'CGST_value_ok_val' =>  trim($this->input->post('CGST_rate_ok')),
-                        'IGST_value_ok_val' =>  trim($this->input->post('igst_rate_ok')),
-                        'p_and_f_charges' =>  trim($this->input->post('p_and_f_charges')),
-    
-                       // 'grand_total' =>  trim($this->input->post('grand_total')),
-                        'total_amount_of_ok_qty' =>trim($this->input->post('total_ok_qty_amount')),
-                        'total_amount_of_ok_qty_data' =>trim($this->input->post('total_amount_of_ok_qty_data')),
-                        'debit_amount' =>  trim($this->input->post('debit_amount')),
-                        'remark'=>  trim($this->input->post('item_remark')),
-                        'pre_debit_note_date' =>   trim($this->input->post('pre_debit_note_date')),
-                        'pre_select_with_po_without_po ' =>   trim($this->input->post('pre_select_with_po_without_po')),
-                        'pre_vendor_supplier_name' =>   trim($this->input->post('pre_vendor_supplier_name')),
-                        'pre_vendor_name' =>    trim($this->input->post('pre_vendor_name')),
-                        'pre_vendor_po_number' =>  trim($this->input->post('pre_vendor_po_number')),
-                        'pre_supplier_name' =>    trim($this->input->post('pre_supplier_name')),
-                        'pre_supplier_po_number' =>    trim($this->input->post('pre_supplier_po_number')),
-                        'pre_po_date' =>    trim($this->input->post('pre_po_date')),
-                        'pre_remark' =>    trim($this->input->post('pre_remark')),
-                    );
-
-                }
-
-            
-
-                $savedebitnoteitemdetails= $this->admin_model->savedebitnoteitemdetails('',$data);
-                if($savedebitnoteitemdetails){
-                    $savdebitnoteitem_response['status'] = 'success';
-                    $savdebitnoteitem_response['error'] = array('part_number'=>strip_tags(form_error('part_number')),'description'=>strip_tags(form_error('description')), 'invoice_no'=>strip_tags(form_error('invoice_no')), 'invoice_date'=>strip_tags(form_error('invoice_date')),'invoice_qty'=>strip_tags(form_error('invoice_qty')), 'ok_qty'=>strip_tags(form_error('ok_qty')), 'rejected_quantity'=>strip_tags(form_error('rejected_quantity')),'received_quantity'=>strip_tags(form_error('received_quantity')),'rate'=>strip_tags(form_error('rate')), 'gst_rate'=>strip_tags(form_error('gst_rate')),'sgst_value'=>strip_tags(form_error('sgst_value')),'cgst_value'=>strip_tags(form_error('cgst_value')),'igst_rate'=>strip_tags(form_error('igst_rate')),'grand_total'=>strip_tags(form_error('grand_total')),'item_remark'=>strip_tags(form_error('item_remark')));
+                $savepoitem= $this->admin_model->savepoitem('',$data);
+                if($savepoitem){
+                    $savepoitem_response['status'] = 'success';
+                    $savepoitem_response['error'] = array('part_number'=>strip_tags(form_error('part_number')),'description'=>strip_tags(form_error('description')), 'order_qty'=>strip_tags(form_error('order_qty')), 'lot_no'=>strip_tags(form_error('lot_no')),'qty_recived'=>strip_tags(form_error('qty_recived')), 'unit'=>strip_tags(form_error('unit')), 'bill_no'=>strip_tags(form_error('bill_no')),'bill_date'=>strip_tags(form_error('bill_date')),'short_excess_qty'=>strip_tags(form_error('short_excess_qty')), 'item_remark'=>strip_tags(form_error('item_remark')));
                 }
 
             }
 
-            echo json_encode($savdebitnoteitem_response);
+            echo json_encode($savepoitem_response);
         }
 
     }
@@ -7302,7 +7236,6 @@ class Admin extends BaseController
 
     }
 
-
     public function get_vendorpodata_with_debit_data(){
 
         $vendor_po_id=$this->input->post('vendor_po_id');
@@ -7345,7 +7278,6 @@ class Admin extends BaseController
 
     }
 
-
     public function qualityrecord(){
 
         $process = 'Qulity Record';
@@ -7355,8 +7287,6 @@ class Admin extends BaseController
         $this->loadViews("masters/qualityrecord", $this->global, $data, NULL);  
     }
     
-
-
     public function addNewqualityrecord(){
 
         $post_submit = $this->input->post();
@@ -7414,6 +7344,40 @@ class Admin extends BaseController
             $this->loadViews("masters/addnewqulityrecord", $this->global, $data, NULL);
         }
        
+    }
+
+    public function deletepoddetails(){
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->deletepoddetails(trim($this->input->post('id')));
+            if ($result) {
+                        $process = 'Delete POD Details';
+                        $processFunction = 'Admin/deletepoddetails';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
+
+    }
+
+    public function deletePODitem(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->deletePODitem(trim($this->input->post('id')));
+            if ($result) {
+                        $process = 'Delete POD Item';
+                        $processFunction = 'Admin/deletePODitem';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
     }
     
     

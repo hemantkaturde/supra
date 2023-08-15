@@ -11176,7 +11176,7 @@
 
 <?php if($pageTitle=='POD Detials' || $pageTitle=='Add New POD Details'){ ?>
 	<script type="text/javascript">
-		 $(document).ready(function() {
+		$(document).ready(function() {
 		    var dt = $('#view_POD_details').DataTable({
 	            "columnDefs": [ 
 	                 { className: "details-control", "targets": [ 0 ] },
@@ -11187,6 +11187,8 @@
 					 { "width": "10%", "targets": 4 },
 					 { "width": "10%", "targets": 5 },
 					 { "width": "10%", "targets": 6 },
+					 { "width": "10%", "targets": 7 },
+					 { "width": "8%", "targets": 8 },
 	            ],
 	            responsive: true,
 	            "oLanguage": {
@@ -11687,7 +11689,6 @@
 			
 		 });
 
-		 
 		 $(document).on('click','#savePODitem',function(e){
 			e.preventDefault();
 			   $(".loader_ajax").show();
@@ -11695,18 +11696,17 @@
 
 			   var part_number =   $('#part_number').val();
 			   var description =   $('#description').val();
-			   var invoice_no =   $('#invoice_no').val();
-			   var invoice_date =   $('#invoice_date').val();
-			   var invoice_qty =   $('#invoice_qty').val();
-			   var ok_qty =   $('#ok_qty').val();
-			   var less_quantity =   $('#less_quantity').val();
-			   var rejected_quantity =   $('#rejected_quantity').val();
-			   var received_quantity =   $('#received_quantity').val();
-			   var rate =   $('#rate').val();
-			
+			   var order_qty =   $('#order_qty').val();
+			   var lot_no =   $('#lot_no').val();
+			   var qty_recived =   $('#qty_recived').val();
+			   var unit =   $('#unit').val();
+			   var bill_no =   $('#bill_no').val();
+			   var bill_date =   $('#bill_date').val();
+			   var short_excess_qty =   $('#short_excess_qty').val();
+			   var item_remark =   $('#item_remark').val();
+	
 
 			   var pre_debit_note_date =   $('#debit_note_date').val();
-			   var pre_select_with_po_without_po =   $('#select_with_po_without_po').val();
 			   var pre_vendor_supplier_name =   $('#vendor_supplier_name').val();
 			   var pre_vendor_name =   $('#vendor_name').val();
 			   var pre_vendor_po_number =   $('#vendor_po_number').val();
@@ -11715,13 +11715,12 @@
 			   var pre_po_date =   $('#po_date').val();
 			   var pre_remark =   $('#remark').val();
 
-		
 			
 			   $.ajax({
 				url : "<?php echo base_url();?>savepoditem",
 				type: "POST",
 				 //data : formData,
-				 data :{part_number:part_number,invoice_no:invoice_no,invoice_date:invoice_date,invoice_qty:invoice_qty,ok_qty:ok_qty,less_quantity:less_quantity,rejected_quantity:rejected_quantity,received_quantity:received_quantity,rate:rate,gst_rate:gst_rate,sgst_value:sgst_value,cgst_value:cgst_value,igst_rate:igst_rate,item_remark:item_remark,pre_debit_note_date:pre_debit_note_date,pre_select_with_po_without_po:pre_select_with_po_without_po,pre_vendor_supplier_name:pre_vendor_supplier_name,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_supplier_name:pre_supplier_name,pre_supplier_po_number:pre_supplier_po_number,pre_po_date:pre_po_date,pre_remark:pre_remark,sgst_value:sgst_value,cgst_value:cgst_value,SGST_rate_ok:SGST_rate_ok,CGST_rate_ok:CGST_rate_ok,igst_rate:igst_rate,igst_rate_ok:igst_rate_ok,debit_amount:debit_amount,total_ok_qty_amount:total_ok_qty_amount,debit_id:debit_id,total_amount_of_ok_qty_data:total_amount_of_ok_qty_data,p_and_f_charges:p_and_f_charges},
+				 data :{part_number:part_number,order_qty:order_qty,lot_no:lot_no,qty_recived:qty_recived,unit:unit,bill_no:bill_no,bill_date:bill_date,short_excess_qty:short_excess_qty,item_remark:item_remark, pre_debit_note_date:pre_debit_note_date,pre_vendor_supplier_name:pre_vendor_supplier_name,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_supplier_name:pre_supplier_name,pre_supplier_po_number:pre_supplier_po_number,pre_po_date:pre_po_date,pre_remark:pre_remark},
 				 method: "POST",
                 // data :{package_id:package_id},
                 cache:false,
@@ -11745,12 +11744,8 @@
 							button: "Ok",
 							},function(){ 
 
-								if(debit_id){
-									window.location.href = "<?php echo base_url().'editdebitnoteform'?>"+debit_id;
-								}else{
-									window.location.href = "<?php echo base_url().'addnewdebitnote'?>";
-								}
-							
+							window.location.href = "<?php echo base_url().'addNewPODdetails'?>";
+								
 						});		
 				    }
 					
@@ -11762,6 +11757,104 @@
 			   });
 			return false;
 	     });
+
+		 $(document).on('click','.deletepoddetails',function(e){
+					var elemF = $(this);
+					e.preventDefault();
+					swal({
+						title: "Are you sure?",
+						text: "Delete POD Details",
+						type: "warning",
+						showCancelButton: true,
+						closeOnClickOutside: false,
+						confirmButtonClass: "btn-sm btn-danger",
+						confirmButtonText: "Yes, delete it!",
+						cancelButtonText: "No, cancel plz!",
+						closeOnConfirm: false,
+						closeOnCancel: false
+					}, function(isConfirm) {
+						if (isConfirm) {
+									$.ajax({
+										url : "<?php echo base_url();?>deletepoddetails",
+										type: "POST",
+										data : 'id='+elemF.attr('data-id'),
+										success: function(data, textStatus, jqXHR)
+										{
+											const obj = JSON.parse(data);
+										
+											if(obj.status=='success'){
+												swal({
+													title: "Deleted!",
+													text: "POD Details Succesfully Deleted",
+													icon: "success",
+													button: "Ok",
+													},function(){ 
+															window.location.href = "<?php echo base_url().'poddetails'?>";
+												});	
+											}
+
+										},
+										error: function (jqXHR, textStatus, errorThrown)
+										{
+											$(".loader_ajax").hide();
+										}
+									})
+								}
+								else {
+						swal("Cancelled", "POD Details deletion cancelled ", "error");
+						}
+					});
+		 });
+
+		 $(document).on('click','.deletePODitem',function(e){
+		
+			var elemF = $(this);
+				e.preventDefault();
+				swal({
+					title: "Are you sure?",
+					text: "Delete POD Form Item ",
+					type: "warning",
+					showCancelButton: true,
+					closeOnClickOutside: false,
+					confirmButtonClass: "btn-sm btn-danger",
+					confirmButtonText: "Yes, delete it!",
+					cancelButtonText: "No, cancel plz!",
+					closeOnConfirm: false,
+					closeOnCancel: false
+				}, function(isConfirm) {
+					if (isConfirm) {
+								$.ajax({
+									url : "<?php echo base_url();?>deletePODitem",
+									type: "POST",
+									data : 'id='+elemF.attr('data-id'),
+									success: function(data, textStatus, jqXHR)
+									{
+										const obj = JSON.parse(data);
+									
+										if(obj.status=='success'){
+											swal({
+												title: "Deleted!",
+												text: "POD Item Deleted Succesfully",
+												icon: "success",
+												button: "Ok",
+												},function(){ 
+														window.location.href = "<?php echo base_url().'addNewPODdetails'?>";
+											});	
+										}
+
+									},
+									error: function (jqXHR, textStatus, errorThrown)
+									{
+										$(".loader_ajax").hide();
+									}
+								})
+							}
+							else {
+					swal("Cancelled", "POD Item deletion cancelled ", "error");
+					}
+				});
+	     });
+
 
     </script>
 <?php } ?>

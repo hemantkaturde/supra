@@ -5018,7 +5018,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['po_date'] = $value['po_date'];
                 $data[$counter]['action'] = '';
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editdebitnoteform/".$value['pod_details_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
-                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['pod_details_id']."' class='fa fa-trash-o deletepaymentdetails' aria-hidden='true'></i>"; 
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['pod_details_id']."' class='fa fa-trash-o deletepoddetails' aria-hidden='true'></i>"; 
                 $counter++; 
             }
         }
@@ -5072,7 +5072,6 @@ class Admin_model extends CI_Model
         return $data;
     }
 
-
     public function get_vendorpodata_with_debit_data($vendor_po_id){
 
         $this->db->select(TBL_DEBIT_NOTE.'.tds_amount,'.TBL_DEBIT_NOTE.'.total_debit_amount,'.TBL_DEBIT_NOTE.'.debit_note_number');
@@ -5093,7 +5092,80 @@ class Admin_model extends CI_Model
         return $data;
     }
     
+    public function savepoitem($id,$data){
+
+        if($id != '') {
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_POD_ITEM, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_POD_ITEM, $data)) {
+                return $this->db->insert_id();;
+            } else {
+                return FALSE;
+            }
+        }
+
+    }
+
+    public function update_last_inserted_id_poddetails($saveNewdPODDetails){
+
+        $data = array(
+            'POD_id' =>$saveNewdPODDetails
+        );
+
+        $this->db->where(TBL_POD_ITEM.'.POD_id IS NULL');
+        if($this->db->update(TBL_POD_ITEM,$data)){
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+
+    }  
     
+    public function deletepoddetails($id){
+        $this->db->where('pod_details_id', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_POD_DETAILS)){
+            
+            $this->db->where('POD_id', $id);
+            //$this->db->delete(TBL_SUPPLIER);
+            if($this->db->delete(TBL_POD_ITEM)){
+               return TRUE;
+            }else{
+               return FALSE;
+            }
+           return TRUE;
+        }else{
+           return FALSE;
+        }
+    }
+
+    public function getpoddetails(){
+
+        $this->db->select('*,'.TBL_POD_ITEM.'.id as pod_id,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_po,'.TBL_POD_ITEM.'.remark as pod_remark');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_POD_ITEM.'.part_number');
+        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_POD_ITEM.'.pre_vendor_po_number','left');
+        $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_POD_ITEM.'.pre_supplier_po_number','left');
+        $this->db->where(TBL_POD_ITEM.'.POD_id IS NULL');
+        $query = $this->db->get(TBL_POD_ITEM);
+        $data = $query->result_array();
+        return $data;
+    }
+
+    public function deletePODitem($id){
+        $this->db->where('id', $id);
+        if($this->db->delete(TBL_POD_ITEM)){
+           return TRUE;
+        }else{
+           return FALSE;
+        }
+
+    }
 
 }
 

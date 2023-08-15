@@ -146,14 +146,12 @@ define('TBL_REWORK_REJECTION','tbl_rework_rejection');
 define('TBL_REWORK_REJECTION_ITEM','tbl_rework_rejection_item');
 define('TBL_CHALLAN_FORM','tbl_challan_form');
 define('TBL_CHALLAN_FORM_ITEM','tbl_challanform_item');
-
 define('TBL_DEBIT_NOTE','tbl_debit_note');
 define('TBL_DEBIT_NOTE_ITEM','tbl_debit_note_item');
-
 define('TBL_PAYMENT_DETAILS','tbl_payment_details');
 
 define('TBL_POD_DETAILS','tbl_pod_details');
-
+define('TBL_POD_ITEM','tbl_pod_item');
 
 
 
