@@ -2820,7 +2820,6 @@ class Admin_model extends CI_Model
 
     }
 
-
     public function getVendorbillofmaterialDetails($id){
         $this->db->select('*');
         $query = $this->db->get(TBL_BILL_OF_MATERIAL_VENDOR);
@@ -2991,7 +2990,6 @@ class Admin_model extends CI_Model
         return $data;
     }
 
-
     public function getPreviousincomingdetails(){
         $this->db->select('incoming_details_id');
         $this->db->where(TBL_INCOMING_DETAILS.'.status', 1);
@@ -3002,8 +3000,6 @@ class Admin_model extends CI_Model
         return $rowcount;
 
     }
-
-
 
     public function getPreviousincomingdetailsforedit($id){
         $this->db->select('*,'.TBL_INCOMING_DETAILS.'.remark as incomig_remark,'.TBL_INCOMING_DETAILS.'.vendor_po_number as venpo');
@@ -4803,7 +4799,6 @@ class Admin_model extends CI_Model
 
     }
 
-
     public function getdebitnoteitemdetailsedit($id){
 
         $this->db->select('*,'.TBL_DEBIT_NOTE_ITEM.'.id as debit_note_id,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_po,'.TBL_DEBIT_NOTE_ITEM.'.remark as debit_note_remark');
@@ -4818,7 +4813,6 @@ class Admin_model extends CI_Model
 
     }
 
-
     public function getTotalDebitAndokQty(){
 
 
@@ -4829,7 +4823,6 @@ class Admin_model extends CI_Model
         return $data;
 
     }
-
 
     public function getPaymentcount($params){
 
@@ -5182,11 +5175,15 @@ class Admin_model extends CI_Model
         $this->db->select('*');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_QUALITY_RECORDS.'.vendor_id');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_QUALITY_RECORDS.'.vendor_po');
+        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_QUALITY_RECORDS.'.buyer_name','left');
+        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_QUALITY_RECORDS.'.buyer_po_number','left');
 
         if($params['search']['value'] != "") 
         {
             $this->db->where("(".TBL_QUALITY_RECORDS.".quality_records_number LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_QUALITY_RECORDS.".quality_records_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%')");
         }
@@ -5194,19 +5191,21 @@ class Admin_model extends CI_Model
         $query = $this->db->get(TBL_QUALITY_RECORDS);
         $rowcount = $query->num_rows();
         return $rowcount;
-
-
     }
 
     public function getqulityformdata($params){
-        $this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_pomaster,'.TBL_QUALITY_RECORDS.'.quality_records_id  as quality_records_id');
+        $this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_pomaster,'.TBL_QUALITY_RECORDS.'.quality_records_id  as quality_records_id,'.TBL_BUYER_PO_MASTER.'.sales_order_number');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_QUALITY_RECORDS.'.vendor_id');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_QUALITY_RECORDS.'.vendor_po');
+        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_QUALITY_RECORDS.'.buyer_name','left');
+        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_QUALITY_RECORDS.'.buyer_po_number','left');
 
         if($params['search']['value'] != "") 
         {
             $this->db->where("(".TBL_QUALITY_RECORDS.".quality_records_number LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_QUALITY_RECORDS.".quality_records_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%')");
         }
@@ -5228,7 +5227,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['vendor_name'] = $value['vendorname'];
                 $data[$counter]['vendor_po_number'] = $value['vendor_pomaster'];
                 $data[$counter]['buyer_name'] = $value['buyer_name'];
-                $data[$counter]['buyer_po'] = $value['buyer_po'];
+                $data[$counter]['buyer_po'] = $value['sales_order_number'];
                 $data[$counter]['action'] = '';
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editchallanform/".$value['quality_records_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['quality_records_id']."' class='fa fa-trash-o deletechallanform' aria-hidden='true'></i>"; 
@@ -5238,7 +5237,36 @@ class Admin_model extends CI_Model
         return $data;
     }
 
-    
+    public function saveualitydetails($id,$data){
+
+        if($id != '') {
+            $this->db->where('quality_records_id', $id);
+            if($this->db->update(TBL_QUALITY_RECORDS, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_QUALITY_RECORDS, $data)) {
+                return $this->db->insert_id();;
+            } else {
+                return FALSE;
+            }
+        }
+
+    }
+
+    public function get_prevoius_QR_REcord(){
+
+        $this->db->select('quality_records_number');
+        $this->db->where(TBL_QUALITY_RECORDS.'.status', 1);
+        $this->db->limit(1);
+        $this->db->order_by(TBL_QUALITY_RECORDS.'.quality_records_id','DESC');
+        $query = $this->db->get(TBL_QUALITY_RECORDS);
+        $rowcount = $query->result_array();
+        return $rowcount;
+
+    }
 
 
 }

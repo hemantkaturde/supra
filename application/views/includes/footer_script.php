@@ -11856,7 +11856,6 @@
 <?php } ?>
 
 
-
 <?php if($pageTitle=='Qulity Record' || $pageTitle=='Add New Qulity Record Form' ){ ?>
 	<script type="text/javascript">
          $(document).ready(function() {
@@ -11865,11 +11864,11 @@
 	                 { className: "details-control", "targets": [ 0 ] },
 	                 { "width": "10%", "targets": 0 },
 	                 { "width": "10%", "targets": 1 },
-					 { "width": "10%", "targets": 2 },
+					 { "width": "15%", "targets": 2 },
 	                 { "width": "10%", "targets": 3 },
-					 { "width": "10%", "targets": 4 },
+					 { "width": "15%", "targets": 4 },
 					 { "width": "10%", "targets": 5 },
-					 { "width": "10%", "targets": 6 }
+					 { "width": "8%", "targets": 6 }
 	            ],
 	            responsive: true,
 	            "oLanguage": {
@@ -12078,7 +12077,7 @@
 
 			var formData = new FormData($("#addnewqualityform")[0]);
 			$.ajax({
-				url : "<?php echo base_url();?>addNewPODdetails",
+				url : "<?php echo base_url();?>addNewqualityrecord",
 				type: "POST",
 				data : formData,
 				cache: false,
@@ -12116,6 +12115,78 @@
 			});
 			return false;
 		 });
+
+
+		 $(document).on('click','#savePODitem',function(e){
+			e.preventDefault();
+			   $(".loader_ajax").show();
+			   var formData = new FormData($("#savePODitem_form")[0]);
+
+			   var part_number =   $('#part_number').val();
+			   var description =   $('#description').val();
+			   var order_qty =   $('#order_qty').val();
+			   var lot_no =   $('#lot_no').val();
+			   var qty_recived =   $('#qty_recived').val();
+			   var unit =   $('#unit').val();
+			   var bill_no =   $('#bill_no').val();
+			   var bill_date =   $('#bill_date').val();
+			   var short_excess_qty =   $('#short_excess_qty').val();
+			   var item_remark =   $('#item_remark').val();
+	
+
+			   var pre_debit_note_date =   $('#debit_note_date').val();
+			   var pre_vendor_supplier_name =   $('#vendor_supplier_name').val();
+			   var pre_vendor_name =   $('#vendor_name').val();
+			   var pre_vendor_po_number =   $('#vendor_po_number').val();
+			   var pre_supplier_name =   $('#supplier_name').val();
+			   var pre_supplier_po_number =   $('#supplier_po_number').val();
+			   var pre_po_date =   $('#po_date').val();
+			   var pre_remark =   $('#remark').val();
+
+			
+			   $.ajax({
+				url : "<?php echo base_url();?>savepoditem",
+				type: "POST",
+				 //data : formData,
+				 data :{part_number:part_number,order_qty:order_qty,lot_no:lot_no,qty_recived:qty_recived,unit:unit,bill_no:bill_no,bill_date:bill_date,short_excess_qty:short_excess_qty,item_remark:item_remark, pre_debit_note_date:pre_debit_note_date,pre_vendor_supplier_name:pre_vendor_supplier_name,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_supplier_name:pre_supplier_name,pre_supplier_po_number:pre_supplier_po_number,pre_po_date:pre_po_date,pre_remark:pre_remark},
+				 method: "POST",
+                // data :{package_id:package_id},
+                cache:false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+						$(".loader_ajax").hide();
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						swal({
+							title: "Success",
+							text: "Item Successfully Added!",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+
+							window.location.href = "<?php echo base_url().'addNewPODdetails'?>";
+								
+						});		
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			   });
+			return false;
+	     });
+
+
 
     </script>
 <?php } ?>

@@ -24,28 +24,28 @@
                      <div class="box-body">
                         <div class="col-md-4">
                            <?php
-                              if($getPreviousPODdetails_number[0]['pod_details_number']){
-                                  $arr = str_split($getPreviousPODdetails_number[0]['pod_details_number']);
+                              if($get_prevoius_QR_REcord[0]['quality_records_number']){
+                                  $arr = str_split($get_prevoius_QR_REcord[0]['quality_records_number']);
                                   $i = end($arr);
-                                  $inrno= "SQPD2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
-                                  $POD_details_number = $inrno;
+                                  $inrno= "SQQR2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                  $quality_records_number = $inrno;
                               }else{
-                                  $POD_details_number = 'SQPD23240001';
+                                  $quality_records_number = 'SQQR23240001';
                               }
                               ?>
                               <div class="col-md-12">
                                  <div class="form-group">
-                                    <label for="POD_details_number">QR Number<span class="required">*</span></label>
-                                    <input type="text" class="form-control" id="c" value="<?=$POD_details_number?>" name="POD_details_number" readonly>
-                                    <p class="error POD_details_number_error"></p>
+                                    <label for="QR_details_number">QR Number<span class="required">*</span></label>
+                                    <input type="text" class="form-control" id="c" value="<?=$quality_records_number?>" name="QR_details_number" readonly>
+                                    <p class="error QR_details_number_error"></p>
                                  </div>
                               </div>
                               <?php $date= date('Y-m-d'); ?>
                               <div class="col-md-12">
                                  <div class="form-group">
-                                    <label for="POD_details_date">QR Date <span class="required">*</span></label>
-                                    <input type="text" class="form-control datepicker"  value="<?=$date?>" id="POD_details_date" name="POD_details_date" required>
-                                    <p class="error POD_details_date_error"></p>
+                                    <label for="QR_details_date">QR Date <span class="required">*</span></label>
+                                    <input type="text" class="form-control datepicker"  value="<?=$date?>" id="QR_details_date" name="QR_details_date" required>
+                                    <p class="error QR_details_date_error"></p>
                                  </div>
                               </div>
                               <div class="col-md-12" >
@@ -170,7 +170,7 @@
                                                 <!-- <span aria-hidden="true">&times;</span> -->
                                                 </button>
                                             </div>
-                                            <form role="form" id="savePODitem_form" action="#" method="post" role="form">
+                                            <form role="form" id="savequlityrecord_form" action="#" method="post" role="form">
 
                                                 <div class="modal-body">
                                                     <div class="loader_ajax" style="display:none;">
@@ -243,7 +243,7 @@
 
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary btn-xl closedebitnotemodel" data-dismiss="modal">Close</button>
-                                                    <button type="submit" id="savedebitnoteitem" name="savedebitnoteitem" class="btn btn-primary" class="btn btn-success btn-xl">Save</button>
+                                                    <button type="submit" id="savequlityrecorditem" name="savequlityrecorditem" class="btn btn-primary" class="btn btn-success btn-xl">Save</button>
                                                 </div>
                                             </form>    
                                             </div>

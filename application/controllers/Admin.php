@@ -5102,7 +5102,6 @@ class Admin extends BaseController
         }
     }
 
-
     public function editpackinginstraction($packinginstractionid){
 
             $process = 'Edit Packing Instraction Details';
@@ -7310,57 +7309,51 @@ class Admin extends BaseController
     public function addNewqualityrecord(){
 
         $post_submit = $this->input->post();
-        if($post_submit){
-               $PODdetails_response = array();
 
-                $this->form_validation->set_rules('POD_details_number','POD Details Number','trim|required');
-                $this->form_validation->set_rules('POD_details_date','POD Details Date','trim|required');
-                $this->form_validation->set_rules('select_with_po_without_po','With PO Without PO','trim|required');
-                $this->form_validation->set_rules('vendor_supplier_name','Vendor/Supplier Name','trim|required');
-                $this->form_validation->set_rules('vendor_name','Vendor Name','trim');
-                $this->form_validation->set_rules('vendor_po_number','Vendor PO Number','trim');
-                $this->form_validation->set_rules('supplier_name','Supplier Name','trim');
-                $this->form_validation->set_rules('supplier_po_number','Supplier PO Number','trim');
+        if($post_submit){
+
+               $qualitydetails_response = array();
+                $this->form_validation->set_rules('QR_details_number','QR Number','trim|required');
+                $this->form_validation->set_rules('QR_details_date','QR Date','trim|required');
+                $this->form_validation->set_rules('vendor_name','Vendor Name','trim|required');
+                $this->form_validation->set_rules('vendor_po_number','Vendor PO Number','trim|required');
                 $this->form_validation->set_rules('po_date','PO Date','trim');
+                $this->form_validation->set_rules('buyer_name','Buyer Name','trim');
+                $this->form_validation->set_rules('buyer_po_number','Buyer PO Number','trim');
                 $this->form_validation->set_rules('remark','Remark','trim');
 
                 if($this->form_validation->run() == FALSE)
                 {
-                    $PODdetails_response['status'] = 'failure';
-                    $PODdetails_response['error'] = array('POD_details_date'=>strip_tags(form_error('POD_details_date')),'POD_details_date'=>strip_tags(form_error('POD_details_date')),'select_with_po_without_po'=>strip_tags(form_error('select_with_po_without_po')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'remark'=>strip_tags(form_error('remark')),'po_date'=>strip_tags(form_error('po_date')));
+                    $qualitydetails_response['status'] = 'failure';
+                    $qualitydetails_response['error'] = array('QR_details_number'=>strip_tags(form_error('QR_details_number')),'QR_details_date'=>strip_tags(form_error('QR_details_date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'po_date'=>strip_tags(form_error('po_date')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'remark'=>strip_tags(form_error('remark')));
                 }else{
 
                     $data = array(
-                        'POD_details_number' =>  trim($this->input->post('POD_details_number')),
-                        'POD_details_date' => trim($this->input->post('POD_details_date')),
-                        'type'=>trim($this->input->post('select_with_po_without_po')),
-                        'supplier_vendor_name' =>  trim($this->input->post('vendor_supplier_name')),
+                        'quality_records_number' =>  trim($this->input->post('QR_details_number')),
+                        'quality_records_date' => trim($this->input->post('QR_details_date')),
                         'vendor_id' =>  trim($this->input->post('vendor_name')),
                         'vendor_po' =>  trim($this->input->post('vendor_po_number')),
-                        'supplier_id' =>  trim($this->input->post('supplier_name')),
-                        'supplier_po' =>  trim($this->input->post('supplier_po_number')),
                         'po_date' =>  trim($this->input->post('po_date')),
+                        'buyer_name' =>  trim($this->input->post('buyer_name')),
+                        'buyer_po_number' =>  trim($this->input->post('buyer_po_number')),
                         'remark' =>  trim($this->input->post('remark'))
                     );
 
-                    $saveNewdPODDetails= $this->admin_model->saveNewdPODDetails('',$data);
-
-                    if($saveNewdPODDetails){
-                        $PODdetails_response['status'] = 'success';
-                        $PODdetails_response['error'] = array('POD_details_date'=>strip_tags(form_error('POD_details_date')),'POD_details_date'=>strip_tags(form_error('POD_details_date')),'select_with_po_without_po'=>strip_tags(form_error('select_with_po_without_po')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'remark'=>strip_tags(form_error('remark')),'po_date'=>strip_tags(form_error('po_date')));
+                    $saveualitydetails= $this->admin_model->saveualitydetails('',$data);
+                    if($saveualitydetails){
+                        $qualitydetails_response['status'] = 'success';
+                        $qualitydetails_response['error'] = array('QR_details_number'=>strip_tags(form_error('QR_details_number')),'QR_details_date'=>strip_tags(form_error('QR_details_date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'po_date'=>strip_tags(form_error('po_date')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'remark'=>strip_tags(form_error('remark')));
                     }
                     
                 }
-             echo json_encode($PODdetails_response);
+             echo json_encode($qualitydetails_response);
         }else{
             $process = 'Add New Qulity Record Form';
             $processFunction = 'Admin/addNewqualityrecord';
             $this->logrecord($process,$processFunction);
             $this->global['pageTitle'] = 'Add New Qulity Record Form';
             $data['vendorList']= $this->admin_model->fetchALLvendorList();
-            $data['supplierList']= $this->admin_model->fetchALLsupplierList();
-            $data['getdebitnoteitemdetails']= $this->admin_model->getdebitnoteitemdetails();
-            $data['getPreviousPODdetails_number'] = $this->admin_model->getPreviousPODdetails_number();
+            $data['get_prevoius_QR_REcord']= $this->admin_model->get_prevoius_QR_REcord();
             $this->loadViews("masters/addnewqulityrecord", $this->global, $data, NULL);
         }
        
