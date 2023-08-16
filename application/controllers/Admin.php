@@ -4625,7 +4625,6 @@ class Admin extends BaseController
         $this->loadViews("masters/exportdetails", $this->global, $data, NULL);  
     }
 
-
     public function fetchexportdetails(){
         $params = $_REQUEST;
         $totalRecords = $this->admin_model->getExportdetailsCount($params); 
@@ -4651,7 +4650,6 @@ class Admin extends BaseController
 
     }
 
-
     public function packagingform(){
 
         $process = 'Packaging Form';
@@ -4672,7 +4670,6 @@ class Admin extends BaseController
         
     }
 
-
     public function incomingdetails(){
 
         $process = 'Incoming Details';
@@ -4682,7 +4679,6 @@ class Admin extends BaseController
         $this->loadViews("masters/incomingdetails", $this->global, $data, NULL);  
 
     }
-
 
     public function getVendorPonumberbyVendorid(){
 
@@ -4703,7 +4699,6 @@ class Admin extends BaseController
 		}
     }
 
-    
     public function getVendorpoitems(){
 
         if($this->input->post('part_number')) {
@@ -4721,7 +4716,6 @@ class Admin extends BaseController
         }
 
     }
-
 
     public function fetchincomingdeatils(){
 
@@ -4748,7 +4742,6 @@ class Admin extends BaseController
         echo json_encode($json_data);
 
     }
-
 
     public function addnewencomingdetails(){
 
@@ -5598,8 +5591,6 @@ class Admin extends BaseController
 
     }
 
-
-
     public function getBuyerDetailsBysupplierponumberforbuyerpo(){
         $supplier_po_number=$this->input->post('supplier_po_number');
         if($supplier_po_number) {
@@ -5618,8 +5609,6 @@ class Admin extends BaseController
 		}
 
     }
-
-
 
     public function getbuyerpoidforshowinitems(){
         $supplier_po_number=$this->input->post('supplier_po_number');
@@ -5640,7 +5629,6 @@ class Admin extends BaseController
 
     }
 
-
     public function viewexportdetails($packinginstarctionid){
 
         $packinginstarctionid=  $this->admin_model->getpackinginstarction_data_by_id(trim($packinginstarctionid));
@@ -5660,7 +5648,6 @@ class Admin extends BaseController
 
     }
 
-
     public function editjobwork($jobworkid){
         $process = 'Edit Job Work';
         $processFunction = 'Admin/editjobwork';
@@ -5673,14 +5660,12 @@ class Admin extends BaseController
 
     }
 
-
     public function scrapreturn(){
         $process = 'Scrap Return';
         $processFunction = 'Admin/scrapreturn';
         $this->global['pageTitle'] = 'Scrap Return';
         $this->loadViews("masters/scrapreturn", $this->global, $data, NULL);  
     }
-
 
     public function addnewScrapreturn(){
         $post_submit = $this->input->post();
@@ -5739,7 +5724,6 @@ class Admin extends BaseController
 
     }
 
-
     public function fetchscrapreturn(){
 
         $params = $_REQUEST;
@@ -5766,7 +5750,6 @@ class Admin extends BaseController
 
     }
 
-
     public function deletescrapreturn(){
 
         $post_submit = $this->input->post();
@@ -5784,7 +5767,6 @@ class Admin extends BaseController
         }
 
     }
-
 
     public function savescrapreturnitem(){
         $post_submit = $this->input->post();
@@ -5882,7 +5864,6 @@ class Admin extends BaseController
 
     }
 
-
     public function editscrapreturn($scrapreturnid){
 
         $process = 'Edit Scrap Return';
@@ -5899,7 +5880,6 @@ class Admin extends BaseController
 
     }
 
-
     public function currentorderstatus(){
 
         $process = 'Current Order Status';
@@ -5909,7 +5889,6 @@ class Admin extends BaseController
         $this->loadViews("masters/currentorderstatus", $this->global, $data, NULL);  
 
     }
-
 
     public function fetchvendorBillofmaterialforcurrentorderstatus($from_date,$to_date,$status){
 
@@ -5937,7 +5916,6 @@ class Admin extends BaseController
 
     }
 
-
     public function fetchcurrentorderstatusreport($vendor_name,$status){
 
         $params = $_REQUEST;
@@ -5963,7 +5941,6 @@ class Admin extends BaseController
         echo json_encode($json_data);
 
     }
-
 
     public function downlaod_current_orderstatus($vendor_name,$status) {
 
@@ -6045,14 +6022,12 @@ class Admin extends BaseController
 
     }
         
-
     public function reworkrejectionreturn(){
         $process = 'Rework Rejection Return Form';
         $processFunction = 'Admin/reworkrejectionreturn';
         $this->global['pageTitle'] = 'Rework Rejection Return Form';
         $this->loadViews("masters/reworkrejectionreturn", $this->global, $data, NULL);  
     }
-
 
     public function fetchreworkrejection(){
         $params = $_REQUEST;
@@ -6078,7 +6053,6 @@ class Admin extends BaseController
         echo json_encode($json_data);
 
     }
-
 
     public function addneworkrejection(){
 
@@ -6156,7 +6130,6 @@ class Admin extends BaseController
         }
 
     }
-
 
     public function deletereworkrejection(){
 
@@ -7027,7 +7000,6 @@ class Admin extends BaseController
 
     }
 
-
     public function editpaymentdetails($payment_details_id){
         $process = 'Edit Payment Details';
         $processFunction = 'Admin/editpaymentdetails';
@@ -7039,7 +7011,6 @@ class Admin extends BaseController
         $this->loadViews("masters/editpaymentdetails", $this->global, $data, NULL);
 
     }
-
 
     public function deletepaymentdetails(){
 
@@ -7294,8 +7265,41 @@ class Admin extends BaseController
 
     }
 
-    public function qualityrecord(){
+    public function deletepoddetails(){
 
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->deletepoddetails(trim($this->input->post('id')));
+            if ($result) {
+                        $process = 'Delete POD Details';
+                        $processFunction = 'Admin/deletepoddetails';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
+
+    }
+
+    public function deletePODitem(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->deletePODitem(trim($this->input->post('id')));
+            if ($result) {
+                        $process = 'Delete POD Item';
+                        $processFunction = 'Admin/deletePODitem';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
+    }
+
+    public function qualityrecord(){
         $process = 'Qulity Record';
         $processFunction = 'Admin/qualityrecord';
         $this->logrecord($process,$processFunction);
@@ -7362,39 +7366,28 @@ class Admin extends BaseController
        
     }
 
-    public function deletepoddetails(){
+    public function fetchqulityrecords(){
+        $params = $_REQUEST;
+        $totalRecords = $this->admin_model->getqulityformcount($params); 
+        $queryRecords = $this->admin_model->getqulityformdata($params); 
 
-        $post_submit = $this->input->post();
-        if($post_submit){
-            $result = $this->admin_model->deletepoddetails(trim($this->input->post('id')));
-            if ($result) {
-                        $process = 'Delete POD Details';
-                        $processFunction = 'Admin/deletepoddetails';
-                        $this->logrecord($process,$processFunction);
-                    echo(json_encode(array('status'=>'success')));
-                }
-            else { echo(json_encode(array('status'=>'failed'))); }
-        }else{
-            echo(json_encode(array('status'=>'failed'))); 
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
         }
-
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+        echo json_encode($json_data);
     }
 
-    public function deletePODitem(){
-        $post_submit = $this->input->post();
-        if($post_submit){
-            $result = $this->admin_model->deletePODitem(trim($this->input->post('id')));
-            if ($result) {
-                        $process = 'Delete POD Item';
-                        $processFunction = 'Admin/deletePODitem';
-                        $this->logrecord($process,$processFunction);
-                    echo(json_encode(array('status'=>'success')));
-                }
-            else { echo(json_encode(array('status'=>'failed'))); }
-        }else{
-            echo(json_encode(array('status'=>'failed'))); 
-        }
-    }
-    
-    
 }

@@ -26,16 +26,15 @@
                 <div class="box">
                     <div class="box-body">   
                         <div class="panel-body">
-                            <table width="100%" class="table table-striped table-bordered table-hover" id="view_POD_details">
+                            <table width="100%" class="table table-striped table-bordered table-hover" id="view_qulity_record">
                                 <thead>
                                     <tr style="background-color:#3c8dbc !important;color:#fff">
-                                        <th>POD No</th>
-                                        <th>POD Date</th>
+                                        <th>QR No</th>
+                                        <th>QR Date</th>
                                         <th>Vendor Name</th>
                                         <th>Vendor PO</th>
-                                        <th>Supplier Name</th>
-                                        <th>Supplier PO</th>
-                                        <th>PO Date</th>
+                                        <th>Buyer Name</th>
+                                        <th>Buyer PO</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>

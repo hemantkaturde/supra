@@ -4951,7 +4951,6 @@ class Admin_model extends CI_Model
     }
 
     public function getPaymentdetails($payment_details_id){
-
         $this->db->select('*,'.TBL_SUPPLIER.'.supplier_name as supplier,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_pomaster,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_master,'.TBL_PAYMENT_DETAILS.'.payment_details_id as debit_id,'.TBL_PAYMENT_DETAILS.'.remark as remarkpayment');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_PAYMENT_DETAILS.'.vendor_id','left');
         $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_PAYMENT_DETAILS.'.supplier_id','left');
@@ -4961,9 +4960,7 @@ class Admin_model extends CI_Model
         $query = $this->db->get(TBL_PAYMENT_DETAILS);
         $fetch_result = $query->result_array();
         return $fetch_result;
-
     }
-
 
     public function getpoddetailscount($params){
 
@@ -5180,6 +5177,69 @@ class Admin_model extends CI_Model
         }
 
     }
+
+    public function getqulityformcount($params){
+        $this->db->select('*');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_QUALITY_RECORDS.'.vendor_id');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_QUALITY_RECORDS.'.vendor_po');
+
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_QUALITY_RECORDS.".quality_records_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_QUALITY_RECORDS.".quality_records_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_QUALITY_RECORDS.'.status', 1); 
+        $query = $this->db->get(TBL_QUALITY_RECORDS);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+
+
+    }
+
+    public function getqulityformdata($params){
+        $this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_pomaster,'.TBL_QUALITY_RECORDS.'.quality_records_id  as quality_records_id');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_QUALITY_RECORDS.'.vendor_id');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_QUALITY_RECORDS.'.vendor_po');
+
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_QUALITY_RECORDS.".quality_records_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_QUALITY_RECORDS.".quality_records_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%')");
+        }
+
+        $this->db->where(TBL_QUALITY_RECORDS.'.status', 1);
+        $this->db->limit($params['length'],$params['start']);
+        $this->db->order_by(TBL_QUALITY_RECORDS.'.quality_records_id','DESC');
+        $query = $this->db->get(TBL_QUALITY_RECORDS);
+        $fetch_result = $query->result_array();
+
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['quality_records_number'] = $value['quality_records_number'];
+                $data[$counter]['quality_records_date'] = $value['quality_records_date'];
+                $data[$counter]['vendor_name'] = $value['vendorname'];
+                $data[$counter]['vendor_po_number'] = $value['vendor_pomaster'];
+                $data[$counter]['buyer_name'] = $value['buyer_name'];
+                $data[$counter]['buyer_po'] = $value['buyer_po'];
+                $data[$counter]['action'] = '';
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editchallanform/".$value['quality_records_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['quality_records_id']."' class='fa fa-trash-o deletechallanform' aria-hidden='true'></i>"; 
+                $counter++; 
+            }
+        }
+        return $data;
+    }
+
+    
+
 
 }
 

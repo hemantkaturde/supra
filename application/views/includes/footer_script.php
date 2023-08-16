@@ -5827,7 +5827,6 @@
 <?php } ?>
 
 
-
 <?php if($pageTitle=='Vendor Bill of Material' || $pageTitle=="Add New Vendor Bill Of Material"){ ?>
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -9565,7 +9564,6 @@
 <?php } ?>
 
 
-
 <?php if($pageTitle=='Debit Note' || $pageTitle=='Add New Debit Note' || $pageTitle=='Edit Debit Note Form' ){ ?>
 	<script type="text/javascript">
 		 $(document).ready(function() {
@@ -10682,7 +10680,6 @@
 
     </script>
 <?php } ?>
-
 
 
 <?php if($pageTitle=='Payment Details' || $pageTitle=='Add New Payment Details' || $pageTitle=='Edit Payment Details'){ ?>
@@ -11855,6 +11852,270 @@
 				});
 	     });
 
+    </script>
+<?php } ?>
+
+
+
+<?php if($pageTitle=='Qulity Record' || $pageTitle=='Add New Qulity Record Form' ){ ?>
+	<script type="text/javascript">
+         $(document).ready(function() {
+		    var dt = $('#view_qulity_record').DataTable({
+	            "columnDefs": [ 
+	                 { className: "details-control", "targets": [ 0 ] },
+	                 { "width": "10%", "targets": 0 },
+	                 { "width": "10%", "targets": 1 },
+					 { "width": "10%", "targets": 2 },
+	                 { "width": "10%", "targets": 3 },
+					 { "width": "10%", "targets": 4 },
+					 { "width": "10%", "targets": 5 },
+					 { "width": "10%", "targets": 6 }
+	            ],
+	            responsive: true,
+	            "oLanguage": {
+	                "sEmptyTable": "<i>No Qulity Records Found.</i>",
+	            }, 
+	            "bSort" : false,
+	            "bFilter":true,
+	            "bLengthChange": true,
+	            "iDisplayLength": 10,   
+	            "bProcessing": true,
+	            "serverSide": true,
+	            "ajax":{
+                    url :"<?php echo base_url();?>fetchqulityrecords",
+                    type: "post",
+	            },
+	        });
+	     });
+
+		 $(document).on('change','#vendor_name',function(e){  
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			// $("#customers-list").html('');
+			var vendor_name = $('#vendor_name').val();
+		    $('.vendor_po_number_div').css('display','block');
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getVendorPonumberbySupplierid",
+				type: "POST",
+				data : {'vendor_name' : vendor_name},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#vendor_po_number').html('<option value="">Select Vendor PO Number</option>');
+					}
+					else
+					{
+						// $('#supplier_po_number').html('<option value="">Select supplier PO Number</option>');
+						$('#vendor_po_number').html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#vendor_po_number').html();
+					//$(".loader_ajax").hide();
+				}
+			});
+			return false;
+		 });
+
+		 $(document).on('change','#vendor_po_number',function(e){  
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			        var vendor_po_number = $('#vendor_po_number').val();
+			        $.ajax({
+							url : "<?php echo ADMIN_PATH;?>getbuyerpodetailsforvendorbillofmaterial",
+							type: "POST",
+							data : {'vendor_po_number' : vendor_po_number},
+							success: function(data, textStatus, jqXHR)
+							{
+								$(".loader_ajax").hide();
+								if(data == "failure")
+								{
+									$('#buyer_name').html('<option value="">Select Buyer Name</option>');
+								}
+								else
+								{
+									$('#buyer_name').html(data);
+					             	$(".autobuyerpo").html('');		
+
+									$.ajax({
+										url : "<?php echo ADMIN_PATH;?>getBuyerDetailsByvendorpoautofill",
+										type: "POST",
+										data : {'vendor_po_number' : vendor_po_number},
+										success: function(data, textStatus, jqXHR)
+										{
+											$(".loader_ajax").hide();
+											if(data == "failure")
+											{
+												$('.autobuyerpo').html('<option value="">Select Buyer PO</option>');
+											}
+											else
+											{
+												$('.autobuyerpo').html(data);
+											}
+										},
+										error: function (jqXHR, textStatus, errorThrown)
+										{
+											$('#buyer_name').html();
+										}
+									});
+
+										
+								}
+							},
+							error: function (jqXHR, textStatus, errorThrown)
+							{
+									$('#buyer_name').html('');				
+							}
+						});
+			    return false;
+	                   
+		 });
+
+		 $(document).on('change','.vendor_po_get_data',function(e){  
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			// $("#customers-list").html('');
+			var vendor_po_id = $('.vendor_po_get_data').val();
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>get_vendorpodata",
+				type: "POST",
+				data : {'vendor_po_id' : vendor_po_id},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#vedor_po_date').val('');
+					}
+					else
+					{
+						var get_vendorpodata = jQuery.parseJSON( data );
+						$('#vedor_po_date').val(get_vendorpodata.date);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#vedor_po_date').val('');
+				}
+			});
+			return false;
+		 });
+
+		 $(document).on('change','.vendor_po_number_itam',function(e){  
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			var vendor_po_number = $('#vendor_po_number').val();
+
+			$("#part_number").html('');
+		
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getVendoritemonly",
+				type: "POST",
+				data : {'vendor_po_number' : vendor_po_number},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#part_number').html('<option value="">Select Part Number</option>');
+					}
+					else
+					{
+						$('#part_number').html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#part_number').html();
+				}
+			});
+			return false;
+		 });
+
+		 $(document).on('change','#part_number',function(e){  
+			e.preventDefault();
+			
+			//$(".loader_ajax").show();
+			var part_number = $('#part_number').val();
+			
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getfinishedgoodsPartnumberByid",
+				type: "POST",
+				data : {'part_number' : part_number},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#description').value('');
+					}
+					else
+					{
+						var data_row_material = jQuery.parseJSON( data );
+
+						$('#description').val(data_row_material.name);
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#description').html();
+					//$(".loader_ajax").hide();
+				}
+			});
+			return false;
+		 });
+
+		 $(document).on('click','#addnewquality',function(e){
+
+			e.preventDefault();
+			$(".loader_ajax").show();
+
+			var formData = new FormData($("#addnewqualityform")[0]);
+			$.ajax({
+				url : "<?php echo base_url();?>addNewPODdetails",
+				type: "POST",
+				data : formData,
+				cache: false,
+				contentType: false,
+				processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+					{
+						$.each(fetchResponse.error, function (i, v)
+						{
+							$('.'+i+'_error').html(v);
+						});
+						$(".loader_ajax").hide();
+					}
+					else if(fetchResponse.status == 'success')
+					{
+						swal({
+							title: "Success",
+							text: "Qulity Records Successfully Added!",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+
+								window.location.href = "<?php echo base_url().'qualityrecord'?>";
+						});		
+					}
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$(".loader_ajax").hide();
+				}
+			});
+			return false;
+		 });
 
     </script>
 <?php } ?>

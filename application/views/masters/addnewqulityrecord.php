@@ -6,7 +6,7 @@
          <small>
             <ul class="breadcrumb" style="background-color:#ecf0f5 !important">
                <li class="completed"><a href="javascript:void(0);">Masters</a></li>
-               <li class="active"><a href="javascript:void(0);"> POD Details</a></li>
+               <li class="active"><a href="javascript:void(0);"> Qulity Record Details</a></li>
             </ul>
          </small>
       </h1>
@@ -20,7 +20,7 @@
                      <h3 class="box-title">Add New Qulity Record</h3>
                   </div>
                   <?php $this->load->helper("form"); ?>
-                  <form role="form" id="addnewPODform" action="#" method="post" role="form">
+                  <form role="form" id="addnewqualityform" action="#" method="post" role="form">
                      <div class="box-body">
                         <div class="col-md-4">
                            <?php
@@ -33,47 +33,24 @@
                                   $POD_details_number = 'SQPD23240001';
                               }
                               ?>
-                           <div class="col-md-12">
-                              <div class="form-group">
-                                 <label for="POD_details_number">POD Details Number<span class="required">*</span></label>
-                                 <input type="text" class="form-control" id="c" value="<?=$POD_details_number?>" name="POD_details_number" readonly>
-                                 <p class="error POD_details_number_error"></p>
+                              <div class="col-md-12">
+                                 <div class="form-group">
+                                    <label for="POD_details_number">QR Number<span class="required">*</span></label>
+                                    <input type="text" class="form-control" id="c" value="<?=$POD_details_number?>" name="POD_details_number" readonly>
+                                    <p class="error POD_details_number_error"></p>
+                                 </div>
                               </div>
-                           </div>
-                           <?php $date= date('Y-m-d'); ?>
-                           <div class="col-md-12">
-                              <div class="form-group">
-                                 <label for="POD_details_date">POD Details Date <span class="required">*</span></label>
-                                 <input type="text" class="form-control datepicker"  value="<?=$date?>" id="POD_details_date" name="POD_details_date" required>
-                                 <p class="error POD_details_date_error"></p>
+                              <?php $date= date('Y-m-d'); ?>
+                              <div class="col-md-12">
+                                 <div class="form-group">
+                                    <label for="POD_details_date">QR Date <span class="required">*</span></label>
+                                    <input type="text" class="form-control datepicker"  value="<?=$date?>" id="POD_details_date" name="POD_details_date" required>
+                                    <p class="error POD_details_date_error"></p>
+                                 </div>
                               </div>
-                           </div>
-                           <div class="col-md-12">
-                              <div class="form-group">
-                                 <label for="select_with_po_without_po">Select With PO / Without PO <span class="required">*</span></label>
-                                 <select class="form-control" name="select_with_po_without_po" id="select_with_po_without_po">
-                                    <option st-id="" value="">Select With PO / Without PO</option>
-                                    <option value="with_po" <?php if($getdebitnoteitemdetails[0]['pre_select_with_po_without_po']=='with_po'){ echo 'selected'; } ?>>With PO</option>
-                                    <option value="without_po" <?php if($getdebitnoteitemdetails[0]['pre_select_with_po_without_po']=='without_po'){ echo 'selected'; } ?>>Without PO</option>
-                                 </select>
-                                 <p class="error select_with_po_without_po_error"></p>
-                              </div>
-                           </div>
-                           <div class="col-md-12">
-                              <div class="form-group">
-                                 <label for="vendor_supplier_name">Select Vendor / Supplier <span class="required">*</span></label>
-                                 <select class="form-control vendor_supplier_name" name="vendor_supplier_name" id="vendor_supplier_name">
-                                    <option st-id="" value="">Select Vendor / Supplier</option>
-                                    <option value="vendor" <?php if($getdebitnoteitemdetails[0]['pre_vendor_supplier_name']=='vendor'){ echo 'selected'; } ?>>Vendor</option>
-                                    <option value="supplier" <?php if($getdebitnoteitemdetails[0]['pre_vendor_supplier_name']=='supplier'){ echo 'selected'; } ?>>Supplier</option>
-                                 </select>
-                                 <p class="error vendor_supplier_name_error"></p>
-                              </div>
-                           </div>
-                           <div id="vendor_name_div_for_hide_show" style="display:none">
                               <div class="col-md-12" >
                                  <div class="form-group">
-                                    <label for="vendor_name">Vendor Name</label>
+                                    <label for="vendor_name">Vendor Name <span class="required">*</span></label>
                                     <select class="form-control vendor_name" name="vendor_name" id="vendor_name">
                                        <option st-id="" value="">Select Vendor Name</option>
                                        <?php foreach ($vendorList as $key => $value) {?>
@@ -83,49 +60,49 @@
                                     <p class="error vendor_name_error"></p>
                                  </div>
                               </div>
-                              <div class="col-md-12 vendor_po_number_div" id="vendor_po_number_div" style="display:none">
+                              <div class="col-md-12 vendor_po_number_div" id="vendor_po_number_div">
                                  <div class="form-group">
-                                    <label for="vendor_po_number">Select Vendor PO Number</label>
-                                    <select class="form-control vendor_po_number_itam" name="vendor_po_number" id="vendor_po_number">
-                                       <!-- <option st-id="" value="">Select Vendor Name</option> -->
+                                    <label for="vendor_po_number">Vendor PO Number <span class="required">*</span></label>
+                                    <select class="form-control vendor_po_number_itam vendor_po_get_data" name="vendor_po_number" id="vendor_po_number">
+                                       <option st-id="" value="">Select Vendor PO Number</option>
                                        <!-- <option st-id="" value="<?=$getdebitnoteitemdetails[0]['pre_vendor_po_number']?>" selected="selected"><?=$selected_value?></option> -->
                                     </select>
                                     <p class="error vendor_po_number_error"></p>
                                  </div>
                               </div>
-                           </div>
-                           <div id="supplier_name_div_for_hide_show" style="display:none">
-                              <div class="col-md-12" >
+                              <div class="col-md-12">
                                  <div class="form-group">
-                                    <label for="supplier_name">Supplier Name </label>
-                                    <select class="form-control" name="supplier_name" id="supplier_name">
-                                       <option st-id="" value="">Select Supplier Name</option>
-                                       <?php foreach ($supplierList as $key => $value) {?>
-                                       <option value="<?php echo $value['sup_id']; ?>" <?php if($value['sup_id']==$getdebitnoteitemdetails[0]['pre_supplier_name']){ echo 'selected';} ?> ><?php echo $value['supplier_name']; ?></option>
-                                       <?php } ?>
-                                    </select>
-                                    <p class="error supplier_name_error"></p>
+                                    <label for="vedor_po_date">PO Date </label>
+                                    <input type="text" class="form-control datepicker"  id="vedor_po_date" name="vedor_po_date" readonly>
+                                    <p class="error vedor_po_date_error"></p>
                                  </div>
                               </div>
-                              <div class="col-md-12 supplier_po_number_div" id="supplier_po_number_div" style="display:none">
+
+                              <div class="col-md-12">
                                  <div class="form-group">
-                                    <label for="supplier_po_number">Select Supplier PO Number</label>
-                                    <select class="form-control supplier_po_number_item supplier_po_number_for_item" name="supplier_po_number" id="supplier_po_number">
-                                       <!-- <option st-id="" value="">Select Vendor Name</option> -->
-                                       <!-- <option st-id="" value="<?=$getdebitnoteitemdetails[0]['pre_supplier_po_number']?>" selected="selected"><?=$selected_value?></option> -->
-                                    </select>
-                                    <p class="error supplier_po_number_error"></p>
+                                       <label for="buyer_name">Buyer Name</label>
+                                          <select class="form-control" name="buyer_name" id="buyer_name" readonly>
+                                             <option st-id="" value="">Select Buyer Name</option>
+                                              <!-- <?php foreach ($buyerList as $key => $value) {?> -->
+                                             <!-- <option value="<?php echo $value['buyer_id']; ?>" <?php if($fetchALLpreBillofmaterailist[0]['pre_buyer_name']== $value['buyer_id']){ echo 'selected'; } ?> ><?php echo $value['buyer_name']; ?></option> -->
+                                          <!-- <?php } ?> -->
+                                       </select>
+                                    <p class="error buyer_name_error"></p>
                                  </div>
                               </div>
-                           </div>
-                           <?php  $po_date= date('Y-m-d'); ?>
-                           <div class="col-md-12">
-                              <div class="form-group">
-                                 <label for="po_date">PO Date <span class="required">*</span></label>
-                                 <input type="text" class="form-control datepicker"  value="<?=$po_date?>" id="po_date" name="po_date" required>
-                                 <p class="error po_date_error"></p>
-                              </div>
-                           </div>
+
+                              <div class="col-md-12">
+                                        <div class="form-group">
+                                                <label for="buyer_po_number">Select Buyer PO </label>
+                                                    <select class="form-control buyer_po_number  buyer_po_number_for_itam_mapping buyer_po_number_for_itam_display autobuyerpo" name="buyer_po_number" id="buyer_po_number" readonly>
+                                                        <option st-id="" value="">Select Buyer PO</option>
+
+                                                        <!-- <option st-id="" value="<?=$fetchALLpreBillofmaterailist[0]['pre_buyer_po_number'] ?>"><?=$sales_order_number ?></option> -->
+                                                    </select>
+                                            <p class="error buyer_po_number_error"></p>
+                                        </div>
+                                    </div>
+
                            <div class="col-md-12">
                               <div class="form-group">
                                  <label for="remark">Remark</label>
@@ -137,7 +114,7 @@
                         <div class="col-md-6">
                                     <div class="container">
                                         <button type="button" class="btn btn-success btn-xl" data-toggle="modal" data-target="#addNewModal">Add New Items</button><br/><br/>
-                                            <table class="table table-bordered" style="max-width: 68%;display: block;overflow-x: auto; white-space: nowrap;">
+                                            <table class="table table-bordered" style="max-width: 70%;display: block;overflow-x: auto; white-space: nowrap;">
                                                 <thead style="background-color:#3c8dbc;color:#fff">
                                                     <tr>
                                                         <th>Sr No.</th>
@@ -155,8 +132,7 @@
                                                         $count=0;
                                                            foreach ($getdebitnoteitemdetails as $key => $value) :
                                                            $count++;
-                                                           $debit_gst_value =  intval($value['SGST_value']) + intval($value['CGST_value']) + intval($value['IGST_value']);
-
+                                                           $debit_gst_value =  '';
                                                     ?>
                                                     <tr>
                                                         <td><?php echo $count;?></td>
@@ -227,32 +203,32 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Inspection Report No<span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="text" class="form-control"  id="order_qty" name="order_qty">
-                                                            <p class="error order_qty_error"></p>
+                                                            <input type="text" class="form-control"  id="inspection_report_no" name="Inspection Report No">
+                                                            <p class="error inspection_report_no_error"></p>
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Inspection Report Date<span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="text" class="form-control"  id="lot_no" name="lot_no">
-                                                            <p class="error lot_no_error"></p>
+                                                            <input type="text" class="form-control datepicker"  id="inspection_report_date" name="inspection_report_date">
+                                                            <p class="error inspection_report_date_error"></p>
                                                         </div>
                                                     </div>  
 
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">LOT Qty<span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="text" class="form-control"  id="qty_recived" name="qty_recived">
-                                                            <p class="error qty_recived_error"></p>
+                                                            <input type="text" class="form-control"  id="lot_qty" name="lot_qty">
+                                                            <p class="error lot_qty_error"></p>
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Inspected By<span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="text" class="form-control"  id="unit" name="unit">
-                                                            <p class="error unit_error"></p>
+                                                            <input type="text" class="form-control"  id="inspected_by" name="inspected_by">
+                                                            <p class="error inspected_by_error"></p>
                                                         </div>
                                                     </div>
 
@@ -281,8 +257,8 @@
                      <!-- /.box-body -->
                      <div class="box-footer">
                         <div class="col-xs-8">
-                           <input type="submit" id="savenewpoddetails" class="btn btn-primary" value="Submit">
-                           <input type="button" onclick="location.href = '<?php echo base_url() ?>poddetails'" class="btn btn-default" value="Back" />
+                           <input type="submit" id="addnewquality" class="btn btn-primary" value="Submit">
+                           <input type="button" onclick="location.href = '<?php echo base_url() ?>qualityrecord'" class="btn btn-default" value="Back" />
                         </div>
                      </div>
                   </form>
