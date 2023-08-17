@@ -7307,11 +7307,8 @@ class Admin extends BaseController
     }
     
     public function addNewqualityrecord(){
-
         $post_submit = $this->input->post();
-
         if($post_submit){
-
                $qualitydetails_response = array();
                 $this->form_validation->set_rules('QR_details_number','QR Number','trim|required');
                 $this->form_validation->set_rules('QR_details_date','QR Date','trim|required');
@@ -7354,6 +7351,9 @@ class Admin extends BaseController
             $this->global['pageTitle'] = 'Add New Qulity Record Form';
             $data['vendorList']= $this->admin_model->fetchALLvendorList();
             $data['get_prevoius_QR_REcord']= $this->admin_model->get_prevoius_QR_REcord();
+
+            $data['get_qulityrecorditemrecord']= $this->admin_model->get_qulityrecorditemrecord();
+
             $this->loadViews("masters/addnewqulityrecord", $this->global, $data, NULL);
         }
        
@@ -7381,6 +7381,52 @@ class Admin extends BaseController
             "data"            => $data   // total data array
             );
         echo json_encode($json_data);
+    }
+
+    public function savequlityrecorditem(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $savequlity_item_response = array();
+            $this->form_validation->set_rules('part_number','Part Number','trim|required');
+            $this->form_validation->set_rules('inspection_report_no','Inspection Report No','trim|required');
+            $this->form_validation->set_rules('inspection_report_date','Inspection Report Date','trim|required');
+            $this->form_validation->set_rules('lot_qty','Lot Qty','trim|required');
+            $this->form_validation->set_rules('inspected_by','Inspected By','trim|required');
+            $this->form_validation->set_rules('item_remark','Item Remark','trim');
+
+            if($this->form_validation->run() == FALSE)
+            {
+                $savequlity_item_response['status'] = 'failure';
+                $savequlity_item_response['error'] = array('part_number'=>strip_tags(form_error('part_number')),'description'=>strip_tags(form_error('description')), 'inspection_report_no'=>strip_tags(form_error('inspection_report_no')), 'inspection_report_date'=>strip_tags(form_error('inspection_report_date')),'lot_qty'=>strip_tags(form_error('lot_qty')), 'inspected_by'=>strip_tags(form_error('inspected_by')), 'item_remark'=>strip_tags(form_error('item_remark')));
+           
+            }else{
+
+                $data = array(
+                    'part_number' =>  trim($this->input->post('part_number')),
+                    'inspection_report_no' =>  trim($this->input->post('inspection_report_no')),
+                    'inspection_report_date' =>  trim($this->input->post('inspection_report_date')),
+                    'lot_qty' =>  trim($this->input->post('lot_qty')),
+                    'inspected_by' =>  trim($this->input->post('inspected_by')),
+                    'remark' =>  trim($this->input->post('item_remark')),
+                    'pre_quality_records_date' =>  trim($this->input->post('pre_QR_details_date')),
+                    'pre_vendor_name' =>  trim($this->input->post('pre_vendor_name')),
+                    'pre_vendor_po_number' =>  trim($this->input->post('pre_vendor_po_number')),
+                    'pre_po_date' =>  trim($this->input->post('pre_vedor_po_date')),
+                    'pre_buyer_name' =>  trim($this->input->post('pre_buyer_name')),
+                    'pre_buyer_po_number' =>  trim($this->input->post('pre_buyer_po_number')),
+                    'pre_remark' =>  trim($this->input->post('pre_remark')),
+                );
+
+               $savequlityrecorditem = $this->admin_model->savequlityrecorditem('',$data);
+
+               if($savequlityrecorditem){
+                   $savequlity_item_response['status'] = 'success';
+                   $savequlity_item_response['error'] = array('part_number'=>strip_tags(form_error('part_number')),'description'=>strip_tags(form_error('description')), 'inspection_report_no'=>strip_tags(form_error('inspection_report_no')), 'inspection_report_date'=>strip_tags(form_error('inspection_report_date')),'lot_qty'=>strip_tags(form_error('lot_qty')), 'inspected_by'=>strip_tags(form_error('inspected_by')), 'item_remark'=>strip_tags(form_error('item_remark')));
+                }
+            }
+            echo json_encode($savequlity_item_response);
+        }
+
     }
 
 }

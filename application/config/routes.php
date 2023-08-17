@@ -292,6 +292,7 @@ $route['qualityrecord'] = "admin/qualityrecord";
 $route['addNewqualityrecord'] = "admin/addNewqualityrecord";
 $route['fetchqulityrecords'] = "admin/fetchqulityrecords";
 
+$route['savequlityrecorditem'] = "admin/savequlityrecorditem";
 
 
 

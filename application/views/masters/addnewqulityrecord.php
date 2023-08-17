@@ -124,13 +124,14 @@
                                                         <th>Inspection Report Date</th>
                                                         <th>LOT Qty</th>
                                                         <th>Inspected By</th>
+                                                        <th>Remark</th>
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <?php
                                                         $count=0;
-                                                           foreach ($getdebitnoteitemdetails as $key => $value) :
+                                                           foreach ($get_qulityrecorditemrecord as $key => $value) :
                                                            $count++;
                                                            $debit_gst_value =  '';
                                                     ?>
@@ -138,10 +139,11 @@
                                                         <td><?php echo $count;?></td>
                                                         <td><?php echo $value['part_number'];?></td>
                                                         <td><?php echo $value['name'];?></td>
-                                                        <td><?php echo $value['invoice_no'];?></td>
-                                                        <td><?php echo $value['invoice_date'];?></td>
-                                                        <td><?php echo $value['invoice_qty'];?></td>
-                                                        <td><?php echo $value['ok_qty'];?></td>
+                                                        <td><?php echo $value['inspection_report_no'];?></td>
+                                                        <td><?php echo $value['inspection_report_date'];?></td>
+                                                        <td><?php echo $value['lot_qty'];?></td>
+                                                        <td><?php echo $value['inspected_by'];?></td>
+                                                        <td><?php echo $value['remark'];?></td>
                                                         <td>
                                                         <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['debit_note_id'];?>' class='fa fa-trash-o deleteDebitnoteitem' aria-hidden='true'></i>
                                                         </td>
@@ -242,7 +244,7 @@
                                                 </div>
 
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary btn-xl closedebitnotemodel" data-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-secondary btn-xl closequlityrecordmodel" data-dismiss="modal">Close</button>
                                                     <button type="submit" id="savequlityrecorditem" name="savequlityrecorditem" class="btn btn-primary" class="btn btn-success btn-xl">Save</button>
                                                 </div>
                                             </form>    
