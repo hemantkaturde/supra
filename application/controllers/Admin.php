@@ -3548,7 +3548,6 @@ class Admin extends BaseController
 
 
     public function getVendorPonumberbySupplierid(){
-
         $vendor_name=$this->input->post('vendor_name');
         if($vendor_name) {
 			$getVendordetails = $this->admin_model->getVendorPonumberbySupplierid($vendor_name);
@@ -7425,6 +7424,30 @@ class Admin extends BaseController
                 }
             }
             echo json_encode($savequlity_item_response);
+        }
+
+    }
+
+    public function stockform(){
+        $process = 'Stock Form';
+        $processFunction = 'Admin/stockform';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Qulity Record';
+        $this->loadViews("masters/stockform", $this->global, $data, NULL);  
+    }
+
+    public function addNewstockform(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+
+        }else{
+            $process = 'Add New Stock Form';
+            $processFunction = 'Admin/addNewstockform';
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Add New Stock Form';
+            $data['vendorList']= $this->admin_model->fetchALLvendorList();
+            $this->loadViews("masters/addNewstockform", $this->global, $data, NULL);
+
         }
 
     }

@@ -252,8 +252,6 @@ $route['deletechallanform'] = "admin/deletechallanform";
 $route['editchallanform/(:any)'] = "admin/editchallanform/$1";
 $route['saveChallanformitem'] = "admin/saveChallanformitem";
 $route['deleteChallanformitem'] = "admin/deleteChallanformitem";
-
-
 $route['debitnote'] = "admin/debitnote";
 $route['addnewdebitnote'] = "admin/addnewdebitnote";
 $route['fetchdebitnotedetails'] = "admin/fetchdebitnotedetails";
@@ -261,38 +259,32 @@ $route['editdebitnoteform/(:any)'] = "admin/editdebitnoteform/$1";
 $route['deletedebitnote'] = "admin/deletedebitnote";
 $route['saveDebitnoteitem'] = "admin/saveDebitnoteitem";
 $route['deleteDebitnoteitem'] = "admin/deleteDebitnoteitem";
-
-
 $route['paymentdetails'] = "admin/paymentdetails";
 $route['addnewpaymentdetails'] = "admin/addnewpaymentdetails";
 $route['fetchPaymentdetails'] = "admin/fetchPaymentdetails";
 $route['deletepaymentdetails'] = "admin/deletepaymentdetails";
 $route['editpaymentdetails/(:any)'] = "admin/editpaymentdetails/$1";
 $route['addpaymentdetailsdata/(:any)'] = "admin/addpaymentdetailsdata/$1";
-
-
-
 $route['get_vendorpodata'] = "admin/get_vendorpodata";
 $route['get_supplierpodata'] = "admin/get_supplierpodata";
-
 $route['poddetails'] = "admin/poddetails";
 $route['fetchpoddetails'] = "admin/fetchpoddetails";
 $route['addNewPODdetails'] = "admin/addNewPODdetails";
 $route['savepoditem'] = "admin/savepoditem";
 $route['deletepoddetails'] = "admin/deletepoddetails";
 $route['deletePODitem'] = "admin/deletePODitem";
-
-
 $route['addpaymentdetailsdata/(:any)'] = "admin/addpaymentdetailsdata/$1";
 $route['get_vendorpodata_with_debit_data'] = "admin/get_vendorpodata_with_debit_data";
 $route['get_supplierpodata_debit_data'] = "admin/get_supplierpodata_debit_data";
-
-
 $route['qualityrecord'] = "admin/qualityrecord";
 $route['addNewqualityrecord'] = "admin/addNewqualityrecord";
 $route['fetchqulityrecords'] = "admin/fetchqulityrecords";
-
 $route['savequlityrecorditem'] = "admin/savequlityrecorditem";
+
+$route['stockform'] = "admin/stockform";
+$route['addNewstockform'] = "admin/addNewstockform";
+
+
 
 
 
