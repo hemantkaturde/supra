@@ -6705,8 +6705,6 @@ class Admin extends BaseController
             "data"            => $data   // total data array
             );
         echo json_encode($json_data);
-
-
     }
 
     public function paymentdetails(){
@@ -7217,8 +7215,6 @@ class Admin extends BaseController
 		} else {
 			echo 'failure';
 		}
-
-
     }
 
     public function get_vendorpodata_with_debit_data(){
@@ -7350,9 +7346,7 @@ class Admin extends BaseController
             $this->global['pageTitle'] = 'Add New Qulity Record Form';
             $data['vendorList']= $this->admin_model->fetchALLvendorList();
             $data['get_prevoius_QR_REcord']= $this->admin_model->get_prevoius_QR_REcord();
-
             $data['get_qulityrecorditemrecord']= $this->admin_model->get_qulityrecorditemrecord();
-
             $this->loadViews("masters/addnewqulityrecord", $this->global, $data, NULL);
         }
        
@@ -7428,28 +7422,208 @@ class Admin extends BaseController
 
     }
 
+    /*======================================================STOCK FORM START HERE==========================================================*/ 
+
+
+    public function getbuyerpodetailsforvendorstockform(){
+        $vendor_po_number=$this->input->post('vendor_po_number');
+        if($vendor_po_number) {
+			$vendor_po_number_data = $this->admin_model->getbuyerpodetailsforvendorstockform($vendor_po_number);
+			if(count($vendor_po_number_data) >= 1) {
+				echo json_encode($vendor_po_number_data[0]);
+			} else {
+				echo 'failure';
+			}
+		} else {
+			echo 'failure';
+		}
+    }
+
+
+    public function getItemdetailsdependonvendorpoforstockform(){
+        if($this->input->post('part_number')) {
+            $getPartNameBypartid = $this->admin_model->getItemdetailsdependonvendorpoforstockform($this->input->post('part_number'),$this->input->post('vendor_po_number'),$this->input->post('vendor_name'));
+        
+            if($getPartNameBypartid){
+                $content = $getPartNameBypartid[0];
+                echo json_encode($content);
+
+            }else{
+                echo 'failure';
+            }
+           
+        } else {
+            echo 'failure';
+        }
+
+    }
+
+
     public function stockform(){
         $process = 'Stock Form';
         $processFunction = 'Admin/stockform';
         $this->logrecord($process,$processFunction);
-        $this->global['pageTitle'] = 'Qulity Record';
+        $this->global['pageTitle'] = 'Stock Form';
         $this->loadViews("masters/stockform", $this->global, $data, NULL);  
+    }
+
+
+    public function fetchstockformrecords(){
+        $params = $_REQUEST;
+        $totalRecords = $this->admin_model->getstockformcount($params); 
+        $queryRecords = $this->admin_model->getstockformdata($params); 
+
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+        echo json_encode($json_data);
     }
 
     public function addNewstockform(){
         $post_submit = $this->input->post();
         if($post_submit){
 
+            $newstockform_response = array();
+            $this->form_validation->set_rules('stock_id','Stock Id','trim|required');
+            $this->form_validation->set_rules('stock_date','Stock Date','trim|required');
+            $this->form_validation->set_rules('vendor_name','Vendor Name','trim|required');
+            $this->form_validation->set_rules('vendor_po_number','Vendor PO Number','trim');
+            $this->form_validation->set_rules('vendor_po_date','Vendor PO Date','trim');
+            $this->form_validation->set_rules('buyer_name','Buyer Name','trim');
+            $this->form_validation->set_rules('buyer_po_number','Buyer PO Number','trim');
+            $this->form_validation->set_rules('buyer_po_id','Buyer PO Id','trim');
+            $this->form_validation->set_rules('buyer_po_date','Buyer PO Date','trim');
+            $this->form_validation->set_rules('buyer_delivery_date','Buyer Delivery Date','trim');
+            $this->form_validation->set_rules('Invoice_qty_in_pcs','Invoice_qty_in_pcs','trim');
+            $this->form_validation->set_rules('Invoice_qty_in_kgs','Invoice_qty_in_kgs','trim');
+            $this->form_validation->set_rules('actual_received_qty_in_pcs','actual_received_qty_in_pcs','trim');
+            $this->form_validation->set_rules('actual_received_qty_in_kgs','actual_received_qty_in_kgs','trim');
+            $this->form_validation->set_rules('total_rejected_in_pcs','total_rejected_in_pcs','trim');
+            $this->form_validation->set_rules('total_rejected_in_pcs_kgs','total_rejected_in_pcs_kgs','trim');
+            $this->form_validation->set_rules('reday_for_export_pcs','reday_for_export_pcs','trim');
+            $this->form_validation->set_rules('reday_for_export_kgs','reday_for_export_kgs','trim');
+            $this->form_validation->set_rules('total_rejection_qty_kgs','total_rejection_qty_kgs','trim');
+            $this->form_validation->set_rules('total_export_qty_pcs','total_export_qty_pcs','trim');
+            $this->form_validation->set_rules('balance_qty_in_pics','balance_qty_in_pics','trim');
+            $this->form_validation->set_rules('balance_qty_in_kgs','balance_qty_in_kgs','trim');
+            $this->form_validation->set_rules('remark','remark','trim');
+          
+            if($this->form_validation->run() == FALSE)
+            {
+                $newstockform_response['status'] = 'failure';
+                $newstockform_response['error'] = array('stock_id'=>strip_tags(form_error('stock_id')),'stock_date'=>strip_tags(form_error('stock_date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'vendor_po_date'=>strip_tags(form_error('vendor_po_date')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'buyer_delivery_date'=>strip_tags(form_error('buyer_delivery_date')),'Invoice_qty_in_pcs'=>strip_tags(form_error('Invoice_qty_in_pcs')),'Invoice_qty_in_kgs'=>strip_tags(form_error('Invoice_qty_in_kgs')),'actual_received_qty_in_pcs'=>strip_tags(form_error('actual_received_qty_in_pcs')),'actual_received_qty_in_kgs'=>strip_tags(form_error('actual_received_qty_in_kgs')),'total_rejected_in_pcs'=>strip_tags(form_error('total_rejected_in_pcs')),'total_rejected_in_pcs_kgs'=>strip_tags(form_error('total_rejected_in_pcs_kgs')),'reday_for_export_pcs'=>strip_tags(form_error('reday_for_export_pcs')),'reday_for_export_kgs'=>strip_tags(form_error('reday_for_export_kgs')),'total_rejection_qty_kgs'=>strip_tags(form_error('total_rejection_qty_kgs')),'total_export_qty_pcs'=>strip_tags(form_error('total_export_qty_pcs')),'balance_qty_in_pics'=>strip_tags(form_error('balance_qty_in_pics')),'balance_qty_in_kgs'=>strip_tags(form_error('balance_qty_in_kgs')),'remark'=>strip_tags(form_error('remark')));
+
+            }else{
+
+                $data = array(
+                    'stock_id_number' => trim($this->input->post('stock_id')),
+                    'stock_date' => trim($this->input->post('stock_date')),
+                    'vendor_name' => trim($this->input->post('vendor_name')),
+                    'vendor_po_number' => trim($this->input->post('vendor_po_number')),
+                    'vendor_po_date' => trim($this->input->post('vendor_po_date')),
+                    'buyer_name' => trim($this->input->post('buyer_name')),
+                    'buyer_po_number' => trim($this->input->post('buyer_po_id')),
+                    'buyer_po_date' => trim($this->input->post('buyer_po_date')),
+                    'buyer_delivery_date' => trim($this->input->post('buyer_delivery_date')),
+                    'Invoice_qty_in_pcs' => trim($this->input->post('Invoice_qty_in_pcs')),
+                    'Invoice_qty_in_kgs' => trim($this->input->post('Invoice_qty_in_kgs')),
+                    'actual_received_qty_in_pcs'  => trim($this->input->post('actual_received_qty_in_pcs')),
+                    'actual_received_qty_in_kgs'  => trim($this->input->post('actual_received_qty_in_kgs')),
+                    'total_rejected_in_pcs'  => trim($this->input->post('total_rejected_in_pcs')),
+                    'total_rejected_in_pcs_kgs' => trim($this->input->post('total_rejected_in_pcs_kgs')),
+                    'reday_for_export_pcs' => trim($this->input->post('reday_for_export_pcs')),
+                    'reday_for_export_kgs' => trim($this->input->post('reday_for_export_kgs')),
+                    'total_rejection_qty_kgs' => trim($this->input->post('total_rejection_qty_kgs')),
+                    'total_export_qty_pcs' => trim($this->input->post('total_export_qty_pcs')),
+                    'balance_qty_in_pics'  => trim($this->input->post('balance_qty_in_pics')),
+                    'balance_qty_in_kgs' => trim($this->input->post('balance_qty_in_kgs')),
+                    'remark' => trim($this->input->post('remark')),
+                );
+
+                $savestockform= $this->admin_model->savestockform('',$data);
+                if($savestockform){
+                    $update_last_inserted_id_stock_from = $this->admin_model->update_last_inserted_id_stock_from($savestockform);
+                    if($update_last_inserted_id_stock_from){
+                            $newstockform_response['status'] = 'success';
+                            $newstockform_response['error'] = array('stock_id'=>strip_tags(form_error('stock_id')),'stock_date'=>strip_tags(form_error('stock_date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'vendor_po_date'=>strip_tags(form_error('vendor_po_date')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'buyer_delivery_date'=>strip_tags(form_error('buyer_delivery_date')),'Invoice_qty_in_pcs'=>strip_tags(form_error('Invoice_qty_in_pcs')),'Invoice_qty_in_kgs'=>strip_tags(form_error('Invoice_qty_in_kgs')),'actual_received_qty_in_pcs'=>strip_tags(form_error('actual_received_qty_in_pcs')),'actual_received_qty_in_kgs'=>strip_tags(form_error('actual_received_qty_in_kgs')),'total_rejected_in_pcs'=>strip_tags(form_error('total_rejected_in_pcs')),'total_rejected_in_pcs_kgs'=>strip_tags(form_error('total_rejected_in_pcs_kgs')),'reday_for_export_pcs'=>strip_tags(form_error('reday_for_export_pcs')),'reday_for_export_kgs'=>strip_tags(form_error('reday_for_export_kgs')),'total_rejection_qty_kgs'=>strip_tags(form_error('total_rejection_qty_kgs')),'total_export_qty_pcs'=>strip_tags(form_error('total_export_qty_pcs')),'balance_qty_in_pics'=>strip_tags(form_error('balance_qty_in_pics')),'balance_qty_in_kgs'=>strip_tags(form_error('balance_qty_in_kgs')),'remark'=>strip_tags(form_error('remark')));
+                    }
+                }
+            }
+            echo json_encode($newstockform_response);
         }else{
             $process = 'Add New Stock Form';
             $processFunction = 'Admin/addNewstockform';
             $this->logrecord($process,$processFunction);
             $this->global['pageTitle'] = 'Add New Stock Form';
             $data['vendorList']= $this->admin_model->fetchALLvendorList();
+            $data['getPriviousstockid']= $this->admin_model->getPriviousstockid();
+            $data['getItemlistStockform']= $this->admin_model->getItemlistStockform();
             $this->loadViews("masters/addNewstockform", $this->global, $data, NULL);
-
         }
 
+    }
+
+    public function saveStockformitem(){
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+
+            $saveStockformitem_response = array();
+             $this->form_validation->set_rules('part_number','Part Number','trim|required');            
+             $this->form_validation->set_rules('buyre_order_qty','Part Number','trim');
+             $this->form_validation->set_rules('fg_order_qty','FG Order Qty','trim');
+             $this->form_validation->set_rules('invoice_number','Invoice Number','trim');
+             $this->form_validation->set_rules('invoice_date','Invoice Date','trim');
+             $this->form_validation->set_rules('invoice_qty_in_pcs','Invoice Qty In Pcs','trim');
+             $this->form_validation->set_rules('invoice_qty_in_kgs','Invoice Qty In kgs','trim');
+             $this->form_validation->set_rules('lot_number','Lot Number','trim');
+             $this->form_validation->set_rules('actaul_recived_qty_in_pics','Actaul Recived Qty In Pics','trim');
+             $this->form_validation->set_rules('actaul_recived_qty_in_kgs','Actaul Recived Qty In Kgs','trim');
+             $this->form_validation->set_rules('privious_balenace','Privious Balenace','trim');
+             $this->form_validation->set_rules('itemremark','Ite Remark','trim');
+
+            if($this->form_validation->run() == FALSE)
+            {
+                $saveStockformitem_response['status'] = 'failure';
+                $saveStockformitem_response['error'] =  array('part_number'=>strip_tags(form_error('part_number')),'buyre_order_qty'=>strip_tags(form_error('buyre_order_qty')),'fg_order_qty'=>strip_tags(form_error('fg_order_qty')),'invoice_number'=>strip_tags(form_error('invoice_number')),'invoice_date'=>strip_tags(form_error('invoice_date')),'invoice_qty_in_pcs'=>strip_tags(form_error('invoice_qty_in_pcs')),'invoice_qty_in_kgs'=>strip_tags(form_error('invoice_qty_in_kgs')),'lot_number'=>strip_tags(form_error('lot_number')),'actaul_recived_qty_in_pics'=>strip_tags(form_error('actaul_recived_qty_in_pics')),'actaul_recived_qty_in_kgs'=>strip_tags(form_error('actaul_recived_qty_in_kgs')),'privious_balenace'=>strip_tags(form_error('privious_balenace')),'itemremark'=>strip_tags(form_error('itemremark')));
+           
+            }else{
+                    $data = array(
+                        'part_number'  =>  trim($this->input->post('part_number')),
+                        'buyer_order_qty'  =>  trim($this->input->post('buyre_order_qty')),
+                        'f_g_order_qty'  =>  trim($this->input->post('fg_order_qty')),
+                        'invoice_number'  =>  trim($this->input->post('invoice_number')),
+                        'invoice_date'  =>  trim($this->input->post('invoice_date')),
+                        'invoice_qty_in_pcs'  =>  trim($this->input->post('invoice_qty_in_pcs')),
+                        'invoice_qty_in_kgs'  =>  trim($this->input->post('invoice_qty_in_kgs')),
+                        'lot_number'  =>  trim($this->input->post('lot_number')),
+                        'actual_received_qty_in_pcs'  =>  trim($this->input->post('actaul_recived_qty_in_pics')),
+                        'actual_received_qty_in_kgs'  =>  trim($this->input->post('actaul_recived_qty_in_kgs')),
+                        'previous_balence'  =>  trim($this->input->post('privious_balenace')),
+                        'item_remark' =>  trim($this->input->post('itemremark'))
+                    );
+
+                $saveStockformitemdetails= $this->admin_model->saveStockformitemdetails('',$data);
+                if($saveStockformitemdetails){
+                    $saveStockformitem_response['status'] = 'success';
+                    $saveStockformitem_response['error'] =  array('part_number'=>strip_tags(form_error('part_number')),'buyre_order_qty'=>strip_tags(form_error('buyre_order_qty')),'fg_order_qty'=>strip_tags(form_error('fg_order_qty')),'invoice_number'=>strip_tags(form_error('invoice_number')),'invoice_date'=>strip_tags(form_error('invoice_date')),'invoice_qty_in_pcs'=>strip_tags(form_error('invoice_qty_in_pcs')),'invoice_qty_in_kgs'=>strip_tags(form_error('invoice_qty_in_kgs')),'lot_number'=>strip_tags(form_error('lot_number')),'actaul_recived_qty_in_pics'=>strip_tags(form_error('actaul_recived_qty_in_pics')),'actaul_recived_qty_in_kgs'=>strip_tags(form_error('actaul_recived_qty_in_kgs')),'privious_balenace'=>strip_tags(form_error('privious_balenace')),'itemremark'=>strip_tags(form_error('itemremark')));
+                }
+            }
+            echo json_encode($saveStockformitem_response);
+        }
     }
 
 }

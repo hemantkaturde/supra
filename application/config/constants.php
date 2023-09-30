@@ -153,6 +153,9 @@ define('TBL_POD_DETAILS','tbl_pod_details');
 define('TBL_POD_ITEM','tbl_pod_item');
 define('TBL_QUALITY_RECORDS','tbl_quality_records');
 define('TBL_QUALITY_RECORDS_ITEM','tbl_quality_records_item');
+define('TBL_STOCKS','tbl_stock_form');
+define('TBL_STOCKS_ITEM','tbl_stock_form_item');
+
 
 
 

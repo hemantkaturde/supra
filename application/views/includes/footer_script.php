@@ -12182,11 +12182,396 @@
 			   });
 			return false;
 	     });
+    </script>
+<?php } ?>
+
+<?php if($pageTitle=='Add New Stock Form' || $pageTitle=='Stock Form'){ ?>
+	<script type="text/javascript">
+
+        $(document).ready(function() {
+		    var dt = $('#view_stock_form_record').DataTable({
+	            "columnDefs": [ 
+	                 { className: "details-control", "targets": [ 0 ] },
+	                 { "width": "8%", "targets": 0 },
+	                 { "width": "10%", "targets": 1 },
+					 { "width": "10%", "targets": 2 },
+	                 { "width": "8%", "targets": 3 },
+					 { "width": "10%", "targets": 4 },
+					 { "width": "10%", "targets": 5 },
+					 { "width": "8%", "targets": 6 },
+					 { "width": "8%", "targets": 7 },
+					 { "width": "8%", "targets": 8 },
+					 { "width": "10%", "targets":9 }
+	            ],
+	            responsive: true,
+	            "oLanguage": {
+	                "sEmptyTable": "<i>No Stock Form Records Found.</i>",
+	            }, 
+	            "bSort" : false,
+	            "bFilter":true,
+	            "bLengthChange": true,
+	            "iDisplayLength": 10,   
+	            "bProcessing": true,
+	            "serverSide": true,
+	            "ajax":{
+                    url :"<?php echo base_url();?>fetchstockformrecords",
+                    type: "post",
+	            },
+	        });
+	    });
+
+		$(document).on('change','#vendor_name',function(e){  
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			// $("#customers-list").html('');
+			var vendor_name = $('#vendor_name').val();
+		    $('.vendor_po_number_div').css('display','block');
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getVendorPonumberbySupplierid",
+				type: "POST",
+				data : {'vendor_name' : vendor_name},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#vendor_po_number').html('<option value="">Select Vendor PO Number</option>');
+					}
+					else
+					{
+						// $('#supplier_po_number').html('<option value="">Select supplier PO Number</option>');
+						$('#vendor_po_number').html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#vendor_po_number').html();
+					//$(".loader_ajax").hide();
+				}
+			});
+			return false;
+		});
+
+		$(document).on('change','.vendor_po_for_buyer_details_',function(e){  
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			        var vendor_po_number = $('#vendor_po_number').val();
+			
+			        $.ajax({
+							url : "<?php echo ADMIN_PATH;?>getbuyerpodetailsforvendorbillofmaterial",
+							type: "POST",
+							data : {'vendor_po_number' : vendor_po_number},
+							success: function(data, textStatus, jqXHR)
+							{
+								$(".loader_ajax").hide();
+								if(data == "failure")
+								{
+									$('#buyer_name').html('');
+								}
+								else
+								{
+									$('#buyer_name').html(data);
+									$('#buyer_po_id').val('');
+					             	$("#buyer_po_number").val('');	
+									$('#buyer_po_date').val('');
+									$('#buyer_delivery_date').val('');	
+
+									$.ajax({
+										url : "<?php echo ADMIN_PATH;?>getbuyerpodetailsforvendorstockform",
+										type: "POST",
+										data : {'vendor_po_number' : vendor_po_number},
+										success: function(data, textStatus, jqXHR)
+										{
+											var get_buyerdata = jQuery.parseJSON( data );
+
+											$(".loader_ajax").hide();
+											if(data == "failure")
+											{
+												$('#buyer_po_id').val('');
+												$('#buyer_po_number').val('');
+												$('#buyer_po_date').val('');
+												$('#buyer_delivery_date').val('');	
+											}
+											else
+											{
+												$('#buyer_po_id').val(get_buyerdata.buyer_po_id);
+												$('#buyer_po_number').val(get_buyerdata.sales_order_number);
+												$('#buyer_po_date').val(get_buyerdata.date);
+												$('#buyer_delivery_date').val(get_buyerdata.delivery_date);	
+											}
+										},
+										error: function (jqXHR, textStatus, errorThrown)
+										{
+											$('#buyer_name').html();
+											
+										}
+									});
+
+										
+								}
+							},
+							error: function (jqXHR, textStatus, errorThrown)
+							{
+								   
+									$('#buyer_name').html('');				
+							}
+						});
+			    return false;
+	                   
+		});
+
+		$(document).on('change','.vendor_name_for_buyer_name',function(e){  
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			// $("#customers-list").html('');
+			var vendor_name_for_buyer_name = $('.vendor_name_for_buyer_name').val();
+
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getBuyerNamebySupplierid",
+				type: "POST",
+				data : {'vendor_name' : vendor_name_for_buyer_name},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#buyer_name').html('<option value="">Select Buyer Name</option>');
+					}
+					else
+					{
+						// $('#supplier_po_number').html('<option value="">Select supplier PO Number</option>');
+						$('#buyer_name').html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#buyer_name').html();
+					//$(".loader_ajax").hide();
+				}
+			});
+			return false;
+		});
+
+		$(document).on('change','.vendor_po_get_data',function(e){  
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			// $("#customers-list").html('');
+			var vendor_po_id = $('.vendor_po_get_data').val();
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>get_vendorpodata",
+				type: "POST",
+				data : {'vendor_po_id' : vendor_po_id},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#vendor_po_date').val('');
+					}
+					else
+					{
+						var get_vendorpodata = jQuery.parseJSON( data );
+						$('#vendor_po_date').val(get_vendorpodata.date);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#vendor_po_date').val('');
+				}
+			});
+			return false;
+		});
+
+		$(document).on('change','.vendor_po_for_item',function(e){  
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			var vendor_po_number = $('#vendor_po_number').val();
+
+			$("#part_number").html('');
+		
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getVendoritemonly",
+				type: "POST",
+				data : {'vendor_po_number' : vendor_po_number},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#part_number').html('<option value="">Select Part Number</option>');
+					}
+					else
+					{
+						$('#part_number').html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#part_number').html();
+				}
+			});
+			return false;
+		});
+
+		$(document).on('change','#part_number',function(e){  
+				e.preventDefault();
+			
+				//$(".loader_ajax").show();
+				var part_number = $('#part_number').val();
+				var vendor_po_number = $('#vendor_po_number').val();
+				var vendor_name = $('#vendor_name').val();
+
+				if(vendor_name){
+					if(vendor_po_number){
+							$.ajax({
+								url : "<?php echo ADMIN_PATH;?>getItemdetailsdependonvendorpoforstockform",
+								type: "POST",
+								data : {'part_number' : part_number,'vendor_po_number':vendor_po_number,'vendor_name':vendor_name},
+								success: function(data, textStatus, jqXHR)
+								{
+									$(".loader_ajax").hide();
+									if(data == "failure")
+									{
+										$('#description').val('');
+										$('#fg_order_qty').val('');
+										$('#buyre_order_qty').val('');
+									}
+									else
+									{
+										var data_finish_good = jQuery.parseJSON( data );
+										$('#description').val(data_finish_good.name);
+										$('#fg_order_qty').val(data_finish_good.vendor_qty);
+										$('#buyre_order_qty').val(data_finish_good.buyer_order_qty);
+									}
+								},
+								error: function (jqXHR, textStatus, errorThrown)
+								{
+										$('#description').val('');
+										$('#fg_order_qty').val('');
+										$('#buyre_order_qty').val('');
+								}
+							});
+							return false;
+
+					}else{
+						$('.part_number_error').html('Please Select Vendor PO Number');
+					}
+
+				}else{
+
+					$('.part_number_error').html('Please Select Vendor PO');
+				}
+				
+		});
+
+		$(document).on('click','#addnewstockform',function(e){
+
+				e.preventDefault();
+				$(".loader_ajax").show();
+				var formData = new FormData($("#addstockform")[0]);
+				$.ajax({
+					url : "<?php echo base_url();?>addNewstockform",
+					type: "POST",
+					data : formData,
+					cache: false,
+					contentType: false,
+					processData: false,
+					success: function(data, textStatus, jqXHR)
+					{
+						var fetchResponse = $.parseJSON(data);
+						if(fetchResponse.status == "failure")
+						{
+							$.each(fetchResponse.error, function (i, v)
+							{
+								$('.'+i+'_error').html(v);
+							});
+							$(".loader_ajax").hide();
+						}
+						else if(fetchResponse.status == 'success')
+						{
+							swal({
+								title: "Success",
+								text: "Stock Form Details Successfully Added!",
+								icon: "success",
+								button: "Ok",
+								},function(){ 
+
+									window.location.href = "<?php echo base_url().'stockform'?>";
+							});		
+						}
+						
+					},
+					error: function (jqXHR, textStatus, errorThrown)
+					{
+						$(".loader_ajax").hide();
+					}
+				});
+				return false;
+		});
 
 
-		 
+		$(document).on('click','#saveStockform_item',function(e){
+			e.preventDefault();
+			   $(".loader_ajax").show();
+		
+			   var part_number =   $('#part_number').val();
+			   var buyre_order_qty =   $('#buyre_order_qty').val();
+			   var fg_order_qty =   $('#fg_order_qty').val();
+			   var invoice_number =   $('#invoice_number').val();
+			   var invoice_date =   $('#invoice_date').val();
+			   var invoice_qty_in_pcs =   $('#invoice_qty_in_pcs').val();
+			   var invoice_qty_in_kgs =   $('#invoice_qty_in_kgs').val();
+			   var lot_number =   $('#lot_number').val();
+			   var actaul_recived_qty_in_pics =   $('#actaul_recived_qty_in_pics').val();
+			   var actaul_recived_qty_in_kgs =   $('#actaul_recived_qty_in_kgs').val();
+			   var privious_balenace =   $('#privious_balenace').val();
+			   var itemremark =   $('#itemremark').val();
+			
+			   $.ajax({
+				url : "<?php echo base_url();?>saveStockformitem",
+				type: "POST",
+				 //data : formData,
+				 data :{ part_number :part_number,buyre_order_qty:buyre_order_qty,fg_order_qty:fg_order_qty,invoice_number:invoice_number,invoice_date :invoice_date,invoice_qty_in_pcs:invoice_qty_in_pcs,invoice_qty_in_kgs :invoice_qty_in_kgs, lot_number :lot_number,actaul_recived_qty_in_pics :actaul_recived_qty_in_pics,actaul_recived_qty_in_kgs : actaul_recived_qty_in_kgs,privious_balenace :privious_balenace,itemremark :itemremark },
+				 method: "POST",
+                // data :{package_id:package_id},
+                cache:false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+						$(".loader_ajax").hide();
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						swal({
+							title: "Success",
+							text: "Item Successfully Added!",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
 
-		 
+							window.location.href = "<?php echo base_url().'addNewstockform'?>";
+								
+						});		
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			   });
+			return false;
+	     });
 
     </script>
 <?php } ?>

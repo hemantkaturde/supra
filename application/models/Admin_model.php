@@ -2889,8 +2889,6 @@ class Admin_model extends CI_Model
         $query = $this->db->get(TBL_FINISHED_GOODS);
         $data = $query->result_array();
         return $data;
-
-
     }
 
     public function getincomingdeatilscount(){
@@ -5286,7 +5284,6 @@ class Admin_model extends CI_Model
         }
     }
 
-
     public function get_qulityrecorditemrecord(){
         $this->db->select('*');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_QUALITY_RECORDS_ITEM.'.part_number');
@@ -5302,6 +5299,158 @@ class Admin_model extends CI_Model
        
     }
 
+    public function getPriviousstockid(){
+
+        $this->db->select('stock_id_number');
+        $this->db->where(TBL_STOCKS.'.status', 1);
+        $this->db->limit(1);
+        $this->db->order_by(TBL_STOCKS.'.stock_id','DESC');
+        $query = $this->db->get(TBL_STOCKS);
+        $rowcount = $query->result_array();
+        return $rowcount;
+    }
+
+    public function getbuyerpodetailsforvendorstockform($vendor_po_number){
+
+        $this->db->select(TBL_BUYER_PO_MASTER.'.*,'.TBL_BUYER_PO_MASTER.'.id as buyer_po_id');
+        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_VENDOR_PO_MASTER.'.buyer_po_number');
+        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_VENDOR_PO_MASTER.'.buyer_name');
+        $this->db->where(TBL_VENDOR_PO_MASTER.'.id', $vendor_po_number);
+        $this->db->where(TBL_VENDOR_PO_MASTER.'.status', 1);
+        $query_result = $this->db->get(TBL_VENDOR_PO_MASTER)->result_array();
+        return $query_result;
+    }
+
+    public function getItemdetailsdependonvendorpoforstockform($part_number,$vendor_po_number,$vendor_name){
+        $this->db->select(TBL_FINISHED_GOODS.'.name,'.TBL_VENDOR_PO_MASTER_ITEM.'.vendor_qty,'.TBL_BUYER_PO_MASTER_ITEM.'.order_oty as buyer_order_qty,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id');
+        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+        $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.pre_vendor_name');
+        $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
+        $this->db->join(TBL_BUYER_PO_MASTER_ITEM.' as a', 'a.buyer_po_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.pre_buyer_po_number');
+        $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id',$vendor_po_number);
+        $this->db->where(TBL_FINISHED_GOODS.'.status',1);
+        $this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
+        $query = $this->db->get(TBL_FINISHED_GOODS);
+        $data = $query->result_array();
+        return $data;
+    }
+
+    public function savestockform($id,$data){
+        if($id != '') {
+            $this->db->where('stock_id', $id);
+            if($this->db->update(TBL_STOCKS, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_STOCKS, $data)) {
+                return $this->db->insert_id();;
+            } else {
+                return FALSE;
+            }
+        }
+    }
+
+
+    public function getstockformcount($params){
+
+        $this->db->select(TBL_STOCKS.'.stock_id_number,'.TBL_STOCKS.'.stock_date,'.TBL_VENDOR_PO_MASTER.'.po_number as venor_po_number,'.TBL_VENDOR_PO_MASTER.'.date as vendor_po_date,'.TBL_VENDOR.'.vendor_name,'.TBL_BUYER_MASTER.'.buyer_name,'.TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_BUYER_PO_MASTER.'.date as buyer_po_date,'.TBL_BUYER_PO_MASTER.'.delivery_date as delivery_date');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_STOCKS.'.vendor_po_number');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_STOCKS.'.vendor_name');
+        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_STOCKS.'.buyer_po_number');
+        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_STOCKS.'.buyer_name');
+        $this->db->where(TBL_STOCKS.'.status', 1);
+        $query = $this->db->get(TBL_STOCKS);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+    }
+
+    public function getstockformdata($params){
+        $this->db->select(TBL_STOCKS.'.stock_id_number,'.TBL_STOCKS.'.stock_date,'.TBL_VENDOR_PO_MASTER.'.po_number as venor_po_number,'.TBL_VENDOR_PO_MASTER.'.date as vendor_po_date,'.TBL_VENDOR.'.vendor_name,'.TBL_BUYER_MASTER.'.buyer_name,'.TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_BUYER_PO_MASTER.'.date as buyer_po_date,'.TBL_BUYER_PO_MASTER.'.delivery_date as delivery_date');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_STOCKS.'.vendor_po_number');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_STOCKS.'.vendor_name');
+        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_STOCKS.'.buyer_po_number');
+        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_STOCKS.'.buyer_name');
+        $this->db->where(TBL_STOCKS.'.status', 1);
+        $this->db->limit($params['length'],$params['start']);
+        $this->db->order_by(TBL_STOCKS.'.stock_id ','DESC');
+        $query = $this->db->get(TBL_STOCKS);
+        $fetch_result = $query->result_array();
+
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['stock_id_number'] = $value['stock_id_number'];
+                $data[$counter]['stock_date'] = $value['stock_date'];
+                $data[$counter]['vendor_name'] = $value['vendor_name'];
+                $data[$counter]['venor_po_number'] = $value['venor_po_number'];
+                $data[$counter]['vendor_po_date'] = $value['vendor_po_date'];
+                $data[$counter]['buyer_name'] = $value['buyer_name'];
+                $data[$counter]['buyer_po_number'] = $value['sales_order_number'];
+                $data[$counter]['buyer_po_date'] = $value['buyer_po_date'];
+                $data[$counter]['buyer_delivery_date'] = $value['delivery_date'];
+                $data[$counter]['action'] = '';
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editdebitnoteform/".$value['pod_details_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addneworkrejection' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-ban' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addnewpackinginstruction' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-stack-exchange' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['pod_details_id']."' class='fa fa-trash-o deletepoddetails' aria-hidden='true'></i>"; 
+                $counter++; 
+            }
+        }
+        return $data;
+    }
+
+
+
+    public function saveStockformitemdetails($id,$data){
+        if($id != '') {
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_STOCKS_ITEM, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_STOCKS_ITEM, $data)) {
+                return $this->db->insert_id();
+            } else {
+                return FALSE;
+            }
+        }
+    }
+
+
+    public function getItemlistStockform(){
+        $this->db->select('*');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_STOCKS_ITEM.'.part_number');
+        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+        $this->db->where(TBL_STOCKS_ITEM.'.status', 1);
+        $this->db->where(TBL_STOCKS_ITEM.'.stock_form_id IS NULL');
+        $query = $this->db->get(TBL_STOCKS_ITEM);
+        $data = $query->result_array();
+        return $data;
+    }
+    
+    public function update_last_inserted_id_stock_from($saveStockformitemdetails){
+
+        $data = array(
+            'stock_form_id' =>$saveStockformitemdetails
+        );
+
+        $this->db->where(TBL_STOCKS_ITEM.'.stock_form_id IS NULL');
+        if($this->db->update(TBL_STOCKS_ITEM,$data)){
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+
+
+    }
 
 }
 

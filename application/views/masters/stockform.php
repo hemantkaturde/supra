@@ -37,7 +37,7 @@
                                         <th>Buyer Name</th>
                                         <th>Buyer PO</th>
                                         <th>Buyer PO Date</th>
-                                        <th>Delivery</th>
+                                        <th>Buyer Delivery Date</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>

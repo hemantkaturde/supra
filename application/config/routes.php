@@ -282,7 +282,17 @@ $route['fetchqulityrecords'] = "admin/fetchqulityrecords";
 $route['savequlityrecorditem'] = "admin/savequlityrecorditem";
 
 $route['stockform'] = "admin/stockform";
+$route['getbuyerpodetailsforvendorstockform'] = "admin/getbuyerpodetailsforvendorstockform";
+$route['getItemdetailsdependonvendorpoforstockform'] = "admin/getItemdetailsdependonvendorpoforstockform";
 $route['addNewstockform'] = "admin/addNewstockform";
+$route['fetchstockformrecords'] = "admin/fetchstockformrecords";
+$route['saveStockformitem'] = "admin/saveStockformitem";
+
+
+
+
+
+
 
 
 
