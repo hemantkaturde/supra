@@ -7571,6 +7571,8 @@ class Admin extends BaseController
             $data['vendorList']= $this->admin_model->fetchALLvendorList();
             $data['getPriviousstockid']= $this->admin_model->getPriviousstockid();
             $data['getItemlistStockform']= $this->admin_model->getItemlistStockform();
+            $data['getStockforminformation']= $this->admin_model->getStockforminformation();
+            $data['getAlltotalcalculation']= $this->admin_model->getAlltotalcalculation();
             $this->loadViews("masters/addNewstockform", $this->global, $data, NULL);
         }
 
@@ -7613,7 +7615,17 @@ class Admin extends BaseController
                         'actual_received_qty_in_pcs'  =>  trim($this->input->post('actaul_recived_qty_in_pics')),
                         'actual_received_qty_in_kgs'  =>  trim($this->input->post('actaul_recived_qty_in_kgs')),
                         'previous_balence'  =>  trim($this->input->post('privious_balenace')),
-                        'item_remark' =>  trim($this->input->post('itemremark'))
+                        'item_remark' =>  trim($this->input->post('itemremark')),
+
+                        'pre_stock_date'=>trim($this->input->post('pre_stock_date')),
+                        'pre_vendor_name'=>trim($this->input->post('pre_vendor_name')),
+                        'pre_vendor_po_number'=>trim($this->input->post('pre_vendor_po_number')),
+                        'pre_vendor_po_date'=>trim($this->input->post('pre_vendor_po_date')),
+
+                        'pre_buyer_name'=>trim($this->input->post('pre_buyer_name')),
+                        'pre_buyer_po_id'=>trim($this->input->post('pre_buyer_po_id')),
+                        'pre_buyer_po_date'=>trim($this->input->post('pre_buyer_po_date')),
+                        'pre_buyer_delivery_date'=>trim($this->input->post('pre_buyer_delivery_date'))
                     );
 
                 $saveStockformitemdetails= $this->admin_model->saveStockformitemdetails('',$data);

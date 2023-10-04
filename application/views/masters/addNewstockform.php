@@ -40,10 +40,18 @@
                                         <p class="error stock_id_error"></p>
                                 </div>
                             </div>
+
+
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="stock_date">Stock Date <span class="required">*</span></label>
-                                        <?php $date= date('Y-m-d'); ?>
+                                        <?php 
+                                        if($getStockforminformation[0]['pre_stock_date']){
+                                            $date= $getStockforminformation[0]['pre_stock_date'];
+                                        }else{
+                                            $date= date('Y-m-d'); 
+                                        }
+                                       ?>
                                         <input type="text" class="form-control datepicker" id="stock_date" name="stock_date" value="<?=$date?>"  required >
                                         <p class="error stock_date_error"></p>
                                 </div>
@@ -55,7 +63,7 @@
                                             <select class="form-control" name="vendor_name" id="vendor_name">
                                                 <option st-id="" value="">Select Vendor Name</option>
                                                     <?php foreach ($vendorList as $key => $value) {?>
-                                                        <option value="<?php echo $value['ven_id']; ?>"><?php echo $value['vendor_name']; ?></option>
+                                                        <option value="<?php echo $value['ven_id']; ?>" <?php if($getStockforminformation[0]['pre_vendor_name']==$value['ven_id']){ echo 'selected'; }?> ><?php echo $value['vendor_name']; ?></option>
                                                     <?php } ?>
                                             </select>
                                         <p class="error vendor_name_error"></p>
@@ -64,9 +72,18 @@
 
                             <div class="col-md-12 vendor_po_number_div" id="vendor_po_number_div">
                                 <div class="form-group">
+
+                                     <?php 
+                                        if($getStockforminformation[0]['pre_vendor_po_number']){
+                                            $po_number=  '<option st-id="" value="'.$getStockforminformation[0]['pre_vendor_po_number'].'">'.$getStockforminformation[0]['po_number'].'</option>';
+                                        }else{
+                                            $po_number= '<option st-id="" value="">Select Vendor Name</option>'; 
+                                        }
+                                       ?>
+
                                     <label for="vendor_po_number">Select Vendor PO Number</label>
                                         <select class="form-control vendor_po_for_item vendor_name_for_buyer_name  vendor_po_for_buyer_details_ vendor_po_get_data" name="vendor_po_number" id="vendor_po_number">
-                                            <!-- <option st-id="" value="">Select Vendor Name</option> -->
+                                            <?php echo $po_number;?>
                                         </select>
                                     <p class="error vendor_po_number_error"></p>
                                 </div>
@@ -78,21 +95,32 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="buyer_po">Vendor PO Date</label>
-                                        <input type="text" class="form-control" id="vendor_po_date" name="vendor_po_date"  required readonly>
+                                       <?php 
+                                        if($getStockforminformation[0]['pre_vendor_po_date']){
+                                            $pre_vendor_po_date= $getStockforminformation[0]['pre_vendor_po_date'];
+                                        }else{
+                                            $pre_vendor_po_date= date('Y-m-d'); 
+                                        }
+                                       ?>
+
+                                        <input type="text" class="form-control" id="vendor_po_date" name="vendor_po_date" value="<?=$pre_vendor_po_date?>" required readonly>
                                         <p class="error vendor_po_date_error"></p>
                                 </div>
                             </div>
+
+                                       <?php 
+                                        if($getStockforminformation[0]['buyer_id']){
+                                            $buyer_name=  '<option st-id="" value="'.$getStockforminformation['0']['buyer_id'].'">'.$getStockforminformation[0]['buyer_name'].'</option>';
+                                        }else{
+                                            $buyer_name= '<option st-id="" value="">Select Buyer Name</option>'; 
+                                        }
+                                       ?>
 
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="buyer_name">Buyer Name</label>
                                             <select class="form-control" name="buyer_name" id="buyer_name" readonly>
-                                                    <option st-id="" value="<?php echo $fetchALLpreVendorpoconfirmationitemList['0']['buyer_name']; ?>" ><?php echo $fetchALLpreVendorpoconfirmationitemList['0']['buyer_name_master']; ?></option>
-
-                                                    <option st-id="" value="">Select Buyer Name</option>
-                                                    <!-- <?php foreach ($buyerList as $key => $value) {?>
-                                                    <option value="<?php echo $value['buyer_id']; ?>" <?php if($value['buyer_id']==$fetchALLpresupplierpoconfirmationitemList[0]['pre_buyer_name']){ echo 'selected';} ?> ><?php echo $value['buyer_name']; ?></option>
-                                                    <?php } ?> -->
+                                                    <?php echo $buyer_name;?>
                                                 </select>
                                         <p class="error buyer_name_error"></p>
                                 </div>
@@ -101,8 +129,17 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="buyer_po_number">Buyer PO Number</label>
-                                    <input type="hidden" class="form-control" id="buyer_po_id" name="buyer_po_id" required readonly>
-                                     <input type="text" class="form-control" id="buyer_po_number" name="buyer_po_number" required readonly>
+                                      <?php 
+                                        if($getStockforminformation[0]['pre_buyer_po_id']){
+                                            $pre_buyer_po_number=  $getStockforminformation[0]['sales_order_number'];
+                                            $pre_buyer_po_id= $getStockforminformation[0]['pre_buyer_po_id'];
+                                        }else{
+                                            $pre_buyer_po_number= ''; 
+                                            $pre_buyer_po_id= ''; 
+                                        }
+                                       ?>
+                                    <input type="hidden" class="form-control" id="buyer_po_id" name="buyer_po_id" value="<?=$pre_buyer_po_id?>" required readonly>
+                                     <input type="text" class="form-control" id="buyer_po_number" name="buyer_po_number" value="<?=$pre_buyer_po_number?>" required readonly>
                                     <p class="error buyer_po_number_error"></p>
                                 </div>
                             </div>
@@ -110,7 +147,16 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="buyer_po_date">Buyer PO Date</label>
-                                     <input type="text" class="form-control" id="buyer_po_date" name="buyer_po_date" required readonly>
+
+                                    <?php 
+                                        if($getStockforminformation[0]['pre_buyer_po_date']){
+                                            $pre_buyer_po_date=  $getStockforminformation[0]['pre_buyer_po_date'];
+                                        }else{
+                                            $pre_buyer_po_date= ''; 
+                                        }
+                                       ?>
+
+                                     <input type="text" class="form-control" id="buyer_po_date" name="buyer_po_date" value="<?=$pre_buyer_po_date?>" required readonly>
                                     <p class="error buyer_po_date_error"></p>
                                 </div>
                             </div>
@@ -118,7 +164,17 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="buyer_delivery_date">Buyer Delivery Date</label>
-                                        <input type="text" class="form-control" id="buyer_delivery_date"  name="buyer_delivery_date" required readonly>
+
+
+                                    <?php 
+                                        if($getStockforminformation[0]['pre_buyer_delivery_date']){
+                                            $pre_buyer_delivery_date=  $getStockforminformation[0]['pre_buyer_delivery_date'];
+                                        }else{
+                                            $pre_buyer_delivery_date= ''; 
+                                        }
+                                       ?>
+
+                                        <input type="text" class="form-control" id="buyer_delivery_date"  name="buyer_delivery_date" value="<?=$pre_buyer_delivery_date?>" required readonly>
                                     <p class="error buyer_delivery_date_error"></p>
                                 </div>
                             </div>
@@ -129,7 +185,18 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="Invoice_qty_in_pcs">Invoice Qty (In pcs)</label>
-                                        <input type="text" class="form-control" id="Invoice_qty_in_pcs" name="Invoice_qty_in_pcs"  required readonly>
+
+                                        <?php
+                                        if($getAlltotalcalculation['invoice_qty_In_pcs']){
+
+                                            $total_invoice_qty_In_pcs = $getAlltotalcalculation['invoice_qty_In_pcs'];
+
+                                        }else{
+                                            $total_invoice_qty_In_pcs = 0;
+                                        }
+                                        ?>
+
+                                        <input type="text" class="form-control" id="Invoice_qty_in_pcs" name="Invoice_qty_in_pcs" value="<?=$total_invoice_qty_In_pcs;?>" required readonly>
                                         <p class="error Invoice_qty_in_pcs_error"></p>
                                 </div>
                             </div>
@@ -137,7 +204,18 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="Invoice_qty_in_kgs">Invoice Qty (In Kgs)</label>
-                                        <input type="text" class="form-control" id="Invoice_qty_in_kgs" name="Invoice_qty_in_kgs"  required readonly>
+
+                                        <?php
+                                        if($getAlltotalcalculation['invoice_qty_In_kgs']){
+
+                                            $total_invoice_qty_In_kgs = $getAlltotalcalculation['invoice_qty_In_kgs'];
+
+                                        }else{
+                                            $total_invoice_qty_In_kgs = 0;
+                                        }
+                                        ?>
+
+                                        <input type="text" class="form-control" id="Invoice_qty_in_kgs" name="Invoice_qty_in_kgs" value="<?=$total_invoice_qty_In_kgs;?>" required readonly>
                                         <p class="error Invoice_qty_in_kgs_error"></p>
                                 </div>
                             </div>
@@ -145,7 +223,17 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="actual_received_qty_in_pcs">Actual received Qty (In Pcs)</label>
-                                        <input type="text" class="form-control" id="actual_received_qty_in_pcs" name="actual_received_qty_in_pcs"  readonly>
+
+                                        <?php
+                                        if($getAlltotalcalculation['actual_received_qty_in_pcs']){
+
+                                            $total_actual_received_qty_in_pcs = $getAlltotalcalculation['actual_received_qty_in_pcs'];
+
+                                        }else{
+                                            $total_actual_received_qty_in_pcs = 0;
+                                        }
+                                        ?>
+                                        <input type="text" class="form-control" id="actual_received_qty_in_pcs" name="actual_received_qty_in_pcs" value="<?=$total_actual_received_qty_in_pcs;?>"  readonly>
                                         <p class="error actual_received_qty_in_pcs_error"></p>
                                 </div>
                             </div>
@@ -153,7 +241,16 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="actual_received_qty_in_kgs">Actual received Qty (In Kgs)</label>
-                                        <input type="text" class="form-control" id="actual_received_qty_in_kgs" name="actual_received_qty_in_kgs"  required readonly>
+                                        <?php
+                                        if($getAlltotalcalculation['actual_received_qty_in_kgs']){
+
+                                            $total_actual_received_qty_in_kgs = $getAlltotalcalculation['actual_received_qty_in_kgs'];
+
+                                        }else{
+                                            $total_actual_received_qty_in_kgs = 0;
+                                        }
+                                        ?>
+                                        <input type="text" class="form-control" id="actual_received_qty_in_kgs" name="actual_received_qty_in_kgs" value="<?=$total_actual_received_qty_in_kgs;?>"  required readonly>
                                         <p class="error actual_received_qty_in_kgs_error"></p>
                                 </div>
                             </div>
@@ -161,8 +258,9 @@
                             
                             <div class="col-md-12">
                                 <div class="form-group">
+
                                         <label for="balance_qty_in_kgs">Remark</label>
-                                        <input type="remark" class="form-control" id="remark" name="remark">
+                                        <input type="remark" class="form-control" id="remark" <?=$getAlltotalcalculation['pre_remark']?> name="remark">
                                         <p class="error remark_error"></p>
                                 </div>
                             </div>
@@ -316,7 +414,7 @@
                             }else{
                             $button ="disabled";
                             } ?>
-                            
+
                            <input type="submit" id="addnewstockform" class="btn btn-primary" value="Submit" <?=$button?>>
                            <input type="button" onclick="location.href = '<?php echo base_url() ?>stockform'" class="btn btn-default" value="Back" />
                         </div>

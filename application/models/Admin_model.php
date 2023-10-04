@@ -5459,8 +5459,33 @@ class Admin_model extends CI_Model
         }else{
            return FALSE;
         }
+    }
+
+    public function getStockforminformation(){
+
+        $this->db->select(TBL_STOCKS_ITEM.'.pre_stock_date,'.TBL_STOCKS_ITEM.'.pre_vendor_po_date,'.TBL_STOCKS_ITEM.'.pre_vendor_name,'.TBL_VENDOR_PO_MASTER.'.po_number,'.TBL_STOCKS_ITEM.'.pre_buyer_name,'.TBL_BUYER_MASTER.'.buyer_name,'.TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_STOCKS_ITEM.'.pre_buyer_po_id,'.TBL_STOCKS_ITEM.'.pre_buyer_po_date,'.TBL_STOCKS_ITEM.'.pre_buyer_delivery_date,'.TBL_STOCKS_ITEM.'.pre_vendor_po_number,'.TBL_BUYER_MASTER.'.buyer_id');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_STOCKS_ITEM.'.pre_vendor_name');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id  = '.TBL_STOCKS_ITEM.'.pre_vendor_po_number');
+        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_STOCKS_ITEM.'.pre_buyer_name');
+        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_STOCKS_ITEM.'.pre_buyer_po_id');
+        $this->db->where(TBL_STOCKS_ITEM.'.stock_form_id IS NULL');
+        $this->db->where(TBL_STOCKS_ITEM.'.status', 1);
+        $query = $this->db->get(TBL_STOCKS_ITEM);
+        $fetch_result = $query->result_array();
+        return $fetch_result;
 
     }
+
+
+  public function getAlltotalcalculation(){
+    $this->db->select('sum(invoice_qty_In_pcs) as invoice_qty_In_pcs,sum(invoice_qty_In_kgs) as invoice_qty_In_kgs,sum(actual_received_qty_in_pcs) as actual_received_qty_in_pcs,sum(actual_received_qty_in_kgs) as actual_received_qty_in_kgs');
+    $this->db->where(TBL_STOCKS_ITEM.'.stock_form_id IS NULL');
+    $this->db->where(TBL_STOCKS_ITEM.'.status', 1);
+    $query = $this->db->get(TBL_STOCKS_ITEM);
+    $fetch_result = $query->row_array();
+    return $fetch_result;
+  }
+
 
 }
 

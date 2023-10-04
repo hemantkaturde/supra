@@ -12220,6 +12220,39 @@
 	        });
 	    });
 
+		$(document).ready(function() {
+			//e.preventDefault();
+			//$(".loader_ajax").show();
+			var vendor_po_number = $('#vendor_po_number').val();
+
+			$("#part_number").html('');
+		
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getVendoritemonly",
+				type: "POST",
+				data : {'vendor_po_number' : vendor_po_number},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#part_number').html('<option value="">Select Part Number</option>');
+					}
+					else
+					{
+						$('#part_number').html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#part_number').html();
+				}
+			});
+			return false;
+
+		});
+
 		$(document).on('change','#vendor_name',function(e){  
 			e.preventDefault();
 			//$(".loader_ajax").show();
@@ -12539,12 +12572,24 @@
 			   var actaul_recived_qty_in_kgs =   $('#actaul_recived_qty_in_kgs').val();
 			   var privious_balenace =   $('#privious_balenace').val();
 			   var itemremark =   $('#itemremark').val();
+
+			   var pre_stock_date =   $('#stock_date').val();
+			   var pre_vendor_name =   $('#vendor_name').val();
+			   var pre_vendor_po_number =   $('#vendor_po_number').val();
+			   var pre_vendor_po_date =   $('#vendor_po_date').val();
+
+			   var pre_buyer_name =   $('#buyer_name').val();
+			   var pre_buyer_po_id =   $('#buyer_po_id').val();
+			   var pre_buyer_po_date =   $('#buyer_po_date').val();
+			   var pre_buyer_delivery_date =   $('#buyer_delivery_date').val();
+
+
 			
 			   $.ajax({
 				url : "<?php echo base_url();?>saveStockformitem",
 				type: "POST",
 				 //data : formData,
-				 data :{ part_number :part_number,buyre_order_qty:buyre_order_qty,fg_order_qty:fg_order_qty,invoice_number:invoice_number,invoice_date :invoice_date,invoice_qty_in_pcs:invoice_qty_in_pcs,invoice_qty_in_kgs :invoice_qty_in_kgs, lot_number :lot_number,actaul_recived_qty_in_pics :actaul_recived_qty_in_pics,actaul_recived_qty_in_kgs : actaul_recived_qty_in_kgs,privious_balenace :privious_balenace,itemremark :itemremark },
+				 data :{ part_number :part_number,buyre_order_qty:buyre_order_qty,fg_order_qty:fg_order_qty,invoice_number:invoice_number,invoice_date :invoice_date,invoice_qty_in_pcs:invoice_qty_in_pcs,invoice_qty_in_kgs :invoice_qty_in_kgs, lot_number :lot_number,actaul_recived_qty_in_pics :actaul_recived_qty_in_pics,actaul_recived_qty_in_kgs : actaul_recived_qty_in_kgs,privious_balenace :privious_balenace,itemremark :itemremark,pre_stock_date:pre_stock_date,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_vendor_po_date:pre_vendor_po_date,pre_buyer_name:pre_buyer_name,pre_buyer_po_id:pre_buyer_po_id,pre_buyer_po_date:pre_buyer_po_date,pre_buyer_delivery_date:pre_buyer_delivery_date},
 				 method: "POST",
                 // data :{package_id:package_id},
                 cache:false,
@@ -12605,10 +12650,9 @@
 			
 		});
 
-
 		$(document).on('click','.deleteStockformitem',function(e){
 		
-		var elemF = $(this);
+		 var elemF = $(this);
 			e.preventDefault();
 			swal({
 				title: "Are you sure?",
