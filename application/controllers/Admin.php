@@ -7511,14 +7511,14 @@ class Admin extends BaseController
             $this->form_validation->set_rules('Invoice_qty_in_kgs','Invoice_qty_in_kgs','trim');
             $this->form_validation->set_rules('actual_received_qty_in_pcs','actual_received_qty_in_pcs','trim');
             $this->form_validation->set_rules('actual_received_qty_in_kgs','actual_received_qty_in_kgs','trim');
-            $this->form_validation->set_rules('total_rejected_in_pcs','total_rejected_in_pcs','trim');
-            $this->form_validation->set_rules('total_rejected_in_pcs_kgs','total_rejected_in_pcs_kgs','trim');
-            $this->form_validation->set_rules('reday_for_export_pcs','reday_for_export_pcs','trim');
-            $this->form_validation->set_rules('reday_for_export_kgs','reday_for_export_kgs','trim');
-            $this->form_validation->set_rules('total_rejection_qty_kgs','total_rejection_qty_kgs','trim');
-            $this->form_validation->set_rules('total_export_qty_pcs','total_export_qty_pcs','trim');
-            $this->form_validation->set_rules('balance_qty_in_pics','balance_qty_in_pics','trim');
-            $this->form_validation->set_rules('balance_qty_in_kgs','balance_qty_in_kgs','trim');
+            // $this->form_validation->set_rules('total_rejected_in_pcs','total_rejected_in_pcs','trim');
+            // $this->form_validation->set_rules('total_rejected_in_pcs_kgs','total_rejected_in_pcs_kgs','trim');
+            // $this->form_validation->set_rules('reday_for_export_pcs','reday_for_export_pcs','trim');
+            // $this->form_validation->set_rules('reday_for_export_kgs','reday_for_export_kgs','trim');
+            // $this->form_validation->set_rules('total_rejection_qty_kgs','total_rejection_qty_kgs','trim');
+            // $this->form_validation->set_rules('total_export_qty_pcs','total_export_qty_pcs','trim');
+            // $this->form_validation->set_rules('balance_qty_in_pics','balance_qty_in_pics','trim');
+            // $this->form_validation->set_rules('balance_qty_in_kgs','balance_qty_in_kgs','trim');
             $this->form_validation->set_rules('remark','remark','trim');
           
             if($this->form_validation->run() == FALSE)
@@ -7542,14 +7542,14 @@ class Admin extends BaseController
                     'Invoice_qty_in_kgs' => trim($this->input->post('Invoice_qty_in_kgs')),
                     'actual_received_qty_in_pcs'  => trim($this->input->post('actual_received_qty_in_pcs')),
                     'actual_received_qty_in_kgs'  => trim($this->input->post('actual_received_qty_in_kgs')),
-                    'total_rejected_in_pcs'  => trim($this->input->post('total_rejected_in_pcs')),
-                    'total_rejected_in_pcs_kgs' => trim($this->input->post('total_rejected_in_pcs_kgs')),
-                    'reday_for_export_pcs' => trim($this->input->post('reday_for_export_pcs')),
-                    'reday_for_export_kgs' => trim($this->input->post('reday_for_export_kgs')),
-                    'total_rejection_qty_kgs' => trim($this->input->post('total_rejection_qty_kgs')),
-                    'total_export_qty_pcs' => trim($this->input->post('total_export_qty_pcs')),
-                    'balance_qty_in_pics'  => trim($this->input->post('balance_qty_in_pics')),
-                    'balance_qty_in_kgs' => trim($this->input->post('balance_qty_in_kgs')),
+                    // 'total_rejected_in_pcs'  => trim($this->input->post('total_rejected_in_pcs')),
+                    // 'total_rejected_in_pcs_kgs' => trim($this->input->post('total_rejected_in_pcs_kgs')),
+                    // 'reday_for_export_pcs' => trim($this->input->post('reday_for_export_pcs')),
+                    // 'reday_for_export_kgs' => trim($this->input->post('reday_for_export_kgs')),
+                    // 'total_rejection_qty_kgs' => trim($this->input->post('total_rejection_qty_kgs')),
+                    // 'total_export_qty_pcs' => trim($this->input->post('total_export_qty_pcs')),
+                    // 'balance_qty_in_pics'  => trim($this->input->post('balance_qty_in_pics')),
+                    // 'balance_qty_in_kgs' => trim($this->input->post('balance_qty_in_kgs')),
                     'remark' => trim($this->input->post('remark')),
                 );
 
@@ -7624,6 +7624,25 @@ class Admin extends BaseController
             }
             echo json_encode($saveStockformitem_response);
         }
+    }
+
+
+    public function deleteStockformitem(){
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->deleteStockformitem(trim($this->input->post('id')));
+            if ($result) {
+                        $process = 'Delete Stock Form Details';
+                        $processFunction = 'Admin/deleteStockformitem';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
+
     }
 
 }

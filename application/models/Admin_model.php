@@ -5322,7 +5322,7 @@ class Admin_model extends CI_Model
     }
 
     public function getItemdetailsdependonvendorpoforstockform($part_number,$vendor_po_number,$vendor_name){
-        $this->db->select(TBL_FINISHED_GOODS.'.name,'.TBL_VENDOR_PO_MASTER_ITEM.'.vendor_qty,'.TBL_BUYER_PO_MASTER_ITEM.'.order_oty as buyer_order_qty,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id');
+        $this->db->select(TBL_FINISHED_GOODS.'.name,'.TBL_FINISHED_GOODS.'.net_weight,'.TBL_VENDOR_PO_MASTER_ITEM.'.vendor_qty,'.TBL_BUYER_PO_MASTER_ITEM.'.order_oty as buyer_order_qty,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id,'.TBL_VENDOR_PO_MASTER_ITEM.'.vendor_qty as vendor_qtyvendor_qty');
         $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
         $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.pre_vendor_name');
@@ -5426,7 +5426,7 @@ class Admin_model extends CI_Model
 
 
     public function getItemlistStockform(){
-        $this->db->select('*');
+        $this->db->select('*,'.TBL_STOCKS_ITEM.'.id as stock_item_id');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_STOCKS_ITEM.'.part_number');
         $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
         $this->db->where(TBL_STOCKS_ITEM.'.status', 1);
@@ -5448,7 +5448,17 @@ class Admin_model extends CI_Model
         }else{
             return FALSE;
         }
+    }
 
+
+    public function deleteStockformitem($id){
+        $this->db->where('id', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_STOCKS_ITEM)){
+           return TRUE;
+        }else{
+           return FALSE;
+        }
 
     }
 

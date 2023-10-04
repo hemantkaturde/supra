@@ -12439,6 +12439,9 @@
 										$('#description').val('');
 										$('#fg_order_qty').val('');
 										$('#buyre_order_qty').val('');
+										$('#invoice_qty_in_pcs').val('');
+										$('#invoice_qty_in_kgs').val('');
+										$('#net_weight').val('');
 									}
 									else
 									{
@@ -12446,6 +12449,10 @@
 										$('#description').val(data_finish_good.name);
 										$('#fg_order_qty').val(data_finish_good.vendor_qty);
 										$('#buyre_order_qty').val(data_finish_good.buyer_order_qty);
+										$('#invoice_qty_in_pcs').val(data_finish_good.vendor_qtyvendor_qty);
+										var invoice_qty_in_kgs =  parseFloat(data_finish_good.vendor_qtyvendor_qty) * parseFloat(data_finish_good.net_weight);
+										$('#invoice_qty_in_kgs').val(invoice_qty_in_kgs);
+										$('#net_weight').val(data_finish_good.net_weight);
 									}
 								},
 								error: function (jqXHR, textStatus, errorThrown)
@@ -12453,6 +12460,9 @@
 										$('#description').val('');
 										$('#fg_order_qty').val('');
 										$('#buyre_order_qty').val('');
+										$('#invoice_qty_in_pcs').val('');
+										$('#invoice_qty_in_kgs').val('');
+										$('#net_weight').val('');
 								}
 							});
 							return false;
@@ -12513,7 +12523,6 @@
 				return false;
 		});
 
-
 		$(document).on('click','#saveStockform_item',function(e){
 			e.preventDefault();
 			   $(".loader_ajax").show();
@@ -12571,7 +12580,80 @@
 			    }
 			   });
 			return false;
-	     });
+	    });
+
+		$(document).on('change', '#actaul_recived_qty_in_pics', function(){	
+				
+			    $("#actaul_recived_qty_in_kgs").val();
+
+				 if($("#actaul_recived_qty_in_pics").val()){
+					 var actaul_recived_qty_in_pics = $("#actaul_recived_qty_in_pics").val();
+				 }else{
+					 var actaul_recived_qty_in_pics = 0;
+				 }
+
+				 if($("#net_weight").val()){
+					 var net_weight = $("#net_weight").val();
+				 }else{
+					 var net_weight = 0;
+				 }
+
+				 
+				 var total_one_group = parseFloat(net_weight) *  parseFloat(actaul_recived_qty_in_pics);
+
+				 $("#actaul_recived_qty_in_kgs").val(total_one_group);
+			
+		});
+
+
+		$(document).on('click','.deleteStockformitem',function(e){
+		
+		var elemF = $(this);
+			e.preventDefault();
+			swal({
+				title: "Are you sure?",
+				text: "Delete Stock Form Item ",
+				type: "warning",
+				showCancelButton: true,
+				closeOnClickOutside: false,
+				confirmButtonClass: "btn-sm btn-danger",
+				confirmButtonText: "Yes, delete it!",
+				cancelButtonText: "No, cancel plz!",
+				closeOnConfirm: false,
+				closeOnCancel: false
+			}, function(isConfirm) {
+				if (isConfirm) {
+							$.ajax({
+								url : "<?php echo base_url();?>deleteStockformitem",
+								type: "POST",
+								data : 'id='+elemF.attr('data-id'),
+								success: function(data, textStatus, jqXHR)
+								{
+									const obj = JSON.parse(data);
+								
+									if(obj.status=='success'){
+										swal({
+											title: "Deleted!",
+											text: "Stock Form Item Deleted Succesfully",
+											icon: "success",
+											button: "Ok",
+											},function(){ 
+													window.location.href = "<?php echo base_url().'addNewstockform'?>";
+										});	
+									}
+
+								},
+								error: function (jqXHR, textStatus, errorThrown)
+								{
+									$(".loader_ajax").hide();
+								}
+							})
+						}
+						else {
+				swal("Cancelled", "Stock Form Item deletion cancelled ", "error");
+				}
+			});
+	    });
 
     </script>
 <?php } ?>

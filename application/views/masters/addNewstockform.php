@@ -71,7 +71,10 @@
                                     <p class="error vendor_po_number_error"></p>
                                 </div>
                             </div>
+                        </div>
 
+
+                        <div class="col-md-4">
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="buyer_po">Vendor PO Date</label>
@@ -119,6 +122,7 @@
                                     <p class="error buyer_delivery_date_error"></p>
                                 </div>
                             </div>
+
                         </div>
 
                         <div class="col-md-4">
@@ -157,8 +161,8 @@
                             
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="balance_qty_in_kgs">Remark</label>
-                                        <textarea class="form-control" name="remark" id="remark" rows="8"></textarea>
+                                        <label for="balance_qty_in_kgs">Remark</label>
+                                        <input type="remark" class="form-control" id="remark" name="remark">
                                         <p class="error remark_error"></p>
                                 </div>
                             </div>
@@ -265,6 +269,7 @@
                                         <th scope="col">Actual Received Qty (In Kgs)</th>
                                         <th scope="col">Previous Balance</th>
                                         <th scope="col">Remark</th>
+                                        <th scope="col">Action</th>
                                     </tr>
                                     </thead>   
 
@@ -287,6 +292,9 @@
                                                 <td><?=$value['actual_received_qty_in_kgs']?></td>
                                                 <td><?=$value['previous_balence']?></td>
                                                 <td><?=$value['item_remark']?></td>
+                                                <td>
+                                                   <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['stock_item_id'];?>' class='fa fa-trash-o deleteStockformitem' aria-hidden='true'></i>
+                                                </td>
                                             <tr>   
 
                                           <?php  } }else{ ?>
@@ -302,7 +310,14 @@
                      <!-- /.box-body -->
                      <div class="box-footer">
                         <div class="col-xs-8">
-                           <input type="submit" id="addnewstockform" class="btn btn-primary" value="Submit">
+
+                            <?php if($getItemlistStockform){ 
+                            $button ="";
+                            }else{
+                            $button ="disabled";
+                            } ?>
+                            
+                           <input type="submit" id="addnewstockform" class="btn btn-primary" value="Submit" <?=$button?>>
                            <input type="button" onclick="location.href = '<?php echo base_url() ?>stockform'" class="btn btn-default" value="Back" />
                         </div>
                      </div>
@@ -378,13 +393,13 @@
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label for="invoice_qty_in_pcs">Invoice Qty (In Pcs) </label>
-                                                                <input type="text" class="form-control" id="invoice_qty_in_pcs" name="invoice_qty_in_pcs">
+                                                                <input type="text" class="form-control" id="invoice_qty_in_pcs" name="invoice_qty_in_pcs" readonly>
                                                                 <p class="error invoice_qty_in_pcs_error"></p>
                                                             </div>
 
                                                             <div class="form-group">
                                                                 <label for="invoice_qty_in_kgs">Invoice Qty (In Kgs) </label>
-                                                                <input type="text" class="form-control" id="invoice_qty_in_kgs" name="invoice_qty_in_kgs">
+                                                                <input type="text" class="form-control" id="invoice_qty_in_kgs" name="invoice_qty_in_kgs" readonly>
                                                                 <p class="error invoice_qty_in_kgs_error"></p>
                                                             </div>
                                                         
@@ -399,10 +414,13 @@
                                                                 <input type="text" class="form-control" id="actaul_recived_qty_in_pics" name="actaul_recived_qty_in_pics">
                                                                 <p class="error actaul_recived_qty_in_pics_error"></p>
                                                             </div>
+
+                                                            <input type="hidden" class="form-control" id="net_weight" name="net_weight">
+
                                                         
                                                             <div class="form-group">
                                                                 <label for="actaul_recived_qty_in_kgs">Actual Received Qty (In kgs) </label>
-                                                                <input type="text" class="form-control" id="actaul_recived_qty_in_kgs" name="actaul_recived_qty_in_kgs">
+                                                                <input type="text" class="form-control" id="actaul_recived_qty_in_kgs" name="actaul_recived_qty_in_kgs" readonly>
                                                                 <p class="error tactaul_recived_qty_in_kgs_error"></p>
                                                             </div>
 
