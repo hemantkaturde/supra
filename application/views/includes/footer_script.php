@@ -12480,7 +12480,7 @@
 									{
 										var data_finish_good = jQuery.parseJSON( data );
 										$('#description').val(data_finish_good.name);
-										$('#fg_order_qty').val(data_finish_good.vendor_qty);
+										$('#fg_order_qty').val(data_finish_good.vendor_order_qty);
 										$('#buyre_order_qty').val(data_finish_good.buyer_order_qty);
 										$('#invoice_qty_in_pcs').val(data_finish_good.vendor_qtyvendor_qty);
 										var invoice_qty_in_kgs =  parseFloat(data_finish_good.vendor_qtyvendor_qty) * parseFloat(data_finish_good.net_weight);
