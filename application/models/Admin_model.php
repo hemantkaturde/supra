@@ -5322,7 +5322,7 @@ class Admin_model extends CI_Model
     }
 
     public function getItemdetailsdependonvendorpoforstockform($part_number,$vendor_po_number,$vendor_name){
-        $this->db->select(TBL_FINISHED_GOODS.'.name,'.TBL_FINISHED_GOODS.'.net_weight,'.TBL_VENDOR_PO_MASTER_ITEM.'.vendor_qty,'.TBL_BUYER_PO_MASTER_ITEM.'.order_oty as buyer_order_qty,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id,'.TBL_VENDOR_PO_MASTER_ITEM.'.vendor_qty as vendor_qtyvendor_qty');
+        $this->db->select(TBL_FINISHED_GOODS.'.name,'.TBL_FINISHED_GOODS.'.net_weight,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_order_qty,'.TBL_BUYER_PO_MASTER_ITEM.'.order_oty as buyer_order_qty,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id,'.TBL_VENDOR_PO_MASTER_ITEM.'.vendor_qty as vendor_qtyvendor_qty');
         $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
         $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.pre_vendor_name');
