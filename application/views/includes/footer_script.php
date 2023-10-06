@@ -12701,3 +12701,42 @@
 
     </script>
 <?php } ?>
+
+
+
+<?php if($pageTitle=='Search Stock'){ ?>
+	<script type="text/javascript">    
+        $(document).ready(function() {
+		    var dt = $('#view_stock_search_record').DataTable({
+	            "columnDefs": [ 
+	                 { className: "details-control", "targets": [ 0 ] },
+	                 { "width": "10%", "targets": 0 },
+	                 { "width": "15%", "targets": 1 },
+					 { "width": "10%", "targets": 2 },
+	                 { "width": "10%", "targets": 3 },
+					 { "width": "10%", "targets": 4 },
+					 { "width": "10%", "targets": 5 },
+					 { "width": "10%", "targets": 6 },
+					 { "width": "5%", "targets": 7 },
+					 { "width": "10%", "targets": 8 },
+					 { "width": "15%", "targets": 9 }
+	            ],
+	            responsive: true,
+	            "oLanguage": {
+	                "sEmptyTable": "<i>No Stock Records Found.</i>",
+	            }, 
+	            "bSort" : false,
+	            "bFilter":true,
+	            "bLengthChange": true,
+	            "iDisplayLength": 10,   
+	            "bProcessing": true,
+	            "serverSide": true,
+	            "ajax":{
+                    url :"<?php echo base_url();?>fetchsearchstockrecords",
+                    type: "post",
+	            },
+	        });
+	    });
+
+   </script>
+<?php } ?>

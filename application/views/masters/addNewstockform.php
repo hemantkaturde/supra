@@ -491,7 +491,7 @@
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label for="invoice_qty_in_pcs">Invoice Qty (In Pcs) </label>
-                                                                <input type="text" class="form-control" id="invoice_qty_in_pcs" name="invoice_qty_in_pcs" readonly>
+                                                                <input type="text" class="form-control" id="invoice_qty_in_pcs" name="invoice_qty_in_pcs">
                                                                 <p class="error invoice_qty_in_pcs_error"></p>
                                                             </div>
 
@@ -525,7 +525,7 @@
 
                                                             <div class="form-group">
                                                                 <label for="privious_balenace">Previous Balenced</label>
-                                                                <input type="text" class="form-control" id="privious_balenace" name="privious_balenace">
+                                                                <input type="text" class="form-control" id="privious_balenace" value="0" name="privious_balenace">
                                                                 <p class="error privious_balenace_error"></p>
                                                             </div>
                                                         

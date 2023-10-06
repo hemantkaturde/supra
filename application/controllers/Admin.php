@@ -7579,7 +7579,6 @@ class Admin extends BaseController
     }
 
     public function saveStockformitem(){
-
         $post_submit = $this->input->post();
         if($post_submit){
 
@@ -7640,7 +7639,6 @@ class Admin extends BaseController
 
 
     public function deleteStockformitem(){
-
         $post_submit = $this->input->post();
         if($post_submit){
             $result = $this->admin_model->deleteStockformitem(trim($this->input->post('id')));
@@ -7654,7 +7652,45 @@ class Admin extends BaseController
         }else{
             echo(json_encode(array('status'=>'failed'))); 
         }
-
     }
+
+
+
+    public function searchstock(){
+        $process = 'Search Stock';
+        $processFunction = 'Admin/searchstock';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Search Stock';
+        $data['vendorList']= $this->admin_model->fetchALLvendorList();
+        $data['getallitemsfromfgorrawmaterial']= $this->admin_model->getallitemsfromfgorrawmaterial();
+        $this->loadViews("masters/searchstock", $this->global, $data, NULL);  
+    }
+
+
+    public function fetchsearchstockrecords(){
+
+        $params = $_REQUEST;
+        $totalRecords = $this->admin_model->getsearchstockformcount($params); 
+        $queryRecords = $this->admin_model->getsearchstockformdata($params); 
+
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+        echo json_encode($json_data);
+    }
+
 
 }

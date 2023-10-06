@@ -5353,7 +5353,6 @@ class Admin_model extends CI_Model
         }
     }
 
-
     public function getstockformcount($params){
 
         $this->db->select(TBL_STOCKS.'.stock_id_number,'.TBL_STOCKS.'.stock_date,'.TBL_VENDOR_PO_MASTER.'.po_number as venor_po_number,'.TBL_VENDOR_PO_MASTER.'.date as vendor_po_date,'.TBL_VENDOR.'.vendor_name,'.TBL_BUYER_MASTER.'.buyer_name,'.TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_BUYER_PO_MASTER.'.date as buyer_po_date,'.TBL_BUYER_PO_MASTER.'.delivery_date as delivery_date');
@@ -5406,7 +5405,6 @@ class Admin_model extends CI_Model
     }
 
 
-
     public function saveStockformitemdetails($id,$data){
         if($id != '') {
             $this->db->where('id', $id);
@@ -5450,7 +5448,6 @@ class Admin_model extends CI_Model
         }
     }
 
-
     public function deleteStockformitem($id){
         $this->db->where('id', $id);
         //$this->db->delete(TBL_SUPPLIER);
@@ -5476,15 +5473,86 @@ class Admin_model extends CI_Model
 
     }
 
+    public function getAlltotalcalculation(){
+        $this->db->select('sum(invoice_qty_In_pcs) as invoice_qty_In_pcs,sum(invoice_qty_In_kgs) as invoice_qty_In_kgs,sum(actual_received_qty_in_pcs) as actual_received_qty_in_pcs,sum(actual_received_qty_in_kgs) as actual_received_qty_in_kgs');
+        $this->db->where(TBL_STOCKS_ITEM.'.stock_form_id IS NULL');
+        $this->db->where(TBL_STOCKS_ITEM.'.status', 1);
+        $query = $this->db->get(TBL_STOCKS_ITEM);
+        $fetch_result = $query->row_array();
+        return $fetch_result;
+    }
 
-  public function getAlltotalcalculation(){
-    $this->db->select('sum(invoice_qty_In_pcs) as invoice_qty_In_pcs,sum(invoice_qty_In_kgs) as invoice_qty_In_kgs,sum(actual_received_qty_in_pcs) as actual_received_qty_in_pcs,sum(actual_received_qty_in_kgs) as actual_received_qty_in_kgs');
-    $this->db->where(TBL_STOCKS_ITEM.'.stock_form_id IS NULL');
-    $this->db->where(TBL_STOCKS_ITEM.'.status', 1);
-    $query = $this->db->get(TBL_STOCKS_ITEM);
-    $fetch_result = $query->row_array();
-    return $fetch_result;
-  }
+
+    public function getallitemsfromfgorrawmaterial(){
+
+        $this->db->select(TBL_FINISHED_GOODS.'.fin_id,'.TBL_FINISHED_GOODS.'.part_number');
+        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number  = '.TBL_FINISHED_GOODS.'.part_number');
+        $this->db->where(TBL_FINISHED_GOODS.'.status', 1);
+        $query = $this->db->get(TBL_FINISHED_GOODS);
+        $fetch_result = $query->result_array();
+        return $fetch_result;
+
+    }
+
+
+
+    public function getsearchstockformcount($params){
+
+        $this->db->select(TBL_STOCKS_ITEM.'.id');
+        $this->db->join(TBL_STOCKS, TBL_STOCKS.'.stock_id  = '.TBL_STOCKS_ITEM.'.stock_form_id');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_STOCKS_ITEM.'.pre_vendor_name');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_STOCKS_ITEM.'.part_number');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id  = '.TBL_STOCKS_ITEM.'.pre_vendor_po_number');
+        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_STOCKS_ITEM.'.pre_buyer_name');
+        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_STOCKS_ITEM.'.pre_buyer_po_id');
+        $this->db->where(TBL_STOCKS_ITEM.'.stock_form_id IS NOT NULL');
+        $this->db->where(TBL_STOCKS_ITEM.'.status', 1);
+        $this->db->order_by(TBL_STOCKS_ITEM.'.id ','DESC');
+        $query = $this->db->get(TBL_STOCKS_ITEM);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+    }
+
+    public function getsearchstockformdata($params){
+        $this->db->select('*');
+        $this->db->join(TBL_STOCKS, TBL_STOCKS.'.stock_id  = '.TBL_STOCKS_ITEM.'.stock_form_id');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_STOCKS_ITEM.'.pre_vendor_name');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_STOCKS_ITEM.'.part_number');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id  = '.TBL_STOCKS_ITEM.'.pre_vendor_po_number');
+        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_STOCKS_ITEM.'.pre_buyer_name');
+        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_STOCKS_ITEM.'.pre_buyer_po_id');
+        $this->db->where(TBL_STOCKS_ITEM.'.stock_form_id IS NOT NULL');
+        $this->db->where(TBL_STOCKS_ITEM.'.status', 1);
+        $this->db->order_by(TBL_STOCKS_ITEM.'.id ','DESC');
+        $query = $this->db->get(TBL_STOCKS_ITEM);
+        $fetch_result = $query->result_array();
+
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['part_number'] =$value['part_number'];
+                $data[$counter]['part_description'] =$value['name'];
+                $data[$counter]['f_g_order_qty'] =$value['f_g_order_qty'];
+                $data[$counter]['invoice_number'] =$value['invoice_number'];
+                $data[$counter]['invoice_date'] =$value['invoice_date'];
+                $data[$counter]['invoice_qty_In_pcs'] =$value['invoice_qty_In_pcs'];
+                $data[$counter]['invoice_qty_In_kgs'] =$value['invoice_qty_In_kgs'];
+                $data[$counter]['lot_number'] =$value['lot_number'];
+                $data[$counter]['actual_received_qty_in_pcs'] =$value['actual_received_qty_in_pcs'];
+                $data[$counter]['actual_received_qty_in_kgs'] =$value['actual_received_qty_in_kgs'];
+              
+                $counter++; 
+            }
+        }
+        return $data;
+    }
+
+
+
+
 
 
 }

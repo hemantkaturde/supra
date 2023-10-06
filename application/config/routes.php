@@ -287,8 +287,13 @@ $route['getItemdetailsdependonvendorpoforstockform'] = "admin/getItemdetailsdepe
 $route['addNewstockform'] = "admin/addNewstockform";
 $route['fetchstockformrecords'] = "admin/fetchstockformrecords";
 $route['saveStockformitem'] = "admin/saveStockformitem";
-
 $route['deleteStockformitem'] = "admin/deleteStockformitem";
+
+
+
+$route['searchstock'] = "admin/searchstock";
+$route['fetchsearchstockrecords'] = "admin/fetchsearchstockrecords";
+
 
 
 
