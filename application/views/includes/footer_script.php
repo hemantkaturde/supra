@@ -6993,6 +6993,7 @@
 			   var fg_material_gross_weight =   $('#fg_material_gross_weight').val();
 			   var units =   $('#units').val();
 			   var boxex_goni_bundle =   $('#boxex_goni_bundle').val();
+			   var lot_no =   $('#lot_no').val();
 			   var remarks =   $('#remarks').val();
 
 			   var pre_vendor_name =   $('#vendor_name').val();
@@ -7009,7 +7010,7 @@
 				url : "<?php echo base_url();?>saveincomingitem",
 				type: "POST",
 				 //data : formData,
-				 data :{ part_number:part_number,description:description,p_o_qty:p_o_qty,net_weight:net_weight,invoice_no:invoice_no,invoice_date:invoice_date,challan_no:challan_no,challan_date:challan_date,received_date:received_date,invoice_qty:invoice_qty,invoice_qty_in_kgs:invoice_qty_in_kgs,balance_qty:balance_qty,fg_material_gross_weight:fg_material_gross_weight,units:units,boxex_goni_bundle:boxex_goni_bundle,remarks:remarks,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_reported_by:pre_reported_by,pre_report_date:pre_report_date,pre_remark:pre_remark,incomingdetail_editid:incomingdetail_editid},
+				 data :{ part_number:part_number,description:description,p_o_qty:p_o_qty,net_weight:net_weight,invoice_no:invoice_no,invoice_date:invoice_date,challan_no:challan_no,challan_date:challan_date,received_date:received_date,invoice_qty:invoice_qty,invoice_qty_in_kgs:invoice_qty_in_kgs,balance_qty:balance_qty,fg_material_gross_weight:fg_material_gross_weight,units:units,boxex_goni_bundle:boxex_goni_bundle,remarks:remarks,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_reported_by:pre_reported_by,pre_report_date:pre_report_date,pre_remark:pre_remark,incomingdetail_editid:incomingdetail_editid,lot_no:lot_no},
 				// method: "POST",
                 // data :{package_id:package_id},
                 cache:false,
@@ -12473,7 +12474,7 @@
 										$('#fg_order_qty').val('');
 										$('#buyre_order_qty').val('');
 										$('#invoice_qty_in_pcs').val('');
-										$('#invoice_qty_in_kgs').val('');
+										//$('#invoice_qty_in_kgs').val('');
 										$('#net_weight').val('');
 									}
 									else
@@ -12482,10 +12483,9 @@
 										$('#description').val(data_finish_good.name);
 										$('#fg_order_qty').val(data_finish_good.vendor_order_qty);
 										$('#buyre_order_qty').val(data_finish_good.buyer_order_qty);
-										$('#invoice_qty_in_pcs').val(data_finish_good.vendor_qtyvendor_qty);
-										var invoice_qty_in_kgs =  parseFloat(data_finish_good.vendor_qtyvendor_qty) * parseFloat(data_finish_good.net_weight);
-										$('#invoice_qty_in_kgs').val(invoice_qty_in_kgs);
+										//$('#invoice_qty_in_pcs').val(data_finish_good.vendor_qtyvendor_qty);
 										$('#net_weight').val(data_finish_good.net_weight);
+										
 									}
 								},
 								error: function (jqXHR, textStatus, errorThrown)
@@ -12494,7 +12494,7 @@
 										$('#fg_order_qty').val('');
 										$('#buyre_order_qty').val('');
 										$('#invoice_qty_in_pcs').val('');
-										$('#invoice_qty_in_kgs').val('');
+										//$('#invoice_qty_in_kgs').val('');
 										$('#net_weight').val('');
 								}
 							});
@@ -12699,9 +12699,118 @@
 			});
 	    });
 
+		$(document).on('change','.part_number_for_incoming_details',function(e){  
+			e.preventDefault();
+			$(".loader_ajax").show();
+			// $("#customers-list").html('');
+			var vendor_id = $('#vendor_name').val();
+			var part_number = $('.part_number_for_incoming_details').val();
+
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getincominglotnumberbyvendor",
+				type: "POST",
+				data : {'vendor_id' : vendor_id,part_number:part_number},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#lot_number').html('<option value="">Select Lot Number</option>');
+					}
+					else
+					{
+						$('#lot_number').html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#lot_number').html();
+					//$(".loader_ajax").hide();
+				}
+			});
+			return false;
+		});
+
+
+		$(document).on('change','.get_invoice_qty_bylot_number',function(e){  
+				e.preventDefault();
+				var lot_id = $('.get_invoice_qty_bylot_number').val();
+
+				if(vendor_name){
+					if(vendor_po_number){
+							$.ajax({
+								url : "<?php echo ADMIN_PATH;?>getinvoiceqtybyLotnumber",
+								type: "POST",
+								data : {'lot_id' : lot_id},
+								success: function(data, textStatus, jqXHR)
+								{
+									$(".loader_ajax").hide();
+									if(data == "failure")
+									{
+										$('#invoice_qty_in_pcs').val('');
+										$('#invoice_qty_in_kgs').val('');
+									}
+									else
+									{
+										var invoice_qty_in_pcs_data = jQuery.parseJSON( data );
+										$('#invoice_qty_in_pcs').val(invoice_qty_in_pcs_data.invoice_qty);
+
+										var net_weight = $('#net_weight').val();
+
+										var invoice_qty_in_kgs =  parseFloat(invoice_qty_in_pcs_data.invoice_qty) * parseFloat(net_weight);
+										$('#invoice_qty_in_kgs').val(invoice_qty_in_kgs);
+										
+									}
+								},
+								error: function (jqXHR, textStatus, errorThrown)
+								{
+										$('#invoice_qty_in_pcs').val('');
+										$('#invoice_qty_in_kgs').val('');
+								}
+							});
+							return false;
+
+					}else{
+						$('.get_invoice_qty_bylot_number').html('Please Select Lot Number');
+					}
+
+				}else{
+
+					$('.get_invoice_qty_bylot_number').html('Please Select Lot Number');
+				}
+				
+		});
+
+
+
+		$(document).on('change', '#invoice_qty_in_pcs', function(){	
+				
+			    $("#invoice_qty_in_pcs").val();
+
+				 if($("#invoice_qty_in_pcs").val()){
+					 var invoice_qty_in_pcs = $("#invoice_qty_in_pcs").val();
+				 }else{
+					 var invoice_qty_in_pcs = 0;
+				 }
+
+				 if($("#net_weight").val()){
+					 var net_weight = $("#net_weight").val();
+				 }else{
+					 var net_weight = 0;
+				 }
+
+				 
+				 var onchange_value = parseFloat(net_weight) *  parseFloat(invoice_qty_in_pcs);
+
+				 $("#invoice_qty_in_kgs").val(onchange_value);
+			
+		});
+
+
+
     </script>
 <?php } ?>
-
 
 
 <?php if($pageTitle=='Search Stock'){ ?>

@@ -127,6 +127,7 @@
                                                         <th>FG Material Gross Weight</th>
                                                         <th>Units</th>
                                                         <th>No. of Boxes / Goni / Bundle</th>
+                                                        <th>Lot Number</th>
                                                         <th>Remarks</th>
                                                         <th>Action</th>
                                                     </tr>
@@ -174,6 +175,7 @@
                                                         <td><?php echo $value['fg_material_gross_weight'];?></td>
                                                         <td><?php echo $value['units'];?></td>
                                                         <td><?php echo $value['boxex_goni_bundle'];?></td>
+                                                        <td><?php echo $value['lot_no'];?></td>
                                                         <td><?php echo $value['remarks'];?></td>
                                                         <td>
                                                         <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['incoming_details_item_id'];?>' class='fa fa-trash-o deleteIncomingDetailsitem' aria-hidden='true'></i>
@@ -300,16 +302,18 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="form-group row">
+                                                    <!-- <div class="form-group row">
                                                         <label class="col-sm-3 col-form-label">Balance Qty (in Pcs) <span class="required">*</span></label>
                                                         <div class="col-sm-9">
                                                             <input type="number" class="form-control"  id="balance_qty" name="balance_qty" readonly>
                                                             <p class="error balance_qty_error"></p>
                                                         </div>
-                                                    </div>
+                                                    </div> -->
 
                                                     
                                                     <div class="form-group row">
+                                                    <input type="hidden" class="form-control"  id="balance_qty" name="balance_qty" readonly>
+
                                                         <label class="col-sm-3 col-form-label">FG Material Gross Weight <span class="required">*</span></label>
                                                         <div class="col-sm-9">
                                                             <input type="text" class="form-control"  id="fg_material_gross_weight" name="fg_material_gross_weight">
@@ -338,6 +342,14 @@
                                                         <div class="col-sm-9">
                                                             <input type="number" class="form-control"  id="boxex_goni_bundle" name="boxex_goni_bundle">
                                                             <p class="error boxex_goni_bundle_error"></p>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-3 col-form-label">Lot No. <span class="required">*</span></label>
+                                                        <div class="col-sm-9">
+                                                            <input type="text" class="form-control"  id="lot_no" name="lot_no">
+                                                            <p class="error lot_no_error"></p>
                                                         </div>
                                                     </div>
 

@@ -293,6 +293,10 @@ $route['deleteStockformitem'] = "admin/deleteStockformitem";
 
 $route['searchstock'] = "admin/searchstock";
 $route['fetchsearchstockrecords'] = "admin/fetchsearchstockrecords";
+$route['getincominglotnumberbyvendor'] = "admin/getincominglotnumberbyvendor";
+$route['getinvoiceqtybyLotnumber'] = "admin/getinvoiceqtybyLotnumber";
+
+
 
 
 

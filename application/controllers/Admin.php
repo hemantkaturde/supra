@@ -4890,53 +4890,76 @@ class Admin extends BaseController
             $this->form_validation->set_rules('fg_material_gross_weight','FG Material Gross Weight','trim|required');
             $this->form_validation->set_rules('units','Units','trim|required');
             $this->form_validation->set_rules('boxex_goni_bundle','Box Goni Bundle','trim|required');
+            $this->form_validation->set_rules('lot_no','Lot No','trim|required');
             $this->form_validation->set_rules('remarks','Remarks','trim');
 
             if($this->form_validation->run() == FALSE)
             {
                 $save_incoming_details_items['status'] = 'failure';
-                $save_incoming_details_items['error'] = array('part_number'=>strip_tags(form_error('part_number')),'description'=>strip_tags(form_error('description')),'p_o_qty'=>strip_tags(form_error('p_o_qty')),'net_weight'=>strip_tags(form_error('net_weight')),'invoice_no'=>strip_tags(form_error('invoice_no')),'invoice_date'=>strip_tags(form_error('invoice_date')),'challan_no'=>strip_tags(form_error('challan_no')),'challan_date'=>strip_tags(form_error('challan_date')),'received_date'=>strip_tags(form_error('received_date')),'invoice_qty'=>strip_tags(form_error('invoice_qty')),'invoice_qty_in_kgs'=>strip_tags(form_error('invoice_qty_in_kgs')),'balance_qty'=>strip_tags(form_error('balance_qty')),'fg_material_gross_weight'=>strip_tags(form_error('fg_material_gross_weight')),'units'=>strip_tags(form_error('units')),'boxex_goni_bundle'=>strip_tags(form_error('boxex_goni_bundle')),'remarks'=>strip_tags(form_error('remarks')));
+                $save_incoming_details_items['error'] = array('part_number'=>strip_tags(form_error('part_number')),'description'=>strip_tags(form_error('description')),'p_o_qty'=>strip_tags(form_error('p_o_qty')),'net_weight'=>strip_tags(form_error('net_weight')),'invoice_no'=>strip_tags(form_error('invoice_no')),'invoice_date'=>strip_tags(form_error('invoice_date')),'challan_no'=>strip_tags(form_error('challan_no')),'challan_date'=>strip_tags(form_error('challan_date')),'received_date'=>strip_tags(form_error('received_date')),'invoice_qty'=>strip_tags(form_error('invoice_qty')),'invoice_qty_in_kgs'=>strip_tags(form_error('invoice_qty_in_kgs')),'balance_qty'=>strip_tags(form_error('balance_qty')),'fg_material_gross_weight'=>strip_tags(form_error('fg_material_gross_weight')),'units'=>strip_tags(form_error('units')),'boxex_goni_bundle'=>strip_tags(form_error('boxex_goni_bundle')),'remarks'=>strip_tags(form_error('remarks')),'lot_no'=>strip_tags(form_error('lot_no')));
            
             }else{
 
 
                 if($this->input->post('incomingdetail_editid')){
 
+                     /*Check Uniqe Validation in lot number*/
+                     $checkLotnumberisexits= $this->admin_model->checkLotnumberisexitsedit(trim($this->input->post('incomingdetail_editid')),trim($this->input->post('lot_no')));
 
-                    $data = array(
-                        'incoming_details_id' =>  $this->input->post('incomingdetail_editid'),
-                        'part_number'   => trim($this->input->post('part_number')),
-                        'p_o_qty'       => trim($this->input->post('p_o_qty')),
-                        'net_weight'    => trim($this->input->post('net_weight')),
-                        'invoice_no'  => trim($this->input->post('invoice_no')),
-                        'invoice_date'=> trim($this->input->post('invoice_date')),
-                        'challan_no' =>    trim($this->input->post('challan_no')),
-                        'challan_date' =>    trim($this->input->post('challan_date')),
-                        'received_date' =>    trim($this->input->post('received_date')),
-                        'invoice_qty' =>    trim($this->input->post('invoice_qty')),
-                        'invoice_qty_in_kgs' =>    trim($this->input->post('invoice_qty_in_kgs')),
-                        'balance_qty' =>    trim($this->input->post('balance_qty')),
-                        'fg_material_gross_weight' =>    trim($this->input->post('fg_material_gross_weight')),
-                        'units' =>    trim($this->input->post('units')),
-                        'boxex_goni_bundle' =>    trim($this->input->post('boxex_goni_bundle')),
-                        'remarks' =>    trim($this->input->post('remarks')),
-                        'pre_vendor_name' =>  trim($this->input->post('pre_vendor_name')),
-                        'pre_vendor_po_number' =>  trim($this->input->post('pre_vendor_po_number')),
-                        'pre_reported_by' =>  trim($this->input->post('pre_reported_by')),
-                        'pre_report_date' =>  trim($this->input->post('pre_report_date')),
-                        'pre_remark' =>  trim($this->input->post('pre_remark')),
-                    );
+                     if($checkLotnumberisexits){
 
-                    $saveIncomingdetailsitem= $this->admin_model->saveIncomingdetailsitem('',$data);
+                        $save_incoming_details_items['status'] = 'failure';
+                        $save_incoming_details_items['error'] = array('part_number'=>strip_tags(form_error('part_number')),'description'=>strip_tags(form_error('description')),'p_o_qty'=>strip_tags(form_error('p_o_qty')),'net_weight'=>strip_tags(form_error('net_weight')),'invoice_no'=>strip_tags(form_error('invoice_no')),'invoice_date'=>strip_tags(form_error('invoice_date')),'challan_no'=>strip_tags(form_error('challan_no')),'challan_date'=>strip_tags(form_error('challan_date')),'received_date'=>strip_tags(form_error('received_date')),'invoice_qty'=>strip_tags(form_error('invoice_qty')),'invoice_qty_in_kgs'=>strip_tags(form_error('invoice_qty_in_kgs')),'balance_qty'=>strip_tags(form_error('balance_qty')),'fg_material_gross_weight'=>strip_tags(form_error('fg_material_gross_weight')),'units'=>strip_tags(form_error('units')),'boxex_goni_bundle'=>strip_tags(form_error('boxex_goni_bundle')),'remarks'=>strip_tags(form_error('remarks')),'lot_no'=>'Lot Number Alreday Exits');
 
-                    if($saveIncomingdetailsitem){
-                        $save_incoming_details_items['status'] = 'success';
-                        $save_incoming_details_items['error'] = array('part_number'=>strip_tags(form_error('part_number')),'description'=>strip_tags(form_error('description')),'p_o_qty'=>strip_tags(form_error('p_o_qty')),'net_weight'=>strip_tags(form_error('net_weight')),'invoice_no'=>strip_tags(form_error('invoice_no')),'invoice_date'=>strip_tags(form_error('invoice_date')),'challan_no'=>strip_tags(form_error('challan_no')),'challan_date'=>strip_tags(form_error('challan_date')),'received_date'=>strip_tags(form_error('received_date')),'invoice_qty'=>strip_tags(form_error('invoice_qty')),'invoice_qty_in_kgs'=>strip_tags(form_error('invoice_qty_in_kgs')),'balance_qty'=>strip_tags(form_error('balance_qty')),'fg_material_gross_weight'=>strip_tags(form_error('fg_material_gross_weight')),'units'=>strip_tags(form_error('units')),'boxex_goni_bundle'=>strip_tags(form_error('boxex_goni_bundle')),'remarks'=>strip_tags(form_error('remarks')));
-                    }
+                     }else{
 
+
+                            $data = array(
+                                'incoming_details_id' =>  $this->input->post('incomingdetail_editid'),
+                                'part_number'   => trim($this->input->post('part_number')),
+                                'p_o_qty'       => trim($this->input->post('p_o_qty')),
+                                'net_weight'    => trim($this->input->post('net_weight')),
+                                'invoice_no'  => trim($this->input->post('invoice_no')),
+                                'invoice_date'=> trim($this->input->post('invoice_date')),
+                                'challan_no' =>    trim($this->input->post('challan_no')),
+                                'challan_date' =>    trim($this->input->post('challan_date')),
+                                'received_date' =>    trim($this->input->post('received_date')),
+                                'invoice_qty' =>    trim($this->input->post('invoice_qty')),
+                                'invoice_qty_in_kgs' =>    trim($this->input->post('invoice_qty_in_kgs')),
+                                'balance_qty' =>    trim($this->input->post('balance_qty')),
+                                'fg_material_gross_weight' =>    trim($this->input->post('fg_material_gross_weight')),
+                                'units' =>    trim($this->input->post('units')),
+                                'boxex_goni_bundle' =>    trim($this->input->post('boxex_goni_bundle')),
+                                'lot_no'=>    trim($this->input->post('lot_no')),
+                                'remarks' =>    trim($this->input->post('remarks')),
+                                'pre_vendor_name' =>  trim($this->input->post('pre_vendor_name')),
+                                'pre_vendor_po_number' =>  trim($this->input->post('pre_vendor_po_number')),
+                                'pre_reported_by' =>  trim($this->input->post('pre_reported_by')),
+                                'pre_report_date' =>  trim($this->input->post('pre_report_date')),
+                                'pre_remark' =>  trim($this->input->post('pre_remark')),
+                            );
+
+                            $saveIncomingdetailsitem= $this->admin_model->saveIncomingdetailsitem('',$data);
+
+                            if($saveIncomingdetailsitem){
+                                $save_incoming_details_items['status'] = 'success';
+                                $save_incoming_details_items['error'] = array('part_number'=>strip_tags(form_error('part_number')),'description'=>strip_tags(form_error('description')),'p_o_qty'=>strip_tags(form_error('p_o_qty')),'net_weight'=>strip_tags(form_error('net_weight')),'invoice_no'=>strip_tags(form_error('invoice_no')),'invoice_date'=>strip_tags(form_error('invoice_date')),'challan_no'=>strip_tags(form_error('challan_no')),'challan_date'=>strip_tags(form_error('challan_date')),'received_date'=>strip_tags(form_error('received_date')),'invoice_qty'=>strip_tags(form_error('invoice_qty')),'invoice_qty_in_kgs'=>strip_tags(form_error('invoice_qty_in_kgs')),'balance_qty'=>strip_tags(form_error('balance_qty')),'fg_material_gross_weight'=>strip_tags(form_error('fg_material_gross_weight')),'units'=>strip_tags(form_error('units')),'boxex_goni_bundle'=>strip_tags(form_error('boxex_goni_bundle')),'remarks'=>strip_tags(form_error('remarks')),'lot_no'=>strip_tags(form_error('lot_no')));
+                            }
+                }
 
 
                 }else{
+
+
+                     /*Check Uniqe Validation in lot number*/
+                     $checkLotnumberisexits= $this->admin_model->checkLotnumberisexitsadd(trim($this->input->post('lot_no')));
+
+                     if($checkLotnumberisexits){
+
+                        $save_incoming_details_items['status'] = 'failure';
+                        $save_incoming_details_items['error'] = array('part_number'=>strip_tags(form_error('part_number')),'description'=>strip_tags(form_error('description')),'p_o_qty'=>strip_tags(form_error('p_o_qty')),'net_weight'=>strip_tags(form_error('net_weight')),'invoice_no'=>strip_tags(form_error('invoice_no')),'invoice_date'=>strip_tags(form_error('invoice_date')),'challan_no'=>strip_tags(form_error('challan_no')),'challan_date'=>strip_tags(form_error('challan_date')),'received_date'=>strip_tags(form_error('received_date')),'invoice_qty'=>strip_tags(form_error('invoice_qty')),'invoice_qty_in_kgs'=>strip_tags(form_error('invoice_qty_in_kgs')),'balance_qty'=>strip_tags(form_error('balance_qty')),'fg_material_gross_weight'=>strip_tags(form_error('fg_material_gross_weight')),'units'=>strip_tags(form_error('units')),'boxex_goni_bundle'=>strip_tags(form_error('boxex_goni_bundle')),'remarks'=>strip_tags(form_error('remarks')),'lot_no'=>'Lot Number Alreday Exits');
+
+                     }else{
 
                         $data = array(
                             'part_number'   => trim($this->input->post('part_number')),
@@ -4953,6 +4976,7 @@ class Admin extends BaseController
                             'fg_material_gross_weight' =>    trim($this->input->post('fg_material_gross_weight')),
                             'units' =>    trim($this->input->post('units')),
                             'boxex_goni_bundle' =>    trim($this->input->post('boxex_goni_bundle')),
+                            'lot_no'=>    trim($this->input->post('lot_no')),
                             'remarks' =>    trim($this->input->post('remarks')),
                             'pre_vendor_name' =>  trim($this->input->post('pre_vendor_name')),
                             'pre_vendor_po_number' =>  trim($this->input->post('pre_vendor_po_number')),
@@ -4965,8 +4989,10 @@ class Admin extends BaseController
 
                         if($saveIncomingdetailsitem){
                             $save_incoming_details_items['status'] = 'success';
-                            $save_incoming_details_items['error'] = array('part_number'=>strip_tags(form_error('part_number')),'description'=>strip_tags(form_error('description')),'p_o_qty'=>strip_tags(form_error('p_o_qty')),'net_weight'=>strip_tags(form_error('net_weight')),'invoice_no'=>strip_tags(form_error('invoice_no')),'invoice_date'=>strip_tags(form_error('invoice_date')),'challan_no'=>strip_tags(form_error('challan_no')),'challan_date'=>strip_tags(form_error('challan_date')),'received_date'=>strip_tags(form_error('received_date')),'invoice_qty'=>strip_tags(form_error('invoice_qty')),'invoice_qty_in_kgs'=>strip_tags(form_error('invoice_qty_in_kgs')),'balance_qty'=>strip_tags(form_error('balance_qty')),'fg_material_gross_weight'=>strip_tags(form_error('fg_material_gross_weight')),'units'=>strip_tags(form_error('units')),'boxex_goni_bundle'=>strip_tags(form_error('boxex_goni_bundle')),'remarks'=>strip_tags(form_error('remarks')));
+                            $save_incoming_details_items['error'] = array('part_number'=>strip_tags(form_error('part_number')),'description'=>strip_tags(form_error('description')),'p_o_qty'=>strip_tags(form_error('p_o_qty')),'net_weight'=>strip_tags(form_error('net_weight')),'invoice_no'=>strip_tags(form_error('invoice_no')),'invoice_date'=>strip_tags(form_error('invoice_date')),'challan_no'=>strip_tags(form_error('challan_no')),'challan_date'=>strip_tags(form_error('challan_date')),'received_date'=>strip_tags(form_error('received_date')),'invoice_qty'=>strip_tags(form_error('invoice_qty')),'invoice_qty_in_kgs'=>strip_tags(form_error('invoice_qty_in_kgs')),'balance_qty'=>strip_tags(form_error('balance_qty')),'fg_material_gross_weight'=>strip_tags(form_error('fg_material_gross_weight')),'units'=>strip_tags(form_error('units')),'boxex_goni_bundle'=>strip_tags(form_error('boxex_goni_bundle')),'remarks'=>strip_tags(form_error('remarks')),'lot_no'=>strip_tags(form_error('lot_no')));
                         }
+
+                     }
 
                 }
             }
@@ -7690,6 +7716,47 @@ class Admin extends BaseController
             "data"            => $data   // total data array
             );
         echo json_encode($json_data);
+    }
+
+
+    public function getincominglotnumberbyvendor(){
+
+       $submit = $this->input->post();
+        if($submit) {
+            $getIncomingdetailsbyvendorid = $this->admin_model->getincominglotnumberbyvendor($this->input->post('part_number'),$this->input->post('vendor_id'));
+            if(count($getIncomingdetailsbyvendorid) >= 1) {
+                $content = $content.'<option value="">Select Lot Number</option>';
+				foreach($getIncomingdetailsbyvendorid as $value) {
+					$content = $content.'<option value="'.$value["id"].'">'.$value["lot_no"].'</lot_no>';
+				}
+				echo $content;
+			} else {
+				echo 'failure';
+			}
+		  }else{
+
+            echo 'failure';
+          }
+    }
+
+
+    public function getinvoiceqtybyLotnumber(){
+
+        if($this->input->post('lot_id')) {
+            $getinvoiceqtybyLotnumber = $this->admin_model->getinvoiceqtybyLotnumber($this->input->post('lot_id'));
+        
+            if($getinvoiceqtybyLotnumber){
+                $content = $getinvoiceqtybyLotnumber[0];
+                echo json_encode($content);
+
+            }else{
+                echo 'failure';
+            }
+           
+        } else {
+            echo 'failure';
+        }
+
     }
 
 

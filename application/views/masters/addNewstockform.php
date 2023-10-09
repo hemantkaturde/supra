@@ -451,7 +451,7 @@
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label for="part_number">F.G Part Number <span class="required">*</span></label>
-                                                                    <select class="form-control" name="part_number" id="part_number">
+                                                                    <select class="form-control part_number_for_incoming_details" name="part_number" id="part_number">
                                                                         <option st-id="" value="">Select F.G Part Number</option>
                                                                     </select>
                                                                    <p class="error part_number_error"></p>
@@ -489,6 +489,17 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
+
+                                                        
+                                                            <div class="form-group">
+                                                                <label for="lot_number">Lot No. </label>
+                                                                <select class="form-control lot_number get_invoice_qty_bylot_number" name="lot_number" id="lot_number">
+                                                                   <option value="">Select Lot Number</option>
+                                                                </select>
+                                                                <p class="error lot_number_error"></p>
+                                                            </div>
+
+
                                                             <div class="form-group">
                                                                 <label for="invoice_qty_in_pcs">Invoice Qty (In Pcs) </label>
                                                                 <input type="text" class="form-control" id="invoice_qty_in_pcs" name="invoice_qty_in_pcs">
@@ -501,12 +512,6 @@
                                                                 <p class="error invoice_qty_in_kgs_error"></p>
                                                             </div>
                                                         
-                                                            <div class="form-group">
-                                                                <label for="lot_number">Lot No. </label>
-                                                                <input type="text" class="form-control" id="lot_number" name="lot_number">
-                                                                <p class="error lot_number_error"></p>
-                                                            </div>
-
                                                             <div class="form-group">
                                                                 <label for="actaul_recived_qty_in_pics">Actual Received Qty (In Pcs) </label>
                                                                 <input type="text" class="form-control" id="actaul_recived_qty_in_pics" name="actaul_recived_qty_in_pics">
