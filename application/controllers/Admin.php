@@ -7688,6 +7688,7 @@ class Admin extends BaseController
         $this->logrecord($process,$processFunction);
         $this->global['pageTitle'] = 'Search Stock';
         $data['vendorList']= $this->admin_model->fetchALLvendorList();
+        $data['buyerList']= $this->admin_model->fetchAllbuyerList();
         $data['getallitemsfromfgorrawmaterial']= $this->admin_model->getallitemsfromfgorrawmaterial();
         $this->loadViews("masters/searchstock", $this->global, $data, NULL);  
     }
@@ -7758,6 +7759,7 @@ class Admin extends BaseController
         }
 
     }
+    
 
 
 }
