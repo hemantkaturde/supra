@@ -199,6 +199,76 @@
                 </div>
                 <!-- /.box -->
             </div>
+
+            
+                            <div class ="total_values" style="border-top: 1px solid black">
+                                <div class="col-md-3" style="margin-top: 20px;">
+                                <div class="form-group">
+                                    <label for="item_number">Ready for Export (In Pcs)</label>
+                                    <input type="text" class="form-control" id="debit_note_number" name="debit_note_number">
+                                    </div>
+                                </div>  
+
+
+                                <div class="col-md-3" style="margin-top: 20px;">
+                                <div class="form-group">
+                                    <label for="item_number">Ready for Export (In Kgs)</label>
+                                    <input type="text" class="form-control" id="debit_note_number" name="debit_note_number">
+                                    </div>
+                                </div>  
+
+                                <div class="col-md-3" style="margin-top: 20px;">
+                                <div class="form-group">
+                                    <label for="item_number">Total Rejected Qty (In Pcs)</label>
+                                    <input type="text" class="form-control" id="debit_note_number" name="debit_note_number">
+                                    </div>
+                                </div>  
+
+                                <div class="col-md-3" style="margin-top: 20px;">
+                                <div class="form-group">
+                                    <label for="item_number">Total Rejected Qty (In Kgs)</label>
+                                    <input type="text" class="form-control" id="debit_note_number" name="debit_note_number">
+                                    </div>
+                                </div>  
+                            </div>   
+
+
+                            <div class ="total_values" style="border-top: 1px solid black">
+                                <div class="col-md-3" style="margin-top: 20px;">
+                                <div class="form-group">
+                                    <label for="item_number">Total Export Qty(In Pcs)</label>
+                                    <input type="text" class="form-control" id="debit_note_number" name="debit_note_number">
+                                    </div>
+                                </div>  
+
+                                <div class="col-md-3" style="margin-top: 20px;">
+                                <div class="form-group">
+                                    <label for="item_number">Total Export Qty (In Kgs)</label>
+                                    <input type="text" class="form-control" id="debit_note_number" name="debit_note_number">
+                                    </div>
+                                </div>  
+                            </div>   
+
+
+                            <div class ="total_values" style="border-top: 1px solid black">
+                                <div class="col-md-3" style="margin-top: 20px;">
+                                <div class="form-group">
+                                    <label for="item_number">Balance Qty(In Pcs)</label>
+                                    <input type="text" class="form-control" id="debit_note_number" name="debit_note_number">
+                                    </div>
+                                </div>  
+
+                                <div class="col-md-3" style="margin-top: 20px;">
+                                <div class="form-group">
+                                    <label for="item_number">Balance Export Qty (In Kgs)</label>
+                                    <input type="text" class="form-control" id="debit_note_number" name="debit_note_number">
+                                    </div>
+                                </div>  
+                            </div>   
+
+
+
+
         </div>
     </section>
 
