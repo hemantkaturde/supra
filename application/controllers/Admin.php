@@ -7448,8 +7448,8 @@ class Admin extends BaseController
 
     }
 
-    /*======================================================STOCK FORM START HERE==========================================================*/ 
 
+    /*======================================================STOCK FORM START HERE==========================================================*/ 
 
     public function getbuyerpodetailsforvendorstockform(){
         $vendor_po_number=$this->input->post('vendor_po_number');
@@ -7464,7 +7464,6 @@ class Admin extends BaseController
 			echo 'failure';
 		}
     }
-
 
     public function getItemdetailsdependonvendorpoforstockform(){
         if($this->input->post('part_number')) {
@@ -7484,7 +7483,6 @@ class Admin extends BaseController
 
     }
 
-
     public function stockform(){
         $process = 'Stock Form';
         $processFunction = 'Admin/stockform';
@@ -7492,7 +7490,6 @@ class Admin extends BaseController
         $this->global['pageTitle'] = 'Stock Form';
         $this->loadViews("masters/stockform", $this->global, $data, NULL);  
     }
-
 
     public function fetchstockformrecords(){
         $params = $_REQUEST;
@@ -7663,7 +7660,6 @@ class Admin extends BaseController
         }
     }
 
-
     public function deleteStockformitem(){
         $post_submit = $this->input->post();
         if($post_submit){
@@ -7680,8 +7676,6 @@ class Admin extends BaseController
         }
     }
 
-
-
     public function searchstock(){
         $process = 'Search Stock';
         $processFunction = 'Admin/searchstock';
@@ -7692,7 +7686,6 @@ class Admin extends BaseController
         $data['getallitemsfromfgorrawmaterial']= $this->admin_model->getallitemsfromfgorrawmaterial();
         $this->loadViews("masters/searchstock", $this->global, $data, NULL);  
     }
-
 
     public function fetchsearchstockrecords(){
 
@@ -7719,7 +7712,6 @@ class Admin extends BaseController
         echo json_encode($json_data);
     }
 
-
     public function getincominglotnumberbyvendor(){
 
        $submit = $this->input->post();
@@ -7740,7 +7732,6 @@ class Admin extends BaseController
           }
     }
 
-
     public function getinvoiceqtybyLotnumber(){
 
         if($this->input->post('lot_id')) {
@@ -7759,7 +7750,64 @@ class Admin extends BaseController
         }
 
     }
-    
+
+    public function getalltotalcalculationstockform(){
+        $getalltotalcalculationstockform = $this->admin_model->getalltotalcalculationstockform();
+        if($getalltotalcalculationstockform){
+            $content = $getalltotalcalculationstockform[0];
+            echo json_encode($content);
+        }else{
+            echo 'failure';
+        }
+    }
+
+    public function fetchexportrecordsitem(){
+        $params = $_REQUEST;
+        $totalRecords = $this->admin_model->getexportrecordsitemcount($params); 
+        $queryRecords = $this->admin_model->getexportrecordsitemdata($params); 
+
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+        echo json_encode($json_data);
+    }
+
+    public function fetchrejecteditem(){
+        $params = $_REQUEST;
+        $totalRecords = $this->admin_model->getexportrejecteditemcount($params); 
+        $queryRecords = $this->admin_model->getexportrejecteditemdata($params); 
+
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+        echo json_encode($json_data);
+    }
 
 
 }

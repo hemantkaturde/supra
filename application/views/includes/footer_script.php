@@ -7752,8 +7752,6 @@
 				return false;		
 		});
 
-
-
     </script>
 <?php } ?>
 
@@ -12841,6 +12839,100 @@
 	            },
 	        });
 	    });
+
+		$(document).ready(function() {
+	        $('#invoice_qty_in_pcs').val('');
+			$('#invoice_qty_in_kgs').val('');
+			$('#actual_received_qty_in_pcs').val('');
+			$('#actual_received_qty_in_kgs').val('');
+
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getalltotalcalculationstockform",
+				type: "POST",
+				data : {'vendor_name' : ''},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#invoice_qty_in_pcs').val('');
+						$('#invoice_qty_in_kgs').val('');
+						$('#actual_received_qty_in_pcs').val('');
+						$('#actual_received_qty_in_kgs').val('');
+					}
+					else
+					{
+						var invoice_qty_in_pcs_data = jQuery.parseJSON( data );
+						$('#invoice_qty_in_pcs').val(invoice_qty_in_pcs_data.invoice_qty_In_pcs);
+						$('#invoice_qty_in_kgs').val(invoice_qty_in_pcs_data.invoice_qty_In_kgs);
+						$('#actual_received_qty_in_pcs').val(invoice_qty_in_pcs_data.actual_received_qty_in_pcs);
+						$('#actual_received_qty_in_kgs').val(invoice_qty_in_pcs_data.actual_received_qty_in_kgs);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					    $('#invoice_qty_in_pcs').val('');
+						$('#invoice_qty_in_kgs').val('');
+						$('#actual_received_qty_in_pcs').val('');
+						$('#actual_received_qty_in_kgs').val('');
+				}
+			});
+			return false;
+	    });
+
+		$(document).ready(function() {
+			var dt = $('#view_export_items').DataTable({
+	            "columnDefs": [ 
+	                 { className: "details-control", "targets": [ 0 ] },
+	                 { "width": "10%", "targets": 0 },
+	                 { "width": "10%", "targets": 1 },
+					 { "width": "10%", "targets": 2 },
+	                 { "width": "10%", "targets": 3 },
+					 { "width": "10%", "targets": 4 }
+	            ],
+	            responsive: true,
+	            "oLanguage": {
+	                "sEmptyTable": "<i>No Export Items Found.</i>",
+	            }, 
+	            "bSort" : false,
+	            "bFilter":true,
+	            "bLengthChange": true,
+	            "iDisplayLength": 10,   
+	            "bProcessing": true,
+	            "serverSide": true,
+	            "ajax":{
+                    url :"<?php echo base_url();?>fetchexportrecordsitem",
+                    type: "post",
+	            },
+	        });
+		});
+
+		$(document).ready(function() {
+			var dt = $('#view_rejected_items').DataTable({
+	            "columnDefs": [ 
+	                 { className: "details-control", "targets": [ 0 ] },
+	                 { "width": "10%", "targets": 0 },
+	                 { "width": "10%", "targets": 1 },
+					 { "width": "10%", "targets": 2 },
+	                 { "width": "10%", "targets": 3 },
+	            ],
+	            responsive: true,
+	            "oLanguage": {
+	                "sEmptyTable": "<i>No Rejected Items Found.</i>",
+	            }, 
+	            "bSort" : false,
+	            "bFilter":true,
+	            "bLengthChange": true,
+	            "iDisplayLength": 10,   
+	            "bProcessing": true,
+	            "serverSide": true,
+	            "ajax":{
+                    url :"<?php echo base_url();?>fetchrejecteditem",
+                    type: "post",
+	            },
+	        });
+		});
 
 		$(document).on('change','#vendor_name',function(e){  
 			e.preventDefault();

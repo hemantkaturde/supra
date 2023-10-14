@@ -5486,7 +5486,7 @@ class Admin_model extends CI_Model
     public function getallitemsfromfgorrawmaterial(){
 
         $this->db->select(TBL_FINISHED_GOODS.'.fin_id,'.TBL_FINISHED_GOODS.'.part_number');
-        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number  = '.TBL_FINISHED_GOODS.'.part_number');
+        // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number  = '.TBL_FINISHED_GOODS.'.part_number');
         $this->db->where(TBL_FINISHED_GOODS.'.status', 1);
         $query = $this->db->get(TBL_FINISHED_GOODS);
         $fetch_result = $query->result_array();
@@ -5600,6 +5600,83 @@ class Admin_model extends CI_Model
         $data = $query->result_array();
         return $data;
     }
+
+
+    public function getalltotalcalculationstockform(){
+        $this->db->select('sum(invoice_qty_In_pcs) as invoice_qty_In_pcs,sum(invoice_qty_In_kgs) as invoice_qty_In_kgs,sum(actual_received_qty_in_pcs) as actual_received_qty_in_pcs,sum(actual_received_qty_in_kgs) as actual_received_qty_in_kgs');
+        //$this->db->where(TBL_INCOMING_DETAILS_ITEM.'.part_number', $part_number);
+        // $this->db->where(TBL_VENDOR_PO_MASTER.'.supplier_name !=',"");
+        //$this->db->where(TBL_STOCKS_ITEM.'.id',trim($lot_id));
+        $query = $this->db->get(TBL_STOCKS_ITEM);
+        $data = $query->result_array();
+        return $data;
+    }
+
+    public function getexportrecordsitemcount($params){
+
+        $this->db->select(TBL_STOCKS_ITEM.'.id');
+        $query = $this->db->get(TBL_STOCKS_ITEM);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+    }
+
+    public function getexportrecordsitemdata($params){
+        $this->db->select('*');
+        $this->db->where(TBL_STOCKS_ITEM.'.status', 1);
+        $this->db->order_by(TBL_STOCKS_ITEM.'.id ','DESC');
+        $query = $this->db->get(TBL_STOCKS_ITEM);
+        $fetch_result = $query->result_array();
+
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['part_number'] =$value['part_number'];
+                $data[$counter]['part_description'] =$value['name'];
+                $data[$counter]['f_g_order_qty'] =$value['f_g_order_qty'];
+                $data[$counter]['invoice_number'] =$value['invoice_number'];
+                $data[$counter]['invoice_date'] =$value['invoice_date'];
+                $counter++; 
+            }
+        }
+        return $data;
+    }
+
+    public function getexportrejecteditemcount($params){
+
+        $this->db->select(TBL_REWORK_REJECTION_ITEM.'.id');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_REWORK_REJECTION_ITEM.'.part_number = '.TBL_FINISHED_GOODS.'.fin_id');
+        $query = $this->db->get(TBL_REWORK_REJECTION_ITEM);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+    }
+
+    public function getexportrejecteditemdata($params){
+        $this->db->select('*');
+        $this->db->where(TBL_REWORK_REJECTION_ITEM.'.status', 1);
+        $this->db->join(TBL_FINISHED_GOODS, TBL_REWORK_REJECTION_ITEM.'.part_number = '.TBL_FINISHED_GOODS.'.fin_id');
+        $this->db->order_by(TBL_REWORK_REJECTION_ITEM.'.id ','DESC');
+        $query = $this->db->get(TBL_REWORK_REJECTION_ITEM);
+        $fetch_result = $query->result_array();
+
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['part_number'] =$value['part_number'];
+                $data[$counter]['rejection_rework_reason'] =$value['rejection_rework_reason'];
+                $data[$counter]['qty'] =$value['qty'];
+                $data[$counter]['qtyss'] =$value['qty'];
+                $counter++; 
+            }
+        }
+        return $data;
+    }
+
 
 
 }
