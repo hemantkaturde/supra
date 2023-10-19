@@ -20,19 +20,6 @@
         <div class="row">
             <div class="col-md-2">
                 <div class="form-group">
-                    <label for="item_number">Part Number </label>
-                        <select class="form-control" name="item_number" id="item_number">
-                            <option st-id="" value="">Select Part Name</option>
-                                <?php foreach ($getallitemsfromfgorrawmaterial as $key => $value) {?>
-                                    <option value="<?php echo $value['find_id']; ?>" ><?php echo $value['part_number']; ?></option>
-                                <?php } ?>
-                        </select>
-                    <p class="error item_number_error"></p>
-                </div>
-            </div>  
-
-            <div class="col-md-2">
-                <div class="form-group">
                     <label for="vendor_name">Vendor Name </label>
                         <select class="form-control" name="vendor_name" id="vendor_name">
                             <option st-id="" value="">Select Vendor Name</option>
@@ -51,6 +38,19 @@
                             <option st-id="" value="">Select Vendor PO Number</option>
                         </select>
                     <p class="error vendor_po_number_error"></p>
+                </div>
+            </div>  
+
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="item_number">Part Number </label>
+                        <select class="form-control" name="item_number" id="item_number">
+                            <option st-id="" value="">Select Part Name</option>
+                                <?php foreach ($getallitemsfromfgorrawmaterial as $key => $value) {?>
+                                    <option value="<?php echo $value['find_id']; ?>" ><?php echo $value['part_number']; ?></option>
+                                <?php } ?>
+                        </select>
+                    <p class="error item_number_error"></p>
                 </div>
             </div>  
 
@@ -170,7 +170,6 @@
                 <!-- /.box -->
             </div>
 
-
             <div class="col-xs-6">
                 <div class="box">
                     <div class="box-body">   
@@ -194,8 +193,6 @@
                 </div>
                 <!-- /.box -->
             </div>
-
-            
         </div>
     </section>
 

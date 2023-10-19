@@ -288,6 +288,8 @@ $route['addNewstockform'] = "admin/addNewstockform";
 $route['fetchstockformrecords'] = "admin/fetchstockformrecords";
 $route['saveStockformitem'] = "admin/saveStockformitem";
 $route['deleteStockformitem'] = "admin/deleteStockformitem";
+$route['deletestockform'] = "admin/deletestockform";
+
 
 
 

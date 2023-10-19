@@ -7448,9 +7448,6 @@ class Admin extends BaseController
 
     }
 
-
-    /*======================================================STOCK FORM START HERE==========================================================*/ 
-
     public function getbuyerpodetailsforvendorstockform(){
         $vendor_po_number=$this->input->post('vendor_po_number');
         if($vendor_po_number) {
@@ -7665,7 +7662,7 @@ class Admin extends BaseController
         if($post_submit){
             $result = $this->admin_model->deleteStockformitem(trim($this->input->post('id')));
             if ($result) {
-                        $process = 'Delete Stock Form Details';
+                        $process = 'Delete Stock Form Item';
                         $processFunction = 'Admin/deleteStockformitem';
                         $this->logrecord($process,$processFunction);
                     echo(json_encode(array('status'=>'success')));
@@ -7675,6 +7672,25 @@ class Admin extends BaseController
             echo(json_encode(array('status'=>'failed'))); 
         }
     }
+
+
+    public function deletestockform(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->deletestockform(trim($this->input->post('id')));
+            if ($result) {
+                        $process = 'Delete Stock Form Details';
+                        $processFunction = 'Admin/deletestockform';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
+        
+    }
+
 
     public function searchstock(){
         $process = 'Search Stock';
@@ -7809,5 +7825,6 @@ class Admin extends BaseController
         echo json_encode($json_data);
     }
 
+   
 
 }

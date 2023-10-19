@@ -5360,6 +5360,18 @@ class Admin_model extends CI_Model
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_STOCKS.'.vendor_name');
         $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_STOCKS.'.buyer_po_number');
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_STOCKS.'.buyer_name');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_STOCKS.".stock_id_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_STOCKS.".stock_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_PO_MASTER.".date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_PO_MASTER.".delivery_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%')");
+        }
         $this->db->where(TBL_STOCKS.'.status', 1);
         $query = $this->db->get(TBL_STOCKS);
         $rowcount = $query->num_rows();
@@ -5367,11 +5379,25 @@ class Admin_model extends CI_Model
     }
 
     public function getstockformdata($params){
-        $this->db->select(TBL_STOCKS.'.stock_id_number,'.TBL_STOCKS.'.stock_date,'.TBL_VENDOR_PO_MASTER.'.po_number as venor_po_number,'.TBL_VENDOR_PO_MASTER.'.date as vendor_po_date,'.TBL_VENDOR.'.vendor_name,'.TBL_BUYER_MASTER.'.buyer_name,'.TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_BUYER_PO_MASTER.'.date as buyer_po_date,'.TBL_BUYER_PO_MASTER.'.delivery_date as delivery_date');
+        $this->db->select(TBL_STOCKS.'.stock_id,'.TBL_STOCKS.'.stock_id_number,'.TBL_STOCKS.'.stock_date,'.TBL_VENDOR_PO_MASTER.'.po_number as venor_po_number,'.TBL_VENDOR_PO_MASTER.'.date as vendor_po_date,'.TBL_VENDOR.'.vendor_name,'.TBL_BUYER_MASTER.'.buyer_name,'.TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_BUYER_PO_MASTER.'.date as buyer_po_date,'.TBL_BUYER_PO_MASTER.'.delivery_date as delivery_date');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_STOCKS.'.vendor_po_number');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_STOCKS.'.vendor_name');
         $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_STOCKS.'.buyer_po_number');
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_STOCKS.'.buyer_name');
+
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_STOCKS.".stock_id_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_STOCKS.".stock_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_PO_MASTER.".date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_PO_MASTER.".delivery_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%')");
+        }
+
         $this->db->where(TBL_STOCKS.'.status', 1);
         $this->db->limit($params['length'],$params['start']);
         $this->db->order_by(TBL_STOCKS.'.stock_id ','DESC');
@@ -5394,16 +5420,15 @@ class Admin_model extends CI_Model
                 $data[$counter]['buyer_po_date'] = $value['buyer_po_date'];
                 $data[$counter]['buyer_delivery_date'] = $value['delivery_date'];
                 $data[$counter]['action'] = '';
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editdebitnoteform/".$value['pod_details_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editdebitnoteform/".$value['stock_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addneworkrejection' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-ban' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addnewpackinginstruction' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-stack-exchange' aria-hidden='true'></i></a>   &nbsp ";
-                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['pod_details_id']."' class='fa fa-trash-o deletepoddetails' aria-hidden='true'></i>"; 
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['stock_id']."' class='fa fa-trash-o deletestockform' aria-hidden='true'></i>"; 
                 $counter++; 
             }
         }
         return $data;
     }
-
 
     public function saveStockformitemdetails($id,$data){
         if($id != '') {
@@ -5421,7 +5446,6 @@ class Admin_model extends CI_Model
             }
         }
     }
-
 
     public function getItemlistStockform(){
         $this->db->select('*,'.TBL_STOCKS_ITEM.'.id as stock_item_id');
@@ -5458,6 +5482,25 @@ class Admin_model extends CI_Model
         }
     }
 
+    public function deletestockform($id){
+        $this->db->where('stock_id', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_STOCKS)){
+            
+            $this->db->where('stock_form_id', $id);
+            //$this->db->delete(TBL_SUPPLIER);
+            if($this->db->delete(TBL_STOCKS_ITEM)){
+               return TRUE;
+            }else{
+               return FALSE;
+            }
+           return TRUE;
+        }else{
+           return FALSE;
+        }
+
+    }
+
     public function getStockforminformation(){
 
         $this->db->select(TBL_STOCKS_ITEM.'.pre_stock_date,'.TBL_STOCKS_ITEM.'.pre_vendor_po_date,'.TBL_STOCKS_ITEM.'.pre_vendor_name,'.TBL_VENDOR_PO_MASTER.'.po_number,'.TBL_STOCKS_ITEM.'.pre_buyer_name,'.TBL_BUYER_MASTER.'.buyer_name,'.TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_STOCKS_ITEM.'.pre_buyer_po_id,'.TBL_STOCKS_ITEM.'.pre_buyer_po_date,'.TBL_STOCKS_ITEM.'.pre_buyer_delivery_date,'.TBL_STOCKS_ITEM.'.pre_vendor_po_number,'.TBL_BUYER_MASTER.'.buyer_id');
@@ -5481,7 +5524,6 @@ class Admin_model extends CI_Model
         $fetch_result = $query->row_array();
         return $fetch_result;
     }
-
 
     public function getallitemsfromfgorrawmaterial(){
 
@@ -5548,7 +5590,6 @@ class Admin_model extends CI_Model
         return $data;
     }
 
-
     public function checkLotnumberisexitsadd($lot_no){
 
         $this->db->select(TBL_INCOMING_DETAILS_ITEM.'.id ');
@@ -5560,7 +5601,6 @@ class Admin_model extends CI_Model
 
     }
 
-
     public function checkLotnumberisexitsedit($incomingdetail_editid,$lot_no){
 
         $this->db->select(TBL_INCOMING_DETAILS_ITEM.'.id ');
@@ -5570,7 +5610,6 @@ class Admin_model extends CI_Model
         $data = $query->row_array();
         return $data;
     }
-
 
     public function getincominglotnumberbyvendor($part_number,$vendor_id){
 
@@ -5589,7 +5628,6 @@ class Admin_model extends CI_Model
         return $data;
     }
 
-
     public function getinvoiceqtybyLotnumber($lot_id){
 
         $this->db->select(TBL_INCOMING_DETAILS_ITEM.'.invoice_qty');
@@ -5600,7 +5638,6 @@ class Admin_model extends CI_Model
         $data = $query->result_array();
         return $data;
     }
-
 
     public function getalltotalcalculationstockform(){
         $this->db->select('sum(invoice_qty_In_pcs) as invoice_qty_In_pcs,sum(invoice_qty_In_kgs) as invoice_qty_In_kgs,sum(actual_received_qty_in_pcs) as actual_received_qty_in_pcs,sum(actual_received_qty_in_kgs) as actual_received_qty_in_kgs');
@@ -5621,10 +5658,12 @@ class Admin_model extends CI_Model
     }
 
     public function getexportrecordsitemdata($params){
-        $this->db->select('*');
-        $this->db->where(TBL_STOCKS_ITEM.'.status', 1);
-        $this->db->order_by(TBL_STOCKS_ITEM.'.id ','DESC');
-        $query = $this->db->get(TBL_STOCKS_ITEM);
+        $this->db->select(TBL_PACKING_INSTRACTION.'.packing_instrauction_id,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_date,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_qty,'.TBL_PACKING_INSTRACTION.'.buyer_po_date,'.TBL_FINISHED_GOODS.'.net_weight');
+        $this->db->join(TBL_PACKING_INSTRACTION, TBL_PACKING_INSTRACTION.'.id = '.TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_PACKING_INSTRACTION_DETAILS.'.part_number');
+        $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.status', 1);
+        $this->db->order_by(TBL_PACKING_INSTRACTION_DETAILS.'.id','DESC');
+        $query = $this->db->get(TBL_PACKING_INSTRACTION_DETAILS);
         $fetch_result = $query->result_array();
 
         $data = array();
@@ -5633,11 +5672,11 @@ class Admin_model extends CI_Model
         {
             foreach ($fetch_result as $key => $value)
             {
-                $data[$counter]['part_number'] =$value['part_number'];
-                $data[$counter]['part_description'] =$value['name'];
-                $data[$counter]['f_g_order_qty'] =$value['f_g_order_qty'];
-                $data[$counter]['invoice_number'] =$value['invoice_number'];
-                $data[$counter]['invoice_date'] =$value['invoice_date'];
+                $data[$counter]['packing_instrauction_id'] =$value['packing_instrauction_id'];
+                $data[$counter]['buyer_invoice_date'] =$value['buyer_invoice_date'];
+                $data[$counter]['buyer_invoice_qty'] =$value['buyer_invoice_qty'];
+                $data[$counter]['export_qty_in_kgs'] = $value['buyer_invoice_qty'] *  $value['net_weight'];
+                $data[$counter]['buyer_po_date'] =$value['buyer_po_date'];
                 $counter++; 
             }
         }
@@ -5648,6 +5687,8 @@ class Admin_model extends CI_Model
 
         $this->db->select(TBL_REWORK_REJECTION_ITEM.'.id');
         $this->db->join(TBL_FINISHED_GOODS, TBL_REWORK_REJECTION_ITEM.'.part_number = '.TBL_FINISHED_GOODS.'.fin_id');
+        $this->db->join(TBL_REWORK_REJECTION, TBL_REWORK_REJECTION.'.id = '.TBL_REWORK_REJECTION_ITEM.'.rework_rejection_id');
+        $this->db->where(TBL_REWORK_REJECTION_ITEM.'.status', 1);
         $query = $this->db->get(TBL_REWORK_REJECTION_ITEM);
         $rowcount = $query->num_rows();
         return $rowcount;
@@ -5657,6 +5698,9 @@ class Admin_model extends CI_Model
         $this->db->select('*');
         $this->db->where(TBL_REWORK_REJECTION_ITEM.'.status', 1);
         $this->db->join(TBL_FINISHED_GOODS, TBL_REWORK_REJECTION_ITEM.'.part_number = '.TBL_FINISHED_GOODS.'.fin_id');
+        $this->db->join(TBL_REWORK_REJECTION, TBL_REWORK_REJECTION.'.id = '.TBL_REWORK_REJECTION_ITEM.'.rework_rejection_id');
+        
+        $this->db->where(TBL_REWORK_REJECTION_ITEM.'.status', 1);
         $this->db->order_by(TBL_REWORK_REJECTION_ITEM.'.id ','DESC');
         $query = $this->db->get(TBL_REWORK_REJECTION_ITEM);
         $fetch_result = $query->result_array();
@@ -5667,17 +5711,15 @@ class Admin_model extends CI_Model
         {
             foreach ($fetch_result as $key => $value)
             {
-                $data[$counter]['part_number'] =$value['part_number'];
+                $data[$counter]['challan_no'] =$value['challan_no'];
                 $data[$counter]['rejection_rework_reason'] =$value['rejection_rework_reason'];
                 $data[$counter]['qty'] =$value['qty'];
-                $data[$counter]['qtyss'] =$value['qty'];
+                $data[$counter]['rejectied_qty_in_kgs'] =$value['qty'] * $value['net_weight'];
                 $counter++; 
             }
         }
         return $data;
     }
-
-
 
 }
 
