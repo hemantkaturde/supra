@@ -4764,6 +4764,9 @@ class Admin extends BaseController
             }else{
 
                 if($this->input->post('incomingdetail_editid')){
+                    $checkvendornameexits = $this->admin_model->checkvendorpoisaredayexitsedit(trim($this->input->post('incomingdetail_editid')),trim($this->input->post('vendor_po_number')));
+
+                    if($checkvendornameexits['vendor_ids'] > 0){
                         $data = array(
                             'incoming_details_id'   => trim($this->input->post('incoming_no')),
                             'vendor_name'  => trim($this->input->post('vendor_name')),
@@ -4783,6 +4786,39 @@ class Admin extends BaseController
                                 }
                         }
 
+                    }else{
+
+                          
+                            $checkvendornameexits = $this->admin_model->checkvendorpoisaredayexits(trim($this->input->post('vendor_po_number')));
+
+                            if($checkvendornameexits['vendor_ids'] > 0){
+                                $save_incoming_details['status'] = 'failure';
+                                $save_incoming_details['error'] = array( 'incoming_no'=>strip_tags(form_error('incoming_no')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>'Incoming Id Already Exits For This Vendor PO Number','reported_by'=>strip_tags(form_error('reported_by')),'reported_date'=>strip_tags(form_error('reported_date')),'remark'=>strip_tags(form_error('remark')));
+                            }else{
+
+
+                                $data = array(
+                                    'incoming_details_id'   => trim($this->input->post('incoming_no')),
+                                    'vendor_name'  => trim($this->input->post('vendor_name')),
+                                    'vendor_po_number'=> trim($this->input->post('vendor_po_number')),
+                                    'reported_by' =>    trim($this->input->post('reported_by')),
+                                    'reported_date' =>    trim($this->input->post('reported_date')),
+                                    'remark' =>    trim($this->input->post('remark'))
+                                );
+                
+                                $saveIncomingdetails= $this->admin_model->saveIncomingdetails(trim($this->input->post('incomingdetail_editid')),$data);
+            
+                                if($saveIncomingdetails){
+                                        $update_last_inserted_id_incoming_details = $this->admin_model->update_last_inserted_id_incoming_details($saveIncomingdetails);
+                                        if($update_last_inserted_id_incoming_details){
+                                            $save_incoming_details['status'] = 'success';
+                                            $save_incoming_details['error'] = array( 'incoming_no'=>strip_tags(form_error('incoming_no')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'reported_by'=>strip_tags(form_error('reported_by')),'reported_date'=>strip_tags(form_error('reported_date')),'remark'=>strip_tags(form_error('remark')));
+                                        }
+                                }
+
+                            }
+                    }
+
                 }else{
 
                     $data = array(
@@ -4793,16 +4829,22 @@ class Admin extends BaseController
                         'reported_date' =>    trim($this->input->post('reported_date')),
                         'remark' =>    trim($this->input->post('remark'))
                     );
-    
+                       /* Check if vendor PO is Alreday Exits */
+                    
+                    $checkvendornameexits = $this->admin_model->checkvendorpoisaredayexits(trim($this->input->post('vendor_po_number')));
+
+                    if($checkvendornameexits['vendor_ids'] > 0){
+                        $save_incoming_details['status'] = 'failure';
+                        $save_incoming_details['error'] = array( 'incoming_no'=>strip_tags(form_error('incoming_no')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>'Incoming Id Already Exits For This Vendor PO Number','reported_by'=>strip_tags(form_error('reported_by')),'reported_date'=>strip_tags(form_error('reported_date')),'remark'=>strip_tags(form_error('remark')));
+                    }else{
+
                     $checkIfexitsincomingdetails = $this->admin_model->checkIfexitsincomingdetails(trim($this->input->post('incoming_no')));
-    
     
                     if($checkIfexitsincomingdetails > 0){
                         $save_incoming_details['status'] = 'failure';
                         $save_incoming_details['error'] = array( 'incoming_no'=>strip_tags(form_error('incoming_no')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'reported_by'=>strip_tags(form_error('reported_by')),'reported_date'=>strip_tags(form_error('reported_date')),'remark'=>strip_tags(form_error('remark')));
                     }else{
                         $saveIncomingdetails= $this->admin_model->saveIncomingdetails('',$data);
-    
     
                         if($saveIncomingdetails){
                             $update_last_inserted_id_incoming_details = $this->admin_model->update_last_inserted_id_incoming_details($saveIncomingdetails);
@@ -4813,7 +4855,7 @@ class Admin extends BaseController
                         }
     
                     }
-            
+                  }
                 }
                
             }
@@ -7598,6 +7640,24 @@ class Admin extends BaseController
 
     }
 
+
+    public function editstcokformdetails($stock_id){
+
+        $process = 'Edit Stock Form';
+        $processFunction = 'Admin/editstcokformdetails';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Edit Stock Form';
+
+        $data['vendorList']= $this->admin_model->fetchALLvendorList();
+        $data['getPriviousstockid']= $this->admin_model->getPriviousstockid();
+        $data['getItemlistStockform']= $this->admin_model->getItemlistStockform();
+        $data['getStockforminformation']= $this->admin_model->getStockforminformation();
+        $data['getAlltotalcalculation']= $this->admin_model->getAlltotalcalculation();
+
+
+        $this->loadViews("masters/editStockform", $this->global, $data, NULL);
+    }
+
     public function saveStockformitem(){
         $post_submit = $this->input->post();
         if($post_submit){
@@ -7732,11 +7792,11 @@ class Admin extends BaseController
 
        $submit = $this->input->post();
         if($submit) {
-            $getIncomingdetailsbyvendorid = $this->admin_model->getincominglotnumberbyvendor($this->input->post('part_number'),$this->input->post('vendor_id'));
+            $getIncomingdetailsbyvendorid = $this->admin_model->getincominglotnumberbyvendor($this->input->post('part_number'),$this->input->post('vendor_id'),$this->input->post('vendor_po_number'));
             if(count($getIncomingdetailsbyvendorid) >= 1) {
                 $content = $content.'<option value="">Select Lot Number</option>';
 				foreach($getIncomingdetailsbyvendorid as $value) {
-					$content = $content.'<option value="'.$value["id"].'">'.$value["incoming_details_id"].' - '.$value["lot_no"].'</lot_no>';
+					$content = $content.'<option value="'.$value["id"].'">'.$value["lot_no"].'</lot_no>';
 				}
 				echo $content;
 			} else {
@@ -7825,6 +7885,21 @@ class Admin extends BaseController
         echo json_encode($json_data);
     }
 
+    public function omschallan(){
+        $process = 'OMS challan';
+        $processFunction = 'Admin/omschallan';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'OMS challan';
+        $data['vendorList']= $this->admin_model->fetchALLvendorList();
+        $this->loadViews("masters/omschallan", $this->global, $data, NULL);  
+    }
+
+
+    public function fetchomschallan(){
+
+
+        
+    }
    
 
 }

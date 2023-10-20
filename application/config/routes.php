@@ -289,8 +289,7 @@ $route['fetchstockformrecords'] = "admin/fetchstockformrecords";
 $route['saveStockformitem'] = "admin/saveStockformitem";
 $route['deleteStockformitem'] = "admin/deleteStockformitem";
 $route['deletestockform'] = "admin/deletestockform";
-
-
+$route['editstcokformdetails/(:any)'] = "admin/editstcokformdetails/$1";
 
 
 $route['searchstock'] = "admin/searchstock";
@@ -300,6 +299,12 @@ $route['getinvoiceqtybyLotnumber'] = "admin/getinvoiceqtybyLotnumber";
 $route['getalltotalcalculationstockform'] = "admin/getalltotalcalculationstockform";
 $route['fetchexportrecordsitem'] = "admin/fetchexportrecordsitem";
 $route['fetchrejecteditem'] = "admin/fetchrejecteditem";
+
+$route['omschallan'] = "admin/omschallan";
+$route['fetchomschallan'] = "admin/fetchomschallan";
+
+
+
 
 
 

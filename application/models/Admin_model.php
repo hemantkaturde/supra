@@ -5420,7 +5420,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['buyer_po_date'] = $value['buyer_po_date'];
                 $data[$counter]['buyer_delivery_date'] = $value['delivery_date'];
                 $data[$counter]['action'] = '';
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editdebitnoteform/".$value['stock_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editstcokformdetails/".$value['stock_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addneworkrejection' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-ban' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addnewpackinginstruction' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-stack-exchange' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['stock_id']."' class='fa fa-trash-o deletestockform' aria-hidden='true'></i>"; 
@@ -5611,22 +5611,26 @@ class Admin_model extends CI_Model
         return $data;
     }
 
-    public function getincominglotnumberbyvendor($part_number,$vendor_id){
+    public function getincominglotnumberbyvendor($part_number,$vendor_id,$vendor_po_number){
 
         $this->db->select(TBL_INCOMING_DETAILS_ITEM.'.id,'.TBL_INCOMING_DETAILS_ITEM.'.lot_no,'.TBL_INCOMING_DETAILS.'.incoming_details_id');
-        $this->db->join(TBL_INCOMING_DETAILS_ITEM, TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id = '.TBL_INCOMING_DETAILS.'.id');
-        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_INCOMING_DETAILS.'.vendor_po_number');
-        $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id = '.TBL_VENDOR_PO_MASTER.'.id');
-        // $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
-        $this->db->join(TBL_VENDOR_PO_MASTER_ITEM.' as a', 'a.part_number_id = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
+        //$this->db->join(TBL_INCOMING_DETAILS_ITEM, TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id = '.TBL_INCOMING_DETAILS.'.id');
+        $this->db->join(TBL_INCOMING_DETAILS, TBL_INCOMING_DETAILS.'.id = '.TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id');
+
+
+        //  $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_INCOMING_DETAILS.'.vendor_po_number');
+        //  $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id = '.TBL_VENDOR_PO_MASTER.'.id');
+        // // $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
+        //   $this->db->join(TBL_VENDOR_PO_MASTER_ITEM.' as a', 'a.part_number_id = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
         $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.part_number', $part_number);
         $this->db->where(TBL_INCOMING_DETAILS.'.vendor_name', $vendor_id);
-
+        $this->db->where(TBL_INCOMING_DETAILS.'.vendor_po_number', $vendor_po_number);
+        
         $this->db->order_by(TBL_INCOMING_DETAILS.'.id','DESC');
-        // $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.part_number', $part_number);
+        $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.part_number', $part_number);
         //$this->db->where(TBL_VENDOR_PO_MASTER.'.supplier_name !=',"");
         //$this->db->where(TBL_VENDOR_PO_MASTER.'.supplier_po_number !=',"");
-        $query = $this->db->get(TBL_INCOMING_DETAILS);
+        $query = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
         $data = $query->result_array();
         return $data;
     }
@@ -5722,6 +5726,26 @@ class Admin_model extends CI_Model
             }
         }
         return $data;
+    }
+
+    public function checkvendorpoisaredayexits($vendor_po_number){
+        $this->db->select('count(*) as vendor_ids');
+        $this->db->where(TBL_INCOMING_DETAILS.'.status', 1);
+        $this->db->where(TBL_INCOMING_DETAILS.'.vendor_po_number', $vendor_po_number);
+        $query = $this->db->get(TBL_INCOMING_DETAILS);
+        $fetch_result = $query->row_array();
+        return $fetch_result;
+    }
+
+    public function checkvendorpoisaredayexitsedit($incomingdetail_editid,$vendor_po_number){
+        $this->db->select('count(*) as vendor_ids');
+        $this->db->where(TBL_INCOMING_DETAILS.'.status', 1);
+        $this->db->where(TBL_INCOMING_DETAILS.'.id', $incomingdetail_editid);
+        $this->db->where(TBL_INCOMING_DETAILS.'.vendor_po_number', $vendor_po_number);
+        $query = $this->db->get(TBL_INCOMING_DETAILS);
+        $fetch_result = $query->row_array();
+        return $fetch_result;
+
     }
 
 }

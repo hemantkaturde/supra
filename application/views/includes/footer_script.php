@@ -12702,12 +12702,13 @@
 			$(".loader_ajax").show();
 			// $("#customers-list").html('');
 			var vendor_id = $('#vendor_name').val();
+			var vendor_po_number = $('#vendor_po_number').val();
 			var part_number = $('.part_number_for_incoming_details').val();
 
 			$.ajax({
 				url : "<?php echo ADMIN_PATH;?>getincominglotnumberbyvendor",
 				type: "POST",
-				data : {'vendor_id' : vendor_id,part_number:part_number},
+				data : {'vendor_id' : vendor_id,'part_number':part_number,'vendor_po_number':vendor_po_number},
 				success: function(data, textStatus, jqXHR)
 				{
 					$(".loader_ajax").hide();
@@ -13048,4 +13049,38 @@
 		});
 
    </script>
+<?php } ?>
+
+
+
+<?php if($pageTitle=='OMS challan'){ ?>
+	<script type="text/javascript">    
+        $(document).ready(function() {
+			var dt = $('#view_OMS_chllan').DataTable({
+	            "columnDefs": [ 
+	                 { className: "details-control", "targets": [ 0 ] },
+	                 { "width": "10%", "targets": 0 },
+	                 { "width": "10%", "targets": 1 },
+					 { "width": "10%", "targets": 2 },
+	                 { "width": "10%", "targets": 3 },
+					 { "width": "10%", "targets": 4 }
+	            ],
+	            responsive: true,
+	            "oLanguage": {
+	                "sEmptyTable": "<i>No OMS Challan Found.</i>",
+	            }, 
+	            "bSort" : false,
+	            "bFilter":true,
+	            "bLengthChange": true,
+	            "iDisplayLength": 10,   
+	            "bProcessing": true,
+	            "serverSide": true,
+	            "ajax":{
+                    url :"<?php echo base_url();?>fetchomschallan",
+                    type: "post",
+	            },
+	        });
+		});
+
+	</script>
 <?php } ?>
