@@ -12883,7 +12883,7 @@
 	                "sEmptyTable": "<i>No Stock Records Found.</i>",
 	            }, 
 	            "bSort" : false,
-	            "bFilter":true,
+	            "bFilter":false,
 	            "bLengthChange": true,
 	            "iDisplayLength": 10,   
 	            "bProcessing": true,
@@ -12951,7 +12951,7 @@
 	                "sEmptyTable": "<i>No Export Items Found.</i>",
 	            }, 
 	            "bSort" : false,
-	            "bFilter":true,
+	            "bFilter":false,
 	            "bLengthChange": true,
 	            "iDisplayLength": 10,   
 	            "bProcessing": true,
@@ -12977,7 +12977,7 @@
 	                "sEmptyTable": "<i>No Rejected Items Found.</i>",
 	            }, 
 	            "bSort" : false,
-	            "bFilter":true,
+	            "bFilter":false,
 	            "bLengthChange": true,
 	            "iDisplayLength": 10,   
 	            "bProcessing": true,
@@ -13051,6 +13051,78 @@
 				}
 			});
 			return false;
+		});
+
+
+		$(document).on('change','.vendor_po_for_buyer_details_',function(e){  
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			        var vendor_po_number = $('#vendor_po_number').val();
+			
+			        $.ajax({
+							url : "<?php echo ADMIN_PATH;?>getbuyerpodetailsforvendorbillofmaterial",
+							type: "POST",
+							data : {'vendor_po_number' : vendor_po_number},
+							success: function(data, textStatus, jqXHR)
+							{
+								$(".loader_ajax").hide();
+								if(data == "failure")
+								{
+									$('#buyer_name').html('');
+								}
+								else
+								{
+									$('#buyer_name').html(data);
+									$('#buyer_po_id').val('');
+					             	$("#buyer_po_number").val('');	
+									$("#buyer_name").val('');	
+									$('#buyer_po_date').val('');
+									$('#buyer_delivery_date').val('');	
+
+									$.ajax({
+										url : "<?php echo ADMIN_PATH;?>getbuyerpodetailsforvendorstockform",
+										type: "POST",
+										data : {'vendor_po_number' : vendor_po_number},
+										success: function(data, textStatus, jqXHR)
+										{
+											var get_buyerdata = jQuery.parseJSON( data );
+
+											$(".loader_ajax").hide();
+											if(data == "failure")
+											{
+												$('#buyer_po_id').val('');
+												$('#buyer_po_number').val('');
+												$("#buyer_name").val('');	
+												$('#buyer_po_date').val('');
+												$('#buyer_delivery_date').val('');	
+											}
+											else
+											{
+												$('#buyer_po_id').val(get_buyerdata.buyer_po_id);
+												$('#buyer_po_number').val(get_buyerdata.sales_order_number);
+												$("#buyer_name").val(get_buyerdata.b_name);	
+												$('#buyer_po_date').val(get_buyerdata.date);
+												$('#buyer_delivery_date').val(get_buyerdata.delivery_date);	
+											}
+										},
+										error: function (jqXHR, textStatus, errorThrown)
+										{
+											$('#buyer_name').html();
+											
+										}
+									});
+
+										
+								}
+							},
+							error: function (jqXHR, textStatus, errorThrown)
+							{
+								   
+									$('#buyer_name').html('');				
+							}
+						});
+			    return false;
+	                   
 		});
 
    </script>

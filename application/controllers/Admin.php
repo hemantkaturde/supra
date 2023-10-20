@@ -7589,12 +7589,7 @@ class Admin extends BaseController
                 $newstockform_response['error'] = array('stock_id'=>strip_tags(form_error('stock_id')),'stock_date'=>strip_tags(form_error('stock_date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'vendor_po_date'=>strip_tags(form_error('vendor_po_date')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'buyer_delivery_date'=>strip_tags(form_error('buyer_delivery_date')),'Invoice_qty_in_pcs'=>strip_tags(form_error('Invoice_qty_in_pcs')),'Invoice_qty_in_kgs'=>strip_tags(form_error('Invoice_qty_in_kgs')),'actual_received_qty_in_pcs'=>strip_tags(form_error('actual_received_qty_in_pcs')),'actual_received_qty_in_kgs'=>strip_tags(form_error('actual_received_qty_in_kgs')),'total_rejected_in_pcs'=>strip_tags(form_error('total_rejected_in_pcs')),'total_rejected_in_pcs_kgs'=>strip_tags(form_error('total_rejected_in_pcs_kgs')),'reday_for_export_pcs'=>strip_tags(form_error('reday_for_export_pcs')),'reday_for_export_kgs'=>strip_tags(form_error('reday_for_export_kgs')),'total_rejection_qty_kgs'=>strip_tags(form_error('total_rejection_qty_kgs')),'total_export_qty_pcs'=>strip_tags(form_error('total_export_qty_pcs')),'balance_qty_in_pics'=>strip_tags(form_error('balance_qty_in_pics')),'balance_qty_in_kgs'=>strip_tags(form_error('balance_qty_in_kgs')),'remark'=>strip_tags(form_error('remark')));
 
             }else{
-
-               
-
-
                 $stock_id = trim($this->input->post('stock_id_main'));
-
                 if($stock_id){
 
                     $data = array(
@@ -7624,8 +7619,6 @@ class Admin extends BaseController
 
                     $savestockform= $this->admin_model->savestockform($stock_id,$data);
                 }else{
-
-
                     $data = array(
                         'stock_id_number' => trim($this->input->post('stock_id')),
                         'stock_date' => trim($this->input->post('stock_date')),
@@ -7677,7 +7670,6 @@ class Admin extends BaseController
         }
 
     }
-
 
     public function editstcokformdetails($stock_id){
 
@@ -7806,7 +7798,6 @@ class Admin extends BaseController
         }
     }
 
-
     public function deletestockform(){
         $post_submit = $this->input->post();
         if($post_submit){
@@ -7823,7 +7814,6 @@ class Admin extends BaseController
         }
         
     }
-
 
     public function searchstock(){
         $process = 'Search Stock';
@@ -7967,6 +7957,7 @@ class Admin extends BaseController
         $this->loadViews("masters/omschallan", $this->global, $data, NULL);  
     }
 
+    
 
     public function fetchomschallan(){
 

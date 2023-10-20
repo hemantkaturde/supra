@@ -4909,7 +4909,6 @@ class Admin_model extends CI_Model
         return $rowcount;
     }
 
-
     public function saveNewdPaymentDetails($id,$data){
 
         if($id != '') {
@@ -5312,7 +5311,7 @@ class Admin_model extends CI_Model
 
     public function getbuyerpodetailsforvendorstockform($vendor_po_number){
 
-        $this->db->select(TBL_BUYER_PO_MASTER.'.*,'.TBL_BUYER_PO_MASTER.'.id as buyer_po_id');
+        $this->db->select(TBL_BUYER_PO_MASTER.'.*,'.TBL_BUYER_PO_MASTER.'.id as buyer_po_id,'.TBL_BUYER_MASTER.'.buyer_name as b_name');
         $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_VENDOR_PO_MASTER.'.buyer_po_number');
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_VENDOR_PO_MASTER.'.buyer_name');
         $this->db->where(TBL_VENDOR_PO_MASTER.'.id', $vendor_po_number);
@@ -5570,6 +5569,12 @@ class Admin_model extends CI_Model
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id  = '.TBL_STOCKS_ITEM.'.pre_vendor_po_number');
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_STOCKS_ITEM.'.pre_buyer_name');
         $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_STOCKS_ITEM.'.pre_buyer_po_id');
+
+
+
+
+
+
         $this->db->where(TBL_STOCKS_ITEM.'.stock_form_id IS NOT NULL');
         $this->db->where(TBL_STOCKS_ITEM.'.status', 1);
         $this->db->order_by(TBL_STOCKS_ITEM.'.id ','DESC');

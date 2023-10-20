@@ -18,7 +18,7 @@
         </div>
 
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <div class="form-group">
                     <label for="vendor_name">Vendor Name </label>
                         <select class="form-control" name="vendor_name" id="vendor_name">
@@ -34,7 +34,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="vendor_po_number">Vendor PO Number</label>
-                        <select class="form-control" name="vendor_po_number" id="vendor_po_number">
+                        <select class="form-control vendor_po_for_buyer_details_" name="vendor_po_number" id="vendor_po_number">
                             <option st-id="" value="">Select Vendor PO Number</option>
                         </select>
                     <p class="error vendor_po_number_error"></p>
@@ -56,28 +56,62 @@
 
             <div class="col-md-2">
                 <div class="form-group">
+                    <label for="item_number">Total Stock</label>
+                        
+                    <p class="error item_number_error"></p>
+                </div>
+            </div>  
+
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="item_number">Total Balance Stock</label>
+                        
+                    <p class="error item_number_error"></p>
+                </div>
+            </div>  
+
+        </div>   
+
+        <div class="row">
+
+        <div class="col-md-3">
+                <div class="form-group">
                     <label for="buyer_name">Buyer Name </label>
-                        <select class="form-control" name="buyer_name" id="buyer_name">
-                            <option st-id="" value="">Select Buyer Name</option>
-                                <?php foreach ($buyerList as $key => $value) {?>
-                                    <option value="<?php echo $value['buyer_id']; ?>" <?php if($value['buyer_id']==$fetchALLpresupplieritemList[0]['pre_buyer_name']){ echo 'selected';} ?> ><?php echo $value['buyer_name']; ?></option>
-                                <?php } ?>
-                            </select>
-                        <p class="error buyer_name_error"></p>
+                    <input type="text" class="form-control" id="buyer_name" name="buyer_name" readonly>
                 </div>
             </div>
 
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="buyer_po_number">Buyer PO Number</label>
-                        <select class="form-control" name="buyer_po_number" id="buyer_po_number">
-                            <option st-id="" value="">Select Buyer PO Number</option>
-                        </select>
-                    <p class="error buyer_po_number_error"></p>
+                    <input type="text" class="form-control" id="buyer_po_number" name="buyer_po_number" readonly>
                 </div>
             </div>  
-        </div>          
 
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="buyer_delivery_date">Buyer Delivery Date</label>
+                    <input type="text" class="form-control" id="buyer_delivery_date" name="buyer_delivery_date" readonly>
+                </div>
+            </div>  
+
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="buyer_po_date">Buyer PO Date</label>
+                    <input type="text" class="form-control" id="buyer_po_date" name="buyer_po_date" readonly>
+                </div>
+            </div> 
+
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="buyer_order_qty">Buyer Order Qty</label>
+                    <input type="text" class="form-control" id="buyer_order_qty" name="buyer_order_qty" readonly>
+                </div>
+            </div>  
+
+        </div>
+        
+    
         <div class="row ">
             <div class="col-xs-12">
                 <div class="box">
