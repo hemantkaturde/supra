@@ -5613,16 +5613,19 @@ class Admin_model extends CI_Model
 
     public function getincominglotnumberbyvendor($part_number,$vendor_id){
 
-        $this->db->select(TBL_INCOMING_DETAILS_ITEM.'.id,'.TBL_INCOMING_DETAILS_ITEM.'.lot_no');
+        $this->db->select(TBL_INCOMING_DETAILS_ITEM.'.id,'.TBL_INCOMING_DETAILS_ITEM.'.lot_no,'.TBL_INCOMING_DETAILS.'.incoming_details_id');
         $this->db->join(TBL_INCOMING_DETAILS_ITEM, TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id = '.TBL_INCOMING_DETAILS.'.id');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_INCOMING_DETAILS.'.vendor_po_number');
         $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id = '.TBL_VENDOR_PO_MASTER.'.id');
         // $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
         $this->db->join(TBL_VENDOR_PO_MASTER_ITEM.' as a', 'a.part_number_id = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
+        $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.part_number', $part_number);
+        $this->db->where(TBL_INCOMING_DETAILS.'.vendor_name', $vendor_id);
 
-        //$this->db->where(TBL_INCOMING_DETAILS_ITEM.'.part_number', $part_number);
-        // $this->db->where(TBL_VENDOR_PO_MASTER.'.supplier_name !=',"");
-        // $this->db->where(TBL_VENDOR_PO_MASTER.'.supplier_po_number !=',"");
+        $this->db->order_by(TBL_INCOMING_DETAILS.'.id','DESC');
+        // $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.part_number', $part_number);
+        //$this->db->where(TBL_VENDOR_PO_MASTER.'.supplier_name !=',"");
+        //$this->db->where(TBL_VENDOR_PO_MASTER.'.supplier_po_number !=',"");
         $query = $this->db->get(TBL_INCOMING_DETAILS);
         $data = $query->result_array();
         return $data;
