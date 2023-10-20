@@ -27,6 +27,9 @@
                                 <div class="form-group">
                                     <label for="stock_id">Stock Id <span class="required">*</span></label>
                                     <?php
+
+                                    // print_r($getPriviousstockid[0]['stock_id_number']);
+                                    // exit;
                                         if($getPriviousstockid[0]['stock_id_number']){
                                             $arr = str_split($getPriviousstockid[0]['stock_id_number']);
                                             $i = end($arr);
