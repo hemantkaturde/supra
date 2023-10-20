@@ -12184,7 +12184,7 @@
     </script>
 <?php } ?>
 
-<?php if($pageTitle=='Add New Stock Form' || $pageTitle=='Stock Form'){ ?>
+<?php if($pageTitle=='Add New Stock Form' || $pageTitle=='Stock Form' || $pageTitle=='Edit Stock Form'){ ?>
 	<script type="text/javascript">
 
         $(document).ready(function() {
@@ -12557,7 +12557,9 @@
 		$(document).on('click','#saveStockform_item',function(e){
 			e.preventDefault();
 			   $(".loader_ajax").show();
-		
+
+			   var stock_id =   $('#stock_id_main').val();
+
 			   var part_number =   $('#part_number').val();
 			   var buyre_order_qty =   $('#buyre_order_qty').val();
 			   var fg_order_qty =   $('#fg_order_qty').val();
@@ -12580,14 +12582,13 @@
 			   var pre_buyer_po_id =   $('#buyer_po_id').val();
 			   var pre_buyer_po_date =   $('#buyer_po_date').val();
 			   var pre_buyer_delivery_date =   $('#buyer_delivery_date').val();
-
-
+			   var pre_remark =   $('#remark').val();
 			
 			   $.ajax({
 				url : "<?php echo base_url();?>saveStockformitem",
 				type: "POST",
 				 //data : formData,
-				 data :{ part_number :part_number,buyre_order_qty:buyre_order_qty,fg_order_qty:fg_order_qty,invoice_number:invoice_number,invoice_date :invoice_date,invoice_qty_in_pcs:invoice_qty_in_pcs,invoice_qty_in_kgs :invoice_qty_in_kgs, lot_number :lot_number,actaul_recived_qty_in_pics :actaul_recived_qty_in_pics,actaul_recived_qty_in_kgs : actaul_recived_qty_in_kgs,privious_balenace :privious_balenace,itemremark :itemremark,pre_stock_date:pre_stock_date,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_vendor_po_date:pre_vendor_po_date,pre_buyer_name:pre_buyer_name,pre_buyer_po_id:pre_buyer_po_id,pre_buyer_po_date:pre_buyer_po_date,pre_buyer_delivery_date:pre_buyer_delivery_date},
+				 data :{ part_number :part_number,buyre_order_qty:buyre_order_qty,fg_order_qty:fg_order_qty,invoice_number:invoice_number,invoice_date :invoice_date,invoice_qty_in_pcs:invoice_qty_in_pcs,invoice_qty_in_kgs :invoice_qty_in_kgs, lot_number :lot_number,actaul_recived_qty_in_pics :actaul_recived_qty_in_pics,actaul_recived_qty_in_kgs : actaul_recived_qty_in_kgs,privious_balenace :privious_balenace,itemremark :itemremark,pre_stock_date:pre_stock_date,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_vendor_po_date:pre_vendor_po_date,pre_buyer_name:pre_buyer_name,pre_buyer_po_id:pre_buyer_po_id,pre_buyer_po_date:pre_buyer_po_date,pre_buyer_delivery_date:pre_buyer_delivery_date,pre_remark:pre_remark,stock_id:stock_id},
 				 method: "POST",
                 // data :{package_id:package_id},
                 cache:false,
@@ -12611,8 +12612,12 @@
 							button: "Ok",
 							},function(){ 
 
-							window.location.href = "<?php echo base_url().'addNewstockform'?>";
-								
+								if(stock_id){
+									window.location.href = "<?php echo base_url().'editstcokformdetails/'?>"+stock_id;
+
+								}else{
+									window.location.href = "<?php echo base_url().'addNewstockform'?>";
+								}
 						});		
 				    }
 					

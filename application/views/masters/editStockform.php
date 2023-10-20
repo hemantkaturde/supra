@@ -26,33 +26,16 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="stock_id">Stock Id <span class="required">*</span></label>
-                                    <?php
-                                        if($getPriviousstockid[0]['stock_id_number']){
-                                            $arr = str_split($getPriviousstockid[0]['stock_id_number']);
-                                            $i = end($arr);
-                                            $inrno= "SQSD2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
-                                            $stock_form_id = $inrno;
-                                        }else{
-                                            $stock_form_id = 'SQSD23240001';
-                                        }
-                                    ?>
-                                        <input type="text" class="form-control" id="stock_id" name="stock_id" value="<?=$stock_form_id;?>" required readonly>
+                                        <input type="hidden" class="form-control" id="stock_id_main" name="stock_id_main" value="<?=$getStockdetailsData['stock_id']?>"  required >
+                                        <input type="text" class="form-control" id="stock_id" name="stock_id" value="<?=$getStockdetailsData['stock_id_number']?>" required readonly>
                                         <p class="error stock_id_error"></p>
                                 </div>
                             </div>
 
-
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="stock_date">Stock Date <span class="required">*</span></label>
-                                        <?php 
-                                        if($getStockforminformation[0]['pre_stock_date']){
-                                            $date= $getStockforminformation[0]['pre_stock_date'];
-                                        }else{
-                                            $date= date('Y-m-d'); 
-                                        }
-                                       ?>
-                                        <input type="text" class="form-control datepicker" id="stock_date" name="stock_date" value="<?=$date?>"  required >
+                                        <input type="text" class="form-control datepicker" id="stock_date" name="stock_date" value="<?=$getStockdetailsData['stock_date']?>"  required >
                                         <p class="error stock_date_error"></p>
                                 </div>
                             </div>
@@ -63,7 +46,7 @@
                                             <select class="form-control" name="vendor_name" id="vendor_name">
                                                 <option st-id="" value="">Select Vendor Name</option>
                                                     <?php foreach ($vendorList as $key => $value) {?>
-                                                        <option value="<?php echo $value['ven_id']; ?>" <?php if($getStockforminformation[0]['pre_vendor_name']==$value['ven_id']){ echo 'selected'; }?> ><?php echo $value['vendor_name']; ?></option>
+                                                        <option value="<?php echo $value['ven_id']; ?>" <?php if($getStockdetailsData['vendor_name']==$value['ven_id']){ echo 'selected'; }?> ><?php echo $value['vendor_name']; ?></option>
                                                     <?php } ?>
                                             </select>
                                         <p class="error vendor_name_error"></p>
@@ -74,8 +57,8 @@
                                 <div class="form-group">
 
                                      <?php 
-                                        if($getStockforminformation[0]['pre_vendor_po_number']){
-                                            $po_number=  '<option st-id="" value="'.$getStockforminformation[0]['pre_vendor_po_number'].'">'.$getStockforminformation[0]['po_number'].'</option>';
+                                        if($getStockdetailsData['vendor_po_id']){
+                                            $po_number=  '<option st-id="" value="'.$getStockdetailsData['vendor_po_id'].'">'.$getStockdetailsData['vendor_po'].'</option>';
                                         }else{
                                             $po_number= '<option st-id="" value="">Select Vendor Name</option>'; 
                                         }
@@ -95,22 +78,14 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="buyer_po">Vendor PO Date</label>
-                                       <?php 
-                                        if($getStockforminformation[0]['pre_vendor_po_date']){
-                                            $pre_vendor_po_date= $getStockforminformation[0]['pre_vendor_po_date'];
-                                        }else{
-                                            $pre_vendor_po_date= date('Y-m-d'); 
-                                        }
-                                       ?>
-
-                                        <input type="text" class="form-control" id="vendor_po_date" name="vendor_po_date" value="<?=$pre_vendor_po_date?>" required readonly>
+                                        <input type="text" class="form-control" id="vendor_po_date" name="vendor_po_date" value="<?=$getStockdetailsData['vendor_po_date']?>" required readonly>
                                         <p class="error vendor_po_date_error"></p>
                                 </div>
                             </div>
 
                                        <?php 
-                                        if($getStockforminformation[0]['buyer_id']){
-                                            $buyer_name=  '<option st-id="" value="'.$getStockforminformation['0']['buyer_id'].'">'.$getStockforminformation[0]['buyer_name'].'</option>';
+                                        if($getStockdetailsData['buyer_id']){
+                                            $buyer_name=  '<option st-id="" value="'.$getStockdetailsData['buyer_id'].'">'.$getStockdetailsData['buyer_name'].'</option>';
                                         }else{
                                             $buyer_name= '<option st-id="" value="">Select Buyer Name</option>'; 
                                         }
@@ -130,9 +105,9 @@
                                 <div class="form-group">
                                     <label for="buyer_po_number">Buyer PO Number</label>
                                       <?php 
-                                        if($getStockforminformation[0]['pre_buyer_po_id']){
-                                            $pre_buyer_po_number=  $getStockforminformation[0]['sales_order_number'];
-                                            $pre_buyer_po_id= $getStockforminformation[0]['pre_buyer_po_id'];
+                                        if($getStockdetailsData['buyer_po_id']){
+                                            $pre_buyer_po_number=  $getStockdetailsData['sales_order_number'];
+                                            $pre_buyer_po_id= $getStockdetailsData['buyer_po_id'];
                                         }else{
                                             $pre_buyer_po_number= ''; 
                                             $pre_buyer_po_id= ''; 
@@ -149,8 +124,8 @@
                                     <label for="buyer_po_date">Buyer PO Date</label>
 
                                     <?php 
-                                        if($getStockforminformation[0]['pre_buyer_po_date']){
-                                            $pre_buyer_po_date=  $getStockforminformation[0]['pre_buyer_po_date'];
+                                        if($getStockdetailsData['buyer_po_date']){
+                                            $pre_buyer_po_date=  $getStockdetailsData['buyer_po_date'];
                                         }else{
                                             $pre_buyer_po_date= ''; 
                                         }
@@ -165,10 +140,9 @@
                                 <div class="form-group">
                                     <label for="buyer_delivery_date">Buyer Delivery Date</label>
 
-
                                     <?php 
-                                        if($getStockforminformation[0]['pre_buyer_delivery_date']){
-                                            $pre_buyer_delivery_date=  $getStockforminformation[0]['pre_buyer_delivery_date'];
+                                        if($getStockdetailsData['delivery_date']){
+                                            $pre_buyer_delivery_date=  $getStockdetailsData['delivery_date'];
                                         }else{
                                             $pre_buyer_delivery_date= ''; 
                                         }
@@ -182,7 +156,7 @@
                         </div>
 
                         <div class="col-md-4">
-                            <div class="col-md-12">
+                        <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="Invoice_qty_in_pcs">Invoice Qty (In pcs)</label>
 
@@ -254,13 +228,11 @@
                                         <p class="error actual_received_qty_in_kgs_error"></p>
                                 </div>
                             </div>
-
                             
                             <div class="col-md-12">
                                 <div class="form-group">
-
                                         <label for="balance_qty_in_kgs">Remark</label>
-                                        <input type="remark" class="form-control" id="remark" <?=$getAlltotalcalculation['pre_remark']?> name="remark">
+                                           <input type="remark" class="form-control" id="remark" value="<?=$getStockdetailsData['stock_remark']?>" name="remark">
                                         <p class="error remark_error"></p>
                                 </div>
                             </div>
@@ -372,9 +344,9 @@
                                     </thead>   
 
                                          <?php 
-                                           if($getItemlistStockform){
+                                           if($getItemlistStockformedit){
                                                $i=1;
-                                            foreach ($getItemlistStockform as $key => $value) { ?>
+                                            foreach ($getItemlistStockformedit as $key => $value) { ?>
                                             <tr>
                                                 <td><?php echo  $i++; ?></td>
                                                 <td><?=$value['part_number']?></td>
@@ -409,7 +381,7 @@
                      <div class="box-footer">
                         <div class="col-xs-8">
 
-                            <?php if($getItemlistStockform){ 
+                            <?php if($getItemlistStockformedit){ 
                             $button ="";
                             }else{
                             $button ="disabled";

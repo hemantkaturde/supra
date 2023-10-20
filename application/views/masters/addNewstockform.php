@@ -262,8 +262,8 @@
                             <div class="col-md-12">
                                 <div class="form-group">
 
-                                        <label for="balance_qty_in_kgs">Remark</label>
-                                        <input type="remark" class="form-control" id="remark" <?=$getAlltotalcalculation['pre_remark']?> name="remark">
+                                        <label for="remark">Remark</label>
+                                        <input type="remark" class="form-control" id="remark" value="<?=$getStockforminformation[0]['pre_remark_item']?>" name="remark">
                                         <p class="error remark_error"></p>
                                 </div>
                             </div>

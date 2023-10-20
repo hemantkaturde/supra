@@ -7590,32 +7590,70 @@ class Admin extends BaseController
 
             }else{
 
-                $data = array(
-                    'stock_id_number' => trim($this->input->post('stock_id')),
-                    'stock_date' => trim($this->input->post('stock_date')),
-                    'vendor_name' => trim($this->input->post('vendor_name')),
-                    'vendor_po_number' => trim($this->input->post('vendor_po_number')),
-                    'vendor_po_date' => trim($this->input->post('vendor_po_date')),
-                    'buyer_name' => trim($this->input->post('buyer_name')),
-                    'buyer_po_number' => trim($this->input->post('buyer_po_id')),
-                    'buyer_po_date' => trim($this->input->post('buyer_po_date')),
-                    'buyer_delivery_date' => trim($this->input->post('buyer_delivery_date')),
-                    'Invoice_qty_in_pcs' => trim($this->input->post('Invoice_qty_in_pcs')),
-                    'Invoice_qty_in_kgs' => trim($this->input->post('Invoice_qty_in_kgs')),
-                    'actual_received_qty_in_pcs'  => trim($this->input->post('actual_received_qty_in_pcs')),
-                    'actual_received_qty_in_kgs'  => trim($this->input->post('actual_received_qty_in_kgs')),
-                    // 'total_rejected_in_pcs'  => trim($this->input->post('total_rejected_in_pcs')),
-                    // 'total_rejected_in_pcs_kgs' => trim($this->input->post('total_rejected_in_pcs_kgs')),
-                    // 'reday_for_export_pcs' => trim($this->input->post('reday_for_export_pcs')),
-                    // 'reday_for_export_kgs' => trim($this->input->post('reday_for_export_kgs')),
-                    // 'total_rejection_qty_kgs' => trim($this->input->post('total_rejection_qty_kgs')),
-                    // 'total_export_qty_pcs' => trim($this->input->post('total_export_qty_pcs')),
-                    // 'balance_qty_in_pics'  => trim($this->input->post('balance_qty_in_pics')),
-                    // 'balance_qty_in_kgs' => trim($this->input->post('balance_qty_in_kgs')),
-                    'remark' => trim($this->input->post('remark')),
-                );
+               
 
-                $savestockform= $this->admin_model->savestockform('',$data);
+
+                $stock_id = trim($this->input->post('stock_id_main'));
+
+                if($stock_id){
+
+                    $data = array(
+                        //'stock_id_number' => trim($this->input->post('stock_id')),
+                        'stock_date' => trim($this->input->post('stock_date')),
+                        'vendor_name' => trim($this->input->post('vendor_name')),
+                        'vendor_po_number' => trim($this->input->post('vendor_po_number')),
+                        'vendor_po_date' => trim($this->input->post('vendor_po_date')),
+                        'buyer_name' => trim($this->input->post('buyer_name')),
+                        'buyer_po_number' => trim($this->input->post('buyer_po_id')),
+                        'buyer_po_date' => trim($this->input->post('buyer_po_date')),
+                        'buyer_delivery_date' => trim($this->input->post('buyer_delivery_date')),
+                        'Invoice_qty_in_pcs' => trim($this->input->post('Invoice_qty_in_pcs')),
+                        'Invoice_qty_in_kgs' => trim($this->input->post('Invoice_qty_in_kgs')),
+                        'actual_received_qty_in_pcs'  => trim($this->input->post('actual_received_qty_in_pcs')),
+                        'actual_received_qty_in_kgs'  => trim($this->input->post('actual_received_qty_in_kgs')),
+                        // 'total_rejected_in_pcs'  => trim($this->input->post('total_rejected_in_pcs')),
+                        // 'total_rejected_in_pcs_kgs' => trim($this->input->post('total_rejected_in_pcs_kgs')),
+                        // 'reday_for_export_pcs' => trim($this->input->post('reday_for_export_pcs')),
+                        // 'reday_for_export_kgs' => trim($this->input->post('reday_for_export_kgs')),
+                        // 'total_rejection_qty_kgs' => trim($this->input->post('total_rejection_qty_kgs')),
+                        // 'total_export_qty_pcs' => trim($this->input->post('total_export_qty_pcs')),
+                        // 'balance_qty_in_pics'  => trim($this->input->post('balance_qty_in_pics')),
+                        // 'balance_qty_in_kgs' => trim($this->input->post('balance_qty_in_kgs')),
+                        'remark' => trim($this->input->post('remark')),
+                    );
+
+                    $savestockform= $this->admin_model->savestockform($stock_id,$data);
+                }else{
+
+
+                    $data = array(
+                        'stock_id_number' => trim($this->input->post('stock_id')),
+                        'stock_date' => trim($this->input->post('stock_date')),
+                        'vendor_name' => trim($this->input->post('vendor_name')),
+                        'vendor_po_number' => trim($this->input->post('vendor_po_number')),
+                        'vendor_po_date' => trim($this->input->post('vendor_po_date')),
+                        'buyer_name' => trim($this->input->post('buyer_name')),
+                        'buyer_po_number' => trim($this->input->post('buyer_po_id')),
+                        'buyer_po_date' => trim($this->input->post('buyer_po_date')),
+                        'buyer_delivery_date' => trim($this->input->post('buyer_delivery_date')),
+                        'Invoice_qty_in_pcs' => trim($this->input->post('Invoice_qty_in_pcs')),
+                        'Invoice_qty_in_kgs' => trim($this->input->post('Invoice_qty_in_kgs')),
+                        'actual_received_qty_in_pcs'  => trim($this->input->post('actual_received_qty_in_pcs')),
+                        'actual_received_qty_in_kgs'  => trim($this->input->post('actual_received_qty_in_kgs')),
+                        // 'total_rejected_in_pcs'  => trim($this->input->post('total_rejected_in_pcs')),
+                        // 'total_rejected_in_pcs_kgs' => trim($this->input->post('total_rejected_in_pcs_kgs')),
+                        // 'reday_for_export_pcs' => trim($this->input->post('reday_for_export_pcs')),
+                        // 'reday_for_export_kgs' => trim($this->input->post('reday_for_export_kgs')),
+                        // 'total_rejection_qty_kgs' => trim($this->input->post('total_rejection_qty_kgs')),
+                        // 'total_export_qty_pcs' => trim($this->input->post('total_export_qty_pcs')),
+                        // 'balance_qty_in_pics'  => trim($this->input->post('balance_qty_in_pics')),
+                        // 'balance_qty_in_kgs' => trim($this->input->post('balance_qty_in_kgs')),
+                        'remark' => trim($this->input->post('remark')),
+                    );
+
+                    $savestockform= $this->admin_model->savestockform('',$data);
+                }
+               
                 if($savestockform){
                     $update_last_inserted_id_stock_from = $this->admin_model->update_last_inserted_id_stock_from($savestockform);
                     if($update_last_inserted_id_stock_from){
@@ -7647,14 +7685,10 @@ class Admin extends BaseController
         $processFunction = 'Admin/editstcokformdetails';
         $this->logrecord($process,$processFunction);
         $this->global['pageTitle'] = 'Edit Stock Form';
-
         $data['vendorList']= $this->admin_model->fetchALLvendorList();
-        $data['getPriviousstockid']= $this->admin_model->getPriviousstockid();
-        $data['getItemlistStockform']= $this->admin_model->getItemlistStockform();
-        $data['getStockforminformation']= $this->admin_model->getStockforminformation();
-        $data['getAlltotalcalculation']= $this->admin_model->getAlltotalcalculation();
-
-
+        $data['getItemlistStockformedit']= $this->admin_model->getItemlistStockformedit($stock_id);
+        $data['getStockdetailsData']= $this->admin_model->getStockdetailsData($stock_id);
+        $data['getAlltotalcalculation']= $this->admin_model->getAlltotalcalculationedit($stock_id);
         $this->loadViews("masters/editStockform", $this->global, $data, NULL);
     }
 
@@ -7682,32 +7716,71 @@ class Admin extends BaseController
                 $saveStockformitem_response['error'] =  array('part_number'=>strip_tags(form_error('part_number')),'buyre_order_qty'=>strip_tags(form_error('buyre_order_qty')),'fg_order_qty'=>strip_tags(form_error('fg_order_qty')),'invoice_number'=>strip_tags(form_error('invoice_number')),'invoice_date'=>strip_tags(form_error('invoice_date')),'invoice_qty_in_pcs'=>strip_tags(form_error('invoice_qty_in_pcs')),'invoice_qty_in_kgs'=>strip_tags(form_error('invoice_qty_in_kgs')),'lot_number'=>strip_tags(form_error('lot_number')),'actaul_recived_qty_in_pics'=>strip_tags(form_error('actaul_recived_qty_in_pics')),'actaul_recived_qty_in_kgs'=>strip_tags(form_error('actaul_recived_qty_in_kgs')),'privious_balenace'=>strip_tags(form_error('privious_balenace')),'itemremark'=>strip_tags(form_error('itemremark')));
            
             }else{
-                    $data = array(
-                        'part_number'  =>  trim($this->input->post('part_number')),
-                        'buyer_order_qty'  =>  trim($this->input->post('buyre_order_qty')),
-                        'f_g_order_qty'  =>  trim($this->input->post('fg_order_qty')),
-                        'invoice_number'  =>  trim($this->input->post('invoice_number')),
-                        'invoice_date'  =>  trim($this->input->post('invoice_date')),
-                        'invoice_qty_in_pcs'  =>  trim($this->input->post('invoice_qty_in_pcs')),
-                        'invoice_qty_in_kgs'  =>  trim($this->input->post('invoice_qty_in_kgs')),
-                        'lot_number'  =>  trim($this->input->post('lot_number')),
-                        'actual_received_qty_in_pcs'  =>  trim($this->input->post('actaul_recived_qty_in_pics')),
-                        'actual_received_qty_in_kgs'  =>  trim($this->input->post('actaul_recived_qty_in_kgs')),
-                        'previous_balence'  =>  trim($this->input->post('privious_balenace')),
-                        'item_remark' =>  trim($this->input->post('itemremark')),
+                    $stock_id = trim($this->input->post('stock_id'));
 
-                        'pre_stock_date'=>trim($this->input->post('pre_stock_date')),
-                        'pre_vendor_name'=>trim($this->input->post('pre_vendor_name')),
-                        'pre_vendor_po_number'=>trim($this->input->post('pre_vendor_po_number')),
-                        'pre_vendor_po_date'=>trim($this->input->post('pre_vendor_po_date')),
+                    if($stock_id){
 
-                        'pre_buyer_name'=>trim($this->input->post('pre_buyer_name')),
-                        'pre_buyer_po_id'=>trim($this->input->post('pre_buyer_po_id')),
-                        'pre_buyer_po_date'=>trim($this->input->post('pre_buyer_po_date')),
-                        'pre_buyer_delivery_date'=>trim($this->input->post('pre_buyer_delivery_date'))
-                    );
+                        $data = array(
+                            'stock_form_id'  =>  trim($this->input->post('stock_id')),
+                            'part_number'  =>  trim($this->input->post('part_number')),
+                            'buyer_order_qty'  =>  trim($this->input->post('buyre_order_qty')),
+                            'f_g_order_qty'  =>  trim($this->input->post('fg_order_qty')),
+                            'invoice_number'  =>  trim($this->input->post('invoice_number')),
+                            'invoice_date'  =>  trim($this->input->post('invoice_date')),
+                            'invoice_qty_in_pcs'  =>  trim($this->input->post('invoice_qty_in_pcs')),
+                            'invoice_qty_in_kgs'  =>  trim($this->input->post('invoice_qty_in_kgs')),
+                            'lot_number'  =>  trim($this->input->post('lot_number')),
+                            'actual_received_qty_in_pcs'  =>  trim($this->input->post('actaul_recived_qty_in_pics')),
+                            'actual_received_qty_in_kgs'  =>  trim($this->input->post('actaul_recived_qty_in_kgs')),
+                            'previous_balence'  =>  trim($this->input->post('privious_balenace')),
+                            'item_remark' =>  trim($this->input->post('itemremark')),
+    
+                            'pre_stock_date'=>trim($this->input->post('pre_stock_date')),
+                            'pre_vendor_name'=>trim($this->input->post('pre_vendor_name')),
+                            'pre_vendor_po_number'=>trim($this->input->post('pre_vendor_po_number')),
+                            'pre_vendor_po_date'=>trim($this->input->post('pre_vendor_po_date')),
+    
+                            'pre_buyer_name'=>trim($this->input->post('pre_buyer_name')),
+                            'pre_buyer_po_id'=>trim($this->input->post('pre_buyer_po_id')),
+                            'pre_buyer_po_date'=>trim($this->input->post('pre_buyer_po_date')),
+                            'pre_buyer_delivery_date'=>trim($this->input->post('pre_buyer_delivery_date')),
+                            'pre_remark' =>trim($this->input->post('pre_remark')),
+                        );
+    
 
-                $saveStockformitemdetails= $this->admin_model->saveStockformitemdetails('',$data);
+                    }else{
+
+                        $data = array(
+                            'part_number'  =>  trim($this->input->post('part_number')),
+                            'buyer_order_qty'  =>  trim($this->input->post('buyre_order_qty')),
+                            'f_g_order_qty'  =>  trim($this->input->post('fg_order_qty')),
+                            'invoice_number'  =>  trim($this->input->post('invoice_number')),
+                            'invoice_date'  =>  trim($this->input->post('invoice_date')),
+                            'invoice_qty_in_pcs'  =>  trim($this->input->post('invoice_qty_in_pcs')),
+                            'invoice_qty_in_kgs'  =>  trim($this->input->post('invoice_qty_in_kgs')),
+                            'lot_number'  =>  trim($this->input->post('lot_number')),
+                            'actual_received_qty_in_pcs'  =>  trim($this->input->post('actaul_recived_qty_in_pics')),
+                            'actual_received_qty_in_kgs'  =>  trim($this->input->post('actaul_recived_qty_in_kgs')),
+                            'previous_balence'  =>  trim($this->input->post('privious_balenace')),
+                            'item_remark' =>  trim($this->input->post('itemremark')),
+    
+                            'pre_stock_date'=>trim($this->input->post('pre_stock_date')),
+                            'pre_vendor_name'=>trim($this->input->post('pre_vendor_name')),
+                            'pre_vendor_po_number'=>trim($this->input->post('pre_vendor_po_number')),
+                            'pre_vendor_po_date'=>trim($this->input->post('pre_vendor_po_date')),
+    
+                            'pre_buyer_name'=>trim($this->input->post('pre_buyer_name')),
+                            'pre_buyer_po_id'=>trim($this->input->post('pre_buyer_po_id')),
+                            'pre_buyer_po_date'=>trim($this->input->post('pre_buyer_po_date')),
+                            'pre_buyer_delivery_date'=>trim($this->input->post('pre_buyer_delivery_date')),
+                            'pre_remark' =>trim($this->input->post('pre_remark')),
+                        );
+
+                    }
+
+                    $saveStockformitemdetails= $this->admin_model->saveStockformitemdetails('',$data);
+
+                    
                 if($saveStockformitemdetails){
                     $saveStockformitem_response['status'] = 'success';
                     $saveStockformitem_response['error'] =  array('part_number'=>strip_tags(form_error('part_number')),'buyre_order_qty'=>strip_tags(form_error('buyre_order_qty')),'fg_order_qty'=>strip_tags(form_error('fg_order_qty')),'invoice_number'=>strip_tags(form_error('invoice_number')),'invoice_date'=>strip_tags(form_error('invoice_date')),'invoice_qty_in_pcs'=>strip_tags(form_error('invoice_qty_in_pcs')),'invoice_qty_in_kgs'=>strip_tags(form_error('invoice_qty_in_kgs')),'lot_number'=>strip_tags(form_error('lot_number')),'actaul_recived_qty_in_pics'=>strip_tags(form_error('actaul_recived_qty_in_pics')),'actaul_recived_qty_in_kgs'=>strip_tags(form_error('actaul_recived_qty_in_kgs')),'privious_balenace'=>strip_tags(form_error('privious_balenace')),'itemremark'=>strip_tags(form_error('itemremark')));
