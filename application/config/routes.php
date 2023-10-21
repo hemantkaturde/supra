@@ -302,6 +302,8 @@ $route['fetchrejecteditem'] = "admin/fetchrejecteditem";
 
 $route['omschallan'] = "admin/omschallan";
 $route['fetchomschallan'] = "admin/fetchomschallan";
+$route['addNewOMSChallan'] = "admin/addNewOMSChallan";
+
 
 
 

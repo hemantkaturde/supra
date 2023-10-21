@@ -5788,6 +5788,40 @@ class Admin_model extends CI_Model
         return $data;
     }
 
+    public function getomsChallancount($params){
+
+        $this->db->select(TBL_OMS_CHALLAN.'.id');
+        $query = $this->db->get(TBL_OMS_CHALLAN);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+    }
+
+    public function getomsChallandata($params){
+        $this->db->select('*');
+        $this->db->where(TBL_OMS_CHALLAN.'.status', 1);
+        $this->db->order_by(TBL_OMS_CHALLAN.'.id','DESC');
+        $query = $this->db->get(TBL_OMS_CHALLAN);
+        $fetch_result = $query->result_array();
+
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['blasting_id'] =$value['blasting_id'];
+                $data[$counter]['date'] =$value['date'];
+                $data[$counter]['vendor_name'] =$value['vendor_name'];
+                $data[$counter]['vendor_po_id'] = $value['vendor_po_id'];
+                $data[$counter]['buyer_po_date'] =$value['buyer_po_date'];
+                $data[$counter]['vendor_date'] =$value['vendor_date'];
+                $data[$counter]['remark'] =$value['remark'];
+                $counter++; 
+            }
+        }
+        return $data;
+    }
+
 
 
 }

@@ -7961,8 +7961,41 @@ class Admin extends BaseController
 
     public function fetchomschallan(){
 
+        $params = $_REQUEST;
+        $totalRecords = $this->admin_model->getomsChallancount($params); 
+        $queryRecords = $this->admin_model->getomsChallandata($params); 
 
-        
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+        echo json_encode($json_data);
+
+    }
+
+    public function addNewOMSChallan(){
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+
+        }else{
+
+            $data['vendorList']= $this->admin_model->fetchALLvendorList();
+            $this->loadViews("masters/addNewomschallan", $this->global, $data, NULL);
+        }
+
     }
    
 

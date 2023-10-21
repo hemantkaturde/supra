@@ -156,6 +156,8 @@ define('TBL_QUALITY_RECORDS_ITEM','tbl_quality_records_item');
 define('TBL_STOCKS','tbl_stock_form');
 define('TBL_STOCKS_ITEM','tbl_stock_form_item');
 
+define('TBL_OMS_CHALLAN','tbl_oms_challan');
+
 
 
 
