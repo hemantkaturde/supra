@@ -13128,7 +13128,6 @@
 <?php } ?>
 
 
-
 <?php if($pageTitle=='OMS challan' || $pageTitle=='Add New OMS challan' || $pageTitle=='Edit OMS Chllan Form'){ ?>
 	<script type="text/javascript">    
         $(document).ready(function() {
@@ -13544,7 +13543,38 @@
 				}
 			});
 	    });
+	</script>
+<?php } ?>
 
 
+<?php if($pageTitle=='Enquiry Form'){  ?>
+	<script type="text/javascript">   
+         $(document).ready(function() {
+			var dt = $('#view_enquiry_form').DataTable({
+	            "columnDefs": [ 
+	                 { className: "details-control", "targets": [ 0 ] },
+	                 { "width": "15%", "targets": 0 },
+	                 { "width": "15%", "targets": 1 },
+					 { "width": "15%", "targets": 2 },
+	                 { "width": "15%", "targets": 3 },
+					 { "width": "15%", "targets": 4 },
+					 { "width": "8%", "targets": 5 }
+	            ],
+	            responsive: true,
+	            "oLanguage": {
+	                "sEmptyTable": "<i>No Enquiry Form Found.</i>",
+	            }, 
+	            "bSort" : false,
+	            "bFilter":true,
+	            "bLengthChange": true,
+	            "iDisplayLength": 10,   
+	            "bProcessing": true,
+	            "serverSide": true,
+	            "ajax":{
+                    url :"<?php echo base_url();?>fetchenquiryform",
+                    type: "post",
+	            },
+	        });
+		});
 	</script>
 <?php } ?>

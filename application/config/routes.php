@@ -308,6 +308,13 @@ $route['saveomschallanitem'] = "admin/saveomschallanitem";
 $route['deleteOmschallnitem'] = "admin/deleteOmschallnitem";
 $route['editomschallan/(:any)'] = "admin/editomschallan/$1";
 
+$route['enquiryform'] = "admin/enquiryform";
+$route['fetchenquiryform'] = "admin/fetchenquiryform";
+$route['addnewenquiryform'] = "admin/addnewenquiryform";
+
+
+
+
 
 
 

@@ -5964,7 +5964,6 @@ class Admin_model extends CI_Model
         return $rowcount;
     }
     
-
     public function getomsitemlistforedit($id){
         $this->db->select('*,'.TBL_FINISHED_GOODS.'.name as fgdiscription,'.TBL_RAWMATERIAL.'.type_of_raw_material,'.TBL_OMS_CHALLAN_ITEM.'.gross_weight as omsgross_weight,'.TBL_OMS_CHALLAN_ITEM.'.net_weight as omsnet_weight,'.TBL_OMS_CHALLAN_ITEM.'.qty as omsqty,'.TBL_OMS_CHALLAN_ITEM.'.remark as omsremark,'.TBL_OMS_CHALLAN_ITEM.'.id  as omsid');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_OMS_CHALLAN_ITEM.'.pre_vendor_name');
@@ -5979,6 +5978,58 @@ class Admin_model extends CI_Model
 
     }
 
+
+    public function getenquiryformcount($params){
+        $this->db->select('*');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_ENAUIRY_FORM.".enquiry_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_ENAUIRY_FORM.".date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_ENAUIRY_FORM.".buyer_enquiry_no LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_ENAUIRY_FORM.".buyer_enquiry_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_ENAUIRY_FORM.".remark LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_ENAUIRY_FORM.'.status', 1);
+        $this->db->order_by(TBL_ENAUIRY_FORM.'.id','DESC');
+        $query = $this->db->get(TBL_ENAUIRY_FORM);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+    }
+
+    public function getenquiryformdata($params){
+        $this->db->select('*');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_ENAUIRY_FORM.".enquiry_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_ENAUIRY_FORM.".date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_ENAUIRY_FORM.".buyer_enquiry_no LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_ENAUIRY_FORM.".buyer_enquiry_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_ENAUIRY_FORM.".remark LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_ENAUIRY_FORM.'.status', 1);
+        $this->db->order_by(TBL_ENAUIRY_FORM.'.id','DESC');
+        $query = $this->db->get(TBL_ENAUIRY_FORM);
+        $fetch_result = $query->result_array();
+
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['enquiry_number'] =$value['enquiry_number'];
+                $data[$counter]['date'] =$value['date'];
+                $data[$counter]['buyer_enquiry_no'] =$value['buyer_enquiry_no'];
+                $data[$counter]['buyer_enquiry_date'] = $value['buyer_enquiry_date'];
+                $data[$counter]['remark'] =$value['remark'];
+                $data[$counter]['action'] ='';
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editomschallan/".$value['oms_challan_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['oms_challan_id']."' class='fa fa-trash-o deleteomschallan' aria-hidden='true'></i>"; 
+                $counter++; 
+            }
+        }
+        return $data;
+    }
 
 
 }

@@ -8024,7 +8024,6 @@ class Admin extends BaseController
             echo json_encode($newpmsform_response);
 
         }else{
-
             $process = 'Add New OMS challan';
             $processFunction = 'Admin/addNewOMSChallan';
             $this->logrecord($process,$processFunction);
@@ -8154,6 +8153,55 @@ class Admin extends BaseController
         $this->loadViews("masters/editomschallan", $this->global, $data, NULL);
 
         
+    }
+
+    public function enquiryform(){
+        $process = 'Enquiry Form';
+        $processFunction = 'Admin/enquiryform';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Enquiry Form';
+        $data['vendorList']= $this->admin_model->fetchALLvendorList();
+        $this->loadViews("masters/enquiryform", $this->global, $data, NULL);  
+    }
+
+    public function fetchenquiryform(){
+        $params = $_REQUEST;
+        $totalRecords = $this->admin_model->getenquiryformcount($params); 
+        $queryRecords = $this->admin_model->getenquiryformdata($params); 
+
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+        echo json_encode($json_data);
+    }
+
+
+    public function addnewenquiryform(){
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+
+
+        }else{
+            $process = 'Add New Enquiry Form';
+            $processFunction = 'Admin/addNewenquiryform';
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Add New Enquiry Form';
+            $this->loadViews("masters/addNewenquiryform", $this->global, $data, NULL);
+        }
     }
 
    
