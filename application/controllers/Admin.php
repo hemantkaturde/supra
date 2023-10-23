@@ -7812,7 +7812,6 @@ class Admin extends BaseController
         }else{
             echo(json_encode(array('status'=>'failed'))); 
         }
-        
     }
 
     public function searchstock(){
@@ -7957,10 +7956,7 @@ class Admin extends BaseController
         $this->loadViews("masters/omschallan", $this->global, $data, NULL);  
     }
 
-    
-
     public function fetchomschallan(){
-
         $params = $_REQUEST;
         $totalRecords = $this->admin_model->getomsChallancount($params); 
         $queryRecords = $this->admin_model->getomsChallandata($params); 
@@ -7982,21 +7978,184 @@ class Admin extends BaseController
             "data"            => $data   // total data array
             );
         echo json_encode($json_data);
-
     }
 
     public function addNewOMSChallan(){
-
         $post_submit = $this->input->post();
         if($post_submit){
+            $newpmsform_response = array();
+            $this->form_validation->set_rules('blasting_id','Blasting Id','trim|required');
+            $this->form_validation->set_rules('oms_challan_date','OMS Challan Date','trim|required');
+            $this->form_validation->set_rules('vendor_name','Vendor Name','trim|required');
+            $this->form_validation->set_rules('vendor_po_number','Vendor PO Number','trim|required');
+            $this->form_validation->set_rules('vendor_po_date','Vendor PO Date','trim|required');
+            $this->form_validation->set_rules('remark','Remark','trim');
+
+            if($this->form_validation->run() == FALSE)
+            {
+                $newpmsform_response['status'] = 'failure';
+                $newpmsform_response['error'] = array('blasting_id'=>strip_tags(form_error('blasting_id')),'oms_challan_date'=>strip_tags(form_error('oms_challan_date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'vendor_po_date'=>strip_tags(form_error('vendor_po_date')),'remark'=>strip_tags(form_error('remark')));
+            }else{
+                $data = array(
+                    'blasting_id' => trim($this->input->post('blasting_id')),
+                    'date' => trim($this->input->post('oms_challan_date')),
+                    'vendor_name' => trim($this->input->post('vendor_name')),
+                    'vendor_po_id' => trim($this->input->post('vendor_po_number')),
+                    'vendor_po_date' => trim($this->input->post('vendor_po_date')), 
+                    'remark' => trim($this->input->post('remark')),
+                );
+
+                $oms_challan_id = trim($this->input->post('oms_challan_id'));
+
+                if($oms_challan_id){
+                    $saveomschallanform= $this->admin_model->saveomschallanform($oms_challan_id,$data);
+                }else{
+                    $saveomschallanform= $this->admin_model->saveomschallanform('',$data);
+                }
+                
+                if($saveomschallanform){
+                    $update_oms_challan_from = $this->admin_model->update_oms_challan_from($saveomschallanform);
+                    if($update_oms_challan_from){
+                        $newpmsform_response['status'] = 'success';
+                        $newpmsform_response['error'] = array('blasting_id'=>strip_tags(form_error('blasting_id')),'oms_challan_date'=>strip_tags(form_error('oms_challan_date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'vendor_po_date'=>strip_tags(form_error('vendor_po_date')),'remark'=>strip_tags(form_error('remark')));
+                     }
+                }
+            }    
+            echo json_encode($newpmsform_response);
 
         }else{
 
+            $process = 'Add New OMS challan';
+            $processFunction = 'Admin/addNewOMSChallan';
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Add New OMS challan';
             $data['vendorList']= $this->admin_model->fetchALLvendorList();
+            $data['getpreviuousblasterId']= $this->admin_model->getpreviuousblasterId();
+            $data['getomschallanitems']= $this->admin_model->getomschallanitems();
             $this->loadViews("masters/addNewomschallan", $this->global, $data, NULL);
         }
 
     }
+
+    public function deleteomschallan(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->deleteomschallan(trim($this->input->post('id')));
+            if ($result) {
+                        $process = 'Delete OMS Challan';
+                        $processFunction = 'Admin/deleteomschallan';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
+    }
+
+    public function saveomschallanitem(){
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+
+            $saveomsChallanformitem_response = array();
+             $this->form_validation->set_rules('part_number','Part Number','trim|required');            
+             $this->form_validation->set_rules('gross_weight','Gross Weight','trim|required');
+             $this->form_validation->set_rules('net_weight','Net Weight','trim|required');
+             $this->form_validation->set_rules('no_of_bags','No of Bags','trim|required');
+             $this->form_validation->set_rules('qty','Qty','trim|required');
+             $this->form_validation->set_rules('hsn_no','HSN No','trim|required');
+             $this->form_validation->set_rules('itemremark','Ite Remark','trim');
+
+            if($this->form_validation->run() == FALSE)
+            {
+                $saveChallanformitem_response['status'] = 'failure';
+                $saveChallanformitem_response['error'] =  array('part_number'=>strip_tags(form_error('part_number')),'qty'=>strip_tags(form_error('qty')),'gross_weight'=>strip_tags(form_error('gross_weight')),'net_weight'=>strip_tags(form_error('net_weight')),'no_of_bags'=>strip_tags(form_error('no_of_bags')),'hsn_no'=>strip_tags(form_error('hsn_no')),'itemremark'=>strip_tags(form_error('itemremark')));
+           
+            }else{
+                
+              $oms_challan_id =  trim($this->input->post('oms_challan_id'));
+                if($oms_challan_id){
+                    $data = array(
+                        'oms_chllan_id'  =>  trim($this->input->post('oms_challan_id')),
+                        'part_number'  =>  trim($this->input->post('part_number')),
+                        'gross_weight'  =>  trim($this->input->post('gross_weight')),
+                        'net_weight'  =>  trim($this->input->post('net_weight')),
+                        'qty' =>trim($this->input->post('qty')),
+                        'no_of_bags'  =>  trim($this->input->post('no_of_bags')),
+                        'hsn_no'  =>  trim($this->input->post('hsn_no')),
+                        'remark' =>  trim($this->input->post('itemremark')),
+                        'pre_oms_challan_date' =>  trim($this->input->post('pre_oms_challan_date')),
+                        'pre_vendor_name' =>  trim($this->input->post('pre_vendor_name')),
+                        'pre_vendor_po_number' =>  trim($this->input->post('pre_vendor_po_number')),
+                        'pre_vendor_date'		 =>  trim($this->input->post('pre_vendor_po_date')),
+                        'pre_remark' =>  trim($this->input->post('pre_remark')),
+
+                    );
+                    $saveomsChallanformdetails= $this->admin_model->saveomsChallanformdetails('',$data);
+
+                }else{
+                    $data = array(
+                        'part_number'  =>  trim($this->input->post('part_number')),
+                        'gross_weight'  =>  trim($this->input->post('gross_weight')),
+                        'net_weight'  =>  trim($this->input->post('net_weight')),
+                        'qty' =>trim($this->input->post('qty')),
+                        'no_of_bags'  =>  trim($this->input->post('no_of_bags')),
+                        'hsn_no'  =>  trim($this->input->post('hsn_no')),
+                        'remark' =>  trim($this->input->post('itemremark')),
+                        'pre_oms_challan_date' =>  trim($this->input->post('pre_oms_challan_date')),
+                        'pre_vendor_name' =>  trim($this->input->post('pre_vendor_name')),
+                        'pre_vendor_po_number' =>  trim($this->input->post('pre_vendor_po_number')),
+                        'pre_vendor_date'		 =>  trim($this->input->post('pre_vendor_po_date')),
+                        'pre_remark' =>  trim($this->input->post('pre_remark')),
+
+                    );
+                    $saveomsChallanformdetails= $this->admin_model->saveomsChallanformdetails('',$data);
+                 }
+
+                 if($saveomsChallanformdetails){
+                    $saveChallanformitem_response['status'] = 'success';
+                    $saveChallanformitem_response['error'] =  array('part_number'=>strip_tags(form_error('part_number')),'gross_weight'=>strip_tags(form_error('gross_weight')),'net_weight'=>strip_tags(form_error('net_weight')),'no_of_bags'=>strip_tags(form_error('no_of_bags')),'hsn_no'=>strip_tags(form_error('hsn_no')),'itemremark'=>strip_tags(form_error('itemremark')));
+                }
+            }
+            echo json_encode($saveChallanformitem_response);
+
+        }
+
+    }
+
+    public function deleteOmschallnitem(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->deleteOmschallnitem(trim($this->input->post('id')));
+            if ($result) {
+                        $process = 'Delete Stock Item Form Details';
+                        $processFunction = 'Admin/deleteOmschallnitem';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
+
+
+    }
+
+    public function editomschallan($id){
+
+        $process = 'Edit OMS Chllan Form';
+        $processFunction = 'Admin/editomschallan';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Edit OMS Chllan Form';
+        $data['vendorList']= $this->admin_model->fetchALLvendorList();
+        $data['getomsitemlistforedit']= $this->admin_model->getomsitemlistforedit($id);
+        $data['getomsChllanData']= $this->admin_model->getomsChllanData($id);
+        $this->loadViews("masters/editomschallan", $this->global, $data, NULL);
+
+        
+    }
+
    
 
 }

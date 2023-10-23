@@ -26,17 +26,8 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="blasting_id">Blasting Id<span class="required">*</span></label>
-                                        <?php
-                                            if($getpreviuousblasterId['blasting_id']){
-                                                $arr = str_split($getpreviuousblasterId['blasting_id']);
-                                                $i = end($arr);
-                                                $inrno= "JW/".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
-                                                $stock_form_id = $inrno;
-                                            }else{
-                                                $stock_form_id = 'JW/0001';
-                                            }
-                                        ?>
-                                            <input type="text" class="form-control" id="blasting_id" name="blasting_id" value="<?=$stock_form_id;?>" required readonly>
+                                        <input type="hidden" class="form-control" id="oms_challan_id" name="oms_challan_id" value="<?=$getomsChllanData['challan_main_id'];?>" required readonly>
+                                            <input type="text" class="form-control" id="blasting_id" name="blasting_id" value="<?=$getomsChllanData['blasting_id'];?>" required readonly>
                                             <p class="error blasting_id_error"></p>
                                     </div>
                                 </div>
@@ -45,14 +36,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="oms_challan_date">OMS Challan Date <span class="required">*</span></label>
-                                            <?php 
-                                            if($getomschallanitems[0]['pre_oms_challan_date']){
-                                                $date= $getomschallanitems[0]['pre_oms_challan_date'];
-                                            }else{
-                                                $date= date('Y-m-d'); 
-                                            }
-                                            ?>
-                                            <input type="text" class="form-control datepicker" id="oms_challan_date" name="oms_challan_date" value="<?=$date?>"  required >
+                                            <input type="text" class="form-control datepicker" id="oms_challan_date" name="oms_challan_date" value="<?=$getomsChllanData['omsdate'];?>"  required >
                                             <p class="error oms_challan_date_error"></p>
                                     </div>
                                 </div>
@@ -65,7 +49,7 @@
                                                 <select class="form-control" name="vendor_name" id="vendor_name">
                                                     <option st-id="" value="">Select Vendor Name</option>
                                                         <?php foreach ($vendorList as $key => $value) {?>
-                                                            <option value="<?php echo $value['ven_id']; ?>" <?php if($getomschallanitems[0]['pre_vendor_name']==$value['ven_id']){ echo 'selected'; }?> ><?php echo $value['vendor_name']; ?></option>
+                                                            <option value="<?php echo $value['ven_id']; ?>" <?php if($getomsChllanData['vendor_name']==$value['ven_id']){ echo 'selected'; }?> ><?php echo $value['vendor_name']; ?></option>
                                                         <?php } ?>
                                                 </select>
                                             <p class="error vendor_name_error"></p>
@@ -75,8 +59,8 @@
                                 <div class="col-md-12 vendor_po_number_div" id="vendor_po_number_div">
                                     <div class="form-group">
                                         <?php 
-                                            if($getomschallanitems[0]['pre_vendor_po_number']){
-                                                $po_number=  '<option st-id="" value="'.$getomschallanitems[0]['pre_vendor_po_number'].'">'.$getomschallanitems[0]['po_number'].'</option>';
+                                            if($getomsChllanData['vendor_po_id']){
+                                                $po_number=  '<option st-id="" value="'.$getomsChllanData['vendor_po_id'].'">'.$getomsChllanData['po_number'].'</option>';
                                             }else{
                                                 $po_number= '<option st-id="" value="">Select Vendor Name</option>'; 
                                             }
@@ -94,8 +78,8 @@
                                 <div class="col-md-12">
 
                                            <?php 
-                                            if($getomschallanitems[0]['pre_vendor_date']){
-                                                $vendor_po_date= $getomschallanitems[0]['pre_vendor_date'];
+                                            if($getomsChllanData['vendor_podate']){
+                                                $vendor_po_date= $getomsChllanData['vendor_podate'];
                                             }else{
                                                 $vendor_po_date= date('Y-m-d'); 
                                             }
@@ -111,7 +95,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="remark">Remark</label>
-                                        <input type="remark" class="form-control" id="remark" name="remark" value="<?=$getomschallanitems[0]['pre_remark'] ?>">
+                                        <input type="remark" class="form-control" id="remark" name="remark" value="<?=$getomsChllanData['omsremark'] ?>">
                                         <p class="error remark_error"></p>
                                     </div>
                                 </div>
@@ -138,9 +122,9 @@
                                     </thead>   
 
                                          <?php 
-                                           if($getomschallanitems){
+                                           if($getomsitemlistforedit){
                                                $i=1;
-                                            foreach ($getomschallanitems as $key => $value) { ?>
+                                            foreach ($getomsitemlistforedit as $key => $value) { ?>
                                             <tr>
                                                 <td><?php echo  $i++; ?></td>
                                                 <td><?=$value['part_number']?></td>
@@ -170,7 +154,7 @@
                      <!-- /.box-body -->
                      <div class="box-footer">
                         <div class="col-xs-8">
-                            <?php if($getomschallanitems){ 
+                            <?php if($getomsitemlistforedit){ 
                             $button ="";
                             }else{
                             $button ="disabled";

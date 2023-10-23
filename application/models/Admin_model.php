@@ -5321,7 +5321,7 @@ class Admin_model extends CI_Model
     }
 
     public function getItemdetailsdependonvendorpoforstockform($part_number,$vendor_po_number,$vendor_name){
-        $this->db->select(TBL_FINISHED_GOODS.'.name,'.TBL_FINISHED_GOODS.'.net_weight,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_order_qty,'.TBL_BUYER_PO_MASTER_ITEM.'.order_oty as buyer_order_qty,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id,'.TBL_VENDOR_PO_MASTER_ITEM.'.vendor_qty as vendor_qtyvendor_qty');
+        $this->db->select(TBL_FINISHED_GOODS.'.name,'.TBL_FINISHED_GOODS.'.net_weight,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_order_qty,'.TBL_BUYER_PO_MASTER_ITEM.'.order_oty as buyer_order_qty,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id,'.TBL_VENDOR_PO_MASTER_ITEM.'.vendor_qty as vendor_qtyvendor_qty,'.TBL_RAWMATERIAL.'.type_of_raw_material,'.TBL_RAWMATERIAL.'.HSN_code');
         $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
         $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.pre_vendor_name');
@@ -5789,15 +5789,38 @@ class Admin_model extends CI_Model
     }
 
     public function getomsChallancount($params){
-
-        $this->db->select(TBL_OMS_CHALLAN.'.id');
+        $this->db->select('*,'.TBL_VENDOR.'.vendor_name as ven_name,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_master,'.TBL_OMS_CHALLAN.'.date as oms_chllan_date');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_OMS_CHALLAN.'.vendor_name');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_OMS_CHALLAN.'.vendor_po_id');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_OMS_CHALLAN.".blasting_id LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_OMS_CHALLAN.".date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_OMS_CHALLAN.".remark LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_OMS_CHALLAN.".vendor_po_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_OMS_CHALLAN.'.status', 1);
+        $this->db->order_by(TBL_OMS_CHALLAN.'.id','DESC');
         $query = $this->db->get(TBL_OMS_CHALLAN);
         $rowcount = $query->num_rows();
         return $rowcount;
     }
 
     public function getomsChallandata($params){
-        $this->db->select('*');
+        $this->db->select('*,'.TBL_VENDOR.'.vendor_name as ven_name,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_master,'.TBL_OMS_CHALLAN.'.date as oms_chllan_date,'.TBL_OMS_CHALLAN.'.id as oms_challan_id');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_OMS_CHALLAN.'.vendor_name');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_OMS_CHALLAN.'.vendor_po_id');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_OMS_CHALLAN.".blasting_id LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_OMS_CHALLAN.".date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_OMS_CHALLAN.".remark LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_OMS_CHALLAN.".vendor_po_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%')");
+        }
         $this->db->where(TBL_OMS_CHALLAN.'.status', 1);
         $this->db->order_by(TBL_OMS_CHALLAN.'.id','DESC');
         $query = $this->db->get(TBL_OMS_CHALLAN);
@@ -5810,16 +5833,150 @@ class Admin_model extends CI_Model
             foreach ($fetch_result as $key => $value)
             {
                 $data[$counter]['blasting_id'] =$value['blasting_id'];
-                $data[$counter]['date'] =$value['date'];
-                $data[$counter]['vendor_name'] =$value['vendor_name'];
-                $data[$counter]['vendor_po_id'] = $value['vendor_po_id'];
-                $data[$counter]['buyer_po_date'] =$value['buyer_po_date'];
-                $data[$counter]['vendor_date'] =$value['vendor_date'];
+                $data[$counter]['date'] =$value['oms_chllan_date'];
+                $data[$counter]['vendor_name'] =$value['ven_name'];
+                $data[$counter]['vendor_po_id'] = $value['vendor_po_master'];
+                $data[$counter]['vendor_po_date'] =$value['vendor_po_date'];
                 $data[$counter]['remark'] =$value['remark'];
+                $data[$counter]['action'] ='';
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editomschallan/".$value['oms_challan_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<a href='#' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<a href='#' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['oms_challan_id']."' class='fa fa-trash-o deleteomschallan' aria-hidden='true'></i>"; 
                 $counter++; 
             }
         }
         return $data;
+    }
+
+    public function getpreviuousblasterId(){
+        $this->db->select('blasting_id');
+        $this->db->where(TBL_OMS_CHALLAN.'.status', 1);
+        $this->db->limit(1);
+        $this->db->order_by(TBL_OMS_CHALLAN.'.id','DESC');
+        $query = $this->db->get(TBL_OMS_CHALLAN);
+        $rowcount = $query->row_array();
+        return $rowcount;
+    }
+
+    public function saveomschallanform($id,$data){
+        if($id != '') {
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_OMS_CHALLAN, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_OMS_CHALLAN, $data)) {
+                return $this->db->insert_id();
+            } else {
+                return FALSE;
+            }
+        }
+    }
+    
+    public function deleteomschallan($id){
+        $this->db->where('id ', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_OMS_CHALLAN)){
+            
+            $this->db->where('oms_chllan_id', $id);
+            //$this->db->delete(TBL_SUPPLIER);
+            if($this->db->delete(TBL_OMS_CHALLAN_ITEM)){
+               return TRUE;
+            }else{
+               return FALSE;
+            }
+           return TRUE;
+        }else{
+           return FALSE;
+        }
+    }
+
+    public function saveomsChallanformdetails($id,$data){
+
+        if($id != '') {
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_OMS_CHALLAN_ITEM, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_OMS_CHALLAN_ITEM, $data)) {
+                return $this->db->insert_id();
+            } else {
+                return FALSE;
+            }
+        }
+
+    }
+
+    public function update_oms_challan_from($oms_challan_id){
+
+        $data = array(
+            'oms_chllan_id' =>$oms_challan_id
+        );
+
+        $this->db->where(TBL_OMS_CHALLAN_ITEM.'.oms_chllan_id IS NULL');
+        if($this->db->update(TBL_OMS_CHALLAN_ITEM,$data)){
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+    }
+
+    public function getomschallanitems(){
+
+        $this->db->select('*,'.TBL_FINISHED_GOODS.'.name as fgdiscription,'.TBL_RAWMATERIAL.'.type_of_raw_material,'.TBL_OMS_CHALLAN_ITEM.'.gross_weight as omsgross_weight,'.TBL_OMS_CHALLAN_ITEM.'.net_weight as omsnet_weight,'.TBL_OMS_CHALLAN_ITEM.'.qty as omsqty,'.TBL_OMS_CHALLAN_ITEM.'.remark as omsremark,'.TBL_OMS_CHALLAN_ITEM.'.id  as omsid');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_OMS_CHALLAN_ITEM.'.pre_vendor_name');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_OMS_CHALLAN_ITEM.'.pre_vendor_po_number');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_OMS_CHALLAN_ITEM.'.part_number');
+        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+        $this->db->where(TBL_OMS_CHALLAN_ITEM.'.status', 1);
+        $this->db->where(TBL_OMS_CHALLAN_ITEM.'.oms_chllan_id IS NULL');
+        $query = $this->db->get(TBL_OMS_CHALLAN_ITEM);
+        $data = $query->result_array();
+        return $data;
+
+    }
+
+    public function deleteOmschallnitem($id){
+
+        $this->db->where('id ', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_OMS_CHALLAN_ITEM)){
+           return TRUE;
+        }else{
+           return FALSE;
+        }
+
+    }
+
+    public function getomsChllanData($id){
+        $this->db->select('*,'.TBL_OMS_CHALLAN.'.remark as omsremark,'.TBL_OMS_CHALLAN.'.vendor_po_date as vendor_podate,'.TBL_OMS_CHALLAN.'.date as omsdate,'.TBL_OMS_CHALLAN.'.id as challan_main_id');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_OMS_CHALLAN.'.vendor_po_id');
+        $this->db->where(TBL_OMS_CHALLAN.'.status', 1);
+        $this->db->where(TBL_OMS_CHALLAN.'.id',$id);
+        $query = $this->db->get(TBL_OMS_CHALLAN);
+        $rowcount = $query->row_array();
+        return $rowcount;
+    }
+    
+
+    public function getomsitemlistforedit($id){
+        $this->db->select('*,'.TBL_FINISHED_GOODS.'.name as fgdiscription,'.TBL_RAWMATERIAL.'.type_of_raw_material,'.TBL_OMS_CHALLAN_ITEM.'.gross_weight as omsgross_weight,'.TBL_OMS_CHALLAN_ITEM.'.net_weight as omsnet_weight,'.TBL_OMS_CHALLAN_ITEM.'.qty as omsqty,'.TBL_OMS_CHALLAN_ITEM.'.remark as omsremark,'.TBL_OMS_CHALLAN_ITEM.'.id  as omsid');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_OMS_CHALLAN_ITEM.'.pre_vendor_name');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_OMS_CHALLAN_ITEM.'.pre_vendor_po_number');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_OMS_CHALLAN_ITEM.'.part_number');
+        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+        $this->db->where(TBL_OMS_CHALLAN_ITEM.'.status', 1);
+        $this->db->where(TBL_OMS_CHALLAN_ITEM.'.oms_chllan_id',$id);
+        $query = $this->db->get(TBL_OMS_CHALLAN_ITEM);
+        $data = $query->result_array();
+        return $data;
+
     }
 
 

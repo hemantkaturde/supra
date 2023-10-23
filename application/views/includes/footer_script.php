@@ -12854,7 +12854,7 @@
 			   swal("Cancelled", "Stock Form deletion cancelled ", "error");
 			   }
 		   });
-	   });
+	    });
 
 
     </script>
@@ -13053,7 +13053,6 @@
 			return false;
 		});
 
-
 		$(document).on('change','.vendor_po_for_buyer_details_',function(e){  
 			e.preventDefault();
 			//$(".loader_ajax").show();
@@ -13130,7 +13129,7 @@
 
 
 
-<?php if($pageTitle=='OMS challan'){ ?>
+<?php if($pageTitle=='OMS challan' || $pageTitle=='Add New OMS challan' || $pageTitle=='Edit OMS Chllan Form'){ ?>
 	<script type="text/javascript">    
         $(document).ready(function() {
 			var dt = $('#view_OMS_chllan').DataTable({
@@ -13142,7 +13141,7 @@
 	                 { "width": "10%", "targets": 3 },
 					 { "width": "10%", "targets": 4 },
 					 { "width": "10%", "targets": 5 },
-					 { "width": "5%", "targets": 6 }
+					 { "width": "10%", "targets": 6 }
 	            ],
 	            responsive: true,
 	            "oLanguage": {
@@ -13160,6 +13159,392 @@
 	            },
 	        });
 		});
+
+		$(document).ready(function() {
+			// e.preventDefault();
+			//$(".loader_ajax").show();
+			var vendor_po_number = $('#vendor_po_number').val();
+			$("#part_number").html('');
+		
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getVendoritemonly",
+				type: "POST",
+				data : {'vendor_po_number' : vendor_po_number},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#part_number').html('<option value="">Select Part Number</option>');
+					}
+					else
+					{
+						$('#part_number').html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#part_number').html();
+				}
+			});
+			return false;
+
+		});
+
+		$(document).on('change','#vendor_name',function(e){  
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			// $("#customers-list").html('');
+			var vendor_name = $('#vendor_name').val();
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getVendorPonumberbySupplierid",
+				type: "POST",
+				data : {'vendor_name' : vendor_name},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#vendor_po_number').html('<option value="">Select Vendor PO Number</option>');
+					}
+					else
+					{
+						// $('#supplier_po_number').html('<option value="">Select supplier PO Number</option>');
+						$('#vendor_po_number').html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#vendor_po_number').html();
+					//$(".loader_ajax").hide();
+				}
+			});
+			return false;
+		});
+
+		$(document).on('change','.vendor_po_get_data',function(e){  
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			// $("#customers-list").html('');
+			var vendor_po_id = $('.vendor_po_get_data').val();
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>get_vendorpodata",
+				type: "POST",
+				data : {'vendor_po_id' : vendor_po_id},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#vendor_po_date').val('');
+					}
+					else
+					{
+						var get_vendorpodata = jQuery.parseJSON( data );
+						$('#vendor_po_date').val(get_vendorpodata.date);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#vendor_po_date').val('');
+				}
+			});
+			return false;
+		});
+
+		$(document).on('click','#addnewomschallan',function(e){
+			e.preventDefault();
+			$(".loader_ajax").show();
+			var formData = new FormData($("#addnewomschallanform")[0]);
+			$.ajax({
+				url : "<?php echo base_url();?>addNewOMSChallan",
+				type: "POST",
+				data : formData,
+				cache: false,
+				contentType: false,
+				processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+					{
+						$.each(fetchResponse.error, function (i, v)
+						{
+							$('.'+i+'_error').html(v);
+						});
+						$(".loader_ajax").hide();
+					}
+					else if(fetchResponse.status == 'success')
+					{
+						swal({
+							title: "Success",
+							text: "OMS Challan Successfully Added!",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+
+								window.location.href = "<?php echo base_url().'omschallan'?>";
+						});		
+					}
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$(".loader_ajax").hide();
+				}
+			});
+			return false;
+		});
+
+		$(document).on('click','.deleteomschallan',function(e){
+		
+		  var elemF = $(this);
+		  e.preventDefault();
+		  swal({
+			  title: "Are you sure?",
+			  text: "Delete OMS Challan ",
+			  type: "warning",
+			  showCancelButton: true,
+			  closeOnClickOutside: false,
+			  confirmButtonClass: "btn-sm btn-danger",
+			  confirmButtonText: "Yes, delete it!",
+			  cancelButtonText: "No, cancel plz!",
+			  closeOnConfirm: false,
+			  closeOnCancel: false
+		  }, function(isConfirm) {
+			  if (isConfirm) {
+						  $.ajax({
+							  url : "<?php echo base_url();?>deleteomschallan",
+							  type: "POST",
+							  data : 'id='+elemF.attr('data-id'),
+							  success: function(data, textStatus, jqXHR)
+							  {
+								  const obj = JSON.parse(data);
+							  
+								  if(obj.status=='success'){
+									  swal({
+										  title: "Deleted!",
+										  text: "OMS Challan Deleted Succesfully",
+										  icon: "success",
+										  button: "Ok",
+										  },function(){ 
+												  window.location.href = "<?php echo base_url().'omschallan'?>";
+									  });	
+								  }
+
+							  },
+							  error: function (jqXHR, textStatus, errorThrown)
+							  {
+								  $(".loader_ajax").hide();
+							  }
+						  })
+					  }
+					  else {
+			  swal("Cancelled", "OMS Challan deletion cancelled ", "error");
+			  }
+		  });
+	    });
+
+		$(document).on('change','.vendor_po_for_item',function(e){  
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			var vendor_po_number = $('#vendor_po_number').val();
+
+			$("#part_number").html('');
+		
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getVendoritemonly",
+				type: "POST",
+				data : {'vendor_po_number' : vendor_po_number},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#part_number').html('<option value="">Select Part Number</option>');
+					}
+					else
+					{
+						$('#part_number').html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#part_number').html();
+				}
+			});
+			return false;
+		});
+
+		$(document).on('change','#part_number',function(e){  
+				e.preventDefault();
+			
+				//$(".loader_ajax").show();
+				var part_number = $('#part_number').val();
+				var vendor_po_number = $('#vendor_po_number').val();
+				var vendor_name = $('#vendor_name').val();
+
+				if(vendor_name){
+					if(vendor_po_number){
+							$.ajax({
+								url : "<?php echo ADMIN_PATH;?>getItemdetailsdependonvendorpoforstockform",
+								type: "POST",
+								data : {'part_number' : part_number,'vendor_po_number':vendor_po_number,'vendor_name':vendor_name},
+								success: function(data, textStatus, jqXHR)
+								{
+									$(".loader_ajax").hide();
+									if(data == "failure")
+									{
+										$('#fg_description').val('');
+										$('#rm_description').val('');
+										$('#hsn_no').val('');
+									}
+									else
+									{
+										var data_finish_good = jQuery.parseJSON( data );
+										$('#fg_description').val(data_finish_good.name); 
+										$('#rm_description').val(data_finish_good.type_of_raw_material);
+										$('#hsn_no').val(data_finish_good.HSN_code);
+
+									}
+								},
+								error: function (jqXHR, textStatus, errorThrown)
+								{
+										$('#fg_description').val('');
+										$('#rm_description').val('');
+										$('#hsn_no').val('');
+								}
+							});
+							return false;
+
+					}else{
+						$('.part_number_error').html('Please Select Vendor PO Number');
+					}
+
+				}else{
+
+					$('.part_number_error').html('Please Select Vendor PO');
+				}
+				
+		});
+
+		$(document).on('click','#saveomschallan_item',function(e){
+			e.preventDefault();
+			   $(".loader_ajax").show();
+
+			   var oms_challan_id =   $('#oms_challan_id').val();
+
+			   var part_number =   $('#part_number').val();
+			   var gross_weight =   $('#gross_weight').val();
+			   var net_weight =   $('#net_weight').val();
+			   var no_of_bags =   $('#no_of_bags').val();
+			   var hsn_no =   $('#hsn_no').val();
+			   var qty = $('#qty').val();
+			   var itemremark =   $('#itemremark').val();
+
+			   var pre_oms_challan_date =   $('#oms_challan_date').val();
+			   var pre_vendor_name =   $('#vendor_name').val();
+			   var pre_vendor_po_number =   $('#vendor_po_number').val();
+			   var pre_vendor_po_date =   $('#vendor_po_date').val();
+			   var pre_remark =   $('#remark').val();
+
+
+			   $.ajax({
+				url : "<?php echo base_url();?>saveomschallanitem",
+				type: "POST",
+				 //data : formData,
+				 data :{part_number:part_number,gross_weight:gross_weight,net_weight:net_weight,no_of_bags:no_of_bags,hsn_no:hsn_no,itemremark:itemremark,qty:qty,pre_oms_challan_date:pre_oms_challan_date,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_vendor_po_date:pre_vendor_po_date,pre_remark:pre_remark,oms_challan_id:oms_challan_id},
+				 method: "POST",
+                // data :{package_id:package_id},
+                cache:false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+						$(".loader_ajax").hide();
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						swal({
+							title: "Success",
+							text: "Item Successfully Added!",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+								if(oms_challan_id){
+									window.location.href = "<?php echo base_url().'editomschallan/'?>"+oms_challan_id;	
+								}else{
+									window.location.href = "<?php echo base_url().'addNewOMSChallan'?>";	
+								}
+						});		
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			   });
+			return false;
+	    });
+
+		$(document).on('click','.deleteOmschallnitem',function(e){
+			var elemF = $(this);
+			e.preventDefault();
+			swal({
+				title: "Are you sure?",
+				text: "Delete OMS Challan Item ",
+				type: "warning",
+				showCancelButton: true,
+				closeOnClickOutside: false,
+				confirmButtonClass: "btn-sm btn-danger",
+				confirmButtonText: "Yes, delete it!",
+				cancelButtonText: "No, cancel plz!",
+				closeOnConfirm: false,
+				closeOnCancel: false
+			}, function(isConfirm) {
+				if (isConfirm) {
+							$.ajax({
+								url : "<?php echo base_url();?>deleteOmschallnitem",
+								type: "POST",
+								data : 'id='+elemF.attr('data-id'),
+								success: function(data, textStatus, jqXHR)
+								{
+									const obj = JSON.parse(data);
+								
+									if(obj.status=='success'){
+										swal({
+											title: "Deleted!",
+											text: "OMS Challan Item Deleted Succesfully",
+											icon: "success",
+											button: "Ok",
+											},function(){ 
+													window.location.href = "<?php echo base_url().'addNewOMSChallan'?>";
+										});	
+									}
+
+								},
+								error: function (jqXHR, textStatus, errorThrown)
+								{
+									$(".loader_ajax").hide();
+								}
+							})
+						}
+						else {
+				swal("Cancelled", "OMS Challan Item deletion cancelled ", "error");
+				}
+			});
+	    });
+
 
 	</script>
 <?php } ?>

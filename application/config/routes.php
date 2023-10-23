@@ -303,6 +303,14 @@ $route['fetchrejecteditem'] = "admin/fetchrejecteditem";
 $route['omschallan'] = "admin/omschallan";
 $route['fetchomschallan'] = "admin/fetchomschallan";
 $route['addNewOMSChallan'] = "admin/addNewOMSChallan";
+$route['deleteomschallan'] = "admin/deleteomschallan";
+$route['saveomschallanitem'] = "admin/saveomschallanitem";
+$route['deleteOmschallnitem'] = "admin/deleteOmschallnitem";
+$route['editomschallan/(:any)'] = "admin/editomschallan/$1";
+
+
+
+
 
 
 
