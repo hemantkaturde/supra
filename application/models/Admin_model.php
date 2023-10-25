@@ -5978,7 +5978,6 @@ class Admin_model extends CI_Model
 
     }
 
-
     public function getenquiryformcount($params){
         $this->db->select('*');
         if($params['search']['value'] != "") 
@@ -6031,7 +6030,22 @@ class Admin_model extends CI_Model
         return $data;
     }
 
-
+    public function saveenquirydetailsform($id,$data){
+        if($id != '') {
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_ENAUIRY_FORM, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_ENAUIRY_FORM, $data)) {
+                return $this->db->insert_id();
+            } else {
+                return FALSE;
+            }
+        }
+    }
 }
 
 ?>

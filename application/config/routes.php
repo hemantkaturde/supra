@@ -473,5 +473,6 @@ $route['addnewenquiryform'] = "admin/addnewenquiryform";
 
 
 
+
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

@@ -197,6 +197,61 @@
                                 <tbody>
                                 </tbody>
                             </table>
+
+
+                            <div class ="total_values" style="border-top: 1px solid black">
+                                <div class="col-md-6" style="margin-top: 20px;">
+                                <div class="form-group">
+                                    <label for="invoice_qty_in_pcs">Ready for Exp Pcs</label>
+                                    <input type="text" class="form-control" id="invoice_qty_in_pcs" name="invoice_qty_in_pcs" readonly>
+                                    </div>
+                                </div>  
+
+
+                                <div class="col-md-6" style="margin-top: 20px;">
+                                <div class="form-group">
+                                    <label for="invoice_qty_in_kgs">Ready for Exp Kgs</label>
+                                    <input type="text" class="form-control" id="invoice_qty_in_kgs" name="invoice_qty_in_kgs" readonly>
+                                    </div>
+                                </div>  
+                            </div>  
+
+
+                            <div class ="total_values" style="border-top: 1px solid black">
+                                <div class="col-md-6" style="margin-top: 20px;">
+                                <div class="form-group">
+                                    <label for="invoice_qty_in_pcs">Total Exp Qty Pcs</label>
+                                    <input type="text" class="form-control" id="invoice_qty_in_pcs" name="invoice_qty_in_pcs" readonly>
+                                    </div>
+                                </div>  
+
+
+                                <div class="col-md-6" style="margin-top: 20px;">
+                                <div class="form-group">
+                                    <label for="invoice_qty_in_kgs">Total Exp Qty Kgs</label>
+                                    <input type="text" class="form-control" id="invoice_qty_in_kgs" name="invoice_qty_in_kgs" readonly>
+                                    </div>
+                                </div>  
+                            </div>  
+
+                            <div class ="total_values" style="border-top: 1px solid black">
+                                <div class="col-md-6" style="margin-top: 20px;">
+                                <div class="form-group">
+                                    <label for="invoice_qty_in_pcs">Balance Qty Pcs</label>
+                                    <input type="text" class="form-control" id="invoice_qty_in_pcs" name="invoice_qty_in_pcs" readonly>
+                                    </div>
+                                </div>  
+
+
+                                <div class="col-md-6" style="margin-top: 20px;">
+                                <div class="form-group">
+                                    <label for="invoice_qty_in_kgs">Balance Qty Kgs</label>
+                                    <input type="text" class="form-control" id="invoice_qty_in_kgs" name="invoice_qty_in_kgs" readonly>
+                                    </div>
+                                </div>  
+                            </div>  
+
+
                         </div>
                     </div>
                     <!-- /.box-body -->
@@ -221,6 +276,26 @@
                                 <tbody>
                                 </tbody>
                             </table>
+
+
+                            <div class ="total_values" style="border-top: 1px solid black">
+                                <div class="col-md-6" style="margin-top: 20px;">
+                                <div class="form-group">
+                                    <label for="invoice_qty_in_pcs">Total Rejected Qty Pcs</label>
+                                    <input type="text" class="form-control" id="invoice_qty_in_pcs" name="invoice_qty_in_pcs" readonly>
+                                    </div>
+                                </div>  
+
+
+                                <div class="col-md-6" style="margin-top: 20px;">
+                                <div class="form-group">
+                                    <label for="invoice_qty_in_kgs">Total Rejected Qty Kgs</label>
+                                    <input type="text" class="form-control" id="invoice_qty_in_kgs" name="invoice_qty_in_kgs" readonly>
+                                    </div>
+                                </div>  
+                            </div>  
+
+
                         </div>
                     </div>
                     <!-- /.box-body -->

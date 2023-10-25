@@ -8194,7 +8194,36 @@ class Admin extends BaseController
         $post_submit = $this->input->post();
         if($post_submit){
 
+            $add_newenquiry_response = array();
+            $this->form_validation->set_rules('enquiry_number','Enquiry Number','trim|required');
+            $this->form_validation->set_rules('enquiry_date','Enquiry Date','trim|required');
+            $this->form_validation->set_rules('buyer_enquiry_no','Buyer Enquiry No','trim|required');
+            $this->form_validation->set_rules('buyer_enquiry_date','Buyer Enquiry Date','trim|required');
+            $this->form_validation->set_rules('remark','Remark','trim');
 
+            if($this->form_validation->run() == FALSE)
+            {
+                $add_newenquiry_response['status'] = 'failure';
+                $add_newenquiry_response['error'] = array('enquiry_number'=>strip_tags(form_error('enquiry_number')),'enquiry_date'=>strip_tags(form_error('enquiry_date')),'buyer_enquiry_no'=>strip_tags(form_error('buyer_enquiry_no')),'buyer_enquiry_date'=>strip_tags(form_error('buyer_enquiry_date')),'remark'=>strip_tags(form_error('remark')));
+
+            }else{
+
+                $data = array(
+                    'enquiry_number' => trim($this->input->post('enquiry_number')),
+                    'date' => trim($this->input->post('enquiry_date')),
+                    'buyer_enquiry_no' => trim($this->input->post('buyer_enquiry_no')),
+                    'buyer_enquiry_date' => trim($this->input->post('buyer_enquiry_date')),
+                    'remark' => trim($this->input->post('remark'))
+                );
+
+                $saveenquirydetailsform= $this->admin_model->saveenquirydetailsform('',$data);
+                if($saveenquirydetailsform){
+                    $add_newenquiry_response['status'] = 'success';
+                    $add_newenquiry_response['error'] = array('enquiry_number'=>strip_tags(form_error('enquiry_number')),'enquiry_date'=>strip_tags(form_error('enquiry_date')),'buyer_enquiry_no'=>strip_tags(form_error('buyer_enquiry_no')),'buyer_enquiry_date'=>strip_tags(form_error('buyer_enquiry_date')),'remark'=>strip_tags(form_error('remark')));
+    
+                }
+            }
+            echo json_encode($add_newenquiry_response);
         }else{
             $process = 'Add New Enquiry Form';
             $processFunction = 'Admin/addNewenquiryform';
