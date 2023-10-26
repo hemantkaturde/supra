@@ -96,15 +96,36 @@
                         
                         <div class="col-md-12">
                            <button type="button" class="btn btn-success btn-xl" data-toggle="modal" data-target="#addNewModal">Add New Items</button><br/><br/>
-                             <table class="table  table-bordered">
+                             <table class="table  table-bordered" style="max-width: 100%;display: block;overflow-x: auto; white-space: nowrap;">
                                 <thead style="background-color: #3c8dbc;">
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Enquiry Number</th>
-                                        <th scope="col">Enquiry Date</th>
-                                        <th scope="col">Buyer Enquiry No</th>
-                                        <th scope="col">Buyer Enquiry Date</th>
-                                        <th scope="col">Remark</th>
+                                        <th scope="col">F.G Part Number</th>
+                                        <th scope="col">F.G. Description</th>
+                                        <th scope="col">R.M Description</th>
+                                        <th scope="col">Gross Weight</th>
+                                        <th scope="col">RM Size</th>
+                                        <th scope="col">Qty</th>
+                                        <th scope="col">Supplier Name</th>
+                                        <th scope="col">Rate</th>
+                                        <th scope="col">Supplier Name</th>
+                                        <th scope="col">Rate</th>
+                                        <th scope="col">Supplier Name</th>
+                                        <th scope="col">Rate</th>
+                                        <th scope="col">Supplier Name</th>
+                                        <th scope="col">Rate</th>
+                                        <th scope="col">Supplier Name</th>
+                                        <th scope="col">Rate</th>
+                                        <th scope="col">Vendor Name</th>
+                                        <th scope="col">Rate</th>
+                                        <th scope="col">Vendor Name</th>
+                                        <th scope="col">Rate</th>
+                                        <th scope="col">Vendor Name</th>
+                                        <th scope="col">Rate</th>
+                                        <th scope="col">Vendor Name</th>
+                                        <th scope="col">Rate</th>
+                                        <th scope="col">Vendor Name</th>
+                                        <th scope="col">Rate</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                     </thead>   
@@ -178,6 +199,9 @@
                                     <label for="part_number">F.G Part Number <span class="required">*</span></label>
                                         <select class="form-control" name="part_number" id="part_number">
                                             <option st-id="" value="">Select F.G Part Number</option>
+                                            <?php foreach ($partNumberlistforenquirylist as $key => $value) {?>
+                                                <option st-id="" value="<?=$value['fin_id']?>"><?=$value['part_number']?></option>
+                                            <?php } ?>
                                          </select>
                                         <p class="error part_number_error"></p>
                                 </div>                   
@@ -188,7 +212,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="rm_description">R.M Description</label>
-                                    <input type="text" class="form-control" id="rm_description" name="rm_description" readonly>
+                                    <input type="text" class="form-control" id="rm_description" name="rm_description">
                                     <p class="error rm_description_error"></p>
                                 </div>               
                                 <div class="form-group">
@@ -207,19 +231,22 @@
                                     <p class="error qty_error"></p>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                               
+
+                                 <div class="col-md-6">
                                        <div class="row" style="display: inline-flex;">
                                             <div style="padding-right: 10px">
                                                 <label for="supplier_name_1">Supplier Name</label>
                                                 <select class="form-control" name="supplier_name_1" id="supplier_name_1" style="width: 240px">
                                                     <option st-id="" value="">Select Supplier Name</option>
+                                                    <?php foreach ($supplierList as $key => $value) {?>
+                                                        <option st-id="" value="<?=$value['sup_id']?>"><?=$value['supplier_name']?></option>
+                                                    <?php }?>
                                                 </select>
                                                 <p class="error supplier_name_1_error"></p>
                                             </div>
                                             <div>
                                                 <label for="rate_1">Rate</label>
-                                                <input type="text" class="form-control" id="rate_1" name="rate_1" readonly>
+                                                <input type="text" class="form-control" id="rate_1" name="rate_1">
                                                 <p class="error rate_1_error"></p>
                                             </div>
                                         </div>
@@ -230,12 +257,15 @@
                                                 <label for="supplier_name_2">Supplier Name</label>
                                                 <select class="form-control" name="supplier_name_2" id="supplier_name_2" style="width: 240px">
                                                     <option st-id="" value="">Select Supplier Name</option>
+                                                    <?php foreach ($supplierList as $key => $value) {?>
+                                                        <option st-id="" value="<?=$value['sup_id']?>"><?=$value['supplier_name']?></option>
+                                                    <?php }?>
                                                 </select>
                                                 <p class="error supplier_name_2_error"></p>
                                             </div>
                                             <div>
                                                 <label for="rate_2">Rate</label>
-                                                <input type="text" class="form-control" id="rate_2" name="rate_2" readonly>
+                                                <input type="text" class="form-control" id="rate_2" name="rate_2">
                                                 <p class="error rate_2_error"></p>
                                             </div>
                                         </div>
@@ -246,12 +276,15 @@
                                                 <label for="supplier_name_3">Supplier Name</label>
                                                 <select class="form-control" name="supplier_name_3" id="supplier_name_3" style="width: 240px">
                                                     <option st-id="" value="">Select Supplier Name</option>
+                                                    <?php foreach ($supplierList as $key => $value) {?>
+                                                        <option st-id="" value="<?=$value['sup_id']?>"><?=$value['supplier_name']?></option>
+                                                    <?php }?>
                                                 </select>
                                                 <p class="error supplier_name_3_error"></p>
                                             </div>
                                             <div>
                                                 <label for="rate_3">Rate</label>
-                                                <input type="text" class="form-control" id="rate_3" name="rate_3" readonly>
+                                                <input type="text" class="form-control" id="rate_3" name="rate_3">
                                                 <p class="error rate_3_error"></p>
                                             </div>
                                         </div>
@@ -262,12 +295,15 @@
                                                 <label for="supplier_name_4">Supplier Name</label>
                                                 <select class="form-control" name="supplier_name_4" id="supplier_name_4" style="width: 240px">
                                                     <option st-id="" value="">Select Supplier Name</option>
+                                                    <?php foreach ($supplierList as $key => $value) {?>
+                                                        <option st-id="" value="<?=$value['sup_id']?>"><?=$value['supplier_name']?></option>
+                                                    <?php }?>
                                                 </select>
                                                 <p class="error supplier_name_4_error"></p>
                                             </div>
                                             <div>
                                                 <label for="rate_4">Rate</label>
-                                                <input type="text" class="form-control" id="rate_4" name="rate_4" readonly>
+                                                <input type="text" class="form-control" id="rate_4" name="rate_4">
                                                 <p class="error rate_4_error"></p>
                                             </div>
                                         </div>
@@ -277,12 +313,15 @@
                                                 <label for="supplier_name_5">Supplier Name</label>
                                                 <select class="form-control" name="supplier_name_5" id="supplier_name_5" style="width: 240px">
                                                     <option st-id="" value="">Select Supplier Name</option>
+                                                    <?php foreach ($supplierList as $key => $value) {?>
+                                                        <option st-id="" value="<?=$value['sup_id']?>"><?=$value['supplier_name']?></option>
+                                                    <?php }?>
                                                 </select>
                                                 <p class="error supplier_name_5_error"></p>
                                             </div>
                                             <div>
                                                 <label for="rate_5">Rate</label>
-                                                <input type="text" class="form-control" id="rate_5" name="rate_5" readonly>
+                                                <input type="text" class="form-control" id="rate_5" name="rate_5">
                                                 <p class="error rate_5_error"></p>
                                             </div>
                                         </div>
@@ -294,13 +333,16 @@
                                             <div style="padding-right: 10px">
                                                 <label for="vendor_name_1">Vendor Name</label>
                                                 <select class="form-control" name="vendor_name_1" id="vendor_name_1" style="width: 240px">
-                                                    <option st-id="" value="">Select Supplier Name</option>
+                                                    <option st-id="" value="">Select Vendor Name</option>
+                                                    <?php foreach ($vendorList as $key => $value) {?>
+                                                        <option st-id="" value="<?=$value['ven_id']?>"><?=$value['vendor_name']?></option>
+                                                    <?php }?>
                                                 </select>
                                                 <p class="error vendor_name_1_error"></p>
                                             </div>
                                             <div>
                                                 <label for="venodr_rate_1">Rate</label>
-                                                <input type="text" class="form-control" id="venodr_rate_1" name="venodr_rate_1" readonly>
+                                                <input type="text" class="form-control" id="venodr_rate_1" name="venodr_rate_1">
                                                 <p class="error venodr_rate_1_error"></p>
                                             </div>
                                         </div>
@@ -308,15 +350,18 @@
                                
                                        <div class="row" style="display: inline-flex;">
                                             <div style="padding-right: 10px">
-                                                <label for="supplier_name_2">Vendor Name</label>
-                                                <select class="form-control" name="supplier_name_2" id="supplier_name_2" style="width: 240px">
-                                                    <option st-id="" value="">Select Supplier Name</option>
+                                                <label for="vendor_name_2">Vendor Name</label>
+                                                <select class="form-control" name="vendor_name_2" id="vendor_name_2" style="width: 240px">
+                                                    <option st-id="" value="">Select Vendor Name</option>
+                                                    <?php foreach ($vendorList as $key => $value) {?>
+                                                        <option st-id="" value="<?=$value['ven_id']?>"><?=$value['vendor_name']?></option>
+                                                    <?php }?>
                                                 </select>
-                                                <p class="error supplier_name_2_error"></p>
+                                                <p class="error vendor_name_2_error"></p>
                                             </div>
                                             <div>
                                                 <label for="venodr_rate_2">Rate</label>
-                                                <input type="text" class="form-control" id="venodr_rate_2" name="venodr_rate_2" readonly>
+                                                <input type="text" class="form-control" id="venodr_rate_2" name="venodr_rate_2">
                                                 <p class="error venodr_rate_2_error"></p>
                                             </div>
                                         </div>
@@ -324,15 +369,18 @@
                               
                                        <div class="row" style="display: inline-flex;">
                                             <div style="padding-right: 10px">
-                                                <label for="supplier_name_3">Vendor Name</label>
-                                                <select class="form-control" name="supplier_name_3" id="supplier_name_3" style="width: 240px">
-                                                    <option st-id="" value="">Select Supplier Name</option>
+                                                <label for="vendor_name_3">Vendor Name</label>
+                                                <select class="form-control" name="vendor_name_3" id="vendor_name_3" style="width: 240px">
+                                                    <option st-id="" value="">Select Vendor Name</option>
+                                                    <?php foreach ($vendorList as $key => $value) {?>
+                                                        <option st-id="" value="<?=$value['ven_id']?>"><?=$value['vendor_name']?></option>
+                                                    <?php }?>
                                                 </select>
-                                                <p class="error supplier_name_3_error"></p>
+                                                <p class="error vendor_name_3_error"></p>
                                             </div>
                                             <div>
                                                 <label for="venodr_rate_3">Rate</label>
-                                                <input type="text" class="form-control" id="venodr_rate_3" name="venodr_rate_3" readonly>
+                                                <input type="text" class="form-control" id="venodr_rate_3" name="venodr_rate_3">
                                                 <p class="error venodr_rate_3_error"></p>
                                             </div>
                                         </div>
@@ -340,30 +388,36 @@
                             
                                        <div class="row" style="display: inline-flex;">
                                             <div style="padding-right: 10px">
-                                                <label for="supplier_name_4">Vendor Name</label>
-                                                <select class="form-control" name="supplier_name_4" id="supplier_name_4" style="width: 240px">
-                                                    <option st-id="" value="">Select Supplier Name</option>
+                                                <label for="vendor_name_4">Vendor Name</label>
+                                                <select class="form-control" name="vendor_name_4" id="vendor_name_4" style="width: 240px">
+                                                    <option st-id="" value="">Select Vendor Name</option>
+                                                    <?php foreach ($vendorList as $key => $value) {?>
+                                                        <option st-id="" value="<?=$value['ven_id']?>"><?=$value['vendor_name']?></option>
+                                                    <?php }?>
                                                 </select>
-                                                <p class="error supplier_name_4_error"></p>
+                                                <p class="error vendor_name_4_error"></p>
                                             </div>
                                             <div>
                                                 <label for="venodr_rate_4">Rate</label>
-                                                <input type="text" class="form-control" id="venodr_rate_4" name="venodr_rate_4" readonly>
+                                                <input type="text" class="form-control" id="venodr_rate_4" name="venodr_rate_4">
                                                 <p class="error venodr_rate_4_error"></p>
                                             </div>
                                         </div>
 
                                         <div class="row" style="display: inline-flex;">
                                             <div style="padding-right: 10px">
-                                                <label for="supplier_name_5">Vendor Name</label>
-                                                <select class="form-control" name="supplier_name_5" id="supplier_name_5" style="width: 240px">
-                                                    <option st-id="" value="">Select Supplier Name</option>
+                                                <label for="vendor_name_5">Vendor Name</label>
+                                                <select class="form-control" name="vendor_name_5" id="vendor_name_5" style="width: 240px">
+                                                   <option st-id="" value="">Select Vendor Name</option>
+                                                    <?php foreach ($vendorList as $key => $value) {?>
+                                                        <option st-id="" value="<?=$value['ven_id']?>"><?=$value['vendor_name']?></option>
+                                                    <?php }?>
                                                 </select>
-                                                <p class="error supplier_name_5_error"></p>
+                                                <p class="error vendor_name_5_error"></p>
                                             </div>
                                             <div>
                                                 <label for="venodr_rate_5">Rate</label>
-                                                <input type="text" class="form-control" id="venodr_rate_5" name="venodr_rate_5" readonly>
+                                                <input type="text" class="form-control" id="venodr_rate_5" name="venodr_rate_5">
                                                 <p class="error venodr_rate_5_error"></p>
                                             </div>
                                         </div>
@@ -374,7 +428,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary btn-xl closebillofmaterialmodal" data-dismiss="modal">Close</button>
-                        <button type="submit" id="saveomschallan_item" name="saveomschallan_item" class="btn btn-primary" class="btn btn-success btn-xl">Save</button>
+                        <button type="submit" id="saveenquiryform_item" name="saveenquiryform_item" class="btn btn-primary" class="btn btn-success btn-xl">Save</button>
                     </div>
                 </form>    
                 </div>

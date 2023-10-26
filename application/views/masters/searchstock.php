@@ -56,17 +56,15 @@
 
             <div class="col-md-2">
                 <div class="form-group">
-                    <label for="item_number">Total Stock</label>
-                        
-                    <p class="error item_number_error"></p>
+                    <label for="buyer_name">Stock Id</label>
+                    <input type="text" class="form-control" id="stock_id" name="stock_id" readonly>
                 </div>
             </div>  
 
             <div class="col-md-2">
                 <div class="form-group">
-                    <label for="item_number">Total Balance Stock</label>
-                        
-                    <p class="error item_number_error"></p>
+                    <label for="stock_id_number">Stock Id Number</label>
+                    <input type="text" class="form-control" id="stock_id_number" name="stock_id_number" readonly>
                 </div>
             </div>  
 
@@ -74,7 +72,7 @@
 
         <div class="row">
 
-        <div class="col-md-3">
+            <div class="col-md-3">
                 <div class="form-group">
                     <label for="buyer_name">Buyer Name </label>
                     <input type="text" class="form-control" id="buyer_name" name="buyer_name" readonly>

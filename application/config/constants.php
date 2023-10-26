@@ -157,8 +157,8 @@ define('TBL_STOCKS','tbl_stock_form');
 define('TBL_STOCKS_ITEM','tbl_stock_form_item');
 define('TBL_OMS_CHALLAN','tbl_oms_challan');
 define('TBL_OMS_CHALLAN_ITEM','tbl_oms_challan_item');
-
 define('TBL_ENAUIRY_FORM','tbl_enquiry_form');
+define('TBL_ENAUIRY_FORM_ITEM','tbl_enuiry_form_item');
 
 
 

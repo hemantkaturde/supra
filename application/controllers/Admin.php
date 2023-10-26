@@ -8006,13 +8006,11 @@ class Admin extends BaseController
                 );
 
                 $oms_challan_id = trim($this->input->post('oms_challan_id'));
-
                 if($oms_challan_id){
                     $saveomschallanform= $this->admin_model->saveomschallanform($oms_challan_id,$data);
                 }else{
                     $saveomschallanform= $this->admin_model->saveomschallanform('',$data);
                 }
-                
                 if($saveomschallanform){
                     $update_oms_challan_from = $this->admin_model->update_oms_challan_from($saveomschallanform);
                     if($update_oms_challan_from){
@@ -8057,7 +8055,7 @@ class Admin extends BaseController
         $post_submit = $this->input->post();
         if($post_submit){
 
-            $saveomsChallanformitem_response = array();
+             $saveomsChallanformitem_response = array();
              $this->form_validation->set_rules('part_number','Part Number','trim|required');            
              $this->form_validation->set_rules('gross_weight','Gross Weight','trim|required');
              $this->form_validation->set_rules('net_weight','Net Weight','trim|required');
@@ -8188,12 +8186,10 @@ class Admin extends BaseController
         echo json_encode($json_data);
     }
 
-
     public function addnewenquiryform(){
 
         $post_submit = $this->input->post();
         if($post_submit){
-
             $add_newenquiry_response = array();
             $this->form_validation->set_rules('enquiry_number','Enquiry Number','trim|required');
             $this->form_validation->set_rules('enquiry_date','Enquiry Date','trim|required');
@@ -8207,7 +8203,6 @@ class Admin extends BaseController
                 $add_newenquiry_response['error'] = array('enquiry_number'=>strip_tags(form_error('enquiry_number')),'enquiry_date'=>strip_tags(form_error('enquiry_date')),'buyer_enquiry_no'=>strip_tags(form_error('buyer_enquiry_no')),'buyer_enquiry_date'=>strip_tags(form_error('buyer_enquiry_date')),'remark'=>strip_tags(form_error('remark')));
 
             }else{
-
                 $data = array(
                     'enquiry_number' => trim($this->input->post('enquiry_number')),
                     'date' => trim($this->input->post('enquiry_date')),
@@ -8215,12 +8210,10 @@ class Admin extends BaseController
                     'buyer_enquiry_date' => trim($this->input->post('buyer_enquiry_date')),
                     'remark' => trim($this->input->post('remark'))
                 );
-
                 $saveenquirydetailsform= $this->admin_model->saveenquirydetailsform('',$data);
                 if($saveenquirydetailsform){
                     $add_newenquiry_response['status'] = 'success';
                     $add_newenquiry_response['error'] = array('enquiry_number'=>strip_tags(form_error('enquiry_number')),'enquiry_date'=>strip_tags(form_error('enquiry_date')),'buyer_enquiry_no'=>strip_tags(form_error('buyer_enquiry_no')),'buyer_enquiry_date'=>strip_tags(form_error('buyer_enquiry_date')),'remark'=>strip_tags(form_error('remark')));
-    
                 }
             }
             echo json_encode($add_newenquiry_response);
@@ -8229,10 +8222,66 @@ class Admin extends BaseController
             $processFunction = 'Admin/addNewenquiryform';
             $this->logrecord($process,$processFunction);
             $this->global['pageTitle'] = 'Add New Enquiry Form';
+            $data['vendorList']= $this->admin_model->fetchALLvendorList();
+            $data['supplierList']= $this->admin_model->fetchALLsupplierList();
+            $data['partNumberlistforenquirylist']= $this->admin_model->partNumberlistforenquirylist();
+
+            $data['getallenquiryformitemadd']= $this->admin_model->getallenquiryformitemadd();
             $this->loadViews("masters/addNewenquiryform", $this->global, $data, NULL);
         }
     }
 
+    public function saveenquiryformitem(){
+        
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $saveenquiryform_response = array();
+            $this->form_validation->set_rules('part_number','Part Number','trim|required');            
+           if($this->form_validation->run() == FALSE)
+           {
+               $saveenquiryform_response['status'] = 'failure';
+               $saveenquiryform_response['error'] =  array('part_number'=>strip_tags(form_error('part_number')));
+          
+           }else{
+                $data = array(
+                    'part_number'  =>  trim($this->input->post('part_number')),
+                    'rm_description'  =>  trim($this->input->post('rm_description')),
+                    'groass_weight'  =>  trim($this->input->post('groass_weight')),
+                    'rm_size'  =>  trim($this->input->post('rm_size')),
+                    'qty'  =>  trim($this->input->post('qty')),
+
+                    'suplier_id_1'  =>  trim($this->input->post('supplier_name_1')),
+                    'suplier_rate_1'  =>  trim($this->input->post('rate_1')),
+                    'suplier_id_2'  =>  trim($this->input->post('supplier_name_2')),
+                    'suplier_rate_2'  =>  trim($this->input->post('rate_2')),
+                    'suplier_id_3'  =>  trim($this->input->post('supplier_name_3')),
+                    'suplier_rate_3'  =>  trim($this->input->post('rate_3')),
+                    'suplier_id_4'  =>  trim($this->input->post('supplier_name_4')),
+                    'suplier_rate_4'  =>  trim($this->input->post('rate_4')),
+                    'suplier_id_5'  =>  trim($this->input->post('supplier_name_5')),
+                    'suplier_rate_5'  =>  trim($this->input->post('rate_5')),
+
+                    'vendor_id_1'  =>  trim($this->input->post('vendor_name_1')),
+                    'vendor_rate_1'  =>  trim($this->input->post('venodr_rate_1')),
+                    'vendor_id_2'  =>  trim($this->input->post('vendor_name_2')),
+                    'vendor_rate_2'  =>  trim($this->input->post('venodr_rate_2')),
+                    'vendor_id_3'  =>  trim($this->input->post('vendor_name_3')),
+                    'vendor_rate_3'  =>  trim($this->input->post('venodr_rate_3')),
+                    'vendor_id_4'  =>  trim($this->input->post('vendor_name_4')),
+                    'vendor_rate_4'  =>  trim($this->input->post('venodr_rate_4')),
+                    'vendor_id_5'  =>  trim($this->input->post('vendor_name_5')),
+                    'vendor_rate_5'  =>  trim($this->input->post('venodr_rate_5'))
+                );
+
+                $saveenquiryformitem = $this->admin_model->saveenquiryformitem('',$data);
+                if($saveenquiryformitem){
+                    $saveenquiryform_response['status'] = 'success';
+                    $saveenquiryform_response['error'] =  array('part_number'=>strip_tags(form_error('part_number')));
+                }
+           }
+           echo json_encode($saveenquiryform_response);
+        }
+    }
    
 
 }

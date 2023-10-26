@@ -1966,7 +1966,6 @@ class Admin_model extends CI_Model
 
     }
 
-
     public function fetchALLSupplierPOitemsforview($supplierpoconfirmationid){
 
         $this->db->select('*');
@@ -2058,7 +2057,6 @@ class Admin_model extends CI_Model
         return $query_result;
 
     }
-
 
     public function getSupplierpoconfirmationdetails($supplierpoconfirmationid){
 
@@ -2452,7 +2450,6 @@ class Admin_model extends CI_Model
         }
     }
 
-
     public function getBillofmaterialCount($params){
 
         $this->db->select('*');
@@ -2518,7 +2515,6 @@ class Admin_model extends CI_Model
 
     }
 
-
     public function getPreviousBomnumber(){
 
         $this->db->select('bom_number');
@@ -2530,7 +2526,6 @@ class Admin_model extends CI_Model
         return $rowcount;
     }
 
-
     public function checkIfexitsBillofmaterial($bom_number){
 
         $this->db->select('*');
@@ -2541,7 +2536,6 @@ class Admin_model extends CI_Model
         return $rowcount;
 
     }
-
 
     public function saveBillofmaterial($id,$data){
 
@@ -2694,7 +2688,6 @@ class Admin_model extends CI_Model
 
     }
 
-
     public function getbuyerdetialsbybuyerponumber($buyer_po_number){
         $this->db->select('buyer_po_date,delivery_date');
         $this->db->where(TBL_BUYER_PO_MASTER.'.status',1);
@@ -2703,7 +2696,6 @@ class Admin_model extends CI_Model
         $data = $query->result_array();
         return $data;
     }
-
 
     public function getVendoritemsonlyvendorBillofmaterial($vendor_po_number){
 
@@ -2719,7 +2711,6 @@ class Admin_model extends CI_Model
         return $data;
 
     }
-
 
     public function getSuppliergoodsPartnumberByidforvendorbillofmaetrial($part_number,$vendor_po_number){
         // $this->db->select('*,'.TBL_FINISHED_GOODS.'.sac as sac_no');
@@ -2747,7 +2738,6 @@ class Admin_model extends CI_Model
         return $data;
     }
 
-    
     public function saveVendorbillofmaterilitemdata($id,$data){
 
         if($id != '') {
@@ -2767,7 +2757,6 @@ class Admin_model extends CI_Model
         
     }
 
-
     public function fetchALLpreVendorpoitemList(){
 
         $this->db->select('*,'.TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.id as vendoritmid');
@@ -2781,7 +2770,6 @@ class Admin_model extends CI_Model
         return $data;
 
     }
-
 
     public function update_last_inserted_id_vendor_bill_of_materil($savevendorBillofmaterial){
         $data = array(
@@ -2877,7 +2865,6 @@ class Admin_model extends CI_Model
         return $data;
     }
 
-
     public function getItemdetailsdependonvendorpobom($part_number,$vendor_po_number,$vendor_name){
         $this->db->select('*,'.TBL_FINISHED_GOODS.'.sac as sac_no,'.TBL_VENDOR_PO_MASTER_ITEM.'.rate as supplierrate,'.TBL_FINISHED_GOODS.'.groass_weight as fg_gross_weight,'.TBL_FINISHED_GOODS.'.net_weight as fg_net_weight');
         $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
@@ -2961,7 +2948,6 @@ class Admin_model extends CI_Model
 
 
     }
-
 
     public function getVendorpoitems($part_number,$vendor_po_number){
     
@@ -3058,7 +3044,6 @@ class Admin_model extends CI_Model
 
     }
 
-
     public function saveIncomingdetailsitem($id,$data){
 
         if($id != '') {
@@ -3090,7 +3075,6 @@ class Admin_model extends CI_Model
 
     }
 
-
     public function getAllitemdetailsforedit($id){
 
         $this->db->select('*,'.TBL_INCOMING_DETAILS_ITEM.'.id as incoming_details_item_id,'.TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id as mainincoming');
@@ -3102,7 +3086,6 @@ class Admin_model extends CI_Model
         return $data;
 
     }
-
 
     public function getPreviousrecordforbalenceqtyedit($incoming_details_item_id,$mainincoming){
         $this->db->select(TBL_INCOMING_DETAILS_ITEM.'.balance_qty as balance_qty');
@@ -3119,7 +3102,6 @@ class Admin_model extends CI_Model
 
     }
 
-
     public function getPreviousrecordforbalenceqtyadd($incoming_details_item_id){
 
         $this->db->select(TBL_INCOMING_DETAILS_ITEM.'.balance_qty as balance_qty');
@@ -3134,7 +3116,6 @@ class Admin_model extends CI_Model
         return $data;
 
     }
-
 
     public function deleteIncomingDetailsitem($id){
 
@@ -3159,7 +3140,6 @@ class Admin_model extends CI_Model
             return FALSE;
         }
     }
-
 
     public function getPackinginstractionCount(){
 
@@ -3246,7 +3226,6 @@ class Admin_model extends CI_Model
 
 
     }
-
 
     public function savePackinginstarction($id,$data){
 
@@ -6046,6 +6025,48 @@ class Admin_model extends CI_Model
             }
         }
     }
+
+    public function partNumberlistforenquirylist(){
+        $this->db->select('fin_id,part_number');
+        $this->db->where(TBL_FINISHED_GOODS.'.status', 1);
+        $this->db->order_by(TBL_FINISHED_GOODS.'.fin_id','DESC');
+        $query = $this->db->get(TBL_FINISHED_GOODS);
+        $data = $query->result_array();
+        return $data;
+    }
+
+    public function saveenquiryformitem($id,$data){
+
+        if($id != '') {
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_ENAUIRY_FORM_ITEM, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_ENAUIRY_FORM_ITEM, $data)) {
+                return $this->db->insert_id();
+            } else {
+                return FALSE;
+            }
+        }
+
+    }
+
+    public function getallenquiryformitemadd(){
+
+        $this->db->select('*,'.TBL_STOCKS_ITEM.'.id as stock_item_id');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_STOCKS_ITEM.'.part_number');
+        $this->db->where(TBL_STOCKS_ITEM.'.status', 1);
+        $this->db->where(TBL_STOCKS_ITEM.'.stock_form_id IS NULL');
+        $query = $this->db->get(TBL_STOCKS_ITEM);
+        $data = $query->result_array();
+        return $data;
+
+    }
+
+
 }
 
 ?>
