@@ -6056,11 +6056,11 @@ class Admin_model extends CI_Model
 
     public function getallenquiryformitemadd(){
 
-        $this->db->select('*,'.TBL_STOCKS_ITEM.'.id as stock_item_id');
-        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_STOCKS_ITEM.'.part_number');
-        $this->db->where(TBL_STOCKS_ITEM.'.status', 1);
-        $this->db->where(TBL_STOCKS_ITEM.'.stock_form_id IS NULL');
-        $query = $this->db->get(TBL_STOCKS_ITEM);
+        $this->db->select('*');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_ENAUIRY_FORM_ITEM.'.part_number');
+        $this->db->where(TBL_ENAUIRY_FORM_ITEM.'.status', 1);
+        $this->db->where(TBL_ENAUIRY_FORM_ITEM.'.enquiry_form_id IS NULL');
+        $query = $this->db->get(TBL_ENAUIRY_FORM_ITEM);
         $data = $query->result_array();
         return $data;
 

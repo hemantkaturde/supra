@@ -85,6 +85,20 @@
                             <div class="col-md-4">
                                 <div class="col-md-12">
                                     <div class="form-group">
+                                        <label for="status">Status</label>
+                                            <select class="form-control" name="status" id="status">
+                                                <option value="">Select Status</option>
+                                                <option value="Open">Open</option>
+                                                <option value="Close">Close</option>
+                                            </select>
+                                        <p class="error status_error"></p>
+                                    </div>
+                                </div>
+                            </div>    
+
+                            <div class="col-md-4">
+                                <div class="col-md-12">
+                                    <div class="form-group">
                                         <label for="remark">Remark</label>
                                         <input type="remark" class="form-control" id="remark" name="remark" value="<?=$getomschallanitems[0]['pre_remark'] ?>">
                                         <p class="error remark_error"></p>
@@ -131,16 +145,16 @@
                                     </thead>   
 
                                          <?php 
-                                           if($getomschallanitems){
+                                           if($getallenquiryformitemadd){
                                                $i=1;
-                                            foreach ($getomschallanitems as $key => $value) { ?>
+                                            foreach ($getallenquiryformitemadd as $key => $value) { ?>
                                             <tr>
                                                 <td><?php echo  $i++; ?></td>
                                                 <td><?=$value['part_number']?></td>
-                                                <td><?=$value['fgdiscription']?></td>
-                                                <td><?=$value['type_of_raw_material']?></td>
-                                                <td><?=$value['omsgross_weight']?></td>
-                                                <td><?=$value['omsremark']?></td>
+                                                <td><?=$value['name']?></td>
+                                                <td><?=$value['rm_description']?></td>
+                                                <td><?=$value['groass_weight']?></td>
+                                                <td><?=$value['rm_size']?></td>
                                                 <td>
                                                    <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['omsid'];?>' class='fa fa-trash-o deleteOmschallnitem' aria-hidden='true'></i>
                                                 </td>
@@ -159,7 +173,7 @@
                      <!-- /.box-body -->
                      <div class="box-footer">
                         <div class="col-xs-8">
-                            <?php if($getomschallanitems){ 
+                            <?php if($getallenquiryformitemadd){ 
                             $button ="";
                             }else{
                             $button ="disabled";
@@ -221,14 +235,20 @@
                                     <p class="error gross_weight_error"></p>
                                 </div>
                                 <div class="form-group">
-                                    <label for="net_weight">RM Size</label>
-                                    <input type="text" class="form-control" id="net_weight" name="net_weight">
-                                    <p class="error net_weight_error"></p>
+                                    <label for="rm_size">RM Size</label>
+                                    <input type="text" class="form-control" id="rm_size" name="rm_size">
+                                    <p class="error rm_size_error"></p>
                                 </div>
                                 <div class="form-group">
-                                    <label for="qty">Qty</label>
-                                    <input type="number" class="form-control" id="qty" name="qty" >
-                                    <p class="error qty_error"></p>
+                                    <label for="supplier_qty_in_kgs">Supplier Qty (in kgs)</label>
+                                    <input type="number" class="form-control" id="supplier_qty_in_kgs" name="supplier_qty_in_kgs" >
+                                    <p class="error supplier_qty_in_kgs_error"></p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="venodr_qty_in_pcs">Vendor Qty (in pcs)</label>
+                                    <input type="number" class="form-control" id="venodr_qty_in_pcs" name="venodr_qty_in_pcs" >
+                                    <p class="error venodr_qty_in_pcs_error"></p>
                                 </div>
                             </div>
 

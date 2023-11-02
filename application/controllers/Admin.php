@@ -8225,7 +8225,6 @@ class Admin extends BaseController
             $data['vendorList']= $this->admin_model->fetchALLvendorList();
             $data['supplierList']= $this->admin_model->fetchALLsupplierList();
             $data['partNumberlistforenquirylist']= $this->admin_model->partNumberlistforenquirylist();
-
             $data['getallenquiryformitemadd']= $this->admin_model->getallenquiryformitemadd();
             $this->loadViews("masters/addNewenquiryform", $this->global, $data, NULL);
         }
@@ -8246,9 +8245,10 @@ class Admin extends BaseController
                 $data = array(
                     'part_number'  =>  trim($this->input->post('part_number')),
                     'rm_description'  =>  trim($this->input->post('rm_description')),
-                    'groass_weight'  =>  trim($this->input->post('groass_weight')),
+                    'groass_weight'  =>  trim($this->input->post('gross_weight')),
                     'rm_size'  =>  trim($this->input->post('rm_size')),
-                    'qty'  =>  trim($this->input->post('qty')),
+                    'supplier_qty_in_kgs'  =>  trim($this->input->post('supplier_qty_in_kgs')),
+                    'venodr_qty_in_pcs'  =>  trim($this->input->post('venodr_qty_in_pcs')),
 
                     'suplier_id_1'  =>  trim($this->input->post('supplier_name_1')),
                     'suplier_rate_1'  =>  trim($this->input->post('rate_1')),

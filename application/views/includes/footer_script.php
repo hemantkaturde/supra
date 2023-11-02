@@ -13658,15 +13658,13 @@
 			e.preventDefault();
 			   $(".loader_ajax").show();
 
-			 
-
 			   var part_number =   $('#part_number').val();
 			   var rm_description =   $('#rm_description').val();
 			   var gross_weight =   $('#gross_weight').val();
-			   var net_weight =   $('#net_weight').val();
-			   var qty =   $('#qty').val();
-			  
-
+			   var rm_size =   $('#rm_size').val();
+			   var supplier_qty_in_kgs =   $('#supplier_qty_in_kgs').val();
+			   var venodr_qty_in_pcs =   $('#venodr_qty_in_pcs').val();
+			   
 			   var supplier_name_1 =   $('#supplier_name_1').val();
 			   var rate_1 =   $('#rate_1').val();
 			   var supplier_name_2 =   $('#supplier_name_2').val();
@@ -13677,7 +13675,6 @@
 			   var rate_4 =   $('#rate_4').val();
 			   var supplier_name_5 =   $('#supplier_name_5').val();
 			   var rate_5 =   $('#rate_5').val();
-
 
 			   var vendor_name_1 =   $('#vendor_name_1').val();
 			   var venodr_rate_1 =   $('#venodr_rate_1').val();
@@ -13695,7 +13692,7 @@
 				url : "<?php echo base_url();?>saveenquiryformitem",
 				type: "POST",
 				 //data : formData,
-				 data :{part_number:part_number,rm_description:rm_description,gross_weight:gross_weight,net_weight:net_weight,qty:qty,supplier_name_1:supplier_name_1,rate_1:rate_1,supplier_name_2:supplier_name_2,rate_2:rate_2,supplier_name_3:supplier_name_3,rate_3:rate_3,supplier_name_4:supplier_name_4,rate_4:rate_4,supplier_name_5:supplier_name_5,rate_5:rate_5,vendor_name_1:vendor_name_1,venodr_rate_1:venodr_rate_1,vendor_name_2:vendor_name_2,venodr_rate_2:venodr_rate_2,vendor_name_3:vendor_name_3,venodr_rate_3:venodr_rate_3,vendor_name_4:vendor_name_4,venodr_rate_4:venodr_rate_4,vendor_name_5:vendor_name_5,venodr_rate_5:venodr_rate_5},
+				 data :{part_number:part_number,rm_description:rm_description,gross_weight:gross_weight,supplier_name_1:supplier_name_1,rate_1:rate_1,supplier_name_2:supplier_name_2,rate_2:rate_2,supplier_name_3:supplier_name_3,rate_3:rate_3,supplier_name_4:supplier_name_4,rate_4:rate_4,supplier_name_5:supplier_name_5,rate_5:rate_5,vendor_name_1:vendor_name_1,venodr_rate_1:venodr_rate_1,vendor_name_2:vendor_name_2,venodr_rate_2:venodr_rate_2,vendor_name_3:vendor_name_3,venodr_rate_3:venodr_rate_3,vendor_name_4:vendor_name_4,venodr_rate_4:venodr_rate_4,vendor_name_5:vendor_name_5,venodr_rate_5:venodr_rate_5,rm_size:rm_size,supplier_qty_in_kgs:supplier_qty_in_kgs,venodr_qty_in_pcs:venodr_qty_in_pcs},
 				 method: "POST",
                 // data :{package_id:package_id},
                 cache:false,
