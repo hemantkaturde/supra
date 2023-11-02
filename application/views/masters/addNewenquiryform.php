@@ -45,8 +45,8 @@
                                     <div class="form-group">
                                         <label for="enquiry_date">Enquiry Date <span class="required">*</span></label>
                                             <?php 
-                                            if($getomschallanitems[0]['pre_oms_challan_date']){
-                                                $date= $getomschallanitems[0]['pre_oms_challan_date'];
+                                            if($getallenquiryformitemadd[0]['pre_enquiry_date']){
+                                                $date= $getallenquiryformitemadd[0]['pre_enquiry_date'];
                                             }else{
                                                 $date= date('Y-m-d'); 
                                             }
@@ -61,7 +61,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="buyer_enquiry_no">Buyer Enquiry No <span class="required">*</span></label>
-                                        <input type="buyer_enquiry_no" class="form-control" id="buyer_enquiry_no" name="buyer_enquiry_no" value="<?=$getomschallanitems[0]['pre_remark'] ?>">
+                                        <input type="buyer_enquiry_no" class="form-control" id="buyer_enquiry_no" name="buyer_enquiry_no" value="<?=$getallenquiryformitemadd[0]['pre_enquiry_date'] ?>">
                                         <p class="error buyer_enquiry_no_error"></p>
                                     </div>
                                 </div>
@@ -70,8 +70,8 @@
                                     <div class="form-group">
                                         <label for="buyer_enquiry_date">Buyer Enquiry Date <span class="required">*</span></label>
                                          <?php 
-                                            if($getomschallanitems[0]['pre_enquiry_date']){
-                                                $buyer_enquiry_date= $getomschallanitems[0]['pre_enquiry_date'];
+                                            if($getallenquiryformitemadd[0]['pre_buyer_enquiry_date']){
+                                                $buyer_enquiry_date= $getallenquiryformitemadd[0]['pre_buyer_enquiry_date'];
                                             }else{
                                                 $buyer_enquiry_date= date('Y-m-d'); 
                                             }
@@ -88,8 +88,8 @@
                                         <label for="status">Status</label>
                                             <select class="form-control" name="status" id="status">
                                                 <option value="">Select Status</option>
-                                                <option value="Open">Open</option>
-                                                <option value="Close">Close</option>
+                                                <option value="Open"  <?php if($getallenquiryformitemadd[0]['pre_status']=='Open'){ echo 'selected';} ?>>Open</option>
+                                                <option value="Close" <?php if($getallenquiryformitemadd[0]['pre_status']=='Close'){ echo 'selected';} ?>>Close</option>
                                             </select>
                                         <p class="error status_error"></p>
                                     </div>
@@ -100,7 +100,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="remark">Remark</label>
-                                        <input type="remark" class="form-control" id="remark" name="remark" value="<?=$getomschallanitems[0]['pre_remark'] ?>">
+                                        <input type="remark" class="form-control" id="remark" name="remark" value="<?=$getallenquiryformitemadd[0]['pre_remark'] ?>">
                                         <p class="error remark_error"></p>
                                     </div>
                                 </div>
@@ -119,7 +119,8 @@
                                         <th scope="col">R.M Description</th>
                                         <th scope="col">Gross Weight</th>
                                         <th scope="col">RM Size</th>
-                                        <th scope="col">Qty</th>
+                                        <th scope="col">Supplier Qty (in kgs)</th>
+                                        <th scope="col">Vendor Qty (in pcs)</th>
                                         <th scope="col">Supplier Name</th>
                                         <th scope="col">Rate</th>
                                         <th scope="col">Supplier Name</th>
@@ -155,6 +156,32 @@
                                                 <td><?=$value['rm_description']?></td>
                                                 <td><?=$value['groass_weight']?></td>
                                                 <td><?=$value['rm_size']?></td>
+                                                <td><?=$value['supplier_qty_in_kgs']?></td>
+                                                <td><?=$value['venodr_qty_in_pcs']?></td>
+                                               
+                                                <td><?=$value['suplier_id_name_1']?></td>
+                                                <td><?=$value['suplier_rate_1']?></td>
+                                                <td><?=$value['suplier_id_name_2']?></td>
+                                                <td><?=$value['suplier_rate_2']?></td>
+                                                <td><?=$value['suplier_id_name_3']?></td>
+                                                <td><?=$value['suplier_rate_3']?></td>
+                                                <td><?=$value['suplier_id_name_4']?></td>
+                                                <td><?=$value['suplier_rate_4']?></td>
+                                                <td><?=$value['suplier_id_name_5']?></td>
+                                                <td><?=$value['suplier_rate_5']?></td>
+
+
+                                                <td><?=$value['vendor_name_1']?></td>
+                                                <td><?=$value['vendor_rate_1']?></td>
+                                                <td><?=$value['vendor_name_2']?></td>
+                                                <td><?=$value['vendor_rate_2']?></td>
+                                                <td><?=$value['vendor_name_3']?></td>
+                                                <td><?=$value['vendor_rate_3']?></td>
+                                                <td><?=$value['vendor_name_4']?></td>
+                                                <td><?=$value['vendor_rate_4']?></td>
+                                                <td><?=$value['vendor_name_5']?></td>
+                                                <td><?=$value['vendor_rate_5']?></td>
+
                                                 <td>
                                                    <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['omsid'];?>' class='fa fa-trash-o deleteOmschallnitem' aria-hidden='true'></i>
                                                 </td>
