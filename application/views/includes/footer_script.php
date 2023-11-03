@@ -1784,7 +1784,7 @@
 <?php if($pageTitle=='Supplier PO' || $pageTitle=='Add Supplier PO' || $pageTitle=="Edit Supplier PO"){ ?>
 	<script type="text/javascript">
      
-	   $(document).ready(function() {
+	    $(document).ready(function() {
             var dt = $('#view_supplierpo').DataTable({
 	            "columnDefs": [ 
 	                 { className: "details-control", "targets": [ 0 ] },
