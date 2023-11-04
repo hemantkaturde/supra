@@ -118,7 +118,7 @@
                                         <th scope="col">F.G. Description</th>
                                         <th scope="col">R.M Description</th>
                                         <th scope="col">Gross Weight</th>
-                                        <th scope="col">RM Size</th>
+                                        <th scope="col">Raw material grade</th>
                                         <th scope="col">Supplier Qty (in kgs)</th>
                                         <th scope="col">Vendor Qty (in pcs)</th>
                                         <th scope="col">Supplier Name</th>
@@ -262,7 +262,7 @@
                                     <p class="error gross_weight_error"></p>
                                 </div>
                                 <div class="form-group">
-                                    <label for="rm_size">RM Size</label>
+                                    <label for="rm_size">Raw material grade</label>
                                     <input type="text" class="form-control" id="rm_size" name="rm_size">
                                     <p class="error rm_size_error"></p>
                                 </div>
