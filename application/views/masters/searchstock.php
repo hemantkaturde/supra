@@ -63,7 +63,7 @@
 
             <div class="col-md-2">
                 <div class="form-group">
-                    <label for="stock_id_number">Stock Id Number</label>
+                    <label for="stock_id_number">Stock Date</label>
                     <input type="text" class="form-control" id="stock_id_number" name="stock_id_number" readonly>
                 </div>
             </div>  
