@@ -199,7 +199,7 @@
                         <li class="line_height <?php if($pageUrl=="exportdetails" || $pageUrl=="addnewExportDetails" || $pageUrl=="editexportdetails" || $pageUrl=="addExportdetailsitems" || $pageUrl=="viewexportdetails"){echo 'active';}?>"><a href="<?php echo base_url(); ?>exportdetails"><i class="fa fa-cubes"></i> Export Details</a></li>
                         <li class="line_height <?php if($pageUrl=="currentorderstatus"){echo 'active';}?>"><a href="<?php echo base_url(); ?>currentorderstatus"><i class="fa fa-cubes"></i> Current Order Status</a></li>
                         <li class="line_height <?php if($pageUrl=="qualityrecord" || $pageUrl=='addNewqualityrecord'){echo 'active';}?>"><a href="<?php echo base_url(); ?>qualityrecord"><i class="fa fa-cubes"></i> Quality Record</a></li>
-                        <li class="line_height <?php if($pageUrl=="stockform" || $pageUrl=='addNewstockform' || $pageUrl=='editstcokformdetails' ){echo 'active';}?>"><a href="<?php echo base_url(); ?>stockform"><i class="fa fa-cubes"></i> Stcok Form</a></li>
+                        <li class="line_height <?php if($pageUrl=="stockform" || $pageUrl=='addNewstockform' || $pageUrl=='editstcokformdetails' ){echo 'active';}?>"><a href="<?php echo base_url(); ?>stockform"><i class="fa fa-cubes"></i> Stock Form</a></li>
                         <li class="line_height <?php if($pageUrl=="searchstock"){echo 'active';}?>"><a href="<?php echo base_url(); ?>searchstock"><i class="fa fa-cubes"></i> Search Stock</a></li>
                       </ul>
                     </li>
