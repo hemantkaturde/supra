@@ -2574,7 +2574,7 @@
 									$('#description_2').val('');
 									$('#qty').val('');
 									$('#vendor_qty').val('');
-									$('#unit').val('');
+									//$('#unit').val('');
 									$('#rm_type').val('');
 
 								}
@@ -2598,7 +2598,7 @@
 										$('#vendor_qty').val();
 									}
 								
-									$('#unit').val(data_row_material.unit);
+									//$('#unit').val(data_row_material.unit);
 									$('#rm_type').val(data_row_material.type_of_raw_material);
 									
 
@@ -2616,7 +2616,7 @@
 									$('#description_2').val('');
 									$('#qty').val('');
 									$('#vendor_qty').val('');
-									$('#unit').val('');
+									//$('#unit').val('');
 									$('#rm_type').val('');
 								//$(".loader_ajax").hide();
 							}
