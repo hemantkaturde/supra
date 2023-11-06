@@ -5609,10 +5609,12 @@ class Admin_model extends CI_Model
         return $data;
     }
 
-    public function checkLotnumberisexitsadd($lot_no){
+    public function checkLotnumberisexitsadd($lot_no,$part_number,$po_number){
 
         $this->db->select(TBL_INCOMING_DETAILS_ITEM.'.id ');
         $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.lot_no', $lot_no);
+        $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.part_number', $part_number);
+        $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.pre_vendor_po_number', $po_number);
         $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id IS NULL');
         $query = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
         $data = $query->row_array();
