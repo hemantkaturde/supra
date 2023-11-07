@@ -27,8 +27,8 @@
                                     <div class="form-group">
                                         <label for="enquiry_number">Enquiry Number<span class="required">*</span></label>
                                         <?php
-                                            if($getpreviuousblasterId['enquiry_number']){
-                                                $arr = str_split($getpreviuousblasterId['enquiry_number']);
+                                            if($getpreviuousenquirynumber['enquiry_number']){
+                                                $arr = str_split($getpreviuousenquirynumber['enquiry_number']);
                                                 $i = end($arr);
                                                 $inrno= str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
                                                 $enquiry_number = $inrno;

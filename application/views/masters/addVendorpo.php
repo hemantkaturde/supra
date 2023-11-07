@@ -329,7 +329,7 @@
                                                         <td><?php echo $value['part_number'];?></td>
                                                         <td><?php echo $value['description'];?></td>
                                                         <td><?php echo $value['rm_type'];?></td>
-                                                        <td><?php echo $value['vendor_qty'];?></td>
+                                                        <td><?php echo $value['vendorpoitem_qty'];?></td>
                                                         <td><?php echo $value['order_oty'];?></td>
                                                         <td><?php echo $value['unit'];?></td>
                                                         <td><?php echo $value['rate'];?></td>

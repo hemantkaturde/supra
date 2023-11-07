@@ -8237,6 +8237,9 @@ class Admin extends BaseController
             $data['supplierList']= $this->admin_model->fetchALLsupplierList();
             $data['partNumberlistforenquirylist']= $this->admin_model->partNumberlistforenquirylist();
             $data['getallenquiryformitemadd']= $this->admin_model->getallenquiryformitemadd();
+
+            $data['getallenquiryformitemadd']= $this->admin_model->getallenquiryformitemadd();
+            
             $this->loadViews("masters/addNewenquiryform", $this->global, $data, NULL);
         }
     }
