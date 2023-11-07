@@ -310,8 +310,8 @@
                                                         <th>Part Number</th>
                                                         <th>Description</th>
                                                         <th>RM Type</th>
-                                                        <th>Vendor  Qty</th>
-                                                        <th>Order Qty</th>
+                                                        <!-- <th>Vendor  Qty</th> -->
+                                                        <th>(Vendor)Order Qty</th>
                                                         <th>Unit</th>
                                                         <th>Rate</th>
                                                         <th>Value</th>
@@ -329,7 +329,7 @@
                                                         <td><?php echo $value['part_number'];?></td>
                                                         <td><?php echo $value['description'];?></td>
                                                         <td><?php echo $value['rm_type'];?></td>
-                                                        <td><?php echo $value['vendorpoitem_qty'];?></td>
+                                                        <!-- <td><?php echo $value['vendorpoitem_qty'];?></td> -->
                                                         <td><?php echo $value['order_oty'];?></td>
                                                         <td><?php echo $value['unit'];?></td>
                                                         <td><?php echo $value['rate'];?></td>
