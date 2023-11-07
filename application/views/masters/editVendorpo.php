@@ -220,7 +220,7 @@
                                                         <th>Part Number</th>
                                                         <th>Description</th>
                                                         <th>RM Type</th>
-                                                        <th>Order Qty</th>
+                                                        <th>(Vendor)Order Qty</th>
                                                         <th>Unit</th>
                                                         <th>Rate</th>
                                                         <th>Value</th>
