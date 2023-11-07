@@ -5064,7 +5064,7 @@ class Admin_model extends CI_Model
 
     public function get_vendorpodata($vendor_po_id){
 
-        $this->db->select(TBL_VENDOR_PO_MASTER.'.date');
+        $this->db->select(TBL_VENDOR_PO_MASTER.'.date,'.TBL_VENDOR_PO_MASTER.'.supplier_po_number');
         $this->db->where(TBL_VENDOR_PO_MASTER.'.id', $vendor_po_id);
         $query = $this->db->get(TBL_VENDOR_PO_MASTER);
         $data = $query->result_array();
