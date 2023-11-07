@@ -160,7 +160,7 @@
                                                         <?php
                                                             $CI =& get_instance();
                                                             $CI->load->model('Admin_model');
-                                                            $result_previous_qty = $CI->Admin_model->getPreviousrecordforbalenceqtyedit($value['incoming_details_item_id'],$value['mainincoming']);
+                                                            $result_previous_qty = $CI->Admin_model->getPreviousrecordforbalenceqtyedit($value['incoming_details_item_id'],$value['mainincoming'],$value['part_number']);
                                                             $balence_qty = $value['p_o_qty'] -$invoice_qty;
 
                                                             if($count == 1){

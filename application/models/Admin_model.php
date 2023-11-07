@@ -3113,12 +3113,13 @@ class Admin_model extends CI_Model
 
     }
 
-    public function getPreviousrecordforbalenceqtyedit($incoming_details_item_id,$mainincoming){
+    public function getPreviousrecordforbalenceqtyedit($incoming_details_item_id,$mainincoming,$part_number){
         $this->db->select(TBL_INCOMING_DETAILS_ITEM.'.balance_qty as balance_qty');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_INCOMING_DETAILS_ITEM.'.pre_vendor_po_number');
         $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.id < ',$incoming_details_item_id);
         $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id',$mainincoming);
+        $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.part_number',$part_number);
         $this->db->order_by(TBL_INCOMING_DETAILS_ITEM.'.id','DESC');
         $this->db->limit('1');
         $query = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
