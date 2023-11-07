@@ -2098,8 +2098,8 @@ class Admin_model extends CI_Model
         $this->db->select('*');
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_VENDOR_PO_MASTER.'.buyer_name');
         $this->db->where(TBL_VENDOR_PO_MASTER.'.vendor_name', $supplier_name);
-        $this->db->where(TBL_VENDOR_PO_MASTER.'.supplier_name !=',"");
-        $this->db->where(TBL_VENDOR_PO_MASTER.'.supplier_po_number !=',"");
+        // $this->db->where(TBL_VENDOR_PO_MASTER.'.supplier_name !=',"");
+        // $this->db->where(TBL_VENDOR_PO_MASTER.'.supplier_po_number !=',"");
         $query = $this->db->get(TBL_VENDOR_PO_MASTER);
         $data = $query->result_array();
         return $data;
