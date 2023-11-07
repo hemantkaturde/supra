@@ -76,15 +76,7 @@
                                                 $po_number = 'SQPC23240001';
                                             }
 
-                                            
                                         }
-
-
-
-
-
-
-                                      
                                     ?>
                                     
                                     <div class="col-md-12">
@@ -137,7 +129,7 @@
                                     <div class="col-md-12 vendor_po_number_div" style="display:<?=$display;?>">
                                             <div class="form-group">
                                                     <label for="vendor_po_number">Select Vendor PO Number <span class="required">*</span></label>
-                                                    <select class="form-control vendor_name_for_buyer_name vendor_po_for_item" name="vendor_po_number" id="vendor_po_number">
+                                                    <select class="form-control vendor_name_for_buyer_name vendor_po_for_item vendor_po_get_data" name="vendor_po_number" id="vendor_po_number">
                                                     <option st-id="" value="<?=$fetchALLpreVendorpoconfirmationitemList[0]['pre_vendor_po_number']?>" selected ><?=$selected_value;?></option>
                                                         <!-- <option st-id="" value="">Select Buyer Name</option>
                                                         <?php foreach ($buyerList as $key => $value) {?>
@@ -148,6 +140,7 @@
                                             </div>
                                     </div>
 
+                                    <input type="text" class="form-control"  id="supplier_po_number" name="supplier_po_number">
 
 
                                     <div class="col-md-12">
@@ -247,7 +240,7 @@
                                                         <td><?php echo $value['gross_weight'];?></td>
                                                         <td><?php echo $value['expected_qty'];?></td>
                                                         <td>
-                                                        <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['vendoritemid'];?>' class='fa fa-trash-o deleteSupplierpoitem' aria-hidden='true'></i>
+                                                           <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['vendoritemid'];?>' class='fa fa-trash-o deleteSupplierpoitem' aria-hidden='true'></i>
                                                         </td>
                                                     </tr>
                                                     <?php endforeach;?>

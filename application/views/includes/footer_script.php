@@ -4357,6 +4357,38 @@
 			location.reload();
         });
 
+		$(document).on('change','.vendor_po_get_data',function(e){  
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			// $("#customers-list").html('');
+			var vendor_po_id = $('.vendor_po_get_data').val();
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>get_vendorpodata",
+				type: "POST",
+				data : {'vendor_po_id' : vendor_po_id},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#supplier_po_number').val('');
+					}
+					else
+					{
+						var get_vendorpodata = jQuery.parseJSON( data );
+						$('#supplier_po_number').val(get_vendorpodata.supplier_po_number);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#supplier_po_number').val('');
+				}
+			});
+			return false;
+		});
+
+
     </script>
 <?php } ?>
 
@@ -13733,9 +13765,7 @@
 			    }
 			   });
 			return false;
-	    });
+	     });
 
-
-		 
 	</script>
 <?php } ?>
