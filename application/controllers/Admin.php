@@ -5613,6 +5613,8 @@ class Admin extends BaseController
         $data['buyerList']= $this->admin_model->fetchAllbuyerList();
         $data['vendorList']= $this->admin_model->fetchALLvendorList();
         $data['getVendorpodetails']= $this->admin_model->getVendorpodetailsedit($vendorpoid);
+
+
         $data['fetchALLVendoritemlistforview']= $this->admin_model->fetchALLVendoritemlistforview($vendorpoid);
         $data['finishgoodList']= $this->admin_model->fetchALLFinishgoodList();
         $this->loadViews("masters/editVendorpo", $this->global, $data, NULL);
