@@ -2146,7 +2146,7 @@ class Admin_model extends CI_Model
     public function getVendoritemsonly($vendor_po_number){
 
         $this->db->select('*');
-        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+        // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
         $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
         $this->db->where(TBL_FINISHED_GOODS.'.status',1);
         //$this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
