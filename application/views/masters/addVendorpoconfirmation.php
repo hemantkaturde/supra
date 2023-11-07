@@ -140,8 +140,7 @@
                                             </div>
                                     </div>
 
-                                    <input type="text" class="form-control"  id="supplier_po_number" name="supplier_po_number">
-
+                                    <input type="hidden" class="form-control"  id="supplier_po_number" name="supplier_po_number">
 
                                     <div class="col-md-12">
                                         <div class="form-group">

@@ -4040,13 +4040,14 @@
 			e.preventDefault();
 			//$(".loader_ajax").show();
 			var vendor_po_number = $('#vendor_po_number').val();
+			var supplier_po_number = $('#supplier_po_number').val();
 
 			$("#part_number").html('');
 		
 			$.ajax({
 				url : "<?php echo ADMIN_PATH;?>getVendoritemonly",
 				type: "POST",
-				data : {'vendor_po_number' : vendor_po_number},
+				data : {'vendor_po_number' : vendor_po_number,'supplier_po_number':supplier_po_number},
 				success: function(data, textStatus, jqXHR)
 				{
 					$(".loader_ajax").hide();
