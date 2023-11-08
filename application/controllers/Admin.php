@@ -4789,7 +4789,9 @@ class Admin extends BaseController
                     }else{
 
                           
-                            $checkvendornameexits = $this->admin_model->checkvendorpoisaredayexits(trim($this->input->post('vendor_po_number')));
+                            // $checkvendornameexits = $this->admin_model->checkvendorpoisaredayexits(trim($this->input->post('vendor_po_number')));
+
+                            $checkvendornameexits = 0;
 
                             if($checkvendornameexits['vendor_ids'] > 0){
                                 $save_incoming_details['status'] = 'failure';
