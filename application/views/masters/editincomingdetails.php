@@ -171,7 +171,7 @@
                                                          ?>
 
 
-                                                        <td><?php echo $balence_qty_val;?></td>
+                                                        <td><?php echo $value['balance_qty'];?></td>
                                                         <td><?php echo $value['fg_material_gross_weight'];?></td>
                                                         <td><?php echo $value['units'];?></td>
                                                         <td><?php echo $value['boxex_goni_bundle'];?></td>
