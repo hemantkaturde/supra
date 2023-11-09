@@ -4958,6 +4958,16 @@ class Admin extends BaseController
                      }else{
 
 
+                            $get_previous_balenace_qty = $this->admin_model->get_previous_item_balenace_qty_edit(trim($this->input->post('part_number')),trim($this->input->post('incomingdetail_editid')));
+
+                            if($get_previous_balenace_qty){
+                                $balence_qty = $get_previous_balenace_qty[0]['balance_qty']-trim($this->input->post('invoice_qty'));
+                            }else{
+                                $balence_qty = trim($this->input->post('p_o_qty'))-trim($this->input->post('invoice_qty'));
+                            }
+
+
+
                             $data = array(
                                 'incoming_details_id' =>  $this->input->post('incomingdetail_editid'),
                                 'part_number'   => trim($this->input->post('part_number')),
@@ -4970,7 +4980,8 @@ class Admin extends BaseController
                                 'received_date' =>    trim($this->input->post('received_date')),
                                 'invoice_qty' =>    trim($this->input->post('invoice_qty')),
                                 'invoice_qty_in_kgs' =>    trim($this->input->post('invoice_qty_in_kgs')),
-                                'balance_qty' =>    trim($this->input->post('balance_qty')),
+                                // 'balance_qty' =>    trim($this->input->post('balance_qty')),
+                                'balance_qty' =>    $balence_qty,
                                 'fg_material_gross_weight' =>    trim($this->input->post('fg_material_gross_weight')),
                                 'units' =>    trim($this->input->post('units')),
                                 'boxex_goni_bundle' =>    trim($this->input->post('boxex_goni_bundle')),
