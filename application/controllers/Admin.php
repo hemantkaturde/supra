@@ -4948,7 +4948,7 @@ class Admin extends BaseController
                 if($this->input->post('incomingdetail_editid')){
 
                      /*Check Uniqe Validation in lot number*/
-                     $checkLotnumberisexits= $this->admin_model->checkLotnumberisexitsedit(trim($this->input->post('incomingdetail_editid')),trim($this->input->post('lot_no')));
+                     $checkLotnumberisexits= $this->admin_model->checkLotnumberisexitsedit(trim($this->input->post('incomingdetail_editid')),trim($this->input->post('lot_no')), trim($this->input->post('part_number')));
 
                      if($checkLotnumberisexits){
 

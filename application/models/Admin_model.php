@@ -5661,10 +5661,11 @@ class Admin_model extends CI_Model
 
     }
 
-    public function checkLotnumberisexitsedit($incomingdetail_editid,$lot_no){
+    public function checkLotnumberisexitsedit($incomingdetail_editid,$lot_no,$part_num){
 
         $this->db->select(TBL_INCOMING_DETAILS_ITEM.'.id ');
         $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.lot_no', $lot_no);
+        $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.part_number', $part_num);
         $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id',$incomingdetail_editid);
         $query = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
         $data = $query->row_array();
