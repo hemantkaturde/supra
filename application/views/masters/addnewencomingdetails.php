@@ -179,7 +179,7 @@
                                                         <td><?php echo $value['fg_material_gross_weight'];?></td>
                                                         <td><?php echo $value['units'];?></td>
                                                         <td><?php echo $value['boxex_goni_bundle'];?></td>
-                                                        <td><?php echo $value['lot_no'];?></td>
+                                                        <td><?php echo $value['part_number'].' - '.$value['lot_no'];?></td>
                                                         <td><?php echo $value['remarks'];?></td>
                                                         <td>
                                                         <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['incoming_details_item_id'];?>' class='fa fa-trash-o deleteIncomingDetailsitem' aria-hidden='true'></i>
