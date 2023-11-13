@@ -117,15 +117,15 @@
                                                         <th>FG Part No</th>
                                                         <th>Description</th>
                                                         <th>P.O.Qty (in Pcs)</th>
-                                                        <th>Net weight (in Kgs)</th>
-                                                        <th>Invoice No.</th>
-                                                        <th>Invoice Date.</th>
-                                                        <th>Challan No.</th>
-                                                        <th>Challan Date.</th>
-                                                        <th>Received Date</th>
                                                         <th>Invoice Qty (in Pcs)</th>
                                                         <th>Invoice Qty (in Kgs)</th>
                                                         <th>Balance Qty in Pcs</th>
+                                                        <th>Invoice No.</th>
+                                                        <th>Invoice Date.</th>
+                                                        <th>Net weight (in Kgs)</th>
+                                                        <th>Challan No.</th>
+                                                        <th>Challan Date.</th>
+                                                        <th>Received Date</th>
                                                         <th>FG Material Gross Weight</th>
                                                         <th>Units</th>
                                                         <th>No. of Boxes / Goni / Bundle</th>
@@ -148,24 +148,14 @@
                                                         <td><?php echo $value['part_number'];?></td>
                                                         <td><?php echo $value['name'];?></td>
                                                         <td><?php echo $value['p_o_qty'];?></td>
-                                                        <td><?php echo $value['net_weight'];?></td>
-                                                        <td><?php echo $value['invoice_no'];?></td>
-                                                        <td><?php echo $value['invoice_date'];?></td>
-                                                        <td><?php echo $value['challan_no'];?></td>
-                                                        <td><?php echo $value['challan_date'];?></td>
-                                                        <td><?php echo $value['received_date'];?></td>
                                                         <td><?php echo $value['invoice_qty'];?></td>
                                                         <td><?php echo $value['invoice_qty_in_kgs'];?></td>
-
                                                         <?php
                                                             $CI =& get_instance();
                                                             $CI->load->model('Admin_model');
                                                             $result_previous_qty = $CI->Admin_model->getPreviousrecordforbalenceqtyadd($value['incoming_details_item_id'],$value['part_number']);
-                                                        
                                                             
                                                             $balence_qty = $value['p_o_qty']  -$invoice_qty;
-
-                                                            
                                                             if($count == 1){
                                                                 $balence_qty_val =  $value['balance_qty'];
                                                             }else{
@@ -173,9 +163,13 @@
                                                             }
                                                          ?>
 
-
                                                         <td><?php echo $value['balance_qty'];?></td>
-
+                                                        <td><?php echo $value['invoice_no'];?></td>
+                                                        <td><?php echo $value['invoice_date'];?></td>
+                                                        <td><?php echo $value['net_weight'];?></td>
+                                                        <td><?php echo $value['challan_no'];?></td>
+                                                        <td><?php echo $value['challan_date'];?></td>
+                                                        <td><?php echo $value['received_date'];?></td>
                                                         <td><?php echo $value['fg_material_gross_weight'];?></td>
                                                         <td><?php echo $value['units'];?></td>
                                                         <td><?php echo $value['boxex_goni_bundle'];?></td>
