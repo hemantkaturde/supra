@@ -496,7 +496,7 @@
 
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Actual Scrap Received In kgs<span class="required">*</span></label>
+                                                        <label class="col-sm-4 col-form-label">Actual Scrap Received In kgs></label>
                                                         <div class="col-sm-8">
                                                             <input type="text" class="form-control"  id="actual_scrap_recived" name="actual_scrap_recived">
                                                             <p class="error actual_scrap_recived_error"></p>

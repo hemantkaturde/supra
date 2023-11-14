@@ -5357,7 +5357,7 @@ class Admin extends BaseController
             $this->form_validation->set_rules('total_net_weight','Total Net Weight','trim|required');
             $this->form_validation->set_rules('short_access','Short Access','trim|required');
             $this->form_validation->set_rules('scrap','Scrap','trim|required');
-            $this->form_validation->set_rules('actual_scrap_recived','Actual Scrap Recived','trim|required');
+            $this->form_validation->set_rules('actual_scrap_recived','Actual Scrap Recived','trim');
             $this->form_validation->set_rules('item_remark','Item Remark','trim');
 
 
