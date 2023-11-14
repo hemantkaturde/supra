@@ -6143,7 +6143,6 @@ class Admin_model extends CI_Model
 
     }
 
-
     public function update_enquiry_from_id_in_items($enquiry_form_id){
 
         $data = array(
@@ -6156,6 +6155,17 @@ class Admin_model extends CI_Model
             return FALSE;
         }
 
+    }
+
+    public function fetchALLvendorListwithsupplier(){
+        $this->db->select(TBL_VENDOR.'.ven_id,'.TBL_VENDOR.'.vendor_name');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.vendor_name = '.TBL_VENDOR.'.ven_id');
+        $this->db->where(TBL_VENDOR.'.status', 1);
+        $this->db->where(TBL_VENDOR_PO_MASTER.'.supplier_name IS NOT NULL');
+        $this->db->where(TBL_VENDOR_PO_MASTER.'.supplier_po_number IS NOT NULL');
+        $query = $this->db->get(TBL_VENDOR);
+        $data = $query->result_array();
+        return $data;
     }
 
 }
