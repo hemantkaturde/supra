@@ -4276,7 +4276,7 @@ class Admin extends BaseController
             $data['getPreviousBomnumber']= $this->admin_model->getPreviousBomnumbervendor()[0];
             $data['fetchALLpreVendorpoitemList']= $this->admin_model->fetchALLpreVendorpoitemList();
             $data['buyerList']= $this->admin_model->fetchAllbuyerList();
-            $data['vendorList']= $this->admin_model->fetchALLvendorList();
+            $data['vendorList']= $this->admin_model->fetchALLvendorListwithoutsupplier();
             $data['incoming_details']= $this->admin_model->fetchAllincomingdetailsList();
             $this->loadViews("masters/addvendorBillofmaterial", $this->global, $data, NULL);
 
