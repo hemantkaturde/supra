@@ -7186,6 +7186,9 @@
 		$(document).on('click','.deleteIncomingDetailsitem',function(e){
 			var elemF = $(this);
 			e.preventDefault();
+
+			var incomingdetail_editid  =   $('#incomingdetail_editid').val();
+
 			swal({
 				title: "Are you sure?",
 				text: "Delete Incoming Details Item ",
@@ -7214,7 +7217,12 @@
 											icon: "success",
 											button: "Ok",
 											},function(){ 
+
+												if(incomingdetail_editid){
+													window.location.href = "<?php echo base_url().'editincomingdetails/'?>"+incomingdetail_editid;
+												}else{
 													window.location.href = "<?php echo base_url().'addnewencomingdetails'?>";
+												}
 										});	
 									}
 
