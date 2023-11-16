@@ -114,6 +114,7 @@
                                                         <th>Sr No.</th>
                                                         <th>FG Part No</th>
                                                         <th>Description</th>
+                                                        <th>Lot Number</th>
                                                         <th>P.O.Qty (in Pcs)</th>
                                                         <th>Invoice Qty (in Pcs)</th>
                                                         <th>Invoice Qty (in Kgs)</th>
@@ -127,7 +128,6 @@
                                                         <th>FG Material Gross Weight</th>
                                                         <th>Units</th>
                                                         <th>No. of Boxes / Goni / Bundle</th>
-                                                        <th>Lot Number</th>
                                                         <th>Remarks</th>
                                                         <th>Action</th>
                                                     </tr>
@@ -146,6 +146,7 @@
                                                         <td><?php echo $count;?></td>
                                                         <td><?php echo $value['part_number'];?></td>
                                                         <td><?php echo $value['name'];?></td>
+                                                        <td><?php echo $value['part_number'].' - '.$value['lot_no'];?></td>
                                                         <td><?php echo $value['p_o_qty'];?></td>
                                                         <td><?php echo $value['invoice_qty'];?></td>
                                                         <td><?php echo $value['invoice_qty_in_kgs'];?></td>
@@ -176,7 +177,7 @@
                                                         <td><?php echo $value['fg_material_gross_weight'];?></td>
                                                         <td><?php echo $value['units'];?></td>
                                                         <td><?php echo $value['boxex_goni_bundle'];?></td>
-                                                        <td><?php echo $value['part_number'].' - '.$value['lot_no'];?></td>
+                                                       
                                                         <td><?php echo $value['remarks'];?></td>
                                                         <td>
                                                         <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['incoming_details_item_id'];?>' class='fa fa-trash-o deleteIncomingDetailsitem' aria-hidden='true'></i>
