@@ -294,7 +294,7 @@
                                                         <td><?php echo $count;?></td>
                                                         <td><?php echo $value['part_number'];?></td>
                                                         <td><?php echo $value['description'];?></td>
-                                                        <td><?php echo $value['order_oty'];?></td>
+                                                        <td><?php echo $value['rmsupplier_order_qty'];?></td>
                                                         <td><?php echo $value['rm_actual_aty'];?></td>
                                                         <td><?php echo $value['type_of_raw_material'];?></td>
                                                         <td><?php echo $value['sitting_size'];?></td>
