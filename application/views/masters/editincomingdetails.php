@@ -117,8 +117,8 @@
                                                         <th>Lot Number</th>
                                                         <th>P.O.Qty (in Pcs)</th>
                                                         <th>Invoice Qty (in Pcs)</th>
-                                                        <th>Invoice Qty (in Kgs)</th>
                                                         <th>Balance Qty in Pcs</th>
+                                                        <th>Invoice Qty (in Kgs)</th>
                                                         <th>Invoice No.</th>
                                                         <th>Invoice Date.</th>
                                                         <th>Net weight (in Kgs)</th>
@@ -149,7 +149,7 @@
                                                         <td><?php echo $value['part_number'].' - '.$value['lot_no'];?></td>
                                                         <td><?php echo $value['p_o_qty'];?></td>
                                                         <td><?php echo $value['invoice_qty'];?></td>
-                                                        <td><?php echo $value['invoice_qty_in_kgs'];?></td>
+                                                       
 
 
                                                         <?php
@@ -167,7 +167,7 @@
 
 
                                                         <td><?php echo $value['balance_qty'];?></td>
-                                                     
+                                                        <td><?php echo $value['invoice_qty_in_kgs'];?></td>
                                                         <td><?php echo $value['invoice_no'];?></td>
                                                         <td><?php echo $value['invoice_date'];?></td>
                                                         <td><?php echo $value['net_weight'];?></td>

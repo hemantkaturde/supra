@@ -161,7 +161,7 @@
                                                         <td><?php echo $value['part_number'].' - '.$value['lot_no'];?></td>
                                                         <td><?php echo $value['p_o_qty'];?></td>
                                                         <td><?php echo $value['invoice_qty'];?></td>
-                                                        <td><?php echo $value['invoice_qty_in_kgs'];?></td>
+                                                       
                                                         <?php
                                                             $CI =& get_instance();
                                                             $CI->load->model('Admin_model');
@@ -176,6 +176,7 @@
                                                          ?>
 
                                                         <td><?php echo $value['balance_qty'];?></td>
+                                                        <td><?php echo $value['invoice_qty_in_kgs'];?></td>
                                                         <td><?php echo $value['invoice_no'];?></td>
                                                         <td><?php echo $value['invoice_date'];?></td>
                                                         <td><?php echo $value['net_weight'];?></td>
