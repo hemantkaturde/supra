@@ -130,8 +130,8 @@
                                                         <th>Lot Number</th>
                                                         <th>P.O.Qty (in Pcs)</th>
                                                         <th>Invoice Qty (in Pcs)</th>
-                                                        <th>Invoice Qty (in Kgs)</th>
                                                         <th>Balance Qty in Pcs</th>
+                                                        <th>Invoice Qty (in Kgs)</th>
                                                         <th>Invoice No.</th>
                                                         <th>Invoice Date.</th>
                                                         <th>Net weight (in Kgs)</th>
