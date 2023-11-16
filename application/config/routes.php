@@ -137,6 +137,7 @@ $route['supplierpoconfirmation'] = "admin/supplierpoconfirmation";
 $route['addSupplierpoconfirmation'] = "admin/addSupplierpoconfirmation";
 $route['fetchSupplierpoconfirmationlist'] = "admin/fetchSupplierpoconfirmationlist";
 $route['getSupplierPonumberbySupplierid'] = "admin/getSupplierPonumberbySupplierid";
+$route['editSupplierpoconfirmation/(:any)'] = "admin/editSupplierpoconfirmation/$1";
 $route['getSupplierItemsforDisplay'] = "admin/getSupplierItemsforDisplay";
 $route['deleteSupplierPoconfirmation'] = "admin/deleteSupplierPoconfirmation";
 $route['getRowmaterialPartnumberByid'] = "admin/getRowmaterialPartnumberByid";

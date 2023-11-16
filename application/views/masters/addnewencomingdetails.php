@@ -109,7 +109,18 @@
 
                                 <div class="col-md-6">
                                     <div class="container">
-                                        <button type="button" class="btn btn-success btn-xl" data-toggle="modal" data-target="#addNewModal">Add New Items</button><br/><br/>
+                                        <button type="button" class="btn btn-success btn-xl" data-toggle="modal" data-target="#addNewModal">Add New Items</button>
+                                        <label for="remark">Item List</label>
+
+                                        <select name="cars" id="cars" >
+                                            <?php foreach ($getAllitemdetails as $key => $getAllitemdetails_val) {?>        
+                                                <option value="<?php echo $getAllitemdetails_val['fin_id']; ?>"><?php echo $getAllitemdetails_val['part_number']; ?></option>
+                                            <?php } ?>
+                                        </select>
+                                                                            
+                                      
+
+                                        <br/><br/>
                                             <table class="table table-bordered" style="max-width: 68%;display: block;overflow-x: auto; white-space: nowrap;">
                                                 <thead style="background-color:#3c8dbc;color:#fff">
                                                     <tr>

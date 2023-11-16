@@ -3254,7 +3254,7 @@
 <?php } ?>
 
 
-<?php  if($pageTitle=='Supplier PO Confirmation' || $pageTitle=='Add Supplier PO Confirmation'){ ?>
+<?php  if($pageTitle=='Supplier PO Confirmation' || $pageTitle=='Add Supplier PO Confirmation' || $pageTitle=='Edit Vendor PO'){ ?>
 	<script type="text/javascript">
 		$(document).ready(function() {
             var dt = $('#view_supplierpoconfirmation').DataTable({
@@ -3352,6 +3352,40 @@
 			});
 			return false;
 		});
+
+
+		$( document ).ready(function() {
+
+			var supplier_po_number = $('.supplier_po_number_for_item').val();
+			var flag = 'Supplier';
+			$("#part_number").html('');
+		
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getSuppliritemonly",
+				type: "POST",
+				data : {'supplier_po_number' : supplier_po_number,'flag':flag},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#part_number').html('<option value="">Select Part Number</option>');
+					}
+					else
+					{
+						$('#part_number').html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#part_number').html();
+				}
+			});
+			return false;
+
+        });
+
 
 		$(document).on('change','#supplier_name',function(e){  
 			e.preventDefault();
@@ -3746,6 +3780,7 @@
 
 			   var vendor_id =   $('#vendor_id').val();
 
+			   var supplierpoconfirmation_id =   $('#supplierpoconfirmation_id').val();
 			  
 			   
 								 
@@ -3753,7 +3788,7 @@
 				url : "<?php echo base_url();?>addSupplierpoConfirmationitem",
 				type: "POST",
 				 //data : formData,
-				 data :{part_number:part_number,description:description,qty:qty,rate:rate,value:value,unit:unit,vendor_qty:vendor_qty,item_remark:item_remark,pre_date:pre_date,pre_supplier_name:pre_supplier_name,pre_supplier_po_number:pre_supplier_po_number,pre_buyer_name:pre_buyer_name,pre_buyer_po_number:pre_buyer_po_number,pre_po_confirmed:pre_po_confirmed,pre_confirmed_date:pre_confirmed_date,pre_confirmed_with:pre_confirmed_with,pre_remark:pre_remark,short_excess:short_excess,sent_qty:sent_qty,sent_qty_pcs:sent_qty_pcs,vendor_id:vendor_id},
+				 data :{part_number:part_number,description:description,qty:qty,rate:rate,value:value,unit:unit,vendor_qty:vendor_qty,item_remark:item_remark,pre_date:pre_date,pre_supplier_name:pre_supplier_name,pre_supplier_po_number:pre_supplier_po_number,pre_buyer_name:pre_buyer_name,pre_buyer_po_number:pre_buyer_po_number,pre_po_confirmed:pre_po_confirmed,pre_confirmed_date:pre_confirmed_date,pre_confirmed_with:pre_confirmed_with,pre_remark:pre_remark,short_excess:short_excess,sent_qty:sent_qty,sent_qty_pcs:sent_qty_pcs,vendor_id:vendor_id,supplierpoconfirmation_id:supplierpoconfirmation_id},
 				// method: "POST",
                 // data :{package_id:package_id},
                 cache:false,
@@ -3770,13 +3805,19 @@
 				    }
 					else if(fetchResponse.status == 'success')
 				    {
+						
 						swal({
 							title: "Success",
 							text: "Item Successfully Added!",
 							icon: "success",
 							button: "Ok",
 							},function(){ 
-								window.location.href = "<?php echo base_url().'addSupplierpoconfirmation'?>";
+								if(supplierpoconfirmation_id){
+									window.location.href = "<?php echo base_url().'editSupplierpoconfirmation/'?>"+supplierpoconfirmation_id;
+								}else{
+									window.location.href = "<?php echo base_url().'addSupplierpoconfirmation'?>";
+								}
+								
 						});		
 				    }
 					
@@ -3792,6 +3833,9 @@
 		$(document).on('click','.deleteSupplierpoitem',function(e){
 			var elemF = $(this);
 			e.preventDefault();
+
+			var supplierpoconfirmation_id =   $('#supplierpoconfirmation_id').val();
+
 			swal({
 				title: "Are you sure?",
 				text: "Delete Supplier PO Confirmation Item ",
@@ -3820,7 +3864,11 @@
 											icon: "success",
 											button: "Ok",
 											},function(){ 
-												window.location.href = "<?php echo base_url().'addSupplierpoconfirmation'?>";
+												if(supplierpoconfirmation_id){
+													window.location.href = "<?php echo base_url().'editSupplierpoconfirmation/'?>"+supplierpoconfirmation_id;
+												}else{
+													window.location.href = "<?php echo base_url().'addSupplierpoconfirmation'?>";
+												}
 										});	
 									}
 

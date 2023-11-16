@@ -1777,7 +1777,9 @@ class Admin_model extends CI_Model
                 $data[$counter]['confirmed_date'] = $value['confirmed_date'];
                 $data[$counter]['confirmed_with'] = $value['confirmed_with'];
                 $data[$counter]['action'] = '';
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewSupplierpoconfirmation/".$value['id']."' style='cursor: pointer;'><i style='font-size: large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
+               // $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewSupplierpoconfirmation/".$value['id']."' style='cursor: pointer;'><i style='font-size: large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editSupplierpoconfirmation/".$value['id']."' style='cursor: pointer;'><i style='font-size: large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['id']."' class='fa fa-trash-o deleteSupplierPoconfirmation' aria-hidden='true'></i>"; 
                 $counter++; 
             }
@@ -1831,7 +1833,7 @@ class Admin_model extends CI_Model
             // return $data;
 
 
-            $this->db->select('*');
+            $this->db->select('*,'.TBL_RAWMATERIAL.'.raw_id as item_id');
             // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
             $this->db->join(TBL_SUPPLIER_PO_MASTER_ITEM, TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id = '.TBL_RAWMATERIAL.'.raw_id');
             // $this->db->where(TBL_FINISHED_GOODS.'.status',1);
@@ -1857,7 +1859,7 @@ class Admin_model extends CI_Model
             // return $data;
 
 
-            $this->db->select('*');
+            $this->db->select('*,'.TBL_FINISHED_GOODS.'fin_id as item_id');
             // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
             $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
             $this->db->where(TBL_FINISHED_GOODS.'.status',1);
@@ -1994,7 +1996,7 @@ class Admin_model extends CI_Model
 
     public function fetchALLSupplierPOitemsforview($supplierpoconfirmationid){
 
-        $this->db->select('*');
+        $this->db->select('*,'.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.id as supplier_po_itemid');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.part_number_id');
         $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.pre_supplier_po_number');
         //$this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.pre_buyer_po_number');
@@ -2086,7 +2088,8 @@ class Admin_model extends CI_Model
 
     public function getSupplierpoconfirmationdetails($supplierpoconfirmationid){
 
-        $this->db->select('*');
+        $this->db->select('*,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_po');
+        $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_SUPPLIER_PO_CONFIRMATION.'.supplier_po_number');
         $this->db->where(TBL_SUPPLIER_PO_CONFIRMATION.'.id', $supplierpoconfirmationid);
         $query = $this->db->get(TBL_SUPPLIER_PO_CONFIRMATION);
         $data = $query->result_array();

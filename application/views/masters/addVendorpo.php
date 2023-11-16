@@ -375,7 +375,7 @@
                                                             <select class="form-control" name="part_number" id="part_number">
                                                                 <option st-id="" value="">Select Part Number</option>
                                                                 <!-- <?php foreach ($finishgoodList as $key => $value) {?>        
-                                                                    <option value="<?php echo $value['fin_id']; ?>"><?php echo $value['part_number']; ?></option>
+                                                                    <option value="<?php echo $value['item_id']; ?>"><?php echo $value['part_number']; ?></option>
                                                                 <?php } ?> -->
                                                             </select>
                                                             <p class="error part_number_error"></p>
