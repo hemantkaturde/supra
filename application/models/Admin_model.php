@@ -2062,7 +2062,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['confirmed_date'] = $value['confirmed_date'];
                 $data[$counter]['confirmed_with'] = $value['confirmed_with'];
                 $data[$counter]['action'] = '';
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewSupplierpoconfirmation/".$value['id']."' style='cursor: pointer;'><i style='font-size: large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editvendorpoconfirmation/".$value['id']."' style='cursor: pointer;'><i style='font-size: large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['id']."' class='fa fa-trash-o deleteVendorPoconfirmation' aria-hidden='true'></i>"; 
                 $counter++; 
             }
@@ -2196,13 +2196,29 @@ class Admin_model extends CI_Model
 
     public function fetchALLpreVendorpoconfirmationitemList(){
 
-        $this->db->select('*,'.TBL_BUYER_MASTER.'.buyer_name as buyer_name_master,'.TBL_VENDOR_PO_CONFIRMATION_ITEM.'.id as vendoritemid');
+        $this->db->select('*,'.TBL_BUYER_MASTER.'.buyer_name as buyer_name_master,'.TBL_VENDOR_PO_CONFIRMATION_ITEM.'.id as vendoritemid,'.TBL_VENDOR_PO_CONFIRMATION_ITEM.'.pre_remark as remark_vendor_po_confrimation');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_CONFIRMATION_ITEM.'.part_number_id');
         //$this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.pre_supplier_po_number');
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_VENDOR_PO_CONFIRMATION_ITEM.'.pre_buyer_name');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_VENDOR_PO_CONFIRMATION_ITEM.'.pre_vendor_po_number');
 
         $this->db->where(TBL_VENDOR_PO_CONFIRMATION_ITEM.'.vendor_po_confirmation_id IS NULL');
+        $this->db->order_by(TBL_VENDOR_PO_CONFIRMATION_ITEM.'.id','desc');
+        $query = $this->db->get(TBL_VENDOR_PO_CONFIRMATION_ITEM);
+        $data = $query->result_array();
+        return $data;
+
+    }
+
+
+    public function fetchALLpreVendorpoconfirmationitemListedit($vendor_po_confirmation_id){
+
+        $this->db->select('*,'.TBL_BUYER_MASTER.'.buyer_name as buyer_name_master,'.TBL_VENDOR_PO_CONFIRMATION_ITEM.'.id as vendoritemid');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_CONFIRMATION_ITEM.'.part_number_id');
+        //$this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.pre_supplier_po_number');
+        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_VENDOR_PO_CONFIRMATION_ITEM.'.pre_buyer_name');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_VENDOR_PO_CONFIRMATION_ITEM.'.pre_vendor_po_number');
+        $this->db->where(TBL_VENDOR_PO_CONFIRMATION_ITEM.'.vendor_po_confirmation_id',$vendor_po_confirmation_id);
         $this->db->order_by(TBL_VENDOR_PO_CONFIRMATION_ITEM.'.id','desc');
         $query = $this->db->get(TBL_VENDOR_PO_CONFIRMATION_ITEM);
         $data = $query->result_array();
@@ -6188,6 +6204,19 @@ class Admin_model extends CI_Model
         return $data;
     }
 
+
+    public function getVendorpoconfirmationdetails($vendor_po_confirmation_id){
+        $this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_VENDOR_PO_CONFIRMATION.'.vendor_name as vendor_name_id,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_master_no,'.TBL_VENDOR_PO_CONFIRMATION.'.buyer_name as buyer_id,'.TBL_BUYER_MASTER.'.buyer_name as buyer_name_master,'.TBL_VENDOR_PO_CONFIRMATION.'.remark as remark_master,'.TBL_VENDOR_PO_CONFIRMATION.'.vendor_po_number as vendor_po_');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_VENDOR_PO_CONFIRMATION.'.vendor_po_number');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_VENDOR_PO_MASTER.'.vendor_name');
+
+        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_VENDOR_PO_CONFIRMATION.'.buyer_name');
+
+        $this->db->where(TBL_VENDOR_PO_CONFIRMATION.'.id',$vendor_po_confirmation_id);
+        $query = $this->db->get(TBL_VENDOR_PO_CONFIRMATION);
+        $data = $query->result_array();
+        return $data;
+    }
 
 }
 

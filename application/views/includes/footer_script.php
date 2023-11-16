@@ -3941,7 +3941,7 @@
 <?php } ?>
 
 
-<?php  if($pageTitle=='Vendor PO Confirmation' || $pageTitle=='Add Vendor PO Confirmation'){ ?>
+<?php  if($pageTitle=='Vendor PO Confirmation' || $pageTitle=='Add Vendor PO Confirmation' || $pageTitle=='Edit Vendor PO Confirmation'){ ?>
 	<script type="text/javascript">
         $(document).ready(function() {
             var dt = $('#view_vendorpoconfirmation').DataTable({
@@ -3973,6 +3973,37 @@
 	            },
 	        });
 	    });
+
+		$(document).ready(function() {
+			var vendor_po_number = $('#vendor_po_number').val();
+			var supplier_po_number = $('#supplier_po_number').val();
+
+			$("#part_number").html('');
+		
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getVendoritemonly",
+				type: "POST",
+				data : {'vendor_po_number' : vendor_po_number,'supplier_po_number':supplier_po_number},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#part_number').html('<option value="">Select Part Number</option>');
+					}
+					else
+					{
+						$('#part_number').html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#part_number').html();
+				}
+			});
+			return false;
+		});
 
 		$(document).on('change','#vendor_name',function(e){  
 			e.preventDefault();
@@ -4265,12 +4296,13 @@
 			   var pre_date =   $('#date').val();
 			   
 
+			   var venodr_po_confirmation_id =   $('#venodr_po_confirmation_id').val();
 								 
 			$.ajax({
 				url : "<?php echo base_url();?>saveVendorconfromationpoitem",
 				type: "POST",
 				 //data : formData,
-				 data :{part_number:part_number,description:description,vendor_qty:vendor_qty,qty:qty,rmqty:rmqty,finishedgoodqty:finishedgoodqty,gross_weight:gross_weight,expected_qty:expected_qty,item_remark:item_remark,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_buyer_name:pre_buyer_name,pre_po_confirmed:pre_po_confirmed,pre_confirmed_date:pre_confirmed_date,pre_confirmed_with:pre_confirmed_with,pre_remark:pre_remark,pre_date:pre_date},
+				 data :{part_number:part_number,description:description,vendor_qty:vendor_qty,qty:qty,rmqty:rmqty,finishedgoodqty:finishedgoodqty,gross_weight:gross_weight,expected_qty:expected_qty,item_remark:item_remark,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_buyer_name:pre_buyer_name,pre_po_confirmed:pre_po_confirmed,pre_confirmed_date:pre_confirmed_date,pre_confirmed_with:pre_confirmed_with,pre_remark:pre_remark,pre_date:pre_date,venodr_po_confirmation_id:venodr_po_confirmation_id},
 				// method: "POST",
                 // data :{package_id:package_id},
                 cache:false,
@@ -4293,7 +4325,11 @@
 							icon: "success",
 							button: "Ok",
 							},function(){ 
-								window.location.href = "<?php echo base_url().'addVendorpoconfirmation'?>";
+								if(venodr_po_confirmation_id){
+									window.location.href = "<?php echo base_url().'editvendorpoconfirmation/'?>"+venodr_po_confirmation_id;
+								}else{
+									window.location.href = "<?php echo base_url().'addVendorpoconfirmation'?>";
+								}
 						});		
 				    }
 					
@@ -4306,9 +4342,12 @@
 			return false;
 	    });
 
-		$(document).on('click','.deleteSupplierpoitem',function(e){
+		$(document).on('click','.deletevendorpoitem',function(e){
 			var elemF = $(this);
 			e.preventDefault();
+
+			var venodr_po_confirmation_id = $('#venodr_po_confirmation_id').val();
+
 			swal({
 				title: "Are you sure?",
 				text: "Delete Vendor PO Confirmation Item ",
@@ -4337,7 +4376,13 @@
 											icon: "success",
 											button: "Ok",
 											},function(){ 
-												window.location.href = "<?php echo base_url().'addVendorpoconfirmation'?>";
+
+												if(venodr_po_confirmation_id){
+													window.location.href = "<?php echo base_url().'editvendorpoconfirmation/'?>"+venodr_po_confirmation_id;
+												}else{
+													window.location.href = "<?php echo base_url().'addVendorpoconfirmation'?>";
+												}
+												
 										});	
 									}
 

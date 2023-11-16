@@ -6,7 +6,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            <i class="fa fa-users"></i> Add New Vendor PO Confirmation
+            <i class="fa fa-users"></i>  Edit Vendor PO Confirmation
             <small>
                 <ul class="breadcrumb" style="background-color:#ecf0f5 !important">
                     <li class="completed"><a href="javascript:void(0);">Masters</a></li>
@@ -22,82 +22,28 @@
                 <div class="box">
                     <div class="box box-primary">
                         <div class="box-header">
-                            <h3 class="box-title">Add Vendor PO Confirmation Details</h3>
+                            <h3 class="box-title">Edit Vendor PO Confirmation Details</h3>
                         </div>
                         <?php $this->load->helper("form"); ?>
                         <form role="form" id="addnnewvendorconfrimationpoform" action="<?php echo base_url() ?>addnnewvendorconfrimationpoform" method="post" role="form">
                             <div class="box-body">
                                 <div class="col-md-4">
-
-                                    <?php
-
-
-                                        if($getPreviousSupplierPoconfirmationNumber['po_number']){
+  
+                                <input type="hidden" class="form-control" id="venodr_po_confirmation_id" name="venodr_po_confirmation_id" value="<?=$venodr_po_confirmation_id?>" required readonly>
 
 
-                                            $getPreviousSupplierPoconfirmationNumber_number = substr($getPreviousSupplierPoconfirmationNumber['po_number'], -1);
-
-                                            $getPreviousVendorPoconfirmationNumber_number = substr($getPreviousVendorPoconfirmationNumber['po_number'], -1);
-
-                                            if($getPreviousSupplierPoconfirmationNumber_number > $getPreviousVendorPoconfirmationNumber_number){
-
-
-                                                if($getPreviousSupplierPoconfirmationNumber_number){
-                                                    $arr = str_split($getPreviousSupplierPoconfirmationNumber_number);
-                                                    $i = end($arr);
-                                                    $inrno= "SQPO2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
-                                                    $po_number = $inrno;
-                                                }else{
-                                                    $po_number = 'SQPO23240001';
-                                                }   
-
-
-                                            }else{
-
-                                                if($getPreviousVendorPoconfirmationNumber_number){
-                                                    $arr = str_split($getPreviousVendorPoconfirmationNumber_number);
-                                                    $i = end($arr);
-                                                    $inrno= "SQPO2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
-                                                    $po_number = $inrno;
-                                                }else{
-                                                    $po_number = 'SQPO23240001';
-                                                } 
-
-                                            }
-
-
-                                        }else{
-                                            if($getPreviousVendorPoconfirmationNumber['po_number']){
-                                                $arr = str_split($getPreviousVendorPoconfirmationNumber['po_number']);
-                                                $i = end($arr);
-                                                $inrno= "SQPC2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
-                                                $po_number = $inrno;
-                                            }else{
-                                                $po_number = 'SQPC23240001';
-                                            }
-
-                                        }
-                                    ?>
-                                    
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="po_number">PO Confirmation Number<span class="required">*</span></label>
-                                            <input type="text" class="form-control" id="po_number" name="po_number" value="<?=$po_number?>" required readonly>
+                                            <input type="text" class="form-control" id="po_number" name="po_number" value="<?=$getVendorpoconfirmationdetails[0]['po_number']?>" required readonly>
                                             <p class="error po_number_error"></p>
                                         </div>
                                     </div>
 
-
-                                    <?php if($fetchALLpreVendorpoconfirmationitemList[0]['pre_date']){
-                                        $date= $fetchALLpreVendorpoconfirmationitemList[0]['pre_date'];
-                                     }else{
-                                        $date= date('Y-m-d');
-                                     } ?>
-
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="date">Date <span class="required">*</span></label>
-                                            <input type="text" class="form-control datepicker"  value="<?=$date?>" id="date" name="date" required>
+                                            <input type="text" class="form-control datepicker"  value="<?=$getVendorpoconfirmationdetails[0]['date']?>" id="date" name="date" required>
                                             <p class="error date_error"></p>
                                         </div>
                                     </div>
@@ -109,32 +55,20 @@
                                                 <select class="form-control " name="vendor_name" id="vendor_name">
                                                     <option st-id="" value="">Select Vendor Name</option>
                                                     <?php foreach ($vendorList as $key => $value) {?>
-                                                    <option value="<?php echo $value['ven_id']; ?>" <?php if($value['ven_id']==$fetchALLpreVendorpoconfirmationitemList[0]['pre_vendor_name']){ echo 'selected';} ?>><?php echo $value['vendor_name']; ?></option>
+                                                    <option value="<?php echo $value['ven_id']; ?>" <?php if($value['ven_id']==$getVendorpoconfirmationdetails[0]['vendor_name_id']){ echo 'selected';} ?>><?php echo $value['vendor_name']; ?></option>
                                                     <?php } ?>
                                                 </select>
                                             <p class="error vendor_name_error"></p>
                                         </div>
                                     </div>
 
-
-                                    <?php if($fetchALLpreVendorpoconfirmationitemList[0]['pre_vendor_po_number']){
-                                        $display='block';
-                                        $selected_value = $fetchALLpreVendorpoconfirmationitemList[0]['po_number'];
-
-                                    }else{
-                                        $display='none';
-                                        $selected_value = 'Select Buyer PO Number';
-                                    } ?>
-
-                                    <div class="col-md-12 vendor_po_number_div" style="display:<?=$display;?>">
+                                
+                                    <div class="col-md-12 vendor_po_number_div">
                                             <div class="form-group">
                                                     <label for="vendor_po_number">Select Vendor PO Number <span class="required">*</span></label>
                                                     <select class="form-control vendor_name_for_buyer_name vendor_po_for_item vendor_po_get_data" name="vendor_po_number" id="vendor_po_number">
-                                                    <option st-id="" value="<?=$fetchALLpreVendorpoconfirmationitemList[0]['pre_vendor_po_number']?>" selected ><?=$selected_value;?></option>
-                                                        <!-- <option st-id="" value="">Select Buyer Name</option>
-                                                        <?php foreach ($buyerList as $key => $value) {?>
-                                                        <option value="<?php echo $value['buyer_id']; ?>" <?php if($value['buyer_id']==$fetchALLpresupplierpoconfirmationitemList[0]['pre_vendor_po_number']){ echo 'selected';} ?> ><?php echo $value['buyer_name']; ?></option>
-                                                        <?php } ?> -->
+                                                        <option value="">Select Vendor PO Number</option>
+                                                        <option value="<?php echo $getVendorpoconfirmationdetails[0]['vendor_po_']; ?>" <?php if($getVendorpoconfirmationdetails[0]['vendor_po_master_no']){ echo 'selected';} ?> ><?php echo $getVendorpoconfirmationdetails[0]['vendor_po_master_no']; ?></option>
                                                     </select> 
                                                 <p class="error vendor_po_number_error"></p>
                                             </div>
@@ -146,12 +80,8 @@
                                         <div class="form-group">
                                                 <label for="buyer_name">Buyer Name <span class="required">*</span></label>
                                                 <select class="form-control" name="buyer_name" id="buyer_name" readonly>
-                                                    <option st-id="" value="<?php echo $fetchALLpreVendorpoconfirmationitemList['0']['buyer_name']; ?>" ><?php echo $fetchALLpreVendorpoconfirmationitemList['0']['buyer_name_master']; ?></option>
-
                                                     <option st-id="" value="">Select Buyer Name</option>
-                                                    <!-- <?php foreach ($buyerList as $key => $value) {?>
-                                                    <option value="<?php echo $value['buyer_id']; ?>" <?php if($value['buyer_id']==$fetchALLpresupplierpoconfirmationitemList[0]['pre_buyer_name']){ echo 'selected';} ?> ><?php echo $value['buyer_name']; ?></option>
-                                                    <?php } ?> -->
+                                                    <option st-id="" value="<?php echo $getVendorpoconfirmationdetails['0']['buyer_id']; ?>"  <?php if($getVendorpoconfirmationdetails['0']['buyer_name_master']){ echo 'selected';} ?> ><?php echo $getVendorpoconfirmationdetails['0']['buyer_name_master']; ?></option>
                                                 </select>
                                             <p class="error buyer_name_error"></p>
                                         </div>
@@ -164,16 +94,16 @@
                                                 <label for="po_confirmed">PO Confirmed<span class="required">*</span></label>
                                                 <select class="form-control" name="po_confirmed" id="po_confirmed">
                                                     <option st-id="" value="">Select PO Confirmed</option>
-                                                    <option st-id="" value="YES" <?php if($fetchALLpreVendorpoconfirmationitemList[0]['pre_po_confirmed']=='YES'){ echo 'selected';} ?>>YES</option>
-                                                    <option st-id="" value="NO"  <?php if($fetchALLpreVendorpoconfirmationitemList[0]['pre_po_confirmed']=='NO'){ echo 'selected';} ?>>NO</option>
+                                                    <option st-id="" value="YES" <?php if($getVendorpoconfirmationdetails[0]['po_confirmed']=='YES'){ echo 'selected';} ?>>YES</option>
+                                                    <option st-id="" value="NO"  <?php if($getVendorpoconfirmationdetails[0]['po_confirmed']=='NO'){ echo 'selected';} ?>>NO</option>
                                                 </select>
                                             <p class="error po_confirmed_error"></p>
                                         </div>
                                     </div>
 
 
-                                    <?php if($fetchALLpreVendorpoconfirmationitemList[0]['pre_confirmed_date']){
-                                        $confirmed_date= $fetchALLpreVendorpoconfirmationitemList[0]['pre_confirmed_date'];
+                                    <?php if($getVendorpoconfirmationdetails[0]['confirmed_date']){
+                                        $confirmed_date= $getVendorpoconfirmationdetails[0]['confirmed_date'];
                                      }else{
                                         $confirmed_date= date('Y-m-d');
                                      } ?>
@@ -190,7 +120,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="confirmed_with">Confirmed With <span class="required">*</span></label>
-                                            <input type="text" class="form-control" id="confirmed_with" value="<?=$fetchALLpreVendorpoconfirmationitemList[0]['pre_confirmed_with']?>" name="confirmed_with">
+                                            <input type="text" class="form-control" id="confirmed_with" value="<?=$getVendorpoconfirmationdetails[0]['confirmed_with']?>" name="confirmed_with">
                                             <p class="error confirmed_with_error"></p>
                                         </div>
                                     </div>
@@ -198,7 +128,7 @@
                                     <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="remark">Remark</label>
-                                                  <textarea type="text" class="form-control"  id="remark"  value="" name="remark" required><?=$fetchALLpreVendorpoconfirmationitemList[0]['remark_vendor_po_confrimation']?></textarea>
+                                                  <textarea type="text" class="form-control"  id="remark"  value="" name="remark" required><?=$getVendorpoconfirmationdetails[0]['remark_master']?></textarea>
                                                 <p class="error remark_error"></p>
                                             </div>
                                     </div>
@@ -225,7 +155,7 @@
                                                 <tbody>
                                                     <?php
                                                         $count=0;
-                                                           foreach ($fetchALLpreVendorpoconfirmationitemList as $key => $value) :
+                                                           foreach ($fetchALLpreVendorpoconfirmationitemListedit as $key => $value) :
                                                            $count++;
                                                     ?>
                                                     <tr>
@@ -376,7 +306,7 @@
                             <!-- /.box-body -->
                             <div class="box-footer">
                                 <div class="col-xs-8">
-                                    <?php if($fetchALLpreVendorpoconfirmationitemList){
+                                    <?php if($fetchALLpreVendorpoconfirmationitemListedit){
                                         $disabled= '';
                                     }else{ 
                                         $disabled= 'disabled';

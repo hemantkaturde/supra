@@ -314,6 +314,9 @@ $route['fetchenquiryform'] = "admin/fetchenquiryform";
 $route['addnewenquiryform'] = "admin/addnewenquiryform";
 $route['saveenquiryformitem'] = "admin/saveenquiryformitem";
 
+$route['editvendorpoconfirmation/(:any)'] = "admin/editvendorpoconfirmation/$1";
+
+
 
 
 

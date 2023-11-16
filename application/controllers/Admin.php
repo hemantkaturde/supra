@@ -3474,6 +3474,10 @@ class Admin extends BaseController
                 $save_vendorconfirmation_response['status'] = 'failure';
                 $save_vendorconfirmation_response['error'] = array( 'po_number'=>strip_tags(form_error('po_number')),'date'=>strip_tags(form_error('date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'buyer_name'=>strip_tags(form_error('buyer_name')),'po_confirmed'=>strip_tags(form_error('po_confirmed')),'confirmed_date'=>strip_tags(form_error('confirmed_date')),'confirmed_with'=>strip_tags(form_error('confirmed_with')),'remark'=>strip_tags(form_error('remark')));
             }else{
+                
+                $venodr_po_confirmation_id = trim($this->input->post('venodr_po_confirmation_id'));
+
+
 
                 $data = array(
                     'po_number'   => trim($this->input->post('po_number')),
@@ -3487,13 +3491,13 @@ class Admin extends BaseController
                     'remark' =>    trim($this->input->post('remark')),
                 );
 
-                $checkIfexitsVendorpoconfirmation = $this->admin_model->checkIfexitsVendorpoconfirmation(trim($this->input->post('po_number')));
-                if($checkIfexitsVendorpoconfirmation > 0){
-                    $save_vendorconfirmation_response['status'] = 'failure';
-                    $save_vendorconfirmation_response['error'] = array( 'po_number'=>strip_tags(form_error('po_number')),'date'=>strip_tags(form_error('date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'buyer_name'=>strip_tags(form_error('buyer_name')),'po_confirmed'=>strip_tags(form_error('po_confirmed')),'confirmed_date'=>strip_tags(form_error('confirmed_date')),'confirmed_with'=>strip_tags(form_error('confirmed_with')),'remark'=>strip_tags(form_error('remark')));
-                }else{
+                // $checkIfexitsVendorpoconfirmation = $this->admin_model->checkIfexitsVendorpoconfirmation(trim($this->input->post('po_number')));
+                // if($checkIfexitsVendorpoconfirmation > 0){
+                //     $save_vendorconfirmation_response['status'] = 'failure';
+                //     $save_vendorconfirmation_response['error'] = array( 'po_number'=>strip_tags(form_error('po_number')),'date'=>strip_tags(form_error('date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'buyer_name'=>strip_tags(form_error('buyer_name')),'po_confirmed'=>strip_tags(form_error('po_confirmed')),'confirmed_date'=>strip_tags(form_error('confirmed_date')),'confirmed_with'=>strip_tags(form_error('confirmed_with')),'remark'=>strip_tags(form_error('remark')));
+                // }else{
 
-                    $saveVendorpoconfirmationdata = $this->admin_model->saveVendorpoconfirmationdata('',$data);
+                    $saveVendorpoconfirmationdata = $this->admin_model->saveVendorpoconfirmationdata($venodr_po_confirmation_id,$data);
                     if($saveVendorpoconfirmationdata){
 
                         $update_last_inserted_id_vendor_po_confirmation = $this->admin_model->update_last_inserted_id_vendor_po_confirmation($saveVendorpoconfirmationdata);
@@ -3503,7 +3507,7 @@ class Admin extends BaseController
                          }
                     }
 
-                }
+                //}
             }
             echo json_encode($save_vendorconfirmation_response);
         }else{
@@ -3551,7 +3555,24 @@ class Admin extends BaseController
         echo json_encode($json_data);
 
     }
-    
+
+
+    public function editvendorpoconfirmation($vendor_po_confirmation_id){
+
+        $process = 'Edit Vendor PO Confirmation';
+        $processFunction = 'Admin/editvendorpoconfirmation';
+        $this->logrecord($process,$processFunction);
+        $data['vendorList']= $this->admin_model->fetchALLvendorList();
+        $data['buyerList']= $this->admin_model->fetchAllbuyerList();
+        $data['venodr_po_confirmation_id']= $vendor_po_confirmation_id;
+        $data['getVendorpoconfirmationdetails']= $this->admin_model->getVendorpoconfirmationdetails($vendor_po_confirmation_id);
+        $data['fetchALLpreVendorpoconfirmationitemListedit']= $this->admin_model->fetchALLpreVendorpoconfirmationitemListedit($vendor_po_confirmation_id);
+        $this->global['pageTitle'] = 'Edit Vendor PO Confirmation';
+        $this->loadViews("masters/editvendorpoconfirmation", $this->global, $data, NULL);
+
+    }
+
+
 
     public function getBuyerDetailsBysupplierponumber(){
         $supplier_po_number=$this->input->post('supplier_po_number');
@@ -3673,9 +3694,19 @@ class Admin extends BaseController
                 $save_buyerpoconfirmationitem_response['error'] = array('part_number'=>strip_tags(form_error('part_number')), 'description'=>strip_tags(form_error('description')), 'qty'=>strip_tags(form_error('qty')), 'rate'=>strip_tags(form_error('rate')),'value'=>strip_tags(form_error('value')),'item_remark'=>strip_tags(form_error('item_remark')),'unit'=>strip_tags(form_error('unit')),'vendor_qty'=>strip_tags(form_error('vendor_qty')),'sent_qty'=>strip_tags(form_error('sent_qty')),'short_excess'=>strip_tags(form_error('short_excess')));
             }else{
 
-                
+            
+                $saveVendorconfromationpoitem = trim($this->input->post('venodr_po_confirmation_id'));
+
+                if($saveVendorconfromationpoitem){
+
+                    $saveVendorconfromation_main_id = trim($this->input->post('venodr_po_confirmation_id'));
+                }else{
+                    $saveVendorconfromation_main_id = '';
+                }
+
                 $data = array(
                     'part_number_id'   => trim($this->input->post('part_number')),
+                    'vendor_po_confirmation_id'  =>$saveVendorconfromation_main_id,
                     'description'     => trim($this->input->post('description')),
                     'vendor_qty'=> trim($this->input->post('vendor_qty')),
                     'order_qty'=> trim($this->input->post('qty')),
@@ -3699,6 +3730,7 @@ class Admin extends BaseController
                 //     $save_buyerpo_response['status'] = 'failure';
                 //     $save_buyerpo_response['error'] = array('sales_order_number'=>'Buyer PO Alreday Exits (Sales Order Number Alreday Exits)');
                 // }else{
+
                     $saveVendorpoconfirmationitemdata = $this->admin_model->saveVendorpoconfirmationitemdata('',$data);
                     
                     if($saveVendorpoconfirmationitemdata){
