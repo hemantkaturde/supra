@@ -4115,6 +4115,8 @@ class Admin extends BaseController
             $this->form_validation->set_rules('incoming_details','Incoming Details','trim');
             $this->form_validation->set_rules('remark','Remark','trim');
 
+
+
             if($this->form_validation->run() == FALSE)
             {
                 $save_Billofmaterial_response['status'] = 'failure';
@@ -4130,6 +4132,7 @@ class Admin extends BaseController
                                                                 'buyer_delivery_date'=>strip_tags(form_error('buyer_delivery_date')),
                                                                 'buyer_delivery_date'=>strip_tags(form_error('buyer_delivery_date')),
                                                                 'incoming_details'=>strip_tags(form_error('incoming_details')),
+                                                                'bom_status'=>strip_tags(form_error('incoming_details')),
                                                                 'remark'=>strip_tags(form_error('remark')));
            
             }else{
@@ -4166,9 +4169,13 @@ class Admin extends BaseController
                         'buyer_delivery_date'=>strip_tags(form_error('buyer_delivery_date')),
                         'buyer_delivery_date'=>strip_tags(form_error('buyer_delivery_date')),
                         'incoming_details'=>strip_tags(form_error('incoming_details')),
+                        'bom_status'=>strip_tags(form_error('incoming_details')),
                         'remark'=>strip_tags(form_error('remark')));
                 }else{
                     $saveBillofmaterial = $this->admin_model->saveBillofmaterial('',$data);
+
+                    
+
                     if($saveBillofmaterial){
                         $update_last_inserted_Bill_of_material = $this->admin_model->update_last_inserted_Bill_of_material($saveBillofmaterial);
                          if($update_last_inserted_Bill_of_material){
@@ -4185,6 +4192,7 @@ class Admin extends BaseController
                                 'buyer_delivery_date'=>strip_tags(form_error('buyer_delivery_date')),
                                 'buyer_delivery_date'=>strip_tags(form_error('buyer_delivery_date')),
                                 'incoming_details'=>strip_tags(form_error('incoming_details')),
+                                'bom_status'=>strip_tags(form_error('incoming_details')),
                                 'remark'=>strip_tags(form_error('remark')));
                          }
                     }
@@ -8383,6 +8391,25 @@ class Admin extends BaseController
            }
            echo json_encode($saveenquiryform_response);
         }
+    }
+
+
+    public function deleteBillofmaterialitem(){
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->deleteBillofmaterialitem(trim($this->input->post('id')));
+            if ($result) {
+                        $process = 'Delete Bill of material Item';
+                        $processFunction = 'Admin/deleteBillofmaterialitem';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
+
     }
    
 

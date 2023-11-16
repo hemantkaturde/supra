@@ -3534,6 +3534,7 @@ class Admin_model extends CI_Model
         .TBL_BUYER_PO_MASTER.'.sales_order_number,'
         .TBL_BILL_OF_MATERIAL_ITEM.'.pre_remark as bom_remark,'
         .TBL_SUPPLIER_PO_MASTER_ITEM.'.order_oty as rmsupplier_order_qty,'
+        .TBL_BILL_OF_MATERIAL_ITEM.'.id as biil_of_material_id,'
         
         .TBL_RAWMATERIAL.'.type_of_raw_material');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BILL_OF_MATERIAL_ITEM.'.part_number');
@@ -6216,6 +6217,20 @@ class Admin_model extends CI_Model
         $query = $this->db->get(TBL_VENDOR_PO_CONFIRMATION);
         $data = $query->result_array();
         return $data;
+    }
+
+
+    public function deleteBillofmaterialitem($id){
+
+        $this->db->where('id ', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_BILL_OF_MATERIAL_ITEM)){
+           return TRUE;
+        }else{
+           return FALSE;
+        }
+
+
     }
 
 }

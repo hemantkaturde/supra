@@ -308,13 +308,13 @@ $route['deleteomschallan'] = "admin/deleteomschallan";
 $route['saveomschallanitem'] = "admin/saveomschallanitem";
 $route['deleteOmschallnitem'] = "admin/deleteOmschallnitem";
 $route['editomschallan/(:any)'] = "admin/editomschallan/$1";
-
 $route['enquiryform'] = "admin/enquiryform";
 $route['fetchenquiryform'] = "admin/fetchenquiryform";
 $route['addnewenquiryform'] = "admin/addnewenquiryform";
 $route['saveenquiryformitem'] = "admin/saveenquiryformitem";
-
 $route['editvendorpoconfirmation/(:any)'] = "admin/editvendorpoconfirmation/$1";
+$route['deleteBillofmaterialitem'] = "admin/deleteBillofmaterialitem";
+
 
 
 

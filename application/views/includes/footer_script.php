@@ -5949,6 +5949,59 @@
 	                   
 		});
 
+
+		$(document).on('click','.deleteBillofmaterialitem',function(e){
+			var elemF = $(this);
+			e.preventDefault();
+
+			swal({
+				title: "Are you sure?",
+				text: "Delete Bill of Material Item ",
+				type: "warning",
+				showCancelButton: true,
+				closeOnClickOutside: false,
+				confirmButtonClass: "btn-sm btn-danger",
+				confirmButtonText: "Yes, delete it!",
+				cancelButtonText: "No, cancel plz!",
+				closeOnConfirm: false,
+				closeOnCancel: false
+			}, function(isConfirm) {
+				if (isConfirm) {
+							$.ajax({
+								url : "<?php echo base_url();?>deleteBillofmaterialitem",
+								type: "POST",
+								data : 'id='+elemF.attr('data-id'),
+								success: function(data, textStatus, jqXHR)
+								{
+									const obj = JSON.parse(data);
+								
+									if(obj.status=='success'){
+										swal({
+											title: "Deleted!",
+											text: "Bill of Material Item Deleted Succesfully",
+											icon: "success",
+											button: "Ok",
+											},function(){ 
+												window.location.href = "<?php echo base_url().'addnewBillofmaterial'?>";
+										
+										});	
+									}
+
+								},
+								error: function (jqXHR, textStatus, errorThrown)
+								{
+									$(".loader_ajax").hide();
+								}
+							})
+						}
+						else {
+				swal("Cancelled", "Bill of Material Item deletion cancelled ", "error");
+				}
+			});
+		});
+
+
+
     </script>
 <?php } ?>
 
