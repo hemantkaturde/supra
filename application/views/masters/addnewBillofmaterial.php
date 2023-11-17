@@ -143,7 +143,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                                 <label for="supplier_po_date">Supplier PO Date</label>
-                                                <input type="text" class="form-control" id="supplier_po_date" name="supplier_po_date" readonly>
+                                                <input type="text" class="form-control" id="supplier_po_date" value="<?=$fetchALLpreBillofmaterailist[0]['pre_supplier_po_date']?>" name="supplier_po_date" readonly>
                                             <p class="error supplier_po_date_error"></p>
                                         </div>
                                     </div>

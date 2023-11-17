@@ -5464,6 +5464,7 @@ class Admin extends BaseController
                     'pre_vendor_po_number' =>$this->input->post('pre_vendor_po_number'),
                     'pre_supplier_name' =>$this->input->post('pre_supplier_name'),
                     'pre_supplier_po_number' =>$this->input->post('pre_supplier_po_number'),
+                    'pre_supplier_po_date' =>$this->input->post('supplier_po_date'),
                     'pre_buyer_name' =>$this->input->post('pre_buyer_name'),
                     'pre_buyer_po_number'  =>$this->input->post('pre_buyer_po_number'),
                     'pre_buyer_po_date'  =>$this->input->post('pre_buyer_po_date'),

@@ -5785,6 +5785,7 @@
                var pre_vendor_po_number =  $('#vendor_po_number').val();
 			   var pre_supplier_name =  $('#supplier_name').val();
                var pre_supplier_po_number =  $('#supplier_po_number').val();
+			   var supplier_po_date =  $('#supplier_po_date').val();
 			   var pre_buyer_name =  $('#buyer_name').val();
 			   var pre_buyer_po_number =  $('#buyer_po_number').val();
 			   var pre_buyer_po_date =  $('#buyer_po_date').val();
@@ -5797,7 +5798,7 @@
 				url : "<?php echo base_url();?>saveBillofmaterialtem",
 				type: "POST",
 				 //data : formData,
-				 data :{part_number:part_number,rm_actual_aty:rm_actual_aty,expected_qty:expected_qty,vendor_actual_received_Qty:vendor_actual_received_Qty,net_weight_per_pcs:net_weight_per_pcs,total_net_weight:total_net_weight,short_access:short_access,scrap:scrap,actual_scrap_recived:actual_scrap_recived,item_remark,pre_date:pre_date,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_supplier_name:pre_supplier_name,pre_supplier_po_number:pre_supplier_po_number,pre_buyer_name:pre_buyer_name,pre_buyer_po_number:pre_buyer_po_number,pre_buyer_po_date:pre_buyer_po_date,pre_buyer_delivery_date:pre_buyer_delivery_date,pre_bom_status:pre_bom_status,pre_incoming_details:pre_incoming_details,pre_remark},
+				 data :{part_number:part_number,rm_actual_aty:rm_actual_aty,expected_qty:expected_qty,vendor_actual_received_Qty:vendor_actual_received_Qty,net_weight_per_pcs:net_weight_per_pcs,total_net_weight:total_net_weight,short_access:short_access,scrap:scrap,actual_scrap_recived:actual_scrap_recived,item_remark,pre_date:pre_date,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_supplier_name:pre_supplier_name,pre_supplier_po_number:pre_supplier_po_number,pre_buyer_name:pre_buyer_name,pre_buyer_po_number:pre_buyer_po_number,pre_buyer_po_date:pre_buyer_po_date,pre_buyer_delivery_date:pre_buyer_delivery_date,pre_bom_status:pre_bom_status,pre_incoming_details:pre_incoming_details,pre_remark,supplier_po_date:supplier_po_date},
 				// method: "POST",
                 // data :{package_id:package_id},
                 cache:false,
