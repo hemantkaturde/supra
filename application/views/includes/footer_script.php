@@ -6934,7 +6934,6 @@
 	        });
 	    });
 
-
 		$(document).ready(function() {
 			//e.preventDefault();
 			//$(".loader_ajax").show();
@@ -7414,9 +7413,6 @@
 
 			}
 		});
-
-
-
 
    </script>
 <?php } ?>

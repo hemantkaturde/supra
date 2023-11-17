@@ -273,7 +273,6 @@
                                                                 <?php } ?> -->
                                                             </select>
                                                             <p class="error part_number_error"></p>
-
                                                         </div>
                                                     </div>
 
