@@ -6229,6 +6229,17 @@ class Admin_model extends CI_Model
         }else{
            return FALSE;
         }
+    }
+
+    public function checkvendorpoandvendornumber($data){
+
+        $this->db->select('*');
+        $this->db->where(TBL_INCOMING_DETAILS.'.status', 1);
+        //$this->db->where(TBL_INCOMING_DETAILS.'.incoming_details_id', trim($data['incoming_no']));
+        $this->db->where(TBL_INCOMING_DETAILS.'.vendor_po_number', trim($data['vendor_po_number']));
+        $query = $this->db->get(TBL_INCOMING_DETAILS);
+        $data = $query->result_array();
+        return $data;
 
 
     }

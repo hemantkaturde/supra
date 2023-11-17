@@ -316,6 +316,10 @@ $route['editvendorpoconfirmation/(:any)'] = "admin/editvendorpoconfirmation/$1";
 $route['deleteBillofmaterialitem'] = "admin/deleteBillofmaterialitem";
 
 
+$route['checkvendorpoandvendornumber'] = "admin/checkvendorpoandvendornumber";
+
+
+
 
 
 
