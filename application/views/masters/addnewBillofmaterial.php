@@ -112,7 +112,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                                 <label for="vendor_po_number">Select Vendor PO Number <span class="required">*</span></label>
-                                                    <select class="form-control vendor_po_number_itam_mapping vendor_po_number_for_view_item vendor_po_for_buyer_details_ vendor_po_for_incoming_details" name="vendor_po_number" id="vendor_po_number">
+                                                    <select class="form-control vendor_po_number_itam_mapping vendor_po_number_for_view_item vendor_po_for_buyer_details_ vendor_po_for_incoming_details vendor_po_for_buyer_details_date_and_podetails" name="vendor_po_number" id="vendor_po_number">
                                                         <option st-id="" value="">Select Vendor Name</option>
                                                         <option st-id="" value="<?=$fetchALLpreBillofmaterailist[0]['pre_vendor_po_number']?>" Selected><?=$selected_value;?></option>
                                                     </select>
@@ -148,8 +148,6 @@
                                         </div>
                                     </div>
 
-
-                                    
                                     
                                   <div class="col-md-12">
                                         <div class="form-group">
@@ -191,7 +189,8 @@
                                     <?php if($fetchALLpreBillofmaterailist[0]['pre_buyer_po_date']){
                                         $pre_buyer_po_date= $fetchALLpreBillofmaterailist[0]['pre_buyer_po_date'];
                                      }else{
-                                        $pre_buyer_po_date= date('Y-m-d');
+                                        // $pre_buyer_po_date= date('Y-m-d');
+                                        $pre_buyer_po_date= '';
                                      } ?>
 
 
@@ -206,7 +205,7 @@
                                     <?php if($fetchALLpreBillofmaterailist[0]['pre_buyer_delivery_date']){
                                         $pre_buyer_delivery_date= $fetchALLpreBillofmaterailist[0]['pre_buyer_delivery_date'];
                                      }else{
-                                        $pre_buyer_delivery_date= date('Y-m-d');
+                                        $pre_buyer_delivery_date= '';
                                      } ?>
 
 

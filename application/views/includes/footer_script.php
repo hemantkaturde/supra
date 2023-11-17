@@ -6032,6 +6032,46 @@
 		});
 
 
+		$(document).on('change','.vendor_po_for_buyer_details_date_and_podetails',function(e){  
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			        var vendor_po_number = $('#vendor_po_number').val();
+		
+									$('#buyer_po_date').val('');
+									$('#buyer_delivery_date').val('');	
+
+									$.ajax({
+										url : "<?php echo ADMIN_PATH;?>getbuyerpodetailsforvendorstockform",
+										type: "POST",
+										data : {'vendor_po_number' : vendor_po_number},
+										success: function(data, textStatus, jqXHR)
+										{
+											var get_buyerdata = jQuery.parseJSON( data );
+
+											$(".loader_ajax").hide();
+											if(data == "failure")
+											{
+											
+												$('#buyer_po_date').val('');
+												$('#buyer_delivery_date').val('');	
+											}
+											else
+											{
+												
+												$('#buyer_po_date').val(get_buyerdata.date);
+												$('#buyer_delivery_date').val(get_buyerdata.delivery_date);	
+											}
+										},
+										error: function (jqXHR, textStatus, errorThrown)
+										{
+											    $('#buyer_po_date').val('');
+												$('#buyer_delivery_date').val('');	
+											
+										}
+									});
+									return false;
+							
+		});
 
     </script>
 <?php } ?>
@@ -6898,6 +6938,47 @@
 						});
 			    return false;
 	                   
+		});
+
+		$(document).on('change','.vendor_po_for_buyer_details_date_and_podetails',function(e){  
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			        var vendor_po_number = $('#vendor_po_number').val();
+		
+									$('#buyer_po_date').val('');
+									$('#buyer_delivery_date').val('');	
+
+									$.ajax({
+										url : "<?php echo ADMIN_PATH;?>getbuyerpodetailsforvendorstockform",
+										type: "POST",
+										data : {'vendor_po_number' : vendor_po_number},
+										success: function(data, textStatus, jqXHR)
+										{
+											var get_buyerdata = jQuery.parseJSON( data );
+
+											$(".loader_ajax").hide();
+											if(data == "failure")
+											{
+											
+												$('#buyer_po_date').val('');
+												$('#buyer_delivery_date').val('');	
+											}
+											else
+											{
+												
+												$('#buyer_po_date').val(get_buyerdata.date);
+												$('#buyer_delivery_date').val(get_buyerdata.delivery_date);	
+											}
+										},
+										error: function (jqXHR, textStatus, errorThrown)
+										{
+											    $('#buyer_po_date').val('');
+												$('#buyer_delivery_date').val('');	
+											
+										}
+									});
+									return false;
+							
 		});
 
     </script>
@@ -9097,7 +9178,6 @@
 
 	</script> 
 <?php } ?>
-
 
 
 <?php if($pageTitle=='Challan Form' || $pageTitle=='Add New Challan Form' || $pageTitle=='Edit Challan Form'){ ?>
