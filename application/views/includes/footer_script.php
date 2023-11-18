@@ -2575,7 +2575,7 @@
 								else
 								{
 									var data_row_material = jQuery.parseJSON( data );
-									$('#description').val(data_row_material.name);
+									$('#description').val(data_row_material.itemdescription);
 									$('#HSN_Code').val(data_row_material.hsn_code);
 									$('#gross_weight').val(data_row_material.groass_weight);
 									$('#net_weight').val(data_row_material.supplier_goods_net_weight);
