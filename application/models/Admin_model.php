@@ -6259,6 +6259,19 @@ class Admin_model extends CI_Model
 
     }
 
+
+    public function checkvendorpoandvendornumberinbillofmaterial($data){
+
+        $this->db->select('*');
+        $this->db->where(TBL_BILL_OF_MATERIAL.'.status', 1);
+        $this->db->where(TBL_BILL_OF_MATERIAL.'.vendor_name', trim($data['vendor_name']));
+        $this->db->where(TBL_BILL_OF_MATERIAL.'.vendor_po_number', trim($data['vendor_po_number']));
+        $query = $this->db->get(TBL_BILL_OF_MATERIAL);
+        $data = $query->result_array();
+        return $data;
+
+    }
+
 }
 
 ?>

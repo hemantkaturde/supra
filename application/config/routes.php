@@ -317,6 +317,7 @@ $route['deleteBillofmaterialitem'] = "admin/deleteBillofmaterialitem";
 
 
 $route['checkvendorpoandvendornumber'] = "admin/checkvendorpoandvendornumber";
+$route['checkvendorpoandvendornumberinbillofmaterial'] = "admin/checkvendorpoandvendornumberinbillofmaterial";
 
 
 
