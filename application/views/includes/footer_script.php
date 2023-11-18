@@ -2537,28 +2537,22 @@
 		$(document).on('change','#part_number',function(e){  
 			e.preventDefault();
 			
-			//$(".loader_ajax").show();
-			var part_number = $('#part_number').val();
-            
-			if($('#supplier_name').val()){
-				var supplier_name = $('#supplier_name').val();
-			}else{
-				var supplier_name = $('#buyer_name').val();
-			}
+						//$(".loader_ajax").show();
+						var part_number = $('#part_number').val();
+          
+						if($('#supplier_po_number').val()){
+							var po_number = $('#supplier_po_number').val();
+							var flag = 'Supplier';
+						}else{
+							var po_number = $('#buyer_po_number').val();
+							var flag = 'Buyer';
+						}
 
-
-			if($('#supplier_po_number').val()){
-				var supplier_po_number = $('#supplier_po_number').val();
-			}else{
-				var supplier_po_number = $('#buyer_po_number').val();
-			}
-
-			if(supplier_name){
-				if(supplier_po_number){
+	
 						$.ajax({
 							url : "<?php echo ADMIN_PATH;?>getfinishedgoodsPartnumberByidvendor",
 							type: "POST",
-							data : {'part_number' : part_number,'supplier_po_number':supplier_po_number},
+							data : {'part_number' : part_number,'po_number':po_number,'flag':flag},
 							success: function(data, textStatus, jqXHR)
 							{
 								$(".loader_ajax").hide();
@@ -2622,15 +2616,6 @@
 							}
 						});
 						return false;
-
-				}else{
-					$('.part_number_error').html('Please Select Supplier PO Number');
-				}
-
-			}else{
-
-				$('.part_number_error').html('Please Select Supplier PO');
-			}
 			
 		});
 
