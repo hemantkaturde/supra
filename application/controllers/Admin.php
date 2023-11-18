@@ -8447,4 +8447,22 @@ class Admin extends BaseController
 
     }
 
+
+
+    public function checkvendorpoandvendornumberinvendorbillofmaterial(){
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+             $result = $this->admin_model->checkvendorpoandvendornumberinvendorbillofmaterial($post_submit);
+             if ($result) {
+                $content = $result[0];
+                echo json_encode($content);
+             }else{
+                echo 'failure';
+             }
+        }else{
+            echo 'failure';
+        }
+    }
+
 }

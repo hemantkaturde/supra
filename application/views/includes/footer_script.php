@@ -7045,6 +7045,53 @@
 							
 		});
 
+		$(document).on('change','#vendor_name,#vendor_po_number',function(e){  
+			e.preventDefault();
+			$('.vendor_po_number_error').html('');
+			var vendor_name = $('#vendor_name').val();
+			var vendor_po_number = $('#vendor_po_number').val();
+
+			if(vendor_name && vendor_po_number){
+
+				        $.ajax({
+							url : "<?php echo ADMIN_PATH;?>checkvendorpoandvendornumberinvendorbillofmaterial",
+							type: "POST",
+							data : {'vendor_name' : vendor_name,'vendor_po_number':vendor_po_number},
+							success: function(data, textStatus, jqXHR)
+							{
+								$(".loader_ajax").hide();
+								if(data == "failure")
+								{
+									$('.vendor_po_number_error').val('');
+							
+								}
+								else
+								{
+									var data_row_material = jQuery.parseJSON( data );
+
+									if(data_row_material.vendor_po_number){
+										$('.vendor_po_number_error').html('Vendor Bill Of Material Already Exists For This Vendor PO');
+									}else{
+
+										$('.vendor_po_number_error').html('');
+									}
+
+									// console.log(data_row_material.vendor_po_number);
+
+									//$('#vendor_po_number').val(data_row_material.name);		
+								}
+							},
+							error: function (jqXHR, textStatus, errorThrown)
+							{
+								    $('.vendor_po_number_error').val('');
+							}
+						});
+						return false;
+
+
+			}
+		});
+
     </script>
 <?php } ?>
 
