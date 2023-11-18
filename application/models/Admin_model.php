@@ -1589,21 +1589,22 @@ class Admin_model extends CI_Model
     public function getfinishedgoodsPartnumberByid($part_number,$flag){
 
 
-        // if($flag=='Supplier'){
+        if($flag=='Supplier'){
 
-        //     $this->db->select('*,'.TBL_RAWMATERIAL.'.net_weight as supplier_goods_net_weight,'.TBL_RAWMATERIAL.'.sac as supplier_goods_sac,'.TBL_RAWMATERIAL.'.type_of_raw_material as name,'.TBL_RAWMATERIAL.'.HSN_code as hsn_code,'.TBL_RAWMATERIAL.'.gross_weight as groass_weight,'.TBL_RAWMATERIAL.'.net_weight as supplier_goods_net_weight');
-        //     // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
-        //     $this->db->join(TBL_SUPPLIER_PO_MASTER_ITEM, TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id = '.TBL_RAWMATERIAL.'.raw_id');
-        //     $this->db->where(TBL_RAWMATERIAL.'.status',1);
-        //     //$this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
-        //     $this->db->where(TBL_RAWMATERIAL.'.raw_id',$part_number);
-        //     $query = $this->db->get(TBL_RAWMATERIAL);
-        //     $data = $query->result_array();
-        //     return $data;
-        // }else{
+            // $this->db->select('*,'.TBL_RAWMATERIAL.'.net_weight as supplier_goods_net_weight,'.TBL_RAWMATERIAL.'.sac as supplier_goods_sac,'.TBL_RAWMATERIAL.'.type_of_raw_material as name,'.TBL_RAWMATERIAL.'.HSN_code as hsn_code,'.TBL_RAWMATERIAL.'.gross_weight as groass_weight,'.TBL_RAWMATERIAL.'.net_weight as supplier_goods_net_weight');
+            // // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+            // $this->db->join(TBL_SUPPLIER_PO_MASTER_ITEM, TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id = '.TBL_RAWMATERIAL.'.raw_id');
+            // $this->db->where(TBL_RAWMATERIAL.'.status',1);
+            // //$this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
+            // $this->db->where(TBL_RAWMATERIAL.'.raw_id',$part_number);
+            // $query = $this->db->get(TBL_RAWMATERIAL);
+            // $data = $query->result_array();
+            // return $data;
+
+
             $this->db->select('*,'.TBL_FINISHED_GOODS.'.net_weight as supplier_goods_net_weight,'.TBL_FINISHED_GOODS.'.sac as supplier_goods_sac');
-            // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
-            // $this->db->join(TBL_SUPPLIER_PO_MASTER_ITEM, TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
+            $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+            $this->db->join(TBL_SUPPLIER_PO_MASTER_ITEM, TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
             $this->db->where(TBL_FINISHED_GOODS.'.status',1);
             $this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
             //$this->db->where(TBL_RAWMATERIAL.'.raw_id',$part_number);
@@ -1611,7 +1612,19 @@ class Admin_model extends CI_Model
             $data = $query->result_array();
             return $data;
 
-       // }
+
+        }else{
+            $this->db->select('*,'.TBL_FINISHED_GOODS.'.net_weight as supplier_goods_net_weight,'.TBL_FINISHED_GOODS.'.sac as supplier_goods_sac');
+            // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+            $this->db->join(TBL_SUPPLIER_PO_MASTER_ITEM, TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
+            $this->db->where(TBL_FINISHED_GOODS.'.status',1);
+            $this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
+            //$this->db->where(TBL_RAWMATERIAL.'.raw_id',$part_number);
+            $query = $this->db->get(TBL_FINISHED_GOODS);
+            $data = $query->result_array();
+            return $data;
+
+        }
     }
 
 
@@ -6220,20 +6233,16 @@ class Admin_model extends CI_Model
         return $data;
     }
 
-
     public function getVendorpoconfirmationdetails($vendor_po_confirmation_id){
         $this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_VENDOR_PO_CONFIRMATION.'.vendor_name as vendor_name_id,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_master_no,'.TBL_VENDOR_PO_CONFIRMATION.'.buyer_name as buyer_id,'.TBL_BUYER_MASTER.'.buyer_name as buyer_name_master,'.TBL_VENDOR_PO_CONFIRMATION.'.remark as remark_master,'.TBL_VENDOR_PO_CONFIRMATION.'.vendor_po_number as vendor_po_');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_VENDOR_PO_CONFIRMATION.'.vendor_po_number');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_VENDOR_PO_MASTER.'.vendor_name');
-
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_VENDOR_PO_CONFIRMATION.'.buyer_name');
-
         $this->db->where(TBL_VENDOR_PO_CONFIRMATION.'.id',$vendor_po_confirmation_id);
         $query = $this->db->get(TBL_VENDOR_PO_CONFIRMATION);
         $data = $query->result_array();
         return $data;
     }
-
 
     public function deleteBillofmaterialitem($id){
 
