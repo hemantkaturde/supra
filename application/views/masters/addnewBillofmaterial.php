@@ -385,9 +385,9 @@
 
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">RM Actual Qty <span class="required">*</span></label>
+                                                        <label class="col-sm-4 col-form-label">RM Actual Qty </label>
                                                         <div class="col-sm-8">
-                                                            <input type="number" class="form-control"  id="rm_actual_aty" name="rm_actual_aty">
+                                                            <input type="number" class="form-control"  id="rm_actual_aty" name="rm_actual_aty" value="0">
                                                             <p class="error rm_actual_aty_error"></p>
                                                         </div>
                                                     </div>
@@ -444,7 +444,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Expected Qty<span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="text" class="form-control"  id="expected_qty" name="expected_qty" readonly>
+                                                            <input type="text" class="form-control"  id="expected_qty" name="expected_qty" value="0">
                                                             <p class="error expected_qty_error"></p>
                                                         </div>
                                                     </div>

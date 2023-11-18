@@ -4132,7 +4132,7 @@ class Admin extends BaseController
                                                                 'buyer_delivery_date'=>strip_tags(form_error('buyer_delivery_date')),
                                                                 'buyer_delivery_date'=>strip_tags(form_error('buyer_delivery_date')),
                                                                 'incoming_details'=>strip_tags(form_error('incoming_details')),
-                                                                'bom_status'=>strip_tags(form_error('incoming_details')),
+                                                                'bom_status'=>strip_tags(form_error('bom_status')),
                                                                 'remark'=>strip_tags(form_error('remark')));
            
             }else{
@@ -4169,7 +4169,7 @@ class Admin extends BaseController
                         'buyer_delivery_date'=>strip_tags(form_error('buyer_delivery_date')),
                         'buyer_delivery_date'=>strip_tags(form_error('buyer_delivery_date')),
                         'incoming_details'=>strip_tags(form_error('incoming_details')),
-                        'bom_status'=>strip_tags(form_error('incoming_details')),
+                        'bom_status'=>strip_tags(form_error('bom_status')),
                         'remark'=>strip_tags(form_error('remark')));
                 }else{
                     $saveBillofmaterial = $this->admin_model->saveBillofmaterial('',$data);
@@ -4192,7 +4192,7 @@ class Admin extends BaseController
                                 'buyer_delivery_date'=>strip_tags(form_error('buyer_delivery_date')),
                                 'buyer_delivery_date'=>strip_tags(form_error('buyer_delivery_date')),
                                 'incoming_details'=>strip_tags(form_error('incoming_details')),
-                                'bom_status'=>strip_tags(form_error('incoming_details')),
+                                'bom_status'=>strip_tags(form_error('bom_status')),
                                 'remark'=>strip_tags(form_error('remark')));
                          }
                     }
