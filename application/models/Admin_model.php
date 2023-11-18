@@ -1874,7 +1874,7 @@ class Admin_model extends CI_Model
             // return $data;
 
 
-            $this->db->select('*,'.TBL_FINISHED_GOODS.'fin_id as item_id');
+            $this->db->select('*,'.TBL_FINISHED_GOODS.'.fin_id as item_id');
             // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
             $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
             $this->db->where(TBL_FINISHED_GOODS.'.status',1);
