@@ -3123,7 +3123,7 @@
 												else
 												{
 
-													//$('.autobuyerpo').html(data);
+													           //$('.autobuyerpo').html(data);
 
 														       var buyer_po_number = data;
 																$("#customers-list").html('');
@@ -3156,8 +3156,37 @@
 
 
 
+																var buyer_po_number = $('.buyer_po_number_for_item').val();
 
+																	$("#part_number").html('');
 
+																	var flag = 'Buyer';
+																
+																	$.ajax({
+																		url : "<?php echo ADMIN_PATH;?>getSuppliritemonly",
+																		type: "POST",
+																		data : {'supplier_po_number' : buyer_po_number,'flag':flag},
+																		success: function(data, textStatus, jqXHR)
+																		{
+																			$(".loader_ajax").hide();
+																			if(data == "failure")
+																			{
+																				$('#part_number').html('<option value="">Select Part Number</option>');
+																			}
+																			else
+																			{
+																				$('#part_number').html(data);
+
+																			}
+																		},
+																		error: function (jqXHR, textStatus, errorThrown)
+																		{
+																			$('#part_number').html();
+																		}
+																});
+																
+
+															
 												}
 											},
 											error: function (jqXHR, textStatus, errorThrown)
