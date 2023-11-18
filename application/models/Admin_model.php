@@ -1601,7 +1601,7 @@ class Admin_model extends CI_Model
         //     $data = $query->result_array();
         //     return $data;
         // }else{
-            $this->db->select('*,'.TBL_FINISHED_GOODS.'.net_weight as supplier_goods_net_weight,'.TBL_FINISHED_GOODS.'.sac as supplier_goods_sac,'.TBL_FINISHED_GOODS.'.itemdescription');
+            $this->db->select('*,'.TBL_FINISHED_GOODS.'.net_weight as supplier_goods_net_weight,'.TBL_FINISHED_GOODS.'.sac as supplier_goods_sac,'.TBL_FINISHED_GOODS.'.name as itemdescription');
             // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
             $this->db->join(TBL_SUPPLIER_PO_MASTER_ITEM, TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
             $this->db->where(TBL_FINISHED_GOODS.'.status',1);
