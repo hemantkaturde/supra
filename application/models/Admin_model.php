@@ -2939,12 +2939,14 @@ class Admin_model extends CI_Model
     }
 
     public function getItemdetailsdependonvendorpobom($part_number,$vendor_po_number,$vendor_name){
-        $this->db->select('*,'.TBL_FINISHED_GOODS.'.sac as sac_no,'.TBL_VENDOR_PO_MASTER_ITEM.'.rate as supplierrate,'.TBL_FINISHED_GOODS.'.groass_weight as fg_gross_weight,'.TBL_FINISHED_GOODS.'.net_weight as fg_net_weight,'.TBL_SUPPLIER_PO_MASTER_ITEM.'.order_oty as ram_supplier_order_qty');
-        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number','left');
+        // $this->db->select('*,'.TBL_FINISHED_GOODS.'.sac as sac_no,'.TBL_VENDOR_PO_MASTER_ITEM.'.rate as supplierrate,'.TBL_FINISHED_GOODS.'.groass_weight as fg_gross_weight,'.TBL_FINISHED_GOODS.'.net_weight as fg_net_weight,'.TBL_SUPPLIER_PO_MASTER_ITEM.'.order_oty as ram_supplier_order_qty');
+        $this->db->select('*,'.TBL_FINISHED_GOODS.'.sac as sac_no,'.TBL_VENDOR_PO_MASTER_ITEM.'.rate as supplierrate,'.TBL_FINISHED_GOODS.'.groass_weight as fg_gross_weight,'.TBL_FINISHED_GOODS.'.net_weight as fg_net_weight, 0 as ram_supplier_order_qty');
+
+        // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
         $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.pre_vendor_name');
 
-        $this->db->join(TBL_SUPPLIER_PO_MASTER_ITEM, TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id = '.TBL_RAWMATERIAL.'.row_id','left');
+        //$this->db->join(TBL_SUPPLIER_PO_MASTER_ITEM, TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
 
         $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id',$vendor_po_number);
         $this->db->where(TBL_FINISHED_GOODS.'.status',1);
