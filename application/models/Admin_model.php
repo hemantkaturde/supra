@@ -3148,8 +3148,85 @@ class Admin_model extends CI_Model
         $query = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
         $data = $query->result_array();
         return $data;
+    }
+
+
+    public function getAllitemdetailsforfilter(){
+
+        $this->db->select('*,'.TBL_INCOMING_DETAILS_ITEM.'.id as incoming_details_item_id');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_INCOMING_DETAILS_ITEM.'.pre_vendor_po_number');
+        $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id is NULL');
+        $this->db->group_by(TBL_INCOMING_DETAILS_ITEM.'.part_number');
+        $query = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
+        $data = $query->result_array();
+        return $data;
+    }
+
+    public function fetchincomingdeatilsitemlistaddcount(){
+        $this->db->select('*,'.TBL_INCOMING_DETAILS_ITEM.'.id as incoming_details_item_id');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_INCOMING_DETAILS_ITEM.'.pre_vendor_po_number');
+        $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id is NULL');
+        $query = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
+        $data = $query->result_array();
+        return $data;
+
 
     }
+
+    public function fetchincomingdeatilsitemlistadddata(){
+        $this->db->select('*,'.TBL_INCOMING_DETAILS_ITEM.'.id as incoming_details_item_id');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_INCOMING_DETAILS_ITEM.'.pre_vendor_po_number');
+        $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id is NULL');
+        $query = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
+        $data = $query->result_array();
+
+
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+
+                $data[$counter]['count'] = $counter;
+                $data[$counter]['part_number'] = $value['part_number'];
+                $data[$counter]['name'] = $value['name'];
+                $data[$counter]['part_number_with_lot'] = $value['part_number'].' - '.$value['lot_no'];
+                $data[$counter]['p_o_qty'] = $value['p_o_qty'];
+                $data[$counter]['invoice_qty'] = $value['invoice_qty'];
+
+
+                $data[$counter]['vendor_name'] = $value['vendorname'];
+                $data[$counter]['vendor_po_number'] = $value['po_number'];
+                $data[$counter]['reported_by'] = $value['reported_by'];
+                $data[$counter]['reported_date'] = $reported_date;
+                
+                $data[$counter]['incoming_details_id'] = $value['incoming_details_id'];
+                $data[$counter]['vendor_name'] = $value['vendorname'];
+                $data[$counter]['vendor_po_number'] = $value['po_number'];
+                $data[$counter]['reported_by'] = $value['reported_by'];
+                $data[$counter]['reported_date'] = $reported_date;
+
+                
+                $data[$counter]['incoming_details_id'] = $value['incoming_details_id'];
+                $data[$counter]['vendor_name'] = $value['vendorname'];
+                $data[$counter]['vendor_po_number'] = $value['po_number'];
+                $data[$counter]['reported_by'] = $value['reported_by'];
+                $data[$counter]['reported_date'] = $reported_date;
+
+                $data[$counter]['action'] = '';
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editincomingdetails/".$value['incomigid']."' style='cursor: pointer;'><i style='font-size: large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+              
+                $counter++; 
+            }
+        }
+
+        return $data;
+    }
+
 
     public function getAllitemdetailsforedit($id){
 

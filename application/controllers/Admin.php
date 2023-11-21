@@ -4940,9 +4940,36 @@ class Admin extends BaseController
             $data['getPreviousincomingdetails']= $this->admin_model->getPreviousincomingdetails();
             //$data['getitemdetails']= $this->admin_model->getitemdetails();
             $data['getAllitemdetails']= $this->admin_model->getAllitemdetails();
+            $data['getAllitemdetailsforfilter']= $this->admin_model->getAllitemdetailsforfilter();
             $this->loadViews("masters/addnewencomingdetails", $this->global, $data, NULL);
 
         }
+    }
+
+    public function fetchincomingdeatilsitemlistadd(){
+
+        $params = $_REQUEST;
+        $totalRecords = $this->admin_model->fetchincomingdeatilsitemlistaddcount($params); 
+        $queryRecords = $this->admin_model->fetchincomingdeatilsitemlistadddata($params); 
+
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+        echo json_encode($json_data);
+
     }
 
 
@@ -5351,8 +5378,8 @@ class Admin extends BaseController
 
             $this->table->set_template($style);
 
-            $this->db->select(TBL_RAWMATERIAL.'.part_number,'.TBL_VENDOR_PO_MASTER_ITEM.'.description,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty,'.TBL_VENDOR_PO_MASTER_ITEM.'.unit,'.TBL_VENDOR_PO_MASTER_ITEM.'.rate,'.TBL_VENDOR_PO_MASTER_ITEM.'.value');
-            $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
+            $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_VENDOR_PO_MASTER_ITEM.'.description,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty,'.TBL_VENDOR_PO_MASTER_ITEM.'.unit,'.TBL_VENDOR_PO_MASTER_ITEM.'.rate,'.TBL_VENDOR_PO_MASTER_ITEM.'.value');
+            $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.find_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
             $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id',$vendor_po_number);
             $query_result = $this->db->get(TBL_VENDOR_PO_MASTER_ITEM);
             $data = $query_result->result_array();

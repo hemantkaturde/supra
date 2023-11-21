@@ -109,19 +109,20 @@
 
                                 <div class="col-md-6">
                                     <div class="container">
-                                        <button type="button" class="btn btn-success btn-xl" data-toggle="modal" data-target="#addNewModal">Add New Items</button>
-                                        <label for="remark">Item List</label>
+                                        <div style="display:flex">
+                                            <button type="button" class="btn btn-success btn-xl" data-toggle="modal" data-target="#addNewModal">Add New Items</button>
 
-                                        <select name="cars" id="cars" >
-                                            <?php foreach ($getAllitemdetails as $key => $getAllitemdetails_val) {?>        
-                                                <option value="<?php echo $getAllitemdetails_val['fin_id']; ?>"><?php echo $getAllitemdetails_val['part_number']; ?></option>
-                                            <?php } ?>
-                                        </select>
-                                                                            
-                                      
-
+                                            
+                                            <select class="form-control" name="part_number_serach" id="part_number_serach" style="width: 300px;margin-left: 30px;">
+                                                <option value="">Filer Item List By Part Name</option>
+                                                <?php foreach ($getAllitemdetailsforfilter as $key => $getAllitemdetails_val) {?>        
+                                                    <option value="<?php echo $getAllitemdetails_val['fin_id']; ?>"><?php echo $getAllitemdetails_val['part_number']; ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                                                        
                                         <br/><br/>
-                                            <table class="table table-bordered" style="max-width: 68%;display: block;overflow-x: auto; white-space: nowrap;">
+                                            <table class="table table-bordered original_table" style="max-width: 68%;display: block;overflow-x: auto; white-space: nowrap;" id="view_incomingdetailss_item_on_add">
                                                 <thead style="background-color:#3c8dbc;color:#fff">
                                                     <tr>
                                                         <th>Sr No.</th>
