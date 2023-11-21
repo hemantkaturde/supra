@@ -7606,51 +7606,59 @@
 			}
 		});
 
+		$(document).on('change','#part_number_serach',function(e){  
+			$("#view_incomingdetailss_item_on_add").dataTable().fnDestroy();
+			getIncomigDataFilter($("#part_number_serach").val());
+		});
 
 		$(document).ready(function() {
-            var dt = $('#view_incomingdetailss_item_on_add').DataTable({
+			$("#view_incomingdetailss_item_on_add").dataTable().fnDestroy();
+			getIncomigDataFilter($("#part_number_serach").val());
+
+	    });
+
+		function getIncomigDataFilter(part_number_serach)
+	    {
+			var dt = $('#view_incomingdetailss_item_on_add').DataTable({
 	            "columnDefs": [ 
 	                 { className: "details-control", "targets": [ 0 ] },
-	                 { "width": "10%", "targets": 0 },
-	                 { "width": "10%", "targets": 1 },
-					 { "width": "15%", "targets": 2 },
-	                 { "width": "10%", "targets": 3 },
-					 { "width": "15%", "targets": 4 },
+	                 { "width": "5%", "targets": 0 },
+	                 { "width": "5%", "targets": 1 },
+					 { "width": "5%", "targets": 2 },
+	                 { "width": "5%", "targets": 3 },
+					 { "width": "10%", "targets": 4 },
 	                 { "width": "10%", "targets": 5 },
 					 { "width": "10%", "targets": 6 },	
 					 { "width": "10%", "targets": 7 },
 	                 { "width": "10%", "targets": 8 },
-					 { "width": "15%", "targets": 9 },
+					 { "width": "10%", "targets": 9 },
 	                 { "width": "10%", "targets": 10 },
-					 { "width": "15%", "targets": 11 },
+					 { "width": "10%", "targets": 11 },
 	                 { "width": "10%", "targets": 12 },
 					 { "width": "10%", "targets": 13 },		
 					 { "width": "10%", "targets": 14 },
 	                 { "width": "10%", "targets": 15 },
-					 { "width": "15%", "targets": 16 },
+					 { "width": "10%", "targets": 16 },
 	                 { "width": "10%", "targets": 17 },
-					 { "width": "15%", "targets": 18 },
-	                 { "width": "10%", "targets": 19 },						
+					 { "width": "10%", "targets": 18 }
 	            ],
-	            responsive: true,
+	            responsive: false,
 	            "oLanguage": {
 	                "sEmptyTable": "<i>No Incoming Details item Found.</i>",
 	            }, 
-	            "bSort" : false,
+				"bSort" : false,
 	            "bFilter":true,
 	            "bLengthChange": true,
 	            "iDisplayLength": 10,   
 	            "bProcessing": true,
 	            "serverSide": true,
 	            "ajax":{
-                    url :"<?php echo base_url();?>fetchincomingdeatilsitemlistadd",
+                    url :"<?php echo base_url();?>fetchincomingdeatilsitemlistadd/"+$.trim(part_number_serach),
                     type: "post",
 	            },
 	        });
-	    });
 
-
-
+		}
 
    </script>
 <?php } ?>

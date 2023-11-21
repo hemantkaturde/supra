@@ -114,7 +114,7 @@
 
                                             
                                             <select class="form-control" name="part_number_serach" id="part_number_serach" style="width: 300px;margin-left: 30px;">
-                                                <option value="">Filer Item List By Part Name</option>
+                                                <option value="NA">Filer Item List By Part Name</option>
                                                 <?php foreach ($getAllitemdetailsforfilter as $key => $getAllitemdetails_val) {?>        
                                                     <option value="<?php echo $getAllitemdetails_val['fin_id']; ?>"><?php echo $getAllitemdetails_val['part_number']; ?></option>
                                                 <?php } ?>
@@ -122,7 +122,7 @@
                                         </div>
                                                                         
                                         <br/><br/>
-                                            <table class="table table-bordered original_table" style="max-width: 68%;display: block;overflow-x: auto; white-space: nowrap;" id="view_incomingdetailss_item_on_add">
+                                            <!-- <table class="table table-bordered original_table" style="max-width: 68%;display: block;overflow-x: auto; white-space: nowrap;" id="view_incomingdetailss_item_on_add">
                                                 <thead style="background-color:#3c8dbc;color:#fff">
                                                     <tr>
                                                         <th>Sr No.</th>
@@ -194,6 +194,34 @@
                                                         </td>
                                                     </tr>
                                                     <?php endforeach;?>
+                                                </tbody>
+                                            </table> -->
+
+                                            <table class="table table-bordered original_table" style="max-width: 100%;display: block;overflow-x: auto; white-space: nowrap;width: 70%; !important" id="view_incomingdetailss_item_on_add">
+                                                <thead style="background-color:#3c8dbc;color:#fff">
+                                                    <tr>
+                                                        <th>Sr No.</th>
+                                                        <th>FG Part No</th>
+                                                        <th>Description</th>
+                                                        <th>Lot Number</th>
+                                                        <th>P.O.Qty (in Pcs)</th>
+                                                        <th>Invoice Qty (in Pcs)</th>
+                                                        <th>Balance Qty in Pcs</th>
+                                                        <th>Invoice Qty (in Kgs)</th>
+                                                        <th>Invoice No.</th>
+                                                        <th>Invoice Date.</th>
+                                                        <th>Net weight (in Kgs)</th>
+                                                        <th>Challan No.</th>
+                                                        <th>Challan Date.</th>
+                                                        <th>Received Date</th>
+                                                        <th>FG Material Gross Weight</th>
+                                                        <th>Units</th>
+                                                        <th>No. of Boxes / Goni / Bundle</th>
+                                                        <th>Remarks</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
                                                 </tbody>
                                             </table>
                                     </div>

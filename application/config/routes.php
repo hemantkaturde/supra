@@ -321,7 +321,7 @@ $route['checkvendorpoandvendornumberinbillofmaterial'] = "admin/checkvendorpoand
 $route['checkvendorpoandvendornumberinvendorbillofmaterial'] = "admin/checkvendorpoandvendornumberinvendorbillofmaterial";
 
 
-$route['fetchincomingdeatilsitemlistadd'] = "admin/fetchincomingdeatilsitemlistadd";
+$route['fetchincomingdeatilsitemlistadd/(:any)'] = "admin/fetchincomingdeatilsitemlistadd/$1";
 
 
 

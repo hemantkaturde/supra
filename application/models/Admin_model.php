@@ -3163,27 +3163,31 @@ class Admin_model extends CI_Model
         return $data;
     }
 
-    public function fetchincomingdeatilsitemlistaddcount(){
+    public function fetchincomingdeatilsitemlistaddcount($params,$part_number_serach){
         $this->db->select('*,'.TBL_INCOMING_DETAILS_ITEM.'.id as incoming_details_item_id');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_INCOMING_DETAILS_ITEM.'.pre_vendor_po_number');
         $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id is NULL');
+        
+        if($part_number_serach != 'NA'){
+            $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.part_number',$part_number_serach);
+        }
+
         $query = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
-        $data = $query->result_array();
-        return $data;
-
-
+        $rowcount = $query->num_rows();
+        return $rowcount;
     }
 
-    public function fetchincomingdeatilsitemlistadddata(){
+    public function fetchincomingdeatilsitemlistadddata($params,$part_number_serach){
         $this->db->select('*,'.TBL_INCOMING_DETAILS_ITEM.'.id as incoming_details_item_id');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_INCOMING_DETAILS_ITEM.'.pre_vendor_po_number');
         $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id is NULL');
+        if($part_number_serach != 'NA'){
+          $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.part_number',$part_number_serach);
+        }
         $query = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
-        $data = $query->result_array();
-
-
+        $fetch_result = $query->result_array();
         $data = array();
         $counter = 0;
         if(count($fetch_result) > 0)
@@ -3191,34 +3195,31 @@ class Admin_model extends CI_Model
             foreach ($fetch_result as $key => $value)
             {
 
-                $data[$counter]['count'] = $counter;
+                $data[$counter]['count'] = $counter+1;
                 $data[$counter]['part_number'] = $value['part_number'];
                 $data[$counter]['name'] = $value['name'];
                 $data[$counter]['part_number_with_lot'] = $value['part_number'].' - '.$value['lot_no'];
                 $data[$counter]['p_o_qty'] = $value['p_o_qty'];
                 $data[$counter]['invoice_qty'] = $value['invoice_qty'];
+                $data[$counter]['balance_qty'] = $value['balance_qty'];
 
-
-                $data[$counter]['vendor_name'] = $value['vendorname'];
-                $data[$counter]['vendor_po_number'] = $value['po_number'];
-                $data[$counter]['reported_by'] = $value['reported_by'];
-                $data[$counter]['reported_date'] = $reported_date;
+                $data[$counter]['invoice_qty_in_kgs'] = $value['invoice_qty_in_kgs'];
+                $data[$counter]['invoice_no'] = $value['invoice_no'];
+                $data[$counter]['invoice_date'] = $value['invoice_date'];
                 
-                $data[$counter]['incoming_details_id'] = $value['incoming_details_id'];
-                $data[$counter]['vendor_name'] = $value['vendorname'];
-                $data[$counter]['vendor_po_number'] = $value['po_number'];
-                $data[$counter]['reported_by'] = $value['reported_by'];
-                $data[$counter]['reported_date'] = $reported_date;
+                $data[$counter]['net_weight'] = $value['net_weight'];
+                $data[$counter]['challan_no'] = $value['challan_no'];
+                $data[$counter]['challan_date'] = $value['challan_date'];
+                $data[$counter]['received_date'] = $value['received_date'];
+                $data[$counter]['fg_material_gross_weight'] = $value['fg_material_gross_weight'];
 
                 
-                $data[$counter]['incoming_details_id'] = $value['incoming_details_id'];
-                $data[$counter]['vendor_name'] = $value['vendorname'];
-                $data[$counter]['vendor_po_number'] = $value['po_number'];
-                $data[$counter]['reported_by'] = $value['reported_by'];
-                $data[$counter]['reported_date'] = $reported_date;
+                $data[$counter]['units'] = $value['units'];
+                $data[$counter]['boxex_goni_bundle'] = $value['boxex_goni_bundle'];
+                $data[$counter]['remarks'] = $value['remarks'];
 
                 $data[$counter]['action'] = '';
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editincomingdetails/".$value['incomigid']."' style='cursor: pointer;'><i style='font-size: large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer' data-id='".$value['incoming_details_item_id']."' class='fa fa-trash-o deleteIncomingDetailsitem' aria-hidden='true'></i>   &nbsp ";
               
                 $counter++; 
             }

@@ -4946,11 +4946,10 @@ class Admin extends BaseController
         }
     }
 
-    public function fetchincomingdeatilsitemlistadd(){
-
+    public function fetchincomingdeatilsitemlistadd($part_number_serach){
         $params = $_REQUEST;
-        $totalRecords = $this->admin_model->fetchincomingdeatilsitemlistaddcount($params); 
-        $queryRecords = $this->admin_model->fetchincomingdeatilsitemlistadddata($params); 
+        $totalRecords = $this->admin_model->fetchincomingdeatilsitemlistaddcount($params,$part_number_serach); 
+        $queryRecords = $this->admin_model->fetchincomingdeatilsitemlistadddata($params,$part_number_serach); 
 
         $data = array();
         foreach ($queryRecords as $key => $value)
