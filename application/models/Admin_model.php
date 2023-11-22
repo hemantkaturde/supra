@@ -1491,7 +1491,7 @@ class Admin_model extends CI_Model
     
     public function getVendorpodata($params){
 
-        $this->db->select('*,'.TBL_SUPPLIER.'.supplier_name as sup_name');
+        $this->db->select('*,'.TBL_SUPPLIER.'.supplier_name as sup_name,'.TBL_VENDOR_PO_MASTER.'.id  as vendor_po_master_id');
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id  = '.TBL_VENDOR_PO_MASTER.'.buyer_name');
         $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id  = '.TBL_VENDOR_PO_MASTER.'.supplier_name','left');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_VENDOR_PO_MASTER.'.vendor_name');
@@ -1525,11 +1525,11 @@ class Admin_model extends CI_Model
                 $data[$counter]['quatation_ref_no'] = $value['quatation_ref_no'];
                 $data[$counter]['quatation_date'] = $value['quatation_date'];
                 $data[$counter]['action'] = '';
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewVendorpo/".$value['id']."' style='cursor: pointer;'><i style='font-size: large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewVendorpo/".$value['vendor_po_master_id']."' style='cursor: pointer;'><i style='font-size: large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
               
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editVendorpo/".$value['id']."' style='cursor: pointer;'><i style='font-size: large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>  &nbsp";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editVendorpo/".$value['vendor_po_master_id']."' style='cursor: pointer;'><i style='font-size: large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>  &nbsp";
               
-                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['id']."' class='fa fa-trash-o deleteVendorpo' aria-hidden='true'></i>"; 
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['vendor_po_master_id']."' class='fa fa-trash-o deleteVendorpo' aria-hidden='true'></i>"; 
                 $counter++; 
             }
         }
