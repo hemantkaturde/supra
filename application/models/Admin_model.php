@@ -2588,6 +2588,30 @@ class Admin_model extends CI_Model
 
     }
 
+    public function getbillofmaterialdataforedit($billofmaterialid){
+
+        $this->db->select('*');
+        // $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_INCOMING_DETAILS.'.vendor_po_number');
+        // $this->db->where(TBL_INCOMING_DETAILS.'.status', 1);
+        $this->db->where(TBL_INCOMING_DETAILS.'.id', $id);
+        $query = $this->db->get(TBL_INCOMING_DETAILS);
+        $row_data = $query->result_array();
+        return $row_data;
+
+    }
+
+    public function getAllitemdetailsforfilteredit($id){
+        
+        $this->db->select('*,'.TBL_INCOMING_DETAILS_ITEM.'.id as incoming_details_item_id');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_INCOMING_DETAILS_ITEM.'.pre_vendor_po_number');
+        $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id',$id);
+        $this->db->group_by(TBL_INCOMING_DETAILS_ITEM.'.part_number');
+        $query = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
+        $data = $query->result_array();
+        return $data;
+    }
+
     public function getPreviousBomnumber(){
 
         $this->db->select('bom_number');
@@ -6374,6 +6398,74 @@ class Admin_model extends CI_Model
         return $data;
 
     }
+
+
+    public function fetchincomingdeatilsitemlistaddcountedit($params,$part_number_serach,$edit_id){
+        $this->db->select('*,'.TBL_INCOMING_DETAILS_ITEM.'.id as incoming_details_item_id');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_INCOMING_DETAILS_ITEM.'.pre_vendor_po_number');
+        $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id',$edit_id);
+        
+        if($part_number_serach != 'NA'){
+            $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.part_number',$part_number_serach);
+        }
+
+        $query = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+    }
+
+    public function fetchincomingdeatilsitemlistadddataedit($params,$part_number_serach,$edit_id){
+        $this->db->select('*,'.TBL_INCOMING_DETAILS_ITEM.'.id as incoming_details_item_id');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_INCOMING_DETAILS_ITEM.'.pre_vendor_po_number');
+        $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id',$edit_id);
+        if($part_number_serach != 'NA'){
+          $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.part_number',$part_number_serach);
+        }
+        $query = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
+        $fetch_result = $query->result_array();
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+
+                $data[$counter]['count'] = $counter+1;
+                $data[$counter]['part_number'] = $value['part_number'];
+                $data[$counter]['name'] = $value['name'];
+                $data[$counter]['part_number_with_lot'] = $value['part_number'].' - '.$value['lot_no'];
+                $data[$counter]['p_o_qty'] = $value['p_o_qty'];
+                $data[$counter]['invoice_qty'] = $value['invoice_qty'];
+                $data[$counter]['balance_qty'] = $value['balance_qty'];
+
+                $data[$counter]['invoice_qty_in_kgs'] = $value['invoice_qty_in_kgs'];
+                $data[$counter]['invoice_no'] = $value['invoice_no'];
+                $data[$counter]['invoice_date'] = $value['invoice_date'];
+                
+                $data[$counter]['net_weight'] = $value['net_weight'];
+                $data[$counter]['challan_no'] = $value['challan_no'];
+                $data[$counter]['challan_date'] = $value['challan_date'];
+                $data[$counter]['received_date'] = $value['received_date'];
+                $data[$counter]['fg_material_gross_weight'] = $value['fg_material_gross_weight'];
+
+                
+                $data[$counter]['units'] = $value['units'];
+                $data[$counter]['boxex_goni_bundle'] = $value['boxex_goni_bundle'];
+                $data[$counter]['remarks'] = $value['remarks'];
+
+                $data[$counter]['action'] = '';
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer' data-id='".$value['incoming_details_item_id']."' class='fa fa-trash-o deleteIncomingDetailsitem' aria-hidden='true'></i>   &nbsp ";
+              
+                $counter++; 
+            }
+        }
+
+        return $data;
+    }
+
+
 
 }
 

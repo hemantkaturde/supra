@@ -7614,7 +7614,6 @@
 		$(document).ready(function() {
 			$("#view_incomingdetailss_item_on_add").dataTable().fnDestroy();
 			getIncomigDataFilter($("#part_number_serach").val());
-
 	    });
 
 		function getIncomigDataFilter(part_number_serach)
@@ -7659,6 +7658,63 @@
 	        });
 
 		}
+	
+		$(document).on('change','#part_number_serach_edit',function(e){  
+			$("#view_incomingdetailss_item_on_edit").dataTable().fnDestroy();
+			getIncomigDataFilteredit($("#part_number_serach_edit").val());
+		});
+
+
+		$(document).ready(function() {
+			$("#view_incomingdetailss_item_on_edit").dataTable().fnDestroy();
+			getIncomigDataFilteredit($("#part_number_serach_edit").val());
+	    });
+
+		function getIncomigDataFilteredit(part_number_serach_edit)
+	    {
+			var incomingdetail_editid = $("#incomingdetail_editid").val();
+	
+			var dt = $('#view_incomingdetailss_item_on_edit').DataTable({
+	            "columnDefs": [ 
+	                 { className: "details-control", "targets": [ 0 ] },
+	                 { "width": "5%", "targets": 0 },
+	                 { "width": "5%", "targets": 1 },
+					 { "width": "5%", "targets": 2 },
+	                 { "width": "5%", "targets": 3 },
+					 { "width": "10%", "targets": 4 },
+	                 { "width": "10%", "targets": 5 },
+					 { "width": "10%", "targets": 6 },	
+					 { "width": "10%", "targets": 7 },
+	                 { "width": "10%", "targets": 8 },
+					 { "width": "10%", "targets": 9 },
+	                 { "width": "10%", "targets": 10 },
+					 { "width": "10%", "targets": 11 },
+	                 { "width": "10%", "targets": 12 },
+					 { "width": "10%", "targets": 13 },		
+					 { "width": "10%", "targets": 14 },
+	                 { "width": "10%", "targets": 15 },
+					 { "width": "10%", "targets": 16 },
+	                 { "width": "10%", "targets": 17 },
+					 { "width": "10%", "targets": 18 }
+	            ],
+	            responsive: false,
+	            "oLanguage": {
+	                "sEmptyTable": "<i>No Incoming Details item Found.</i>",
+	            }, 
+				"bSort" : false,
+	            "bFilter":true,
+	            "bLengthChange": true,
+	            "iDisplayLength": 10,   
+	            "bProcessing": true,
+	            "serverSide": true,
+	            "ajax":{
+                    url :"<?php echo base_url();?>admin/fetchincomingdeatilsitemlistedit/"+$.trim(part_number_serach_edit)+'/'+incomingdetail_editid,
+                    type: "post",
+	            },
+	        });
+
+		}
+
 
    </script>
 <?php } ?>

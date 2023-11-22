@@ -4221,6 +4221,19 @@ class Admin extends BaseController
 
     }
 
+    public function editbillofmaterial($billofmaterialid){
+
+        $process = 'Edit Bill Of Material';
+        $processFunction = 'Admin/editbillofmaterial';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Edit Bill Of Material';
+        $data['getbillofmaterialdataforedit']= $this->admin_model->getbillofmaterialdataforedit($billofmaterialid);
+        $data['billofmaterialid']= $billofmaterialid;
+        $this->loadViews("masters/editbillofmaterial", $this->global, $data, NULL);
+
+    }
+
+
     public function deleteBillofmaterial(){
         $post_submit = $this->input->post();
         if($post_submit){
@@ -5000,6 +5013,7 @@ class Admin extends BaseController
         $data['getPreviousincomingdetails']= $this->admin_model->getPreviousincomingdetails();
         $data['getPreviousincomingdetailsforedit']= $this->admin_model->getPreviousincomingdetailsforedit($id);
         $data['getAllitemdetails']= $this->admin_model->getAllitemdetailsforedit($id);
+        $data['getAllitemdetailsforfilteredit']= $this->admin_model->getAllitemdetailsforfilteredit($id);
         $data['edit_id']= $id;
         $this->loadViews("masters/editincomingdetails", $this->global, $data, NULL);
 
@@ -8489,6 +8503,33 @@ class Admin extends BaseController
         }else{
             echo 'failure';
         }
+    }
+
+
+    public function fetchincomingdeatilsitemlistedit($searchid,$edit_id){
+
+        $params = $_REQUEST;
+        $totalRecords = $this->admin_model->fetchincomingdeatilsitemlistaddcountedit($params,$searchid,$edit_id); 
+        $queryRecords = $this->admin_model->fetchincomingdeatilsitemlistadddataedit($params,$searchid,$edit_id); 
+
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+        echo json_encode($json_data);
+
     }
 
 }
