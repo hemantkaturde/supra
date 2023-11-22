@@ -317,6 +317,9 @@ $route['fetchincomingdeatilsitemlistadd/(:any)'] = "admin/fetchincomingdeatilsit
 
 
 $route['editbillofmaterial/(:any)'] = "admin/editbillofmaterial/$1";
+$route['editvendorbillofmaterial/(:any)'] = "admin/editvendorbillofmaterial/$1";
+
+
 
 //$route['fetchincomingdeatilsitemlistedit/(:any)'] = "admin/fetchincomingdeatilsitemlistedit/$1";
 

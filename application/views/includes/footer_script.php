@@ -6149,7 +6149,7 @@
 <?php } ?>
 
 
-<?php if($pageTitle=='Vendor Bill of Material' || $pageTitle=="Add New Vendor Bill Of Material"){ ?>
+<?php if($pageTitle=='Vendor Bill of Material' || $pageTitle=="Add New Vendor Bill Of Material" || $pageTitle=="Edit Vendor Bill Of Material"){ ?>
 	<script type="text/javascript">
 		$(document).ready(function() {
             var dt = $('#view_vendorbillofmaterialVendor').DataTable({
@@ -6681,12 +6681,15 @@
 			   var pre_remark =   $('#remark').val();
 
 			   var pre_incoming_details =   $('#incoming_details').val();
+
+
+			   var editvbmid =   $('#editvbmid').val();
 		 
 			$.ajax({
 				url : "<?php echo base_url();?>saveVendorbilloamaterialitems",
 				type: "POST",
 				 //data : formData,
-				 data :{part_number:part_number,description:description,buyer_order_qty:buyer_order_qty,vendor_order_qty:vendor_order_qty,vendor_received_aty:vendor_received_aty,balanced_aty:balanced_aty,item_remark:item_remark,pre_date:pre_date,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_buyer_name:pre_buyer_name,pre_buyer_po_number:pre_buyer_po_number,pre_buyer_po_date:pre_buyer_po_date,pre_buyer_delivery_date:pre_buyer_delivery_date,pre_bom_status:pre_bom_status,pre_remark:pre_remark,pre_incoming_details:pre_incoming_details},
+				 data :{part_number:part_number,description:description,buyer_order_qty:buyer_order_qty,vendor_order_qty:vendor_order_qty,vendor_received_aty:vendor_received_aty,balanced_aty:balanced_aty,item_remark:item_remark,pre_date:pre_date,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_buyer_name:pre_buyer_name,pre_buyer_po_number:pre_buyer_po_number,pre_buyer_po_date:pre_buyer_po_date,pre_buyer_delivery_date:pre_buyer_delivery_date,pre_bom_status:pre_bom_status,pre_remark:pre_remark,pre_incoming_details:pre_incoming_details,editvbmid:editvbmid},
 				// method: "POST",
                 // data :{package_id:package_id},
                 cache:false,
@@ -6709,7 +6712,13 @@
 							icon: "success",
 							button: "Ok",
 							},function(){ 
-								window.location.href = "<?php echo base_url().'addvendorBillofmaterial'?>";
+
+								if(editvbmid){
+									window.location.href = "<?php echo base_url().'editvendorbillofmaterial/'?>"+editvbmid;
+								}else{
+									window.location.href = "<?php echo base_url().'addvendorBillofmaterial'?>";
+								}
+								
 						});		
 				    }
 					
