@@ -281,7 +281,6 @@ $route['qualityrecord'] = "admin/qualityrecord";
 $route['addNewqualityrecord'] = "admin/addNewqualityrecord";
 $route['fetchqulityrecords'] = "admin/fetchqulityrecords";
 $route['savequlityrecorditem'] = "admin/savequlityrecorditem";
-
 $route['stockform'] = "admin/stockform";
 $route['getbuyerpodetailsforvendorstockform'] = "admin/getbuyerpodetailsforvendorstockform";
 $route['getItemdetailsdependonvendorpoforstockform'] = "admin/getItemdetailsdependonvendorpoforstockform";
@@ -291,8 +290,6 @@ $route['saveStockformitem'] = "admin/saveStockformitem";
 $route['deleteStockformitem'] = "admin/deleteStockformitem";
 $route['deletestockform'] = "admin/deletestockform";
 $route['editstcokformdetails/(:any)'] = "admin/editstcokformdetails/$1";
-
-
 $route['searchstock'] = "admin/searchstock";
 $route['fetchsearchstockrecords'] = "admin/fetchsearchstockrecords";
 $route['getincominglotnumberbyvendor'] = "admin/getincominglotnumberbyvendor";
@@ -300,7 +297,6 @@ $route['getinvoiceqtybyLotnumber'] = "admin/getinvoiceqtybyLotnumber";
 $route['getalltotalcalculationstockform'] = "admin/getalltotalcalculationstockform";
 $route['fetchexportrecordsitem'] = "admin/fetchexportrecordsitem";
 $route['fetchrejecteditem'] = "admin/fetchrejecteditem";
-
 $route['omschallan'] = "admin/omschallan";
 $route['fetchomschallan'] = "admin/fetchomschallan";
 $route['addNewOMSChallan'] = "admin/addNewOMSChallan";
@@ -314,15 +310,10 @@ $route['addnewenquiryform'] = "admin/addnewenquiryform";
 $route['saveenquiryformitem'] = "admin/saveenquiryformitem";
 $route['editvendorpoconfirmation/(:any)'] = "admin/editvendorpoconfirmation/$1";
 $route['deleteBillofmaterialitem'] = "admin/deleteBillofmaterialitem";
-
-
 $route['checkvendorpoandvendornumber'] = "admin/checkvendorpoandvendornumber";
 $route['checkvendorpoandvendornumberinbillofmaterial'] = "admin/checkvendorpoandvendornumberinbillofmaterial";
 $route['checkvendorpoandvendornumberinvendorbillofmaterial'] = "admin/checkvendorpoandvendornumberinvendorbillofmaterial";
-
-
 $route['fetchincomingdeatilsitemlistadd/(:any)'] = "admin/fetchincomingdeatilsitemlistadd/$1";
-
 
 
 $route['editbillofmaterial/(:any)'] = "admin/editbillofmaterial/$1";

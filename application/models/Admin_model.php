@@ -2590,12 +2590,30 @@ class Admin_model extends CI_Model
 
     public function getbillofmaterialdataforedit($billofmaterialid){
 
-        $this->db->select('*');
-        // $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_INCOMING_DETAILS.'.vendor_po_number');
+        $this->db->select(TBL_BILL_OF_MATERIAL.'.bom_number,'.TBL_BILL_OF_MATERIAL.'.id as bomidedit,'.TBL_BILL_OF_MATERIAL.'.date as bomdate,'
+        .TBL_BILL_OF_MATERIAL.'.supplier_name,'
+        .TBL_BILL_OF_MATERIAL.'.supplier_po_number,'
+        .TBL_BILL_OF_MATERIAL.'.vendor_name as bomvendor,'
+        .TBL_VENDOR_PO_MASTER.'.po_number,'
+        .TBL_VENDOR_PO_MASTER.'.id as vendor_po_id,'
+        .TBL_BILL_OF_MATERIAL.'.buyer_name as bill_of_buyer_id,'
+        .TBL_BUYER_PO_MASTER.'.sales_order_number,'
+        .TBL_BILL_OF_MATERIAL.'.buyer_po_number,'
+        .TBL_BILL_OF_MATERIAL.'.buyer_po_date,'
+        .TBL_BILL_OF_MATERIAL.'.buyer_delivery_date,'
+        .TBL_BILL_OF_MATERIAL.'.bom_status,'
+        .TBL_BILL_OF_MATERIAL.'.incoming_details,'
+        .TBL_BILL_OF_MATERIAL.'.remark,'
+        .TBL_BILL_OF_MATERIAL.'.supplier_po_date'
+        
+         );
+
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_BILL_OF_MATERIAL.'.vendor_po_number');
+        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_BILL_OF_MATERIAL.'.buyer_po_number');
         // $this->db->where(TBL_INCOMING_DETAILS.'.status', 1);
-        $this->db->where(TBL_INCOMING_DETAILS.'.id', $id);
-        $query = $this->db->get(TBL_INCOMING_DETAILS);
-        $row_data = $query->result_array();
+        $this->db->where(TBL_BILL_OF_MATERIAL.'.id', $billofmaterialid);
+        $query = $this->db->get(TBL_BILL_OF_MATERIAL);
+        $row_data = $query->row_array();
         return $row_data;
 
     }
@@ -2658,13 +2676,12 @@ class Admin_model extends CI_Model
         $this->db->where('id', $id);
         //$this->db->delete(TBL_SUPPLIER);
         if($this->db->delete(TBL_BILL_OF_MATERIAL)){
-            // $this->db->where('jobwork_id', $id);
-            // $this->db->delete(TBL_SUPPLIER);
-            // if($this->db->delete(TBL_JOB_WORK_ITEM)){
-            //    return TRUE;
-            // }else{
-            //    return FALSE;
-            // }
+            $this->db->where('bom_id', $id);
+            if($this->db->delete(TBL_BILL_OF_MATERIAL_ITEM)){
+               return TRUE;
+            }else{
+               return FALSE;
+            }
             return TRUE;
         }else{
            return FALSE;
@@ -3682,6 +3699,64 @@ class Admin_model extends CI_Model
 
 
     }
+
+
+    public function fetchALLpreBillofmaterailistedit($billofmaterialid){
+
+
+        // $this->db->select('*,'.TBL_FINISHED_GOODS.'.sac as sac_no,'.TBL_VENDOR_PO_MASTER_ITEM.'.rate as supplierrate,'.TBL_FINISHED_GOODS.'.groass_weight as fg_gross_weight,'.TBL_FINISHED_GOODS.'.net_weight as fg_net_weight');
+        // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+        // $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
+        // $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.pre_vendor_name');
+        // $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id',$vendor_po_number);
+        // $this->db->where(TBL_FINISHED_GOODS.'.status',1);
+        // $this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
+        // $query = $this->db->get(TBL_FINISHED_GOODS);
+        // $data = $query->result_array();
+        // return $data;
+
+
+
+        $this->db->select('*,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name as description,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as order_oty,'
+        .TBL_BILL_OF_MATERIAL_ITEM.'.rm_actual_aty,'
+        .TBL_BILL_OF_MATERIAL_ITEM.'.pre_supplier_name,'
+        .TBL_RAWMATERIAL.'.sitting_size,'
+        .TBL_RAWMATERIAL.'.diameter,'
+        .TBL_RAWMATERIAL.'.thickness,'
+        .TBL_RAWMATERIAL.'.hex_a_f,'
+        .TBL_FINISHED_GOODS.'.groass_weight,'
+        .TBL_BILL_OF_MATERIAL_ITEM.'.expected_qty,'
+        .TBL_BILL_OF_MATERIAL_ITEM.'.vendor_actual_recived_qty,'
+        .TBL_BILL_OF_MATERIAL_ITEM.'.net_weight_per_pcs,'
+        .TBL_BILL_OF_MATERIAL_ITEM.'.total_neight_weight,'
+        .TBL_BILL_OF_MATERIAL_ITEM.'.short_excess,'
+        .TBL_BILL_OF_MATERIAL_ITEM.'.scrap_in_kgs,'
+        .TBL_BILL_OF_MATERIAL_ITEM.'.actual_scrap_received_in_kgs,'
+        .TBL_BILL_OF_MATERIAL_ITEM.'.remark,'
+        .TBL_VENDOR_PO_MASTER.'.po_number as vendorponumnber,'
+        .TBL_BILL_OF_MATERIAL_ITEM.'.pre_supplier_po_number,'
+        .TBL_BUYER_PO_MASTER.'.sales_order_number,'
+        .TBL_BILL_OF_MATERIAL_ITEM.'.pre_remark as bom_remark,'
+        .TBL_SUPPLIER_PO_MASTER_ITEM.'.order_oty as rmsupplier_order_qty,'
+        .TBL_BILL_OF_MATERIAL_ITEM.'.id as biil_of_material_id,'
+        .TBL_BILL_OF_MATERIAL_ITEM.'.pre_vendor_name as vendor_biil_of_materil,'
+        
+        .TBL_RAWMATERIAL.'.type_of_raw_material');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BILL_OF_MATERIAL_ITEM.'.part_number');
+        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+        $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_BILL_OF_MATERIAL_ITEM.'.pre_vendor_po_number');
+        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_BILL_OF_MATERIAL_ITEM.'.pre_buyer_po_number');
+        $this->db->join(TBL_SUPPLIER_PO_MASTER_ITEM, TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id = '.TBL_RAWMATERIAL.'.raw_id');
+        $this->db->where(TBL_BILL_OF_MATERIAL_ITEM.'.bom_id',$billofmaterialid);
+        $this->db->group_by(TBL_BILL_OF_MATERIAL_ITEM.'.id');
+        $query = $this->db->get(TBL_BILL_OF_MATERIAL_ITEM);
+        $data = $query->result_array();
+        return $data;
+
+
+    }
+
 
 
     // public function getExportdetailsCount(){

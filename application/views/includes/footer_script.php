@@ -5041,7 +5041,7 @@
 <?php } ?>
 
 
-<?php if($pageTitle=='Bill of Material' || $pageTitle=="Add New Bill Of Material"){ ?>
+<?php if($pageTitle=='Bill of Material' || $pageTitle=="Add New Bill Of Material" || $pageTitle=="Edit Bill Of Material"){ ?>
 
 	<script type="text/javascript">
         $(document).ready(function() {
@@ -5808,11 +5808,14 @@
 			   var pre_incoming_details =  $('#incoming_details').val();
                var pre_remark =  $('#remark').val();
 
+			   var bom_id_edit =  $('#bom_id_edit').val();
+
+
 			$.ajax({
 				url : "<?php echo base_url();?>saveBillofmaterialtem",
 				type: "POST",
 				 //data : formData,
-				 data :{part_number:part_number,rm_actual_aty:rm_actual_aty,expected_qty:expected_qty,vendor_actual_received_Qty:vendor_actual_received_Qty,net_weight_per_pcs:net_weight_per_pcs,total_net_weight:total_net_weight,short_access:short_access,scrap:scrap,actual_scrap_recived:actual_scrap_recived,item_remark,pre_date:pre_date,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_supplier_name:pre_supplier_name,pre_supplier_po_number:pre_supplier_po_number,pre_buyer_name:pre_buyer_name,pre_buyer_po_number:pre_buyer_po_number,pre_buyer_po_date:pre_buyer_po_date,pre_buyer_delivery_date:pre_buyer_delivery_date,pre_bom_status:pre_bom_status,pre_incoming_details:pre_incoming_details,pre_remark,supplier_po_date:supplier_po_date},
+				 data :{part_number:part_number,rm_actual_aty:rm_actual_aty,expected_qty:expected_qty,vendor_actual_received_Qty:vendor_actual_received_Qty,net_weight_per_pcs:net_weight_per_pcs,total_net_weight:total_net_weight,short_access:short_access,scrap:scrap,actual_scrap_recived:actual_scrap_recived,item_remark,pre_date:pre_date,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_supplier_name:pre_supplier_name,pre_supplier_po_number:pre_supplier_po_number,pre_buyer_name:pre_buyer_name,pre_buyer_po_number:pre_buyer_po_number,pre_buyer_po_date:pre_buyer_po_date,pre_buyer_delivery_date:pre_buyer_delivery_date,pre_bom_status:pre_bom_status,pre_incoming_details:pre_incoming_details,pre_remark,supplier_po_date:supplier_po_date,bom_id_edit:bom_id_edit},
 				// method: "POST",
                 // data :{package_id:package_id},
                 cache:false,
@@ -5835,7 +5838,12 @@
 							icon: "success",
 							button: "Ok",
 							},function(){ 
-								window.location.href = "<?php echo base_url().'addnewBillofmaterial'?>";
+								if(bom_id_edit){
+									window.location.href = "<?php echo base_url().'editbillofmaterial/'?>"+bom_id_edit;
+								}else{
+									window.location.href = "<?php echo base_url().'addnewBillofmaterial'?>";
+								}
+								
 						});		
 				    }
 					

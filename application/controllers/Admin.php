@@ -4107,6 +4107,7 @@ class Admin extends BaseController
             $this->form_validation->set_rules('vendor_po_number','Vendor PO  Number','trim|required');
             $this->form_validation->set_rules('supplier_name','Supplier Name','trim');
             $this->form_validation->set_rules('supplier_po_number','Supplier PO  Number','trim');
+            $this->form_validation->set_rules('supplier_po_date','Supplier PO Date','trim');
             $this->form_validation->set_rules('buyer_name','Buyer_name','trim|required');
             $this->form_validation->set_rules('buyer_po_number','Buyer PO Number','trim|required');
             $this->form_validation->set_rules('buyer_po_date','Buyer PO Date','trim|required');
@@ -4126,6 +4127,7 @@ class Admin extends BaseController
                                                                 'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),
                                                                 'supplier_name'=>strip_tags(form_error('supplier_name')),
                                                                 'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),
+                                                                'supplier_po_date'=>strip_tags(form_error('supplier_po_date')),
                                                                 'buyer_name'=>strip_tags(form_error('buyer_name')),
                                                                 'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),
                                                                 'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),
@@ -4145,6 +4147,7 @@ class Admin extends BaseController
                     'vendor_po_number'=> trim($this->input->post('vendor_po_number')),
                     'supplier_name'=> trim($this->input->post('supplier_name')),
                     'supplier_po_number'=> trim($this->input->post('supplier_po_number')),
+                    'supplier_po_date'=>trim($this->input->post('supplier_po_date')),
                     'buyer_name' =>    trim($this->input->post('buyer_name')),
                     'buyer_po_number' =>    trim($this->input->post('buyer_po_number')),
                     'buyer_po_date' =>    trim($this->input->post('buyer_po_date')),
@@ -4154,8 +4157,10 @@ class Admin extends BaseController
                     'remark' =>    trim($this->input->post('remark')),
                 );
 
-                $checkIfexitsBillofmaterial = $this->admin_model->checkIfexitsBillofmaterial(trim($this->input->post('bom_number')));
-                if($checkIfexitsBillofmaterial > 0){
+                // $checkIfexitsBillofmaterial = $this->admin_model->checkIfexitsBillofmaterial(trim($this->input->post('bom_number')));
+                // if($checkIfexitsBillofmaterial > 0){
+
+                   
                         $save_Billofmaterial_response['status'] = 'failure';
                         $save_Billofmaterial_response['error'] = array( 'bom_number'=>strip_tags(form_error('bom_number')),
                         'date'=>strip_tags(form_error('date')),
@@ -4163,6 +4168,7 @@ class Admin extends BaseController
                         'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),
                         'supplier_name'=>strip_tags(form_error('supplier_name')),
                         'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),
+                        'supplier_po_date'=>strip_tags(form_error('supplier_po_date')),
                         'buyer_name'=>strip_tags(form_error('buyer_name')),
                         'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),
                         'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),
@@ -4171,10 +4177,11 @@ class Admin extends BaseController
                         'incoming_details'=>strip_tags(form_error('incoming_details')),
                         'bom_status'=>strip_tags(form_error('bom_status')),
                         'remark'=>strip_tags(form_error('remark')));
-                }else{
-                    $saveBillofmaterial = $this->admin_model->saveBillofmaterial('',$data);
+                // }else{
 
-                    
+                    $saveBillofmaterial = $this->admin_model->saveBillofmaterial(trim($this->input->post('bom_id_edit')),$data);
+
+                  
 
                     if($saveBillofmaterial){
                         $update_last_inserted_Bill_of_material = $this->admin_model->update_last_inserted_Bill_of_material($saveBillofmaterial);
@@ -4186,6 +4193,7 @@ class Admin extends BaseController
                                 'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),
                                 'supplier_name'=>strip_tags(form_error('supplier_name')),
                                 'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),
+                                'supplier_po_date'=>strip_tags(form_error('supplier_po_date')),
                                 'buyer_name'=>strip_tags(form_error('buyer_name')),
                                 'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),
                                 'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),
@@ -4197,7 +4205,7 @@ class Admin extends BaseController
                          }
                     }
 
-                }
+                //}
 
             }
 
@@ -4227,7 +4235,11 @@ class Admin extends BaseController
         $processFunction = 'Admin/editbillofmaterial';
         $this->logrecord($process,$processFunction);
         $this->global['pageTitle'] = 'Edit Bill Of Material';
+        $data['vendorList']= $this->admin_model->fetchALLvendorListwithsupplier();
+        $data['buyerList']= $this->admin_model->fetchAllbuyerList();
         $data['getbillofmaterialdataforedit']= $this->admin_model->getbillofmaterialdataforedit($billofmaterialid);
+        $data['fetchALLpreBillofmaterailistedit']= $this->admin_model->fetchALLpreBillofmaterailistedit($billofmaterialid);
+        $data['incoming_details']= $this->admin_model->fetchAllincomingdetailsList();
         $data['billofmaterialid']= $billofmaterialid;
         $this->loadViews("masters/editbillofmaterial", $this->global, $data, NULL);
 
@@ -5487,7 +5499,16 @@ class Admin extends BaseController
                     'item_remark'=>strip_tags(form_error('item_remark')));
             }else{
 
+                $bom_id_edit =   $this->input->post('bom_id_edit');
+
+                if($bom_id_edit){
+                    $incoming_details_id =$bom_id_edit;
+                }else{
+                    $incoming_details_id =NULL;
+                }
+
                  $data = array(
+                    'bom_id'=>$incoming_details_id,
                     'part_number'=>$this->input->post('part_number'),
                     'rm_actual_aty'=>$this->input->post('rm_actual_aty'),
                     'expected_qty'=>$this->input->post('expected_qty'),
