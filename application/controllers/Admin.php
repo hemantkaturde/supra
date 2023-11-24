@@ -8579,4 +8579,14 @@ class Admin extends BaseController
 
     }
 
+
+    public function stockrejectionform(){
+            $process = 'Stockrejection Form';
+            $processFunction = 'Admin/stockrejectionform';
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Stockrejection Form';
+            $data['vendorList']= $this->admin_model->fetchALLvendorList();   
+            $this->loadViews("masters/stockrejectionform", $this->global, $data, NULL);
+    }
+
 }

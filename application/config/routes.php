@@ -314,10 +314,11 @@ $route['checkvendorpoandvendornumber'] = "admin/checkvendorpoandvendornumber";
 $route['checkvendorpoandvendornumberinbillofmaterial'] = "admin/checkvendorpoandvendornumberinbillofmaterial";
 $route['checkvendorpoandvendornumberinvendorbillofmaterial'] = "admin/checkvendorpoandvendornumberinvendorbillofmaterial";
 $route['fetchincomingdeatilsitemlistadd/(:any)'] = "admin/fetchincomingdeatilsitemlistadd/$1";
-
-
 $route['editbillofmaterial/(:any)'] = "admin/editbillofmaterial/$1";
 $route['editvendorbillofmaterial/(:any)'] = "admin/editvendorbillofmaterial/$1";
+
+
+$route['stockrejectionform'] = "admin/stockrejectionform";
 
 
 
