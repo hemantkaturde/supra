@@ -14349,7 +14349,6 @@
 	        });
 		 });
 
-
 		 $(document).ready(function() {
 			var rejection_form_id = $('#rejection_form_id').val();
 
@@ -14377,7 +14376,6 @@
 	            },
 	        });
 		 });
-
 
 		 $(document).on('click','#addnewrejectionform',function(e){
 			e.preventDefault();
@@ -14503,6 +14501,90 @@
 					}
 				});
 	     });
+
+		 $(document).on('click','.addrejectionitemdata',function(e){
+			var elemF = $(this);
+
+			$('#rejection_form_id_popup').val();
+			$('#vendor_po_id').val();
+			$('#vendor_po_item_id').val();
+			$('#net_weight').val();
+
+			var rejection_form_id = elemF.attr('rejection-form-id');
+			var vendor_po_id = elemF.attr('vendor-po-id');
+			var vendor_po_item_id = elemF.attr('vendor_po_item_id');
+			var net_weight = elemF.attr('net_weight');
+
+			$('#rejection_form_id_popup').val(rejection_form_id);
+			$('#vendor_po_id').val(vendor_po_id);
+			$('#vendor_po_item_id').val(vendor_po_item_id);
+			$('#net_weight').val(net_weight);
+	     });
+
+		 $(document).on('change', '#qty_in_pcs', function(){	
+				
+			     $("#qty_in_kgs").val();
+			  
+				 if($("#qty_in_pcs").val()){
+					 var qty_in_pcs = $("#qty_in_pcs").val();
+				 }else{
+					 var qty_in_pcs = 0;
+				 }
+
+				 if($("#net_weight").val()){
+					 var net_weight = $("#net_weight").val();
+				 }else{
+					 var net_weight = 0;
+				 }
+		 
+				 var value = parseFloat(qty_in_pcs) * parseFloat(net_weight);
+				 $("#qty_in_kgs").val( Math.round(value));
+		 });
+
+
+		 $(document).on('click','#saverejectedformitemdata',function(e){
+			e.preventDefault();
+			$(".loader_ajax").show();
+			var rejection_form_id_popup = $("#rejection_form_id_popup").val();
+			var formData = new FormData($("#saverejectedformitemdataform")[0]);
+			$.ajax({
+				url : "<?php echo base_url();?>saverejectedformitemdata",
+				type: "POST",
+				data : formData,
+				cache: false,
+		        contentType: false,
+		        processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+						$(".loader_ajax").hide();
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						swal({
+							title: "Success",
+							text: "Items Details Successfully Added!",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+								window.location.href = "<?php echo base_url().'addrejectionformitemsdata/'?>"+rejection_form_id_popup;
+						});		
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			});
+			return false;
+	    });
 
 		 
 	</script>

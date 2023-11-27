@@ -8642,6 +8642,9 @@ class Admin extends BaseController
                 if($savenewrejectionform){
                     $add_newrejection_response['status'] = 'success';
                     $add_newrejection_response['error'] = array('rejection_number'=>strip_tags(form_error('rejection_number')),'rejection_form_date'=>strip_tags(form_error('rejection_form_date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'remark'=>strip_tags(form_error('remark')));
+                 }else{
+                    $add_newrejection_response['status'] = 'failure';
+                    $add_newrejection_response['error'] = array('rejection_number'=>strip_tags(form_error('rejection_number')),'rejection_form_date'=>strip_tags(form_error('rejection_form_date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'remark'=>strip_tags(form_error('remark')));
                  }
             }
             echo json_encode($add_newrejection_response);
@@ -8740,6 +8743,46 @@ class Admin extends BaseController
         $data['getalldataofeditrejectionform']= $this->admin_model->getalldataofeditrejectionform($rejection_form_id);
         $this->loadViews("masters/addrejectionformitemsmultipaledata", $this->global, $data, NULL);
 
+    }
+
+    public function saverejectedformitemdata(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $saverejectedform_response = array();
+            $this->form_validation->set_rules('rejected_reason','Rejected Reason','trim|required'); 
+            $this->form_validation->set_rules('qty_in_pcs','Qty In Pcs','trim|required');   
+            $this->form_validation->set_rules('qty_in_kgs','Qty In Kgs','trim|required');      
+            $this->form_validation->set_rules('remark','Remark','trim');                   
+            if($this->form_validation->run() == FALSE)
+            {
+                $saverejectedform_response['status'] = 'failure';
+                $saverejectedform_response['error'] =  array('rejected_reason'=>strip_tags(form_error('rejected_reason')),'qty_in_pcs'=>strip_tags(form_error('qty_in_pcs')),'qty_in_kgs'=>strip_tags(form_error('qty_in_kgs')),'remark'=>strip_tags(form_error('remark')));
+            
+            }else{
+
+                $data = array(
+                    'item_id '=> trim($this->input->post('vendor_po_item_id')),
+                    'rejection_form_id '=> trim($this->input->post('rejection_form_id_popup')),
+                    'vendor_po_id '=> trim($this->input->post('vendor_po_id')),
+                    'rejected_reason' => trim($this->input->post('rejected_reason')),
+                    'qty_in_pcs' => trim($this->input->post('qty_in_pcs')),
+                    'qty_in_kgs' => trim($this->input->post('qty_in_kgs')),
+                    'remark' => trim($this->input->post('remark')),
+                );
+
+                $savenewrejectionform= $this->admin_model->saverejectedformitemdata('',$data);
+                if($savenewrejectionform){
+                    $saverejectedform_response['status'] = 'success';
+                    $saverejectedform_response['error'] =  array('rejected_reason'=>strip_tags(form_error('rejected_reason')),'qty_in_pcs'=>strip_tags(form_error('qty_in_pcs')),'qty_in_kgs'=>strip_tags(form_error('qty_in_kgs')),'remark'=>strip_tags(form_error('remark')));
+                }else{
+                    $saverejectedform_response['status'] = 'failure';
+                    $saverejectedform_response['error'] =  array('rejected_reason'=>strip_tags(form_error('rejected_reason')),'qty_in_pcs'=>strip_tags(form_error('qty_in_pcs')),'qty_in_kgs'=>strip_tags(form_error('qty_in_kgs')),'remark'=>strip_tags(form_error('remark')));
+                 }
+
+            }
+
+            echo json_encode($saverejectedform_response);
+        }
     }
 
 }
