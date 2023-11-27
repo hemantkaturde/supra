@@ -8636,10 +8636,9 @@ class Admin extends BaseController
                     'vendor_po_number' => trim($this->input->post('vendor_po_number')),
                     'remark' => trim($this->input->post('remark'))
                 );
-                $rejection_form_id =  trim($this->input->post('rejection_number'));
-
-               
-                $savenewrejectionform= $this->admin_model->savenewrejectionform('',$data);
+                $rejection_form_id =  trim($this->input->post('rejection_form_id'));
+                
+                $savenewrejectionform= $this->admin_model->savenewrejectionform($rejection_form_id,$data);
                 if($savenewrejectionform){
                     $add_newrejection_response['status'] = 'success';
                     $add_newrejection_response['error'] = array('rejection_number'=>strip_tags(form_error('rejection_number')),'rejection_form_date'=>strip_tags(form_error('rejection_form_date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'remark'=>strip_tags(form_error('remark')));

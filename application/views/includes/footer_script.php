@@ -14359,7 +14359,7 @@
 	                 { "width": "20%", "targets": 0 },
 	                 { "width": "20%", "targets": 1 },
 					 { "width": "20%", "targets": 2 },
-	                 { "width": "15%", "targets": 3 }
+	                 { "width": "5%", "targets": 3 }
 	            ],
 	            responsive: true,
 	            "oLanguage": {
