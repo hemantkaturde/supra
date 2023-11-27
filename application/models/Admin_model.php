@@ -6711,7 +6711,7 @@ class Admin_model extends CI_Model
         return $rowcount;
     }
 
-    public function getstockrejectionformitemdata($params,$vendor_po_id){
+    public function getstockrejectionformitemdata($params,$vendor_po_id,$id){
         $this->db->select('*');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
 
@@ -6735,7 +6735,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['name'] =$value['name'];
                 $data[$counter]['remark'] =$value['item_remark'];
                 $data[$counter]['action'] = '';
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addrejectionformitemsdata/".$value['rejectionformid']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addrejectionformitemsdatamultientries?rejection_form_id=".$id.'&vendor_po_item_id='.$value['id'].'&vendor_po_id='.$vendor_po_id."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
                 $counter++; 
             }
         }

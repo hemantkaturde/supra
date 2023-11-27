@@ -8701,8 +8701,8 @@ class Admin extends BaseController
         $vendor_po_id =  trim($data['getalldataofeditrejectionform']['vpn']);
 
         $params = $_REQUEST;
-        $totalRecords = $this->admin_model->getstockrejectionformitemcount($params, $vendor_po_id); 
-        $queryRecords = $this->admin_model->getstockrejectionformitemdata($params, $vendor_po_id); 
+        $totalRecords = $this->admin_model->getstockrejectionformitemcount($params, $vendor_po_id,$id); 
+        $queryRecords = $this->admin_model->getstockrejectionformitemdata($params, $vendor_po_id,$id); 
 
         $data = array();
         foreach ($queryRecords as $key => $value)
@@ -8721,6 +8721,24 @@ class Admin extends BaseController
             "data"            => $data   // total data array
             );
         echo json_encode($json_data);
+
+    }
+
+
+    public function addrejectionformitemsdatamultientries(){
+
+        $rejection_form_id = $_GET['rejection_form_id'];
+        $vendor_po_item_id = $_GET['vendor_po_item_id'];
+        $vendor_po_id = $_GET['vendor_po_id'];
+        $process = 'Add Rejection Form Data';
+        $processFunction = 'Admin/editrejetionform';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Add Rejection Form Data';
+        $data['rejection_form_id']= $rejection_form_id;
+        $data['vendor_po_item_id']= $vendor_po_item_id;
+        $data['vendor_po_id']= $vendor_po_id;
+        $data['getalldataofeditrejectionform']= $this->admin_model->getalldataofeditrejectionform($rejection_form_id);
+        $this->loadViews("masters/addrejectionformitemsmultipaledata", $this->global, $data, NULL);
 
     }
 
