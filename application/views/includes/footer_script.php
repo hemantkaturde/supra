@@ -14541,7 +14541,6 @@
 				 $("#qty_in_kgs").val( Math.round(value));
 		 });
 
-
 		 $(document).on('click','#saverejectedformitemdata',function(e){
 			e.preventDefault();
 			$(".loader_ajax").show();
@@ -14584,8 +14583,40 @@
 			    }
 			});
 			return false;
-	    });
+	     });	 
+	</script>
+<?php } ?>
 
-		 
+
+<?php if($pageTitle=='Add Rejection Form Data'){ ?>
+	<script type="text/javascript">  
+        $(document).ready(function() {
+			var dt = $('#view_stock_rejection_form_ttem_details').DataTable({
+	            "columnDefs": [ 
+	                 { className: "details-control", "targets": [ 0 ] },
+	                 { "width": "20%", "targets": 0 },
+	                 { "width": "20%", "targets": 1 },
+					 { "width": "20%", "targets": 2 },
+	                 { "width": "15%", "targets": 3 },
+					 { "width": "15%", "targets": 4 }
+	            ],
+	            responsive: true,
+	            "oLanguage": {
+	                "sEmptyTable": "<i>No Stock Rejection Form Item Details Found.</i>",
+	            }, 
+	            "bSort" : false,
+	            "bFilter":true,
+	            "bLengthChange": true,
+	            "iDisplayLength": 10,   
+	            "bProcessing": true,
+	            "serverSide": true,
+	            "ajax":{
+                    url :"<?php echo base_url();?>fetch_stock_rejection_form_ttem_details",
+                    type: "post",
+	            },
+	        });
+		 });
+
+
 	</script>
 <?php } ?>
