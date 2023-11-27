@@ -8638,14 +8638,8 @@ class Admin extends BaseController
                 );
                 $rejection_form_id =  trim($this->input->post('rejection_number'));
 
-                if($rejection_form_id){
-                    $edit_id =$rejection_form_id;
-
-                }else{
-                    $edit_id =NULL;
-                }
-
-                $savenewrejectionform= $this->admin_model->savenewrejectionform($edit_id,$data);
+               
+                $savenewrejectionform= $this->admin_model->savenewrejectionform('',$data);
                 if($savenewrejectionform){
                     $add_newrejection_response['status'] = 'success';
                     $add_newrejection_response['error'] = array('rejection_number'=>strip_tags(form_error('rejection_number')),'rejection_form_date'=>strip_tags(form_error('rejection_form_date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'remark'=>strip_tags(form_error('remark')));
