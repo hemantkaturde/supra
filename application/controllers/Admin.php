@@ -8535,7 +8535,6 @@ class Admin extends BaseController
     }
 
 
-
     public function checkvendorpoandvendornumberinvendorbillofmaterial(){
 
         $post_submit = $this->input->post();
@@ -8551,7 +8550,6 @@ class Admin extends BaseController
             echo 'failure';
         }
     }
-
 
     public function fetchincomingdeatilsitemlistedit($searchid,$edit_id){
 
@@ -8579,7 +8577,6 @@ class Admin extends BaseController
 
     }
 
-
     public function stockrejectionform(){
             $process = 'Stockrejection Form';
             $processFunction = 'Admin/stockrejectionform';
@@ -8587,6 +8584,144 @@ class Admin extends BaseController
             $this->global['pageTitle'] = 'Stockrejection Form';
             $data['vendorList']= $this->admin_model->fetchALLvendorList();   
             $this->loadViews("masters/stockrejectionform", $this->global, $data, NULL);
+    }
+
+    public function fetchenstockrejectionform(){
+        $params = $_REQUEST;
+        $totalRecords = $this->admin_model->fetchenstockrejectionformCount($params); 
+        $queryRecords = $this->admin_model->fetchenstockrejectionformData($params); 
+
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+        echo json_encode($json_data);
+
+
+    }
+
+
+    public function addnewrejectionform(){
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $add_newrejection_response = array();
+            $this->form_validation->set_rules('rejection_number','Rejection Number','trim|required');
+            $this->form_validation->set_rules('rejection_form_date','Rejection Form Date','trim|required');
+            $this->form_validation->set_rules('vendor_name','Vendor Name','trim|required');
+            $this->form_validation->set_rules('vendor_po_number','Vendor PO Number','trim|required');
+            $this->form_validation->set_rules('remark','Remark','trim');
+
+            if($this->form_validation->run() == FALSE)
+            {
+                $add_newrejection_response['status'] = 'failure';
+                $add_newrejection_response['error'] = array('rejection_number'=>strip_tags(form_error('rejection_number')),'rejection_form_date'=>strip_tags(form_error('rejection_form_date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'remark'=>strip_tags(form_error('remark')));
+            }else{
+                $data = array(
+                    'rejection_number' => trim($this->input->post('rejection_number')),
+                    'rejection_form_date' => trim($this->input->post('rejection_form_date')),
+                    'vendor_id' => trim($this->input->post('vendor_name')),
+                    'vendor_po_number' => trim($this->input->post('vendor_po_number')),
+                    'remark' => trim($this->input->post('remark'))
+                );
+                $rejection_form_id =  trim($this->input->post('rejection_number'));
+
+                $savenewrejectionform= $this->admin_model->savenewrejectionform($rejection_form_id,$data);
+                if($savenewrejectionform){
+                    $add_newrejection_response['status'] = 'success';
+                    $add_newrejection_response['error'] = array('rejection_number'=>strip_tags(form_error('rejection_number')),'rejection_form_date'=>strip_tags(form_error('rejection_form_date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'remark'=>strip_tags(form_error('remark')));
+                 }
+            }
+            echo json_encode($add_newrejection_response);
+        }else{
+            $process = 'Add New Rejection Form';
+            $processFunction = 'Admin/addnewrejectionform';
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Add New Rejection Form';
+            $data['vendorList']= $this->admin_model->fetchALLvendorList();
+            $data['getPreviousrejectionformnumber']= $this->admin_model->getPreviousrejectionformnumber();
+            $this->loadViews("masters/addnewrejectionform", $this->global, $data, NULL);
+        }
+    }
+
+
+    public function editrejetionform($id){
+
+        $process = 'Edit Rejection Form';
+        $processFunction = 'Admin/editrejetionform';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Edit Rejection Form';
+        $data['vendorList']= $this->admin_model->fetchALLvendorList();
+        $data['getalldataofeditrejectionform']= $this->admin_model->getalldataofeditrejectionform($id);
+        $this->loadViews("masters/editstockrejetionform", $this->global, $data, NULL);
+
+    }
+
+    public function deleterejectionform(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->deleterejectionform(trim($this->input->post('id')));
+            if ($result) {
+                        $process = 'Delete Rejection Form';
+                        $processFunction = 'Admin/deleterejectionform';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
+    }
+
+
+    public function addrejectionformitemsdata($id){
+        $process = 'Add Rejection Form Data';
+        $processFunction = 'Admin/editrejetionform';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Add Rejection Form Data';
+        $data['getalldataofeditrejectionform']= $this->admin_model->getalldataofeditrejectionform($id);
+        $this->loadViews("masters/addrejectionformitemsdata", $this->global, $data, NULL);
+    }
+
+
+    public function fetchenstockrejectionformitemdata($id){
+        $data['getalldataofeditrejectionform']= $this->admin_model->getalldataofeditrejectionform($id);
+        $vendor_po_id =  trim($data['getalldataofeditrejectionform']['vpn']);
+
+        $params = $_REQUEST;
+        $totalRecords = $this->admin_model->getstockrejectionformitemcount($params, $vendor_po_id); 
+        $queryRecords = $this->admin_model->getstockrejectionformitemdata($params, $vendor_po_id); 
+
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+        echo json_encode($json_data);
+
     }
 
 }

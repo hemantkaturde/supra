@@ -2,7 +2,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            <i class="fa fa-users"></i> Stock Rejection Form
+            <i class="fa fa-users"></i> Stock Rejection Form Items Data
             <small>Add,Delete</small>
         </h1>
     </section>
@@ -11,28 +11,30 @@
             <div class="col-xs-6 text-left">
                 <ul class="breadcrumb" style="background-color:#ecf0f5 !important">
                     <li class="completed"><a href="javascript:void(0);">Masters</a></li>
-                    <li class="active"><a href="javascript:void(0);">Stock Rejection Form</a></li>
+                    <li class="active"><a href="javascript:void(0);">Stock Rejection Form Items Data</a></li>
                 </ul>
             </div>
             <div class="col-xs-6 text-right">
                 <div class="form-group">
-                    <a class="btn btn-primary" href="<?php echo base_url(); ?>addnewrejectionform">
-                        <i class="fa fa-plus"></i> Add Stock Rejection Form</a>
+                   <p><b>Vendor Name</b> : <?=$getalldataofeditrejectionform['vendor_name']; ?></p>
+                   <p><b>Vendor PO</b> : <?=$getalldataofeditrejectionform['po_number']; ?></p>
                 </div>
             </div>
         </div>
+
+        <input type="hidden" class="form-control" id="rejection_form_id" name="rejection_form_id" value="<?=$getalldataofeditrejectionform['rejection_form_id'];?>" required readonly>
+
+
         <div class="row">
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-body">   
                         <div class="panel-body">
-                            <table width="100%" class="table table-striped table-bordered table-hover" id="view_stockrejection_form">
+                            <table width="100%" class="table table-striped table-bordered table-hover" id="view_stockrejection_form_item_data">
                                 <thead>
                                     <tr style="background-color:#3c8dbc !important;color:#fff">
-                                        <th>Stock Rejection No</th>
-                                        <th>Date</th>
-                                        <th>Vendor Name</th>
-                                        <th>Vendor PO</th>
+                                        <th>Part Number</th>
+                                        <th>Description</th>
                                         <th>Remark</th>
                                         <th>Action</th>
                                     </tr>

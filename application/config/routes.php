@@ -319,6 +319,18 @@ $route['editvendorbillofmaterial/(:any)'] = "admin/editvendorbillofmaterial/$1";
 
 
 $route['stockrejectionform'] = "admin/stockrejectionform";
+$route['fetchenstockrejectionform'] = "admin/fetchenstockrejectionform";
+$route['addnewrejectionform'] = "admin/addnewrejectionform";
+$route['editrejetionform/(:any)'] = "admin/editrejetionform/$1";
+
+$route['deleterejectionform'] = "admin/deleterejectionform";
+$route['addrejectionformitemsdata/(:any)'] = "admin/addrejectionformitemsdata/$1";
+
+$route['fetchenstockrejectionformitemdata/(:any)'] = "admin/fetchenstockrejectionformitemdata/$1";
+
+
+
+
 
 
 

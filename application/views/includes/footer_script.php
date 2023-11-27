@@ -14320,7 +14320,7 @@
 <?php } ?>
 
 
-<?php if($pageTitle=='Stockrejection Form'){ ?>
+<?php if($pageTitle=='Stockrejection Form' || $pageTitle=='Add New Rejection Form' || $pageTitle=='Edit Rejection Form' || $pageTitle=='Add Rejection Form Data'){ ?>
 	<script type="text/javascript">  
          $(document).ready(function() {
 			var dt = $('#view_stockrejection_form').DataTable({
@@ -14329,7 +14329,8 @@
 	                 { "width": "20%", "targets": 0 },
 	                 { "width": "20%", "targets": 1 },
 					 { "width": "20%", "targets": 2 },
-	                 { "width": "15%", "targets": 3 }
+	                 { "width": "15%", "targets": 3 },
+					 { "width": "15%", "targets": 4 }
 	            ],
 	            responsive: true,
 	            "oLanguage": {
@@ -14347,5 +14348,162 @@
 	            },
 	        });
 		 });
+
+
+		 $(document).ready(function() {
+			var rejection_form_id = $('#rejection_form_id').val();
+
+			var dt = $('#view_stockrejection_form_item_data').DataTable({
+	            "columnDefs": [ 
+	                 { className: "details-control", "targets": [ 0 ] },
+	                 { "width": "20%", "targets": 0 },
+	                 { "width": "20%", "targets": 1 },
+					 { "width": "20%", "targets": 2 },
+	                 { "width": "15%", "targets": 3 }
+	            ],
+	            responsive: true,
+	            "oLanguage": {
+	                "sEmptyTable": "<i>No Stock Rejection Form Item Data Found.</i>",
+	            }, 
+	            "bSort" : false,
+	            "bFilter":true,
+	            "bLengthChange": true,
+	            "iDisplayLength": 10,   
+	            "bProcessing": true,
+	            "serverSide": true,
+	            "ajax":{
+                    url :"<?php echo base_url();?>fetchenstockrejectionformitemdata/"+rejection_form_id,
+                    type: "post",
+	            },
+	        });
+		 });
+
+
+		 $(document).on('click','#addnewrejectionform',function(e){
+			e.preventDefault();
+			$(".loader_ajax").show();
+			var formData = new FormData($("#addnewrejectionformdata")[0]);
+			$.ajax({
+				url : "<?php echo base_url();?>addnewrejectionform",
+				type: "POST",
+				data : formData,
+				cache: false,
+				contentType: false,
+				processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+					{
+						$.each(fetchResponse.error, function (i, v)
+						{
+							$('.'+i+'_error').html(v);
+						});
+						$(".loader_ajax").hide();
+					}
+					else if(fetchResponse.status == 'success')
+					{
+						swal({
+							title: "Success",
+							text: "Rejection Form Successfully Added!",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+
+								window.location.href = "<?php echo base_url().'stockrejectionform'?>";
+						});		
+					}
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$(".loader_ajax").hide();
+				}
+			});
+			return false;
+		 });
+
+		 $(document).on('change','#vendor_name',function(e){  
+				e.preventDefault();
+				//$(".loader_ajax").show();
+				// $("#customers-list").html('');
+				var vendor_name = $('#vendor_name').val();
+				$('.vendor_po_number_div').css('display','block');
+				$.ajax({
+					url : "<?php echo ADMIN_PATH;?>getVendorPonumberbyVendorid",
+					type: "POST",
+					data : {'vendor_name' : vendor_name},
+					success: function(data, textStatus, jqXHR)
+					{
+						$(".loader_ajax").hide();
+						if(data == "failure")
+						{
+							$('#vendor_po_number').html('<option value="">Select Vendor PO Number</option>');
+						}
+						else
+						{
+							// $('#supplier_po_number').html('<option value="">Select supplier PO Number</option>');
+							$('#vendor_po_number').html(data);
+
+						}
+					},
+					error: function (jqXHR, textStatus, errorThrown)
+					{
+						$('#vendor_po_number').html();
+						//$(".loader_ajax").hide();
+					}
+				});
+				return false;
+		 });
+
+		 $(document).on('click','.deleterejectionform',function(e){
+				var elemF = $(this);
+				e.preventDefault();
+				swal({
+					title: "Are you sure?",
+					text: "Delete Rejection Form ",
+					type: "warning",
+					showCancelButton: true,
+					closeOnClickOutside: false,
+					confirmButtonClass: "btn-sm btn-danger",
+					confirmButtonText: "Yes, delete it!",
+					cancelButtonText: "No, cancel plz!",
+					closeOnConfirm: false,
+					closeOnCancel: false
+				}, function(isConfirm) {
+					if (isConfirm) {
+								$.ajax({
+									url : "<?php echo base_url();?>deleterejectionform",
+									type: "POST",
+									data : 'id='+elemF.attr('data-id'),
+									success: function(data, textStatus, jqXHR)
+									{
+										const obj = JSON.parse(data);
+									
+										if(obj.status=='success'){
+											swal({
+												title: "Deleted!",
+												text: "Rejection Form Deleted Succesfully",
+												icon: "success",
+												button: "Ok",
+												},function(){ 
+													window.location.href = "<?php echo base_url().'stockrejectionform'?>";
+											});	
+										}
+
+									},
+									error: function (jqXHR, textStatus, errorThrown)
+									{
+										$(".loader_ajax").hide();
+									}
+								})
+							}
+							else {
+					swal("Cancelled", "Rejection Form deletion cancelled ", "error");
+					}
+				});
+	     });
+
+		 
 	</script>
 <?php } ?>
