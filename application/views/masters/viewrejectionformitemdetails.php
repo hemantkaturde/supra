@@ -14,7 +14,19 @@
                     <li class="active"><a href="javascript:void(0);"> Stock Rejection Form Item Details</a></li>
                 </ul>
             </div>
+
+            <div class="col-xs-6 text-right">
+                <div class="form-group">
+                   <input type="button" onclick="location.href = '<?php echo base_url() ?>addrejectionformitemsdata/<?=$rejection_form_id?>'" class="btn  btn-primary" value="Back" />
+                </div>
+            </div>
+
         </div>
+
+        <input type="hidden" class="form-control"  id="rejection_form_id" name="rejection_form_id"  value="<?=$rejection_form_id?>">   
+        <input type="hidden" class="form-control"  id="vendor_po_item_id" name="vendor_po_item_id"  value="<?=$vendor_po_item_id?>">   
+        <input type="hidden" class="form-control"  id="vendor_po_id" name="vendor_po_id"  value="<?=$vendor_po_id?>">   
+
         <div class="row">
             <div class="col-xs-10">
                 <div class="box">

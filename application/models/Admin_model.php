@@ -6774,6 +6774,10 @@ class Admin_model extends CI_Model
         //     $this->db->where("(".TBL_VENDOR_PO_MASTER_ITEM.".rejection_number LIKE '%".$params['search']['value']."%'");
         //     $this->db->or_where(TBL_VENDOR_PO_MASTER_ITEM.".remark LIKE '%".$params['search']['value']."%')");
         // }
+        
+        $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id', $vendor_po_item_id);
+        $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.rejection_form_id', $rejection_form_id);
+        $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.vendor_po_id', $vendor_po_id);
         $this->db->order_by(TBL_REJECTION_FORM_REJECTED_ITEM.'.id','DESC');
         $query = $this->db->get(TBL_REJECTION_FORM_REJECTED_ITEM);
         $rowcount = $query->num_rows();
@@ -6788,9 +6792,9 @@ class Admin_model extends CI_Model
         //     $this->db->where("(".TBL_REJECTION_FORM_REJECTED_ITEM.".rejection_number LIKE '%".$params['search']['value']."%'");
         //     $this->db->or_where(TBL_REJECTION_FORM_REJECTED_ITEM.".remark LIKE '%".$params['search']['value']."%')");
         // }
-        //$this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id', $vendor_po_item_id);
-        //$this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.rejection_form_id', $rejection_form_id);
-        //$this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.vendor_po_id', $vendor_po_id);
+        $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id', $vendor_po_item_id);
+        $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.rejection_form_id', $rejection_form_id);
+        $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.vendor_po_id', $vendor_po_id);
         $this->db->order_by(TBL_REJECTION_FORM_REJECTED_ITEM.'.id','DESC');
         $query = $this->db->get(TBL_REJECTION_FORM_REJECTED_ITEM);
         $fetch_result = $query->result_array();

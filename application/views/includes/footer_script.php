@@ -14591,6 +14591,11 @@
 <?php if($pageTitle=='View Rejection Form Data'){ ?>
 	<script type="text/javascript">  
         $(document).ready(function() {
+
+			var rejection_form_id = $("#rejection_form_id").val();
+			var vendor_po_item_id = $("#vendor_po_item_id").val();
+			var vendor_po_id = $("#vendor_po_id").val();
+
 			var dt = $('#view_stock_rejection_form_ttem_details').DataTable({
 	            "columnDefs": [ 
 	                 { className: "details-control", "targets": [ 0 ] },
@@ -14613,13 +14618,19 @@
 	            "ajax":{
                     url :"<?php echo base_url();?>fetch_stock_rejection_form_ttem_details",
                     type: "post",
+					data : {'rejection_form_id':rejection_form_id,'vendor_po_item_id':vendor_po_item_id,'vendor_po_id':vendor_po_id},
 	            },
 	        });
 		});
 
 
 		$(document).on('click','.deleterejectionformitem',function(e){
-				var elemF = $(this);
+			
+			var rejection_form_id = $("#rejection_form_id").val();
+			var vendor_po_item_id = $("#vendor_po_item_id").val();
+			var vendor_po_id = $("#vendor_po_id").val();
+			
+			    var elemF = $(this);
 				e.preventDefault();
 				swal({
 					title: "Are you sure?",
@@ -14635,7 +14646,7 @@
 				}, function(isConfirm) {
 					if (isConfirm) {
 								$.ajax({
-									url : "<?php echo base_url();?>deleterejectionform",
+									url : "<?php echo base_url();?>deleterejectionformitem",
 									type: "POST",
 									data : 'id='+elemF.attr('data-id'),
 									success: function(data, textStatus, jqXHR)
@@ -14649,7 +14660,7 @@
 												icon: "success",
 												button: "Ok",
 												},function(){ 
-													window.location.href = "<?php echo base_url().'stockrejectionform'?>";
+													window.location.href = "<?php echo base_url().'viewrejectionformitemdetails?'?>rejection_form_id="+rejection_form_id+"vendor_po_item_id="+vendor_po_item_id+"vendor_po_id="+vendor_po_id;
 											});	
 										}
 

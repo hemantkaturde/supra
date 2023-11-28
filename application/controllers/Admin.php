@@ -8783,11 +8783,10 @@ class Admin extends BaseController
         }
     }
 
-
     public function fetch_stock_rejection_form_ttem_details(){
-        $rejection_form_id= $_GET['rejection_form_id'];
-        $vendor_po_item_id= $_GET['vendor_po_item_id'];
-        $vendor_po_id=  $_GET['vendor_po_id'];
+        $rejection_form_id= trim($this->input->post('rejection_form_id'));
+        $vendor_po_item_id= trim($this->input->post('vendor_po_item_id'));
+        $vendor_po_id=  trim($this->input->post('vendor_po_id'));
 
         $params = $_REQUEST;
         $totalRecords = $this->admin_model->getfetch_stock_rejection_form_ttem_detailscount($params, $rejection_form_id,$vendor_po_item_id,$vendor_po_id); 
@@ -8811,6 +8810,12 @@ class Admin extends BaseController
             );
         echo json_encode($json_data);
 
+    }
+
+    public function deleterejectionformitem(){
+
+
+        
     }
 
 }
