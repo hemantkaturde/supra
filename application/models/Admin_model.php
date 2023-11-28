@@ -6818,8 +6818,17 @@ class Admin_model extends CI_Model
         return $data;
     }
     
+    public function deleterejectionformitem($id){
+        $this->db->where('id ', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_REJECTION_FORM_REJECTED_ITEM)){
+           return TRUE;
+        }else{
+           return FALSE;
+        }
+    }
 
-
+    
 
 }
 

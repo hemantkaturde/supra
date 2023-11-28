@@ -8814,6 +8814,20 @@ class Admin extends BaseController
 
     public function deleterejectionformitem(){
 
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->deleterejectionformitem(trim($this->input->post('id')));
+            if ($result) {
+                        $process = 'Delete Rejection Form Items';
+                        $processFunction = 'Admin/deleterejectionformitem';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
+
 
         
     }
