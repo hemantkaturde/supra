@@ -8734,10 +8734,10 @@ class Admin extends BaseController
         $data['vendor_po_item_id']= $_GET['vendor_po_item_id'];
         $data['vendor_po_id']=  $_GET['vendor_po_id'];
 
-        $process = 'Add Rejection Form Data';
+        $process = 'View Rejection Form Data';
         $processFunction = 'Admin/editrejetionform';
         $this->logrecord($process,$processFunction);
-        $this->global['pageTitle'] = 'Add Rejection Form Data';
+        $this->global['pageTitle'] = 'View Rejection Form Data';
 
         $this->loadViews("masters/viewrejectionformitemdetails", $this->global, $data, NULL);
 
@@ -8788,10 +8788,10 @@ class Admin extends BaseController
         $rejection_form_id= $_GET['rejection_form_id'];
         $vendor_po_item_id= $_GET['vendor_po_item_id'];
         $vendor_po_id=  $_GET['vendor_po_id'];
-        
+
         $params = $_REQUEST;
-        $totalRecords = $this->admin_model->getstockrejectionformitemcount($params, $rejection_form_id,$vendor_po_item_id,$vendor_po_id); 
-        $queryRecords = $this->admin_model->getstockrejectionformitemdata($params, $rejection_form_id,$vendor_po_item_id,$vendor_po_id); 
+        $totalRecords = $this->admin_model->getfetch_stock_rejection_form_ttem_detailscount($params, $rejection_form_id,$vendor_po_item_id,$vendor_po_id); 
+        $queryRecords = $this->admin_model->getfetch_stock_rejection_form_ttem_detailsdata($params, $rejection_form_id,$vendor_po_item_id,$vendor_po_id); 
 
         $data = array();
         foreach ($queryRecords as $key => $value)

@@ -14588,7 +14588,7 @@
 <?php } ?>
 
 
-<?php if($pageTitle=='Add Rejection Form Data'){ ?>
+<?php if($pageTitle=='View Rejection Form Data'){ ?>
 	<script type="text/javascript">  
         $(document).ready(function() {
 			var dt = $('#view_stock_rejection_form_ttem_details').DataTable({
@@ -14615,7 +14615,56 @@
                     type: "post",
 	            },
 	        });
-		 });
+		});
+
+
+		$(document).on('click','.deleterejectionformitem',function(e){
+				var elemF = $(this);
+				e.preventDefault();
+				swal({
+					title: "Are you sure?",
+					text: "Delete Rejection Form Item Details",
+					type: "warning",
+					showCancelButton: true,
+					closeOnClickOutside: false,
+					confirmButtonClass: "btn-sm btn-danger",
+					confirmButtonText: "Yes, delete it!",
+					cancelButtonText: "No, cancel plz!",
+					closeOnConfirm: false,
+					closeOnCancel: false
+				}, function(isConfirm) {
+					if (isConfirm) {
+								$.ajax({
+									url : "<?php echo base_url();?>deleterejectionform",
+									type: "POST",
+									data : 'id='+elemF.attr('data-id'),
+									success: function(data, textStatus, jqXHR)
+									{
+										const obj = JSON.parse(data);
+									
+										if(obj.status=='success'){
+											swal({
+												title: "Deleted!",
+												text: "Rejection Form Item Details Deleted Succesfully",
+												icon: "success",
+												button: "Ok",
+												},function(){ 
+													window.location.href = "<?php echo base_url().'stockrejectionform'?>";
+											});	
+										}
+
+									},
+									error: function (jqXHR, textStatus, errorThrown)
+									{
+										$(".loader_ajax").hide();
+									}
+								})
+							}
+							else {
+					swal("Cancelled", "Rejection Form Item Details deletion cancelled ", "error");
+					}
+				});
+	     });
 
 
 	</script>

@@ -6765,6 +6765,58 @@ class Admin_model extends CI_Model
     }
 
 
+    public function getfetch_stock_rejection_form_ttem_detailscount($params,$rejection_form_id,$vendor_po_item_id,$vendor_po_id){
+        $this->db->select('*');
+       // $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
+
+        // if($params['search']['value'] != "") 
+        // {
+        //     $this->db->where("(".TBL_VENDOR_PO_MASTER_ITEM.".rejection_number LIKE '%".$params['search']['value']."%'");
+        //     $this->db->or_where(TBL_VENDOR_PO_MASTER_ITEM.".remark LIKE '%".$params['search']['value']."%')");
+        // }
+        $this->db->order_by(TBL_REJECTION_FORM_REJECTED_ITEM.'.id','DESC');
+        $query = $this->db->get(TBL_REJECTION_FORM_REJECTED_ITEM);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+    }
+
+    public function getfetch_stock_rejection_form_ttem_detailsdata($params,$rejection_form_id,$vendor_po_item_id,$vendor_po_id){
+        $this->db->select('*,'.TBL_REJECTION_FORM_REJECTED_ITEM.'.id as rejection_item_id');
+        // $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
+        // if($params['search']['value'] != "") 
+        // {
+        //     $this->db->where("(".TBL_REJECTION_FORM_REJECTED_ITEM.".rejection_number LIKE '%".$params['search']['value']."%'");
+        //     $this->db->or_where(TBL_REJECTION_FORM_REJECTED_ITEM.".remark LIKE '%".$params['search']['value']."%')");
+        // }
+        //$this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id', $vendor_po_item_id);
+        //$this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.rejection_form_id', $rejection_form_id);
+        //$this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.vendor_po_id', $vendor_po_id);
+        $this->db->order_by(TBL_REJECTION_FORM_REJECTED_ITEM.'.id','DESC');
+        $query = $this->db->get(TBL_REJECTION_FORM_REJECTED_ITEM);
+        $fetch_result = $query->result_array();
+
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['rejected_reason'] =$value['rejected_reason'];
+                $data[$counter]['qty_In_pcs'] =$value['qty_In_pcs'];
+                $data[$counter]['qty_In_kgs'] =$value['qty_In_kgs'];
+                $data[$counter]['remark'] =$value['remark'];
+                $data[$counter]['action'] = '';
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editrejetionform/".$value['rejectionformid']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['rejection_item_id']."' class='fa fa-trash-o deleterejectionformitem' aria-hidden='true'></i>"; 
+                $counter++; 
+            }
+        }
+        return $data;
+    }
+    
+
+
+
 }
 
 ?>
