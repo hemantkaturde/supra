@@ -328,14 +328,7 @@ $route['addrejectionformitemsdatamultientries'] = "admin/addrejectionformitemsda
 $route['saverejectedformitemdata'] = "admin/saverejectedformitemdata";
 $route['viewrejectionformitemdetails'] = "admin/viewrejectionformitemdetails";
 $route['fetch_stock_rejection_form_ttem_details'] = "admin/fetch_stock_rejection_form_ttem_details";
-
 $route['deleterejectionformitem'] = "admin/deleterejectionformitem";
-
-
-
-
-
-
 
 //$route['fetchincomingdeatilsitemlistedit/(:any)'] = "admin/fetchincomingdeatilsitemlistedit/$1";
 
