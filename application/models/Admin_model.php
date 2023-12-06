@@ -5980,7 +5980,7 @@ class Admin_model extends CI_Model
 
     public function getexportrejecteditemcount($params){
         $this->db->select('*');
-        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id');
+        //$this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id');
         $this->db->join(TBL_REJECTION_FORM, TBL_REJECTION_FORM.'.id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.rejection_form_id');
         $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.status', 1);
         $query = $this->db->get(TBL_REJECTION_FORM_REJECTED_ITEM);
@@ -5990,7 +5990,7 @@ class Admin_model extends CI_Model
 
     public function getexportrejecteditemdata($params){
         $this->db->select('*');
-        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id');
+        //$this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id');
         $this->db->join(TBL_REJECTION_FORM, TBL_REJECTION_FORM.'.id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.rejection_form_id');
         
         $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.status', 1);
