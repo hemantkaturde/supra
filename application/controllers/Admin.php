@@ -8847,4 +8847,21 @@ class Admin extends BaseController
 		}
     }
 
+    public function getbuyerorderqtyfrompartnumber(){
+
+        $vendor_po_number=$this->input->post('vendor_po_number');
+        $item_number=$this->input->post('item_number');
+        if($vendor_po_number && $item_number) {
+			$vendor_po_number_stock_data = $this->admin_model->getbuyerorderqtyfrompartnumber($vendor_po_number,$item_number);
+			if(count($vendor_po_number_stock_data) >= 1) {
+				echo json_encode($vendor_po_number_stock_data[0]);
+			} else {
+				echo 'failure';
+			}
+		} else {
+			echo 'failure';
+		}
+
+    }
+
 }

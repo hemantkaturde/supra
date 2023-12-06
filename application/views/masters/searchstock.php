@@ -44,7 +44,7 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="item_number">Part Number </label>
-                        <select class="form-control" name="item_number" id="item_number">
+                        <select class="form-control getbuyerorderqtyfrompartnumber" name="item_number" id="item_number">
                             <option st-id="" value="">Select Part Name</option>
                                 <!-- <?php foreach ($getallitemsfromfgorrawmaterial as $key => $value) {?>
                                     <option value="<?php echo $value['find_id']; ?>" ><?php echo $value['part_number']; ?></option>
@@ -71,7 +71,6 @@
         </div>   
 
         <div class="row">
-
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="buyer_name">Buyer Name </label>

@@ -13773,6 +13773,43 @@
 	                   
 		});
 
+		$(document).on('change','.getbuyerorderqtyfrompartnumber',function(e){  
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			        var item_number = $('#item_number').val();
+					var vendor_po_number = $('#vendor_po_number').val();
+
+			        $.ajax({
+							url : "<?php echo ADMIN_PATH;?>getbuyerorderqtyfrompartnumber",
+							type: "POST",
+							data : {'item_number' : item_number,'vendor_po_number':vendor_po_number},
+							success: function(data, textStatus, jqXHR)
+							{
+								$(".loader_ajax").hide();
+								if(data == "failure")
+								{
+									$('#buyer_order_qty').val('');
+								}
+								else
+								{
+									var buyer_order_qty = jQuery.parseJSON( data );
+					             	$("#buyer_order_qty").val(buyer_order_qty.order_oty);	
+								}
+							},
+							error: function (jqXHR, textStatus, errorThrown)
+							{
+									$('#buyer_order_qty').val('');
+							}
+						});
+			    return false;
+	                   
+		});
+
+		
+
+
+
+
    </script>
 <?php } ?>
 

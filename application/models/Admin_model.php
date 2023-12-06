@@ -6821,11 +6821,25 @@ class Admin_model extends CI_Model
     }
 
   public function getStockdatadependsonvendorpo($vendor_po_number){
-
     $this->db->select('stock_id_number,stock_date');
     $this->db->where(TBL_STOCKS.'.vendor_po_number', $vendor_po_number);
     $this->db->where(TBL_STOCKS.'.status', 1);
     $query = $this->db->get(TBL_STOCKS);
+    $data = $query->result_array();
+    return $data;
+  }
+
+
+  public function getbuyerorderqtyfrompartnumber($vendor_po_number,$item_number){
+
+    $this->db->select(TBL_BUYER_PO_MASTER_ITEM.'.order_oty');
+    $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id');
+    $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_VENDOR_PO_MASTER.'.buyer_po_number');
+    $this->db->join(TBL_BUYER_PO_MASTER_ITEM.' as a ', 'a.buyer_po_id = '.TBL_BUYER_PO_MASTER.'.id');
+    $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.part_number_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
+    $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id', $item_number);
+    $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id', $vendor_po_number);
+    $query = $this->db->get(TBL_VENDOR_PO_MASTER_ITEM);
     $data = $query->result_array();
     return $data;
 
