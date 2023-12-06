@@ -5979,25 +5979,23 @@ class Admin_model extends CI_Model
     }
 
     public function getexportrejecteditemcount($params){
-
-        $this->db->select(TBL_REWORK_REJECTION_ITEM.'.id');
-        $this->db->join(TBL_FINISHED_GOODS, TBL_REWORK_REJECTION_ITEM.'.part_number = '.TBL_FINISHED_GOODS.'.fin_id');
-        $this->db->join(TBL_REWORK_REJECTION, TBL_REWORK_REJECTION.'.id = '.TBL_REWORK_REJECTION_ITEM.'.rework_rejection_id');
-        $this->db->where(TBL_REWORK_REJECTION_ITEM.'.status', 1);
-        $query = $this->db->get(TBL_REWORK_REJECTION_ITEM);
+        $this->db->select('*');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id');
+        $this->db->join(TBL_REJECTION_FORM, TBL_REJECTION_FORM.'.id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.rejection_form_id');
+        $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.status', 1);
+        $query = $this->db->get(TBL_REJECTION_FORM_REJECTED_ITEM);
         $rowcount = $query->num_rows();
         return $rowcount;
     }
 
     public function getexportrejecteditemdata($params){
         $this->db->select('*');
-        $this->db->where(TBL_REWORK_REJECTION_ITEM.'.status', 1);
-        $this->db->join(TBL_FINISHED_GOODS, TBL_REWORK_REJECTION_ITEM.'.part_number = '.TBL_FINISHED_GOODS.'.fin_id');
-        $this->db->join(TBL_REWORK_REJECTION, TBL_REWORK_REJECTION.'.id = '.TBL_REWORK_REJECTION_ITEM.'.rework_rejection_id');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id');
+        $this->db->join(TBL_REJECTION_FORM, TBL_REJECTION_FORM.'.id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.rejection_form_id');
         
-        $this->db->where(TBL_REWORK_REJECTION_ITEM.'.status', 1);
-        $this->db->order_by(TBL_REWORK_REJECTION_ITEM.'.id ','DESC');
-        $query = $this->db->get(TBL_REWORK_REJECTION_ITEM);
+        $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.status', 1);
+        $this->db->order_by(TBL_REJECTION_FORM_REJECTED_ITEM.'.id ','DESC');
+        $query = $this->db->get(TBL_REJECTION_FORM_REJECTED_ITEM);
         $fetch_result = $query->result_array();
 
         $data = array();
@@ -6006,10 +6004,10 @@ class Admin_model extends CI_Model
         {
             foreach ($fetch_result as $key => $value)
             {
-                $data[$counter]['challan_no'] =$value['challan_no'];
-                $data[$counter]['rejection_rework_reason'] =$value['rejection_rework_reason'];
-                $data[$counter]['qty'] =$value['qty'];
-                $data[$counter]['rejectied_qty_in_kgs'] =$value['qty'] * $value['net_weight'];
+                $data[$counter]['rejection_number'] =$value['rejection_number'];
+                $data[$counter]['rejected_reason'] =$value['rejected_reason'];
+                $data[$counter]['qty_In_pcs'] =$value['qty_In_pcs'];
+                $data[$counter]['qty_In_kgs'] =$value['qty_In_pcs'] * $value['qty_In_kgs'];
                 $counter++; 
             }
         }
