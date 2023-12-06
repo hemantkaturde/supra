@@ -13498,11 +13498,12 @@
 					}
 					else
 					{
+
 						var invoice_qty_in_pcs_data = jQuery.parseJSON( data );
-						$('#invoice_qty_in_pcs').val(invoice_qty_in_pcs_data.invoice_qty_In_pcs);
-						$('#invoice_qty_in_kgs').val(invoice_qty_in_pcs_data.invoice_qty_In_kgs);
-						$('#actual_received_qty_in_pcs').val(invoice_qty_in_pcs_data.actual_received_qty_in_pcs);
-						$('#actual_received_qty_in_kgs').val(invoice_qty_in_pcs_data.actual_received_qty_in_kgs);
+						$('#invoice_qty_in_pcs').val(parseFloat(invoice_qty_in_pcs_data.invoice_qty_In_pcs).toFixed(5));
+						$('#invoice_qty_in_kgs').val(parseFloat(invoice_qty_in_pcs_data.invoice_qty_In_kgs).toFixed(5));
+						$('#actual_received_qty_in_pcs').val(parseFloat(invoice_qty_in_pcs_data.actual_received_qty_in_pcs).toFixed(5));
+						$('#actual_received_qty_in_kgs').val(parseFloat(invoice_qty_in_pcs_data.actual_received_qty_in_kgs).toFixed(5));
 
 					}
 				},
@@ -13806,7 +13807,6 @@
 		});
 
 		
-
 
 
 
