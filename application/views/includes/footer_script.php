@@ -13705,6 +13705,41 @@
 	                   
 		});
 
+
+		$(document).on('change','.vendor_po_number_itam_mapping',function(e){  
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			var vendor_po_number = $('#vendor_po_number').val();
+
+			$("#item_number").html('');
+		
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getVendoritemsonlyvendorBillofmaterial",
+				type: "POST",
+				data : {'vendor_po_number' : vendor_po_number},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#item_number').html('<option value="">Select Part Number</option>');
+					}
+					else
+					{
+						$('#item_number').html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#item_number').html();
+				}
+			});
+			return false;
+		});
+
+
+
    </script>
 <?php } ?>
 

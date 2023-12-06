@@ -34,7 +34,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="vendor_po_number">Vendor PO Number</label>
-                        <select class="form-control vendor_po_for_buyer_details_" name="vendor_po_number" id="vendor_po_number">
+                        <select class="form-control vendor_po_for_buyer_details_ vendor_po_number_itam_mapping" name="vendor_po_number" id="vendor_po_number">
                             <option st-id="" value="">Select Vendor PO Number</option>
                         </select>
                     <p class="error vendor_po_number_error"></p>
@@ -46,9 +46,9 @@
                     <label for="item_number">Part Number </label>
                         <select class="form-control" name="item_number" id="item_number">
                             <option st-id="" value="">Select Part Name</option>
-                                <?php foreach ($getallitemsfromfgorrawmaterial as $key => $value) {?>
+                                <!-- <?php foreach ($getallitemsfromfgorrawmaterial as $key => $value) {?>
                                     <option value="<?php echo $value['find_id']; ?>" ><?php echo $value['part_number']; ?></option>
-                                <?php } ?>
+                                <?php } ?> -->
                         </select>
                     <p class="error item_number_error"></p>
                 </div>
