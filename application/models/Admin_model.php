@@ -6443,7 +6443,6 @@ class Admin_model extends CI_Model
 
     }
 
-
     public function checkvendorpoandvendornumberinbillofmaterial($data){
 
         $this->db->select('*');
@@ -6456,7 +6455,6 @@ class Admin_model extends CI_Model
 
     }
 
-
     public function checkvendorpoandvendornumberinvendorbillofmaterial($data){
 
         $this->db->select('*');
@@ -6468,7 +6466,6 @@ class Admin_model extends CI_Model
         return $data;
 
     }
-
 
     public function fetchincomingdeatilsitemlistaddcountedit($params,$part_number_serach,$edit_id){
         $this->db->select('*,'.TBL_INCOMING_DETAILS_ITEM.'.id as incoming_details_item_id');
@@ -6535,7 +6532,6 @@ class Admin_model extends CI_Model
         return $data;
     }
 
-
     public function fetchALLVendorbillofmaterialdetails($edit_id){
 
         $this->db->select(TBL_BILL_OF_MATERIAL_VENDOR.'.id as vbom_id,'.TBL_BILL_OF_MATERIAL_VENDOR.'.bom_number,'
@@ -6566,7 +6562,6 @@ class Admin_model extends CI_Model
         return $data;
     }
 
-
     public function fetchALLpreVendorpoitemListedit($edit_id){
 
         $this->db->select('*,'.TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.id as vendoritmid');
@@ -6580,7 +6575,6 @@ class Admin_model extends CI_Model
         return $data;
 
     }
-
 
     public function fetchenstockrejectionformCount($params){
         $this->db->select('*');
@@ -6695,7 +6689,6 @@ class Admin_model extends CI_Model
         }
     }
 
-
     public function getstockrejectionformitemcount($params,$vendor_po_id){
         $this->db->select('*');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
@@ -6764,7 +6757,6 @@ class Admin_model extends CI_Model
         }
     }
 
-
     public function getfetch_stock_rejection_form_ttem_detailscount($params,$rejection_form_id,$vendor_po_item_id,$vendor_po_id){
         $this->db->select('*');
        // $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
@@ -6828,6 +6820,16 @@ class Admin_model extends CI_Model
         }
     }
 
+  public function getStockdatadependsonvendorpo($vendor_po_number){
+
+    $this->db->select('stock_id_number,stock_date');
+    $this->db->where(TBL_STOCKS.'.vendor_po_number', $vendor_po_number);
+    $this->db->where(TBL_STOCKS.'.status', 1);
+    $query = $this->db->get(TBL_STOCKS);
+    $data = $query->result_array();
+    return $data;
+
+  }
     
 
 }

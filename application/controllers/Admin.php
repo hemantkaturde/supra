@@ -8832,4 +8832,19 @@ class Admin extends BaseController
         
     }
 
+    public function getStockdatadependsonvendorpo(){
+
+        $vendor_po_number=$this->input->post('vendor_po_number');
+        if($vendor_po_number) {
+			$vendor_po_number_stock_data = $this->admin_model->getStockdatadependsonvendorpo($vendor_po_number);
+			if(count($vendor_po_number_stock_data) >= 1) {
+				echo json_encode($vendor_po_number_stock_data[0]);
+			} else {
+				echo 'failure';
+			}
+		} else {
+			echo 'failure';
+		}
+    }
+
 }

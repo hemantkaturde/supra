@@ -34,7 +34,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="vendor_po_number">Vendor PO Number</label>
-                        <select class="form-control vendor_po_for_buyer_details_ vendor_po_number_itam_mapping" name="vendor_po_number" id="vendor_po_number">
+                        <select class="form-control vendor_po_for_buyer_details_ vendor_po_number_itam_mapping vendor_po_number_for_stock_data" name="vendor_po_number" id="vendor_po_number">
                             <option st-id="" value="">Select Vendor PO Number</option>
                         </select>
                     <p class="error vendor_po_number_error"></p>
@@ -63,8 +63,8 @@
 
             <div class="col-md-2">
                 <div class="form-group">
-                    <label for="stock_id_number">Stock Date</label>
-                    <input type="text" class="form-control" id="stock_id_number" name="stock_id_number" readonly>
+                    <label for="stock_date">Stock Date</label>
+                    <input type="text" class="form-control" id="stock_date" name="stock_date" readonly>
                 </div>
             </div>  
 

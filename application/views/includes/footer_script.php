@@ -13705,7 +13705,6 @@
 	                   
 		});
 
-
 		$(document).on('change','.vendor_po_number_itam_mapping',function(e){  
 			e.preventDefault();
 			//$(".loader_ajax").show();
@@ -13738,7 +13737,41 @@
 			return false;
 		});
 
+		$(document).on('change','.vendor_po_number_for_stock_data',function(e){  
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			        var vendor_po_number = $('#vendor_po_number').val();
+			
+			        $.ajax({
+							url : "<?php echo ADMIN_PATH;?>getStockdatadependsonvendorpo",
+							type: "POST",
+							data : {'vendor_po_number' : vendor_po_number},
+							success: function(data, textStatus, jqXHR)
+							{
+								$(".loader_ajax").hide();
+								if(data == "failure")
+								{
+									$('#stock_id').val('');
+					             	$("#stock_date").val('');	
+								}
+								else
+								{
+									var get_stock_details = jQuery.parseJSON( data );
 
+
+									$('#stock_id').val(get_stock_details.stock_id_number);
+					             	$("#stock_date").val(get_stock_details.stock_date);	
+								}
+							},
+							error: function (jqXHR, textStatus, errorThrown)
+							{
+									$('#stock_id').val('');
+					             	$("#stock_date").val('');		
+							}
+						});
+			    return false;
+	                   
+		});
 
    </script>
 <?php } ?>
