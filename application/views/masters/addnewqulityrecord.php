@@ -63,7 +63,7 @@
                               <div class="col-md-12 vendor_po_number_div" id="vendor_po_number_div">
                                  <div class="form-group">
                                     <label for="vendor_po_number">Vendor PO Number <span class="required">*</span></label>
-                                    <select class="form-control vendor_po_number_itam vendor_po_get_data" name="vendor_po_number" id="vendor_po_number">
+                                    <select class="form-control vendor_po_number_itam vendor_po_get_data vendor_po_number_for_view_item_stock_form" name="vendor_po_number" id="vendor_po_number">
                                        <option st-id="" value="">Select Vendor PO Number</option>
                                        <!-- <option st-id="" value="<?=$getdebitnoteitemdetails[0]['pre_vendor_po_number']?>" selected="selected"><?=$selected_value?></option> -->
                                     </select>
@@ -153,13 +153,19 @@
                                             </table>
                                     </div>
 
-                                    <!-- <div class="container">
+                                    <div class="container">
+                                         <div id="stockform_item_list">
+                                         </div>
+                                    </div>
+
+                                     <!-- <div class="container">
                                          <div id="supplier_po_item_list">
                                          </div>
 
                                          <div id="customers-list">
                                          </div>
                                     </div> -->
+
 
                                       <!-- Add New Package Modal -->
                                     <?php $this->load->helper("form"); ?>

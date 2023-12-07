@@ -2716,7 +2716,6 @@ class Admin extends BaseController
 
             }else{
                 echo '';
-
             }
     
        }
@@ -7598,6 +7597,16 @@ class Admin extends BaseController
        
     }
 
+
+    public function vendorponumberforviewitemstockform(){
+
+
+
+    }
+
+
+
+
     public function fetchqulityrecords(){
         $params = $_REQUEST;
         $totalRecords = $this->admin_model->getqulityformcount($params); 
@@ -8863,5 +8872,42 @@ class Admin extends BaseController
 		}
 
     }
+
+    public function vendorponumberforviewitemstockform_display(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+    
+            $vendor_po_number = $this->input->post('vendor_po_number');
+        
+            // load table library
+            $this->load->library('table');
+            
+            // set heading
+            $this->table->set_heading('Part Number', 'Order Qty','Invoice Number', 'Invoice Date','Invoice Qty In Pcs','Invoice Qty In Kgs','Lot No','Actual Received Qty In Pcs','Actual Received Qty In Kgs');
+    
+            // set template
+            $style = array('table_open'  => '<p><b>Stock Form Item</b></p><table style="max-width: 70%;display: block;overflow-x: auto; white-space: nowrap;" class="table">');
+    
+            $this->table->set_template($style);
+    
+            $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_STOCKS_ITEM.'.f_g_order_qty,'.TBL_STOCKS_ITEM.'.invoice_number,'.TBL_STOCKS_ITEM.'.invoice_date,'.TBL_STOCKS_ITEM.'.invoice_qty_In_pcs,'.TBL_STOCKS_ITEM.'.invoice_qty_In_kgs,'.TBL_STOCKS_ITEM.'.lot_number,'.TBL_STOCKS_ITEM.'.actual_received_qty_in_pcs,'.TBL_STOCKS_ITEM.'.actual_received_qty_in_kgs');
+            $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id = '.TBL_STOCKS_ITEM.'.part_number');
+            $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_STOCKS_ITEM.'.part_number');
+            $this->db->join(TBL_STOCKS, TBL_STOCKS.'.stock_id = '.TBL_STOCKS_ITEM.'.stock_form_id');
+            $this->db->where(TBL_STOCKS.'.vendor_po_number',$vendor_po_number);
+            $query_result = $this->db->get(TBL_STOCKS_ITEM);
+            $data = $query_result->result_array();
+    
+            if($data){
+                echo $this->table->generate($query_result);
+    
+            }else{
+                echo '';
+            }
+    
+        }
+    }
+
+
 
 }
