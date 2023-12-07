@@ -108,7 +108,6 @@
 
         </div>
         
-    
         <div class="row ">
             <div class="col-xs-12">
                 <div class="box">
@@ -278,16 +277,16 @@
                             <div class ="total_values" style="border-top: 1px solid black">
                                 <div class="col-md-6" style="margin-top: 20px;">
                                 <div class="form-group">
-                                    <label for="invoice_qty_in_pcs">Total Rejected Qty Pcs</label>
-                                    <input type="text" class="form-control" id="invoice_qty_in_pcs" name="invoice_qty_in_pcs" readonly>
+                                    <label for="total_rejected_qty_in_pcs">Total Rejected Qty Pcs</label>
+                                    <input type="text" class="form-control" id="total_rejected_qty_in_pcs" name="total_rejected_qty_in_pcs" readonly>
                                     </div>
                                 </div>  
 
 
                                 <div class="col-md-6" style="margin-top: 20px;">
                                 <div class="form-group">
-                                    <label for="invoice_qty_in_kgs">Total Rejected Qty Kgs</label>
-                                    <input type="text" class="form-control" id="invoice_qty_in_kgs" name="invoice_qty_in_kgs" readonly>
+                                    <label for="total_rejected_qty_in_kgs">Total Rejected Qty Kgs</label>
+                                    <input type="text" class="form-control" id="total_rejected_qty_in_kgs" name="total_rejected_qty_in_kgs" readonly>
                                     </div>
                                 </div>  
                             </div>  

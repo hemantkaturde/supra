@@ -8908,6 +8908,16 @@ class Admin extends BaseController
         }
     }
 
+    public function getallcalculationrejecteditems(){
+
+        $getallcalculationrejecteditems = $this->admin_model->getallcalculationrejecteditems();
+        if($getallcalculationrejecteditems){
+            $content = $getallcalculationrejecteditems[0];
+            echo json_encode($content);
+        }else{
+            echo 'failure';
+        }
+    }
 
 
 }

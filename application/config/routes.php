@@ -331,8 +331,10 @@ $route['fetch_stock_rejection_form_ttem_details'] = "admin/fetch_stock_rejection
 $route['deleterejectionformitem'] = "admin/deleterejectionformitem";
 $route['getStockdatadependsonvendorpo'] = "admin/getStockdatadependsonvendorpo";
 $route['getbuyerorderqtyfrompartnumber'] = "admin/getbuyerorderqtyfrompartnumber";
-
 $route['vendorponumberforviewitemstockform_display'] = "admin/vendorponumberforviewitemstockform_display";
+
+
+$route['getallcalculationrejecteditems'] = "admin/getallcalculationrejecteditems";
 
 
 

@@ -13610,6 +13610,38 @@
 	        });
 		});
 
+		$(document).ready(function() {
+	        $('#total_rejected_qty_in_pcs').val('');
+			$('#total_rejected_qty_in_kgs').val('');
+
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getallcalculationrejecteditems",
+				type: "POST",
+				data : {'vendor_name' : ''},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#total_rejected_qty_in_pcs').val('');
+						$('#total_rejected_qty_in_kgs').val('');
+					}
+					else
+					{
+						var rejecteditems_data = jQuery.parseJSON( data );
+						$('#total_rejected_qty_in_pcs').val(parseFloat(rejecteditems_data.total_rejected_qty_in_pcs).toFixed(2));
+						$('#total_rejected_qty_in_kgs').val(parseFloat(rejecteditems_data.total_rejected_qty_in_pcs).toFixed(2));
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					    $('#total_rejected_qty_in_pcs').val('');
+						$('#total_rejected_qty_in_kgs').val('');
+				}
+			});
+			return false;
+	    });
+
 		$(document).on('change','#vendor_name',function(e){  
 			e.preventDefault();
 			//$(".loader_ajax").show();
