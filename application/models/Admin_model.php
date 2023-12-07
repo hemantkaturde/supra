@@ -5980,7 +5980,8 @@ class Admin_model extends CI_Model
 
     public function getexportrejecteditemcount($params){
         $this->db->select('*');
-        //$this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id');
+        $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
         $this->db->join(TBL_REJECTION_FORM, TBL_REJECTION_FORM.'.id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.rejection_form_id');
         $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.status', 1);
         $query = $this->db->get(TBL_REJECTION_FORM_REJECTED_ITEM);
@@ -5989,10 +5990,10 @@ class Admin_model extends CI_Model
     }
 
     public function getexportrejecteditemdata($params){
-        $this->db->select('*');
-        //$this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id');
+        $this->db->select('*,'.TBL_FINISHED_GOODS.'.net_weight as fg_net_weight');
+        $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
         $this->db->join(TBL_REJECTION_FORM, TBL_REJECTION_FORM.'.id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.rejection_form_id');
-        
         $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.status', 1);
         $this->db->order_by(TBL_REJECTION_FORM_REJECTED_ITEM.'.id ','DESC');
         $query = $this->db->get(TBL_REJECTION_FORM_REJECTED_ITEM);
@@ -6007,7 +6008,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['rejection_number'] =$value['rejection_number'];
                 $data[$counter]['rejected_reason'] =$value['rejected_reason'];
                 $data[$counter]['qty_In_pcs'] =$value['qty_In_pcs'];
-                $data[$counter]['qty_In_kgs'] =$value['qty_In_pcs'] * $value['qty_In_kgs'];
+                $data[$counter]['qty_In_kgs'] =$value['fg_net_weight'] * $value['qty_In_kgs'];
                 $counter++; 
             }
         }
