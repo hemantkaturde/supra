@@ -1952,7 +1952,7 @@ class Admin_model extends CI_Model
         $this->db->join(TBL_SUPPLIER_PO_MASTER_ITEM, TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id = '.TBL_RAWMATERIAL.'.raw_id');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.pre_vendor_name');
         $this->db->where(TBL_RAWMATERIAL.'.status',1);
-        $this->db->where(TBL_RAWMATERIAL.'.fin_id',$part_number);
+        $this->db->where(TBL_RAWMATERIAL.'.raw_id',$part_number);
         //$this->db->where(TBL_RAWMATERIAL.'.raw_id',$part_number);
         $query = $this->db->get(TBL_FINISHED_GOODS);
         $data = $query->result_array();
