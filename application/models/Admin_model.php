@@ -1014,8 +1014,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['buyer_name'] = $value['buyer_name'];
                 $data[$counter]['currency'] = $value['currency'];
                 $data[$counter]['action'] = '';
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewBuyerpo/".$value['id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>    &nbsp ";
-
+                //$data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewBuyerpo/".$value['id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>    &nbsp ";
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editBuyerpo/".$value['id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>    &nbsp";
 
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['id']."' class='fa fa-trash-o deleteBuyerpo' aria-hidden='true'></i>"; 
@@ -1194,7 +1193,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['quatation_ref_no'] = $value['quatation_ref_no'];
                 $data[$counter]['quatation_date'] = $value['quatation_date'];
                 $data[$counter]['action'] = '';
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewSupplierpo/".$value['id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
+               // $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewSupplierpo/".$value['id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editSupplierpo/".$value['id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>  &nbsp";
 
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['id']."' class='fa fa-trash-o deleteSupplierpo' aria-hidden='true'></i>"; 
@@ -1525,7 +1524,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['quatation_ref_no'] = $value['quatation_ref_no'];
                 $data[$counter]['quatation_date'] = $value['quatation_date'];
                 $data[$counter]['action'] = '';
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewVendorpo/".$value['vendor_po_master_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
+                //$data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewVendorpo/".$value['vendor_po_master_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
               
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editVendorpo/".$value['vendor_po_master_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>  &nbsp";
               
