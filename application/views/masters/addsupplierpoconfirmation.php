@@ -25,10 +25,8 @@
                             <div class="box-body">
                                 <div class="col-md-4">
                                     <?php
-
-
                                         if($getPreviousVendorPoconfirmationNumber['po_number']){
-
+                                            
                                             $getPreviousVendorPoconfirmationNumber_number = substr($getPreviousVendorPoconfirmationNumber['po_number'], -1);
                                             $getPreviousSupplierPoconfirmationNumber_number = substr($getPreviousSupplierPoconfirmationNumber['po_number'], -1);
                                             if($getPreviousVendorPoconfirmationNumber_number > $getPreviousSupplierPoconfirmationNumber_number){
