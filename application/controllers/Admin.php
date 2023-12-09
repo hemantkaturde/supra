@@ -3183,10 +3183,10 @@ class Admin extends BaseController
     
     public function editSupplierpoconfirmation($supplierpoconfirmationid){
 
-        $process = 'Edit Vendor PO';
+        $process = 'Edit Supplier PO Confirmation';
         $processFunction = 'Admin/editSupplierconfirmation';
         $this->logrecord($process,$processFunction);
-        $this->global['pageTitle'] = 'Edit Vendor PO';
+        $this->global['pageTitle'] = 'Edit Supplier PO Confirmation';
         $data['supplierList']= $this->admin_model->fetchALLsupplierList();
         $data['buyerList']= $this->admin_model->fetchAllbuyerList();
         $data['vendorList']= $this->admin_model->fetchALLvendorList();

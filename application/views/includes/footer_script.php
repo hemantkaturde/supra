@@ -3268,7 +3268,7 @@
 <?php } ?>
 
 
-<?php  if($pageTitle=='Supplier PO Confirmation' || $pageTitle=='Add Supplier PO Confirmation' || $pageTitle=='Edit Vendor PO'){ ?>
+<?php  if($pageTitle=='Supplier PO Confirmation' || $pageTitle=='Add Supplier PO Confirmation' || $pageTitle=='Edit Supplier PO Confirmation'){ ?>
 	<script type="text/javascript">
 		$(document).ready(function() {
             var dt = $('#view_supplierpoconfirmation').DataTable({
@@ -3370,7 +3370,8 @@
 
 		$( document ).ready(function() {
 
-			var supplier_po_number = $('.supplier_po_number_for_item').val();
+		//$(".loader_ajax").show();
+		var supplier_po_number = $('.supplier_po_number_for_item').val();
 			var flag = 'Supplier';
 			$("#part_number").html('');
 		

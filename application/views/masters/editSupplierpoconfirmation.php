@@ -78,9 +78,6 @@
                                             </div>
                                     </div>
 
-
-                           
-
                                     <div class="col-md-12">
                                         <div class="form-group">
                                                 <label for="buyer_name">Buyer Name <span class="required">*</span></label>
