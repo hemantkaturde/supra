@@ -3636,8 +3636,10 @@ class Admin extends BaseController
 
         $vendor_po_number=$this->input->post('vendor_po_number');
 
+
+    
         if($vendor_po_number) {
-			$getVendoritemsonly = $this->admin_model->getVendoritemsonly($vendor_po_number);
+			$getVendoritemsonly = $this->admin_model->getVendoritemsonly($vendor_po_number,$flag);
 			if(count($getVendoritemsonly) >= 1) {
                 $content = $content.'<option value="">Select Part Number</option>';
 				foreach($getVendoritemsonly as $value) {
@@ -3655,8 +3657,18 @@ class Admin extends BaseController
 
     public function getSuppliergoodsPartnumberByid(){
 
+
+        $vendor_po_number=$this->input->post('vendor_po_number');
+        $chekc_if_supplie_name = $this->admin_model->chekc_if_supplie_name_exits($vendor_po_number);
+
+        if($chekc_if_supplie_name['supplier_po_number'] && $chekc_if_supplie_name['supplier_name']){
+          $flag ='Supplier';
+        }else{
+          $flag ='Vendor';
+        }
+
         if($this->input->post('part_number')) {
-            $getPartNameBypartid = $this->admin_model->getSuppliergoodsPartnumberByid($this->input->post('part_number'));
+            $getPartNameBypartid = $this->admin_model->getSuppliergoodsPartnumberByid($this->input->post('part_number'),$flag);
 
             if($getPartNameBypartid){
                 $content = $getPartNameBypartid[0];

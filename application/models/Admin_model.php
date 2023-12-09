@@ -2173,7 +2173,7 @@ class Admin_model extends CI_Model
         }
     }
 
-    public function getVendoritemsonly($vendor_po_number){
+    public function getVendoritemsonly($vendor_po_number,$flag){
 
         $this->db->select('*');
         // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
@@ -2186,20 +2186,52 @@ class Admin_model extends CI_Model
         return $data;
 
     }
-    
-    public function getSuppliergoodsPartnumberByid($part_number){
-        $this->db->select('*,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_order_qty');
-        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
-        $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
-        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.pre_vendor_name');
-        $this->db->join(TBL_SUPPLIER_PO_CONFIRMATION_ITEM, TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.vendor_id = '.TBL_VENDOR.'.ven_id');
 
-        $this->db->where(TBL_FINISHED_GOODS.'.status',1);
-        $this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
-        //$this->db->where(TBL_RAWMATERIAL.'.raw_id',$part_number);
-        $query = $this->db->get(TBL_FINISHED_GOODS);
-        $data = $query->result_array();
+
+     public function chekc_if_supplie_name_exits($vendor_po_number){
+
+        $this->db->select('supplier_po_number,supplier_name');
+        $this->db->where(TBL_VENDOR_PO_MASTER.'.id',$vendor_po_number);
+        $query = $this->db->get(TBL_VENDOR_PO_MASTER);
+        $data = $query->row_array();
         return $data;
+
+     }
+
+
+    public function getSuppliergoodsPartnumberByid($part_number,$flag){
+
+        if($flag=='Supplier'){
+
+            $this->db->select('*,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_order_qty');
+            // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+            $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id = '.TBL_RAWMATERIAL.'.raw_id');
+            $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.pre_vendor_name');
+            $this->db->join(TBL_SUPPLIER_PO_CONFIRMATION_ITEM, TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.vendor_id = '.TBL_VENDOR.'.ven_id');
+    
+            $this->db->where(TBL_RAWMATERIAL.'.status',1);
+            $this->db->where(TBL_RAWMATERIAL.'.raw_id',$part_number);
+            //$this->db->where(TBL_RAWMATERIAL.'.raw_id',$part_number);
+            $query = $this->db->get(TBL_RAWMATERIAL);
+            $data = $query->result_array();
+            return $data;
+
+        }else{
+            $this->db->select('*,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_order_qty');
+            $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+            $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
+            $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.pre_vendor_name');
+            $this->db->join(TBL_SUPPLIER_PO_CONFIRMATION_ITEM, TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.vendor_id = '.TBL_VENDOR.'.ven_id');
+    
+            $this->db->where(TBL_FINISHED_GOODS.'.status',1);
+            $this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
+            //$this->db->where(TBL_RAWMATERIAL.'.raw_id',$part_number);
+            $query = $this->db->get(TBL_FINISHED_GOODS);
+            $data = $query->result_array();
+            return $data;
+        }
+
+        
     }
 
     public function saveVendorpoconfirmationitemdata($id,$data){
