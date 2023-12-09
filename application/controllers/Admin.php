@@ -3712,7 +3712,7 @@ class Admin extends BaseController
 
                     $saveVendorconfromation_main_id = trim($this->input->post('venodr_po_confirmation_id'));
                 }else{
-                    $saveVendorconfromation_main_id = '';
+                    $saveVendorconfromation_main_id = NULL;
                 }
 
                 $data = array(
