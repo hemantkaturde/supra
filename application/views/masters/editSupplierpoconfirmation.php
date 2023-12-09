@@ -84,7 +84,7 @@
                                                 <select class="form-control" name="buyer_name" id="buyer_name">
                                                     <option st-id="" value="">Select Buyer Name</option>
                                                     <?php foreach ($buyerList as $key => $value) {?>
-                                                       <option value="<?php echo $value['buyer_id']; ?>" <?php if($value['buyer_id']==$getSupplierpoconfirmationdetails[0]['buyer_po_id']){ echo 'selected';} ?> ><?php echo $value['buyer_name']; ?></option>
+                                                       <option value="<?php echo $value['buyer_id']; ?>" <?php if($value['buyer_id']==$getSupplierpoconfirmationdetails[0]['buyerpoid']){ echo 'selected';} ?> ><?php echo $value['buyer_name']; ?></option>
                                                     <?php } ?>
                                                 </select>
                                             <p class="error buyer_name_error"></p>
