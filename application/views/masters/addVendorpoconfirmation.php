@@ -309,7 +309,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Raw Material Order Quantity (In Kgs / pcs)<span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="number" class="form-control"  id="qty" name="qty" readonly>
+                                                            <input type="number" class="form-control"  id="qty" name="qty" value="0"  readonly>
                                                             <p class="error qty_error"></p>
                                                         </div>
                                                     </div>
@@ -318,7 +318,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Raw Material Received Quantity (In Kgs / pcs)<span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="number" class="form-control"  id="rmqty" name="rmqty"  readonly>
+                                                            <input type="number" class="form-control"  id="rmqty" name="rmqty" value="0"  readonly>
                                                             <p class="error rmqty_error"></p>
                                                         </div>
                                                     </div>
@@ -336,7 +336,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Gross Weight <span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="number" class="form-control"  id="gross_weight" name="gross_weight" readonly>
+                                                            <input type="number" class="form-control"  id="gross_weight" name="gross_weight" value="0" readonly>
                                                             <p class="error gross_weight_error"></p>
                                                         </div>
                                                     </div>
@@ -345,7 +345,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Expected Quantity (In pcs)<span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="number" class="form-control"  id="expected_qty" name="expected_qty" readonly>
+                                                            <input type="number" class="form-control"  id="expected_qty" name="expected_qty" value="0" readonly>
                                                             <p class="error expected_qty_error"></p>
                                                         </div>
                                                     </div>
