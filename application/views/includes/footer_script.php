@@ -4511,7 +4511,6 @@
 			return false;
 		});
 
-
     </script>
 <?php } ?>
 
