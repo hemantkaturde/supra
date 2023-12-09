@@ -4204,7 +4204,14 @@
 									var data_row_material = jQuery.parseJSON( data );
 									$('#description').val(data_row_material.name);
 									$('#HSN_Code').val(data_row_material.hsn_code);
-									$('#gross_weight').val(data_row_material.groass_weight);
+
+									if(data_row_material.groass_weight){
+										$('#gross_weight').val(data_row_material.groass_weight);
+									}else{
+										var zero_val = 0;
+										$('#gross_weight').val(zero_val);
+									}
+
 									$('#net_weight').val(data_row_material.net_weight);
 									$('#SAC').val(data_row_material.sac);
 									$('#drawing_number').val(data_row_material.drawing_number);
@@ -4214,9 +4221,16 @@
 									$('#vendor_qty').val(data_row_material.vendor_order_qty);
 									$('#unit').val(data_row_material.unit);
 									$('#rm_type').val(data_row_material.type_of_raw_material);
-									$('#rmqty').val(data_row_material.sent_qty);
 
 
+									if(data_row_material.sent_qty){
+										$('#rmqty').val(data_row_material.sent_qty);
+									}else{
+										var zero_val = 0;
+										$('#rmqty').val(zero_val);
+									}	
+
+									
 										if($("#rmqty").val()){
 											var rmqty = $("#rmqty").val();
 										}else{
