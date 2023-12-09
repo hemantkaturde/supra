@@ -2203,7 +2203,7 @@ class Admin_model extends CI_Model
 
         if($flag=='Supplier'){
 
-            $this->db->select('*,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_order_qty');
+            $this->db->select('*,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_order_qty,'.TBL_RAWMATERIAL.'.type_of_raw_material as name');
             // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
             $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id = '.TBL_RAWMATERIAL.'.raw_id');
             $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.pre_vendor_name');

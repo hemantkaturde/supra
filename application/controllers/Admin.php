@@ -3661,10 +3661,10 @@ class Admin extends BaseController
         $vendor_po_number=$this->input->post('vendor_po_number');
         $chekc_if_supplie_name = $this->admin_model->chekc_if_supplie_name_exits($vendor_po_number);
 
-        if($chekc_if_supplie_name['supplier_po_number'] && $chekc_if_supplie_name['supplier_name']){
-          $flag ='Supplier';
-        }else{
+        if($chekc_if_supplie_name['supplier_po_number']){
           $flag ='Vendor';
+        }else{
+          $flag ='Supplier';
         }
 
         if($this->input->post('part_number')) {
