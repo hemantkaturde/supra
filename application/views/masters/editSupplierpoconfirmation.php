@@ -78,13 +78,16 @@
                                             </div>
                                     </div>
 
+
+                           
+
                                     <div class="col-md-12">
                                         <div class="form-group">
                                                 <label for="buyer_name">Buyer Name <span class="required">*</span></label>
                                                 <select class="form-control" name="buyer_name" id="buyer_name">
                                                     <option st-id="" value="">Select Buyer Name</option>
                                                     <?php foreach ($buyerList as $key => $value) {?>
-                                                       <option value="<?php echo $value['buyer_id']; ?>" <?php if($value['buyer_id']==$getSupplierpoconfirmationdetails[0]['buyerpoid']){ echo 'selected';} ?> ><?php echo $value['buyer_name']; ?></option>
+                                                       <option value="<?php echo $value['buyer_id']; ?>" <?php if($value['buyer_id']==$getSupplierpoconfirmationdetails['buyerpoid']){ echo 'selected';} ?> ><?php echo $value['buyer_name']; ?></option>
                                                     <?php } ?>
                                                 </select>
                                             <p class="error buyer_name_error"></p>
@@ -92,19 +95,19 @@
                                     </div>
 
 
-                                    <div class="col-md-12 buyer_po_number_div" style="display:<?=$display;?>">
+                                    <!-- <div class="col-md-12 buyer_po_number_div" style="display:<?=$display;?>">
                                             <div class="form-group">
                                                     <label for="buyer_po_number">Buyer PO Number <span class="required">*</span></label>
                                                     <select class="form-control" name="buyer_po_number" id="buyer_po_number">
                                                     <option st-id="" value="<?=$fetchALLpresupplierpoconfirmationitemList[0]['buyer_po_number']?>" selected ><?=$selected_value;?></option>
-                                                        <!-- <option st-id="" value="">Select Buyer Name</option>
+                                                        <option st-id="" value="">Select Buyer Name</option>
                                                         <?php foreach ($buyerList as $key => $value) {?>
                                                         <option value="<?php echo $value['buyer_id']; ?>" <?php if($getSupplierpoconfirmationdetails['buyer_id']==$getSupplierpoconfirmationdetails[0]['buyer_po_number']){ echo 'selected';} ?> ><?php echo $value['buyer_name']; ?></option>
-                                                        <?php } ?> -->
+                                                        <?php } ?>
                                                     </select> 
                                                 <p class="error buyer_po_number_error"></p>
                                             </div>
-                                    </div>
+                                    </div> -->
 
                                 
                                 
