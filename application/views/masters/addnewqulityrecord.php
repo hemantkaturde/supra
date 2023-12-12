@@ -145,7 +145,7 @@
                            <div class="col-md-12">
                               <div class="form-group">
                                  <label for="remark">Remark</label>
-                                 <textarea type="text" class="form-control"  id="remark"  name="remark"></textarea>
+                                 <textarea type="text" class="form-control"  id="remark"  name="remark"><?=$get_qulityrecorditemrecord[0]['remarkitem'];?></textarea>
                                  <p class="error remark_error"></p>
                               </div>
                            </div>
