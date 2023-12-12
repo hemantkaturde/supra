@@ -5637,6 +5637,15 @@ class Admin_model extends CI_Model
 
     }
 
+    public function deletequalityrecordsitem($id){
+        $this->db->where('id', $id);
+        if($this->db->delete(TBL_QUALITY_RECORDS_ITEM)){
+          return TRUE;
+        }else{
+           return FALSE;
+        }
+    }
+
     public function get_prevoius_QR_REcord(){
 
         $this->db->select('quality_records_number');
@@ -5668,7 +5677,7 @@ class Admin_model extends CI_Model
     }
 
     public function get_qulityrecorditemrecord(){
-        $this->db->select('*,'.TBL_QUALITY_RECORDS_ITEM.'.pre_vendor_name as vendor_id_qty_record,'.TBL_VENDOR_PO_MASTER.'.po_number as qtypo_number');
+        $this->db->select('*,'.TBL_QUALITY_RECORDS_ITEM.'.pre_vendor_name as vendor_id_qty_record,'.TBL_VENDOR_PO_MASTER.'.po_number as qtypo_number,'.TBL_QUALITY_RECORDS_ITEM.'.id as qtyid');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_QUALITY_RECORDS_ITEM.'.part_number');
         $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_QUALITY_RECORDS_ITEM.'.pre_vendor_name');

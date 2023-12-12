@@ -335,6 +335,8 @@ $route['vendorponumberforviewitemstockform_display'] = "admin/vendorponumberforv
 $route['getallcalculationrejecteditems'] = "admin/getallcalculationrejecteditems";
 
 $route['deletequlityrecords'] = "admin/deletequlityrecords";
+$route['deletequalityrecordsitem'] = "admin/deletequalityrecordsitem";
+
 
 
 

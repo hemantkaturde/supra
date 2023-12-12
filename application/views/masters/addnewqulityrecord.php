@@ -157,7 +157,7 @@
                                                         <td><?php echo $value['inspected_by'];?></td>
                                                         <td><?php echo $value['remark'];?></td>
                                                         <td>
-                                                        <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['debit_note_id'];?>' class='fa fa-trash-o deleteDebitnoteitem' aria-hidden='true'></i>
+                                                        <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['qtyid'];?>' class='fa fa-trash-o deletequalityrecordsitem' aria-hidden='true'></i>
                                                         </td>
                                                     </tr>
                                                     <?php endforeach;?>
