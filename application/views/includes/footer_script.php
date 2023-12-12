@@ -12524,6 +12524,38 @@
 	        });
 	     });
 
+		 $(document).ready(function() {
+
+			var vendor_po_number = $('#vendor_po_number').val();
+			$("#stockform_item_list").html('');
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>vendorponumberforviewitemstockform_display",
+				type: "POST",
+				data : {'vendor_po_number' : vendor_po_number},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						//$('#buyer_po_number').html('<option value="">Select Buyer PO Number</option>');
+					}
+					else
+					{
+						//$('#buyer_po_number').html('<option value="">Select Buyer PO Number</option>');
+						//$('#buyer_po_number').html(data);
+						$("#stockform_item_list").html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#stockform_item_list').html();
+					//$(".loader_ajax").hide();
+				}
+			});
+			return false;
+		 });
+
 		 $(document).on('change','#vendor_name',function(e){  
 			e.preventDefault();
 			//$(".loader_ajax").show();
@@ -12900,7 +12932,6 @@
 						}
 					});
 		 });
-
 
 
 		 $(document).on('click','.deletequalityrecordsitem',function(e){
