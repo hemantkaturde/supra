@@ -6501,8 +6501,19 @@ class Admin extends BaseController
     }
 
     public function getSuppliergoodsreworkrejectionsupplier(){
+
+
+        $vendor_po_number=$this->input->post('vendor_po_number');
+        $chekc_if_supplie_name = $this->admin_model->chekc_if_supplie_name_exits($vendor_po_number);
+
+        if($chekc_if_supplie_name['supplier_po_number']){
+          $flag ='Vendor';
+        }else{
+          $flag ='Supplier';
+        }
+
         if($this->input->post('part_number')) {
-            $getPartNameBypartid = $this->admin_model->getSuppliergoodsreworkrejectionsupplier($this->input->post('part_number'),$this->input->post('vendor_po_number'),$this->input->post('supplier_po_number'));
+            $getPartNameBypartid = $this->admin_model->getSuppliergoodsreworkrejectionsupplier($this->input->post('part_number'),$this->input->post('vendor_po_number'),$this->input->post('supplier_po_number'),$flag);
             if($getPartNameBypartid){
                 $content = $getPartNameBypartid[0];
                 echo json_encode($content);
