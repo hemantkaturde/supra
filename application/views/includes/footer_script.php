@@ -4250,6 +4250,15 @@
 										var zero_val = 0;
 										$('#gross_weight').val(zero_val);
 									}
+									
+
+									if(data_row_material.sent_qty != "undefined"){
+										$('#rmqty').val(data_row_material.sent_qty);
+									}else{
+										var zero_val = 0;
+										$('#rmqty').val(zero_val);
+									}	
+
 
 									$('#net_weight').val(data_row_material.net_weight);
 									$('#SAC').val(data_row_material.sac);
@@ -4263,13 +4272,7 @@
 
 								
 
-									if(data_row_material.sent_qty != "undefined"){
-										$('#rmqty').val(data_row_material.sent_qty);
-									}else{
-										var zero_val = 0;
-										$('#rmqty').val(zero_val);
-									}	
-
+								
 									
 										if($("#rmqty").val()){
 											var rmqty = $("#rmqty").val();
