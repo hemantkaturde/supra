@@ -14767,7 +14767,7 @@
 				 }
 		 
 				 var value = parseFloat(qty_in_pcs) * parseFloat(net_weight);
-				 $("#qty_in_kgs").val( Math.round(value));
+				 $("#qty_in_kgs").val(value);
 		 });
 
 		 $(document).on('click','#saverejectedformitemdata',function(e){
