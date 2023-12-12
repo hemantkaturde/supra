@@ -2024,7 +2024,7 @@ class Admin_model extends CI_Model
     public function fetchALLSupplierPOitemsforview($supplierpoconfirmationid){
 
         $this->db->select('*,'.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.id as supplier_po_itemid');
-        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.part_number_id');
+        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.part_number_id');
         $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.pre_supplier_po_number');
         //$this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.pre_buyer_po_number');
         $this->db->where(TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.supplier_po_confirmation_id',$supplierpoconfirmationid);
