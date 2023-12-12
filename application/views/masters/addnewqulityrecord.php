@@ -85,16 +85,30 @@
                               <div class="col-md-12">
                                  <div class="form-group">
                                     <label for="vedor_po_date">PO Date </label>
-                                    <input type="text" class="form-control datepicker"  id="vedor_po_date" name="vedor_po_date" readonly>
+                                    <input type="text" class="form-control datepicker"  Value="<?=$get_qulityrecorditemrecord[0]['vendorpodate'];?>" id="vedor_po_date" name="vedor_po_date" readonly>
                                     <p class="error vedor_po_date_error"></p>
                                  </div>
                               </div>
+
+
+                              
+                                        <?php
+                                            if($get_qulityrecorditemrecord[0]['pre_buyer_name']){
+                                                $display='block';
+                                                $selected_value = $get_qulityrecorditemrecord[0]['byuerqty'];
+                                            }else{
+                                                $display='none';
+                                                $selected_value = 'Select Buyer PO Number';
+                                            }        
+                                        ?>
 
                               <div class="col-md-12">
                                  <div class="form-group">
                                        <label for="buyer_name">Buyer Name</label>
                                           <select class="form-control" name="buyer_name" id="buyer_name" readonly>
                                              <option st-id="" value="">Select Buyer Name</option>
+                                             <option st-id="" value="<?=$get_qulityrecorditemrecord[0]['pre_buyer_name']?>" selected="selected"><?=$selected_value?></option>
+
                                               <!-- <?php foreach ($buyerList as $key => $value) {?> -->
                                              <!-- <option value="<?php echo $value['buyer_id']; ?>" <?php if($fetchALLpreBillofmaterailist[0]['pre_buyer_name']== $value['buyer_id']){ echo 'selected'; } ?> ><?php echo $value['buyer_name']; ?></option> -->
                                           <!-- <?php } ?> -->
@@ -103,11 +117,24 @@
                                  </div>
                               </div>
 
+
+                              <?php
+                                            if($get_qulityrecorditemrecord[0]['pre_buyer_po_number']){
+                                                $display='block';
+                                                $selected_value = $get_qulityrecorditemrecord[0]['sales_order_number'];
+                                            }else{
+                                                $display='none';
+                                                $selected_value = 'Select Buyer PO Number';
+                                            }        
+                                        ?>
+
+
                               <div class="col-md-12">
                                         <div class="form-group">
                                                 <label for="buyer_po_number">Select Buyer PO </label>
                                                     <select class="form-control buyer_po_number  buyer_po_number_for_itam_mapping buyer_po_number_for_itam_display autobuyerpo" name="buyer_po_number" id="buyer_po_number" readonly>
                                                         <option st-id="" value="">Select Buyer PO</option>
+                                                        <option st-id="" value="<?=$get_qulityrecorditemrecord[0]['pre_buyer_po_number']?>" selected="selected"><?=$selected_value?></option>
 
                                                         <!-- <option st-id="" value="<?=$fetchALLpreBillofmaterailist[0]['pre_buyer_po_number'] ?>"><?=$sales_order_number ?></option> -->
                                                     </select>
