@@ -3662,9 +3662,9 @@ class Admin extends BaseController
         $chekc_if_supplie_name = $this->admin_model->chekc_if_supplie_name_exits($vendor_po_number);
 
         if($chekc_if_supplie_name['supplier_po_number']){
-          $flag ='Vendor';
-        }else{
           $flag ='Supplier';
+        }else{
+          $flag ='Vendor';
         }
 
         if($this->input->post('part_number')) {
