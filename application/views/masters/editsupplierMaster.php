@@ -63,7 +63,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="contact_person">Contact Person <span class="required">*</span></label>
+                                            <label for="contact_person">Contact Person</label>
                                             <input type="text" class="form-control" value="<?=$data['contact_person']?>" id="contact_person" name="contact_person" required>
                                             <p class="error contact_person_error"></p>
                                         </div>
