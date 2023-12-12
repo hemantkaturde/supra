@@ -5133,15 +5133,13 @@ class Admin_model extends CI_Model
         }
     }
 
-
-
     
     public function update_last_inqulity_record($saveualitydetails){
         $data = array(
-            'rework_rejection_id' =>$saveualitydetails
+            'quality_records_id' =>$saveualitydetails
         );
 
-        $this->db->where(TBL_QUALITY_RECORDS_ITEM.'.rework_rejection_id IS NULL');
+        $this->db->where(TBL_QUALITY_RECORDS_ITEM.'.quality_records_id IS NULL');
         if($this->db->update(TBL_QUALITY_RECORDS_ITEM,$data)){
             return TRUE;
         }else{
