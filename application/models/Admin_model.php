@@ -5134,6 +5134,22 @@ class Admin_model extends CI_Model
     }
 
 
+
+    
+    public function update_last_inqulity_record($saveualitydetails){
+        $data = array(
+            'rework_rejection_id' =>$saveualitydetails
+        );
+
+        $this->db->where(TBL_QUALITY_RECORDS_ITEM.'.rework_rejection_id IS NULL');
+        if($this->db->update(TBL_QUALITY_RECORDS_ITEM,$data)){
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+    }
+
+
     public function deleteDebitnoteitem($debit_note_id){
 
         $this->db->where('id', $debit_note_id);

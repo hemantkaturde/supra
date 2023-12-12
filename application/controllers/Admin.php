@@ -7591,8 +7591,14 @@ class Admin extends BaseController
 
                     $saveualitydetails= $this->admin_model->saveualitydetails('',$data);
                     if($saveualitydetails){
-                        $qualitydetails_response['status'] = 'success';
-                        $qualitydetails_response['error'] = array('QR_details_number'=>strip_tags(form_error('QR_details_number')),'QR_details_date'=>strip_tags(form_error('QR_details_date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'po_date'=>strip_tags(form_error('po_date')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'remark'=>strip_tags(form_error('remark')));
+
+                       if($saveualitydetails){
+                            $update_last_inqulity_record = $this->admin_model->update_last_inqulity_record($saveualitydetails);
+                            if($update_last_inqulity_record){
+                                $qualitydetails_response['status'] = 'success';
+                                 $qualitydetails_response['error'] = array('QR_details_number'=>strip_tags(form_error('QR_details_number')),'QR_details_date'=>strip_tags(form_error('QR_details_date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'po_date'=>strip_tags(form_error('po_date')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'remark'=>strip_tags(form_error('remark')));
+                            }
+                        }
                     }
                     
                 }
