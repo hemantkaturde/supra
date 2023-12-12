@@ -131,7 +131,8 @@
                                                         <td><?php echo $value['rate'];?></td>
                                                         <td><?php echo $value['value'];?></td>
                                                         <td>
-                                                        <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['id'];?>' data-flag='edit' class='fa fa-trash-o deleteBuyerpoitem' aria-hidden='true'></i>
+                                                            <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['id'];?>' class='fa fa-pencil-square-o editbuyerpoitem'  aria-hidden='true'></i>
+                                                            <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['id'];?>' data-flag='edit' class='fa fa-trash-o deleteBuyerpoitem' aria-hidden='true'></i>
                                                         </td>
                                                     </tr>
                                                     <?php endforeach;?>

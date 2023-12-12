@@ -155,7 +155,8 @@
                                                         <td><?php echo $value['rate'];?></td>
                                                         <td><?php echo $value['value'];?></td>
                                                         <td>
-                                                        <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['id'];?>' class='fa fa-trash-o deleteBuyerpoitem' aria-hidden='true'></i>
+                                                          <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['id'];?>' class='fa fa-pencil-square-o editbuyerpoitem'  aria-hidden='true'></i>
+                                                          <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['id'];?>' class='fa fa-trash-o deleteBuyerpoitem' aria-hidden='true'></i>
                                                         </td>
                                                     </tr>
                                                     <?php endforeach;?>
@@ -256,6 +257,103 @@
                                             </div>
                                         </div>
                                     </div>
+
+
+
+                                    <div class="modal fade" id="editNewModal" role="dialog" aria-labelledby="additem" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+                                      
+                                      <div class="modal-dialog" role="document">
+                                          <div class="modal-content">
+                                          <div class="modal-header">
+                                              <h3 class="modal-title" id="additem">Add New Item</h3>
+                                              <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
+                                              <!-- <span aria-hidden="true">&times;</span> -->
+                                              </button>
+                                          </div>
+                                          <form role="form" id="addbuyeritemform" action="<?php echo base_url() ?>addbuyeritem" method="post" role="form">
+
+                                              <div class="modal-body">
+                                                      <div class="loader_ajax" style="display:none;">
+                                                          <div class="loader_ajax_inner"><img src="<?php echo ICONPATH;?>/preloader_ajax.gif"></div>
+                                                      </div>
+
+                                                  <div class="form-group row">
+                                                      <label class="col-sm-3 col-form-label">Part Number <span class="required">*</span> (<small>Finished Goods Master</small>)</label>
+                                                      <div class="col-sm-9">
+                                                          <select class="form-control" name="part_number" id="part_number">
+                                                              <option st-id="" value="">Select Part Name</option>
+                                                              <?php foreach ($finishgoodList as $key => $value) {?>        
+                                                                  <option value="<?php echo $value['fin_id']; ?>"><?php echo $value['part_number']; ?></option>
+                                                              <?php } ?>
+                                                          </select>
+                                                          <p class="error part_number_error"></p>
+
+                                                      </div>
+                                                  </div>
+
+                                                  <div class="form-group row">
+                                                      <label class="col-sm-3 col-form-label">Part Name <span class="required">*</span></label>
+                                                      <div class="col-sm-9">
+                                                          <!-- <textarea type="text" class="form-control"  id="description"  name="description" required></textarea> -->
+                                                          <input type="type" class="form-control"  id="description" name="description" required readonly>
+                                                          <p class="error description_error"></p>
+                                                      </div>
+                                                  </div>
+
+                                                  <div class="form-group row">
+                                                      <label class="col-sm-3 col-form-label">Order Quantity <span class="required">*</span></label>
+                                                      <div class="col-sm-9">
+                                                          <input type="number" class="form-control"  id="qty" name="qty">
+                                                          <p class="error qty_error"></p>
+                                                      </div>
+                                                  </div>
+
+                                                  
+                                                  <div class="form-group row">
+                                                      <label class="col-sm-3 col-form-label">Unit</label>
+                                                      <div class="col-sm-9">
+                                                           <select class="form-control" name="unit" id="unit">
+                                                              <option value="">Select Part Name</option>
+                                                              <option value="kgs">Kgs</option>
+                                                              <option value="Pcs">Pcs</option>
+                                                              <option value="Nos">Nos</option>
+                                                              <option value="Sheet">Sheet</option>
+                                                              <option value="Set">Set</option>
+                                                           </select>
+                                                          <p class="error unit_error"></p>
+                                                      </div>
+                                                  </div>
+
+                                                  <div class="form-group row">
+                                                      <label class="col-sm-3 col-form-label">Rate <span class="required">*</span></label>
+                                                      <div class="col-sm-9">
+                                                          <input type="number" class="form-control"  id="rate" name="rate">
+                                                          <p class="error rate"></p>
+                                                      </div>
+                                                  </div>
+
+                                                  <div class="form-group row">
+                                                      <label class="col-sm-3 col-form-label">Value <span class="required">*</span></label>
+                                                      <div class="col-sm-9">
+                                                          <input type="number" class="form-control"  id="value" name="value" readonly>
+                                                          <p class="error value_error"></p>
+                                                      </div>
+                                                  </div>
+                                  
+                                              </div>
+
+                                              <div class="modal-footer">
+                                                  <button type="button" class="btn btn-secondary btn-xl closebuyerpo" data-dismiss="modal">Close</button>
+                                                  <button type="submit" id="savebuyeritem" name="savebuyeritem" class="btn btn-primary" class="btn btn-success btn-xl">Save</button>
+                                              </div>
+
+                                          </form>    
+                                          </div>
+                                      </div>
+                                    </div>
+
+
+
                                 </div>
                                 </div>
 

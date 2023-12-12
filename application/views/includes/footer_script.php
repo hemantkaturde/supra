@@ -1777,6 +1777,45 @@
 			return false;
 		});
 
+
+		$(document).on('click','.editbuyerpoitem',function(e){  
+			e.preventDefault();
+
+			$('#addNewModal').modal('show'); 
+			// $.ajax({
+			// 	url : "<?php echo base_url();?>addnewBuyerpo",
+			// 	type: "POST",
+			// 	data : formData,
+			// 	cache: false,
+		    //     contentType: false,
+		    //     processData: false,
+			// 	success: function(data, textStatus, jqXHR)
+			// 	{
+			// 		var fetchResponse = $.parseJSON(data);
+			// 		if(fetchResponse.status == "failure")
+			// 	    {
+			// 	    	$.each(fetchResponse.error, function (i, v)
+		    //             {
+		    //                 $('.'+i+'_error').html(v);
+		    //             });
+			// 			$(".loader_ajax").hide();
+			// 	    }
+			// 		else if(fetchResponse.status == 'success')
+			// 	    {
+			// 			$('#editNewModal').modal('show'); 
+			// 	    }
+					
+			// 	},
+			// 	error: function (jqXHR, textStatus, errorThrown)
+			//     {
+			//    	   $(".loader_ajax").hide();
+			//     }
+			// });
+			// return false;
+		});
+
+
+
     </script>
 <?php } ?>
 
