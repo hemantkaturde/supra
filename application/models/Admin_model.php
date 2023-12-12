@@ -2201,6 +2201,9 @@ class Admin_model extends CI_Model
 
     public function getSuppliergoodsPartnumberByid($part_number,$flag){
 
+        print_r($flag);
+        exit;
+
         if($flag=='Supplier'){
 
             $this->db->select('*,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_order_qty');
@@ -2217,6 +2220,11 @@ class Admin_model extends CI_Model
             return $data;
 
         }else{
+
+            
+        
+        
+
             $this->db->select('*,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_order_qty');
             $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
             $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');

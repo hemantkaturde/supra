@@ -3667,6 +3667,7 @@ class Admin extends BaseController
           $flag ='Supplier';
         }
 
+
         if($this->input->post('part_number')) {
             $getPartNameBypartid = $this->admin_model->getSuppliergoodsPartnumberByid($this->input->post('part_number'),$flag);
 
