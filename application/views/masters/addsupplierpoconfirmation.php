@@ -250,7 +250,7 @@
                                                     ?>
                                                     <tr>
                                                         <td><?php echo $count;?></td>
-                                                        <td><?php echo $value['part_number'];?></td>
+                                                        <td><?php echo $value['fgpartnumber'];?></td>
                                                         <td><?php echo $value['description'];?></td>
                                                         <td><?php echo $value['order_oty'];?></td>
                                                         <td><?php echo $value['sent_qty'];?></td>
