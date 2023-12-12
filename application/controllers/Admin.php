@@ -564,15 +564,15 @@ class Admin extends BaseController
             $save_supplier_response = array();
 
             $this->form_validation->set_rules('supplier_name','Supplier Name','trim|required|max_length[128]');
-            $this->form_validation->set_rules('landline','Landline','trim|required|max_length[128]');
+            $this->form_validation->set_rules('landline','Landline','trim|max_length[128]');
             $this->form_validation->set_rules('address','Address','trim|required');
             $this->form_validation->set_rules('phone_1','Phone 1','trim|numeric|max_length[50]');
-            $this->form_validation->set_rules('contact_person','Contact Person','trim|required|max_length[50]');
+            $this->form_validation->set_rules('contact_person','Contact Person','trim|max_length[50]');
             $this->form_validation->set_rules('mobile','Mobile','trim|required|numeric|max_length[50]');
             $this->form_validation->set_rules('email','Email','trim|required|valid_email|max_length[50]');
             $this->form_validation->set_rules('mobile_2','Mobile 2','trim|numeric|max_length[50]');
             $this->form_validation->set_rules('fax','Fax','trim|max_length[50]');
-            $this->form_validation->set_rules('GSTIN','GSTIN','trim|required|max_length[50]');
+            $this->form_validation->set_rules('GSTIN','GSTIN','trim|max_length[50]');
 
             if($this->form_validation->run() == FALSE)
             {
