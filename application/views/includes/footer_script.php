@@ -3699,7 +3699,7 @@
 
 		$(document).on('change','#part_number',function(e){  
 			e.preventDefault();
-			
+
 			//$(".loader_ajax").show();
 			var part_number = $('#part_number').val();
 		    var supplier_po_number = $('#supplier_po_number').val();

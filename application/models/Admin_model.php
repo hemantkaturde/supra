@@ -1860,7 +1860,7 @@ class Admin_model extends CI_Model
             // return $data;
 
 
-            $this->db->select('*,'.TBL_RAWMATERIAL.'.raw_id as item_id,'.TBL_RAWMATERIAL.'.type_of_raw_material as part_number');
+            $this->db->select('*,'.TBL_RAWMATERIAL.'.raw_id as item_id');
             // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
             $this->db->join(TBL_SUPPLIER_PO_MASTER_ITEM, TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id = '.TBL_RAWMATERIAL.'.raw_id');
             // $this->db->where(TBL_FINISHED_GOODS.'.status',1);
@@ -1886,7 +1886,7 @@ class Admin_model extends CI_Model
             // return $data;
 
 
-            $this->db->select('*,'.TBL_FINISHED_GOODS.'.fin_id as item_id,'.TBL_FINISHED_GOODS.'name as part_number');
+            $this->db->select('*,'.TBL_FINISHED_GOODS.'.fin_id as item_id');
             // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
             $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
             $this->db->where(TBL_FINISHED_GOODS.'.status',1);
@@ -1947,13 +1947,13 @@ class Admin_model extends CI_Model
 
     public function getRowmaterialPartnumberByid($part_number){
         $this->db->select('*');
-        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+        // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
         $this->db->join(TBL_SUPPLIER_PO_MASTER_ITEM, TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id = '.TBL_RAWMATERIAL.'.raw_id');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.pre_vendor_name');
         $this->db->where(TBL_RAWMATERIAL.'.status',1);
         $this->db->where(TBL_RAWMATERIAL.'.raw_id',$part_number);
         //$this->db->where(TBL_RAWMATERIAL.'.raw_id',$part_number);
-        $query = $this->db->get(TBL_FINISHED_GOODS);
+        $query = $this->db->get(TBL_RAWMATERIAL);
         $data = $query->result_array();
         return $data;
     }
@@ -1979,8 +1979,8 @@ class Admin_model extends CI_Model
 
     public function fetchALLpresupplierpoconfirmationitemList(){
 
-        $this->db->select('*,'.TBL_FINISHED_GOODS.'.part_number as fgpartnumber');
-        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.part_number_id');
+        $this->db->select('*');
+        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.part_number_id');
         $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.pre_supplier_po_number');
         $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.pre_buyer_po_number','left');
 
