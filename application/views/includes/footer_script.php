@@ -4261,9 +4261,9 @@
 									$('#unit').val(data_row_material.unit);
 									$('#rm_type').val(data_row_material.type_of_raw_material);
 
-									alert(data_row_material.sent_qty)
+								
 
-									if(data_row_material.sent_qty){
+									if(data_row_material.sent_qty != "undefined"){
 										$('#rmqty').val(data_row_material.sent_qty);
 									}else{
 										var zero_val = 0;
