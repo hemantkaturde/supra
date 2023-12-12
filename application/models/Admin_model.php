@@ -5961,6 +5961,7 @@ class Admin_model extends CI_Model
         $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_STOCKS_ITEM.'.pre_buyer_po_id');
         $this->db->where(TBL_STOCKS_ITEM.'.stock_form_id IS NOT NULL');
         $this->db->where(TBL_STOCKS_ITEM.'.status', 1);
+        $this->db->group_by(TBL_STOCKS_ITEM.'.id');
         $this->db->order_by(TBL_STOCKS_ITEM.'.id ','DESC');
         $query = $this->db->get(TBL_STOCKS_ITEM);
         $rowcount = $query->num_rows();
@@ -5978,6 +5979,7 @@ class Admin_model extends CI_Model
 
         $this->db->where(TBL_STOCKS_ITEM.'.stock_form_id IS NOT NULL');
         $this->db->where(TBL_STOCKS_ITEM.'.status', 1);
+        $this->db->group_by(TBL_STOCKS_ITEM.'.id');
         $this->db->order_by(TBL_STOCKS_ITEM.'.id ','DESC');
         $query = $this->db->get(TBL_STOCKS_ITEM);
         $fetch_result = $query->result_array();
