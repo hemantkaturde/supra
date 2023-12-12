@@ -12820,7 +12820,6 @@
 			return false;
 	     });
 
-
 		 $(document).on('change','.vendor_po_number_for_view_item_stock_form',function(e){  
 			e.preventDefault();
 			//$(".loader_ajax").show();
@@ -12852,8 +12851,57 @@
 				}
 			});
 			return false;
-		});
+		 });
 
+
+
+		 $(document).on('click','.deletequlityrecords',function(e){
+					var elemF = $(this);
+					e.preventDefault();
+					swal({
+						title: "Are you sure?",
+						text: "Delete Quality Records",
+						type: "warning",
+						showCancelButton: true,
+						closeOnClickOutside: false,
+						confirmButtonClass: "btn-sm btn-danger",
+						confirmButtonText: "Yes, delete it!",
+						cancelButtonText: "No, cancel plz!",
+						closeOnConfirm: false,
+						closeOnCancel: false
+					}, function(isConfirm) {
+						if (isConfirm) {
+									$.ajax({
+										url : "<?php echo base_url();?>deletequlityrecords",
+										type: "POST",
+										data : 'id='+elemF.attr('data-id'),
+										success: function(data, textStatus, jqXHR)
+										{
+											const obj = JSON.parse(data);
+										
+											if(obj.status=='success'){
+												swal({
+													title: "Deleted!",
+													text: "Quality Succesfully Deleted",
+													icon: "success",
+													button: "Ok",
+													},function(){ 
+															window.location.href = "<?php echo base_url().'qualityrecord'?>";
+												});	
+											}
+
+										},
+										error: function (jqXHR, textStatus, errorThrown)
+										{
+											$(".loader_ajax").hide();
+										}
+									})
+								}
+								else {
+						swal("Cancelled", "Quality deletion cancelled ", "error");
+						}
+					});
+		 });
 
 
     </script>

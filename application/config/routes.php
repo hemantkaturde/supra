@@ -332,9 +332,9 @@ $route['deleterejectionformitem'] = "admin/deleterejectionformitem";
 $route['getStockdatadependsonvendorpo'] = "admin/getStockdatadependsonvendorpo";
 $route['getbuyerorderqtyfrompartnumber'] = "admin/getbuyerorderqtyfrompartnumber";
 $route['vendorponumberforviewitemstockform_display'] = "admin/vendorponumberforviewitemstockform_display";
-
-
 $route['getallcalculationrejecteditems'] = "admin/getallcalculationrejecteditems";
+
+$route['deletequlityrecords'] = "admin/deletequlityrecords";
 
 
 

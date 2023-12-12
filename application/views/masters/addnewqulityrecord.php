@@ -2,11 +2,11 @@
    <!-- Content Header (Page header) -->
    <section class="content-header">
       <h1>
-         <i class="fa fa-users"></i> Add New Qulity Record
+         <i class="fa fa-users"></i> Add New Quality Record
          <small>
             <ul class="breadcrumb" style="background-color:#ecf0f5 !important">
                <li class="completed"><a href="javascript:void(0);">Masters</a></li>
-               <li class="active"><a href="javascript:void(0);"> Qulity Record Details</a></li>
+               <li class="active"><a href="javascript:void(0);"> Quality Record Details</a></li>
             </ul>
          </small>
       </h1>
@@ -17,7 +17,7 @@
             <div class="box">
                <div class="box box-primary">
                   <div class="box-header">
-                     <h3 class="box-title">Add New Qulity Record</h3>
+                     <h3 class="box-title">Add New Quality Record</h3>
                   </div>
                   <?php $this->load->helper("form"); ?>
                   <form role="form" id="addnewqualityform" action="#" method="post" role="form">
@@ -54,18 +54,30 @@
                                     <select class="form-control vendor_name" name="vendor_name" id="vendor_name">
                                        <option st-id="" value="">Select Vendor Name</option>
                                        <?php foreach ($vendorList as $key => $value) {?>
-                                       <option value="<?php echo $value['ven_id']; ?>" <?php if($value['ven_id']==$getdebitnoteitemdetails[0]['pre_vendor_name']){ echo 'selected';} ?>><?php echo $value['vendor_name']; ?></option>
+                                       <option value="<?php echo $value['ven_id']; ?>" <?php if($value['ven_id']==$get_qulityrecorditemrecord[0]['vendor_id_qty_record']){ echo 'selected';} ?>><?php echo $value['vendor_name']; ?></option>
                                        <?php } ?>
                                     </select>
                                     <p class="error vendor_name_error"></p>
                                  </div>
                               </div>
+
+                                       <?php
+                                            if($get_qulityrecorditemrecord[0]['pre_vendor_po_number']){
+                                                $display='block';
+                                                $selected_value = $get_qulityrecorditemrecord[0]['qtypo_number'];
+                                            }else{
+                                                $display='none';
+                                                $selected_value = 'Select Buyer PO Number';
+                                            }        
+                                        ?>
+
+
                               <div class="col-md-12 vendor_po_number_div" id="vendor_po_number_div">
                                  <div class="form-group">
                                     <label for="vendor_po_number">Vendor PO Number <span class="required">*</span></label>
                                     <select class="form-control vendor_po_number_itam vendor_po_get_data vendor_po_number_for_view_item_stock_form" name="vendor_po_number" id="vendor_po_number">
                                        <option st-id="" value="">Select Vendor PO Number</option>
-                                       <!-- <option st-id="" value="<?=$getdebitnoteitemdetails[0]['pre_vendor_po_number']?>" selected="selected"><?=$selected_value?></option> -->
+                                       <option st-id="" value="<?=$get_qulityrecorditemrecord[0]['pre_vendor_po_number']?>" selected="selected"><?=$selected_value?></option>
                                     </select>
                                     <p class="error vendor_po_number_error"></p>
                                  </div>

@@ -5591,7 +5591,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['buyer_po'] = $value['sales_order_number'];
                 $data[$counter]['action'] = '';
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editchallanform/".$value['quality_records_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
-                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['quality_records_id']."' class='fa fa-trash-o deletechallanform' aria-hidden='true'></i>"; 
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['quality_records_id']."' class='fa fa-trash-o deletequlityrecords' aria-hidden='true'></i>"; 
                 $counter++; 
             }
         }
@@ -5613,6 +5613,26 @@ class Admin_model extends CI_Model
             } else {
                 return FALSE;
             }
+        }
+
+    }
+
+
+    public function deletequlityrecords($id){
+        $this->db->where('quality_records_id', $id);
+        if($this->db->delete(TBL_QUALITY_RECORDS)){
+    
+           $this->db->where('quality_records_id', $id);
+           //$this->db->delete(TBL_SUPPLIER);
+           if($this->db->delete(TBL_QUALITY_RECORDS_ITEM)){
+              return TRUE;
+           }else{
+              return FALSE;
+           }
+          return TRUE;
+
+        }else{
+           return FALSE;
         }
 
     }
@@ -5648,7 +5668,7 @@ class Admin_model extends CI_Model
     }
 
     public function get_qulityrecorditemrecord(){
-        $this->db->select('*');
+        $this->db->select('*,'.TBL_QUALITY_RECORDS_ITEM.'.pre_vendor_name as vendor_id_qty_record,'.TBL_VENDOR_PO_MASTER.'.po_number as qtypo_number');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_QUALITY_RECORDS_ITEM.'.part_number');
         $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_QUALITY_RECORDS_ITEM.'.pre_vendor_name');

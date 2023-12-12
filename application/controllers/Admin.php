@@ -7619,7 +7619,6 @@ class Admin extends BaseController
 
 
 
-
     public function fetchqulityrecords(){
         $params = $_REQUEST;
         $totalRecords = $this->admin_model->getqulityformcount($params); 
@@ -7642,6 +7641,22 @@ class Admin extends BaseController
             "data"            => $data   // total data array
             );
         echo json_encode($json_data);
+    }
+
+    public function deletequlityrecords(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->deletequlityrecords(trim($this->input->post('id')));
+            if ($result) {
+                        $process = 'Delete Quality Details';
+                        $processFunction = 'Admin/deletequlityrecords';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
     }
 
     public function savequlityrecorditem(){
