@@ -205,7 +205,7 @@
                                                         </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Part Number <span class="required">*</span> (<small>Row Material Goods Master</small>)</label>
+                                                        <label class="col-sm-4 col-form-label">Part Number <span class="required">*</span></label>
                                                         <div class="col-sm-8">
                                                             <select class="form-control" name="part_number" id="part_number">
                                                                 <option st-id="" value="">Select Part Name</option>
