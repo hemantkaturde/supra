@@ -206,8 +206,8 @@
 
                                 <div class="col-md-6" style="margin-top: 20px;">
                                 <div class="form-group">
-                                    <label for="invoice_qty_in_kgs">Ready for Exp Kgs</label>
-                                    <input type="text" class="form-control" id="invoice_qty_in_kgs" name="invoice_qty_in_kgs" readonly>
+                                    <label for="ready_for_exp_kgs">Ready for Exp Kgs</label>
+                                    <input type="text" class="form-control" id="ready_for_exp_kgs" name="ready_for_exp_kgs" readonly>
                                     </div>
                                 </div>  
                             </div>  
