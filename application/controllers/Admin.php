@@ -7636,14 +7636,6 @@ class Admin extends BaseController
     }
 
 
-    public function vendorponumberforviewitemstockform(){
-
-
-
-    }
-
-
-
     public function fetchqulityrecords(){
         $params = $_REQUEST;
         $totalRecords = $this->admin_model->getqulityformcount($params); 
@@ -7666,6 +7658,21 @@ class Admin extends BaseController
             "data"            => $data   // total data array
             );
         echo json_encode($json_data);
+    }
+
+    public function editqulityrecordform($qulity_record_id){
+        $process = 'Edit Qulity Record Form';
+        $processFunction = 'Admin/editqulityrecordform';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Edit Qulity Record Form';
+        $data['vendorList']= $this->admin_model->fetchALLvendorList();
+        $data['get_qulityrecorditemrecord_edit']= $this->admin_model->get_qulityrecorditemrecord_edit($qulity_record_id);
+
+        $data['getqualityrecords_details']= $this->admin_model->getqualityrecords_details($qulity_record_id);
+
+        $this->loadViews("masters/editnewqulityrecord", $this->global, $data, NULL);
+
+
     }
 
     public function deletequlityrecords(){

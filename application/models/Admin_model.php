@@ -5602,7 +5602,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['buyer_name'] = $value['buyer_name'];
                 $data[$counter]['buyer_po'] = $value['sales_order_number'];
                 $data[$counter]['action'] = '';
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editchallanform/".$value['quality_records_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editqulityrecordform/".$value['quality_records_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['quality_records_id']."' class='fa fa-trash-o deletequlityrecords' aria-hidden='true'></i>"; 
                 $counter++; 
             }
@@ -5702,6 +5702,38 @@ class Admin_model extends CI_Model
         return $fetch_result;
        
     }
+
+    public function get_qulityrecorditemrecord_edit($qulity_record_id){
+        $this->db->select('*,'.TBL_QUALITY_RECORDS_ITEM.'.pre_vendor_name as vendor_id_qty_record,'.TBL_VENDOR_PO_MASTER.'.po_number as qtypo_number,'.TBL_QUALITY_RECORDS_ITEM.'.id as qtyid,'.TBL_BUYER_MASTER.'.buyer_name as byuerqty,'.TBL_VENDOR_PO_MASTER.'.date as vendorpodate,'.TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_QUALITY_RECORDS_ITEM.'.remark as remarkitem');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_QUALITY_RECORDS_ITEM.'.part_number');
+        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_QUALITY_RECORDS_ITEM.'.pre_vendor_name');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_QUALITY_RECORDS_ITEM.'.pre_vendor_po_number');
+        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_QUALITY_RECORDS_ITEM.'.pre_buyer_name','left');
+        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_QUALITY_RECORDS_ITEM.'.pre_buyer_po_number','left');
+        $this->db->where(TBL_QUALITY_RECORDS_ITEM.'.status', 1);
+        $this->db->where(TBL_QUALITY_RECORDS_ITEM.'.quality_records_id', $qulity_record_id);
+        $query = $this->db->get(TBL_QUALITY_RECORDS_ITEM);
+        $fetch_result = $query->result_array();
+        return $fetch_result;
+       
+    }
+
+    public function getqualityrecords_details($qulity_record_id){
+
+        $this->db->select(TBL_QUALITY_RECORDS.'.quality_records_number,'.TBL_QUALITY_RECORDS.'.quality_records_date,'.TBL_QUALITY_RECORDS.'.vendor_id,'.TBL_VENDOR_PO_MASTER.'.po_number,'.TBL_QUALITY_RECORDS.'.vendor_po as vendor_po_id,'.TBL_VENDOR_PO_MASTER.'.date as po_date,'.TBL_BUYER_MASTER.'.buyer_name,'.TBL_QUALITY_RECORDS.'.buyer_name as buyer_id,'.TBL_QUALITY_RECORDS.'.buyer_po_number as buyer_po_id,'.TBL_BUYER_PO_MASTER.'.sales_order_number');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_QUALITY_RECORDS.'.vendor_po');
+        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_QUALITY_RECORDS.'.buyer_po_number');
+        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_QUALITY_RECORDS.'.buyer_name');
+        $this->db->where(TBL_QUALITY_RECORDS.'.status', 1);
+        $this->db->where(TBL_QUALITY_RECORDS.'.quality_records_id', $qulity_record_id);
+        $query = $this->db->get(TBL_QUALITY_RECORDS);
+        $fetch_result = $query->row_array();
+        return $fetch_result;
+
+
+    }
+
 
     public function getPriviousstockid(){
 
