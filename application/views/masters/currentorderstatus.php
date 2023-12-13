@@ -73,7 +73,7 @@
                                                     <th>Received Qty</th>
                                                     <th>Buyer Name</th>
                                                     <th>Status</th>
-                                                    <th>Flag</th>
+                                                    <th>Form Name</th>
                                                 </tr>
                                             </thead>
                                             <tbody>

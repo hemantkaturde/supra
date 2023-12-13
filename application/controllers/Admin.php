@@ -6219,21 +6219,27 @@ class Admin extends BaseController
             $objPHPExcel->getActiveSheet()->SetCellValue('A1', 'Buyer Name');
             $objPHPExcel->getActiveSheet()->SetCellValue('B1', 'Buyer PO No');
             $objPHPExcel->getActiveSheet()->SetCellValue('C1', 'Buyer PO Date');
-            $objPHPExcel->getActiveSheet()->SetCellValue('D1', 'Buyer Part No');
-            $objPHPExcel->getActiveSheet()->SetCellValue('E1', 'Buyer Order Qty');    
-            $objPHPExcel->getActiveSheet()->SetCellValue('F1', 'Buyer Delivery Date');
-            $objPHPExcel->getActiveSheet()->SetCellValue('G1', 'Vendor PO Number');
-            $objPHPExcel->getActiveSheet()->SetCellValue('H1', 'Vendor PO DATE');
-            $objPHPExcel->getActiveSheet()->SetCellValue('I1', 'Raw Material Supplier');   
-            $objPHPExcel->getActiveSheet()->SetCellValue('J1', 'Vendor');  
-            $objPHPExcel->getActiveSheet()->SetCellValue('K1', 'Part Description');  
-            $objPHPExcel->getActiveSheet()->SetCellValue('L1', 'Part No');  
-            $objPHPExcel->getActiveSheet()->SetCellValue('M1', 'Order Quantity');  
-            $objPHPExcel->getActiveSheet()->SetCellValue('N1', 'Delivery Date');  
-            $objPHPExcel->getActiveSheet()->SetCellValue('O1', 'Received Quantity');  
-            $objPHPExcel->getActiveSheet()->SetCellValue('P1', 'Scrap Received');  
-            $objPHPExcel->getActiveSheet()->SetCellValue('Q1', 'Current Status');  
-            $objPHPExcel->getActiveSheet()->SetCellValue('R1', 'Remarks');  
+            $objPHPExcel->getActiveSheet()->SetCellValue('D1', 'Buyer Order Qty'); 
+            $objPHPExcel->getActiveSheet()->SetCellValue('E1', 'Buyer Delivery Date');
+            $objPHPExcel->getActiveSheet()->SetCellValue('F1', 'Raw Material Supplier');   
+            $objPHPExcel->getActiveSheet()->SetCellValue('G1', 'Type Of Raw Material');  
+            $objPHPExcel->getActiveSheet()->SetCellValue('H1', 'Gross Weight Per Pcs in Kgs');  
+            $objPHPExcel->getActiveSheet()->SetCellValue('I1', 'Raw Material Order Qty');  
+            $objPHPExcel->getActiveSheet()->SetCellValue('J1', 'Raw Material Actual Recd Qty');  
+            $objPHPExcel->getActiveSheet()->SetCellValue('K1', 'Expected Qty');  
+            $objPHPExcel->getActiveSheet()->SetCellValue('L1', 'Vendor Name');  
+            $objPHPExcel->getActiveSheet()->SetCellValue('M1', 'Vendor PO Number');
+            $objPHPExcel->getActiveSheet()->SetCellValue('N1', 'Vendor PO DATE');
+            $objPHPExcel->getActiveSheet()->SetCellValue('O1', 'F G Part Description');
+            $objPHPExcel->getActiveSheet()->SetCellValue('P1', 'FG Part No');
+            $objPHPExcel->getActiveSheet()->SetCellValue('Q1', 'FG Order Quantity');
+            $objPHPExcel->getActiveSheet()->SetCellValue('R1', 'Received Quantity');
+            $objPHPExcel->getActiveSheet()->SetCellValue('S1', 'Net Weight Per Pcs in Kgs');
+            $objPHPExcel->getActiveSheet()->SetCellValue('T1', 'Vendor Delivery Date');
+            $objPHPExcel->getActiveSheet()->SetCellValue('U1', 'Remarks');
+            $objPHPExcel->getActiveSheet()->SetCellValue('V1', 'Form Name');
+            $objPHPExcel->getActiveSheet()->SetCellValue('W1', 'Status');
+    
 
             // set Row
             $rowCount = 2;
@@ -6241,35 +6247,42 @@ class Admin extends BaseController
                 $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $element['buyer_name']);
                 $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $element['sales_order_number']);
                 $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $element['buyer_po_date']);
-                $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['part_number'] .' - '. $element['partname']);
-                $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['vendor_order_qty']);
-                $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['buyer_delivery_date']);
-                $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['vendor_po']);
-                $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $element['date']);
-                $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, "");
-                $objPHPExcel->getActiveSheet()->SetCellValue('J' . $rowCount, $element['vendor']);
-                $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, $element['partname']);
-                $objPHPExcel->getActiveSheet()->SetCellValue('L' . $rowCount, $element['part_number']);
-                $objPHPExcel->getActiveSheet()->SetCellValue('M' . $rowCount, $element['vendor_order_qty']);
-                $objPHPExcel->getActiveSheet()->SetCellValue('N' . $rowCount, $element['buyer_delivery_date']); 
-                $objPHPExcel->getActiveSheet()->SetCellValue('O' . $rowCount, $element['vendor_received_qty']); 
-                $objPHPExcel->getActiveSheet()->SetCellValue('P' . $rowCount, ""); 
-                $objPHPExcel->getActiveSheet()->SetCellValue('Q' . $rowCount,$element['bom_status']); 
-                $objPHPExcel->getActiveSheet()->SetCellValue('R' . $rowCount,$element['item_remark']); 
+                $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['buyer_order_qty']);
+                $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['buyer_delivery_date']);
+                $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['raw_material_supplier']);
+                $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['type_of_raw_material']);
+                $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $element['gross_weight_per_pcs_in_Kgs']);
+                $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, $element['raw_material_order_qty']);
+                $objPHPExcel->getActiveSheet()->SetCellValue('J' . $rowCount, $element['raw_material_actual_recd_qty']);
+                $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, $element['expected_qty']);
+                $objPHPExcel->getActiveSheet()->SetCellValue('L' . $rowCount, $element['vendor']);
+                $objPHPExcel->getActiveSheet()->SetCellValue('M' . $rowCount, $element['vendor_po']);
+                $objPHPExcel->getActiveSheet()->SetCellValue('N' . $rowCount, $element['vendor_po_date']);
+                $objPHPExcel->getActiveSheet()->SetCellValue('O' . $rowCount, $element['part_decription']);
+                $objPHPExcel->getActiveSheet()->SetCellValue('P' . $rowCount, $element['part_number']);
+                $objPHPExcel->getActiveSheet()->SetCellValue('Q' . $rowCount, $element['vendor_order_qty']);
+                $objPHPExcel->getActiveSheet()->SetCellValue('R' . $rowCount, $element['vendor_received_qty']);
+                $objPHPExcel->getActiveSheet()->SetCellValue('S' . $rowCount, $element['net_Weight_per_pcs_in_kgs']);
+                $objPHPExcel->getActiveSheet()->SetCellValue('T' . $rowCount, $element['vendor_PO_date']);
+                $objPHPExcel->getActiveSheet()->SetCellValue('T' . $rowCount, $element['vendor_delivery_date']);
+                $objPHPExcel->getActiveSheet()->SetCellValue('U' . $rowCount, $element['item_remark']);
+                $objPHPExcel->getActiveSheet()->SetCellValue('V' . $rowCount, $element['form_name']);
+                $objPHPExcel->getActiveSheet()->SetCellValue('W' . $rowCount, $element['bom_status']);
 
+                
                 $rowCount++;
             }
 
-            foreach(range('A','R') as $columnID) {
+            foreach(range('A','W') as $columnID) {
                 $objPHPExcel->getActiveSheet()->getColumnDimension($columnID)->setAutoSize(true);
 			}
 			/*********************Autoresize column width depending upon contents END***********************/
 			
-            $objPHPExcel->getActiveSheet()->getStyle('A1:R1')->getFont()->setBold(true); //Make heading font bold
+            $objPHPExcel->getActiveSheet()->getStyle('A1:W1')->getFont()->setBold(true); //Make heading font bold
 			
 			/*********************Add color to heading START**********************/
             $objPHPExcel->getActiveSheet()
-						->getStyle('A1:R1')
+						->getStyle('A1:W1')
 						->getFill()
 						->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
 						->getStartColor()
