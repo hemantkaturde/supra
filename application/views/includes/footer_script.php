@@ -13823,7 +13823,7 @@
 																				$('#ready_for_exp_pcs').val(ready_for_exp_pcs);
 
 
-																				$('#invoice_qty_in_kgs').val('');
+																				$('#ready_for_exp_kgs').val('');
 																				var precalculation_ready_for_export_kgs =  parseFloat(invoice_qty_in_pcs_data.actual_received_qty_in_kgs) - parseFloat(total_rejected_qty_kgs);
 																				var ready_for_exp_kgs = parseFloat(balenceitems_data.balence_qty_in_pcs) + parseFloat(precalculation_ready_for_export_kgs);
 																				$('#ready_for_exp_kgs').val(ready_for_exp_kgs);
