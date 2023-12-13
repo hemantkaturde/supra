@@ -152,7 +152,7 @@
                                 <div class="col-md-3" style="margin-top: 20px;">
                                 <div class="form-group">
                                     <label for="actual_received_qty_in_pcs">Actual Received Qty (In Pcs)</label>
-                                    <input type="text" class="form-control" id="actual_received_qty_in_pcs" name="actual_received_qty_in_pcs" readonly>
+                                    <input type="text" class="form-control" id="actual_received_qty_in_pcs" name="actual_received_qty_in_pcs">
                                     </div>
                                 </div>  
 
@@ -198,8 +198,8 @@
                             <div class ="total_values" style="border-top: 1px solid black">
                                 <div class="col-md-6" style="margin-top: 20px;">
                                 <div class="form-group">
-                                    <label for="invoice_qty_in_pcs">Ready for Exp Pcs</label>
-                                    <input type="text" class="form-control" id="invoice_qty_in_pcs" name="invoice_qty_in_pcs" readonly>
+                                    <label for="ready_for_exp_pcs">Ready for Exp Pcs</label>
+                                    <input type="text" class="form-control" id="ready_for_exp_pcs" name="ready_for_exp_pcs" readonly>
                                     </div>
                                 </div>  
 
@@ -233,16 +233,16 @@
                             <div class ="total_values" style="border-top: 1px solid black">
                                 <div class="col-md-6" style="margin-top: 20px;">
                                 <div class="form-group">
-                                    <label for="invoice_qty_in_pcs">Balance Qty Pcs</label>
-                                    <input type="text" class="form-control" id="invoice_qty_in_pcs" name="invoice_qty_in_pcs" readonly>
+                                    <label for="balence_qty_in_pcs">Balance Qty Pcs</label>
+                                    <input type="text" class="form-control" id="balence_qty_in_pcs" name="balence_qty_in_pcs" readonly>
                                     </div>
                                 </div>  
 
 
                                 <div class="col-md-6" style="margin-top: 20px;">
                                 <div class="form-group">
-                                    <label for="invoice_qty_in_kgs">Balance Qty Kgs</label>
-                                    <input type="text" class="form-control" id="invoice_qty_in_kgs" name="invoice_qty_in_kgs" readonly>
+                                    <label for="balence_qty_in_kgs">Balance Qty Kgs</label>
+                                    <input type="text" class="form-control" id="balence_qty_in_kgs" name="balence_qty_in_kgs" readonly>
                                     </div>
                                 </div>  
                             </div>  

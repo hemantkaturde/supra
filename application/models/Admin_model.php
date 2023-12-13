@@ -7059,6 +7059,28 @@ class Admin_model extends CI_Model
   }
 
 
+  public function getallbalencecalculationexportitems(){
+
+    // $this->db->select('sum(qty_In_pcs) as total_rejected_qty_in_pcs');
+    // //$this->db->where(TBL_INCOMING_DETAILS_ITEM.'.part_number', $part_number);
+    // // $this->db->where(TBL_VENDOR_PO_MASTER.'.supplier_name !=',"");
+    // $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.status',1);
+    // $query = $this->db->get(TBL_REJECTION_FORM_REJECTED_ITEM);
+    // $data = $query->result_array();
+    // return $data;
+
+    // $this->db->select('*,'.TBL_FINISHED_GOODS.'.net_weight as fg_net_weight');
+
+        $this->db->select('sum('.TBL_STOCKS_ITEM.'.balence_qty_in_pcs) as balence_qty_in_pcs,sum('.TBL_STOCKS_ITEM.'.balence_qty_in_kgs) as balence_qty_in_kgs');
+        $this->db->where(TBL_STOCKS_ITEM.'.status', 1);
+        $this->db->order_by(TBL_STOCKS_ITEM.'.id','DESC');
+        $query = $this->db->get(TBL_STOCKS_ITEM);
+        $fetch_result = $query->result_array();
+         return $fetch_result;
+
+  }
+
+
 }
 
 ?>

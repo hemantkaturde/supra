@@ -338,7 +338,7 @@ $route['deletequalityrecordsitem'] = "admin/deletequalityrecordsitem";
 $route['editqulityrecordform/(:any)'] = "admin/editqulityrecordform/$1";
 $route['getallcalculationexportitems'] = "admin/getallcalculationexportitems";
 
-
+$route['getallbalencecalculationexportitems'] = "admin/getallbalencecalculationexportitems";
 
 
 

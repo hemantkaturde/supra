@@ -9010,6 +9010,17 @@ class Admin extends BaseController
     }
 
 
+    public function getallbalencecalculationexportitems(){
+
+        $getallbalencecalculationexportitems = $this->admin_model->getallbalencecalculationexportitems();
+        if($getallbalencecalculationexportitems){
+            $content = $getallbalencecalculationexportitems[0];
+            echo json_encode($content);
+        }else{
+            echo 'failure';
+        }
+    }
+
     
 
 
