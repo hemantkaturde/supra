@@ -5721,7 +5721,7 @@ class Admin_model extends CI_Model
 
     public function getqualityrecords_details($qulity_record_id){
 
-        $this->db->select(TBL_QUALITY_RECORDS.'.quality_records_number,'.TBL_QUALITY_RECORDS.'.quality_records_date,'.TBL_QUALITY_RECORDS.'.vendor_id,'.TBL_VENDOR_PO_MASTER.'.po_number,'.TBL_QUALITY_RECORDS.'.vendor_po as vendor_po_id,'.TBL_VENDOR_PO_MASTER.'.date as po_date,'.TBL_BUYER_MASTER.'.buyer_name,'.TBL_QUALITY_RECORDS.'.buyer_name as buyer_id,'.TBL_QUALITY_RECORDS.'.buyer_po_number as buyer_po_id,'.TBL_BUYER_PO_MASTER.'.sales_order_number');
+        $this->db->select(TBL_QUALITY_RECORDS.'.quality_records_number,'.TBL_QUALITY_RECORDS.'.quality_records_date,'.TBL_QUALITY_RECORDS.'.vendor_id,'.TBL_VENDOR_PO_MASTER.'.po_number,'.TBL_QUALITY_RECORDS.'.vendor_po as vendor_po_id,'.TBL_VENDOR_PO_MASTER.'.date as po_date,'.TBL_BUYER_MASTER.'.buyer_name,'.TBL_QUALITY_RECORDS.'.buyer_name as buyer_id,'.TBL_QUALITY_RECORDS.'.buyer_po_number as buyer_po_id,'.TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_QUALITY_RECORDS.'.remark,'.TBL_QUALITY_RECORDS.'.quality_records_id');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_QUALITY_RECORDS.'.vendor_po');
         $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_QUALITY_RECORDS.'.buyer_po_number');
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_QUALITY_RECORDS.'.buyer_name');

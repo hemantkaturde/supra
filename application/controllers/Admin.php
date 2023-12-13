@@ -7608,7 +7608,9 @@ class Admin extends BaseController
                         'remark' =>  trim($this->input->post('remark'))
                     );
 
-                    $saveualitydetails= $this->admin_model->saveualitydetails('',$data);
+                    $quality_record_id = trim($this->input->post('quality_record_id'));
+
+                    $saveualitydetails= $this->admin_model->saveualitydetails($quality_record_id,$data);
                     if($saveualitydetails){
 
                        if($saveualitydetails){
@@ -7667,12 +7669,8 @@ class Admin extends BaseController
         $this->global['pageTitle'] = 'Edit Qulity Record Form';
         $data['vendorList']= $this->admin_model->fetchALLvendorList();
         $data['get_qulityrecorditemrecord_edit']= $this->admin_model->get_qulityrecorditemrecord_edit($qulity_record_id);
-
         $data['getqualityrecords_details']= $this->admin_model->getqualityrecords_details($qulity_record_id);
-
         $this->loadViews("masters/editnewqulityrecord", $this->global, $data, NULL);
-
-
     }
 
     public function deletequlityrecords(){

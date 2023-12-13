@@ -11,6 +11,10 @@
          </small>
       </h1>
    </section>
+
+  
+
+
    <section class="content">
       <div class="row">
          <div class="col-xs-12">
@@ -22,11 +26,16 @@
                   <?php $this->load->helper("form"); ?>
                   <form role="form" id="addnewqualityform" action="#" method="post" role="form">
                      <div class="box-body">
+
+
+                     <input type="hidden" class="form-control" id="quality_record_id" value="<?=$getqualityrecords_details['quality_records_id']?>" name="quality_record_id" readonly>
+
+
                         <div class="col-md-4">
                               <div class="col-md-12">
                                  <div class="form-group">
                                     <label for="QR_details_number">QR Number<span class="required">*</span></label>
-                                    <input type="text" class="form-control" id="c" value="<?=$getqualityrecords_details['quality_records_number']?>" name="QR_details_number" readonly>
+                                    <input type="text" class="form-control" id="QR_details_number" value="<?=$getqualityrecords_details['quality_records_number']?>" name="QR_details_number" readonly>
                                     <p class="error QR_details_number_error"></p>
                                  </div>
                               </div>
@@ -107,11 +116,10 @@
                                             </div>
                                         </div>
 
-
                                         <?php
-                                            if($get_qulityrecorditemrecord['buyer_po_id']){
+                                            if($getqualityrecords_details['buyer_po_id']){
                                                 $display='block';
-                                                $selected_value_1 = $get_qulityrecorditemrecord['sales_order_number'];
+                                                $selected_value_1 = $getqualityrecords_details['sales_order_number'];
                                             }else{
                                                 $display='none';
                                                 $selected_value_1 = 'Select Buyer PO Number';
@@ -124,22 +132,21 @@
                                                 <label for="buyer_po_number">Select Buyer PO </label>
                                                     <select class="form-control buyer_po_number  buyer_po_number_for_itam_mapping buyer_po_number_for_itam_display autobuyerpo" name="buyer_po_number" id="buyer_po_number" readonly>
                                                         <option st-id="" value="">Select Buyer PO</option>
-                                                        <option st-id="" value="<?=$get_qulityrecorditemrecord['buyer_po_id']?>" selected="selected"><?=$selected_value_1?></option>
+                                                        <option st-id="" value="<?=$getqualityrecords_details['buyer_po_id']?>" selected="selected"><?=$selected_value_1?></option>
 
-                                                        <!-- <option st-id="" value="<?=$fetchALLpreBillofmaterailist[0]['pre_buyer_po_number'] ?>"><?=$sales_order_number ?></option> -->
                                                     </select>
                                             <p class="error buyer_po_number_error"></p>
                                         </div>
                                     </div>
 
-                           <div class="col-md-12">
-                              <div class="form-group">
-                                 <label for="remark">Remark</label>
-                                 <textarea type="text" class="form-control"  id="remark"  name="remark"><?=$get_qulityrecorditemrecord[0]['remarkitem'];?></textarea>
-                                 <p class="error remark_error"></p>
-                              </div>
-                           </div>
-                        </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="remark">Remark</label>
+                                            <textarea type="text" class="form-control"  id="remark"  name="remark"><?=$getqualityrecords_details['remark'];?></textarea>
+                                            <p class="error remark_error"></p>
+                                        </div>
+                                    </div>
+                                    </div>
                         <div class="col-md-6">
                                     <div class="container">
                                         <button type="button" class="btn btn-success btn-xl" data-toggle="modal" data-target="#addNewModal">Add New Items</button><br/><br/>

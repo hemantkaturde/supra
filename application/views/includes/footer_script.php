@@ -12494,7 +12494,7 @@
 <?php } ?>
 
 
-<?php if($pageTitle=='Qulity Record' || $pageTitle=='Add New Qulity Record Form' ){ ?>
+<?php if($pageTitle=='Qulity Record' || $pageTitle=='Add New Qulity Record Form' || $pageTitle=='Edit Qulity Record Form' ){ ?>
 	<script type="text/javascript">
          $(document).ready(function() {
 		    var dt = $('#view_qulity_record').DataTable({
@@ -12745,6 +12745,9 @@
 			e.preventDefault();
 			$(".loader_ajax").show();
 
+
+			var quality_record_id =$('#quality_record_id').val();
+
 			var formData = new FormData($("#addnewqualityform")[0]);
 			$.ajax({
 				url : "<?php echo base_url();?>addNewqualityrecord",
@@ -12773,7 +12776,12 @@
 							button: "Ok",
 							},function(){ 
 
-								window.location.href = "<?php echo base_url().'qualityrecord'?>";
+								if(quality_record_id){
+									window.location.href = "<?php echo base_url().'editqulityrecordform/'?>"+quality_record_id;
+								}else{
+									window.location.href = "<?php echo base_url().'qualityrecord'?>";
+								}
+								
 						});		
 					}
 					
