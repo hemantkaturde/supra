@@ -6000,7 +6000,7 @@ class Admin_model extends CI_Model
     }
 
     public function getsearchstockformdata($params){
-        $this->db->select('*');
+        $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name,'.TBL_STOCKS_ITEM.'.f_g_order_qty,'.TBL_STOCKS_ITEM.'.invoice_number,'.TBL_STOCKS_ITEM.'.invoice_date,'.TBL_STOCKS_ITEM.'.invoice_qty_In_pcs,'.TBL_STOCKS_ITEM.'.invoice_qty_In_kgs,'.TBL_STOCKS_ITEM.'.lot_number,'.TBL_STOCKS_ITEM.'.actual_received_qty_in_pcs,'.TBL_STOCKS_ITEM.'.actual_received_qty_in_kgs');
         $this->db->join(TBL_STOCKS, TBL_STOCKS.'.stock_id  = '.TBL_STOCKS_ITEM.'.stock_form_id');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_STOCKS_ITEM.'.pre_vendor_name');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_STOCKS_ITEM.'.part_number');
@@ -6098,7 +6098,10 @@ class Admin_model extends CI_Model
     }
 
     public function getalltotalcalculationstockform(){
-        $this->db->select('sum(invoice_qty_In_pcs) as invoice_qty_In_pcs,sum(invoice_qty_In_kgs) as invoice_qty_In_kgs,sum(actual_received_qty_in_pcs) as actual_received_qty_in_pcs,sum(actual_received_qty_in_kgs) as actual_received_qty_in_kgs');
+        // $this->db->select('sum(invoice_qty_In_pcs) as invoice_qty_In_pcs,sum(invoice_qty_In_kgs) as invoice_qty_In_kgs,sum(actual_received_qty_in_pcs) as actual_received_qty_in_pcs,sum(actual_received_qty_in_kgs) as actual_received_qty_in_kgs');
+
+        $this->db->select('sum(invoice_qty_In_pcs) as invoice_qty_In_pcs,sum(invoice_qty_In_kgs) as invoice_qty_In_kgs,sum(actual_received_qty_in_pcs) as actual_received_qty_in_pcss,sum(actual_received_qty_in_kgs) as actual_received_qty_in_kgs');
+
         //$this->db->where(TBL_INCOMING_DETAILS_ITEM.'.part_number', $part_number);
         // $this->db->where(TBL_VENDOR_PO_MASTER.'.supplier_name !=',"");
         $this->db->where(TBL_STOCKS_ITEM.'.status',1);
@@ -7009,15 +7012,52 @@ class Admin_model extends CI_Model
 
   public function getallcalculationrejecteditems(){
 
-    $this->db->select('sum(qty_In_pcs) as total_rejected_qty_in_pcs');
-    //$this->db->where(TBL_INCOMING_DETAILS_ITEM.'.part_number', $part_number);
-    // $this->db->where(TBL_VENDOR_PO_MASTER.'.supplier_name !=',"");
-    $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.status',1);
+    // $this->db->select('sum(qty_In_pcs) as total_rejected_qty_in_pcs');
+    // //$this->db->where(TBL_INCOMING_DETAILS_ITEM.'.part_number', $part_number);
+    // // $this->db->where(TBL_VENDOR_PO_MASTER.'.supplier_name !=',"");
+    // $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.status',1);
+    // $query = $this->db->get(TBL_REJECTION_FORM_REJECTED_ITEM);
+    // $data = $query->result_array();
+    // return $data;
+
+    // $this->db->select('*,'.TBL_FINISHED_GOODS.'.net_weight as fg_net_weight');
+
+    $this->db->select('sum(qty_In_pcs) as total_rejected_qty_in_pcs,'.TBL_FINISHED_GOODS.'.net_weight as fg_net_weight,'.TBL_REJECTION_FORM_REJECTED_ITEM.'.qty_In_kgs');
+    $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id');
+    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
+    $this->db->join(TBL_REJECTION_FORM, TBL_REJECTION_FORM.'.id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.rejection_form_id');
+    $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.status', 1);
+    $this->db->order_by(TBL_REJECTION_FORM_REJECTED_ITEM.'.id ','DESC');
     $query = $this->db->get(TBL_REJECTION_FORM_REJECTED_ITEM);
-    $data = $query->result_array();
-    return $data;
+    $fetch_result = $query->result_array();
+    return $fetch_result;
 
   }
+
+
+  public function getallcalculationexportitems(){
+
+    // $this->db->select('sum(qty_In_pcs) as total_rejected_qty_in_pcs');
+    // //$this->db->where(TBL_INCOMING_DETAILS_ITEM.'.part_number', $part_number);
+    // // $this->db->where(TBL_VENDOR_PO_MASTER.'.supplier_name !=',"");
+    // $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.status',1);
+    // $query = $this->db->get(TBL_REJECTION_FORM_REJECTED_ITEM);
+    // $data = $query->result_array();
+    // return $data;
+
+    // $this->db->select('*,'.TBL_FINISHED_GOODS.'.net_weight as fg_net_weight');
+
+        $this->db->select('sum('.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_qty) as total_exp_qty_in_pcs,'.TBL_FINISHED_GOODS.'.net_weight as fg_net_weight');
+        $this->db->join(TBL_PACKING_INSTRACTION, TBL_PACKING_INSTRACTION.'.id = '.TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_PACKING_INSTRACTION_DETAILS.'.part_number');
+        $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.status', 1);
+        $this->db->order_by(TBL_PACKING_INSTRACTION_DETAILS.'.id','DESC');
+        $query = $this->db->get(TBL_PACKING_INSTRACTION_DETAILS);
+        $fetch_result = $query->result_array();
+         return $fetch_result;
+
+  }
+
 
 }
 

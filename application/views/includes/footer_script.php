@@ -13733,9 +13733,9 @@
 					{
 
 						var invoice_qty_in_pcs_data = jQuery.parseJSON( data );
-						$('#invoice_qty_in_kgs').val(parseFloat(invoice_qty_in_pcs_data.invoice_qty_In_pcs).toFixed(2));
+						$('#invoice_qty_in_pcs').val(parseFloat(invoice_qty_in_pcs_data.invoice_qty_In_pcs).toFixed(2));
 						$('#invoice_qty_in_kgs').val(parseFloat(invoice_qty_in_pcs_data.invoice_qty_In_kgs).toFixed(2));
-						$('#actual_received_qty_in_pcs').val(parseFloat(invoice_qty_in_pcs_data.actual_received_qty_in_pcs).toFixed(2));
+						$('#actual_received_qty_in_pcs').val(parseFloat(invoice_qty_in_pcs_data.actual_received_qty_in_pcss).toFixed(2));
 						$('#actual_received_qty_in_kgs').val(parseFloat(invoice_qty_in_pcs_data.actual_received_qty_in_kgs).toFixed(2));
 
 					}
@@ -13823,8 +13823,11 @@
 					else
 					{
 						var rejecteditems_data = jQuery.parseJSON( data );
+
+						var total_rejected_qty_kgs = parseFloat(rejecteditems_data.qty_In_kgs) * parseFloat(rejecteditems_data.fg_net_weight);
+
 						$('#total_rejected_qty_in_pcs').val(parseFloat(rejecteditems_data.total_rejected_qty_in_pcs).toFixed(2));
-						$('#total_rejected_qty_in_kgs').val(parseFloat(rejecteditems_data.total_rejected_qty_in_pcs).toFixed(2));
+						$('#total_rejected_qty_in_kgs').val(parseFloat(total_rejected_qty_kgs).toFixed(2));
 					}
 				},
 				error: function (jqXHR, textStatus, errorThrown)
@@ -13835,6 +13838,46 @@
 			});
 			return false;
 	    });
+
+		$(document).ready(function() {
+	        $('#total_exp_qty_in_pcs').val('');
+			$('#total_exp_qty_in_kgs').val('');
+
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getallcalculationexportitems",
+				type: "POST",
+				data : {'vendor_name' : ''},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#total_exp_qty_in_pcs').val('');
+						$('#total_exp_qty_in_kgs').val('');
+					}
+					else
+					{
+						var exportitems_data = jQuery.parseJSON( data );
+
+						var total_export_qty_kgs = parseFloat(exportitems_data.total_exp_qty_in_pcs) * parseFloat(exportitems_data.fg_net_weight);
+
+						$('#total_exp_qty_in_pcs').val(parseFloat(exportitems_data.total_exp_qty_in_pcs).toFixed(2));
+						$('#total_exp_qty_in_kgs').val(parseFloat(total_export_qty_kgs).toFixed(2));
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					    $('#total_exp_qty_in_pcs').val('');
+						$('#total_exp_qty_in_kgs').val('');
+				}
+			});
+			return false;
+	    });
+
+
+
+
+
 
 		$(document).on('change','#vendor_name',function(e){  
 			e.preventDefault();

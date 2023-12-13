@@ -8155,6 +8155,7 @@ class Admin extends BaseController
 
     public function getalltotalcalculationstockform(){
         $getalltotalcalculationstockform = $this->admin_model->getalltotalcalculationstockform();
+
         if($getalltotalcalculationstockform){
             $content = $getalltotalcalculationstockform[0];
             echo json_encode($content);
@@ -8995,6 +8996,21 @@ class Admin extends BaseController
             echo 'failure';
         }
     }
+
+
+    public function getallcalculationexportitems(){
+
+        $getallcalculationexportitems = $this->admin_model->getallcalculationexportitems();
+        if($getallcalculationexportitems){
+            $content = $getallcalculationexportitems[0];
+            echo json_encode($content);
+        }else{
+            echo 'failure';
+        }
+    }
+
+
+    
 
 
 }

@@ -216,16 +216,16 @@
                             <div class ="total_values" style="border-top: 1px solid black">
                                 <div class="col-md-6" style="margin-top: 20px;">
                                 <div class="form-group">
-                                    <label for="invoice_qty_in_pcs">Total Exp Qty Pcs</label>
-                                    <input type="text" class="form-control" id="invoice_qty_in_pcs" name="invoice_qty_in_pcs" readonly>
+                                    <label for="total_exp_qty_in_pcs">Total Exp Qty Pcs</label>
+                                    <input type="text" class="form-control" id="total_exp_qty_in_pcs" name="total_exp_qty_in_pcs" readonly>
                                     </div>
                                 </div>  
 
 
                                 <div class="col-md-6" style="margin-top: 20px;">
                                 <div class="form-group">
-                                    <label for="invoice_qty_in_kgs">Total Exp Qty Kgs</label>
-                                    <input type="text" class="form-control" id="invoice_qty_in_kgs" name="invoice_qty_in_kgs" readonly>
+                                    <label for="total_exp_qty_in_kgs">Total Exp Qty Kgs</label>
+                                    <input type="text" class="form-control" id="total_exp_qty_in_kgs" name="total_exp_qty_in_kgs" readonly>
                                     </div>
                                 </div>  
                             </div>  
