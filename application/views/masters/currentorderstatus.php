@@ -72,6 +72,8 @@
                                                     <th>Order Qty</th>
                                                     <th>Received Qty</th>
                                                     <th>Buyer Name</th>
+                                                    <th>Status</th>
+                                                    <th>Flag</th>
                                                 </tr>
                                             </thead>
                                             <tbody>

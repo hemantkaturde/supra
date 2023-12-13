@@ -4365,7 +4365,7 @@ class Admin_model extends CI_Model
     public function fetchcurrentorderstatusreportdata($params,$vendor_name,$status){
 
         /* Vendor Bill of material Data */
-        $this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_BILL_OF_MATERIAL_VENDOR.'.id as billofmaterialid,'.TBL_FINISHED_GOODS.'.part_number as partno,'.TBL_BUYER_MASTER.'.buyer_name as buyer');
+        $this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_BILL_OF_MATERIAL_VENDOR.'.id as billofmaterialid,'.TBL_FINISHED_GOODS.'.part_number as partno,'.TBL_BUYER_MASTER.'.buyer_name as buyer,1 as flag,'.TBL_BILL_OF_MATERIAL_VENDOR.'.bom_status');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id= '.TBL_BILL_OF_MATERIAL_VENDOR.'.vendor_name');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id= '.TBL_BILL_OF_MATERIAL_VENDOR.'.vendor_po_number');
         $this->db->join(TBL_BUYER_MASTER, TBL_BILL_OF_MATERIAL_VENDOR.'.buyer_name= '.TBL_BUYER_MASTER.'.buyer_id');
@@ -4401,7 +4401,7 @@ class Admin_model extends CI_Model
 
 
         /* Bill of material Data */
-        $this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_BILL_OF_MATERIAL.'.id as billofmaterialid,'.TBL_FINISHED_GOODS.'.part_number as partno,'.TBL_BUYER_MASTER.'.buyer_name as buyer');
+        $this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_BILL_OF_MATERIAL.'.id as billofmaterialid,'.TBL_FINISHED_GOODS.'.part_number as partno,'.TBL_BUYER_MASTER.'.buyer_name as buyer, 2 as flag,'.TBL_BILL_OF_MATERIAL.'.bom_status');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id= '.TBL_BILL_OF_MATERIAL.'.vendor_name');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id= '.TBL_BILL_OF_MATERIAL.'.vendor_po_number');
         $this->db->join(TBL_BUYER_MASTER, TBL_BILL_OF_MATERIAL.'.buyer_name= '.TBL_BUYER_MASTER.'.buyer_id');
@@ -4449,6 +4449,15 @@ class Admin_model extends CI_Model
                 $data[$counter]['vendor_order_qty'] = $value['vendor_order_qty'];
                 $data[$counter]['vendor_received_qty'] = $value['vendor_received_qty'];
                 $data[$counter]['buyer_name'] = $value['buyer'];
+               
+                $data[$counter]['status'] = $value['bom_status'];
+
+                  if($value['flag']==1){
+                    $flag = 'Vendor Bill of Material';
+                   }else{
+                    $flag = 'Bill of Material';
+                   }
+                $data[$counter]['flag'] = $flag;
                 $counter++; 
             }
         }
