@@ -340,7 +340,7 @@ $route['getallcalculationexportitems'] = "admin/getallcalculationexportitems";
 
 $route['getallbalencecalculationexportitems'] = "admin/getallbalencecalculationexportitems";
 
-
+$route['getbuyeritemdataforitemedit'] = "admin/getbuyeritemdataforitemedit";
 
 
 

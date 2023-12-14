@@ -1580,12 +1580,15 @@
 			   var currency =   $('#currency').val();
 			   var delivery_date =   $('#delivery_date').val();
 			   var remark =   $('#remark').val();
+
+			   var buyer_po_item_id =   $('#buyer_po_item_id').val();
+			   
 			 
 			$.ajax({
 				url : "<?php echo base_url();?>addbuyeritem",
 				type: "POST",
 				 //data : formData,
-				 data :{part_number:part_number,description:description,qty:qty,rate:rate,value:value,buyer_po_number:buyer_po_number,date:date,buyer_po_date:buyer_po_date,buyer_name:buyer_name,currency:currency,delivery_date:delivery_date,remark:remark,unit:unit,po_id:po_id},
+				 data :{part_number:part_number,description:description,qty:qty,rate:rate,value:value,buyer_po_number:buyer_po_number,date:date,buyer_po_date:buyer_po_date,buyer_name:buyer_name,currency:currency,delivery_date:delivery_date,remark:remark,unit:unit,po_id:po_id,buyer_po_item_id:buyer_po_item_id},
 				// method: "POST",
                 // data :{package_id:package_id},
                 cache:false,
@@ -1780,38 +1783,33 @@
 
 		$(document).on('click','.editbuyerpoitem',function(e){  
 			e.preventDefault();
+			var elemF = $(this);
+			var item_id = elemF.attr('data-id');
+			$.ajax({
+				url : "<?php echo base_url();?>getbuyeritemdataforitemedit",
+				type: "POST",
+				data : 'id='+item_id,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+				
 
-			$('#addNewModal').modal('show'); 
-			// $.ajax({
-			// 	url : "<?php echo base_url();?>addnewBuyerpo",
-			// 	type: "POST",
-			// 	data : formData,
-			// 	cache: false,
-		    //     contentType: false,
-		    //     processData: false,
-			// 	success: function(data, textStatus, jqXHR)
-			// 	{
-			// 		var fetchResponse = $.parseJSON(data);
-			// 		if(fetchResponse.status == "failure")
-			// 	    {
-			// 	    	$.each(fetchResponse.error, function (i, v)
-		    //             {
-		    //                 $('.'+i+'_error').html(v);
-		    //             });
-			// 			$(".loader_ajax").hide();
-			// 	    }
-			// 		else if(fetchResponse.status == 'success')
-			// 	    {
-			// 			$('#editNewModal').modal('show'); 
-			// 	    }
+						$('#addNewModal').modal('show'); 
+						$('#buyer_po_item_id').val(fetchResponse.buyer_item_id); 
+						$('#part_number').val(fetchResponse.fin_id);  
+						$('#description').val(fetchResponse.description);  
+						$('#qty').val(fetchResponse.order_oty);  
+						$('#unit').val(fetchResponse.unit);  
+						$('#rate').val(fetchResponse.rate);  
+						$('#value').val(fetchResponse.value);  
 					
-			// 	},
-			// 	error: function (jqXHR, textStatus, errorThrown)
-			//     {
-			//    	   $(".loader_ajax").hide();
-			//     }
-			// });
-			// return false;
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			});
+			return false;
 		});
 
 

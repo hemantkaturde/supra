@@ -1224,18 +1224,18 @@ class Admin_model extends CI_Model
     public function saveBuyerpoitemdata($id,$data){
 
         if($id != '') {
-            // $this->db->where('id', $id);
-            // if($this->db->update(TBL_BUYER_PO_MASTER_ITEM, $data)){
-            //     return TRUE;
-            // } else {
-            //     return FALSE;
-            // }
-
-            if($this->db->insert(TBL_BUYER_PO_MASTER_ITEM, $data)) {
-                return $this->db->insert_id();;
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_BUYER_PO_MASTER_ITEM, $data)){
+                return TRUE;
             } else {
                 return FALSE;
             }
+
+            // if($this->db->insert(TBL_BUYER_PO_MASTER_ITEM, $data)) {
+            //     return $this->db->insert_id();;
+            // } else {
+            //     return FALSE;
+            // }
 
 
         } else {
@@ -7121,6 +7121,19 @@ class Admin_model extends CI_Model
         $query = $this->db->get(TBL_STOCKS_ITEM);
         $fetch_result = $query->result_array();
          return $fetch_result;
+
+  }
+
+
+  public function getbuyeritemdataforitemedit($id){
+
+    $this->db->select(TBL_BUYER_PO_MASTER_ITEM.'.id as buyer_item_id,'.TBL_FINISHED_GOODS.'.fin_id,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name as description,'.TBL_BUYER_PO_MASTER_ITEM.'.order_oty,'.TBL_BUYER_PO_MASTER_ITEM.'.unit,'.TBL_BUYER_PO_MASTER_ITEM.'.rate,'.TBL_BUYER_PO_MASTER_ITEM.'.value');
+    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
+    $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.id', $id);
+    $this->db->order_by(TBL_BUYER_PO_MASTER_ITEM.'.id','DESC');
+    $query = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
+    $fetch_result = $query->result_array();
+     return $fetch_result;
 
   }
 

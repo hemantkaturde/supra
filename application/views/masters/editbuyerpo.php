@@ -22,6 +22,7 @@
                         </div>
                         <?php $this->load->helper("form"); ?>
                         <form role="form" id="addnewbuyerform" action="<?php echo base_url() ?>addnewbuyerform" method="post" role="form">
+                        <input type="hidden" class="form-control"  id="buyer_po_item_id" name="buyer_po_item_id" required readonly>
                             <div class="box-body">
                                 <div class="col-md-4">
                                 <input type="hidden" class="form-control"  id="po_id" name="po_id"  value="<?=$getbuyerpodetails[0]['id']?>">                                

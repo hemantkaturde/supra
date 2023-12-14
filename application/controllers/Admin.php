@@ -2428,7 +2428,15 @@ class Admin extends BaseController
                 //     $save_buyerpo_response['status'] = 'failure';
                 //     $save_buyerpo_response['error'] = array('sales_order_number'=>'Buyer PO Alreday Exits (Sales Order Number Alreday Exits)');
                 // }else{
-                    $saveBuyerpoitemdata = $this->admin_model->saveBuyerpoitemdata($po_id,$data);
+
+                    $buyer_po_item_id = trim($this->input->post('buyer_po_item_id'));
+                    if( $buyer_po_item_id){
+                        $buyerpoitemid = $buyer_po_item_id;
+                    }else{
+                        $buyerpoitemid = '';
+                    }
+
+                    $saveBuyerpoitemdata = $this->admin_model->saveBuyerpoitemdata($buyerpoitemid,$data);
                     if($saveBuyerpoitemdata){
                         $save_buyerpoitem_response['status'] = 'success';
                         $save_buyerpoitem_response['error'] = array('part_number'=>'', 'description'=>'', 'qty'=>'', 'rate'=>'','value'=>'');
@@ -9034,7 +9042,22 @@ class Admin extends BaseController
         }
     }
 
-    
+
+    public function getbuyeritemdataforitemedit(){
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $getbuyeritemdataforitemedit = $this->admin_model->getbuyeritemdataforitemedit(trim($this->input->post('id')));
+            if($getbuyeritemdataforitemedit){
+                $content = $getbuyeritemdataforitemedit[0];
+                echo json_encode($content);
+            }else{
+                echo 'failure';
+            }
+        }
+
+    }
+
 
 
 }
