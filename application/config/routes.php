@@ -352,6 +352,9 @@ $route['downloadsupplierpo/(:any)'] = "admin/downloadsupplierpo/$1";
 
 $route['getbuyeritemdataforitemedit'] = "admin/getbuyeritemdataforitemedit";
 $route['getSupplieritemdataforitemedit'] = "admin/getSupplieritemdataforitemedit";
+$route['getVendoritemdataforitemedit'] = "admin/getVendoritemdataforitemedit";
+
+
 
 
 //$route['fetchincomingdeatilsitemlistedit/(:any)'] = "admin/fetchincomingdeatilsitemlistedit/$1";

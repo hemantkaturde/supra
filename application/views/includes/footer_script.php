@@ -2751,13 +2751,14 @@
 			   var description_1 =   $('#description_1').val();
 			   var description_2 =   $('#description_2').val();
 
+			   var vendor_po_item_id = $('#vendor_po_item_id').val();
 			   
 					 
 			$.ajax({
 				url : "<?php echo base_url();?>addVendoritem",
 				type: "POST",
 				 //data : formData,
-				 data :{part_number:part_number,description:description,qty:qty,rate:rate,value:value,date:date,supplier_name:supplier_name,buyer_name:buyer_name,vendor_name:vendor_name,quatation_ref_no:quatation_ref_no,quatation_date:quatation_date,delivery_date:delivery_date,delivery:delivery,delivery_address:delivery_address,work_order:work_order,remark:remark,buyer_po_number:buyer_po_number,vendor_qty:vendor_qty,unit:unit,item_remark:item_remark,rm_type:rm_type,supplier_po_number:supplier_po_number,vendor_id:vendor_id,description_1:description_1,description_2:description_2},
+				 data :{part_number:part_number,description:description,qty:qty,rate:rate,value:value,date:date,supplier_name:supplier_name,buyer_name:buyer_name,vendor_name:vendor_name,quatation_ref_no:quatation_ref_no,quatation_date:quatation_date,delivery_date:delivery_date,delivery:delivery,delivery_address:delivery_address,work_order:work_order,remark:remark,buyer_po_number:buyer_po_number,vendor_qty:vendor_qty,unit:unit,item_remark:item_remark,rm_type:rm_type,supplier_po_number:supplier_po_number,vendor_id:vendor_id,description_1:description_1,description_2:description_2,vendor_po_item_id:vendor_po_item_id},
 				// method: "POST",
                 // data :{package_id:package_id},
                 cache:false,
@@ -3344,6 +3345,51 @@
 				}
 			});
 		});
+
+
+		$(document).on('click','.editVendorpoitem',function(e){  
+			e.preventDefault();
+			var elemF = $(this);
+			var item_id = elemF.attr('data-id');
+			$.ajax({
+				url : "<?php echo base_url();?>getVendoritemdataforitemedit",
+				type: "POST",
+				data : 'id='+item_id,
+				success: function(data, textStatus, jqXHR)
+				{
+					    var fetchResponse = $.parseJSON(data);
+						$('#addNewModal').modal('show'); 
+						$('#vendor_po_item_id').val(fetchResponse.vendor_po_item_id); 
+						$('#part_number').val(fetchResponse.fin_id);  
+						$('#description').val(fetchResponse.description);  
+						// $('#diameter').val(fetchResponse.diameter);  
+						// $('#slitting_size').val(fetchResponse.sitting_size);  
+						$('#rm_type').val(fetchResponse.rm_type);  
+						$('#drawing_number').val(fetchResponse.drawing_number);  
+						$('#HSN_Code').val(fetchResponse.hsn_code);  
+						$('#length').val(fetchResponse.length);  
+						$('#gross_weight').val(fetchResponse.groass_weight);  
+						$('#net_weight').val(fetchResponse.net_weight);  
+						$('#SAC').val(fetchResponse.sac);  
+						$('#description_1').val(fetchResponse.description_1);  
+						$('#description_2').val(fetchResponse.description_2);  	
+						$('#vendor_qty').val(fetchResponse.vendor_qty);  	
+						$('#qty').val(fetchResponse.order_oty);  
+						$('#unit').val(fetchResponse.unit);  
+						$('#rate').val(fetchResponse.rate);  
+						$('#value').val(fetchResponse.value);  
+						$('#item_remark').val(fetchResponse.item_remark);  
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			});
+			return false;
+		});
+
+
 	
     </script>
 <?php } ?>

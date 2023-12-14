@@ -7169,6 +7169,35 @@ class Admin_model extends CI_Model
 
   }
 
+  public function getVendoritemdataforitemedit($id){
+
+    $this->db->select(TBL_VENDOR_PO_MASTER_ITEM.'.id as vendor_po_item_id,'.TBL_FINISHED_GOODS.'.fin_id,'.TBL_FINISHED_GOODS.'.part_number,'
+    .TBL_FINISHED_GOODS.'.name as description,'
+    // .TBL_FINISHED_GOODS.'.diameter as diameter,'
+    // .TBL_FINISHED_GOODS.'.sitting_size,'
+    // .TBL_FINISHED_GOODS.'.thickness,'
+    .TBL_VENDOR_PO_MASTER_ITEM.'.rm_type,'
+    .TBL_FINISHED_GOODS.'.hsn_code,'
+    .TBL_FINISHED_GOODS.'.drawing_number,'
+    .TBL_FINISHED_GOODS.'.groass_weight,'
+    .TBL_FINISHED_GOODS.'.net_weight,'
+    .TBL_FINISHED_GOODS.'.sac,'
+    .TBL_VENDOR_PO_MASTER_ITEM.'.description_1,'
+    .TBL_VENDOR_PO_MASTER_ITEM.'.description_2,'
+    .TBL_VENDOR_PO_MASTER_ITEM.'.item_remark,'    
+    .TBL_VENDOR_PO_MASTER_ITEM.'.order_oty,'
+    .TBL_VENDOR_PO_MASTER_ITEM.'.vendor_qty,'
+    .TBL_VENDOR_PO_MASTER_ITEM.'.unit,'
+    .TBL_VENDOR_PO_MASTER_ITEM.'.rate,'
+    .TBL_VENDOR_PO_MASTER_ITEM.'.value');
+    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
+    $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.id', $id);
+    $this->db->order_by(TBL_VENDOR_PO_MASTER_ITEM.'.id','DESC');
+    $query = $this->db->get(TBL_VENDOR_PO_MASTER_ITEM);
+    $fetch_result = $query->result_array();
+    return $fetch_result;
+
+  }
 
 }
 

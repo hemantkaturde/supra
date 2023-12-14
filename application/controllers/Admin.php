@@ -3018,7 +3018,15 @@ class Admin extends BaseController
                 //     $save_buyerpo_response['status'] = 'failure';
                 //     $save_buyerpo_response['error'] = array('sales_order_number'=>'Buyer PO Alreday Exits (Sales Order Number Alreday Exits)');
                 // }else{
-                    $saveSupplierpoitemdata = $this->admin_model->saveVendorpoitemdata('',$data);
+                    $vendor_po_item_id = trim($this->input->post('vendor_po_item_id'));
+                    if( $vendor_po_item_id){
+                        $vendorpoitemid = $vendor_po_item_id;
+                    }else{
+                        $vendorpoitemid = '';
+                    }
+
+                    
+                    $saveSupplierpoitemdata = $this->admin_model->saveVendorpoitemdata($vendorpoitemid,$data);
                     if($saveSupplierpoitemdata){
                         $save_vendorpoitem_response['status'] = 'success';
                         $save_vendorpoitem_response['error'] = array('part_number'=>'', 'description'=>'', 'qty'=>'', 'rate'=>'','value'=>'');
@@ -9078,6 +9086,18 @@ class Admin extends BaseController
         }
     }
     
+    public function getVendoritemdataforitemedit(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $getVendoritemdataforitemedit = $this->admin_model->getVendoritemdataforitemedit(trim($this->input->post('id')));
+            if($getVendoritemdataforitemedit){
+                $content = $getVendoritemdataforitemedit[0];
+                echo json_encode($content);
+            }else{
+                echo 'failure';
+            }
+        }
+    }
 
 
 

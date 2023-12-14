@@ -335,6 +335,7 @@
                                                         <td><?php echo $value['rate'];?></td>
                                                         <td><?php echo $value['value'];?></td>
                                                         <td>
+                                                        <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['vendoritemid'];?>' class='fa fa-pencil-square-o editVendorpoitem'  aria-hidden='true'></i>
                                                         <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['vendoritemid'];?>' class='fa fa-trash-o deleteVendorpoitem' aria-hidden='true'></i>
                                                         </td>
                                                     </tr>
@@ -365,7 +366,9 @@
                                                 </button>
                                             </div>
                                             <form role="form" id="addvendoritemform" action="<?php echo base_url() ?>addvendoritemform" method="post" role="form">
-                                                <div class="modal-body">
+                                        
+                                                 <input type="hidden" class="form-control"  id="vendor_po_item_id" name="vendor_po_item_id" required readonly>
+                                                 <div class="modal-body">
                                                         <div class="loader_ajax" style="display:none;">
                                                             <div class="loader_ajax_inner"><img src="<?php echo ICONPATH;?>/preloader_ajax.gif"></div>
                                                         </div>
