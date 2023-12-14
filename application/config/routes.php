@@ -342,7 +342,7 @@ $route['getallbalencecalculationexportitems'] = "admin/getallbalencecalculatione
 
 
 /* ALL Downlaod Forms */
-$route['downloadsupplierpo/(:any)'] = "admin/downloadsupplierpo/$1";
+$route['downlaodsupplierpo/(:any)'] = "admin/downlaodsupplierpo/$1";
 
 
 

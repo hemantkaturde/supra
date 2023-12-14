@@ -9102,17 +9102,165 @@ class Admin extends BaseController
 
 
 
-    // public function downloadbuyerpo(){
+    public function downlaodsupplierpo(){
 
 
-    //     $mpdf = new \Mpdf\Mpdf();
-    //     // $html = $this->load->view('html_to_pdf',[],true);
-    //     $html = '<html><p style="color:red">HEllo</html>';
-    //     $mpdf->WriteHTML($html);
-    //     $mpdf->Output(); // opens in browser
+
+        
+
+        $mpdf = new \Mpdf\Mpdf();
+        // $html = $this->load->view('html_to_pdf',[],true);
+        $html = '<table style=" width: 100%;text-align: center;border-collapse: collapse;border: #cccccc 0px solid;font-family:arial;">
+                    <tr>
+                      <td rowspan="2"><img src="'.base_url().'assets/images/supra_logo_1.jpg" width="80" height="80"></td>
+                      <td><h3>SUPRA QUALITY EXPORTS (I) PVT. LTD</h3></td>
+                      <td rowspan="2"><img src="'.base_url().'assets/images/supra_logo_2.jpg"width="80" height="80"></td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>MANUFACTURER & EXPORTERS OF:</p>
+                        <p>PRECISION TURNED COMPONENTS, STAMPED /PRESSED PARTS IN FERROUS & NON-FERROUS METAL</p>
+                        <p>MOULDED & EXTRUDED PLASTIC AND RUBBER COMPONENTS</p> 
+                      </td>
+                    </tr>
+                </table>
+                <hr>
+                <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 0px solid;font-family:arial;">
+                        <tr>
+                            <td>
+                              <p><b>Office:</b> 229 to 232, Bharat Industrial Estate, L.B.S. Marg, Bhandup West, Mumbai – 400078. INDIA.
+                              <p>Tel: +91 22 66959505 / +91 22 66600196 </p>
+                              <p>+91 22 62390222 / +91 22 46061497 / +91 22 35115396 </p>
+                            </td>
+                            <td>
+                                <p><b>Email:</b> purchase@supraexports.in</p>
+                                <p>purchase1@supraexports.in</p>
+                                <p>purchase2@supraexports.in</p>
+                            </td>  
+                        </tr>
+                </table>
+
+                <table style=" width: 100%;text-align: center;border-collapse: collapse;border: #ccc 0px solid;margin-top:10px;margin-bottom:10px;font-family:arial;">
+                        <tr>
+                            <td>
+                              <h2>PURCHASE ORDER</h2>
+                            </td>
+                        </tr>
+                </table>
+
+                <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;font-family:arial;">
+                        <tr style="border: 1px solid black;">
+                            <td style="border: 1px solid black;">To </td>
+                            <td style="border: 1px solid black;">HEMANT KESHAV KATURDE</td>
+                        
+                        </tr>
+                        <tr style="border: 1px solid black;">
+                            <td style="border: 1px solid black;">Address </td>
+                            <td style="border: 1px solid black;">229 to 232, Bharat Industrial Estate, L.B.S. Marg, Bhandup West, Mumbai – 400078. INDIA.</td>
+                            
+                        </tr>
+                        <tr style="border: 1px solid black;">
+                            <td style="border: 1px solid black;">Contact No </td>
+                            <td style="border: 1px solid black;">8097404125</td>
+                        
+                        </tr>
+                        <tr style="border: 1px solid black;">
+                            <td style="border: 1px solid black;">Contact Person </td>
+                            <td style="border: 1px solid black;">Helen Bennett</td>
+                        
+                        </tr>
+                        <tr style="border: 1px solid black;">
+                            <td style="border: 1px solid black;">Email ID </td>
+                            <td style="border: 1px solid black;">Yoshi Tannamuri</td>
+                        </tr>
+
+                        <tr style="border: 1px solid black;">
+                            <td style="border: 1px solid black;">GSTIN </td>
+                            <td style="border: 1px solid black;">Yoshi Tannamuri</td>
+                        </tr>
+                </table>
+
+                <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:arial;">
+                    <tr style="border: 1px solid black;">
+                        <th align="left" style="border: 1px solid black;">P.O.NO</th>
+                        <th align="left" style="border: 1px solid black;">P.O.DATE:</th>
+                        <th align="left" style="border: 1px solid black;">QUOTATION REFERENCE:</th>    
+                        <th align="left" style="border: 1px solid black;">QUOTATION DATE:</th>    
+                    </tr>
+                    <tr style="border: 1px solid black;">
+                        <td style="border: 1px solid black;">1514545454</td>
+                        <td style="border: 1px solid black;">12/06/2026</td>    
+                        <td style="border: 1px solid black;">TEST</td>
+                        <td style="border: 1px solid black;">12/06/2026</td>
+                    </tr>
+                </table>
+
+                <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:arial;">
+                    <tr style="border: 1px solid black;">
+                        <th align="left" style="border: 1px solid black;">NEED TEST CERTIFICATE</th>
+                        <th align="left" style="border: 1px solid black;">DELIVERY DATE</th>
+                        <th align="left" style="border: 1px solid black;">PAYMENT TERMS</th>    
+                    </tr>
+                    <tr style="border: 1px solid black;">
+                        <td style="border: 1px solid black;">ff</td>
+                        <td style="border: 1px solid black;">fff</td>    
+                        <td style="border: 1px solid black;">ff</td>
+                    </tr>
+                </table>
 
 
-    // }
+                <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:arial;">
+                    <tr style="border: 1px solid black;">
+                        <th align="left" style="border: 1px solid black;">SR.NO.</th>
+                        <th align="left" style="border: 1px solid black;">PART DESCRIPTION</th>
+                        <th align="left" style="border: 1px solid black;">PART NO.</th>  
+                        <th align="left" style="border: 1px solid black;">QTY</th> 
+                        <th align="left" style="border: 1px solid black;">RATE</th>  
+                        <th align="left"  style="border: 1px solid black;">AMOUNT</th>
+                    </tr>
+                    <tr style="border: 1px solid black;">
+                        <td style="border: 1px solid black;">1</td>
+                        <td style="border: 1px solid black;">Raw Material Deliver To,  Vendor Name, Address,  Contact No, Contact Person  GSTIN No </td>   
+                        <td style="border: 1px solid black;">5000</td>
+                        <td style="border: 1px solid black;">20</td>
+                        <td style="border: 1px solid black;">40</td>    
+                        <td style="border: 1px solid black;">500</td>
+                    </tr>
+
+                    <tr style="border: 1px solid black;">
+                        <td></td>
+                        <td></td>   
+                        <td></td>
+                        <td></td>
+                        <td style="border: 1px solid black;">SUB TOTAL (+) GST </td>    
+                        <td style="border: 1px solid black;">500</td>
+                    </tr>
+                </table>
+
+                <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:arial;">
+                        <tr style="border: 1px solid black;">
+                            <td style="border: 1px solid black;">
+                                <p><b>NOTE :</b></p>
+                                <p>1. Confirmation of PO is Mandatory</p>
+                                <p>2. Mentioning P.O.No. on Invoice is Mandatory</b></p>
+                                <p>3. Once order issued & accepted, cannot be cancelled</p>
+                                <p>4. Essence of this order is delivering the specified quality product on time.</p>
+                                <p>5. If any Prices issue, should inform in 24hrs after receipt of P.O.</p>
+                            </td>
+                            <td style="border: 1px solid black;">
+                                <p>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</p>
+                                <p>AUTHORIZED SIGNATORY</p>
+                            </td>    
+                    </tr>
+                </table>';
+
+
+        
+        $mpdf->WriteHTML($html);
+        $mpdf->Output('purshase_order.pdf','I'); // opens in browser
+
+
+    }
 
 
 
