@@ -1016,7 +1016,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['action'] = '';
                 //$data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewBuyerpo/".$value['id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>    &nbsp ";
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editBuyerpo/".$value['id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>    &nbsp";
-
+                // $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downloadbuyerpo/".$value['id']."' style='cursor: pointer;' target='_blank'><i style='font-size: 21px;cursor: pointer;' class='fa fa-file-pdf-o' aria-hidden='true'></i></a>    &nbsp";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['id']."' class='fa fa-trash-o deleteBuyerpo' aria-hidden='true'></i>"; 
                 $counter++; 
             }
@@ -1339,18 +1339,18 @@ class Admin_model extends CI_Model
     public function saveSupplierpoitemdata($id,$data){
 
         if($id != '') {
-            // $this->db->where('id', $id);
-            // if($this->db->update(TBL_SUPPLIER_PO_MASTER_ITEM, $data)){
-            //     return TRUE;
-            // } else {
-            //     return FALSE;
-            // }
-
-            if($this->db->insert(TBL_SUPPLIER_PO_MASTER_ITEM, $data)) {
-                return $this->db->insert_id();;
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_SUPPLIER_PO_MASTER_ITEM, $data)){
+                return TRUE;
             } else {
                 return FALSE;
             }
+
+            // if($this->db->insert(TBL_SUPPLIER_PO_MASTER_ITEM, $data)) {
+            //     return $this->db->insert_id();;
+            // } else {
+            //     return FALSE;
+            // }
 
         } else {
             if($this->db->insert(TBL_SUPPLIER_PO_MASTER_ITEM, $data)) {
@@ -1456,7 +1456,7 @@ class Admin_model extends CI_Model
     }
 
     public function fetchALLsupplieritemlistforview($supplierpoid){
-        $this->db->select('*');
+        $this->db->select('*,'.TBL_SUPPLIER_PO_MASTER_ITEM.'.id as suppliritemid');
         $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id');
         $this->db->where(TBL_SUPPLIER_PO_MASTER_ITEM.'.supplier_po_id',$supplierpoid);
         $query = $this->db->get(TBL_SUPPLIER_PO_MASTER_ITEM);
@@ -7133,7 +7133,39 @@ class Admin_model extends CI_Model
     $this->db->order_by(TBL_BUYER_PO_MASTER_ITEM.'.id','DESC');
     $query = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
     $fetch_result = $query->result_array();
-     return $fetch_result;
+    return $fetch_result;
+
+  }
+
+
+  public function getSupplieritemdataforitemedit($id){
+
+    $this->db->select(TBL_SUPPLIER_PO_MASTER_ITEM.'.id as supplier_item_id,'.TBL_RAWMATERIAL.'.raw_id,'.TBL_RAWMATERIAL.'.part_number,'
+    .TBL_RAWMATERIAL.'.type_of_raw_material as description,'
+    .TBL_RAWMATERIAL.'.diameter as diameter,'
+    .TBL_RAWMATERIAL.'.sitting_size,'
+    .TBL_RAWMATERIAL.'.thickness,'
+    .TBL_RAWMATERIAL.'.hex_a_f,'
+    .TBL_RAWMATERIAL.'.HSN_code,'
+    .TBL_RAWMATERIAL.'.length,'
+    .TBL_RAWMATERIAL.'.gross_weight,'
+    .TBL_RAWMATERIAL.'.net_weight,'
+    .TBL_RAWMATERIAL.'.sac,'
+    .TBL_SUPPLIER_PO_MASTER_ITEM.'.description_1,'
+    .TBL_SUPPLIER_PO_MASTER_ITEM.'.description_2,'
+    .TBL_SUPPLIER_PO_MASTER_ITEM.'.item_remark,'    
+    .TBL_SUPPLIER_PO_MASTER_ITEM.'.order_oty,'
+    .TBL_SUPPLIER_PO_MASTER_ITEM.'.vendor_qty,'
+    
+    .TBL_SUPPLIER_PO_MASTER_ITEM.'.unit,'
+    .TBL_SUPPLIER_PO_MASTER_ITEM.'.rate,'
+    .TBL_SUPPLIER_PO_MASTER_ITEM.'.value');
+    $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id');
+    $this->db->where(TBL_SUPPLIER_PO_MASTER_ITEM.'.id', $id);
+    $this->db->order_by(TBL_SUPPLIER_PO_MASTER_ITEM.'.id','DESC');
+    $query = $this->db->get(TBL_SUPPLIER_PO_MASTER_ITEM);
+    $fetch_result = $query->result_array();
+    return $fetch_result;
 
   }
 

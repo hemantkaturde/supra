@@ -2609,7 +2609,15 @@ class Admin extends BaseController
                 //     $save_buyerpo_response['status'] = 'failure';
                 //     $save_buyerpo_response['error'] = array('sales_order_number'=>'Buyer PO Alreday Exits (Sales Order Number Alreday Exits)');
                 // }else{
-                    $saveSupplierpoitemdata = $this->admin_model->saveSupplierpoitemdata($supplier_po_id,$data);
+
+                    $supplier_po_item_id = trim($this->input->post('supplier_po_item_id'));
+                    if( $supplier_po_item_id){
+                        $supplierpoitemid = $supplier_po_item_id;
+                    }else{
+                        $supplierpoitemid = '';
+                    }
+
+                    $saveSupplierpoitemdata = $this->admin_model->saveSupplierpoitemdata($supplierpoitemid,$data);
                     if($saveSupplierpoitemdata){
                         $save_supplierpoitem_response['status'] = 'success';
                         $save_supplierpoitem_response['error'] = array('part_number'=>'', 'description'=>'', 'qty'=>'', 'rate'=>'','value'=>'');
@@ -9044,7 +9052,6 @@ class Admin extends BaseController
 
 
     public function getbuyeritemdataforitemedit(){
-
         $post_submit = $this->input->post();
         if($post_submit){
             $getbuyeritemdataforitemedit = $this->admin_model->getbuyeritemdataforitemedit(trim($this->input->post('id')));
@@ -9055,8 +9062,37 @@ class Admin extends BaseController
                 echo 'failure';
             }
         }
-
     }
+
+
+    public function getSupplieritemdataforitemedit(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $getSupplieritemdataforitemedit = $this->admin_model->getSupplieritemdataforitemedit(trim($this->input->post('id')));
+            if($getSupplieritemdataforitemedit){
+                $content = $getSupplieritemdataforitemedit[0];
+                echo json_encode($content);
+            }else{
+                echo 'failure';
+            }
+        }
+    }
+    
+
+
+
+
+    // public function downloadbuyerpo(){
+
+
+    //     $mpdf = new \Mpdf\Mpdf();
+    //     // $html = $this->load->view('html_to_pdf',[],true);
+    //     $html = '<html><p style="color:red">HEllo</html>';
+    //     $mpdf->WriteHTML($html);
+    //     $mpdf->Output(); // opens in browser
+
+
+    // }
 
 
 

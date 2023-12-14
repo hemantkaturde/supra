@@ -337,11 +337,21 @@ $route['deletequlityrecords'] = "admin/deletequlityrecords";
 $route['deletequalityrecordsitem'] = "admin/deletequalityrecordsitem";
 $route['editqulityrecordform/(:any)'] = "admin/editqulityrecordform/$1";
 $route['getallcalculationexportitems'] = "admin/getallcalculationexportitems";
-
 $route['getallbalencecalculationexportitems'] = "admin/getallbalencecalculationexportitems";
 
-$route['getbuyeritemdataforitemedit'] = "admin/getbuyeritemdataforitemedit";
 
+
+/* ALL Downlaod Forms */
+$route['downloadsupplierpo/(:any)'] = "admin/downloadsupplierpo/$1";
+
+
+
+
+
+/* ALL Edit Forms*/
+
+$route['getbuyeritemdataforitemedit'] = "admin/getbuyeritemdataforitemedit";
+$route['getSupplieritemdataforitemedit'] = "admin/getSupplieritemdataforitemedit";
 
 
 //$route['fetchincomingdeatilsitemlistedit/(:any)'] = "admin/fetchincomingdeatilsitemlistedit/$1";
