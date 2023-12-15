@@ -3783,7 +3783,14 @@ class Admin extends BaseController
                 //     $save_buyerpo_response['error'] = array('sales_order_number'=>'Buyer PO Alreday Exits (Sales Order Number Alreday Exits)');
                 // }else{
 
-                    $saveVendorpoconfirmationitemdata = $this->admin_model->saveVendorpoconfirmationitemdata('',$data);
+                    $vendor_po_confirmation_item_id = trim($this->input->post('vendor_po_confirmation_item_id'));
+                    if( $vendor_po_confirmation_item_id){
+                        $endor_po_confirmationid = $vendor_po_confirmation_item_id;
+                    }else{
+                        $endor_po_confirmationid = '';
+                    }
+
+                    $saveVendorpoconfirmationitemdata = $this->admin_model->saveVendorpoconfirmationitemdata($endor_po_confirmationid,$data);
                     
                     if($saveVendorpoconfirmationitemdata){
                         $save_buyerpoconfirmationitem_response['status'] = 'success';
@@ -9120,6 +9127,19 @@ class Admin extends BaseController
         }
     }
 
+
+    public function getvendorpoconfirmationitemedit(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $getvendorpoconfirmationitemedit = $this->admin_model->getvendorpoconfirmationitemedit(trim($this->input->post('id')));
+            if($getvendorpoconfirmationitemedit){
+                $content = $getvendorpoconfirmationitemedit[0];
+                echo json_encode($content);
+            }else{
+                echo 'failure';
+            }
+        }
+    }
 
 
 

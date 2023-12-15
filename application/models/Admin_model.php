@@ -7227,6 +7227,31 @@ class Admin_model extends CI_Model
 
   }
 
+  public function getvendorpoconfirmationitemedit($id){
+    $this->db->select(TBL_VENDOR_PO_CONFIRMATION_ITEM.'.id as vendor_po_confirmation_item_id,'
+    .TBL_FINISHED_GOODS.'.fin_id,'
+    .TBL_FINISHED_GOODS.'.part_number,'
+    .TBL_FINISHED_GOODS.'.name as description,'
+    .TBL_VENDOR_PO_CONFIRMATION_ITEM.'.vendor_qty as vendor_qty,'
+    .TBL_VENDOR_PO_CONFIRMATION_ITEM.'.order_qty as order_qty,'
+    .TBL_VENDOR_PO_CONFIRMATION_ITEM.'.row_material_recived_qty as row_material_recived_qty,'
+    .TBL_VENDOR_PO_CONFIRMATION_ITEM.'.finished_good_recived_qty as finished_good_recived_qty,'
+    .TBL_VENDOR_PO_CONFIRMATION_ITEM.'.gross_weight as gross_weight,'
+    .TBL_VENDOR_PO_CONFIRMATION_ITEM.'.expected_qty as expected_qty,'
+    .TBL_VENDOR_PO_CONFIRMATION_ITEM.'.item_remark as item_remark,'
+
+    // .TBL_FINISHED_GOODS.'.sitting_size,'
+    // .TBL_FINISHED_GOODS.'.thickness,'
+    );
+    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_CONFIRMATION_ITEM.'.part_number_id');
+    $this->db->where(TBL_VENDOR_PO_CONFIRMATION_ITEM.'.id', $id);
+    $this->db->order_by(TBL_VENDOR_PO_CONFIRMATION_ITEM.'.id','DESC');
+    $query = $this->db->get(TBL_VENDOR_PO_CONFIRMATION_ITEM);
+    $fetch_result = $query->result_array();
+    return $fetch_result;
+
+  }
+
 }
 
 ?>

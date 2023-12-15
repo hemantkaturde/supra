@@ -169,6 +169,7 @@
                                                         <td><?php echo $value['gross_weight'];?></td>
                                                         <td><?php echo $value['expected_qty'];?></td>
                                                         <td>
+                                                           <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['vendoritemid'];?>' class='fa fa-pencil-square-o editvendorpoconfirmationitem'  aria-hidden='true'></i>
                                                            <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['vendoritemid'];?>' class='fa fa-trash-o deletevendorpoitem' aria-hidden='true'></i>
                                                         </td>
                                                     </tr>
@@ -198,6 +199,7 @@
                                                 </button>
                                             </div>
                                             <form role="form" id="saveVendorconfromationpoitemform" action="<?php echo base_url() ?>saveVendorconfromationpoitemform" method="post" role="form">
+                                            <input type="hidden" class="form-control"  id="vendor_po_confirmation_item_id" name="vendor_po_confirmation_item_id" required readonly>
 
                                                 <div class="modal-body">
                                                         <div class="loader_ajax" style="display:none;">

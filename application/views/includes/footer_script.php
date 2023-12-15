@@ -4494,12 +4494,14 @@
 			   
 
 			   var venodr_po_confirmation_id =   $('#venodr_po_confirmation_id').val();
+
+			   var vendor_po_confirmation_item_id =   $('#vendor_po_confirmation_item_id').val();
 								 
 			$.ajax({
 				url : "<?php echo base_url();?>saveVendorconfromationpoitem",
 				type: "POST",
 				 //data : formData,
-				 data :{part_number:part_number,description:description,vendor_qty:vendor_qty,qty:qty,rmqty:rmqty,finishedgoodqty:finishedgoodqty,gross_weight:gross_weight,expected_qty:expected_qty,item_remark:item_remark,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_buyer_name:pre_buyer_name,pre_po_confirmed:pre_po_confirmed,pre_confirmed_date:pre_confirmed_date,pre_confirmed_with:pre_confirmed_with,pre_remark:pre_remark,pre_date:pre_date,venodr_po_confirmation_id:venodr_po_confirmation_id},
+				 data :{part_number:part_number,description:description,vendor_qty:vendor_qty,qty:qty,rmqty:rmqty,finishedgoodqty:finishedgoodqty,gross_weight:gross_weight,expected_qty:expected_qty,item_remark:item_remark,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_buyer_name:pre_buyer_name,pre_po_confirmed:pre_po_confirmed,pre_confirmed_date:pre_confirmed_date,pre_confirmed_with:pre_confirmed_with,pre_remark:pre_remark,pre_date:pre_date,venodr_po_confirmation_id:venodr_po_confirmation_id,vendor_po_confirmation_item_id:vendor_po_confirmation_item_id},
 				// method: "POST",
                 // data :{package_id:package_id},
                 cache:false,
@@ -4678,6 +4680,40 @@
 			});
 			return false;
 		});
+
+
+		$(document).on('click','.editvendorpoconfirmationitem',function(e){  
+			e.preventDefault();
+			var elemF = $(this);
+			var item_id = elemF.attr('data-id');
+			$.ajax({
+				url : "<?php echo base_url();?>getvendorpoconfirmationitemedit",
+				type: "POST",
+				data : 'id='+item_id,
+				success: function(data, textStatus, jqXHR)
+				{
+					    var fetchResponse = $.parseJSON(data);
+						$('#addNewModal').modal('show'); 
+
+						$('#vendor_po_confirmation_item_id').val(fetchResponse.vendor_po_confirmation_item_id); 
+						$('#part_number').val(fetchResponse.fin_id);  
+						$('#description').val(fetchResponse.description); 
+						$('#vendor_qty').val(fetchResponse.vendor_qty);
+						$('#qty').val(fetchResponse.order_qty);
+						$('#rmqty').val(fetchResponse.row_material_recived_qty);
+						$('#finishedgoodqty').val(fetchResponse.finished_good_recived_qty);
+						$('#gross_weight').val(fetchResponse.gross_weight);
+						$('#expected_qty').val(fetchResponse.expected_qty);
+						$('#item_remark').val(fetchResponse.item_remark);
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			});
+			return false;
+		});
+
 
     </script>
 <?php } ?>
