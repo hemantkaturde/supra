@@ -5148,6 +5148,14 @@ class Admin extends BaseController
             }else{
 
 
+                $incoiming_details_item_id = trim($this->input->post('incoiming_details_item_id'));
+                if( $incoiming_details_item_id){
+                    $incoiming_detail__item_id = $incoiming_details_item_id;
+                }else{
+                    $incoiming_detail__item_id = '';
+                }
+
+
                 if($this->input->post('incomingdetail_editid')){
 
                      /*Check Uniqe Validation in lot number*/
@@ -5160,7 +5168,7 @@ class Admin extends BaseController
 
                      }else{
 
-
+                    
                             $get_previous_balenace_qty = $this->admin_model->get_previous_item_balenace_qty_edit(trim($this->input->post('part_number')),trim($this->input->post('incomingdetail_editid')));
 
                             if($get_previous_balenace_qty){
@@ -5168,8 +5176,6 @@ class Admin extends BaseController
                             }else{
                                 $balence_qty = trim($this->input->post('p_o_qty'))-trim($this->input->post('invoice_qty'));
                             }
-
-
 
                             $data = array(
                                 'incoming_details_id' =>  $this->input->post('incomingdetail_editid'),
@@ -5197,7 +5203,7 @@ class Admin extends BaseController
                                 'pre_remark' =>  trim($this->input->post('pre_remark')),
                             );
 
-                            $saveIncomingdetailsitem= $this->admin_model->saveIncomingdetailsitem('',$data);
+                            $saveIncomingdetailsitem= $this->admin_model->saveIncomingdetailsitem($incoiming_detail__item_id,$data);
 
                             if($saveIncomingdetailsitem){
                                 $save_incoming_details_items['status'] = 'success';
@@ -5252,7 +5258,15 @@ class Admin extends BaseController
                             'pre_remark' =>  trim($this->input->post('pre_remark')),
                         );
 
-                        $saveIncomingdetailsitem= $this->admin_model->saveIncomingdetailsitem('',$data);
+
+                        $incoiming_details_item_id = trim($this->input->post('incoiming_details_item_id'));
+                        if( $incoiming_details_item_id){
+                            $incoiming_detail__item_id = $incoiming_details_item_id;
+                        }else{
+                            $incoiming_detail__item_id = '';
+                        }
+                        
+                        $saveIncomingdetailsitem= $this->admin_model->saveIncomingdetailsitem($incoiming_detail__item_id,$data);
 
                         if($saveIncomingdetailsitem){
                             $save_incoming_details_items['status'] = 'success';
@@ -9140,6 +9154,22 @@ class Admin extends BaseController
             }
         }
     }
+
+
+    public function getIncomingDetailitemedit(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $getIncomingDetailitemedit = $this->admin_model->getIncomingDetailitemedit(trim($this->input->post('id')));
+            if($getIncomingDetailitemedit){
+                $content = $getIncomingDetailitemedit[0];
+                echo json_encode($content);
+            }else{
+                echo 'failure';
+            }
+        }
+    }
+
+    
 
 
 

@@ -238,7 +238,7 @@
                                                 </button>
                                             </div>
                                             <form role="form" id="saveincomingitemform" action="<?php echo base_url() ?>saveincomingitemform" method="post" role="form">
-
+                                            <input type="hidden" class="form-control"  id="incoiming_details_item_id" name="incoiming_details_item_id" required readonly>
                                                 <div class="modal-body">
                                                         <div class="loader_ajax" style="display:none;">
                                                             <div class="loader_ajax_inner"><img src="<?php echo ICONPATH;?>/preloader_ajax.gif"></div>

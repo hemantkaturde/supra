@@ -355,6 +355,8 @@ $route['getSupplieritemdataforitemedit'] = "admin/getSupplieritemdataforitemedit
 $route['getVendoritemdataforitemedit'] = "admin/getVendoritemdataforitemedit";
 $route['getSupplierpoconfimationitemedit'] = "admin/getSupplierpoconfimationitemedit";
 $route['getvendorpoconfirmationitemedit'] = "admin/getvendorpoconfirmationitemedit";
+$route['getIncomingDetailitemedit'] = "admin/getIncomingDetailitemedit";
+
 
 
 

@@ -3292,6 +3292,8 @@ class Admin_model extends CI_Model
                 $data[$counter]['remarks'] = $value['remarks'];
 
                 $data[$counter]['action'] = '';
+
+                $data[$counter]['action'] .="<i style='font-size: x-large;cursor: pointer' data-id='".$value['incoming_details_item_id']."' class='fa fa-pencil-square-o editIncomingDetailsitem'  aria-hidden='true'></i>  &nbsp";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer' data-id='".$value['incoming_details_item_id']."' class='fa fa-trash-o deleteIncomingDetailsitem' aria-hidden='true'></i>   &nbsp ";
               
                 $counter++; 
@@ -3348,8 +3350,6 @@ class Admin_model extends CI_Model
 
     }
 
-
-
     public function  get_previous_item_balenace_qty_add($part_number){
 
         $this->db->select(TBL_INCOMING_DETAILS_ITEM.'.balance_qty as balance_qty');
@@ -3365,7 +3365,6 @@ class Admin_model extends CI_Model
 
     }
 
-
     public function  get_previous_item_balenace_qty_edit($part_number,$incomingdetail_editid){
 
         $this->db->select(TBL_INCOMING_DETAILS_ITEM.'.balance_qty as balance_qty');
@@ -3380,8 +3379,6 @@ class Admin_model extends CI_Model
         return $data;
 
     }
-
-
 
     public function deleteIncomingDetailsitem($id){
 
@@ -6733,6 +6730,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['remarks'] = $value['remarks'];
 
                 $data[$counter]['action'] = '';
+                $data[$counter]['action'] .="<i style='font-size: x-large;cursor: pointer' data-id='".$value['incoming_details_item_id']."' class='fa fa-pencil-square-o editIncomingDetailsitem'  aria-hidden='true'></i>  &nbsp";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer' data-id='".$value['incoming_details_item_id']."' class='fa fa-trash-o deleteIncomingDetailsitem' aria-hidden='true'></i>   &nbsp ";
               
                 $counter++; 
@@ -7247,6 +7245,40 @@ class Admin_model extends CI_Model
     $this->db->where(TBL_VENDOR_PO_CONFIRMATION_ITEM.'.id', $id);
     $this->db->order_by(TBL_VENDOR_PO_CONFIRMATION_ITEM.'.id','DESC');
     $query = $this->db->get(TBL_VENDOR_PO_CONFIRMATION_ITEM);
+    $fetch_result = $query->result_array();
+    return $fetch_result;
+
+  }
+
+  public function getIncomingDetailitemedit($id){
+
+    $this->db->select(TBL_INCOMING_DETAILS_ITEM.'.id as incoiming_details_item_id,'
+    .TBL_FINISHED_GOODS.'.fin_id,'
+    .TBL_FINISHED_GOODS.'.part_number,'
+    .TBL_FINISHED_GOODS.'.name as description,'
+    .TBL_INCOMING_DETAILS_ITEM.'.p_o_qty as p_o_qty,'
+    .TBL_INCOMING_DETAILS_ITEM.'.net_weight as net_weight,'
+    .TBL_INCOMING_DETAILS_ITEM.'.invoice_no as invoice_no,'
+    .TBL_INCOMING_DETAILS_ITEM.'.invoice_date as invoice_date,'
+    .TBL_INCOMING_DETAILS_ITEM.'.challan_no as challan_no,'
+    .TBL_INCOMING_DETAILS_ITEM.'.challan_date as challan_date,'
+    .TBL_INCOMING_DETAILS_ITEM.'.received_date as received_date,'
+    .TBL_INCOMING_DETAILS_ITEM.'.invoice_qty as invoice_qty,'
+    .TBL_INCOMING_DETAILS_ITEM.'.invoice_qty_in_kgs as invoice_qty_in_kgs,'
+    .TBL_INCOMING_DETAILS_ITEM.'.balance_qty as balance_qty,'
+    .TBL_INCOMING_DETAILS_ITEM.'.fg_material_gross_weight as fg_material_gross_weight,'
+    .TBL_INCOMING_DETAILS_ITEM.'.units as units,'
+    .TBL_INCOMING_DETAILS_ITEM.'.boxex_goni_bundle as boxex_goni_bundle,'
+    .TBL_INCOMING_DETAILS_ITEM.'.lot_no as lot_no,'
+    .TBL_INCOMING_DETAILS_ITEM.'.remarks as remarks,'
+
+    // .TBL_FINISHED_GOODS.'.sitting_size,'
+    // .TBL_FINISHED_GOODS.'.thickness,'
+    );
+    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
+    $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.id', $id);
+    $this->db->order_by(TBL_INCOMING_DETAILS_ITEM.'.id','DESC');
+    $query = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
     $fetch_result = $query->result_array();
     return $fetch_result;
 

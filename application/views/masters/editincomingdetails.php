@@ -232,7 +232,8 @@
                                       <?php $this->load->helper("form"); ?>
 
                                     <div class="modal fade" id="addNewModal" role="dialog" aria-labelledby="additem" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-                                      
+                                    <input type="hidden" class="form-control"  id="incoiming_details_item_id" name="incoiming_details_item_id" required readonly>
+
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                             <div class="modal-header">
