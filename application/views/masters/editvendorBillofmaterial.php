@@ -160,6 +160,7 @@
                                                         <th>Part Number</th>
                                                         <th>Description</th>
                                                         <th>Buyer Order Qty</th>
+                                                        <th>Vendor Received Qty</th>
                                                         <th>Vendor Order Qty</th>
                                                         <th>Balanced Qty</th>
                                                         <th>Remark</th>
@@ -179,8 +180,10 @@
                                                         <td><?php echo $value['buyer_order_qty'];?></td>
                                                         <td><?php echo $value['vendor_order_qty'];?></td>
                                                         <td><?php echo $value['vendor_received_qty'];?></td>
+                                                        <td><?php echo $value['balenced_qty'];?></td>
                                                         <td><?php echo $value['item_remark'];?></td>
                                                         <td>
+                                                        <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['vendoritmid'];?>' class='fa fa-pencil-square-o editVendorbillofmaterialpoitem'  aria-hidden='true'></i>
                                                         <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['vendoritmid'];?>' class='fa fa-trash-o deleteVendorbillofmaterialpoitem' aria-hidden='true'></i>
                                                         </td>
                                                     </tr>
@@ -214,6 +217,7 @@
                                                 </button>
                                             </div>
                                             <form role="form" id="saveVendorbilloamaterialitemform" action="<?php echo base_url() ?>saveVendorbilloamaterialitemform" method="post" role="form">
+                                            <input type="hidden" class="form-control"  id="vendor_bill_of_material_item_id" name="vendor_bill_of_material_item_id" required readonly>
 
                                                 <div class="modal-body">
                                                         <div class="loader_ajax" style="display:none;">
@@ -261,8 +265,8 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Vendor Received Qty <span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="number" class="form-control"  id="vendor_received_aty" name="vendor_received_aty">
-                                                            <p class="error vendor_received_aty_error"></p>
+                                                            <input type="number" class="form-control"  id="vendor_order_qty" name="vendor_order_qty">
+                                                            <p class="error vendor_order_qty_error"></p>
                                                         </div>
                                                     </div>
 

@@ -4541,14 +4541,14 @@ class Admin extends BaseController
             $this->form_validation->set_rules('description','Part Name','trim|required');
             $this->form_validation->set_rules('buyer_order_qty','Buyer Order Qty','trim|required');
             $this->form_validation->set_rules('vendor_order_qty','Vendor Order Qty','trim|required');
-            $this->form_validation->set_rules('vendor_received_aty','Vendor Received Qty','trim|required');
+            $this->form_validation->set_rules('vendor_received_qty','Vendor Received Qty','trim|required');
             $this->form_validation->set_rules('balanced_aty','Balanced Qty','trim|required');
             $this->form_validation->set_rules('item_remark','Item Remark','trim');
 
             if($this->form_validation->run() == FALSE)
             {
                 $save_billofmaterial_response['status'] = 'failure';
-                $save_billofmaterial_response['error'] = array('part_number'=>strip_tags(form_error('part_number')), 'description'=>strip_tags(form_error('description')), 'buyer_order_qty'=>strip_tags(form_error('buyer_order_qty')), 'vendor_order_qty'=>strip_tags(form_error('vendor_order_qty')),'vendor_received_aty'=>strip_tags(form_error('vendor_received_aty')),'balanced_aty'=>strip_tags(form_error('balanced_aty')));
+                $save_billofmaterial_response['error'] = array('part_number'=>strip_tags(form_error('part_number')), 'description'=>strip_tags(form_error('description')), 'buyer_order_qty'=>strip_tags(form_error('buyer_order_qty')), 'vendor_order_qty'=>strip_tags(form_error('vendor_order_qty')),'vendor_received_qty'=>strip_tags(form_error('vendor_received_qty')),'balanced_aty'=>strip_tags(form_error('balanced_aty')));
             }else{
 
                 $editvbmid = trim($this->input->post('editvbmid'));
@@ -4565,7 +4565,7 @@ class Admin extends BaseController
                     'description'     => trim($this->input->post('description')),
                     'buyer_order_qty'=> trim($this->input->post('buyer_order_qty')),
                     'vendor_order_qty'=> trim($this->input->post('vendor_order_qty')),
-                    'vendor_received_qty'=> trim($this->input->post('vendor_received_aty')),
+                    'vendor_received_qty'=> trim($this->input->post('vendor_received_qty')),
                     'balenced_qty'=> trim($this->input->post('balanced_aty')),
                     'item_remark'=> trim($this->input->post('item_remark')),
 
@@ -4586,7 +4586,17 @@ class Admin extends BaseController
                 //     $save_buyerpo_response['status'] = 'failure';
                 //     $save_buyerpo_response['error'] = array('sales_order_number'=>'Buyer PO Alreday Exits (Sales Order Number Alreday Exits)');
                 // }else{
-                    $saveVendorbillofmaterilitemdata = $this->admin_model->saveVendorbillofmaterilitemdata('',$data);
+
+
+                    $vendor_bill_of_material_item_id = trim($this->input->post('vendor_bill_of_material_item_id'));
+                    if( $vendor_bill_of_material_item_id){
+                        $vendorbillofmaterialitemid = $vendor_bill_of_material_item_id;
+                    }else{
+                        $vendorbillofmaterialitemid = '';
+                    }
+                    
+                    
+                    $saveVendorbillofmaterilitemdata = $this->admin_model->saveVendorbillofmaterilitemdata($vendorbillofmaterialitemid,$data);
                     
                     if($saveVendorbillofmaterilitemdata){
                         $save_billofmaterial_response['status'] = 'success';
@@ -9193,7 +9203,18 @@ class Admin extends BaseController
         }
     }
 
-    
+    public function geteditVendorbillofmaterialpoitem(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $geteditVendorbillofmaterialpoitem = $this->admin_model->geteditVendorbillofmaterialpoitem(trim($this->input->post('id')));
+            if($geteditVendorbillofmaterialpoitem){
+                $content = $geteditVendorbillofmaterialpoitem[0];
+                echo json_encode($content);
+            }else{
+                echo 'failure';
+            }
+        }
+    }
 
 
 

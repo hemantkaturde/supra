@@ -7325,6 +7325,36 @@ class Admin_model extends CI_Model
     return $fetch_result;
 
   }
+
+
+  public function geteditVendorbillofmaterialpoitem($id){
+
+    $this->db->select(
+        TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.id as vendor_bill_of_material_item_id,'
+        .TBL_FINISHED_GOODS.'.fin_id,'
+        .TBL_FINISHED_GOODS.'.part_number,'
+        .TBL_FINISHED_GOODS.'.name as description,'
+        .TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.buyer_order_qty as buyer_order_qty,'
+        .TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.vendor_order_qty as vendor_order_qty,'
+        .TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.vendor_received_qty as vendor_received_qty,'
+
+        .TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.balenced_qty as balenced_qty,'
+        .TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.item_remark as item_remark,'
+        
+        
+
+    );
+    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.part_number_id');
+    $this->db->where(TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.id', $id);
+    $this->db->order_by(TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.id','DESC');
+    $query = $this->db->get(TBL_BILL_OF_MATERIAL_VENDOR_ITEM);
+    $fetch_result = $query->result_array();
+    return $fetch_result;
+
+  }
+
+
+
   
 
 }
