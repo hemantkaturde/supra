@@ -153,8 +153,10 @@
                                                 <label for="incoming_details">Incoming Details </label>
                                                 <select class="form-control  incoming_details_item_list_display" name="incoming_details" id="incoming_details">
                                                     <option st-id="" value="">Select Incoming Details</option>
-                                                    <?php foreach ($incoming_details as $key => $value) {?>
-                                                    <option value="<?php echo $value['id']; ?>" <?php if($getbillofmaterialdataforedit['incoming_details']== $value['id']){ echo 'selected'; } ?>><?php echo $value['incoming_details_id']; ?></option>
+                                                    <?php foreach ($incoming_details as $key => $value) {
+                                                        if($getbillofmaterialdataforedit['incoming_details']== $value['id']){ ?>
+                                                            <option value="<?php echo $value['id']; ?>" <?php if($getbillofmaterialdataforedit['incoming_details']== $value['id']){ echo 'selected'; } ?>><?php echo $value['incoming_details_id']; ?></option>
+                                                       <?php }  ?>
                                                     <?php } ?>
                                                 </select>
                                             <p class="error incoming_details_error"></p>
