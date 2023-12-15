@@ -353,7 +353,7 @@ $route['downlaodsupplierpo/(:any)'] = "admin/downlaodsupplierpo/$1";
 $route['getbuyeritemdataforitemedit'] = "admin/getbuyeritemdataforitemedit";
 $route['getSupplieritemdataforitemedit'] = "admin/getSupplieritemdataforitemedit";
 $route['getVendoritemdataforitemedit'] = "admin/getVendoritemdataforitemedit";
-
+$route['getSupplierpoconfimationitemedit'] = "admin/getSupplierpoconfimationitemedit";
 
 
 

@@ -3412,7 +3412,15 @@ class Admin extends BaseController
                 //     $save_buyerpo_response['status'] = 'failure';
                 //     $save_buyerpo_response['error'] = array('sales_order_number'=>'Buyer PO Alreday Exits (Sales Order Number Alreday Exits)');
                 // }else{
-                    $saveSupplierpoconfirmationitemdata = $this->admin_model->saveSupplierpoconfirmationitemdata('',$data);
+
+                    $supplier_confirmation_po_item_id = trim($this->input->post('supplier_confirmation_po_item_id'));
+                    if( $supplier_confirmation_po_item_id){
+                        $supplierconfirmationpoitemid = $supplier_confirmation_po_item_id;
+                    }else{
+                        $supplierconfirmationpoitemid = '';
+                    }
+
+                    $saveSupplierpoconfirmationitemdata = $this->admin_model->saveSupplierpoconfirmationitemdata($supplierconfirmationpoitemid,$data);
                     
                     if($saveSupplierpoconfirmationitemdata){
                         $save_supplierpoconfirmationitem_response['status'] = 'success';
@@ -9099,14 +9107,23 @@ class Admin extends BaseController
         }
     }
 
+    public function getSupplierpoconfimationitemedit(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $getSupplierpoconfimationitemedit = $this->admin_model->getSupplierpoconfimationitemedit(trim($this->input->post('id')));
+            if($getSupplierpoconfimationitemedit){
+                $content = $getSupplierpoconfimationitemedit[0];
+                echo json_encode($content);
+            }else{
+                echo 'failure';
+            }
+        }
+    }
+
 
 
 
     public function downlaodsupplierpo(){
-
-
-
-        
 
         $mpdf = new \Mpdf\Mpdf();
         // $html = $this->load->view('html_to_pdf',[],true);

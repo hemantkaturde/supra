@@ -260,7 +260,8 @@
                                                         <td><?php echo $value['rate'];?></td>
                                                         <td><?php echo $value['value'];?></td> -->
                                                         <td>
-                                                        <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['id'];?>' class='fa fa-trash-o deleteSupplierpoitem' aria-hidden='true'></i>
+                                                         <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['supplierpoitemid'];?>' class='fa fa-pencil-square-o editSupplierpoconfimationitem'  aria-hidden='true'></i>
+                                                         <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['supplierpoitemid'];?>' class='fa fa-trash-o deleteSupplierpoitem' aria-hidden='true'></i>
                                                         </td>
                                                     </tr>
                                                     <?php endforeach;?>
@@ -289,6 +290,8 @@
                                                 </button>
                                             </div>
                                             <form role="form" id="saveSupplierconfromationpoitemform" action="<?php echo base_url() ?>saveSupplierconfromationpoitemform" method="post" role="form">
+
+                                            <input type="hidden" class="form-control"  id="supplier_confirmation_po_item_id" name="supplier_confirmation_po_item_id" required readonly>
 
                                                 <div class="modal-body">
                                                         <div class="loader_ajax" style="display:none;">

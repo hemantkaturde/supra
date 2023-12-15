@@ -1980,7 +1980,7 @@ class Admin_model extends CI_Model
 
     public function fetchALLpresupplierpoconfirmationitemList(){
 
-        $this->db->select('*');
+        $this->db->select('*,'.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.id as supplierpoitemid');
         $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.part_number_id');
         $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.pre_supplier_po_number');
         $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.pre_buyer_po_number','left');
@@ -7195,6 +7195,33 @@ class Admin_model extends CI_Model
     $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.id', $id);
     $this->db->order_by(TBL_VENDOR_PO_MASTER_ITEM.'.id','DESC');
     $query = $this->db->get(TBL_VENDOR_PO_MASTER_ITEM);
+    $fetch_result = $query->result_array();
+    return $fetch_result;
+
+  }
+
+  public function getSupplierpoconfimationitemedit($id){
+
+    $this->db->select(
+     TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.id as supplier_confirmation_po_item_id,'
+    .TBL_RAWMATERIAL.'.raw_id,'
+    .TBL_RAWMATERIAL.'.part_number,'
+    .TBL_RAWMATERIAL.'.type_of_raw_material as description,'
+    .TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.order_oty as order_oty,'
+    .TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.sent_qty as sent_qty,'
+    .TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.unit as unit,'
+    .TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.short_excess as short_excess,'
+    .TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.sent_qty_pcs as sent_qty_pcs,'
+    .TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.vendor_id as vendor_id,'
+    .TBL_VENDOR.'.vendor_name,'
+    .TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.vendor_qty'
+
+    );
+    $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.part_number_id');
+    $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.vendor_id');
+    $this->db->where(TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.id', $id);
+    $this->db->order_by(TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.id','DESC');
+    $query = $this->db->get(TBL_SUPPLIER_PO_CONFIRMATION_ITEM);
     $fetch_result = $query->result_array();
     return $fetch_result;
 
