@@ -13934,6 +13934,10 @@
 									$(".loader_ajax").hide();
 									if(data == "failure")
 									{
+
+										$('#invoice_number').val('');
+										$('#invoice_date').val('');
+
 										$('#invoice_qty_in_pcs').val('');
 										$('#invoice_qty_in_kgs').val('');
 									}
@@ -13946,11 +13950,19 @@
 
 										var invoice_qty_in_kgs =  parseFloat(invoice_qty_in_pcs_data.invoice_qty) * parseFloat(net_weight);
 										$('#invoice_qty_in_kgs').val(invoice_qty_in_kgs);
+
+
+										$('#invoice_number').val(invoice_qty_in_pcs_data.invoice_no);
+										$('#invoice_date').val(invoice_qty_in_pcs_data.invoice_date);
+
+
 										
 									}
 								},
 								error: function (jqXHR, textStatus, errorThrown)
 								{
+									    $('#invoice_number').val('');
+										$('#invoice_date').val('');
 										$('#invoice_qty_in_pcs').val('');
 										$('#invoice_qty_in_kgs').val('');
 								}

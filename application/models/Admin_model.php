@@ -6129,7 +6129,7 @@ class Admin_model extends CI_Model
 
     public function getinvoiceqtybyLotnumber($lot_id){
 
-        $this->db->select(TBL_INCOMING_DETAILS_ITEM.'.invoice_qty');
+        $this->db->select(TBL_INCOMING_DETAILS_ITEM.'.invoice_qty,'.TBL_INCOMING_DETAILS_ITEM.'.invoice_no,'.TBL_INCOMING_DETAILS_ITEM.'.invoice_date');
         //$this->db->where(TBL_INCOMING_DETAILS_ITEM.'.part_number', $part_number);
         // $this->db->where(TBL_VENDOR_PO_MASTER.'.supplier_name !=',"");
         $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.id',trim($lot_id));

@@ -479,6 +479,14 @@
                                                             </div>
 
                                                             <div class="form-group">
+                                                                <label for="lot_number">Lot No. </label>
+                                                                <select class="form-control lot_number get_invoice_qty_bylot_number" name="lot_number" id="lot_number">
+                                                                   <option value="">Select Lot Number</option>
+                                                                </select>
+                                                                <p class="error lot_number_error"></p>
+                                                            </div>
+
+                                                            <div class="form-group">
                                                                 <label for="invoice_number">Invoice Number</label>
                                                                 <input type="text" class="form-control" id="invoice_number" name="invoice_number">
                                                                 <p class="error invoice_number_error"></p>
@@ -492,17 +500,6 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
-
-                                                        
-                                                            <div class="form-group">
-                                                                <label for="lot_number">Lot No. </label>
-                                                                <select class="form-control lot_number get_invoice_qty_bylot_number" name="lot_number" id="lot_number">
-                                                                   <option value="">Select Lot Number</option>
-                                                                </select>
-                                                                <p class="error lot_number_error"></p>
-                                                            </div>
-
-
                                                             <div class="form-group">
                                                                 <label for="invoice_qty_in_pcs">Invoice Qty (In Pcs) </label>
                                                                 <input type="text" class="form-control" id="invoice_qty_in_pcs" name="invoice_qty_in_pcs">
