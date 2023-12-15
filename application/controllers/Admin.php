@@ -4020,6 +4020,7 @@ class Admin extends BaseController
             $this->form_validation->set_rules('packing_and_forwarding','Packing And Forwarding','trim|required');
             $this->form_validation->set_rules('total','Total','trim|required');
             $this->form_validation->set_rules('gst','GST','trim|required');
+            $this->form_validation->set_rules('gst_rate','GST rate','trim|required');
             $this->form_validation->set_rules('grand_total','Grand Total','trim|required');
             //$this->form_validation->set_rules('item_remark ','Item Remark','trim|required');
     
@@ -4027,7 +4028,7 @@ class Admin extends BaseController
             {
                 $save_jobwork_response['status'] = 'failure';
                 $save_jobwork_response['error'] = array(
-                    'part_number'=>strip_tags(form_error('part_number')),'description'=>strip_tags(form_error('description')),'rm_actual_aty'=>strip_tags(form_error('rm_actual_aty')),'vendor_order_qty'=>strip_tags(form_error('vendor_order_qty')),'unit'=>strip_tags(form_error('unit')),'rm_rate'=>strip_tags(form_error('rm_rate')),'value'=>strip_tags(form_error('value')),'packing_and_forwarding'=>strip_tags(form_error('packing_and_forwarding')),'total'=>strip_tags(form_error('total')),'gst'=>strip_tags(form_error('gst')),'grand_total'=>strip_tags(form_error('grand_total')));
+                    'part_number'=>strip_tags(form_error('part_number')),'description'=>strip_tags(form_error('description')),'rm_actual_aty'=>strip_tags(form_error('rm_actual_aty')),'vendor_order_qty'=>strip_tags(form_error('vendor_order_qty')),'unit'=>strip_tags(form_error('unit')),'rm_rate'=>strip_tags(form_error('rm_rate')),'value'=>strip_tags(form_error('value')),'packing_and_forwarding'=>strip_tags(form_error('packing_and_forwarding')),'total'=>strip_tags(form_error('total')),'gst'=>strip_tags(form_error('gst')),'grand_total'=>strip_tags(form_error('grand_total')),'gst_rate'=>strip_tags(form_error('gst_rate')));
             }else{
 
 
@@ -4047,6 +4048,7 @@ class Admin extends BaseController
                         'packing_forwarding'	=>trim($this->input->post('packing_and_forwarding')),
                         'total'	=>trim($this->input->post('total')),
                         'gst'	=>trim($this->input->post('gst')),
+                        'gst_rate' => trim($this->input->post('gst_rate')),
                         'grand_total'	=>trim($this->input->post('grand_total')),
                         'item_remark' =>trim($this->input->post('item_remark')),
                         'pre_date'=> trim($this->input->post('pre_date')),
@@ -4069,6 +4071,7 @@ class Admin extends BaseController
                     'packing_forwarding'	=>trim($this->input->post('packing_and_forwarding')),
                     'total'	=>trim($this->input->post('total')),
                     'gst'	=>trim($this->input->post('gst')),
+                    'gst_rate' => trim($this->input->post('gst_rate')),
                     'grand_total'	=>trim($this->input->post('grand_total')),
                     'item_remark' =>trim($this->input->post('item_remark')),
                     'pre_date'=> trim($this->input->post('pre_date')),
@@ -4082,6 +4085,12 @@ class Admin extends BaseController
                }
 
 
+               $jobwork_item_id = trim($this->input->post('jobwork_item_id'));
+               if( $jobwork_item_id){
+                   $jobworkitemid = $jobwork_item_id;
+               }else{
+                   $jobworkitemid = '';
+               }
                
 
                 // $checkIfexitsbuyerpo = $this->admin_model->checkIfexitsbuyerpo(trim($this->input->post('sales_order_number')));
@@ -4089,7 +4098,7 @@ class Admin extends BaseController
                 //     $save_buyerpo_response['status'] = 'failure';
                 //     $save_buyerpo_response['error'] = array('sales_order_number'=>'Buyer PO Alreday Exits (Sales Order Number Alreday Exits)');
                 // }else{
-                    $saveJobworkitemdata = $this->admin_model->saveJobworkitemdata('',$data);
+                    $saveJobworkitemdata = $this->admin_model->saveJobworkitemdata($jobworkitemid,$data);
 
                     if($saveJobworkitemdata){
 
@@ -4119,6 +4128,25 @@ class Admin extends BaseController
         }
 
     }
+
+    public function deletejobworkitem(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->deletejobworkitem(trim($this->input->post('id')));
+            if ($result) {
+                        $process = 'Job Work Delete Item';
+                        $processFunction = 'Admin/deletejobworkitem';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
+
+    }
+
+    
 
     public function billofmaterial(){
 
@@ -9233,6 +9261,37 @@ class Admin extends BaseController
         }
 
     }
+
+
+    public function geteditjobworkitem(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $geteditjobworkitem = $this->admin_model->geteditjobworkitem(trim($this->input->post('id')));
+            if($geteditjobworkitem){
+                $content = $geteditjobworkitem[0];
+                echo json_encode($content);
+            }else{
+                echo 'failure';
+            }
+        }
+
+    }
+
+
+    public function geteditReworkRejectionitem(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $geteditReworkRejectionitem = $this->admin_model->geteditReworkRejectionitem(trim($this->input->post('id')));
+            if($geteditReworkRejectionitem){
+                $content = $geteditReworkRejectionitem[0];
+                echo json_encode($content);
+            }else{
+                echo 'failure';
+            }
+        }
+    }
+
+    
 
 
 

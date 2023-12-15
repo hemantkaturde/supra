@@ -338,6 +338,8 @@ $route['deletequalityrecordsitem'] = "admin/deletequalityrecordsitem";
 $route['editqulityrecordform/(:any)'] = "admin/editqulityrecordform/$1";
 $route['getallcalculationexportitems'] = "admin/getallcalculationexportitems";
 $route['getallbalencecalculationexportitems'] = "admin/getallbalencecalculationexportitems";
+$route['deletejobworkitem'] = "admin/deletejobworkitem";
+
 
 
 
@@ -359,7 +361,9 @@ $route['getIncomingDetailitemedit'] = "admin/getIncomingDetailitemedit";
 $route['geteditBillofmaterialitem'] = "admin/geteditBillofmaterialitem";
 $route['geteditVendorbillofmaterialpoitem'] = "admin/geteditVendorbillofmaterialpoitem";
 $route['geteditDebitnoteitemedit'] = "admin/geteditDebitnoteitemedit";
+$route['geteditjobworkitem'] = "admin/geteditjobworkitem";
 
+$route['geteditReworkRejectionitem'] = "admin/geteditReworkRejectionitem";
 
 
 

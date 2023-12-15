@@ -2358,7 +2358,7 @@ class Admin_model extends CI_Model
 
     public function fetchALLprejobworkitemList(){
 
-        $this->db->select('*,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po,'.TBL_SUPPLIER.'.supplier_name as rowmaterialsuppliername');
+        $this->db->select('*,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po,'.TBL_SUPPLIER.'.supplier_name as rowmaterialsuppliername,'.TBL_JOB_WORK_ITEM.'.id as jobworkitemid');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_JOB_WORK_ITEM.'.part_number_id');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_JOB_WORK_ITEM.'.pre_vendor_po_number');
         $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_JOB_WORK_ITEM.'.pre_raw_material_supplier_name','left');
@@ -4083,7 +4083,7 @@ class Admin_model extends CI_Model
 
 
     public function fetchALLprejobworkitemListedit($jobworkid){
-        $this->db->select('*,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po,'.TBL_SUPPLIER.'.supplier_name as rowmaterialsuppliername');
+        $this->db->select('*,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po,'.TBL_SUPPLIER.'.supplier_name as rowmaterialsuppliername,'.TBL_JOB_WORK_ITEM.'.id as jobworkid');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_JOB_WORK_ITEM.'.part_number_id');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_JOB_WORK_ITEM.'.pre_vendor_po_number');
         $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_JOB_WORK_ITEM.'.pre_raw_material_supplier_name','left');
@@ -6896,6 +6896,18 @@ class Admin_model extends CI_Model
         }
     }
 
+    public function deletejobworkitem($id){
+        $this->db->where('id ', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_JOB_WORK_ITEM)){
+           return TRUE;
+        }else{
+           return FALSE;
+        }
+    }
+
+    
+
     public function getstockrejectionformitemcount($params,$vendor_po_id){
         $this->db->select('*');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
@@ -7352,7 +7364,6 @@ class Admin_model extends CI_Model
 
   }
 
-  
 
   public function geteditDebitnoteitemedit($id){
 
@@ -7395,8 +7406,63 @@ class Admin_model extends CI_Model
 
   }
 
-  
 
+  public function geteditjobworkitem($id){
+
+    $this->db->select(
+        TBL_JOB_WORK_ITEM.'.id as jobwork_item_id,'
+        .TBL_RAWMATERIAL.'.raw_id,'
+        .TBL_RAWMATERIAL.'.part_number,'
+        .TBL_RAWMATERIAL.'.type_of_raw_material as description,'
+        .TBL_RAWMATERIAL.'.sac as sac,'
+        .TBL_RAWMATERIAL.'.HSN_code as HSN_code,'
+        .TBL_RAWMATERIAL.'.sitting_size as sitting_size,'
+        .TBL_JOB_WORK_ITEM.'.vendor_qty as vendor_qty,'
+        .TBL_JOB_WORK_ITEM.'.rm_actual_qty as rm_actual_qty,'
+        .TBL_JOB_WORK_ITEM.'.unit as unit,'
+        .TBL_JOB_WORK_ITEM.'.ram_rate as ram_rate,'
+        .TBL_JOB_WORK_ITEM.'.value as value,'
+        .TBL_JOB_WORK_ITEM.'.packing_forwarding as packing_forwarding,'
+        .TBL_JOB_WORK_ITEM.'.total as total,'
+        .TBL_JOB_WORK_ITEM.'.gst as gst,'
+        .TBL_JOB_WORK_ITEM.'.gst_rate as gst_rate,'
+        .TBL_JOB_WORK_ITEM.'.grand_total as grand_total,'
+        .TBL_JOB_WORK_ITEM.'.item_remark as item_remark,'
+
+    );
+    $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_JOB_WORK_ITEM.'.part_number_id');
+    $this->db->where(TBL_JOB_WORK_ITEM.'.id', $id);
+    $this->db->order_by(TBL_JOB_WORK_ITEM.'.id','DESC');
+    $query = $this->db->get(TBL_JOB_WORK_ITEM);
+    $fetch_result = $query->result_array();
+    return $fetch_result;
+
+
+  }
+
+
+  public function geteditReworkRejectionitem($id){
+
+    $this->db->select(
+         TBL_REWORK_REJECTION_ITEM.'.id as rework_rejection_item_id,'
+        .TBL_RAWMATERIAL.'.raw_id,'
+        .TBL_RAWMATERIAL.'.part_number,'
+        .TBL_RAWMATERIAL.'.type_of_raw_material as description,'
+        .TBL_RAWMATERIAL.'.type_of_raw_material,'
+        .TBL_RAWMATERIAL.'.sac as sac,'
+        .TBL_RAWMATERIAL.'.HSN_code as HSN_code,'
+        .TBL_RAWMATERIAL.'.sitting_size as sitting_size,'
+        .TBL_REWORK_REJECTION_ITEM.'.rejection_rework_reason,'
+    );
+    $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_REWORK_REJECTION_ITEM.'.part_number');
+    $this->db->where(TBL_REWORK_REJECTION_ITEM.'.id', $id);
+    $this->db->order_by(TBL_REWORK_REJECTION_ITEM.'.id','DESC');
+    $query = $this->db->get(TBL_REWORK_REJECTION_ITEM);
+    $fetch_result = $query->result_array();
+    return $fetch_result;
+
+
+  }
 
   
 

@@ -84,9 +84,7 @@
                                     }else{
                                         $display='none';
                                         $selected_value = 'Select Buyer PO Number';
-                                    }
-                                    
-                                                
+                                    }       
                                     ?>
 
 
@@ -103,18 +101,15 @@
 
 
                                     <?php
-                                 
-                                    if($fetchALLprejobworkitemList[0]['pre_raw_material_supplier_name']){
-                                        $display='block';
-                                        $selected_value = $fetchALLprejobworkitemList[0]['rowmaterialsuppliername'];
+                                        if($fetchALLprejobworkitemList[0]['pre_raw_material_supplier_name']){
+                                            $display='block';
+                                            $selected_value = $fetchALLprejobworkitemList[0]['rowmaterialsuppliername'];
 
-                                    }else{
-                                        $display='none';
-                                        $selected_value = 'Select Raw Material Supplier Name';
-                                    }
-                                    
-                                             
-                                 ?>
+                                        }else{
+                                            $display='none';
+                                            $selected_value = 'Select Raw Material Supplier Name';
+                                        }      
+                                    ?>
 
 
                                     <div class="col-md-12">
@@ -141,7 +136,7 @@
                                 <div class="col-md-6">
                                     <div class="container">
                                         <button type="button" class="btn btn-success btn-xl" data-toggle="modal" data-target="#addNewModal">Add New Items</button><br/><br/>
-                                            <table class="table table-bordered" style="width: 100% !important; max-width: 100%;margin-bottom: 20px;">
+                                            <table class="table table-bordered" style="max-width: 68%;display: block;overflow-x: auto; white-space: nowrap;">
                                                 <thead style="background-color:#3c8dbc;color:#fff">
                                                     <tr>
                                                         <th>Sr No.</th>
@@ -179,7 +174,8 @@
                                                         <td><?php echo $value['grand_total'];?></td>
                                                         <td><?php echo $value['item_remark'];?></td>
                                                         <td>
-                                                        <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['id'];?>' class='fa fa-trash-o deleteSupplierpoitem' aria-hidden='true'></i>
+                                                           <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['jobworkitemid'];?>' class='fa fa-pencil-square-o editjobworkitem'  aria-hidden='true'></i>
+                                                           <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['jobworkitemid'];?>' class='fa fa-trash-o deletejobworkitem' aria-hidden='true'></i>
                                                         </td>
                                                     </tr>
                                                     <?php endforeach;?>
@@ -208,6 +204,8 @@
                                                 </button>
                                             </div>
                                             <form role="form" id="savejobworkitemform" action="<?php echo base_url() ?>savejobworkitemform" method="post" role="form">
+
+                                                <input type="hidden" class="form-control"  id="jobwork_item_id" name="jobwork_item_id" required readonly>
 
                                                 <div class="modal-body">
                                                         <div class="loader_ajax" style="display:none;">

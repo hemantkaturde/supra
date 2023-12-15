@@ -5014,6 +5014,7 @@
 			   var packing_and_forwarding =   $('#packing_and_forwarding').val();
 			   var total =   $('#total').val();
 			   var gst =   $('#gst').val();
+			   var gst_rate =   $('#gst_rate').val();
 			   var grand_total =   $('#grand_total').val();
 			   var item_remark =   $('#item_remark').val();
 
@@ -5026,12 +5027,14 @@
 
 			   var job_work_id =   $('#job_work_id').val();
 
+			   var jobwork_item_id =   $('#jobwork_item_id').val();
+
 			 
 			$.ajax({
 				url : "<?php echo base_url();?>saveJobworktem",
 				type: "POST",
 				 //data : formData,
-				 data :{part_number:part_number ,description:description,SAC_no:SAC_no,HSN_Code:HSN_Code,raw_material_size:raw_material_size,vendor_order_qty:vendor_order_qty,rm_actual_aty:rm_actual_aty,unit:unit,rm_rate:rm_rate,value:value,packing_and_forwarding:packing_and_forwarding,total:total,gst:gst,grand_total:grand_total,item_remark:item_remark,pre_date:pre_date,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_raw_material_supplier_name:pre_raw_material_supplier_name,pre_remark:pre_remark,job_work_id:job_work_id},
+				 data :{part_number:part_number ,description:description,SAC_no:SAC_no,HSN_Code:HSN_Code,raw_material_size:raw_material_size,vendor_order_qty:vendor_order_qty,rm_actual_aty:rm_actual_aty,unit:unit,rm_rate:rm_rate,value:value,packing_and_forwarding:packing_and_forwarding,total:total,gst:gst,grand_total:grand_total,item_remark:item_remark,pre_date:pre_date,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_raw_material_supplier_name:pre_raw_material_supplier_name,pre_remark:pre_remark,job_work_id:job_work_id,gst_rate:gst_rate,jobwork_item_id:jobwork_item_id},
 				// method: "POST",
                 // data :{package_id:package_id},
                 cache:false,
@@ -5253,6 +5256,107 @@
 				swal("Cancelled", "Vendor PO deletion cancelled ", "error");
 				}
 			});
+		});
+
+
+		$(document).on('click','.deletejobworkitem',function(e){
+			var elemF = $(this);
+			e.preventDefault();
+
+			var job_work_id = $("#job_work_id").val();
+			
+
+			swal({
+				title: "Are you sure?",
+				text: "Delete Job Work Item",
+				type: "warning",
+				showCancelButton: true,
+				closeOnClickOutside: false,
+				confirmButtonClass: "btn-sm btn-danger",
+				confirmButtonText: "Yes, delete it!",
+				cancelButtonText: "No, cancel plz!",
+				closeOnConfirm: false,
+				closeOnCancel: false
+			}, function(isConfirm) {
+				if (isConfirm) {
+							$.ajax({
+								url : "<?php echo base_url();?>deletejobworkitem",
+								type: "POST",
+								data : 'id='+elemF.attr('data-id'),
+								success: function(data, textStatus, jqXHR)
+								{
+									const obj = JSON.parse(data);
+								
+									if(obj.status=='success'){
+										swal({
+											title: "Deleted!",
+											text: "Job Work Item Succesfully Deleted",
+											icon: "success",
+											button: "Ok",
+											},function(){ 
+
+												if(job_work_id){
+													window.location.href = "<?php echo base_url().'editjobwork/'?>"+job_work_id;
+												}else{
+
+													window.location.href = "<?php echo base_url().'addjobwork'?>";
+												}
+												
+										});	
+									}
+
+								},
+								error: function (jqXHR, textStatus, errorThrown)
+								{
+									$(".loader_ajax").hide();
+								}
+							})
+						}
+						else {
+				swal("Cancelled", "Vendor PO deletion cancelled ", "error");
+				}
+			});
+		});
+
+
+		$(document).on('click','.editjobworkitem',function(e){  
+			e.preventDefault();
+			var elemF = $(this);
+			var item_id = elemF.attr('data-id');
+			$.ajax({
+				url : "<?php echo base_url();?>geteditjobworkitem",
+				type: "POST",
+				data : 'id='+item_id,
+				success: function(data, textStatus, jqXHR)
+				{
+					    var fetchResponse = $.parseJSON(data);
+						$('#addNewModal').modal('show'); 
+						$('#jobwork_item_id').val(fetchResponse.jobwork_item_id); 
+						$('#part_number').val(fetchResponse.raw_id); 
+						$('#description').val(fetchResponse.description); 
+						$('#SAC').val(fetchResponse.sac); 
+						$('#HSN_Code').val(fetchResponse.HSN_code); 
+						$('#raw_material_size').val(fetchResponse.sitting_size); 
+						$('#vendor_order_qty').val(fetchResponse.vendor_qty); 
+						$('#rm_actual_aty').val(fetchResponse.rm_actual_qty); 
+						$('#unit').val(fetchResponse.unit); 
+						$('#rm_rate').val(fetchResponse.ram_rate); 
+						$('#value').val(fetchResponse.value); 
+						$('#packing_and_forwarding').val(fetchResponse.packing_forwarding); 
+						$('#total').val(fetchResponse.total); 
+						$('#gst').val(fetchResponse.gst); 
+						$('#gst_rate').val(fetchResponse.gst_rate); 
+						$('#grand_total').val(fetchResponse.grand_total);
+						$('#item_remark').val(fetchResponse.item_remark); 
+						
+						
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			});
+			return false;
 		});
 		
     </script>
@@ -9753,6 +9857,40 @@
 					swal("Cancelled", "Rework Rejection Item deletion cancelled ", "error");
 					}
 				});
+		});
+
+
+		$(document).on('click','.editReworkRejectionitem',function(e){  
+			e.preventDefault();
+			var elemF = $(this);
+			var item_id = elemF.attr('data-id');
+			$.ajax({
+				url : "<?php echo base_url();?>geteditReworkRejectionitem",
+				type: "POST",
+				data : 'id='+item_id,
+				success: function(data, textStatus, jqXHR)
+				{
+					    var fetchResponse = $.parseJSON(data);
+						$('#addNewModal').modal('show'); 
+						$('#vendor_po_confirmation_item_id').val(fetchResponse.vendor_po_confirmation_item_id); 
+						$('#part_number').val(fetchResponse.raw_id);  
+						$('#description').val(fetchResponse.description); 
+						$('#HSN_Code').val(fetchResponse.HSN_code); 
+						$('#SAC').val(fetchResponse.sac); 
+						$('#type_of_raw_material').val(fetchResponse.type_of_raw_material); 
+						$('#rejected_work_reason').val(fetchResponse.rejection_rework_reason); 
+						$('#rejected_work_reason').val(fetchResponse.rejection_rework_reason); 
+
+						
+						
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			});
+			return false;
 		});
 
 	</script> 
