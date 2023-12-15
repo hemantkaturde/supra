@@ -6977,12 +6977,12 @@ class Admin extends BaseController
                 $this->form_validation->set_rules('remark','Remark','trim');
 
 
-                $this->form_validation->set_rules('total_debit_amount','Total Debit Amount','trim|required');
+                $this->form_validation->set_rules('total_debit_amount','Total Debit Amount','trim');
                 $this->form_validation->set_rules('total_debit_amount_ok_qty','Total Debit Amount OK Qty','trim');
                // $this->form_validation->set_rules('p_and_f_charges','P_And F Charges','trim|required');
-                $this->form_validation->set_rules('tds_amount','TDS Amount','trim|required');
-                $this->form_validation->set_rules('freight_amount_charge','Freight Amount Charge','trim|required');
-                $this->form_validation->set_rules('grand_total_main','Grand Total main','trim|required');
+                $this->form_validation->set_rules('tds_amount','TDS Amount','trim');
+                $this->form_validation->set_rules('freight_amount_charge','Freight Amount Charge','trim');
+                $this->form_validation->set_rules('grand_total_main','Grand Total main','trim');
 
 
                 if($this->form_validation->run() == FALSE)
@@ -7217,9 +7217,14 @@ class Admin extends BaseController
 
                 }
 
-            
-
-                $savedebitnoteitemdetails= $this->admin_model->savedebitnoteitemdetails('',$data);
+                $debit_note_item_id = trim($this->input->post('debit_note_item_id'));
+                if( $debit_note_item_id){
+                    $debitnoteitemid = $debit_note_item_id;
+                }else{
+                    $debitnoteitemid = '';
+                }
+                
+                $savedebitnoteitemdetails= $this->admin_model->savedebitnoteitemdetails($debitnoteitemid,$data);
                 if($savedebitnoteitemdetails){
                     $savdebitnoteitem_response['status'] = 'success';
                     $savdebitnoteitem_response['error'] = array('part_number'=>strip_tags(form_error('part_number')),'description'=>strip_tags(form_error('description')), 'invoice_no'=>strip_tags(form_error('invoice_no')), 'invoice_date'=>strip_tags(form_error('invoice_date')),'invoice_qty'=>strip_tags(form_error('invoice_qty')), 'ok_qty'=>strip_tags(form_error('ok_qty')), 'rejected_quantity'=>strip_tags(form_error('rejected_quantity')),'received_quantity'=>strip_tags(form_error('received_quantity')),'rate'=>strip_tags(form_error('rate')), 'gst_rate'=>strip_tags(form_error('gst_rate')),'sgst_value'=>strip_tags(form_error('sgst_value')),'cgst_value'=>strip_tags(form_error('cgst_value')),'igst_rate'=>strip_tags(form_error('igst_rate')),'grand_total'=>strip_tags(form_error('grand_total')),'item_remark'=>strip_tags(form_error('item_remark')));
@@ -7790,9 +7795,6 @@ class Admin extends BaseController
             echo(json_encode(array('status'=>'failed'))); 
         }
     }
-
-    
-
 
     public function savequlityrecorditem(){
         $post_submit = $this->input->post();
@@ -9214,6 +9216,22 @@ class Admin extends BaseController
                 echo 'failure';
             }
         }
+    }
+
+
+    public function geteditDebitnoteitemedit(){
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $geteditDebitnoteitemedit = $this->admin_model->geteditDebitnoteitemedit(trim($this->input->post('id')));
+            if($geteditDebitnoteitemedit){
+                $content = $geteditDebitnoteitemedit[0];
+                echo json_encode($content);
+            }else{
+                echo 'failure';
+            }
+        }
+
     }
 
 

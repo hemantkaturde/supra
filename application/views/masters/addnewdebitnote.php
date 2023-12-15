@@ -303,7 +303,8 @@
                                                         <td><?php echo $value['debit_amount'];?></td>
                                                         <td><?php echo $value['debit_note_remark'];?></td>
                                                         <td>
-                                                        <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['debit_note_id'];?>' class='fa fa-trash-o deleteDebitnoteitem' aria-hidden='true'></i>
+                                                           <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['debit_note_id'];?>' class='fa fa-pencil-square-o editDebitnoteitem'  aria-hidden='true'></i>
+                                                           <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['debit_note_id'];?>' class='fa fa-trash-o deleteDebitnoteitem' aria-hidden='true'></i>
                                                         </td>
                                                     </tr>
                                                     <?php endforeach;?>
@@ -331,6 +332,7 @@
                                                 </button>
                                             </div>
                                             <form role="form" id="saveDebitnoteitem_form" action="<?php echo base_url() ?>savedebitnoteitem" method="post" role="form">
+                                            <input type="hidden" class="form-control"  id="debit_note_item_id" name="debit_note_item_id" required readonly>
 
                                                 <div class="modal-body">
                                                     <div class="loader_ajax" style="display:none;">
@@ -560,9 +562,6 @@
                                                             <p class="error debit_amount_error"></p>
                                                         </div>
                                                     </div>
-
-
-                                                    
 
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Remark</label>

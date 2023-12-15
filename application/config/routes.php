@@ -358,6 +358,7 @@ $route['getvendorpoconfirmationitemedit'] = "admin/getvendorpoconfirmationitemed
 $route['getIncomingDetailitemedit'] = "admin/getIncomingDetailitemedit";
 $route['geteditBillofmaterialitem'] = "admin/geteditBillofmaterialitem";
 $route['geteditVendorbillofmaterialpoitem'] = "admin/geteditVendorbillofmaterialpoitem";
+$route['geteditDebitnoteitemedit'] = "admin/geteditDebitnoteitemedit";
 
 
 

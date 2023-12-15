@@ -7373,7 +7373,6 @@
 			}
 		});
 
-
 		$(document).on('click','.editVendorbillofmaterialpoitem',function(e){  
 			e.preventDefault();
 			var elemF = $(this);
@@ -10499,8 +10498,7 @@
 					 { "width": "10%", "targets": 4 },
 					 { "width": "10%", "targets": 5 },
 					 { "width": "5%", "targets": 6 },
-					 { "width": "5%", "targets": 7 },
-					 { "width": "5%", "targets": 8 },
+					 { "width": "5%", "targets": 7 }
 	            ],
 	            responsive: true,
 	            "oLanguage": {
@@ -11368,14 +11366,14 @@
 			   
 
 			   var debit_id =   $('#debit_id').val();
-
+			   var debit_note_item_id =   $('#debit_note_item_id').val();
 			
 			
 			   $.ajax({
 				url : "<?php echo base_url();?>saveDebitnoteitem",
 				type: "POST",
 				 //data : formData,
-				 data :{part_number:part_number,invoice_no:invoice_no,invoice_date:invoice_date,invoice_qty:invoice_qty,ok_qty:ok_qty,less_quantity:less_quantity,rejected_quantity:rejected_quantity,received_quantity:received_quantity,rate:rate,gst_rate:gst_rate,sgst_value:sgst_value,cgst_value:cgst_value,igst_rate:igst_rate,item_remark:item_remark,pre_debit_note_date:pre_debit_note_date,pre_select_with_po_without_po:pre_select_with_po_without_po,pre_vendor_supplier_name:pre_vendor_supplier_name,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_supplier_name:pre_supplier_name,pre_supplier_po_number:pre_supplier_po_number,pre_po_date:pre_po_date,pre_remark:pre_remark,sgst_value:sgst_value,cgst_value:cgst_value,SGST_rate_ok:SGST_rate_ok,CGST_rate_ok:CGST_rate_ok,igst_rate:igst_rate,igst_rate_ok:igst_rate_ok,debit_amount:debit_amount,total_ok_qty_amount:total_ok_qty_amount,debit_id:debit_id,total_amount_of_ok_qty_data:total_amount_of_ok_qty_data,p_and_f_charges:p_and_f_charges},
+				 data :{part_number:part_number,invoice_no:invoice_no,invoice_date:invoice_date,invoice_qty:invoice_qty,ok_qty:ok_qty,less_quantity:less_quantity,rejected_quantity:rejected_quantity,received_quantity:received_quantity,rate:rate,gst_rate:gst_rate,sgst_value:sgst_value,cgst_value:cgst_value,igst_rate:igst_rate,item_remark:item_remark,pre_debit_note_date:pre_debit_note_date,pre_select_with_po_without_po:pre_select_with_po_without_po,pre_vendor_supplier_name:pre_vendor_supplier_name,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_supplier_name:pre_supplier_name,pre_supplier_po_number:pre_supplier_po_number,pre_po_date:pre_po_date,pre_remark:pre_remark,sgst_value:sgst_value,cgst_value:cgst_value,SGST_rate_ok:SGST_rate_ok,CGST_rate_ok:CGST_rate_ok,igst_rate:igst_rate,igst_rate_ok:igst_rate_ok,debit_amount:debit_amount,total_ok_qty_amount:total_ok_qty_amount,debit_id:debit_id,total_amount_of_ok_qty_data:total_amount_of_ok_qty_data,p_and_f_charges:p_and_f_charges,debit_note_item_id:debit_note_item_id},
 				 method: "POST",
                 // data :{package_id:package_id},
                 cache:false,
@@ -11400,7 +11398,7 @@
 							},function(){ 
 
 								if(debit_id){
-									window.location.href = "<?php echo base_url().'editdebitnoteform'?>"+debit_id;
+									window.location.href = "<?php echo base_url().'editdebitnoteform/'?>"+debit_id;
 								}else{
 									window.location.href = "<?php echo base_url().'addnewdebitnote'?>";
 								}
@@ -11599,6 +11597,94 @@
 			});
 			return false;
 		 });
+
+		 $(document).on('click','.editDebitnoteitem',function(e){  
+			e.preventDefault();
+			var elemF = $(this);
+			var item_id = elemF.attr('data-id');
+			$.ajax({
+				url : "<?php echo base_url();?>geteditDebitnoteitemedit",
+				type: "POST",
+				data : 'id='+item_id,
+				success: function(data, textStatus, jqXHR)
+				{
+					    var fetchResponse = $.parseJSON(data);
+						$('#addNewModal').modal('show'); 
+
+						$('#debit_note_item_id').val(fetchResponse.debit_note_item_id); 
+						$('#part_number').val(fetchResponse.raw_id);  
+						$('#description').val(fetchResponse.description); 
+						$('#invoice_no').val(fetchResponse.invoice_no);
+                        $('#invoice_date').val(fetchResponse.invoice_date);
+						$('#invoice_qty').val(fetchResponse.invoice_qty);
+						$('#ok_qty').val(fetchResponse.ok_qty);
+						$('#less_quantity').val(fetchResponse.less_quantity);
+						$('#rejected_quantity').val(fetchResponse.rejected_quantity);
+						$('#received_quantity').val(fetchResponse.received_quantity);
+						$('#p_and_f_charges').val(fetchResponse.p_and_f_charges);
+						$('#rate').val(fetchResponse.rate);
+						$('#gst_rate').val(fetchResponse.gst_rate);
+						$('#debit_amount').val(fetchResponse.debit_amount);
+						$('#item_remark').val(fetchResponse.remark);
+
+
+						if(fetchResponse.gst_rate=='CGST_SGST'){
+							$(".cgst_sgst_div").attr("style", "display:block");
+							$(".cgst_sgst_ok_9_div").attr("style", "display:block");
+							
+							$('#SGST_rate_9').val(fetchResponse.SGST_value);
+							$('#CGST_rate_9').val(fetchResponse.CGST_value);
+
+							$('#SGST_rate_9_ok').val(fetchResponse.SGST_value_ok_val);
+							$('#CGST_rate_9_ok').val(fetchResponse.CGST_value_ok_val);
+						}
+
+						if(fetchResponse.gst_rate=='CGST_SGST_6'){
+							
+							$(".cgst_sgst_div_6").attr("style", "display:block");
+							$(".cgst_sgst_ok_6_div").attr("style", "display:block");
+							
+							$('#SGST_rate_6').val(fetchResponse.SGST_value);
+							$('#CGST_rate_6').val(fetchResponse.CGST_value);
+
+							$('#SGST_rate_6_ok').val(fetchResponse.SGST_value_ok_val);
+							$('#SGST_rate_6_ok').val(fetchResponse.CGST_value_ok_val);
+						}
+
+
+						if(fetchResponse.gst_rate=='IGST'){
+							
+							$(".igst_div").attr("style", "display:block");
+							$(".igst_ok_qty_div").attr("style", "display:block");
+							
+							$('#igst_rate_18').val(fetchResponse.IGST_value);
+							$('#igst_rate_ok_18').val(fetchResponse.IGST_value_ok_val);
+
+						}
+
+
+						if(fetchResponse.gst_rate=='IGST_12'){
+							
+							$(".igst_div_12").attr("style", "display:block");
+							$(".igst_ok_div_12_div").attr("style", "display:block");
+							
+							$('#igst_rate_12').val(fetchResponse.IGST_value);
+							$('#igst_rate_ok_12').val(fetchResponse.IGST_value_ok_val);
+
+						}
+					
+					
+						
+
+
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			});
+			return false;
+		});
 
     </script>
 <?php } ?>

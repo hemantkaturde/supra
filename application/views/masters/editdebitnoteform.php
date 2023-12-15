@@ -199,6 +199,7 @@
                                                         <th>Rate </th>
                                                         <th>Select GST Rate</th>
                                                         <th>Value</th>
+                                                        <th>IGST Value</th>
                                                         <th>Debit Amount</th>
                                                         <th>Remark</th>
                                                         <th>Action</th>
@@ -209,6 +210,21 @@
                                                         $count=0;
                                                            foreach ($getdebitnoteitemdetailsedit as $key => $value) :
                                                            $count++;
+
+                                                            if($value['SGST_value']){
+                                                                $SGST_value = $value['SGST_value'];
+                                                            }else{
+                                                                $SGST_value = 0;
+                                                            }
+
+                                                            if($value['CGST_value']){
+                                                              $CGST_value = $value['CGST_value'];
+                                                            }else{
+                                                              $CGST_value = 0;
+                                                            }
+                                                           
+                                                           
+                                                         $total_val_tax =  $SGST_value +$CGST_value;
                                                     ?>
                                                     <tr>
                                                         <td><?php echo $count;?></td>
@@ -223,11 +239,13 @@
                                                         <td><?php echo $value['received_quantity'];?></td>
                                                         <td><?php echo $value['rate'];?></td>
                                                         <td><?php echo $value['gst_rate'];?></td>
-                                                        <td><?php echo $value['SGST_value'] + $value['CGST_value'];?></td>
+                                                        <td><?php echo $total_val_tax;?></td>
+                                                        <td><?php echo $value['IGST_value'];?></td>
                                                         <td><?php echo $value['debit_amount'];?></td>
                                                         <td><?php echo $value['debit_note_remark'];?></td>
                                                         <td>
-                                                        <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['debit_note_id'];?>' class='fa fa-trash-o deleteDebitnoteitem' aria-hidden='true'></i>
+                                                          <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['debit_note_id'];?>' class='fa fa-pencil-square-o editDebitnoteitem'  aria-hidden='true'></i>
+                                                          <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['debit_note_id'];?>' class='fa fa-trash-o deleteDebitnoteitem' aria-hidden='true'></i>
                                                         </td>
                                                     </tr>
                                                     <?php endforeach;?>
@@ -255,6 +273,8 @@
                                                 </button>
                                             </div>
                                             <form role="form" id="saveDebitnoteitem_form" action="<?php echo base_url() ?>savedebitnoteitem" method="post" role="form">
+
+                                            <input type="hidden" class="form-control"  id="debit_note_item_id" name="debit_note_item_id" required readonly>
 
                                                 <div class="modal-body">
                                                     <div class="loader_ajax" style="display:none;">
