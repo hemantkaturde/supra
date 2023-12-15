@@ -48,7 +48,7 @@
                                     <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="address">Address <span class="required">*</span></label>
-                                                <textarea type="text" class="form-control"  id="address"  name="address"><?php echo $data['currency']; ?></textarea>
+                                                <textarea type="text" class="form-control"  id="address"  name="address"><?php echo $data['address']; ?></textarea>
                                                 <p class="error address_error"></p>
                                             </div>
                                     </div>
