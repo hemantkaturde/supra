@@ -5634,7 +5634,17 @@ class Admin extends BaseController
                     'pre_remark'  =>$this->input->post('pre_remark')
                   );
 
-                    $saveBillofmaterialitamdata = $this->admin_model->saveBillofmaterialitamdata('',$data);
+
+                  $bill_of_material_item_id = trim($this->input->post('bill_of_material_item_id'));
+                  if( $bill_of_material_item_id){
+                      $billofmaterialitemid = $bill_of_material_item_id;
+                  }else{
+                      $billofmaterialitemid = '';
+                  }
+                  
+
+
+                    $saveBillofmaterialitamdata = $this->admin_model->saveBillofmaterialitamdata($billofmaterialitemid,$data);
 
                     if($saveBillofmaterialitamdata){
 
@@ -9162,6 +9172,20 @@ class Admin extends BaseController
             $getIncomingDetailitemedit = $this->admin_model->getIncomingDetailitemedit(trim($this->input->post('id')));
             if($getIncomingDetailitemedit){
                 $content = $getIncomingDetailitemedit[0];
+                echo json_encode($content);
+            }else{
+                echo 'failure';
+            }
+        }
+    }
+
+
+    public function geteditBillofmaterialitem(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $geteditBillofmaterialitem = $this->admin_model->geteditBillofmaterialitem(trim($this->input->post('id')));
+            if($geteditBillofmaterialitem){
+                $content = $geteditBillofmaterialitem[0];
                 echo json_encode($content);
             }else{
                 echo 'failure';

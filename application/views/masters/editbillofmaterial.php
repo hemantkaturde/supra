@@ -228,6 +228,8 @@
 
 
                                                         <td>
+                                                        <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['biil_of_material_id'];?>' class='fa fa-pencil-square-o editBillofmaterialitem'  aria-hidden='true'></i>
+
                                                         <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['biil_of_material_id'];?>' class='fa fa-trash-o deleteBillofmaterialitem' aria-hidden='true'></i>
                                                         </td>
                                                     </tr>
@@ -262,6 +264,7 @@
                                                 </button>
                                             </div>
                                             <form role="form" id="saveBillofmaterialform" action="<?php echo base_url() ?>saveBillofmaterialform" method="post" role="form">
+                                            <input type="hidden" class="form-control"  id="bill_of_material_item_id" name="bill_of_material_item_id" required readonly>
 
                                                 <div class="modal-body">
                                                         <div class="loader_ajax" style="display:none;">
