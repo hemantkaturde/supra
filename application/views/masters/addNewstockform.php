@@ -488,14 +488,14 @@
 
                                                             <div class="form-group">
                                                                 <label for="invoice_number">Invoice Number</label>
-                                                                <input type="text" class="form-control" id="invoice_number" name="invoice_number">
+                                                                <input type="text" class="form-control" id="invoice_number" name="invoice_number" readonly>
                                                                 <p class="error invoice_number_error"></p>
                                                             </div>
                                                         
                                                             <div class="form-group">
                                                             <?php $Invoice_date= date('Y-m-d'); ?>
                                                                 <label for="invoice_date">Invoice Date</label>
-                                                                <input type="text" class="form-control datepicker" id="invoice_date" value="<?=$Invoice_date?>" name="invoice_date">
+                                                                <input type="text" class="form-control datepicker" id="invoice_date" value="<?=$Invoice_date?>" name="invoice_date" readonly>
                                                                 <p class="error invoice_date_error"></p>
                                                             </div>
                                                         </div>
