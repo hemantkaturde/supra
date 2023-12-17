@@ -28,10 +28,17 @@
                                         <label for="rejection_number">Rejection Id<span class="required">*</span></label>
                                         <?php
                                             if($getPreviousrejectionformnumber['rejection_number']){
-                                                $arr = str_split($getPreviousrejectionformnumber['rejection_number']);
-                                                $i = end($arr);
-                                                $inrno= "SQRC2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                                // $arr = str_split($getPreviousrejectionformnumber['rejection_number']);
+                                                // $i = end($arr);
+                                                // $inrno= "SQRC2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                                // $rejection_number = $inrno;
+
+                                                $string = $getPreviousrejectionformnumber['rejection_number'];
+                                                $n = 4; // Number of characters to extract from the end
+                                                $lastNCharacters = substr($string, -$n);
+                                                $inrno= "SQRC2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
                                                 $rejection_number = $inrno;
+
                                             }else{
                                                 $rejection_number = 'SQRC23240001';
                                             }

@@ -25,10 +25,18 @@
                         <div class="col-md-4">
                            <?php
                               if($get_prevoius_QR_REcord[0]['quality_records_number']){
-                                  $arr = str_split($get_prevoius_QR_REcord[0]['quality_records_number']);
-                                  $i = end($arr);
-                                  $inrno= "SQQR2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
-                                  $quality_records_number = $inrno;
+                                //   $arr = str_split($get_prevoius_QR_REcord[0]['quality_records_number']);
+                                //   $i = end($arr);
+                                //   $inrno= "SQQR2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                //   $quality_records_number = $inrno;
+
+                                    $string = $getPreviousincomingdetails[0]['incoming_details_id'];
+                                    $n = 4; // Number of characters to extract from the end
+                                    $lastNCharacters = substr($string, -$n);
+                                    $inrno= "SQQR2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                    $quality_records_number = $inrno;
+
+
                               }else{
                                   $quality_records_number = 'SQQR23240001';
                               }

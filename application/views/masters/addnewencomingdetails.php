@@ -24,10 +24,18 @@
                             <div class="box-body">
                                     <?php
                                         if($getPreviousincomingdetails[0]['incoming_details_id']){
-                                            $arr = str_split($getPreviousincomingdetails[0]['incoming_details_id']);
-                                            $i = end($arr);
-                                            $inrno= "SQID2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                            // $arr = str_split($getPreviousincomingdetails[0]['incoming_details_id']);
+                                            // $i = end($arr);
+                                            // $inrno= "SQID2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                            // $incoming_details_id = $inrno;
+
+                                            
+                                            $string = $getPreviousincomingdetails[0]['incoming_details_id'];
+                                            $n = 4; // Number of characters to extract from the end
+                                            $lastNCharacters = substr($string, -$n);
+                                            $inrno= "SQID2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
                                             $incoming_details_id = $inrno;
+
                                         }else{
                                             $incoming_details_id = 'SQID23240001';
                                         }

@@ -34,10 +34,18 @@
                                            if($getPrevioussupplierPONumber_number > $getPreviousPONumber_number){
 
                                                     if($getPrevioussupplierPONumber_number){
-                                                        $arr = str_split($getPrevioussupplierPONumber_number);
-                                                        $i = end($arr);
-                                                        $inrno= "SQPO2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                                        // $arr = str_split($getPrevioussupplierPONumber_number);
+                                                        // $i = end($arr);
+                                                        // $inrno= "SQPO2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                                        // $po_number = $inrno;
+
+                                                        
+                                                        $string = $getPrevioussupplierPONumber_number;
+                                                        $n = 4; // Number of characters to extract from the end
+                                                        $lastNCharacters = substr($string, -$n);
+                                                        $inrno= "SQPO2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
                                                         $po_number = $inrno;
+
                                                     }else{
                                                         $po_number = 'SQPO23240001';
                                                     }     
@@ -45,13 +53,19 @@
                                                
                                            }else{
 
-                                                    
-
                                                     if($getPreviousPONumber_number){
-                                                        $arr = str_split($getPreviousPONumber_number);
-                                                        $i = end($arr);
-                                                        $inrno= "SQPO2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                                        // $arr = str_split($getPreviousPONumber_number);
+                                                        // $i = end($arr);
+                                                        // $inrno= "SQPO2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                                        // $po_number = $inrno;
+
+                                                        $string = $getPreviousPONumber_number;
+                                                        $n = 4; // Number of characters to extract from the end
+                                                        $lastNCharacters = substr($string, -$n);
+                                                        $inrno= "SQPO2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
                                                         $po_number = $inrno;
+        
+
                                                     }else{
                                                         $po_number = 'SQPO23240001';
                                                     }   
@@ -62,10 +76,18 @@
                                         }else{
 
                                             if($getPreviousPONumber['po_number']){
-                                                $arr = str_split($getPreviousPONumber['po_number']);
-                                                $i = end($arr);
-                                                $inrno= "SQPO2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                                // $arr = str_split($getPreviousPONumber['po_number']);
+                                                // $i = end($arr);
+                                                // $inrno= "SQPO2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                                // $po_number = $inrno;
+
+                                                $string = $getPreviousPONumber['po_number'];
+                                                $n = 4; // Number of characters to extract from the end
+                                                $lastNCharacters = substr($string, -$n);
+                                                $inrno= "SQPO2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
                                                 $po_number = $inrno;
+
+
                                             }else{
                                                 $po_number = 'SQPO23240001';
                                             }        

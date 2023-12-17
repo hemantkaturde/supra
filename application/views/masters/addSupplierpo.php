@@ -41,7 +41,7 @@
                                                     $string = $getPreviousvendorPONumber_number;
                                                     $n = 4; // Number of characters to extract from the end
                                                     $lastNCharacters = substr($string, -$n);
-                                                    $inrno= "SQBO2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                    $inrno= "SQPO2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
                                                     $po_number = $inrno;
 
                                                 }else{
@@ -60,7 +60,7 @@
                                                     $string = $getPreviousPONumber_number;
                                                     $n = 4; // Number of characters to extract from the end
                                                     $lastNCharacters = substr($string, -$n);
-                                                    $inrno= "SQBO2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                    $inrno= "SQPO2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
                                                     $po_number = $inrno;
     
 
@@ -80,7 +80,7 @@
                                                 $string = $getPreviousPONumber['po_number'];
                                                 $n = 4; // Number of characters to extract from the end
                                                 $lastNCharacters = substr($string, -$n);
-                                                $inrno= "SQBO2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                $inrno= "SQPO2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
                                                 $po_number = $inrno;
 
 

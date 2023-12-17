@@ -27,10 +27,17 @@
 
                                     <?php
                                         if($getpreviouspackinginstarction[0]['packing_instrauction_id']){
-                                            $arr = str_split($getpreviouspackinginstarction[0]['packing_instrauction_id']);
-                                            $i = end($arr);
-                                            $inrno= "PI2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                            // $arr = str_split($getpreviouspackinginstarction[0]['packing_instrauction_id']);
+                                            // $i = end($arr);
+                                            // $inrno= "PI2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                            // $packing_instrauction_id = $inrno;
+
+                                            $string =$getpreviouspackinginstarction[0]['packing_instrauction_id'];
+                                            $n = 4; // Number of characters to extract from the end
+                                            $lastNCharacters = substr($string, -$n);
+                                            $inrno= "PI2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
                                             $packing_instrauction_id = $inrno;
+
                                         }else{
                                             $packing_instrauction_id = 'PI23240001';
                                         }

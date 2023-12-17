@@ -32,10 +32,17 @@
                                             if($getPreviousVendorPoconfirmationNumber_number > $getPreviousSupplierPoconfirmationNumber_number){
 
                                                 if($getPreviousVendorPoconfirmationNumber_number){
-                                                    $arr = str_split($getPreviousVendorPoconfirmationNumber_number);
-                                                    $i = end($arr);
-                                                    $inrno= "SQPO2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                                    // $arr = str_split($getPreviousVendorPoconfirmationNumber_number);
+                                                    // $i = end($arr);
+                                                    // $inrno= "SQPO2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                                    // $po_number = $inrno;
+
+                                                    $string = $getPreviousVendorPoconfirmationNumber_number;
+                                                    $n = 4; // Number of characters to extract from the end
+                                                    $lastNCharacters = substr($string, -$n);
+                                                    $inrno= "SQPO2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
                                                     $po_number = $inrno;
+
                                                 }else{
                                                     $po_number = 'SQPO23240001';
                                                 }   
@@ -43,9 +50,15 @@
                                             }else{
 
                                                 if($getPreviousSupplierPoconfirmationNumber_number){
-                                                    $arr = str_split($getPreviousSupplierPoconfirmationNumber_number);
-                                                    $i = end($arr);
-                                                    $inrno= "SQPO2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                                    // $arr = str_split($getPreviousSupplierPoconfirmationNumber_number);
+                                                    // $i = end($arr);
+                                                    // $inrno= "SQPO2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                                    // $po_number = $inrno;
+
+                                                    $string = $getPreviousSupplierPoconfirmationNumber_number;
+                                                    $n = 4; // Number of characters to extract from the end
+                                                    $lastNCharacters = substr($string, -$n);
+                                                    $inrno= "SQPO2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
                                                     $po_number = $inrno;
                                                 }else{
                                                     $po_number = 'SQPO23240001';
@@ -55,10 +68,17 @@
                                         }else{
 
                                             if($getPreviousSupplierPoconfirmationNumber['po_number']){
-                                                $arr = str_split($getPreviousSupplierPoconfirmationNumber['po_number']);
-                                                $i = end($arr);
-                                                $inrno= "SQPC2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                                // $arr = str_split($getPreviousSupplierPoconfirmationNumber['po_number']);
+                                                // $i = end($arr);
+                                                // $inrno= "SQPC2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                                // $po_number = $inrno;
+
+                                                $string = $getPreviousSupplierPoconfirmationNumber['po_number'];
+                                                $n = 4; // Number of characters to extract from the end
+                                                $lastNCharacters = substr($string, -$n);
+                                                $inrno= "SQPO2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
                                                 $po_number = $inrno;
+
                                             }else{
                                                 $po_number = 'SQPC23240001';
                                             }
