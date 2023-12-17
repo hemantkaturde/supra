@@ -15863,6 +15863,101 @@
 					swal("Cancelled", "Rejection Form Item Details deletion cancelled ", "error");
 					}
 				});
+	    });
+
+
+		$(document).on('click','.editrejectionformitem',function(e){  
+			e.preventDefault();
+			var elemF = $(this);
+			var item_id = elemF.attr('data-id');		
+			$.ajax({
+				url : "<?php echo base_url();?>geteditrejectionformitem",
+				type: "POST",
+				data : 'id='+item_id,
+				success: function(data, textStatus, jqXHR)
+				{
+					    var fetchResponse = $.parseJSON(data);
+						$('#addNewModal').modal('show'); 
+						$('#rejection_form_id_popup').val(fetchResponse.id); 
+						$('#rejected_reason').val(fetchResponse.rejected_reason);  
+						$('#qty_in_pcs').val(fetchResponse.qty_In_pcs);  
+						$('#qty_in_kgs').val(fetchResponse.qty_in_kgs);  
+						$('#remark').val(fetchResponse.remark); 
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			});
+			return false;
+		});
+
+		$(document).on('change', '#qty_in_pcs', function(){	
+				
+				$("#qty_in_kgs").val();
+			 
+				if($("#qty_in_pcs").val()){
+					var qty_in_pcs = $("#qty_in_pcs").val();
+				}else{
+					var qty_in_pcs = 0;
+				}
+
+				if($("#net_weight_fg").val()){
+					var net_weight = $("#net_weight_fg").val();
+				}else{
+					var net_weight = 0;
+				}
+		
+				var value = parseFloat(qty_in_pcs) * parseFloat(net_weight);
+				$("#qty_in_kgs").val(value);
+		});
+
+
+		$(document).on('click','#editrejectedformitemdata',function(e){
+			e.preventDefault();
+			$(".loader_ajax").show();
+			var rejection_form_id = $("#rejection_form_id").val();
+			var vendor_po_item_id = $("#vendor_po_item_id").val();
+			var vendor_po_id = $("#vendor_po_id").val();
+
+			var formData = new FormData($("#editrejectedformitemdataform")[0]);
+			$.ajax({
+				url : "<?php echo base_url();?>editrejectedformitemdata",
+				type: "POST",
+				data : formData,
+				cache: false,
+		        contentType: false,
+		        processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+						$(".loader_ajax").hide();
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						swal({
+							title: "Success",
+							text: "Items Details Successfully Added!",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+								window.location.href = "<?php echo base_url().'viewrejectionformitemdetails?';?>rejection_form_id="+rejection_form_id+"&vendor_po_item_id="+vendor_po_item_id+"&vendor_po_id="+vendor_po_id;
+						});		
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			});
+			return false;
 	     });
 
 

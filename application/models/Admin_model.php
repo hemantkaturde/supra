@@ -6556,6 +6556,25 @@ class Admin_model extends CI_Model
 
     }
 
+    public function saveenquiryformitemedit($id,$data){
+
+        if($id != '') {
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_REJECTION_FORM_REJECTED_ITEM, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_REJECTION_FORM_REJECTED_ITEM, $data)) {
+                return $this->db->insert_id();
+            } else {
+                return FALSE;
+            }
+        }
+
+    }
+
     public function getallenquiryformitemadd(){
         $this->db->select('*,'.TBL_SUPPLIER.'.supplier_name as suplier_id_name_1,a.supplier_name as suplier_id_name_2,b.supplier_name as suplier_id_name_3,c.supplier_name as suplier_id_name_4,d.supplier_name as suplier_id_name_5,e.vendor_name as vendor_name_1,f.vendor_name as vendor_name_2,g.vendor_name as vendor_name_3,h.vendor_name as vendor_name_4,i.vendor_name as vendor_name_5');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_ENAUIRY_FORM_ITEM.'.part_number');
@@ -6959,6 +6978,27 @@ class Admin_model extends CI_Model
         }
         return $data;
     }
+
+    public function getstockrejectionformitemdataitemdetailsforedit($vendor_po_id){
+
+        $this->db->select(TBL_FINISHED_GOODS.'.net_weight as net_weight_fg');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
+
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_VENDOR_PO_MASTER_ITEM.".rejection_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER_ITEM.".remark LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id', $vendor_po_id);
+        $this->db->order_by(TBL_VENDOR_PO_MASTER_ITEM.'.id','DESC');
+        $query = $this->db->get(TBL_VENDOR_PO_MASTER_ITEM);
+        $fetch_result = $query->result_array();
+
+        return $fetch_result;
+
+    }
+
+
     
     public function  saverejectedformitemdata($id,$data){
         if($id != '') {
@@ -7022,7 +7062,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['qty_In_kgs'] =$value['qty_In_kgs'];
                 $data[$counter]['remark'] =$value['remark'];
                 $data[$counter]['action'] = '';
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editrejetionform/".$value['rejectionformid']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['rejection_item_id']."' class='fa fa-pencil-square-o editrejectionformitem' aria-hidden='true'></i>  &nbsp ";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['rejection_item_id']."' class='fa fa-trash-o deleterejectionformitem' aria-hidden='true'></i>"; 
                 $counter++; 
             }
@@ -7490,6 +7530,17 @@ class Admin_model extends CI_Model
     return $fetch_result;
   }
 
+
+  public function geteditrejectionformitem( $id){
+
+   $this->db->select('id,rejected_reason,qty_In_pcs,qty_in_kgs,remark');
+   $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.id', $id);
+   $this->db->order_by(TBL_REJECTION_FORM_REJECTED_ITEM.'.id','DESC');
+   $query = $this->db->get(TBL_REJECTION_FORM_REJECTED_ITEM);
+   $fetch_result = $query->result_array();
+   return $fetch_result;
+
+  }
   
 
   

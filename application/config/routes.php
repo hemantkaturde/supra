@@ -364,10 +364,10 @@ $route['geteditDebitnoteitemedit'] = "admin/geteditDebitnoteitemedit";
 $route['geteditjobworkitem'] = "admin/geteditjobworkitem";
 $route['geteditReworkRejectionitem'] = "admin/geteditReworkRejectionitem";
 $route['geteditqualityrecordsitem'] = "admin/geteditqualityrecordsitem";
+$route['geteditrejectionformitem'] = "admin/geteditrejectionformitem";
 
 
-
-
+$route['editrejectedformitemdata'] = "admin/editrejectedformitemdata";
 
 //$route['fetchincomingdeatilsitemlistedit/(:any)'] = "admin/fetchincomingdeatilsitemlistedit/$1";
 

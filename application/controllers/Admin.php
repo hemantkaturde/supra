@@ -8967,7 +8967,8 @@ class Admin extends BaseController
         $data['rejection_form_id']= $_GET['rejection_form_id'];
         $data['vendor_po_item_id']= $_GET['vendor_po_item_id'];
         $data['vendor_po_id']=  $_GET['vendor_po_id'];
-
+        $getstockrejectionformitemdataitemdetailsforedit = $this->admin_model->getstockrejectionformitemdataitemdetailsforedit(trim($_GET['vendor_po_id']));
+        $data['net_weight_fg'] =  $getstockrejectionformitemdataitemdetailsforedit[0]['net_weight_fg'];
         $process = 'View Rejection Form Data';
         $processFunction = 'Admin/editrejetionform';
         $this->logrecord($process,$processFunction);
@@ -9337,12 +9338,55 @@ class Admin extends BaseController
     }
     
     
+    public function geteditrejectionformitem(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $geteditrejectionformitem = $this->admin_model->geteditrejectionformitem(trim($this->input->post('id')));
+            if($geteditrejectionformitem){
+                $content = $geteditrejectionformitem[0];
+                echo json_encode($content);
+            }else{
+                echo 'failure';
+            }
+        }
+
+    }
+
+    public function editrejectedformitemdata(){
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $saveenquiryform_response = array();
+            $this->form_validation->set_rules('rejected_reason','Rejected Reason','trim|required');    
+            $this->form_validation->set_rules('qty_in_pcs','Qty In PCS','trim|required');     
+            $this->form_validation->set_rules('qty_in_kgs','Qty In KGS','trim|required');    
+            $this->form_validation->set_rules('remark','Remark','trim');    
+
+           if($this->form_validation->run() == FALSE)
+           {
+               $saveenquiryform_response['status'] = 'failure';
+               $saveenquiryform_response['error'] =  array('rejected_reason'=>strip_tags(form_error('rejected_reason')),'qty_in_pcs'=>strip_tags(form_error('qty_in_pcs')),'qty_in_kgs'=>strip_tags(form_error('qty_in_kgs')));
+          
+           }else{
+                $data = array(
+                    'rejected_reason'  =>  trim($this->input->post('rejected_reason')),
+                    'qty_in_pcs'  =>  trim($this->input->post('qty_in_pcs')),
+                    'qty_in_kgs'  =>  trim($this->input->post('qty_in_kgs')),
+                    'remark'  =>  trim($this->input->post('remark'))
+                );
+
+                $saveenquiryformitem = $this->admin_model->saveenquiryformitemedit(trim($this->input->post('rejection_form_id_popup')),$data);
+                if($saveenquiryformitem){
+                    $saveenquiryform_response['status'] = 'success';
+                    $saveenquiryform_response['error'] =  array('rejected_reason'=>strip_tags(form_error('rejected_reason')),'qty_in_pcs'=>strip_tags(form_error('qty_in_pcs')),'qty_in_kgs'=>strip_tags(form_error('qty_in_kgs')));
+                }
+           }
+           echo json_encode($saveenquiryform_response);
+        }
 
 
+    }   
     
-    
-
-
 
     public function downlaodsupplierpo(){
 
