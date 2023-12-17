@@ -30,23 +30,23 @@
 
 
 
-                                            $getPreviousvendorPONumber_number = substr($getPreviousvendorPONumber['po_number'], -1);
+                                            // $getPreviousvendorPONumber_number = substr($getPreviousvendorPONumber['po_number'], -1);
 
                                             $getPreviousPONumber_number = substr($getPreviousPONumber['po_number'], -1);
 
-                                            if($getPreviousvendorPONumber_number > $getPreviousPONumber_number){
+                                            // if($getPreviousvendorPONumber_number > $getPreviousPONumber_number){
 
-                                                if($getPreviousvendorPONumber_number){
-                                                    $arr = str_split($getPreviousvendorPONumber_number);
-                                                    $i = end($arr);
-                                                    $inrno= "SQPO2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
-                                                    $po_number = $inrno;
-                                                }else{
-                                                    $po_number = 'SQPO23240001';
-                                                }     
+                                            //     if($getPreviousvendorPONumber_number){
+                                            //         $arr = str_split($getPreviousvendorPONumber_number);
+                                            //         $i = end($arr);
+                                            //         $inrno= "SQPO2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                            //         $po_number = $inrno;
+                                            //     }else{
+                                            //         $po_number = 'SQPO23240001';
+                                            //     }     
 
 
-                                            }else{
+                                            // }else{
 
                                                 if($getPreviousPONumber_number){
                                                     $arr = str_split($getPreviousPONumber_number);
@@ -56,7 +56,7 @@
                                                 }else{
                                                     $po_number = 'SQPO23240001';
                                                 }   
-                                            }
+                                            // }
 
                                         }else{
 
