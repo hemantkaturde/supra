@@ -362,8 +362,9 @@ $route['geteditBillofmaterialitem'] = "admin/geteditBillofmaterialitem";
 $route['geteditVendorbillofmaterialpoitem'] = "admin/geteditVendorbillofmaterialpoitem";
 $route['geteditDebitnoteitemedit'] = "admin/geteditDebitnoteitemedit";
 $route['geteditjobworkitem'] = "admin/geteditjobworkitem";
-
 $route['geteditReworkRejectionitem'] = "admin/geteditReworkRejectionitem";
+$route['geteditqualityrecordsitem'] = "admin/geteditqualityrecordsitem";
+
 
 
 

@@ -30,7 +30,7 @@
                                 //   $inrno= "SQQR2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
                                 //   $quality_records_number = $inrno;
 
-                                    $string = $getPreviousincomingdetails[0]['incoming_details_id'];
+                                    $string = $get_prevoius_QR_REcord[0]['quality_records_number'];
                                     $n = 4; // Number of characters to extract from the end
                                     $lastNCharacters = substr($string, -$n);
                                     $inrno= "SQQR2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
@@ -192,7 +192,8 @@
                                                         <td><?php echo $value['inspected_by'];?></td>
                                                         <td><?php echo $value['remark'];?></td>
                                                         <td>
-                                                        <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['qtyid'];?>' class='fa fa-trash-o deletequalityrecordsitem' aria-hidden='true'></i>
+                                                           <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['qtyid'];?>' class='fa fa-pencil-square-o editqualityrecordsitem'  aria-hidden='true'></i>
+                                                           <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['qtyid'];?>' class='fa fa-trash-o deletequalityrecordsitem' aria-hidden='true'></i>
                                                         </td>
                                                     </tr>
                                                     <?php endforeach;?>
@@ -226,6 +227,7 @@
                                                 </button>
                                             </div>
                                             <form role="form" id="savequlityrecord_form" action="#" method="post" role="form">
+                                            <input type="hidden" class="form-control"  id="quality_record_item_id" name="quality_record_item_id" required readonly>
 
                                                 <div class="modal-body">
                                                     <div class="loader_ajax" style="display:none;">

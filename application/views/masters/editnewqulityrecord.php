@@ -181,7 +181,8 @@
                                                         <td><?php echo $value['inspected_by'];?></td>
                                                         <td><?php echo $value['remark'];?></td>
                                                         <td>
-                                                        <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['qtyid'];?>' class='fa fa-trash-o deletequalityrecordsitem' aria-hidden='true'></i>
+                                                         <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['qtyid'];?>' class='fa fa-pencil-square-o editqualityrecordsitem'  aria-hidden='true'></i>
+                                                         <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['qtyid'];?>' class='fa fa-trash-o deletequalityrecordsitem' aria-hidden='true'></i>
                                                         </td>
                                                     </tr>
                                                     <?php endforeach;?>
@@ -215,6 +216,7 @@
                                                 </button>
                                             </div>
                                             <form role="form" id="savequlityrecord_form" action="#" method="post" role="form">
+                                            <input type="hidden" class="form-control"  id="quality_record_item_id" name="quality_record_item_id" required readonly>
 
                                                 <div class="modal-body">
                                                     <div class="loader_ajax" style="display:none;">

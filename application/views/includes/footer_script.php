@@ -9880,10 +9880,6 @@
 						$('#type_of_raw_material').val(fetchResponse.type_of_raw_material); 
 						$('#rejected_work_reason').val(fetchResponse.rejection_rework_reason); 
 						$('#rejected_work_reason').val(fetchResponse.rejection_rework_reason); 
-
-						
-						
-					
 				},
 				error: function (jqXHR, textStatus, errorThrown)
 			    {
@@ -13066,6 +13062,39 @@
 			return false;
 		 });
 
+		 $(document).ready(function() {
+			// e.preventDefault();
+			//$(".loader_ajax").show();
+			var vendor_po_number = $('#vendor_po_number').val();
+
+			$("#part_number").html('');
+		
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getVendoritemonly",
+				type: "POST",
+				data : {'vendor_po_number' : vendor_po_number},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#part_number').html('<option value="">Select Part Number</option>');
+					}
+					else
+					{
+						$('#part_number').html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#part_number').html();
+				}
+			});
+			return false;
+
+		 });
+
 		 $(document).on('change','#vendor_name',function(e){  
 			e.preventDefault();
 			//$(".loader_ajax").show();
@@ -13328,11 +13357,14 @@
 			   var pre_buyer_po_number =   $('#buyer_po_number').val();
 			   var pre_remark =   $('#remark').val();
 
+			   var quality_record_item_id =   $('#quality_record_item_id').val();
+			   var quality_record_id =   $('#quality_record_id').val();
+
 			   $.ajax({
 				url : "<?php echo base_url();?>savequlityrecorditem",
 				type: "POST",
 				 //data : formData,
-				 data :{part_number:part_number,inspection_report_no:inspection_report_no,inspection_report_date:inspection_report_date,lot_qty:lot_qty,inspected_by:inspected_by,item_remark:item_remark,pre_QR_details_date:pre_QR_details_date,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_vedor_po_date:pre_vedor_po_date,pre_buyer_name:pre_buyer_name,pre_buyer_po_number:pre_buyer_po_number,pre_remark:pre_remark},
+				 data :{part_number:part_number,inspection_report_no:inspection_report_no,inspection_report_date:inspection_report_date,lot_qty:lot_qty,inspected_by:inspected_by,item_remark:item_remark,pre_QR_details_date:pre_QR_details_date,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_vedor_po_date:pre_vedor_po_date,pre_buyer_name:pre_buyer_name,pre_buyer_po_number:pre_buyer_po_number,pre_remark:pre_remark,quality_record_item_id:quality_record_item_id,quality_record_id:quality_record_id},
 				 method: "POST",
                 // data :{package_id:package_id},
                 cache:false,
@@ -13356,7 +13388,14 @@
 							button: "Ok",
 							},function(){ 
 
-							window.location.href = "<?php echo base_url().'addNewqualityrecord'?>";
+								if(quality_record_id){
+
+									window.location.href = "<?php echo base_url().'editqulityrecordform/'?>"+quality_record_id;
+								}else{
+									window.location.href = "<?php echo base_url().'addNewqualityrecord'?>";
+								}
+
+							
 								
 						});		
 				    }
@@ -13499,6 +13538,36 @@
 						}
 					});
 		 });
+
+
+		 $(document).on('click','.editqualityrecordsitem',function(e){  
+			e.preventDefault();
+			var elemF = $(this);
+			var item_id = elemF.attr('data-id');
+			$.ajax({
+				url : "<?php echo base_url();?>geteditqualityrecordsitem",
+				type: "POST",
+				data : 'id='+item_id,
+				success: function(data, textStatus, jqXHR)
+				{
+					    var fetchResponse = $.parseJSON(data);
+						$('#addNewModal').modal('show'); 
+						$('#quality_record_item_id').val(fetchResponse.quality_record_item_id); 
+						$('#part_number').val(fetchResponse.part_number_id);  
+						$('#description').val(fetchResponse.description); 
+						$('#inspection_report_no').val(fetchResponse.inspection_report_no); 
+						$('#inspection_report_date').val(fetchResponse.inspection_report_date); 
+						$('#lot_qty').val(fetchResponse.lot_qty); 
+						$('#inspected_by').val(fetchResponse.inspected_by); 
+						$('#item_remark').val(fetchResponse.remark); 
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			});
+			return false;
+		});
 
 
 

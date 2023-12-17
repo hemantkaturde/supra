@@ -5738,6 +5738,7 @@ class Admin_model extends CI_Model
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_QUALITY_RECORDS_ITEM.'.pre_buyer_name','left');
         $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_QUALITY_RECORDS_ITEM.'.pre_buyer_po_number','left');
         $this->db->where(TBL_QUALITY_RECORDS_ITEM.'.status', 1);
+        $this->db->where(TBL_QUALITY_RECORDS_ITEM.'.quality_records_id IS NULL');
         $query = $this->db->get(TBL_QUALITY_RECORDS_ITEM);
         $fetch_result = $query->result_array();
         return $fetch_result;
@@ -7461,9 +7462,35 @@ class Admin_model extends CI_Model
     $query = $this->db->get(TBL_REWORK_REJECTION_ITEM);
     $fetch_result = $query->result_array();
     return $fetch_result;
-
-
   }
+
+
+  public function geteditqualityrecordsitem($id){
+
+    $this->db->select(
+         TBL_QUALITY_RECORDS_ITEM.'.id as quality_record_item_id,'
+        .TBL_RAWMATERIAL.'.raw_id as part_number_id,'
+        .TBL_RAWMATERIAL.'.part_number,'
+        .TBL_RAWMATERIAL.'.type_of_raw_material as description,'
+        .TBL_RAWMATERIAL.'.type_of_raw_material,'
+        .TBL_RAWMATERIAL.'.sac as sac,'
+        .TBL_RAWMATERIAL.'.HSN_code as HSN_code,'
+        .TBL_RAWMATERIAL.'.sitting_size as sitting_size,'
+        .TBL_QUALITY_RECORDS_ITEM.'.inspection_report_no,'
+        .TBL_QUALITY_RECORDS_ITEM.'.inspection_report_date,'
+        .TBL_QUALITY_RECORDS_ITEM.'.lot_qty,'
+        .TBL_QUALITY_RECORDS_ITEM.'.inspected_by,'
+        .TBL_QUALITY_RECORDS_ITEM.'.remark,'
+    );
+    $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_QUALITY_RECORDS_ITEM.'.part_number');
+    $this->db->where(TBL_QUALITY_RECORDS_ITEM.'.id', $id);
+    $this->db->order_by(TBL_QUALITY_RECORDS_ITEM.'.id','DESC');
+    $query = $this->db->get(TBL_QUALITY_RECORDS_ITEM);
+    $fetch_result = $query->result_array();
+    return $fetch_result;
+  }
+
+  
 
   
 
