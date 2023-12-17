@@ -26,10 +26,36 @@
                                 <div class="col-md-4">
                                     <?php
                                         if($getPreviousSalesOrderNumber['sales_order_number']){
-                                            $arr = str_split($getPreviousSalesOrderNumber['sales_order_number']);
-                                            $i = end($arr);
-                                            $inrno= "SQBO2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
-                                            $sales_order_number = $inrno;
+                                                // $arr = str_split($getPreviousSalesOrderNumber['sales_order_number']);
+                                                // $i = end($arr);
+                                                // $inrno= "SQBO2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                                // $sales_order_number = $inrno;
+
+
+                                                // $currentDate = new DateTime();
+
+                                                // // Check if the current date is on or after April 1st
+                                                // if ($currentDate >= new DateTime(date('Y') . '-04-01')) {
+                                                //     // If it is, the financial year has started in the current calendar year
+                                                //     $startYear = date('Y');
+                                                //     $endYear = $startYear + 1;
+                                                // } else {
+                                                //     // If it is not, the financial year has started in the previous calendar year
+                                                //     $endYear = date('Y');
+                                                //     $startYear = $endYear - 1;
+                                                // }
+
+                                                // // Display the financial year
+                                                // $financialYear = $startYear . '-' . $endYear;
+
+
+
+                                                $string = $getPreviousSalesOrderNumber['sales_order_number'];
+                                                $n = 4; // Number of characters to extract from the end
+                                                $lastNCharacters = substr($string, -$n);
+                                                $inrno= "SQBO2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                $sales_order_number = $inrno;
+
                                         }else{
                                             $sales_order_number = 'SQBO23240001';
                                         }
