@@ -8148,7 +8148,7 @@
 						$('#addNewModal').modal('show'); 
 
 						$('#incoiming_details_item_id').val(fetchResponse.incoiming_details_item_id); 
-						$('#part_number').val(fetchResponse.fin_id);  
+						$('#part_number').val(fetchResponse.part_number);  
 						$('#description').val(fetchResponse.description); 
 						$('#p_o_qty').val(fetchResponse.p_o_qty);
 						$('#net_weight').val(fetchResponse.net_weight);

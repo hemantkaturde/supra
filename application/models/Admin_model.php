@@ -7282,6 +7282,7 @@ class Admin_model extends CI_Model
     .TBL_INCOMING_DETAILS_ITEM.'.boxex_goni_bundle as boxex_goni_bundle,'
     .TBL_INCOMING_DETAILS_ITEM.'.lot_no as lot_no,'
     .TBL_INCOMING_DETAILS_ITEM.'.remarks as remarks,'
+    .TBL_INCOMING_DETAILS_ITEM.'.part_number as part_number,'
 
     // .TBL_FINISHED_GOODS.'.sitting_size,'
     // .TBL_FINISHED_GOODS.'.thickness,'
