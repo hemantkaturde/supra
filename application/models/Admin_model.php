@@ -7496,6 +7496,17 @@ class Admin_model extends CI_Model
         .TBL_RAWMATERIAL.'.HSN_code as HSN_code,'
         .TBL_RAWMATERIAL.'.sitting_size as sitting_size,'
         .TBL_REWORK_REJECTION_ITEM.'.rejection_rework_reason,'
+        .TBL_REWORK_REJECTION_ITEM.'.qty,'
+        .TBL_REWORK_REJECTION_ITEM.'.rate,'
+        .TBL_REWORK_REJECTION_ITEM.'.value,'
+        .TBL_REWORK_REJECTION_ITEM.'.row_material_cost,'
+        .TBL_REWORK_REJECTION_ITEM.'.gst_rate,'
+        .TBL_REWORK_REJECTION_ITEM.'.gst_value,'
+        .TBL_REWORK_REJECTION_ITEM.'.grand_total,'
+
+        .TBL_REWORK_REJECTION_ITEM.'.item_remark,'
+        
+
     );
     $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_REWORK_REJECTION_ITEM.'.part_number');
     $this->db->where(TBL_REWORK_REJECTION_ITEM.'.id', $id);

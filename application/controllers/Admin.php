@@ -6731,7 +6731,14 @@ class Admin extends BaseController
                     );
                 }
 
-                $savereworkrejectionitemdetails= $this->admin_model->savereworkrejectionitemdetails('',$data);
+                $rework_rejection_item_id = trim($this->input->post('rework_rejection_item_id'));
+                if( $rework_rejection_item_id){
+                    $reworkrejectionitemid = $rework_rejection_item_id;
+                }else{
+                    $reworkrejectionitemid = '';
+                }
+
+                $savereworkrejectionitemdetails= $this->admin_model->savereworkrejectionitemdetails($reworkrejectionitemid,$data);
                 if($savereworkrejectionitemdetails){
                     $savereworkrejectiontem_response['status'] = 'success';
                     $savereworkrejectiontem_response['error'] = array('part_number'=>strip_tags(form_error('part_number')),'description'=>strip_tags(form_error('description')),'rejected_work_reason'=>strip_tags(form_error('rejected_work_reason')),'quantity'=>strip_tags(form_error('quantity')),'rate'=>strip_tags(form_error('rate')),'value'=>strip_tags(form_error('value')),'row_material_cost'=>strip_tags(form_error('row_material_cost')),'gst_rate'=>strip_tags(form_error('gst_rate')),'grand_total'=>strip_tags(form_error('grand_total')),'item_remark'=>strip_tags(form_error('item_remark')));

@@ -9793,6 +9793,9 @@
 			   var pre_remark =   $('#remark').val();
 
 			   var reworkrejectionid =   $('#reworkrejectionid').val();
+
+			   var rework_rejection_item_id =   $('#rework_rejection_item_id').val();
+			   
 			   
 
 
@@ -9800,7 +9803,7 @@
 				url : "<?php echo base_url();?>savereworkrejectiontem",
 				type: "POST",
 				 //data : formData,
-				 data :{part_number:part_number,description:description,rejected_work_reason:rejected_work_reason,quantity:quantity,rate:rate,value:value,row_material_cost:row_material_cost,gst_rate:gst_rate,grand_total:grand_total,item_remark:item_remark,pre_challan_date:pre_challan_date,pre_vendor_supplier_name:pre_vendor_supplier_name,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_supplier_name:pre_supplier_name,pre_supplier_po_number:pre_supplier_po_number,pre_dispath_through:pre_dispath_through,pre_total_weight:pre_total_weight,pre_total_bags:pre_total_bags,pre_remark:pre_remark,reworkrejectionid:reworkrejectionid },
+				 data :{part_number:part_number,description:description,rejected_work_reason:rejected_work_reason,quantity:quantity,rate:rate,value:value,row_material_cost:row_material_cost,gst_rate:gst_rate,grand_total:grand_total,item_remark:item_remark,pre_challan_date:pre_challan_date,pre_vendor_supplier_name:pre_vendor_supplier_name,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_supplier_name:pre_supplier_name,pre_supplier_po_number:pre_supplier_po_number,pre_dispath_through:pre_dispath_through,pre_total_weight:pre_total_weight,pre_total_bags:pre_total_bags,pre_remark:pre_remark,reworkrejectionid:reworkrejectionid,rework_rejection_item_id:rework_rejection_item_id },
 				// method: "POST",
                 // data :{package_id:package_id},
                 cache:false,
@@ -9902,14 +9905,22 @@
 				{
 					    var fetchResponse = $.parseJSON(data);
 						$('#addNewModal').modal('show'); 
-						$('#vendor_po_confirmation_item_id').val(fetchResponse.vendor_po_confirmation_item_id); 
+						$('#rework_rejection_item_id').val(fetchResponse.rework_rejection_item_id); 
 						$('#part_number').val(fetchResponse.raw_id);  
 						$('#description').val(fetchResponse.description); 
 						$('#HSN_Code').val(fetchResponse.HSN_code); 
 						$('#SAC').val(fetchResponse.sac); 
 						$('#type_of_raw_material').val(fetchResponse.type_of_raw_material); 
 						$('#rejected_work_reason').val(fetchResponse.rejection_rework_reason); 
-						$('#rejected_work_reason').val(fetchResponse.rejection_rework_reason); 
+						$('#quantity').val(fetchResponse.qty); 
+						$('#rate').val(fetchResponse.rate); 
+						$('#value').val(fetchResponse.value); 
+						$('#row_material_cost').val(fetchResponse.row_material_cost); 
+						$('#gst_rate').val(fetchResponse.gst_rate); 
+						$('#gst_value').val(fetchResponse.gst_value); 
+						$('#grand_total').val(fetchResponse.grand_total); 
+						$('#item_remark').val(fetchResponse.item_remark); 
+						
 				},
 				error: function (jqXHR, textStatus, errorThrown)
 			    {
