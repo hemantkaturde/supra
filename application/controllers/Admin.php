@@ -4451,8 +4451,16 @@ class Admin extends BaseController
             $processFunction = 'Admin/addjobwork';
             $this->logrecord($process,$processFunction);
             $this->global['pageTitle'] = 'Add New Vendor Bill Of Material';
-            $data['getPreviousBomnumber']= $this->admin_model->getPreviousBomnumbervendor()[0];
+
+            $data['getPreviousBomnumber']= $this->admin_model->getPreviousBomnumber()[0];
+            
+            $data['getPreviousBomnumbervendor']= $this->admin_model->getPreviousBomnumbervendor()[0];
+
+
             $data['fetchALLpreVendorpoitemList']= $this->admin_model->fetchALLpreVendorpoitemList();
+
+          
+
             $data['buyerList']= $this->admin_model->fetchAllbuyerList();
             $data['vendorList']= $this->admin_model->fetchALLvendorListwithoutsupplier();
             $data['incoming_details']= $this->admin_model->fetchAllincomingdetailsList();

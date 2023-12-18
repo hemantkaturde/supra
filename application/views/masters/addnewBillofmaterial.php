@@ -25,9 +25,9 @@
                             <div class="box-body">
                                 <div class="col-md-4">
                                     <?php
-                                        if($getPreviousvendorBomnumber['po_number']){
-                                            $getPreviousvendorbomPONumber_number = substr($getPreviousvendorBomnumber['po_number'], -4);
-                                            $getPreviousBomnumber_number = substr($getPreviousBomnumber['po_number'], -4);
+                                        if($getPreviousvendorBomnumber['bom_number']){
+                                            $getPreviousvendorbomPONumber_number = substr($getPreviousvendorBomnumber['bom_number'], -4);
+                                            $getPreviousBomnumber_number = substr($getPreviousBomnumber['bom_number'], -4);
                                             if($getPreviousvendorbomPONumber_number > $getPreviousBomnumber_number){
 
                                                 if($getPreviousvendorbomPONumber_number){
