@@ -8505,7 +8505,6 @@
 			});
 		});
 
-
         $(document).on('click','.editpackinginstractionsubitem',function(e){  
 			e.preventDefault();
 			var elemF = $(this);
@@ -13598,7 +13597,7 @@
 			    }
 			});
 			return false;
-		});
+	    });
 
 
 
@@ -14287,6 +14286,44 @@
 			   swal("Cancelled", "Stock Form deletion cancelled ", "error");
 			   }
 		   });
+	    });
+
+
+		$(document).on('click','.editStockformitem',function(e){  
+			e.preventDefault();
+			var elemF = $(this);
+			var item_id = elemF.attr('data-id');
+			$.ajax({
+				url : "<?php echo base_url();?>geteditStockformitem",
+				type: "POST",
+				data : 'id='+item_id,
+				success: function(data, textStatus, jqXHR)
+				{
+					    var fetchResponse = $.parseJSON(data);
+						$('#addNewModal').modal('show'); 
+						$('#stock_form_item_id').val(fetchResponse.stock_form_item_id); 
+					    $('#part_number').val(fetchResponse.fin_id);  
+						$('#description').val(fetchResponse.description); 
+						$('#buyre_order_qty').val(fetchResponse.buyer_order_qty); 
+						$('#fg_order_qty').val(fetchResponse.f_g_order_qty); 
+						$('#lot_number').val(fetchResponse.lot_number); 
+						$('#invoice_number').val(fetchResponse.invoice_number); 
+						$('#invoice_date').val(fetchResponse.invoice_date); 
+						$('#invoice_qty_in_pcs').val(fetchResponse.invoice_qty_In_pcs); 
+						$('#invoice_qty_in_kgs').val(fetchResponse.invoice_qty_In_kgs); 
+						$('#actaul_recived_qty_in_pics').val(fetchResponse.invoice_qty_In_pcs); 
+						$('#actaul_recived_qty_in_kgs').val(fetchResponse.invoice_qty_In_kgs); 
+						$('#privious_balenace').val(fetchResponse.previous_balence); 
+						$('#itemremark').val(fetchResponse.item_remark); 
+
+
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			});
+			return false;
 	    });
 
 		

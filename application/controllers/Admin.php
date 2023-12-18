@@ -9363,10 +9363,6 @@ class Admin extends BaseController
         $post_submit = $this->input->post();
         if($post_submit){
             $geteditpackinginstractionsubitem = $this->admin_model->geteditpackinginstractionsubitem(trim($this->input->post('id')));
-
-            // print_r($geteditpackinginstractionsubitem);
-            // exit;
-
             if($geteditpackinginstractionsubitem){
                 $content = $geteditpackinginstractionsubitem[0];
                 echo json_encode($content);
@@ -9376,6 +9372,25 @@ class Admin extends BaseController
         }
 
     }
+
+
+    public function geteditStockformitem(){
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $geteditStockformitem = $this->admin_model->geteditStockformitem(trim($this->input->post('id')));
+            if($geteditStockformitem){
+                $content = $geteditStockformitem[0];
+                echo json_encode($content);
+            }else{
+                echo 'failure';
+            }
+        }
+
+    }
+
+
+    
 
 
     public function editrejectedformitemdata(){
