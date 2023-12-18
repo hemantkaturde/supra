@@ -265,7 +265,7 @@
 
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Vendor Received Qty <span class="required">*</span></label>
+                                                        <label class="col-sm-4 col-form-label">Vendor Received Qty <span class="required">*</span>(Enter Zero If No Qty Received)</label>
                                                         <div class="col-sm-8">
                                                             <input type="number" class="form-control"  id="vendor_order_qty" name="vendor_order_qty">
                                                             <p class="error vendor_order_qty_error"></p>
