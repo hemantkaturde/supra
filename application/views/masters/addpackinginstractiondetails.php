@@ -69,6 +69,9 @@
 
                                         <input type="hidden" class="form-control" id="main_id" name="main_id" value="<?=$main_id?>" >
 
+                                        <input type="hidden" class="form-control" id="packing_details_item_id" name="packing_details_item_id" >
+
+
                                         <div class="form-group">
                                             <label for="buyer_po_date">Buyer Invoice Number <span class="required">*</span></label>
                                             <input type="text" class="form-control" id="buyer_invoice_number" name="buyer_invoice_number" required>
@@ -111,7 +114,7 @@
                                 </div>
                             </div>
                         </form>
-                        <div class="col-md-8">
+                        <div class="col-md-10">
                                         <table class="table">
                                             <thead>
                                                 <tr>
@@ -141,7 +144,10 @@
                                                         <td><?=$value_details['buyer_invoice_qty'];?></td>
                                                         <td><?=$value_details['box_qty'];?></td>
                                                         <td><?=$value_details['remark'];?></td>
-                                                        <td><i style='font-size: x-large;cursor: pointer;' main-id='<?=$main_id; ?>'   data-id='<?=$value_details['packing_instaction_details'];?>' class='fa fa-trash-o deletepackinginstractionsubitem' aria-hidden='true'></i></td>
+                                                        <td>
+                                                            <i style='font-size: x-large;cursor: pointer'  main-id='<?=$main_id; ?>'   data-id='<?=$value_details['packing_instaction_details'];?>' class='fa fa-pencil-square-o editpackinginstractionsubitem'  aria-hidden='true'></i>
+                                                            <i style='font-size: x-large;cursor: pointer;' main-id='<?=$main_id; ?>'   data-id='<?=$value_details['packing_instaction_details'];?>' class='fa fa-trash-o deletepackinginstractionsubitem' aria-hidden='true'></i>
+                                                        </td>
                                                     </tr>
                                             <?php } ?>  
                                             </tbody>
@@ -154,6 +160,11 @@
         </div>
     </section>
 </div>
+
+
+                                   
+
+
 
 
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/common.js" charset="utf-8"></script>

@@ -8505,6 +8505,37 @@
 			});
 		});
 
+
+        $(document).on('click','.editpackinginstractionsubitem',function(e){  
+			e.preventDefault();
+			var elemF = $(this);
+			var item_id = elemF.attr('data-id');
+			$.ajax({
+				url : "<?php echo base_url();?>geteditpackinginstractionsubitem",
+				type: "POST",
+				data : 'id='+item_id,
+				success: function(data, textStatus, jqXHR)
+				{
+					    var fetchResponse = $.parseJSON(data);
+						$('#addNewModal').modal('show'); 
+						$('#packing_details_item_id').val(fetchResponse.id); 
+						$('#part_number').val(fetchResponse.part_number);  
+						$('#buyer_invoice_number').val(fetchResponse.buyer_invoice_number); 
+						$('#buyer_invoice_qty').val(fetchResponse.buyer_invoice_qty); 
+						$('#buyer_invoice_date').val(fetchResponse.buyer_invoice_date); 
+						$('#box_qty').val(fetchResponse.box_qty); 
+						$('#remark').val(fetchResponse.remark); 
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			});
+			return false;
+		});
+
+
 		</script>
 <?php } ?>
 

@@ -365,9 +365,11 @@ $route['geteditjobworkitem'] = "admin/geteditjobworkitem";
 $route['geteditReworkRejectionitem'] = "admin/geteditReworkRejectionitem";
 $route['geteditqualityrecordsitem'] = "admin/geteditqualityrecordsitem";
 $route['geteditrejectionformitem'] = "admin/geteditrejectionformitem";
-
+$route['geteditpackinginstractionsubitem'] = "admin/geteditpackinginstractionsubitem";
 
 $route['editrejectedformitemdata'] = "admin/editrejectedformitemdata";
+
+
 
 //$route['fetchincomingdeatilsitemlistedit/(:any)'] = "admin/fetchincomingdeatilsitemlistedit/$1";
 

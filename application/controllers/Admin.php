@@ -5430,8 +5430,13 @@ class Admin extends BaseController
                     'remark' =>    trim($this->input->post('remark'))
                 );
 
+                if(trim($this->input->post('packing_details_item_id'))){
+                    $packing_details_item_id = trim($this->input->post('packing_details_item_id'));
+                }else{
+                    $packing_details_item_id = '';
+                }
 
-                $savePackinginstarction= $this->admin_model->savePackinginstarctiondetails('',$data);
+                $savePackinginstarction= $this->admin_model->savePackinginstarctiondetails($packing_details_item_id,$data);
 
                 if($savePackinginstarction){
                     $add_packing_instraction_details_response['status'] = 'success';
@@ -9351,6 +9356,27 @@ class Admin extends BaseController
         }
 
     }
+
+
+    public function geteditpackinginstractionsubitem(){
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $geteditpackinginstractionsubitem = $this->admin_model->geteditpackinginstractionsubitem(trim($this->input->post('id')));
+
+            // print_r($geteditpackinginstractionsubitem);
+            // exit;
+
+            if($geteditpackinginstractionsubitem){
+                $content = $geteditpackinginstractionsubitem[0];
+                echo json_encode($content);
+            }else{
+                echo 'failure';
+            }
+        }
+
+    }
+
 
     public function editrejectedformitemdata(){
 

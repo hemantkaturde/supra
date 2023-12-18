@@ -3614,6 +3614,7 @@ class Admin_model extends CI_Model
         return $fetch_result;
 
     }
+    
 
 
     public function deletepackinginstractionsubitem($id){
@@ -7542,6 +7543,18 @@ class Admin_model extends CI_Model
 
   }
   
+
+  public function geteditpackinginstractionsubitem( $id){
+
+    $this->db->select('*');
+    $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.id', $id);
+    $this->db->order_by(TBL_PACKING_INSTRACTION_DETAILS.'.id','DESC');
+    $query = $this->db->get(TBL_PACKING_INSTRACTION_DETAILS);
+    $fetch_result = $query->result_array();
+    return $fetch_result;
+ 
+   }
+   
 
   
 
