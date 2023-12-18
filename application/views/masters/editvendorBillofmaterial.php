@@ -162,8 +162,8 @@
                                                         <th>Part Number</th>
                                                         <th>Description</th>
                                                         <th>Buyer Order Qty</th>
-                                                        <th>Vendor Received Qty</th>
                                                         <th>Vendor Order Qty</th>
+                                                        <th>Vendor Received Qty</th>
                                                         <th>Balanced Qty</th>
                                                         <th>Remark</th>
                                                         <th>Action</th>
@@ -267,8 +267,8 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Vendor Received Qty <span class="required">*</span>(Enter Zero If No Qty Received)</label>
                                                         <div class="col-sm-8">
-                                                            <input type="number" class="form-control"  id="vendor_order_qty" name="vendor_order_qty">
-                                                            <p class="error vendor_order_qty_error"></p>
+                                                            <input type="number" class="form-control"  id="vendor_received_qty" name="vendor_received_qty">
+                                                            <p class="error vendor_received_qty_error"></p>
                                                         </div>
                                                     </div>
 
