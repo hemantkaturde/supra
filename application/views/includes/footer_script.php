@@ -14326,9 +14326,7 @@
 			return false;
 	    });
 
-		
-
-
+	
     </script>
 <?php } ?>
 

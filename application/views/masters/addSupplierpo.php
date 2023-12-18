@@ -27,9 +27,9 @@
                                     <?php
 
                                         if($getPreviousvendorPONumber['po_number']){
-                                            $getPreviousvendorPONumber_number = substr($getPreviousvendorPONumber['po_number'], -1);
+                                            $getPreviousvendorPONumber_number = substr($getPreviousvendorPONumber['po_number'], -4);
 
-                                            $getPreviousPONumber_number = substr($getPreviousPONumber['po_number'], -1);
+                                            $getPreviousPONumber_number = substr($getPreviousPONumber['po_number'], -4);
 
                                             if($getPreviousvendorPONumber_number > $getPreviousPONumber_number){
 
