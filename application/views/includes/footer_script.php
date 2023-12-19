@@ -10553,12 +10553,14 @@
 
 			   var challan_id =   $('#challan_id').val();
 
+			   var challan_form_item_id =   $('#challan_form_item_id').val();
+			   
 
 			   $.ajax({
 				url : "<?php echo base_url();?>saveChallanformitem",
 				type: "POST",
 				 //data : formData,
-				 data :{part_number:part_number,description:description,type_of_raw_platting:type_of_raw_platting,quantity:quantity,rate:rate,value:value,row_material_cost:row_material_cost,gst_rate:gst_rate,grand_total:grand_total,item_remark:item_remark,pre_challan_date:pre_challan_date,pre_vendor_supplier_name:pre_vendor_supplier_name,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_supplier_name:pre_supplier_name,pre_supplier_po_number:pre_supplier_po_number,pre_remark:pre_remark,challan_id:challan_id },
+				 data :{part_number:part_number,description:description,type_of_raw_platting:type_of_raw_platting,quantity:quantity,rate:rate,value:value,row_material_cost:row_material_cost,gst_rate:gst_rate,grand_total:grand_total,item_remark:item_remark,pre_challan_date:pre_challan_date,pre_vendor_supplier_name:pre_vendor_supplier_name,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_supplier_name:pre_supplier_name,pre_supplier_po_number:pre_supplier_po_number,pre_remark:pre_remark,challan_id:challan_id,challan_form_item_id:challan_form_item_id },
 				 method: "POST",
                 // data :{package_id:package_id},
                 cache:false,
@@ -10655,6 +10657,47 @@
 					}
 				});
 		});
+
+
+		$(document).on('click','.editChallanformitem',function(e){  
+			e.preventDefault();
+			var elemF = $(this);
+			var item_id = elemF.attr('data-id');
+			$.ajax({
+				url : "<?php echo base_url();?>geteditChallanformitem",
+				type: "POST",
+				data : 'id='+item_id,
+				success: function(data, textStatus, jqXHR)
+				{
+					    var fetchResponse = $.parseJSON(data);
+						$('#addNewModal').modal('show'); 
+						$('#challan_form_item_id').val(fetchResponse.challan_form_item_id); 
+						$('#part_number').val(fetchResponse.raw_id);  
+						$('#description').val(fetchResponse.description); 
+						$('#HSN_Code').val(fetchResponse.HSN_code); 
+						$('#SAC').val(fetchResponse.sac); 
+						$('#type_of_raw_material').val(fetchResponse.type_of_raw_material); 
+						$('#type_of_raw_platting').val(fetchResponse.type_of_raw_platting); 
+						$('#quantity').val(fetchResponse.qty); 
+						$('#unit').val(fetchResponse.unit); 
+						$('#rate').val(fetchResponse.rate); 
+						$('#value').val(fetchResponse.value); 
+						$('#row_material_cost').val(fetchResponse.row_material_cost); 
+
+						$('#gst_rate').val(fetchResponse.gst_rate); 
+
+						$('#grand_total').val(fetchResponse.grand_total); 
+						$('#item_remark').val(fetchResponse.item_remark); 
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			});
+			return false;
+	     });
+
+
 
 	</script>
 <?php } ?>
@@ -11859,7 +11902,7 @@
 			    }
 			});
 			return false;
-		});
+		 });
 
     </script>
 <?php } ?>
@@ -13608,7 +13651,7 @@
 			    }
 			});
 			return false;
-	    });
+	     });
 
 
 

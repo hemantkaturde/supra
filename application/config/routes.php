@@ -367,8 +367,9 @@ $route['geteditqualityrecordsitem'] = "admin/geteditqualityrecordsitem";
 $route['geteditrejectionformitem'] = "admin/geteditrejectionformitem";
 $route['geteditpackinginstractionsubitem'] = "admin/geteditpackinginstractionsubitem";
 $route['geteditStockformitem'] = "admin/geteditStockformitem";
-
 $route['editrejectedformitemdata'] = "admin/editrejectedformitemdata";
+$route['geteditChallanformitem'] = "admin/geteditChallanformitem";
+
 
 
 

@@ -6949,7 +6949,15 @@ class Admin extends BaseController
                     );
                 }
 
-                $savechallanformitemdetails= $this->admin_model->savechallanformitemdetails('',$data);
+
+                $challan_form_item_id = trim($this->input->post('challan_form_item_id'));
+                if( $challan_form_item_id){
+                    $challanformitemid = $challan_form_item_id;
+                }else{
+                    $challanformitemid = '';
+                }
+
+                $savechallanformitemdetails= $this->admin_model->savechallanformitemdetails($challanformitemid,$data);
                 if($savechallanformitemdetails){
                     $savechallnitem_response['status'] = 'success';
                     $savechallnitem_response['error'] = array('part_number'=>strip_tags(form_error('part_number')),'description'=>strip_tags(form_error('description')),'type_of_raw_platting'=>strip_tags(form_error('type_of_raw_platting')),'quantity'=>strip_tags(form_error('quantity')),'rate'=>strip_tags(form_error('rate')),'value'=>strip_tags(form_error('value')),'row_material_cost'=>strip_tags(form_error('row_material_cost')),'gst_rate'=>strip_tags(form_error('gst_rate')),'grand_total'=>strip_tags(form_error('grand_total')),'item_remark'=>strip_tags(form_error('item_remark')));
@@ -9398,9 +9406,22 @@ class Admin extends BaseController
     }
 
 
+    public function geteditChallanformitem(){
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $geteditChallanformitem = $this->admin_model->geteditChallanformitem(trim($this->input->post('id')));
+            if($geteditChallanformitem){
+                $content = $geteditChallanformitem[0];
+                echo json_encode($content);
+            }else{
+                echo 'failure';
+            }
+        }
+
+    }
+
     
-
-
     public function editrejectedformitemdata(){
 
         $post_submit = $this->input->post();

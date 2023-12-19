@@ -210,7 +210,8 @@
                                                         <td><?php echo $value['grand_total'];?></td>
                                                         <td><?php echo $value['item_remark'];?></td>
                                                         <td>
-                                                        <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['challanformid'];?>' class='fa fa-trash-o deleteChallanformitem' aria-hidden='true'></i>
+                                                           <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['challanformid'];?>' class='fa fa-pencil-square-o editChallanformitem'  aria-hidden='true'></i>
+                                                           <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['challanformid'];?>' class='fa fa-trash-o deleteChallanformitem' aria-hidden='true'></i>
                                                         </td>
                                                     </tr>
                                                     <?php endforeach;?>
@@ -229,7 +230,7 @@
                                       <!-- Add New Package Modal -->
                                     <?php $this->load->helper("form"); ?>
                                     <div class="modal fade" id="addNewModal" role="dialog" aria-labelledby="additem" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-                                      
+
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                             <div class="modal-header">
@@ -239,6 +240,7 @@
                                                 </button>
                                             </div>
                                             <form role="form" id="saveChallanformitem_form" action="<?php echo base_url() ?>saveChallanformitem" method="post" role="form">
+                                            <input type="hidden" class="form-control"  id="challan_form_item_id" name="challan_form_item_id" required readonly>
 
                                                 <div class="modal-body">
                                                     <div class="loader_ajax" style="display:none;">
