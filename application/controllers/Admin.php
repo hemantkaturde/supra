@@ -6203,7 +6203,16 @@ class Admin extends BaseController
 
                 }
                 
-                $saveIncomingdetailsitem= $this->admin_model->saveNewscrapreturn('',$data);
+
+
+                if(trim($this->input->post('scrap_item_id'))){
+                    $scrap_item_id = trim($this->input->post('scrap_item_id'));
+                }else{
+                    $scrap_item_id = '';
+                }
+
+                
+                $saveIncomingdetailsitem= $this->admin_model->saveNewscrapreturn($scrap_item_id,$data);
 
                 if($saveIncomingdetailsitem){
                     $savescrapreturnitem_response['status'] = 'success';
@@ -9407,7 +9416,6 @@ class Admin extends BaseController
 
 
     public function geteditChallanformitem(){
-
         $post_submit = $this->input->post();
         if($post_submit){
             $geteditChallanformitem = $this->admin_model->geteditChallanformitem(trim($this->input->post('id')));
@@ -9418,8 +9426,24 @@ class Admin extends BaseController
                 echo 'failure';
             }
         }
-
     }
+
+
+    public function geteditScrpareturnid(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $geteditScrpareturnid = $this->admin_model->geteditScrpareturnid(trim($this->input->post('id')));
+            if($geteditScrpareturnid){
+                $content = $geteditScrpareturnid[0];
+                echo json_encode($content);
+            }else{
+                echo 'failure';
+            }
+        }
+    }
+
+
+    
 
     
     public function editrejectedformitemdata(){

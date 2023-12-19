@@ -7591,6 +7591,18 @@ class Admin_model extends CI_Model
 
    }
 
+   public function geteditScrpareturnid($id){
+    
+        $this->db->select('*');
+        // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_CHALLAN_FORM_ITEM.'.part_number');
+        $this->db->where(TBL_SCRAP_RETURN_ITEM.'.id', $id);
+        $this->db->order_by(TBL_SCRAP_RETURN_ITEM.'.id','DESC');
+        $query = $this->db->get(TBL_SCRAP_RETURN_ITEM);
+        $fetch_result = $query->result_array();
+        return $fetch_result;
+
+   }
+
   
 
 }

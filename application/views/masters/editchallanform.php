@@ -174,6 +174,8 @@
                                                         <td><?php echo $value['grand_total'];?></td>
                                                         <td><?php echo $value['item_remark'];?></td>
                                                         <td>
+                                                        <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['itm_id'];?>' class='fa fa-pencil-square-o editChallanformitem'  aria-hidden='true'></i>
+
                                                         <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['itm_id'];?>' class='fa fa-trash-o deleteChallanformitem' aria-hidden='true'></i>
                                                         </td>
                                                     </tr>
@@ -203,6 +205,7 @@
                                                 </button>
                                             </div>
                                             <form role="form" id="addnnewreworkrejectionitemform" action="<?php echo base_url() ?>addnnewreworkrejectionitemform" method="post" role="form">
+                                            <input type="hidden" class="form-control"  id="challan_form_item_id" name="challan_form_item_id" required readonly>
 
                                                 <div class="modal-body">
                                                         <div class="loader_ajax" style="display:none;">

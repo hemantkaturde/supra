@@ -8956,12 +8956,14 @@
 
 			   var challan_table_id = $('#challan_table_id').val();
 
+			   var scrap_item_id = $('#scrap_item_id').val();
+
 
 			$.ajax({
 				url : "<?php echo base_url();?>savescrapreturnitem",
 				type: "POST",
 				 //data : formData,
-				 data :{ description:description,gross_weight:gross_weight,net_weight:net_weight,quantity:quantity,number_of_bags:number_of_bags,hsn_code:hsn_code,estimated_value:estimated_value,number_of_processing:number_of_processing,item_remark:item_remark,pre_challan_date:pre_challan_date,pre_vendor_name:pre_vendor_name,pre_supplier_name:pre_supplier_name,pre_remark:pre_remark,challan_table_id:challan_table_id },
+				 data :{ description:description,gross_weight:gross_weight,net_weight:net_weight,quantity:quantity,number_of_bags:number_of_bags,hsn_code:hsn_code,estimated_value:estimated_value,number_of_processing:number_of_processing,item_remark:item_remark,pre_challan_date:pre_challan_date,pre_vendor_name:pre_vendor_name,pre_supplier_name:pre_supplier_name,pre_remark:pre_remark,challan_table_id:challan_table_id,scrap_item_id:scrap_item_id },
 				// method: "POST",
                 // data :{package_id:package_id},
                 cache:false,
@@ -9053,6 +9055,40 @@
 				}
 			});
 	   });
+
+	   
+	   $(document).on('click','.editScrpareturnid',function(e){  
+			e.preventDefault();
+			var elemF = $(this);
+			var item_id = elemF.attr('data-id');
+			$.ajax({
+				url : "<?php echo base_url();?>geteditScrpareturnid",
+				type: "POST",
+				data : 'id='+item_id,
+				success: function(data, textStatus, jqXHR)
+				{
+					    var fetchResponse = $.parseJSON(data);
+						$('#addNewModal').modal('show'); 
+						$('#scrap_item_id').val(fetchResponse.id); 
+						$('#description').val(fetchResponse.description);  
+						$('#gross_weight').val(fetchResponse.gross_weight); 
+						$('#net_weight').val(fetchResponse.net_weight); 
+						$('#quantity').val(fetchResponse.quantity); 
+						$('#number_of_bags').val(fetchResponse.number_of_bags); 
+						$('#hsn_code').val(fetchResponse.hsn_code); 
+						$('#estimated_value').val(fetchResponse.estimated_value); 
+						$('#number_of_processing').val(fetchResponse.number_of_processing); 
+						$('#item_remark').val(fetchResponse.remarks); 
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			});
+			return false;
+		});
+
 
     </script>
 <?php }?>

@@ -130,6 +130,7 @@
                                                         <td><?php echo $value['number_of_processing'];?></td>
                                                         <td><?php echo $value['remarks'];?></td>
                                                         <td>
+                                                        <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['scrapreturnid'];?>' class='fa fa-pencil-square-o editScrpareturnid'  aria-hidden='true'></i>
                                                         <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['scrapreturnid'];?>' class='fa fa-trash-o deleteScrpareturnid' aria-hidden='true'></i>
                                                         </td>
                                                     </tr>
@@ -151,6 +152,9 @@
                                                 </button>
                                             </div>
                                             <form role="form" id="addscrapreturnform" action="<?php echo base_url() ?>addscrapreturnform" method="post" role="form">
+
+                                            <input type="hidden" class="form-control"  id="scrap_item_id" name="scrap_item_id" required readonly>
+
                                                 <div class="modal-body">
                                                     <div class="loader_ajax" style="display:none;">
                                                             <div class="loader_ajax_inner"><img src="<?php echo ICONPATH;?>/preloader_ajax.gif"></div>
