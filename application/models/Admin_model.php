@@ -5241,6 +5241,16 @@ class Admin_model extends CI_Model
 
     }
 
+    public function getTotalDebitAndokQtyedit($id){
+
+        $this->db->select('sum(debit_amount) as total_debit_amount, sum(SGST_value) as total_SGST_value, sum(CGST_value) as total_CGST_value, sum(IGST_value) as total_IGST_value , sum(total_amount_of_ok_qty_data) as total_amount_of_ok_qty_data,sum(total_amount_of_ok_qty) as total_amount_of_ok_qty,sum(p_and_f_charges) as p_and_f_charges');
+        $this->db->where(TBL_DEBIT_NOTE_ITEM.'.debit_note_id',$id);
+        $query = $this->db->get(TBL_DEBIT_NOTE_ITEM);
+        $data = $query->result_array();
+        return $data;
+
+    }
+
     public function getPaymentcount($params){
 
        
@@ -5437,13 +5447,38 @@ class Admin_model extends CI_Model
                 $data[$counter]['supplier_po_number'] = $value['supplier_master'];
                 $data[$counter]['po_date'] = $value['po_date'];
                 $data[$counter]['action'] = '';
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editdebitnoteform/".$value['pod_details_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editpoddetails/".$value['pod_details_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['pod_details_id']."' class='fa fa-trash-o deletepoddetails' aria-hidden='true'></i>"; 
                 $counter++; 
             }
         }
         return $data;
     }
+
+    public function getpoddetailsforedititem($i){
+        $this->db->select('*,'.TBL_POD_ITEM.'.id as pod_id,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_po,'.TBL_POD_ITEM.'.remark as pod_remark');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_POD_ITEM.'.part_number');
+        // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_POD_ITEM.'.pre_vendor_po_number','left');
+        $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_POD_ITEM.'.pre_supplier_po_number','left');
+        $this->db->where(TBL_POD_ITEM.'.POD_id',$i);
+        $query = $this->db->get(TBL_POD_ITEM);
+        $data = $query->result_array();
+        return $data;
+    }
+
+
+    public function getpoddetailsforedit($i){
+        $this->db->select('*,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_master,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_po_number,'.TBL_POD_DETAILS.'.remark as pod_details,'.TBL_POD_DETAILS.'.pod_details_id');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_POD_DETAILS.'.vendor_po','left');
+        $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_POD_DETAILS.'.supplier_po','left');
+
+        $this->db->where(TBL_POD_DETAILS.'.pod_details_id',$i);
+        $query = $this->db->get(TBL_POD_DETAILS);
+        $data = $query->result_array();
+        return $data;
+    }
+
 
     public function getPreviousPODdetails_number(){
         $this->db->select('pod_details_number');

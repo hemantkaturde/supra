@@ -7146,6 +7146,7 @@ class Admin extends BaseController
         $data['supplierList']= $this->admin_model->fetchALLsupplierList();
         $data['getdebitnoteditailsdata']= $this->admin_model->getdebitnoteditailsdata($id);
         $data['getdebitnoteitemdetailsedit']= $this->admin_model->getdebitnoteitemdetailsedit($id);
+        $data['totalDebitAndokQty'] = $this->admin_model->getTotalDebitAndokQtyedit($id)[0];
         $this->loadViews("masters/editdebitnoteform", $this->global, $data, NULL);
     }
 
@@ -7518,7 +7519,17 @@ class Admin extends BaseController
                         'remark' =>  trim($this->input->post('remark'))
                     );
 
-                    $saveNewdPODDetails= $this->admin_model->saveNewdPODDetails('',$data);
+
+                    if(trim($this->input->post('POD_details_id'))){
+
+                        $POD_details_id = trim($this->input->post('POD_details_id'));
+
+                    }else{
+                        $POD_details_id = '';
+
+                    }
+
+                    $saveNewdPODDetails= $this->admin_model->saveNewdPODDetails($POD_details_id,$data);
 
                     if($saveNewdPODDetails){
 
@@ -7570,8 +7581,16 @@ class Admin extends BaseController
            
             }else{
 
+                    $POD_details_id =  trim($this->input->post('POD_details_id'));
+                    if($POD_details_id){
+                        $POD_details_id_main =$POD_details_id;
+                    }else{
+                        $POD_details_id_main =NULL;
+                    }
+
                     $data = array(
                         'part_number' =>  trim($this->input->post('part_number')),
+                        'POD_id' => $POD_details_id_main,
                         'order_qty' =>  trim($this->input->post('order_qty')),
                         'lot_no' =>  trim($this->input->post('lot_no')),
                         'qty_recived' =>  trim($this->input->post('qty_recived')),
@@ -7717,6 +7736,19 @@ class Admin extends BaseController
         }else{
             echo(json_encode(array('status'=>'failed'))); 
         }
+    }
+
+    public function editpoddetails($i){
+        $process = 'edit POD Details';
+        $processFunction = 'Admin/editpoddetails';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'edit POD Details';
+        $data['vendorList']= $this->admin_model->fetchALLvendorList();
+        $data['supplierList']= $this->admin_model->fetchALLsupplierList();
+        $data['getpoddetailsforedit']= $this->admin_model->getpoddetailsforedit($i)[0];
+        $data['getpoddetailsforedititem']= $this->admin_model->getpoddetailsforedititem($i);
+        $this->loadViews("masters/editpoddetails", $this->global, $data, NULL);
+
     }
 
     public function qualityrecord(){

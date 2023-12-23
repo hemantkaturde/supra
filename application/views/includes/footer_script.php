@@ -1852,7 +1852,6 @@
 	        });
 	    });
 
-
 		$(document).ready(function() {
 
 			var buyer_po_number = $('#buyer_po_number').val();
@@ -12467,7 +12466,7 @@
 <?php } ?>
 
 
-<?php if($pageTitle=='POD Detials' || $pageTitle=='Add New POD Details'){ ?>
+<?php if($pageTitle=='POD Detials' || $pageTitle=='Add New POD Details' || $pageTitle=='edit POD Details'){ ?>
 	<script type="text/javascript">
 		$(document).ready(function() {
 		    var dt = $('#view_POD_details').DataTable({
@@ -12499,6 +12498,94 @@
 	            },
 	        });
 	    });
+
+
+		$(document).ready(function() {
+
+		
+			var vendor_supplier_name = $('#vendor_supplier_name').val();
+
+			
+
+			if(vendor_supplier_name=='vendor'){
+
+				// $('#vendor_name_div_for_hide_show').css('display','block');
+				// $('#supplier_name_div_for_hide_show').css('display','none');
+
+				// $(document).on('change','.vendor_po_number_itam',function(e){  
+						// e.preventDefault();
+						//$(".loader_ajax").show();
+						var vendor_po_number = $('#vendor_po_number').val();
+
+						$("#part_number").html('');
+					
+						$.ajax({
+							url : "<?php echo ADMIN_PATH;?>getVendoritemonly",
+							type: "POST",
+							data : {'vendor_po_number' : vendor_po_number},
+							success: function(data, textStatus, jqXHR)
+							{
+								$(".loader_ajax").hide();
+								if(data == "failure")
+								{
+									$('#part_number').html('<option value="">Select Part Number</option>');
+								}
+								else
+								{
+									$('#part_number').html(data);
+
+								}
+							},
+							error: function (jqXHR, textStatus, errorThrown)
+							{
+								$('#part_number').html();
+							}
+						});
+						return false;
+				// });
+
+			}
+
+			if(vendor_supplier_name=='supplier'){
+
+				// $('#supplier_name_div_for_hide_show').css('display','block');
+				// $('#vendor_name_div_for_hide_show').css('display','none');
+
+
+				// $(document).on('change','.supplier_po_number_for_item',function(e){  
+				// 	e.preventDefault();
+					//$(".loader_ajax").show();
+					var supplier_po_number = $('.supplier_po_number_for_item').val();
+					var flag = 'Supplier';
+					$("#part_number").html('');
+				
+					$.ajax({
+						url : "<?php echo ADMIN_PATH;?>getSuppliritemonly",
+						type: "POST",
+						data : {'supplier_po_number' : supplier_po_number,'flag':flag},
+						success: function(data, textStatus, jqXHR)
+						{
+							$(".loader_ajax").hide();
+							if(data == "failure")
+							{
+								$('#part_number').html('<option value="">Select Part Number</option>');
+							}
+							else
+							{
+								$('#part_number').html(data);
+
+							}
+						},
+						error: function (jqXHR, textStatus, errorThrown)
+						{
+							$('#part_number').html();
+						}
+					});
+					return false;
+				// });
+
+			}			
+		});
 
 		$(document).on('click','#savenewpaymentdetails',function(e){
 
@@ -13009,12 +13096,14 @@
 			   var pre_po_date =   $('#po_date').val();
 			   var pre_remark =   $('#remark').val();
 
-			
+			   var POD_details_id =   $('#POD_details_id').val();
+			   
+
 			   $.ajax({
 				url : "<?php echo base_url();?>savepoditem",
 				type: "POST",
 				 //data : formData,
-				 data :{part_number:part_number,order_qty:order_qty,lot_no:lot_no,qty_recived:qty_recived,unit:unit,bill_no:bill_no,bill_date:bill_date,short_excess_qty:short_excess_qty,item_remark:item_remark, pre_debit_note_date:pre_debit_note_date,pre_vendor_supplier_name:pre_vendor_supplier_name,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_supplier_name:pre_supplier_name,pre_supplier_po_number:pre_supplier_po_number,pre_po_date:pre_po_date,pre_remark:pre_remark},
+				 data :{part_number:part_number,order_qty:order_qty,lot_no:lot_no,qty_recived:qty_recived,unit:unit,bill_no:bill_no,bill_date:bill_date,short_excess_qty:short_excess_qty,item_remark:item_remark, pre_debit_note_date:pre_debit_note_date,pre_vendor_supplier_name:pre_vendor_supplier_name,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_supplier_name:pre_supplier_name,pre_supplier_po_number:pre_supplier_po_number,pre_po_date:pre_po_date,pre_remark:pre_remark,POD_details_id:POD_details_id},
 				 method: "POST",
                 // data :{package_id:package_id},
                 cache:false,
@@ -13038,8 +13127,11 @@
 							button: "Ok",
 							},function(){ 
 
-							window.location.href = "<?php echo base_url().'addNewPODdetails'?>";
-								
+								if(POD_details_id){
+									window.location.href = "<?php echo base_url().'editpoddetails'?>"+POD_details_id;
+								}else{
+									window.location.href = "<?php echo base_url().'addNewPODdetails'?>";
+								}	
 						});		
 				    }
 					

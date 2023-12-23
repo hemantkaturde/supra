@@ -168,6 +168,64 @@
                                             </div>
                                     </div>
 
+
+                                    <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="total_debit_amount">Total Debit Amount <span class="required">*</span></label>
+                                                  <input type="text" class="form-control"  value="<?=$totalDebitAndokQty['total_debit_amount'] + $totalDebitAndokQty['total_SGST_value'] + $totalDebitAndokQty['total_CGST_value'] + $totalDebitAndokQty['total_IGST_value'] ; ?>" id="total_debit_amount" name="total_debit_amount" required readonly>
+                                                <p class="error total_debit_amount_error"></p>
+                                            </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="total_debit_amount_ok_qty">Total Amount of OK Quantity <span class="required">*</span></label>
+                                                  <input type="text" class="form-control"  value="<?=$totalDebitAndokQty['total_amount_of_ok_qty_data']?>" id="total_amount_of_ok_qty_data" name="total_amount_of_ok_qty_data" required readonly>
+                                                  <input type="hidden" class="form-control"  value="<?=$totalDebitAndokQty['total_amount_of_ok_qty']?>" id="total_amount_of_ok_qty" name="total_amount_of_ok_qty" required readonly>
+                                                <p class="error total_debit_amount_ok_qty_error"></p>
+                                            </div>
+                                    </div>
+
+
+                                    <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="tds_amount">TDS Amount <span class="required">*</span></label>
+                                                  <input type="text" class="form-control"  value="" id="tds_amount" name="tds_amount" required>
+                                                <p class="error tds_amount_error"></p>
+                                            </div>
+                                    </div>
+                                    
+
+                                    <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="freight_amount_charge">Freight Amount charge <span class="required">*</span></label>
+                                                  <input type="text" class="form-control"  value="" id="freight_amount_charge" name="freight_amount_charge" required>
+                                                <p class="error freight_amount_charge_error"></p>
+                                            </div>
+                                    </div>
+                                    
+                                    <input type="hidden" class="form-control" value="<?=$totalDebitAndokQty['p_and_f_charges']?>"  id="p_and_f_charges_main" name="p_and_f_charges_main">
+
+                                    <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="chq_amt">Chq Amount <span class="required">*</span></label>
+                                                  <input type="text" class="form-control"  value="" id="chq_amt" name="chq_amt" required>
+                                                <p class="error chq_amt_error"></p>
+                                            </div>
+                                    </div>
+                                    
+
+                                    <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="freight_amount_charge">Grand Total <span class="required">*</span></label>
+                                                  <input type="text" class="form-control"  value="" id="grand_total_main" name="grand_total_main" required>
+                                                <p class="error grand_total_main_error"></p>
+                                            </div>
+                                    </div>
+                                    
+
+
+
                                     <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="remark">Remark</label>
@@ -497,6 +555,7 @@
                                                             <p class="error debit_amount_error"></p>
                                                         </div>
                                                     </div>
+                                                    
 
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Remark</label>
