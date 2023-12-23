@@ -222,6 +222,8 @@
                                                     <td><?php echo $value['short_excess_qty'];?></td>
                                                     <td><?php echo $value['pod_remark'];?></td>
                                                     <td>
+                                                        <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['pod_id'];?>' class='fa fa-pencil-square-o editPODitem'  aria-hidden='true'></i>
+
                                                         <i style='font-size: x-large;cursor: pointer'
                                                             data-id='<?php echo $value['pod_id'];?>'
                                                             class='fa fa-trash-o deletePODitem' aria-hidden='true'></i>
@@ -259,6 +261,9 @@
                                                     action="<?php echo base_url() ?>savePODitem" method="post"
                                                     role="form">
 
+                                                    <input type="hidden" class="form-control" id="poditems_id"
+                                                                    name="poditems_id" readonly>
+                                                                    
                                                     <div class="modal-body">
                                                         <div class="loader_ajax" style="display:none;">
                                                             <div class="loader_ajax_inner"><img

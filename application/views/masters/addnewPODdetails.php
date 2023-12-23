@@ -244,7 +244,8 @@
                                                     <td><?php echo $value['short_excess_qty'];?></td>
                                                     <td><?php echo $value['pod_remark'];?></td>
                                                     <td>
-                                                        <i style='font-size: x-large;cursor: pointer'
+                                                    <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['pod_id'];?>' class='fa fa-pencil-square-o editPODitem'  aria-hidden='true'></i>
+                                                    <i style='font-size: x-large;cursor: pointer'
                                                             data-id='<?php echo $value['pod_id'];?>'
                                                             class='fa fa-trash-o deletePODitem' aria-hidden='true'></i>
                                                     </td>
@@ -280,6 +281,9 @@
                                                 <form role="form" id="savePODitem_form"
                                                     action="<?php echo base_url() ?>savePODitem" method="post"
                                                     role="form">
+
+                                                    <input type="hidden" class="form-control" id="poditems_id"
+                                                                    name="poditems_id" readonly>
 
                                                     <div class="modal-body">
                                                         <div class="loader_ajax" style="display:none;">
@@ -374,14 +378,14 @@
                                                         </div>
 
 
-                                                        <?php $bill_date= date('Y-m-d'); ?>
+                                                    
 
                                                         <div class="form-group row">
                                                             <label class="col-sm-4 col-form-label">Bill Date<span
                                                                     class="required">*</span></label>
                                                             <div class="col-sm-8">
                                                                 <input type="text" class="form-control datepicker"
-                                                                    value="<?=$bill_date?>" id="bill_date"
+                                                                    id="bill_date"
                                                                     name="bill_date">
                                                                 <p class="error bill_date_error"></p>
                                                             </div>

@@ -7609,7 +7609,15 @@ class Admin extends BaseController
                         'pre_remark' =>    trim($this->input->post('pre_remark')),
                     );
 
-                $savepoitem= $this->admin_model->savepoitem('',$data);
+                    $poditems_id =  trim($this->input->post('poditems_id'));
+                    if($poditems_id){
+                        $poditemsid =$poditems_id;
+                    }else{
+                        $poditemsid =NULL;
+                    }
+
+
+                $savepoitem= $this->admin_model->savepoitem( $poditemsid,$data);
                 if($savepoitem){
                     $savepoitem_response['status'] = 'success';
                     $savepoitem_response['error'] = array('part_number'=>strip_tags(form_error('part_number')),'description'=>strip_tags(form_error('description')), 'order_qty'=>strip_tags(form_error('order_qty')), 'lot_no'=>strip_tags(form_error('lot_no')),'qty_recived'=>strip_tags(form_error('qty_recived')), 'unit'=>strip_tags(form_error('unit')), 'bill_no'=>strip_tags(form_error('bill_no')),'bill_date'=>strip_tags(form_error('bill_date')),'short_excess_qty'=>strip_tags(form_error('short_excess_qty')), 'item_remark'=>strip_tags(form_error('item_remark')));
@@ -9474,8 +9482,19 @@ class Admin extends BaseController
         }
     }
 
+    public function geteditPODitem(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $geteditPODitem = $this->admin_model->geteditPODitemedit(trim($this->input->post('id')));
+            if($geteditPODitem){
+                $content = $geteditPODitem[0];
+                echo json_encode($content);
+            }else{
+                echo 'failure';
+            }
+        }
+    }
 
-    
 
     
     public function editrejectedformitemdata(){

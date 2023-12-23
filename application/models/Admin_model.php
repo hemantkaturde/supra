@@ -5456,8 +5456,8 @@ class Admin_model extends CI_Model
     }
 
     public function getpoddetailsforedititem($i){
-        $this->db->select('*,'.TBL_POD_ITEM.'.id as pod_id,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_po,'.TBL_POD_ITEM.'.remark as pod_remark');
-        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_POD_ITEM.'.part_number');
+        $this->db->select('*,'.TBL_POD_ITEM.'.id as pod_id,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_po,'.TBL_POD_ITEM.'.remark as pod_remark,'.TBL_RAWMATERIAL.'.type_of_raw_material as name');
+        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_POD_ITEM.'.part_number');
         // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_POD_ITEM.'.pre_vendor_po_number','left');
         $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_POD_ITEM.'.pre_supplier_po_number','left');
@@ -5601,8 +5601,8 @@ class Admin_model extends CI_Model
 
     public function getpoddetails(){
 
-        $this->db->select('*,'.TBL_POD_ITEM.'.id as pod_id,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_po,'.TBL_POD_ITEM.'.remark as pod_remark');
-        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_POD_ITEM.'.part_number');
+        $this->db->select('*,'.TBL_POD_ITEM.'.id as pod_id,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_po,'.TBL_POD_ITEM.'.remark as pod_remark,'.TBL_RAWMATERIAL.'.type_of_raw_material as name');
+        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_POD_ITEM.'.part_number');
         // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_POD_ITEM.'.pre_vendor_po_number','left');
         $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_POD_ITEM.'.pre_supplier_po_number','left');
@@ -7593,14 +7593,13 @@ class Admin_model extends CI_Model
 
   public function geteditpackinginstractionsubitem( $id){
 
-    $this->db->select('*');
-    $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.id', $id);
-    $this->db->order_by(TBL_PACKING_INSTRACTION_DETAILS.'.id','DESC');
-    $query = $this->db->get(TBL_PACKING_INSTRACTION_DETAILS);
-    $fetch_result = $query->result_array();
-    return $fetch_result;
- 
-   }
+        $this->db->select('*');
+        $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.id', $id);
+        $this->db->order_by(TBL_PACKING_INSTRACTION_DETAILS.'.id','DESC');
+        $query = $this->db->get(TBL_PACKING_INSTRACTION_DETAILS);
+        $fetch_result = $query->result_array();
+        return $fetch_result;
+    }
 
 
    public function geteditStockformitem($id){
@@ -7638,9 +7637,34 @@ class Admin_model extends CI_Model
         return $fetch_result;
 
    }
+   
 
+   public function geteditPODitemedit($id){
+
+        $this->db->select(TBL_POD_ITEM.'.id as poditems_id,
+        '.TBL_RAWMATERIAL.'.raw_id,
+        '.TBL_POD_ITEM.'.order_qty,
+        '.TBL_POD_ITEM.'.lot_no,
+        '.TBL_POD_ITEM.'.qty_recived,
+        '.TBL_POD_ITEM.'.unit,
+        '.TBL_POD_ITEM.'.bill_no,
+        '.TBL_POD_ITEM.'.bill_date,
+        '.TBL_POD_ITEM.'.short_excess_qty,
+        '.TBL_POD_ITEM.'.remark,
+        
+        '.TBL_RAWMATERIAL.'.type_of_raw_material as description');
+        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_POD_ITEM.'.part_number');
+        $this->db->where(TBL_POD_ITEM.'.id', $id);
+        $this->db->order_by(TBL_POD_ITEM.'.id','DESC');
+        $query = $this->db->get(TBL_POD_ITEM);
+        $fetch_result = $query->result_array();
+        return $fetch_result;
+
+   }
   
 
-}
+  }
+
+  
 
 ?>

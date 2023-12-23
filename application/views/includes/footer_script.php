@@ -12505,7 +12505,6 @@
 		
 			var vendor_supplier_name = $('#vendor_supplier_name').val();
 
-			
 
 			if(vendor_supplier_name=='vendor'){
 
@@ -13098,12 +13097,13 @@
 
 			   var POD_details_id =   $('#POD_details_id').val();
 			   
+			   var poditems_id =   $('#poditems_id').val();
 
 			   $.ajax({
 				url : "<?php echo base_url();?>savepoditem",
 				type: "POST",
 				 //data : formData,
-				 data :{part_number:part_number,order_qty:order_qty,lot_no:lot_no,qty_recived:qty_recived,unit:unit,bill_no:bill_no,bill_date:bill_date,short_excess_qty:short_excess_qty,item_remark:item_remark, pre_debit_note_date:pre_debit_note_date,pre_vendor_supplier_name:pre_vendor_supplier_name,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_supplier_name:pre_supplier_name,pre_supplier_po_number:pre_supplier_po_number,pre_po_date:pre_po_date,pre_remark:pre_remark,POD_details_id:POD_details_id},
+				 data :{part_number:part_number,order_qty:order_qty,lot_no:lot_no,qty_recived:qty_recived,unit:unit,bill_no:bill_no,bill_date:bill_date,short_excess_qty:short_excess_qty,item_remark:item_remark, pre_debit_note_date:pre_debit_note_date,pre_vendor_supplier_name:pre_vendor_supplier_name,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_supplier_name:pre_supplier_name,pre_supplier_po_number:pre_supplier_po_number,pre_po_date:pre_po_date,pre_remark:pre_remark,POD_details_id:POD_details_id,poditems_id:poditems_id},
 				 method: "POST",
                 // data :{package_id:package_id},
                 cache:false,
@@ -13128,7 +13128,7 @@
 							},function(){ 
 
 								if(POD_details_id){
-									window.location.href = "<?php echo base_url().'editpoddetails'?>"+POD_details_id;
+									window.location.href = "<?php echo base_url().'editpoddetails/'?>"+POD_details_id;
 								}else{
 									window.location.href = "<?php echo base_url().'addNewPODdetails'?>";
 								}	
@@ -13241,6 +13241,39 @@
 				});
 	     });
 
+		 $(document).on('click','.editPODitem',function(e){  
+			e.preventDefault();
+			var elemF = $(this);
+			var item_id = elemF.attr('data-id');
+			$.ajax({
+				url : "<?php echo base_url();?>geteditPODitem",
+				type: "POST",
+				data : 'id='+item_id,
+				success: function(data, textStatus, jqXHR)
+				{
+					    var fetchResponse = $.parseJSON(data);
+						$('#addNewModal').modal('show'); 
+
+						$('#poditems_id').val(fetchResponse.poditems_id); 
+						$('#part_number').val(fetchResponse.raw_id);  
+						$('#description').val(fetchResponse.description);  
+						$('#order_qty').val(fetchResponse.order_qty);  
+						$('#lot_no').val(fetchResponse.lot_no);  
+						$('#qty_recived').val(fetchResponse.qty_recived);  
+						$('#unit').val(fetchResponse.unit);  
+						$('#bill_no').val(fetchResponse.bill_no);  
+						$('#bill_date').val(fetchResponse.bill_date);  
+						$('#short_excess_qty').val(fetchResponse.short_excess_qty);  
+						$('#item_remark').val(fetchResponse.remark);  
+						
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			});
+			return false;
+		 });
     </script>
 <?php } ?>
 

@@ -373,6 +373,8 @@ $route['geteditStockformitem'] = "admin/geteditStockformitem";
 $route['editrejectedformitemdata'] = "admin/editrejectedformitemdata";
 $route['geteditChallanformitem'] = "admin/geteditChallanformitem";
 $route['geteditScrpareturnid'] = "admin/geteditScrpareturnid";
+$route['geteditPODitem'] = "admin/geteditPODitem";
+
 
 
 
