@@ -3856,9 +3856,11 @@ class Admin_model extends CI_Model
 
 
 
-    public function getExportdetailsCount(){
+    public function getExportdetailsCount($params){
 
         $this->db->select('*');
+        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_PACKING_INSTRACTION.'.buyer_name');
+        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_PACKING_INSTRACTION.'.buyer_po_number');
         if($params['search']['value'] != "") 
         {
             $this->db->where("(".TBL_PACKING_INSTRACTION.".packing_instrauction_id LIKE '%".$params['search']['value']."%'");
@@ -3874,12 +3876,11 @@ class Admin_model extends CI_Model
 
     }
 
-    public function getExportdetailsdata(){
+    public function getExportdetailsdata($params){
 
         $this->db->select('*,'.TBL_BUYER_MASTER.'.buyer_name as buyer_name_master,'.TBL_PACKING_INSTRACTION.'.id as packinginstarctionid,'.TBL_BUYER_PO_MASTER.'.id as buyerpoid'); 
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_PACKING_INSTRACTION.'.buyer_name');
         $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_PACKING_INSTRACTION.'.buyer_po_number');
-      
         if($params['search']['value'] != "") 
         {
             $this->db->where("(".TBL_PACKING_INSTRACTION.".packing_instrauction_id LIKE '%".$params['search']['value']."%'");
@@ -3904,7 +3905,7 @@ class Admin_model extends CI_Model
                 // if($value['packing_instrauction_id']){
                     $arr = str_split($value['packing_instrauction_id']);
                   
-                    $inrno= "SQID2324".str_pad((int)$counter+1, 4, 0, STR_PAD_LEFT);
+                    $inrno= "SQID2324".str_pad((int)$counter+1, 4, 0, STR_PAD_LEFT);    
                     $export_id = $inrno;
                 // }else{
                 //     $export_id = 'SQID23240001';
