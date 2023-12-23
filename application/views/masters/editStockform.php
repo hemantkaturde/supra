@@ -363,6 +363,8 @@
                                                 <td><?=$value['previous_balence']?></td>
                                                 <td><?=$value['item_remark']?></td>
                                                 <td>
+                                                  <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['stock_item_id'];?>' class='fa fa-pencil-square-o editStockformitem'  aria-hidden='true'></i>
+
                                                    <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['stock_item_id'];?>' class='fa fa-trash-o deleteStockformitem' aria-hidden='true'></i>
                                                 </td>
                                             <tr>   
@@ -418,6 +420,8 @@
                                                     <div class="loader_ajax" style="display:none;">
                                                             <div class="loader_ajax_inner"><img src="<?php echo ICONPATH;?>/preloader_ajax.gif"></div>
                                                     </div>
+
+                                                    <input type="hidden" class="form-control"  id="stock_form_item_id" name="stock_form_item_id" required readonly>
 
                                                     <div class="row">
                                                         <div class="col-md-6">
