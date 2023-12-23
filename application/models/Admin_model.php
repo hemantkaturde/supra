@@ -5527,14 +5527,25 @@ class Admin_model extends CI_Model
         return $data;
     }
 
-    public function get_vendorpodata_with_debit_data($vendor_po_id){
+    public function get_vendorpodata_with_debit_data($vendor_po_id,$vendor_supplier_name,$supplier_po_number){
 
-        $this->db->select(TBL_DEBIT_NOTE.'.tds_amount,'.TBL_DEBIT_NOTE.'.total_debit_amount,'.TBL_DEBIT_NOTE.'.debit_note_number');
-        $this->db->join(TBL_DEBIT_NOTE, TBL_DEBIT_NOTE.'.vendor_po = '.TBL_VENDOR_PO_MASTER.'.id');
-        $this->db->where(TBL_VENDOR_PO_MASTER.'.id', $vendor_po_id);
-        $query = $this->db->get(TBL_VENDOR_PO_MASTER);
-        $data = $query->result_array();
-        return $data;
+        if($vendor_supplier_name=='vendor'){
+            $this->db->select(TBL_DEBIT_NOTE.'.tds_amount,'.TBL_DEBIT_NOTE.'.total_debit_amount,'.TBL_DEBIT_NOTE.'.debit_note_number');
+            $this->db->join(TBL_DEBIT_NOTE, TBL_DEBIT_NOTE.'.vendor_po = '.TBL_VENDOR_PO_MASTER.'.id');
+            $this->db->where(TBL_VENDOR_PO_MASTER.'.id', $vendor_po_id);
+            $query = $this->db->get(TBL_VENDOR_PO_MASTER);
+            $data = $query->result_array();
+            return $data;
+        }else{
+
+            $this->db->select(TBL_DEBIT_NOTE.'.tds_amount,'.TBL_DEBIT_NOTE.'.total_debit_amount,'.TBL_DEBIT_NOTE.'.debit_note_number');
+            $this->db->join(TBL_DEBIT_NOTE, TBL_DEBIT_NOTE.'.supplier_po = '.TBL_SUPPLIER_PO_MASTER.'.id');
+            $this->db->where(TBL_SUPPLIER_PO_MASTER.'.id', $supplier_po_number);
+            $query = $this->db->get(TBL_SUPPLIER_PO_MASTER);
+            $data = $query->result_array();
+            return $data;
+        }
+
     }
 
     public function get_supplierpodata_debit_data($supplier_po_id){

@@ -12391,11 +12391,14 @@
 			e.preventDefault();
 			//$(".loader_ajax").show();
 			// $("#customers-list").html('');
+			
+			var vendor_supplier_name = $('#vendor_supplier_name').val();
+			var supplier_po_number = $('#supplier_po_number').val();
 			var vendor_po_id = $('.vendor_po_get_data').val();
 			$.ajax({
 				url : "<?php echo ADMIN_PATH;?>get_vendorpodata_with_debit_data",
 				type: "POST",
-				data : {'vendor_po_id' : vendor_po_id},
+				data : {'vendor_po_id' : vendor_po_id,'supplier_po_number':supplier_po_number,'vendor_supplier_name':vendor_supplier_name},
 				success: function(data, textStatus, jqXHR)
 				{
 					$(".loader_ajax").hide();

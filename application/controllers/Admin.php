@@ -7673,8 +7673,10 @@ class Admin extends BaseController
     public function get_vendorpodata_with_debit_data(){
 
         $vendor_po_id=$this->input->post('vendor_po_id');
+        $vendor_supplier_name=$this->input->post('vendor_supplier_name');
+        $supplier_po_number=$this->input->post('supplier_po_number');
         if($vendor_po_id) {
-			$vendor_po_number_data = $this->admin_model->get_vendorpodata_with_debit_data($vendor_po_id);
+			$vendor_po_number_data = $this->admin_model->get_vendorpodata_with_debit_data($vendor_po_id,$vendor_supplier_name,$supplier_po_number);
 
 			if($vendor_po_number_data) {
 
