@@ -190,7 +190,7 @@
                                     <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="tds_amount">TDS Amount <span class="required">*</span></label>
-                                                  <input type="text" class="form-control"  value="" id="tds_amount" name="tds_amount" required>
+                                                  <input type="text" class="form-control"  value="<?=$getdebitnoteditailsdata[0]['tds_amount'] ?>" id="tds_amount" name="tds_amount" required>
                                                 <p class="error tds_amount_error"></p>
                                             </div>
                                     </div>
@@ -199,7 +199,7 @@
                                     <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="freight_amount_charge">Freight Amount charge <span class="required">*</span></label>
-                                                  <input type="text" class="form-control"  value="" id="freight_amount_charge" name="freight_amount_charge" required>
+                                                  <input type="text" class="form-control"  value="<?=$getdebitnoteditailsdata[0]['freight_amount_charge'] ?>" id="freight_amount_charge" name="freight_amount_charge" required>
                                                 <p class="error freight_amount_charge_error"></p>
                                             </div>
                                     </div>
@@ -218,7 +218,7 @@
                                     <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="freight_amount_charge">Grand Total <span class="required">*</span></label>
-                                                  <input type="text" class="form-control"  value="" id="grand_total_main" name="grand_total_main" required>
+                                                  <input type="text" class="form-control"  value="<?=$getdebitnoteditailsdata[0]['grand_total_main']?>" id="grand_total_main" name="grand_total_main" required>
                                                 <p class="error grand_total_main_error"></p>
                                             </div>
                                     </div>
