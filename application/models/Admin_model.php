@@ -7411,6 +7411,19 @@ class Admin_model extends CI_Model
 
   public function geteditBillofmaterialitem($id){
 
+    $this->db->select('pre_supplier_po_number');
+    $this->db->where(TBL_BILL_OF_MATERIAL_ITEM.'.id', $id);
+    $this->db->order_by(TBL_BILL_OF_MATERIAL_ITEM.'.id','DESC');
+    $query = $this->db->get(TBL_BILL_OF_MATERIAL_ITEM);
+    $check_supplier_po = $query->row_array();
+
+    print_r($check_supplier_po);
+    exit;
+
+
+
+
+
     $this->db->select(
      TBL_BILL_OF_MATERIAL_ITEM.'.id as bill_of_material_item_id,'
     .TBL_RAWMATERIAL.'.raw_id,'
