@@ -5633,7 +5633,7 @@ class Admin_model extends CI_Model
 
         $this->db->select('*,'.TBL_POD_ITEM.'.id as pod_id,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_po,'.TBL_POD_ITEM.'.remark as pod_remark,'.TBL_RAWMATERIAL.'.type_of_raw_material as name');
         $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_POD_ITEM.'.part_number','left');
-        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number','left');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.part_number = '.TBL_RAWMATERIAL.'.part_number','left');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_POD_ITEM.'.pre_vendor_po_number','left');
         $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_POD_ITEM.'.pre_supplier_po_number','left');
         $this->db->where(TBL_POD_ITEM.'.POD_id IS NULL');
