@@ -5197,9 +5197,6 @@ class Admin extends BaseController
 
                 if($this->input->post('incomingdetail_editid')){
 
-                    print_r('in condition');
-                    exit;
-
                     $incoiming_details_item_id = trim($this->input->post('incoiming_details_item_id'));
                     if( $incoiming_details_item_id){
                         $incoiming_detail__item_id = $incoiming_details_item_id;
