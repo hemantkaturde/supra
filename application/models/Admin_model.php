@@ -3926,7 +3926,7 @@ class Admin_model extends CI_Model
 
                 $data[$counter]['packing_instrauction_id'] = $export_id;
                 $data[$counter]['buyer_name'] = $value['buyer_name_master'];
-                $data[$counter]['buyer_po'] = $value['sales_order_number'];
+                $data[$counter]['buyer_po'] = $value['sales_order_number'].' - '.$value['buyer_po_number'];
                 $data[$counter]['buyer_po_date'] = $value['buyer_po_date'];
                 $data[$counter]['action'] = '';
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewexportdetails/".$value['packinginstarctionid']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
