@@ -7426,12 +7426,12 @@ class Admin_model extends CI_Model
            .TBL_SUPPLIER_PO_MASTER_ITEM.'.order_oty as rmsupplier_order_qty,'
            .TBL_BILL_OF_MATERIAL_ITEM.'.vendor_actual_recived_qty as vendor_actual_recived_qty,'
            .TBL_FINISHED_GOODS.'.name as rm_type,'
-        //    .TBL_FINISHED_GOODS.'.sitting_size,'
-        //    .TBL_FINISHED_GOODS.'.thickness,'
-        //    .TBL_FINISHED_GOODS.'.diameter,'
-        //    .TBL_FINISHED_GOODS.'.thickness,'
-        //    .TBL_FINISHED_GOODS.'.hex_a_f,'
-        //    .TBL_FINISHED_GOODS.'.length,'
+           .TBL_RAWMATERIAL.'.sitting_size,'
+           .TBL_RAWMATERIAL.'.thickness,'
+           .TBL_RAWMATERIAL.'.diameter,'
+           .TBL_RAWMATERIAL.'.thickness,'
+           .TBL_RAWMATERIAL.'.hex_a_f,'
+           .TBL_RAWMATERIAL.'.length,'
            .TBL_FINISHED_GOODS.'.groass_weight as gross_weight,'
            .TBL_FINISHED_GOODS.'.net_weight,'
            .TBL_FINISHED_GOODS.'.sac,'
@@ -7447,7 +7447,9 @@ class Admin_model extends CI_Model
            .TBL_BILL_OF_MATERIAL_ITEM.'.remark as remark,'
        
            );
+           
            $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BILL_OF_MATERIAL_ITEM.'.part_number');
+           $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
            $this->db->join(TBL_SUPPLIER_PO_MASTER_ITEM, TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
            $this->db->where(TBL_BILL_OF_MATERIAL_ITEM.'.id', $id);
            $this->db->order_by(TBL_BILL_OF_MATERIAL_ITEM.'.id','DESC');
