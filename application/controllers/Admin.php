@@ -3667,9 +3667,6 @@ class Admin extends BaseController
     public function getVendoritemonly(){
 
         $vendor_po_number=$this->input->post('vendor_po_number');
-
-
-    
         if($vendor_po_number) {
 			$getVendoritemsonly = $this->admin_model->getVendoritemsonly($vendor_po_number,$flag);
 			if(count($getVendoritemsonly) >= 1) {
@@ -9797,6 +9794,49 @@ class Admin extends BaseController
         $mpdf->Output('purshase_order.pdf','I'); // opens in browser
 
 
+    }
+
+
+    public function getVendoritemonlyforpod(){
+
+        $vendor_po_number=$this->input->post('vendor_po_number');
+
+        $flag=$this->input->post('vendor_supplier_name');
+
+        if($vendor_po_number) {
+			$getVendoritemsonly = $this->admin_model->getVendoritemonlyforpod($vendor_po_number,$flag);
+			if(count($getVendoritemsonly) >= 1) {
+                $content = $content.'<option value="">Select Part Number</option>';
+				foreach($getVendoritemsonly as $value) {
+					$content = $content.'<option value="'.$value["fin_id"].'">'.$value["part_number"].'</option>';
+				}
+				echo $content;
+			} else {
+				echo 'failure';
+			}
+		} else {
+			echo 'failure';
+		}
+
+    }
+
+
+
+    public function getSuppliergoodsreworkrejectionvendorpod(){
+        
+        if($this->input->post('part_number')) {
+            $getPartNameBypartid = $this->admin_model->getSuppliergoodsreworkrejectionvendorpod($this->input->post('part_number'),$this->input->post('vendor_po_number'),trim($this->input->post('vendor_supplier_name')));
+            if($getPartNameBypartid){
+                $content = $getPartNameBypartid[0];
+                echo json_encode($content);
+
+            }else{
+                echo 'failure';
+            }
+           
+        } else {
+            echo 'failure';
+        }
     }
 
 

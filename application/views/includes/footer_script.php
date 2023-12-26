@@ -12653,9 +12653,9 @@
 						$("#part_number").html('');
 					
 						$.ajax({
-							url : "<?php echo ADMIN_PATH;?>getVendoritemonly",
+							url : "<?php echo ADMIN_PATH;?>getVendoritemonlyforpod",
 							type: "POST",
-							data : {'vendor_po_number' : vendor_po_number},
+							data : {'vendor_po_number' : vendor_po_number,'vendor_supplier_name':vendor_supplier_name},
 							success: function(data, textStatus, jqXHR)
 							{
 								$(".loader_ajax").hide();
@@ -12958,9 +12958,9 @@
 				if(vendor_name){
 					if(vendor_po_number){
 							$.ajax({
-								url : "<?php echo ADMIN_PATH;?>getSuppliergoodsreworkrejectionvendor",
+								url : "<?php echo ADMIN_PATH;?>getSuppliergoodsreworkrejectionvendorpod",
 								type: "POST",
-								data : {'part_number' : part_number,'vendor_po_number':vendor_po_number},
+								data : {'part_number' : part_number,'vendor_po_number':vendor_po_number,'vendor_supplier_name':vendor_supplier_name},
 								success: function(data, textStatus, jqXHR)
 								{
 									$(".loader_ajax").hide();

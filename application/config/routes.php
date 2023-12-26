@@ -374,6 +374,9 @@ $route['editrejectedformitemdata'] = "admin/editrejectedformitemdata";
 $route['geteditChallanformitem'] = "admin/geteditChallanformitem";
 $route['geteditScrpareturnid'] = "admin/geteditScrpareturnid";
 $route['geteditPODitem'] = "admin/geteditPODitem";
+$route['getVendoritemonlyforpod'] = "admin/getVendoritemonlyforpod";
+$route['getSuppliergoodsreworkrejectionvendorpod'] = "admin/getSuppliergoodsreworkrejectionvendorpod";
+
 
 
 
