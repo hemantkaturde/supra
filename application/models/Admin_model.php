@@ -6014,6 +6014,7 @@ class Admin_model extends CI_Model
         $this->db->select('*,'.TBL_STOCKS_ITEM.'.id as stock_item_id,'.TBL_INCOMING_DETAILS_ITEM.'.lot_no as lot_number_incoming');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_STOCKS_ITEM.'.part_number');
         $this->db->join(TBL_INCOMING_DETAILS_ITEM, TBL_INCOMING_DETAILS_ITEM.'.part_number = '.TBL_STOCKS_ITEM.'.part_number');
+        $this->db->join(TBL_INCOMING_DETAILS_ITEM.' as a', 'a.pre_vendor_po_number = '.TBL_STOCKS_ITEM.'.pre_vendor_po_number');
         $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
         $this->db->where(TBL_STOCKS_ITEM.'.status', 1);
         $this->db->where(TBL_STOCKS_ITEM.'.stock_form_id IS NULL');
