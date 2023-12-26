@@ -69,6 +69,8 @@
                                         <div class="form-group">
                                                 <label for="buyer_po_number_existing">Selected PO</label>
                                                  <input type="text" class="form-control" id="buyer_po_number_existing" value="<?=$buyer_po_number;?>" name="buyer_po_number_existing" readonly>
+                                                 <input type="hidden" class="form-control" id="buyer_po_number_existing_id" value="<?=$getdetailsofpackinginsraction[0]['buyer_po_number'];?>" name="buyer_po_number_existing_id" readonly>
+
                                         </div>
                                     </div>
 

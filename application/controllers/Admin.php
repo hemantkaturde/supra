@@ -5587,36 +5587,31 @@ class Admin extends BaseController
            
             }else{
 
-                if($this->input->post('buyer_po_date')){
-                   $buyer_po_date =  $this->input->post('buyer_po_date');
-                }else{
-                   $buyer_po_date =  $this->input->post('buyer_po_date_existing');
-                }
+                    if($this->input->post('buyer_po_date')){
+                    $buyer_po_date =  $this->input->post('buyer_po_date');
+                    }else{
+                    $buyer_po_date =  $this->input->post('buyer_po_date_existing');
+                    }
 
-                if($this->input->post('buyer_po_number')){
-                    $buyer_po_number =  $this->input->post('buyer_po_number');
-                 }else{
-                     $buyer_po_number =  $this->input->post('buyer_po_number_existing');
-                 }
+                    if($this->input->post('buyer_po_number')){
+                        $buyer_po_number =  $this->input->post('buyer_po_number');
+                    }else{
+                        $buyer_po_number =  $this->input->post('buyer_po_number_existing_id');
+                    }
 
-
-                $data = array(
-                    'packing_instrauction_id'   => trim($this->input->post('packing_id_number')),
-                    'buyer_name'     => trim($this->input->post('buyer_name')),
-                    'buyer_po_number'  => trim($buyer_po_number),
-                    'buyer_po_date'=> trim($buyer_po_date),
-                    'remark'=> trim($this->input->post('remark')),
-                );
-
+                    $data = array(
+                        'packing_instrauction_id'   => trim($this->input->post('packing_id_number')),
+                        'buyer_name'     => trim($this->input->post('buyer_name')),
+                        'buyer_po_number'  => trim($buyer_po_number),
+                        'buyer_po_date'=> trim($buyer_po_date),
+                        'remark'=> trim($this->input->post('remark')),
+                    );
             
                     $savePackinginstarction = $this->admin_model->savePackinginstarction(trim($this->input->post('packinginstarctionid')),$data);
                     if($savePackinginstarction){
                              $packing_instrction_response['status'] = 'success';
                              $packing_instrction_response['error'] = array( 'packing_id_number'=>strip_tags(form_error('packing_id_number')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'remark'=>strip_tags(form_error('remark')));
-                            
-                
-
-                }
+                    }
 
             }
 
