@@ -176,7 +176,7 @@
                             $button ="disabled";
                             } ?>
                            <input type="submit" id="addnewomschallan" class="btn btn-primary" value="Submit" <?=$button?>>
-                           <input type="button" onclick="location.href = '<?php echo base_url() ?>addNewOMSChallan'" class="btn btn-default" value="Back" />
+                           <input type="button" onclick="location.href = '<?php echo base_url() ?>omschallan'" class="btn btn-default" value="Back" />
                         </div>
                      </div>
                   </form>
