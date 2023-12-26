@@ -7684,7 +7684,7 @@ class Admin_model extends CI_Model
 
    public function geteditStockformitem($id){
     
-        $this->db->select('*,'.TBL_FINISHED_GOODS.'.name as description');
+        $this->db->select('*,'.TBL_FINISHED_GOODS.'.name as description,'.TBL_STOCKS_ITEM.'.id as item_id');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_STOCKS_ITEM.'.part_number');
         $this->db->where(TBL_STOCKS_ITEM.'.id', $id);
         $this->db->order_by(TBL_STOCKS_ITEM.'.id','DESC');

@@ -14616,7 +14616,7 @@
 								{
 										var fetchResponse = $.parseJSON(data);
 										$('#addNewModal').modal('show'); 
-										$('#stock_form_item_id').val(fetchResponse.stock_form_item_id); 
+										$('#stock_form_item_id').val(fetchResponse.item_id); 
 										$('#part_number').val(fetchResponse.fin_id);  
 										$('#description').val(fetchResponse.description); 
 										$('#buyre_order_qty').val(fetchResponse.buyer_order_qty); 
