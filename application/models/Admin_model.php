@@ -6011,7 +6011,7 @@ class Admin_model extends CI_Model
     }
 
     public function getItemlistStockform(){
-        $this->db->select('*,'.TBL_STOCKS_ITEM.'.id as stock_item_id,'.TBL_INCOMING_DETAILS_ITEM.'.lot_no as lot_number_incoming');
+        $this->db->select('*,'.TBL_STOCKS_ITEM.'.id as stock_item_id,b.lot_no as lot_number_incoming');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_STOCKS_ITEM.'.part_number');
        
         $this->db->join(TBL_INCOMING_DETAILS_ITEM.' as b', 'b.lot_no = '.TBL_STOCKS_ITEM.'.lot_number');
