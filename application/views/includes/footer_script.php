@@ -15494,7 +15494,7 @@
 										var data_finish_good = jQuery.parseJSON( data );
 										$('#fg_description').val(data_finish_good.name); 
 										$('#rm_description').val(data_finish_good.type_of_raw_material);
-										$('#hsn_no').val(data_finish_good.HSN_code);
+										$('#hsn_no').val(data_finish_good.finhsn_code);
 
 									}
 								},
