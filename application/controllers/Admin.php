@@ -8442,7 +8442,7 @@ class Admin extends BaseController
             if(count($getIncomingdetailsbyvendorid) >= 1) {
                 $content = $content.'<option value="">Select Lot Number</option>';
 				foreach($getIncomingdetailsbyvendorid as $value) {
-					$content = $content.'<option value="'.$value["id"].'">'.$value["lot_no"].'</lot_no>';
+					$content = $content.'<option value="'.$value["lot_no"].'">'.$value["lot_no"].'</lot_no>';
 				}
 				echo $content;
 			} else {
