@@ -9796,7 +9796,6 @@ class Admin extends BaseController
 
     }
 
-
     public function getVendoritemonlyforpod(){
 
         $vendor_po_number=$this->input->post('vendor_po_number');
@@ -9820,8 +9819,6 @@ class Admin extends BaseController
 
     }
 
-
-
     public function getSuppliergoodsreworkrejectionvendorpod(){
         
         if($this->input->post('part_number')) {
@@ -9838,7 +9835,5 @@ class Admin extends BaseController
             echo 'failure';
         }
     }
-
-
 
 }

@@ -5482,6 +5482,8 @@ class Admin_model extends CI_Model
 
 
     public function getpoddetailsforedit($i){
+     
+     
         $this->db->select('*,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_master,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_po_number,'.TBL_POD_DETAILS.'.remark as pod_details,'.TBL_POD_DETAILS.'.pod_details_id');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_POD_DETAILS.'.vendor_po','left');
         $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_POD_DETAILS.'.supplier_po','left');
@@ -5626,8 +5628,8 @@ class Admin_model extends CI_Model
     public function getpoddetails(){
 
         $this->db->select('*,'.TBL_POD_ITEM.'.id as pod_id,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_po,'.TBL_POD_ITEM.'.remark as pod_remark,'.TBL_RAWMATERIAL.'.type_of_raw_material as name');
-        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_POD_ITEM.'.part_number');
-        // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_POD_ITEM.'.part_number','left');
+        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number','left');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_POD_ITEM.'.pre_vendor_po_number','left');
         $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_POD_ITEM.'.pre_supplier_po_number','left');
         $this->db->where(TBL_POD_ITEM.'.POD_id IS NULL');
@@ -7792,7 +7794,7 @@ class Admin_model extends CI_Model
 
     }else{
 
-    
+
         $this->db->select('*,'.TBL_FINISHED_GOODS.'.sac as sac_no,'.TBL_VENDOR_PO_MASTER_ITEM.'.rate as vendorrate,'.TBL_FINISHED_GOODS.'.name as typeofrawmaterial,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_order_qty');
         // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
         $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
