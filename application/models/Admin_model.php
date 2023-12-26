@@ -6184,9 +6184,24 @@ class Admin_model extends CI_Model
         $this->db->select(TBL_INCOMING_DETAILS_ITEM.'.id ');
         $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.lot_no', $lot_no);
         $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.id', $incoiming_detail__item_id);
-        $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.part_number', $part_number);
+        // $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.part_number', $part_number);
         $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.pre_vendor_po_number', $po_number);
         $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id IS NULL');
+        $query = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
+        $data = $query->row_array();
+        return $data;
+
+    }
+
+
+    public function checkLotnumberisexitsaddedititemedit($lot_no,$part_number,$po_number,$incoiming_detail__item_id){
+
+        $this->db->select(TBL_INCOMING_DETAILS_ITEM.'.id ');
+        $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.lot_no', $lot_no);
+        $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.id', $incoiming_detail__item_id);
+        $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.part_number', $part_number);
+        $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.pre_vendor_po_number', $po_number);
+        $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id IS NOT NULL');
         $query = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
         $data = $query->row_array();
         return $data;
