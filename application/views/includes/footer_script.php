@@ -13924,6 +13924,41 @@
 
 		});
 
+
+		// $(document).ready(function() {
+		// 	var vendor_id = $('#vendor_name').val();
+		// 	var vendor_po_number = $('#vendor_po_number').val();
+		// 	var part_number = $('.part_number_for_incoming_details').val();
+
+		// 	$.ajax({
+		// 		url : "<?php echo ADMIN_PATH;?>getincominglotnumberbyvendor",
+		// 		type: "POST",
+		// 		data : {'vendor_id' : vendor_id,'part_number':part_number,'vendor_po_number':vendor_po_number},
+		// 		success: function(data, textStatus, jqXHR)
+		// 		{
+		// 			$(".loader_ajax").hide();
+		// 			if(data == "failure")
+		// 			{
+		// 				$('#lot_number').html('<option value="">Select Lot Number</option>');
+		// 			}
+		// 			else
+		// 			{
+		// 				$('#lot_number').html(data);
+
+		// 			}
+		// 		},
+		// 		error: function (jqXHR, textStatus, errorThrown)
+		// 		{
+		// 			$('#lot_number').html();
+		// 			//$(".loader_ajax").hide();
+		// 		}
+		// 	});
+		// 	return false;
+
+
+		// });
+
+
 		$(document).on('change','#vendor_name',function(e){  
 			e.preventDefault();
 			//$(".loader_ajax").show();
@@ -14543,6 +14578,39 @@
 
 		$(document).on('click','.editStockformitem',function(e){  
 			e.preventDefault();
+
+			
+
+			var vendor_id = $('#vendor_name').val();
+			var vendor_po_number = $('#vendor_po_number').val();
+			var elemFrx = $(this);
+			var part_number = elemFrx.attr('data_id_part_number');
+			
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getincominglotnumberbyvendor",
+				type: "POST",
+				data : {'vendor_id' : vendor_id,'part_number':part_number,'vendor_po_number':vendor_po_number},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#lot_number').html('<option value="">Select Lot Number</option>');
+					}
+					else
+					{
+						$('#lot_number').html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#lot_number').html();
+					//$(".loader_ajax").hide();
+				}
+			});
+	
+
 			var elemF = $(this);
 			var item_id = elemF.attr('data-id');
 			$.ajax({
