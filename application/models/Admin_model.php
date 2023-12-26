@@ -2129,8 +2129,8 @@ class Admin_model extends CI_Model
         $this->db->select('*');
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_VENDOR_PO_MASTER.'.buyer_name');
         $this->db->where(TBL_VENDOR_PO_MASTER.'.vendor_name', $supplier_name);
-        // $this->db->where(TBL_VENDOR_PO_MASTER.'.supplier_name !=',"");
-        // $this->db->where(TBL_VENDOR_PO_MASTER.'.supplier_po_number !=',"");
+        $this->db->where(TBL_VENDOR_PO_MASTER.'.supplier_name !=',"");
+        $this->db->where(TBL_VENDOR_PO_MASTER.'.supplier_po_number !=',"");
         $query = $this->db->get(TBL_VENDOR_PO_MASTER);
         $data = $query->result_array();
         return $data;
@@ -2860,6 +2860,7 @@ class Admin_model extends CI_Model
         $this->db->select('*');
         // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
+        // $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
         // $this->db->where(TBL_FINISHED_GOODS.'.status',1);
         // $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id',$buyer_po_number);
         // $this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
