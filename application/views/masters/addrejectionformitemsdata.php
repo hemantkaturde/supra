@@ -18,6 +18,7 @@
                 <div class="form-group">
                    <p><b>Vendor Name</b> : <?=$getalldataofeditrejectionform['vendor_name']; ?></p>
                    <p><b>Vendor PO</b> : <?=$getalldataofeditrejectionform['po_number']; ?></p>
+                   <input type="button" onclick="location.href = '<?php echo base_url() ?>stockrejectionform'" class="btn  btn-primary" value="Back" />
                 </div>
             </div>
         </div>
