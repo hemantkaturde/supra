@@ -13410,6 +13410,92 @@
 			return false;
 		 });
 
+		 $(document).ready(function() {
+
+			var vendor_po_number = $('#vendor_po_number').val();
+			        $.ajax({
+							url : "<?php echo ADMIN_PATH;?>getbuyerpodetailsforvendorbillofmaterial",
+							type: "POST",
+							data : {'vendor_po_number' : vendor_po_number},
+							success: function(data, textStatus, jqXHR)
+							{
+								$(".loader_ajax").hide();
+								if(data == "failure")
+								{
+									$('#buyer_name').html('<option value="">Select Buyer Name</option>');
+								}
+								else
+								{
+									$('#buyer_name').html(data);
+					             	$(".autobuyerpo").html('');		
+
+									$.ajax({
+										url : "<?php echo ADMIN_PATH;?>getBuyerDetailsByvendorpoautofill",
+										type: "POST",
+										data : {'vendor_po_number' : vendor_po_number},
+										success: function(data, textStatus, jqXHR)
+										{
+											$(".loader_ajax").hide();
+											if(data == "failure")
+											{
+												$('.autobuyerpo').html('<option value="">Select Buyer PO</option>');
+											}
+											else
+											{
+												$('.autobuyerpo').html(data);
+
+												var autobuyerpo = $(".autobuyerpo").val();
+
+												$("#export-list").html('');
+												$.ajax({
+													url : "<?php echo ADMIN_PATH;?>getexportdetailsforqulityrecord",
+													type: "POST",
+													data : {'buyer_po' : autobuyerpo},
+													success: function(data, textStatus, jqXHR)
+													{
+														$(".loader_ajax").hide();
+														if(data == "failure")
+														{
+															//$('#buyer_po_number').html('<option value="">Select Buyer PO Number</option>');
+														}
+														else
+														{
+															//$('#buyer_po_number').html('<option value="">Select Buyer PO Number</option>');
+															//$('#buyer_po_number').html(data);
+															$("#export-list").html(data);
+
+														}
+													},
+													error: function (jqXHR, textStatus, errorThrown)
+													{
+														$('#export-list').html();
+														//$(".loader_ajax").hide();
+													}
+												});
+
+
+
+											}
+										},
+										error: function (jqXHR, textStatus, errorThrown)
+										{
+											$('#buyer_name').html();
+										}
+									});
+
+										
+								}
+							},
+							error: function (jqXHR, textStatus, errorThrown)
+							{
+									$('#buyer_name').html('');				
+							}
+						});
+			    return false;
+
+		 });
+
+
 		 $(document).on('change','#vendor_po_number',function(e){  
 			e.preventDefault();
 			//$(".loader_ajax").show();
