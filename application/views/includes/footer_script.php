@@ -14586,6 +14586,10 @@
 			var vendor_po_number = $('#vendor_po_number').val();
 			var elemFrx = $(this);
 			var part_number = elemFrx.attr('data_id_part_number');
+
+
+			var elemF = $(this);
+			var item_id = elemF.attr('data-id');
 			
 			$.ajax({
 				url : "<?php echo ADMIN_PATH;?>getincominglotnumberbyvendor",
@@ -14603,8 +14607,7 @@
 						$('#lot_number').html(data);
 
 
-							var elemF = $(this);
-							var item_id = elemF.attr('data-id');
+						
 							$.ajax({
 								url : "<?php echo base_url();?>geteditStockformitem",
 								type: "POST",
@@ -14635,7 +14638,7 @@
 								$(".loader_ajax").hide();
 								}
 							});
-							// return false;
+							 return false;
 
 
 					}
