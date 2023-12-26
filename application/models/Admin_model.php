@@ -7427,7 +7427,7 @@ class Admin_model extends CI_Model
 
         $this->db->select(
             TBL_BILL_OF_MATERIAL_ITEM.'.id as bill_of_material_item_id,'
-           .TBL_RAWMATERIAL.'.raw_id,'
+           .TBL_FINISHED_GOODS.'.fin_id as  raw_id,'
            .TBL_RAWMATERIAL.'.part_number,'
            .TBL_RAWMATERIAL.'.type_of_raw_material as description,'
            .TBL_SUPPLIER_PO_MASTER_ITEM.'.order_oty as rmsupplier_order_qty,'
