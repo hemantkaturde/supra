@@ -8354,7 +8354,17 @@ class Admin extends BaseController
 
                     }
 
-                    $saveStockformitemdetails= $this->admin_model->saveStockformitemdetails('',$data);
+
+                    
+
+                    $stock_form_item_id =  trim($this->input->post('stock_form_item_id'));
+                    if($stock_form_item_id){
+                        $stockformitemid =$stock_form_item_id;
+                    }else{
+                        $stockformitemid =NULL;
+                    }
+
+                    $saveStockformitemdetails= $this->admin_model->saveStockformitemdetails($stockformitemid,$data);
 
                     
                 if($saveStockformitemdetails){

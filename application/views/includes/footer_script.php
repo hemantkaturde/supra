@@ -14290,12 +14290,15 @@
 			   var pre_buyer_po_date =   $('#buyer_po_date').val();
 			   var pre_buyer_delivery_date =   $('#buyer_delivery_date').val();
 			   var pre_remark =   $('#remark').val();
+
+			   var stock_form_item_id =   $('#stock_form_item_id').val();
+
 			
 			   $.ajax({
 				url : "<?php echo base_url();?>saveStockformitem",
 				type: "POST",
 				 //data : formData,
-				 data :{ part_number :part_number,buyre_order_qty:buyre_order_qty,fg_order_qty:fg_order_qty,invoice_number:invoice_number,invoice_date :invoice_date,invoice_qty_in_pcs:invoice_qty_in_pcs,invoice_qty_in_kgs :invoice_qty_in_kgs, lot_number :lot_number,actaul_recived_qty_in_pics :actaul_recived_qty_in_pics,actaul_recived_qty_in_kgs : actaul_recived_qty_in_kgs,privious_balenace :privious_balenace,itemremark :itemremark,pre_stock_date:pre_stock_date,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_vendor_po_date:pre_vendor_po_date,pre_buyer_name:pre_buyer_name,pre_buyer_po_id:pre_buyer_po_id,pre_buyer_po_date:pre_buyer_po_date,pre_buyer_delivery_date:pre_buyer_delivery_date,pre_remark:pre_remark,stock_id:stock_id},
+				 data :{ part_number :part_number,buyre_order_qty:buyre_order_qty,fg_order_qty:fg_order_qty,invoice_number:invoice_number,invoice_date :invoice_date,invoice_qty_in_pcs:invoice_qty_in_pcs,invoice_qty_in_kgs :invoice_qty_in_kgs, lot_number :lot_number,actaul_recived_qty_in_pics :actaul_recived_qty_in_pics,actaul_recived_qty_in_kgs : actaul_recived_qty_in_kgs,privious_balenace :privious_balenace,itemremark :itemremark,pre_stock_date:pre_stock_date,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_vendor_po_date:pre_vendor_po_date,pre_buyer_name:pre_buyer_name,pre_buyer_po_id:pre_buyer_po_id,pre_buyer_po_date:pre_buyer_po_date,pre_buyer_delivery_date:pre_buyer_delivery_date,pre_remark:pre_remark,stock_id:stock_id,stock_form_item_id:stock_form_item_id},
 				 method: "POST",
                 // data :{package_id:package_id},
                 cache:false,
@@ -14578,8 +14581,6 @@
 
 		$(document).on('click','.editStockformitem',function(e){  
 			e.preventDefault();
-
-			
 
 			var vendor_id = $('#vendor_name').val();
 			var vendor_po_number = $('#vendor_po_number').val();
