@@ -3492,7 +3492,7 @@ class Admin_model extends CI_Model
 
     public function getpreviouspackinginstarction(){
 
-        $this->db->select('packing_instrauction_id');
+        $this->db->select('packing_instrauction_id,export_id');
         $this->db->where(TBL_PACKING_INSTRACTION.'.status', 1);
         $this->db->limit(1);
         $this->db->order_by(TBL_PACKING_INSTRACTION.'.id','DESC');
