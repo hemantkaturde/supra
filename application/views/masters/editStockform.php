@@ -522,7 +522,7 @@
                                                 </div>
 
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary btn-xl closebillofmaterialmodal" data-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-secondary btn-xl closestockform" data-dismiss="modal">Close</button>
                                                     <button type="submit" id="saveStockform_item" name="saveStockform_item" class="btn btn-primary" class="btn btn-success btn-xl">Save</button>
                                                 </div>
                                             </form>    

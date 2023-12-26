@@ -14652,6 +14652,11 @@
             return false;
 	    });
 
+
+		$(document).on('click','.closestockform', function(){
+			location.reload();
+        });
+
 	
     </script>
 <?php } ?>
