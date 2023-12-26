@@ -3916,15 +3916,15 @@ class Admin_model extends CI_Model
             {
 
                 // if($value['packing_instrauction_id']){
-                    $arr = str_split($value['packing_instrauction_id']);
+                  //  $arr = str_split($value['packing_instrauction_id']);
                   
-                    $inrno= "SQID2324".str_pad((int)$counter+1, 4, 0, STR_PAD_LEFT);    
-                    $export_id = $inrno;
+                   // $inrno= "SQID2324".str_pad((int)$counter+1, 4, 0, STR_PAD_LEFT);    
+                   // $export_id = $inrno;
                 // }else{
                 //     $export_id = 'SQID23240001';
                 // }
 
-                $data[$counter]['packing_instrauction_id'] = $export_id;
+                $data[$counter]['packing_instrauction_id'] =  $value['export_id'];
                 $data[$counter]['buyer_name'] = $value['buyer_name_master'];
                 $data[$counter]['buyer_po'] = $value['sales_order_number'].' - '.$value['buyer_po_number'];
                 $data[$counter]['buyer_po_date'] = $value['buyer_po_date'];

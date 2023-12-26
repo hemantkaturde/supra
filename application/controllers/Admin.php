@@ -4781,17 +4781,19 @@ class Admin extends BaseController
             $this->form_validation->set_rules('buyer_name','Date','trim|required');
             $this->form_validation->set_rules('buyer_po_number','Vendor Name','trim|required');
             $this->form_validation->set_rules('buyer_po_date','Buyer PO Date','trim|required');
+            $this->form_validation->set_rules('export_id','Export Id','trim|required');
             $this->form_validation->set_rules('remark','Remark','trim');
 
             if($this->form_validation->run() == FALSE)
             {
                 $packing_instrction_response['status'] = 'failure';
-                $packing_instrction_response['error'] = array( 'packing_id_number'=>strip_tags(form_error('packing_id_number')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'remark'=>strip_tags(form_error('remark')));
+                $packing_instrction_response['error'] = array('export_id'=>strip_tags(form_error('export_id')), 'packing_id_number'=>strip_tags(form_error('packing_id_number')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'remark'=>strip_tags(form_error('remark')));
            
             }else{
 
                 $data = array(
                     'packing_instrauction_id'   => trim($this->input->post('packing_id_number')),
+                    'export_id'   => trim($this->input->post('export_id')),
                     'buyer_name'     => trim($this->input->post('buyer_name')),
                     'buyer_po_number'  => trim($this->input->post('buyer_po_number')),
                     'buyer_po_date'=> trim($this->input->post('buyer_po_date')),

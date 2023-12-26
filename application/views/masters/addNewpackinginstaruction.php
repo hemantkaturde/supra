@@ -41,6 +41,26 @@
                                         }else{
                                             $packing_instrauction_id = 'PI23240001';
                                         }
+
+
+
+                                        if($getpreviouspackinginstarction[0]['export_id']){
+                                            // $arr = str_split($getpreviouspackinginstarction[0]['packing_instrauction_id']);
+                                            // $i = end($arr);
+                                            // $inrno= "PI2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                            // $packing_instrauction_id = $inrno;
+
+                                            $string =$getpreviouspackinginstarction[0]['export_id'];
+                                            $n = 4; // Number of characters to extract from the end
+                                            $lastNCharacters = substr($string, -$n);
+                                            $inrno= "SQID2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                            $export_id = $inrno;
+
+                                        }else{
+                                            $export_id = 'SQID23240001';
+                                        }
+
+
                                     ?>
 
                                     <div class="col-md-6">
@@ -50,6 +70,10 @@
                                             <p class="error packing_id_number_error"></p>
                                         </div>
                                     </div>
+
+                                  
+                                    <input type="hidden" class="form-control" id="export_id" name="export_id"  value="<?php echo $export_id; ?>">
+                                    
                                     
                                     <div class="col-md-6">
                                         <div class="form-group">
