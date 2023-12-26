@@ -13444,6 +13444,38 @@
 											else
 											{
 												$('.autobuyerpo').html(data);
+
+												var autobuyerpo = $(".autobuyerpo").val();
+
+												$("#export-list").html('');
+												$.ajax({
+													url : "<?php echo ADMIN_PATH;?>getexportdetailsforqulityrecord",
+													type: "POST",
+													data : {'buyer_po' : autobuyerpo},
+													success: function(data, textStatus, jqXHR)
+													{
+														$(".loader_ajax").hide();
+														if(data == "failure")
+														{
+															//$('#buyer_po_number').html('<option value="">Select Buyer PO Number</option>');
+														}
+														else
+														{
+															//$('#buyer_po_number').html('<option value="">Select Buyer PO Number</option>');
+															//$('#buyer_po_number').html(data);
+															$("#export-list").html(data);
+
+														}
+													},
+													error: function (jqXHR, textStatus, errorThrown)
+													{
+														$('#export-list').html();
+														//$(".loader_ajax").hide();
+													}
+												});
+
+
+
 											}
 										},
 										error: function (jqXHR, textStatus, errorThrown)

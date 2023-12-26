@@ -340,6 +340,9 @@ $route['getallcalculationexportitems'] = "admin/getallcalculationexportitems";
 $route['getallbalencecalculationexportitems'] = "admin/getallbalencecalculationexportitems";
 $route['deletejobworkitem'] = "admin/deletejobworkitem";
 $route['editpoddetails/(:any)'] = "admin/editpoddetails/$1";
+$route['getexportdetailsforqulityrecord'] = "admin/getexportdetailsforqulityrecord";
+
+
 
 
 

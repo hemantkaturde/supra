@@ -9836,4 +9836,38 @@ class Admin extends BaseController
         }
     }
 
+
+    public function getexportdetailsforqulityrecord(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+    
+            $buyer_po = $this->input->post('buyer_po');
+        
+            // load table library
+            $this->load->library('table');
+            
+            // set heading
+            $this->table->set_heading('Part Number', 'Description','Buyer Invoice Number', 'Buyer Invoice Date','Buyer Invoice Qty','Box Qty','Remark');
+    
+            // set template
+            $style = array('table_open'  => '<p><b>Export Details</b></p><table style="max-width: 70%;display: block;overflow-x: auto; white-space: nowrap;" class="table">');
+    
+            $this->table->set_template($style);
+            $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_number,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_date,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_qty,'.TBL_PACKING_INSTRACTION_DETAILS.'.box_qty,'.TBL_PACKING_INSTRACTION_DETAILS.'.remark');
+            $this->db->join(TBL_PACKING_INSTRACTION_DETAILS, TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id = '.TBL_PACKING_INSTRACTION.'.id');
+            $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_PACKING_INSTRACTION_DETAILS.'.part_number');
+            $this->db->where(TBL_PACKING_INSTRACTION.'.buyer_po_number',$buyer_po);
+            $query_result = $this->db->get(TBL_PACKING_INSTRACTION);
+            $data = $query_result->result_array();
+    
+            if($data){
+                echo $this->table->generate($query_result);
+    
+            }else{
+                echo '';
+            }
+        }
+
+    }
+
 }
