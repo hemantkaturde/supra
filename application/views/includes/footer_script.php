@@ -5562,6 +5562,65 @@
 			return false;
 		});
 
+		$(document).ready(function() {
+
+			var vendor_po_number = $('#vendor_po_number').val();
+			
+			$.ajax({
+					url : "<?php echo ADMIN_PATH;?>getIncomingDetailsofbillofmaterial",
+					type: "POST",
+					data : {'vendor_po_number' : vendor_po_number},
+					success: function(data, textStatus, jqXHR)
+					{
+						$(".loader_ajax").hide();
+						if(data == "failure")
+						{
+							$('#incoming_details').html('<option value="">Select Incoming Details</option>');
+						}
+						else
+						{
+							$('#incoming_details').html(data);
+
+							var incoming_details = $('#incoming_details').val();
+							$("#incoming_details_item_list").html('');
+							$.ajax({
+								url : "<?php echo ADMIN_PATH;?>getincomingListforDisplay",
+								type: "POST",
+								data : {'incoming_details' : incoming_details},
+								success: function(data, textStatus, jqXHR)
+								{
+									$(".loader_ajax").hide();
+									if(data == "failure")
+									{
+										//$('#buyer_po_number').html('<option value="">Select Buyer PO Number</option>');
+									}
+									else
+									{
+										$("#incoming_details_item_list").html(data);
+
+									}
+								},
+								error: function (jqXHR, textStatus, errorThrown)
+								{
+									$('#incoming_details_item_list').html();
+									//$(".loader_ajax").hide();
+								}
+							});
+
+						}
+					},
+					error: function (jqXHR, textStatus, errorThrown)
+					{
+						   
+							$('#incoming_details').html('');				
+					}
+				});
+		return false;
+
+		});
+
+
+
 		$(document).on('change','#vendor_name',function(e){  
 			e.preventDefault();
 			//$(".loader_ajax").show();
