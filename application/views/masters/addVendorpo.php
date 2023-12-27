@@ -306,7 +306,7 @@
 
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="work_order">Work Order </label>
+                                            <label for="work_order">Payment Terms </label>
                                             <input type="text" class="form-control" id="work_order" value="<?=$fetchALLpreVendoritemList[0]['pre_work_order'];?>" name="work_order">
                                             <p class="error work_order_error"></p>
                                         </div>
