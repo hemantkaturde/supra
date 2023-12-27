@@ -218,6 +218,27 @@
                                                                 <p class="error gross_weight_error"></p>
                                                             </div>
 
+                                                            <div class="form-group">
+                                                            <label for="unit">Unit</label>
+            
+                                                                    <select class="form-control" name="unit" id="unit">
+                                                                        <option value="">Select Unit</option>
+                                                                        <option value="kgs">Kgs</option>
+                                                                        <option value="Pcs">Pcs</option>
+                                                                        <option value="Nos">Nos</option>
+                                                                        <option value="Sheet">Sheet</option>
+                                                                        <option value="Set">Set</option>
+                                                                    </select>
+                                                                    <p class="error unit_error"></p>
+                                                                
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="calculation">Calculation</label>
+                                                                <input type="text" class="form-control" id="calculation" name="calculation">
+                                                                <p class="error calculation_error"></p>
+                                                            </div>
+
                                                         </div>
                                                         <div class="col-md-6">
 
