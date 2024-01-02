@@ -209,7 +209,7 @@
                                     <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="chq_amt">Chq Amount <span class="required">*</span></label>
-                                                  <input type="text" class="form-control"  value="" id="chq_amt" name="chq_amt" required>
+                                                  <input type="text" class="form-control"  value="<?=$getdebitnoteditailsdata[0]['chq_amount']?>" id="chq_amt" name="chq_amt" required>
                                                 <p class="error chq_amt_error"></p>
                                             </div>
                                     </div>
