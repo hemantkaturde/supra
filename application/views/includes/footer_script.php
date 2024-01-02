@@ -1780,7 +1780,6 @@
 			return false;
 		});
 
-
 		$(document).on('click','.editbuyerpoitem',function(e){  
 			e.preventDefault();
 			var elemF = $(this);
@@ -1811,8 +1810,6 @@
 			});
 			return false;
 		});
-
-
 
     </script>
 <?php } ?>

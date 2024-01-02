@@ -31,9 +31,7 @@
 
                                     <?php
 
-
                                         if($getPreviousSupplierPoconfirmationNumber['po_number']){
-
 
                                             $getPreviousSupplierPoconfirmationNumber_number = substr($getPreviousSupplierPoconfirmationNumber['po_number'], -1);
 
