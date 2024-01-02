@@ -13085,7 +13085,7 @@
 									else
 									{
 										var data_row_material = jQuery.parseJSON( data );
-										$('#description').val(data_row_material.name);
+										$('#description').val(data_row_material.typeofrawmaterial);
 										$('#rate').val(data_row_material.vendorrate);
 										$('#order_qty').val(data_row_material.vendor_order_qty);
 									}
