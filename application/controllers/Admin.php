@@ -3643,6 +3643,31 @@ class Admin extends BaseController
 		}
     }
 
+    
+
+    public function getVendorPonumberbySupplieridvendorbillofmaterial(){
+        $vendor_name=$this->input->post('vendor_name');
+        if($vendor_name) {
+			$getVendordetails = $this->admin_model->getVendorPonumberbySupplieridvendorbillofmaterial($vendor_name);
+			if(count($getVendordetails) >= 1) {
+                $content = $content.'<option value="">Select Vendor PO Number</option>';
+				foreach($getVendordetails as $value) {
+					$content = $content.'<option value="'.$value["id"].'">'.$value["po_number"].'</option>';
+				}
+				echo $content;
+			} else {
+				echo 'failure';
+			}
+		} else {
+			echo 'failure';
+		}
+    }
+
+
+
+    
+
+
 
     public function getBuyerNamebySupplierid(){
 

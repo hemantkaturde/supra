@@ -388,6 +388,9 @@ $route['getSuppliergoodsreworkrejectionvendorpod'] = "admin/getSuppliergoodsrewo
 
 
 
+$route['getVendorPonumberbySupplieridvendorbillofmaterial'] = "admin/getVendorPonumberbySupplieridvendorbillofmaterial";
+
+
 
 
 
