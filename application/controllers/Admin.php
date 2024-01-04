@@ -7672,7 +7672,6 @@ class Admin extends BaseController
             $data['vendorList']= $this->admin_model->fetchALLvendorList();
             $data['supplierList']= $this->admin_model->fetchALLsupplierList();
             $data['getpoddetails']= $this->admin_model->getpoddetails();
-        
             $data['getPreviousPODdetails_number'] = $this->admin_model->getPreviousPODdetails_number();
             $this->loadViews("masters/addnewPODdetails", $this->global, $data, NULL);
         }
