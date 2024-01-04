@@ -4407,8 +4407,8 @@
 									}
 									
 
-									if(data_row_material.sent_qty != "undefined"){
-										$('#rmqty').val(data_row_material.sent_qty);
+									if(data_row_material.supplier_sent_qty != "undefined"){
+										$('#rmqty').val(data_row_material.supplier_sent_qty);
 									}else{
 										var zero_val = 0;
 										$('#rmqty').val(zero_val);
@@ -4420,7 +4420,7 @@
 									$('#drawing_number').val(data_row_material.drawing_number);
 									$('#description_1').val(data_row_material.description_1);
 									$('#description_2').val(data_row_material.description_2);
-									$('#qty').val(data_row_material.order_oty);
+									$('#qty').val(data_row_material.supplier_order_qty);
 									$('#vendor_qty').val(data_row_material.vendor_order_qty);
 									$('#unit').val(data_row_material.unit);
 									$('#rm_type').val(data_row_material.type_of_raw_material);
