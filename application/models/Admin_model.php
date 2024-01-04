@@ -6607,7 +6607,7 @@ class Admin_model extends CI_Model
     }
 
     public function getenquiryformdata($params){
-        $this->db->select('*');
+        $this->db->select('*,'.TBL_ENAUIRY_FORM.'.id as enquiry_form_id');
         if($params['search']['value'] != "") 
         {
             $this->db->where("(".TBL_ENAUIRY_FORM.".enquiry_number LIKE '%".$params['search']['value']."%'");
@@ -6633,8 +6633,8 @@ class Admin_model extends CI_Model
                 $data[$counter]['buyer_enquiry_date'] = $value['buyer_enquiry_date'];
                 $data[$counter]['remark'] =$value['remark'];
                 $data[$counter]['action'] ='';
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editomschallan/".$value['oms_challan_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
-                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['oms_challan_id']."' class='fa fa-trash-o deleteomschallan' aria-hidden='true'></i>"; 
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editeqnuiryformdata/".$value['enquiry_form_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['enquiry_form_id']."' class='fa fa-trash-o deleteeqnuiryformdata' aria-hidden='true'></i>"; 
                 $counter++; 
             }
         }
@@ -7836,10 +7836,43 @@ class Admin_model extends CI_Model
 
     }
 
-}
+   }
 
 
-  
+    public function deleteenquiryformdata($id){
+
+        $this->db->where('id ', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_ENAUIRY_FORM)){
+        return TRUE;
+        }else{
+        return FALSE;
+        }
+    }
+
+
+    public function geteditChallanformitemforedititem($id){
+
+        $this->db->select(TBL_OMS_CHALLAN_ITEM.'.id as omschallanid,'
+        .TBL_FINISHED_GOODS.'.fin_id as part_number,'
+        .TBL_FINISHED_GOODS.'.name as fg_description,'
+        .TBL_RAWMATERIAL.'.type_of_raw_material as rm_description,'
+        .TBL_OMS_CHALLAN_ITEM.'.gross_weight as gross_weight,'
+        .TBL_OMS_CHALLAN_ITEM.'.net_weight as net_weight,'
+        
+    
+         );
+
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_OMS_CHALLAN_ITEM.'.part_number');
+        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number','left');
+        
+        $this->db->where(TBL_OMS_CHALLAN_ITEM.'.id', $id);
+        $query = $this->db->get(TBL_OMS_CHALLAN_ITEM);
+        $fetch_result = $query->result_array();
+        return $fetch_result;
+
+    }
+
 
   }
 

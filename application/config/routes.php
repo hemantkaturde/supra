@@ -341,6 +341,8 @@ $route['getallbalencecalculationexportitems'] = "admin/getallbalencecalculatione
 $route['deletejobworkitem'] = "admin/deletejobworkitem";
 $route['editpoddetails/(:any)'] = "admin/editpoddetails/$1";
 $route['getexportdetailsforqulityrecord'] = "admin/getexportdetailsforqulityrecord";
+$route['deleteenquiryformdata'] = "admin/deleteenquiryformdata";
+
 
 
 
@@ -379,6 +381,7 @@ $route['geteditScrpareturnid'] = "admin/geteditScrpareturnid";
 $route['geteditPODitem'] = "admin/geteditPODitem";
 $route['getVendoritemonlyforpod'] = "admin/getVendoritemonlyforpod";
 $route['getSuppliergoodsreworkrejectionvendorpod'] = "admin/getSuppliergoodsreworkrejectionvendorpod";
+$route['geteditChallanformitemforedititem'] = "admin/geteditChallanformitemforedititem";
 
 
 

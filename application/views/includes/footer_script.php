@@ -15939,6 +15939,42 @@
 				}
 			});
 	    });
+		
+		$(document).on('click','.editChallanformitem',function(e){  
+			e.preventDefault();
+			var elemF = $(this);
+			var item_id = elemF.attr('data-id');
+			$.ajax({
+				url : "<?php echo base_url();?>geteditChallanformitemforedititem",
+				type: "POST",
+				data : 'id='+item_id,
+				success: function(data, textStatus, jqXHR)
+				{
+					    var fetchResponse = $.parseJSON(data);
+						$('#addNewModal').modal('show'); 
+
+						$('#oms_challan_item_id').val(fetchResponse.omschallanid); 
+						$('#part_number').val(fetchResponse.part_number);  
+						$('#fg_description').val(fetchResponse.fg_description);  
+						$('#rm_description').val(fetchResponse.rm_description);  
+						$('#gross_weight').val(fetchResponse.gross_weight);  
+						// $('#qty_recived').val(fetchResponse.qty_recived);  
+						$('#unit').val(fetchResponse.unit);  
+						// $('#bill_no').val(fetchResponse.bill_no);  
+						// $('#bill_date').val(fetchResponse.bill_date);  
+						// $('#short_excess_qty').val(fetchResponse.short_excess_qty);  
+						// $('#item_remark').val(fetchResponse.remark);  
+						
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			});
+			return false;
+		 });
+
+
 	</script>
 <?php } ?>
 
@@ -16129,6 +16165,54 @@
 			    }
 			   });
 			return false;
+	     });
+
+		 $(document).on('click','.deleteeqnuiryformdata',function(e){
+			var elemF = $(this);
+			e.preventDefault();
+			swal({
+				title: "Are you sure?",
+				text: "Delete Enquiry Form Data",
+				type: "warning",
+				showCancelButton: true,
+				closeOnClickOutside: false,
+				confirmButtonClass: "btn-sm btn-danger",
+				confirmButtonText: "Yes, delete it!",
+				cancelButtonText: "No, cancel plz!",
+				closeOnConfirm: false,
+				closeOnCancel: false
+			}, function(isConfirm) {
+				if (isConfirm) {
+							$.ajax({
+								url : "<?php echo base_url();?>deleteenquiryformdata",
+								type: "POST",
+								data : 'id='+elemF.attr('data-id'),
+								success: function(data, textStatus, jqXHR)
+								{
+									const obj = JSON.parse(data);
+								
+									if(obj.status=='success'){
+										swal({
+											title: "Deleted!",
+											text: "Enquiry Form Data Deleted Succesfully",
+											icon: "success",
+											button: "Ok",
+											},function(){ 
+													window.location.href = "<?php echo base_url().'enquiryform'?>";
+										});	
+									}
+
+								},
+								error: function (jqXHR, textStatus, errorThrown)
+								{
+									$(".loader_ajax").hide();
+								}
+							})
+						}
+						else {
+				swal("Cancelled", "Enquiry Form Data deletion cancelled ", "error");
+				}
+			});
 	     });
 
 	</script>

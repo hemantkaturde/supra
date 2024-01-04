@@ -8859,6 +8859,22 @@ class Admin extends BaseController
         }
     }
 
+    public function deleteenquiryformdata(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->deleteenquiryformdata(trim($this->input->post('id')));
+            if ($result) {
+                        $process = 'Delete Enquiry Data';
+                        $processFunction = 'Admin/deleteenquiryformdata';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
+    }
+
     public function saveenquiryformitem(){
         
         $post_submit = $this->input->post();
@@ -9628,7 +9644,6 @@ class Admin extends BaseController
         }
     }
 
-
     
     public function editrejectedformitemdata(){
 
@@ -9891,6 +9906,21 @@ class Admin extends BaseController
     
             }else{
                 echo '';
+            }
+        }
+
+    }
+
+    public function geteditChallanformitemforedititem(){
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $geteditPODitem = $this->admin_model->geteditChallanformitemforedititem(trim($this->input->post('id')));
+            if($geteditPODitem){
+                $content = $geteditPODitem[0];
+                echo json_encode($content);
+            }else{
+                echo 'failure';
             }
         }
 
