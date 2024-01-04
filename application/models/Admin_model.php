@@ -5485,7 +5485,7 @@ class Admin_model extends CI_Model
 
 
         $this->db->select('pre_vendor_supplier_name');
-        $this->db->where(TBL_POD_ITEM.'.POD_id IS NULL');
+        $this->db->where(TBL_POD_ITEM.'.POD_id',$i);
         $query = $this->db->get(TBL_POD_ITEM);
         $pre_vendor_supplier_name = $query->result_array();
        
