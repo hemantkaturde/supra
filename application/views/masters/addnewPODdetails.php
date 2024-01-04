@@ -242,7 +242,7 @@
                                                     <td><?php echo $value['bill_no'];?></td>
                                                     <td><?php echo $value['bill_date'];?></td>
                                                     <td><?php echo $value['short_excess_qty'];?></td>
-                                                    <td><?php echo $value['pod_remark'];?></td>
+                                                <td><?php echo $value['pod_remark'];?></td>
                                                     <td>
                                                     <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['pod_id'];?>' class='fa fa-pencil-square-o editPODitem'  aria-hidden='true'></i>
                                                     <i style='font-size: x-large;cursor: pointer'

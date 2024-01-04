@@ -5482,8 +5482,6 @@ class Admin_model extends CI_Model
 
     public function getpoddetailsforedititem($i){
 
-
-
         $this->db->select('pre_vendor_supplier_name');
         $this->db->where(TBL_POD_ITEM.'.POD_id',$i);
         $query = $this->db->get(TBL_POD_ITEM);
@@ -7850,24 +7848,93 @@ class Admin_model extends CI_Model
 
    public function geteditPODitemedit($id){
 
-        $this->db->select(TBL_POD_ITEM.'.id as poditems_id,
-        '.TBL_RAWMATERIAL.'.raw_id,
-        '.TBL_POD_ITEM.'.order_qty,
-        '.TBL_POD_ITEM.'.lot_no,
-        '.TBL_POD_ITEM.'.qty_recived,
-        '.TBL_POD_ITEM.'.unit,
-        '.TBL_POD_ITEM.'.bill_no,
-        '.TBL_POD_ITEM.'.bill_date,
-        '.TBL_POD_ITEM.'.short_excess_qty,
-        '.TBL_POD_ITEM.'.remark,
-        
-        '.TBL_RAWMATERIAL.'.type_of_raw_material as description');
-        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_POD_ITEM.'.part_number');
-        $this->db->where(TBL_POD_ITEM.'.id', $id);
-        $this->db->order_by(TBL_POD_ITEM.'.id','DESC');
-        $query = $this->db->get(TBL_POD_ITEM);
-        $fetch_result = $query->result_array();
-        return $fetch_result;
+
+
+    $this->db->select('pre_vendor_supplier_name');
+    $this->db->where(TBL_POD_ITEM.'.id',$id);
+    $query = $this->db->get(TBL_POD_ITEM);
+    $pre_vendor_supplier_name = $query->result_array();
+   
+    foreach ($pre_vendor_supplier_name as $key_vendor_supplier_name => $value_vendor_supplier_name) {
+
+        // print_r($value_vendor_supplier_name);
+        // exit;
+
+        if($value_vendor_supplier_name['pre_vendor_supplier_name']=='vendor'){
+
+            if($value_vendor_supplier_name['pre_supplier_po_number']){
+
+                $this->db->select(TBL_POD_ITEM.'.id as poditems_id,
+                '.TBL_FINISHED_GOODS.'.fin_id as raw_id,
+                '.TBL_POD_ITEM.'.order_qty,
+                '.TBL_POD_ITEM.'.lot_no,
+                '.TBL_POD_ITEM.'.qty_recived,
+                '.TBL_POD_ITEM.'.unit,
+                '.TBL_POD_ITEM.'.bill_no,
+                '.TBL_POD_ITEM.'.bill_date,
+                '.TBL_POD_ITEM.'.short_excess_qty,
+                '.TBL_POD_ITEM.'.remark,
+                
+                '.TBL_FINISHED_GOODS.'.name as description');
+                $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_POD_ITEM.'.part_number');
+                $this->db->where(TBL_POD_ITEM.'.id', $id);
+                $this->db->order_by(TBL_POD_ITEM.'.id','DESC');
+                $query = $this->db->get(TBL_POD_ITEM);
+                $fetch_result = $query->result_array();
+                return $fetch_result;
+
+            }else{
+
+                $this->db->select(TBL_POD_ITEM.'.id as poditems_id,
+                '.TBL_FINISHED_GOODS.'.fin_id as raw_id,
+                '.TBL_POD_ITEM.'.order_qty,
+                '.TBL_POD_ITEM.'.lot_no,
+                '.TBL_POD_ITEM.'.qty_recived,
+                '.TBL_POD_ITEM.'.unit,
+                '.TBL_POD_ITEM.'.bill_no,
+                '.TBL_POD_ITEM.'.bill_date,
+                '.TBL_POD_ITEM.'.short_excess_qty,
+                '.TBL_POD_ITEM.'.remark,
+                
+                '.TBL_FINISHED_GOODS.'.name as description');
+                $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_POD_ITEM.'.part_number');
+                $this->db->where(TBL_POD_ITEM.'.id', $id);
+                $this->db->order_by(TBL_POD_ITEM.'.id','DESC');
+                $query = $this->db->get(TBL_POD_ITEM);
+                $fetch_result = $query->result_array();
+                return $fetch_result;
+            }
+            
+            
+        }else{
+
+            $this->db->select(TBL_POD_ITEM.'.id as poditems_id,
+            '.TBL_RAWMATERIAL.'.raw_id,
+            '.TBL_POD_ITEM.'.order_qty,
+            '.TBL_POD_ITEM.'.lot_no,
+            '.TBL_POD_ITEM.'.qty_recived,
+            '.TBL_POD_ITEM.'.unit,
+            '.TBL_POD_ITEM.'.bill_no,
+            '.TBL_POD_ITEM.'.bill_date,
+            '.TBL_POD_ITEM.'.short_excess_qty,
+            '.TBL_POD_ITEM.'.remark,
+            
+            '.TBL_RAWMATERIAL.'.type_of_raw_material as description');
+            $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_POD_ITEM.'.part_number');
+            $this->db->where(TBL_POD_ITEM.'.id', $id);
+            $this->db->order_by(TBL_POD_ITEM.'.id','DESC');
+            $query = $this->db->get(TBL_POD_ITEM);
+            $fetch_result = $query->result_array();
+            return $fetch_result;
+
+        }           
+    }
+
+
+    
+
+
+       
 
    }
 
