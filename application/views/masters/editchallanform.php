@@ -89,7 +89,7 @@
                                         </div>
                                     </div>
 
-
+<!-- 
                                     <div class="col-md-12">
                                         <div class="form-group">
                                                 <label for="supplier_name">Supplier Name </label>
@@ -101,7 +101,7 @@
                                                 </select>
                                             <p class="error supplier_name_error"></p>
                                         </div>
-                                    </div>
+                                    </div> -->
 
                                     <?php
                                         if($getChallanformdetails[0]['rejection_supplier_po']){
@@ -266,14 +266,14 @@
                                                         </div>
                                                     </div>
 
-
+<!-- 
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Rejected Work Reason<span class="required">*</span></label>
                                                         <div class="col-sm-8">
                                                             <input type="text" class="form-control"  id="rejected_work_reason" name="rejected_work_reason">
                                                             <p class="error rejected_work_reason_error"></p>
                                                         </div>
-                                                    </div>
+                                                    </div> -->
 
                                                    
                                                     <div class="form-group row">
