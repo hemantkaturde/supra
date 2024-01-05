@@ -344,7 +344,6 @@ $route['getexportdetailsforqulityrecord'] = "admin/getexportdetailsforqulityreco
 $route['deleteenquiryformdata'] = "admin/deleteenquiryformdata";
 $route['deleteenquiryformitemdata'] = "admin/deleteenquiryformitemdata";
 $route['geteditenquiryformitemdata'] = "admin/geteditenquiryformitemdata";
-
 $route['getVendorPoconfirmationvendorlist'] = "admin/getVendorPoconfirmationvendorlist";
 
 
