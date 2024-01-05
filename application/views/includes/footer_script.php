@@ -16019,6 +16019,8 @@
 		 $(document).on('click','#savenewenauiryform',function(e){
 			e.preventDefault();
 			$(".loader_ajax").show();
+
+			
 			var formData = new FormData($("#addnewenauiryform")[0]);
 			$.ajax({
 				url : "<?php echo base_url();?>addnewenquiryform",
@@ -16134,6 +16136,10 @@
 
 
 			   var enquiry_form_item_id =   $('#enquiry_form_item_id').val();
+
+			   var enquiry_form_id =   $('#enquiry_form_id').val();
+
+			   
 			   
 			   $.ajax({
 				url : "<?php echo base_url();?>saveenquiryformitem",
@@ -16162,8 +16168,16 @@
 							icon: "success",
 							button: "Ok",
 							},function(){ 
+
+								if(enquiry_form_id){
+
+									window.location.href = "<?php echo base_url().'editeqnuiryformdata/'?>"+enquiry_form_id;	
+								}else{
+
+									window.location.href = "<?php echo base_url().'addnewenquiryform'?>";	
+								}
 								
-							    window.location.href = "<?php echo base_url().'addnewenquiryform'?>";	
+							   
 								
 						});		
 				    }

@@ -61,7 +61,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="buyer_enquiry_no">Buyer Name<span class="required">*</span></label>
-                                        <input type="buyer_enquiry_no" class="form-control" id="buyer_enquiry_no" name="buyer_enquiry_no" value="<?=$getallenquiryformitemadd[0]['pre_enquiry_date'] ?>">
+                                        <input type="buyer_enquiry_no" class="form-control" id="buyer_enquiry_no" name="buyer_enquiry_no" value="">
                                         <p class="error buyer_enquiry_no_error"></p>
                                     </div>
                                 </div>

@@ -8841,12 +8841,22 @@ class Admin extends BaseController
                 $data = array(
                     'enquiry_number' => trim($this->input->post('enquiry_number')),
                     'date' => trim($this->input->post('enquiry_date')),
+                    'buyer_name' => trim($this->input->post('buyer_enquiry_no')),
                     'buyer_enquiry_no' => trim($this->input->post('buyer_enquiry_no')),
                     'buyer_enquiry_date' => trim($this->input->post('buyer_enquiry_date')),
                     'remark' => trim($this->input->post('remark')),
                     'enquiry_status'  => trim($this->input->post('status')),
                 );
-                $saveenquirydetailsform= $this->admin_model->saveenquirydetailsform('',$data);
+
+                $enquiry_form_id = trim($this->input->post('enquiry_form_id'));
+
+                if($enquiry_form_id){
+                    $enquiryformid = $enquiry_form_id;
+                }else{
+                    $enquiryformid =NULL;
+                }
+
+                $saveenquirydetailsform= $this->admin_model->saveenquirydetailsform($enquiryformid,$data);
                 if($saveenquirydetailsform){
 
                     $update_enquiry_from = $this->admin_model->update_enquiry_from_id_in_items($saveenquirydetailsform);
@@ -8921,7 +8931,6 @@ class Admin extends BaseController
         $data['getallenquiryformitemedit']= $this->admin_model->getallenquiryformitemedit($enquiryformid);
 
         $data['getenquirydetailsforedit']= $this->admin_model->getenquirydetailsforedit($enquiryformid);
-
         $this->loadViews("masters/editenquiryform", $this->global, $data, NULL);
 
     }

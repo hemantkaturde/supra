@@ -6821,7 +6821,7 @@ class Admin_model extends CI_Model
 
     public function getenquirydetailsforedit($enquiryformid){
 
-        $this->db->select('*');
+        $this->db->select('*,'.TBL_ENAUIRY_FORM.'.id as enquiry_form_id');
         $this->db->where(TBL_ENAUIRY_FORM.'.status', 1);
         $this->db->where(TBL_ENAUIRY_FORM.'.id',$enquiryformid);
         $query = $this->db->get(TBL_ENAUIRY_FORM);
@@ -6868,7 +6868,7 @@ class Admin_model extends CI_Model
         $this->db->join(TBL_VENDOR.' as h', 'h.ven_id = '.TBL_ENAUIRY_FORM_ITEM.'.vendor_id_4','left');
         $this->db->join(TBL_VENDOR.' as i', 'i.ven_id = '.TBL_ENAUIRY_FORM_ITEM.'.vendor_id_5','left');
         $this->db->where(TBL_ENAUIRY_FORM_ITEM.'.status', 1);
-        $this->db->where(TBL_ENAUIRY_FORM_ITEM.'.id',$id);
+        $this->db->where(TBL_ENAUIRY_FORM_ITEM.'.enquiry_form_id',$id);
         $query = $this->db->get(TBL_ENAUIRY_FORM_ITEM);
         $data = $query->result_array();
         return $data;
@@ -8130,9 +8130,17 @@ class Admin_model extends CI_Model
         $this->db->where('id ', $id);
         //$this->db->delete(TBL_SUPPLIER);
         if($this->db->delete(TBL_ENAUIRY_FORM)){
-        return TRUE;
+            
+            $this->db->where('enquiry_form_id', $id);
+            //$this->db->delete(TBL_SUPPLIER);
+            if($this->db->delete(TBL_ENAUIRY_FORM_ITEM)){
+               return TRUE;
+            }else{
+               return FALSE;
+            }
+        //    return TRUE;
         }else{
-        return FALSE;
+          return FALSE;
         }
     }
 
