@@ -4221,7 +4221,7 @@
 			var vendor_name = $('#vendor_name').val();
 		    $('.vendor_po_number_div').css('display','block');
 			$.ajax({
-				url : "<?php echo ADMIN_PATH;?>getVendorPonumberbySupplierid",
+				url : "<?php echo ADMIN_PATH;?>getVendorPoconfirmationvendorlist",
 				type: "POST",
 				data : {'vendor_name' : vendor_name},
 				success: function(data, textStatus, jqXHR)
