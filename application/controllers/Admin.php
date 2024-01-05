@@ -8695,6 +8695,8 @@ class Admin extends BaseController
                         'qty' =>trim($this->input->post('qty')),
                         'no_of_bags'  =>  trim($this->input->post('no_of_bags')),
                         'hsn_no'  =>  trim($this->input->post('hsn_no')),
+                        'unit'  =>  trim($this->input->post('unit')),
+                        'calculation'  =>  trim($this->input->post('calculation')),
                         'remark' =>  trim($this->input->post('itemremark')),
                         'pre_oms_challan_date' =>  trim($this->input->post('pre_oms_challan_date')),
                         'pre_vendor_name' =>  trim($this->input->post('pre_vendor_name')),
@@ -8703,7 +8705,15 @@ class Admin extends BaseController
                         'pre_remark' =>  trim($this->input->post('pre_remark')),
 
                     );
-                    $saveomsChallanformdetails= $this->admin_model->saveomsChallanformdetails('',$data);
+
+                    $oms_challan_item_id =  trim($this->input->post('oms_challan_item_id'));
+                    if($oms_challan_item_id){
+                        $omschallanitemid =$oms_challan_item_id;
+                    }else{
+                        $omschallanitemid =NULL;
+                    }
+                    
+                    $saveomsChallanformdetails= $this->admin_model->saveomsChallanformdetails($omschallanitemid,$data);
 
                 }else{
                     $data = array(
@@ -8713,6 +8723,8 @@ class Admin extends BaseController
                         'qty' =>trim($this->input->post('qty')),
                         'no_of_bags'  =>  trim($this->input->post('no_of_bags')),
                         'hsn_no'  =>  trim($this->input->post('hsn_no')),
+                        'unit'  =>  trim($this->input->post('unit')),
+                        'calculation'  =>  trim($this->input->post('calculation')),
                         'remark' =>  trim($this->input->post('itemremark')),
                         'pre_oms_challan_date' =>  trim($this->input->post('pre_oms_challan_date')),
                         'pre_vendor_name' =>  trim($this->input->post('pre_vendor_name')),
@@ -8721,7 +8733,15 @@ class Admin extends BaseController
                         'pre_remark' =>  trim($this->input->post('pre_remark')),
 
                     );
-                    $saveomsChallanformdetails= $this->admin_model->saveomsChallanformdetails('',$data);
+
+                    $oms_challan_item_id =  trim($this->input->post('oms_challan_item_id'));
+                    if($oms_challan_item_id){
+                        $omschallanitemid =$oms_challan_item_id;
+                    }else{
+                        $omschallanitemid =NULL;
+                    }
+
+                    $saveomsChallanformdetails= $this->admin_model->saveomsChallanformdetails($omschallanitemid,$data);
                  }
 
                  if($saveomsChallanformdetails){

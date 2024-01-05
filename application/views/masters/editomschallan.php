@@ -137,6 +137,7 @@
                                                 <td><?=$value['hsn_no']?></td>
                                                 <td><?=$value['omsremark']?></td>
                                                 <td>
+                                                   <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['omsid'];?>' class='fa fa-pencil-square-o editChallanformitem'  aria-hidden='true'></i>
                                                    <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['omsid'];?>' class='fa fa-trash-o deleteOmschallnitem' aria-hidden='true'></i>
                                                 </td>
                                             <tr>   
@@ -186,6 +187,8 @@
                                                 </button>
                                             </div>
                                             <form role="form" id="saveomschallanform" action="<?php echo base_url() ?>saveomschallanform" method="post" role="form">
+                                               <input type="hidden" class="form-control"  id="oms_challan_item_id" name="oms_challan_item_id" required readonly>
+    
                                                 <div class="modal-body">
                                                     <div class="loader_ajax" style="display:none;">
                                                             <div class="loader_ajax_inner"><img src="<?php echo ICONPATH;?>/preloader_ajax.gif"></div>

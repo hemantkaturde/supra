@@ -6533,7 +6533,7 @@ class Admin_model extends CI_Model
     }
 
     public function getomsChallandata($params){
-        $this->db->select('*,'.TBL_VENDOR.'.vendor_name as ven_name,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_master,'.TBL_OMS_CHALLAN.'.date as oms_chllan_date,'.TBL_OMS_CHALLAN.'.id as oms_challan_id');
+        $this->db->select('*,'.TBL_VENDOR.'.vendor_name as ven_name,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_master,'.TBL_OMS_CHALLAN.'.date as oms_chllan_date,'.TBL_OMS_CHALLAN.'.id as oms_challan_id,'.TBL_OMS_CHALLAN.'.remark as omsremark');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_OMS_CHALLAN.'.vendor_name');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_OMS_CHALLAN.'.vendor_po_id');
         if($params['search']['value'] != "") 
@@ -6561,7 +6561,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['vendor_name'] =$value['ven_name'];
                 $data[$counter]['vendor_po_id'] = $value['vendor_po_master'];
                 $data[$counter]['vendor_po_date'] =$value['vendor_po_date'];
-                $data[$counter]['remark'] =$value['remark'];
+                $data[$counter]['remark'] =$value['omsremark'];
                 $data[$counter]['action'] ='';
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editomschallan/".$value['oms_challan_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<a href='#' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>   &nbsp ";
@@ -8072,8 +8072,12 @@ class Admin_model extends CI_Model
         .TBL_RAWMATERIAL.'.type_of_raw_material as rm_description,'
         .TBL_OMS_CHALLAN_ITEM.'.gross_weight as gross_weight,'
         .TBL_OMS_CHALLAN_ITEM.'.net_weight as net_weight,'
-        
-    
+        .TBL_OMS_CHALLAN_ITEM.'.unit as unit,'
+        .TBL_OMS_CHALLAN_ITEM.'.calculation as calculation,'
+        .TBL_OMS_CHALLAN_ITEM.'.qty as qty,'
+        .TBL_OMS_CHALLAN_ITEM.'.no_of_bags as no_of_bags,'
+        .TBL_OMS_CHALLAN_ITEM.'.hsn_no as hsn_no,'
+        .TBL_OMS_CHALLAN_ITEM.'.remark as remark,'
          );
 
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_OMS_CHALLAN_ITEM.'.part_number');

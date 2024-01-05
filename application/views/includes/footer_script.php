@@ -15838,6 +15838,8 @@
 			   var net_weight =   $('#net_weight').val();
 			   var no_of_bags =   $('#no_of_bags').val();
 			   var hsn_no =   $('#hsn_no').val();
+			   var unit =   $('#unit').val();
+			   var calculation =   $('#calculation').val();
 			   var qty = $('#qty').val();
 			   var itemremark =   $('#itemremark').val();
 
@@ -15847,12 +15849,13 @@
 			   var pre_vendor_po_date =   $('#vendor_po_date').val();
 			   var pre_remark =   $('#remark').val();
 
+			   var oms_challan_item_id =   $('#oms_challan_item_id').val();
 
 			   $.ajax({
 				url : "<?php echo base_url();?>saveomschallanitem",
 				type: "POST",
 				 //data : formData,
-				 data :{part_number:part_number,gross_weight:gross_weight,net_weight:net_weight,no_of_bags:no_of_bags,hsn_no:hsn_no,itemremark:itemremark,qty:qty,pre_oms_challan_date:pre_oms_challan_date,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_vendor_po_date:pre_vendor_po_date,pre_remark:pre_remark,oms_challan_id:oms_challan_id},
+				 data :{part_number:part_number,gross_weight:gross_weight,net_weight:net_weight,no_of_bags:no_of_bags,hsn_no:hsn_no,itemremark:itemremark,qty:qty,pre_oms_challan_date:pre_oms_challan_date,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_vendor_po_date:pre_vendor_po_date,pre_remark:pre_remark,oms_challan_id:oms_challan_id,unit:unit,calculation:calculation,oms_challan_item_id:oms_challan_item_id},
 				 method: "POST",
                 // data :{package_id:package_id},
                 cache:false,
@@ -15958,12 +15961,13 @@
 						$('#fg_description').val(fetchResponse.fg_description);  
 						$('#rm_description').val(fetchResponse.rm_description);  
 						$('#gross_weight').val(fetchResponse.gross_weight);  
-						// $('#qty_recived').val(fetchResponse.qty_recived);  
 						$('#unit').val(fetchResponse.unit);  
-						// $('#bill_no').val(fetchResponse.bill_no);  
-						// $('#bill_date').val(fetchResponse.bill_date);  
-						// $('#short_excess_qty').val(fetchResponse.short_excess_qty);  
-						// $('#item_remark').val(fetchResponse.remark);  
+						$('#calculation').val(fetchResponse.calculation);  
+						$('#net_weight').val(fetchResponse.net_weight);  
+						$('#qty').val(fetchResponse.qty);  
+						$('#hsn_no').val(fetchResponse.hsn_no);  
+						$('#no_of_bags').val(fetchResponse.no_of_bags);  
+						$('#itemremark').val(fetchResponse.remark);  
 						
 				},
 				error: function (jqXHR, textStatus, errorThrown)
@@ -15972,8 +15976,11 @@
 			    }
 			});
 			return false;
-		 });
+		});
 
+		$(document).on('click','.closeomschallan',function(e){  
+			location.reload();
+		});
 
 	</script>
 <?php } ?>
