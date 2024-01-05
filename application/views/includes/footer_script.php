@@ -14856,7 +14856,7 @@
 										$('#invoice_date').val(fetchResponse.invoice_date); 
 										$('#invoice_qty_in_pcs').val(fetchResponse.invoice_qty_In_pcs); 
 										$('#invoice_qty_in_kgs').val(fetchResponse.invoice_qty_In_kgs); 
-										$('#actaul_recived_qty_in_pics').val(fetchResponse.invoice_qty_In_pcs); 
+										$('#actaul_recived_qty_in_pics').val(fetchResponse.actual_received_qty_in_pcs); 
 										$('#actaul_recived_qty_in_kgs').val(fetchResponse.invoice_qty_In_kgs); 
 										$('#privious_balenace').val(fetchResponse.previous_balence); 
 										$('#itemremark').val(fetchResponse.item_remark); 
