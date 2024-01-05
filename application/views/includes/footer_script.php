@@ -16131,12 +16131,15 @@
 			   var pre_buyer_enquiry_date =   $('#buyer_enquiry_date').val();
 			   var pre_buyer_enquiry_no =   $('#buyer_enquiry_no').val();
 			   var pre_enquiry_date =   $('#enquiry_date').val();
+
+
+			   var enquiry_form_item_id =   $('#enquiry_form_item_id').val();
 			   
 			   $.ajax({
 				url : "<?php echo base_url();?>saveenquiryformitem",
 				type: "POST",
 				 //data : formData,
-				 data :{part_number:part_number,rm_description:rm_description,gross_weight:gross_weight,supplier_name_1:supplier_name_1,rate_1:rate_1,supplier_name_2:supplier_name_2,rate_2:rate_2,supplier_name_3:supplier_name_3,rate_3:rate_3,supplier_name_4:supplier_name_4,rate_4:rate_4,supplier_name_5:supplier_name_5,rate_5:rate_5,vendor_name_1:vendor_name_1,venodr_rate_1:venodr_rate_1,vendor_name_2:vendor_name_2,venodr_rate_2:venodr_rate_2,vendor_name_3:vendor_name_3,venodr_rate_3:venodr_rate_3,vendor_name_4:vendor_name_4,venodr_rate_4:venodr_rate_4,vendor_name_5:vendor_name_5,venodr_rate_5:venodr_rate_5,rm_size:rm_size,supplier_qty_in_kgs:supplier_qty_in_kgs,venodr_qty_in_pcs:venodr_qty_in_pcs,pre_remark:pre_remark,pre_status:pre_status,pre_buyer_enquiry_date:pre_buyer_enquiry_date,pre_buyer_enquiry_no:pre_buyer_enquiry_no,pre_enquiry_date:pre_enquiry_date},
+				 data :{part_number:part_number,rm_description:rm_description,gross_weight:gross_weight,supplier_name_1:supplier_name_1,rate_1:rate_1,supplier_name_2:supplier_name_2,rate_2:rate_2,supplier_name_3:supplier_name_3,rate_3:rate_3,supplier_name_4:supplier_name_4,rate_4:rate_4,supplier_name_5:supplier_name_5,rate_5:rate_5,vendor_name_1:vendor_name_1,venodr_rate_1:venodr_rate_1,vendor_name_2:vendor_name_2,venodr_rate_2:venodr_rate_2,vendor_name_3:vendor_name_3,venodr_rate_3:venodr_rate_3,vendor_name_4:vendor_name_4,venodr_rate_4:venodr_rate_4,vendor_name_5:vendor_name_5,venodr_rate_5:venodr_rate_5,rm_size:rm_size,supplier_qty_in_kgs:supplier_qty_in_kgs,venodr_qty_in_pcs:venodr_qty_in_pcs,pre_remark:pre_remark,pre_status:pre_status,pre_buyer_enquiry_date:pre_buyer_enquiry_date,pre_buyer_enquiry_no:pre_buyer_enquiry_no,pre_enquiry_date:pre_enquiry_date,enquiry_form_item_id:enquiry_form_item_id},
 				 method: "POST",
                 // data :{package_id:package_id},
                 cache:false,
@@ -16221,6 +16224,107 @@
 				}
 			});
 	     });
+
+		 $(document).on('click','.deleteenquiryformitemdata',function(e){
+			var elemF = $(this);
+			e.preventDefault();
+			swal({
+				title: "Are you sure?",
+				text: "Delete Enquiry Form Item Data",
+				type: "warning",
+				showCancelButton: true,
+				closeOnClickOutside: false,
+				confirmButtonClass: "btn-sm btn-danger",
+				confirmButtonText: "Yes, delete it!",
+				cancelButtonText: "No, cancel plz!",
+				closeOnConfirm: false,
+				closeOnCancel: false
+			}, function(isConfirm) {
+				if (isConfirm) {
+							$.ajax({
+								url : "<?php echo base_url();?>deleteenquiryformitemdata",
+								type: "POST",
+								data : 'id='+elemF.attr('data-id'),
+								success: function(data, textStatus, jqXHR)
+								{
+									const obj = JSON.parse(data);
+								
+									if(obj.status=='success'){
+										swal({
+											title: "Deleted!",
+											text: "Enquiry Form Item Data Deleted Succesfully",
+											icon: "success",
+											button: "Ok",
+											},function(){ 
+													window.location.href = "<?php echo base_url().'addnewenquiryform'?>";
+										});	
+									}
+
+								},
+								error: function (jqXHR, textStatus, errorThrown)
+								{
+									$(".loader_ajax").hide();
+								}
+							})
+						}
+						else {
+				swal("Cancelled", "Enquiry Form Item Data deletion cancelled ", "error");
+				}
+			});
+	     });
+
+		 $(document).on('click','.editenquiryformitemdata',function(e){  
+			e.preventDefault();
+			var elemF = $(this);
+			var item_id = elemF.attr('data-id');
+			$.ajax({
+				url : "<?php echo base_url();?>geteditenquiryformitemdata",
+				type: "POST",
+				data : 'id='+item_id,
+				success: function(data, textStatus, jqXHR)
+				{
+					    var fetchResponse = $.parseJSON(data);
+						$('#addNewModal').modal('show'); 
+						$('#enquiry_form_item_id').val(fetchResponse.enquiry_form_item_id); 
+						$('#part_number').val(fetchResponse.fin_id); 
+						$('#fg_description').val(fetchResponse.name); 
+						$('#rm_description').val(fetchResponse.rm_description); 
+						$('#gross_weight').val(fetchResponse.groass_weight); 
+						$('#rm_size').val(fetchResponse.rm_size); 
+						$('#supplier_qty_in_kgs').val(fetchResponse.supplier_qty_in_kgs); 
+                        $('#venodr_qty_in_pcs').val(fetchResponse.venodr_qty_in_pcs); 
+
+						$('#supplier_name_1').val(fetchResponse.suplier_id_name_1); 
+						$('#supplier_name_2').val(fetchResponse.suplier_id_name_2); 
+						$('#supplier_name_3').val(fetchResponse.suplier_id_name_3); 
+						$('#supplier_name_4').val(fetchResponse.suplier_id_name_4); 
+						$('#supplier_name_5').val(fetchResponse.suplier_id_name_5); 
+
+						$('#rate_1').val(fetchResponse.suplier_rate_1); 
+						$('#rate_2').val(fetchResponse.suplier_rate_2); 
+						$('#rate_3').val(fetchResponse.suplier_rate_3); 
+						$('#rate_4').val(fetchResponse.suplier_rate_4); 
+						$('#rate_5').val(fetchResponse.suplier_rate_5); 
+
+						$('#vendor_name_1').val(fetchResponse.vendor_name_1); 
+						$('#vendor_name_2').val(fetchResponse.vendor_name_2); 
+						$('#vendor_name_3').val(fetchResponse.vendor_name_3); 
+						$('#vendor_name_4').val(fetchResponse.vendor_name_4); 
+						$('#vendor_name_5').val(fetchResponse.vendor_name_5); 
+						$('#venodr_rate_1').val(fetchResponse.vendor_rate_1); 
+						$('#venodr_rate_2').val(fetchResponse.vendor_rate_2); 
+						$('#venodr_rate_3').val(fetchResponse.vendor_rate_3); 
+						$('#venodr_rate_4').val(fetchResponse.vendor_rate_4); 
+						$('#venodr_rate_5').val(fetchResponse.vendor_rate_5); 
+						
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			});
+			return false;
+		 });
 
 	</script>
 <?php } ?>

@@ -8871,9 +8871,6 @@ class Admin extends BaseController
             $data['supplierList']= $this->admin_model->fetchALLsupplierList();
             $data['partNumberlistforenquirylist']= $this->admin_model->partNumberlistforenquirylist();
             $data['getallenquiryformitemadd']= $this->admin_model->getallenquiryformitemadd();
-
-            $data['getallenquiryformitemadd']= $this->admin_model->getallenquiryformitemadd();
-            
             $this->loadViews("masters/addNewenquiryform", $this->global, $data, NULL);
         }
     }
@@ -8893,6 +8890,25 @@ class Admin extends BaseController
             echo(json_encode(array('status'=>'failed'))); 
         }
     }
+
+
+    public function deleteenquiryformitemdata(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->deleteenquiryformitemdata(trim($this->input->post('id')));
+            if ($result) {
+                        $process = 'Delete Enquiry Item Data';
+                        $processFunction = 'Admin/deleteenquiryformitemdata';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
+    }
+
+
 
     public function saveenquiryformitem(){
         
@@ -8943,7 +8959,15 @@ class Admin extends BaseController
                     'pre_remark' =>  trim($this->input->post('pre_remark'))
                 );
 
-                $saveenquiryformitem = $this->admin_model->saveenquiryformitem('',$data);
+                $enquiry_form_item_id =  trim($this->input->post('enquiry_form_item_id'));
+                if($enquiry_form_item_id){
+                    $enquiryformitemid =$enquiry_form_item_id;
+                }else{
+                    $enquiryformitemid =NULL;
+                }
+
+
+                $saveenquiryformitem = $this->admin_model->saveenquiryformitem($enquiryformitemid,$data);
                 if($saveenquiryformitem){
                     $saveenquiryform_response['status'] = 'success';
                     $saveenquiryform_response['error'] =  array('part_number'=>strip_tags(form_error('part_number')));
@@ -9943,6 +9967,20 @@ class Admin extends BaseController
             }
         }
 
+    }
+
+
+    public function geteditenquiryformitemdata(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $geteditPODitem = $this->admin_model->geteditenquiryformitemdata(trim($this->input->post('id')));
+            if($geteditPODitem){
+                $content = $geteditPODitem[0];
+                echo json_encode($content);
+            }else{
+                echo 'failure';
+            }
+        }
     }
 
 }

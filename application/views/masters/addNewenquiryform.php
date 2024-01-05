@@ -183,7 +183,8 @@
                                                 <td><?=$value['vendor_rate_5']?></td>
 
                                                 <td>
-                                                   <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['omsid'];?>' class='fa fa-trash-o deleteOmschallnitem' aria-hidden='true'></i>
+                                                   <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['enquiry_form_id'];?>' class='fa fa-pencil-square-o editenquiryformitemdata'  aria-hidden='true'></i>
+                                                   <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['enquiry_form_id'];?>' class='fa fa-trash-o deleteenquiryformitemdata' aria-hidden='true'></i>
                                                 </td>
                                             <tr>   
 
@@ -230,6 +231,8 @@
                         <!-- </button> -->                        
                 </div>                                     
                 <form role="form" id="saveomschallanform" action="<?php echo base_url() ?>saveomschallanform" method="post" role="form">
+                <input type="hidden" class="form-control"  id="enquiry_form_item_id" name="enquiry_form_item_id" required readonly>
+
                     <div class="modal-body">
                         <div class="loader_ajax" style="display:none;">
                             <div class="loader_ajax_inner"><img src="<?php echo ICONPATH;?>/preloader_ajax.gif"></div>

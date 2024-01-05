@@ -342,10 +342,8 @@ $route['deletejobworkitem'] = "admin/deletejobworkitem";
 $route['editpoddetails/(:any)'] = "admin/editpoddetails/$1";
 $route['getexportdetailsforqulityrecord'] = "admin/getexportdetailsforqulityrecord";
 $route['deleteenquiryformdata'] = "admin/deleteenquiryformdata";
-
-
-
-
+$route['deleteenquiryformitemdata'] = "admin/deleteenquiryformitemdata";
+$route['geteditenquiryformitemdata'] = "admin/geteditenquiryformitemdata";
 
 
 
