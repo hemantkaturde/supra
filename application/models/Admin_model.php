@@ -8124,6 +8124,16 @@ class Admin_model extends CI_Model
 
    }
 
+   public function getpreviuousenquirynumber(){
+    $this->db->select('enquiry_number');
+    $this->db->where(TBL_ENAUIRY_FORM.'.status', 1);
+    $this->db->limit(1);
+    $this->db->order_by(TBL_ENAUIRY_FORM.'.id','DESC');
+    $query = $this->db->get(TBL_ENAUIRY_FORM);
+    $rowcount = $query->row_array();
+    return $rowcount;
+   }
+
 
     public function deleteenquiryformdata($id){
 
