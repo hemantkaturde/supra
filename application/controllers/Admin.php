@@ -8471,7 +8471,7 @@ class Admin extends BaseController
             if(count($getIncomingdetailsbyvendorid) >= 1) {
                 $content = $content.'<option value="">Select Lot Number</option>';
 				foreach($getIncomingdetailsbyvendorid as $value) {
-					$content = $content.'<option value="'.$value["lot_no"].'">'.$value["lot_no"].'</lot_no>';
+					$content = $content.'<option value="'.$value["id"].'">'.$value["lot_no"].'</lot_no>';
 				}
 				echo $content;
 			} else {
@@ -8881,11 +8881,7 @@ class Admin extends BaseController
             $data['supplierList']= $this->admin_model->fetchALLsupplierList();
             $data['partNumberlistforenquirylist']= $this->admin_model->partNumberlistforenquirylist();
             $data['getallenquiryformitemadd']= $this->admin_model->getallenquiryformitemadd();
-
             $data['getpreviuousenquirynumber']= $this->admin_model->getpreviuousenquirynumber();
-
-    
-
             $this->loadViews("masters/addNewenquiryform", $this->global, $data, NULL);
         }
     }
