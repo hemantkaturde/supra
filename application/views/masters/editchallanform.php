@@ -89,7 +89,7 @@
                                         </div>
                                     </div>
 
-<!-- 
+
                                     <div class="col-md-12">
                                         <div class="form-group">
                                                 <label for="supplier_name">Supplier Name </label>
@@ -101,7 +101,7 @@
                                                 </select>
                                             <p class="error supplier_name_error"></p>
                                         </div>
-                                    </div> -->
+                                    </div>
 
                                     <?php
                                         if($getChallanformdetails[0]['rejection_supplier_po']){
