@@ -205,7 +205,7 @@
                       </ul>
                     </li>
 
-                    <li class="treeview <?php if($pageUrl=="jobWork" || $pageUrl=="addjobwork" || $pageUrl=="editjobwork" ||  $pageUrl=="scrapreturn" || $pageUrl=="addnewScrapreturn" || $pageUrl=="editscrapreturn" || $pageUrl=="reworkrejectionreturn" || $pageUrl=="addneworkrejection" || $pageUrl=="editreworkrejection" || $pageUrl=="challanform" || $pageUrl=="addchallanform" || $pageUrl=="editchallanform" || $pageUrl=="omschallan" || $pageUrl=='addNewOMSChallan' ||  $pageUrl=='editomschallan' || $pageUrl=='enquiryform' || $pageUrl=="enquiryform" || $pageUrl=='addnewenquiryform' ||  $pageUrl=='editenquiryform'){echo 'active';}?>">
+                    <li class="treeview <?php if($pageUrl=="jobWork" || $pageUrl=="addjobwork" || $pageUrl=="editjobwork" ||  $pageUrl=="scrapreturn" || $pageUrl=="addnewScrapreturn" || $pageUrl=="editscrapreturn" || $pageUrl=="reworkrejectionreturn" || $pageUrl=="addneworkrejection" || $pageUrl=="editreworkrejection" || $pageUrl=="challanform" || $pageUrl=="addchallanform" || $pageUrl=="editchallanform" || $pageUrl=="omschallan" || $pageUrl=='addNewOMSChallan' ||  $pageUrl=='editomschallan' || $pageUrl=='enquiryform' || $pageUrl=="enquiryform" || $pageUrl=='addnewenquiryform' ||  $pageUrl=='editenquiryform' || $pageUrl=='editeqnuiryformdata'){echo 'active';}?>">
                       <a href="#">
                         <i class="fa fa-file-text-o"></i> <span class="menu_label">Challans</span>
                           <span class="pull-right-container">
@@ -221,7 +221,7 @@
                         <!-- <li class="line_height <?php if($pageUrl=="paymentdetails"){echo 'active';}?>"><a href="<?php echo base_url(); ?>paymentdetails"><i class="fa fa-cubes"></i> Payment Details</a></li> -->
                         <!-- <li class="line_height <?php if($pageUrl=="poddetails"){echo 'active';}?>"><a href="<?php echo base_url(); ?>poddetails"><i class="fa fa-cubes"></i> POD Details</a></li> -->
                         <li class="line_height <?php if($pageUrl=="omschallan" || $pageUrl=='addNewOMSChallan' ||  $pageUrl=='editomschallan'){echo 'active';}?>"><a href="<?php echo base_url(); ?>omschallan"><i class="fa fa-cubes"></i> OMS Challan</a></li>
-                        <li class="line_height <?php if($pageUrl=="enquiryform" || $pageUrl=='addnewenquiryform' ||  $pageUrl=='editenquiryform'){echo 'active';}?>"><a href="<?php echo base_url(); ?>enquiryform"><i class="fa fa-cubes"></i> Enquiry Form</a></li>
+                        <li class="line_height <?php if($pageUrl=="enquiryform" || $pageUrl=='addnewenquiryform' ||  $pageUrl=='editenquiryform' ||  $pageUrl=='editeqnuiryformdata'){echo 'active';}?>"><a href="<?php echo base_url(); ?>enquiryform"><i class="fa fa-cubes"></i> Enquiry Form</a></li>
                       </ul>
                     </li>
 

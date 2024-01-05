@@ -15986,7 +15986,7 @@
 <?php } ?>
 
 
-<?php if($pageTitle=='Enquiry Form' || $pageTitle=='Add New Enquiry Form'){  ?>
+<?php if($pageTitle=='Enquiry Form' || $pageTitle=='Add New Enquiry Form' || $pageTitle=='Edit New Enquiry Form' ){  ?>
 	<script type="text/javascript">   
          $(document).ready(function() {
 			var dt = $('#view_enquiry_form').DataTable({

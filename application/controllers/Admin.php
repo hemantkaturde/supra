@@ -8909,6 +8909,24 @@ class Admin extends BaseController
     }
 
 
+    public function editeqnuiryformdata($enquiryformid){
+
+        $process = 'Edit New Enquiry Form';
+        $processFunction = 'Admin/editeqnuiryformdata';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Edit New Enquiry Form';
+        $data['vendorList']= $this->admin_model->fetchALLvendorList();
+        $data['supplierList']= $this->admin_model->fetchALLsupplierList();
+        $data['partNumberlistforenquirylist']= $this->admin_model->partNumberlistforenquirylist();
+        $data['getallenquiryformitemedit']= $this->admin_model->getallenquiryformitemedit($enquiryformid);
+
+        $data['getenquirydetailsforedit']= $this->admin_model->getenquirydetailsforedit($enquiryformid);
+
+        $this->loadViews("masters/editenquiryform", $this->global, $data, NULL);
+
+    }
+
+
 
     public function saveenquiryformitem(){
         

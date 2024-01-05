@@ -351,7 +351,7 @@ $route['geteditenquiryformitemdata'] = "admin/geteditenquiryformitemdata";
 
 /* ALL Downlaod Forms */
 $route['downlaodsupplierpo/(:any)'] = "admin/downlaodsupplierpo/$1";
-
+$route['editeqnuiryformdata/(:any)'] = "admin/editeqnuiryformdata/$1";
 
 
 
@@ -380,15 +380,6 @@ $route['geteditPODitem'] = "admin/geteditPODitem";
 $route['getVendoritemonlyforpod'] = "admin/getVendoritemonlyforpod";
 $route['getSuppliergoodsreworkrejectionvendorpod'] = "admin/getSuppliergoodsreworkrejectionvendorpod";
 $route['geteditChallanformitemforedititem'] = "admin/geteditChallanformitemforedititem";
-
-
-
-
-
-//$route['fetchincomingdeatilsitemlistedit/(:any)'] = "admin/fetchincomingdeatilsitemlistedit/$1";
-
-
-
 $route['getVendorPonumberbySupplieridvendorbillofmaterial'] = "admin/getVendorPonumberbySupplieridvendorbillofmaterial";
 
 
