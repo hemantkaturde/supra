@@ -4375,13 +4375,13 @@ class Admin_model extends CI_Model
            TBL_BUYER_PO_MASTER.'.sales_order_number',
            TBL_BUYER_PO_MASTER.'.buyer_po_date', 
            TBL_BUYER_PO_MASTER_ITEM.'.order_oty as buyer_order_qty', 
-        //    '" " as buyer_order_qty',
+           //    '" " as buyer_order_qty',
            TBL_BILL_OF_MATERIAL.'.buyer_delivery_date as buyer_delivery_date',
            TBL_SUPPLIER.'.supplier_name as raw_material_supplier',
            TBL_FINISHED_GOODS.'.name as type_of_raw_material',
            TBL_FINISHED_GOODS.'.groass_weight as gross_weight_per_pcs_in_Kgs',
            '"Bill Of Material" as form_name,
-           "NA" as raw_material_order_qty,
+
            "NA" as raw_material_actual_recd_qty,
            "NA" as expected_qty,'.
            TBL_VENDOR.'.vendor_name as vendor',
@@ -4394,7 +4394,9 @@ class Admin_model extends CI_Model
            TBL_FINISHED_GOODS.'.net_weight as net_Weight_per_pcs_in_kgs',
            TBL_BILL_OF_MATERIAL.'.date as vendor_delivery_date',
            TBL_BILL_OF_MATERIAL.'.bom_status as bom_status',
-           TBL_BILL_OF_MATERIAL_ITEM.'.remark as item_remark'
+           TBL_BILL_OF_MATERIAL_ITEM.'.remark as item_remark',
+
+           TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.order_oty as raw_material_order_qty'
            
         ));
 
@@ -4415,6 +4417,8 @@ class Admin_model extends CI_Model
         $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id= '.TBL_SUPPLIER_PO_MASTER.'.supplier_name');
         $this->db->join(TBL_BILL_OF_MATERIAL_ITEM, TBL_BILL_OF_MATERIAL_ITEM.'.bom_id= '.TBL_BILL_OF_MATERIAL.'.id');
         $this->db->join(TBL_FINISHED_GOODS, TBL_BILL_OF_MATERIAL_ITEM.'.part_number= '.TBL_FINISHED_GOODS.'.fin_id');
+        $this->db->join(TBL_SUPPLIER_PO_CONFIRMATION_ITEM, TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.part_number_id= '.TBL_BILL_OF_MATERIAL_ITEM.'.part_number');
+
         $this->db->from(TBL_BILL_OF_MATERIAL);
         $query_2 = $this->db->get();
         $result_2 = $query_2->result_array();
