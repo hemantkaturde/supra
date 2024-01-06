@@ -6196,7 +6196,7 @@ class Admin_model extends CI_Model
     public function getItemlistStockform(){
         $this->db->select('*,'.TBL_STOCKS_ITEM.'.id as stock_item_id');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_STOCKS_ITEM.'.part_number');
-        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+       // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
         $this->db->where(TBL_STOCKS_ITEM.'.status', 1);
         $this->db->where(TBL_STOCKS_ITEM.'.stock_form_id IS NULL');
         $query = $this->db->get(TBL_STOCKS_ITEM);
