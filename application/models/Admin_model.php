@@ -7944,9 +7944,9 @@ class Admin_model extends CI_Model
        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_QUALITY_RECORDS_ITEM.'.part_number');
        $this->db->where(TBL_QUALITY_RECORDS_ITEM.'.id', $id);
     //    $this->db->order_by(TBL_QUALITY_RECORDS_ITEM.'.id','DESC');
-       $query = $this->db->get(TBL_QUALITY_RECORDS_ITEM);
-       $fetch_result = $query->result_array();
-       return $fetch_result;
+       $query2 = $this->db->get(TBL_QUALITY_RECORDS_ITEM);
+       $fetch_result2 = $query2->result_array();
+       return $fetch_result2;
 
     }
 
