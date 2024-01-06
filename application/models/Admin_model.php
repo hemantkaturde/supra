@@ -5931,7 +5931,7 @@ class Admin_model extends CI_Model
     public function get_qulityrecorditemrecord(){
         $this->db->select('*,'.TBL_QUALITY_RECORDS_ITEM.'.pre_vendor_name as vendor_id_qty_record,'.TBL_VENDOR_PO_MASTER.'.po_number as qtypo_number,'.TBL_QUALITY_RECORDS_ITEM.'.id as qtyid,'.TBL_BUYER_MASTER.'.buyer_name as byuerqty,'.TBL_VENDOR_PO_MASTER.'.date as vendorpodate,'.TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_QUALITY_RECORDS_ITEM.'.remark as remarkitem');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_QUALITY_RECORDS_ITEM.'.part_number');
-        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+        // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_QUALITY_RECORDS_ITEM.'.pre_vendor_name');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_QUALITY_RECORDS_ITEM.'.pre_vendor_po_number');
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_QUALITY_RECORDS_ITEM.'.pre_buyer_name','left');
