@@ -51,7 +51,7 @@
                                    <?php  
                                 
                                     if($getdetailsofpackinginsraction[0]['sales_order_number']){
-                                        $buyer_po_number = $getdetailsofpackinginsraction[0]['sales_order_number'].' - '. $getdetailsofpackinginsraction[0]['buyer_po_number'];
+                                        $buyer_po_number = $getdetailsofpackinginsraction[0]['sales_order_number'].' - '. $getdetailsofpackinginsraction[0]['buyerponumber'];
                                     }else{
                                         $buyer_po_number = '';
                                     }
