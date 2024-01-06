@@ -14858,6 +14858,8 @@
 										$('#invoice_qty_in_kgs').val(fetchResponse.invoice_qty_In_kgs); 
 										$('#actaul_recived_qty_in_pics').val(fetchResponse.actual_received_qty_in_pcs); 
 										$('#actaul_recived_qty_in_kgs').val(fetchResponse.actual_received_qty_in_kgs); 
+
+										$('#net_weight').val(fetchResponse.net_weight); 
 										$('#privious_balenace').val(fetchResponse.previous_balence); 
 										$('#itemremark').val(fetchResponse.item_remark); 
 
