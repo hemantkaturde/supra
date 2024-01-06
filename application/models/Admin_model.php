@@ -4382,8 +4382,8 @@ class Admin_model extends CI_Model
            TBL_FINISHED_GOODS.'.groass_weight as gross_weight_per_pcs_in_Kgs',
            '"Bill Of Material" as form_name,
            "NA" as raw_material_order_qty,
-           "NA" as raw_material_actual_recd_qty,
-           "NA" as expected_qty,'.
+           "NA" as raw_material_actual_recd_qty,'.
+
            TBL_VENDOR.'.vendor_name as vendor',
            TBL_VENDOR_PO_MASTER.'.po_number as vendor_po',
            TBL_VENDOR_PO_MASTER.'.date as vendor_po_date',
@@ -4394,7 +4394,8 @@ class Admin_model extends CI_Model
            TBL_FINISHED_GOODS.'.net_weight as net_Weight_per_pcs_in_kgs',
            TBL_BILL_OF_MATERIAL.'.date as vendor_delivery_date',
            TBL_BILL_OF_MATERIAL.'.bom_status as bom_status',
-           TBL_BILL_OF_MATERIAL_ITEM.'.remark as item_remark'
+           TBL_BILL_OF_MATERIAL_ITEM.'.remark as item_remark',
+           TBL_BILL_OF_MATERIAL_ITEM.'.expected_qty as expected_qty'
            
         ));
 
