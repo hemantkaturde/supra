@@ -4374,7 +4374,8 @@ class Admin_model extends CI_Model
            TBL_BUYER_MASTER.'.buyer_name', 
            TBL_BUYER_PO_MASTER.'.sales_order_number',
            TBL_BUYER_PO_MASTER.'.buyer_po_date', 
-           '" " as buyer_order_qty',
+           TBL_BUYER_PO_MASTER_ITEM.'.order_oty as buyer_order_qty', 
+        //    '" " as buyer_order_qty',
            TBL_BILL_OF_MATERIAL.'.buyer_delivery_date as buyer_delivery_date',
            TBL_SUPPLIER.'.supplier_name as raw_material_supplier',
            TBL_FINISHED_GOODS.'.name as type_of_raw_material',
@@ -4408,6 +4409,7 @@ class Admin_model extends CI_Model
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id= '.TBL_BILL_OF_MATERIAL.'.vendor_name');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id= '.TBL_BILL_OF_MATERIAL.'.vendor_po_number');
         $this->db->join(TBL_BUYER_PO_MASTER, TBL_BILL_OF_MATERIAL.'.buyer_po_number= '.TBL_BUYER_PO_MASTER.'.id');
+        $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id= '.TBL_BUYER_PO_MASTER.'.id');
         $this->db->join(TBL_BUYER_MASTER, TBL_BILL_OF_MATERIAL.'.buyer_name= '.TBL_BUYER_MASTER.'.buyer_id');
         $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id= '.TBL_VENDOR_PO_MASTER.'.supplier_po_number');
         $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id= '.TBL_SUPPLIER_PO_MASTER.'.supplier_name');
