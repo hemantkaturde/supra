@@ -6574,7 +6574,7 @@
 						$('#part_number').val(fetchResponse.raw_id);  
 						$('#description').val(fetchResponse.description); 
 						$('#rm_order_qty').val(fetchResponse.rmsupplier_order_qty);
-						$('#rm_actual_aty').val(fetchResponse.vendor_actual_recived_qty);
+						$('#rm_actual_aty').val(fetchResponse.rm_actual_aty);
 						$('#rm_type').val(fetchResponse.rm_type);
 						$('#slitting_size').val(fetchResponse.sitting_size);
 						$('#diameter').val(fetchResponse.diameter);

@@ -7729,7 +7729,7 @@ class Admin_model extends CI_Model
            .TBL_RAWMATERIAL.'.part_number,'
            .TBL_FINISHED_GOODS.'.name as description,'
            .TBL_SUPPLIER_PO_MASTER_ITEM.'.order_oty as rmsupplier_order_qty,'
-           .TBL_BILL_OF_MATERIAL_ITEM.'.vendor_actual_recived_qty as vendor_actual_recived_qty,'
+           .TBL_BILL_OF_MATERIAL_ITEM.'.rm_actual_aty as rm_actual_aty,'
            .TBL_RAWMATERIAL.'.type_of_raw_material as rm_type,'
            .TBL_RAWMATERIAL.'.sitting_size,'
            .TBL_RAWMATERIAL.'.thickness,'
