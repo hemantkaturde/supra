@@ -7916,7 +7916,7 @@ class Admin_model extends CI_Model
     );
     $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_QUALITY_RECORDS_ITEM.'.part_number');
     $this->db->where(TBL_QUALITY_RECORDS_ITEM.'.id', $id);
-    $this->db->order_by(TBL_QUALITY_RECORDS_ITEM.'.id','DESC');
+    //$this->db->order_by(TBL_QUALITY_RECORDS_ITEM.'.id','DESC');
     $query = $this->db->get(TBL_QUALITY_RECORDS_ITEM);
     $fetch_result = $query->result_array();
     // return $fetch_result;
@@ -7943,7 +7943,7 @@ class Admin_model extends CI_Model
        );
        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_QUALITY_RECORDS_ITEM.'.part_number');
        $this->db->where(TBL_QUALITY_RECORDS_ITEM.'.id', $id);
-       $this->db->order_by(TBL_QUALITY_RECORDS_ITEM.'.id','DESC');
+    //    $this->db->order_by(TBL_QUALITY_RECORDS_ITEM.'.id','DESC');
        $query = $this->db->get(TBL_QUALITY_RECORDS_ITEM);
        $fetch_result = $query->result_array();
        return $fetch_result;
