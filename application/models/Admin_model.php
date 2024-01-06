@@ -5969,6 +5969,10 @@ class Admin_model extends CI_Model
     }
 
     public function get_qulityrecorditemrecord_edit($qulity_record_id){
+
+
+
+
         $this->db->select('*,'.TBL_QUALITY_RECORDS_ITEM.'.pre_vendor_name as vendor_id_qty_record,'.TBL_VENDOR_PO_MASTER.'.po_number as qtypo_number,'.TBL_QUALITY_RECORDS_ITEM.'.id as qtyid,'.TBL_BUYER_MASTER.'.buyer_name as byuerqty,'.TBL_VENDOR_PO_MASTER.'.date as vendorpodate,'.TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_QUALITY_RECORDS_ITEM.'.remark as remarkitem');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_QUALITY_RECORDS_ITEM.'.part_number');
         //$this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
@@ -5981,6 +5985,10 @@ class Admin_model extends CI_Model
         $query = $this->db->get(TBL_QUALITY_RECORDS_ITEM);
         $fetch_result = $query->result_array();
         return $fetch_result;
+
+
+
+
        
     }
 
@@ -7911,7 +7919,37 @@ class Admin_model extends CI_Model
     $this->db->order_by(TBL_QUALITY_RECORDS_ITEM.'.id','DESC');
     $query = $this->db->get(TBL_QUALITY_RECORDS_ITEM);
     $fetch_result = $query->result_array();
-    return $fetch_result;
+    // return $fetch_result;
+
+    if(count($fetch_result) > 0)
+    {
+      return $fetch_result;   
+    }else{
+
+        $this->db->select(
+            TBL_QUALITY_RECORDS_ITEM.'.id as quality_record_item_id,'
+           .TBL_FINISHED_GOODS.'.fin_id as part_number_id,'
+           .TBL_FINISHED_GOODS.'.part_number,'
+           .TBL_FINISHED_GOODS.'.name as description,'
+           .TBL_FINISHED_GOODS.'.name as type_of_raw_material,'
+           .TBL_FINISHED_GOODS.'.sac as sac,'
+           .TBL_FINISHED_GOODS.'.hsn_code as HSN_code,'
+        //    .TBL_FINISHED_GOODS.'.sitting_size as sitting_size,'
+           .TBL_QUALITY_RECORDS_ITEM.'.inspection_report_no,'
+           .TBL_QUALITY_RECORDS_ITEM.'.inspection_report_date,'
+           .TBL_QUALITY_RECORDS_ITEM.'.lot_qty,'
+           .TBL_QUALITY_RECORDS_ITEM.'.inspected_by,'
+           .TBL_QUALITY_RECORDS_ITEM.'.remark,'
+       );
+       $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_QUALITY_RECORDS_ITEM.'.part_number');
+       $this->db->where(TBL_QUALITY_RECORDS_ITEM.'.id', $id);
+       $this->db->order_by(TBL_QUALITY_RECORDS_ITEM.'.id','DESC');
+       $query = $this->db->get(TBL_QUALITY_RECORDS_ITEM);
+       $fetch_result = $query->result_array();
+       return $fetch_result;
+
+    }
+
   }
 
 
