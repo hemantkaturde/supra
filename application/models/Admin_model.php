@@ -7902,55 +7902,56 @@ class Admin_model extends CI_Model
 
   public function geteditqualityrecordsitem($id){
 
-    $this->db->select(
-         TBL_QUALITY_RECORDS_ITEM.'.id as quality_record_item_id,'
-        .TBL_RAWMATERIAL.'.raw_id as part_number_id,'
-        .TBL_RAWMATERIAL.'.part_number,'
-        .TBL_RAWMATERIAL.'.type_of_raw_material as description,'
-        .TBL_RAWMATERIAL.'.type_of_raw_material,'
-        .TBL_RAWMATERIAL.'.sac as sac,'
-        .TBL_RAWMATERIAL.'.HSN_code as HSN_code,'
-        .TBL_RAWMATERIAL.'.sitting_size as sitting_size,'
-        .TBL_QUALITY_RECORDS_ITEM.'.inspection_report_no,'
-        .TBL_QUALITY_RECORDS_ITEM.'.inspection_report_date,'
-        .TBL_QUALITY_RECORDS_ITEM.'.lot_qty,'
-        .TBL_QUALITY_RECORDS_ITEM.'.inspected_by,'
-        .TBL_QUALITY_RECORDS_ITEM.'.remark,'
-    );
-    $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_QUALITY_RECORDS_ITEM.'.part_number');
-    $this->db->where(TBL_QUALITY_RECORDS_ITEM.'.id', $id);
-    //$this->db->order_by(TBL_QUALITY_RECORDS_ITEM.'.id','DESC');
-    $query = $this->db->get(TBL_QUALITY_RECORDS_ITEM);
-    $fetch_result = $query->result_array();
-    // return $fetch_result;
+            $this->db->select(
+                TBL_QUALITY_RECORDS_ITEM.'.id as quality_record_item_id,'
+            .TBL_FINISHED_GOODS.'.fin_id as part_number_id,'
+            .TBL_FINISHED_GOODS.'.part_number,'
+            .TBL_FINISHED_GOODS.'.name as description,'
+            .TBL_FINISHED_GOODS.'.name as type_of_raw_material,'
+            .TBL_FINISHED_GOODS.'.sac as sac,'
+            .TBL_FINISHED_GOODS.'.hsn_code as HSN_code,'
+            //.TBL_FINISHED_GOODS.'.sitting_size as sitting_size,'
+            .TBL_QUALITY_RECORDS_ITEM.'.inspection_report_no,'
+            .TBL_QUALITY_RECORDS_ITEM.'.inspection_report_date,'
+            .TBL_QUALITY_RECORDS_ITEM.'.lot_qty,'
+            .TBL_QUALITY_RECORDS_ITEM.'.inspected_by,'
+            .TBL_QUALITY_RECORDS_ITEM.'.remark,'
+        );
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_QUALITY_RECORDS_ITEM.'.part_number');
+        $this->db->where(TBL_QUALITY_RECORDS_ITEM.'.id', $id);
+        // $this->db->order_by(TBL_QUALITY_RECORDS_ITEM.'.id','DESC');
+        $query2 = $this->db->get(TBL_QUALITY_RECORDS_ITEM);
+        $fetch_result2 = $query2->result_array();
+        return $fetch_result2;
 
     if(count($fetch_result) > 0)
     {
       return $fetch_result;   
     }else{
 
-        $this->db->select(
-            TBL_QUALITY_RECORDS_ITEM.'.id as quality_record_item_id,'
-           .TBL_FINISHED_GOODS.'.fin_id as part_number_id,'
-           .TBL_FINISHED_GOODS.'.part_number,'
-           .TBL_FINISHED_GOODS.'.name as description,'
-           .TBL_FINISHED_GOODS.'.name as type_of_raw_material,'
-           .TBL_FINISHED_GOODS.'.sac as sac,'
-           .TBL_FINISHED_GOODS.'.hsn_code as HSN_code,'
-        //    .TBL_FINISHED_GOODS.'.sitting_size as sitting_size,'
-           .TBL_QUALITY_RECORDS_ITEM.'.inspection_report_no,'
-           .TBL_QUALITY_RECORDS_ITEM.'.inspection_report_date,'
-           .TBL_QUALITY_RECORDS_ITEM.'.lot_qty,'
-           .TBL_QUALITY_RECORDS_ITEM.'.inspected_by,'
-           .TBL_QUALITY_RECORDS_ITEM.'.remark,'
-       );
-       $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_QUALITY_RECORDS_ITEM.'.part_number');
-       $this->db->where(TBL_QUALITY_RECORDS_ITEM.'.id', $id);
-    //    $this->db->order_by(TBL_QUALITY_RECORDS_ITEM.'.id','DESC');
-       $query2 = $this->db->get(TBL_QUALITY_RECORDS_ITEM);
-       $fetch_result2 = $query2->result_array();
-       return $fetch_result2;
+            $this->db->select(
+                TBL_QUALITY_RECORDS_ITEM.'.id as quality_record_item_id,'
+            .TBL_RAWMATERIAL.'.raw_id as part_number_id,'
+            .TBL_RAWMATERIAL.'.part_number,'
+            .TBL_RAWMATERIAL.'.type_of_raw_material as description,'
+            .TBL_RAWMATERIAL.'.type_of_raw_material,'
+            .TBL_RAWMATERIAL.'.sac as sac,'
+            .TBL_RAWMATERIAL.'.HSN_code as HSN_code,'
+            .TBL_RAWMATERIAL.'.sitting_size as sitting_size,'
+            .TBL_QUALITY_RECORDS_ITEM.'.inspection_report_no,'
+            .TBL_QUALITY_RECORDS_ITEM.'.inspection_report_date,'
+            .TBL_QUALITY_RECORDS_ITEM.'.lot_qty,'
+            .TBL_QUALITY_RECORDS_ITEM.'.inspected_by,'
+            .TBL_QUALITY_RECORDS_ITEM.'.remark,'
+        );
+        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_QUALITY_RECORDS_ITEM.'.part_number');
+        $this->db->where(TBL_QUALITY_RECORDS_ITEM.'.id', $id);
+        //$this->db->order_by(TBL_QUALITY_RECORDS_ITEM.'.id','DESC');
+        $query = $this->db->get(TBL_QUALITY_RECORDS_ITEM);
+        $fetch_result = $query->result_array();
+        return $fetch_result;
 
+       
     }
 
   }
