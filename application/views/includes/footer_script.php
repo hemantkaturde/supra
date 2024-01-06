@@ -13826,11 +13826,11 @@
 							button: "Ok",
 							},function(){ 
 
-								if(quality_record_id){
-									window.location.href = "<?php echo base_url().'editqulityrecordform/'?>"+quality_record_id;
-								}else{
+								// if(quality_record_id){
+								// 	window.location.href = "<?php echo base_url().'editqulityrecordform/'?>"+quality_record_id;
+								// }else{
 									window.location.href = "<?php echo base_url().'qualityrecord'?>";
-								}
+								// }
 								
 						});		
 					}
