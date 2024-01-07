@@ -6728,8 +6728,26 @@ class Admin_model extends CI_Model
         $this->db->where(TBL_OMS_CHALLAN_ITEM.'.oms_chllan_id IS NULL');
         $query = $this->db->get(TBL_OMS_CHALLAN_ITEM);
         $data = $query->result_array();
-        return $data;
 
+        if(count($data) > 0)
+        {
+            return $data;
+        }else{
+
+            $this->db->select('*,'.TBL_FINISHED_GOODS.'.name as fgdiscription,'.TBL_FINISHED_GOODS.'.name as type_of_raw_material,'.TBL_OMS_CHALLAN_ITEM.'.gross_weight as omsgross_weight,'.TBL_OMS_CHALLAN_ITEM.'.net_weight as omsnet_weight,'.TBL_OMS_CHALLAN_ITEM.'.qty as omsqty,'.TBL_OMS_CHALLAN_ITEM.'.remark as omsremark,'.TBL_OMS_CHALLAN_ITEM.'.id  as omsid');
+            $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_OMS_CHALLAN_ITEM.'.pre_vendor_name');
+            $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_OMS_CHALLAN_ITEM.'.pre_vendor_po_number');
+            $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_OMS_CHALLAN_ITEM.'.part_number');
+            // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+            $this->db->where(TBL_OMS_CHALLAN_ITEM.'.status', 1);
+            $this->db->where(TBL_OMS_CHALLAN_ITEM.'.oms_chllan_id IS NULL');
+            $query = $this->db->get(TBL_OMS_CHALLAN_ITEM);
+            $data_2 = $query->result_array();
+
+            return $data_2;
+
+
+        }
     }
 
     public function deleteOmschallnitem($id){
