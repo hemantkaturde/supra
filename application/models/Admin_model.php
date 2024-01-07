@@ -5334,7 +5334,7 @@ class Admin_model extends CI_Model
         $query = $this->db->get(TBL_DEBIT_NOTE_ITEM);
         $data = $query->result_array();
 
-        if(count($fetch_result) > 0)
+        if(count($data) > 0)
         {
             return $data;
 
