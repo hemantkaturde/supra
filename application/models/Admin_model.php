@@ -4789,7 +4789,7 @@ class Admin_model extends CI_Model
             // return $data;
 
 
-            $this->db->select('*,'.TBL_RAWMATERIAL.'.sac as sac_no,'.TBL_SUPPLIER_PO_MASTER_ITEM.'.rate as supplierrate,'.TBL_RAWMATERIAL.'.type_of_raw_material as typeofrawmaterial,'.TBL_SUPPLIER_PO_MASTER_ITEM.'.order_oty as supplier_order_qty');
+            $this->db->select('*,'.TBL_RAWMATERIAL.'.sac as sac_no,'.TBL_SUPPLIER_PO_MASTER_ITEM.'.rate as supplierrate,'.TBL_RAWMATERIAL.'.type_of_raw_material as name,'.TBL_SUPPLIER_PO_MASTER_ITEM.'.order_oty as supplier_order_qty');
             $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id');
            // $this->db->join(TBL_SUPPLIER_PO_MASTER_ITEM, TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id = '.TBL_RAWMATERIAL.'.raw_id');
             $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.pre_vendor_name');
