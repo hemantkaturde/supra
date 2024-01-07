@@ -5325,7 +5325,7 @@ class Admin_model extends CI_Model
 
     public function getdebitnoteitemdetails(){
         $this->db->select('*,'.TBL_DEBIT_NOTE_ITEM.'.id as debit_note_id,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_po,'.TBL_DEBIT_NOTE_ITEM.'.remark as debit_note_remark,'.TBL_RAWMATERIAL.'.type_of_raw_material as part_name');
-        //$this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_DEBIT_NOTE_ITEM.'.part_number');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.part_number = '.TBL_DEBIT_NOTE_ITEM.'.part_number');
         $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_DEBIT_NOTE_ITEM.'.part_number');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_DEBIT_NOTE_ITEM.'.pre_vendor_po_number','left');
         $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_DEBIT_NOTE_ITEM.'.pre_supplier_po_number','left');
@@ -5340,7 +5340,6 @@ class Admin_model extends CI_Model
 
         }else{
 
-
             $this->db->select('*,'.TBL_DEBIT_NOTE_ITEM.'.id as debit_note_id,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_po,'.TBL_DEBIT_NOTE_ITEM.'.remark as debit_note_remark,'.TBL_FINISHED_GOODS.'.name as part_name');
             $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_DEBIT_NOTE_ITEM.'.part_number');
             // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number','left');
@@ -5351,13 +5350,7 @@ class Admin_model extends CI_Model
             $data_1 = $query_1->result_array();
             return $data_1;
 
-           
-
-           
-        }
-
-
-       
+        }       
 
     }
 
