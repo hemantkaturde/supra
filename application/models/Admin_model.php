@@ -5026,7 +5026,7 @@ class Admin_model extends CI_Model
         $data = $query->result_array();
       
 
-        if(count($fetch_result) > 0)
+        if(count($data) > 0)
         {
             return $data;
         }else{
