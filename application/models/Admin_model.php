@@ -4394,7 +4394,7 @@ class Admin_model extends CI_Model
            TBL_BILL_OF_MATERIAL_ITEM.'.remark as item_remark',
            TBL_BILL_OF_MATERIAL_ITEM.'.expected_qty as expected_qty',
            TBL_BILL_OF_MATERIAL_ITEM.'.rm_actual_aty as raw_material_actual_recd_qty',
-           TBL_BILL_OF_MATERIAL_ITEM.'.order_oty as raw_material_order_qty',
+           TBL_SUPPLIER_PO_MASTER_ITEM.'.order_oty as raw_material_order_qty',
         ));
 
          if($vendor_name!='NA'){
