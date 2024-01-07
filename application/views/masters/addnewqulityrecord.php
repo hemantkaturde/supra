@@ -190,7 +190,7 @@
                                                         <td><?php echo $value['inspection_report_date'];?></td>
                                                         <td><?php echo $value['lot_qty'];?></td>
                                                         <td><?php echo $value['inspected_by'];?></td>
-                                                        <td><?php echo $value['remark'];?></td>
+                                                        <td><?php echo $value['remarkitem'];?></td>
                                                         <td>
                                                            <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['qtyid'];?>' class='fa fa-pencil-square-o editqualityrecordsitem'  aria-hidden='true'></i>
                                                            <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['qtyid'];?>' class='fa fa-trash-o deletequalityrecordsitem' aria-hidden='true'></i>
