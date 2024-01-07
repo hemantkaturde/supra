@@ -15595,7 +15595,7 @@
 			// $("#customers-list").html('');
 			var vendor_name = $('#vendor_name').val();
 			$.ajax({
-				url : "<?php echo ADMIN_PATH;?>getVendorPonumberbySupplierid",
+				url : "<?php echo ADMIN_PATH;?>getVendorPoconfirmationvendorlist",
 				type: "POST",
 				data : {'vendor_name' : vendor_name},
 				success: function(data, textStatus, jqXHR)
