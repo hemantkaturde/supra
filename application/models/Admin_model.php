@@ -4380,8 +4380,7 @@ class Admin_model extends CI_Model
            TBL_SUPPLIER.'.supplier_name as raw_material_supplier',
            TBL_FINISHED_GOODS.'.name as type_of_raw_material',
            TBL_FINISHED_GOODS.'.groass_weight as gross_weight_per_pcs_in_Kgs',
-           '"Bill Of Material" as form_name,
-           "NA" as raw_material_order_qty,'.
+           '"Bill Of Material" as form_name,'.
            TBL_VENDOR.'.vendor_name as vendor',
            TBL_VENDOR_PO_MASTER.'.po_number as vendor_po',
            TBL_VENDOR_PO_MASTER.'.date as vendor_po_date',
@@ -4395,7 +4394,7 @@ class Admin_model extends CI_Model
            TBL_BILL_OF_MATERIAL_ITEM.'.remark as item_remark',
            TBL_BILL_OF_MATERIAL_ITEM.'.expected_qty as expected_qty',
            TBL_BILL_OF_MATERIAL_ITEM.'.rm_actual_aty as raw_material_actual_recd_qty',
-           
+           TBL_BILL_OF_MATERIAL_ITEM.'.order_oty as raw_material_order_qty',
         ));
 
          if($vendor_name!='NA'){
