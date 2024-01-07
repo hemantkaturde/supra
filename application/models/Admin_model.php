@@ -7934,7 +7934,7 @@ class Admin_model extends CI_Model
             TBL_DEBIT_NOTE_ITEM.'.id  as debit_note_item_id,'
            .TBL_FINISHED_GOODS.'.fin_id as raw_id,'
            .TBL_FINISHED_GOODS.'.part_number,'
-           .TBL_FINISHED_GOODS.'.namw as description,'
+           .TBL_FINISHED_GOODS.'.name as description,'
            .TBL_DEBIT_NOTE_ITEM.'.invoice_no as invoice_no,'
            .TBL_DEBIT_NOTE_ITEM.'.invoice_date as invoice_date,'
            .TBL_DEBIT_NOTE_ITEM.'.invoice_qty as invoice_qty,'
