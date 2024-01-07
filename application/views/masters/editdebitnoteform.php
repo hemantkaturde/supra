@@ -59,7 +59,7 @@
                                     </div>
 
 
-                                    <div class="col-md-12">
+                                    <!-- <div class="col-md-12">
                                         <div class="form-group">
                                                 <label for="vendor_supplier_name">Select Vendor / Supplier <span class="required">*</span></label>
                                                 <select class="form-control vendor_supplier_name" name="vendor_supplier_name" id="vendor_supplier_name">
@@ -69,7 +69,7 @@
                                                 </select>
                                             <p class="error vendor_supplier_name_error"></p>
                                         </div>
-                                    </div>
+                                    </div> -->
 
 
                                      <?php if($getdebitnoteditailsdata[0]['vendor_id']){
