@@ -7039,7 +7039,7 @@ class Admin extends BaseController
             $savechallnitem_response = array();
             $this->form_validation->set_rules('part_number','Part Number','trim|required');
             $this->form_validation->set_rules('description','Description','trim|required');
-            $this->form_validation->set_rules('type_of_raw_platting','Type of Raw Platting','trim|required');
+            $this->form_validation->set_rules('type_of_raw_platting','Type of Raw Platting','trim');
             $this->form_validation->set_rules('row_material_cost','Row Material Cost','trim|required');
             $this->form_validation->set_rules('quantity','Quantity','trim|required');
             $this->form_validation->set_rules('rate','Rate','trim|required');
