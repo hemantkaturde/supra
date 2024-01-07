@@ -7951,7 +7951,7 @@ class Admin_model extends CI_Model
         .TBL_JOB_WORK_ITEM.'.item_remark as item_remark,'
 
     );
-    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.raw_id = '.TBL_JOB_WORK_ITEM.'.part_number_id');
+    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_JOB_WORK_ITEM.'.part_number_id');
     $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
     $this->db->where(TBL_JOB_WORK_ITEM.'.id', $id);
     $this->db->order_by(TBL_JOB_WORK_ITEM.'.id','DESC');
