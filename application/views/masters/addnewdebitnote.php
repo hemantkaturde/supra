@@ -288,7 +288,7 @@
                                                     <tr>
                                                         <td><?php echo $count;?></td>
                                                         <td><?php echo $value['part_number'];?></td>
-                                                        <td><?php echo $value['name'];?></td>
+                                                        <td><?php echo $value['part_name'];?></td>
                                                         <td><?php echo $value['invoice_no'];?></td>
                                                         <td><?php echo $value['invoice_date'];?></td>
                                                         <td><?php echo $value['invoice_qty'];?></td>
