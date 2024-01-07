@@ -46,7 +46,7 @@
 
 
 
-                                    <div class="col-md-12">
+                                    <!-- <div class="col-md-12">
                                         <div class="form-group">
                                                 <label for="select_with_po_without_po">Select With PO / Without PO <span class="required">*</span></label>
                                                 <select class="form-control" name="select_with_po_without_po" id="select_with_po_without_po">
@@ -56,10 +56,10 @@
                                                 </select>
                                             <p class="error select_with_po_without_po_error"></p>
                                         </div>
-                                    </div>
+                                    </div> -->
 
 
-                                    <!-- <div class="col-md-12">
+                                    <div class="col-md-12">
                                         <div class="form-group">
                                                 <label for="vendor_supplier_name">Select Vendor / Supplier <span class="required">*</span></label>
                                                 <select class="form-control vendor_supplier_name" name="vendor_supplier_name" id="vendor_supplier_name">
@@ -69,7 +69,7 @@
                                                 </select>
                                             <p class="error vendor_supplier_name_error"></p>
                                         </div>
-                                    </div> -->
+                                    </div>
 
 
                                      <?php if($getdebitnoteditailsdata[0]['vendor_id']){
