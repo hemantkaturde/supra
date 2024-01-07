@@ -147,7 +147,7 @@
                                                 <td><?=$value['part_number']?></td>
                                                 <td><?=$value['name']?></td>
                                                 <td><?=$value['rm_description']?></td>
-                                                <td><?=$value['groass_weight']?></td>
+                                                <td><?=$value['engroass_weight']?></td>
                                                 <td><?=$value['rm_size']?></td>
                                                 <td><?=$value['supplier_qty_in_kgs']?></td>
                                                 <td><?=$value['venodr_qty_in_pcs']?></td>
