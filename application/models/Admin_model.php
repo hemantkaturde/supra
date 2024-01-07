@@ -6945,7 +6945,7 @@ class Admin_model extends CI_Model
 
 
     public function geteditenquiryformitemdata($id){
-        $this->db->select('*,'.TBL_SUPPLIER.'.sup_id as suplier_id_name_1,a.sup_id as suplier_id_name_2,b.sup_id as suplier_id_name_3,c.sup_id as suplier_id_name_4,d.sup_id as suplier_id_name_5,e.ven_id  as vendor_name_1,f.ven_id  as vendor_name_2,g.ven_id  as vendor_name_3,h.ven_id  as vendor_name_4,i.ven_id  as vendor_name_5,'.TBL_ENAUIRY_FORM_ITEM.'.id as enquiry_form_item_id');
+        $this->db->select('*,'.TBL_SUPPLIER.'.sup_id as suplier_id_name_1,a.sup_id as suplier_id_name_2,b.sup_id as suplier_id_name_3,c.sup_id as suplier_id_name_4,d.sup_id as suplier_id_name_5,e.ven_id  as vendor_name_1,f.ven_id  as vendor_name_2,g.ven_id  as vendor_name_3,h.ven_id  as vendor_name_4,i.ven_id  as vendor_name_5,'.TBL_ENAUIRY_FORM_ITEM.'.id as enquiry_form_item_id,'.TBL_ENAUIRY_FORM_ITEM.'.groass_weight as engroass_weight');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_ENAUIRY_FORM_ITEM.'.part_number');
         $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_ENAUIRY_FORM_ITEM.'.suplier_id_1','left');
         $this->db->join(TBL_SUPPLIER.' as a', 'a.sup_id = '.TBL_ENAUIRY_FORM_ITEM.'.suplier_id_2','left');

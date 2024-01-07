@@ -16305,7 +16305,7 @@
 						$('#part_number').val(fetchResponse.fin_id); 
 						$('#fg_description').val(fetchResponse.name); 
 						$('#rm_description').val(fetchResponse.rm_description); 
-						$('#gross_weight').val(fetchResponse.groass_weight); 
+						$('#gross_weight').val(fetchResponse.engroass_weight); 
 						$('#rm_size').val(fetchResponse.rm_size); 
 						$('#supplier_qty_in_kgs').val(fetchResponse.supplier_qty_in_kgs); 
                         $('#venodr_qty_in_pcs').val(fetchResponse.venodr_qty_in_pcs); 
