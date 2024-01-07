@@ -10839,7 +10839,6 @@
 				});
 		});
 
-
 		$(document).on('click','.editChallanformitem',function(e){  
 			e.preventDefault();
 			var elemF = $(this);
@@ -11246,7 +11245,7 @@
 				if(vendor_name){
 					if(vendor_po_number){
 							$.ajax({
-								url : "<?php echo ADMIN_PATH;?>getSuppliergoodsreworkrejectionvendor",
+								url : "<?php echo ADMIN_PATH;?>getdebitnotepartnumberdetails_byvendor",
 								type: "POST",
 								data : {'part_number' : part_number,'vendor_po_number':vendor_po_number},
 								success: function(data, textStatus, jqXHR)

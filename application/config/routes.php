@@ -383,6 +383,10 @@ $route['geteditChallanformitemforedititem'] = "admin/geteditChallanformitemfored
 $route['getVendorPonumberbySupplieridvendorbillofmaterial'] = "admin/getVendorPonumberbySupplieridvendorbillofmaterial";
 
 
+$route['getdebitnotepartnumberdetails_byvendor'] = "admin/getdebitnotepartnumberdetails_byvendor";
+
+
+
 
 
 

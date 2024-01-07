@@ -10031,4 +10031,22 @@ class Admin extends BaseController
         }
     }
 
+
+   public function getdebitnotepartnumberdetails_byvendor(){
+        if($this->input->post('part_number')) {
+            $getPartNameBypartid = $this->admin_model->getdebitnotepartnumberdetails_byvendor($this->input->post('part_number'),$this->input->post('vendor_po_number'));
+            if($getPartNameBypartid){
+                $content = $getPartNameBypartid[0];
+                echo json_encode($content);
+
+            }else{
+                echo 'failure';
+            }
+        
+        } else {
+            echo 'failure';
+        }
+   }
+    
+
 }
