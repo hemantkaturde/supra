@@ -8182,17 +8182,7 @@ class Admin_model extends CI_Model
 
    }
    
-   public function geteditChallanformitem($id){
-
-        $this->db->select('*,'.TBL_RAWMATERIAL.'.type_of_raw_material as description,'.TBL_CHALLAN_FORM_ITEM.'.id  as challan_form_item_id');
-        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_CHALLAN_FORM_ITEM.'.part_number');
-        $this->db->where(TBL_CHALLAN_FORM_ITEM.'.id', $id);
-        $this->db->order_by(TBL_CHALLAN_FORM_ITEM.'.id','DESC');
-        $query = $this->db->get(TBL_CHALLAN_FORM_ITEM);
-        $fetch_result = $query->result_array();
-        return $fetch_result;
-
-   }
+  
 
    public function geteditScrpareturnid($id){
     
@@ -8208,8 +8198,6 @@ class Admin_model extends CI_Model
    
 
    public function geteditPODitemedit($id){
-
-
 
     $this->db->select('pre_vendor_supplier_name');
     $this->db->where(TBL_POD_ITEM.'.id',$id);
@@ -8291,13 +8279,80 @@ class Admin_model extends CI_Model
         }           
     }
 
-
-    
-
-
-       
-
    }
+
+
+
+   public function geteditChallanformitem($id){
+
+    // $this->db->select('*,'.TBL_RAWMATERIAL.'.type_of_raw_material as description,'.TBL_CHALLAN_FORM_ITEM.'.id  as challan_form_item_id');
+    // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_CHALLAN_FORM_ITEM.'.part_number');
+    // $this->db->where(TBL_CHALLAN_FORM_ITEM.'.id', $id);
+    // $this->db->order_by(TBL_CHALLAN_FORM_ITEM.'.id','DESC');
+    // $query = $this->db->get(TBL_CHALLAN_FORM_ITEM);
+    // $fetch_result = $query->result_array();
+    // return $fetch_result;
+
+
+    $this->db->select('pre_vendor_supplier_name');
+    $this->db->where(TBL_CHALLAN_FORM_ITEM.'.id',$id);
+    $query = $this->db->get(TBL_CHALLAN_FORM_ITEM);
+    $pre_vendor_supplier_name = $query->result_array();
+
+    foreach ($pre_vendor_supplier_name as $key_vendor_supplier_name => $value_vendor_supplier_name) {
+
+        if($value_vendor_supplier_name['pre_vendor_supplier_name']=='vendor'){
+
+            if($value_vendor_supplier_name['pre_supplier_po_number']){
+
+                $this->db->select('*,'.TBL_FINISHED_GOODS.'.fin_id as raw_id'.
+                                  TBL_FINISHED_GOODS.'.name as description,'.
+                                  TBL_FINISHED_GOODS.'.hsn_code as HSN_code,'.
+                                  TBL_FINISHED_GOODS.'.sac as sac,'.
+                                  TBL_CHALLAN_FORM_ITEM.'.qty as qty,'.
+                                  TBL_CHALLAN_FORM_ITEM.'.id  as challan_form_item_id');
+                $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_CHALLAN_FORM_ITEM.'.part_number');
+                $this->db->where(TBL_CHALLAN_FORM_ITEM.'.id', $id);
+                $this->db->order_by(TBL_CHALLAN_FORM_ITEM.'.id','DESC');
+                $query = $this->db->get(TBL_CHALLAN_FORM_ITEM);
+                $fetch_result = $query->result_array();
+                return $fetch_result;
+              
+
+            }else{
+
+                $this->db->select('*,'.TBL_FINISHED_GOODS.'.fin_id as raw_id,'.
+                                  TBL_FINISHED_GOODS.'.name as description,'.
+                                  TBL_FINISHED_GOODS.'.hsn_code as HSN_code,'.
+                                  TBL_FINISHED_GOODS.'.sac as sac,'.
+                                  TBL_CHALLAN_FORM_ITEM.'.qty as qty,'.
+                                  TBL_CHALLAN_FORM_ITEM.'.id  as challan_form_item_id');
+                $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_CHALLAN_FORM_ITEM.'.part_number');
+                $this->db->where(TBL_CHALLAN_FORM_ITEM.'.id', $id);
+                $this->db->order_by(TBL_CHALLAN_FORM_ITEM.'.id','DESC');
+                $query = $this->db->get(TBL_CHALLAN_FORM_ITEM);
+                $fetch_result = $query->result_array();
+                return $fetch_result;
+
+            }
+
+        }else{
+
+            $this->db->select('*,'.TBL_RAWMATERIAL.'.raw_id as raw_id,'.TBL_RAWMATERIAL.'.type_of_raw_material as description,'.TBL_CHALLAN_FORM_ITEM.'.id  as challan_form_item_id');
+            $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_CHALLAN_FORM_ITEM.'.part_number');
+            $this->db->where(TBL_CHALLAN_FORM_ITEM.'.id', $id);
+            $this->db->order_by(TBL_CHALLAN_FORM_ITEM.'.id','DESC');
+            $query = $this->db->get(TBL_CHALLAN_FORM_ITEM);
+            $fetch_result = $query->result_array();
+            return $fetch_result;
+
+
+        }
+
+    }
+
+
+}
 
 
 
@@ -8340,6 +8395,48 @@ class Admin_model extends CI_Model
         }
             
    }
+
+
+   
+   public function getVendoritemonlyforchallan($vendor_po_number,$flag){
+
+    $check_if_supplier_exist =  $this->chekc_if_supplie_name_exits($vendor_po_number);
+
+    if($check_if_supplier_exist['supplier_po_number']){
+        $this->db->select('*,'.TBL_FINISHED_GOODS.'.fin_id as fin_id');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
+        // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+        $this->db->where(TBL_FINISHED_GOODS.'.status',1);
+        //$this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
+        $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id',$vendor_po_number);
+        $query = $this->db->get(TBL_VENDOR_PO_MASTER_ITEM);
+        $data = $query->result_array();
+        return $data;
+    }else{
+        // $this->db->select('*,'.TBL_RAWMATERIAL.'.raw_id as fin_id');
+        // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
+        // //$this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
+        // $this->db->where(TBL_RAWMATERIAL.'.status',1);
+        // //$this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
+        // $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id',$vendor_po_number);
+        // $query = $this->db->get(TBL_VENDOR_PO_MASTER_ITEM);
+        // $data = $query->result_array();
+        // return $data;
+
+        $this->db->select('*,'.TBL_FINISHED_GOODS.'.fin_id as fin_id');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
+        // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+        $this->db->where(TBL_FINISHED_GOODS.'.status',1);
+        //$this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
+        $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id',$vendor_po_number);
+        $query = $this->db->get(TBL_VENDOR_PO_MASTER_ITEM);
+        $data = $query->result_array();
+        return $data;
+
+
+    }
+        
+}
 
 
    public function getSuppliergoodsreworkrejectionvendorpod($part_number,$vendor_po_number,$vendor_supplier_name){
@@ -8400,6 +8497,78 @@ class Admin_model extends CI_Model
         // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.pre_vendor_name');
+        $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id',$part_number);
+        $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id',$vendor_po_number);
+        $query = $this->db->get(TBL_VENDOR_PO_MASTER_ITEM);
+        $data = $query->result_array();
+        return $data;
+
+       
+
+    }
+
+   }
+
+
+
+   public function getSuppliergoodsreworkrejectionvendorchallan($part_number,$vendor_po_number,$vendor_supplier_name){
+
+
+    $check_if_supplier_exist =  $this->chekc_if_supplie_name_exits($vendor_po_number);
+    if($check_if_supplier_exist['supplier_po_number']){
+
+        // $this->db->select('*,'.TBL_RAWMATERIAL.'.sac as sac_no,'.TBL_VENDOR_PO_MASTER_ITEM.'.rate as vendorrate,'.TBL_RAWMATERIAL.'.type_of_raw_material as typeofrawmaterial,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_order_qty');
+        // // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+        // $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id = '.TBL_RAWMATERIAL.'.raw_id');
+        // $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.pre_vendor_name');
+        // $this->db->where(TBL_RAWMATERIAL.'.status',1);
+        // // $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id',$vendor_po_number);
+        // $this->db->where(TBL_RAWMATERIAL.'.raw_id',$part_number);
+        // $query = $this->db->get(TBL_RAWMATERIAL);
+        // $data = $query->result_array();
+        // return $data;
+
+        // $this->db->select('*,'.TBL_FINISHED_GOODS.'.sac as sac_no,'.TBL_VENDOR_PO_MASTER_ITEM.'.rate as vendorrate,'.TBL_FINISHED_GOODS.'.name as typeofrawmaterial,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_order_qty');
+        // // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+        // $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
+        // $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.pre_vendor_name');
+        // $this->db->where(TBL_FINISHED_GOODS.'.status',1);
+        // $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id',$vendor_po_number);
+        // $this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
+        // $query = $this->db->get(TBL_FINISHED_GOODS);
+        // $data = $query->result_array();
+        // return $data;
+
+        
+        $this->db->select('*,'.TBL_FINISHED_GOODS.'.sac as sac_no,'.TBL_VENDOR_PO_MASTER_ITEM.'.rate as vendorrate,'.TBL_FINISHED_GOODS.'.name as typeofrawmaterial,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_order_qty');
+        // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
+        // $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.pre_vendor_name');
+        $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id',$part_number);
+        $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id',$vendor_po_number);
+        $query = $this->db->get(TBL_VENDOR_PO_MASTER_ITEM);
+        $data = $query->result_array();
+        return $data;
+
+
+
+    }else{
+
+        // $this->db->select('*,'.TBL_FINISHED_GOODS.'.sac as sac_no,'.TBL_VENDOR_PO_MASTER_ITEM.'.rate as vendorrate,'.TBL_FINISHED_GOODS.'.name as typeofrawmaterial,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_order_qty');
+        // // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+        // $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
+        // $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.pre_vendor_name');
+        // $this->db->where(TBL_FINISHED_GOODS.'.status',1);
+        // $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id',$vendor_po_number);
+        // $this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
+        // $query = $this->db->get(TBL_FINISHED_GOODS);
+        // $data = $query->result_array();
+        // return $data;
+
+        $this->db->select('*,'.TBL_FINISHED_GOODS.'.sac as sac_no,'.TBL_VENDOR_PO_MASTER_ITEM.'.rate as vendorrate,'.TBL_FINISHED_GOODS.'.name as typeofrawmaterial,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_order_qty');
+        // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
+        //$this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.pre_vendor_name');
         $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id',$part_number);
         $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id',$vendor_po_number);
         $query = $this->db->get(TBL_VENDOR_PO_MASTER_ITEM);

@@ -10350,7 +10350,7 @@
 							$("#part_number").html('');
 						
 							$.ajax({
-								url : "<?php echo ADMIN_PATH;?>getVendoritemonly",
+								url : "<?php echo ADMIN_PATH;?>getVendoritemonlyforchallan",
 								type: "POST",
 								data : {'vendor_po_number' : vendor_po_number},
 								success: function(data, textStatus, jqXHR)
@@ -10478,9 +10478,9 @@
 				if(vendor_name){
 					if(vendor_po_number){
 							$.ajax({
-								url : "<?php echo ADMIN_PATH;?>getSuppliergoodsreworkrejectionvendor",
+								url : "<?php echo ADMIN_PATH;?>getSuppliergoodsreworkrejectionvendorchallan",
 								type: "POST",
-								data : {'part_number' : part_number,'vendor_po_number':vendor_po_number},
+								data : {'part_number' : part_number,'vendor_po_number':vendor_po_number,'vendor_supplier_name':vendor_supplier_name},
 								success: function(data, textStatus, jqXHR)
 								{
 									$(".loader_ajax").hide();
@@ -10863,9 +10863,7 @@
 						$('#rate').val(fetchResponse.rate); 
 						$('#value').val(fetchResponse.value); 
 						$('#row_material_cost').val(fetchResponse.row_material_cost); 
-
 						$('#gst_rate').val(fetchResponse.gst_rate); 
-
 						$('#grand_total').val(fetchResponse.grand_total); 
 						$('#item_remark').val(fetchResponse.item_remark); 
 				},

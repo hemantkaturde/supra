@@ -381,10 +381,9 @@ $route['getVendoritemonlyforpod'] = "admin/getVendoritemonlyforpod";
 $route['getSuppliergoodsreworkrejectionvendorpod'] = "admin/getSuppliergoodsreworkrejectionvendorpod";
 $route['geteditChallanformitemforedititem'] = "admin/geteditChallanformitemforedititem";
 $route['getVendorPonumberbySupplieridvendorbillofmaterial'] = "admin/getVendorPonumberbySupplieridvendorbillofmaterial";
-
-
+$route['getVendoritemonlyforchallan'] = "admin/getVendoritemonlyforchallan";
 $route['getdebitnotepartnumberdetails_byvendor'] = "admin/getdebitnotepartnumberdetails_byvendor";
-
+$route['getSuppliergoodsreworkrejectionvendorchallan'] = "admin/getSuppliergoodsreworkrejectionvendorchallan";
 
 
 
