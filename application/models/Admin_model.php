@@ -5012,7 +5012,7 @@ class Admin_model extends CI_Model
     }
 
     public function getChallanformlist(){
-        $this->db->select('*,'.TBL_CHALLAN_FORM_ITEM.'.id as challanformid,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_po_number,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_number');
+        $this->db->select('*,'.TBL_CHALLAN_FORM_ITEM.'.id as challanformid,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_po_number,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_number,'.TBL_FINISHED_GOODS.'.name as description');
         // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_CHALLAN_FORM_ITEM.'.part_number');
         // $this->db->join(TBL_FINISHED_GOODS, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_CHALLAN_FORM_ITEM.'.part_number');
@@ -5031,7 +5031,7 @@ class Admin_model extends CI_Model
             return $data;
         }else{
 
-            $this->db->select('*,'.TBL_CHALLAN_FORM_ITEM.'.id as challanformid,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_po_number,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_number');
+            $this->db->select('*,'.TBL_CHALLAN_FORM_ITEM.'.id as challanformid,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_po_number,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_number,'.TBL_RAWMATERIAL.'.type_of_raw_material as description');
             // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_CHALLAN_FORM_ITEM.'.part_number');
             // $this->db->join(TBL_FINISHED_GOODS, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
            // $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_CHALLAN_FORM_ITEM.'.part_number');
@@ -8364,93 +8364,49 @@ class Admin_model extends CI_Model
 
 
 
-   public function geteditChallanformitem($id){
+   public function geteditChallanformitem($id,$vendor_po_number,$vendor_supplier_name){
 
-    // $this->db->select('*,'.TBL_RAWMATERIAL.'.type_of_raw_material as description,'.TBL_CHALLAN_FORM_ITEM.'.id  as challan_form_item_id');
-    // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_CHALLAN_FORM_ITEM.'.part_number');
-    // $this->db->where(TBL_CHALLAN_FORM_ITEM.'.id', $id);
-    // $this->db->order_by(TBL_CHALLAN_FORM_ITEM.'.id','DESC');
-    // $query = $this->db->get(TBL_CHALLAN_FORM_ITEM);
-    // $fetch_result = $query->result_array();
-    // return $fetch_result;
+            if($vendor_supplier_name=='vendor'){
+                $this->db->select('supplier_po_number');
+                $this->db->where(TBL_VENDOR_PO_MASTER.'.id', $vendor_po_number);
+                $supplier_po_number_query = $this->db->get(TBL_VENDOR_PO_MASTER);
+                $supplier_po_number_result = $supplier_po_number_query->row_array();
+    
+                if($supplier_po_number_result['supplier_po_number']){
 
-
-    $this->db->select('pre_vendor_supplier_name');
-    $this->db->where(TBL_CHALLAN_FORM_ITEM.'.id',$id);
-    $query = $this->db->get(TBL_CHALLAN_FORM_ITEM);
-    $pre_vendor_supplier_name = $query->result_array();
-
-    foreach ($pre_vendor_supplier_name as $key_vendor_supplier_name => $value_vendor_supplier_name) {
-
-        if($value_vendor_supplier_name['pre_vendor_supplier_name']=='vendor'){
-
-            if($value_vendor_supplier_name['pre_supplier_po_number']){
-
-                $this->db->select('*,'.TBL_FINISHED_GOODS.'.fin_id as raw_id'.
-                                  TBL_FINISHED_GOODS.'.name as description,'.
-                                  TBL_FINISHED_GOODS.'.hsn_code as HSN_code,'.
-                                  TBL_FINISHED_GOODS.'.sac as sac,'.
-                                  TBL_CHALLAN_FORM_ITEM.'.qty as qty,'.
-                                  TBL_RAWMATERIAL.'.type_of_raw_material as type_of_raw_material,'.
-                                  TBL_CHALLAN_FORM_ITEM.'.unit,'.
-                                  TBL_CHALLAN_FORM_ITEM.'.id  as challan_form_item_id');
-                $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_CHALLAN_FORM_ITEM.'.part_number');
-                $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
-                $this->db->where(TBL_CHALLAN_FORM_ITEM.'.id', $id);
-                $this->db->order_by(TBL_CHALLAN_FORM_ITEM.'.id','DESC');
-                $query = $this->db->get(TBL_CHALLAN_FORM_ITEM);
-                $fetch_result = $query->result_array();
-                return $fetch_result;
-              
+                    $this->db->select('*,'.TBL_FINISHED_GOODS.'.fin_id as raw_id,'.TBL_FINISHED_GOODS.'.name as description,'.TBL_CHALLAN_FORM_ITEM.'.id  as challan_form_item_id,'.TBL_FINISHED_GOODS.'.hsn_code as HSN_code1,'.TBL_RAWMATERIAL.'.type_of_raw_material as typeofrow,'.TBL_CHALLAN_FORM_ITEM.'.unit as unit1');
+                    $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_CHALLAN_FORM_ITEM.'.part_number');
+                    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.part_number = '.TBL_RAWMATERIAL.'.part_number');
+                    $this->db->where(TBL_CHALLAN_FORM_ITEM.'.id', $id);
+                    $this->db->order_by(TBL_CHALLAN_FORM_ITEM.'.id','DESC');
+                    $query3 = $this->db->get(TBL_CHALLAN_FORM_ITEM);
+                    $fetch_result3 = $query3->result_array();
+                    return $fetch_result3;
+    
+                }else{
+    
+                    $this->db->select('*,'.TBL_FINISHED_GOODS.'.fin_id as raw_id,'.TBL_FINISHED_GOODS.'.name as description,'.TBL_CHALLAN_FORM_ITEM.'.id  as challan_form_item_id,'.TBL_FINISHED_GOODS.'.hsn_code as HSN_code1,'.TBL_CHALLAN_FORM_ITEM.'.unit as unit1');
+                    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_CHALLAN_FORM_ITEM.'.part_number');
+                    $this->db->where(TBL_CHALLAN_FORM_ITEM.'.id', $id);
+                    $this->db->order_by(TBL_CHALLAN_FORM_ITEM.'.id','DESC');
+                    $query3 = $this->db->get(TBL_CHALLAN_FORM_ITEM);
+                    $fetch_result3 = $query3->result_array();
+                    return $fetch_result3;
+    
+                }
 
             }else{
-
-                // $this->db->select('*,'.TBL_FINISHED_GOODS.'.fin_id as raw_id,'.
-                //                   TBL_FINISHED_GOODS.'.name as description,'.
-                //                   TBL_FINISHED_GOODS.'.hsn_code as HSN_code,'.
-                //                   TBL_FINISHED_GOODS.'.sac as sac,'.
-                //                   TBL_CHALLAN_FORM_ITEM.'.qty as qty,'.
-                //                   TBL_CHALLAN_FORM_ITEM.'.id  as challan_form_item_id');
-                // $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_CHALLAN_FORM_ITEM.'.part_number');
-                // $this->db->where(TBL_CHALLAN_FORM_ITEM.'.id', $id);
-                // $this->db->order_by(TBL_CHALLAN_FORM_ITEM.'.id','DESC');
-                // $query = $this->db->get(TBL_CHALLAN_FORM_ITEM);
-                // $fetch_result = $query->result_array();
-                // return $fetch_result;
-
-                $this->db->select('*,'.TBL_FINISHED_GOODS.'.fin_id as raw_id'.
-                TBL_FINISHED_GOODS.'.name as description,'.
-                TBL_FINISHED_GOODS.'.hsn_code as HSN_code,'.
-                TBL_FINISHED_GOODS.'.sac as sac,'.
-                TBL_CHALLAN_FORM_ITEM.'.qty as qty,'.
-                TBL_RAWMATERIAL.'.type_of_raw_material as type_of_raw_material,'.
-                TBL_CHALLAN_FORM_ITEM.'.unit,'.
-                TBL_CHALLAN_FORM_ITEM.'.id  as challan_form_item_id');
-$this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_CHALLAN_FORM_ITEM.'.part_number');
-$this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
-$this->db->where(TBL_CHALLAN_FORM_ITEM.'.id', $id);
-$this->db->order_by(TBL_CHALLAN_FORM_ITEM.'.id','DESC');
-$query = $this->db->get(TBL_CHALLAN_FORM_ITEM);
-$fetch_result = $query->result_array();
-return $fetch_result;
-
+                $this->db->select('*,'.TBL_RAWMATERIAL.'.raw_id as raw_id,'.TBL_RAWMATERIAL.'.type_of_raw_material as description,'.TBL_CHALLAN_FORM_ITEM.'.id  as challan_form_item_id,'.TBL_RAWMATERIAL.'.HSN_code as HSN_code1,'.TBL_RAWMATERIAL.'.type_of_raw_material as typeofrow,'.TBL_CHALLAN_FORM_ITEM.'.unit as unit1');
+                $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_CHALLAN_FORM_ITEM.'.part_number');
+                $this->db->where(TBL_CHALLAN_FORM_ITEM.'.id', $id);
+                $this->db->order_by(TBL_CHALLAN_FORM_ITEM.'.id','DESC');
+                $query3 = $this->db->get(TBL_CHALLAN_FORM_ITEM);
+                $fetch_result3 = $query3->result_array();
+                return $fetch_result3;
             }
 
-        }else{
 
-            $this->db->select('*,'.TBL_RAWMATERIAL.'.raw_id as raw_id,'.TBL_RAWMATERIAL.'.type_of_raw_material as description,'.TBL_CHALLAN_FORM_ITEM.'.id  as challan_form_item_id');
-            $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_CHALLAN_FORM_ITEM.'.part_number');
-            $this->db->where(TBL_CHALLAN_FORM_ITEM.'.id', $id);
-            $this->db->order_by(TBL_CHALLAN_FORM_ITEM.'.id','DESC');
-            $query = $this->db->get(TBL_CHALLAN_FORM_ITEM);
-            $fetch_result = $query->result_array();
-            return $fetch_result;
-
-
-        }
-
-    }
-
+          
 
 }
 

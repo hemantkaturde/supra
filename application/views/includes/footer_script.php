@@ -10843,10 +10843,12 @@
 			e.preventDefault();
 			var elemF = $(this);
 			var item_id = elemF.attr('data-id');
+			var vendor_po_number =   $('#vendor_po_number').val();
+			var vendor_supplier_name = $('#vendor_supplier_name').val();
 			$.ajax({
 				url : "<?php echo base_url();?>geteditChallanformitem",
 				type: "POST",
-				data : 'id='+item_id,
+				data : {'id' : item_id,'vendor_po_number':vendor_po_number,'vendor_supplier_name':vendor_supplier_name},
 				success: function(data, textStatus, jqXHR)
 				{
 					    var fetchResponse = $.parseJSON(data);
@@ -10854,12 +10856,12 @@
 						$('#challan_form_item_id').val(fetchResponse.challan_form_item_id); 
 						$('#part_number').val(fetchResponse.raw_id);  
 						$('#description').val(fetchResponse.description); 
-						$('#HSN_Code').val(fetchResponse.HSN_code); 
+						$('#HSN_Code').val(fetchResponse.HSN_code1); 
 						$('#SAC').val(fetchResponse.sac); 
-						$('#type_of_raw_material').val(fetchResponse.type_of_raw_material); 
+						$('#type_of_raw_material').val(fetchResponse.typeofrow); 
 						$('#type_of_raw_platting').val(fetchResponse.type_of_raw_platting); 
 						$('#quantity').val(fetchResponse.qty); 
-						$('#unit').val(fetchResponse.unit); 
+						$('#unit').val(fetchResponse.unit1); 
 						$('#rate').val(fetchResponse.rate); 
 						$('#value').val(fetchResponse.value); 
 						$('#row_material_cost').val(fetchResponse.row_material_cost); 

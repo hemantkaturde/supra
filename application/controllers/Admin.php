@@ -9698,7 +9698,7 @@ class Admin extends BaseController
     public function geteditChallanformitem(){
         $post_submit = $this->input->post();
         if($post_submit){
-            $geteditChallanformitem = $this->admin_model->geteditChallanformitem(trim($this->input->post('id')));
+            $geteditChallanformitem = $this->admin_model->geteditChallanformitem(trim($this->input->post('id')),trim($this->input->post('vendor_po_number')),trim($this->input->post('vendor_supplier_name')));
             if($geteditChallanformitem){
                 $content = $geteditChallanformitem[0];
                 echo json_encode($content);

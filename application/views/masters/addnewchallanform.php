@@ -178,6 +178,7 @@
                                                     <tr>
                                                         <th>Sr No.</th>
                                                         <th>Part Number</th>
+                                                        <th>Description</th>
                                                         <th>Quantity</th>
                                                         <th>Rate</th>
                                                         <th>Value</th>
@@ -199,7 +200,7 @@
                                                     <tr>
                                                         <td><?php echo $count;?></td>
                                                         <td><?php echo $value['part_number'];?></td>
-                                                        <!-- <td><?php echo $value['description'];?></td> -->
+                                                        <td><?php echo $value['description'];?></td>
                                                         <td><?php echo $value['qty'];?></td>
                                                         <td><?php echo $value['rate'];?></td>
                                                         <td><?php echo $value['value'];?></td>
