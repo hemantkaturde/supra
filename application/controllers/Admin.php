@@ -10010,6 +10010,25 @@ class Admin extends BaseController
     }
 
 
+    
+    public function getSuppliergoodsreworkrejectionvendorreworkrejection(){
+        
+        if($this->input->post('part_number')) {
+            $getPartNameBypartid = $this->admin_model->getSuppliergoodsreworkrejectionvendorreworkrejection($this->input->post('part_number'),$this->input->post('vendor_po_number'),trim($this->input->post('vendor_supplier_name')));
+            if($getPartNameBypartid){
+                $content = $getPartNameBypartid[0];
+                echo json_encode($content);
+
+            }else{
+                echo 'failure';
+            }
+           
+        } else {
+            echo 'failure';
+        }
+    }
+
+
     public function getexportdetailsforqulityrecord(){
         $post_submit = $this->input->post();
         if($post_submit){

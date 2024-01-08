@@ -9714,7 +9714,7 @@
 							$.ajax({
 								url : "<?php echo ADMIN_PATH;?>getSuppliergoodsreworkrejectionvendor",
 								type: "POST",
-								data : {'part_number' : part_number,'vendor_po_number':vendor_po_number},
+								data : {'part_number' : part_number,'vendor_po_number':vendor_po_number,'vendor_supplier_name':vendor_supplier_name},
 								success: function(data, textStatus, jqXHR)
 								{
 									$(".loader_ajax").hide();
