@@ -183,9 +183,9 @@
                                                         <td><?php echo $value['grand_total'];?></td>
                                                         <td><?php echo $value['item_remark'];?></td>
                                                         <td>
-                                                        <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['itm_id'];?>' class='fa fa-pencil-square-o editChallanformitem'  aria-hidden='true'></i>
+                                                        <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['challanformid'];?>' class='fa fa-pencil-square-o editChallanformitem'  aria-hidden='true'></i>
 
-                                                        <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['itm_id'];?>' class='fa fa-trash-o deleteChallanformitem' aria-hidden='true'></i>
+                                                        <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['challanformid'];?>' class='fa fa-trash-o deleteChallanformitem' aria-hidden='true'></i>
                                                         </td>
                                                     </tr>
                                                     <?php endforeach;?>
