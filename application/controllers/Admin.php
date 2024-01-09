@@ -10210,7 +10210,7 @@ public function downlaodjobworkchllan($id){
                 <tr style="border: 1px solid black;">
                     <td style="border: 1px solid black;">'.$i.'</td>
                     <td style="border: 1px solid black;">'.$getJobworkchallandetailsForInvoice['po_number'].'</td>  
-                    <td style="border: 1px solid black;">'.$value['hsn_code'].'</td>
+                    <td style="border: 1px solid black;">'.$value['hsn_code'].'-'.$value['part_number'].'</td>
                     <td style="border: 1px solid black;">'.$value['name'].'</td>
                     <td style="border: 1px solid black;">'.$value['order_oty'].'</td>
                     <td style="border: 1px solid black;">'.$value['vendor_qty'].'</td> 
@@ -10312,7 +10312,7 @@ public function downlaodjobworkchllan($id){
                 <tr style="border: 1px solid black;">
                     <th align="left" style="border: 1px solid black;">SR.NO.</th>
                     <th align="left" style="border: 1px solid black;">PO Number</th>
-                    <th align="left" style="border: 1px solid black;">HSN</th>
+                    <th align="left" style="border: 1px solid black;">HSN / Part Number</th>
                     <th align="left" style="border: 1px solid black;">Finished Goods</th>  
                     <th align="left" style="border: 1px solid black;">Rejection Reason</th> 
                     <th align="left" style="border: 1px solid black;">Qty</th>  
@@ -10337,11 +10337,9 @@ public function downlaodjobworkchllan($id){
                    <tr style="border: 1px solid black;">
                         <td style="border: 1px solid black;">
                             <p><b>NOTE :</b></p>
-                            <p>1. Confirmation of PO is Mandatory</p>
-                            <p>2. Mentioning P.O.No. on Invoice is Mandatory</b></p>
-                            <p>3. Once order issued & accepted, cannot be cancelled</p>
-                            <p>4. Essence of this order is delivering the specified quality product on time.</p>
-                            <p>5. If any Prices issue, should inform in 24hrs after receipt of P.O.</p>
+                            <p>Received the above mentioned goods in good order & condition & returned  the duplicate duly sealed & signed.</p>
+                            <p>Dispatched by: Anjani Courier</p>
+                            <p>NO of Bags / Gonies: 1 Box-1.280 Kgs</p>
                         </td>
                         <td style="border: 1px solid black;">
                           
