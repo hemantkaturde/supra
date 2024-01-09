@@ -9792,8 +9792,8 @@ class Admin extends BaseController
                         <td style="border: 1px solid black;">'.$value['type_of_raw_material'].'</td>   
                         <td style="border: 1px solid black;">'.$value['part_number'].'</td>
                         <td style="border: 1px solid black;">'.$value['order_oty'].'</td>
+                        <td style="border: 1px solid black;">'.$value['unit'].'</td> 
                         <td style="border: 1px solid black;">'.$value['rate'].'</td>    
-                        <td style="border: 1px solid black;">'.$value['unit'].'</td>    
                         <td style="border: 1px solid black;">'.$value['value'].'</td>
                     </tr>';
                 $i++;       
@@ -9909,8 +9909,8 @@ class Admin extends BaseController
                         <th align="left" style="border: 1px solid black;">PART DESCRIPTION</th>
                         <th align="left" style="border: 1px solid black;">PART NO.</th>  
                         <th align="left" style="border: 1px solid black;">QTY</th> 
-                        <th align="left" style="border: 1px solid black;">RATE</th>  
                         <th align="left" style="border: 1px solid black;">UNITS</th>  
+                        <th align="left" style="border: 1px solid black;">RATE</th>  
                         <th align="left"  style="border: 1px solid black;">AMOUNT</th>
                     </tr>
                     '.$CartItem.'
