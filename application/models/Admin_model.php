@@ -8408,7 +8408,7 @@ class Admin_model extends CI_Model
                     .TBL_RAWMATERIAL.'.raw_id,'
                     .TBL_RAWMATERIAL.'.part_number,'
                     .TBL_RAWMATERIAL.'.type_of_raw_material as description,'
-                    .TBL_RAWMATERIAL.'.type_of_raw_material,'
+                    // .TBL_RAWMATERIAL.'.type_of_raw_material,'
                     .TBL_RAWMATERIAL.'.sac as sac,'
                     .TBL_RAWMATERIAL.'.HSN_code as HSN_code,'
                     .TBL_RAWMATERIAL.'.sitting_size as sitting_size,'
