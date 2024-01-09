@@ -8407,6 +8407,9 @@ class Admin_model extends CI_Model
     
                 if($supplier_po_number_result['supplier_po_number']){
 
+                    print_r('ddd');
+                    exit;
+
                     $this->db->select('*,'.TBL_FINISHED_GOODS.'.fin_id as raw_id,'.TBL_RAWMATERIAL.'.type_of_raw_material as description,'.TBL_CHALLAN_FORM_ITEM.'.id  as challan_form_item_id,'.TBL_FINISHED_GOODS.'.hsn_code as HSN_code1,'.TBL_RAWMATERIAL.'.type_of_raw_material as typeofrow,'.TBL_CHALLAN_FORM_ITEM.'.unit as unit1');
                     $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_CHALLAN_FORM_ITEM.'.part_number');
                     $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.part_number = '.TBL_RAWMATERIAL.'.part_number');
