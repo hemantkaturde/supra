@@ -9807,6 +9807,7 @@ class Admin extends BaseController
                               <p><b>Office:</b> 229 to 232, Bharat Industrial Estate, L.B.S. Marg, Bhandup West, Mumbai – 400078. INDIA.
                               <p>Tel: +91 22 66959505 / +91 22 66600196 </p>
                               <p>+91 22 62390222 / +91 22 46061497 / +91 22 35115396 </p>
+                              <p>GSTIN : 27AAJCS7869M1ZB </p>
                             </td>
                             <td>
                                 <p><b>Email:</b> purchase@supraexports.in</p>
