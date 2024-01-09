@@ -4748,16 +4748,82 @@ class Admin_model extends CI_Model
 
     public function getSuppliergoodsreworkrejectionvendor($part_number,$vendor_po_number){
 
-        $this->db->select('*,'.TBL_FINISHED_GOODS.'.sac as sac_no,'.TBL_VENDOR_PO_MASTER_ITEM.'.rate as vendorrate,'.TBL_FINISHED_GOODS.'.name as typeofrawmaterial,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_order_qty');
-        // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
-        $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
-        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.pre_vendor_name');
-        $this->db->where(TBL_FINISHED_GOODS.'.status',1);
-        $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id',$vendor_po_number);
-        $this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
-        $query = $this->db->get(TBL_FINISHED_GOODS);
-        $data = $query->result_array();
-        return $data;
+
+        $check_if_supplier_exist =  $this->chekc_if_supplie_name_exits($vendor_po_number);
+        if($check_if_supplier_exist['supplier_po_number']){
+    
+            // $this->db->select('*,'.TBL_RAWMATERIAL.'.sac as sac_no,'.TBL_VENDOR_PO_MASTER_ITEM.'.rate as vendorrate,'.TBL_RAWMATERIAL.'.type_of_raw_material as typeofrawmaterial,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_order_qty');
+            // // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+            // $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id = '.TBL_RAWMATERIAL.'.raw_id');
+            // $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.pre_vendor_name');
+            // $this->db->where(TBL_RAWMATERIAL.'.status',1);
+            // // $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id',$vendor_po_number);
+            // $this->db->where(TBL_RAWMATERIAL.'.raw_id',$part_number);
+            // $query = $this->db->get(TBL_RAWMATERIAL);
+            // $data = $query->result_array();
+            // return $data;
+    
+            // $this->db->select('*,'.TBL_FINISHED_GOODS.'.sac as sac_no,'.TBL_VENDOR_PO_MASTER_ITEM.'.rate as vendorrate,'.TBL_FINISHED_GOODS.'.name as typeofrawmaterial,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_order_qty');
+            // // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+            // $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
+            // $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.pre_vendor_name');
+            // $this->db->where(TBL_FINISHED_GOODS.'.status',1);
+            // $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id',$vendor_po_number);
+            // $this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
+            // $query = $this->db->get(TBL_FINISHED_GOODS);
+            // $data = $query->result_array();
+            // return $data;
+    
+            
+            $this->db->select('*,'.TBL_FINISHED_GOODS.'.sac as sac_no,'.TBL_VENDOR_PO_MASTER_ITEM.'.rate as vendorrate,'.TBL_RAWMATERIAL.'.type_of_raw_material as typeofrawmaterial,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_order_qty');
+          
+            $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
+              $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+            // $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.pre_vendor_name');
+            $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id',$part_number);
+            $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id',$vendor_po_number);
+            $query = $this->db->get(TBL_VENDOR_PO_MASTER_ITEM);
+            $data = $query->result_array();
+            return $data;
+    
+    
+    
+        }else{
+    
+            // $this->db->select('*,'.TBL_FINISHED_GOODS.'.sac as sac_no,'.TBL_VENDOR_PO_MASTER_ITEM.'.rate as vendorrate,'.TBL_FINISHED_GOODS.'.name as typeofrawmaterial,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_order_qty');
+            // // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+            // $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
+            // $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.pre_vendor_name');
+            // $this->db->where(TBL_FINISHED_GOODS.'.status',1);
+            // $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id',$vendor_po_number);
+            // $this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
+            // $query = $this->db->get(TBL_FINISHED_GOODS);
+            // $data = $query->result_array();
+            // return $data;
+    
+            $this->db->select('*,'.TBL_FINISHED_GOODS.'.sac as sac_no,'.TBL_VENDOR_PO_MASTER_ITEM.'.rate as vendorrate,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_order_qty');
+            // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+            $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
+            //$this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.pre_vendor_name');
+            $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id',$part_number);
+            $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id',$vendor_po_number);
+            $query = $this->db->get(TBL_VENDOR_PO_MASTER_ITEM);
+            $data = $query->result_array();
+            return $data;
+
+        }
+
+        // $this->db->select('*,'.TBL_FINISHED_GOODS.'.sac as sac_no,'.TBL_VENDOR_PO_MASTER_ITEM.'.rate as vendorrate,'.TBL_FINISHED_GOODS.'.name as typeofrawmaterial,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_order_qty');
+        // // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+        // $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
+        // $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.pre_vendor_name');
+        // $this->db->where(TBL_FINISHED_GOODS.'.status',1);
+        // $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id',$vendor_po_number);
+        // $this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
+        // $query = $this->db->get(TBL_FINISHED_GOODS);
+        // $data = $query->result_array();
+        // return $data;
+        
 
     }
 
@@ -4824,16 +4890,58 @@ class Admin_model extends CI_Model
 
     public function getReworkRejectionitemslist(){
 
-        $this->db->select('*,'.TBL_REWORK_REJECTION_ITEM.'.id as reworkrejectionid,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_po_number,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_number');
-        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_REWORK_REJECTION_ITEM.'.part_number');
-        $this->db->join(TBL_FINISHED_GOODS, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
-        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_REWORK_REJECTION_ITEM.'.pre_vendor_po_number','left');
-        $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_REWORK_REJECTION_ITEM.'.pre_supplier_po_number','left');
-        $this->db->where(TBL_REWORK_REJECTION_ITEM.'.status',1);
+        $this->db->select(TBL_VENDOR_PO_MASTER.'.supplier_po_number,'.TBL_REWORK_REJECTION_ITEM.'.pre_vendor_supplier_name');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_REWORK_REJECTION_ITEM.'.pre_vendor_po_number');
         $this->db->where(TBL_REWORK_REJECTION_ITEM.'.rework_rejection_id IS NULL');
-        $query = $this->db->get(TBL_REWORK_REJECTION_ITEM);
-        $data = $query->result_array();
-        return $data;
+        $query_vendor_po = $this->db->get(TBL_REWORK_REJECTION_ITEM);
+        $query_vendor_data = $query_vendor_po->row_array();
+
+        if($query_vendor_data['pre_vendor_supplier_name']=='vendor'){
+
+                if($query_vendor_data['supplier_po_number']){
+
+                    $this->db->select('*,'.TBL_REWORK_REJECTION_ITEM.'.id as reworkrejectionid,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_po_number,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_number,'.TBL_FINISHED_GOODS.'.name as description1');
+                    $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_REWORK_REJECTION_ITEM.'.part_number');
+                    $this->db->join(TBL_FINISHED_GOODS, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+                    $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_REWORK_REJECTION_ITEM.'.pre_vendor_po_number','left');
+                    $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_REWORK_REJECTION_ITEM.'.pre_supplier_po_number','left');
+                    $this->db->where(TBL_REWORK_REJECTION_ITEM.'.status',1);
+                    $this->db->where(TBL_REWORK_REJECTION_ITEM.'.rework_rejection_id IS NULL');
+                    $query = $this->db->get(TBL_REWORK_REJECTION_ITEM);
+                    $data = $query->result_array();
+                    return $data;
+                }else{
+
+
+                    $this->db->select('*,'.TBL_REWORK_REJECTION_ITEM.'.id as reworkrejectionid,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_po_number,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_number,'.TBL_FINISHED_GOODS.'.name as description1');
+                    //$this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_REWORK_REJECTION_ITEM.'.part_number');
+                    $this->db->join(TBL_FINISHED_GOODS, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+                    $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_REWORK_REJECTION_ITEM.'.pre_vendor_po_number','left');
+                    $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_REWORK_REJECTION_ITEM.'.pre_supplier_po_number','left');
+                    $this->db->where(TBL_REWORK_REJECTION_ITEM.'.status',1);
+                    $this->db->where(TBL_REWORK_REJECTION_ITEM.'.rework_rejection_id IS NULL');
+                    $query = $this->db->get(TBL_REWORK_REJECTION_ITEM);
+                    $data = $query->result_array();
+                    return $data;
+
+                }
+
+        }else{
+
+
+            $this->db->select('*,'.TBL_REWORK_REJECTION_ITEM.'.id as reworkrejectionid,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_po_number,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_number,'.TBL_RAWMATERIAL.'.type_of_raw_material as description1');
+            $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_REWORK_REJECTION_ITEM.'.part_number');
+            //$this->db->join(TBL_FINISHED_GOODS, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+            $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_REWORK_REJECTION_ITEM.'.pre_vendor_po_number','left');
+            $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_REWORK_REJECTION_ITEM.'.pre_supplier_po_number','left');
+            $this->db->where(TBL_REWORK_REJECTION_ITEM.'.status',1);
+            $this->db->where(TBL_REWORK_REJECTION_ITEM.'.rework_rejection_id IS NULL');
+            $query = $this->db->get(TBL_REWORK_REJECTION_ITEM);
+            $data = $query->result_array();
+            return $data;
+
+
+        }
 
     }
 
@@ -4864,16 +4972,70 @@ class Admin_model extends CI_Model
 
     public function getReworkRejectionitemslistforedit($id){
 
-        $this->db->select('*,'.TBL_REWORK_REJECTION_ITEM.'.id as reworkrejectionid,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_po_number,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_number');
-        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_REWORK_REJECTION_ITEM.'.part_number');
-        $this->db->join(TBL_FINISHED_GOODS, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
-        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_REWORK_REJECTION_ITEM.'.pre_vendor_po_number','left');
-        $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_REWORK_REJECTION_ITEM.'.pre_supplier_po_number','left');
-        $this->db->where(TBL_REWORK_REJECTION_ITEM.'.status',1);
+        // $this->db->select('*,'.TBL_REWORK_REJECTION_ITEM.'.id as reworkrejectionid,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_po_number,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_number');
+        // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_REWORK_REJECTION_ITEM.'.part_number');
+        // $this->db->join(TBL_FINISHED_GOODS, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+        // $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_REWORK_REJECTION_ITEM.'.pre_vendor_po_number','left');
+        // $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_REWORK_REJECTION_ITEM.'.pre_supplier_po_number','left');
+        // $this->db->where(TBL_REWORK_REJECTION_ITEM.'.status',1);
+        // $this->db->where(TBL_REWORK_REJECTION_ITEM.'.rework_rejection_id',$id);
+        // $query = $this->db->get(TBL_REWORK_REJECTION_ITEM);
+        // $data = $query->result_array();
+        // return $data;
+
+
+        $this->db->select(TBL_VENDOR_PO_MASTER.'.supplier_po_number,'.TBL_REWORK_REJECTION_ITEM.'.pre_vendor_supplier_name');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_REWORK_REJECTION_ITEM.'.pre_vendor_po_number');
         $this->db->where(TBL_REWORK_REJECTION_ITEM.'.rework_rejection_id',$id);
-        $query = $this->db->get(TBL_REWORK_REJECTION_ITEM);
-        $data = $query->result_array();
-        return $data;
+        $query_vendor_po = $this->db->get(TBL_REWORK_REJECTION_ITEM);
+        $query_vendor_data = $query_vendor_po->row_array();
+
+        if($query_vendor_data['pre_vendor_supplier_name']=='vendor'){
+
+                if($query_vendor_data['supplier_po_number']){
+
+                    $this->db->select('*,'.TBL_REWORK_REJECTION_ITEM.'.id as reworkrejectionid,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_po_number,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_number,'.TBL_FINISHED_GOODS.'.name as description1');
+                    $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_REWORK_REJECTION_ITEM.'.part_number');
+                    $this->db->join(TBL_FINISHED_GOODS, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+                    $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_REWORK_REJECTION_ITEM.'.pre_vendor_po_number','left');
+                    $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_REWORK_REJECTION_ITEM.'.pre_supplier_po_number','left');
+                    $this->db->where(TBL_REWORK_REJECTION_ITEM.'.status',1);
+                    $this->db->where(TBL_REWORK_REJECTION_ITEM.'.rework_rejection_id',$id);
+                    $query = $this->db->get(TBL_REWORK_REJECTION_ITEM);
+                    $data = $query->result_array();
+                    return $data;
+                }else{
+
+
+                    $this->db->select('*,'.TBL_REWORK_REJECTION_ITEM.'.id as reworkrejectionid,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_po_number,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_number,'.TBL_FINISHED_GOODS.'.name as description1');
+                    //$this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_REWORK_REJECTION_ITEM.'.part_number');
+                    $this->db->join(TBL_FINISHED_GOODS, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+                    $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_REWORK_REJECTION_ITEM.'.pre_vendor_po_number','left');
+                    $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_REWORK_REJECTION_ITEM.'.pre_supplier_po_number','left');
+                    $this->db->where(TBL_REWORK_REJECTION_ITEM.'.status',1);
+                    $this->db->where(TBL_REWORK_REJECTION_ITEM.'.rework_rejection_id',$id);
+                    $query = $this->db->get(TBL_REWORK_REJECTION_ITEM);
+                    $data = $query->result_array();
+                    return $data;
+
+                }
+
+        }else{
+
+
+            $this->db->select('*,'.TBL_REWORK_REJECTION_ITEM.'.id as reworkrejectionid,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_po_number,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_number,'.TBL_RAWMATERIAL.'.type_of_raw_material as description1');
+            $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_REWORK_REJECTION_ITEM.'.part_number');
+            //$this->db->join(TBL_FINISHED_GOODS, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+            $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_REWORK_REJECTION_ITEM.'.pre_vendor_po_number','left');
+            $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_REWORK_REJECTION_ITEM.'.pre_supplier_po_number','left');
+            $this->db->where(TBL_REWORK_REJECTION_ITEM.'.status',1);
+            $this->db->where(TBL_REWORK_REJECTION_ITEM.'.rework_rejection_id IS NULL');
+            $query = $this->db->get(TBL_REWORK_REJECTION_ITEM);
+            $data = $query->result_array();
+            return $data;
+
+
+        }
 
 
     }
@@ -8595,7 +8757,90 @@ class Admin_model extends CI_Model
 
     }
         
-}
+   }
+
+
+   public function getVendoritemonlyforreworkrejection($vendor_po_number,$flag){
+
+
+    if($flag=='vendor'){
+
+        $check_if_supplier_exist =  $this->chekc_if_supplie_name_exits($vendor_po_number);
+
+        if($check_if_supplier_exist['supplier_po_number']){
+            $this->db->select('*,'.TBL_FINISHED_GOODS.'.fin_id as fin_id');
+            $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
+            $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+            $this->db->where(TBL_FINISHED_GOODS.'.status',1);
+            //$this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
+            $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id',$vendor_po_number);
+            $query = $this->db->get(TBL_VENDOR_PO_MASTER_ITEM);
+            $data = $query->result_array();
+            return $data;
+        }else{
+            $this->db->select('*,'.TBL_FINISHED_GOODS.'.fin_id as fin_id');
+            $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
+            // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+            $this->db->where(TBL_FINISHED_GOODS.'.status',1);
+            //$this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
+            $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id',$vendor_po_number);
+            $query = $this->db->get(TBL_VENDOR_PO_MASTER_ITEM);
+            $data = $query->result_array();
+            return $data;
+
+
+        }
+    }else{
+
+        $this->db->select('*,'.TBL_RAWMATERIAL.'.raw_id as fin_id');
+        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
+        //$this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
+        $this->db->where(TBL_RAWMATERIAL.'.status',1);
+        //$this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
+        $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id',$vendor_po_number);
+        $query = $this->db->get(TBL_VENDOR_PO_MASTER_ITEM);
+        $data = $query->result_array();
+        return $data;
+
+    }
+
+    // $check_if_supplier_exist =  $this->chekc_if_supplie_name_exits($vendor_po_number);
+
+    // if($check_if_supplier_exist['supplier_po_number']){
+    //     $this->db->select('*,'.TBL_FINISHED_GOODS.'.fin_id as fin_id');
+    //     $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
+    //     // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+    //     $this->db->where(TBL_FINISHED_GOODS.'.status',1);
+    //     //$this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
+    //     $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id',$vendor_po_number);
+    //     $query = $this->db->get(TBL_VENDOR_PO_MASTER_ITEM);
+    //     $data = $query->result_array();
+    //     return $data;
+    // }else{
+    //     // $this->db->select('*,'.TBL_RAWMATERIAL.'.raw_id as fin_id');
+    //     // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
+    //     // //$this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
+    //     // $this->db->where(TBL_RAWMATERIAL.'.status',1);
+    //     // //$this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
+    //     // $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id',$vendor_po_number);
+    //     // $query = $this->db->get(TBL_VENDOR_PO_MASTER_ITEM);
+    //     // $data = $query->result_array();
+    //     // return $data;
+
+    //     $this->db->select('*,'.TBL_FINISHED_GOODS.'.fin_id as fin_id');
+    //     $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
+    //     // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+    //     $this->db->where(TBL_FINISHED_GOODS.'.status',1);
+    //     //$this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
+    //     $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id',$vendor_po_number);
+    //     $query = $this->db->get(TBL_VENDOR_PO_MASTER_ITEM);
+    //     $data = $query->result_array();
+    //     return $data;
+
+
+    // }
+        
+   }
 
 
    public function getSuppliergoodsreworkrejectionvendorpod($part_number,$vendor_po_number,$vendor_supplier_name){

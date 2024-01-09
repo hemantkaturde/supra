@@ -9632,7 +9632,7 @@
 							$("#part_number").html('');
 						
 							$.ajax({
-								url : "<?php echo ADMIN_PATH;?>getVendoritemonly",
+								url : "<?php echo ADMIN_PATH;?>getVendoritemonlyforreworkrejection",
 								type: "POST",
 								data : {'vendor_po_number' : vendor_po_number},
 								success: function(data, textStatus, jqXHR)
@@ -9701,6 +9701,9 @@
    
 		$(document).on('change','#part_number',function(e){  
 			e.preventDefault();
+
+
+			
 			
 			var part_number = $('#part_number').val();
 		    var vendor_po_number = $('#vendor_po_number').val();
