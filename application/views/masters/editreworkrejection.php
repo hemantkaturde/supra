@@ -284,8 +284,8 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Type Of Row Material</label>
                                                         <div class="col-sm-8">
-                                                            <input type="text" class="form-control"  id="raw_material_size" name="raw_material_size" readonly>
-                                                            <p class="error raw_material_size_error"></p>
+                                                            <input type="text" class="form-control"  id="type_of_raw_material" name="type_of_raw_material" readonly>
+                                                            <p class="error type_of_raw_material_error"></p>
                                                         </div>
                                                     </div>
                                                 
