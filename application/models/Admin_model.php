@@ -5079,72 +5079,37 @@ class Admin_model extends CI_Model
 
 
 
-        // $this->db->select('*,'.TBL_CHALLAN_FORM_ITEM.'.id as itm_id,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_po_number,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_number');
-        // // $this->db->join(TBL_FINISHED_GOODS, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
-        // // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_CHALLAN_FORM_ITEM.'.part_number');
-        // $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_CHALLAN_FORM_ITEM.'.part_number');
-        // //$this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
-        // $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_CHALLAN_FORM_ITEM.'.pre_vendor_po_number','left');
-        // $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_CHALLAN_FORM_ITEM.'.pre_supplier_po_number','left');
-        // $this->db->where(TBL_CHALLAN_FORM_ITEM.'.status',1);
-        // $this->db->where(TBL_CHALLAN_FORM_ITEM.'.challan_id',$challan_id);
-        // $query = $this->db->get(TBL_CHALLAN_FORM_ITEM);
-        // $data = $query->result_array();
-    
-        // if(count($data) > 0)
-        // {
-        //     return $data;
-        // }else{
-
-        //     $this->db->select('*,'.TBL_CHALLAN_FORM_ITEM.'.id as itm_id,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_po_number,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_number');
-        //     // $this->db->join(TBL_FINISHED_GOODS, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
-        //     // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_CHALLAN_FORM_ITEM.'.part_number');
-        //     // $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_CHALLAN_FORM_ITEM.'.part_number');
-        //     $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_CHALLAN_FORM_ITEM.'.part_number');
-        //     $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_CHALLAN_FORM_ITEM.'.pre_vendor_po_number','left');
-        //     $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_CHALLAN_FORM_ITEM.'.pre_supplier_po_number','left');
-        //     $this->db->where(TBL_CHALLAN_FORM_ITEM.'.status',1);
-        //     $this->db->where(TBL_CHALLAN_FORM_ITEM.'.challan_id',$challan_id);
-        //     $query = $this->db->get(TBL_CHALLAN_FORM_ITEM);
-
-
-        // }
-
-
-        $this->db->select('*,'.TBL_CHALLAN_FORM_ITEM.'.id as challanformid,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_po_number,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_number,'.TBL_FINISHED_GOODS.'.name as description');
-        // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_CHALLAN_FORM_ITEM.'.part_number');
+        $this->db->select('*,'.TBL_CHALLAN_FORM_ITEM.'.id as itm_id,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_po_number,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_number');
         // $this->db->join(TBL_FINISHED_GOODS, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+        // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_CHALLAN_FORM_ITEM.'.part_number');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_CHALLAN_FORM_ITEM.'.part_number');
-        // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
-
+        //$this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_CHALLAN_FORM_ITEM.'.pre_vendor_po_number','left');
         $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_CHALLAN_FORM_ITEM.'.pre_supplier_po_number','left');
         $this->db->where(TBL_CHALLAN_FORM_ITEM.'.status',1);
         $this->db->where(TBL_CHALLAN_FORM_ITEM.'.challan_id',$challan_id);
         $query = $this->db->get(TBL_CHALLAN_FORM_ITEM);
         $data = $query->result_array();
-      
-
+    
         if(count($data) > 0)
         {
             return $data;
         }else{
 
-            $this->db->select('*,'.TBL_CHALLAN_FORM_ITEM.'.id as challanformid,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_po_number,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_number,'.TBL_RAWMATERIAL.'.type_of_raw_material as description');
-            // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_CHALLAN_FORM_ITEM.'.part_number');
+            $this->db->select('*,'.TBL_CHALLAN_FORM_ITEM.'.id as itm_id,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_po_number,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_number');
             // $this->db->join(TBL_FINISHED_GOODS, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
-           // $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_CHALLAN_FORM_ITEM.'.part_number');
+            // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_CHALLAN_FORM_ITEM.'.part_number');
+            // $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_CHALLAN_FORM_ITEM.'.part_number');
             $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_CHALLAN_FORM_ITEM.'.part_number');
             $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_CHALLAN_FORM_ITEM.'.pre_vendor_po_number','left');
             $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_CHALLAN_FORM_ITEM.'.pre_supplier_po_number','left');
             $this->db->where(TBL_CHALLAN_FORM_ITEM.'.status',1);
             $this->db->where(TBL_CHALLAN_FORM_ITEM.'.challan_id',$challan_id);
             $query = $this->db->get(TBL_CHALLAN_FORM_ITEM);
-            $data2 = $query->result_array();
 
-            return $data2;
 
         }
+
 
 
     }
