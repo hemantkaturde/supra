@@ -9961,7 +9961,8 @@ class Admin extends BaseController
              </table>
 
                 <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:arial;">
-                        <tr style="border: 1px solid black;">
+                       <p>Raw Material Deliver</p> 
+                       <tr style="border: 1px solid black;">
                             <td style="border: 1px solid black;">
                                 <p><b>NOTE :</b></p>
                                 <p>1. Confirmation of PO is Mandatory</p>
