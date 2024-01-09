@@ -10859,7 +10859,7 @@
 						$('#description').val(fetchResponse.description); 
 						$('#HSN_Code').val(fetchResponse.HSN_code1); 
 						$('#SAC').val(fetchResponse.sac); 
-						$('#type_of_raw_material').val(fetchResponse.typeofrow); 
+						$('#type_of_raw_material').val(fetchResponse.type_of_raw_material); 
 						$('#type_of_raw_platting').val(fetchResponse.type_of_raw_platting); 
 						$('#quantity').val(fetchResponse.qty); 
 						$('#unit').val(fetchResponse.unit1); 
