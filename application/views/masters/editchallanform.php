@@ -116,7 +116,7 @@
 
                                     <div class="col-md-12 supplier_po_number_div" id="supplier_po_number_div" style="display: <?=$display?>">
                                         <div class="form-group">
-                                                <label for="supplier_po_number">Select Vendor PO Number</label>
+                                                <label for="supplier_po_number">Select Supplier PO Number</label>
                                                     <select class="form-control supplier_po_number_for_item" name="supplier_po_number" id="supplier_po_number">
                                                         <!-- <option st-id="" value="">Select Vendor Name</option> -->
                                                         <option st-id="" value="<?=$getChallanformdetails[0]['rejection_supplier_po']?>" selected="selected"><?=$selected_value?></option>
