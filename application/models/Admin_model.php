@@ -8408,7 +8408,7 @@ class Admin_model extends CI_Model
                 if($supplier_po_number_result['supplier_po_number']){
 
         
-                    $this->db->select('*,'.TBL_FINISHED_GOODS.'.fin_id as raw_id,'.TBL_FINISHED_GOODS.'.name as description,'.TBL_CHALLAN_FORM_ITEM.'.id  as challan_form_item_id,'.TBL_FINISHED_GOODS.'.hsn_code as HSN_code1,'.TBL_RAWMATERIAL.'.type_of_raw_material as typeofrow,'.TBL_CHALLAN_FORM_ITEM.'.unit as unit1');
+                    $this->db->select('*,'.TBL_FINISHED_GOODS.'.fin_id as raw_id,'.TBL_FINISHED_GOODS.'.name as description,'.TBL_CHALLAN_FORM_ITEM.'.id  as challan_form_item_id,'.TBL_FINISHED_GOODS.'.hsn_code as HSN_code1,'.TBL_RAWMATERIAL.'.type_of_raw_material as typeofrow5gk,'.TBL_CHALLAN_FORM_ITEM.'.unit as unit1');
                     $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_CHALLAN_FORM_ITEM.'.part_number');
                     $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
                     $this->db->where(TBL_CHALLAN_FORM_ITEM.'.id', $id);
@@ -8429,7 +8429,7 @@ class Admin_model extends CI_Model
                 }
 
             }else{
-                $this->db->select('*,'.TBL_RAWMATERIAL.'.raw_id as raw_id,'.TBL_RAWMATERIAL.'.type_of_raw_material as description,'.TBL_CHALLAN_FORM_ITEM.'.id  as challan_form_item_id,'.TBL_RAWMATERIAL.'.HSN_code as HSN_code1,'.TBL_RAWMATERIAL.'.type_of_raw_material as typeofrow,'.TBL_CHALLAN_FORM_ITEM.'.unit as unit1');
+                $this->db->select('*,'.TBL_RAWMATERIAL.'.raw_id as raw_id,'.TBL_RAWMATERIAL.'.type_of_raw_material as description,'.TBL_CHALLAN_FORM_ITEM.'.id  as challan_form_item_id,'.TBL_RAWMATERIAL.'.HSN_code as HSN_code1,'.TBL_RAWMATERIAL.'.type_of_raw_material as typeofrow5gk,'.TBL_CHALLAN_FORM_ITEM.'.unit as unit1');
                 $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_CHALLAN_FORM_ITEM.'.part_number');
                 $this->db->where(TBL_CHALLAN_FORM_ITEM.'.id', $id);
                 $this->db->order_by(TBL_CHALLAN_FORM_ITEM.'.id','DESC');
