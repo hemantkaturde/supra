@@ -286,7 +286,7 @@
 
                                                    
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Quantity (in pcs / in Kgs)<span class="required">*</span></label>
+                                                        <label class="col-sm-4 col-form-label">Quantity<span class="required">*</span></label>
                                                         <div class="col-sm-8">
                                                             <input type="text" class="form-control"  id="quantity" name="quantity">
                                                             <p class="error quantity_error"></p>

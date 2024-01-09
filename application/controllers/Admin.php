@@ -7084,6 +7084,7 @@ class Admin extends BaseController
                         'qty' =>  trim($this->input->post('quantity')),
                         'rate' =>  trim($this->input->post('rate')),
                         'value' =>  trim($this->input->post('value')),
+                        'unit' =>  trim($this->input->post('unit')),
                         'type_of_raw_platting' =>  trim($this->input->post('type_of_raw_platting')),
                         'row_material_cost' =>  trim($this->input->post('row_material_cost')),
                         'gst_rate' =>  trim($this->input->post('gst_rate')),
