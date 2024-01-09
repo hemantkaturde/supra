@@ -8410,15 +8410,11 @@ class Admin_model extends CI_Model
             
 
                     $this->db->select('*,'.TBL_FINISHED_GOODS.'.fin_id as raw_id,'.TBL_RAWMATERIAL.'.type_of_raw_material as description,'.TBL_CHALLAN_FORM_ITEM.'.id  as challan_form_item_id,'.TBL_FINISHED_GOODS.'.hsn_code as HSN_code1,'.TBL_RAWMATERIAL.'.type_of_raw_material as typeofrow,'.TBL_CHALLAN_FORM_ITEM.'.unit as unit1');
-                    $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_CHALLAN_FORM_ITEM.'.part_number');
-                    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.part_number = '.TBL_RAWMATERIAL.'.part_number');
+                    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_CHALLAN_FORM_ITEM.'.part_number');
+                    $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
                     $this->db->where(TBL_CHALLAN_FORM_ITEM.'.id', $id);
                     $query10 = $this->db->get(TBL_CHALLAN_FORM_ITEM);
                     $fetch_result10 = $query10->result_array();
-
-                    print_r($fetch_result10);
-                    exit;
-
                     return $fetch_result10;
     
                 }else{
