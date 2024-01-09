@@ -58,7 +58,7 @@
                                         </div>
                                     </div>
 
-
+                                    <?php if($getReworkrejectiondetails[0]['vendor_supplier_name']=='vendor'){ ?>
                                     <div class="col-md-12">
                                         <div class="form-group">
                                                 <label for="vendor_name">Vendor Name</label>
@@ -94,6 +94,9 @@
                                         </div>
                                     </div>
 
+                                    <?php } ?>
+                                    <?php if($getReworkrejectiondetails[0]['vendor_supplier_name']=='supplier'){ ?>
+
 
                                     <div class="col-md-12">
                                         <div class="form-group">
@@ -121,7 +124,7 @@
 
                                     <div class="col-md-12 supplier_po_number_div" id="supplier_po_number_div" style="display: <?=$display?>">
                                         <div class="form-group">
-                                                <label for="supplier_po_number">Select Vendor PO Number</label>
+                                                <label for="supplier_po_number">Select Supplier PO Number</label>
                                                     <select class="form-control supplier_po_number_for_item" name="supplier_po_number" id="supplier_po_number">
                                                         <!-- <option st-id="" value="">Select Vendor Name</option> -->
                                                         <option st-id="" value="<?=$getReworkrejectiondetails[0]['rejection_supplier_po']?>" selected="selected"><?=$selected_value?></option>
@@ -129,7 +132,7 @@
                                             <p class="error supplier_po_number_error"></p>
                                         </div>
                                     </div>
-
+                                    <?php } ?>
 
                                     <div class="col-md-12">
                                         <div class="form-group">
