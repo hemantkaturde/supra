@@ -116,11 +116,11 @@
                                     </div>
 
 
-                                    <?php if($getReworkRejectionitemslist[0]['pre_supplier_name']){
-                                      $display = 'block';
-                                     }else{ 
-                                      $display = 'none';
-                                     } ?>
+                                        <?php if($getReworkRejectionitemslist[0]['pre_supplier_name']){
+                                        $display = 'block';
+                                        }else{ 
+                                        $display = 'none';
+                                        } ?>
 
                                         <div id="supplier_name_div_for_hide_show" style="display:<?=$display;?>">
                                             <div class="col-md-12" >
