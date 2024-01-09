@@ -9785,6 +9785,7 @@ class Admin extends BaseController
 
         $CartItem = "";
         $i =1;
+        $subtotal = 0;
         foreach ($getsupplierItemdeatilsForInvoice as $key => $value) {
             $CartItem .= '
                     <tr style="border: 1px solid black;">
@@ -9796,6 +9797,7 @@ class Admin extends BaseController
                         <td style="border: 1px solid black;">'.$value['rate'].'</td>    
                         <td style="border: 1px solid black;">'.$value['value'].'</td>
                     </tr>';
+                    $subtotal+=$value['value'];
                 $i++;       
         }
 
@@ -9921,7 +9923,7 @@ class Admin extends BaseController
                         <td></td>
                         <td></td>
                         <td style="border: 1px solid black;">SUB TOTAL (+) GST </td>    
-                        <td style="border: 1px solid black;">500</td>
+                        <td style="border: 1px solid black;">'.$subtotal.'</td>
                     </tr>
                 </table>
 
