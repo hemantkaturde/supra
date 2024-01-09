@@ -10213,7 +10213,7 @@ public function downlaodjobworkchllan($id){
                     <td style="border: 1px solid black;">'.$value['hsn_code'].'</td>
                     <td style="border: 1px solid black;">'.$value['name'].'</td>
                     <td style="border: 1px solid black;">'.$value['order_oty'].'</td>
-                    <td style="border: 1px solid black;">'.$value['unit'].'</td> 
+                    <td style="border: 1px solid black;">'.$value['vendor_qty'].'</td> 
                     <td style="border: 1px solid black;">'.$value['groass_weight'].'</td>    
                     <td style="border: 1px solid black;">'.$value['value'].'</td>
                 </tr>';
@@ -10316,7 +10316,7 @@ public function downlaodjobworkchllan($id){
                     <th align="left" style="border: 1px solid black;">Finished Goods</th>  
                     <th align="left" style="border: 1px solid black;">Rejection Reason</th> 
                     <th align="left" style="border: 1px solid black;">Qty</th>  
-                    <th align="left" style="border: 1px solid black;">Weigt</th>  
+                    <th align="left" style="border: 1px solid black;">Weight (in kgs)</th>  
                     <th align="left"  style="border: 1px solid black;">Value</th>
                 </tr>
                 '.$CartItem.'
