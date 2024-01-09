@@ -8337,6 +8337,10 @@ class Admin_model extends CI_Model
                     if($value_vendor_supplier_name['supplier_po_number']){
 
 
+                        print_r('sds');
+                        exit;
+
+
                         $this->db->select('*,'.
                             TBL_REWORK_REJECTION_ITEM.'.id as rework_rejection_item_id,'
                             .TBL_FINISHED_GOODS.'.fin_id as raw_id,'
