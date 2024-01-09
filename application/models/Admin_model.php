@@ -8342,7 +8342,7 @@ class Admin_model extends CI_Model
                     .TBL_FINISHED_GOODS.'.fin_id as raw_id,'
                     .TBL_FINISHED_GOODS.'.part_number,'
                     .TBL_FINISHED_GOODS.'.name as description,'
-                    // .TBL_FINISHED_GOODS.'.type_of_raw_material,'
+                    .TBL_RAWMATERIAL.'.type_of_raw_material,'
                     .TBL_FINISHED_GOODS.'.sac as sac,'
                     .TBL_FINISHED_GOODS.'.hsn_code as HSN_code,'
                     // .TBL_FINISHED_GOODS.'.sitting_size as sitting_size,'
@@ -8359,6 +8359,7 @@ class Admin_model extends CI_Model
 
                 );
                 $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_REWORK_REJECTION_ITEM.'.part_number');
+                $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
                 $this->db->where(TBL_REWORK_REJECTION_ITEM.'.id', $id);
                 $this->db->order_by(TBL_REWORK_REJECTION_ITEM.'.id','DESC');
                 $query = $this->db->get(TBL_REWORK_REJECTION_ITEM);
