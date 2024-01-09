@@ -9777,8 +9777,13 @@ class Admin extends BaseController
     }   
     
 
-    public function downlaodsupplierpo(){
+    public function downlaodsupplierpo($id){
 
+
+        $getsupplierdeatilsForInvoice = $this->admin_model->getsupplierdeatilsForInvoice($id);
+       // $getsupplierItemdeatilsForInvoice = $this->admin_model->getsupplierItemdeatilsForInvoice($id);
+
+    
         $mpdf = new \Mpdf\Mpdf();
         // $html = $this->load->view('html_to_pdf',[],true);
         $html = '<table style=" width: 100%;text-align: center;border-collapse: collapse;border: #cccccc 0px solid;font-family:arial;">
@@ -9822,32 +9827,32 @@ class Admin extends BaseController
                 <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;font-family:arial;">
                         <tr style="border: 1px solid black;">
                             <td style="border: 1px solid black;">To </td>
-                            <td style="border: 1px solid black;">HEMANT KESHAV KATURDE</td>
+                            <td style="border: 1px solid black;">'.$getsupplierdeatilsForInvoice['supplier_name'].'</td>
                         
                         </tr>
                         <tr style="border: 1px solid black;">
                             <td style="border: 1px solid black;">Address </td>
-                            <td style="border: 1px solid black;">229 to 232, Bharat Industrial Estate, L.B.S. Marg, Bhandup West, Mumbai – 400078. INDIA.</td>
+                            <td style="border: 1px solid black;">'.$getsupplierdeatilsForInvoice['supplier_addess'].'</td>
                             
                         </tr>
                         <tr style="border: 1px solid black;">
                             <td style="border: 1px solid black;">Contact No </td>
-                            <td style="border: 1px solid black;">8097404125</td>
+                            <td style="border: 1px solid black;">'.$getsupplierdeatilsForInvoice['suplier_landline'].'</td>
                         
                         </tr>
                         <tr style="border: 1px solid black;">
                             <td style="border: 1px solid black;">Contact Person </td>
-                            <td style="border: 1px solid black;">Helen Bennett</td>
+                            <td style="border: 1px solid black;">'.$getsupplierdeatilsForInvoice['sup_conatct'].'</td>
                         
                         </tr>
                         <tr style="border: 1px solid black;">
                             <td style="border: 1px solid black;">Email ID </td>
-                            <td style="border: 1px solid black;">Yoshi Tannamuri</td>
+                            <td style="border: 1px solid black;">'.$getsupplierdeatilsForInvoice['sup_email'].'</td>
                         </tr>
 
                         <tr style="border: 1px solid black;">
                             <td style="border: 1px solid black;">GSTIN </td>
-                            <td style="border: 1px solid black;">Yoshi Tannamuri</td>
+                            <td style="border: 1px solid black;">'.$getsupplierdeatilsForInvoice['sup_GSTIN'].'</td>
                         </tr>
                 </table>
 
@@ -9859,10 +9864,10 @@ class Admin extends BaseController
                         <th align="left" style="border: 1px solid black;">QUOTATION DATE:</th>    
                     </tr>
                     <tr style="border: 1px solid black;">
-                        <td style="border: 1px solid black;">1514545454</td>
-                        <td style="border: 1px solid black;">12/06/2026</td>    
-                        <td style="border: 1px solid black;">TEST</td>
-                        <td style="border: 1px solid black;">12/06/2026</td>
+                        <td style="border: 1px solid black;">'.$getsupplierdeatilsForInvoice['po_number'].'</td>
+                        <td style="border: 1px solid black;">'.$getsupplierdeatilsForInvoice['date'].'</td>    
+                        <td style="border: 1px solid black;">'.$getsupplierdeatilsForInvoice['quatation_date'].'</td>
+                        <td style="border: 1px solid black;">'.$getsupplierdeatilsForInvoice['quatation_ref_no'].'</td>
                     </tr>
                 </table>
 
@@ -9873,9 +9878,9 @@ class Admin extends BaseController
                         <th align="left" style="border: 1px solid black;">PAYMENT TERMS</th>    
                     </tr>
                     <tr style="border: 1px solid black;">
-                        <td style="border: 1px solid black;">ff</td>
-                        <td style="border: 1px solid black;">fff</td>    
-                        <td style="border: 1px solid black;">ff</td>
+                        <td style="border: 1px solid black;"></td>
+                        <td style="border: 1px solid black;">'.$getsupplierdeatilsForInvoice['delivery_date'].'</td>    
+                        <td style="border: 1px solid black;"></td>
                     </tr>
                 </table>
 

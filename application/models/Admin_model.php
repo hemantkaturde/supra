@@ -9210,6 +9210,33 @@ class Admin_model extends CI_Model
     }
 
   
+    public function getsupplierdeatilsForInvoice($id){
+        $this->db->select(TBL_SUPPLIER.'.supplier_name,'
+                         .TBL_SUPPLIER.'.address as supplier_addess,'
+                         .TBL_SUPPLIER.'.landline as suplier_landline,'
+                         .TBL_SUPPLIER.'.contact_person as sup_conatct,'
+                         .TBL_SUPPLIER.'.email as sup_email,'
+                         .TBL_SUPPLIER.'.GSTIN as sup_GSTIN,'
+                         .TBL_SUPPLIER_PO_MASTER.'.po_number as po_number,'
+                         .TBL_SUPPLIER_PO_MASTER.'.date as date,'
+                         .TBL_SUPPLIER_PO_MASTER.'.quatation_date as quatation_date,'
+                         .TBL_SUPPLIER_PO_MASTER.'.quatation_ref_no as quatation_ref_no,'
+                         .TBL_SUPPLIER_PO_MASTER.'.delivery_date as delivery_date,'
+                         
+                          );
+        $this->db->where(TBL_SUPPLIER_PO_MASTER.'.id', $id);
+        $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_SUPPLIER_PO_MASTER.'.supplier_name');
+        $query = $this->db->get(TBL_SUPPLIER_PO_MASTER);
+        $fetch_result = $query->row_array();
+        return $fetch_result;
+    }
+
+
+    public function getsupplierItemdeatilsForInvoice($id){
+
+
+    }
+
 
   }
 
