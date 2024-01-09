@@ -10326,6 +10326,7 @@ public function downlaodjobworkchllan($id){
                     <td></td>
                     <td></td>
                     <td></td>
+                    <td></td>
                     <td style="border: 1px solid black;">SUB TOTAL (+) GST </td>    
                     <td style="border: 1px solid black;">'.$subtotal.'</td>
                 </tr>
