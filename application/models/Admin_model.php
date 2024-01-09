@@ -8325,7 +8325,7 @@ class Admin_model extends CI_Model
   public function geteditReworkRejectionitem($id){
 
 
-    $this->db->select('pre_vendor_supplier_name');
+    $this->db->select('pre_vendor_supplier_name,pre_vendor_supplier_name');
     $this->db->where(TBL_REWORK_REJECTION_ITEM.'.id',$id);
     $query = $this->db->get(TBL_REWORK_REJECTION_ITEM);
     $pre_vendor_supplier_name = $query->result_array();
