@@ -5119,7 +5119,7 @@ class Admin_model extends CI_Model
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_CHALLAN_FORM_ITEM.'.pre_vendor_po_number','left');
         $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_CHALLAN_FORM_ITEM.'.pre_supplier_po_number','left');
         $this->db->where(TBL_CHALLAN_FORM_ITEM.'.status',1);
-        $this->db->where(TBL_CHALLAN_FORM_ITEM.'.challan_id IS NULL');
+        $this->db->where(TBL_CHALLAN_FORM_ITEM.'.challan_id',$challan_id);
         $query = $this->db->get(TBL_CHALLAN_FORM_ITEM);
         $data2 = $query->result_array();
 
@@ -5136,7 +5136,7 @@ class Admin_model extends CI_Model
             $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_CHALLAN_FORM_ITEM.'.pre_vendor_po_number','left');
             $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_CHALLAN_FORM_ITEM.'.pre_supplier_po_number','left');
             $this->db->where(TBL_CHALLAN_FORM_ITEM.'.status',1);
-            $this->db->where(TBL_CHALLAN_FORM_ITEM.'.challan_id IS NULL');
+            $this->db->where(TBL_CHALLAN_FORM_ITEM.'.challan_id',$challan_id);
             $query = $this->db->get(TBL_CHALLAN_FORM_ITEM);
             $data = $query->result_array();
             return $data;
