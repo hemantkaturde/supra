@@ -9860,9 +9860,9 @@ class Admin extends BaseController
                 <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:arial;">
                     <tr style="border: 1px solid black;">
                         <th align="left" style="border: 1px solid black;">P.O.NO</th>
-                        <th align="left" style="border: 1px solid black;">P.O.DATE:</th>
-                        <th align="left" style="border: 1px solid black;">QUOTATION REFERENCE:</th>    
-                        <th align="left" style="border: 1px solid black;">QUOTATION DATE:</th>    
+                        <th align="left" style="border: 1px solid black;">P.O.DATE</th>
+                        <th align="left" style="border: 1px solid black;">QUOTATION REFERENCE</th>    
+                        <th align="left" style="border: 1px solid black;">QUOTATION DATE</th>    
                     </tr>
                     <tr style="border: 1px solid black;">
                         <td style="border: 1px solid black;">'.$getsupplierdeatilsForInvoice['po_number'].'</td>
