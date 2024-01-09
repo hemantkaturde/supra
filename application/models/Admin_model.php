@@ -2451,6 +2451,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['raw_material_supplier'] = $value['suppliername'];
                 $data[$counter]['action'] = '';
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editjobwork/".$value['jobworkid']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downlaodjobworkchllan/".$value['jobworkid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['jobworkid']."' class='fa fa-trash-o deleteJobwork' aria-hidden='true'></i>"; 
                 $counter++; 
             }
@@ -9249,6 +9250,37 @@ class Admin_model extends CI_Model
         $query = $this->db->get(TBL_SUPPLIER_PO_MASTER_ITEM);
         $fetch_result = $query->result_array();
         return $fetch_result;
+    }
+
+    public function getJobworkchallandetailsForInvoice($id){
+        $this->db->select(
+             TBL_VENDOR.'.vendor_name as vendor_name,'
+            .TBL_VENDOR.'.address as ven_address,'
+            .TBL_VENDOR.'.landline as ven_landline,'
+            .TBL_VENDOR.'.contact_person as ven_contact_person,'
+            .TBL_VENDOR.'.email as ven_email,'
+            .TBL_VENDOR.'.GSTIN as ven_GSTIN,'
+            .TBL_JOB_WORK.'.po_number as po_number,'
+            .TBL_JOB_WORK.'.date as date,'
+          );
+        $this->db->where(TBL_JOB_WORK.'.id', $id);
+        // $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_SUPPLIER_PO_MASTER.'.supplier_name');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_JOB_WORK.'.vendor_name');
+        $query = $this->db->get(TBL_JOB_WORK);
+        $fetch_result = $query->row_array();
+        return $fetch_result;
+    }
+
+
+    public function getJobworkchallanItemdeatilsForInvoice($id){
+
+        $this->db->select('*');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_JOB_WORK_ITEM.'.part_number_id');
+        $this->db->where(TBL_JOB_WORK_ITEM.'.jobwork_id', $id);
+        $query = $this->db->get(TBL_JOB_WORK_ITEM);
+        $fetch_result = $query->result_array();
+        return $fetch_result;
+
     }
 
 

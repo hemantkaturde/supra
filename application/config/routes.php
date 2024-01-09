@@ -388,6 +388,10 @@ $route['getSuppliergoodsreworkrejectionvendorreworkrejection'] = "admin/getSuppl
 $route['getVendoritemonlyforreworkrejection'] = "admin/getVendoritemonlyforreworkrejection";
 
 
+$route['downlaodjobworkchllan/(:any)'] = "admin/downlaodjobworkchllan/$1";
+
+
+
 
 
 
