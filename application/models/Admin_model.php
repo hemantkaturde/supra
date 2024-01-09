@@ -8322,118 +8322,154 @@ class Admin_model extends CI_Model
 
   public function geteditReworkRejectionitem($id,$vendor_po_number,$vendor_supplier_name){
 
+    if($vendor_po_number){
 
-    $this->db->select(TBL_REWORK_REJECTION_ITEM.'.pre_vendor_supplier_name,'.TBL_VENDOR_PO_MASTER.'.supplier_po_number');
-    $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_REWORK_REJECTION_ITEM.'.pre_vendor_po_number');
-    $this->db->where(TBL_REWORK_REJECTION_ITEM.'.id',$id);
-    $query = $this->db->get(TBL_REWORK_REJECTION_ITEM);
-    $pre_vendor_supplier_name = $query->result_array();
+            $this->db->select(TBL_REWORK_REJECTION_ITEM.'.pre_vendor_supplier_name,'.TBL_VENDOR_PO_MASTER.'.supplier_po_number');
+            $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_REWORK_REJECTION_ITEM.'.pre_vendor_po_number');
+            $this->db->where(TBL_REWORK_REJECTION_ITEM.'.id',$id);
+            $query = $this->db->get(TBL_REWORK_REJECTION_ITEM);
+            $pre_vendor_supplier_name = $query->result_array();
 
-    foreach ($pre_vendor_supplier_name as $key_vendor_supplier_name => $value_vendor_supplier_name) {
+            foreach ($pre_vendor_supplier_name as $key_vendor_supplier_name => $value_vendor_supplier_name) {
 
-        if($value_vendor_supplier_name['pre_vendor_supplier_name']=='vendor'){
+                if($value_vendor_supplier_name['pre_vendor_supplier_name']=='vendor'){
 
-            if($value_vendor_supplier_name['supplier_po_number']){
-
-
-                $this->db->select('*,'.
-                    TBL_REWORK_REJECTION_ITEM.'.id as rework_rejection_item_id,'
-                    .TBL_FINISHED_GOODS.'.fin_id as raw_id,'
-                    .TBL_FINISHED_GOODS.'.part_number,'
-                    .TBL_FINISHED_GOODS.'.name as description,'
-                    .TBL_RAWMATERIAL.'.type_of_raw_material as tp,'
-                    .TBL_FINISHED_GOODS.'.sac as sac,'
-                    .TBL_FINISHED_GOODS.'.hsn_code as HSN_code,'
-                    // .TBL_FINISHED_GOODS.'.sitting_size as sitting_size,'
-                    .TBL_REWORK_REJECTION_ITEM.'.rejection_rework_reason,'
-                    .TBL_REWORK_REJECTION_ITEM.'.qty,'
-                    .TBL_REWORK_REJECTION_ITEM.'.rate,'
-                    .TBL_REWORK_REJECTION_ITEM.'.value,'
-                    .TBL_REWORK_REJECTION_ITEM.'.row_material_cost,'
-                    .TBL_REWORK_REJECTION_ITEM.'.gst_rate,'
-                    .TBL_REWORK_REJECTION_ITEM.'.gst_value,'
-                    .TBL_REWORK_REJECTION_ITEM.'.grand_total,'
-                    .TBL_REWORK_REJECTION_ITEM.'.item_remark,'
-                    .TBL_RAWMATERIAL.'.type_of_raw_material as tppp,'
-                    
-
-                );
-                $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_REWORK_REJECTION_ITEM.'.part_number');
-                $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
-                $this->db->where(TBL_REWORK_REJECTION_ITEM.'.id', $id);
-                $this->db->order_by(TBL_REWORK_REJECTION_ITEM.'.id','DESC');
-                $query = $this->db->get(TBL_REWORK_REJECTION_ITEM);
-                $fetch_result = $query->result_array();
-                return $fetch_result;
+                    if($value_vendor_supplier_name['supplier_po_number']){
 
 
-            }else{
+                        $this->db->select('*,'.
+                            TBL_REWORK_REJECTION_ITEM.'.id as rework_rejection_item_id,'
+                            .TBL_FINISHED_GOODS.'.fin_id as raw_id,'
+                            .TBL_FINISHED_GOODS.'.part_number,'
+                            .TBL_FINISHED_GOODS.'.name as description,'
+                            .TBL_RAWMATERIAL.'.type_of_raw_material as tp,'
+                            .TBL_FINISHED_GOODS.'.sac as sac,'
+                            .TBL_FINISHED_GOODS.'.hsn_code as HSN_code,'
+                            // .TBL_FINISHED_GOODS.'.sitting_size as sitting_size,'
+                            .TBL_REWORK_REJECTION_ITEM.'.rejection_rework_reason,'
+                            .TBL_REWORK_REJECTION_ITEM.'.qty,'
+                            .TBL_REWORK_REJECTION_ITEM.'.rate,'
+                            .TBL_REWORK_REJECTION_ITEM.'.value,'
+                            .TBL_REWORK_REJECTION_ITEM.'.row_material_cost,'
+                            .TBL_REWORK_REJECTION_ITEM.'.gst_rate,'
+                            .TBL_REWORK_REJECTION_ITEM.'.gst_value,'
+                            .TBL_REWORK_REJECTION_ITEM.'.grand_total,'
+                            .TBL_REWORK_REJECTION_ITEM.'.item_remark,'
+                            .TBL_RAWMATERIAL.'.type_of_raw_material as tppp,'
+                            
+
+                        );
+                        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_REWORK_REJECTION_ITEM.'.part_number');
+                        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+                        $this->db->where(TBL_REWORK_REJECTION_ITEM.'.id', $id);
+                        $this->db->order_by(TBL_REWORK_REJECTION_ITEM.'.id','DESC');
+                        $query = $this->db->get(TBL_REWORK_REJECTION_ITEM);
+                        $fetch_result = $query->result_array();
+                        return $fetch_result;
 
 
-                $this->db->select(
-                    TBL_REWORK_REJECTION_ITEM.'.id as rework_rejection_item_id,'
-                    .TBL_FINISHED_GOODS.'.fin_id as raw_id,'
-                    .TBL_FINISHED_GOODS.'.part_number,'
-                    .TBL_FINISHED_GOODS.'.name as description,'
-                    // .TBL_FINISHED_GOODS.'.type_of_raw_material,'
-                    .TBL_FINISHED_GOODS.'.sac as sac,'
-                    .TBL_FINISHED_GOODS.'.hsn_code as HSN_code,'
-                    // .TBL_FINISHED_GOODS.'.sitting_size as sitting_size,'
-                    .TBL_REWORK_REJECTION_ITEM.'.rejection_rework_reason,'
-                    .TBL_REWORK_REJECTION_ITEM.'.qty,'
-                    .TBL_REWORK_REJECTION_ITEM.'.rate,'
-                    .TBL_REWORK_REJECTION_ITEM.'.value,'
-                    .TBL_REWORK_REJECTION_ITEM.'.row_material_cost,'
-                    .TBL_REWORK_REJECTION_ITEM.'.gst_rate,'
-                    .TBL_REWORK_REJECTION_ITEM.'.gst_value,'
-                    .TBL_REWORK_REJECTION_ITEM.'.grand_total,'
-                    .TBL_REWORK_REJECTION_ITEM.'.item_remark,'
-                    
-
-                );
-                $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_REWORK_REJECTION_ITEM.'.part_number');
-                $this->db->where(TBL_REWORK_REJECTION_ITEM.'.id', $id);
-                $this->db->order_by(TBL_REWORK_REJECTION_ITEM.'.id','DESC');
-                $query = $this->db->get(TBL_REWORK_REJECTION_ITEM);
-                $fetch_result = $query->result_array();
-                return $fetch_result;
+                    }else{
 
 
+                        $this->db->select(
+                            TBL_REWORK_REJECTION_ITEM.'.id as rework_rejection_item_id,'
+                            .TBL_FINISHED_GOODS.'.fin_id as raw_id,'
+                            .TBL_FINISHED_GOODS.'.part_number,'
+                            .TBL_FINISHED_GOODS.'.name as description,'
+                            // .TBL_FINISHED_GOODS.'.type_of_raw_material,'
+                            .TBL_FINISHED_GOODS.'.sac as sac,'
+                            .TBL_FINISHED_GOODS.'.hsn_code as HSN_code,'
+                            // .TBL_FINISHED_GOODS.'.sitting_size as sitting_size,'
+                            .TBL_REWORK_REJECTION_ITEM.'.rejection_rework_reason,'
+                            .TBL_REWORK_REJECTION_ITEM.'.qty,'
+                            .TBL_REWORK_REJECTION_ITEM.'.rate,'
+                            .TBL_REWORK_REJECTION_ITEM.'.value,'
+                            .TBL_REWORK_REJECTION_ITEM.'.row_material_cost,'
+                            .TBL_REWORK_REJECTION_ITEM.'.gst_rate,'
+                            .TBL_REWORK_REJECTION_ITEM.'.gst_value,'
+                            .TBL_REWORK_REJECTION_ITEM.'.grand_total,'
+                            .TBL_REWORK_REJECTION_ITEM.'.item_remark,'
+                            
 
+                        );
+                        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_REWORK_REJECTION_ITEM.'.part_number');
+                        $this->db->where(TBL_REWORK_REJECTION_ITEM.'.id', $id);
+                        $this->db->order_by(TBL_REWORK_REJECTION_ITEM.'.id','DESC');
+                        $query = $this->db->get(TBL_REWORK_REJECTION_ITEM);
+                        $fetch_result = $query->result_array();
+                        return $fetch_result;
+
+
+
+                    }
+                }else{
+
+
+                            $this->db->select(
+                            TBL_REWORK_REJECTION_ITEM.'.id as rework_rejection_item_id,'
+                            .TBL_RAWMATERIAL.'.raw_id,'
+                            .TBL_RAWMATERIAL.'.part_number,'
+                            .TBL_RAWMATERIAL.'.type_of_raw_material as description,'
+                            .TBL_RAWMATERIAL.'.type_of_raw_material as tp,'
+                            .TBL_RAWMATERIAL.'.sac as sac,'
+                            .TBL_RAWMATERIAL.'.HSN_code as HSN_code,'
+                            .TBL_RAWMATERIAL.'.sitting_size as sitting_size,'
+                            .TBL_REWORK_REJECTION_ITEM.'.rejection_rework_reason,'
+                            .TBL_REWORK_REJECTION_ITEM.'.qty,'
+                            .TBL_REWORK_REJECTION_ITEM.'.rate,'
+                            .TBL_REWORK_REJECTION_ITEM.'.value,'
+                            .TBL_REWORK_REJECTION_ITEM.'.row_material_cost,'
+                            .TBL_REWORK_REJECTION_ITEM.'.gst_rate,'
+                            .TBL_REWORK_REJECTION_ITEM.'.gst_value,'
+                            .TBL_REWORK_REJECTION_ITEM.'.grand_total,'
+                            .TBL_REWORK_REJECTION_ITEM.'.item_remark,'
+                            // .TBL_RAWMATERIAL.'.type_of_raw_material as tppp,'
+
+                        );
+                        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_REWORK_REJECTION_ITEM.'.part_number');
+                        $this->db->where(TBL_REWORK_REJECTION_ITEM.'.id', $id);
+                        $this->db->order_by(TBL_REWORK_REJECTION_ITEM.'.id','DESC');
+                        $query = $this->db->get(TBL_REWORK_REJECTION_ITEM);
+                        $fetch_result = $query->result_array();
+                        return $fetch_result;
+
+                }
             }
-        }else{
+
+    }else{
 
 
-                    $this->db->select(
-                    TBL_REWORK_REJECTION_ITEM.'.id as rework_rejection_item_id,'
-                    .TBL_RAWMATERIAL.'.raw_id,'
-                    .TBL_RAWMATERIAL.'.part_number,'
-                    .TBL_RAWMATERIAL.'.type_of_raw_material as description,'
-                    .TBL_RAWMATERIAL.'.type_of_raw_material as tp,'
-                    .TBL_RAWMATERIAL.'.sac as sac,'
-                    .TBL_RAWMATERIAL.'.HSN_code as HSN_code,'
-                    .TBL_RAWMATERIAL.'.sitting_size as sitting_size,'
-                    .TBL_REWORK_REJECTION_ITEM.'.rejection_rework_reason,'
-                    .TBL_REWORK_REJECTION_ITEM.'.qty,'
-                    .TBL_REWORK_REJECTION_ITEM.'.rate,'
-                    .TBL_REWORK_REJECTION_ITEM.'.value,'
-                    .TBL_REWORK_REJECTION_ITEM.'.row_material_cost,'
-                    .TBL_REWORK_REJECTION_ITEM.'.gst_rate,'
-                    .TBL_REWORK_REJECTION_ITEM.'.gst_value,'
-                    .TBL_REWORK_REJECTION_ITEM.'.grand_total,'
-                    .TBL_REWORK_REJECTION_ITEM.'.item_remark,'
-                    // .TBL_RAWMATERIAL.'.type_of_raw_material as tppp,'
+        $this->db->select(
+            TBL_REWORK_REJECTION_ITEM.'.id as rework_rejection_item_id,'
+            .TBL_RAWMATERIAL.'.raw_id,'
+            .TBL_RAWMATERIAL.'.part_number,'
+            .TBL_RAWMATERIAL.'.type_of_raw_material as description,'
+            .TBL_RAWMATERIAL.'.type_of_raw_material as tp,'
+            .TBL_RAWMATERIAL.'.sac as sac,'
+            .TBL_RAWMATERIAL.'.HSN_code as HSN_code,'
+            .TBL_RAWMATERIAL.'.sitting_size as sitting_size,'
+            .TBL_REWORK_REJECTION_ITEM.'.rejection_rework_reason,'
+            .TBL_REWORK_REJECTION_ITEM.'.qty,'
+            .TBL_REWORK_REJECTION_ITEM.'.rate,'
+            .TBL_REWORK_REJECTION_ITEM.'.value,'
+            .TBL_REWORK_REJECTION_ITEM.'.row_material_cost,'
+            .TBL_REWORK_REJECTION_ITEM.'.gst_rate,'
+            .TBL_REWORK_REJECTION_ITEM.'.gst_value,'
+            .TBL_REWORK_REJECTION_ITEM.'.grand_total,'
+            .TBL_REWORK_REJECTION_ITEM.'.item_remark,'
+            // .TBL_RAWMATERIAL.'.type_of_raw_material as tppp,'
 
-                );
-                $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_REWORK_REJECTION_ITEM.'.part_number');
-                $this->db->where(TBL_REWORK_REJECTION_ITEM.'.id', $id);
-                $this->db->order_by(TBL_REWORK_REJECTION_ITEM.'.id','DESC');
-                $query = $this->db->get(TBL_REWORK_REJECTION_ITEM);
-                $fetch_result = $query->result_array();
-                return $fetch_result;
+        );
+        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_REWORK_REJECTION_ITEM.'.part_number');
+        $this->db->where(TBL_REWORK_REJECTION_ITEM.'.id', $id);
+        $this->db->order_by(TBL_REWORK_REJECTION_ITEM.'.id','DESC');
+        $query = $this->db->get(TBL_REWORK_REJECTION_ITEM);
+        $fetch_result = $query->result_array();
+        return $fetch_result;
 
-        }
     }
+
+
   }
 
 
