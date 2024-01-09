@@ -9625,7 +9625,7 @@ class Admin extends BaseController
     public function geteditReworkRejectionitem(){
         $post_submit = $this->input->post();
         if($post_submit){
-            $geteditReworkRejectionitem = $this->admin_model->geteditReworkRejectionitem(trim($this->input->post('id')));
+            $geteditReworkRejectionitem = $this->admin_model->geteditReworkRejectionitem(trim($this->input->post('id')),trim($this->input->post('vendor_po_number')),trim($this->input->post('vendor_supplier_name')));
             if($geteditReworkRejectionitem){
                 $content = $geteditReworkRejectionitem[0];
                 echo json_encode($content);

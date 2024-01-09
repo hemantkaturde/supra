@@ -8320,10 +8320,11 @@ class Admin_model extends CI_Model
   }
 
 
-  public function geteditReworkRejectionitem($id){
+  public function geteditReworkRejectionitem($id,$vendor_po_number,$vendor_supplier_name){
 
 
-    $this->db->select('pre_vendor_supplier_name,pre_vendor_supplier_name');
+    $this->db->select(TBL_REWORK_REJECTION_ITEM.'.pre_vendor_supplier_name,'.TBL_VENDOR_PO_MASTER.'.supplier_po_number');
+    $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_REWORK_REJECTION_ITEM.'.pre_vendor_po_number');
     $this->db->where(TBL_REWORK_REJECTION_ITEM.'.id',$id);
     $query = $this->db->get(TBL_REWORK_REJECTION_ITEM);
     $pre_vendor_supplier_name = $query->result_array();
@@ -8332,7 +8333,7 @@ class Admin_model extends CI_Model
 
         if($value_vendor_supplier_name['pre_vendor_supplier_name']=='vendor'){
 
-            if($value_vendor_supplier_name['pre_supplier_po_number']){
+            if($value_vendor_supplier_name['supplier_po_number']){
 
 
                 $this->db->select('*,'.
