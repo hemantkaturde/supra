@@ -8355,6 +8355,7 @@ class Admin_model extends CI_Model
                     .TBL_REWORK_REJECTION_ITEM.'.gst_value,'
                     .TBL_REWORK_REJECTION_ITEM.'.grand_total,'
                     .TBL_REWORK_REJECTION_ITEM.'.item_remark,'
+                    .TBL_RAWMATERIAL.'.type_of_raw_material as tppp,'
                     
 
                 );
