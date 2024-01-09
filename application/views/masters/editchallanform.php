@@ -54,6 +54,9 @@
                                     </div>
 
 
+                                    <?php if($getChallanformdetails[0]['vendor_supplier_type']=='vendor'){ ?>
+
+
                                     <div class="col-md-12">
                                         <div class="form-group">
                                                 <label for="vendor_name">Vendor Name</label>
@@ -89,6 +92,9 @@
                                         </div>
                                     </div>
 
+                                    <?php } ?>
+
+                                    <?php if($getChallanformdetails[0]['vendor_supplier_type']=='supplier'){ ?>    
 
                                     <div class="col-md-12">
                                         <div class="form-group">
@@ -124,6 +130,8 @@
                                             <p class="error supplier_po_number_error"></p>
                                         </div>
                                     </div>
+
+                                    <?php } ?>
 
                                     <div class="col-md-12">
                                             <div class="form-group">
