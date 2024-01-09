@@ -259,7 +259,7 @@
                                                     </div>
                                                 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Type Of Row Platting<span class="required">*</span></label>
+                                                        <label class="col-sm-4 col-form-label">Type Of Row Platting</label>
                                                         <div class="col-sm-8">
                                                             <input type="text" class="form-control"  id="type_of_raw_platting" name="type_of_raw_platting">
                                                             <p class="error type_of_raw_platting_error"></p>
