@@ -9634,7 +9634,7 @@
 							$.ajax({
 								url : "<?php echo ADMIN_PATH;?>getVendoritemonlyforreworkrejection",
 								type: "POST",
-								data : {'vendor_po_number' : vendor_po_number},
+								data : {'vendor_po_number' : vendor_po_number,'flag':'vendor'},
 								success: function(data, textStatus, jqXHR)
 								{
 									$(".loader_ajax").hide();
