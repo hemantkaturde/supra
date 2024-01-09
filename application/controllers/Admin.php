@@ -9928,7 +9928,9 @@ class Admin extends BaseController
                 </table>
 
 
+                <p>Raw Material Deliver</p> 
                 <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;font-family:arial;">
+               
                 <tr style="border: 1px solid black;">
                     <td style="border: 1px solid black;">To </td>
                     <td style="border: 1px solid black;">'.$getsupplierdeatilsForInvoice['supplier_name'].'</td>
@@ -9961,7 +9963,7 @@ class Admin extends BaseController
              </table>
 
                 <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:arial;">
-                       <p>Raw Material Deliver</p> 
+                      
                        <tr style="border: 1px solid black;">
                             <td style="border: 1px solid black;">
                                 <p><b>NOTE :</b></p>
