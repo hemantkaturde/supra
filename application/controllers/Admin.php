@@ -10115,7 +10115,7 @@ class Admin extends BaseController
 
     $vendor_po_number=$this->input->post('vendor_po_number');
 
-    $flag=$this->input->post('vendor_supplier_name');
+    $flag=$this->input->post('flag');
 
     if($vendor_po_number) {
         $getVendoritemsonly = $this->admin_model->getVendoritemonlyforreworkrejection($vendor_po_number,$flag);
