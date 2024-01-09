@@ -9881,7 +9881,7 @@ class Admin extends BaseController
                     <tr style="border: 1px solid black;">
                         <td style="border: 1px solid black;"></td>
                         <td style="border: 1px solid black;">'.$getsupplierdeatilsForInvoice['delivery_date'].'</td>    
-                        <td style="border: 1px solid black;"></td>
+                        <td style="border: 1px solid black;">'.$getsupplierdeatilsForInvoice['work_order'].'</td>
                     </tr>
                 </table>
 

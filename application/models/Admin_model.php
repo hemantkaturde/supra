@@ -9222,6 +9222,7 @@ class Admin_model extends CI_Model
                          .TBL_SUPPLIER_PO_MASTER.'.quatation_date as quatation_date,'
                          .TBL_SUPPLIER_PO_MASTER.'.quatation_ref_no as quatation_ref_no,'
                          .TBL_SUPPLIER_PO_MASTER.'.delivery_date as delivery_date,'
+                         .TBL_SUPPLIER_PO_MASTER.'.work_order as work_order,'
                          
                           );
         $this->db->where(TBL_SUPPLIER_PO_MASTER.'.id', $id);
