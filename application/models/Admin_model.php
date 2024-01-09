@@ -9234,7 +9234,7 @@ class Admin_model extends CI_Model
                           );
         $this->db->where(TBL_SUPPLIER_PO_MASTER.'.id', $id);
         $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_SUPPLIER_PO_MASTER.'.supplier_name');
-        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_SUPPLIER_PO_MASTER.'.vendor_name');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_SUPPLIER_PO_MASTER.'.vendor_name');
         $query = $this->db->get(TBL_SUPPLIER_PO_MASTER);
         $fetch_result = $query->row_array();
         return $fetch_result;

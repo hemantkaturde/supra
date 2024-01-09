@@ -9974,13 +9974,13 @@ class Admin extends BaseController
                                 <p>5. If any Prices issue, should inform in 24hrs after receipt of P.O.</p>
                             </td>
                             <td style="border: 1px solid black;">
-                                <p>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</p>
+                              
                                 <p>AUTHORIZED SIGNATORY</p>
                             </td>    
                     </tr>
                 </table>';
 
-
+                // <p>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</p>
         
         $mpdf->WriteHTML($html);
         $mpdf->Output('purshase_order.pdf','I'); // opens in browser
