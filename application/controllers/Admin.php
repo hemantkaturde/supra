@@ -9928,37 +9928,37 @@ class Admin extends BaseController
                 </table>
 
 
-                <p>Raw Material Deliver</p> 
+                <p>Raw Material Delivery</p> 
                 <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;font-family:arial;">
                
                 <tr style="border: 1px solid black;">
                     <td style="border: 1px solid black;">To </td>
-                    <td style="border: 1px solid black;">'.$getsupplierdeatilsForInvoice['supplier_name'].'</td>
+                    <td style="border: 1px solid black;">'.$getsupplierdeatilsForInvoice['vendor_name'].'</td>
                 
                 </tr>
                 <tr style="border: 1px solid black;">
                     <td style="border: 1px solid black;">Address </td>
-                    <td style="border: 1px solid black;">'.$getsupplierdeatilsForInvoice['supplier_addess'].'</td>
+                    <td style="border: 1px solid black;">'.$getsupplierdeatilsForInvoice['ven_address'].'</td>
                     
                 </tr>
                 <tr style="border: 1px solid black;">
                     <td style="border: 1px solid black;">Contact No </td>
-                    <td style="border: 1px solid black;">'.$getsupplierdeatilsForInvoice['suplier_landline'].'</td>
+                    <td style="border: 1px solid black;">'.$getsupplierdeatilsForInvoice['ven_landline'].'</td>
                 
                 </tr>
                 <tr style="border: 1px solid black;">
                     <td style="border: 1px solid black;">Contact Person </td>
-                    <td style="border: 1px solid black;">'.$getsupplierdeatilsForInvoice['sup_conatct'].'</td>
+                    <td style="border: 1px solid black;">'.$getsupplierdeatilsForInvoice['ven_contact_person'].'</td>
                 
                 </tr>
                 <tr style="border: 1px solid black;">
                     <td style="border: 1px solid black;">Email ID </td>
-                    <td style="border: 1px solid black;">'.$getsupplierdeatilsForInvoice['sup_email'].'</td>
+                    <td style="border: 1px solid black;">'.$getsupplierdeatilsForInvoice['ven_email'].'</td>
                 </tr>
 
                 <tr style="border: 1px solid black;">
                     <td style="border: 1px solid black;">GSTIN </td>
-                    <td style="border: 1px solid black;">'.$getsupplierdeatilsForInvoice['sup_GSTIN'].'</td>
+                    <td style="border: 1px solid black;">'.$getsupplierdeatilsForInvoice['ven_GSTIN'].'</td>
                 </tr>
              </table>
 

@@ -9223,10 +9223,18 @@ class Admin_model extends CI_Model
                          .TBL_SUPPLIER_PO_MASTER.'.quatation_ref_no as quatation_ref_no,'
                          .TBL_SUPPLIER_PO_MASTER.'.delivery_date as delivery_date,'
                          .TBL_SUPPLIER_PO_MASTER.'.work_order as work_order,'
+
+                         .TBL_VENDOR.'.vendor_name as vendor_name,'
+                         .TBL_VENDOR.'.address as ven_address,'
+                         .TBL_VENDOR.'.landline as ven_landline,'
+                         .TBL_VENDOR.'.contact_person as ven_contact_person,'
+                         .TBL_VENDOR.'.email as ven_email,'
+                         .TBL_VENDOR.'.GSTIN as ven_GSTIN,'
                          
                           );
         $this->db->where(TBL_SUPPLIER_PO_MASTER.'.id', $id);
         $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_SUPPLIER_PO_MASTER.'.supplier_name');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.sup_id = '.TBL_SUPPLIER_PO_MASTER.'.vendor_name');
         $query = $this->db->get(TBL_SUPPLIER_PO_MASTER);
         $fetch_result = $query->row_array();
         return $fetch_result;
