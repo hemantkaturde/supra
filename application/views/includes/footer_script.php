@@ -10098,7 +10098,7 @@
 						$('#description').val(fetchResponse.description); 
 						$('#HSN_Code').val(fetchResponse.HSN_code); 
 						$('#SAC').val(fetchResponse.sac); 
-						$('#type_of_raw_material').val(fetchResponse.type_of_raw_material); 
+						$('#type_of_raw_material').val(fetchResponse.tppp); 
 						$('#rejected_work_reason').val(fetchResponse.rejection_rework_reason); 
 						$('#quantity').val(fetchResponse.qty); 
 						$('#rate').val(fetchResponse.rate); 

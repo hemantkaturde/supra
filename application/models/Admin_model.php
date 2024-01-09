@@ -8364,12 +8364,9 @@ class Admin_model extends CI_Model
                         $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
                         $this->db->where(TBL_REWORK_REJECTION_ITEM.'.id', $id);
                         $this->db->order_by(TBL_REWORK_REJECTION_ITEM.'.id','DESC');
-                        $query = $this->db->get(TBL_REWORK_REJECTION_ITEM);
-                        $fetch_result = $query->result_array();
-
-                        print_r($fetch_result);
-                        exit;
-                        return $fetch_result;
+                        $query1 = $this->db->get(TBL_REWORK_REJECTION_ITEM);
+                        $fetch_result1 = $query1->result_array();
+                        return $fetch_result1;
 
 
                     }else{
@@ -8398,9 +8395,9 @@ class Admin_model extends CI_Model
                         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_REWORK_REJECTION_ITEM.'.part_number');
                         $this->db->where(TBL_REWORK_REJECTION_ITEM.'.id', $id);
                         $this->db->order_by(TBL_REWORK_REJECTION_ITEM.'.id','DESC');
-                        $query = $this->db->get(TBL_REWORK_REJECTION_ITEM);
-                        $fetch_result = $query->result_array();
-                        return $fetch_result;
+                        $query2 = $this->db->get(TBL_REWORK_REJECTION_ITEM);
+                        $fetch_result2 = $query2->result_array();
+                        return $fetch_result2;
 
 
 
@@ -8431,9 +8428,9 @@ class Admin_model extends CI_Model
                         $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_REWORK_REJECTION_ITEM.'.part_number');
                         $this->db->where(TBL_REWORK_REJECTION_ITEM.'.id', $id);
                         $this->db->order_by(TBL_REWORK_REJECTION_ITEM.'.id','DESC');
-                        $query = $this->db->get(TBL_REWORK_REJECTION_ITEM);
-                        $fetch_result = $query->result_array();
-                        return $fetch_result;
+                        $query3 = $this->db->get(TBL_REWORK_REJECTION_ITEM);
+                        $fetch_result3 = $query3->result_array();
+                        return $fetch_result3;
 
                 }
             }
@@ -8465,9 +8462,9 @@ class Admin_model extends CI_Model
         $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_REWORK_REJECTION_ITEM.'.part_number');
         $this->db->where(TBL_REWORK_REJECTION_ITEM.'.id', $id);
         $this->db->order_by(TBL_REWORK_REJECTION_ITEM.'.id','DESC');
-        $query = $this->db->get(TBL_REWORK_REJECTION_ITEM);
-        $fetch_result = $query->result_array();
-        return $fetch_result;
+        $query4 = $this->db->get(TBL_REWORK_REJECTION_ITEM);
+        $fetch_result4 = $query4->result_array();
+        return $fetch_result4;
 
     }
 
