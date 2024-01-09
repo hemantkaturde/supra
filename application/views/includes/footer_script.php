@@ -9958,6 +9958,7 @@
 			   var description =   $('#description').val();
 			   var rejected_work_reason =   $('#rejected_work_reason').val();
 			   var quantity =   $('#quantity').val();
+			   var unit =   $('#unit').val();
 			   var rate =   $('#rate').val();
 			   var value =   $('#value').val();
 			   var row_material_cost =   $('#row_material_cost').val();
@@ -9987,7 +9988,7 @@
 				url : "<?php echo base_url();?>savereworkrejectiontem",
 				type: "POST",
 				 //data : formData,
-				 data :{part_number:part_number,description:description,rejected_work_reason:rejected_work_reason,quantity:quantity,rate:rate,value:value,row_material_cost:row_material_cost,gst_rate:gst_rate,grand_total:grand_total,item_remark:item_remark,pre_challan_date:pre_challan_date,pre_vendor_supplier_name:pre_vendor_supplier_name,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_supplier_name:pre_supplier_name,pre_supplier_po_number:pre_supplier_po_number,pre_dispath_through:pre_dispath_through,pre_total_weight:pre_total_weight,pre_total_bags:pre_total_bags,pre_remark:pre_remark,reworkrejectionid:reworkrejectionid,rework_rejection_item_id:rework_rejection_item_id },
+				 data :{part_number:part_number,description:description,rejected_work_reason:rejected_work_reason,quantity:quantity,rate:rate,value:value,row_material_cost:row_material_cost,gst_rate:gst_rate,grand_total:grand_total,item_remark:item_remark,pre_challan_date:pre_challan_date,pre_vendor_supplier_name:pre_vendor_supplier_name,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_supplier_name:pre_supplier_name,pre_supplier_po_number:pre_supplier_po_number,pre_dispath_through:pre_dispath_through,pre_total_weight:pre_total_weight,pre_total_bags:pre_total_bags,pre_remark:pre_remark,reworkrejectionid:reworkrejectionid,rework_rejection_item_id:rework_rejection_item_id,unit:unit },
 				// method: "POST",
                 // data :{package_id:package_id},
                 cache:false,
@@ -10101,6 +10102,7 @@
 						$('#type_of_raw_material').val(fetchResponse.tppp); 
 						$('#rejected_work_reason').val(fetchResponse.rejection_rework_reason); 
 						$('#quantity').val(fetchResponse.qty); 
+						$('#unit').val(fetchResponse.unit); 
 						$('#rate').val(fetchResponse.rate); 
 						$('#value').val(fetchResponse.value); 
 						$('#row_material_cost').val(fetchResponse.row_material_cost); 

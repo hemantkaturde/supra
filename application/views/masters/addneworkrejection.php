@@ -336,6 +336,21 @@
                                                         </div>
                                                     </div>
 
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-4 col-form-label">Unit <span class="required">*</span></label>
+                                                        <div class="col-sm-8">
+                                                             <select class="form-control" name="unit" id="unit">
+                                                                <option value="">Select Unit</option>
+                                                                <option value="kgs">Kgs</option>
+                                                                <option value="Pcs">Pcs</option>
+                                                                <option value="Nos">Nos</option>
+                                                                <option value="Sheet">Sheet</option>
+                                                                <option value="Set">Set</option>
+                                                             </select>
+                                                            <p class="error unit_error"></p>
+                                                        </div>
+                                                    </div>
+
 
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Rate<span class="required">*</span></label>

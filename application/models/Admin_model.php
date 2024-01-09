@@ -8356,7 +8356,8 @@ class Admin_model extends CI_Model
                             .TBL_REWORK_REJECTION_ITEM.'.gst_value,'
                             .TBL_REWORK_REJECTION_ITEM.'.grand_total,'
                             .TBL_REWORK_REJECTION_ITEM.'.item_remark,'
-                            .TBL_RAWMATERIAL.'.type_of_raw_material as tppp,'
+                            .TBL_RAWMATERIAL.'.type_of_raw_material as tppp,'.
+                            TBL_REWORK_REJECTION_ITEM.'.id as unit,'
                             
 
                         );
@@ -8389,6 +8390,7 @@ class Admin_model extends CI_Model
                             .TBL_REWORK_REJECTION_ITEM.'.gst_value,'
                             .TBL_REWORK_REJECTION_ITEM.'.grand_total,'
                             .TBL_REWORK_REJECTION_ITEM.'.item_remark,'
+                            .TBL_REWORK_REJECTION_ITEM.'.id as unit,'
                             
 
                         );
@@ -8423,6 +8425,7 @@ class Admin_model extends CI_Model
                             .TBL_REWORK_REJECTION_ITEM.'.grand_total,'
                             .TBL_REWORK_REJECTION_ITEM.'.item_remark,'
                             // .TBL_RAWMATERIAL.'.type_of_raw_material as tppp,'
+                            .TBL_REWORK_REJECTION_ITEM.'.id as unit,'
 
                         );
                         $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_REWORK_REJECTION_ITEM.'.part_number');

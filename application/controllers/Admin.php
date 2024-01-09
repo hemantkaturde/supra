@@ -6816,6 +6816,7 @@ class Admin extends BaseController
             $this->form_validation->set_rules('description','Description','trim|required');
             $this->form_validation->set_rules('rejected_work_reason','Rejected Work Reason','trim|required');
             $this->form_validation->set_rules('quantity','Quantity','trim|required');
+            $this->form_validation->set_rules('unit','Unit','trim|required');
             $this->form_validation->set_rules('rate','Rate','trim|required');
             $this->form_validation->set_rules('value','value','trim|required');
             $this->form_validation->set_rules('row_material_cost','row_material_cost','trim|required');
@@ -6826,7 +6827,7 @@ class Admin extends BaseController
             if($this->form_validation->run() == FALSE)
             {
                 $savereworkrejectiontem_response['status'] = 'failure';
-                $savereworkrejectiontem_response['error'] = array('part_number'=>strip_tags(form_error('part_number')),'description'=>strip_tags(form_error('description')),'rejected_work_reason'=>strip_tags(form_error('rejected_work_reason')),'quantity'=>strip_tags(form_error('quantity')),'rate'=>strip_tags(form_error('rate')),'value'=>strip_tags(form_error('value')),'row_material_cost'=>strip_tags(form_error('row_material_cost')),'gst_rate'=>strip_tags(form_error('gst_rate')),'grand_total'=>strip_tags(form_error('grand_total')),'item_remark'=>strip_tags(form_error('item_remark')));
+                $savereworkrejectiontem_response['error'] = array('part_number'=>strip_tags(form_error('part_number')),'description'=>strip_tags(form_error('description')),'rejected_work_reason'=>strip_tags(form_error('rejected_work_reason')),'quantity'=>strip_tags(form_error('quantity')),'rate'=>strip_tags(form_error('rate')),'value'=>strip_tags(form_error('value')),'row_material_cost'=>strip_tags(form_error('row_material_cost')),'gst_rate'=>strip_tags(form_error('gst_rate')),'grand_total'=>strip_tags(form_error('grand_total')),'item_remark'=>strip_tags(form_error('item_remark')),'unit'=>strip_tags(form_error('unit')));
            
             }else{
 
@@ -6837,6 +6838,7 @@ class Admin extends BaseController
                         'rework_rejection_id' =>  $reworkrejectionid,
                         'rejection_rework_reason' =>  trim($this->input->post('rejected_work_reason')),
                         'qty' =>  trim($this->input->post('quantity')),
+                        'unit' =>  trim($this->input->post('unit')),
                         'rate' =>  trim($this->input->post('rate')),
                         'value' =>  trim($this->input->post('value')),
                         'row_material_cost' =>  trim($this->input->post('row_material_cost')),
@@ -6861,6 +6863,7 @@ class Admin extends BaseController
                          // 'description' =>  trim($this->input->post('description')),
                         'rejection_rework_reason' =>  trim($this->input->post('rejected_work_reason')),
                         'qty' =>  trim($this->input->post('quantity')),
+                        'unit' =>  trim($this->input->post('unit')),
                         'rate' =>  trim($this->input->post('rate')),
                         'value' =>  trim($this->input->post('value')),
                         'row_material_cost' =>  trim($this->input->post('row_material_cost')),
@@ -6890,7 +6893,7 @@ class Admin extends BaseController
                 $savereworkrejectionitemdetails= $this->admin_model->savereworkrejectionitemdetails($reworkrejectionitemid,$data);
                 if($savereworkrejectionitemdetails){
                     $savereworkrejectiontem_response['status'] = 'success';
-                    $savereworkrejectiontem_response['error'] = array('part_number'=>strip_tags(form_error('part_number')),'description'=>strip_tags(form_error('description')),'rejected_work_reason'=>strip_tags(form_error('rejected_work_reason')),'quantity'=>strip_tags(form_error('quantity')),'rate'=>strip_tags(form_error('rate')),'value'=>strip_tags(form_error('value')),'row_material_cost'=>strip_tags(form_error('row_material_cost')),'gst_rate'=>strip_tags(form_error('gst_rate')),'grand_total'=>strip_tags(form_error('grand_total')),'item_remark'=>strip_tags(form_error('item_remark')));
+                    $savereworkrejectiontem_response['error'] = array('part_number'=>strip_tags(form_error('part_number')),'description'=>strip_tags(form_error('description')),'rejected_work_reason'=>strip_tags(form_error('rejected_work_reason')),'quantity'=>strip_tags(form_error('quantity')),'rate'=>strip_tags(form_error('rate')),'value'=>strip_tags(form_error('value')),'row_material_cost'=>strip_tags(form_error('row_material_cost')),'gst_rate'=>strip_tags(form_error('gst_rate')),'grand_total'=>strip_tags(form_error('grand_total')),'item_remark'=>strip_tags(form_error('item_remark')),'unit'=>strip_tags(form_error('unit')));
                 }
             }
             echo json_encode($savereworkrejectiontem_response);
