@@ -9927,6 +9927,39 @@ class Admin extends BaseController
                     </tr>
                 </table>
 
+
+                <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;font-family:arial;">
+                <tr style="border: 1px solid black;">
+                    <td style="border: 1px solid black;">To </td>
+                    <td style="border: 1px solid black;">'.$getsupplierdeatilsForInvoice['supplier_name'].'</td>
+                
+                </tr>
+                <tr style="border: 1px solid black;">
+                    <td style="border: 1px solid black;">Address </td>
+                    <td style="border: 1px solid black;">'.$getsupplierdeatilsForInvoice['supplier_addess'].'</td>
+                    
+                </tr>
+                <tr style="border: 1px solid black;">
+                    <td style="border: 1px solid black;">Contact No </td>
+                    <td style="border: 1px solid black;">'.$getsupplierdeatilsForInvoice['suplier_landline'].'</td>
+                
+                </tr>
+                <tr style="border: 1px solid black;">
+                    <td style="border: 1px solid black;">Contact Person </td>
+                    <td style="border: 1px solid black;">'.$getsupplierdeatilsForInvoice['sup_conatct'].'</td>
+                
+                </tr>
+                <tr style="border: 1px solid black;">
+                    <td style="border: 1px solid black;">Email ID </td>
+                    <td style="border: 1px solid black;">'.$getsupplierdeatilsForInvoice['sup_email'].'</td>
+                </tr>
+
+                <tr style="border: 1px solid black;">
+                    <td style="border: 1px solid black;">GSTIN </td>
+                    <td style="border: 1px solid black;">'.$getsupplierdeatilsForInvoice['sup_GSTIN'].'</td>
+                </tr>
+             </table>
+
                 <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:arial;">
                         <tr style="border: 1px solid black;">
                             <td style="border: 1px solid black;">
