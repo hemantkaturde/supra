@@ -8337,7 +8337,7 @@ class Admin_model extends CI_Model
                     if($value_vendor_supplier_name['supplier_po_number']){
 
 
-                        print_r('sds');
+                        print_r('sds1');
                         exit;
 
 
@@ -8374,6 +8374,9 @@ class Admin_model extends CI_Model
 
                     }else{
 
+                        print_r('sds2');
+                        exit;
+
 
                         $this->db->select(
                             TBL_REWORK_REJECTION_ITEM.'.id as rework_rejection_item_id,'
@@ -8408,7 +8411,8 @@ class Admin_model extends CI_Model
                     }
                 }else{
 
-
+                    print_r('sds3');
+                    exit;
                             $this->db->select(
                             TBL_REWORK_REJECTION_ITEM.'.id as rework_rejection_item_id,'
                             .TBL_RAWMATERIAL.'.raw_id,'
