@@ -10326,9 +10326,9 @@ public function downlaodjobworkchllan($id){
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td></td>
-                    <td style="border: 1px solid black;">SUB TOTAL (+) GST </td>    
-                    <td style="border: 1px solid black;">'.$subtotal.'</td>
+                    <td>SUB TOTAL (+) GST</td>
+                    <td style="border: 1px solid black;">'.$getJobworkchallanItemdeatilsForInvoice['0']['gst_rate'].'-'.$getJobworkchallanItemdeatilsForInvoice['0']['gst'].'</td>    
+                    <td style="border: 1px solid black;">'.$subtotal+$getJobworkchallanItemdeatilsForInvoice['0']['gst'].'</td>
                 </tr>
             </table>
 
