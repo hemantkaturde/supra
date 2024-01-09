@@ -9235,7 +9235,12 @@ class Admin_model extends CI_Model
 
     public function getsupplierItemdeatilsForInvoice($id){
 
-
+        $this->db->select('*');
+        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id');
+        $this->db->where(TBL_SUPPLIER_PO_MASTER_ITEM.'.supplier_po_id', $id);
+        $query = $this->db->get(TBL_SUPPLIER_PO_MASTER_ITEM);
+        $fetch_result = $query->result_array();
+        return $fetch_result;
     }
 
 

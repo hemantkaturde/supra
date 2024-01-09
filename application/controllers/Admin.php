@@ -9781,7 +9781,24 @@ class Admin extends BaseController
 
 
         $getsupplierdeatilsForInvoice = $this->admin_model->getsupplierdeatilsForInvoice($id);
-       // $getsupplierItemdeatilsForInvoice = $this->admin_model->getsupplierItemdeatilsForInvoice($id);
+        $getsupplierItemdeatilsForInvoice = $this->admin_model->getsupplierItemdeatilsForInvoice($id);
+
+        $CartItem = "";
+        $i =1;
+        foreach ($getsupplierItemdeatilsForInvoice as $key => $value) {
+            $CartItem .= '
+                    <tr style="border: 1px solid black;">
+                        <td style="border: 1px solid black;">'.$i.'</td>
+                        <td style="border: 1px solid black;">'.$value['type_of_raw_material'].'</td>   
+                        <td style="border: 1px solid black;">'.$value['part_number'].'</td>
+                        <td style="border: 1px solid black;">'.$value['order_oty'].'</td>
+                        <td style="border: 1px solid black;">'.$value['rate'].'</td>    
+                        <td style="border: 1px solid black;">'.$value['unit'].'</td>    
+                        <td style="border: 1px solid black;">'.$value['value'].'</td>
+                    </tr>';
+                $i++;       
+        }
+
 
     
         $mpdf = new \Mpdf\Mpdf();
@@ -9893,20 +9910,14 @@ class Admin extends BaseController
                         <th align="left" style="border: 1px solid black;">PART NO.</th>  
                         <th align="left" style="border: 1px solid black;">QTY</th> 
                         <th align="left" style="border: 1px solid black;">RATE</th>  
+                        <th align="left" style="border: 1px solid black;">UNITS</th>  
                         <th align="left"  style="border: 1px solid black;">AMOUNT</th>
                     </tr>
-                    <tr style="border: 1px solid black;">
-                        <td style="border: 1px solid black;">1</td>
-                        <td style="border: 1px solid black;">Raw Material Deliver To,  Vendor Name, Address,  Contact No, Contact Person  GSTIN No </td>   
-                        <td style="border: 1px solid black;">5000</td>
-                        <td style="border: 1px solid black;">20</td>
-                        <td style="border: 1px solid black;">40</td>    
-                        <td style="border: 1px solid black;">500</td>
-                    </tr>
-
+                    '.$CartItem.'
                     <tr style="border: 1px solid black;">
                         <td></td>
                         <td></td>   
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td style="border: 1px solid black;">SUB TOTAL (+) GST </td>    
