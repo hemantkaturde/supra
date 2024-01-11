@@ -7426,7 +7426,7 @@ class Admin_model extends CI_Model
     }
 
     public function getVendorpoconfirmationdetails($vendor_po_confirmation_id){
-        $this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_VENDOR_PO_CONFIRMATION.'.vendor_name as vendor_name_id,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_master_no,'.TBL_VENDOR_PO_CONFIRMATION.'.buyer_name as buyer_id,'.TBL_BUYER_MASTER.'.buyer_name as buyer_name_master,'.TBL_VENDOR_PO_CONFIRMATION.'.remark as remark_master,'.TBL_VENDOR_PO_CONFIRMATION.'.vendor_po_number as vendor_po_');
+        $this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_VENDOR_PO_CONFIRMATION.'.vendor_name as vendor_name_id,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_master_no,'.TBL_VENDOR_PO_CONFIRMATION.'.buyer_name as buyer_id,'.TBL_BUYER_MASTER.'.buyer_name as buyer_name_master,'.TBL_VENDOR_PO_CONFIRMATION.'.remark as remark_master,'.TBL_VENDOR_PO_CONFIRMATION.'.vendor_po_number as vendor_po_,'.TBL_VENDOR_PO_CONFIRMATION.'.po_number as vendor_po_confimation');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_VENDOR_PO_CONFIRMATION.'.vendor_po_number');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_VENDOR_PO_MASTER.'.vendor_name');
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_VENDOR_PO_CONFIRMATION.'.buyer_name');
