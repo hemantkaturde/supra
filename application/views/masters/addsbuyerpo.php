@@ -163,6 +163,7 @@
                                                         <th>Unit</th>
                                                         <th>Rate</th>
                                                         <th>Value</th>
+                                                        <th>Buyer PO Delivery Date</th>
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>
@@ -180,6 +181,7 @@
                                                         <td><?php echo $value['unit'];?></td>
                                                         <td><?php echo $value['rate'];?></td>
                                                         <td><?php echo $value['value'];?></td>
+                                                        <td><?php echo $value['buyer_po_part_delivery_date'];?></td>
                                                         <td>
                                                           <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['id'];?>' class='fa fa-pencil-square-o editbuyerpoitem'  aria-hidden='true'></i>
                                                           <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['id'];?>' class='fa fa-trash-o deleteBuyerpoitem' aria-hidden='true'></i>
@@ -271,6 +273,14 @@
                                                         <div class="col-sm-9">
                                                             <input type="number" class="form-control"  id="value" name="value" readonly>
                                                             <p class="error value_error"></p>
+                                                        </div>
+                                                    </div>
+                                    
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-3 col-form-label">Buyer PO Part Delivery Date <span class="required">*</span></label>
+                                                        <div class="col-sm-9">
+                                                            <input type="text" class="form-control datepicker"  id="buyer_po_part_delivery_date" name="buyer_po_part_delivery_date">
+                                                            <p class="error buyer_po_part_delivery_date_error"></p>
                                                         </div>
                                                     </div>
                                     

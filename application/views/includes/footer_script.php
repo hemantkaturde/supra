@@ -1571,6 +1571,7 @@
 			   var rate =   $('#rate').val();
 			   var value =   $('#value').val();
 			   var unit =   $('#unit').val();
+			   var buyer_po_part_delivery_date =   $('#buyer_po_part_delivery_date').val();
 			   
 			   var sales_order_number =   $('#sales_order_number').val();
 			   var date =   $('#date').val();
@@ -1588,7 +1589,7 @@
 				url : "<?php echo base_url();?>addbuyeritem",
 				type: "POST",
 				 //data : formData,
-				 data :{part_number:part_number,description:description,qty:qty,rate:rate,value:value,buyer_po_number:buyer_po_number,date:date,buyer_po_date:buyer_po_date,buyer_name:buyer_name,currency:currency,delivery_date:delivery_date,remark:remark,unit:unit,po_id:po_id,buyer_po_item_id:buyer_po_item_id},
+				 data :{part_number:part_number,description:description,qty:qty,rate:rate,value:value,buyer_po_part_delivery_date:buyer_po_part_delivery_date,buyer_po_number:buyer_po_number,date:date,buyer_po_date:buyer_po_date,buyer_name:buyer_name,currency:currency,delivery_date:delivery_date,remark:remark,unit:unit,po_id:po_id,buyer_po_item_id:buyer_po_item_id},
 				// method: "POST",
                 // data :{package_id:package_id},
                 cache:false,

@@ -2378,11 +2378,12 @@ class Admin extends BaseController
             $this->form_validation->set_rules('rate','Rate','trim|required');
             $this->form_validation->set_rules('value','Value','trim|required');
             $this->form_validation->set_rules('unit','Unit','trim');
+            $this->form_validation->set_rules('buyer_po_delivery_date','Buyer PO Delivery Date','trim');
         
             if($this->form_validation->run() == FALSE)
             {
                 $save_buyerpoitem_response['status'] = 'failure';
-                $save_buyerpoitem_response['error'] = array('part_number'=>strip_tags(form_error('part_number')), 'description'=>strip_tags(form_error('description')), 'qty'=>strip_tags(form_error('qty')), 'rate'=>strip_tags(form_error('rate')),'value'=>strip_tags(form_error('value')));
+                $save_buyerpoitem_response['error'] = array('part_number'=>strip_tags(form_error('part_number')), 'description'=>strip_tags(form_error('description')), 'qty'=>strip_tags(form_error('qty')), 'rate'=>strip_tags(form_error('rate')),'value'=>strip_tags(form_error('value')),'buyer_po_delivery_date'=>strip_tags(form_error('buyer_po_delivery_date')));
             }else{
 
                     $po_id = trim($this->input->post('po_id'));
@@ -2395,6 +2396,7 @@ class Admin extends BaseController
                             'rate'  => trim($this->input->post('rate')),
                             'value' =>   trim($this->input->post('value')),
                             'unit' =>  trim($this->input->post('unit')),
+                            'buyer_po_part_delivery_date' => trim($this->input->post('buyer_po_part_delivery_date')),
                             'pre_buyer_po_number'=>trim($this->input->post('buyer_po_number')),
                             'pre_date'=>trim($this->input->post('date')),
                             'pre_buyer_po_date'=>trim($this->input->post('buyer_po_date')),
@@ -2412,6 +2414,7 @@ class Admin extends BaseController
                                 'rate'  => trim($this->input->post('rate')),
                                 'value' =>   trim($this->input->post('value')),
                                 'unit' =>  trim($this->input->post('unit')),
+                                'buyer_po_part_delivery_date' => trim($this->input->post('buyer_po_part_delivery_date')),
                                 'pre_buyer_po_number'=>trim($this->input->post('buyer_po_number')),
                                 'pre_date'=>trim($this->input->post('date')),
                                 'pre_buyer_po_date'=>trim($this->input->post('buyer_po_date')),
