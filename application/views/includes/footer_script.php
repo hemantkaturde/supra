@@ -5366,7 +5366,7 @@
 						$('#description').val(fetchResponse.description); 
 						$('#SAC').val(fetchResponse.sac); 
 						$('#HSN_Code').val(fetchResponse.HSN_code); 
-						$('#raw_material_size').val(fetchResponse.sitting_size); 
+						$('#raw_material_size').val(fetchResponse.type_of_raw_material); 
 						$('#vendor_order_qty').val(fetchResponse.vendor_qty); 
 						$('#rm_actual_aty').val(fetchResponse.rm_actual_qty); 
 						$('#unit').val(fetchResponse.unit); 
