@@ -33,19 +33,19 @@
                                                 if($getPreviousvendorbomPONumber_number){
                                                     $arr = str_split($getPreviousvendorbomPONumber_number);
                                                     $i = end($arr);
-                                                    $inrno= "SQPO2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                                    $inrno= "SQBM2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
                                                     $po_number = $inrno;
                                                 }else{
-                                                    $po_number = 'SQPO23240001';
+                                                    $po_number = 'SQBM23240001';
                                                 }     
                                             }else{
                                                 if($getPreviousBomnumber_number){
                                                     $arr = str_split($getPreviousBomnumber_number);
                                                     $i = end($arr);
-                                                    $inrno= "SQPO2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                                    $inrno= "SQBM2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
                                                     $po_number = $inrno;
                                                 }else{
-                                                    $po_number = 'SQPO23240001';
+                                                    $po_number = 'SQBM23240001';
                                                 }  
                                             }
 
