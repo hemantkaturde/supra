@@ -44,22 +44,22 @@
                                                     $string = $getPreviousBomnumber_po_N;
                                                     $n = 4; // Number of characters to extract from the end
                                                     $lastNCharacters = substr($string, -$n);
-                                                    $inrno= "SQPO2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                    $inrno= "SQBM2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
                                                     $po_number = $inrno;
 
 
                                                 }else{
-                                                    $po_number = 'SQPO23240001';
+                                                    $po_number = 'SQBM23240001';
                                                 }     
                                             }else{
 
                                                 if($getPreviousBomnumbervendor_po_N){
                                                     $arr = str_split($getPreviousBomnumbervendor_po_N);
                                                     $i = end($arr);
-                                                    $inrno= "SQPO2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                                    $inrno= "SQBM2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
                                                     $po_number = $inrno;
                                                 }else{
-                                                    $po_number = 'SQPO23240001';
+                                                    $po_number = 'SQBM23240001';
                                                 }  
                                             }
 
@@ -72,11 +72,11 @@
 
                                                     $arr = str_split($getPreviousBomnumbervendor['bom_number']);
                                                     $i = end($arr);
-                                                    $inrno= "SQPO2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                                    $inrno= "SQBM2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
                                                     $po_number = $inrno;
 
                                                 }else{
-                                                    $po_number = 'SQPO23240001';
+                                                    $po_number = 'SQBM23240001';
                                                 }
 
                                         }
