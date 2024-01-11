@@ -8294,6 +8294,7 @@ class Admin_model extends CI_Model
         .TBL_FINISHED_GOODS.'.part_number,'
         .TBL_FINISHED_GOODS.'.name as description,'
         .TBL_RAWMATERIAL.'.sac as sac,'
+        .TBL_RAWMATERIAL.'.type_of_raw_material as type_of_raw_material,'
         .TBL_RAWMATERIAL.'.HSN_code as HSN_code,'
         .TBL_RAWMATERIAL.'.sitting_size as sitting_size,'
         .TBL_JOB_WORK_ITEM.'.vendor_qty as vendor_qty,'
