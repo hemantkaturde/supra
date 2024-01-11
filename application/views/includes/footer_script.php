@@ -1801,7 +1801,8 @@
 						$('#qty').val(fetchResponse.order_oty);  
 						$('#unit').val(fetchResponse.unit);  
 						$('#rate').val(fetchResponse.rate);  
-						$('#value').val(fetchResponse.value);  
+						$('#value').val(fetchResponse.value); 
+						$('#buyer_po_part_delivery_date').val(fetchResponse.buyer_po_part_delivery_date);  
 					
 				},
 				error: function (jqXHR, textStatus, errorThrown)
