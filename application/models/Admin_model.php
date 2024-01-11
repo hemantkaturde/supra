@@ -596,7 +596,7 @@ class Admin_model extends CI_Model
     public function checkifexitfinishedgoodsupdate($id,$name){
         $this->db->select('*');
         $this->db->where(TBL_FINISHED_GOODS.'.fin_id', $id);
-        $this->db->where(TBL_FINISHED_GOODS.'.part_name', $name);
+        $this->db->where(TBL_FINISHED_GOODS.'.part_number', $name);
         $this->db->where(TBL_FINISHED_GOODS.'.status', 1);
         $query = $this->db->get(TBL_FINISHED_GOODS);
         $data = $query->num_rows();
