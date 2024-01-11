@@ -1482,7 +1482,7 @@ class Admin extends BaseController
                 );
 
                
-                $checkifexitfinishedgoodsupdate = $this->admin_model->checkifexitfinishedgoodsupdate(trim($this->input->post('finished_goods_id')),trim($this->input->post('name')));
+                $checkifexitfinishedgoodsupdate = $this->admin_model->checkifexitfinishedgoodsupdate(trim($this->input->post('finished_goods_id')),trim($this->input->post('part_number')));
 
                 if($checkifexitfinishedgoodsupdate > 0){
                     $updatefinishedgoodsdata = $this->admin_model->saveFinishedgoodsdata(trim($this->input->post('finished_goods_id')),$data);
@@ -1493,7 +1493,7 @@ class Admin extends BaseController
 
                 }else{
 
-                    $checkifexitsfinished = $this->admin_model->checkIfexitsFinishedgoods(trim($this->input->post('name')));
+                    $checkifexitsfinished = $this->admin_model->checkIfexitsFinishedgoods(trim($this->input->post('part_number')));
                     if($checkifexitsfinished > 0){
                         $update_finished_goods_response['status'] = 'failure';
                         $update_finished_goods_response['error'] = array('name'=>'Finished Alreday Exits');

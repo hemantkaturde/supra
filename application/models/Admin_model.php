@@ -228,7 +228,7 @@ class Admin_model extends CI_Model
         $this->db->select('*');
         $this->db->where(TBL_RAWMATERIAL.'.raw_id', trim($id));
         $this->db->where(TBL_RAWMATERIAL.'.part_number', trim($part_num));
-        $this->db->where(TBL_RAWMATERIAL.'.type_of_raw_material', trim($type_of_good));
+        // $this->db->where(TBL_RAWMATERIAL.'.type_of_raw_material', trim($type_of_good));
         $this->db->where(TBL_RAWMATERIAL.'.status', 1);
         $query = $this->db->get(TBL_RAWMATERIAL);
         $data = $query->num_rows();
@@ -596,7 +596,7 @@ class Admin_model extends CI_Model
     public function checkifexitfinishedgoodsupdate($id,$name){
         $this->db->select('*');
         $this->db->where(TBL_FINISHED_GOODS.'.fin_id', $id);
-        $this->db->where(TBL_FINISHED_GOODS.'.name', $name);
+        $this->db->where(TBL_FINISHED_GOODS.'.part_name', $name);
         $this->db->where(TBL_FINISHED_GOODS.'.status', 1);
         $query = $this->db->get(TBL_FINISHED_GOODS);
         $data = $query->num_rows();
