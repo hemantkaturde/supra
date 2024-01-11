@@ -49,11 +49,11 @@
                                                     $string = $getPreviousSupplierPoconfirmationNumber_number;
                                                     $n = 4; // Number of characters to extract from the end
                                                     $lastNCharacters = substr($string, -$n);
-                                                    $inrno= "SQPO2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                    $inrno= "SQFU2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
                                                     $po_number = $inrno;
 
                                                 }else{
-                                                    $po_number = 'SQPO23240001';
+                                                    $po_number = 'SQFU23240001';
                                                 }   
 
 
