@@ -800,7 +800,7 @@ class Admin extends BaseController
                 $checkIfexitsrawmdata = $this->admin_model->checkifexitsrawmaterial(trim($this->input->post('part_number')),trim($this->input->post('type_of_raw_material')));
                 if($checkIfexitsrawmdata > 0){
                     $save_rawmatrial_response['status'] = 'failure';
-                    $save_rawmatrial_response['error'] = array('part_number'=>'Part Number Alreday Exits','type_of_raw_material'=>'Type of Raw Material Alreday Exits');
+                    $save_rawmatrial_response['error'] = array('part_number'=>'Part Number Alreday Exits');
                 }else{
                     $saveSupplierdata = $this->admin_model->saveMaterialdata('',$data);
                     if($saveSupplierdata){
