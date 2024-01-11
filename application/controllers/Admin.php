@@ -1400,7 +1400,7 @@ class Admin extends BaseController
                     'description_2' =>    trim($this->input->post('description_2'))
                 );
 
-                $checkIfexitsFinishedgoods = $this->admin_model->checkIfexitsFinishedgoods(trim($this->input->post('name')));
+                $checkIfexitsFinishedgoods = $this->admin_model->checkIfexitsFinishedgoods(trim($this->input->post('part_number')));
                 if($checkIfexitsFinishedgoods > 0){
                     $save_finished_goods_response['status'] = 'failure';
                     $save_finished_goods_response['error'] = array('name'=>'Name Alreday Exits');

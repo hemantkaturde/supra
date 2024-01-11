@@ -208,7 +208,7 @@ class Admin_model extends CI_Model
 
         $this->db->select('*');
         $this->db->where(TBL_RAWMATERIAL.'.part_number', trim($part_num));
-        $this->db->where(TBL_RAWMATERIAL.'.type_of_raw_material', trim($type_of_good));
+        // $this->db->where(TBL_RAWMATERIAL.'.type_of_raw_material', trim($type_of_good));
         $this->db->where(TBL_RAWMATERIAL.'.status', 1);
         $query = $this->db->get(TBL_RAWMATERIAL);
         $rowcount = $query->num_rows();
@@ -546,10 +546,10 @@ class Admin_model extends CI_Model
         return $data;
     }
 
-    public function checkIfexitsFinishedgoods($name){
+    public function checkIfexitsFinishedgoods($part_number){
 
         $this->db->select('*');
-        $this->db->where(TBL_FINISHED_GOODS.'.name', $name);
+        $this->db->where(TBL_FINISHED_GOODS.'.part_number', $part_number);
         $this->db->where(TBL_FINISHED_GOODS.'.status', 1);
         $query = $this->db->get(TBL_FINISHED_GOODS);
         $rowcount = $query->num_rows();
