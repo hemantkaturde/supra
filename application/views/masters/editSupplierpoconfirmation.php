@@ -30,7 +30,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="po_number">PO Number<span class="required">*</span></label>
-                                            <input type="text" class="form-control" id="po_number" name="po_number" value="<?=$getSupplierpoconfirmationdetails['po_number']?>" required readonly>
+                                            <input type="text" class="form-control" id="po_number" name="po_number" value="<?=$getSupplierpoconfirmationdetails['confirmation_po']?>" required readonly>
                                             <p class="error po_number_error"></p>
                                         </div>
                                     </div>
