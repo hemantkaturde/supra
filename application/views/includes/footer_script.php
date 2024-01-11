@@ -11922,14 +11922,17 @@
 				 }
 
 
-				 if($("#p_and_f_charges_main").val()){
-					 var p_and_f_charges_main = $("#p_and_f_charges_main").val();
-				 }else{
-					 var p_and_f_charges_main = 0;
-				 }
+				//  if($("#p_and_f_charges_main").val()){
+				// 	 var p_and_f_charges_main = $("#p_and_f_charges_main").val();
+				//  }else{
+				// 	 var p_and_f_charges_main = 0;
+				//  }
 
 				 
-				 var total_one_group = parseFloat(total_amount_of_ok_qty_data) +  parseFloat(total_amount_of_ok_qty) +  parseFloat(p_and_f_charges_main) ;
+				//  var total_one_group = parseFloat(total_amount_of_ok_qty_data) +  parseFloat(total_amount_of_ok_qty) +  parseFloat(p_and_f_charges_main) ;
+
+				var total_one_group = parseFloat(total_amount_of_ok_qty_data) +  parseFloat(total_amount_of_ok_qty);
+
 
 				 var total_second_group = parseFloat(tds_amount) +  parseFloat(freight_amount_charge);
 
