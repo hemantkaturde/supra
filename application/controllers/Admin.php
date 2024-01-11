@@ -1403,7 +1403,7 @@ class Admin extends BaseController
                 $checkIfexitsFinishedgoods = $this->admin_model->checkIfexitsFinishedgoods(trim($this->input->post('part_number')));
                 if($checkIfexitsFinishedgoods > 0){
                     $save_finished_goods_response['status'] = 'failure';
-                    $save_finished_goods_response['error'] = array('name'=>'Part Number Already Exits');
+                    $save_finished_goods_response['error'] = array('part_number'=>'Part Number Already Exits');
                 }else{
                     $saveFinishedgoodsdata = $this->admin_model->saveFinishedgoodsdata('',$data);
                     if($saveFinishedgoodsdata){
@@ -1496,7 +1496,7 @@ class Admin extends BaseController
                     $checkifexitsfinished = $this->admin_model->checkIfexitsFinishedgoods(trim($this->input->post('part_number')));
                     if($checkifexitsfinished > 0){
                         $update_finished_goods_response['status'] = 'failure';
-                        $update_finished_goods_response['error'] = array('name'=>'Finished Alreday Exits');
+                        $update_finished_goods_response['error'] = array('part_number'=>'Finished Alreday Exits');
                     }else{
                         $updatedata = $this->admin_model->saveFinishedgoodsdata(trim($this->input->post('finished_goods_id')),$data);
                         if($updatedata){
