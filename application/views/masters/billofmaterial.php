@@ -2,7 +2,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            <i class="fa fa-users"></i> Bill of Materail
+            <i class="fa fa-users"></i> Bill of Material
             <small>Add,Delete</small>
         </h1>
     </section>
@@ -11,13 +11,13 @@
             <div class="col-xs-6 text-left">
                 <ul class="breadcrumb" style="background-color:#ecf0f5 !important">
                     <li class="completed"><a href="javascript:void(0);">Masters</a></li>
-                    <li class="active"><a href="javascript:void(0);">Bill of Materail</a></li>
+                    <li class="active"><a href="javascript:void(0);">Bill of Material</a></li>
                 </ul>
             </div>
             <div class="col-xs-6 text-right">
                 <div class="form-group">
                     <a class="btn btn-primary" href="<?php echo base_url(); ?>addnewBillofmaterial">
-                        <i class="fa fa-plus"></i> Add Bill of Materail</a>
+                        <i class="fa fa-plus"></i> Add Bill of Material</a>
                 </div>
             </div>
         </div>
