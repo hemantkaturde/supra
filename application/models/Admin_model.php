@@ -9285,6 +9285,16 @@ class Admin_model extends CI_Model
     }
 
 
+    public function getUSPmasterlist(){
+
+        $this->db->select('*');
+        $this->db->where(TBL_USP.'.status', 1);
+        $query = $this->db->get(TBL_USP);
+        $data = $query->result_array();
+        return $data;
+    }
+
+
   }
 
   

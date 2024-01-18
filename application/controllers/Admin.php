@@ -6969,11 +6969,12 @@ class Admin extends BaseController
             $this->form_validation->set_rules('supplier_po_number','Supplier PO Number','trim');
             $this->form_validation->set_rules('remark','Remark','trim');
             $this->form_validation->set_rules('vendor_supplier_name','vendor/supplier','trim|required');
+            $this->form_validation->set_rules('usp','USP','trim|required');
 
             if($this->form_validation->run() == FALSE)
             {
                 $addmewchallanform_response['status'] = 'failure';
-                $addmewchallanform_response['error'] = array('challan_no'=>strip_tags(form_error('challan_no')),'challan_date'=>strip_tags(form_error('challan_date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'remark'=>strip_tags(form_error('remark')));
+                $addmewchallanform_response['error'] = array('challan_no'=>strip_tags(form_error('challan_no')),'challan_date'=>strip_tags(form_error('challan_date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'usp'=>strip_tags(form_error('usp')),'remark'=>strip_tags(form_error('remark')));
             }else{
 
                 $data = array(
@@ -6984,6 +6985,7 @@ class Admin extends BaseController
                     'vendor_po_number' =>  trim($this->input->post('vendor_po_number')),
                     'supplier_name' =>  trim($this->input->post('supplier_name')),
                     'supplier_po_number' =>  trim($this->input->post('supplier_po_number')),
+                    'usp_id'  =>  trim($this->input->post('usp')),
                     'remark' =>  trim($this->input->post('remark')),
                 );
 
@@ -6992,7 +6994,7 @@ class Admin extends BaseController
                     $saveNewchallan= $this->admin_model->savechallanformdetails($challanformid,$data);
                     if($saveNewchallan){
                         $addmewchallanform_response['status'] = 'success';
-                        $addmewchallanform_response['error'] = array('challan_no'=>strip_tags(form_error('challan_no')),'challan_date'=>strip_tags(form_error('challan_date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'remark'=>strip_tags(form_error('remark')));
+                        $addmewchallanform_response['error'] = array('challan_no'=>strip_tags(form_error('challan_no')),'challan_date'=>strip_tags(form_error('challan_date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'usp'=>strip_tags(form_error('usp')),'remark'=>strip_tags(form_error('remark')));
                     }
                 }else{
                     $saveNewchallan= $this->admin_model->savechallanformdetails('',$data);
@@ -7000,7 +7002,7 @@ class Admin extends BaseController
                         $update_last_inserted_id_challan_form = $this->admin_model->update_last_inserted_id_challan_form($saveNewchallan);
                          if($update_last_inserted_id_challan_form){
                             $addmewchallanform_response['status'] = 'success';
-                            $addmewchallanform_response['error'] = array('challan_no'=>strip_tags(form_error('challan_no')),'challan_date'=>strip_tags(form_error('challan_date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'remark'=>strip_tags(form_error('remark')));
+                            $addmewchallanform_response['error'] = array('challan_no'=>strip_tags(form_error('challan_no')),'challan_date'=>strip_tags(form_error('challan_date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'usp'=>strip_tags(form_error('usp')),'remark'=>strip_tags(form_error('remark')));
                          }
                      }
                 }
@@ -7015,6 +7017,7 @@ class Admin extends BaseController
             $data['supplierList']= $this->admin_model->fetchALLsupplierList();
             $data['getPreviousChallanform_number']= $this->admin_model->getPreviousChallanform_number();
             $data['getChallanformlist']= $this->admin_model->getChallanformlist();
+            $data['getUSPmasterlist']= $this->admin_model->getUSPmasterlist();
             $this->loadViews("masters/addnewchallanform", $this->global, $data, NULL);
         }
 
@@ -7080,6 +7083,7 @@ class Admin extends BaseController
                         'pre_vendor_po_number' =>    trim($this->input->post('pre_vendor_po_number')),
                         'pre_supplier_name' =>  trim($this->input->post('pre_supplier_name')),
                         'pre_supplier_po_number' =>    trim($this->input->post('pre_supplier_po_number')),
+                        'pre_usp_id' =>    trim($this->input->post('pre_usp_id')),
                         'pre_remark' =>    trim($this->input->post('pre_remark')),
                     );
                 }else{
@@ -7102,6 +7106,7 @@ class Admin extends BaseController
                         'pre_vendor_po_number' =>    trim($this->input->post('pre_vendor_po_number')),
                         'pre_supplier_name' =>  trim($this->input->post('pre_supplier_name')),
                         'pre_supplier_po_number' =>    trim($this->input->post('pre_supplier_po_number')),
+                        'pre_usp_id' =>    trim($this->input->post('pre_usp_id')),
                         'pre_remark' =>    trim($this->input->post('pre_remark')),
                     );
                 }
@@ -7133,7 +7138,7 @@ class Admin extends BaseController
         $data['vendorList']= $this->admin_model->fetchALLvendorList();
         $data['supplierList']= $this->admin_model->fetchALLsupplierList();
         $data['getChallanformdetails']= $this->admin_model->getChallanformdetails($id);
-
+        $data['getUSPmasterlist']= $this->admin_model->getUSPmasterlist();
         $data['getChallanformlistedit']= $this->admin_model->getChallanformlistedit($id);
         $this->loadViews("masters/editchallanform", $this->global, $data, NULL);
 
