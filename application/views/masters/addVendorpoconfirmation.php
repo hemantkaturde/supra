@@ -33,9 +33,9 @@
 
                                         if($getPreviousSupplierPoconfirmationNumber['po_number']){
 
-                                            $getPreviousSupplierPoconfirmationNumber_number = substr($getPreviousSupplierPoconfirmationNumber['po_number'], -1);
+                                            $getPreviousSupplierPoconfirmationNumber_number = substr($getPreviousSupplierPoconfirmationNumber['po_number'], -4);
 
-                                            $getPreviousVendorPoconfirmationNumber_number = substr($getPreviousVendorPoconfirmationNumber['po_number'], -1);
+                                            $getPreviousVendorPoconfirmationNumber_number = substr($getPreviousVendorPoconfirmationNumber['po_number'], -4);
 
                                             if($getPreviousSupplierPoconfirmationNumber_number > $getPreviousVendorPoconfirmationNumber_number){
 
