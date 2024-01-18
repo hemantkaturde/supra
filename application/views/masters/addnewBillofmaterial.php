@@ -267,10 +267,10 @@
                                                         <th>RM Order Qty</th>
                                                         <th>Rm Actual Qty</th>
                                                         <th>RM Type</th>
-                                                        <th>Slitting Size</th>
+                                                        <!-- <th>Slitting Size</th>
                                                         <th>Diameter</th>
                                                         <th>Thickness</th>
-                                                        <th>Hex A/F </th>
+                                                        <th>Hex A/F </th> -->
                                                         <th>Gross Weight</th>
                                                         <th>Expected Qty</th>
                                                         <th>Vendor Actual Received Qty</th>
@@ -278,8 +278,8 @@
                                                         <th>Total Net Weight</th>
                                                         <th>Short Excess</th>
                                                         <th>Scrap In kgs</th>
-                                                        <th>Actual Scrap Received In kgs</th>
-                                                        <th>Remark</th>
+                                                        <!-- <th>Actual Scrap Received In kgs</th>
+                                                        <th>Remark</th> -->
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>
@@ -296,10 +296,10 @@
                                                         <td><?php echo $value['rmsupplier_order_qty'];?></td>
                                                         <td><?php echo $value['rm_actual_aty'];?></td>
                                                         <td><?php echo $value['type_of_raw_material'];?></td>
-                                                        <td><?php echo $value['sitting_size'];?></td>
+                                                        <!-- <td><?php echo $value['sitting_size'];?></td>
                                                         <td><?php echo $value['diameter'];?></td>
                                                         <td><?php echo $value['thickness'];?></td>
-                                                        <td><?php echo $value['hex_a_f'];?></td>
+                                                        <td><?php echo $value['hex_a_f'];?></td> -->
                                                         <td><?php echo $value['groass_weight'];?></td>
                                                         <td><?php echo $value['expected_qty'];?></td>
                                                         <td><?php echo $value['vendor_actual_recived_qty'];?></td>
@@ -307,8 +307,8 @@
                                                         <td><?php echo $value['total_neight_weight'];?></td>
                                                         <td><?php echo $value['short_excess'];?></td>
                                                         <td><?php echo $value['scrap_in_kgs'];?></td>
-                                                        <td><?php echo $value['actual_scrap_received_in_kgs'];?></td>
-                                                        <td><?php echo $value['remark'];?></td>
+                                                        <!-- <td><?php echo $value['actual_scrap_received_in_kgs'];?></td>
+                                                        <td><?php echo $value['remark'];?></td> -->
 
                                                         <td>
                                                           <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['biil_of_material_id'];?>' class='fa fa-pencil-square-o editBillofmaterialitem'  aria-hidden='true'></i>
