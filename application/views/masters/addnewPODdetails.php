@@ -242,7 +242,7 @@
                                                     <td><?php echo $value['bill_no'];?></td>
                                                     <td><?php echo $value['bill_date'];?></td>
                                                     <td><?php echo $value['short_excess_qty'];?></td>
-                                                <td><?php echo $value['pod_remark'];?></td>
+                                                    <td><?php echo $value['pod_remark'];?></td>
                                                     <td>
                                                     <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['pod_id'];?>' class='fa fa-pencil-square-o editPODitem'  aria-hidden='true'></i>
                                                     <i style='font-size: x-large;cursor: pointer'
@@ -297,7 +297,7 @@
                                                                     class="required">*</span> (<small>Row Material Goods
                                                                     Master</small>)</label>
                                                             <div class="col-sm-8">
-                                                                <select class="form-control" name="part_number"
+                                                                <select class="form-control part_number_for_previous_short_excess" name="part_number"
                                                                     id="part_number">
                                                                     <option st-id="" value="">Select Part Name</option>
                                                                     <!-- <?php foreach ($rowMaterialList as $key => $value) {?>        
@@ -388,6 +388,17 @@
                                                                     id="bill_date"
                                                                     name="bill_date">
                                                                 <p class="error bill_date_error"></p>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-4 col-form-label"> Previous Short / Excess
+                                                                Qty</label>
+                                                            <div class="col-sm-8">
+                                                                <input type="text" class="form-control"
+                                                                    id="previous_short_excess_qty" name="previous_short_excess_qty"
+                                                                    readonly>
+                                                                <p class="error previous_short_excess_qty_error"></p>
                                                             </div>
                                                         </div>
 

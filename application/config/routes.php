@@ -386,10 +386,8 @@ $route['getdebitnotepartnumberdetails_byvendor'] = "admin/getdebitnotepartnumber
 $route['getSuppliergoodsreworkrejectionvendorchallan'] = "admin/getSuppliergoodsreworkrejectionvendorchallan";
 $route['getSuppliergoodsreworkrejectionvendorreworkrejection'] = "admin/getSuppliergoodsreworkrejectionvendorreworkrejection";
 $route['getVendoritemonlyforreworkrejection'] = "admin/getVendoritemonlyforreworkrejection";
-
-
 $route['downlaodjobworkchllan/(:any)'] = "admin/downlaodjobworkchllan/$1";
-
+$route['getpreviousshortexcess'] = "admin/getpreviousshortexcess";
 
 
 

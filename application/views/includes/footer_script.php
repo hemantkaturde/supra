@@ -13193,7 +13193,19 @@
 					 var qty_recived = 0;
 				 }
 
-				 var total_short_excess_qty = parseFloat(order_qty) -  parseFloat(qty_recived);
+				 if($("#previous_short_excess_qty").val()){
+					 var previous_short_excess_qty = $("#previous_short_excess_qty").val();
+				 }else{
+					 var previous_short_excess_qty = 0;
+				 }
+
+				 if(previous_short_excess_qty > 0){
+					var calculate_qty = previous_short_excess_qty;
+				 }else{
+					var calculate_qty = order_qty;
+				 }
+
+				 var total_short_excess_qty = parseFloat(calculate_qty) -  parseFloat(qty_recived);
 
 				 $("#short_excess_qty").val(total_short_excess_qty);
 			
@@ -13404,6 +13416,29 @@
 			});
 			return false;
 		 });
+
+          
+		 $(document).on('change','.part_number_for_previous_short_excess',function(e){  
+			e.preventDefault();
+			var elemF = $(this);
+			var part_number = $('#part_number').val();
+			$.ajax({
+				url : "<?php echo base_url();?>getpreviousshortexcess",
+				type: "POST",
+				data : 'part_number='+part_number,
+				success: function(data, textStatus, jqXHR)
+				{
+					    var fetchResponse = $.parseJSON(data);
+						$('#previous_short_excess_qty').val(fetchResponse.short_excess_qty); 	
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	        $(".loader_ajax").hide();
+			    }
+			});
+			return false;
+		 });
+
     </script>
 <?php } ?>
 
