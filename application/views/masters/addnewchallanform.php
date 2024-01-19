@@ -165,7 +165,7 @@
                                                     <select class="form-control usp" name="usp" id="usp">
                                                         <option st-id="" value="">Select USP</option>
                                                         <?php foreach ($getUSPmasterlist as $key => $value) {?>
-                                                        <option value="<?php echo $value['usp_id']; ?>" <?php if($value['usp_name']==$getChallanformlist[0]['pre_usp_name']){ echo 'selected';} ?>><?php echo $value['usp_name']; ?></option>
+                                                        <option value="<?php echo $value['usp_id']; ?>" <?php if($value['usp_name']==$getChallanformlist[0]['pre_usp_id']){ echo 'selected';} ?>><?php echo $value['usp_name']; ?></option>
                                                         <?php } ?>
                                                     </select>
                                                 <p class="error usp_error"></p>
