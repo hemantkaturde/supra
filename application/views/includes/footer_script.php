@@ -13429,7 +13429,13 @@
 				success: function(data, textStatus, jqXHR)
 				{
 					    var fetchResponse = $.parseJSON(data);
-						$('#previous_short_excess_qty').val(fetchResponse.short_excess_qty); 	
+						if(fetchResponse.short_excess_qty > 0){
+                           var short_excess_qty = fetchResponse.short_excess_qty;
+						}else{
+						   var short_excess_qty = 0;
+						}
+						
+						$('#previous_short_excess_qty').val(short_excess_qty); 	
 				},
 				error: function (jqXHR, textStatus, errorThrown)
 			    {
