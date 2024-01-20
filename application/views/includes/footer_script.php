@@ -13416,7 +13416,6 @@
 			});
 			return false;
 		 });
-
           
 		 $(document).on('change','.part_number_for_previous_short_excess',function(e){  
 			e.preventDefault();
@@ -13434,7 +13433,7 @@
 						}else{
 						   var short_excess_qty = 0;
 						}
-						
+
 						$('#previous_short_excess_qty').val(short_excess_qty); 	
 				},
 				error: function (jqXHR, textStatus, errorThrown)
