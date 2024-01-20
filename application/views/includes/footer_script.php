@@ -13426,14 +13426,18 @@
 				type: "POST",
 				data : 'part_number='+part_number,
 				success: function(data, textStatus, jqXHR)
-				{
+				{ 
 					    var fetchResponse = $.parseJSON(data);
-						if(fetchResponse.short_excess_qty > 0){
-                           var short_excess_qty = fetchResponse.short_excess_qty;
-						}else{
-						   var short_excess_qty = 0;
-						}
 
+						if(fetchResponse =='failure'){
+							var short_excess_qty = 0;
+						}else{
+							if(fetchResponse.short_excess_qty > 0){
+                               var short_excess_qty = fetchResponse.short_excess_qty;
+							}else{
+							   var short_excess_qty = 0;
+							}
+						}
 						$('#previous_short_excess_qty').val(short_excess_qty); 	
 				},
 				error: function (jqXHR, textStatus, errorThrown)
