@@ -161,7 +161,7 @@
 
                                     <div class="col-md-12" >
                                             <div class="form-group">
-                                                    <label for="usp">USP <span class="required">*</span></label>
+                                                    <label for="usp">USP </label>
                                                     <select class="form-control usp" name="usp" id="usp">
                                                         <option st-id="" value="">Select USP</option>
                                                         <?php foreach ($getUSPmasterlist as $key => $value) {?>
@@ -456,7 +456,7 @@
                             <!-- /.box-body -->
                             <div class="box-footer">
                                 <div class="col-xs-8">
-                                    <?php if($getReworkRejectionitemslist){
+                                    <?php if($getChallanformlist){
                                         $disabled= '';
                                     }else{ 
                                         $disabled= 'disabled';

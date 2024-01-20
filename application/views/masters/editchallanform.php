@@ -136,7 +136,7 @@
 
                                     <div class="col-md-12" >
                                             <div class="form-group">
-                                                    <label for="usp">USP <span class="required">*</span></label>
+                                                    <label for="usp">USP </label>
                                                     <select class="form-control usp" name="usp" id="usp">
                                                         <option st-id="" value="">Select USP</option>
                                                         <?php foreach ($getUSPmasterlist as $key => $value) {?>
