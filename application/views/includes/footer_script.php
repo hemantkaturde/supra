@@ -7690,6 +7690,7 @@
 	        });
 	    });
 
+
 		$(document).ready(function() {
 			//e.preventDefault();
 			//$(".loader_ajax").show();
@@ -7720,8 +7721,6 @@
 				}
 			});
 			return false;
-
-
 		});
 
 		$(document).on('change','#vendor_name',function(e){  
@@ -8222,8 +8221,27 @@
 	            },
 	        });
 
+
+
 		}
 	
+	
+
+		$('#view_incomingdetailss_item_on_add thead th').each(function(columnIndex) {
+        var total = 0;
+
+        // Loop through each row in the tbody
+        $('#view_incomingdetailss_item_on_add tbody tr').each(function() {
+          // Extract the value from the specified column and add it to the total
+          total += parseFloat($(this).find('td').eq(columnIndex).text()) || 0;
+        });
+
+        // Update the total in the footer for the specified column
+        $('#view_incomingdetailss_item_on_add tfoot td.totalColumn').eq(columnIndex).text(total);
+      });
+	
+
+
 		$(document).on('change','#part_number_serach_edit',function(e){  
 			$("#view_incomingdetailss_item_on_edit").dataTable().fnDestroy();
 			getIncomigDataFilteredit($("#part_number_serach_edit").val());

@@ -231,7 +231,32 @@
                                                 </thead>
                                                 <tbody>
                                                 </tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <td><b>Total</b></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                </tfoot>
                                             </table>
+
+                                            
                                     </div>
 
                                       <!-- Add New Package Modal -->
