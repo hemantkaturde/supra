@@ -8219,7 +8219,30 @@
                     url :"<?php echo base_url();?>fetchincomingdeatilsitemlistadd/"+$.trim(part_number_serach),
                     type: "post",
 	            },
+
+
+				"footerCallback": function ( row, data, start, end, display) {
+						var api = this.api(), data;
+
+						var intVal = function ( i ) {
+							return typeof i === 'string' ?
+								i.replace(/[\$,]/g, '')*1 :
+								typeof i === 'number' ?
+									i : 0;
+						};
+
+						var amtTotal = api
+							.column( 5 )
+							.data()
+							.reduce( function (a, b) {
+								return intVal(a) + intVal(b);
+							}, 0 );
+							
+					$( api.column( 5 ).footer() ).html(amtTotal);
+                },
+
 	        });
+
 
 
 
@@ -8227,18 +8250,6 @@
 	
 	
 
-		$('#view_incomingdetailss_item_on_add thead th').each(function(columnIndex) {
-        var total = 0;
-
-        // Loop through each row in the tbody
-        $('#view_incomingdetailss_item_on_add tbody tr').each(function() {
-          // Extract the value from the specified column and add it to the total
-          total += parseFloat($(this).find('td').eq(columnIndex).text()) || 0;
-        });
-
-        // Update the total in the footer for the specified column
-        $('#view_incomingdetailss_item_on_add tfoot td.totalColumn').eq(columnIndex).text(total);
-      });
 	
 
 
