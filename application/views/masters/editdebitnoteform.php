@@ -172,7 +172,7 @@
                                     <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="total_debit_amount">Total Debit Amount <span class="required">*</span></label>
-                                                  <input type="text" class="form-control"  value="<?=$totalDebitAndokQty['total_debit_amount'] + $totalDebitAndokQty['total_SGST_value'] + $totalDebitAndokQty['total_CGST_value'] + $totalDebitAndokQty['total_IGST_value'] ; ?>" id="total_debit_amount" name="total_debit_amount" required readonly>
+                                                  <input type="text" class="form-control"  value="<?=round($totalDebitAndokQty['total_debit_amount'] + $totalDebitAndokQty['total_SGST_value'] + $totalDebitAndokQty['total_CGST_value'] + $totalDebitAndokQty['total_IGST_value'],2 ); ?>" id="total_debit_amount" name="total_debit_amount" required readonly>
                                                 <p class="error total_debit_amount_error"></p>
                                             </div>
                                     </div>
