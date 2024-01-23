@@ -2718,7 +2718,7 @@ class Admin extends BaseController
             
             // set heading
             //$this->table->set_heading('Part Number', 'Description', 'Order Qty','Unit', 'Rate','Value');
-            $this->table->set_heading('Part Number', 'Description', 'Order Qty','Delivery');
+            $this->table->set_heading('Part Number', 'Description', 'Order Qty','Delivery Date');
 
             // set template
             $style = array('table_open'  => '<p><b>Buyer PO Item</b></p><table style="width: 70% !important; max-width: 100%;margin-bottom: 20px;" class="table">');
