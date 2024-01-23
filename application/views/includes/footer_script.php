@@ -8243,15 +8243,8 @@
 
 	        });
 
-
-
-
 		}
 	
-	
-
-	
-
 
 		$(document).on('change','#part_number_serach_edit',function(e){  
 			$("#view_incomingdetailss_item_on_edit").dataTable().fnDestroy();
