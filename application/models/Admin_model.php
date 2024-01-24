@@ -1966,7 +1966,7 @@ class Admin_model extends CI_Model
               $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
               $this->db->where(TBL_FINISHED_GOODS.'.status',1);
               //$this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
-              $this->db->where('tbl_buyerpo_item.part_number_id NOT IN (SELECT part_number_id FROM tbl_supplierpo_item)', NULL, FALSE);
+              //$this->db->where('tbl_buyerpo_item.part_number_id NOT IN (SELECT part_number_id FROM tbl_supplierpo_item)', NULL, FALSE);
               $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id',$supplier_po_number);
               $query = $this->db->get(TBL_FINISHED_GOODS);
               $data = $query->result_array();
