@@ -1390,7 +1390,6 @@ class Admin_model extends CI_Model
     }
 
     public function deleteSupplierpoitem($id){
-
         $this->db->where('id', $id);
         //$this->db->delete(TBL_SUPPLIER);
         if($this->db->delete(TBL_SUPPLIER_PO_MASTER_ITEM)){

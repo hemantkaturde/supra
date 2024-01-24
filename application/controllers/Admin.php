@@ -2114,13 +2114,14 @@ class Admin extends BaseController
             $this->form_validation->set_rules('buyer_name','Buyer Name','trim|required');
             $this->form_validation->set_rules('currency','Currency','trim|required');
             $this->form_validation->set_rules('delivery_date','Delivery Date','trim|required');
+            $this->form_validation->set_rules('generate_po','Generate PO','trim|required');
             $this->form_validation->set_rules('remark','Remark','trim');
 
 
             if($this->form_validation->run() == FALSE)
             {
                 $save_buyerpo_response['status'] = 'failure';
-                $save_buyerpo_response['error'] = array('sales_order_number'=>strip_tags(form_error('sales_order_number')), 'date'=>strip_tags(form_error('date')), 'buyer_po_number'=>strip_tags(form_error('buyer_po_number')), 'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'buyer_name'=>strip_tags(form_error('buyer_name')),'currency'=>strip_tags(form_error('currency')),'rate'=>strip_tags(form_error('rate')),'value'=>strip_tags(form_error('value')),'part_number'=>strip_tags(form_error('part_number')),'order_quantity'=>strip_tags(form_error('order_quantity')),'description'=>strip_tags(form_error('description')),'delivery_date'=>strip_tags(form_error('delivery_date')),'remark'=>strip_tags(form_error('remark')));
+                $save_buyerpo_response['error'] = array('sales_order_number'=>strip_tags(form_error('sales_order_number')), 'date'=>strip_tags(form_error('date')), 'buyer_po_number'=>strip_tags(form_error('buyer_po_number')), 'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'buyer_name'=>strip_tags(form_error('buyer_name')),'currency'=>strip_tags(form_error('currency')),'rate'=>strip_tags(form_error('rate')),'value'=>strip_tags(form_error('value')),'part_number'=>strip_tags(form_error('part_number')),'order_quantity'=>strip_tags(form_error('order_quantity')),'description'=>strip_tags(form_error('description')),'delivery_date'=>strip_tags(form_error('delivery_date')),'generate_po'=>strip_tags(form_error('generate_po')),'remark'=>strip_tags(form_error('remark')));
             }else{
 
                     $po_id =  trim($this->input->post('po_id'));
@@ -2133,6 +2134,7 @@ class Admin extends BaseController
                             'buyer_name_id' =>   trim($this->input->post('buyer_name')),
                             'currency' => trim($this->input->post('currency')),
                             'delivery_date' =>    trim($this->input->post('delivery_date')),
+                            'generate_po' =>    trim($this->input->post('generate_po')),
                             'remark' =>    trim($this->input->post('remark')),
                         );
 
@@ -2146,7 +2148,7 @@ class Admin extends BaseController
                                 $update_last_inserted_id = $this->admin_model->update_last_inserted_id($saveBuyerpodata);
                                 if($update_last_inserted_id){
                                     $save_buyerpo_response['status'] = 'success';
-                                    $save_buyerpo_response['error'] = array('sales_order_number'=>strip_tags(form_error('sales_order_number')), 'date'=>strip_tags(form_error('date')), 'buyer_po_number'=>strip_tags(form_error('buyer_po_number')), 'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'buyer_name'=>strip_tags(form_error('buyer_name')),'currency'=>strip_tags(form_error('currency')),'rate'=>strip_tags(form_error('rate')),'value'=>strip_tags(form_error('value')),'part_number'=>strip_tags(form_error('part_number')),'order_quantity'=>strip_tags(form_error('order_quantity')),'description'=>strip_tags(form_error('description')),'delivery_date'=>strip_tags(form_error('delivery_date')),'remark'=>strip_tags(form_error('remark')));
+                                    $save_buyerpo_response['error'] = array('sales_order_number'=>strip_tags(form_error('sales_order_number')), 'date'=>strip_tags(form_error('date')), 'buyer_po_number'=>strip_tags(form_error('buyer_po_number')), 'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'buyer_name'=>strip_tags(form_error('buyer_name')),'currency'=>strip_tags(form_error('currency')),'rate'=>strip_tags(form_error('rate')),'value'=>strip_tags(form_error('value')),'part_number'=>strip_tags(form_error('part_number')),'order_quantity'=>strip_tags(form_error('order_quantity')),'description'=>strip_tags(form_error('description')),'delivery_date'=>strip_tags(form_error('delivery_date')),'generate_po'=>strip_tags(form_error('generate_po')),'remark'=>strip_tags(form_error('remark')));
                                 }
                             }
                         }
@@ -2160,13 +2162,14 @@ class Admin extends BaseController
                             'buyer_name_id' =>   trim($this->input->post('buyer_name')),
                             'currency' => trim($this->input->post('currency')),
                             'delivery_date' =>    trim($this->input->post('delivery_date')),
+                            'generate_po' =>    trim($this->input->post('generate_po')),
                             'remark' =>    trim($this->input->post('remark')),
                         );
 
                         $saveBuyerpodata = $this->admin_model->saveBuyerpodata($po_id,$data);
                         if($saveBuyerpodata){
                                 $save_buyerpo_response['status'] = 'success';
-                                $save_buyerpo_response['error'] = array('sales_order_number'=>strip_tags(form_error('sales_order_number')), 'date'=>strip_tags(form_error('date')), 'buyer_po_number'=>strip_tags(form_error('buyer_po_number')), 'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'buyer_name'=>strip_tags(form_error('buyer_name')),'currency'=>strip_tags(form_error('currency')),'rate'=>strip_tags(form_error('rate')),'value'=>strip_tags(form_error('value')),'part_number'=>strip_tags(form_error('part_number')),'order_quantity'=>strip_tags(form_error('order_quantity')),'description'=>strip_tags(form_error('description')),'delivery_date'=>strip_tags(form_error('delivery_date')),'remark'=>strip_tags(form_error('remark')));
+                                $save_buyerpo_response['error'] = array('sales_order_number'=>strip_tags(form_error('sales_order_number')), 'date'=>strip_tags(form_error('date')), 'buyer_po_number'=>strip_tags(form_error('buyer_po_number')), 'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'buyer_name'=>strip_tags(form_error('buyer_name')),'currency'=>strip_tags(form_error('currency')),'rate'=>strip_tags(form_error('rate')),'value'=>strip_tags(form_error('value')),'part_number'=>strip_tags(form_error('part_number')),'order_quantity'=>strip_tags(form_error('order_quantity')),'description'=>strip_tags(form_error('description')),'delivery_date'=>strip_tags(form_error('delivery_date')),'generate_po'=>strip_tags(form_error('generate_po')),'remark'=>strip_tags(form_error('remark')));
                           
                         }
 
@@ -2403,6 +2406,7 @@ class Admin extends BaseController
                             'pre_buyer_name' =>trim($this->input->post('buyer_name')),
                             'pre_currency' =>trim($this->input->post('currency')),
                             'pre_delivery_date' =>trim($this->input->post('delivery_date')),
+                            'pre_generate_po' =>trim($this->input->post('generate_po')),
                             'pre_remark' =>trim($this->input->post('remark')),
                         );
                      }else{
@@ -2421,6 +2425,7 @@ class Admin extends BaseController
                                 'pre_buyer_name' =>trim($this->input->post('buyer_name')),
                                 'pre_currency' =>trim($this->input->post('currency')),
                                 'pre_delivery_date' =>trim($this->input->post('delivery_date')),
+                                'pre_generate_po' =>trim($this->input->post('generate_po')),
                                 'pre_remark' =>trim($this->input->post('remark')),
                             );
 
@@ -2671,7 +2676,7 @@ class Admin extends BaseController
     public function deleteSupplierpoitem(){
         $post_submit = $this->input->post();
         if($post_submit){
-            $result = $this->admin_model->deleteSupplierpoconfirmationitem(trim($this->input->post('id')));
+            $result = $this->admin_model->deleteSupplierpoitem(trim($this->input->post('id')));
             if ($result) {
                         $process = 'Supplier PO Delete';
                         $processFunction = 'Admin/deleteSupplierpoitem';

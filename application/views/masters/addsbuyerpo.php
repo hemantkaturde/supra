@@ -141,6 +141,19 @@
                                         </div>
                                     </div>
 
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="generate_po">Generate PO <span class="required">*</span></label>
+                                                 <select class="form-control" name="generate_po" id="generate_po">
+                                                    <option value="">Select Generate PO </option>
+                                                    <option value="YES" <?php if($fetchALLitemList[0]['pre_generate_po']=='YES'){ echo 'selected';} ?>>YES</option>
+                                                    <option value="NO"  <?php if($fetchALLitemList[0]['pre_generate_po']=='NO'){ echo 'selected';} ?>>NO</option>
+                                                 </select>
+                                            <p class="error generate_po_error"></p>
+                                        </div>
+                                    </div>
+
                                     <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="remark">Remark</label>
