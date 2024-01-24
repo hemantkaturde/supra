@@ -121,9 +121,7 @@ $route['addSuplieritem'] = "admin/addSuplieritem";
 $route['viewSupplierpo/(:any)'] = "admin/viewSupplierpo/$1";
 $route['deleteSupplierpoitem'] = "admin/deleteSupplierpoitem";
 $route['getBuyerPonumberbyBuyerid'] = "admin/getBuyerPonumberbyBuyerid";
-
 $route['getBuyerPonumberbyBuyeridforsupplierandvendorpo'] = "admin/getBuyerPonumberbyBuyeridforsupplierandvendorpo";
-
 $route['getBuyerItemsforDisplay'] = "admin/getBuyerItemsforDisplay";
 $route['getBuyerItemsforDisplayBybuyerid'] = "admin/getBuyerItemsforDisplayBybuyerid";
 $route['vendorpo'] = "admin/vendorpo";
