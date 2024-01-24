@@ -3339,6 +3339,31 @@ class Admin extends BaseController
 
     }
 
+
+    public function getSuppliritemonlyforgetbuyeritemonly(){
+
+        $supplier_po_number=$this->input->post('supplier_po_number');
+
+        $flag=$this->input->post('flag');
+
+        if($supplier_po_number) {
+			$getSupplieritemsonly = $this->admin_model->getSuppliritemonlyforgetbuyeritemonly($supplier_po_number,$flag);
+			if(count($getSupplieritemsonly) >= 1) {
+                $content = $content.'<option value="">Select Part Number</option>';
+				foreach($getSupplieritemsonly as $value) {
+					$content = $content.'<option value="'.$value["item_id"].'">'.$value["part_number"].'</option>';
+				}
+				echo $content;
+			} else {
+				echo 'failure';
+			}
+		} else {
+			echo 'failure';
+		}
+
+    }
+
+
     public function deleteSupplierPoconfirmation(){
 
         $post_submit = $this->input->post();
