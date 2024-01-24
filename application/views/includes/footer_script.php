@@ -2205,7 +2205,7 @@
 			var buyer_name = $('#buyer_name').val();
 		    $('.buyer_po_number_div').css('display','block');
 			$.ajax({
-				url : "<?php echo ADMIN_PATH;?>getBuyerPonumberbyBuyerid",
+				url : "<?php echo ADMIN_PATH;?>getBuyerPonumberbyBuyeridforsupplierandvendorpo",
 				type: "POST",
 				data : {'buyer_name' : buyer_name},
 				success: function(data, textStatus, jqXHR)

@@ -78,7 +78,7 @@
                                                     <select class="form-control" name="buyer_po_number" id="buyer_po_number">
                                                         <option st-id="" value="">Select Buyer Name</option>
                                                            <?php foreach ($buyerpoList as $key => $value) {?>
-                                                               <option value="<?php echo $value['id']; ?>" <?php if($value['id']==$fetchALLsupplieritemlistforview[0]['pre_buyer_po_number']){ echo 'selected';} ?> ><?php echo $value['sales_order_number']; ?></option>
+                                                               <option value="<?php echo $value['id']; ?>" <?php if($value['id']==$fetchALLsupplieritemlistforview[0]['pre_buyer_po_number']){ echo 'selected';} ?> ><?php echo $value['sales_order_number'].'-'.$value['buyer_po_number']; ?></option>
                                                            <?php } ?>
                                                     </select> 
                                                 <p class="error buyer_po_number_error"></p>
