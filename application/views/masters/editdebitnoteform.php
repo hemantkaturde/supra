@@ -248,8 +248,8 @@
                                                         <th>Part Number</th>
                                                         <th>Description</th>
                                                         <th>Invoice No</th>
-                                                        <th>Invoice Qty</th>
                                                         <th>Invoice Date</th>
+                                                        <th>Invoice Qty</th>
                                                         <th>OK Qty</th>
                                                         <th>Less Quantity</th>
                                                         <th>Rejected Quantity</th>
