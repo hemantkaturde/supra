@@ -295,28 +295,21 @@
                                                          $total_val_tax =  $SGST_value +$CGST_value;
                                                          $debit_gst_value =  floatval($value['SGST_value']) + floatval($value['CGST_value']) + floatval($value['IGST_value']);
 
+                                                       
                                                          if($value['gst_rate']=='CGST_SGST'){
-                                                            $gate_rate = '9'.' %';
-                                                         }else{
                                                             $gate_rate = '9'.' %';
                                                          }
 
                                                          if($value['gst_rate']=='CGST_SGST_6'){
-                                                            $gate_rate = '6'.' %';
-                                                         }else{
                                                             $gate_rate = '6'.' %';
                                                          }
 
                                                          
                                                          if($value['gst_rate']=='IGST'){
                                                             $gate_rate = '18'.' %';
-                                                         }else{
-                                                            $gate_rate = '18'.' %';
                                                          }
 
                                                          if($value['gst_rate']=='IGST_12'){
-                                                            $gate_rate = '12'.' %';
-                                                         }else{
                                                             $gate_rate = '12'.' %';
                                                          }
 
