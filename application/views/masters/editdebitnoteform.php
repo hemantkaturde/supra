@@ -215,6 +215,16 @@
                                     </div>
                                     
 
+                                      <?php if($getdebitnoteditailsdata[0]['grand_total_main']){ 
+                                         
+                                        $grand_total =round($getdebitnoteditailsdata[0]['grand_total_main']);
+                                        
+                                        }else{
+
+                                        $grand_total =0;
+
+                                        }  ?>
+
                                     <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="freight_amount_charge">Grand Total <span class="required">*</span></label>
