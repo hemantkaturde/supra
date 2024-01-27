@@ -265,9 +265,9 @@
                                                         <th>Rejected Quantity</th>
                                                         <th>Received Quantity</th>
                                                         <th>Rate </th>
-                                                        <th>Select GST Rate</th>
-                                                        <th>Value</th>
-                                                        <th>IGST Value</th>
+                                                        <th>GST Rate</th>
+                                                        <th>Debit Value</th>
+                                                        <th>OK GST</th>
                                                         <th>Debit Amount</th>
                                                         <th>Remark</th>
                                                         <th>Action</th>
@@ -293,6 +293,8 @@
                                                            
                                                            
                                                          $total_val_tax =  $SGST_value +$CGST_value;
+                                                         $debit_gst_value =  floatval($value['SGST_value']) + floatval($value['CGST_value']) + floatval($value['IGST_value']);
+
                                                     ?>
                                                     <tr>
                                                         <td><?php echo $count;?></td>
@@ -307,8 +309,8 @@
                                                         <td><?php echo $value['received_quantity'];?></td>
                                                         <td><?php echo $value['rate'];?></td>
                                                         <td><?php echo $value['gst_rate'];?></td>
-                                                        <td><?php echo $total_val_tax;?></td>
-                                                        <td><?php echo $value['IGST_value'];?></td>
+                                                        <td><?php echo $debit_gst_value;?></td>
+                                                        <td><?php echo $value['total_amount_of_ok_qty'];?></td>
                                                         <td><?php echo $value['debit_amount'];?></td>
                                                         <td><?php echo $value['debit_note_remark'];?></td>
                                                         <td>
