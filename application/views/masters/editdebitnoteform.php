@@ -228,7 +228,7 @@
                                     <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="freight_amount_charge">Grand Total <span class="required">*</span></label>
-                                                  <input type="text" class="form-control"  value="<?=round($getdebitnoteditailsdata[0]['grand_total_main'])?>" id="grand_total_main" name="grand_total_main" required>
+                                                  <input type="text" class="form-control"  value="<?=round($grand_total)?>" id="grand_total_main" name="grand_total_main" required>
                                                 <p class="error grand_total_main_error"></p>
                                             </div>
                                     </div>
