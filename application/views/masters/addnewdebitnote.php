@@ -282,7 +282,7 @@
                                                         $count=0;
                                                            foreach ($getdebitnoteitemdetails as $key => $value) :
                                                            $count++;
-                                                           $debit_gst_value =  intval($value['SGST_value']) + intval($value['CGST_value']) + intval($value['IGST_value']);
+                                                           $debit_gst_value =  floatval($value['SGST_value']) + floatval($value['CGST_value']) + floatval($value['IGST_value']);
 
                                                     ?>
                                                     <tr>
