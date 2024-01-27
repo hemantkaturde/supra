@@ -266,7 +266,7 @@
                                                         <th>Received Quantity</th>
                                                         <th>Rate </th>
                                                         <th>GST Rate</th>
-                                                        <th>Debit Value</th>
+                                                        <th>Debit GST</th>
                                                         <th>OK GST</th>
                                                         <th>Debit Amount</th>
                                                         <th>Remark</th>
