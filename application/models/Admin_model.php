@@ -1436,7 +1436,8 @@ class Admin_model extends CI_Model
         $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id = '.TBL_BUYER_PO_MASTER.'.id');
 		$this->db->where(TBL_BUYER_PO_MASTER.'.buyer_name_id', $buyer_name);
         $this->db->where(TBL_BUYER_PO_MASTER.'.status', 1);
-        $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.part_number_id NOT IN (SELECT part_number_id FROM tbl_supplierpo_item where pre_buyer_name='.$buyer_name.')', NULL, FALSE);
+        //$this->db->where(TBL_BUYER_PO_MASTER.'.generate_po', 'YES');
+        //$this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.part_number_id NOT IN (SELECT tbl_rawmaterial.raw_id FROM tbl_supplierpo_item join tbl_rawmaterial on tbl_supplierpo_item.part_number_id=tbl_rawmaterial.raw_id where pre_buyer_name='.$buyer_name.')', NULL, FALSE);
         $this->db->group_by(TBL_BUYER_PO_MASTER.'.sales_order_number');
         $this->db->order_by('sales_order_number','ASC');
         $query_result = $this->db->get(TBL_BUYER_PO_MASTER)->result_array();
