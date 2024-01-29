@@ -2757,10 +2757,12 @@ class Admin extends BaseController
             $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_BUYER_PO_MASTER_ITEM.'.description,'.TBL_BUYER_PO_MASTER_ITEM.'.order_oty,'.TBL_BUYER_PO_MASTER.'.delivery_date');
             $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
             $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id');
+            $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.part_number_id NOT IN (SELECT part_number_id FROM tbl_supplierpo_item)', NULL, FALSE);
             $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id',$buyer_po_number);
             $query_result = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
             $data = $query_result->result_array();
 
+            
             if($data){
                 echo $this->table->generate($query_result);
 

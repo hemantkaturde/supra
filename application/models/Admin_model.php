@@ -1432,10 +1432,11 @@ class Admin_model extends CI_Model
     
     public function getBuyerPonumberbyBuyeridforsupplierandvendorpo($buyer_name){
 
-        $this->db->select('*');
+        $this->db->select(TBL_BUYER_PO_MASTER.'.*');
+        $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id = '.TBL_BUYER_PO_MASTER.'.id');
 		$this->db->where('buyer_name_id', $buyer_name);
         $this->db->where('status', 1);
-        $this->db->where('id NOT IN (SELECT buyer_po_number FROM tbl_supplier_po where status=1)', NULL, FALSE);
+        $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.part_number_id NOT IN (SELECT part_number_id FROM tbl_supplierpo_item)', NULL, FALSE);
         $this->db->order_by('sales_order_number','ASC');
         $query_result = $this->db->get(TBL_BUYER_PO_MASTER)->result_array();
 		
@@ -1950,6 +1951,10 @@ class Admin_model extends CI_Model
   
         }else{
   
+
+            // print_r('hemsndn');
+            // exit;
+
               // $this->db->select('*');
               // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
               // $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
@@ -1959,16 +1964,18 @@ class Admin_model extends CI_Model
               // $query = $this->db->get(TBL_FINISHED_GOODS);
               // $data = $query->result_array();
               // return $data;
-  
+
+        
   
               $this->db->select('*,'.TBL_RAWMATERIAL.'.raw_id as item_id');
+              $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
               $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
-              $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
+            //   $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
               $this->db->where(TBL_FINISHED_GOODS.'.status',1);
               //$this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
-              //$this->db->where('tbl_buyerpo_item.part_number_id NOT IN (SELECT part_number_id FROM tbl_supplierpo_item)', NULL, FALSE);
+              $this->db->where('tbl_buyerpo_item.part_number_id NOT IN (SELECT part_number_id FROM tbl_supplierpo_item)', NULL, FALSE);
               $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id',$supplier_po_number);
-              $query = $this->db->get(TBL_FINISHED_GOODS);
+              $query = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
               $data = $query->result_array();
               return $data;
   
