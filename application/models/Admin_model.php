@@ -8087,6 +8087,7 @@ class Admin_model extends CI_Model
     .TBL_SUPPLIER_PO_MASTER_ITEM.'.rate,'
     .TBL_SUPPLIER_PO_MASTER_ITEM.'.value');
     $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id');
+
     $this->db->where(TBL_SUPPLIER_PO_MASTER_ITEM.'.id', $id);
     $this->db->order_by(TBL_SUPPLIER_PO_MASTER_ITEM.'.id','DESC');
     $query = $this->db->get(TBL_SUPPLIER_PO_MASTER_ITEM);

@@ -2097,7 +2097,13 @@
 			$(".loader_ajax").show();
 
 			   var formData = new FormData($("#addbuyeritemform")[0]);
-               var part_number =   $('#part_number').val();
+             
+			   if($('#part_number').val()){
+				   var part_number =  $('#part_number').val() ;
+			   }else{
+				   var part_number =   $('#part_number_1_edit').val();
+			   }
+			   
 			   var description =   $('#description').val();
 			   var qty =   $('#qty').val();
 			   var rate =   $('#rate').val();
@@ -2345,6 +2351,11 @@
 			e.preventDefault();
 			var elemF = $(this);
 			var item_id = elemF.attr('data-id');
+
+			$("#part_number_old").hide();
+			$("#part_number_new").show();
+
+
 			$.ajax({
 				url : "<?php echo base_url();?>getSupplieritemdataforitemedit",
 				type: "POST",
@@ -2354,7 +2365,8 @@
 					    var fetchResponse = $.parseJSON(data);
 						$('#addNewModal').modal('show'); 
 						$('#supplier_po_item_id').val(fetchResponse.supplier_item_id); 
-						$('#part_number').val(fetchResponse.raw_id);  
+						$('#part_number_1').val(fetchResponse.raw_id);  
+						$('#part_number_1_edit').val(fetchResponse.raw_id);  
 						$('#description').val(fetchResponse.description);  
 						$('#diameter').val(fetchResponse.diameter);  
 						$('#slitting_size').val(fetchResponse.sitting_size);  
@@ -2383,6 +2395,10 @@
 			return false;
 		});
 
+		$(document).on('click','.createnewitem',function(e){  
+			$("#part_number_old").show();
+			$("#part_number_new").hide();
+		});
 
     </script>
 <?php } ?>
