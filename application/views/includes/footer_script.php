@@ -1855,33 +1855,36 @@
 		$(document).ready(function() {
 
 			var buyer_po_number = $('#buyer_po_number').val();
-			$("#customers-list").html('');
-			$.ajax({
-				url : "<?php echo ADMIN_PATH;?>getBuyerItemsforDisplay",
-				type: "POST",
-				data : {'buyer_po_number' : buyer_po_number},
-				success: function(data, textStatus, jqXHR)
-				{
-					$(".loader_ajax").hide();
-					if(data == "failure")
+			if(buyer_po_number){
+				
+				$("#customers-list").html('');
+				$.ajax({
+					url : "<?php echo ADMIN_PATH;?>getBuyerItemsforDisplay",
+					type: "POST",
+					data : {'buyer_po_number' : buyer_po_number},
+					success: function(data, textStatus, jqXHR)
 					{
-						//$('#buyer_po_number').html('<option value="">Select Buyer PO Number</option>');
-					}
-					else
-					{
-						//$('#buyer_po_number').html('<option value="">Select Buyer PO Number</option>');
-						//$('#buyer_po_number').html(data);
-						$("#customers-list").html(data);
+						$(".loader_ajax").hide();
+						if(data == "failure")
+						{
+							//$('#buyer_po_number').html('<option value="">Select Buyer PO Number</option>');
+						}
+						else
+						{
+							//$('#buyer_po_number').html('<option value="">Select Buyer PO Number</option>');
+							//$('#buyer_po_number').html(data);
+							$("#customers-list").html(data);
 
+						}
+					},
+					error: function (jqXHR, textStatus, errorThrown)
+					{
+						$('#buyer_po_number').html();
+						//$(".loader_ajax").hide();
 					}
-				},
-				error: function (jqXHR, textStatus, errorThrown)
-				{
-					$('#buyer_po_number').html();
-					//$(".loader_ajax").hide();
-				}
-			});
-			return false;
+				});
+				return false;
+		    }
 
 		});
 
@@ -2181,6 +2184,9 @@
 
 		$(document).on('click','.deleteSupplierpoitem',function(e){
 			var elemF = $(this);
+
+			
+			var sup_id =   $('#sup_id').val();
 			e.preventDefault();
 			swal({
 				title: "Are you sure?",
@@ -2210,7 +2216,13 @@
 											icon: "success",
 											button: "Ok",
 											},function(){ 
-												window.location.href = "<?php echo base_url().'addnewSupplierpo'?>";
+
+												if(sup_id){
+													window.location.href = "<?php echo base_url().'editSupplierpo/'?>"+sup_id;
+												}else{
+													window.location.href = "<?php echo base_url().'addnewSupplierpo'?>";
+												}
+												
 										});	
 									}
 
