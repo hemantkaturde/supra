@@ -147,12 +147,26 @@
                                             <label for="generate_po">Generate PO <span class="required">*</span></label>
                                                  <select class="form-control" name="generate_po" id="generate_po">
                                                     <option value="">Select Generate PO </option>
-                                                    <option value="YES" <?php if($fetchALLitemList[0]['pre_generate_po']=='YES'){ echo 'selected';} ?>>YES</option>
+                                                    <option value="YES" <?php if($fetchALLitemList[0]['pre_generate_po']=='YES'){ echo 'selected';} ?> selected>YES</option>
                                                     <option value="NO"  <?php if($fetchALLitemList[0]['pre_generate_po']=='NO'){ echo 'selected';} ?>>NO</option>
                                                  </select>
                                             <p class="error generate_po_error"></p>
                                         </div>
                                     </div>
+
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="po_status">PO Status<span class="required">*</span></label>
+                                                 <select class="form-control" name="po_status" id="po_status">
+                                                    <option value="">Select PO Status </option>
+                                                    <option value="Open" <?php if($fetchALLitemList[0]['pre_po_status']=='Open'){ echo 'selected';} ?> selected>Open</option>
+                                                    <option value="Close"  <?php if($fetchALLitemList[0]['pre_po_status']=='Close'){ echo 'selected';} ?>>Close</option>
+                                                 </select>
+                                            <p class="error pre_po_status_error"></p>
+                                        </div>
+                                    </div>
+
 
                                     <!-- <div class="col-md-12">
                                         <div class="form-group">

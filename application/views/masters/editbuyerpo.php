@@ -104,6 +104,19 @@
                                     </div>
 
                                     <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="po_status">PO Status<span class="required">*</span></label>
+                                                 <select class="form-control" name="po_status" id="po_status">
+                                                    <option value="">Select PO Status </option>
+                                                    <option value="Open" <?php if($getbuyerpodetails[0]['po_status']=='Open'){ echo 'selected';} ?>>Open</option>
+                                                    <option value="Close"  <?php if($getbuyerpodetails[0]['po_status']=='Close'){ echo 'selected';} ?>>Close</option>
+                                                 </select>
+                                            <p class="error pre_po_status_error"></p>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="remark">Remark</label>
                                                   <textarea type="text" class="form-control"  id="remark"  name="remark" required> <?=$getbuyerpodetails[0]['remark'];?></textarea>

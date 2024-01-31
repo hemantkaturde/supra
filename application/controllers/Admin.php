@@ -2115,13 +2115,14 @@ class Admin extends BaseController
             $this->form_validation->set_rules('currency','Currency','trim|required');
             $this->form_validation->set_rules('delivery_date','Delivery Date','trim|required');
             $this->form_validation->set_rules('generate_po','Generate PO','trim|required');
+            $this->form_validation->set_rules('po_status','PO Status','trim|required');
             $this->form_validation->set_rules('remark','Remark','trim');
 
 
             if($this->form_validation->run() == FALSE)
             {
                 $save_buyerpo_response['status'] = 'failure';
-                $save_buyerpo_response['error'] = array('sales_order_number'=>strip_tags(form_error('sales_order_number')), 'date'=>strip_tags(form_error('date')), 'buyer_po_number'=>strip_tags(form_error('buyer_po_number')), 'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'buyer_name'=>strip_tags(form_error('buyer_name')),'currency'=>strip_tags(form_error('currency')),'rate'=>strip_tags(form_error('rate')),'value'=>strip_tags(form_error('value')),'part_number'=>strip_tags(form_error('part_number')),'order_quantity'=>strip_tags(form_error('order_quantity')),'description'=>strip_tags(form_error('description')),'delivery_date'=>strip_tags(form_error('delivery_date')),'generate_po'=>strip_tags(form_error('generate_po')),'remark'=>strip_tags(form_error('remark')));
+                $save_buyerpo_response['error'] = array('sales_order_number'=>strip_tags(form_error('sales_order_number')), 'date'=>strip_tags(form_error('date')), 'buyer_po_number'=>strip_tags(form_error('buyer_po_number')), 'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'buyer_name'=>strip_tags(form_error('buyer_name')),'currency'=>strip_tags(form_error('currency')),'rate'=>strip_tags(form_error('rate')),'value'=>strip_tags(form_error('value')),'part_number'=>strip_tags(form_error('part_number')),'order_quantity'=>strip_tags(form_error('order_quantity')),'description'=>strip_tags(form_error('description')),'delivery_date'=>strip_tags(form_error('delivery_date')),'generate_po'=>strip_tags(form_error('generate_po')),'po_status'=>strip_tags(form_error('po_status')),'remark'=>strip_tags(form_error('remark')));
             }else{
 
                     $po_id =  trim($this->input->post('po_id'));
@@ -2135,6 +2136,7 @@ class Admin extends BaseController
                             'currency' => trim($this->input->post('currency')),
                             'delivery_date' =>    trim($this->input->post('delivery_date')),
                             'generate_po' =>    trim($this->input->post('generate_po')),
+                            'po_status' => trim($this->input->post('po_status')),
                             'remark' =>    trim($this->input->post('remark')),
                         );
 
@@ -2163,6 +2165,7 @@ class Admin extends BaseController
                             'currency' => trim($this->input->post('currency')),
                             'delivery_date' =>    trim($this->input->post('delivery_date')),
                             'generate_po' =>    trim($this->input->post('generate_po')),
+                            'po_status' => trim($this->input->post('po_status')),
                             'remark' =>    trim($this->input->post('remark')),
                         );
 
@@ -2407,6 +2410,7 @@ class Admin extends BaseController
                             'pre_currency' =>trim($this->input->post('currency')),
                             'pre_delivery_date' =>trim($this->input->post('delivery_date')),
                             'pre_generate_po' =>trim($this->input->post('generate_po')),
+                            'pre_po_status' =>trim($this->input->post('po_status')),
                             'pre_remark' =>trim($this->input->post('remark')),
                         );
                      }else{
@@ -2426,6 +2430,7 @@ class Admin extends BaseController
                                 'pre_currency' =>trim($this->input->post('currency')),
                                 'pre_delivery_date' =>trim($this->input->post('delivery_date')),
                                 'pre_generate_po' =>trim($this->input->post('generate_po')),
+                                'pre_po_status' =>trim($this->input->post('po_status')),
                                 'pre_remark' =>trim($this->input->post('remark')),
                             );
 

@@ -1584,13 +1584,15 @@
 
 			   var buyer_po_item_id =   $('#buyer_po_item_id').val();
 			   var generate_po =   $('#generate_po').val();
+			   var po_status =   $('#po_status').val();
+			   
 			   
 			 
 			$.ajax({
 				url : "<?php echo base_url();?>addbuyeritem",
 				type: "POST",
 				 //data : formData,
-				 data :{part_number:part_number,description:description,qty:qty,rate:rate,value:value,buyer_po_part_delivery_date:buyer_po_part_delivery_date,buyer_po_number:buyer_po_number,date:date,buyer_po_date:buyer_po_date,buyer_name:buyer_name,currency:currency,delivery_date:delivery_date,remark:remark,unit:unit,po_id:po_id,buyer_po_item_id:buyer_po_item_id,generate_po:generate_po},
+				 data :{part_number:part_number,description:description,qty:qty,rate:rate,value:value,buyer_po_part_delivery_date:buyer_po_part_delivery_date,buyer_po_number:buyer_po_number,date:date,buyer_po_date:buyer_po_date,buyer_name:buyer_name,currency:currency,delivery_date:delivery_date,remark:remark,unit:unit,po_id:po_id,buyer_po_item_id:buyer_po_item_id,generate_po:generate_po,po_status:po_status},
 				// method: "POST",
                 // data :{package_id:package_id},
                 cache:false,
