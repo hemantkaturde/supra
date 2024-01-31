@@ -1142,6 +1142,8 @@ class Admin_model extends CI_Model
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id  = '.TBL_SUPPLIER_PO_MASTER.'.buyer_name');
         $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id  = '.TBL_SUPPLIER_PO_MASTER.'.supplier_name');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_SUPPLIER_PO_MASTER.'.vendor_name');
+        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id  = '.TBL_SUPPLIER_PO_MASTER.'.buyer_po_number');
+
         if($params['search']['value'] != "") 
         {
             $this->db->where("(".TBL_SUPPLIER_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
@@ -1163,7 +1165,7 @@ class Admin_model extends CI_Model
     
     public function getSupplierpodata($params){
 
-        $this->db->select('*,'.TBL_SUPPLIER.'.supplier_name as sup_name,'.TBL_BUYER_PO_MASTER.'.buyer_po_number as bypo');
+        $this->db->select('*,'.TBL_SUPPLIER.'.supplier_name as sup_name,'.TBL_BUYER_PO_MASTER.'.buyer_po_number as bypo,'.TBL_SUPPLIER_PO_MASTER.'.id as supplierpoid');
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id  = '.TBL_SUPPLIER_PO_MASTER.'.buyer_name');
         $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id  = '.TBL_SUPPLIER_PO_MASTER.'.supplier_name');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_SUPPLIER_PO_MASTER.'.vendor_name');
@@ -1202,10 +1204,10 @@ class Admin_model extends CI_Model
                 $data[$counter]['quatation_date'] = $value['quatation_date'];
                 $data[$counter]['action'] = '';
                // $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewSupplierpo/".$value['id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editSupplierpo/".$value['id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>  &nbsp";
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downlaodsupplierpo/".$value['id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editSupplierpo/".$value['supplierpoid']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>  &nbsp";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downlaodsupplierpo/".$value['supplierpoid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
 
-                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['id']."' class='fa fa-trash-o deleteSupplierpo' aria-hidden='true'></i>"; 
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['supplierpoid']."' class='fa fa-trash-o deleteSupplierpo' aria-hidden='true'></i>"; 
                 $counter++; 
             }
         }
