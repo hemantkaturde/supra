@@ -33,6 +33,7 @@
                                         <th>Date</th>
                                         <th>Supplier Name</th>
                                         <th>Buyer Name</th>
+                                        <th>Buyer PO Number</th>
                                         <th>Vendor Name</th>
                                         <th>Quotation Ref Number</th>
                                         <th>Quotation Date</th>

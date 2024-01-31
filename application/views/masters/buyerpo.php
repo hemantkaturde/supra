@@ -35,6 +35,8 @@
                                         <th>PO Date</th>
                                         <th>Buyer Name</th>
                                         <th>Currency</th>
+                                        <th>Generate PO</th>
+                                        <th>PO Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>

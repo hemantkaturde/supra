@@ -1013,6 +1013,8 @@ class Admin_model extends CI_Model
                 $data[$counter]['buyer_po_date'] = $value['buyer_po_date'];
                 $data[$counter]['buyer_name'] = $value['buyer_name'];
                 $data[$counter]['currency'] = $value['currency'];
+                $data[$counter]['generate_po'] = $value['generate_po'];
+                $data[$counter]['po_status'] = $value['po_status'];
                 $data[$counter]['action'] = '';
                 //$data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewBuyerpo/".$value['id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>    &nbsp ";
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editBuyerpo/".$value['id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>    &nbsp";
@@ -1147,6 +1149,8 @@ class Admin_model extends CI_Model
             $this->db->or_where(TBL_SUPPLIER.".supplier_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_SUPPLIER_PO_MASTER.".quatation_date LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_SUPPLIER_PO_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_PO_MASTER.".buyer_po_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_SUPPLIER_PO_MASTER.".quatation_ref_no LIKE '%".$params['search']['value']."%')");
         }
@@ -1159,10 +1163,11 @@ class Admin_model extends CI_Model
     
     public function getSupplierpodata($params){
 
-        $this->db->select('*,'.TBL_SUPPLIER.'.supplier_name as sup_name');
+        $this->db->select('*,'.TBL_SUPPLIER.'.supplier_name as sup_name,'.TBL_BUYER_PO_MASTER.'.buyer_po_number as bypo');
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id  = '.TBL_SUPPLIER_PO_MASTER.'.buyer_name');
         $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id  = '.TBL_SUPPLIER_PO_MASTER.'.supplier_name');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_SUPPLIER_PO_MASTER.'.vendor_name');
+        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id  = '.TBL_SUPPLIER_PO_MASTER.'.buyer_po_number');
         if($params['search']['value'] != "") 
         {
             $this->db->where("(".TBL_SUPPLIER_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
@@ -1170,6 +1175,8 @@ class Admin_model extends CI_Model
             $this->db->or_where(TBL_SUPPLIER.".supplier_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_SUPPLIER_PO_MASTER.".quatation_date LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_SUPPLIER_PO_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_PO_MASTER.".buyer_po_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_SUPPLIER_PO_MASTER.".quatation_ref_no LIKE '%".$params['search']['value']."%')");
         }
@@ -1189,6 +1196,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['date'] = $value['date'];
                 $data[$counter]['sup_name'] = $value['sup_name'];
                 $data[$counter]['buyer_name'] = $value['buyer_name'];
+                $data[$counter]['buyer_po'] = $value['sales_order_number'].'-'.$value['bypo'];
                 $data[$counter]['vendor_name'] = $value['vendor_name'];
                 $data[$counter]['quatation_ref_no'] = $value['quatation_ref_no'];
                 $data[$counter]['quatation_date'] = $value['quatation_date'];
