@@ -1435,9 +1435,9 @@
 	                 { "width": "10%", "targets": 3 },
 					 { "width": "15%", "targets": 4 },
 	                 { "width": "10%", "targets": 5 },
-					 { "width": "10%", "targets": 6 },
-					 { "width": "10%", "targets": 7 },
-					 { "width": "15%", "targets": 8 },
+					 { "width": "8%", "targets": 6 },
+					 { "width": "8%", "targets": 7 },
+					 { "width": "20%", "targets": 8 },
 					//  { "width": "15%", "targets": 7 },
 					
 	            ],
