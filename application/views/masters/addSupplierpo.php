@@ -333,20 +333,36 @@
                                                         <div class="loader_ajax" style="display:none;">
                                                             <div class="loader_ajax_inner"><img src="<?php echo ICONPATH;?>/preloader_ajax.gif"></div>
                                                         </div>
+                                                    <div class="form-group row" id="part_number_old">
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">Part Number <span class="required">*</span> (<small>Row Material Goods Master</small>)</label>
+                                                            <div class="col-sm-9">
+                                                                <select class="form-control" name="part_number" id="part_number">
+                                                                    <option st-id="" value="">Select Part Name</option>
+                                                                    <!-- <?php foreach ($rowMaterialList as $key => $value) {?>        
+                                                                        <option value="<?php echo $value['raw_id']; ?>"><?php echo $value['part_number']; ?></option>
+                                                                    <?php } ?> -->
+                                                                </select>
+                                                                <p class="error part_number_error"></p>
 
-                                                    <div class="form-group row">
+                                                            </div>
+                                                        </div>
+                                                        </div>
+
+
+                                                    <div class="form-group row" id="part_number_new">
                                                         <label class="col-sm-3 col-form-label">Part Number <span class="required">*</span> (<small>Row Material Goods Master</small>)</label>
                                                         <div class="col-sm-9">
-                                                            <select class="form-control" name="part_number" id="part_number">
+                                                            <select class="form-control" name="part_number_1" id="part_number_1" disabled>
                                                                 <option st-id="" value="">Select Part Name</option>
-                                                                <!-- <?php foreach ($rowMaterialList as $key => $value) {?>        
+                                                                <?php foreach ($rowMaterialList as $key => $value) {?>        
                                                                     <option value="<?php echo $value['raw_id']; ?>"><?php echo $value['part_number']; ?></option>
-                                                                <?php } ?> -->
+                                                                <?php } ?>
                                                             </select>
+                                                            <input type="hidden" class="form-control"  id="part_number_1_edit" name="part_number_1_edit" required readonly>
                                                             <p class="error part_number_error"></p>
-
                                                         </div>
-                                                    </div>
+                                                     </div>
 
                                                     <div class="form-group row">
                                                         <label class="col-sm-3 col-form-label">Part Name <span class="required">*</span></label>
