@@ -159,9 +159,11 @@
                                                 <label for="buyer_name">Buyer Name <span class="required">*</span></label>
                                                 <select class="form-control" name="buyer_name" id="buyer_name">
                                                     <option st-id="" value="">Select Buyer Name</option>
-                                                    <?php foreach ($buyerList as $key => $value) {?>
+                                                    <?php foreach ($buyerList as $key => $value) {
+                                                        if($value['po_status']=='open'){
+                                                        ?>
                                                     <option value="<?php echo $value['buyer_id']; ?>" <?php if($value['buyer_id']==$fetchALLpreVendoritemList[0]['pre_buyer_name']){ echo 'selected';} ?> ><?php echo $value['buyer_name']; ?></option>
-                                                    <?php } ?>
+                                                    <?php } } ?>
                                                 </select>
                                             <p class="error buyer_name_error"></p>
                                         </div>
