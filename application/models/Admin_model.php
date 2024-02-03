@@ -1943,6 +1943,8 @@ class Admin_model extends CI_Model
             $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
             $this->db->where(TBL_FINISHED_GOODS.'.status',1);
             //$this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
+            $this->db->where(TBL_FINISHED_GOODS.'.part_number NOT IN (SELECT tbl_finished_goods.part_number FROM tbl_vendorpo_item join tbl_finished_goods on tbl_vendorpo_item.part_number_id=tbl_finished_goods.fin_id where tbl_vendorpo_item.pre_buyer_po_number='.$supplier_po_number.')', NULL, FALSE);
+
             $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id',$supplier_po_number);
             $query = $this->db->get(TBL_FINISHED_GOODS);
             $data = $query->result_array();
