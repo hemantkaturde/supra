@@ -2852,7 +2852,14 @@
 			e.preventDefault();
 			$(".loader_ajax").show();
 			   var formData = new FormData($("#addvendoritemform")[0]);
-               var part_number =   $('#part_number').val();
+
+			   if($('#part_number').val()){
+				   var part_number =  $('#part_number').val() ;
+			   }else{
+				   var part_number =   $('#part_number_1_edit').val();
+			   }
+
+               //var part_number =   $('#part_number').val();
 			   var description =   $('#description').val();
 			   var qty =   $('#qty').val();
 			   var rate =   $('#rate').val();

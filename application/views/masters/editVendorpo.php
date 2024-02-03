@@ -212,7 +212,7 @@
 
                                 <div class="col-md-6">
                                 <div class="container">
-                                        <button type="button" class="btn btn-success btn-xl" data-toggle="modal" data-target="#addNewModal">Add New Items</button><br/><br/>
+                                        <button type="button" class="btn btn-success btn-xl createnewitem" data-toggle="modal" data-target="#addNewModal">Add New Items</button><br/><br/>
                                             <table class="table table-bordered" style="width: 70% !important; max-width: 100%;margin-bottom: 20px;">
                                                 <thead style="background-color:#3c8dbc;color:#fff">
                                                     <tr>
@@ -282,7 +282,7 @@
                                                         <div class="loader_ajax" style="display:none;">
                                                             <div class="loader_ajax_inner"><img src="<?php echo ICONPATH;?>/preloader_ajax.gif"></div>
                                                         </div>
-                                                    <div class="form-group row">
+                                                    <div class="form-group row" id="part_number_old">
                                                         <label class="col-sm-3 col-form-label">Part Number <span class="required">*</span> (<small>Finished Goods Master</small>)</label>
                                                         <div class="col-sm-9">
                                                             <select class="form-control" name="part_number" id="part_number">
@@ -295,6 +295,23 @@
 
                                                         </div>
                                                     </div>
+
+
+                                                    
+                                                    <div class="form-group row" id="part_number_new">
+                                                            <label class="col-sm-3 col-form-label">Part Number <span class="required">*</span> (<small>Finished Goods Master</small>)</label>
+                                                            <div class="col-sm-9">
+                                                                <select class="form-control" name="part_number_1" id="part_number_1" readonly>
+                                                                    <option st-id="" value="">Select Part Number</option>
+                                                                    <?php foreach ($finishgoodList as $key => $value) {?>        
+                                                                        <option value="<?php echo $value['fin_id']; ?>"><?php echo $value['part_number']; ?></option>
+                                                                    <?php } ?>
+                                                                </select>
+                                                                <input type="hidden" class="form-control"  id="part_number_1_edit" name="part_number_1_edit" required readonly>
+                                                                <p class="error part_number_error"></p>
+
+                                                            </div>
+                                                        </div>
 
                                                     <div class="form-group row">
                                                         <label class="col-sm-3 col-form-label">Part Name <span class="required">*</span></label>
