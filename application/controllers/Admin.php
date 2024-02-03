@@ -2934,7 +2934,7 @@ class Admin extends BaseController
     public function getfinishedgoodsPartnumberByidvendor(){
 
             if($this->input->post('part_number')) {
-                $getPartNameBypartid = $this->admin_model->getfinishedgoodsPartnumberByid($this->input->post('part_number'),$this->input->post('flag'));
+                $getPartNameBypartid = $this->admin_model->getfinishedgoodsPartnumberByid($this->input->post('part_number'),$this->input->post('flag'),$this->input->post('po_number'));
 
                 if($getPartNameBypartid){
                     $content = $getPartNameBypartid[0];
