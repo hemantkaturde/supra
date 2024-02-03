@@ -3482,6 +3482,10 @@
 			e.preventDefault();
 			var elemF = $(this);
 			var item_id = elemF.attr('data-id');
+
+			$("#part_number_old").hide();
+			$("#part_number_new").show();
+
 			$.ajax({
 				url : "<?php echo base_url();?>getVendoritemdataforitemedit",
 				type: "POST",
@@ -3492,6 +3496,8 @@
 						$('#addNewModal').modal('show'); 
 						$('#vendor_po_item_id').val(fetchResponse.vendor_po_item_id); 
 						$('#part_number').val(fetchResponse.fin_id);  
+						$('#part_number_1').val(fetchResponse.fin_id);  
+						$('#part_number_1_edit').val(fetchResponse.fin_id);  
 						$('#description').val(fetchResponse.description);  
 						// $('#diameter').val(fetchResponse.diameter);  
 						// $('#slitting_size').val(fetchResponse.sitting_size);  
@@ -3520,6 +3526,11 @@
 			return false;
 		});
 
+
+		$(document).on('click','.createnewitem',function(e){  
+			$("#part_number_old").show();
+			$("#part_number_new").hide();
+		});
 
 	
     </script>

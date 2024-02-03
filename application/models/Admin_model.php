@@ -1641,7 +1641,6 @@ class Admin_model extends CI_Model
 
 
         if($flag=='Supplier'){
-
             // $this->db->select('*,'.TBL_RAWMATERIAL.'.net_weight as supplier_goods_net_weight,'.TBL_RAWMATERIAL.'.sac as supplier_goods_sac,'.TBL_RAWMATERIAL.'.type_of_raw_material as name,'.TBL_RAWMATERIAL.'.HSN_code as hsn_code,'.TBL_RAWMATERIAL.'.gross_weight as groass_weight,'.TBL_RAWMATERIAL.'.net_weight as supplier_goods_net_weight');
             // // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
             // $this->db->join(TBL_SUPPLIER_PO_MASTER_ITEM, TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id = '.TBL_RAWMATERIAL.'.raw_id');
@@ -1656,7 +1655,7 @@ class Admin_model extends CI_Model
             $this->db->select('*,'.TBL_FINISHED_GOODS.'.net_weight as supplier_goods_net_weight,'.TBL_FINISHED_GOODS.'.sac as supplier_goods_sac');
             $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
             $this->db->join(TBL_SUPPLIER_PO_MASTER_ITEM, TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id = '.TBL_RAWMATERIAL.'.raw_id');
-            $this->db->where(TBL_FINISHED_GOODS.'.status',1);
+            //$this->db->where(TBL_FINISHED_GOODS.'.status',1);
             $this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
             //$this->db->where(TBL_RAWMATERIAL.'.raw_id',$part_number);
             $query = $this->db->get(TBL_FINISHED_GOODS);
