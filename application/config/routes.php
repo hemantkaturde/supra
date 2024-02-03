@@ -391,10 +391,10 @@ $route['getSuppliergoodsreworkrejectionvendorreworkrejection'] = "admin/getSuppl
 $route['getVendoritemonlyforreworkrejection'] = "admin/getVendoritemonlyforreworkrejection";
 $route['downlaodjobworkchllan/(:any)'] = "admin/downlaodjobworkchllan/$1";
 $route['getpreviousshortexcess'] = "admin/getpreviousshortexcess";
-
-
 $route['buyerpodetailsreport'] = "admin/buyerpodetailsreport";
 
+
+$route['fetchbuyerpodetailsreport'] = "admin/fetchbuyerpodetailsreport";
 
 
 

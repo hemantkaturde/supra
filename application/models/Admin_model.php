@@ -9425,6 +9425,18 @@ class Admin_model extends CI_Model
     }
 
 
+    public function fetchbuyerpodetailsreportCount(){
+
+
+    }
+
+
+    public function fetchbuyerpodetailsreportData(){
+
+        
+    }
+
+
   }
 
   

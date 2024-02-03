@@ -10455,4 +10455,30 @@ public function buyerpodetailsreport(){
 }
 
 
+public function fetchbuyerpodetailsreport(){
+    $params = $_REQUEST;
+    $totalRecords = $this->admin_model->fetchbuyerpodetailsreportCount($params); 
+    $queryRecords = $this->admin_model->fetchbuyerpodetailsreportData($params); 
+
+    $data = array();
+    foreach ($queryRecords as $key => $value)
+     {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+     }
+     
+     $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+     echo json_encode($json_data);
+}
+
+
 }

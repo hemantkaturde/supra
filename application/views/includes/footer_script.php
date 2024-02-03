@@ -17034,7 +17034,7 @@
 	            "bProcessing": true,
 	            "serverSide": true,
 	            "ajax":{
-                    url :"<?php echo base_url();?>fetchenstockrejectionform",
+                    url :"<?php echo base_url();?>fetchbuyerpodetailsreport",
                     type: "post",
 	            },
 	        });
