@@ -3276,7 +3276,10 @@ class Admin extends BaseController
 			if(count($getSupplierdetails) >= 1) {
                 $content = $content.'<option value="">Select Supplier PO Number</option>';
 				foreach($getSupplierdetails as $value) {
-					$content = $content.'<option value="'.$value["id"].'">'.$value["po_number"].'</option>';
+                    if($value['po_status']=='Open'){
+                        $content = $content.'<option value="'.$value["id"].'">'.$value["po_number"].'</option>';
+                    }
+					
 				}
 				echo $content;
 			} else {

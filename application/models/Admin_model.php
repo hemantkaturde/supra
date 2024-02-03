@@ -1871,8 +1871,10 @@ class Admin_model extends CI_Model
     public function getSupplierDeatilsbyid($supplier_name){
 
         $this->db->select('*');
-		$this->db->where('supplier_name', $supplier_name);
-        $this->db->where('status', 1);
+        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id  = '.TBL_SUPPLIER_PO_MASTER.'.buyer_po_number');
+		$this->db->where(TBL_BUYER_PO_MASTER.'.generate_po', 'YES');
+        $this->db->where(TBL_SUPPLIER_PO_MASTER.'.supplier_name', $supplier_name);
+        $this->db->where(TBL_SUPPLIER_PO_MASTER.'.status', 1);
 
         $query_result = $this->db->get(TBL_SUPPLIER_PO_MASTER)->result_array();
 		
@@ -4218,7 +4220,6 @@ class Admin_model extends CI_Model
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_SUPPLIER_PO_MASTER.'.buyer_name');
 		$this->db->where(TBL_SUPPLIER_PO_MASTER.'.id', $supplier_po_number);
         $this->db->where(TBL_SUPPLIER_PO_MASTER.'.status', 1);
-        $this->db->where(TBL_BUYER_PO_MASTER.'.generate_po','YES');
         $query_result = $this->db->get(TBL_SUPPLIER_PO_MASTER)->result_array();
 		foreach($query_result as $key => $value) {
 			$query_result[$key]['selected'] = '';
