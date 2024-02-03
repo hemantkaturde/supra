@@ -394,7 +394,7 @@
                                                         <div class="loader_ajax" style="display:none;">
                                                             <div class="loader_ajax_inner"><img src="<?php echo ICONPATH;?>/preloader_ajax.gif"></div>
                                                         </div>
-                                                    <div class="form-group row">
+                                                    <div class="form-group row" id="part_number_new">
                                                         <label class="col-sm-3 col-form-label">Part Number <span class="required">*</span> (<small>Finished Goods Master</small>)</label>
                                                         <div class="col-sm-9">
                                                             <select class="form-control" name="part_number" id="part_number">
@@ -408,7 +408,7 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="form-group row">
+                                                    <div class="form-group row" id="part_number_old">
                                                         <label class="col-sm-3 col-form-label">Part Name <span class="required">*</span></label>
                                                         <div class="col-sm-9">
                                                             <!-- <textarea type="text" class="form-control"  id="description"  name="description" required></textarea> -->
