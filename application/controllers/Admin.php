@@ -3737,8 +3737,6 @@ class Admin extends BaseController
     }
 
 
-    
-
     public function getVendorPonumberbySupplieridvendorbillofmaterial(){
         $vendor_name=$this->input->post('vendor_name');
         if($vendor_name) {
@@ -3756,11 +3754,6 @@ class Admin extends BaseController
 			echo 'failure';
 		}
     }
-
-
-
-    
-
 
 
     public function getBuyerNamebySupplierid(){
@@ -4262,7 +4255,6 @@ class Admin extends BaseController
 
     }
 
-    
 
     public function billofmaterial(){
 
@@ -10451,6 +10443,16 @@ public function getpreviousshortexcess(){
 
 }
 
+
+public function buyerpodetailsreport(){
+
+    $process = 'View Buyer PO Details Report';
+    $processFunction = 'Admin/editrejetionform';
+    $this->logrecord($process,$processFunction);
+    $this->global['pageTitle'] = 'View Buyer PO Details Report';
+    $data['buyerList']= $this->admin_model->fetchAllbuyerList();
+    $this->loadViews("masters/viewbuyerpodetailsreport", $this->global, $data, NULL);
+}
 
 
 }

@@ -393,10 +393,7 @@ $route['downlaodjobworkchllan/(:any)'] = "admin/downlaodjobworkchllan/$1";
 $route['getpreviousshortexcess'] = "admin/getpreviousshortexcess";
 
 
-
-
-
-
+$route['buyerpodetailsreport'] = "admin/buyerpodetailsreport";
 
 
 

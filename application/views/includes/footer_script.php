@@ -17002,3 +17002,43 @@
 
 	</script>
 <?php } ?>
+
+
+<?php if($pageTitle=='View Buyer PO Details Report'){ ?>
+	<script type="text/javascript"> 
+        $(document).ready(function() {
+			var dt = $('#view_buyer_PO_details_report').DataTable({
+	            "columnDefs": [ 
+	                 { className: "details-control", "targets": [ 0 ] },
+	                 { "width": "10%", "targets": 0 },
+	                 { "width": "10%", "targets": 1 },
+					 { "width": "10%", "targets": 2 },
+	                 { "width": "10%", "targets": 3 },
+					 { "width": "10%", "targets": 4 },
+					 { "width": "10%", "targets": 5 },
+					 { "width": "10%", "targets": 6 },
+					 { "width": "10%", "targets": 7 },
+					 { "width": "10%", "targets": 8 },
+					 { "width": "10%", "targets": 9 },
+					 { "width": "10%", "targets": 10 },
+					 { "width": "10%", "targets": 11 },
+	            ],
+	            responsive: true,
+	            "oLanguage": {
+	                "sEmptyTable": "<i>No Buyer PO Details Found.</i>",
+	            }, 
+	            "bSort" : false,
+	            "bFilter":true,
+	            "bLengthChange": true,
+	            "iDisplayLength": 10,   
+	            "bProcessing": true,
+	            "serverSide": true,
+	            "ajax":{
+                    url :"<?php echo base_url();?>fetchenstockrejectionform",
+                    type: "post",
+	            },
+	        });
+		 });
+
+	</script>
+<?php } ?>
