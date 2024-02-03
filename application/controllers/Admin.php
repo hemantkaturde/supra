@@ -3267,7 +3267,8 @@ class Admin extends BaseController
     }
 
 
-    public function getSupplierPonumberbySupplierid(){
+
+    public function getSupplierPonumberbySupplieridvendorponew(){
 
         $supplier_name=$this->input->post('supplier_name');
 
@@ -3279,7 +3280,29 @@ class Admin extends BaseController
                     if($value['po_status']=='Open'){
                         $content = $content.'<option value="'.$value["id"].'">'.$value["po_number"].'</option>';
                     }
-					
+				}
+				echo $content;
+			} else {
+				echo 'failure';
+			}
+		} else {
+			echo 'failure';
+		}
+
+    }
+
+
+
+    public function getSupplierPonumberbySupplierid(){
+
+        $supplier_name=$this->input->post('supplier_name');
+
+        if($supplier_name) {
+			$getSupplierdetails = $this->admin_model->getSupplierDeatilsbyid($supplier_name);
+			if(count($getSupplierdetails) >= 1) {
+                $content = $content.'<option value="">Select Supplier PO Number</option>';
+				foreach($getSupplierdetails as $value) {
+                        $content = $content.'<option value="'.$value["id"].'">'.$value["po_number"].'</option>';
 				}
 				echo $content;
 			} else {

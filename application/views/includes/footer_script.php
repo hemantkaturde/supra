@@ -3056,7 +3056,7 @@
 
 		    $('.supplier_po_number_div').css('display','block');
 			$.ajax({
-				url : "<?php echo ADMIN_PATH;?>getSupplierPonumberbySupplierid",
+				url : "<?php echo ADMIN_PATH;?>getSupplierPonumberbySupplieridvendorponew",
 				type: "POST",
 				data : {'supplier_name' : supplier_name},
 				success: function(data, textStatus, jqXHR)
