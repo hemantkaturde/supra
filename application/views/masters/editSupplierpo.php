@@ -205,7 +205,7 @@
                                             </table>
                                     </div>
 
-                                    <!-- <div class="container">
+                                     <div class="container">
                                          <div id="customers-list">
 
                                          </div>
