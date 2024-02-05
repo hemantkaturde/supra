@@ -10530,4 +10530,16 @@ public function fetchbuyerpodetailsreport($buyer_name,$part_number,$from_date,$t
 }
 
 
+public function calculatesumofallbuyerdetails(){
+
+    $vendor_po_number_stock_data = $this->admin_model->calculatesumofallbuyerdetails();
+    if(count($vendor_po_number_stock_data) >= 1) {
+        echo json_encode($vendor_po_number_stock_data[0]);
+    } else {
+        echo 'failure';
+    }
+
+}
+
+
 }

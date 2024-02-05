@@ -17153,33 +17153,44 @@
 
 
 			$.ajax({
-				url : "<?php echo ADMIN_PATH;?>getStockdatadependsonvendorpo",
+				url : "<?php echo ADMIN_PATH;?>calculatesumofallbuyerdetails",
 				type: "POST",
-				data : {'vendor_po_number' : vendor_po_number},
+				data : {'flag' : 'sum of all buyer details'},
 					success: function(data, textStatus, jqXHR)
 				    {
 								$(".loader_ajax").hide();
 								if(data == "failure")
 								{
-									$('#stock_id').val('');
-					             	$("#stock_date").val('');	
+									$('#total_order_qty').val('');
+					             	$("#total_export_qty").val('');	
+									$("#balenace_export_qty").val('');	
 								}
 								else
 								{
-									var get_stock_details = jQuery.parseJSON( data );
-									
-									$('#stock_id').val(get_stock_details.stock_id_number);
-					             	$("#stock_date").val(get_stock_details.stock_date);	
+									var calculate_valuecls = jQuery.parseJSON( data );
+
+									var total_order_qty =  calculate_valuecls.total_order_aty;
+									var total_export_qty =  calculate_valuecls.export_qty;
+
+									$('#total_order_qty').val(total_order_qty);
+					             	$("#total_export_qty").val(total_export_qty);	
+
+									var balence_export_qty = parseFloat(total_order_qty) - parseFloat(total_export_qty);
+									$("#balenace_export_qty").val(balence_export_qty);	
 								}
 					},
 					error: function (jqXHR, textStatus, errorThrown)
 						{
-							$('#stock_id').val('');
-					        $("#stock_date").val('');		
+							$('#total_order_qty').val('');
+					        $("#total_export_qty").val('');	
+							$("#balenace_export_qty").val('');			
 						}
-                    });
-			    return false;
+            });
 
-		};
+			//return false;
+
+		    };
+
+			
 	</script>
 <?php } ?>
