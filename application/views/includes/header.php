@@ -204,6 +204,10 @@
                         <li class="line_height <?php if($pageUrl=="currentorderstatus"){echo 'active';}?>"><a href="<?php echo base_url(); ?>currentorderstatus"><i class="fa fa-cubes"></i> Current Order Status</a></li>
                         <li class="line_height <?php if($pageUrl=="buyerpodetailsreport"){echo 'active';}?>"><a href="<?php echo base_url(); ?>buyerpodetailsreport"><i class="fa fa-cubes"></i> Buyer PO Details</a></li>
 
+
+                        <!-- <li class="line_height <?php if($pageUrl=="buyerpodetailsreport"){echo 'active';}?>"><a href="<?php echo base_url(); ?>buyerpodetailsreport"><i class="fa fa-cubes"></i> Analaysis and Corrective Action Report</a></li> -->
+
+
                       </ul>
                     </li>
 
