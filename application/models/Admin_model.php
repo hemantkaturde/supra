@@ -9484,8 +9484,8 @@ class Admin_model extends CI_Model
        
         $this->db->where(TBL_PACKING_INSTRACTION.'.status', 1);
         $this->db->order_by(TBL_PACKING_INSTRACTION.'.id','DESC');
+        $this->db->limit($params['length'],$params['start']);
         $query = $this->db->get(TBL_PACKING_INSTRACTION);
-
         $fetch_result = $query->result_array();
 
         $data = array();
