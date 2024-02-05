@@ -111,7 +111,7 @@
                                     <div class="col-xs-3 text-left" style="margin-top: 10px;">
                                         <div class="form-group">
                                                 <label for="part_number">Print / Export</label>
-                                                <p><input type="button" id="export" class="btn btn-primary" value="Export"/></p>
+                                                <p><input type="button" id="export_to_excel" class="btn btn-primary" value="Export"/></p>
                                         </div>
                                     </div>
                                    

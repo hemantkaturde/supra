@@ -17187,9 +17187,64 @@
 						}
             });
 
-			//return false;
+		};
 
-		    };
+
+			
+	    $(document).on('click','#export_to_excel',function(e){
+			e.preventDefault();
+			$(".loader_ajax").show();
+			if($("#buyer_name").val()){
+				var buyer_name = $("#buyer_name").val();
+			}else{
+				var buyer_name = 'NA';
+			}
+
+			if($("#part_number").val()){
+				var part_number = $("#part_number").val();
+			}else{
+				var part_number = 'NA';
+			}
+
+			if($("#from_date").val()){
+				var from_date = $("#from_date").val();
+			}else{
+				var from_date = 'NA';
+			}
+
+			if($("#to_date").val()){
+				var to_date = $("#to_date").val();
+			}else{
+				var to_date = 'NA';
+			}
+
+ 
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>admin/exportbuyerdetailsrecord/"+buyer_name+"/"+part_number+"/"+from_date+"/"+to_date,
+				type: "POST",
+				// data : {'hospitals' : hospitals, 'driver' : driver,'ride_start':ride_start,'ride_stop':ride_stop},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+				    {
+						$(".report_type_error").html("");
+				    	alert('No data fond');
+				    }
+				    else
+				    {
+						$(".report_type_error").html("");
+				    	window.location.href = "<?php echo ADMIN_PATH;?>admin/exportbuyerdetailsrecord/"+buyer_name+"/"+part_number+"/"+from_date+"/"+to_date;
+				    }
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   		alert('No data fond');
+					$(".loader_ajax").hide();
+			    }
+			});
+		   return false;
+	    });
 
 			
 	</script>

@@ -10542,4 +10542,73 @@ public function calculatesumofallbuyerdetails($buyer_name,$part_number,$from_dat
 }
 
 
+public function exportbuyerdetailsrecord($buyer_name,$part_number,$from_date,$to_date){
+
+    
+    // create file name
+    $fileName = 'Buyer Order & Exports Report -'.date('d-m-Y').'.xlsx';  
+    // load excel library
+    $empInfo = $this->admin_model->exportbuyerdetailsrecord($buyer_name,$part_number,$from_date,$to_date);
+
+    $objPHPExcel = new PHPExcel();
+    $objPHPExcel->setActiveSheetIndex(0);
+    // set Header
+    $objPHPExcel->getActiveSheet()->SetCellValue('A1', 'Buyer Name');
+    $objPHPExcel->getActiveSheet()->SetCellValue('B1', 'Buyer PO No');
+    $objPHPExcel->getActiveSheet()->SetCellValue('C1', 'Buyer PO Date');
+    $objPHPExcel->getActiveSheet()->SetCellValue('D1', 'Part Number'); 
+    $objPHPExcel->getActiveSheet()->SetCellValue('E1', 'Part Description');
+    $objPHPExcel->getActiveSheet()->SetCellValue('F1', 'Order Qty');   
+    $objPHPExcel->getActiveSheet()->SetCellValue('G1', 'Delivery Date');  
+    $objPHPExcel->getActiveSheet()->SetCellValue('H1', 'Export Invoice No');  
+    $objPHPExcel->getActiveSheet()->SetCellValue('I1', 'Export Qty');  
+    $objPHPExcel->getActiveSheet()->SetCellValue('J1', 'Export Invoice Date');  
+    $objPHPExcel->getActiveSheet()->SetCellValue('K1', 'Remark');
+
+
+    // set Row
+    $rowCount = 2;
+    foreach ($empInfo as $element) {
+        $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $element['buyer_name']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $element['sales_order_number']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $element['buyer_po_date']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['part_number']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['name']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['order_oty']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['buyer_po_part_delivery_date']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $element['buyer_invoice_number']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, $element['buyer_invoice_qty']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('J' . $rowCount, $element['buyer_invoice_date']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, $element['remark']);
+        $rowCount++;
+    }
+
+    foreach(range('A','K') as $columnID) {
+        $objPHPExcel->getActiveSheet()->getColumnDimension($columnID)->setAutoSize(true);
+    }
+    /*********************Autoresize column width depending upon contents END***********************/
+    
+    $objPHPExcel->getActiveSheet()->getStyle('A1:K1')->getFont()->setBold(true); //Make heading font bold
+    
+    /*********************Add color to heading START**********************/
+    $objPHPExcel->getActiveSheet()
+                ->getStyle('A1:K1')
+                ->getFill()
+                ->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
+                ->getStartColor()
+                ->setARGB('99ff99');
+
+
+    $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
+      
+    header('Content-Type: application/vnd.ms-excel');
+    header("Content-Disposition: attachment;Filename=$fileName.xls");
+    header('Cache-Control: max-age=0');
+    $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+    $objWriter->save('php://output');
+
+
+    
+}
+
 }
