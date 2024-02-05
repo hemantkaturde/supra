@@ -399,7 +399,7 @@ $route['getSupplierPonumberbySupplieridvendorponew'] = "admin/getSupplierPonumbe
 
 
 $route['buyerpodetailsreport'] = "admin/buyerpodetailsreport";
-$route['fetchbuyerpodetailsreport'] = "admin/fetchbuyerpodetailsreport";
+//$route['fetchbuyerpodetailsreport/(:num)/(:num)/(:num)/(:num)'] = "admin/fetchbuyerpodetailsreport/$1/$2/$3/$4";
 
 
 

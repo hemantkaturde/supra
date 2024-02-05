@@ -10504,10 +10504,10 @@ public function buyerpodetailsreport(){
 }
 
 
-public function fetchbuyerpodetailsreport(){
+public function fetchbuyerpodetailsreport($buyer_name,$part_number,$from_date,$to_date){
     $params = $_REQUEST;
-    $totalRecords = $this->admin_model->fetchbuyerpodetailsreportCount($params); 
-    $queryRecords = $this->admin_model->fetchbuyerpodetailsreportData($params); 
+    $totalRecords = $this->admin_model->fetchbuyerpodetailsreportCount($params,$buyer_name,$part_number,$from_date,$to_date); 
+    $queryRecords = $this->admin_model->fetchbuyerpodetailsreportData($params,$buyer_name,$part_number,$from_date,$to_date); 
 
     $data = array();
     foreach ($queryRecords as $key => $value)

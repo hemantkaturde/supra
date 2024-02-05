@@ -17025,6 +17025,101 @@
 <?php if($pageTitle=='View Buyer PO Details Report'){ ?>
 	<script type="text/javascript"> 
         $(document).ready(function() {
+			$("#view_buyer_PO_details_report").dataTable().fnDestroy();
+			if($("#buyer_name").val()){
+				var buyer_name = $("#buyer_name").val();
+			}else{
+				var buyer_name = 'NA';
+			}
+
+			if($("#part_number").val()){
+				var part_number = $("#part_number").val();
+			}else{
+				var part_number = 'NA';
+			}
+
+			if($("#from_date").val()){
+				var from_date = $("#from_date").val();
+			}else{
+				var from_date = 'NA';
+			}
+
+			if($("#to_date").val()){
+				var to_date = $("#to_date").val();
+			}else{
+				var to_date = 'NA';
+			}
+
+			getAlldatausingfilter(buyer_name,part_number,from_date,to_date);
+
+		});
+
+		$(document).on('change','#buyer_name',function(e){
+			e.preventDefault();
+			$("#view_buyer_PO_details_report").dataTable().fnDestroy();
+			if($("#buyer_name").val()){
+				var buyer_name = $("#buyer_name").val();
+			}else{
+				var buyer_name = 'NA';
+			}
+
+			if($("#part_number").val()){
+				var part_number = $("#part_number").val();
+			}else{
+				var part_number = 'NA';
+			}
+
+			if($("#from_date").val()){
+				var from_date = $("#from_date").val();
+			}else{
+				var from_date = 'NA';
+			}
+
+			if($("#to_date").val()){
+				var to_date = $("#to_date").val();
+			}else{
+				var to_date = 'NA';
+			}
+
+			getAlldatausingfilter(buyer_name,part_number,from_date,to_date);
+
+			
+		});
+
+		$(document).on('change','#part_number',function(e){
+			e.preventDefault();
+			$("#view_buyer_PO_details_report").dataTable().fnDestroy();
+			if($("#buyer_name").val()){
+				var buyer_name = $("#buyer_name").val();
+			}else{
+				var buyer_name = 'NA';
+			}
+
+			if($("#part_number").val()){
+				var part_number = $("#part_number").val();
+			}else{
+				var part_number = 'NA';
+			}
+
+			if($("#from_date").val()){
+				var from_date = $("#from_date").val();
+			}else{
+				var from_date = 'NA';
+			}
+
+			if($("#to_date").val()){
+				var to_date = $("#to_date").val();
+			}else{
+				var to_date = 'NA';
+			}
+
+			getAlldatausingfilter(buyer_name,part_number,from_date,to_date);
+
+			
+		});
+
+
+		function getAlldatausingfilter(buyer_name,part_number,from_date,to_date){
 			var dt = $('#view_buyer_PO_details_report').DataTable({
 	            "columnDefs": [ 
 	                 { className: "details-control", "targets": [ 0 ] },
@@ -17051,16 +17146,40 @@
 	            "bProcessing": true,
 	            "serverSide": true,
 	            "ajax":{
-                    url :"<?php echo base_url();?>fetchbuyerpodetailsreport",
+                    url :"<?php echo base_url();?>admin/fetchbuyerpodetailsreport/"+buyer_name+"/"+part_number+"/"+from_date+"/"+to_date,
                     type: "post",
 	            },
 	        });
-		});
 
 
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getStockdatadependsonvendorpo",
+				type: "POST",
+				data : {'vendor_po_number' : vendor_po_number},
+					success: function(data, textStatus, jqXHR)
+				    {
+								$(".loader_ajax").hide();
+								if(data == "failure")
+								{
+									$('#stock_id').val('');
+					             	$("#stock_date").val('');	
+								}
+								else
+								{
+									var get_stock_details = jQuery.parseJSON( data );
+									
+									$('#stock_id').val(get_stock_details.stock_id_number);
+					             	$("#stock_date").val(get_stock_details.stock_date);	
+								}
+					},
+					error: function (jqXHR, textStatus, errorThrown)
+						{
+							$('#stock_id').val('');
+					        $("#stock_date").val('');		
+						}
+                    });
+			    return false;
 
-
-
-
+		};
 	</script>
 <?php } ?>
