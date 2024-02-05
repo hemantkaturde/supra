@@ -9498,7 +9498,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['sales_order_number'] =$value['sales_order_number'];
                 $data[$counter]['buyer_po_date'] =$value['buyer_po_date'];
                 $data[$counter]['part_number'] =$value['part_number'];
-                $data[$counter]['type_of_raw_material'] =$value['type_of_raw_material'];
+                $data[$counter]['type_of_raw_material'] =$value['name'];
                 $data[$counter]['order_qty'] ='';
                 $data[$counter]['delivery_date'] =$value['delivery_date'];
                 $data[$counter]['export_invoice_number'] =$value['buyer_invoice_number'];
