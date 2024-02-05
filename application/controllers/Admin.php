@@ -2702,9 +2702,9 @@ class Admin extends BaseController
 			if(count($getAllponumber) >= 1) {
                 $content = $content.'<option value="">Select Buyer Number</option>';
 				foreach($getAllponumber as $value) {
-                    if($value['po_status']=='Open'){
+                    
 					  $content = $content.'<option value="'.$value["id"].'">'.$value["sales_order_number"].' - '.$value["buyer_po_number"].'</option>';
-                    }
+                    
 				}
 				echo $content;
 			} else {
