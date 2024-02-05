@@ -10477,6 +10477,7 @@ public function buyerpodetailsreport(){
     $this->logrecord($process,$processFunction);
     $this->global['pageTitle'] = 'View Buyer PO Details Report';
     $data['buyerList']= $this->admin_model->fetchAllbuyerList();
+    $data['itemList']= $this->admin_model->fetchALLFinishgoodList();
     $this->loadViews("masters/viewbuyerpodetailsreport", $this->global, $data, NULL);
 }
 

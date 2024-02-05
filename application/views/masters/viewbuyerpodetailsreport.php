@@ -36,9 +36,13 @@
             </div>
             <div class="col-xs-3 text-left" style="margin-top: 10px;">
                 <div class="form-group">
-                    <label for="date">Part Number</label>
-                        <input type="text" class="form-control datepicker"  id="date" name="date">
-                        <p class="error date_error"></p>
+                        <label for="part_number">Part Number</label>
+                        <select class="form-control" name="part_number" id="part_number">
+                            <option st-id="" value="">Select Part Number</option>
+                            <?php foreach ($itemList as $key => $value) {?>
+                                <option value="<?php echo $value['fin_id']; ?>"><?php echo $value['part_number']; ?></option>
+                            <?php } ?>
+                        </select>
                 </div>
             </div>
             <div class="col-xs-3 text-left" style="margin-top: 10px;">
