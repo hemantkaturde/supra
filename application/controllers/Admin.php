@@ -10530,9 +10530,9 @@ public function fetchbuyerpodetailsreport($buyer_name,$part_number,$from_date,$t
 }
 
 
-public function calculatesumofallbuyerdetails(){
+public function calculatesumofallbuyerdetails($buyer_name,$part_number,$from_date,$to_date){
 
-    $vendor_po_number_stock_data = $this->admin_model->calculatesumofallbuyerdetails();
+    $vendor_po_number_stock_data = $this->admin_model->calculatesumofallbuyerdetails($buyer_name,$part_number,$from_date,$to_date);
     if(count($vendor_po_number_stock_data) >= 1) {
         echo json_encode($vendor_po_number_stock_data[0]);
     } else {

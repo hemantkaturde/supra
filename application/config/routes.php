@@ -400,7 +400,7 @@ $route['getSupplierPonumberbySupplieridvendorponew'] = "admin/getSupplierPonumbe
 
 $route['buyerpodetailsreport'] = "admin/buyerpodetailsreport";
 //$route['fetchbuyerpodetailsreport/(:num)/(:num)/(:num)/(:num)'] = "admin/fetchbuyerpodetailsreport/$1/$2/$3/$4";
-$route['calculatesumofallbuyerdetails'] = "admin/calculatesumofallbuyerdetails";
+//$route['calculatesumofallbuyerdetails'] = "admin/calculatesumofallbuyerdetails";
 
 
 

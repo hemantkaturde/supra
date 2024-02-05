@@ -17153,7 +17153,7 @@
 
 
 			$.ajax({
-				url : "<?php echo ADMIN_PATH;?>calculatesumofallbuyerdetails",
+				url : "<?php echo ADMIN_PATH;?>admin/calculatesumofallbuyerdetails/"+buyer_name+"/"+part_number+"/"+from_date+"/"+to_date,
 				type: "POST",
 				data : {'flag' : 'sum of all buyer details'},
 					success: function(data, textStatus, jqXHR)
