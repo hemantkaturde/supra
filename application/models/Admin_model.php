@@ -9427,20 +9427,87 @@ class Admin_model extends CI_Model
     }
 
 
-    public function fetchbuyerpodetailsreportCount(){
+    public function fetchbuyerpodetailsreportCount($params){
+        $this->db->select('*');
+        $this->db->join(TBL_PACKING_INSTRACTION_DETAILS, TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id = '.TBL_PACKING_INSTRACTION.'.id');
+        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_PACKING_INSTRACTION.'.buyer_po_number');
+        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_PACKING_INSTRACTION.'.buyer_name');
 
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_PO_MASTER.".buyer_po_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_RAWMATERIAL.".part_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_PO_MASTER.".delivery_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_qty LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_PACKING_INSTRACTION_DETAILS.".remark LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_RAWMATERIAL.".type_of_raw_material LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_PACKING_INSTRACTION.'.status', 1);
+        $this->db->order_by(TBL_PACKING_INSTRACTION.'.id','DESC');
+        $query = $this->db->get(TBL_PACKING_INSTRACTION);
+        $rowcount = $query->num_rows();
+        return $rowcount;
 
     }
 
 
-    public function fetchbuyerpodetailsreportData(){
+    public function fetchbuyerpodetailsreportData($params){
 
-        
+        $this->db->select(TBL_BUYER_MASTER.'.buyer_name,'.TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_BUYER_PO_MASTER.'.buyer_po_date,'.TBL_RAWMATERIAL.'.part_number,'.TBL_RAWMATERIAL.'.type_of_raw_material,'.TBL_BUYER_PO_MASTER.'.delivery_date,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_qty,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_number,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_date,'.TBL_PACKING_INSTRACTION_DETAILS.'.remark');
+        $this->db->join(TBL_PACKING_INSTRACTION_DETAILS, TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id = '.TBL_PACKING_INSTRACTION.'.id');
+        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_PACKING_INSTRACTION.'.buyer_po_number');
+        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_PACKING_INSTRACTION.'.buyer_name');
+        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_PACKING_INSTRACTION_DETAILS.'.part_number');
+       
+       
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_PO_MASTER.".buyer_po_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_RAWMATERIAL.".part_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_PO_MASTER.".delivery_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_qty LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_PACKING_INSTRACTION_DETAILS.".remark LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_RAWMATERIAL.".type_of_raw_material LIKE '%".$params['search']['value']."%')");
+        }
+       
+       
+        $this->db->where(TBL_PACKING_INSTRACTION.'.status', 1);
+        $this->db->order_by(TBL_PACKING_INSTRACTION.'.id','DESC');
+        $query = $this->db->get(TBL_PACKING_INSTRACTION);
+
+        $fetch_result = $query->result_array();
+
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['buyer_name'] =$value['buyer_name'];
+                $data[$counter]['sales_order_number'] =$value['sales_order_number'];
+                $data[$counter]['buyer_po_date'] =$value['buyer_po_date'];
+                $data[$counter]['part_number'] =$value['part_number'];
+                $data[$counter]['type_of_raw_material'] =$value['type_of_raw_material'];
+                $data[$counter]['order_qty'] ='';
+                $data[$counter]['delivery_date'] =$value['delivery_date'];
+                $data[$counter]['export_invoice_number'] =$value['buyer_invoice_number'];
+                $data[$counter]['buyer_invoice_qty'] =$value['buyer_invoice_qty'];
+                $data[$counter]['buyer_invoice_date'] =$value['buyer_invoice_date'];
+                $data[$counter]['remark'] =$value['remark'];
+                $counter++; 
+            }
+        }
+        return $data;
     }
 
-
-  }
-
-  
+}
 
 ?>

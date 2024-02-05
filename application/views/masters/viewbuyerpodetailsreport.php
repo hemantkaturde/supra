@@ -80,12 +80,43 @@
                                         <th>Export Qty</th>
                                         <th>Export Invoice Date</th>
                                         <th>Remarks</th>
-                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 </tbody>
                             </table>
+
+
+                            <div>
+                                <div class="row" style="background: #fff;margin-right: 1px;margin-left: 1px;margin-bottom: 12px;margin-top: 10px;">
+                                    <div class="col-xs-3 text-left" style="margin-top: 10px;">
+                                        <div class="form-group">
+                                            <label for="total_order_qty">Total Order Qty</label>
+                                            <input type="text" class="form-control"  id="total_order_qty" name="total_order_qty"  readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-3 text-left" style="margin-top: 10px;">
+                                        <div class="form-group">
+                                                <label for="total_export_qty">Total Export Qty</label>
+                                                <input type="text" class="form-control"  id="total_export_qty" name="total_export_qty"  readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-3 text-left" style="margin-top: 10px;">
+                                        <div class="form-group">
+                                                <label for="balenace_export_qty">Balenace Export Qty</label>
+                                                <input type="text" class="form-control"  id="balenace_export_qty" name="balenace_export_qty"  readonly>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-3 text-left" style="margin-top: 10px;">
+                                        <div class="form-group">
+                                                <label for="part_number">Print / Export</label>
+                                                <p><input type="button" id="export" class="btn btn-primary" value="Export"/></p>
+                                        </div>
+                                    </div>
+                                   
+                                </div>              
+                            </div>
                         </div>
                     </div>
                     <!-- /.box-body -->
