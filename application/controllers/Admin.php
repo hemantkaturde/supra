@@ -10605,10 +10605,26 @@ public function exportbuyerdetailsrecord($buyer_name,$part_number,$from_date,$to
     header("Content-Disposition: attachment;Filename=$fileName.xls");
     header('Cache-Control: max-age=0');
     $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
-    $objWriter->save('php://output');
+    $objWriter->save('php://output');    
+}
 
+public function analaysisandcorrectiveactionreport(){
 
-    
+    $process = 'Analysis and Corrective Action Report';
+    $processFunction = 'Admin/enquiryform';
+    $this->logrecord($process,$processFunction);
+    $this->global['pageTitle'] = 'Analysis and Corrective Action Report';
+    $data['vendorList']= $this->admin_model->fetchALLvendorList();
+    $this->loadViews("masters/viewanalaysisandcorrectiveactionreport", $this->global, $data, NULL);  
+}
+
+public function addanalaysisandcorrectiveactionreport(){
+
+    $process = 'Analysis and Corrective Action Report';
+    $processFunction = 'Admin/enquiryform';
+    $this->logrecord($process,$processFunction);
+    $this->global['pageTitle'] = 'Add new Analysis and Corrective Action Report';
+    $this->loadViews("masters/addanalaysisandcorrectiveactionreport", $this->global, $data, NULL);  
 }
 
 }
