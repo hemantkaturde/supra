@@ -1891,7 +1891,7 @@ class Admin_model extends CI_Model
 
     public function getSupplierDeatilsbyid($supplier_name){
 
-        $this->db->select('*');
+        $this->db->select('*,'.TBL_SUPPLIER_PO_MASTER.'.id as supplier_id');
         $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id  = '.TBL_SUPPLIER_PO_MASTER.'.buyer_po_number');
 		$this->db->where(TBL_BUYER_PO_MASTER.'.generate_po', 'YES');
         $this->db->where(TBL_SUPPLIER_PO_MASTER.'.supplier_name', $supplier_name);
@@ -1934,6 +1934,7 @@ class Admin_model extends CI_Model
             // $data = $query->result_array();
             // return $data;
 
+           
 
             $this->db->select('*,'.TBL_RAWMATERIAL.'.raw_id as item_id');
             // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
@@ -1959,7 +1960,7 @@ class Admin_model extends CI_Model
             // $query = $this->db->get(TBL_FINISHED_GOODS);
             // $data = $query->result_array();
             // return $data;
-
+            
 
             $this->db->select('*,'.TBL_FINISHED_GOODS.'.fin_id as item_id');
             // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
@@ -4236,6 +4237,7 @@ class Admin_model extends CI_Model
 
     public function getBuyerDetailsBysupplierponumberforbuyer($supplier_po_number){
 
+   
         $this->db->select(TBL_BUYER_MASTER.'.*,'.TBL_BUYER_MASTER.'.buyer_name as buyer,'.TBL_SUPPLIER_PO_MASTER.'.*,'.TBL_BUYER_PO_MASTER.'.*');
         $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_SUPPLIER_PO_MASTER.'.buyer_po_number');
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_SUPPLIER_PO_MASTER.'.buyer_name');

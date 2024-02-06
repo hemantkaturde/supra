@@ -3064,7 +3064,7 @@
 					$(".loader_ajax").hide();
 					if(data == "failure")
 					{
-						$('.supplier_po_number_div').css('display','none');
+						$('.supplier_po_number_div').css('display','block');
 						$('#supplier_po_number').html('<option value="">Select Supplier PO Number</option>');
 					}
 					else

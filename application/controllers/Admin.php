@@ -3300,7 +3300,7 @@ class Admin extends BaseController
                 $content = $content.'<option value="">Select Supplier PO Number</option>';
 				foreach($getSupplierdetails as $value) {
                     if($value['po_status']=='Open'){
-                        $content = $content.'<option value="'.$value["id"].'">'.$value["po_number"].'</option>';
+                        $content = $content.'<option value="'.$value["supplier_id"].'">'.$value["po_number"].'</option>';
                     }
 				}
 				echo $content;
@@ -3324,7 +3324,7 @@ class Admin extends BaseController
 			if(count($getSupplierdetails) >= 1) {
                 $content = $content.'<option value="">Select Supplier PO Number</option>';
 				foreach($getSupplierdetails as $value) {
-                        $content = $content.'<option value="'.$value["id"].'">'.$value["po_number"].'</option>';
+                        $content = $content.'<option value="'.$value["supplier_id"].'">'.$value["po_number"].'</option>';
 				}
 				echo $content;
 			} else {
