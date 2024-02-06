@@ -17118,7 +17118,6 @@
 			
 		});
 
-
 		function getAlldatausingfilter(buyer_name,part_number,from_date,to_date){
 			var dt = $('#view_buyer_PO_details_report').DataTable({
 	            "columnDefs": [ 
@@ -17189,8 +17188,6 @@
 
 		};
 
-
-			
 	    $(document).on('click','#export_to_excel',function(e){
 			e.preventDefault();
 			$(".loader_ajax").show();
@@ -17246,6 +17243,60 @@
 		   return false;
 	    });
 
-			
 	</script>
+<?php } ?>
+
+
+<?php if($pageTitle=='ITC Report'){ ?>
+	<script type="text/javascript"> 
+	  $(document).on('click','#ITC_export_to_excel',function(e){
+			e.preventDefault();
+			$(".loader_ajax").show();
+
+			if($("#ITC_report").val()){
+				var ITC_report = $("#ITC_report").val();
+			}else{
+				var ITC_report = 'NA';
+			}
+
+			if($("#from_date").val()){
+				var from_date = $("#from_date").val();
+			}else{
+				var from_date = 'NA';
+			}
+
+			if($("#to_date").val()){
+				var to_date = $("#to_date").val();
+			}else{
+				var to_date = 'NA';
+			}
+
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>admin/exportitcreportITC/"+ITC_report+"/"+from_date+"/"+to_date,
+				type: "POST",
+				// data : {'hospitals' : hospitals, 'driver' : driver,'ride_start':ride_start,'ride_stop':ride_stop},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+				    {
+						$(".report_type_error").html("");
+				    	alert('No data fond');
+				    }
+				    else
+				    {
+						$(".report_type_error").html("");
+				    	window.location.href = "<?php echo ADMIN_PATH;?>admin/exportitcreportITC/"+ITC_report+"/"+from_date+"/"+to_date;
+				    }
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   		alert('No data fond');
+					$(".loader_ajax").hide();
+			    }
+			});
+		   return false;
+	    });
+
+    </script>
 <?php } ?>

@@ -405,7 +405,7 @@ $route['analaysisandcorrectiveactionreport'] = "admin/analaysisandcorrectiveacti
 $route['addanalaysisandcorrectiveactionreport'] = "admin/addanalaysisandcorrectiveactionreport";
 
 
-
+$route['itcreport'] = "admin/itcreport";
 
 
 
