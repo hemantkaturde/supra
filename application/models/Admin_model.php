@@ -9483,12 +9483,12 @@ class Admin_model extends CI_Model
         }
         
         if($from_date!='NA'){
-            $fromdate = $from_date." 00:00:00";
+            $fromdate = $from_date;
             $this->db->where(TBL_BUYER_PO_MASTER.'.delivery_date >=', $fromdate);
         }
 
         if($to_date!='NA'){
-            $todate = $to_date." 23:59:59";
+            $todate = $to_date;
             $this->db->where(TBL_BUYER_PO_MASTER.'.delivery_date <=', $todate);
         }
 
@@ -9537,15 +9537,18 @@ class Admin_model extends CI_Model
 
 
         if($from_date!='NA'){
-            $fromdate = $from_date." 00:00:00";
+            $fromdate = $from_date;
+
+            // print_r($fromdate);
+            // exit;
            
             $this->db->where(TBL_BUYER_PO_MASTER.'.delivery_date >=', $fromdate);
         }
 
-        if($to_date!='NA'){
-            $todate = $to_date." 23:59:59";
-            $this->db->where(TBL_BUYER_PO_MASTER.'.delivery_date <=', $todate);
-        }
+        // if($to_date!='NA'){
+        //     $todate = $to_date;
+        //     $this->db->where(TBL_BUYER_PO_MASTER.'.delivery_date <=', $todate);
+        // }
 
     
         $this->db->where(TBL_PACKING_INSTRACTION.'.status', 1);
@@ -9595,12 +9598,12 @@ class Admin_model extends CI_Model
 
           
         if($from_date!='NA'){
-            $fromdate = $from_date." 00:00:00";
+            $fromdate = $from_date;
             $this->db->where(TBL_BUYER_PO_MASTER.'.delivery_date >=', $fromdate);
         }
 
         if($to_date!='NA'){
-            $todate = $to_date." 23:59:59";
+            $todate = $to_date;
             $this->db->where(TBL_BUYER_PO_MASTER.'.delivery_date <=', $todate);
         }
 

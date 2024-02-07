@@ -17057,13 +17057,13 @@
 
 		$("#from_date").datepicker({
 
-			        dateFormat: 'yy-mm-dd',
-					controlType: 'select',
-					oneLine: true,
-					changeMonth: true,
-			    	changeYear: true,
-					timeFormat: '',
-					maxDate: 0,
+			dateFormat: 'yy-mm-dd',
+			controlType: 'select',
+			oneLine: true,
+			changeMonth: true,
+			changeYear: true,
+			timeFormat: '',
+			maxDate: 0,
 
 			onSelect: function(dateText) {
 				
