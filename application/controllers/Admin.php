@@ -10633,18 +10633,19 @@ public function itcreport(){
     $processFunction = 'Admin/itcreport';
     $this->logrecord($process,$processFunction);
     $this->global['pageTitle'] = 'ITC Report';
+    $data['jobworkdetails']= $this->admin_model->getjobworkdetails();
     $this->loadViews("masters/viewitcreport", $this->global, $data, NULL);  
 }
 
 
-public function exportitcreportITC($ITC_report,$from_date,$to_date){
+public function exportitcreportITC($ITC_report,$job_work_no,$from_date,$to_date){
 
 
       if($ITC_report=='itc_4'){
                 // create file name
                 $fileName = 'ITC 4 Report -'.date('d-m-Y').'.xlsx';  
                 // load excel library
-                $empInfo = $this->admin_model->exportitcreportITCrecord($ITC_report,$from_date,$to_date);
+                $empInfo = $this->admin_model->exportitcreportITCrecord($ITC_report,$job_work_no,$from_date,$to_date);
             
                 $objPHPExcel = new PHPExcel();
                 $objPHPExcel->setActiveSheetIndex(0);
@@ -10667,17 +10668,34 @@ public function exportitcreportITC($ITC_report,$from_date,$to_date){
                 // set Row
                 $rowCount = 2;
                 foreach ($empInfo as $element) {
-                    $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $element['buyer_name']);
-                    $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $element['sales_order_number']);
-                    $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $element['buyer_po_date']);
-                    $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['part_number']);
-                    $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['name']);
-                    $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['order_oty']);
-                    $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['buyer_po_part_delivery_date']);
-                    $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $element['buyer_invoice_number']);
-                    $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, $element['buyer_invoice_qty']);
-                    $objPHPExcel->getActiveSheet()->SetCellValue('J' . $rowCount, $element['buyer_invoice_date']);
-                    $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, $element['remark']);
+
+                    if($element['gst_rate']=='CGST_SGST'){
+                        $centraltax = '9.00';
+                        $statetax   = '9.00';
+                    }else{
+                        $centraltax = '';
+                        $statetax   = '';
+                    }
+                    
+                    if($element['gst_rate']=='IGST'){
+                        $igsttax = '18.00';
+                    }else{
+                        $igsttax = '';
+                    }  
+
+                    $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $element['GSTIN']);
+                    $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, '');
+                    $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, 'Non SEZ');
+                    $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['po_number']);
+                    $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['date']);
+                    $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, 'Inputs');
+                    $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, 'Part No '.$element['part_number']);
+                    $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $element['unit']);
+                    $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, $element['rm_actual_qty']);
+                    $objPHPExcel->getActiveSheet()->SetCellValue('J' . $rowCount, $element['total']);
+                    $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, $igsttax);
+                    $objPHPExcel->getActiveSheet()->SetCellValue('L' . $rowCount, $centraltax);
+                    $objPHPExcel->getActiveSheet()->SetCellValue('M' . $rowCount, $statetax);
                     $rowCount++;
                 }
             
@@ -10686,7 +10704,7 @@ public function exportitcreportITC($ITC_report,$from_date,$to_date){
                 }
                 /*********************Autoresize column width depending upon contents END***********************/
                 
-                $objPHPExcel->getActiveSheet()->getStyle('A1:K1')->getFont()->setBold(true); //Make heading font bold
+                $objPHPExcel->getActiveSheet()->getStyle('A1:M1')->getFont()->setBold(true); //Make heading font bold
                 
                 /*********************Add color to heading START**********************/
                 $objPHPExcel->getActiveSheet()
@@ -10712,7 +10730,7 @@ public function exportitcreportITC($ITC_report,$from_date,$to_date){
         // create file name
                 $fileName = 'ITC 5 Report -'.date('d-m-Y').'.xlsx';  
                 // load excel library
-                $empInfo = $this->admin_model->exportitcreportITCrecord($ITC_report,$from_date,$to_date);
+                $empInfo = $this->admin_model->exportitcreportITCrecord($ITC_report,$job_work_no,$from_date,$to_date);
             
                 $objPHPExcel = new PHPExcel();
                 $objPHPExcel->setActiveSheetIndex(0);
@@ -10734,17 +10752,17 @@ public function exportitcreportITC($ITC_report,$from_date,$to_date){
                 // set Row
                 $rowCount = 2;
                 foreach ($empInfo as $element) {
-                    $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $element['buyer_name']);
-                    $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $element['sales_order_number']);
-                    $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $element['buyer_po_date']);
-                    $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['part_number']);
-                    $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['name']);
-                    $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['order_oty']);
-                    $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['buyer_po_part_delivery_date']);
-                    $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $element['buyer_invoice_number']);
-                    $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, $element['buyer_invoice_qty']);
-                    $objPHPExcel->getActiveSheet()->SetCellValue('J' . $rowCount, $element['buyer_invoice_date']);
-                    $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, $element['remark']);
+                    $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $element['GSTIN']);
+                    $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, '');
+                    $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, 'Non SEZ');
+                    $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['po_number']);
+                    $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['date']);
+                    $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, '');
+                    $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, '');
+                    $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, '');
+                    $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, '');
+                    $objPHPExcel->getActiveSheet()->SetCellValue('J' . $rowCount, '');
+                    $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, '');
                     $rowCount++;
                 }
             

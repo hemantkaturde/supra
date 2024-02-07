@@ -17252,11 +17252,17 @@
 	  $(document).on('click','#ITC_export_to_excel',function(e){
 			e.preventDefault();
 			$(".loader_ajax").show();
-
+			
 			if($("#ITC_report").val()){
 				var ITC_report = $("#ITC_report").val();
 			}else{
 				var ITC_report = 'NA';
+			}
+
+			if($("#job_work_no").val()){
+				var job_work_no = $("#job_work_no").val();
+			}else{
+				var job_work_no = 'NA';
 			}
 
 			if($("#from_date").val()){
@@ -17272,7 +17278,7 @@
 			}
 
 			$.ajax({
-				url : "<?php echo ADMIN_PATH;?>admin/exportitcreportITC/"+ITC_report+"/"+from_date+"/"+to_date,
+				url : "<?php echo ADMIN_PATH;?>admin/exportitcreportITC/"+ITC_report+"/"+job_work_no+"/"+from_date+"/"+to_date,
 				type: "POST",
 				// data : {'hospitals' : hospitals, 'driver' : driver,'ride_start':ride_start,'ride_stop':ride_stop},
 				success: function(data, textStatus, jqXHR)
@@ -17286,7 +17292,7 @@
 				    else
 				    {
 						$(".report_type_error").html("");
-				    	window.location.href = "<?php echo ADMIN_PATH;?>admin/exportitcreportITC/"+ITC_report+"/"+from_date+"/"+to_date;
+				    	window.location.href = "<?php echo ADMIN_PATH;?>admin/exportitcreportITC/"+ITC_report+"/"+job_work_no+"/"+from_date+"/"+to_date;
 				    }
 				},
 				error: function (jqXHR, textStatus, errorThrown)

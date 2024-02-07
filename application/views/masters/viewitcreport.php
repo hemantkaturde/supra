@@ -34,26 +34,39 @@
                                                     <option value="itc_4">ITC 4</option>
                                                     <option value="itc_5">ITC 5</option>
                                             </select>
+                                            <p class="error ITC_report_error"></p>
                                     </div>
                                 </div>
                                 <div class="col-xs-3 text-left" style="margin-top: 10px;">
+                                    <div class="form-group">
+                                        <label for="job_work_no">JoB Work No</label>
+                                             <select class="form-control" name="job_work_no" id="job_work_no">
+                                                    <option value="">Select Job Work Number</option>
+                                                    <?php foreach ($jobworkdetails as $key => $value) {?>
+                                                        <option value="<?php echo $value['id']; ?>"><?php echo $value['po_number']; ?></option>
+                                                    <?php } ?>
+                                            </select>
+                                            <p class="error job_work_no_error"></p>
+                                    </div>
+                                </div>
+                                <div class="col-xs-2 text-left" style="margin-top: 10px;">
                                     <div class="form-group">
                                         <label for="date">From Date</label>
-                                            <input type="text" class="form-control datepicker" id="from_date" name="from_date">
+                                            <input type="text" class="form-control datepicker" placeholder="Select From date Here" id="from_date" name="from_date">
                                             <p class="error date_error"></p>
                                     </div>
                                 </div>
-                                <div class="col-xs-3 text-left" style="margin-top: 10px;">
+                                <div class="col-xs-2 text-left" style="margin-top: 10px;">
                                     <div class="form-group">
                                         <label for="date">To Date</label>
-                                            <input type="text" class="form-control datepicker" id="to_date"  name="to_date">
+                                            <input type="text" class="form-control datepicker" placeholder="Select To date Here" id="to_date"  name="to_date">
                                             <p class="error date_error"></p>
                                     </div>
                                 </div>
-                                <div class="col-xs-3 text-left" style="margin-top: 10px;">
+                                <div class="col-xs-2 text-left" style="margin-top: 10px;">
                                     <div class="form-group">
                                         <label for="date">Downlaod Report</label>
-                                        <p><input type="button" id="ITC_export_to_excel" class="btn btn-primary" value="Downlaod Report"/></p>
+                                        <p><input type="button" id="ITC_export_to_excel"  class="btn btn-primary" value="Downlaod Report"/></p>
                                     </div>
                                 </div>
                             </div>
@@ -67,7 +80,6 @@
     </section>
 </div>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/common.js" charset="utf-8"></script>
-
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/common.js" charset="utf-8"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
 
