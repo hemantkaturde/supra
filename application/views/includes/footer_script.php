@@ -17054,6 +17054,87 @@
 
 		});
 
+
+		$("#from_date").datepicker({
+
+			        dateFormat: 'yy-mm-dd',
+					controlType: 'select',
+					oneLine: true,
+					changeMonth: true,
+			    	changeYear: true,
+					timeFormat: '',
+					maxDate: 0,
+
+			onSelect: function(dateText) {
+				
+
+				if($("#buyer_name").val()){
+					var buyer_name = $("#buyer_name").val();
+				}else{
+					var buyer_name = 'NA';
+				}
+
+				if($("#part_number").val()){
+					var part_number = $("#part_number").val();
+				}else{
+					var part_number = 'NA';
+				}
+
+				if($("#from_date").val()){
+					var from_date = $("#from_date").val();
+				}else{
+					var from_date = 'NA';
+				}
+
+				if($("#to_date").val()){
+					var to_date = $("#to_date").val();
+				}else{
+					var to_date = 'NA';
+				}
+				
+				getAlldatausingfilter(buyer_name,part_number,from_date,to_date);
+			}
+		});
+
+
+		$("#to_date").datepicker({
+			        dateFormat: 'yy-mm-dd',
+					controlType: 'select',
+					oneLine: true,
+					changeMonth: true,
+			    	changeYear: true,
+					timeFormat: '',
+					maxDate: 0,
+			onSelect: function(dateText) {
+
+				if($("#buyer_name").val()){
+					var buyer_name = $("#buyer_name").val();
+				}else{
+					var buyer_name = 'NA';
+				}
+
+				if($("#part_number").val()){
+					var part_number = $("#part_number").val();
+				}else{
+					var part_number = 'NA';
+				}
+
+				if($("#from_date").val()){
+					var from_date = $("#from_date").val();
+				}else{
+					var from_date = 'NA';
+				}
+
+				if($("#to_date").val()){
+					var to_date = $("#to_date").val();
+				}else{
+					var to_date = 'NA';
+				}
+				
+				getAlldatausingfilter(buyer_name,part_number,from_date,to_date);
+			}
+		});
+
 		$(document).on('change','#buyer_name',function(e){
 			e.preventDefault();
 			$("#view_buyer_PO_details_report").dataTable().fnDestroy();
@@ -17119,6 +17200,7 @@
 		});
 
 		function getAlldatausingfilter(buyer_name,part_number,from_date,to_date){
+			$("#view_buyer_PO_details_report").dataTable().fnDestroy();
 			var dt = $('#view_buyer_PO_details_report').DataTable({
 	            "columnDefs": [ 
 	                 { className: "details-control", "targets": [ 0 ] },

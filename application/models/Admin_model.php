@@ -9482,10 +9482,17 @@ class Admin_model extends CI_Model
             $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.part_number', $part_number);
         }
         
-        if($from_date!='NA' || $to_date!='NA'){
-            $this->db->where(TBL_BUYER_PO_MASTER_ITEM.".buyer_po_part_delivery_date >=", $fromdate);
-            $this->db->where(TBL_BUYER_PO_MASTER_ITEM.".buyer_po_part_delivery_date <=", $todate);
+        if($from_date!='NA'){
+            $fromdate = $from_date." 00:00:00";
+            $this->db->where(TBL_BUYER_PO_MASTER.'.delivery_date >=', $fromdate);
         }
+
+        if($to_date!='NA'){
+            $todate = $to_date." 23:59:59";
+            $this->db->where(TBL_BUYER_PO_MASTER.'.delivery_date <=', $todate);
+        }
+
+
 
         $this->db->where(TBL_PACKING_INSTRACTION.'.status', 1);
         $this->db->order_by(TBL_PACKING_INSTRACTION.'.id','DESC');
@@ -9497,9 +9504,6 @@ class Admin_model extends CI_Model
 
 
     public function fetchbuyerpodetailsreportData($params,$buyer_name,$part_number,$from_date,$to_date){
-
-        $fromdate = $from_date." 00:00:00";
-        $todate = $to_date." 23:59:59";
 
 
         $this->db->select(TBL_BUYER_MASTER.'.buyer_name,'.TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_BUYER_PO_MASTER.'.buyer_po_date,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name,'.TBL_BUYER_PO_MASTER.'.delivery_date,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_qty,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_number,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_date,'.TBL_PACKING_INSTRACTION_DETAILS.'.remark,'.TBL_BUYER_PO_MASTER_ITEM.'.order_oty,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date');
@@ -9530,11 +9534,19 @@ class Admin_model extends CI_Model
         if($part_number!='NA'){
             $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.part_number', $part_number);
         }
-        
-        if($from_date!='NA' || $to_date!='NA'){
-            $this->db->where(TBL_BUYER_PO_MASTER_ITEM.".buyer_po_part_delivery_date >=", $fromdate);
-            $this->db->where(TBL_BUYER_PO_MASTER_ITEM.".buyer_po_part_delivery_date <=", $todate);
+
+
+        if($from_date!='NA'){
+            $fromdate = $from_date." 00:00:00";
+           
+            $this->db->where(TBL_BUYER_PO_MASTER.'.delivery_date >=', $fromdate);
         }
+
+        if($to_date!='NA'){
+            $todate = $to_date." 23:59:59";
+            $this->db->where(TBL_BUYER_PO_MASTER.'.delivery_date <=', $todate);
+        }
+
     
         $this->db->where(TBL_PACKING_INSTRACTION.'.status', 1);
         $this->db->order_by(TBL_PACKING_INSTRACTION.'.id','DESC');
@@ -9582,10 +9594,16 @@ class Admin_model extends CI_Model
         }
 
           
-        if($from_date!='NA' || $to_date !='NA'){
-           $this->db->where(TBL_BUYER_PO_MASTER_ITEM.".buyer_po_part_delivery_date >=", $fromdate);
-           $this->db->where(TBL_BUYER_PO_MASTER_ITEM.".buyer_po_part_delivery_date <=", $todate);
+        if($from_date!='NA'){
+            $fromdate = $from_date." 00:00:00";
+            $this->db->where(TBL_BUYER_PO_MASTER.'.delivery_date >=', $fromdate);
         }
+
+        if($to_date!='NA'){
+            $todate = $to_date." 23:59:59";
+            $this->db->where(TBL_BUYER_PO_MASTER.'.delivery_date <=', $todate);
+        }
+
 
         $this->db->where(TBL_PACKING_INSTRACTION.'.status', 1);
         $this->db->order_by(TBL_PACKING_INSTRACTION.'.id','DESC');
@@ -9597,10 +9615,7 @@ class Admin_model extends CI_Model
 
     public function exportbuyerdetailsrecord($buyer_name,$part_number,$from_date,$to_date){
 
-        
-        $fromdate = $from_date." 00:00:00";
-        $todate = $to_date." 23:59:59";
-    
+
         $this->db->select(TBL_BUYER_MASTER.'.buyer_name,'.TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_BUYER_PO_MASTER.'.buyer_po_date,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name,'.TBL_BUYER_PO_MASTER.'.delivery_date,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_qty,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_number,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_date,'.TBL_PACKING_INSTRACTION_DETAILS.'.remark,'.TBL_BUYER_PO_MASTER_ITEM.'.order_oty,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date');
         $this->db->join(TBL_PACKING_INSTRACTION_DETAILS, TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id = '.TBL_PACKING_INSTRACTION.'.id');
         $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_PACKING_INSTRACTION.'.buyer_po_number');
@@ -9618,10 +9633,13 @@ class Admin_model extends CI_Model
         }
         
         if($from_date!='NA'){
+            $fromdate = $from_date." 00:00:00";
+           
             $this->db->where(TBL_BUYER_PO_MASTER.'.delivery_date >=', $fromdate);
         }
 
         if($to_date!='NA'){
+            $todate = $to_date." 23:59:59";
             $this->db->where(TBL_BUYER_PO_MASTER.'.delivery_date <=', $todate);
         }
 
