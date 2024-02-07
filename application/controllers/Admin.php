@@ -10655,7 +10655,7 @@ public function exportitcreportITC($ITC_report,$from_date,$to_date){
                 $objPHPExcel->getActiveSheet()->SetCellValue('D1', 'Challan No'); 
                 $objPHPExcel->getActiveSheet()->SetCellValue('E1', 'Challan date');
                 $objPHPExcel->getActiveSheet()->SetCellValue('F1', 'Type of Goods');   
-                $objPHPExcel->getActiveSheet()->SetCellValue('G1', 'Discrption of goods');  
+                $objPHPExcel->getActiveSheet()->SetCellValue('G1', 'Description of goods');  
                 $objPHPExcel->getActiveSheet()->SetCellValue('H1', 'UQC');  
                 $objPHPExcel->getActiveSheet()->SetCellValue('I1', 'Quantity');  
                 $objPHPExcel->getActiveSheet()->SetCellValue('J1', 'Taxable value');  
@@ -10722,16 +10722,13 @@ public function exportitcreportITC($ITC_report,$from_date,$to_date){
                 $objPHPExcel->getActiveSheet()->SetCellValue('C1', 'Job worker`s type');
                 $objPHPExcel->getActiveSheet()->SetCellValue('D1', 'Challan No'); 
                 $objPHPExcel->getActiveSheet()->SetCellValue('E1', 'Challan date');
-                $objPHPExcel->getActiveSheet()->SetCellValue('F1', 'Type of Goods');  
-                $objPHPExcel->getActiveSheet()->SetCellValue('G1', 'Challan no issued by job worker');  
-                $objPHPExcel->getActiveSheet()->SetCellValue('H1', 'Challan date issued by job worker');  
-                $objPHPExcel->getActiveSheet()->SetCellValue('I1', 'Discrption of goods');  
+                // $objPHPExcel->getActiveSheet()->SetCellValue('F1', 'Type of Goods');  
+                $objPHPExcel->getActiveSheet()->SetCellValue('F1', 'Challan no issued by job worker');  
+                $objPHPExcel->getActiveSheet()->SetCellValue('G1', 'Challan date issued by job worker');  
+                $objPHPExcel->getActiveSheet()->SetCellValue('H1', 'Nature Of Job Work');  
+                $objPHPExcel->getActiveSheet()->SetCellValue('I1', 'Description of goods');  
                 $objPHPExcel->getActiveSheet()->SetCellValue('J1', 'UQC');  
-                $objPHPExcel->getActiveSheet()->SetCellValue('K1', 'Quantity');  
-                $objPHPExcel->getActiveSheet()->SetCellValue('L1', 'Taxable value');  
-                $objPHPExcel->getActiveSheet()->SetCellValue('M1', 'Integrated tax rate(%)');
-                $objPHPExcel->getActiveSheet()->SetCellValue('N1', 'central tax(%)');
-                $objPHPExcel->getActiveSheet()->SetCellValue('O1', 'state tax(%)');
+                $objPHPExcel->getActiveSheet()->SetCellValue('K1', 'Quantity');
             
             
                 // set Row
@@ -10751,16 +10748,16 @@ public function exportitcreportITC($ITC_report,$from_date,$to_date){
                     $rowCount++;
                 }
             
-                foreach(range('A','O') as $columnID) {
+                foreach(range('A','K') as $columnID) {
                     $objPHPExcel->getActiveSheet()->getColumnDimension($columnID)->setAutoSize(true);
                 }
                 /*********************Autoresize column width depending upon contents END***********************/
                 
-                $objPHPExcel->getActiveSheet()->getStyle('A1:O1')->getFont()->setBold(true); //Make heading font bold
+                $objPHPExcel->getActiveSheet()->getStyle('A1:K1')->getFont()->setBold(true); //Make heading font bold
                 
                 /*********************Add color to heading START**********************/
                 $objPHPExcel->getActiveSheet()
-                            ->getStyle('A1:O1')
+                            ->getStyle('A1:K1')
                             ->getFill()
                             ->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
                             ->getStartColor()
