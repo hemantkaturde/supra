@@ -10641,7 +10641,7 @@ public function exportitcreportITC($ITC_report,$from_date,$to_date){
 
 
       if($ITC_report=='itc_4'){
-                    // create file name
+                // create file name
                 $fileName = 'ITC 4 Report -'.date('d-m-Y').'.xlsx';  
                 // load excel library
                 $empInfo = $this->admin_model->exportitcreportITCrecord($ITC_report,$from_date,$to_date);
@@ -10709,25 +10709,27 @@ public function exportitcreportITC($ITC_report,$from_date,$to_date){
 
       if($ITC_report=='itc_5'){
 
-                    // create file name
-                $fileName = 'ITC 5 Report -'.date('d-m-Y').'.xlsx';  
+        // create file name
+                $fileName = 'ITC 4 Report -'.date('d-m-Y').'.xlsx';  
                 // load excel library
-                $empInfo = $this->admin_model->exportbuyerdetailsrecord($buyer_name,$part_number,$from_date,$to_date);
+                $empInfo = $this->admin_model->exportitcreportITCrecord($ITC_report,$from_date,$to_date);
             
                 $objPHPExcel = new PHPExcel();
                 $objPHPExcel->setActiveSheetIndex(0);
                 // set Header
-                $objPHPExcel->getActiveSheet()->SetCellValue('A1', 'Buyer Name');
-                $objPHPExcel->getActiveSheet()->SetCellValue('B1', 'Buyer PO No');
-                $objPHPExcel->getActiveSheet()->SetCellValue('C1', 'Buyer PO Date');
-                $objPHPExcel->getActiveSheet()->SetCellValue('D1', 'Part Number'); 
-                $objPHPExcel->getActiveSheet()->SetCellValue('E1', 'Part Description');
-                $objPHPExcel->getActiveSheet()->SetCellValue('F1', 'Order Qty');   
-                $objPHPExcel->getActiveSheet()->SetCellValue('G1', 'Delivery Date');  
-                $objPHPExcel->getActiveSheet()->SetCellValue('H1', 'Export Invoice No');  
-                $objPHPExcel->getActiveSheet()->SetCellValue('I1', 'Export Qty');  
-                $objPHPExcel->getActiveSheet()->SetCellValue('J1', 'Export Invoice Date');  
-                $objPHPExcel->getActiveSheet()->SetCellValue('K1', 'Remark');
+                $objPHPExcel->getActiveSheet()->SetCellValue('A1', 'GST No');
+                $objPHPExcel->getActiveSheet()->SetCellValue('B1', 'State');
+                $objPHPExcel->getActiveSheet()->SetCellValue('C1', 'Job worker`s type');
+                $objPHPExcel->getActiveSheet()->SetCellValue('D1', 'Challan No'); 
+                $objPHPExcel->getActiveSheet()->SetCellValue('E1', 'Challan date');
+                $objPHPExcel->getActiveSheet()->SetCellValue('F1', 'Type of Goods');   
+                $objPHPExcel->getActiveSheet()->SetCellValue('G1', 'Discrption of goods');  
+                $objPHPExcel->getActiveSheet()->SetCellValue('H1', 'UQC');  
+                $objPHPExcel->getActiveSheet()->SetCellValue('I1', 'Quantity');  
+                $objPHPExcel->getActiveSheet()->SetCellValue('J1', 'Taxable value');  
+                $objPHPExcel->getActiveSheet()->SetCellValue('K1', 'Integrated tax rate(%)');
+                $objPHPExcel->getActiveSheet()->SetCellValue('L1', 'central tax(%)');
+                $objPHPExcel->getActiveSheet()->SetCellValue('M1', 'state tax(%)');
             
             
                 // set Row
@@ -10747,7 +10749,7 @@ public function exportitcreportITC($ITC_report,$from_date,$to_date){
                     $rowCount++;
                 }
             
-                foreach(range('A','K') as $columnID) {
+                foreach(range('A','M') as $columnID) {
                     $objPHPExcel->getActiveSheet()->getColumnDimension($columnID)->setAutoSize(true);
                 }
                 /*********************Autoresize column width depending upon contents END***********************/
@@ -10756,7 +10758,7 @@ public function exportitcreportITC($ITC_report,$from_date,$to_date){
                 
                 /*********************Add color to heading START**********************/
                 $objPHPExcel->getActiveSheet()
-                            ->getStyle('A1:K1')
+                            ->getStyle('A1:M1')
                             ->getFill()
                             ->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
                             ->getStartColor()
@@ -10769,8 +10771,7 @@ public function exportitcreportITC($ITC_report,$from_date,$to_date){
                 header("Content-Disposition: attachment;Filename=$fileName.xls");
                 header('Cache-Control: max-age=0');
                 $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
-                $objWriter->save('php://output');  
-
+                $objWriter->save('php://output'); 
       }
     
 }

@@ -48,14 +48,14 @@
             <div class="col-xs-3 text-left" style="margin-top: 10px;">
                 <div class="form-group">
                     <label for="date">From Date</label>
-                        <input type="text" class="form-control datepicker" value="<?=date("1-m-Y")?>" id="from_date" name="from_date">
+                        <input type="text" class="form-control datepicker" placeholder="Select From Date" id="from_date" name="from_date">
                         <p class="error date_error"></p>
                 </div>
             </div>
             <div class="col-xs-3 text-left" style="margin-top: 10px;">
                 <div class="form-group">
                     <label for="date">To Date</label>
-                        <input type="text" class="form-control datepicker" value="<?=date("t-m-Y")?>"  id="to_date"  name="to_date">
+                        <input type="text" class="form-control datepicker" placeholder="Select To Date" id="to_date"  name="to_date">
                         <p class="error date_error"></p>
                 </div>
             </div>
