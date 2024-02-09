@@ -401,8 +401,12 @@ $route['getSupplierPonumberbySupplieridvendorponew'] = "admin/getSupplierPonumbe
 $route['buyerpodetailsreport'] = "admin/buyerpodetailsreport";
 //$route['fetchbuyerpodetailsreport/(:num)/(:num)/(:num)/(:num)'] = "admin/fetchbuyerpodetailsreport/$1/$2/$3/$4";
 //$route['calculatesumofallbuyerdetails'] = "admin/calculatesumofallbuyerdetails";
-$route['analaysisandcorrectiveactionreport'] = "admin/analaysisandcorrectiveactionreport";
-$route['addanalaysisandcorrectiveactionreport'] = "admin/addanalaysisandcorrectiveactionreport";
+$route['complaintform'] = "admin/complaintform";
+$route['addcomplaintform'] = "admin/addcomplaintform";
+$route['fetchcompalintrecords'] = "admin/fetchcompalintrecords";
+$route['deletecomplainform'] = "admin/deletecomplainform";
+$route['editcomplainform/(:any)'] = "admin/editcomplainform/$1";
+
 
 
 $route['itcreport'] = "admin/itcreport";

@@ -161,8 +161,7 @@ define('TBL_ENAUIRY_FORM','tbl_enquiry_form');
 define('TBL_ENAUIRY_FORM_ITEM','tbl_enuiry_form_item');
 define('TBL_REJECTION_FORM','tbl_rejection_form');
 define('TBL_REJECTION_FORM_REJECTED_ITEM','tbl_tbl_rejection_form_rejected_item');
-
-
+define('TBL_COMPLAIN_FORM','tbl_complainform');
 
 
 

@@ -2,7 +2,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            <i class="fa fa-users"></i> Analysis and Corrective Action Report
+            <i class="fa fa-users"></i>  Complaint form
             <small>Add,Edit,Delete</small>
         </h1>
     </section>
@@ -11,13 +11,13 @@
             <div class="col-xs-6 text-left">
                 <ul class="breadcrumb" style="background-color:#ecf0f5 !important">
                     <li class="completed"><a href="javascript:void(0);">Masters</a></li>
-                    <li class="active"><a href="javascript:void(0);">Analysis and Corrective Action Report</a></li>
+                    <li class="active"><a href="javascript:void(0);"> Complaint form</a></li>
                 </ul>
             </div>
             <div class="col-xs-6 text-right">
                 <div class="form-group">
-                    <a class="btn btn-primary" href="<?php echo base_url(); ?>addanalaysisandcorrectiveactionreport">
-                        <i class="fa fa-plus"></i> Add Analysis and Corrective Action Report</a>
+                    <a class="btn btn-primary" href="<?php echo base_url(); ?>addcomplaintform">
+                        <i class="fa fa-plus"></i> Add Complaint form</a>
                 </div>
             </div>
         </div>
@@ -26,7 +26,7 @@
                 <div class="box">
                     <div class="box-body">   
                         <div class="panel-body">
-                            <table width="100%" class="table table-striped table-bordered table-hover" id="view_export_details">
+                            <table width="100%" class="table table-striped table-bordered table-hover" id="view_complaint_form">
                                 <thead>
                                     <tr style="background-color:#3c8dbc !important;color:#fff">
                                         <th>Report No</th>

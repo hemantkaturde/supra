@@ -8861,7 +8861,6 @@ class Admin_model extends CI_Model
 }
 
 
-
    public function getVendoritemonlyforpod($vendor_po_number,$flag){
 
         $check_if_supplier_exist =  $this->chekc_if_supplie_name_exits($vendor_po_number);
@@ -9416,7 +9415,6 @@ class Admin_model extends CI_Model
         return $fetch_result;
     }
 
-
     public function getJobworkchallanItemdeatilsForInvoice($id){
 
         $this->db->select('*');
@@ -9428,7 +9426,6 @@ class Admin_model extends CI_Model
 
     }
 
-
     public function getUSPmasterlist(){
 
         $this->db->select('*');
@@ -9437,7 +9434,6 @@ class Admin_model extends CI_Model
         $data = $query->result_array();
         return $data;
     }
-
 
     public function getpreviousshortexcess($part_number){
         $this->db->select('short_excess_qty');
@@ -9448,7 +9444,6 @@ class Admin_model extends CI_Model
         $fetch_result = $query->result_array();
         return $fetch_result;
     }
-
 
     public function fetchbuyerpodetailsreportCount($params,$buyer_name,$part_number,$from_date,$to_date){
         $this->db->select('*');
@@ -9501,7 +9496,6 @@ class Admin_model extends CI_Model
         return $rowcount;
 
     }
-
 
     public function fetchbuyerpodetailsreportData($params,$buyer_name,$part_number,$from_date,$to_date){
 
@@ -9695,6 +9689,117 @@ class Admin_model extends CI_Model
 
     }
 
+    public function fetchcompalintrecordsCount($params){
+        $this->db->select('*');
+
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_COMPLAIN_FORM.".blasting_id LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_COMPLAIN_FORM.".date LIKE '%".$params['search']['value']."%'");
+            $this->db->where("(".TBL_COMPLAIN_FORM.".report_no LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_COMPLAIN_FORM.".stage LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_COMPLAIN_FORM.".date_of_observation_rejection_found LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_COMPLAIN_FORM.".drawing_no_rev_no LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_COMPLAIN_FORM.".challan_no LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_COMPLAIN_FORM.".inword_no LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_COMPLAIN_FORM.".po_no_wo_no LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_COMPLAIN_FORM.'.status', 1);
+        $this->db->order_by(TBL_COMPLAIN_FORM.'.id','DESC');
+        $query = $this->db->get(TBL_COMPLAIN_FORM);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+    }
+
+    public function fetchcompalintrecordsData($params){
+        $this->db->select('*');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_COMPLAIN_FORM.".report_no LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_COMPLAIN_FORM.".stage LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_COMPLAIN_FORM.".date_of_observation_rejection_found LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_COMPLAIN_FORM.".drawing_no_rev_no LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_COMPLAIN_FORM.".challan_no LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_COMPLAIN_FORM.".inword_no LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_COMPLAIN_FORM.".po_no_wo_no LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_COMPLAIN_FORM.'.status', 1);
+        $this->db->order_by(TBL_COMPLAIN_FORM.'.id','DESC');
+        $query = $this->db->get(TBL_COMPLAIN_FORM);
+        $fetch_result = $query->result_array();
+
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['report_no'] =$value['report_no'];
+                $data[$counter]['stage'] =$value['stage'];
+                $data[$counter]['date_of_observation_rejection_found'] =$value['date_of_observation_rejection_found'];
+                $data[$counter]['drawing_no_rev_no'] =$value['drawing_no_rev_no'];
+                $data[$counter]['challan_no'] =$value['challan_no'];
+                $data[$counter]['po_no_wo_no'] =$value['po_no_wo_no'];
+                $data[$counter]['inword_no'] =$value['inword_no'];
+                $data[$counter]['action'] ='';
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editcomplainform/".$value['id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['id']."' class='fa fa-trash-o deletecomplainform' aria-hidden='true'></i>"; 
+                $counter++; 
+            }
+        }
+        return $data;
+    }
+
+    public function savenewcomplaintform($id,$data){
+
+        if($id != '') {
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_COMPLAIN_FORM, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_COMPLAIN_FORM, $data)) {
+                return $this->db->insert_id();
+            } else {
+                return FALSE;
+            }
+        }
+
+    }
+
+    public function deletecomplainform($id){
+        $this->db->where('id ', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_COMPLAIN_FORM)){
+           return TRUE;
+        }else{
+           return FALSE;
+        }
+    }
+
+    public function getcompalinformdata($id){
+
+        $this->db->select('*');
+        $this->db->where(TBL_COMPLAIN_FORM.'.status', 1);
+        $this->db->where(TBL_COMPLAIN_FORM.'.id',$id);
+        $query = $this->db->get(TBL_COMPLAIN_FORM);
+        $fetch_result = $query->row_array();
+        return $fetch_result;
+    }
+    
+
+    public function getPreviousCompalinformnumber(){
+
+        $this->db->select('report_no');
+        $this->db->where(TBL_COMPLAIN_FORM.'.status', 1);
+        $this->db->limit(1);
+        $this->db->order_by(TBL_COMPLAIN_FORM.'.id','DESC');
+        $query = $this->db->get(TBL_COMPLAIN_FORM);
+        $rowcount = $query->result_array();
+        return $rowcount;
+    }
 
 }
 

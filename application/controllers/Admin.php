@@ -10608,27 +10608,120 @@ public function exportbuyerdetailsrecord($buyer_name,$part_number,$from_date,$to
     $objWriter->save('php://output');    
 }
 
-public function analaysisandcorrectiveactionreport(){
+public function complaintform(){
 
-    $process = 'Analysis and Corrective Action Report';
-    $processFunction = 'Admin/enquiryform';
+    $process = 'Complaint Form';
+    $processFunction = 'Admin/complaintform';
     $this->logrecord($process,$processFunction);
-    $this->global['pageTitle'] = 'Analysis and Corrective Action Report';
+    $this->global['pageTitle'] = 'Complaint Form';
     $data['vendorList']= $this->admin_model->fetchALLvendorList();
-    $this->loadViews("masters/viewanalaysisandcorrectiveactionreport", $this->global, $data, NULL);  
+    $this->loadViews("masters/viewcomplaintform", $this->global, $data, NULL);  
 }
 
-public function addanalaysisandcorrectiveactionreport(){
+public function addcomplaintform(){
 
-    $process = 'Analysis and Corrective Action Report';
-    $processFunction = 'Admin/addanalaysisandcorrectiveactionreport';
-    $this->logrecord($process,$processFunction);
-    $this->global['pageTitle'] = 'Add new Analysis and Corrective Action Report';
-    $this->loadViews("masters/addanalaysisandcorrectiveactionreport", $this->global, $data, NULL);  
+    $post_submit = $this->input->post();
+    if($post_submit){
+        $add_complainform_response = array();
+        $this->form_validation->set_rules('report_no','Report No','trim|required');
+        $this->form_validation->set_rules('stage','Stage','trim|required');
+        $this->form_validation->set_rules('drawing_no_rev_no','Drawing No / Rev No','trim|required');
+      
+        if($this->form_validation->run() == FALSE)
+        {
+            $add_complainform_response['status'] = 'failure';
+            $add_complainform_response['error'] = array('report_no'=>strip_tags(form_error('report_no')),'stage'=>strip_tags(form_error('stage')),'drawing_no_rev_no'=>strip_tags(form_error('drawing_no_rev_no')));
+
+        }else{
+
+            $data = array(
+                'report_no' => trim($this->input->post('report_no')),
+                'stage' => trim($this->input->post('stage')),
+                'date_of_observation_rejection_found' => trim($this->input->post('date_of_observation_rejection_found')),
+                'total_failure_qty' => trim($this->input->post('total_failure_qty')),
+                'drawing_no_rev_no' => trim($this->input->post('drawing_no_rev_no')),
+                'challan_no' => trim($this->input->post('challan_no')),
+                'po_no_wo_no' => trim($this->input->post('po_no_wo_no')),
+                'poac' => trim($this->input->post('poac')),
+                'inword_no' => trim($this->input->post('inword_no')),
+                'component_description' => trim($this->input->post('component_description')),
+                'total_qty_checked' => trim($this->input->post('total_qty_checked')),
+                'problem_description' => trim($this->input->post('total_qty_checked')),
+                'intermidiate_disposal' => trim($this->input->post('intermidiate_disposal')),
+                'root_cause' => trim($this->input->post('root_cause')),
+                'coorection' => trim($this->input->post('coorection')),
+                'coorection_responsibility' => trim($this->input->post('coorection_responsibility')),
+                'coorection_date' => trim($this->input->post('coorection_date')),
+                'corrective_action_taken' => trim($this->input->post('corrective_action_taken')),
+                'corrective_action_responsibility' => trim($this->input->post('corrective_action_responsibility')),
+                'corrective_action_date' => trim($this->input->post('corrective_action_date')),
+                'effective_action' => trim($this->input->post('effective_action')),
+                'effective_action_responsiblity' => trim($this->input->post('effective_action_responsiblity')),
+                'effective_action_date' => trim($this->input->post('effective_action_date')),
+                'team' => trim($this->input->post('team')),
+                'prepared_by' => trim($this->input->post('prepared_by')),
+                'prepared_by_date' => trim($this->input->post('prepared_by_date')),                
+                'approved_by' => trim($this->input->post('approved_by')),
+                'approved_by_date' => trim($this->input->post('approved_by_date')),
+                'report_closed_by' => trim($this->input->post('report_closed_by')),
+                'report_close_date' => trim($this->input->post('report_close_date')),
+            );
+
+            if(trim($this->input->post('complain_form_id'))){
+                $complain_form_id = trim($this->input->post('complain_form_id'));
+            }else{
+                $complain_form_id = '';
+            }    
+
+            $savenewcomplaintform= $this->admin_model->savenewcomplaintform($complain_form_id,$data);
+              if($savenewcomplaintform){
+                  $add_complainform_response['status'] = 'success';
+                  $add_complainform_response['error'] = array('report_no'=>strip_tags(form_error('report_no')),'stage'=>strip_tags(form_error('stage')),'drawing_no_rev_no'=>strip_tags(form_error('drawing_no_rev_no')));
+                }else{
+                  $add_complainform_response['status'] = 'failure';
+                  $add_complainform_response['error'] = array('report_no'=>strip_tags(form_error('report_no')),'stage'=>strip_tags(form_error('stage')),'drawing_no_rev_no'=>strip_tags(form_error('drawing_no_rev_no')));
+                }
+        }
+        echo json_encode($add_complainform_response);
+    }else{
+
+        $process = 'Add New Compalint Form';
+        $processFunction = 'Admin/addanalaysisandcorrectiveactionreport';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Add New Compalint Form';
+        $data['getPreviousCompalinformnumber']= $this->admin_model->getPreviousCompalinformnumber()[0];
+        $this->loadViews("masters/addcomplaintform", $this->global, $data, NULL);
+    }
 }
+
+
+public function fetchcompalintrecords(){
+    $params = $_REQUEST;
+    $totalRecords = $this->admin_model->fetchcompalintrecordsCount($params); 
+    $queryRecords = $this->admin_model->fetchcompalintrecordsData($params); 
+
+    $data = array();
+    foreach ($queryRecords as $key => $value)
+     {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+     }
+     
+     $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+     echo json_encode($json_data);
+}
+
 
 public function itcreport(){
-
     $process = 'ITC Report';
     $processFunction = 'Admin/itcreport';
     $this->logrecord($process,$processFunction);
@@ -10793,5 +10886,31 @@ public function exportitcreportITC($ITC_report,$job_work_no,$from_date,$to_date)
     
 }
 
+public function deletecomplainform(){
+
+    $post_submit = $this->input->post();
+    if($post_submit){
+        $result = $this->admin_model->deletecomplainform(trim($this->input->post('id')));
+        if ($result) {
+                    $process = 'Delete Compliant Form';
+                    $processFunction = 'Admin/deletecomplainform';
+                    $this->logrecord($process,$processFunction);
+                echo(json_encode(array('status'=>'success')));
+            }
+        else { echo(json_encode(array('status'=>'failed'))); }
+    }else{
+        echo(json_encode(array('status'=>'failed'))); 
+    }
+
+}
+
+public function editcomplainform($id){
+    $process = 'Edit Complain Form';
+    $processFunction = 'Admin/editcomplainform';
+    $this->logrecord($process,$processFunction);
+    $this->global['pageTitle'] = 'Edit Complain Form';
+    $data['getcompalinformdata']= $this->admin_model->getcompalinformdata($id);
+    $this->loadViews("masters/editcomplainform", $this->global, $data, NULL);
+}
 
 }
