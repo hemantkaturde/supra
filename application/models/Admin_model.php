@@ -9650,13 +9650,13 @@ class Admin_model extends CI_Model
 
     public function exportitcreportITCrecord($ITC_report,$job_work_no,$from_date,$to_date){
 
-        $fromdate = $from_date." 00:00:00";
-        $todate = $to_date." 23:59:59";
+        $fromdate = $from_date;
+        $todate = $to_date;
     
 
         $this->db->select(TBL_VENDOR.'.GSTIN,'.TBL_JOB_WORK.'.po_number,'.TBL_JOB_WORK.'.date,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_JOB_WORK_ITEM.'.unit,'.TBL_JOB_WORK_ITEM.'.rm_actual_qty,'.TBL_JOB_WORK_ITEM.'.total,'.TBL_JOB_WORK_ITEM.'.gst_rate');
-        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_JOB_WORK_ITEM.'.part_number_id');
         $this->db->join(TBL_JOB_WORK, TBL_JOB_WORK.'.id = '.TBL_JOB_WORK_ITEM.'.jobwork_id');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_JOB_WORK_ITEM.'.part_number_id');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_JOB_WORK.'.vendor_name');
 
         if($job_work_no!='NA'){

@@ -65,7 +65,7 @@
                                 </div>
                                 <div class="col-xs-2 text-left" style="margin-top: 10px;">
                                     <div class="form-group">
-                                        <label for="date">Downlaod Report</label>
+                                        <label for="date">Download Report</label>
                                         <p><input type="button" id="ITC_export_to_excel"  class="btn btn-primary" value="Downlaod Report"/></p>
                                     </div>
                                 </div>

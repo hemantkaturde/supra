@@ -10852,9 +10852,9 @@ public function exportitcreportITC($ITC_report,$job_work_no,$from_date,$to_date)
                     $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['date']);
                     $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, '');
                     $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, '');
-                    $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, '');
+                    $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, 'Goods received back from JW');
                     $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, '');
-                    $objPHPExcel->getActiveSheet()->SetCellValue('J' . $rowCount, '');
+                    $objPHPExcel->getActiveSheet()->SetCellValue('J' . $rowCount, 'Pieces');
                     $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, '');
                     $rowCount++;
                 }
