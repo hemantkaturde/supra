@@ -396,20 +396,14 @@ $route['getVendoritemonlyforreworkrejection'] = "admin/getVendoritemonlyforrewor
 $route['downlaodjobworkchllan/(:any)'] = "admin/downlaodjobworkchllan/$1";
 $route['getpreviousshortexcess'] = "admin/getpreviousshortexcess";
 $route['getSupplierPonumberbySupplieridvendorponew'] = "admin/getSupplierPonumberbySupplieridvendorponew";
-
-
 $route['buyerpodetailsreport'] = "admin/buyerpodetailsreport";
-//$route['fetchbuyerpodetailsreport/(:num)/(:num)/(:num)/(:num)'] = "admin/fetchbuyerpodetailsreport/$1/$2/$3/$4";
-//$route['calculatesumofallbuyerdetails'] = "admin/calculatesumofallbuyerdetails";
 $route['complaintform'] = "admin/complaintform";
 $route['addcomplaintform'] = "admin/addcomplaintform";
 $route['fetchcompalintrecords'] = "admin/fetchcompalintrecords";
 $route['deletecomplainform'] = "admin/deletecomplainform";
 $route['editcomplainform/(:any)'] = "admin/editcomplainform/$1";
-
-
-
 $route['itcreport'] = "admin/itcreport";
+
 
 
 
