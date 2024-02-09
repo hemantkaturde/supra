@@ -17060,7 +17060,7 @@
 			changeMonth: true,
 			changeYear: true,
 			timeFormat: '',
-			maxDate: 0,
+			// maxDate: 0,
 
 			onSelect: function(dateText) {
 				
@@ -17100,7 +17100,7 @@
 					changeMonth: true,
 			    	changeYear: true,
 					timeFormat: '',
-					maxDate: 0,
+					// maxDate: 0,
 			onSelect: function(dateText) {
 
 				if($("#buyer_name").val()){
