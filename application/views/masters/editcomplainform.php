@@ -43,7 +43,7 @@
                                                         <option st-id="" value="">Select Stage</option>
                                                         <option value="Incoming" <?php if($getcompalinformdata['stage']=='Incoming'){ echo 'selected';} ?>>Incoming</option>
                                                         <option value="Inprogress" <?php if($getcompalinformdata['stage']=='Inprogress'){ echo 'selected';} ?>>Inprogress</option>
-                                                        <option value="Final Inspection" <?php if($getcompalinformdata['stage']=='Final Inspection'){ echo 'selected';} ?>">Final Inspection</option>
+                                                        <option value="Final Inspection" <?php if($getcompalinformdata['stage']=='Final Inspection'){ echo 'selected';} ?>>Final Inspection</option>
                                                         <option value="At Customer End" <?php if($getcompalinformdata['stage']=='At Customer End'){ echo 'selected';} ?>>At Customer End</option>
                                                         <option value="At Supplier End" <?php if($getcompalinformdata['stage']=='At Supplier End'){ echo 'selected';} ?>>At Supplier End</option>
                                                     </select> 
