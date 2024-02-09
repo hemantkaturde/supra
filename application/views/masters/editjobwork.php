@@ -12,10 +12,6 @@
         </h1>
     </section>
 
-
-
-
-
     <section class="content">
         <div class="row">
             <div class="col-xs-12">
@@ -35,7 +31,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="job_work_no">JoB Work No<span class="required">*</span></label>
-                                            <input type="text" class="form-control" id="job_work_no" name="job_work_no" value="<?=$getalljobworkdetails[0]['po_number']?>" required readonly>
+                                            <input type="text" class="form-control" id="job_work_no" name="job_work_no" value="<?=$getalljobworkdetails[0]['job_work_po']?>" required readonly>
                                             <p class="error job_work_no_error"></p>
                                         </div>
                                     </div>

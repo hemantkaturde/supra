@@ -4253,7 +4253,7 @@ class Admin_model extends CI_Model
 
 
     public function getalljobworkdetails($jobworkid){
-        $this->db->select('*,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po,'.TBL_SUPPLIER.'.supplier_name as supplier_name_sup,'.TBL_JOB_WORK.'.vendor_po_number as pre_vendor_po,'.TBL_JOB_WORK.'.remark as jobwork_remark,'.TBL_JOB_WORK.'.date as job_work_date');
+        $this->db->select('*,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po,'.TBL_SUPPLIER.'.supplier_name as supplier_name_sup,'.TBL_JOB_WORK.'.vendor_po_number as pre_vendor_po,'.TBL_JOB_WORK.'.remark as jobwork_remark,'.TBL_JOB_WORK.'.date as job_work_date,'.TBL_JOB_WORK.'.po_number as job_work_po');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_JOB_WORK.'.vendor_po_number');
         $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_JOB_WORK.'.raw_material_supplier');
         $this->db->where(TBL_JOB_WORK.'.status',1);
