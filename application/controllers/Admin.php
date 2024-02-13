@@ -10626,11 +10626,14 @@ public function addcomplaintform(){
         $this->form_validation->set_rules('report_no','Report No','trim|required');
         $this->form_validation->set_rules('stage','Stage','trim|required');
         $this->form_validation->set_rules('drawing_no_rev_no','Drawing No / Rev No','trim|required');
+        $this->form_validation->set_rules('vendor_name','Vendor Name','trim|required');
+        $this->form_validation->set_rules('po_no_wo_no','PO_NO/WO_NO','trim|required');
+        $this->form_validation->set_rules('component_description','Component Description','trim|required');
       
         if($this->form_validation->run() == FALSE)
         {
             $add_complainform_response['status'] = 'failure';
-            $add_complainform_response['error'] = array('report_no'=>strip_tags(form_error('report_no')),'stage'=>strip_tags(form_error('stage')),'drawing_no_rev_no'=>strip_tags(form_error('drawing_no_rev_no')));
+            $add_complainform_response['error'] = array('report_no'=>strip_tags(form_error('report_no')),'stage'=>strip_tags(form_error('stage')),'drawing_no_rev_no'=>strip_tags(form_error('drawing_no_rev_no')),'vendor_name'=>strip_tags(form_error('vendor_name')),'po_no_wo_no'=>strip_tags(form_error('po_no_wo_no')),'component_description'=>strip_tags(form_error('component_description')));
 
         }else{
 
@@ -10641,6 +10644,7 @@ public function addcomplaintform(){
                 'total_failure_qty' => trim($this->input->post('total_failure_qty')),
                 'drawing_no_rev_no' => trim($this->input->post('drawing_no_rev_no')),
                 'challan_no' => trim($this->input->post('challan_no')),
+                'vendor_name' => trim($this->input->post('vendor_name')),
                 'po_no_wo_no' => trim($this->input->post('po_no_wo_no')),
                 'poac' => trim($this->input->post('poac')),
                 'inword_no' => trim($this->input->post('inword_no')),
@@ -10676,10 +10680,10 @@ public function addcomplaintform(){
             $savenewcomplaintform= $this->admin_model->savenewcomplaintform($complain_form_id,$data);
               if($savenewcomplaintform){
                   $add_complainform_response['status'] = 'success';
-                  $add_complainform_response['error'] = array('report_no'=>strip_tags(form_error('report_no')),'stage'=>strip_tags(form_error('stage')),'drawing_no_rev_no'=>strip_tags(form_error('drawing_no_rev_no')));
+                  $add_complainform_response['error'] = array('report_no'=>strip_tags(form_error('report_no')),'stage'=>strip_tags(form_error('stage')),'drawing_no_rev_no'=>strip_tags(form_error('drawing_no_rev_no')),'vendor_name'=>strip_tags(form_error('vendor_name')),'po_no_wo_no'=>strip_tags(form_error('po_no_wo_no')),'component_description'=>strip_tags(form_error('component_description')));
                 }else{
                   $add_complainform_response['status'] = 'failure';
-                  $add_complainform_response['error'] = array('report_no'=>strip_tags(form_error('report_no')),'stage'=>strip_tags(form_error('stage')),'drawing_no_rev_no'=>strip_tags(form_error('drawing_no_rev_no')));
+                  $add_complainform_response['error'] = array('report_no'=>strip_tags(form_error('report_no')),'stage'=>strip_tags(form_error('stage')),'drawing_no_rev_no'=>strip_tags(form_error('drawing_no_rev_no')),'vendor_name'=>strip_tags(form_error('vendor_name')),'po_no_wo_no'=>strip_tags(form_error('po_no_wo_no')),'component_description'=>strip_tags(form_error('component_description')));
                 }
         }
         echo json_encode($add_complainform_response);
@@ -10690,10 +10694,10 @@ public function addcomplaintform(){
         $this->logrecord($process,$processFunction);
         $this->global['pageTitle'] = 'Add New Compalint Form';
         $data['getPreviousCompalinformnumber']= $this->admin_model->getPreviousCompalinformnumber()[0];
+        $data['vendorList']= $this->admin_model->fetchALLvendorList();
         $this->loadViews("masters/addcomplaintform", $this->global, $data, NULL);
     }
 }
-
 
 public function fetchcompalintrecords(){
     $params = $_REQUEST;
@@ -10910,6 +10914,8 @@ public function editcomplainform($id){
     $this->logrecord($process,$processFunction);
     $this->global['pageTitle'] = 'Edit Complain Form';
     $data['getcompalinformdata']= $this->admin_model->getcompalinformdata($id);
+    $data['vendorList']= $this->admin_model->fetchALLvendorList();
+
     $this->loadViews("masters/editcomplainform", $this->global, $data, NULL);
 }
 

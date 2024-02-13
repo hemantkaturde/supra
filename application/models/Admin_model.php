@@ -9780,8 +9780,13 @@ class Admin_model extends CI_Model
 
     public function getcompalinformdata($id){
 
-        $this->db->select('*');
+        $this->db->select(TBL_COMPLAIN_FORM.'.*,'.TBL_VENDOR_PO_MASTER.'.id as vendor_po_number_id,'.TBL_VENDOR_PO_MASTER.'.po_number,'.TBL_FINISHED_GOODS.'.fin_id,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
+        //$this->db->select(TBL_COMPLAIN_FORM.'.*');
         $this->db->where(TBL_COMPLAIN_FORM.'.status', 1);
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_COMPLAIN_FORM.'.vendor_name');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_COMPLAIN_FORM.'.po_no_wo_no');
+        $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id = '.TBL_VENDOR_PO_MASTER.'.id');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
         $this->db->where(TBL_COMPLAIN_FORM.'.id',$id);
         $query = $this->db->get(TBL_COMPLAIN_FORM);
         $fetch_result = $query->row_array();

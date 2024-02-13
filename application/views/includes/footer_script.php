@@ -17418,6 +17418,41 @@
 	        });
         });
 
+
+		$(document).ready(function() {
+
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			var vendor_po_number = $('#po_no_wo_no').val();
+
+			$("#component_description").html('');
+		
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getVendoritemonly",
+				type: "POST",
+				data : {'vendor_po_number' : vendor_po_number},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#component_description').html('<option value="">Select Part Number</option>');
+					}
+					else
+					{
+						$('#component_description').html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#component_description').html();
+				}
+			});
+			return false;
+		    
+        });
+
 		$(document).on('click','#savenewcompalinformdata',function(e){
 			e.preventDefault();
 			$(".loader_ajax").show();
@@ -17510,6 +17545,70 @@
 				}
 			});
 	    });
+
+		$(document).on('change','#vendor_name',function(e){  
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			// $("#customers-list").html('');
+			var vendor_name = $('#vendor_name').val();
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getVendorPonumberbyVendorid",
+				type: "POST",
+				data : {'vendor_name' : vendor_name},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#po_no_wo_no').html('<option value="">Select Vendor PO Number</option>');
+					}
+					else
+					{
+						// $('#supplier_po_number').html('<option value="">Select supplier PO Number</option>');
+						$('#po_no_wo_no').html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#po_no_wo_no').html();
+					//$(".loader_ajax").hide();
+				}
+			});
+			return false;
+		});
+
+		$(document).on('change','.po_no_wo_no',function(e){  
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			var vendor_po_number = $('#po_no_wo_no').val();
+
+			$("#component_description").html('');
+		
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getVendoritemonly",
+				type: "POST",
+				data : {'vendor_po_number' : vendor_po_number},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#component_description').html('<option value="">Select Part Number</option>');
+					}
+					else
+					{
+						$('#component_description').html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#component_description').html();
+				}
+			});
+			return false;
+		});
 
     </script>
 <?php } ?>

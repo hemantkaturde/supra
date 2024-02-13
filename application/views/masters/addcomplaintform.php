@@ -158,12 +158,47 @@
 
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="po_no_wo_no">PO NO / WO NO</label>
-                                                <input type="text" class="form-control" id="po_no_wo_no" name="po_no_wo_no">
-                                                <p class="error po_no_wo_no_error"></p>
+                                                <label for="vendor_id">Vendor Name <span class="required">*</span></label>
+                                                  <select class="form-control" name="vendor_name" id="vendor_name">
+                                                    <option st-id="" value="">Select Vendor Name</option>
+                                                    <?php foreach ($vendorList as $key => $value) {?>
+                                                    <option value="<?php echo $value['ven_id']; ?>"><?php echo $value['vendor_name']; ?></option>
+                                                    <?php } ?>
+                                                 </select>
+                                                <p class="error vendor_name_error"></p>
                                             </div>
                                         </div>
 
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="po_no_wo_no">PO NO / WO NO <span class="required">*</span></label>
+                                                    <select class="form-control po_no_wo_no"  name="po_no_wo_no" id="po_no_wo_no">
+                                                        <option st-id="" value="">Select PO NO / WO NO</option>
+                                                    </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="component_description">Component Description <span class="required">*</span></label>
+                                                    <select class="form-control" name="component_description" id="component_description">
+                                                        <option st-id="" value="">Select Component Description</option>
+                                                    </select>
+                                                    <p class="error component_description_error"></p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-sm">
+                                       <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="inword_no">Inword NO</label>
+                                                <input type="text" class="form-control" id="inword_no" name="inword_no" required>
+                                                <p class="error inword_no_error"></p>
+                                            </div>
+                                        </div>
+
+                                       
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="poac">Problem Occurs</label>
@@ -176,23 +211,9 @@
                                                 <p class="error poac_error"></p>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-sm">
-                                       <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="inword_no">Inword NO</label>
-                                                <input type="text" class="form-control" id="inword_no" name="inword_no" required>
-                                                <p class="error inword_no_error"></p>
-                                            </div>
-                                        </div>
 
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="component_description">Component Description</label>
-                                                <input type="text" class="form-control" id="component_description" name="component_description" required>
-                                                <p class="error component_description_error"></p>
-                                            </div>
-                                        </div>
+
+
 
                                         <div class="col-md-4">
                                             <div class="form-group">
