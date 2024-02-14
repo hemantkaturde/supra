@@ -17418,6 +17418,233 @@
 	        });
         });
 
+		$(document).ready(function() {
+
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			var vendor_po_number = $('#po_no_wo_no').val();
+
+			$("#component_description").html('');
+		
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getVendoritemonly",
+				type: "POST",
+				data : {'vendor_po_number' : vendor_po_number},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#component_description').html('<option value="">Select Part Number</option>');
+					}
+					else
+					{
+						$('#component_description').html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#component_description').html();
+				}
+			});
+			return false;
+		    
+        });
+
+		$(document).on('click','#savenewcompalinformdata',function(e){
+			e.preventDefault();
+			$(".loader_ajax").show();
+
+			var formData = new FormData($("#savenewcompalinform")[0]);
+			$.ajax({
+				url : "<?php echo base_url();?>addcomplaintform",
+				type: "POST",
+				data : formData,
+				cache: false,
+				contentType: false,
+				processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+					{
+						$.each(fetchResponse.error, function (i, v)
+						{
+							$('.'+i+'_error').html(v);
+						});
+						$(".loader_ajax").hide();
+					}
+					else if(fetchResponse.status == 'success')
+					{
+						swal({
+							title: "Success",
+							text: "Complain Form Successfully Added!",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+
+								window.location.href = "<?php echo base_url().'complaintform'?>";
+						});		
+					}
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$(".loader_ajax").hide();
+				}
+			});
+			return false;
+		});
+
+		$(document).on('click','.deletecomplainform',function(e){
+			var elemF = $(this);
+			e.preventDefault();
+			swal({
+				title: "Are you sure?",
+				text: "Delete Complian Form ",
+				type: "warning",
+				showCancelButton: true,
+				closeOnClickOutside: false,
+				confirmButtonClass: "btn-sm btn-danger",
+				confirmButtonText: "Yes, delete it!",
+				cancelButtonText: "No, cancel plz!",
+				closeOnConfirm: false,
+				closeOnCancel: false
+			}, function(isConfirm) {
+				if (isConfirm) {
+							$.ajax({
+								url : "<?php echo base_url();?>deletecomplainform",
+								type: "POST",
+								data : 'id='+elemF.attr('data-id'),
+								success: function(data, textStatus, jqXHR)
+								{
+									const obj = JSON.parse(data);
+								
+									if(obj.status=='success'){
+										swal({
+											title: "Deleted!",
+											text: "Complian Form Deleted Succesfully",
+											icon: "success",
+											button: "Ok",
+											},function(){ 
+													window.location.href = "<?php echo base_url().'complaintform'?>";
+										});	
+									}
+
+								},
+								error: function (jqXHR, textStatus, errorThrown)
+								{
+									$(".loader_ajax").hide();
+								}
+							})
+						}
+						else {
+				swal("Cancelled", "Compliant Form  deletion cancelled ", "error");
+				}
+			});
+	    });
+
+		$(document).on('change','#vendor_name',function(e){  
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			// $("#customers-list").html('');
+			var vendor_name = $('#vendor_name').val();
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getVendorPonumberbyVendorid",
+				type: "POST",
+				data : {'vendor_name' : vendor_name},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#po_no_wo_no').html('<option value="">Select Vendor PO Number</option>');
+					}
+					else
+					{
+						// $('#supplier_po_number').html('<option value="">Select supplier PO Number</option>');
+						$('#po_no_wo_no').html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#po_no_wo_no').html();
+					//$(".loader_ajax").hide();
+				}
+			});
+			return false;
+		});
+
+		$(document).on('change','.po_no_wo_no',function(e){  
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			var vendor_po_number = $('#po_no_wo_no').val();
+
+			$("#component_description").html('');
+		
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getVendoritemonly",
+				type: "POST",
+				data : {'vendor_po_number' : vendor_po_number},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#component_description').html('<option value="">Select Part Number</option>');
+					}
+					else
+					{
+						$('#component_description').html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#component_description').html();
+				}
+			});
+			return false;
+		});
+
+    </script>
+<?php } ?>
+
+
+
+
+<?php if($pageTitle=='Credit Note' || $pageTitle=='Add Credit Note'){ ?>
+	<script type="text/javascript"> 
+        $(document).ready(function() {
+		    var dt = $('#view_credit_note').DataTable({
+	            "columnDefs": [ 
+	                 { className: "details-control", "targets": [ 0 ] },
+	                 { "width": "10%", "targets": 0 },
+	                 { "width": "10%", "targets": 1 },
+					 { "width": "15%", "targets": 2 },
+	                 { "width": "10%", "targets": 3 },
+					 { "width": "10%", "targets": 4 },
+					 { "width": "10%", "targets": 5 },
+					 { "width": "8%", "targets": 6 },
+	            ],
+	            responsive: true,
+	            "oLanguage": {
+	                "sEmptyTable": "<i>No Credit Report Found.</i>",
+	            }, 
+	            "bSort" : false,
+	            "bFilter":true,
+	            "bLengthChange": true,
+	            "iDisplayLength": 10,   
+	            "bProcessing": true,
+	            "serverSide": true,
+	            "ajax":{
+                    url :"<?php echo base_url();?>fetchcompalintrecords",
+                    type: "post",
+	            },
+	        });
+        });
 
 		$(document).ready(function() {
 

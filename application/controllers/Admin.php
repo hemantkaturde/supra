@@ -10784,7 +10784,7 @@ public function exportitcreportITC($ITC_report,$job_work_no,$from_date,$to_date)
                     $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, '');
                     $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, 'Non SEZ');
                     $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['po_number']);
-                    $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['date']);
+                    $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, date("d-m-Y", strtotime($element['date'])));
                     $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, 'Inputs');
                     $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, 'Part No '.$element['part_number']);
                     $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $element['unit']);
@@ -10853,11 +10853,11 @@ public function exportitcreportITC($ITC_report,$job_work_no,$from_date,$to_date)
                     $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, '');
                     $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, 'Non SEZ');
                     $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['po_number']);
-                    $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['date']);
+                    $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount,  date("d-m-Y", strtotime($element['date'])));
                     $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, '');
                     $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, '');
                     $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, 'Goods received back from JW');
-                    $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, $element['part_number']);
+                    $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, 'Part No '.$element['part_number']);
                     $objPHPExcel->getActiveSheet()->SetCellValue('J' . $rowCount, 'Pieces');
                     $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, '');
                     $rowCount++;
@@ -10915,8 +10915,101 @@ public function editcomplainform($id){
     $this->global['pageTitle'] = 'Edit Complain Form';
     $data['getcompalinformdata']= $this->admin_model->getcompalinformdata($id);
     $data['vendorList']= $this->admin_model->fetchALLvendorList();
-
     $this->loadViews("masters/editcomplainform", $this->global, $data, NULL);
+}
+
+
+public function creditnote(){
+
+    $process = 'Credit Note';
+    $processFunction = 'Admin/creditnote';
+    $this->logrecord($process,$processFunction);
+    $this->global['pageTitle'] = 'Credit Note';
+    $data['vendorList']= $this->admin_model->fetchALLvendorList();
+    $this->loadViews("masters/viewcreditnote", $this->global, $data, NULL);  
+}
+
+public function addcreditnote(){
+
+
+    $post_submit = $this->input->post();
+    if($post_submit){
+        $add_complainform_response = array();
+        $this->form_validation->set_rules('report_no','Report No','trim|required');
+        $this->form_validation->set_rules('stage','Stage','trim|required');
+        $this->form_validation->set_rules('drawing_no_rev_no','Drawing No / Rev No','trim|required');
+        $this->form_validation->set_rules('vendor_name','Vendor Name','trim|required');
+        $this->form_validation->set_rules('po_no_wo_no','PO_NO/WO_NO','trim|required');
+        $this->form_validation->set_rules('component_description','Component Description','trim|required');
+      
+        if($this->form_validation->run() == FALSE)
+        {
+            $add_complainform_response['status'] = 'failure';
+            $add_complainform_response['error'] = array('report_no'=>strip_tags(form_error('report_no')),'stage'=>strip_tags(form_error('stage')),'drawing_no_rev_no'=>strip_tags(form_error('drawing_no_rev_no')),'vendor_name'=>strip_tags(form_error('vendor_name')),'po_no_wo_no'=>strip_tags(form_error('po_no_wo_no')),'component_description'=>strip_tags(form_error('component_description')));
+
+        }else{
+
+            $data = array(
+                'report_no' => trim($this->input->post('report_no')),
+                'stage' => trim($this->input->post('stage')),
+                'date_of_observation_rejection_found' => trim($this->input->post('date_of_observation_rejection_found')),
+                'total_failure_qty' => trim($this->input->post('total_failure_qty')),
+                'drawing_no_rev_no' => trim($this->input->post('drawing_no_rev_no')),
+                'challan_no' => trim($this->input->post('challan_no')),
+                'vendor_name' => trim($this->input->post('vendor_name')),
+                'po_no_wo_no' => trim($this->input->post('po_no_wo_no')),
+                'poac' => trim($this->input->post('poac')),
+                'inword_no' => trim($this->input->post('inword_no')),
+                'component_description' => trim($this->input->post('component_description')),
+                'total_qty_checked' => trim($this->input->post('total_qty_checked')),
+                'problem_description' => trim($this->input->post('total_qty_checked')),
+                'intermidiate_disposal' => trim($this->input->post('intermidiate_disposal')),
+                'root_cause' => trim($this->input->post('root_cause')),
+                'coorection' => trim($this->input->post('coorection')),
+                'coorection_responsibility' => trim($this->input->post('coorection_responsibility')),
+                'coorection_date' => trim($this->input->post('coorection_date')),
+                'corrective_action_taken' => trim($this->input->post('corrective_action_taken')),
+                'corrective_action_responsibility' => trim($this->input->post('corrective_action_responsibility')),
+                'corrective_action_date' => trim($this->input->post('corrective_action_date')),
+                'effective_action' => trim($this->input->post('effective_action')),
+                'effective_action_responsiblity' => trim($this->input->post('effective_action_responsiblity')),
+                'effective_action_date' => trim($this->input->post('effective_action_date')),
+                'team' => trim($this->input->post('team')),
+                'prepared_by' => trim($this->input->post('prepared_by')),
+                'prepared_by_date' => trim($this->input->post('prepared_by_date')),                
+                'approved_by' => trim($this->input->post('approved_by')),
+                'approved_by_date' => trim($this->input->post('approved_by_date')),
+                'report_closed_by' => trim($this->input->post('report_closed_by')),
+                'report_close_date' => trim($this->input->post('report_close_date')),
+            );
+
+            if(trim($this->input->post('complain_form_id'))){
+                $complain_form_id = trim($this->input->post('complain_form_id'));
+            }else{
+                $complain_form_id = '';
+            }    
+
+            $savenewcomplaintform= $this->admin_model->savenewcomplaintform($complain_form_id,$data);
+              if($savenewcomplaintform){
+                  $add_complainform_response['status'] = 'success';
+                  $add_complainform_response['error'] = array('report_no'=>strip_tags(form_error('report_no')),'stage'=>strip_tags(form_error('stage')),'drawing_no_rev_no'=>strip_tags(form_error('drawing_no_rev_no')),'vendor_name'=>strip_tags(form_error('vendor_name')),'po_no_wo_no'=>strip_tags(form_error('po_no_wo_no')),'component_description'=>strip_tags(form_error('component_description')));
+                }else{
+                  $add_complainform_response['status'] = 'failure';
+                  $add_complainform_response['error'] = array('report_no'=>strip_tags(form_error('report_no')),'stage'=>strip_tags(form_error('stage')),'drawing_no_rev_no'=>strip_tags(form_error('drawing_no_rev_no')),'vendor_name'=>strip_tags(form_error('vendor_name')),'po_no_wo_no'=>strip_tags(form_error('po_no_wo_no')),'component_description'=>strip_tags(form_error('component_description')));
+                }
+        }
+        echo json_encode($add_complainform_response);
+    }else{
+
+        $process = 'Add Credit Note';
+        $processFunction = 'Admin/addcreditnote';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Add Credit Note';
+       // $data['getPreviousCreditnotenumber']= $this->admin_model->getPreviousCreditnotenumber()[0];
+        $data['vendorList']= $this->admin_model->fetchALLvendorList();
+        $this->loadViews("masters/addcreditnote", $this->global, $data, NULL);
+    }
+
 }
 
 }

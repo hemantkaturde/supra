@@ -403,6 +403,9 @@ $route['fetchcompalintrecords'] = "admin/fetchcompalintrecords";
 $route['deletecomplainform'] = "admin/deletecomplainform";
 $route['editcomplainform/(:any)'] = "admin/editcomplainform/$1";
 $route['itcreport'] = "admin/itcreport";
+$route['creditnote'] = "admin/creditnote";
+$route['addcreditnote'] = "admin/addcreditnote";
+
 
 
 
