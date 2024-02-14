@@ -10851,7 +10851,7 @@ public function exportitcreportITC($ITC_report,$job_work_no,$from_date,$to_date)
                 foreach ($empInfo as $element) {
                     $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $element['GSTIN']);
                     $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, '');
-                    $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, 'Non SEZ');
+                    $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, '');
                     $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['po_number']);
                     $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount,  date("d-m-Y", strtotime($element['date'])));
                     $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, '');

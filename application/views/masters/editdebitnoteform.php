@@ -198,7 +198,7 @@
 
                                     <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="freight_amount_charge">Freight Amount charge <span class="required">*</span></label>
+                                                <label for="freight_amount_charge">Courier/Return Charges <span class="required">*</span></label>
                                                   <input type="text" class="form-control"  value="<?=$getdebitnoteditailsdata[0]['freight_amount_charge'] ?>" id="freight_amount_charge" name="freight_amount_charge" required>
                                                 <p class="error freight_amount_charge_error"></p>
                                             </div>
