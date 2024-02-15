@@ -197,7 +197,7 @@
                                     <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="total_debit_amount_ok_qty">Total Amount of OK Quantity <span class="required">*</span></label>
-                                                  <input type="text" class="form-control"  value="<?=$totalDebitAndokQty['total_amount_of_ok_qty_data']?>" id="total_amount_of_ok_qty_data" name="total_amount_of_ok_qty_data" required readonly>
+                                                  <input type="text" class="form-control"  value="<?=$totalDebitAndokQty['total_amount_of_ok_qty_data']+$totalDebitAndokQty['SGST_value_ok_val']+$totalDebitAndokQty['CGST_value_ok_val']+$totalDebitAndokQty['IGST_value_ok_val']?>" id="total_amount_of_ok_qty_data" name="total_amount_of_ok_qty_data" required readonly>
                                                   <input type="hidden" class="form-control"  value="<?=$totalDebitAndokQty['total_amount_of_ok_qty']?>" id="total_amount_of_ok_qty" name="total_amount_of_ok_qty" required readonly>
                                                 <p class="error total_debit_amount_ok_qty_error"></p>
                                             </div>
