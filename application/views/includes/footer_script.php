@@ -12094,8 +12094,9 @@
 				 
 				//  var total_one_group = parseFloat(total_amount_of_ok_qty_data) +  parseFloat(total_amount_of_ok_qty) +  parseFloat(p_and_f_charges_main) ;
 
-				var total_one_group = parseFloat(total_amount_of_ok_qty_data) +  parseFloat(total_amount_of_ok_qty);
+				//var total_one_group = parseFloat(total_amount_of_ok_qty_data) +  parseFloat(total_amount_of_ok_qty);
 
+				 var total_one_group =  parseFloat(total_amount_of_ok_qty);
 
 				 var total_second_group = parseFloat(tds_amount) +  parseFloat(freight_amount_charge);
 
