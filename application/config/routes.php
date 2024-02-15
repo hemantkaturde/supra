@@ -405,6 +405,8 @@ $route['editcomplainform/(:any)'] = "admin/editcomplainform/$1";
 $route['itcreport'] = "admin/itcreport";
 $route['creditnote'] = "admin/creditnote";
 $route['addcreditnote'] = "admin/addcreditnote";
+$route['getPartDetailsbypartnumber'] = "admin/getPartDetailsbypartnumber";
+
 
 
 

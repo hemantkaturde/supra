@@ -120,15 +120,16 @@
                                             </div>
                                         </div> -->
 
+                                        
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="drawing_no_rev_no">Drawing No / REV NO <span class="required">*</span></label>
-                                                <input type="text" class="form-control" id="drawing_no_rev_no" name="drawing_no_rev_no" required>
-                                                <p class="error drawing_no_rev_no_error"></p>
+                                                <label for="challan_no">Challan NO</label>
+                                                <input type="text" class="form-control" id="challan_no" name="challan_no">
+                                                <p class="error challan_no_error"></p>
                                             </div>
                                         </div>
 
-
+                                     
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="total_failure_qty">Total Failure Qty</label>
@@ -148,13 +149,10 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="challan_no">Challan NO</label>
-                                                <input type="text" class="form-control" id="challan_no" name="challan_no">
-                                                <p class="error challan_no_error"></p>
-                                            </div>
-                                        </div>
+
+                                       
+
+
 
                                         <div class="col-md-4">
                                             <div class="form-group">
@@ -175,6 +173,18 @@
                                                     <select class="form-control po_no_wo_no"  name="po_no_wo_no" id="po_no_wo_no">
                                                         <option st-id="" value="">Select PO NO / WO NO</option>
                                                     </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="drawing_no_rev_no">Drawing No / REV NO <span class="required">*</span></label>
+                                                <!-- <input type="text" class="form-control" id="drawing_no_rev_no" name="drawing_no_rev_no" required> -->
+                                                    <select class="form-control" name="drawing_no_rev_no" id="drawing_no_rev_no">
+                                                        <option st-id="" value="">Select Drawing No / REV NO</option>
+                                                    </select>
+                                                    <p class="error drawing_no_rev_no_error"></p>
+                                                <p class="error drawing_no_rev_no_error"></p>
                                             </div>
                                         </div>
 
