@@ -7484,7 +7484,7 @@ class Admin extends BaseController
                         'CGST_value_ok_val' =>  trim($this->input->post('CGST_rate_ok')),
                         'IGST_value_ok_val' =>  trim($this->input->post('igst_rate_ok')),
                         'p_and_f_charges' =>  trim($this->input->post('p_and_f_charges')),
-                        'total_amount_of_ok_qty_data' =>trim($this->input->post('total_amount_of_ok_qty_data')),
+                        'total_amount_of_ok_qty_data' =>trim($this->input->post('rate')) * trim($this->input->post('ok_qty')),
                        // 'grand_total' =>  trim($this->input->post('grand_total')),
                         'total_amount_of_ok_qty' =>trim($this->input->post('total_ok_qty_amount')),
                         'debit_amount' =>  trim($this->input->post('debit_amount')),
