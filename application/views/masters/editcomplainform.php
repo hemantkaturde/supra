@@ -51,13 +51,17 @@
                                             </div>
                                         </div>
 
+
+                                        
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="drawing_no_rev_no">Drawing No / REV NO <span class="required">*</span></label>
-                                                <input type="text" class="form-control" id="drawing_no_rev_no" value="<?=$getcompalinformdata['drawing_no_rev_no']?>" name="drawing_no_rev_no" required>
-                                                <p class="error drawing_no_rev_no_error"></p>
+                                                <label for="challan_no">Challan NO</label>
+                                                <input type="text" class="form-control" id="challan_no"  value="<?=$getcompalinformdata['challan_no']?>" name="challan_no">
+                                                <p class="error challan_no_error"></p>
                                             </div>
                                         </div>
+
+
 
 
                                         <div class="col-md-4">
@@ -79,13 +83,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="challan_no">Challan NO</label>
-                                                <input type="text" class="form-control" id="challan_no"  value="<?=$getcompalinformdata['challan_no']?>" name="challan_no">
-                                                <p class="error challan_no_error"></p>
-                                            </div>
-                                        </div>
+                                        
 
 
                                         <div class="col-md-4">
@@ -137,14 +135,46 @@
                                             </div>
                                         </div> -->
 
+                                        
+                                    
+
+
+                                        <?php if($getcompalinformdata['drawing_no_rev_no']){
+                                             $value_drwing = $getcompalinformdata['part_number'];
+                                             $selected_drwing = 'selected';
+                                        }else{ 
+                                             $value_drwing = '';
+                                             $selected_drwing = '';
+
+                                         } ?>
+
+
+
+
+                                        
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="drawing_no_rev_no">Drawing No / REV NO <span class="required">*</span></label>
+                                                <!-- <input type="text" class="form-control" id="drawing_no_rev_no" name="drawing_no_rev_no" required> -->
+                                                    <select class="form-control drawing_no_rev_no" name="drawing_no_rev_no" id="drawing_no_rev_no">
+                                                        <option st-id="" value="">Select Drawing No / REV NO</option>
+                                                        <option st-id="" value="<?=$getcompalinformdata['drawing_no_rev_no']?>" <?=$selected_drwing?>><?=$value_drwing?></option>
+
+                                                    </select>
+                                                <p class="error drawing_no_rev_no_error"></p>
+                                            </div>
+                                        </div>
+
+
                                         <?php if($getcompalinformdata['part_number_id']){
-                                             $value = $getcompalinformdata['part_number'];
+                                             $value = $getcompalinformdata['name'];
                                              $selected = 'selected';
                                         }else{ 
                                              $value = '';
                                              $selected = '';
 
                                          } ?>
+
 
 
                                         <div class="col-md-4">

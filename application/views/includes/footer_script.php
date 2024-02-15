@@ -17419,39 +17419,37 @@
 	        });
         });
 
-		$(document).ready(function() {
+		// $(document).ready(function() {
 
-			e.preventDefault();
-			//$(".loader_ajax").show();
-			var vendor_po_number = $('#po_no_wo_no').val();
+		// 	var vendor_po_number = $('#po_no_wo_no').val();
 
-			$("#component_description").html('');
+		// 	$("#drawing_no_rev_no").html('');
 		
-			$.ajax({
-				url : "<?php echo ADMIN_PATH;?>getVendoritemonly",
-				type: "POST",
-				data : {'vendor_po_number' : vendor_po_number},
-				success: function(data, textStatus, jqXHR)
-				{
-					$(".loader_ajax").hide();
-					if(data == "failure")
-					{
-						$('#component_description').html('<option value="">Select Part Number</option>');
-					}
-					else
-					{
-						$('#component_description').html(data);
+		// 	$.ajax({
+		// 		url : "<?php echo ADMIN_PATH;?>getVendoritemonly",
+		// 		type: "POST",
+		// 		data : {'vendor_po_number' : vendor_po_number},
+		// 		success: function(data, textStatus, jqXHR)
+		// 		{
+		// 			$(".loader_ajax").hide();
+		// 			if(data == "failure")
+		// 			{
+		// 				$('#drawing_no_rev_no').html('<option value="">Select Part Number</option>');
+		// 			}
+		// 			else
+		// 			{
+		// 				$('#drawing_no_rev_no').html(data);
 
-					}
-				},
-				error: function (jqXHR, textStatus, errorThrown)
-				{
-					$('#component_description').html();
-				}
-			});
-			return false;
+		// 			}
+		// 		},
+		// 		error: function (jqXHR, textStatus, errorThrown)
+		// 		{
+		// 			$('#drawing_no_rev_no').html();
+		// 		}
+		// 	});
+		// 	return false;
 		    
-        });
+        // });
 
 		$(document).on('click','#savenewcompalinformdata',function(e){
 			e.preventDefault();
@@ -17626,7 +17624,7 @@
 					$(".loader_ajax").hide();
 					if(data == "failure")
 					{
-						$('#component_description').html('<option value="">Select Part Number</option>');
+						$('#component_description').html('<option value="">Select Part </option>');
 					}
 					else
 					{

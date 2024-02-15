@@ -180,10 +180,9 @@
                                             <div class="form-group">
                                                 <label for="drawing_no_rev_no">Drawing No / REV NO <span class="required">*</span></label>
                                                 <!-- <input type="text" class="form-control" id="drawing_no_rev_no" name="drawing_no_rev_no" required> -->
-                                                    <select class="form-control" name="drawing_no_rev_no" id="drawing_no_rev_no">
+                                                    <select class="form-control drawing_no_rev_no" name="drawing_no_rev_no" id="drawing_no_rev_no">
                                                         <option st-id="" value="">Select Drawing No / REV NO</option>
                                                     </select>
-                                                    <p class="error drawing_no_rev_no_error"></p>
                                                 <p class="error drawing_no_rev_no_error"></p>
                                             </div>
                                         </div>

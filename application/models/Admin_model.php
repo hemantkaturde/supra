@@ -9780,7 +9780,7 @@ class Admin_model extends CI_Model
 
     public function getcompalinformdata($id){
 
-        $this->db->select(TBL_COMPLAIN_FORM.'.*,'.TBL_VENDOR_PO_MASTER.'.id as vendor_po_number_id,'.TBL_VENDOR_PO_MASTER.'.po_number,'.TBL_FINISHED_GOODS.'.fin_id,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
+        $this->db->select(TBL_COMPLAIN_FORM.'.*,'.TBL_VENDOR_PO_MASTER.'.id as vendor_po_number_id,'.TBL_VENDOR_PO_MASTER.'.po_number,'.TBL_FINISHED_GOODS.'.fin_id,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id,'.TBL_FINISHED_GOODS.'.name');
         //$this->db->select(TBL_COMPLAIN_FORM.'.*');
         $this->db->where(TBL_COMPLAIN_FORM.'.status', 1);
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_COMPLAIN_FORM.'.vendor_name');
@@ -9803,6 +9803,19 @@ class Admin_model extends CI_Model
         $query = $this->db->get(TBL_COMPLAIN_FORM);
         $rowcount = $query->result_array();
         return $rowcount;
+    }
+
+    public function getPartDetailsbypartnumber($itemid){
+
+        $this->db->select('*');
+        // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+        $this->db->where(TBL_FINISHED_GOODS.'.status',1);
+        //$this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
+        $this->db->where(TBL_FINISHED_GOODS.'.fin_id',$itemid);
+        $query = $this->db->get(TBL_FINISHED_GOODS);
+        $data = $query->result_array();
+        return $data;
+
     }
 
 }

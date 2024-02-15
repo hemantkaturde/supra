@@ -10908,6 +10908,25 @@ public function deletecomplainform(){
 
 }
 
+public function getPartDetailsbypartnumber(){
+    $drawing_no_rev_no=$this->input->post('drawing_no_rev_no');
+    if($drawing_no_rev_no) {
+        $drawing_no_rev_noItem = $this->admin_model->getPartDetailsbypartnumber($drawing_no_rev_no);
+        if(count($drawing_no_rev_noItem) >= 1) {
+            $content = $content.'<option value="">Select Part Number</option>';
+            foreach($drawing_no_rev_noItem as $value) {
+                $content = $content.'<option value="'.$value["fin_id"].'">'.$value["name"].'</option>';
+            }
+            echo $content;
+        } else {
+            echo 'failure';
+        }
+    } else {
+        echo 'failure';
+    }
+
+}
+
 public function editcomplainform($id){
     $process = 'Edit Complain Form';
     $processFunction = 'Admin/editcomplainform';
