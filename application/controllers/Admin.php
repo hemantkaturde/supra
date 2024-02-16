@@ -11051,4 +11051,16 @@ public function getBuyerPonumbercreditnote(){
 
 }
 
+
+public function getPartnumberBypartnumberforcreitnote(){
+
+    if($this->input->post('part_number')) {
+        $getPartNameBypartid = $this->admin_model->getPartnumberBypartnumberforcreitnote($this->input->post('part_number'));
+        $content = $getPartNameBypartid[0];
+        echo json_encode($content);
+    } else {
+        echo 'failure';
+    }
+}
+
 }

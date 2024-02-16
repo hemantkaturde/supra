@@ -9812,7 +9812,6 @@ class Admin_model extends CI_Model
         $fetch_result = $query->row_array();
         return $fetch_result;
     }
-    
 
     public function getPreviousCompalinformnumber(){
 
@@ -9838,7 +9837,6 @@ class Admin_model extends CI_Model
 
     }
 
-
     public function getBuyerPonumbercreditnote($buyer_name){
 
         $this->db->select(TBL_BUYER_PO_MASTER.'.*');
@@ -9856,6 +9854,16 @@ class Admin_model extends CI_Model
 			$query_result[$key]['selected'] = '';
 		}
         return $query_result;
+    }
+
+    public function getPartnumberBypartnumberforcreitnote($part_number){
+        $this->db->select('*');
+        $this->db->where(TBL_FINISHED_GOODS.'.status',1);
+        $this->db->where(TBL_FINISHED_GOODS.'.fin_id ',$part_number);
+        $query = $this->db->get(TBL_FINISHED_GOODS);
+        $data = $query->result_array();
+        return $data;
+
     }
 
 }

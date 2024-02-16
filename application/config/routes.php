@@ -404,9 +404,6 @@ $route['deletecomplainform'] = "admin/deletecomplainform";
 $route['editcomplainform/(:any)'] = "admin/editcomplainform/$1";
 $route['itcreport'] = "admin/itcreport";
 $route['getPartDetailsbypartnumber'] = "admin/getPartDetailsbypartnumber";
-
-
-
 $route['creditnote'] = "admin/creditnote";
 $route['addcreditnote'] = "admin/addcreditnote";
 $route['getBuyerPonumbercreditnote'] = "admin/getBuyerPonumbercreditnote";
@@ -418,8 +415,7 @@ $route['getBuyerPonumbercreditnote'] = "admin/getBuyerPonumbercreditnote";
 
 
 
-
-
+$route['getPartnumberBypartnumberforcreitnote'] = "admin/getPartnumberBypartnumberforcreitnote";
 
 
 

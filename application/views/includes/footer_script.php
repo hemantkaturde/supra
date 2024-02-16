@@ -17677,7 +17677,6 @@
 	        });
         });
 
-
 		$(document).on('change','#buyer_name',function(e){  
 			e.preventDefault();
 			//$(".loader_ajax").show();
@@ -17711,7 +17710,6 @@
 			return false;
 		});
 
-
 		$(document).on('change','.buyer_name_for_currency',function(e){  
 			e.preventDefault();
 
@@ -17744,10 +17742,76 @@
 			return false;
 		});
 
+		$(document).on('change','.buyer_po_number_for_item',function(e){  
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			var buyer_po_number = $('.buyer_po_number_for_item').val();
 
+			$("#part_number").html('');
 
-
+			var flag = 'Buyer';
 		
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getSuppliritemonlyforgetbuyeritemonly",
+				type: "POST",
+				data : {'supplier_po_number' : buyer_po_number,'flag':flag},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#part_number').html('<option value="">Select Part Number</option>');
+					}
+					else
+					{
+						$('#part_number').html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#part_number').html();
+				}
+			});
+			return false;
+		});
+
+		$(document).on('change','#part_number',function(e){  
+			e.preventDefault();
+			
+			//$(".loader_ajax").show();
+			var part_number = $('#part_number').val();
+			
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getPartnumberBypartnumberforcreitnote",
+				type: "POST",
+				data : {'part_number' : part_number},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#description').value('');
+						$('#hsn_code').val('');
+					}
+					else
+					{
+						var data_row_material = jQuery.parseJSON( data );
+						$('#description').val(data_row_material.name);
+						$('#hsn_code').val(data_row_material.hsn_code);
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					    $('#description').value('');
+						$('#hsn_code').val('');
+					   //$(".loader_ajax").hide();
+				}
+			});
+			return false;
+		});
+
+
 
     </script>
 <?php } ?>

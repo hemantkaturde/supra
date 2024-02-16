@@ -220,8 +220,8 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">HSN Code</label>
                                                         <div class="col-sm-8">
-                                                            <input type="text" class="form-control"  id="HSN_Code" name="HSN_Code" readonly>
-                                                            <p class="error HSN_Code_error"></p>
+                                                            <input type="text" class="form-control"  id="hsn_code" name="hsn_code" readonly>
+                                                            <p class="error hsn_code_error"></p>
                                                         </div>
                                                     </div>
 
