@@ -29,10 +29,10 @@
                                         if($getPreviousjobworkponumber['po_number']){
                                             $arr = str_split($getPreviousjobworkponumber['po_number']);
                                             $i = end($arr);
-                                            $inrno= "SQJW2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                            $inrno= "SQCN2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
                                             $po_number = $inrno;
                                         }else{
-                                            $po_number = 'SQJW23240001';
+                                            $po_number = 'SQCN23240001';
                                         }
                                     ?>
                                     
@@ -45,8 +45,8 @@
                                     </div>
 
 
-                                    <?php if($fetchALLprejobworkitemList[0]['pre_date']){
-                                        $date= $fetchALLprejobworkitemList[0]['pre_date'];
+                                    <?php if($fetchALLpreCredititemList[0]['pre_date']){
+                                        $date= $fetchALLpreCredititemList[0]['pre_date'];
                                      }else{
                                         $date= date('Y-m-d');
                                      } ?>
@@ -66,16 +66,16 @@
                                                 <select class="form-control buyer_name_for_currency" name="buyer_name" id="buyer_name">
                                                     <option st-id="" value="">Select Buyer Name</option>
                                                     <?php foreach ($buyerList as $key => $value) {?>
-                                                    <option value="<?php echo $value['buyer_id']; ?>" <?php if($value['buyer_id']==$fetchALLpresupplieritemList[0]['pre_buyer_name']){ echo 'selected';} ?> ><?php echo $value['buyer_name']; ?></option>
+                                                    <option value="<?php echo $value['buyer_id']; ?>" <?php if($value['buyer_id']==$fetchALLpreCredititemList[0]['pre_buyer_name']){ echo 'selected';} ?> ><?php echo $value['buyer_name']; ?></option>
                                                     <?php } ?>
                                                 </select>
                                             <p class="error buyer_name_error"></p>
                                         </div>
                                     </div>
 
-                                    <?php if($fetchALLpresupplieritemList[0]['pre_buyer_po_number']){
+                                    <?php if($fetchALLpreCredititemList[0]['pre_buyer_po_number']){
                                         $display='block';
-                                        $selected_value = $fetchALLpresupplieritemList[0]['sales_order_number'];
+                                        $selected_value = $fetchALLpreCredititemList[0]['sales_order_number'];
 
                                     }else{
                                         $display='none';
@@ -85,11 +85,11 @@
                                     <div class="col-md-12 buyer_po_number_div" >
                                             <div class="form-group">
                                                     <label for="buyer_po_number">Select Buyer PO Number <span class="required">*</span></label>
-                                                    <select class="form-control buyer_po_number_for_item" name="buyer_po_number" id="buyer_po_number">
-                                                    <option st-id="" value="<?=$fetchALLpresupplieritemList[0]['pre_buyer_po_number']?>" selected ><?=$selected_value;?></option>
+                                                    <select class="form-control buyer_po_number_for_item buyer_po_number_for_export_invoice" name="buyer_po_number" id="buyer_po_number">
+                                                    <option st-id="" value="<?=$fetchALLpreCredititemList[0]['pre_buyer_po_number']?>" selected ><?=$selected_value;?></option>
                                                         <!-- <option st-id="" value="">Select Buyer Name</option>
                                                         <?php foreach ($buyerList as $key => $value) {?>
-                                                        <option value="<?php echo $value['buyer_id']; ?>" <?php if($value['buyer_id']==$fetchALLpresupplieritemList[0]['pre_buyer_name']){ echo 'selected';} ?> ><?php echo $value['buyer_name']; ?></option>
+                                                        <option value="<?php echo $value['buyer_id']; ?>" <?php if($value['buyer_id']==$fetchALLpreCredititemList[0]['pre_buyer_name']){ echo 'selected';} ?> ><?php echo $value['buyer_name']; ?></option>
                                                         <?php } ?> -->
                                                     </select> 
                                                 <p class="error buyer_po_number_error"></p>
@@ -100,7 +100,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="Currency">Currency</label>
-                                            <input type="text" class="form-control" id="currency" name="currency" required readonly>
+                                            <input type="text" class="form-control" id="currency" name="currency" value="<?=$fetchALLpreCredititemList[0]['currency']?>" required readonly>
                                             <p class="error currency_error"></p>
                                         </div>
                                     </div>
@@ -131,7 +131,6 @@
                                                         <th>Price</th>
                                                         <th>Inv Value</th>
                                                         <th>Recived Amount</th>
-                                                        <th>Diff</th>
                                                         <th>Credit Note value</th>
                                                         <th>Remark</th>
                                                         <th>Action</th>
@@ -140,21 +139,21 @@
                                                 <tbody>
                                                     <?php
                                                         $count=0;
-                                                           foreach ($fetchALLprejobworkitemList as $key => $value) :
+                                                           foreach ($fetchALLpreCredititemList as $key => $value) :
                                                            $count++;
+
                                                     ?>
                                                     <tr>
                                                         <td><?php echo $count;?></td>
                                                         <td><?php echo $value['part_number'];?></td>
-                                                        <td><?php echo $value['description'];?></td>
-                                                        <td><?php echo $value['vendor_qty'];?></td>
-                                                        <td><?php echo $value['rm_actual_qty'];?></td>
-                                                        <td><?php echo $value['ram_rate'];?></td>
-                                                        <td><?php echo $value['value'];?></td>
-                                                        <td><?php echo $value['packing_forwarding'];?></td>
-                                                        <td><?php echo $value['total'];?></td>
-                                                        <td><?php echo $value['gst'];?></td>
-                                                        <td><?php echo $value['grand_total'];?></td>
+                                                        <td><?php echo $value['name'];?></td>
+                                                        <td><?php echo $value['invoice_no'];?></td>
+                                                        <td><?php echo $value['invoice_date'];?></td>
+                                                        <td><?php echo $value['qty'];?></td>
+                                                        <td><?php echo $value['price'];?></td>
+                                                        <td><?php echo $value['invoice_value'];?></td>
+                                                        <td><?php echo $value['recivable_amount'];?></td>
+                                                        <td><?php echo $value['diff_credite_note_value'];?></td>
                                                         <td><?php echo $value['item_remark'];?></td>
                                                         <td>
                                                            <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['jobworkitemid'];?>' class='fa fa-pencil-square-o editjobworkitem'  aria-hidden='true'></i>
@@ -186,9 +185,9 @@
                                                 <!-- <span aria-hidden="true">&times;</span> -->
                                                 </button>
                                             </div>
-                                            <form role="form" id="savejobworkitemform" action="<?php echo base_url() ?>savejobworkitemform" method="post" role="form">
+                                            <form role="form" id="savecreditnoteinformationform" action="<?php echo base_url() ?>savecreditnoteinformationform" method="post" role="form">
 
-                                                <input type="hidden" class="form-control"  id="jobwork_item_id" name="jobwork_item_id" required readonly>
+                                                <!-- <input type="hidden" class="form-control"  id="jobwork_item_id" name="jobwork_item_id" required readonly> -->
 
                                                 <div class="modal-body">
                                                         <div class="loader_ajax" style="display:none;">
@@ -229,8 +228,13 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Invoice Number <span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="text" class="form-control"  id="invoice_number" name="invoice_number">
-                                                            <p class="error raw_material_size_error"></p>
+                                                            <select class="form-control invoice_number" name="invoice_number" id="invoice_number">
+                                                                <option st-id="" value="">Select Invoice Name</option>
+                                                                <!-- <?php foreach ($exportInvoiceList as $key => $value) {?>        
+                                                                    <option value="<?php echo $value['id']; ?>"><?php echo $value['buyer_invoice_number']; ?></option>
+                                                                <?php } ?> -->
+                                                            </select>
+                                                            <p class="error invoice_number_error"></p>
                                                         </div>
                                                     </div>
 
@@ -238,7 +242,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Invoice Date <span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="number" class="form-control"  id="invoice_date" name="invoice_date">
+                                                            <input type="text" class="form-control"  id="invoice_date" name="invoice_date" readonly>
                                                             <p class="error invoice_date_error"></p>
                                                         </div>
                                                     </div>
@@ -247,8 +251,8 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Qty <span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="number" class="form-control"  id="rm_actual_aty" name="rm_actual_aty">
-                                                            <p class="error rm_actual_aty_error"></p>
+                                                            <input type="number" class="form-control"  id="qty" name="qty">
+                                                            <p class="error qty_error"></p>
                                                         </div>
                                                     </div>
 
@@ -258,8 +262,8 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Price<span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="number" class="form-control"  id="rm_rate" name="rm_rate">
-                                                            <p class="error rm_rate_error"></p>
+                                                            <input type="number" class="form-control"  id="rate" name="rate">
+                                                            <p class="error rate_error"></p>
                                                         </div>
                                                     </div>
 
@@ -267,8 +271,8 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Invoice Value<span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="number" class="form-control"  id="value" name="value" readonly>
-                                                            <p class="error value_error"></p>
+                                                            <input type="text" class="form-control"  id="invoice_value" name="invoice_value" readonly>
+                                                            <p class="error invoice_value_error"></p>
                                                         </div>
                                                     </div>
 
@@ -276,8 +280,8 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Recivable Amount<span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="number" class="form-control"  id="packing_and_forwarding"  value="0" name="packing_and_forwarding">
-                                                            <p class="error packing_and_forwarding_error"></p>
+                                                            <input type="text" class="form-control"  id="recivable_amount" name="recivable_amount">
+                                                            <p class="error recivable_amount_error"></p>
                                                         </div>
                                                     </div>
 
@@ -285,8 +289,8 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Differnce (Credit Note Value)<span class="required">*</span></label>
                                                         <div class="col-sm-8">
-                                                            <input type="number" class="form-control"  id="total" name="total" readonly>
-                                                            <p class="error total_error"></p>
+                                                            <input type="text" class="form-control"  id="diff_value" name="diff_value" readonly>
+                                                            <p class="error diff_value_error"></p>
                                                         </div>
                                                     </div>
 
@@ -302,7 +306,7 @@
 
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary btn-xl closejobworkmodal" data-dismiss="modal">Close</button>
-                                                    <button type="submit" id="saveJobworktem" name="saveJobworktem" class="btn btn-primary" class="btn btn-success btn-xl">Save</button>
+                                                    <button type="submit" id="savecreditnoteitrminformation" name="savecreditnoteitrminformation" class="btn btn-primary" class="btn btn-success btn-xl">Save</button>
                                                 </div>
 
                                             </form>    
@@ -316,7 +320,7 @@
                             <!-- /.box-body -->
                             <div class="box-footer">
                                 <div class="col-xs-8">
-                                    <?php if($fetchALLprejobworkitemList){
+                                    <?php if($fetchALLpreCredititemList){
                                         $disabled= '';
                                     }else{ 
                                         $disabled= 'disabled';

@@ -2041,7 +2041,7 @@ class Admin_model extends CI_Model
   
         }
   
-      }
+    }
 
     public function checkIfexitsSupplierpoconfirmation($po_number){
 
@@ -9865,6 +9865,68 @@ class Admin_model extends CI_Model
         return $data;
 
     }
+
+
+   public function fetchexportInvoiceList(){
+        $this->db->select('*');
+        $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.status', 1);
+        $query = $this->db->get(TBL_PACKING_INSTRACTION_DETAILS);
+        $data = $query->result_array();
+        return $data;
+   }
+
+   public function getexportInvoicebybyerpo($supplier_po_number){
+          $this->db->select(TBL_PACKING_INSTRACTION_DETAILS.'.id as invoice_id,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_number');
+          $this->db->join(TBL_PACKING_INSTRACTION, TBL_PACKING_INSTRACTION.'.id = '.TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id');
+          $this->db->where(TBL_PACKING_INSTRACTION.'.buyer_po_number',$supplier_po_number);
+          $query = $this->db->get(TBL_PACKING_INSTRACTION_DETAILS);
+          $data = $query->result_array();
+          return $data;
+   }
+
+   public function getInvoicedateforcreditdate($invoice_number){
+        $this->db->select('buyer_invoice_date');
+        $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.status',1);
+        $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.id',$invoice_number);
+        $query = $this->db->get(TBL_PACKING_INSTRACTION_DETAILS);
+        $data = $query->result_array();
+        return $data;
+   } 
+
+
+   public function saveCreditNoteitamdata($id,$data){
+
+    if($id != '') {
+        $this->db->where('id', $id);
+        if($this->db->update(TBL_CREDIT_NOTE_ITEM, $data)){
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    } else {
+        if($this->db->insert(TBL_CREDIT_NOTE_ITEM, $data)) {
+            return $this->db->insert_id();;
+        } else {
+            return FALSE;
+        }
+    }
+
+   }
+
+
+   public function fetchALLpreCredititemList(){
+
+        $this->db->select('*');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_CREDIT_NOTE_ITEM.'.part_number');
+        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_CREDIT_NOTE_ITEM.'.pre_buyer_po_number');
+        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_CREDIT_NOTE_ITEM.'.pre_buyer_name');
+        // $this->db->where(TBL_JOB_WORK_ITEM.'.jobwork_id IS NULL');
+        // $this->db->order_by(TBL_CREDIT_NOTE_ITEM.'.id','desc');
+        $query = $this->db->get(TBL_CREDIT_NOTE_ITEM);
+        $data = $query->result_array();
+        return $data;
+
+   }
 
 }
 

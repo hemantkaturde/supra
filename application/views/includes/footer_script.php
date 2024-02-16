@@ -11229,8 +11229,6 @@
 
 		 });
 
-
-
 		 $(document).on('change','#vendor_supplier_name',function(e){  
 				e.preventDefault();
 			
@@ -17848,6 +17846,39 @@
 			});
 			return false;
 		});
+		
+		$(document).on('change','.buyer_po_number_for_export_invoice',function(e){  
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			var buyer_po_number = $('.buyer_po_number_for_export_invoice').val();
+
+			$("#invoice_number").html('');
+
+		
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getexportInvoicebybyerpo",
+				type: "POST",
+				data : {'supplier_po_number' : buyer_po_number},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#invoice_number').html('<option value="">Select Invoice Number</option>');
+					}
+					else
+					{
+						$('#invoice_number').html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#invoice_number').html();
+				}
+			});
+			return false;
+		});
 
 		$(document).on('change','#part_number',function(e){  
 			e.preventDefault();
@@ -17883,6 +17914,147 @@
 			});
 			return false;
 		});
+
+		$(document).on('change', '#rate,#qty', function(){	
+				 $("#invoice_value").val();
+
+				 if($("#rate").val()){
+					 var rate = $("#rate").val();
+				 }else{
+					 var rate = 0;
+				 }
+
+				 if($("#qty").val()){
+					 var qty = $("#qty").val();
+				 }else{
+					 var qty = 0;
+				 }
+
+				 var total_second_group = parseFloat(rate) *  parseFloat(qty);
+				 $("#invoice_value").val(Math.round(total_second_group));
+
+		});
+
+		$(document).on('change', '#recivable_amount', function(){	
+				 $("#diff_value").val();
+
+				 if($("#invoice_value").val()){
+					 var invoice_value = $("#invoice_value").val();
+				 }else{
+					 var invoice_value = 0;
+				 }
+
+				 if($("#recivable_amount").val()){
+					 var recivable_amount = $("#recivable_amount").val();
+				 }else{
+					 var recivable_amount = 0;
+				 }
+				 var total_second_group = parseFloat(invoice_value) - parseFloat(recivable_amount);
+				 $("#diff_value").val(Math.round(total_second_group));
+
+		});
+
+		$(document).on('change','.invoice_number',function(e){  
+			e.preventDefault();
+
+			$('#currency').html();
+			
+			//$(".loader_ajax").show();
+			var invoice_number = $('#invoice_number').val();
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getInvoicedateforcreditdate",
+				type: "POST",
+				data : {'invoice_number' : invoice_number},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#invoice_date').value('');
+					}
+					else
+					{
+						$('#invoice_date').val(data);
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#invoice_date').html();
+					//$(".loader_ajax").hide();
+				}
+			});
+			return false;
+		});
+
+		$(document).on('click','#savecreditnoteitrminformation',function(e){
+			e.preventDefault();
+			   $(".loader_ajax").show();
+			   var formData = new FormData($("#savecreditnoteinformationform")[0]);
+
+			   var part_number =   $('#part_number').val();
+			   var description =   $('#description').val();
+			   var invoice_no =   $('#invoice_number').val();
+			   var invoice_date =   $('#invoice_date').val();
+			   var qty =   $('#qty').val();
+			   var rate =   $('#rate').val();
+			   var invoice_value =   $('#invoice_value').val();
+			   var recivable_amount =   $('#recivable_amount').val();
+			   var diff_value =   $('#diff_value').val();
+			   var item_remark =   $('#item_remark').val();
+
+			   var pre_date =   $('#date').val();
+			   var pre_buyer_name =   $('#buyer_name').val();
+			   var pre_buyer_po_number =   $('#buyer_po_number').val();
+			   var pre_currency =   $('#currency').val();
+			   var pre_remark =   $('#remark').val();
+			
+			   $.ajax({
+				url : "<?php echo base_url();?>saveCreditnoteitem",
+				type: "POST",
+				 //data : formData,
+				 data :{part_number:part_number,description:description,invoice_no:invoice_no,invoice_date:invoice_date,qty:qty,rate:rate,invoice_value:invoice_value,recivable_amount:recivable_amount,diff_value:diff_value,item_remark:item_remark,pre_date:pre_date,pre_buyer_name:pre_buyer_name,pre_buyer_po_number:pre_buyer_po_number,pre_currency:pre_currency,pre_remark:pre_remark},
+				 method: "POST",
+                // data :{package_id:package_id},
+                cache:false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+						$(".loader_ajax").hide();
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						swal({
+							title: "Success",
+							text: "Item Successfully Added!",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+
+								// if(debit_id){
+								// 	window.location.href = "<?php echo base_url().'editdebitnoteform/'?>"+debit_id;
+								// }else{
+									window.location.href = "<?php echo base_url().'creditnote'?>";
+								// }
+							
+						});		
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			   });
+			return false;
+	     });
+
+
 
 
 

@@ -4303,7 +4303,6 @@ class Admin extends BaseController
 
     }
 
-
     public function billofmaterial(){
 
         $process = 'Bill of Material';
@@ -4488,7 +4487,6 @@ class Admin extends BaseController
 
     }
 
-
     public function deleteBillofmaterial(){
         $post_submit = $this->input->post();
         if($post_submit){
@@ -4618,7 +4616,6 @@ class Admin extends BaseController
         }
     }
 
-
     public function editvendorbillofmaterial($edit_id){
         $process = 'Edit Vendor Bill Of Material';
         $processFunction = 'Admin/editvendorbillofmaterial';
@@ -4673,7 +4670,6 @@ class Admin extends BaseController
 
     }
 
-
     public function getVendoritemsonlyvendorBillofmaterial(){
 
         $vendor_po_number=$this->input->post('vendor_po_number');
@@ -4695,7 +4691,6 @@ class Admin extends BaseController
 		}
 
     }
-
 
     public function getSuppliergoodsPartnumberByidforvendorbillofmaetrial(){
 
@@ -11024,8 +11019,11 @@ public function addcreditnote(){
         $processFunction = 'Admin/addcreditnote';
         $this->logrecord($process,$processFunction);
         $this->global['pageTitle'] = 'Add Credit Note';
-       // $data['getPreviousCreditnotenumber']= $this->admin_model->getPreviousCreditnotenumber()[0];
+        //$data['getPreviousCreditnotenumber']= $this->admin_model->getPreviousCreditnotenumber()[0];
         $data['buyerList']= $this->admin_model->fetchAllbuyerList();
+        $data['exportInvoiceList']= $this->admin_model->fetchexportInvoiceList();
+        $data['fetchALLpreCredititemList']= $this->admin_model->fetchALLpreCredititemList();
+
         $this->loadViews("masters/addcreditnote", $this->global, $data, NULL);
     }
 
@@ -11061,6 +11059,128 @@ public function getPartnumberBypartnumberforcreitnote(){
     } else {
         echo 'failure';
     }
+}
+
+
+public function getexportInvoicebybyerpo(){
+    $supplier_po_number=$this->input->post('supplier_po_number');
+    if($supplier_po_number) {
+        $getSupplieritemsonly = $this->admin_model->getexportInvoicebybyerpo($supplier_po_number);
+        if(count($getSupplieritemsonly) >= 1) {
+            $content = $content.'<option value="">Select Part Number</option>';
+            foreach($getSupplieritemsonly as $value) {
+                $content = $content.'<option value="'.$value["invoice_id"].'">'.$value["buyer_invoice_number"].'</option>';
+            }
+            echo $content;
+        } else {
+            echo 'failure';
+        }
+    } else {
+        echo 'failure';
+    }
+
+}
+
+
+public function getInvoicedateforcreditdate() {
+    if($this->input->post('invoice_number')) {
+                $getBuyerCurrency = $this->admin_model->getInvoicedateforcreditdate($this->input->post('invoice_number'));
+                $content = $getBuyerCurrency[0]['buyer_invoice_date'];
+            echo $content;
+    } else {
+        echo 'failure';
+    }
+}
+
+
+
+public function saveCreditnoteitem(){
+    $post_submit = $this->input->post();
+    if($post_submit){
+
+        $saveCreditnoteitem_response = array();
+        $this->form_validation->set_rules('part_number','Part Number','trim|required');
+        $this->form_validation->set_rules('invoice_no','Invoice Number','trim|required');
+        $this->form_validation->set_rules('invoice_date','Invoice_date','trim|required');
+        $this->form_validation->set_rules('qty','Qty','trim|required');
+        $this->form_validation->set_rules('rate','Rate','trim|required');
+        $this->form_validation->set_rules('invoice_value','Invoice Value','trim|required');
+        $this->form_validation->set_rules('recivable_amount','Recivable Amount','trim|required');
+        $this->form_validation->set_rules('diff_value','Diff Value','trim|required');
+        $this->form_validation->set_rules('item_remark','Item Remark','trim');
+
+        if($this->form_validation->run() == FALSE)
+        {
+            $saveCreditnoteitem_response['status'] = 'failure';
+            $saveCreditnoteitem_response['error'] = array(
+                'part_number'=>strip_tags(form_error('part_number')),
+                'invoice_no'=>strip_tags(form_error('invoice_no')),
+                'invoice_date'=>strip_tags(form_error('invoice_date')),
+                'qty'=>strip_tags(form_error('qty')),
+                'rate'=>strip_tags(form_error('rate')),
+                'invoice_value'=>strip_tags(form_error('invoice_value')),
+                'recivable_amount'=>strip_tags(form_error('recivable_amount')),
+                'diff_value'=>strip_tags(form_error('diff_value')),
+                'item_remark'=>strip_tags(form_error('item_remark')));
+        }else{
+
+            $bom_id_edit =   $this->input->post('credit_note_id');
+
+            if($bom_id_edit){
+                $incoming_details_id =$bom_id_edit;
+            }else{
+                $incoming_details_id =NULL;
+            }
+
+             $data = array(
+                'credit_note_id'=>$incoming_details_id,
+                'part_number'=>$this->input->post('part_number'),
+                'invoice_no'=>$this->input->post('invoice_no'),
+                'invoice_date'=>$this->input->post('invoice_date'),
+                'qty'=>$this->input->post('qty'),
+                'price'=>$this->input->post('rate'),
+                'invoice_value'=>$this->input->post('invoice_value'),
+                'recivable_amount'=>$this->input->post('recivable_amount'),
+                'diff_credite_note_value'=>$this->input->post('diff_value'),
+                'remark'=>$this->input->post('item_remark'),
+
+                'pre_date'   =>$this->input->post('pre_date'),
+                'pre_buyer_name'   =>$this->input->post('pre_buyer_name'),
+                'pre_buyer_po_number' =>$this->input->post('pre_buyer_po_number'),
+                'pre_currency' =>$this->input->post('pre_currency'),
+                'pre_remark' =>$this->input->post('pre_remark'),
+            
+              );
+
+
+              $bill_of_material_item_id = trim($this->input->post('bill_of_material_item_id'));
+              if( $bill_of_material_item_id){
+                  $billofmaterialitemid = $bill_of_material_item_id;
+              }else{
+                  $billofmaterialitemid = '';
+              }
+              
+                $saveCreditNoteitamdata = $this->admin_model->saveCreditNoteitamdata($billofmaterialitemid,$data);
+
+                if($saveCreditNoteitamdata){
+
+                    $saveCreditnoteitem_response['status'] = 'success';
+                    $saveCreditnoteitem_response['error'] = array(
+                        'part_number'=>strip_tags(form_error('part_number')),
+                        'invoice_number'=>strip_tags(form_error('invoice_number')),
+                        'invoice_date'=>strip_tags(form_error('invoice_date')),
+                        'qty'=>strip_tags(form_error('qty')),
+                        'rate'=>strip_tags(form_error('rate')),
+                        'invoice_value'=>strip_tags(form_error('invoice_value')),
+                        'recivable_amount'=>strip_tags(form_error('recivable_amount')),
+                        'diff_value'=>strip_tags(form_error('diff_value')),
+                        'item_remark'=>strip_tags(form_error('item_remark')));
+                }
+        }
+          echo json_encode($saveCreditnoteitem_response);
+    }
+
+
 }
 
 }

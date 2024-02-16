@@ -163,6 +163,9 @@ define('TBL_REJECTION_FORM','tbl_rejection_form');
 define('TBL_REJECTION_FORM_REJECTED_ITEM','tbl_tbl_rejection_form_rejected_item');
 define('TBL_COMPLAIN_FORM','tbl_complainform');
 
+define('TBL_CREDIT_NOTE','tbl_credit_note');
+define('TBL_CREDIT_NOTE_ITEM','tbl_credit_note_item');
+
 
 
 

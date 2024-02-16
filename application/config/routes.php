@@ -409,17 +409,12 @@ $route['addcreditnote'] = "admin/addcreditnote";
 $route['getBuyerPonumbercreditnote'] = "admin/getBuyerPonumbercreditnote";
 
 
-
-
-
-
-
-
 $route['getPartnumberBypartnumberforcreitnote'] = "admin/getPartnumberBypartnumberforcreitnote";
+$route['getexportInvoicebybyerpo'] = "admin/getexportInvoicebybyerpo";
+$route['getInvoicedateforcreditdate'] = "admin/getInvoicedateforcreditdate";
 
 
-
-
+$route['saveCreditnoteitem'] = "admin/saveCreditnoteitem";
 
 
 
