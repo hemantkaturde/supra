@@ -32,9 +32,9 @@
                                         <th>Report No</th>
                                         <th>Stage</th>
                                         <th>Date of Observation / Rejected Found</th>
-                                        <th>Drawing No / REV No</th>
-                                        <th>Challan No</th>
                                         <th>PO NO / WO NO</th>
+                                        <th>Challan No</th>
+                                        <th>Drawing No / REV No</th>
                                         <th>Inword No</th>
                                         <th>Action</th>
                                     </tr>

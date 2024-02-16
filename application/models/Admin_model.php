@@ -9699,10 +9699,18 @@ class Admin_model extends CI_Model
             $this->db->or_where(TBL_COMPLAIN_FORM.".stage LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_COMPLAIN_FORM.".date_of_observation_rejection_found LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_COMPLAIN_FORM.".drawing_no_rev_no LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_COMPLAIN_FORM.".challan_no LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_COMPLAIN_FORM.".inword_no LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_COMPLAIN_FORM.".po_no_wo_no LIKE '%".$params['search']['value']."%')");
         }
+        
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_COMPLAIN_FORM.'.vendor_name');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_COMPLAIN_FORM.'.po_no_wo_no');
+        $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id = '.TBL_VENDOR_PO_MASTER.'.id');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
+
         $this->db->where(TBL_COMPLAIN_FORM.'.status', 1);
         $this->db->order_by(TBL_COMPLAIN_FORM.'.id','DESC');
         $query = $this->db->get(TBL_COMPLAIN_FORM);
@@ -9711,7 +9719,7 @@ class Admin_model extends CI_Model
     }
 
     public function fetchcompalintrecordsData($params){
-        $this->db->select('*');
+        $this->db->select('*,'.TBL_FINISHED_GOODS.'.part_number as part,'.TBL_VENDOR_PO_MASTER.'.po_number as vpn,'.TBL_COMPLAIN_FORM.'.id as cfid');
         if($params['search']['value'] != "") 
         {
             $this->db->where("(".TBL_COMPLAIN_FORM.".report_no LIKE '%".$params['search']['value']."%'");
@@ -9719,9 +9727,18 @@ class Admin_model extends CI_Model
             $this->db->or_where(TBL_COMPLAIN_FORM.".date_of_observation_rejection_found LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_COMPLAIN_FORM.".drawing_no_rev_no LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_COMPLAIN_FORM.".challan_no LIKE '%".$params['search']['value']."%'");
+
+            $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
+
             $this->db->or_where(TBL_COMPLAIN_FORM.".inword_no LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_COMPLAIN_FORM.".po_no_wo_no LIKE '%".$params['search']['value']."%')");
         }
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_COMPLAIN_FORM.'.vendor_name');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_COMPLAIN_FORM.'.po_no_wo_no');
+        $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id = '.TBL_VENDOR_PO_MASTER.'.id');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
+
         $this->db->where(TBL_COMPLAIN_FORM.'.status', 1);
         $this->db->order_by(TBL_COMPLAIN_FORM.'.id','DESC');
         $query = $this->db->get(TBL_COMPLAIN_FORM);
@@ -9736,13 +9753,13 @@ class Admin_model extends CI_Model
                 $data[$counter]['report_no'] =$value['report_no'];
                 $data[$counter]['stage'] =$value['stage'];
                 $data[$counter]['date_of_observation_rejection_found'] =$value['date_of_observation_rejection_found'];
-                $data[$counter]['drawing_no_rev_no'] =$value['drawing_no_rev_no'];
+                $data[$counter]['po_no_wo_no'] =$value['vpn'];
                 $data[$counter]['challan_no'] =$value['challan_no'];
-                $data[$counter]['po_no_wo_no'] =$value['po_no_wo_no'];
+                $data[$counter]['drawing_no_rev_no'] =$value['part'];
                 $data[$counter]['inword_no'] =$value['inword_no'];
                 $data[$counter]['action'] ='';
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editcomplainform/".$value['id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
-                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['id']."' class='fa fa-trash-o deletecomplainform' aria-hidden='true'></i>"; 
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editcomplainform/".$value['cfid']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['cfid']."' class='fa fa-trash-o deletecomplainform' aria-hidden='true'></i>"; 
                 $counter++; 
             }
         }

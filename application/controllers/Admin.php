@@ -10915,7 +10915,7 @@ public function getPartDetailsbypartnumber(){
         if(count($drawing_no_rev_noItem) >= 1) {
             $content = $content.'<option value="">Select Part Number</option>';
             foreach($drawing_no_rev_noItem as $value) {
-                $content = $content.'<option value="'.$value["fin_id"].'">'.$value["name"].'</option>';
+                $content = $content.'<option value="'.$value["fin_id"].'" selected>'.$value["name"].'</option>';
             }
             echo $content;
         } else {

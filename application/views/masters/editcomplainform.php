@@ -180,7 +180,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="component_description">Component Description <span class="required">*</span></label>
-                                                    <select class="form-control" name="component_description" id="component_description">
+                                                    <select class="form-control" name="component_description" id="component_description" readonly>
                                                         <option st-id="" value="">Select Component Description</option>
                                                         <option st-id="" value="<?=$getcompalinformdata['part_number_id']?>" <?=$selected?>><?=$value?></option>
 
