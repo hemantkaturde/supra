@@ -11158,6 +11158,79 @@
 		    }
 		 });
 
+
+		 $(document).ready(function() {
+
+
+			$("#chq_amt").val();
+
+			$("#grand_total_main").val();
+
+			if($("#total_amount_of_ok_qty_data").val()){
+				var total_amount_of_ok_qty_data = $("#total_amount_of_ok_qty_data").val();
+			}else{
+				var total_amount_of_ok_qty_data = 0;
+			}
+
+			if($("#total_amount_of_ok_qty").val()){
+				var total_amount_of_ok_qty = $("#total_amount_of_ok_qty").val();
+			}else{
+				var total_amount_of_ok_qty = 0;
+			}
+
+			if($("#p_and_f_charges").val()){
+				var p_and_f_charges = $("#p_and_f_charges").val();
+			}else{
+				var p_and_f_charges = 0;
+			}
+
+			if($("#tds_amount").val()){
+				var tds_amount = $("#tds_amount").val();
+			}else{
+				var tds_amount = 0;
+			}
+
+			if($("#freight_amount_charge").val()){
+				var freight_amount_charge = $("#freight_amount_charge").val();
+			}else{
+				var freight_amount_charge = 0;
+			}
+
+			if($("#total_debit_amount").val()){
+				var total_debit_amount = $("#total_debit_amount").val();
+			}else{
+				var total_debit_amount = 0;
+			}
+
+
+			//  if($("#p_and_f_charges_main").val()){
+			// 	 var p_and_f_charges_main = $("#p_and_f_charges_main").val();
+			//  }else{
+			// 	 var p_and_f_charges_main = 0;
+			//  }
+
+
+			//  var total_one_group = parseFloat(total_amount_of_ok_qty_data) +  parseFloat(total_amount_of_ok_qty) +  parseFloat(p_and_f_charges_main) ;
+
+			//var total_one_group = parseFloat(total_amount_of_ok_qty_data) +  parseFloat(total_amount_of_ok_qty);
+
+			var total_one_group =  parseFloat(total_amount_of_ok_qty_data);
+
+			var total_second_group = parseFloat(tds_amount) +  parseFloat(freight_amount_charge);
+
+			var chq_amt =  parseFloat(total_one_group) - parseFloat(total_second_group);
+
+			$("#chq_amt").val(chq_amt);
+
+
+			var total_third_group = parseFloat(total_debit_amount) +  parseFloat(tds_amount) + parseFloat(chq_amt) +  parseFloat(freight_amount_charge);
+
+			$("#grand_total_main").val(Math.round(total_third_group));
+
+		 });
+
+
+
 		 $(document).on('change','#vendor_supplier_name',function(e){  
 				e.preventDefault();
 			
