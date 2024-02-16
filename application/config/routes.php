@@ -403,9 +403,14 @@ $route['fetchcompalintrecords'] = "admin/fetchcompalintrecords";
 $route['deletecomplainform'] = "admin/deletecomplainform";
 $route['editcomplainform/(:any)'] = "admin/editcomplainform/$1";
 $route['itcreport'] = "admin/itcreport";
+$route['getPartDetailsbypartnumber'] = "admin/getPartDetailsbypartnumber";
+
+
+
 $route['creditnote'] = "admin/creditnote";
 $route['addcreditnote'] = "admin/addcreditnote";
-$route['getPartDetailsbypartnumber'] = "admin/getPartDetailsbypartnumber";
+$route['getBuyerPonumbercreditnote'] = "admin/getBuyerPonumbercreditnote";
+
 
 
 

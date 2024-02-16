@@ -11025,8 +11025,28 @@ public function addcreditnote(){
         $this->logrecord($process,$processFunction);
         $this->global['pageTitle'] = 'Add Credit Note';
        // $data['getPreviousCreditnotenumber']= $this->admin_model->getPreviousCreditnotenumber()[0];
-        $data['vendorList']= $this->admin_model->fetchALLvendorList();
+        $data['buyerList']= $this->admin_model->fetchAllbuyerList();
         $this->loadViews("masters/addcreditnote", $this->global, $data, NULL);
+    }
+
+}
+
+public function getBuyerPonumbercreditnote(){
+    if($this->input->post('buyer_name')) {
+        $getAllponumber = $this->admin_model->getBuyerPonumbercreditnote($this->input->post('buyer_name'));
+        if(count($getAllponumber) >= 1) {
+            $content = $content.'<option value="">Select Buyer Number</option>';
+            foreach($getAllponumber as $value) {
+                
+                    $content = $content.'<option value="'.$value["id"].'">'.$value["sales_order_number"].' - '.$value["buyer_po_number"].'</option>';
+            
+            }
+            echo $content;
+        } else {
+            echo 'failure';
+        }
+    } else {
+        echo 'failure';
     }
 
 }

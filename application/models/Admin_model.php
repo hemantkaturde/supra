@@ -9712,6 +9712,7 @@ class Admin_model extends CI_Model
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
 
         $this->db->where(TBL_COMPLAIN_FORM.'.status', 1);
+        $this->db->group_by(TBL_COMPLAIN_FORM.'.report_no');
         $this->db->order_by(TBL_COMPLAIN_FORM.'.id','DESC');
         $query = $this->db->get(TBL_COMPLAIN_FORM);
         $rowcount = $query->num_rows();
@@ -9740,6 +9741,8 @@ class Admin_model extends CI_Model
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
 
         $this->db->where(TBL_COMPLAIN_FORM.'.status', 1);
+        $this->db->group_by(TBL_COMPLAIN_FORM.'.report_no');
+
         $this->db->order_by(TBL_COMPLAIN_FORM.'.id','DESC');
         $query = $this->db->get(TBL_COMPLAIN_FORM);
         $fetch_result = $query->result_array();
@@ -9833,6 +9836,26 @@ class Admin_model extends CI_Model
         $data = $query->result_array();
         return $data;
 
+    }
+
+
+    public function getBuyerPonumbercreditnote($buyer_name){
+
+        $this->db->select(TBL_BUYER_PO_MASTER.'.*');
+        $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id = '.TBL_BUYER_PO_MASTER.'.id');
+		$this->db->where(TBL_BUYER_PO_MASTER.'.buyer_name_id', $buyer_name);
+        $this->db->where(TBL_BUYER_PO_MASTER.'.status', 1);
+        //$this->db->where(TBL_BUYER_PO_MASTER.'.generate_po', 'YES');
+        //$this->db->or_where(TBL_BUYER_PO_MASTER.'.po_status', 'Open');
+        //$this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.part_number_id NOT IN (SELECT tbl_rawmaterial.raw_id FROM tbl_supplierpo_item join tbl_rawmaterial on tbl_supplierpo_item.part_number_id=tbl_rawmaterial.raw_id where pre_buyer_name='.$buyer_name.')', NULL, FALSE);
+        $this->db->group_by(TBL_BUYER_PO_MASTER.'.sales_order_number');
+        $this->db->order_by('sales_order_number','ASC');
+        $query_result = $this->db->get(TBL_BUYER_PO_MASTER)->result_array();
+		
+		foreach($query_result as $key => $value) {
+			$query_result[$key]['selected'] = '';
+		}
+        return $query_result;
     }
 
 }

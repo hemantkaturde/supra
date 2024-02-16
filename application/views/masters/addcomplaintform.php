@@ -52,11 +52,14 @@
                                                 // Display the financial year
                                                 $financialYear = $startYear . '-' . $endYear;
 
-
+                                               
 
                                                 $string = $getPreviousCompalinformnumber['report_no'];
+
+                                                $explod = explode("/",$string);
+
                                                 $n = 4; // Number of characters to extract from the end
-                                                $lastNCharacters = substr($string, -$n);
+                                                $lastNCharacters = substr($explod[0], -$n);
                                                 //$inrno= "SQBO2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
 
                                                 $inrno= ($lastNCharacters+1)."/".$financialYear;
