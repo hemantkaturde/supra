@@ -11242,4 +11242,28 @@ public function editcreditnote($id){
 }
 
 
+public function getbuyeritemonly(){
+
+    $buyer_po_number=$this->input->post('buyer_po_number');
+
+    $flag=$this->input->post('flag');
+
+    if($buyer_po_number) {
+        $getbuyeritemonly = $this->admin_model->getbuyeritemonly($buyer_po_number);
+        if(count($getbuyeritemonly) >= 1) {
+            $content = $content.'<option value="">Select Part Number</option>';
+            foreach($getbuyeritemonly as $value) {
+                $content = $content.'<option value="'.$value["item_id"].'">'.$value["part_number"].'</option>';
+            }
+            echo $content;
+        } else {
+            echo 'failure';
+        }
+    } else {
+        echo 'failure';
+    }
+
+}
+
+
 }

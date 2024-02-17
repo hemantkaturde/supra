@@ -422,6 +422,7 @@ $route['editcreditnote/(:any)'] = "admin/editcreditnote/$1";
 
 
 
+$route['getbuyeritemonly'] = "admin/getbuyeritemonly";
 
 
 

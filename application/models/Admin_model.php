@@ -10095,6 +10095,20 @@ public function getcreditnoteitemdetails($id){
 
 }
 
+public function getbuyeritemonly($buyer_po_number){
+
+          $this->db->select('*,'.TBL_FINISHED_GOODS.'.fin_id as item_id');
+          $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
+          //$this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
+          $this->db->where(TBL_FINISHED_GOODS.'.status',1);
+          //$this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
+          // $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.part_number_id NOT IN (SELECT part_number_id FROM tbl_supplierpo_item where pre_buyer_po_number='.$supplier_po_number.')', NULL, FALSE);
+          $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id',$buyer_po_number);
+          $query = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
+          $data = $query->result_array();
+          return $data;
+}
+
 
 }
 
