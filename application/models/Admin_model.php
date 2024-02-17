@@ -9688,87 +9688,6 @@ class Admin_model extends CI_Model
 
     }
 
-    public function fetchcompalintrecordsCount($params){
-        $this->db->select('*');
-
-        if($params['search']['value'] != "") 
-        {
-            $this->db->where("(".TBL_COMPLAIN_FORM.".blasting_id LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_COMPLAIN_FORM.".date LIKE '%".$params['search']['value']."%'");
-            $this->db->where("(".TBL_COMPLAIN_FORM.".report_no LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_COMPLAIN_FORM.".stage LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_COMPLAIN_FORM.".date_of_observation_rejection_found LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_COMPLAIN_FORM.".drawing_no_rev_no LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_COMPLAIN_FORM.".challan_no LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_COMPLAIN_FORM.".inword_no LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_COMPLAIN_FORM.".po_no_wo_no LIKE '%".$params['search']['value']."%')");
-        }
-        
-        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_COMPLAIN_FORM.'.vendor_name');
-        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_COMPLAIN_FORM.'.po_no_wo_no');
-        $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id = '.TBL_VENDOR_PO_MASTER.'.id');
-        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
-
-        $this->db->where(TBL_COMPLAIN_FORM.'.status', 1);
-        $this->db->group_by(TBL_COMPLAIN_FORM.'.report_no');
-        $this->db->order_by(TBL_COMPLAIN_FORM.'.id','DESC');
-        $query = $this->db->get(TBL_COMPLAIN_FORM);
-        $rowcount = $query->num_rows();
-        return $rowcount;
-    }
-
-    public function fetchcompalintrecordsData($params){
-        $this->db->select('*,'.TBL_FINISHED_GOODS.'.part_number as part,'.TBL_VENDOR_PO_MASTER.'.po_number as vpn,'.TBL_COMPLAIN_FORM.'.id as cfid');
-        if($params['search']['value'] != "") 
-        {
-            $this->db->where("(".TBL_COMPLAIN_FORM.".report_no LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_COMPLAIN_FORM.".stage LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_COMPLAIN_FORM.".date_of_observation_rejection_found LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_COMPLAIN_FORM.".drawing_no_rev_no LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_COMPLAIN_FORM.".challan_no LIKE '%".$params['search']['value']."%'");
-
-            $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
-
-            $this->db->or_where(TBL_COMPLAIN_FORM.".inword_no LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_COMPLAIN_FORM.".po_no_wo_no LIKE '%".$params['search']['value']."%')");
-        }
-        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_COMPLAIN_FORM.'.vendor_name');
-        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_COMPLAIN_FORM.'.po_no_wo_no');
-        $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id = '.TBL_VENDOR_PO_MASTER.'.id');
-        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
-
-        $this->db->where(TBL_COMPLAIN_FORM.'.status', 1);
-        $this->db->group_by(TBL_COMPLAIN_FORM.'.report_no');
-
-        $this->db->order_by(TBL_COMPLAIN_FORM.'.id','DESC');
-        $query = $this->db->get(TBL_COMPLAIN_FORM);
-        $fetch_result = $query->result_array();
-
-        $data = array();
-        $counter = 0;
-        if(count($fetch_result) > 0)
-        {
-            foreach ($fetch_result as $key => $value)
-            {
-                $data[$counter]['report_no'] =$value['report_no'];
-                $data[$counter]['stage'] =$value['stage'];
-                $data[$counter]['date_of_observation_rejection_found'] =$value['date_of_observation_rejection_found'];
-                $data[$counter]['po_no_wo_no'] =$value['vpn'];
-                $data[$counter]['challan_no'] =$value['challan_no'];
-                $data[$counter]['drawing_no_rev_no'] =$value['part'];
-                $data[$counter]['inword_no'] =$value['inword_no'];
-                $data[$counter]['action'] ='';
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editcomplainform/".$value['cfid']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
-                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['cfid']."' class='fa fa-trash-o deletecomplainform' aria-hidden='true'></i>"; 
-                $counter++; 
-            }
-        }
-        return $data;
-    }
-
     public function savenewcomplaintform($id,$data){
 
         if($id != '') {
@@ -9893,19 +9812,144 @@ class Admin_model extends CI_Model
         return $data;
    } 
 
+    public function fetchcompalintrecordsCount($params){
+        $this->db->select('*');
 
-   public function saveCreditNoteitamdata($id,$data){
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_COMPLAIN_FORM.".blasting_id LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_COMPLAIN_FORM.".date LIKE '%".$params['search']['value']."%'");
+            $this->db->where("(".TBL_COMPLAIN_FORM.".report_no LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_COMPLAIN_FORM.".stage LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_COMPLAIN_FORM.".date_of_observation_rejection_found LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_COMPLAIN_FORM.".drawing_no_rev_no LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_COMPLAIN_FORM.".challan_no LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_COMPLAIN_FORM.".inword_no LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_COMPLAIN_FORM.".po_no_wo_no LIKE '%".$params['search']['value']."%')");
+        }
+        
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_COMPLAIN_FORM.'.vendor_name');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_COMPLAIN_FORM.'.po_no_wo_no');
+        $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id = '.TBL_VENDOR_PO_MASTER.'.id');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
+
+        $this->db->where(TBL_COMPLAIN_FORM.'.status', 1);
+        $this->db->group_by(TBL_COMPLAIN_FORM.'.report_no');
+        $this->db->order_by(TBL_COMPLAIN_FORM.'.id','DESC');
+        $query = $this->db->get(TBL_COMPLAIN_FORM);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+    }
+
+    public function fetchcompalintrecordsData($params){
+        $this->db->select('*,'.TBL_FINISHED_GOODS.'.part_number as part,'.TBL_VENDOR_PO_MASTER.'.po_number as vpn,'.TBL_COMPLAIN_FORM.'.id as cfid');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_COMPLAIN_FORM.".report_no LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_COMPLAIN_FORM.".stage LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_COMPLAIN_FORM.".date_of_observation_rejection_found LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_COMPLAIN_FORM.".drawing_no_rev_no LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_COMPLAIN_FORM.".challan_no LIKE '%".$params['search']['value']."%'");
+
+            $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
+
+            $this->db->or_where(TBL_COMPLAIN_FORM.".inword_no LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_COMPLAIN_FORM.".po_no_wo_no LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_COMPLAIN_FORM.'.vendor_name');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_COMPLAIN_FORM.'.po_no_wo_no');
+        $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id = '.TBL_VENDOR_PO_MASTER.'.id');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
+
+        $this->db->where(TBL_COMPLAIN_FORM.'.status', 1);
+        $this->db->group_by(TBL_COMPLAIN_FORM.'.report_no');
+
+        $this->db->order_by(TBL_COMPLAIN_FORM.'.id','DESC');
+        $query = $this->db->get(TBL_COMPLAIN_FORM);
+        $fetch_result = $query->result_array();
+
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['report_no'] =$value['report_no'];
+                $data[$counter]['stage'] =$value['stage'];
+                $data[$counter]['date_of_observation_rejection_found'] =$value['date_of_observation_rejection_found'];
+                $data[$counter]['po_no_wo_no'] =$value['vpn'];
+                $data[$counter]['challan_no'] =$value['challan_no'];
+                $data[$counter]['drawing_no_rev_no'] =$value['part'];
+                $data[$counter]['inword_no'] =$value['inword_no'];
+                $data[$counter]['action'] ='';
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editcomplainform/".$value['cfid']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['cfid']."' class='fa fa-trash-o deletecomplainform' aria-hidden='true'></i>"; 
+                $counter++; 
+            }
+        }
+        return $data;
+    }
+
+
+    public function saveCreditNoteitamdata($id,$data){
+
+        if($id != '') {
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_CREDIT_NOTE_ITEM, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_CREDIT_NOTE_ITEM, $data)) {
+                return $this->db->insert_id();;
+            } else {
+                return FALSE;
+            }
+        }
+
+    }
+
+
+   public function fetchALLpreCredititemList(){
+        $this->db->select('*,'.TBL_CREDIT_NOTE_ITEM.'.remark as item_remark,'.TBL_CREDIT_NOTE_ITEM.'.id as credit_note_item_id');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_CREDIT_NOTE_ITEM.'.part_number');
+        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_CREDIT_NOTE_ITEM.'.pre_buyer_po_number');
+        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_CREDIT_NOTE_ITEM.'.pre_buyer_name');
+        $this->db->where(TBL_CREDIT_NOTE_ITEM.'.credit_note_id IS NULL');
+        // $this->db->order_by(TBL_CREDIT_NOTE_ITEM.'.id','desc');
+        $query = $this->db->get(TBL_CREDIT_NOTE_ITEM);
+        $data = $query->result_array();
+        return $data;
+   }
+
+
+   public function getPreviousCreditnotenumber(){
+        $this->db->select('credit_note_number');
+        $this->db->where(TBL_CREDIT_NOTE.'.status', 1);
+        $this->db->limit(1);
+        $this->db->order_by(TBL_CREDIT_NOTE.'.id','DESC');
+        $query = $this->db->get(TBL_CREDIT_NOTE);
+        $rowcount = $query->result_array();
+        return $rowcount;
+   }
+
+
+   public function savenewcreditnote($id,$data){
 
     if($id != '') {
         $this->db->where('id', $id);
-        if($this->db->update(TBL_CREDIT_NOTE_ITEM, $data)){
+        if($this->db->update(TBL_CREDIT_NOTE, $data)){
             return TRUE;
         } else {
             return FALSE;
         }
     } else {
-        if($this->db->insert(TBL_CREDIT_NOTE_ITEM, $data)) {
-            return $this->db->insert_id();;
+        if($this->db->insert(TBL_CREDIT_NOTE, $data)) {
+            return $this->db->insert_id();
         } else {
             return FALSE;
         }
@@ -9914,19 +9958,143 @@ class Admin_model extends CI_Model
    }
 
 
-   public function fetchALLpreCredititemList(){
+   public function update_last_inserted_id_credite_note_details($last_inserted_id){
 
-        $this->db->select('*');
-        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_CREDIT_NOTE_ITEM.'.part_number');
-        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_CREDIT_NOTE_ITEM.'.pre_buyer_po_number');
-        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_CREDIT_NOTE_ITEM.'.pre_buyer_name');
-        // $this->db->where(TBL_JOB_WORK_ITEM.'.jobwork_id IS NULL');
-        // $this->db->order_by(TBL_CREDIT_NOTE_ITEM.'.id','desc');
-        $query = $this->db->get(TBL_CREDIT_NOTE_ITEM);
-        $data = $query->result_array();
-        return $data;
-
+        $data = array(
+            'credit_note_id' => $last_inserted_id
+        );
+        $this->db->where(TBL_CREDIT_NOTE_ITEM.'.credit_note_id IS NULL');
+        if($this->db->update(TBL_CREDIT_NOTE_ITEM,$data)){
+            return TRUE;
+        }else{
+            return FALSE;
+        }
    }
+
+
+   public function fetchcreditnoterecordsCount($params){
+    $this->db->select('*');
+
+    if($params['search']['value'] != "") 
+    {
+
+        $this->db->where("(".TBL_CREDIT_NOTE.".credit_note_number LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_CREDIT_NOTE.".date LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_BUYER_MASTER.".currency LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_CREDIT_NOTE.".remark LIKE '%".$params['search']['value']."%')");
+    }
+    
+    $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_CREDIT_NOTE.'.buyer_po_number');
+    $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_CREDIT_NOTE.'.buyer_name');
+    $this->db->where(TBL_CREDIT_NOTE.'.status', 1);
+    $this->db->order_by(TBL_CREDIT_NOTE.'.id','DESC');
+    $query = $this->db->get(TBL_CREDIT_NOTE);
+    $rowcount = $query->num_rows();
+    return $rowcount;
+}
+
+public function fetchcreditnoterecordstData($params){
+    $this->db->select('*,'.TBL_BUYER_MASTER.'.buyer_name as buyer,'.TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_CREDIT_NOTE.'.id as cerdit_note_id,'.TBL_CREDIT_NOTE.'.remark as creditnoteremark');
+
+    if($params['search']['value'] != "") 
+    {
+        $this->db->where("(".TBL_CREDIT_NOTE.".credit_note_number LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_CREDIT_NOTE.".date LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_BUYER_MASTER.".currency LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_CREDIT_NOTE.".remark LIKE '%".$params['search']['value']."%')");
+    }
+
+    $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_CREDIT_NOTE.'.buyer_po_number');
+    $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_CREDIT_NOTE.'.buyer_name');
+    $this->db->where(TBL_CREDIT_NOTE.'.status', 1);
+    $this->db->order_by(TBL_CREDIT_NOTE.'.id','DESC');
+    $query = $this->db->get(TBL_CREDIT_NOTE);
+    $fetch_result = $query->result_array();
+
+    $data = array();
+    $counter = 0;
+    if(count($fetch_result) > 0)
+    {
+        foreach ($fetch_result as $key => $value)
+        {
+            $data[$counter]['credit_note_number'] =$value['credit_note_number'];
+            $data[$counter]['date'] =$value['date'];
+            $data[$counter]['buyer_name'] =$value['buyer'];
+            $data[$counter]['buyer_po_number'] =$value['sales_order_number'];
+            $data[$counter]['currency'] =$value['currency'];
+            $data[$counter]['remark'] =$value['creditnoteremark'];
+            $data[$counter]['action'] ='';
+            $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editcreditnote/".$value['cerdit_note_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+            $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['cerdit_note_id']."' class='fa fa-trash-o deletecreditnote' aria-hidden='true'></i>"; 
+            $counter++; 
+        }
+    }
+    return $data;
+}
+
+
+public function deletecreditnote($id){
+    $this->db->where('id ', $id);
+    //$this->db->delete(TBL_SUPPLIER);
+    if($this->db->delete(TBL_CREDIT_NOTE)){
+       //return TRUE;
+       $this->db->where('credit_note_id', $id);
+       //$this->db->delete(TBL_SUPPLIER);
+       if($this->db->delete(TBL_CREDIT_NOTE_ITEM)){
+          return TRUE;
+       }else{
+          return FALSE;
+       }
+      return TRUE;
+
+
+    }else{
+       return FALSE;
+    }
+}
+
+
+public function deletecreditnoteitem($id){
+    $this->db->where('id ', $id);
+    //$this->db->delete(TBL_SUPPLIER);
+    if($this->db->delete(TBL_CREDIT_NOTE_ITEM)){
+      return TRUE;
+    }else{
+       return FALSE;
+    }
+}
+
+
+public function getcreditenotedetailsforedit($id){
+    $this->db->select('*,'.TBL_BUYER_MASTER.'.buyer_name as buyer,'.TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_CREDIT_NOTE.'.id as cerdit_note_id,'.TBL_BUYER_PO_MASTER.'.id as buyer_po_number_id,'.TBL_CREDIT_NOTE.'.remark as creditnoteremark');
+    $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_CREDIT_NOTE.'.buyer_po_number');
+    $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_CREDIT_NOTE.'.buyer_name');
+    $this->db->where(TBL_CREDIT_NOTE.'.status', 1);
+    $this->db->order_by(TBL_CREDIT_NOTE.'.id','DESC');
+    $query = $this->db->get(TBL_CREDIT_NOTE);
+    $fetch_result = $query->row_array();
+    return $fetch_result;
+}
+
+public function getcreditnoteitemdetails($id){
+    $this->db->select('*,'.TBL_CREDIT_NOTE_ITEM.'.remark as item_remark,'.TBL_CREDIT_NOTE_ITEM.'.id as credit_note_item_id');
+    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_CREDIT_NOTE_ITEM.'.part_number');
+    $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_CREDIT_NOTE_ITEM.'.pre_buyer_po_number');
+    $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_CREDIT_NOTE_ITEM.'.pre_buyer_name');
+    $this->db->where(TBL_CREDIT_NOTE_ITEM.'.credit_note_id',$id);
+    // $this->db->order_by(TBL_CREDIT_NOTE_ITEM.'.id','desc');
+    $query = $this->db->get(TBL_CREDIT_NOTE_ITEM);
+    $data = $query->result_array();
+    return $data;
+
+}
+
 
 }
 

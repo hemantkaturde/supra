@@ -12176,7 +12176,11 @@
 				 $("#chq_amt").val(chq_amt);
 
 
+				 //var total_third_group = parseFloat(total_debit_amount) +  parseFloat(tds_amount) + parseFloat(chq_amt) +  parseFloat(freight_amount_charge);
+
+
 				 var total_third_group = parseFloat(total_debit_amount) +  parseFloat(tds_amount) + parseFloat(chq_amt) +  parseFloat(freight_amount_charge);
+
 
 				 $("#grand_total_main").val(Math.round(total_third_group));
 			
@@ -17717,7 +17721,7 @@
 
 
 
-<?php if($pageTitle=='Credit Note' || $pageTitle=='Add Credit Note'){ ?>
+<?php if($pageTitle=='Credit Note' || $pageTitle=='Add Credit Note' || $pageTitle=='Edit Credit Note'){ ?>
 	<script type="text/javascript"> 
         $(document).ready(function() {
 		    var dt = $('#view_credit_note').DataTable({
@@ -17725,7 +17729,7 @@
 	                 { className: "details-control", "targets": [ 0 ] },
 	                 { "width": "10%", "targets": 0 },
 	                 { "width": "10%", "targets": 1 },
-					 { "width": "15%", "targets": 2 },
+					 { "width": "10%", "targets": 2 },
 	                 { "width": "10%", "targets": 3 },
 					 { "width": "10%", "targets": 4 },
 					 { "width": "10%", "targets": 5 },
@@ -17742,11 +17746,76 @@
 	            "bProcessing": true,
 	            "serverSide": true,
 	            "ajax":{
-                    url :"<?php echo base_url();?>fetchcompalintrecords",
+                    url :"<?php echo base_url();?>fetchcreditnoterecords",
                     type: "post",
 	            },
 	        });
         });
+
+		$(document).ready(function() {
+	
+			var buyer_po_number = $('.buyer_po_number_for_item').val();
+
+			$("#part_number").html('');
+
+			var flag = 'Buyer';
+		
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getSuppliritemonlyforgetbuyeritemonly",
+				type: "POST",
+				data : {'supplier_po_number' : buyer_po_number,'flag':flag},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#part_number').html('<option value="">Select Part Number</option>');
+					}
+					else
+					{
+						$('#part_number').html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#part_number').html();
+				}
+			});
+			return false;
+
+		});
+
+		$(document).ready(function() {
+
+			var buyer_po_number = $('.buyer_po_number_for_export_invoice').val();
+
+			$("#invoice_number").html('');
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getexportInvoicebybyerpo",
+				type: "POST",
+				data : {'supplier_po_number' : buyer_po_number},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#invoice_number').html('<option value="">Select Invoice Number</option>');
+					}
+					else
+					{
+						$('#invoice_number').html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#invoice_number').html();
+				}
+			});
+			return false;
+
+		});
 
 		$(document).on('change','#buyer_name',function(e){  
 			e.preventDefault();
@@ -18007,12 +18076,15 @@
 			   var pre_buyer_po_number =   $('#buyer_po_number').val();
 			   var pre_currency =   $('#currency').val();
 			   var pre_remark =   $('#remark').val();
+
+
+			   var cerdit_note_id =   $('#cerdit_note_id').val();
 			
 			   $.ajax({
 				url : "<?php echo base_url();?>saveCreditnoteitem",
 				type: "POST",
 				 //data : formData,
-				 data :{part_number:part_number,description:description,invoice_no:invoice_no,invoice_date:invoice_date,qty:qty,rate:rate,invoice_value:invoice_value,recivable_amount:recivable_amount,diff_value:diff_value,item_remark:item_remark,pre_date:pre_date,pre_buyer_name:pre_buyer_name,pre_buyer_po_number:pre_buyer_po_number,pre_currency:pre_currency,pre_remark:pre_remark},
+				 data :{part_number:part_number,description:description,invoice_no:invoice_no,invoice_date:invoice_date,qty:qty,rate:rate,invoice_value:invoice_value,recivable_amount:recivable_amount,diff_value:diff_value,item_remark:item_remark,pre_date:pre_date,pre_buyer_name:pre_buyer_name,pre_buyer_po_number:pre_buyer_po_number,pre_currency:pre_currency,pre_remark:pre_remark,cerdit_note_id:cerdit_note_id},
 				 method: "POST",
                 // data :{package_id:package_id},
                 cache:false,
@@ -18036,11 +18108,11 @@
 							button: "Ok",
 							},function(){ 
 
-								// if(debit_id){
-								// 	window.location.href = "<?php echo base_url().'editdebitnoteform/'?>"+debit_id;
-								// }else{
-									window.location.href = "<?php echo base_url().'creditnote'?>";
-								// }
+								if(cerdit_note_id){
+								 	window.location.href = "<?php echo base_url().'editcreditnote/'?>"+cerdit_note_id;
+								 }else{
+									window.location.href = "<?php echo base_url().'addcreditnote'?>";
+								 }
 							
 						});		
 				    }
@@ -18052,11 +18124,161 @@
 			    }
 			   });
 			return false;
-	     });
+	    });
+
+		$(document).on('click','#savenewcreditnote',function(e){
+			e.preventDefault();
+			$(".loader_ajax").show();
+
+			var formData = new FormData($("#addnnewcreditnoteform")[0]);
+			$.ajax({
+				url : "<?php echo base_url();?>addcreditnote",
+				type: "POST",
+				data : formData,
+				cache: false,
+				contentType: false,
+				processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+					{
+						$.each(fetchResponse.error, function (i, v)
+						{
+							$('.'+i+'_error').html(v);
+						});
+						$(".loader_ajax").hide();
+					}
+					else if(fetchResponse.status == 'success')
+					{
+						swal({
+							title: "Success",
+							text: "Credit Note Successfully Added!",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+
+								window.location.href = "<?php echo base_url().'creditnote'?>";
+						});		
+					}
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$(".loader_ajax").hide();
+				}
+			});
+			return false;
+		});
+
+		$(document).on('click','.deletecreditnote',function(e){
+			var elemF = $(this);
+			e.preventDefault();
+			swal({
+				title: "Are you sure?",
+				text: "Delete Credit Note",
+				type: "warning",
+				showCancelButton: true,
+				closeOnClickOutside: false,
+				confirmButtonClass: "btn-sm btn-danger",
+				confirmButtonText: "Yes, delete it!",
+				cancelButtonText: "No, cancel plz!",
+				closeOnConfirm: false,
+				closeOnCancel: false
+			}, function(isConfirm) {
+				if (isConfirm) {
+							$.ajax({
+								url : "<?php echo base_url();?>deletecreditnote",
+								type: "POST",
+								data : 'id='+elemF.attr('data-id'),
+								success: function(data, textStatus, jqXHR)
+								{
+									const obj = JSON.parse(data);
+								
+									if(obj.status=='success'){
+										swal({
+											title: "Deleted!",
+											text: "Credit Note Succesfully Deleted",
+											icon: "success",
+											button: "Ok",
+											},function(){ 
+												window.location.href = "<?php echo base_url().'creditnote'?>";
+										});	
+									}
+
+								},
+								error: function (jqXHR, textStatus, errorThrown)
+								{
+									$(".loader_ajax").hide();
+								}
+							})
+						}
+						else {
+				swal("Cancelled", "Credit Note deletion cancelled ", "error");
+				}
+			});
+		});
 
 
+        $(document).on('click','.deletecreditnoteitem',function(e){
+			
+			//var challan_id = $("#challan_id").val();
+			var elemF = $(this);
+				e.preventDefault();
+				swal({
+					title: "Are you sure?",
+					text: "Delete Credit Note Item ",
+					type: "warning",
+					showCancelButton: true,
+					closeOnClickOutside: false,
+					confirmButtonClass: "btn-sm btn-danger",
+					confirmButtonText: "Yes, delete it!",
+					cancelButtonText: "No, cancel plz!",
+					closeOnConfirm: false,
+					closeOnCancel: false
+				}, function(isConfirm) {
+					if (isConfirm) {
+								$.ajax({
+									url : "<?php echo base_url();?>deletecreditnoteitem",
+									type: "POST",
+									data : 'id='+elemF.attr('data-id'),
+									success: function(data, textStatus, jqXHR)
+									{
+										const obj = JSON.parse(data);
+									
+										if(obj.status=='success'){
+											swal({
+												title: "Deleted!",
+												text: "Credit Note Item Deleted Succesfully",
+												icon: "success",
+												button: "Ok",
+												},function(){ 
+
+													// if(challan_id){
+													// 	window.location.href = "<?php echo base_url().'editchallanform/'?>"+challan_id;
+													// }else{
+														window.location.href = "<?php echo base_url().'addcreditnote'?>";
+													// }
+											});	
+										}
+
+									},
+									error: function (jqXHR, textStatus, errorThrown)
+									{
+										$(".loader_ajax").hide();
+									}
+								})
+							}
+							else {
+					swal("Cancelled", "Credit Note Item deletion cancelled ", "error");
+					}
+				});
+	    });
 
 
+	    $(document).on('click','.closecreditnotemodal',function(e){  
+			location.reload();
+		});
 
     </script>
 <?php } ?>

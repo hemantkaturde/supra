@@ -9491,8 +9491,6 @@ class Admin extends BaseController
         }else{
             echo(json_encode(array('status'=>'failed'))); 
         }
-
-
         
     }
 
@@ -10945,85 +10943,66 @@ public function creditnote(){
 
 public function addcreditnote(){
 
-
     $post_submit = $this->input->post();
     if($post_submit){
-        $add_complainform_response = array();
-        $this->form_validation->set_rules('report_no','Report No','trim|required');
-        $this->form_validation->set_rules('stage','Stage','trim|required');
-        $this->form_validation->set_rules('drawing_no_rev_no','Drawing No / Rev No','trim|required');
-        $this->form_validation->set_rules('vendor_name','Vendor Name','trim|required');
-        $this->form_validation->set_rules('po_no_wo_no','PO_NO/WO_NO','trim|required');
-        $this->form_validation->set_rules('component_description','Component Description','trim|required');
+        $add_creditnote_response = array();
+        $this->form_validation->set_rules('credit_note_number','credit_note_number','trim|required');
+        $this->form_validation->set_rules('date','date','trim|required');
+        $this->form_validation->set_rules('buyer_name','buyer_name','trim|required');
+        $this->form_validation->set_rules('buyer_po_number','Buyer PO  Number','trim|required');
+        $this->form_validation->set_rules('currency','Currency','trim');
+        $this->form_validation->set_rules('remark','Remark','trim');
       
         if($this->form_validation->run() == FALSE)
         {
-            $add_complainform_response['status'] = 'failure';
-            $add_complainform_response['error'] = array('report_no'=>strip_tags(form_error('report_no')),'stage'=>strip_tags(form_error('stage')),'drawing_no_rev_no'=>strip_tags(form_error('drawing_no_rev_no')),'vendor_name'=>strip_tags(form_error('vendor_name')),'po_no_wo_no'=>strip_tags(form_error('po_no_wo_no')),'component_description'=>strip_tags(form_error('component_description')));
+            $add_creditnote_response['status'] = 'failure';
+            $add_creditnote_response['error'] = array('credit_note_number'=>strip_tags(form_error('credit_note_number')),'date'=>strip_tags(form_error('date')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'currency'=>strip_tags(form_error('currency')),'remark'=>strip_tags(form_error('remark')));
 
         }else{
 
             $data = array(
-                'report_no' => trim($this->input->post('report_no')),
-                'stage' => trim($this->input->post('stage')),
-                'date_of_observation_rejection_found' => trim($this->input->post('date_of_observation_rejection_found')),
-                'total_failure_qty' => trim($this->input->post('total_failure_qty')),
-                'drawing_no_rev_no' => trim($this->input->post('drawing_no_rev_no')),
-                'challan_no' => trim($this->input->post('challan_no')),
-                'vendor_name' => trim($this->input->post('vendor_name')),
-                'po_no_wo_no' => trim($this->input->post('po_no_wo_no')),
-                'poac' => trim($this->input->post('poac')),
-                'inword_no' => trim($this->input->post('inword_no')),
-                'component_description' => trim($this->input->post('component_description')),
-                'total_qty_checked' => trim($this->input->post('total_qty_checked')),
-                'problem_description' => trim($this->input->post('total_qty_checked')),
-                'intermidiate_disposal' => trim($this->input->post('intermidiate_disposal')),
-                'root_cause' => trim($this->input->post('root_cause')),
-                'coorection' => trim($this->input->post('coorection')),
-                'coorection_responsibility' => trim($this->input->post('coorection_responsibility')),
-                'coorection_date' => trim($this->input->post('coorection_date')),
-                'corrective_action_taken' => trim($this->input->post('corrective_action_taken')),
-                'corrective_action_responsibility' => trim($this->input->post('corrective_action_responsibility')),
-                'corrective_action_date' => trim($this->input->post('corrective_action_date')),
-                'effective_action' => trim($this->input->post('effective_action')),
-                'effective_action_responsiblity' => trim($this->input->post('effective_action_responsiblity')),
-                'effective_action_date' => trim($this->input->post('effective_action_date')),
-                'team' => trim($this->input->post('team')),
-                'prepared_by' => trim($this->input->post('prepared_by')),
-                'prepared_by_date' => trim($this->input->post('prepared_by_date')),                
-                'approved_by' => trim($this->input->post('approved_by')),
-                'approved_by_date' => trim($this->input->post('approved_by_date')),
-                'report_closed_by' => trim($this->input->post('report_closed_by')),
-                'report_close_date' => trim($this->input->post('report_close_date')),
+                'credit_note_number' => trim($this->input->post('credit_note_number')),
+                'date' => trim($this->input->post('date')),
+                'buyer_name' => trim($this->input->post('buyer_name')),
+                'buyer_po_number' => trim($this->input->post('buyer_po_number')),
+                'currency' => trim($this->input->post('currency')),
+                'remark' => trim($this->input->post('remark')),
             );
 
-            if(trim($this->input->post('complain_form_id'))){
-                $complain_form_id = trim($this->input->post('complain_form_id'));
+            if(trim($this->input->post('cerdit_note_id'))){
+                $cerdit_note_id = trim($this->input->post('cerdit_note_id'));
             }else{
-                $complain_form_id = '';
+                $cerdit_note_id = '';
             }    
 
-            $savenewcomplaintform= $this->admin_model->savenewcomplaintform($complain_form_id,$data);
-              if($savenewcomplaintform){
-                  $add_complainform_response['status'] = 'success';
-                  $add_complainform_response['error'] = array('report_no'=>strip_tags(form_error('report_no')),'stage'=>strip_tags(form_error('stage')),'drawing_no_rev_no'=>strip_tags(form_error('drawing_no_rev_no')),'vendor_name'=>strip_tags(form_error('vendor_name')),'po_no_wo_no'=>strip_tags(form_error('po_no_wo_no')),'component_description'=>strip_tags(form_error('component_description')));
+            $savenewcreditnote= $this->admin_model->savenewcreditnote($cerdit_note_id,$data);
+              if($savenewcreditnote){
+                $update_last_inserted_id_credite_note_details = $this->admin_model->update_last_inserted_id_credite_note_details($savenewcreditnote);
+                if($update_last_inserted_id_credite_note_details){
+
+                  $add_creditnote_response['status'] = 'success';
+                  $add_creditnote_response['error'] = array('credit_note_number'=>strip_tags(form_error('credit_note_number')),'date'=>strip_tags(form_error('date')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'currency'=>strip_tags(form_error('currency')),'remark'=>strip_tags(form_error('remark')));
                 }else{
-                  $add_complainform_response['status'] = 'failure';
-                  $add_complainform_response['error'] = array('report_no'=>strip_tags(form_error('report_no')),'stage'=>strip_tags(form_error('stage')),'drawing_no_rev_no'=>strip_tags(form_error('drawing_no_rev_no')),'vendor_name'=>strip_tags(form_error('vendor_name')),'po_no_wo_no'=>strip_tags(form_error('po_no_wo_no')),'component_description'=>strip_tags(form_error('component_description')));
+                    $add_creditnote_response['status'] = 'failure';
+                    $add_creditnote_response['error'] = array('credit_note_number'=>strip_tags(form_error('credit_note_number')),'date'=>strip_tags(form_error('date')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'currency'=>strip_tags(form_error('currency')),'remark'=>strip_tags(form_error('remark')));
+               
+                }
+                }else{
+                  $add_creditnote_response['status'] = 'failure';
+                  $add_creditnote_response['error'] = array('credit_note_number'=>strip_tags(form_error('credit_note_number')),'date'=>strip_tags(form_error('date')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'currency'=>strip_tags(form_error('currency')),'remark'=>strip_tags(form_error('remark')));
                 }
         }
-        echo json_encode($add_complainform_response);
+        echo json_encode($add_creditnote_response);
     }else{
 
         $process = 'Add Credit Note';
         $processFunction = 'Admin/addcreditnote';
         $this->logrecord($process,$processFunction);
         $this->global['pageTitle'] = 'Add Credit Note';
-        //$data['getPreviousCreditnotenumber']= $this->admin_model->getPreviousCreditnotenumber()[0];
+        $data['getPreviousCreditnotenumber']= $this->admin_model->getPreviousCreditnotenumber()[0];
         $data['buyerList']= $this->admin_model->fetchAllbuyerList();
         $data['exportInvoiceList']= $this->admin_model->fetchexportInvoiceList();
         $data['fetchALLpreCredititemList']= $this->admin_model->fetchALLpreCredititemList();
-
         $this->loadViews("masters/addcreditnote", $this->global, $data, NULL);
     }
 
@@ -11124,16 +11103,16 @@ public function saveCreditnoteitem(){
                 'item_remark'=>strip_tags(form_error('item_remark')));
         }else{
 
-            $bom_id_edit =   $this->input->post('credit_note_id');
+            $cerdit_note_id =   $this->input->post('cerdit_note_id');
 
-            if($bom_id_edit){
-                $incoming_details_id =$bom_id_edit;
+            if($cerdit_note_id){
+                $credit_note_id_item =$cerdit_note_id;
             }else{
-                $incoming_details_id =NULL;
+                $credit_note_id_item =NULL;
             }
 
              $data = array(
-                'credit_note_id'=>$incoming_details_id,
+                'credit_note_id'=>$credit_note_id_item,
                 'part_number'=>$this->input->post('part_number'),
                 'invoice_no'=>$this->input->post('invoice_no'),
                 'invoice_date'=>$this->input->post('invoice_date'),
@@ -11153,14 +11132,14 @@ public function saveCreditnoteitem(){
               );
 
 
-              $bill_of_material_item_id = trim($this->input->post('bill_of_material_item_id'));
-              if( $bill_of_material_item_id){
-                  $billofmaterialitemid = $bill_of_material_item_id;
-              }else{
-                  $billofmaterialitemid = '';
-              }
+            //   $bill_of_material_item_id = trim($this->input->post('bill_of_material_item_id'));
+            //   if( $bill_of_material_item_id){
+            //       $billofmaterialitemid = $bill_of_material_item_id;
+            //   }else{
+            //       $billofmaterialitemid = '';
+            //   }
               
-                $saveCreditNoteitamdata = $this->admin_model->saveCreditNoteitamdata($billofmaterialitemid,$data);
+                $saveCreditNoteitamdata = $this->admin_model->saveCreditNoteitamdata('',$data);
 
                 if($saveCreditNoteitamdata){
 
@@ -11182,5 +11161,85 @@ public function saveCreditnoteitem(){
 
 
 }
+
+
+public function fetchcreditnoterecords(){
+
+    $params = $_REQUEST;
+    $totalRecords = $this->admin_model->fetchcreditnoterecordsCount($params); 
+    $queryRecords = $this->admin_model->fetchcreditnoterecordstData($params); 
+
+    $data = array();
+    foreach ($queryRecords as $key => $value)
+     {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+     }
+     
+     $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+     echo json_encode($json_data);
+
+}
+
+
+public function deletecreditnote(){
+    $post_submit = $this->input->post();
+    if($post_submit){
+        $result = $this->admin_model->deletecreditnote(trim($this->input->post('id')));
+        if ($result) {
+                    $process = 'Delete Rejection Form';
+                    $processFunction = 'Admin/deleterejectionform';
+                    $this->logrecord($process,$processFunction);
+                echo(json_encode(array('status'=>'success')));
+            }
+        else { echo(json_encode(array('status'=>'failed'))); }
+    }else{
+        echo(json_encode(array('status'=>'failed'))); 
+    }
+
+
+}
+
+
+public function deletecreditnoteitem(){
+
+    $post_submit = $this->input->post();
+    if($post_submit){
+        $result = $this->admin_model->deletecreditnoteitem(trim($this->input->post('id')));
+        if ($result) {
+                    $process = 'Delete Credit Note Items';
+                    $processFunction = 'Admin/deletecreditnoteitem';
+                    $this->logrecord($process,$processFunction);
+                echo(json_encode(array('status'=>'success')));
+            }
+        else { echo(json_encode(array('status'=>'failed'))); }
+    }else{
+        echo(json_encode(array('status'=>'failed'))); 
+    }
+}
+
+
+public function editcreditnote($id){
+
+    $process = 'Edit Credit Note';
+    $processFunction = 'Admin/editcreditnote';
+    $this->logrecord($process,$processFunction);
+    $this->global['pageTitle'] = 'Edit Credit Note';
+    $data['buyerList']= $this->admin_model->fetchAllbuyerList();
+    $data['getcreditenotedetails']= $this->admin_model->getcreditenotedetailsforedit($id);
+    $data['fetchALLpreCredititemList']= $this->admin_model->getcreditnoteitemdetails($id);
+    $this->loadViews("masters/editcreditnote", $this->global, $data, NULL);
+
+}
+
 
 }

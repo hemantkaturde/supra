@@ -2,11 +2,11 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            <i class="fa fa-users"></i> Add Credit Note
+            <i class="fa fa-users"></i> Edit Credit Note
             <small>
                 <ul class="breadcrumb" style="background-color:#ecf0f5 !important">
                     <li class="completed"><a href="javascript:void(0);">Masters</a></li>
-                    <li class="active"><a href="javascript:void(0);">Credit Note</a></li>
+                    <li class="active"><a href="javascript:void(0);">Edit Credit Note</a></li>
                 </ul>
             </small>
         </h1>
@@ -18,43 +18,29 @@
                 <div class="box">
                     <div class="box box-primary">
                         <div class="box-header">
-                            <h3 class="box-title">Add Credit Note Details</h3>
+                            <h3 class="box-title">Add Edit Credit Note Details</h3>
                         </div>
                         <?php $this->load->helper("form"); ?>
                         <form role="form" id="addnnewcreditnoteform" action="<?php echo base_url() ?>addnnewcreditnoteform" method="post" role="form">
                             <div class="box-body">
                                 <div class="col-md-4">
 
-                                    <?php
-                                        if($getPreviousCreditnotenumber['credit_note_number']){
-                                            $arr = str_split($getPreviousCreditnotenumber['credit_note_number']);
-                                            $i = end($arr);
-                                            $inrno= "SQCN2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
-                                            $po_number = $inrno;
-                                        }else{
-                                            $po_number = 'SQCN23240001';
-                                        }
-                                    ?>
+                                <input type="hidden" class="form-control" id="cerdit_note_id" name="cerdit_note_id" value="<?=$getcreditenotedetails['cerdit_note_id']?>" required readonly>
+
                                     
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="credit_note_number">Credit Note Number<span class="required">*</span></label>
-                                            <input type="text" class="form-control" id="credit_note_number" name="credit_note_number" value="<?=$po_number?>" required readonly>
+                                            <input type="text" class="form-control" id="credit_note_number" name="credit_note_number" value="<?=$getcreditenotedetails['credit_note_number']?>" required readonly>
                                             <p class="error credit_note_number_error"></p>
                                         </div>
                                     </div>
 
 
-                                    <?php if($fetchALLpreCredititemList[0]['pre_date']){
-                                        $date= $fetchALLpreCredititemList[0]['pre_date'];
-                                     }else{
-                                        $date= date('Y-m-d');
-                                     } ?>
-
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="date">Date <span class="required">*</span></label>
-                                            <input type="text" class="form-control datepicker"  value="<?=$date?>" id="date" name="date" required>
+                                            <input type="text" class="form-control datepicker"  value="<?=$getcreditenotedetails['date']?>" id="date" name="date" required>
                                             <p class="error date_error"></p>
                                         </div>
                                     </div>
@@ -73,9 +59,9 @@
                                         </div>
                                     </div>
 
-                                    <?php if($fetchALLpreCredititemList[0]['pre_buyer_po_number']){
+                                    <?php if($getcreditenotedetails['buyer_po_number']){
                                         $display='block';
-                                        $selected_value = $fetchALLpreCredititemList[0]['sales_order_number'];
+                                        $selected_value = $getcreditenotedetails['sales_order_number'].'-'.$getcreditenotedetails['buyer_po_number'];
 
                                     }else{
                                         $display='none';
@@ -86,10 +72,10 @@
                                             <div class="form-group">
                                                     <label for="buyer_po_number">Select Buyer PO Number <span class="required">*</span></label>
                                                     <select class="form-control buyer_po_number_for_item buyer_po_number_for_export_invoice" name="buyer_po_number" id="buyer_po_number">
-                                                    <option st-id="" value="<?=$fetchALLpreCredititemList[0]['pre_buyer_po_number']?>" selected ><?=$selected_value;?></option>
+                                                    <option st-id="" value="<?=$getcreditenotedetails['buyer_po_number_id']?>" selected ><?=$selected_value;?></option>
                                                         <!-- <option st-id="" value="">Select Buyer Name</option>
                                                         <?php foreach ($buyerList as $key => $value) {?>
-                                                        <option value="<?php echo $value['buyer_id']; ?>" <?php if($value['buyer_id']==$fetchALLpreCredititemList[0]['pre_buyer_name']){ echo 'selected';} ?> ><?php echo $value['buyer_name']; ?></option>
+                                                        <option value="<?php echo $value['buyer_id']; ?>" <?php if($value['buyer_id']==$getcreditenotedetails['buyer_name']){ echo 'selected';} ?> ><?php echo $value['buyer_name']; ?></option>
                                                         <?php } ?> -->
                                                     </select> 
                                                 <p class="error buyer_po_number_error"></p>
@@ -100,7 +86,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="Currency">Currency</label>
-                                            <input type="text" class="form-control" id="currency" name="currency" value="<?=$fetchALLpreCredititemList[0]['currency']?>" required readonly>
+                                            <input type="text" class="form-control" id="currency" name="currency" value="<?=$getcreditenotedetails['currency']?>" required readonly>
                                             <p class="error currency_error"></p>
                                         </div>
                                     </div>
@@ -109,7 +95,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="remark">Remark</label>
-                                            <input type="text" class="form-control" id="remark" name="remark" value="<?=$fetchALLprejobworkitemList[0]['pre_remark'] ?>">
+                                            <input type="text" class="form-control" id="remark" name="remark" value="<?=$getcreditenotedetails['creditnoteremark'] ?>">
                                             <p class="error remark_error"></p>
                                         </div>
                                     </div>
