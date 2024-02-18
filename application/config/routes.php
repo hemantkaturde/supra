@@ -417,11 +417,7 @@ $route['creditnote'] = "admin/creditnote";
 $route['saveCreditnoteitem'] = "admin/saveCreditnoteitem";
 $route['deletecreditnote'] = "admin/deletecreditnote";
 $route['deletecreditnoteitem'] = "admin/deletecreditnoteitem";
-
 $route['editcreditnote/(:any)'] = "admin/editcreditnote/$1";
-
-
-
 $route['getbuyeritemonly'] = "admin/getbuyeritemonly";
 
 

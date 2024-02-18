@@ -11683,6 +11683,13 @@
 				 }
 
 
+				 if($("#invoice_qty").val()){
+					 var invoice_qty = $("#invoice_qty").val();
+				 }else{
+					 var invoice_qty = 0;
+				 }
+
+
 				 if($("#p_and_f_charges").val()){
 					 var p_and_f_charges = $("#p_and_f_charges").val();
 				 }else{
@@ -11701,7 +11708,7 @@
 
 				/*=======================================normal invoice=========================================================*/
 
-				var total_qty_normal_plus_pnf = parseFloat(ok_qty) *  parseFloat(rate);
+				var total_qty_normal_plus_pnf = parseFloat(invoice_qty) *  parseFloat(rate);
 
 				var total_qty_normal_qty = parseFloat(total_qty_normal_plus_pnf) +  parseFloat(p_and_f_charges);
 
@@ -11744,6 +11751,12 @@
 					 var rate = $("#rate").val();
 				 }else{
 					 var rate = 0;
+				 }
+
+				 if($("#invoice_qty").val()){
+					 var invoice_qty = $("#invoice_qty").val();
+				 }else{
+					 var invoice_qty = 0;
 				 }
 
 				var less_qty_rejected_qty = parseFloat(less_quantity) +  parseFloat(rejected_quantity);
@@ -11799,7 +11812,7 @@
 
 					/*=======================================normal invoice=========================================================*/
 
-					var total_qty_normal_plus_pnf = parseFloat(ok_qty) *  parseFloat(rate);
+					var total_qty_normal_plus_pnf = parseFloat(invoice_qty) *  parseFloat(rate);
 
 					var total_qty_normal_qty = parseFloat(total_qty_normal_plus_pnf) +  parseFloat(p_and_f_charges);
 
@@ -11879,6 +11892,13 @@
 				 }
 
 
+				 if($("#invoice_qty").val()){
+					 var invoice_qty = $("#invoice_qty").val();
+				 }else{
+					 var invoice_qty = 0;
+				 }
+				 
+
 				 var total_qty_for_ok_qty_plus_pnf = parseFloat(ok_qty) *  parseFloat(rate);
 
 				 var total_qty_for_ok_qty = parseFloat(total_qty_for_ok_qty_plus_pnf) +  parseFloat(p_and_f_charges);
@@ -11893,7 +11913,7 @@
 
 					/*=======================================normal invoice=========================================================*/
 
-					var total_qty_normal_plus_pnf = parseFloat(ok_qty) *  parseFloat(rate);
+					var total_qty_normal_plus_pnf = parseFloat(invoice_qty) *  parseFloat(rate);
 
 					var total_qty_normal_qty = parseFloat(total_qty_normal_plus_pnf) +  parseFloat(p_and_f_charges);
 
@@ -11966,6 +11986,12 @@
 				 }
 
 
+				 if($("#invoice_qty").val()){
+					 var invoice_qty = $("#invoice_qty").val();
+				 }else{
+					 var invoice_qty = 0;
+				 }
+
 				 var total_qty_for_ok_qty_plus_pnf = parseFloat(ok_qty) *  parseFloat(rate);
 
 				 var total_qty_for_ok_12_qty = parseFloat(total_qty_for_ok_qty_plus_pnf) + parseFloat(p_and_f_charges);
@@ -11979,7 +12005,7 @@
 
 				/*=======================================normal invoice=========================================================*/
 
-				var total_qty_normal_plus_pnf = parseFloat(ok_qty) *  parseFloat(rate);
+				var total_qty_normal_plus_pnf = parseFloat(invoice_qty) *  parseFloat(rate);
 
 				var total_qty_normal_qty = parseFloat(total_qty_normal_plus_pnf) +  parseFloat(p_and_f_charges);
 
