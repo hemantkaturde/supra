@@ -7450,6 +7450,14 @@ class Admin extends BaseController
             $this->form_validation->set_rules('p_and_f_charges','P And F Charges','trim');
             $this->form_validation->set_rules('item_remark','Item Remark','trim');
 
+
+            $this->form_validation->set_rules('total_qty_into_rate','Total Qty Into Rate','trim');
+            $this->form_validation->set_rules('total_qty_normal_qty_plus_pnf','total_qty_normal_qty_plus_pnf','trim');
+            $this->form_validation->set_rules('total_normal_gst_value','total_normal_gst_value','trim');
+            $this->form_validation->set_rules('total_normal_gst_value_plus_total','total_normal_gst_value_plus_total','trim');
+
+
+
             if($this->form_validation->run() == FALSE)
             {
                 $savdebitnoteitem_response['status'] = 'failure';
@@ -7483,6 +7491,14 @@ class Admin extends BaseController
                        // 'grand_total' =>  trim($this->input->post('grand_total')),
                         'total_amount_of_ok_qty' =>trim($this->input->post('total_ok_qty_amount')),
                         'debit_amount' =>  trim($this->input->post('debit_amount')),
+
+
+                        'total_qty_into_rate' => trim($this->input->post('total_qty_into_rate')),
+                        'total_qty_normal_qty_plus_pnf' => trim($this->input->post('total_qty_normal_qty_plus_pnf')),
+                        'total_normal_gst_value' => trim($this->input->post('total_normal_gst_value')),
+                        'total_normal_gst_value_plus_total' => trim($this->input->post('total_normal_gst_value_plus_total')),
+
+
                         'remark'=>  trim($this->input->post('item_remark')),
                         'pre_debit_note_date' =>   trim($this->input->post('pre_debit_note_date')),
                         'pre_select_with_po_without_po ' =>   trim($this->input->post('pre_select_with_po_without_po')),
@@ -7518,6 +7534,14 @@ class Admin extends BaseController
                         'IGST_value_ok_val' =>  trim($this->input->post('igst_rate_ok')),
                         'p_and_f_charges' =>  trim($this->input->post('p_and_f_charges')),
     
+
+
+                        'total_qty_into_rate' => trim($this->input->post('total_qty_into_rate')),
+                        'total_qty_normal_qty_plus_pnf' => trim($this->input->post('total_qty_normal_qty_plus_pnf')),
+                        'total_normal_gst_value' => trim($this->input->post('total_normal_gst_value')),
+                        'total_normal_gst_value_plus_total' => trim($this->input->post('total_normal_gst_value_plus_total')),
+
+
                        // 'grand_total' =>  trim($this->input->post('grand_total')),
                         'total_amount_of_ok_qty' =>trim($this->input->post('total_ok_qty_amount')),
                         'total_amount_of_ok_qty_data' =>trim($this->input->post('total_amount_of_ok_qty_data')),

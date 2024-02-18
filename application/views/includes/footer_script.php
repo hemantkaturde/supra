@@ -11699,6 +11699,24 @@
 				 $("#igst_rate_ok_18").val(gst_value_ok_18);
 
 
+				/*=======================================normal invoice=========================================================*/
+
+				var total_qty_normal_plus_pnf = parseFloat(ok_qty) *  parseFloat(rate);
+
+				var total_qty_normal_qty = parseFloat(total_qty_normal_plus_pnf) +  parseFloat(p_and_f_charges);
+
+				var gst_normal_gst = parseFloat(total_qty_normal_qty) * 18 / 100;
+
+				var total_value_plus_gst_normal= parseFloat(total_qty_normal_qty) + parseFloat(gst_normal_gst);
+
+
+				$("#total_qty_into_rate").val(total_qty_normal_plus_pnf);
+				$("#total_qty_normal_qty_plus_pnf").val(total_qty_normal_qty);
+				$("#total_normal_gst_value").val(gst_normal_gst);
+				$("#total_normal_gst_value_plus_total").val(total_value_plus_gst_normal);
+
+                /*=======================================normal invoice=========================================================*/
+
 
 			}else if(gst_rate_value=='CGST_SGST'){
 
@@ -11779,6 +11797,25 @@
 				$("#SGST_rate_9_ok").val(SGST_rate_ok_9);
 
 
+					/*=======================================normal invoice=========================================================*/
+
+					var total_qty_normal_plus_pnf = parseFloat(ok_qty) *  parseFloat(rate);
+
+					var total_qty_normal_qty = parseFloat(total_qty_normal_plus_pnf) +  parseFloat(p_and_f_charges);
+
+					var gst_normal_gst = parseFloat(total_qty_normal_qty) * 18 / 100;
+
+					var total_value_plus_gst_normal= parseFloat(total_qty_normal_qty) + parseFloat(gst_normal_gst);
+
+
+					$("#total_qty_into_rate").val(total_qty_normal_plus_pnf);
+					$("#total_qty_normal_qty_plus_pnf").val(total_qty_normal_qty);
+					$("#total_normal_gst_value").val(gst_normal_gst);
+					$("#total_normal_gst_value_plus_total").val(total_value_plus_gst_normal);
+
+					/*=======================================normal invoice=========================================================*/
+
+
 			}else if(gst_rate_value=='CGST_SGST_6'){
 
 				$(".igst_div").attr("style", "display:none");
@@ -11847,11 +11884,33 @@
 				 var total_qty_for_ok_qty = parseFloat(total_qty_for_ok_qty_plus_pnf) +  parseFloat(p_and_f_charges);
 
 				// var total_qty_for_ok_qty = parseFloat(ok_qty) *  parseFloat(rate)
-				var gst_value_ok_6 = parseFloat(total_qty_for_ok_qty) * 18 / 100;
+				var gst_value_ok_6 = parseFloat(total_qty_for_ok_qty) * 12 / 100;
 				var cgst_rate_ok_6  =gst_value_ok_6/2;
 				var SGST_rate_ok_6  =gst_value_ok_6/2;
 				$("#CGST_rate_6_ok").val( cgst_rate_ok_6);
 				$("#SGST_rate_6_ok").val( SGST_rate_ok_6);
+
+
+					/*=======================================normal invoice=========================================================*/
+
+					var total_qty_normal_plus_pnf = parseFloat(ok_qty) *  parseFloat(rate);
+
+					var total_qty_normal_qty = parseFloat(total_qty_normal_plus_pnf) +  parseFloat(p_and_f_charges);
+
+					var gst_normal_gst = parseFloat(total_qty_normal_qty) * 12 / 100;
+
+					var total_value_plus_gst_normal= parseFloat(total_qty_normal_qty) + parseFloat(gst_normal_gst);
+
+
+					$("#total_qty_into_rate").val(total_qty_normal_plus_pnf);
+					$("#total_qty_normal_qty_plus_pnf").val(total_qty_normal_qty);
+					$("#total_normal_gst_value").val(gst_normal_gst);
+					$("#total_normal_gst_value_plus_total").val(total_value_plus_gst_normal);
+
+					/*=======================================normal invoice=========================================================*/
+
+
+
 				
 			}else if(gst_rate_value=='IGST_12'){
 
@@ -11917,6 +11976,24 @@
 				 var gst_value_ok_12 = parseFloat(total_qty_for_ok_12_qty) * 12 / 100;
 
 				 $("#igst_rate_ok_12").val(gst_value_ok_12);
+
+				/*=======================================normal invoice=========================================================*/
+
+				var total_qty_normal_plus_pnf = parseFloat(ok_qty) *  parseFloat(rate);
+
+				var total_qty_normal_qty = parseFloat(total_qty_normal_plus_pnf) +  parseFloat(p_and_f_charges);
+
+				var gst_normal_gst = parseFloat(total_qty_normal_qty) * 12 / 100;
+
+				var total_value_plus_gst_normal= parseFloat(total_qty_normal_qty) + parseFloat(gst_normal_gst);
+
+
+				$("#total_qty_into_rate").val(total_qty_normal_plus_pnf);
+				$("#total_qty_normal_qty_plus_pnf").val(total_qty_normal_qty);
+				$("#total_normal_gst_value").val(gst_normal_gst);
+				$("#total_normal_gst_value_plus_total").val(total_value_plus_gst_normal);
+
+				/*=======================================normal invoice=========================================================*/
 			}
          });
 
@@ -12006,16 +12083,22 @@
 			   var p_and_f_charges =   $('#p_and_f_charges').val();
 
 			   
-
 			   var debit_id =   $('#debit_id').val();
 			   var debit_note_item_id =   $('#debit_note_item_id').val();
-			
+
+
+			   var total_qty_into_rate =   $('#total_qty_into_rate').val();
+			   var total_qty_normal_qty_plus_pnf =   $('#total_qty_normal_qty_plus_pnf').val();
+			   var total_normal_gst_value =   $('#total_normal_gst_value').val();
+			   var total_normal_gst_value_plus_total =   $('#total_normal_gst_value_plus_total').val();
+
+
 			
 			   $.ajax({
 				url : "<?php echo base_url();?>saveDebitnoteitem",
 				type: "POST",
 				 //data : formData,
-				 data :{part_number:part_number,invoice_no:invoice_no,invoice_date:invoice_date,invoice_qty:invoice_qty,ok_qty:ok_qty,less_quantity:less_quantity,rejected_quantity:rejected_quantity,received_quantity:received_quantity,rate:rate,gst_rate:gst_rate,sgst_value:sgst_value,cgst_value:cgst_value,igst_rate:igst_rate,item_remark:item_remark,pre_debit_note_date:pre_debit_note_date,pre_select_with_po_without_po:pre_select_with_po_without_po,pre_vendor_supplier_name:pre_vendor_supplier_name,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_supplier_name:pre_supplier_name,pre_supplier_po_number:pre_supplier_po_number,pre_po_date:pre_po_date,pre_remark:pre_remark,sgst_value:sgst_value,cgst_value:cgst_value,SGST_rate_ok:SGST_rate_ok,CGST_rate_ok:CGST_rate_ok,igst_rate:igst_rate,igst_rate_ok:igst_rate_ok,debit_amount:debit_amount,total_ok_qty_amount:total_ok_qty_amount,debit_id:debit_id,total_amount_of_ok_qty_data:total_amount_of_ok_qty_data,p_and_f_charges:p_and_f_charges,debit_note_item_id:debit_note_item_id},
+				 data :{part_number:part_number,invoice_no:invoice_no,invoice_date:invoice_date,invoice_qty:invoice_qty,ok_qty:ok_qty,less_quantity:less_quantity,rejected_quantity:rejected_quantity,received_quantity:received_quantity,rate:rate,gst_rate:gst_rate,sgst_value:sgst_value,cgst_value:cgst_value,igst_rate:igst_rate,item_remark:item_remark,pre_debit_note_date:pre_debit_note_date,pre_select_with_po_without_po:pre_select_with_po_without_po,pre_vendor_supplier_name:pre_vendor_supplier_name,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_supplier_name:pre_supplier_name,pre_supplier_po_number:pre_supplier_po_number,pre_po_date:pre_po_date,pre_remark:pre_remark,sgst_value:sgst_value,cgst_value:cgst_value,SGST_rate_ok:SGST_rate_ok,CGST_rate_ok:CGST_rate_ok,igst_rate:igst_rate,igst_rate_ok:igst_rate_ok,debit_amount:debit_amount,total_ok_qty_amount:total_ok_qty_amount,debit_id:debit_id,total_amount_of_ok_qty_data:total_amount_of_ok_qty_data,p_and_f_charges:p_and_f_charges,debit_note_item_id:debit_note_item_id,			   total_qty_into_rate:total_qty_into_rate,total_qty_normal_qty_plus_pnf:total_qty_normal_qty_plus_pnf,total_normal_gst_value:total_normal_gst_value,total_normal_gst_value_plus_total:total_normal_gst_value_plus_total},
 				 method: "POST",
                 // data :{package_id:package_id},
                 cache:false,
@@ -12179,10 +12262,10 @@
 				 //var total_third_group = parseFloat(total_debit_amount) +  parseFloat(tds_amount) + parseFloat(chq_amt) +  parseFloat(freight_amount_charge);
 
 
-				 var total_third_group = parseFloat(total_debit_amount) +  parseFloat(tds_amount) + parseFloat(chq_amt) +  parseFloat(freight_amount_charge);
+				// var total_third_group = parseFloat(total_debit_amount) +  parseFloat(tds_amount) + parseFloat(chq_amt) +  parseFloat(freight_amount_charge);
 
 
-				 $("#grand_total_main").val(Math.round(total_third_group));
+				// $("#grand_total_main").val(Math.round(total_third_group));
 			
 		 });
 
@@ -12323,7 +12406,12 @@
 
 						}
 					
-					
+
+					        $('#total_qty_into_rate').val(fetchResponse.total_qty_into_rate);
+							$('#total_qty_normal_qty_plus_pnf').val(fetchResponse.total_qty_normal_qty_plus_pnf);
+							$('#total_normal_gst_value').val(fetchResponse.total_normal_gst_value);
+							$('#total_normal_gst_value_plus_total').val(fetchResponse.total_normal_gst_value_plus_total);
+
 						
 
 
@@ -17717,8 +17805,6 @@
 
     </script>
 <?php } ?>
-
-
 
 
 <?php if($pageTitle=='Credit Note' || $pageTitle=='Add Credit Note' || $pageTitle=='Edit Credit Note'){ ?>

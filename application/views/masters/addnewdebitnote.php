@@ -235,7 +235,7 @@
                                     <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="freight_amount_charge">Grand Total <span class="required">*</span></label>
-                                                  <input type="text" class="form-control"  value="" id="grand_total_main" name="grand_total_main" required>
+                                                  <input type="text" class="form-control"  value="" id="grand_total_main" value="<?=$totalDebitAndokQty['total_normal_gst_value_plus_total']?>"  name="grand_total_main" required>
                                                 <p class="error grand_total_main_error"></p>
                                             </div>
                                     </div>
@@ -590,6 +590,11 @@
                                                            <p class="error item_remark_error"></p>
                                                         </div>
                                                     </div>
+
+                                                    <input type="hidden" class="form-control"  id="total_qty_into_rate" name="total_qty_into_rate" readonly>
+                                                    <input type="hidden" class="form-control"  id="total_qty_normal_qty_plus_pnf" name="total_qty_normal_qty_plus_pnf" readonly>
+                                                    <input type="hidden" class="form-control"  id="total_normal_gst_value" name="total_normal_gst_value" readonly>
+                                                    <input type="hidden" class="form-control"  id="total_normal_gst_value_plus_total" name="total_normal_gst_value_plus_total" readonly>
                                                 </div>
 
                                                 <div class="modal-footer">

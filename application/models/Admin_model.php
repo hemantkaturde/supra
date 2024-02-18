@@ -5810,7 +5810,7 @@ class Admin_model extends CI_Model
     public function getTotalDebitAndokQty(){
 
 
-        $this->db->select('sum(debit_amount) as total_debit_amount, sum(SGST_value) as total_SGST_value, sum(CGST_value) as total_CGST_value, sum(IGST_value) as total_IGST_value , sum(total_amount_of_ok_qty_data) as total_amount_of_ok_qty_data,sum(total_amount_of_ok_qty) as total_amount_of_ok_qty,sum(p_and_f_charges) as p_and_f_charges,sum(SGST_value_ok_val) as SGST_value_ok_val,sum(CGST_value_ok_val) as CGST_value_ok_val,sum(IGST_value_ok_val) as IGST_value_ok_val,sum(SGST_value_ok_val) as SGST_value_ok_val,sum(CGST_value_ok_val) as CGST_value_ok_val,sum(IGST_value_ok_val) as IGST_value_ok_val');
+        $this->db->select('sum(debit_amount) as total_debit_amount, sum(SGST_value) as total_SGST_value, sum(CGST_value) as total_CGST_value, sum(IGST_value) as total_IGST_value , sum(total_amount_of_ok_qty_data) as total_amount_of_ok_qty_data,sum(total_amount_of_ok_qty) as total_amount_of_ok_qty,sum(p_and_f_charges) as p_and_f_charges,sum(SGST_value_ok_val) as SGST_value_ok_val,sum(CGST_value_ok_val) as CGST_value_ok_val,sum(IGST_value_ok_val) as IGST_value_ok_val,sum(SGST_value_ok_val) as SGST_value_ok_val,sum(CGST_value_ok_val) as CGST_value_ok_val,sum(IGST_value_ok_val) as IGST_value_ok_val,sum(total_normal_gst_value_plus_total) as total_normal_gst_value_plus_total');
         $this->db->where(TBL_DEBIT_NOTE_ITEM.'.debit_note_id IS NULL');
         $query = $this->db->get(TBL_DEBIT_NOTE_ITEM);
         $data = $query->result_array();
@@ -5820,7 +5820,7 @@ class Admin_model extends CI_Model
 
     public function getTotalDebitAndokQtyedit($id){
 
-        $this->db->select('sum(debit_amount) as total_debit_amount, sum(SGST_value) as total_SGST_value, sum(CGST_value) as total_CGST_value, sum(IGST_value) as total_IGST_value , sum(total_amount_of_ok_qty_data) as total_amount_of_ok_qty_data,sum(total_amount_of_ok_qty) as total_amount_of_ok_qty,sum(p_and_f_charges) as p_and_f_charges,sum(SGST_value_ok_val) as SGST_value_ok_val,sum(CGST_value_ok_val) as CGST_value_ok_val,sum(IGST_value_ok_val) as IGST_value_ok_val,sum(SGST_value_ok_val) as SGST_value_ok_val,sum(CGST_value_ok_val) as CGST_value_ok_val,sum(IGST_value_ok_val) as IGST_value_ok_val');
+        $this->db->select('sum(debit_amount) as total_debit_amount, sum(SGST_value) as total_SGST_value, sum(CGST_value) as total_CGST_value, sum(IGST_value) as total_IGST_value , sum(total_amount_of_ok_qty_data) as total_amount_of_ok_qty_data,sum(total_amount_of_ok_qty) as total_amount_of_ok_qty,sum(p_and_f_charges) as p_and_f_charges,sum(SGST_value_ok_val) as SGST_value_ok_val,sum(CGST_value_ok_val) as CGST_value_ok_val,sum(IGST_value_ok_val) as IGST_value_ok_val,sum(SGST_value_ok_val) as SGST_value_ok_val,sum(CGST_value_ok_val) as CGST_value_ok_val,sum(IGST_value_ok_val) as IGST_value_ok_val,sum(total_normal_gst_value_plus_total) as total_normal_gst_value_plus_total');
         $this->db->where(TBL_DEBIT_NOTE_ITEM.'.debit_note_id',$id);
         $query = $this->db->get(TBL_DEBIT_NOTE_ITEM);
         $data = $query->result_array();
@@ -8370,6 +8370,11 @@ class Admin_model extends CI_Model
         .TBL_DEBIT_NOTE_ITEM.'.SGST_value_ok_val as SGST_value_ok_val,'
         .TBL_DEBIT_NOTE_ITEM.'.CGST_value_ok_val as CGST_value_ok_val,'
         .TBL_DEBIT_NOTE_ITEM.'.IGST_value_ok_val as IGST_value_ok_val,'
+
+        .TBL_DEBIT_NOTE_ITEM.'.total_qty_into_rate as total_qty_into_rate,'
+        .TBL_DEBIT_NOTE_ITEM.'.total_qty_normal_qty_plus_pnf as total_qty_normal_qty_plus_pnf,'
+        .TBL_DEBIT_NOTE_ITEM.'.total_normal_gst_value as total_normal_gst_value,'
+        .TBL_DEBIT_NOTE_ITEM.'.total_normal_gst_value_plus_total as total_normal_gst_value_plus_total,'
 
         
 
