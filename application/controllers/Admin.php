@@ -7540,11 +7540,11 @@ class Admin extends BaseController
                         'total_qty_normal_qty_plus_pnf' => trim($this->input->post('total_qty_normal_qty_plus_pnf')),
                         'total_normal_gst_value' => trim($this->input->post('total_normal_gst_value')),
                         'total_normal_gst_value_plus_total' => trim($this->input->post('total_normal_gst_value_plus_total')),
-
+                        'total_amount_of_ok_qty_data' =>trim($this->input->post('rate')) * trim($this->input->post('ok_qty')),
 
                        // 'grand_total' =>  trim($this->input->post('grand_total')),
                         'total_amount_of_ok_qty' =>trim($this->input->post('total_ok_qty_amount')),
-                        'total_amount_of_ok_qty_data' =>trim($this->input->post('total_amount_of_ok_qty_data')),
+                        //'total_amount_of_ok_qty_data' =>trim($this->input->post('total_amount_of_ok_qty_data')),
                         'debit_amount' =>  trim($this->input->post('debit_amount')),
                         'remark'=>  trim($this->input->post('item_remark')),
                         'pre_debit_note_date' =>   trim($this->input->post('pre_debit_note_date')),
