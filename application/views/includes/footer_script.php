@@ -12226,7 +12226,7 @@
 		 $(document).on('change', '#tds_amount,#freight_amount_charge', function(){	
 				 $("#chq_amt").val();
 
-				 $("#grand_total_main").val();
+				// $("#grand_total_main").val();
 			  
 				 if($("#total_amount_of_ok_qty_data").val()){
 					 var total_amount_of_ok_qty_data = $("#total_amount_of_ok_qty_data").val();
