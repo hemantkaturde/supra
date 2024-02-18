@@ -11164,7 +11164,7 @@
 
 			$("#chq_amt").val();
 
-			$("#grand_total_main").val();
+			//$("#grand_total_main").val();
 
 			if($("#total_amount_of_ok_qty_data").val()){
 				var total_amount_of_ok_qty_data = $("#total_amount_of_ok_qty_data").val();
@@ -11223,9 +11223,9 @@
 			$("#chq_amt").val(chq_amt);
 
 
-			var total_third_group = parseFloat(total_debit_amount) +  parseFloat(tds_amount) + parseFloat(chq_amt) +  parseFloat(freight_amount_charge);
+			//var total_third_group = parseFloat(total_debit_amount) +  parseFloat(tds_amount) + parseFloat(chq_amt) +  parseFloat(freight_amount_charge);
 
-			$("#grand_total_main").val(Math.round(total_third_group));
+			//$("#grand_total_main").val(Math.round(total_third_group));
 
 		 });
 
