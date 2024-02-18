@@ -236,7 +236,7 @@
                                     <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="freight_amount_charge">Grand Total <span class="required">*</span></label>
-                                                  <input type="text" class="form-control"  value="" id="grand_total_main" value="<?=$totalDebitAndokQty['grandtotal']?>"  name="grand_total_main" required>
+                                                  <input type="text" class="form-control" id="grand_total_main" value="<?=$totalDebitAndokQty['grandtotal']?>"  name="grand_total_main" required>
                                                 <p class="error grand_total_main_error"></p>
                                             </div>
                                     </div>
