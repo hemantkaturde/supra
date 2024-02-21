@@ -176,7 +176,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Part Number <span class="required">*</span> (<small>Row Material Goods Master</small>)</label>
                                                         <div class="col-sm-8">
-                                                            <select class="form-control" name="part_number" id="part_number">
+                                                            <select class="form-control part_number_for_export_invoice" name="part_number" id="part_number">
                                                                 <option st-id="" value="">Select Part Name</option>
                                                                 <!-- <?php foreach ($rowMaterialList as $key => $value) {?>        
                                                                     <option value="<?php echo $value['raw_id']; ?>"><?php echo $value['part_number']; ?></option>
