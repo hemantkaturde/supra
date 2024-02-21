@@ -11066,9 +11066,11 @@ public function getPartnumberBypartnumberforcreitnote(){
 
 
 public function getexportInvoicebybyerpo(){
-    $supplier_po_number=$this->input->post('supplier_po_number');
-    if($supplier_po_number) {
-        $getSupplieritemsonly = $this->admin_model->getexportInvoicebybyerpo($supplier_po_number);
+    $buyer_po_number=$this->input->post('buyer_po_number');
+    $part_number_for_export_invoice=$this->input->post('part_number_for_export_invoice');
+
+    if($buyer_po_number) {
+        $getSupplieritemsonly = $this->admin_model->getexportInvoicebybyerpo($buyer_po_number,$part_number_for_export_invoice);
         if(count($getSupplieritemsonly) >= 1) {
             $content = $content.'<option value="">Select Part Number</option>';
             foreach($getSupplieritemsonly as $value) {

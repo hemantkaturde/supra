@@ -85,7 +85,7 @@
                                     <div class="col-md-12 buyer_po_number_div" >
                                             <div class="form-group">
                                                     <label for="buyer_po_number">Select Buyer PO Number <span class="required">*</span></label>
-                                                    <select class="form-control buyer_po_number_for_item buyer_po_number_for_export_invoice" name="buyer_po_number" id="buyer_po_number">
+                                                    <select class="form-control buyer_po_number_for_item" name="buyer_po_number" id="buyer_po_number">
                                                     <option st-id="" value="<?=$fetchALLpreCredititemList[0]['pre_buyer_po_number']?>" selected ><?=$selected_value;?></option>
                                                         <!-- <option st-id="" value="">Select Buyer Name</option>
                                                         <?php foreach ($buyerList as $key => $value) {?>
@@ -190,7 +190,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Part Number <span class="required">*</span> (<small>Row Material Goods Master</small>)</label>
                                                         <div class="col-sm-8">
-                                                            <select class="form-control" name="part_number" id="part_number">
+                                                            <select class="form-control part_number_for_export_invoice" name="part_number" id="part_number">
                                                                 <option st-id="" value="">Select Part Name</option>
                                                                 <!-- <?php foreach ($rowMaterialList as $key => $value) {?>        
                                                                     <option value="<?php echo $value['raw_id']; ?>"><?php echo $value['part_number']; ?></option>

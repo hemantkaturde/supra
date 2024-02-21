@@ -9799,10 +9799,11 @@ class Admin_model extends CI_Model
         return $data;
    }
 
-   public function getexportInvoicebybyerpo($supplier_po_number){
+   public function getexportInvoicebybyerpo($buyer_po_number,$part_number_for_export_invoice){
           $this->db->select(TBL_PACKING_INSTRACTION_DETAILS.'.id as invoice_id,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_number');
           $this->db->join(TBL_PACKING_INSTRACTION, TBL_PACKING_INSTRACTION.'.id = '.TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id');
-          $this->db->where(TBL_PACKING_INSTRACTION.'.buyer_po_number',$supplier_po_number);
+          $this->db->where(TBL_PACKING_INSTRACTION.'.buyer_po_number',$buyer_po_number);
+          $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.part_number',$part_number_for_export_invoice);
           $query = $this->db->get(TBL_PACKING_INSTRACTION_DETAILS);
           $data = $query->result_array();
           return $data;
