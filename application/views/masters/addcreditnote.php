@@ -145,7 +145,7 @@
                                                     ?>
                                                     <tr>
                                                         <td><?php echo $count;?></td>
-                                                        <td><?php echo $value['part_number'];?></td>
+                                                        <td><?php echo $value['partnumber'];?></td>
                                                         <td><?php echo $value['name'];?></td>
                                                         <td><?php echo $value['buyer_invoice_number'];?></td>
                                                         <td><?php echo $value['buyer_invoice_date'];?></td>

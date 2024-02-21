@@ -9921,7 +9921,7 @@ class Admin_model extends CI_Model
 
 
    public function fetchALLpreCredititemList(){
-        $this->db->select('*,'.TBL_CREDIT_NOTE_ITEM.'.remark as item_remark,'.TBL_CREDIT_NOTE_ITEM.'.id as credit_note_item_id,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_number,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_date');
+        $this->db->select('*,'.TBL_CREDIT_NOTE_ITEM.'.remark as item_remark,'.TBL_CREDIT_NOTE_ITEM.'.id as credit_note_item_id,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_number,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_date,'.TBL_FINISHED_GOODS.'.part_number as partnumber');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_CREDIT_NOTE_ITEM.'.part_number');
         $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_CREDIT_NOTE_ITEM.'.pre_buyer_po_number');
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_CREDIT_NOTE_ITEM.'.pre_buyer_name');
