@@ -17961,37 +17961,35 @@
         });
 
 		$(document).ready(function() {
-	
 			var buyer_po_number = $('.buyer_po_number_for_item').val();
 
-			$("#part_number").html('');
+					$("#part_number").html('');
 
-			var flag = 'Buyer';
-		
-			$.ajax({
-				url : "<?php echo ADMIN_PATH;?>getPartnumberBypartnumberforcreitnote",
-				type: "POST",
-				data : {'supplier_po_number' : buyer_po_number,'flag':flag},
-				success: function(data, textStatus, jqXHR)
-				{
-					$(".loader_ajax").hide();
-					if(data == "failure")
-					{
-						$('#part_number').html('<option value="">Select Part Number</option>');
-					}
-					else
-					{
-						$('#part_number').html(data);
+					var flag = 'Buyer';
 
-					}
-				},
-				error: function (jqXHR, textStatus, errorThrown)
-				{
-					$('#part_number').html();
-				}
-			});
-			return false;
+					$.ajax({
+						url : "<?php echo ADMIN_PATH;?>getbuyeritemonly",
+						type: "POST",
+						data : {'buyer_po_number' : buyer_po_number,'flag':flag},
+						success: function(data, textStatus, jqXHR)
+						{
+							$(".loader_ajax").hide();
+							if(data == "failure")
+							{
+								$('#part_number').html('<option value="">Select Part Number</option>');
+							}
+							else
+							{
+								$('#part_number').html(data);
 
+							}
+						},
+						error: function (jqXHR, textStatus, errorThrown)
+						{
+							$('#part_number').html();
+						}
+					});
+					return false;
 		});
 
 		// $(document).ready(function() {
