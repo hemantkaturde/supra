@@ -103,7 +103,7 @@
                                             }        
                                         ?>
 
-                                        <div class="col-md-12 vendor_po_number_div" id="vendor_po_number_div">
+                                        <div class="col-md-12 vendor_po_number_div" id="vendor_po_number_div" style="display:<?=$display;?>">
                                             <div class="form-group">
                                                     <label for="vendor_po_number">Select Vendor PO Number</label>
                                                         <select class="form-control vendor_po_number_itam" name="vendor_po_number" id="vendor_po_number">
