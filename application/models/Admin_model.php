@@ -9921,10 +9921,11 @@ class Admin_model extends CI_Model
 
 
    public function fetchALLpreCredititemList(){
-        $this->db->select('*,'.TBL_CREDIT_NOTE_ITEM.'.remark as item_remark,'.TBL_CREDIT_NOTE_ITEM.'.id as credit_note_item_id');
+        $this->db->select('*,'.TBL_CREDIT_NOTE_ITEM.'.remark as item_remark,'.TBL_CREDIT_NOTE_ITEM.'.id as credit_note_item_id,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_number,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_date');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_CREDIT_NOTE_ITEM.'.part_number');
         $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_CREDIT_NOTE_ITEM.'.pre_buyer_po_number');
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_CREDIT_NOTE_ITEM.'.pre_buyer_name');
+        $this->db->join(TBL_PACKING_INSTRACTION_DETAILS, TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id = '.TBL_CREDIT_NOTE_ITEM.'.invoice_no');
         $this->db->where(TBL_CREDIT_NOTE_ITEM.'.credit_note_id IS NULL');
         // $this->db->order_by(TBL_CREDIT_NOTE_ITEM.'.id','desc');
         $query = $this->db->get(TBL_CREDIT_NOTE_ITEM);
