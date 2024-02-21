@@ -17969,7 +17969,7 @@
 			var flag = 'Buyer';
 		
 			$.ajax({
-				url : "<?php echo ADMIN_PATH;?>getSuppliritemonlyforgetbuyeritemonly",
+				url : "<?php echo ADMIN_PATH;?>getPartnumberBypartnumberforcreitnote",
 				type: "POST",
 				data : {'supplier_po_number' : buyer_po_number,'flag':flag},
 				success: function(data, textStatus, jqXHR)
