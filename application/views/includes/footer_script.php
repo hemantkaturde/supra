@@ -17996,13 +17996,15 @@
 
 		$(document).ready(function() {
 
-			var buyer_po_number = $('.buyer_po_number_for_export_invoice').val();
+			var part_number_for_export_invoice = $('.part_number_for_export_invoice').val();
+			var buyer_po_number = $('#buyer_po_number').val();
 
 			$("#invoice_number").html('');
+
 			$.ajax({
 				url : "<?php echo ADMIN_PATH;?>getexportInvoicebybyerpo",
 				type: "POST",
-				data : {'supplier_po_number' : buyer_po_number},
+				data : {'buyer_po_number' : buyer_po_number,'part_number_for_export_invoice' : part_number_for_export_invoice},
 				success: function(data, textStatus, jqXHR)
 				{
 					$(".loader_ajax").hide();
