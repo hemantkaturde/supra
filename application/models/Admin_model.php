@@ -10115,6 +10115,32 @@ public function getbuyeritemonly($buyer_po_number){
 }
 
 
+public function checkvendorpoandvendornumberinvendorpoconfirmation($data){
+
+    $this->db->select('*');
+    $this->db->where(TBL_VENDOR_PO_CONFIRMATION.'.status', 1);
+    $this->db->where(TBL_VENDOR_PO_CONFIRMATION.'.vendor_name', trim($data['vendor_name']));
+    $this->db->where(TBL_VENDOR_PO_CONFIRMATION.'.vendor_po_number', trim($data['vendor_po_number']));
+    $query = $this->db->get(TBL_VENDOR_PO_CONFIRMATION);
+    $data = $query->result_array();
+    return $data;
+
+}
+
+
+
+public function checkvendorpoandvendornumberinsupplierpoconfirmation($data){
+
+    $this->db->select('*');
+    $this->db->where(TBL_SUPPLIER_PO_CONFIRMATION.'.status', 1);
+    $this->db->where(TBL_SUPPLIER_PO_CONFIRMATION.'.supplier_po_id', trim($data['supplier_name']));
+    $this->db->where(TBL_SUPPLIER_PO_CONFIRMATION.'.supplier_po_number', trim($data['supplier_po_number']));
+    $query = $this->db->get(TBL_SUPPLIER_PO_CONFIRMATION);
+    $data = $query->result_array();
+    return $data;
+
+}
+
 }
 
 ?>

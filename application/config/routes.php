@@ -420,8 +420,8 @@ $route['deletecreditnoteitem'] = "admin/deletecreditnoteitem";
 $route['editcreditnote/(:any)'] = "admin/editcreditnote/$1";
 $route['getbuyeritemonly'] = "admin/getbuyeritemonly";
 
-
-
+$route['checkvendorpoandvendornumberinvendorpoconfirmation'] = "admin/checkvendorpoandvendornumberinvendorpoconfirmation";
+$route['checkvendorpoandvendornumberinsupplierpoconfirmation'] = "admin/checkvendorpoandvendornumberinsupplierpoconfirmation";
 
 
 

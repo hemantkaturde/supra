@@ -11290,4 +11290,39 @@ public function getbuyeritemonly(){
 }
 
 
+public function checkvendorpoandvendornumberinvendorpoconfirmation(){
+
+    $post_submit = $this->input->post();
+    if($post_submit){
+         $result = $this->admin_model->checkvendorpoandvendornumberinvendorpoconfirmation($post_submit);
+         if ($result) {
+            $content = $result[0];
+            echo json_encode($content);
+         }else{
+            echo 'failure';
+         }
+    }else{
+        echo 'failure';
+    }
+}
+
+
+public function checkvendorpoandvendornumberinsupplierpoconfirmation(){
+
+    $post_submit = $this->input->post();
+    if($post_submit){
+         $result = $this->admin_model->checkvendorpoandvendornumberinsupplierpoconfirmation($post_submit);
+         if ($result) {
+            $content = $result[0];
+            echo json_encode($content);
+         }else{
+            echo 'failure';
+         }
+    }else{
+        echo 'failure';
+    }
+}
+
+
+
 }
