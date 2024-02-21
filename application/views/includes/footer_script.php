@@ -17994,38 +17994,38 @@
 
 		});
 
-		$(document).ready(function() {
+		// $(document).ready(function() {
 
-			var part_number_for_export_invoice = $('.part_number_for_export_invoice').val();
-			var buyer_po_number = $('#buyer_po_number').val();
+		// 	var part_number_for_export_invoice = $('.part_number_for_export_invoice').val();
+		// 	var buyer_po_number = $('#buyer_po_number').val();
 
-			$("#invoice_number").html('');
+		// 	$("#invoice_number").html('');
 
-			$.ajax({
-				url : "<?php echo ADMIN_PATH;?>getexportInvoicebybyerpo",
-				type: "POST",
-				data : {'buyer_po_number' : buyer_po_number,'part_number_for_export_invoice' : part_number_for_export_invoice},
-				success: function(data, textStatus, jqXHR)
-				{
-					$(".loader_ajax").hide();
-					if(data == "failure")
-					{
-						$('#invoice_number').html('<option value="">Select Invoice Number</option>');
-					}
-					else
-					{
-						$('#invoice_number').html(data);
+		// 	$.ajax({
+		// 		url : "<?php echo ADMIN_PATH;?>getexportInvoicebybyerpo",
+		// 		type: "POST",
+		// 		data : {'buyer_po_number' : buyer_po_number,'part_number_for_export_invoice' : part_number_for_export_invoice},
+		// 		success: function(data, textStatus, jqXHR)
+		// 		{
+		// 			$(".loader_ajax").hide();
+		// 			if(data == "failure")
+		// 			{
+		// 				$('#invoice_number').html('<option value="">Select Invoice Number</option>');
+		// 			}
+		// 			else
+		// 			{
+		// 				$('#invoice_number').html(data);
 
-					}
-				},
-				error: function (jqXHR, textStatus, errorThrown)
-				{
-					$('#invoice_number').html();
-				}
-			});
-			return false;
+		// 			}
+		// 		},
+		// 		error: function (jqXHR, textStatus, errorThrown)
+		// 		{
+		// 			$('#invoice_number').html();
+		// 		}
+		// 	});
+		// 	return false;
 
-		});
+		// });
 
 		$(document).on('change','#buyer_name',function(e){  
 			e.preventDefault();
