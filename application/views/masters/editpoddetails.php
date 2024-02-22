@@ -276,7 +276,7 @@
                                                                     class="required">*</span> (<small>Row Material Goods
                                                                     Master</small>)</label>
                                                             <div class="col-sm-8">
-                                                                <select class="form-control" name="part_number"
+                                                                <select class="form-control part_number_for_previous_short_excess" name="part_number"
                                                                     id="part_number">
                                                                     <option st-id="" value="">Select Part Name</option>
                                                                     <!-- <?php foreach ($rowMaterialList as $key => $value) {?>        

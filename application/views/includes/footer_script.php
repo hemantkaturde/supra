@@ -13670,6 +13670,7 @@
 			   var unit =   $('#unit').val();
 			   var bill_no =   $('#bill_no').val();
 			   var bill_date =   $('#bill_date').val();
+               var previous_short_excess_qty = $('#previous_short_excess_qty').val();
 			   var short_excess_qty =   $('#short_excess_qty').val();
 			   var item_remark =   $('#item_remark').val();
 	
@@ -13691,7 +13692,7 @@
 				url : "<?php echo base_url();?>savepoditem",
 				type: "POST",
 				 //data : formData,
-				 data :{part_number:part_number,order_qty:order_qty,lot_no:lot_no,qty_recived:qty_recived,unit:unit,bill_no:bill_no,bill_date:bill_date,short_excess_qty:short_excess_qty,item_remark:item_remark, pre_debit_note_date:pre_debit_note_date,pre_vendor_supplier_name:pre_vendor_supplier_name,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_supplier_name:pre_supplier_name,pre_supplier_po_number:pre_supplier_po_number,pre_po_date:pre_po_date,pre_remark:pre_remark,POD_details_id:POD_details_id,poditems_id:poditems_id},
+				 data :{part_number:part_number,order_qty:order_qty,lot_no:lot_no,qty_recived:qty_recived,unit:unit,bill_no:bill_no,bill_date:bill_date,short_excess_qty:short_excess_qty,item_remark:item_remark, pre_debit_note_date:pre_debit_note_date,pre_vendor_supplier_name:pre_vendor_supplier_name,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_supplier_name:pre_supplier_name,pre_supplier_po_number:pre_supplier_po_number,pre_po_date:pre_po_date,pre_remark:pre_remark,POD_details_id:POD_details_id,poditems_id:poditems_id,previous_short_excess_qty:previous_short_excess_qty},
 				 method: "POST",
                 // data :{package_id:package_id},
                 cache:false,
@@ -13851,6 +13852,7 @@
 						$('#unit').val(fetchResponse.unit);  
 						$('#bill_no').val(fetchResponse.bill_no);  
 						$('#bill_date').val(fetchResponse.bill_date);  
+						$('#previous_short_excess_qty').val(fetchResponse.previous_short_excess_qty);  
 						$('#short_excess_qty').val(fetchResponse.short_excess_qty);  
 						$('#item_remark').val(fetchResponse.remark);  
 						

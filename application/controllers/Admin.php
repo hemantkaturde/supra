@@ -7855,7 +7855,8 @@ class Admin extends BaseController
             $this->form_validation->set_rules('unit','Unit','trim|required');
             $this->form_validation->set_rules('bill_no','Bill No','trim|required');
             $this->form_validation->set_rules('bill_date','Bill Date','trim|required');
-            $this->form_validation->set_rules('short_excess_qty','Short Excess Qty','trim|required');
+            $this->form_validation->set_rules('short_excess_qty','Short Excess Qty','required|trim');
+            $this->form_validation->set_rules('previous_short_excess_qty','Previous Short Excess Qty','trim');
 
             if($this->form_validation->run() == FALSE)
             {
@@ -7881,6 +7882,7 @@ class Admin extends BaseController
                         'bill_no' =>  trim($this->input->post('bill_no')),
                         'bill_date' =>  trim($this->input->post('bill_date')),
                         'short_excess_qty' =>  trim($this->input->post('short_excess_qty')),
+                        'previous_short_excess_qty' =>  trim($this->input->post('previous_short_excess_qty')),
                         'remark' =>  trim($this->input->post('item_remark')),
                         'pre_pod_date' =>   trim($this->input->post('pre_pod_date')),
                         'pre_vendor_supplier_name' =>   trim($this->input->post('pre_vendor_supplier_name')),

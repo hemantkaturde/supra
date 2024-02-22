@@ -8758,6 +8758,7 @@ class Admin_model extends CI_Model
                 '.TBL_POD_ITEM.'.bill_no,
                 '.TBL_POD_ITEM.'.bill_date,
                 '.TBL_POD_ITEM.'.short_excess_qty,
+                '.TBL_POD_ITEM.'.previous_short_excess_qty,
                 '.TBL_POD_ITEM.'.remark,
                 
                 '.TBL_FINISHED_GOODS.'.name as description');
@@ -8779,6 +8780,7 @@ class Admin_model extends CI_Model
                 '.TBL_POD_ITEM.'.bill_no,
                 '.TBL_POD_ITEM.'.bill_date,
                 '.TBL_POD_ITEM.'.short_excess_qty,
+                '.TBL_POD_ITEM.'.previous_short_excess_qty,
                 '.TBL_POD_ITEM.'.remark,
                 
                 '.TBL_FINISHED_GOODS.'.name as description');
@@ -8802,6 +8804,7 @@ class Admin_model extends CI_Model
             '.TBL_POD_ITEM.'.bill_no,
             '.TBL_POD_ITEM.'.bill_date,
             '.TBL_POD_ITEM.'.short_excess_qty,
+            '.TBL_POD_ITEM.'.previous_short_excess_qty,
             '.TBL_POD_ITEM.'.remark,
             
             '.TBL_RAWMATERIAL.'.type_of_raw_material as description');
