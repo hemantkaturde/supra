@@ -43,9 +43,9 @@ if($_SERVER['HTTP_HOST']=='localhost'){
     $config['base_url'] = $base;
 
     define('TH_DB_HOST','localhost');
-    define('TH_DB_USER','qelocit2_supra');
-    define('TH_DB_PASSWORD','supra@2022');
-    define('TH_DB_DBNAME','qelocit2_supra');
+    define('TH_DB_USER','supraexp_supraexports');
+    define('TH_DB_PASSWORD','supraexp');
+    define('TH_DB_DBNAME','supraexp_supraexports');
 }
 
 define("ADMIN_PATH",$config['base_url']);
