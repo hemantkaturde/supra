@@ -10134,27 +10134,84 @@ public function getbuyeritemonly($buyer_po_number){
 
 public function checkvendorpoandvendornumberinvendorpoconfirmation($data){
 
-    $this->db->select('*');
-    $this->db->where(TBL_VENDOR_PO_CONFIRMATION.'.status', 1);
-    $this->db->where(TBL_VENDOR_PO_CONFIRMATION.'.vendor_name', trim($data['vendor_name']));
-    $this->db->where(TBL_VENDOR_PO_CONFIRMATION.'.vendor_po_number', trim($data['vendor_po_number']));
-    $query = $this->db->get(TBL_VENDOR_PO_CONFIRMATION);
-    $data = $query->result_array();
-    return $data;
+    if($data['venodr_po_confirmation_id']){
 
+        
+        $this->db->select('*');
+        $this->db->where(TBL_VENDOR_PO_CONFIRMATION.'.status', 1);
+        $this->db->where(TBL_VENDOR_PO_CONFIRMATION.'.vendor_name', trim($data['vendor_name']));
+        $this->db->where(TBL_VENDOR_PO_CONFIRMATION.'.vendor_po_number', trim($data['vendor_po_number']));
+        $this->db->where(TBL_VENDOR_PO_CONFIRMATION.'.id', trim($data['venodr_po_confirmation_id']));
+
+        $query_1 = $this->db->get(TBL_VENDOR_PO_CONFIRMATION);
+        $data_1 = $query_1->result_array();
+
+            if($data_1){
+                return array();
+            }else{
+
+                $this->db->select('*');
+                $this->db->where(TBL_VENDOR_PO_CONFIRMATION.'.status', 1);
+                $this->db->where(TBL_VENDOR_PO_CONFIRMATION.'.vendor_name', trim($data['vendor_name']));
+                $this->db->where(TBL_VENDOR_PO_CONFIRMATION.'.vendor_po_number', trim($data['vendor_po_number']));
+                $query1 = $this->db->get(TBL_VENDOR_PO_CONFIRMATION);
+                $data1 = $query1->result_array();
+
+                return $data1;
+    
+            }
+
+
+    }else{
+
+        $this->db->select('*');
+        $this->db->where(TBL_VENDOR_PO_CONFIRMATION.'.status', 1);
+        $this->db->where(TBL_VENDOR_PO_CONFIRMATION.'.vendor_name', trim($data['vendor_name']));
+        $this->db->where(TBL_VENDOR_PO_CONFIRMATION.'.vendor_po_number', trim($data['vendor_po_number']));
+        $query = $this->db->get(TBL_VENDOR_PO_CONFIRMATION);
+        $data = $query->result_array();
+        return $data;
+    }
 }
 
 
 
 public function checkvendorpoandvendornumberinsupplierpoconfirmation($data){
 
-    $this->db->select('*');
-    $this->db->where(TBL_SUPPLIER_PO_CONFIRMATION.'.status', 1);
-    $this->db->where(TBL_SUPPLIER_PO_CONFIRMATION.'.supplier_po_id', trim($data['supplier_name']));
-    $this->db->where(TBL_SUPPLIER_PO_CONFIRMATION.'.supplier_po_number', trim($data['supplier_po_number']));
-    $query = $this->db->get(TBL_SUPPLIER_PO_CONFIRMATION);
-    $data = $query->result_array();
-    return $data;
+    if($data['supplierpoconfirmation_id']){
+
+            $this->db->select('*');
+            $this->db->where(TBL_SUPPLIER_PO_CONFIRMATION.'.status', 1);
+            $this->db->where(TBL_SUPPLIER_PO_CONFIRMATION.'.supplier_po_id', trim($data['supplier_name']));
+            $this->db->where(TBL_SUPPLIER_PO_CONFIRMATION.'.supplier_po_number', trim($data['supplier_po_number']));
+            $this->db->where(TBL_SUPPLIER_PO_CONFIRMATION.'.id', trim($data['supplierpoconfirmation_id']));
+            $query_1 = $this->db->get(TBL_SUPPLIER_PO_CONFIRMATION);
+            $data_1 = $query_1->result_array();
+
+            if($data_1){
+                return array();
+            }else{
+
+                $this->db->select('*');
+                $this->db->where(TBL_SUPPLIER_PO_CONFIRMATION.'.status', 1);
+                $this->db->where(TBL_SUPPLIER_PO_CONFIRMATION.'.supplier_po_id', trim($data['supplier_name']));
+                $this->db->where(TBL_SUPPLIER_PO_CONFIRMATION.'.supplier_po_number', trim($data['supplier_po_number']));
+                $query1 = $this->db->get(TBL_SUPPLIER_PO_CONFIRMATION);
+                $data1 = $query1->result_array();
+             
+                return $data1;
+            }
+
+    }else{
+        $this->db->select('*');
+        $this->db->where(TBL_SUPPLIER_PO_CONFIRMATION.'.status', 1);
+        $this->db->where(TBL_SUPPLIER_PO_CONFIRMATION.'.supplier_po_id', trim($data['supplier_name']));
+        $this->db->where(TBL_SUPPLIER_PO_CONFIRMATION.'.supplier_po_number', trim($data['supplier_po_number']));
+        $query = $this->db->get(TBL_SUPPLIER_PO_CONFIRMATION);
+        $data = $query->result_array();
+        return $data;
+    }
+   
 
 }
 

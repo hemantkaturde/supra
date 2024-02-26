@@ -4271,18 +4271,22 @@
 			var supplier_name = $('#supplier_name').val();
 			var supplier_po_number = $('#supplier_po_number').val();
 
+			var supplierpoconfirmation_id = $('#supplierpoconfirmation_id').val();
+
 			if(supplier_name && supplier_po_number){
 
 				        $.ajax({
 							url : "<?php echo ADMIN_PATH;?>checkvendorpoandvendornumberinsupplierpoconfirmation",
 							type: "POST",
-							data : {'supplier_name' : supplier_name,'supplier_po_number':supplier_po_number},
+							data : {'supplier_name' : supplier_name,'supplier_po_number':supplier_po_number,'supplierpoconfirmation_id':supplierpoconfirmation_id},
 							success: function(data, textStatus, jqXHR)
 							{
 								$(".loader_ajax").hide();
 								if(data == "failure")
 								{
+									
 									$('.supplier_po_number_error').val('');
+									$('#savenewsupplierconfrimationpo').prop('disabled', false);
 							
 								}
 								else
@@ -4291,9 +4295,11 @@
 
 									if(data_row_material.supplier_po_number){
 										$('.supplier_po_number_error').html('Supplier PO Confirmation Alreday Exists For This Supplier PO');
+										$('#savenewsupplierconfrimationpo').prop('disabled', true);
 									}else{
 
 										$('.supplier_po_number_error').html('');
+										$('#savenewsupplierconfrimationpo').prop('disabled', false);
 									}
 
 									// console.log(data_row_material.vendor_po_number);
@@ -4304,6 +4310,7 @@
 							error: function (jqXHR, textStatus, errorThrown)
 							{
 								    $('.supplier_po_number_error').val('');
+									$('#savenewsupplierconfrimationpo').prop('disabled', false);
 							}
 						});
 						return false;
@@ -4917,19 +4924,21 @@
 			$('.vendor_po_number_error').html('');
 			var vendor_name = $('#vendor_name').val();
 			var vendor_po_number = $('#vendor_po_number').val();
+			var venodr_po_confirmation_id = $('#venodr_po_confirmation_id').val();
 
 			if(vendor_name && vendor_po_number){
 
 				        $.ajax({
 							url : "<?php echo ADMIN_PATH;?>checkvendorpoandvendornumberinvendorpoconfirmation",
 							type: "POST",
-							data : {'vendor_name' : vendor_name,'vendor_po_number':vendor_po_number},
+							data : {'vendor_name' : vendor_name,'vendor_po_number':vendor_po_number,'venodr_po_confirmation_id':venodr_po_confirmation_id},
 							success: function(data, textStatus, jqXHR)
 							{
 								$(".loader_ajax").hide();
 								if(data == "failure")
 								{
 									$('.vendor_po_number_error').val('');
+									$('#savenewvendorconfrimationpo').prop('disabled', false);
 							
 								}
 								else
@@ -4938,9 +4947,13 @@
 
 									if(data_row_material.vendor_po_number){
 										$('.vendor_po_number_error').html('Vendor PO Confirmation Alreday Exists For This Vendor PO');
+										$('#savenewvendorconfrimationpo').prop('disabled', true);
+
 									}else{
 
 										$('.vendor_po_number_error').html('');
+										$('#savenewvendorconfrimationpo').prop('disabled', false);
+
 									}
 
 									// console.log(data_row_material.vendor_po_number);
@@ -4951,6 +4964,8 @@
 							error: function (jqXHR, textStatus, errorThrown)
 							{
 								    $('.vendor_po_number_error').val('');
+									$('#savenewvendorconfrimationpo').prop('disabled', false);
+
 							}
 						});
 						return false;
