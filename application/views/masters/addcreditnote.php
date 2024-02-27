@@ -27,10 +27,18 @@
 
                                     <?php
                                         if($getPreviousCreditnotenumber['credit_note_number']){
-                                            $arr = str_split($getPreviousCreditnotenumber['credit_note_number']);
-                                            $i = end($arr);
-                                            $inrno= "SQCN2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                            // $arr = str_split($getPreviousCreditnotenumber['credit_note_number']);
+                                            // $i = end($arr);
+                                            // $inrno= "SQCN2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                            // $po_number = $inrno;
+
+                                            $string = $getPreviousCreditnotenumber['credit_note_number'];
+                                            $n = 4; // Number of characters to extract from the end
+                                            $lastNCharacters = substr($string, -$n);
+                                            $inrno= "SQSD2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
                                             $po_number = $inrno;
+
+
                                         }else{
                                             $po_number = 'SQCN23240001';
                                         }
