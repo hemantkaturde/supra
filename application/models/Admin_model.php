@@ -10215,6 +10215,38 @@ public function checkvendorpoandvendornumberinsupplierpoconfirmation($data){
 
 }
 
+
+
+public function geteditcreditnoteitem($id){
+
+    $this->db->select(
+         TBL_CREDIT_NOTE_ITEM.'.id as credit_note_item_id,'
+        .TBL_FINISHED_GOODS.'.fin_id as raw_id,'
+        .TBL_FINISHED_GOODS.'.part_number,'
+        .TBL_FINISHED_GOODS.'.hsn_code,'
+        .TBL_FINISHED_GOODS.'.name as description,'
+        .TBL_PACKING_INSTRACTION_DETAILS.'.id as invoice_no_id,'
+        .TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_date as invoice_date,'
+        .TBL_CREDIT_NOTE_ITEM.'.qty as qty,'
+        .TBL_CREDIT_NOTE_ITEM.'.price as price,'
+        .TBL_CREDIT_NOTE_ITEM.'.invoice_value as invoice_value,'
+        .TBL_CREDIT_NOTE_ITEM.'.recivable_amount as recivable_amount,'
+        .TBL_CREDIT_NOTE_ITEM.'.diff_credite_note_value as diff_credite_note_value,'
+        .TBL_CREDIT_NOTE_ITEM.'.remark as remark,'
+    );
+    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_CREDIT_NOTE_ITEM.'.part_number');
+    $this->db->join(TBL_PACKING_INSTRACTION_DETAILS, TBL_PACKING_INSTRACTION_DETAILS.'.id = '.TBL_CREDIT_NOTE_ITEM.'.invoice_no');
+    $this->db->where(TBL_CREDIT_NOTE_ITEM.'.id', $id);
+    $this->db->order_by(TBL_CREDIT_NOTE_ITEM.'.id','DESC');
+    $query = $this->db->get(TBL_CREDIT_NOTE_ITEM);
+    $fetch_result = $query->result_array();
+    return $fetch_result;
+
+
+  }
+
+
+
 }
 
 ?>

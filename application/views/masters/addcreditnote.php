@@ -156,7 +156,7 @@
                                                         <td><?php echo $value['diff_credite_note_value'];?></td>
                                                         <td><?php echo $value['item_remark'];?></td>
                                                         <td>
-                                                           <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['credit_note_item_id'];?>' class='fa fa-pencil-square-o editjobworkitem'  aria-hidden='true'></i>
+                                                           <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['credit_note_item_id'];?>' class='fa fa-pencil-square-o editcreditnoteitem'  aria-hidden='true'></i>
                                                            <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['credit_note_item_id'];?>' class='fa fa-trash-o deletecreditnoteitem' aria-hidden='true'></i>
                                                         </td>
                                                     </tr>
@@ -180,7 +180,7 @@
                                             </div>
                                             <form role="form" id="savecreditnoteinformationform" action="<?php echo base_url() ?>savecreditnoteinformationform" method="post" role="form">
 
-                                                <!-- <input type="hidden" class="form-control"  id="jobwork_item_id" name="jobwork_item_id" required readonly> -->
+                                                <input type="hidden" class="form-control"  id="cerdit_note_item_id" name="cerdit_note_item_id" required readonly>
 
                                                 <div class="modal-body">
                                                         <div class="loader_ajax" style="display:none;">
@@ -188,7 +188,7 @@
                                                         </div>
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Part Number <span class="required">*</span> (<small>Row Material Goods Master</small>)</label>
+                                                        <label class="col-sm-4 col-form-label">Part Number <span class="required">*</span> (<small>Finished Goods Master</small>)</label>
                                                         <div class="col-sm-8">
                                                             <select class="form-control part_number_for_export_invoice" name="part_number" id="part_number">
                                                                 <option st-id="" value="">Select Part Name</option>
@@ -223,9 +223,9 @@
                                                         <div class="col-sm-8">
                                                             <select class="form-control invoice_number" name="invoice_number" id="invoice_number">
                                                                 <option st-id="" value="">Select Invoice Name</option>
-                                                                <!-- <?php foreach ($exportInvoiceList as $key => $value) {?>        
+                                                                 <?php foreach ($exportInvoiceList as $key => $value) {?>        
                                                                     <option value="<?php echo $value['id']; ?>"><?php echo $value['buyer_invoice_number']; ?></option>
-                                                                <?php } ?> -->
+                                                                <?php } ?> 
                                                             </select>
                                                             <p class="error invoice_number_error"></p>
                                                         </div>
@@ -242,7 +242,7 @@
 
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Qty <span class="required">*</span></label>
+                                                        <label class="col-sm-4 col-form-label">Qty </label>
                                                         <div class="col-sm-8">
                                                             <input type="number" class="form-control"  id="qty" name="qty">
                                                             <p class="error qty_error"></p>
@@ -253,7 +253,7 @@
                                                     
                                                 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Price<span class="required">*</span></label>
+                                                        <label class="col-sm-4 col-form-label">Price</label>
                                                         <div class="col-sm-8">
                                                             <input type="number" class="form-control"  id="rate" name="rate">
                                                             <p class="error rate_error"></p>
@@ -262,16 +262,16 @@
 
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Invoice Value<span class="required">*</span></label>
+                                                        <label class="col-sm-4 col-form-label">Invoice Value</label>
                                                         <div class="col-sm-8">
-                                                            <input type="text" class="form-control"  id="invoice_value" name="invoice_value" readonly>
+                                                            <input type="text" class="form-control"  id="invoice_value" name="invoice_value">
                                                             <p class="error invoice_value_error"></p>
                                                         </div>
                                                     </div>
 
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Recivable Amount<span class="required">*</span></label>
+                                                        <label class="col-sm-4 col-form-label">Recivable Amount</label>
                                                         <div class="col-sm-8">
                                                             <input type="text" class="form-control"  id="recivable_amount" name="recivable_amount">
                                                             <p class="error recivable_amount_error"></p>
@@ -280,9 +280,9 @@
 
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Differnce (Credit Note Value)<span class="required">*</span></label>
+                                                        <label class="col-sm-4 col-form-label">Differnce (Credit Note Value)</label>
                                                         <div class="col-sm-8">
-                                                            <input type="text" class="form-control"  id="diff_value" name="diff_value" readonly>
+                                                            <input type="text" class="form-control"  id="diff_value" name="diff_value">
                                                             <p class="error diff_value_error"></p>
                                                         </div>
                                                     </div>

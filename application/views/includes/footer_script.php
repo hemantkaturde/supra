@@ -18209,44 +18209,44 @@
 			return false;
 		});
 
-		$(document).on('change', '#rate,#qty', function(){	
-				 $("#invoice_value").val();
+		// $(document).on('change', '#rate,#qty', function(){	
+		// 		 $("#invoice_value").val();
 
-				 if($("#rate").val()){
-					 var rate = $("#rate").val();
-				 }else{
-					 var rate = 0;
-				 }
+		// 		 if($("#rate").val()){
+		// 			 var rate = $("#rate").val();
+		// 		 }else{
+		// 			 var rate = 0;
+		// 		 }
 
-				 if($("#qty").val()){
-					 var qty = $("#qty").val();
-				 }else{
-					 var qty = 0;
-				 }
+		// 		 if($("#qty").val()){
+		// 			 var qty = $("#qty").val();
+		// 		 }else{
+		// 			 var qty = 0;
+		// 		 }
 
-				 var total_second_group = parseFloat(rate) *  parseFloat(qty);
-				 $("#invoice_value").val(Math.round(total_second_group));
+		// 		 var total_second_group = parseFloat(rate) *  parseFloat(qty);
+		// 		 $("#invoice_value").val(Math.round(total_second_group));
 
-		});
+		// });
 
-		$(document).on('change', '#recivable_amount', function(){	
-				 $("#diff_value").val();
+		// $(document).on('change', '#recivable_amount', function(){	
+		// 		 $("#diff_value").val();
 
-				 if($("#invoice_value").val()){
-					 var invoice_value = $("#invoice_value").val();
-				 }else{
-					 var invoice_value = 0;
-				 }
+		// 		 if($("#invoice_value").val()){
+		// 			 var invoice_value = $("#invoice_value").val();
+		// 		 }else{
+		// 			 var invoice_value = 0;
+		// 		 }
 
-				 if($("#recivable_amount").val()){
-					 var recivable_amount = $("#recivable_amount").val();
-				 }else{
-					 var recivable_amount = 0;
-				 }
-				 var total_second_group = parseFloat(invoice_value) - parseFloat(recivable_amount);
-				 $("#diff_value").val(Math.round(total_second_group));
+		// 		 if($("#recivable_amount").val()){
+		// 			 var recivable_amount = $("#recivable_amount").val();
+		// 		 }else{
+		// 			 var recivable_amount = 0;
+		// 		 }
+		// 		 var total_second_group = parseFloat(invoice_value) - parseFloat(recivable_amount);
+		// 		 $("#diff_value").val(Math.round(total_second_group));
 
-		});
+		// });
 
 		$(document).on('change','.invoice_number',function(e){  
 			e.preventDefault();
@@ -18305,11 +18305,13 @@
 
 			   var cerdit_note_id =   $('#cerdit_note_id').val();
 			
+			   var cerdit_note_item_id =   $('#cerdit_note_item_id').val();
+
 			   $.ajax({
 				url : "<?php echo base_url();?>saveCreditnoteitem",
 				type: "POST",
 				 //data : formData,
-				 data :{part_number:part_number,description:description,invoice_no:invoice_no,invoice_date:invoice_date,qty:qty,rate:rate,invoice_value:invoice_value,recivable_amount:recivable_amount,diff_value:diff_value,item_remark:item_remark,pre_date:pre_date,pre_buyer_name:pre_buyer_name,pre_buyer_po_number:pre_buyer_po_number,pre_currency:pre_currency,pre_remark:pre_remark,cerdit_note_id:cerdit_note_id},
+				 data :{part_number:part_number,description:description,invoice_no:invoice_no,invoice_date:invoice_date,qty:qty,rate:rate,invoice_value:invoice_value,recivable_amount:recivable_amount,diff_value:diff_value,item_remark:item_remark,pre_date:pre_date,pre_buyer_name:pre_buyer_name,pre_buyer_po_number:pre_buyer_po_number,pre_currency:pre_currency,pre_remark:pre_remark,cerdit_note_id:cerdit_note_id,cerdit_note_item_id:cerdit_note_item_id},
 				 method: "POST",
                 // data :{package_id:package_id},
                 cache:false,
@@ -18444,7 +18446,6 @@
 			});
 		});
 
-
         $(document).on('click','.deletecreditnoteitem',function(e){
 			
 			//var challan_id = $("#challan_id").val();
@@ -18500,9 +18501,47 @@
 				});
 	    });
 
-
 	    $(document).on('click','.closecreditnotemodal',function(e){  
 			location.reload();
+		});
+
+		$(document).on('click','.editcreditnoteitem',function(e){  
+			e.preventDefault();
+			var elemF = $(this);
+			var item_id = elemF.attr('data-id');
+			$.ajax({
+				url : "<?php echo base_url();?>geteditcreditnoteitem",
+				type: "POST",
+				data : 'id='+item_id,
+				success: function(data, textStatus, jqXHR)
+				{
+					    var fetchResponse = $.parseJSON(data);
+						$('#addNewModal').modal('show'); 
+						$('#cerdit_note_item_id').val(fetchResponse.credit_note_item_id); 
+						$('#part_number').val(fetchResponse.raw_id); 
+						$('#description').val(fetchResponse.description); 
+						$('#hsn_code').val(fetchResponse.hsn_code); 
+						$('#invoice_number').val(fetchResponse.invoice_no_id); 
+						$('#invoice_date').val(fetchResponse.invoice_date); 
+						$('#qty').val(fetchResponse.qty); 
+						$('#rate').val(fetchResponse.price); 
+						$('#invoice_value').val(fetchResponse.price); 
+						$('#recivable_amount').val(fetchResponse.recivable_amount); 
+						$('#diff_value').val(fetchResponse.diff_credite_note_value); 
+					    $('#item_remark').val(fetchResponse.remark); 
+						// $('#gst').val(fetchResponse.gst); 
+						// $('#gst_rate').val(fetchResponse.gst_rate); 
+						// $('#grand_total').val(fetchResponse.grand_total);
+						// $('#item_remark').val(fetchResponse.item_remark); 
+						
+						
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			});
+			return false;
 		});
 
     </script>

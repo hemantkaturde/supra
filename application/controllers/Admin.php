@@ -11109,11 +11109,11 @@ public function saveCreditnoteitem(){
         $this->form_validation->set_rules('part_number','Part Number','trim|required');
         $this->form_validation->set_rules('invoice_no','Invoice Number','trim|required');
         $this->form_validation->set_rules('invoice_date','Invoice_date','trim|required');
-        $this->form_validation->set_rules('qty','Qty','trim|required');
-        $this->form_validation->set_rules('rate','Rate','trim|required');
-        $this->form_validation->set_rules('invoice_value','Invoice Value','trim|required');
-        $this->form_validation->set_rules('recivable_amount','Recivable Amount','trim|required');
-        $this->form_validation->set_rules('diff_value','Diff Value','trim|required');
+        $this->form_validation->set_rules('qty','Qty','trim');
+        $this->form_validation->set_rules('rate','Rate','trim');
+        $this->form_validation->set_rules('invoice_value','Invoice Value','trim');
+        $this->form_validation->set_rules('recivable_amount','Recivable Amount','trim');
+        $this->form_validation->set_rules('diff_value','Diff Value','trim');
         $this->form_validation->set_rules('item_remark','Item Remark','trim');
 
         if($this->form_validation->run() == FALSE)
@@ -11156,18 +11156,19 @@ public function saveCreditnoteitem(){
                 'pre_buyer_po_number' =>$this->input->post('pre_buyer_po_number'),
                 'pre_currency' =>$this->input->post('pre_currency'),
                 'pre_remark' =>$this->input->post('pre_remark'),
-            
               );
 
+              $cerdit_note_item_id = trim($this->input->post('cerdit_note_item_id'));
+              if( $cerdit_note_item_id){
+                  $cerditnoteitemid = $cerdit_note_item_id;
+              }else{
+                  $cerditnoteitemid = '';
+              }
 
-            //   $bill_of_material_item_id = trim($this->input->post('bill_of_material_item_id'));
-            //   if( $bill_of_material_item_id){
-            //       $billofmaterialitemid = $bill_of_material_item_id;
-            //   }else{
-            //       $billofmaterialitemid = '';
-            //   }
+            //   print_r($cerditnoteitemid);
+            //   exit;
               
-                $saveCreditNoteitamdata = $this->admin_model->saveCreditNoteitamdata('',$data);
+                $saveCreditNoteitamdata = $this->admin_model->saveCreditNoteitamdata($cerditnoteitemid,$data);
 
                 if($saveCreditNoteitamdata){
 
@@ -11325,6 +11326,21 @@ public function checkvendorpoandvendornumberinsupplierpoconfirmation(){
     }else{
         echo 'failure';
     }
+}
+
+
+public function geteditcreditnoteitem(){
+    $post_submit = $this->input->post();
+    if($post_submit){
+        $geteditcreditnoteitem = $this->admin_model->geteditcreditnoteitem(trim($this->input->post('id')));
+        if($geteditcreditnoteitem){
+            $content = $geteditcreditnoteitem[0];
+            echo json_encode($content);
+        }else{
+            echo 'failure';
+        }
+    }
+
 }
 
 
