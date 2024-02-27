@@ -44,7 +44,7 @@ if($_SERVER['HTTP_HOST']=='localhost'){
 
     define('TH_DB_HOST','localhost');
     define('TH_DB_USER','supraexp_supraexports');
-    define('TH_DB_PASSWORD','supraexp');
+    define('TH_DB_PASSWORD','XQdxEBP$5{v@');
     define('TH_DB_DBNAME','supraexp_supraexports');
 }
 
