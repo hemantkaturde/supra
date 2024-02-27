@@ -10243,10 +10243,93 @@ public function geteditcreditnoteitem($id){
     return $fetch_result;
 
 
-  }
+}
+
+
+public function checkvendorpoandvendornumberinpoddetails($data){
+
+    if($data['POD_details_id']){
+
+        $this->db->select('*');
+        $this->db->where(TBL_POD_DETAILS.'.status', 1);
+        $this->db->where(TBL_POD_DETAILS.'.vendor_id', trim($data['vendor_name']));
+        $this->db->where(TBL_POD_DETAILS.'.vendor_po', trim($data['vendor_po_number']));
+        $this->db->where(TBL_POD_DETAILS.'.pod_details_id', trim($data['POD_details_id']));
+        $query_1 = $this->db->get(TBL_POD_DETAILS);
+        $data_1 = $query_1->result_array();
+
+        if($data_1){
+            return array();
+        }else{
+
+            $this->db->select('*');
+            $this->db->where(TBL_POD_DETAILS.'.status', 1);
+            $this->db->where(TBL_POD_DETAILS.'.vendor_id', trim($data['vendor_name']));
+            $this->db->where(TBL_POD_DETAILS.'.vendor_po', trim($data['vendor_po_number']));
+            $query1 = $this->db->get(TBL_POD_DETAILS);
+            $data1 = $query1->result_array();
+         
+            return $data1;
+        }
+
+    }else{
+        $this->db->select('*');
+        $this->db->where(TBL_POD_DETAILS.'.status', 1);
+        $this->db->where(TBL_POD_DETAILS.'.vendor_id', trim($data['vendor_name']));
+        $this->db->where(TBL_POD_DETAILS.'.vendor_po', trim($data['vendor_po_number']));
+        $query = $this->db->get(TBL_POD_DETAILS);
+        $data = $query->result_array();
+        return $data;
+    }
+    
+
+}
+
+
+
+public function checksupplierandvendornumberinpoddetails($data){
+
+    if($data['POD_details_id']){
+
+            $this->db->select('*');
+            $this->db->where(TBL_POD_DETAILS.'.status', 1);
+            $this->db->where(TBL_POD_DETAILS.'.supplier_id', trim($data['supplier_name']));
+            $this->db->where(TBL_POD_DETAILS.'.supplier_po', trim($data['supplier_po_number']));
+            $this->db->where(TBL_POD_DETAILS.'.pod_details_id', trim($data['POD_details_id']));
+            $query_1 = $this->db->get(TBL_POD_DETAILS);
+            $data_1 = $query_1->result_array();
+
+            if($data_1){
+                return array();
+            }else{
+
+                $this->db->select('*');
+                $this->db->where(TBL_POD_DETAILS.'.status', 1);
+                $this->db->where(TBL_POD_DETAILS.'.supplier_id', trim($data['supplier_name']));
+                $this->db->where(TBL_POD_DETAILS.'.supplier_po', trim($data['supplier_po_number']));
+                $query1 = $this->db->get(TBL_POD_DETAILS);
+                $data1 = $query1->result_array();
+             
+                return $data1;
+            }
+
+    }else{
+        $this->db->select('*');
+        $this->db->where(TBL_POD_DETAILS.'.status', 1);
+        $this->db->where(TBL_POD_DETAILS.'.supplier_id', trim($data['supplier_name']));
+        $this->db->where(TBL_POD_DETAILS.'.supplier_po', trim($data['supplier_po_number']));
+        $query = $this->db->get(TBL_POD_DETAILS);
+        $data = $query->result_array();
+        return $data;
+    }
 
 
 
 }
+
+
+}
+
+
 
 ?>

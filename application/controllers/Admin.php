@@ -11344,5 +11344,40 @@ public function geteditcreditnoteitem(){
 }
 
 
+public function checkvendorpoandvendornumberinpoddetails(){
+
+    $post_submit = $this->input->post();
+    if($post_submit){
+         $result = $this->admin_model->checkvendorpoandvendornumberinpoddetails($post_submit);
+         if ($result) {
+            $content = $result[0];
+            echo json_encode($content);
+         }else{
+            echo 'failure';
+         }
+    }else{
+        echo 'failure';
+    }
+
+}
+
+
+public function checksupplierandvendornumberinpoddetails(){
+
+    $post_submit = $this->input->post();
+    if($post_submit){
+         $result = $this->admin_model->checksupplierandvendornumberinpoddetails($post_submit);
+         if ($result) {
+            $content = $result[0];
+            echo json_encode($content);
+         }else{
+            echo 'failure';
+         }
+    }else{
+        echo 'failure';
+    }
+
+}
+
 
 }

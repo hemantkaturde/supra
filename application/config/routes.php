@@ -422,8 +422,10 @@ $route['getbuyeritemonly'] = "admin/getbuyeritemonly";
 
 $route['checkvendorpoandvendornumberinvendorpoconfirmation'] = "admin/checkvendorpoandvendornumberinvendorpoconfirmation";
 $route['checkvendorpoandvendornumberinsupplierpoconfirmation'] = "admin/checkvendorpoandvendornumberinsupplierpoconfirmation";
-
 $route['geteditcreditnoteitem'] = "admin/geteditcreditnoteitem";
+
+$route['checkvendorpoandvendornumberinpoddetails'] = "admin/checkvendorpoandvendornumberinpoddetails";
+$route['checksupplierandvendornumberinpoddetails'] = "admin/checksupplierandvendornumberinpoddetails";
 
 
 

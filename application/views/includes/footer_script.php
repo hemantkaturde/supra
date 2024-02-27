@@ -6828,8 +6828,6 @@
 			return false;
 		});
 
-
-
     </script>
 <?php } ?>
 
@@ -13090,7 +13088,6 @@
 	        });
 	    });
 
-
 		$(document).ready(function() {
 
 		
@@ -13911,6 +13908,104 @@
 			return false;
 		 });
 
+		 $(document).on('change','#vendor_name,#vendor_po_number,#supplier_name,#supplier_po_number',function(e){  
+
+			var vendor_supplier_name = $('#vendor_supplier_name').val();
+
+			if(vendor_supplier_name=='vendor'){
+
+				var vendor_name = $('#vendor_name').val();
+				var vendor_po_number = $('#vendor_po_number').val();
+				var POD_details_id = $('#POD_details_id').val();
+
+				if(vendor_name && vendor_po_number){
+
+					$.ajax({
+							url : "<?php echo ADMIN_PATH;?>checkvendorpoandvendornumberinpoddetails",
+							type: "POST",
+							data : {'vendor_name' : vendor_name,'vendor_po_number':vendor_po_number,'POD_details_id':POD_details_id},
+							success: function(data, textStatus, jqXHR)
+							{
+								$(".loader_ajax").hide();
+								if(data == "failure")
+								{
+									$('.vendor_po_number_error').html('');
+									$('#savenewpoddetails').prop('disabled', false);
+
+								}
+								else
+								{
+									var data_row_material = jQuery.parseJSON( data );
+
+									if(data_row_material.vendor_po){
+										$('.vendor_po_number_error').html('POD Details Alreday Exists For This Vendor PO');
+										$('#savenewpoddetails').prop('disabled', true);
+									}else{
+
+										$('.vendor_po_number_error').html('');
+										$('#savenewpoddetails').prop('disabled', false);
+									}
+								}
+							},
+							error: function (jqXHR, textStatus, errorThrown)
+							{
+								    $('.vendor_po_number_error').html('');
+									$('#savenewpoddetails').prop('disabled', false);
+							}
+						});
+					return false;
+				}
+				    
+			}
+
+			if(vendor_supplier_name=='supplier'){
+
+				var supplier_name = $('#supplier_name').val();
+				var supplier_po_number = $('#supplier_po_number').val();
+				var POD_details_id = $('#POD_details_id').val();
+
+
+				if(supplier_name && supplier_po_number){
+
+					$.ajax({
+							url : "<?php echo ADMIN_PATH;?>checksupplierandvendornumberinpoddetails",
+							type: "POST",
+							data : {'supplier_name' : supplier_name,'supplier_po_number':supplier_po_number,'POD_details_id':POD_details_id},
+							success: function(data, textStatus, jqXHR)
+							{
+								$(".loader_ajax").hide();
+								if(data == "failure")
+								{
+									$('.supplier_po_number_error').html('');
+									$('#savenewpoddetails').prop('disabled', false);
+							
+								}
+								else
+								{
+									var data_row_material = jQuery.parseJSON( data );
+
+									if(data_row_material.vendor_po){
+										$('.supplier_po_number_error').html('POD Details Alreday Exists For This Supplier PO');
+										$('#savenewpoddetails').prop('disabled', true);
+									}else{
+
+										$('.supplier_po_number_error').html('');
+										$('#savenewpoddetails').prop('disabled', false);
+									}
+								}
+							},
+							error: function (jqXHR, textStatus, errorThrown)
+							{
+								    $('.supplier_po_number_error').html('');
+									$('#savenewpoddetails').prop('disabled', false);
+							}
+						});
+					return false;
+				}
+
+            }
+
+		 });
     </script>
 <?php } ?>
 

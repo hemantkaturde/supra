@@ -57,9 +57,6 @@
                                         </div>
                                     </div>
 
-
-
-
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="vendor_supplier_name">Select Vendor / Supplier <span
