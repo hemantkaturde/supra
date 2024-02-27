@@ -27,10 +27,17 @@
                                     <?php
 
                                         if($getPreviousDebitnote_number[0]['debit_note_number']){
-                                            $arr = str_split($getPreviousDebitnote_number[0]['debit_note_number']);
-                                            $i = end($arr);
-                                            $inrno= "SQDN2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                            // $arr = str_split($getPreviousDebitnote_number[0]['debit_note_number']);
+                                            // $i = end($arr);
+                                            // $inrno= "SQDN2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                            // $debit_note_number = $inrno;
+                                            
+                                            $string = $getPreviousDebitnote_number[0]['debit_note_number'];
+                                            $n = 4; // Number of characters to extract from the end
+                                            $lastNCharacters = substr($string, -$n);
+                                            $inrno= "SQSD2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
                                             $debit_note_number = $inrno;
+
                                         }else{
                                             $debit_note_number = 'SQDN23240001';
                                         }
