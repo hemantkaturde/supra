@@ -404,11 +404,8 @@ $route['deletecomplainform'] = "admin/deletecomplainform";
 $route['editcomplainform/(:any)'] = "admin/editcomplainform/$1";
 $route['itcreport'] = "admin/itcreport";
 $route['getPartDetailsbypartnumber'] = "admin/getPartDetailsbypartnumber";
-
 $route['addcreditnote'] = "admin/addcreditnote";
 $route['getBuyerPonumbercreditnote'] = "admin/getBuyerPonumbercreditnote";
-
-
 $route['getPartnumberBypartnumberforcreitnote'] = "admin/getPartnumberBypartnumberforcreitnote";
 $route['getexportInvoicebybyerpo'] = "admin/getexportInvoicebybyerpo";
 $route['getInvoicedateforcreditdate'] = "admin/getInvoicedateforcreditdate";
@@ -419,13 +416,26 @@ $route['deletecreditnote'] = "admin/deletecreditnote";
 $route['deletecreditnoteitem'] = "admin/deletecreditnoteitem";
 $route['editcreditnote/(:any)'] = "admin/editcreditnote/$1";
 $route['getbuyeritemonly'] = "admin/getbuyeritemonly";
-
 $route['checkvendorpoandvendornumberinvendorpoconfirmation'] = "admin/checkvendorpoandvendornumberinvendorpoconfirmation";
 $route['checkvendorpoandvendornumberinsupplierpoconfirmation'] = "admin/checkvendorpoandvendornumberinsupplierpoconfirmation";
 $route['geteditcreditnoteitem'] = "admin/geteditcreditnoteitem";
-
 $route['checkvendorpoandvendornumberinpoddetails'] = "admin/checkvendorpoandvendornumberinpoddetails";
 $route['checksupplierandvendornumberinpoddetails'] = "admin/checksupplierandvendornumberinpoddetails";
+
+
+
+
+$route['preexport'] = "admin/preexport";
+$route['fetchpreexportdetails'] = "admin/fetchpreexportdetails";
+$route['addnewfreexport'] = "admin/addnewfreexport";
+$route['deletepreexport'] = "admin/deletepreexport";
+$route['editpreexport/(:any)'] = "admin/editpreexport/$1";
+
+
+
+
+
+
 
 
 

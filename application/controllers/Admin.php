@@ -11358,7 +11358,6 @@ public function checkvendorpoandvendornumberinpoddetails(){
     }else{
         echo 'failure';
     }
-
 }
 
 
@@ -11377,6 +11376,125 @@ public function checksupplierandvendornumberinpoddetails(){
         echo 'failure';
     }
 
+}
+
+
+public function preexport(){
+
+    $process = 'Pre Export';
+    $processFunction = 'Admin/preexport';
+    $this->logrecord($process,$processFunction);
+    $this->global['pageTitle'] = 'Pre Export';
+    //$data['vendorList']= $this->admin_model->fetchALLvendorList();
+    $this->loadViews("masters/preexport", $this->global, $data, NULL);  
+
+}
+
+
+public function fetchpreexportdetails(){
+
+    $params = $_REQUEST;
+    $totalRecords = $this->admin_model->getpreexportcount($params); 
+    $queryRecords = $this->admin_model->getpreexportdata($params); 
+
+    $data = array();
+    foreach ($queryRecords as $key => $value)
+    {
+        $i = 0;
+        foreach($value as $v)
+        {
+            $data[$key][$i] = $v;
+            $i++;
+        }
+    }
+    $json_data = array(
+        "draw"            => intval( $params['draw'] ),   
+        "recordsTotal"    => intval( $totalRecords ),  
+        "recordsFiltered" => intval($totalRecords),
+        "data"            => $data   // total data array
+        );
+    echo json_encode($json_data);
+
+}
+
+
+public function addnewfreexport(){
+    $post_submit = $this->input->post();
+    if($post_submit){
+
+        $savePreexport_response = array();
+        $this->form_validation->set_rules('invoice_number','Invoice Number','trim|required');
+        $this->form_validation->set_rules('date','Date','trim|required');
+        $this->form_validation->set_rules('buyer_name','Buyer Name','trim|required');
+        $this->form_validation->set_rules('buyer_po_number','Buyer PO Number','trim|required');
+        $this->form_validation->set_rules('remark','Remark','trim');
+
+        if($this->form_validation->run() == FALSE)
+        {
+            $savePreexport_response['status'] = 'success';
+            $savePreexport_response['error'] = array('invoice_number'=>strip_tags(form_error('invoice_number')),'date'=>strip_tags(form_error('date')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'remark'=>strip_tags(form_error('remark')));
+    
+        }else{
+
+            $data = array(
+                'pre_export_invoice_no' => trim($this->input->post('invoice_number')),
+                'date' => trim($this->input->post('date')),
+                'buyer_name' => trim($this->input->post('buyer_name')),
+                'buyer_po' => trim($this->input->post('buyer_po_number')),
+                'remark' => trim($this->input->post('remark')),
+            );
+
+
+            if(trim($this->input->post('preexport_id'))){
+                $preexport_id = trim($this->input->post('preexport_id'));
+            }else{
+                $preexport_id = '';
+            }    
+
+            $savenepreexport= $this->admin_model->savenepreexport($preexport_id,$data);
+            if($savenepreexport){
+                $savePreexport_response['status'] = 'success';
+                $savePreexport_response['error'] = array('invoice_number'=>strip_tags(form_error('invoice_number')),'date'=>strip_tags(form_error('date')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'remark'=>strip_tags(form_error('remark')));
+            }
+        }
+        echo json_encode($savePreexport_response);
+    }else{
+        $process = 'Add New Export Export';
+        $processFunction = 'Admin/addnewpreexport';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Add New Export Export';
+        $data['buyerList']= $this->admin_model->fetchAllbuyerList();
+        $this->loadViews("masters/addnewpreexport", $this->global, $data, NULL); 
+    }
+}
+
+public function deletepreexport(){
+
+    $post_submit = $this->input->post();
+    if($post_submit){
+        $result = $this->admin_model->deletepreexport(trim($this->input->post('id')));
+        if ($result) {
+                    $process = 'Delete Export';
+                    $processFunction = 'Admin/deletepreexport';
+                    $this->logrecord($process,$processFunction);
+                echo(json_encode(array('status'=>'success')));
+            }
+        else { echo(json_encode(array('status'=>'failed'))); }
+    }else{
+        echo(json_encode(array('status'=>'failed'))); 
+    }
+
+}
+
+
+public function editpreexport($id){
+    $process = 'Edit Pre Export';
+    $processFunction = 'Admin/editpreexport';
+    $this->logrecord($process,$processFunction);
+    $this->global['pageTitle'] = 'Edit Pre Export';
+    $data['getexportdetailsforedit']= $this->admin_model->getpreexportdetailsforedit($id);
+    $data['buyerList']= $this->admin_model->fetchAllbuyerList();
+    $this->loadViews("masters/editpreexport", $this->global, $data, NULL);
 }
 
 

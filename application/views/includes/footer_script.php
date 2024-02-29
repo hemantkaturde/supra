@@ -18641,3 +18641,170 @@
 
     </script>
 <?php } ?>
+
+
+<?php if($pageTitle=='Pre Export' || $pageTitle=='Add New Export Export' || $pageTitle=="Edit Pre Export"){?>
+	<script type="text/javascript"> 
+	        $(document).ready(function() {
+				var dt = $('#view_pre_export').DataTable({
+					"columnDefs": [ 
+						{ className: "details-control", "targets": [ 0 ] },
+						{ "width": "10%", "targets": 0 },
+						{ "width": "10%", "targets": 1 },
+						{ "width": "20%", "targets": 2 },
+						{ "width": "10%", "targets": 3 },
+						{ "width": "10%", "targets": 4 },
+						{ "width": "8%", "targets": 5 },
+					],
+					responsive: true,
+					"oLanguage": {
+						"sEmptyTable": "<i>No Pre Export Found.</i>",
+					}, 
+					"bSort" : false,
+					"bFilter":true,
+					"bLengthChange": true,
+					"iDisplayLength": 10,   
+					"bProcessing": true,
+					"serverSide": true,
+					"ajax":{
+						url :"<?php echo base_url();?>fetchpreexportdetails",
+						type: "post",
+					},
+				});
+            });
+
+
+			$(document).on('change','#buyer_name',function(e){  
+				e.preventDefault();
+				//$(".loader_ajax").show();
+				$("#customers-list").html('');
+				var buyer_name = $('#buyer_name').val();
+				$('.buyer_po_number_div').css('display','block');
+				$.ajax({
+					url : "<?php echo ADMIN_PATH;?>getBuyerPonumbercreditnote",
+					type: "POST",
+					data : {'buyer_name' : buyer_name},
+					success: function(data, textStatus, jqXHR)
+					{
+						$(".loader_ajax").hide();
+						if(data == "failure")
+						{
+							$('#buyer_po_number').html('<option value="">Select Buyer PO Number</option>');
+						}
+						else
+						{
+							// $('#buyer_po_number').html('<option value="">Select Buyer PO Number</option>');
+							$('#buyer_po_number').html(data);
+
+						}
+					},
+					error: function (jqXHR, textStatus, errorThrown)
+					{
+						$('#buyer_po_number').html();
+						//$(".loader_ajax").hide();
+					}
+				});
+				return false;
+		    });
+
+
+		    $(document).on('click','#savenewpreexport',function(e){
+
+				e.preventDefault();
+				$(".loader_ajax").show();
+
+				var preexport_id = $('#preexport_id').val();
+
+				var formData = new FormData($("#savenewpreexportform")[0]);
+				$.ajax({
+					url : "<?php echo base_url();?>addnewfreexport",
+					type: "POST",
+					data : formData,
+					cache: false,
+					contentType: false,
+					processData: false,
+					success: function(data, textStatus, jqXHR)
+					{
+						var fetchResponse = $.parseJSON(data);
+						if(fetchResponse.status == "failure")
+						{
+							$.each(fetchResponse.error, function (i, v)
+							{
+								$('.'+i+'_error').html(v);
+							});
+							$(".loader_ajax").hide();
+						}
+						else if(fetchResponse.status == 'success')
+						{
+							swal({
+								title: "Success",
+								text: "Pre-Export Successfully Added!",
+								icon: "success",
+								button: "Ok",
+								},function(){ 
+									
+									window.location.href = "<?php echo base_url().'preexport'?>";
+								
+							});		
+						}
+						
+					},
+					error: function (jqXHR, textStatus, errorThrown)
+					{
+						$(".loader_ajax").hide();
+					}
+				});
+				return false;
+            });
+
+
+			$(document).on('click','.deletepreexport',function(e){
+				var elemF = $(this);
+				e.preventDefault();
+				swal({
+					title: "Are you sure?",
+					text: "Delete Pre-Export ",
+					type: "warning",
+					showCancelButton: true,
+					closeOnClickOutside: false,
+					confirmButtonClass: "btn-sm btn-danger",
+					confirmButtonText: "Yes, delete it!",
+					cancelButtonText: "No, cancel plz!",
+					closeOnConfirm: false,
+					closeOnCancel: false
+				}, function(isConfirm) {
+					if (isConfirm) {
+								$.ajax({
+									url : "<?php echo base_url();?>deletepreexport",
+									type: "POST",
+									data : 'id='+elemF.attr('data-id'),
+									success: function(data, textStatus, jqXHR)
+									{
+										const obj = JSON.parse(data);
+									
+										if(obj.status=='success'){
+											swal({
+												title: "Deleted!",
+												text: "Pre-Export Succesfully Deleted",
+												icon: "success",
+												button: "Ok",
+												},function(){ 
+													window.location.href = "<?php echo base_url().'preexport'?>";
+											});	
+										}
+
+									},
+									error: function (jqXHR, textStatus, errorThrown)
+									{
+										$(".loader_ajax").hide();
+									}
+								})
+							}
+							else {
+					swal("Cancelled", "Pre-Export deletion cancelled ", "error");
+					}
+				});
+		    });
+
+    </script>
+<?php } ?>
