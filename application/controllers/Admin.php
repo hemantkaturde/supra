@@ -11648,6 +11648,43 @@ public function editaddpreexportitemdetails($id){
 }
 
 
+public function addexportitemdetailswithattributes($id){
+    $process = 'Pre Export Item Attributes';
+    $processFunction = 'Admin/addexportitemdetailswithattributes';
+    $this->logrecord($process,$processFunction);
+    $this->global['pageTitle'] = 'Pre Export Item Attributes';
+    $data['getexportetails']= $this->admin_model->getbuyerpodetailsforexportdetailsedititemdetails($id);
+    $data['main_export_id']= $data['getexportetails'][0]['export_id'];
+    $data['preexportitemdetailsid']= $id;
+    $this->loadViews("masters/addexportitemdetailswithattributes", $this->global, $data, NULL);
+}
+
+
+public function fetchpreexportitemdetailsattribute($id){
+
+    $params = $_REQUEST;
+    $totalRecords = $this->admin_model->getpreexportitemdetailsattributecount($params,$id); 
+    $queryRecords = $this->admin_model->getpreexportitemdetailsattributedata($params,$id); 
+
+    $data = array();
+    foreach ($queryRecords as $key => $value)
+    {
+        $i = 0;
+        foreach($value as $v)
+        {
+            $data[$key][$i] = $v;
+            $i++;
+        }
+    }
+    $json_data = array(
+        "draw"            => intval( $params['draw'] ),   
+        "recordsTotal"    => intval( $totalRecords ),  
+        "recordsFiltered" => intval($totalRecords),
+        "data"            => $data   // total data array
+        );
+    echo json_encode($json_data);
+
+}
 
 
 

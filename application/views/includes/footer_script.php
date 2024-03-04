@@ -18977,3 +18977,37 @@
 
     </script>
 <?php } ?>
+
+
+<?php if($pageTitle=='Pre Export Item Attributes'){?>
+	<script type="text/javascript"> 
+	        $(document).ready(function() {
+				var preexportitemdetailsid = $('#preexportitemdetailsid').val();
+				var dt = $('#view_pre_export_item_details_attribute').DataTable({
+					"columnDefs": [ 
+						{ className: "details-control", "targets": [ 0 ] },
+						{ "width": "10%", "targets": 0 },
+						{ "width": "20%", "targets": 1 },
+						{ "width": "5%", "targets": 2 },
+						{ "width": "8%", "targets": 3 },
+						{ "width": "12%", "targets": 4 },
+						{ "width": "8%", "targets": 5 },
+					],
+					responsive: true,
+					"oLanguage": {
+						"sEmptyTable": "<i>No Pre Export Item Attributes Found.</i>",
+					}, 
+					"bSort" : false,
+					"bFilter":true,
+					"bLengthChange": true,
+					"iDisplayLength": 10,   
+					"bProcessing": true,
+					"serverSide": true,
+					"ajax":{
+						url :"<?php echo base_url();?>fetchpreexportitemdetailsattribute/"+preexportitemdetailsid,
+						type: "post",
+					},
+				});
+            });
+   </script>
+<?php } ?>
