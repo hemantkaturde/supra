@@ -10489,7 +10489,7 @@ public function getpreexportitemdetailscount($params,$id){
 
 
 public function getpreexportitemdetailsdata($params,$id){
-    $this->db->select('*');
+    $this->db->select('*,'.TBL_PREEXPORT_ITEM_DETAILS.'.id as preexportitemid');
     // if($params['search']['value'] != "") 
     // {
     //     $this->db->where("(".TBL_PREEXPORT.".pre_export_invoice_no LIKE '%".$params['search']['value']."%'");
@@ -10520,9 +10520,9 @@ public function getpreexportitemdetailsdata($params,$id){
             $data[$counter]['total_no_of_cartoons_gross_wigth'] ='';
             //$data[$counter]['remark'] ='';
             $data[$counter]['action'] ='';
-            $data[$counter]['action'] .= "<a href='".ADMIN_PATH."exportdetailsitemdetails/".$value['export_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>   &nbsp ";
-            $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editpreexport/".$value['export_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
-            $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['export_id']."' class='fa fa-trash-o deletepreexport' aria-hidden='true'></i>"; 
+            $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addexportitemdetailswithattributes/".$value['preexportitemid']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>   &nbsp ";
+            $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editaddpreexportitemdetails/".$value['preexportitemid']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+            $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['preexportitemid']."' pre-export-id='".$value['pre_export_id']."' class='fa fa-trash-o deletepreexportitemdetails' aria-hidden='true'></i>"; 
             $counter++; 
         }
     }
@@ -10560,9 +10560,36 @@ public function savePreexportitemdata($id,$data){
             return FALSE;
         }
     }
+}
 
+
+public function deletepreexportitemdetails($id){
+
+    $this->db->where('id ', $id);
+    //$this->db->delete(TBL_SUPPLIER);
+    if($this->db->delete(TBL_PREEXPORT_ITEM_DETAILS)){
+      return TRUE;
+    }else{
+       return FALSE;
+    }
+}
+
+
+public function getbuyerpodetailsforexportdetailsedititemdetails($id){
+
+    $this->db->select('*,'.TBL_PREEXPORT_ITEM_DETAILS.'.remark as preexportremark,'.TBL_PREEXPORT.'.id as export_id,'.TBL_PREEXPORT_ITEM_DETAILS.'.part_number as part_number_id');
+    $this->db->join(TBL_PREEXPORT, TBL_PREEXPORT.'.id = '.TBL_PREEXPORT_ITEM_DETAILS.'.pre_export_id');
+    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_PREEXPORT_ITEM_DETAILS.'.part_number');
+    $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_PREEXPORT.'.buyer_po');
+    $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_PREEXPORT.'.buyer_name');
+    $this->db->where(TBL_PREEXPORT_ITEM_DETAILS.'.status', 1);
+    $this->db->where(TBL_PREEXPORT_ITEM_DETAILS.'.id',$id);
+    $query = $this->db->get(TBL_PREEXPORT_ITEM_DETAILS);
+    $fetch_result = $query->result_array();
+    return $fetch_result;
 
 }
+
 
 
 

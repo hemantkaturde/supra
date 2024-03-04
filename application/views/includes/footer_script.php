@@ -18810,7 +18810,7 @@
 <?php } ?>
 
 
-<?php if($pageTitle=='Pre Export Item Details' || $pageTitle=='Add New Pre Export Item Details'){?>
+<?php if($pageTitle=='Pre Export Item Details' || $pageTitle=='Add New Pre Export Item Details' || $pageTitle=='Edit Pre Export Item Details'){?>
 	<script type="text/javascript"> 
 	        $(document).ready(function() {
 				
@@ -18841,7 +18841,6 @@
 					},
 				});
             });
-
 
 			$(document).on('change','#part_number',function(e){  
 				e.preventDefault();
@@ -18876,15 +18875,13 @@
 				return false;
 		    });
 
-
-
 		    $(document).on('click','#savenewpreexportitemdetails',function(e){
 
 				e.preventDefault();
 				$(".loader_ajax").show();
 
 				var main_export_id = $('#main_export_id').val();
-		
+				var preexportitemdetailsid = $('#preexportitemdetailsid').val();
 				var formData = new FormData($("#savenewpreexportitemdetailsform")[0]);
 				$.ajax({
 					url : "<?php echo base_url();?>addpreexportitemdetails/"+main_export_id,
@@ -18927,54 +18924,56 @@
 				return false;
             });
 
+			$(document).on('click','.deletepreexportitemdetails',function(e){
+				var elemF = $(this);
+				e.preventDefault();
 
-			// $(document).on('click','.deletepreexport',function(e){
-			// 	var elemF = $(this);
-			// 	e.preventDefault();
-			// 	swal({
-			// 		title: "Are you sure?",
-			// 		text: "Delete Pre-Export ",
-			// 		type: "warning",
-			// 		showCancelButton: true,
-			// 		closeOnClickOutside: false,
-			// 		confirmButtonClass: "btn-sm btn-danger",
-			// 		confirmButtonText: "Yes, delete it!",
-			// 		cancelButtonText: "No, cancel plz!",
-			// 		closeOnConfirm: false,
-			// 		closeOnCancel: false
-			// 	}, function(isConfirm) {
-			// 		if (isConfirm) {
-			// 					$.ajax({
-			// 						url : "<?php echo base_url();?>deletepreexport",
-			// 						type: "POST",
-			// 						data : 'id='+elemF.attr('data-id'),
-			// 						success: function(data, textStatus, jqXHR)
-			// 						{
-			// 							const obj = JSON.parse(data);
+				var pre_export_id = elemF.attr('data-id');
+
+				swal({
+					title: "Are you sure?",
+					text: "Delete Pre-Export Item Details",
+					type: "warning",
+					showCancelButton: true,
+					closeOnClickOutside: false,
+					confirmButtonClass: "btn-sm btn-danger",
+					confirmButtonText: "Yes, delete it!",
+					cancelButtonText: "No, cancel plz!",
+					closeOnConfirm: false,
+					closeOnCancel: false
+				}, function(isConfirm) {
+					if (isConfirm) {
+								$.ajax({
+									url : "<?php echo base_url();?>deletepreexportitemdetails",
+									type: "POST",
+									data : 'id='+elemF.attr('data-id'),
+									success: function(data, textStatus, jqXHR)
+									{
+										const obj = JSON.parse(data);
 									
-			// 							if(obj.status=='success'){
-			// 								swal({
-			// 									title: "Deleted!",
-			// 									text: "Pre-Export Succesfully Deleted",
-			// 									icon: "success",
-			// 									button: "Ok",
-			// 									},function(){ 
-			// 										window.location.href = "<?php echo base_url().'preexport'?>";
-			// 								});	
-			// 							}
+										if(obj.status=='success'){
+											swal({
+												title: "Deleted!",
+												text: "Pre-Export Item Details Succesfully Deleted",
+												icon: "success",
+												button: "Ok",
+												},function(){ 
+													window.location.href = "<?php echo base_url().'exportdetailsitemdetails/'?>"+pre_export_id;
+											});	
+										}
 
-			// 						},
-			// 						error: function (jqXHR, textStatus, errorThrown)
-			// 						{
-			// 							$(".loader_ajax").hide();
-			// 						}
-			// 					})
-			// 				}
-			// 				else {
-			// 		swal("Cancelled", "Pre-Export deletion cancelled ", "error");
-			// 		}
-			// 	});
-		    // });
+									},
+									error: function (jqXHR, textStatus, errorThrown)
+									{
+										$(".loader_ajax").hide();
+									}
+								})
+							}
+							else {
+					swal("Cancelled", "Pre-Export Item Details deletion cancelled ", "error");
+					}
+				});
+		    });
 
     </script>
 <?php } ?>

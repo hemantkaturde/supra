@@ -11561,7 +11561,13 @@ public function addpreexportitemdetails($id){
                 'remark'=>$this->input->post('remark'),
               );
 
-              $savePreexportitemdata = $this->admin_model->savePreexportitemdata('',$data);
+              if(trim($this->input->post('preexportitemdetailsid'))){
+                $preexportitemdetailsid =trim($this->input->post('preexportitemdetailsid'));
+              }else{
+                $preexportitemdetailsid ='';
+              }
+
+              $savePreexportitemdata = $this->admin_model->savePreexportitemdata($preexportitemdetailsid,$data);
 
               if($savePreexportitemdata){
                 $saveExportitemdetails_response['status'] = 'success';                
@@ -11606,6 +11612,41 @@ public function get_preexport_item_details(){
     }
 
 }
+
+
+
+public function deletepreexportitemdetails(){
+
+    $post_submit = $this->input->post();
+    if($post_submit){
+        $result = $this->admin_model->deletepreexportitemdetails(trim($this->input->post('id')));
+        if ($result) {
+                    $process = 'Delete Export Item Details';
+                    $processFunction = 'Admin/deletepreexportitemdetails';
+                    $this->logrecord($process,$processFunction);
+                echo(json_encode(array('status'=>'success')));
+            }
+        else { echo(json_encode(array('status'=>'failed'))); }
+    }else{
+        echo(json_encode(array('status'=>'failed'))); 
+    }
+
+}
+
+
+public function editaddpreexportitemdetails($id){
+
+    $process = 'Edit Pre Export Item Details';
+    $processFunction = 'Admin/editpreexport';
+    $this->logrecord($process,$processFunction);
+    $this->global['pageTitle'] = 'Edit Pre Export Item Details';
+    $data['getexportetails']= $this->admin_model->getbuyerpodetailsforexportdetailsedititemdetails($id);
+    $data['main_export_id']= $data['getexportetails'][0]['export_id'];
+    $data['preexportitemdetailsid']= $id;
+    $data['getbuyerpoitemdetails']= $this->admin_model->getbuyerpoitemdetails($data['getexportetails'][0]['buyer_po']);
+    $this->loadViews("masters/editaddpreexportitemdetails", $this->global, $data, NULL);
+}
+
 
 
 

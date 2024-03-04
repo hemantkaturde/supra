@@ -2,7 +2,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            <i class="fa fa-users"></i> Add New Pre Export Item
+            <i class="fa fa-users"></i> Edit New Pre Export Item
             <small>
                 <ul class="breadcrumb" style="background-color:#ecf0f5 !important">
                     <li class="completed"><a href="javascript:void(0);">Masters</a></li>
@@ -32,7 +32,8 @@
                             
                         <input type="hidden" class="main_export_id" id="main_export_id" value=<?=$main_export_id?> name="main_export_id">
                         <input type="hidden" class="buyer_po_id" id="buyer_po_id" value=<?=$buyer_po_id?> name="buyer_po_id">
-
+                        <input type="hidden" class="preexportitemdetailsid" id="preexportitemdetailsid" value=<?=$preexportitemdetailsid?> name="preexportitemdetailsid">
+                        
                         <div class="box-body">
                                 <div class="row">
                                     <div class="col-md-6">
@@ -41,7 +42,7 @@
                                                 <select class="form-control part_number" name="part_number" id="part_number">
                                                     <option st-id="" value="">Select Part Number</option>
                                                     <?php foreach ($getbuyerpoitemdetails as $key => $value) {?>
-                                                    <option value="<?php echo $value['fin_id']; ?>"><?php echo $value['part_number']; ?></option>
+                                                    <option value="<?php echo $value['fin_id']; ?>" <?php if($getexportetails[0]['part_number_id']==$value['fin_id']){ echo 'selected';} ?> ><?php echo $value['part_number']; ?></option>
                                                     <?php } ?>
                                                 </select>
                                             <p class="error part_number_error"></p>
@@ -53,7 +54,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                                <label for="part_description">Part Description</label>
-                                               <input type="text" class="form-control" id="part_description" name="part_description" readonly>
+                                               <input type="text" class="form-control" id="part_description" value="<?=$getexportetails[0]['name']?>" name="part_description" readonly>
                                             <p class="error part_description_error"></p>
                                         </div>
                                     </div>
@@ -64,7 +65,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="fax">Remark </label>
-                                            <textarea type="text" class="form-control"  id="remark"  name="remark"></textarea>
+                                            <textarea type="text" class="form-control"  id="remark"  name="remark"><?=$getexportetails[0]['preexportremark']?></textarea>
                                             <p class="error remark_error"></p>
                                         </div>
                                     </div>
