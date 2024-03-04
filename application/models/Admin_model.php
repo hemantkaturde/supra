@@ -10325,7 +10325,7 @@ public function checksupplierandvendornumberinpoddetails($data){
 }
 
 
-public function getpreexportcount(){
+public function getpreexportcount($params){
 
     $this->db->select('*');
     if($params['search']['value'] != "") 
@@ -10349,7 +10349,7 @@ public function getpreexportcount(){
 }
 
 
-public function getpreexportdata(){
+public function getpreexportdata($params){
     $this->db->select('*,'.TBL_PREEXPORT.'.remark as preexportremark,'.TBL_PREEXPORT.'.id as export_id');
     if($params['search']['value'] != "") 
     {
@@ -10365,6 +10365,7 @@ public function getpreexportdata(){
 
     $this->db->where(TBL_PREEXPORT.'.status', 1);
     $this->db->order_by(TBL_PREEXPORT.'.id','DESC');
+    $this->db->limit($params['length'],$params['start']);
     $query = $this->db->get(TBL_PREEXPORT);
     $fetch_result = $query->result_array();
 
@@ -10380,7 +10381,7 @@ public function getpreexportdata(){
             $data[$counter]['buyer_po_number'] =$value['sales_order_number'];
             $data[$counter]['remark'] =$value['preexportremark'];
             $data[$counter]['action'] ='';
-            $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editcreditnote/".$value['export_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>   &nbsp ";
+            $data[$counter]['action'] .= "<a href='".ADMIN_PATH."exportdetailsitemdetails/".$value['export_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>   &nbsp ";
             $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editpreexport/".$value['export_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
             $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['export_id']."' class='fa fa-trash-o deletepreexport' aria-hidden='true'></i>"; 
             $counter++; 
@@ -10435,6 +10436,134 @@ public function getpreexportdetailsforedit($id){
     return $fetch_result;
 
 }
+
+
+public function getbuyerpodetailsforexportdetails($id){
+
+    $this->db->select('*,'.TBL_PREEXPORT.'.remark as preexportremark,'.TBL_PREEXPORT.'.id as export_id');
+    $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_PREEXPORT.'.buyer_name');
+    $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_PREEXPORT.'.buyer_po');
+    $this->db->where(TBL_PREEXPORT.'.status', 1);
+    $this->db->where(TBL_PREEXPORT.'.id',$id);
+    $query = $this->db->get(TBL_PREEXPORT);
+    $fetch_result = $query->result_array();
+    return $fetch_result;
+
+}
+
+public function getbuyerpoitemdetails($po_id){
+
+    $this->db->select(TBL_FINISHED_GOODS.'.fin_id,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name');
+    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
+    $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id',$po_id);
+    $query = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
+    $fetch_result = $query->result_array();
+    return $fetch_result;
+
+}
+
+
+public function getpreexportitemdetailscount($params,$id){
+
+    $this->db->select('*');
+    // if($params['search']['value'] != "") 
+    // {
+    //     $this->db->where("(".TBL_PREEXPORT.".pre_export_invoice_no LIKE '%".$params['search']['value']."%'");
+    //     $this->db->or_where(TBL_PREEXPORT.".date LIKE '%".$params['search']['value']."%'");
+    //     $this->db->or_where(TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
+    //     $this->db->or_where(TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
+    //     $this->db->or_where(TBL_PREEXPORT.".remark LIKE '%".$params['search']['value']."%')");
+    // }
+
+    // $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_PREEXPORT.'.buyer_name');
+    // $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_PREEXPORT.'.buyer_po');
+    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_PREEXPORT_ITEM_DETAILS.'.part_number');
+    $this->db->where(TBL_PREEXPORT_ITEM_DETAILS.'.pre_export_id', $id);
+    $this->db->where(TBL_PREEXPORT_ITEM_DETAILS.'.status', 1);
+    $this->db->order_by(TBL_PREEXPORT_ITEM_DETAILS.'.id','DESC');
+    $query = $this->db->get(TBL_PREEXPORT_ITEM_DETAILS);
+    $rowcount = $query->num_rows();
+    return $rowcount;
+
+}
+
+
+public function getpreexportitemdetailsdata($params,$id){
+    $this->db->select('*');
+    // if($params['search']['value'] != "") 
+    // {
+    //     $this->db->where("(".TBL_PREEXPORT.".pre_export_invoice_no LIKE '%".$params['search']['value']."%'");
+    //     $this->db->or_where(TBL_PREEXPORT.".date LIKE '%".$params['search']['value']."%'");
+    //     $this->db->or_where(TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
+    //     $this->db->or_where(TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
+    //     $this->db->or_where(TBL_PREEXPORT.".remark LIKE '%".$params['search']['value']."%')");
+    // }
+
+    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_PREEXPORT_ITEM_DETAILS.'.part_number');
+    $this->db->where(TBL_PREEXPORT_ITEM_DETAILS.'.pre_export_id', $id);
+    $this->db->where(TBL_PREEXPORT_ITEM_DETAILS.'.status', 1);
+    $this->db->order_by(TBL_PREEXPORT_ITEM_DETAILS.'.id','DESC');
+    $this->db->limit($params['length'],$params['start']);
+    $query = $this->db->get(TBL_PREEXPORT_ITEM_DETAILS);
+    $fetch_result = $query->result_array();
+
+    $data = array();
+    $counter = 0;
+    if(count($fetch_result) > 0)
+    {
+        foreach ($fetch_result as $key => $value)
+        {
+            $data[$counter]['part_number'] =$value['part_number'];
+            $data[$counter]['part_description'] =$value['name'];;
+            $data[$counter]['total_qty'] ='';
+            $data[$counter]['total_no_of_cartoons'] ='';
+            $data[$counter]['total_no_of_cartoons_gross_wigth'] ='';
+            //$data[$counter]['remark'] ='';
+            $data[$counter]['action'] ='';
+            $data[$counter]['action'] .= "<a href='".ADMIN_PATH."exportdetailsitemdetails/".$value['export_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>   &nbsp ";
+            $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editpreexport/".$value['export_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+            $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['export_id']."' class='fa fa-trash-o deletepreexport' aria-hidden='true'></i>"; 
+            $counter++; 
+        }
+    }
+    return $data;
+    
+}
+
+
+public function get_preexport_item_details($part_number,$main_expot_id,$buyer_po_id){
+
+    $this->db->select(TBL_FINISHED_GOODS.'.fin_id,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name');
+    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
+    $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id',$buyer_po_id);
+    $this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
+    $query = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
+    $fetch_result = $query->result_array();
+    return $fetch_result;
+
+}
+
+
+public function savePreexportitemdata($id,$data){
+
+    if($id != '') {
+        $this->db->where('id', $id);
+        if($this->db->update(TBL_PREEXPORT_ITEM_DETAILS, $data)){
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    } else {
+        if($this->db->insert(TBL_PREEXPORT_ITEM_DETAILS, $data)) {
+            return $this->db->insert_id();
+        } else {
+            return FALSE;
+        }
+    }
+
+
+}
+
 
 
 }

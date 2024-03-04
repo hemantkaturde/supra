@@ -430,6 +430,16 @@ $route['fetchpreexportdetails'] = "admin/fetchpreexportdetails";
 $route['addnewfreexport'] = "admin/addnewfreexport";
 $route['deletepreexport'] = "admin/deletepreexport";
 $route['editpreexport/(:any)'] = "admin/editpreexport/$1";
+$route['exportdetailsitemdetails/(:any)'] = "admin/exportdetailsitemdetails/$1";
+$route['fetchpreexportitemdetails/(:any)'] = "admin/fetchpreexportitemdetails/$1";
+$route['addpreexportitemdetails/(:any)'] = "admin/addpreexportitemdetails/$1";
+$route['get_preexport_item_details'] = "admin/get_preexport_item_details";
+
+
+
+
+
+
 
 
 

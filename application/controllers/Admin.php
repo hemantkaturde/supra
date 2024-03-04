@@ -11486,7 +11486,6 @@ public function deletepreexport(){
 
 }
 
-
 public function editpreexport($id){
     $process = 'Edit Pre Export';
     $processFunction = 'Admin/editpreexport';
@@ -11496,6 +11495,119 @@ public function editpreexport($id){
     $data['buyerList']= $this->admin_model->fetchAllbuyerList();
     $this->loadViews("masters/editpreexport", $this->global, $data, NULL);
 }
+
+
+public function exportdetailsitemdetails($id){
+
+    $process = 'Pre Export Item Details';
+    $processFunction = 'Admin/exportdetailsitemdetails';
+    $this->logrecord($process,$processFunction);
+    $this->global['pageTitle'] = 'Pre Export Item Details';
+    $data['getexportetails']= $this->admin_model->getbuyerpodetailsforexportdetails($id);
+    $data['main_export_id']= $id;
+    $this->loadViews("masters/exportdetailsitemdetails", $this->global, $data, NULL);
+
+}
+
+
+public function fetchpreexportitemdetails($id){
+
+    $params = $_REQUEST;
+    $totalRecords = $this->admin_model->getpreexportitemdetailscount($params,$id); 
+    $queryRecords = $this->admin_model->getpreexportitemdetailsdata($params,$id); 
+
+    $data = array();
+    foreach ($queryRecords as $key => $value)
+    {
+        $i = 0;
+        foreach($value as $v)
+        {
+            $data[$key][$i] = $v;
+            $i++;
+        }
+    }
+    $json_data = array(
+        "draw"            => intval( $params['draw'] ),   
+        "recordsTotal"    => intval( $totalRecords ),  
+        "recordsFiltered" => intval($totalRecords),
+        "data"            => $data   // total data array
+        );
+    echo json_encode($json_data);
+
+}
+
+public function addpreexportitemdetails($id){
+
+    $post_submit = $this->input->post();
+    if($post_submit){
+
+        $saveExportitemdetails_response = array();
+        $this->form_validation->set_rules('part_number','Part Number','trim|required');
+        $this->form_validation->set_rules('part_description','Part Description','trim');
+        $this->form_validation->set_rules('remark','Remark','trim');
+        $this->form_validation->set_rules('main_export_id','Main Export Id','trim');
+
+
+        if($this->form_validation->run() == FALSE)
+        {
+
+            $saveExportitemdetails_response['status'] = 'failure';
+            $saveExportitemdetails_response['error'] = array('part_number'=>strip_tags(form_error('part_number')),'part_description'=>strip_tags(form_error('part_description')),'remark'=>strip_tags(form_error('remark')),'main_export_id'=>strip_tags(form_error('main_export_id')));
+        }else{
+
+             $data = array(
+                'pre_export_id'=>$this->input->post('main_export_id'),
+                'part_number'=>$this->input->post('part_number'),
+                'remark'=>$this->input->post('remark'),
+              );
+
+              $savePreexportitemdata = $this->admin_model->savePreexportitemdata('',$data);
+
+              if($savePreexportitemdata){
+                $saveExportitemdetails_response['status'] = 'success';                
+                $saveExportitemdetails_response['error'] = array('part_number'=>strip_tags(form_error('part_number')),'part_description'=>strip_tags(form_error('part_description')),'remark'=>strip_tags(form_error('remark')),'main_export_id'=>strip_tags(form_error('main_export_id')));
+
+              }else{
+
+                $saveExportitemdetails_response['status'] = 'failure';
+                $saveExportitemdetails_response['error'] = array('part_number'=>strip_tags(form_error('part_number')),'part_description'=>strip_tags(form_error('part_description')),'remark'=>strip_tags(form_error('remark')),'main_export_id'=>strip_tags(form_error('main_export_id')));
+
+              }
+
+        }
+            echo json_encode($saveExportitemdetails_response);
+
+    }else{
+
+        $process = 'Add New Pre Export Item Details';
+        $processFunction = 'Admin/addpreexportitemdetails';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Add New Pre Export Item Details';
+        $data['getexportetails']= $this->admin_model->getbuyerpodetailsforexportdetails($id);
+        $data['getbuyerpoitemdetails']= $this->admin_model->getbuyerpoitemdetails($data['getexportetails'][0]['buyer_po']);
+        $data['main_export_id']= $id;
+        $data['buyer_po_id']= $data['getexportetails'][0]['buyer_po'];
+        $this->loadViews("masters/addpreexportitemdetails", $this->global, $data, NULL);
+    }
+}
+
+
+public function get_preexport_item_details(){
+
+    $post_submit = $this->input->post();
+    if($post_submit){
+        $getpreexportitemdetails = $this->admin_model->get_preexport_item_details(trim($this->input->post('part_number')),trim($this->input->post('main_export_id')),trim($this->input->post('buyer_po_id')));
+        if($getpreexportitemdetails){
+            $content = $getpreexportitemdetails[0];
+            echo json_encode($content);
+        }else{
+            echo 'failure';
+        }
+    }
+
+}
+
+
 
 
 }

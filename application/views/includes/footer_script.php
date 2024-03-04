@@ -18808,3 +18808,173 @@
 
     </script>
 <?php } ?>
+
+
+<?php if($pageTitle=='Pre Export Item Details' || $pageTitle=='Add New Pre Export Item Details'){?>
+	<script type="text/javascript"> 
+	        $(document).ready(function() {
+				
+				var main_export_id = $('#main_export_id').val();
+				var dt = $('#view_pre_export_item_details').DataTable({
+					"columnDefs": [ 
+						{ className: "details-control", "targets": [ 0 ] },
+						{ "width": "10%", "targets": 0 },
+						{ "width": "20%", "targets": 1 },
+						{ "width": "5%", "targets": 2 },
+						{ "width": "8%", "targets": 3 },
+						{ "width": "12%", "targets": 4 },
+						{ "width": "8%", "targets": 5 },
+					],
+					responsive: true,
+					"oLanguage": {
+						"sEmptyTable": "<i>No Pre Export Item Details Found.</i>",
+					}, 
+					"bSort" : false,
+					"bFilter":true,
+					"bLengthChange": true,
+					"iDisplayLength": 10,   
+					"bProcessing": true,
+					"serverSide": true,
+					"ajax":{
+						url :"<?php echo base_url();?>fetchpreexportitemdetails/"+main_export_id,
+						type: "post",
+					},
+				});
+            });
+
+
+			$(document).on('change','#part_number',function(e){  
+				e.preventDefault();
+				//$(".loader_ajax").show();
+				// $("#customers-list").html('');
+				var part_number = $('#part_number').val();
+				var main_export_id = $('#main_export_id').val();
+				var buyer_po_id = $('#buyer_po_id').val();
+				$.ajax({
+					url : "<?php echo ADMIN_PATH;?>get_preexport_item_details",
+					type: "POST",
+					data : {'part_number' : part_number,'main_export_id' : main_export_id,'buyer_po_id':buyer_po_id},
+					success: function(data, textStatus, jqXHR)
+					{
+						$(".loader_ajax").hide();
+						if(data == "failure")
+						{
+							$('#part_description').val('');
+						}
+						else
+						{
+							var data_part_details = jQuery.parseJSON( data );
+							$('#part_description').val(data_part_details.name);
+
+						}
+					},
+					error: function (jqXHR, textStatus, errorThrown)
+					{
+						$('#part_description').val('');
+					}
+				});
+				return false;
+		    });
+
+
+
+		    $(document).on('click','#savenewpreexportitemdetails',function(e){
+
+				e.preventDefault();
+				$(".loader_ajax").show();
+
+				var main_export_id = $('#main_export_id').val();
+		
+				var formData = new FormData($("#savenewpreexportitemdetailsform")[0]);
+				$.ajax({
+					url : "<?php echo base_url();?>addpreexportitemdetails/"+main_export_id,
+					type: "POST",
+					data : formData,
+					cache: false,
+					contentType: false,
+					processData: false,
+					success: function(data, textStatus, jqXHR)
+					{
+						var fetchResponse = $.parseJSON(data);
+						if(fetchResponse.status == "failure")
+						{
+							$.each(fetchResponse.error, function (i, v)
+							{
+								$('.'+i+'_error').html(v);
+							});
+							$(".loader_ajax").hide();
+						}
+						else if(fetchResponse.status == 'success')
+						{
+							swal({
+								title: "Success",
+								text: "Pre-Export Item Details Successfully Added!",
+								icon: "success",
+								button: "Ok",
+								},function(){ 
+									
+									window.location.href = "<?php echo base_url().'exportdetailsitemdetails/'?>"+main_export_id;
+								
+							});		
+						}
+						
+					},
+					error: function (jqXHR, textStatus, errorThrown)
+					{
+						$(".loader_ajax").hide();
+					}
+				});
+				return false;
+            });
+
+
+			// $(document).on('click','.deletepreexport',function(e){
+			// 	var elemF = $(this);
+			// 	e.preventDefault();
+			// 	swal({
+			// 		title: "Are you sure?",
+			// 		text: "Delete Pre-Export ",
+			// 		type: "warning",
+			// 		showCancelButton: true,
+			// 		closeOnClickOutside: false,
+			// 		confirmButtonClass: "btn-sm btn-danger",
+			// 		confirmButtonText: "Yes, delete it!",
+			// 		cancelButtonText: "No, cancel plz!",
+			// 		closeOnConfirm: false,
+			// 		closeOnCancel: false
+			// 	}, function(isConfirm) {
+			// 		if (isConfirm) {
+			// 					$.ajax({
+			// 						url : "<?php echo base_url();?>deletepreexport",
+			// 						type: "POST",
+			// 						data : 'id='+elemF.attr('data-id'),
+			// 						success: function(data, textStatus, jqXHR)
+			// 						{
+			// 							const obj = JSON.parse(data);
+									
+			// 							if(obj.status=='success'){
+			// 								swal({
+			// 									title: "Deleted!",
+			// 									text: "Pre-Export Succesfully Deleted",
+			// 									icon: "success",
+			// 									button: "Ok",
+			// 									},function(){ 
+			// 										window.location.href = "<?php echo base_url().'preexport'?>";
+			// 								});	
+			// 							}
+
+			// 						},
+			// 						error: function (jqXHR, textStatus, errorThrown)
+			// 						{
+			// 							$(".loader_ajax").hide();
+			// 						}
+			// 					})
+			// 				}
+			// 				else {
+			// 		swal("Cancelled", "Pre-Export deletion cancelled ", "error");
+			// 		}
+			// 	});
+		    // });
+
+    </script>
+<?php } ?>
