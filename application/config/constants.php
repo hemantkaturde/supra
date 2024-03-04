@@ -166,6 +166,4 @@ define('TBL_CREDIT_NOTE','tbl_credit_note');
 define('TBL_CREDIT_NOTE_ITEM','tbl_credit_note_item');
 define('TBL_PREEXPORT','tbl_preexport');
 define('TBL_PREEXPORT_ITEM_DETAILS','tbl_preexport_item_details');
-
-
-
+define('TBL_PREEXPORT_ITEM_ATTRIBUTES','tbl_pre_export_item_attribute');

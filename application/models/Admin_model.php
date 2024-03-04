@@ -10605,11 +10605,10 @@ public function getpreexportitemdetailsattributecount($params,$id){
 
     // $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_PREEXPORT.'.buyer_name');
     // $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_PREEXPORT.'.buyer_po');
-    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_PREEXPORT_ITEM_DETAILS.'.part_number');
-    $this->db->where(TBL_PREEXPORT_ITEM_DETAILS.'.pre_export_id', $id);
-    $this->db->where(TBL_PREEXPORT_ITEM_DETAILS.'.status', 1);
-    $this->db->order_by(TBL_PREEXPORT_ITEM_DETAILS.'.id','DESC');
-    $query = $this->db->get(TBL_PREEXPORT_ITEM_DETAILS);
+    $this->db->where(TBL_PREEXPORT_ITEM_ATTRIBUTES.'.pre_export_item_id', $id);
+    $this->db->where(TBL_PREEXPORT_ITEM_ATTRIBUTES.'.status', 1);
+    $this->db->order_by(TBL_PREEXPORT_ITEM_ATTRIBUTES.'.id','DESC');
+    $query = $this->db->get(TBL_PREEXPORT_ITEM_ATTRIBUTES);
     $rowcount = $query->num_rows();
     return $rowcount;
 
@@ -10617,7 +10616,7 @@ public function getpreexportitemdetailsattributecount($params,$id){
 
 
 public function getpreexportitemdetailsattributedata($params,$id){
-    $this->db->select('*,'.TBL_PREEXPORT_ITEM_DETAILS.'.id as preexportitemid');
+    $this->db->select('*');
     // if($params['search']['value'] != "") 
     // {
     //     $this->db->where("(".TBL_PREEXPORT.".pre_export_invoice_no LIKE '%".$params['search']['value']."%'");
@@ -10627,12 +10626,12 @@ public function getpreexportitemdetailsattributedata($params,$id){
     //     $this->db->or_where(TBL_PREEXPORT.".remark LIKE '%".$params['search']['value']."%')");
     // }
 
-    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_PREEXPORT_ITEM_DETAILS.'.part_number');
-    $this->db->where(TBL_PREEXPORT_ITEM_DETAILS.'.pre_export_id', $id);
-    $this->db->where(TBL_PREEXPORT_ITEM_DETAILS.'.status', 1);
-    $this->db->order_by(TBL_PREEXPORT_ITEM_DETAILS.'.id','DESC');
+    
+    $this->db->where(TBL_PREEXPORT_ITEM_ATTRIBUTES.'.pre_export_item_id', $id);
+    $this->db->where(TBL_PREEXPORT_ITEM_ATTRIBUTES.'.status', 1);
+    $this->db->order_by(TBL_PREEXPORT_ITEM_ATTRIBUTES.'.id','DESC');
     $this->db->limit($params['length'],$params['start']);
-    $query = $this->db->get(TBL_PREEXPORT_ITEM_DETAILS);
+    $query = $this->db->get(TBL_PREEXPORT_ITEM_ATTRIBUTES);
     $fetch_result = $query->result_array();
 
     $data = array();
@@ -10641,15 +10640,15 @@ public function getpreexportitemdetailsattributedata($params,$id){
     {
         foreach ($fetch_result as $key => $value)
         {
-            $data[$counter]['part_number'] =$value['part_number'];
-            $data[$counter]['part_description'] =$value['name'];;
-            $data[$counter]['total_qty'] ='';
-            $data[$counter]['total_no_of_cartoons'] ='';
-            $data[$counter]['total_no_of_cartoons_gross_wigth'] ='';
+            $data[$counter]['gross_per_box_weight'] =$value['gross_per_box_weight'];
+            $data[$counter]['no_of_cartoons'] =$value['no_of_cartoons'];
+            $data[$counter]['per_box_PCS'] =$value['per_box_PCS'];
+            $data[$counter]['total_qty'] =$value['total_qty'];
+            $data[$counter]['total_net_weight'] =$value['total_net_weight'];
             //$data[$counter]['remark'] ='';
             $data[$counter]['action'] ='';
             $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editaddpreexportitemdetails/".$value['preexportitemid']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
-            $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['preexportitemid']."' pre-export-id='".$value['pre_export_id']."' class='fa fa-trash-o deletepreexportitemdetails' aria-hidden='true'></i>"; 
+            $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['id']."' pre_export_item_id='".$value['pre_export_item_id']."' class='fa fa-trash-o deletepreexportitemattributes' aria-hidden='true'></i>"; 
             $counter++; 
         }
     }
@@ -10658,6 +10657,35 @@ public function getpreexportitemdetailsattributedata($params,$id){
 }
 
 
+public function savePreexportitemattributes($id,$data){
+
+    if($id != '') {
+        $this->db->where('id', $id);
+        if($this->db->update(TBL_PREEXPORT_ITEM_ATTRIBUTES, $data)){
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    } else {
+        if($this->db->insert(TBL_PREEXPORT_ITEM_ATTRIBUTES, $data)) {
+            return $this->db->insert_id();
+        } else {
+            return FALSE;
+        }
+    }
+}
+
+
+public function deletepreexportitemattributes($id){
+
+    $this->db->where('id ', $id);
+    //$this->db->delete(TBL_SUPPLIER);
+    if($this->db->delete(TBL_PREEXPORT_ITEM_ATTRIBUTES)){
+      return TRUE;
+    }else{
+       return FALSE;
+    }
+}
 
 
 

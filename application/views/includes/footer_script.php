@@ -19009,5 +19009,110 @@
 					},
 				});
             });
+
+
+			$(document).on('click','#addexportitemdetailswithattributesvalues',function(e){
+
+				e.preventDefault();
+				$(".loader_ajax").show();
+
+				var main_export_id = $('#main_export_id').val();
+				var preexportitemdetailsid = $('#preexportitemdetailsid').val();
+
+				var formData = new FormData($("#addexportitemdetailswithattributesvaluesform")[0]);
+				$.ajax({
+					url : "<?php echo base_url();?>addexportitemdetailswithattributesvalues/"+preexportitemdetailsid,
+					type: "POST",
+					data : formData,
+					cache: false,
+					contentType: false,
+					processData: false,
+					success: function(data, textStatus, jqXHR)
+					{
+						var fetchResponse = $.parseJSON(data);
+						if(fetchResponse.status == "failure")
+						{
+							$.each(fetchResponse.error, function (i, v)
+							{
+								$('.'+i+'_error').html(v);
+							});
+							$(".loader_ajax").hide();
+						}
+						else if(fetchResponse.status == 'success')
+						{
+							swal({
+								title: "Success",
+								text: "Pre-Export Item Details Successfully Added!",
+								icon: "success",
+								button: "Ok",
+								},function(){ 
+									
+									window.location.href = "<?php echo base_url().'addexportitemdetailswithattributes/'?>"+preexportitemdetailsid;
+								
+							});		
+						}
+						
+					},
+					error: function (jqXHR, textStatus, errorThrown)
+					{
+						$(".loader_ajax").hide();
+					}
+				});
+				return false;
+			});
+
+
+			$(document).on('click','.deletepreexportitemattributes',function(e){
+				var elemF = $(this);
+				e.preventDefault();
+
+				var pre_export_item_id = elemF.attr('pre_export_item_id');
+
+				swal({
+					title: "Are you sure?",
+					text: "Delete Pre-Export Item Attributes",
+					type: "warning",
+					showCancelButton: true,
+					closeOnClickOutside: false,
+					confirmButtonClass: "btn-sm btn-danger",
+					confirmButtonText: "Yes, delete it!",
+					cancelButtonText: "No, cancel plz!",
+					closeOnConfirm: false,
+					closeOnCancel: false
+				}, function(isConfirm) {
+					if (isConfirm) {
+								$.ajax({
+									url : "<?php echo base_url();?>deletepreexportitemattributes",
+									type: "POST",
+									data : 'id='+elemF.attr('data-id'),
+									success: function(data, textStatus, jqXHR)
+									{
+										const obj = JSON.parse(data);
+									
+										if(obj.status=='success'){
+											swal({
+												title: "Deleted!",
+												text: "Pre-Export Item Attributes Succesfully Deleted",
+												icon: "success",
+												button: "Ok",
+												},function(){ 
+													window.location.href = "<?php echo base_url().'addexportitemdetailswithattributes/'?>"+pre_export_item_id;
+											});	
+										}
+
+									},
+									error: function (jqXHR, textStatus, errorThrown)
+									{
+										$(".loader_ajax").hide();
+									}
+								})
+							}
+							else {
+					swal("Cancelled", "Pre-Export Item Attributes deletion cancelled ", "error");
+					}
+				});
+		    });
+
+
    </script>
 <?php } ?>

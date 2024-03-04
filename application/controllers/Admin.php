@@ -11687,5 +11687,87 @@ public function fetchpreexportitemdetailsattribute($id){
 }
 
 
+public function addexportitemdetailswithattributesvalues($id){
+
+    $post_submit = $this->input->post();
+    if($post_submit){
+
+        $saveexportdetailsattributes_response = array();
+        $this->form_validation->set_rules('gross_per_box_weight','Gross Per Box Weight','trim|required');
+        $this->form_validation->set_rules('no_of_cartoons','No Of Cartoons','trim|required');
+        $this->form_validation->set_rules('total_qty','Total Qty','trim|required');
+        $this->form_validation->set_rules('total_net_weight','Total Net Weight','trim|required');
+        $this->form_validation->set_rules('remark','Remark','trim');
+
+        if($this->form_validation->run() == FALSE)
+        {
+            $saveexportdetailsattributes_response['status'] = 'failure';
+            $saveexportdetailsattributes_response['error'] = array('gross_per_box_weight'=>strip_tags(form_error('gross_per_box_weight')),'no_of_cartoons'=>strip_tags(form_error('no_of_cartoons')),'total_qty'=>strip_tags(form_error('total_qty')),'total_net_weight'=>strip_tags(form_error('total_net_weight')),'remark'=>strip_tags(form_error('remark')));
+        }else{
+
+
+            $data = array(
+                'pre_export_item_id'=>$this->input->post('preexportitemdetailsid'),
+                'gross_per_box_weight'=>$this->input->post('gross_per_box_weight'),
+                'no_of_cartoons'=>$this->input->post('no_of_cartoons'),
+                'per_box_PCS' => $this->input->post('per_boc_pcs'),
+                'total_qty'=>$this->input->post('total_qty'),
+                'total_net_weight'=>$this->input->post('total_net_weight'),
+                'remark'=>$this->input->post('remark'),
+            );
+
+
+            $savePreexportitemattributes = $this->admin_model->savePreexportitemattributes('',$data);
+
+            if( $savePreexportitemattributes){
+
+                $saveexportdetailsattributes_response['status'] = 'success';
+                $saveexportdetailsattributes_response['error'] = array('gross_per_box_weight'=>strip_tags(form_error('gross_per_box_weight')),'no_of_cartoons'=>strip_tags(form_error('no_of_cartoons')),'total_qty'=>strip_tags(form_error('total_qty')),'total_net_weight'=>strip_tags(form_error('total_net_weight')),'remark'=>strip_tags(form_error('remark')));
+         
+            }else{
+                $saveexportdetailsattributes_response['status'] = 'failure';
+                $saveexportdetailsattributes_response['error'] = array('gross_per_box_weight'=>strip_tags(form_error('gross_per_box_weight')),'no_of_cartoons'=>strip_tags(form_error('no_of_cartoons')),'total_qty'=>strip_tags(form_error('total_qty')),'total_net_weight'=>strip_tags(form_error('total_net_weight')),'remark'=>strip_tags(form_error('remark')));
+         
+
+            }
+        }
+
+        echo json_encode($saveexportdetailsattributes_response);
+
+    }else{
+
+        $process = 'Pre Export Item Attributes';
+        $processFunction = 'Admin/addexportitemdetailswithattributesvalues';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Pre Export Item Attributes';
+        $data['getexportetails']= $this->admin_model->getbuyerpodetailsforexportdetailsedititemdetails($id);
+        $data['main_export_id']= $data['getexportetails'][0]['export_id'];
+        $data['preexportitemdetailsid']= $id;
+        $this->loadViews("masters/addexportitemdetailswithattributesvalues", $this->global, $data, NULL);
+
+    }
+
+
+}
+
+
+public function deletepreexportitemattributes(){
+
+    $post_submit = $this->input->post();
+    if($post_submit){
+        $result = $this->admin_model->deletepreexportitemattributes(trim($this->input->post('id')));
+        if ($result) {
+                    $process = 'Delete Export Item Details';
+                    $processFunction = 'Admin/deletepreexportitemattributes';
+                    $this->logrecord($process,$processFunction);
+                echo(json_encode(array('status'=>'success')));
+            }
+        else { echo(json_encode(array('status'=>'failed'))); }
+    }else{
+        echo(json_encode(array('status'=>'failed'))); 
+    }
+
+}
+
 
 }
