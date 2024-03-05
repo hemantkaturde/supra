@@ -33,6 +33,8 @@
                                         <th>Date</th>
                                         <th>Buyer Name</th>
                                         <th>Buyer PO</th>
+                                        <th>Total Net Weight Of Shipment</th>
+                                        <th>Total Gross Shipment Weight</th>
                                         <th>Remark</th>
                                         <th>Action</th>
                                     </tr>

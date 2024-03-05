@@ -423,8 +423,6 @@ $route['checkvendorpoandvendornumberinpoddetails'] = "admin/checkvendorpoandvend
 $route['checksupplierandvendornumberinpoddetails'] = "admin/checksupplierandvendornumberinpoddetails";
 
 
-
-
 $route['preexport'] = "admin/preexport";
 $route['fetchpreexportdetails'] = "admin/fetchpreexportdetails";
 $route['addnewfreexport'] = "admin/addnewfreexport";

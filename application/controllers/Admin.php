@@ -11700,7 +11700,7 @@ public function addexportitemdetailswithattributesvalues($id){
         $this->form_validation->set_rules('gross_per_box_weight','Gross Per Box Weight','trim|required');
         $this->form_validation->set_rules('no_of_cartoons','No Of Cartoons','trim|required');
         $this->form_validation->set_rules('total_qty','Total Qty','trim|required');
-        $this->form_validation->set_rules('total_net_weight','Total Net Weight','trim|required');
+        $this->form_validation->set_rules('total_net_weight','Total Net Weight','trim');
         $this->form_validation->set_rules('remark','Remark','trim');
 
         if($this->form_validation->run() == FALSE)
@@ -11719,9 +11719,14 @@ public function addexportitemdetailswithattributesvalues($id){
                 'total_net_weight'=>$this->input->post('total_net_weight'),
                 'remark'=>$this->input->post('remark'),
             );
+           
+            if(trim($this->input->post('pre_export_item_attribute_id'))){
+                $pre_export_item_attribute_id=trim($this->input->post('pre_export_item_attribute_id'));
+            }else{
+                $pre_export_item_attribute_id='';
+            }
 
-
-            $savePreexportitemattributes = $this->admin_model->savePreexportitemattributes('',$data);
+            $savePreexportitemattributes = $this->admin_model->savePreexportitemattributes($pre_export_item_attribute_id,$data);
 
             if( $savePreexportitemattributes){
 
@@ -11740,10 +11745,10 @@ public function addexportitemdetailswithattributesvalues($id){
 
     }else{
 
-        $process = 'Pre Export Item Attributes';
+        $process = 'Pre Export Item Attributes add';
         $processFunction = 'Admin/addexportitemdetailswithattributesvalues';
         $this->logrecord($process,$processFunction);
-        $this->global['pageTitle'] = 'Pre Export Item Attributes';
+        $this->global['pageTitle'] = 'Pre Export Item Attributes add';
         $data['getexportetails']= $this->admin_model->getbuyerpodetailsforexportdetailsedititemdetails($id);
         $data['main_export_id']= $data['getexportetails'][0]['export_id'];
         $data['preexportitemdetailsid']= $id;
@@ -11780,9 +11785,16 @@ public function editexportitemdetailswithattributesvalues($id){
     $this->logrecord($process,$processFunction);
     $this->global['pageTitle'] = 'Pre Export Item Attributes Edit';
     $data['getpreexportidbyattributesid'] = $this->admin_model->getpreexportidbyattributesid($id);
+
+    $data['pre_export_item_id'] = $data['getpreexportidbyattributesid'][0]['pre_export_item_id'];
+
     $data['getexportetails']= $this->admin_model->getbuyerpodetailsforexportdetailsedititemdetails($data['getpreexportidbyattributesid'][0]['pre_export_item_id']);
     $data['main_export_id']= $data['getexportetails'][0]['export_id'];
-    $data['preexportattributeid']= $id;
+    $data['pre_export_item_attribute_id']= $id;
+
+    
+
+
     $this->loadViews("masters/editexportitemdetailswithattributesvalues", $this->global, $data, NULL);
 
 

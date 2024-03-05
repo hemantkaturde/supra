@@ -33,14 +33,17 @@
                             
                         <input type="hidden" class="main_export_id" id="main_export_id" value=<?=$main_export_id?> name="main_export_id">
                         <input type="hidden" class="buyer_po_id" id="buyer_po_id" value=<?=$buyer_po_id?> name="buyer_po_id">
-                        <input type="hidden" class="preexportitemdetailsid" id="preexportitemdetailsid" value="<?=$preexportitemdetailsid?>" name="preexportitemdetailsid">
+                        <input type="hidden" class="pre_export_item_id" id="pre_export_item_id" value="<?=$pre_export_item_id?>" name="pre_export_item_id">
+                        <input type="hidden" class="pre_export_item_attribute_id" id="pre_export_item_attribute_id" value="<?=$pre_export_item_attribute_id?>" name="pre_export_item_attribute_id">
+                        <input type="hidden" class="preexportitemdetailsid" id="preexportitemdetailsid" value="<?=$pre_export_item_id?>" name="preexportitemdetailsid">
+
 
                         <div class="box-body">
                                 <div class="row">
                                     <div class="col-md-6">
                                        <div class="form-group">
                                                <label for="gross_per_box_weight">Gross Per Box Weight <span class="required">*</span></label>
-                                               <input type="number" class="form-control" id="gross_per_box_weight" name="gross_per_box_weight">
+                                               <input type="number" class="form-control" id="gross_per_box_weight" value="<?=$getpreexportidbyattributesid[0]['gross_per_box_weight']?>" name="gross_per_box_weight">
                                             <p class="error gross_per_box_weight_error"></p>
                                         </div>
                                     </div>
@@ -50,7 +53,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                                <label for="no_of_cartoons">No Of Cartoons <span class="required">*</span></label>
-                                               <input type="number" class="form-control" id="no_of_cartoons" name="no_of_cartoons">
+                                               <input type="number" class="form-control" id="no_of_cartoons" value="<?=$getpreexportidbyattributesid[0]['no_of_cartoons']?>"  name="no_of_cartoons">
                                             <p class="error no_of_cartoons_error"></p>
                                         </div>
                                     </div>
@@ -60,7 +63,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                                <label for="per_boc_pcs">Per Box Pcs <span class="required">*</span></label>
-                                               <input type="number" class="form-control" id="per_boc_pcs" name="per_boc_pcs">
+                                               <input type="number" class="form-control" id="per_boc_pcs" value="<?=$getpreexportidbyattributesid[0]['per_box_PCS']?>"  name="per_boc_pcs">
                                             <p class="error per_boc_pcs_error"></p>
                                         </div>
                                     </div>
@@ -70,7 +73,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                                <label for="total_qty">Total Qty <span class="required">*</span></label>
-                                               <input type="number" class="form-control" id="total_qty" name="total_qty" readonly>
+                                               <input type="number" class="form-control" id="total_qty"  value="<?=$getpreexportidbyattributesid[0]['total_qty']?>" name="total_qty" readonly>
                                             <p class="error total_qty_error"></p>
                                         </div>
                                     </div>
@@ -80,8 +83,8 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                               <label for="total_net_weight">Total Net Weight <span class="required">*</span></label>
-                                               <input type="number" class="form-control" id="total_net_weight" name="total_net_weight">
+                                               <label for="total_net_weight">Total Net Weight</label>
+                                               <input type="number" class="form-control" id="total_net_weight" value="<?=$getpreexportidbyattributesid[0]['total_net_weight']?>" name="total_net_weight">
                                             <p class="error total_net_weight_error"></p>
                                         </div>
                                     </div>
@@ -92,7 +95,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="fax">Remark </label>
-                                            <textarea type="text" class="form-control"  id="remark"  name="remark"></textarea>
+                                            <textarea type="text" class="form-control"  id="remark"  name="remark"><?=$getpreexportidbyattributesid[0]['remark']?></textarea>
                                             <p class="error remark_error"></p>
                                         </div>
                                     </div>
@@ -101,7 +104,7 @@
                             <!-- /.box-body -->
                             <div class="box-footer">
                                 <input type="submit" id="addexportitemdetailswithattributesvalues" class="btn btn-primary" value="Submit" />
-                                <input type="button" onclick="location.href = '<?php echo base_url() ?>addexportitemdetailswithattributes/<?=$preexportitemdetailsid?>'" class="btn btn-default" value="Back" />
+                                <input type="button" onclick="location.href = '<?php echo base_url() ?>addexportitemdetailswithattributes/<?=$pre_export_item_id?>'" class="btn btn-default" value="Back" />
                             </div>
                         </form>
                     </div>

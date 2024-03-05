@@ -40,9 +40,12 @@
                                     <tr style="background-color:#3c8dbc !important;color:#fff">
                                         <th>Part Number</th>
                                         <th>Part Description</th>
+                                        <th>Total Gross Per Box Weight</th>
+                                        <th>Total No of Cartoons</th>
+                                        <th>Total Per Box PCS</th>
                                         <th>Total Qty</th>
-                                        <th>Total No Of Cartoons</th>
-                                        <th>Total No Of Gross Weight for Part</th>
+                                        <th>Total Net Weight</th>
+                                        <th>Remark</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>

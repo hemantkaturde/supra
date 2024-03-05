@@ -80,7 +80,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                               <label for="total_net_weight">Total Net Weight <span class="required">*</span></label>
+                                               <label for="total_net_weight">Total Net Weight</label>
                                                <input type="number" class="form-control" id="total_net_weight" name="total_net_weight">
                                             <p class="error total_net_weight_error"></p>
                                         </div>

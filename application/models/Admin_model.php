@@ -10379,6 +10379,22 @@ public function getpreexportdata($params){
             $data[$counter]['date'] =$value['date'];
             $data[$counter]['buyer_name'] =$value['buyer_name'];
             $data[$counter]['buyer_po_number'] =$value['sales_order_number'];
+
+
+            $sum_of_export = $this->getSumetionofpreexportallrows($value['export_id']);
+
+            if($sum_of_export){
+             $gross_per_box_weight =  $sum_of_export['gross_per_box_weight'];
+             $total_net_weight =  $sum_of_export['total_net_weight'];
+
+            }else{
+
+                $gross_per_box_weight =  '';
+                $total_net_weight =  '';
+            }
+
+            $data[$counter]['total_net_weight_of_shipment'] = $total_net_weight;
+            $data[$counter]['total_gross_shipment_weight'] = $gross_per_box_weight;
             $data[$counter]['remark'] =$value['preexportremark'];
             $data[$counter]['action'] ='';
             $data[$counter]['action'] .= "<a href='".ADMIN_PATH."exportdetailsitemdetails/".$value['export_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>   &nbsp ";
@@ -10489,15 +10505,13 @@ public function getpreexportitemdetailscount($params,$id){
 
 
 public function getpreexportitemdetailsdata($params,$id){
-    $this->db->select('*,'.TBL_PREEXPORT_ITEM_DETAILS.'.id as preexportitemid');
-    // if($params['search']['value'] != "") 
-    // {
-    //     $this->db->where("(".TBL_PREEXPORT.".pre_export_invoice_no LIKE '%".$params['search']['value']."%'");
-    //     $this->db->or_where(TBL_PREEXPORT.".date LIKE '%".$params['search']['value']."%'");
-    //     $this->db->or_where(TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
-    //     $this->db->or_where(TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
-    //     $this->db->or_where(TBL_PREEXPORT.".remark LIKE '%".$params['search']['value']."%')");
-    // }
+    $this->db->select('*,'.TBL_PREEXPORT_ITEM_DETAILS.'.id as preexportitemid,'.TBL_PREEXPORT_ITEM_DETAILS.'.remark as itemdetailsremark');
+    if($params['search']['value'] != "") 
+    {
+        $this->db->where("(".TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_FINISHED_GOODS.".name LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_PREEXPORT_ITEM_DETAILS.".remark LIKE '%".$params['search']['value']."%')");
+    }
 
     $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_PREEXPORT_ITEM_DETAILS.'.part_number');
     $this->db->where(TBL_PREEXPORT_ITEM_DETAILS.'.pre_export_id', $id);
@@ -10515,10 +10529,31 @@ public function getpreexportitemdetailsdata($params,$id){
         {
             $data[$counter]['part_number'] =$value['part_number'];
             $data[$counter]['part_description'] =$value['name'];
-            $data[$counter]['total_qty'] ='';
-            $data[$counter]['total_no_of_cartoons'] ='';
-            $data[$counter]['total_no_of_cartoons_gross_wigth'] ='';
-            //$data[$counter]['remark'] ='';
+
+              $preexportitemid =  $this->getSumetionofpreexportattributes($value['preexportitemid']);
+
+              if($preexportitemid){
+                $gross_per_box_weight = $preexportitemid['gross_per_box_weight'];
+                $no_of_cartoons = $preexportitemid['no_of_cartoons'];
+                $per_box_PCS = $preexportitemid['per_box_PCS'];
+                $total_qty = $preexportitemid['total_qty'];
+                $total_net_weight = $preexportitemid['total_net_weight'];
+
+              }else{
+                $gross_per_box_weight=0;
+                $no_of_cartoons=0;
+                $per_box_PCS=0;
+                $total_qty =0;
+                $total_net_weight=0;
+              }
+
+            $data[$counter]['total_gross_per_box_weight	'] =$gross_per_box_weight;
+            $data[$counter]['total_no_of_cartoons'] =$no_of_cartoons;
+            $data[$counter]['per_box_PCS'] =$per_box_PCS;
+            $data[$counter]['total_qty'] =$total_qty;
+            $data[$counter]['total_noq_of_cartoons'] =$total_net_weight;
+
+            $data[$counter]['remark'] =$value['itemdetailsremark'];
             $data[$counter]['action'] ='';
             $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addexportitemdetailswithattributes/".$value['preexportitemid']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>   &nbsp ";
             $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editaddpreexportitemdetails/".$value['preexportitemid']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
@@ -10691,11 +10726,37 @@ public function getpreexportidbyattributesid($id){
 
     $this->db->select('*');
     $this->db->where(TBL_PREEXPORT_ITEM_ATTRIBUTES.'.id',$id);
+    $this->db->order_by(TBL_PREEXPORT_ITEM_ATTRIBUTES.'.id','DESC');
     $query = $this->db->get(TBL_PREEXPORT_ITEM_ATTRIBUTES);
     $fetch_result = $query->result_array();
     return $fetch_result;
 }
 
+
+
+public function getSumetionofpreexportattributes($id){
+
+    $this->db->select('sum(gross_per_box_weight) as gross_per_box_weight,sum(no_of_cartoons) as no_of_cartoons,sum(per_box_PCS) as per_box_PCS,sum(total_qty) as total_qty,sum(total_net_weight) as total_net_weight');
+    $this->db->where(TBL_PREEXPORT_ITEM_ATTRIBUTES.'.pre_export_item_id',$id);
+    $this->db->group_by(TBL_PREEXPORT_ITEM_ATTRIBUTES.'.pre_export_item_id');
+    $query = $this->db->get(TBL_PREEXPORT_ITEM_ATTRIBUTES);
+    $fetch_result = $query->row_array();
+    return $fetch_result;
+
+}
+
+
+public function getSumetionofpreexportallrows($pre_export_id){
+
+    $this->db->select('sum(gross_per_box_weight) as gross_per_box_weight,sum(total_net_weight) as total_net_weight');
+    $this->db->join(TBL_PREEXPORT_ITEM_DETAILS, TBL_PREEXPORT_ITEM_DETAILS.'.id = '.TBL_PREEXPORT_ITEM_ATTRIBUTES.'.pre_export_item_id');
+    $this->db->where(TBL_PREEXPORT_ITEM_DETAILS.'.pre_export_id',$pre_export_id);
+    $this->db->group_by(TBL_PREEXPORT_ITEM_ATTRIBUTES.'.pre_export_item_id');
+    $query = $this->db->get(TBL_PREEXPORT_ITEM_ATTRIBUTES);
+    $fetch_result = $query->row_array();
+    return $fetch_result;
+
+}
 
 
 }

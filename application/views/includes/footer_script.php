@@ -18654,7 +18654,9 @@
 						{ "width": "20%", "targets": 2 },
 						{ "width": "10%", "targets": 3 },
 						{ "width": "10%", "targets": 4 },
-						{ "width": "8%", "targets": 5 },
+						{ "width": "10%", "targets": 5 },
+						{ "width": "10%", "targets": 6 },
+						{ "width": "8%", "targets": 7 },
 					],
 					responsive: true,
 					"oLanguage": {
@@ -18820,10 +18822,13 @@
 						{ className: "details-control", "targets": [ 0 ] },
 						{ "width": "10%", "targets": 0 },
 						{ "width": "20%", "targets": 1 },
-						{ "width": "5%", "targets": 2 },
-						{ "width": "8%", "targets": 3 },
-						{ "width": "12%", "targets": 4 },
-						{ "width": "8%", "targets": 5 },
+						{ "width": "10%", "targets": 2 },
+						{ "width": "10%", "targets": 3 },
+						{ "width": "10%", "targets": 4 },
+						{ "width": "10%", "targets": 5 },
+						{ "width": "10%", "targets": 6 },
+						{ "width": "10%", "targets": 7 },
+						{ "width": "10%", "targets":  8 },
 					],
 					responsive: true,
 					"oLanguage": {
@@ -18979,7 +18984,7 @@
 <?php } ?>
 
 
-<?php if($pageTitle=='Pre Export Item Attributes'){?>
+<?php if($pageTitle=='Pre Export Item Attributes' || $pageTitle=='Pre Export Item Attributes Edit' || $pageTitle=='Pre Export Item Attributes add'){?>
 	<script type="text/javascript"> 
 	        $(document).ready(function() {
 				var preexportitemdetailsid = $('#preexportitemdetailsid').val();
@@ -18991,7 +18996,7 @@
 						{ "width": "8%", "targets": 2 },
 						{ "width": "8%", "targets": 3 },
 						{ "width": "8%", "targets": 4 },
-						{ "width": "8%", "targets": 5 },
+						{ "width": "5%", "targets": 5 },
 					],
 					responsive: true,
 					"oLanguage": {
@@ -19018,6 +19023,9 @@
 
 				var main_export_id = $('#main_export_id').val();
 				var preexportitemdetailsid = $('#preexportitemdetailsid').val();
+
+
+				var pre_export_item_id = $('#pre_export_item_id').val();
 
 				var formData = new FormData($("#addexportitemdetailswithattributesvaluesform")[0]);
 				$.ajax({
@@ -19046,8 +19054,13 @@
 								icon: "success",
 								button: "Ok",
 								},function(){ 
+
+									if(pre_export_item_id){
+										window.location.href = "<?php echo base_url().'addexportitemdetailswithattributes/'?>"+pre_export_item_id;
+									}else{
+										window.location.href = "<?php echo base_url().'addexportitemdetailswithattributes/'?>"+preexportitemdetailsid;
+									}
 									
-									window.location.href = "<?php echo base_url().'addexportitemdetailswithattributes/'?>"+preexportitemdetailsid;
 								
 							});		
 						}
@@ -19114,14 +19127,14 @@
 		    });
 
 
-			$(document).on('change', '#gross_per_box_weight,#no_of_cartoons', function(){	
+			$(document).on('change', '#per_boc_pcs,#no_of_cartoons', function(){	
 
-				if($("#gross_per_box_weight").val() && $("#no_of_cartoons").val()){
+				if($("#per_boc_pcs").val() && $("#no_of_cartoons").val()){
 
-					if($("#gross_per_box_weight").val()){
-						var gross_per_box_weight = $("#gross_per_box_weight").val();
+					if($("#per_boc_pcs").val()){
+						var per_boc_pcs = $("#per_boc_pcs").val();
 					}else{
-						var gross_per_box_weight = 0;
+						var per_boc_pcs = 0;
 					}
 
 					if($("#no_of_cartoons").val()){
@@ -19131,15 +19144,13 @@
 					}
 
 					//var less_qty_rejected_qty = parseFloat(less_quantity) +  parseFloat(rejected_quantity);
-					var total_qty = parseFloat(gross_per_box_weight) *  parseFloat(no_of_cartoons);
+					var total_qty = parseFloat(per_boc_pcs) *  parseFloat(no_of_cartoons);
 	
 					$("#total_qty").val(total_qty);
 
 				}
 				
-		 });
-
-
+		    });
 
    </script>
 <?php } ?>
