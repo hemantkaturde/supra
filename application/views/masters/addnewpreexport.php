@@ -94,6 +94,26 @@
                                     </div>
                                 </div>
 
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                                <label for="total_no_of_pallets">Total No of Pallets </label>
+                                                <input type="text" class="form-control" id="total_no_of_pallets" name="total_no_of_pallets">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                                <label for="total_weight_of_pallets">Total Weight of Pallets </label>
+                                                <input type="text" class="form-control" id="total_weight_of_pallets" name="total_weight_of_pallets">
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">

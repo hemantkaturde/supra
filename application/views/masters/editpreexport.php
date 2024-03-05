@@ -97,6 +97,25 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
+                                                <label for="total_no_of_pallets">Total No of Pallets </label>
+                                                <input type="text" class="form-control" value="<?=$getexportdetailsforedit[0]['total_no_of_pallets']?>" id="total_no_of_pallets" name="total_no_of_pallets">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                                <label for="total_weight_of_pallets">Total Weight of Pallets </label>
+                                                <input type="text" class="form-control" value="<?=$getexportdetailsforedit[0]['total_weight_of_pallets']?>" id="total_weight_of_pallets" name="total_weight_of_pallets">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
                                                 <label for="fax">Remark </label>
                                                 <textarea type="text" class="form-control"  id="remark"  name="remark"><?=$getexportdetailsforedit[0]['preexportremark']?></textarea>
                                                 <p class="error remark_error"></p>

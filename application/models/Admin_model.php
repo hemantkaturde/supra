@@ -10687,6 +10687,16 @@ public function deletepreexportitemattributes($id){
 }
 
 
+public function getpreexportidbyattributesid($id){
+
+    $this->db->select('*');
+    $this->db->where(TBL_PREEXPORT_ITEM_ATTRIBUTES.'.id',$id);
+    $query = $this->db->get(TBL_PREEXPORT_ITEM_ATTRIBUTES);
+    $fetch_result = $query->result_array();
+    return $fetch_result;
+}
+
+
 
 }
 

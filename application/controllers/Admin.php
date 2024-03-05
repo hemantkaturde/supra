@@ -11427,12 +11427,14 @@ public function addnewfreexport(){
         $this->form_validation->set_rules('date','Date','trim|required');
         $this->form_validation->set_rules('buyer_name','Buyer Name','trim|required');
         $this->form_validation->set_rules('buyer_po_number','Buyer PO Number','trim|required');
+        $this->form_validation->set_rules('total_no_of_pallets','Total No Of Pallets','trim');
+        $this->form_validation->set_rules('total_weight_of_pallets','Total weight Of Pallets','trim');
         $this->form_validation->set_rules('remark','Remark','trim');
 
         if($this->form_validation->run() == FALSE)
         {
             $savePreexport_response['status'] = 'success';
-            $savePreexport_response['error'] = array('invoice_number'=>strip_tags(form_error('invoice_number')),'date'=>strip_tags(form_error('date')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'remark'=>strip_tags(form_error('remark')));
+            $savePreexport_response['error'] = array('invoice_number'=>strip_tags(form_error('invoice_number')),'date'=>strip_tags(form_error('date')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'total_no_of_pallets'=>strip_tags(form_error('total_no_of_pallets')),'total_weight_of_pallets'=>strip_tags(form_error('total_weight_of_pallets')),'remark'=>strip_tags(form_error('remark')));
     
         }else{
 
@@ -11441,6 +11443,8 @@ public function addnewfreexport(){
                 'date' => trim($this->input->post('date')),
                 'buyer_name' => trim($this->input->post('buyer_name')),
                 'buyer_po' => trim($this->input->post('buyer_po_number')),
+                'total_no_of_pallets' => trim($this->input->post('total_no_of_pallets')),
+                'total_weight_of_pallets' => trim($this->input->post('total_weight_of_pallets')),
                 'remark' => trim($this->input->post('remark')),
             );
 
@@ -11454,7 +11458,7 @@ public function addnewfreexport(){
             $savenepreexport= $this->admin_model->savenepreexport($preexport_id,$data);
             if($savenepreexport){
                 $savePreexport_response['status'] = 'success';
-                $savePreexport_response['error'] = array('invoice_number'=>strip_tags(form_error('invoice_number')),'date'=>strip_tags(form_error('date')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'remark'=>strip_tags(form_error('remark')));
+                $savePreexport_response['error'] = array('invoice_number'=>strip_tags(form_error('invoice_number')),'date'=>strip_tags(form_error('date')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'total_no_of_pallets'=>strip_tags(form_error('total_no_of_pallets')),'total_weight_of_pallets'=>strip_tags(form_error('total_weight_of_pallets')),'remark'=>strip_tags(form_error('remark')));
             }
         }
         echo json_encode($savePreexport_response);
@@ -11747,7 +11751,6 @@ public function addexportitemdetailswithattributesvalues($id){
 
     }
 
-
 }
 
 
@@ -11772,6 +11775,15 @@ public function deletepreexportitemattributes(){
 
 public function editexportitemdetailswithattributesvalues($id){
 
+    $process = 'Pre Export Item Attributes Edit';
+    $processFunction = 'Admin/editexportitemdetailswithattributesvalues';
+    $this->logrecord($process,$processFunction);
+    $this->global['pageTitle'] = 'Pre Export Item Attributes Edit';
+    $data['getpreexportidbyattributesid'] = $this->admin_model->getpreexportidbyattributesid($id);
+    $data['getexportetails']= $this->admin_model->getbuyerpodetailsforexportdetailsedititemdetails($data['getpreexportidbyattributesid'][0]['pre_export_item_id']);
+    $data['main_export_id']= $data['getexportetails'][0]['export_id'];
+    $data['preexportattributeid']= $id;
+    $this->loadViews("masters/editexportitemdetailswithattributesvalues", $this->global, $data, NULL);
 
 
 }
