@@ -19114,5 +19114,32 @@
 		    });
 
 
+			$(document).on('change', '#gross_per_box_weight,#no_of_cartoons', function(){	
+
+				if($("#gross_per_box_weight").val() && $("#no_of_cartoons").val()){
+
+					if($("#gross_per_box_weight").val()){
+						var gross_per_box_weight = $("#gross_per_box_weight").val();
+					}else{
+						var gross_per_box_weight = 0;
+					}
+
+					if($("#no_of_cartoons").val()){
+						var no_of_cartoons = $("#no_of_cartoons").val();
+					}else{
+						var no_of_cartoons = 0;
+					}
+
+					//var less_qty_rejected_qty = parseFloat(less_quantity) +  parseFloat(rejected_quantity);
+					var total_qty = parseFloat(gross_per_box_weight) *  parseFloat(no_of_cartoons);
+	
+					$("#total_qty").val(total_qty);
+
+				}
+				
+		 });
+
+
+
    </script>
 <?php } ?>

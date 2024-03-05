@@ -70,7 +70,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                                <label for="total_qty">Total Qty <span class="required">*</span></label>
-                                               <input type="number" class="form-control" id="total_qty" name="total_qty">
+                                               <input type="number" class="form-control" id="total_qty" name="total_qty" readonly>
                                             <p class="error total_qty_error"></p>
                                         </div>
                                     </div>
