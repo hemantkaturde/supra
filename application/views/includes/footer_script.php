@@ -18986,11 +18986,11 @@
 				var dt = $('#view_pre_export_item_details_attribute').DataTable({
 					"columnDefs": [ 
 						{ className: "details-control", "targets": [ 0 ] },
-						{ "width": "10%", "targets": 0 },
-						{ "width": "20%", "targets": 1 },
-						{ "width": "5%", "targets": 2 },
+						{ "width": "8%", "targets": 0 },
+						{ "width": "8%", "targets": 1 },
+						{ "width": "8%", "targets": 2 },
 						{ "width": "8%", "targets": 3 },
-						{ "width": "12%", "targets": 4 },
+						{ "width": "8%", "targets": 4 },
 						{ "width": "8%", "targets": 5 },
 					],
 					responsive: true,

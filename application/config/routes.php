@@ -439,8 +439,8 @@ $route['editaddpreexportitemdetails/(:any)'] = "admin/editaddpreexportitemdetail
 $route['addexportitemdetailswithattributes/(:any)'] = "admin/addexportitemdetailswithattributes/$1";
 $route['fetchpreexportitemdetailsattribute/(:any)'] = "admin/fetchpreexportitemdetailsattribute/$1";
 $route['addexportitemdetailswithattributesvalues/(:any)'] = "admin/addexportitemdetailswithattributesvalues/$1";
-
 $route['deletepreexportitemattributes'] = "admin/deletepreexportitemattributes";
+$route['editexportitemdetailswithattributesvalues/(:any)'] = "admin/editexportitemdetailswithattributesvalues/$1";
 
 
 

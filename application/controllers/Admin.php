@@ -11770,4 +11770,11 @@ public function deletepreexportitemattributes(){
 }
 
 
+public function editexportitemdetailswithattributesvalues($id){
+
+
+
+}
+
+
 }
