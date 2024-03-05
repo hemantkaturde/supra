@@ -10759,6 +10759,17 @@ public function getSumetionofpreexportallrows($pre_export_id){
 }
 
 
+public function getPreviousPreexport(){
+    $this->db->select('pre_export_invoice_no');
+    $this->db->where(TBL_PREEXPORT.'.status', 1);
+    $this->db->limit(1);
+    $this->db->order_by(TBL_PREEXPORT.'.id','DESC');
+    $query = $this->db->get(TBL_PREEXPORT);
+    $rowcount = $query->result_array();
+    return $rowcount;
+}
+
+
 }
 
 

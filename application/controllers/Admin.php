@@ -11467,6 +11467,7 @@ public function addnewfreexport(){
         $processFunction = 'Admin/addnewpreexport';
         $this->logrecord($process,$processFunction);
         $this->global['pageTitle'] = 'Add New Export Export';
+        $data['getPreviousPreexport']= $this->admin_model->getPreviousPreexport()[0];
         $data['buyerList']= $this->admin_model->fetchAllbuyerList();
         $this->loadViews("masters/addnewpreexport", $this->global, $data, NULL); 
     }

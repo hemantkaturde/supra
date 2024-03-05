@@ -24,19 +24,20 @@
                         <form role="form" id="savenewpreexportform" action="<?php echo base_url() ?>savenewpreexportform" method="post" role="form">
                             <div class="box-body">
                                     <?php
-                                        if($getPreviousCreditnotenumber['pre_export_invoice_no']){
+                                        if($getPreviousPreexport['pre_export_invoice_no']){
                                             // $arr = str_split($getPreviousCreditnotenumber['credit_note_number']);
                                             // $i = end($arr);
                                             // $inrno= "SQCN2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
                                             // $po_number = $inrno;
 
-                                            $string = $getPreviousCreditnotenumber['pre_export_invoice_no'];
+                                            $string = $getPreviousPreexport['pre_export_invoice_no'];
                                             $n = 4; // Number of characters to extract from the end
                                             $lastNCharacters = substr($string, -$n);
-                                            $inrno= "SQSD2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                            $inrno= "MG2324/".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
                                             $invoice_number = $inrno;
                                         }else{
-                                            $invoice_number = 'MG-001/2324';
+                                            //$invoice_number = 'MG-001/2324';
+                                            $invoice_number = 'MG2324/0001';
                                         }
                                     ?>
                                 <div class="row">
