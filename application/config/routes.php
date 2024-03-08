@@ -448,7 +448,11 @@ $route['salestrackingreport'] = "admin/salestrackingreport";
 
 
 
-
+$route['chamaster'] = "admin/chamaster";
+$route['fetchCHA'] = "admin/fetchCHA";
+$route['addnewVendor'] = "admin/addnewVendor";
+$route['updateVendor/(:any)'] = "admin/updateVendor/$1";
+$route['deleteVendor'] = "admin/deleteVendor";
 
 
 

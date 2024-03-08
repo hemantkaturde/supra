@@ -11802,6 +11802,39 @@ public function editexportitemdetailswithattributesvalues($id){
 }
 
 
+public function chamaster(){
+    $process = 'CHA Master';
+    $processFunction = 'Admin/chamaster';
+    $this->logrecord($process,$processFunction);
+    $this->global['pageTitle'] = 'CHA Master';
+    $this->loadViews("masters/chaMaster", $this->global, $data, NULL);
+}
+
+
+public function fetchCHA(){
+    $params = $_REQUEST;
+    $totalRecords = $this->admin_model->getCHACount($params); 
+    $queryRecords = $this->admin_model->getCHAdata($params); 
+
+    $data = array();
+    foreach ($queryRecords as $key => $value)
+    {
+        $i = 0;
+        foreach($value as $v)
+        {
+            $data[$key][$i] = $v;
+            $i++;
+        }
+    }
+    $json_data = array(
+        "draw"            => intval( $params['draw'] ),   
+        "recordsTotal"    => intval( $totalRecords ),  
+        "recordsFiltered" => intval($totalRecords),
+        "data"            => $data   // total data array
+        );
+    echo json_encode($json_data);
+ }
+
 
 
 
