@@ -59,6 +59,18 @@
                                     </div>
                                 </div>    
 
+
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                               <label for="total_item_net_weight">Total Item Net Weight</label>
+                                               <input type="number" class="form-control" id="total_item_net_weight" name="total_item_net_weight">
+                                            <p class="error total_item_net_weight_error"></p>
+                                        </div>
+                                    </div>
+                                </div>    
+
                             
                                 <div class="row">
                                     <div class="col-md-6">

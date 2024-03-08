@@ -10482,17 +10482,13 @@ public function getbuyerpoitemdetails($po_id){
 public function getpreexportitemdetailscount($params,$id){
 
     $this->db->select('*');
-    // if($params['search']['value'] != "") 
-    // {
-    //     $this->db->where("(".TBL_PREEXPORT.".pre_export_invoice_no LIKE '%".$params['search']['value']."%'");
-    //     $this->db->or_where(TBL_PREEXPORT.".date LIKE '%".$params['search']['value']."%'");
-    //     $this->db->or_where(TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
-    //     $this->db->or_where(TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
-    //     $this->db->or_where(TBL_PREEXPORT.".remark LIKE '%".$params['search']['value']."%')");
-    // }
-
-    // $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_PREEXPORT.'.buyer_name');
-    // $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_PREEXPORT.'.buyer_po');
+    if($params['search']['value'] != "") 
+    {
+        $this->db->where("(".TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_FINISHED_GOODS.".name LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_PREEXPORT_ITEM_DETAILS.".total_item_net_weight LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_PREEXPORT_ITEM_DETAILS.".remark LIKE '%".$params['search']['value']."%')");
+    }
     $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_PREEXPORT_ITEM_DETAILS.'.part_number');
     $this->db->where(TBL_PREEXPORT_ITEM_DETAILS.'.pre_export_id', $id);
     $this->db->where(TBL_PREEXPORT_ITEM_DETAILS.'.status', 1);
@@ -10510,6 +10506,7 @@ public function getpreexportitemdetailsdata($params,$id){
     {
         $this->db->where("(".TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_FINISHED_GOODS.".name LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_PREEXPORT_ITEM_DETAILS.".total_item_net_weight LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_PREEXPORT_ITEM_DETAILS.".remark LIKE '%".$params['search']['value']."%')");
     }
 
@@ -10529,6 +10526,7 @@ public function getpreexportitemdetailsdata($params,$id){
         {
             $data[$counter]['part_number'] =$value['part_number'];
             $data[$counter]['part_description'] =$value['name'];
+            $data[$counter]['total_item_net_weight'] =$value['total_item_net_weight'];
 
               $preexportitemid =  $this->getSumetionofpreexportattributes($value['preexportitemid']);
 
@@ -10635,7 +10633,8 @@ public function getpreexportitemdetailsattributecount($params,$id){
         $this->db->or_where(TBL_PREEXPORT_ITEM_ATTRIBUTES.".no_of_cartoons LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_PREEXPORT_ITEM_ATTRIBUTES.".per_box_PCS LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_PREEXPORT_ITEM_ATTRIBUTES.".total_qty LIKE '%".$params['search']['value']."%'");
-        $this->db->or_where(TBL_PREEXPORT_ITEM_ATTRIBUTES.".total_qty LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_PREEXPORT_ITEM_ATTRIBUTES.".total_gross_weight LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_PREEXPORT_ITEM_ATTRIBUTES.".total_net_weight LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_PREEXPORT_ITEM_ATTRIBUTES.".remark LIKE '%".$params['search']['value']."%')");
     }
 
@@ -10657,7 +10656,8 @@ public function getpreexportitemdetailsattributedata($params,$id){
         $this->db->or_where(TBL_PREEXPORT_ITEM_ATTRIBUTES.".no_of_cartoons LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_PREEXPORT_ITEM_ATTRIBUTES.".per_box_PCS LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_PREEXPORT_ITEM_ATTRIBUTES.".total_qty LIKE '%".$params['search']['value']."%'");
-        $this->db->or_where(TBL_PREEXPORT_ITEM_ATTRIBUTES.".total_qty LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_PREEXPORT_ITEM_ATTRIBUTES.".total_gross_weight LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_PREEXPORT_ITEM_ATTRIBUTES.".total_net_weight LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_PREEXPORT_ITEM_ATTRIBUTES.".remark LIKE '%".$params['search']['value']."%')");
     }
     
@@ -10676,6 +10676,7 @@ public function getpreexportitemdetailsattributedata($params,$id){
         {
             $data[$counter]['gross_per_box_weight'] =$value['gross_per_box_weight'];
             $data[$counter]['no_of_cartoons'] =$value['no_of_cartoons'];
+            $data[$counter]['total_gross_weight'] =$value['total_gross_weight'];
             $data[$counter]['per_box_PCS'] =$value['per_box_PCS'];
             $data[$counter]['total_qty'] =$value['total_qty'];
             $data[$counter]['total_net_weight'] =$value['total_net_weight'];

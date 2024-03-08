@@ -11429,12 +11429,14 @@ public function addnewfreexport(){
         $this->form_validation->set_rules('buyer_po_number','Buyer PO Number','trim|required');
         $this->form_validation->set_rules('total_no_of_pallets','Total No Of Pallets','trim');
         $this->form_validation->set_rules('total_weight_of_pallets','Total weight Of Pallets','trim');
+        $this->form_validation->set_rules('pallet_1','Pallet 1','trim');
+        $this->form_validation->set_rules('pallet_2','Pallet 2','trim');
         $this->form_validation->set_rules('remark','Remark','trim');
 
         if($this->form_validation->run() == FALSE)
         {
             $savePreexport_response['status'] = 'success';
-            $savePreexport_response['error'] = array('invoice_number'=>strip_tags(form_error('invoice_number')),'date'=>strip_tags(form_error('date')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'total_no_of_pallets'=>strip_tags(form_error('total_no_of_pallets')),'total_weight_of_pallets'=>strip_tags(form_error('total_weight_of_pallets')),'remark'=>strip_tags(form_error('remark')));
+            $savePreexport_response['error'] = array('invoice_number'=>strip_tags(form_error('invoice_number')),'date'=>strip_tags(form_error('date')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'total_no_of_pallets'=>strip_tags(form_error('total_no_of_pallets')),'total_weight_of_pallets'=>strip_tags(form_error('total_weight_of_pallets')),'pallet_1'=>strip_tags(form_error('pallet_1')),'pallet_2'=>strip_tags(form_error('pallet_2')),'remark'=>strip_tags(form_error('remark')));
     
         }else{
 
@@ -11445,6 +11447,8 @@ public function addnewfreexport(){
                 'buyer_po' => trim($this->input->post('buyer_po_number')),
                 'total_no_of_pallets' => trim($this->input->post('total_no_of_pallets')),
                 'total_weight_of_pallets' => trim($this->input->post('total_weight_of_pallets')),
+                'pallet_1' => trim($this->input->post('pallet_1')),
+                'pallet_2' => trim($this->input->post('pallet_2')),
                 'remark' => trim($this->input->post('remark')),
             );
 
@@ -11458,7 +11462,7 @@ public function addnewfreexport(){
             $savenepreexport= $this->admin_model->savenepreexport($preexport_id,$data);
             if($savenepreexport){
                 $savePreexport_response['status'] = 'success';
-                $savePreexport_response['error'] = array('invoice_number'=>strip_tags(form_error('invoice_number')),'date'=>strip_tags(form_error('date')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'total_no_of_pallets'=>strip_tags(form_error('total_no_of_pallets')),'total_weight_of_pallets'=>strip_tags(form_error('total_weight_of_pallets')),'remark'=>strip_tags(form_error('remark')));
+                $savePreexport_response['error'] = array('invoice_number'=>strip_tags(form_error('invoice_number')),'date'=>strip_tags(form_error('date')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'total_no_of_pallets'=>strip_tags(form_error('total_no_of_pallets')),'total_weight_of_pallets'=>strip_tags(form_error('total_weight_of_pallets')),'pallet_1'=>strip_tags(form_error('pallet_1')),'pallet_2'=>strip_tags(form_error('pallet_2')),'remark'=>strip_tags(form_error('remark')));
             }
         }
         echo json_encode($savePreexport_response);
@@ -11501,7 +11505,6 @@ public function editpreexport($id){
     $this->loadViews("masters/editpreexport", $this->global, $data, NULL);
 }
 
-
 public function exportdetailsitemdetails($id){
 
     $process = 'Pre Export Item Details';
@@ -11513,7 +11516,6 @@ public function exportdetailsitemdetails($id){
     $this->loadViews("masters/exportdetailsitemdetails", $this->global, $data, NULL);
 
 }
-
 
 public function fetchpreexportitemdetails($id){
 
@@ -11549,6 +11551,7 @@ public function addpreexportitemdetails($id){
         $saveExportitemdetails_response = array();
         $this->form_validation->set_rules('part_number','Part Number','trim|required');
         $this->form_validation->set_rules('part_description','Part Description','trim');
+        $this->form_validation->set_rules('total_item_net_weight','Total Item Net Weight','trim');
         $this->form_validation->set_rules('remark','Remark','trim');
         $this->form_validation->set_rules('main_export_id','Main Export Id','trim');
 
@@ -11557,12 +11560,13 @@ public function addpreexportitemdetails($id){
         {
 
             $saveExportitemdetails_response['status'] = 'failure';
-            $saveExportitemdetails_response['error'] = array('part_number'=>strip_tags(form_error('part_number')),'part_description'=>strip_tags(form_error('part_description')),'remark'=>strip_tags(form_error('remark')),'main_export_id'=>strip_tags(form_error('main_export_id')));
+            $saveExportitemdetails_response['error'] = array('part_number'=>strip_tags(form_error('part_number')),'part_description'=>strip_tags(form_error('part_description')),'total_item_net_weight'=>strip_tags(form_error('total_item_net_weight')),'remark'=>strip_tags(form_error('remark')),'main_export_id'=>strip_tags(form_error('main_export_id')));
         }else{
 
              $data = array(
                 'pre_export_id'=>$this->input->post('main_export_id'),
                 'part_number'=>$this->input->post('part_number'),
+                'total_item_net_weight'=>$this->input->post('total_item_net_weight'),
                 'remark'=>$this->input->post('remark'),
               );
 
@@ -11576,12 +11580,12 @@ public function addpreexportitemdetails($id){
 
               if($savePreexportitemdata){
                 $saveExportitemdetails_response['status'] = 'success';                
-                $saveExportitemdetails_response['error'] = array('part_number'=>strip_tags(form_error('part_number')),'part_description'=>strip_tags(form_error('part_description')),'remark'=>strip_tags(form_error('remark')),'main_export_id'=>strip_tags(form_error('main_export_id')));
+                $saveExportitemdetails_response['error'] = array('part_number'=>strip_tags(form_error('part_number')),'part_description'=>strip_tags(form_error('part_description')),'total_item_net_weight'=>strip_tags(form_error('total_item_net_weight')),'remark'=>strip_tags(form_error('remark')),'main_export_id'=>strip_tags(form_error('main_export_id')));
 
               }else{
 
                 $saveExportitemdetails_response['status'] = 'failure';
-                $saveExportitemdetails_response['error'] = array('part_number'=>strip_tags(form_error('part_number')),'part_description'=>strip_tags(form_error('part_description')),'remark'=>strip_tags(form_error('remark')),'main_export_id'=>strip_tags(form_error('main_export_id')));
+                $saveExportitemdetails_response['error'] = array('part_number'=>strip_tags(form_error('part_number')),'part_description'=>strip_tags(form_error('part_description')),'total_item_net_weight'=>strip_tags(form_error('total_item_net_weight')),'remark'=>strip_tags(form_error('remark')),'main_export_id'=>strip_tags(form_error('main_export_id')));
 
               }
 
@@ -11702,12 +11706,13 @@ public function addexportitemdetailswithattributesvalues($id){
         $this->form_validation->set_rules('no_of_cartoons','No Of Cartoons','trim|required');
         $this->form_validation->set_rules('total_qty','Total Qty','trim|required');
         $this->form_validation->set_rules('total_net_weight','Total Net Weight','trim');
+        $this->form_validation->set_rules('total_gross_weight','Total Gross Weight','trim');
         $this->form_validation->set_rules('remark','Remark','trim');
 
         if($this->form_validation->run() == FALSE)
         {
             $saveexportdetailsattributes_response['status'] = 'failure';
-            $saveexportdetailsattributes_response['error'] = array('gross_per_box_weight'=>strip_tags(form_error('gross_per_box_weight')),'no_of_cartoons'=>strip_tags(form_error('no_of_cartoons')),'total_qty'=>strip_tags(form_error('total_qty')),'total_net_weight'=>strip_tags(form_error('total_net_weight')),'remark'=>strip_tags(form_error('remark')));
+            $saveexportdetailsattributes_response['error'] = array('gross_per_box_weight'=>strip_tags(form_error('gross_per_box_weight')),'no_of_cartoons'=>strip_tags(form_error('no_of_cartoons')),'total_qty'=>strip_tags(form_error('total_qty')),'total_net_weight'=>strip_tags(form_error('total_net_weight')),'total_gross_weight'=>strip_tags(form_error('total_gross_weight')),'remark'=>strip_tags(form_error('remark')));
         }else{
 
 
@@ -11718,6 +11723,7 @@ public function addexportitemdetailswithattributesvalues($id){
                 'per_box_PCS' => $this->input->post('per_boc_pcs'),
                 'total_qty'=>$this->input->post('total_qty'),
                 'total_net_weight'=>$this->input->post('total_net_weight'),
+                'total_gross_weight'=>$this->input->post('total_gross_weight'),
                 'remark'=>$this->input->post('remark'),
             );
            
@@ -11732,11 +11738,11 @@ public function addexportitemdetailswithattributesvalues($id){
             if( $savePreexportitemattributes){
 
                 $saveexportdetailsattributes_response['status'] = 'success';
-                $saveexportdetailsattributes_response['error'] = array('gross_per_box_weight'=>strip_tags(form_error('gross_per_box_weight')),'no_of_cartoons'=>strip_tags(form_error('no_of_cartoons')),'total_qty'=>strip_tags(form_error('total_qty')),'total_net_weight'=>strip_tags(form_error('total_net_weight')),'remark'=>strip_tags(form_error('remark')));
+                $saveexportdetailsattributes_response['error'] = array('gross_per_box_weight'=>strip_tags(form_error('gross_per_box_weight')),'no_of_cartoons'=>strip_tags(form_error('no_of_cartoons')),'total_qty'=>strip_tags(form_error('total_qty')),'total_net_weight'=>strip_tags(form_error('total_net_weight')),'total_gross_weight'=>strip_tags(form_error('total_gross_weight')),'remark'=>strip_tags(form_error('remark')));
          
             }else{
                 $saveexportdetailsattributes_response['status'] = 'failure';
-                $saveexportdetailsattributes_response['error'] = array('gross_per_box_weight'=>strip_tags(form_error('gross_per_box_weight')),'no_of_cartoons'=>strip_tags(form_error('no_of_cartoons')),'total_qty'=>strip_tags(form_error('total_qty')),'total_net_weight'=>strip_tags(form_error('total_net_weight')),'remark'=>strip_tags(form_error('remark')));
+                $saveexportdetailsattributes_response['error'] = array('gross_per_box_weight'=>strip_tags(form_error('gross_per_box_weight')),'no_of_cartoons'=>strip_tags(form_error('no_of_cartoons')),'total_qty'=>strip_tags(form_error('total_qty')),'total_net_weight'=>strip_tags(form_error('total_net_weight')),'total_gross_weight'=>strip_tags(form_error('total_gross_weight')),'remark'=>strip_tags(form_error('remark')));
          
 
             }
@@ -11792,14 +11798,11 @@ public function editexportitemdetailswithattributesvalues($id){
     $data['getexportetails']= $this->admin_model->getbuyerpodetailsforexportdetailsedititemdetails($data['getpreexportidbyattributesid'][0]['pre_export_item_id']);
     $data['main_export_id']= $data['getexportetails'][0]['export_id'];
     $data['pre_export_item_attribute_id']= $id;
-
-    
-
-
     $this->loadViews("masters/editexportitemdetailswithattributesvalues", $this->global, $data, NULL);
-
-
 }
+
+
+
 
 
 }

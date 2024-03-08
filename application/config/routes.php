@@ -441,6 +441,11 @@ $route['deletepreexportitemattributes'] = "admin/deletepreexportitemattributes";
 $route['editexportitemdetailswithattributesvalues/(:any)'] = "admin/editexportitemdetailswithattributesvalues/$1";
 
 
+$route['salestrackingreport'] = "admin/salestrackingreport";
+
+
+
+
 
 
 

@@ -90,6 +90,16 @@
                                     </div>
                                 </div>    
 
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                               <label for="total_gross_weight">Total Gross Weight</label>
+                                               <input type="number" class="form-control" id="total_gross_weight" value="<?=$getpreexportidbyattributesid[0]['total_gross_weight']?>" name="total_gross_weight" readonly>
+                                            <p class="error total_gross_weight_error"></p>
+                                        </div>
+                                    </div>
+                                </div>    
                             
                                 <div class="row">
                                     <div class="col-md-6">
