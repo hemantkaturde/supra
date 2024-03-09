@@ -18651,7 +18651,7 @@
 						{ className: "details-control", "targets": [ 0 ] },
 						{ "width": "10%", "targets": 0 },
 						{ "width": "10%", "targets": 1 },
-						{ "width": "20%", "targets": 2 },
+						{ "width": "10%", "targets": 2 },
 						{ "width": "10%", "targets": 3 },
 						{ "width": "10%", "targets": 4 },
 						{ "width": "10%", "targets": 5 },
