@@ -25,6 +25,9 @@
             </div>
             <div class="col-xs-6 text-right">
                 <div class="form-group">
+                    <a class="btn btn-primary" href="<?php echo base_url(); ?>preexport">
+                        <i class="fa fa-arrow-left"></i> Back</a>
+
                     <a class="btn btn-primary" href="<?php echo base_url(); ?>addpreexportitemdetails/<?=$main_export_id?>">
                         <i class="fa fa-plus"></i> Add Pre Export Item Details</a>
                 </div>
