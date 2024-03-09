@@ -10386,15 +10386,23 @@ public function getpreexportdata($params){
             if($sum_of_export){
              $gross_per_box_weight =  $sum_of_export['gross_per_box_weight'];
              $total_net_weight =  $sum_of_export['total_net_weight'];
+             $total_item_net_weight =  $sum_of_export['total_item_net_weight'];
+             $total_no_of_carttons =  $sum_of_export['no_of_cartoons'];
 
             }else{
 
                 $gross_per_box_weight =  '';
                 $total_net_weight =  '';
+                $total_item_net_weight =  '';
+                $total_no_of_carttons =  '';
             }
 
             $data[$counter]['total_net_weight_of_shipment'] = $total_net_weight;
             $data[$counter]['total_gross_shipment_weight'] = $gross_per_box_weight;
+
+            $data[$counter]['total_item_net_weight'] = '';
+            $data[$counter]['total_no_of_carttons'] = '';
+
             $data[$counter]['remark'] =$value['preexportremark'];
             $data[$counter]['action'] ='';
             $data[$counter]['action'] .= "<a href='".ADMIN_PATH."exportdetailsitemdetails/".$value['export_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>   &nbsp ";
@@ -10749,7 +10757,7 @@ public function getSumetionofpreexportattributes($id){
 
 public function getSumetionofpreexportallrows($pre_export_id){
 
-    $this->db->select('sum(gross_per_box_weight) as gross_per_box_weight,sum(total_net_weight) as total_net_weight');
+    $this->db->select('sum(gross_per_box_weight) as gross_per_box_weight,sum(total_net_weight) as total_net_weight,sum(total_item_net_weight) as total_item_net_weight,sum(no_of_cartoons) as no_of_cartoons');
     $this->db->join(TBL_PREEXPORT_ITEM_DETAILS, TBL_PREEXPORT_ITEM_DETAILS.'.id = '.TBL_PREEXPORT_ITEM_ATTRIBUTES.'.pre_export_item_id');
     $this->db->where(TBL_PREEXPORT_ITEM_DETAILS.'.pre_export_id',$pre_export_id);
     $this->db->group_by(TBL_PREEXPORT_ITEM_ATTRIBUTES.'.pre_export_item_id');
