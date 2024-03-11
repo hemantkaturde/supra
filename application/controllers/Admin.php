@@ -11623,7 +11623,6 @@ public function get_preexport_item_details(){
 }
 
 
-
 public function deletepreexportitemdetails(){
 
     $post_submit = $this->input->post();

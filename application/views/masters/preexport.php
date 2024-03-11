@@ -34,8 +34,7 @@
                                         <th>Buyer Name</th>
                                         <th>Buyer PO</th>
                                         <th>Total Net Weight Of Shipment</th>
-                                        <th>Total Gross Shipment Weight</th>
-                                        <th>Total Item Net Weight</th>
+                                        <th>Total Gross Weight + Total Weight of Pallets</th>
                                         <th>Total No of cartoons</th>
                                         <th>Remark</th>
                                         <th>Action</th>

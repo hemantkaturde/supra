@@ -44,9 +44,9 @@
                                         <th>Part Number</th>
                                         <th>Part Description</th>
                                         <th>Total Item Net Weight</th>
-                                        <th>Total Gross Per Box Weight</th>
+                                        <th>Total Gross Weight</th>
                                         <th>Total No of Cartoons</th>
-                                        <th>Total Per Box PCS</th>
+                                        <!-- <th>Total Per Box PCS</th> -->
                                         <th>Total Qty</th>
                                         <th>Total Net Weight</th>
                                         <th>Remark</th>

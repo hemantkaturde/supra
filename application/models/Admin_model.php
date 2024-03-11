@@ -10384,24 +10384,22 @@ public function getpreexportdata($params){
             $sum_of_export = $this->getSumetionofpreexportallrows($value['export_id']);
 
             if($sum_of_export){
-             $gross_per_box_weight =  $sum_of_export['gross_per_box_weight'];
+             $total_gross_weight =  $sum_of_export['total_gross_weight'] + $value['total_weight_of_pallets'];
              $total_net_weight =  $sum_of_export['total_net_weight'];
              $total_item_net_weight =  $sum_of_export['total_item_net_weight'];
              $total_no_of_carttons =  $sum_of_export['no_of_cartoons'];
 
             }else{
 
-                $gross_per_box_weight =  '';
+                $total_gross_weight =  '';
                 $total_net_weight =  '';
                 $total_item_net_weight =  '';
                 $total_no_of_carttons =  '';
             }
 
             $data[$counter]['total_net_weight_of_shipment'] = $total_net_weight;
-            $data[$counter]['total_gross_shipment_weight'] = $gross_per_box_weight;
-
-            $data[$counter]['total_item_net_weight'] = '';
-            $data[$counter]['total_no_of_carttons'] = '';
+            $data[$counter]['total_gross_shipment_weight'] = $total_gross_weight;
+            $data[$counter]['total_no_of_carttons'] =  $total_no_of_carttons;
 
             $data[$counter]['remark'] =$value['preexportremark'];
             $data[$counter]['action'] ='';
@@ -10539,23 +10537,23 @@ public function getpreexportitemdetailsdata($params,$id){
               $preexportitemid =  $this->getSumetionofpreexportattributes($value['preexportitemid']);
 
               if($preexportitemid){
-                $gross_per_box_weight = $preexportitemid['gross_per_box_weight'];
+                $total_gross_weight = $preexportitemid['total_gross_weight'];
                 $no_of_cartoons = $preexportitemid['no_of_cartoons'];
                 $per_box_PCS = $preexportitemid['per_box_PCS'];
                 $total_qty = $preexportitemid['total_qty'];
                 $total_net_weight = $preexportitemid['total_net_weight'];
 
               }else{
-                $gross_per_box_weight=0;
+                $total_gross_weight=0;
                 $no_of_cartoons=0;
                 $per_box_PCS=0;
                 $total_qty =0;
                 $total_net_weight=0;
               }
 
-            $data[$counter]['total_gross_per_box_weight	'] =$gross_per_box_weight;
+            $data[$counter]['total_gross_per_box_weight	'] =$total_gross_weight;
             $data[$counter]['total_no_of_cartoons'] =$no_of_cartoons;
-            $data[$counter]['per_box_PCS'] =$per_box_PCS;
+            // $data[$counter]['per_box_PCS'] =$per_box_PCS;
             $data[$counter]['total_qty'] =$total_qty;
             $data[$counter]['total_noq_of_cartoons'] =$total_net_weight;
 
@@ -10745,7 +10743,7 @@ public function getpreexportidbyattributesid($id){
 
 public function getSumetionofpreexportattributes($id){
 
-    $this->db->select('sum(gross_per_box_weight) as gross_per_box_weight,sum(no_of_cartoons) as no_of_cartoons,sum(per_box_PCS) as per_box_PCS,sum(total_qty) as total_qty,sum(total_net_weight) as total_net_weight');
+    $this->db->select('sum(total_gross_weight) as total_gross_weight,sum(no_of_cartoons) as no_of_cartoons,sum(per_box_PCS) as per_box_PCS,sum(total_qty) as total_qty,sum(total_net_weight) as total_net_weight');
     $this->db->where(TBL_PREEXPORT_ITEM_ATTRIBUTES.'.pre_export_item_id',$id);
     $this->db->group_by(TBL_PREEXPORT_ITEM_ATTRIBUTES.'.pre_export_item_id');
     $query = $this->db->get(TBL_PREEXPORT_ITEM_ATTRIBUTES);
@@ -10757,7 +10755,7 @@ public function getSumetionofpreexportattributes($id){
 
 public function getSumetionofpreexportallrows($pre_export_id){
 
-    $this->db->select('sum(gross_per_box_weight) as gross_per_box_weight,sum(total_net_weight) as total_net_weight,sum(total_item_net_weight) as total_item_net_weight,sum(no_of_cartoons) as no_of_cartoons');
+    $this->db->select('sum(total_gross_weight) as total_gross_weight,sum(total_net_weight) as total_net_weight,sum(total_item_net_weight) as total_item_net_weight,sum(no_of_cartoons) as no_of_cartoons');
     $this->db->join(TBL_PREEXPORT_ITEM_DETAILS, TBL_PREEXPORT_ITEM_DETAILS.'.id = '.TBL_PREEXPORT_ITEM_ATTRIBUTES.'.pre_export_item_id');
     $this->db->where(TBL_PREEXPORT_ITEM_DETAILS.'.pre_export_id',$pre_export_id);
     $this->db->group_by(TBL_PREEXPORT_ITEM_ATTRIBUTES.'.pre_export_item_id');
