@@ -10532,7 +10532,7 @@ public function getpreexportitemdetailsdata($params,$id){
         {
             $data[$counter]['part_number'] =$value['part_number'];
             $data[$counter]['part_description'] =$value['name'];
-            $data[$counter]['total_item_net_weight'] =$value['total_item_net_weight'];
+            // $data[$counter]['total_item_net_weight'] =$value['total_item_net_weight'];
 
               $preexportitemid =  $this->getSumetionofpreexportattributes($value['preexportitemid']);
 

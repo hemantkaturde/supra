@@ -43,7 +43,7 @@
                                     <tr style="background-color:#3c8dbc !important;color:#fff">
                                         <th>Part Number</th>
                                         <th>Part Description</th>
-                                        <th>Total Item Net Weight</th>
+                                        <!-- <th>Total Item Net Weight</th> -->
                                         <th>Total Gross Weight</th>
                                         <th>Total No of Cartoons</th>
                                         <!-- <th>Total Per Box PCS</th> -->
