@@ -31,19 +31,36 @@
                                             if($getPreviousvendorbomPONumber_number > $getPreviousBomnumber_number){
 
                                                 if($getPreviousvendorbomPONumber_number){
-                                                    $arr = str_split($getPreviousvendorbomPONumber_number);
-                                                    $i = end($arr);
-                                                    $inrno= "SQBM2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                                    // $arr = str_split($getPreviousvendorbomPONumber_number);
+                                                    // $i = end($arr);
+                                                    // $inrno= "SQBM2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                                    // $po_number = $inrno;
+
+                                                    $string = str_split($getPreviousBomnumber_number);
+                                                    $n = 4; // Number of characters to extract from the end
+                                                    $lastNCharacters = substr($string, -$n);
+                                                    $inrno= "SQBM2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
                                                     $po_number = $inrno;
+
+
+
                                                 }else{
                                                     $po_number = 'SQBM23240001';
                                                 }     
                                             }else{
                                                 if($getPreviousBomnumber_number){
-                                                    $arr = str_split($getPreviousBomnumber_number);
-                                                    $i = end($arr);
-                                                    $inrno= "SQBM2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                                    // $arr = str_split($getPreviousBomnumber_number);
+                                                    // $i = end($arr);
+                                                    // $inrno= "SQBM2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                                    // $po_number = $inrno;
+
+                                                    $string = str_split($getPreviousBomnumber_number);
+                                                    $n = 4; // Number of characters to extract from the end
+                                                    $lastNCharacters = substr($string, -$n);
+                                                    $inrno= "SQBM2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
                                                     $po_number = $inrno;
+
+
                                                 }else{
                                                     $po_number = 'SQBM23240001';
                                                 }  
