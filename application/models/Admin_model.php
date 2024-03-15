@@ -10399,8 +10399,8 @@ public function getpreexportdata($params){
                 $total_no_of_carttons =  '';
             }
 
-            $data[$counter]['total_net_weight_of_shipment'] = round($total_net_weight,2);
-            $data[$counter]['total_gross_shipment_weight'] = round($total_gross_weight,2);
+            $data[$counter]['total_net_weight_of_shipment'] = $total_net_weight;
+            $data[$counter]['total_gross_shipment_weight'] = $total_gross_weight;
             $data[$counter]['total_no_of_carttons'] =  $total_no_of_carttons;
 
             $data[$counter]['remark'] =$value['preexportremark'];
