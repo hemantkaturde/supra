@@ -396,7 +396,7 @@
                                                 <td><?=$value['invoice_date']?></td>
                                                 <td><?=$value['invoice_qty_In_pcs']?></td>
                                                 <td><?=$value['invoice_qty_In_kgs']?></td>
-                                                <td><?=$value['lot_number']?></td>
+                                                <td><?=$value['lot']?></td>
                                                 <td><?=$value['actual_received_qty_in_pcs']?></td>
                                                 <td><?=$value['actual_received_qty_in_kgs']?></td>
                                                 <td><?=$value['previous_balence']?></td>
