@@ -36,7 +36,7 @@
                                                     // $inrno= "SQBM2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
                                                     // $po_number = $inrno;
 
-                                                    $string = str_split($getPreviousBomnumber_number);
+                                                    $string = $getPreviousvendorbomPONumber_number;
                                                     $n = 4; // Number of characters to extract from the end
                                                     $lastNCharacters = substr($string, -$n);
                                                     $inrno= "SQBM2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
@@ -54,7 +54,7 @@
                                                     // $inrno= "SQBM2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
                                                     // $po_number = $inrno;
 
-                                                    $string = str_split($getPreviousBomnumber_number);
+                                                    $string = $getPreviousBomnumber_number;
                                                     $n = 4; // Number of characters to extract from the end
                                                     $lastNCharacters = substr($string, -$n);
                                                     $inrno= "SQBM2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
