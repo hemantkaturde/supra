@@ -439,8 +439,6 @@ $route['fetchpreexportitemdetailsattribute/(:any)'] = "admin/fetchpreexportitemd
 $route['addexportitemdetailswithattributesvalues/(:any)'] = "admin/addexportitemdetailswithattributesvalues/$1";
 $route['deletepreexportitemattributes'] = "admin/deletepreexportitemattributes";
 $route['editexportitemdetailswithattributesvalues/(:any)'] = "admin/editexportitemdetailswithattributesvalues/$1";
-
-
 $route['salestrackingreport'] = "admin/salestrackingreport";
 
 
@@ -450,9 +448,9 @@ $route['salestrackingreport'] = "admin/salestrackingreport";
 
 $route['chamaster'] = "admin/chamaster";
 $route['fetchCHA'] = "admin/fetchCHA";
-$route['addnewVendor'] = "admin/addnewVendor";
-$route['updateVendor/(:any)'] = "admin/updateVendor/$1";
-$route['deleteVendor'] = "admin/deleteVendor";
+$route['addnewCha'] = "admin/addnewCha";
+$route['updatecha/(:any)'] = "admin/updatecha/$1";
+$route['deletecha'] = "admin/deletecha";
 
 
 

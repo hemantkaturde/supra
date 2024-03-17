@@ -19185,7 +19185,7 @@
 <?php } ?>
 
 
-<?php if($pageTitle=='CHA Master' || $pageTitle=='Add Vendor Master' || $pageTitle=='Edit Vendor Master'){ ?>
+<?php if($pageTitle=='CHA Master' || $pageTitle=='Add New CHA Master' || $pageTitle=='Edit CHA Master'){ ?>
 <script type="text/javascript">
 		$(document).ready(function() {
 				var dt = $('#view_cha_master').DataTable({
@@ -19216,13 +19216,13 @@
 				});
 		});
 
-		$(document).on('click','#savenewvendor',function(e){
+		$(document).on('click','#savenewcha',function(e){
 				e.preventDefault();
 				$(".loader_ajax").show();
-				var formData = new FormData($("#addnewvendorform")[0]);
+				var formData = new FormData($("#addnewchaform")[0]);
 
 				$.ajax({
-					url : "<?php echo base_url();?>addnewVendor",
+					url : "<?php echo base_url();?>addnewCha",
 					type: "POST",
 					data : formData,
 					cache: false,
@@ -19243,11 +19243,11 @@
 						{
 							swal({
 								title: "Success",
-								text: "Vendor Successfully Added!",
+								text: "CHA Successfully Added!",
 								icon: "success",
 								button: "Ok",
 								},function(){ 
-									window.location.href = "<?php echo base_url().'vendormaster'?>";
+									window.location.href = "<?php echo base_url().'chamaster'?>";
 							});		
 						}
 						
@@ -19260,13 +19260,13 @@
 				return false;
 		});
 
-		$(document).on('click','#updatevendor',function(e){
+		$(document).on('click','#updatecha',function(e){
 				e.preventDefault();
 				$(".loader_ajax").show();
-				var formData = new FormData($("#updatevendorform")[0]);
-				var vendor_id = $("#vendor_id").val();
+				var formData = new FormData($("#updatechaform")[0]);
+				var cha_id = $("#cha_id").val();
 				$.ajax({
-					url : "<?php echo base_url();?>updateVendor/"+vendor_id,
+					url : "<?php echo base_url();?>updatecha/"+cha_id,
 					type: "POST",
 					data : formData,
 					cache: false,
@@ -19287,11 +19287,11 @@
 						{
 							swal({
 								title: "Success",
-								text: "Vendor Successfully Updated!",
+								text: "CHA Successfully Updated!",
 								icon: "success",
 								button: "Ok",
 								},function(){ 
-									window.location.href = "<?php echo base_url().'vendormaster'?>";
+									window.location.href = "<?php echo base_url().'chamaster'?>";
 							});		
 						}
 						
@@ -19304,7 +19304,7 @@
 				return false;
 		});
 
-		$(document).on('click','.deletevendor',function(e){
+		$(document).on('click','.deletecha',function(e){
 			var elemF = $(this);
 			e.preventDefault();
 
@@ -19322,7 +19322,7 @@
 			}, function(isConfirm) {
 				if (isConfirm) {
 							$.ajax({
-								url : "<?php echo base_url();?>deleteVendor",
+								url : "<?php echo base_url();?>deletecha",
 								type: "POST",
 								data : 'id='+elemF.attr('data-id'),
 								success: function(data, textStatus, jqXHR)
@@ -19332,11 +19332,11 @@
 									if(obj.status=='success'){
 										swal({
 											title: "Deleted!",
-											text: "Vendor Deleted Succesfully",
+											text: "CHA Deleted Succesfully",
 											icon: "success",
 											button: "Ok",
 											},function(){ 
-												window.location.href = "<?php echo base_url().'vendormaster'?>";
+												window.location.href = "<?php echo base_url().'chamaster'?>";
 										});	
 									}
 
@@ -19348,7 +19348,7 @@
 							})
 						}
 						else {
-				swal("Cancelled", "Vendor deletion cancelled ", "error");
+				swal("Cancelled", "CHA deletion cancelled ", "error");
 				}
 			});
 		});

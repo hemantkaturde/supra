@@ -10784,7 +10784,7 @@ public function getCHACount($params){
     $this->db->select('*');
     if($params['search']['value'] != "") 
     {
-        $this->db->where("(".TBL_CHA_MASTER.".vendor_name LIKE '%".$params['search']['value']."%'");
+        $this->db->where("(".TBL_CHA_MASTER.".cha_name LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_CHA_MASTER.".address LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_CHA_MASTER.".landline LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_CHA_MASTER.".phone1 LIKE '%".$params['search']['value']."%'");
@@ -10803,7 +10803,7 @@ public function getCHAdata($params){
     $this->db->select('*');
     if($params['search']['value'] != "") 
     {
-        $this->db->where("(".TBL_CHA_MASTER.".vendor_name LIKE '%".$params['search']['value']."%'");
+        $this->db->where("(".TBL_CHA_MASTER.".cha_name LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_CHA_MASTER.".address LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_CHA_MASTER.".landline LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_CHA_MASTER.".phone1 LIKE '%".$params['search']['value']."%'");
@@ -10828,14 +10828,75 @@ public function getCHAdata($params){
             $data[$counter]['phone1'] =  $value['phone1'];
             $data[$counter]['contact_person'] =  $value['contact_person'];
             $data[$counter]['action'] = '';
-            $data[$counter]['action'] .= "<a href='".ADMIN_PATH."updateVendor/".$value['cha_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";
-            $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['cha_id']."' class='fa fa-trash-o deletevendor' aria-hidden='true'></i>"; 
+            $data[$counter]['action'] .= "<a href='".ADMIN_PATH."updatecha/".$value['cha_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";
+            $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['cha_id']."' class='fa fa-trash-o deletecha' aria-hidden='true'></i>"; 
 
             $counter++; 
         }
     }
 
     return $data;
+}
+
+public function checkifexitscha($vendor_name){
+
+    $this->db->select('*');
+    $this->db->where(TBL_VENDOR.'.vendor_name', $vendor_name);
+    $this->db->where(TBL_VENDOR.'.status', 1);
+    $query = $this->db->get(TBL_VENDOR);
+    $rowcount = $query->num_rows();
+    return $rowcount;
+
+}
+
+
+public function saveChadata($id,$data){
+    if($id != '') {
+        $this->db->where('cha_id', $id);
+        if($this->db->update(TBL_CHA_MASTER, $data)){
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    } else {
+        if($this->db->insert(TBL_CHA_MASTER, $data)) {
+            return $this->db->insert_id();;
+        } else {
+            return FALSE;
+        }
+    }
+}
+
+
+public function deletecha($id){
+    $this->db->where('cha_id', $id);
+    //$this->db->delete(TBL_SUPPLIER);
+    if($this->db->delete(TBL_CHA_MASTER)){
+       return TRUE;
+    }else{
+       return FALSE;
+    }
+}
+
+
+public function getChadataforedit($id){
+    $this->db->select('*');
+    $this->db->where(TBL_CHA_MASTER.'.cha_id', $id);
+    $this->db->where(TBL_CHA_MASTER.'.status', 1);
+    $query = $this->db->get(TBL_CHA_MASTER);
+    $data = $query->result_array();
+    return $data;
+}
+
+public function checkifexitchaupdate($id,$vendor){
+    $this->db->select('*');
+    $this->db->where(TBL_CHA_MASTER.'.cha_id', $id);
+    $this->db->where(TBL_CHA_MASTER.'.cha_name', $vendor);
+    $this->db->where(TBL_CHA_MASTER.'.status', 1);
+    $query = $this->db->get(TBL_CHA_MASTER);
+    $data = $query->num_rows();
+    return $data;
+
 }
 
 

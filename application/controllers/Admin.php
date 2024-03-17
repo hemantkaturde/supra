@@ -11832,9 +11832,162 @@ public function fetchCHA(){
         "data"            => $data   // total data array
         );
     echo json_encode($json_data);
+}
+
+
+public function addnewCha(){
+    $post_submit = $this->input->post();
+    if($post_submit){
+        $save_cha_response = array();
+
+        $this->form_validation->set_rules('cha_name','CHA Name','trim|required|max_length[128]');
+        $this->form_validation->set_rules('landline','Landline','trim|numeric|max_length[128]');
+        $this->form_validation->set_rules('address','Address','trim|required');
+        $this->form_validation->set_rules('phone_1','Phone 1','trim|numeric|max_length[50]');
+        $this->form_validation->set_rules('contact_person','Contact Person','trim|max_length[50]');
+        $this->form_validation->set_rules('mobile','Mobile','trim|required|numeric|max_length[50]');
+        $this->form_validation->set_rules('email','Email','trim|required|valid_email|max_length[50]');
+        $this->form_validation->set_rules('mobile_2','Mobile 2','trim|numeric|max_length[50]');
+        $this->form_validation->set_rules('fax','Fax','trim|max_length[50]');
+        $this->form_validation->set_rules('GSTIN','GSTIN','trim|max_length[50]');
+
+        if($this->form_validation->run() == FALSE)
+        {
+            $save_cha_response['status'] = 'failure';
+            $save_cha_response['error'] = array('cha_name'=>strip_tags(form_error('cha_name')), 'landline'=>strip_tags(form_error('landline')), 'address'=>strip_tags(form_error('address')), 'phone_1'=>strip_tags(form_error('phone_1')),'contact_person'=>strip_tags(form_error('contact_person')),'mobile'=>strip_tags(form_error('mobile')),'email'=>strip_tags(form_error('email')),'mobile_2'=>strip_tags(form_error('mobile_2')),'fax'=>strip_tags(form_error('fax')),'GSTIN'=>strip_tags(form_error('GSTIN')));
+        }else{
+
+            $data = array(
+                'cha_name'   => trim($this->input->post('cha_name')),
+                'landline'     => trim($this->input->post('landline')),
+                'address'    => trim($this->input->post('address')),
+                'phone1'  => trim($this->input->post('phone_1')),
+                'contact_person' => trim($this->input->post('contact_person')),
+                'mobile' =>   trim($this->input->post('mobile')),
+                'email' =>    trim($this->input->post('email')),
+                'mobile2' =>    trim($this->input->post('mobile_2')),
+                'fax' =>    trim($this->input->post('fax')),
+                'GSTIN' =>    trim($this->input->post('GSTIN'))
+            );
+
+            $checkifexitscha = $this->admin_model->checkifexitscha(trim($this->input->post('cha_name')));
+            if($checkifexitscha > 0){
+                $save_cha_response['status'] = 'failure';
+                $save_cha_response['error'] = array('cha_name'=>'Vendor Alreday Exits');
+            }else{
+                $savechadata = $this->admin_model->saveChadata('',$data);
+                if($savechadata){
+                    $save_cha_response['status'] = 'success';
+                    $save_cha_response['error'] = array('cha_name'=>'', 'landline'=>'', 'address'=>'', 'phone_1'=>'','contact_person'=>'','mobile'=>'','email'=>'','mobile_2'=>'','fax'=>'','GSTIN'=>'');
+                }
+            }
+        }
+        echo json_encode($save_cha_response);
+    }else{
+        $process = 'Add New CHA Master';
+        $processFunction = 'Admin/addnewCha';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Add New CHA Master';
+        $this->loadViews("masters/addnewCha", $this->global, NULL, NULL);
+    }
+}
+
+
+public function deletecha(){
+    $post_submit = $this->input->post();
+    if($post_submit){
+        $result = $this->admin_model->deletecha(trim($this->input->post('id')));
+        if ($result) {
+                    $process = 'CHA Delete';
+                    $processFunction = 'Admin/deletecha';
+                    $this->logrecord($process,$processFunction);
+                echo(json_encode(array('status'=>'success')));
+            }
+        else { echo(json_encode(array('status'=>'failed'))); }
+    }else{
+        echo(json_encode(array('status'=>'failed'))); 
+    }
+}
+
+
+
+public function updatecha($id){
+    $post_submit = $this->input->post();
+    if($post_submit){
+
+        $update_cha_response = array();
+
+        $this->form_validation->set_rules('cha_name','CHA Name','trim|required|max_length[128]');
+        $this->form_validation->set_rules('landline','Landline','trim|numeric|max_length[128]');
+        $this->form_validation->set_rules('address','Address','trim|required');
+        $this->form_validation->set_rules('phone_1','Phone 1','trim|numeric|max_length[50]');
+        $this->form_validation->set_rules('contact_person','Contact Person','trim|max_length[50]');
+        $this->form_validation->set_rules('mobile','Mobile','trim|required|numeric|max_length[50]');
+        $this->form_validation->set_rules('email','Email','trim|required|valid_email|max_length[50]');
+        $this->form_validation->set_rules('mobile_2','Mobile 2','trim|numeric|max_length[50]');
+        $this->form_validation->set_rules('fax','Fax','trim|max_length[50]');
+        $this->form_validation->set_rules('GSTIN','GSTIN','trim|max_length[50]');
+
+        if($this->form_validation->run() == FALSE)
+        {
+            $update_cha_response['status'] = 'failure';
+            $update_cha_response['error'] = array('cha_name'=>strip_tags(form_error('cha_name')), 'landline'=>strip_tags(form_error('landline')), 'address'=>strip_tags(form_error('address')), 'phone_1'=>strip_tags(form_error('phone_1')),'contact_person'=>strip_tags(form_error('contact_person')),'mobile'=>strip_tags(form_error('mobile')),'email'=>strip_tags(form_error('email')),'mobile_2'=>strip_tags(form_error('mobile_2')),'fax'=>strip_tags(form_error('fax')),'GSTIN'=>strip_tags(form_error('GSTIN')));
+        }else{
+
+            $data = array(
+                'cha_name'   => trim($this->input->post('cha_name')),
+                'landline'     => trim($this->input->post('landline')),
+                'address'    => trim($this->input->post('address')),
+                'phone1'  => trim($this->input->post('phone_1')),
+                'contact_person' => trim($this->input->post('contact_person')),
+                'mobile' =>   trim($this->input->post('mobile')),
+                'email' =>    trim($this->input->post('email')),
+                'mobile2' =>    trim($this->input->post('mobile_2')),
+                'fax' =>    trim($this->input->post('fax')),
+                'GSTIN' =>    trim($this->input->post('GSTIN'))
+            );
+
+            $checkifexitchaupdate = $this->admin_model->checkifexitchaupdate(trim($this->input->post('cha_id')),trim($this->input->post('cha_name')));
+
+            if($checkifexitchaupdate > 0){
+                $updateCHAdata = $this->admin_model->saveChadata(trim($this->input->post('cha_id')),$data);
+                if($updateCHAdata){
+                    $update_cha_response['status'] = 'success';
+                    $update_cha_response['error'] = array('cha_name'=>'', 'landline'=>'', 'address'=>'', 'phone_1'=>'','contact_person'=>'','mobile'=>'','email'=>'','mobile_2'=>'','fax'=>'','GSTIN'=>'');
+                }
+
+            }else{
+
+                $checkifexitscha = $this->admin_model->checkifexitscha(trim($this->input->post('cha_name')));
+                if($checkifexitscha > 0){
+                    $update_cha_response['status'] = 'failure';
+                    $update_cha_response['error'] = array('cha_name'=>'CHA Alreday Exits');
+                }else{
+                    $updateCHAdata = $this->admin_model->saveChadata(trim($this->input->post('cha_id')),$data);
+                    if($updateCHAdata){
+                       $update_cha_response['status'] = 'success';
+                       $update_cha_response['error'] = array('cha_name'=>'', 'landline'=>'', 'address'=>'', 'phone_1'=>'','contact_person'=>'','mobile'=>'','email'=>'','mobile_2'=>'','fax'=>'','GSTIN'=>'');
+                    }
+
+                }
+            }
+       
+        }
+        echo json_encode($update_cha_response);
+    }else{
+        $process = 'Edit CHA Master';
+        $processFunction = 'Admin/updateCha';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Edit CHA Master';
+        $data['getChadata'] = $this->admin_model->getChadataforedit($id);
+        $this->loadViews("masters/updateCha", $this->global, $data, NULL);
+
+    }
+
  }
 
 
 
 
 }
+
