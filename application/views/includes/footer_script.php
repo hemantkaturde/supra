@@ -19352,6 +19352,182 @@
 				}
 			});
 		});
+</script>
+<?php } ?>
 
+
+
+<?php if($pageTitle=='Sales Tracking Report' || $pageTitle=='Add New Sales Tracking Report' || $pageTitle=='Edit New Sales Tracking Report'){ ?>
+<script type="text/javascript">
+		$(document).ready(function() {
+				var dt = $('#view_sales_tracking_report').DataTable({
+					"columnDefs": [ 
+						{ className: "details-control", "targets": [ 0 ] },
+						{ "width": "10%", "targets": 0 },
+						{ "width": "10%", "targets": 1 },
+						{ "width": "10%", "targets": 2 },
+						{ "width": "10%", "targets": 3 },
+						{ "width": "10%", "targets": 4 },
+						{ "width": "10%", "targets": 5 },
+						{ "width": "10%", "targets": 6 },
+						{ "width": "10%", "targets": 7 },
+						{ "width": "10%", "targets": 8 },
+						{ "width": "10%", "targets": 9 },
+						{ "width": "10%", "targets": 10},
+						{ "width": "10%", "targets": 11},
+					],
+					responsive: true,
+					"oLanguage": {
+						"sEmptyTable": "<i>No Seles Tracking Report Found.</i>",
+					}, 
+					"bSort" : false,
+					"bFilter":true,
+					"bLengthChange": true,
+					"iDisplayLength": 10,   
+					"bProcessing": true,
+					"serverSide": true,
+					"ajax":{
+						url :"<?php echo base_url();?>fetchsalestrackingReport",
+						type: "post",
+					},
+				});
+		});
+
+		$(document).on('click','#savenewcha',function(e){
+				e.preventDefault();
+				$(".loader_ajax").show();
+				var formData = new FormData($("#addnewchaform")[0]);
+
+				$.ajax({
+					url : "<?php echo base_url();?>addnewCha",
+					type: "POST",
+					data : formData,
+					cache: false,
+					contentType: false,
+					processData: false,
+					success: function(data, textStatus, jqXHR)
+					{
+						var fetchResponse = $.parseJSON(data);
+						if(fetchResponse.status == "failure")
+						{
+							$.each(fetchResponse.error, function (i, v)
+							{
+								$('.'+i+'_error').html(v);
+							});
+							$(".loader_ajax").hide();
+						}
+						else if(fetchResponse.status == 'success')
+						{
+							swal({
+								title: "Success",
+								text: "CHA Successfully Added!",
+								icon: "success",
+								button: "Ok",
+								},function(){ 
+									window.location.href = "<?php echo base_url().'chamaster'?>";
+							});		
+						}
+						
+					},
+					error: function (jqXHR, textStatus, errorThrown)
+					{
+					$(".loader_ajax").hide();
+					}
+				});
+				return false;
+		});
+
+		$(document).on('click','#updatecha',function(e){
+				e.preventDefault();
+				$(".loader_ajax").show();
+				var formData = new FormData($("#updatechaform")[0]);
+				var cha_id = $("#cha_id").val();
+				$.ajax({
+					url : "<?php echo base_url();?>updatecha/"+cha_id,
+					type: "POST",
+					data : formData,
+					cache: false,
+					contentType: false,
+					processData: false,
+					success: function(data, textStatus, jqXHR)
+					{
+						var fetchResponse = $.parseJSON(data);
+						if(fetchResponse.status == "failure")
+						{
+							$.each(fetchResponse.error, function (i, v)
+							{
+								$('.'+i+'_error').html(v);
+							});
+							$(".loader_ajax").hide();
+						}
+						else if(fetchResponse.status == 'success')
+						{
+							swal({
+								title: "Success",
+								text: "CHA Successfully Updated!",
+								icon: "success",
+								button: "Ok",
+								},function(){ 
+									window.location.href = "<?php echo base_url().'chamaster'?>";
+							});		
+						}
+						
+					},
+					error: function (jqXHR, textStatus, errorThrown)
+					{
+					$(".loader_ajax").hide();
+					}
+				});
+				return false;
+		});
+
+		$(document).on('click','.deletecha',function(e){
+			var elemF = $(this);
+			e.preventDefault();
+
+			swal({
+				title: "Are you sure?",
+				text: "Delete Vendor",
+				type: "warning",
+				showCancelButton: true,
+				closeOnClickOutside: false,
+				confirmButtonClass: "btn-sm btn-danger",
+				confirmButtonText: "Yes, delete it!",
+				cancelButtonText: "No, cancel plz!",
+				closeOnConfirm: false,
+				closeOnCancel: false
+			}, function(isConfirm) {
+				if (isConfirm) {
+							$.ajax({
+								url : "<?php echo base_url();?>deletecha",
+								type: "POST",
+								data : 'id='+elemF.attr('data-id'),
+								success: function(data, textStatus, jqXHR)
+								{
+									const obj = JSON.parse(data);
+								
+									if(obj.status=='success'){
+										swal({
+											title: "Deleted!",
+											text: "CHA Deleted Succesfully",
+											icon: "success",
+											button: "Ok",
+											},function(){ 
+												window.location.href = "<?php echo base_url().'chamaster'?>";
+										});	
+									}
+
+								},
+								error: function (jqXHR, textStatus, errorThrown)
+								{
+									$(".loader_ajax").hide();
+								}
+							})
+						}
+						else {
+				swal("Cancelled", "CHA deletion cancelled ", "error");
+				}
+			});
+		});
 </script>
 <?php } ?>

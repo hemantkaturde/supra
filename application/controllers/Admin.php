@@ -11984,8 +11984,61 @@ public function updatecha($id){
 
     }
 
- }
+}
 
+
+public function salestrackingreport(){
+    $process = 'Sales Tracking Report';
+    $processFunction = 'Admin/salestrackingreport';
+    $this->logrecord($process,$processFunction);
+    $this->global['pageTitle'] = 'Sales Tracking Report';
+    $this->loadViews("masters/salestrackingreport", $this->global, $data, NULL);
+}
+
+
+
+public function fetchsalestrackingReport(){
+    $params = $_REQUEST;
+    $totalRecords = $this->admin_model->getfetchsalestrackingReportcount($params); 
+    $queryRecords = $this->admin_model->getfetchsalestrackingReportdata($params); 
+
+    $data = array();
+    foreach ($queryRecords as $key => $value)
+    {
+        $i = 0;
+        foreach($value as $v)
+        {
+            $data[$key][$i] = $v;
+            $i++;
+        }
+    }
+    $json_data = array(
+        "draw"            => intval( $params['draw'] ),   
+        "recordsTotal"    => intval( $totalRecords ),  
+        "recordsFiltered" => intval($totalRecords),
+        "data"            => $data   // total data array
+        );
+    echo json_encode($json_data);
+}
+
+
+
+// foreach ($variable as $key => $value) {
+ 
+//     $retVal = (condition) ? a : b ;
+
+  
+//      if($and == $v)
+//      {
+
+
+//          $ATUAL_Val = 500;  
+
+
+//      }
+  
+//     # code...
+// }
 
 
 

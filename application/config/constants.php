@@ -168,3 +168,4 @@ define('TBL_PREEXPORT','tbl_preexport');
 define('TBL_PREEXPORT_ITEM_DETAILS','tbl_preexport_item_details');
 define('TBL_PREEXPORT_ITEM_ATTRIBUTES','tbl_pre_export_item_attribute');
 define('TBL_CHA_MASTER','tbl_cha');
+define('TBL_CHA_MASTER','tbl_cha');
