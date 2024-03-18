@@ -33,7 +33,7 @@
                                         <th>Address</th>
                                         <th>Email</th>
                                         <th>Landline</th>
-                                        <th>Phone 1</th>
+                                        <th>Mobile No</th>
                                         <!-- <th>Mobile 1</th>
                                         <th>Mobile 2</th> -->
                                         <th>Contact Person</th>
