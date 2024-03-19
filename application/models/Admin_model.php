@@ -10387,11 +10387,11 @@ public function getpreexportdata($params){
             $sum_of_export = $this->getSumetionofpreexportallrows($value['export_id']);
 
             if($sum_of_export){
-             $total_gross_weight =  $sum_of_export['total_gross_weight'] + $value['total_weight_of_pallets'];
-             $total_net_weight =  $sum_of_export['total_net_weight'];
-             $total_item_net_weight =  $sum_of_export['total_item_net_weight'];
+             $total_gross_weight =  round($sum_of_export['total_gross_weight'] + $value['total_weight_of_pallets'],3);
+             $total_net_weight =  round($sum_of_export['total_net_weight'],3);
+             $total_item_net_weight =  round($sum_of_export['total_item_net_weight'],3);
              $total_no_of_carttons =  $sum_of_export['no_of_cartoons'];
-             $total_gross_only= $sum_of_export['total_gross_weight'];
+             $total_gross_only= round($sum_of_export['total_gross_weight'],3);
 
             }else{
 
@@ -10402,11 +10402,9 @@ public function getpreexportdata($params){
                 $total_gross_only='';
             }
 
-            $data[$counter]['total_net_weight_of_shipment'] = round($total_net_weight,3);
-            
-            $data[$counter]['total_gross_only'] = round($total_gross_only,3);
-
-            $data[$counter]['total_gross_shipment_weight'] = round($total_gross_weight,3);
+            $data[$counter]['total_net_weight_of_shipment'] = $total_net_weight;
+            $data[$counter]['total_gross_only'] = $total_gross_only;
+            $data[$counter]['total_gross_shipment_weight'] = $total_gross_weight;
             $data[$counter]['total_no_of_carttons'] =  $total_no_of_carttons;
 
             $data[$counter]['remark'] =$value['preexportremark'];
