@@ -10391,6 +10391,7 @@ public function getpreexportdata($params){
              $total_net_weight =  $sum_of_export['total_net_weight'];
              $total_item_net_weight =  $sum_of_export['total_item_net_weight'];
              $total_no_of_carttons =  $sum_of_export['no_of_cartoons'];
+             $total_gross_only= $sum_of_export['total_gross_weight'];
 
             }else{
 
@@ -10398,9 +10399,13 @@ public function getpreexportdata($params){
                 $total_net_weight =  '';
                 $total_item_net_weight =  '';
                 $total_no_of_carttons =  '';
+                $total_gross_only='';
             }
 
-            $data[$counter]['total_net_weight_of_shipment'] = $total_net_weight;
+            $data[$counter]['total_net_weight_of_shipment'] = round($total_net_weight,3);
+            
+            $data[$counter]['total_gross_only'] = round($total_gross_only);
+
             $data[$counter]['total_gross_shipment_weight'] = $total_gross_weight;
             $data[$counter]['total_no_of_carttons'] =  $total_no_of_carttons;
 
