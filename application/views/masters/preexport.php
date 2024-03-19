@@ -37,6 +37,7 @@
                                         <th>Total Gross Weight (in Kgs)</th>
                                         <th>Total Gross Weight + Total Weight of Pallets (in Kgs)</th>
                                         <th>Total No of cartoons</th>
+                                        <th>Total No of Pallets</th>
                                         <th>Remark</th>
                                         <th>Action</th>
                                     </tr>

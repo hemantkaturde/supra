@@ -10406,6 +10406,8 @@ public function getpreexportdata($params){
             $data[$counter]['total_gross_only'] = $total_gross_only;
             $data[$counter]['total_gross_shipment_weight'] = $total_gross_weight;
             $data[$counter]['total_no_of_carttons'] =  $total_no_of_carttons;
+            $data[$counter]['total_no_of_pallets'] =  $value['total_no_of_pallets'];
+
 
             $data[$counter]['remark'] =$value['preexportremark'];
             $data[$counter]['action'] ='';
