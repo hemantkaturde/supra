@@ -9829,15 +9829,15 @@ class Admin_model extends CI_Model
 
         if($params['search']['value'] != "") 
         {
-            $this->db->where("(".TBL_COMPLAIN_FORM.".blasting_id LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_COMPLAIN_FORM.".date LIKE '%".$params['search']['value']."%'");
             $this->db->where("(".TBL_COMPLAIN_FORM.".report_no LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_COMPLAIN_FORM.".stage LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_COMPLAIN_FORM.".date_of_observation_rejection_found LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_COMPLAIN_FORM.".drawing_no_rev_no LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_COMPLAIN_FORM.".challan_no LIKE '%".$params['search']['value']."%'");
+
             $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_COMPLAIN_FORM.".challan_no LIKE '%".$params['search']['value']."%'");
+
             $this->db->or_where(TBL_COMPLAIN_FORM.".inword_no LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_COMPLAIN_FORM.".po_no_wo_no LIKE '%".$params['search']['value']."%')");
         }
