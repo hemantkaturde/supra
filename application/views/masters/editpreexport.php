@@ -115,7 +115,7 @@
 
 
 
-                                <div class="row">
+                                <!-- <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                                 <label for="pallet_1">Pallet 1 </label>
@@ -132,7 +132,7 @@
                                                 <input type="text" class="form-control" value="<?=$getexportdetailsforedit[0]['pallet_2']?>"  id="pallet_2" name="pallet_2">
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
 
 
                                 <div class="row">

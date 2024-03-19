@@ -273,7 +273,8 @@ class Admin_model extends CI_Model
             $this->db->where("(".TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_VENDOR.".address LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_VENDOR.".landline LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_VENDOR.".phone1 LIKE '%".$params['search']['value']."%'");
+            // $this->db->or_where(TBL_VENDOR.".phone1 LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".mobile LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_VENDOR.".contact_person LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_VENDOR.".email LIKE '%".$params['search']['value']."%')");
         }
@@ -292,7 +293,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['address'] =  $value['address'];
                 $data[$counter]['email'] =  $value['email'];
                 $data[$counter]['landline'] = $value['landline'];
-                $data[$counter]['phone1'] =  $value['phone1'];
+                $data[$counter]['phone1'] =  $value['mobile'];
                 $data[$counter]['contact_person'] =  $value['contact_person'];
                 $data[$counter]['action'] = '';
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."updateVendor/".$value['ven_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";
@@ -10806,7 +10807,7 @@ public function getCHAdata($params){
         $this->db->where("(".TBL_CHA_MASTER.".cha_name LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_CHA_MASTER.".address LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_CHA_MASTER.".landline LIKE '%".$params['search']['value']."%'");
-        $this->db->or_where(TBL_CHA_MASTER.".phone1 LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_CHA_MASTER.".mobile LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_CHA_MASTER.".contact_person LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_CHA_MASTER.".email LIKE '%".$params['search']['value']."%')");
     }
@@ -10825,7 +10826,7 @@ public function getCHAdata($params){
             $data[$counter]['address'] =  $value['address'];
             $data[$counter]['email'] =  $value['email'];
             $data[$counter]['landline'] = $value['landline'];
-            $data[$counter]['phone1'] =  $value['phone1'];
+            $data[$counter]['phone1'] =  $value['mobile'];
             $data[$counter]['contact_person'] =  $value['contact_person'];
             $data[$counter]['action'] = '';
             $data[$counter]['action'] .= "<a href='".ADMIN_PATH."updatecha/".$value['cha_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";
