@@ -33,9 +33,9 @@
                                         <th>Date</th>
                                         <th>Buyer Name</th>
                                         <th>Buyer PO</th>
-                                        <th>Total Net Weight Of Shipment</th>
-                                        <th>Total Gross Weight</th>
-                                        <th>Total Gross Weight + Total Weight of Pallets</th>
+                                        <th>Total Net Weight Of Shipment (in Kgs)</th>
+                                        <th>Total Gross Weight (in Kgs)</th>
+                                        <th>Total Gross Weight + Total Weight of Pallets (in Kgs)</th>
                                         <th>Total No of cartoons</th>
                                         <th>Remark</th>
                                         <th>Action</th>
