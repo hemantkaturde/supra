@@ -10388,12 +10388,21 @@ public function getpreexportdata($params){
             $sum_of_export = $this->getSumetionofpreexportallrows($value['export_id']);
 
             if($sum_of_export){
-             $total_gross_weight =  round(floatval($sum_of_export['total_gross_weight']) + floatval($value['total_weight_of_pallets']),3);
+
+                if($sum_of_export['total_gross_weight']){
+                    $total_gross_weight =  round(floatval($sum_of_export['total_gross_weight']) + floatval($value['total_weight_of_pallets']),3);
+                    $total_gross_only= round($sum_of_export['total_gross_weight'],3);
+
+                }else{
+                    $total_gross_weight = '';
+                    $total_gross_only=  '';
+                }
+
+            
              $total_net_weight =  round($sum_of_export['total_net_weight'],3);
              $total_item_net_weight =  round($sum_of_export['total_item_net_weight'],3);
              $total_no_of_carttons =  $sum_of_export['no_of_cartoons'];
-             $total_gross_only= round($sum_of_export['total_gross_weight'],3);
-
+            
             }else{
 
                 $total_gross_weight =  '';
