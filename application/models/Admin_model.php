@@ -3584,7 +3584,7 @@ class Admin_model extends CI_Model
         }
     }
 
-    public function getPackinginstractionCount(){
+    public function getPackinginstractionCount($params){
 
         $this->db->select('*');
 
@@ -3603,7 +3603,7 @@ class Admin_model extends CI_Model
 
     }
 
-    public function getPackinginstractiondata(){
+    public function getPackinginstractiondata($params){
 
         $this->db->select('*,'.TBL_BUYER_MASTER.'.buyer_name as buyer_name_master,'.TBL_PACKING_INSTRACTION.'.id as packinginstarctionid,'.TBL_BUYER_PO_MASTER.'.id as buyerpoid'); 
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_PACKING_INSTRACTION.'.buyer_name');
