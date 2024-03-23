@@ -10813,7 +10813,7 @@ public function getSumetionofpreexportallrows($pre_export_id){
     $this->db->select('sum(total_gross_weight) as total_gross_weight,sum(total_net_weight) as total_net_weight,sum(total_item_net_weight) as total_item_net_weight,sum(no_of_cartoons) as no_of_cartoons');
     $this->db->join(TBL_PREEXPORT_ITEM_DETAILS, TBL_PREEXPORT_ITEM_DETAILS.'.id = '.TBL_PREEXPORT_ITEM_ATTRIBUTES.'.pre_export_item_id');
     $this->db->where(TBL_PREEXPORT_ITEM_DETAILS.'.pre_export_id',$pre_export_id);
-    $this->db->group_by(TBL_PREEXPORT_ITEM_ATTRIBUTES.'.pre_export_item_id');
+    //$this->db->group_by(TBL_PREEXPORT_ITEM_ATTRIBUTES.'.pre_export_item_id');
     $query = $this->db->get(TBL_PREEXPORT_ITEM_ATTRIBUTES);
     $fetch_result = $query->row_array();
     return $fetch_result;
