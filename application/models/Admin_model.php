@@ -3722,8 +3722,10 @@ class Admin_model extends CI_Model
     public function getbuyeritemdetails($buyer_po_number){
         
         $this->db->select('*,'.TBL_FINISHED_GOODS.'.fin_id as item_details,'.TBL_BUYER_PO_MASTER_ITEM.'.id as poitemid');
+        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
-        $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id',$buyer_po_number);
+        // $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id',$buyer_po_number);
+        $this->db->where(TBL_BUYER_PO_MASTER.'.id',$buyer_po_number);
         $query = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
         $data = $query->result_array();
         return $data;
