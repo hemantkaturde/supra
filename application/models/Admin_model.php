@@ -10557,11 +10557,11 @@ public function getpreexportitemdetailsdata($params,$id){
               $preexportitemid =  $this->getSumetionofpreexportattributes($value['preexportitemid']);
 
               if($preexportitemid){
-                $total_gross_weight = $preexportitemid['total_gross_weight'];
+                $total_gross_weight = round($preexportitemid['total_gross_weight'],3);
                 $no_of_cartoons = $preexportitemid['no_of_cartoons'];
                 $per_box_PCS = $preexportitemid['per_box_PCS'];
                 $total_qty = $preexportitemid['total_qty'];
-                $total_net_weight = $preexportitemid['total_net_weight'];
+                $total_net_weight = round($preexportitemid['total_net_weight'],3);
 
               }else{
                 $total_gross_weight=0;
@@ -10700,12 +10700,31 @@ public function getpreexportitemdetailsattributedata($params,$id){
     {
         foreach ($fetch_result as $key => $value)
         {
-            $data[$counter]['gross_per_box_weight'] =$value['gross_per_box_weight'];
+
+            if($value['gross_per_box_weight']){
+              $gross_per_box_weight =  $value['gross_per_box_weight'];
+            }else{
+              $gross_per_box_weight = '';
+            }
+
+            if($value['total_gross_weight']){
+                $total_gross_weight =  $value['total_gross_weight'];
+            }else{
+                $total_gross_weight = '';
+            }
+
+            if($value['total_net_weight']){
+                $total_net_weight =  $value['total_net_weight'];
+            }else{
+                $total_net_weight = '';
+            }
+
+            $data[$counter]['gross_per_box_weight'] =round($gross_per_box_weight,3);
             $data[$counter]['no_of_cartoons'] =$value['no_of_cartoons'];
-            $data[$counter]['total_gross_weight'] =$value['total_gross_weight'];
+            $data[$counter]['total_gross_weight'] =round($total_gross_weight,3);
             $data[$counter]['per_box_PCS'] =$value['per_box_PCS'];
             $data[$counter]['total_qty'] =$value['total_qty'];
-            $data[$counter]['total_net_weight'] =$value['total_net_weight'];
+            $data[$counter]['total_net_weight'] =$total_net_weight;
             //$data[$counter]['remark'] ='';
             $data[$counter]['action'] ='';
             $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editexportitemdetailswithattributesvalues/".$value['id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
