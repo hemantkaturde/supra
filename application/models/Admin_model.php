@@ -10460,7 +10460,18 @@ public function deletepreexport($id){
     $this->db->where('id ', $id);
     //$this->db->delete(TBL_SUPPLIER);
     if($this->db->delete(TBL_PREEXPORT)){
-      return TRUE;
+        $this->db->where('pre_export_id ', $id);
+        if($this->db->delete(TBL_PREEXPORT_ITEM_DETAILS)){
+            $this->db->where('main_export_id ', $id);
+            if($this->db->delete(TBL_PREEXPORT_ITEM_ATTRIBUTES)){
+                return TRUE;
+            }else{
+                return FALSE;
+            }
+
+        }else{
+            return FALSE;
+        }
     }else{
        return FALSE;
     }
@@ -10627,7 +10638,12 @@ public function deletepreexportitemdetails($id){
     $this->db->where('id ', $id);
     //$this->db->delete(TBL_SUPPLIER);
     if($this->db->delete(TBL_PREEXPORT_ITEM_DETAILS)){
-      return TRUE;
+        $this->db->where('pre_export_item_id ', $id);
+        if($this->db->delete(TBL_PREEXPORT_ITEM_ATTRIBUTES)){
+            return TRUE;
+        }else{
+            return FALSE;
+        }
     }else{
        return FALSE;
     }

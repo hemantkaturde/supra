@@ -11719,6 +11719,7 @@ public function addexportitemdetailswithattributesvalues($id){
 
             $data = array(
                 'pre_export_item_id'=>$this->input->post('preexportitemdetailsid'),
+                'main_export_id'=>$this->input->post('main_export_id'),
                 'gross_per_box_weight'=>$this->input->post('gross_per_box_weight'),
                 'no_of_cartoons'=>$this->input->post('no_of_cartoons'),
                 'per_box_PCS' => $this->input->post('per_boc_pcs'),
