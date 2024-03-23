@@ -9559,7 +9559,7 @@
 					"bSort" : false,
 					"bFilter":true,
 					"bLengthChange": true,
-					"iDisplayLength": 5,   
+					"iDisplayLength": 10,   
 					"bProcessing": true,
 					"serverSide": true,
 					"ajax":{
