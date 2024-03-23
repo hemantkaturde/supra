@@ -5618,9 +5618,7 @@ class Admin extends BaseController
         $packinginstarctionid=  $this->admin_model->getpackinginstarction_data_by_id(trim($packinginstarctionid));
         $buyer_po_number = $packinginstarctionid[0]['buyerpoid'];
 
-        print_r($buyer_po_number);
-        exit;
-
+    
         $main_id = $packinginstarctionid[0]['main_id'];
 
 
