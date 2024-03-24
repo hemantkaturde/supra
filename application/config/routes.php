@@ -450,6 +450,8 @@ $route['deletecha'] = "admin/deletecha";
 
 $route['salestrackingreport'] = "admin/salestrackingreport";
 $route['fetchsalestrackingReport'] = "admin/fetchsalestrackingReport";
+$route['addsalestrackingreport'] = "admin/addsalestrackingreport";
+
 
 
 

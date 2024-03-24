@@ -10956,18 +10956,8 @@ public function checkifexitchaupdate($id,$vendor){
 public function getfetchsalestrackingReportcount($params){
 
     $this->db->select('*');
-    if($params['search']['value'] != "") 
-    {
-        $this->db->where("(".TBL_CHA_MASTER.".cha_name LIKE '%".$params['search']['value']."%'");
-        $this->db->or_where(TBL_CHA_MASTER.".address LIKE '%".$params['search']['value']."%'");
-        $this->db->or_where(TBL_CHA_MASTER.".landline LIKE '%".$params['search']['value']."%'");
-        $this->db->or_where(TBL_CHA_MASTER.".phone1 LIKE '%".$params['search']['value']."%'");
-        $this->db->or_where(TBL_CHA_MASTER.".contact_person LIKE '%".$params['search']['value']."%'");
-        $this->db->or_where(TBL_CHA_MASTER.".email LIKE '%".$params['search']['value']."%')");
-    }
-
-    $this->db->where(TBL_CHA_MASTER.'.status', 1);
-    $query = $this->db->get(TBL_CHA_MASTER);
+    $this->db->where(TBL_SALES_TRACKING_REPORT.'.status', 1);
+    $query = $this->db->get(TBL_SALES_TRACKING_REPORT);
     $rowcount = $query->num_rows();
     return $rowcount;
 }
@@ -10975,19 +10965,10 @@ public function getfetchsalestrackingReportcount($params){
 public function getfetchsalestrackingReportdata($params){
 
     $this->db->select('*');
-    // if($params['search']['value'] != "") 
-    // {
-    //     $this->db->where("(".TBL_CHA_MASTER.".cha_name LIKE '%".$params['search']['value']."%'");
-    //     $this->db->or_where(TBL_CHA_MASTER.".address LIKE '%".$params['search']['value']."%'");
-    //     $this->db->or_where(TBL_CHA_MASTER.".landline LIKE '%".$params['search']['value']."%'");
-    //     $this->db->or_where(TBL_CHA_MASTER.".phone1 LIKE '%".$params['search']['value']."%'");
-    //     $this->db->or_where(TBL_CHA_MASTER.".contact_person LIKE '%".$params['search']['value']."%'");
-    //     $this->db->or_where(TBL_CHA_MASTER.".email LIKE '%".$params['search']['value']."%')");
-    // }
-    $this->db->where(TBL_CHA_MASTER.'.status', 1);
+    $this->db->where(TBL_SALES_TRACKING_REPORT.'.status', 1);
     $this->db->limit($params['length'],$params['start']);
-    $this->db->order_by(TBL_CHA_MASTER.'.cha_id','DESC');
-    $query = $this->db->get(TBL_CHA_MASTER);
+    $this->db->order_by(TBL_SALES_TRACKING_REPORT.'.id','DESC');
+    $query = $this->db->get(TBL_SALES_TRACKING_REPORT);
     $fetch_result = $query->result_array();
     $data = array();
     $counter = 0;
@@ -10995,12 +10976,16 @@ public function getfetchsalestrackingReportdata($params){
     {
         foreach ($fetch_result as $key => $value)
         {
-            $data[$counter]['cha_name'] = $value['cha_name'];
-            $data[$counter]['address'] =  $value['address'];
-            $data[$counter]['email'] =  $value['email'];
-            $data[$counter]['landline'] = $value['landline'];
-            $data[$counter]['phone1'] =  $value['phone1'];
-            $data[$counter]['contact_person'] =  $value['contact_person'];
+            $data[$counter]['sales_tracking_number'] = $value['sales_tracking_number'];
+            $data[$counter]['CHA_forwarder'] =  $value['CHA_forwarder'];
+            $data[$counter]['clearance_done_by'] =  $value['clearance_done_by'];
+            $data[$counter]['mode_of_shipment'] = $value['mode_of_shipment'];
+            $data[$counter]['payment_terms'] =  $value['payment_terms'];
+            $data[$counter]['inv_amount'] =  $value['inv_amount'];
+            $data[$counter]['igst_value'] =  $value['igst_value'];
+            $data[$counter]['igst_rcved_amt'] =  $value['igst_rcved_amt'];
+            $data[$counter]['igst_rcved_date'] =  $value['igst_rcved_date'];
+            $data[$counter]['no_of_ctns'] =  $value['no_of_ctns'];
             $data[$counter]['action'] = '';
             $data[$counter]['action'] .= "<a href='".ADMIN_PATH."updatecha/".$value['cha_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";
             $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['cha_id']."' class='fa fa-trash-o deletecha' aria-hidden='true'></i>"; 

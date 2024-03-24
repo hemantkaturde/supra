@@ -19376,7 +19376,6 @@
 						{ "width": "10%", "targets": 8 },
 						{ "width": "10%", "targets": 9 },
 						{ "width": "10%", "targets": 10},
-						{ "width": "10%", "targets": 11},
 					],
 					responsive: true,
 					"oLanguage": {
@@ -19395,7 +19394,7 @@
 				});
 		});
 
-		$(document).on('click','#savenewcha',function(e){
+		$(document).on('click','#savenewsalestracking',function(e){
 				e.preventDefault();
 				$(".loader_ajax").show();
 				var formData = new FormData($("#addnewchaform")[0]);
