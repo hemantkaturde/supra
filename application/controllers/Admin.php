@@ -10194,7 +10194,7 @@ public function downlaodsupplierpo($id){
 
             <table style=" width: 100%;text-align: left;border-collapse: collapse;font-family:arial;border: #ccc 1px solid">
                 <tr style="border: 1px solid black;">
-                    <td width="50%">
+                    <td width="50%" margin-left: 10%;>
                         <div>
                             <p>&nbsp;To,</p>
                             <p>&nbsp;'.$getsupplierdeatilsForInvoice['supplier_name'].'</p>
@@ -10221,9 +10221,9 @@ public function downlaodsupplierpo($id){
 
             <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:arial;">
                 <tr style="border: 1px solid black;">
-                    <th align="left" style="border: 1px solid black;">NEED TEST CERTIFICATE</th>
-                    <th align="left" style="border: 1px solid black;">DELIVERY DATE</th>
-                    <th align="left" style="border: 1px solid black;">PAYMENT TERMS</th>    
+                    <th align="left" style="border: 1px solid black;" margin-bottom: 10%;>NEED TEST CERTIFICATE</th>
+                    <th align="left" style="border: 1px solid black;" margin-bottom: 10%;>DELIVERY DATE</th>
+                    <th align="left" style="border: 1px solid black;" margin-bottom: 10%;>PAYMENT TERMS</th>    
                 </tr>
                 <tr style="border: 1px solid black;">
                     <td style="border: 1px solid black;"></td>
@@ -10235,13 +10235,13 @@ public function downlaodsupplierpo($id){
 
             <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:arial;">
                 <tr style="border: 1px solid black;">
-                    <th align="left" style="border: 1px solid black;">SR.NO.</th>
-                    <th align="left" style="border: 1px solid black;">PART DESCRIPTION</th>
-                    <th align="left" style="border: 1px solid black;">PART NO.</th>  
-                    <th align="left" style="border: 1px solid black;">QTY</th> 
-                    <th align="left" style="border: 1px solid black;">UNITS</th>  
-                    <th align="left" style="border: 1px solid black;">RATE</th>  
-                    <th align="left"  style="border: 1px solid black;">AMOUNT</th>
+                    <th align="left" style="border: 1px solid black;" margin-bottom: 10%;>SR.NO.</th>
+                    <th align="left" style="border: 1px solid black;" margin-bottom: 10%;>PART DESCRIPTION</th>
+                    <th align="left" style="border: 1px solid black;" margin-bottom: 10%;>PART NO.</th>  
+                    <th align="left" style="border: 1px solid black;" margin-bottom: 10%;>QTY</th> 
+                    <th align="left" style="border: 1px solid black;" margin-bottom: 10%;>UNITS</th>  
+                    <th align="left" style="border: 1px solid black;" margin-bottom: 10%;>RATE</th>  
+                    <th align="left"  style="border: 1px solid black;" margin-bottom: 10%;>AMOUNT</th>
                 </tr>
                 '.$CartItem.'
 
