@@ -10196,21 +10196,24 @@ public function downlaodsupplierpo($id){
                 <tr style="border: 1px solid black;">
                     <td width="50%">
                         <div>
-                            <p>To,</p>
-                            <p>'.$getsupplierdeatilsForInvoice['supplier_name'].'</p>
-                            <p>'.$getsupplierdeatilsForInvoice['supplier_addess'].'</p>
-                            <p>Contact No:'.$getsupplierdeatilsForInvoice['suplier_landline'].'</p>
-                            <p>Contact Person:'.$getsupplierdeatilsForInvoice['sup_conatct'].'</p>
-                            <p>Email:'.$getsupplierdeatilsForInvoice['sup_email'].'</p>
-                            <p style="color:red">GSTIN:'.$getsupplierdeatilsForInvoice['sup_GSTIN'].'</p>
+                            <p>&nbsp;To,</p>
+                            <p>&nbsp;'.$getsupplierdeatilsForInvoice['supplier_name'].'</p>
+                            <p>&nbsp;'.$getsupplierdeatilsForInvoice['supplier_addess'].'</p>
+                            <p>&nbsp;Contact No:'.$getsupplierdeatilsForInvoice['suplier_landline'].'</p>
+                            <p>&nbsp;Contact Person:'.$getsupplierdeatilsForInvoice['sup_conatct'].'</p>
+                            <p>&nbsp;Email:'.$getsupplierdeatilsForInvoice['sup_email'].'</p>
+                            <p style="color:red">&nbsp;GSTIN:'.$getsupplierdeatilsForInvoice['sup_GSTIN'].'</p>
                         <div>    
                     </td> 
                     <td style="border-left: 1px solid black;" width="50%">
                         <div>
-                            <p>P.O.NO :'.$getsupplierdeatilsForInvoice['po_number'].'</p>
-                            <p>P.O.DATE :'.$getsupplierdeatilsForInvoice['date'].'</p>
-                            <p>QUOTATION REFERENCE :'.$getsupplierdeatilsForInvoice['quatation_ref_no'].'</p>
-                            <p>QUOTATION DATE :'.$getsupplierdeatilsForInvoice['quatation_date'].'</p>
+                            <p>&nbsp;P.O.NO :'.$getsupplierdeatilsForInvoice['po_number'].'</p>
+                            <p>&nbsp;</p>
+                            <p>&nbsp;P.O.DATE :'.$getsupplierdeatilsForInvoice['date'].'</p>
+                            <p>&nbsp;</p>
+                            <p>&nbsp;QUOTATION REFERENCE :'.$getsupplierdeatilsForInvoice['quatation_ref_no'].'</p>
+                            <p>&nbsp;</p>
+                            <p>&nbsp;QUOTATION DATE :'.$getsupplierdeatilsForInvoice['quatation_date'].'</p>
                         </div>
                     </td>
                 </tr>
@@ -10241,7 +10244,39 @@ public function downlaodsupplierpo($id){
                     <th align="left"  style="border: 1px solid black;">AMOUNT</th>
                 </tr>
                 '.$CartItem.'
-            
+
+                <tr style="border-left: 1px solid black;border-right: 1px solid black;">
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
+                </tr>
+
+                <tr style="border-left: 1px solid black;border-right: 1px solid black;">
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
+                </tr>
+        
+
+                <tr style="border-left: 1px solid black;border-right: 1px solid black;">
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
+                </tr>
+    
+        
                 <tr style="border-left: 1px solid black;border-right: 1px solid black;">
                     <td></td>
                     <td><p><b>Delivery Address</b></p>
@@ -10269,7 +10304,7 @@ public function downlaodsupplierpo($id){
             <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:arial;">
                   
                    <tr style="border: 1px solid black;">
-                        <td style="border: 1px solid black;">
+                        <td style="border: 1px solid black;" width="75%">
                             <p><b>NOTE :</b></p>
                             <p>1. Confirmation of PO is Mandatory</p>
                             <p>2. Mentioning P.O.No. on Invoice is Mandatory</b></p>
@@ -10277,10 +10312,13 @@ public function downlaodsupplierpo($id){
                             <p>4. Essence of this order is delivering the specified quality product on time.</p>
                             <p>5. If any Prices issue, should inform in 24hrs after receipt of P.O.</p>
                         </td>
-                        <td style="border: 1px solid black;">
-                          
-                            <p>AUTHORIZED SIGNATORY</p>
-                        </td>    
+                        <td style="border: 1px solid black;text-align: center;" width="25%" valign="top">
+                            <p style="vertical-align: text-top;">FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</p>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <p style="vertical-align: text-top;">AUTHORIZED SIGNATORY</p>
+                        </td> 
                 </tr>
             </table>';
 
