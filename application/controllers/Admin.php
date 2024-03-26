@@ -10173,12 +10173,13 @@ public function downlaodsupplierpo($id){
                           <p><b>Office:</b> 229 to 232, Bharat Industrial Estate, L.B.S. Marg, Bhandup West, Mumbai – 400078. INDIA.
                           <p>Tel: +91 22 66959505 / +91 22 66600196 </p>
                           <p>+91 22 62390222 / +91 22 46061497 / +91 22 35115396 </p>
-                          <p>GSTIN : 27AAJCS7869M1ZB </p>
+                          <p style="color:blue">GSTIN : 27AAJCS7869M1ZB </p>
                         </td>
                         <td>
-                            <p><b>Email:</b> purchase@supraexports.in</p>
-                            <p>purchase1@supraexports.in</p>
-                            <p>purchase2@supraexports.in</p>
+                            <p><b>Email:</b></p> 
+                            <p style="color:blue">purchase@supraexports.in</p>
+                            <p style="color:blue">purchase1@supraexports.in</p>
+                            <p style="color:blue">purchase2@supraexports.in</p>
                         </td>  
                     </tr>
             </table>
@@ -10191,50 +10192,27 @@ public function downlaodsupplierpo($id){
                     </tr>
             </table>
 
-            <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;font-family:arial;">
-                    <tr style="border: 1px solid black;">
-                        <td style="border: 1px solid black;">To </td>
-                        <td style="border: 1px solid black;">'.$getsupplierdeatilsForInvoice['supplier_name'].'</td>
-                    
-                    </tr>
-                    <tr style="border: 1px solid black;">
-                        <td style="border: 1px solid black;">Address </td>
-                        <td style="border: 1px solid black;">'.$getsupplierdeatilsForInvoice['supplier_addess'].'</td>
-                        
-                    </tr>
-                    <tr style="border: 1px solid black;">
-                        <td style="border: 1px solid black;">Contact No </td>
-                        <td style="border: 1px solid black;">'.$getsupplierdeatilsForInvoice['suplier_landline'].'</td>
-                    
-                    </tr>
-                    <tr style="border: 1px solid black;">
-                        <td style="border: 1px solid black;">Contact Person </td>
-                        <td style="border: 1px solid black;">'.$getsupplierdeatilsForInvoice['sup_conatct'].'</td>
-                    
-                    </tr>
-                    <tr style="border: 1px solid black;">
-                        <td style="border: 1px solid black;">Email ID </td>
-                        <td style="border: 1px solid black;">'.$getsupplierdeatilsForInvoice['sup_email'].'</td>
-                    </tr>
-
-                    <tr style="border: 1px solid black;">
-                        <td style="border: 1px solid black;">GSTIN </td>
-                        <td style="border: 1px solid black;">'.$getsupplierdeatilsForInvoice['sup_GSTIN'].'</td>
-                    </tr>
-            </table>
-
-            <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:arial;">
+            <table style=" width: 100%;text-align: left;border-collapse: collapse;font-family:arial;border: #ccc 1px solid">
                 <tr style="border: 1px solid black;">
-                    <th align="left" style="border: 1px solid black;">P.O.NO</th>
-                    <th align="left" style="border: 1px solid black;">P.O.DATE</th>
-                    <th align="left" style="border: 1px solid black;">QUOTATION REFERENCE</th>    
-                    <th align="left" style="border: 1px solid black;">QUOTATION DATE</th>    
-                </tr>
-                <tr style="border: 1px solid black;">
-                    <td style="border: 1px solid black;">'.$getsupplierdeatilsForInvoice['po_number'].'</td>
-                    <td style="border: 1px solid black;">'.$getsupplierdeatilsForInvoice['date'].'</td>    
-                    <td style="border: 1px solid black;">'.$getsupplierdeatilsForInvoice['quatation_ref_no'].'</td>
-                    <td style="border: 1px solid black;">'.$getsupplierdeatilsForInvoice['quatation_date'].'</td>
+                    <td width="50%">
+                        <div>
+                            <p>To,</p>
+                            <p>'.$getsupplierdeatilsForInvoice['supplier_name'].'</p>
+                            <p>'.$getsupplierdeatilsForInvoice['supplier_addess'].'</p>
+                            <p>Contact No:'.$getsupplierdeatilsForInvoice['suplier_landline'].'</p>
+                            <p>Contact Person:'.$getsupplierdeatilsForInvoice['sup_conatct'].'</p>
+                            <p>Email:'.$getsupplierdeatilsForInvoice['sup_email'].'</p>
+                            <p style="color:red">GSTIN:'.$getsupplierdeatilsForInvoice['sup_GSTIN'].'</p>
+                        <div>    
+                    </td> 
+                    <td style="border-left: 1px solid black;" width="50%">
+                        <div>
+                            <p>P.O.NO :'.$getsupplierdeatilsForInvoice['po_number'].'</p>
+                            <p>P.O.DATE :'.$getsupplierdeatilsForInvoice['date'].'</p>
+                            <p>QUOTATION REFERENCE :'.$getsupplierdeatilsForInvoice['quatation_ref_no'].'</p>
+                            <p>QUOTATION DATE :'.$getsupplierdeatilsForInvoice['quatation_date'].'</p>
+                        </div>
+                    </td>
                 </tr>
             </table>
 
@@ -10263,6 +10241,20 @@ public function downlaodsupplierpo($id){
                     <th align="left"  style="border: 1px solid black;">AMOUNT</th>
                 </tr>
                 '.$CartItem.'
+            
+                <tr style="border-left: 1px solid black;border-right: 1px solid black;">
+                    <td></td>
+                    <td><p><b>Delivery Address</b></p>
+                    <p>'.$getsupplierdeatilsForInvoice['vendor_name'].'</p>
+                    <p>'.$getsupplierdeatilsForInvoice['ven_address'].'</p>
+                    <p>'.$getsupplierdeatilsForInvoice['ven_landline'].'</p>
+                    <p>'.$getsupplierdeatilsForInvoice['ven_contact_person'].'</p>
+                    <p>'.$getsupplierdeatilsForInvoice['ven_email'].'</p>
+                    <p>'.$getsupplierdeatilsForInvoice['ven_GSTIN'].'</p>
+                    <td colspan="45"></td>
+                </tr>
+
+
                 <tr style="border: 1px solid black;">
                     <td></td>
                     <td></td>   
@@ -10273,41 +10265,6 @@ public function downlaodsupplierpo($id){
                     <td style="border: 1px solid black;">'.$subtotal.'</td>
                 </tr>
             </table>
-
-
-            <p>Raw Material Delivery</p> 
-            <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;font-family:arial;">
-           
-            <tr style="border: 1px solid black;">
-                <td style="border: 1px solid black;">To </td>
-                <td style="border: 1px solid black;">'.$getsupplierdeatilsForInvoice['vendor_name'].'</td>
-            
-            </tr>
-            <tr style="border: 1px solid black;">
-                <td style="border: 1px solid black;">Address </td>
-                <td style="border: 1px solid black;">'.$getsupplierdeatilsForInvoice['ven_address'].'</td>
-                
-            </tr>
-            <tr style="border: 1px solid black;">
-                <td style="border: 1px solid black;">Contact No </td>
-                <td style="border: 1px solid black;">'.$getsupplierdeatilsForInvoice['ven_landline'].'</td>
-            
-            </tr>
-            <tr style="border: 1px solid black;">
-                <td style="border: 1px solid black;">Contact Person </td>
-                <td style="border: 1px solid black;">'.$getsupplierdeatilsForInvoice['ven_contact_person'].'</td>
-            
-            </tr>
-            <tr style="border: 1px solid black;">
-                <td style="border: 1px solid black;">Email ID </td>
-                <td style="border: 1px solid black;">'.$getsupplierdeatilsForInvoice['ven_email'].'</td>
-            </tr>
-
-            <tr style="border: 1px solid black;">
-                <td style="border: 1px solid black;">GSTIN </td>
-                <td style="border: 1px solid black;">'.$getsupplierdeatilsForInvoice['ven_GSTIN'].'</td>
-            </tr>
-         </table>
 
             <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:arial;">
                   
