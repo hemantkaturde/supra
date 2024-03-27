@@ -10135,14 +10135,14 @@ public function downlaodsupplierpo($id){
     $subtotal = 0;
     foreach ($getsupplierItemdeatilsForInvoice as $key => $value) {
         $CartItem .= '
-                <tr style="border: 1px solid black;">
-                    <td style="border: 1px solid black;">'.$i.'</td>
-                    <td style="border: 1px solid black;">'.$value['type_of_raw_material'].'</td>   
-                    <td style="border: 1px solid black;">'.$value['part_number'].'</td>
-                    <td style="border: 1px solid black;">'.$value['order_oty'].'</td>
-                    <td style="border: 1px solid black;">'.$value['unit'].'</td> 
-                    <td style="border: 1px solid black;">'.$value['rate'].'</td>    
-                    <td style="border: 1px solid black;">'.$value['value'].'</td>
+                <tr style="border-left: 1px solid black;border-right: 1px solid black;">
+                    <td style="border: 1px solid black;text-align:center;padding: 15px;">'.$i.'</td>
+                    <td style="border: 1px solid black;text-align:center;padding: 15px;">'.$value['type_of_raw_material'].'</td>   
+                    <td style="border: 1px solid black;text-align:center;padding: 15px;">'.$value['part_number'].'</td>
+                    <td style="border: 1px solid black;text-align:center;padding: 15px;">'.$value['order_oty'].'</td>
+                    <td style="border: 1px solid black;text-align:center;padding: 15px;">'.$value['unit'].'</td> 
+                    <td style="border: 1px solid black;text-align:center;padding: 15px;">'.$value['rate'].'/-'.'</td>    
+                    <td style="border: 1px solid black;text-align:center;padding: 15px;">'.$value['value'].'/-'.'</td>
                 </tr>';
                 $subtotal+=$value['value'];
             $i++;       
@@ -10167,15 +10167,16 @@ public function downlaodsupplierpo($id){
                 </tr>
             </table>
             <hr>
-            <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 0px solid;font-family:arial;">
+            <table style="width: 100%;text-align: left;border-collapse: collapse;border: #ccc 0px solid;font-family:arial;">
                     <tr>
-                        <td>
-                          <p><b>Office:</b> 229 to 232, Bharat Industrial Estate, L.B.S. Marg, Bhandup West, Mumbai – 400078. INDIA.
+                        <td width="60%">
+                          <p><b>Office:</b> 229 to 232, Bharat Industrial Estate,
+                          <p> L.B.S. Marg, Bhandup West, Mumbai – 400078. INDIA.</b>
                           <p>Tel: +91 22 66959505 / +91 22 66600196 </p>
                           <p>+91 22 62390222 / +91 22 46061497 / +91 22 35115396 </p>
                           <p style="color:blue">GSTIN : 27AAJCS7869M1ZB </p>
                         </td>
-                        <td>
+                        <td width="40%">
                             <p><b>Email:</b></p> 
                             <p style="color:blue">purchase@supraexports.in</p>
                             <p style="color:blue">purchase1@supraexports.in</p>
@@ -10194,26 +10195,26 @@ public function downlaodsupplierpo($id){
 
             <table style=" width: 100%;text-align: left;border-collapse: collapse;font-family:arial;border: #ccc 1px solid">
                 <tr style="border: 1px solid black;">
-                    <td width="50%" margin-left: 10%;>
+                    <td width="50%" style="padding-left: 15px;">
                         <div>
-                            <p>&nbsp;To,</p>
-                            <p>&nbsp;'.$getsupplierdeatilsForInvoice['supplier_name'].'</p>
-                            <p>&nbsp;'.$getsupplierdeatilsForInvoice['supplier_addess'].'</p>
-                            <p>&nbsp;Contact No:'.$getsupplierdeatilsForInvoice['suplier_landline'].'</p>
-                            <p>&nbsp;Contact Person:'.$getsupplierdeatilsForInvoice['sup_conatct'].'</p>
-                            <p>&nbsp;Email:'.$getsupplierdeatilsForInvoice['sup_email'].'</p>
-                            <p style="color:red">&nbsp;GSTIN:'.$getsupplierdeatilsForInvoice['sup_GSTIN'].'</p>
+                            <p>To,</p>
+                            <p>'.$getsupplierdeatilsForInvoice['supplier_name'].'</p>
+                            <p>'.$getsupplierdeatilsForInvoice['supplier_addess'].'</p>
+                            <p>Contact No:'.$getsupplierdeatilsForInvoice['suplier_landline'].'</p>
+                            <p>Contact Person:'.$getsupplierdeatilsForInvoice['sup_conatct'].'</p>
+                            <p>Email:'.$getsupplierdeatilsForInvoice['sup_email'].'</p>
+                            <p style="color:red">GSTIN:'.$getsupplierdeatilsForInvoice['sup_GSTIN'].'</p>
                         <div>    
                     </td> 
-                    <td style="border-left: 1px solid black;" width="50%">
+                    <td style="border-left: 1px solid black;padding-left: 15px;" width="50%" >
                         <div>
-                            <p>&nbsp;P.O.NO :'.$getsupplierdeatilsForInvoice['po_number'].'</p>
+                            <p>P.O.NO :'.$getsupplierdeatilsForInvoice['po_number'].'</p>
                             <p>&nbsp;</p>
-                            <p>&nbsp;P.O.DATE :'.$getsupplierdeatilsForInvoice['date'].'</p>
+                            <p>P.O.DATE :'.date('d-m-Y',strtotime($getsupplierdeatilsForInvoice['date'])).'</p>
                             <p>&nbsp;</p>
-                            <p>&nbsp;QUOTATION REFERENCE :'.$getsupplierdeatilsForInvoice['quatation_ref_no'].'</p>
+                            <p>QUOTATION REFERENCE :'.$getsupplierdeatilsForInvoice['quatation_ref_no'].'</p>
                             <p>&nbsp;</p>
-                            <p>&nbsp;QUOTATION DATE :'.$getsupplierdeatilsForInvoice['quatation_date'].'</p>
+                            <p>QUOTATION DATE :'.date('d-m-Y',strtotime($getsupplierdeatilsForInvoice['quatation_date'])).'</p>
                         </div>
                     </td>
                 </tr>
@@ -10226,9 +10227,9 @@ public function downlaodsupplierpo($id){
                     <th align="left" style="border: 1px solid black;" margin-bottom: 10%;>PAYMENT TERMS</th>    
                 </tr>
                 <tr style="border: 1px solid black;">
-                    <td style="border: 1px solid black;"></td>
-                    <td style="border: 1px solid black;">'.$getsupplierdeatilsForInvoice['delivery_date'].'</td>    
-                    <td style="border: 1px solid black;">'.$getsupplierdeatilsForInvoice['work_order'].'</td>
+                    <td style="border: 1px solid black;text-align:center"><b>YES<b></td>
+                    <td style="border: 1px solid black;padding-left: 15px;">'.date('d-m-Y',strtotime($getsupplierdeatilsForInvoice['delivery_date'])).'</td>    
+                    <td style="border: 1px solid black;padding-left: 15px;">'.$getsupplierdeatilsForInvoice['work_order'].'</td>
                 </tr>
             </table>
 
@@ -10246,56 +10247,68 @@ public function downlaodsupplierpo($id){
                 '.$CartItem.'
 
                 <tr style="border-left: 1px solid black;border-right: 1px solid black;">
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
                 </tr>
 
                 <tr style="border-left: 1px solid black;border-right: 1px solid black;">
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
                 </tr>
         
 
-                <tr style="border-left: 1px solid black;border-right: 1px solid black;">
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
-                </tr>
+            <tr style="border-left: 1px solid black;border-right: 1px solid black;">
+                <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+           </tr>
     
+            <tr style="border-left: 1px solid black;border-right: 1px solid black;">
+                <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+            </tr>
+
         
                 <tr style="border-left: 1px solid black;border-right: 1px solid black;">
-                    <td></td>
-                    <td><p><b>Delivery Address</b></p>
-                    <p>'.$getsupplierdeatilsForInvoice['vendor_name'].'</p>
-                    <p>'.$getsupplierdeatilsForInvoice['ven_address'].'</p>
-                    <p>'.$getsupplierdeatilsForInvoice['ven_landline'].'</p>
-                    <p>'.$getsupplierdeatilsForInvoice['ven_contact_person'].'</p>
-                    <p>'.$getsupplierdeatilsForInvoice['ven_email'].'</p>
-                    <p>'.$getsupplierdeatilsForInvoice['ven_GSTIN'].'</p>
-                    <td colspan="45"></td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;"></td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;padding-left: 15px;"><p><b>Delivery Address</b></p>
+                        <p>'.$getsupplierdeatilsForInvoice['vendor_name'].'</p>
+                        <p>'.$getsupplierdeatilsForInvoice['ven_address'].'</p>
+                        <p>'.$getsupplierdeatilsForInvoice['ven_landline'].'</p>
+                        <p>'.$getsupplierdeatilsForInvoice['ven_contact_person'].'</p>
+                        <p>'.$getsupplierdeatilsForInvoice['ven_email'].'</p>
+                        <p>'.$getsupplierdeatilsForInvoice['ven_GSTIN'].'</p> 
+                    </td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;"></td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;"></td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;"></td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;"></td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;"></td>
                 </tr>
 
 
                 <tr style="border: 1px solid black;">
-                    <td></td>
-                    <td></td>   
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td colspan="5" style="padding-left: 15px;">'.$this->amount_in_word($subtotal).'</td>
+                
                     <td style="border: 1px solid black;">SUB TOTAL (+) GST </td>    
                     <td style="border: 1px solid black;">'.$subtotal.'</td>
                 </tr>
@@ -10304,7 +10317,7 @@ public function downlaodsupplierpo($id){
             <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:arial;">
                   
                    <tr style="border: 1px solid black;">
-                        <td style="border: 1px solid black;" width="75%">
+                        <td style="border: 1px solid black; padding-left: 15px;" width="78%;">
                             <p><b>NOTE :</b></p>
                             <p>1. Confirmation of PO is Mandatory</p>
                             <p>2. Mentioning P.O.No. on Invoice is Mandatory</b></p>
@@ -10312,12 +10325,12 @@ public function downlaodsupplierpo($id){
                             <p>4. Essence of this order is delivering the specified quality product on time.</p>
                             <p>5. If any Prices issue, should inform in 24hrs after receipt of P.O.</p>
                         </td>
-                        <td style="border: 1px solid black;text-align: center;" width="25%" valign="top">
-                            <p style="vertical-align: text-top;">FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</p>
+                        <td style="border: 1px solid black;text-align: center;" width="22%" valign="top">
+                            <p style="vertical-align: text-top;font-size:12px;"><b>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</b></p>
                             <br/>
                             <br/>
                             <br/>
-                            <p style="vertical-align: text-top;">AUTHORIZED SIGNATORY</p>
+                            <p style="vertical-align: text-top;font-size:10px"><b>AUTHORIZED SIGNATORY</b></p>
                         </td> 
                 </tr>
             </table>';
@@ -12076,6 +12089,50 @@ public function addsalestrackingreport(){
         $this->loadViews("masters/addsalestrackingreport", $this->global, NULL, NULL);
     }
 
+}
+
+
+public function amount_in_word($number){
+
+    $no = floor($number);
+    $point = round($number - $no, 2) * 100;
+    $hundred = null;
+    $digits_1 = strlen($no);
+    $i = 0;
+    $str = array();
+    $words = array('0' => '', '1' => 'One', '2' => 'Two',
+     '3' => 'Three', '4' => 'Four', '5' => 'Five', '6' => 'Six',
+     '7' => 'Seven', '8' => 'Eight', '9' => 'Nine',
+     '10' => 'Ten', '11' => 'Eleven', '12' => 'Twelve',
+     '13' => 'Thirteen', '14' => 'Fourteen',
+     '15' => 'Fifteen', '16' => 'Sixteen', '17' => 'Seventeen',
+     '18' => 'Eighteen', '19' =>'Nineteen', '20' => 'Twenty',
+     '30' => 'Thirty', '40' => 'Forty', '50' => 'Fifty',
+     '60' => 'Sixty', '70' => 'Seventy',
+     '80' => 'Eighty', '90' => 'Ninety');
+    $digits = array('', 'Hundred', 'Thousand', 'Lakh', 'Crore');
+    while ($i < $digits_1) {
+      $divider = ($i == 2) ? 10 : 100;
+      $number = floor($no % $divider);
+      $no = floor($no / $divider);
+      $i += ($divider == 10) ? 1 : 2;
+      if ($number) {
+         $plural = (($counter = count($str)) && $number > 9) ? 's' : null;
+         $hundred = ($counter == 1 && $str[0]) ? ' and ' : null;
+         $str [] = ($number < 21) ? $words[$number] .
+             " " . $digits[$counter] . $plural . " " . $hundred
+             :
+             $words[floor($number / 10) * 10]
+             . " " . $words[$number % 10] . " "
+             . $digits[$counter] . $plural . " " . $hundred;
+      } else $str[] = null;
+   }
+   $str = array_reverse($str);
+   $result = implode('', $str);
+   $points = ($point) ?
+     "." . $words[$point / 10] . " " . 
+           $words[$point = $point % 10] : '';
+   return $result . "Rupees  " . $points . " Paise";
 }
 
 }
