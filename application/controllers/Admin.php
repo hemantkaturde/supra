@@ -10137,7 +10137,7 @@ public function downlaodsupplierpo($id){
         $CartItem .= '
                 <tr style="border-left: 1px solid black;border-right: 1px solid black;">
                     <td style="border: 1px solid black;text-align:center;padding: 15px;">'.$i.'</td>
-                    <td style="border: 1px solid black;text-align:center;padding: 15px;">'.$value['type_of_raw_material'].' Vendor Qty-'.$value['vendor_qty'].' pcs </td>   
+                    <td style="border: 1px solid black;text-align:center;padding: 15px;">'.$value['type_of_raw_material'].' <br>Vendor Qty-'.$value['vendor_qty'].' pcs </br></td>   
                     <td style="border: 1px solid black;text-align:center;padding: 15px;">'.$value['part_number'].'</td>
                     <td style="border: 1px solid black;text-align:center;padding: 15px;">'.$value['order_oty'].'</td>
                     <td style="border: 1px solid black;text-align:center;padding: 15px;">'.$value['unit'].'</td> 
