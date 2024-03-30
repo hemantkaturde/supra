@@ -12134,7 +12134,7 @@ public function amount_in_word($number){
            $words[$point = $point % 10] : '';
    //return $result . "Rupees  " . $points . " Paise";
 
-   return  "Rupees  " .$result . $points;
+   return  "Rupees  " .$result . $points. " Only";
 }
 
 }
