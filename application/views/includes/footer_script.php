@@ -1746,7 +1746,7 @@
 				}
 				
 				var total_value = rate * qty;
-				$("#value").val( Math.round(total_value));
+				$("#value").val(total_value.toFixed(2));
         });
 
 		$(document).on('click','.closebuyerpo', function(){
