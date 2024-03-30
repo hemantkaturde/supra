@@ -12110,7 +12110,7 @@ public function amount_in_word($number){
      '30' => 'Thirty', '40' => 'Forty', '50' => 'Fifty',
      '60' => 'Sixty', '70' => 'Seventy',
      '80' => 'Eighty', '90' => 'Ninety');
-    $digits = array('', 'Hundred', 'Thousand', 'Lakh', 'Crore');
+    $digits = array('', 'Hundreds', 'Thousands', 'Lakhs', 'Crore');
     while ($i < $digits_1) {
       $divider = ($i == 2) ? 10 : 100;
       $number = floor($no % $divider);
@@ -12132,7 +12132,9 @@ public function amount_in_word($number){
    $points = ($point) ?
      "." . $words[$point / 10] . " " . 
            $words[$point = $point % 10] : '';
-   return $result . "Rupees  " . $points . " Paise";
+   //return $result . "Rupees  " . $points . " Paise";
+
+   return  "Rupees  " .$result . $points;
 }
 
 }
