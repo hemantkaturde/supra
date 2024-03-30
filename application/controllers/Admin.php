@@ -10307,17 +10307,17 @@ public function downlaodsupplierpo($id){
 
 
                 <tr style="border: 1px solid black;">
-                    <td colspan="5" style="padding-left: 15px;">'.$this->amount_in_word($subtotal).'</td>
+                    <td colspan="5" style="padding-left: 10px;">'.$this->amount_in_word($subtotal).'</td>
                 
-                    <td style="border: 1px solid black;padding-left: 15px;">SUB TOTAL (+) GST </td>    
-                    <td style="border: 1px solid black;padding-left: 15px;">'.$subtotal.' /-'.'</td>
+                    <td style="border: 1px solid black;padding-left: 10px;">SUB TOTAL (+) GST </td>    
+                    <td style="border: 1px solid black;padding-left: 10px;">'.$subtotal.' /-'.'</td>
                 </tr>
             </table>
 
             <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:arial;">
                   
                    <tr style="border: 1px solid black;">
-                        <td style="border: 1px solid black; padding-left: 15px;" width="78%;">
+                        <td style="border: 1px solid black; padding-left: 10px;" width="78%;">
                             <p><b>NOTE :</b></p>
                             <p>1. Confirmation of PO is Mandatory</p>
                             <p>2. Mentioning P.O.No. on Invoice is Mandatory</b></p>
