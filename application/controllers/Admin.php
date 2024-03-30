@@ -10296,7 +10296,7 @@ public function downlaodsupplierpo($id){
                         <p>'.$getsupplierdeatilsForInvoice['ven_landline'].'</p>
                         <p>'.$getsupplierdeatilsForInvoice['ven_contact_person'].'</p>
                         <p>'.$getsupplierdeatilsForInvoice['mobile'].'</p>
-                        <p> GSTIN'.$getsupplierdeatilsForInvoice['ven_GSTIN'].'</p> 
+                        <p> GSTIN:'.$getsupplierdeatilsForInvoice['ven_GSTIN'].'</p> 
                     </td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;"></td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;"></td>
