@@ -10137,7 +10137,7 @@ public function downlaodsupplierpo($id){
         $CartItem .= '
                 <tr style="border-left: 1px solid black;border-right: 1px solid black;">
                     <td style="border: 1px solid black;text-align:center;padding: 15px;">'.$i.'</td>
-                    <td style="border: 1px solid black;text-align:center;padding: 15px;">'.$value['type_of_raw_material'].'</td>   
+                    <td style="border: 1px solid black;text-align:center;padding: 15px;">'.$value['type_of_raw_material'].' Vendor Qty-'.$value['vendor_qty'].' pcs </td>   
                     <td style="border: 1px solid black;text-align:center;padding: 15px;">'.$value['part_number'].'</td>
                     <td style="border: 1px solid black;text-align:center;padding: 15px;">'.$value['order_oty'].'</td>
                     <td style="border: 1px solid black;text-align:center;padding: 15px;">'.$value['unit'].'</td> 
@@ -10296,7 +10296,7 @@ public function downlaodsupplierpo($id){
                         <p>'.$getsupplierdeatilsForInvoice['ven_landline'].'</p>
                         <p>'.$getsupplierdeatilsForInvoice['ven_contact_person'].'</p>
                         <p>'.$getsupplierdeatilsForInvoice['mobile'].'</p>
-                        <p>'.$getsupplierdeatilsForInvoice['ven_GSTIN'].'</p> 
+                        <p> GSTIN'.$getsupplierdeatilsForInvoice['ven_GSTIN'].'</p> 
                     </td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;"></td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;"></td>
@@ -10309,8 +10309,8 @@ public function downlaodsupplierpo($id){
                 <tr style="border: 1px solid black;">
                     <td colspan="5" style="padding-left: 15px;">'.$this->amount_in_word($subtotal).'</td>
                 
-                    <td style="border: 1px solid black;">SUB TOTAL (+) GST </td>    
-                    <td style="border: 1px solid black;">'.$subtotal.'</td>
+                    <td style="border: 1px solid black;padding-left: 15px;">SUB TOTAL (+) GST </td>    
+                    <td style="border: 1px solid black;padding-left: 15px;">'.$subtotal.' /-'.'</td>
                 </tr>
             </table>
 
