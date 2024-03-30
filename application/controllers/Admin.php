@@ -10136,13 +10136,13 @@ public function downlaodsupplierpo($id){
     foreach ($getsupplierItemdeatilsForInvoice as $key => $value) {
         $CartItem .= '
                 <tr style="border-left: 1px solid black;border-right: 1px solid black;">
-                    <td style="border: 1px solid black;text-align:left;padding: 15px;">'.$i.'</td>
-                    <td style="border: 1px solid black;text-align:left;padding: 15px;">'.$value['type_of_raw_material'].' <br>Vendor Qty-'.$value['vendor_qty'].' pcs </br></td>   
-                    <td style="border: 1px solid black;text-align:left;padding: 15px;">'.$value['part_number'].'</td>
-                    <td style="border: 1px solid black;text-align:left;padding: 15px;">'.$value['order_oty'].'</td>
-                    <td style="border: 1px solid black;text-align:left;padding: 15px;">'.$value['unit'].'</td> 
-                    <td style="border: 1px solid black;text-align:left;padding: 15px;">'.$value['rate'].'/-'.'</td>    
-                    <td style="border: 1px solid black;text-align:left;padding: 15px;">'.$value['value'].'/-'.'</td>
+                    <td style="border: 1px solid black;text-align:left;padding: 10px;">'.$i.'</td>
+                    <td style="border: 1px solid black;text-align:left;padding: 10px;">'.$value['type_of_raw_material'].' <br>Vendor Qty-'.$value['vendor_qty'].' pcs </br></td>   
+                    <td style="border: 1px solid black;text-align:left;padding: 10px;">'.$value['part_number'].'</td>
+                    <td style="border: 1px solid black;text-align:left;padding: 10px;">'.$value['order_oty'].'</td>
+                    <td style="border: 1px solid black;text-align:left;padding: 10px;">'.$value['unit'].'</td> 
+                    <td style="border: 1px solid black;text-align:left;padding: 10px;">'.$value['rate'].'/-'.'</td>    
+                    <td style="border: 1px solid black;text-align:left;padding: 10px;">'.$value['value'].'/-'.'</td>
                 </tr>';
                 $subtotal+=$value['value'];
             $i++;       
