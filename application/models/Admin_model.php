@@ -9386,6 +9386,7 @@ class Admin_model extends CI_Model
                          .TBL_VENDOR.'.address as ven_address,'
                          .TBL_VENDOR.'.landline as ven_landline,'
                          .TBL_VENDOR.'.contact_person as ven_contact_person,'
+                         .TBL_VENDOR.'.mobile as mobile,'
                          .TBL_VENDOR.'.email as ven_email,'
                          .TBL_VENDOR.'.GSTIN as ven_GSTIN,'
                          
