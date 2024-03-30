@@ -10136,13 +10136,13 @@ public function downlaodsupplierpo($id){
     foreach ($getsupplierItemdeatilsForInvoice as $key => $value) {
         $CartItem .= '
                 <tr style="border-left: 1px solid black;border-right: 1px solid black;">
-                    <td style="border: 1px solid black;text-align:center;padding: 15px;">'.$i.'</td>
-                    <td style="border: 1px solid black;text-align:center;padding: 15px;">'.$value['type_of_raw_material'].' <br>Vendor Qty-'.$value['vendor_qty'].' pcs </br></td>   
-                    <td style="border: 1px solid black;text-align:center;padding: 15px;">'.$value['part_number'].'</td>
-                    <td style="border: 1px solid black;text-align:center;padding: 15px;">'.$value['order_oty'].'</td>
-                    <td style="border: 1px solid black;text-align:center;padding: 15px;">'.$value['unit'].'</td> 
-                    <td style="border: 1px solid black;text-align:center;padding: 15px;">'.$value['rate'].'/-'.'</td>    
-                    <td style="border: 1px solid black;text-align:center;padding: 15px;">'.$value['value'].'/-'.'</td>
+                    <td style="border: 1px solid black;text-align:left;padding: 15px;">'.$i.'</td>
+                    <td style="border: 1px solid black;text-align:left;padding: 15px;">'.$value['type_of_raw_material'].' <br>Vendor Qty-'.$value['vendor_qty'].' pcs </br></td>   
+                    <td style="border: 1px solid black;text-align:left;padding: 15px;">'.$value['part_number'].'</td>
+                    <td style="border: 1px solid black;text-align:left;padding: 15px;">'.$value['order_oty'].'</td>
+                    <td style="border: 1px solid black;text-align:left;padding: 15px;">'.$value['unit'].'</td> 
+                    <td style="border: 1px solid black;text-align:left;padding: 15px;">'.$value['rate'].'/-'.'</td>    
+                    <td style="border: 1px solid black;text-align:left;padding: 15px;">'.$value['value'].'/-'.'</td>
                 </tr>';
                 $subtotal+=$value['value'];
             $i++;       
@@ -10236,13 +10236,13 @@ public function downlaodsupplierpo($id){
 
             <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:arial;">
                 <tr style="border: 1px solid black;">
-                    <th align="left" style="border: 1px solid black;" margin-bottom: 10%;>SR.NO.</th>
-                    <th align="left" style="border: 1px solid black;" margin-bottom: 10%;>PART DESCRIPTION</th>
-                    <th align="left" style="border: 1px solid black;" margin-bottom: 10%;>PART NO.</th>  
-                    <th align="left" style="border: 1px solid black;" margin-bottom: 10%;>QTY</th> 
-                    <th align="left" style="border: 1px solid black;" margin-bottom: 10%;>UNITS</th>  
-                    <th align="left" style="border: 1px solid black;" margin-bottom: 10%;>RATE</th>  
-                    <th align="left"  style="border: 1px solid black;" margin-bottom: 10%;>AMOUNT</th>
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>SR.NO.</th>
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>PART DESCRIPTION</th>
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>PART NO.</th>  
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>QTY</th> 
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>UNITS</th>  
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>RATE</th>  
+                    <th align="left"  style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>AMOUNT</th>
                 </tr>
                 '.$CartItem.'
 
