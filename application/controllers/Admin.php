@@ -12110,7 +12110,7 @@ public function amount_in_word($number){
      '30' => 'Thirty', '40' => 'Forty', '50' => 'Fifty',
      '60' => 'Sixty', '70' => 'Seventy',
      '80' => 'Eighty', '90' => 'Ninety');
-    $digits = array('', 'Hundreds', 'Thousands', 'Lakhs', 'Crore');
+    $digits = array('', 'Hundred', 'Thousand', 'Lakh', 'Crore');
     while ($i < $digits_1) {
       $divider = ($i == 2) ? 10 : 100;
       $number = floor($no % $divider);
