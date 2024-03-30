@@ -10208,13 +10208,13 @@ public function downlaodsupplierpo($id){
                     </td> 
                     <td style="border-left: 1px solid black;padding-left: 15px;" width="50%" >
                         <div>
-                            <p>P.O.NO :'.$getsupplierdeatilsForInvoice['po_number'].'</p>
+                            <p>P.O.NO : '.$getsupplierdeatilsForInvoice['po_number'].'</p>
                             <p>&nbsp;</p>
-                            <p>P.O.DATE :'.date('d-m-Y',strtotime($getsupplierdeatilsForInvoice['date'])).'</p>
+                            <p>P.O.DATE : '.date('d-m-Y',strtotime($getsupplierdeatilsForInvoice['date'])).'</p>
                             <p>&nbsp;</p>
-                            <p>QUOTATION REFERENCE :'.$getsupplierdeatilsForInvoice['quatation_ref_no'].'</p>
+                            <p>QUOTATION REFERENCE : '.$getsupplierdeatilsForInvoice['quatation_ref_no'].'</p>
                             <p>&nbsp;</p>
-                            <p>QUOTATION DATE :'.date('d-m-Y',strtotime($getsupplierdeatilsForInvoice['quatation_date'])).'</p>
+                            <p>QUOTATION DATE : '.date('d-m-Y',strtotime($getsupplierdeatilsForInvoice['quatation_date'])).'</p>
                         </div>
                     </td>
                 </tr>
