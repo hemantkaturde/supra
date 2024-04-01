@@ -10174,13 +10174,13 @@ public function downlaodsupplierpo($id){
                           <p> L.B.S. Marg, Bhandup West, Mumbai – 400078. INDIA.</b>
                           <p>Tel: +91 22 66959505 / +91 22 66600196 </p>
                           <p>+91 22 62390222 / +91 22 46061497 / +91 22 35115396 </p>
-                          <p style="color:#0096FF">GSTIN : 27AAJCS7869M1ZB </p>
+                          <p style="color:#206a9b"><b>GSTIN : 27AAJCS7869M1ZB </b></p>
                         </td>
                         <td width="40%">
                             <p><b>Email:</b></p> 
-                            <p style="color:#0096FF">purchase@supraexports.in</p>
-                            <p style="color:#0096FF">purchase1@supraexports.in</p>
-                            <p style="color:#0096FF">purchase2@supraexports.in</p>
+                            <p style="color:#206a9b">purchase@supraexports.in</p>
+                            <p style="color:#206a9b">purchase1@supraexports.in</p>
+                            <p style="color:#206a9b">purchase2@supraexports.in</p>
                         </td>  
                     </tr>
             </table>
@@ -10267,8 +10267,6 @@ public function downlaodsupplierpo($id){
                 </tr>
         
 
-
-        
                 <tr style="border-left: 1px solid black;border-right: 1px solid black;">
                     <td style="border-left: 1px solid black;border-right: 1px solid black;"></td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;padding-left: 15px;"><p><b>Delivery Address</b></p>
@@ -10307,11 +10305,11 @@ public function downlaodsupplierpo($id){
                             <p>5. If any Prices issue, should inform in 24hrs after receipt of P.O.</p>
                         </td>
                         <td style="border: 1px solid black;text-align: center;" width="22%" valign="top">
-                            <p style="vertical-align: text-top;font-size:12px;color:#0096FF"><b>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</b></p>
+                            <p style="vertical-align: text-top;font-size:12px;color:#206a9b"><b>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</b></p>
                             <br/>
                             <br/>
                             <br/>
-                            <p style="vertical-align: text-top;font-size:10px;color:#0096FF"><b>AUTHORIZED SIGNATORY</b></p>
+                            <p style="vertical-align: text-top;font-size:10px;color:#206a9b"><b>AUTHORIZED SIGNATORY</b></p>
                         </td> 
                 </tr>
             </table>';
