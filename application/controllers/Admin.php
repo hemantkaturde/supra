@@ -10152,11 +10152,11 @@ public function downlaodsupplierpo($id){
 
     $mpdf = new \Mpdf\Mpdf();
     // $html = $this->load->view('html_to_pdf',[],true);
-    $html = '<table style=" width: 100%;text-align: center;border-collapse: collapse;border: #cccccc 0px solid;font-family:arial;">
+    $html = '<table style=" width: 100%;text-align: center;border-collapse: collapse;border: #cccccc 0px solid;font-family:cambria;">
                 <tr>
                   <td rowspan="2"><img src="'.base_url().'assets/images/supra_logo_1.jpg" width="80" height="80"></td>
                   <td style="color:#000080"><h2>SUPRA QUALITY EXPORTS (I) PVT. LTD</h2></td>
-                  <td rowspan="2"><img src="'.base_url().'assets/images/supra_logo_2.jpg"width="80" height="80"></td>
+                  <td rowspan="2"><img src="'.base_url().'assets/images/logo_2.png"width="80" height="80"></td>
                 </tr>
                 <tr>
                   <td>
@@ -10167,7 +10167,7 @@ public function downlaodsupplierpo($id){
                 </tr>
             </table>
             <hr>
-            <table style="width: 100%;text-align: left;border-collapse: collapse;border: #ccc 0px solid;font-family:arial;">
+            <table style="width: 100%;text-align: left;border-collapse: collapse;border: #ccc 0px solid;font-family:cambria;">
                     <tr>
                         <td width="60%">
                           <p><b>Office:</b> 229 to 232, Bharat Industrial Estate,
@@ -10185,7 +10185,7 @@ public function downlaodsupplierpo($id){
                     </tr>
             </table>
 
-            <table style=" width: 100%;text-align: center;border-collapse: collapse;border: #ccc 0px solid;margin-top:10px;margin-bottom:10px;font-family:arial;">
+            <table style=" width: 100%;text-align: center;border-collapse: collapse;border: #ccc 0px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;">
                     <tr>
                         <td style="color:red;font-size:25px">
                           <u><p>PURCHASE ORDER</h2></p>
@@ -10193,34 +10193,34 @@ public function downlaodsupplierpo($id){
                     </tr>
             </table>
 
-            <table style=" width: 100%;text-align: left;border-collapse: collapse;font-family:arial;border: #ccc 1px solid">
+            <table style=" width: 100%;text-align: left;border-collapse: collapse;font-family:cambria;border: #ccc 1px solid">
                 <tr style="border: 1px solid black;">
                     <td width="50%" style="padding-left: 15px;">
                         <div>
                             <p>To,</p>
-                            <p>'.$getsupplierdeatilsForInvoice['supplier_name'].'</p>
+                            <p><b>'.$getsupplierdeatilsForInvoice['supplier_name'].'</b></p>
                             <p>'.$getsupplierdeatilsForInvoice['supplier_addess'].'</p>
-                            <p>Contact No: '.$getsupplierdeatilsForInvoice['suplier_mobile'].' / '.$getsupplierdeatilsForInvoice['suplier_landline'].'</p>
-                            <p>Contact Person: '.$getsupplierdeatilsForInvoice['sup_conatct'].'</p>
-                            <p>Email: '.$getsupplierdeatilsForInvoice['sup_email'].'</p>
+                            <p><b>Contact No:</b> '.$getsupplierdeatilsForInvoice['suplier_mobile'].' / '.$getsupplierdeatilsForInvoice['suplier_landline'].'</p>
+                            <p><b>Contact Person:</b> '.$getsupplierdeatilsForInvoice['sup_conatct'].'</p>
+                            <p><b>Email:</b> '.$getsupplierdeatilsForInvoice['sup_email'].'</p>
                             <p style="color:red">GSTIN:'.$getsupplierdeatilsForInvoice['sup_GSTIN'].'</p>
                         <div>    
                     </td> 
                     <td style="border-left: 1px solid black;padding-left: 15px;" width="50%" >
                         <div>
-                            <p>P.O.NO : '.'<span style="color:red">'.$getsupplierdeatilsForInvoice['po_number'].'</span></p>
+                            <p><b>P.O.NO :</b> '.'<span style="color:red">'.$getsupplierdeatilsForInvoice['po_number'].'</span></p>
                             <p>&nbsp;</p>
-                            <p>P.O.DATE : '.date('d-m-Y',strtotime($getsupplierdeatilsForInvoice['date'])).'</p>
+                            <p><b>P.O.DATE :</b> '.date('d-m-Y',strtotime($getsupplierdeatilsForInvoice['date'])).'</p>
                             <p>&nbsp;</p>
-                            <p>QUOTATION REFERENCE : '.$getsupplierdeatilsForInvoice['quatation_ref_no'].'</p>
+                            <p><b>QUOTATION REFERENCE :</b> '.$getsupplierdeatilsForInvoice['quatation_ref_no'].'</p>
                             <p>&nbsp;</p>
-                            <p>QUOTATION DATE : '.date('d-m-Y',strtotime($getsupplierdeatilsForInvoice['quatation_date'])).'</p>
+                            <p><b>QUOTATION DATE :</b> '.date('d-m-Y',strtotime($getsupplierdeatilsForInvoice['quatation_date'])).'</p>
                         </div>
                     </td>
                 </tr>
             </table>
 
-            <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:arial;">
+            <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;">
                 <tr style="border: 1px solid black;">
                     <th align="left" style="border: 1px solid black;" margin-bottom: 10%;>NEED TEST CERTIFICATE</th>
                     <th align="left" style="border: 1px solid black;" margin-bottom: 10%;>DELIVERY DATE</th>
@@ -10234,7 +10234,7 @@ public function downlaodsupplierpo($id){
             </table>
 
 
-            <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:arial;">
+            <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;">
                 <tr style="border: 1px solid black;">
                     <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>SR.NO.</th>
                     <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>PART DESCRIPTION</th>
@@ -10314,7 +10314,7 @@ public function downlaodsupplierpo($id){
                 </tr>
             </table>
 
-            <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:arial;">
+            <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;">
                   
                    <tr style="border: 1px solid black;">
                         <td style="border: 1px solid black; padding-left: 10px;" width="78%;">
