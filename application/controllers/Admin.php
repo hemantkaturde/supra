@@ -10136,13 +10136,13 @@ public function downlaodsupplierpo($id){
     foreach ($getsupplierItemdeatilsForInvoice as $key => $value) {
         $CartItem .= '
                 <tr style="border-left: 1px solid black;border-right: 1px solid black;">
-                    <td style="border: 1px solid black;text-align:left;padding: 10px;">'.$i.'</td>
-                    <td style="border: 1px solid black;text-align:left;padding: 10px;">'.$value['type_of_raw_material'].' <br>Vendor Qty-'.$value['vendor_qty'].' pcs </br></td>   
-                    <td style="border: 1px solid black;text-align:left;padding: 10px;">'.$value['part_number'].'</td>
-                    <td style="border: 1px solid black;text-align:left;padding: 10px;">'.$value['order_oty'].'</td>
-                    <td style="border: 1px solid black;text-align:left;padding: 10px;">'.$value['unit'].'</td> 
-                    <td style="border: 1px solid black;text-align:left;padding: 10px;">'.$value['rate'].'/-'.'</td>    
-                    <td style="border: 1px solid black;text-align:left;padding: 10px;">'.$value['value'].'/-'.'</td>
+                    <td style="border: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$i.'</td>
+                    <td style="border: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['type_of_raw_material'].' <br>Vendor Qty-'.$value['vendor_qty'].' pcs </br></td>   
+                    <td style="border: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['part_number'].'</td>
+                    <td style="border: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['order_oty'].'</td>
+                    <td style="border: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['unit'].'</td> 
+                    <td style="border: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rate'].'/-'.'</td>    
+                    <td style="border: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['value'].'/-'.'</td>
                 </tr>';
                 $subtotal+=$value['value'];
             $i++;       
@@ -10187,13 +10187,13 @@ public function downlaodsupplierpo($id){
 
             <table style=" width: 100%;text-align: center;border-collapse: collapse;border: #ccc 0px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;">
                     <tr>
-                        <td style="color:red;font-size:25px">
-                          <u><p>PURCHASE ORDER</h2></p>
+                        <td style="color:red;font-size:18px">
+                          <u><p><h3>PURCHASE ORDER</h3></p>
                         </td>
                     </tr>
             </table>
 
-            <table style=" width: 100%;text-align: left;border-collapse: collapse;font-family:cambria;border: #ccc 1px solid">
+            <table style=" width: 100%;text-align: left;border-collapse: collapse;font-family:cambria;font-size:14px;border: #ccc 1px solid">
                 <tr style="border: 1px solid black;">
                     <td width="50%" style="padding-left: 15px;">
                         <div>
@@ -10220,7 +10220,7 @@ public function downlaodsupplierpo($id){
                 </tr>
             </table>
 
-            <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;">
+            <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:14px">
                 <tr style="border: 1px solid black;">
                     <th align="left" style="border: 1px solid black;" margin-bottom: 10%;>NEED TEST CERTIFICATE</th>
                     <th align="left" style="border: 1px solid black;" margin-bottom: 10%;>DELIVERY DATE</th>
@@ -10234,7 +10234,7 @@ public function downlaodsupplierpo($id){
             </table>
 
 
-            <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;">
+            <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:14px">
                 <tr style="border: 1px solid black;">
                     <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>SR.NO.</th>
                     <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>PART DESCRIPTION</th>
@@ -10256,15 +10256,6 @@ public function downlaodsupplierpo($id){
                     <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
                 </tr>
 
-                <tr style="border-left: 1px solid black;border-right: 1px solid black;">
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                </tr>
         
 
                 <tr style="border-left: 1px solid black;border-right: 1px solid black;">
@@ -10272,7 +10263,6 @@ public function downlaodsupplierpo($id){
                     <td style="border-left: 1px solid black;border-right: 1px solid black;padding-left: 15px;"><p><b>Delivery Address</b></p>
                         <p>'.$getsupplierdeatilsForInvoice['vendor_name'].'</p>
                         <p>'.$getsupplierdeatilsForInvoice['ven_address'].'</p>
-                        <p>'.$getsupplierdeatilsForInvoice['ven_landline'].'</p>
                         <p> <b>Kind Attn:</b> '.$getsupplierdeatilsForInvoice['ven_contact_person'].'</p>
                         <p> <b>Tel No:</b> '.$getsupplierdeatilsForInvoice['mobile'].' / '.$getsupplierdeatilsForInvoice['ven_landline'].'</p>
                         <p> <b>GSTIN:</b> '.$getsupplierdeatilsForInvoice['ven_GSTIN'].'</p> 
@@ -10293,7 +10283,7 @@ public function downlaodsupplierpo($id){
                 </tr>
             </table>
 
-            <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;">
+            <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:14px">
                   
                    <tr style="border: 1px solid black;">
                         <td style="border: 1px solid black; padding-left: 10px;" width="78%;">

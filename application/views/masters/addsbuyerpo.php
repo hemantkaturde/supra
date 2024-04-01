@@ -30,34 +30,58 @@
                                                 // $i = end($arr);
                                                 // $inrno= "SQBO2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
                                                 // $sales_order_number = $inrno;
+                                                // echo $removed_string_last;
+                           
+                                                // get last digit of string 
 
+                                                $lastDigit = substr($getPreviousSalesOrderNumber['sales_order_number'], -1);
 
-                                                // $currentDate = new DateTime();
+                                                // Get the current date
+                                                $currentDate = new DateTime();
 
-                                                // // Check if the current date is on or after April 1st
-                                                // if ($currentDate >= new DateTime(date('Y') . '-04-01')) {
-                                                //     // If it is, the financial year has started in the current calendar year
-                                                //     $startYear = date('Y');
-                                                //     $endYear = $startYear + 1;
-                                                // } else {
-                                                //     // If it is not, the financial year has started in the previous calendar year
-                                                //     $endYear = date('Y');
-                                                //     $startYear = $endYear - 1;
-                                                // }
+                                                // Check if the current date is on or after April 1st
+                                                if ($currentDate >= new DateTime(date('Y') . '-04-01')) {
+                                                    // If it is, the financial year has started in the current calendar year
+                                                    //$startYear = date('Y');
+                                                    $startYear = date('y');
+                                                    $endYear = $startYear + 1;
+                                                } else {
+                                                    // If it is not, the financial year has started in the previous calendar year
+                                                    //$endYear = date('Y');
+                                                    $endYear = date('y');
+                                                    $startYear = $endYear - 1;
+                                                }
 
-                                                // // Display the financial year
-                                                // $financialYear = $startYear . '-' . $endYear;
-
-
-
+                                                // Display the financial year
+                                                //$financialYear = $startYear . '-' . $endYear;
+                                                $financialYear = $startYear.$endYear;
                                                 $string = $getPreviousSalesOrderNumber['sales_order_number'];
                                                 $n = 4; // Number of characters to extract from the end
+
+
+                                                 // Extract the current year
+                                                 $currentYear = $currentDate->format('Y');
+                                                
+                                                 // Define the start and end dates of the financial year (April 1st to March 31st)
+                                                 $financialYearStart = new DateTime("$currentYear-04-01");
+                                                 $financialYearEnd = new DateTime(($currentYear + 1) . '-03-31');
+                                                 
+                                                 // Check if the current date is within the financial year
+                                                 if ($currentDate >= $financialYearStart && $currentDate <= $financialYearEnd) {
+
+                                                        $n =0;
+                                                 } else {
+                                                     $n =$lastDigit;
+                                                 }
+
                                                 $lastNCharacters = substr($string, -$n);
-                                                $inrno= "SQBO2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+
+
+                                                $inrno= "SQBO".$financialYear.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
                                                 $sales_order_number = $inrno;
 
                                         }else{
-                                            $sales_order_number = 'SQBO23240001';
+                                            $sales_order_number = 'SQBO'.$financialYear.'001';
                                         }
                                     ?>
                                     <div class="col-md-12">
