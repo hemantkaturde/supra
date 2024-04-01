@@ -358,6 +358,10 @@ $route['getVendorPoconfirmationvendorlist'] = "admin/getVendorPoconfirmationvend
 
 /* ALL Downlaod Forms */
 $route['downlaodsupplierpo/(:any)'] = "admin/downlaodsupplierpo/$1";
+$route['downloadvendorpo/(:any)'] = "admin/downloadvendorpo/$1";
+
+
+
 $route['editeqnuiryformdata/(:any)'] = "admin/editeqnuiryformdata/$1";
 
 
@@ -451,25 +455,6 @@ $route['deletecha'] = "admin/deletecha";
 $route['salestrackingreport'] = "admin/salestrackingreport";
 $route['fetchsalestrackingReport'] = "admin/fetchsalestrackingReport";
 $route['addsalestrackingreport'] = "admin/addsalestrackingreport";
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

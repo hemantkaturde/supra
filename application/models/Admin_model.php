@@ -1601,6 +1601,9 @@ class Admin_model extends CI_Model
               
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editVendorpo/".$value['vendor_po_master_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>  &nbsp";
               
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downloadvendorpo/".$value['vendor_po_master_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>  &nbsp";
+
+
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['vendor_po_master_id']."' class='fa fa-trash-o deleteVendorpo' aria-hidden='true'></i>"; 
                 $counter++; 
             }
@@ -9372,6 +9375,7 @@ class Admin_model extends CI_Model
         $this->db->select(TBL_SUPPLIER.'.supplier_name,'
                          .TBL_SUPPLIER.'.address as supplier_addess,'
                          .TBL_SUPPLIER.'.landline as suplier_landline,'
+                         .TBL_SUPPLIER.'.mobile as suplier_mobile,'
                          .TBL_SUPPLIER.'.contact_person as sup_conatct,'
                          .TBL_SUPPLIER.'.email as sup_email,'
                          .TBL_SUPPLIER.'.GSTIN as sup_GSTIN,'
@@ -10995,6 +10999,38 @@ public function getfetchsalestrackingReportdata($params){
     }
 
     return $data;
+}
+
+
+  
+public function getvendordeatilsForInvoice($id){
+                $this->db->select(TBL_SUPPLIER.'.supplier_name,'
+                     .TBL_SUPPLIER.'.address as supplier_addess,'
+                     .TBL_SUPPLIER.'.landline as suplier_landline,'
+                     .TBL_SUPPLIER.'.contact_person as sup_conatct,'
+                     .TBL_SUPPLIER.'.email as sup_email,'
+                     .TBL_SUPPLIER.'.GSTIN as sup_GSTIN,'
+                     .TBL_SUPPLIER_PO_MASTER.'.po_number as po_number,'
+                     .TBL_SUPPLIER_PO_MASTER.'.date as date,'
+                     .TBL_SUPPLIER_PO_MASTER.'.quatation_date as quatation_date,'
+                     .TBL_SUPPLIER_PO_MASTER.'.quatation_ref_no as quatation_ref_no,'
+                     .TBL_SUPPLIER_PO_MASTER.'.delivery_date as delivery_date,'
+                     .TBL_SUPPLIER_PO_MASTER.'.work_order as work_order,'
+                     .TBL_VENDOR.'.vendor_name as vendor_name,'
+                     .TBL_VENDOR.'.address as ven_address,'
+                     .TBL_VENDOR.'.landline as ven_landline,'
+                     .TBL_VENDOR.'.contact_person as ven_contact_person,'
+                     .TBL_VENDOR.'.mobile as mobile,'
+                     .TBL_VENDOR.'.email as ven_email,'
+                     .TBL_VENDOR.'.GSTIN as ven_GSTIN,'
+                     
+                      );
+                    $this->db->where(TBL_VENDOR_PO_MASTER.'.id', $id);
+                    $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.id = '.TBL_VENDOR_PO_MASTER.'.supplier_po_number');
+                    $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_VENDOR_PO_MASTER.'.buyer_po_number');
+                    $query = $this->db->get(TBL_VENDOR_PO_MASTER);
+                    $fetch_result = $query->row_array();
+                    return $fetch_result;
 }
 
 
