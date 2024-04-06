@@ -10187,7 +10187,7 @@ public function downlaodsupplierpo($id){
 
             <table style=" width: 100%;text-align: center;border-collapse: collapse;border: #ccc 0px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;">
                     <tr>
-                        <td style="color:red;font-size:18px">
+                        <td style="color:red;font-size:15px">
                           <u><p><h3>PURCHASE ORDER</h3></p>
                         </td>
                     </tr>
@@ -10220,7 +10220,7 @@ public function downlaodsupplierpo($id){
                 </tr>
             </table>
 
-            <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:14px">
+            <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:12px">
                 <tr style="border: 1px solid black;">
                     <th align="left" style="border: 1px solid black;" margin-bottom: 10%;>NEED TEST CERTIFICATE</th>
                     <th align="left" style="border: 1px solid black;" margin-bottom: 10%;>DELIVERY DATE</th>
@@ -10234,7 +10234,7 @@ public function downlaodsupplierpo($id){
             </table>
 
 
-            <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:14px">
+            <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:12px">
                 <tr style="border: 1px solid black;">
                     <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>SR.NO.</th>
                     <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>PART DESCRIPTION</th>
@@ -10283,7 +10283,7 @@ public function downlaodsupplierpo($id){
                 </tr>
             </table>
 
-            <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:14px">
+            <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:10px">
                   
                    <tr style="border: 1px solid black;">
                         <td style="border: 1px solid black; padding-left: 8px !important;" width="78%;">
