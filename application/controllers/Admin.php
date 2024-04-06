@@ -10137,7 +10137,7 @@ public function downlaodsupplierpo($id){
         $CartItem .= '
                 <tr style="border-left: 1px solid black;border-right: 1px solid black;">
                     <td style="border: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$i.'</td>
-                    <td style="border: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['type_of_raw_material'].' <br>Vendor Qty-'.$value['vendor_qty'].' pcs </br></td>   
+                    <td style="border: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['type_of_raw_material'].' <br>Vendor Qty-'.$value['vendor_qty'].' pcs </br> <br>Gross Weight-'.$value['vendor_qty'].' pcs </br><br>'.$value['description_1'].'</br><br>'.$value['description_2'].'</br></td>   
                     <td style="border: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['part_number'].'</td>
                     <td style="border: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['order_oty'].'</td>
                     <td style="border: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['unit'].'</td> 
@@ -10286,13 +10286,13 @@ public function downlaodsupplierpo($id){
             <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:14px">
                   
                    <tr style="border: 1px solid black;">
-                        <td style="border: 1px solid black; padding-left: 10px;" width="78%;">
+                        <td style="border: 1px solid black; padding-left: 8px !important;" width="78%;">
                             <p><b>NOTE :</b></p>
-                            <p>1. Confirmation of PO is Mandatory</p>
-                            <p>2. Mentioning P.O.No. on Invoice is Mandatory</b></p>
-                            <p>3. Once order issued & accepted, cannot be cancelled</p>
-                            <p>4. Essence of this order is delivering the specified quality product on time.</p>
-                            <p>5. If any Prices issue, should inform in 24hrs after receipt of P.O.</p>
+                            <p><b>1. Confirmation of PO is Mandatory</b></p>
+                            <p><b>2. Mentioning P.O.No. on Invoice is Mandatory</b></p>
+                            <p><b>3. Once order issued & accepted, cannot be cancelled</b></p>
+                            <p><b>4. Essence of this order is delivering the specified quality product on time.</b></p>
+                            <p><b>5. If any Prices issue, should inform in 24hrs after receipt of P.O.</b></p>
                         </td>
                         <td style="border: 1px solid black;text-align: center;" width="22%" valign="top">
                             <p style="vertical-align: text-top;font-size:12px;color:#206a9b"><b>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</b></p>
