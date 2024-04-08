@@ -10159,7 +10159,7 @@ public function downlaodsupplierpo($id){
                   <td rowspan="2"><img src="'.base_url().'assets/images/logo_2.png"width="80" height="80"></td>
                 </tr>
                 <tr>
-                  <td>
+                  <td style="font-weight: bold;">
                     <p>MANUFACTURER & EXPORTERS OF:</p>
                     <p>PRECISION TURNED COMPONENTS, STAMPED /PRESSED PARTS IN FERROUS & NON-FERROUS METAL</p>
                     <p>MOULDED & EXTRUDED PLASTIC AND RUBBER COMPONENTS</p> 
@@ -10304,7 +10304,7 @@ public function downlaodsupplierpo($id){
                         </td>
                         <td style="border: 1px solid black;text-align: center;" width="25%" valign="top">
                             <p style="vertical-align: text-top;font-size:12px;color:#206a9b"><b>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</b></p>
-                            <br/><img src="'.base_url().'assets/images/stmps/supplierpostampsignature.jpg" width="100" height="100">
+                            <br/><img src="'.base_url().'assets/images/stmps/supplierpostampsignature.png" width="150" height="100">
                             <p style="vertical-align: text-top;font-size:10px;color:#206a9b"><b>AUTHORIZED SIGNATORY</b></p>
                         </td> 
                 </tr>
@@ -12068,43 +12068,39 @@ public function addsalestrackingreport(){
 
 public function downloadvendorpo($id){
 
-
     $getvendordeatilsForInvoice = $this->admin_model->getvendordeatilsForInvoice($id);
-
-    print_r($getvendordeatilsForInvoice);
-    exit;
-
-
-    $getsupplierItemdeatilsForInvoice = $this->admin_model->getsupplierItemdeatilsForInvoice($id);
+    $getvendorItemdeatilsForInvoice = $this->admin_model->getvendorItemdeatilsForInvoice($id);
 
     $CartItem = "";
     $i =1;
     $subtotal = 0;
-    foreach ($getsupplierItemdeatilsForInvoice as $key => $value) {
+    foreach ($getvendorItemdeatilsForInvoice as $key => $value) {
         $CartItem .= '
                 <tr style="border-left: 1px solid black;border-right: 1px solid black;">
-                    <td style="border: 1px solid black;text-align:left;padding: 10px;">'.$i.'</td>
-                    <td style="border: 1px solid black;text-align:left;padding: 10px;">'.$value['type_of_raw_material'].' <br>Vendor Qty-'.$value['vendor_qty'].' pcs </br></td>   
-                    <td style="border: 1px solid black;text-align:left;padding: 10px;">'.$value['part_number'].'</td>
-                    <td style="border: 1px solid black;text-align:left;padding: 10px;">'.$value['order_oty'].'</td>
-                    <td style="border: 1px solid black;text-align:left;padding: 10px;">'.$value['unit'].'</td> 
-                    <td style="border: 1px solid black;text-align:left;padding: 10px;">'.$value['rate'].'/-'.'</td>    
-                    <td style="border: 1px solid black;text-align:left;padding: 10px;">'.$value['value'].'/-'.'</td>
+                    <td style="border: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$i.'</td>
+                    <td style="border: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['type_of_raw_material'].' <br>Vendor Qty-'.$value['vendor_qty'].' pcs </br> <br>Gross Weight-'.$value['rmgrossweight'].' kgs </br><br>'.$value['description_1'].'</br><br>'.$value['description_2'].'</br></td>   
+                    <td style="border: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['part_number'].'</td>
+                    <td style="border: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['order_oty'].'</td>
+                    <td style="border: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['unit'].'</td> 
+                    <td style="border: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rate'].'/-'.'</td>    
+                    <td style="border: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['value'].'/-'.'</td>
                 </tr>';
                 $subtotal+=$value['value'];
             $i++;       
     }
 
+
+
     $mpdf = new \Mpdf\Mpdf();
     // $html = $this->load->view('html_to_pdf',[],true);
-    $html = '<table style=" width: 100%;text-align: center;border-collapse: collapse;border: #cccccc 0px solid;font-family:arial;">
+    $html = '<table style=" width: 100%;text-align: center;border-collapse: collapse;border: #cccccc 0px solid;font-family:cambria;">
                 <tr>
                   <td rowspan="2"><img src="'.base_url().'assets/images/supra_logo_1.jpg" width="80" height="80"></td>
-                  <td><h3>SUPRA QUALITY EXPORTS (I) PVT. LTD</h3></td>
-                  <td rowspan="2"><img src="'.base_url().'assets/images/supra_logo_2.jpg"width="80" height="80"></td>
+                  <td style="color:#000080"><h2>SUPRA QUALITY EXPORTS (I) PVT. LTD</h2></td>
+                  <td rowspan="2"><img src="'.base_url().'assets/images/logo_2.png"width="80" height="80"></td>
                 </tr>
                 <tr>
-                  <td>
+                  <td style="font-weight: bold;">
                     <p>MANUFACTURER & EXPORTERS OF:</p>
                     <p>PRECISION TURNED COMPONENTS, STAMPED /PRESSED PARTS IN FERROUS & NON-FERROUS METAL</p>
                     <p>MOULDED & EXTRUDED PLASTIC AND RUBBER COMPONENTS</p> 
@@ -12112,60 +12108,60 @@ public function downloadvendorpo($id){
                 </tr>
             </table>
             <hr>
-            <table style="width: 100%;text-align: left;border-collapse: collapse;border: #ccc 0px solid;font-family:arial;">
+            <table style="width: 100%;text-align: left;border-collapse: collapse;border: #ccc 0px solid;font-family:cambria;">
                     <tr>
                         <td width="60%">
                           <p><b>Office:</b> 229 to 232, Bharat Industrial Estate,
                           <p> L.B.S. Marg, Bhandup West, Mumbai – 400078. INDIA.</b>
                           <p>Tel: +91 22 66959505 / +91 22 66600196 </p>
                           <p>+91 22 62390222 / +91 22 46061497 / +91 22 35115396 </p>
-                          <p style="color:blue">GSTIN : 27AAJCS7869M1ZB </p>
+                          <p style="color:#206a9b"><b>GSTIN : 27AAJCS7869M1ZB </b></p>
                         </td>
                         <td width="40%">
                             <p><b>Email:</b></p> 
-                            <p style="color:blue">purchase@supraexports.in</p>
-                            <p style="color:blue">purchase1@supraexports.in</p>
-                            <p style="color:blue">purchase2@supraexports.in</p>
+                            <p style="color:#206a9b">purchase@supraexports.in</p>
+                            <p style="color:#206a9b">purchase1@supraexports.in</p>
+                            <p style="color:#206a9b">purchase2@supraexports.in</p>
                         </td>  
                     </tr>
             </table>
 
-            <table style=" width: 100%;text-align: center;border-collapse: collapse;border: #ccc 0px solid;margin-top:10px;margin-bottom:10px;font-family:arial;">
+            <table style=" width: 100%;text-align: center;border-collapse: collapse;border: #ccc 0px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;">
                     <tr>
-                        <td>
-                          <h2>PURCHASE ORDER</h2>
+                        <td style="color:red;font-size:15px">
+                          <u><p><h3>PURCHASE ORDER</h3></p>
                         </td>
                     </tr>
             </table>
 
-            <table style=" width: 100%;text-align: left;border-collapse: collapse;font-family:arial;border: #ccc 1px solid">
+            <table style=" width: 100%;text-align: left;border-collapse: collapse;font-family:cambria;font-size:13px;border: #ccc 1px solid">
                 <tr style="border: 1px solid black;">
                     <td width="50%" style="padding-left: 15px;">
                         <div>
                             <p>To,</p>
-                            <p>'.$getsupplierdeatilsForInvoice['supplier_name'].'</p>
-                            <p>'.$getsupplierdeatilsForInvoice['supplier_addess'].'</p>
-                            <p>Contact No:'.$getsupplierdeatilsForInvoice['suplier_landline'].'</p>
-                            <p>Contact Person:'.$getsupplierdeatilsForInvoice['sup_conatct'].'</p>
-                            <p>Email:'.$getsupplierdeatilsForInvoice['sup_email'].'</p>
-                            <p style="color:red">GSTIN:'.$getsupplierdeatilsForInvoice['sup_GSTIN'].'</p>
+                            <p><b>'.$getvendordeatilsForInvoice['supplier_name'].'</b></p>
+                            <p>'.$getvendordeatilsForInvoice['supplier_addess'].'</p>
+                            <p><b>Contact No:</b> '.$getvendordeatilsForInvoice['suplier_mobile'].' / '.$getvendordeatilsForInvoice['suplier_landline'].'</p>
+                            <p><b>Contact Person:</b> '.$getvendordeatilsForInvoice['sup_conatct'].'</p>
+                            <p><b>Email:</b> '.$getvendordeatilsForInvoice['sup_email'].'</p>
+                            <p style="color:red">GSTIN:'.$getvendordeatilsForInvoice['sup_GSTIN'].'</p>
                         <div>    
                     </td> 
-                    <td style="border-left: 1px solid black;padding-left: 15px;" width="50%" >
+                    <td style="border-left: 1px solid black;padding-left: 15px;font-size:13px" width="50%" >
                         <div>
-                            <p>P.O.NO : '.$getsupplierdeatilsForInvoice['po_number'].'</p>
+                            <p><b>P.O.NO :</b> '.'<span style="color:red">'.$getvendordeatilsForInvoice['po_number'].'</span></p>
                             <p>&nbsp;</p>
-                            <p>P.O.DATE : '.date('d-m-Y',strtotime($getsupplierdeatilsForInvoice['date'])).'</p>
+                            <p><b>P.O.DATE :</b> '.date('d-m-Y',strtotime($getvendordeatilsForInvoice['date'])).'</p>
                             <p>&nbsp;</p>
-                            <p>QUOTATION REFERENCE : '.$getsupplierdeatilsForInvoice['quatation_ref_no'].'</p>
+                            <p><b>QUOTATION REFERENCE :</b> '.$getvendordeatilsForInvoice['quatation_ref_no'].'</p>
                             <p>&nbsp;</p>
-                            <p>QUOTATION DATE : '.date('d-m-Y',strtotime($getsupplierdeatilsForInvoice['quatation_date'])).'</p>
+                            <p><b>QUOTATION DATE :</b> '.date('d-m-Y',strtotime($getvendordeatilsForInvoice['quatation_date'])).'</p>
                         </div>
                     </td>
                 </tr>
             </table>
 
-            <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:arial;">
+            <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:12px">
                 <tr style="border: 1px solid black;">
                     <th align="left" style="border: 1px solid black;" margin-bottom: 10%;>NEED TEST CERTIFICATE</th>
                     <th align="left" style="border: 1px solid black;" margin-bottom: 10%;>DELIVERY DATE</th>
@@ -12173,13 +12169,13 @@ public function downloadvendorpo($id){
                 </tr>
                 <tr style="border: 1px solid black;">
                     <td style="border: 1px solid black;text-align:center"><b>YES<b></td>
-                    <td style="border: 1px solid black;padding-left: 15px;">'.date('d-m-Y',strtotime($getsupplierdeatilsForInvoice['delivery_date'])).'</td>    
-                    <td style="border: 1px solid black;padding-left: 15px;">'.$getsupplierdeatilsForInvoice['work_order'].'</td>
+                    <td style="border: 1px solid black;padding-left: 15px;">'.date('d-m-Y',strtotime($getvendordeatilsForInvoice['delivery_date'])).'</td>    
+                    <td style="border: 1px solid black;padding-left: 15px;">'.$getvendordeatilsForInvoice['work_order'].'</td>
                 </tr>
             </table>
 
 
-            <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:arial;">
+            <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:12px">
                 <tr style="border: 1px solid black;">
                     <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>SR.NO.</th>
                     <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>PART DESCRIPTION</th>
@@ -12201,47 +12197,16 @@ public function downloadvendorpo($id){
                     <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
                 </tr>
 
-                <tr style="border-left: 1px solid black;border-right: 1px solid black;">
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                </tr>
         
 
-            <tr style="border-left: 1px solid black;border-right: 1px solid black;">
-                <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-           </tr>
-    
-            <tr style="border-left: 1px solid black;border-right: 1px solid black;">
-                <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-            </tr>
-
-        
                 <tr style="border-left: 1px solid black;border-right: 1px solid black;">
                     <td style="border-left: 1px solid black;border-right: 1px solid black;"></td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;padding-left: 15px;"><p><b>Delivery Address</b></p>
-                        <p>'.$getsupplierdeatilsForInvoice['vendor_name'].'</p>
-                        <p>'.$getsupplierdeatilsForInvoice['ven_address'].'</p>
-                        <p>'.$getsupplierdeatilsForInvoice['ven_landline'].'</p>
-                        <p>'.$getsupplierdeatilsForInvoice['ven_contact_person'].'</p>
-                        <p>'.$getsupplierdeatilsForInvoice['mobile'].'</p>
-                        <p> GSTIN:'.$getsupplierdeatilsForInvoice['ven_GSTIN'].'</p> 
+                        <p>'.$getvendordeatilsForInvoice['vendor_name'].'</p>
+                        <p>'.$getvendordeatilsForInvoice['ven_address'].'</p>
+                        <p> <b>Kind Attn:</b> '.$getvendordeatilsForInvoice['ven_contact_person'].'</p>
+                        <p> <b>Tel No:</b> '.$getvendordeatilsForInvoice['mobile'].' / '.$getvendordeatilsForInvoice['ven_landline'].'</p>
+                        <p> <b>GSTIN:</b> '.$getvendordeatilsForInvoice['ven_GSTIN'].'</p> 
                     </td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;"></td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;"></td>
@@ -12254,31 +12219,35 @@ public function downloadvendorpo($id){
                 <tr style="border: 1px solid black;">
                     <td colspan="5" style="padding-left: 10px;">'.$this->amount_in_word($subtotal).'</td>
                 
-                    <td style="border: 1px solid black;padding-left: 10px;">SUB TOTAL (+) GST </td>    
+                    <td style="border: 1px solid black;padding-left: 10px;font-family:cambria;font-size:14px;">SUB TOTAL (+) GST </td>    
                     <td style="border: 1px solid black;padding-left: 10px;">'.$subtotal.'/-'.'</td>
                 </tr>
-                
             </table>
 
-            <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:arial;">
+            <table style=" width: 100%;border-collapse: collapse;border: #ccc 1px solid;font-family:cambria;font-size:12px">
+                <tr style="border: 1px solid black;">
+                        <td style="border: 1px solid black;padding-left: 10px;">
+                            <p><b>Remark :</b>'.$getvendordeatilsForInvoice['remark'].'</p>    
+                    </td>   
+                </tr>
+            </table>
+
+            <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:12px">
                   
                    <tr style="border: 1px solid black;">
-                        <td style="border: 1px solid black; padding-left: 10px;" width="78%;">
+                        <td style="border: 1px solid black;padding-left: 10px;" width="75%;">
                             <p><b>NOTE :</b></p>
-                            <p>1. Confirmation of PO is Mandatory</p>
-                            <p>2. Mentioning P.O.No. on Invoice is Mandatory</b></p>
-                            <p>3. Once order issued & accepted, cannot be cancelled</p>
-                            <p>4. Essence of this order is delivering the specified quality product on time.</p>
-                            <p>5. If any Prices issue, should inform in 24hrs after receipt of P.O.</p>
+                            <p><b>1. Confirmation of PO is Mandatory</b></p>
+                            <p><b>2. Mentioning P.O.No. on Invoice is Mandatory</b></p>
+                            <p><b>3. Once order issued & accepted, cannot be cancelled</b></p>
+                            <p><b>4. Essence of this order is delivering the specified quality product on time.</b></p>
+                            <p><b>5. If any Prices issue, should inform in 24hrs after receipt of P.O.</b></p>
                         </td>
-                        <td style="border: 1px solid black;text-align: center;" width="22%" valign="top">
-                            <p style="vertical-align: text-top;font-size:12px;"><b>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</b></p>
-                            <br/>
-                            <br/>
-                            <br/>
-                            <p style="vertical-align: text-top;font-size:10px"><b>AUTHORIZED SIGNATORY</b></p>
+                        <td style="border: 1px solid black;text-align: center;" width="25%" valign="top">
+                            <p style="vertical-align: text-top;font-size:12px;color:#206a9b"><b>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</b></p>
+                            <br/><img src="'.base_url().'assets/images/stmps/supplierpostampsignature.png" width="150" height="100">
+                            <p style="vertical-align: text-top;font-size:10px;color:#206a9b"><b>AUTHORIZED SIGNATORY</b></p>
                         </td> 
-                        <td><img src="'.base_url().'assets/images/supra_logo_1.jpg" width="80" height="80"></td>
                 </tr>
             </table>';
 
@@ -12286,6 +12255,7 @@ public function downloadvendorpo($id){
     
     $mpdf->WriteHTML($html);
     $mpdf->Output('purshase_order.pdf','I'); // opens in browser
+
 
 
 }
