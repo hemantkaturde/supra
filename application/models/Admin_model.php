@@ -1202,7 +1202,14 @@ class Admin_model extends CI_Model
                 $data[$counter]['buyer_po'] = $value['sales_order_number'].'-'.$value['bypo'];
                 $data[$counter]['vendor_name'] = $value['vendor_name'];
                 $data[$counter]['quatation_ref_no'] = $value['quatation_ref_no'];
-                $data[$counter]['quatation_date'] = $value['quatation_date'];
+
+                if($value['quatation_date']){
+                    $quatation_date = $value['quatation_date'];
+                }else{
+                    $quatation_date = '';
+                }
+
+                $data[$counter]['quatation_date'] = $quatation_date;
                 $data[$counter]['action'] = '';
                // $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewSupplierpo/".$value['id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editSupplierpo/".$value['supplierpoid']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>  &nbsp";

@@ -10130,6 +10130,12 @@ public function downlaodsupplierpo($id){
     $getsupplierdeatilsForInvoice = $this->admin_model->getsupplierdeatilsForInvoice($id);
     $getsupplierItemdeatilsForInvoice = $this->admin_model->getsupplierItemdeatilsForInvoice($id);
 
+    if($getsupplierdeatilsForInvoice['quatation_date']){
+        $quatation_date =   $getsupplierdeatilsForInvoice['quatation_date'];
+    }else{
+        $quatation_date = '';
+    }
+
     $CartItem = "";
     $i =1;
     $subtotal = 0;
@@ -10214,7 +10220,7 @@ public function downlaodsupplierpo($id){
                             <p>&nbsp;</p>
                             <p><b>QUOTATION REFERENCE :</b> '.$getsupplierdeatilsForInvoice['quatation_ref_no'].'</p>
                             <p>&nbsp;</p>
-                            <p><b>QUOTATION DATE :</b> '.date('d-m-Y',strtotime($getsupplierdeatilsForInvoice['quatation_date'])).'</p>
+                            <p><b>QUOTATION DATE :</b> '.date('d-m-Y',strtotime($quatation_date)).'</p>
                         </div>
                     </td>
                 </tr>
