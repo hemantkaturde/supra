@@ -11008,6 +11008,7 @@ public function getvendordeatilsForInvoice($id){
                                 .TBL_SUPPLIER.'.contact_person as sup_conatct,'
                                 .TBL_SUPPLIER.'.email as sup_email,'
                                 .TBL_SUPPLIER.'.GSTIN as sup_GSTIN,'
+                                .TBL_SUPPLIER.'.mobile as sup_mobile,'
                                 .TBL_SUPPLIER_PO_MASTER.'.po_number as po_number,'
                                 .TBL_SUPPLIER_PO_MASTER.'.date as date,'
                                 .TBL_SUPPLIER_PO_MASTER.'.quatation_date as quatation_date,'
@@ -11021,12 +11022,16 @@ public function getvendordeatilsForInvoice($id){
                                 .TBL_VENDOR.'.mobile as mobile,'
                                 .TBL_VENDOR.'.email as ven_email,'
                                 .TBL_VENDOR.'.GSTIN as ven_GSTIN,'
+                                .TBL_VENDOR_PO_MASTER.'.po_number as ven_po_number,'
+                                .TBL_VENDOR_PO_MASTER.'.date as ven_date,'
+                                .TBL_VENDOR_PO_MASTER.'.quatation_ref_no as ven_quatation_ref_no,'
+                                .TBL_VENDOR_PO_MASTER.'.quatation_date as ven_quatation_date,'
                     );
 
                     $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_VENDOR_PO_MASTER.'.buyer_po_number');
                     $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_VENDOR_PO_MASTER.'.vendor_name');
                     $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_VENDOR_PO_MASTER.'.supplier_po_number');
-                    $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_SUPPLIER_PO_MASTER.'.id');
+                    $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_VENDOR_PO_MASTER.'.supplier_name');
                     $this->db->where(TBL_VENDOR_PO_MASTER.'.id', $id);
                     $query = $this->db->get(TBL_VENDOR_PO_MASTER);
                     $fetch_result = $query->row_array();

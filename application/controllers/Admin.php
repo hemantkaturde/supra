@@ -12139,23 +12139,23 @@ public function downloadvendorpo($id){
                     <td width="50%" style="padding-left: 15px;">
                         <div>
                             <p>To,</p>
-                            <p><b>'.$getvendordeatilsForInvoice['supplier_name'].'</b></p>
-                            <p>'.$getvendordeatilsForInvoice['supplier_addess'].'</p>
-                            <p><b>Contact No:</b> '.$getvendordeatilsForInvoice['suplier_mobile'].' / '.$getvendordeatilsForInvoice['suplier_landline'].'</p>
-                            <p><b>Contact Person:</b> '.$getvendordeatilsForInvoice['sup_conatct'].'</p>
-                            <p><b>Email:</b> '.$getvendordeatilsForInvoice['sup_email'].'</p>
-                            <p style="color:red">GSTIN:'.$getvendordeatilsForInvoice['sup_GSTIN'].'</p>
+                            <p><b>'.$getvendordeatilsForInvoice['vendor_name'].'</b></p>
+                            <p>'.$getvendordeatilsForInvoice['ven_address'].'</p>
+                            <p><b>Contact No:</b> '.$getvendordeatilsForInvoice['mobile'].' / '.$getvendordeatilsForInvoice['ven_landline'].'</p>
+                            <p><b>Contact Person:</b> '.$getvendordeatilsForInvoice['ven_contact_person'].'</p>
+                            <p><b>Email:</b> '.$getvendordeatilsForInvoice['ven_email'].'</p>
+                            <p style="color:red">GSTIN:'.$getvendordeatilsForInvoice['ven_GSTIN'].'</p>
                         <div>    
                     </td> 
                     <td style="border-left: 1px solid black;padding-left: 15px;font-size:13px" width="50%" >
                         <div>
-                            <p><b>P.O.NO :</b> '.'<span style="color:red">'.$getvendordeatilsForInvoice['po_number'].'</span></p>
+                            <p><b>P.O.NO :</b> '.'<span style="color:red">'.$getvendordeatilsForInvoice['ven_po_number'].'</span></p>
                             <p>&nbsp;</p>
-                            <p><b>P.O.DATE :</b> '.date('d-m-Y',strtotime($getvendordeatilsForInvoice['date'])).'</p>
+                            <p><b>P.O.DATE :</b> '.date('d-m-Y',strtotime($getvendordeatilsForInvoice['ven_date'])).'</p>
                             <p>&nbsp;</p>
-                            <p><b>QUOTATION REFERENCE :</b> '.$getvendordeatilsForInvoice['quatation_ref_no'].'</p>
+                            <p><b>QUOTATION REFERENCE :</b> '.$getvendordeatilsForInvoice['ven_quatation_ref_no'].'</p>
                             <p>&nbsp;</p>
-                            <p><b>QUOTATION DATE :</b> '.date('d-m-Y',strtotime($getvendordeatilsForInvoice['quatation_date'])).'</p>
+                            <p><b>QUOTATION DATE :</b> '.date('d-m-Y',strtotime($getvendordeatilsForInvoice['ven_quatation_date'])).'</p>
                         </div>
                     </td>
                 </tr>
@@ -12201,12 +12201,12 @@ public function downloadvendorpo($id){
 
                 <tr style="border-left: 1px solid black;border-right: 1px solid black;">
                     <td style="border-left: 1px solid black;border-right: 1px solid black;"></td>
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;padding-left: 15px;"><p><b>Delivery Address</b></p>
-                        <p>'.$getvendordeatilsForInvoice['vendor_name'].'</p>
-                        <p>'.$getvendordeatilsForInvoice['ven_address'].'</p>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;padding-left: 15px;"><p><b> Material From</b></p>
+                        <p>'.$getvendordeatilsForInvoice['supplier_name'].'</p>
+                        <p>'.$getvendordeatilsForInvoice['supplier_addess'].'</p>
                         <p> <b>Kind Attn:</b> '.$getvendordeatilsForInvoice['ven_contact_person'].'</p>
-                        <p> <b>Tel No:</b> '.$getvendordeatilsForInvoice['mobile'].' / '.$getvendordeatilsForInvoice['ven_landline'].'</p>
-                        <p> <b>GSTIN:</b> '.$getvendordeatilsForInvoice['ven_GSTIN'].'</p> 
+                        <p> <b>Tel No:</b> '.$getvendordeatilsForInvoice['sup_mobile'].' / '.$getvendordeatilsForInvoice['suplier_landline'].'</p>
+                        <p> <b>GSTIN:</b> '.$getvendordeatilsForInvoice['sup_GSTIN'].'</p> 
                     </td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;"></td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;"></td>
