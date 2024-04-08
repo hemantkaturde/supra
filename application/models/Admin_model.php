@@ -9385,6 +9385,7 @@ class Admin_model extends CI_Model
                          .TBL_SUPPLIER_PO_MASTER.'.quatation_ref_no as quatation_ref_no,'
                          .TBL_SUPPLIER_PO_MASTER.'.delivery_date as delivery_date,'
                          .TBL_SUPPLIER_PO_MASTER.'.work_order as work_order,'
+                         .TBL_SUPPLIER_PO_MASTER.'.remark as remark,'
 
                          .TBL_VENDOR.'.vendor_name as vendor_name,'
                          .TBL_VENDOR.'.address as ven_address,'

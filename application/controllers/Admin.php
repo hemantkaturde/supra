@@ -10193,7 +10193,7 @@ public function downlaodsupplierpo($id){
                     </tr>
             </table>
 
-            <table style=" width: 100%;text-align: left;border-collapse: collapse;font-family:cambria;font-size:14px;border: #ccc 1px solid">
+            <table style=" width: 100%;text-align: left;border-collapse: collapse;font-family:cambria;font-size:13px;border: #ccc 1px solid">
                 <tr style="border: 1px solid black;">
                     <td width="50%" style="padding-left: 15px;">
                         <div>
@@ -10206,7 +10206,7 @@ public function downlaodsupplierpo($id){
                             <p style="color:red">GSTIN:'.$getsupplierdeatilsForInvoice['sup_GSTIN'].'</p>
                         <div>    
                     </td> 
-                    <td style="border-left: 1px solid black;padding-left: 15px;" width="50%" >
+                    <td style="border-left: 1px solid black;padding-left: 15px;font-size:13px" width="50%" >
                         <div>
                             <p><b>P.O.NO :</b> '.'<span style="color:red">'.$getsupplierdeatilsForInvoice['po_number'].'</span></p>
                             <p>&nbsp;</p>
@@ -10283,7 +10283,15 @@ public function downlaodsupplierpo($id){
                 </tr>
             </table>
 
-            <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:10px">
+            <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;font-family:cambria;font-size:12px">
+                <tr style="border: 1px solid black;">
+                        <td style="border: 1px solid black; padding-left: 8px !important;" width="78%;">
+                            <p><b>Remark :</b>'.$getsupplierdeatilsForInvoice['remark'].'</p>    
+                    </td>   
+                </tr>
+            </table>
+
+            <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:12px">
                   
                    <tr style="border: 1px solid black;">
                         <td style="border: 1px solid black; padding-left: 8px !important;" width="78%;">
@@ -10296,9 +10304,7 @@ public function downlaodsupplierpo($id){
                         </td>
                         <td style="border: 1px solid black;text-align: center;" width="22%" valign="top">
                             <p style="vertical-align: text-top;font-size:12px;color:#206a9b"><b>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</b></p>
-                            <br/>
-                            <br/>
-                            <br/>
+                            <br/><img src="'.base_url().'assets/images/stmps/supplierpostampsignature.jpg" width="100" height="100">
                             <p style="vertical-align: text-top;font-size:10px;color:#206a9b"><b>AUTHORIZED SIGNATORY</b></p>
                         </td> 
                 </tr>
@@ -12251,6 +12257,7 @@ public function downloadvendorpo($id){
                     <td style="border: 1px solid black;padding-left: 10px;">SUB TOTAL (+) GST </td>    
                     <td style="border: 1px solid black;padding-left: 10px;">'.$subtotal.'/-'.'</td>
                 </tr>
+                
             </table>
 
             <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:arial;">
@@ -12271,6 +12278,7 @@ public function downloadvendorpo($id){
                             <br/>
                             <p style="vertical-align: text-top;font-size:10px"><b>AUTHORIZED SIGNATORY</b></p>
                         </td> 
+                        <td><img src="'.base_url().'assets/images/supra_logo_1.jpg" width="80" height="80"></td>
                 </tr>
             </table>';
 
