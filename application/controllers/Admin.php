@@ -12169,8 +12169,8 @@ public function downloadvendorpo($id){
                 </tr>
                 <tr style="border: 1px solid black;">
                     <td style="border: 1px solid black;text-align:center"><b>YES<b></td>
-                    <td style="border: 1px solid black;padding-left: 15px;">'.date('d-m-Y',strtotime($getvendordeatilsForInvoice['delivery_date'])).'</td>    
-                    <td style="border: 1px solid black;padding-left: 15px;">'.$getvendordeatilsForInvoice['work_order'].'</td>
+                    <td style="border: 1px solid black;padding-left: 15px;">'.date('d-m-Y',strtotime($getvendordeatilsForInvoice['ven_delivery_date'])).'</td>    
+                    <td style="border: 1px solid black;padding-left: 15px;">'.$getvendordeatilsForInvoice['ven_work_order'].'</td>
                 </tr>
             </table>
 

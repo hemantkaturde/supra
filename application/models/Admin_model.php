@@ -11026,6 +11026,10 @@ public function getvendordeatilsForInvoice($id){
                                 .TBL_VENDOR_PO_MASTER.'.date as ven_date,'
                                 .TBL_VENDOR_PO_MASTER.'.quatation_ref_no as ven_quatation_ref_no,'
                                 .TBL_VENDOR_PO_MASTER.'.quatation_date as ven_quatation_date,'
+                                .TBL_VENDOR_PO_MASTER.'.delivery_date as ven_delivery_date,'
+                                .TBL_VENDOR_PO_MASTER.'.work_order as ven_work_order,'
+
+                                
                     );
 
                     $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_VENDOR_PO_MASTER.'.buyer_po_number');
