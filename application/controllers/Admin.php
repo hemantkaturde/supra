@@ -10139,6 +10139,11 @@ public function downlaodsupplierpo($id){
     $CartItem = "";
     $i =1;
     $subtotal = 0;
+
+
+    $item_count =count($getsupplierItemdeatilsForInvoice);
+    // exit;
+
     foreach ($getsupplierItemdeatilsForInvoice as $key => $value) {
         $CartItem .= '
                 <tr style="border-left: 1px solid black;border-right: 1px solid black;">
@@ -10153,8 +10158,6 @@ public function downlaodsupplierpo($id){
                 $subtotal+=$value['value'];
             $i++;       
     }
-
-
 
     $mpdf = new \Mpdf\Mpdf();
     // $html = $this->load->view('html_to_pdf',[],true);
@@ -10250,9 +10253,9 @@ public function downlaodsupplierpo($id){
                     <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>RATE</th>  
                     <th align="left"  style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>AMOUNT</th>
                 </tr>
-                '.$CartItem.'
-
-                <tr style="border-left: 1px solid black;border-right: 1px solid black;">
+                '.$CartItem.'    
+                
+                <tr>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
@@ -10261,9 +10264,7 @@ public function downlaodsupplierpo($id){
                     <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
                 </tr>
-
-        
-
+ 
                 <tr style="border-left: 1px solid black;border-right: 1px solid black;">
                     <td style="border-left: 1px solid black;border-right: 1px solid black;"></td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;padding-left: 15px;"><p><b>Delivery Address</b></p>
