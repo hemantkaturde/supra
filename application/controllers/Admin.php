@@ -10145,11 +10145,11 @@ public function downlaodsupplierpo($id){
     if($item_count==1){
         $padding_bottom = '120px';
     }else if($item_count==2){
-        $padding_bottom = '60px';
-    }else if($item_count==3){
         $padding_bottom = '30px';
+    }else if($item_count==3){
+        $padding_bottom = '10px';
     }else{
-        $padding_bottom = '40px';
+        $padding_bottom = '10px';
     }
 
     foreach ($getsupplierItemdeatilsForInvoice as $key => $value) {
