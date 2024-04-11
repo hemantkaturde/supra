@@ -10328,7 +10328,7 @@ public function downlaodsupplierpo($id){
             // <p>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</p>
     $invoice_name =  $getsupplierdeatilsForInvoice['po_number'].' - '.$getsupplierdeatilsForInvoice['supplier_name'].'.pdf';
     $mpdf->WriteHTML($html);
-    $mpdf->Output($invoice_name,'I'); // opens in browser
+    $mpdf->Output($invoice_name,'D'); // opens in browser
 
 
 }
