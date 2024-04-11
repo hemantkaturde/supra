@@ -10145,9 +10145,9 @@ public function downlaodsupplierpo($id){
     if($item_count==1){
         $padding_bottom = '120px';
     }else if($item_count==2){
-        $padding_bottom = '80px';
+        $padding_bottom = '60px';
     }else if($item_count==3){
-        $padding_bottom = '40px';
+        $padding_bottom = '30px';
     }else{
         $padding_bottom = '40px';
     }
@@ -10291,9 +10291,9 @@ public function downlaodsupplierpo($id){
 
 
                 <tr style="border: 1px solid black;">
-                    <td colspan="5" style="padding-left: 10px;">'.$this->amount_in_word($subtotal).'</td>
+                    <td colspan="4" style="padding-left: 10px;">'.$this->amount_in_word($subtotal).'</td>
                 
-                    <td style="border: 1px solid black;padding-left: 10px;font-family:cambria;font-size:14px;">SUB TOTAL (+) GST </td>    
+                    <td colspan="2"  style="border: 1px solid black;padding-left: 10px;padding-right: 10px;font-family:cambria;font-size:12px;">SUB TOTAL (+) GST </td>    
                     <td style="border: 1px solid black;padding-left: 10px;">'.$subtotal.'/-'.'</td>
                 </tr>
             </table>
@@ -10319,7 +10319,7 @@ public function downlaodsupplierpo($id){
                         </td>
                         <td style="border: 1px solid black;text-align: center;" width="25%" valign="top">
                             <p style="vertical-align: text-top;font-size:12px;color:#206a9b"><b>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</b></p>
-                            <br/><img src="'.base_url().'assets/images/stmps/supplierpostampsignature.png" width="140" height="100">
+                            <br/><img src="'.base_url().'assets/images/stmps/supplierpostampsignature.png" width="130" height="100">
                             <p style="vertical-align: text-top;font-size:10px;color:#206a9b"><b>AUTHORIZED SIGNATORY</b></p>
                         </td> 
                 </tr>
@@ -10328,7 +10328,7 @@ public function downlaodsupplierpo($id){
             // <p>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</p>
     $invoice_name =  $getsupplierdeatilsForInvoice['po_number'].' - '.$getsupplierdeatilsForInvoice['supplier_name'].'.pdf';
     $mpdf->WriteHTML($html);
-    $mpdf->Output($invoice_name,'D'); // opens in browser
+    $mpdf->Output($invoice_name,'I'); // opens in browser
 
 
 }
