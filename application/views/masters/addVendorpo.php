@@ -32,9 +32,7 @@
                                            $getPreviousPONumber_number = substr($getPreviousPONumber['po_number'], -4);
 
                                            if($getPrevioussupplierPONumber_number > $getPreviousPONumber_number){
-
-                                         
-
+                                            
                                                     if($getPrevioussupplierPONumber_number){
                                                         // $arr = str_split($getPrevioussupplierPONumber_number);
                                                         // $i = end($arr);

@@ -10140,20 +10140,28 @@ public function downlaodsupplierpo($id){
     $i =1;
     $subtotal = 0;
 
-
     $item_count =count($getsupplierItemdeatilsForInvoice);
-    // exit;
+
+    if($item_count==1){
+        $padding_bottom = '120px';
+    }else if($item_count==2){
+        $padding_bottom = '80px';
+    }else if($item_count==3){
+        $padding_bottom = '40px';
+    }else{
+        $padding_bottom = '40px';
+    }
 
     foreach ($getsupplierItemdeatilsForInvoice as $key => $value) {
         $CartItem .= '
-                <tr style="border-left: 1px solid black;border-right: 1px solid black;">
-                    <td style="border: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$i.'</td>
-                    <td style="border: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['type_of_raw_material'].' <br>Vendor Qty-'.$value['vendor_qty'].' pcs </br> <br>Gross Weight-'.$value['rmgrossweight'].' kgs </br><br>'.$value['description_1'].'</br><br>'.$value['description_2'].'</br></td>   
-                    <td style="border: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['part_number'].'</td>
-                    <td style="border: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['order_oty'].'</td>
-                    <td style="border: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['unit'].'</td> 
-                    <td style="border: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rate'].'/-'.'</td>    
-                    <td style="border: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['value'].'/-'.'</td>
+                <tr style="style=border-left: 1px solid black;border-right: 1px solid black;">
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;padding-bottom: '.$padding_bottom.';" valign="top">'.$i.'</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;padding-bottom: '.$padding_bottom.';" valign="top">'.$value['type_of_raw_material'].' <br>Vendor Qty-'.$value['vendor_qty'].' pcs </br> <br>Gross Weight-'.$value['rmgrossweight'].' kgs </br><br>'.$value['description_1'].'</br><br>'.$value['description_2'].'</br></td>   
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;padding-bottom: '.$padding_bottom.';" valign="top">'.$value['part_number'].'</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;padding-bottom: '.$padding_bottom.';" valign="top">'.$value['order_oty'].'</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;padding-bottom: '.$padding_bottom.';" valign="top">'.$value['unit'].'</td> 
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;padding-bottom: '.$padding_bottom.';" valign="top">'.$value['rate'].'/-'.'</td>    
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;padding-bottom: '.$padding_bottom.';" valign="top">'.$value['value'].'/-'.'</td>
                 </tr>';
                 $subtotal+=$value['value'];
             $i++;       
@@ -10311,16 +10319,16 @@ public function downlaodsupplierpo($id){
                         </td>
                         <td style="border: 1px solid black;text-align: center;" width="25%" valign="top">
                             <p style="vertical-align: text-top;font-size:12px;color:#206a9b"><b>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</b></p>
-                            <br/><img src="'.base_url().'assets/images/stmps/supplierpostampsignature.png" width="150" height="100">
+                            <br/><img src="'.base_url().'assets/images/stmps/supplierpostampsignature.png" width="140" height="100">
                             <p style="vertical-align: text-top;font-size:10px;color:#206a9b"><b>AUTHORIZED SIGNATORY</b></p>
                         </td> 
                 </tr>
             </table>';
 
             // <p>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</p>
-    
+    $invoice_name =  $getsupplierdeatilsForInvoice['po_number'].' - '.$getsupplierdeatilsForInvoice['supplier_name'].'.pdf';
     $mpdf->WriteHTML($html);
-    $mpdf->Output('purshase_order.pdf','I'); // opens in browser
+    $mpdf->Output($invoice_name,'D'); // opens in browser
 
 
 }

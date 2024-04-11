@@ -27,13 +27,10 @@
                                     <?php
                                         if($getPreviousvendorPONumber['po_number']){
                                             $getPreviousvendorPONumber_number = substr($getPreviousvendorPONumber['po_number'], -4);
-
                                             $getPreviousPONumber_number = substr($getPreviousPONumber['po_number'], -4);
-
                                             if($getPreviousvendorPONumber_number > $getPreviousPONumber_number){
-
                                                 if($getPreviousvendorPONumber_number){
-                                                  
+                    
                                                     // $arr = str_split($getPreviousvendorPONumber_number);
                                                     // $i = end($arr);
                                                     // $inrno= "SQPO2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
@@ -120,20 +117,21 @@
                                                       // Check if the current date falls within the financial year
                                                       if ($currentDate >= $financialYearStart && $currentDate <= $financialYearEnd) {
                                                          
-                                                          $string = $getPreviousvendorPONumber_number;
-                                                          $n = 4; // Number of characters to extract from the end
-                                                          $lastNCharacters = substr($string, -$n);
-                                                          $inrno= "SQPO2425".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
-                                                          $po_number = $inrno;
+                                                            $string = $getPreviousPONumber['po_number'];
+                                                            $n = 4; // Number of characters to extract from the end
+                                                            $lastNCharacters = substr($string, -$n);
+                                                            $inrno= "SQPO2425".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                            $po_number = $inrno;
 
                                                       } else {
-                                                          $po_number = 'SQPO24250001';
+                                                            $string = $getPreviousvendorPONumber_number;
+                                                            $n = 4; // Number of characters to extract from the end
+                                                            $lastNCharacters = substr($string, -$n);
+                                                            $inrno= "SQPO2425".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                            $po_number = $inrno;
 
                                                       }  
                                                     /* New Logic End Here */
-
-    
-
                                                 }else{
                                                     $po_number = 'SQPO24250001';
                                                 }   
@@ -172,14 +170,18 @@
                                                       // Check if the current date falls within the financial year
                                                       if ($currentDate >= $financialYearStart && $currentDate <= $financialYearEnd) {
                                                          
-                                                          $string = $getPreviousvendorPONumber_number;
+                                                          $string = $getPreviousPONumber['po_number'];
                                                           $n = 4; // Number of characters to extract from the end
                                                           $lastNCharacters = substr($string, -$n);
                                                           $inrno= "SQPO2425".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
                                                           $po_number = $inrno;
 
                                                       } else {
-                                                          $po_number = 'SQPO24250001';
+                                                          $string = $getPreviousvendorPONumber_number;
+                                                          $n = 4; // Number of characters to extract from the end
+                                                          $lastNCharacters = substr($string, -$n);
+                                                          $inrno= "SQPO2425".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                          $po_number = $inrno;
 
                                                       }  
                                                     /* New Logic End Here */
