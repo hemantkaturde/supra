@@ -10145,7 +10145,7 @@ public function downlaodsupplierpo($id){
     if($item_count==1){
         $padding_bottom = '120px';
     }else if($item_count==2){
-        $padding_bottom = '30px';
+        $padding_bottom = '28px';
     }else if($item_count==3){
         $padding_bottom = '10px';
     }else{
@@ -10291,7 +10291,7 @@ public function downlaodsupplierpo($id){
 
 
                 <tr style="border: 1px solid black;">
-                    <td colspan="4" style="padding-left: 10px;">'.$this->amount_in_word($subtotal).'</td>
+                    <td colspan="4" style="padding: 10px;">'.$this->amount_in_word($subtotal).'</td>
                 
                     <td colspan="2"  style="border: 1px solid black;padding-left: 10px;padding-right: 10px;font-family:cambria;font-size:12px;">SUB TOTAL (+) GST </td>    
                     <td style="border: 1px solid black;padding-left: 10px;">'.$subtotal.'/-'.'</td>
