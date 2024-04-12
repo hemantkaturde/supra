@@ -304,7 +304,8 @@
                                     <?php if($fetchALLpresupplieritemList[0]['pre_quatation_date']){
                                         $buyer_po_date= $fetchALLpresupplieritemList[0]['pre_quatation_date'];
                                      }else{
-                                        $buyer_po_date= date('Y-m-d');
+                                        //$buyer_po_date= date('Y-m-d');
+                                        $buyer_po_date= '';
                                      } ?>
 
                                     <div class="col-md-12">
