@@ -108,12 +108,18 @@
                                         </div>
                                     </div>
 
-                                
+                                    <?php
+                                        if($getSuplierpodetails[0]['quatation_date']!='0000-00-00'){
+                                            $quatation_date = $getSuplierpodetails[0]['quatation_date'];
+                                        }else{
+                                            $quatation_date = '';
+                                        }
+                                    ?>
 
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="quatation_date">Quotation Date</label>
-                                            <input type="text" class="form-control datepicker" value="<?=$getSuplierpodetails[0]['quatation_date'];?>" id="quatation_date" name="quatation_date" required>
+                                            <input type="text" class="form-control datepicker" value="<?=$quatation_date;?>" id="quatation_date" name="quatation_date" required>
                                             <p class="error quatation_date_error"></p>
                                         </div>
                                     </div>

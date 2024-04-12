@@ -10130,7 +10130,7 @@ public function downlaodsupplierpo($id){
     $getsupplierdeatilsForInvoice = $this->admin_model->getsupplierdeatilsForInvoice($id);
     $getsupplierItemdeatilsForInvoice = $this->admin_model->getsupplierItemdeatilsForInvoice($id);
 
-    if($getsupplierdeatilsForInvoice['quatation_date']){
+    if($getsupplierdeatilsForInvoice['quatation_date']!='0000-00-00'){
         $quatation_date =   $getsupplierdeatilsForInvoice['quatation_date'];
     }else{
         $quatation_date = '';

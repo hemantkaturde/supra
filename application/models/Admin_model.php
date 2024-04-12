@@ -1203,7 +1203,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['vendor_name'] = $value['vendor_name'];
                 $data[$counter]['quatation_ref_no'] = $value['quatation_ref_no'];
 
-                if($value['quatation_date']){
+                if($value['quatation_date']!='0000-00-00'){
                     $quatation_date = $value['quatation_date'];
                 }else{
                     $quatation_date = '';
