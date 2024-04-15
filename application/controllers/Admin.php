@@ -12306,27 +12306,25 @@ public function downloadvendorpo($id){
         $padding_bottom = '10px';
     }
 
-    foreach ($getvendorItemdeatilsForInvoice as $key => $value) {
+    foreach ($getsuppliertemdeatilsForInvoiceonvendorpo as $key => $value) {
         $supplierItem .= '
-                <tr style="style=border-left: 1px solid black;border-right: 1px solid black;">
-                    <td style="border-left: 1px solid black;text-align:left;padding: 10px;" valign="top"></td>
-                    <td style="border-left: 1px solid black;padding-left: 10px;" valign="top">'.$i.' '.$value['name'].'</br></td> 
-                    <td style="" valign="top">'.$value['type_of_raw_material'].'</td>
-                    <td style="" valign="top">'.$value['gross_weight'].'kgs</td>
-                    <td style="" valign="top">'.$value['unit'].'</td> 
-                    <td style="" valign="top">'.$value['rate'].'/-'.'</td>    
-                    <td style="border-right: 1px solid black;" valign="top">'.$value['value'].'/-'.'</td>
-                </tr>';
+            <tr style="border-left: 1px solid black;border-right: 1px solid black;">
+                <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top"></td>
+                <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$i.'.'.$value['type_of_raw_material'].'-'.$value['part_number'].' - '.$value['order_oty'].' kgs * '.$value['rate'].' = '.$value['value'].'</td> 
+                <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top"></td>
+                <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top"></td>
+                <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top"></td> 
+                <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top"></td>    
+                <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top"></td>
+            </tr>';
             $i++;       
     }
 
 
 
-
-
     foreach ($getvendorItemdeatilsForInvoice as $key => $value) {
         $CartItem .= '
-                <tr style="style=border-left: 1px solid black;border-right: 1px solid black;">
+                <tr style="border-left: 1px solid black;border-right: 1px solid black;">
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$i.'</td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['name'].'<br>Gross Weight-'.$value['rmgrossweight'].' kgs </br><br>HSN Code -'.$value['hsn_code'].'</br><br>'.$value['desc1'].'</br><br>'.$value['desc2'].'</br></td> 
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['part_number'].'</td>
