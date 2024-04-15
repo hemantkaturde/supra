@@ -11026,7 +11026,7 @@ public function getvendordeatilsForInvoice($id){
                                 .TBL_VENDOR.'.address as ven_address,'
                                 .TBL_VENDOR.'.landline as ven_landline,'
                                 .TBL_VENDOR.'.contact_person as ven_contact_person,'
-                                .TBL_VENDOR.'.mobile as mobile,'
+                                .TBL_VENDOR.'.mobile as ven_mobile,'
                                 .TBL_VENDOR.'.email as ven_email,'
                                 .TBL_VENDOR.'.GSTIN as ven_GSTIN,'
                                 .TBL_VENDOR_PO_MASTER.'.po_number as ven_po_number,'
@@ -11035,6 +11035,7 @@ public function getvendordeatilsForInvoice($id){
                                 .TBL_VENDOR_PO_MASTER.'.quatation_date as ven_quatation_date,'
                                 .TBL_VENDOR_PO_MASTER.'.delivery_date as ven_delivery_date,'
                                 .TBL_VENDOR_PO_MASTER.'.work_order as ven_work_order,'
+                                .TBL_VENDOR_PO_MASTER.'.remark as ven_remark,'
 
                                 
                     );
@@ -11053,9 +11054,10 @@ public function getvendordeatilsForInvoice($id){
 public function getvendorItemdeatilsForInvoice($id){
 
     // $this->db->select('*,'.TBL_RAWMATERIAL.'.gross_weight as rmgrossweight');
-    $this->db->select('*');
+    $this->db->select('*,'.TBL_VENDOR_PO_MASTER_ITEM.'.description_1 as desc1,'.TBL_VENDOR_PO_MASTER_ITEM.'.description_2 as desc2');
     // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
     // $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id');
+    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
     $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id', $id);
     $query = $this->db->get(TBL_VENDOR_PO_MASTER_ITEM);
     $fetch_result = $query->result_array();

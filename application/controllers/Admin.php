@@ -12282,8 +12282,8 @@ public function downloadvendorpo($id){
     $getvendordeatilsForInvoice = $this->admin_model->getvendordeatilsForInvoice($id);
     $getvendorItemdeatilsForInvoice = $this->admin_model->getvendorItemdeatilsForInvoice($id);
 
-    if($getvendordeatilsForInvoice['quatation_date']!='0000-00-00'){
-        $quatation_date =  date('d-m-Y',strtotime($getvendordeatilsForInvoice['quatation_date']));
+    if($getvendordeatilsForInvoice['ven_quatation_date']!='0000-00-00'){
+        $quatation_date =  date('d-m-Y',strtotime($getvendordeatilsForInvoice['ven_quatation_date']));
     }else{
         $quatation_date = '';
     }
@@ -12304,11 +12304,14 @@ public function downloadvendorpo($id){
         $padding_bottom = '10px';
     }
 
+    // <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['name'].' <br>Vendor Qty-'.$value['vendor_qty'].' pcs </br> <br>Gross Weight-'.$value['rmgrossweight'].' kgs </br><br>'.$value['desc1'].'</br><br>'.$value['desc2'].'</br></td>   
+
+
     foreach ($getvendorItemdeatilsForInvoice as $key => $value) {
         $CartItem .= '
                 <tr style="style=border-left: 1px solid black;border-right: 1px solid black;">
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$i.'</td>
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['type_of_raw_material'].' <br>Vendor Qty-'.$value['vendor_qty'].' pcs </br> <br>Gross Weight-'.$value['rmgrossweight'].' kgs </br><br>'.$value['description_1'].'</br><br>'.$value['description_2'].'</br></td>   
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['name'].'<br>'.$value['desc1'].'</br><br>'.$value['desc2'].'</br><br>Gross Weight-'.$value['rmgrossweight'].' kgs </br><br>HSN Code -'.$value['hsn_code'].'</br></td> 
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['part_number'].'</td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['order_oty'].'</td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['unit'].'</td> 
@@ -12377,21 +12380,21 @@ public function downloadvendorpo($id){
                     <td width="50%" style="padding-left: 15px;">
                         <div>
                             <p>To,</p>
-                            <p><b>'.$getvendordeatilsForInvoice['supplier_name'].'</b></p>
-                            <p>'.$getvendordeatilsForInvoice['supplier_addess'].'</p>
-                            <p><b>Contact No:</b> '.$getvendordeatilsForInvoice['suplier_mobile'].' / '.$getvendordeatilsForInvoice['suplier_landline'].'</p>
-                            <p><b>Contact Person:</b> '.$getvendordeatilsForInvoice['sup_conatct'].'</p>
-                            <p><b>Email:</b> '.$getvendordeatilsForInvoice['sup_email'].'</p>
-                            <p style="color:red">GSTIN:'.$getvendordeatilsForInvoice['sup_GSTIN'].'</p>
+                            <p><b>'.$getvendordeatilsForInvoice['vendor_name'].'</b></p>
+                            <p>'.$getvendordeatilsForInvoice['ven_address'].'</p>
+                            <p><b>Contact No:</b> '.$getvendordeatilsForInvoice['ven_mobile'].' / '.$getvendordeatilsForInvoice['ven_landline'].'</p>
+                            <p><b>Contact Person:</b> '.$getvendordeatilsForInvoice['ven_contact_person'].'</p>
+                            <p><b>Email:</b> '.$getvendordeatilsForInvoice['ven_email'].'</p>
+                            <p style="color:red">GSTIN:'.$getvendordeatilsForInvoice['ven_GSTIN'].'</p>
                         <div>    
                     </td> 
                     <td style="border-left: 1px solid black;padding-left: 15px;font-size:13px" width="50%" >
                         <div>
-                            <p><b>P.O.NO :</b> '.'<span style="color:red">'.$getvendordeatilsForInvoice['po_number'].'</span></p>
+                            <p><b>P.O.NO :</b> '.'<span style="color:red">'.$getvendordeatilsForInvoice['ven_po_number'].'</span></p>
                             <p>&nbsp;</p>
-                            <p><b>P.O.DATE :</b> '.date('d-m-Y',strtotime($getvendordeatilsForInvoice['date'])).'</p>
+                            <p><b>P.O.DATE :</b> '.date('d-m-Y',strtotime($getvendordeatilsForInvoice['ven_date'])).'</p>
                             <p>&nbsp;</p>
-                            <p><b>QUOTATION REFERENCE :</b> '.$getvendordeatilsForInvoice['quatation_ref_no'].'</p>
+                            <p><b>QUOTATION REFERENCE :</b> '.$getvendordeatilsForInvoice['ven_quatation_ref_no'].'</p>
                             <p>&nbsp;</p>
                             <p><b>QUOTATION DATE :</b> '.$quatation_date.'</p>
                         </div>
@@ -12401,14 +12404,12 @@ public function downloadvendorpo($id){
 
             <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:12px">
                 <tr style="border: 1px solid black;">
-                    <th align="left" style="border: 1px solid black;" margin-bottom: 10%;>NEED TEST CERTIFICATE</th>
-                    <th align="left" style="border: 1px solid black;" margin-bottom: 10%;>DELIVERY DATE</th>
-                    <th align="left" style="border: 1px solid black;" margin-bottom: 10%;>PAYMENT TERMS</th>    
+                    <th align="left" style="border: 1px solid black;padding-left: 10px;" margin-bottom: 10%;>DELIVERY DATE</th>
+                    <th align="left" style="border: 1px solid black;padding-left: 10px;" margin-bottom: 10%;>PAYMENT TERMS</th>    
                 </tr>
                 <tr style="border: 1px solid black;">
-                    <td style="border: 1px solid black;text-align:center"><b>YES<b></td>
-                    <td style="border: 1px solid black;padding-left: 15px;">'.date('d-m-Y',strtotime($getvendordeatilsForInvoice['delivery_date'])).'</td>    
-                    <td style="border: 1px solid black;padding-left: 15px;">'.$getvendordeatilsForInvoice['work_order'].'</td>
+                    <td style="border: 1px solid black;padding-left: 10px;">'.date('d-m-Y',strtotime($getvendordeatilsForInvoice['delivery_date'])).'</td>    
+                    <td style="border: 1px solid black;padding-left: 10px;">'.$getvendordeatilsForInvoice['work_order'].'</td>
                 </tr>
             </table>
 
@@ -12429,12 +12430,8 @@ public function downloadvendorpo($id){
  
                 <tr style="border-left: 1px solid black;border-right: 1px solid black;">
                     <td style="border-left: 1px solid black;border-right: 1px solid black;"></td>
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;padding-left: 15px;"><p><b>Delivery Address</b></p>
-                        <p>'.$getvendordeatilsForInvoice['vendor_name'].'</p>
-                        <p>'.$getvendordeatilsForInvoice['ven_address'].'</p>
-                        <p> <b>Kind Attn:</b> '.$getvendordeatilsForInvoice['ven_contact_person'].'</p>
-                        <p> <b>Tel No:</b> '.$getvendordeatilsForInvoice['mobile'].' / '.$getvendordeatilsForInvoice['ven_landline'].'</p>
-                        <p> <b>GSTIN:</b> '.$getvendordeatilsForInvoice['ven_GSTIN'].'</p> 
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;padding-left: 15px;"><p><b>Material Form : </b></p>
+                        <p>'.$getvendordeatilsForInvoice['supplier_name'].'</p>
                     </td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;"></td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;"></td>
@@ -12455,7 +12452,7 @@ public function downloadvendorpo($id){
             <table style=" width: 100%;border-collapse: collapse;border: #ccc 1px solid;font-family:cambria;font-size:12px">
                 <tr style="border: 1px solid black;">
                         <td style="border: 1px solid black;padding-left: 10px;">
-                            <p><b>Remark :</b>'.$getvendordeatilsForInvoice['remark'].'</p>    
+                            <p><b>Remark :</b>'.$getvendordeatilsForInvoice['ven_remark'].'</p>    
                     </td>   
                 </tr>
             </table>
@@ -12480,7 +12477,7 @@ public function downloadvendorpo($id){
             </table>';
 
             // <p>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</p>
-    $invoice_name =  $getvendordeatilsForInvoice['po_number'].' - '.$getvendordeatilsForInvoice['supplier_name'].'.pdf';
+    $invoice_name =  $getvendordeatilsForInvoice['ven_po_number'].' - '.$getvendordeatilsForInvoice['vendor_name'].'.pdf';
     $mpdf->WriteHTML($html);
     $mpdf->Output($invoice_name,'D'); // opens in browser
 
