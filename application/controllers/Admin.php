@@ -12292,6 +12292,7 @@ public function downloadvendorpo($id){
     $CartItem = "";
     $supplierItem = "";
     $i =1;
+    $ii =1;
     $subtotal = 0;
 
     $item_count =count($getvendorItemdeatilsForInvoice);
@@ -12309,13 +12310,13 @@ public function downloadvendorpo($id){
     foreach ($getsuppliertemdeatilsForInvoiceonvendorpo as $key => $value) {
         $supplierItem .= '
             <tr style="border-left: 1px solid black;border-right: 1px solid black;">
-                <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top"></td>
-                <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$i.'.'.$value['type_of_raw_material'].'-'.$value['part_number'].' - '.$value['order_oty'].' kgs * '.$value['rate'].' = '.$value['value'].'</td> 
-                <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top"></td>
-                <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top"></td>
-                <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top"></td> 
-                <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top"></td>    
-                <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top"></td>
+                <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding-left: 15px;" valign="top"></td>
+                <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding-left: 15px;" valign="top">'.$i.'.'.$value['type_of_raw_material'].'-'.$value['part_number'].' - '.$value['order_oty'].' kgs * '.$value['rate'].' = '.$value['value'].'</td> 
+                <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding-left: 10px;" valign="top"></td>
+                <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding-left: 10px;" valign="top"></td>
+                <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding-left: 10px;" valign="top"></td> 
+                <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding-left: 10px;" valign="top"></td>    
+                <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding-left: 10px;" valign="top"></td>
             </tr>';
             $i++;       
     }
@@ -12325,7 +12326,7 @@ public function downloadvendorpo($id){
     foreach ($getvendorItemdeatilsForInvoice as $key => $value) {
         $CartItem .= '
                 <tr style="border-left: 1px solid black;border-right: 1px solid black;">
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$i.'</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$ii.'</td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['name'].'<br>Gross Weight-'.$value['rmgrossweight'].' kgs </br><br>HSN Code -'.$value['hsn_code'].'</br><br>'.$value['desc1'].'</br><br>'.$value['desc2'].'</br></td> 
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['part_number'].'</td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['order_oty'].'</td>
@@ -12334,7 +12335,7 @@ public function downloadvendorpo($id){
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['value'].'/-'.'</td>
                 </tr>';
                 $subtotal+=$value['value'];
-            $i++;       
+            $ii++;       
     }
 
     $space = '<tr>

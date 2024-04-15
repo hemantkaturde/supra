@@ -11055,7 +11055,7 @@ public function getvendordeatilsForInvoice($id){
 public function getvendorItemdeatilsForInvoice($id){
 
     // $this->db->select('*,'.TBL_RAWMATERIAL.'.gross_weight as rmgrossweight');
-    $this->db->select('*,'.TBL_VENDOR_PO_MASTER_ITEM.'.description_1 as desc1,'.TBL_VENDOR_PO_MASTER_ITEM.'.description_2 as desc2');
+    $this->db->select('*,'.TBL_VENDOR_PO_MASTER_ITEM.'.description_1 as desc1,'.TBL_VENDOR_PO_MASTER_ITEM.'.description_2 as desc2,'.TBL_FINISHED_GOODS.'.groass_weight as rmgrossweight,'.TBL_VENDOR_PO_MASTER_ITEM.'.unit as unit');
     // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
     // $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id');
     $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
