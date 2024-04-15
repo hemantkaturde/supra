@@ -12281,6 +12281,7 @@ public function downloadvendorpo($id){
 
     $getvendordeatilsForInvoice = $this->admin_model->getvendordeatilsForInvoice($id);
     $getvendorItemdeatilsForInvoice = $this->admin_model->getvendorItemdeatilsForInvoice($id);
+    $getsuppliertemdeatilsForInvoiceonvendorpo = $this->admin_model->getsuppliertemdeatilsForInvoiceonvendorpo(trim($getvendordeatilsForInvoice['supplier_po_id']));
 
     if($getvendordeatilsForInvoice['ven_quatation_date']!='0000-00-00'){
         $quatation_date =  date('d-m-Y',strtotime($getvendordeatilsForInvoice['ven_quatation_date']));
@@ -12289,6 +12290,7 @@ public function downloadvendorpo($id){
     }
 
     $CartItem = "";
+    $supplierItem = "";
     $i =1;
     $subtotal = 0;
 
@@ -12304,7 +12306,22 @@ public function downloadvendorpo($id){
         $padding_bottom = '10px';
     }
 
-    // <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['name'].' <br>Vendor Qty-'.$value['vendor_qty'].' pcs </br> <br>Gross Weight-'.$value['rmgrossweight'].' kgs </br><br>'.$value['desc1'].'</br><br>'.$value['desc2'].'</br></td>   
+    foreach ($getvendorItemdeatilsForInvoice as $key => $value) {
+        $supplierItem .= '
+                <tr style="style=border-left: 1px solid black;border-right: 1px solid black;">
+                    <td style="border-left: 1px solid black;text-align:left;padding: 10px;" valign="top"></td>
+                    <td style="border-left: 1px solid black;padding-left: 10px;" valign="top">'.$i.' '.$value['name'].'</br></td> 
+                    <td style="" valign="top">'.$value['type_of_raw_material'].'</td>
+                    <td style="" valign="top">'.$value['gross_weight'].'kgs</td>
+                    <td style="" valign="top">'.$value['unit'].'</td> 
+                    <td style="" valign="top">'.$value['rate'].'/-'.'</td>    
+                    <td style="border-right: 1px solid black;" valign="top">'.$value['value'].'/-'.'</td>
+                </tr>';
+            $i++;       
+    }
+
+
+
 
 
     foreach ($getvendorItemdeatilsForInvoice as $key => $value) {
@@ -12439,8 +12456,7 @@ public function downloadvendorpo($id){
                     <td style="border-left: 1px solid black;border-right: 1px solid black;"></td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;"></td>
                 </tr>
-
-
+                '.$supplierItem.'
                 <tr style="border: 1px solid black;">
                     <td colspan="4" style="padding: 8px;">'.$this->amount_in_word($subtotal).'</td>
                 

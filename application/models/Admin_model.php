@@ -11016,6 +11016,7 @@ public function getvendordeatilsForInvoice($id){
                                 .TBL_SUPPLIER.'.email as sup_email,'
                                 .TBL_SUPPLIER.'.GSTIN as sup_GSTIN,'
                                 .TBL_SUPPLIER.'.mobile as sup_mobile,'
+                                .TBL_SUPPLIER_PO_MASTER.'.id  as supplier_po_id,'
                                 .TBL_SUPPLIER_PO_MASTER.'.po_number as po_number,'
                                 .TBL_SUPPLIER_PO_MASTER.'.date as date,'
                                 .TBL_SUPPLIER_PO_MASTER.'.quatation_date as quatation_date,'
@@ -11062,6 +11063,20 @@ public function getvendorItemdeatilsForInvoice($id){
     $query = $this->db->get(TBL_VENDOR_PO_MASTER_ITEM);
     $fetch_result = $query->result_array();
     return $fetch_result;
+}
+
+
+public function getsuppliertemdeatilsForInvoiceonvendorpo($supplier_po_id){
+
+    $this->db->select(TBL_RAWMATERIAL.'.part_number,'.TBL_SUPPLIER_PO_MASTER_ITEM.'.description,'.TBL_SUPPLIER_PO_MASTER_ITEM.'.order_oty,'.TBL_BUYER_PO_MASTER.'.delivery_date');
+    $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id');
+    $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.pre_buyer_po_number');
+    $this->db->where(TBL_SUPPLIER_PO_MASTER_ITEM.'.supplier_po_id',$supplier_po_id);
+    $query_result = $this->db->get(TBL_SUPPLIER_PO_MASTER_ITEM);
+    $data = $query_result->result_array();
+
+    return $data;
+
 }
 
 
