@@ -10145,7 +10145,7 @@ public function downlaodsupplierpo($id){
     $item_count =count($getsupplierItemdeatilsForInvoice);
 
     if($item_count==1){
-        $padding_bottom = '120px';
+        $padding_bottom = '80px';
     }else if($item_count==2){
         $padding_bottom = '28px';
     }else if($item_count==3){
