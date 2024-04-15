@@ -12444,7 +12444,7 @@ public function downloadvendorpo($id){
                 <tr style="border: 1px solid black;">
                     <td colspan="4" style="padding: 8px;">'.$this->amount_in_word($subtotal).'</td>
                 
-                    <td colspan="2"  style="border: 1px solid black;padding-left: 10px;padding-right: 10px;font-family:cambria;font-size:12px;">SUB TOTAL (+) GST </td>    
+                    <td colspan="2"  style="border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:10px;">SUB TOTAL (+) GST </td>    
                     <td style="border: 1px solid black;padding-left: 10px;">'.$subtotal.'/-'.'</td>
                 </tr>
             </table>
