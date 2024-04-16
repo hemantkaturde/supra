@@ -12424,7 +12424,7 @@ public function downloadvendorpo($id){
                     <th align="left" style="border: 1px solid black;padding-left: 10px;" margin-bottom: 10%;>PAYMENT TERMS</th>    
                 </tr>
                 <tr style="border: 1px solid black;">
-                    <td style="border: 1px solid black;padding-left: 10px;">'.date('d-m-Y',strtotime($getvendordeatilsForInvoice['delivery_date'])).'</td>    
+                    <td style="border: 1px solid black;padding-left: 10px;">'.date('d-m-Y',strtotime($getvendordeatilsForInvoice['ven_delivery_date'])).'</td>    
                     <td style="border: 1px solid black;padding-left: 10px;">'.$getvendordeatilsForInvoice['work_order'].'</td>
                 </tr>
             </table>
@@ -12629,7 +12629,7 @@ public function downloadvendorpowithoutsupplier($id){
                     <th align="left" style="border: 1px solid black;padding-left: 10px;" margin-bottom: 10%;>PAYMENT TERMS</th>    
                 </tr>
                 <tr style="border: 1px solid black;">
-                    <td style="border: 1px solid black;padding-left: 10px;">'.date('d-m-Y',strtotime($getvendordeatilsForInvoice['delivery_date'])).'</td>    
+                    <td style="border: 1px solid black;padding-left: 10px;">'.date('d-m-Y',strtotime($getvendordeatilsForInvoice['ven_delivery_date'])).'</td>    
                     <td style="border: 1px solid black;padding-left: 10px;">'.$getvendordeatilsForInvoice['work_order'].'</td>
                 </tr>
             </table>

@@ -11043,6 +11043,7 @@ public function getvendordeatilsForInvoice($id){
                                 .TBL_VENDOR_PO_MASTER.'.work_order as ven_work_order,'
                                 .TBL_VENDOR_PO_MASTER.'.remark as ven_remark,'
 
+
                                 
                     );
 
