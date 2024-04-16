@@ -1605,9 +1605,15 @@ class Admin_model extends CI_Model
                 $data[$counter]['quatation_date'] = $value['quatation_date'];
                 $data[$counter]['action'] = '';
                 //$data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewVendorpo/".$value['vendor_po_master_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
-              
+                
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editVendorpo/".$value['vendor_po_master_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>  &nbsp";
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downloadvendorpo/".$value['vendor_po_master_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
+                
+                if($value['supplier_po_number']){
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downloadvendorpo/".$value['vendor_po_master_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
+                }else{
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downloadvendorpowithoutsupplier/".$value['vendor_po_master_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
+                }
+
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['vendor_po_master_id']."' class='fa fa-trash-o deleteVendorpo' aria-hidden='true'></i>"; 
                 $counter++; 
             }
@@ -1984,7 +1990,6 @@ class Admin_model extends CI_Model
       }
 
     }
-
 
     
     public function getSuppliritemonlyforgetbuyeritemonly($supplier_po_number,$flag){
@@ -11053,6 +11058,48 @@ public function getvendordeatilsForInvoice($id){
 
 
 public function getvendorItemdeatilsForInvoice($id){
+
+    // $this->db->select('*,'.TBL_RAWMATERIAL.'.gross_weight as rmgrossweight');
+    $this->db->select('*,'.TBL_VENDOR_PO_MASTER_ITEM.'.description_1 as desc1,'.TBL_VENDOR_PO_MASTER_ITEM.'.description_2 as desc2,'.TBL_FINISHED_GOODS.'.groass_weight as rmgrossweight,'.TBL_VENDOR_PO_MASTER_ITEM.'.unit as unit');
+    // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
+    // $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id');
+    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
+    $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id', $id);
+    $query = $this->db->get(TBL_VENDOR_PO_MASTER_ITEM);
+    $fetch_result = $query->result_array();
+    return $fetch_result;
+}
+
+
+  
+public function getvendordeatilsForInvoicewithoutsupplier($id){
+                $this->db->select(TBL_VENDOR.'.vendor_name as vendor_name,'
+                    .TBL_VENDOR.'.address as ven_address,'
+                    .TBL_VENDOR.'.landline as ven_landline,'
+                    .TBL_VENDOR.'.contact_person as ven_contact_person,'
+                    .TBL_VENDOR.'.mobile as ven_mobile,'
+                    .TBL_VENDOR.'.email as ven_email,'
+                    .TBL_VENDOR.'.GSTIN as ven_GSTIN,'
+                    .TBL_VENDOR_PO_MASTER.'.po_number as ven_po_number,'
+                    .TBL_VENDOR_PO_MASTER.'.date as ven_date,'
+                    .TBL_VENDOR_PO_MASTER.'.quatation_ref_no as ven_quatation_ref_no,'
+                    .TBL_VENDOR_PO_MASTER.'.quatation_date as ven_quatation_date,'
+                    .TBL_VENDOR_PO_MASTER.'.delivery_date as ven_delivery_date,'
+                    .TBL_VENDOR_PO_MASTER.'.work_order as ven_work_order,'
+                    .TBL_VENDOR_PO_MASTER.'.remark as ven_remark,'
+                );
+
+        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_VENDOR_PO_MASTER.'.buyer_po_number');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_VENDOR_PO_MASTER.'.vendor_name');
+        $this->db->where(TBL_VENDOR_PO_MASTER.'.id', $id);
+        $query = $this->db->get(TBL_VENDOR_PO_MASTER);
+        $fetch_result = $query->row_array();
+        return $fetch_result;
+}
+
+
+
+public function getvendorItemdeatilsForInvoicewithoutsupplier($id){
 
     // $this->db->select('*,'.TBL_RAWMATERIAL.'.gross_weight as rmgrossweight');
     $this->db->select('*,'.TBL_VENDOR_PO_MASTER_ITEM.'.description_1 as desc1,'.TBL_VENDOR_PO_MASTER_ITEM.'.description_2 as desc2,'.TBL_FINISHED_GOODS.'.groass_weight as rmgrossweight,'.TBL_VENDOR_PO_MASTER_ITEM.'.unit as unit');

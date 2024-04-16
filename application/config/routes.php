@@ -361,8 +361,8 @@ $route['downlaodsupplierpo/(:any)'] = "admin/downlaodsupplierpo/$1";
 $route['downloadvendorpo/(:any)'] = "admin/downloadvendorpo/$1";
 
 
-
-$route['editeqnuiryformdata/(:any)'] = "admin/editeqnuiryformdata/$1";
+$route['downloadvendorpo/(:any)'] = "admin/downloadvendorpo/$1";
+$route['downloadvendorpowithoutsupplier/(:any)'] = "admin/downloadvendorpowithoutsupplier/$1";
 
 
 
