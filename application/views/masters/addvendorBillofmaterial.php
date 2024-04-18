@@ -27,59 +27,59 @@
 
                                     <?php
 
+                                        // old Logic Start Here comment 18-04-2024
+                                        // if($getPreviousBomnumber['bom_number']){
 
-                                        if($getPreviousBomnumber['bom_number']){
+                                        //     $getPreviousBomnumber_po_N = substr($getPreviousBomnumber['bom_number'], -4);
+                                        //     $getPreviousBomnumbervendor_po_N = substr($getPreviousBomnumbervendor['bom_number'], -4);
 
-                                            $getPreviousBomnumber_po_N = substr($getPreviousBomnumber['bom_number'], -4);
-                                            $getPreviousBomnumbervendor_po_N = substr($getPreviousBomnumbervendor['bom_number'], -4);
+                                        //     if($getPreviousBomnumber_po_N > $getPreviousBomnumbervendor_po_N){
 
-                                            if($getPreviousBomnumber_po_N > $getPreviousBomnumbervendor_po_N){
+                                        //         if($getPreviousBomnumber_po_N){
+                                        //             // $arr = str_split($getPreviousBomnumber_po_N);
+                                        //             // $i = end($arr);
+                                        //             // $inrno= "SQPO2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                        //             // $po_number = $inrno;
 
-                                                if($getPreviousBomnumber_po_N){
-                                                    // $arr = str_split($getPreviousBomnumber_po_N);
-                                                    // $i = end($arr);
-                                                    // $inrno= "SQPO2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
-                                                    // $po_number = $inrno;
-
-                                                    $string = $getPreviousBomnumber_po_N;
-                                                    $n = 4; // Number of characters to extract from the end
-                                                    $lastNCharacters = substr($string, -$n);
-                                                    $inrno= "SQBM2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
-                                                    $po_number = $inrno;
+                                        //             $string = $getPreviousBomnumber_po_N;
+                                        //             $n = 4; // Number of characters to extract from the end
+                                        //             $lastNCharacters = substr($string, -$n);
+                                        //             $inrno= "SQBM2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                        //             $po_number = $inrno;
 
 
-                                                }else{
-                                                    $po_number = 'SQBM23240001';
-                                                }     
-                                            }else{
+                                        //         }else{
+                                        //             $po_number = 'SQBM23240001';
+                                        //         }     
+                                        //     }else{
 
-                                                if($getPreviousBomnumbervendor_po_N){
-                                                    $arr = str_split($getPreviousBomnumbervendor_po_N);
-                                                    $i = end($arr);
-                                                    $inrno= "SQBM2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
-                                                    $po_number = $inrno;
-                                                }else{
-                                                    $po_number = 'SQBM23240001';
-                                                }  
-                                            }
+                                        //         if($getPreviousBomnumbervendor_po_N){
+                                        //             $arr = str_split($getPreviousBomnumbervendor_po_N);
+                                        //             $i = end($arr);
+                                        //             $inrno= "SQBM2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                        //             $po_number = $inrno;
+                                        //         }else{
+                                        //             $po_number = 'SQBM23240001';
+                                        //         }  
+                                        //     }
 
-                                        }else{
-                                                if($getPreviousBomnumbervendor['bom_number']){
-                                                    // $arr = str_split($getPreviousBomnumber['bom_number']);
-                                                    // $i = end($arr);
-                                                    // $inrno= "SQBM2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
-                                                    // $po_number = $inrno;
+                                        // }else{
+                                        //         if($getPreviousBomnumbervendor['bom_number']){
+                                        //             // $arr = str_split($getPreviousBomnumber['bom_number']);
+                                        //             // $i = end($arr);
+                                        //             // $inrno= "SQBM2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                        //             // $po_number = $inrno;
 
-                                                    $arr = str_split($getPreviousBomnumbervendor['bom_number']);
-                                                    $i = end($arr);
-                                                    $inrno= "SQBM2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
-                                                    $po_number = $inrno;
+                                        //             $arr = str_split($getPreviousBomnumbervendor['bom_number']);
+                                        //             $i = end($arr);
+                                        //             $inrno= "SQBM2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                        //             $po_number = $inrno;
 
-                                                }else{
-                                                    $po_number = 'SQBM23240001';
-                                                }
+                                        //         }else{
+                                        //             $po_number = 'SQBM23240001';
+                                        //         }
 
-                                        }
+                                        // }
 
 
                                         // if($getPreviousBomnumber['bom_number']){
@@ -90,6 +90,153 @@
                                         // }else{
                                         //     $po_number = 'SQBM23240001';
                                         // }
+
+                                        // New Logic comment 18-04-2024
+
+                                        if($getPreviousBomnumber['bom_number']){
+
+                                            $getPreviousBomnumber_po_N = substr($getPreviousBomnumber['bom_number'], -4);
+                                            $getPreviousBomnumbervendor_po_N = substr($getPreviousBomnumbervendor['bom_number'], -4);
+
+                                            if($getPreviousBomnumber_po_N > $getPreviousBomnumbervendor_po_N){
+
+                                                if($getPreviousBomnumber_po_N){
+                                                   
+                                                    $getfinancial_year = substr($getPreviousBomnumbervendor['bom_number'], -8);
+        
+                                                    // Function to check if a given year is the current Indian financial year
+                                                    $year = substr($getfinancial_year,0,2);
+
+                                                    // Current date
+                                                    $currentDate = new DateTime();
+                                                    
+                                                    // Financial year in India starts from April 1st
+                                                    $financialYearStart = new DateTime("$year-04-01");
+                                                    
+                                                    // Financial year in India ends on March 31st of the following year
+                                                    $financialYearEnd = new DateTime(($year + 1) . "-03-31");
+                                                    
+                                                    // Check if the current date falls within the financial year
+                                                    if ($currentDate >= $financialYearStart && $currentDate <= $financialYearEnd) {
+                                                       
+                                                        $string = $getPreviousBomnumber_po_N;
+                                                        $n = 4; // Number of characters to extract from the end
+                                                        $lastNCharacters = substr($string, -$n);
+                                                        $inrno= "SQBM2425".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                        $po_number = $inrno;
+
+                                                    } else {
+
+                                                        $string = $getPreviousBomnumbervendor_po_N;
+                                                        $n = 4; // Number of characters to extract from the end
+                                                        $lastNCharacters = substr($string, -$n);
+                                                        $inrno= "SQBM2425".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                        $po_number = $inrno;
+
+                                                        //$po_number = 'SQPO24250001';
+                                                    }  
+                                                  /* New Logic End Here */
+
+                                                }else{
+                                                    $po_number = 'SQBM24250001';
+                                                }     
+                                            }else{
+
+                                                if($getPreviousBomnumbervendor_po_N){
+
+
+                                                     /* New Logic Statrt Here */ 
+                                                      /* get finaicial Year from the Serial Number*/
+                                                      $getfinancial_year = substr($getPreviousBomnumber['bom_number'], -8);
+        
+                                                      // Function to check if a given year is the current Indian financial year
+                                                      $year = substr($getfinancial_year,0,2);
+
+                                                      // Current date
+                                                      $currentDate = new DateTime();
+                                                      
+                                                      // Financial year in India starts from April 1st
+                                                      $financialYearStart = new DateTime("$year-04-01");
+                                                      
+                                                      // Financial year in India ends on March 31st of the following year
+                                                      $financialYearEnd = new DateTime(($year + 1) . "-03-31");
+                                                      
+                                                      // Check if the current date falls within the financial year
+                                                      if ($currentDate >= $financialYearStart && $currentDate <= $financialYearEnd) {
+                                                         
+                                                            $string = $getPreviousBomnumber['bom_number'];
+                                                            $n = 4; // Number of characters to extract from the end
+                                                            $lastNCharacters = substr($string, -$n);
+                                                            $inrno= "SQBM2425".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                            $po_number = $inrno;
+
+                                                      } else {
+                                                            $string = $getPreviousBomnumber_po_N;
+                                                            $n = 4; // Number of characters to extract from the end
+                                                            $lastNCharacters = substr($string, -$n);
+                                                            $inrno= "SQBM2425".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                            $po_number = $inrno;
+
+                                                      }  
+                                                    /* New Logic End Here */
+                                                 
+
+
+                                                }else{
+                                                    $po_number = 'SQBM24250001';
+                                                }  
+                                            }
+
+                                        }else{
+                                                if($getPreviousBomnumbervendor['bom_number']){
+                                                 
+
+                                                     /* New Logic Statrt Here */ 
+                                                      /* get finaicial Year from the Serial Number*/
+                                                      $getfinancial_year = substr($getPreviousBomnumber['bom_number'], -8);
+        
+                                                      // Function to check if a given year is the current Indian financial year
+                                                      $year = substr($getfinancial_year,0,2);
+
+                                                      // Current date
+                                                      $currentDate = new DateTime();
+                                                      
+                                                      // Financial year in India starts from April 1st
+                                                      $financialYearStart = new DateTime("$year-04-01");
+                                                      
+                                                      // Financial year in India ends on March 31st of the following year
+                                                      $financialYearEnd = new DateTime(($year + 1) . "-03-31");
+                                                      
+                                                      // Check if the current date falls within the financial year
+                                                      if ($currentDate >= $financialYearStart && $currentDate <= $financialYearEnd) {
+                                                         
+                                                          $string = $getPreviousBomnumbervendor['bom_number'];
+                                                          $n = 4; // Number of characters to extract from the end
+                                                          $lastNCharacters = substr($string, -$n);
+                                                          $inrno= "SQBM2425".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                          $po_number = $inrno;
+
+                                                      } else {
+                                                          $string = $getPreviousBomnumber_po_N;
+                                                          $n = 4; // Number of characters to extract from the end
+                                                          $lastNCharacters = substr($string, -$n);
+                                                          $inrno= "SQBM2425".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                          $po_number = $inrno;
+
+                                                      }  
+                                                    /* New Logic End Here */
+
+
+
+
+                                                }else{
+                                                    $po_number = 'SQBM24250001';
+                                                }
+
+                                        }
+
+
+
                                     ?>
                                     
                                     <div class="col-md-12">
