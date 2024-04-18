@@ -27,20 +27,69 @@
                                     <div class="form-group">
                                         <label for="rejection_number">Rejection Id<span class="required">*</span></label>
                                         <?php
+
+
+                                            $current_month = date("n"); // Get the current month without leading zeros
+
+                                            if ($current_month >= 4) {
+                                                    // If the current month is April or later, the financial year is from April (current year) to March (next year)
+                                                    $financial_year_indian = date("y") . "" . (date("y") + 1);
+                                            } else {
+                                                    // If the current month is before April, the financial year is from April (last year) to March (current year)
+                                                    $financial_year_indian = (date("y") - 1) . "" . date("y");
+                                            }
+
                                             if($getPreviousrejectionformnumber['rejection_number']){
                                                 // $arr = str_split($getPreviousrejectionformnumber['rejection_number']);
                                                 // $i = end($arr);
                                                 // $inrno= "SQRC2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
                                                 // $rejection_number = $inrno;
 
-                                                $string = $getPreviousrejectionformnumber['rejection_number'];
-                                                $n = 4; // Number of characters to extract from the end
-                                                $lastNCharacters = substr($string, -$n);
-                                                $inrno= "SQRC2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
-                                                $rejection_number = $inrno;
+                                                // OLD LOGIC END Here Commited 18-04-2024
+                                                // $string = $getPreviousrejectionformnumber['rejection_number'];
+                                                // $n = 4; // Number of characters to extract from the end
+                                                // $lastNCharacters = substr($string, -$n);
+                                                // $inrno= "SQRC2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                // $rejection_number = $inrno;
+
+
+                                                $getfinancial_year = substr($getPreviousrejectionformnumber['rejection_number'], -8);
+
+                                                $first_part_of_string = substr($getfinancial_year,0,4);
+                                                $year = substr($getfinancial_year,0,2);
+    
+                                                // Current date
+                                                $currentDate = new DateTime();
+                                                
+                                                // Financial year in India starts from April 1st
+                                                $financialYearStart = new DateTime("$year-04-01");
+                                                
+                                                // Financial year in India ends on March 31st of the following year
+                                                $financialYearEnd = new DateTime(($year + 1) . "-03-31");
+                                                
+                                                // Check if the current date falls within the financial year
+                                                if ($currentDate >= $financialYearStart && $currentDate <= $financialYearEnd) {
+                                                   
+                                                    $string = $getPreviousrejectionformnumber['rejection_number'];
+                                                    $n = 4; // Number of characters to extract from the end
+                                                    $lastNCharacters = substr($string, -$n);
+                                                    $inrno= "SQID".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                    $incoming_details_id = $inrno;
+    
+                                                } else {
+    
+                                                    $string = $getPreviousrejectionformnumber['rejection_number'];
+                                                    $n = 4; // Number of characters to extract from the end
+                                                    $lastNCharacters = substr($string, -$n);
+                                                    $inrno= "SQID".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                    $incoming_details_id = $inrno;
+    
+                                                    //$po_number = 'SQPO24250001';
+                                                }  
+                                              /* New Logic End Here */
 
                                             }else{
-                                                $rejection_number = 'SQRC23240001';
+                                                $rejection_number = 'SQRC'.$financial_year_indian.'0001';
                                             }
                                         ?>
                                             <input type="text" class="form-control" id="rejection_number" name="rejection_number" value="<?=$rejection_number;?>" required readonly>
