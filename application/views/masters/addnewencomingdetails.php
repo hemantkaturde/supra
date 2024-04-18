@@ -22,7 +22,17 @@
                         <?php $this->load->helper("form"); ?>
                         <form role="form" id="addnewincomingdetailsform" action="<?php echo base_url() ?>addnewincomingdetailsform" method="post" role="form">
                             <div class="box-body">
-                                    <?php
+                                    <?php                                        
+                                        $current_month = date("n"); // Get the current month without leading zeros
+
+                                        if ($current_month >= 4) {
+                                                // If the current month is April or later, the financial year is from April (current year) to March (next year)
+                                                $financial_year_indian = date("y") . "" . (date("y") + 1);
+                                        } else {
+                                                // If the current month is before April, the financial year is from April (last year) to March (current year)
+                                                $financial_year_indian = (date("y") - 1) . "" . date("y");
+                                        }
+
                                         if($getPreviousincomingdetails[0]['incoming_details_id']){
                                             // $arr = str_split($getPreviousincomingdetails[0]['incoming_details_id']);
                                             // $i = end($arr);
@@ -38,6 +48,7 @@
 
                                             // New Logic Start Here 
 
+                                           
                                             $getfinancial_year = substr($getPreviousincomingdetails[0]['incoming_details_id'], -8);
 
                                             $first_part_of_string = substr($getfinancial_year,0,4);
@@ -58,7 +69,7 @@
                                                 $string = $getPreviousincomingdetails[0]['incoming_details_id'];
                                                 $n = 4; // Number of characters to extract from the end
                                                 $lastNCharacters = substr($string, -$n);
-                                                $inrno= "SQID2425".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                $inrno= "SQID".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
                                                 $incoming_details_id = $inrno;
 
                                             } else {
@@ -66,7 +77,7 @@
                                                 $string = $getPreviousincomingdetails[0]['incoming_details_id'];
                                                 $n = 4; // Number of characters to extract from the end
                                                 $lastNCharacters = substr($string, -$n);
-                                                $inrno= "SQID2425".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                $inrno= "SQID".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
                                                 $incoming_details_id = $inrno;
 
                                                 //$po_number = 'SQPO24250001';
@@ -74,7 +85,7 @@
                                           /* New Logic End Here */
 
                                         }else{
-                                            $incoming_details_id = 'SQID24250001';
+                                            $incoming_details_id = 'SQID'.$financial_year_indian.'0001';
                                         }
                                     ?>
 
