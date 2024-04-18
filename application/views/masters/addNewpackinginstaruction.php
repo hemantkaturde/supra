@@ -69,7 +69,7 @@
                                             // Check if the current date falls within the financial year
                                             if ($currentDate >= $financialYearStart && $currentDate <= $financialYearEnd) {
                                                 
-                                                $string = 0;
+                                                $string = $getpreviouspackinginstarction[0]['packing_instrauction_id'];
                                                 $n = 4; // Number of characters to extract from the end
                                                 $lastNCharacters = substr($string, -$n);
                                                 $inrno= "PI".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
@@ -77,7 +77,7 @@
 
                                             } else {
 
-                                                $string = $getpreviouspackinginstarction[0]['packing_instrauction_id'];
+                                                $string = 0;
                                                 $n = 4; // Number of characters to extract from the end
                                                 $lastNCharacters = substr($string, -$n);
                                                 $inrno= "PI".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
