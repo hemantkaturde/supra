@@ -25,9 +25,8 @@
                             <div class="box-body">
                                 <div class="col-md-4">
                                     <?php
-
                                         if($getPrevioussupplierPONumber['po_number']){
-
+                                            
                                            $getPrevioussupplierPONumber_number = substr($getPrevioussupplierPONumber['po_number'], -4);
                                            $getPreviousPONumber_number = substr($getPreviousPONumber['po_number'], -4);
 

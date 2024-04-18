@@ -25,6 +25,68 @@
                             <div class="box-body">
                                 <div class="col-md-4">
                                     <?php
+                                        // Old Logic Commnet here 18-04-2024
+                                        // if($getPreviousVendorPoconfirmationNumber['po_number']){
+                                            
+                                        //     $getPreviousVendorPoconfirmationNumber_number = substr($getPreviousVendorPoconfirmationNumber['po_number'], -4);
+                                        //     $getPreviousSupplierPoconfirmationNumber_number = substr($getPreviousSupplierPoconfirmationNumber['po_number'], -4);
+                                        //     if($getPreviousVendorPoconfirmationNumber_number > $getPreviousSupplierPoconfirmationNumber_number){
+
+                                        //         if($getPreviousVendorPoconfirmationNumber_number){
+                                        //             // $arr = str_split($getPreviousVendorPoconfirmationNumber_number);
+                                        //             // $i = end($arr);
+                                        //             // $inrno= "SQPO2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                        //             // $po_number = $inrno;
+
+                                        //             $string = $getPreviousVendorPoconfirmationNumber_number;
+                                        //             $n = 4; // Number of characters to extract from the end
+                                        //             $lastNCharacters = substr($string, -$n);
+                                        //             $inrno= "SQFU2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                        //             $po_number = $inrno;
+
+                                        //         }else{
+                                        //             $po_number = 'SQFU23240001';
+                                        //         }   
+
+                                        //     }else{
+
+                                        //         if($getPreviousSupplierPoconfirmationNumber_number){
+                                        //             // $arr = str_split($getPreviousSupplierPoconfirmationNumber_number);
+                                        //             // $i = end($arr);
+                                        //             // $inrno= "SQPO2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                        //             // $po_number = $inrno;
+
+                                        //             $string = $getPreviousSupplierPoconfirmationNumber_number;
+                                        //             $n = 4; // Number of characters to extract from the end
+                                        //             $lastNCharacters = substr($string, -$n);
+                                        //             $inrno= "SQFU2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                        //             $po_number = $inrno;
+                                        //         }else{
+                                        //             $po_number = 'SQFU23240001';
+                                        //         }   
+                                        //     }
+
+                                        // }else{
+
+                                        //     if($getPreviousSupplierPoconfirmationNumber['po_number']){
+                                        //         // $arr = str_split($getPreviousSupplierPoconfirmationNumber['po_number']);
+                                        //         // $i = end($arr);
+                                        //         // $inrno= "SQPC2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                        //         // $po_number = $inrno;
+
+                                        //         $string = $getPreviousSupplierPoconfirmationNumber['po_number'];
+                                        //         $n = 4; // Number of characters to extract from the end
+                                        //         $lastNCharacters = substr($string, -$n);
+                                        //         $inrno= "SQFU2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                        //         $po_number = $inrno;
+
+                                        //     }else{
+                                        //         $po_number = 'SQFU23240001';
+                                        //     }
+                                            
+                                        // }     
+                                        
+                                        // New Logic Commnet here 18-04-2024
                                         if($getPreviousVendorPoconfirmationNumber['po_number']){
                                             
                                             $getPreviousVendorPoconfirmationNumber_number = substr($getPreviousVendorPoconfirmationNumber['po_number'], -4);
@@ -32,36 +94,88 @@
                                             if($getPreviousVendorPoconfirmationNumber_number > $getPreviousSupplierPoconfirmationNumber_number){
 
                                                 if($getPreviousVendorPoconfirmationNumber_number){
-                                                    // $arr = str_split($getPreviousVendorPoconfirmationNumber_number);
-                                                    // $i = end($arr);
-                                                    // $inrno= "SQPO2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
-                                                    // $po_number = $inrno;
+                                                   
 
-                                                    $string = $getPreviousVendorPoconfirmationNumber_number;
-                                                    $n = 4; // Number of characters to extract from the end
-                                                    $lastNCharacters = substr($string, -$n);
-                                                    $inrno= "SQFU2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
-                                                    $po_number = $inrno;
+                                                    $getfinancial_year = substr($getPreviousVendorPoconfirmationNumber['po_number'], -8);
+        
+                                                    // Function to check if a given year is the current Indian financial year
+                                                    $year = substr($getfinancial_year,0,2);
+
+                                                    // Current date
+                                                    $currentDate = new DateTime();
+                                                    
+                                                    // Financial year in India starts from April 1st
+                                                    $financialYearStart = new DateTime("$year-04-01");
+                                                    
+                                                    // Financial year in India ends on March 31st of the following year
+                                                    $financialYearEnd = new DateTime(($year + 1) . "-03-31");
+                                                    
+                                                    // Check if the current date falls within the financial year
+                                                    if ($currentDate >= $financialYearStart && $currentDate <= $financialYearEnd) {
+                                                       
+                                                        $string = $getPreviousVendorPoconfirmationNumber_number;
+                                                        $n = 4; // Number of characters to extract from the end
+                                                        $lastNCharacters = substr($string, -$n);
+                                                        $inrno= "SQFU2425".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                        $po_number = $inrno;
+
+                                                    } else {
+
+                                                        $string = $getPreviousSupplierPoconfirmationNumber_number;
+                                                        $n = 4; // Number of characters to extract from the end
+                                                        $lastNCharacters = substr($string, -$n);
+                                                        $inrno= "SQFU2425".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                        $po_number = $inrno;
+
+                                                        //$po_number = 'SQPO24250001';
+                                                    }  
+                                                  /* New Logic End Here */
 
                                                 }else{
-                                                    $po_number = 'SQFU23240001';
+                                                    $po_number = 'SQFU24250001';
                                                 }   
 
                                             }else{
 
                                                 if($getPreviousSupplierPoconfirmationNumber_number){
-                                                    // $arr = str_split($getPreviousSupplierPoconfirmationNumber_number);
-                                                    // $i = end($arr);
-                                                    // $inrno= "SQPO2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
-                                                    // $po_number = $inrno;
+                                                   
+                                                    
+                                                    /* New Logic Statrt Here */ 
+                                                      /* get finaicial Year from the Serial Number*/
+                                                      $getfinancial_year = substr($getPreviousSupplierPoconfirmationNumber['po_number'], -8);
+        
+                                                      // Function to check if a given year is the current Indian financial year
+                                                      $year = substr($getfinancial_year,0,2);
 
-                                                    $string = $getPreviousSupplierPoconfirmationNumber_number;
-                                                    $n = 4; // Number of characters to extract from the end
-                                                    $lastNCharacters = substr($string, -$n);
-                                                    $inrno= "SQFU2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
-                                                    $po_number = $inrno;
+                                                      // Current date
+                                                      $currentDate = new DateTime();
+                                                      
+                                                      // Financial year in India starts from April 1st
+                                                      $financialYearStart = new DateTime("$year-04-01");
+                                                      
+                                                      // Financial year in India ends on March 31st of the following year
+                                                      $financialYearEnd = new DateTime(($year + 1) . "-03-31");
+                                                      
+                                                      // Check if the current date falls within the financial year
+                                                      if ($currentDate >= $financialYearStart && $currentDate <= $financialYearEnd) {
+                                                         
+                                                            $string = $getPreviousSupplierPoconfirmationNumber['po_number'];
+                                                            $n = 4; // Number of characters to extract from the end
+                                                            $lastNCharacters = substr($string, -$n);
+                                                            $inrno= "SQFU2425".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                            $po_number = $inrno;
+
+                                                      } else {
+                                                            $string = $getPreviousVendorPoconfirmationNumber_number;
+                                                            $n = 4; // Number of characters to extract from the end
+                                                            $lastNCharacters = substr($string, -$n);
+                                                            $inrno= "SQFU2425".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                            $po_number = $inrno;
+
+                                                      }  
+                                                    /* New Logic End Here */
                                                 }else{
-                                                    $po_number = 'SQFU23240001';
+                                                    $po_number = 'SQFU24250001';
                                                 }   
                                             }
 
@@ -73,17 +187,49 @@
                                                 // $inrno= "SQPC2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
                                                 // $po_number = $inrno;
 
-                                                $string = $getPreviousSupplierPoconfirmationNumber['po_number'];
-                                                $n = 4; // Number of characters to extract from the end
-                                                $lastNCharacters = substr($string, -$n);
-                                                $inrno= "SQFU2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
-                                                $po_number = $inrno;
+                                              
+                                                /* New Logic Statrt Here */ 
+                                                      /* get finaicial Year from the Serial Number*/
+                                                      $getfinancial_year = substr($getPreviousSupplierPoconfirmationNumber['po_number'], -8);
+        
+                                                      // Function to check if a given year is the current Indian financial year
+                                                      $year = substr($getfinancial_year,0,2);
+
+                                                      // Current date
+                                                      $currentDate = new DateTime();
+                                                      
+                                                      // Financial year in India starts from April 1st
+                                                      $financialYearStart = new DateTime("$year-04-01");
+                                                      
+                                                      // Financial year in India ends on March 31st of the following year
+                                                      $financialYearEnd = new DateTime(($year + 1) . "-03-31");
+                                                      
+                                                      // Check if the current date falls within the financial year
+                                                      if ($currentDate >= $financialYearStart && $currentDate <= $financialYearEnd) {
+                                                         
+                                                          $string = $getPreviousSupplierPoconfirmationNumber['po_number'];
+                                                          $n = 4; // Number of characters to extract from the end
+                                                          $lastNCharacters = substr($string, -$n);
+                                                          $inrno= "SQFU2425".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                          $po_number = $inrno;
+
+                                                      } else {
+                                                          $string = $getPreviousVendorPoconfirmationNumber_number;
+                                                          $n = 4; // Number of characters to extract from the end
+                                                          $lastNCharacters = substr($string, -$n);
+                                                          $inrno= "SQFU2425".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                          $po_number = $inrno;
+
+                                                      }  
+                                                    /* New Logic End Here */
 
                                             }else{
-                                                $po_number = 'SQFU23240001';
+                                                $po_number = 'SQFU24250001';
                                             }
                                             
-                                        }                                       
+                                        } 
+
+
                                     ?>
                                     <div class="col-md-12">
                                         <div class="form-group">
