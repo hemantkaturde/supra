@@ -47,8 +47,6 @@
                                             // $incoming_details_id = $inrno;
 
                                             // New Logic Start Here 
-
-                                           
                                             $getfinancial_year = substr($getPreviousincomingdetails[0]['incoming_details_id'], -8);
 
                                             $first_part_of_string = substr($getfinancial_year,0,4);
