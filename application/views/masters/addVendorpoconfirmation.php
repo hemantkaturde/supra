@@ -159,7 +159,7 @@
                                                        
                                                     /* New Logic Statrt Here */ 
                                                       /* get finaicial Year from the Serial Number*/
-                                                      $getfinancial_year = substr($getPreviousVendorPoconfirmationNumber_number['po_number'], -8);
+                                                      $getfinancial_year = substr($getPreviousVendorPoconfirmationNumber['po_number'], -8);
         
                                                       // Function to check if a given year is the current Indian financial year
                                                       $year = substr($getfinancial_year,0,2);
