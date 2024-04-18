@@ -102,7 +102,7 @@
 
                                                 if($getPreviousBomnumber_po_N){
                                                    
-                                                    $getfinancial_year = substr($getPreviousBomnumbervendor['bom_number'], -8);
+                                                    $getfinancial_year = substr($getPreviousBomnumber['bom_number'], -8);
         
                                                     // Function to check if a given year is the current Indian financial year
                                                     $year = substr($getfinancial_year,0,2);
@@ -147,7 +147,7 @@
 
                                                      /* New Logic Statrt Here */ 
                                                       /* get finaicial Year from the Serial Number*/
-                                                      $getfinancial_year = substr($getPreviousBomnumber['bom_number'], -8);
+                                                      $getfinancial_year = substr($getPreviousBomnumbervendor['bom_number'], -8);
         
                                                       // Function to check if a given year is the current Indian financial year
                                                       $year = substr($getfinancial_year,0,2);
@@ -164,14 +164,14 @@
                                                       // Check if the current date falls within the financial year
                                                       if ($currentDate >= $financialYearStart && $currentDate <= $financialYearEnd) {
                                                          
-                                                            $string = $getPreviousBomnumber['bom_number'];
+                                                            $string = $getPreviousBomnumbervendor['bom_number'];
                                                             $n = 4; // Number of characters to extract from the end
                                                             $lastNCharacters = substr($string, -$n);
                                                             $inrno= "SQBM2425".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
                                                             $po_number = $inrno;
 
                                                       } else {
-                                                            $string = $getPreviousBomnumber_po_N;
+                                                            $string = $getPreviousBomnumbervendor_po_N;
                                                             $n = 4; // Number of characters to extract from the end
                                                             $lastNCharacters = substr($string, -$n);
                                                             $inrno= "SQBM2425".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
@@ -193,7 +193,7 @@
 
                                                      /* New Logic Statrt Here */ 
                                                       /* get finaicial Year from the Serial Number*/
-                                                      $getfinancial_year = substr($getPreviousBomnumber['bom_number'], -8);
+                                                      $getfinancial_year = substr($getPreviousBomnumbervendor['bom_number'], -8);
         
                                                       // Function to check if a given year is the current Indian financial year
                                                       $year = substr($getfinancial_year,0,2);
@@ -217,7 +217,7 @@
                                                           $po_number = $inrno;
 
                                                       } else {
-                                                          $string = $getPreviousBomnumber_po_N;
+                                                          $string = $getPreviousBomnumbervendor_po_N;
                                                           $n = 4; // Number of characters to extract from the end
                                                           $lastNCharacters = substr($string, -$n);
                                                           $inrno= "SQBM2425".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
