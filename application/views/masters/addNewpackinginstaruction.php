@@ -87,8 +87,6 @@
                                                     $string1 =0;
                                                 }
 
-
-                                               
                                                 $n = 4; // Number of characters to extract from the end
                                                 $lastNCharacters = substr($string1, -$n);
                                                 $inrno= "PI".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
