@@ -29,15 +29,52 @@
                                             // $inrno= "SQID2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
                                             // $incoming_details_id = $inrno;
 
+                                            // Old logic commit 18-04-2024
+                                            // $string = $getPreviousincomingdetails[0]['incoming_details_id'];
+                                            // $n = 4; // Number of characters to extract from the end
+                                            // $lastNCharacters = substr($string, -$n);
+                                            // $inrno= "SQID2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                            // $incoming_details_id = $inrno;
+
+                                            // New Logic Start Here 
+
+                                            $getfinancial_year = substr($getPreviousincomingdetails[0]['incoming_details_id'], -8);
+
+                                            $first_part_of_string = substr($getfinancial_year,0,4);
+                                            $year = substr($getfinancial_year,0,2);
+
+                                            // Current date
+                                            $currentDate = new DateTime();
                                             
-                                            $string = $getPreviousincomingdetails[0]['incoming_details_id'];
-                                            $n = 4; // Number of characters to extract from the end
-                                            $lastNCharacters = substr($string, -$n);
-                                            $inrno= "SQID2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
-                                            $incoming_details_id = $inrno;
+                                            // Financial year in India starts from April 1st
+                                            $financialYearStart = new DateTime("$year-04-01");
+                                            
+                                            // Financial year in India ends on March 31st of the following year
+                                            $financialYearEnd = new DateTime(($year + 1) . "-03-31");
+                                            
+                                            // Check if the current date falls within the financial year
+                                            if ($currentDate >= $financialYearStart && $currentDate <= $financialYearEnd) {
+                                               
+                                                $string = $getPreviousincomingdetails[0]['incoming_details_id'];
+                                                $n = 4; // Number of characters to extract from the end
+                                                $lastNCharacters = substr($string, -$n);
+                                                $inrno= "SQID2425".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                $incoming_details_id = $inrno;
+
+                                            } else {
+
+                                                $string = $getPreviousincomingdetails[0]['incoming_details_id'];
+                                                $n = 4; // Number of characters to extract from the end
+                                                $lastNCharacters = substr($string, -$n);
+                                                $inrno= "SQID2425".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                $incoming_details_id = $inrno;
+
+                                                //$po_number = 'SQPO24250001';
+                                            }  
+                                          /* New Logic End Here */
 
                                         }else{
-                                            $incoming_details_id = 'SQID23240001';
+                                            $incoming_details_id = 'SQID24250001';
                                         }
                                     ?>
 
