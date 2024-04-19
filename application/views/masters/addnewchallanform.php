@@ -66,7 +66,7 @@
                                                 $n = 4; // Number of characters to extract from the end
                                                 $lastNCharacters = substr($string, -$n);
                                                 $inrno= "SQCH".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
-                                                $payment_details_number = $inrno;
+                                                $challan_number = $inrno;
 
                                             } else {
 
@@ -89,7 +89,7 @@
 
                                                   $lastNCharacters = substr($string1, -$n);
                                                   $inrno= "SQCH".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
-                                                  $payment_details_number = $inrno;
+                                                  $challan_number = $inrno;
 
                                                 //$po_number = 'SQPO24250001';
                                             }  
