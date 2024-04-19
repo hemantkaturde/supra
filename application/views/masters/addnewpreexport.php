@@ -99,8 +99,6 @@
                                               }  
                                             /* New Logic End Here */
 
-
-
                                         }else{
                                             //$invoice_number = 'MG-001/2324';
                                             $invoice_number = 'MG'.$financial_year_indian.'/0001';
