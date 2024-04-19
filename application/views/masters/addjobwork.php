@@ -94,10 +94,6 @@
                                                  //$po_number = 'SQPO24250001';
                                              }  
                                            /* New Logic End Here */
-
-
-
-
                                         }else{
                                             $po_number = 'SQJW'.$financial_year_indian.'0001';
                                         }

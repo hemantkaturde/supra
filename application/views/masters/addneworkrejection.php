@@ -25,13 +25,78 @@
                             <div class="box-body">
                                 <div class="col-md-4">
                                     <?php
+
+                                        $current_month = date("n"); // Get the current month without leading zeros
+
+                                        if ($current_month >= 4) {
+                                            // If the current month is April or later, the financial year is from April (current year) to March (next year)
+                                            $financial_year_indian = date("y") . "" . (date("y") + 1);
+                                        } else {
+                                            // If the current month is before April, the financial year is from April (last year) to March (current year)
+                                            $financial_year_indian = (date("y") - 1) . "" . date("y");
+                                        }
+
+
                                         if($getPreviousReworkreturnnumber[0]['challan_no']){
-                                            $arr = str_split($getPreviousReworkreturnnumber[0]['challan_no']);
-                                            $i = end($arr);
-                                            $inrno= "SQJW2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
-                                            $challan_number = $inrno;
+                                            // $arr = str_split($getPreviousReworkreturnnumber[0]['challan_no']);
+                                            // $i = end($arr);
+                                            // $inrno= "SQJW2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                            // $challan_number = $inrno;
+
+                                             // New Logic Start Here 
+                                             $getfinancial_year = substr($getPreviousReworkreturnnumber[0]['challan_no'], -8);
+
+                                             $first_part_of_string = substr($getfinancial_year,0,4);
+                                             $year = substr($first_part_of_string,0,2);
+
+                                             // Current date
+                                             $currentDate = new DateTime();
+                                             
+                                             // Financial year in India starts from April 1st
+                                             $financialYearStart = new DateTime("$year-04-01");
+                                             
+                                             // Financial year in India ends on March 31st of the following year
+                                             $financialYearEnd = new DateTime(($year + 1) . "-03-31");
+                                             
+                                             // Check if the current date falls within the financial year
+                                             if ($currentDate >= $financialYearStart && $currentDate <= $financialYearEnd) {
+                                                
+                                                 $string = $getPreviousReworkreturnnumber[0]['challan_no'];
+                                                 $n = 4; // Number of characters to extract from the end
+                                                 $lastNCharacters = substr($string, -$n);
+                                                 $inrno= "SQRR".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                 $challan_number = $inrno;
+ 
+                                             } else {
+ 
+                                                   $string = $getPreviousReworkreturnnumber[0]['challan_no'];
+                                                   $n = 4; // Number of characters to extract from the end
+                                                   $lastNCharacters1 = substr($string, -$n);
+                                                   
+                                                   if($lastNCharacters1  > 0){
+
+                                                       if ($currentDate >= $financialYearStart && $currentDate <= $financialYearEnd) {
+
+                                                           $string1 =$getPreviousReworkreturnnumber[0]['challan_no'];
+                                                       }else{
+                                                           $string1 =0;
+                                                       }
+
+                                                   }else{
+                                                       $string1 =0;
+                                                   }
+
+                                                   $lastNCharacters = substr($string1, -$n);
+                                                   $inrno= "SQRR".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                   $challan_number = $inrno;
+ 
+                                                 //$po_number = 'SQPO24250001';
+                                             }  
+                                           /* New Logic End Here */
+
+
                                         }else{
-                                            $challan_number = 'SQRR23240001';
+                                            $challan_number = 'SQRR'.$financial_year_indian.'0001';
                                         }
                                     ?>
 
