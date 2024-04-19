@@ -75,7 +75,15 @@
 
                                                 $string = $get_prevoius_QR_REcord[0]['quality_records_number'];
                                                 $n = 4; // Number of characters to extract from the end
-                                                $lastNCharacters = substr($string, -$n);
+                                                $lastNCharacters1 = substr($string1, -$n);
+                                                
+                                                if($lastNCharacters1  > 0){
+                                                    $string1 =$get_prevoius_QR_REcord[0]['quality_records_number'];
+                                                }else{
+                                                    $string1 =0;
+                                                }
+
+                                                $lastNCharacters = substr($string1, -$n);
                                                 $inrno= "SQID".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
                                                 $quality_records_number = $inrno;
 

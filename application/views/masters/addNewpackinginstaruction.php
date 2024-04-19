@@ -79,9 +79,9 @@
 
                                                 $string = $getpreviouspackinginstarction[0]['packing_instrauction_id'];
                                                 $n = 4; // Number of characters to extract from the end
-                                                $lastNCharacters = substr($string, -$n);
+                                                $lastNCharacters1 = substr($string, -$n);
 
-                                                if($lastNCharacters  > 0){
+                                                if($lastNCharacters1  > 0){
                                                     $string1 =$getpreviouspackinginstarction[0]['packing_instrauction_id'];
                                                 }else{
                                                     $string1 =0;
