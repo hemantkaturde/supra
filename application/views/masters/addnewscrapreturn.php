@@ -61,7 +61,7 @@
                                             // Check if the current date falls within the financial year
                                             if ($currentDate >= $financialYearStart && $currentDate <= $financialYearEnd) {
                                                
-                                                $string = $getPreviousChallanform_number[0]['challan_no'];
+                                                $string = $getpriviousscrapreturn['challan_id'];
                                                 $n = 4; // Number of characters to extract from the end
                                                 $lastNCharacters = substr($string, -$n);
                                                 $inrno= "SQSR".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
