@@ -12646,6 +12646,13 @@ public function downloadvendorpowithoutsupplier($id){
                     <th align="left"  style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>AMOUNT</th>
                 </tr>
                 '.$CartItem.$space.' 
+
+                <tr style="border: 1px solid black;">
+                <td colspan="4" style="padding: 8px;">'.$this->amount_in_word($subtotal).'</td>
+            
+                <td colspan="2"  style="border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:10px;">SUB TOTAL (+) GST </td>    
+                <td style="border: 1px solid black;padding-left: 10px;">'.$subtotal.'/-'.'</td>
+            </tr>
             </table>
 
             <table style=" width: 100%;border-collapse: collapse;border: #ccc 1px solid;font-family:cambria;font-size:12px">
