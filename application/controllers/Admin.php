@@ -12446,8 +12446,8 @@ public function downloadvendorpo($id){
  
                 <tr style="border-left: 1px solid black;border-right: 1px solid black;">
                     <td style="border-left: 1px solid black;border-right: 1px solid black;"></td>
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;padding-left: 15px;"><p><b>Material Form : </b></p>
-                        <p>'.$getvendordeatilsForInvoice['supplier_name'].'</p>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;padding-left: 15px;"><p><b>Material From : </b></p>
+                        <b><p>'.$getvendordeatilsForInvoice['supplier_name'].'</p></b>
                     </td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;"></td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;"></td>
