@@ -2605,7 +2605,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['raw_material_supplier'] = $value['suppliername'];
                 $data[$counter]['action'] = '';
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editjobwork/".$value['jobworkid']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downlaodjobworkchllan/".$value['jobworkid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
+                // $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downlaodjobworkchllan/".$value['jobworkid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['jobworkid']."' class='fa fa-trash-o deleteJobwork' aria-hidden='true'></i>"; 
                 $counter++; 
             }
@@ -4802,6 +4802,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['supplier_po_number'] = $value['supplier_master'];
                 $data[$counter]['action'] = '';
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editreworkrejection/".$value['reworkrejectionid']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downloadreworkrejection/".$value['reworkrejectionid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['reworkrejectionid']."' class='fa fa-trash-o deletereworkrejection' aria-hidden='true'></i>"; 
 
                 $counter++; 
@@ -11125,6 +11126,35 @@ public function getsuppliertemdeatilsForInvoiceonvendorpo($supplier_po_id){
 
     return $data;
 
+}
+
+
+public function getReworkrejectionforInvoicesupplier($id){
+    $this->db->select(TBL_REWORK_REJECTION.'.*,'.
+                     TBL_SUPPLIER.'.supplier_name,'
+                    .TBL_SUPPLIER.'.address as supplier_addess,'
+                    .TBL_SUPPLIER.'.landline as suplier_landline,'
+                    .TBL_SUPPLIER.'.contact_person as sup_conatct,'
+                    .TBL_SUPPLIER.'.email as sup_email,'
+                    .TBL_SUPPLIER.'.GSTIN as sup_GSTIN,'
+                    .TBL_SUPPLIER.'.mobile as sup_mobile,'
+                    .TBL_SUPPLIER_PO_MASTER.'.id  as supplier_po_id,'
+                    .TBL_SUPPLIER_PO_MASTER.'.po_number as po_number,'
+                    .TBL_SUPPLIER_PO_MASTER.'.date as date,'
+                    .TBL_SUPPLIER_PO_MASTER.'.quatation_date as quatation_date,'
+                    .TBL_SUPPLIER_PO_MASTER.'.quatation_ref_no as quatation_ref_no,'
+                    .TBL_SUPPLIER_PO_MASTER.'.delivery_date as delivery_date,'
+                    .TBL_SUPPLIER_PO_MASTER.'.work_order as work_order,'
+                    .TBL_REWORK_REJECTION.'.challan_no rrchallaon,'
+                    .TBL_REWORK_REJECTION.'.remark as supplier_remark,'
+        
+        );
+        $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_REWORK_REJECTION.'.supplier_po_number');
+        $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_REWORK_REJECTION.'.supplier_name');
+        $this->db->where(TBL_REWORK_REJECTION.'.id', $id);
+        $query = $this->db->get(TBL_REWORK_REJECTION);
+        $fetch_result = $query->row_array();
+        return $fetch_result;
 }
 
 

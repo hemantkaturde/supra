@@ -9633,7 +9633,7 @@
 	                 { "width": "10%", "targets": 3 },
 					 { "width": "10%", "targets": 4 },
 					 { "width": "10%", "targets": 5 },
-					 { "width": "5%", "targets": 6 },
+					 { "width": "8%", "targets": 6 },
 	            ],
 	            responsive: true,
 	            "oLanguage": {
@@ -10347,7 +10347,6 @@
 					}
 				});
 		});
-
 
 		$(document).on('click','.editReworkRejectionitem',function(e){  
 			e.preventDefault();
