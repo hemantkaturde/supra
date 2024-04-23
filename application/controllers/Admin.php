@@ -12900,7 +12900,7 @@ public function downloadreworkrejection($id){
                             <p style="color:red">GSTIN:'.$getReworkrejectionforInvoice['sup_GSTIN'].'</p>
                         <div>    
                     </td> 
-                    <td style="border-left: 1px solid black;padding-left: 15px;font-size:13px" width="50%" >
+                    <td style="border-left: 1px solid black;padding-left: 15px;font-size:13px" width="50%" valign="top">
                         <div>
                             <p><b>CHALLAN NO :</b> '.'<span style="color:red">'.$getReworkrejectionforInvoice['rrchallaon'].'</span></p>
                             <p>&nbsp;</p>
@@ -12919,7 +12919,7 @@ public function downloadreworkrejection($id){
                     <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>F.G. PART NO.</th>  
                     <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>RM TYPE</th> 
                     <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>Rejection Reason</th>  
-                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>QTY</th>  
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>QTY IN PCS</th>  
                     <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>Net Weight In kgs</th>  
                     <th align="left"  style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>AMOUNT</th>
                 </tr>
