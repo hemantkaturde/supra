@@ -6954,6 +6954,7 @@ class Admin extends BaseController
                         'value' =>  trim($this->input->post('value')),
                         'row_material_cost' =>  trim($this->input->post('row_material_cost')),
                         'gst_rate' =>  trim($this->input->post('gst_rate')),
+                        'gst_value' =>  trim($this->input->post('gst_val')),
                         'grand_total' =>  trim($this->input->post('grand_total')),
                         'item_remark' =>  trim($this->input->post('item_remark')),
                         'pre_challan_date' =>   trim($this->input->post('pre_challan_date')),
@@ -6979,6 +6980,7 @@ class Admin extends BaseController
                         'value' =>  trim($this->input->post('value')),
                         'row_material_cost' =>  trim($this->input->post('row_material_cost')),
                         'gst_rate' =>  trim($this->input->post('gst_rate')),
+                        'gst_value' =>  trim($this->input->post('gst_val')),
                         'grand_total' =>  trim($this->input->post('grand_total')),
                         'item_remark' =>  trim($this->input->post('item_remark')),
                         'pre_challan_date' =>   trim($this->input->post('pre_challan_date')),
@@ -12748,10 +12750,16 @@ public function downloadreworkrejection($id){
     $ii =1;
     $subtotal = 0;
 
+    $raw_material_cost = 0;
+    $cgst_tax_rate = 0;
+    $sgst_tax_rate = 0;
+    $igst_tax_rate = 0;
+    $gst_rate ='';
+
     $item_count =count($getReworkRejectionitemdeatilsForInvoice);
 
     if($item_count==1){
-        $padding_bottom = '95px';
+        $padding_bottom = '120px';
     }else if($item_count==2){
         $padding_bottom = '28px';
     }else if($item_count==3){
@@ -12767,13 +12775,40 @@ public function downloadreworkrejection($id){
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$ii.'</td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['type_of_raw_material'].'<br>Gross Weight-'.$value['rmgrossweight'].' kgs </br><br>HSN Code -'.$value['hsn_code'].'</br><br>'.$value['desc1'].'</br><br>'.$value['desc2'].'</br></td> 
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['part_number'].'</td>
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['type_of_raw_material'].'</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top"></td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rejection_rework_reason'].'</td> 
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['qty'].'</td>    
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['raw_material_neight_weight'].'</td>    
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['grand_total'].'/-'.'</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rate'].'</td>    
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['value'].'/-'.'</td>
                 </tr>';
-                $subtotal+=$value['grand_total'];
+                $subtotal+=$value['value'];
+                $raw_material_cost +=$value['row_material_cost'];
+                $grand_total +=$value['grand_total'];
+                $gst_rate = $value['gst_rate'];
+
+                if($value['gst_rate']=='CGST_SGST'){
+                    $cgst_tax_rate = 9;
+                    $sgst_tax_rate = 9;
+
+                    $cgst_tax_value = $value['gst_value']/2;
+                    $sgst_tax_value = $value['gst_value']/2;
+
+                }else if($value['gst_rate']=='CGST_SGST_6'){
+                    $cgst_tax_rate = 6;
+                    $sgst_tax_rate = 6;
+
+                    $cgst_tax_value = $value['gst_value']/2;
+                    $sgst_tax_value = $value['gst_value']/2;
+
+                }else if($value['gst_rate']=='IGST'){
+                    $igst_tax_rate = 18;
+                    $igst_tax_value = $value['gst_value'];
+                }else if($value['gst_rate']=='IGST_12'){
+                    $igst_tax_rate = 12;
+                    $igst_tax_value = $value['gst_value'];
+
+                }
+
             $ii++;       
     }
 
@@ -12788,6 +12823,27 @@ public function downloadreworkrejection($id){
         <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
     </tr>';
 
+
+     if($gst_rate=='CGST_SGST' || $gst_rate=='CGST_SGST_6'){
+        $tax_value = '<tr style="border: 1px solid black;">               
+            <td colspan="7"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;">(+) '.$cgst_tax_rate.' CGST </td>    
+                <td style="border: 1px solid black;padding-left: 10px;">'.$cgst_tax_value.'</td>
+            </tr>
+
+            <tr style="border: 1px solid black;">
+
+                <td colspan="7"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;">(+) '.$sgst_tax_rate.' SGST </td>    
+                <td style="border: 1px solid black;padding-left: 10px;">'.$sgst_tax_value.'</td>
+            </tr>';
+     }else{
+        $tax_value = '
+            <tr style="border: 1px solid black;">
+                <td colspan="7"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;">(+) '.$igst_tax_rate.' IGST </td>    
+                <td style="border: 1px solid black;padding-left: 10px;">'.$igst_tax_value.'</td>
+            </tr>';
+     }
+
+  
     $mpdf = new \Mpdf\Mpdf();
     // $html = $this->load->view('html_to_pdf',[],true);
     $html = '<table style=" width: 100%;text-align: center;border-collapse: collapse;border: #cccccc 0px solid;font-family:cambria;">
@@ -12868,21 +12924,17 @@ public function downloadreworkrejection($id){
                     <th align="left"  style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>AMOUNT</th>
                 </tr>
                 '.$CartItem.$space.' 
-                
+
                 <tr style="border: 1px solid black;">               
-                    <td colspan="7"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;">(+) CGST </td>    
-                    <td style="border: 1px solid black;padding-left: 10px;"></td>
-                </tr>
+                <td colspan="7"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;">(+) Raw Material Cost ('.$raw_material_cost.') </td>    
+                <td style="border: 1px solid black;padding-left: 10px;">'. $subtotal+$raw_material_cost.'</td>
+            </tr>
+             '. $tax_value.'
+            
 
-                <tr style="border: 1px solid black;">
-                
-                    <td colspan="7"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;">(+) SGST </td>    
-                    <td style="border: 1px solid black;padding-left: 10px;"></td>
-               </tr>
-
-               <tr style="border: 1px solid black;">
+            <tr style="border: 1px solid black;">
                     <td colspan="7"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;">TOTAL</td>    
-                    <td style="border: 1px solid black;padding-left: 10px;">'.$subtotal.'/-'.'</td>
+                    <td style="border: 1px solid black;padding-left: 10px;">'.$grand_total.'/-'.'</td>
               </tr>
           
             </table>
@@ -12914,7 +12966,7 @@ public function downloadreworkrejection($id){
                         </td>
                         <td style="border: 1px solid black;text-align: center;" width="25%" valign="top">
                             <p style="vertical-align: text-top;font-size:12px;color:#206a9b"><b>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</b></p>
-                            <br/><img src="'.base_url().'assets/images/stmps/supplierpostampsignature.png" width="130" height="100">
+                            <br/><img src="'.base_url().'assets/images/stmps/rr_challan.png" width="130" height="100">
                             <p style="vertical-align: text-top;font-size:10px;color:#206a9b"><b>AUTHORIZED SIGNATORY</b></p>
                         </td> 
                 </tr>

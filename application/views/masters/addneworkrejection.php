@@ -515,6 +515,8 @@
                                                         </div>
                                                     </div>
 
+                                                    <input type="hidden" class="form-control"  id="gst" name="gst" readonly>
+
 
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Grand Total<span class="required">*</span></label>
