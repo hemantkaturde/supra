@@ -12739,7 +12739,7 @@ public function amount_in_word($number){
 public function downloadreworkrejection($id){
 
     $getReworkrejectionforInvoice = $this->admin_model->getReworkrejectionforInvoicesupplier($id);
-    $getvendorItemdeatilsForInvoice = $this->admin_model->getvendorItemdeatilsForInvoice($id);
+    $getReworkRejectionitemdeatilsForInvoice = $this->admin_model->getReworkRejectionitemdeatilsForInvoice($id);
 
    
     $CartItem = "";
@@ -12748,7 +12748,7 @@ public function downloadreworkrejection($id){
     $ii =1;
     $subtotal = 0;
 
-    $item_count =count($getvendorItemdeatilsForInvoice);
+    $item_count =count($getReworkRejectionitemdeatilsForInvoice);
 
     if($item_count==1){
         $padding_bottom = '95px';
@@ -12761,22 +12761,24 @@ public function downloadreworkrejection($id){
     }
 
     
-    foreach ($getvendorItemdeatilsForInvoice as $key => $value) {
+    foreach ($getReworkRejectionitemdeatilsForInvoice as $key => $value) {
         $CartItem .= '
                 <tr style="border-left: 1px solid black;border-right: 1px solid black;">
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$ii.'</td>
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['name'].'<br>Gross Weight-'.$value['rmgrossweight'].' kgs </br><br>HSN Code -'.$value['hsn_code'].'</br><br>'.$value['desc1'].'</br><br>'.$value['desc2'].'</br></td> 
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['type_of_raw_material'].'<br>Gross Weight-'.$value['rmgrossweight'].' kgs </br><br>HSN Code -'.$value['hsn_code'].'</br><br>'.$value['desc1'].'</br><br>'.$value['desc2'].'</br></td> 
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['part_number'].'</td>
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['order_oty'].'</td>
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['unit'].'</td> 
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rate'].'/-'.'</td>    
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['value'].'/-'.'</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['type_of_raw_material'].'</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rejection_rework_reason'].'</td> 
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['qty'].'</td>    
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['raw_material_neight_weight'].'</td>    
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['grand_total'].'/-'.'</td>
                 </tr>';
-                $subtotal+=$value['value'];
+                $subtotal+=$value['grand_total'];
             $ii++;       
     }
 
     $space = '<tr>
+        <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
         <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
         <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
         <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
@@ -12861,17 +12863,28 @@ public function downloadreworkrejection($id){
                     <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>F.G. PART NO.</th>  
                     <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>RM TYPE</th> 
                     <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>Rejection Reason</th>  
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>QTY</th>  
                     <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>Net Weight In kgs</th>  
                     <th align="left"  style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>AMOUNT</th>
                 </tr>
                 '.$CartItem.$space.' 
                 
-                <tr style="border: 1px solid black;">
-                    <td colspan="4" style="padding: 8px;">'.$this->amount_in_word($subtotal).'</td>
-                
-                    <td colspan="2"  style="border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:10px;">SUB TOTAL (+) GST </td>    
-                    <td style="border: 1px solid black;padding-left: 10px;">'.$subtotal.'/-'.'</td>
+                <tr style="border: 1px solid black;">               
+                    <td colspan="7"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;">(+) CGST </td>    
+                    <td style="border: 1px solid black;padding-left: 10px;"></td>
                 </tr>
+
+                <tr style="border: 1px solid black;">
+                
+                    <td colspan="7"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;">(+) SGST </td>    
+                    <td style="border: 1px solid black;padding-left: 10px;"></td>
+               </tr>
+
+               <tr style="border: 1px solid black;">
+                    <td colspan="7"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;">TOTAL</td>    
+                    <td style="border: 1px solid black;padding-left: 10px;">'.$subtotal.'/-'.'</td>
+              </tr>
+          
             </table>
 
             <table style=" width: 100%;border-collapse: collapse;border: #ccc 1px solid;font-family:cambria;font-size:12px">
@@ -12890,11 +12903,14 @@ public function downloadreworkrejection($id){
                                 <p><b>Received the above-mentioned goods in good order & condition & 
                                 returned the Duplicate Duty sealed & signed.</b></p>
                             </div>
+                            <br>
 
                             <p><b>Dispatched By: </b></p>
                             <p><b>No.of Bags/ Boxes/ Goni: </b></p>
                             <p><b>Total Gross Weight: </b></p>
                             <p><b>Total Net Weight:</b></p>
+                            <p><b>Remark:</b>__________________________________________________________</p><br>
+                            <p>____________________________________________________________________</p>
                         </td>
                         <td style="border: 1px solid black;text-align: center;" width="25%" valign="top">
                             <p style="vertical-align: text-top;font-size:12px;color:#206a9b"><b>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</b></p>
