@@ -1,6 +1,10 @@
 <?php if(!defined('BASEPATH')) exit('No direct script access allowed');
 
 require APPPATH . '/libraries/BaseController.php';
+
+use PhpOffice\PhpWord\Shared\Html;
+use PhpOffice\PhpWord\Element\TableRow;
+
 /**
  * Class : Admin (AdminController)
  * Admin class to control to authenticate admin credentials and include admin functions.
@@ -12977,6 +12981,161 @@ public function downloadreworkrejection($id){
     $mpdf->WriteHTML($html);
     $mpdf->Output($invoice_name,'D'); // opens in browser
 
+}
+
+
+public function downloadpackinginstraction($packing_details_item_id){
+
+        $getPackingInstructionData = $this->admin_model->getPackingInstructionData($packing_details_item_id);
+
+        // Create a new PHPWord object
+        $phpWord = new \PhpOffice\PhpWord\PhpWord();
+
+        // Add a section to the document
+        $section = $phpWord->addSection();
+
+        // Sample HTML table string
+        $htmlTable = '<table style="width:100%;font-size:20px;font-family:cambria;" border="0.5">
+                <tr>
+                    <th colspan="3" style="text-align:center;padding: 10px;"><b>PACKAGING INSTRUCTION</b></th>
+                </tr>
+                <tr>
+                    <td style="text-align:left;padding-letf: 10px;width:30%;font-size:17px"><b>PO No and Date</b></td>
+                    <td style="text-align:left;padding: 10px;width:10%"></td>
+                    <td style="text-align:left;padding: 10px;width:60%">'.$getPackingInstructionData[0]['buyer_po_number'].'</td>
+                </tr>
+                <tr>
+                    <td style="text-align:left;margin-top: 10px;width:30%;font-size:17px"><b>Invoice No</b></td>
+                    <td style="text-align:left;padding: 10px;width:10%"></td>
+                    <td style="text-align:left;padding: 10px;width:60%">'.$getPackingInstructionData[0]['buyer_invoice_number'].'</td>
+                </tr>
+                <tr>
+                    <td style="text-align:left;margin-top: 10px;width:30%;font-size:17px"><b>Date</b></td>
+                    <td style="text-align:left;padding: 10px;width:10%"></td>
+                    <td style="text-align:left;padding: 10px;width:60%">'.$getPackingInstructionData[0]['buyer_invoice_date'].'</td>
+                </tr>
+                <tr>
+                    <td style="text-align:left;margin-top: 10px;width:30%;font-size:17px"><b>Description</b></td>
+                    <td style="text-align:left;padding: 10px;width:10%"></td>
+                    <td style="text-align:left;padding: 10px;width:60%">'.$getPackingInstructionData[0]['name'].'</td>
+                </tr>
+                <tr>
+                    <td style="text-align:left;margin-top: 10px;width:30%;font-size:17px"><b>Part No</b></td>
+                    <td style="text-align:left;padding: 10px;width:10%"></td>
+                    <td style="text-align:left;padding: 10px;width:60%">'.$getPackingInstructionData[0]['part_number'].'</td>
+                </tr>
+                <tr>
+                    <td style="text-align:left;margin-top: 10px;width:30%;font-size:17px"><b>Quantity</b></td>
+                    <td style="text-align:left;padding: 10px;width:10%"></td>
+                    <td style="text-align:left;padding: 10px;width:60%">'.$getPackingInstructionData[0]['buyer_invoice_qty'].'</td>
+                </tr>
+                <tr>
+                    <td style="text-align:left;margin-top: 10px;width:30%;font-size:17px"><b>Final Check Signature</b></td>
+                    <td style="text-align:left;padding: 10px;width:10%"></td>
+                    <td style="text-align:left;padding: 10px;width:60%"></td>
+                </tr>
+            </table>   <br/>
+
+            <table style="width:100%;font-size:20px;font-family:cambria;" border="0.5">
+                <tr>
+                    <th colspan="3" style="text-align:center;padding: 10px;"><b>PACKAGING INSTRUCTION</b></th>
+                </tr>
+                <tr>
+                    <td style="text-align:left;padding-letf: 10px;width:30%;font-size:17px"><b>PO No and Date</b></td>
+                    <td style="text-align:left;padding: 10px;width:10%"></td>
+                    <td style="text-align:left;padding: 10px;width:60%">'.$getPackingInstructionData[0]['buyer_po_number'].'</td>
+                </tr>
+                <tr>
+                    <td style="text-align:left;margin-top: 10px;width:30%;font-size:17px"><b>Invoice No</b></td>
+                    <td style="text-align:left;padding: 10px;width:10%"></td>
+                    <td style="text-align:left;padding: 10px;width:60%">'.$getPackingInstructionData[0]['buyer_invoice_number'].'</td>
+                </tr>
+                <tr>
+                    <td style="text-align:left;margin-top: 10px;width:30%;font-size:17px"><b>Date</b></td>
+                    <td style="text-align:left;padding: 10px;width:10%"></td>
+                    <td style="text-align:left;padding: 10px;width:60%">'.$getPackingInstructionData[0]['buyer_invoice_date'].'</td>
+                </tr>
+                <tr>
+                    <td style="text-align:left;margin-top: 10px;width:30%;font-size:17px"><b>Description</b></td>
+                    <td style="text-align:left;padding: 10px;width:10%"></td>
+                    <td style="text-align:left;padding: 10px;width:60%">'.$getPackingInstructionData[0]['name'].'</td>
+                </tr>
+                <tr>
+                    <td style="text-align:left;margin-top: 10px;width:30%;font-size:17px"><b>Part No</b></td>
+                    <td style="text-align:left;padding: 10px;width:10%"></td>
+                    <td style="text-align:left;padding: 10px;width:60%">'.$getPackingInstructionData[0]['part_number'].'</td>
+                </tr>
+                <tr>
+                    <td style="text-align:left;margin-top: 10px;width:30%;font-size:17px"><b>Quantity</b></td>
+                    <td style="text-align:left;padding: 10px;width:10%"></td>
+                    <td style="text-align:left;padding: 10px;width:60%">'.$getPackingInstructionData[0]['buyer_invoice_qty'].'</td>
+                </tr>
+                <tr>
+                    <td style="text-align:left;margin-top: 10px;width:30%;font-size:17px"><b>Final Check Signature</b></td>
+                    <td style="text-align:left;padding: 10px;width:10%"></td>
+                    <td style="text-align:left;padding: 10px;width:60%"></td>
+                </tr>
+            </table>
+            <br/>
+
+            <table style="width:100%;font-size:20px;font-family:cambria;" border="0.5">
+                <tr>
+                    <th colspan="3" style="text-align:center;padding: 10px;"><b>PACKAGING INSTRUCTION</b></th>
+                </tr>
+                <tr>
+                    <td style="text-align:left;padding-letf: 10px;width:30%;font-size:17px"><b>PO No and Date</b></td>
+                    <td style="text-align:left;padding: 10px;width:10%"></td>
+                    <td style="text-align:left;padding: 10px;width:60%">'.$getPackingInstructionData[0]['buyer_po_number'].'</td>
+                </tr>
+                <tr>
+                    <td style="text-align:left;margin-top: 10px;width:30%;font-size:17px"><b>Invoice No</b></td>
+                    <td style="text-align:left;padding: 10px;width:10%"></td>
+                    <td style="text-align:left;padding: 10px;width:60%">'.$getPackingInstructionData[0]['buyer_invoice_number'].'</td>
+                </tr>
+                <tr>
+                    <td style="text-align:left;margin-top: 10px;width:30%;font-size:17px"><b>Date</b></td>
+                    <td style="text-align:left;padding: 10px;width:10%"></td>
+                    <td style="text-align:left;padding: 10px;width:60%">'.$getPackingInstructionData[0]['buyer_invoice_date'].'</td>
+                </tr>
+                <tr>
+                    <td style="text-align:left;margin-top: 10px;width:30%;font-size:17px"><b>Description</b></td>
+                    <td style="text-align:left;padding: 10px;width:10%"></td>
+                    <td style="text-align:left;padding: 10px;width:60%">'.$getPackingInstructionData[0]['name'].'</td>
+                </tr>
+                <tr>
+                    <td style="text-align:left;margin-top: 10px;width:30%;font-size:17px"><b>Part No</b></td>
+                    <td style="text-align:left;padding: 10px;width:10%"></td>
+                    <td style="text-align:left;padding: 10px;width:60%">'.$getPackingInstructionData[0]['part_number'].'</td>
+                </tr>
+                <tr>
+                    <td style="text-align:left;margin-top: 10px;width:30%;font-size:17px"><b>Quantity</b></td>
+                    <td style="text-align:left;padding: 10px;width:10%"></td>
+                    <td style="text-align:left;padding: 10px;width:60%">'.$getPackingInstructionData[0]['buyer_invoice_qty'].'</td>
+                </tr>
+                <tr>
+                    <td style="text-align:left;margin-top: 10px;width:30%;font-size:17px"><b>Final Check Signature</b></td>
+                    <td style="text-align:left;padding: 10px;width:10%"></td>
+                    <td style="text-align:left;padding: 10px;width:60%"></td>
+                </tr>
+            </table>
+            ';
+
+            // Parse HTML table
+            $table = Html::addHtml($section, $htmlTable, false, false);
+
+            // Save the document
+            $filename = $getPackingInstructionData[0]['part_number'].'.docx';
+            $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
+            $objWriter->save($filename);
+
+            // Offer the document as a download
+            header('Content-Type: application/octet-stream');
+            header('Content-Disposition: attachment; filename="' . $filename . '"');
+            readfile($filename);
+
+            // Clean up: delete the temporary file
+            unlink($filename);
+    
 }
 
 }

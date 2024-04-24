@@ -114,7 +114,7 @@
                                 </div>
                             </div>
                         </form>
-                        <div class="col-md-10">
+                        <div class="col-md-12">
                                         <table class="table">
                                             <thead>
                                                 <tr>
@@ -145,6 +145,7 @@
                                                         <td><?=$value_details['box_qty'];?></td>
                                                         <td><?=$value_details['remark'];?></td>
                                                         <td>
+                                                            <a href='<?=ADMIN_PATH.'downloadpackinginstraction/'.$value_details['packing_instaction_details'];?>' ><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>
                                                             <i style='font-size: x-large;cursor: pointer'  main-id='<?=$main_id; ?>'   data-id='<?=$value_details['packing_instaction_details'];?>' class='fa fa-pencil-square-o editpackinginstractionsubitem'  aria-hidden='true'></i>
                                                             <i style='font-size: x-large;cursor: pointer;' main-id='<?=$main_id; ?>'   data-id='<?=$value_details['packing_instaction_details'];?>' class='fa fa-trash-o deletepackinginstractionsubitem' aria-hidden='true'></i>
                                                         </td>
