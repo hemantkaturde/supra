@@ -10408,7 +10408,7 @@
 	                 { "width": "10%", "targets": 3 },
 					 { "width": "10%", "targets": 4 },
 					 { "width": "10%", "targets": 5 },
-					 { "width": "5%", "targets": 6 },
+					 { "width": "8%", "targets": 6 },
 	            ],
 	            responsive: true,
 	            "oLanguage": {
@@ -11002,6 +11002,7 @@
 			   var unit =   $('#unit').val();
 			   var row_material_cost =   $('#row_material_cost').val();
 			   var gst_rate =   $('#gst_rate').val();
+			   var gst_value =   $('#gst').val();
 			   var grand_total =   $('#grand_total').val();
 			   var item_remark =   $('#item_remark').val();
 
@@ -11023,7 +11024,7 @@
 				url : "<?php echo base_url();?>saveChallanformitem",
 				type: "POST",
 				 //data : formData,
-				 data :{part_number:part_number,description:description,type_of_raw_platting:type_of_raw_platting,quantity:quantity,rate:rate,value:value,row_material_cost:row_material_cost,gst_rate:gst_rate,grand_total:grand_total,item_remark:item_remark,pre_challan_date:pre_challan_date,pre_vendor_supplier_name:pre_vendor_supplier_name,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_supplier_name:pre_supplier_name,pre_supplier_po_number:pre_supplier_po_number,pre_remark:pre_remark,challan_id:challan_id,challan_form_item_id:challan_form_item_id,unit:unit,pre_usp_id:pre_usp_id },
+				 data :{part_number:part_number,description:description,type_of_raw_platting:type_of_raw_platting,quantity:quantity,rate:rate,value:value,row_material_cost:row_material_cost,gst_rate:gst_rate,grand_total:grand_total,item_remark:item_remark,pre_challan_date:pre_challan_date,pre_vendor_supplier_name:pre_vendor_supplier_name,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_supplier_name:pre_supplier_name,pre_supplier_po_number:pre_supplier_po_number,pre_remark:pre_remark,challan_id:challan_id,challan_form_item_id:challan_form_item_id,unit:unit,pre_usp_id:pre_usp_id,gst_value:gst_value },
 				 method: "POST",
                 // data :{package_id:package_id},
                 cache:false,

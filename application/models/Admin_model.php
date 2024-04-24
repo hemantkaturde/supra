@@ -5266,6 +5266,15 @@ class Admin_model extends CI_Model
                 $data[$counter]['supplier_po_number'] = $value['supplier_master'];
                 $data[$counter]['action'] = '';
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editchallanform/".$value['challan_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+            
+
+                if($value['vendor_supplier_type']=='supplier'){
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downloadchallanform/".$value['challan_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
+                }else{
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downloadchallanformvendor/".$value['challan_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
+                }
+            
+               
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['challan_id']."' class='fa fa-trash-o deletechallanform' aria-hidden='true'></i>"; 
                 $counter++; 
             }
@@ -11177,7 +11186,6 @@ public function getReworkRejectionitemdeatilsForInvoice($id){
 }
 
 
-
 public function getReworkrejectionforInvoicevendor($id){
     $this->db->select(TBL_REWORK_REJECTION.'.*,'
                     .TBL_VENDOR.'.vendor_name as vendor_name,'
@@ -11220,7 +11228,6 @@ public function getReworkRejectionitemdeatilsForInvoicevendor($id){
 }
 
 
-
 public function getPackingInstructionData($packing_details_item_id){
 
     // $this->db->select('*,'.TBL_RAWMATERIAL.'.net_weight as raw_material_neight_weight');
@@ -11243,6 +11250,46 @@ public function getPackingInstructionData($packing_details_item_id){
     return $fetch_result;
 
 }
+
+public function getChallanformdetailsforInvoice($id){
+    $this->db->select(TBL_CHALLAN_FORM.'.*,'.
+                     TBL_SUPPLIER.'.supplier_name,'
+                    .TBL_SUPPLIER.'.address as supplier_addess,'
+                    .TBL_SUPPLIER.'.landline as suplier_landline,'
+                    .TBL_SUPPLIER.'.contact_person as sup_conatct,'
+                    .TBL_SUPPLIER.'.email as sup_email,'
+                    .TBL_SUPPLIER.'.GSTIN as sup_GSTIN,'
+                    .TBL_SUPPLIER.'.mobile as sup_mobile,'
+                    .TBL_SUPPLIER_PO_MASTER.'.id  as supplier_po_id,'
+                    .TBL_SUPPLIER_PO_MASTER.'.po_number as po_number,'
+                    .TBL_SUPPLIER_PO_MASTER.'.date as date,'
+                    .TBL_SUPPLIER_PO_MASTER.'.quatation_date as quatation_date,'
+                    .TBL_SUPPLIER_PO_MASTER.'.quatation_ref_no as quatation_ref_no,'
+                    .TBL_SUPPLIER_PO_MASTER.'.delivery_date as delivery_date,'
+                    .TBL_SUPPLIER_PO_MASTER.'.work_order as work_order,'
+                    .TBL_CHALLAN_FORM.'.challan_no rrchallaon,'
+                    .TBL_CHALLAN_FORM.'.remark as supplier_remark,'
+        
+        );
+        $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_CHALLAN_FORM.'.supplier_po_number');
+        $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_CHALLAN_FORM.'.supplier_name');
+        $this->db->where(TBL_CHALLAN_FORM.'.challan_id', $id);
+        $query = $this->db->get(TBL_CHALLAN_FORM);
+        $fetch_result = $query->row_array();
+        return $fetch_result;
+}
+
+public function getChallanformditemdeatilsForInvoice($id){
+
+    // $this->db->select('*,'.TBL_RAWMATERIAL.'.gross_weight as rmgrossweight');
+    $this->db->select('*,'.TBL_RAWMATERIAL.'.net_weight as raw_material_neight_weight');
+    $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_CHALLAN_FORM_ITEM.'.part_number');
+    $this->db->where(TBL_CHALLAN_FORM_ITEM.'.challan_id', $id);
+    $query = $this->db->get(TBL_CHALLAN_FORM_ITEM);
+    $fetch_result = $query->result_array();
+    return $fetch_result;
+}
+
 
 
 }
