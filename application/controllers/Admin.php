@@ -12774,6 +12774,11 @@ public function downloadreworkrejection($id){
         $padding_bottom = '10px';
     }
 
+    if($value['raw_material_neight_weight']){
+        $net_weigth = $value['qty'] *$value['raw_material_neight_weight'];
+    }else{
+        $net_weigth ='';
+    }
     
     foreach ($getReworkRejectionitemdeatilsForInvoice as $key => $value) {
         $CartItem .= '
@@ -12784,7 +12789,7 @@ public function downloadreworkrejection($id){
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top"></td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rejection_rework_reason'].'</td> 
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['qty'].'</td>    
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['raw_material_neight_weight'].'</td>    
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$net_weigth.'</td>    
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['value'].'/-'.'</td>
                 </tr>';
                 $subtotal+=$value['value'];
@@ -13016,6 +13021,12 @@ public function downloadreworkrejectionvendor($id){
         $padding_bottom = '10px';
     }
 
+    if($value['raw_material_neight_weight']){
+        $net_weigth = $value['qty'] *$value['raw_material_neight_weight'];
+    }else{
+        $net_weigth ='';
+    }
+    
     
     foreach ($getReworkRejectionitemdeatilsForInvoice as $key => $value) {
         $CartItem .= '
@@ -13026,7 +13037,7 @@ public function downloadreworkrejectionvendor($id){
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['type_of_raw_material'].'</td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rejection_rework_reason'].'</td> 
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['qty'].'</td>    
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['raw_material_neight_weight'].'</td>    
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$net_weigth.'</td>    
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['value'].'/-'.'</td>
                 </tr>';
                 $subtotal+=$value['value'];
