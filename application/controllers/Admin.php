@@ -12904,8 +12904,9 @@ public function downloadreworkrejection($id){
                             <p style="color:red">GSTIN:'.$getReworkrejectionforInvoice['sup_GSTIN'].'</p>
                         <div>    
                     </td> 
-                    <td style="border-left: 1px solid black;padding-left: 15px;font-size:13px" width="50%" valign="top">
-                        <div  style="margin-top: 10x;">
+                    <td style="border-left: 1px solid black;padding-left: 15px;font-size:13px;" width="50%" valign="top">
+                        <div>
+                            <p><b></b>'. str_repeat('&nbsp;', 5).'<span style="color:red"></span></p>
                             <p><b>CHALLAN NO :</b> '.'<span style="color:red">'.$getReworkrejectionforInvoice['rrchallaon'].'</span></p>
                             <p>&nbsp;</p>
                             <p><b>CHALLAN DATE :</b> '.date('d-m-Y',strtotime($getReworkrejectionforInvoice['challan_date'])).'</p>
