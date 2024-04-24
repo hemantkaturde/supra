@@ -12832,19 +12832,19 @@ public function downloadreworkrejection($id){
 
      if($gst_rate=='CGST_SGST' || $gst_rate=='CGST_SGST_6'){
         $tax_value = '<tr style="border: 1px solid black;">               
-            <td colspan="7"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;">(+) '.$cgst_tax_rate.' CGST </td>    
+            <td colspan="7"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>(+) '.$cgst_tax_rate.'% CGST </b></td>    
                 <td style="border: 1px solid black;padding-left: 10px;">'.$cgst_tax_value.'</td>
             </tr>
 
             <tr style="border: 1px solid black;">
 
-                <td colspan="7"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;">(+) '.$sgst_tax_rate.' SGST </td>    
+                <td colspan="7"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>(+) '.$sgst_tax_rate.'% SGST </b></td>    
                 <td style="border: 1px solid black;padding-left: 10px;">'.$sgst_tax_value.'</td>
             </tr>';
      }else{
         $tax_value = '
             <tr style="border: 1px solid black;">
-                <td colspan="7"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;">(+) '.$igst_tax_rate.' IGST </td>    
+                <td colspan="7"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>(+) '.$igst_tax_rate.'% IGST </b></td>    
                 <td style="border: 1px solid black;padding-left: 10px;">'.$igst_tax_value.'</td>
             </tr>';
      }
@@ -12933,14 +12933,14 @@ public function downloadreworkrejection($id){
                 '.$CartItem.$space.' 
 
                 <tr style="border: 1px solid black;">               
-                <td colspan="7"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;">Total Raw Material Cost </td>    
+                <td colspan="7"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>Total Raw Material Cost </b></td>    
                 <td style="border: 1px solid black;padding-left: 10px;">'. $raw_material_cost.'</td>
             </tr>
              '. $tax_value.'
             
 
             <tr style="border: 1px solid black;">
-                    <td colspan="7"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;">TOTAL</td>    
+                    <td colspan="7"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>TOTAL</b></td>    
                     <td style="border: 1px solid black;padding-left: 10px;">'.$grand_total.'/-'.'</td>
               </tr>
           
@@ -13074,19 +13074,19 @@ public function downloadreworkrejectionvendor($id){
 
      if($gst_rate=='CGST_SGST' || $gst_rate=='CGST_SGST_6'){
         $tax_value = '<tr style="border: 1px solid black;">               
-            <td colspan="7"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;">(+) '.$cgst_tax_rate.' CGST </td>    
+            <td colspan="7"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>(+) '.$cgst_tax_rate.'% CGST </b></td>    
                 <td style="border: 1px solid black;padding-left: 10px;">'.$cgst_tax_value.'</td>
             </tr>
 
             <tr style="border: 1px solid black;">
 
-                <td colspan="7"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;">(+) '.$sgst_tax_rate.' SGST </td>    
+                <td colspan="7"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>(+) '.$sgst_tax_rate.'% SGST </b></td>    
                 <td style="border: 1px solid black;padding-left: 10px;">'.$sgst_tax_value.'</td>
             </tr>';
      }else{
         $tax_value = '
             <tr style="border: 1px solid black;">
-                <td colspan="7"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;">(+) '.$igst_tax_rate.' IGST </td>    
+                <td colspan="7"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>(+) '.$igst_tax_rate.'% IGST </b></td>    
                 <td style="border: 1px solid black;padding-left: 10px;">'.$igst_tax_value.'</td>
             </tr>';
      }
@@ -13175,14 +13175,14 @@ public function downloadreworkrejectionvendor($id){
                 '.$CartItem.$space.' 
 
                 <tr style="border: 1px solid black;">               
-                <td colspan="7"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;">Total Raw Material Cost </td>    
+                <td colspan="7"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>Total Raw Material Cost </b></td>    
                 <td style="border: 1px solid black;padding-left: 10px;">'. $raw_material_cost.'</td>
             </tr>
              '. $tax_value.'
             
 
             <tr style="border: 1px solid black;">
-                    <td colspan="7"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;">TOTAL</td>    
+                    <td colspan="7"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>TOTAL</b></td>    
                     <td style="border: 1px solid black;padding-left: 10px;">'.$grand_total.'/-'.'</td>
               </tr>
           
