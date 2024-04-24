@@ -12777,12 +12777,12 @@ public function downloadreworkrejection($id){
         $CartItem .= '
                 <tr style="border-left: 1px solid black;border-right: 1px solid black;">
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$ii.'</td>
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['type_of_raw_material'].'<br>Gross Weight-'.$value['rmgrossweight'].' kgs </br><br>HSN Code -'.$value['hsn_code'].'</br><br>'.$value['desc1'].'</br><br>'.$value['desc2'].'</br></td> 
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['type_of_raw_material'].'</br></td> 
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['part_number'].'</td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top"></td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rejection_rework_reason'].'</td> 
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['qty'].'</td>    
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rate'].'</td>    
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['raw_material_neight_weight'].'</td>    
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['value'].'/-'.'</td>
                 </tr>';
                 $subtotal+=$value['value'];
@@ -12905,7 +12905,7 @@ public function downloadreworkrejection($id){
                         <div>    
                     </td> 
                     <td style="border-left: 1px solid black;padding-left: 15px;font-size:13px" width="50%" valign="top">
-                        <div>
+                        <div  style="margin-top: 10x;">
                             <p><b>CHALLAN NO :</b> '.'<span style="color:red">'.$getReworkrejectionforInvoice['rrchallaon'].'</span></p>
                             <p>&nbsp;</p>
                             <p><b>CHALLAN DATE :</b> '.date('d-m-Y',strtotime($getReworkrejectionforInvoice['challan_date'])).'</p>
@@ -12930,8 +12930,8 @@ public function downloadreworkrejection($id){
                 '.$CartItem.$space.' 
 
                 <tr style="border: 1px solid black;">               
-                <td colspan="7"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;">(+) Raw Material Cost ('.$raw_material_cost.') </td>    
-                <td style="border: 1px solid black;padding-left: 10px;">'. $subtotal+$raw_material_cost.'</td>
+                <td colspan="7"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;">Total Raw Material Cost </td>    
+                <td style="border: 1px solid black;padding-left: 10px;">'. $raw_material_cost.'</td>
             </tr>
              '. $tax_value.'
             
