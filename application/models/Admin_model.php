@@ -11219,8 +11219,8 @@ public function getReworkRejectionitemdeatilsForInvoicevendor($id){
 
     // $this->db->select('*,'.TBL_RAWMATERIAL.'.gross_weight as rmgrossweight');
     $this->db->select('*,'.TBL_FINISHED_GOODS.'.net_weight as raw_material_neight_weight');
-    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_REWORK_REJECTION_ITEM.'.part_number','left');
-    $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_REWORK_REJECTION_ITEM.'.part_number');
+    $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number','left');
     $this->db->where(TBL_REWORK_REJECTION_ITEM.'.rework_rejection_id', $id);
     $query = $this->db->get(TBL_REWORK_REJECTION_ITEM);
     $fetch_result = $query->result_array();
