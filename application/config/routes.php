@@ -362,6 +362,7 @@ $route['downloadvendorpo/(:any)'] = "admin/downloadvendorpo/$1";
 $route['downloadvendorpowithoutsupplier/(:any)'] = "admin/downloadvendorpowithoutsupplier/$1";
 $route['downloadreworkrejection/(:any)'] = "admin/downloadreworkrejection/$1";
 $route['downloadpackinginstraction/(:any)'] = "admin/downloadpackinginstraction/$1";
+$route['downloadreworkrejectionvendor/(:any)'] = "admin/downloadreworkrejectionvendor/$1";
 
 
 /* ALL Edit Forms*/

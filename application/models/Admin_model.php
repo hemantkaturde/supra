@@ -4802,7 +4802,14 @@ class Admin_model extends CI_Model
                 $data[$counter]['supplier_po_number'] = $value['supplier_master'];
                 $data[$counter]['action'] = '';
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editreworkrejection/".$value['reworkrejectionid']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downloadreworkrejection/".$value['reworkrejectionid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
+                
+                if($value['vendor_supplier_name']=='supplier'){
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downloadreworkrejection/".$value['reworkrejectionid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
+                }else{
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downloadreworkrejectionvendor/".$value['reworkrejectionid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
+                }
+                
+                
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['reworkrejectionid']."' class='fa fa-trash-o deletereworkrejection' aria-hidden='true'></i>"; 
 
                 $counter++; 
@@ -11168,6 +11175,51 @@ public function getReworkRejectionitemdeatilsForInvoice($id){
     $fetch_result = $query->result_array();
     return $fetch_result;
 }
+
+
+
+public function getReworkrejectionforInvoicevendor($id){
+    $this->db->select(TBL_REWORK_REJECTION.'.*,'
+                    .TBL_VENDOR.'.vendor_name as vendor_name,'
+                    .TBL_VENDOR.'.address as ven_address,'
+                    .TBL_VENDOR.'.landline as ven_landline,'
+                    .TBL_VENDOR.'.contact_person as ven_contact_person,'
+                    .TBL_VENDOR.'.mobile as ven_mobile,'
+                    .TBL_VENDOR.'.email as ven_email,'
+                    .TBL_VENDOR.'.GSTIN as ven_GSTIN,'
+                    .TBL_VENDOR_PO_MASTER.'.po_number as ven_po_number,'
+                    .TBL_VENDOR_PO_MASTER.'.date as ven_date,'
+                    .TBL_VENDOR_PO_MASTER.'.quatation_ref_no as ven_quatation_ref_no,'
+                    .TBL_VENDOR_PO_MASTER.'.quatation_date as ven_quatation_date,'
+                    .TBL_VENDOR_PO_MASTER.'.delivery_date as ven_delivery_date,'
+                    .TBL_VENDOR_PO_MASTER.'.work_order as ven_work_order,'
+                    .TBL_VENDOR_PO_MASTER.'.remark as ven_remark,'
+                    .TBL_REWORK_REJECTION.'.challan_no rrchallaon,'
+                    .TBL_REWORK_REJECTION.'.remark as supplier_remark,'
+        
+        );
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_REWORK_REJECTION.'.vendor_po_number');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_REWORK_REJECTION.'.vendor_name');
+        $this->db->where(TBL_REWORK_REJECTION.'.id', $id);
+        $query = $this->db->get(TBL_REWORK_REJECTION);
+        $fetch_result = $query->row_array();
+        return $fetch_result;
+}
+
+
+public function getReworkRejectionitemdeatilsForInvoicevendor($id){
+
+    // $this->db->select('*,'.TBL_RAWMATERIAL.'.gross_weight as rmgrossweight');
+    $this->db->select('*,'.TBL_FINISHED_GOODS.'.net_weight as raw_material_neight_weight');
+    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_REWORK_REJECTION_ITEM.'.part_number');
+    $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+    $this->db->where(TBL_REWORK_REJECTION_ITEM.'.rework_rejection_id', $id);
+    $query = $this->db->get(TBL_REWORK_REJECTION_ITEM);
+    $fetch_result = $query->result_array();
+    return $fetch_result;
+}
+
+
 
 public function getPackingInstructionData($packing_details_item_id){
 
