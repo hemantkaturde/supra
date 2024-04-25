@@ -5613,7 +5613,6 @@ class Admin_model extends CI_Model
         }
 
         $this->db->where(TBL_DEBIT_NOTE.'.status', 1);
-        $this->db->limit($params['length'],$params['start']);
         $this->db->order_by(TBL_DEBIT_NOTE.'.debit_id','DESC');
         $query = $this->db->get(TBL_DEBIT_NOTE);
         $rowcount = $query->num_rows();
