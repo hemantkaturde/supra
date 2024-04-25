@@ -13431,6 +13431,40 @@ public function downloadchallanform($id){
         $padding_bottom = '10px';
     }
 
+
+    if($getChallanformdetailsforInvoice['usp_id']){
+        $to_data = ' <td width="50%" style="padding-left: 15px;">
+                        <div>
+                            <p>To,</p>
+                            <p><b>'.$getChallanformdetailsforInvoice['usp_name'].'</b></p>
+                            <p>'.$getChallanformdetailsforInvoice['usp_addess'].'</p>
+                            <p><b>Contact No:</b> '.$getChallanformdetailsforInvoice['usp_mobile'].' / '.$getChallanformdetailsforInvoice['usp_landline'].'</p>
+                            <p><b>Contact Person:</b> '.$getChallanformdetailsforInvoice['contact_person'].'</p>
+                            <p><b>Email:</b> '.$getChallanformdetailsforInvoice['usp_email'].'</p>
+                            <p style="color:red">GSTIN:'.$getChallanformdetailsforInvoice['usp_GSTIN'].'</p>
+                        <div>    
+                    </td> ';
+          
+        $pdf_name = $getChallanformdetailsforInvoice['usp_name'];
+                    
+
+    }else{
+
+        $to_data = ' <td width="50%" style="padding-left: 15px;">
+                        <div>
+                            <p>To,</p>
+                            <p><b>'.$getChallanformdetailsforInvoice['supplier_name'].'</b></p>
+                            <p>'.$getChallanformdetailsforInvoice['supplier_addess'].'</p>
+                            <p><b>Contact No:</b> '.$getChallanformdetailsforInvoice['mobile'].' / '.$getChallanformdetailsforInvoice['suplier_landline'].'</p>
+                            <p><b>Contact Person:</b> '.$getChallanformdetailsforInvoice['sup_conatct'].'</p>
+                            <p><b>Email:</b> '.$getChallanformdetailsforInvoice['sup_email'].'</p>
+                            <p style="color:red">GSTIN:'.$getChallanformdetailsforInvoice['sup_GSTIN'].'</p>
+                        <div>    
+                    </td> ';
+                    $pdf_name = $getChallanformdetailsforInvoice['supplier_name'];
+    }
+
+
     
     foreach ($getChallanformditemdeatilsForInvoice as $key => $value) {
         $CartItem .= '
@@ -13550,17 +13584,7 @@ public function downloadchallanform($id){
 
             <table style=" width: 100%;text-align: left;border-collapse: collapse;font-family:cambria;font-size:13px;border: #ccc 1px solid">
                 <tr style="border: 1px solid black;">
-                    <td width="50%" style="padding-left: 15px;">
-                        <div>
-                            <p>To,</p>
-                            <p><b>'.$getChallanformdetailsforInvoice['supplier_name'].'</b></p>
-                            <p>'.$getChallanformdetailsforInvoice['supplier_addess'].'</p>
-                            <p><b>Contact No:</b> '.$getChallanformdetailsforInvoice['mobile'].' / '.$getChallanformdetailsforInvoice['suplier_landline'].'</p>
-                            <p><b>Contact Person:</b> '.$getChallanformdetailsforInvoice['sup_conatct'].'</p>
-                            <p><b>Email:</b> '.$getChallanformdetailsforInvoice['sup_email'].'</p>
-                            <p style="color:red">GSTIN:'.$getChallanformdetailsforInvoice['sup_GSTIN'].'</p>
-                        <div>    
-                    </td> 
+                   '.$to_data.'
                     <td style="border-left: 1px solid black;padding-left: 15px;font-size:13px;" width="50%" valign="top">
                         <div>
                             <p><b></b>'. str_repeat('&nbsp;', 5).'<span style="color:red"></span></p>
@@ -13634,7 +13658,7 @@ public function downloadchallanform($id){
             </table>';
 
             // <p>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</p>
-    $invoice_name =  $getChallanformdetailsforInvoice['rrchallaon'].' - '.$getChallanformdetailsforInvoice['supplier_name'].'.pdf';
+    $invoice_name =  $getChallanformdetailsforInvoice['rrchallaon'].' - '.$pdf_name.'.pdf';
     $mpdf->WriteHTML($html);
     $mpdf->Output($invoice_name,'D'); // opens in browser
 

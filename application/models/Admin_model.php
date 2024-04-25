@@ -11269,10 +11269,19 @@ public function getChallanformdetailsforInvoice($id){
                     .TBL_SUPPLIER_PO_MASTER.'.work_order as work_order,'
                     .TBL_CHALLAN_FORM.'.challan_no rrchallaon,'
                     .TBL_CHALLAN_FORM.'.remark as supplier_remark,'
+                    .TBL_USP.'.usp_id,'
+                    .TBL_USP.'.usp_name,'
+                    .TBL_USP.'.address as usp_addess,'
+                    .TBL_USP.'.landline as usp_landline,'
+                    .TBL_USP.'.contact_person as usp_conatct,'
+                    .TBL_USP.'.email as usp_email,'
+                    .TBL_USP.'.GSTIN as usp_GSTIN,'
+                    .TBL_USP.'.mobile as usp_mobile,'
         
         );
         $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_CHALLAN_FORM.'.supplier_po_number');
         $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_CHALLAN_FORM.'.supplier_name');
+        $this->db->join(TBL_USP, TBL_USP.'.usp_id = '.TBL_CHALLAN_FORM.'.usp_id','left');
         $this->db->where(TBL_CHALLAN_FORM.'.challan_id', $id);
         $query = $this->db->get(TBL_CHALLAN_FORM);
         $fetch_result = $query->row_array();
