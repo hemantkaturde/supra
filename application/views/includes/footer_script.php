@@ -10378,7 +10378,7 @@
 						$('#value').val(fetchResponse.value); 
 						$('#row_material_cost').val(fetchResponse.row_material_cost); 
 						$('#gst_rate').val(fetchResponse.gst_rate); 
-						$('#gst_value').val(fetchResponse.gst_value); 
+						$('#gst').val(fetchResponse.gst_value); 
 						$('#grand_total').val(fetchResponse.grand_total); 
 						$('#item_remark').val(fetchResponse.item_remark); 
 						
@@ -11149,6 +11149,7 @@
 						$('#value').val(fetchResponse.value); 
 						$('#row_material_cost').val(fetchResponse.row_material_cost); 
 						$('#gst_rate').val(fetchResponse.gst_rate); 
+						$('#gst').val(fetchResponse.gst_value); 
 						$('#grand_total').val(fetchResponse.grand_total); 
 						$('#item_remark').val(fetchResponse.item_remark); 
 				},
