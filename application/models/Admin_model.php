@@ -6010,7 +6010,6 @@ class Admin_model extends CI_Model
         }
 
         $this->db->where(TBL_POD_DETAILS.'.status', 1);
-        $this->db->limit($params['length'],$params['start']);
         $query = $this->db->get(TBL_POD_DETAILS);
         $rowcount = $query->num_rows();
         return $rowcount;
