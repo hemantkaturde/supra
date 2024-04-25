@@ -11299,6 +11299,56 @@ public function getChallanformditemdeatilsForInvoice($id){
     return $fetch_result;
 }
 
+public function getchallanformInvoicevendor($id){
+            $this->db->select(TBL_CHALLAN_FORM.'.*,'
+            .TBL_VENDOR.'.vendor_name as vendor_name,'
+            .TBL_VENDOR.'.address as ven_address,'
+            .TBL_VENDOR.'.landline as ven_landline,'
+            .TBL_VENDOR.'.contact_person as ven_contact_person,'
+            .TBL_VENDOR.'.mobile as ven_mobile,'
+            .TBL_VENDOR.'.email as ven_email,'
+            .TBL_VENDOR.'.GSTIN as ven_GSTIN,'
+            .TBL_VENDOR_PO_MASTER.'.po_number as ven_po_number,'
+            .TBL_VENDOR_PO_MASTER.'.date as ven_date,'
+            .TBL_VENDOR_PO_MASTER.'.quatation_ref_no as ven_quatation_ref_no,'
+            .TBL_VENDOR_PO_MASTER.'.quatation_date as ven_quatation_date,'
+            .TBL_VENDOR_PO_MASTER.'.delivery_date as ven_delivery_date,'
+            .TBL_VENDOR_PO_MASTER.'.work_order as ven_work_order,'
+            .TBL_VENDOR_PO_MASTER.'.remark as ven_remark,'
+            .TBL_CHALLAN_FORM.'.challan_no rrchallaon,'
+            .TBL_CHALLAN_FORM.'.remark as supplier_remark,'
+            .TBL_USP.'.usp_id,'
+            .TBL_USP.'.usp_name,'
+            .TBL_USP.'.address as usp_addess,'
+            .TBL_USP.'.landline as usp_landline,'
+            .TBL_USP.'.contact_person as usp_conatct,'
+            .TBL_USP.'.email as usp_email,'
+            .TBL_USP.'.GSTIN as usp_GSTIN,'
+            .TBL_USP.'.mobile as usp_mobile,'
+
+            );
+            $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_CHALLAN_FORM.'.vendor_po_number');
+            $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_CHALLAN_FORM.'.vendor_name');
+            $this->db->join(TBL_USP, TBL_USP.'.usp_id = '.TBL_CHALLAN_FORM.'.usp_id','left');
+            $this->db->where(TBL_CHALLAN_FORM.'.challan_id', $id);
+            $query = $this->db->get(TBL_CHALLAN_FORM);
+            $fetch_result = $query->row_array();
+            return $fetch_result;
+}
+
+
+public function getchallanformeatilsForInvoicevendor($id){
+
+    // $this->db->select('*,'.TBL_RAWMATERIAL.'.gross_weight as rmgrossweight');
+    $this->db->select('*,'.TBL_FINISHED_GOODS.'.net_weight as raw_material_neight_weight,'.TBL_FINISHED_GOODS.'.part_number as fg_part');
+    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_CHALLAN_FORM_ITEM.'.part_number');
+    $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number','left');
+    $this->db->where(TBL_CHALLAN_FORM_ITEM.'.challan_id', $id);
+    $query = $this->db->get(TBL_CHALLAN_FORM_ITEM);
+    $fetch_result = $query->result_array();
+    return $fetch_result;
+}
+
 
 
 }

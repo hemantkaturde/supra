@@ -13666,8 +13666,8 @@ public function downloadchallanform($id){
 
 public function downloadchallanformvendor($id){
 
-    $getReworkrejectionforInvoice = $this->admin_model->getReworkrejectionforInvoicevendor($id);
-    $getReworkRejectionitemdeatilsForInvoice = $this->admin_model->getReworkRejectionitemdeatilsForInvoicevendor($id);
+    $getChallanformdetailsforInvoice = $this->admin_model->getchallanformInvoicevendor($id);
+    $getChallanformditemdeatilsForInvoice = $this->admin_model->getchallanformeatilsForInvoicevendor($id);
 
    
     $CartItem = "";
@@ -13682,7 +13682,7 @@ public function downloadchallanformvendor($id){
     $igst_tax_rate = 0;
     $gst_rate ='';
 
-    $item_count =count($getReworkRejectionitemdeatilsForInvoice);
+    $item_count =count($getChallanformditemdeatilsForInvoice);
 
     if($item_count==1){
         $padding_bottom = '200px';
@@ -13694,17 +13694,46 @@ public function downloadchallanformvendor($id){
         $padding_bottom = '10px';
     }
 
-    
-    foreach ($getReworkRejectionitemdeatilsForInvoice as $key => $value) {
+
+    if($getChallanformdetailsforInvoice['usp_id']){
+                    $to_data = ' <td width="50%" style="padding-left: 15px;">
+                        <div>
+                            <p>To,</p>
+                            <p><b>'.$getChallanformdetailsforInvoice['usp_name'].'</b></p>
+                            <p>'.$getChallanformdetailsforInvoice['usp_addess'].'</p>
+                            <p><b>Contact No:</b> '.$getChallanformdetailsforInvoice['usp_mobile'].' / '.$getChallanformdetailsforInvoice['usp_landline'].'</p>
+                            <p><b>Contact Person:</b> '.$getChallanformdetailsforInvoice['contact_person'].'</p>
+                            <p><b>Email:</b> '.$getChallanformdetailsforInvoice['usp_email'].'</p>
+                            <p style="color:red">GSTIN:'.$getChallanformdetailsforInvoice['usp_GSTIN'].'</p>
+                        <div>    
+                    </td> ';
+          
+        $pdf_name = $getChallanformdetailsforInvoice['usp_name'];
+    }else{
+
+                    $to_data = ' <td width="50%" style="padding-left: 15px;">
+                        <div>
+                            <p>To,</p>
+                            <p><b>'.$getChallanformdetailsforInvoice['vendor_name'].'</b></p>
+                            <p>'.$getChallanformdetailsforInvoice['ven_address'].'</p>
+                            <p><b>Contact No:</b> '.$getChallanformdetailsforInvoice['ven_mobile'].' / '.$getChallanformdetailsforInvoice['ven_landline'].'</p>
+                            <p><b>Contact Person:</b> '.$getChallanformdetailsforInvoice['ven_contact_person'].'</p>
+                            <p><b>Email:</b> '.$getChallanformdetailsforInvoice['ven_email'].'</p>
+                            <p style="color:red">GSTIN:'.$getChallanformdetailsforInvoice['ven_GSTIN'].'</p>
+                        <div>    
+                    </td> ';
+                    $pdf_name = $getChallanformdetailsforInvoice['vendor_name'];
+    }
+
+    foreach ($getChallanformditemdeatilsForInvoice as $key => $value) {
         $CartItem .= '
                 <tr style="border-left: 1px solid black;border-right: 1px solid black;">
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$ii.'</td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['name'].'</br></td> 
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['part_number'].'</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['fg_part'].'</td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['type_of_raw_material'].'</td>
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rejection_rework_reason'].'</td> 
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['type_of_raw_platting'].'</td> 
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['qty'].'</td>    
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['raw_material_neight_weight'].'</td>    
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['value'].'/-'.'</td>
                 </tr>';
                 $subtotal+=$value['value'];
@@ -13746,25 +13775,24 @@ public function downloadchallanformvendor($id){
         <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
         <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
         <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-        <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
     </tr>';
 
 
      if($gst_rate=='CGST_SGST' || $gst_rate=='CGST_SGST_6'){
         $tax_value = '<tr style="border: 1px solid black;">               
-            <td colspan="7"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;">(+) '.$cgst_tax_rate.' CGST </td>    
+            <td colspan="6"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;">(+) '.$cgst_tax_rate.' CGST </td>    
                 <td style="border: 1px solid black;padding-left: 10px;">'.$cgst_tax_value.'</td>
             </tr>
 
             <tr style="border: 1px solid black;">
 
-                <td colspan="7"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;">(+) '.$sgst_tax_rate.' SGST </td>    
+                <td colspan="6"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;">(+) '.$sgst_tax_rate.' SGST </td>    
                 <td style="border: 1px solid black;padding-left: 10px;">'.$sgst_tax_value.'</td>
             </tr>';
      }else{
         $tax_value = '
             <tr style="border: 1px solid black;">
-                <td colspan="7"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;">(+) '.$igst_tax_rate.' IGST </td>    
+                <td colspan="6"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;">(+) '.$igst_tax_rate.' IGST </td>    
                 <td style="border: 1px solid black;padding-left: 10px;">'.$igst_tax_value.'</td>
             </tr>';
      }
@@ -13808,30 +13836,20 @@ public function downloadchallanformvendor($id){
             <table style=" width: 100%;text-align: center;border-collapse: collapse;border: #ccc 0px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;">
                     <tr>
                         <td style="color:red;font-size:15px">
-                          <u><p><h3>R R CHALLAN</h3></p>
+                          <u><p><h3>CHALLAN</h3></p>
                         </td>
                     </tr>
             </table>
 
             <table style=" width: 100%;text-align: left;border-collapse: collapse;font-family:cambria;font-size:13px;border: #ccc 1px solid">
                 <tr style="border: 1px solid black;">
-                    <td width="50%" style="padding-left: 15px;">
-                        <div>
-                            <p>To,</p>
-                            <p><b>'.$getReworkrejectionforInvoice['vendor_name'].'</b></p>
-                            <p>'.$getReworkrejectionforInvoice['ven_address'].'</p>
-                            <p><b>Contact No:</b> '.$getReworkrejectionforInvoice['ven_mobile'].' / '.$getReworkrejectionforInvoice['ven_landline'].'</p>
-                            <p><b>Contact Person:</b> '.$getReworkrejectionforInvoice['ven_contact_person'].'</p>
-                            <p><b>Email:</b> '.$getReworkrejectionforInvoice['ven_mobile'].'</p>
-                            <p style="color:red">GSTIN:'.$getReworkrejectionforInvoice['ven_GSTIN'].'</p>
-                        <div>    
-                    </td> 
+                   '.$to_data.'
                     <td style="border-left: 1px solid black;padding-left: 15px;font-size:13px;" width="50%" valign="top">
                         <div>
                             <p><b></b>'. str_repeat('&nbsp;', 5).'<span style="color:red"></span></p>
-                            <p><b>CHALLAN NO :</b> '.'<span style="color:red">'.$getReworkrejectionforInvoice['rrchallaon'].'</span></p>
+                            <p><b>CHALLAN NO :</b> '.'<span style="color:red">'.$getChallanformdetailsforInvoice['rrchallaon'].'</span></p>
                             <p>&nbsp;</p>
-                            <p><b>CHALLAN DATE :</b> '.date('d-m-Y',strtotime($getReworkrejectionforInvoice['challan_date'])).'</p>
+                            <p><b>CHALLAN DATE :</b> '.date('d-m-Y',strtotime($getChallanformdetailsforInvoice['challan_date'])).'</p>
                             <p>&nbsp;</p>
                         </div>
                     </td>
@@ -13843,24 +13861,23 @@ public function downloadchallanformvendor($id){
                 <tr style="border: 1px solid black;">
                     <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>SR.NO.</th>
                     <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>F.G. PART DESCRIPTION</th>
-                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>F.G. PART NO.</th>  
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>F.G. PART NO</th>  
                     <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>RM TYPE</th> 
-                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>Rejection Reason</th>  
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>PROCESS</th>  
                     <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>QTY IN PCS</th>  
-                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>Net Weight In kgs</th>  
                     <th align="left"  style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>AMOUNT</th>
                 </tr>
                 '.$CartItem.$space.' 
 
                 <tr style="border: 1px solid black;">               
-                <td colspan="7"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;">Total Raw Material Cost </td>    
+                <td colspan="6"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;">Total Raw Material Cost </td>    
                 <td style="border: 1px solid black;padding-left: 10px;">'. $raw_material_cost.'</td>
             </tr>
              '. $tax_value.'
             
 
             <tr style="border: 1px solid black;">
-                    <td colspan="7"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;">TOTAL</td>    
+                    <td colspan="6"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;">TOTAL</td>    
                     <td style="border: 1px solid black;padding-left: 10px;">'.$grand_total.'/-'.'</td>
               </tr>
           
@@ -13869,7 +13886,7 @@ public function downloadchallanformvendor($id){
             <table style=" width: 100%;border-collapse: collapse;border: #ccc 1px solid;font-family:cambria;font-size:12px">
                 <tr style="border: 1px solid black;">
                         <td style="border: 1px solid black;padding-left: 10px;">
-                            <p><b>Remark :</b>'.$getReworkrejectionforInvoice['supplier_remark'].'</p>    
+                            <p><b>Remark :</b>'.$getChallanformdetailsforInvoice['supplier_remark'].'</p>    
                     </td>   
                 </tr>
             </table>
@@ -13900,7 +13917,7 @@ public function downloadchallanformvendor($id){
             </table>';
 
             // <p>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</p>
-    $invoice_name =  $getReworkrejectionforInvoice['rrchallaon'].' - '.$getReworkrejectionforInvoice['vendor_name'].'.pdf';
+    $invoice_name =  $getChallanformdetailsforInvoice['rrchallaon'].' - '.$pdf_name.'.pdf';
     $mpdf->WriteHTML($html);
     $mpdf->Output($invoice_name,'D'); // opens in browser
 }
