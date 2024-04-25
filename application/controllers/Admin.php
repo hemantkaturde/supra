@@ -13400,7 +13400,6 @@ public function downloadpackinginstraction($packing_details_item_id){
     
 }
 
-
 public function downloadchallanform($id){
 
     $getChallanformdetailsforInvoice = $this->admin_model->getChallanformdetailsforInvoice($id);
@@ -13456,7 +13455,7 @@ public function downloadchallanform($id){
                             <p><b>'.$getChallanformdetailsforInvoice['supplier_name'].'</b></p>
                             <p>'.$getChallanformdetailsforInvoice['supplier_addess'].'</p>
                             <p><b>Contact No:</b> '.$getChallanformdetailsforInvoice['mobile'].' / '.$getChallanformdetailsforInvoice['suplier_landline'].'</p>
-                            <p><b>Contact Person:</b> '.$getChallanformdetailsforInvoice['sup_conatct'].'</p>
+                            <p><b>Contact Person:</b> '.$getChallanformdetailsforInvoice['usp_conatct'].'</p>
                             <p><b>Email:</b> '.$getChallanformdetailsforInvoice['sup_email'].'</p>
                             <p style="color:red">GSTIN:'.$getChallanformdetailsforInvoice['sup_GSTIN'].'</p>
                         <div>    
@@ -13521,19 +13520,19 @@ public function downloadchallanform($id){
 
      if($gst_rate=='CGST_SGST' || $gst_rate=='CGST_SGST_6'){
         $tax_value = '<tr style="border: 1px solid black;">               
-            <td colspan="6"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;">(+) '.$cgst_tax_rate.' CGST </td>    
+            <td colspan="6"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>(+) '.$cgst_tax_rate.' CGST </b></td>    
                 <td style="border: 1px solid black;padding-left: 10px;">'.$cgst_tax_value.'</td>
             </tr>
 
             <tr style="border: 1px solid black;">
 
-                <td colspan="6"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;">(+) '.$sgst_tax_rate.' SGST </td>    
+                <td colspan="6"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>(+) '.$sgst_tax_rate.' SGST </b></td>    
                 <td style="border: 1px solid black;padding-left: 10px;">'.$sgst_tax_value.'</td>
             </tr>';
      }else{
         $tax_value = '
             <tr style="border: 1px solid black;">
-                <td colspan="6"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;">(+) '.$igst_tax_rate.' IGST </td>    
+                <td colspan="6"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>(+) '.$igst_tax_rate.' IGST </b></td>    
                 <td style="border: 1px solid black;padding-left: 10px;">'.$igst_tax_value.'</td>
             </tr>';
      }
@@ -13611,14 +13610,14 @@ public function downloadchallanform($id){
                 '.$CartItem.$space.' 
 
                 <tr style="border: 1px solid black;">               
-                <td colspan="6"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;">Total Raw Material Cost </td>    
+                <td colspan="6"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>Total Raw Material Cost </b></td>    
                 <td style="border: 1px solid black;padding-left: 10px;">'. $raw_material_cost.'</td>
             </tr>
              '. $tax_value.'
             
 
             <tr style="border: 1px solid black;">
-                    <td colspan="6"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;">TOTAL</td>    
+                    <td colspan="6"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>TOTAL</b></td>    
                     <td style="border: 1px solid black;padding-left: 10px;">'.$grand_total.'/-'.'</td>
               </tr>
           
@@ -13702,7 +13701,7 @@ public function downloadchallanformvendor($id){
                             <p><b>'.$getChallanformdetailsforInvoice['usp_name'].'</b></p>
                             <p>'.$getChallanformdetailsforInvoice['usp_addess'].'</p>
                             <p><b>Contact No:</b> '.$getChallanformdetailsforInvoice['usp_mobile'].' / '.$getChallanformdetailsforInvoice['usp_landline'].'</p>
-                            <p><b>Contact Person:</b> '.$getChallanformdetailsforInvoice['contact_person'].'</p>
+                            <p><b>Contact Person:</b> '.$getChallanformdetailsforInvoice['usp_conatct'].'</p>
                             <p><b>Email:</b> '.$getChallanformdetailsforInvoice['usp_email'].'</p>
                             <p style="color:red">GSTIN:'.$getChallanformdetailsforInvoice['usp_GSTIN'].'</p>
                         <div>    
@@ -13780,19 +13779,19 @@ public function downloadchallanformvendor($id){
 
      if($gst_rate=='CGST_SGST' || $gst_rate=='CGST_SGST_6'){
         $tax_value = '<tr style="border: 1px solid black;">               
-            <td colspan="6"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;">(+) '.$cgst_tax_rate.' CGST </td>    
+            <td colspan="6"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>(+) '.$cgst_tax_rate.' CGST </b></td>    
                 <td style="border: 1px solid black;padding-left: 10px;">'.$cgst_tax_value.'</td>
             </tr>
 
             <tr style="border: 1px solid black;">
 
-                <td colspan="6"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;">(+) '.$sgst_tax_rate.' SGST </td>    
+                <td colspan="6"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>(+) '.$sgst_tax_rate.' SGST </b></td>    
                 <td style="border: 1px solid black;padding-left: 10px;">'.$sgst_tax_value.'</td>
             </tr>';
      }else{
         $tax_value = '
             <tr style="border: 1px solid black;">
-                <td colspan="6"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;">(+) '.$igst_tax_rate.' IGST </td>    
+                <td colspan="6"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>(+) '.$igst_tax_rate.' IGST </b></td>    
                 <td style="border: 1px solid black;padding-left: 10px;">'.$igst_tax_value.'</td>
             </tr>';
      }
@@ -13870,14 +13869,14 @@ public function downloadchallanformvendor($id){
                 '.$CartItem.$space.' 
 
                 <tr style="border: 1px solid black;">               
-                <td colspan="6"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;">Total Raw Material Cost </td>    
+                <td colspan="6"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>Total Raw Material Cost </b></td>    
                 <td style="border: 1px solid black;padding-left: 10px;">'. $raw_material_cost.'</td>
             </tr>
              '. $tax_value.'
             
 
             <tr style="border: 1px solid black;">
-                    <td colspan="6"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;">TOTAL</td>    
+                    <td colspan="6"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>TOTAL</b></td>    
                     <td style="border: 1px solid black;padding-left: 10px;">'.$grand_total.'/-'.'</td>
               </tr>
           
@@ -13921,8 +13920,6 @@ public function downloadchallanformvendor($id){
     $mpdf->WriteHTML($html);
     $mpdf->Output($invoice_name,'D'); // opens in browser
 }
-
-
 
 }
 
