@@ -13025,14 +13025,18 @@ public function downloadreworkrejectionvendor($id){
         $padding_bottom = '10px';
     }
 
-    if($value['raw_material_neight_weight']){
-        $net_weigth = $value['qty'] *$value['raw_material_neight_weight'];
-    }else{
-        $net_weigth ='';
-    }
+  
     
     
     foreach ($getReworkRejectionitemdeatilsForInvoice as $key => $value) {
+
+
+        if($value['raw_material_neight_weight']){
+            $net_weigth = $value['qty'] *$value['raw_material_neight_weight'];
+        }else{
+            $net_weigth ='';
+        }
+
         $CartItem .= '
                 <tr style="border-left: 1px solid black;border-right: 1px solid black;">
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$ii.'</td>
