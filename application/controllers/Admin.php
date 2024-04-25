@@ -13578,9 +13578,9 @@ public function downloadchallanform($id){
                 <tr style="border: 1px solid black;">
                     <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>SR.NO.</th>
                     <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>F.G. PART DESCRIPTION</th>
-                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>F.G. PART NO WITH HSN CODE</th>  
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>F.G. PART NO</th>  
                     <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>RM TYPE</th> 
-                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>PLATTING TYPE</th>  
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>PROCESS</th>  
                     <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>QTY IN PCS</th>  
                     <th align="left"  style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>AMOUNT</th>
                 </tr>
