@@ -5221,7 +5221,6 @@ class Admin_model extends CI_Model
             $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%')");
         }
         $this->db->where(TBL_CHALLAN_FORM.'.status', 1); 
-    
         $query = $this->db->get(TBL_CHALLAN_FORM);
         $rowcount = $query->num_rows();
         return $rowcount;
@@ -5880,12 +5879,9 @@ class Admin_model extends CI_Model
         }
 
         $this->db->where(TBL_PAYMENT_DETAILS.'.status', 1);
-        $this->db->limit($params['length'],$params['start']);
         $query = $this->db->get(TBL_PAYMENT_DETAILS);
         $rowcount = $query->num_rows();
         return $rowcount;
-
-
     }
 
     public function getPaymentdata($params){
@@ -5991,6 +5987,7 @@ class Admin_model extends CI_Model
     }
 
     public function getpoddetailscount($params){
+
 
        
         $this->db->select('*,'.TBL_SUPPLIER.'.supplier_name as supplier,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_pomaster,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_master,'.TBL_POD_DETAILS.'.pod_details_id   as debit_id');
