@@ -13473,7 +13473,7 @@ public function downloadchallanform($id){
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['part_number'].'</td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['type_of_raw_material'].'</td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['type_of_raw_platting'].'</td> 
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['qty'].'</td>    
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.trim($value['qty']).'</td>    
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['value'].'/-'.'</td>
                 </tr>';
                 $subtotal+=$value['value'];
@@ -13599,13 +13599,13 @@ public function downloadchallanform($id){
 
             <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:12px">
                 <tr style="border: 1px solid black;">
-                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>SR.NO.</th>
-                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>F.G. PART DESCRIPTION</th>
-                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>F.G. PART NO</th>  
-                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>RM TYPE</th> 
-                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>PROCESS</th>  
-                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>QTY IN PCS</th>  
-                    <th align="left"  style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>AMOUNT</th>
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%; width="10%">SR.NO.</th>
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%; width="30%">F.G. PART DESCRIPTION</th>
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%; width="20%">F.G. PART NO</th>  
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%; width="10%">RM TYPE</th> 
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%; width="10%">PROCESS</th>  
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%; width="10%">QTY IN PCS</th>  
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%; width="10%">AMOUNT</th>
                 </tr>
                 '.$CartItem.$space.' 
 
@@ -13858,13 +13858,13 @@ public function downloadchallanformvendor($id){
 
             <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:12px">
                 <tr style="border: 1px solid black;">
-                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>SR.NO.</th>
-                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>F.G. PART DESCRIPTION</th>
-                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>F.G. PART NO</th>  
-                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>RM TYPE</th> 
-                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>PROCESS</th>  
-                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>QTY IN PCS</th>  
-                    <th align="left"  style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>AMOUNT</th>
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%; width="10%">SR.NO.</th>
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%; width="35%">F.G. PART DESCRIPTION</th>
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%; width="10%">F.G. PART NO</th>  
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%; width="15%">RM TYPE</th> 
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%; width="10%">PROCESS</th>  
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%; width="10%">QTY IN PCS</th>  
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%; width="10%">AMOUNT</th>
                 </tr>
                 '.$CartItem.$space.' 
 
