@@ -14038,20 +14038,16 @@ public function downlaodjobworkchllan($id){
         $CartItem .= '
                 <tr style="style=border-left: 1px solid black;border-right: 1px solid black;">
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$i.'</td>
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['name'].'</br></td>   
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['type_of_raw_material'].'</br></td>   
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['part_number'].'</td>
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['order_oty'].'</td>
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['unit'].'</td> 
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rate'].'/-'.'</td>    
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['value'].'/-'.'</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rm_qty'].'-'.$value['unit'].'</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rm_qty'] * $value['ram_rate'].'</td> 
                 </tr>';
                 $subtotal+=$value['value'];
             $i++;       
     }
 
     $space = '<tr>
-        <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-        <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
         <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
         <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
         <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
@@ -14135,18 +14131,16 @@ public function downlaodjobworkchllan($id){
                     <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>SR.NO.</th>
                     <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>PART DESCRIPTION</th>
                     <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>PART NO.</th>  
-                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>QTY</th> 
-                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>UNITS</th>  
-                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>RATE</th>  
-                    <th align="left"  style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>AMOUNT</th>
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>Raw Material Qty</th> 
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>Raw Material Value</th>  
                 </tr>
                 '.$CartItem.$space.' 
                    
     
                 <tr style="border: 1px solid black;">
-                    <td colspan="4" style="padding: 8px;">'.$this->amount_in_word($subtotal).'</td>
+                    <td colspan="3" style="padding: 8px;">'.$this->amount_in_word($subtotal).'</td>
                 
-                    <td colspan="2"  style="border: 1px solid black;padding-left: 10px;padding-right: 10px;font-family:cambria;font-size:12px;">SUB TOTAL (+) GST </td>    
+                    <td colspan="1"  style="border: 1px solid black;padding-left: 10px;padding-right: 10px;font-family:cambria;font-size:12px;">SUB TOTAL (+) GST </td>    
                     <td style="border: 1px solid black;padding-left: 10px;">'.$subtotal.'/-'.'</td>
                 </tr>
             </table>

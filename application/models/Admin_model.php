@@ -9462,8 +9462,9 @@ class Admin_model extends CI_Model
 
     public function getJobworkchallanItemdeatilsForInvoice($id){
 
-        $this->db->select('*');
+        $this->db->select('*,'.TBL_JOB_WORK_ITEM.'.rm_actual_qty as rm_qty');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_JOB_WORK_ITEM.'.part_number_id');
+        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
         $this->db->where(TBL_JOB_WORK_ITEM.'.jobwork_id', $id);
         $query = $this->db->get(TBL_JOB_WORK_ITEM);
         $fetch_result = $query->result_array();
