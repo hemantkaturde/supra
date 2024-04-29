@@ -13449,7 +13449,7 @@ public function downloadchallanform($id){
                 </tr>
                 '.$CartItem.$space.' 
 
-                <tr style="border: 1px solid black;">               
+            <tr style="border: 1px solid black;">               
                 <td colspan="6"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>Total Raw Material Cost </b></td>    
                 <td style="border: 1px solid black;padding-left: 10px;">'. $raw_material_cost.'</td>
             </tr>
@@ -14012,7 +14012,6 @@ public function downlaoddebitnote($id){
 
 }  
 
-
 public function downlaodjobworkchllan($id){
 
     $getJobworkchallandetailsForInvoice = $this->admin_model->getJobworkchallandetailsForInvoice($id);
@@ -14022,10 +14021,17 @@ public function downlaodjobworkchllan($id){
     $i =1;
     $subtotal = 0;
 
+
+    $packing_forwarding = 0;
+    $cgst_tax_rate = 0;
+    $sgst_tax_rate = 0;
+    $igst_tax_rate = 0;
+    $gst_rate ='';
+
     $item_count =count($getJobworkchallanItemdeatilsForInvoice);
 
     if($item_count==1){
-        $padding_bottom = '95px';
+        $padding_bottom = '150px';
     }else if($item_count==2){
         $padding_bottom = '28px';
     }else if($item_count==3){
@@ -14038,13 +14044,42 @@ public function downlaodjobworkchllan($id){
         $CartItem .= '
                 <tr style="style=border-left: 1px solid black;border-right: 1px solid black;">
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$i.'</td>
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['type_of_raw_material'].'</br></td>   
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['type_of_raw_material'].'<br/>Part No : '.$value['part_number'].'<br/>Vendor Qty : '.$value['vendor_qty'].'<br/>HSN Code :' .$value['HSN_code'].'</td>   
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['part_number'].'</td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rm_qty'].'-'.$value['unit'].'</td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rm_qty'] * $value['ram_rate'].'</td> 
                 </tr>';
+
+
                 $subtotal+=$value['value'];
-            $i++;       
+                $packing_forwarding +=$value['packing_forwarding'];
+                $grand_total +=$value['grand_total'];
+                $gst_rate = $value['gst_rate'];
+
+                if($value['gst_rate']=='CGST_SGST'){
+                    $cgst_tax_rate = 9;
+                    $sgst_tax_rate = 9;
+
+                    $cgst_tax_value = $value['gst']/2;
+                    $sgst_tax_value = $value['gst']/2;
+
+                }else if($value['gst_rate']=='CGST_SGST_6'){
+                    $cgst_tax_rate = 6;
+                    $sgst_tax_rate = 6;
+
+                    $cgst_tax_value = $value['gst']/2;
+                    $sgst_tax_value = $value['gst']/2;
+
+                }else if($value['gst_rate']=='IGST'){
+                    $igst_tax_rate = 18;
+                    $igst_tax_value = $value['gst'];
+                }else if($value['gst_rate']=='IGST_12'){
+                    $igst_tax_rate = 12;
+                    $igst_tax_value = $value['gst'];
+
+                }
+
+            $ii++;
     }
 
     $space = '<tr>
@@ -14054,6 +14089,28 @@ public function downlaodjobworkchllan($id){
         <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
         <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
     </tr>';
+
+
+    if($gst_rate=='CGST_SGST' || $gst_rate=='CGST_SGST_6'){
+        $tax_value = '<tr style="border: 1px solid black;">               
+            <td colspan="4"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>(+) '.$cgst_tax_rate.' CGST </b></td>    
+                <td style="border: 1px solid black;padding-left: 10px;">'.$cgst_tax_value.'</td>
+            </tr>
+
+            <tr style="border: 1px solid black;">
+
+                <td colspan="4"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>(+) '.$sgst_tax_rate.' SGST </b></td>    
+                <td style="border: 1px solid black;padding-left: 10px;">'.$sgst_tax_value.'</td>
+            </tr>';
+     }else{
+        $tax_value = '
+            <tr style="border: 1px solid black;">
+                <td colspan="4"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>(+) '.$igst_tax_rate.' IGST </b></td>    
+                <td style="border: 1px solid black;padding-left: 10px;">'.$igst_tax_value.'</td>
+            </tr>';
+     }
+
+  
 
     $mpdf = new \Mpdf\Mpdf();
     // $html = $this->load->view('html_to_pdf',[],true);
@@ -14128,21 +14185,27 @@ public function downlaodjobworkchllan($id){
 
             <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:12px">
                 <tr style="border: 1px solid black;">
-                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>SR.NO.</th>
-                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>PART DESCRIPTION</th>
-                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>PART NO.</th>  
-                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>Raw Material Qty</th> 
-                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>Raw Material Value</th>  
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%; width="10%">SR.NO.</th>
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%; width="10%">PART DESCRIPTION</th>
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%; width="10%">PART NO.</th>  
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%; width="10%">Raw Material Qty</th> 
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%; width="10%">Raw Material Value</th>  
                 </tr>
                 '.$CartItem.$space.' 
-                   
-    
-                <tr style="border: 1px solid black;">
-                    <td colspan="3" style="padding: 8px;">'.$this->amount_in_word($subtotal).'</td>
-                
-                    <td colspan="1"  style="border: 1px solid black;padding-left: 10px;padding-right: 10px;font-family:cambria;font-size:12px;">SUB TOTAL (+) GST </td>    
-                    <td style="border: 1px solid black;padding-left: 10px;">'.$subtotal.'/-'.'</td>
+
+                <tr style="border: 1px solid black;">               
+                    <td colspan="4"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>Packing & Forwording </b></td>    
+                    <td style="border: 1px solid black;padding-left: 10px;">'. $packing_forwarding.'</td>
                 </tr>
+                '. $tax_value.'
+                
+
+                <tr style="border: 1px solid black;">
+                        <td colspan="4"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>TOTAL</b></td>    
+                        <td style="border: 1px solid black;padding-left: 10px;">'.$grand_total.'/-'.'</td>
+                </tr>
+          
+                   
             </table>
 
             <table style=" width: 100%;border-collapse: collapse;border: #ccc 1px solid;font-family:cambria;font-size:12px">
