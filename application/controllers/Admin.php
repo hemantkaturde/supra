@@ -14018,7 +14018,6 @@ public function downlaodjobworkchllan($id){
     $getJobworkchallandetailsForInvoice = $this->admin_model->getJobworkchallandetailsForInvoice($id);
     $getJobworkchallanItemdeatilsForInvoice = $this->admin_model->getJobworkchallanItemdeatilsForInvoice($id);
 
-
     $CartItem = "";
     $i =1;
     $subtotal = 0;
@@ -14039,7 +14038,7 @@ public function downlaodjobworkchllan($id){
         $CartItem .= '
                 <tr style="style=border-left: 1px solid black;border-right: 1px solid black;">
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$i.'</td>
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['name']'</br></td>   
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['name'].'</br></td>   
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['part_number'].'</td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['order_oty'].'</td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['unit'].'</td> 
