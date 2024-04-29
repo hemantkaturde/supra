@@ -365,7 +365,8 @@ $route['downloadpackinginstraction/(:any)'] = "admin/downloadpackinginstraction/
 $route['downloadreworkrejectionvendor/(:any)'] = "admin/downloadreworkrejectionvendor/$1";
 $route['downloadchallanform/(:any)'] = "admin/downloadchallanform/$1";
 $route['downloadchallanformvendor/(:any)'] = "admin/downloadchallanformvendor/$1";
-
+$route['downlaoddebitnote/(:any)'] = "admin/downlaoddebitnote/$1";
+$route['downlaodjobworkchllan/(:any)'] = "admin/downlaodjobworkchllan/$1";
 
 
 /* ALL Edit Forms*/
@@ -398,7 +399,7 @@ $route['getdebitnotepartnumberdetails_byvendor'] = "admin/getdebitnotepartnumber
 $route['getSuppliergoodsreworkrejectionvendorchallan'] = "admin/getSuppliergoodsreworkrejectionvendorchallan";
 $route['getSuppliergoodsreworkrejectionvendorreworkrejection'] = "admin/getSuppliergoodsreworkrejectionvendorreworkrejection";
 $route['getVendoritemonlyforreworkrejection'] = "admin/getVendoritemonlyforreworkrejection";
-$route['downlaodjobworkchllan/(:any)'] = "admin/downlaodjobworkchllan/$1";
+
 $route['getpreviousshortexcess'] = "admin/getpreviousshortexcess";
 $route['getSupplierPonumberbySupplieridvendorponew'] = "admin/getSupplierPonumberbySupplieridvendorponew";
 $route['buyerpodetailsreport'] = "admin/buyerpodetailsreport";

@@ -2605,7 +2605,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['raw_material_supplier'] = $value['suppliername'];
                 $data[$counter]['action'] = '';
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editjobwork/".$value['jobworkid']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
-                // $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downlaodjobworkchllan/".$value['jobworkid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downlaodjobworkchllan/".$value['jobworkid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['jobworkid']."' class='fa fa-trash-o deleteJobwork' aria-hidden='true'></i>"; 
                 $counter++; 
             }
@@ -5659,6 +5659,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['po_date'] = $value['po_date'];
                 $data[$counter]['action'] = '';
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editdebitnoteform/".$value['debit_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downlaoddebitnote/".$value['debit_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['debit_id']."' class='fa fa-trash-o deletedebitnote' aria-hidden='true'></i>"; 
                 $counter++; 
             }
@@ -9444,11 +9445,15 @@ class Admin_model extends CI_Model
             .TBL_VENDOR.'.contact_person as ven_contact_person,'
             .TBL_VENDOR.'.email as ven_email,'
             .TBL_VENDOR.'.GSTIN as ven_GSTIN,'
+            .TBL_VENDOR.'.mobile as ven_mobile,'
             .TBL_JOB_WORK.'.po_number as po_number,'
             .TBL_JOB_WORK.'.date as date,'
+            .TBL_VENDOR_PO_MASTER.'.po_number as ven_po_number,'
+            .TBL_VENDOR_PO_MASTER.'.date as ven_date,'
+            .TBL_VENDOR_PO_MASTER.'.remark as ven_remark,'
           );
         $this->db->where(TBL_JOB_WORK.'.id', $id);
-        // $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_SUPPLIER_PO_MASTER.'.supplier_name');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_JOB_WORK.'.vendor_po_number');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_JOB_WORK.'.vendor_name');
         $query = $this->db->get(TBL_JOB_WORK);
         $fetch_result = $query->row_array();

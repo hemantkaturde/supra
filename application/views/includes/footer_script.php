@@ -4990,7 +4990,7 @@
 					 { "width": "15%", "targets": 2 },
 	                 { "width": "10%", "targets": 3 },
 					 { "width": "15%", "targets": 4 },
-	                 { "width": "10%", "targets": 5 }
+	                 { "width": "6%", "targets": 5 }
 					
 	            ],
 	            responsive: true,
@@ -11180,7 +11180,7 @@
 					 { "width": "10%", "targets": 4 },
 					 { "width": "10%", "targets": 5 },
 					 { "width": "5%", "targets": 6 },
-					 { "width": "5%", "targets": 7 }
+					 { "width": "7%", "targets": 7 }
 	            ],
 	            responsive: true,
 	            "oLanguage": {

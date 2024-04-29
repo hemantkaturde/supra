@@ -10342,166 +10342,6 @@ public function downlaodsupplierpo($id){
 }
 
 
-public function downlaodjobworkchllan($id){
-
-
-    $getJobworkchallandetailsForInvoice = $this->admin_model->getJobworkchallandetailsForInvoice($id);
-    $getJobworkchallanItemdeatilsForInvoice = $this->admin_model->getJobworkchallanItemdeatilsForInvoice($id);
-
-    $CartItem = "";
-    $i =1;
-    $subtotal = 0;
-    foreach ($getJobworkchallanItemdeatilsForInvoice as $key => $value) {
-        $CartItem .= '
-                <tr style="border: 1px solid black;">
-                    <td style="border: 1px solid black;">'.$i.'</td>
-                    <td style="border: 1px solid black;">'.$getJobworkchallandetailsForInvoice['po_number'].'</td>  
-                    <td style="border: 1px solid black;">'.$value['hsn_code'].'-'.$value['part_number'].'</td>
-                    <td style="border: 1px solid black;">'.$value['name'].'</td>
-                    <td style="border: 1px solid black;">'.$value['order_oty'].'</td>
-                    <td style="border: 1px solid black;">'.$value['vendor_qty'].'</td> 
-                    <td style="border: 1px solid black;">'.$value['groass_weight'].'</td>    
-                    <td style="border: 1px solid black;">'.$value['value'].'</td>
-                </tr>';
-                $subtotal+=$value['value'];
-            $i++;       
-    }
-
-
-
-    $mpdf = new \Mpdf\Mpdf();
-    // $html = $this->load->view('html_to_pdf',[],true);
-    $html = '<table style=" width: 100%;text-align: center;border-collapse: collapse;border: #cccccc 0px solid;font-family:arial;">
-                <tr>
-                  <td rowspan="2"><img src="'.base_url().'assets/images/supra_logo_1.jpg" width="80" height="80"></td>
-                  <td><h3>SUPRA QUALITY EXPORTS (I) PVT. LTD</h3></td>
-                  <td rowspan="2"><img src="'.base_url().'assets/images/supra_logo_2.jpg"width="80" height="80"></td>
-                </tr>
-                <tr>
-                  <td>
-                    <p>MANUFACTURER & EXPORTERS OF:</p>
-                    <p>PRECISION TURNED COMPONENTS, STAMPED /PRESSED PARTS IN FERROUS & NON-FERROUS METAL</p>
-                    <p>MOULDED & EXTRUDED PLASTIC AND RUBBER COMPONENTS</p> 
-                  </td>
-                </tr>
-            </table>
-            <hr>
-            <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 0px solid;font-family:arial;">
-                    <tr>
-                        <td>
-                          <p><b>Office:</b> 229 to 232, Bharat Industrial Estate, L.B.S. Marg, Bhandup West, Mumbai – 400078. INDIA.
-                          <p>Tel: +91 22 66959505 / +91 22 66600196 </p>
-                          <p>+91 22 62390222 / +91 22 46061497 / +91 22 35115396 </p>
-                          <p>GSTIN : 27AAJCS7869M1ZB </p>
-                        </td>
-                        <td>
-                            <p><b>Email:</b> purchase@supraexports.in</p>
-                            <p>purchase1@supraexports.in</p>
-                            <p>purchase2@supraexports.in</p>
-                        </td>  
-                    </tr>
-            </table>
-
-            <table style=" width: 100%;text-align: center;border-collapse: collapse;border: #ccc 0px solid;margin-top:10px;margin-bottom:10px;font-family:arial;">
-                    <tr>
-                        <td>
-                          <h2>JOB WORK CHALLAN</h2>
-                        </td>
-                    </tr>
-            </table>
-
-            <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;font-family:arial;">
-                    <tr style="border: 1px solid black;">
-                        <td style="border: 1px solid black;">To </td>
-                        <td style="border: 1px solid black;">'.$getJobworkchallandetailsForInvoice['vendor_name'].'</td>
-                    
-                    </tr>
-                    <tr style="border: 1px solid black;">
-                        <td style="border: 1px solid black;">Address </td>
-                        <td style="border: 1px solid black;">'.$getJobworkchallandetailsForInvoice['ven_address'].'</td>
-                        
-                    </tr>
-                    <tr style="border: 1px solid black;">
-                        <td style="border: 1px solid black;">Contact No </td>
-                        <td style="border: 1px solid black;">'.$getJobworkchallandetailsForInvoice['ven_landline'].'</td>
-                    
-                    </tr>
-                    <tr style="border: 1px solid black;">
-                        <td style="border: 1px solid black;">Contact Person </td>
-                        <td style="border: 1px solid black;">'.$getJobworkchallandetailsForInvoice['ven_contact_person'].'</td>
-                    
-                    </tr>
-                    <tr style="border: 1px solid black;">
-                        <td style="border: 1px solid black;">Email ID </td>
-                        <td style="border: 1px solid black;">'.$getJobworkchallandetailsForInvoice['ven_email'].'</td>
-                    </tr>
-
-                    <tr style="border: 1px solid black;">
-                        <td style="border: 1px solid black;">GSTIN </td>
-                        <td style="border: 1px solid black;">'.$getJobworkchallandetailsForInvoice['ven_GSTIN'].'</td>
-                    </tr>
-            </table>
-
-            <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:arial;">
-                <tr style="border: 1px solid black;">
-                    <th align="left" style="border: 1px solid black;">Challan No</th>
-                    <th align="left" style="border: 1px solid black;">Challan Date</th>
-                </tr>
-                <tr style="border: 1px solid black;">
-                    <td style="border: 1px solid black;">'.$getJobworkchallandetailsForInvoice['po_number'].'</td>
-                    <td style="border: 1px solid black;">'.$getJobworkchallandetailsForInvoice['date'].'</td>    
-                </tr>
-            </table>
-
-        
-            <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:arial;">
-                <tr style="border: 1px solid black;">
-                    <th align="left" style="border: 1px solid black;">SR.NO.</th>
-                    <th align="left" style="border: 1px solid black;">PO Number</th>
-                    <th align="left" style="border: 1px solid black;">HSN / Part Number</th>
-                    <th align="left" style="border: 1px solid black;">Finished Goods</th>  
-                    <th align="left" style="border: 1px solid black;">Rejection Reason</th> 
-                    <th align="left" style="border: 1px solid black;">Qty</th>  
-                    <th align="left" style="border: 1px solid black;">Weight (in kgs)</th>  
-                    <th align="left"  style="border: 1px solid black;">Value</th>
-                </tr>
-                '.$CartItem.'
-                <tr style="border: 1px solid black;">
-                    <td></td>
-                    <td></td>   
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>SUB TOTAL (+) GST</td>
-                    <td style="border: 1px solid black;">'.$getJobworkchallanItemdeatilsForInvoice['0']['gst_rate'].'-'.$getJobworkchallanItemdeatilsForInvoice['0']['gst'].'</td>    
-                    <td style="border: 1px solid black;">'.$subtotal+$getJobworkchallanItemdeatilsForInvoice['0']['gst'].'</td>
-                </tr>
-            </table>
-
-            <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:arial;">
-                  
-                   <tr style="border: 1px solid black;">
-                        <td style="border: 1px solid black;">
-                            <p><b>NOTE :</b></p>
-                            <p>Received the above mentioned goods in good order & condition & returned  the duplicate duly sealed & signed.</p>
-                            <p>Dispatched by: Anjani Courier</p>
-                            <p>NO of Bags / Gonies: 1 Box-1.280 Kgs</p>
-                        </td>
-                        <td style="border: 1px solid black;">
-                          
-                            <p>AUTHORIZED SIGNATORY</p>
-                        </td>    
-                </tr>
-            </table>';
-
-            // <p>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</p>
-    
-    $mpdf->WriteHTML($html);
-    $mpdf->Output('purshase_order.pdf','I'); // opens in browser
-
-
-}
-
 
 public function getpreviousshortexcess(){
 
@@ -13920,6 +13760,432 @@ public function downloadchallanformvendor($id){
     $mpdf->WriteHTML($html);
     $mpdf->Output($invoice_name,'D'); // opens in browser
 }
+
+public function downlaoddebitnote($id){
+
+    $getReworkrejectionforInvoice = $this->admin_model->getReworkrejectionforInvoicesupplier($id);
+    $getReworkRejectionitemdeatilsForInvoice = $this->admin_model->getReworkRejectionitemdeatilsForInvoice($id);
+
+   
+    $CartItem = "";
+    $supplierItem = "";
+    $i =1;
+    $ii =1;
+    $subtotal = 0;
+
+    $raw_material_cost = 0;
+    $cgst_tax_rate = 0;
+    $sgst_tax_rate = 0;
+    $igst_tax_rate = 0;
+    $gst_rate ='';
+
+    $item_count =count($getReworkRejectionitemdeatilsForInvoice);
+
+    if($item_count==1){
+        $padding_bottom = '200px';
+    }else if($item_count==2){
+        $padding_bottom = '40px';
+    }else if($item_count==3){
+        $padding_bottom = '10px';
+    }else{
+        $padding_bottom = '10px';
+    }
+
+   
+    
+    foreach ($getReworkRejectionitemdeatilsForInvoice as $key => $value) {
+
+        if($value['raw_material_neight_weight']){
+            $net_weigth = $value['qty'] * $value['raw_material_neight_weight'];
+        }else{
+            $net_weigth ='';
+        }
+
+
+        $CartItem .= '
+                <tr style="border-left: 1px solid black;border-right: 1px solid black;">
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$ii.'</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['type_of_raw_material'].'</br></td> 
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['part_number'].'</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top"></td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rejection_rework_reason'].'</td> 
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['qty'].'</td>    
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$net_weigth.'</td>    
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['value'].'/-'.'</td>
+                </tr>';
+                $subtotal+=$value['value'];
+                $raw_material_cost +=$value['row_material_cost'];
+                $grand_total +=$value['grand_total'];
+                $gst_rate = $value['gst_rate'];
+
+                if($value['gst_rate']=='CGST_SGST'){
+                    $cgst_tax_rate = 9;
+                    $sgst_tax_rate = 9;
+
+                    $cgst_tax_value = $value['gst_value']/2;
+                    $sgst_tax_value = $value['gst_value']/2;
+
+                }else if($value['gst_rate']=='CGST_SGST_6'){
+                    $cgst_tax_rate = 6;
+                    $sgst_tax_rate = 6;
+
+                    $cgst_tax_value = $value['gst_value']/2;
+                    $sgst_tax_value = $value['gst_value']/2;
+
+                }else if($value['gst_rate']=='IGST'){
+                    $igst_tax_rate = 18;
+                    $igst_tax_value = $value['gst_value'];
+                }else if($value['gst_rate']=='IGST_12'){
+                    $igst_tax_rate = 12;
+                    $igst_tax_value = $value['gst_value'];
+
+                }
+
+            $ii++;       
+    }
+
+    $space = '<tr>
+        <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+        <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+        <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+        <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+        <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+        <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+        <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+        <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+    </tr>';
+
+
+     if($gst_rate=='CGST_SGST' || $gst_rate=='CGST_SGST_6'){
+        $tax_value = '<tr style="border: 1px solid black;">               
+            <td colspan="7"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>(+) '.$cgst_tax_rate.'% CGST </b></td>    
+                <td style="border: 1px solid black;padding-left: 10px;">'.$cgst_tax_value.'</td>
+            </tr>
+
+            <tr style="border: 1px solid black;">
+
+                <td colspan="7"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>(+) '.$sgst_tax_rate.'% SGST </b></td>    
+                <td style="border: 1px solid black;padding-left: 10px;">'.$sgst_tax_value.'</td>
+            </tr>';
+     }else{
+        $tax_value = '
+            <tr style="border: 1px solid black;">
+                <td colspan="7"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>(+) '.$igst_tax_rate.'% IGST </b></td>    
+                <td style="border: 1px solid black;padding-left: 10px;">'.$igst_tax_value.'</td>
+            </tr>';
+     }
+
+  
+    $mpdf = new \Mpdf\Mpdf();
+    // $html = $this->load->view('html_to_pdf',[],true);
+    $html = '<table style=" width: 100%;text-align: center;border-collapse: collapse;border: #cccccc 0px solid;font-family:cambria;">
+                <tr>
+                  <td rowspan="2"><img src="'.base_url().'assets/images/supra_logo_1.jpg" width="80" height="80"></td>
+                  <td style="color:#000080"><h2>SUPRA QUALITY EXPORTS (I) PVT. LTD</h2></td>
+                  <td rowspan="2"><img src="'.base_url().'assets/images/logo_2.png"width="80" height="80"></td>
+                </tr>
+                <tr>
+                  <td style="font-weight: bold;">
+                    <p>MANUFACTURER & EXPORTERS OF:</p>
+                    <p>PRECISION TURNED COMPONENTS, STAMPED /PRESSED PARTS IN FERROUS & NON-FERROUS METAL</p>
+                    <p>MOULDED & EXTRUDED PLASTIC AND RUBBER COMPONENTS</p> 
+                  </td>
+                </tr>
+            </table>
+            <hr>
+            <table style="width: 100%;text-align: left;border-collapse: collapse;border: #ccc 0px solid;font-family:cambria;">
+                    <tr>
+                        <td width="60%">
+                          <p><b>Office:</b> 229 to 232, Bharat Industrial Estate,
+                          <p> L.B.S. Marg, Bhandup West, Mumbai – 400078. INDIA.</b>
+                          <p>Tel: +91 22 66959505 / +91 22 66600196 </p>
+                          <p>+91 22 62390222 / +91 22 46061497 / +91 22 35115396 </p>
+                          <p style="color:#206a9b"><b>GSTIN : 27AAJCS7869M1ZB </b></p>
+                        </td>
+                        <td width="40%">
+                            <p><b>Email:</b></p> 
+                            <p style="color:#206a9b">purchase@supraexports.in</p>
+                            <p style="color:#206a9b">purchase1@supraexports.in</p>
+                            <p style="color:#206a9b">purchase2@supraexports.in</p>
+                        </td>  
+                    </tr>
+            </table>
+
+            <table style=" width: 100%;text-align: center;border-collapse: collapse;border: #ccc 0px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;">
+                    <tr>
+                        <td style="color:red;font-size:15px">
+                          <u><p><h3>R R CHALLAN</h3></p>
+                        </td>
+                    </tr>
+            </table>
+
+            <table style=" width: 100%;text-align: left;border-collapse: collapse;font-family:cambria;font-size:13px;border: #ccc 1px solid">
+                <tr style="border: 1px solid black;">
+                    <td width="50%" style="padding-left: 15px;">
+                        <div>
+                            <p>To,</p>
+                            <p><b>'.$getReworkrejectionforInvoice['supplier_name'].'</b></p>
+                            <p>'.$getReworkrejectionforInvoice['supplier_addess'].'</p>
+                            <p><b>Contact No:</b> '.$getReworkrejectionforInvoice['mobile'].' / '.$getReworkrejectionforInvoice['suplier_landline'].'</p>
+                            <p><b>Contact Person:</b> '.$getReworkrejectionforInvoice['sup_conatct'].'</p>
+                            <p><b>Email:</b> '.$getReworkrejectionforInvoice['sup_email'].'</p>
+                            <p style="color:red">GSTIN:'.$getReworkrejectionforInvoice['sup_GSTIN'].'</p>
+                        <div>    
+                    </td> 
+                    <td style="border-left: 1px solid black;padding-left: 15px;font-size:13px;" width="50%" valign="top">
+                        <div>
+                            <p><b></b>'. str_repeat('&nbsp;', 5).'<span style="color:red"></span></p>
+                            <p><b>CHALLAN NO :</b> '.'<span style="color:red">'.$getReworkrejectionforInvoice['rrchallaon'].'</span></p>
+                            <p>&nbsp;</p>
+                            <p><b>CHALLAN DATE :</b> '.date('d-m-Y',strtotime($getReworkrejectionforInvoice['challan_date'])).'</p>
+                            <p>&nbsp;</p>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+
+            <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:12px">
+                <tr style="border: 1px solid black;">
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>SR.NO.</th>
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>F.G. PART DESCRIPTION</th>
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>F.G. PART NO.</th>  
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>RM TYPE</th> 
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>Rejection Reason</th>  
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>QTY IN PCS</th>  
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>Net Weight In kgs</th>  
+                    <th align="left"  style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>AMOUNT</th>
+                </tr>
+                '.$CartItem.$space.' 
+
+                <tr style="border: 1px solid black;">               
+                <td colspan="7"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>Total Raw Material Cost </b></td>    
+                <td style="border: 1px solid black;padding-left: 10px;">'. $raw_material_cost.'</td>
+            </tr>
+             '. $tax_value.'
+            
+
+            <tr style="border: 1px solid black;">
+                    <td colspan="7"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>TOTAL</b></td>    
+                    <td style="border: 1px solid black;padding-left: 10px;">'.$grand_total.'/-'.'</td>
+              </tr>
+          
+            </table>
+
+            <table style=" width: 100%;border-collapse: collapse;border: #ccc 1px solid;font-family:cambria;font-size:12px">
+                <tr style="border: 1px solid black;">
+                        <td style="border: 1px solid black;padding-left: 10px;">
+                            <p><b>Remark :</b>'.$getReworkrejectionforInvoice['supplier_remark'].'</p>    
+                    </td>   
+                </tr>
+            </table>
+
+            <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:12px">
+                  
+                   <tr style="border: 1px solid black;">
+                        <td style="border: 1px solid black;padding-left: 10px;" width="75%;" valign="top">
+                            <div style="margin-bottom:10px;">
+                                <p><b>Received the above-mentioned goods in good order & condition & 
+                                returned the Duplicate Duty sealed & signed.</b></p>
+                            </div>
+                            <br>
+
+                            <p><b>Dispatched By: </b></p>
+                            <p><b>No.of Bags/ Boxes/ Goni: </b></p>
+                            <p><b>Total Gross Weight: </b></p>
+                            <p><b>Total Net Weight:</b></p>
+                            <p><b>Remark:</b>__________________________________________________________</p><br>
+                            <p>____________________________________________________________________</p>
+                        </td>
+                        <td style="border: 1px solid black;text-align: center;" width="25%" valign="top">
+                            <p style="vertical-align: text-top;font-size:12px;color:#206a9b"><b>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</b></p>
+                            <br/><img src="'.base_url().'assets/images/stmps/rr_challan.png" width="130" height="100">
+                            <p style="vertical-align: text-top;font-size:10px;color:#206a9b"><b>AUTHORIZED SIGNATORY</b></p>
+                        </td> 
+                </tr>
+            </table>';
+
+            // <p>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</p>
+    $invoice_name =  $getReworkrejectionforInvoice['rrchallaon'].' - '.$getReworkrejectionforInvoice['supplier_name'].'.pdf';
+    $mpdf->WriteHTML($html);
+    $mpdf->Output($invoice_name,'D'); // opens in browser
+
+}  
+
+
+public function downlaodjobworkchllan($id){
+
+    $getJobworkchallandetailsForInvoice = $this->admin_model->getJobworkchallandetailsForInvoice($id);
+    $getJobworkchallanItemdeatilsForInvoice = $this->admin_model->getJobworkchallanItemdeatilsForInvoice($id);
+
+
+    $CartItem = "";
+    $i =1;
+    $subtotal = 0;
+
+    $item_count =count($getJobworkchallanItemdeatilsForInvoice);
+
+    if($item_count==1){
+        $padding_bottom = '95px';
+    }else if($item_count==2){
+        $padding_bottom = '28px';
+    }else if($item_count==3){
+        $padding_bottom = '10px';
+    }else{
+        $padding_bottom = '10px';
+    }
+
+    foreach ($getJobworkchallanItemdeatilsForInvoice as $key => $value) {
+        $CartItem .= '
+                <tr style="style=border-left: 1px solid black;border-right: 1px solid black;">
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$i.'</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['name']'</br></td>   
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['part_number'].'</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['order_oty'].'</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['unit'].'</td> 
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rate'].'/-'.'</td>    
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['value'].'/-'.'</td>
+                </tr>';
+                $subtotal+=$value['value'];
+            $i++;       
+    }
+
+    $space = '<tr>
+        <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+        <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+        <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+        <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+        <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+        <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+        <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+    </tr>';
+
+    $mpdf = new \Mpdf\Mpdf();
+    // $html = $this->load->view('html_to_pdf',[],true);
+    $html = '<table style=" width: 100%;text-align: center;border-collapse: collapse;border: #cccccc 0px solid;font-family:cambria;">
+                <tr>
+                  <td rowspan="2"><img src="'.base_url().'assets/images/supra_logo_1.jpg" width="80" height="80"></td>
+                  <td style="color:#000080"><h2>SUPRA QUALITY EXPORTS (I) PVT. LTD</h2></td>
+                  <td rowspan="2"><img src="'.base_url().'assets/images/logo_2.png"width="80" height="80"></td>
+                </tr>
+                <tr>
+                  <td style="font-weight: bold;">
+                    <p>MANUFACTURER & EXPORTERS OF:</p>
+                    <p>PRECISION TURNED COMPONENTS, STAMPED /PRESSED PARTS IN FERROUS & NON-FERROUS METAL</p>
+                    <p>MOULDED & EXTRUDED PLASTIC AND RUBBER COMPONENTS</p> 
+                  </td>
+                </tr>
+            </table>
+            <hr>
+            <table style="width: 100%;text-align: left;border-collapse: collapse;border: #ccc 0px solid;font-family:cambria;">
+                    <tr>
+                        <td width="60%">
+                          <p><b>Office:</b> 229 to 232, Bharat Industrial Estate,
+                          <p> L.B.S. Marg, Bhandup West, Mumbai – 400078. INDIA.</b>
+                          <p>Tel: +91 22 66959505 / +91 22 66600196 </p>
+                          <p>+91 22 62390222 / +91 22 46061497 / +91 22 35115396 </p>
+                          <p style="color:#206a9b"><b>GSTIN : 27AAJCS7869M1ZB </b></p>
+                        </td>
+                        <td width="40%">
+                            <p><b>Email:</b></p> 
+                            <p style="color:#206a9b">purchase@supraexports.in</p>
+                            <p style="color:#206a9b">purchase1@supraexports.in</p>
+                            <p style="color:#206a9b">purchase2@supraexports.in</p>
+                        </td>  
+                    </tr>
+            </table>
+
+            <table style=" width: 100%;text-align: center;border-collapse: collapse;border: #ccc 0px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;">
+                    <tr>
+                        <td style="color:red;font-size:15px">
+                          <u><p><h3>JOB WORK CHALLAN</h3></p>
+                        </td>
+                    </tr>
+            </table>
+
+            <table style=" width: 100%;text-align: left;border-collapse: collapse;font-family:cambria;font-size:13px;border: #ccc 1px solid">
+                <tr style="border: 1px solid black;">
+                    <td width="50%" style="padding-left: 15px;">
+                        <div>
+                            <p>To,</p>
+                            <p><b>'.$getJobworkchallandetailsForInvoice['vendor_name'].'</b></p>
+                            <p>'.$getJobworkchallandetailsForInvoice['ven_address'].'</p>
+                            <p><b>Contact No:</b> '.$getJobworkchallandetailsForInvoice['ven_mobile'].' / '.$getJobworkchallandetailsForInvoice['ven_landline'].'</p>
+                            <p><b>Contact Person:</b> '.$getJobworkchallandetailsForInvoice['ven_contact_person'].'</p>
+                            <p><b>Email:</b> '.$getJobworkchallandetailsForInvoice['ven_email'].'</p>
+                            <p style="color:red">GSTIN:'.$getJobworkchallandetailsForInvoice['ven_GSTIN'].'</p>
+                        <div>    
+                    </td> 
+                    <td style="border-left: 1px solid black;padding-left: 15px;font-size:13px" width="50%" >
+                        <div>
+                            <p><b>CHALLAN NO :</b> '.'<span style="color:red">'.$getJobworkchallandetailsForInvoice['po_number'].'</span></p>
+                            <p>&nbsp;</p>
+                            <p><b>CHALLAN DATE :</b> '.date('d-m-Y',strtotime($getJobworkchallandetailsForInvoice['date'])).'</p>
+                            <p>&nbsp;</p>
+                            <p><b>P.O.NO :</b> '.$getJobworkchallandetailsForInvoice['ven_po_number'].'</p>
+                            <p>&nbsp;</p>
+                            <p><b>P.O.DATE :</b> '.date('d-m-Y',strtotime($getJobworkchallandetailsForInvoice['ven_date'])).'</p>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+
+            <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:12px">
+                <tr style="border: 1px solid black;">
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>SR.NO.</th>
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>PART DESCRIPTION</th>
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>PART NO.</th>  
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>QTY</th> 
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>UNITS</th>  
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>RATE</th>  
+                    <th align="left"  style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>AMOUNT</th>
+                </tr>
+                '.$CartItem.$space.' 
+                   
+    
+                <tr style="border: 1px solid black;">
+                    <td colspan="4" style="padding: 8px;">'.$this->amount_in_word($subtotal).'</td>
+                
+                    <td colspan="2"  style="border: 1px solid black;padding-left: 10px;padding-right: 10px;font-family:cambria;font-size:12px;">SUB TOTAL (+) GST </td>    
+                    <td style="border: 1px solid black;padding-left: 10px;">'.$subtotal.'/-'.'</td>
+                </tr>
+            </table>
+
+            <table style=" width: 100%;border-collapse: collapse;border: #ccc 1px solid;font-family:cambria;font-size:12px">
+                <tr style="border: 1px solid black;">
+                        <td style="border: 1px solid black;padding-left: 10px;">
+                            <p><b>Remark :</b>'.$getJobworkchallandetailsForInvoice['ven_remark'].'</p>    
+                    </td>   
+                </tr>
+            </table>
+
+            <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:12px">
+                  
+                   <tr style="border: 1px solid black;">
+                        <td style="border: 1px solid black;padding-left: 10px;" width="75%;">
+                            <p><b>NOTE :</b></p>
+                            <p><b>1. Confirmation of PO is Mandatory</b></p>
+                            <p><b>2. Mentioning P.O.No. on Invoice is Mandatory</b></p>
+                            <p><b>3. Once order issued & accepted, cannot be cancelled</b></p>
+                            <p><b>4. Essence of this order is delivering the specified quality product on time.</b></p>
+                            <p><b>5. If any Prices issue, should inform in 24hrs after receipt of P.O.</b></p>
+                        </td>
+                        <td style="border: 1px solid black;text-align: center;" width="25%" valign="top">
+                            <p style="vertical-align: text-top;font-size:12px;color:#206a9b"><b>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</b></p>
+                            <br/><img src="'.base_url().'assets/images/stmps/supplierpostampsignature.png" width="130" height="100">
+                            <p style="vertical-align: text-top;font-size:10px;color:#206a9b"><b>AUTHORIZED SIGNATORY</b></p>
+                        </td> 
+                </tr>
+            </table>';
+
+            // <p>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</p>
+    $invoice_name =  $getJobworkchallandetailsForInvoice['po_number'].' - '.$getJobworkchallandetailsForInvoice['vendor_name'].'.pdf';
+    $mpdf->WriteHTML($html);
+    $mpdf->Output($invoice_name,'D'); // opens in browser
+    
+}
+
 
 }
 
