@@ -14235,8 +14235,8 @@ public function downloadscrapreturn($id){
 
     $mpdf = new \Mpdf\Mpdf();
     // $html = $this->load->view('html_to_pdf',[],true);
-    $html = '<table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:14px">
-                <tr style="border: 1px solid black;">
+    $html = '<table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:13px">
+                <tr style="border: 1px solid black;" valign="top">
                     <td width="50%" style="padding: 10px;text-align: left;">
                         <p><h4>SUPRA QUALITY EXPORTS INDIA PVT LTD </h4></p>
                         <p>229 to 232, Bharat Industrial Estate,</p>
@@ -14280,6 +14280,11 @@ public function downloadscrapreturn($id){
                 <tr style="border: 1px solid black;">
                     <td width="50%" style="padding: 10px;text-align: left;valign="top"">
                          <p>Part-I </p>
+                         <p>'. str_repeat('&nbsp;', 5).'</p>
+                         <p>'. str_repeat('&nbsp;', 5).'</p>
+                         <p>'. str_repeat('&nbsp;', 5).'</p>
+                         <p>'. str_repeat('&nbsp;', 5).'</p>
+                         <p>'. str_repeat('&nbsp;', 5).'</p>
                     </td> 
 
                     <td style="border-left: 1px solid black;padding: 10px;" width="50%" valign="top">
@@ -14289,7 +14294,7 @@ public function downloadscrapreturn($id){
                 </tr>
             </table>
 
-            <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:14px;">
+            <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:13px;">
                 
                 <tr style="border-left: 1px solid black;border-right: 1px solid black;border-bottom: 1px solid black;">
                     <td style="text-align:left;padding: 10px;"          width="50%">2. Identification marks & number if any</td> 
@@ -14370,6 +14375,9 @@ public function downloadscrapreturn($id){
                 <tr style="border-left: 1px solid black;border-right: 1px solid black;">
                     <td style="padding-left: 15px;text-align: left;border-right: 1px solid black"  width="50%">
                     <p> 5. Estimated Value of inputs / Partially processed inputs  </p>
+                    <p>'. str_repeat('&nbsp;', 5).'</p>
+                    <p>'. str_repeat('&nbsp;', 5).'</p>
+                    <p>'. str_repeat('&nbsp;', 5).'</p>
                     </td> 
                     <td style="border-left: 1px solid black;padding-left: 15px;">5</td>
                     <td style="border-left: 1px solid black;padding-left: 15px;"></td>
@@ -14389,11 +14397,11 @@ public function downloadscrapreturn($id){
                 </tr>
             </table>
             
-            <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:14px;">
+            <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:13px;">
 
                 <tr style="border: 1px solid black;">
                     <td width="50%" style="padding: 10px;text-align: left;">
-                        <p>6.Date & Time of Issue : '.$getscrapreturnForInvoice['challan_date'].'</p>
+                        <p>6.Date & Time of Issue : '.date('d-m-Y',strtotime($getscrapreturnForInvoice['challan_date'])).'</p>
                     </td> 
 
                     <td style="border-left: 1px solid black;padding: 10px;" width="50%" valign="top">
@@ -14404,6 +14412,8 @@ public function downloadscrapreturn($id){
                 <tr style="border: 1px solid black;">
                     <td width="50%" style="padding: 10px;text-align: left;">
                         <p>7. Nature of processing: '.$getscrapreturnItemdeatilsForInvoice[0]['number_of_processing'].'</p>
+                        <p>'. str_repeat('&nbsp;', 5).'</p>
+                        <p>'. str_repeat('&nbsp;', 5).'</p>
                     </td> 
 
                     <td style="border-left: 1px solid black;padding-left: 10px;" width="50%" valign="top">
@@ -14420,6 +14430,8 @@ public function downloadscrapreturn($id){
 
                     <td style="border-left: 1px solid black;padding: 10px;" width="50%" valign="top">
                         <p>4. Name & Address of the Processor:</p>
+                        <p>'. str_repeat('&nbsp;', 5).'</p>
+                        <p>'. str_repeat('&nbsp;', 5).'</p>
                     </td>
                 </tr>
 
