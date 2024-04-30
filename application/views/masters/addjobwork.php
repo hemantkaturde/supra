@@ -377,7 +377,7 @@
 
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Packing & Forwording<span class="required">*</span></label>
+                                                        <label class="col-sm-4 col-form-label">Packing & Forwarding<span class="required">*</span></label>
                                                         <div class="col-sm-8">
                                                             <input type="number" class="form-control"  id="packing_and_forwarding"  value="0" name="packing_and_forwarding">
                                                             <p class="error packing_and_forwarding_error"></p>

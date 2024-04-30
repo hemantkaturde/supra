@@ -14194,7 +14194,7 @@ public function downlaodjobworkchllan($id){
                 '.$CartItem.$space.' 
 
                 <tr style="border: 1px solid black;">               
-                    <td colspan="4"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>Packing & Forwording </b></td>    
+                    <td colspan="4"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>Packing & Forwarding </b></td>    
                     <td style="border: 1px solid black;padding-left: 10px;">'. $packing_forwarding.'</td>
                 </tr>
                 '. $tax_value.'

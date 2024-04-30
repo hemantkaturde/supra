@@ -9450,7 +9450,7 @@ class Admin_model extends CI_Model
             .TBL_JOB_WORK.'.date as date,'
             .TBL_VENDOR_PO_MASTER.'.po_number as ven_po_number,'
             .TBL_VENDOR_PO_MASTER.'.date as ven_date,'
-            .TBL_VENDOR_PO_MASTER.'.remark as ven_remark,'
+            .TBL_JOB_WORK.'.remark as ven_remark,'
           );
         $this->db->where(TBL_JOB_WORK.'.id', $id);
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_JOB_WORK.'.vendor_po_number');
