@@ -4364,6 +4364,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['supplier_name'] = $value['supplier_name'];
                 $data[$counter]['action'] = '';
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editscrapreturn/".$value['scrapretrunid']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downloadscrapreturn/".$value['scrapretrunid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['scrapretrunid']."' class='fa fa-trash-o deletescrapreturn' aria-hidden='true'></i>"; 
                 $counter++; 
             }
@@ -11028,8 +11029,6 @@ public function getfetchsalestrackingReportdata($params){
 
     return $data;
 }
-
-
   
 public function getvendordeatilsForInvoice($id){
                 $this->db->select(TBL_SUPPLIER.'.supplier_name,'
@@ -11089,8 +11088,6 @@ public function getvendorItemdeatilsForInvoice($id){
     return $fetch_result;
 }
 
-
-  
 public function getvendordeatilsForInvoicewithoutsupplier($id){
                 $this->db->select(TBL_VENDOR.'.vendor_name as vendor_name,'
                     .TBL_VENDOR.'.address as ven_address,'
@@ -11116,8 +11113,6 @@ public function getvendordeatilsForInvoicewithoutsupplier($id){
         return $fetch_result;
 }
 
-
-
 public function getvendorItemdeatilsForInvoicewithoutsupplier($id){
 
     // $this->db->select('*,'.TBL_RAWMATERIAL.'.gross_weight as rmgrossweight');
@@ -11130,7 +11125,6 @@ public function getvendorItemdeatilsForInvoicewithoutsupplier($id){
     $fetch_result = $query->result_array();
     return $fetch_result;
 }
-
 
 public function getsuppliertemdeatilsForInvoiceonvendorpo($supplier_po_id){
 
@@ -11351,9 +11345,35 @@ public function getchallanformeatilsForInvoicevendor($id){
 }
 
 
+public function getscrapreturnForInvoice($id){
+    $this->db->select(TBL_SUPPLIER.'.supplier_name,'
+                     .TBL_SUPPLIER.'.address as supplier_addess,'
+                     .TBL_SUPPLIER.'.landline as suplier_landline,'
+                     .TBL_SUPPLIER.'.mobile as suplier_mobile,'
+                     .TBL_SUPPLIER.'.contact_person as sup_conatct,'
+                     .TBL_SUPPLIER.'.email as sup_email,'
+                     .TBL_SUPPLIER.'.GSTIN as sup_GSTIN,'
+                     .TBL_VENDOR.'.vendor_name as vendor_name,'
+                     .TBL_VENDOR.'.address as ven_address,'
+                     .TBL_VENDOR.'.landline as ven_landline,'
+                     .TBL_VENDOR.'.contact_person as ven_contact_person,'
+                     .TBL_VENDOR.'.mobile as mobile,'
+                     .TBL_VENDOR.'.email as ven_email,'
+                     .TBL_VENDOR.'.GSTIN as ven_GSTIN,'
+                     .TBL_VENDOR.'.challan_id as challan_id,'
+                     .TBL_VENDOR.'.challan_date as challan_date,'
+                     .TBL_VENDOR.'.remarks as remarks,'
+                      );
 
+    $this->db->where(TBL_SCRAP_RETURN.'.id', $id);
+    $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_SCRAP_RETURN.'.vendor_id');
+    $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_SCRAP_RETURN.'.supplier_id','left');
+    $query = $this->db->get(TBL_SCRAP_RETURN);
+    $fetch_result = $query->row_array();
+    return $fetch_result;
 }
 
+}
 
 
 ?>

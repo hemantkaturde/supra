@@ -52,7 +52,7 @@
 
                                     <div class="col-md-12">
                                             <div class="form-group">
-                                                    <label for="vendor_name">Vendor Name </label>
+                                                    <label for="vendor_name">Vendor Name <span class="required">*</span></label>
                                                     <select class="form-control" name="vendor_name" id="vendor_name">
                                                         <option st-id="" value="">Select Vendor Name</option>
                                                         <?php foreach ($vendorList as $key => $value) {?>
