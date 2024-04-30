@@ -14044,7 +14044,7 @@ public function downlaodjobworkchllan($id){
         $CartItem .= '
                 <tr style="style=border-left: 1px solid black;border-right: 1px solid black;">
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$i.'</td>
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['type_of_raw_material'].'<br/>Part No : '.$value['part_number'].'<br/>Vendor Qty : '.$value['vendor_qty'].'<br/>HSN Code :' .$value['HSN_code'].'</td>   
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top"> Material Description : '.$value['type_of_raw_material'].'<br/>For Part No : '.$value['part_number'].'-'.$value['fg_description'].'<br/>Vendor Qty : '.$value['vendor_qty'].' pcs <br/>HSN Code :' .$value['HSN_code'].'<br/> SAC : '.$value['fg_sac'].'</td>   
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['part_number'].'</td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rm_qty'].'-'.$value['unit'].'</td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rm_qty'] * $value['ram_rate'].'</td> 
@@ -14208,7 +14208,7 @@ public function downlaodjobworkchllan($id){
             <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:12px">
                   
                    <tr style="border: 1px solid black;">
-                        <td style="border: 1px solid black;padding-left: 10px;" width="75%;">
+                        <td style="border: 1px solid black;padding-left: 10px;" width="75%;" valign="top">
                             <p><b>Remark :</b></p>
                             <p><b>'.$getJobworkchallandetailsForInvoice['ven_remark'].'</b></p>
                         </td>
