@@ -14380,7 +14380,7 @@ public function downloadscrapreturn($id){
 
                 <tr style="border-left: 1px solid black;border-right: 1px solid black;">
                     <td style="padding-left: 15px;text-align: left;border-right: 1px solid black"  width="50%">
-                    <p> 1.   443878  </p>
+                    <p>  </p>
                     </td> 
                     <td style="border-left: 1px solid black;padding-left: 15px;">6</td>
                     <td style="border-left: 1px solid black;padding-left: 15px;"></td>
@@ -14415,10 +14415,6 @@ public function downloadscrapreturn($id){
                     <td width="50%" style="padding: 10px;text-align: left;">
                         <p>8. Factory / Place of processing / Manufacturing : '.$getscrapreturnForInvoice['vendor_name'].'</p>
                         <p>'.$getscrapreturnForInvoice['ven_address'].'</p>
-                        <p>'.$getscrapreturnForInvoice['ven_landline'].'</p>
-                        <p>'.$getscrapreturnForInvoice['ven_contact_person'].'</p>
-                        <p>'.$getscrapreturnForInvoice['mobile'].'</p>
-                        <p>'.$getscrapreturnForInvoice['ven_email'].'</p>
                         <p>'.$getscrapreturnForInvoice['ven_GSTIN'].'</p>
                     </td> 
 
