@@ -14306,94 +14306,94 @@ public function downloadscrapreturn($id){
                 </tr>
 
                 <tr style="border-left: 1px solid black;border-right: 1px solid black;">
-                    <td style="padding-left: 15px;text-align: left;"  width="50%">
+                    <td style="padding-left: 10px;text-align: left;"  width="50%">
                        <p> 3. Quantity (Nos. / Weight / Metre /Litre) </p>
                      </td> 
-                    <td style="border-left: 1px solid black;padding-left: 15px;">1</td>
-                    <td style="border-left: 1px solid black;padding-left: 15px;"></td>
-                    <td style="border-left: 1px solid black;padding-left: 15px;"></td>
-                    <td style="border-left: 1px solid black;padding-left: 15px;"></td>
+                    <td style="border-left: 1px solid black;padding-left: 10px;">1</td>
+                    <td style="border-left: 1px solid black;padding-left: 10px;"></td>
+                    <td style="border-left: 1px solid black;padding-left: 10px;"></td>
+                    <td style="border-left: 1px solid black;padding-left: 10px;"></td>
                 </tr>
 
 
                 <tr style="border-left: 1px solid black;border-right: 1px solid black;">
-                    <td style="padding-left: 15px;text-align: left;"  width="50%">
+                    <td style="padding-left: 10px;text-align: left;"  width="50%">
                        <p> Gross Weight: '.$getscrapreturnItemdeatilsForInvoice[0]['gross_weight'].' kgs </p>
                      </td> 
-                    <td style="border-left: 1px solid black;padding-left: 15px;"></td>
-                    <td style="border-left: 1px solid black;padding-left: 15px;"></td>
-                    <td style="border-left: 1px solid black;padding-left: 15px;"></td>
-                    <td style="border-left: 1px solid black;padding-left: 15px;"></td>
+                    <td style="border-left: 1px solid black;padding-left: 10px;"></td>
+                    <td style="border-left: 1px solid black;padding-left: 10px;"></td>
+                    <td style="border-left: 1px solid black;padding-left: 10px;"></td>
+                    <td style="border-left: 1px solid black;padding-left: 10px;"></td>
                 </tr>
 
 
                 <tr style="border-left: 1px solid black;border-right: 1px solid black;">
-                    <td style="padding-left: 15px;text-align: left;"  width="50%">
+                    <td style="padding-left: 10px;text-align: left;"  width="50%">
                       <p> Net Weight:   '.$getscrapreturnItemdeatilsForInvoice[0]['net_weight'].' kgs </p>
                     </td> 
-                    <td style="border-left: 1px solid black;padding-left: 15px;">2</td>
-                    <td style="border-left: 1px solid black;padding-left: 15px;"></td>
-                    <td style="border-left: 1px solid black;padding-left: 15px;"></td>
-                    <td style="border-left: 1px solid black;padding-left: 15px;"></td>
+                    <td style="border-left: 1px solid black;padding-left: 10px;">2</td>
+                    <td style="border-left: 1px solid black;padding-left: 10px;"></td>
+                    <td style="border-left: 1px solid black;padding-left: 10px;"></td>
+                    <td style="border-left: 1px solid black;padding-left: 10px;"></td>
                 </tr>
 
 
                 <tr style="border-left: 1px solid black;border-right: 1px solid black;">
-                    <td style="padding-left: 15px;text-align: left;"  width="50%">
+                    <td style="padding-left: 10px;text-align: left;"  width="50%">
                     <p> Quantity:   '.$getscrapreturnItemdeatilsForInvoice[0]['quantity'].' </p>
                     </td> 
-                    <td style="border-left: 1px solid black;padding-left: 15px;"></td>
-                    <td style="border-left: 1px solid black;padding-left: 15px;"></td>
-                    <td style="border-left: 1px solid black;padding-left: 15px;"></td>
-                    <td style="border-left: 1px solid black;padding-left: 15px;"></td>
+                    <td style="border-left: 1px solid black;padding-left: 10px;"></td>
+                    <td style="border-left: 1px solid black;padding-left: 10px;"></td>
+                    <td style="border-left: 1px solid black;padding-left: 10px;"></td>
+                    <td style="border-left: 1px solid black;padding-left: 10px;"></td>
                 </tr>
 
 
                 <tr style="border-left: 1px solid black;border-right: 1px solid black;">
-                        <td style="padding-left: 15px;text-align: left;border-right: 1px solid black;"  width="50%">
-                         <p> No. of Bags:  '.$getscrapreturnItemdeatilsForInvoice[0]['number_of_bags'].' </p>
+                        <td style="text-align: left;border-right: 1px solid black;border-bottom: 1px solid black"  width="50%">
+                         <p>'.str_repeat('&nbsp;', 1).' No. of Bags:  '.$getscrapreturnItemdeatilsForInvoice[0]['number_of_bags'].' </p>
                         </td> 
-                        <hr/>
-                        <td style="border-left: 1px solid black;padding-left: 15px;">3</td>
-                        <td style="border-left: 1px solid black;padding-left: 15px;"></td>
-                        <td style="border-left: 1px solid black;padding-left: 15px;"></td>
-                        <td style="border-left: 1px solid black;padding-left: 15px;"></td>
+                        <hr style="margin-left: 10px;"></hr>
+                        <td style="border-left: 1px solid black;padding-left: 10px;">3</td>
+                        <td style="border-left: 1px solid black;padding-left: 10px;"></td>
+                        <td style="border-left: 1px solid black;padding-left: 10px;"></td>
+                        <td style="border-left: 1px solid black;padding-left: 10px;"></td>
                 </tr>
 
 
                 <tr style="border-left: 1px solid black;border-right: 1px solid black;">
-                    <td style="padding-left: 15px;text-align: left;border-right: 1px solid black"  width="50%">
-                       <p> 4. HSN NO: '.$getscrapreturnItemdeatilsForInvoice[0]['hsn_code'].'  </p>
+                    <td style="text-align: left;border-right: 1px solid black;border-bottom: 1px solid black"  width="50%">
+                       <p>'.str_repeat('&nbsp;', 1).' 4. HSN NO: '.$getscrapreturnItemdeatilsForInvoice[0]['hsn_code'].'  </p>
                     </td> 
-                    <hr/>
-                    <td style="border-left: 1px solid black;padding-left: 15px;">4</td>
-                    <td style="border-left: 1px solid black;padding-left: 15px;"></td>
-                    <td style="border-left: 1px solid black;padding-left: 15px;"></td>
-                    <td style="border-left: 1px solid black;padding-left: 15px;"></td>
+                    <hr style="margin-left: 10px;"></hr>
+                    <td style="border-left: 1px solid black;padding-left: 10px;">4</td>
+                    <td style="border-left: 1px solid black;padding-left: 10px;"></td>
+                    <td style="border-left: 1px solid black;padding-left: 10px;"></td>
+                    <td style="border-left: 1px solid black;padding-left: 10px;"></td>
                 </tr>
 
 
                 <tr style="border-left: 1px solid black;border-right: 1px solid black;">
-                    <td style="padding-left: 15px;text-align: left;border-right: 1px solid black"  width="50%">
+                    <td style="padding-left: 10px;text-align: left;border-right: 1px solid black"  width="50%">
                     <p> 5. Estimated Value of inputs / Partially processed inputs  </p>
                     <p>'. str_repeat('&nbsp;', 5).'</p>
                     <p>'. str_repeat('&nbsp;', 5).'</p>
                     </td> 
-                    <td style="border-left: 1px solid black;padding-left: 15px;">5</td>
-                    <td style="border-left: 1px solid black;padding-left: 15px;"></td>
-                    <td style="border-left: 1px solid black;padding-left: 15px;"></td>
-                    <td style="border-left: 1px solid black;padding-left: 15px;"></td>
+                    <td style="border-left: 1px solid black;padding-left: 10px;">5</td>
+                    <td style="border-left: 1px solid black;padding-left: 10px;"></td>
+                    <td style="border-left: 1px solid black;padding-left: 10px;"></td>
+                    <td style="border-left: 1px solid black;padding-left: 10px;"></td>
                 </tr>
 
 
                 <tr style="border-left: 1px solid black;border-right: 1px solid black;">
-                    <td style="padding-left: 15px;text-align: left;border-right: 1px solid black"  width="50%">
+                    <td style="padding-left: 10px;text-align: left;border-right: 1px solid black"  width="50%">
                     <p>  </p>
                     </td> 
-                    <td style="border-left: 1px solid black;padding-left: 15px;">6</td>
-                    <td style="border-left: 1px solid black;padding-left: 15px;"></td>
-                    <td style="border-left: 1px solid black;padding-left: 15px;"></td>
-                    <td style="border-left: 1px solid black;padding-left: 15px;"></td>
+                    <td style="border-left: 1px solid black;padding-left: 10px;">6</td>
+                    <td style="border-left: 1px solid black;padding-left: 10px;"></td>
+                    <td style="border-left: 1px solid black;padding-left: 10px;"></td>
+                    <td style="border-left: 1px solid black;padding-left: 10px;"></td>
                 </tr>
             </table>
             
