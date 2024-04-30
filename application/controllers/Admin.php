@@ -14238,12 +14238,12 @@ public function downloadscrapreturn($id){
     $html = '<table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:13px">
                 <tr style="border: 1px solid black;" valign="top">
                     <td width="50%" style="padding: 10px;text-align: left;">
-                        <p><h4>SUPRA QUALITY EXPORTS INDIA PVT LTD </h4></p>
+                        <p><h3 style="color:#000080">SUPRA QUALITY EXPORTS INDIA PVT LTD </h3></p>
                         <p>229 to 232, Bharat Industrial Estate,</p>
                         <p>L.B.S. Marg, Bhandup West, Mumbai – 400078. INDIA.</p>
                         <p></p>
                         <p></p>
-                        <p>GSTIN : 27AAJCS7869M1ZB</p>
+                        <p><span style="color:#000080">GSTIN : 27AAJCS7869M1ZB</span></p>
                     </td> 
 
                     <td style="border-left: 1px solid black;padding: 10px;" width="50%" valign="top">
@@ -14257,12 +14257,27 @@ public function downloadscrapreturn($id){
                 </tr>
            
                 <tr style="border: 1px solid black;padding: 10px;">
-                    <td width="50%" style="padding-left: 15px;text-align: left;">
-                       Sr. No. : '.$getscrapreturnForInvoice['challan_id'].'
+                    <td width="50%" style="padding: 10px;text-align: left;">
+                       Sr. No. : <span style="color:red">'.$getscrapreturnForInvoice['challan_id'].'</span>
                     </td> 
 
                     <td style="border-left: 1px solid black;padding: 10px;" width="50%" valign="top">
                        <input type="checkbox" style="width: 100px;height: 100px;zoom:5;"> Original  <input type="checkbox"> Duplicate  <input type="checkbox"> Triplicate
+                    </td>
+                </tr>
+
+                <tr style="border: 1px solid black;">
+                    <td width="50%" style="padding: 10px;text-align: left;valign="top"">
+                        <p>Part-I </p>
+                        <p>'. str_repeat('&nbsp;', 5).'</p>
+                        <p>'. str_repeat('&nbsp;', 5).'</p>
+                        <p>'. str_repeat('&nbsp;', 5).'</p>
+                        <p>'. str_repeat('&nbsp;', 5).'</p>
+                    </td> 
+
+                    <td style="border-left: 1px solid black;padding: 10px;" width="50%" valign="top">
+                        <p>Part-II </p>
+                        <p>to be filled by the processing factory in original and duplicate challans. </p>
                     </td>
                 </tr>
 
@@ -14277,20 +14292,7 @@ public function downloadscrapreturn($id){
                     </td>
                 </tr>
 
-                <tr style="border: 1px solid black;">
-                    <td width="50%" style="padding: 10px;text-align: left;valign="top"">
-                         <p>Part-I </p>
-                         <p>'. str_repeat('&nbsp;', 5).'</p>
-                         <p>'. str_repeat('&nbsp;', 5).'</p>
-                         <p>'. str_repeat('&nbsp;', 5).'</p>
-                         <p>'. str_repeat('&nbsp;', 5).'</p>
-                    </td> 
-
-                    <td style="border-left: 1px solid black;padding: 10px;" width="50%" valign="top">
-                        <p>Part-II </p>
-                        <p>to be filled by the processing factory in original and duplicate challans. </p>
-                    </td>
-                </tr>
+             
             </table>
 
             <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:13px;">
@@ -14350,8 +14352,8 @@ public function downloadscrapreturn($id){
                 <tr style="border-left: 1px solid black;border-right: 1px solid black;">
                         <td style="padding-left: 15px;text-align: left;border-right: 1px solid black;"  width="50%">
                          <p> No. of Bags:  '.$getscrapreturnItemdeatilsForInvoice[0]['number_of_bags'].' </p>
-                         <hr/>
                         </td> 
+                        <hr/>
                         <td style="border-left: 1px solid black;padding-left: 15px;">3</td>
                         <td style="border-left: 1px solid black;padding-left: 15px;"></td>
                         <td style="border-left: 1px solid black;padding-left: 15px;"></td>
@@ -14362,8 +14364,8 @@ public function downloadscrapreturn($id){
                 <tr style="border-left: 1px solid black;border-right: 1px solid black;">
                     <td style="padding-left: 15px;text-align: left;border-right: 1px solid black"  width="50%">
                        <p> 4. HSN NO: '.$getscrapreturnItemdeatilsForInvoice[0]['hsn_code'].'  </p>
-                       <hr/>
                     </td> 
+                    <hr/>
                     <td style="border-left: 1px solid black;padding-left: 15px;">4</td>
                     <td style="border-left: 1px solid black;padding-left: 15px;"></td>
                     <td style="border-left: 1px solid black;padding-left: 15px;"></td>
@@ -14436,12 +14438,12 @@ public function downloadscrapreturn($id){
                 
                 <tr style="border: 1px solid black;">
                     <td width="50%" style="padding: 10px;text-align: left;">
-                        <p style="vertical-align: text-top;font-size:12px;color:#206a9b"><b>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</b></p>
+                        <p style="vertical-align: text-top;font-size:12px;color:#000080"><b>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</b></p>
                         <p>Date:03-November-2023</p>
                         <p>Place: Mumbai</p>
                        
                         <br/><img src="'.base_url().'assets/images/stmps/supplierpostampsignature.png" width="130" height="100">
-                        <p style="vertical-align: text-top;font-size:10px;color:#206a9b;text-align: right;"><b>AUTHORIZED SIGNATORY</b></p>
+                        <p style="vertical-align: text-top;font-size:10px;color:#000080;text-align: right;"><b>AUTHORIZED SIGNATORY</b></p>
 
                     </td> 
 
