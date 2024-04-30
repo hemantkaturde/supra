@@ -14411,6 +14411,7 @@ public function downloadscrapreturn($id){
                     <td width="50%" style="padding: 10px;text-align: left;">
                         <p>7. Nature of processing: '.$getscrapreturnItemdeatilsForInvoice[0]['number_of_processing'].'</p>
                         <p>'. str_repeat('&nbsp;', 5).'</p>
+                        <p>'. str_repeat('&nbsp;', 5).'</p>
                     </td> 
 
                     <td style="border-left: 1px solid black;padding-left: 10px;" width="50%" valign="top">
