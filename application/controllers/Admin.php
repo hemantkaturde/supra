@@ -14284,7 +14284,6 @@ public function downloadscrapreturn($id){
                          <p>'. str_repeat('&nbsp;', 5).'</p>
                          <p>'. str_repeat('&nbsp;', 5).'</p>
                          <p>'. str_repeat('&nbsp;', 5).'</p>
-                         <p>'. str_repeat('&nbsp;', 5).'</p>
                     </td> 
 
                     <td style="border-left: 1px solid black;padding: 10px;" width="50%" valign="top">
@@ -14377,7 +14376,6 @@ public function downloadscrapreturn($id){
                     <p> 5. Estimated Value of inputs / Partially processed inputs  </p>
                     <p>'. str_repeat('&nbsp;', 5).'</p>
                     <p>'. str_repeat('&nbsp;', 5).'</p>
-                    <p>'. str_repeat('&nbsp;', 5).'</p>
                     </td> 
                     <td style="border-left: 1px solid black;padding-left: 15px;">5</td>
                     <td style="border-left: 1px solid black;padding-left: 15px;"></td>
@@ -14412,7 +14410,6 @@ public function downloadscrapreturn($id){
                 <tr style="border: 1px solid black;">
                     <td width="50%" style="padding: 10px;text-align: left;">
                         <p>7. Nature of processing: '.$getscrapreturnItemdeatilsForInvoice[0]['number_of_processing'].'</p>
-                        <p>'. str_repeat('&nbsp;', 5).'</p>
                         <p>'. str_repeat('&nbsp;', 5).'</p>
                     </td> 
 
