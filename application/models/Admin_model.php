@@ -4364,7 +4364,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['supplier_name'] = $value['supplier_name'];
                 $data[$counter]['action'] = '';
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editscrapreturn/".$value['scrapretrunid']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downloadscrapreturn/".$value['scrapretrunid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."getdownloadscrapreturn/".$value['scrapretrunid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['scrapretrunid']."' class='fa fa-trash-o deletescrapreturn' aria-hidden='true'></i>"; 
                 $counter++; 
             }
@@ -11360,9 +11360,9 @@ public function getscrapreturnForInvoice($id){
                      .TBL_VENDOR.'.mobile as mobile,'
                      .TBL_VENDOR.'.email as ven_email,'
                      .TBL_VENDOR.'.GSTIN as ven_GSTIN,'
-                     .TBL_VENDOR.'.challan_id as challan_id,'
-                     .TBL_VENDOR.'.challan_date as challan_date,'
-                     .TBL_VENDOR.'.remarks as remarks,'
+                     .TBL_SCRAP_RETURN.'.challan_id as challan_id,'
+                     .TBL_SCRAP_RETURN.'.challan_date as challan_date,'
+                     .TBL_SCRAP_RETURN.'.remarks as remarks,'
                       );
 
     $this->db->where(TBL_SCRAP_RETURN.'.id', $id);
@@ -11370,6 +11370,16 @@ public function getscrapreturnForInvoice($id){
     $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_SCRAP_RETURN.'.supplier_id','left');
     $query = $this->db->get(TBL_SCRAP_RETURN);
     $fetch_result = $query->row_array();
+    return $fetch_result;
+}
+
+
+public function getscrapreturnItemdeatilsForInvoice($id){
+
+    $this->db->select('*');
+    $this->db->where(TBL_SCRAP_RETURN_ITEM.'.scrap_return_id', $id);
+    $query = $this->db->get(TBL_SCRAP_RETURN_ITEM);
+    $fetch_result = $query->result_array();
     return $fetch_result;
 }
 

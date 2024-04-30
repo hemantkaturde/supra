@@ -14227,172 +14227,220 @@ public function downlaodjobworkchllan($id){
     
 }
 
+
 public function downloadscrapreturn($id){
 
-   
+    $getscrapreturnForInvoice = $this->admin_model->getscrapreturnForInvoice($id);
+    $getscrapreturnItemdeatilsForInvoice = $this->admin_model->getscrapreturnItemdeatilsForInvoice($id);
 
-    // $getscrapreturnForInvoice = $this->admin_model->getscrapreturnForInvoice($id);
-    // //$getsupplierItemdeatilsForInvoice = $this->admin_model->getsupplierItemdeatilsForInvoice($id);
+    $mpdf = new \Mpdf\Mpdf();
+    // $html = $this->load->view('html_to_pdf',[],true);
+    $html = '<table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:cambria;">
+                <tr style="border: 1px solid black;">
+                    <td width="50%" style="padding: 15px;text-align: left;">
+                        <p><h4>SUPRA QUALITY EXPORTS INDIA PVT LTD </h4></p>
+                        <p>229 to 232, Bharat Industrial Estate,</p>
+                        <p>L.B.S. Marg, Bhandup West, Mumbai – 400078. INDIA.</p>
+                        <p></p>
+                        <p></p>
+                        <p>GSTIN : 27AAJCS7869M1ZB</p>
+                    </td> 
 
-   
+                    <td style="border-left: 1px solid black;padding: 15px;" width="50%" valign="top">
+                          <p style="text-align: center"><h4>DELIVERY CHALLAN</h4></p>
+                          <p style="text-align: left;"> Movement of inputs or partially processed goods
+                            for job work   under Iulc 55 ofthe Central Goods
+                            ‘8; Service Tax Rules.20l7. from one factory to
+                            another factory for further processing / operation.
+                          </p>
+                    </td>
+                </tr>
+           
+                <tr style="border: 1px solid black;padding: 10px;">
+                    <td width="50%" style="padding-left: 15px;text-align: left;">
+                       Sr. No. : '.$getscrapreturnForInvoice['challan_id'].'
+                    </td> 
 
-    // $mpdf = new \Mpdf\Mpdf();
-    // // $html = $this->load->view('html_to_pdf',[],true);
-    // $html = '<table style=" width: 100%;text-align: center;border-collapse: collapse;border: #cccccc 0px solid;font-family:cambria;">
-    //             <tr>
-    //               <td rowspan="2"><img src="'.base_url().'assets/images/supra_logo_1.jpg" width="80" height="80"></td>
-    //               <td style="color:#000080"><h2>SUPRA QUALITY EXPORTS (I) PVT. LTD</h2></td>
-    //               <td rowspan="2"><img src="'.base_url().'assets/images/logo_2.png"width="80" height="80"></td>
-    //             </tr>
-    //             <tr>
-    //               <td style="font-weight: bold;">
-    //                 <p>MANUFACTURER & EXPORTERS OF:</p>
-    //                 <p>PRECISION TURNED COMPONENTS, STAMPED /PRESSED PARTS IN FERROUS & NON-FERROUS METAL</p>
-    //                 <p>MOULDED & EXTRUDED PLASTIC AND RUBBER COMPONENTS</p> 
-    //               </td>
-    //             </tr>
-    //         </table>
-    //         <hr>
-    //         <table style="width: 100%;text-align: left;border-collapse: collapse;border: #ccc 0px solid;font-family:cambria;">
-    //                 <tr>
-    //                     <td width="60%">
-    //                       <p><b>Office:</b> 229 to 232, Bharat Industrial Estate,
-    //                       <p> L.B.S. Marg, Bhandup West, Mumbai – 400078. INDIA.</b>
-    //                       <p>Tel: +91 22 66959505 / +91 22 66600196 </p>
-    //                       <p>+91 22 62390222 / +91 22 46061497 / +91 22 35115396 </p>
-    //                       <p style="color:#206a9b"><b>GSTIN : 27AAJCS7869M1ZB </b></p>
-    //                     </td>
-    //                     <td width="40%">
-    //                         <p><b>Email:</b></p> 
-    //                         <p style="color:#206a9b">purchase@supraexports.in</p>
-    //                         <p style="color:#206a9b">purchase1@supraexports.in</p>
-    //                         <p style="color:#206a9b">purchase2@supraexports.in</p>
-    //                     </td>  
-    //                 </tr>
-    //         </table>
+                    <td style="border-left: 1px solid black;padding: 10px;" width="50%" valign="top">
+                       <input type="checkbox" style="width: 100px;height: 100px;zoom:5;"> Original  <input type="checkbox"> Duplicate  <input type="checkbox"> Triplicate
+                    </td>
+                </tr>
 
-    //         <table style=" width: 100%;text-align: center;border-collapse: collapse;border: #ccc 0px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;">
-    //                 <tr>
-    //                     <td style="color:red;font-size:15px">
-    //                       <u><p><h3>PURCHASE ORDER</h3></p>
-    //                     </td>
-    //                 </tr>
-    //         </table>
+                <tr style="border: 1px solid black;">
+                    <td width="50%" style="padding: 15px;text-align: left;">
+                         <p>1. Description </p>
+                         <p>'.$getscrapreturnItemdeatilsForInvoice[0]['description'].'</p>
+                    </td> 
 
-    //         <table style=" width: 100%;text-align: left;border-collapse: collapse;font-family:cambria;font-size:13px;border: #ccc 1px solid">
-    //             <tr style="border: 1px solid black;">
-    //                 <td width="50%" style="padding-left: 15px;">
-    //                     <div>
-    //                         <p>To,</p>
-    //                         <p><b>'.$getsupplierdeatilsForInvoice['supplier_name'].'</b></p>
-    //                         <p>'.$getsupplierdeatilsForInvoice['supplier_addess'].'</p>
-    //                         <p><b>Contact No:</b> '.$getsupplierdeatilsForInvoice['suplier_mobile'].' / '.$getsupplierdeatilsForInvoice['suplier_landline'].'</p>
-    //                         <p><b>Contact Person:</b> '.$getsupplierdeatilsForInvoice['sup_conatct'].'</p>
-    //                         <p><b>Email:</b> '.$getsupplierdeatilsForInvoice['sup_email'].'</p>
-    //                         <p style="color:red">GSTIN:'.$getsupplierdeatilsForInvoice['sup_GSTIN'].'</p>
-    //                     <div>    
-    //                 </td> 
-    //                 <td style="border-left: 1px solid black;padding-left: 15px;font-size:13px" width="50%" >
-    //                     <div>
-    //                         <p><b>P.O.NO :</b> '.'<span style="color:red">'.$getsupplierdeatilsForInvoice['po_number'].'</span></p>
-    //                         <p>&nbsp;</p>
-    //                         <p><b>P.O.DATE :</b> '.date('d-m-Y',strtotime($getsupplierdeatilsForInvoice['date'])).'</p>
-    //                         <p>&nbsp;</p>
-    //                         <p><b>QUOTATION REFERENCE :</b> '.$getsupplierdeatilsForInvoice['quatation_ref_no'].'</p>
-    //                         <p>&nbsp;</p>
-    //                         <p><b>QUOTATION DATE :</b> '.$quatation_date.'</p>
-    //                     </div>
-    //                 </td>
-    //             </tr>
-    //         </table>
+                    <td style="border-left: 1px solid black;padding: 15px;" width="50%" valign="top">
+                        <p>1. Details of type,qty, date & time of processing done and Return of processed goods to parent favtory </p>
+                    </td>
+                </tr>
+            </table>
 
-    //         <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:12px">
-    //             <tr style="border: 1px solid black;">
-    //                 <th align="left" style="border: 1px solid black;" margin-bottom: 10%;>NEED TEST CERTIFICATE</th>
-    //                 <th align="left" style="border: 1px solid black;" margin-bottom: 10%;>DELIVERY DATE</th>
-    //                 <th align="left" style="border: 1px solid black;" margin-bottom: 10%;>PAYMENT TERMS</th>    
-    //             </tr>
-    //             <tr style="border: 1px solid black;">
-    //                 <td style="border: 1px solid black;text-align:center"><b>YES<b></td>
-    //                 <td style="border: 1px solid black;padding-left: 15px;">'.date('d-m-Y',strtotime($getsupplierdeatilsForInvoice['delivery_date'])).'</td>    
-    //                 <td style="border: 1px solid black;padding-left: 15px;">'.$getsupplierdeatilsForInvoice['work_order'].'</td>
-    //             </tr>
-    //         </table>
-
-
-    //         <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:12px">
-    //             <tr style="border: 1px solid black;">
-    //                 <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>SR.NO.</th>
-    //                 <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>PART DESCRIPTION</th>
-    //                 <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>PART NO.</th>  
-    //                 <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>QTY</th> 
-    //                 <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>UNITS</th>  
-    //                 <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>RATE</th>  
-    //                 <th align="left"  style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>AMOUNT</th>
-    //             </tr>
-    //             '.$CartItem.$space.' 
-                   
-               
- 
-    //             <tr style="border-left: 1px solid black;border-right: 1px solid black;">
-    //                 <td style="border-left: 1px solid black;border-right: 1px solid black;"></td>
-    //                 <td style="border-left: 1px solid black;border-right: 1px solid black;padding-left: 15px;"><p><b>Delivery Address</b></p>
-    //                     <p>'.$getsupplierdeatilsForInvoice['vendor_name'].'</p>
-    //                     <p>'.$getsupplierdeatilsForInvoice['ven_address'].'</p>
-    //                     <p> <b>Kind Attn:</b> '.$getsupplierdeatilsForInvoice['ven_contact_person'].'</p>
-    //                     <p> <b>Tel No:</b> '.$getsupplierdeatilsForInvoice['mobile'].' / '.$getsupplierdeatilsForInvoice['ven_landline'].'</p>
-    //                     <p> <b>GSTIN:</b> '.$getsupplierdeatilsForInvoice['ven_GSTIN'].'</p> 
-    //                 </td>
-    //                 <td style="border-left: 1px solid black;border-right: 1px solid black;"></td>
-    //                 <td style="border-left: 1px solid black;border-right: 1px solid black;"></td>
-    //                 <td style="border-left: 1px solid black;border-right: 1px solid black;"></td>
-    //                 <td style="border-left: 1px solid black;border-right: 1px solid black;"></td>
-    //                 <td style="border-left: 1px solid black;border-right: 1px solid black;"></td>
-    //             </tr>
-
-
-    //             <tr style="border: 1px solid black;">
-    //                 <td colspan="4" style="padding: 8px;">'.$this->amount_in_word($subtotal).'</td>
+            <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:cambria;">
                 
-    //                 <td colspan="2"  style="border: 1px solid black;padding-left: 10px;padding-right: 10px;font-family:cambria;font-size:12px;">SUB TOTAL (+) GST </td>    
-    //                 <td style="border: 1px solid black;padding-left: 10px;">'.$subtotal.'/-'.'</td>
-    //             </tr>
-    //         </table>
+                <tr style="border-left: 1px solid black;border-right: 1px solid black;border-bottom: 1px solid black;">
+                    <td style="text-align:left;padding: 15px;"          width="50%">2. Identification marks & number if any</td> 
+                    <td style="border-left: 1px solid black;padding:15px;">Size / Type</td>
+                    <td style="border-left: 1px solid black;padding: 15px;" >Quantity</td>
+                    <td style="border-left: 1px solid black;padding: 15px;" >Date</td>
+                    <td style="border-left: 1px solid black;padding: 15px;" >Time</td>
+                </tr>
 
-    //         <table style=" width: 100%;border-collapse: collapse;border: #ccc 1px solid;font-family:cambria;font-size:12px">
-    //             <tr style="border: 1px solid black;">
-    //                     <td style="border: 1px solid black;padding-left: 10px;">
-    //                         <p><b>Remark :</b>'.$getsupplierdeatilsForInvoice['remark'].'</p>    
-    //                 </td>   
-    //             </tr>
-    //         </table>
-
-    //         <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:12px">
-                  
-    //                <tr style="border: 1px solid black;">
-    //                     <td style="border: 1px solid black;padding-left: 10px;" width="75%;">
-    //                         <p><b>NOTE :</b></p>
-    //                         <p><b>1. Confirmation of PO is Mandatory</b></p>
-    //                         <p><b>2. Mentioning P.O.No. on Invoice is Mandatory</b></p>
-    //                         <p><b>3. Once order issued & accepted, cannot be cancelled</b></p>
-    //                         <p><b>4. Essence of this order is delivering the specified quality product on time.</b></p>
-    //                         <p><b>5. If any Prices issue, should inform in 24hrs after receipt of P.O.</b></p>
-    //                     </td>
-    //                     <td style="border: 1px solid black;text-align: center;" width="25%" valign="top">
-    //                         <p style="vertical-align: text-top;font-size:12px;color:#206a9b"><b>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</b></p>
-    //                         <br/><img src="'.base_url().'assets/images/stmps/supplierpostampsignature.png" width="130" height="100">
-    //                         <p style="vertical-align: text-top;font-size:10px;color:#206a9b"><b>AUTHORIZED SIGNATORY</b></p>
-    //                     </td> 
-    //             </tr>
-    //         </table>';
-
-    //         // <p>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</p>
-    // $invoice_name =  $getsupplierdeatilsForInvoice['po_number'].' - '.$getsupplierdeatilsForInvoice['supplier_name'].'.pdf';
-    // $mpdf->WriteHTML($html);
-    // $mpdf->Output($invoice_name,'D'); // opens in browser
+                <tr style="border-left: 1px solid black;border-right: 1px solid black;">
+                    <td style="padding-left: 15px;text-align: left;"  width="50%">
+                       <p> 3. Quantity (Nos. / Weight / Metre /Litre) </p>
+                     </td> 
+                    <td style="border-left: 1px solid black;padding-left: 15px;">1</td>
+                    <td style="border-left: 1px solid black;padding-left: 15px;"></td>
+                    <td style="border-left: 1px solid black;padding-left: 15px;"></td>
+                    <td style="border-left: 1px solid black;padding-left: 15px;"></td>
+                </tr>
 
 
+                <tr style="border-left: 1px solid black;border-right: 1px solid black;">
+                    <td style="padding-left: 15px;text-align: left;"  width="50%">
+                       <p> Gross Weight: '.$getscrapreturnItemdeatilsForInvoice[0]['gross_weight'].' kgs </p>
+                     </td> 
+                    <td style="border-left: 1px solid black;padding-left: 15px;"></td>
+                    <td style="border-left: 1px solid black;padding-left: 15px;"></td>
+                    <td style="border-left: 1px solid black;padding-left: 15px;"></td>
+                    <td style="border-left: 1px solid black;padding-left: 15px;"></td>
+                </tr>
 
+
+                <tr style="border-left: 1px solid black;border-right: 1px solid black;">
+                    <td style="padding-left: 15px;text-align: left;"  width="50%">
+                      <p> Net Weight:   '.$getscrapreturnItemdeatilsForInvoice[0]['net_weight'].' kgs </p>
+                    </td> 
+                    <td style="border-left: 1px solid black;padding-left: 15px;">2</td>
+                    <td style="border-left: 1px solid black;padding-left: 15px;"></td>
+                    <td style="border-left: 1px solid black;padding-left: 15px;"></td>
+                    <td style="border-left: 1px solid black;padding-left: 15px;"></td>
+                </tr>
+
+
+                <tr style="border-left: 1px solid black;border-right: 1px solid black;">
+                    <td style="padding-left: 15px;text-align: left;"  width="50%">
+                    <p> Quantity:   '.$getscrapreturnItemdeatilsForInvoice[0]['quantity'].' </p>
+                    </td> 
+                    <td style="border-left: 1px solid black;padding-left: 15px;"></td>
+                    <td style="border-left: 1px solid black;padding-left: 15px;"></td>
+                    <td style="border-left: 1px solid black;padding-left: 15px;"></td>
+                    <td style="border-left: 1px solid black;padding-left: 15px;"></td>
+                </tr>
+
+
+                <tr style="border-left: 1px solid black;border-right: 1px solid black;">
+                        <td style="padding-left: 15px;text-align: left;border-right: 1px solid black;"  width="50%">
+                         <p> No. of Bags:  '.$getscrapreturnItemdeatilsForInvoice[0]['number_of_bags'].' </p>
+                         <hr/>
+                        </td> 
+                        <td style="border-left: 1px solid black;padding-left: 15px;">3</td>
+                        <td style="border-left: 1px solid black;padding-left: 15px;"></td>
+                        <td style="border-left: 1px solid black;padding-left: 15px;"></td>
+                        <td style="border-left: 1px solid black;padding-left: 15px;"></td>
+                </tr>
+
+
+                <tr style="border-left: 1px solid black;border-right: 1px solid black;">
+                    <td style="padding-left: 15px;text-align: left;border-right: 1px solid black"  width="50%">
+                       <p> 4. HSN NO: '.$getscrapreturnItemdeatilsForInvoice[0]['hsn_code'].'  </p>
+                       <hr/>
+                    </td> 
+                    <td style="border-left: 1px solid black;padding-left: 15px;">4</td>
+                    <td style="border-left: 1px solid black;padding-left: 15px;"></td>
+                    <td style="border-left: 1px solid black;padding-left: 15px;"></td>
+                    <td style="border-left: 1px solid black;padding-left: 15px;"></td>
+                </tr>
+
+
+                <tr style="border-left: 1px solid black;border-right: 1px solid black;">
+                    <td style="padding-left: 15px;text-align: left;border-right: 1px solid black"  width="50%">
+                    <p> 5. Estimated Value of inputs / Partially processed inputs  </p>
+                    </td> 
+                    <td style="border-left: 1px solid black;padding-left: 15px;">5</td>
+                    <td style="border-left: 1px solid black;padding-left: 15px;"></td>
+                    <td style="border-left: 1px solid black;padding-left: 15px;"></td>
+                    <td style="border-left: 1px solid black;padding-left: 15px;"></td>
+                </tr>
+
+
+                <tr style="border-left: 1px solid black;border-right: 1px solid black;">
+                    <td style="padding-left: 15px;text-align: left;border-right: 1px solid black"  width="50%">
+                    <p> 1.   443878  </p>
+                    </td> 
+                    <td style="border-left: 1px solid black;padding-left: 15px;">6</td>
+                    <td style="border-left: 1px solid black;padding-left: 15px;"></td>
+                    <td style="border-left: 1px solid black;padding-left: 15px;"></td>
+                    <td style="border-left: 1px solid black;padding-left: 15px;"></td>
+                </tr>
+            </table>
+            
+            <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:cambria;">
+
+                <tr style="border: 1px solid black;">
+                    <td width="50%" style="padding: 10px;text-align: left;">
+                        <p>6.Date & Time of Issue : '.$getscrapreturnForInvoice['challan_date'].'</p>
+                    </td> 
+
+                    <td style="border-left: 1px solid black;padding: 10px;" width="50%" valign="top">
+                        <p>2. Nature of Proc. / Manufacturing done</p>
+                    </td>
+                </tr>
+
+                <tr style="border: 1px solid black;">
+                    <td width="50%" style="padding: 10px;text-align: left;">
+                        <p>7. Nature of processing: '.$getscrapreturnItemdeatilsForInvoice[0]['number_of_processing'].'</p>
+                    </td> 
+
+                    <td style="border-left: 1px solid black;padding-left: 10px;" width="50%" valign="top">
+                        <p>3. Qty of waste material / rejection returned to the factory &</p>
+                    </td>
+                </tr>
+
+                <tr style="border: 1px solid black;">
+                    <td width="50%" style="padding: 10px;text-align: left;">
+                        <p>8. Factory / Place of processing / Manufacturing : '.$getscrapreturnForInvoice['vendor_name'].'</p>
+                        <p>'.$getscrapreturnForInvoice['ven_address'].'</p>
+                        <p>'.$getscrapreturnForInvoice['ven_landline'].'</p>
+                        <p>'.$getscrapreturnForInvoice['ven_contact_person'].'</p>
+                        <p>'.$getscrapreturnForInvoice['mobile'].'</p>
+                        <p>'.$getscrapreturnForInvoice['ven_email'].'</p>
+                        <p>'.$getscrapreturnForInvoice['ven_GSTIN'].'</p>
+                    </td> 
+
+                    <td style="border-left: 1px solid black;padding: 10px;" width="50%" valign="top">
+                        <p>4. Name & Address of the Processor:</p>
+                    </td>
+                </tr>
+
+                
+                <tr style="border: 1px solid black;">
+                    <td width="50%" style="padding: 10px;text-align: left;">
+                        <p style="vertical-align: text-top;font-size:12px;color:#206a9b"><b>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</b></p>
+                        <p>Date:03-November-2023</p>
+                        <p>Place: Mumbai</p>
+                       
+                        <br/><img src="'.base_url().'assets/images/stmps/supplierpostampsignature.png" width="130" height="100">
+                        <p style="vertical-align: text-top;font-size:10px;color:#206a9b;text-align: right;"><b>AUTHORIZED SIGNATORY</b></p>
+
+                    </td> 
+
+                    <td style="border-left: 1px solid black;padding: 10px;" width="50%" valign="top">
+                        <p>5. Signature of Processor </p>
+                    </td>
+                </tr>
+            </table>
+            
+            ';
+
+            // <p>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</p>
+    $invoice_name =  $getscrapreturnForInvoice['challan_id'].' - '.$getscrapreturnForInvoice['vendor_name'].'.pdf';
+    $mpdf->WriteHTML($html);
+    $mpdf->Output($invoice_name,'D'); // opens in browser
+    
 }
 
 
