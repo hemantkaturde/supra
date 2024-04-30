@@ -14235,9 +14235,9 @@ public function downloadscrapreturn($id){
 
     $mpdf = new \Mpdf\Mpdf();
     // $html = $this->load->view('html_to_pdf',[],true);
-    $html = '<table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:cambria;">
+    $html = '<table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:14px">
                 <tr style="border: 1px solid black;">
-                    <td width="50%" style="padding: 15px;text-align: left;">
+                    <td width="50%" style="padding: 10px;text-align: left;">
                         <p><h4>SUPRA QUALITY EXPORTS INDIA PVT LTD </h4></p>
                         <p>229 to 232, Bharat Industrial Estate,</p>
                         <p>L.B.S. Marg, Bhandup West, Mumbai – 400078. INDIA.</p>
@@ -14246,7 +14246,7 @@ public function downloadscrapreturn($id){
                         <p>GSTIN : 27AAJCS7869M1ZB</p>
                     </td> 
 
-                    <td style="border-left: 1px solid black;padding: 15px;" width="50%" valign="top">
+                    <td style="border-left: 1px solid black;padding: 10px;" width="50%" valign="top">
                           <p style="text-align: center"><h4>DELIVERY CHALLAN</h4></p>
                           <p style="text-align: left;"> Movement of inputs or partially processed goods
                             for job work   under Iulc 55 ofthe Central Goods
@@ -14267,25 +14267,36 @@ public function downloadscrapreturn($id){
                 </tr>
 
                 <tr style="border: 1px solid black;">
-                    <td width="50%" style="padding: 15px;text-align: left;">
+                    <td width="50%" style="padding: 10px;text-align: left;">
                          <p>1. Description </p>
                          <p>'.$getscrapreturnItemdeatilsForInvoice[0]['description'].'</p>
                     </td> 
 
-                    <td style="border-left: 1px solid black;padding: 15px;" width="50%" valign="top">
+                    <td style="border-left: 1px solid black;padding: 10px;" width="50%" valign="top">
                         <p>1. Details of type,qty, date & time of processing done and Return of processed goods to parent favtory </p>
+                    </td>
+                </tr>
+
+                <tr style="border: 1px solid black;">
+                    <td width="50%" style="padding: 10px;text-align: left;valign="top"">
+                         <p>Part-I </p>
+                    </td> 
+
+                    <td style="border-left: 1px solid black;padding: 10px;" width="50%" valign="top">
+                        <p>Part-II </p>
+                        <p>to be filled by the processing factory in original and duplicate challans. </p>
                     </td>
                 </tr>
             </table>
 
-            <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:cambria;">
+            <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:14px;">
                 
                 <tr style="border-left: 1px solid black;border-right: 1px solid black;border-bottom: 1px solid black;">
-                    <td style="text-align:left;padding: 15px;"          width="50%">2. Identification marks & number if any</td> 
-                    <td style="border-left: 1px solid black;padding:15px;">Size / Type</td>
-                    <td style="border-left: 1px solid black;padding: 15px;" >Quantity</td>
-                    <td style="border-left: 1px solid black;padding: 15px;" >Date</td>
-                    <td style="border-left: 1px solid black;padding: 15px;" >Time</td>
+                    <td style="text-align:left;padding: 10px;"          width="50%">2. Identification marks & number if any</td> 
+                    <td style="border-left: 1px solid black;padding:10px;">Size / Type</td>
+                    <td style="border-left: 1px solid black;padding: 10px;" >Quantity</td>
+                    <td style="border-left: 1px solid black;padding: 10px;" >Date</td>
+                    <td style="border-left: 1px solid black;padding: 10px;" >Time</td>
                 </tr>
 
                 <tr style="border-left: 1px solid black;border-right: 1px solid black;">
@@ -14378,7 +14389,7 @@ public function downloadscrapreturn($id){
                 </tr>
             </table>
             
-            <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:cambria;">
+            <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:14px;">
 
                 <tr style="border: 1px solid black;">
                     <td width="50%" style="padding: 10px;text-align: left;">
