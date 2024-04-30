@@ -14044,9 +14044,9 @@ public function downlaodjobworkchllan($id){
         $CartItem .= '
                 <tr style="style=border-left: 1px solid black;border-right: 1px solid black;">
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$i.'</td>
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top"> Material Description : '.$value['type_of_raw_material'].'<br/>For Part No : '.$value['part_number'].'-'.$value['fg_description'].'<br/>Vendor Qty : '.$value['vendor_qty'].' pcs <br/>HSN Code :' .$value['HSN_code'].'<br/> SAC : '.$value['fg_sac'].'</td>   
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top"> Material Description : '.$value['type_of_raw_material'].'<br/>For Part No : '.$value['part_number'].'-'.$value['fg_description'].'<br/>Vendor Qty : '.$value['vendor_qty'].' pcs <br/>HSN Code :' .$value['HSN_code'].'<br/></td>   
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['part_number'].'</td>
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rm_qty'].'-'.$value['unit'].'</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rm_qty'].' '.$value['unit'].'</td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rm_qty'] * $value['ram_rate'].'</td> 
                 </tr>';
 
@@ -14376,8 +14376,8 @@ public function downloadscrapreturn($id){
                 <tr style="border-left: 1px solid black;border-right: 1px solid black;">
                     <td style="padding-left: 10px;text-align: left;border-right: 1px solid black"  width="50%">
                     <p> 5. Estimated Value of inputs / Partially processed inputs  </p>
-                    <p>'. str_repeat('&nbsp;', 5).'</p>
-                    <p>'. str_repeat('&nbsp;', 5).'</p>
+                    <p>'.$getscrapreturnItemdeatilsForInvoice[0]['estimated_value'].'</p>
+                   
                     </td> 
                     <td style="border-left: 1px solid black;padding-left: 10px;">5</td>
                     <td style="border-left: 1px solid black;padding-left: 10px;"></td>
@@ -14439,7 +14439,7 @@ public function downloadscrapreturn($id){
                 <tr style="border: 1px solid black;">
                     <td width="50%" style="padding: 10px;text-align: left;">
                         <p style="vertical-align: text-top;font-size:12px;color:#000080"><b>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</b></p>
-                        <p>Date:03-November-2023</p>
+                        <p>'.date('d-m-Y').'</p>
                         <p>Place: Mumbai</p>
                        
                         <br/><img src="'.base_url().'assets/images/stmps/supplierpostampsignature.png" width="130" height="100">
