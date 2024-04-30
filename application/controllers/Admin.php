@@ -14425,7 +14425,7 @@ public function downloadscrapreturn($id){
                     <td width="50%" style="padding: 10px;text-align: left;">
                         <p>8. Factory / Place of processing / Manufacturing : '.$getscrapreturnForInvoice['vendor_name'].'</p>
                         <p>'.$getscrapreturnForInvoice['ven_address'].'</p>
-                        <p style="style="color:#206a9b">'.$getscrapreturnForInvoice['ven_GSTIN'].'</p>
+                        <p style="color:#206a9b">'.$getscrapreturnForInvoice['ven_GSTIN'].'</p>
                     </td> 
 
                     <td style="border-left: 1px solid black;padding: 10px;" width="50%" valign="top">
