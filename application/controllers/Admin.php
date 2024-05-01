@@ -14221,7 +14221,10 @@ public function downlaoddebitnote($id){
     $ii =1;
     $subtotal = 0;
 
-    $raw_material_cost = 0;
+    $paid_amount =0;
+    $total_paid_amount = 0;
+    $total_debit_amount =0;
+    $total_amount =0;
     $cgst_tax_rate = 0;
     $sgst_tax_rate = 0;
     $igst_tax_rate = 0;
@@ -14248,6 +14251,9 @@ public function downlaoddebitnote($id){
             $net_weigth ='';
         }
 
+        $paid_amount = $value['rate'] * $value['ok_qty'];
+        $total_paid_amount += $value['rate'] * $value['ok_qty'];
+        $total_debit_amount +=$value['debit_amount'];
 
         $CartItem .= '
                 <tr style="border-left: 1px solid black;border-right: 1px solid black;">
@@ -14258,36 +14264,39 @@ public function downlaoddebitnote($id){
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['less_quantity'].' pcs</td> 
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rejected_quantity'].' pcs</td>    
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rate'].'</td>    
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.number_format($value['debit_amount'],2).'</td>    
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rate'] * $value['ok_qty'].'</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.round($value['debit_amount'],2).'</td>    
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$paid_amount.'</td>
                 </tr>';
-                $subtotal+=$value['value'];
-                $raw_material_cost +=$value['row_material_cost'];
-                $grand_total +=$value['grand_total'];
+          
+
+              
                 $gst_rate = $value['gst_rate'];
 
                 if($value['gst_rate']=='CGST_SGST'){
                     $cgst_tax_rate = 9;
                     $sgst_tax_rate = 9;
 
-                    $cgst_tax_value = $value['gst_value']/2;
-                    $sgst_tax_value = $value['gst_value']/2;
+                    $cgst_tax_value = $value['CGST_value'];
+                    $sgst_tax_value = $value['SGST_value'];
 
                 }else if($value['gst_rate']=='CGST_SGST_6'){
                     $cgst_tax_rate = 6;
                     $sgst_tax_rate = 6;
 
-                    $cgst_tax_value = $value['gst_value']/2;
-                    $sgst_tax_value = $value['gst_value']/2;
+                    $cgst_tax_value = $value['CGST_value'];
+                    $sgst_tax_value = $value['SGST_value'];
 
                 }else if($value['gst_rate']=='IGST'){
                     $igst_tax_rate = 18;
-                    $igst_tax_value = $value['gst_value'];
+                    $igst_tax_value = $value['IGST_value'];
                 }else if($value['gst_rate']=='IGST_12'){
                     $igst_tax_rate = 12;
-                    $igst_tax_value = $value['gst_value'];
+                    $igst_tax_value = $value['IGST_value'];
 
                 }
+
+                $total_amount +=   $sgst_tax_value+$cgst_tax_value+$igst_tax_value+$paid_amount;
+                $total_amount_debit +=   $sgst_tax_value+$cgst_tax_value+$igst_tax_value+$value['debit_amount'];
 
             $ii++;       
     }
@@ -14297,20 +14306,25 @@ public function downlaoddebitnote($id){
 
      if($gst_rate=='CGST_SGST' || $gst_rate=='CGST_SGST_6'){
         $tax_value = '<tr style="border: 1px solid black;">               
-            <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;"><b>CGST @ '.$cgst_tax_rate.'% </b></td>    
-                <td style="border: 1px solid black;padding: 5px;">'.$cgst_tax_value.'</td>
+            <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;">CGST @ '.$cgst_tax_rate.'% </td>    
+                <td style="border: 1px solid black;padding: 5px;">'.round($cgst_tax_value,2).'</td>
             </tr>
 
             <tr style="border: 1px solid black;">
-                <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;"><b>SGST @ '.$sgst_tax_rate.'% </b></td>    
-                <td style="border: 1px solid black;padding: 5px;">'.$sgst_tax_value.'</td>
+                <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;">SGST @ '.$sgst_tax_rate.'% </td>    
+                <td style="border: 1px solid black;padding: 5px;">'.round($sgst_tax_value,2).'</td>
             </tr>';
+
+            $total_tax_rate = 'CGST @ '.$cgst_tax_rate.'% = '.round($cgst_tax_value,2).'<br/> SGST @ '.$sgst_tax_rate.'% = '.round($sgst_tax_value,2);
+
      }else{
         $tax_value = '
             <tr style="border: 1px solid black;">
-                <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;"><b>IGST @ '.$igst_tax_rate.'%</b></td>    
-                <td style="border: 1px solid black;padding: 5px;">'.$igst_tax_value.'</td>
+                <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;">IGST @ '.$igst_tax_rate.'%</td>    
+                <td style="border: 1px solid black;padding: 5px;">'.round($igst_tax_value,2).'</td>
             </tr>';
+
+        $total_tax_rate = 'IGST @ '.$igst_tax_rate.'%'.round($igst_tax_value,2);
      }
 
   
@@ -14392,32 +14406,37 @@ public function downlaoddebitnote($id){
                 '.$CartItem.' 
 
                 <tr style="border: 1px solid black;">               
-                    <td colspan="8"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>Total </b></td>    
-                    <td style="border: 1px solid black;padding-left: 10px;">'. $raw_material_cost.'</td>
+                    <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;;padding: 5px;;font-family:cambria;font-size:14px;"><b>Total </b></td>    
+                    <td style="border: 1px solid black;padding: 5px;"></td>
                 </tr>
 
              '. $tax_value.'
             
 
              <tr style="border: 1px solid black;">
-                    <td colspan="8"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;">Total amount</td>    
-                    <td style="border: 1px solid black;padding-left: 10px;">'.$grand_total.'/-'.'</td>
+                    <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;"><b>Total amount</b></td>    
+                    <td style="border: 1px solid black;padding: 5px;">'.round($total_amount,2).'</td>
               </tr>
 
               <tr style="border: 1px solid black;">
-                <td colspan="8"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;">Less TDS</td>    
-                <td style="border: 1px solid black;padding-left: 10px;">'.$grand_total.'/-'.'</td>
+                <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;">Less TDS</td>    
+                <td style="border: 1px solid black;padding: 5px;">'.$getDebitnotedetailsforInvoice['tds_amount'].'</td>
               </tr>
 
               <tr style="border: 1px solid black;">
-                <td colspan="8"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>Cheque Amt</b></td>    
-                <td style="border: 1px solid black;padding-left: 10px;">'.$grand_total.'/-'.'</td>
+                <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;">Cheque Amt</td>    
+                <td style="border: 1px solid black;padding: 5px">'.$getDebitnotedetailsforInvoice['chq_amount'].'</td>
               </tr>
 
               <tr style="border: 1px solid black;">
-                <td colspan="8"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>Grand Total</b></td>    
-                 <td style="border: 1px solid black;padding-left: 10px;">'.$grand_total.'/-'.'</td>
+                <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;">We Have Debit Amt = '.round($total_debit_amount,2).' <br/> '.$total_tax_rate.'<br>________________<br/>'.round($total_amount_debit,2).'</td>    
+                <td style="border: 1px solid black;padding: 5px">'.$getDebitnotedetailsforInvoice['tds_amount'].'<br/><br/>'.round($total_amount_debit,2).'<br/>_____________________<br/>'.$getDebitnotedetailsforInvoice['tds_amount']+round($total_amount_debit,2).'</td>
               </tr>
+
+                <tr style="border: 1px solid black;">
+                <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;"><b>Grand Total</b></td>    
+                <td style="border: 1px solid black;padding: 5px">'.round($getDebitnotedetailsforInvoice['grand_total_main'],2).'</td>
+                </tr>
           
             </table>
 
