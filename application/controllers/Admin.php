@@ -14215,8 +14215,6 @@ public function downlaoddebitnote($id){
     $getDebitnotedetailsforInvoice = $this->admin_model->getDebitnotedetailsforInvoice($id);
     $getDebitnoteitemdeatilsForInvoice = $this->admin_model->getDebitnoteitemdeatilsForInvoice($id);
 
-
-
     $CartItem = "";
     $supplierItem = "";
     $i =1;
@@ -14254,13 +14252,13 @@ public function downlaoddebitnote($id){
         $CartItem .= '
                 <tr style="border-left: 1px solid black;border-right: 1px solid black;">
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['type_of_raw_material'].'<br/>'.$value['part_number'].'</td>
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['invoice_no'].'<br/>'.$value['invoice_date'].'</br></td> 
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['invoice_qty'].'<br/> Recd Qty '.$value['received_quantity'].'</td>
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['ok_qty'].'</td>
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['less_quantity'].'</td> 
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rejected_quantity'].'</td>    
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['invoice_no'].'<br/>'.date('d-m-Y',strtotime($value['invoice_date'])).'</br></td> 
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['invoice_qty'].' pcs<br/> Recd Qty '.$value['received_quantity'].' pcs</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['ok_qty'].' pcs</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['less_quantity'].' pcs</td> 
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rejected_quantity'].' pcs</td>    
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rate'].'</td>    
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['debit_amount'].'</td>    
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.number_format($value['debit_amount'],2).'</td>    
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top"></td>
                 </tr>';
                 $subtotal+=$value['value'];
@@ -14299,20 +14297,19 @@ public function downlaoddebitnote($id){
 
      if($gst_rate=='CGST_SGST' || $gst_rate=='CGST_SGST_6'){
         $tax_value = '<tr style="border: 1px solid black;">               
-            <td colspan="8"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>(+) '.$cgst_tax_rate.'% CGST </b></td>    
-                <td style="border: 1px solid black;padding-left: 10px;">'.$cgst_tax_value.'</td>
+            <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;"><b>CGST @ '.$cgst_tax_rate.'% </b></td>    
+                <td style="border: 1px solid black;padding: 5px;">'.$cgst_tax_value.'</td>
             </tr>
 
             <tr style="border: 1px solid black;">
-
-                <td colspan="8"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>(+) '.$sgst_tax_rate.'% SGST </b></td>    
-                <td style="border: 1px solid black;padding-left: 10px;">'.$sgst_tax_value.'</td>
+                <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;"><b>SGST @ '.$sgst_tax_rate.'% </b></td>    
+                <td style="border: 1px solid black;padding: 5px;">'.$sgst_tax_value.'</td>
             </tr>';
      }else{
         $tax_value = '
             <tr style="border: 1px solid black;">
-                <td colspan="8"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>(+) '.$igst_tax_rate.'% IGST </b></td>    
-                <td style="border: 1px solid black;padding-left: 10px;">'.$igst_tax_value.'</td>
+                <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;"><b>IGST @ '.$igst_tax_rate.'%</b></td>    
+                <td style="border: 1px solid black;padding: 5px;">'.$igst_tax_value.'</td>
             </tr>';
      }
 
@@ -14447,7 +14444,7 @@ public function downlaoddebitnote($id){
             </table>';
 
             // <p>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</p>
-    $invoice_name =  $getReworkrejectionforInvoice['rrchallaon'].' - '.$getReworkrejectionforInvoice['supplier_name'].'.pdf';
+    $invoice_name =  $getDebitnotedetailsforInvoice['debit_note_number'].' - '.$getDebitnotedetailsforInvoice['supplier_name'].'.pdf';
     $mpdf->WriteHTML($html);
     $mpdf->Output($invoice_name,'D'); // opens in browser
 
