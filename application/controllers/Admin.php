@@ -12158,7 +12158,7 @@ public function downloadvendorpo($id){
         $supplierItem .= '
             <tr style="border-left: 1px solid black;border-right: 1px solid black;">
                 <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding-left: 15px;" valign="top"></td>
-                <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding-left: 15px;" valign="top">'.$i.'.'.$value['type_of_raw_material'].' - '.$value['order_oty'].' '.$value['unit'].' * '.$value['rate'].' = '.$value['value'].'</td> 
+                <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding-left: 15px;" valign="top">'.$i.') '.$value['type_of_raw_material'].' - '.$value['order_oty'].' '.$value['unit'].' * '.$value['rate'].' = '.$value['value'].'</td> 
                 <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding-left: 10px;" valign="top"></td>
                 <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding-left: 10px;" valign="top"></td>
                 <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding-left: 10px;" valign="top"></td> 
