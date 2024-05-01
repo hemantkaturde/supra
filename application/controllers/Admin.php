@@ -14253,15 +14253,15 @@ public function downlaoddebitnote($id){
 
         $CartItem .= '
                 <tr style="border-left: 1px solid black;border-right: 1px solid black;">
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$ii.'</td>
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['type_of_raw_material'].'</br></td> 
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['part_number'].'</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['type_of_raw_material'].'<br/>'.$value['part_number'].'</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['invoice_no'].'<br/>'.$value['invoice_date'].'</br></td> 
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['invoice_qty'].'<br/> Recd Qty '.$value['received_quantity'].'</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['ok_qty'].'</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['less_quantity'].'</td> 
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rejected_quantity'].'</td>    
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rate'].'</td>    
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['debit_amount'].'</td>    
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top"></td>
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rejection_rework_reason'].'</td> 
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['qty'].'</td>    
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$net_weigth.'</td>    
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$net_weigth.'</td>    
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['value'].'/-'.'</td>
                 </tr>';
                 $subtotal+=$value['value'];
                 $raw_material_cost +=$value['row_material_cost'];
@@ -14358,9 +14358,9 @@ public function downlaoddebitnote($id){
                     <td style="font-size:13px;" width="50%" valign="top">
                         <div>
                             <p><b></b>'. str_repeat('&nbsp;', 5).'<span style="color:red"></span></p>
-                            <p><b>CHALLAN NO :</b> '.'<span style="color:red">'.$getDebitnotedetailsforInvoice['debit_note_number'].'</span></p>
+                            <p><b>DEBIT NOTE NO :</b> '.'<span style="color:red">'.$getDebitnotedetailsforInvoice['debit_note_number'].'</span></p>
                             <p>&nbsp;</p>
-                            <p><b>CHALLAN DATE :</b> '.date('d-m-Y',strtotime($getDebitnotedetailsforInvoice['debit_note_date'])).'</p>
+                            <p><b>Date :</b> '.date('d-m-Y',strtotime($getDebitnotedetailsforInvoice['debit_note_date'])).'</p>
                             <p>&nbsp;</p>
                         </div>
                     </td>
