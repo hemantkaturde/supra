@@ -12571,7 +12571,7 @@
 		    var dt = $('#view_payment_details').DataTable({
 	            "columnDefs": [ 
 	                 { className: "details-control", "targets": [ 0 ] },
-	                 { "width": "15%", "targets": 0 },
+	                 { "width": "10%", "targets": 0 },
 	                 { "width": "10%", "targets": 1 },
 					 { "width": "10%", "targets": 2 },
 	                 { "width": "10%", "targets": 3 },
