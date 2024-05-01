@@ -14212,10 +14212,11 @@ public function downloadscrapreturn($id){
 
 public function downlaoddebitnote($id){
 
-    $getReworkrejectionforInvoice = $this->admin_model->getReworkrejectionforInvoicesupplier($id);
-    $getReworkRejectionitemdeatilsForInvoice = $this->admin_model->getReworkRejectionitemdeatilsForInvoice($id);
+    $getDebitnotedetailsforInvoice = $this->admin_model->getDebitnotedetailsforInvoice($id);
+    $getDebitnoteitemdeatilsForInvoice = $this->admin_model->getDebitnoteitemdeatilsForInvoice($id);
 
-   
+
+
     $CartItem = "";
     $supplierItem = "";
     $i =1;
@@ -14228,7 +14229,7 @@ public function downlaoddebitnote($id){
     $igst_tax_rate = 0;
     $gst_rate ='';
 
-    $item_count =count($getReworkRejectionitemdeatilsForInvoice);
+    $item_count =count($getDebitnoteitemdeatilsForInvoice);
 
     if($item_count==1){
         $padding_bottom = '200px';
@@ -14241,7 +14242,7 @@ public function downlaoddebitnote($id){
     }
 
     
-    foreach ($getReworkRejectionitemdeatilsForInvoice as $key => $value) {
+    foreach ($getDebitnoteitemdeatilsForInvoice as $key => $value) {
 
         if($value['raw_material_neight_weight']){
             $net_weigth = $value['qty'] * $value['raw_material_neight_weight'];
@@ -14258,6 +14259,7 @@ public function downlaoddebitnote($id){
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top"></td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rejection_rework_reason'].'</td> 
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['qty'].'</td>    
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$net_weigth.'</td>    
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$net_weigth.'</td>    
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['value'].'/-'.'</td>
                 </tr>';
@@ -14292,33 +14294,24 @@ public function downlaoddebitnote($id){
             $ii++;       
     }
 
-    $space = '<tr>
-        <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-        <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-        <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-        <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-        <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-        <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-        <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-        <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-    </tr>';
+  
 
 
      if($gst_rate=='CGST_SGST' || $gst_rate=='CGST_SGST_6'){
         $tax_value = '<tr style="border: 1px solid black;">               
-            <td colspan="7"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>(+) '.$cgst_tax_rate.'% CGST </b></td>    
+            <td colspan="8"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>(+) '.$cgst_tax_rate.'% CGST </b></td>    
                 <td style="border: 1px solid black;padding-left: 10px;">'.$cgst_tax_value.'</td>
             </tr>
 
             <tr style="border: 1px solid black;">
 
-                <td colspan="7"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>(+) '.$sgst_tax_rate.'% SGST </b></td>    
+                <td colspan="8"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>(+) '.$sgst_tax_rate.'% SGST </b></td>    
                 <td style="border: 1px solid black;padding-left: 10px;">'.$sgst_tax_value.'</td>
             </tr>';
      }else{
         $tax_value = '
             <tr style="border: 1px solid black;">
-                <td colspan="7"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>(+) '.$igst_tax_rate.'% IGST </b></td>    
+                <td colspan="8"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>(+) '.$igst_tax_rate.'% IGST </b></td>    
                 <td style="border: 1px solid black;padding-left: 10px;">'.$igst_tax_value.'</td>
             </tr>';
      }
@@ -14326,7 +14319,7 @@ public function downlaoddebitnote($id){
   
     $mpdf = new \Mpdf\Mpdf();
     // $html = $this->load->view('html_to_pdf',[],true);
-    $html = '<table style=" width: 100%;text-align: center;border-collapse: collapse;border: #cccccc 0px solid;font-family:cambria;">
+    $html = '<table style=" width: 100%;text-align: center;border-collapse: collapse;font-family:cambria;">
                 <tr>
                   <td rowspan="2"><img src="'.base_url().'assets/images/supra_logo_1.jpg" width="80" height="80"></td>
                   <td style="color:#000080"><h2>SUPRA QUALITY EXPORTS (I) PVT. LTD</h2></td>
@@ -14341,81 +14334,92 @@ public function downlaoddebitnote($id){
                 </tr>
             </table>
             <hr>
-            <table style="width: 100%;text-align: left;border-collapse: collapse;border: #ccc 0px solid;font-family:cambria;">
-                    <tr>
-                        <td width="60%">
-                          <p><b>Office:</b> 229 to 232, Bharat Industrial Estate,
-                          <p> L.B.S. Marg, Bhandup West, Mumbai – 400078. INDIA.</b>
-                          <p>Tel: +91 22 66959505 / +91 22 66600196 </p>
-                          <p>+91 22 62390222 / +91 22 46061497 / +91 22 35115396 </p>
-                          <p style="color:#206a9b"><b>GSTIN : 27AAJCS7869M1ZB </b></p>
-                        </td>
-                        <td width="40%">
-                            <p><b>Email:</b></p> 
-                            <p style="color:#206a9b">purchase@supraexports.in</p>
-                            <p style="color:#206a9b">purchase1@supraexports.in</p>
-                            <p style="color:#206a9b">purchase2@supraexports.in</p>
-                        </td>  
-                    </tr>
-            </table>
-
-            <table style=" width: 100%;text-align: center;border-collapse: collapse;border: #ccc 0px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;">
+            <table style=" width: 100%;text-align: center;margin-top:10px;margin-bottom:10px;font-family:cambria;">
                     <tr>
                         <td style="color:red;font-size:15px">
-                          <u><p><h3>R R CHALLAN</h3></p>
+                          <u><p><h3>DEBIT NOTE</h3></p>
                         </td>
                     </tr>
             </table>
 
-            <table style=" width: 100%;text-align: left;border-collapse: collapse;font-family:cambria;font-size:13px;border: #ccc 1px solid">
-                <tr style="border: 1px solid black;">
-                    <td width="50%" style="padding-left: 15px;">
+            <table style=" width: 100%;text-align: left;border-collapse: collapse;font-family:cambria;font-size:13px;">
+                <tr>
+                    <td width="50%">
                         <div>
                             <p>To,</p>
-                            <p><b>'.$getReworkrejectionforInvoice['supplier_name'].'</b></p>
-                            <p>'.$getReworkrejectionforInvoice['supplier_addess'].'</p>
-                            <p><b>Contact No:</b> '.$getReworkrejectionforInvoice['mobile'].' / '.$getReworkrejectionforInvoice['suplier_landline'].'</p>
-                            <p><b>Contact Person:</b> '.$getReworkrejectionforInvoice['sup_conatct'].'</p>
-                            <p><b>Email:</b> '.$getReworkrejectionforInvoice['sup_email'].'</p>
-                            <p style="color:red">GSTIN:'.$getReworkrejectionforInvoice['sup_GSTIN'].'</p>
+                            <p><b>'.$getDebitnotedetailsforInvoice['supplier_name'].'</b></p>
+                            <p>'.$getDebitnotedetailsforInvoice['supplier_addess'].'</p>
+                            <p><b>Contact No:</b> '.$getDebitnotedetailsforInvoice['mobile'].' / '.$getDebitnotedetailsforInvoice['suplier_landline'].'</p>
+                            <p><b>Contact Person:</b> '.$getDebitnotedetailsforInvoice['sup_conatct'].'</p>
+                            <p><b>Email:</b> '.$getDebitnotedetailsforInvoice['sup_email'].'</p>
+                            <p style="color:red">GSTIN:'.$getDebitnotedetailsforInvoice['sup_GSTIN'].'</p>
                         <div>    
                     </td> 
-                    <td style="border-left: 1px solid black;padding-left: 15px;font-size:13px;" width="50%" valign="top">
+                    <td style="font-size:13px;" width="50%" valign="top">
                         <div>
                             <p><b></b>'. str_repeat('&nbsp;', 5).'<span style="color:red"></span></p>
-                            <p><b>CHALLAN NO :</b> '.'<span style="color:red">'.$getReworkrejectionforInvoice['rrchallaon'].'</span></p>
+                            <p><b>CHALLAN NO :</b> '.'<span style="color:red">'.$getDebitnotedetailsforInvoice['debit_note_number'].'</span></p>
                             <p>&nbsp;</p>
-                            <p><b>CHALLAN DATE :</b> '.date('d-m-Y',strtotime($getReworkrejectionforInvoice['challan_date'])).'</p>
+                            <p><b>CHALLAN DATE :</b> '.date('d-m-Y',strtotime($getDebitnotedetailsforInvoice['debit_note_date'])).'</p>
                             <p>&nbsp;</p>
                         </div>
                     </td>
                 </tr>
             </table>
 
-
-            <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:12px">
-                <tr style="border: 1px solid black;">
-                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>SR.NO.</th>
-                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>F.G. PART DESCRIPTION</th>
-                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>F.G. PART NO.</th>  
-                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>RM TYPE</th> 
-                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>Rejection Reason</th>  
-                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>QTY IN PCS</th>  
-                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>Net Weight In kgs</th>  
-                    <th align="left"  style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>AMOUNT</th>
+            <table style="margin-top:20px;width: 100%;text-align: left;border-collapse: collapse;font-family:cambria;font-size:13px;">
+                <tr>
+                    <td width="50%">
+                        <div>
+                            <p>Dear Sir,</p>
+                            <p><b>Sub: Debit Note</b></p>
+                            <p>With reference to the above subject we have debited your account vide your Inv No. GT-016 Dated 23-Sep-2023. 
+                               The details are as follows: </p>
+                        <div>    
+                    </td>  
                 </tr>
-                '.$CartItem.$space.' 
+            </table>
+
+            <table style="margin-top:10px;width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:12px">
+                <tr style="border: 1px solid black;">
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>Part Description & PartNo</th>
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>Inv No Inv Date</th>  
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>Bill Qty</th> 
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>Ok Qty</th>  
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>Less Qty</th>  
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>Rej Qty</th>  
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>Rate</th>
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>Debit Amt</th>
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>Paid Amt</th>
+                </tr>
+                '.$CartItem.' 
 
                 <tr style="border: 1px solid black;">               
-                <td colspan="7"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>Total Raw Material Cost </b></td>    
-                <td style="border: 1px solid black;padding-left: 10px;">'. $raw_material_cost.'</td>
-            </tr>
+                    <td colspan="8"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>Total </b></td>    
+                    <td style="border: 1px solid black;padding-left: 10px;">'. $raw_material_cost.'</td>
+                </tr>
+
              '. $tax_value.'
             
 
-            <tr style="border: 1px solid black;">
-                    <td colspan="7"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>TOTAL</b></td>    
+             <tr style="border: 1px solid black;">
+                    <td colspan="8"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;">Total amount</td>    
                     <td style="border: 1px solid black;padding-left: 10px;">'.$grand_total.'/-'.'</td>
+              </tr>
+
+              <tr style="border: 1px solid black;">
+                <td colspan="8"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;">Less TDS</td>    
+                <td style="border: 1px solid black;padding-left: 10px;">'.$grand_total.'/-'.'</td>
+              </tr>
+
+              <tr style="border: 1px solid black;">
+                <td colspan="8"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>Cheque Amt</b></td>    
+                <td style="border: 1px solid black;padding-left: 10px;">'.$grand_total.'/-'.'</td>
+              </tr>
+
+              <tr style="border: 1px solid black;">
+                <td colspan="8"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>Grand Total</b></td>    
+                 <td style="border: 1px solid black;padding-left: 10px;">'.$grand_total.'/-'.'</td>
               </tr>
           
             </table>
@@ -14423,32 +14427,21 @@ public function downlaoddebitnote($id){
             <table style=" width: 100%;border-collapse: collapse;border: #ccc 1px solid;font-family:cambria;font-size:12px">
                 <tr style="border: 1px solid black;">
                         <td style="border: 1px solid black;padding-left: 10px;">
-                            <p><b>Remark :</b>'.$getReworkrejectionforInvoice['supplier_remark'].'</p>    
+                            <p><b>Remark :</b>'.$getDebitnotedetailsforInvoice['debit_note_remark'].'</p>    
                     </td>   
                 </tr>
             </table>
 
-            <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:12px">
-                  
-                   <tr style="border: 1px solid black;">
-                        <td style="border: 1px solid black;padding-left: 10px;" width="75%;" valign="top">
-                            <div style="margin-bottom:10px;">
-                                <p><b>Received the above-mentioned goods in good order & condition & 
-                                returned the Duplicate Duty sealed & signed.</b></p>
-                            </div>
-                            <br>
-
-                            <p><b>Dispatched By: </b></p>
-                            <p><b>No.of Bags/ Boxes/ Goni: </b></p>
-                            <p><b>Total Gross Weight: </b></p>
-                            <p><b>Total Net Weight:</b></p>
-                            <p><b>Remark:</b>__________________________________________________________</p><br>
-                            <p>____________________________________________________________________</p>
-                        </td>
-                        <td style="border: 1px solid black;text-align: center;" width="25%" valign="top">
+            <table style=" width: 100%;text-align: left;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:12px">
+                   <tr >
+                        <td style="padding-left: 10px;" width="75%;" valign="top">
+                            <p>Thanking You,</p>
+                            <p>Yours truly</p>
                             <p style="vertical-align: text-top;font-size:12px;color:#206a9b"><b>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</b></p>
                             <br/><img src="'.base_url().'assets/images/stmps/rr_challan.png" width="130" height="100">
                             <p style="vertical-align: text-top;font-size:10px;color:#206a9b"><b>AUTHORIZED SIGNATORY</b></p>
+                        </td>
+                        <td style="text-align: center;" width="25%" valign="top">
                         </td> 
                 </tr>
             </table>';

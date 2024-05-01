@@ -11383,6 +11383,49 @@ public function getscrapreturnItemdeatilsForInvoice($id){
     return $fetch_result;
 }
 
+
+public function getDebitnotedetailsforInvoice($id){
+    $this->db->select(TBL_DEBIT_NOTE.'.*,'.
+                     TBL_SUPPLIER.'.supplier_name,'
+                    .TBL_SUPPLIER.'.address as supplier_addess,'
+                    .TBL_SUPPLIER.'.landline as suplier_landline,'
+                    .TBL_SUPPLIER.'.contact_person as sup_conatct,'
+                    .TBL_SUPPLIER.'.email as sup_email,'
+                    .TBL_SUPPLIER.'.GSTIN as sup_GSTIN,'
+                    .TBL_SUPPLIER.'.mobile as sup_mobile,'
+                    .TBL_SUPPLIER_PO_MASTER.'.id  as supplier_po_id,'
+                    .TBL_SUPPLIER_PO_MASTER.'.po_number as po_number,'
+                    .TBL_SUPPLIER_PO_MASTER.'.date as date,'
+                    .TBL_SUPPLIER_PO_MASTER.'.quatation_date as quatation_date,'
+                    .TBL_SUPPLIER_PO_MASTER.'.quatation_ref_no as quatation_ref_no,'
+                    .TBL_SUPPLIER_PO_MASTER.'.delivery_date as delivery_date,'
+                    .TBL_SUPPLIER_PO_MASTER.'.work_order as work_order,'
+                    .TBL_DEBIT_NOTE.'.debit_note_number as debit_note_number,'
+                    .TBL_DEBIT_NOTE.'.remark as debit_note_remark,'
+        
+        );
+        $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_DEBIT_NOTE.'.supplier_po');
+        $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_DEBIT_NOTE.'.supplier_id');
+        $this->db->where(TBL_DEBIT_NOTE.'.debit_id', $id);
+        $query = $this->db->get(TBL_DEBIT_NOTE);
+        $fetch_result = $query->row_array();
+        return $fetch_result;
+}
+
+
+public function getDebitnoteitemdeatilsForInvoice($id){
+
+    // $this->db->select('*,'.TBL_RAWMATERIAL.'.gross_weight as rmgrossweight');
+    $this->db->select('*,'.TBL_RAWMATERIAL.'.net_weight as raw_material_neight_weight');
+    $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_DEBIT_NOTE_ITEM.'.part_number');
+    $this->db->where(TBL_DEBIT_NOTE_ITEM.'.debit_note_id', $id);
+    $query = $this->db->get(TBL_DEBIT_NOTE_ITEM);
+    $fetch_result = $query->result_array();
+    return $fetch_result;
+}
+
+
+
 }
 
 
