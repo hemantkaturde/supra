@@ -12272,7 +12272,7 @@ public function downloadvendorpo($id){
                 </tr>
                 <tr style="border: 1px solid black;">
                     <td style="border: 1px solid black;padding-left: 10px;">'.date('d-m-Y',strtotime($getvendordeatilsForInvoice['ven_delivery_date'])).'</td>    
-                    <td style="border: 1px solid black;padding-left: 10px;">'.$getvendordeatilsForInvoice['work_order'].'</td>
+                    <td style="border: 1px solid black;padding-left: 10px;">'.$getvendordeatilsForInvoice['ven_work_order'].'</td>
                 </tr>
             </table>
 
@@ -12477,7 +12477,7 @@ public function downloadvendorpowithoutsupplier($id){
                 </tr>
                 <tr style="border: 1px solid black;">
                     <td style="border: 1px solid black;padding-left: 10px;">'.date('d-m-Y',strtotime($getvendordeatilsForInvoice['ven_delivery_date'])).'</td>    
-                    <td style="border: 1px solid black;padding-left: 10px;">'.$getvendordeatilsForInvoice['work_order'].'</td>
+                    <td style="border: 1px solid black;padding-left: 10px;">'.$getvendordeatilsForInvoice['ven_work_order'].'</td>
                 </tr>
             </table>
 

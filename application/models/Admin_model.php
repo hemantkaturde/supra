@@ -8527,6 +8527,7 @@ class Admin_model extends CI_Model
                             .TBL_FINISHED_GOODS.'.part_number,'
                             .TBL_FINISHED_GOODS.'.name as description,'
                             .TBL_RAWMATERIAL.'.type_of_raw_material as tp,'
+                            .TBL_RAWMATERIAL.'.type_of_raw_material as tppp,'
                             .TBL_FINISHED_GOODS.'.sac as sac,'
                             .TBL_FINISHED_GOODS.'.hsn_code as HSN_code,'
                             // .TBL_FINISHED_GOODS.'.sitting_size as sitting_size,'
@@ -8539,8 +8540,7 @@ class Admin_model extends CI_Model
                             .TBL_REWORK_REJECTION_ITEM.'.gst_value,'
                             .TBL_REWORK_REJECTION_ITEM.'.grand_total,'
                             .TBL_REWORK_REJECTION_ITEM.'.item_remark,'
-                            .TBL_RAWMATERIAL.'.type_of_raw_material as tppp,'.
-                            TBL_REWORK_REJECTION_ITEM.'.unit as unit,'
+                            .TBL_REWORK_REJECTION_ITEM.'.unit as unit,'
                             
 
                         );
@@ -8642,6 +8642,7 @@ class Admin_model extends CI_Model
             .TBL_REWORK_REJECTION_ITEM.'.gst_value,'
             .TBL_REWORK_REJECTION_ITEM.'.grand_total,'
             .TBL_REWORK_REJECTION_ITEM.'.item_remark,'
+            .TBL_REWORK_REJECTION_ITEM.'.unit,'
             // .TBL_RAWMATERIAL.'.type_of_raw_material as tppp,'
 
         );
