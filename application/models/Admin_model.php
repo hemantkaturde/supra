@@ -11487,6 +11487,8 @@ public function getblastingdetailsforinvoice($id){
                      .TBL_OMS_CHALLAN.'.vendor_po_date as vendor_po_date,'
                      .TBL_OMS_CHALLAN.'.date as date,'
                      .TBL_OMS_CHALLAN.'.remark as remarks,'
+                     .TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_number,'
+                     .TBL_VENDOR_PO_MASTER.'.date as v_po_date,'
                       );
 
     $this->db->where(TBL_OMS_CHALLAN.'.id', $id);

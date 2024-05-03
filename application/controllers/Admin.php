@@ -14972,7 +14972,255 @@ public function downloadomsblasting($id){
 }
 
 
-public function downloadomsmachinary(){
+public function downloadomsmachinary($id){
+
+    $getblastingdetailsforinvoice = $this->admin_model->getblastingdetailsforinvoice($id);
+    $getblastingItemdeatilsForInvoice = $this->admin_model->getblastingItemdeatilsForInvoice($id);
+
+    $mpdf = new \Mpdf\Mpdf();
+    // $html = $this->load->view('html_to_pdf',[],true);
+    $html = '<table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:13px">
+                <tr style="border: 1px solid black;" valign="top">
+                    <td width="50%" style="padding: 10px;text-align: left;">
+                        <p><h3 style="color:#000080">SUPRA QUALITY EXPORTS INDIA PVT LTD </h3></p>
+                        <p>229 to 232, Bharat Industrial Estate,</p>
+                        <p>L.B.S. Marg, Bhandup West, Mumbai – 400078. INDIA.</p>
+                        <p></p>
+                        <p></p>
+                        <p><span style="color:#000080">GSTIN : 27AAJCS7869M1ZB</span></p>
+                    </td> 
+
+                    <td style="border-left: 1px solid black;padding: 10px;" width="50%" valign="top">
+                          <p style="text-align: center"><h4>DELIVERY CHALLAN</h4></p>
+                          <p style="text-align: left;"> Movement of inputs or partially processed goods
+                            for job work under Rule 55 ofthe Central Goods
+                            ‘8; Service Tax Rules.20l7. from one factory to
+                            another factory for further processing / operation.
+                          </p>
+                    </td>
+                </tr>
+           
+                <tr style="border: 1px solid black;padding: 10px;">
+                    <td width="50%" style="padding: 10px;text-align: left;">
+                       Sr. No. : <span style="color:red">'.$getblastingdetailsforinvoice['blasting_id'].'-B '.date('d-m-Y',strtotime($getblastingdetailsforinvoice['date'])).'</span>
+                    </td> 
+
+                    <td style="border-left: 1px solid black;padding: 10px;" width="50%" valign="top">
+                       <input type="checkbox" style="width: 100px;height: 100px;zoom:5;"> Original  <input type="checkbox"> Duplicate  <input type="checkbox"> Triplicate
+                    </td>
+                </tr>
+
+                <tr style="border: 1px solid black;">
+                    <td width="50%" style="padding: 10px;text-align: left;valign="top"">
+                        <p>'. str_repeat('&nbsp;', 5).'</p>
+                        <p>'. str_repeat('&nbsp;', 5).'</p>
+                        <p>'. str_repeat('&nbsp;', 5).'</p>
+                    </td> 
+
+                    <td style="border-left: 1px solid black;padding: 10px;" width="50%" valign="top">
+                        <p>Part-II </p>
+                        <p>to be filled by the processing factory in original and duplicate challans. </p>
+                    </td>
+                </tr>
+
+                <tr style="border: 1px solid black;">
+                    <td width="50%" style="padding: 10px;text-align: left;">
+                         <p>1. Description </p>
+                         <p>'.$getblastingItemdeatilsForInvoice[0]['type_of_raw_material'].'</p>
+                    </td> 
+
+                    <td style="border-left: 1px solid black;padding: 10px;" width="50%" valign="top">
+                        <p>1. Details of type,qty, date & time of processing done and Return of processed goods to parent factory </p>
+                    </td>
+                </tr>
+            </table>
+
+            <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:13px;">
+                <tr style="border-left: 1px solid black;border-right: 1px solid black;border-bottom: 1px solid black;">
+                    <td style="text-align:left;padding: 10px;">'.str_repeat('&nbsp;', 5).'</td> 
+                    <td style="border-left: 1px solid black;padding:10px;" width="10%">'.str_repeat('&nbsp;', 5).'</td>
+                    <td style="border-left: 1px solid black;padding:10px;" width="10%">'.str_repeat('&nbsp;', 5).'</td>
+                    <td style="border-left: 1px solid black;padding:10px;" width="10%">'.str_repeat('&nbsp;', 5).'</td>
+                    <td style="border-left: 1px solid black;padding:10px;" width="10%">'.str_repeat('&nbsp;', 5).'</td>
+                    <td style="border-left: 1px solid black;padding:10px;" width="50%">'.str_repeat('&nbsp;', 5).'</td>
+                </tr>
+            </table>
+
+
+            <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:13px;">
+                
+                <tr style="border-left: 1px solid black;border-right: 1px solid black;border-bottom: 1px solid black;">
+                    <td style="text-align:left;padding: 10px;"          width="50%">2. Identification marks & number if any</td> 
+                    <td style="border-left: 1px solid black;padding:10px;">Size / Type</td>
+                    <td style="border-left: 1px solid black;padding: 10px;" >Quantity</td>
+                    <td style="border-left: 1px solid black;padding: 10px;" >Date</td>
+                    <td style="border-left: 1px solid black;padding: 10px;" >Time</td>
+                </tr>
+
+                <tr style="border-left: 1px solid black;border-right: 1px solid black;">
+                    <td style="padding-left: 10px;text-align: left;"  width="50%">
+                       <p> 3. Quantity (Nos. / Weight / Metre /Litre) </p>
+                     </td> 
+                    <td style="border-left: 1px solid black;padding-left: 10px;">1</td>
+                    <td style="border-left: 1px solid black;padding-left: 10px;"></td>
+                    <td style="border-left: 1px solid black;padding-left: 10px;"></td>
+                    <td style="border-left: 1px solid black;padding-left: 10px;"></td>
+                </tr>
+
+
+                <tr style="border-left: 1px solid black;border-right: 1px solid black;">
+                    <td style="padding-left: 10px;text-align: left;"  width="50%">
+                       <p> Gross Weight: '.$getblastingItemdeatilsForInvoice[0]['gross_weight_oms'].' kgs </p>
+                     </td> 
+                    <td style="border-left: 1px solid black;padding-left: 10px;"></td>
+                    <td style="border-left: 1px solid black;padding-left: 10px;"></td>
+                    <td style="border-left: 1px solid black;padding-left: 10px;"></td>
+                    <td style="border-left: 1px solid black;padding-left: 10px;"></td>
+                </tr>
+
+
+                <tr style="border-left: 1px solid black;border-right: 1px solid black;">
+                    <td style="padding-left: 10px;text-align: left;"  width="50%">
+                      <p> Net Weight:   '.$getblastingItemdeatilsForInvoice[0]['net_weight_oms'].' kgs </p>
+                    </td> 
+                    <td style="border-left: 1px solid black;padding-left: 10px;">2</td>
+                    <td style="border-left: 1px solid black;padding-left: 10px;"></td>
+                    <td style="border-left: 1px solid black;padding-left: 10px;"></td>
+                    <td style="border-left: 1px solid black;padding-left: 10px;"></td>
+                </tr>
+
+
+                <tr style="border-left: 1px solid black;border-right: 1px solid black;">
+                    <td style="padding-left: 10px;text-align: left;"  width="50%">
+                    <p> Quantity:   '.$getblastingItemdeatilsForInvoice[0]['qty'].' Pcs</p>
+                    </td> 
+                    <td style="border-left: 1px solid black;padding-left: 10px;"></td>
+                    <td style="border-left: 1px solid black;padding-left: 10px;"></td>
+                    <td style="border-left: 1px solid black;padding-left: 10px;"></td>
+                    <td style="border-left: 1px solid black;padding-left: 10px;"></td>
+                </tr>
+
+
+                <tr style="border-left: 1px solid black;border-right: 1px solid black;">
+                        <td style="text-align: left;border-right: 1px solid black;border-bottom: 1px solid black"  width="50%">
+                         <p>'.str_repeat('&nbsp;', 1).' No. of Bags:  '.$getblastingItemdeatilsForInvoice[0]['no_of_bags'].' Bags</p>
+                        </td> 
+                        <hr style="margin-left: 10px;"></hr>
+                        <td style="border-left: 1px solid black;padding-left: 10px;">3</td>
+                        <td style="border-left: 1px solid black;padding-left: 10px;"></td>
+                        <td style="border-left: 1px solid black;padding-left: 10px;"></td>
+                        <td style="border-left: 1px solid black;padding-left: 10px;"></td>
+                </tr>
+
+
+                <tr style="border-left: 1px solid black;border-right: 1px solid black;">
+                    <td style="text-align: left;border-right: 1px solid black;border-bottom: 1px solid black"  width="50%">
+                       <p>'.str_repeat('&nbsp;', 1).' 4. HSN NO: '.$getblastingItemdeatilsForInvoice[0]['hsn_code'].'  </p>
+                    </td> 
+                    <hr style="margin-left: 10px;"></hr>
+                    <td style="border-left: 1px solid black;padding-left: 10px;">4</td>
+                    <td style="border-left: 1px solid black;padding-left: 10px;"></td>
+                    <td style="border-left: 1px solid black;padding-left: 10px;"></td>
+                    <td style="border-left: 1px solid black;padding-left: 10px;"></td>
+                </tr>
+
+
+                <tr style="border-left: 1px solid black;border-right: 1px solid black;">
+                    <td style="padding-left: 10px;text-align: left;border-right: 1px solid black"  width="50%">
+                    <p> 5. Estimated Value of inputs / Partially processed inputs  </p>
+                    <p>'.$getblastingItemdeatilsForInvoice[0]['calculation'].'</p>
+                   
+                    </td> 
+                    <td style="border-left: 1px solid black;padding-left: 10px;">5</td>
+                    <td style="border-left: 1px solid black;padding-left: 10px;"></td>
+                    <td style="border-left: 1px solid black;padding-left: 10px;"></td>
+                    <td style="border-left: 1px solid black;padding-left: 10px;"></td>
+                </tr>
+
+
+                <tr style="border-left: 1px solid black;border-right: 1px solid black;">
+                    <td style="padding-left: 10px;text-align: left;border-right: 1px solid black"  width="50%">
+                    <p>  </p>
+                    </td> 
+                    <td style="border-left: 1px solid black;padding-left: 10px;">6</td>
+                    <td style="border-left: 1px solid black;padding-left: 10px;"></td>
+                    <td style="border-left: 1px solid black;padding-left: 10px;"></td>
+                    <td style="border-left: 1px solid black;padding-left: 10px;"></td>
+                </tr>
+            </table>
+            
+            <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:13px;">
+
+                <tr style="border: 1px solid black;">
+                    <td width="50%" style="padding: 10px;text-align: left;">
+                        <p>6.Date & Time of Issue : '.date('d-m-Y',strtotime($getblastingdetailsforinvoice['date'])).'</p>
+                    </td> 
+
+                    <td style="border-left: 1px solid black;padding: 10px;" width="50%" valign="top">
+                        <p>2. Nature of Proc. / Manufacturing done</p>
+                    </td>
+                </tr>
+
+                <tr style="border: 1px solid black;">
+                    <td width="50%" style="padding: 10px;text-align: left;">
+                        <p>7. Nature of processing:</p>
+                        <p>'.$getblastingItemdeatilsForInvoice[0]['name'].'  Part Number - '.$getblastingItemdeatilsForInvoice[0]['part_number'].'</p>
+                    </td> 
+
+                    <td style="border-left: 1px solid black;padding-left: 10px;" width="50%" valign="top">
+                        <p>3. Qty of waste material / rejection returned to the factory &</p>
+                    </td>
+                </tr>
+
+
+                <tr style="border: 1px solid black;">
+                <td width="50%" style="padding: 10px;text-align: left;">
+                    <p>Against P.O.No: '.$getblastingdetailsforinvoice['vendor_po_number'].' dated '.date('d-m-Y',strtotime($getblastingdetailsforinvoice['v_po_date'])).'</p>
+                </td> 
+
+                <td style="border-left: 1px solid black;padding-left: 10px;" width="50%" valign="top">
+                    <p></p>
+                </td>
+            </tr>
+
+                <tr style="border: 1px solid black;">
+                    <td width="50%" style="padding: 10px;text-align: left;">
+                        <p>8. Factory / Place of processing / Manufacturing : '.$getblastingdetailsforinvoice['vendor_name'].' </p>
+                        <p>'.$getblastingdetailsforinvoice['ven_address'].'</p>
+                        <p style="color:#000080">GSTIN : '.$getblastingdetailsforinvoice['ven_GSTIN'].'</p>
+                        <p>'. str_repeat('&nbsp;', 5).'</p>
+                    </td> 
+
+                    <td style="border-left: 1px solid black;padding: 10px;" width="50%" valign="top">
+                        <p>4. Name & Address of the Processor:</p>
+                        <p>'. str_repeat('&nbsp;', 5).'</p>
+                    </td>
+                </tr>
+
+                
+                <tr style="border: 1px solid black;">
+                    <td width="50%" style="padding: 10px;text-align: left;">
+                        <p style="vertical-align: text-top;font-size:12px;color:#000080"><b>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</b></p>
+                        <p>'.date('d-m-Y').'</p>
+                        <p>Place: Mumbai</p>
+                       
+                        <br/><img src="'.base_url().'assets/images/stmps/supplierpostampsignature.png" width="130" height="100">
+                        <p style="vertical-align: text-top;font-size:10px;color:#000080;text-align: right;"><b>AUTHORIZED SIGNATORY</b></p>
+
+                    </td> 
+
+                    <td style="border-left: 1px solid black;padding: 10px;" width="50%" valign="top">
+                        <p>5. Signature of Processor </p>
+                    </td>
+                </tr>
+            </table>
+            
+            ';
+
+            // <p>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</p>
+    $invoice_name =  $getblastingdetailsforinvoice['blasting_id'].'-A-'.$getblastingdetailsforinvoice['vendor_name'].'.pdf';
+    $mpdf->WriteHTML($html);
+    $mpdf->Output($invoice_name,'D'); // opens in browser
 
 
 }
