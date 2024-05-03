@@ -9095,7 +9095,7 @@ class Admin extends BaseController
     }
 
 
-    public function editeqnuiryformdata($enquiryformid){
+    public function editeqnuiryformdatabyid($enquiryformid){
 
         $process = 'Edit New Enquiry Form';
         $processFunction = 'Admin/editeqnuiryformdata';
