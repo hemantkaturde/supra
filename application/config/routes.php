@@ -315,6 +315,7 @@ $route['enquiryform'] = "admin/enquiryform";
 $route['fetchenquiryform'] = "admin/fetchenquiryform";
 $route['addnewenquiryform'] = "admin/addnewenquiryform";
 $route['saveenquiryformitem'] = "admin/saveenquiryformitem";
+$route['editeqnuiryformdata/(:any)'] = "admin/editeqnuiryformdata/$1";
 $route['editvendorpoconfirmation/(:any)'] = "admin/editvendorpoconfirmation/$1";
 $route['deleteBillofmaterialitem'] = "admin/deleteBillofmaterialitem";
 $route['checkvendorpoandvendornumber'] = "admin/checkvendorpoandvendornumber";
