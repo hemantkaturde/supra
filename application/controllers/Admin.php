@@ -14769,7 +14769,6 @@ public function downloadomsblasting($id){
 
                 <tr style="border: 1px solid black;">
                     <td width="50%" style="padding: 10px;text-align: left;valign="top"">
-                        <p>Part-I </p>
                         <p>'. str_repeat('&nbsp;', 5).'</p>
                         <p>'. str_repeat('&nbsp;', 5).'</p>
                         <p>'. str_repeat('&nbsp;', 5).'</p>
