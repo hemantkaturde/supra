@@ -14472,5 +14472,265 @@ public function downlaoddebitnote($id){
 }  
 
 
+public function downlaoddebitnotevendor($id){
+
+    $getDebitnotedetailsforInvoice = $this->admin_model->getDebitnotedetailsforInvoicevendor($id);
+    $getDebitnoteitemdeatilsForInvoice = $this->admin_model->getDebitnoteitemdeatilsForInvoicevendor($id);
+
+    $CartItem = "";
+    $supplierItem = "";
+    $i =1;
+    $ii =1;
+    $subtotal = 0;
+
+    $paid_amount =0;
+    $total_paid_amount = 0;
+    $total_debit_amount =0;
+    $total_amount =0;
+    $cgst_tax_rate = 0;
+    $sgst_tax_rate = 0;
+    $igst_tax_rate = 0;
+    $gst_rate ='';
+
+    $item_count =count($getDebitnoteitemdeatilsForInvoice);
+
+    if($item_count==1){
+        $padding_bottom = '200px';
+    }else if($item_count==2){
+        $padding_bottom = '40px';
+    }else if($item_count==3){
+        $padding_bottom = '10px';
+    }else{
+        $padding_bottom = '10px';
+    }
+
+    
+    foreach ($getDebitnoteitemdeatilsForInvoice as $key => $value) {
+
+        if($value['raw_material_neight_weight']){
+            $net_weigth = $value['qty'] * $value['raw_material_neight_weight'];
+        }else{
+            $net_weigth ='';
+        }
+
+        $paid_amount = $value['rate'] * $value['ok_qty'];
+        $total_paid_amount += $value['rate'] * $value['ok_qty'];
+        $total_debit_amount +=$value['debit_amount'];
+
+        $CartItem .= '
+                <tr style="border-left: 1px solid black;border-right: 1px solid black;">
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['name'].'<br/>'.$value['fgpart'].'</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['invoice_no'].'<br/>'.date('d-m-Y',strtotime($value['invoice_date'])).'</br></td> 
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['invoice_qty'].' pcs<br/> Recd Qty '.$value['received_quantity'].' pcs</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['ok_qty'].' pcs</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['less_quantity'].' pcs</td> 
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rejected_quantity'].' pcs</td>    
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rate'].'</td>    
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.round($value['debit_amount'],2).'</td>    
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$paid_amount.'</td>
+                </tr>';
+          
+
+              
+                $gst_rate = $value['gst_rate'];
+
+                if($value['gst_rate']=='CGST_SGST'){
+                    $cgst_tax_rate = 9;
+                    $sgst_tax_rate = 9;
+
+                    $cgst_tax_value = $value['CGST_value'];
+                    $sgst_tax_value = $value['SGST_value'];
+
+                }else if($value['gst_rate']=='CGST_SGST_6'){
+                    $cgst_tax_rate = 6;
+                    $sgst_tax_rate = 6;
+
+                    $cgst_tax_value = $value['CGST_value'];
+                    $sgst_tax_value = $value['SGST_value'];
+
+                }else if($value['gst_rate']=='IGST'){
+                    $igst_tax_rate = 18;
+                    $igst_tax_value = $value['IGST_value'];
+                }else if($value['gst_rate']=='IGST_12'){
+                    $igst_tax_rate = 12;
+                    $igst_tax_value = $value['IGST_value'];
+
+                }
+
+                $total_amount +=   $sgst_tax_value+$cgst_tax_value+$igst_tax_value+$paid_amount;
+                $total_amount_debit +=   $sgst_tax_value+$cgst_tax_value+$igst_tax_value+$value['debit_amount'];
+
+            $ii++;       
+    }
+
+  
+
+
+     if($gst_rate=='CGST_SGST' || $gst_rate=='CGST_SGST_6'){
+        $tax_value = '<tr style="border: 1px solid black;">               
+            <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;">CGST @ '.$cgst_tax_rate.'% </td>    
+                <td style="border: 1px solid black;padding: 5px;">'.round($cgst_tax_value,2).'</td>
+            </tr>
+
+            <tr style="border: 1px solid black;">
+                <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;">SGST @ '.$sgst_tax_rate.'% </td>    
+                <td style="border: 1px solid black;padding: 5px;">'.round($sgst_tax_value,2).'</td>
+            </tr>';
+
+            $total_tax_rate = 'CGST @ '.$cgst_tax_rate.'% = '.round($cgst_tax_value,2).'<br/> SGST @ '.$sgst_tax_rate.'% = '.round($sgst_tax_value,2);
+
+     }else{
+        $tax_value = '
+            <tr style="border: 1px solid black;">
+                <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;">IGST @ '.$igst_tax_rate.'%</td>    
+                <td style="border: 1px solid black;padding: 5px;">'.round($igst_tax_value,2).'</td>
+            </tr>';
+
+        $total_tax_rate = 'IGST @ '.$igst_tax_rate.'%'.round($igst_tax_value,2);
+     }
+
+  
+    $mpdf = new \Mpdf\Mpdf();
+    // $html = $this->load->view('html_to_pdf',[],true);
+    $html = '<table style=" width: 100%;text-align: center;border-collapse: collapse;font-family:cambria;">
+                <tr>
+                  <td rowspan="2"><img src="'.base_url().'assets/images/supra_logo_1.jpg" width="80" height="80"></td>
+                  <td style="color:#000080"><h2>SUPRA QUALITY EXPORTS (I) PVT. LTD</h2></td>
+                  <td rowspan="2"><img src="'.base_url().'assets/images/logo_2.png"width="80" height="80"></td>
+                </tr>
+                <tr>
+                  <td style="font-weight: bold;">
+                    <p>MANUFACTURER & EXPORTERS OF:</p>
+                    <p>PRECISION TURNED COMPONENTS, STAMPED /PRESSED PARTS IN FERROUS & NON-FERROUS METAL</p>
+                    <p>MOULDED & EXTRUDED PLASTIC AND RUBBER COMPONENTS</p> 
+                  </td>
+                </tr>
+            </table>
+            <hr>
+            <table style=" width: 100%;text-align: center;margin-top:10px;margin-bottom:10px;font-family:cambria;">
+                    <tr>
+                        <td style="color:red;font-size:15px">
+                          <u><p><h3>DEBIT NOTE</h3></p>
+                        </td>
+                    </tr>
+            </table>
+
+            <table style=" width: 100%;text-align: left;border-collapse: collapse;font-family:cambria;font-size:13px;">
+                <tr>
+                    <td width="50%">
+                        <div>
+                            <p>To,</p>
+                            <p><b>'.$getDebitnotedetailsforInvoice['vendor_name'].'</b></p>
+                            <p>'.$getDebitnotedetailsforInvoice['ven_address'].'</p>
+                            <p><b>Contact No:</b> '.$getDebitnotedetailsforInvoice['ven_mobile'].' / '.$getDebitnotedetailsforInvoice['ven_landline'].'</p>
+                            <p><b>Contact Person:</b> '.$getDebitnotedetailsforInvoice['ven_contact_person'].'</p>
+                            <p><b>Email:</b> '.$getDebitnotedetailsforInvoice['ven_email'].'</p>
+                            <p style="color:red">GSTIN:'.$getDebitnotedetailsforInvoice['ven_GSTIN'].'</p>
+                        <div>    
+                    </td> 
+                    <td style="font-size:13px;" width="50%" valign="top">
+                        <div>
+                            <p><b></b>'. str_repeat('&nbsp;', 5).'<span style="color:red"></span></p>
+                            <p><b>DEBIT NOTE NO :</b> '.'<span style="color:red">'.$getDebitnotedetailsforInvoice['debit_note_number'].'</span></p>
+                            <p>&nbsp;</p>
+                            <p><b>Date :</b> '.date('d-m-Y',strtotime($getDebitnotedetailsforInvoice['debit_note_date'])).'</p>
+                            <p>&nbsp;</p>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+            <table style="margin-top:20px;width: 100%;text-align: left;border-collapse: collapse;font-family:cambria;font-size:13px;">
+                <tr>
+                    <td width="50%">
+                        <div>
+                            <p>Dear Sir,</p>
+                            <p><b>Sub: Debit Note</b></p>
+                            <p>With reference to the above subject we have debited your account vide your Inv No. GT-016 Dated 23-Sep-2023. 
+                               The details are as follows: </p>
+                        <div>    
+                    </td>  
+                </tr>
+            </table>
+
+            <table style="margin-top:10px;width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:12px">
+                <tr style="border: 1px solid black;">
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>Part Description & PartNo</th>
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>Inv No Inv Date</th>  
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>Bill Qty</th> 
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>Ok Qty</th>  
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>Less Qty</th>  
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>Rej Qty</th>  
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>Rate</th>
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>Debit Amt</th>
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>Paid Amt</th>
+                </tr>
+                '.$CartItem.' 
+
+                <tr style="border: 1px solid black;">               
+                    <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;;padding: 5px;;font-family:cambria;font-size:14px;"><b>Total </b></td>    
+                    <td style="border: 1px solid black;padding: 5px;"></td>
+                </tr>
+
+             '. $tax_value.'
+            
+
+             <tr style="border: 1px solid black;">
+                    <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;"><b>Total amount</b></td>    
+                    <td style="border: 1px solid black;padding: 5px;">'.round($total_amount,2).'</td>
+              </tr>
+
+              <tr style="border: 1px solid black;">
+                <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;">Less TDS</td>    
+                <td style="border: 1px solid black;padding: 5px;">'.$getDebitnotedetailsforInvoice['tds_amount'].'</td>
+              </tr>
+
+              <tr style="border: 1px solid black;">
+                <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;">Cheque Amt</td>    
+                <td style="border: 1px solid black;padding: 5px">'.$getDebitnotedetailsforInvoice['chq_amount'].'</td>
+              </tr>
+
+              <tr style="border: 1px solid black;">
+                <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;">We Have Debit Amt = '.round($total_debit_amount,2).' <br/> '.$total_tax_rate.'<br>____________<br/>'.round($total_amount_debit,2).'</td>    
+                <td style="border: 1px solid black;padding: 5px">'.$getDebitnotedetailsforInvoice['tds_amount'].'<br/><br/>'.round($total_amount_debit,2).'<br/>____________<br/>'.$getDebitnotedetailsforInvoice['tds_amount']+round($total_amount_debit,2).'</td>
+              </tr>
+
+                <tr style="border: 1px solid black;">
+                <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;"><b>Grand Total</b></td>    
+                <td style="border: 1px solid black;padding: 5px">'.round($getDebitnotedetailsforInvoice['grand_total_main'],2).'</td>
+                </tr>
+          
+            </table>
+
+            <table style=" width: 100%;border-collapse: collapse;border: #ccc 1px solid;font-family:cambria;font-size:12px">
+                <tr style="border: 1px solid black;">
+                        <td style="border: 1px solid black;padding-left: 10px;">
+                            <p><b>Remark :</b>'.$getDebitnotedetailsforInvoice['debit_note_remark'].'</p>    
+                    </td>   
+                </tr>
+            </table>
+
+            <table style=" width: 100%;text-align: left;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:12px">
+                   <tr >
+                        <td style="padding-left: 10px;" width="75%;" valign="top">
+                            <p>Thanking You,</p>
+                            <p>Yours truly</p>
+                            <p style="vertical-align: text-top;font-size:12px;color:#206a9b"><b>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</b></p>
+                            <br/><img src="'.base_url().'assets/images/stmps/rr_challan.png" width="130" height="100">
+                            <p style="vertical-align: text-top;font-size:10px;color:#206a9b"><b>AUTHORIZED SIGNATORY</b></p>
+                        </td>
+                        <td style="text-align: center;" width="25%" valign="top">
+                        </td> 
+                </tr>
+            </table>';
+
+            // <p>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</p>
+    $invoice_name =  $getDebitnotedetailsforInvoice['debit_note_number'].' - '.$getDebitnotedetailsforInvoice['vendor_name'].'.pdf';
+    $mpdf->WriteHTML($html);
+    $mpdf->Output($invoice_name,'D'); // opens in browser
+
+}  
+
+
 }
 

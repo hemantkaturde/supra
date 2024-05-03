@@ -366,6 +366,7 @@ $route['downloadreworkrejectionvendor/(:any)'] = "admin/downloadreworkrejectionv
 $route['downloadchallanform/(:any)'] = "admin/downloadchallanform/$1";
 $route['downloadchallanformvendor/(:any)'] = "admin/downloadchallanformvendor/$1";
 $route['downlaoddebitnote/(:any)'] = "admin/downlaoddebitnote/$1";
+$route['downlaoddebitnotevendor/(:any)'] = "admin/downlaoddebitnotevendor/$1";
 $route['downlaodjobworkchllan/(:any)'] = "admin/downlaodjobworkchllan/$1";
 $route['getdownloadscrapreturn/(:any)'] = "admin/downloadscrapreturn/$1";
 

@@ -5660,7 +5660,13 @@ class Admin_model extends CI_Model
                 $data[$counter]['po_date'] = $value['po_date'];
                 $data[$counter]['action'] = '';
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editdebitnoteform/".$value['debit_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downlaoddebitnote/".$value['debit_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
+               
+                if( $value['supplier_vendor_name']=='supplier'){
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downlaoddebitnote/".$value['debit_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
+                }else{
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downlaoddebitnotevendor/".$value['debit_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
+                }
+
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['debit_id']."' class='fa fa-trash-o deletedebitnote' aria-hidden='true'></i>"; 
                 $counter++; 
             }
@@ -11420,6 +11426,48 @@ public function getDebitnoteitemdeatilsForInvoice($id){
     // $this->db->select('*,'.TBL_RAWMATERIAL.'.gross_weight as rmgrossweight');
     $this->db->select('*,'.TBL_RAWMATERIAL.'.net_weight as raw_material_neight_weight');
     $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_DEBIT_NOTE_ITEM.'.part_number');
+    $this->db->where(TBL_DEBIT_NOTE_ITEM.'.debit_note_id', $id);
+    $query = $this->db->get(TBL_DEBIT_NOTE_ITEM);
+    $fetch_result = $query->result_array();
+    return $fetch_result;
+}
+
+
+public function getDebitnotedetailsforInvoicevendor($id){
+    $this->db->select(TBL_DEBIT_NOTE.'.*,'.
+                     TBL_VENDOR.'.vendor_name as vendor_name,'
+                    .TBL_VENDOR.'.address as ven_address,'
+                    .TBL_VENDOR.'.landline as ven_landline,'
+                    .TBL_VENDOR.'.contact_person as ven_contact_person,'
+                    .TBL_VENDOR.'.mobile as ven_mobile,'
+                    .TBL_VENDOR.'.email as ven_email,'
+                    .TBL_VENDOR.'.GSTIN as ven_GSTIN,'
+                    .TBL_VENDOR_PO_MASTER.'.po_number as ven_po_number,'
+                    .TBL_VENDOR_PO_MASTER.'.date as ven_date,'
+                    .TBL_VENDOR_PO_MASTER.'.quatation_ref_no as ven_quatation_ref_no,'
+                    .TBL_VENDOR_PO_MASTER.'.quatation_date as ven_quatation_date,'
+                    .TBL_VENDOR_PO_MASTER.'.delivery_date as ven_delivery_date,'
+                    .TBL_VENDOR_PO_MASTER.'.work_order as ven_work_order,'
+                    .TBL_VENDOR_PO_MASTER.'.remark as ven_remark,'
+                    .TBL_DEBIT_NOTE.'.debit_note_number as debit_note_number,'
+                    .TBL_DEBIT_NOTE.'.remark as debit_note_remark,'
+        
+        );
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_DEBIT_NOTE.'.vendor_po');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_DEBIT_NOTE.'.vendor_id');
+        $this->db->where(TBL_DEBIT_NOTE.'.debit_id', $id);
+        $query = $this->db->get(TBL_DEBIT_NOTE);
+        $fetch_result = $query->row_array();
+        return $fetch_result;
+}
+
+
+public function getDebitnoteitemdeatilsForInvoicevendor($id){
+
+    // $this->db->select('*,'.TBL_RAWMATERIAL.'.gross_weight as rmgrossweight');
+    $this->db->select('*,'.TBL_FINISHED_GOODS.'.net_weight as raw_material_neight_weight,'.TBL_FINISHED_GOODS.'.part_number as fgpart');
+    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_DEBIT_NOTE_ITEM.'.part_number');
+    // $this->db->join(TBLRAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_DEBIT_NOTE_ITEM.'.part_number');
     $this->db->where(TBL_DEBIT_NOTE_ITEM.'.debit_note_id', $id);
     $query = $this->db->get(TBL_DEBIT_NOTE_ITEM);
     $fetch_result = $query->result_array();
