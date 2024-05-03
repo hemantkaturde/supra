@@ -13997,7 +13997,7 @@ public function downloadscrapreturn($id){
                     <td style="border-left: 1px solid black;padding: 10px;" width="50%" valign="top">
                           <p style="text-align: center"><h4>DELIVERY CHALLAN</h4></p>
                           <p style="text-align: left;"> Movement of inputs or partially processed goods
-                            for job work   under Iulc 55 ofthe Central Goods
+                            for job work under Rule 55 ofthe Central Goods
                             ‘8; Service Tax Rules.20l7. from one factory to
                             another factory for further processing / operation.
                           </p>
@@ -14174,6 +14174,8 @@ public function downloadscrapreturn($id){
                         <p>8. Factory / Place of processing / Manufacturing : '.$getscrapreturnForInvoice['vendor_name'].'</p>
                         <p>'.$getscrapreturnForInvoice['ven_address'].'</p>
                         <p style="color:#000080">GSTIN :'.$getscrapreturnForInvoice['ven_GSTIN'].'</p>
+                        <p>'. str_repeat('&nbsp;', 5).'</p>
+                        <p>'. str_repeat('&nbsp;', 5).'</p>
                     </td> 
 
                     <td style="border-left: 1px solid black;padding: 10px;" width="50%" valign="top">
