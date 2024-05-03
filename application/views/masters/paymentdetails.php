@@ -31,7 +31,6 @@
                                     <tr style="background-color:#3c8dbc !important;color:#fff">
                                         <th>Payment Details No</th>
                                         <th>Payment Date</th>
-                                        <th>Type</th>
                                         <th>Vendor Name</th>
                                         <th>Vendor PO</th>
                                         <th>Supplier Name</th>
