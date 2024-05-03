@@ -11500,7 +11500,7 @@ public function getblastingdetailsforinvoice($id){
 
 public function getblastingItemdeatilsForInvoice($id){
 
-    $this->db->select('*');
+    $this->db->select('*,'.TBL_OMS_CHALLAN_ITEM.'.gross_weight as gross_weight_oms,'.TBL_OMS_CHALLAN_ITEM.'.net_weight as net_weight_oms');
     $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_OMS_CHALLAN_ITEM.'.part_number');
     $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
     $this->db->where(TBL_OMS_CHALLAN_ITEM.'.oms_chllan_id', $id);

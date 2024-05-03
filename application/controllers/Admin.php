@@ -14828,7 +14828,7 @@ public function downloadomsblasting($id){
 
                 <tr style="border-left: 1px solid black;border-right: 1px solid black;">
                     <td style="padding-left: 10px;text-align: left;"  width="50%">
-                       <p> Gross Weight: '.$getblastingItemdeatilsForInvoice[0]['gross_weight'].' kgs </p>
+                       <p> Gross Weight: '.$getblastingItemdeatilsForInvoice[0]['gross_weight_oms'].' kgs </p>
                      </td> 
                     <td style="border-left: 1px solid black;padding-left: 10px;"></td>
                     <td style="border-left: 1px solid black;padding-left: 10px;"></td>
@@ -14839,7 +14839,7 @@ public function downloadomsblasting($id){
 
                 <tr style="border-left: 1px solid black;border-right: 1px solid black;">
                     <td style="padding-left: 10px;text-align: left;"  width="50%">
-                      <p> Net Weight:   '.$getblastingItemdeatilsForInvoice[0]['net_weight'].' kgs </p>
+                      <p> Net Weight:   '.$getblastingItemdeatilsForInvoice[0]['net_weight_oms'].' kgs </p>
                     </td> 
                     <td style="border-left: 1px solid black;padding-left: 10px;">2</td>
                     <td style="border-left: 1px solid black;padding-left: 10px;"></td>
@@ -14886,7 +14886,7 @@ public function downloadomsblasting($id){
                 <tr style="border-left: 1px solid black;border-right: 1px solid black;">
                     <td style="padding-left: 10px;text-align: left;border-right: 1px solid black"  width="50%">
                     <p> 5. Estimated Value of inputs / Partially processed inputs  </p>
-                    <p>'.$getblastingItemdeatilsForInvoice[0]['estimated_value'].'</p>
+                    <p>'.$getblastingItemdeatilsForInvoice[0]['calculation'].'</p>
                    
                     </td> 
                     <td style="border-left: 1px solid black;padding-left: 10px;">5</td>
