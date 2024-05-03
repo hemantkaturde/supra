@@ -27,7 +27,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="vendor_name">Supplier Name <span class="required">*</span></label>
+                                            <label for="vendor_name">Vendor Name <span class="required">*</span></label>
                                             <input type="text" class="form-control" id="vendor_name" value="<?=$data['vendor_name']?>" name="vendor_name">
                                             <input type="hidden" class="form-control" id="vendor_id" value="<?=$data['ven_id']?>" name="vendor_id">
                                             <p class="error vendor_name_error"></p>

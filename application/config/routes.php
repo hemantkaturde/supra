@@ -356,7 +356,6 @@ $route['getVendorPoconfirmationvendorlist'] = "admin/getVendorPoconfirmationvend
 
 
 
-
 /* ALL Downlaod Forms */
 $route['downlaodsupplierpo/(:any)'] = "admin/downlaodsupplierpo/$1";
 $route['downloadvendorpo/(:any)'] = "admin/downloadvendorpo/$1";
@@ -370,7 +369,8 @@ $route['downlaoddebitnote/(:any)'] = "admin/downlaoddebitnote/$1";
 $route['downlaoddebitnotevendor/(:any)'] = "admin/downlaoddebitnotevendor/$1";
 $route['downlaodjobworkchllan/(:any)'] = "admin/downlaodjobworkchllan/$1";
 $route['getdownloadscrapreturn/(:any)'] = "admin/downloadscrapreturn/$1";
-
+$route['downloadomsblasting/(:any)'] = "admin/downloadomsblasting/$1";
+$route['downloadomsmachinary/(:any)'] = "admin/downloadomsmachinary/$1";
 
 
 /* ALL Edit Forms*/

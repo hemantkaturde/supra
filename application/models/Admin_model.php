@@ -7183,10 +7183,8 @@ class Admin_model extends CI_Model
                 $data[$counter]['remark'] =$value['omsremark'];
                 $data[$counter]['action'] ='';
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editomschallan/".$value['oms_challan_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
-              
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downloadvendorpo/".$value['oms_challan_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downloadvendorpo/".$value['oms_challan_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
-
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downloadomsblasting/".$value['oms_challan_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'>B</i></a>  &nbsp";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downloadomsmachinary/".$value['oms_challan_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'>M</i></a>  &nbsp";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['oms_challan_id']."' class='fa fa-trash-o deleteomschallan' aria-hidden='true'></i>"; 
                 $counter++; 
             }
@@ -11472,6 +11470,41 @@ public function getDebitnoteitemdeatilsForInvoicevendor($id){
     // $this->db->join(TBLRAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_DEBIT_NOTE_ITEM.'.part_number');
     $this->db->where(TBL_DEBIT_NOTE_ITEM.'.debit_note_id', $id);
     $query = $this->db->get(TBL_DEBIT_NOTE_ITEM);
+    $fetch_result = $query->result_array();
+    return $fetch_result;
+}
+
+
+public function getblastingdetailsforinvoice($id){
+    $this->db->select(TBL_VENDOR.'.vendor_name as vendor_name,'
+                     .TBL_VENDOR.'.address as ven_address,'
+                     .TBL_VENDOR.'.landline as ven_landline,'
+                     .TBL_VENDOR.'.contact_person as ven_contact_person,'
+                     .TBL_VENDOR.'.mobile as mobile,'
+                     .TBL_VENDOR.'.email as ven_email,'
+                     .TBL_VENDOR.'.GSTIN as ven_GSTIN,'
+                     .TBL_OMS_CHALLAN.'.blasting_id as blasting_id,'
+                     .TBL_OMS_CHALLAN.'.vendor_po_date as vendor_po_date,'
+                     .TBL_OMS_CHALLAN.'.date as date,'
+                     .TBL_OMS_CHALLAN.'.remark as remarks,'
+                      );
+
+    $this->db->where(TBL_OMS_CHALLAN.'.id', $id);
+    $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_OMS_CHALLAN.'.vendor_name');
+    $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_OMS_CHALLAN.'.vendor_po_id');
+    $query = $this->db->get(TBL_OMS_CHALLAN);
+    $fetch_result = $query->row_array();
+    return $fetch_result;
+}
+
+
+public function getblastingItemdeatilsForInvoice($id){
+
+    $this->db->select('*');
+    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_OMS_CHALLAN_ITEM.'.part_number');
+    $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+    $this->db->where(TBL_OMS_CHALLAN_ITEM.'.oms_chllan_id', $id);
+    $query = $this->db->get(TBL_OMS_CHALLAN_ITEM);
     $fetch_result = $query->result_array();
     return $fetch_result;
 }
