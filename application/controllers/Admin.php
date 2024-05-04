@@ -14972,6 +14972,7 @@ public function downloadomsblasting($id){
 }
 
 
+
 public function downloadomsmachinary($id){
 
     $getblastingdetailsforinvoice = $this->admin_model->getblastingdetailsforinvoice($id);
@@ -14981,7 +14982,7 @@ public function downloadomsmachinary($id){
     // $html = $this->load->view('html_to_pdf',[],true);
     $html = '<table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:13px">
                 <tr style="border: 1px solid black;" valign="top">
-                    <td width="50%" style="padding: 5px;text-align: left;">
+                    <td width="50%" style="padding: 8px;text-align: left;">
                         <p><h3 style="color:#000080">SUPRA QUALITY EXPORTS INDIA PVT LTD </h3></p>
                         <p>229 to 232, Bharat Industrial Estate,</p>
                         <p>L.B.S. Marg, Bhandup West, Mumbai – 400078. INDIA.</p>
@@ -14990,7 +14991,7 @@ public function downloadomsmachinary($id){
                         <p><span style="color:#000080">GSTIN : 27AAJCS7869M1ZB</span></p>
                     </td> 
 
-                    <td style="border-left: 1px solid black;padding: 5px;" width="50%" valign="top">
+                    <td style="border-left: 1px solid black;padding: 8px;" width="50%" valign="top">
                           <p style="text-align: center"><h4>DELIVERY CHALLAN</h4></p>
                           <p style="text-align: left;"> Movement of inputs or partially processed goods
                             for job work under Rule 55 of the Central Goods
@@ -15000,34 +15001,34 @@ public function downloadomsmachinary($id){
                     </td>
                 </tr>
            
-                <tr style="border: 1px solid black;padding: 5px;">
-                    <td width="50%" style="padding: 5px;text-align: left;">
+                <tr style="border: 1px solid black;padding: 8px;">
+                    <td width="50%" style="padding: 8px;text-align: left;">
                        Sr. No. : <span style="color:red">'.$getblastingdetailsforinvoice['blasting_id'].'-B '.date('d-m-Y',strtotime($getblastingdetailsforinvoice['date'])).'</span>
                     </td> 
 
-                    <td style="border-left: 1px solid black;padding: 5px;" width="50%" valign="top">
+                    <td style="border-left: 1px solid black;padding: 8px;" width="50%" valign="top">
                        <input type="checkbox" style="width: 100px;height: 100px;zoom:5;"> Original  <input type="checkbox"> Duplicate  <input type="checkbox"> Triplicate
                     </td>
                 </tr>
 
                 <tr style="border: 1px solid black;">
-                    <td width="50%" style="padding: 5px;text-align: left;valign="top"">
+                    <td width="50%" style="padding: 8px;text-align: left;valign="top"">
                         <p>'. str_repeat('&nbsp;', 5).'</p>
                     </td> 
 
-                    <td style="border-left: 1px solid black;padding: 5px;" width="50%" valign="top">
+                    <td style="border-left: 1px solid black;padding: 8px;" width="50%" valign="top">
                         <p>Part-II </p>
                         <p>to be filled by the processing factory in original and duplicate challans. </p>
                     </td>
                 </tr>
 
                 <tr style="border: 1px solid black;">
-                    <td width="50%" style="padding: 5px;text-align: left;">
+                    <td width="50%" style="padding: 8px;text-align: left;">
                          <p>1. Description </p>
                          <p>'.$getblastingItemdeatilsForInvoice[0]['type_of_raw_material'].'</p>
                     </td> 
 
-                    <td style="border-left: 1px solid black;padding: 5px;" width="50%" valign="top">
+                    <td style="border-left: 1px solid black;padding: 8px;" width="50%" valign="top">
                         <p>1. Details of type,qty, date & time of processing done and Return of processed goods to parent factory </p>
                     </td>
                 </tr>
@@ -15035,7 +15036,7 @@ public function downloadomsmachinary($id){
 
             <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:13px;">
                 <tr style="border-left: 1px solid black;border-right: 1px solid black;border-bottom: 1px solid black;">
-                    <td style="text-align:left;padding: 5px;">'.str_repeat('&nbsp;', 2).'</td> 
+                    <td style="text-align:left;padding: 8px;">'.str_repeat('&nbsp;', 2).'</td> 
                     <td style="border-left: 1px solid black;padding:5px;" width="10%">'.str_repeat('&nbsp;', 2).'</td>
                     <td style="border-left: 1px solid black;padding:5px;" width="10%">'.str_repeat('&nbsp;', 2).'</td>
                     <td style="border-left: 1px solid black;padding:5px;" width="10%">'.str_repeat('&nbsp;', 2).'</td>
@@ -15048,11 +15049,11 @@ public function downloadomsmachinary($id){
             <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:13px;">
                 
                 <tr style="border-left: 1px solid black;border-right: 1px solid black;border-bottom: 1px solid black;">
-                    <td style="text-align:left;padding: 5px;"          width="50%">2. Identification marks & number if any</td> 
-                    <td style="border-left: 1px solid black;padding: 5px;">Size / Type</td>
-                    <td style="border-left: 1px solid black;padding: 5px;" >Quantity</td>
-                    <td style="border-left: 1px solid black;padding: 5px;" >Date</td>
-                    <td style="border-left: 1px solid black;padding: 5px;" >Time</td>
+                    <td style="text-align:left;padding: 8px;"          width="50%">2. Identification marks & number if any</td> 
+                    <td style="border-left: 1px solid black;padding: 8px;">Size / Type</td>
+                    <td style="border-left: 1px solid black;padding: 8px;" >Quantity</td>
+                    <td style="border-left: 1px solid black;padding: 8px;" >Date</td>
+                    <td style="border-left: 1px solid black;padding: 8px;" >Time</td>
                 </tr>
 
                 <tr style="border-left: 1px solid black;border-right: 1px solid black;">
@@ -15150,17 +15151,17 @@ public function downloadomsmachinary($id){
             <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:13px;">
 
                 <tr style="border: 1px solid black;">
-                    <td width="50%" style="padding: 10px;text-align: left;">
+                    <td width="50%" style="padding: 8px;text-align: left;">
                         <p>6.Date & Time of Issue : '.date('d-m-Y',strtotime($getblastingdetailsforinvoice['date'])).'</p>
                     </td> 
 
-                    <td style="border-left: 1px solid black;padding: 10px;" width="50%" valign="top">
+                    <td style="border-left: 1px solid black;padding: 8px;" width="50%" valign="top">
                         <p>2. Nature of Proc. / Manufacturing done</p>
                     </td>
                 </tr>
 
                 <tr style="border: 1px solid black;">
-                    <td width="50%" style="padding: 10px;text-align: left;">
+                    <td width="50%" style="padding: 8px;text-align: left;">
                         <p>7. Nature of processing:</p>
                         <p>'.$getblastingItemdeatilsForInvoice[0]['name'].'  Part Number - '.$getblastingItemdeatilsForInvoice[0]['part_number'].'</p>
                     </td> 
@@ -15172,7 +15173,7 @@ public function downloadomsmachinary($id){
 
 
                 <tr style="border: 1px solid black;">
-                <td width="50%" style="padding: 10px;text-align: left;">
+                <td width="50%" style="padding: 8px;text-align: left;">
                     <p>Against P.O.No: '.$getblastingdetailsforinvoice['vendor_po_number'].' dated '.date('d-m-Y',strtotime($getblastingdetailsforinvoice['v_po_date'])).'</p>
                 </td> 
 
@@ -15182,20 +15183,20 @@ public function downloadomsmachinary($id){
             </tr>
 
                 <tr style="border: 1px solid black;">
-                    <td width="50%" style="padding: 10px;text-align: left;">
+                    <td width="50%" style="padding: 8px;text-align: left;">
                         <p>8. Factory / Place of processing / Manufacturing : '.$getblastingdetailsforinvoice['vendor_name'].' </p>
                         <p>'.$getblastingdetailsforinvoice['ven_address'].'</p>
                         <p style="color:#000080">GSTIN : '.$getblastingdetailsforinvoice['ven_GSTIN'].'</p>
                     </td> 
 
-                    <td style="border-left: 1px solid black;padding: 10px;" width="50%" valign="top">
+                    <td style="border-left: 1px solid black;padding: 8px;" width="50%" valign="top">
                         <p>4. Name & Address of the Processor:</p>
                     </td>
                 </tr>
 
                 
                 <tr style="border: 1px solid black;">
-                    <td width="50%" style="padding: 10px;text-align: left;">
+                    <td width="50%" style="padding: 8px;text-align: left;">
                         <p style="vertical-align: text-top;font-size:12px;color:#000080"><b>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</b></p>
                         <p>'.date('d-m-Y').'</p>
                         <p>Place: Mumbai</p>
@@ -15205,7 +15206,7 @@ public function downloadomsmachinary($id){
 
                     </td> 
 
-                    <td style="border-left: 1px solid black;padding: 10px;" width="50%" valign="top">
+                    <td style="border-left: 1px solid black;padding: 8px;" width="50%" valign="top">
                         <p>5. Signature of Processor </p>
                     </td>
                 </tr>
@@ -15220,7 +15221,6 @@ public function downloadomsmachinary($id){
 
 
 }
-
 
 
 
