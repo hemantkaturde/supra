@@ -15013,7 +15013,6 @@ public function downloadomsmachinary($id){
                 <tr style="border: 1px solid black;">
                     <td width="50%" style="padding: 10px;text-align: left;valign="top"">
                         <p>'. str_repeat('&nbsp;', 5).'</p>
-                        <p>'. str_repeat('&nbsp;', 5).'</p>
                     </td> 
 
                     <td style="border-left: 1px solid black;padding: 10px;" width="50%" valign="top">
@@ -15127,7 +15126,7 @@ public function downloadomsmachinary($id){
                 <tr style="border-left: 1px solid black;border-right: 1px solid black;">
                     <td style="padding-left: 10px;text-align: left;border-right: 1px solid black"  width="50%">
                     <p> 5. Estimated Value of inputs / Partially processed inputs  </p>
-                    <p>'.$getblastingItemdeatilsForInvoice[0]['calculation'].'</p>
+                     <p>'.$getblastingItemdeatilsForInvoice[0]['calculation'].'</p>
                    
                     </td> 
                     <td style="border-left: 1px solid black;padding-left: 10px;">5</td>
