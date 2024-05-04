@@ -15035,12 +15035,12 @@ public function downloadomsmachinary($id){
 
             <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:13px;">
                 <tr style="border-left: 1px solid black;border-right: 1px solid black;border-bottom: 1px solid black;">
-                    <td style="text-align:left;padding: 10px;">'.str_repeat('&nbsp;', 5).'</td> 
-                    <td style="border-left: 1px solid black;padding:10px;" width="10%">'.str_repeat('&nbsp;', 5).'</td>
-                    <td style="border-left: 1px solid black;padding:10px;" width="10%">'.str_repeat('&nbsp;', 5).'</td>
-                    <td style="border-left: 1px solid black;padding:10px;" width="10%">'.str_repeat('&nbsp;', 5).'</td>
-                    <td style="border-left: 1px solid black;padding:10px;" width="10%">'.str_repeat('&nbsp;', 5).'</td>
-                    <td style="border-left: 1px solid black;padding:10px;" width="50%">'.str_repeat('&nbsp;', 5).'</td>
+                    <td style="text-align:left;padding: 10px;">'.str_repeat('&nbsp;', 2).'</td> 
+                    <td style="border-left: 1px solid black;padding:10px;" width="10%">'.str_repeat('&nbsp;', 2).'</td>
+                    <td style="border-left: 1px solid black;padding:10px;" width="10%">'.str_repeat('&nbsp;', 2).'</td>
+                    <td style="border-left: 1px solid black;padding:10px;" width="10%">'.str_repeat('&nbsp;', 2).'</td>
+                    <td style="border-left: 1px solid black;padding:10px;" width="10%">'.str_repeat('&nbsp;', 2).'</td>
+                    <td style="border-left: 1px solid black;padding:10px;" width="50%">'.str_repeat('&nbsp;', 2).'</td>
                 </tr>
             </table>
 
