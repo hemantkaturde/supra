@@ -14993,8 +14993,8 @@ public function downloadomsmachinary($id){
                     <td style="border-left: 1px solid black;padding: 10px;" width="50%" valign="top">
                           <p style="text-align: center"><h4>DELIVERY CHALLAN</h4></p>
                           <p style="text-align: left;"> Movement of inputs or partially processed goods
-                            for job work under Rule 55 ofthe Central Goods
-                            ‘8; Service Tax Rules.20l7. from one factory to
+                            for job work under Rule 55 of the Central Goods
+                            & Service Tax Rules.20l7. from one factory to
                             another factory for further processing / operation.
                           </p>
                     </td>
@@ -15012,7 +15012,6 @@ public function downloadomsmachinary($id){
 
                 <tr style="border: 1px solid black;">
                     <td width="50%" style="padding: 10px;text-align: left;valign="top"">
-                        <p>'. str_repeat('&nbsp;', 5).'</p>
                         <p>'. str_repeat('&nbsp;', 5).'</p>
                         <p>'. str_repeat('&nbsp;', 5).'</p>
                     </td> 
@@ -15188,12 +15187,12 @@ public function downloadomsmachinary($id){
                         <p>8. Factory / Place of processing / Manufacturing : '.$getblastingdetailsforinvoice['vendor_name'].' </p>
                         <p>'.$getblastingdetailsforinvoice['ven_address'].'</p>
                         <p style="color:#000080">GSTIN : '.$getblastingdetailsforinvoice['ven_GSTIN'].'</p>
-                        <p>'. str_repeat('&nbsp;', 5).'</p>
+                        <p>'. str_repeat('&nbsp;', 1).'</p>
                     </td> 
 
                     <td style="border-left: 1px solid black;padding: 10px;" width="50%" valign="top">
                         <p>4. Name & Address of the Processor:</p>
-                        <p>'. str_repeat('&nbsp;', 5).'</p>
+                        <p>'. str_repeat('&nbsp;', 1).'</p>
                     </td>
                 </tr>
 
@@ -15218,7 +15217,7 @@ public function downloadomsmachinary($id){
             ';
 
             // <p>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</p>
-    $invoice_name =  $getblastingdetailsforinvoice['blasting_id'].'-A-'.$getblastingdetailsforinvoice['vendor_name'].'.pdf';
+    $invoice_name =  $getblastingdetailsforinvoice['blasting_id'].'-B-'.$getblastingdetailsforinvoice['vendor_name'].'.pdf';
     $mpdf->WriteHTML($html);
     $mpdf->Output($invoice_name,'D'); // opens in browser
 
