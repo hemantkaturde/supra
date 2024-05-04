@@ -14751,7 +14751,7 @@ public function downloadomsblasting($id){
                           <p style="text-align: center"><h4>DELIVERY CHALLAN</h4></p>
                           <p style="text-align: left;"> Movement of inputs or partially processed goods
                             for job work under Rule 55 ofthe Central Goods
-                            ‘8; Service Tax Rules.20l7. from one factory to
+                            & Service Tax Rules.20l7. from one factory to
                             another factory for further processing / operation.
                           </p>
                     </td>
