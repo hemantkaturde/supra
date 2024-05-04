@@ -15186,12 +15186,10 @@ public function downloadomsmachinary($id){
                         <p>8. Factory / Place of processing / Manufacturing : '.$getblastingdetailsforinvoice['vendor_name'].' </p>
                         <p>'.$getblastingdetailsforinvoice['ven_address'].'</p>
                         <p style="color:#000080">GSTIN : '.$getblastingdetailsforinvoice['ven_GSTIN'].'</p>
-                        <p>'. str_repeat('&nbsp;', 1).'</p>
                     </td> 
 
                     <td style="border-left: 1px solid black;padding: 10px;" width="50%" valign="top">
                         <p>4. Name & Address of the Processor:</p>
-                        <p>'. str_repeat('&nbsp;', 1).'</p>
                     </td>
                 </tr>
 
