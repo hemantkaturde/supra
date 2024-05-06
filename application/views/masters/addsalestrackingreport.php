@@ -23,6 +23,52 @@
                         <?php $this->load->helper("form"); ?>
                         <form role="form" id="addnewchaform" action="<?php echo base_url() ?>addnewchaform" method="post" role="form">
                             <div class="box-body">
+
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="cha_forworder">INV NO.<span class="required">*</span></label>
+                                            <input type="text" class="form-control" id="cha_forworder" name="cha_forworder" required>
+                                            <p class="error cha_forworder_error"></p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="clearance_done_by">INV.DATE</label>
+                                            <input type="text" class="form-control" id="clearance_done_by" name="clearance_done_by">
+                                            <p class="error clearance_done_by_error"></p>
+                                        </div>
+                                    </div>
+
+                        
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="payment_terms">BUYER NAME</label>
+                                            <input type="text" class="form-control" id="payment_terms" name="payment_terms">
+                                            <p class="error payment_terms_error"></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="cha_forworder">Buyer Address<span class="required">*</span></label>
+                                            <input type="text" class="form-control" id="cha_forworder" name="cha_forworder" required>
+                                            <p class="error cha_forworder_error"></p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="clearance_done_by">INV. CURRENCY</label>
+                                            <input type="text" class="form-control" id="clearance_done_by" name="clearance_done_by">
+                                            <p class="error clearance_done_by_error"></p>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="form-group">
@@ -78,13 +124,6 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label for="landline">Landline</label>
-                                            <input type="text" class="form-control" id="landline" name="landline" required>
-                                            <p class="error landline_error"></p>
-                                        </div>
-                                    </div>
 
                                     <div class="col-md-3">
                                         <div class="form-group">
@@ -222,13 +261,6 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label for="egm_status">Egm Status</label>
-                                            <input type="text" class="form-control" maxlength="12"  id="egm_status" name="egm_status" required>
-                                            <p class="error egm_status_error"></p>
-                                        </div>
-                                    </div>
                                 </div>
                                
                                 <div class="row">
@@ -343,14 +375,7 @@
                                         </div>
                                     </div>
                                     
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label for="exchange_rate">Exchange Rate</label>
-                                            <input type="text" class="form-control" id="exchange_rate" name="exchange_rate">
-                                            <p class="error exchange_rate_error"></p>
-                                        </div>
-                                    </div>
-
+                               
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="realised_amt_in_inr">Realised Amt In Inr</label>
@@ -435,8 +460,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-
                                 
                                 <div class="row">
                                     <div class="col-md-3">
@@ -454,33 +477,9 @@
                                             <p class="error exchange_rate_as_per_sb_error"></p>
                                         </div>
                                     </div>
-
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label for="tooling_inv_no">Tooling Inv No</label>
-                                            <input type="text" class="form-control" id="tooling_inv_no" name="tooling_inv_no">
-                                            <p class="error tooling_inv_no_error"></p>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label for="date">Date</label>
-                                            <input type="text" class="form-control" id="date" name="date">
-                                            <p class="error date_error"></p>
-                                        </div>
-                                    </div>
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label for="amt">Amt</label>
-                                            <input type="text" class="form-control" id="amt" name="amt">
-                                            <p class="error amt_error"></p>
-                                        </div>
-                                    </div>
-                                </div>
+                              
                             </div>
                             <!-- /.box-body -->
                             <div class="box-footer">
