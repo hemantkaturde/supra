@@ -370,7 +370,6 @@ $route['downloadomsmachinary/(:any)'] = "admin/downloadomsmachinary/$1";
 
 
 /* ALL Edit Forms*/
-
 $route['getbuyeritemdataforitemedit'] = "admin/getbuyeritemdataforitemedit";
 $route['getSupplieritemdataforitemedit'] = "admin/getSupplieritemdataforitemedit";
 $route['getVendoritemdataforitemedit'] = "admin/getVendoritemdataforitemedit";
@@ -399,7 +398,6 @@ $route['getdebitnotepartnumberdetails_byvendor'] = "admin/getdebitnotepartnumber
 $route['getSuppliergoodsreworkrejectionvendorchallan'] = "admin/getSuppliergoodsreworkrejectionvendorchallan";
 $route['getSuppliergoodsreworkrejectionvendorreworkrejection'] = "admin/getSuppliergoodsreworkrejectionvendorreworkrejection";
 $route['getVendoritemonlyforreworkrejection'] = "admin/getVendoritemonlyforreworkrejection";
-
 $route['getpreviousshortexcess'] = "admin/getpreviousshortexcess";
 $route['getSupplierPonumberbySupplieridvendorponew'] = "admin/getSupplierPonumberbySupplieridvendorponew";
 $route['buyerpodetailsreport'] = "admin/buyerpodetailsreport";
@@ -427,8 +425,6 @@ $route['checkvendorpoandvendornumberinsupplierpoconfirmation'] = "admin/checkven
 $route['geteditcreditnoteitem'] = "admin/geteditcreditnoteitem";
 $route['checkvendorpoandvendornumberinpoddetails'] = "admin/checkvendorpoandvendornumberinpoddetails";
 $route['checksupplierandvendornumberinpoddetails'] = "admin/checksupplierandvendornumberinpoddetails";
-
-
 $route['preexport'] = "admin/preexport";
 $route['fetchpreexportdetails'] = "admin/fetchpreexportdetails";
 $route['addnewfreexport'] = "admin/addnewfreexport";
@@ -453,11 +449,12 @@ $route['deletecha'] = "admin/deletecha";
 $route['salestrackingreport'] = "admin/salestrackingreport";
 $route['fetchsalestrackingReport'] = "admin/fetchsalestrackingReport";
 $route['addsalestrackingreport'] = "admin/addsalestrackingreport";
-
-
 $route['getinvoicedetilsbyinvoiceid'] = "admin/getinvoicedetilsbyinvoiceid";
 $route['deletesalestracking'] = "admin/deletesalestracking";
+$route['getcreditnotedetailsbycreditnoteid'] = "admin/getcreditnotedetailsbycreditnoteid";
 
+
+$route['getdebitnotedetailsbydebitenoteeid'] = "admin/getdebitnotedetailsbydebitenoteeid";
 
 
 

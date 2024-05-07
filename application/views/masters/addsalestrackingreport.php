@@ -285,6 +285,14 @@
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="form-group">
+                                            <label for="EGM_status">EGM Status</label>
+                                            <input type="text" class="form-control" id="EGM_status" name="EGM_status">
+                                            <p class="error EGM_status_error"></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
                                             <label for="carrier_bill_number ">Carrier Bill Number</label>
                                             <input type="text" class="form-control" id="carrier_bill_number" name="carrier_bill_number">
                                             <p class="error carrier_bill_number_error"></p>
@@ -294,7 +302,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="carrier_bill_date">Carrier Bill Date</label>
-                                            <input type="text" class="form-control" id="carrier_bill_date" name="carrier_bill_date">
+                                            <input type="text" class="form-control datepicker" id="carrier_bill_date" name="carrier_bill_date">
                                             <p class="error carrier_bill_date_error"></p>
                                         </div>
                                     </div>
@@ -337,7 +345,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="bill_paid_date">Bill Paid Date</label>
-                                            <input type="text" class="form-control" id="bill_paid_date" name="bill_paid_date">
+                                            <input type="text" class="form-control datepicker" id="bill_paid_date" name="bill_paid_date">
                                             <p class="error bill_paid_date_error"></p>
                                         </div>
                                     </div>
@@ -355,7 +363,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="dbk_recd_date">Dbk Recd Date</label>
-                                            <input type="text" class="form-control" id="dbk_recd_date" name="dbk_recd_date">
+                                            <input type="text" class="form-control datepicker" id="dbk_recd_date" name="dbk_recd_date">
                                             <p class="error dbk_recd_date_error"></p>
                                         </div>
                                     </div>
@@ -379,7 +387,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="payment_recvd_date">Payment Recvd Date</label>
-                                            <input type="text" class="form-control" id="payment_recvd_date" name="payment_recvd_date" required>
+                                            <input type="text" class="form-control datepicker" id="payment_recvd_date" name="payment_recvd_date" required>
                                             <p class="error payment_recvd_date_error"></p>
                                         </div>
                                     </div>
@@ -391,6 +399,15 @@
                                             <label for="payment_rcivd_amt">Payment Rcivd Amt</label>
                                             <input type="text" class="form-control" id="payment_rcivd_amt" name="payment_rcivd_amt">
                                             <p class="error payment_rcivd_amt_error"></p>
+                                        </div>
+                                    </div>
+
+                                     
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="payment_exchange_amt">Payment Exchange Rate</label>
+                                            <input type="text" class="form-control" id="payment_exchange_amt" name="payment_exchange_amt">
+                                            <p class="error payment_exchange_amt_error"></p>
                                         </div>
                                     </div>
                                     
@@ -411,20 +428,28 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <!-------------------------------------------------------------------------------------->
+
                                
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="credit_note_number">Credit Note Number</label>
-                                             <input type="text" class="form-control" id="credit_note_number" name="credit_note_number">
-                                            <p class="error credit_note_number_error"></p>
+                                                <select class="form-control" name="credit_note_number" id="credit_note_number">
+                                                            <option st-id="" value="">Select Part Number</option>
+                                                                <?php foreach ($getcreditnotenumber as $key => $value) {?>
+                                                            <option value="<?php echo $value['id']; ?>"><?php echo $value['credit_note_number']; ?></option>
+                                                        <?php } ?>
+                                                    <p class="error credit_note_number_error"></p>
+                                                </select>
                                         </div>
                                     </div>
                                     
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="credit_note_date">Credit Note Date</label>
-                                             <input type="text" class="form-control" id="credit_note_date" name="credit_note_date">
+                                             <input type="text" class="form-control datepicker" id="credit_note_date" name="credit_note_date">
                                             <p class="error credit_note_date_error"></p>
                                         </div>
                                     </div>
@@ -454,19 +479,26 @@
                                             <p class="error credit_note_reason_error"></p>
                                         </div>
                                     </div>
-                                    
-                                    <div class="col-md-3">
+                                </div>
+                                
+                                <div class="row">
+                                   <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="debit_note_number">Debit Note Number</label>
-                                            <input type="text" class="form-control" id="debit_note_number" name="debit_note_number">
-                                            <p class="error debit_note_number_error"></p>
+                                                <select class="form-control" name="debit_note_number" id="debit_note_number">
+                                                            <option st-id="" value="">Select Part Number</option>
+                                                                <?php foreach ($getdebitenotenumber as $key => $value) {?>
+                                                            <option value="<?php echo $value['debit_id']; ?>"><?php echo $value['debit_note_number']; ?></option>
+                                                        <?php } ?>
+                                                    <p class="error debit_note_number_error"></p>
+                                                </select>
                                         </div>
                                     </div>
 
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="debit_note_date">Debit Note Date</label>
-                                            <input type="text" class="form-control" id="debit_note_date" name="debit_note_date">
+                                            <input type="text" class="form-control datepicker" id="debit_note_date" name="debit_note_date">
                                             <p class="error debit_note_date_error"></p>
                                         </div>
                                     </div>
@@ -478,9 +510,7 @@
                                             <p class="error difference_debit_note_amt_error"></p>
                                         </div>
                                     </div>
-                                </div>
-                                
-                                <div class="row">
+
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="debit_amount_reason">Debit Amount Reason</label>
@@ -497,8 +527,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-                              
                             </div>
                             <!-- /.box-body -->
                             <div class="box-footer">
@@ -520,11 +548,11 @@
 <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
 <script>
    $(function() {
-   $(".datepicker").datepicker({ 
-   	// minDate: 0,
-   	todayHighlight: true,
-                dateFormat: 'yy-mm-dd',
-   	startDate: new Date()
-   });
+    $(".datepicker").datepicker({ 
+        // minDate: 0,
+        todayHighlight: true,
+                    dateFormat: 'yy-mm-dd',
+        startDate: new Date()
+    });
    });
 </script>

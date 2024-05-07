@@ -19363,7 +19363,7 @@
 
 
 <?php if($pageTitle=='Sales Tracking Report' || $pageTitle=='Add New Sales Tracking Report' || $pageTitle=='Edit New Sales Tracking Report' || $pageTitle=='Add Sales Tracking Report'){ ?>
-<script type="text/javascript">
+    <script type="text/javascript">
 		$(document).ready(function() {
 				var dt = $('#view_sales_tracking_report').DataTable({
 					"columnDefs": [ 
@@ -19573,5 +19573,80 @@
 				 return false;
 	    });		
 
-</script>
+		$(document).on('change','#credit_note_number',function(e){  
+			e.preventDefault();
+			var credit_note_number = $('#credit_note_number').val();
+            $.ajax({
+				url : "<?php echo ADMIN_PATH;?>getcreditnotedetailsbycreditnoteid",
+				type: "POST",
+				data : {'credit_note_number' : credit_note_number},
+					success: function(data, textStatus, jqXHR)
+					{
+					    var get_buyerdata = jQuery.parseJSON( data );
+
+						$(".loader_ajax").hide();
+							if(data == "failure")
+								{
+									$('#credit_note_date').val('');
+									$('#receivable_amt').val('');
+									$('#difference').val('');	
+									$('#credit_note_reason').val('');		
+								}
+								else
+									{
+											$('#credit_note_date').val(get_buyerdata.date);
+											$('#receivable_amt').val('');	
+											$('#difference').val('');	
+											$('#credit_note_reason').val('');	
+									}
+								    },
+									error: function (jqXHR, textStatus, errorThrown)
+										{
+											$('#credit_note_date').val('');
+											$('#receivable_amt').val('');	
+											$('#difference').val('');
+											$('#credit_note_reason').val('');		
+											
+										}
+									});
+				 return false;
+	    });
+
+		$(document).on('change','#debit_note_number',function(e){  
+			e.preventDefault();
+			var debit_note_number = $('#debit_note_number').val();
+            $.ajax({
+				url : "<?php echo ADMIN_PATH;?>getdebitnotedetailsbydebitenoteeid",
+				type: "POST",
+				data : {'debit_note_number' : debit_note_number},
+					success: function(data, textStatus, jqXHR)
+					{
+					    var get_buyerdata = jQuery.parseJSON( data );
+
+						$(".loader_ajax").hide();
+							if(data == "failure")
+								{
+										$('#debit_note_date').val('');
+										$('#difference_debit_note_amt').val('');
+										$('#debit_amount_reason').val('');	
+								}
+								else
+									{
+										$('#debit_note_date').val(get_buyerdata.debit_note_date);
+										$('#difference_debit_note_amt').val('');	
+										$('#debit_amount_reason').val('');	
+											
+									}
+								    },
+									error: function (jqXHR, textStatus, errorThrown)
+										{
+										  $('#debit_note_date').val('');
+										  $('#difference_debit_note_amt').val('');	
+										  $('#debit_amount_reason').val('');
+										}
+									});
+				 return false;
+	    });
+
+    </script>
 <?php } ?>
