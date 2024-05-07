@@ -21,32 +21,39 @@
                             <h3 class="box-title">Add Sales Tracking Report Details</h3>
                         </div>
                         <?php $this->load->helper("form"); ?>
-                        <form role="form" id="addnewchaform" action="<?php echo base_url() ?>addnewchaform" method="post" role="form">
+                        <form role="form" id="addsalestrackingreport" action="<?php echo base_url() ?>addsalestrackingreport" method="post" role="form">
                             <div class="box-body">
+
+                             <!-------------------------------------------------------------------------------------->
 
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="cha_forworder">INV NO.<span class="required">*</span></label>
-                                            <input type="text" class="form-control" id="cha_forworder" name="cha_forworder" required>
-                                            <p class="error cha_forworder_error"></p>
+                                            <label for="invoice_number">INV NO <span class="required">*</span></label>
+                                                <select class="form-control" name="invoice_number" id="invoice_number">
+                                                            <option st-id="" value="">Select Part Number</option>
+                                                                <?php foreach ($invoicenumberfromPackaging as $key => $value) {?>
+                                                            <option value="<?php echo $value['id']; ?>"><?php echo $value['buyer_invoice_number']; ?></option>
+                                                        <?php } ?>
+                                                    <p class="error invoice_number_error"></p>
+                                                </select>
                                         </div>
                                     </div>
                                     
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="clearance_done_by">INV.DATE</label>
-                                            <input type="text" class="form-control" id="clearance_done_by" name="clearance_done_by">
-                                            <p class="error clearance_done_by_error"></p>
+                                            <label for="invoice_date">INV DATE</label>
+                                            <input type="text" class="form-control" id="invoice_date" name="invoice_date">
+                                            <p class="error invoice_date_error"></p>
                                         </div>
                                     </div>
 
                         
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="payment_terms">BUYER NAME</label>
-                                            <input type="text" class="form-control" id="payment_terms" name="payment_terms">
-                                            <p class="error payment_terms_error"></p>
+                                            <label for="buyer_name">BUYER NAME</label>
+                                            <input type="text" class="form-control" id="buyer_name" name="buyer_name">
+                                            <p class="error buyer_name_error"></p>
                                         </div>
                                     </div>
                                 </div>
@@ -54,17 +61,17 @@
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="cha_forworder">Buyer Address<span class="required">*</span></label>
-                                            <input type="text" class="form-control" id="cha_forworder" name="cha_forworder" required>
-                                            <p class="error cha_forworder_error"></p>
+                                            <label for="buyer_address">Buyer Address<span class="required">*</span></label>
+                                            <input type="text" class="form-control" id="buyer_address" name="buyer_address" required>
+                                            <p class="error buyer_address_error"></p>
                                         </div>
                                     </div>
                                     
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="clearance_done_by">INV. CURRENCY</label>
-                                            <input type="text" class="form-control" id="clearance_done_by" name="clearance_done_by">
-                                            <p class="error clearance_done_by_error"></p>
+                                            <label for="invoice_currency">INV. CURRENCY</label>
+                                            <input type="text" class="form-control" id="invoice_currency" name="invoice_currency">
+                                            <p class="error invoice_currency_error"></p>
                                         </div>
                                     </div>
                                 </div>
@@ -72,9 +79,14 @@
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="cha_forworder">Cha Forwarder<span class="required">*</span></label>
-                                            <input type="text" class="form-control" id="cha_forworder" name="cha_forworder" required>
-                                            <p class="error cha_forworder_error"></p>
+                                            <label for="cha_forworder">CHA Forwarder<span class="required">*</span></label>
+                                                 <select class="form-control" name="cha_forworder" id="cha_forworder">
+                                                            <option st-id="" value="">Select CHA Forwarder</option>
+                                                                <?php foreach ($getchamaster as $key => $value) {?>
+                                                            <option value="<?php echo $value['cha_id']; ?>"><?php echo $value['cha_name']; ?></option>
+                                                        <?php } ?>
+                                                    <p class="error cha_forworder_error"></p>
+                                                </select>
                                         </div>
                                     </div>
                                     
@@ -138,7 +150,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="igst_rcved_date">Igst Rcved Date</label>
-                                            <input type="text" class="form-control" id="igst_rcved_date" name="igst_rcved_date">
+                                            <input type="text" class="form-control datepicker" id="igst_rcved_date" name="igst_rcved_date">
                                             <p class="error igst_rcved_date_error"></p>
                                         </div>
                                     </div>
@@ -154,8 +166,11 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="port_code">Port Code</label>
-                                            <input type="text" class="form-control" maxlength="12"  id="port_code" name="port_code">
-                                            <p class="error port_code_error"></p>
+                                                <select class="form-control" name="port_code" id="port_code">
+                                                    <option st-id="" value="">select Port Code</option>
+                                                    <option st-id="" value="INNSA1">INNSA1</option>
+                                                    <option st-id="" value="INBOM4">INBOM4</option>
+                                                </select>
                                         </div>
                                     </div>
 
@@ -180,7 +195,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="sb_date">Sb. Date</label>
-                                            <input type="text" class="form-control" id="sb_date" name="sb_date">
+                                            <input type="text" class="form-control datepicker" id="sb_date" name="sb_date">
                                             <p class="error sb_date_error"></p>
                                         </div>
                                     </div>
@@ -214,7 +229,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="bl_awb_date">BL/Awb Date</label>
-                                            <input type="text" class="form-control" id="bl_awb_date" name="bl_awb_date">
+                                            <input type="text" class="form-control datepicker" id="bl_awb_date" name="bl_awb_date">
                                             <p class="error bl_awb_date_error"></p>
                                         </div>
                                     </div>
@@ -260,8 +275,12 @@
                                             <p class="error foreign_bank_charges_in_inr_error"></p>
                                         </div>
                                     </div>
-
                                 </div>
+
+
+
+
+                                <!-------------------------------------------------------------------------------------->
                                
                                 <div class="row">
                                     <div class="col-md-3">
@@ -494,4 +513,18 @@
         </div>
     </section>
 </div>
+
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/common.js" charset="utf-8"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
+<script>
+   $(function() {
+   $(".datepicker").datepicker({ 
+   	// minDate: 0,
+   	todayHighlight: true,
+                dateFormat: 'yy-mm-dd',
+   	startDate: new Date()
+   });
+   });
+</script>

@@ -19362,7 +19362,7 @@
 
 
 
-<?php if($pageTitle=='Sales Tracking Report' || $pageTitle=='Add New Sales Tracking Report' || $pageTitle=='Edit New Sales Tracking Report'){ ?>
+<?php if($pageTitle=='Sales Tracking Report' || $pageTitle=='Add New Sales Tracking Report' || $pageTitle=='Edit New Sales Tracking Report' || $pageTitle=='Add Sales Tracking Report'){ ?>
 <script type="text/javascript">
 		$(document).ready(function() {
 				var dt = $('#view_sales_tracking_report').DataTable({
@@ -19373,11 +19373,11 @@
 						{ "width": "10%", "targets": 2 },
 						{ "width": "10%", "targets": 3 },
 						{ "width": "10%", "targets": 4 },
-						{ "width": "10%", "targets": 5 },
-						{ "width": "10%", "targets": 6 },
-						{ "width": "10%", "targets": 7 },
+						{ "width": "8%", "targets": 5 },
+						{ "width": "8%", "targets": 6 },
+						{ "width": "8%", "targets": 7 },
 						{ "width": "10%", "targets": 8 },
-						{ "width": "10%", "targets": 9 },
+						{ "width": "8%", "targets": 9 },
 						{ "width": "10%", "targets": 10},
 					],
 					responsive: true,
@@ -19400,10 +19400,10 @@
 		$(document).on('click','#savenewsalestracking',function(e){
 				e.preventDefault();
 				$(".loader_ajax").show();
-				var formData = new FormData($("#addnewchaform")[0]);
+				var formData = new FormData($("#addsalestrackingreport")[0]);
 
 				$.ajax({
-					url : "<?php echo base_url();?>addnewCha",
+					url : "<?php echo base_url();?>addsalestrackingreport",
 					type: "POST",
 					data : formData,
 					cache: false,
@@ -19424,11 +19424,11 @@
 						{
 							swal({
 								title: "Success",
-								text: "CHA Successfully Added!",
+								text: "Sales Tracking Report Successfully Added!",
 								icon: "success",
 								button: "Ok",
 								},function(){ 
-									window.location.href = "<?php echo base_url().'chamaster'?>";
+									window.location.href = "<?php echo base_url().'salestrackingreport'?>";
 							});		
 						}
 						
@@ -19485,7 +19485,7 @@
 				return false;
 		});
 
-		$(document).on('click','.deletecha',function(e){
+		$(document).on('click','.deletesalestracking',function(e){
 			var elemF = $(this);
 			e.preventDefault();
 
@@ -19503,7 +19503,7 @@
 			}, function(isConfirm) {
 				if (isConfirm) {
 							$.ajax({
-								url : "<?php echo base_url();?>deletecha",
+								url : "<?php echo base_url();?>deletesalestracking",
 								type: "POST",
 								data : 'id='+elemF.attr('data-id'),
 								success: function(data, textStatus, jqXHR)
@@ -19513,11 +19513,11 @@
 									if(obj.status=='success'){
 										swal({
 											title: "Deleted!",
-											text: "CHA Deleted Succesfully",
+											text: "Sales Tracking Deleted Succesfully",
 											icon: "success",
 											button: "Ok",
 											},function(){ 
-												window.location.href = "<?php echo base_url().'chamaster'?>";
+												window.location.href = "<?php echo base_url().'salestrackingreport'?>";
 										});	
 									}
 
@@ -19529,9 +19529,49 @@
 							})
 						}
 						else {
-				swal("Cancelled", "CHA deletion cancelled ", "error");
+				swal("Cancelled", "Sales Tracking deletion cancelled ", "error");
 				}
 			});
 		});
+
+        $(document).on('change','#invoice_number',function(e){  
+				   e.preventDefault();
+				    var invoice_number = $('#invoice_number').val();
+            $.ajax({
+				url : "<?php echo ADMIN_PATH;?>getinvoicedetilsbyinvoiceid",
+				type: "POST",
+				data : {'invoice_number' : invoice_number},
+					success: function(data, textStatus, jqXHR)
+					{
+					    var get_buyerdata = jQuery.parseJSON( data );
+
+						$(".loader_ajax").hide();
+							if(data == "failure")
+								{
+									$('#invoice_date').val('');
+									$('#buyer_name').val('');
+									$('#buyer_address').val('');	
+									$('#invoice_currency').val('');		
+								}
+								else
+									{
+											$('#invoice_date').val(get_buyerdata.buyer_invoice_date);
+											$('#buyer_name').val(get_buyerdata.buyer_name);	
+											$('#buyer_address').val(get_buyerdata.address);	
+											$('#invoice_currency').val(get_buyerdata.currency);	
+									}
+								    },
+									error: function (jqXHR, textStatus, errorThrown)
+										{
+											$('#invoice_date').val('');
+											$('#buyer_name').val('');	
+											$('#buyer_address').val('');
+											$('#invoice_currency').val('');		
+											
+										}
+									});
+				 return false;
+	    });		
+
 </script>
 <?php } ?>

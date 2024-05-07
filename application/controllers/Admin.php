@@ -11870,57 +11870,132 @@ public function addsalestrackingreport(){
 
     $post_submit = $this->input->post();
     if($post_submit){
-        $save_cha_response = array();
+        $save_salestracking_response = array();
 
-        $this->form_validation->set_rules('cha_name','CHA Name','trim|required|max_length[128]');
-        $this->form_validation->set_rules('landline','Landline','trim|numeric|max_length[128]');
-        $this->form_validation->set_rules('address','Address','trim|required');
-        $this->form_validation->set_rules('phone_1','Phone 1','trim|numeric|max_length[50]');
-        $this->form_validation->set_rules('contact_person','Contact Person','trim|max_length[50]');
-        $this->form_validation->set_rules('mobile','Mobile','trim|required|numeric|max_length[50]');
-        $this->form_validation->set_rules('email','Email','trim|required|valid_email|max_length[50]');
-        $this->form_validation->set_rules('mobile_2','Mobile 2','trim|numeric|max_length[50]');
-        $this->form_validation->set_rules('fax','Fax','trim|max_length[50]');
-        $this->form_validation->set_rules('GSTIN','GSTIN','trim|max_length[50]');
+        $this->form_validation->set_rules('invoice_number','Invoice Number','trim|required');
+        $this->form_validation->set_rules('cha_forworder','CHA Forworder','trim');
+        $this->form_validation->set_rules('clearance_done_by','Clearance Done By','trim|required');
+        $this->form_validation->set_rules('mode_of_Shipment','Mode of Shipment','trim');
+        $this->form_validation->set_rules('payment_terms','Payment Terms','trim');
+        $this->form_validation->set_rules('inv_amount','Inv Amount','trim');
+        $this->form_validation->set_rules('igst_value','Igst Value','trim');
+        $this->form_validation->set_rules('igst_rcved_amt','Igst Rcved Amt','trim');
+        $this->form_validation->set_rules('igst_rcved_date','Igst Rcved Date','trim');
+        $this->form_validation->set_rules('no_of_ctns','No of CTNS','trim');
+        $this->form_validation->set_rules('port_code','Port Code','trim');
+        $this->form_validation->set_rules('port_of_discharge','Port Of Discharge','trim');
+        $this->form_validation->set_rules('sb_no','SB No','trim');
+        $this->form_validation->set_rules('sb_date','SB Date','trim');
+        $this->form_validation->set_rules('fob_amount_rs','FOB Amount RS','trim');
+        $this->form_validation->set_rules('drawback','Drawback','trim');
+        $this->form_validation->set_rules('bl_awb_no','BL AWB No','trim');
+        $this->form_validation->set_rules('bl_awb_date','BL AWB Date','trim');
+        $this->form_validation->set_rules('brc_number_and_dt','Brc Number And DT','trim');
+        $this->form_validation->set_rules('transaction_id','Transaction id','trim');
+        $this->form_validation->set_rules('brc_value','BRC Value','trim');
+        $this->form_validation->set_rules('foreign_bank_charges','Foreign Bank Charges','trim');
+        $this->form_validation->set_rules('foreign_bank_charges_in_inr','Foreign Bank Charges In INR','trim');
+
 
         if($this->form_validation->run() == FALSE)
         {
-            $save_cha_response['status'] = 'failure';
-            $save_cha_response['error'] = array('cha_name'=>strip_tags(form_error('cha_name')), 'landline'=>strip_tags(form_error('landline')), 'address'=>strip_tags(form_error('address')), 'phone_1'=>strip_tags(form_error('phone_1')),'contact_person'=>strip_tags(form_error('contact_person')),'mobile'=>strip_tags(form_error('mobile')),'email'=>strip_tags(form_error('email')),'mobile_2'=>strip_tags(form_error('mobile_2')),'fax'=>strip_tags(form_error('fax')),'GSTIN'=>strip_tags(form_error('GSTIN')));
+            $save_salestracking_response['status'] = 'failure';
+            $save_salestracking_response['error'] = array(
+            'invoice_number'=>strip_tags(form_error('invoice_number')),
+            'cha_forworder'=>strip_tags(form_error('cha_forworder')),
+            'clearance_done_by'=>strip_tags(form_error('clearance_done_by')),
+            'mode_of_Shipment'=>strip_tags(form_error('mode_of_Shipment')),
+            'payment_terms'=>strip_tags(form_error('payment_terms')),
+            'inv_amount'=>strip_tags(form_error('inv_amount')),
+            'igst_value'=>strip_tags(form_error('igst_value')),
+            'igst_rcved_amt'=>strip_tags(form_error('igst_rcved_amt')),
+            'igst_rcved_date'=>strip_tags(form_error('igst_rcved_date')),
+            'no_of_ctns'=>strip_tags(form_error('no_of_ctns')),
+            'port_code'=>strip_tags(form_error('port_code')),
+            'port_of_discharge'=>strip_tags(form_error('port_of_discharge')),
+            'sb_no'=>strip_tags(form_error('sb_no')),
+            'sb_date'=>strip_tags(form_error('sb_date')),
+            'fob_amount_rs'=>strip_tags(form_error('fob_amount_rs')),
+            'drawback'=>strip_tags(form_error('drawback')),
+            'bl_awb_no'=>strip_tags(form_error('bl_awb_no')),
+            'bl_awb_date'=>strip_tags(form_error('bl_awb_date')),
+            'brc_number_and_dt'=>strip_tags(form_error('brc_number_and_dt')),
+            'transaction_id'=>strip_tags(form_error('transaction_id')),
+            'bl_awb_date'=>strip_tags(form_error('bl_awb_date')),
+            'brc_number_and_dt'=>strip_tags(form_error('brc_number_and_dt')),
+            'transaction_id'=>strip_tags(form_error('transaction_id')),
+            'brc_value'=>strip_tags(form_error('brc_value')),
+            'foreign_bank_charges'=>strip_tags(form_error('foreign_bank_charges')),
+            'foreign_bank_charges_in_inr'=>strip_tags(form_error('foreign_bank_charges_in_inr')));
+
         }else{
 
             $data = array(
-                'cha_name'   => trim($this->input->post('cha_name')),
-                'landline'     => trim($this->input->post('landline')),
-                'address'    => trim($this->input->post('address')),
-                'phone1'  => trim($this->input->post('phone_1')),
-                'contact_person' => trim($this->input->post('contact_person')),
-                'mobile' =>   trim($this->input->post('mobile')),
-                'email' =>    trim($this->input->post('email')),
-                'mobile2' =>    trim($this->input->post('mobile_2')),
-                'fax' =>    trim($this->input->post('fax')),
-                'GSTIN' =>    trim($this->input->post('GSTIN'))
+                'invoice_number'=> trim($this->input->post('invoice_number')),
+                'CHA_forwarder'=> trim($this->input->post('cha_forworder')),
+                'clearance_done_by'=>trim($this->input->post('clearance_done_by')),
+                'mode_of_Shipment'=>trim($this->input->post('mode_of_Shipment')),
+                'payment_terms'=>trim($this->input->post('payment_terms')),
+                'inv_amount'=>trim($this->input->post('inv_amount')),
+                'igst_value'=>trim($this->input->post('igst_value')),
+                'igst_rcved_amt'=>trim($this->input->post('igst_rcved_amt')),
+                'igst_rcved_date'=>trim($this->input->post('igst_rcved_date')),
+                'no_of_ctns'=>trim($this->input->post('no_of_ctns')),
+                'port_code'=>trim($this->input->post('port_code')),
+                'port_of_discharge'=>trim($this->input->post('port_of_discharge')),
+                'sb_no'=>trim($this->input->post('sb_no')),
+                'sb_date'=>trim($this->input->post('sb_date')),
+                'fob_amount_rs'=>trim($this->input->post('fob_amount_rs')),
+                'drawback'=>trim($this->input->post('drawback')),
+                'bl_awb_no'=>trim($this->input->post('bl_awb_no')),
+                'bl_awb_date'=>trim($this->input->post('bl_awb_date')),
+                'brc_number_and_dt'=>trim($this->input->post('brc_number_and_dt')),
+                'transaction_id'=>trim($this->input->post('transaction_id')),
+                'brc_value'=>trim($this->input->post('brc_value')),
+                'foreign_bank_charges'=>trim($this->input->post('foreign_bank_charges')),
+                'foreign_bank_charges_in_inr'=>trim($this->input->post('foreign_bank_charges_in_inr'))
             );
 
-            $checkifexitscha = $this->admin_model->checkifexitscha(trim($this->input->post('cha_name')));
-            if($checkifexitscha > 0){
-                $save_cha_response['status'] = 'failure';
-                $save_cha_response['error'] = array('cha_name'=>'Vendor Alreday Exits');
-            }else{
-                $savechadata = $this->admin_model->saveChadata('',$data);
-                if($savechadata){
-                    $save_cha_response['status'] = 'success';
-                    $save_cha_response['error'] = array('cha_name'=>'', 'landline'=>'', 'address'=>'', 'phone_1'=>'','contact_person'=>'','mobile'=>'','email'=>'','mobile_2'=>'','fax'=>'','GSTIN'=>'');
-                }
+                $savesalestrackingdata = $this->admin_model->savesalestrackingreportdata('',$data);
+                
+                if($savesalestrackingdata){
+                    $save_salestracking_response['status'] = 'success';
+                    $save_salestracking_response['error'] = array(
+                        'invoice_number'=>strip_tags(form_error('invoice_number')),
+                        'cha_forworder'=>strip_tags(form_error('cha_forworder')),
+                        'clearance_done_by'=>strip_tags(form_error('clearance_done_by')),
+                        'mode_of_Shipment'=>strip_tags(form_error('mode_of_Shipment')),
+                        'payment_terms'=>strip_tags(form_error('payment_terms')),
+                        'inv_amount'=>strip_tags(form_error('inv_amount')),
+                        'igst_value'=>strip_tags(form_error('igst_value')),
+                        'igst_rcved_amt'=>strip_tags(form_error('igst_rcved_amt')),
+                        'igst_rcved_date'=>strip_tags(form_error('igst_rcved_date')),
+                        'no_of_ctns'=>strip_tags(form_error('no_of_ctns')),
+                        'port_code'=>strip_tags(form_error('port_code')),
+                        'port_of_discharge'=>strip_tags(form_error('port_of_discharge')),
+                        'sb_no'=>strip_tags(form_error('sb_no')),
+                        'sb_date'=>strip_tags(form_error('sb_date')),
+                        'fob_amount_rs'=>strip_tags(form_error('fob_amount_rs')),
+                        'drawback'=>strip_tags(form_error('drawback')),
+                        'bl_awb_no'=>strip_tags(form_error('bl_awb_no')),
+                        'bl_awb_date'=>strip_tags(form_error('bl_awb_date')),
+                        'brc_number_and_dt'=>strip_tags(form_error('brc_number_and_dt')),
+                        'transaction_id'=>strip_tags(form_error('transaction_id')),
+                        'brc_value'=>strip_tags(form_error('brc_value')),
+                        'foreign_bank_charges'=>strip_tags(form_error('foreign_bank_charges')),
+                        'foreign_bank_charges_in_inr'=>strip_tags(form_error('foreign_bank_charges_in_inr')));
+             
             }
         }
-        echo json_encode($save_cha_response);
+        echo json_encode($save_salestracking_response);
     }else{
         $process = 'Add Sales Tracking Report';
         $processFunction = 'Admin/addsalestrackingreport';
         $this->logrecord($process,$processFunction);
         $this->global['pageTitle'] = 'Add Sales Tracking Report';
-        $this->loadViews("masters/addsalestrackingreport", $this->global, NULL, NULL);
+        $data['invoicenumberfromPackaging']= $this->admin_model->invoicenumberfromPackaging();
+        $data['getchamaster']= $this->admin_model->getchamaster();
+        $this->loadViews("masters/addsalestrackingreport", $this->global, $data, NULL);
     }
 
 }
@@ -14468,7 +14543,6 @@ public function downlaoddebitnote($id){
 
 }  
 
-
 public function downlaoddebitnotevendor($id){
 
     $getDebitnotedetailsforInvoice = $this->admin_model->getDebitnotedetailsforInvoicevendor($id);
@@ -14972,7 +15046,6 @@ public function downloadomsblasting($id){
 }
 
 
-
 public function downloadomsmachinary($id){
 
     $getblastingdetailsforinvoice = $this->admin_model->getblastingdetailsforinvoice($id);
@@ -15223,6 +15296,38 @@ public function downloadomsmachinary($id){
 }
 
 
+public function getinvoicedetilsbyinvoiceid(){
+
+    $invoice_number=$this->input->post('invoice_number');
+    if($invoice_number) {
+        $invoice_number_data = $this->admin_model->getinvoicedetilsbyinvoiceid($invoice_number);
+        if(count($invoice_number_data) >= 1) {
+            echo json_encode($invoice_number_data[0]);
+        } else {
+            echo 'failure';
+        }
+    } else {
+        echo 'failure';
+    }
+
+}
+
+
+public function deletesalestracking(){
+    $post_submit = $this->input->post();
+    if($post_submit){
+        $result = $this->admin_model->deletesalestracking(trim($this->input->post('id')));
+        if ($result) {
+                    $process = 'Sales Tracking Delete';
+                    $processFunction = 'Admin/deletesalestracking';
+                    $this->logrecord($process,$processFunction);
+                echo(json_encode(array('status'=>'success')));
+            }
+        else { echo(json_encode(array('status'=>'failed'))); }
+    }else{
+        echo(json_encode(array('status'=>'failed'))); 
+    }
+}
 
 }
 

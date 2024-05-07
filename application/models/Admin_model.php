@@ -7486,8 +7486,6 @@ class Admin_model extends CI_Model
 
     }
 
-
-
     public function getallenquiryformitemadd(){
         $this->db->select('*,'.TBL_SUPPLIER.'.supplier_name as suplier_id_name_1,a.supplier_name as suplier_id_name_2,b.supplier_name as suplier_id_name_3,c.supplier_name as suplier_id_name_4,d.supplier_name as suplier_id_name_5,e.vendor_name as vendor_name_1,f.vendor_name as vendor_name_2,g.vendor_name as vendor_name_3,h.vendor_name as vendor_name_4,i.vendor_name as vendor_name_5,'.TBL_ENAUIRY_FORM_ITEM.'.id as enquiry_form_id,'.TBL_ENAUIRY_FORM_ITEM.'.groass_weight as engroass_weight');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_ENAUIRY_FORM_ITEM.'.part_number');
@@ -7531,9 +7529,6 @@ class Admin_model extends CI_Model
 
     }
 
-
-
-
     public function geteditenquiryformitemdata($id){
         $this->db->select('*,'.TBL_SUPPLIER.'.sup_id as suplier_id_name_1,a.sup_id as suplier_id_name_2,b.sup_id as suplier_id_name_3,c.sup_id as suplier_id_name_4,d.sup_id as suplier_id_name_5,e.ven_id  as vendor_name_1,f.ven_id  as vendor_name_2,g.ven_id  as vendor_name_3,h.ven_id  as vendor_name_4,i.ven_id  as vendor_name_5,'.TBL_ENAUIRY_FORM_ITEM.'.id as enquiry_form_item_id,'.TBL_ENAUIRY_FORM_ITEM.'.groass_weight as engroass_weight');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_ENAUIRY_FORM_ITEM.'.part_number');
@@ -7554,9 +7549,6 @@ class Admin_model extends CI_Model
         return $data;
 
     }
-
-
-
 
     public function update_enquiry_from_id_in_items($enquiry_form_id){
 
@@ -7898,8 +7890,6 @@ class Admin_model extends CI_Model
         }
     }
 
-    
-
     public function getstockrejectionformitemcount($params,$vendor_po_id){
         $this->db->select('*');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
@@ -7970,8 +7960,6 @@ class Admin_model extends CI_Model
 
     }
 
-
-    
     public function  saverejectedformitemdata($id,$data){
         if($id != '') {
             $this->db->where('id', $id);
@@ -11005,8 +10993,10 @@ public function getfetchsalestrackingReportcount($params){
 
 public function getfetchsalestrackingReportdata($params){
 
-    $this->db->select('*');
-    $this->db->where(TBL_SALES_TRACKING_REPORT.'.status', 1);
+    $this->db->select('*,'.TBL_SALES_TRACKING_REPORT.'.id as sales_tracking_report');
+    $this->db->join(TBL_PACKING_INSTRACTION_DETAILS, TBL_PACKING_INSTRACTION_DETAILS.'.id = '.TBL_SALES_TRACKING_REPORT.'.invoice_number');
+    $this->db->join(TBL_CHA_MASTER, TBL_CHA_MASTER.'.cha_id = '.TBL_SALES_TRACKING_REPORT.'.CHA_forwarder');
+    $this->db->where(TBL_SALES_TRACKING_REPORT.'.status', 1);    
     $this->db->limit($params['length'],$params['start']);
     $this->db->order_by(TBL_SALES_TRACKING_REPORT.'.id','DESC');
     $query = $this->db->get(TBL_SALES_TRACKING_REPORT);
@@ -11017,8 +11007,8 @@ public function getfetchsalestrackingReportdata($params){
     {
         foreach ($fetch_result as $key => $value)
         {
-            $data[$counter]['sales_tracking_number'] = $value['sales_tracking_number'];
-            $data[$counter]['CHA_forwarder'] =  $value['CHA_forwarder'];
+            $data[$counter]['invoice_number'] = $value['buyer_invoice_number'];
+            $data[$counter]['CHA_forwarder'] =  $value['cha_name'];
             $data[$counter]['clearance_done_by'] =  $value['clearance_done_by'];
             $data[$counter]['mode_of_shipment'] = $value['mode_of_shipment'];
             $data[$counter]['payment_terms'] =  $value['payment_terms'];
@@ -11028,8 +11018,8 @@ public function getfetchsalestrackingReportdata($params){
             $data[$counter]['igst_rcved_date'] =  $value['igst_rcved_date'];
             $data[$counter]['no_of_ctns'] =  $value['no_of_ctns'];
             $data[$counter]['action'] = '';
-            $data[$counter]['action'] .= "<a href='".ADMIN_PATH."updatecha/".$value['cha_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";
-            $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['cha_id']."' class='fa fa-trash-o deletecha' aria-hidden='true'></i>"; 
+            $data[$counter]['action'] .= "<a href='".ADMIN_PATH."updatesalestrackingreport/".$value['sales_tracking_report']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";
+            $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['sales_tracking_report']."' class='fa fa-trash-o deletesalestracking' aria-hidden='true'></i>"; 
 
             $counter++; 
         }
@@ -11511,6 +11501,65 @@ public function getblastingItemdeatilsForInvoice($id){
     return $fetch_result;
 }
 
+
+public function invoicenumberfromPackaging(){
+    $this->db->select(TBL_PACKING_INSTRACTION_DETAILS.'.id,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_number');
+    $this->db->join(TBL_PACKING_INSTRACTION, TBL_PACKING_INSTRACTION.'.id = '.TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id');
+    $query = $this->db->get(TBL_PACKING_INSTRACTION_DETAILS);
+    $data = $query->result_array();
+    return $data;
+}
+
+public function getinvoicedetilsbyinvoiceid($invoice_number){
+
+    $this->db->select('*');
+    $this->db->join(TBL_PACKING_INSTRACTION, TBL_PACKING_INSTRACTION.'.id = '.TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id');
+    $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_PACKING_INSTRACTION.'.buyer_name');
+    $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_PACKING_INSTRACTION.'.buyer_po_number');
+    $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.id', $invoice_number);
+    $query = $this->db->get(TBL_PACKING_INSTRACTION_DETAILS);
+    $data = $query->result_array();
+    return $data;
+}
+
+
+public function getchamaster(){
+    $this->db->select('*');
+    $this->db->where(TBL_CHA_MASTER.'.status', 1);
+    $query = $this->db->get(TBL_CHA_MASTER);
+    $data = $query->result_array();
+    return $data;
+
+}
+
+
+public function savesalestrackingreportdata($id,$data){
+    if($id != '') {
+        $this->db->where('id', $id);
+        if($this->db->update(TBL_SALES_TRACKING_REPORT, $data)){
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    } else {
+        if($this->db->insert(TBL_SALES_TRACKING_REPORT, $data)) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+}
+
+
+public function deletesalestracking($id){
+    $this->db->where('id', $id);
+    //$this->db->delete(TBL_SUPPLIER);
+    if($this->db->delete(TBL_SALES_TRACKING_REPORT)){
+       return TRUE;
+    }else{
+       return FALSE;
+    }
+}
 
 
 }

@@ -121,13 +121,9 @@ $route['addSuplieritem'] = "admin/addSuplieritem";
 $route['viewSupplierpo/(:any)'] = "admin/viewSupplierpo/$1";
 $route['deleteSupplierpoitem'] = "admin/deleteSupplierpoitem";
 $route['getBuyerPonumberbyBuyerid'] = "admin/getBuyerPonumberbyBuyerid";
-
-
 $route['getBuyerPonumberbyBuyeridvendorpo'] = "admin/getBuyerPonumberbyBuyeridvendorpo";
-
 $route['getBuyerPonumberbyBuyeridforsupplierandvendorpo'] = "admin/getBuyerPonumberbyBuyeridforsupplierandvendorpo";
 $route['getSuppliritemonlyforgetbuyeritemonly'] = "admin/getSuppliritemonlyforgetbuyeritemonly";
-
 $route['getBuyerItemsforDisplay'] = "admin/getBuyerItemsforDisplay";
 $route['getBuyerItemsforDisplayBybuyerid'] = "admin/getBuyerItemsforDisplayBybuyerid";
 $route['vendorpo'] = "admin/vendorpo";
@@ -449,20 +445,18 @@ $route['fetchpreexportitemdetailsattribute/(:any)'] = "admin/fetchpreexportitemd
 $route['addexportitemdetailswithattributesvalues/(:any)'] = "admin/addexportitemdetailswithattributesvalues/$1";
 $route['deletepreexportitemattributes'] = "admin/deletepreexportitemattributes";
 $route['editexportitemdetailswithattributesvalues/(:any)'] = "admin/editexportitemdetailswithattributesvalues/$1";
-
-
-
 $route['chamaster'] = "admin/chamaster";
 $route['fetchCHA'] = "admin/fetchCHA";
 $route['addnewCha'] = "admin/addnewCha";
 $route['updatecha/(:any)'] = "admin/updatecha/$1";
 $route['deletecha'] = "admin/deletecha";
-
 $route['salestrackingreport'] = "admin/salestrackingreport";
 $route['fetchsalestrackingReport'] = "admin/fetchsalestrackingReport";
 $route['addsalestrackingreport'] = "admin/addsalestrackingreport";
 
 
+$route['getinvoicedetilsbyinvoiceid'] = "admin/getinvoicedetilsbyinvoiceid";
+$route['deletesalestracking'] = "admin/deletesalestracking";
 
 
 
