@@ -11907,6 +11907,7 @@ public function addsalestrackingreport(){
         $this->form_validation->set_rules('exchange_rate_as_per_sb','Exchange Rate As Per SB','trim');
         $this->form_validation->set_rules('EGM_status','EGM status','trim');
         $this->form_validation->set_rules('payment_exchange_amt','payment_exchange_amt','trim');
+        $this->form_validation->set_rules('payment_status','Payment Status','trim');
 
         if($this->form_validation->run() == FALSE)
         {
@@ -11947,6 +11948,7 @@ public function addsalestrackingreport(){
             'debit_note_date'=>strip_tags(form_error('foreign_bank_charges')),
             'difference_debit_note_amt'=>strip_tags(form_error('foreign_bank_charges')),
             'debit_amount_reason'=>strip_tags(form_error('foreign_bank_charges')),
+            'payment_status'=>strip_tags(form_error('payment_status')),
             'exchange_rate_as_per_sb'=>strip_tags(form_error('foreign_bank_charges')));
 
         }else{
@@ -11986,6 +11988,7 @@ public function addsalestrackingreport(){
                 'debit_note_date'=>trim($this->input->post('foreign_bank_charges')),
                 'difference_debit_note_amt'=>trim($this->input->post('foreign_bank_charges')),
                 'debit_amount_reason'=>trim($this->input->post('foreign_bank_charges')),
+                'payment_status'=>trim($this->input->post('payment_status')),
                 'exchange_rate_as_per_sb'=>trim($this->input->post('foreign_bank_charges'))
             );
 
@@ -12028,6 +12031,7 @@ public function addsalestrackingreport(){
                         'debit_amount_reason'=>strip_tags(form_error('foreign_bank_charges')),
                         'payment_exchange_amt'=>strip_tags(form_error('payment_exchange_amt')),
                         'EGM_status'=>strip_tags(form_error('EGM_status')),
+                        'payment_status'=>strip_tags(form_error('payment_status')),
                         'exchange_rate_as_per_sb'=>strip_tags(form_error('foreign_bank_charges')));
              
             }

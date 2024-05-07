@@ -526,6 +526,21 @@
                                             <p class="error exchange_rate_as_per_sb_error"></p>
                                         </div>
                                     </div>
+
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="payment_status">Payment Status</label>
+                                                 <select class="form-control" name="payment_status" id="payment_status">
+                                                        <option st-id="" value="">Select Payment Status</option>
+                                                        <option value="Open">Open</option>
+                                                        <option value="Close">Close</option>
+                                                     
+                                                </select>
+                                            <p class="error payment_status_error"></p>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                             <!-- /.box-body -->
