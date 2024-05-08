@@ -11584,11 +11584,12 @@ public function getdebitenotenumber(){
 
 public function getcreditnotedetailsbycreditnoteid($credit_note_number){
 
-    $this->db->select('*');
-    // $this->db->join(TBL_PACKING_INSTRACTION, TBL_PACKING_INSTRACTION.'.id = '.TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id');
+    $this->db->select('*,sum(recivable_amount) as recivable_amount,sum(diff_credite_note_value) as diff_credite_note_value,'.TBL_CREDIT_NOTE.'.remark as credite_note_remark');
+    $this->db->join(TBL_CREDIT_NOTE_ITEM, TBL_CREDIT_NOTE_ITEM.'.credit_note_id = '.TBL_CREDIT_NOTE.'.id');
     // $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_PACKING_INSTRACTION.'.buyer_name');
     // $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_PACKING_INSTRACTION.'.buyer_po_number');
     $this->db->where(TBL_CREDIT_NOTE.'.id', $credit_note_number);
+    $this->db->group_by(TBL_CREDIT_NOTE_ITEM.'.credit_note_id');
     $query = $this->db->get(TBL_CREDIT_NOTE);
     $data = $query->result_array();
     return $data;

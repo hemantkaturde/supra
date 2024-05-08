@@ -464,7 +464,7 @@
 
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="receivable_amt">Receivable Amt</label>
+                                            <label for="receivable_amt">Receivable Amt (Credit Note)</label>
                                             <input type="text" class="form-control"  id="receivable_amt" name="receivable_amt">
                                             <p class="error receivable_amt_error"></p>
                                         </div>
@@ -515,6 +515,14 @@
 
                                     <div class="col-md-3">
                                         <div class="form-group">
+                                            <label for="receivable_amt_debit">Receivable Amt (Debit Note)</label>
+                                            <input type="text" class="form-control"  id="receivable_amt_debit" name="receivable_amt_debit">
+                                            <p class="error receivable_amt_debit_error"></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
                                             <label for="difference_debit_note_amt">Difference / Debit Note Amt</label>
                                             <input type="text" class="form-control" id="difference_debit_note_amt" name="difference_debit_note_amt">
                                             <p class="error difference_debit_note_amt_error"></p>
@@ -528,8 +536,11 @@
                                             <p class="error debit_amount_reason_error"></p>
                                         </div>
                                     </div>
-                                    
-                                    <div class="col-md-3">
+                                </div>
+
+                                <div class="row">
+
+                                <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="exchange_rate_as_per_sb">Exchange Rate As Per Sb</label>
                                             <input type="text" class="form-control" id="exchange_rate_as_per_sb" name="exchange_rate_as_per_sb">
@@ -545,13 +556,12 @@
                                                         <option st-id="" value="">Select Payment Status</option>
                                                         <option value="Open">Open</option>
                                                         <option value="Close">Close</option>
-                                                     
                                                 </select>
                                             <p class="error payment_status_error"></p>
                                         </div>
                                     </div>
-
                                 </div>
+
                             </div>
                             <!-- /.box-body -->
                             <div class="box-footer">
