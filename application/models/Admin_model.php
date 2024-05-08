@@ -9500,6 +9500,7 @@ class Admin_model extends CI_Model
         if($params['search']['value'] != "") 
         {
             $this->db->where("(".TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_PO_MASTER.".buyer_po_number LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_BUYER_PO_MASTER.".buyer_po_date LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
@@ -9556,6 +9557,7 @@ class Admin_model extends CI_Model
         {
             $this->db->where("(".TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_PO_MASTER.".buyer_po_number LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_BUYER_PO_MASTER.".buyer_po_date LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_BUYER_PO_MASTER.".buyer_po_part_delivery_date LIKE '%".$params['search']['value']."%'");
@@ -9600,7 +9602,7 @@ class Admin_model extends CI_Model
             foreach ($fetch_result as $key => $value)
             {
                 $data[$counter]['buyer_name'] =$value['buyer_name'];
-                $data[$counter]['sales_order_number'] =$value['sales_order_number'];
+                $data[$counter]['sales_order_number'] =$value['buyer_po_number'];
                 $data[$counter]['buyer_po_date'] =$value['buyer_po_date'];
                 $data[$counter]['part_number'] =$value['part_number'];
                 $data[$counter]['type_of_raw_material'] =$value['name'];
