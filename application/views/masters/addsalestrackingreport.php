@@ -43,7 +43,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="invoice_date">INV DATE</label>
-                                            <input type="text" class="form-control" id="invoice_date" name="invoice_date">
+                                            <input type="text" class="form-control" id="invoice_date" name="invoice_date" readonly>
                                             <p class="error invoice_date_error"></p>
                                         </div>
                                     </div>
@@ -59,7 +59,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="buyer_name">BUYER NAME</label>
-                                            <input type="text" class="form-control" id="buyer_name" name="buyer_name">
+                                            <input type="text" class="form-control" id="buyer_name" name="buyer_name" readonly>
                                             <p class="error buyer_name_error"></p>
                                         </div>
                                     </div>
@@ -69,7 +69,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="buyer_address">Buyer Address</label>
-                                            <input type="text" class="form-control" id="buyer_address" name="buyer_address" required>
+                                            <input type="text" class="form-control" id="buyer_address" name="buyer_address" readonly>
                                             <p class="error buyer_address_error"></p>
                                         </div>
                                     </div>
@@ -77,7 +77,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="invoice_currency">INV. CURRENCY</label>
-                                            <input type="text" class="form-control" id="invoice_currency" name="invoice_currency">
+                                            <input type="text" class="form-control" id="invoice_currency" name="invoice_currency" readonly >
                                             <p class="error invoice_currency_error"></p>
                                         </div>
                                     </div>
