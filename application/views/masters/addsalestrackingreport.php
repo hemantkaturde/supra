@@ -48,6 +48,13 @@
                                         </div>
                                     </div>
 
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="buyer_PO">BUYER PO</label>
+                                            <input type="text" class="form-control" id="buyer_PO" name="buyer_PO">
+                                            <p class="error buyer_PO_error"></p>
+                                        </div>
+                                    </div>
                         
                                     <div class="col-md-3">
                                         <div class="form-group">
@@ -61,7 +68,7 @@
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="buyer_address">Buyer Address<span class="required">*</span></label>
+                                            <label for="buyer_address">Buyer Address</label>
                                             <input type="text" class="form-control" id="buyer_address" name="buyer_address" required>
                                             <p class="error buyer_address_error"></p>
                                         </div>
@@ -430,19 +437,20 @@
                                 </div>
 
                                 <!-------------------------------------------------------------------------------------->
-
                                
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="credit_note_number">Credit Note Number</label>
-                                                <select class="form-control" name="credit_note_number" id="credit_note_number">
+                                                <!-- <select class="form-control" name="credit_note_number" id="credit_note_number">
                                                             <option st-id="" value="">Select Part Number</option>
                                                                 <?php foreach ($getcreditnotenumber as $key => $value) {?>
                                                             <option value="<?php echo $value['id']; ?>"><?php echo $value['credit_note_number']; ?></option>
                                                         <?php } ?>
                                                     <p class="error credit_note_number_error"></p>
-                                                </select>
+                                                </select> -->
+                                                <input type="text" class="form-control" id="credit_note_number" name="credit_note_number">
+                                                <p class="error credit_note_number_error"></p>
                                         </div>
                                     </div>
                                     
@@ -485,13 +493,15 @@
                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="debit_note_number">Debit Note Number</label>
-                                                <select class="form-control" name="debit_note_number" id="debit_note_number">
+                                                <!-- <select class="form-control" name="debit_note_number" id="debit_note_number">
                                                             <option st-id="" value="">Select Part Number</option>
                                                                 <?php foreach ($getdebitenotenumber as $key => $value) {?>
                                                             <option value="<?php echo $value['debit_id']; ?>"><?php echo $value['debit_note_number']; ?></option>
                                                         <?php } ?>
                                                     <p class="error debit_note_number_error"></p>
-                                                </select>
+                                                </select> -->
+                                                <input type="text" class="form-control" id="debit_note_number" name="debit_note_number">
+                                                <p class="error debit_note_number_error"></p>
                                         </div>
                                     </div>
 

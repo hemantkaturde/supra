@@ -19552,6 +19552,7 @@
 									$('#buyer_name').val('');
 									$('#buyer_address').val('');	
 									$('#invoice_currency').val('');		
+									$('#buyer_PO').val('');		
 								}
 								else
 									{
@@ -19559,6 +19560,7 @@
 											$('#buyer_name').val(get_buyerdata.buyer_name);	
 											$('#buyer_address').val(get_buyerdata.address);	
 											$('#invoice_currency').val(get_buyerdata.currency);	
+											$('#buyer_PO').val(get_buyerdata.sales_order_number);	
 									}
 								    },
 									error: function (jqXHR, textStatus, errorThrown)
@@ -19567,6 +19569,7 @@
 											$('#buyer_name').val('');	
 											$('#buyer_address').val('');
 											$('#invoice_currency').val('');		
+											$('#buyer_PO').val('');		
 											
 										}
 									});
@@ -19647,6 +19650,52 @@
 									});
 				 return false;
 	    });
+
+		$(document).on('change', '#inv_amount,#brc_value', function(){	
+				
+			    $("#foreign_bank_charges").val();
+
+				 if($("#inv_amount").val()){
+					 var inv_amount = $("#inv_amount").val();
+				 }else{
+					 var inv_amount = 0;
+				 }
+
+				 if($("#brc_value").val()){
+					 var brc_value = $("#brc_value").val();
+				 }else{
+					 var brc_value = 0;
+				 }
+
+				 
+				 var total_one_group = parseFloat(inv_amount) -  parseFloat(brc_value);
+
+				 $("#foreign_bank_charges").val(total_one_group);
+			
+		});
+
+		$(document).on('change', '#payment_exchange_amt,#foreign_bank_charges', function(){	
+				
+			    $("#foreign_bank_charges_in_inr").val();
+
+				 if($("#payment_exchange_amt").val()){
+					 var payment_exchange_amt = $("#payment_exchange_amt").val();
+				 }else{
+					 var payment_exchange_amt = 0;
+				 }
+
+				 if($("#foreign_bank_charges").val()){
+					 var foreign_bank_charges = $("#foreign_bank_charges").val();
+				 }else{
+					 var foreign_bank_charges = 0;
+				 }
+
+				 
+				 var total_one_group = parseFloat(payment_exchange_amt) *  parseFloat(foreign_bank_charges);
+
+				 $("#foreign_bank_charges_in_inr").val(total_one_group);
+			
+		});
 
     </script>
 <?php } ?>
