@@ -11505,6 +11505,7 @@ public function getblastingItemdeatilsForInvoice($id){
 public function invoicenumberfromPackaging(){
     $this->db->select(TBL_PACKING_INSTRACTION_DETAILS.'.id,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_number');
     $this->db->join(TBL_PACKING_INSTRACTION, TBL_PACKING_INSTRACTION.'.id = '.TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id');
+    $this->db->group_by(TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_number');
     $query = $this->db->get(TBL_PACKING_INSTRACTION_DETAILS);
     $data = $query->result_array();
     return $data;
