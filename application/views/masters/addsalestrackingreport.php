@@ -442,14 +442,14 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="credit_note_number">Credit Note Number</label>
-                                                <!-- <select class="form-control" name="credit_note_number" id="credit_note_number">
-                                                            <option st-id="" value="">Select Part Number</option>
+                                                <select class="form-control" name="credit_note_number" id="credit_note_number">
+                                                            <option st-id="" value="">Select Credit Note Number</option>
                                                                 <?php foreach ($getcreditnotenumber as $key => $value) {?>
                                                             <option value="<?php echo $value['id']; ?>"><?php echo $value['credit_note_number']; ?></option>
                                                         <?php } ?>
                                                     <p class="error credit_note_number_error"></p>
-                                                </select> -->
-                                                <input type="text" class="form-control" id="credit_note_number" name="credit_note_number">
+                                                </select>
+                                                <!-- <input type="text" class="form-control" id="credit_note_number" name="credit_note_number"> -->
                                                 <p class="error credit_note_number_error"></p>
                                         </div>
                                     </div>
