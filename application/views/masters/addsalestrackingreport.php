@@ -48,13 +48,13 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-3">
+                                    <!-- <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="buyer_PO">BUYER PO</label>
                                             <input type="text" class="form-control" id="buyer_PO" name="buyer_PO">
                                             <p class="error buyer_PO_error"></p>
                                         </div>
-                                    </div>
+                                    </div> -->
                         
                                     <div class="col-md-3">
                                         <div class="form-group">
