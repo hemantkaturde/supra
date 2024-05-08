@@ -300,7 +300,7 @@
 
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="carrier_bill_number ">Carrier Bill Number</label>
+                                            <label for="carrier_bill_number ">CHA Bill Number</label>
                                             <input type="text" class="form-control" id="carrier_bill_number" name="carrier_bill_number">
                                             <p class="error carrier_bill_number_error"></p>
                                         </div>
@@ -308,7 +308,7 @@
                                     
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="carrier_bill_date">Carrier Bill Date</label>
+                                            <label for="carrier_bill_date">CHA Bill Date</label>
                                             <input type="text" class="form-control datepicker" id="carrier_bill_date" name="carrier_bill_date">
                                             <p class="error carrier_bill_date_error"></p>
                                         </div>
