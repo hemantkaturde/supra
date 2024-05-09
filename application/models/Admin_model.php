@@ -1846,7 +1846,7 @@ class Admin_model extends CI_Model
             $this->db->or_where(TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_SUPPLIER_PO_CONFIRMATION.".confirmed_date LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_SUPPLIER_PO_CONFIRMATION.".po_confirmed LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_SUPPLIER_PO_CONFIRMATION.".quatation_ref_no LIKE '%".$params['search']['value']."%')");
+            $this->db->or_where(TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%')");
         }
         $this->db->where(TBL_SUPPLIER_PO_CONFIRMATION.'.status', 1);
         $query = $this->db->get(TBL_SUPPLIER_PO_CONFIRMATION);
@@ -1868,7 +1868,7 @@ class Admin_model extends CI_Model
             $this->db->or_where(TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_SUPPLIER_PO_CONFIRMATION.".confirmed_date LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_SUPPLIER_PO_CONFIRMATION.".po_confirmed LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_SUPPLIER_PO_CONFIRMATION.".quatation_ref_no LIKE '%".$params['search']['value']."%')");
+            $this->db->or_where(TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%')");
         }
         $this->db->where(TBL_SUPPLIER_PO_CONFIRMATION.'.status', 1);
         $this->db->limit($params['length'],$params['start']);
@@ -2200,7 +2200,7 @@ class Admin_model extends CI_Model
             $this->db->or_where(TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_VENDOR_PO_CONFIRMATION.".confirmed_date LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_VENDOR_PO_CONFIRMATION.".po_confirmed LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_VENDOR_PO_CONFIRMATION.".quatation_ref_no LIKE '%".$params['search']['value']."%')");
+            $this->db->or_where(TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%')");
         }
         $this->db->where(TBL_VENDOR_PO_CONFIRMATION.'.status', 1);
         $query = $this->db->get(TBL_VENDOR_PO_CONFIRMATION);
@@ -2222,7 +2222,7 @@ class Admin_model extends CI_Model
             $this->db->or_where(TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_VENDOR_PO_CONFIRMATION.".confirmed_date LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_VENDOR_PO_CONFIRMATION.".po_confirmed LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_VENDOR_PO_CONFIRMATION.".quatation_ref_no LIKE '%".$params['search']['value']."%')");
+            $this->db->or_where(TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%')");
         }
         $this->db->where(TBL_VENDOR_PO_CONFIRMATION.'.status', 1);
         $this->db->limit($params['length'],$params['start']);
@@ -2745,7 +2745,7 @@ class Admin_model extends CI_Model
             $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_BILL_OF_MATERIAL.".bom_status LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_BILL_OF_MATERIAL.".part_number LIKE '%".$params['search']['value']."%')");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%')");
         }
         $this->db->where(TBL_BILL_OF_MATERIAL.'.status', 1);        
         $query = $this->db->get(TBL_BILL_OF_MATERIAL);
@@ -2767,7 +2767,7 @@ class Admin_model extends CI_Model
             $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_BILL_OF_MATERIAL.".bom_status LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_BILL_OF_MATERIAL.".part_number LIKE '%".$params['search']['value']."%')");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%')");
         }
         $this->db->where(TBL_BILL_OF_MATERIAL.'.status', 1);
         $this->db->limit($params['length'],$params['start']);
@@ -9491,7 +9491,7 @@ class Admin_model extends CI_Model
     public function fetchbuyerpodetailsreportCount($params,$buyer_name,$part_number,$from_date,$to_date){
         $this->db->select('*');
         $this->db->join(TBL_PACKING_INSTRACTION_DETAILS, TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id = '.TBL_PACKING_INSTRACTION.'.id');
-        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_PACKING_INSTRACTION.'.buyer_po_number','left');
+        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_PACKING_INSTRACTION.'.buyer_po_number');
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_PACKING_INSTRACTION.'.buyer_name');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_PACKING_INSTRACTION_DETAILS.'.part_number');
         $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.part_number_id = '.TBL_PACKING_INSTRACTION_DETAILS.'.part_number');
@@ -9544,12 +9544,11 @@ class Admin_model extends CI_Model
     public function fetchbuyerpodetailsreportData($params,$buyer_name,$part_number,$from_date,$to_date){
 
 
-
-
         $this->db->select(TBL_BUYER_MASTER.'.buyer_name,'.TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_BUYER_PO_MASTER.'.buyer_po_date,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name,'.TBL_BUYER_PO_MASTER.'.delivery_date,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_qty,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_number,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_date,'.TBL_PACKING_INSTRACTION_DETAILS.'.remark,'.TBL_BUYER_PO_MASTER_ITEM.'.order_oty,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date,'.TBL_BUYER_PO_MASTER.'.buyer_po_number');
-        $this->db->join(TBL_PACKING_INSTRACTION_DETAILS, TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id = '.TBL_PACKING_INSTRACTION.'.id');
         $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_PACKING_INSTRACTION.'.buyer_po_number','left');
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_PACKING_INSTRACTION.'.buyer_name');
+
+        $this->db->join(TBL_PACKING_INSTRACTION_DETAILS, TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id = '.TBL_PACKING_INSTRACTION.'.id');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_PACKING_INSTRACTION_DETAILS.'.part_number');
         $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.part_number_id = '.TBL_PACKING_INSTRACTION_DETAILS.'.part_number');
        
