@@ -19513,7 +19513,7 @@
 				e.preventDefault();
 				$(".loader_ajax").show();
 				var formData = new FormData($("#addsalestrackingreport")[0]);
-
+			
 				$.ajax({
 					url : "<?php echo base_url();?>addsalestrackingreport",
 					type: "POST",

@@ -12032,7 +12032,14 @@ public function addsalestrackingreport(){
                 'receivable_amt_debit'=>trim($this->input->post('receivable_amt_debit'))
             );
 
-                $savesalestrackingdata = $this->admin_model->savesalestrackingreportdata('',$data);
+        
+                if(trim($this->input->post('salestracking_id'))){
+                    $salestracking_id =  trim($this->input->post('salestracking_id'));
+                }else{
+                    $salestracking_id='';
+                }
+
+                $savesalestrackingdata = $this->admin_model->savesalestrackingreportdata($salestracking_id,$data);
                 
                 if($savesalestrackingdata){
                     $save_salestracking_response['status'] = 'success';

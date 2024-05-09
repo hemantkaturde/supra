@@ -24,7 +24,7 @@
                         <form role="form" id="addsalestrackingreport" action="<?php echo base_url() ?>addsalestrackingreport" method="post" role="form">
                             <div class="box-body">
 
-                             <?php  $getsalestrackingdetailsforedit['invoice_number'] ?>
+                             <?php  //$getsalestrackingdetailsforedit['invoice_number'] ?>
 
                                 <!-------------------------------------------------------------------------------------->
 

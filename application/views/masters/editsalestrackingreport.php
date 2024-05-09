@@ -23,8 +23,9 @@
                         <?php $this->load->helper("form"); ?>
                         <form role="form" id="addsalestrackingreport" action="<?php echo base_url() ?>addsalestrackingreport" method="post" role="form">
                             <div class="box-body">
-                            <?php // $getsalestrackingdetailsforedit['invoice_number'];exit; ?>
+                            
                                 <!-------------------------------------------------------------------------------------->
+                                <input type="hidden" class="form-control" id="salestracking_id"  value="<?=$getsalestrackingdetailsforedit['id'];?>" name="salestracking_id" readonly>
 
                                 <div class="row">
                                     <div class="col-md-3">
