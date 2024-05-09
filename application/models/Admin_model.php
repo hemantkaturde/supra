@@ -10369,6 +10369,8 @@ public function getpreexportcount($params){
         $this->db->where("(".TBL_PREEXPORT.".pre_export_invoice_no LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_PREEXPORT.".date LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_PREEXPORT.".invoice_number LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_PREEXPORT.".mode_of_shipment LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_PREEXPORT.".remark LIKE '%".$params['search']['value']."%')");
     }
@@ -10392,6 +10394,8 @@ public function getpreexportdata($params){
         $this->db->where("(".TBL_PREEXPORT.".pre_export_invoice_no LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_PREEXPORT.".date LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_PREEXPORT.".invoice_number LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_PREEXPORT.".mode_of_shipment LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_PREEXPORT.".remark LIKE '%".$params['search']['value']."%')");
     }
@@ -10411,7 +10415,7 @@ public function getpreexportdata($params){
     {
         foreach ($fetch_result as $key => $value)
         {
-            $data[$counter]['pre_export_invoice_no'] =$value['pre_export_invoice_no'].'<br>'.'<b>'.$value['invoice_number'].'</b>';
+            $data[$counter]['pre_export_invoice_no'] =$value['pre_export_invoice_no'].'-'.'<b>'.$value['invoice_number'].'</b>';
             $data[$counter]['date'] =$value['date'];
             $data[$counter]['buyer_name'] =$value['buyer_name'];
             $data[$counter]['buyer_po_number'] =$value['sales_order_number'];
