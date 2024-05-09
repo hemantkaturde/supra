@@ -2910,7 +2910,7 @@ class Admin_model extends CI_Model
             $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_BILL_OF_MATERIAL_VENDOR.".bom_status LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_BILL_OF_MATERIAL_VENDOR.".part_number LIKE '%".$params['search']['value']."%')");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%')");
         }
         $this->db->where(TBL_BILL_OF_MATERIAL_VENDOR.'.status', 1);        
         $query = $this->db->get(TBL_BILL_OF_MATERIAL_VENDOR);
@@ -2933,7 +2933,7 @@ class Admin_model extends CI_Model
             $this->db->or_where(TBL_BILL_OF_MATERIAL_VENDOR.".po_number LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_BILL_OF_MATERIAL_VENDOR.".bom_status LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_BILL_OF_MATERIAL_VENDOR.".part_number LIKE '%".$params['search']['value']."%')");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%')");
         }
         $this->db->where(TBL_BILL_OF_MATERIAL_VENDOR.'.status', 1);
         $this->db->limit($params['length'],$params['start']);
