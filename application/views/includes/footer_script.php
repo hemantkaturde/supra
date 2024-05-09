@@ -16791,7 +16791,7 @@
 
 								if(enquiry_form_id){
 
-									window.location.href = "<?php echo base_url().'editeqnuiryformdata/'?>"+enquiry_form_id;	
+									window.location.href = "<?php echo base_url().'editeqnuiryformdatabyid/'?>"+enquiry_form_id;	
 								}else{
 
 									window.location.href = "<?php echo base_url().'addnewenquiryform'?>";	
