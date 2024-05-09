@@ -15403,9 +15403,6 @@ public function getdebitnotedetailsbydebitenoteeid(){
 }
 
 
-
-
-
 public function deletesalestracking(){
     $post_submit = $this->input->post();
     if($post_submit){
@@ -15419,6 +15416,22 @@ public function deletesalestracking(){
         else { echo(json_encode(array('status'=>'failed'))); }
     }else{
         echo(json_encode(array('status'=>'failed'))); 
+    }
+}
+
+
+public function getnumberofcartoonsfrompreexport(){
+
+    $get_numberofcartoons=$this->input->post('get_numberofcartoons');
+    if($get_numberofcartoons) {
+        $get_numberofcartoons_data = $this->admin_model->get_numberofcartoons($get_numberofcartoons);
+        if(count($get_numberofcartoons_data) >= 1) {
+            echo json_encode($get_numberofcartoons_data[0]);
+        } else {
+            echo 'failure';
+        }
+    } else {
+        echo 'failure';
     }
 }
 

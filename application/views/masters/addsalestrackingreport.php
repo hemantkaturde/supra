@@ -24,16 +24,16 @@
                         <form role="form" id="addsalestrackingreport" action="<?php echo base_url() ?>addsalestrackingreport" method="post" role="form">
                             <div class="box-body">
 
-                             <!-------------------------------------------------------------------------------------->
+                                <!-------------------------------------------------------------------------------------->
 
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="invoice_number">INV NO <span class="required">*</span></label>
-                                                <select class="form-control" name="invoice_number" id="invoice_number">
+                                                <select class="form-control get_numberofcartoons" name="invoice_number" id="invoice_number">
                                                             <option st-id="" value="">Select Part Number</option>
                                                                 <?php foreach ($invoicenumberfromPackaging as $key => $value) {?>
-                                                            <option value="<?php echo $value['id']; ?>"><?php echo $value['buyer_invoice_number']; ?></option>
+                                                            <option value="<?php echo $value['id']; ?>" data_invoice="fsgfg"><?php echo $value['buyer_invoice_number']; ?></option>
                                                         <?php } ?>
                                                     <p class="error invoice_number_error"></p>
                                                 </select>
@@ -165,7 +165,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="no_of_ctns">No. Of Ctns</label>
-                                            <input type="text" class="form-control" id="no_of_ctns" name="no_of_ctns" required>
+                                            <input type="text" class="form-control" id="no_of_ctns" name="no_of_ctns" required readonly>
                                             <p class="error no_of_ctns_error"></p>
                                         </div>
                                     </div>

@@ -11615,6 +11615,77 @@ public function getdebitnotedetailsbydebitenoteeid($debit_note_number){
 }
 
 
+public function get_numberofcartoons($get_numberofcartoons){
+
+    $this->db->select('buyer_invoice_number');
+    $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.id', $get_numberofcartoons);
+    $query = $this->db->get(TBL_PACKING_INSTRACTION_DETAILS);
+    $data = $query->result_array();
+
+    if(count($data) > 0 ){
+        if($data[0]['buyer_invoice_number']){
+
+            $this->db->select('*,'.TBL_PREEXPORT.'.remark as preexportremark,'.TBL_PREEXPORT.'.id as export_id');
+            $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_PREEXPORT.'.buyer_name');
+            $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_PREEXPORT.'.buyer_po');
+            $this->db->where(TBL_PREEXPORT.'.invoice_number', trim($data[0]['buyer_invoice_number']));
+            $this->db->where(TBL_PREEXPORT.'.status', 1);
+
+            $query = $this->db->get(TBL_PREEXPORT);
+            $fetch_result = $query->result_array();
+        
+            $data = array();
+            $counter = 0;
+            if(count($fetch_result) > 0)
+            {
+                foreach ($fetch_result as $key => $value)
+                {
+                    
+                    $sum_of_export = $this->getSumetionofpreexportallrows($value['export_id']);
+        
+                    if($sum_of_export){
+        
+                        if($sum_of_export['total_gross_weight']){
+                            $total_gross_weight =  round(floatval($sum_of_export['total_gross_weight']) + floatval($value['total_weight_of_pallets']),3);
+                            $total_gross_only= round($sum_of_export['total_gross_weight'],3);
+        
+                        }else{
+                            $total_gross_weight = '';
+                            $total_gross_only=  '';
+                        }
+        
+                    
+                     $total_net_weight =  round($sum_of_export['total_net_weight'],3);
+                     $total_item_net_weight =  round($sum_of_export['total_item_net_weight'],3);
+                     $total_no_of_carttons =  $sum_of_export['no_of_cartoons'];
+                    
+                    }else{
+        
+                        $total_gross_weight =  '';
+                        $total_net_weight =  '';
+                        $total_item_net_weight =  '';
+                        $total_no_of_carttons =  '';
+                        $total_gross_only='';
+                    }
+                    $data[$counter]['total_no_of_carttons'] =  $total_no_of_carttons;
+                    $counter++; 
+                }
+            }
+            return $data;
+
+        }else{
+            return array();
+        }
+
+    }else{
+        return array();
+    }
+
+
+}
+
+
+
 }
 
 

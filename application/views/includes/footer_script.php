@@ -19697,5 +19697,39 @@
 			
 		});
 
+
+
+        $(document).on('change','.get_numberofcartoons',function(e){  
+			e.preventDefault();
+			var get_numberofcartoons = $('.get_numberofcartoons').val();
+            $.ajax({
+				url : "<?php echo ADMIN_PATH;?>getnumberofcartoonsfrompreexport",
+				type: "POST",
+				data : {'get_numberofcartoons' : get_numberofcartoons},
+					success: function(data, textStatus, jqXHR)
+					{
+					    var get_buyerdata = jQuery.parseJSON( data );
+
+						$(".loader_ajax").hide();
+							if(data == "failure")
+								{
+									    $('#no_of_ctns').val('');
+								}
+								else
+									{
+										$('#no_of_ctns').val(get_buyerdata.total_no_of_carttons);
+									}
+								    },
+									error: function (jqXHR, textStatus, errorThrown)
+										{
+										  $('#no_of_ctns').val('');
+										}
+									});
+				 return false;
+	    });		
+
+
+		
+
     </script>
 <?php } ?>

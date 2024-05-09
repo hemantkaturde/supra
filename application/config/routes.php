@@ -454,9 +454,9 @@ $route['deletesalestracking'] = "admin/deletesalestracking";
 $route['getcreditnotedetailsbycreditnoteid'] = "admin/getcreditnotedetailsbycreditnoteid";
 
 
+
 $route['getdebitnotedetailsbydebitenoteeid'] = "admin/getdebitnotedetailsbydebitenoteeid";
-
-
+$route['getnumberofcartoonsfrompreexport'] = "admin/getnumberofcartoonsfrompreexport";
 
 
 
