@@ -29,7 +29,7 @@
                             <table width="100%" class="table table-striped table-bordered table-hover" id="view_pre_export">
                                 <thead>
                                     <tr style="background-color:#3c8dbc !important;color:#fff">
-                                        <th>Invoice No</th>
+                                        <th>Pre Export Number</th>
                                         <th>Date</th>
                                         <th>Buyer Name</th>
                                         <th>Buyer PO</th>
@@ -38,7 +38,7 @@
                                         <th>Total Gross Weight + Total Weight of Pallets (in Kgs)</th>
                                         <th>Total No of cartoons</th>
                                         <th>Total No of Pallets</th>
-                                        <th>Remark</th>
+                                        <th>Mode Of Shipment</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>

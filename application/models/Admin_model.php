@@ -10411,7 +10411,7 @@ public function getpreexportdata($params){
     {
         foreach ($fetch_result as $key => $value)
         {
-            $data[$counter]['pre_export_invoice_no'] =$value['pre_export_invoice_no'];
+            $data[$counter]['pre_export_invoice_no'] =$value['pre_export_invoice_no'].'<br>'.'<b>'.$value['invoice_number'].'</b>';
             $data[$counter]['date'] =$value['date'];
             $data[$counter]['buyer_name'] =$value['buyer_name'];
             $data[$counter]['buyer_po_number'] =$value['sales_order_number'];
@@ -10451,7 +10451,7 @@ public function getpreexportdata($params){
             $data[$counter]['total_no_of_pallets'] =  $value['total_no_of_pallets'];
 
 
-            $data[$counter]['remark'] =$value['preexportremark'];
+            $data[$counter]['remark'] =$value['mode_of_shipment'];
             $data[$counter]['action'] ='';
             $data[$counter]['action'] .= "<a href='".ADMIN_PATH."exportdetailsitemdetails/".$value['export_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>   &nbsp ";
             $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editpreexport/".$value['export_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
