@@ -19362,7 +19362,7 @@
 
 
 
-<?php if($pageTitle=='Sales Tracking Report' || $pageTitle=='Add New Sales Tracking Report' || $pageTitle=='Edit New Sales Tracking Report' || $pageTitle=='Add Sales Tracking Report'){ ?>
+<?php if($pageTitle=='Sales Tracking Report' || $pageTitle=='Add New Sales Tracking Report' || $pageTitle=='Edit Tracking Report' || $pageTitle=='Add Sales Tracking Report'){ ?>
     <script type="text/javascript">
 		$(document).ready(function() {
 				var dt = $('#view_sales_tracking_report').DataTable({
@@ -19396,6 +19396,118 @@
 					},
 				});
 		});
+
+		$(document).ready(function() {
+			var invoice_number = $('#invoice_number').val();
+            $.ajax({
+				url : "<?php echo ADMIN_PATH;?>getinvoicedetilsbyinvoiceid",
+				type: "POST",
+				data : {'invoice_number' : invoice_number},
+					success: function(data, textStatus, jqXHR)
+					{
+					    var get_buyerdata = jQuery.parseJSON( data );
+
+						$(".loader_ajax").hide();
+							if(data == "failure")
+								{
+									$('#invoice_date').val('');
+									$('#buyer_name').val('');
+									$('#buyer_address').val('');	
+									$('#invoice_currency').val('');		
+									$('#buyer_PO').val('');		
+								}
+								else
+									{
+											$('#invoice_date').val(get_buyerdata.buyer_invoice_date);
+											$('#buyer_name').val(get_buyerdata.buyer_name);	
+											$('#buyer_address').val(get_buyerdata.address);	
+											$('#invoice_currency').val(get_buyerdata.currency);	
+											$('#buyer_PO').val(get_buyerdata.sales_order_number);	
+									}
+								    },
+									error: function (jqXHR, textStatus, errorThrown)
+										{
+											$('#invoice_date').val('');
+											$('#buyer_name').val('');	
+											$('#buyer_address').val('');
+											$('#invoice_currency').val('');		
+											$('#buyer_PO').val('');		
+											
+										}
+									});
+				 return false;
+		});
+
+		$(document).ready(function() {
+
+			var get_numberofcartoons = $('.get_numberofcartoons').val();
+            $.ajax({
+				url : "<?php echo ADMIN_PATH;?>getnumberofcartoonsfrompreexport",
+				type: "POST",
+				data : {'get_numberofcartoons' : get_numberofcartoons},
+					success: function(data, textStatus, jqXHR)
+					{
+					    var get_buyerdata = jQuery.parseJSON( data );
+
+						$(".loader_ajax").hide();
+							if(data == "failure")
+								{
+									    $('#no_of_ctns').val('');
+								}
+								else
+									{
+										$('#no_of_ctns').val(get_buyerdata.total_no_of_carttons);
+									}
+								    },
+									error: function (jqXHR, textStatus, errorThrown)
+										{
+										  $('#no_of_ctns').val('');
+										}
+									});
+				 return false;
+
+        });
+
+		$(document).ready(function() {
+
+			var credit_note_number = $('#credit_note_number').val();
+            $.ajax({
+				url : "<?php echo ADMIN_PATH;?>getcreditnotedetailsbycreditnoteid",
+				type: "POST",
+				data : {'credit_note_number' : credit_note_number},
+					success: function(data, textStatus, jqXHR)
+					{
+					    var get_buyerdata = jQuery.parseJSON( data );
+
+						$(".loader_ajax").hide();
+							if(data == "failure")
+								{
+									$('#credit_note_date').val('');
+									$('#receivable_amt').val('');
+									$('#difference').val('');	
+									$('#credit_note_reason').val('');		
+								}
+								else
+									{
+											$('#credit_note_date').val(get_buyerdata.date);
+											$('#receivable_amt').val(get_buyerdata.recivable_amount);	
+											$('#difference').val(get_buyerdata.diff_credite_note_value);	
+											$('#credit_note_reason').val(get_buyerdata.credite_note_remark);	
+									}
+								    },
+									error: function (jqXHR, textStatus, errorThrown)
+										{
+											$('#credit_note_date').val('');
+											$('#receivable_amt').val('');	
+											$('#difference').val('');
+											$('#credit_note_reason').val('');		
+											
+										}
+									});
+				 return false;
+
+		});
+
 
 		$(document).on('click','#savenewsalestracking',function(e){
 				e.preventDefault();
@@ -19535,8 +19647,8 @@
 		});
 
         $(document).on('change','#invoice_number',function(e){  
-				   e.preventDefault();
-				    var invoice_number = $('#invoice_number').val();
+			e.preventDefault();
+			var invoice_number = $('#invoice_number').val();
             $.ajax({
 				url : "<?php echo ADMIN_PATH;?>getinvoicedetilsbyinvoiceid",
 				type: "POST",
@@ -19697,8 +19809,6 @@
 			
 		});
 
-
-
         $(document).on('change','.get_numberofcartoons',function(e){  
 			e.preventDefault();
 			var get_numberofcartoons = $('.get_numberofcartoons').val();
@@ -19726,10 +19836,10 @@
 										}
 									});
 				 return false;
-	    });		
-
-
+	    });	
 		
+		
+
 
     </script>
 <?php } ?>

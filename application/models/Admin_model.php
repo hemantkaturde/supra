@@ -11023,7 +11023,7 @@ public function getfetchsalestrackingReportdata($params){
             $data[$counter]['igst_rcved_date'] =  $value['igst_rcved_date'];
             $data[$counter]['no_of_ctns'] =  $value['no_of_ctns'];
             $data[$counter]['action'] = '';
-            $data[$counter]['action'] .= "<a href='".ADMIN_PATH."updatesalestrackingreport/".$value['sales_tracking_report']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";
+            $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editsalestrackingreport/".$value['sales_tracking_report']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";
             $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['sales_tracking_report']."' class='fa fa-trash-o deletesalestracking' aria-hidden='true'></i>"; 
 
             $counter++; 
@@ -11684,6 +11684,17 @@ public function get_numberofcartoons($get_numberofcartoons){
 
 }
 
+public function getsalestrackingdetailsforedit($id){
+
+    $this->db->select('*');
+    // $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_BILL_OF_MATERIAL.'.vendor_po_number');
+    // $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_BILL_OF_MATERIAL.'.buyer_po_number');
+    // $this->db->where(TBL_INCOMING_DETAILS.'.status', 1);
+    $this->db->where(TBL_SALES_TRACKING_REPORT.'.id', $id);
+    $query = $this->db->get(TBL_SALES_TRACKING_REPORT);
+    $row_data = $query->row_array();
+    return $row_data;
+}
 
 
 }

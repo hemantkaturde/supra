@@ -11915,47 +11915,65 @@ public function addsalestrackingreport(){
         $this->form_validation->set_rules('payment_exchange_amt','payment_exchange_amt','trim');
         $this->form_validation->set_rules('payment_status','Payment Status','trim');
 
+        $this->form_validation->set_rules('carrier_bill_number','carrier_bill_number','trim');
+        $this->form_validation->set_rules('carrier_bill_date','carrier_bill_date','trim');
+        $this->form_validation->set_rules('bill_amt','bill_amt','trim');
+        $this->form_validation->set_rules('bill_paid_amount','bill_paid_amount','trim');
+        $this->form_validation->set_rules('tds_amt','tds_amt','trim');
+        $this->form_validation->set_rules('cheque_no','cheque_no','trim');
+        $this->form_validation->set_rules('bill_paid_date','bill_paid_date','trim');
+        $this->form_validation->set_rules('dbk_recd_amount','dbk_recd_amount','trim');
+        $this->form_validation->set_rules('dbk_recd_date','dbk_recd_date','trim');
+        $this->form_validation->set_rules('rodtep','rodtep','trim');
+        $this->form_validation->set_rules('escript_number_license_no','escript_number_license_no','trim');
+        $this->form_validation->set_rules('payment_recvd_date','payment_recvd_date','trim');
+        $this->form_validation->set_rules('payment_rcivd_amt','payment_rcivd_amt','trim');
+        $this->form_validation->set_rules('realised_amt_in_inr','realised_amt_in_inr','trim');
+        $this->form_validation->set_rules('bank_charges_inr','bank_charges_inr','trim');
+        $this->form_validation->set_rules('receivable_amt_debit','receivable_amt_debit','trim');
+        
+
         if($this->form_validation->run() == FALSE)
         {
             $save_salestracking_response['status'] = 'failure';
             $save_salestracking_response['error'] = array(
-            'invoice_number'=>strip_tags(form_error('invoice_number')),
-            'cha_forworder'=>strip_tags(form_error('cha_forworder')),
-            'clearance_done_by'=>strip_tags(form_error('clearance_done_by')),
-            'mode_of_Shipment'=>strip_tags(form_error('mode_of_Shipment')),
-            'payment_terms'=>strip_tags(form_error('payment_terms')),
-            'inv_amount'=>strip_tags(form_error('inv_amount')),
-            'igst_value'=>strip_tags(form_error('igst_value')),
-            'igst_rcved_amt'=>strip_tags(form_error('igst_rcved_amt')),
-            'igst_rcved_date'=>strip_tags(form_error('igst_rcved_date')),
-            'no_of_ctns'=>strip_tags(form_error('no_of_ctns')),
-            'port_code'=>strip_tags(form_error('port_code')),
-            'port_of_discharge'=>strip_tags(form_error('port_of_discharge')),
-            'sb_no'=>strip_tags(form_error('sb_no')),
-            'sb_date'=>strip_tags(form_error('sb_date')),
-            'fob_amount_rs'=>strip_tags(form_error('fob_amount_rs')),
-            'drawback'=>strip_tags(form_error('drawback')),
-            'bl_awb_no'=>strip_tags(form_error('bl_awb_no')),
-            'bl_awb_date'=>strip_tags(form_error('bl_awb_date')),
-            'brc_number_and_dt'=>strip_tags(form_error('brc_number_and_dt')),
-            'bl_awb_date'=>strip_tags(form_error('bl_awb_date')),
-            'transaction_id'=>strip_tags(form_error('transaction_id')),
-            'brc_value'=>strip_tags(form_error('brc_value')),
-            'foreign_bank_charges'=>strip_tags(form_error('foreign_bank_charges')),
-            'foreign_bank_charges_in_inr'=>strip_tags(form_error('foreign_bank_charges_in_inr')),
-            'payment_exchange_amt'=>strip_tags(form_error('payment_exchange_amt')),
-            'EGM_status'=>strip_tags(form_error('EGM_status')),
-            'credit_note_number'=>strip_tags(form_error('foreign_bank_charges')),
-            'credit_note_date'=>strip_tags(form_error('foreign_bank_charges')),
-            'receivable_amt'=>strip_tags(form_error('foreign_bank_charges')),
-            'difference'=>strip_tags(form_error('foreign_bank_charges')),
-            'credit_note_reason'=>strip_tags(form_error('foreign_bank_charges')),
-            'debit_note_number'=>strip_tags(form_error('foreign_bank_charges')),
-            'debit_note_date'=>strip_tags(form_error('foreign_bank_charges')),
-            'difference_debit_note_amt'=>strip_tags(form_error('foreign_bank_charges')),
-            'debit_amount_reason'=>strip_tags(form_error('foreign_bank_charges')),
-            'payment_status'=>strip_tags(form_error('payment_status')),
-            'exchange_rate_as_per_sb'=>strip_tags(form_error('foreign_bank_charges')));
+                'invoice_number'=>strip_tags(form_error('invoice_number')),
+                'cha_forworder'=>strip_tags(form_error('cha_forworder')),
+                'clearance_done_by'=>strip_tags(form_error('clearance_done_by')),
+                'mode_of_Shipment'=>strip_tags(form_error('mode_of_Shipment')),
+                'payment_terms'=>strip_tags(form_error('payment_terms')),
+                'inv_amount'=>strip_tags(form_error('inv_amount')),
+                'igst_value'=>strip_tags(form_error('igst_value')),
+                'igst_rcved_amt'=>strip_tags(form_error('igst_rcved_amt')),
+                'igst_rcved_date'=>strip_tags(form_error('igst_rcved_date')),
+                'no_of_ctns'=>strip_tags(form_error('no_of_ctns')),
+                'port_code'=>strip_tags(form_error('port_code')),
+                'port_of_discharge'=>strip_tags(form_error('port_of_discharge')),
+                'sb_no'=>strip_tags(form_error('sb_no')),
+                'sb_date'=>strip_tags(form_error('sb_date')),
+                'fob_amount_rs'=>strip_tags(form_error('fob_amount_rs')),
+                'drawback'=>strip_tags(form_error('drawback')),
+                'bl_awb_no'=>strip_tags(form_error('bl_awb_no')),
+                'bl_awb_date'=>strip_tags(form_error('bl_awb_date')),
+                'brc_number_and_dt'=>strip_tags(form_error('brc_number_and_dt')),
+                'transaction_id'=>strip_tags(form_error('transaction_id')),
+                'brc_value'=>strip_tags(form_error('brc_value')),
+                'foreign_bank_charges'=>strip_tags(form_error('foreign_bank_charges')),
+                'foreign_bank_charges_in_inr'=>strip_tags(form_error('foreign_bank_charges_in_inr')),
+                'credit_note_number'=>strip_tags(form_error('credit_note_number')),
+                'credit_note_date'=>strip_tags(form_error('credit_note_date')),
+                'receivable_amt'=>strip_tags(form_error('receivable_amt')),
+                'difference'=>strip_tags(form_error('difference')),
+                'credit_note_reason'=>strip_tags(form_error('credit_note_reason')),
+                'debit_note_number'=>strip_tags(form_error('debit_note_number')),
+                'debit_note_date'=>strip_tags(form_error('debit_note_date')),
+                'difference_debit_note_amt'=>strip_tags(form_error('difference_debit_note_amt')),
+                'debit_amount_reason'=>strip_tags(form_error('debit_amount_reason')),
+                'payment_exchange_amt'=>strip_tags(form_error('payment_exchange_amt')),
+                'EGM_status'=>strip_tags(form_error('EGM_status')),
+                'payment_status'=>strip_tags(form_error('payment_status')),
+                'receivable_amt_debit' =>strip_tags(form_error('receivable_amt_debit')),
+                'exchange_rate_as_per_sb'=>strip_tags(form_error('exchange_rate_as_per_sb')));
 
         }else{
 
@@ -11985,17 +12003,33 @@ public function addsalestrackingreport(){
                 'foreign_bank_charges_in_inr'=>trim($this->input->post('foreign_bank_charges_in_inr')),
                 'payment_exchange_amt'=>trim($this->input->post('payment_exchange_amt')),
                 'EGM_status'=>trim($this->input->post('EGM_status')),
-                'credit_note_number'=>trim($this->input->post('foreign_bank_charges')),
-                'credit_note_date'=>trim($this->input->post('foreign_bank_charges')),
-                'receivable_amt'=>trim($this->input->post('foreign_bank_charges')),
-                'difference'=>trim($this->input->post('foreign_bank_charges')),
-                'credit_note_reason'=>trim($this->input->post('foreign_bank_charges')),
-                'debit_note_number'=>trim($this->input->post('foreign_bank_charges')),
-                'debit_note_date'=>trim($this->input->post('foreign_bank_charges')),
-                'difference_debit_note_amt'=>trim($this->input->post('foreign_bank_charges')),
-                'debit_amount_reason'=>trim($this->input->post('foreign_bank_charges')),
+                'credit_note_number'=>trim($this->input->post('credit_note_number')),
+                'credit_note_date'=>trim($this->input->post('credit_note_date')),
+                'receivable_amt'=>trim($this->input->post('receivable_amt')),
+                'difference'=>trim($this->input->post('difference')),
+                'credit_note_reason'=>trim($this->input->post('credit_note_reason')),
+                'debit_note_number'=>trim($this->input->post('debit_note_number')),
+                'debit_note_date'=>trim($this->input->post('debit_note_date')),
+                'difference_debit_note_amt'=>trim($this->input->post('difference_debit_note_amt')),
+                'debit_amount_reason'=>trim($this->input->post('debit_amount_reason')),
                 'payment_status'=>trim($this->input->post('payment_status')),
-                'exchange_rate_as_per_sb'=>trim($this->input->post('foreign_bank_charges'))
+                'exchange_rate_as_per_sb'=>trim($this->input->post('exchange_rate_as_per_sb')),
+                'carrier_bill_number'=>trim($this->input->post('carrier_bill_number')),
+                'carrier_bill_date'=>trim($this->input->post('carrier_bill_date')),
+                'bill_amt'=>trim($this->input->post('bill_amt')),
+                'bill_paid_amount'=>trim($this->input->post('bill_paid_amount')),
+                'tds_amt'=>trim($this->input->post('tds_amt')),
+                'cheque_no'=>trim($this->input->post('cheque_no')),
+                'bill_paid_date'=>trim($this->input->post('bill_paid_date')),
+                'dbk_recd_amount'=>trim($this->input->post('dbk_recd_amount')),
+                'dbk_recd_date'=>trim($this->input->post('dbk_recd_date')),
+                'rodtep'=>trim($this->input->post('rodtep')),
+                'escript_number_license_no'=>trim($this->input->post('escript_number_license_no')),
+                'payment_recvd_date'=>trim($this->input->post('payment_recvd_date')),
+                'payment_rcivd_amt'=>trim($this->input->post('payment_rcivd_amt')),
+                'realised_amt_in_inr'=>trim($this->input->post('realised_amt_in_inr')),
+                'bank_charges_inr'=>trim($this->input->post('bank_charges_inr')),
+                'receivable_amt_debit'=>trim($this->input->post('receivable_amt_debit'))
             );
 
                 $savesalestrackingdata = $this->admin_model->savesalestrackingreportdata('',$data);
@@ -12026,19 +12060,20 @@ public function addsalestrackingreport(){
                         'brc_value'=>strip_tags(form_error('brc_value')),
                         'foreign_bank_charges'=>strip_tags(form_error('foreign_bank_charges')),
                         'foreign_bank_charges_in_inr'=>strip_tags(form_error('foreign_bank_charges_in_inr')),
-                        'credit_note_number'=>strip_tags(form_error('foreign_bank_charges')),
-                        'credit_note_date'=>strip_tags(form_error('foreign_bank_charges')),
-                        'receivable_amt'=>strip_tags(form_error('foreign_bank_charges')),
-                        'difference'=>strip_tags(form_error('foreign_bank_charges')),
-                        'credit_note_reason'=>strip_tags(form_error('foreign_bank_charges')),
-                        'debit_note_number'=>strip_tags(form_error('foreign_bank_charges')),
-                        'debit_note_date'=>strip_tags(form_error('foreign_bank_charges')),
-                        'difference_debit_note_amt'=>strip_tags(form_error('foreign_bank_charges')),
-                        'debit_amount_reason'=>strip_tags(form_error('foreign_bank_charges')),
+                        'credit_note_number'=>strip_tags(form_error('credit_note_number')),
+                        'credit_note_date'=>strip_tags(form_error('credit_note_date')),
+                        'receivable_amt'=>strip_tags(form_error('receivable_amt')),
+                        'difference'=>strip_tags(form_error('difference')),
+                        'credit_note_reason'=>strip_tags(form_error('credit_note_reason')),
+                        'debit_note_number'=>strip_tags(form_error('debit_note_number')),
+                        'debit_note_date'=>strip_tags(form_error('debit_note_date')),
+                        'difference_debit_note_amt'=>strip_tags(form_error('difference_debit_note_amt')),
+                        'debit_amount_reason'=>strip_tags(form_error('debit_amount_reason')),
                         'payment_exchange_amt'=>strip_tags(form_error('payment_exchange_amt')),
                         'EGM_status'=>strip_tags(form_error('EGM_status')),
                         'payment_status'=>strip_tags(form_error('payment_status')),
-                        'exchange_rate_as_per_sb'=>strip_tags(form_error('foreign_bank_charges')));
+                        'receivable_amt_debit' =>strip_tags(form_error('receivable_amt_debit')),
+                        'exchange_rate_as_per_sb'=>strip_tags(form_error('exchange_rate_as_per_sb')));
              
             }
         }
@@ -15434,6 +15469,22 @@ public function getnumberofcartoonsfrompreexport(){
         echo 'failure';
     }
 }
+
+
+public function editsalestrackingreport($id){
+    $process = 'Edit Tracking Report';
+    $processFunction = 'Admin/editsalestrackingreport';
+    $this->logrecord($process,$processFunction);
+    $this->global['pageTitle'] = 'Edit Tracking Report';
+    $data['getsalestrackingdetailsforedit']= $this->admin_model->getsalestrackingdetailsforedit($id);
+    $data['invoicenumberfromPackaging']= $this->admin_model->invoicenumberfromPackaging();
+    $data['getchamaster']= $this->admin_model->getchamaster();
+    $data['getcreditnotenumber']= $this->admin_model->getcreditnotenumber();
+    $data['getdebitenotenumber']= $this->admin_model->getdebitenotenumber();
+    $this->loadViews("masters/editsalestrackingreport", $this->global, $data, NULL);
+}
+
+
 
 }
 
