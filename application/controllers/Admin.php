@@ -13953,7 +13953,7 @@ public function downlaodjobworkchllan($id){
 
                 }
 
-            $ii++;
+            $i++;
     }
 
     $space = '<tr>
