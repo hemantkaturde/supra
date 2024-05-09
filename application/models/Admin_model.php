@@ -2559,7 +2559,7 @@ class Admin_model extends CI_Model
             $this->db->where("(".TBL_JOB_WORK.".po_number LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_JOB_WORK.".date LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_VENDOR.".date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_JOB_WORK.".date LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_SUPPLIER.".supplier_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_JOB_WORK.".raw_material_supplier LIKE '%".$params['search']['value']."%')");
         }
@@ -2582,7 +2582,7 @@ class Admin_model extends CI_Model
             $this->db->where("(".TBL_JOB_WORK.".po_number LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_JOB_WORK.".date LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_VENDOR.".date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_JOB_WORK.".date LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_SUPPLIER.".supplier_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_JOB_WORK.".raw_material_supplier LIKE '%".$params['search']['value']."%')");
         }
