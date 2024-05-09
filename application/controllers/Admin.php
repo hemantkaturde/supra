@@ -11278,10 +11278,14 @@ public function addnewfreexport(){
         $this->form_validation->set_rules('pallet_2','Pallet 2','trim');
         $this->form_validation->set_rules('remark','Remark','trim');
 
+        $this->form_validation->set_rules('preexport_invoice_number','Preexport Invoice Number','trim');
+        $this->form_validation->set_rules('mode_of_shipment','Mode of Shipment','trim|required');
+
+
         if($this->form_validation->run() == FALSE)
         {
             $savePreexport_response['status'] = 'success';
-            $savePreexport_response['error'] = array('invoice_number'=>strip_tags(form_error('invoice_number')),'date'=>strip_tags(form_error('date')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'total_no_of_pallets'=>strip_tags(form_error('total_no_of_pallets')),'total_weight_of_pallets'=>strip_tags(form_error('total_weight_of_pallets')),'pallet_1'=>strip_tags(form_error('pallet_1')),'pallet_2'=>strip_tags(form_error('pallet_2')),'remark'=>strip_tags(form_error('remark')));
+            $savePreexport_response['error'] = array('invoice_number'=>strip_tags(form_error('invoice_number')),'date'=>strip_tags(form_error('date')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'total_no_of_pallets'=>strip_tags(form_error('total_no_of_pallets')),'total_weight_of_pallets'=>strip_tags(form_error('total_weight_of_pallets')),'pallet_1'=>strip_tags(form_error('pallet_1')),'pallet_2'=>strip_tags(form_error('pallet_2')),'remark'=>strip_tags(form_error('remark')),'preexport_invoice_number'=>strip_tags(form_error('preexport_invoice_number')),'mode_of_shipment'=>strip_tags(form_error('mode_of_shipment')));
     
         }else{
 
@@ -11295,6 +11299,8 @@ public function addnewfreexport(){
                 'pallet_1' => trim($this->input->post('pallet_1')),
                 'pallet_2' => trim($this->input->post('pallet_2')),
                 'remark' => trim($this->input->post('remark')),
+                'invoice_number' => trim($this->input->post('preexport_invoice_number')),
+                'mode_of_shipment' => trim($this->input->post('mode_of_shipment')),
             );
 
 
@@ -11307,7 +11313,7 @@ public function addnewfreexport(){
             $savenepreexport= $this->admin_model->savenepreexport($preexport_id,$data);
             if($savenepreexport){
                 $savePreexport_response['status'] = 'success';
-                $savePreexport_response['error'] = array('invoice_number'=>strip_tags(form_error('invoice_number')),'date'=>strip_tags(form_error('date')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'total_no_of_pallets'=>strip_tags(form_error('total_no_of_pallets')),'total_weight_of_pallets'=>strip_tags(form_error('total_weight_of_pallets')),'pallet_1'=>strip_tags(form_error('pallet_1')),'pallet_2'=>strip_tags(form_error('pallet_2')),'remark'=>strip_tags(form_error('remark')));
+                $savePreexport_response['error'] = array('invoice_number'=>strip_tags(form_error('invoice_number')),'date'=>strip_tags(form_error('date')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'total_no_of_pallets'=>strip_tags(form_error('total_no_of_pallets')),'total_weight_of_pallets'=>strip_tags(form_error('total_weight_of_pallets')),'pallet_1'=>strip_tags(form_error('pallet_1')),'pallet_2'=>strip_tags(form_error('pallet_2')),'remark'=>strip_tags(form_error('remark')),'preexport_invoice_number'=>strip_tags(form_error('preexport_invoice_number')),'mode_of_shipment'=>strip_tags(form_error('mode_of_shipment')));
             }
         }
         echo json_encode($savePreexport_response);

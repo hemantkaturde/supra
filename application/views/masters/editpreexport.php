@@ -44,6 +44,19 @@
                                      } ?>
 
 
+
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="preexport_invoice_number">Invoice Number</label>
+                                            <input type="text" class="form-control" id="preexport_invoice_number" value="<?=trim($getexportdetailsforedit[0]['invoice_number'])?>" name="preexport_invoice_number">
+                                            <p class="error preexport_invoice_number_error"></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -133,6 +146,20 @@
                                         </div>
                                     </div>
                                 </div> -->
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                               <label for="mode_of_shipment">Mode of Shipment <span class="required">*</span></label>
+                                                <select class="form-control mode_of_shipment" name="mode_of_shipment" id="mode_of_shipment">
+                                                    <option st-id="" value="">Select Mode of Shipment</option>
+                                                    <option st-id="" value="Air" <?php if($getexportdetailsforedit[0]['mode_of_shipment']=='Air'){  echo 'selected'; } ?> >Air</option>
+                                                    <option st-id="" value="Sea" <?php if($getexportdetailsforedit[0]['mode_of_shipment']=='Sea'){  echo 'selected'; }   ?>>Sea</option>
+                                                </select>
+                                            <p class="error mode_of_shipment_error"></p>
+                                        </div>
+                                    </div>
+                                </div>  
 
 
                                 <div class="row">

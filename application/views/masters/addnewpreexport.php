@@ -107,10 +107,21 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="invoice_number">Invoice Number<span class="required">*</span></label>
+                                            <label for="invoice_number">Pre Export Number<span class="required">*</span></label>
                                             <input type="text" class="form-control" id="invoice_number" value="<?=$invoice_number?>" name="invoice_number" required readonly>
                                             <p class="error invoice_number_error"></p>
 
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="preexport_invoice_number">Invoice Number</label>
+                                            <input type="text" class="form-control" id="preexport_invoice_number" name="preexport_invoice_number">
+                                            <p class="error preexport_invoice_number_error"></p>
                                         </div>
                                     </div>
                                 </div>
@@ -198,6 +209,21 @@
                                         </div>
                                     </div>
                                 </div> -->
+
+                                
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                               <label for="mode_of_shipment">Mode of Shipment <span class="required">*</span></label>
+                                                <select class="form-control mode_of_shipment" name="mode_of_shipment" id="mode_of_shipment">
+                                                    <option st-id="" value="">Select Mode of Shipment</option>
+                                                    <option st-id="" value="Air">Air</option>
+                                                    <option st-id="" value="sea">Sea</option>
+                                                </select>
+                                            <p class="error mode_of_shipment_error"></p>
+                                        </div>
+                                    </div>
+                                </div>  
 
                                 <div class="row">
                                     <div class="col-md-6">
