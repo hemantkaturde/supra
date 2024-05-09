@@ -13280,7 +13280,7 @@ public function downloadpackinginstraction($packing_details_item_id){
                 <tr>
                     <td style="text-align:left;margin-top: 10px;width:30%;font-size:17px"><b>Date</b></td>
                     <td style="text-align:left;padding: 10px;width:10%"></td>
-                    <td style="text-align:left;padding: 10px;width:60%">'.$getPackingInstructionData[0]['buyer_invoice_date'].'</td>
+                    <td style="text-align:left;padding: 10px;width:60%">'.date('d-m-Y',strtotime($getPackingInstructionData[0]['buyer_invoice_date'])).'</td>
                 </tr>
                 <tr>
                     <td style="text-align:left;margin-top: 10px;width:30%;font-size:17px"><b>Description</b></td>
@@ -13295,7 +13295,7 @@ public function downloadpackinginstraction($packing_details_item_id){
                 <tr>
                     <td style="text-align:left;margin-top: 10px;width:30%;font-size:17px"><b>Quantity</b></td>
                     <td style="text-align:left;padding: 10px;width:10%"></td>
-                    <td style="text-align:left;padding: 10px;width:60%">'.$getPackingInstructionData[0]['buyer_invoice_qty'].'</td>
+                    <td style="text-align:left;padding: 10px;width:60%">'.$getPackingInstructionData[0]['box_qty'].'</td>
                 </tr>
                 <tr>
                     <td style="text-align:left;margin-top: 10px;width:30%;font-size:17px"><b>Final Check Signature</b></td>
@@ -13322,7 +13322,7 @@ public function downloadpackinginstraction($packing_details_item_id){
                 <tr>
                     <td style="text-align:left;margin-top: 10px;width:30%;font-size:17px"><b>Date</b></td>
                     <td style="text-align:left;padding: 10px;width:10%"></td>
-                    <td style="text-align:left;padding: 10px;width:60%">'.$getPackingInstructionData[0]['buyer_invoice_date'].'</td>
+                    <td style="text-align:left;padding: 10px;width:60%">'.date('d-m-Y',strtotime($getPackingInstructionData[0]['buyer_invoice_date'])).'</td>
                 </tr>
                 <tr>
                     <td style="text-align:left;margin-top: 10px;width:30%;font-size:17px"><b>Description</b></td>
@@ -13337,7 +13337,7 @@ public function downloadpackinginstraction($packing_details_item_id){
                 <tr>
                     <td style="text-align:left;margin-top: 10px;width:30%;font-size:17px"><b>Quantity</b></td>
                     <td style="text-align:left;padding: 10px;width:10%"></td>
-                    <td style="text-align:left;padding: 10px;width:60%">'.$getPackingInstructionData[0]['buyer_invoice_qty'].'</td>
+                    <td style="text-align:left;padding: 10px;width:60%">'.$getPackingInstructionData[0]['box_qty'].'</td>
                 </tr>
                 <tr>
                     <td style="text-align:left;margin-top: 10px;width:30%;font-size:17px"><b>Final Check Signature</b></td>
