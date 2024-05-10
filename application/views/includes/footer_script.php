@@ -15212,6 +15212,9 @@
 		});
 
 		$(document).on('click','.deleteStockformitem',function(e){
+
+			
+		var stock_id =   $('#stock_id_main').val();
 		
 		 var elemF = $(this);
 			e.preventDefault();
@@ -15243,7 +15246,13 @@
 											icon: "success",
 											button: "Ok",
 											},function(){ 
+
+												 if(stock_id){
+													window.location.href = "<?php echo base_url().'editstcokformdetails/'?>"+stock_id;
+												 }else{
 													window.location.href = "<?php echo base_url().'addNewstockform'?>";
+												 }
+													
 										});	
 									}
 
