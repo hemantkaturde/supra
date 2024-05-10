@@ -688,7 +688,7 @@
                                     }else{ 
                                         $disabled= 'disabled';
                                      } ?>
-                                    <input type="submit" id="savenewBillofmaterail" class="btn btn-primary" value="Submit" <?php //echo //$disabled;?> >
+                                    <input type="submit" id="savenewBillofmaterail" class="btn btn-primary" value="Submit" <?php echo $disabled;?> >
                                     <input type="button" onclick="location.href = '<?php echo base_url() ?>billofmaterial'" class="btn btn-default" value="Back" />
                                 </div>
                             </div>
