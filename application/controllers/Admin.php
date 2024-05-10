@@ -11880,7 +11880,7 @@ public function addsalestrackingreport(){
 
         $this->form_validation->set_rules('invoice_number','Invoice Number','trim|required');
         $this->form_validation->set_rules('cha_forworder','CHA Forworder','trim');
-        $this->form_validation->set_rules('clearance_done_by','Clearance Done By','trim|required');
+        $this->form_validation->set_rules('clearance_done_by','Clearance Done By','trim');
         $this->form_validation->set_rules('mode_of_Shipment','Mode of Shipment','trim');
         $this->form_validation->set_rules('payment_terms','Payment Terms','trim');
         $this->form_validation->set_rules('inv_amount','Inv Amount','trim');
