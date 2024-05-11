@@ -147,6 +147,41 @@
                                             </div>
                                         </div>
 
+
+                                        <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="dispatched_by">Dispatched by</label>
+                                            <input type="text" class="form-control" id="dispatched_by" value="<?=$getChallanformdetails[0]['dispatched_by']?>" name="dispatched_by" required>
+                                            <p class="error dispatched_by_error"></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="total_gross_weight_in_kgs">Total Gross Weight In kgs</label>
+                                            <input type="text" class="form-control" id="total_gross_weight_in_kgs" value="<?=$getChallanformdetails[0]['total_gross_weight_in_kgs']?>" name="total_gross_weight_in_kgs" required>
+                                            <p class="error total_gross_weight_in_kgs_error"></p>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="total_netweight_in_kgs">Total Net Weight In kgs</label>
+                                            <input type="text" class="form-control" id="total_netweight_in_kgs" value="<?=$getChallanformdetails[0]['total_netweight_in_kgs']?>" name="total_netweight_in_kgs" required>
+                                            <p class="error total_netweight_in_kgs_error"></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="no_of_bags_boxs_goni">No of Bags/Boxes/Goni </label>
+                                            <input type="text" class="form-control" id="no_of_bags_boxs_goni" value="<?=$getChallanformdetails[0]['no_of_bags_boxs_goni']?>" name="no_of_bags_boxs_goni" required>
+                                            <p class="error no_of_bags_boxs_goni_error"></p>
+                                        </div>
+                                    </div>
+
+
                                     <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="remark">Remark</label>

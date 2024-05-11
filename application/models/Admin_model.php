@@ -11278,6 +11278,11 @@ public function getChallanformdetailsforInvoice($id){
                     .TBL_USP.'.email as usp_email,'
                     .TBL_USP.'.GSTIN as usp_GSTIN,'
                     .TBL_USP.'.mobile as usp_mobile,'
+
+                    .TBL_CHALLAN_FORM.'.dispatched_by,'
+                    .TBL_CHALLAN_FORM.'.total_gross_weight_in_kgs,'
+                    .TBL_CHALLAN_FORM.'.total_netweight_in_kgs,'
+                    .TBL_CHALLAN_FORM.'.no_of_bags_boxs_goni'
         
         );
         $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_CHALLAN_FORM.'.supplier_po_number');

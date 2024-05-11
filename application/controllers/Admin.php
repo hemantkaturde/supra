@@ -7101,6 +7101,11 @@ class Admin extends BaseController
                     'supplier_po_number' =>  trim($this->input->post('supplier_po_number')),
                     'usp_id'  =>  trim($this->input->post('usp')),
                     'remark' =>  trim($this->input->post('remark')),
+                    'dispatched_by' =>  trim($this->input->post('dispatched_by')),
+                    'total_gross_weight_in_kgs' =>  trim($this->input->post('total_gross_weight_in_kgs')),
+                    'total_netweight_in_kgs' =>  trim($this->input->post('total_netweight_in_kgs')),
+                    'no_of_bags_boxs_goni'  =>  trim($this->input->post('no_of_bags_boxs_goni')),
+
                 );
 
                 $challanformid = trim($this->input->post('challan_id'));
@@ -13654,10 +13659,11 @@ public function downloadchallanform($id){
                             </div>
                             <br>
 
-                            <p><b>Dispatched By: </b></p>
-                            <p><b>No.of Bags/ Boxes/ Goni: </b></p>
-                            <p><b>Total Gross Weight: </b></p>
-                            <p><b>Total Net Weight:</b></p>
+                           
+                            <p><b>Dispatched By:</b> '.$getChallanformdetailsforInvoice['dispatched_by'].'</p>
+                            <p><b>No.of Bags/ Boxes/ Goni:</b> '.$getChallanformdetailsforInvoice['no_of_bags_boxs_goni'].'</p>
+                            <p><b>Total Gross Weight:</b> '.$getChallanformdetailsforInvoice['total_gross_weight_in_kgs'].'</p>
+                            <p><b>Total Net Weight:</b> '.$getChallanformdetailsforInvoice['total_netweight_in_kgs'].'</p>
                             <p><b>Remark:</b>__________________________________________________________</p><br>
                             <p>____________________________________________________________________</p>
                         </td>
@@ -13913,10 +13919,10 @@ public function downloadchallanformvendor($id){
                             </div>
                             <br>
 
-                            <p><b>Dispatched By: </b></p>
-                            <p><b>No.of Bags/ Boxes/ Goni: </b></p>
-                            <p><b>Total Gross Weight: </b></p>
-                            <p><b>Total Net Weight:</b></p>
+                            <p><b>Dispatched By:</b> '.$getChallanformdetailsforInvoice['dispatched_by'].'</p>
+                            <p><b>No.of Bags/ Boxes/ Goni:</b> '.$getChallanformdetailsforInvoice['no_of_bags_boxs_goni'].'</p>
+                            <p><b>Total Gross Weight:</b> '.$getChallanformdetailsforInvoice['total_gross_weight_in_kgs'].'</p>
+                            <p><b>Total Net Weight:</b> '.$getChallanformdetailsforInvoice['total_netweight_in_kgs'].'</p>
                             <p><b>Remark:</b>__________________________________________________________</p><br>
                             <p>____________________________________________________________________</p>
                         </td>
