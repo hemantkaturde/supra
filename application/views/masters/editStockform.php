@@ -349,7 +349,7 @@
                                             foreach ($getItemlistStockformedit as $key => $value) { ?>
                                             <tr>
                                                 <td><?php echo  $i++; ?></td>
-                                                <td><?=$value['part_number']?></td>
+                                                <td><?=$value['part_name_fg']?></td>
                                                 <td><?=$value['name']?></td>
                                                 <td><?=$value['buyer_order_qty']?></td>
                                                 <td><?=$value['f_g_order_qty']?></td>

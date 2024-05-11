@@ -6757,7 +6757,7 @@ class Admin_model extends CI_Model
     }
 
     public function getItemlistStockform(){
-        $this->db->select('*,'.TBL_STOCKS_ITEM.'.id as stock_item_id,'.TBL_INCOMING_DETAILS_ITEM.'.lot_no as lot');
+        $this->db->select('*,'.TBL_STOCKS_ITEM.'.id as stock_item_id,'.TBL_INCOMING_DETAILS_ITEM.'.lot_no as lot,'.TBL_FINISHED_GOODS.'.part_number as part_name_fg');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_STOCKS_ITEM.'.part_number');
         $this->db->join(TBL_INCOMING_DETAILS_ITEM, TBL_INCOMING_DETAILS_ITEM.'.part_number = '.TBL_STOCKS_ITEM.'.part_number');
        // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
@@ -7122,7 +7122,7 @@ class Admin_model extends CI_Model
     }
     
     public function getItemlistStockformedit($stock_id){
-        $this->db->select('*,'.TBL_STOCKS_ITEM.'.id as stock_item_id,'.TBL_INCOMING_DETAILS_ITEM.'.lot_no as lot');
+        $this->db->select('*,'.TBL_STOCKS_ITEM.'.id as stock_item_id,'.TBL_INCOMING_DETAILS_ITEM.'.lot_no as lot,'.TBL_FINISHED_GOODS.'.part_number as part_name_fg');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_STOCKS_ITEM.'.part_number');
         $this->db->join(TBL_INCOMING_DETAILS_ITEM, TBL_INCOMING_DETAILS_ITEM.'.part_number = '.TBL_STOCKS_ITEM.'.part_number');
         //$this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
