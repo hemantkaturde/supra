@@ -355,8 +355,8 @@
                                                 <td><?=$value['f_g_order_qty']?></td>
                                                 <td><?=$value['invoice_number']?></td>
                                                 <td><?=$value['invoice_date']?></td>
-                                                <td><?=$value['invoice_qty_In_pcs']?></td>
-                                                <td><?=$value['invoice_qty_In_kgs']?></td>
+                                                <td><?=round($value['invoice_qty_In_pcs'],2)?></td>
+                                                <td><?=round($value['invoice_qty_In_kgs'],2)?></td>
                                                 <td><?=$value['lot']?></td>
                                                 <td><?=$value['actual_received_qty_in_pcs']?></td>
                                                 <td><?=$value['actual_received_qty_in_kgs']?></td>
