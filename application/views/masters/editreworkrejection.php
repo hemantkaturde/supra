@@ -151,6 +151,15 @@
                                         </div>
                                     </div>
 
+                                    
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="total_netweight_weight">Total Net Weight (in Kgs)</label>
+                                            <input type="text" class="form-control" id="total_netweight_weight" value="<?=$getReworkrejectiondetails[0]['total_netweight_in_kgs'];?>" name="total_netweight_weight">
+                                            <p class="error total_netweight_weight_error"></p>
+                                        </div>
+                                    </div>
+
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="total_bags">Total Bags / Boxes / Goni </label>

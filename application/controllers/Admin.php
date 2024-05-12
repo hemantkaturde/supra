@@ -6737,7 +6737,7 @@ class Admin extends BaseController
                     'supplier_po_number' =>  trim($this->input->post('supplier_po_number')),
                     'dispath_through' =>  trim($this->input->post('dispath_through')),
                     'total_weight' =>  trim($this->input->post('total_weight')),
-                    'total_netweight_in_kgs' => trim($this->input->post('total_weight')),
+                    'total_netweight_in_kgs' => trim($this->input->post('total_netweight_weight')),
                     'total_bags' =>  trim($this->input->post('total_bags')),
                     'remark' =>  trim($this->input->post('remark')),
                    
@@ -6998,7 +6998,6 @@ class Admin extends BaseController
                         'pre_dispath_through' =>    trim($this->input->post('pre_dispath_through')),
                         'pre_total_weight' =>    trim($this->input->post('pre_total_weight')),
                         'pre_total_netweight' =>    trim($this->input->post('pre_total_netweight_weight')),
-
                         'pre_total_bags' =>    trim($this->input->post('pre_total_bags')),
                         'pre_remark' =>    trim($this->input->post('pre_remark')),
                     );
@@ -13005,12 +13004,11 @@ public function downloadreworkrejection($id){
                             </div>
                             <br>
 
-                            <p><b>Dispatched By: </b></p>
-                            <p><b>No.of Bags/ Boxes/ Goni: </b></p>
-                            <p><b>Total Gross Weight: </b></p>
-                            <p><b>Total Net Weight:</b></p>
-                            <p><b>Remark:</b>__________________________________________________________</p><br>
-                            <p>____________________________________________________________________</p>
+                            <p><b>Dispatched By: </b>'.$getReworkrejectionforInvoice['dispath_through'].'</p>
+                            <p><b>No.of Bags/ Boxes/ Goni: </b>'.$getReworkrejectionforInvoice['total_bags'].'</p>
+                            <p><b>Total Gross Weight: </b>'.$getReworkrejectionforInvoice['total_weight'].'</p>
+                            <p><b>Total Net Weight: </b>'.$getReworkrejectionforInvoice['total_netweight_in_kgs'].'</p>
+                          
                         </td>
                         <td style="border: 1px solid black;text-align: center;" width="25%" valign="top">
                             <p style="vertical-align: text-top;font-size:12px;color:#206a9b"><b>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</b></p>
@@ -13257,12 +13255,11 @@ public function downloadreworkrejectionvendor($id){
                             </div>
                             <br>
 
-                            <p><b>Dispatched By: </b></p>
-                            <p><b>No.of Bags/ Boxes/ Goni: </b></p>
-                            <p><b>Total Gross Weight: </b></p>
-                            <p><b>Total Net Weight:</b></p>
-                            <p><b>Remark:</b>__________________________________________________________</p><br>
-                            <p>____________________________________________________________________</p>
+                            <p><b>Dispatched By: </b>'.$getReworkrejectionforInvoice['dispath_through'].'</p>
+                            <p><b>No.of Bags/ Boxes/ Goni: </b>'.$getReworkrejectionforInvoice['total_bags'].'</p>
+                            <p><b>Total Gross Weight: </b>'.$getReworkrejectionforInvoice['total_weight'].'</p>
+                            <p><b>Total Net Weight :</b>'.$getReworkrejectionforInvoice['total_netweight_in_kgs'].'</p>
+                          
                         </td>
                         <td style="border: 1px solid black;text-align: center;" width="25%" valign="top">
                             <p style="vertical-align: text-top;font-size:12px;color:#206a9b"><b>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</b></p>
@@ -13674,12 +13671,11 @@ public function downloadchallanform($id){
                             <br>
 
                            
-                            <p><b>Dispatched By:</b> '.$getChallanformdetailsforInvoice['dispatched_by'].'</p>
-                            <p><b>No.of Bags/ Boxes/ Goni:</b> '.$getChallanformdetailsforInvoice['no_of_bags_boxs_goni'].'</p>
-                            <p><b>Total Gross Weight:</b> '.$getChallanformdetailsforInvoice['total_gross_weight_in_kgs'].'</p>
-                            <p><b>Total Net Weight:</b> '.$getChallanformdetailsforInvoice['total_netweight_in_kgs'].'</p>
-                            <p><b>Remark:</b>__________________________________________________________</p><br>
-                            <p>____________________________________________________________________</p>
+                            <p><b>Dispatched By: </b>'.$getChallanformdetailsforInvoice['dispatched_by'].'</p>
+                            <p><b>No.of Bags/ Boxes/ Goni: </b>'.$getChallanformdetailsforInvoice['no_of_bags_boxs_goni'].'</p>
+                            <p><b>Total Gross Weight: </b>'.$getChallanformdetailsforInvoice['total_gross_weight_in_kgs'].'</p>
+                            <p><b>Total Net Weight: </b>'.$getChallanformdetailsforInvoice['total_netweight_in_kgs'].'</p>
+                          
                         </td>
                         <td style="border: 1px solid black;text-align: center;" width="25%" valign="top">
                             <p style="vertical-align: text-top;font-size:12px;color:#206a9b"><b>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</b></p>
@@ -13937,8 +13933,7 @@ public function downloadchallanformvendor($id){
                             <p><b>No.of Bags/ Boxes/ Goni:</b> '.$getChallanformdetailsforInvoice['no_of_bags_boxs_goni'].'</p>
                             <p><b>Total Gross Weight:</b> '.$getChallanformdetailsforInvoice['total_gross_weight_in_kgs'].'</p>
                             <p><b>Total Net Weight:</b> '.$getChallanformdetailsforInvoice['total_netweight_in_kgs'].'</p>
-                            <p><b>Remark:</b>__________________________________________________________</p><br>
-                            <p>____________________________________________________________________</p>
+                          
                         </td>
                         <td style="border: 1px solid black;text-align: center;" width="25%" valign="top">
                             <p style="vertical-align: text-top;font-size:12px;color:#206a9b"><b>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</b></p>
