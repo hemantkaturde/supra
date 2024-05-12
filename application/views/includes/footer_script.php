@@ -16769,18 +16769,28 @@
 			   var pre_buyer_enquiry_no =   $('#buyer_enquiry_no').val();
 			   var pre_enquiry_date =   $('#enquiry_date').val();
 
-
 			   var enquiry_form_item_id =   $('#enquiry_form_item_id').val();
-
 			   var enquiry_form_id =   $('#enquiry_form_id').val();
 
-			   
-			   
+
+			   var remark_1 =   $('#remark_1').val();
+			   var remark_2 =   $('#remark_2').val();
+			   var remark_3 =   $('#remark_3').val();
+			   var remark_4 =   $('#remark_4').val();
+			   var remark_5 =   $('#remark_5').val();
+
+			   var remark_6 =   $('#remark_6').val();
+			   var remark_7 =   $('#remark_7').val();
+			   var remark_8 =   $('#remark_8').val();
+			   var remark_9 =   $('#remark_9').val();
+			   var remark_10 =   $('#remark_10').val();
+
+
 			   $.ajax({
 				url : "<?php echo base_url();?>saveenquiryformitem",
 				type: "POST",
 				 //data : formData,
-				 data :{part_number:part_number,rm_description:rm_description,gross_weight:gross_weight,supplier_name_1:supplier_name_1,rate_1:rate_1,supplier_name_2:supplier_name_2,rate_2:rate_2,supplier_name_3:supplier_name_3,rate_3:rate_3,supplier_name_4:supplier_name_4,rate_4:rate_4,supplier_name_5:supplier_name_5,rate_5:rate_5,vendor_name_1:vendor_name_1,venodr_rate_1:venodr_rate_1,vendor_name_2:vendor_name_2,venodr_rate_2:venodr_rate_2,vendor_name_3:vendor_name_3,venodr_rate_3:venodr_rate_3,vendor_name_4:vendor_name_4,venodr_rate_4:venodr_rate_4,vendor_name_5:vendor_name_5,venodr_rate_5:venodr_rate_5,rm_size:rm_size,supplier_qty_in_kgs:supplier_qty_in_kgs,venodr_qty_in_pcs:venodr_qty_in_pcs,pre_remark:pre_remark,pre_status:pre_status,pre_buyer_enquiry_date:pre_buyer_enquiry_date,pre_buyer_enquiry_no:pre_buyer_enquiry_no,pre_enquiry_date:pre_enquiry_date,enquiry_form_item_id:enquiry_form_item_id},
+				 data :{part_number:part_number,rm_description:rm_description,gross_weight:gross_weight,supplier_name_1:supplier_name_1,rate_1:rate_1,supplier_name_2:supplier_name_2,rate_2:rate_2,supplier_name_3:supplier_name_3,rate_3:rate_3,supplier_name_4:supplier_name_4,rate_4:rate_4,supplier_name_5:supplier_name_5,rate_5:rate_5,vendor_name_1:vendor_name_1,venodr_rate_1:venodr_rate_1,vendor_name_2:vendor_name_2,venodr_rate_2:venodr_rate_2,vendor_name_3:vendor_name_3,venodr_rate_3:venodr_rate_3,vendor_name_4:vendor_name_4,venodr_rate_4:venodr_rate_4,vendor_name_5:vendor_name_5,venodr_rate_5:venodr_rate_5,rm_size:rm_size,supplier_qty_in_kgs:supplier_qty_in_kgs,venodr_qty_in_pcs:venodr_qty_in_pcs,pre_remark:pre_remark,pre_status:pre_status,pre_buyer_enquiry_date:pre_buyer_enquiry_date,pre_buyer_enquiry_no:pre_buyer_enquiry_no,pre_enquiry_date:pre_enquiry_date,enquiry_form_item_id:enquiry_form_item_id,remark_1:remark_1,remark_2:remark_2,remark_3:remark_3,remark_4:remark_4,remark_5:remark_5,remark_6:remark_6,remark_7:remark_7,remark_8:remark_8,remark_9:remark_9,remark_10:remark_10},
 				 method: "POST",
                 // data :{package_id:package_id},
                 cache:false,
@@ -16965,7 +16975,20 @@
 						$('#venodr_rate_3').val(fetchResponse.vendor_rate_3); 
 						$('#venodr_rate_4').val(fetchResponse.vendor_rate_4); 
 						$('#venodr_rate_5').val(fetchResponse.vendor_rate_5); 
+
+
 						
+					    $('#remark_1').val(fetchResponse.remark_1); 
+						$('#remark_2').val(fetchResponse.remark_2); 
+						$('#remark_3').val(fetchResponse.remark_3); 
+						$('#remark_4').val(fetchResponse.remark_4); 
+						$('#remark_5').val(fetchResponse.remark_5); 
+
+						$('#remark_6').val(fetchResponse.remark_6); 
+						$('#remark_7').val(fetchResponse.remark_7); 
+						$('#remark_8').val(fetchResponse.remark_8); 
+						$('#remark_9').val(fetchResponse.remark_9); 
+						$('#remark_10').val(fetchResponse.remark_10); 
 				},
 				error: function (jqXHR, textStatus, errorThrown)
 			    {

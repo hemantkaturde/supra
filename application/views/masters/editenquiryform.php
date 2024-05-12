@@ -289,6 +289,13 @@
                                             </div>
                                         </div>
                            
+                                        <div class="row">
+                                            <div>
+                                                <label for="remark_10">Remark </label>
+                                                <input type="text" class="form-control" id="remark_1" name="remark_1" style="width:95%;">
+                                                <p class="error remark_1_error"></p>
+                                            </div>
+                                        </div>
                                
                                        <div class="row" style="display: inline-flex;">
                                             <div style="padding-right: 10px">
@@ -305,6 +312,14 @@
                                                 <label for="rate_2">Rate</label>
                                                 <input type="text" class="form-control" id="rate_2" name="rate_2">
                                                 <p class="error rate_2_error"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div>
+                                                <label for="remark_2">Remark </label>
+                                                <input type="text" class="form-control" id="remark_2" name="remark_2" style="width:95%;">
+                                                <p class="error remark_2_error"></p>
                                             </div>
                                         </div>
                         
@@ -327,6 +342,13 @@
                                             </div>
                                         </div>
                                
+                                        <div class="row">
+                                            <div>
+                                                <label for="remark_3">Remark </label>
+                                                <input type="text" class="form-control" id="remark_3" name="remark_3" style="width:95%;">
+                                                <p class="error remark_3_error"></p>
+                                            </div>
+                                        </div>
                             
                                        <div class="row" style="display: inline-flex;">
                                             <div style="padding-right: 10px">
@@ -346,6 +368,14 @@
                                             </div>
                                         </div>
 
+                                        <div class="row">
+                                            <div>
+                                                <label for="remark_4">Remark </label>
+                                                <input type="text" class="form-control" id="remark_4" name="remark_4" style="width:95%;">
+                                                <p class="error remark_4_error"></p>
+                                            </div>
+                                        </div>
+
                                         <div class="row" style="display: inline-flex;">
                                             <div style="padding-right: 10px">
                                                 <label for="supplier_name_5">Supplier Name</label>
@@ -361,6 +391,14 @@
                                                 <label for="rate_5">Rate</label>
                                                 <input type="text" class="form-control" id="rate_5" name="rate_5">
                                                 <p class="error rate_5_error"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div>
+                                                <label for="remark_5">Remark </label>
+                                                <input type="text" class="form-control" id="remark_5" name="remark_5" style="width:95%;">
+                                                <p class="error remark_5_error"></p>
                                             </div>
                                         </div>
 
@@ -384,6 +422,14 @@
                                                 <p class="error venodr_rate_1_error"></p>
                                             </div>
                                         </div>
+
+                                        <div class="row">
+                                            <div>
+                                                <label for="remark_6">Remark </label>
+                                                <input type="text" class="form-control" id="remark_6" name="remark_6" style="width:95%;">
+                                                <p class="error remark_6_error"></p>
+                                            </div>
+                                        </div>
                            
                                
                                        <div class="row" style="display: inline-flex;">
@@ -403,7 +449,14 @@
                                                 <p class="error venodr_rate_2_error"></p>
                                             </div>
                                         </div>
-                        
+                                        
+                                        <div class="row">
+                                            <div>
+                                                <label for="remark_7">Remark </label>
+                                                <input type="text" class="form-control" id="remark_7" name="remark_7" style="width:95%;">
+                                                <p class="error remark_7_error"></p>
+                                            </div>
+                                        </div>
                               
                                        <div class="row" style="display: inline-flex;">
                                             <div style="padding-right: 10px">
@@ -423,6 +476,13 @@
                                             </div>
                                         </div>
                                
+                                        <div class="row">
+                                            <div>
+                                                <label for="remark_8">Remark </label>
+                                                <input type="text" class="form-control" id="remark_8" name="remark_8" style="width:95%;">
+                                                <p class="error remark_8_error"></p>
+                                            </div>
+                                        </div>
                             
                                        <div class="row" style="display: inline-flex;">
                                             <div style="padding-right: 10px">
@@ -442,6 +502,14 @@
                                             </div>
                                         </div>
 
+                                        <div class="row">
+                                            <div>
+                                                <label for="remark_9">Remark </label>
+                                                <input type="text" class="form-control" id="remark_9" name="remark_9" style="width:95%;">
+                                                <p class="error remark_9_error"></p>
+                                            </div>
+                                        </div>
+
                                         <div class="row" style="display: inline-flex;">
                                             <div style="padding-right: 10px">
                                                 <label for="vendor_name_5">Vendor Name</label>
@@ -457,6 +525,14 @@
                                                 <label for="venodr_rate_5">Rate</label>
                                                 <input type="text" class="form-control" id="venodr_rate_5" name="venodr_rate_5">
                                                 <p class="error venodr_rate_5_error"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div>
+                                                <label for="remark_10">Remark </label>
+                                                <input type="text" class="form-control" id="remark_10" name="remark_10" style="width:95%;">
+                                                <p class="error remark_10_error"></p>
                                             </div>
                                         </div>
                             

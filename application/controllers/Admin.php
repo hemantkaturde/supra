@@ -9173,11 +9173,29 @@ class Admin extends BaseController
                     'vendor_id_5'  =>  trim($this->input->post('vendor_name_5')),
                     'vendor_rate_5'  =>  trim($this->input->post('venodr_rate_5')),
 
+                    'remark_1'  =>  trim($this->input->post('remark_1')),
+                    'remark_2'  =>  trim($this->input->post('remark_2')),
+                    'remark_3'  =>  trim($this->input->post('remark_3')),
+                    'remark_4'  =>  trim($this->input->post('remark_4')),
+                    'remark_5'  =>  trim($this->input->post('remark_5')),
+
+
+                    'remark_6'  =>  trim($this->input->post('remark_6')),
+                    'remark_7'  =>  trim($this->input->post('remark_7')),
+                    'remark_8'  =>  trim($this->input->post('remark_8')),
+                    'remark_9'  =>  trim($this->input->post('remark_9')),
+                    'remark_10'  =>  trim($this->input->post('remark_10')),
+
+
+
                     'pre_enquiry_date'	=>  trim($this->input->post('pre_enquiry_date')),
                     'pre_buyer_enquiry_number' =>  trim($this->input->post('pre_buyer_enquiry_no')),
                     'pre_buyer_enquiry_date' =>  trim($this->input->post('pre_buyer_enquiry_date')),
                     'pre_status' =>  trim($this->input->post('pre_status')),
-                    'pre_remark' =>  trim($this->input->post('pre_remark'))
+                    'pre_remark' =>  trim($this->input->post('pre_remark')),
+
+
+
                 );
 
                 $enquiry_form_item_id =  trim($this->input->post('enquiry_form_item_id'));

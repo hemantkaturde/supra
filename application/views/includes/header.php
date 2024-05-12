@@ -176,7 +176,6 @@
                         <li class="line_height <?php if($pageUrl=="rejectionmaster" || $pageUrl=="addnewRejection" || $pageUrl=="updateRejectionmaster"){echo 'active';}?>"><a href="<?php echo base_url();?>rejectionmaster"><i class="fa fa-cubes"></i> Rejection Reason Master</a></li>
                         <li class="line_height <?php if($pageUrl=="buyermaster" || $pageUrl=="addnewBuyer" || $pageUrl=="updateBuyer"){echo 'active';}?>"><a href="<?php echo base_url();?>buyermaster"><i class="fa fa-cubes"></i> Buyer Master</a></li>
                         <li class="line_height <?php if($pageUrl=="chamaster" || $pageUrl=='addnewCha' || $pageUrl=='updatecha'){echo 'active';}?>"><a href="<?php echo base_url(); ?>chamaster"><i class="fa fa-cubes"></i> CHA Master</a></li>
-
                       </ul>
                     </li>
 
@@ -213,7 +212,7 @@
                       </ul>
                     </li>
 
-                    <li class="treeview <?php if($pageUrl=="jobWork" || $pageUrl=="addjobwork" || $pageUrl=="editjobwork" ||  $pageUrl=="scrapreturn" || $pageUrl=="addnewScrapreturn" || $pageUrl=="editscrapreturn" || $pageUrl=="reworkrejectionreturn" || $pageUrl=="addneworkrejection" || $pageUrl=="editreworkrejection" || $pageUrl=="challanform" || $pageUrl=="addchallanform" || $pageUrl=="editchallanform" || $pageUrl=="omschallan" || $pageUrl=='addNewOMSChallan' ||  $pageUrl=='editomschallan' || $pageUrl=='enquiryform' || $pageUrl=="enquiryform" || $pageUrl=='addnewenquiryform' ||  $pageUrl=='editenquiryform' || $pageUrl=='editeqnuiryformdata'){echo 'active';}?>">
+                    <li class="treeview <?php if($pageUrl=="jobWork" || $pageUrl=="addjobwork" || $pageUrl=="editjobwork" ||  $pageUrl=="scrapreturn" || $pageUrl=="addnewScrapreturn" || $pageUrl=="editscrapreturn" || $pageUrl=="reworkrejectionreturn" || $pageUrl=="addneworkrejection" || $pageUrl=="editreworkrejection" || $pageUrl=="challanform" || $pageUrl=="addchallanform" || $pageUrl=="editchallanform" || $pageUrl=="omschallan" || $pageUrl=='addNewOMSChallan' ||  $pageUrl=='editomschallan' || $pageUrl=='enquiryform' || $pageUrl=="editeqnuiryformdatabyid" || $pageUrl=='addnewenquiryform' ||  $pageUrl=='editenquiryform' || $pageUrl=='editeqnuiryformdata'){echo 'active';}?>">
                       <a href="#">
                         <i class="fa fa-file-text-o"></i> <span class="menu_label">Challans</span>
                           <span class="pull-right-container">
