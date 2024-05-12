@@ -236,9 +236,18 @@
 
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="total_weight">Total Weight (in Kgs)</label>
+                                            <label for="total_weight">Total Gross Weight (in Kgs)</label>
                                             <input type="text" class="form-control" id="total_weight" value="<?=$getReworkRejectionitemslist[0]['pre_total_weight'];?>" name="total_weight">
                                             <p class="error total_weight_error"></p>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="total_netweight_weight">Total Net Weight (in Kgs)</label>
+                                            <input type="text" class="form-control" id="total_netweight_weight" value="<?=$getReworkRejectionitemslist[0]['pre_total_netweight'];?>" name="total_netweight_weight">
+                                            <p class="error total_netweight_weight_error"></p>
                                         </div>
                                     </div>
 

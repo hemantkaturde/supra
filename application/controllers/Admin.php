@@ -6737,6 +6737,7 @@ class Admin extends BaseController
                     'supplier_po_number' =>  trim($this->input->post('supplier_po_number')),
                     'dispath_through' =>  trim($this->input->post('dispath_through')),
                     'total_weight' =>  trim($this->input->post('total_weight')),
+                    'total_netweight_in_kgs' => trim($this->input->post('total_weight')),
                     'total_bags' =>  trim($this->input->post('total_bags')),
                     'remark' =>  trim($this->input->post('remark')),
                    
@@ -6969,6 +6970,7 @@ class Admin extends BaseController
                         'pre_supplier_po_number' =>    trim($this->input->post('pre_supplier_po_number')),
                         'pre_dispath_through' =>    trim($this->input->post('pre_dispath_through')),
                         'pre_total_weight' =>    trim($this->input->post('pre_total_weight')),
+                        'pre_total_netweight' =>    trim($this->input->post('pre_total_netweight_weight')),
                         'pre_total_bags' =>    trim($this->input->post('pre_total_bags')),
                         'pre_remark' =>    trim($this->input->post('pre_remark')),
                     );
@@ -6995,6 +6997,8 @@ class Admin extends BaseController
                         'pre_supplier_po_number' =>    trim($this->input->post('pre_supplier_po_number')),
                         'pre_dispath_through' =>    trim($this->input->post('pre_dispath_through')),
                         'pre_total_weight' =>    trim($this->input->post('pre_total_weight')),
+                        'pre_total_netweight' =>    trim($this->input->post('pre_total_netweight_weight')),
+
                         'pre_total_bags' =>    trim($this->input->post('pre_total_bags')),
                         'pre_remark' =>    trim($this->input->post('pre_remark')),
                     );
@@ -7205,6 +7209,11 @@ class Admin extends BaseController
                         'pre_supplier_po_number' =>    trim($this->input->post('pre_supplier_po_number')),
                         'pre_usp_id' =>    trim($this->input->post('pre_usp_id')),
                         'pre_remark' =>    trim($this->input->post('pre_remark')),
+
+                        'dispatched_by' =>    trim($this->input->post('dispatched_by')),
+                        'total_gross_weight_in_kgs' =>    trim($this->input->post('total_gross_weight_in_kgs')),
+                        'total_netweight_in_kgs' =>    trim($this->input->post('total_netweight_in_kgs')),
+                        'no_of_bags_boxs_goni' =>    trim($this->input->post('no_of_bags_boxs_goni')),
                     );
                 }else{
 
@@ -7229,6 +7238,11 @@ class Admin extends BaseController
                         'pre_supplier_po_number' =>    trim($this->input->post('pre_supplier_po_number')),
                         'pre_usp_id' =>    trim($this->input->post('pre_usp_id')),
                         'pre_remark' =>    trim($this->input->post('pre_remark')),
+
+                        'pre_dispatched_by' =>    trim($this->input->post('dispatched_by')),
+                        'pre_total_gross_weight_in_kgs' =>    trim($this->input->post('total_gross_weight_in_kgs')),
+                        'pre_total_netweight_in_kgs' =>    trim($this->input->post('total_netweight_in_kgs')),
+                        'pre_no_of_bags_boxs_goni' =>    trim($this->input->post('no_of_bags_boxs_goni')),
                     );
                 }
 
