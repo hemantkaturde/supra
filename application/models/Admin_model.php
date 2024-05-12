@@ -4488,7 +4488,7 @@ class Admin_model extends CI_Model
 
         $this->db->select(array('bom_number', 
         TBL_BUYER_MASTER.'.buyer_name', 
-        TBL_BUYER_PO_MASTER.'.sales_order_number',
+        TBL_BUYER_PO_MASTER.'.buyer_po_number',
         TBL_BUYER_PO_MASTER.'.buyer_po_date',
         TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.buyer_order_qty as buyer_order_qty',
         TBL_BILL_OF_MATERIAL_VENDOR.'.buyer_delivery_date as buyer_delivery_date',
@@ -4527,13 +4527,14 @@ class Admin_model extends CI_Model
         $this->db->join(TBL_BILL_OF_MATERIAL_VENDOR_ITEM, TBL_BILL_OF_MATERIAL_VENDOR.'.id= '.TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.vendor_bill_of_material_id');
         $this->db->join(TBL_FINISHED_GOODS, TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.part_number_id= '.TBL_FINISHED_GOODS.'.fin_id');
         $this->db->from(TBL_BILL_OF_MATERIAL_VENDOR);
+        $this->db->group_by(TBL_BILL_OF_MATERIAL_VENDOR.'.id');
         $query_1 = $this->db->get();
         $result_1 = $query_1->result_array();
 
 
         $this->db->select(array('bom_number', 
            TBL_BUYER_MASTER.'.buyer_name', 
-           TBL_BUYER_PO_MASTER.'.sales_order_number',
+           TBL_BUYER_PO_MASTER.'.buyer_po_number',
            TBL_BUYER_PO_MASTER.'.buyer_po_date', 
            TBL_BUYER_PO_MASTER_ITEM.'.order_oty as buyer_order_qty', 
         //    '" " as buyer_order_qty',
@@ -4578,6 +4579,7 @@ class Admin_model extends CI_Model
         $this->db->join(TBL_BILL_OF_MATERIAL_ITEM, TBL_BILL_OF_MATERIAL_ITEM.'.bom_id= '.TBL_BILL_OF_MATERIAL.'.id');
         $this->db->join(TBL_FINISHED_GOODS, TBL_BILL_OF_MATERIAL_ITEM.'.part_number= '.TBL_FINISHED_GOODS.'.fin_id');
         $this->db->from(TBL_BILL_OF_MATERIAL);
+        $this->db->group_by(TBL_BILL_OF_MATERIAL.'.id');
         $query_2 = $this->db->get();
         $result_2 = $query_2->result_array();
 

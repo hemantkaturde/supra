@@ -6616,7 +6616,7 @@ class Admin extends BaseController
             $rowCount = 2;
             foreach ($empInfo as $element) {
                 $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $element['buyer_name']);
-                $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $element['sales_order_number']);
+                $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $element['buyer_po_number']);
                 $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $element['buyer_po_date']);
                 $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['buyer_order_qty']);
                 $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['buyer_delivery_date']);
