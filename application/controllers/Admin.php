@@ -15525,6 +15525,34 @@ public function editsalestrackingreport($id){
 }
 
 
+public function checkifpartnumberisalreadyexists(){
+
+    $post_submit = $this->input->post();
+    if($post_submit){
+
+       $part_number =  trim($this->input->post('part_number'));
+       $main_id =  trim($this->input->post('main_id'));
+
+       if($part_number && $main_id ){
+
+            $checkifpartnumberisalreadyexists = $this->admin_model->checkifpartnumberisalreadyexists($part_number,$main_id);
+            if(count($checkifpartnumberisalreadyexists) >= 1) {
+
+                echo 'success';
+            }else{
+
+                echo 'failure';
+            }
+       }else{
+        echo 'failure';
+       }
+    }else{
+
+        echo 'failure';
+    }
+
+}
+
 
 }
 

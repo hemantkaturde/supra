@@ -59,7 +59,7 @@
                                         <div class="form-group">
                                             <label for="part_number">Select Part Number<span class="required">*</span></label>
                                                 <select class="form-control" name="part_number" id="part_number">
-                                                    <option st-id="" value="">Select Buyer Name</option>
+                                                    <option st-id="" value="">Select Part Number</option>
                                                         <?php foreach ($getbuyeritemdetails as $key => $value) {?>
                                                                 <option value="<?php echo $value['item_details']; ?>"><?php echo $value['part_number']; ?></option>
                                                         <?php } ?>

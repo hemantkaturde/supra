@@ -458,7 +458,7 @@ $route['getcreditnotedetailsbycreditnoteid'] = "admin/getcreditnotedetailsbycred
 $route['getdebitnotedetailsbydebitenoteeid'] = "admin/getdebitnotedetailsbydebitenoteeid";
 $route['getnumberofcartoonsfrompreexport'] = "admin/getnumberofcartoonsfrompreexport";
 $route['editsalestrackingreport/(:any)'] = "admin/editsalestrackingreport/$1";
-
+$route['checkifpartnumberisalreadyexists'] = "admin/checkifpartnumberisalreadyexists";
 
 
 

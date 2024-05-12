@@ -8951,6 +8951,44 @@
 		});
 
 
+		$(document).on('change','#part_number',function(e){  
+			e.preventDefault();
+			        var part_number = $('#part_number').val();	
+					var main_id = $('#main_id').val();	
+
+					$.ajax({
+							url : "<?php echo ADMIN_PATH;?>checkifpartnumberisalreadyexists",
+							type: "POST",
+							data : {'part_number' : part_number,'main_id' : main_id},
+							success: function(data, textStatus, jqXHR)
+							{
+								$(".loader_ajax").hide();
+								if(data == "failure")
+								{
+									// $('#buyer_po_date').val('');
+									// $('#buyer_delivery_date').val('');
+								}
+								else
+								{
+										swal({
+											title: "Record Exists Notification",
+											text: "Record Already Exists for this buyer PO and Date.Do you Still want to Insert The record ?",
+											icon: "success",
+											button: "Ok",
+											},function(){ 
+												
+										});		
+							    }
+							},
+							error: function (jqXHR, textStatus, errorThrown)
+							{
+								    //$('#buyer_po_date').val('');
+								    //$(".loader_ajax").hide();
+							}
+				});
+			return false;
+		   });
+
 		</script>
 <?php } ?>
 
