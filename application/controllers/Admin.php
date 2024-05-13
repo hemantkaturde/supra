@@ -9143,8 +9143,19 @@ class Admin extends BaseController
                $saveenquiryform_response['error'] =  array('part_number'=>strip_tags(form_error('part_number')));
           
            }else{
+
+
+
+            if(trim($this->input->post('rm_description'))){
+                $enquiry_form_id = trim($this->input->post('rm_description'));
+            }else{
+                $enquiry_form_id ='';
+            }
+
+
                 $data = array(
                     'part_number'  =>  trim($this->input->post('part_number')),
+                    'enquiry_form_id' =>  $enquiry_form_id,
                     'rm_description'  =>  trim($this->input->post('rm_description')),
                     'groass_weight'  =>  trim($this->input->post('gross_weight')),
                     'rm_size'  =>  trim($this->input->post('rm_size')),
