@@ -443,8 +443,8 @@
                                                 <td><?=round($value['invoice_qty_In_pcs'],3)?></td>
                                                 <td><?=round($value['invoice_qty_In_kgs'],3)?></td>
                                                 <td><?=$value['lot']?></td>
-                                                <td><?=round($value['actual_received_qty_in_pcs'],3)?></td>
-                                                <td><?=round($value['actual_received_qty_in_kgs'],3)?></td>
+                                                <td><?=$value['actual_received_qty_in_pcs']?></td>
+                                                <td><?=$value['actual_received_qty_in_kgs']?></td>
                                                 <td><?=$value['previous_balence']?></td>
                                                 <td><?=$value['item_remark']?></td>
                                                 <td>
