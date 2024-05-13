@@ -11179,7 +11179,7 @@ public function getReworkrejectionforInvoicesupplier($id){
 public function getReworkRejectionitemdeatilsForInvoice($id){
 
     // $this->db->select('*,'.TBL_RAWMATERIAL.'.gross_weight as rmgrossweight');
-    $this->db->select('*,'.TBL_RAWMATERIAL.'.net_weight as raw_material_neight_weight');
+    $this->db->select('*,'.TBL_RAWMATERIAL.'.net_weight as raw_material_neight_weight,'.TBL_REWORK_REJECTION_ITEM.'.rate as rejection_rate');
     $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_REWORK_REJECTION_ITEM.'.part_number');
     $this->db->where(TBL_REWORK_REJECTION_ITEM.'.rework_rejection_id', $id);
     $query = $this->db->get(TBL_REWORK_REJECTION_ITEM);
