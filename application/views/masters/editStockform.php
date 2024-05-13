@@ -355,11 +355,11 @@
                                                 <td><?=$value['f_g_order_qty']?></td>
                                                 <td><?=$value['invoice_number']?></td>
                                                 <td><?=$value['invoice_date']?></td>
-                                                <td><?=round($value['invoice_qty_In_pcs'],2)?></td>
-                                                <td><?=round($value['invoice_qty_In_kgs'],2)?></td>
+                                                <td><?=round($value['invoice_qty_In_pcs'],3)?></td>
+                                                <td><?=round($value['invoice_qty_In_kgs'],3)?></td>
                                                 <td><?=$value['lot']?></td>
-                                                <td><?=$value['actual_received_qty_in_pcs']?></td>
-                                                <td><?=$value['actual_received_qty_in_kgs']?></td>
+                                                <td><?=round($value['actual_received_qty_in_pcs'],3)?></td>
+                                                <td><?=round($value['actual_received_qty_in_kgs'],3)?></td>
                                                 <td><?=$value['previous_balence']?></td>
                                                 <td><?=$value['item_remark']?></td>
                                                 <td>
