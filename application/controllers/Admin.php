@@ -9146,10 +9146,10 @@ class Admin extends BaseController
 
 
 
-            if(trim($this->input->post('rm_description'))){
-                $enquiry_form_id = trim($this->input->post('rm_description'));
+            if(trim($this->input->post('enquiry_form_id'))){
+                $enquiry_form_id = trim($this->input->post('enquiry_form_id'));
             }else{
-                $enquiry_form_id ='';
+                $enquiry_form_id =NULL;
             }
 
 
