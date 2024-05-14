@@ -27,7 +27,7 @@
             <div class="col-xs-3 text-left" style="margin-top: 10px;">
                 <div class="form-group">
                         <label for="part_number">Part Number</label>
-                        <select class="form-control" name="part_number" id="part_number">
+                        <select class="form-control select2" name="part_number" id="part_number">
                             <option st-id="" value="">Select Part Number</option>
                             <?php foreach ($itemList as $key => $value) {?>
                                 <option value="<?php echo $value['fin_id']; ?>"><?php echo $value['part_number']; ?></option>
@@ -139,6 +139,11 @@
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
 <script>
+
+    $(document).ready(function(){
+			$("select").select2();
+	});
+
    $(function() {
 			$(".datepicker").datepicker({ 
 				// minDate: 0,
@@ -148,3 +153,7 @@
 			});
 		});
 </script>
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
