@@ -3606,6 +3606,7 @@ class Admin_model extends CI_Model
             $this->db->where("(".TBL_PACKING_INSTRACTION.".packing_instrauction_id LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_PO_MASTER.".buyer_po_number LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_PACKING_INSTRACTION.".buyer_po_date LIKE '%".$params['search']['value']."%')");
         }
 
@@ -3627,6 +3628,7 @@ class Admin_model extends CI_Model
             $this->db->where("(".TBL_PACKING_INSTRACTION.".packing_instrauction_id LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_PO_MASTER.".buyer_po_number LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_PACKING_INSTRACTION.".buyer_po_date LIKE '%".$params['search']['value']."%')");
         }
       
