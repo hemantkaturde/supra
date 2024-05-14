@@ -9492,15 +9492,144 @@ class Admin_model extends CI_Model
         return $fetch_result;
     }
 
-    public function fetchbuyerpodetailsreportCount($params,$buyer_name,$part_number,$from_date,$to_date){
-        $this->db->select('*');
-        $this->db->join(TBL_PACKING_INSTRACTION_DETAILS, TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id = '.TBL_PACKING_INSTRACTION.'.id');
-        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_PACKING_INSTRACTION.'.buyer_po_number');
-        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_PACKING_INSTRACTION.'.buyer_name');
-        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_PACKING_INSTRACTION_DETAILS.'.part_number');
-        $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.part_number_id = '.TBL_PACKING_INSTRACTION_DETAILS.'.part_number');
+    // public function fetchbuyerpodetailsreportCount($params,$buyer_name,$part_number,$from_date,$to_date){
+    //     $this->db->select('*');
+    //     $this->db->join(TBL_PACKING_INSTRACTION_DETAILS, TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id = '.TBL_PACKING_INSTRACTION.'.id');
+    //     $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_PACKING_INSTRACTION.'.buyer_po_number');
+    //     $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_PACKING_INSTRACTION.'.buyer_name');
+    //     $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_PACKING_INSTRACTION_DETAILS.'.part_number');
+    //     $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.part_number_id = '.TBL_PACKING_INSTRACTION_DETAILS.'.part_number');
 
 
+    //     if($params['search']['value'] != "") 
+    //     {
+    //         $this->db->where("(".TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
+    //            $this->db->or_where(TBL_BUYER_PO_MASTER.".buyer_po_number LIKE '%".$params['search']['value']."%'");
+    //         $this->db->or_where(TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
+    //         $this->db->or_where(TBL_BUYER_PO_MASTER.".buyer_po_date LIKE '%".$params['search']['value']."%'");
+    //         $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
+    //         $this->db->or_where(TBL_BUYER_PO_MASTER.".delivery_date LIKE '%".$params['search']['value']."%'");
+    //         $this->db->or_where(TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_qty LIKE '%".$params['search']['value']."%'");
+    //         $this->db->or_where(TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_number LIKE '%".$params['search']['value']."%'");
+    //         $this->db->or_where(TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_date LIKE '%".$params['search']['value']."%'");
+    //         $this->db->or_where(TBL_PACKING_INSTRACTION_DETAILS.".remark LIKE '%".$params['search']['value']."%'");
+    //         $this->db->or_where(TBL_FINISHED_GOODS.".name LIKE '%".$params['search']['value']."%')");
+    //     }
+
+
+    //     if($buyer_name!='NA'){
+    //         $this->db->where(TBL_PACKING_INSTRACTION.'.buyer_name', $buyer_name);
+    //     }
+
+    //     if($part_number!='NA'){
+    //         $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.part_number', $part_number);
+    //     }
+
+
+    //     if($from_date!='NA'){
+    //         $fromdate = $from_date;
+    //         $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date >=', $fromdate);
+    //     }
+
+    //     if($to_date!='NA'){
+    //         $todate = $to_date;
+    //         $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date <=', $todate);
+    //     }
+
+
+    //     $this->db->where(TBL_PACKING_INSTRACTION.'.status', 1);
+    //     $this->db->order_by(TBL_PACKING_INSTRACTION.'.id','DESC');
+    //     $query = $this->db->get(TBL_PACKING_INSTRACTION);
+    //     $rowcount = $query->num_rows();
+    //     return $rowcount;
+
+    // }
+
+    // public function fetchbuyerpodetailsreportData($params,$buyer_name,$part_number,$from_date,$to_date){
+
+
+    //     $this->db->select(TBL_BUYER_MASTER.'.buyer_name,'.TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_BUYER_PO_MASTER.'.buyer_po_date,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name,'.TBL_BUYER_PO_MASTER.'.delivery_date,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_qty,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_number,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_date,'.TBL_PACKING_INSTRACTION_DETAILS.'.remark,'.TBL_BUYER_PO_MASTER_ITEM.'.order_oty,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date,'.TBL_BUYER_PO_MASTER.'.buyer_po_number');
+    //     $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_PACKING_INSTRACTION.'.buyer_po_number','left');
+    //     $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_PACKING_INSTRACTION.'.buyer_name');
+
+    //     $this->db->join(TBL_PACKING_INSTRACTION_DETAILS, TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id = '.TBL_PACKING_INSTRACTION.'.id');
+    //     $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_PACKING_INSTRACTION_DETAILS.'.part_number');
+    //     $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.part_number_id = '.TBL_PACKING_INSTRACTION_DETAILS.'.part_number');
+       
+    //     if($params['search']['value'] != "") 
+    //     {
+    //         $this->db->where("(".TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
+    //         $this->db->or_where(TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
+    //         $this->db->or_where(TBL_BUYER_PO_MASTER.".buyer_po_number LIKE '%".$params['search']['value']."%'");
+    //         $this->db->or_where(TBL_BUYER_PO_MASTER.".buyer_po_date LIKE '%".$params['search']['value']."%'");
+    //         $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
+    //         $this->db->or_where(TBL_BUYER_PO_MASTER.".buyer_po_part_delivery_date LIKE '%".$params['search']['value']."%'");
+    //         $this->db->or_where(TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_qty LIKE '%".$params['search']['value']."%'");
+    //         $this->db->or_where(TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_number LIKE '%".$params['search']['value']."%'");
+    //         $this->db->or_where(TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_date LIKE '%".$params['search']['value']."%'");
+    //         $this->db->or_where(TBL_PACKING_INSTRACTION_DETAILS.".remark LIKE '%".$params['search']['value']."%'");
+    //         $this->db->or_where(TBL_FINISHED_GOODS.".name LIKE '%".$params['search']['value']."%')");
+    //     }
+
+    //     if($buyer_name!='NA'){
+    //         $this->db->where(TBL_PACKING_INSTRACTION.'.buyer_name', $buyer_name);
+    //     }
+
+    //     if($part_number!='NA'){
+    //         $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.part_number', $part_number);
+    //     }
+
+
+    //     if($from_date!='NA'){
+    //         $fromdate = $from_date;
+
+    //         $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date >=', $fromdate);
+    //     }
+
+    //     if($to_date!='NA'){
+    //         $todate = $to_date;
+    //         $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date <=', $todate);
+    //     }
+
+    
+    //     $this->db->where(TBL_PACKING_INSTRACTION.'.status', 1);
+    //     $this->db->order_by(TBL_PACKING_INSTRACTION.'.id','DESC');
+    //     $this->db->limit($params['length'],$params['start']);
+    //     $query = $this->db->get(TBL_PACKING_INSTRACTION);
+    //     $fetch_result = $query->result_array();
+        
+    //     $data = array();
+    //     $counter = 0;
+    //     if(count($fetch_result) > 0)
+    //     {
+    //         foreach ($fetch_result as $key => $value)
+    //         {
+    //             $data[$counter]['buyer_name'] =$value['buyer_name'];
+    //             $data[$counter]['sales_order_number'] =$value['buyer_po_number'];
+    //             $data[$counter]['buyer_po_date'] =$value['buyer_po_date'];
+    //             $data[$counter]['part_number'] =$value['part_number'];
+    //             $data[$counter]['type_of_raw_material'] =$value['name'];
+    //             $data[$counter]['order_qty'] =$value['order_oty'];;
+    //             $data[$counter]['buyer_po_part_delivery_date'] =$value['buyer_po_part_delivery_date'];
+    //             $data[$counter]['export_invoice_number'] =$value['buyer_invoice_number'];
+    //             $data[$counter]['buyer_invoice_qty'] =$value['buyer_invoice_qty'];
+    //             $data[$counter]['buyer_invoice_date'] =$value['buyer_invoice_date'];
+    //             $data[$counter]['remark'] =$value['remark'];
+    //             $counter++; 
+    //         }
+    //     }
+    //     return $data;
+    // }
+
+
+     public function fetchbuyerpodetailsreportCount($params,$buyer_name,$part_number,$from_date,$to_date){
+        $this->db->select(TBL_BUYER_MASTER.'.buyer_name,'.TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_BUYER_PO_MASTER.'.buyer_po_date,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name,'.TBL_BUYER_PO_MASTER.'.delivery_date,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_qty,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_number,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_date,'.TBL_PACKING_INSTRACTION_DETAILS.'.remark,'.TBL_BUYER_PO_MASTER_ITEM.'.order_oty,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date,'.TBL_BUYER_PO_MASTER.'.buyer_po_number');
+        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_BUYER_PO_MASTER.'.buyer_name_id');
+        $this->db->join(TBL_PACKING_INSTRACTION, TBL_PACKING_INSTRACTION.'.buyer_po_number = '.TBL_BUYER_PO_MASTER.'.id','left');
+        $this->db->join(TBL_PACKING_INSTRACTION_DETAILS, TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id = '.TBL_PACKING_INSTRACTION.'.id','left');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_PACKING_INSTRACTION_DETAILS.'.part_number','left');
+        $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.part_number_id = '.TBL_PACKING_INSTRACTION_DETAILS.'.part_number','left');
+       
         if($params['search']['value'] != "") 
         {
             $this->db->where("(".TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
@@ -9516,7 +9645,6 @@ class Admin_model extends CI_Model
             $this->db->or_where(TBL_FINISHED_GOODS.".name LIKE '%".$params['search']['value']."%')");
         }
 
-
         if($buyer_name!='NA'){
             $this->db->where(TBL_PACKING_INSTRACTION.'.buyer_name', $buyer_name);
         }
@@ -9528,6 +9656,7 @@ class Admin_model extends CI_Model
 
         if($from_date!='NA'){
             $fromdate = $from_date;
+
             $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date >=', $fromdate);
         }
 
@@ -9536,25 +9665,24 @@ class Admin_model extends CI_Model
             $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date <=', $todate);
         }
 
-
-        $this->db->where(TBL_PACKING_INSTRACTION.'.status', 1);
-        $this->db->order_by(TBL_PACKING_INSTRACTION.'.id','DESC');
-        $query = $this->db->get(TBL_PACKING_INSTRACTION);
+        $this->db->where(TBL_BUYER_PO_MASTER.'.status', 1);
+        $this->db->order_by(TBL_BUYER_PO_MASTER.'.id','DESC');
+        $query = $this->db->get(TBL_BUYER_PO_MASTER);
         $rowcount = $query->num_rows();
         return $rowcount;
 
     }
 
+
     public function fetchbuyerpodetailsreportData($params,$buyer_name,$part_number,$from_date,$to_date){
 
-
+        //$this->db->select(TBL_BUYER_MASTER.'.buyer_name,'.TBL_BUYER_PO_MASTER.'.sales_order_number as buyer_po_number,'.TBL_BUYER_PO_MASTER.'.buyer_po_date,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_qty,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_number,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_date,'.TBL_PACKING_INSTRACTION_DETAILS.'.remark');
         $this->db->select(TBL_BUYER_MASTER.'.buyer_name,'.TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_BUYER_PO_MASTER.'.buyer_po_date,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name,'.TBL_BUYER_PO_MASTER.'.delivery_date,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_qty,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_number,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_date,'.TBL_PACKING_INSTRACTION_DETAILS.'.remark,'.TBL_BUYER_PO_MASTER_ITEM.'.order_oty,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date,'.TBL_BUYER_PO_MASTER.'.buyer_po_number');
-        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_PACKING_INSTRACTION.'.buyer_po_number','left');
-        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_PACKING_INSTRACTION.'.buyer_name');
-
-        $this->db->join(TBL_PACKING_INSTRACTION_DETAILS, TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id = '.TBL_PACKING_INSTRACTION.'.id');
-        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_PACKING_INSTRACTION_DETAILS.'.part_number');
-        $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.part_number_id = '.TBL_PACKING_INSTRACTION_DETAILS.'.part_number');
+        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_BUYER_PO_MASTER.'.buyer_name_id');
+        $this->db->join(TBL_PACKING_INSTRACTION, TBL_PACKING_INSTRACTION.'.buyer_po_number = '.TBL_BUYER_PO_MASTER.'.id','left');
+        $this->db->join(TBL_PACKING_INSTRACTION_DETAILS, TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id = '.TBL_PACKING_INSTRACTION.'.id','left');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_PACKING_INSTRACTION_DETAILS.'.part_number','left');
+        $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.part_number_id = '.TBL_PACKING_INSTRACTION_DETAILS.'.part_number','left');
        
         if($params['search']['value'] != "") 
         {
@@ -9592,10 +9720,10 @@ class Admin_model extends CI_Model
         }
 
     
-        $this->db->where(TBL_PACKING_INSTRACTION.'.status', 1);
-        $this->db->order_by(TBL_PACKING_INSTRACTION.'.id','DESC');
+        $this->db->where(TBL_BUYER_PO_MASTER.'.status', 1);
+        $this->db->order_by(TBL_BUYER_PO_MASTER.'.id','DESC');
         $this->db->limit($params['length'],$params['start']);
-        $query = $this->db->get(TBL_PACKING_INSTRACTION);
+        $query = $this->db->get(TBL_BUYER_PO_MASTER);
         $fetch_result = $query->result_array();
         
         $data = array();
@@ -9620,6 +9748,8 @@ class Admin_model extends CI_Model
         }
         return $data;
     }
+
+
 
     public function calculatesumofallbuyerdetails($buyer_name,$part_number,$from_date,$to_date){
         $this->db->select('sum('.TBL_BUYER_PO_MASTER_ITEM.'.order_oty) as total_order_aty,sum('.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_qty) as export_qty');
