@@ -9664,7 +9664,7 @@ class Admin_model extends CI_Model
             $todate = $to_date;
             $this->db->where(TBL_BUYER_PO_MASTER.'.buyer_po_date <=', $todate);
         }
-       
+        $this->db->group_by(TBL_BUYER_PO_MASTER_ITEM.'.id');
         $query = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
         $rowcount = $query->num_rows();
         return $rowcount;
@@ -9719,6 +9719,7 @@ class Admin_model extends CI_Model
 
 
         $this->db->order_by(TBL_BUYER_PO_MASTER.'.id','DESC');
+        $this->db->group_by(TBL_BUYER_PO_MASTER_ITEM.'.id');
         $this->db->limit($params['length'],$params['start']);
         $query = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
         $fetch_result = $query->result_array();
@@ -9774,12 +9775,12 @@ class Admin_model extends CI_Model
           
         if($from_date!='NA'){
             $fromdate = $from_date;
-            $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date >=', $fromdate);
+            $this->db->where(TBL_BUYER_PO_MASTER.'.buyer_po_date >=', $fromdate);
         }
 
         if($to_date!='NA'){
             $todate = $to_date;
-            $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date <=', $todate);
+            $this->db->where(TBL_BUYER_PO_MASTER.'.buyer_po_date <=', $todate);
         }
 
 

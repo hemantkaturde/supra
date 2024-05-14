@@ -23,17 +23,7 @@
         </div>
 
         <div class="row" style="background: #fff;margin-right: 1px;margin-left: 1px;margin-bottom: 12px;margin-top: 10px;">
-            <div class="col-xs-3 text-left" style="margin-top: 10px;">
-                <div class="form-group">
-                    <label for="date">Buyer Name</label>
-                        <select class="form-control" name="buyer_name" id="buyer_name">
-                            <option st-id="" value="">Select Buyer Name</option>
-                            <?php foreach ($buyerList as $key => $value) {?>
-                                <option value="<?php echo $value['buyer_id']; ?>"><?php echo $value['buyer_name']; ?></option>
-                            <?php } ?>
-                        </select>
-                </div>
-            </div>
+            
             <div class="col-xs-3 text-left" style="margin-top: 10px;">
                 <div class="form-group">
                         <label for="part_number">Part Number</label>
@@ -45,6 +35,19 @@
                         </select>
                 </div>
             </div>
+
+            <div class="col-xs-3 text-left" style="margin-top: 10px;">
+                <div class="form-group">
+                    <label for="date">Buyer Name</label>
+                        <select class="form-control" name="buyer_name" id="buyer_name">
+                            <option st-id="" value="">Select Buyer Name</option>
+                            <?php foreach ($buyerList as $key => $value) {?>
+                                <option value="<?php echo $value['buyer_id']; ?>"><?php echo $value['buyer_name']; ?></option>
+                            <?php } ?>
+                        </select>
+                </div>
+            </div>
+
             <div class="col-xs-3 text-left" style="margin-top: 10px;">
                 <div class="form-group">
                     <label for="date">From Date</label>
