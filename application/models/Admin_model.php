@@ -9824,10 +9824,28 @@ class Admin_model extends CI_Model
         }
 
         //$this->db->order_by(TBL_BUYER_PO_MASTER.'.id','DESC');
-      //  $this->db->group_by(TBL_BUYER_PO_MASTER_ITEM.'.id');
+        $this->db->group_by(TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
         $query = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
-        $data = $query->result_array();
-        return $data;
+        $fetch_result = $query->result_array();
+ 
+        $data = array();
+        $total_order_aty=0;
+        $export_qty=0;
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+
+                $total_order_aty = $total_order_aty + $value['total_order_aty'];
+                $export_qty = $export_qty + $value['export_qty'];
+                $counter++;
+            }
+
+        }
+
+         $data[] = array('total_order_aty'=>$total_order_aty,'export_qty'=>$export_qty);
+         return $data;
         
     }
 
