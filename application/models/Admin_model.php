@@ -9647,13 +9647,12 @@ class Admin_model extends CI_Model
             $this->db->or_where(TBL_FINISHED_GOODS.".name LIKE '%".$params['search']['value']."%')");
         }
 
-
         if($buyer_name!='NA'){
-            $this->db->where(TBL_PACKING_INSTRACTION.'.buyer_name', $buyer_name);
+            $this->db->where(TBL_BUYER_PO_MASTER.'.buyer_name_id', $buyer_name);
         }
 
         if($part_number!='NA'){
-            $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.part_number', $part_number);
+            $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.part_number_id', $part_number);
         }
 
         if($from_date!='NA'){
@@ -9700,11 +9699,11 @@ class Admin_model extends CI_Model
 
 
         if($buyer_name!='NA'){
-            $this->db->where(TBL_PACKING_INSTRACTION.'.buyer_name', $buyer_name);
+            $this->db->where(TBL_BUYER_PO_MASTER.'.buyer_name_id', $buyer_name);
         }
 
         if($part_number!='NA'){
-            $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.part_number', $part_number);
+            $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.part_number_id', $part_number);
         }
 
 
