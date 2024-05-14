@@ -9823,8 +9823,8 @@ class Admin_model extends CI_Model
             $this->db->where(TBL_BUYER_PO_MASTER.'.buyer_po_date <=', $todate);
         }
 
-        $this->db->order_by(TBL_BUYER_PO_MASTER.'.id','DESC');
-        //$this->db->group_by(TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id',TBL_BUYER_PO_MASTER.'buyer_po_date');
+        //$this->db->order_by(TBL_BUYER_PO_MASTER.'.id','DESC');
+        $this->db->group_by(TBL_BUYER_PO_MASTER_ITEM.'.id');
         $query = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
         $data = $query->result_array();
         return $data;
