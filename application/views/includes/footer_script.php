@@ -17733,7 +17733,7 @@
 									var total_order_qty =  calculate_valuecls.total_order_aty;
 									var total_export_qty =  calculate_valuecls.export_qty;
 
-									if(total_order_qty || total_export_qty){
+									
 										$('#total_order_qty').val(total_order_qty);
 					             	    $("#total_export_qty").val(total_export_qty);	
 
@@ -17745,11 +17745,7 @@
 										}
 										
 									    $("#balenace_export_qty").val(result);
-									}else{
-										$('#total_order_qty').val('');
-					             	    $("#total_export_qty").val('');	
-									    $("#balenace_export_qty").val('');
-									}
+									
 								}
 					},
 					error: function (jqXHR, textStatus, errorThrown)
