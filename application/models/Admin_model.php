@@ -3598,7 +3598,9 @@ class Admin_model extends CI_Model
     public function getPackinginstractionCount($params){
 
         $this->db->select('*');
-
+        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_PACKING_INSTRACTION.'.buyer_name');
+        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_PACKING_INSTRACTION.'.buyer_po_number');
+      
         if($params['search']['value'] != "") 
         {
             $this->db->where("(".TBL_PACKING_INSTRACTION.".packing_instrauction_id LIKE '%".$params['search']['value']."%'");
