@@ -17733,12 +17733,18 @@
 									var total_order_qty =  calculate_valuecls.total_order_aty;
 									var total_export_qty =  calculate_valuecls.export_qty;
 
-									if(total_order_qty && total_export_qty){
+									if(total_order_qty || total_export_qty){
 										$('#total_order_qty').val(total_order_qty);
 					             	    $("#total_export_qty").val(total_export_qty);	
 
 									    var balence_export_qty = parseFloat(total_order_qty) - parseFloat(total_export_qty);
-									    $("#balenace_export_qty").val(balence_export_qty);
+										if(isNaN(balence_export_qty)) {
+											var result = 0;
+										}else{
+											var result = balence_export_qty;
+										}
+										
+									    $("#balenace_export_qty").val(result);
 									}else{
 										$('#total_order_qty').val('');
 					             	    $("#total_export_qty").val('');	
