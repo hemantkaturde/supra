@@ -9656,17 +9656,15 @@ class Admin_model extends CI_Model
             $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.part_number', $part_number);
         }
 
-
         if($from_date!='NA'){
             $fromdate = $from_date;
-            $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date >=', $fromdate);
+            $this->db->where(TBL_BUYER_PO_MASTER.'.buyer_po_date >=', $fromdate);
         }
 
         if($to_date!='NA'){
             $todate = $to_date;
-            $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date <=', $todate);
+            $this->db->where(TBL_BUYER_PO_MASTER.'.buyer_po_date <=', $todate);
         }
-       
        
         $query = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
         $rowcount = $query->num_rows();
@@ -9677,7 +9675,7 @@ class Admin_model extends CI_Model
 
     public function fetchbuyerpodetailsreportData($params,$buyer_name,$part_number,$from_date,$to_date){
 
-        $this->db->select(TBL_BUYER_MASTER.'.buyer_name,'.TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_BUYER_PO_MASTER.'.buyer_po_date,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name,'.TBL_BUYER_PO_MASTER.'.delivery_date,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_qty,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_number,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_date,'.TBL_PACKING_INSTRACTION_DETAILS.'.remark,'.TBL_BUYER_PO_MASTER_ITEM.'.order_oty,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date,'.TBL_BUYER_PO_MASTER.'.buyer_po_number');
+        $this->db->select(TBL_BUYER_MASTER.'.buyer_name,'.TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_BUYER_PO_MASTER.'.buyer_po_date,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name,'.TBL_BUYER_PO_MASTER.'.delivery_date,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_qty,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_number,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_date,'.TBL_PACKING_INSTRACTION_DETAILS.'.remark,'.TBL_BUYER_PO_MASTER_ITEM.'.order_oty,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date,'.TBL_BUYER_PO_MASTER.'.buyer_po_number,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date');
         $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_BUYER_PO_MASTER.'.buyer_name_id');
@@ -9712,12 +9710,12 @@ class Admin_model extends CI_Model
 
         if($from_date!='NA'){
             $fromdate = $from_date;
-            $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date >=', $fromdate);
+            $this->db->where(TBL_BUYER_PO_MASTER.'.buyer_po_date >=', $fromdate);
         }
 
         if($to_date!='NA'){
             $todate = $to_date;
-            $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date <=', $todate);
+            $this->db->where(TBL_BUYER_PO_MASTER.'.buyer_po_date <=', $todate);
         }
 
 
@@ -9732,13 +9730,20 @@ class Admin_model extends CI_Model
         {
             foreach ($fetch_result as $key => $value)
             {
+                if(trim($value['buyer_po_part_delivery_date'])=='0000-00-00'){
+
+                    $buyer_po_part_delivery_date = '';
+                }else{
+                    $buyer_po_part_delivery_date = $value['buyer_po_part_delivery_date'];
+                }
+
                 $data[$counter]['buyer_name'] =$value['buyer_name'];
                 $data[$counter]['sales_order_number'] =$value['buyer_po_number'];
                 $data[$counter]['buyer_po_date'] =$value['buyer_po_date'];
                 $data[$counter]['part_number'] =$value['part_number'];
                 $data[$counter]['type_of_raw_material'] =$value['name'];
                 $data[$counter]['order_qty'] =$value['order_oty'];;
-                $data[$counter]['buyer_po_part_delivery_date'] =$value['buyer_po_part_delivery_date'];
+                $data[$counter]['buyer_po_part_delivery_date'] =$buyer_po_part_delivery_date;
                 $data[$counter]['export_invoice_number'] =$value['buyer_invoice_number'];
                 $data[$counter]['buyer_invoice_qty'] =$value['buyer_invoice_qty'];
                 $data[$counter]['buyer_invoice_date'] =$value['buyer_invoice_date'];
