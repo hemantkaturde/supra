@@ -9827,6 +9827,10 @@ class Admin_model extends CI_Model
         $this->db->group_by(TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
         $query = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
         $fetch_result = $query->result_array();
+
+        // $str = $this->db->last_query();
+        // print_r($str);
+        // exit;
  
         $data = array();
         $total_order_aty=0;
@@ -9837,14 +9841,14 @@ class Admin_model extends CI_Model
             foreach ($fetch_result as $key => $value)
             {
 
-                $total_order_aty = $total_order_aty + $value['total_order_aty'];
-                $export_qty = $export_qty + $value['export_qty'];
+                $total_order_aty1 = $total_order_aty + $value['total_order_aty'];
+                $export_qty1 = $export_qty + $value['export_qty'];
                 $counter++;
             }
 
         }
 
-         $data[] = array('total_order_aty'=>$total_order_aty,'export_qty'=>$export_qty);
+         $data[] = array('total_order_aty'=>$total_order_aty1,'export_qty'=>$export_qty1);
          return $data;
         
     }
