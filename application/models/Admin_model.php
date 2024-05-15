@@ -9627,6 +9627,7 @@ class Admin_model extends CI_Model
 
 
      public function fetchbuyerpodetailsreportCount($params,$buyer_name,$part_number,$from_date,$to_date){
+        $this->db->distinct();
         $this->db->select(TBL_BUYER_MASTER.'.buyer_name,'.TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_BUYER_PO_MASTER.'.buyer_po_date,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name,'.TBL_BUYER_PO_MASTER.'.delivery_date,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_qty,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_number,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_date,'.TBL_PACKING_INSTRACTION_DETAILS.'.remark,'.TBL_BUYER_PO_MASTER_ITEM.'.order_oty,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date,'.TBL_BUYER_PO_MASTER.'.buyer_po_number,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date');
         $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
@@ -9678,7 +9679,7 @@ class Admin_model extends CI_Model
 
 
     public function fetchbuyerpodetailsreportData($params,$buyer_name,$part_number,$from_date,$to_date){
-
+        $this->db->distinct();
         $this->db->select(TBL_BUYER_MASTER.'.buyer_name,'.TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_BUYER_PO_MASTER.'.date as bddate,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name,'.TBL_BUYER_PO_MASTER.'.delivery_date,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_qty,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_number,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_date,'.TBL_PACKING_INSTRACTION_DETAILS.'.remark,'.TBL_BUYER_PO_MASTER_ITEM.'.order_oty,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date,'.TBL_BUYER_PO_MASTER.'.buyer_po_number,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date');
         $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
@@ -9799,7 +9800,10 @@ class Admin_model extends CI_Model
 
     
     public function calculatesumofallbuyerdetails($buyer_name,$part_number,$from_date,$to_date){
-        $this->db->select('sum('.TBL_BUYER_PO_MASTER_ITEM.'.order_oty) as total_order_aty,sum('.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_qty) as export_qty');
+        $this->db->distinct();
+        //$this->db->select('sum('.TBL_BUYER_PO_MASTER_ITEM.'.order_oty) as total_order_aty,sum('.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_qty) as export_qty');
+        $this->db->select(TBL_BUYER_PO_MASTER_ITEM.'.order_oty as total_order_aty,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_qty as export_qty');
+
         $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_BUYER_PO_MASTER.'.buyer_name_id');
@@ -9832,6 +9836,10 @@ class Admin_model extends CI_Model
         $query = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
         $fetch_result = $query->result_array();
 
+       
+        // print_r($fetch_result);        
+        // exit;
+
         // $str = $this->db->last_query();
         // print_r($str);
         // exit;
@@ -9854,6 +9862,7 @@ class Admin_model extends CI_Model
 
          $data[] = array('total_order_aty'=>$total_order_aty1,'export_qty'=>$export_qty1);
          return $data;
+
         
     }
 
