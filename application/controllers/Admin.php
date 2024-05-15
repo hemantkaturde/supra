@@ -15565,5 +15565,300 @@ public function checkifpartnumberisalreadyexists(){
 }
 
 
+
+public function downloadcomplainform($id){
+
+    $getscrapreturnForInvoice = $this->admin_model->getscrapreturnForInvoice($id);
+    $getscrapreturnItemdeatilsForInvoice = $this->admin_model->getscrapreturnItemdeatilsForInvoice($id);
+
+    $mpdf = new \Mpdf\Mpdf();
+    // $html = $this->load->view('html_to_pdf',[],true);
+    $html = '<table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:12px;">
+                <tr style="border: 1px solid black;" valign="top">
+                    <td width="20%" style="padding: 10px;text-align: center;">
+                        <p><h6 style="color:#000080">SUPRA QUALITY EXPORTS INDIA PVT LTD </h6></p>
+                    </td> 
+
+                    <td width="55%"  style="border-left: 1px solid black;padding: 10px;" valign="top">
+                          <p style="text-align: center"><h3>Analysis and Corrective Action Report</h3></p>
+                    </td>
+
+                    <td width="30%" style="border-left: 1px solid black;padding: 10px;" valign="top">
+                        <p style="font-size:13px;">Format No:-001 </p>
+                        <p>Rev. No. 001 </p>
+                        <p>Report No=</p>
+                    </td>
+                </tr>
+            </table>
+
+            <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:12px;">
+                <tr style="border: 1px solid black;" valign="top">
+                    <td width="25%" style="padding: 10px;text-align: left;">
+                        <p>STAGE :  INCOMING / INPROCESS /  FINAL INSPECTION / AT CUSTOMER /
+                        AT SUPPLIER END</p>
+                    </td> 
+
+                    <td width="25%"  style="border-left: 1px solid black;padding: 10px;" valign="top">
+                          <p style="text-align: center"></p>
+                    </td>
+
+                    <td width="25%" style="border-left: 1px solid black;padding: 10px;" valign="top">
+                        <p style="font-size:13px;">DATE OF OBSERVATION /  REJECTION FOUND:</p>
+                    </td>
+
+                    <td width="30%" style="border-left: 1px solid black;padding: 10px;" valign="top">
+                        <p> </p>
+                    </td>
+                </tr>
+            </table>
+
+            <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:12px;">
+                <tr style="border: 1px solid black;" valign="top">
+                    <td width="25%" style="padding: 10px;text-align: left;">
+                        <p>DRAWING NO / REV NO :</p>
+                    </td> 
+
+                    <td width="25%"  style="border-left: 1px solid black;padding: 10px;" valign="top">
+                        <p style="text-align: center"></p>
+                    </td>
+
+                    <td width="25%" style="border-left: 1px solid black;padding: 10px;" valign="top">
+                        <p style="font-size:13px;">
+                         CHALLAN NO :
+                         PO NO / WO NO :
+                         INWARD NO ::</p>
+                    </td>
+
+                    <td width="30%" style="border-left: 1px solid black;padding: 10px;" valign="top">
+                        <p> </p>
+                    </td>
+                </tr>
+            </table>
+
+
+            <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:12px;">
+                <tr style="border: 1px solid black;" valign="top">
+                    <td width="25%" style="padding: 10px;text-align: left;">
+                        <p>COMPONENT DESCRIPTION :</p>
+                    </td> 
+
+                    <td width="25%"  style="border-left: 1px solid black;padding: 10px;" valign="top">
+                        <p style="text-align: center"></p>
+                    </td>
+
+                    <td width="25%" style="border-left: 1px solid black;padding: 10px;" valign="top">
+                        <p style="font-size:13px;">TOTAL QTY CHECKED :</p>
+                    </td>
+
+                    <td width="30%" style="border-left: 1px solid black;padding: 10px;" valign="top">
+                        <p> </p>
+                    </td>
+                </tr>
+            </table>
+
+
+            <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:12px;">
+                <tr style="border: 1px solid black;" valign="top">
+                    <td width="25%" style="padding: 10px;text-align: left;">
+                        <p>PROBLEM OCCURS AT CUSTOMER END / SUPPLIER END/INITIAL STAGE :</p>
+                    </td> 
+
+                    <td width="25%"  style="border-left: 1px solid black;padding: 10px;" valign="top">
+                        <p style="text-align: center"></p>
+                    </td>
+
+                    <td width="25%" style="border-left: 1px solid black;padding: 10px;" valign="top">
+                        <p style="font-size:13px;">TOTAL FAILURE QTY :</p>
+                    </td>
+
+                    <td width="30%" style="border-left: 1px solid black;padding: 10px;" valign="top">
+                        <p> </p>
+                    </td>
+                </tr>
+           </table>
+
+
+           <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:12px;">
+                   <tr style="border: 1px solid black;" valign="top">
+                      <td width="25%" style="padding: 10px;text-align: left;">
+                        <p>1. PROBLEM DESCRIPTION :</p>
+                      </td>
+                    </tr>
+           </table>
+
+           <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:12px;">
+                <tr style="border: 1px solid black;" valign="top">
+                <td width="25%" style="padding: 10px;text-align: left;">
+                    <p>'.str_repeat('&nbsp;', 5).'</p>
+                    <p>'.str_repeat('&nbsp;', 5).'</p>
+                    <p>'.str_repeat('&nbsp;', 5).'</p>
+                </td>
+                </tr>
+          </table>
+
+          <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:12px;">
+            <tr style="border: 1px solid black;" valign="top">
+                <td width="25%" style="padding: 10px;text-align: left;">
+                <p>2. INTERMIDIATE DISPOSAL :</p>
+                </td>
+            </tr>
+            </table>
+
+            <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:12px;">
+                <tr style="border: 1px solid black;" valign="top">
+                <td width="25%" style="padding: 10px;text-align: left;">
+                    <p>'.str_repeat('&nbsp;', 5).'</p>
+                    <p>'.str_repeat('&nbsp;', 5).'</p>
+                    <p>'.str_repeat('&nbsp;', 5).'</p>
+                </td>
+                </tr>
+            </table>
+
+            <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:12px;">
+             <tr style="border: 1px solid black;" valign="top">
+                <td width="25%" style="padding: 10px;text-align: left;">
+                <p>3. ROOT CAUSE(S) : </p>
+                </td>
+             </tr>
+            </table>
+
+            <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:12px;">
+                <tr style="border: 1px solid black;" valign="top">
+                <td width="25%" style="padding: 10px;text-align: left;">
+                    <p>'.str_repeat('&nbsp;', 5).'</p>
+                    <p>'.str_repeat('&nbsp;', 5).'</p>
+                    <p>'.str_repeat('&nbsp;', 5).'</p>
+                </td>
+                </tr>
+            </table>
+
+
+            <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:12px;">
+                <tr style="border: 1px solid black;" valign="top">
+                    <td width="70%" style="padding: 10px;text-align: left;border-right:1px solid black;">
+                       <p>4. CORRECTION : </p>
+                    </td>
+
+                    <td width="10%" style="padding: 10px;text-align: left;border-right:1px solid black;">
+                       <p>RESPONSIBILITY</p>
+                    </td>
+
+                    <td width="10%" style="padding: 10px;text-align: left;">
+                       <p>DATE</p>
+                    </td>
+                </tr>
+           </table>
+
+           <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:12px;">
+                <tr style="border: 1px solid black;" valign="top">
+                <td width="70%" style="padding: 10px;text-align: left;border-right:1px solid black;">
+                    <p>'.str_repeat('&nbsp;', 5).'</p>
+                    <p>'.str_repeat('&nbsp;', 5).'</p>
+                    <p>'.str_repeat('&nbsp;', 5).'</p>
+                </td>
+
+                <td width="20%" style="padding: 10px;text-align: left;border-right:1px solid black;">
+                    <p>'.str_repeat('&nbsp;', 5).'</p>
+                    <p>'.str_repeat('&nbsp;', 5).'</p>
+                    <p>'.str_repeat('&nbsp;', 5).'</p>
+                </td>
+
+                <td width="10%" style="padding: 10px;text-align: left;">
+                    <p>'.str_repeat('&nbsp;', 5).'</p>
+                    <p>'.str_repeat('&nbsp;', 5).'</p>
+                    <p>'.str_repeat('&nbsp;', 5).'</p>
+                </td>
+            </tr>
+          </table>
+
+          <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:12px;">
+          <tr style="border: 1px solid black;" valign="top">
+              <td width="70%" style="padding: 10px;text-align: left;border-right:1px solid black;">
+                 <p> 5. CORRECTIVE ACTION TAKEN : </p>
+              </td>
+
+              <td width="10%" style="padding: 10px;text-align: left;border-right:1px solid black;">
+                 <p>RESPONSIBILITY</p>
+              </td>
+
+              <td width="10%" style="padding: 10px;text-align: left;">
+                 <p>DATE</p>
+              </td>
+          </tr>
+        </table>
+
+        <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:12px;">
+          <tr style="border: 1px solid black;" valign="top">
+          <td width="70%" style="padding: 10px;text-align: left;border-right:1px solid black;">
+              <p>'.str_repeat('&nbsp;', 5).'</p>
+              <p>'.str_repeat('&nbsp;', 5).'</p>
+              <p>'.str_repeat('&nbsp;', 5).'</p>
+          </td>
+
+          <td width="20%" style="padding: 10px;text-align: left;border-right:1px solid black;">
+              <p>'.str_repeat('&nbsp;', 5).'</p>
+              <p>'.str_repeat('&nbsp;', 5).'</p>
+              <p>'.str_repeat('&nbsp;', 5).'</p>
+          </td>
+
+          <td width="10%" style="padding: 10px;text-align: left;">
+              <p>'.str_repeat('&nbsp;', 5).'</p>
+              <p>'.str_repeat('&nbsp;', 5).'</p>
+              <p>'.str_repeat('&nbsp;', 5).'</p>
+          </td>
+      </tr>
+    </table>
+
+       <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:12px;">
+          <tr style="border: 1px solid black;" valign="top">
+              <td width="70%" style="padding: 10px;text-align: left;border-right:1px solid black;">
+                 <p> 6. EFFECTIVE ACTION : </p>
+              </td>
+
+              <td width="10%" style="padding: 10px;text-align: left;border-right:1px solid black;">
+                 <p>RESPONSIBILITY</p>
+              </td>
+
+              <td width="10%" style="padding: 10px;text-align: left;">
+                 <p>DATE</p>
+              </td>
+          </tr>
+        </table>
+
+        <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:12px;">
+          <tr style="border: 1px solid black;" valign="top">
+          <td width="70%" style="padding: 10px;text-align: left;border-right:1px solid black;">
+              <p>'.str_repeat('&nbsp;', 5).'</p>
+              <p>'.str_repeat('&nbsp;', 5).'</p>
+              <p>'.str_repeat('&nbsp;', 5).'</p>
+          </td>
+
+          <td width="20%" style="padding: 10px;text-align: left;border-right:1px solid black;">
+              <p>'.str_repeat('&nbsp;', 5).'</p>
+              <p>'.str_repeat('&nbsp;', 5).'</p>
+              <p>'.str_repeat('&nbsp;', 5).'</p>
+          </td>
+
+          <td width="10%" style="padding: 10px;text-align: left;">
+              <p>'.str_repeat('&nbsp;', 5).'</p>
+              <p>'.str_repeat('&nbsp;', 5).'</p>
+              <p>'.str_repeat('&nbsp;', 5).'</p>
+          </td>
+      </tr>
+    </table>
+
+                    
+            
+            ';
+
+            // <p>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</p>
+    $invoice_name =  $getscrapreturnForInvoice['challan_id'].' - '.$getscrapreturnForInvoice['vendor_name'].'.pdf';
+    $mpdf->WriteHTML($html);
+    $mpdf->Output($invoice_name,'D'); // opens in browser
+    
+}
+
+
+
 }
 
