@@ -9854,14 +9854,14 @@ class Admin_model extends CI_Model
             foreach ($fetch_result as $key => $value)
             {
 
-                $total_order_aty1 = $total_order_aty + $value['total_order_aty'];
-                $export_qty1 = $export_qty + $value['export_qty'];
+                $total_order_aty = $total_order_aty + $value['total_order_aty'];
+                $export_qty = $export_qty + $value['export_qty'];
                 $counter++;
             }
 
         }
 
-         $data[] = array('total_order_aty'=>$total_order_aty1,'export_qty'=>$export_qty1);
+         $data[] = array('total_order_aty'=>$total_order_aty,'export_qty'=>$export_qty);
          return $data;
 
         
