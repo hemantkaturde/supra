@@ -9662,12 +9662,12 @@ class Admin_model extends CI_Model
 
         if($from_date!='NA'){
             $fromdate = $from_date;
-            $this->db->where(TBL_BUYER_PO_MASTER.'.buyer_po_date >=', $fromdate);
+            $this->db->where(TBL_BUYER_PO_MASTER.'.date >=', $fromdate);
         }
 
         if($to_date!='NA'){
             $todate = $to_date;
-            $this->db->where(TBL_BUYER_PO_MASTER.'.buyer_po_date <=', $todate);
+            $this->db->where(TBL_BUYER_PO_MASTER.'.date <=', $todate);
         }
 
         $query = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
