@@ -15927,13 +15927,10 @@ public function downloadcomplainform($id){
               <p>'.str_repeat('&nbsp;', 5).'</p>
           </td>
       </tr>
-    </table>
-                    
-            
-            ';
+    </table>';
 
             // <p>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</p>
-    $invoice_name =  $getscrapreturnForInvoice['challan_id'].' - '.$getscrapreturnForInvoice['vendor_name'].'.pdf';
+    $invoice_name =  'Analysis & Corrective Action Report final - '.$getscrapreturnForInvoice['report_no'].'.pdf';
     $mpdf->WriteHTML($html);
     $mpdf->Output($invoice_name,'D'); // opens in browser
     
