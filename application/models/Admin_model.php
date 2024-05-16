@@ -9860,7 +9860,7 @@ class Admin_model extends CI_Model
 
                 $get_export_invoice_details =$this->getexportinvoicedetails($value['buyer_po_idpo'],$value['part_number']);
                 $total_order_aty = $total_order_aty + $value['total_order_aty'];
-                $export_qty = $export_qty + $get_export_invoice_details[0]['buyer_invoice_qty'];
+                $export_qty = $get_export_invoice_details[0]['buyer_invoice_qty'];
                 $counter++;
             }
 
