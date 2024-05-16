@@ -12017,6 +12017,16 @@ public function checkifpartnumberisalreadyexists($part_number,$main_id){
     return $row_data;
 }
 
+public function getcompalinformdetailsforInvoice($id){
+
+    $this->db->select('*');
+    $this->db->where(TBL_COMPLAIN_FORM.'.id', $id);
+    $query = $this->db->get(TBL_COMPLAIN_FORM);
+    $row_data = $query->row_array();
+    return $row_data;
+
+
+}
 
 
 }

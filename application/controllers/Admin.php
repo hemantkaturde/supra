@@ -15568,8 +15568,8 @@ public function checkifpartnumberisalreadyexists(){
 
 public function downloadcomplainform($id){
 
-    $getscrapreturnForInvoice = $this->admin_model->getscrapreturnForInvoice($id);
-    $getscrapreturnItemdeatilsForInvoice = $this->admin_model->getscrapreturnItemdeatilsForInvoice($id);
+    $getcompalinformdetailsforInvoice = $this->admin_model->getcompalinformdetailsforInvoice($id);
+
 
     $mpdf = new \Mpdf\Mpdf();
     // $html = $this->load->view('html_to_pdf',[],true);
@@ -15579,8 +15579,8 @@ public function downloadcomplainform($id){
                         <p><h6 style="color:#000080">SUPRA QUALITY EXPORTS INDIA PVT LTD </h6></p>
                     </td> 
 
-                    <td width="55%"  style="border-left: 1px solid black;padding: 5px;" valign="top">
-                          <p style="text-align: center"><h3>Analysis and Corrective Action Report</h3></p>
+                    <td width="55%"  style="text-align: center;border-left: 1px solid black;padding: 5px;">
+                          <p style="text-align: center;color:#000080"><h2>Analysis and Corrective Action Report</h2></p>
                     </td>
 
                     <td width="30%" style="border-left: 1px solid black;padding: 5px;" valign="top">
@@ -15599,7 +15599,7 @@ public function downloadcomplainform($id){
                     </td> 
 
                     <td width="25%"  style="border-left: 1px solid black;padding: 5px;" valign="top">
-                          <p style="text-align: center"></p>
+                          <p style="text-align: center">'.$getcompalinformdetailsforInvoice['stage'].'</p>
                     </td>
 
                     <td width="25%" style="border-left: 1px solid black;padding: 5px;" valign="top">
@@ -15607,7 +15607,7 @@ public function downloadcomplainform($id){
                     </td>
 
                     <td width="30%" style="border-left: 1px solid black;padding: 5px;" valign="top">
-                        <p> </p>
+                        <p>'.$getcompalinformdetailsforInvoice['date_of_observation_rejection_found'].' </p>
                     </td>
                 </tr>
             </table>
@@ -15619,18 +15619,18 @@ public function downloadcomplainform($id){
                     </td> 
 
                     <td width="25%"  style="border-left: 1px solid black;padding: 5px;" valign="top">
-                        <p style="text-align: center"></p>
+                        <p>'.$getcompalinformdetailsforInvoice['drawing_no_rev_no'].'</p>
                     </td>
 
                     <td width="25%" style="border-left: 1px solid black;padding: 5px;" valign="top">
                         <p style="font-size:13px;">
                          CHALLAN NO :
                          PO NO / WO NO :
-                         INWARD NO ::</p>
+                         INWARD NO :</p>
                     </td>
 
                     <td width="30%" style="border-left: 1px solid black;padding: 5px;" valign="top">
-                        <p> </p>
+                        <p> '.$getcompalinformdetailsforInvoice['challan_no'].'</p>
                     </td>
                 </tr>
             </table>
@@ -15643,7 +15643,7 @@ public function downloadcomplainform($id){
                     </td> 
 
                     <td width="25%"  style="border-left: 1px solid black;padding: 5px;" valign="top">
-                        <p style="text-align: center"></p>
+                        <p>'.$getcompalinformdetailsforInvoice['component_description'].'</p>
                     </td>
 
                     <td width="25%" style="border-left: 1px solid black;padding: 5px;" valign="top">
@@ -15651,7 +15651,7 @@ public function downloadcomplainform($id){
                     </td>
 
                     <td width="30%" style="border-left: 1px solid black;padding: 5px;" valign="top">
-                        <p> </p>
+                        <p>'.$getcompalinformdetailsforInvoice['total_qty_checked'].' </p>
                     </td>
                 </tr>
             </table>
@@ -15664,7 +15664,7 @@ public function downloadcomplainform($id){
                     </td> 
 
                     <td width="25%"  style="border-left: 1px solid black;padding: 5px;" valign="top">
-                        <p style="text-align: center"></p>
+                      <p>'.$getcompalinformdetailsforInvoice['problem_description'].' </p>
                     </td>
 
                     <td width="25%" style="border-left: 1px solid black;padding: 5px;" valign="top">
@@ -15672,7 +15672,7 @@ public function downloadcomplainform($id){
                     </td>
 
                     <td width="30%" style="border-left: 1px solid black;padding: 5px;" valign="top">
-                        <p> </p>
+                      <p>'.$getcompalinformdetailsforInvoice['total_failure_qty'].' </p>
                     </td>
                 </tr>
            </table>
@@ -15689,8 +15689,7 @@ public function downloadcomplainform($id){
            <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:12px;">
                 <tr style="border: 1px solid black;" valign="top">
                 <td width="25%" style="padding: 5px;text-align: left;">
-                    <p>'.str_repeat('&nbsp;', 5).'</p>
-                    <p>'.str_repeat('&nbsp;', 5).'</p>
+                    <p>'.$getcompalinformdetailsforInvoice['problem_description'].' </p>
                     <p>'.str_repeat('&nbsp;', 5).'</p>
                 </td>
                 </tr>
@@ -15707,8 +15706,7 @@ public function downloadcomplainform($id){
             <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:12px;">
                 <tr style="border: 1px solid black;" valign="top">
                 <td width="25%" style="padding: 5px;text-align: left;">
-                    <p>'.str_repeat('&nbsp;', 5).'</p>
-                    <p>'.str_repeat('&nbsp;', 5).'</p>
+                    <p>'.$getcompalinformdetailsforInvoice['intermidiate_disposal'].' </p>
                     <p>'.str_repeat('&nbsp;', 5).'</p>
                 </td>
                 </tr>
@@ -15725,8 +15723,7 @@ public function downloadcomplainform($id){
             <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:12px;">
                 <tr style="border: 1px solid black;" valign="top">
                 <td width="25%" style="padding: 5px;text-align: left;">
-                    <p>'.str_repeat('&nbsp;', 5).'</p>
-                    <p>'.str_repeat('&nbsp;', 5).'</p>
+                    <p>'.$getcompalinformdetailsforInvoice['root_cause'].' </p>
                     <p>'.str_repeat('&nbsp;', 5).'</p>
                 </td>
                 </tr>
@@ -15739,11 +15736,11 @@ public function downloadcomplainform($id){
                        <p>4. CORRECTION : </p>
                     </td>
 
-                    <td width="10%" style="padding: 5px;text-align: left;border-right:1px solid black;">
+                    <td width="20%" style="padding: 5px;text-align: left;border-right:1px solid black;">
                        <p>RESPONSIBILITY</p>
                     </td>
 
-                    <td width="10%" style="padding: 5px;text-align: left;">
+                    <td width="12%" style="padding: 5px;text-align: left;">
                        <p>DATE</p>
                     </td>
                 </tr>
@@ -15752,19 +15749,19 @@ public function downloadcomplainform($id){
            <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:12px;">
                 <tr style="border: 1px solid black;" valign="top">
                 <td width="70%" style="padding: 5px;text-align: left;border-right:1px solid black;">
-                    <p>'.str_repeat('&nbsp;', 5).'</p>
+                    <p>'.$getcompalinformdetailsforInvoice['coorection'].' </p>
                     <p>'.str_repeat('&nbsp;', 5).'</p>
                     <p>'.str_repeat('&nbsp;', 5).'</p>
                 </td>
 
                 <td width="20%" style="padding: 5px;text-align: left;border-right:1px solid black;">
-                    <p>'.str_repeat('&nbsp;', 5).'</p>
+                    <p>'.$getcompalinformdetailsforInvoice['coorection_responsibility'].' </p>
                     <p>'.str_repeat('&nbsp;', 5).'</p>
                     <p>'.str_repeat('&nbsp;', 5).'</p>
                 </td>
 
-                <td width="10%" style="padding: 5px;text-align: left;">
-                    <p>'.str_repeat('&nbsp;', 5).'</p>
+                <td width="12%" style="padding: 5px;text-align: left;">
+                    <p>'.$getcompalinformdetailsforInvoice['coorection_date'].' </p>
                     <p>'.str_repeat('&nbsp;', 5).'</p>
                     <p>'.str_repeat('&nbsp;', 5).'</p>
                 </td>
@@ -15777,11 +15774,11 @@ public function downloadcomplainform($id){
                  <p> 5. CORRECTIVE ACTION TAKEN : </p>
               </td>
 
-              <td width="10%" style="padding: 5px;text-align: left;border-right:1px solid black;">
+              <td width="20%" style="padding: 5px;text-align: left;border-right:1px solid black;">
                  <p>RESPONSIBILITY</p>
               </td>
 
-              <td width="10%" style="padding: 5px;text-align: left;">
+              <td width="12%" style="padding: 5px;text-align: left;">
                  <p>DATE</p>
               </td>
           </tr>
@@ -15790,21 +15787,18 @@ public function downloadcomplainform($id){
         <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:12px;">
           <tr style="border: 1px solid black;" valign="top">
           <td width="70%" style="padding: 5px;text-align: left;border-right:1px solid black;">
-              <p>'.str_repeat('&nbsp;', 5).'</p>
-              <p>'.str_repeat('&nbsp;', 5).'</p>
+              <p>'.$getcompalinformdetailsforInvoice['corrective_action_taken'].' </p>
               <p>'.str_repeat('&nbsp;', 5).'</p>
           </td>
 
           <td width="20%" style="padding: 5px;text-align: left;border-right:1px solid black;">
-              <p>'.str_repeat('&nbsp;', 5).'</p>
-              <p>'.str_repeat('&nbsp;', 5).'</p>
+              <p>'.$getcompalinformdetailsforInvoice['corrective_action_responsibility'].' </p>
               <p>'.str_repeat('&nbsp;', 5).'</p>
           </td>
 
-          <td width="10%" style="padding: 5px;text-align: left;">
-              <p>'.str_repeat('&nbsp;', 5).'</p>
-              <p>'.str_repeat('&nbsp;', 5).'</p>
-              <p>'.str_repeat('&nbsp;', 5).'</p>
+          <td width="12%" style="padding: 5px;text-align: left;">
+               <p>'.$getcompalinformdetailsforInvoice['corrective_action_date'].' </p>
+               <p>'.str_repeat('&nbsp;', 5).'</p>
           </td>
       </tr>
     </table>
@@ -15815,11 +15809,11 @@ public function downloadcomplainform($id){
                  <p> 6. EFFECTIVE ACTION : </p>
               </td>
 
-              <td width="10%" style="padding: 5px;text-align: left;border-right:1px solid black;">
+              <td width="20%" style="padding: 5px;text-align: left;border-right:1px solid black;">
                  <p>RESPONSIBILITY</p>
               </td>
 
-              <td width="10%" style="padding: 5px;text-align: left;">
+              <td width="12%" style="padding: 5px;text-align: left;">
                  <p>DATE</p>
               </td>
           </tr>
@@ -15828,20 +15822,17 @@ public function downloadcomplainform($id){
         <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:12px;">
           <tr style="border: 1px solid black;" valign="top">
           <td width="70%" style="padding: 5px;text-align: left;border-right:1px solid black;">
-              <p>'.str_repeat('&nbsp;', 5).'</p>
-              <p>'.str_repeat('&nbsp;', 5).'</p>
+              <p>'.$getcompalinformdetailsforInvoice['effective_action'].' </p>
               <p>'.str_repeat('&nbsp;', 5).'</p>
           </td>
 
           <td width="20%" style="padding: 5px;text-align: left;border-right:1px solid black;">
-              <p>'.str_repeat('&nbsp;', 5).'</p>
-              <p>'.str_repeat('&nbsp;', 5).'</p>
+              <p>'.$getcompalinformdetailsforInvoice['effective_action_responsiblity'].' </p>
               <p>'.str_repeat('&nbsp;', 5).'</p>
           </td>
 
-          <td width="10%" style="padding: 5px;text-align: left;">
-              <p>'.str_repeat('&nbsp;', 5).'</p>
-              <p>'.str_repeat('&nbsp;', 5).'</p>
+          <td width="12%" style="padding: 5px;text-align: left;">
+              <p>'.$getcompalinformdetailsforInvoice['effective_action_date'].' </p>
               <p>'.str_repeat('&nbsp;', 5).'</p>
           </td>
       </tr>
@@ -15850,7 +15841,7 @@ public function downloadcomplainform($id){
 
     <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:12px;">
           <tr style="border: 1px solid black;" valign="top">
-              <td width="45%" style="padding: 5px;text-align: left;border-right:1px solid black;">
+              <td width="43%" style="padding: 5px;text-align: left;border-right:1px solid black;">
                  <p> 7. TEAM :</p>
               </td>
 
@@ -15858,7 +15849,7 @@ public function downloadcomplainform($id){
                 <p>PREPARED BY</p>
               </td>
 
-              <td width="10%" style="padding: 5px;text-align: left;border-right:1px solid black;">
+              <td width="12%" style="padding: 5px;text-align: left;border-right:1px solid black;">
                  <p>DATE</p>
               </td>
 
@@ -15866,7 +15857,7 @@ public function downloadcomplainform($id){
                  <p>APPROVED BY</p>
               </td>
 
-              <td width="10%" style="padding: 5px;text-align: left;">
+              <td width="12%" style="padding: 5px;text-align: left;">
                  <p>DATE</p>
               </td>
           </tr>
@@ -15874,34 +15865,29 @@ public function downloadcomplainform($id){
 
         <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:12px;">
           <tr style="border: 1px solid black;" valign="top">
-          <td width="45%" style="padding: 5px;text-align: left;border-right:1px solid black;">
-              <p>'.str_repeat('&nbsp;', 5).'</p>
-              <p>'.str_repeat('&nbsp;', 5).'</p>
+          <td width="43%" style="padding: 5px;text-align: left;border-right:1px solid black;">
+              <p>'.$getcompalinformdetailsforInvoice['team'].' </p>
               <p>'.str_repeat('&nbsp;', 5).'</p>
           </td>
 
             <td width="15%" style="padding: 5px;text-align: left;border-right:1px solid black;">
-                <p>'.str_repeat('&nbsp;', 5).'</p>
-                <p>'.str_repeat('&nbsp;', 5).'</p>
+                <p>'.$getcompalinformdetailsforInvoice['prepared_by'].' </p>
                 <p>'.str_repeat('&nbsp;', 5).'</p>
             </td>
 
-            <td width="10%" style="padding: 5px;text-align: left;border-right:1px solid black;">
-                <p>'.str_repeat('&nbsp;', 5).'</p>
-                <p>'.str_repeat('&nbsp;', 5).'</p>
+            <td width="12%" style="padding: 5px;text-align: left;border-right:1px solid black;">
+                <p>'.$getcompalinformdetailsforInvoice['prepared_by_date'].' </p>
                 <p>'.str_repeat('&nbsp;', 5).'</p>
             </td>
 
 
           <td width="20%" style="padding: 5px;text-align: left;border-right:1px solid black;">
-              <p>'.str_repeat('&nbsp;', 5).'</p>
-              <p>'.str_repeat('&nbsp;', 5).'</p>
+              <p>'.$getcompalinformdetailsforInvoice['approved_by'].' </p>
               <p>'.str_repeat('&nbsp;', 5).'</p>
           </td>
 
-          <td width="10%" style="padding: 5px;text-align: left;">
-              <p>'.str_repeat('&nbsp;', 5).'</p>
-              <p>'.str_repeat('&nbsp;', 5).'</p>
+          <td width="12%" style="padding: 5px;text-align: left;">
+              <p>'.$getcompalinformdetailsforInvoice['approved_by_date'].' </p>
               <p>'.str_repeat('&nbsp;', 5).'</p>
           </td>
       </tr>
@@ -15914,11 +15900,11 @@ public function downloadcomplainform($id){
                  <p> 8. REPORT CLOSED BY  : </p>
               </td>
 
-              <td width="10%" style="padding: 5px;text-align: left;border-right:1px solid black;">
+              <td width="20%" style="padding: 5px;text-align: left;border-right:1px solid black;">
                  <p>RESPONSIBILITY</p>
               </td>
 
-              <td width="10%" style="padding: 5px;text-align: left;">
+              <td width="12%" style="padding: 5px;text-align: left;">
                  <p>DATE</p>
               </td>
           </tr>
@@ -15927,20 +15913,17 @@ public function downloadcomplainform($id){
         <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:12px;">
           <tr style="border: 1px solid black;" valign="top">
           <td width="70%" style="padding: 5px;text-align: left;border-right:1px solid black;">
-              <p>'.str_repeat('&nbsp;', 5).'</p>
-              <p>'.str_repeat('&nbsp;', 5).'</p>
+              <p>'.$getcompalinformdetailsforInvoice['report_closed_by'].' </p>
               <p>'.str_repeat('&nbsp;', 5).'</p>
           </td>
 
           <td width="20%" style="padding: 5px;text-align: left;border-right:1px solid black;">
-              <p>'.str_repeat('&nbsp;', 5).'</p>
-              <p>'.str_repeat('&nbsp;', 5).'</p>
+              <p>'.$getcompalinformdetailsforInvoice['report_closed_by'].' </p>
               <p>'.str_repeat('&nbsp;', 5).'</p>
           </td>
 
-          <td width="10%" style="padding: 5px;text-align: left;">
-              <p>'.str_repeat('&nbsp;', 5).'</p>
-              <p>'.str_repeat('&nbsp;', 5).'</p>
+          <td width="12%" style="padding: 5px;text-align: left;">
+              <p>'.$getcompalinformdetailsforInvoice['report_close_date'].' </p>
               <p>'.str_repeat('&nbsp;', 5).'</p>
           </td>
       </tr>
