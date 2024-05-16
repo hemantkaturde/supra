@@ -15930,7 +15930,7 @@ public function downloadcomplainform($id){
     </table>';
 
             // <p>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</p>
-    $invoice_name =  'Analysis & Corrective Action Report final - '.$getscrapreturnForInvoice['report_no'].'.pdf';
+    $invoice_name =  'Analysis & Corrective Action Report final-'.$getcompalinformdetailsforInvoice['report_no'].'.pdf';
     $mpdf->WriteHTML($html);
     $mpdf->Output($invoice_name,'D'); // opens in browser
     
