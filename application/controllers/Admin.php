@@ -15850,11 +15850,11 @@ public function downloadcomplainform($id){
 
     <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:12px;">
           <tr style="border: 1px solid black;" valign="top">
-              <td width="40%" style="padding: 5px;text-align: left;border-right:1px solid black;">
-                 <p> 7. TEAM : </p>
+              <td width="45%" style="padding: 5px;text-align: left;border-right:1px solid black;">
+                 <p> 7. TEAM :</p>
               </td>
 
-              <td width="10%" style="padding: 5px;text-align: left;border-right:1px solid black;">
+              <td width="15%" style="padding: 5px;text-align: left;border-right:1px solid black;">
                 <p>PREPARED BY</p>
               </td>
 
@@ -15862,7 +15862,7 @@ public function downloadcomplainform($id){
                  <p>DATE</p>
               </td>
 
-              <td width="10%" style="padding: 5px;text-align: left;border-right:1px solid black;">
+              <td width="20%" style="padding: 5px;text-align: left;border-right:1px solid black;">
                  <p>APPROVED BY</p>
               </td>
 
@@ -15874,13 +15874,13 @@ public function downloadcomplainform($id){
 
         <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:12px;">
           <tr style="border: 1px solid black;" valign="top">
-          <td width="40%" style="padding: 5px;text-align: left;border-right:1px solid black;">
+          <td width="45%" style="padding: 5px;text-align: left;border-right:1px solid black;">
               <p>'.str_repeat('&nbsp;', 5).'</p>
               <p>'.str_repeat('&nbsp;', 5).'</p>
               <p>'.str_repeat('&nbsp;', 5).'</p>
           </td>
 
-            <td width="10%" style="padding: 5px;text-align: left;border-right:1px solid black;">
+            <td width="15%" style="padding: 5px;text-align: left;border-right:1px solid black;">
                 <p>'.str_repeat('&nbsp;', 5).'</p>
                 <p>'.str_repeat('&nbsp;', 5).'</p>
                 <p>'.str_repeat('&nbsp;', 5).'</p>
