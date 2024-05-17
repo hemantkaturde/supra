@@ -467,6 +467,8 @@ $route['editsalestrackingreport/(:any)'] = "admin/editsalestrackingreport/$1";
 $route['checkifpartnumberisalreadyexists'] = "admin/checkifpartnumberisalreadyexists";
 
 
+$route['chadebitnote'] = "admin/chadebitnote";
+
 
 
 

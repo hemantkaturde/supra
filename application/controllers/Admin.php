@@ -16013,10 +16013,17 @@ public function downloadpreexportform($id){
     $mpdf->WriteHTML($html);
     $mpdf->Output($invoice_name,'D'); // opens in browser
 
-
-
 }
 
+
+
+public function chadebitnote(){
+    $process = 'CHA Debit Note';
+    $processFunction = 'Admin/chadebitnote';
+    $this->logrecord($process,$processFunction);
+    $this->global['pageTitle'] = 'CHA Debit Note';
+    $this->loadViews("masters/chadebitnote", $this->global, $data, NULL);
+}
 
 }
 

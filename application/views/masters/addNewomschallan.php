@@ -28,10 +28,18 @@
                                         <label for="blasting_id">Blasting Id<span class="required">*</span></label>
                                         <?php
                                             if($getpreviuousblasterId['blasting_id']){
-                                                $arr = str_split($getpreviuousblasterId['blasting_id']);
-                                                $i = end($arr);
-                                                $inrno= "JW/".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                                // $arr = str_split($getpreviuousblasterId['blasting_id']);
+                                                // $i = end($arr);
+                                                // $inrno= "JW/".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                                // $stock_form_id = $inrno;
+
+                                                $string = $getpreviuousblasterId['blasting_id'];
+                                                $n = 4; // Number of characters to extract from the end
+                                                $lastNCharacters = substr($string, -$n);
+                                                $inrno= "JW/".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
                                                 $stock_form_id = $inrno;
+
+
                                             }else{
                                                 $stock_form_id = 'JW/0001';
                                             }
