@@ -15936,7 +15936,39 @@ public function downloadcomplainform($id){
     
 }
 
+public function downloadpreexportform($id){
 
+    $getpreexportdetailsforInvoice = $this->admin_model->getpreexportdetailsforInvoice($id);
+    $getpreexportdetailsitemsforInvoice = $this->admin_model->getpreexportdetailsitemsforInvoice($id);
+    
+    
+    $CartItem = '';
+    $i =1;
+     foreach ($getpreexportdetailsitemsforInvoice as $key => $value) {
+        $CartItem .= '<div>
+                        <p>'.$i.') '.$value['name'].'</p>
+                        <p>'.$value['part_number'].' </p>
+                        <p>'.$value['remark'].'</p>
+                    </div>';
+            $i++;
+     }
+
+
+
+    $mpdf = new \Mpdf\Mpdf();
+    // $html = $this->load->view('html_to_pdf',[],true);
+    $html = '<div style="text-align:right"> 
+                 <p  style="margin-right:10%">'.$getpreexportdetailsforInvoice['buyer_name'].' - '.$getpreexportdetailsforInvoice['mode_of_shipment'].'</p>
+            </div>'.$CartItem;
+
+            // <p>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</p>
+    $invoice_name =  $getpreexportdetailsforInvoice['pre_export_invoice_no'].'.pdf';
+    $mpdf->WriteHTML($html);
+    $mpdf->Output($invoice_name,'D'); // opens in browser
+
+
+
+}
 
 
 }
