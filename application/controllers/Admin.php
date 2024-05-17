@@ -16004,8 +16004,8 @@ public function downloadpreexportform($id){
 
     $mpdf = new \Mpdf\Mpdf();
     // $html = $this->load->view('html_to_pdf',[],true);
-    $html = '<div style="text-align:right"> 
-                 <p  style="margin-right:10%">'.$getpreexportdetailsforInvoice['buyer_name'].' - '.$getpreexportdetailsforInvoice['mode_of_shipment'].'</p>
+    $html = '<div style="text-align:center"> 
+                 <p>'.$getpreexportdetailsforInvoice['buyer_name'].' - '.$getpreexportdetailsforInvoice['mode_of_shipment'].'</p>
             </div>'.$CartItem;
 
             // <p>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</p>
