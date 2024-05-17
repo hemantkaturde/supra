@@ -12044,7 +12044,7 @@ public function getpreexportdetailsforInvoice($id){
 
 public function getpreexportdetailsitemsforInvoice($id){
 
-    $this->db->select('*');
+    $this->db->select('*,'.TBL_PREEXPORT_ITEM_DETAILS.'.remark as item_remark,'.TBL_PREEXPORT_ITEM_DETAILS.'.pre_export_id,'.TBL_PREEXPORT_ITEM_DETAILS.'.id as itemidwwww');
     $this->db->join(TBL_PREEXPORT, TBL_PREEXPORT.'.id = '.TBL_PREEXPORT_ITEM_DETAILS.'.pre_export_id');
     $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_PREEXPORT_ITEM_DETAILS.'.part_number');
     $this->db->where(TBL_PREEXPORT_ITEM_DETAILS.'.pre_export_id', $id);
@@ -12052,6 +12052,23 @@ public function getpreexportdetailsitemsforInvoice($id){
     $row_data = $query->result_array();
     return $row_data;
 }
+
+
+public function getpreexportdetailsitemsAttributeforInvoice($pre_export_id,$itemid){
+
+    $this->db->select('*,'.TBL_PREEXPORT_ITEM_ATTRIBUTES.'.remark as attribute_remark');
+    $this->db->join(TBL_PREEXPORT, TBL_PREEXPORT.'.id = '.TBL_PREEXPORT_ITEM_DETAILS.'.pre_export_id');
+    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_PREEXPORT_ITEM_DETAILS.'.part_number');
+    $this->db->join(TBL_PREEXPORT_ITEM_ATTRIBUTES, TBL_PREEXPORT_ITEM_ATTRIBUTES.'.pre_export_item_id = '.TBL_PREEXPORT_ITEM_DETAILS.'.id');
+    $this->db->where(TBL_PREEXPORT_ITEM_DETAILS.'.pre_export_id', $pre_export_id);
+    $this->db->where(TBL_PREEXPORT_ITEM_ATTRIBUTES.'.pre_export_item_id', $itemid);
+
+    $query = $this->db->get(TBL_PREEXPORT_ITEM_DETAILS);
+    $row_data = $query->result_array();
+    return $row_data;
+
+}
+
 
 
 }

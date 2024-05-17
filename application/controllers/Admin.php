@@ -15940,18 +15940,65 @@ public function downloadpreexportform($id){
 
     $getpreexportdetailsforInvoice = $this->admin_model->getpreexportdetailsforInvoice($id);
     $getpreexportdetailsitemsforInvoice = $this->admin_model->getpreexportdetailsitemsforInvoice($id);
-    
-    
+    //$getpreexportdetailsitemsAttributeforInvoice = $this->admin_model->getpreexportdetailsitemsAttributeforInvoice($id);
+
+
+
+
     $CartItem = '';
     $i =1;
      foreach ($getpreexportdetailsitemsforInvoice as $key => $value) {
-        $CartItem .= '<div>
-                        <p>'.$i.') '.$value['name'].'</p>
+
+
+       
+        $getpreexportdetailsitemsAttributeforInvoice = $this->admin_model->getpreexportdetailsitemsAttributeforInvoice($value['pre_export_id'],$value['itemidwwww']);
+        $CartItemattribute='';
+
+        $gross_per_box_weight =0;
+        $no_of_cartoons =0;
+        $per_box_PCS =0;
+        $total_qty =0;
+        
+
+        foreach ($getpreexportdetailsitemsAttributeforInvoice as $key => $value1) {
+            $CartItemattribute .= '
+                    <tr style=" border-bottom: 1px solid #000;">
+                        <td style="text-align:left;padding: 10px;" valign="top">'.$value1['gross_per_box_weight'].' kgs</br></td>   
+                        <td style="text-align:left;padding: 10px;" valign="top">'.$value1['no_of_cartoons'].' ctns </td>
+                        <td style="text-align:left;padding: 10px;" valign="top">'.$value1['per_box_PCS'].' pcs</td>
+                        <td style="text-align:left;padding: 10px;" valign="top">'.$value1['total_qty'].' pcs</td> 
+                        <td style="text-align:left;padding: 10px;" valign="top" >'.$value1['attribute_remark'].'/-'.'</td>    
+                    </tr>';  
+                    
+                    $gross_per_box_weight += $value1['gross_per_box_weight'];
+                    $no_of_cartoons += $value1['no_of_cartoons'];
+                    $per_box_PCS += $value1['per_box_PCS'];
+                    $total_qty += $value1['total_qty'];
+
+        }
+    
+
+           $CartItem .= '<div>
+                        <p><b>'.$i.') '.$value['name'].'</b></p>
                         <p>'.$value['part_number'].' </p>
-                        <p>'.$value['remark'].'</p>
-                    </div>';
+                        <p>'.$value['item_remark'].'</p>
+                    </div>
+                    <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:12px;">
+                    '.$CartItemattribute.'
+
+                        <tr>
+                                <td style="text-align:left;padding: 10px;" valign="top"><b>'.$gross_per_box_weight.' kgs</b></br></td>   
+                                <td style="text-align:left;padding: 10px;" valign="top"><b>'.$no_of_cartoons.' ctns </b></td>
+                                <td style="text-align:left;padding: 10px;" valign="top"><b>'.$per_box_PCS.' pcs</b></td>
+                                <td style="text-align:left;padding: 10px;" valign="top"><b>'.$total_qty.' pcs</b></td> 
+                                <td style="text-align:left;padding: 10px;" valign="top"> </td>    
+                        </tr>
+                    </table>';
             $i++;
      }
+
+
+     
 
 
 
