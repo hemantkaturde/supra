@@ -12062,7 +12062,7 @@ public function getpreexportdetailsitemsAttributeforInvoice($pre_export_id,$item
     $this->db->join(TBL_PREEXPORT_ITEM_ATTRIBUTES, TBL_PREEXPORT_ITEM_ATTRIBUTES.'.pre_export_item_id = '.TBL_PREEXPORT_ITEM_DETAILS.'.id');
     $this->db->where(TBL_PREEXPORT_ITEM_DETAILS.'.pre_export_id', $pre_export_id);
     $this->db->where(TBL_PREEXPORT_ITEM_ATTRIBUTES.'.pre_export_item_id', $itemid);
-
+    $this->db->order_by(TBL_PREEXPORT_ITEM_ATTRIBUTES.'.sup_id','ASC');
     $query = $this->db->get(TBL_PREEXPORT_ITEM_DETAILS);
     $row_data = $query->result_array();
     return $row_data;
