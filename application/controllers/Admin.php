@@ -15941,9 +15941,7 @@ public function downloadpreexportform($id){
     $getpreexportdetailsforInvoice = $this->admin_model->getpreexportdetailsforInvoice($id);
     $getpreexportdetailsitemsforInvoice = $this->admin_model->getpreexportdetailsitemsforInvoice($id);
     //$getpreexportdetailsitemsAttributeforInvoice = $this->admin_model->getpreexportdetailsitemsAttributeforInvoice($id);
-
-
-
+    $getpreexportallcountdataforinvoice = $this->admin_model->getpreexportallcountdataforinvoice($id);
 
     $CartItem = '';
     $i =1;
@@ -15985,7 +15983,6 @@ public function downloadpreexportform($id){
                     </div>
                     <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:12px;">
                     '.$CartItemattribute.'
-
                         <tr>
                                 <td style="text-align:left;padding: 10px;" valign="top"><b>'.$gross_per_box_weight.' kgs</b></br></td>   
                                 <td style="text-align:left;padding: 10px;" valign="top"><b>'.$no_of_cartoons.' ctns </b></td>
@@ -15998,15 +15995,18 @@ public function downloadpreexportform($id){
      }
 
 
-     
-
-
-
+    
     $mpdf = new \Mpdf\Mpdf();
     // $html = $this->load->view('html_to_pdf',[],true);
     $html = '<div style="text-align:center"> 
                  <p>'.$getpreexportdetailsforInvoice['buyer_name'].' - '.$getpreexportdetailsforInvoice['mode_of_shipment'].'</p>
-            </div>'.$CartItem;
+            </div>'.$CartItem.'
+                
+            <div>
+                    <p><b>Total ctns : </b> '.$getpreexportallcountdataforinvoice[0]['total_no_of_carttons'].'</p>
+                    <p><b>Total Nt.Weight : </b>'.round($getpreexportallcountdataforinvoice[0]['total_net_weight_of_shipment'],3).'</p>
+                    <p><b>Total Gr.Weight : </b>'.round($getpreexportallcountdataforinvoice[0]['total_gross_shipment_weight'],3).'</p>
+            </div>';
 
             // <p>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</p>
     $invoice_name =  $getpreexportdetailsforInvoice['pre_export_invoice_no'].'.pdf';

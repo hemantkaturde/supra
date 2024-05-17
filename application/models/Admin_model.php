@@ -12070,6 +12070,73 @@ public function getpreexportdetailsitemsAttributeforInvoice($pre_export_id,$item
 }
 
 
+public function getpreexportallcountdataforinvoice($id){
+    $this->db->select('*,'.TBL_PREEXPORT.'.remark as preexportremark,'.TBL_PREEXPORT.'.id as export_id');
+    $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_PREEXPORT.'.buyer_name');
+    $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_PREEXPORT.'.buyer_po');
+    $this->db->where(TBL_PREEXPORT.'.id', $id);
+    $query = $this->db->get(TBL_PREEXPORT);
+    $fetch_result = $query->result_array();
+
+    $data = array();
+    $counter = 0;
+    if(count($fetch_result) > 0)
+    {
+        foreach ($fetch_result as $key => $value)
+        {
+        
+            $sum_of_export = $this->getSumetionofpreexportallrowsforinvoice($value['export_id']);
+
+            
+            if($sum_of_export){
+
+                if($sum_of_export['total_gross_weight']){
+                    $total_gross_weight =  round(floatval($sum_of_export['total_gross_weight']) + floatval($value['total_weight_of_pallets']),3);
+                    $total_gross_only= round($sum_of_export['total_gross_weight'],3);
+
+                }else{
+                    $total_gross_weight = '';
+                    $total_gross_only=  '';
+                }
+
+            
+             $total_net_weight =  round($sum_of_export['total_net_weight'],3);
+             $total_item_net_weight =  round($sum_of_export['total_item_net_weight'],3);
+             $total_no_of_carttons =  $sum_of_export['no_of_cartoons'];
+            
+            }else{
+
+                $total_gross_weight =  '';
+                $total_net_weight =  '';
+                $total_item_net_weight =  '';
+                $total_no_of_carttons =  '';
+                $total_gross_only='';
+            }
+
+            $data[$counter]['total_net_weight_of_shipment'] = $total_net_weight;
+            $data[$counter]['total_gross_only'] = $total_gross_only;
+            $data[$counter]['total_gross_shipment_weight'] = $total_gross_weight;
+            $data[$counter]['total_no_of_carttons'] =  $total_no_of_carttons;
+            $counter++; 
+        }
+    }
+    return $data;
+    
+}
+
+public function getSumetionofpreexportallrowsforinvoice($pre_export_id){
+
+    $this->db->select('sum(total_gross_weight) as total_gross_weight,sum(total_net_weight) as total_net_weight,sum(total_item_net_weight) as total_item_net_weight,sum(no_of_cartoons) as no_of_cartoons');
+    $this->db->join(TBL_PREEXPORT_ITEM_DETAILS, TBL_PREEXPORT_ITEM_DETAILS.'.id = '.TBL_PREEXPORT_ITEM_ATTRIBUTES.'.pre_export_item_id');
+    $this->db->where(TBL_PREEXPORT_ITEM_ATTRIBUTES.'.main_export_id',$pre_export_id);
+    //$this->db->group_by(TBL_PREEXPORT_ITEM_ATTRIBUTES.'.pre_export_item_id');
+    $query = $this->db->get(TBL_PREEXPORT_ITEM_ATTRIBUTES);
+    $fetch_result = $query->row_array();
+    return $fetch_result;
+
+}
+
+
 
 }
 
