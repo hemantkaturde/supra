@@ -28,10 +28,17 @@
                                         <label for="enquiry_number">Enquiry Number<span class="required">*</span></label>
                                         <?php
                                             if($getpreviuousenquirynumber['enquiry_number']){
-                                                $arr = str_split($getpreviuousenquirynumber['enquiry_number']);
-                                                $i = end($arr);
-                                                $inrno= str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                                // $arr = str_split($getpreviuousenquirynumber['enquiry_number']);
+                                                // $i = end($arr);
+                                                // $inrno= str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                                // $enquiry_number = $inrno;
+
+                                                $string = $getpreviuousenquirynumber['enquiry_number'];
+                                                $n = 4; // Number of characters to extract from the end
+                                                $lastNCharacters = substr($string, -$n);
+                                                $inrno= str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
                                                 $enquiry_number = $inrno;
+
                                             }else{
                                                 $enquiry_number = '0001';
                                             }
