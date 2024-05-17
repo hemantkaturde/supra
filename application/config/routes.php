@@ -468,7 +468,7 @@ $route['checkifpartnumberisalreadyexists'] = "admin/checkifpartnumberisalreadyex
 
 
 $route['chadebitnote'] = "admin/chadebitnote";
-
+$route['addchadebitnote'] = "admin/addchadebitnote";
 
 
 

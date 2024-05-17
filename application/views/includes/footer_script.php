@@ -19934,3 +19934,53 @@
 
     </script>
 <?php } ?>
+
+
+<?php if($pageTitle=='Add CHA Debit note'){ ?>
+	<script type="text/javascript">
+	$(document).on('click','#savechadebitnote',function(e){
+				e.preventDefault();
+				$(".loader_ajax").show();
+				var formData = new FormData($("#savechadebitnoteform")[0]);
+
+				$.ajax({
+					url : "<?php echo base_url();?>addchadebitnote",
+					type: "POST",
+					data : formData,
+					cache: false,
+					contentType: false,
+					processData: false,
+					success: function(data, textStatus, jqXHR)
+					{
+						var fetchResponse = $.parseJSON(data);
+						if(fetchResponse.status == "failure")
+						{
+							$.each(fetchResponse.error, function (i, v)
+							{
+								$('.'+i+'_error').html(v);
+							});
+							$(".loader_ajax").hide();
+						}
+						else if(fetchResponse.status == 'success')
+						{
+							swal({
+								title: "Success",
+								text: "CHA Debit Note Successfully Added!",
+								icon: "success",
+								button: "Ok",
+								},function(){ 
+									window.location.href = "<?php echo base_url().'chadebitnote'?>";
+							});		
+						}
+						
+					},
+					error: function (jqXHR, textStatus, errorThrown)
+					{
+					$(".loader_ajax").hide();
+					}
+				});
+				return false;
+		});
+</script>
+<?php } ?>
+

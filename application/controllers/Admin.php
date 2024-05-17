@@ -16025,5 +16025,66 @@ public function chadebitnote(){
     $this->loadViews("masters/chadebitnote", $this->global, $data, NULL);
 }
 
+
+public function addchadebitnote(){
+
+    $post_submit = $this->input->post();
+    if($post_submit){
+        $save_chadebitnote_response = array();
+        
+        $this->form_validation->set_rules('supplier_name','Supplier Name','trim|required|max_length[128]');
+        $this->form_validation->set_rules('landline','Landline','trim|max_length[128]');
+        $this->form_validation->set_rules('address','Address','trim|required');
+        $this->form_validation->set_rules('phone_1','Phone 1','trim|numeric|max_length[50]');
+        $this->form_validation->set_rules('contact_person','Contact Person','trim|max_length[50]');
+        $this->form_validation->set_rules('mobile','Mobile','trim|required|numeric|max_length[50]');
+        $this->form_validation->set_rules('email','Email','trim|required|valid_email|max_length[50]');
+        $this->form_validation->set_rules('mobile_2','Mobile 2','trim|numeric|max_length[50]');
+        $this->form_validation->set_rules('fax','Fax','trim|max_length[50]');
+        $this->form_validation->set_rules('GSTIN','GSTIN','trim|max_length[50]');
+
+        if($this->form_validation->run() == FALSE)
+        {
+            $save_supplier_response['status'] = 'failure';
+            $save_supplier_response['error'] = array('supplier_name'=>strip_tags(form_error('supplier_name')), 'landline'=>strip_tags(form_error('landline')), 'address'=>strip_tags(form_error('address')), 'phone_1'=>strip_tags(form_error('phone_1')),'contact_person'=>strip_tags(form_error('contact_person')),'mobile'=>strip_tags(form_error('mobile')),'email'=>strip_tags(form_error('email')),'mobile_2'=>strip_tags(form_error('mobile_2')),'fax'=>strip_tags(form_error('fax')),'GSTIN'=>strip_tags(form_error('GSTIN')));
+        }else{
+
+
+            $AWB_No = $_POST['AWB_No'];
+            $debit_amount = $_POST['debit_amount'];
+            $SGST = $_POST['SGST'];
+            $CGST = $_POST['CGST'];
+            $total = $_POST['total'];
+           
+            if(!empty($AWB_No)){
+                for($i = 0; $i < count($AWB_No); $i++){
+                    if(!empty($AWB_No[$i])){
+                        $data['AWB_No'] = $AWB_No[$i];
+                        $data['debit_amount'] = $debit_amount[$i];
+                        $data['SGST'] = $SGST[$i];
+                        $data['CGST'] = $CGST[$i];
+                        $data['total'] = $total[$i];
+    
+                        $this->db->insert('tbl_cha_debitnote_transaction',$data);
+                    }
+                }
+            }
+
+
+        }
+         
+    }else{
+            $process = 'Add CHA Debit note';
+            $processFunction = 'Admin/addchadebitnote';
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Add CHA Debit note';
+            $this->loadViews("masters/addchadebitnote", $this->global, $data, NULL);
+
+    }
+
+}
+
+
+
 }
 

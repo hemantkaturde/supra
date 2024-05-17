@@ -16,7 +16,7 @@
             </div>
             <div class="col-xs-6 text-right">
                 <div class="form-group">
-                    <a class="btn btn-primary" href="<?php echo base_url(); ?>addnewBuyerpo">
+                    <a class="btn btn-primary" href="<?php echo base_url(); ?>addchadebitnote">
                         <i class="fa fa-plus"></i> Add CHA Debit Note</a>
                 </div>
             </div>
@@ -35,7 +35,6 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                   
                                 </tbody>
                             </table>
                         </div>
