@@ -15963,8 +15963,8 @@ public function downloadpreexportform($id){
                         <td style="text-align:left;padding: 10px;border: 1px solid black;" valign="top">'.$value1['no_of_cartoons'].' ctns </td>
                         <td style="text-align:left;padding: 10px;border: 1px solid black;" valign="top">'.$value1['per_box_PCS'].' pcs</td>
                         <td style="text-align:left;padding: 10px;border: 1px solid black;" valign="top">'.$value1['total_qty'].' pcs</td> 
-                        <td style="text-align:left;padding: 10px;border: 1px solid black;" valign="top" >'.$value1['attribute_remark'].'</td>   
-                        <td style="text-align:left;padding: 10px;border: 1px solid black;" valign="top" ></td>    
+                        <td style="text-align:left;padding: 10px;border: 1px solid black;" valign="top" ></td>   
+                        <td style="text-align:left;padding: 10px;border: 1px solid black;" valign="top" >'.$value1['attribute_remark'].'</td>    
                         <td style="text-align:left;padding: 10px;border: 1px solid black;" valign="top" ></td>     
                     </tr>';  
                     
