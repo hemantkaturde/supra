@@ -16005,9 +16005,9 @@ public function downloadpreexportform($id){
                                 <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top"><b>'.$no_of_cartoons.' ctns </b></td>
                                 <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top"><b></td>
                                 <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top"><b>'.$total_qty.' pcs</b></td> 
-                                <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top"><b>'.$total_gross_weight.' kgs</b></td>   
+                                <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top"><b>'.number_format($total_gross_weight,3).' kgs</b></td>   
                                 <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top"> </td>   
-                                <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top"><b>'.$total_net_weight.' kgs</b></td>    
+                                <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top"><b>'.number_format($total_net_weight,3).' kgs</b></td>    
                         </tr>
                     </table>';
             $i++;
