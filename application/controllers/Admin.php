@@ -15993,7 +15993,7 @@ public function downloadpreexportform($id){
                     </tr>
                        '.$CartItemattribute.'
                         <tr>
-                                <td style="text-align:left;padding: 10px;" valign="top"><b>'.$gross_per_box_weight.' kgs</b></br></td>   
+                                <td style="text-align:left;padding: 10px;" valign="top"></td>   
                                 <td style="text-align:left;padding: 10px;" valign="top"><b>'.$no_of_cartoons.' ctns </b></td>
                                 <td style="text-align:left;padding: 10px;" valign="top"><b>'.$per_box_PCS.' pcs</b></td>
                                 <td style="text-align:left;padding: 10px;" valign="top"><b>'.$total_qty.' pcs</b></td> 
