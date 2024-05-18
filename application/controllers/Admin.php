@@ -15945,18 +15945,22 @@ public function downloadpreexportform($id){
 
     $CartItem = '';
     $i =1;
+
+    $gross_per_box_weight =0;
+    $no_of_cartoons =0;
+    $per_box_PCS =0;
+    $total_qty =0;
+
+    $total_gross_weight = 0;
+    
+
+
      foreach ($getpreexportdetailsitemsforInvoice as $key => $value) {
 
         $getpreexportdetailsitemsAttributeforInvoice = $this->admin_model->getpreexportdetailsitemsAttributeforInvoice($value['pre_export_id'],$value['itemidwwww']);
         $CartItemattribute='';
 
-        $gross_per_box_weight =0;
-        $no_of_cartoons =0;
-        $per_box_PCS =0;
-        $total_qty =0;
-
-        $total_gross_weight = 0;
-        
+      
 
         foreach ($getpreexportdetailsitemsAttributeforInvoice as $key => $value1) {
             $CartItemattribute .= '
