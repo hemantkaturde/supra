@@ -12117,6 +12117,9 @@ public function getpreexportallcountdataforinvoice($id){
             $data[$counter]['total_gross_only'] = $total_gross_only;
             $data[$counter]['total_gross_shipment_weight'] = $total_gross_weight;
             $data[$counter]['total_no_of_carttons'] =  $total_no_of_carttons;
+
+            $data[$counter]['total_no_of_pallets'] =  $total_no_of_pallets;
+            $data[$counter]['total_weight_of_pallets'] =  $total_weight_of_pallets;
             $counter++; 
         }
     }
