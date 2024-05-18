@@ -99,7 +99,7 @@ $(document).ready(function(){
                                                 <div class="form-group">
                                                     <label for="taxable_amount">Taxable Amount</label>
                                                     <input type="text" class="form-control" id="taxable_amount" name="taxable_amount" required>
-                                                    <p class="error total_error"></p>
+                                                    <p class="error taxable_amount_error"></p>
                                                 </div>
                                             </div>
                                     </div>
@@ -107,18 +107,18 @@ $(document).ready(function(){
                                     <div class="row" >
                                            <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="taxable_amount">CGST + SGST 18 %</label>
-                                                    <input type="text" class="form-control" id="taxable_amount" name="taxable_amount" required>
-                                                    <p class="error total_error"></p>
+                                                    <label for="cgst_sgst">CGST + SGST 18 %</label>
+                                                    <input type="text" class="form-control" id="cgst_sgst" name="cgst_sgst" required>
+                                                    <p class="error cgst_sgst_error"></p>
                                                 </div>
                                             </div>
                                     </div>
                                     <div class="row" >
                                            <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="taxable_amount">Bill Amount (inc GST)</label>
-                                                    <input type="text" class="form-control" id="taxable_amount" name="taxable_amount" required>
-                                                    <p class="error total_error"></p>
+                                                    <label for="bill_amount">Bill Amount (inc GST)</label>
+                                                    <input type="text" class="form-control" id="bill_amount" name="bill_amount" required>
+                                                    <p class="error bill_amount_error"></p>
                                                 </div>
                                             </div>
                                     </div>
@@ -126,9 +126,9 @@ $(document).ready(function(){
                                     <div class="row" >
                                            <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="taxable_amount">Debit Amount (Rs)</label>
-                                                    <input type="text" class="form-control" id="taxable_amount" name="taxable_amount" required>
-                                                    <p class="error total_error"></p>
+                                                    <label for="debit_amount">Debit Amount (Rs)</label>
+                                                    <input type="text" class="form-control" id="debit_amount" name="debit_amount" required>
+                                                    <p class="error debit_amount_error"></p>
                                                 </div>
                                             </div>
                                     </div>
@@ -136,9 +136,9 @@ $(document).ready(function(){
                                      <div class="row" >
                                            <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="taxable_amount">Amount Payable Before TDS</label>
-                                                    <input type="text" class="form-control" id="taxable_amount" name="taxable_amount" required>
-                                                    <p class="error total_error"></p>
+                                                    <label for="amount_payable_before_tds">Amount Payable Before TDS</label>
+                                                    <input type="text" class="form-control" id="amount_payable_before_tds" name="amount_payable_before_tds" required>
+                                                    <p class="error amount_payable_before_tds_error"></p>
                                                 </div>
                                             </div>
                                     </div>
@@ -147,9 +147,9 @@ $(document).ready(function(){
                                     <div class="row" >
                                            <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="taxable_amount">Less TDS</label>
-                                                    <input type="text" class="form-control" id="taxable_amount" name="taxable_amount" required>
-                                                    <p class="error total_error"></p>
+                                                    <label for="less_tds">Less TDS</label>
+                                                    <input type="text" class="form-control" id="less_tds" name="less_tds" required>
+                                                    <p class="error less_tds_error"></p>
                                                 </div>
                                             </div>
                                     </div>
@@ -159,8 +159,8 @@ $(document).ready(function(){
                                            <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="number">Payable Amount</label>
-                                                    <input type="text" class="form-control" name="total[]" name="total[]" required>
-                                                    <p class="error total_error"></p>
+                                                    <input type="text" class="form-control" name="payable_amount" name="payable_amount" required>
+                                                    <p class="error payable_amount_error"></p>
                                                 </div>
                                             </div>
                                     </div>

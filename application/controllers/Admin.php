@@ -15947,8 +15947,6 @@ public function downloadpreexportform($id){
     $i =1;
      foreach ($getpreexportdetailsitemsforInvoice as $key => $value) {
 
-
-       
         $getpreexportdetailsitemsAttributeforInvoice = $this->admin_model->getpreexportdetailsitemsAttributeforInvoice($value['pre_export_id'],$value['itemidwwww']);
         $CartItemattribute='';
 
@@ -15983,6 +15981,13 @@ public function downloadpreexportform($id){
                     </div>
                     <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:12px;">
                     '.$CartItemattribute.'
+                        <tr>
+                                <td style="text-align:left;padding: 10px;border-bottom: 1px solid black;" valign="top"></td>   
+                                <td style="text-align:left;padding: 10px;border-bottom: 1px solid black;" valign="top"></td>
+                                <td style="text-align:left;padding: 10px;border-bottom: 1px solid black;" valign="top"></td>
+                                <td style="text-align:left;padding: 10px;border-bottom: 1px solid black;" valign="top"></td> 
+                                <td style="text-align:left;padding: 10px;border-bottom: 1px solid black;" valign="top"></td>    
+                        </tr>
                         <tr>
                                 <td style="text-align:left;padding: 10px;" valign="top"><b>'.$gross_per_box_weight.' kgs</b></br></td>   
                                 <td style="text-align:left;padding: 10px;" valign="top"><b>'.$no_of_cartoons.' ctns </b></td>
