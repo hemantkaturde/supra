@@ -12071,7 +12071,7 @@ public function getpreexportdetailsitemsAttributeforInvoice($pre_export_id,$item
 
 
 public function getpreexportallcountdataforinvoice($id){
-    $this->db->select('*,'.TBL_PREEXPORT.'.remark as preexportremark,'.TBL_PREEXPORT.'.id as export_id,'.TBL_PREEXPORT.'.total_no_of_pallets as tnp,'.TBL_PREEXPORT.'.total_no_of_pallets as twp');
+    $this->db->select('*,'.TBL_PREEXPORT.'.remark as preexportremark,'.TBL_PREEXPORT.'.id as export_id,'.TBL_PREEXPORT.'.total_no_of_pallets as tnp,'.TBL_PREEXPORT.'.total_weight_of_pallets as twp');
     $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_PREEXPORT.'.buyer_name');
     $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_PREEXPORT.'.buyer_po');
     $this->db->where(TBL_PREEXPORT.'.id', $id);
