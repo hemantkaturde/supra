@@ -15954,6 +15954,8 @@ public function downloadpreexportform($id){
         $no_of_cartoons =0;
         $per_box_PCS =0;
         $total_qty =0;
+
+        $total_gross_weight = 0;
         
 
         foreach ($getpreexportdetailsitemsAttributeforInvoice as $key => $value1) {
@@ -15973,6 +15975,7 @@ public function downloadpreexportform($id){
                     $per_box_PCS += $value1['per_box_PCS'];
                     $total_qty += $value1['total_qty'];
 
+                    $total_gross_weight = +$value1['total_gross_weight'];
         }
     
 
@@ -15997,7 +16000,7 @@ public function downloadpreexportform($id){
                                 <td style="text-align:left;padding: 10px;" valign="top"><b>'.$no_of_cartoons.' ctns </b></td>
                                 <td style="text-align:left;padding: 10px;" valign="top"><b></td>
                                 <td style="text-align:left;padding: 10px;" valign="top"><b>'.$total_qty.' pcs</b></td> 
-                                <td style="text-align:left;padding: 10px;" valign="top"><b>'.$gross_per_box_weight.' kgs</b></td>   
+                                <td style="text-align:left;padding: 10px;" valign="top"><b>'.$total_gross_weight.' kgs</b></td>   
                                 <td style="text-align:left;padding: 10px;" valign="top"> </td>   
                                 <td style="text-align:left;padding: 10px;" valign="top"> </td>    
                         </tr>
