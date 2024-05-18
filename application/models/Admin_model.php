@@ -12056,7 +12056,7 @@ public function getpreexportdetailsitemsforInvoice($id){
 
 public function getpreexportdetailsitemsAttributeforInvoice($pre_export_id,$itemid){
 
-    $this->db->select('*,'.TBL_PREEXPORT_ITEM_ATTRIBUTES.'.remark as attribute_remark');
+    $this->db->select('*,'.TBL_PREEXPORT_ITEM_ATTRIBUTES.'.remark as attribute_remark,'.TBL_PREEXPORT_ITEM_ATTRIBUTES.'.total_gross_weight as tg');
     $this->db->join(TBL_PREEXPORT, TBL_PREEXPORT.'.id = '.TBL_PREEXPORT_ITEM_DETAILS.'.pre_export_id');
     $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_PREEXPORT_ITEM_DETAILS.'.part_number');
     $this->db->join(TBL_PREEXPORT_ITEM_ATTRIBUTES, TBL_PREEXPORT_ITEM_ATTRIBUTES.'.pre_export_item_id = '.TBL_PREEXPORT_ITEM_DETAILS.'.id');
