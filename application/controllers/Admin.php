@@ -15975,7 +15975,7 @@ public function downloadpreexportform($id){
                     $per_box_PCS += $value1['per_box_PCS'];
                     $total_qty += $value1['total_qty'];
 
-                    $total_gross_weight = +$value1['tg'];
+                    $total_gross_weight += $value1['tg'];
         }
     
 
