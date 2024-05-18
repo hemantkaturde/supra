@@ -16023,11 +16023,11 @@ public function downloadpreexportform($id){
                 
             <div>
                     <p><b>Total ctns : </b> '.$getpreexportallcountdataforinvoice[0]['total_no_of_carttons'].'</p>
-                    <p><b>Total Nt.Weight : </b>'.number_format($getpreexportallcountdataforinvoice[0]['total_net_weight_of_shipment'],3).'</p>
-                    <p><b>Total Gr.Weight : </b>'.number_format($getpreexportallcountdataforinvoice[0]['total_gross_only'],3).'</p>
+                    <p><b>Total Nt.Weight : </b>'.number_format($getpreexportallcountdataforinvoice[0]['total_net_weight_of_shipment'],3).' kgs</p>
+                    <p><b>Total Gr.Weight : </b>'.number_format($getpreexportallcountdataforinvoice[0]['total_gross_only'],3).' kgs</p>
                     <p><b>Total No of Pallets : </b>'.$getpreexportallcountdataforinvoice[0]['tnp'].'</p>
-                    <p><b>Total Weight of Pallets : </b>'.$getpreexportallcountdataforinvoice[0]['twp'].'</p>
-                    <p><b>Final Gross Weight : </b>'.$getpreexportallcountdataforinvoice[0]['total_gross_shipment_weight'].'</p>
+                    <p><b>Total Weight of Pallets : </b>'.$getpreexportallcountdataforinvoice[0]['twp'].' kgs</p>
+                    <p><b>Final Gross Weight : </b>'.$getpreexportallcountdataforinvoice[0]['total_gross_shipment_weight'].' kgs</p>
             </div>';
 
             // <p>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</p>
