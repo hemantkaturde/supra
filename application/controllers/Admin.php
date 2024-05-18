@@ -16024,7 +16024,7 @@ public function downloadpreexportform($id){
             <div>
                     <p><b>Total ctns : </b> '.$getpreexportallcountdataforinvoice[0]['total_no_of_carttons'].'</p>
                     <p><b>Total Nt.Weight : </b>'.round($getpreexportallcountdataforinvoice[0]['total_net_weight_of_shipment'],3).'</p>
-                    <p><b>Total Gr.Weight : </b>'.round($getpreexportallcountdataforinvoice[0]['total_gross_shipment_weight'],3).'</p>
+                    <p><b>Total Gr.Weight : </b>'.round($getpreexportallcountdataforinvoice[0]['total_gross_only'],3).'</p>
             </div>';
 
             // <p>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</p>
