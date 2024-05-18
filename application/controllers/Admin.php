@@ -15959,11 +15959,13 @@ public function downloadpreexportform($id){
         foreach ($getpreexportdetailsitemsAttributeforInvoice as $key => $value1) {
             $CartItemattribute .= '
                     <tr style=" border-bottom: 1px solid #000;">
-                        <td style="text-align:left;padding: 10px;" valign="top">'.$value1['gross_per_box_weight'].' kgs</br></td>   
-                        <td style="text-align:left;padding: 10px;" valign="top">'.$value1['no_of_cartoons'].' ctns </td>
-                        <td style="text-align:left;padding: 10px;" valign="top">'.$value1['per_box_PCS'].' pcs</td>
-                        <td style="text-align:left;padding: 10px;" valign="top">'.$value1['total_qty'].' pcs</td> 
-                        <td style="text-align:left;padding: 10px;" valign="top" >'.$value1['attribute_remark'].'</td>    
+                        <td style="text-align:left;padding: 10px;border: 1px solid black;" valign="top">'.$value1['gross_per_box_weight'].' kgs</br></td>   
+                        <td style="text-align:left;padding: 10px;border: 1px solid black;" valign="top">'.$value1['no_of_cartoons'].' ctns </td>
+                        <td style="text-align:left;padding: 10px;border: 1px solid black;" valign="top">'.$value1['per_box_PCS'].' pcs</td>
+                        <td style="text-align:left;padding: 10px;border: 1px solid black;" valign="top">'.$value1['total_qty'].' pcs</td> 
+                        <td style="text-align:left;padding: 10px;border: 1px solid black;" valign="top" >'.$value1['attribute_remark'].'</td>   
+                        <td style="text-align:left;padding: 10px;border: 1px solid black;" valign="top" ></td>    
+                        <td style="text-align:left;padding: 10px;border: 1px solid black;" valign="top" ></td>     
                     </tr>';  
                     
                     $gross_per_box_weight += $value1['gross_per_box_weight'];
@@ -15979,12 +15981,25 @@ public function downloadpreexportform($id){
                         <p>'.$value['part_number'].' </p>
                         <p>'.$value['item_remark'].'</p>
                     </div>
-                    <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:12px;">
+                    <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:12px;border: 1px solid black;">
+                    <tr>
+                        <td style="text-align:left;padding: 10px;border: 1px solid black;" valign="top">Gross Wt per Box</td>   
+                        <td style="text-align:left;padding: 10px;border: 1px solid black;" valign="top">No. of Cartoons</td>
+                        <td style="text-align:left;padding: 10px;border: 1px solid black;" valign="top">Qty Per Qty</td>
+                        <td style="text-align:left;padding: 10px;border: 1px solid black;" valign="top">Total Qty</td> 
+                        <td style="text-align:left;padding: 10px;border: 1px solid black;" valign="top">Gross Weight with Ctns</td>  
+                        <td style="text-align:left;padding: 10px;border: 1px solid black;" valign="top">Box Size</td>    
+                        <td style="text-align:left;padding: 10px;border: 1px solid black;" valign="top">Net Weight</td>    
+                    </tr>
+
+
                     '.$CartItemattribute.'
                         <tr>
                                 <td style="text-align:left;padding: 10px;border-bottom: 1px solid black;" valign="top"></td>   
                                 <td style="text-align:left;padding: 10px;border-bottom: 1px solid black;" valign="top"></td>
                                 <td style="text-align:left;padding: 10px;border-bottom: 1px solid black;" valign="top"></td>
+                                <td style="text-align:left;padding: 10px;border-bottom: 1px solid black;" valign="top"></td> 
+                                <td style="text-align:left;padding: 10px;border-bottom: 1px solid black;" valign="top"></td>    
                                 <td style="text-align:left;padding: 10px;border-bottom: 1px solid black;" valign="top"></td> 
                                 <td style="text-align:left;padding: 10px;border-bottom: 1px solid black;" valign="top"></td>    
                         </tr>
@@ -15993,6 +16008,8 @@ public function downloadpreexportform($id){
                                 <td style="text-align:left;padding: 10px;" valign="top"><b>'.$no_of_cartoons.' ctns </b></td>
                                 <td style="text-align:left;padding: 10px;" valign="top"><b>'.$per_box_PCS.' pcs</b></td>
                                 <td style="text-align:left;padding: 10px;" valign="top"><b>'.$total_qty.' pcs</b></td> 
+                                <td style="text-align:left;padding: 10px;" valign="top"> </td>   
+                                <td style="text-align:left;padding: 10px;" valign="top"> </td>   
                                 <td style="text-align:left;padding: 10px;" valign="top"> </td>    
                         </tr>
                     </table>';
