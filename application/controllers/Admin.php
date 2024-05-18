@@ -15991,18 +15991,7 @@ public function downloadpreexportform($id){
                         <td style="text-align:left;padding: 10px;border: 1px solid black;" valign="top">Box Size</td>    
                         <td style="text-align:left;padding: 10px;border: 1px solid black;" valign="top">Net Weight</td>    
                     </tr>
-
-
-                    '.$CartItemattribute.'
-                        <tr>
-                                <td style="text-align:left;padding: 10px;border-bottom: 1px solid black;" valign="top"></td>   
-                                <td style="text-align:left;padding: 10px;border-bottom: 1px solid black;" valign="top"></td>
-                                <td style="text-align:left;padding: 10px;border-bottom: 1px solid black;" valign="top"></td>
-                                <td style="text-align:left;padding: 10px;border-bottom: 1px solid black;" valign="top"></td> 
-                                <td style="text-align:left;padding: 10px;border-bottom: 1px solid black;" valign="top"></td>    
-                                <td style="text-align:left;padding: 10px;border-bottom: 1px solid black;" valign="top"></td> 
-                                <td style="text-align:left;padding: 10px;border-bottom: 1px solid black;" valign="top"></td>    
-                        </tr>
+                       '.$CartItemattribute.'
                         <tr>
                                 <td style="text-align:left;padding: 10px;" valign="top"><b>'.$gross_per_box_weight.' kgs</b></br></td>   
                                 <td style="text-align:left;padding: 10px;" valign="top"><b>'.$no_of_cartoons.' ctns </b></td>
