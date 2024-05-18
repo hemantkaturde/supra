@@ -16000,13 +16000,13 @@ public function downloadpreexportform($id){
                     </tr>
                        '.$CartItemattribute.'
                         <tr>
-                                <td style="text-align:left;padding: 10px;" valign="top"></td>   
-                                <td style="text-align:left;padding: 10px;" valign="top"><b>'.$no_of_cartoons.' ctns </b></td>
-                                <td style="text-align:left;padding: 10px;" valign="top"><b></td>
-                                <td style="text-align:left;padding: 10px;" valign="top"><b>'.$total_qty.' pcs</b></td> 
-                                <td style="text-align:left;padding: 10px;" valign="top"><b>'.$total_gross_weight.' kgs</b></td>   
-                                <td style="text-align:left;padding: 10px;" valign="top"> </td>   
-                                <td style="text-align:left;padding: 10px;" valign="top"> </td>    
+                                <td style="text-align:left;padding: 10px;border: 1px solid black;" valign="top"><b>Total</b></td>   
+                                <td style="text-align:left;padding: 10px;border: 1px solid black;" valign="top"><b>'.$no_of_cartoons.' ctns </b></td>
+                                <td style="text-align:left;padding: 10px;border: 1px solid black;" valign="top"><b></td>
+                                <td style="text-align:left;padding: 10px;border: 1px solid black;" valign="top"><b>'.$total_qty.' pcs</b></td> 
+                                <td style="text-align:left;padding: 10px;border: 1px solid black;" valign="top"><b>'.$total_gross_weight.' kgs</b></td>   
+                                <td style="text-align:left;padding: 10px;border: 1px solid black;" valign="top"> </td>   
+                                <td style="text-align:left;padding: 10px;border: 1px solid black;" valign="top"> </td>    
                         </tr>
                     </table>';
             $i++;
