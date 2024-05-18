@@ -15990,13 +15990,13 @@ public function downloadpreexportform($id){
                     </div>
                     <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:12px;border: 1px solid black;">
                     <tr>
-                        <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top">Gross Wt per Box</td>   
-                        <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top">No. of Cartoons</td>
-                        <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top">Qty Per Qty</td>
-                        <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top">Total Qty</td> 
-                        <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top">Gross Weight with Ctns</td>  
-                        <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top">Box Size</td>    
-                        <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top">Net Weight</td>    
+                        <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top"><b>Gross Wt per Box</b></td>   
+                        <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top"><b>No. of Cartoons</b></td>
+                        <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top"><b>Qty Per Qty</b></td>
+                        <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top"><b>Total Qty</b></td> 
+                        <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top"><b>Gross Weight with Ctns</b></td>  
+                        <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top"><b>Box Size</b></td>    
+                        <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top"><b>Net Weight</b></td>    
                     </tr>
                        '.$CartItemattribute.'
                         <tr>
