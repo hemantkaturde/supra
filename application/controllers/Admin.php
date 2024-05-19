@@ -15440,7 +15440,6 @@ public function downloadomsmachinary($id){
 
 }
 
-
 public function getinvoicedetilsbyinvoiceid(){
 
     $invoice_number=$this->input->post('invoice_number');
@@ -15456,7 +15455,6 @@ public function getinvoicedetilsbyinvoiceid(){
     }
 
 }
-
 
 public function getcreditnotedetailsbycreditnoteid(){
 
@@ -15488,7 +15486,6 @@ public function getdebitnotedetailsbydebitenoteeid(){
     }
 }
 
-
 public function deletesalestracking(){
     $post_submit = $this->input->post();
     if($post_submit){
@@ -15505,7 +15502,6 @@ public function deletesalestracking(){
     }
 }
 
-
 public function getnumberofcartoonsfrompreexport(){
 
     $get_numberofcartoons=$this->input->post('get_numberofcartoons');
@@ -15521,7 +15517,6 @@ public function getnumberofcartoonsfrompreexport(){
     }
 }
 
-
 public function editsalestrackingreport($id){
     $process = 'Edit Tracking Report';
     $processFunction = 'Admin/editsalestrackingreport';
@@ -15534,7 +15529,6 @@ public function editsalestrackingreport($id){
     $data['getdebitenotenumber']= $this->admin_model->getdebitenotenumber();
     $this->loadViews("masters/editsalestrackingreport", $this->global, $data, NULL);
 }
-
 
 public function checkifpartnumberisalreadyexists(){
 
@@ -15563,8 +15557,6 @@ public function checkifpartnumberisalreadyexists(){
     }
 
 }
-
-
 
 public function downloadcomplainform($id){
 
@@ -16037,8 +16029,6 @@ public function downloadpreexportform($id){
 
 }
 
-
-
 public function chadebitnote(){
     $process = 'CHA Debit Note';
     $processFunction = 'Admin/chadebitnote';
@@ -16046,7 +16036,6 @@ public function chadebitnote(){
     $this->global['pageTitle'] = 'CHA Debit Note';
     $this->loadViews("masters/chadebitnote", $this->global, $data, NULL);
 }
-
 
 public function addchadebitnote(){
 
@@ -16105,8 +16094,6 @@ public function addchadebitnote(){
     }
 
 }
-
-
 
 }
 

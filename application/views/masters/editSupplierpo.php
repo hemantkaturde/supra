@@ -71,6 +71,16 @@
                                         </div>
                                     </div>
 
+                                    <?php if($getSuplierpodetails[0]['buyer_po_number']){
+                                        $display='block';
+                                        $selected_value = $getSuplierpodetails[0]['sales_order_number'];
+
+                                    }else{
+                                        $display='none';
+                                        $selected_value = 'Select Buyer PO Number';
+                                    } ?>
+
+
                                   
                                     <div class="col-md-12 buyer_po_number_div" style="display:<?=$display;?>">
                                             <div class="form-group">
