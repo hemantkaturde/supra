@@ -13712,11 +13712,13 @@
 					 var previous_short_excess_qty = 0;
 				 }
 
-				 if(previous_short_excess_qty > 0){
-					var calculate_qty = previous_short_excess_qty;
-				 }else{
-					var calculate_qty = order_qty;
-				 }
+				//  if(previous_short_excess_qty > 0){
+				// 	var calculate_qty = previous_short_excess_qty;
+				//  }else{
+				// 	var calculate_qty = order_qty;
+				//  }
+
+				var calculate_qty = previous_short_excess_qty;
 
 				 var total_short_excess_qty = parseFloat(calculate_qty) -  parseFloat(qty_recived);
 
@@ -13850,6 +13852,7 @@
 
 		 $(document).on('click','.deletePODitem',function(e){
 		
+			var POD_details_id = $('#POD_details_id').val();
 			var elemF = $(this);
 				e.preventDefault();
 				swal({
@@ -13880,7 +13883,14 @@
 												icon: "success",
 												button: "Ok",
 												},function(){ 
-														window.location.href = "<?php echo base_url().'addNewPODdetails'?>";
+
+													    if(POD_details_id){
+															window.location.href = "<?php echo base_url().'editpoddetails/'?>"+POD_details_id;
+														}else{
+															window.location.href = "<?php echo base_url().'addNewPODdetails'?>";
+														}
+
+														
 											});	
 										}
 
@@ -13947,11 +13957,13 @@
 						if(fetchResponse =='failure'){
 							var short_excess_qty = 0;
 						}else{
-							if(fetchResponse.short_excess_qty > 0){
-                               var short_excess_qty = fetchResponse.short_excess_qty;
-							}else{
-							   var short_excess_qty = 0;
-							}
+							// if(fetchResponse.short_excess_qty > 0){
+                            //    var short_excess_qty = fetchResponse.short_excess_qty;
+							// }else{
+							//    var short_excess_qty = 0;
+							// }
+
+							var short_excess_qty = fetchResponse.short_excess_qty;
 						}
 						$('#previous_short_excess_qty').val(short_excess_qty); 	
 				},
