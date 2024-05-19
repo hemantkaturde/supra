@@ -58,6 +58,29 @@
                                     </div>
 
 
+                                    <?php
+                                    if($getSuplierpodetails[0]['supplier_po_number']){
+                                        $display='block';
+                                        $selected_value_supplier_po = $getSuplierpodetails['po_number'];
+
+                                    }else{
+                                        $display='none';
+                                        $selected_value_supplier_po = 'Select Supplier PO Number';
+                                    } 
+                                    ?>
+
+                                    <div class="col-md-12 supplier_po_number_div" style="display:<?=$display;?>">
+                                            <div class="form-group">
+                                                    <label for="supplier_po_number">Select Supplier PO Number <span class="required">*</span></label>
+                                                    <select class="form-control supplier_po_number_for_item supplier_po_number_for_vendor_details supplier_po_for_fetch_buyer_details" name="supplier_po_number" id="supplier_po_number">
+                                                    <option st-id="" value="<?=$fetchALLpreVendoritemList[0]['supplier_po_number']?>" selected ><?=$selected_value_supplier_po;?></option>
+                                                    </select> 
+                                                <p class="error supplier_po_number_error"></p>
+                                            </div>
+                                    </div>
+
+
+
                                     <div class="col-md-12">
                                         <div class="form-group">
                                                 <label for="buyer_name">Buyer Name <span class="required">*</span></label>

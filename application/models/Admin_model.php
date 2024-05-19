@@ -2814,12 +2814,14 @@ class Admin_model extends CI_Model
         .TBL_BILL_OF_MATERIAL.'.bom_status,'
         .TBL_BILL_OF_MATERIAL.'.incoming_details,'
         .TBL_BILL_OF_MATERIAL.'.remark,'
-        .TBL_BILL_OF_MATERIAL.'.supplier_po_date'
+        .TBL_BILL_OF_MATERIAL.'.supplier_po_date,'
+        .TBL_BUYER_PO_MASTER.'.buyer_po_number as bp_number,'
         
          );
 
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_BILL_OF_MATERIAL.'.vendor_po_number');
         $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_BILL_OF_MATERIAL.'.buyer_po_number');
+        // $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_BUYER_PO_MASTER.'.buyer_name_id');
         // $this->db->where(TBL_INCOMING_DETAILS.'.status', 1);
         $this->db->where(TBL_BILL_OF_MATERIAL.'.id', $billofmaterialid);
         $query = $this->db->get(TBL_BILL_OF_MATERIAL);
