@@ -7666,7 +7666,7 @@ class Admin extends BaseController
                 $this->form_validation->set_rules('vendor_po_number','Vendor PO Number','trim');
                 $this->form_validation->set_rules('supplier_name','Supplier Name','trim');
                 $this->form_validation->set_rules('supplier_po_number','Supplier PO Number','trim');
-                $this->form_validation->set_rules('po_date','PO Date','trim');
+                $this->form_validation->set_rules('po_date','PO Date','trim|required');
                 $this->form_validation->set_rules('remark','Remark','trim');
                 $this->form_validation->set_rules('bill_number','Bill Number','trim');
                 $this->form_validation->set_rules('bill_date','Bill Date','trim');
@@ -7685,11 +7685,19 @@ class Admin extends BaseController
                     $paymentdetails_response['error'] = array('vendor_supplier_name'=>strip_tags(form_error('vendor_supplier_name')),'payment_details_number'=>strip_tags(form_error('payment_details_number')),'payment_details_date'=>strip_tags(form_error('payment_details_date')),'select_with_po_without_po'=>strip_tags(form_error('select_with_po_without_po')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'remark'=>strip_tags(form_error('remark')),'po_date'=>strip_tags(form_error('po_date')),'bill_number'=>strip_tags(form_error('bill_number')),'bill_date'=>strip_tags(form_error('bill_date')),'bill_amount'=>strip_tags(form_error('bill_amount')),'cheque_number'=>strip_tags(form_error('cheque_number')),'cheque_date'=>strip_tags(form_error('cheque_date')),'amount_paid'=>strip_tags(form_error('amount_paid')),'tds'=>strip_tags(form_error('tds')),'debit_note_amount'=>strip_tags(form_error('debit_note_amount')),'debit_note_no'=>strip_tags(form_error('debit_note_no')),'payment_status'=>strip_tags(form_error('payment_status')));
                 }else{
 
+                    if(trim($this->input->post('payment_details_id'))){
+                        $payment_details_id_edit =trim($this->input->post('payment_details_id'));
+                    }else{
+                        $payment_details_id_edit ='';
+                    }
+
+                    /*check if duplicate payment details */
+                    
                     
                     $data = array(
                         'payment_details_number' =>  trim($this->input->post('payment_details_number')),
                         'payment_details_date' => trim($this->input->post('payment_details_date')),
-                      //  'type'=>trim($this->input->post('select_with_po_without_po')),
+                         // 'type'=>trim($this->input->post('select_with_po_without_po')),
                         'supplier_vendor_name' =>  trim($this->input->post('vendor_supplier_name')),
                         'vendor_id' =>  trim($this->input->post('vendor_name')),
                         'vendor_po' =>  trim($this->input->post('vendor_po_number')),
@@ -7709,12 +7717,9 @@ class Admin extends BaseController
                         'remark' =>  trim($this->input->post('remark'))
                     );
 
-                    if(trim($this->input->post('payment_details_id'))){
-                        $saveNewdPaymentDetails= $this->admin_model->saveNewdPaymentDetails(trim($this->input->post('payment_details_id')),$data);
-                    }else{
-                        $saveNewdPaymentDetails= $this->admin_model->saveNewdPaymentDetails('',$data);
-                    }
-
+                  
+                    $saveNewdPaymentDetails= $this->admin_model->saveNewdPaymentDetails($payment_details_id_edit,$data);
+                
                     if($saveNewdPaymentDetails){
                         $paymentdetails_response['status'] = 'success';
                         $paymentdetails_response['error'] = array('vendor_supplier_name'=>strip_tags(form_error('vendor_supplier_name')),'payment_details_number'=>strip_tags(form_error('payment_details_number')),'payment_details_date'=>strip_tags(form_error('payment_details_date')),'select_with_po_without_po'=>strip_tags(form_error('select_with_po_without_po')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'remark'=>strip_tags(form_error('remark')),'po_date'=>strip_tags(form_error('po_date')),'bill_number'=>strip_tags(form_error('bill_number')),'bill_date'=>strip_tags(form_error('bill_date')),'bill_amount'=>strip_tags(form_error('bill_amount')),'cheque_number'=>strip_tags(form_error('cheque_number')),'cheque_date'=>strip_tags(form_error('cheque_date')),'amount_paid'=>strip_tags(form_error('amount_paid')),'tds'=>strip_tags(form_error('tds')),'debit_note_amount'=>strip_tags(form_error('debit_note_amount')),'debit_note_no'=>strip_tags(form_error('debit_note_no')),'payment_status'=>strip_tags(form_error('payment_status')));
@@ -16094,6 +16099,176 @@ public function addchadebitnote(){
     }
 
 }
+
+public function downloadenquiryformdata($id){
+
+         // create file name
+         $fileName = 'Enquiry_Form_Report -'.date('d-m-Y').'.xlsx';  
+         // load excel library
+         $getEnquiryInfo = $this->admin_model->downloadenquiryformdata($id);
+         $getEnquiryInforowdata = $this->admin_model->getEnquiryInforowdata($excelvalue['enquiry_form_id']);
+
+
+         $html = '<html><h5>Enquiry_Form_Report</h5>';
+         $html.= '<p>Enquiry Number : '.$getEnquiryInfo[0]['enquiry_number'].'</p>';
+         $html.= '<table style="border: 1px solid;">';
+         $html.= '<caption style="text-align:left;"><h5>Supplier Details</h5></caption>';
+
+         foreach ($getEnquiryInfo as  $value) {
+
+            $html.= '<tr style="text-align:left;background-color:yellow">';
+            $html.= '<th style="text-align:left;border: 1px solid;"> </th>';
+            $html.= '<th style="text-align:left;border: 1px solid;"> </th>';
+            $html.= '<th style="text-align:left;border: 1px solid;">'.$value['suplier_id_name_1'].'</th>';
+            $html.= '<th style="text-align:left;border: 1px solid;">'.$value['suplier_id_name_2'].'</th>';
+            $html.= '<th style="text-align:left;border: 1px solid;">'.$value['suplier_id_name_3'].'</th>';
+            $html.= '<th style="text-align:left;border: 1px solid;">'.$value['suplier_id_name_4'].'</th>';
+            $html.= '<th style="text-align:left;border: 1px solid;">'.$value['suplier_id_name_5'].'</th>';
+            $html.= '</tr>';
+
+            $html.= '<tr style="text-align:left;border: 1px solid;">';
+            $html.= '<td style="text-align:left;border: 1px solid;">Part Number</td>';
+            $html.= '<td style="text-align:left;border: 1px solid;">'.$value['part_number'].'</td>';
+            $html.= '<td style="text-align:left;border: 1px solid;"></td>';
+            $html.= '<td style="text-align:left;border: 1px solid;"></td>';
+            $html.= '<td style="text-align:left;border: 1px solid;"></td>';
+            $html.= '<td style="text-align:left;border: 1px solid;"></td>';
+            $html.= '<td style="text-align:left;border: 1px solid;"></td>';
+            $html.= '</tr>';
+
+            $html.= '<tr style="text-align:left;border: 1px solid;">';
+            $html.= '<td style="text-align:left;border: 1px solid;">Required Qty</td>';
+            $html.= '<td style="text-align:left;border: 1px solid;">'.$value['supplier_qty_in_kgs'].'</td>';
+            $html.= '<td style="text-align:left;border: 1px solid;">'.$value['suplier_rate_1'].'/-</td>';
+            $html.= '<td style="text-align:left;border: 1px solid;">'.$value['suplier_rate_2'].'/-</td>';
+            $html.= '<td style="text-align:left;border: 1px solid;">'.$value['suplier_rate_3'].'/-</td>';
+            $html.= '<td style="text-align:left;border: 1px solid;">'.$value['suplier_rate_4'].'/-</td>';
+            $html.= '<td style="text-align:left;border: 1px solid;">'.$value['suplier_rate_5'].'/-</td>';
+            $html.= '</tr>';
+
+            $html.= '<tr style="text-align:left;border: 1px solid;">';
+            $html.= '<td style="text-align:left;border: 1px solid;">Raw Material</td>';
+            $html.= '<td style="text-align:left;border: 1px solid;">'.$value['name'].'</td>';
+            $html.= '<td style="text-align:left;border: 1px solid;"></td>';
+            $html.= '<td style="text-align:left;border: 1px solid;"></td>';
+            $html.= '<td style="text-align:left;border: 1px solid;"></td>';
+            $html.= '<td style="text-align:left;border: 1px solid;"></td>';
+            $html.= '<td style="text-align:left;border: 1px solid;"></td>';
+            $html.= '</tr>';
+
+            $html.= '<tr style="text-align:left;border: 1px solid;">';
+            $html.= '<td style="text-align:left;border: 1px solid;">Grade</td>';
+            $html.= '<td style="text-align:left;border: 1px solid;">'.$value['rm_size'].'</td>';
+            $html.= '<td style="text-align:left;border: 1px solid;"></td>';
+            $html.= '<td style="text-align:left;border: 1px solid;"></td>';
+            $html.= '<td style="text-align:left;border: 1px solid;"></td>';
+            $html.= '<td style="text-align:left;border: 1px solid;"></td>';
+            $html.= '<td style="text-align:left;border: 1px solid;"></td>';
+            $html.= '</tr>';
+
+            $html.= '<tr style="text-align:left;border: 1px solid;">';
+            $html.= '<td style="text-align:left;border: 1px solid;">Gross Weight</td>';
+            $html.= '<td style="text-align:left;border: 1px solid;">'.$value['groass_weight'].'</td>';
+            $html.= '<td style="text-align:left;border: 1px solid;"></td>';
+            $html.= '<td style="text-align:left;border: 1px solid;"></td>';
+            $html.= '<td style="text-align:left;border: 1px solid;"></td>';
+            $html.= '<td style="text-align:left;border: 1px solid;"></td>';
+            $html.= '<td style="text-align:left;border: 1px solid;"></td>';
+            $html.= '</tr>';
+
+        
+         }
+
+
+         foreach ($getEnquiryInfo as  $value) {
+
+
+            $html.= '<tr style="text-align:left;background-color:yellow">';
+            $html.= '<th style="text-align:left;border: 1px solid;"> </th>';
+            $html.= '<th style="text-align:left;border: 1px solid;"> </th>';
+            $html.= '<th style="text-align:left;border: 1px solid;">'.$value['vendor_name_1'].'</th>';
+            $html.= '<th style="text-align:left;border: 1px solid;">'.$value['vendor_name_2'].'</th>';
+            $html.= '<th style="text-align:left;border: 1px solid;">'.$value['vendor_name_3'].'</th>';
+            $html.= '<th style="text-align:left;border: 1px solid;">'.$value['vendor_name_4'].'</th>';
+            $html.= '<th style="text-align:left;border: 1px solid;">'.$value['vendor_name_5'].'</th>';
+            $html.= '</tr>';
+
+            $html.= '<tr style="text-align:left;border: 1px solid;">';
+            $html.= '<td style="text-align:left;border: 1px solid;">Part Number</td>';
+            $html.= '<td style="text-align:left;border: 1px solid;">'.$value['part_number'].'</td>';
+            $html.= '<td style="text-align:left;border: 1px solid;"></td>';
+            $html.= '<td style="text-align:left;border: 1px solid;"></td>';
+            $html.= '<td style="text-align:left;border: 1px solid;"></td>';
+            $html.= '<td style="text-align:left;border: 1px solid;"></td>';
+            $html.= '<td style="text-align:left;border: 1px solid;"></td>';
+            $html.= '</tr>';
+
+            $html.= '<tr style="text-align:left;border: 1px solid;">';
+            $html.= '<td style="text-align:left;border: 1px solid;">Required Qty</td>';
+            $html.= '<td style="text-align:left;border: 1px solid;">'.$value['venodr_qty_in_pcs'].'</td>';
+            $html.= '<td style="text-align:left;border: 1px solid;">'.$value['vendor_rate_1'].'/-</td>';
+            $html.= '<td style="text-align:left;border: 1px solid;">'.$value['vendor_rate_2'].'/-</td>';
+            $html.= '<td style="text-align:left;border: 1px solid;">'.$value['vendor_rate_3'].'/-</td>';
+            $html.= '<td style="text-align:left;border: 1px solid;">'.$value['vendor_rate_4'].'/-</td>';
+            $html.= '<td style="text-align:left;border: 1px solid;">'.$value['vendor_rate_5'].'/-</td>';
+            $html.= '</tr>';
+
+            $html.= '<tr style="text-align:left;border: 1px solid;">';
+            $html.= '<td style="text-align:left;border: 1px solid;">Raw Material</td>';
+            $html.= '<td style="text-align:left;border: 1px solid;">'.$value['name'].'</td>';
+            $html.= '<td style="text-align:left;border: 1px solid;"></td>';
+            $html.= '<td style="text-align:left;border: 1px solid;"></td>';
+            $html.= '<td style="text-align:left;border: 1px solid;"></td>';
+            $html.= '<td style="text-align:left;border: 1px solid;"></td>';
+            $html.= '<td style="text-align:left;border: 1px solid;"></td>';
+            $html.= '</tr>';
+
+            $html.= '<tr style="text-align:left;border: 1px solid;">';
+            $html.= '<td style="text-align:left;border: 1px solid;">Grade</td>';
+            $html.= '<td style="text-align:left;border: 1px solid;">'.$value['rm_size'].'</td>';
+            $html.= '<td style="text-align:left;border: 1px solid;"></td>';
+            $html.= '<td style="text-align:left;border: 1px solid;"></td>';
+            $html.= '<td style="text-align:left;border: 1px solid;"></td>';
+            $html.= '<td style="text-align:left;border: 1px solid;"></td>';
+            $html.= '<td style="text-align:left;border: 1px solid;"></td>';
+            $html.= '</tr>';
+
+            $html.= '<tr style="text-align:left;border: 1px solid;">';
+            $html.= '<td style="text-align:left;border: 1px solid;">Gross Weight</td>';
+            $html.= '<td style="text-align:left;border: 1px solid;">'.$value['groass_weight'].'</td>';
+            $html.= '<td style="text-align:left;border: 1px solid;"></td>';
+            $html.= '<td style="text-align:left;border: 1px solid;"></td>';
+            $html.= '<td style="text-align:left;border: 1px solid;"></td>';
+            $html.= '<td style="text-align:left;border: 1px solid;"></td>';
+            $html.= '<td style="text-align:left;border: 1px solid;"></td>';
+            $html.= '</tr>';
+
+            $html.= '<tr style="text-align:left;border: 1px solid;">';
+            $html.= '<td style="text-align:left;border: 1px solid;">Remark</td>';
+            $html.= '<td style="text-align:left;border: 1px solid;"></td>';
+            $html.= '<td style="text-align:left;border: 1px solid;">'.$value['remark_6'].'</td>';
+            $html.= '<td style="text-align:left;border: 1px solid;">'.$value['remark_7'].'</td>';
+            $html.= '<td style="text-align:left;border: 1px solid;">'.$value['remark_8'].'</td>';
+            $html.= '<td style="text-align:left;border: 1px solid;">'.$value['remark_9'].'</td>';
+            $html.= '<td style="text-align:left;border: 1px solid;">'.$value['remark_10'].'</td>';
+            $html.= '</tr>';
+
+         }
+
+
+
+         $html.= '</table>';
+         $html.= '</html>';
+           
+         header('Content-Type: application/vnd.ms-excel');
+         header("Content-Disposition: attachment;Filename=$fileName.xls");
+         header('Cache-Control: max-age=0');
+
+         echo $html;
+      
+}
+
+
 
 }
 

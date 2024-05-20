@@ -7413,6 +7413,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['remark'] =$value['remark'];
                 $data[$counter]['action'] ='';
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editeqnuiryformdatabyid/".$value['enquiry_form_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downloadenquiryformdata/".$value['enquiry_form_id']."' style='cursor: pointer;'><i style='font-size:21px;cursor: pointer;' class='fa fa-file-excel-o' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['enquiry_form_id']."' class='fa fa-trash-o deleteeqnuiryformdata' aria-hidden='true'></i>"; 
                 $counter++; 
             }
@@ -12140,6 +12141,99 @@ public function getSumetionofpreexportallrowsforinvoice($pre_export_id){
     return $fetch_result;
 
 }
+
+
+public function checkifsamevendor_or_bill_numberpaymentdetails($payment_details_id_edit,$vendor_supplier_name,$payment_details_date,$vendor_name,$vendor_po_number,$supplier_name,$supplier_po_number,$bill_number){
+
+
+    if($payment_details_id_edit){
+
+        if($vendor_supplier_name=='vendor'){
+            $this->db->where(TBL_PAYMENT_DETAILS.'.vendor_id',$vendor_name);
+            $this->db->where(TBL_PAYMENT_DETAILS.'.vendor_po',$vendor_po_number);
+        }else{
+            $this->db->where(TBL_PAYMENT_DETAILS.'.supplier_id',$supplier_name);
+            $this->db->where(TBL_PAYMENT_DETAILS.'.supplier_po',$supplier_po_number);
+        }
+    
+        $this->db->select('*');
+        $this->db->where(TBL_PAYMENT_DETAILS.'.payment_details_date',$payment_details_date);
+        $this->db->where(TBL_PAYMENT_DETAILS.'.bill_number',$bill_number);
+        $this->db->where(TBL_PAYMENT_DETAILS.'.payment_details_id',$payment_details_id_edit);
+        //$this->db->group_by(TBL_PREEXPORT_ITEM_ATTRIBUTES.'.pre_export_item_id');
+        $query = $this->db->get(TBL_PAYMENT_DETAILS);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+
+    }else{
+        if($vendor_supplier_name=='vendor'){
+            $this->db->where(TBL_PAYMENT_DETAILS.'.vendor_id',$vendor_name);
+            $this->db->where(TBL_PAYMENT_DETAILS.'.vendor_po',$vendor_po_number);
+        }else{
+            $this->db->where(TBL_PAYMENT_DETAILS.'.supplier_id',$supplier_name);
+            $this->db->where(TBL_PAYMENT_DETAILS.'.supplier_po',$supplier_po_number);
+        }
+    
+        $this->db->select('*');
+        $this->db->where(TBL_PAYMENT_DETAILS.'.payment_details_date',$payment_details_date);
+        $this->db->where(TBL_PAYMENT_DETAILS.'.bill_number',$bill_number);
+        //$this->db->group_by(TBL_PREEXPORT_ITEM_ATTRIBUTES.'.pre_export_item_id');
+        $query = $this->db->get(TBL_PAYMENT_DETAILS);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+
+    }
+
+   
+}
+
+public function downloadenquiryformdata($id){
+
+    $this->db->select('*,'.TBL_SUPPLIER.'.supplier_name as suplier_id_name_1,a.supplier_name as suplier_id_name_2,b.supplier_name as suplier_id_name_3,c.supplier_name as suplier_id_name_4,d.supplier_name as suplier_id_name_5,e.vendor_name as vendor_name_1,f.vendor_name as vendor_name_2,g.vendor_name as vendor_name_3,h.vendor_name as vendor_name_4,i.vendor_name as vendor_name_5,'.TBL_ENAUIRY_FORM_ITEM.'.id as enquiry_form_id,'.TBL_ENAUIRY_FORM_ITEM.'.groass_weight as engroass_weight');
+    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_ENAUIRY_FORM_ITEM.'.part_number');
+    $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_ENAUIRY_FORM_ITEM.'.suplier_id_1','left');
+    $this->db->join(TBL_SUPPLIER.' as a', 'a.sup_id = '.TBL_ENAUIRY_FORM_ITEM.'.suplier_id_2','left');
+    $this->db->join(TBL_SUPPLIER.' as b', 'b.sup_id = '.TBL_ENAUIRY_FORM_ITEM.'.suplier_id_3','left');
+    $this->db->join(TBL_SUPPLIER.' as c', 'c.sup_id = '.TBL_ENAUIRY_FORM_ITEM.'.suplier_id_4','left');
+    $this->db->join(TBL_SUPPLIER.' as d', 'd.sup_id = '.TBL_ENAUIRY_FORM_ITEM.'.suplier_id_5','left');
+    $this->db->join(TBL_VENDOR.' as e', 'e.ven_id = '.TBL_ENAUIRY_FORM_ITEM.'.vendor_id_1','left');
+    $this->db->join(TBL_VENDOR.' as f', 'f.ven_id = '.TBL_ENAUIRY_FORM_ITEM.'.vendor_id_2','left');
+    $this->db->join(TBL_VENDOR.' as g', 'g.ven_id = '.TBL_ENAUIRY_FORM_ITEM.'.vendor_id_3','left');
+    $this->db->join(TBL_VENDOR.' as h', 'h.ven_id = '.TBL_ENAUIRY_FORM_ITEM.'.vendor_id_4','left');
+    $this->db->join(TBL_VENDOR.' as i', 'i.ven_id = '.TBL_ENAUIRY_FORM_ITEM.'.vendor_id_5','left');
+    $this->db->join(TBL_ENAUIRY_FORM.' as ll', 'll.id = '.TBL_ENAUIRY_FORM_ITEM.'.enquiry_form_id');
+
+    $this->db->where(TBL_ENAUIRY_FORM_ITEM.'.status', 1);
+    $this->db->where(TBL_ENAUIRY_FORM_ITEM.'.enquiry_form_id',$id);
+    $query = $this->db->get(TBL_ENAUIRY_FORM_ITEM);
+    $data = $query->result_array();
+    return $data;
+
+}
+
+
+public function getEnquiryInforowdata($id){
+
+    $this->db->select('*,'.TBL_SUPPLIER.'.supplier_name as suplier_id_name_1,a.supplier_name as suplier_id_name_2,b.supplier_name as suplier_id_name_3,c.supplier_name as suplier_id_name_4,d.supplier_name as suplier_id_name_5,e.vendor_name as vendor_name_1,f.vendor_name as vendor_name_2,g.vendor_name as vendor_name_3,h.vendor_name as vendor_name_4,i.vendor_name as vendor_name_5,'.TBL_ENAUIRY_FORM_ITEM.'.id as enquiry_form_id,'.TBL_ENAUIRY_FORM_ITEM.'.groass_weight as engroass_weight');
+    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_ENAUIRY_FORM_ITEM.'.part_number');
+    $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_ENAUIRY_FORM_ITEM.'.suplier_id_1','left');
+    $this->db->join(TBL_SUPPLIER.' as a', 'a.sup_id = '.TBL_ENAUIRY_FORM_ITEM.'.suplier_id_2','left');
+    $this->db->join(TBL_SUPPLIER.' as b', 'b.sup_id = '.TBL_ENAUIRY_FORM_ITEM.'.suplier_id_3','left');
+    $this->db->join(TBL_SUPPLIER.' as c', 'c.sup_id = '.TBL_ENAUIRY_FORM_ITEM.'.suplier_id_4','left');
+    $this->db->join(TBL_SUPPLIER.' as d', 'd.sup_id = '.TBL_ENAUIRY_FORM_ITEM.'.suplier_id_5','left');
+    $this->db->join(TBL_VENDOR.' as e', 'e.ven_id = '.TBL_ENAUIRY_FORM_ITEM.'.vendor_id_1','left');
+    $this->db->join(TBL_VENDOR.' as f', 'f.ven_id = '.TBL_ENAUIRY_FORM_ITEM.'.vendor_id_2','left');
+    $this->db->join(TBL_VENDOR.' as g', 'g.ven_id = '.TBL_ENAUIRY_FORM_ITEM.'.vendor_id_3','left');
+    $this->db->join(TBL_VENDOR.' as h', 'h.ven_id = '.TBL_ENAUIRY_FORM_ITEM.'.vendor_id_4','left');
+    $this->db->join(TBL_VENDOR.' as i', 'i.ven_id = '.TBL_ENAUIRY_FORM_ITEM.'.vendor_id_5','left');
+    $this->db->where(TBL_ENAUIRY_FORM_ITEM.'.status', 1);
+    $this->db->where(TBL_ENAUIRY_FORM_ITEM.'.id',$id);
+    $query = $this->db->get(TBL_ENAUIRY_FORM_ITEM);
+    $data = $query->result_array();
+    return $data;
+
+}
+
 
 
 
