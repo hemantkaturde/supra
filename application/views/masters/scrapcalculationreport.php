@@ -25,8 +25,6 @@
                                 <div class="row" style="margin-left:4px">
                                     <div class="col-md-4">
                                         <div class="form-group">
-
-                                    
                                             <label for="email">Type of Raw Material</label>
                                             <select class="form-control" name="status" id="status">
                                                     <option st-id="" value="NA">Select Status</option>

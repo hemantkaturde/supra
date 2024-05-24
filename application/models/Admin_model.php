@@ -12235,7 +12235,7 @@ public function getEnquiryInforowdata($id){
 
 
 
-public function fetchscrapcalculationreportcount($params,$vendor_name,$status){
+public function fetchscrapcalculationreportcount($params,$status){
 
 
     /* Bill of material Data */
@@ -12256,9 +12256,7 @@ public function fetchscrapcalculationreportcount($params,$vendor_name,$status){
         $this->db->or_where(TBL_BILL_OF_MATERIAL.".part_number LIKE '%".$params['search']['value']."%')");
     }
 
-    if($vendor_name!='NA'){
-        $this->db->where(TBL_BILL_OF_MATERIAL.'.vendor_name', $vendor_name); 
-    }
+   
 
     if($status!='NA'){
         $this->db->where(TBL_BILL_OF_MATERIAL.'.bom_status', $status); 
@@ -12271,7 +12269,7 @@ public function fetchscrapcalculationreportcount($params,$vendor_name,$status){
 
 }
 
-public function fetchscrapcalculationreportdata($params,$vendor_name,$status){
+public function fetchscrapcalculationreportdata($params,$status){
 
   
     /* Bill of material Data */
@@ -12290,10 +12288,6 @@ public function fetchscrapcalculationreportdata($params,$vendor_name,$status){
         $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_BILL_OF_MATERIAL.".bom_status LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_BILL_OF_MATERIAL.".part_number LIKE '%".$params['search']['value']."%')");
-    }
-
-    if($vendor_name!='NA'){
-        $this->db->where(TBL_BILL_OF_MATERIAL.'.vendor_name', $vendor_name); 
     }
 
     if($status!='NA'){

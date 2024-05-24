@@ -20003,29 +20003,18 @@
   
 	$(document).ready(function() {
 		$("#view_current_order_status").dataTable().fnDestroy();
-		var vendor_name = $('#vendor_name').val();
 		var status = $('#status').val();
-		getallCurrentOrserReport($("#vendor_name").val(), $("#status").val());
-	});
-
-	$(document).on('change','#vendor_name',function(e){  
-		$("#view_current_order_status").dataTable().fnDestroy();
-			e.preventDefault();
-			var vendor_name = $('#vendor_name').val();
-			var status = $('#status').val();
-			getallCurrentOrserReport($("#vendor_name").val(), $("#status").val());
+		getallCurrentOrserReport(status);
 	});
 
 	$(document).on('change','#status',function(e){  
 		$("#view_current_order_status").dataTable().fnDestroy();
-
 		e.preventDefault();
-		var vendor_name = $('#vendor_name').val();
 		var status = $('#status').val();
-		getallCurrentOrserReport($("#vendor_name").val(), $("#status").val());
+		getallCurrentOrserReport(status);
 	});
 
-	function getallCurrentOrserReport(vendor_name,status){
+	function getallCurrentOrserReport(status){
 
 			var dt = $('#view_scrap_calculation_report').DataTable({
 				"columnDefs": [ 
@@ -20041,7 +20030,7 @@
 				],
 				responsive: true,
 				"oLanguage": {
-					"sEmptyTable": "<i>No Current Order Status Found.</i>",
+					"sEmptyTable": "<i>No Scrap Calculation Records Found.</i>",
 				}, 
 				"bSort" : false,
 				"bFilter":true,
@@ -20050,7 +20039,7 @@
 				"bProcessing": true,
 				"serverSide": true,
 				"ajax":{
-					url :"<?php echo base_url();?>admin/fetchscrapcalculationreport/"+vendor_name+"/"+status,
+					url :"<?php echo base_url();?>admin/fetchscrapcalculationreport/"+status,
 					type: "post",
 				},
 			});

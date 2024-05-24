@@ -16318,11 +16318,11 @@ public function scrapcalculationreport(){
 }
 
 
-public function fetchscrapcalculationreport($vendor_name,$status){
+public function fetchscrapcalculationreport($status){
 
     $params = $_REQUEST;
-    $totalRecords = $this->admin_model->fetchscrapcalculationreportcount($params,$vendor_name,$status); 
-    $queryRecords = $this->admin_model->fetchscrapcalculationreportdata($params,$vendor_name,$status); 
+    $totalRecords = $this->admin_model->fetchscrapcalculationreportcount($params,$status); 
+    $queryRecords = $this->admin_model->fetchscrapcalculationreportdata($params,$status); 
 
     $data = array();
     foreach ($queryRecords as $key => $value)
