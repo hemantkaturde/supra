@@ -16113,7 +16113,7 @@ public function downloadenquiryformdata($id){
          $html.= '<table>';
 
          $html.= '<tr>';
-         $html.= '<td><b>Enquiry From Report</b></td>';
+         $html.= '<td><b>Enquiry Form Report</b></td>';
          $html.= '</tr>';
 
          $html.= '<tr>';
@@ -16125,7 +16125,7 @@ public function downloadenquiryformdata($id){
          $html.= '</tr>';
 
          $html.= '<tr>';
-         $html.= '<td>Enquiry Date : '.$getEnquiryInfo[0]['buyer_enquiry_date'].'</td>';
+         $html.= '<td>Enquiry Date : '.  date('d-m-Y',strtotime($getEnquiryInfo[0]['buyer_enquiry_date'])).'</td>';
          $html.= '</tr>';
 
          $html.= '</table>';
@@ -16159,7 +16159,7 @@ public function downloadenquiryformdata($id){
 
             $html.= '<tr style="text-align:left;border: 1px solid;">';
             $html.= '<td style="text-align:left;border: 1px solid;">Required Qty</td>';
-            $html.= '<td style="text-align:left;border: 1px solid;">'.$value['supplier_qty_in_kgs'].'</td>';
+            $html.= '<td style="text-align:left;border: 1px solid;">'.$value['supplier_qty_in_kgs'].' kgs</td>';
             $html.= '<td style="text-align:left;border: 1px solid;">'.$value['suplier_rate_1'].'/-</td>';
             $html.= '<td style="text-align:left;border: 1px solid;">'.$value['suplier_rate_2'].'/-</td>';
             $html.= '<td style="text-align:left;border: 1px solid;">'.$value['suplier_rate_3'].'/-</td>';
@@ -16242,7 +16242,7 @@ public function downloadenquiryformdata($id){
 
             $html.= '<tr style="text-align:left;border: 1px solid;">';
             $html.= '<td style="text-align:left;border: 1px solid;">Required Qty</td>';
-            $html.= '<td style="text-align:left;border: 1px solid;">'.$value['venodr_qty_in_pcs'].'</td>';
+            $html.= '<td style="text-align:left;border: 1px solid;">'.$value['venodr_qty_in_pcs'].' pcs</td>';
             $html.= '<td style="text-align:left;border: 1px solid;">'.$value['vendor_rate_1'].'/-</td>';
             $html.= '<td style="text-align:left;border: 1px solid;">'.$value['vendor_rate_2'].'/-</td>';
             $html.= '<td style="text-align:left;border: 1px solid;">'.$value['vendor_rate_3'].'/-</td>';
