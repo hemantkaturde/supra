@@ -16305,6 +16305,43 @@ public function downloadenquiryformdata($id){
       
 }
 
+public function scrapcalculationreport(){
+
+    $process = 'Scrap Calculation Report';
+    $processFunction = 'Admin/scrapcalculationreport';
+    $this->global['pageTitle'] = 'Scrap Calculation Report';
+    $data['vendorList']= $this->admin_model->fetchALLvendorList();
+    $this->loadViews("masters/scrapcalculationreport", $this->global, $data, NULL);  
+
+
+}
+
+
+public function fetchscrapcalculationreport($vendor_name,$status){
+
+    $params = $_REQUEST;
+    $totalRecords = $this->admin_model->fetchscrapcalculationreportcount($params,$vendor_name,$status); 
+    $queryRecords = $this->admin_model->fetchscrapcalculationreportdata($params,$vendor_name,$status); 
+
+    $data = array();
+    foreach ($queryRecords as $key => $value)
+    {
+        $i = 0;
+        foreach($value as $v)
+        {
+            $data[$key][$i] = $v;
+            $i++;
+        }
+    }
+    $json_data = array(
+        "draw"            => intval( $params['draw'] ),   
+        "recordsTotal"    => intval( $totalRecords ),  
+        "recordsFiltered" => intval($totalRecords),
+        "data"            => $data   // total data array
+        );
+    echo json_encode($json_data);
+
+}
 
 
 }
