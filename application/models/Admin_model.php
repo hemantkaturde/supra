@@ -12201,8 +12201,7 @@ public function downloadenquiryformdata($id){
     $this->db->join(TBL_VENDOR.' as g', 'g.ven_id = '.TBL_ENAUIRY_FORM_ITEM.'.vendor_id_3','left');
     $this->db->join(TBL_VENDOR.' as h', 'h.ven_id = '.TBL_ENAUIRY_FORM_ITEM.'.vendor_id_4','left');
     $this->db->join(TBL_VENDOR.' as i', 'i.ven_id = '.TBL_ENAUIRY_FORM_ITEM.'.vendor_id_5','left');
-    $this->db->join(TBL_ENAUIRY_FORM.' as ll', 'll.id = '.TBL_ENAUIRY_FORM_ITEM.'.enquiry_form_id');
-
+    $this->db->join(TBL_ENAUIRY_FORM.' as ll', 'll.id = '.TBL_ENAUIRY_FORM_ITEM.'.enquiry_form_id');  
     $this->db->where(TBL_ENAUIRY_FORM_ITEM.'.status', 1);
     $this->db->where(TBL_ENAUIRY_FORM_ITEM.'.enquiry_form_id',$id);
     $query = $this->db->get(TBL_ENAUIRY_FORM_ITEM);

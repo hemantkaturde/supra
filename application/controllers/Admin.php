@@ -16109,10 +16109,31 @@ public function downloadenquiryformdata($id){
          $getEnquiryInforowdata = $this->admin_model->getEnquiryInforowdata($excelvalue['enquiry_form_id']);
 
 
-         $html = '<html><h5>Enquiry_Form_Report</h5>';
-         $html.= '<p>Enquiry Number : '.$getEnquiryInfo[0]['enquiry_number'].'</p>';
-         $html.= '<table style="border: 1px solid;">';
-         $html.= '<caption style="text-align:left;"><h5>Supplier Details</h5></caption>';
+         $html = '<html>';
+         $html.= '<table>';
+
+         $html.= '<tr>';
+         $html.= '<td><b>Enquiry From Report</b></td>';
+         $html.= '</tr>';
+
+         $html.= '<tr>';
+         $html.= '<td>Buyer Name : '.$getEnquiryInfo[0]['buyer_name'].'</td>';
+         $html.= '</tr>';
+
+         $html.= '<tr>';
+         $html.= '<td>Enquiry Number :'.$getEnquiryInfo[0]['enquiry_number'].'</td>';
+         $html.= '</tr>';
+
+         $html.= '<tr>';
+         $html.= '<td>Enquiry Date : '.$getEnquiryInfo[0]['buyer_enquiry_date'].'</td>';
+         $html.= '</tr>';
+
+         $html.= '</table>';
+
+       
+          //$html.= '<p>Enquiry Number : '.$getEnquiryInfo[0]['enquiry_number'].'</p>';
+          $html.= '<table style="border: 1px solid;">';
+          $html.= '<caption style="text-align:left;"><h5>Supplier Details</h5></caption>';
 
          foreach ($getEnquiryInfo as  $value) {
 
@@ -16176,9 +16197,25 @@ public function downloadenquiryformdata($id){
             $html.= '<td style="text-align:left;border: 1px solid;"></td>';
             $html.= '</tr>';
 
+
+            $html.= '<tr style="text-align:left;border: 1px solid;">';
+            $html.= '<td style="text-align:left;border: 1px solid;">Remark</td>';
+            $html.= '<td style="text-align:left;border: 1px solid;"></td>';
+            $html.= '<td style="text-align:left;border: 1px solid;">'.$value['remark_1'].'</td>';
+            $html.= '<td style="text-align:left;border: 1px solid;">'.$value['remark_2'].'</td>';
+            $html.= '<td style="text-align:left;border: 1px solid;">'.$value['remark_3'].'</td>';
+            $html.= '<td style="text-align:left;border: 1px solid;">'.$value['remark_4'].'</td>';
+            $html.= '<td style="text-align:left;border: 1px solid;">'.$value['remark_5'].'</td>';
+            $html.= '</tr>';
+
         
          }
 
+         $html.= '</table>';
+
+
+         $html.= '<table style="border: 1px solid;">';
+         $html.= '<caption style="text-align:left;"><h5>Buyer Details</h5></caption>';
 
          foreach ($getEnquiryInfo as  $value) {
 
