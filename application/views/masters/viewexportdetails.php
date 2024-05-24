@@ -14,7 +14,7 @@
 
         <p> Buyer PO Number : <?=$packingintractiondetails_data[0]['sales_order_number'].'-'.$packingintractiondetails_data[0]['buyer_po_number']?></p>
 
-        <input type="button" onclick="location.href = '<?php echo base_url() ?>exportdetails'" class="btn btn-default" value="Back" />
+        <input type="button" onclick="location.href = '<?php echo base_url() ?>exportdetails'" class="btn btn-success" value="Back" />
     </section>
 
     <section class="content">
