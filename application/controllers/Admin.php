@@ -6258,6 +6258,9 @@ class Admin extends BaseController
     public function viewexportdetails($packinginstarctionid){
 
         $packinginstarctionid=  $this->admin_model->getpackinginstarction_data_by_id(trim($packinginstarctionid));
+
+        $data['packingintractiondetails_data']=$packinginstarctionid;
+
         $buyer_po_number = $packinginstarctionid[0]['buyerpoid'];
         $main_id = $packinginstarctionid[0]['main_id'];
 
