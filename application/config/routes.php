@@ -372,8 +372,7 @@ $route['downloadpreexportform/(:any)'] = "admin/downloadpreexportform/$1";
 $route['downloadenquiryformdata/(:any)'] = "admin/downloadenquiryformdata/$1";
 
 $route['scrapcalculationreport'] = "admin/scrapcalculationreport";
-
-
+$route['productionstatusreport'] = "admin/productionstatusreport";
 
 
 /* ALL Edit Forms*/

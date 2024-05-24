@@ -16312,8 +16312,6 @@ public function scrapcalculationreport(){
     $this->global['pageTitle'] = 'Scrap Calculation Report';
     $data['vendorList']= $this->admin_model->fetchALLvendorList();
     $this->loadViews("masters/scrapcalculationreport", $this->global, $data, NULL);  
-
-
 }
 
 
@@ -16342,6 +16340,16 @@ public function fetchscrapcalculationreport($vendor_name,$status){
     echo json_encode($json_data);
 
 }
+
+
+public function productionstatusreport(){
+    $process = 'Production Status Report';
+    $processFunction = 'Admin/productionstatusreport';
+    $this->global['pageTitle'] = 'Production Status Report';
+    $data['vendorList']= $this->admin_model->fetchALLvendorList();
+    $this->loadViews("masters/productionstatusreport", $this->global, $data, NULL);  
+}
+
 
 
 }
