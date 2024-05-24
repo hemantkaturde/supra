@@ -16169,7 +16169,7 @@ public function downloadenquiryformdata($id){
 
             $html.= '<tr style="text-align:left;border: 1px solid;">';
             $html.= '<td style="text-align:left;border: 1px solid;">Raw Material</td>';
-            $html.= '<td style="text-align:left;border: 1px solid;">'.$value['name'].'</td>';
+            $html.= '<td style="text-align:left;border: 1px solid;">'.$value['rm_description'].'</td>';
             $html.= '<td style="text-align:left;border: 1px solid;"></td>';
             $html.= '<td style="text-align:left;border: 1px solid;"></td>';
             $html.= '<td style="text-align:left;border: 1px solid;"></td>';
@@ -16215,7 +16215,7 @@ public function downloadenquiryformdata($id){
 
 
          $html.= '<table style="border: 1px solid;">';
-         $html.= '<caption style="text-align:left;"><h5>Buyer Details</h5></caption>';
+         $html.= '<caption style="text-align:left;"><h5>Vendor Details</h5></caption>';
 
          foreach ($getEnquiryInfo as  $value) {
 
