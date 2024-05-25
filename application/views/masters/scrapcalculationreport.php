@@ -28,7 +28,7 @@
                                             <label for="email">Type of Raw Material</label>
                                             <select class="form-control" name="status" id="status">
                                                     <option st-id="" value="NA">Select Status</option>
-                                                    <option value="all">All</option>
+                                                    <option value="NA">All</option>
                                                     <option value="Brass">Brass</option>
                                                     <option value="Copper">Copper</option>
                                                     <option value="Aluminium">Aluminium</option>

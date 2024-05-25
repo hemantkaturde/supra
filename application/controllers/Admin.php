@@ -7694,8 +7694,12 @@ class Admin extends BaseController
                         $payment_details_id_edit ='';
                     }
 
+
+
                     /*check if duplicate payment details */
-                    
+                    //$check_uniuqe= $this->admin_model->check_uniuqe_validation_payment_details(trim($this->input->post('bill_number')),);
+
+
                     
                     $data = array(
                         'payment_details_number' =>  trim($this->input->post('payment_details_number')),

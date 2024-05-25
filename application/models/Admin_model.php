@@ -12271,9 +12271,9 @@ public function fetchscrapcalculationreportcount($params,$status){
         $this->db->or_where(TBL_BILL_OF_MATERIAL_ITEM.".rm_actual_aty LIKE '%".$params['search']['value']."%')");
     }
 
-   
+
     if($status!='NA'){
-        $this->db->where(TBL_BILL_OF_MATERIAL.'.bom_status', $status); 
+        $this->db->like(TBL_RAWMATERIAL.'.type_of_raw_material', "%".$status."%");
     }
 
 
@@ -12315,8 +12315,9 @@ public function fetchscrapcalculationreportdata($params,$status){
         $this->db->or_where(TBL_BILL_OF_MATERIAL_ITEM.".rm_actual_aty LIKE '%".$params['search']['value']."%')");
     }
 
+  
     if($status!='NA'){
-        $this->db->where(TBL_BILL_OF_MATERIAL.'.bom_status', $status); 
+        $this->db->where(TBL_RAWMATERIAL.'.type_of_raw_material', "%".$status."%");
     }
 
     $this->db->where(TBL_BILL_OF_MATERIAL.'.status', 1);
@@ -12368,7 +12369,7 @@ public function getscrapcalculationreportdata($status){
     $this->db->join(TBL_FINISHED_GOODS, TBL_BILL_OF_MATERIAL_ITEM.'.part_number= '.TBL_FINISHED_GOODS.'.fin_id');
 
     if($status!='NA'){
-        $this->db->where(TBL_BILL_OF_MATERIAL.'.bom_status', $status); 
+        $this->db->like(TBL_RAWMATERIAL.'.type_of_raw_material', "%".$status."%");
     }
 
     $this->db->where(TBL_BILL_OF_MATERIAL.'.status', 1);

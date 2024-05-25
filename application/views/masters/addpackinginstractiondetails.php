@@ -41,7 +41,7 @@
                                             foreach ($getbuyeritemdetails as $key => $value) { 
                                                 ?>
                                                     <tr>
-                                                        <th scope="row"><?=$i;?></th>
+                                                        <th scope="row"><?=$i++;?></th>
                                                         <td><?=$value['part_number'];?></td>
                                                         <td><?=$value['description'];?></td>
                                                         <td><?=$value['order_oty'];?></td>
