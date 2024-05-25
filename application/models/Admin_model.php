@@ -12355,7 +12355,6 @@ public function fetchscrapcalculationreportdata($params,$status){
 
 public function getscrapcalculationreportdata($status){
 
-  
     /* Bill of material Data */
     $this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_BILL_OF_MATERIAL.'.id as billofmaterialid,'.TBL_FINISHED_GOODS.'.part_number as partno,'.TBL_BUYER_MASTER.'.buyer_name as buyer, 2 as flag,'.TBL_BILL_OF_MATERIAL.'.bom_status,'.TBL_BILL_OF_MATERIAL_ITEM.'.rm_actual_aty as vendor_order_qty_co,'.TBL_BILL_OF_MATERIAL_ITEM.'.vendor_actual_recived_qty as vendor_received_qty_co,'.TBL_VENDOR_PO_MASTER.'.po_number as v_po_number,'.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.sent_qty_pcs,'.TBL_FINISHED_GOODS.'.name,'.TBL_RAWMATERIAL.'.type_of_raw_material');
     $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id= '.TBL_BILL_OF_MATERIAL.'.vendor_name');
@@ -12401,6 +12400,28 @@ public function getscrapcalculationreportdata($status){
 
     return $data;
 }
+
+
+public function check_uniuqe_validation_payment_details($bill_number,$bill_date,$vendor_supplier_name,$vendor_po_number,$supplier_po_number){
+
+    $this->db->select('*');
+    $this->db->where(TBL_PAYMENT_DETAILS.'.bill_date',trim($bill_date));
+    $this->db->where(TBL_PAYMENT_DETAILS.'.bill_number',trim($bill_number));
+
+    if($vendor_supplier_name=='vendor'){
+        $this->db->where(TBL_PAYMENT_DETAILS.'.vendor_po',trim($vendor_po_number));
+    }
+
+    if($vendor_supplier_name=='supplier'){
+        $this->db->where(TBL_PAYMENT_DETAILS.'.supplier_po',trim($supplier_po_number));
+    }
+
+    $query = $this->db->get(TBL_PAYMENT_DETAILS);
+    $rowcount = $query->num_rows();
+    return $rowcount;
+
+}
+
 
 
 

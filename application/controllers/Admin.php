@@ -7695,43 +7695,50 @@ class Admin extends BaseController
                     }
 
 
-
                     /*check if duplicate payment details */
-                    //$check_uniuqe= $this->admin_model->check_uniuqe_validation_payment_details(trim($this->input->post('bill_number')),);
+                    $check_uniuqe= $this->admin_model->check_uniuqe_validation_payment_details(trim($this->input->post('bill_number')),trim($this->input->post('bill_date')),trim($this->input->post('vendor_supplier_name')),trim($this->input->post('vendor_supplier_name')),trim($this->input->post('vendor_po_number')),trim($this->input->post('supplier_po_number')));
 
+                    if( $check_uniuqe > 0){
 
-                    
-                    $data = array(
-                        'payment_details_number' =>  trim($this->input->post('payment_details_number')),
-                        'payment_details_date' => trim($this->input->post('payment_details_date')),
-                         // 'type'=>trim($this->input->post('select_with_po_without_po')),
-                        'supplier_vendor_name' =>  trim($this->input->post('vendor_supplier_name')),
-                        'vendor_id' =>  trim($this->input->post('vendor_name')),
-                        'vendor_po' =>  trim($this->input->post('vendor_po_number')),
-                        'supplier_id' =>  trim($this->input->post('supplier_name')),
-                        'supplier_po' =>  trim($this->input->post('supplier_po_number')),
-                        'po_date' =>  trim($this->input->post('po_date')),
-                        'bill_number' =>  trim($this->input->post('bill_number')),
-                        'bill_date' =>  trim($this->input->post('bill_date')),
-                        'bill_amount' =>  trim($this->input->post('bill_amount')),
-                        'cheque_number' =>  trim($this->input->post('cheque_number')),
-                        'cheque_date' =>  trim($this->input->post('cheque_date')),
-                        'amount_paid'  =>  trim($this->input->post('amount_paid')),
-                        'tds'  =>  trim($this->input->post('tds')),
-                        'debit_note_amount'  =>  trim($this->input->post('debit_note_amount')),
-                        'debit_note_no' =>  trim($this->input->post('debit_note_amount')),
-                        'payment_status' =>  trim($this->input->post('payment_status')),
-                        'remark' =>  trim($this->input->post('remark'))
-                    );
+                        $paymentdetails_response['status'] = 'failure';
+                        $paymentdetails_response['error'] = array('bill_number'=>'Bill Number Alreday Exists','bill_date'=>'Bill Date Alreday Exists');
+                   
+                    }else{
 
-                  
-                    $saveNewdPaymentDetails= $this->admin_model->saveNewdPaymentDetails($payment_details_id_edit,$data);
-                
-                    if($saveNewdPaymentDetails){
-                        $paymentdetails_response['status'] = 'success';
-                        $paymentdetails_response['error'] = array('vendor_supplier_name'=>strip_tags(form_error('vendor_supplier_name')),'payment_details_number'=>strip_tags(form_error('payment_details_number')),'payment_details_date'=>strip_tags(form_error('payment_details_date')),'select_with_po_without_po'=>strip_tags(form_error('select_with_po_without_po')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'remark'=>strip_tags(form_error('remark')),'po_date'=>strip_tags(form_error('po_date')),'bill_number'=>strip_tags(form_error('bill_number')),'bill_date'=>strip_tags(form_error('bill_date')),'bill_amount'=>strip_tags(form_error('bill_amount')),'cheque_number'=>strip_tags(form_error('cheque_number')),'cheque_date'=>strip_tags(form_error('cheque_date')),'amount_paid'=>strip_tags(form_error('amount_paid')),'tds'=>strip_tags(form_error('tds')),'debit_note_amount'=>strip_tags(form_error('debit_note_amount')),'debit_note_no'=>strip_tags(form_error('debit_note_no')),'payment_status'=>strip_tags(form_error('payment_status')));
+                                
+                            $data = array(
+                                'payment_details_number' =>  trim($this->input->post('payment_details_number')),
+                                'payment_details_date' => trim($this->input->post('payment_details_date')),
+                                // 'type'=>trim($this->input->post('select_with_po_without_po')),
+                                'supplier_vendor_name' =>  trim($this->input->post('vendor_supplier_name')),
+                                'vendor_id' =>  trim($this->input->post('vendor_name')),
+                                'vendor_po' =>  trim($this->input->post('vendor_po_number')),
+                                'supplier_id' =>  trim($this->input->post('supplier_name')),
+                                'supplier_po' =>  trim($this->input->post('supplier_po_number')),
+                                'po_date' =>  trim($this->input->post('po_date')),
+                                'bill_number' =>  trim($this->input->post('bill_number')),
+                                'bill_date' =>  trim($this->input->post('bill_date')),
+                                'bill_amount' =>  trim($this->input->post('bill_amount')),
+                                'cheque_number' =>  trim($this->input->post('cheque_number')),
+                                'cheque_date' =>  trim($this->input->post('cheque_date')),
+                                'amount_paid'  =>  trim($this->input->post('amount_paid')),
+                                'tds'  =>  trim($this->input->post('tds')),
+                                'debit_note_amount'  =>  trim($this->input->post('debit_note_amount')),
+                                'debit_note_no' =>  trim($this->input->post('debit_note_amount')),
+                                'payment_status' =>  trim($this->input->post('payment_status')),
+                                'remark' =>  trim($this->input->post('remark'))
+                            );
+
+                        
+                            $saveNewdPaymentDetails= $this->admin_model->saveNewdPaymentDetails($payment_details_id_edit,$data);
+                        
+                            if($saveNewdPaymentDetails){
+                                $paymentdetails_response['status'] = 'success';
+                                $paymentdetails_response['error'] = array('vendor_supplier_name'=>strip_tags(form_error('vendor_supplier_name')),'payment_details_number'=>strip_tags(form_error('payment_details_number')),'payment_details_date'=>strip_tags(form_error('payment_details_date')),'select_with_po_without_po'=>strip_tags(form_error('select_with_po_without_po')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'remark'=>strip_tags(form_error('remark')),'po_date'=>strip_tags(form_error('po_date')),'bill_number'=>strip_tags(form_error('bill_number')),'bill_date'=>strip_tags(form_error('bill_date')),'bill_amount'=>strip_tags(form_error('bill_amount')),'cheque_number'=>strip_tags(form_error('cheque_number')),'cheque_date'=>strip_tags(form_error('cheque_date')),'amount_paid'=>strip_tags(form_error('amount_paid')),'tds'=>strip_tags(form_error('tds')),'debit_note_amount'=>strip_tags(form_error('debit_note_amount')),'debit_note_no'=>strip_tags(form_error('debit_note_no')),'payment_status'=>strip_tags(form_error('payment_status')));
+                            }
+
                     }
-                    
+                                      
                 }
              echo json_encode($paymentdetails_response);
         }else{
@@ -16259,7 +16266,7 @@ public function downloadenquiryformdata($id){
 
             $html.= '<tr style="text-align:left;border: 1px solid;">';
             $html.= '<td style="text-align:left;border: 1px solid;">Raw Material</td>';
-            $html.= '<td style="text-align:left;border: 1px solid;">'.$value['name'].'</td>';
+            $html.= '<td style="text-align:left;border: 1px solid;">'.$value['rm_description'].'</td>';
             $html.= '<td style="text-align:left;border: 1px solid;"></td>';
             $html.= '<td style="text-align:left;border: 1px solid;"></td>';
             $html.= '<td style="text-align:left;border: 1px solid;"></td>';
