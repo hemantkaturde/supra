@@ -7696,7 +7696,7 @@ class Admin extends BaseController
 
 
                     /*check if duplicate payment details */
-                    $check_uniuqe= $this->admin_model->check_uniuqe_validation_payment_details(trim($this->input->post('bill_number')),trim($this->input->post('bill_date')),trim($this->input->post('vendor_supplier_name')),trim($this->input->post('vendor_supplier_name')),trim($this->input->post('vendor_po_number')),trim($this->input->post('supplier_po_number')));
+                    $check_uniuqe= $this->admin_model->check_uniuqe_validation_payment_details(trim($this->input->post('bill_number')),trim($this->input->post('bill_date')),trim($this->input->post('vendor_supplier_name')),trim($this->input->post('vendor_po_number')),trim($this->input->post('supplier_po_number')));
 
                     if( $check_uniuqe > 0){
 
