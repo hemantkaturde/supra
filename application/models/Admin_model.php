@@ -12248,18 +12248,27 @@ public function fetchscrapcalculationreportcount($params,$status){
     $this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_BILL_OF_MATERIAL.'.id as billofmaterialid,'.TBL_FINISHED_GOODS.'.part_number as partno,'.TBL_BUYER_MASTER.'.buyer_name as buyer, 2 as flag,'.TBL_BILL_OF_MATERIAL.'.bom_status,'.TBL_BILL_OF_MATERIAL_ITEM.'.rm_actual_aty as vendor_order_qty_co,'.TBL_BILL_OF_MATERIAL_ITEM.'.vendor_actual_recived_qty as vendor_received_qty_co,'.TBL_VENDOR_PO_MASTER.'.po_number as v_po_number');
     $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id= '.TBL_BILL_OF_MATERIAL.'.vendor_name');
     $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id= '.TBL_BILL_OF_MATERIAL.'.vendor_po_number');
+    $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.po_number= '.TBL_BILL_OF_MATERIAL.'.supplier_po_number');
+    $this->db->join(TBL_SUPPLIER_PO_CONFIRMATION, TBL_SUPPLIER_PO_CONFIRMATION.'.supplier_po_number= '.TBL_SUPPLIER_PO_MASTER.'.id');
+    $this->db->join(TBL_SUPPLIER_PO_CONFIRMATION_ITEM, TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.supplier_po_confirmation_id= '.TBL_SUPPLIER_PO_CONFIRMATION.'.id');
+    $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id= '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.part_number_id');
     $this->db->join(TBL_BUYER_MASTER, TBL_BILL_OF_MATERIAL.'.buyer_name= '.TBL_BUYER_MASTER.'.buyer_id');
     $this->db->join(TBL_BILL_OF_MATERIAL_ITEM, TBL_BILL_OF_MATERIAL.'.id= '.TBL_BILL_OF_MATERIAL_ITEM.'.bom_id');
     $this->db->join(TBL_FINISHED_GOODS, TBL_BILL_OF_MATERIAL_ITEM.'.part_number= '.TBL_FINISHED_GOODS.'.fin_id');
 
     if($params['search']['value'] != "") 
     {
-        $this->db->where("(".TBL_BILL_OF_MATERIAL.".bom_number LIKE '%".$params['search']['value']."%'");
-        $this->db->or_where(TBL_BILL_OF_MATERIAL.".date LIKE '%".$params['search']['value']."%'");
-        $this->db->or_where(TBL_BILL_OF_MATERIAL.".po_number LIKE '%".$params['search']['value']."%'");
-        $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
-        $this->db->or_where(TBL_BILL_OF_MATERIAL.".bom_status LIKE '%".$params['search']['value']."%'");
-        $this->db->or_where(TBL_BILL_OF_MATERIAL.".part_number LIKE '%".$params['search']['value']."%')");
+        $this->db->where("(".TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_VENDOR_PO_MASTER.".date LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_RAWMATERIAL.".type_of_raw_material LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_SUPPLIER_PO_CONFIRMATION_ITEM.".sent_qty_pcs LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_BILL_OF_MATERIAL_ITEM.".vendor_actual_recived_qty LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_BILL_OF_MATERIAL_ITEM.".scrap_in_kgs LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_BILL_OF_MATERIAL_ITEM.".total_neight_weight LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_BILL_OF_MATERIAL_ITEM.".net_weight_per_pcs LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_BILL_OF_MATERIAL_ITEM.".rm_actual_aty LIKE '%".$params['search']['value']."%')");
     }
 
    
@@ -12281,15 +12290,10 @@ public function fetchscrapcalculationreportdata($params,$status){
     $this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_BILL_OF_MATERIAL.'.id as billofmaterialid,'.TBL_FINISHED_GOODS.'.part_number as partno,'.TBL_BUYER_MASTER.'.buyer_name as buyer, 2 as flag,'.TBL_BILL_OF_MATERIAL.'.bom_status,'.TBL_BILL_OF_MATERIAL_ITEM.'.rm_actual_aty as vendor_order_qty_co,'.TBL_BILL_OF_MATERIAL_ITEM.'.vendor_actual_recived_qty as vendor_received_qty_co,'.TBL_VENDOR_PO_MASTER.'.po_number as v_po_number,'.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.sent_qty_pcs,'.TBL_FINISHED_GOODS.'.name,'.TBL_RAWMATERIAL.'.type_of_raw_material');
     $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id= '.TBL_BILL_OF_MATERIAL.'.vendor_name');
     $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id= '.TBL_BILL_OF_MATERIAL.'.vendor_po_number');
-
     $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.po_number= '.TBL_BILL_OF_MATERIAL.'.supplier_po_number');
-
     $this->db->join(TBL_SUPPLIER_PO_CONFIRMATION, TBL_SUPPLIER_PO_CONFIRMATION.'.supplier_po_number= '.TBL_SUPPLIER_PO_MASTER.'.id');
     $this->db->join(TBL_SUPPLIER_PO_CONFIRMATION_ITEM, TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.supplier_po_confirmation_id= '.TBL_SUPPLIER_PO_CONFIRMATION.'.id');
-
     $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id= '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.part_number_id');
-
-
     $this->db->join(TBL_BUYER_MASTER, TBL_BILL_OF_MATERIAL.'.buyer_name= '.TBL_BUYER_MASTER.'.buyer_id');
     $this->db->join(TBL_BILL_OF_MATERIAL_ITEM, TBL_BILL_OF_MATERIAL.'.id= '.TBL_BILL_OF_MATERIAL_ITEM.'.bom_id');
     $this->db->join(TBL_FINISHED_GOODS, TBL_BILL_OF_MATERIAL_ITEM.'.part_number= '.TBL_FINISHED_GOODS.'.fin_id');
@@ -12298,12 +12302,17 @@ public function fetchscrapcalculationreportdata($params,$status){
 
     if($params['search']['value'] != "") 
     {
-        $this->db->where("(".TBL_BILL_OF_MATERIAL.".bom_number LIKE '%".$params['search']['value']."%'");
-        $this->db->or_where(TBL_BILL_OF_MATERIAL.".date LIKE '%".$params['search']['value']."%'");
-        $this->db->or_where(TBL_BILL_OF_MATERIAL.".po_number LIKE '%".$params['search']['value']."%'");
-        $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
-        $this->db->or_where(TBL_BILL_OF_MATERIAL.".bom_status LIKE '%".$params['search']['value']."%'");
-        $this->db->or_where(TBL_BILL_OF_MATERIAL.".part_number LIKE '%".$params['search']['value']."%')");
+        $this->db->where("(".TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_VENDOR_PO_MASTER.".date LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_RAWMATERIAL.".type_of_raw_material LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_SUPPLIER_PO_CONFIRMATION_ITEM.".sent_qty_pcs LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_BILL_OF_MATERIAL_ITEM.".vendor_actual_recived_qty LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_BILL_OF_MATERIAL_ITEM.".scrap_in_kgs LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_BILL_OF_MATERIAL_ITEM.".total_neight_weight LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_BILL_OF_MATERIAL_ITEM.".net_weight_per_pcs LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_BILL_OF_MATERIAL_ITEM.".rm_actual_aty LIKE '%".$params['search']['value']."%')");
     }
 
     if($status!='NA'){

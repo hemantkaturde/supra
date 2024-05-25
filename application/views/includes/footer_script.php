@@ -20002,14 +20002,14 @@
 <script type="text/javascript">
   
 	$(document).ready(function() {
-		$("#view_current_order_status").dataTable().fnDestroy();
+		$("#view_scrap_calculation_report").dataTable().fnDestroy();
 		var status = $('#status').val();
 		getallCurrentOrserReport(status);
 	});
 
 	$(document).on('change','#status',function(e){  
-		$("#view_current_order_status").dataTable().fnDestroy();
 		e.preventDefault();
+		$("#view_scrap_calculation_report").dataTable().fnDestroy();
 		var status = $('#status').val();
 		getallCurrentOrserReport(status);
 	});
