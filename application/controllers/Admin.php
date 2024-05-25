@@ -16354,6 +16354,73 @@ public function productionstatusreport(){
 }
 
 
+public function downlaod_scrap_calculation_report($status) {
+
+    
+    // create file name
+    $fileName = 'Scrap_Calculation_Report_Report -'.date('d-m-Y').'.xlsx';  
+    // load excel library
+    $empInfo = $this->admin_model->getscrapcalculationreportdata($status);
+    $objPHPExcel = new PHPExcel();
+    $objPHPExcel->setActiveSheetIndex(0);
+    // set Header
+    $objPHPExcel->getActiveSheet()->SetCellValue('A1', 'Vendor Name');
+    $objPHPExcel->getActiveSheet()->SetCellValue('B1', 'Vendor PO NUmber');
+    $objPHPExcel->getActiveSheet()->SetCellValue('C1', 'Vendor PO Date');
+    $objPHPExcel->getActiveSheet()->SetCellValue('D1', 'FG Part No'); 
+    $objPHPExcel->getActiveSheet()->SetCellValue('E1', 'RM Type');
+    $objPHPExcel->getActiveSheet()->SetCellValue('F1', 'Raw Material Actual Qty');   
+    $objPHPExcel->getActiveSheet()->SetCellValue('G1', 'Raw Material In pcs');  
+    $objPHPExcel->getActiveSheet()->SetCellValue('H1', 'Vendor Actual Received Qty');  
+    $objPHPExcel->getActiveSheet()->SetCellValue('I1', 'Scrap In Kgs');  
+    $objPHPExcel->getActiveSheet()->SetCellValue('J1', 'Supra`s Total Net weight');  
+    $objPHPExcel->getActiveSheet()->SetCellValue('K1', 'Net Weight Per pcs');  
+
+
+    // set Row
+    $rowCount = 2;
+    foreach ($empInfo as $element) {
+        $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $element['vendorname']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $element['bom_number']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $element['date']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['fg_part_number']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['rm_type']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['rm_actual_aty']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['raw_material_in_pcs']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $element['vendor_actual_recived_qty']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, $element['scrap_in_kgs']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('J' . $rowCount, $element['supras_total_net_weight']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, $element['net_weight_per_pcs']);
+              
+        $rowCount++;
+    }
+
+    foreach(range('A','K') as $columnID) {
+        $objPHPExcel->getActiveSheet()->getColumnDimension($columnID)->setAutoSize(true);
+    }
+    /*********************Autoresize column width depending upon contents END***********************/
+    
+    $objPHPExcel->getActiveSheet()->getStyle('A1:K1')->getFont()->setBold(true); //Make heading font bold
+    
+    /*********************Add color to heading START**********************/
+    $objPHPExcel->getActiveSheet()
+                ->getStyle('A1:K1')
+                ->getFill()
+                ->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
+                ->getStartColor()
+                ->setARGB('99ff99');
+
+
+    $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
+      
+    header('Content-Type: application/vnd.ms-excel');
+    header("Content-Disposition: attachment;Filename=$fileName.xls");
+    header('Cache-Control: max-age=0');
+    $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+    $objWriter->save('php://output');
+
+}
+
 
 }
 

@@ -20049,17 +20049,9 @@
 	$(document).on('click','#export_to_excel',function(e){
 		e.preventDefault();
 
-		var vendor_name       =    $('#vendor_name').val();
 		var status         =    $("#status").val();
 
-		if(vendor_name){
-			var vendor_name_value = vendor_name;
-		}else{
-			var vendor_name_value = 'NA';
-		}
-
 		if(status){
-
 			var status_value = status;
 		}else{
 
@@ -20067,7 +20059,7 @@
 		}
 
 		$.ajax({
-			url : "<?php echo ADMIN_PATH;?>admin/downlaod_current_orderstatus/"+vendor_name_value+"/"+status_value,
+			url : "<?php echo ADMIN_PATH;?>admin/downlaod_scrap_calculation_report/"+status_value,
 			type: "POST",
 			// data : {'hospitals' : hospitals, 'driver' : driver,'ride_start':ride_start,'ride_stop':ride_stop},
 			success: function(data, textStatus, jqXHR)
@@ -20081,7 +20073,7 @@
 				else
 				{
 					$(".report_type_error").html("");
-					window.location.href = "<?php echo ADMIN_PATH;?>admin/downlaod_current_orderstatus/"+vendor_name+"/"+status;
+					window.location.href = "<?php echo ADMIN_PATH;?>admin/downlaod_scrap_calculation_report/"+status_value;
 				}
 			},
 			error: function (jqXHR, textStatus, errorThrown)
