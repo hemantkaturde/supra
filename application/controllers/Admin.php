@@ -7701,11 +7701,10 @@ class Admin extends BaseController
                     if( $check_uniuqe > 0){
 
                         $paymentdetails_response['status'] = 'failure';
-                        $paymentdetails_response['error'] = array('bill_number'=>'Bill Number Alreday Exists','bill_date'=>'Bill Date Alreday Exists');
+                        $paymentdetails_response['error'] = array('bill_number'=>'Bill Number Alreday Exists','bill_date'=>'Bill Date Alreday Exists','vendor_po_number'=>'Vendor PO Number Alreday Exists','supplier_po_number'=>'Supplier PO Number Alreday Exists');
                    
                     }else{
 
-                                
                             $data = array(
                                 'payment_details_number' =>  trim($this->input->post('payment_details_number')),
                                 'payment_details_date' => trim($this->input->post('payment_details_date')),
