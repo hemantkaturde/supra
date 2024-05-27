@@ -16355,14 +16355,6 @@ public function fetchscrapcalculationreport($status){
 }
 
 
-public function productionstatusreport(){
-    $process = 'Production Status Report';
-    $processFunction = 'Admin/productionstatusreport';
-    $this->global['pageTitle'] = 'Production Status Report';
-    $data['vendorList']= $this->admin_model->fetchALLvendorList();
-    $this->loadViews("masters/productionstatusreport", $this->global, $data, NULL);  
-}
-
 
 public function downlaod_scrap_calculation_report($status) {
 
@@ -16428,6 +16420,43 @@ public function downlaod_scrap_calculation_report($status) {
     header('Cache-Control: max-age=0');
     $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
     $objWriter->save('php://output');
+
+}
+
+
+public function productionstatusreport(){
+    $process = 'Production Status Report';
+    $processFunction = 'Admin/productionstatusreport';
+    $this->global['pageTitle'] = 'Production Status Report';
+    $data['vendorList']= $this->admin_model->fetchALLvendorList();
+    $this->loadViews("masters/productionstatusreport", $this->global, $data, NULL);  
+}
+
+
+
+public function fetchproductionstatusreport($vendor_name,$status){
+
+    $params = $_REQUEST;
+    $totalRecords = $this->admin_model->fetchproductionstatusreportcount($params,$vendor_name,$status); 
+    $queryRecords = $this->admin_model->fetchproductionstatusreportdata($params,$vendor_name,$status); 
+
+    $data = array();
+    foreach ($queryRecords as $key => $value)
+    {
+        $i = 0;
+        foreach($value as $v)
+        {
+            $data[$key][$i] = $v;
+            $i++;
+        }
+    }
+    $json_data = array(
+        "draw"            => intval( $params['draw'] ),   
+        "recordsTotal"    => intval( $totalRecords ),  
+        "recordsFiltered" => intval($totalRecords),
+        "data"            => $data   // total data array
+        );
+    echo json_encode($json_data);
 
 }
 

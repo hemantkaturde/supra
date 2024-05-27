@@ -61,17 +61,20 @@
                             
 
                                     <div class="panel-body">
-                                        <table width="100%" class="table table-striped table-bordered table-hover" id="view_current_order_status">
+                                        <table width="100%" class="table table-striped table-bordered table-hover" id="view_production_status_report">
                                             <thead>
                                                 <tr style="background-color:#3c8dbc !important;color:#fff">
+                                                    <th>Vendor Name</th>
                                                     <th>Vendor PO Number</th>
                                                     <th>Vendor PO Date</th>
                                                     <th>FG Part No</th>
-                                                    <th>Order Qty</th>
-                                                    <th>Received Qty</th>
+                                                    <th>FG Part Description</th>
+                                                    <th>FG Part Order Qty</th>
+                                                    <th>FG Part Expected Qty</th>
+                                                    <th>FG Part Received Qty</th>
+                                                    <th>Vendor Delivery Date</th>
                                                     <th>Buyer Name</th>
-                                                    <th>Status</th>
-                                                    <th>Form Name</th>
+                                                    <th>Buyer PO No</th>
                                                 </tr>
                                             </thead>
                                             <tbody>

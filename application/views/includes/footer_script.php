@@ -20088,3 +20088,117 @@
 </script>  
 <?php } ?>
 
+
+
+<?php if($pageTitle=='Production Status Report'){ ?>
+
+<script type="text/javascript">
+  
+	$(document).ready(function() {
+		$("#view_production_status_report").dataTable().fnDestroy();
+		var vendor_name = $('#vendor_name').val();
+		var status = $('#status').val();
+		getallProductionstatusreport($("#vendor_name").val(), $("#status").val());
+	});
+
+	$(document).on('change','#vendor_name',function(e){  
+		$("#view_production_status_report").dataTable().fnDestroy();
+			e.preventDefault();
+			var vendor_name = $('#vendor_name').val();
+			var status = $('#status').val();
+			getallProductionstatusreport($("#vendor_name").val(), $("#status").val());
+	});
+
+	$(document).on('change','#status',function(e){  
+		$("#view_production_status_report").dataTable().fnDestroy();
+
+		e.preventDefault();
+		var vendor_name = $('#vendor_name').val();
+		var status = $('#status').val();
+		getallProductionstatusreport($("#vendor_name").val(), $("#status").val());
+	});
+
+	function getallProductionstatusreport(vendor_name,status){
+
+			var dt = $('#view_production_status_report').DataTable({
+				"columnDefs": [ 
+					{ className: "details-control", "targets": [ 0 ] },
+					{ "width": "10%", "targets": 0 },
+					{ "width": "10%", "targets": 1 },
+					{ "width": "10%", "targets": 2 },
+					{ "width": "10%", "targets": 3 },
+					{ "width": "10%", "targets": 4 },
+					{ "width": "10%", "targets": 5 },
+					{ "width": "10%", "targets": 6 },
+					{ "width": "10%", "targets": 7 },
+					{ "width": "10%", "targets": 8 },
+					{ "width": "10%", "targets": 9 },
+					{ "width": "10%", "targets": 10 },
+				],
+				responsive: true,
+				"oLanguage": {
+					"sEmptyTable": "<i>No Production Status Found.</i>",
+				}, 
+				"bSort" : false,
+				"bFilter":true,
+				"bLengthChange": true,
+				"iDisplayLength": 10,   
+				"bProcessing": true,
+				"serverSide": true,
+				"ajax":{
+					url :"<?php echo base_url();?>admin/fetchproductionstatusreport/"+vendor_name+"/"+status,
+					type: "post",
+				},
+			});
+
+	}
+	
+	$(document).on('click','#export_to_excel',function(e){
+		e.preventDefault();
+
+		var vendor_name       =    $('#vendor_name').val();
+		var status         =    $("#status").val();
+
+		if(vendor_name){
+			var vendor_name_value = vendor_name;
+		}else{
+			var vendor_name_value = 'NA';
+		}
+
+		if(status){
+
+			var status_value = status;
+		}else{
+
+			var status_value = 'NA';
+		}
+
+		$.ajax({
+			url : "<?php echo ADMIN_PATH;?>admin/downlaod_current_orderstatus/"+vendor_name_value+"/"+status_value,
+			type: "POST",
+			// data : {'hospitals' : hospitals, 'driver' : driver,'ride_start':ride_start,'ride_stop':ride_stop},
+			success: function(data, textStatus, jqXHR)
+			{
+				$(".loader_ajax").hide();
+				if(data == "failure")
+				{
+					$(".report_type_error").html("");
+					alert('No data fond');
+				}
+				else
+				{
+					$(".report_type_error").html("");
+					window.location.href = "<?php echo ADMIN_PATH;?>admin/downlaod_current_orderstatus/"+vendor_name+"/"+status;
+				}
+			},
+			error: function (jqXHR, textStatus, errorThrown)
+			{
+				   alert('No data fond');
+				$(".loader_ajax").hide();
+			}
+		});
+	   return false;
+	});
+
+</script>  
+<?php } ?>
