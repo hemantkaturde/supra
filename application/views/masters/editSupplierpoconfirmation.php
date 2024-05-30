@@ -141,8 +141,8 @@
                                                 <label for="material_sent">Material Sent (Material Dispatch or Not)</label>
                                                 <select class="form-control" name="material_sent" id="material_sent">
                                                     <option st-id="" value="">Select Material Sent</option>
-                                                    <option st-id="" value="Yes">Yes</option>
-                                                    <option st-id="" value="No">No</option>
+                                                    <option st-id="" value="Yes" <?php if($getSupplierpoconfirmationdetails['material_sent']=='Yes'){ echo 'selected';} ?>>Yes</option>
+                                                    <option st-id="" value="No"  <?php if($getSupplierpoconfirmationdetails['material_sent']=='No'){ echo 'selected';} ?>>No</option>
                                                 </select>
                                             <p class="error material_sent_error"></p>
                                         </div>
@@ -154,8 +154,8 @@
                                                 <label for="material_receipt_confirmation">Material Receipt Confirmation </label>
                                                 <select class="form-control" name="material_receipt_confirmation" id="material_receipt_confirmation">
                                                     <option st-id="" value="">Select >Material Receipt Confirmation</option>
-                                                    <option st-id="" value="Pending">Pending</option>
-                                                    <option st-id="" value="Done">Done</option>
+                                                    <option st-id="" value="Pending" <?php if($getSupplierpoconfirmationdetails['material_receipt_confirmation']=='Pending'){ echo 'selected';} ?>>Pending</option>
+                                                    <option st-id="" value="Done" <?php if($getSupplierpoconfirmationdetails['material_receipt_confirmation']=='Done'){ echo 'selected';} ?>>Done</option>
                                         
                                                 </select>
                                             <p class="error material_receipt_confirmation_error"></p>
