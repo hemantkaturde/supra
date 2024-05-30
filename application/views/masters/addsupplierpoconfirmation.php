@@ -380,6 +380,36 @@
                                         </div>
                                     </div>
 
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                                <label for="material_sent">Materail Sent </label>
+                                                <select class="form-control" name="material_sent" id="material_sent">
+                                                    <option st-id="" value="">Select Supplier Name</option>
+                                                    <option st-id="" value="Yes">Yes</option>
+                                                    <option st-id="" value="No">No</option>
+                                                </select>
+                                            <p class="error material_sent_error"></p>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                                <label for="material_receipt_confirmation">Material Receipt Confirmation </label>
+                                                <select class="form-control" name="material_receipt_confirmation" id="material_receipt_confirmation">
+                                                    <option st-id="" value="">Select Supplier Name</option>
+                                                    <option st-id="" value="Pending">Pending</option>
+                                                    <option st-id="" value="Done">Done</option>
+                                        
+                                                </select>
+                                            <p class="error material_receipt_confirmation_error"></p>
+                                        </div>
+                                    </div>
+
+
+
                                     <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="remark">Remark</label>

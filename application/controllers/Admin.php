@@ -3189,6 +3189,8 @@ class Admin extends BaseController
             $this->form_validation->set_rules('po_confirmed','PO Confirmed','trim|required');
             $this->form_validation->set_rules('confirmed_date','Confirmed Date','trim|required');
             $this->form_validation->set_rules('confirmed_with','Confirmed With','trim|required');
+            $this->form_validation->set_rules('confirmed_with','Material Sent','trim');
+            $this->form_validation->set_rules('material_receipt_confirmation','Material Receipt Confirmation','trim');
             $this->form_validation->set_rules('remark','Remark','trim');
 
 
@@ -3211,6 +3213,8 @@ class Admin extends BaseController
                     'po_confirmed' =>    trim($this->input->post('po_confirmed')),
                     'confirmed_date' =>    trim($this->input->post('confirmed_date')),
                     'confirmed_with' =>    trim($this->input->post('confirmed_with')),
+                    'material_sent' =>    trim($this->input->post('material_sent')),
+                    'material_receipt_confirmation' =>    trim($this->input->post('material_receipt_confirmation')),
                     'remark' =>    trim($this->input->post('remark')),
                 );
 
