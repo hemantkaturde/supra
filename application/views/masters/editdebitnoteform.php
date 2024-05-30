@@ -188,20 +188,36 @@
                                             </div>
                                     </div>
 
+                                    <?php 
+                                     if($getdebitnoteditailsdata[0]['tds_amount']){
+
+                                        $tds =$getdebitnoteditailsdata[0]['tds_amount'];
+                                     }else{
+                                        $tds =0;
+                                     }
+                                    ?>
 
                                     <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="tds_amount">TDS Amount <span class="required">*</span></label>
-                                                  <input type="text" class="form-control"  value="<?=$getdebitnoteditailsdata[0]['tds_amount'] ?>" id="tds_amount" name="tds_amount" required>
+                                                  <input type="text" class="form-control"  value="<?=$tds?>" id="tds_amount" name="tds_amount" required>
                                                 <p class="error tds_amount_error"></p>
                                             </div>
                                     </div>
                                     
+                                    <?php 
+                                     if($getdebitnoteditailsdata[0]['freight_amount_charge']){
+
+                                        $cr =$getdebitnoteditailsdata[0]['freight_amount_charge'];
+                                     }else{
+                                        $cr =0;
+                                     }
+                                    ?>
 
                                     <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="freight_amount_charge">Courier/Return Charges <span class="required">*</span></label>
-                                                  <input type="text" class="form-control"  value="<?=$getdebitnoteditailsdata[0]['freight_amount_charge'] ?>" id="freight_amount_charge" name="freight_amount_charge" required>
+                                                  <input type="text" class="form-control"  value="<?=$cr ?>" id="freight_amount_charge" name="freight_amount_charge" required>
                                                 <p class="error freight_amount_charge_error"></p>
                                             </div>
                                     </div>
