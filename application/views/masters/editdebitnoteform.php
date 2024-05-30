@@ -230,7 +230,7 @@
                                     <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="freight_amount_charge">Grand Total <span class="required">*</span></label>
-                                                  <input type="text" class="form-control"  value="<?=$totalDebitAndokQty['total_normal_gst_value_plus_total']?>" id="grand_total_main" name="grand_total_main" required>
+                                                  <input type="text" class="form-control"  value="<?=round($totalDebitAndokQty['total_normal_gst_value_plus_total'],2)?>" id="grand_total_main" name="grand_total_main" required>
                                                 <p class="error grand_total_main_error"></p>
                                             </div>
                                     </div>
