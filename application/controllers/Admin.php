@@ -7669,7 +7669,7 @@ class Admin extends BaseController
                 $this->form_validation->set_rules('vendor_po_number','Vendor PO Number','trim');
                 $this->form_validation->set_rules('supplier_name','Supplier Name','trim');
                 $this->form_validation->set_rules('supplier_po_number','Supplier PO Number','trim');
-                $this->form_validation->set_rules('po_date','PO Date','trim|required');
+                $this->form_validation->set_rules('po_date','PO Date','trim');
                 $this->form_validation->set_rules('remark','Remark','trim');
                 $this->form_validation->set_rules('bill_number','Bill Number','trim');
                 $this->form_validation->set_rules('bill_date','Bill Date','trim');

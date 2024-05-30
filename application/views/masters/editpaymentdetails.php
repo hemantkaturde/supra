@@ -144,7 +144,7 @@
 
                                  <div class="col-md-12">
                                     <div class="form-group">
-                                       <label for="po_date">PO Date <span class="required">*</span></label>
+                                       <label for="po_date">PO Date</label>
                                        <input type="text" class="form-control datepicker" value="<?=$getPaymentdetails[0]['po_date']?>" id="po_date" name="po_date" required>
                                        <p class="error po_date_error"></p>
                                     </div>
