@@ -14665,7 +14665,7 @@ public function downlaoddebitnote($id){
                         <div>
                             <p>Dear Sir,</p>
                             <p><b>Sub: Debit Note</b></p>
-                            <p>With reference to the above subject we have debited your account vide your Inv No.'.$getDebitnoteitemdeatilsForInvoice[0]['invoice_no'].' Dated '.$getDebitnoteitemdeatilsForInvoice[0]['invoice_date'].'. 
+                            <p>With reference to the above subject we have debited your account vide your Inv No.'.$getDebitnoteitemdeatilsForInvoice[0]['invoice_no'].' Dated '.date('d-m-Y',strtotime($getDebitnoteitemdeatilsForInvoice[0]['invoice_date'])).'
                                The details are as follows: </p>
                         <div>    
                     </td>  
