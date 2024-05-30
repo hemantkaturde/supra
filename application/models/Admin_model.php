@@ -12203,7 +12203,7 @@ public function checkifsamevendor_or_bill_numberpaymentdetails($payment_details_
 
 public function downloadenquiryformdata($id){
 
-    $this->db->select('*,'.TBL_SUPPLIER.'.supplier_name as suplier_id_name_1,a.supplier_name as suplier_id_name_2,b.supplier_name as suplier_id_name_3,c.supplier_name as suplier_id_name_4,d.supplier_name as suplier_id_name_5,e.vendor_name as vendor_name_1,f.vendor_name as vendor_name_2,g.vendor_name as vendor_name_3,h.vendor_name as vendor_name_4,i.vendor_name as vendor_name_5,'.TBL_ENAUIRY_FORM_ITEM.'.id as enquiry_form_id,'.TBL_ENAUIRY_FORM_ITEM.'.groass_weight as engroass_weight');
+    $this->db->select('*,'.TBL_SUPPLIER.'.supplier_name as suplier_id_name_1,a.supplier_name as suplier_id_name_2,b.supplier_name as suplier_id_name_3,c.supplier_name as suplier_id_name_4,d.supplier_name as suplier_id_name_5,e.vendor_name as vendor_name_1,f.vendor_name as vendor_name_2,g.vendor_name as vendor_name_3,h.vendor_name as vendor_name_4,i.vendor_name as vendor_name_5,'.TBL_ENAUIRY_FORM_ITEM.'.id as enquiry_form_id,'.TBL_ENAUIRY_FORM_ITEM.'.groass_weight as engroass_weight,LEAST(suplier_rate_1,suplier_rate_2,suplier_rate_3,suplier_rate_4,suplier_rate_5 ) as min_number');
     $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_ENAUIRY_FORM_ITEM.'.part_number');
     $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_ENAUIRY_FORM_ITEM.'.suplier_id_1','left');
     $this->db->join(TBL_SUPPLIER.' as a', 'a.sup_id = '.TBL_ENAUIRY_FORM_ITEM.'.suplier_id_2','left');
