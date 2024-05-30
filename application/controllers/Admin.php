@@ -14797,12 +14797,12 @@ public function downlaoddebitnotevendor($id){
 
         $CartItem .= '
                 <tr style="border-left: 1px solid black;border-right: 1px solid black;">
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['name'].'<br/>'.$value['fgpart'].'</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['name'].'<br/>'.$value['fgpart'].'</td> 
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['invoice_no'].'<br/>'.date('d-m-Y',strtotime($value['invoice_date'])).'</br></td> 
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['invoice_qty'].' pcs<br/> Recd Qty '.$value['received_quantity'].' pcs</td>
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['ok_qty'].' pcs</td>
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['less_quantity'].' pcs</td> 
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rejected_quantity'].' pcs</td>    
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['invoice_qty'].' '.$value['vendor_po_unit'].'<br/> Recd Qty '.$value['received_quantity'].' '.$value['vendor_po_unit'].'</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['ok_qty'].' '.$value['vendor_po_unit'].'</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['less_quantity'].' '.$value['vendor_po_unit'].'</td> 
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rejected_quantity'].' '.$value['vendor_po_unit'].'</td>    
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rate'].'</td>    
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.round($value['debit_amount'],2).'</td>    
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$paid_amount.'</td>
@@ -14924,7 +14924,7 @@ public function downlaoddebitnotevendor($id){
                         <div>
                             <p>Dear Sir,</p>
                             <p><b>Sub: Debit Note</b></p>
-                            <p>With reference to the above subject we have debited your account vide your Inv No. GT-016 Dated 23-Sep-2023. 
+                            <p>With reference to the above subject we have debited your account vide your Inv No.'.$getDebitnoteitemdeatilsForInvoice[0]['invoice_no'].' Dated '.date('d-m-Y',strtotime($getDebitnoteitemdeatilsForInvoice[0]['invoice_date'])).'
                                The details are as follows: </p>
                         <div>    
                     </td>  
