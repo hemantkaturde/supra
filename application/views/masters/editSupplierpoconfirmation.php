@@ -153,7 +153,7 @@
                                         <div class="form-group">
                                                 <label for="material_receipt_confirmation">Material Receipt Confirmation </label>
                                                 <select class="form-control" name="material_receipt_confirmation" id="material_receipt_confirmation">
-                                                    <option st-id="" value="">Select >Material Receipt Confirmation</option>
+                                                    <option st-id="" value="">Select Material Receipt Confirmation</option>
                                                     <option st-id="" value="Pending" <?php if($getSupplierpoconfirmationdetails['material_receipt_confirmation']=='Pending'){ echo 'selected';} ?>>Pending</option>
                                                     <option st-id="" value="Done" <?php if($getSupplierpoconfirmationdetails['material_receipt_confirmation']=='Done'){ echo 'selected';} ?>>Done</option>
                                         
