@@ -12422,6 +12422,35 @@ public function check_uniuqe_validation_payment_details($bill_number,$bill_date,
 }
 
 
+public function check_uniuqe_validation_payment_details_update($payment_details_id_edit,$bill_number,$bill_date,$vendor_supplier_name,$vendor_po_number,$supplier_po_number){
+
+     if($payment_details_id_edit){
+
+        $this->db->select('*');
+        $this->db->where(TBL_PAYMENT_DETAILS.'.bill_date',trim($bill_date));
+        $this->db->where(TBL_PAYMENT_DETAILS.'.bill_number',trim($bill_number));
+    
+        if($vendor_supplier_name=='vendor'){
+            $this->db->where(TBL_PAYMENT_DETAILS.'.vendor_po',trim($vendor_po_number));
+        }
+    
+        if($vendor_supplier_name=='supplier'){
+            $this->db->where(TBL_PAYMENT_DETAILS.'.supplier_po',trim($supplier_po_number));
+        }
+    
+        $query = $this->db->get(TBL_PAYMENT_DETAILS);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+     }else{
+
+        return 0;
+     }
+   
+
+}
+
+
+
 public function fetchproductionstatusreportcount($params,$vendor_name,$status){
 
     $this->db->select('*');
