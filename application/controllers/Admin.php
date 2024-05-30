@@ -7697,7 +7697,10 @@ class Admin extends BaseController
                     $check_uniuqe_update_check= $this->admin_model->check_uniuqe_validation_payment_details_update($payment_details_id_edit,trim($this->input->post('bill_number')),trim($this->input->post('bill_date')),trim($this->input->post('vendor_supplier_name')),trim($this->input->post('vendor_po_number')),trim($this->input->post('supplier_po_number')));
 
                     if($check_uniuqe_update_check > 0){
-                        
+                        //$paymentdetails_response['status'] = 'failure';
+                        //$paymentdetails_response['error'] = array('bill_number'=>'Bill Number Alreday Exists','bill_date'=>'Bill Date Alreday Exists','vendor_po_number'=>'Vendor PO Number Alreday Exists','supplier_po_number'=>'Supplier PO Number Alreday Exists');
+                
+                
                         $data = array(
                             'payment_details_number' =>  trim($this->input->post('payment_details_number')),
                             'payment_details_date' => trim($this->input->post('payment_details_date')),
@@ -7728,10 +7731,10 @@ class Admin extends BaseController
                             $paymentdetails_response['status'] = 'success';
                             $paymentdetails_response['error'] = array('vendor_supplier_name'=>strip_tags(form_error('vendor_supplier_name')),'payment_details_number'=>strip_tags(form_error('payment_details_number')),'payment_details_date'=>strip_tags(form_error('payment_details_date')),'select_with_po_without_po'=>strip_tags(form_error('select_with_po_without_po')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'remark'=>strip_tags(form_error('remark')),'po_date'=>strip_tags(form_error('po_date')),'bill_number'=>strip_tags(form_error('bill_number')),'bill_date'=>strip_tags(form_error('bill_date')),'bill_amount'=>strip_tags(form_error('bill_amount')),'cheque_number'=>strip_tags(form_error('cheque_number')),'cheque_date'=>strip_tags(form_error('cheque_date')),'amount_paid'=>strip_tags(form_error('amount_paid')),'tds'=>strip_tags(form_error('tds')),'debit_note_amount'=>strip_tags(form_error('debit_note_amount')),'debit_note_no'=>strip_tags(form_error('debit_note_no')),'payment_status'=>strip_tags(form_error('payment_status')));
                         }
-
+                
+                
                     }else{
 
-                
                     /*check if duplicate payment details */
                     $check_uniuqe= $this->admin_model->check_uniuqe_validation_payment_details(trim($this->input->post('bill_number')),trim($this->input->post('bill_date')),trim($this->input->post('vendor_supplier_name')),trim($this->input->post('vendor_po_number')),trim($this->input->post('supplier_po_number')));
 
