@@ -138,9 +138,9 @@
 
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                                <label for="material_sent">Materail Sent (Materail Dispatch or Not)</label>
+                                                <label for="material_sent">Material Sent (Material Dispatch or Not)</label>
                                                 <select class="form-control" name="material_sent" id="material_sent">
-                                                    <option st-id="" value="">Select Materail Sent</option>
+                                                    <option st-id="" value="">Select Material Sent</option>
                                                     <option st-id="" value="Yes">Yes</option>
                                                     <option st-id="" value="No">No</option>
                                                 </select>
