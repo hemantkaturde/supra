@@ -3220,7 +3220,7 @@ class Admin_model extends CI_Model
         return $data;
     }
 
-    public function getincomingdeatilscount(){
+    public function getincomingdeatilscount($params){
 
         $this->db->select('*,'.TBL_INCOMING_DETAILS.'.vendor_name as vendorname');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id= '.TBL_INCOMING_DETAILS.'.vendor_name');
@@ -3240,7 +3240,7 @@ class Admin_model extends CI_Model
 
     }
 
-    public function getincomingdeatilsdata(){
+    public function getincomingdeatilsdata($params){
 
         $this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_INCOMING_DETAILS.'.id as incomigid');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id= '.TBL_INCOMING_DETAILS.'.vendor_name');
