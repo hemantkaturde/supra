@@ -1166,7 +1166,7 @@ class Admin_model extends CI_Model
     
     public function getSupplierpodata($params){
 
-        $this->db->select('*,'.TBL_SUPPLIER.'.supplier_name as sup_name,'.TBL_BUYER_PO_MASTER.'.buyer_po_number as bypo,'.TBL_SUPPLIER_PO_MASTER.'.id as supplierpoid');
+        $this->db->select('*,'.TBL_SUPPLIER.'.supplier_name as sup_name,'.TBL_BUYER_PO_MASTER.'.buyer_po_number as bypo,'.TBL_SUPPLIER_PO_MASTER.'.id as supplierpoid,'.TBL_SUPPLIER_PO_MASTER.'date as supdate');
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id  = '.TBL_SUPPLIER_PO_MASTER.'.buyer_name');
         $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id  = '.TBL_SUPPLIER_PO_MASTER.'.supplier_name');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_SUPPLIER_PO_MASTER.'.vendor_name');
@@ -1196,7 +1196,7 @@ class Admin_model extends CI_Model
             foreach ($fetch_result as $key => $value)
             {
                 $data[$counter]['po_number'] = $value['po_number'];
-                $data[$counter]['date'] = $value['date'];
+                $data[$counter]['date'] = $value['supdate'];
                 $data[$counter]['sup_name'] = $value['sup_name'];
                 $data[$counter]['buyer_name'] = $value['buyer_name'];
                 $data[$counter]['buyer_po'] = $value['sales_order_number'].'-'.$value['bypo'];
