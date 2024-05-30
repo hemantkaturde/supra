@@ -138,9 +138,9 @@
 
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                                <label for="material_sent">Materail Sent </label>
+                                                <label for="material_sent">Materail Sent (Materail Dispatch or Not)</label>
                                                 <select class="form-control" name="material_sent" id="material_sent">
-                                                    <option st-id="" value="">Select Supplier Name</option>
+                                                    <option st-id="" value="">Select Materail Sent</option>
                                                     <option st-id="" value="Yes">Yes</option>
                                                     <option st-id="" value="No">No</option>
                                                 </select>
@@ -153,7 +153,7 @@
                                         <div class="form-group">
                                                 <label for="material_receipt_confirmation">Material Receipt Confirmation </label>
                                                 <select class="form-control" name="material_receipt_confirmation" id="material_receipt_confirmation">
-                                                    <option st-id="" value="">Select Supplier Name</option>
+                                                    <option st-id="" value="">Select >Material Receipt Confirmation</option>
                                                     <option st-id="" value="Pending">Pending</option>
                                                     <option st-id="" value="Done">Done</option>
                                         
