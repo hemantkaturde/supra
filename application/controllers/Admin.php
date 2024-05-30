@@ -14711,7 +14711,7 @@ public function downlaoddebitnote($id){
 
               <tr style="border: 1px solid black;">
                 <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;">We Have Debit Amt = '.round($total_debit_amount,2).' <br/> '.$total_tax_rate.'<br>____________<br/>'.round($total_amount_debit,2).'</td>    
-                <td style="border: 1px solid black;padding: 5px">'.$getDebitnotedetailsforInvoice['tds_amount'].'<br/><br/>'.round($total_amount_debit,2).'<br/>____________<br/>'.$getDebitnotedetailsforInvoice['tds_amount']+round($total_amount_debit,2).'</td>
+                <td style="border: 1px solid black;padding: 5px">'.$getDebitnotedetailsforInvoice['tds_amount'].'<br/><br/>'.round($total_amount_debit,2).'<br/>____________<br/>'.$getDebitnotedetailsforInvoice['tds_amount']+$total_amount_debit.'</td>
               </tr>
 
                 <tr style="border: 1px solid black;">
