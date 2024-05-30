@@ -2044,7 +2044,9 @@ class Admin_model extends CI_Model
               //$this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
               $this->db->where(TBL_FINISHED_GOODS.'.status',1);
               //$this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
-              $this->db->where(TBL_RAWMATERIAL.'.part_number NOT IN (SELECT tbl_rawmaterial.part_number FROM tbl_supplierpo_item join tbl_rawmaterial on tbl_supplierpo_item.part_number_id=tbl_rawmaterial.raw_id where pre_buyer_po_number='.$supplier_po_number.')', NULL, FALSE);
+
+              /* comment 30-05-2024*/
+              //$this->db->where(TBL_RAWMATERIAL.'.part_number NOT IN (SELECT tbl_rawmaterial.part_number FROM tbl_supplierpo_item join tbl_rawmaterial on tbl_supplierpo_item.part_number_id=tbl_rawmaterial.raw_id where pre_buyer_po_number='.$supplier_po_number.')', NULL, FALSE);
               // $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.part_number_id NOT IN (SELECT part_number_id FROM tbl_supplierpo_item where pre_buyer_po_number='.$supplier_po_number.')', NULL, FALSE);
               $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id',$supplier_po_number);
               $query = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
