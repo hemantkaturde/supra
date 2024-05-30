@@ -14540,10 +14540,10 @@ public function downlaoddebitnote($id){
                 <tr style="border-left: 1px solid black;border-right: 1px solid black;">
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['type_of_raw_material'].'<br/>'.$value['part_number'].'</td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['invoice_no'].'<br/>'.date('d-m-Y',strtotime($value['invoice_date'])).'</br></td> 
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['invoice_qty'].' pcs<br/> Recd Qty '.$value['received_quantity'].' pcs</td>
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['ok_qty'].' pcs</td>
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['less_quantity'].' pcs</td> 
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rejected_quantity'].' pcs</td>    
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['invoice_qty'].' '.$value['supplier_po_unit'].'<br/> Recd Qty '.$value['received_quantity'].' '.$value['supplier_po_unit'].'</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['ok_qty'].' '.$value['supplier_po_unit'].'</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['less_quantity'].' '.$value['supplier_po_unit'].'</td> 
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rejected_quantity'].' '.$value['supplier_po_unit'].'</td>    
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rate'].'</td>    
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.round($value['debit_amount'],2).'</td>    
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$paid_amount.'</td>

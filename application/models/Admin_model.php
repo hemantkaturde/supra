@@ -11739,8 +11739,9 @@ public function getDebitnotedetailsforInvoice($id){
 public function getDebitnoteitemdeatilsForInvoice($id){
 
     // $this->db->select('*,'.TBL_RAWMATERIAL.'.gross_weight as rmgrossweight');
-    $this->db->select('*,'.TBL_RAWMATERIAL.'.net_weight as raw_material_neight_weight');
+    $this->db->select('*,'.TBL_RAWMATERIAL.'.net_weight as raw_material_neight_weight,'.TBL_SUPPLIER_PO_MASTER_ITEM.'.unit as supplier_po_unit');
     $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_DEBIT_NOTE_ITEM.'.part_number');
+    $this->db->join(TBL_SUPPLIER_PO_MASTER_ITEM, TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id = '.TBL_DEBIT_NOTE_ITEM.'.part_number');
     $this->db->where(TBL_DEBIT_NOTE_ITEM.'.debit_note_id', $id);
     $query = $this->db->get(TBL_DEBIT_NOTE_ITEM);
     $fetch_result = $query->result_array();
