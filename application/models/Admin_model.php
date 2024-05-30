@@ -1166,7 +1166,7 @@ class Admin_model extends CI_Model
     
     public function getSupplierpodata($params){
 
-        $this->db->select('*,'.TBL_SUPPLIER.'.supplier_name as sup_name,'.TBL_BUYER_PO_MASTER.'.buyer_po_number as bypo,'.TBL_SUPPLIER_PO_MASTER.'.id as supplierpoid,'.TBL_SUPPLIER_PO_MASTER.'date as supdate');
+        $this->db->select('*,'.TBL_SUPPLIER.'.supplier_name as sup_name,'.TBL_BUYER_PO_MASTER.'.buyer_po_number as bypo,'.TBL_SUPPLIER_PO_MASTER.'.id as supplierpoid,'.TBL_SUPPLIER_PO_MASTER.'.date as supdate');
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id  = '.TBL_SUPPLIER_PO_MASTER.'.buyer_name');
         $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id  = '.TBL_SUPPLIER_PO_MASTER.'.supplier_name');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_SUPPLIER_PO_MASTER.'.vendor_name');
