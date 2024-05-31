@@ -14705,7 +14705,7 @@ public function downlaoddebitnote($id){
               </tr>
 
               <tr style="border: 1px solid black;">
-                <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;">Cheque Amt</td>    
+                <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;"><b>Cheque Amt</b></td>    
                 <td style="border: 1px solid black;padding: 5px">'.$getDebitnotedetailsforInvoice['chq_amount'].'</td>
               </tr>
 
@@ -14716,7 +14716,7 @@ public function downlaoddebitnote($id){
 
                 <tr style="border: 1px solid black;">
                 <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;"><b>Grand Total</b></td>    
-                <td style="border: 1px solid black;padding: 5px">'.round($getDebitnotedetailsforInvoice['grand_total_main'],2).'</td>
+                <td style="border: 1px solid black;padding: 5px"><b>'.round($getDebitnotedetailsforInvoice['grand_total_main'],2).'</b></td>
                 </tr>
           
             </table>
@@ -14964,7 +14964,7 @@ public function downlaoddebitnotevendor($id){
               </tr>
 
               <tr style="border: 1px solid black;">
-                <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;">Cheque Amt</td>    
+                <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;"><b>Cheque Amt</b></td>    
                 <td style="border: 1px solid black;padding: 5px">'.$getDebitnotedetailsforInvoice['chq_amount'].'</td>
               </tr>
 
@@ -14975,7 +14975,7 @@ public function downlaoddebitnotevendor($id){
 
                 <tr style="border: 1px solid black;">
                 <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;"><b>Grand Total</b></td>    
-                <td style="border: 1px solid black;padding: 5px">'.round($getDebitnotedetailsforInvoice['grand_total_main'],2).'</td>
+                <td style="border: 1px solid black;padding: 5px"><b>'.round($getDebitnotedetailsforInvoice['grand_total_main'],2).'</b></td>
                 </tr>
           
             </table>
