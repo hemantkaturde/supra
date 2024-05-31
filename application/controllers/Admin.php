@@ -16197,44 +16197,46 @@ public function downloadenquiryformdata($id){
          foreach ($getEnquiryInfo as  $value) {
 
             $html.= '<tr style="text-align:left;background-color:yellow">';
-            $html.= '<th style="text-align:left;border: 1px solid;"> </th>';
-            $html.= '<th style="text-align:left;border: 1px solid;"> </th>';
-            $html.= '<th style="text-align:left;border: 1px solid;">'.$value['suplier_id_name_1'].'</th>';
-            $html.= '<th style="text-align:left;border: 1px solid;">'.$value['suplier_id_name_2'].'</th>';
-            $html.= '<th style="text-align:left;border: 1px solid;">'.$value['suplier_id_name_3'].'</th>';
-            $html.= '<th style="text-align:left;border: 1px solid;">'.$value['suplier_id_name_4'].'</th>';
-            $html.= '<th style="text-align:left;border: 1px solid;">'.$value['suplier_id_name_5'].'</th>';
+                $html.= '<th style="text-align:left;border: 1px solid;"> </th>';
+                $html.= '<th style="text-align:left;border: 1px solid;"> </th>';
+                $html.= '<th style="text-align:left;border: 1px solid;">'.$value['suplier_id_name_1'].'</th>';
+                $html.= '<th style="text-align:left;border: 1px solid;">'.$value['suplier_id_name_2'].'</th>';
+                $html.= '<th style="text-align:left;border: 1px solid;">'.$value['suplier_id_name_3'].'</th>';
+                $html.= '<th style="text-align:left;border: 1px solid;">'.$value['suplier_id_name_4'].'</th>';
+                $html.= '<th style="text-align:left;border: 1px solid;">'.$value['suplier_id_name_5'].'</th>';
             $html.= '</tr>';
 
             $html.= '<tr style="text-align:left;border: 1px solid;">';
-            $html.= '<td style="text-align:left;border: 1px solid;">Part Number</td>';
-            $html.= '<td style="text-align:left;border: 1px solid;">'.$value['part_number'].'</td>';
-            $html.= '<td style="text-align:left;border: 1px solid;"></td>';
-            $html.= '<td style="text-align:left;border: 1px solid;"></td>';
-            $html.= '<td style="text-align:left;border: 1px solid;"></td>';
-            $html.= '<td style="text-align:left;border: 1px solid;"></td>';
-            $html.= '<td style="text-align:left;border: 1px solid;"></td>';
+                $html.= '<td style="text-align:left;border: 1px solid;">Part Number</td>';
+                $html.= '<td style="text-align:left;border: 1px solid;">'.$value['part_number'].'</td>';
+                $html.= '<td style="text-align:left;border: 1px solid;"></td>';
+                $html.= '<td style="text-align:left;border: 1px solid;"></td>';
+                $html.= '<td style="text-align:left;border: 1px solid;"></td>';
+                $html.= '<td style="text-align:left;border: 1px solid;"></td>';
+                $html.= '<td style="text-align:left;border: 1px solid;"></td>';
             $html.= '</tr>';
 
            
             $html.= '<tr style="text-align:left;border: 1px solid;">';
                 $html.= '<td style="text-align:left;border: 1px solid;">Required Qty</td>';
-                $html.= '<td style="text-align:left;border: 1px solid;>'.$value['supplier_qty_in_kgs'].' kgs</td>';
-                $html.= '<td style="text-align:left;border: 1px solid;>'.$value['suplier_rate_1'].'/-</td>';
-                $html.= '<td style="text-align:left;border: 1px solid;>'.$value['suplier_rate_2'].'/-</td>';
-                $html.= '<td style="text-align:left;border: 1px solid;>'.$value['suplier_rate_3'].'/-</td>';
-                $html.= '<td style="text-align:left;border: 1px solid;>'.$value['suplier_rate_4'].'/-</td>';
-                $html.= '<td style="text-align:left;border: 1px solid;>'.$value['suplier_rate_5'].'/-</td>';
+                $html.= '<td style="text-align:left;border: 1px solid;">'.$value['supplier_qty_in_kgs'].' kgs</td>';
+                $html.= '<td style="text-align:left;border: 1px solid;">'.$value['suplier_rate_1'].'/-</td>';
+                $html.= '<td style="text-align:left;border: 1px solid;">'.$value['suplier_rate_2'].'/-</td>';
+                $html.= '<td style="text-align:left;border: 1px solid;">'.$value['suplier_rate_3'].'/-</td>';
+                $html.= '<td style="text-align:left;border: 1px solid;">'.$value['suplier_rate_4'].'/-</td>';
+                $html.= '<td style="text-align:left;border: 1px solid;">'.$value['suplier_rate_5'].'/-</td>';
             $html.= '</tr>';
 
+
+        
             $html.= '<tr style="text-align:left;border: 1px solid;">';
-            $html.= '<td style="text-align:left;border: 1px solid;">Raw Material</td>';
-            $html.= '<td style="text-align:left;border: 1px solid;">'.$value['rm_description'].'</td>';
-            $html.= '<td style="text-align:left;border: 1px solid;"></td>';
-            $html.= '<td style="text-align:left;border: 1px solid;"></td>';
-            $html.= '<td style="text-align:left;border: 1px solid;"></td>';
-            $html.= '<td style="text-align:left;border: 1px solid;"></td>';
-            $html.= '<td style="text-align:left;border: 1px solid;"></td>';
+                $html.= '<td style="text-align:left;border: 1px solid;">Raw Material</td>';
+                $html.= '<td style="text-align:left;border: 1px solid;">'.$value['rm_description'].'</td>';
+                $html.= '<td style="text-align:left;border: 1px solid;"></td>';
+                $html.= '<td style="text-align:left;border: 1px solid;"></td>';
+                $html.= '<td style="text-align:left;border: 1px solid;"></td>';
+                $html.= '<td style="text-align:left;border: 1px solid;"></td>';
+                $html.= '<td style="text-align:left;border: 1px solid;"></td>';
             $html.= '</tr>';
 
             $html.= '<tr style="text-align:left;border: 1px solid;">';
