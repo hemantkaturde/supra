@@ -19942,6 +19942,28 @@
 				 return false;
 	    });	
 		
+
+		$(document).on('change', '#payment_rcivd_amt,#payment_exchange_amt', function(){	
+				
+			    $("#payment_rcivd_amt").val();
+
+				 if($("#payment_rcivd_amt").val()){
+					 var payment_rcivd_amt = $("#payment_rcivd_amt").val();
+				 }else{
+					 var payment_rcivd_amt = 0;
+				 }
+
+				 if($("#payment_exchange_amt").val()){
+					 var payment_exchange_amt = $("#payment_exchange_amt").val();
+				 }else{
+					 var payment_exchange_amt = 0;
+				 }
+
+				 var total_one_group = parseFloat(payment_exchange_amt) *  parseFloat(payment_exchange_amt);
+
+				 $("#realised_amt_in_inr").val(total_one_group);
+			
+		});
 		
 
 
