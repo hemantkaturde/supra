@@ -5896,6 +5896,8 @@ class Admin_model extends CI_Model
         if($params['search']['value'] != "") 
         {
             $this->db->where("(".TBL_PAYMENT_DETAILS.".payment_details_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_PAYMENT_DETAILS.".bill_number LIKE '%".$params['search']['value']."%'");
+
             $this->db->or_where(TBL_PAYMENT_DETAILS.".payment_details_date LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_SUPPLIER_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
@@ -5920,6 +5922,8 @@ class Admin_model extends CI_Model
         {
             $this->db->where("(".TBL_PAYMENT_DETAILS.".payment_details_number LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_PAYMENT_DETAILS.".payment_details_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_PAYMENT_DETAILS.".bill_number LIKE '%".$params['search']['value']."%'");
+
             $this->db->or_where(TBL_SUPPLIER_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_SUPPLIER.".supplier_name LIKE '%".$params['search']['value']."%'");
@@ -5940,7 +5944,7 @@ class Admin_model extends CI_Model
             {
                 $data[$counter]['payment_details_number'] = $value['payment_details_number'];
                 $data[$counter]['payment_details_date'] = $value['payment_details_date'];
-                // $data[$counter]['type'] = $value['type'];
+                $data[$counter]['bill_no'] = $value['bill_number'];
                 $data[$counter]['vendor_name'] = $value['vendorname'];
                 $data[$counter]['vendor_po_number'] = $value['vendor_pomaster'];
                 $data[$counter]['supplier_name'] = $value['supplier'];
