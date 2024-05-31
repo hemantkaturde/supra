@@ -30,7 +30,7 @@
                                 <thead>
                                     <tr style="background-color:#3c8dbc !important;color:#fff">
                                         <th>Sales Tracking Number</th>
-                                        <th>CHA Forwarder</th>
+                                        <th>Buyer Name</th>
                                         <th>Clearance Done By</th>
                                         <th>Mode of Shipment</th>
                                         <th>Payment Terms</th>

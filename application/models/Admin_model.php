@@ -11310,6 +11310,11 @@ public function checkifexitchaupdate($id,$vendor){
 public function getfetchsalestrackingReportcount($params){
 
     $this->db->select('*');
+    $this->db->join(TBL_PACKING_INSTRACTION_DETAILS, TBL_PACKING_INSTRACTION_DETAILS.'.id = '.TBL_SALES_TRACKING_REPORT.'.invoice_number');
+    $this->db->join(TBL_PACKING_INSTRACTION, TBL_PACKING_INSTRACTION.'.id = '.TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id');
+    $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_PACKING_INSTRACTION.'.buyer_po_number');
+    $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id  = '.TBL_BUYER_PO_MASTER.'.buyer_name_id');
+    $this->db->join(TBL_CHA_MASTER, TBL_CHA_MASTER.'.cha_id = '.TBL_SALES_TRACKING_REPORT.'.CHA_forwarder');
     $this->db->where(TBL_SALES_TRACKING_REPORT.'.status', 1);
     $query = $this->db->get(TBL_SALES_TRACKING_REPORT);
     $rowcount = $query->num_rows();
@@ -11318,8 +11323,11 @@ public function getfetchsalestrackingReportcount($params){
 
 public function getfetchsalestrackingReportdata($params){
 
-    $this->db->select('*,'.TBL_SALES_TRACKING_REPORT.'.id as sales_tracking_report');
+    $this->db->select('*,'.TBL_SALES_TRACKING_REPORT.'.id as sales_tracking_report,'.TBL_BUYER_MASTER.'.buyer_name');
     $this->db->join(TBL_PACKING_INSTRACTION_DETAILS, TBL_PACKING_INSTRACTION_DETAILS.'.id = '.TBL_SALES_TRACKING_REPORT.'.invoice_number');
+    $this->db->join(TBL_PACKING_INSTRACTION, TBL_PACKING_INSTRACTION.'.id = '.TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id');
+    $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_PACKING_INSTRACTION.'.buyer_po_number');
+    $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id  = '.TBL_BUYER_PO_MASTER.'.buyer_name_id');
     $this->db->join(TBL_CHA_MASTER, TBL_CHA_MASTER.'.cha_id = '.TBL_SALES_TRACKING_REPORT.'.CHA_forwarder');
     $this->db->where(TBL_SALES_TRACKING_REPORT.'.status', 1);    
     $this->db->limit($params['length'],$params['start']);
@@ -11333,7 +11341,7 @@ public function getfetchsalestrackingReportdata($params){
         foreach ($fetch_result as $key => $value)
         {
             $data[$counter]['invoice_number'] = $value['buyer_invoice_number'];
-            $data[$counter]['CHA_forwarder'] =  $value['cha_name'];
+            $data[$counter]['CHA_forwarder'] =  $value['buyer_name'];
             $data[$counter]['clearance_done_by'] =  $value['clearance_done_by'];
             $data[$counter]['mode_of_shipment'] = $value['mode_of_shipment'];
             $data[$counter]['payment_terms'] =  $value['payment_terms'];
