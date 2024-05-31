@@ -14485,7 +14485,7 @@ public function downloadscrapreturn($id){
             ';
 
             // <p>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</p>
-    $invoice_name =  $getscrapreturnForInvoice['challan_id'].' - '.$getscrapreturnForInvoice['vendor_name'].'.pdf';
+    $invoice_name =  $getscrapreturnForInvoice['challan_id'].' - '.$getscrapreturnForInvoice['vendor_name'].' To '.$getscrapreturnForInvoice['supplier_name'].'.pdf';
     $mpdf->WriteHTML($html);
     $mpdf->Output($invoice_name,'D'); // opens in browser
     
