@@ -16161,12 +16161,12 @@ public function downloadenquiryformdata($id){
 
          // create file name
         // $fileName = 'Enquiry_Form_Report -'.date('d-m-Y').'.xlsx';  
+        $getEnquiryInfo = $this->admin_model->downloadenquiryformdata($id);
 
         $fileName = ' Enq No - '.$getEnquiryInfo[0]['enquiry_number'].' - '.$getEnquiryInfo[0]['buyer_name'].' - '.date('d-m-Y',strtotime($getEnquiryInfo[0]['buyer_enquiry_date']));  
 
         
          // load excel library
-         $getEnquiryInfo = $this->admin_model->downloadenquiryformdata($id);
 
 
         // $getEnquiryInforowdata = $this->admin_model->getEnquiryInforowdata($excelvalue['enquiry_form_id']);
