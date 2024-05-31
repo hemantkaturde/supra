@@ -3231,7 +3231,7 @@ class Admin_model extends CI_Model
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id= '.TBL_INCOMING_DETAILS.'.vendor_po_number');
         if($params['search']['value'] != "") 
         {
-            $this->db->where("(".TBL_INCOMING_DETAILS.".bom_number LIKE '%".$params['search']['value']."%'");
+            $this->db->where("(".TBL_INCOMING_DETAILS.".incoming_details_id LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_INCOMING_DETAILS.".reported_by LIKE '%".$params['search']['value']."%'");
@@ -3252,7 +3252,7 @@ class Admin_model extends CI_Model
         
         if($params['search']['value'] != "") 
         {
-            $this->db->where("(".TBL_INCOMING_DETAILS.".bom_number LIKE '%".$params['search']['value']."%'");
+            $this->db->where("(".TBL_INCOMING_DETAILS.".incoming_details_id LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_INCOMING_DETAILS.".reported_by LIKE '%".$params['search']['value']."%'");
