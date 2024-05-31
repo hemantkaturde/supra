@@ -16514,5 +16514,42 @@ public function fetchproductionstatusreport($vendor_name,$status){
 }
 
 
+public function checkifpackingintractionalreadyexists(){
+
+    $post_submit = $this->input->post();
+    if($post_submit){
+
+       $buyer_name =  trim($this->input->post('buyer_name'));
+       $buyer_po_number =  trim($this->input->post('buyer_po_number'));
+
+       if($buyer_name && $buyer_po_number ){
+
+            $checkifpackingintractionalreadyexists = $this->admin_model->checkifpackingintractionalreadyexists($buyer_name,$buyer_po_number);
+           
+           if($checkifpackingintractionalreadyexists){
+
+            if(count($checkifpackingintractionalreadyexists) >= 1) {
+
+                echo 'success';
+            }else{
+
+                echo 'failure';
+            }
+
+           }else{
+               echo 'failure';
+           }
+           
+       }else{
+        echo 'failure';
+       }
+    }else{
+
+        echo 'failure';
+    }
+
+}
+
+
 }
 

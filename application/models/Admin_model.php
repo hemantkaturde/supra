@@ -12048,6 +12048,20 @@ public function checkifpartnumberisalreadyexists($part_number,$main_id){
     return $row_data;
 }
 
+
+public function checkifpackingintractionalreadyexists($buyer_name,$buyer_po_number){
+
+    $this->db->select('*');
+    // $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_BILL_OF_MATERIAL.'.vendor_po_number');
+    // $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_BILL_OF_MATERIAL.'.buyer_po_number');
+    // $this->db->where(TBL_INCOMING_DETAILS.'.status', 1);
+    $this->db->where(TBL_PACKING_INSTRACTION.'.buyer_name', $buyer_name);
+    $this->db->where(TBL_PACKING_INSTRACTION.'.buyer_po_number', $buyer_po_number);
+    $query = $this->db->get(TBL_PACKING_INSTRACTION);
+    $row_data = $query->row_array();
+    return $row_data;
+}
+
 public function getcompalinformdetailsforInvoice($id){
 
     $this->db->select('*');

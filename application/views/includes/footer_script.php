@@ -8997,6 +8997,47 @@
 			return false;
 		   });
 
+
+
+		   $(document).on('change','#buyer_name,#buyer_po_number',function(e){  
+			e.preventDefault();
+			        var buyer_name = $('#buyer_name').val();	
+					var buyer_po_number = $('#buyer_po_number').val();	
+
+					$.ajax({
+							url : "<?php echo ADMIN_PATH;?>checkifpackingintractionalreadyexists",
+							type: "POST",
+							data : {'buyer_name' : buyer_name,'buyer_po_number' : buyer_po_number},
+							success: function(data, textStatus, jqXHR)
+							{
+								$(".loader_ajax").hide();
+								if(data == "failure")
+								{
+									// $('#buyer_po_date').val('');
+									// $('#buyer_delivery_date').val('');
+								}
+								else
+								{
+										swal({
+											title: "Record Exists Notification",
+											text: "Record Already Exists for this buyer Name and buyer PO .Do you Still want to Insert The record ?",
+											icon: "success",
+											button: "Ok",
+											},function(){ 
+												
+										});		
+							    }
+							},
+							error: function (jqXHR, textStatus, errorThrown)
+							{
+								    //$('#buyer_po_date').val('');
+								    //$(".loader_ajax").hide();
+							}
+				});
+			return false;
+		   });
+
+
 		</script>
 <?php } ?>
 

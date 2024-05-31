@@ -466,6 +466,7 @@ $route['getdebitnotedetailsbydebitenoteeid'] = "admin/getdebitnotedetailsbydebit
 $route['getnumberofcartoonsfrompreexport'] = "admin/getnumberofcartoonsfrompreexport";
 $route['editsalestrackingreport/(:any)'] = "admin/editsalestrackingreport/$1";
 $route['checkifpartnumberisalreadyexists'] = "admin/checkifpartnumberisalreadyexists";
+$route['checkifpackingintractionalreadyexists'] = "admin/checkifpackingintractionalreadyexists";
 
 $route['fetchproductionstatusreport'] = "admin/fetchproductionstatusreport";
 
