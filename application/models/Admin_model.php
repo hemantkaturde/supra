@@ -1666,6 +1666,7 @@ class Admin_model extends CI_Model
     public function fetchALLFinishgoodList(){
         $this->db->select('*');
         $this->db->where(TBL_FINISHED_GOODS.'.status', 1);
+        $this->db->order_by(TBL_FINISHED_GOODS.'.part_number', 'ASC');
         $query = $this->db->get(TBL_FINISHED_GOODS);
         $data = $query->result_array();
         return $data;
