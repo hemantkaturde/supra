@@ -4558,7 +4558,7 @@ class Admin_model extends CI_Model
            TBL_VENDOR_PO_MASTER.'.date as vendor_po_date',
            TBL_FINISHED_GOODS.'.part_number as part_number',
            TBL_FINISHED_GOODS.'.name as part_decription',
-           TBL_BILL_OF_MATERIAL_ITEM.'.expected_qty as vendor_order_qty',
+           TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_order_qty',
            TBL_BILL_OF_MATERIAL_ITEM.'.vendor_actual_recived_qty as vendor_received_qty',   
            TBL_FINISHED_GOODS.'.net_weight as net_Weight_per_pcs_in_kgs',
            TBL_BILL_OF_MATERIAL.'.date as vendor_delivery_date',
@@ -4579,7 +4579,7 @@ class Admin_model extends CI_Model
 
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id= '.TBL_BILL_OF_MATERIAL.'.vendor_name');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id= '.TBL_BILL_OF_MATERIAL.'.vendor_po_number');
-        // $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id= '.TBL_VENDOR_PO_MASTER.'.id');
+        $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id= '.TBL_VENDOR_PO_MASTER.'.id');
         $this->db->join(TBL_BUYER_PO_MASTER, TBL_BILL_OF_MATERIAL.'.buyer_po_number= '.TBL_BUYER_PO_MASTER.'.id');
         $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id= '.TBL_BUYER_PO_MASTER.'.id');
         $this->db->join(TBL_BUYER_MASTER, TBL_BILL_OF_MATERIAL.'.buyer_name= '.TBL_BUYER_MASTER.'.buyer_id');
