@@ -12308,7 +12308,8 @@ public function fetchscrapcalculationreportcount($params,$status){
 
 
     if($status!='NA'){
-        $this->db->like(TBL_RAWMATERIAL.'.type_of_raw_material', "%".$status."%");
+        // $this->db->like(TBL_RAWMATERIAL.'.type_of_raw_material', "%".$status."%");
+        $this->db->where("(".TBL_RAWMATERIAL.".type_of_raw_material LIKE '%".str_replace(" ", "%", $status)."%')");
     }
 
 
@@ -12352,7 +12353,10 @@ public function fetchscrapcalculationreportdata($params,$status){
 
   
     if($status!='NA'){
-        $this->db->where(TBL_RAWMATERIAL.'.type_of_raw_material', "%".$status."%");
+        // $this->db->Like(TBL_RAWMATERIAL.'.type_of_raw_material', "%".$status."");
+
+        $this->db->where("(".TBL_RAWMATERIAL.".type_of_raw_material LIKE '%".str_replace(" ", "%", $status)."%')");
+
     }
 
     $this->db->where(TBL_BILL_OF_MATERIAL.'.status', 1);
@@ -12403,7 +12407,8 @@ public function getscrapcalculationreportdata($status){
     $this->db->join(TBL_FINISHED_GOODS, TBL_BILL_OF_MATERIAL_ITEM.'.part_number= '.TBL_FINISHED_GOODS.'.fin_id');
 
     if($status!='NA'){
-        $this->db->like(TBL_RAWMATERIAL.'.type_of_raw_material', "%".$status."%");
+       // $this->db->like(TBL_RAWMATERIAL.'.type_of_raw_material', "%".$status."%");
+        $this->db->where("(".TBL_RAWMATERIAL.".type_of_raw_material LIKE '%".str_replace(" ", "%", $status)."%')");
     }
 
     $this->db->where(TBL_BILL_OF_MATERIAL.'.status', 1);
