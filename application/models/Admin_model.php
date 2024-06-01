@@ -12602,11 +12602,11 @@ public function fetchproductionstatusreportdata($params,$vendor_name,$status){
     $this->db->limit($params['length'],$params['start']);
     $this->db->order_by(TBL_BILL_OF_MATERIAL.'.id','DESC');
     $query = $this->db->get(TBL_BILL_OF_MATERIAL);
-    // $fetch_result = $query->result_array();
-    $query2 = $query->result_array();
+     $fetch_result = $query->result_array();
+    //$query2 = $query->result_array();
 
     
-    $fetch_result =   array_merge($query1, $query2);
+    //$fetch_result =   array_merge($query1, $query2);
     $data = array();
     $counter = 0;
     if(count($fetch_result) > 0)
@@ -12619,9 +12619,9 @@ public function fetchproductionstatusreportdata($params,$vendor_name,$status){
             $data[$counter]['fg_part_number'] = $value['partno'];
             $data[$counter]['part_description'] = $value['part_description'];
            
-            $data[$counter]['vendor_order_qty'] = '';
-            $data[$counter]['vendor_received_qty'] = '';
-            $data[$counter]['vendor_received_qtys'] = '';
+            $data[$counter]['vendor_order_qty'] = $value['vendor_order_qty_co'];
+            $data[$counter]['vendor_received_qty'] = $value['expected_qty'];
+            $data[$counter]['vendor_received_qtys'] = $value['vendor_actual_recived_qty'];
 
             $data[$counter]['delivery_date'] = $value['delivery_date'];
             $data[$counter]['buyer_name'] = $value['buyer'];
