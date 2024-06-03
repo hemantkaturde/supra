@@ -9659,7 +9659,7 @@
 		
 	    $(document).on('click','#export_to_excel',function(e){
 			e.preventDefault();
-
+			$(".loader_ajax").show();
 			var vendor_name       =    $('#vendor_name').val();
 			var status         =    $("#status").val();
 
