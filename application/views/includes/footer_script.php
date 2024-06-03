@@ -4,6 +4,22 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
 <script type="text/javascript">
+
+//     $(document).ready(function(){
+// 			$("select").select2();
+// 	});
+
+//    $(function() {
+// 			$(".datepicker").datepicker({ 
+// 				// minDate: 0,
+// 				todayHighlight: true,
+//                 dateFormat: 'yy-mm-dd',
+// 				startDate: new Date()
+// 			});
+// 		});
+</script>
+
+<script type="text/javascript">
 //    $(document).ready(function(){
 // 			$("select").select2();
 // 	});
