@@ -9582,9 +9582,10 @@ class Admin_model extends CI_Model
         return $data;
     }
 
-    public function getpreviousshortexcess($part_number){
+    public function getpreviousshortexcess($part_number,$vendor_po_number){
         $this->db->select('short_excess_qty');
         $this->db->where(TBL_POD_ITEM.'.part_number', $part_number);
+        $this->db->where(TBL_POD_ITEM.'.pre_vendor_po_number', $vendor_po_number);
         $this->db->order_by(TBL_POD_ITEM.'.id','DESC');
         $this->db->limit(1);
         $query = $this->db->get(TBL_POD_ITEM);

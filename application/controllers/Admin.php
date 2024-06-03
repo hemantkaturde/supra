@@ -10452,8 +10452,9 @@ public function downlaodsupplierpo($id){
 public function getpreviousshortexcess(){
 
     $post_submit = $this->input->post();
+
     if($post_submit){
-        $getpreviousshortexcess = $this->admin_model->getpreviousshortexcess(trim($this->input->post('part_number')));
+        $getpreviousshortexcess = $this->admin_model->getpreviousshortexcess(trim($this->input->post('part_number')),trim($this->input->post('vendor_po_number')));
         if($getpreviousshortexcess){
             $content = $getpreviousshortexcess[0];
             echo json_encode($content);

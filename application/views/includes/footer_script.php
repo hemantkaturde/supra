@@ -14004,10 +14004,11 @@
 			e.preventDefault();
 			var elemF = $(this);
 			var part_number = $('#part_number').val();
+			var vendor_po_number = $('#vendor_po_number').val();
 			$.ajax({
 				url : "<?php echo base_url();?>getpreviousshortexcess",
 				type: "POST",
-				data : 'part_number='+part_number,
+				data : 'part_number='+part_number+'&vendor_po_number='+vendor_po_number,
 				success: function(data, textStatus, jqXHR)
 				{ 
 					    var fetchResponse = $.parseJSON(data);
