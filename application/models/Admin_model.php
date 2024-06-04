@@ -4767,7 +4767,7 @@ class Admin_model extends CI_Model
         $this->db->join(TBL_BUYER_MASTER, TBL_BILL_OF_MATERIAL.'.buyer_name= '.TBL_BUYER_MASTER.'.buyer_id');
         $this->db->join(TBL_BILL_OF_MATERIAL_ITEM, TBL_BILL_OF_MATERIAL.'.id= '.TBL_BILL_OF_MATERIAL_ITEM.'.bom_id');
 
-        $this->db->join(TBL_VENDOR_PO_MASTER_ITEM.'. as vpi', 'vpi.part_number_id= '.TBL_BILL_OF_MATERIAL_ITEM.'.part_number');
+        $this->db->join(TBL_BILL_OF_MATERIAL_ITEM.' as a', 'a.part_number= '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
 
 
         $this->db->join(TBL_FINISHED_GOODS, TBL_BILL_OF_MATERIAL_ITEM.'.part_number= '.TBL_FINISHED_GOODS.'.fin_id');
@@ -4791,7 +4791,7 @@ class Admin_model extends CI_Model
         }
 
         $this->db->where(TBL_BILL_OF_MATERIAL.'.status', 1);
-        $this->db->group_by(TBL_BILL_OF_MATERIAL_ITEM.'.id');
+        // $this->db->group_by(TBL_BILL_OF_MATERIAL_ITEM.'.id');
         $this->db->order_by(TBL_BILL_OF_MATERIAL.'.id','DESC');
         $this->db->limit($params['length'],$params['start']);
       
