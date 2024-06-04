@@ -35,6 +35,7 @@
                                         <th>Vendor PO</th>
                                         <th>Supplier Name</th>
                                         <th>Supplier PO</th>
+                                        <th>USP Name</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
