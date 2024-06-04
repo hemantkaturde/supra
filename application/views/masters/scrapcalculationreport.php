@@ -32,9 +32,20 @@
                                                     <option value="Brass">Brass</option>
                                                     <option value="Copper">Copper</option>
                                                     <option value="Aluminium">Aluminium</option>
-                                                    <option value="SS304">SS304</option>
-                                                    <option value="SS316">SS316</option>
-                                                    <option value="Inconel">Inconel</option>
+                                                    <option value="SS 304">SS 304</option>
+                                                    <option value="SS 316">SS 316</option>
+                                                    <option value="SS 303">SS 303</option>
+                                                    <option value="SS 316 L">SS 316 L</option>
+                                                    <option value="SS 304 L">SS 304 L</option>
+                                                    <option value="SS 316 Ti">SS 316 Ti</option>
+                                                    <option value="Duplex">Duplex</option>
+                                                    <option value="Inconnel">Inconnel</option>
+                                                    <option value="PFTE- Teflon Sheet">PFTE- Teflon Sheet</option>
+                                                    <option value="EN1A Leaded">EN1A Leaded</option>
+                                                    <option value="EN1A Non – Leaded">EN1A Non – Leaded</option>
+                                                    <option value="MS">MS</option>
+
+                                                    
                                                 </select>
                                                 <p class="error status_error"></p>
                                         </div>
