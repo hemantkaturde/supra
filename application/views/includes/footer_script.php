@@ -20130,7 +20130,7 @@
 	
 	$(document).on('click','#export_to_excel',function(e){
 		e.preventDefault();
-
+		$(".loader_ajax").show();
 		var status         =    $("#status").val();
 
 		if(status){
