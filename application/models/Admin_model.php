@@ -5315,6 +5315,8 @@ class Admin_model extends CI_Model
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_CHALLAN_FORM.'.vendor_name','left');
         $this->db->join(TBL_USP, TBL_USP.'.usp_id = '.TBL_CHALLAN_FORM.'.usp_id','left');
         $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_CHALLAN_FORM.'.supplier_name','left');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_CHALLAN_FORM.'.vendor_po_number','left');
+        $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_CHALLAN_FORM.'.supplier_po_number','left');
 
         if($params['search']['value'] != "") 
         {
