@@ -4577,19 +4577,18 @@ class Admin_model extends CI_Model
             $this->db->where(TBL_BILL_OF_MATERIAL.'.bom_status', $status); 
         }
 
+        $this->db->join(TBL_BILL_OF_MATERIAL_ITEM, TBL_BILL_OF_MATERIAL_ITEM.'.bom_id= '.TBL_BILL_OF_MATERIAL.'.id');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id= '.TBL_BILL_OF_MATERIAL.'.vendor_name');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id= '.TBL_BILL_OF_MATERIAL.'.vendor_po_number');
-        $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id= '.TBL_VENDOR_PO_MASTER.'.id');
-
-        //$this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id= '.TBL_BILL_OF_MATERIAL_ITEM.'.part_number');
-       
+       // $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id= '.TBL_VENDOR_PO_MASTER.'.id');
+        $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id= '.TBL_BILL_OF_MATERIAL_ITEM.'.part_number');
+        
         $this->db->join(TBL_BUYER_PO_MASTER, TBL_BILL_OF_MATERIAL.'.buyer_po_number= '.TBL_BUYER_PO_MASTER.'.id');
         $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id= '.TBL_BUYER_PO_MASTER.'.id');
         $this->db->join(TBL_BUYER_MASTER, TBL_BILL_OF_MATERIAL.'.buyer_name= '.TBL_BUYER_MASTER.'.buyer_id');
         $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id= '.TBL_VENDOR_PO_MASTER.'.supplier_po_number');
         $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id= '.TBL_SUPPLIER_PO_MASTER.'.supplier_name');
         $this->db->join(TBL_SUPPLIER_PO_MASTER_ITEM, TBL_SUPPLIER_PO_MASTER_ITEM.'.supplier_po_id= '.TBL_VENDOR_PO_MASTER.'.supplier_po_number');
-        $this->db->join(TBL_BILL_OF_MATERIAL_ITEM, TBL_BILL_OF_MATERIAL_ITEM.'.bom_id= '.TBL_BILL_OF_MATERIAL.'.id');
         $this->db->join(TBL_FINISHED_GOODS, TBL_BILL_OF_MATERIAL_ITEM.'.part_number= '.TBL_FINISHED_GOODS.'.fin_id');
         // $this->db->group_by(TBL_BILL_OF_MATERIAL_ITEM.'.id');
         $this->db->from(TBL_BILL_OF_MATERIAL);
