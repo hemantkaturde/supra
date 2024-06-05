@@ -4818,11 +4818,13 @@ class Admin_model extends CI_Model
 
         /* Bill of material Data */
                             $this->db->select(
-                            TBL_BILL_OF_MATERIAL.'.id as billofmaterialid,
-                            '.TBL_VENDOR_PO_MASTER.'.date as partno,
+                              TBL_BILL_OF_MATERIAL.'.id as billofmaterialid,
+                            '.TBL_BILL_OF_MATERIAL.'.date as partno,
                             '.TBL_FINISHED_GOODS.'.part_number as partno,
                             '.TBL_BUYER_MASTER.'.buyer_name as buyer, 2 as flag,
                             '.TBL_BILL_OF_MATERIAL.'.bom_status,
+                            '.TBL_BILL_OF_MATERIAL.'.vendor_po_number,
+                            '.TBL_BILL_OF_MATERIAL_ITEM.'.part_number,
                             
                             '.TBL_BILL_OF_MATERIAL_ITEM.'.vendor_actual_recived_qty as vendor_received_qty_co,
                             '.TBL_VENDOR_PO_MASTER.'.po_number as v_po_number');
@@ -4843,27 +4845,27 @@ class Admin_model extends CI_Model
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id= '.TBL_BILL_OF_MATERIAL.'.buyer_name');
         $this->db->join(TBL_FINISHED_GOODS, TBL_BILL_OF_MATERIAL_ITEM.'.part_number= '.TBL_FINISHED_GOODS.'.fin_id');
 
-        // if($params['search']['value'] != "") 
-        // {
-        //     $this->db->where("(".TBL_BILL_OF_MATERIAL.".bom_number LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_BILL_OF_MATERIAL.".date LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_BILL_OF_MATERIAL.".bom_status LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%')");
-        // }
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_BILL_OF_MATERIAL.".bom_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BILL_OF_MATERIAL.".date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
+            // $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BILL_OF_MATERIAL.".bom_status LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%')");
+        }
 
-        // if($vendor_name!='NA'){
-        //     $this->db->where(TBL_BILL_OF_MATERIAL.'.vendor_name', 196); 
-        // }
+        if($vendor_name!='NA'){
+            $this->db->where(TBL_BILL_OF_MATERIAL.'.vendor_name', $vendor_name); 
+        }
 
-        // if($status!='NA'){
-        //     $this->db->where(TBL_BILL_OF_MATERIAL.'.bom_status', $status); 
-        // }
+        if($status!='NA'){
+            $this->db->where(TBL_BILL_OF_MATERIAL.'.bom_status', $status); 
+        }
 
         //$this->db->where(TBL_BILL_OF_MATERIAL.'.status', 1);
         //$this->db->group_by(TBL_BILL_OF_MATERIAL_ITEM.'.id');
-        // $this->db->order_by(TBL_BILL_OF_MATERIAL_ITEM.'.id','DESC');
+        $this->db->order_by(TBL_BILL_OF_MATERIAL_ITEM.'.id','DESC');
         $this->db->limit($params['length'],$params['start']);
       
         $query = $this->db->get(TBL_BILL_OF_MATERIAL_ITEM);
@@ -4883,7 +4885,8 @@ class Admin_model extends CI_Model
                 $data[$counter]['bom_number'] = $value['v_po_number'];
                 $data[$counter]['date'] = $value['date'];
                 $data[$counter]['fg_part_number'] = $value['partno'];
-                $data[$counter]['vendor_order_qty'] = '0';
+                $get_vendor_received_qty = $this->get_vendor_order_qty($value['vendor_po_number'],$value['part_number']);
+                $data[$counter]['vendor_order_qty'] = $get_vendor_received_qty[0]['vendor_qty'];
                 $data[$counter]['vendor_received_qty'] = $value['vendor_received_qty_co'];
                 $data[$counter]['buyer_name'] = $value['buyer'];
                
@@ -4901,6 +4904,19 @@ class Admin_model extends CI_Model
 
         return $data;
     }
+
+
+    public function get_vendor_order_qty($vendor_po_number,$part_number){
+        $this->db->select('vendor_qty');
+        $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id', $vendor_po_number);
+        $this->db->order_by(TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id',$part_number);
+        $query = $this->db->get(TBL_VENDOR_PO_MASTER_ITEM);
+        $fetch_result = $query->result_array();
+        return $fetch_result;
+
+     }
+
+
 
     public function saveNewreworkrejection($id,$data){
 
