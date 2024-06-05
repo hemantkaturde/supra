@@ -4908,6 +4908,8 @@ class Admin_model extends CI_Model
 
 
     public function get_vendor_order_qty($vendor_po_number,$part_number){
+        
+
         $this->db->select('order_oty');
         $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id', $vendor_po_number);
         $this->db->order_by(TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id',$part_number);
