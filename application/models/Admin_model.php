@@ -4825,8 +4825,10 @@ class Admin_model extends CI_Model
                              "NA" as flag,
                              "NA" as bom_status,
                              "NA" as vendor_order_qty_co,'
+
                              .TBL_FINISHED_GOODS.'.part_number as partno,
-                             "NA" as vendor_received_qty_co,
+                             "NA" as vendor_received_qty_co,'
+                             .TBL_BILL_OF_MATERIAL_ITEM.'.vendor_actual_recived_qty as vendor_received_qty_co,
                             "NA" as v_po_number');
 
 
