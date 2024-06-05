@@ -20005,6 +20005,7 @@
 		$(document).on('change', '#payment_rcivd_amt,#payment_exchange_amt', function(){	
 				
 			    $("#payment_rcivd_amt").val();
+				$("#payment_exchange_amt").val();
 
 				 if($("#payment_rcivd_amt").val()){
 					 var payment_rcivd_amt = $("#payment_rcivd_amt").val();
