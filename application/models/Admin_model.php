@@ -12600,6 +12600,7 @@ public function getscrapcalculationreportdata($status){
     }
 
     $this->db->where(TBL_BILL_OF_MATERIAL.'.status', 1);
+    $this->db->group_by(TBL_BILL_OF_MATERIAL.'.id');
     $this->db->order_by(TBL_BILL_OF_MATERIAL.'.id','DESC');
     $query = $this->db->get(TBL_BILL_OF_MATERIAL);
     $fetch_result = $query->result_array();
