@@ -4823,7 +4823,7 @@ class Admin_model extends CI_Model
                             '.TBL_FINISHED_GOODS.'.part_number as partno,
                             '.TBL_BUYER_MASTER.'.buyer_name as buyer, 2 as flag,
                             '.TBL_BILL_OF_MATERIAL.'.bom_status,
-                            '.TBL_BILL_OF_MATERIAL.'.vendor_po_number,
+                            '.TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id,
                             '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id,
                             
                             '.TBL_BILL_OF_MATERIAL_ITEM.'.vendor_actual_recived_qty as vendor_received_qty_co,
@@ -4885,7 +4885,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['bom_number'] = $value['v_po_number'];
                 $data[$counter]['date'] = $value['date'];
                 $data[$counter]['fg_part_number'] = $value['partno'];
-                $get_vendor_received_qty = $this->get_vendor_order_qty($value['vendor_po_number'],$value['part_number']);
+                $get_vendor_received_qty = $this->get_vendor_order_qty($value['vendor_po_id'],$value['part_number']);
                 $data[$counter]['vendor_order_qty'] = $get_vendor_received_qty[0]['order_oty'];
               
                 $data[$counter]['vendor_received_qty'] = $value['vendor_received_qty_co'];
