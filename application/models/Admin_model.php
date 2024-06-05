@@ -4820,7 +4820,7 @@ class Admin_model extends CI_Model
         //$this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_BILL_OF_MATERIAL.'.id as billofmaterialid,'.TBL_FINISHED_GOODS.'.part_number as partno,'.TBL_BUYER_MASTER.'.buyer_name as buyer, 2 as flag,'.TBL_BILL_OF_MATERIAL.'.bom_status,'.TBL_BILL_OF_MATERIAL_ITEM.'.rm_actual_aty as vendor_order_qty_co,'.TBL_BILL_OF_MATERIAL_ITEM.'.vendor_actual_recived_qty as vendor_received_qty_co,'.TBL_VENDOR_PO_MASTER.'.po_number as v_po_number');
         $this->db->select(TBL_VENDOR.'.vendor_name as vendorname,
                              "NA" as billofmaterialid,'
-                             .TBL_FINISHED_GOODS.'.part_number as partno
+                             .TBL_FINISHED_GOODS.'.part_number as partno,
                              "NA" as buyer, 
                              "NA" as flag,
                              "NA" as bom_status,'
