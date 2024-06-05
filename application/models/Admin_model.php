@@ -4886,7 +4886,8 @@ class Admin_model extends CI_Model
                 $data[$counter]['date'] = $value['date'];
                 $data[$counter]['fg_part_number'] = $value['partno'];
                 $get_vendor_received_qty = $this->get_vendor_order_qty($value['vendor_po_number'],$value['part_number']);
-                $data[$counter]['vendor_order_qty'] = $get_vendor_received_qty[0]['vendor_qty'];
+                $data[$counter]['vendor_order_qty'] = $get_vendor_received_qty[0]['order_oty'];
+              
                 $data[$counter]['vendor_received_qty'] = $value['vendor_received_qty_co'];
                 $data[$counter]['buyer_name'] = $value['buyer'];
                
@@ -4907,7 +4908,7 @@ class Admin_model extends CI_Model
 
 
     public function get_vendor_order_qty($vendor_po_number,$part_number){
-        $this->db->select('vendor_qty');
+        $this->db->select('order_oty');
         $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id', $vendor_po_number);
         $this->db->order_by(TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id',$part_number);
         $query = $this->db->get(TBL_VENDOR_PO_MASTER_ITEM);
