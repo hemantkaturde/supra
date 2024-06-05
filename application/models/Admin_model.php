@@ -4824,7 +4824,7 @@ class Admin_model extends CI_Model
                             '.TBL_BUYER_MASTER.'.buyer_name as buyer, 2 as flag,
                             '.TBL_BILL_OF_MATERIAL.'.bom_status,
                             '.TBL_BILL_OF_MATERIAL.'.vendor_po_number,
-                            '.TBL_BILL_OF_MATERIAL_ITEM.'.part_number,
+                            '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number,
                             
                             '.TBL_BILL_OF_MATERIAL_ITEM.'.vendor_actual_recived_qty as vendor_received_qty_co,
                             '.TBL_VENDOR_PO_MASTER.'.po_number as v_po_number');
@@ -4832,7 +4832,7 @@ class Admin_model extends CI_Model
                             $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id= '.TBL_BILL_OF_MATERIAL.'.vendor_po_number');
                            // $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id= '.TBL_VENDOR_PO_MASTER.'.id');
 
-                           //$this->db->join(TBL_VENDOR_PO_MASTER_ITEM.' as a', 'a.part_number_id= '.TBL_BILL_OF_MATERIAL_ITEM.'.part_number');
+                           $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id= '.TBL_BILL_OF_MATERIAL_ITEM.'.part_number');
                          //  $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id= a.vendor_po_id');
 
         // $this->db->join(TBL_BILL_OF_MATERIAL_ITEM.' as a', 'a.part_number= '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
