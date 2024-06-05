@@ -4853,16 +4853,11 @@ class Admin_model extends CI_Model
         }
 
         //$this->db->where(TBL_BILL_OF_MATERIAL.'.status', 1);
-        //$this->db->group_by(TBL_BILL_OF_MATERIAL_ITEM.'.id');
+        $this->db->group_by(TBL_BILL_OF_MATERIAL_ITEM.'.id');
         $this->db->order_by(TBL_BILL_OF_MATERIAL_ITEM.'.id','DESC');
         $this->db->limit($params['length'],$params['start']);
       
         $query = $this->db->get(TBL_BILL_OF_MATERIAL_ITEM);
-
-        // $str = $this->db->last_query();
-        // print_r($str);
-        // exit;
-
         // $fetch_result = $query->result_array();
         $query2 = $query->result_array();
 
