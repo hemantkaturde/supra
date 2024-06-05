@@ -4824,7 +4824,7 @@ class Admin_model extends CI_Model
                              .TBL_BUYER_MASTER.'.buyer_name as buyer,
                              "NA" as flag,
                              "NA" as bom_status,
-                              a.order_oty as vendor_order_qty_co,'
+                             "NA" as vendor_order_qty_co,'
 
                              .TBL_FINISHED_GOODS.'.part_number as partno,
                              "NA" as vendor_received_qty_co,'
