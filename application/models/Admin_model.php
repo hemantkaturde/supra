@@ -4561,7 +4561,6 @@ class Admin_model extends CI_Model
         TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_order_qty',
         TBL_FINISHED_GOODS.'.name as part_decription',
         ' "NA" as part_decription',
-        TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_order_qty',
         TBL_BILL_OF_MATERIAL_ITEM.'.vendor_actual_recived_qty as vendor_received_qty',   
         ' "NA" as net_Weight_per_pcs_in_kgs',
         ' "NA" as vendor_delivery_date',
