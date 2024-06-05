@@ -20018,7 +20018,7 @@
 					 var payment_exchange_amt = 0;
 				 }
 
-				 var total_one_group = parseFloat(payment_exchange_amt) *  parseFloat(payment_exchange_amt);
+				 var total_one_group = parseFloat(payment_rcivd_amt) *  parseFloat(payment_exchange_amt);
 
 				 $("#realised_amt_in_inr").val(total_one_group);
 			
