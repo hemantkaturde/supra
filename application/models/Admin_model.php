@@ -4818,11 +4818,20 @@ class Admin_model extends CI_Model
 
         /* Bill of material Data */
         //$this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_BILL_OF_MATERIAL.'.id as billofmaterialid,'.TBL_FINISHED_GOODS.'.part_number as partno,'.TBL_BUYER_MASTER.'.buyer_name as buyer, 2 as flag,'.TBL_BILL_OF_MATERIAL.'.bom_status,'.TBL_BILL_OF_MATERIAL_ITEM.'.rm_actual_aty as vendor_order_qty_co,'.TBL_BILL_OF_MATERIAL_ITEM.'.vendor_actual_recived_qty as vendor_received_qty_co,'.TBL_VENDOR_PO_MASTER.'.po_number as v_po_number');
-        $this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_BILL_OF_MATERIAL.'.id as billofmaterialid,'.TBL_FINISHED_GOODS.'.part_number as partno,'.TBL_BUYER_MASTER.'.buyer_name as buyer, 2 as flag,'.TBL_BILL_OF_MATERIAL.'.bom_status,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_order_qty_co,'.TBL_BILL_OF_MATERIAL_ITEM.'.vendor_actual_recived_qty as vendor_received_qty_co,'.TBL_VENDOR_PO_MASTER.'.po_number as v_po_number');
+        $this->db->select(TBL_VENDOR.'.vendor_name as vendorname,
+                             "NA" as billofmaterialid,
+                             "NA" as partno,
+                             "NA" as buyer, 
+                             "NA" as flag,
+                             "NA" as bom_status,'
+                             .TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_order_qty_co,
+                             "NA" as vendor_received_qty_co,
+                            "NA" as v_po_number');
 
-        $this->db->join(TBL_BILL_OF_MATERIAL, TBL_BILL_OF_MATERIAL.'.id= '.TBL_BILL_OF_MATERIAL_ITEM.'.bom_id');
-        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id= '.TBL_BILL_OF_MATERIAL.'.vendor_po_number');
+
         $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id= '.TBL_BILL_OF_MATERIAL_ITEM.'.part_number');
+        $this->db->join(TBL_BILL_OF_MATERIAL, TBL_BILL_OF_MATERIAL.'.id= '.TBL_BILL_OF_MATERIAL_ITEM.'.bom_id');
+        // $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id= '.TBL_BILL_OF_MATERIAL.'.vendor_po_number');
         // $this->db->join(TBL_BILL_OF_MATERIAL_ITEM.' as a', 'a.part_number= '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
       
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id= '.TBL_BILL_OF_MATERIAL.'.vendor_name');
@@ -4831,8 +4840,8 @@ class Admin_model extends CI_Model
        // $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id= '.TBL_BILL_OF_MATERIAL_ITEM.'.part_number');
        // $this->db->join(TBL_BILL_OF_MATERIAL_ITEM.' as a', 'a.part_number= '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
 
-        $this->db->join(TBL_BUYER_MASTER, TBL_BILL_OF_MATERIAL.'.buyer_name= '.TBL_BUYER_MASTER.'.buyer_id');
-        $this->db->join(TBL_FINISHED_GOODS, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id= '.TBL_FINISHED_GOODS.'.fin_id');
+       // $this->db->join(TBL_BUYER_MASTER, TBL_BILL_OF_MATERIAL.'.buyer_name= '.TBL_BUYER_MASTER.'.buyer_id');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_BILL_OF_MATERIAL_ITEM.'.part_number= '.TBL_FINISHED_GOODS.'.fin_id');
 
         if($params['search']['value'] != "") 
         {
@@ -4853,8 +4862,8 @@ class Admin_model extends CI_Model
         }
 
         //$this->db->where(TBL_BILL_OF_MATERIAL.'.status', 1);
-          $this->db->group_by(TBL_BILL_OF_MATERIAL_ITEM.'.id');
-          $this->db->order_by(TBL_BILL_OF_MATERIAL_ITEM.'.id','DESC');
+        // $this->db->group_by(TBL_BILL_OF_MATERIAL_ITEM.'.id');
+        // $this->db->order_by(TBL_BILL_OF_MATERIAL_ITEM.'.id','DESC');
         $this->db->limit($params['length'],$params['start']);
       
         $query = $this->db->get(TBL_BILL_OF_MATERIAL_ITEM);
