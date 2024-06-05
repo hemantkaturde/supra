@@ -4862,7 +4862,7 @@ class Admin_model extends CI_Model
         // }
 
         //$this->db->where(TBL_BILL_OF_MATERIAL.'.status', 1);
-        // $this->db->group_by(TBL_BILL_OF_MATERIAL_ITEM.'.id');
+        $this->db->group_by(TBL_BILL_OF_MATERIAL_ITEM.'.id');
         // $this->db->order_by(TBL_BILL_OF_MATERIAL_ITEM.'.id','DESC');
         $this->db->limit($params['length'],$params['start']);
       
