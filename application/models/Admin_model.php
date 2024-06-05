@@ -12499,7 +12499,7 @@ public function fetchscrapcalculationreportcount($params,$status){
         $this->db->where("(".TBL_RAWMATERIAL.".type_of_raw_material LIKE '%".str_replace("%20", " ", $status)."%')");
     }
 
-
+    $this->db->group_by(TBL_BILL_OF_MATERIAL.'.id');
     $query = $this->db->get(TBL_BILL_OF_MATERIAL);
     $rowcount = $query->num_rows();
     return $rowcount;
@@ -12548,6 +12548,7 @@ public function fetchscrapcalculationreportdata($params,$status){
 
     $this->db->where(TBL_BILL_OF_MATERIAL.'.status', 1);
     $this->db->limit($params['length'],$params['start']);
+    $this->db->group_by(TBL_BILL_OF_MATERIAL.'.id');
     $this->db->order_by(TBL_BILL_OF_MATERIAL.'.id','DESC');
     $query = $this->db->get(TBL_BILL_OF_MATERIAL);
     $fetch_result = $query->result_array();
