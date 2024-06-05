@@ -4818,7 +4818,7 @@ class Admin_model extends CI_Model
 
         /* Bill of material Data */
         //$this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_BILL_OF_MATERIAL.'.id as billofmaterialid,'.TBL_FINISHED_GOODS.'.part_number as partno,'.TBL_BUYER_MASTER.'.buyer_name as buyer, 2 as flag,'.TBL_BILL_OF_MATERIAL.'.bom_status,'.TBL_BILL_OF_MATERIAL_ITEM.'.rm_actual_aty as vendor_order_qty_co,'.TBL_BILL_OF_MATERIAL_ITEM.'.vendor_actual_recived_qty as vendor_received_qty_co,'.TBL_VENDOR_PO_MASTER.'.po_number as v_po_number');
-        $this->db->select(TBL_VENDOR.'.vendor_name as vendorname,
+        $this->db->select('"NA" as vendorname,
                              "NA" as billofmaterialid,
                           
                              "NA" as buyer, 
@@ -4831,10 +4831,10 @@ class Admin_model extends CI_Model
 
 
         $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id= '.TBL_BILL_OF_MATERIAL_ITEM.'.part_number');
-        $this->db->join(TBL_BILL_OF_MATERIAL, TBL_BILL_OF_MATERIAL.'.id= '.TBL_BILL_OF_MATERIAL_ITEM.'.bom_id');
-         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id= '.TBL_BILL_OF_MATERIAL.'.vendor_po_number');
+        //$this->db->join(TBL_BILL_OF_MATERIAL, TBL_BILL_OF_MATERIAL.'.id= '.TBL_BILL_OF_MATERIAL_ITEM.'.bom_id');
+        // $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id= '.TBL_BILL_OF_MATERIAL.'.vendor_po_number');
         // $this->db->join(TBL_BILL_OF_MATERIAL_ITEM.' as a', 'a.part_number= '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
-        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id= '.TBL_BILL_OF_MATERIAL.'.vendor_name');
+       // $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id= '.TBL_BILL_OF_MATERIAL.'.vendor_name');
 
         
         // $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id= '.TBL_BILL_OF_MATERIAL_ITEM.'.part_number');
@@ -4843,26 +4843,26 @@ class Admin_model extends CI_Model
        // $this->db->join(TBL_BUYER_MASTER, TBL_BILL_OF_MATERIAL.'.buyer_name= '.TBL_BUYER_MASTER.'.buyer_id');
         $this->db->join(TBL_FINISHED_GOODS, TBL_BILL_OF_MATERIAL_ITEM.'.part_number= '.TBL_FINISHED_GOODS.'.fin_id');
 
-        if($params['search']['value'] != "") 
-        {
-            $this->db->where("(".TBL_BILL_OF_MATERIAL.".bom_number LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_BILL_OF_MATERIAL.".date LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_BILL_OF_MATERIAL.".bom_status LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%')");
-        }
+        // if($params['search']['value'] != "") 
+        // {
+        //     $this->db->where("(".TBL_BILL_OF_MATERIAL.".bom_number LIKE '%".$params['search']['value']."%'");
+        //     $this->db->or_where(TBL_BILL_OF_MATERIAL.".date LIKE '%".$params['search']['value']."%'");
+        //     $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
+        //     $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+        //     $this->db->or_where(TBL_BILL_OF_MATERIAL.".bom_status LIKE '%".$params['search']['value']."%'");
+        //     $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%')");
+        // }
 
-        if($vendor_name!='NA'){
-            $this->db->where(TBL_BILL_OF_MATERIAL.'.vendor_name', 196); 
-        }
+        // if($vendor_name!='NA'){
+        //     $this->db->where(TBL_BILL_OF_MATERIAL.'.vendor_name', 196); 
+        // }
 
-        if($status!='NA'){
-            $this->db->where(TBL_BILL_OF_MATERIAL.'.bom_status', $status); 
-        }
+        // if($status!='NA'){
+        //     $this->db->where(TBL_BILL_OF_MATERIAL.'.bom_status', $status); 
+        // }
 
         //$this->db->where(TBL_BILL_OF_MATERIAL.'.status', 1);
-       // $this->db->group_by(TBL_BILL_OF_MATERIAL_ITEM.'.id');
+        // $this->db->group_by(TBL_BILL_OF_MATERIAL_ITEM.'.id');
         // $this->db->order_by(TBL_BILL_OF_MATERIAL_ITEM.'.id','DESC');
         $this->db->limit($params['length'],$params['start']);
       
