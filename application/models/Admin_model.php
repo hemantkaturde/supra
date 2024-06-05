@@ -4567,7 +4567,7 @@ class Admin_model extends CI_Model
         TBL_BILL_OF_MATERIAL_ITEM.'.remark as item_remark',
         TBL_BILL_OF_MATERIAL_ITEM.'.expected_qty as expected_qty',
         TBL_BILL_OF_MATERIAL_ITEM.'.rm_actual_aty as raw_material_actual_recd_qty',
-        TBL_SUPPLIER_PO_MASTER_ITEM.'.order_oty as raw_material_order_qty',
+        '"NA" as raw_material_order_qty',
      ));
 
       if($vendor_name!='NA'){
@@ -4590,7 +4590,7 @@ class Admin_model extends CI_Model
      $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id= '.TBL_BILL_OF_MATERIAL.'.buyer_name');
      $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id= '.TBL_VENDOR_PO_MASTER.'.supplier_po_number');
      $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id= '.TBL_SUPPLIER_PO_MASTER.'.supplier_name');
-     $this->db->join(TBL_SUPPLIER_PO_MASTER_ITEM, TBL_SUPPLIER_PO_MASTER_ITEM.'.supplier_po_id= '.TBL_VENDOR_PO_MASTER.'.supplier_po_number');
+     //$this->db->join(TBL_SUPPLIER_PO_MASTER_ITEM, TBL_SUPPLIER_PO_MASTER_ITEM.'.supplier_po_id= '.TBL_VENDOR_PO_MASTER.'.supplier_po_number');
      $this->db->group_by(TBL_SUPPLIER_PO_MASTER_ITEM.'.id');
      $this->db->from(TBL_BILL_OF_MATERIAL);
      $query_2 = $this->db->get();
