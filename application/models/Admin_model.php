@@ -4821,7 +4821,7 @@ class Admin_model extends CI_Model
         $this->db->select(TBL_VENDOR.'.vendor_name as vendorname,
                              "NA" as billofmaterialid,'
                           
-                             .TBL_BUYER_MASTER.'.buyer_name as buyer
+                             .TBL_BUYER_MASTER.'.buyer_name as buyer,
                              "NA" as flag,
                              "NA" as bom_status,
                              "NA" as vendor_order_qty_co,'
