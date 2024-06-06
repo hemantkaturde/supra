@@ -4819,7 +4819,7 @@ class Admin_model extends CI_Model
         /* Bill of material Data */
                             $this->db->select(
                               TBL_BILL_OF_MATERIAL.'.id as billofmaterialid,
-                            '.TBL_BILL_OF_MATERIAL.'.date as partno,
+                            '.TBL_BILL_OF_MATERIAL.'.date as date,
                             '.TBL_FINISHED_GOODS.'.part_number as partno,
                             '.TBL_BUYER_MASTER.'.buyer_name as buyer, 2 as flag,
                             '.TBL_BILL_OF_MATERIAL.'.bom_status,
