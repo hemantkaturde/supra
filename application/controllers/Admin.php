@@ -5920,6 +5920,8 @@ class Admin extends BaseController
                     'short_excess'=>$this->input->post('short_access'),
                     'scrap_in_kgs'=>$this->input->post('scrap'),
                     'actual_scrap_received_in_kgs'=>$this->input->post('actual_scrap_recived'),
+                    'vendor_order_qty'=>$this->input->post('vendor_order_qty'),
+
                     'remark'=>$this->input->post('item_remark'),
 
                     'pre_date'   =>$this->input->post('pre_date'),

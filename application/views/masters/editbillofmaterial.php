@@ -370,6 +370,14 @@
                                                         </div>
                                                     </div>
 
+                                                    
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-4 col-form-label">Vendor Order Qty</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" class="form-control"  id="vendor_order_qty" name="vendor_order_qty" value="0">
+                                                            <p class="error vendor_order_qty_error"></p>
+                                                        </div>
+                                                    </div>
 
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Vendor Actual Received Qty (Enter Zero If No Qty Received)</label>

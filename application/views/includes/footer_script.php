@@ -6214,6 +6214,8 @@
 										$('#hex_af').val('');
 										$('#gross_weight').val('');
 										$('#net_weight_per_pcs').val('');
+										$('#vendor_order_qty').val('');
+
 
 									}
 									else
@@ -6228,9 +6230,8 @@
 										$('#hex_af').val(data_row_material.hex_a_f);
 										$('#gross_weight').val(data_row_material.fg_gross_weight);
 										$('#net_weight_per_pcs').val(data_row_material.fg_net_weight);
+										$('#vendor_order_qty').val(data_row_material.vendor_or_qty);
 
-
-								
 									}
 								},
 								error: function (jqXHR, textStatus, errorThrown)
@@ -6244,6 +6245,8 @@
 										$('#hex_af').val('');
 										$('#gross_weight').val('');
 										$('#net_weight_per_pcs').val('');
+										$('#vendor_order_qty').val('');
+
 
 								}
 							});
@@ -6458,6 +6461,8 @@
 			   var actual_scrap_recived =  $('#actual_scrap_recived').val();
 			   var item_remark =  $('#item_remark').val();
 			
+			   var vendor_order_qty =  $('#vendor_order_qty').val();
+
 
 			   var pre_date  =  $('#date').val();
 			   var pre_vendor_name =  $('#vendor_name').val();
@@ -6482,7 +6487,7 @@
 				url : "<?php echo base_url();?>saveBillofmaterialtem",
 				type: "POST",
 				 //data : formData,
-				 data :{part_number:part_number,rm_actual_aty:rm_actual_aty,expected_qty:expected_qty,vendor_actual_received_Qty:vendor_actual_received_Qty,net_weight_per_pcs:net_weight_per_pcs,total_net_weight:total_net_weight,short_access:short_access,scrap:scrap,actual_scrap_recived:actual_scrap_recived,item_remark,pre_date:pre_date,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_supplier_name:pre_supplier_name,pre_supplier_po_number:pre_supplier_po_number,pre_buyer_name:pre_buyer_name,pre_buyer_po_number:pre_buyer_po_number,pre_buyer_po_date:pre_buyer_po_date,pre_buyer_delivery_date:pre_buyer_delivery_date,pre_bom_status:pre_bom_status,pre_incoming_details:pre_incoming_details,pre_remark,supplier_po_date:supplier_po_date,bom_id_edit:bom_id_edit,bill_of_material_item_id:bill_of_material_item_id},
+				 data :{part_number:part_number,rm_actual_aty:rm_actual_aty,expected_qty:expected_qty,vendor_actual_received_Qty:vendor_actual_received_Qty,net_weight_per_pcs:net_weight_per_pcs,total_net_weight:total_net_weight,short_access:short_access,scrap:scrap,actual_scrap_recived:actual_scrap_recived,item_remark,pre_date:pre_date,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_supplier_name:pre_supplier_name,pre_supplier_po_number:pre_supplier_po_number,pre_buyer_name:pre_buyer_name,pre_buyer_po_number:pre_buyer_po_number,pre_buyer_po_date:pre_buyer_po_date,pre_buyer_delivery_date:pre_buyer_delivery_date,pre_bom_status:pre_bom_status,pre_incoming_details:pre_incoming_details,pre_remark,supplier_po_date:supplier_po_date,bom_id_edit:bom_id_edit,bill_of_material_item_id:bill_of_material_item_id,vendor_order_qty:vendor_order_qty},
 				// method: "POST",
                 // data :{package_id:package_id},
                 cache:false,
@@ -6836,6 +6841,7 @@
 						$('#hex_af').val(fetchResponse.hex_a_f);
 						$('#gross_weight').val(fetchResponse.gross_weight);
 						$('#expected_qty').val(fetchResponse.expected_qty);
+						$('#vendor_order_qty').val(fetchResponse.vendor_order_qty);
 						$('#vendor_actual_received_Qty').val(fetchResponse.vendor_actual_recived_qty);
 						$('#net_weight_per_pcs').val(fetchResponse.net_weight_per_pcs);
 						$('#total_net_weight').val(fetchResponse.total_neight_weight);
