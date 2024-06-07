@@ -7594,6 +7594,7 @@ class Admin_model extends CI_Model
         }
         $this->db->where(TBL_ENAUIRY_FORM.'.status', 1);
         $this->db->order_by(TBL_ENAUIRY_FORM.'.id','DESC');
+        $this->db->limit($params['length'],$params['start']);
         $query = $this->db->get(TBL_ENAUIRY_FORM);
         $fetch_result = $query->result_array();
 
