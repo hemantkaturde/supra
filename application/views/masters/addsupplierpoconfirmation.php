@@ -413,7 +413,7 @@
                                     <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="remark">Remark</label>
-                                                  <textarea type="text" class="form-control"  id="remark"  name="remark" required> <?=$fetchALLpresupplierpoconfirmationitemList[0]['pre_confirmed_with'];?></textarea>
+                                                  <textarea type="text" class="form-control"  id="remark"  name="remark" required> <?=$fetchALLpresupplierpoconfirmationitemList[0]['pre_remark'];?></textarea>
                                                 <p class="error remark_error"></p>
                                             </div>
                                     </div>
