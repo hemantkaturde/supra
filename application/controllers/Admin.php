@@ -6643,7 +6643,7 @@ class Admin extends BaseController
                 $objPHPExcel->getActiveSheet()->SetCellValue('Q' . $rowCount, $element['vendor_order_qty']);
                 $objPHPExcel->getActiveSheet()->SetCellValue('R' . $rowCount, $element['vendor_received_qty']);
                 $objPHPExcel->getActiveSheet()->SetCellValue('S' . $rowCount, $element['net_Weight_per_pcs_in_kgs']);
-                $objPHPExcel->getActiveSheet()->SetCellValue('T' . $rowCount, $element['vendor_PO_date']);
+                // $objPHPExcel->getActiveSheet()->SetCellValue('T' . $rowCount, $element['vendor_PO_date']);
                 $objPHPExcel->getActiveSheet()->SetCellValue('T' . $rowCount, $element['vendor_delivery_date']);
                 $objPHPExcel->getActiveSheet()->SetCellValue('U' . $rowCount, $element['item_remark']);
                 $objPHPExcel->getActiveSheet()->SetCellValue('V' . $rowCount, $element['form_name']);
