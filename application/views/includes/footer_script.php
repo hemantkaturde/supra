@@ -4086,7 +4086,7 @@
 			   var pre_po_confirmed =   $('#po_confirmed').val();
 			   var pre_confirmed_date =   $('#confirmed_date').val();
 			   var pre_confirmed_with =   $('#confirmed_with').val();
-			   var pre_remark =   $('#pre_remark').val();
+			   var pre_remark =   $('#remark').val();
 
 			   var short_excess =   $('#short_excess').val();
 			   var sent_qty =   $('#sent_qty').val();

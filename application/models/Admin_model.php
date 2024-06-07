@@ -2275,7 +2275,7 @@ class Admin_model extends CI_Model
 
     public function getSupplierpoconfirmationdetails($supplierpoconfirmationid){
 
-        $this->db->select('*,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_po,'.TBL_SUPPLIER_PO_CONFIRMATION.'.buyer_po_id as buyerpoid,'.TBL_SUPPLIER_PO_CONFIRMATION.'.po_number as confirmation_po');
+        $this->db->select('*,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_po,'.TBL_SUPPLIER_PO_CONFIRMATION.'.buyer_po_id as buyerpoid,'.TBL_SUPPLIER_PO_CONFIRMATION.'.po_number as confirmation_po,'.TBL_SUPPLIER_PO_CONFIRMATION.'.remark as rm');
         $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_SUPPLIER_PO_CONFIRMATION.'.supplier_po_number');
         $this->db->where(TBL_SUPPLIER_PO_CONFIRMATION.'.id', $supplierpoconfirmationid);
         $query = $this->db->get(TBL_SUPPLIER_PO_CONFIRMATION);
