@@ -13777,13 +13777,13 @@
 					 var previous_short_excess_qty = 0;
 				 }
 
-				//  if(previous_short_excess_qty > 0){
-				// 	var calculate_qty = previous_short_excess_qty;
-				//  }else{
-				// 	var calculate_qty = order_qty;
-				//  }
+				 if(previous_short_excess_qty > 0){
+					var calculate_qty = previous_short_excess_qty;
+				 }else{
+					var calculate_qty = order_qty;
+				 }
 
-				var calculate_qty = previous_short_excess_qty;
+				//var calculate_qty = previous_short_excess_qty;
 
 				 var total_short_excess_qty = parseFloat(calculate_qty) -  parseFloat(qty_recived);
 
@@ -14031,8 +14031,9 @@
 							}
 
 							//var short_excess_qty = fetchResponse.short_excess_qty;
+							$('#previous_short_excess_qty').val(short_excess_qty); 	
+
 						}
-						$('#previous_short_excess_qty').val(short_excess_qty); 	
 				},
 				error: function (jqXHR, textStatus, errorThrown)
 			    {
