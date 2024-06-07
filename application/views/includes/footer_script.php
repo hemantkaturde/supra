@@ -14012,10 +14012,11 @@
 			var elemF = $(this);
 			var part_number = $('#part_number').val();
 			var vendor_po_number = $('#vendor_po_number').val();
+			var supplier_po_number = $('#supplier_po_number').val();
 			$.ajax({
 				url : "<?php echo base_url();?>getpreviousshortexcess",
 				type: "POST",
-				data : 'part_number='+part_number+'&vendor_po_number='+vendor_po_number,
+				data : 'part_number='+part_number+'&vendor_po_number='+vendor_po_number+'&supplier_po_number='+supplier_po_number,
 				success: function(data, textStatus, jqXHR)
 				{ 
 					    var fetchResponse = $.parseJSON(data);
@@ -14064,6 +14065,7 @@
 								{
 									$('.vendor_po_number_error').html('');
 									$('#savenewpoddetails').prop('disabled', false);
+									$('#add_item_details').prop('disabled', false);
 
 								}
 								else
@@ -14073,9 +14075,11 @@
 									if(data_row_material.vendor_po){
 										$('.vendor_po_number_error').html('POD Details Alreday Exists For This Vendor PO');
 										$('#savenewpoddetails').prop('disabled', true);
+										$('#add_item_details').prop('disabled', true);
 									}else{
 
 										$('.vendor_po_number_error').html('');
+										$('#add_item_details').prop('disabled', false);
 										$('#savenewpoddetails').prop('disabled', false);
 									}
 								}

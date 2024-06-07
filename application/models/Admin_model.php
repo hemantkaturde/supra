@@ -9687,15 +9687,33 @@ class Admin_model extends CI_Model
         return $data;
     }
 
-    public function getpreviousshortexcess($part_number,$vendor_po_number){
-        $this->db->select('short_excess_qty');
-        $this->db->where(TBL_POD_ITEM.'.part_number', $part_number);
-        $this->db->where(TBL_POD_ITEM.'.pre_vendor_po_number', $vendor_po_number);
-        $this->db->order_by(TBL_POD_ITEM.'.id','DESC');
-        $this->db->limit(1);
-        $query = $this->db->get(TBL_POD_ITEM);
-        $fetch_result = $query->result_array();
-        return $fetch_result;
+    public function getpreviousshortexcess($part_number,$vendor_po_number,$supplier_po_number){
+       
+        if($vendor_po_number){
+            $this->db->select(TBL_POD_ITEM.'.short_excess_qty');
+            $this->db->join(TBL_POD_DETAILS, TBL_POD_DETAILS.'.pod_details_id = '.TBL_POD_ITEM.'.POD_id');
+            $this->db->where(TBL_POD_ITEM.'.part_number', $part_number);
+            $this->db->where(TBL_POD_ITEM.'.pre_vendor_po_number', $vendor_po_number);
+            $this->db->where(TBL_POD_DETAILS.'.vendor_po', $vendor_po_number);
+            $this->db->order_by(TBL_POD_ITEM.'.id','DESC');
+            $this->db->limit(1);
+            $query = $this->db->get(TBL_POD_ITEM);
+            $fetch_result = $query->result_array();
+            return $fetch_result;
+        } else{
+            $this->db->select(TBL_POD_ITEM.'.short_excess_qty');
+            $this->db->join(TBL_POD_DETAILS, TBL_POD_DETAILS.'.pod_details_id = '.TBL_POD_ITEM.'.POD_id');
+            $this->db->where(TBL_POD_ITEM.'.part_number', $part_number);
+            $this->db->where(TBL_POD_ITEM.'.pre_supplier_po_number', $supplier_po_number);
+            $this->db->where(TBL_POD_DETAILS.'.supplier_po', $supplier_po_number);
+            $this->db->order_by(TBL_POD_ITEM.'.id','DESC');
+            $this->db->limit(1);
+            $query = $this->db->get(TBL_POD_ITEM);
+            $fetch_result = $query->result_array();
+            return $fetch_result;
+    
+
+        } 
     }
 
     // public function fetchbuyerpodetailsreportCount($params,$buyer_name,$part_number,$from_date,$to_date){
@@ -12819,6 +12837,18 @@ public function fetchproductionstatusreportdata($params,$vendor_name,$status){
     }
 
     return $data;
+}
+
+public function fetchALLvendorpoList(){
+
+    $this->db->select('*');
+    $this->db->join(TBL_PREEXPORT_ITEM_DETAILS, TBL_PREEXPORT_ITEM_DETAILS.'.id = '.TBL_PREEXPORT_ITEM_ATTRIBUTES.'.pre_export_item_id');
+    $this->db->where(TBL_PREEXPORT_ITEM_ATTRIBUTES.'.main_export_id',$pre_export_id);
+    $query = $this->db->get(TBL_PREEXPORT_ITEM_ATTRIBUTES);
+    $fetch_result = $query->row_array();
+    return $fetch_result;
+
+
 }
 
 

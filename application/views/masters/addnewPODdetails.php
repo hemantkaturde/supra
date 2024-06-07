@@ -265,7 +265,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="container">
-                                        <button type="button" class="btn btn-success btn-xl" data-toggle="modal"
+                                        <button type="button" class="btn btn-success btn-xl" id="add_item_details" data-toggle="modal"
                                             data-target="#addNewModal">Add New Items</button><br /><br />
                                         <table class="table table-bordered"
                                             style="max-width: 68%;display: block;overflow-x: auto; white-space: nowrap;">

@@ -10456,7 +10456,7 @@ public function getpreviousshortexcess(){
     $post_submit = $this->input->post();
 
     if($post_submit){
-        $getpreviousshortexcess = $this->admin_model->getpreviousshortexcess(trim($this->input->post('part_number')),trim($this->input->post('vendor_po_number')));
+        $getpreviousshortexcess = $this->admin_model->getpreviousshortexcess(trim($this->input->post('part_number')),trim($this->input->post('vendor_po_number')),trim($this->input->post('supplier_po_number')));
         if($getpreviousshortexcess){
             $content = $getpreviousshortexcess[0];
             echo json_encode($content);
@@ -16485,6 +16485,8 @@ public function productionstatusreport(){
     $processFunction = 'Admin/productionstatusreport';
     $this->global['pageTitle'] = 'Production Status Report';
     $data['vendorList']= $this->admin_model->fetchALLvendorList();
+    $data['finishgoodList']= $this->admin_model->fetchALLFinishgoodList();
+    $data['vendorpoList']= $this->admin_model->fetchALLvendorpoList();
     $this->loadViews("masters/productionstatusreport", $this->global, $data, NULL);  
 }
 

@@ -23,9 +23,39 @@
                         <?php $this->load->helper("form"); ?>
                             <div class="box-body">
                                 <div class="row" style="margin-left:4px">
-                                    <div class="col-md-4">
+
+                                    <div class="col-md-2">
                                         <div class="form-group">
-                                            <label for="vendor_name">Vendor Name <span class="required">*</span></label>
+                                            <label for="vendor_name">Part Number</label>
+                                                <select class="form-control" name="vendor_name" id="vendor_name">
+                                                    <option st-id="" value="NA">Select Part Number</option>
+                                                    <?php foreach ($vendorList as $key => $value) {?>
+                                                    <option value="<?php echo $value['ven_id']; ?>"  <?php if($value['ven_id']==$fetchALLpresupplieritemList[0]['pre_vendor_name']){ echo 'selected';} ?> ><?php echo $value['vendor_name']; ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            <p class="error vendor_name_error"></p>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="vendor_name">Vendor PO</label>
+                                                <select class="form-control" name="vendor_name" id="vendor_name">
+                                                    <option st-id="" value="NA">Select Vendor PO</option>
+                                                    <?php foreach ($vendorList as $key => $value) {?>
+                                                    <option value="<?php echo $value['ven_id']; ?>"  <?php if($value['ven_id']==$fetchALLpresupplieritemList[0]['pre_vendor_name']){ echo 'selected';} ?> ><?php echo $value['vendor_name']; ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            <p class="error vendor_name_error"></p>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="vendor_name">Vendor Name</label>
                                                 <select class="form-control" name="vendor_name" id="vendor_name">
                                                     <option st-id="" value="NA">Select Vendor Name</option>
                                                     <?php foreach ($vendorList as $key => $value) {?>
