@@ -6258,7 +6258,7 @@ class Admin_model extends CI_Model
             {
                 $data[$counter]['pod_details_number'] = $value['pod_details_number'];
                 $data[$counter]['pod_details_date'] = $value['pod_details_date'];
-                $data[$counter]['type'] = $value['type'];
+                // $data[$counter]['type'] = $value['type'];
                 $data[$counter]['vendor_name'] = $value['vendorname'];
                 $data[$counter]['vendor_po_number'] = $value['vendor_pomaster'];
                 $data[$counter]['supplier_name'] = $value['supplier'];
