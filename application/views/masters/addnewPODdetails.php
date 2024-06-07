@@ -457,8 +457,8 @@
                                                             <label class="col-sm-4 col-form-label"> Previous Short / Excess
                                                                 Qty</label>
                                                             <div class="col-sm-8">
-                                                                <input type="text" class="form-control"
-                                                                    id="previous_short_excess_qty" name="previous_short_excess_qty"
+                                                                <input type="text" class="form-control" value="0"
+                                                                    id="previous_short_excess_qty" name="previous_short_excess_qty" 
                                                                     readonly>
                                                                 <p class="error previous_short_excess_qty_error"></p>
                                                             </div>
