@@ -14025,13 +14025,13 @@
 						if(fetchResponse =='failure'){
 							var short_excess_qty = 0;
 						}else{
-							if(fetchResponse.short_excess_qty > 0){
-                               var short_excess_qty = fetchResponse.short_excess_qty;
-							}else{
-							   var short_excess_qty = 0;
-							}
+							// if(fetchResponse.short_excess_qty > 0){
+                            //    var short_excess_qty = fetchResponse.short_excess_qty;
+							// }else{
+							//    var short_excess_qty = 0;
+							// }
 
-							//var short_excess_qty = fetchResponse.short_excess_qty;
+							var short_excess_qty = fetchResponse.short_excess_qty;
 							$('#previous_short_excess_qty').val(short_excess_qty); 	
 
 						}
