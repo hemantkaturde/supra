@@ -16492,11 +16492,11 @@ public function productionstatusreport(){
 
 
 
-public function fetchproductionstatusreport($vendor_name,$status){
+public function fetchproductionstatusreport($vendor_name,$status,$part_number,$vendor_po){
 
     $params = $_REQUEST;
-    $totalRecords = $this->admin_model->fetchproductionstatusreportcount($params,$vendor_name,$status); 
-    $queryRecords = $this->admin_model->fetchproductionstatusreportdata($params,$vendor_name,$status); 
+    $totalRecords = $this->admin_model->fetchproductionstatusreportcount($params,$vendor_name,$status,$part_number,$vendor_po); 
+    $queryRecords = $this->admin_model->fetchproductionstatusreportdata($params,$vendor_name,$status,$part_number,$vendor_po); 
 
     $data = array();
     foreach ($queryRecords as $key => $value)

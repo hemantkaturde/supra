@@ -20190,29 +20190,57 @@
   
 	$(document).ready(function() {
 		$("#view_production_status_report").dataTable().fnDestroy();
+		var vendor_po = $('#vendor_po').val();
+		var part_number = $('#part_number').val();
 		var vendor_name = $('#vendor_name').val();
 		var status = $('#status').val();
-		getallProductionstatusreport($("#vendor_name").val(), $("#status").val());
+		getallProductionstatusreport($("#vendor_name").val(), $("#status").val(),$("#part_number").val(),$("#vendor_po").val());
 	});
 
 	$(document).on('change','#vendor_name',function(e){  
 		$("#view_production_status_report").dataTable().fnDestroy();
 			e.preventDefault();
+			var vendor_po = $('#vendor_po').val();
+    		var part_number = $('#part_number').val();
 			var vendor_name = $('#vendor_name').val();
 			var status = $('#status').val();
-			getallProductionstatusreport($("#vendor_name").val(), $("#status").val());
+			getallProductionstatusreport($("#vendor_name").val(), $("#status").val(),$("#part_number").val(),$("#vendor_po").val());
 	});
 
 	$(document).on('change','#status',function(e){  
 		$("#view_production_status_report").dataTable().fnDestroy();
-
 		e.preventDefault();
-		var vendor_name = $('#vendor_name').val();
-		var status = $('#status').val();
-		getallProductionstatusreport($("#vendor_name").val(), $("#status").val());
+			var vendor_po = $('#vendor_po').val();
+			var part_number = $('#part_number').val();
+			var vendor_name = $('#vendor_name').val();
+			var status = $('#status').val();
+		getallProductionstatusreport($("#vendor_name").val(), $("#status").val(),$("#part_number").val(),$("#vendor_po").val());
 	});
 
-	function getallProductionstatusreport(vendor_name,status){
+
+	$(document).on('change','#part_number',function(e){  
+		$("#view_production_status_report").dataTable().fnDestroy();
+			e.preventDefault();
+ 			var vendor_po = $('#vendor_po').val();
+    		var part_number = $('#part_number').val();
+			var vendor_name = $('#vendor_name').val();
+			var status = $('#status').val();
+			getallProductionstatusreport($("#vendor_name").val(), $("#status").val(),$("#part_number").val(),$("#vendor_po").val());
+	});
+
+	$(document).on('change','#vendor_po',function(e){  
+		$("#view_production_status_report").dataTable().fnDestroy();
+		e.preventDefault();
+			var vendor_po = $('#vendor_po').val();
+			var part_number = $('#part_number').val();
+			var vendor_name = $('#vendor_name').val();
+			var status = $('#status').val();
+		getallProductionstatusreport($("#vendor_name").val(), $("#status").val(),$("#part_number").val(),$("#vendor_po").val());
+	});
+
+
+
+	function getallProductionstatusreport(vendor_name,status,part_number,vendor_po){
 
 			var dt = $('#view_production_status_report').DataTable({
 				"columnDefs": [ 
@@ -20240,7 +20268,7 @@
 				"bProcessing": true,
 				"serverSide": true,
 				"ajax":{
-					url :"<?php echo base_url();?>admin/fetchproductionstatusreport/"+vendor_name+"/"+status,
+					url :"<?php echo base_url();?>admin/fetchproductionstatusreport/"+vendor_name+"/"+status+"/"+part_number+"/"+vendor_po,
 					type: "post",
 				},
 			});
