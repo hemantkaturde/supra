@@ -20277,9 +20277,11 @@
 	
 	$(document).on('click','#export_to_excel',function(e){
 		e.preventDefault();
-
+		$(".loader_ajax").show();
 		var vendor_name       =    $('#vendor_name').val();
-		var status         =    $("#status").val();
+		var status         =       $("#status").val();
+		var vendor_po       =        $('#vendor_po').val();
+		var part_number         =    $("#part_number").val();
 
 		if(vendor_name){
 			var vendor_name_value = vendor_name;
@@ -20288,15 +20290,25 @@
 		}
 
 		if(status){
-
 			var status_value = status;
 		}else{
-
 			var status_value = 'NA';
 		}
 
+		if(vendor_po){
+			var vendor_po_number = vendor_po;
+		}else{
+			var vendor_po_number = 'NA';
+		}
+
+		if(part_number){
+			var part_number_id = part_number;
+		}else{
+			var part_number_id = 'NA';
+		}
+
 		$.ajax({
-			url : "<?php echo ADMIN_PATH;?>admin/downlaod_current_orderstatus/"+vendor_name_value+"/"+status_value,
+			url : "<?php echo ADMIN_PATH;?>admin/downlaod_production_status_report/"+vendor_name_value+"/"+status_value+"/"+vendor_po_number+"/"+part_number_id,
 			type: "POST",
 			// data : {'hospitals' : hospitals, 'driver' : driver,'ride_start':ride_start,'ride_stop':ride_stop},
 			success: function(data, textStatus, jqXHR)
@@ -20310,13 +20322,13 @@
 				else
 				{
 					$(".report_type_error").html("");
-					window.location.href = "<?php echo ADMIN_PATH;?>admin/downlaod_current_orderstatus/"+vendor_name+"/"+status;
+					window.location.href = "<?php echo ADMIN_PATH;?>admin/downlaod_production_status_report/"+vendor_name_value+"/"+status_value+"/"+vendor_po_number+"/"+part_number_id;
 				}
 			},
 			error: function (jqXHR, textStatus, errorThrown)
 			{
 				   alert('No data fond');
-				$(".loader_ajax").hide();
+				   $(".loader_ajax").hide();
 			}
 		});
 	   return false;
