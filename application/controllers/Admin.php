@@ -13380,7 +13380,7 @@ public function downloadpackinginstraction($packing_details_item_id){
         $section = $phpWord->addSection();
 
         // Sample HTML table string
-        $htmlTable = '<table style="width:100%;font-size:20px;font-family:cambria;" border="0.5">
+        $htmlTable = '<table style="width:80%;font-size:18px;font-family:cambria;" border="0.5">
                 <tr>
                     <th colspan="3" style="text-align:center;padding: 10px;"><b>PACKAGING INSTRUCTION</b></th>
                 </tr>
@@ -13421,7 +13421,7 @@ public function downloadpackinginstraction($packing_details_item_id){
                 </tr>
             </table>   <br/>
 
-            <table style="width:100%;font-size:20px;font-family:cambria;" border="0.5">
+            <table style="width:80%;font-size:18px;font-family:cambria;" border="0.5">
                 <tr>
                     <th colspan="3" style="text-align:center;padding: 10px;"><b>PACKAGING INSTRUCTION</b></th>
                 </tr>
@@ -13463,7 +13463,7 @@ public function downloadpackinginstraction($packing_details_item_id){
             </table>
             <br/>
 
-            <table style="width:100%;font-size:20px;font-family:cambria;" border="0.5">
+            <table style="width:80%;font-size:18px;font-family:cambria;" border="0.5">
                 <tr>
                     <th colspan="3" style="text-align:center;padding: 10px;"><b>PACKAGING INSTRUCTION</b></th>
                 </tr>
