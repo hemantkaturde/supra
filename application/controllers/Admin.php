@@ -16594,8 +16594,8 @@ public function downlaod_production_status_report($vendor_name,$status,$vendor_p
         $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['fg_part_number']);
         $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['part_description']);
         $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['vendor_order_qty']);
-        $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['expected_qty']);
-        $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $element['vendor_actual_recived_qty']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['vendor_received_qty']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $element['vendor_received_qtys']);
         $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, $element['delivery_date']);
         $objPHPExcel->getActiveSheet()->SetCellValue('J' . $rowCount, $element['buyer_name']);
         $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, $element['buyer_po_number']);
