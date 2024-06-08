@@ -13787,7 +13787,7 @@
 				 var total_short_excess_qty = parseFloat(calculate_qty) -  parseFloat(qty_recived);
 				 
 
-				 $("#short_excess_qty").val(total_short_excess_qty);
+				 $("#short_excess_qty").val(total_short_excess_qty.toFixed(2));
 			
 		 });
 
