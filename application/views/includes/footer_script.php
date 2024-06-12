@@ -20238,8 +20238,6 @@
 		getallProductionstatusreport($("#vendor_name").val(), $("#status").val(),$("#part_number").val(),$("#vendor_po").val());
 	});
 
-
-
 	function getallProductionstatusreport(vendor_name,status,part_number,vendor_po){
 
 			var dt = $('#view_production_status_report').DataTable({
@@ -20256,6 +20254,7 @@
 					{ "width": "10%", "targets": 8 },
 					{ "width": "10%", "targets": 9 },
 					{ "width": "10%", "targets": 10 },
+					{ "width": "10%", "targets": 11 },
 				],
 				responsive: true,
 				"oLanguage": {
@@ -20333,6 +20332,87 @@
 		});
 	   return false;
 	});
+
+	$(document).on('click','.addnotes',function(e){
+		var elemF = $(this);
+	    e.preventDefault();
+		$.ajax({
+			url : "<?php echo ADMIN_PATH;?>getpreviousaddednotesfordisplay",
+			type: "POST",
+			data : {'id' : elemF.attr('data-id')},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+						{
+							$('#notes').val('');
+							$('#notes_id').val('');
+							$('#addnotes').modal('hide');
+						}
+						else
+						{
+							var notedata = jQuery.parseJSON( data );
+							$('#notes').val(notedata.notes);
+							$('#notes_id').val(notedata.id);
+							$('#addnotes').modal('show');
+					    }
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+					{
+							$('#notes').val('');
+							$('#notes_id').val('');
+							$('#addnotes').modal('hide');
+					}
+		});
+	});
+
+	$(document).on('click','#close',function(e){
+		window.location.reload();
+	});
+
+	$(document).on('click','#savebillofmaterialnotes',function(e){
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			
+				var notes_id = $('#notes_id').val();
+				var notes = $('#notes').val();
+
+				$.ajax({
+					url : "<?php echo base_url();?>savebillofmaterialnotes",
+					type: "POST",
+					data : {'notes_id':notes_id,'notes':notes},
+					success: function(data, textStatus, jqXHR)
+					{
+						var fetchResponse = $.parseJSON(data);
+						if(fetchResponse.status == "failure")
+						{
+							$.each(fetchResponse.error, function (i, v)
+							{
+								$('.'+i+'_error').html(v);
+							});
+							//$(".loader_ajax").hide();
+						}
+						else if(fetchResponse.status == 'success')
+						{
+							swal({
+								title: "Success",
+								text: "Bill Of Material Notes Added Successfully!",
+								icon: "success",
+								button: "Ok",
+								},function(){ 
+									window.location.href = "<?php echo base_url().'productionstatusreport'?>";
+							});		
+						}
+						
+					},
+					error: function (jqXHR, textStatus, errorThrown)
+					{
+					  //$(".loader_ajax").hide();
+					}
+				});
+				return false;
+	});
+	
 
 </script>  
 <?php } ?>

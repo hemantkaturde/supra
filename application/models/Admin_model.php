@@ -12752,7 +12752,7 @@ public function fetchproductionstatusreportcount($params,$vendor_name,$status,$p
 
 public function fetchproductionstatusreportdata($params,$vendor_name,$status,$part_number,$vendor_po){
     //$this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_BILL_OF_MATERIAL.'.id as billofmaterialid,'.TBL_FINISHED_GOODS.'.part_number as partno,'.TBL_BUYER_MASTER.'.buyer_name as buyer, 2 as flag,'.TBL_BILL_OF_MATERIAL.'.bom_status,'.TBL_BILL_OF_MATERIAL_ITEM.'.rm_actual_aty as vendor_order_qty_co,'.TBL_BILL_OF_MATERIAL_ITEM.'.vendor_actual_recived_qty as vendor_received_qty_co,'.TBL_VENDOR_PO_MASTER.'.po_number as v_po_number');
-    $this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_BILL_OF_MATERIAL.'.id as billofmaterialid,'.TBL_FINISHED_GOODS.'.part_number as partno,'.TBL_BUYER_MASTER.'.buyer_name as buyer, 2 as flag,'.TBL_BILL_OF_MATERIAL.'.bom_status,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_order_qty_co,'.TBL_BILL_OF_MATERIAL_ITEM.'.vendor_actual_recived_qty as vendor_received_qty_co,'.TBL_VENDOR_PO_MASTER.'.po_number as v_po_number,'.TBL_FINISHED_GOODS.'.name as part_description,'.TBL_VENDOR_PO_MASTER.'.delivery_date');
+    $this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_BILL_OF_MATERIAL.'.id as billofmaterialid,'.TBL_FINISHED_GOODS.'.part_number as partno,'.TBL_BUYER_MASTER.'.buyer_name as buyer, 2 as flag,'.TBL_BILL_OF_MATERIAL.'.bom_status,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_order_qty_co,'.TBL_BILL_OF_MATERIAL_ITEM.'.vendor_actual_recived_qty as vendor_received_qty_co,'.TBL_VENDOR_PO_MASTER.'.po_number as v_po_number,'.TBL_FINISHED_GOODS.'.name as part_description,'.TBL_VENDOR_PO_MASTER.'.delivery_date,'.TBL_BILL_OF_MATERIAL_ITEM.'.id as vendor_bill_item_id');
     $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id= '.TBL_BILL_OF_MATERIAL.'.vendor_name');
     $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id= '.TBL_BILL_OF_MATERIAL.'.vendor_po_number');
     $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id= '.TBL_VENDOR_PO_MASTER.'.id');
@@ -12815,6 +12815,7 @@ public function fetchproductionstatusreportdata($params,$vendor_name,$status,$pa
             $data[$counter]['delivery_date'] = $value['delivery_date'];
             $data[$counter]['buyer_name'] = $value['buyer'];
             $data[$counter]['status'] = $value['bom_status'];
+            $data[$counter]['action'] = "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['vendor_bill_item_id']."' class='fa fa-plus-circle addnotes' aria-hidden='true'></i>";
 
             $counter++; 
         }
@@ -12906,6 +12907,28 @@ public function fetchALLvendorpoList(){
 
 
 }
+
+
+public function getpreviousaddednotesfordisplay($bill_of_material_id){
+
+    $this->db->select('notes,id');
+    $this->db->where(TBL_BILL_OF_MATERIAL_ITEM.'.id', $bill_of_material_id);
+    $query = $this->db->get(TBL_BILL_OF_MATERIAL_ITEM);
+    $data = $query->result_array();
+    return $data;
+}
+
+
+public function savebillofmaterialnotes($id,$data){
+    $this->db->where('id', $id);
+    if($this->db->update(TBL_BILL_OF_MATERIAL_ITEM, $data)){
+        return TRUE;
+    } else {
+        return FALSE;
+    }
+}
+
+
 
 
 }

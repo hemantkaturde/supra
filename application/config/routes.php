@@ -375,6 +375,8 @@ $route['scrapcalculationreport'] = "admin/scrapcalculationreport";
 $route['downlaod_scrap_calculation_report'] = "admin/downlaod_scrap_calculation_report";
 $route['productionstatusreport'] = "admin/productionstatusreport";
 $route['downlaod_production_status_report'] = "admin/downlaod_production_status_report";
+$route['getpreviousaddednotesfordisplay']  = "admin/getpreviousaddednotesfordisplay";
+$route['savebillofmaterialnotes']  = "admin/savebillofmaterialnotes";
 
 
 

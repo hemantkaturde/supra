@@ -16633,6 +16633,50 @@ public function downlaod_production_status_report($vendor_name,$status,$vendor_p
 
 }
 
+public function getpreviousaddednotesfordisplay(){
+    $bill_ofmaterial_id=$this->input->post('id');
+    if($bill_ofmaterial_id) {
+        $bill_ofmaterial_id_data = $this->admin_model->getpreviousaddednotesfordisplay($bill_ofmaterial_id);
+        if(count($bill_ofmaterial_id_data) >= 1) {
+            echo json_encode($bill_ofmaterial_id_data[0]);
+        } else {
+            echo 'failure';
+        }
+    } else {
+        echo 'failure';
+    }
+
+}
+
+
+public function savebillofmaterialnotes(){
+    $post_submit=$this->input->post();
+
+    if($post_submit){
+
+        $savebillofmaterialnotes_response = array();
+        $this->form_validation->set_rules('notes','Notes','trim|required');
+
+        if($this->form_validation->run() == FALSE)
+        {
+            $savebillofmaterialnotes_response['status'] = 'failure';
+            $savebillofmaterialnotes_response['error'] = array( 'notes'=>strip_tags(form_error('notes')));
+       
+        }else{
+            $data = array('notes'=>trim($this->input->post('notes')));
+            $bill_ofmaterial_id_data = $this->admin_model->savebillofmaterialnotes(trim($this->input->post('notes_id')),$data);
+
+            if($bill_ofmaterial_id_data){
+                $savebillofmaterialnotes_response['status'] = 'success';
+                $savebillofmaterialnotes_response['error'] = array( 'notes'=>strip_tags(form_error('notes')));
+            }
+
+        }
+
+        echo json_encode($savebillofmaterialnotes_response);
+    }
+
+}
 
 
 }
