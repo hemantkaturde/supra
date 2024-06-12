@@ -16603,7 +16603,7 @@ public function downlaod_production_status_report($vendor_name,$status,$vendor_p
         $objPHPExcel->getActiveSheet()->SetCellValue('M' . $rowCount, '');
         $objPHPExcel->getActiveSheet()->SetCellValue('N' . $rowCount, $element['buyer_delivery_date']);
         $objPHPExcel->getActiveSheet()->SetCellValue('O' . $rowCount, $element['status']);
-        $objPHPExcel->getActiveSheet()->SetCellValue('P' . $rowCount, '');   
+        $objPHPExcel->getActiveSheet()->SetCellValue('P' . $rowCount, $element['itemnote']);   
         $rowCount++;
     }
 
