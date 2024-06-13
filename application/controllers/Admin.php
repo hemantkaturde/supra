@@ -16102,53 +16102,100 @@ public function chadebitnote(){
     $this->loadViews("masters/chadebitnote", $this->global, $data, NULL);
 }
 
+
+public function fetchadebitnote(){
+
+    $params = $_REQUEST;
+    $totalRecords = $this->admin_model->fetchadebitnotecount($params); 
+    $queryRecords = $this->admin_model->fetchadebitnotedata($params); 
+
+    $data = array();
+    foreach ($queryRecords as $key => $value)
+    {
+        $i = 0;
+        foreach($value as $v)
+        {
+            $data[$key][$i] = $v;
+            $i++;
+        }
+    }
+    $json_data = array(
+        "draw"            => intval( $params['draw'] ),   
+        "recordsTotal"    => intval( $totalRecords ),  
+        "recordsFiltered" => intval($totalRecords),
+        "data"            => $data   // total data array
+        );
+    echo json_encode($json_data);
+}
+
+
 public function addchadebitnote(){
 
     $post_submit = $this->input->post();
     if($post_submit){
         $save_chadebitnote_response = array();
         
-        $this->form_validation->set_rules('supplier_name','Supplier Name','trim|required|max_length[128]');
-        $this->form_validation->set_rules('landline','Landline','trim|max_length[128]');
-        $this->form_validation->set_rules('address','Address','trim|required');
-        $this->form_validation->set_rules('phone_1','Phone 1','trim|numeric|max_length[50]');
-        $this->form_validation->set_rules('contact_person','Contact Person','trim|max_length[50]');
-        $this->form_validation->set_rules('mobile','Mobile','trim|required|numeric|max_length[50]');
-        $this->form_validation->set_rules('email','Email','trim|required|valid_email|max_length[50]');
-        $this->form_validation->set_rules('mobile_2','Mobile 2','trim|numeric|max_length[50]');
-        $this->form_validation->set_rules('fax','Fax','trim|max_length[50]');
-        $this->form_validation->set_rules('GSTIN','GSTIN','trim|max_length[50]');
+        $this->form_validation->set_rules('cha_debit_note_number','Cha Debit Note Number','trim|required');
+        $this->form_validation->set_rules('cha_debit_note_date','Cha debit Note Date','trim');
+        $this->form_validation->set_rules('taxable_amount','Taxable Amount','trim');
+        $this->form_validation->set_rules('cgst_sgst','Cgst Sgst','trim');
+        $this->form_validation->set_rules('bill_amount','Bill Amount','trim');
+        $this->form_validation->set_rules('debit_amount','Debit Amount','trim');
+        $this->form_validation->set_rules('amount_payable_before_tds','Amount Payable Before TDS','trim');
+        $this->form_validation->set_rules('less_tds','Less TDS','trim');
+        $this->form_validation->set_rules('payable_amount','Payable Amount','trim');
 
         if($this->form_validation->run() == FALSE)
         {
-            $save_supplier_response['status'] = 'failure';
-            $save_supplier_response['error'] = array('supplier_name'=>strip_tags(form_error('supplier_name')), 'landline'=>strip_tags(form_error('landline')), 'address'=>strip_tags(form_error('address')), 'phone_1'=>strip_tags(form_error('phone_1')),'contact_person'=>strip_tags(form_error('contact_person')),'mobile'=>strip_tags(form_error('mobile')),'email'=>strip_tags(form_error('email')),'mobile_2'=>strip_tags(form_error('mobile_2')),'fax'=>strip_tags(form_error('fax')),'GSTIN'=>strip_tags(form_error('GSTIN')));
+            $save_chadebitnote_response['status'] = 'failure';
+            $save_chadebitnote_response['error'] = array('cha_debit_note_number'=>strip_tags(form_error('cha_debit_note_number')), 'cha_debit_note_date'=>strip_tags(form_error('cha_debit_note_date')), 'taxable_amount'=>strip_tags(form_error('taxable_amount')), 'cgst_sgst'=>strip_tags(form_error('cgst_sgst')),'bill_amount'=>strip_tags(form_error('bill_amount')),'debit_amount'=>strip_tags(form_error('debit_amount')),'amount_payable_before_tds'=>strip_tags(form_error('amount_payable_before_tds')),'less_tds'=>strip_tags(form_error('less_tds')),'payable_amount'=>strip_tags(form_error('payable_amount')));
         }else{
 
+            $data = array(
+                'cha_debit_number' =>trim($this->input->post('cha_debit_note_number')),
+                'cha_debit_note_date'=>trim($this->input->post('cha_debit_note_date')),
+                'taxable_amount'=>trim($this->input->post('taxable_amount')),
+                'cgst_sgst'=>trim($this->input->post('cgst_sgst')),
+                'bill_amount'=>trim($this->input->post('bill_amount')),
+                'debit_amount'=>trim($this->input->post('debit_amount')),
+                'amount_payable_before_tds'=>trim($this->input->post('amount_payable_before_tds')),
+                'less_tds'=>trim($this->input->post('less_tds')),
+                'payable_amount'=>trim($this->input->post('payable_amount'))
+            );
 
-            $AWB_No = $_POST['AWB_No'];
-            $debit_amount = $_POST['debit_amount'];
-            $SGST = $_POST['SGST'];
-            $CGST = $_POST['CGST'];
-            $total = $_POST['total'];
-           
-            if(!empty($AWB_No)){
-                for($i = 0; $i < count($AWB_No); $i++){
-                    if(!empty($AWB_No[$i])){
-                        $data['AWB_No'] = $AWB_No[$i];
-                        $data['debit_amount'] = $debit_amount[$i];
-                        $data['SGST'] = $SGST[$i];
-                        $data['CGST'] = $CGST[$i];
-                        $data['total'] = $total[$i];
-    
-                        $this->db->insert('tbl_cha_debitnote_transaction',$data);
+            $savechadebitnote= $this->admin_model->savechadebitnote('',$data);
+
+            if($savechadebitnote){
+
+                    $AWB_No = $_POST['AWB_No'];
+                    $debit_amount = $_POST['debit_amount'];
+                    $SGST = $_POST['SGST'];
+                    $CGST = $_POST['CGST'];
+                    $total = $_POST['total'];
+                
+                    if(!empty($AWB_No)){
+                        for($i = 0; $i < count($AWB_No); $i++){
+                            if(!empty($AWB_No[$i])){
+                                $data1['AWB_No'] = $AWB_No[$i];
+                                $data1['debit_amount'] = $debit_amount[$i];
+                                $data1['SGST'] = $SGST[$i];
+                                $data1['CGST'] = $CGST[$i];
+                                $data1['total'] = $total[$i];
+                                $data1['cha_debit_id'] = $savechadebitnote;
+            
+                                $this->db->insert('tbl_cha_debitnote_transaction',$data1);
+                            }
+                        }
                     }
+
+                    $save_chadebitnote_response['status'] = 'success';
+                    $save_chadebitnote_response['error'] = array('cha_debit_note_number'=>strip_tags(form_error('cha_debit_note_number')), 'cha_debit_note_date'=>strip_tags(form_error('cha_debit_note_date')), 'taxable_amount'=>strip_tags(form_error('taxable_amount')), 'cgst_sgst'=>strip_tags(form_error('cgst_sgst')),'bill_amount'=>strip_tags(form_error('bill_amount')),'debit_amount'=>strip_tags(form_error('debit_amount')),'amount_payable_before_tds'=>strip_tags(form_error('amount_payable_before_tds')),'less_tds'=>strip_tags(form_error('less_tds')),'payable_amount'=>strip_tags(form_error('payable_amount')));
+            
                 }
-            }
+          }
 
+        echo json_encode($save_chadebitnote_response);
 
-        }
-         
     }else{
             $process = 'Add CHA Debit note';
             $processFunction = 'Admin/addchadebitnote';
@@ -16159,6 +16206,12 @@ public function addchadebitnote(){
     }
 
 }
+
+
+
+
+
+
 
 public function downloadenquiryformdata($id){
 
@@ -16383,7 +16436,6 @@ public function scrapcalculationreport(){
     $this->loadViews("masters/scrapcalculationreport", $this->global, $data, NULL);  
 }
 
-
 public function fetchscrapcalculationreport($status){
 
     $params = $_REQUEST;
@@ -16409,8 +16461,6 @@ public function fetchscrapcalculationreport($status){
     echo json_encode($json_data);
 
 }
-
-
 
 public function downlaod_scrap_calculation_report($status) {
 
@@ -16479,7 +16529,6 @@ public function downlaod_scrap_calculation_report($status) {
 
 }
 
-
 public function productionstatusreport(){
     $process = 'Production Status Report';
     $processFunction = 'Admin/productionstatusreport';
@@ -16489,8 +16538,6 @@ public function productionstatusreport(){
     $data['vendorpoList']= $this->admin_model->fetchALLvendorpoList();
     $this->loadViews("masters/productionstatusreport", $this->global, $data, NULL);  
 }
-
-
 
 public function fetchproductionstatusreport($vendor_name,$status,$part_number,$vendor_po){
 
@@ -16517,7 +16564,6 @@ public function fetchproductionstatusreport($vendor_name,$status,$part_number,$v
     echo json_encode($json_data);
 
 }
-
 
 public function checkifpackingintractionalreadyexists(){
 
@@ -16554,7 +16600,6 @@ public function checkifpackingintractionalreadyexists(){
     }
 
 }
-
 
 public function downlaod_production_status_report($vendor_name,$status,$vendor_po_number,$part_number_id) {
 
@@ -16648,7 +16693,6 @@ public function getpreviousaddednotesfordisplay(){
 
 }
 
-
 public function savebillofmaterialnotes(){
     $post_submit=$this->input->post();
 
@@ -16680,4 +16724,3 @@ public function savebillofmaterialnotes(){
 
 
 }
-

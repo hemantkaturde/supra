@@ -94,6 +94,27 @@ $(document).ready(function(){
                             </div>
 
                             <div class="box-body">
+
+                                    <div class="row" >
+                                           <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="cha_debit_note_number">CHA Debit Note Number <span class="required">*</span></label>
+                                                    <input type="text" class="form-control" id="cha_debit_note_number" name="cha_debit_note_number" required>
+                                                    <p class="error cha_debit_note_number_error"></p>
+                                                </div>
+                                            </div>
+                                    </div>
+
+                                    <div class="row" >
+                                           <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="cha_debit_note_date">CHA Debit Note Date <span class="required">*</span></label>
+                                                    <input type="text" class="form-control" id="cha_debit_note_date" name="cha_debit_note_date" required>
+                                                    <p class="error cha_debit_note_date_error"></p>
+                                                </div>
+                                            </div>
+                                    </div>
+
                                    <div class="row" >
                                            <div class="col-md-4">
                                                 <div class="form-group">

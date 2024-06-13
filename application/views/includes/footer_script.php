@@ -20042,9 +20042,37 @@
 <?php } ?>
 
 
-<?php if($pageTitle=='Add CHA Debit note'){ ?>
+<?php if($pageTitle=='Add CHA Debit note' || $pageTitle=='CHA Debit Note'){ ?>
 	<script type="text/javascript">
-	$(document).on('click','#savechadebitnote',function(e){
+
+            $(document).ready(function() {
+				var dt = $('#view_chatdebitnote').DataTable({
+					"columnDefs": [ 
+						{ className: "details-control", "targets": [ 0 ] },
+						{ "width": "40%", "targets": 0 },
+						{ "width": "10%", "targets": 1 },
+						{ "width": "5%", "targets": 2 },
+					
+					],
+					responsive: true,
+					"oLanguage": {
+						"sEmptyTable": "<i>No CHA Debit Note Found.</i>",
+					}, 
+					"bSort" : false,
+					"bFilter":true,
+					"bLengthChange": true,
+					"iDisplayLength": 10,   
+					"bProcessing": true,
+					"serverSide": true,
+					"ajax":{
+						url :"<?php echo base_url();?>fetchadebitnote",
+						type: "post",
+					},
+				});
+		    });
+
+    
+	        $(document).on('click','#savechadebitnote',function(e){
 				e.preventDefault();
 				$(".loader_ajax").show();
 				var formData = new FormData($("#savechadebitnoteform")[0]);
@@ -20086,7 +20114,7 @@
 					}
 				});
 				return false;
-		});
+		    });
 </script>
 <?php } ?>
 
@@ -20216,7 +20244,6 @@
 			var status = $('#status').val();
 		getallProductionstatusreport($("#vendor_name").val(), $("#status").val(),$("#part_number").val(),$("#vendor_po").val());
 	});
-
 
 	$(document).on('change','#part_number',function(e){  
 		$("#view_production_status_report").dataTable().fnDestroy();

@@ -477,6 +477,8 @@ $route['fetchproductionstatusreport'] = "admin/fetchproductionstatusreport";
 
 $route['chadebitnote'] = "admin/chadebitnote";
 $route['addchadebitnote'] = "admin/addchadebitnote";
+$route['fetchadebitnote'] = "admin/fetchadebitnote";
+
 
 
 /* End of file routes.php */

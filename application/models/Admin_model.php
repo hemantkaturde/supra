@@ -12930,6 +12930,78 @@ public function savebillofmaterialnotes($id,$data){
 }
 
 
+public function savechadebitnote($id,$data){
+    if($id != '') {
+        $this->db->where('id', $id);
+        if($this->db->update(TBL_CHA_DEBIT_NOTE, $data)){
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    } else {
+        if($this->db->insert(TBL_CHA_DEBIT_NOTE, $data)) {
+            // return TRUE;
+            return $this->db->insert_id();
+        } else {
+            return FALSE;
+        }
+    }
+}
+
+
+public function fetchadebitnotecount($params){
+
+        $this->db->select('*');
+       
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_CHA_DEBIT_NOTE.".bom_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CHA_DEBIT_NOTE.".part_number LIKE '%".$params['search']['value']."%')");
+        }
+
+        $this->db->where(TBL_CHA_DEBIT_NOTE.'.status', 1);
+        $this->db->order_by(TBL_CHA_DEBIT_NOTE.'.id','DESC');
+        $query = $this->db->get(TBL_CHA_DEBIT_NOTE);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+
+
+}
+
+public function fetchadebitnotedata($params){
+        $this->db->select('*');
+
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_CHA_DEBIT_NOTE.".bom_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CHA_DEBIT_NOTE.".part_number LIKE '%".$params['search']['value']."%')");
+        }
+
+        $this->db->where(TBL_CHA_DEBIT_NOTE.'.status', 1);
+        $this->db->limit($params['length'],$params['start']);
+        $this->db->order_by(TBL_CHA_DEBIT_NOTE.'.id','DESC');
+        $query = $this->db->get(TBL_CHA_DEBIT_NOTE);
+        $fetch_result = $query->result_array();
+
+
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['cha_debit_number'] = $value['cha_debit_number'];
+                $data[$counter]['cha_debit_note_date'] = $value['cha_debit_note_date'];
+                $data[$counter]['date'] = $value['date'];
+            
+            
+                $counter++; 
+            }
+        }
+
+        return $data;
+}
+
 
 
 }
