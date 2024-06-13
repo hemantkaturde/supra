@@ -20423,7 +20423,7 @@
 						{
 							swal({
 								title: "Success",
-								text: "Bill Of Material Notes Added Successfully!",
+								text: "Notes Added Successfully!",
 								icon: "success",
 								button: "Ok",
 								},function(){ 
