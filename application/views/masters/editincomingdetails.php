@@ -22,10 +22,7 @@
                         <?php $this->load->helper("form"); ?>
                         <form role="form" id="addnewincomingdetailsform" action="<?php echo base_url() ?>addnewincomingdetailsform" method="post" role="form">
                             <div class="box-body">
-
-
-                            
-                            
+                                
                                 <input type="hidden" class="form-control" id="incomingdetail_editid" name="incomingdetail_editid" value="<?php echo $edit_id;?>" readonly>
 
                                 <div class="col-md-4">

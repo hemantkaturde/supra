@@ -5150,7 +5150,8 @@ class Admin extends BaseController
                             'vendor_po_number'=> trim($this->input->post('vendor_po_number')),
                             'reported_by' =>    trim($this->input->post('reported_by')),
                             'reported_date' =>    trim($this->input->post('reported_date')),
-                            'remark' =>    trim($this->input->post('remark'))
+                            'remark' =>    trim($this->input->post('remark')),
+                            'updatedDtm' => date("Y-m-d h:m:s"),
                         );
         
                         $saveIncomingdetails= $this->admin_model->saveIncomingdetails(trim($this->input->post('incomingdetail_editid')),$data);
@@ -5182,7 +5183,8 @@ class Admin extends BaseController
                                     'vendor_po_number'=> trim($this->input->post('vendor_po_number')),
                                     'reported_by' =>    trim($this->input->post('reported_by')),
                                     'reported_date' =>    trim($this->input->post('reported_date')),
-                                    'remark' =>    trim($this->input->post('remark'))
+                                    'remark' =>    trim($this->input->post('remark')),
+                                    'updatedDtm' => date("Y-m-d h:m:s"),
                                 );
                 
                                 $saveIncomingdetails= $this->admin_model->saveIncomingdetails(trim($this->input->post('incomingdetail_editid')),$data);
