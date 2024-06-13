@@ -16648,8 +16648,8 @@ public function downlaod_production_status_report($vendor_name,$status,$vendor_p
         // $objPHPExcel->getActiveSheet()->SetCellValue('L' . $rowCount, $element['buyer_po_date']);
         // $objPHPExcel->getActiveSheet()->SetCellValue('M' . $rowCount, '');
         // $objPHPExcel->getActiveSheet()->SetCellValue('N' . $rowCount, $element['buyer_delivery_date']);
-        $objPHPExcel->getActiveSheet()->SetCellValue('K1' . $rowCount, $element['status']);
-        $objPHPExcel->getActiveSheet()->SetCellValue('L1' . $rowCount, $element['itemnote']);   
+        $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, $element['status']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('L' . $rowCount, $element['itemnote']);   
         $rowCount++;
     }
 
