@@ -5,6 +5,11 @@ require APPPATH . '/libraries/BaseController.php';
 use PhpOffice\PhpWord\Shared\Html;
 use PhpOffice\PhpWord\Element\TableRow;
 
+
+use PhpOffice\PhpWord\PhpWord;
+use PhpOffice\PhpWord\IOFactory;
+use PhpOffice\PhpWord\Exception\Exception;
+
 /**
  * Class : Admin (AdminController)
  * Admin class to control to authenticate admin credentials and include admin functions.
