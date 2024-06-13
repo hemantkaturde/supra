@@ -6,10 +6,6 @@ use PhpOffice\PhpWord\Shared\Html;
 use PhpOffice\PhpWord\Element\TableRow;
 
 
-use PhpOffice\PhpWord\PhpWord;
-use PhpOffice\PhpWord\IOFactory;
-use PhpOffice\PhpWord\Exception\Exception;
-
 /**
  * Class : Admin (AdminController)
  * Admin class to control to authenticate admin credentials and include admin functions.
@@ -16626,12 +16622,12 @@ public function downlaod_production_status_report($vendor_name,$status,$vendor_p
     $objPHPExcel->getActiveSheet()->SetCellValue('H1', 'FG Part Received Qty');  
     $objPHPExcel->getActiveSheet()->SetCellValue('I1', 'Vendor Delivery Date');  
     $objPHPExcel->getActiveSheet()->SetCellValue('J1', 'Buyer Name');  
-    $objPHPExcel->getActiveSheet()->SetCellValue('K1', 'Buyer PO No');  
-    $objPHPExcel->getActiveSheet()->SetCellValue('L1', 'Buyer PO Date');  
-    $objPHPExcel->getActiveSheet()->SetCellValue('M1', 'Buyer Order Qty');
-    $objPHPExcel->getActiveSheet()->SetCellValue('N1', 'Buyer Delivery Date');
-    $objPHPExcel->getActiveSheet()->SetCellValue('O1', 'Status');
-    $objPHPExcel->getActiveSheet()->SetCellValue('P1', 'Notes');
+    // $objPHPExcel->getActiveSheet()->SetCellValue('K1', 'Buyer PO No');  
+    // $objPHPExcel->getActiveSheet()->SetCellValue('L1', 'Buyer PO Date');  
+    // $objPHPExcel->getActiveSheet()->SetCellValue('M1', 'Buyer Order Qty');
+    // $objPHPExcel->getActiveSheet()->SetCellValue('N1', 'Buyer Delivery Date');
+    $objPHPExcel->getActiveSheet()->SetCellValue('K1', 'Status');
+    $objPHPExcel->getActiveSheet()->SetCellValue('L1', 'Notes');
 
 
 
@@ -16648,25 +16644,25 @@ public function downlaod_production_status_report($vendor_name,$status,$vendor_p
         $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $element['vendor_received_qtys']);
         $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, $element['delivery_date']);
         $objPHPExcel->getActiveSheet()->SetCellValue('J' . $rowCount, $element['buyer_name']);
-        $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, $element['buyer_po_number']);
-        $objPHPExcel->getActiveSheet()->SetCellValue('L' . $rowCount, $element['buyer_po_date']);
-        $objPHPExcel->getActiveSheet()->SetCellValue('M' . $rowCount, '');
-        $objPHPExcel->getActiveSheet()->SetCellValue('N' . $rowCount, $element['buyer_delivery_date']);
-        $objPHPExcel->getActiveSheet()->SetCellValue('O' . $rowCount, $element['status']);
-        $objPHPExcel->getActiveSheet()->SetCellValue('P' . $rowCount, $element['itemnote']);   
+        // $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, $element['buyer_po_number']);
+        // $objPHPExcel->getActiveSheet()->SetCellValue('L' . $rowCount, $element['buyer_po_date']);
+        // $objPHPExcel->getActiveSheet()->SetCellValue('M' . $rowCount, '');
+        // $objPHPExcel->getActiveSheet()->SetCellValue('N' . $rowCount, $element['buyer_delivery_date']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('K1' . $rowCount, $element['status']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('L1' . $rowCount, $element['itemnote']);   
         $rowCount++;
     }
 
-    foreach(range('A','P') as $columnID) {
+    foreach(range('A','L') as $columnID) {
         $objPHPExcel->getActiveSheet()->getColumnDimension($columnID)->setAutoSize(true);
     }
     /*********************Autoresize column width depending upon contents END***********************/
     
-    $objPHPExcel->getActiveSheet()->getStyle('A1:P1')->getFont()->setBold(true); //Make heading font bold
+    $objPHPExcel->getActiveSheet()->getStyle('A1:L1')->getFont()->setBold(true); //Make heading font bold
     
     /*********************Add color to heading START**********************/
     $objPHPExcel->getActiveSheet()
-                ->getStyle('A1:P1')
+                ->getStyle('A1:L1')
                 ->getFill()
                 ->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
                 ->getStartColor()

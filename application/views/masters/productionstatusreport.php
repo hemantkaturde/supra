@@ -110,7 +110,7 @@
                                             <th>FG Part Received Qty</th>
                                             <th>Vendor Delivery Date</th>
                                             <th>Buyer Name</th>
-                                            <th>Buyer PO No</th>
+                                            <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>

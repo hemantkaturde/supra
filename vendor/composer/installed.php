@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '4a4b23bee8bbe5a3edf76da89ce942472cdf0623',
+        'reference' => '189035c6801adc9a0ef52219e8c5c960939ce26f',
         'name' => 'codeigniter/framework',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '4a4b23bee8bbe5a3edf76da89ce942472cdf0623',
+            'reference' => '189035c6801adc9a0ef52219e8c5c960939ce26f',
             'dev_requirement' => false,
         ),
         'doctrine/instantiator' => array(
@@ -101,12 +101,12 @@
             'dev_requirement' => false,
         ),
         'myclabs/deep-copy' => array(
-            'pretty_version' => '1.11.1',
-            'version' => '1.11.1.0',
+            'pretty_version' => '1.12.0',
+            'version' => '1.12.0.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../myclabs/deep-copy',
             'aliases' => array(),
-            'reference' => '7284c22080590fb39f2ffa3e9057f10a4ddd0e0c',
+            'reference' => '3a6b9a42cd8f8771bd4295d13e1423fa7f3d942c',
             'dev_requirement' => false,
         ),
         'myclabs/php-enum' => array(
