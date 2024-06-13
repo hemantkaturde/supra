@@ -3263,6 +3263,7 @@ class Admin_model extends CI_Model
         $this->db->where(TBL_INCOMING_DETAILS.'.status', 1);
         $this->db->limit($params['length'],$params['start']);
         $this->db->order_by(TBL_INCOMING_DETAILS.'.updatedDtm','DESC');
+        $this->db->order_by(TBL_INCOMING_DETAILS.'.id','DESC');
         $query = $this->db->get(TBL_INCOMING_DETAILS);
         $fetch_result = $query->result_array();
 
