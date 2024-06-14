@@ -8655,6 +8655,44 @@
 	        });
 	    });
 
+
+		$(document).ready(function() {
+			var buyer_po_number_id = $('#buyer_po_number_id').val();
+									var part_number = $('#part_number').val();
+		
+									$('#buyer_item_delivery_date').val('');	
+
+									$.ajax({
+										url : "<?php echo ADMIN_PATH;?>getbuyerdetailsbybuteridoritemid",
+										type: "POST",
+										data : {'buyer_po_number_id' : buyer_po_number_id,'part_number':part_number},
+										success: function(data, textStatus, jqXHR)
+										{
+											var get_buyerdata = jQuery.parseJSON( data );
+
+											$(".loader_ajax").hide();
+											if(data == "failure")
+											{
+										
+												$('#buyer_item_delivery_date').val('');	
+											}
+											else
+											{
+												
+												$('#buyer_item_delivery_date').val(get_buyerdata.buyer_po_part_delivery_date);	
+											}
+										},
+										error: function (jqXHR, textStatus, errorThrown)
+										{
+												$('#buyer_item_delivery_date').val('');	
+											
+										}
+									});
+									return false;
+
+
+		});
+
 		$(document).on('change','#buyer_name',function(e){  
 			e.preventDefault();
 			//$(".loader_ajax").show();
