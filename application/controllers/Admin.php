@@ -13533,7 +13533,7 @@ public function downloadpackinginstraction($packing_details_item_id){
             $table = Html::addHtml($section, $htmlTable, false, false);
 
             // Save the document
-            $filename = '1.docx';
+            $filename = 'Packing_Instructions.docx';
             $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
             $objWriter->save($filename);
 
