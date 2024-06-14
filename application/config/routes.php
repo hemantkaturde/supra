@@ -349,9 +349,6 @@ $route['deleteenquiryformdata'] = "admin/deleteenquiryformdata";
 $route['deleteenquiryformitemdata'] = "admin/deleteenquiryformitemdata";
 $route['geteditenquiryformitemdata'] = "admin/geteditenquiryformitemdata";
 $route['getVendorPoconfirmationvendorlist'] = "admin/getVendorPoconfirmationvendorlist";
-
-
-
 /* ALL Downlaod Forms */
 $route['downlaodsupplierpo/(:any)'] = "admin/downlaodsupplierpo/$1";
 $route['downloadvendorpo/(:any)'] = "admin/downloadvendorpo/$1";
@@ -370,14 +367,12 @@ $route['downloadomsmachinary/(:any)'] = "admin/downloadomsmachinary/$1";
 $route['downloadcomplainform/(:any)'] = "admin/downloadcomplainform/$1";
 $route['downloadpreexportform/(:any)'] = "admin/downloadpreexportform/$1";
 $route['downloadenquiryformdata/(:any)'] = "admin/downloadenquiryformdata/$1";
-
 $route['scrapcalculationreport'] = "admin/scrapcalculationreport";
 $route['downlaod_scrap_calculation_report'] = "admin/downlaod_scrap_calculation_report";
 $route['productionstatusreport'] = "admin/productionstatusreport";
 $route['downlaod_production_status_report'] = "admin/downlaod_production_status_report";
 $route['getpreviousaddednotesfordisplay']  = "admin/getpreviousaddednotesfordisplay";
 $route['savebillofmaterialnotes']  = "admin/savebillofmaterialnotes";
-
 $route['getbuyerdetailsbybuteridoritemid'] = "admin/getbuyerdetailsbybuteridoritemid";
 
 /* ALL Edit Forms*/
@@ -463,21 +458,18 @@ $route['addsalestrackingreport'] = "admin/addsalestrackingreport";
 $route['getinvoicedetilsbyinvoiceid'] = "admin/getinvoicedetilsbyinvoiceid";
 $route['deletesalestracking'] = "admin/deletesalestracking";
 $route['getcreditnotedetailsbycreditnoteid'] = "admin/getcreditnotedetailsbycreditnoteid";
-
-
-
 $route['getdebitnotedetailsbydebitenoteeid'] = "admin/getdebitnotedetailsbydebitenoteeid";
 $route['getnumberofcartoonsfrompreexport'] = "admin/getnumberofcartoonsfrompreexport";
 $route['editsalestrackingreport/(:any)'] = "admin/editsalestrackingreport/$1";
 $route['checkifpartnumberisalreadyexists'] = "admin/checkifpartnumberisalreadyexists";
 $route['checkifpackingintractionalreadyexists'] = "admin/checkifpackingintractionalreadyexists";
-
 $route['fetchproductionstatusreport'] = "admin/fetchproductionstatusreport";
-
-
 $route['chadebitnote'] = "admin/chadebitnote";
 $route['addchadebitnote'] = "admin/addchadebitnote";
 $route['fetchadebitnote'] = "admin/fetchadebitnote";
+
+
+$route['supplierporeport'] = "admin/supplierporeport";
 
 
 

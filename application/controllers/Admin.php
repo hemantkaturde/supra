@@ -16233,11 +16233,6 @@ public function addchadebitnote(){
 }
 
 
-
-
-
-
-
 public function downloadenquiryformdata($id){
 
          // create file name
@@ -16745,6 +16740,18 @@ public function savebillofmaterialnotes(){
         echo json_encode($savebillofmaterialnotes_response);
     }
 
+}
+
+
+public function supplierporeport(){
+
+    $process = 'Supplier PO Report';
+    $processFunction = 'Admin/supplierporeport';
+    $this->global['pageTitle'] = 'Supplier PO Report';
+    //$data['vendorList']= $this->admin_model->fetchALLvendorList();
+    //$data['finishgoodList']= $this->admin_model->fetchALLFinishgoodList();
+    //$data['vendorpoList']= $this->admin_model->fetchALLvendorpoList();
+    $this->loadViews("masters/supplierporeport", $this->global, $data, NULL);  
 }
 
 
