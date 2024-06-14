@@ -5638,10 +5638,29 @@ class Admin extends BaseController
         $this->logrecord($process,$processFunction);
         $this->global['pageTitle'] = 'Add Packing Instraction Details';
         $data['main_id'] =$main_id;
+        $data['buyer_po_number_id'] =$buyer_po_number;
         $data['getbuyeritemdetails'] =  $this->admin_model->getbuyeritemdetails(trim($buyer_po_number));
         $data['getpackingdetails_itemdetails'] =  $this->admin_model->getpackingdetails_itemdetails(trim($main_id));
         $this->loadViews("masters/addpackinginstractiondetails", $this->global, $data, NULL);  
 
+
+    }
+
+
+    public function  getbuyerdetailsbybuteridoritemid(){
+
+        $vendor_po_number=$this->input->post();
+        if($vendor_po_number) {
+			$vendor_po_number_data = $this->admin_model->getbuyerdetailsbybuteridoritemid(trim($this->input->post('buyer_po_number_id')),trim($this->input->post('part_number')));
+
+			if(count($vendor_po_number_data) >= 1) {
+				echo json_encode($vendor_po_number_data[0]);
+			} else {
+				echo 'failure';
+			}
+		} else {
+			echo 'failure';
+		}
 
     }
 
@@ -5679,11 +5698,12 @@ class Admin extends BaseController
             $this->form_validation->set_rules('buyer_invoice_qty','Buyer Invoice qty','trim|required');
             $this->form_validation->set_rules('box_qty','Box qty','trim|required');
             $this->form_validation->set_rules('remark','Buyer PO Date','trim');
+            $this->form_validation->set_rules('buyer_item_delivery_date','Buyer Item Delivery Date','trim');
 
             if($this->form_validation->run() == FALSE)
             {
                 $add_packing_instraction_details_response['status'] = 'failure';
-                $add_packing_instraction_details_response['error'] = array('part_number'=>strip_tags(form_error('part_number')),'buyer_invoice_number'=>strip_tags(form_error('buyer_invoice_number')),'buyer_invoice_date'=>strip_tags(form_error('buyer_invoice_date')),'buyer_invoice_qty'=>strip_tags(form_error('buyer_invoice_qty')),'box_qty'=>strip_tags(form_error('box_qty')),'remark'=>strip_tags(form_error('remark')));
+                $add_packing_instraction_details_response['error'] = array('part_number'=>strip_tags(form_error('part_number')),'buyer_invoice_number'=>strip_tags(form_error('buyer_invoice_number')),'buyer_invoice_date'=>strip_tags(form_error('buyer_invoice_date')),'buyer_invoice_qty'=>strip_tags(form_error('buyer_invoice_qty')),'box_qty'=>strip_tags(form_error('box_qty')),'remark'=>strip_tags(form_error('remark')),'buyer_item_delivery_date'=>strip_tags(form_error('buyer_item_delivery_date')));
            
             }else{
 
@@ -5695,7 +5715,8 @@ class Admin extends BaseController
                     'buyer_invoice_date' =>    trim($this->input->post('buyer_invoice_date')),
                     'buyer_invoice_qty' =>    trim($this->input->post('buyer_invoice_qty')),
                     'box_qty' =>    trim($this->input->post('box_qty')),
-                    'remark' =>    trim($this->input->post('remark'))
+                    'remark' =>    trim($this->input->post('remark')),
+                    'buyer_item_delivery_date' =>    trim($this->input->post('buyer_item_delivery_date'))
                 );
 
                 if(trim($this->input->post('packing_details_item_id'))){
@@ -5708,7 +5729,7 @@ class Admin extends BaseController
 
                 if($savePackinginstarction){
                     $add_packing_instraction_details_response['status'] = 'success';
-                    $add_packing_instraction_details_response['error'] = array( 'incoming_no'=>strip_tags(form_error('incoming_no')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'reported_by'=>strip_tags(form_error('reported_by')),'reported_date'=>strip_tags(form_error('reported_date')),'remark'=>strip_tags(form_error('remark')));
+                    $add_packing_instraction_details_response['error'] = array( 'incoming_no'=>strip_tags(form_error('incoming_no')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'reported_by'=>strip_tags(form_error('reported_by')),'reported_date'=>strip_tags(form_error('reported_date')),'remark'=>strip_tags(form_error('remark')),'buyer_item_delivery_date'=>strip_tags(form_error('buyer_item_delivery_date')));
                 }
 
 

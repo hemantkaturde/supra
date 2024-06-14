@@ -8720,9 +8720,6 @@
 							}
 						});
 						return false;
-
-	
-		
 		});
 
 		$(document).on('click','#savepackinginstarction',function(e){
@@ -8996,7 +8993,7 @@
 								if(data == "failure")
 								{
 									// $('#buyer_po_date').val('');
-									// $('#buyer_delivery_date').val('');
+									   $('#buyer_delivery_date').val('');
 								}
 								else
 								{
@@ -9012,16 +9009,15 @@
 							},
 							error: function (jqXHR, textStatus, errorThrown)
 							{
-								    //$('#buyer_po_date').val('');
+								    $('#buyer_po_date').val('');
 								    //$(".loader_ajax").hide();
 							}
 				});
 			return false;
-		   });
+		});
 
 
-
-		   $(document).on('change','#buyer_name,#buyer_po_number',function(e){  
+		$(document).on('change','#buyer_name,#buyer_po_number',function(e){  
 			e.preventDefault();
 			        var buyer_name = $('#buyer_name').val();	
 					var buyer_po_number = $('#buyer_po_number').val();	
@@ -9057,7 +9053,48 @@
 							}
 				});
 			return false;
-		   });
+		});
+
+		
+		
+		$(document).on('change','.get_buyer_delivery_date',function(e){  
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			                        var buyer_po_number_id = $('#buyer_po_number_id').val();
+									var part_number = $('#part_number').val();
+		
+									$('#buyer_item_delivery_date').val('');	
+
+									$.ajax({
+										url : "<?php echo ADMIN_PATH;?>getbuyerdetailsbybuteridoritemid",
+										type: "POST",
+										data : {'buyer_po_number_id' : buyer_po_number_id,'part_number':part_number},
+										success: function(data, textStatus, jqXHR)
+										{
+											var get_buyerdata = jQuery.parseJSON( data );
+
+											$(".loader_ajax").hide();
+											if(data == "failure")
+											{
+										
+												$('#buyer_item_delivery_date').val('');	
+											}
+											else
+											{
+												
+												$('#buyer_item_delivery_date').val(get_buyerdata.buyer_po_part_delivery_date);	
+											}
+										},
+										error: function (jqXHR, textStatus, errorThrown)
+										{
+												$('#buyer_item_delivery_date').val('');	
+											
+										}
+									});
+									return false;
+							
+		});
+
 
 
 		</script>

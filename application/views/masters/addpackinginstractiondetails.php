@@ -28,8 +28,9 @@
                                                 <tr>
                                                     <th scope="col">#</th>
                                                     <th scope="col">Part Number</th>
+                                                    <th scope="col">Buyer PO Part Delivery Date</th>
+                                                    <th scope="col">Part Number</th>
                                                     <th scope="col">Description</th>
-                                                    <th scope="col">Order Qty</th>
                                                     <!-- <th scope="col">Rate</th>
                                                     <th scope="col">Value</th> -->
                                                 </tr>
@@ -43,6 +44,7 @@
                                                     <tr>
                                                         <th scope="row"><?=$i++;?></th>
                                                         <td><?=$value['part_number'];?></td>
+                                                        <td><?=$value['buyer_po_part_delivery_date'];?></td>
                                                         <td><?=$value['description'];?></td>
                                                         <td><?=$value['order_oty'];?></td>
                                                         <!-- <td><?=$value['rate'];?></td>
@@ -58,7 +60,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="part_number">Select Part Number<span class="required">*</span></label>
-                                                <select class="form-control" name="part_number" id="part_number">
+                                                <select class="form-control get_buyer_delivery_date" name="part_number" id="part_number">
                                                     <option st-id="" value="">Select Part Number</option>
                                                         <?php foreach ($getbuyeritemdetails as $key => $value) {?>
                                                                 <option value="<?php echo $value['item_details']; ?>"><?php echo $value['part_number']; ?></option>
@@ -66,10 +68,15 @@
                                                 </select> 
                                             <p class="error part_number_error"></p>
                                         </div>
-
+                                        <input type="hidden" class="form-control" id="buyer_po_number_id" name="buyer_po_number_id" value="<?=$buyer_po_number_id?>" >
                                         <input type="hidden" class="form-control" id="main_id" name="main_id" value="<?=$main_id?>" >
-
                                         <input type="hidden" class="form-control" id="packing_details_item_id" name="packing_details_item_id" >
+
+                                        <div class="form-group">
+                                            <label for="buyer_item_delivery_date">Buyer Item Delivery Date </label>
+                                            <input type="text" class="form-control" id="buyer_item_delivery_date" name="buyer_item_delivery_date" required readonly>
+                                            <p class="error buyer_item_delivery_date_error"></p>
+                                        </div>
 
 
                                         <div class="form-group">
@@ -124,6 +131,7 @@
                                                     <th scope="col">Buyer Invoice Number</th>
                                                     <th scope="col">Buyer Invoice Date</th>
                                                     <th scope="col">Buyer Invoice Qty </th>
+                                                    <th scope="col">Buyer Delivery Date </th>
                                                     <th scope="col">Box Qty</th>
                                                     <th scope="col">Remark</th>
                                                     <th scope="col">Action</th>
@@ -142,6 +150,7 @@
                                                         <td><?=$value_details['buyer_invoice_number'];?></td>
                                                         <td><?=$value_details['buyer_invoice_date'];?></td>
                                                         <td><?=$value_details['buyer_invoice_qty'];?></td>
+                                                        <td><?=$value_details['buyer_item_delivery_date'];?></td>
                                                         <td><?=$value_details['box_qty'];?></td>
                                                         <td><?=$value_details['remark'];?></td>
                                                         <td>

@@ -378,7 +378,7 @@ $route['downlaod_production_status_report'] = "admin/downlaod_production_status_
 $route['getpreviousaddednotesfordisplay']  = "admin/getpreviousaddednotesfordisplay";
 $route['savebillofmaterialnotes']  = "admin/savebillofmaterialnotes";
 
-
+$route['getbuyerdetailsbybuteridoritemid'] = "admin/getbuyerdetailsbybuteridoritemid";
 
 /* ALL Edit Forms*/
 $route['getbuyeritemdataforitemedit'] = "admin/getbuyeritemdataforitemedit";
