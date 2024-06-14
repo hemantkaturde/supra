@@ -13539,7 +13539,9 @@ public function downloadpackinginstraction($packing_details_item_id){
 
             // Offer the document as a download
             header('Content-Type: application/octet-stream');
-            header('Content-Disposition: attachment; filename="' . $filename . '"');
+           // header('Content-Disposition: attachment; filename="' . $filename . '"');
+            header('Content-Disposition: attachment; filename="hhhh"');
+
             readfile($filename);
 
             // Clean up: delete the temporary file
