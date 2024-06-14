@@ -127,11 +127,11 @@
                                                 <tr>
                                                     <th scope="col">#</th>
                                                     <th scope="col">Part Number</th>
+                                                    <th scope="col">Buyer Delivery Date </th>
                                                     <th scope="col">Description</th>
                                                     <th scope="col">Buyer Invoice Number</th>
                                                     <th scope="col">Buyer Invoice Date</th>
                                                     <th scope="col">Buyer Invoice Qty </th>
-                                                    <th scope="col">Buyer Delivery Date </th>
                                                     <th scope="col">Box Qty</th>
                                                     <th scope="col">Remark</th>
                                                     <th scope="col">Action</th>
@@ -144,13 +144,14 @@
                                             foreach ($getpackingdetails_itemdetails as $key_details => $value_details) { 
                                                 ?>
                                                     <tr>
-                                                        <th scope="row"><?=$i;?></th>
+                                                        <th scope="row"><?=$i++;?></th>
                                                         <td><?=$value_details['part_number'];?></td>
+                                                        <td><?=$value_details['buyer_item_delivery_date'];?></td>
                                                         <td><?=$value_details['name'];?></td>
                                                         <td><?=$value_details['buyer_invoice_number'];?></td>
                                                         <td><?=$value_details['buyer_invoice_date'];?></td>
                                                         <td><?=$value_details['buyer_invoice_qty'];?></td>
-                                                        <td><?=$value_details['buyer_item_delivery_date'];?></td>
+                                                      
                                                         <td><?=$value_details['box_qty'];?></td>
                                                         <td><?=$value_details['remark'];?></td>
                                                         <td>
