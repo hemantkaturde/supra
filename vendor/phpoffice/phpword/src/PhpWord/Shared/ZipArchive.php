@@ -167,11 +167,11 @@ class ZipArchive
      */
     public function close()
     {
-        // if (!$this->usePclzip) {
-        //     if ($this->zip->close() === false) {
-        //         throw new Exception("Could not close zip file {$this->filename}: ");
-        //     }
-        // }
+        if (!$this->usePclzip) {
+            if ($this->zip->close() === false) {
+                throw new Exception("Could not close zip file {$this->filename}: ");
+            }
+        }
 
         return true;
     }
