@@ -13533,15 +13533,14 @@ public function downloadpackinginstraction($packing_details_item_id){
             $table = Html::addHtml($section, $htmlTable, false, false);
 
             // Save the document
-            $filename = $getPackingInstructionData[0]['part_number'].'.docx';
+            $filename = '1.docx';
             $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
             $objWriter->save($filename);
 
             // Offer the document as a download
             header('Content-Type: application/octet-stream');
-           // header('Content-Disposition: attachment; filename="' . $filename . '"');
-            header('Content-Disposition: attachment; filename="hhhh"');
-
+            header('Content-Disposition: attachment; filename="' . $filename . '"');
+            
             readfile($filename);
 
             // Clean up: delete the temporary file
