@@ -9061,6 +9061,19 @@
 		$(document).on('change','.get_buyer_delivery_date',function(e){  
 			e.preventDefault();
 			//$(".loader_ajax").show();
+			// var elemF = $(this);
+			// var item_id = elemF.getAttribute('data-id');
+
+			var selectElement = document.getElementById("part_number");
+			// Get the selected option element
+			var selectedOption = selectElement.options[selectElement.selectedIndex];
+
+			// Get the value of the data-info attribute of the selected option
+			var poitemid = selectedOption.getAttribute("data_id");
+
+			
+
+
 			                        var buyer_po_number_id = $('#buyer_po_number_id').val();
 									var part_number = $('#part_number').val();
 		
@@ -9069,7 +9082,7 @@
 									$.ajax({
 										url : "<?php echo ADMIN_PATH;?>getbuyerdetailsbybuteridoritemid",
 										type: "POST",
-										data : {'buyer_po_number_id' : buyer_po_number_id,'part_number':part_number},
+										data : {'buyer_po_number_id' : buyer_po_number_id,'part_number':part_number,'poitemid':poitemid},
 										success: function(data, textStatus, jqXHR)
 										{
 											var get_buyerdata = jQuery.parseJSON( data );

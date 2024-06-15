@@ -13004,11 +13004,13 @@ public function fetchadebitnotedata($params){
 }
 
 
-public function getbuyerdetailsbybuteridoritemid($buyer_po_number_id,$part_number){
+public function getbuyerdetailsbybuteridoritemid($buyer_po_number_id,$part_number,$itemid){
 
     $this->db->select(TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date');
     $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id', $buyer_po_number_id);
-     $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.id', $part_number);
+    $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.part_number_id', $part_number);
+    $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.id', $itemid);
+
     $query_result = $this->db->get(TBL_BUYER_PO_MASTER_ITEM)->result_array();
     return $query_result;
 }

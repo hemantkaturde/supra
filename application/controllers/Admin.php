@@ -5651,7 +5651,7 @@ class Admin extends BaseController
 
         $vendor_po_number=$this->input->post();
         if($vendor_po_number) {
-			$vendor_po_number_data = $this->admin_model->getbuyerdetailsbybuteridoritemid(trim($this->input->post('buyer_po_number_id')),trim($this->input->post('part_number')));
+			$vendor_po_number_data = $this->admin_model->getbuyerdetailsbybuteridoritemid(trim($this->input->post('buyer_po_number_id')),trim($this->input->post('part_number')),trim($this->input->post('poitemid')));
 
 			if(count($vendor_po_number_data) >= 1) {
 				echo json_encode($vendor_po_number_data[0]);
