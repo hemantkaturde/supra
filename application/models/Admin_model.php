@@ -10150,7 +10150,7 @@ class Admin_model extends CI_Model
     public function exportbuyerdetailsrecord($buyer_name,$part_number,$from_date,$to_date){
 
 
-        $this->db->select(TBL_BUYER_PO_MASTER.'.buyer_po_date,'.TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_BUYER_MASTER.'.buyer_name,'.TBL_BUYER_PO_MASTER.'.buyer_po_number,'.TBL_BUYER_PO_MASTER.'.date,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name,'.TBL_BUYER_PO_MASTER_ITEM.'.order_oty,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date,'.TBL_BUYER_PO_MASTER.'.id as buyer_po_idpo');
+        $this->db->select(TBL_BUYER_PO_MASTER.'.buyer_po_date,'.TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_BUYER_MASTER.'.buyer_name,'.TBL_BUYER_PO_MASTER.'.buyer_po_number,'.TBL_BUYER_PO_MASTER.'.date,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name,'.TBL_BUYER_PO_MASTER_ITEM.'.order_oty,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date,'.TBL_BUYER_PO_MASTER.'.id as buyer_po_idpo,'.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id as part_id');
         $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_BUYER_PO_MASTER.'.buyer_name_id');
@@ -10203,7 +10203,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['order_oty'] =$value['order_oty'];;
                 $data[$counter]['buyer_po_part_delivery_date'] =$buyer_po_part_delivery_date;
 
-                $get_export_invoice_details =$this->getexportinvoicedetails($value['buyer_po_idpo'],$value['part_number']);
+                $get_export_invoice_details =$this->getexportinvoicedetails($value['buyer_po_idpo'],$value['part_id'],$buyer_po_part_delivery_date);
                 if($get_export_invoice_details){
                     $buyer_invoice_number = $get_export_invoice_details[0]['buyer_invoice_number'];
                     $buyer_invoice_qty = $get_export_invoice_details[0]['buyer_invoice_qty'];
