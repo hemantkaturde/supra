@@ -9914,8 +9914,8 @@ class Admin_model extends CI_Model
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_BUYER_PO_MASTER.'.buyer_name_id');
         $this->db->join(TBL_PACKING_INSTRACTION_DETAILS, TBL_PACKING_INSTRACTION_DETAILS.'.part_number = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
-        $this->db->join(TBL_PACKING_INSTRACTION, TBL_PACKING_INSTRACTION.'.id = '.TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id');
-        $this->db->join(TBL_PACKING_INSTRACTION.' as a', 'a.buyer_po_number = '.TBL_BUYER_PO_MASTER.'.id');
+       // $this->db->join(TBL_PACKING_INSTRACTION, TBL_PACKING_INSTRACTION.'.id = '.TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id');
+        //  $this->db->join(TBL_PACKING_INSTRACTION.' as a', 'a.buyer_po_number = '.TBL_BUYER_PO_MASTER.'.id','left');
 
 
         if($params['search']['value'] != "") 
@@ -9952,7 +9952,7 @@ class Admin_model extends CI_Model
             $this->db->where(TBL_BUYER_PO_MASTER.'.date <=', $todate);
         }
 
-        $this->db->group_by(array('part_number_id','packing_instract_id'));
+        // $this->db->group_by(array('part_number_id','buyer_invoice_number'));
         $this->db->order_by(TBL_BUYER_PO_MASTER_ITEM.'.id','DESC');
         //$this->db->group_by(TBL_BUYER_PO_MASTER.'.sales_order_number,');
 
@@ -10012,6 +10012,7 @@ class Admin_model extends CI_Model
         $this->db->where(TBL_PACKING_INSTRACTION.'.buyer_po_number', $buyer_po_id);
         $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.part_number', $part_number);
         $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.buyer_item_delivery_date', $buyer_po_part_delivery_date);
+        $this->db->group_by(TBL_PACKING_INSTRACTION.'.packing_instract_id');
         $query = $this->db->get(TBL_PACKING_INSTRACTION_DETAILS);
         $fetch_result = $query->result_array();
         return $fetch_result;
