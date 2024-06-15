@@ -9979,7 +9979,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['order_qty'] =$value['order_oty'];;
                 $data[$counter]['buyer_po_part_delivery_date'] =$buyer_po_part_delivery_date;
 
-                $get_export_invoice_details =$this->getexportinvoicedetails($value['part_number_id_buyer_Po'],$value['part_number'],$buyer_po_part_delivery_date);
+                $get_export_invoice_details =$this->getexportinvoicedetails($value['buyer_po_idpo'],$value['part_number_id_buyer_Po'],$buyer_po_part_delivery_date);
                 if($get_export_invoice_details){
                     $buyer_invoice_number = $get_export_invoice_details[0]['buyer_invoice_number'];
                     $buyer_invoice_qty = $get_export_invoice_details[0]['buyer_invoice_qty'];
@@ -10092,7 +10092,7 @@ class Admin_model extends CI_Model
             foreach ($fetch_result as $key => $value)
             {
 
-                $get_export_invoice_details =$this->getexportinvoicedetails($value['buyer_po_idpo'],$value['part_number']);
+                $get_export_invoice_details =$this->getexportinvoicedetails($value['buyer_po_idpo'],$value['part_number'],$value['buyer_po_part_delivery_date']);
                 $total_order_aty = $total_order_aty + $value['total_order_aty'];
                 $export_qty = $export_qty + $get_export_invoice_details[0]['buyer_invoice_qty'];
                 $counter++;
