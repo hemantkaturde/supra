@@ -13063,7 +13063,7 @@ public function fetchsupplierporeportcount($params){
     }
 
     public function fetchsupplierporeportdata($params){
-        $this->db->select('*');
+        $this->db->select('*,'.TBL_FINISHED_GOODS.'.part_number as part_number_fg');
         $this->db->join(TBL_SUPPLIER_PO_CONFIRMATION, TBL_SUPPLIER_PO_CONFIRMATION.'.id= '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.supplier_po_confirmation_id');
         $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id= '.TBL_SUPPLIER_PO_CONFIRMATION.'.supplier_po_id');
         $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id= '.TBL_SUPPLIER_PO_MASTER.'.supplier_name');
@@ -13098,9 +13098,16 @@ public function fetchsupplierporeportcount($params){
                 $data[$counter]['supplier_name'] = $value['supplier_name'];
                 $data[$counter]['name'] = $value['name'];
                 $data[$counter]['vendor_name'] = $value['vendor_name'];
-              
+                $data[$counter]['part_number'] = $value['part_number_fg'];
+                $data[$counter]['order_oty'] = $value['order_oty'];
+                $data[$counter]['sent_qty'] = $value['sent_qty'];
+                $data[$counter]['order_oty_pcs'] = '';
+                $data[$counter]['sent_qty_pcs'] = $value['sent_qty_pcs'];
+                $data[$counter]['est_delevery_date'] = '';
+                $data[$counter]['material_sent'] = $value['material_sent'];
+                $data[$counter]['material_receipt_confirmation'] = $value['material_receipt_confirmation'];
 
-
+                
                 $counter++; 
             }
         }
