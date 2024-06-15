@@ -9957,7 +9957,7 @@ class Admin_model extends CI_Model
         $this->db->order_by(TBL_BUYER_PO_MASTER_ITEM.'.id','DESC');
         //$this->db->group_by(TBL_BUYER_PO_MASTER.'.sales_order_number,');
 
-        // $this->db->limit($params['length'],$params['start']);
+        $this->db->limit($params['length'],$params['start']);
         $query = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
         $fetch_result = $query->result_array();
 
