@@ -23,14 +23,13 @@
         </div>
 
         <div class="row" style="background: #fff;margin-right: 1px;margin-left: 1px;margin-bottom: 12px;margin-top: 10px;">
-            
             <div class="col-xs-3 text-left" style="margin-top: 10px;">
                 <div class="form-group">
                         <label for="part_number">Part Number</label>
                         <select class="form-control select2" name="part_number" id="part_number">
                             <option st-id="" value="">Select Part Number</option>
                             <?php foreach ($itemList as $key => $value) {?>
-                                <option value="<?php echo $value['fin_id']; ?>"><?php echo $value['part_number']; ?></option>
+                                <option value="<?php echo $value['poitemid']; ?>"><?php echo $value['part_number']; ?></option>
                             <?php } ?>
                         </select>
                 </div>
