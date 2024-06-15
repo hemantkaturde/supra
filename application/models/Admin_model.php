@@ -9914,8 +9914,8 @@ class Admin_model extends CI_Model
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_BUYER_PO_MASTER.'.buyer_name_id');
         // $this->db->join(TBL_PACKING_INSTRACTION, TBL_PACKING_INSTRACTION.'.id = '.TBL_BUYER_PO_MASTER.'.packing_instract_id');
-       // $this->db->join(TBL_PACKING_INSTRACTION_DETAILS, TBL_PACKING_INSTRACTION_DETAILS.'.part_number_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
-       // $this->db->join(TBL_PACKING_INSTRACTION, TBL_PACKING_INSTRACTION.'.id = '.TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id');
+        // $this->db->join(TBL_PACKING_INSTRACTION_DETAILS, TBL_PACKING_INSTRACTION_DETAILS.'.part_number_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
+        // $this->db->join(TBL_PACKING_INSTRACTION, TBL_PACKING_INSTRACTION.'.id = '.TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id');
         //  $this->db->join(TBL_PACKING_INSTRACTION.' as a', 'a.buyer_po_number = '.TBL_BUYER_PO_MASTER.'.id','left');
 
 
@@ -9982,7 +9982,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['order_qty'] =$value['order_oty'];;
                 $data[$counter]['buyer_po_part_delivery_date'] =$buyer_po_part_delivery_date;
 
-                $get_export_invoice_details =$this->getexportinvoicedetails($value['buyer_po_idpo'],$value['part_number_id_buyer_Po'],$buyer_po_part_delivery_date,$value['buyer_invoice_qty']);
+                $get_export_invoice_details =$this->getexportinvoicedetails($value['buyer_po_idpo'],$value['part_number_id_buyer_Po'],$buyer_po_part_delivery_date);
                 if($get_export_invoice_details){
                     $buyer_invoice_number = $get_export_invoice_details[0]['buyer_invoice_number'];
                     $buyer_invoice_qty = $get_export_invoice_details[0]['buyer_invoice_qty'];
@@ -10006,14 +10006,14 @@ class Admin_model extends CI_Model
     }
 
 
-    public function getexportinvoicedetails($buyer_po_id,$part_number,$buyer_po_part_delivery_date,$buyer_invoice_qty){
+    public function getexportinvoicedetails($buyer_po_id,$part_number,$buyer_po_part_delivery_date){
 
         $this->db->select(TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_number,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_qty,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_date,'.TBL_PACKING_INSTRACTION_DETAILS.'.remark');
         $this->db->join(TBL_PACKING_INSTRACTION, TBL_PACKING_INSTRACTION.'.id = '.TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id');
         $this->db->where(TBL_PACKING_INSTRACTION.'.buyer_po_number', $buyer_po_id);
         $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.part_number', $part_number);
         $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.buyer_item_delivery_date', $buyer_po_part_delivery_date);
-        $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_qty', $buyer_invoice_qty);
+        // $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_qty', $buyer_invoice_qty);
         // $this->db->group_by(TBL_PACKING_INSTRACTION.'.packing_instract_id');
         $query = $this->db->get(TBL_PACKING_INSTRACTION_DETAILS);
         $fetch_result = $query->result_array();
