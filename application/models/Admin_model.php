@@ -12828,7 +12828,13 @@ public function fetchproductionstatusreportdata($params,$vendor_name,$status,$pa
             $data[$counter]['delivery_date'] = $value['delivery_date'];
             $data[$counter]['buyer_name'] = $value['buyer'];
             $data[$counter]['status'] = $value['bom_status'];
-            $data[$counter]['action'] = "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['vendor_bill_item_id']."' class='fa fa-plus-circle addnotes' aria-hidden='true'></i>";
+
+            if($value['notes']){
+               $notes_remark = 'Notes Added';
+            }else{
+                $notes_remark = '';
+            }
+            $data[$counter]['action'] = "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['vendor_bill_item_id']."' class='fa fa-plus-circle addnotes' aria-hidden='true'></i><small>".$notes_remark."</small>" ;
 
             $counter++; 
         }
