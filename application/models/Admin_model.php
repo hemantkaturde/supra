@@ -13029,48 +13029,27 @@ public function getbuyerdetailsbybuteridoritemid($buyer_po_number_id,$part_numbe
 
 
 public function fetchsupplierporeportcount($params){
+    $this->db->select('*');
+    $this->db->join(TBL_SUPPLIER_PO_CONFIRMATION, TBL_SUPPLIER_PO_CONFIRMATION.'.id= '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.supplier_po_confirmation_id');
+        // $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.id= '.TBL_SUPPLIER_PO_CONFIRMATION.'.vendor_po_number');
+    // $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id= '.TBL_VENDOR_PO_MASTER.'.id');
+    // $this->db->join(TBL_BUYER_MASTER, TBL_BILL_OF_MATERIAL.'.buyer_name= '.TBL_BUYER_MASTER.'.buyer_id');
+    // $this->db->join(TBL_BILL_OF_MATERIAL_ITEM, TBL_BILL_OF_MATERIAL.'.id= '.TBL_BILL_OF_MATERIAL_ITEM.'.bom_id');
+    // $this->db->join(TBL_FINISHED_GOODS, TBL_BILL_OF_MATERIAL_ITEM.'.part_number= '.TBL_FINISHED_GOODS.'.fin_id');
 
-            /* Bill of material Data */
-        //$this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_BILL_OF_MATERIAL.'.id as billofmaterialid,'.TBL_FINISHED_GOODS.'.part_number as partno,'.TBL_BUYER_MASTER.'.buyer_name as buyer, 2 as flag,'.TBL_BILL_OF_MATERIAL.'.bom_status,'.TBL_BILL_OF_MATERIAL_ITEM.'.rm_actual_aty as vendor_order_qty_co,'.TBL_BILL_OF_MATERIAL_ITEM.'.vendor_actual_recived_qty as vendor_received_qty_co,'.TBL_VENDOR_PO_MASTER.'.po_number as v_po_number');
-        $this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_BILL_OF_MATERIAL.'.id as billofmaterialid,'.TBL_FINISHED_GOODS.'.part_number as partno,'.TBL_BUYER_MASTER.'.buyer_name as buyer, 2 as flag,'.TBL_BILL_OF_MATERIAL.'.bom_status,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_order_qty_co,'.TBL_BILL_OF_MATERIAL_ITEM.'.vendor_actual_recived_qty as vendor_received_qty_co,'.TBL_VENDOR_PO_MASTER.'.po_number as v_po_number,'.TBL_FINISHED_GOODS.'.name as part_description,'.TBL_VENDOR_PO_MASTER.'.delivery_date');
-        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id= '.TBL_BILL_OF_MATERIAL.'.vendor_name');
-        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id= '.TBL_BILL_OF_MATERIAL.'.vendor_po_number');
-        $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id= '.TBL_VENDOR_PO_MASTER.'.id');
+    // if($params['search']['value'] != "") 
+    // {
+    //     $this->db->where("(".TBL_BILL_OF_MATERIAL.".bom_number LIKE '%".$params['search']['value']."%'");
+    //     $this->db->or_where(TBL_BILL_OF_MATERIAL.".date LIKE '%".$params['search']['value']."%'");
+    //     $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
+    //     $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+    //     $this->db->or_where(TBL_BILL_OF_MATERIAL.".bom_status LIKE '%".$params['search']['value']."%'");
+    //     $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%')");
+    // }
 
-        $this->db->join(TBL_BUYER_MASTER, TBL_BILL_OF_MATERIAL.'.buyer_name= '.TBL_BUYER_MASTER.'.buyer_id');
-        $this->db->join(TBL_BILL_OF_MATERIAL_ITEM, TBL_BILL_OF_MATERIAL.'.id= '.TBL_BILL_OF_MATERIAL_ITEM.'.bom_id');
-        $this->db->join(TBL_FINISHED_GOODS, TBL_BILL_OF_MATERIAL_ITEM.'.part_number= '.TBL_FINISHED_GOODS.'.fin_id');
 
-        if($params['search']['value'] != "") 
-        {
-            $this->db->where("(".TBL_BILL_OF_MATERIAL.".bom_number LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_BILL_OF_MATERIAL.".date LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_BILL_OF_MATERIAL.".bom_status LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%')");
-        }
-
-        if($vendor_name!='NA'){
-            $this->db->where(TBL_BILL_OF_MATERIAL.'.vendor_name', $vendor_name); 
-        }
-
-        if($status!='NA'){
-            $this->db->where(TBL_BILL_OF_MATERIAL.'.bom_status', $status); 
-        }
-
-        
-        if($part_number!='NA'){
-            $this->db->where(TBL_BILL_OF_MATERIAL_ITEM.'.part_number', $part_number); 
-        }
-
-        if($vendor_po!='NA'){
-            $this->db->where(TBL_BILL_OF_MATERIAL.'.vendor_po_number', $vendor_po); 
-        }
-
-        $this->db->where(TBL_BILL_OF_MATERIAL.'.status', 1);
-        $this->db->order_by(TBL_BILL_OF_MATERIAL.'.id','DESC');
-        $query = $this->db->get(TBL_BILL_OF_MATERIAL);
+        $this->db->order_by(TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.id','DESC');
+        $query = $this->db->get(TBL_SUPPLIER_PO_CONFIRMATION_ITEM);
         $rowcount = $query->num_rows();
         return $rowcount;
 
@@ -13080,11 +13059,11 @@ public function fetchsupplierporeportcount($params){
     public function fetchsupplierporeportdata($params){
         $this->db->select('*');
         $this->db->join(TBL_SUPPLIER_PO_CONFIRMATION, TBL_SUPPLIER_PO_CONFIRMATION.'.id= '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.supplier_po_confirmation_id');
-            // $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.id= '.TBL_SUPPLIER_PO_CONFIRMATION.'.vendor_po_number');
-        // $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id= '.TBL_VENDOR_PO_MASTER.'.id');
-        // $this->db->join(TBL_BUYER_MASTER, TBL_BILL_OF_MATERIAL.'.buyer_name= '.TBL_BUYER_MASTER.'.buyer_id');
+        $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id= '.TBL_SUPPLIER_PO_CONFIRMATION.'.supplier_po_id');
+        $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id= '.TBL_SUPPLIER_PO_MASTER.'.supplier_name');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.buyer_name= '.TBL_SUPPLIER_PO_MASTER.'.buyer_id');
         // $this->db->join(TBL_BILL_OF_MATERIAL_ITEM, TBL_BILL_OF_MATERIAL.'.id= '.TBL_BILL_OF_MATERIAL_ITEM.'.bom_id');
-        // $this->db->join(TBL_FINISHED_GOODS, TBL_BILL_OF_MATERIAL_ITEM.'.part_number= '.TBL_FINISHED_GOODS.'.fin_id');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id= '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.part_number_id');
 
         // if($params['search']['value'] != "") 
         // {
@@ -13109,17 +13088,11 @@ public function fetchsupplierporeportcount($params){
             foreach ($fetch_result as $key => $value)
             {
                 $data[$counter]['po_number'] = $value['po_number'];
-                $data[$counter]['bom_number'] = $value['v_po_number'];
                 $data[$counter]['date'] = $value['date'];
-                $data[$counter]['fg_part_number'] = $value['partno'];
-                $data[$counter]['part_description'] = $value['part_description'];
-                $data[$counter]['vendor_order_qty'] = $value['vendor_order_qty_co'];
-                $data[$counter]['vendor_received_qty'] = $value['expected_qty'];
-                $data[$counter]['vendor_received_qtys'] = $value['vendor_actual_recived_qty'];
-                $data[$counter]['delivery_date'] = $value['delivery_date'];
-                $data[$counter]['buyer_name'] = $value['buyer'];
-                $data[$counter]['status'] = $value['bom_status'];
-                $data[$counter]['action'] = "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['vendor_bill_item_id']."' class='fa fa-plus-circle addnotes' aria-hidden='true'></i>";
+                $data[$counter]['supplier_name'] = $value['supplier_name'];
+                $data[$counter]['name'] = $value['name'];
+              
+
 
                 $counter++; 
             }

@@ -8966,6 +8966,7 @@
 						$('#buyer_invoice_number').val(fetchResponse.buyer_invoice_number); 
 						$('#buyer_invoice_qty').val(fetchResponse.buyer_invoice_qty); 
 						$('#buyer_invoice_date').val(fetchResponse.buyer_invoice_date); 
+						$('#buyer_item_delivery_date').val(fetchResponse.buyer_item_delivery_date); 
 						$('#box_qty').val(fetchResponse.box_qty); 
 						$('#remark').val(fetchResponse.remark); 
 					
