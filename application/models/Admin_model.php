@@ -13061,7 +13061,7 @@ public function fetchsupplierporeportcount($params){
         $this->db->join(TBL_SUPPLIER_PO_CONFIRMATION, TBL_SUPPLIER_PO_CONFIRMATION.'.id= '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.supplier_po_confirmation_id');
         $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id= '.TBL_SUPPLIER_PO_CONFIRMATION.'.supplier_po_id');
         $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id= '.TBL_SUPPLIER_PO_MASTER.'.supplier_name');
-        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.buyer_name= '.TBL_SUPPLIER_PO_MASTER.'.buyer_id');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_SUPPLIER_PO_MASTER.'.vendor_name');
         // $this->db->join(TBL_BILL_OF_MATERIAL_ITEM, TBL_BILL_OF_MATERIAL.'.id= '.TBL_BILL_OF_MATERIAL_ITEM.'.bom_id');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id= '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.part_number_id');
 
@@ -13091,6 +13091,7 @@ public function fetchsupplierporeportcount($params){
                 $data[$counter]['date'] = $value['date'];
                 $data[$counter]['supplier_name'] = $value['supplier_name'];
                 $data[$counter]['name'] = $value['name'];
+                $data[$counter]['vendor_name'] = $value['vendor_name'];
               
 
 
