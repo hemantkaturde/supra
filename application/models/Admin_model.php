@@ -10008,7 +10008,7 @@ class Admin_model extends CI_Model
         $this->db->select(TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_number,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_qty,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_date,'.TBL_PACKING_INSTRACTION_DETAILS.'.remark');
         $this->db->join(TBL_PACKING_INSTRACTION, TBL_PACKING_INSTRACTION.'.id = '.TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id');
         $this->db->where(TBL_PACKING_INSTRACTION.'.buyer_po_number', $buyer_po_id);
-        $this->db->where(TBL_PACKING_INSTRACTION.'.part_number', $part_number);
+        $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.part_number', $part_number);
         $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.buyer_item_delivery_date', $buyer_po_part_delivery_date);
         $query = $this->db->get(TBL_PACKING_INSTRACTION_DETAILS);
         $fetch_result = $query->result_array();
