@@ -212,7 +212,7 @@
                         <li class="line_height <?php if($pageUrl=="chadebitnote" || $pageUrl=="addchadebitnote"){echo 'active';}?>"><a href="<?php echo base_url(); ?>chadebitnote"><i class="fa fa-cubes"></i> CHA Debit Note</a></li>
                         <li class="line_height <?php if($pageUrl=="scrapcalculationreport"){echo 'active';}?>"><a href="<?php echo base_url(); ?>scrapcalculationreport"><i class="fa fa-cubes"></i> Scrap Calculation Report</a></li>
                         <li class="line_height <?php if($pageUrl=="productionstatusreport"){echo 'active';}?>"><a href="<?php echo base_url(); ?>productionstatusreport"><i class="fa fa-cubes"></i> Peoduction Status Report</a></li>
-                        <li class="line_height <?php if($pageUrl=="supplierporeport"){echo 'active';}?>"><a href="<?php echo base_url(); ?>supplierporeport"><i class="fa fa-cubes"></i> Supplier PO Report</a></li>
+                        <li class="line_height <?php if($pageUrl=="supplierporeport"){echo 'active';}?>"><a href="<?php echo base_url(); ?>supplierporeport"><i class="fa fa-cubes"></i> Supplier PO Confirmation Report</a></li>
 
                       </ul>
                     </li>

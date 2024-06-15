@@ -470,6 +470,8 @@ $route['fetchadebitnote'] = "admin/fetchadebitnote";
 
 
 $route['supplierporeport'] = "admin/supplierporeport";
+$route['fetchsupplierporeport'] = "admin/fetchsupplierporeport";
+
 
 
 

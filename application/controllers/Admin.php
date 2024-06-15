@@ -16745,13 +16745,40 @@ public function savebillofmaterialnotes(){
 
 public function supplierporeport(){
 
-    $process = 'Supplier PO Report';
+    $process = 'Supplier PO Confirmation Report';
     $processFunction = 'Admin/supplierporeport';
-    $this->global['pageTitle'] = 'Supplier PO Report';
+    $this->global['pageTitle'] = 'Supplier PO Confirmation Report';
     //$data['vendorList']= $this->admin_model->fetchALLvendorList();
     //$data['finishgoodList']= $this->admin_model->fetchALLFinishgoodList();
     //$data['vendorpoList']= $this->admin_model->fetchALLvendorpoList();
     $this->loadViews("masters/supplierporeport", $this->global, $data, NULL);  
+}
+
+
+public function fetchsupplierporeport(){
+
+    $params = $_REQUEST;
+    $totalRecords = $this->admin_model->fetchsupplierporeportcount($params); 
+    $queryRecords = $this->admin_model->fetchsupplierporeportdata($params); 
+
+    $data = array();
+    foreach ($queryRecords as $key => $value)
+    {
+        $i = 0;
+        foreach($value as $v)
+        {
+            $data[$key][$i] = $v;
+            $i++;
+        }
+    }
+    $json_data = array(
+        "draw"            => intval( $params['draw'] ),   
+        "recordsTotal"    => intval( $totalRecords ),  
+        "recordsFiltered" => intval($totalRecords),
+        "data"            => $data   // total data array
+        );
+    echo json_encode($json_data);
+
 }
 
 

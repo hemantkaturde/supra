@@ -59,10 +59,9 @@
                                 </div>
                             </div>
 
-
                             <div class="panel-body">
                                 <table width="100%" class="table table-striped table-bordered table-hover"
-                                    id="view_production_status_report">
+                                    id="view_supplier_po_report">
                                     <thead>
                                         <tr style="background-color:#3c8dbc !important;color:#fff">
                                             <th>PO Number</th>
@@ -74,9 +73,10 @@
                                             <th>Ordered Qty</th>
                                             <th>Sent Qty</th>
                                             <th>Ordered Qty In Pcs</th>
+                                            <th>Sent Qty In Pcs</th>
                                             <th>Est Del Date</th>
-                                            <th>Status</th>
-                                            <th>Action</th>
+                                            <th>Materail Sent</th>
+                                            <th>Materail Receipt Confirmation</th>
                                         </tr>
                                     </thead>
                                     <tbody>
