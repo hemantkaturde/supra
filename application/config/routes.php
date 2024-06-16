@@ -471,7 +471,8 @@ $route['fetchadebitnote'] = "admin/fetchadebitnote";
 
 $route['supplierporeport'] = "admin/supplierporeport";
 $route['fetchsupplierporeport'] = "admin/fetchsupplierporeport";
-
+$route['deletechadebitnote'] = "admin/deletechadebitnote";
+$route['editchadebitnote/(:any)'] = "admin/editchadebitnote/$1";
 
 
 

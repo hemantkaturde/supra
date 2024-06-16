@@ -20064,7 +20064,6 @@
 				 return false;
 	    });	
 		
-
 		$(document).on('change', '#payment_rcivd_amt,#payment_exchange_amt', function(){	
 				
 			    $("#payment_rcivd_amt").val();
@@ -20087,23 +20086,24 @@
 				 $("#realised_amt_in_inr").val(total_one_group);
 			
 		});
-		
-
-
+	
     </script>
 <?php } ?>
 
 
-<?php if($pageTitle=='Add CHA Debit note' || $pageTitle=='CHA Debit Note'){ ?>
+<?php if($pageTitle=='Add CHA Debit note' || $pageTitle=='CHA Debit Note' || $pageTitle=='Edit CHA Debit Note' ){ ?>
 	<script type="text/javascript">
 
             $(document).ready(function() {
 				var dt = $('#view_chatdebitnote').DataTable({
 					"columnDefs": [ 
 						{ className: "details-control", "targets": [ 0 ] },
-						{ "width": "40%", "targets": 0 },
+						{ "width": "10%", "targets": 0 },
 						{ "width": "10%", "targets": 1 },
-						{ "width": "5%", "targets": 2 },
+						{ "width": "10%", "targets": 2 },
+						{ "width": "2%", "targets": 3 },
+						{ "width": "2%", "targets": 4 },
+						{ "width": "2%", "targets": 5 },
 					
 					],
 					responsive: true,
@@ -20123,11 +20123,13 @@
 				});
 		    });
 
-    
 	        $(document).on('click','#savechadebitnote',function(e){
 				e.preventDefault();
 				$(".loader_ajax").show();
 				var formData = new FormData($("#savechadebitnoteform")[0]);
+
+			    var cha_debit_note_id = $("#cha_debit_note_id").val();
+
 
 				$.ajax({
 					url : "<?php echo base_url();?>addchadebitnote",
@@ -20155,6 +20157,7 @@
 								icon: "success",
 								button: "Ok",
 								},function(){ 
+									
 									window.location.href = "<?php echo base_url().'chadebitnote'?>";
 							});		
 						}
@@ -20167,6 +20170,58 @@
 				});
 				return false;
 		    });
+
+
+			$(document).on('click','.deletechadebitnote',function(e){
+			var elemF = $(this);
+			e.preventDefault();
+
+			swal({
+				title: "Are you sure?",
+				text: "Delete CHA Debit Note",
+				type: "warning",
+				showCancelButton: true,
+				closeOnClickOutside: false,
+				confirmButtonClass: "btn-sm btn-danger",
+				confirmButtonText: "Yes, delete it!",
+				cancelButtonText: "No, cancel plz!",
+				closeOnConfirm: false,
+				closeOnCancel: false
+			}, function(isConfirm) {
+				if (isConfirm) {
+							$.ajax({
+								url : "<?php echo base_url();?>deletechadebitnote",
+								type: "POST",
+								data : 'id='+elemF.attr('data-id'),
+								success: function(data, textStatus, jqXHR)
+								{
+									const obj = JSON.parse(data);
+								
+									if(obj.status=='success'){
+										swal({
+											title: "Deleted!",
+											text: "CHA Debit Note Deleted Succesfully",
+											icon: "success",
+											button: "Ok",
+											},function(){ 
+												window.location.href = "<?php echo base_url().'chadebitnote'?>";
+										});	
+									}
+
+								},
+								error: function (jqXHR, textStatus, errorThrown)
+								{
+									$(".loader_ajax").hide();
+								}
+							})
+						}
+						else {
+				swal("Cancelled", "CHA Debit Note deletion cancelled ", "error");
+				}
+			});
+		});
+
+
 </script>
 <?php } ?>
 

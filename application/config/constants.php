@@ -170,3 +170,5 @@ define('TBL_PREEXPORT_ITEM_ATTRIBUTES','tbl_pre_export_item_attribute');
 define('TBL_CHA_MASTER','tbl_cha');
 define('TBL_SALES_TRACKING_REPORT','tbl_sales_tracking_report');
 define('TBL_CHA_DEBIT_NOTE','tbl_cha_debit_note');
+define('TBL_CHA_DEBIT_NOTE_TRANSACTION','tbl_cha_debitnote_transaction');
+

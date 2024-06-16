@@ -29,8 +29,11 @@
                             <table width="100%" class="table table-striped table-bordered table-hover" id="view_chatdebitnote">
                                 <thead>
                                     <tr style="background-color:#3c8dbc !important;color:#fff">
-                                        <th>CHA Debit Note Number</th>
-                                        <th>Date</th>
+                                        <th>CHA Debit Number</th>
+                                        <th>CHA Debit Date</th>
+                                        <th>CHA Name</th>
+                                        <th>Debit Amount</th>
+                                        <th>Payable Amount</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>

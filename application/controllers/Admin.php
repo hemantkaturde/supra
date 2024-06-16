@@ -16126,7 +16126,6 @@ public function chadebitnote(){
     $this->loadViews("masters/chadebitnote", $this->global, $data, NULL);
 }
 
-
 public function fetchadebitnote(){
 
     $params = $_REQUEST;
@@ -16151,7 +16150,6 @@ public function fetchadebitnote(){
         );
     echo json_encode($json_data);
 }
-
 
 public function addchadebitnote(){
 
@@ -16178,18 +16176,41 @@ public function addchadebitnote(){
             $data = array(
                 'cha_debit_number' =>trim($this->input->post('cha_debit_note_number')),
                 'cha_debit_note_date'=>trim($this->input->post('cha_debit_note_date')),
+                'cha_name' =>trim($this->input->post('cha_name')),
+                'subject'  =>trim($this->input->post('subject')),
+                'invoice_1'  =>trim($this->input->post('invoice_1')),
+                'invoice_2'  =>trim($this->input->post('invoice_2')),
+                'invoice_3'  =>trim($this->input->post('invoice_3')),
+                'date_1'  =>trim($this->input->post('date_1')),
+                'date_2'  =>trim($this->input->post('date_2')),
+                'date_3'  =>trim($this->input->post('date_3')),
                 'taxable_amount'=>trim($this->input->post('taxable_amount')),
                 'cgst_sgst'=>trim($this->input->post('cgst_sgst')),
                 'bill_amount'=>trim($this->input->post('bill_amount')),
                 'debit_amount'=>trim($this->input->post('debit_amount')),
                 'amount_payable_before_tds'=>trim($this->input->post('amount_payable_before_tds')),
                 'less_tds'=>trim($this->input->post('less_tds')),
+                'remark'=>trim($this->input->post('remark')),
                 'payable_amount'=>trim($this->input->post('payable_amount'))
             );
 
-            $savechadebitnote= $this->admin_model->savechadebitnote('',$data);
+            if($this->input->post('cha_debit_note_id')){
+
+                $cha_debit_note_id = trim($this->input->post('cha_debit_note_id'));
+            }else{
+
+                $cha_debit_note_id = '';
+            }
+            
+            $savechadebitnote= $this->admin_model->savechadebitnote($cha_debit_note_id,$data);
 
             if($savechadebitnote){
+
+                 if($cha_debit_note_id){
+
+
+                    $this->db->where('cha_debit_id', $cha_debit_note_id);
+                    $this->db->delete(TBL_CHA_DEBIT_NOTE_TRANSACTION);
 
                     $AWB_No = $_POST['AWB_No'];
                     $debit_amount = $_POST['debit_amount'];
@@ -16206,12 +16227,35 @@ public function addchadebitnote(){
                                 $data1['CGST'] = $CGST[$i];
                                 $data1['total'] = $total[$i];
                                 $data1['cha_debit_id'] = $savechadebitnote;
-            
-                                $this->db->insert('tbl_cha_debitnote_transaction',$data1);
+                              //  $this->db->where('cha_debit_id', $cha_debit_note_id);
+                                $this->db->insert(TBL_CHA_DEBIT_NOTE_TRANSACTION,$data1);
                             }
                         }
                     }
 
+                 }else{
+                        $AWB_No = $_POST['AWB_No'];
+                        $debit_amount = $_POST['debit_amount'];
+                        $SGST = $_POST['SGST'];
+                        $CGST = $_POST['CGST'];
+                        $total = $_POST['total'];
+                    
+                        if(!empty($AWB_No)){
+                            for($i = 0; $i < count($AWB_No); $i++){
+                                // if(!empty($AWB_No[$i])){
+                                    $data1['AWB_No'] = $AWB_No[$i];
+                                    $data1['debit_amount'] = $debit_amount[$i];
+                                    $data1['SGST'] = $SGST[$i];
+                                    $data1['CGST'] = $CGST[$i];
+                                    $data1['total'] = $total[$i];
+                                    $data1['cha_debit_id'] = $savechadebitnote;
+                                    $this->db->insert(TBL_CHA_DEBIT_NOTE_TRANSACTION,$data1);
+                                // }
+                            }
+                        }
+                 }
+
+                
                     $save_chadebitnote_response['status'] = 'success';
                     $save_chadebitnote_response['error'] = array('cha_debit_note_number'=>strip_tags(form_error('cha_debit_note_number')), 'cha_debit_note_date'=>strip_tags(form_error('cha_debit_note_date')), 'taxable_amount'=>strip_tags(form_error('taxable_amount')), 'cgst_sgst'=>strip_tags(form_error('cgst_sgst')),'bill_amount'=>strip_tags(form_error('bill_amount')),'debit_amount'=>strip_tags(form_error('debit_amount')),'amount_payable_before_tds'=>strip_tags(form_error('amount_payable_before_tds')),'less_tds'=>strip_tags(form_error('less_tds')),'payable_amount'=>strip_tags(form_error('payable_amount')));
             
@@ -16225,12 +16269,13 @@ public function addchadebitnote(){
             $processFunction = 'Admin/addchadebitnote';
             $this->logrecord($process,$processFunction);
             $this->global['pageTitle'] = 'Add CHA Debit note';
+            $data['getchamaster']= $this->admin_model->getchamaster();
+            $data['getPreviousCHAdebitnotnumber']= $this->admin_model->getPreviousCHAdebitnotnumber()[0];
             $this->loadViews("masters/addchadebitnote", $this->global, $data, NULL);
 
     }
 
 }
-
 
 public function downloadenquiryformdata($id){
 
@@ -16741,7 +16786,6 @@ public function savebillofmaterialnotes(){
 
 }
 
-
 public function supplierporeport(){
 
     $process = 'Supplier PO Confirmation Report';
@@ -16752,7 +16796,6 @@ public function supplierporeport(){
     //$data['vendorpoList']= $this->admin_model->fetchALLvendorpoList();
     $this->loadViews("masters/supplierporeport", $this->global, $data, NULL);  
 }
-
 
 public function fetchsupplierporeport(){
 
@@ -16778,6 +16821,34 @@ public function fetchsupplierporeport(){
         );
     echo json_encode($json_data);
 
+}
+
+public function deletechadebitnote(){
+    $post_submit = $this->input->post();
+    if($post_submit){
+        $result = $this->admin_model->deletechadebitnote(trim($this->input->post('id')));
+        if ($result) {
+                    $process = 'CHA Debit Delete';
+                    $processFunction = 'Admin/deletechadebitnote';
+                    $this->logrecord($process,$processFunction);
+                echo(json_encode(array('status'=>'success')));
+            }
+        else { echo(json_encode(array('status'=>'failed'))); }
+    }else{
+        echo(json_encode(array('status'=>'failed'))); 
+    }
+}
+
+public function editchadebitnote($id){
+
+    $process = 'Edit CHA Debit Note';
+    $processFunction = 'Admin/editchadebitnote';
+    $this->logrecord($process,$processFunction);
+    $this->global['pageTitle'] = 'Edit CHA Debit Note';
+    $data['getchadebitnotedetails'] = $this->admin_model->getchadebitnotedetails($id);
+    $data['getcurrentorderdetails']= $this->admin_model->getcurrentorderdetails($id);
+    $data['getchamaster']= $this->admin_model->getchamaster();
+    $this->loadViews("masters/editchadebitnote", $this->global, $data, NULL);
 }
 
 

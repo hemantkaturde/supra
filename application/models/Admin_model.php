@@ -12974,16 +12974,19 @@ public function savechadebitnote($id,$data){
 
 
 public function fetchadebitnotecount($params){
-
         $this->db->select('*');
-       
+        $this->db->join(TBL_CHA_MASTER, TBL_CHA_MASTER.'.cha_id = '.TBL_CHA_DEBIT_NOTE.'.cha_name');
         if($params['search']['value'] != "") 
         {
-            $this->db->where("(".TBL_CHA_DEBIT_NOTE.".bom_number LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_CHA_DEBIT_NOTE.".part_number LIKE '%".$params['search']['value']."%')");
+            $this->db->where("(".TBL_CHA_DEBIT_NOTE.".cha_debit_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CHA_DEBIT_NOTE.".payable_amount LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CHA_DEBIT_NOTE.".debit_amount LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CHA_MASTER.".cha_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CHA_DEBIT_NOTE.".cha_debit_note_date LIKE '%".$params['search']['value']."%')");
         }
 
         $this->db->where(TBL_CHA_DEBIT_NOTE.'.status', 1);
+        $this->db->limit($params['length'],$params['start']);
         $this->db->order_by(TBL_CHA_DEBIT_NOTE.'.id','DESC');
         $query = $this->db->get(TBL_CHA_DEBIT_NOTE);
         $rowcount = $query->num_rows();
@@ -12993,12 +12996,16 @@ public function fetchadebitnotecount($params){
 }
 
 public function fetchadebitnotedata($params){
-        $this->db->select('*');
+        $this->db->select('*,'.TBL_CHA_DEBIT_NOTE.'.id as debit_note_id');
+        $this->db->join(TBL_CHA_MASTER, TBL_CHA_MASTER.'.cha_id = '.TBL_CHA_DEBIT_NOTE.'.cha_name');
 
         if($params['search']['value'] != "") 
         {
-            $this->db->where("(".TBL_CHA_DEBIT_NOTE.".bom_number LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_CHA_DEBIT_NOTE.".part_number LIKE '%".$params['search']['value']."%')");
+            $this->db->where("(".TBL_CHA_DEBIT_NOTE.".cha_debit_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CHA_DEBIT_NOTE.".payable_amount LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CHA_DEBIT_NOTE.".debit_amount LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CHA_MASTER.".cha_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CHA_DEBIT_NOTE.".cha_debit_note_date LIKE '%".$params['search']['value']."%')");
         }
 
         $this->db->where(TBL_CHA_DEBIT_NOTE.'.status', 1);
@@ -13006,7 +13013,6 @@ public function fetchadebitnotedata($params){
         $this->db->order_by(TBL_CHA_DEBIT_NOTE.'.id','DESC');
         $query = $this->db->get(TBL_CHA_DEBIT_NOTE);
         $fetch_result = $query->result_array();
-
 
         $data = array();
         $counter = 0;
@@ -13016,9 +13022,12 @@ public function fetchadebitnotedata($params){
             {
                 $data[$counter]['cha_debit_number'] = $value['cha_debit_number'];
                 $data[$counter]['cha_debit_note_date'] = $value['cha_debit_note_date'];
-                $data[$counter]['date'] = $value['date'];
-            
-            
+                $data[$counter]['cha_name'] = $value['cha_name'];
+                $data[$counter]['debit_amount'] = $value['debit_amount'];
+                $data[$counter]['payable_amount'] = $value['payable_amount'];
+                $data[$counter]['action'] .='';
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editchadebitnote/".$value['debit_note_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['debit_note_id']."' class='fa fa-trash-o deletechadebitnote' aria-hidden='true'></i>"; 
                 $counter++; 
             }
         }
@@ -13121,7 +13130,55 @@ public function fetchsupplierporeportcount($params){
     }
 
 
+    public function getPreviousCHAdebitnotnumber(){
+        $this->db->select('cha_debit_number');
+        $this->db->where(TBL_CHA_DEBIT_NOTE.'.status', 1);
+        $this->db->limit(1);
+        $this->db->order_by(TBL_CHA_DEBIT_NOTE.'.id','DESC');
+        $query = $this->db->get(TBL_CHA_DEBIT_NOTE);
+        $rowcount = $query->result_array();
+        return $rowcount;
+    }
+    
+
+
+    public function deletechadebitnote($id){
+        $this->db->where('id', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_CHA_DEBIT_NOTE)){
+           return TRUE;
+        }else{
+           return FALSE;
+        }
+    }
+
+
+    public function getchadebitnotedetails($id){
+        $this->db->select('*,'.TBL_CHA_DEBIT_NOTE.'.id as debit_note_id,'.TBL_CHA_DEBIT_NOTE.'.cha_name as cha_name_id');
+        $this->db->join(TBL_CHA_MASTER, TBL_CHA_MASTER.'.cha_id = '.TBL_CHA_DEBIT_NOTE.'.cha_name');
+        $this->db->where(TBL_CHA_DEBIT_NOTE.'.id',$id);
+        $query = $this->db->get(TBL_CHA_DEBIT_NOTE);
+        $fetch_result = $query->result_array();
+        return  $fetch_result;
+    }
+
+
+    public function getcurrentorderdetails($id){
+        $this->db->select('*');
+        $this->db->where(TBL_CHA_DEBIT_NOTE_TRANSACTION.'.cha_debit_id',$id);
+        $query = $this->db->get(TBL_CHA_DEBIT_NOTE_TRANSACTION);
+        $fetch_result = $query->result_array();
+        return  $fetch_result;
+
+    }
+    
+
+
 }
+
+
+
+
 
 
 ?>
