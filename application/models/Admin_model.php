@@ -13049,26 +13049,27 @@ public function getbuyerdetailsbybuteridoritemid($buyer_po_number_id,$part_numbe
 
 
 public function fetchsupplierporeportcount($params){
-    $this->db->select('*');
-    $this->db->join(TBL_SUPPLIER_PO_CONFIRMATION, TBL_SUPPLIER_PO_CONFIRMATION.'.id= '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.supplier_po_confirmation_id');
-        // $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.id= '.TBL_SUPPLIER_PO_CONFIRMATION.'.vendor_po_number');
-    // $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id= '.TBL_VENDOR_PO_MASTER.'.id');
-    // $this->db->join(TBL_BUYER_MASTER, TBL_BILL_OF_MATERIAL.'.buyer_name= '.TBL_BUYER_MASTER.'.buyer_id');
-    // $this->db->join(TBL_BILL_OF_MATERIAL_ITEM, TBL_BILL_OF_MATERIAL.'.id= '.TBL_BILL_OF_MATERIAL_ITEM.'.bom_id');
-    // $this->db->join(TBL_FINISHED_GOODS, TBL_BILL_OF_MATERIAL_ITEM.'.part_number= '.TBL_FINISHED_GOODS.'.fin_id');
+        $this->db->select('*,'.TBL_RAWMATERIAL.'.part_number as part_number_fg');
+        $this->db->join(TBL_SUPPLIER_PO_CONFIRMATION, TBL_SUPPLIER_PO_CONFIRMATION.'.id= '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.supplier_po_confirmation_id');
+        $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id= '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.pre_supplier_po_number');
+        $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id= '.TBL_SUPPLIER_PO_MASTER.'.supplier_name');
+        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id= '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.part_number_id');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id= '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.vendor_id');
 
-    // if($params['search']['value'] != "") 
-    // {
-    //     $this->db->where("(".TBL_BILL_OF_MATERIAL.".bom_number LIKE '%".$params['search']['value']."%'");
-    //     $this->db->or_where(TBL_BILL_OF_MATERIAL.".date LIKE '%".$params['search']['value']."%'");
-    //     $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
-    //     $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
-    //     $this->db->or_where(TBL_BILL_OF_MATERIAL.".bom_status LIKE '%".$params['search']['value']."%'");
-    //     $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%')");
-    // }
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_SUPPLIER_PO_CONFIRMATION.".po_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER_PO_CONFIRMATION.".date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER.".supplier_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_RAWMATERIAL.".type_of_raw_material LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_RAWMATERIAL.".part_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER_PO_CONFIRMATION_ITEM.".order_oty LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER_PO_CONFIRMATION_ITEM.".sent_qty_pcs LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER_PO_CONFIRMATION.".material_sent LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER_PO_CONFIRMATION.".material_receipt_confirmation LIKE '%".$params['search']['value']."%')");
+        }
 
-
-        $this->db->order_by(TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.id','DESC');
         $query = $this->db->get(TBL_SUPPLIER_PO_CONFIRMATION_ITEM);
         $rowcount = $query->num_rows();
         return $rowcount;
@@ -13077,27 +13078,31 @@ public function fetchsupplierporeportcount($params){
     }
 
     public function fetchsupplierporeportdata($params){
-        $this->db->select('*,'.TBL_FINISHED_GOODS.'.part_number as part_number_fg');
+        $this->db->select('*,'.TBL_RAWMATERIAL.'.part_number as part_number_fg');
         $this->db->join(TBL_SUPPLIER_PO_CONFIRMATION, TBL_SUPPLIER_PO_CONFIRMATION.'.id= '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.supplier_po_confirmation_id');
-        $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id= '.TBL_SUPPLIER_PO_CONFIRMATION.'.supplier_po_id');
+        $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id= '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.pre_supplier_po_number');
         $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id= '.TBL_SUPPLIER_PO_MASTER.'.supplier_name');
-        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_SUPPLIER_PO_MASTER.'.vendor_name');
-        // $this->db->join(TBL_BILL_OF_MATERIAL_ITEM, TBL_BILL_OF_MATERIAL.'.id= '.TBL_BILL_OF_MATERIAL_ITEM.'.bom_id');
-        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id= '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.part_number_id');
+        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id= '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.part_number_id');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id= '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.vendor_id');
 
-        // if($params['search']['value'] != "") 
-        // {
-        //     $this->db->where("(".TBL_BILL_OF_MATERIAL.".bom_number LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_BILL_OF_MATERIAL.".date LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_BILL_OF_MATERIAL.".bom_status LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%')");
-        // }
+
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_SUPPLIER_PO_CONFIRMATION.".po_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER_PO_CONFIRMATION.".date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER.".supplier_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_RAWMATERIAL.".type_of_raw_material LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_RAWMATERIAL.".part_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER_PO_CONFIRMATION_ITEM.".order_oty LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER_PO_CONFIRMATION_ITEM.".sent_qty_pcs LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER_PO_CONFIRMATION.".material_sent LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER_PO_CONFIRMATION.".material_receipt_confirmation LIKE '%".$params['search']['value']."%')");
+        }
 
     
         $this->db->limit($params['length'],$params['start']);
-        $this->db->order_by(TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.id','DESC');
+        $this->db->order_by(TBL_SUPPLIER_PO_CONFIRMATION.'.id','DESC');
         $query = $this->db->get(TBL_SUPPLIER_PO_CONFIRMATION_ITEM);
         $fetch_result = $query->result_array();
 
@@ -13107,10 +13112,11 @@ public function fetchsupplierporeportcount($params){
         {
             foreach ($fetch_result as $key => $value)
             {
+            
                 $data[$counter]['po_number'] = $value['po_number'];
                 $data[$counter]['date'] = $value['date'];
                 $data[$counter]['supplier_name'] = $value['supplier_name'];
-                $data[$counter]['name'] = $value['name'];
+                $data[$counter]['name'] = $value['type_of_raw_material'];
                 $data[$counter]['vendor_name'] = $value['vendor_name'];
                 $data[$counter]['part_number'] = $value['part_number_fg'];
                 $data[$counter]['order_oty'] = $value['order_oty'];

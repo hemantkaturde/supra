@@ -467,8 +467,6 @@ $route['fetchproductionstatusreport'] = "admin/fetchproductionstatusreport";
 $route['chadebitnote'] = "admin/chadebitnote";
 $route['addchadebitnote'] = "admin/addchadebitnote";
 $route['fetchadebitnote'] = "admin/fetchadebitnote";
-
-
 $route['supplierporeport'] = "admin/supplierporeport";
 $route['fetchsupplierporeport'] = "admin/fetchsupplierporeport";
 $route['deletechadebitnote'] = "admin/deletechadebitnote";
