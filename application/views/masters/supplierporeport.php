@@ -70,11 +70,10 @@
                                             <th>Materail Description</th>
                                             <th>Vendor Name</th>
                                             <th>Part No</th>
-                                            <th>Ordered Qty</th>
-                                            <th>Sent Qty</th>
+                                            <th>Ordered Qty kgs</th>
+                                            <th>Sent Qty kgs</th>
                                             <th>Ordered Qty In Pcs</th>
                                             <th>Sent Qty In Pcs</th>
-                                            <th>Est Del Date</th>
                                             <th>Materail Sent</th>
                                             <th>Materail Receipt Confirmation</th>
                                         </tr>

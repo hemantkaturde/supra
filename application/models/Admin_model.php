@@ -13121,9 +13121,8 @@ public function fetchsupplierporeportcount($params){
                 $data[$counter]['part_number'] = $value['part_number_fg'];
                 $data[$counter]['order_oty'] = $value['order_oty'];
                 $data[$counter]['sent_qty'] = $value['sent_qty'];
-                $data[$counter]['order_oty_pcs'] = '';
+                $data[$counter]['order_oty_pcs'] =  $value['vendor_qty'];
                 $data[$counter]['sent_qty_pcs'] = $value['sent_qty_pcs'];
-                $data[$counter]['est_delevery_date'] = '';
                 $data[$counter]['material_sent'] = $value['material_sent'];
                 $data[$counter]['material_receipt_confirmation'] = $value['material_receipt_confirmation'];
 
