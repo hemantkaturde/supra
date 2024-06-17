@@ -16851,5 +16851,12 @@ public function editchadebitnote($id){
     $this->loadViews("masters/editchadebitnote", $this->global, $data, NULL);
 }
 
+public function salestrackingexcelreport(){
+    $process = 'Sales Tracking Excel Report';
+    $processFunction = 'Admin/salestrackingexcelreport';
+    $this->global['pageTitle'] = 'Sales Tracking Excel Report';
+    $this->loadViews("masters/salestrackingexcelreport", $this->global, $data, NULL);  
+}
+
 
 }

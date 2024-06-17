@@ -474,5 +474,9 @@ $route['editchadebitnote/(:any)'] = "admin/editchadebitnote/$1";
 
 
 
+$route['salestrackingexcelreport'] = "admin/salestrackingexcelreport";
+
+
+
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
