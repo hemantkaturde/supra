@@ -20222,6 +20222,30 @@
 		});
 
 
+		$(document).on('change', '#taxable_amount,#cgst_sgst', function(){	
+				
+			    $("#taxable_amount").val();
+				$("#cgst_sgst").val();
+
+				 if($("#taxable_amount").val()){
+					 var taxable_amount = $("#taxable_amount").val();
+				 }else{
+					 var taxable_amount = 0;
+				 }
+
+				 if($("#cgst_sgst").val()){
+					 var cgst_sgst = $("#cgst_sgst").val();
+				 }else{
+					 var cgst_sgst = 0;
+				 }
+
+				 var total_one_group = parseFloat(taxable_amount) +  parseFloat(cgst_sgst);
+
+				 $("#bill_amount").val(total_one_group);
+			
+		});
+
+
 </script>
 <?php } ?>
 
@@ -20572,7 +20596,6 @@
 		getallsupplierporeport();
 	});
 
-
     function getallsupplierporeport(){
 
 		var dt = $('#view_supplier_po_report').DataTable({
@@ -20606,6 +20629,9 @@
 			},
 		});
 	}
+
+	
+
 
     </script>  
 <?php } ?>

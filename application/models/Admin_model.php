@@ -13065,6 +13065,7 @@ public function fetchsupplierporeportcount($params){
             $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_RAWMATERIAL.".part_number LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_SUPPLIER_PO_CONFIRMATION_ITEM.".order_oty LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER_PO_CONFIRMATION_ITEM.".vendor_qty LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_SUPPLIER_PO_CONFIRMATION_ITEM.".sent_qty_pcs LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_SUPPLIER_PO_CONFIRMATION.".material_sent LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_SUPPLIER_PO_CONFIRMATION.".material_receipt_confirmation LIKE '%".$params['search']['value']."%')");
@@ -13095,6 +13096,7 @@ public function fetchsupplierporeportcount($params){
             $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_RAWMATERIAL.".part_number LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_SUPPLIER_PO_CONFIRMATION_ITEM.".order_oty LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER_PO_CONFIRMATION_ITEM.".vendor_qty LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_SUPPLIER_PO_CONFIRMATION_ITEM.".sent_qty_pcs LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_SUPPLIER_PO_CONFIRMATION.".material_sent LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_SUPPLIER_PO_CONFIRMATION.".material_receipt_confirmation LIKE '%".$params['search']['value']."%')");
