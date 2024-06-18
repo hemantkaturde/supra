@@ -16892,7 +16892,7 @@ public function downlaod_supplier_po_details_report($supplier_name,$supplier_po,
         $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['part_number']);
         $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['order_oty']);
         $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $element['sent_qty']);
-        $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, $element['vendor_qty']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, $element['order_oty_pcs']);
         $objPHPExcel->getActiveSheet()->SetCellValue('J' . $rowCount, $element['sent_qty_pcs']);
         $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, $element['material_sent']);
         $objPHPExcel->getActiveSheet()->SetCellValue('L' . $rowCount, $element['material_receipt_confirmation']);   
