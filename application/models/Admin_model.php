@@ -2384,7 +2384,7 @@ class Admin_model extends CI_Model
 
     public function getVendoritemsonly($vendor_po_number,$flag){
 
-        $this->db->select('*');
+        $this->db->select('*,'.TBL_VENDOR_PO_MASTER_ITEM.'.id as vendor_po_item_id');
         // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
         $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
         $this->db->where(TBL_FINISHED_GOODS.'.status',1);
@@ -2444,7 +2444,7 @@ class Admin_model extends CI_Model
     }
 
 
-    public function getSuppliergoodsPartnumberByidvendorpoconfirmation($part_number,$flag,$vendor_po_number){
+    public function getSuppliergoodsPartnumberByidvendorpoconfirmation($part_number,$flag,$vendor_po_number,$poitemid){
 
         if($flag=='Supplier'){
 
@@ -2469,8 +2469,9 @@ class Admin_model extends CI_Model
             // $this->db->join(TBL_SUPPLIER_PO_CONFIRMATION_ITEM, TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.vendor_id = '.TBL_VENDOR.'.ven_id');
     
             $this->db->where(TBL_FINISHED_GOODS.'.status',1);
-            $this->db->where(TBL_FINISHED_GOODS.'.id',$vendor_po_number);
-            $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.raw_id');
+            $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id',$vendor_po_number);
+            $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.id',$poitemid);
+            $this->db->where(TBL_FINISHED_GOODS.'.raw_id',$part_number);
             $query = $this->db->get(TBL_FINISHED_GOODS);
             $data = $query->result_array();
             return $data;
@@ -9174,7 +9175,7 @@ class Admin_model extends CI_Model
         $check_if_supplier_exist =  $this->chekc_if_supplie_name_exits($vendor_po_number);
 
         if($check_if_supplier_exist['supplier_po_number']){
-            $this->db->select('*,'.TBL_FINISHED_GOODS.'.fin_id as fin_id');
+            $this->db->select('*,'.TBL_FINISHED_GOODS.'.fin_id as fin_id,'.TBL_VENDOR_PO_MASTER_ITEM.'.id as vendor_po_item_id');
             $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
             // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
             $this->db->where(TBL_FINISHED_GOODS.'.status',1);

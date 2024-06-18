@@ -4534,6 +4534,7 @@
 			//$(".loader_ajax").show();
 			var vendor_po_number = $('#vendor_po_number').val();
 			var supplier_po_number = $('#supplier_po_number').val();
+			
 
 			$("#part_number").html('');
 		
@@ -4570,13 +4571,21 @@
 		    var vendor_po_number = $('#vendor_po_number').val();
 			var vendor_name = $('#vendor_name').val();
 
+			var selectElement = document.getElementById("part_number");
+			// Get the selected option element
+			var selectedOption = selectElement.options[selectElement.selectedIndex];
+
+			// Get the value of the data-info attribute of the selected option
+			var poitemid = selectedOption.getAttribute("data_id");
+
+
 
 			if(vendor_name){
 				if(vendor_po_number){
 						$.ajax({
 							url : "<?php echo ADMIN_PATH;?>getSuppliergoodsPartnumberByidvendorpoconfirmation",
 							type: "POST",
-							data : {'part_number' : part_number,'vendor_po_number':vendor_po_number},
+							data : {'part_number' : part_number,'vendor_po_number':vendor_po_number,'poitemid':poitemid},
 							success: function(data, textStatus, jqXHR)
 							{
 								$(".loader_ajax").hide();

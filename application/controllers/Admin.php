@@ -3854,7 +3854,7 @@ class Admin extends BaseController
 			if(count($getVendoritemsonly) >= 1) {
                 $content = $content.'<option value="">Select Part Number</option>';
 				foreach($getVendoritemsonly as $value) {
-					$content = $content.'<option value="'.$value["fin_id"].'">'.$value["part_number"].'</option>';
+					$content = $content.'<option value="'.$value["fin_id"].'" data_id="'.$value["vendor_po_item_id"].'">'.$value["part_number"].'</option>';
 				}
 				echo $content;
 			} else {
@@ -3924,7 +3924,7 @@ class Admin extends BaseController
 
         
         if($this->input->post('part_number')) {
-            $getPartNameBypartid = $this->admin_model->getSuppliergoodsPartnumberByidvendorpoconfirmation($this->input->post('part_number'),$flag, $vendor_po_number);
+            $getPartNameBypartid = $this->admin_model->getSuppliergoodsPartnumberByidvendorpoconfirmation($this->input->post('part_number'),$flag, $vendor_po_number,$this->input->post('poitemid'));
 
             if($getPartNameBypartid){
                 $content = $getPartNameBypartid[0];
@@ -10121,7 +10121,7 @@ class Admin extends BaseController
 			if(count($getVendoritemsonly) >= 1) {
                 $content = $content.'<option value="">Select Part Number</option>';
 				foreach($getVendoritemsonly as $value) {
-					$content = $content.'<option value="'.$value["fin_id"].'">'.$value["part_number"].'</option>';
+					$content = $content.'<option value="'.$value["fin_id"].'"  data_id="'.$value["vendor_po_item_id"].'">'.$value["part_number"].'</option>';
 				}
 				echo $content;
 			} else {
