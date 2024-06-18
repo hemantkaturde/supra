@@ -97,15 +97,15 @@
                                             <th>PO Number</th>
                                             <th>PO Date</th>
                                             <th>Supplier Name</th>
-                                            <th>Materail Description</th>
+                                            <th>Material Description</th>
                                             <th>Vendor Name</th>
                                             <th>Part No</th>
                                             <th>Ordered Qty kgs</th>
                                             <th>Sent Qty kgs</th>
                                             <th>Ordered Qty In Pcs</th>
                                             <th>Sent Qty In Pcs</th>
-                                            <th>Materail Sent</th>
-                                            <th>Materail Receipt Confirmation</th>
+                                            <th>Material Sent</th>
+                                            <th>Material Receipt Confirmation</th>
                                         </tr>
                                     </thead>
                                     <tbody>
