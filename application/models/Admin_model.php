@@ -2137,7 +2137,7 @@ class Admin_model extends CI_Model
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.pre_vendor_name');
         $this->db->where(TBL_RAWMATERIAL.'.status',1);
         $this->db->where(TBL_RAWMATERIAL.'.raw_id',$part_number);
-        $this->db->where(TBL_SUPPLIER_PO_MASTER_ITEM.'.pre_supplier_po_number',$supplier_po_number);
+        $this->db->where(TBL_SUPPLIER_PO_MASTER_ITEM.'.supplier_po_id',$supplier_po_number);
         $query = $this->db->get(TBL_RAWMATERIAL);
         $data = $query->result_array();
         return $data;

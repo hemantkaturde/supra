@@ -3969,7 +3969,7 @@
 			if(supplier_name){
 				if(supplier_po_number){
 						$.ajax({
-							url : "<?php echo ADMIN_PATH;?>getRowmaterialPartnumberByid",
+							url : "<?php echo ADMIN_PATH;?>getRowmaterialPartnumberByidsupplierpoconfirmation",
 							type: "POST",
 							data : {'part_number' : part_number,'supplier_po_number':supplier_po_number},
 							success: function(data, textStatus, jqXHR)
