@@ -317,7 +317,7 @@ $(document).ready(function() {
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="debit_amount">Debit Amount (Rs)</label>
-                                            <input type="text" class="form-control" id="debit_amount"
+                                            <input type="text" class="form-control debit_amount_total" id="debit_amount"
                                                 name="debit_amount" required>
                                             <p class="error debit_amount_error"></p>
                                         </div>
@@ -335,7 +335,7 @@ $(document).ready(function() {
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="less_tds">Less TDS</label>
-                                            <input type="text" class="form-control" id="less_tds" name="less_tds"
+                                            <input type="text" class="form-control" id="less_tdsss" name="less_tds"
                                                 required>
                                             <p class="error less_tds_error"></p>
                                         </div>
@@ -344,7 +344,7 @@ $(document).ready(function() {
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="number">Payable Amount</label>
-                                            <input type="text" class="form-control" name="payable_amount"
+                                            <input type="text" class="form-control" id="payable_amount" name="payable_amount"
                                                 name="payable_amount" required>
                                             <p class="error payable_amount_error"></p>
                                         </div>

@@ -20242,7 +20242,53 @@
 				 var total_one_group = parseFloat(taxable_amount) +  parseFloat(cgst_sgst);
 
 				 $("#bill_amount").val(total_one_group);
+		});
+
+
+		$(document).on('change', '.debit_amount_total', function(){	
+				
+			    $("#bill_amount").val();
+				$(".debit_amount_total").val();
+
+				 if($("#bill_amount").val()){
+					 var bill_amount = $("#bill_amount").val();
+				 }else{
+					 var bill_amount = 0;
+				 }
+
+				 if($(".debit_amount_total").val()){
+					 var debit_amount = $(".debit_amount_total").val();
+				 }else{
+					 var debit_amount = 0;
+				 }
+
+				 var total_one_groupq= parseFloat(bill_amount) -  parseFloat(debit_amount);
+
+				 $("#amount_payable_before_tds").val(total_one_groupq);
 			
+		});
+
+
+		$(document).on('change', '#less_tdsss', function(){	
+
+			    $("#amount_payable_before_tds").val();
+				$("#less_tdsss").val();
+
+				 if($("#amount_payable_before_tds").val()){
+					 var amount_payable_before_tds = $("#amount_payable_before_tds").val();
+				 }else{
+					 var amount_payable_before_tds = 0;
+				 }
+
+				 if($("#less_tdsss").val()){
+					 var less_tds = $("#less_tdsss").val();
+				 }else{
+					 var less_tds = 0;
+				 }
+
+				 var total_one_group = parseFloat(amount_payable_before_tds) -  parseFloat(less_tds);
+
+				 $("#payable_amount").val(total_one_group);
 		});
 
 
@@ -20663,7 +20709,6 @@
 		});
 	}
 
-
 	$(document).on('click','#export_to_excel_supplier_po',function(e){
 		e.preventDefault();
 		$(".loader_ajax").show();
@@ -20699,8 +20744,6 @@
 		});
 	   return false;
 	});
-
-	
 
 
     </script>  
