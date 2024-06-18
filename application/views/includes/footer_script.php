@@ -3966,12 +3966,19 @@
 		    var supplier_po_number = $('#supplier_po_number').val();
 			var supplier_name = $('#supplier_name').val();
 
+			var selectElement = document.getElementById("part_number");
+			// Get the selected option element
+			var selectedOption = selectElement.options[selectElement.selectedIndex];
+
+			// Get the value of the data-info attribute of the selected option
+			var poitemid = selectedOption.getAttribute("data_id");
+
 			if(supplier_name){
 				if(supplier_po_number){
 						$.ajax({
 							url : "<?php echo ADMIN_PATH;?>getRowmaterialPartnumberByidsupplierpoconfirmation",
 							type: "POST",
-							data : {'part_number' : part_number,'supplier_po_number':supplier_po_number},
+							data : {'part_number' : part_number,'supplier_po_number':supplier_po_number,'poitemid':poitemid},
 							success: function(data, textStatus, jqXHR)
 							{
 								$(".loader_ajax").hide();

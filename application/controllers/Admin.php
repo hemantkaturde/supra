@@ -3255,7 +3255,7 @@ class Admin extends BaseController
     public function getRowmaterialPartnumberByidsupplierpoconfirmation(){
 
             if($this->input->post('part_number')) {
-                $getPartNameBypartid = $this->admin_model->getRowmaterialPartnumberByidsupplierpoconfirmation($this->input->post('part_number'),$this->input->post('supplier_po_number'));
+                $getPartNameBypartid = $this->admin_model->getRowmaterialPartnumberByidsupplierpoconfirmation($this->input->post('part_number'),$this->input->post('supplier_po_number'),$this->input->post('poitemid'));
     
                 if($getPartNameBypartid){
                     $content = $getPartNameBypartid[0];
@@ -3409,7 +3409,7 @@ class Admin extends BaseController
 			if(count($getSupplieritemsonly) >= 1) {
                 $content = $content.'<option value="">Select Part Number</option>';
 				foreach($getSupplieritemsonly as $value) {
-					$content = $content.'<option value="'.$value["item_id"].'">'.$value["part_number"].'</option>';
+					$content = $content.'<option value="'.$value["item_id"].'" data_id="'.$value["supplier_po_item_id"].'">'.$value["part_number"].'</option>';
 				}
 				echo $content;
 			} else {

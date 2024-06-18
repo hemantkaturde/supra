@@ -1961,7 +1961,7 @@ class Admin_model extends CI_Model
 
            
 
-            $this->db->select('*,'.TBL_RAWMATERIAL.'.raw_id as item_id');
+            $this->db->select('*,'.TBL_RAWMATERIAL.'.raw_id as item_id,'.TBL_SUPPLIER_PO_MASTER_ITEM.'.id as supplier_po_item_id');
             // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
             $this->db->join(TBL_SUPPLIER_PO_MASTER_ITEM, TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id = '.TBL_RAWMATERIAL.'.raw_id');
             // $this->db->where(TBL_FINISHED_GOODS.'.status',1);
@@ -2130,7 +2130,7 @@ class Admin_model extends CI_Model
     }
 
 
-    public function getRowmaterialPartnumberByidsupplierpoconfirmation($part_number,$supplier_po_number){
+    public function getRowmaterialPartnumberByidsupplierpoconfirmation($part_number,$supplier_po_number,$poitemid){
         $this->db->select('*');
         // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
         $this->db->join(TBL_SUPPLIER_PO_MASTER_ITEM, TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id = '.TBL_RAWMATERIAL.'.raw_id');
@@ -2138,6 +2138,7 @@ class Admin_model extends CI_Model
         $this->db->where(TBL_RAWMATERIAL.'.status',1);
         $this->db->where(TBL_RAWMATERIAL.'.raw_id',$part_number);
         $this->db->where(TBL_SUPPLIER_PO_MASTER_ITEM.'.supplier_po_id',$supplier_po_number);
+        $this->db->where(TBL_SUPPLIER_PO_MASTER_ITEM.'.id',$poitemid);
         $query = $this->db->get(TBL_RAWMATERIAL);
         $data = $query->result_array();
         return $data;
