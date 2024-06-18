@@ -16858,4 +16858,74 @@ public function salestrackingexcelreport(){
 }
 
 
+public function downlaod_supplier_po_details_report($supplier_name,$supplier_po,$material_sent,$materila_recipt_confirmation) {
+
+    // create file name
+    $fileName = 'Supplier_PO_Report -'.date('d-m-Y').'.xlsx';  
+    // load excel library
+    $empInfo = $this->admin_model->downlaodsupplierpodetailsreportdata($supplier_name,$supplier_po,$material_sent,$materila_recipt_confirmation);
+
+    $objPHPExcel = new PHPExcel();
+    $objPHPExcel->setActiveSheetIndex(0);
+    // set Header
+    $objPHPExcel->getActiveSheet()->SetCellValue('A1', 'PO Number');
+    $objPHPExcel->getActiveSheet()->SetCellValue('B1', 'PO Date');
+    $objPHPExcel->getActiveSheet()->SetCellValue('C1', 'Supplier Name');
+    $objPHPExcel->getActiveSheet()->SetCellValue('D1', 'Materail Description'); 
+    $objPHPExcel->getActiveSheet()->SetCellValue('E1', 'Vendor Name');
+    $objPHPExcel->getActiveSheet()->SetCellValue('F1', 'Part No');   
+    $objPHPExcel->getActiveSheet()->SetCellValue('G1', 'Ordered Qty kgs');  
+    $objPHPExcel->getActiveSheet()->SetCellValue('H1', 'Sent Qty kgs');  
+    $objPHPExcel->getActiveSheet()->SetCellValue('I1', 'Ordered Qty In Pcs');  
+    $objPHPExcel->getActiveSheet()->SetCellValue('J1', 'Sent Qty In Pcs');  
+    $objPHPExcel->getActiveSheet()->SetCellValue('K1', 'Materail Sent');
+    $objPHPExcel->getActiveSheet()->SetCellValue('L1', 'Materail Receipt Confirmation');
+
+    // set Row
+    $rowCount = 2;
+    foreach ($empInfo as $element) {
+        $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $element['po_number']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $element['date']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $element['supplier_name']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['type_of_raw_material']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['vendor_name']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['part_number_fg']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['order_oty']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $element['sent_qty']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, $element['vendor_qty']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('J' . $rowCount, $element['sent_qty_pcs']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, $element['material_sent']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('L' . $rowCount, $element['material_receipt_confirmation']);   
+        $rowCount++;
+    }
+
+    foreach(range('A','L') as $columnID) {
+        $objPHPExcel->getActiveSheet()->getColumnDimension($columnID)->setAutoSize(true);
+    }
+    /*********************Autoresize column width depending upon contents END***********************/
+    
+    $objPHPExcel->getActiveSheet()->getStyle('A1:L1')->getFont()->setBold(true); //Make heading font bold
+    
+    /*********************Add color to heading START**********************/
+    $objPHPExcel->getActiveSheet()
+                ->getStyle('A1:L1')
+                ->getFill()
+                ->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
+                ->getStartColor()
+                ->setARGB('99ff99');
+
+
+    $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
+      
+    header('Content-Type: application/vnd.ms-excel');
+    header("Content-Disposition: attachment;Filename=$fileName.xls");
+    header('Cache-Control: max-age=0');
+    $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+    $objWriter->save('php://output');
+
+}
+
+
+
+
 }

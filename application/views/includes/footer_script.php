@@ -20663,6 +20663,43 @@
 		});
 	}
 
+
+	$(document).on('click','#export_to_excel_supplier_po',function(e){
+		e.preventDefault();
+		$(".loader_ajax").show();
+		var supplier_name = $('#supplier_name').val();
+		var supplier_po = $('#supplier_po').val();
+		var material_sent = $('#material_sent').val();
+		var materila_recipt_confirmation = $('#materila_recipt_confirmation').val();
+
+
+		$.ajax({
+			url : "<?php echo ADMIN_PATH;?>admin/downlaod_supplier_po_details_report/"+supplier_name+"/"+supplier_po+"/"+material_sent+"/"+materila_recipt_confirmation,
+			type: "POST",
+			// data : {'hospitals' : hospitals, 'driver' : driver,'ride_start':ride_start,'ride_stop':ride_stop},
+			success: function(data, textStatus, jqXHR)
+			{
+				$(".loader_ajax").hide();
+				if(data == "failure")
+				{
+					$(".report_type_error").html("");
+					alert('No data fond');
+				}
+				else
+				{
+					$(".report_type_error").html("");
+					window.location.href = "<?php echo ADMIN_PATH;?>admin/downlaod_supplier_po_details_report/"+supplier_name+"/"+supplier_po+"/"+material_sent+"/"+materila_recipt_confirmation;
+				}
+			},
+			error: function (jqXHR, textStatus, errorThrown)
+			{
+				   alert('No data fond');
+				   $(".loader_ajax").hide();
+			}
+		});
+	   return false;
+	});
+
 	
 
 

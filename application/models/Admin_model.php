@@ -13229,10 +13229,74 @@ public function fetchsupplierporeportcount($params,$supplier_name,$supplier_po,$
 
     }
     
+   
 
+    public function downlaodsupplierpodetailsreportdata($supplier_name,$supplier_po,$material_sent,$materila_recipt_confirmation){
+
+        $this->db->select('*,'.TBL_RAWMATERIAL.'.part_number as part_number_fg');
+        $this->db->join(TBL_SUPPLIER_PO_CONFIRMATION, TBL_SUPPLIER_PO_CONFIRMATION.'.id= '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.supplier_po_confirmation_id');
+        $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id= '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.pre_supplier_po_number');
+        $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id= '.TBL_SUPPLIER_PO_MASTER.'.supplier_name');
+        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id= '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.part_number_id');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id= '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.vendor_id');
+
+        if($supplier_name!='NA'){
+            $this->db->where(TBL_SUPPLIER.'.sup_id', $supplier_name);
+        }
+
+        
+        if($supplier_po!='NA'){
+            $this->db->where(TBL_SUPPLIER_PO_MASTER.'.id', $supplier_po);
+        }
+
+        
+        if($material_sent!='NA'){
+            $this->db->where(TBL_SUPPLIER_PO_CONFIRMATION.'.material_sent', $material_sent);
+        }
+
+        
+        if($materila_recipt_confirmation!='NA'){
+            $this->db->where(TBL_SUPPLIER_PO_CONFIRMATION.'.material_receipt_confirmation', $materila_recipt_confirmation);
+        }
+    
+        $this->db->limit($params['length'],$params['start']);
+        $this->db->order_by(TBL_SUPPLIER_PO_CONFIRMATION.'.id','DESC');
+        $query = $this->db->get(TBL_SUPPLIER_PO_CONFIRMATION_ITEM);
+        $fetch_result = $query->result_array();
+
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+            
+                $data[$counter]['po_number'] = $value['po_number'];
+                $data[$counter]['date'] = $value['date'];
+                $data[$counter]['supplier_name'] = $value['supplier_name'];
+                $data[$counter]['name'] = $value['type_of_raw_material'];
+                $data[$counter]['vendor_name'] = $value['vendor_name'];
+                $data[$counter]['part_number'] = $value['part_number_fg'];
+                $data[$counter]['order_oty'] = $value['order_oty'];
+                $data[$counter]['sent_qty'] = $value['sent_qty'];
+                $data[$counter]['order_oty_pcs'] =  $value['vendor_qty'];
+                $data[$counter]['sent_qty_pcs'] = $value['sent_qty_pcs'];
+                $data[$counter]['material_sent'] = $value['material_sent'];
+                $data[$counter]['material_receipt_confirmation'] = $value['material_receipt_confirmation'];
+
+                
+                $counter++; 
+            }
+        }
+
+        return $data;
+    
+    }
+    
+    
+    
 
 }
-
 
 
 
