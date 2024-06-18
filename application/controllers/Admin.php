@@ -3241,18 +3241,33 @@ class Admin extends BaseController
             $data['buyerList']= $this->admin_model->fetchAllbuyerList();
             $data['supplierList']= $this->admin_model->fetchALLsupplierList();
             $data['rowMaterialList']= $this->admin_model->fetchALLrowMaterialList();
-
-
             $data['getPreviousSupplierPoconfirmationNumber']= $this->admin_model->getPreviousSupplierPoconfirmationNumber()[0];
             $data['getPreviousVendorPoconfirmationNumber']= $this->admin_model->getPreviousVendorPoconfirmationNumber()[0];
-
-            
             $data['fetchALLpresupplierpoconfirmationitemList']= $this->admin_model->fetchALLpresupplierpoconfirmationitemList();
-             $this->logrecord($process,$processFunction);
+            $this->logrecord($process,$processFunction);
             $this->global['pageTitle'] = 'Add Supplier PO Confirmation';
             $this->loadViews("masters/addsupplierpoconfirmation", $this->global, $data, NULL);
         }
 
+    }
+
+
+    public function getRowmaterialPartnumberByidsupplierpoconfirmation(){
+
+            if($this->input->post('part_number')) {
+                $getPartNameBypartid = $this->admin_model->getRowmaterialPartnumberByidsupplierpoconfirmation($this->input->post('part_number'),$this->input->post('supplier_po_number'));
+    
+                if($getPartNameBypartid){
+                    $content = $getPartNameBypartid[0];
+                    echo json_encode($content);
+    
+                }else{
+                    echo 'failure';
+                }
+               
+            } else {
+                echo 'failure';
+            }
     }
 
     public function fetchSupplierpoconfirmationlist(){
@@ -3283,7 +3298,6 @@ class Admin extends BaseController
     }
     
     public function editSupplierpoconfirmation($supplierpoconfirmationid){
-
         $process = 'Edit Supplier PO Confirmation';
         $processFunction = 'Admin/editSupplierconfirmation';
         $this->logrecord($process,$processFunction);
