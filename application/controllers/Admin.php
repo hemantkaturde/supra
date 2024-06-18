@@ -16871,15 +16871,15 @@ public function downlaod_supplier_po_details_report($supplier_name,$supplier_po,
     $objPHPExcel->getActiveSheet()->SetCellValue('A1', 'PO Number');
     $objPHPExcel->getActiveSheet()->SetCellValue('B1', 'PO Date');
     $objPHPExcel->getActiveSheet()->SetCellValue('C1', 'Supplier Name');
-    $objPHPExcel->getActiveSheet()->SetCellValue('D1', 'Materail Description'); 
+    $objPHPExcel->getActiveSheet()->SetCellValue('D1', 'Material Description'); 
     $objPHPExcel->getActiveSheet()->SetCellValue('E1', 'Vendor Name');
     $objPHPExcel->getActiveSheet()->SetCellValue('F1', 'Part No');   
     $objPHPExcel->getActiveSheet()->SetCellValue('G1', 'Ordered Qty kgs');  
     $objPHPExcel->getActiveSheet()->SetCellValue('H1', 'Sent Qty kgs');  
     $objPHPExcel->getActiveSheet()->SetCellValue('I1', 'Ordered Qty In Pcs');  
     $objPHPExcel->getActiveSheet()->SetCellValue('J1', 'Sent Qty In Pcs');  
-    $objPHPExcel->getActiveSheet()->SetCellValue('K1', 'Materail Sent');
-    $objPHPExcel->getActiveSheet()->SetCellValue('L1', 'Materail Receipt Confirmation');
+    $objPHPExcel->getActiveSheet()->SetCellValue('K1', 'Material Sent');
+    $objPHPExcel->getActiveSheet()->SetCellValue('L1', 'Material Receipt Confirmation');
 
     // set Row
     $rowCount = 2;
