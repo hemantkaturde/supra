@@ -3903,6 +3903,44 @@ class Admin extends BaseController
         }
     }
 
+
+    public function getSuppliergoodsPartnumberByidvendorpoconfirmation(){
+
+
+        $vendor_po_number=$this->input->post('vendor_po_number');
+        $chekc_if_supplie_name = $this->admin_model->chekc_if_supplie_name_exits($vendor_po_number);
+
+        // if($chekc_if_supplie_name['supplier_po_number']){
+        //   $flag ='Vendor';
+        // }else{
+        //   $flag ='Supplier';
+        // }
+
+          if($chekc_if_supplie_name['supplier_po_number']){
+            $flag ='Supplier';
+          }else{
+            $flag ='Vendor';
+          }
+
+        
+        if($this->input->post('part_number')) {
+            $getPartNameBypartid = $this->admin_model->getSuppliergoodsPartnumberByidvendorpoconfirmation($this->input->post('part_number'),$flag, $vendor_po_number);
+
+            if($getPartNameBypartid){
+                $content = $getPartNameBypartid[0];
+                echo json_encode($content);
+
+            }else{
+                echo 'failure';
+            }
+           
+        } else {
+            echo 'failure';
+        }
+    }
+
+
+
     public function saveVendorconfromationpoitem(){
 
         $post_submit = $this->input->post();

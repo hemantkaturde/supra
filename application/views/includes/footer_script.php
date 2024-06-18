@@ -4574,7 +4574,7 @@
 			if(vendor_name){
 				if(vendor_po_number){
 						$.ajax({
-							url : "<?php echo ADMIN_PATH;?>getSuppliergoodsPartnumberByid",
+							url : "<?php echo ADMIN_PATH;?>getSuppliergoodsPartnumberByidvendorpoconfirmation",
 							type: "POST",
 							data : {'part_number' : part_number,'vendor_po_number':vendor_po_number},
 							success: function(data, textStatus, jqXHR)
