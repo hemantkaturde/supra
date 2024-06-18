@@ -16187,7 +16187,7 @@ public function addchadebitnote(){
                 'taxable_amount'=>trim($this->input->post('taxable_amount')),
                 'cgst_sgst'=>trim($this->input->post('cgst_sgst')),
                 'bill_amount'=>trim($this->input->post('bill_amount')),
-                'debit_amount'=>trim($this->input->post('debit_amount')),
+                'debit_amount'=>trim($this->input->post('debit_amount_total')),
                 'amount_payable_before_tds'=>trim($this->input->post('amount_payable_before_tds')),
                 'less_tds'=>trim($this->input->post('less_tds')),
                 'remark'=>trim($this->input->post('remark')),

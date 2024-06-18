@@ -316,10 +316,10 @@ $(document).ready(function() {
 
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="debit_amount">Debit Amount (Rs)</label>
-                                            <input type="text" class="form-control debit_amount_total" id="debit_amount"
-                                                name="debit_amount" required>
-                                            <p class="error debit_amount_error"></p>
+                                            <label for="debit_amount_total">Debit Amount (Rs)</label>
+                                            <input type="text" class="form-control debit_amount_total" id="debit_amount_total"
+                                                name="debit_amount_total" required>
+                                            <p class="error debit_amount_total_error"></p>
                                         </div>
                                     </div>
 
