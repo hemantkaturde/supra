@@ -23,31 +23,61 @@
                         <?php $this->load->helper("form"); ?>
                         <div class="box-body">
                             <div class="row" style="margin-left:4px">
+
+                               <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="supplier_name">Supplier Name</label>
+                                        <select class="form-control" name="supplier_name" id="supplier_name">
+                                            <option st-id="" value="NA">Select Supplier Name</option>
+                                            <?php foreach ($supplierlist as $key => $value) {?>
+                                            <option value="<?php echo $value['sup_id']; ?>">
+                                                <?php echo $value['supplier_name']; ?></option>
+                                            <?php } ?>
+                                        </select>
+                                        <p class="error supplier_name_error"></p>
+                                    </div>
+                                </div>
+
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="vendor_po">Supplier PO</label>
-                                        <select class="form-control" name="vendor_po" id="vendor_po">
-                                            <option st-id="" value="NA">Select Vendor PO</option>
-                                            <?php foreach ($vendorpoList as $key => $value) {?>
+                                        <label for="supplier_po">Supplier PO</label>
+                                        <select class="form-control" name="supplier_po" id="supplier_po">
+                                            <option st-id="" value="NA">Select Supplier PO</option>
+                                            <?php foreach ($supplierpoList as $key => $value) {?>
                                             <option value="<?php echo $value['id']; ?>">
                                                 <?php echo $value['po_number']; ?></option>
                                             <?php } ?>
                                         </select>
-                                        <p class="error vendor_po_error"></p>
+                                        <p class="error supplier_po_error"></p>
                                     </div>
                                 </div>
 
                                 <div class="col-md-2">
                                     <div class="form-group">
-                                        <label for="email">Status</label>
-                                        <select class="form-control" name="status" id="status">
-                                            <option value="OPEN">Open </option>
-                                            <option value="CLOSE">Close</option>
+                                        <label for="email">Material sent</label>
+                                        <select class="form-control" name="material_sent" id="material_sent">
+                                            <option value="NA">Select  Material sent</option>
+                                            <option value="Yes">Yes </option>
+                                            <option value="No">No</option>
                                         </select>
-                                        <p class="error status_error"></p>
+                                        <p class="error material_sent_error"></p>
                                     </div>
                                 </div>
 
+
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="email">Receipt Confirmation</label>
+                                        <select class="form-control" name="materila_recipt_confirmation" id="materila_recipt_confirmation">
+                                            <option value="NA">Receipt Confirmation </option>
+                                            <option value="done">Done </option>
+                                            <option value="Pending">Pending</option>
+                                        </select>
+                                        <p class="error materila_recipt_confirmation_error"></p>
+                                    </div>
+                                </div>
+
+                                
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <div style="margin-top:22px">

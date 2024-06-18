@@ -16791,17 +16791,16 @@ public function supplierporeport(){
     $process = 'Supplier PO Confirmation Report';
     $processFunction = 'Admin/supplierporeport';
     $this->global['pageTitle'] = 'Supplier PO Confirmation Report';
-    //$data['vendorList']= $this->admin_model->fetchALLvendorList();
-    //$data['finishgoodList']= $this->admin_model->fetchALLFinishgoodList();
-    //$data['vendorpoList']= $this->admin_model->fetchALLvendorpoList();
+    $data['supplierpoList']= $this->admin_model->getSuplierpoMasterList();
+    $data['supplierlist']= $this->admin_model->fetchALLsupplierList();
     $this->loadViews("masters/supplierporeport", $this->global, $data, NULL);  
 }
 
-public function fetchsupplierporeport(){
+public function fetchsupplierporeport($supplier_name,$supplier_po,$material_sent,$materila_recipt_confirmation){
 
     $params = $_REQUEST;
-    $totalRecords = $this->admin_model->fetchsupplierporeportcount($params); 
-    $queryRecords = $this->admin_model->fetchsupplierporeportdata($params); 
+    $totalRecords = $this->admin_model->fetchsupplierporeportcount($params,$supplier_name,$supplier_po,$material_sent,$materila_recipt_confirmation); 
+    $queryRecords = $this->admin_model->fetchsupplierporeportdata($params,$supplier_name,$supplier_po,$material_sent,$materila_recipt_confirmation); 
 
     $data = array();
     foreach ($queryRecords as $key => $value)

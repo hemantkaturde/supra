@@ -20581,22 +20581,55 @@
 
     $(document).ready(function() {
 		$("#view_supplier_po_report").dataTable().fnDestroy();
-		getallsupplierporeport();
+		var supplier_name = $('#supplier_name').val();
+		var supplier_po = $('#supplier_po').val();
+		var material_sent = $('#material_sent').val();
+		var materila_recipt_confirmation = $('#materila_recipt_confirmation').val();
+		getallsupplierporeport(supplier_name,supplier_po,material_sent,materila_recipt_confirmation);
 	});
 
-	$(document).on('change','#vendor_name',function(e){  
+
+	$(document).on('change','#supplier_name',function(e){  
 		$("#view_supplier_po_report").dataTable().fnDestroy();
 		e.preventDefault();
-		getallsupplierporeport();
+		var supplier_name = $('#supplier_name').val();
+		var supplier_po = $('#supplier_po').val();
+		var material_sent = $('#material_sent').val();
+		var materila_recipt_confirmation = $('#materila_recipt_confirmation').val();
+		getallsupplierporeport(supplier_name,supplier_po,material_sent,materila_recipt_confirmation);
 	});
 
-	$(document).on('change','#status',function(e){  
+	$(document).on('change','#supplier_po',function(e){  
 		$("#view_supplier_po_report").dataTable().fnDestroy();
 		e.preventDefault();	
-		getallsupplierporeport();
+		var supplier_name = $('#supplier_name').val();
+		var supplier_po = $('#supplier_po').val();
+		var material_sent = $('#material_sent').val();
+		var materila_recipt_confirmation = $('#materila_recipt_confirmation').val();
+		getallsupplierporeport(supplier_name,supplier_po,material_sent,materila_recipt_confirmation);
 	});
 
-    function getallsupplierporeport(){
+	$(document).on('change','#material_sent',function(e){  
+		$("#view_supplier_po_report").dataTable().fnDestroy();
+		e.preventDefault();
+		var supplier_name = $('#supplier_name').val();
+		var supplier_po = $('#supplier_po').val();
+		var material_sent = $('#material_sent').val();
+		var materila_recipt_confirmation = $('#materila_recipt_confirmation').val();
+		getallsupplierporeport(supplier_name,supplier_po,material_sent,materila_recipt_confirmation);
+	});
+
+	$(document).on('change','#materila_recipt_confirmation',function(e){  
+		$("#view_supplier_po_report").dataTable().fnDestroy();
+		e.preventDefault();	
+		var supplier_name = $('#supplier_name').val();
+		var supplier_po = $('#supplier_po').val();
+		var material_sent = $('#material_sent').val();
+		var materila_recipt_confirmation = $('#materila_recipt_confirmation').val();
+		getallsupplierporeport(supplier_name,supplier_po,material_sent,materila_recipt_confirmation);
+	});
+
+    function getallsupplierporeport(supplier_name,supplier_po,material_sent,materila_recipt_confirmation){
 
 		var dt = $('#view_supplier_po_report').DataTable({
 			"columnDefs": [ 
@@ -20624,7 +20657,7 @@
 			"bProcessing": true,
 			"serverSide": true,
 			"ajax":{
-				url :"<?php echo base_url();?>admin/fetchsupplierporeport",
+				url :"<?php echo base_url();?>admin/fetchsupplierporeport/"+supplier_name+"/"+supplier_po+"/"+material_sent+"/"+materila_recipt_confirmation,
 				type: "post",
 			},
 		});
