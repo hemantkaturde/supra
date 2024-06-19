@@ -111,6 +111,7 @@
                                             <th>Vendor Delivery Date</th>
                                             <th>Buyer Name</th>
                                             <th>Status</th>
+                                            <th>flag</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
