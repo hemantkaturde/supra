@@ -17026,41 +17026,43 @@ public function export_to_excel_payment_details($vendor_name,$supplier_name,$pay
     $objPHPExcel = new PHPExcel();
     $objPHPExcel->setActiveSheetIndex(0);
     // set Header
-    $objPHPExcel->getActiveSheet()->SetCellValue('A1', 'Payment Details No');
-    $objPHPExcel->getActiveSheet()->SetCellValue('B1', 'Payment Date');
-    $objPHPExcel->getActiveSheet()->SetCellValue('C1', 'Bill No');
-    $objPHPExcel->getActiveSheet()->SetCellValue('D1', 'Vendor Name'); 
-    $objPHPExcel->getActiveSheet()->SetCellValue('E1', 'Vendor PO');
-    $objPHPExcel->getActiveSheet()->SetCellValue('F1', 'Supplier Name');   
-    $objPHPExcel->getActiveSheet()->SetCellValue('G1', 'Supplier PO');  
-    $objPHPExcel->getActiveSheet()->SetCellValue('H1', 'PO Date');  
-    $objPHPExcel->getActiveSheet()->SetCellValue('I1', 'Payment Status');  
+    $objPHPExcel->getActiveSheet()->SetCellValue('A1', 'Vendor Name');
+    $objPHPExcel->getActiveSheet()->SetCellValue('B1', 'Supplier Name');
+    $objPHPExcel->getActiveSheet()->SetCellValue('C1', 'Payment Details Number');
+    $objPHPExcel->getActiveSheet()->SetCellValue('D1', 'Bill No'); 
+    $objPHPExcel->getActiveSheet()->SetCellValue('E1', 'Bill Date');
+    $objPHPExcel->getActiveSheet()->SetCellValue('F1', 'Bill Amount');   
+    $objPHPExcel->getActiveSheet()->SetCellValue('G1', 'TDS');  
+    $objPHPExcel->getActiveSheet()->SetCellValue('H1', 'Debit Note Amount');  
+    $objPHPExcel->getActiveSheet()->SetCellValue('I1', 'Amount Paid');  
+    $objPHPExcel->getActiveSheet()->SetCellValue('J1', 'Payment Status');  
 
     // set Row
     $rowCount = 2;
     foreach ($empInfo as $element) {
-        $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $element['payment_details_number']);
-        $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $element['payment_details_date']);
-        $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $element['bill_no']);
-        $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['vendor_name']);
-        $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['vendor_po_number']);
-        $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['supplier_name']);
-        $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['supplier_po_number']);
-        $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $element['po_date']);
-        $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, $element['payment_status']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $element['vendor_name']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $element['supplier_name']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $element['payment_details_number']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['bill_no']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['bill_date']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['bill_amount']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['tds']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $element['debit_note_amount']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $element['amount_paid']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('J' . $rowCount, $element['payment_status']);
         $rowCount++;
     }
 
-    foreach(range('A','I') as $columnID) {
+    foreach(range('A','J') as $columnID) {
         $objPHPExcel->getActiveSheet()->getColumnDimension($columnID)->setAutoSize(true);
     }
     /*********************Autoresize column width depending upon contents END***********************/
     
-    $objPHPExcel->getActiveSheet()->getStyle('A1:I1')->getFont()->setBold(true); //Make heading font bold
+    $objPHPExcel->getActiveSheet()->getStyle('A1:J1')->getFont()->setBold(true); //Make heading font bold
     
     /*********************Add color to heading START**********************/
     $objPHPExcel->getActiveSheet()
-                ->getStyle('A1:I1')
+                ->getStyle('A1:J1')
                 ->getFill()
                 ->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
                 ->getStartColor()

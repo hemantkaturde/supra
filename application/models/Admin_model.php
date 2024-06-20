@@ -13562,11 +13562,15 @@ public function fetchsupplierporeportcount($params,$supplier_name,$supplier_po,$
                 $data[$counter]['payment_details_date'] = $value['payment_details_date'];
                 $data[$counter]['bill_no'] = $value['bill_number'];
                 $data[$counter]['vendor_name'] = $value['vendorname'];
-                $data[$counter]['vendor_po_number'] = $value['vendor_pomaster'];
+                $data[$counter]['bill_date'] = $value['bill_date'];
                 $data[$counter]['supplier_name'] = $value['supplier'];
-                $data[$counter]['supplier_po_number'] = $value['supplier_master'];
+                $data[$counter]['bill_amount'] = $value['bill_amount'];
                 $data[$counter]['po_date'] = $value['po_date'];
                 $data[$counter]['payment_status'] = $value['payment_status'];
+                $data[$counter]['tds'] = $value['tds'];
+                $data[$counter]['debit_note_amount'] = $value['debit_note_amount'];
+                $data[$counter]['amount_paid'] = $value['amount_paid'];
+         
                 $counter++; 
             }
         }
