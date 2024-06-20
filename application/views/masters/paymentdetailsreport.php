@@ -36,7 +36,7 @@
                         <div class="form-group">
                             <label for="vendor_name ">Vendor Name</label>
                             <select class="form-control" name="vendor_name" id="vendor_name_id">
-                                <option st-id="" value="NA">Select Vendor PO</option>
+                                <option st-id="" value="NA">Select Vendor Name</option>
                                 <?php foreach ($vendorList as $key => $value) {?>
                                 <option value="<?php echo $value['ven_id']; ?>">
                                     <?php echo $value['vendor_name']; ?></option>
@@ -52,7 +52,7 @@
                         <div class="form-group">
                             <label for="supplier_name">Supplier Name</label>
                             <select class="form-control" name="supplier_name" id="supplier_name_id">
-                                <option st-id="" value="NA">Select Supplier PO</option>
+                                <option st-id="" value="NA">Select Supplier Name</option>
                                 <?php foreach ($supplierList as $key => $value) {?>
                                 <option value="<?php echo $value['sup_id']; ?>">
                                     <?php echo $value['supplier_name']; ?></option>
@@ -133,3 +133,13 @@
     </section>
 </div>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/common.js" charset="utf-8"></script>
+
+
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
+<script>
+
+    $(document).ready(function(){
+			$("select").select2();
+	});
+</script>
