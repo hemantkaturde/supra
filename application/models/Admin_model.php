@@ -12853,7 +12853,7 @@ public function fetchproductionstatusreportdata($params,$vendor_name,$status,$pa
 
     
     if($part_number!='NA'){
-        $this->db->where(TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.part_number', $part_number); 
+        $this->db->where(TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.part_number_id', $part_number); 
     }
 
     if($vendor_po!='NA'){
