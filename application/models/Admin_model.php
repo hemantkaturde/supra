@@ -1094,8 +1094,6 @@ class Admin_model extends CI_Model
         $query = $this->db->get(TBL_SUPPLIER);
         $data = $query->result_array();
         return $data;
-
-
     }
 
     public function fetchALLvendorList(){
@@ -13329,7 +13327,6 @@ public function fetchsupplierporeportcount($params,$supplier_name,$supplier_po,$
     }
     
    
-
     public function downlaodsupplierpodetailsreportdata($supplier_name,$supplier_po,$material_sent,$materila_recipt_confirmation){
 
         $this->db->select('*,'.TBL_RAWMATERIAL.'.part_number as part_number_fg');
@@ -13392,6 +13389,131 @@ public function fetchsupplierporeportcount($params,$supplier_name,$supplier_po,$
     
     }
     
+
+    public function getPaymentdetsilsreportcount($params,$vendor_name,$supplier_name,$payment_details_no,$status){
+
+       
+        $this->db->select('*,'.TBL_SUPPLIER.'.supplier_name as supplier,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_pomaster,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_master,'.TBL_PAYMENT_DETAILS.'.payment_details_id  as debit_id');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_PAYMENT_DETAILS.'.vendor_id','left');
+        $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_PAYMENT_DETAILS.'.supplier_id','left');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_PAYMENT_DETAILS.'.vendor_po','left');
+        $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_PAYMENT_DETAILS.'.supplier_po','left');
+
+       
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_PAYMENT_DETAILS.".payment_details_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_PAYMENT_DETAILS.".bill_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_PAYMENT_DETAILS.".payment_details_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER.".supplier_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%')");
+        }
+
+        if($vendor_name!='NA'){
+            $this->db->where(TBL_PAYMENT_DETAILS.'.vendor_id', $vendor_name); 
+        }
+
+        if($supplier_name!='NA'){
+            $this->db->where(TBL_PAYMENT_DETAILS.'.supplier_id', $supplier_name); 
+        }
+
+        
+        if($payment_details_no!='NA'){
+            $this->db->where(TBL_PAYMENT_DETAILS.'.payment_details_id', $payment_details_no); 
+        }
+
+        
+        if($status!='NA'){
+            $this->db->where(TBL_PAYMENT_DETAILS.'.payment_status', $status); 
+        }
+
+        $this->db->where(TBL_PAYMENT_DETAILS.'.status', 1);
+        $query = $this->db->get(TBL_PAYMENT_DETAILS);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+    }
+
+    public function getPaymentdetsilsreportdata($params,$vendor_name,$supplier_name,$payment_details_no,$status){
+        $this->db->select('*,'.TBL_SUPPLIER.'.supplier_name as supplier,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_pomaster,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_master,'.TBL_PAYMENT_DETAILS.'.payment_details_id as debit_id');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_PAYMENT_DETAILS.'.vendor_id','left');
+        $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_PAYMENT_DETAILS.'.supplier_id','left');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_PAYMENT_DETAILS.'.vendor_po','left');
+        $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_PAYMENT_DETAILS.'.supplier_po','left');
+
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_PAYMENT_DETAILS.".payment_details_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_PAYMENT_DETAILS.".payment_details_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_PAYMENT_DETAILS.".bill_number LIKE '%".$params['search']['value']."%'");
+
+            $this->db->or_where(TBL_SUPPLIER_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER.".supplier_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%')");
+        }
+
+        if($vendor_name!='NA'){
+            $this->db->where(TBL_PAYMENT_DETAILS.'.vendor_id', $vendor_name); 
+        }
+
+        if($supplier_name!='NA'){
+            $this->db->where(TBL_PAYMENT_DETAILS.'.supplier_id', $supplier_name); 
+        }
+
+        
+        if($payment_details_no!='NA'){
+            $this->db->where(TBL_PAYMENT_DETAILS.'.payment_details_id', $payment_details_no); 
+        }
+
+        
+        if($status!='NA'){
+            $this->db->where(TBL_PAYMENT_DETAILS.'.payment_status', $status); 
+        }
+    
+      
+        $this->db->where(TBL_PAYMENT_DETAILS.'.status', 1);
+        $this->db->limit($params['length'],$params['start']);
+        $this->db->order_by(TBL_PAYMENT_DETAILS.'.payment_details_id','DESC');
+        $query = $this->db->get(TBL_PAYMENT_DETAILS);
+        $fetch_result = $query->result_array();
+
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['payment_details_number'] = $value['payment_details_number'];
+                $data[$counter]['payment_details_date'] = $value['payment_details_date'];
+                $data[$counter]['bill_no'] = $value['bill_number'];
+                $data[$counter]['vendor_name'] = $value['vendorname'];
+                $data[$counter]['vendor_po_number'] = $value['vendor_pomaster'];
+                $data[$counter]['supplier_name'] = $value['supplier'];
+                $data[$counter]['supplier_po_number'] = $value['supplier_master'];
+                $data[$counter]['po_date'] = $value['po_date'];
+                $data[$counter]['payment_status'] = $value['payment_status'];
+                $data[$counter]['action'] = '';
+                // $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addpaymentdetailsdata/".$value['payment_details_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editpaymentdetails/".$value['payment_details_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['payment_details_id']."' class='fa fa-trash-o deletepaymentdetails' aria-hidden='true'></i>"; 
+                $counter++; 
+            }
+        }
+        return $data;
+    }
+
+
+    public function paymentdetailsnumberList(){
+
+        $this->db->select('*');
+        $this->db->where(TBL_PAYMENT_DETAILS.'.status', 1);
+        $this->db->order_by(TBL_PAYMENT_DETAILS.'.payment_details_id', 'DESC');
+        $query = $this->db->get(TBL_PAYMENT_DETAILS);
+        $data = $query->result_array();
+        return $data;
+    }
     
     
 

@@ -16979,15 +16979,41 @@ public function downlaod_supplier_po_details_report($supplier_name,$supplier_po,
 
 public function paymentdetailsreport(){
 
-    $process = 'Payment Details Report';
+    $process = 'PPayment Details Report';
     $processFunction = 'Admin/paymentdetailsreport';
     $this->logrecord($process,$processFunction);
     $this->global['pageTitle'] = 'Payment Details Report';
+    $data['vendorList']= $this->admin_model->fetchALLvendorList();
+    $data['supplierList']= $this->admin_model->fetchALLsupplierList();
+    $data['paymentdetailsnumberList']= $this->admin_model->paymentdetailsnumberList();
     $this->loadViews("masters/paymentdetailsreport", $this->global, $data, NULL);  
-
-
 }
 
+
+public function fetchPaymentdetailsreport($vendor_name,$supplier_name,$payment_details_no,$status){
+    $params = $_REQUEST;
+    $totalRecords = $this->admin_model->getPaymentdetsilsreportcount($params,$vendor_name,$supplier_name,$payment_details_no,$status); 
+    $queryRecords = $this->admin_model->getPaymentdetsilsreportdata($params,$vendor_name,$supplier_name,$payment_details_no,$status); 
+
+    $data = array();
+    foreach ($queryRecords as $key => $value)
+    {
+        $i = 0;
+        foreach($value as $v)
+        {
+            $data[$key][$i] = $v;
+            $i++;
+        }
+    }
+    $json_data = array(
+        "draw"            => intval( $params['draw'] ),   
+        "recordsTotal"    => intval( $totalRecords ),  
+        "recordsFiltered" => intval($totalRecords),
+        "data"            => $data   // total data array
+        );
+    echo json_encode($json_data);
+
+}
 
 
 

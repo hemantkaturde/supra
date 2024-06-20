@@ -20765,3 +20765,110 @@
 
     </script>  
 <?php } ?>
+
+
+<?php if($pageTitle=='Payment Details Report'){ ?>
+	<script type="text/javascript">
+		$(document).ready(function() {
+      		var vendor_name = $('#vendor_name_id').val();
+			var supplier_name =$('#supplier_name_id').val();
+			var payment_details_no = $('#payment_details_no').val();
+			var status = $('#status').val();
+			getallPatmentdetailsreport(vendor_name,supplier_name,payment_details_no,status);
+	    });
+
+		$(document).on('change','#vendor_supplier_name',function(e){  
+			var vendor_supplier_name = $('#vendor_supplier_name').val();
+			if(vendor_supplier_name=='Vendor'){
+                 $('#vendor_name_div').css('display','block');
+				 $('#supplier_name_div').css('display','none');
+				 $('#supplier_name_div').val('');
+			}
+			if(vendor_supplier_name=='Supplier'){
+				$('#supplier_name_div').css('display','block');
+				$('#vendor_name_div').css('display','none');
+				$('#vendor_name_div').val('');
+
+            }
+		});
+
+
+		$(document).on('change','#vendor_name_id',function(e){  
+			    $("#view_payment_details_report").dataTable().fnDestroy();
+				var vendor_name = $('#vendor_name_id').val();
+				var supplier_name ='NA';
+				var payment_details_no = $('#payment_details_no').val();
+				var status = $('#status').val();
+				getallPatmentdetailsreport(vendor_name,supplier_name,payment_details_no,status);
+		});
+
+
+		$(document).on('change','#supplier_name_id',function(e){  
+			    $("#view_payment_details_report").dataTable().fnDestroy();
+				
+				var vendor_name = 'NA';
+				var supplier_name =$('#supplier_name_id').val();
+				var payment_details_no = $('#payment_details_no').val();
+				var status = $('#status').val();
+				getallPatmentdetailsreport(vendor_name,supplier_name,payment_details_no,status);
+		});
+
+
+		$(document).on('change','#payment_details_no',function(e){  
+			    $("#view_payment_details_report").dataTable().fnDestroy();
+				var vendor_name = $('#vendor_name_id').val();
+				var supplier_name =$('#supplier_name_id').val();
+			
+				var payment_details_no = $('#payment_details_no').val();
+				var status = $('#status').val();
+				getallPatmentdetailsreport(vendor_name,supplier_name,payment_details_no,status);
+		});
+
+
+		
+		$(document).on('change','#status',function(e){  
+			    $("#view_payment_details_report").dataTable().fnDestroy();
+				var vendor_name = $('#vendor_name_id').val();
+				var supplier_name =$('#supplier_name_id').val();
+				var payment_details_no = $('#payment_details_no').val();
+				var status = $('#status').val();
+				getallPatmentdetailsreport(vendor_name,supplier_name,payment_details_no,status);
+		});
+
+
+
+		function getallPatmentdetailsreport(vendor_name,supplier_name,payment_details_no,status){
+
+			var dt = $('#view_payment_details_report').DataTable({
+	            "columnDefs": [ 
+	                 { className: "details-control", "targets": [ 0 ] },
+	                 { "width": "10%", "targets": 0 },
+	                 { "width": "10%", "targets": 1 },
+					 { "width": "10%", "targets": 2 },
+	                 { "width": "10%", "targets": 3 },
+					 { "width": "10%", "targets": 4 },
+					 { "width": "10%", "targets": 5 },
+					 { "width": "10%", "targets": 6 },
+					 { "width": "10%", "targets": 7 },
+					 { "width": "10%", "targets": 8 },
+	            ],
+	            responsive: true,
+	            "oLanguage": {
+	                "sEmptyTable": "<i>No Payment Details Found.</i>",
+	            }, 
+	            "bSort" : false,
+	            "bFilter":true,
+	            "bLengthChange": true,
+	            "iDisplayLength": 10,   
+	            "bProcessing": true,
+	            "serverSide": true,
+	            "ajax":{
+					url :"<?php echo base_url();?>admin/fetchPaymentdetailsreport/"+vendor_name+"/"+supplier_name+"/"+payment_details_no+"/"+status,
+                    type: "post",
+	            },
+	        });
+        }
+
+
+    </script>
+<?php } ?>

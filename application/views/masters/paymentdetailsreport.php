@@ -20,47 +20,60 @@
             <div class="row" style="margin-left:4px">
                 <div class="col-md-2">
                     <div class="form-group">
-                        <label for="part_number">Part Number</label>
-                        <select class="form-control" name="part_number" id="part_number">
-                            <option st-id="" value="NA">Select Part Number</option>
-                            <?php foreach ($finishgoodList as $key => $value) {?>
-                            <option value="<?php echo $value['fin_id']; ?>">
-                                <?php echo $value['part_number']; ?></option>
-                            <?php } ?>
-                        </select>
-                        <p class="error part_number_error"></p>
+                        <label for="vendor_supplier_name">Vendor / Supplier</label>
+                            <select class="form-control" name="vendor_supplier_name" id="vendor_supplier_name">
+                                <option st-id="" value="NA">Select Vendor Supplier</option>
+                                <option st-id="" value="Vendor">Vendor</option>
+                                <option st-id="" value="Supplier">Supplier</option>
+                            </select>
+                        <p class="error vendor_supplier_name_error"></p>
                     </div>
                 </div>
 
 
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="vendor_po">Vendor PO</label>
-                        <select class="form-control" name="vendor_po" id="vendor_po">
-                            <option st-id="" value="NA">Select Vendor PO</option>
-                            <?php foreach ($vendorpoList as $key => $value) {?>
-                            <option value="<?php echo $value['id']; ?>">
-                                <?php echo $value['po_number']; ?></option>
-                            <?php } ?>
-                        </select>
-                        <p class="error vendor_po_error"></p>
+                 <div id="vendor_name_div" style="display:none">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="vendor_name ">Vendor Name</label>
+                            <select class="form-control" name="vendor_name" id="vendor_name_id">
+                                <option st-id="" value="NA">Select Vendor PO</option>
+                                <?php foreach ($vendorList as $key => $value) {?>
+                                <option value="<?php echo $value['ven_id']; ?>">
+                                    <?php echo $value['vendor_name']; ?></option>
+                                <?php } ?>
+                            </select>
+                            <p class="error vendor_name_error"></p>
+                        </div>
+                    </div>
+                 </div>
+
+                 <div id="supplier_name_div" style="display:none">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="supplier_name">Supplier Name</label>
+                            <select class="form-control" name="supplier_name" id="supplier_name_id">
+                                <option st-id="" value="NA">Select Supplier PO</option>
+                                <?php foreach ($supplierList as $key => $value) {?>
+                                <option value="<?php echo $value['sup_id']; ?>">
+                                    <?php echo $value['supplier_name']; ?></option>
+                                <?php } ?>
+                            </select>
+                            <p class="error supplier_name_error"></p>
+                        </div>
                     </div>
                 </div>
 
-
-
                 <div class="col-md-3">
                     <div class="form-group">
-                        <label for="vendor_name">Vendor Name</label>
-                        <select class="form-control" name="vendor_name" id="vendor_name">
-                            <option st-id="" value="NA">Select Vendor Name</option>
-                            <?php foreach ($vendorList as $key => $value) {?>
-                            <option value="<?php echo $value['ven_id']; ?>"
-                                <?php if($value['ven_id']==$fetchALLpresupplieritemList[0]['pre_vendor_name']){ echo 'selected';} ?>>
-                                <?php echo $value['vendor_name']; ?></option>
+                        <label for="payment_details_no">Payment Details No</label>
+                        <select class="form-control" name="payment_details_no" id="payment_details_no">
+                            <option st-id="" value="NA">Select Payment Details PO</option>
+                            <?php foreach ($paymentdetailsnumberList as $key => $value) {?>
+                            <option value="<?php echo $value['payment_details_id']; ?>">
+                                <?php echo $value['payment_details_number']; ?></option>
                             <?php } ?>
                         </select>
-                        <p class="error vendor_name_error"></p>
+                        <p class="error payment_details_no_error"></p>
                     </div>
                 </div>
 
@@ -69,9 +82,8 @@
                         <label for="email">Status</label>
                         <select class="form-control" name="status" id="status">
                             <option st-id="" value="NA">Select Status</option>
-                            <option st-id="" value="NA">ALL</option>
-                            <option value="OPEN">Open </option>
-                            <option value="CLOSE">Close</option>
+                            <option value="paid">Paid </option>
+                            <option value="unpaid">Unpaid</option>
                         </select>
                         <p class="error status_error"></p>
                     </div>
@@ -94,7 +106,7 @@
                     <div class="box-body">
                         <div class="panel-body">
                             <table width="100%" class="table table-striped table-bordered table-hover"
-                                id="view_payment_details">
+                                id="view_payment_details_report">
                                 <thead>
                                     <tr style="background-color:#3c8dbc !important;color:#fff">
                                         <th>Payment Details No</th>
@@ -106,7 +118,6 @@
                                         <th>Supplier PO</th>
                                         <th>PO Date</th>
                                         <th>Payment Status</th>
-                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
