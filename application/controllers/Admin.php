@@ -17048,7 +17048,7 @@ public function export_to_excel_payment_details($vendor_name,$supplier_name,$pay
         $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['bill_amount']);
         $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['tds']);
         $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $element['debit_note_amount']);
-        $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $element['amount_paid']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, $element['amount_paid']);
         $objPHPExcel->getActiveSheet()->SetCellValue('J' . $rowCount, $element['payment_status']);
         $rowCount++;
     }
