@@ -7840,11 +7840,30 @@ class Admin extends BaseController
                                         // If the current month is before April, the financial year is from April (last year) to March (current year)
                                         $financial_year_indian = (date("y") - 1) . "" . date("y");
                                     }
-    
-                                    $lastNCharacters = substr($check_uniuqe_for_browser[0]['payment_details_number'], -$n);
+
+                                
+                                    $string = $check_uniuqe_for_browser[0]['payment_details_number'];
+                                    $n = 4; // Number of characters to extract from the end
+                                    $lastNCharacters1 = substr($string, -$n);
+                                    
+                                    if($lastNCharacters1  > 0){
+
+                                        if ($currentDate >= $financialYearStart && $currentDate <= $financialYearEnd) {
+
+                                            $string1 =$check_uniuqe_for_browser[0]['payment_details_number'];
+                                        }else{
+                                            $string1 =0;
+                                        }
+
+                                    }else{
+                                        $string1 =0;
+                                    }
+
+                                    $lastNCharacters = substr($string1, -$n);
                                     $inrno= "SQPN".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
                                     $payment_details_number = $inrno;
                                     $payment_details_number =   $inrno;
+
 
                                 }else{
 
