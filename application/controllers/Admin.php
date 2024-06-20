@@ -16909,7 +16909,6 @@ public function salestrackingexcelreport(){
     $this->loadViews("masters/salestrackingexcelreport", $this->global, $data, NULL);  
 }
 
-
 public function downlaod_supplier_po_details_report($supplier_name,$supplier_po,$material_sent,$materila_recipt_confirmation) {
 
     // create file name
@@ -16974,6 +16973,18 @@ public function downlaod_supplier_po_details_report($supplier_name,$supplier_po,
     header('Cache-Control: max-age=0');
     $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
     $objWriter->save('php://output');
+
+}
+
+
+public function paymentdetailsreport(){
+
+    $process = 'Payment Details Report';
+    $processFunction = 'Admin/paymentdetailsreport';
+    $this->logrecord($process,$processFunction);
+    $this->global['pageTitle'] = 'Payment Details Report';
+    $this->loadViews("masters/paymentdetailsreport", $this->global, $data, NULL);  
+
 
 }
 

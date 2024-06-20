@@ -144,14 +144,8 @@ $route['editSupplierpoconfirmation/(:any)'] = "admin/editSupplierpoconfirmation/
 $route['getSupplierItemsforDisplay'] = "admin/getSupplierItemsforDisplay";
 $route['deleteSupplierPoconfirmation'] = "admin/deleteSupplierPoconfirmation";
 $route['getRowmaterialPartnumberByid'] = "admin/getRowmaterialPartnumberByid";
-
-
 $route['getRowmaterialPartnumberByidsupplierpoconfirmation'] = "admin/getRowmaterialPartnumberByidsupplierpoconfirmation";
 $route['getSuppliergoodsPartnumberByidvendorpoconfirmation'] = "admin/getSuppliergoodsPartnumberByidvendorpoconfirmation";
-
-
-
-
 $route['addSupplierpoConfirmationitem'] = "admin/addSupplierpoConfirmationitem";
 $route['getfinishedgoodsPartnumberByidvendor'] = "admin/getfinishedgoodsPartnumberByidvendor";
 $route['getVendorDetailsBysupplierponumber'] = "admin/getVendorDetailsBysupplierponumber";
@@ -382,7 +376,6 @@ $route['downlaod_production_status_report'] = "admin/downlaod_production_status_
 $route['getpreviousaddednotesfordisplay']  = "admin/getpreviousaddednotesfordisplay";
 $route['savebillofmaterialnotes']  = "admin/savebillofmaterialnotes";
 $route['getbuyerdetailsbybuteridoritemid'] = "admin/getbuyerdetailsbybuteridoritemid";
-
 /* ALL Edit Forms*/
 $route['getbuyeritemdataforitemedit'] = "admin/getbuyeritemdataforitemedit";
 $route['getSupplieritemdataforitemedit'] = "admin/getSupplieritemdataforitemedit";
@@ -480,7 +473,7 @@ $route['fetchsupplierporeport'] = "admin/fetchsupplierporeport";
 $route['deletechadebitnote'] = "admin/deletechadebitnote";
 $route['editchadebitnote/(:any)'] = "admin/editchadebitnote/$1";
 $route['salestrackingexcelreport'] = "admin/salestrackingexcelreport";
-
+$route['paymentdetailsreport'] = "admin/paymentdetailsreport";
 
 
 /* End of file routes.php */
