@@ -20762,7 +20762,6 @@
 	   return false;
 	});
 
-
     </script>  
 <?php } ?>
 
@@ -20792,7 +20791,6 @@
             }
 		});
 
-
 		$(document).on('change','#vendor_name_id',function(e){  
 			    $("#view_payment_details_report").dataTable().fnDestroy();
 				var vendor_name = $('#vendor_name_id').val();
@@ -20801,7 +20799,6 @@
 				var status = $('#status').val();
 				getallPatmentdetailsreport(vendor_name,supplier_name,payment_details_no,status);
 		});
-
 
 		$(document).on('change','#supplier_name_id',function(e){  
 			    $("#view_payment_details_report").dataTable().fnDestroy();
@@ -20813,7 +20810,6 @@
 				getallPatmentdetailsreport(vendor_name,supplier_name,payment_details_no,status);
 		});
 
-
 		$(document).on('change','#payment_details_no',function(e){  
 			    $("#view_payment_details_report").dataTable().fnDestroy();
 				var vendor_name = $('#vendor_name_id').val();
@@ -20823,8 +20819,6 @@
 				var status = $('#status').val();
 				getallPatmentdetailsreport(vendor_name,supplier_name,payment_details_no,status);
 		});
-
-
 		
 		$(document).on('change','#status',function(e){  
 			    $("#view_payment_details_report").dataTable().fnDestroy();
@@ -20834,8 +20828,6 @@
 				var status = $('#status').val();
 				getallPatmentdetailsreport(vendor_name,supplier_name,payment_details_no,status);
 		});
-
-
 
 		function getallPatmentdetailsreport(vendor_name,supplier_name,payment_details_no,status){
 
@@ -20869,6 +20861,44 @@
 	        });
         }
 
+
+		$(document).on('click','#export_to_excel_payment_details',function(e){
+			e.preventDefault();
+			$(".loader_ajax").show();
+		    var vendor_name = $('#vendor_name_id').val();
+			var supplier_name =$('#supplier_name_id').val();
+
+		
+			var payment_details_no = $('#payment_details_no').val();
+			var status = $('#status').val();
+
+
+			$.ajax({
+					url : "<?php echo ADMIN_PATH;?>admin/export_to_excel_payment_details/"+vendor_name+"/"+supplier_name+"/"+payment_details_no+"/"+status,
+					type: "POST",
+					// data : {'hospitals' : hospitals, 'driver' : driver,'ride_start':ride_start,'ride_stop':ride_stop},
+					success: function(data, textStatus, jqXHR)
+					{
+						$(".loader_ajax").hide();
+						if(data == "failure")
+						{
+							$(".report_type_error").html("");
+							alert('No data fond');
+						}
+						else
+						{
+							$(".report_type_error").html("");
+							window.location.href = "<?php echo ADMIN_PATH;?>admin/export_to_excel_payment_details/"+vendor_name+"/"+supplier_name+"/"+payment_details_no+"/"+status;
+						}
+					},
+					error: function (jqXHR, textStatus, errorThrown)
+					{
+						alert('No data fond');
+						$(".loader_ajax").hide();
+					}
+				});
+			return false;
+    	});
 
     </script>
 <?php } ?>

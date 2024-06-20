@@ -17016,5 +17016,68 @@ public function fetchPaymentdetailsreport($vendor_name,$supplier_name,$payment_d
 }
 
 
+public function export_to_excel_payment_details($vendor_name,$supplier_name,$payment_details_no,$status) {
+
+    // create file name
+    $fileName = 'Payment_Details_Report -'.date('d-m-Y').'.xlsx';  
+    // load excel library
+    $empInfo = $this->admin_model->downlaodpaymentdetailsreportdata($vendor_name,$supplier_name,$payment_details_no,$status);
+
+    $objPHPExcel = new PHPExcel();
+    $objPHPExcel->setActiveSheetIndex(0);
+    // set Header
+    $objPHPExcel->getActiveSheet()->SetCellValue('A1', 'Payment Details No');
+    $objPHPExcel->getActiveSheet()->SetCellValue('B1', 'Payment Date');
+    $objPHPExcel->getActiveSheet()->SetCellValue('C1', 'Bill No');
+    $objPHPExcel->getActiveSheet()->SetCellValue('D1', 'Vendor Name'); 
+    $objPHPExcel->getActiveSheet()->SetCellValue('E1', 'Vendor PO');
+    $objPHPExcel->getActiveSheet()->SetCellValue('F1', 'Supplier Name');   
+    $objPHPExcel->getActiveSheet()->SetCellValue('G1', 'Supplier PO');  
+    $objPHPExcel->getActiveSheet()->SetCellValue('H1', 'PO Date');  
+    $objPHPExcel->getActiveSheet()->SetCellValue('I1', 'Payment Status');  
+
+    // set Row
+    $rowCount = 2;
+    foreach ($empInfo as $element) {
+        $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $element['payment_details_number']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $element['payment_details_date']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $element['bill_no']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['vendor_name']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['vendor_po_number']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['supplier_name']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['supplier_po_number']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $element['po_date']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, $element['payment_status']);
+        $rowCount++;
+    }
+
+    foreach(range('A','I') as $columnID) {
+        $objPHPExcel->getActiveSheet()->getColumnDimension($columnID)->setAutoSize(true);
+    }
+    /*********************Autoresize column width depending upon contents END***********************/
+    
+    $objPHPExcel->getActiveSheet()->getStyle('A1:I1')->getFont()->setBold(true); //Make heading font bold
+    
+    /*********************Add color to heading START**********************/
+    $objPHPExcel->getActiveSheet()
+                ->getStyle('A1:I1')
+                ->getFill()
+                ->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
+                ->getStartColor()
+                ->setARGB('99ff99');
+
+
+    $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
+      
+    header('Content-Type: application/vnd.ms-excel');
+    header("Content-Disposition: attachment;Filename=$fileName.xls");
+    header('Cache-Control: max-age=0');
+    $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+    $objWriter->save('php://output');
+
+}
+
+
+
 
 }

@@ -79,7 +79,7 @@
 
                 <div class="col-md-2">
                     <div class="form-group">
-                        <label for="email">Status</label>
+                        <label for="status">Status</label>
                         <select class="form-control" name="status" id="status">
                             <option st-id="" value="NA">Select Status</option>
                             <option value="paid">Paid </option>
@@ -93,8 +93,8 @@
                     <div class="form-group">
                         <div style="margin-top:22px">
                             <!-- <input type="button"  class="btn btn-primary" value="Search" id="search" name="search" /> -->
-                            <input type="button" class="btn btn-primary" value="Export To Excel" id="export_to_excel"
-                                name="export_to_excel" />
+                            <input type="button" class="btn btn-primary" value="Export To Excel" id="export_to_excel_payment_details"
+                                name="export_to_excel_payment_details" />
                         </div>
                     </div>
                 </div>
