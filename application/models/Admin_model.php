@@ -13579,6 +13579,15 @@ public function fetchsupplierporeportcount($params,$supplier_name,$supplier_po,$
 
     }
     
+
+    public function checkforbrowserduplicate($payment_details_number){
+        $this->db->select('*');
+        $this->db->where(TBL_PAYMENT_DETAILS.'.payment_details_number', $payment_details_number);
+        $query = $this->db->get(TBL_PAYMENT_DETAILS);
+        $data = $query->result_array();
+        return $data;
+
+    }
     
 
 }

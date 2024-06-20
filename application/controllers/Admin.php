@@ -7826,8 +7826,40 @@ class Admin extends BaseController
                    
                     }else{
 
+                            $check_uniuqe_for_browser= $this->admin_model->checkforbrowserduplicate(trim($this->input->post('payment_details_number')));
+                            if($check_uniuqe_for_browser){
+
+                                if($check_uniuqe_for_browser[0]['payment_details_number']){
+
+                                    $current_month = date("n");
+
+                                    if ($current_month >= 4) {
+                                        // If the current month is April or later, the financial year is from April (current year) to March (next year)
+                                        $financial_year_indian = date("y") . "" . (date("y") + 1);
+                                    } else {
+                                        // If the current month is before April, the financial year is from April (last year) to March (current year)
+                                        $financial_year_indian = (date("y") - 1) . "" . date("y");
+                                    }
+    
+                                    $lastNCharacters = substr($check_uniuqe_for_browser[0]['payment_details_number'], -$n);
+                                    $inrno= "SQPN".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                    $payment_details_number = $inrno;
+                                    $payment_details_number =   $inrno;
+
+                                }else{
+
+                                    $payment_details_number =  trim($this->input->post('payment_details_number'));
+                                }
+
+                            }else{
+
+                                 $payment_details_number =  trim($this->input->post('payment_details_number'));
+                            }
+
+
+                    
                             $data = array(
-                                'payment_details_number' =>  trim($this->input->post('payment_details_number')),
+                                'payment_details_number' =>  $payment_details_number,
                                 'payment_details_date' => trim($this->input->post('payment_details_date')),
                                 // 'type'=>trim($this->input->post('select_with_po_without_po')),
                                 'supplier_vendor_name' =>  trim($this->input->post('vendor_supplier_name')),
