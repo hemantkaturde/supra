@@ -12857,7 +12857,7 @@ public function fetchproductionstatusreportdata($params,$vendor_name,$status,$pa
     }
 
     if($vendor_po!='NA'){
-        $this->db->where(TBL_BILL_OF_MATERIAL_VENDOR.'.vendor_po_number', $vendor_po); 
+        $this->db->where(TBL_VENDOR_PO_MASTER.'.vendor_po_number', $vendor_po); 
     }
 
     $this->db->where(TBL_BILL_OF_MATERIAL_VENDOR.'.status', 1);
@@ -12902,7 +12902,7 @@ public function fetchproductionstatusreportdata($params,$vendor_name,$status,$pa
     }
 
     if($vendor_po!='NA'){
-        $this->db->where(TBL_BILL_OF_MATERIAL.'.vendor_po_number', $vendor_po); 
+        $this->db->where(TBL_VENDOR_PO_MASTER.'.vendor_po_number', $vendor_po); 
     }
 
     $this->db->where(TBL_BILL_OF_MATERIAL.'.status', 1);
