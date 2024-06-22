@@ -17232,38 +17232,38 @@ public function downlaodchadebitnote($id){
 
                 <tr style="border: 1px solid black;">
                     <td style="border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:13px;">Taxable Amount </td>    
-                    <td colspan="5" style="border: 1px solid black;padding-left: 10px;">'.$getchaDebitnotedetailsforInvoice['taxable_amount'].'</td>
+                    <td colspan="5" style="border: 1px solid black;padding-left: 10px;">'.number_format($getchaDebitnotedetailsforInvoice['taxable_amount'],2).'</td>
                 </tr>
 
                 <tr style="border: 1px solid black;">
                     <td style="border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:13px;">CGST + SGST 18% </td>    
-                    <td colspan="5" style="border: 1px solid black;padding-left: 10px;">'.$getchaDebitnotedetailsforInvoice['cgst_sgst'].'</td>
+                    <td colspan="5" style="border: 1px solid black;padding-left: 10px;">'.number_format($getchaDebitnotedetailsforInvoice['cgst_sgst'],2).'</td>
                 </tr>
 
                 <tr style="border: 1px solid black;">
                     <td style="border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:13px;">Bill Amt. (incl GST)  </td>    
-                    <td colspan="5" style="border: 1px solid black;padding-left: 10px;">'.$getchaDebitnotedetailsforInvoice['taxable_amount'] + $getchaDebitnotedetailsforInvoice['cgst_sgst'].'</td>
+                    <td colspan="5" style="border: 1px solid black;padding-left: 10px;">'.number_format($getchaDebitnotedetailsforInvoice['taxable_amount'] + $getchaDebitnotedetailsforInvoice['cgst_sgst'],2).'</td>
                 </tr>
 
                 <tr style="border: 1px solid black;">
                     <td style="border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:13px;">Debit Amt  Rs. </td>    
-                    <td colspan="5" style="border: 1px solid black;padding-left: 10px;">'.$getchaDebitnotedetailsforInvoice['debit_amount'].'</td>
+                    <td colspan="5" style="border: 1px solid black;padding-left: 10px;">'.number_format($getchaDebitnotedetailsforInvoice['debit_amount'],2).'</td>
                 </tr>
 
 
                 <tr style="border: 1px solid black;">
                     <td style="border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:13px;">Amount payable before TDS </td>    
-                    <td colspan="5" style="border: 1px solid black;padding-left: 10px;">'.$getchaDebitnotedetailsforInvoice['amount_payable_before_tds'].'</td>
+                    <td colspan="5" style="border: 1px solid black;padding-left: 10px;">'.number_format($getchaDebitnotedetailsforInvoice['amount_payable_before_tds'],2).'</td>
                 </tr>
 
                  <tr style="border: 1px solid black;">
                     <td style="border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:13px;">Less TDS </td>    
-                    <td colspan="5" style="border: 1px solid black;padding-left: 10px;">'.$getchaDebitnotedetailsforInvoice['less_tds'].'</td>
+                    <td colspan="5" style="border: 1px solid black;padding-left: 10px;">'.number_format($getchaDebitnotedetailsforInvoice['less_tds'],2).'</td>
                 </tr>
 
                 <tr style="border: 1px solid black;">
                     <td style="border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:13px;">Payable Amt</td>    
-                    <td colspan="5" style="border: 1px solid black;padding-left: 10px;">'.$getchaDebitnotedetailsforInvoice['payable_amount'].'</td>
+                    <td colspan="5" style="border: 1px solid black;padding-left: 10px;">'.number_format($getchaDebitnotedetailsforInvoice['payable_amount'],2).'</td>
                 </tr>
                         
             </table>
