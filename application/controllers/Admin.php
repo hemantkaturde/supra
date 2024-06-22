@@ -17223,7 +17223,7 @@ public function downlaodchadebitnote($id){
                     <td width="50%">
                         <div>
                             <p>Dear Sir,</p>
-                            <p><b>Sub: '.$getchaDebitnotedetailsforInvoice['subject'].'</b></p>
+                            <p><b>Sub: </b>'.$getchaDebitnotedetailsforInvoice['subject'].'</p>
                             <p>With reference to the above subject we have debited your account vide your </p>
                                '.$invoice_number_and_date.'
                                 <p>'. str_repeat('&nbsp;', 5).'</p>
