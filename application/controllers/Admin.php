@@ -17228,23 +17228,45 @@ public function downlaodchadebitnote($id){
                     <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>CGST 9%</th>  
                     <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>Total</th>  
                 </tr>
-                '.$CartItem.'           
-            </table>
+                '.$CartItem.'   
 
-
-            <table style="border: 1px solid black;margin-top:10px;width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:12px">
                 <tr style="border: 1px solid black;">
-                    <td align="left" style="border: 1px solid black;text-align:center;" padding: 10%;>Sr. No</td>
-                    <td rowspan="6" align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>AWB No</td>  
-                </tr>    
-                
+                    <td style="border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:13px;">Taxable Amount </td>    
+                    <td colspan="5" style="border: 1px solid black;padding-left: 10px;">'.$getchaDebitnotedetailsforInvoice['taxable_amount'].'</td>
+                </tr>
+
+                <tr style="border: 1px solid black;">
+                    <td style="border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:13px;">CGST + SGST 18% </td>    
+                    <td colspan="5" style="border: 1px solid black;padding-left: 10px;">'.$getchaDebitnotedetailsforInvoice['cgst_sgst'].'</td>
+                </tr>
+
+                <tr style="border: 1px solid black;">
+                    <td style="border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:13px;">Bill Amt. (incl GST)  </td>    
+                    <td colspan="5" style="border: 1px solid black;padding-left: 10px;">'.$getchaDebitnotedetailsforInvoice['taxable_amount'] + $getchaDebitnotedetailsforInvoice['cgst_sgst'].'</td>
+                </tr>
+
+                <tr style="border: 1px solid black;">
+                    <td style="border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:13px;">Debit Amt  Rs. </td>    
+                    <td colspan="5" style="border: 1px solid black;padding-left: 10px;">'.$getchaDebitnotedetailsforInvoice['debit_amount'].'</td>
+                </tr>
+
+
+                <tr style="border: 1px solid black;">
+                    <td style="border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:13px;">Amount payable before TDS </td>    
+                    <td colspan="5" style="border: 1px solid black;padding-left: 10px;">'.$getchaDebitnotedetailsforInvoice['amount_payable_before_tds'].'</td>
+                </tr>
+
                  <tr style="border: 1px solid black;">
-                    <td align="left" style="border: 1px solid black;text-align:center;" padding: 10%;>Sr. No</td>
-                    <td rowspan="6" align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>AWB No</td>  
-                </tr>   
+                    <td style="border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:13px;">Less TDS </td>    
+                    <td colspan="5" style="border: 1px solid black;padding-left: 10px;">'.$getchaDebitnotedetailsforInvoice['less_tds'].'</td>
+                </tr>
+
+                <tr style="border: 1px solid black;">
+                    <td style="border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:13px;">Payable Amt</td>    
+                    <td colspan="5" style="border: 1px solid black;padding-left: 10px;">'.$getchaDebitnotedetailsforInvoice['payable_amount'].'</td>
+                </tr>
+                        
             </table>
-
-
 
             <table style=" width: 100%;text-align: left;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:12px">
                    <tr >
@@ -17252,7 +17274,7 @@ public function downlaodchadebitnote($id){
                             <p>Thanking You,</p>
                             <p>Yours truly</p>
                             <p style="vertical-align: text-top;font-size:12px;color:#206a9b"><b>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</b></p>
-                            <br/><img src="'.base_url().'assets/images/stmps/rr_challan.png" width="130" height="100">
+                            <br/><img src="'.base_url().'assets/images/stmps/singnature.jpg" width="130" height="100">
                             <p style="vertical-align: text-top;font-size:10px;color:#206a9b"><b>AUTHORIZED SIGNATORY</b></p>
                         </td>
                         <td style="text-align: center;" width="25%" valign="top">
