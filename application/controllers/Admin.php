@@ -17154,19 +17154,18 @@ public function downlaodchadebitnote($id){
     }
 
 
-   
 
     $invoice_number_and_date = "";
     if($getchaDebitnotedetailsforInvoice['invoice_1'] || $getchaDebitnotedetailsforInvoice['date_1']){
-        $invoice_number_and_date .= '<p><b>Inv No : </b>'.$getchaDebitnotedetailsforInvoice['invoice_1']. str_repeat('&nbsp;', 5). '<b>Date : </b>'.$getchaDebitnotedetailsforInvoice['date_1'].'</p>';
+        $invoice_number_and_date .= '<p><b>Inv No : </b>'.$getchaDebitnotedetailsforInvoice['invoice_1']. str_repeat('&nbsp;', 5). '<b>Date : </b>'.date("d-m-Y", strtotime($getchaDebitnotedetailsforInvoice['date_1'])).'</p>';
     }
 
     if($getchaDebitnotedetailsforInvoice['invoice_2'] || $getchaDebitnotedetailsforInvoice[0]['date_2']){
-        $invoice_number_and_date .= '<p><b>Inv No : </b>'.$getchaDebitnotedetailsforInvoice['invoice_2']. str_repeat('&nbsp;', 5). '<b>Date : </b>'.$getchaDebitnotedetailsforInvoice['date_2'].'</p>';
+        $invoice_number_and_date .= '<p><b>Inv No : </b>'.$getchaDebitnotedetailsforInvoice['invoice_2']. str_repeat('&nbsp;', 5). '<b>Date : </b>'.date("d-m-Y", strtotime($getchaDebitnotedetailsforInvoice['date_2'])).'</p>';
     }
 
     if($getchaDebitnotedetailsforInvoice[0]['invoice_3'] || $getchaDebitnotedetailsforInvoice[0]['date_3']){
-        $invoice_number_and_date .= '<p><b>Inv No : </b>'.$getchaDebitnotedetailsforInvoice['invoice_3']. str_repeat('&nbsp;', 5). '<b>Date : </b>'.$getchaDebitnotedetailsforInvoice['date_3'].'</p>';
+        $invoice_number_and_date .= '<p><b>Inv No : </b>'.$getchaDebitnotedetailsforInvoice['invoice_3']. str_repeat('&nbsp;', 5). '<b>Date : </b>'.date("d-m-Y", strtotime($getchaDebitnotedetailsforInvoice['date_3'])).'</p>';
     }
 
 
