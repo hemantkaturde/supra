@@ -17131,6 +17131,142 @@ public function export_to_excel_payment_details($vendor_name,$supplier_name,$pay
 }
 
 
+public function downlaodchadebitnote($id){
+
+    $getchaDebitnotedetailsforInvoice = $this->admin_model->getchaDebitnotedetailsforInvoice($id);
+    $getchaDebitnoteitemdeatilsForInvoice = $this->admin_model->getchaDebitnoteitemdeatilsForInvoice($id);
+
+    $i=1;
+    $CartItem = "";
+    foreach ($getchaDebitnoteitemdeatilsForInvoice as $key => $value) {
+        $CartItem .= '
+                <tr style="border: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;">
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$i.'</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['AWB_No'].'</br></td> 
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['debit_amount'].' '.$value['supplier_po_unit'].'</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['SGST'].' '.$value['supplier_po_unit'].'</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['CGST'].' '.$value['supplier_po_unit'].'</td> 
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['total'].' '.$value['supplier_po_unit'].'</td>    
+                </tr>';
+        $ii++;       
+    }
+
+  
+    $mpdf = new \Mpdf\Mpdf();
+    // $html = $this->load->view('html_to_pdf',[],true);
+    $html = '<table style=" width: 100%;text-align: center;border-collapse: collapse;font-family:cambria;">
+                <tr>
+                  <td rowspan="2"><img src="'.base_url().'assets/images/supra_logo_1.jpg" width="80" height="80"></td>
+                  <td style="color:#000080"><h2>SUPRA QUALITY EXPORTS (I) PVT. LTD</h2></td>
+                  <td rowspan="2"><img src="'.base_url().'assets/images/logo_2.png" width="80" height="80"></td>
+                </tr> 
+                <tr>
+                  <td style="font-weight: bold;">
+                    <p>MANUFACTURER & EXPORTERS OF:</p>
+                    <p>PRECISION TURNED COMPONENTS, STAMPED /PRESSED PARTS IN FERROUS & NON-FERROUS METAL</p>
+                    <p>MOULDED & EXTRUDED PLASTIC AND RUBBER COMPONENTS</p> 
+                  </td>
+                </tr>
+            </table>
+            <hr>
+            <table style=" width: 100%;text-align: center;margin-top:10px;margin-bottom:10px;font-family:cambria;">
+                    <tr>
+                        <td style="color:red;font-size:15px">
+                          <u><p><h3>CHA DEBIT NOTE</h3></p>
+                        </td>
+                    </tr>
+            </table>
+
+            <table style=" width: 100%;text-align: left;border-collapse: collapse;font-family:cambria;font-size:13px;">
+                <tr>
+                    <td width="50%">
+                        <div>
+                            <p>To,</p>
+                            <p><b>'.$getchaDebitnotedetailsforInvoice['cha_name'].'</b></p>
+                            <p>'.$getchaDebitnotedetailsforInvoice['address'].'</p>
+                            <p><b>Contact No:</b> '.$getchaDebitnotedetailsforInvoice['mobile'].' / '.$getchaDebitnotedetailsforInvoice['landline'].'</p>
+                            <p><b>Contact Person:</b> '.$getchaDebitnotedetailsforInvoice['contact_person'].'</p>
+                            <p><b>Email:</b> '.$getchaDebitnotedetailsforInvoice['email'].'</p>
+                            <p style="color:red">GSTIN:'.$getchaDebitnotedetailsforInvoice['GSTIN'].'</p>
+                        <div>    
+                    </td> 
+                    <td style="font-size:13px;" width="50%" valign="top">
+                        <div>
+                            <p><b></b>'. str_repeat('&nbsp;', 5).'<span style="color:red"></span></p>
+                            <p><b>DEBIT NOTE NO :</b> '.'<span style="color:red">'.$getchaDebitnotedetailsforInvoice['cha_debit_number'].'</span></p>
+                            <p>&nbsp;</p>
+                            <p><b>Date :</b> '.date('d-m-Y',strtotime($getchaDebitnotedetailsforInvoice['cha_debit_note_date'])).'</p>
+                            <p>&nbsp;</p>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+            <table style="margin-top:20px;width: 100%;text-align: left;border-collapse: collapse;font-family:cambria;font-size:13px;">
+                <tr>
+                    <td width="50%">
+                        <div>
+                            <p>Dear Sir,</p>
+                            <p><b>Sub: Debit Note</b></p>
+                            <p>With reference to the above subject we have debited your account vide your </p>
+                            <p> Inv No.'.$getDebitnoteitemdeatilsForInvoice[0]['invoice_1'].' Dated '.date('d-m-Y',strtotime($getDebitnoteitemdeatilsForInvoice[0]['date_1'])).' </p>
+                            <p> Inv No.'.$getDebitnoteitemdeatilsForInvoice[0]['invoice_2'].' Dated '.date('d-m-Y',strtotime($getDebitnoteitemdeatilsForInvoice[0]['date_2'])).' </p>
+                            <p> Inv No.'.$getDebitnoteitemdeatilsForInvoice[0]['invoice_3'].' Dated '.date('d-m-Y',strtotime($getDebitnoteitemdeatilsForInvoice[0]['date_3'])).' </p>
+                            <p>'. str_repeat('&nbsp;', 5).'</p>
+                            <p>The details are as follows: </p>
+                        <div>    
+                    </td>  
+                </tr>
+            </table>
+
+            <table style="border: 1px solid black;margin-top:10px;width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:12px">
+                <tr style="border: 1px solid black;">
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>Sr. No</th>
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>AWB No</th>  
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>Debit Amt</th> 
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>SGST 9%</th>  
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>CGST 9%</th>  
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>Total</th>  
+                </tr>
+                '.$CartItem.'           
+            </table>
+
+
+            <table style="border: 1px solid black;margin-top:10px;width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:12px">
+                <tr style="border: 1px solid black;">
+                    <td align="left" style="border: 1px solid black;text-align:center;" padding: 10%;>Sr. No</td>
+                    <td rowspan="6" align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>AWB No</td>  
+                </tr>    
+                
+                 <tr style="border: 1px solid black;">
+                    <td align="left" style="border: 1px solid black;text-align:center;" padding: 10%;>Sr. No</td>
+                    <td rowspan="6" align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>AWB No</td>  
+                </tr>   
+            </table>
+
+
+
+            <table style=" width: 100%;text-align: left;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:12px">
+                   <tr >
+                        <td style="padding-left: 10px;" width="75%;" valign="top">
+                            <p>Thanking You,</p>
+                            <p>Yours truly</p>
+                            <p style="vertical-align: text-top;font-size:12px;color:#206a9b"><b>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</b></p>
+                            <br/><img src="'.base_url().'assets/images/stmps/rr_challan.png" width="130" height="100">
+                            <p style="vertical-align: text-top;font-size:10px;color:#206a9b"><b>AUTHORIZED SIGNATORY</b></p>
+                        </td>
+                        <td style="text-align: center;" width="25%" valign="top">
+                        </td> 
+                </tr>
+            </table>';
+
+            // <p>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</p>
+    $invoice_name =  $getchaDebitnotedetailsforInvoice['cha_debit_number'].' - '.$getchaDebitnotedetailsforInvoice['cha_name'].'.pdf';
+    $mpdf->WriteHTML($html);
+    $mpdf->Output($invoice_name,'D'); // opens in browser
+
+}  
+
 
 
 }

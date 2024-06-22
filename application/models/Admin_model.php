@@ -13124,6 +13124,7 @@ public function fetchadebitnotedata($params){
                 $data[$counter]['payable_amount'] = $value['payable_amount'];
                 $data[$counter]['action'] .='';
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editchadebitnote/".$value['debit_note_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downlaodchadebitnote/".$value['debit_note_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['debit_note_id']."' class='fa fa-trash-o deletechadebitnote' aria-hidden='true'></i>"; 
                 $counter++; 
             }
@@ -13586,6 +13587,28 @@ public function fetchsupplierporeportcount($params,$supplier_name,$supplier_po,$
         $query = $this->db->get(TBL_PAYMENT_DETAILS);
         $data = $query->result_array();
         return $data;
+
+    }
+
+
+    public function getchaDebitnotedetailsforInvoice($id){
+
+        $this->db->select('*');
+        $this->db->join(TBL_CHA_MASTER, TBL_CHA_MASTER.'.cha_id = '.TBL_CHA_DEBIT_NOTE.'.cha_name');
+        $this->db->where(TBL_CHA_DEBIT_NOTE.'.id',$id);
+        $query = $this->db->get(TBL_CHA_DEBIT_NOTE);
+        $fetch_result = $query->row_array();
+        return  $fetch_result;
+
+    }
+
+    public function getchaDebitnoteitemdeatilsForInvoice($id){
+
+        $this->db->select('*');
+        $this->db->where(TBL_CHA_DEBIT_NOTE_TRANSACTION.'.cha_debit_id',$id);
+        $query = $this->db->get(TBL_CHA_DEBIT_NOTE_TRANSACTION);
+        $fetch_result = $query->result_array();
+        return  $fetch_result;
 
     }
     
