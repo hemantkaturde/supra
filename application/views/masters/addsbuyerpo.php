@@ -375,7 +375,19 @@
                                                             <p class="error buyer_po_part_delivery_date_error"></p>
                                                         </div>
                                                     </div>
-                                    
+
+
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-3 col-form-label">Packaging Instraction</label>
+                                                        <div class="col-sm-9">
+                                                             <select class="form-control" name="packaging_instraction" id="packaging_instraction">
+                                                                <option value="">Select Packaging Instraction</option>
+                                                                <option value="Yes">Yes</option>
+                                                                <option value="No">No</option>
+                                                             </select>
+                                                            <p class="error packaging_instraction_error"></p>
+                                                        </div>
+                                                    </div>
                                                 </div>
 
                                                 <div class="modal-footer">

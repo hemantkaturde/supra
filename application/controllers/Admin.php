@@ -2111,7 +2111,7 @@ class Admin extends BaseController
         $post_submit = $this->input->post();
         if($post_submit){
             $save_buyerpo_response = array();
-
+            
             $this->form_validation->set_rules('sales_order_number','Sales Order Number','trim|required');
             $this->form_validation->set_rules('date','Date','trim|required');
             $this->form_validation->set_rules('buyer_po_number','Buyer PO Number','trim|required');
@@ -2122,7 +2122,6 @@ class Admin extends BaseController
             $this->form_validation->set_rules('generate_po','Generate PO','trim|required');
             $this->form_validation->set_rules('po_status','PO Status','trim|required');
             $this->form_validation->set_rules('remark','Remark','trim');
-
 
             if($this->form_validation->run() == FALSE)
             {
@@ -2190,7 +2189,6 @@ class Admin extends BaseController
             $data['buyerList']= $this->admin_model->fetchAllbuyerList();
             // $data['rowMaterialList']= $this->admin_model->fetchALLrowMaterialList();
             $data['finishgoodList']= $this->admin_model->fetchALLFinishgoodList();
-
             $data['getPreviousSalesOrderNumber']= $this->admin_model->getPreviousSalesOrderNumber()[0];
             $data['fetchALLitemList']= $this->admin_model->fetchALLitemList();
             $this->logrecord($process,$processFunction);
@@ -2390,11 +2388,12 @@ class Admin extends BaseController
             $this->form_validation->set_rules('value','Value','trim|required');
             $this->form_validation->set_rules('unit','Unit','trim');
             $this->form_validation->set_rules('buyer_po_delivery_date','Buyer PO Delivery Date','trim');
+            $this->form_validation->set_rules('packaging_instraction','Packaging Instraction','trim');
         
             if($this->form_validation->run() == FALSE)
             {
                 $save_buyerpoitem_response['status'] = 'failure';
-                $save_buyerpoitem_response['error'] = array('part_number'=>strip_tags(form_error('part_number')), 'description'=>strip_tags(form_error('description')), 'qty'=>strip_tags(form_error('qty')), 'rate'=>strip_tags(form_error('rate')),'value'=>strip_tags(form_error('value')),'buyer_po_delivery_date'=>strip_tags(form_error('buyer_po_delivery_date')));
+                $save_buyerpoitem_response['error'] = array('part_number'=>strip_tags(form_error('part_number')), 'description'=>strip_tags(form_error('description')), 'qty'=>strip_tags(form_error('qty')), 'rate'=>strip_tags(form_error('rate')),'value'=>strip_tags(form_error('value')),'buyer_po_delivery_date'=>strip_tags(form_error('buyer_po_delivery_date')),'packaging_instraction'=>strip_tags(form_error('packaging_instraction')));
             }else{
 
                     $po_id = trim($this->input->post('po_id'));
@@ -2417,6 +2416,7 @@ class Admin extends BaseController
                             'pre_generate_po' =>trim($this->input->post('generate_po')),
                             'pre_po_status' =>trim($this->input->post('po_status')),
                             'pre_remark' =>trim($this->input->post('remark')),
+                            'packaging_instraction' =>trim($this->input->post('packaging_instraction')),
                         );
                      }else{
                             $data = array(
@@ -2437,6 +2437,8 @@ class Admin extends BaseController
                                 'pre_generate_po' =>trim($this->input->post('generate_po')),
                                 'pre_po_status' =>trim($this->input->post('po_status')),
                                 'pre_remark' =>trim($this->input->post('remark')),
+                                'packaging_instraction' =>trim($this->input->post('packaging_instraction')),
+
                             );
 
                         }
