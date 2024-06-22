@@ -17141,7 +17141,7 @@ public function downlaodchadebitnote($id){
     foreach ($getchaDebitnoteitemdeatilsForInvoice as $key => $value) {
         $CartItem .= '
                 <tr style="border: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;">
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$i.'</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$i++.'</td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['AWB_No'].'</br></td> 
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['debit_amount'].' '.$value['supplier_po_unit'].'</td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['SGST'].' '.$value['supplier_po_unit'].'</td>
