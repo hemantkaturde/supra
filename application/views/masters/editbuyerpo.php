@@ -262,8 +262,8 @@
                                                         <div class="col-sm-9">
                                                              <select class="form-control" name="packaging_instraction" id="packaging_instraction">
                                                                 <option value="">Select Packaging Instruction</option>
-                                                                <option value="Yes">Yes</option>
-                                                                <option value="No">No</option>
+                                                                <option value="Open">Open</option>
+                                                                <option value="Close">Close</option>
                                                              </select>
                                                             <p class="error packaging_instraction_error"></p>
                                                         </div>

@@ -69,7 +69,7 @@
                                                   $string = $getPreviousPreexport['pre_export_invoice_no'];
                                                   $n = 4; // Number of characters to extract from the end
                                                   $lastNCharacters = substr($string, -$n);
-                                                  $inrno= "MG".$financial_year_indian.'/'.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                  $inrno= "PEI".$financial_year_indian.'/'.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
                                                   $invoice_number = $inrno;
   
                                               } else {
@@ -92,7 +92,7 @@
                                                     }
 
                                                     $lastNCharacters = substr($string1, -$n);
-                                                    $inrno= "MG".$financial_year_indian.'/'.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                    $inrno= "PEI".$financial_year_indian.'/'.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
                                                     $invoice_number = $inrno;
   
                                                   //$po_number = 'SQPO24250001';
@@ -101,7 +101,7 @@
 
                                         }else{
                                             //$invoice_number = 'MG-001/2324';
-                                            $invoice_number = 'MG'.$financial_year_indian.'/0001';
+                                            $invoice_number = 'PEI'.$financial_year_indian.'/0001';
                                         }
                                     ?>
                                 <div class="row">
@@ -159,7 +159,7 @@
                                     </div>
                                 </div>    
 
-                                <div class="row">
+                                <!-- <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="buyer_po">Buyer PO<span class="required">*</span></label>
@@ -168,7 +168,7 @@
                                                 </select> 
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
 
 
                                 <div class="row">
