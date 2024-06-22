@@ -17155,15 +17155,15 @@ public function downlaodchadebitnote($id){
 
     $invoice_number_and_date = "";
     if($getchaDebitnotedetailsforInvoice['invoice_1'] || $getchaDebitnotedetailsforInvoice['date_1']){
-        $invoice_number_and_date .= "<p> Inv No.'".$getchaDebitnotedetailsforInvoice[0]['invoice_1']."' Dated '.date('d-m-Y',strtotime('".$getchaDebitnotedetailsforInvoice[0]['date_1']."')).' </p>";
+        $invoice_number_and_date .= "<p> Inv No.'".$getchaDebitnotedetailsforInvoice['invoice_1']."' Dated '.date('d-m-Y',strtotime('".$getchaDebitnotedetailsforInvoice['date_1']."')).' </p>";
     }
 
     if($getchaDebitnotedetailsforInvoice['invoice_2'] || $getchaDebitnotedetailsforInvoice[0]['date_2']){
-        $invoice_number_and_date .= "<p> Inv No.'".$getchaDebitnotedetailsforInvoice[0]['invoice_2']."' Dated '.date('d-m-Y',strtotime('".$getchaDebitnotedetailsforInvoice[0]['date_2']."')).' </p>";
+        $invoice_number_and_date .= "<p> Inv No.'".$getchaDebitnotedetailsforInvoice['invoice_2']."' Dated '.date('d-m-Y',strtotime('".$getchaDebitnotedetailsforInvoice['date_2']."')).' </p>";
     }
 
     if($getchaDebitnotedetailsforInvoice[0]['invoice_3'] || $getchaDebitnotedetailsforInvoice[0]['date_3']){
-        $invoice_number_and_date .= "<p> Inv No.'".$getchaDebitnotedetailsforInvoice[0]['invoice_3']."' Dated '.date('d-m-Y',strtotime('".$getchaDebitnotedetailsforInvoice[0]['date_3']."')).' </p>";
+        $invoice_number_and_date .= "<p> Inv No.'".$getchaDebitnotedetailsforInvoice['invoice_3']."' Dated '.date('d-m-Y',strtotime('".$getchaDebitnotedetailsforInvoice['date_3']."')).' </p>";
     }
 
 
