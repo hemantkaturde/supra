@@ -16790,14 +16790,8 @@ public function downlaod_production_status_report($vendor_name,$status,$vendor_p
     $objPHPExcel->getActiveSheet()->SetCellValue('H1', 'FG Part Received Qty');  
     $objPHPExcel->getActiveSheet()->SetCellValue('I1', 'Vendor Delivery Date');  
     $objPHPExcel->getActiveSheet()->SetCellValue('J1', 'Buyer Name');  
-    // $objPHPExcel->getActiveSheet()->SetCellValue('K1', 'Buyer PO No');  
-    // $objPHPExcel->getActiveSheet()->SetCellValue('L1', 'Buyer PO Date');  
-    // $objPHPExcel->getActiveSheet()->SetCellValue('M1', 'Buyer Order Qty');
-    // $objPHPExcel->getActiveSheet()->SetCellValue('N1', 'Buyer Delivery Date');
     $objPHPExcel->getActiveSheet()->SetCellValue('K1', 'Status');
     $objPHPExcel->getActiveSheet()->SetCellValue('L1', 'Notes');
-
-
 
     // set Row
     $rowCount = 2;
@@ -16812,10 +16806,6 @@ public function downlaod_production_status_report($vendor_name,$status,$vendor_p
         $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $element['vendor_received_qtys']);
         $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, $element['delivery_date']);
         $objPHPExcel->getActiveSheet()->SetCellValue('J' . $rowCount, $element['buyer_name']);
-        // $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, $element['buyer_po_number']);
-        // $objPHPExcel->getActiveSheet()->SetCellValue('L' . $rowCount, $element['buyer_po_date']);
-        // $objPHPExcel->getActiveSheet()->SetCellValue('M' . $rowCount, '');
-        // $objPHPExcel->getActiveSheet()->SetCellValue('N' . $rowCount, $element['buyer_delivery_date']);
         $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, $element['status']);
         $objPHPExcel->getActiveSheet()->SetCellValue('L' . $rowCount, $element['itemnote']);   
         $rowCount++;
