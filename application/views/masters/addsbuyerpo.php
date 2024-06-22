@@ -378,10 +378,10 @@
 
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Packaging Instraction</label>
+                                                        <label class="col-sm-3 col-form-label">Packaging Instruction</label>
                                                         <div class="col-sm-9">
                                                              <select class="form-control" name="packaging_instraction" id="packaging_instraction">
-                                                                <option value="">Select Packaging Instraction</option>
+                                                                <option value="">Select Packaging Instruction</option>
                                                                 <option value="Yes">Yes</option>
                                                                 <option value="No">No</option>
                                                              </select>
