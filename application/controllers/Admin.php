@@ -17172,7 +17172,7 @@ public function downlaodchadebitnote($id){
             <table style=" width: 100%;text-align: center;margin-top:10px;margin-bottom:10px;font-family:cambria;">
                     <tr>
                         <td style="color:red;font-size:15px">
-                          <u><p><h3>CHA DEBIT NOTE</h3></p>
+                          <u><p><h3>DEBIT NOTE</h3></p>
                         </td>
                     </tr>
             </table>
@@ -17274,7 +17274,7 @@ public function downlaodchadebitnote($id){
                             <p>Thanking You,</p>
                             <p>Yours truly</p>
                             <p style="vertical-align: text-top;font-size:12px;color:#206a9b"><b>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</b></p>
-                            <br/><img src="'.base_url().'assets/images/stmps/singnature.jpg" width="130" height="100">
+                            <br/><img src="'.base_url().'assets/images/stmps/aprana_sign_cha.png" width="130" height="100">
                             <p style="vertical-align: text-top;font-size:10px;color:#206a9b"><b>AUTHORIZED SIGNATORY</b></p>
                         </td>
                         <td style="text-align: center;" width="25%" valign="top">
