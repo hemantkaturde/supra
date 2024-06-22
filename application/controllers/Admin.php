@@ -17245,38 +17245,38 @@ public function downlaodchadebitnote($id){
                 '.$CartItem.'   
 
                 <tr style="border: 1px solid black;">
-                    <td style="border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:13px;">Taxable Amount </td>    
+                    <td style="border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:13px;"><b>Taxable Amount </b></td>    
                     <td colspan="5" style="border: 1px solid black;padding-left: 10px;">'.number_format($getchaDebitnotedetailsforInvoice['taxable_amount'],2).'</td>
                 </tr>
 
                 <tr style="border: 1px solid black;">
-                    <td style="border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:13px;">CGST + SGST 18% </td>    
+                    <td style="border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:13px;"><b>CGST + SGST 18% </b></td>    
                     <td colspan="5" style="border: 1px solid black;padding-left: 10px;">'.number_format($getchaDebitnotedetailsforInvoice['cgst_sgst'],2).'</td>
                 </tr>
 
                 <tr style="border: 1px solid black;">
-                    <td style="border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:13px;">Bill Amt. (incl GST)  </td>    
+                    <td style="border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:13px;"><b>Bill Amt. (incl GST)  </b></td>    
                     <td colspan="5" style="border: 1px solid black;padding-left: 10px;">'.number_format($getchaDebitnotedetailsforInvoice['taxable_amount'] + $getchaDebitnotedetailsforInvoice['cgst_sgst'],2).'</td>
                 </tr>
 
                 <tr style="border: 1px solid black;">
-                    <td style="border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:13px;">Debit Amt  Rs. </td>    
+                    <td style="border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:13px;"><b>Debit Amt  Rs. </b></td>    
                     <td colspan="5" style="border: 1px solid black;padding-left: 10px;">'.number_format($getchaDebitnotedetailsforInvoice['debit_amount'],2).'</td>
                 </tr>
 
 
                 <tr style="border: 1px solid black;">
-                    <td style="border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:13px;">Amount payable before TDS </td>    
+                    <td style="border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:13px;"><b>Amount payable before TDS</b></td>    
                     <td colspan="5" style="border: 1px solid black;padding-left: 10px;">'.number_format($getchaDebitnotedetailsforInvoice['amount_payable_before_tds'],2).'</td>
                 </tr>
 
                  <tr style="border: 1px solid black;">
-                    <td style="border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:13px;">Less TDS </td>    
+                    <td style="border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:13px;"><b>Less TDS </b></td>    
                     <td colspan="5" style="border: 1px solid black;padding-left: 10px;">'.number_format($getchaDebitnotedetailsforInvoice['less_tds'],2).'</td>
                 </tr>
 
                 <tr style="border: 1px solid black;">
-                    <td style="border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:13px;">Payable Amt</td>    
+                    <td style="border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:13px;"><b>Payable Amt</b></td>    
                     <td colspan="5" style="border: 1px solid black;padding-left: 10px;">'.number_format($getchaDebitnotedetailsforInvoice['payable_amount'],2).'</td>
                 </tr>
                         
