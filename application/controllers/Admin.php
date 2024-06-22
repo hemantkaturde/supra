@@ -17154,15 +17154,15 @@ public function downlaodchadebitnote($id){
     }
 
     $invoice_number_and_date = "";
-    if($getDebitnoteitemdeatilsForInvoice[0]['invoice_1'] && $getDebitnoteitemdeatilsForInvoice[0]['date_1']){
+    if($getDebitnoteitemdeatilsForInvoice[0]['invoice_1'] || $getDebitnoteitemdeatilsForInvoice[0]['date_1']){
         $invoice_number_and_date .= "<p> Inv No.'.$getDebitnoteitemdeatilsForInvoice[0]['invoice_1'].' Dated '.date('d-m-Y',strtotime($getDebitnoteitemdeatilsForInvoice[0]['date_1'])).' </p>";
     }
 
-    if($getDebitnoteitemdeatilsForInvoice[0]['invoice_2'] && $getDebitnoteitemdeatilsForInvoice[0]['date_2']){
+    if($getDebitnoteitemdeatilsForInvoice[0]['invoice_2'] || $getDebitnoteitemdeatilsForInvoice[0]['date_2']){
         $invoice_number_and_date .= "<p> Inv No.'.$getDebitnoteitemdeatilsForInvoice[0]['invoice_2'].' Dated '.date('d-m-Y',strtotime($getDebitnoteitemdeatilsForInvoice[0]['date_2'])).' </p>";
     }
 
-    if($getDebitnoteitemdeatilsForInvoice[0]['invoice_3'] && $getDebitnoteitemdeatilsForInvoice[0]['date_3']){
+    if($getDebitnoteitemdeatilsForInvoice[0]['invoice_3'] || $getDebitnoteitemdeatilsForInvoice[0]['date_3']){
         $invoice_number_and_date .= "<p> Inv No.'.$getDebitnoteitemdeatilsForInvoice[0]['invoice_3'].' Dated '.date('d-m-Y',strtotime($getDebitnoteitemdeatilsForInvoice[0]['date_3'])).' </p>";
     }
 
@@ -17223,7 +17223,7 @@ public function downlaodchadebitnote($id){
                     <td width="50%">
                         <div>
                             <p>Dear Sir,</p>
-                            <p><b>Sub: Debit Note</b></p>
+                            <p><b>Sub: '.$$getchaDebitnotedetailsforInvoice['subject'].'</b></p>
                             <p>With reference to the above subject we have debited your account vide your </p>
                                '.$invoice_number_and_date.'
                                 <p>'. str_repeat('&nbsp;', 5).'</p>
