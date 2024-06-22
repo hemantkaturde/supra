@@ -17151,6 +17151,20 @@ public function downlaodchadebitnote($id){
         $i++;       
     }
 
+    $invoice_number_and_date = "";
+    if($getDebitnoteitemdeatilsForInvoice[0]['invoice_1'] && $getDebitnoteitemdeatilsForInvoice[0]['date_1']){
+        $invoice_number_and_date .= "<p> Inv No.'.$getDebitnoteitemdeatilsForInvoice[0]['invoice_1'].' Dated '.date('d-m-Y',strtotime($getDebitnoteitemdeatilsForInvoice[0]['date_1'])).' </p>";
+    }
+
+    if($getDebitnoteitemdeatilsForInvoice[0]['invoice_2'] && $getDebitnoteitemdeatilsForInvoice[0]['date_2']){
+        $invoice_number_and_date .= "<p> Inv No.'.$getDebitnoteitemdeatilsForInvoice[0]['invoice_2'].' Dated '.date('d-m-Y',strtotime($getDebitnoteitemdeatilsForInvoice[0]['date_2'])).' </p>";
+    }
+
+    if($getDebitnoteitemdeatilsForInvoice[0]['invoice_3'] && $getDebitnoteitemdeatilsForInvoice[0]['date_3']){
+        $invoice_number_and_date .= "<p> Inv No.'.$getDebitnoteitemdeatilsForInvoice[0]['invoice_3'].' Dated '.date('d-m-Y',strtotime($getDebitnoteitemdeatilsForInvoice[0]['date_3'])).' </p>";
+    }
+
+
   
     $mpdf = new \Mpdf\Mpdf();
     // $html = $this->load->view('html_to_pdf',[],true);
@@ -17209,11 +17223,9 @@ public function downlaodchadebitnote($id){
                             <p>Dear Sir,</p>
                             <p><b>Sub: Debit Note</b></p>
                             <p>With reference to the above subject we have debited your account vide your </p>
-                            <p> Inv No.'.$getDebitnoteitemdeatilsForInvoice[0]['invoice_1'].' Dated '.date('d-m-Y',strtotime($getDebitnoteitemdeatilsForInvoice[0]['date_1'])).' </p>
-                            <p> Inv No.'.$getDebitnoteitemdeatilsForInvoice[0]['invoice_2'].' Dated '.date('d-m-Y',strtotime($getDebitnoteitemdeatilsForInvoice[0]['date_2'])).' </p>
-                            <p> Inv No.'.$getDebitnoteitemdeatilsForInvoice[0]['invoice_3'].' Dated '.date('d-m-Y',strtotime($getDebitnoteitemdeatilsForInvoice[0]['date_3'])).' </p>
-                            <p>'. str_repeat('&nbsp;', 5).'</p>
-                            <p>The details are as follows: </p>
+                               '.$invoice_number_and_date.'
+                                <p>'. str_repeat('&nbsp;', 5).'</p>
+                                <p>The details are as follows: </p>
                         <div>    
                     </td>  
                 </tr>
