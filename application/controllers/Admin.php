@@ -17289,7 +17289,7 @@ public function downlaodchadebitnote($id){
             <table style=" width: 100%;text-align: left;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:12px">
                    <tr >
                         <td style="padding-left: 10px;" width="75%;" valign="top">
-                            <p>Thanking You,</p>
+                            <p><b>Thanking You,</b></p>
                             <p>Yours truly</p>
                             <p style="vertical-align: text-top;font-size:12px;color:#206a9b"><b>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</b></p>
                             <br/><img src="'.base_url().'assets/images/stmps/aprana_sign_cha.png" width="130" height="100">
