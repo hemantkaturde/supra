@@ -19092,6 +19092,50 @@
 				});
             });
 
+
+			$(document).ready(function() {
+				//$(".loader_ajax").show();
+				// $("#customers-list").html('');
+				var part_number = $('#part_number').val();
+				var main_export_id = $('#main_export_id').val();
+				var buyer_po_id = $('#buyer_po_id').val();
+				var buyer_name_id = $('#buyer_name_id').val();
+				
+				$.ajax({
+					url : "<?php echo ADMIN_PATH;?>get_preexport_item_details",
+					type: "POST",
+					data : {'part_number' : part_number,'main_export_id' : main_export_id,'buyer_po_id':buyer_po_id,'buyer_name_id':buyer_name_id},
+					success: function(data, textStatus, jqXHR)
+					{
+						$(".loader_ajax").hide();
+						if(data == "failure")
+						{
+							$('#part_description').val('');
+							$('#buyer_po_number').val('');
+							$('#buyer_po_number_id').val('');
+						}
+						else
+						{
+							var data_part_details = jQuery.parseJSON( data );
+							$('#part_description').val(data_part_details.name);
+							$('#buyer_po_number').val(data_part_details.sales_order_number);
+							$('#buyer_po_number_id').val(data_part_details.buyer_po_number_id);
+
+						}
+					},
+					error: function (jqXHR, textStatus, errorThrown)
+					{
+						$('#part_description').val('');
+						$('#buyer_po_number').val('');
+						$('#buyer_po_number_id').val('');
+					}
+				});
+				return false;
+
+			});
+
+
+
 			$(document).on('change','#part_number',function(e){  
 				e.preventDefault();
 				//$(".loader_ajax").show();
@@ -19099,27 +19143,35 @@
 				var part_number = $('#part_number').val();
 				var main_export_id = $('#main_export_id').val();
 				var buyer_po_id = $('#buyer_po_id').val();
+				var buyer_name_id = $('#buyer_name_id').val();
+				
 				$.ajax({
 					url : "<?php echo ADMIN_PATH;?>get_preexport_item_details",
 					type: "POST",
-					data : {'part_number' : part_number,'main_export_id' : main_export_id,'buyer_po_id':buyer_po_id},
+					data : {'part_number' : part_number,'main_export_id' : main_export_id,'buyer_po_id':buyer_po_id,'buyer_name_id':buyer_name_id},
 					success: function(data, textStatus, jqXHR)
 					{
 						$(".loader_ajax").hide();
 						if(data == "failure")
 						{
 							$('#part_description').val('');
+							$('#buyer_po_number').val('');
+							$('#buyer_po_number_id').val('');
 						}
 						else
 						{
 							var data_part_details = jQuery.parseJSON( data );
 							$('#part_description').val(data_part_details.name);
+							$('#buyer_po_number').val(data_part_details.sales_order_number);
+							$('#buyer_po_number_id').val(data_part_details.buyer_po_number_id);
 
 						}
 					},
 					error: function (jqXHR, textStatus, errorThrown)
 					{
 						$('#part_description').val('');
+						$('#buyer_po_number').val('');
+						$('#buyer_po_number_id').val('');
 					}
 				});
 				return false;

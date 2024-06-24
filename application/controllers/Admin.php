@@ -11645,19 +11645,20 @@ public function addpreexportitemdetails($id){
         $this->form_validation->set_rules('total_item_net_weight','Total Item Net Weight','trim');
         $this->form_validation->set_rules('remark','Remark','trim');
         $this->form_validation->set_rules('main_export_id','Main Export Id','trim');
-
+        $this->form_validation->set_rules('buyer_po_number_id','Buyer PO Number Id','trim');
 
         if($this->form_validation->run() == FALSE)
         {
 
             $saveExportitemdetails_response['status'] = 'failure';
-            $saveExportitemdetails_response['error'] = array('part_number'=>strip_tags(form_error('part_number')),'part_description'=>strip_tags(form_error('part_description')),'total_item_net_weight'=>strip_tags(form_error('total_item_net_weight')),'remark'=>strip_tags(form_error('remark')),'main_export_id'=>strip_tags(form_error('main_export_id')));
+            $saveExportitemdetails_response['error'] = array('part_number'=>strip_tags(form_error('part_number')),'part_description'=>strip_tags(form_error('part_description')),'total_item_net_weight'=>strip_tags(form_error('total_item_net_weight')),'remark'=>strip_tags(form_error('remark')),'main_export_id'=>strip_tags(form_error('main_export_id')),'buyer_po_number_id'=>strip_tags(form_error('buyer_po_number_id')));
         }else{
 
              $data = array(
                 'pre_export_id'=>$this->input->post('main_export_id'),
                 'part_number'=>$this->input->post('part_number'),
                 'total_item_net_weight'=>$this->input->post('total_item_net_weight'),
+                'buyer_po_number_id'=>$this->input->post('buyer_po_number_id'),
                 'remark'=>$this->input->post('remark'),
               );
 
@@ -11671,12 +11672,12 @@ public function addpreexportitemdetails($id){
 
               if($savePreexportitemdata){
                 $saveExportitemdetails_response['status'] = 'success';                
-                $saveExportitemdetails_response['error'] = array('part_number'=>strip_tags(form_error('part_number')),'part_description'=>strip_tags(form_error('part_description')),'total_item_net_weight'=>strip_tags(form_error('total_item_net_weight')),'remark'=>strip_tags(form_error('remark')),'main_export_id'=>strip_tags(form_error('main_export_id')));
+                $saveExportitemdetails_response['error'] = array('part_number'=>strip_tags(form_error('part_number')),'part_description'=>strip_tags(form_error('part_description')),'total_item_net_weight'=>strip_tags(form_error('total_item_net_weight')),'remark'=>strip_tags(form_error('remark')),'main_export_id'=>strip_tags(form_error('main_export_id')),'buyer_po_number_id'=>strip_tags(form_error('buyer_po_number_id')));
 
               }else{
 
                 $saveExportitemdetails_response['status'] = 'failure';
-                $saveExportitemdetails_response['error'] = array('part_number'=>strip_tags(form_error('part_number')),'part_description'=>strip_tags(form_error('part_description')),'total_item_net_weight'=>strip_tags(form_error('total_item_net_weight')),'remark'=>strip_tags(form_error('remark')),'main_export_id'=>strip_tags(form_error('main_export_id')));
+                $saveExportitemdetails_response['error'] = array('part_number'=>strip_tags(form_error('part_number')),'part_description'=>strip_tags(form_error('part_description')),'total_item_net_weight'=>strip_tags(form_error('total_item_net_weight')),'remark'=>strip_tags(form_error('remark')),'main_export_id'=>strip_tags(form_error('main_export_id')),'buyer_po_number_id'=>strip_tags(form_error('buyer_po_number_id')));
 
               }
 
@@ -11690,10 +11691,11 @@ public function addpreexportitemdetails($id){
         $this->logrecord($process,$processFunction);
         $this->global['pageTitle'] = 'Add New Pre Export Item Details';
         $data['getexportetails']= $this->admin_model->getbuyerpodetailsforexportdetails($id);
-
         $data['getbuyerpoitemdetails']= $this->admin_model->getbuyerpoitemdetails($data['getexportetails'][0]['buyer_id']);
         $data['main_export_id']= $id;
         $data['buyer_po_id']= $data['getexportetails'][0]['buyer_id'];
+        $data['buyer_name_id']= $data['getexportetails'][0]['buyer_id'];
+
         $this->loadViews("masters/addpreexportitemdetails", $this->global, $data, NULL);
     }
 }
@@ -11703,7 +11705,7 @@ public function get_preexport_item_details(){
 
     $post_submit = $this->input->post();
     if($post_submit){
-        $getpreexportitemdetails = $this->admin_model->get_preexport_item_details(trim($this->input->post('part_number')),trim($this->input->post('main_export_id')),trim($this->input->post('buyer_po_id')));
+        $getpreexportitemdetails = $this->admin_model->get_preexport_item_details(trim($this->input->post('part_number')),trim($this->input->post('main_export_id')),trim($this->input->post('buyer_po_id')),trim($this->input->post('buyer_name_id')));
         if($getpreexportitemdetails){
             $content = $getpreexportitemdetails[0];
             echo json_encode($content);
@@ -11743,7 +11745,10 @@ public function editaddpreexportitemdetails($id){
     $data['getexportetails']= $this->admin_model->getbuyerpodetailsforexportdetailsedititemdetails($id);
     $data['main_export_id']= $data['getexportetails'][0]['export_id'];
     $data['preexportitemdetailsid']= $id;
-    $data['getbuyerpoitemdetails']= $this->admin_model->getbuyerpoitemdetails($data['getexportetails'][0]['buyer_po']);
+    // $data['getbuyerpoitemdetails']= $this->admin_model->getbuyerpoitemdetails($data['getexportetails'][0]['buyer_po']);
+    $data['getbuyerpoitemdetails']= $this->admin_model->getbuyerpoitemdetails($data['getexportetails'][0]['buyer_id']);
+    $data['buyer_name_id']= $data['getexportetails'][0]['buyer_id'];
+
     $this->loadViews("masters/editaddpreexportitemdetails", $this->global, $data, NULL);
 }
 

@@ -33,6 +33,9 @@
                         <input type="hidden" class="main_export_id" id="main_export_id" value=<?=$main_export_id?> name="main_export_id">
                         <input type="hidden" class="buyer_po_id" id="buyer_po_id" value=<?=$buyer_po_id?> name="buyer_po_id">
                         <input type="hidden" class="preexportitemdetailsid" id="preexportitemdetailsid" value=<?=$preexportitemdetailsid?> name="preexportitemdetailsid">
+
+                        <input type="hidden" class="buyer_name_id" id="buyer_name_id" value=<?=$buyer_name_id?>>
+
                         
                         <div class="box-body">
                                 <div class="row">
@@ -59,6 +62,19 @@
                                         </div>
                                     </div>
                                 </div>    
+
+                                      
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                               <label for="buyer_po_number">Buyer PO Number</label>
+                                               <input type="hidden" class="form-control" id="buyer_po_number_id" name="buyer_po_number_id" readonly>
+                                               <input type="text" class="form-control" id="buyer_po_number" name="buyer_po_number" readonly>
+                                            <p class="error buyer_po_number_error"></p>
+                                        </div>
+                                    </div>
+                                </div>    
+
 
                                 <!-- <div class="row">
                                     <div class="col-md-6">
