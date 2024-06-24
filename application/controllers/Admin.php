@@ -16839,8 +16839,9 @@ public function downlaod_production_status_report($vendor_name,$status,$vendor_p
 
 public function getpreviousaddednotesfordisplay(){
     $bill_ofmaterial_id=$this->input->post('id');
+    $flag=$this->input->post('flag');
     if($bill_ofmaterial_id) {
-        $bill_ofmaterial_id_data = $this->admin_model->getpreviousaddednotesfordisplay($bill_ofmaterial_id);
+        $bill_ofmaterial_id_data = $this->admin_model->getpreviousaddednotesfordisplay($bill_ofmaterial_id,$flag);
         if(count($bill_ofmaterial_id_data) >= 1) {
             echo json_encode($bill_ofmaterial_id_data[0]);
         } else {
@@ -16867,7 +16868,7 @@ public function savebillofmaterialnotes(){
        
         }else{
             $data = array('notes'=>trim($this->input->post('notes')));
-            $bill_ofmaterial_id_data = $this->admin_model->savebillofmaterialnotes(trim($this->input->post('notes_id')),$data);
+            $bill_ofmaterial_id_data = $this->admin_model->savebillofmaterialnotes(trim($this->input->post('notes_id')),trim($this->input->post('flag')),$data);
 
             if($bill_ofmaterial_id_data){
                 $savebillofmaterialnotes_response['status'] = 'success';

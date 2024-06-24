@@ -147,6 +147,7 @@
             </div>
             <div class="modal-body">
             <input type="hidden" class="form-control" id="notes_id" name="notes_id">
+            <input type="hidden" class="form-control" id="flag" name="flag">
 
                 <div class="col-md-12">
                     <div class="form-group">

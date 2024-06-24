@@ -20557,7 +20557,7 @@
 		$.ajax({
 			url : "<?php echo ADMIN_PATH;?>getpreviousaddednotesfordisplay",
 			type: "POST",
-			data : {'id' : elemF.attr('data-id')},
+			data : {'id' : elemF.attr('data-id'),'flag' : elemF.attr('flag')},
 				success: function(data, textStatus, jqXHR)
 				{
 					$(".loader_ajax").hide();
@@ -20565,6 +20565,7 @@
 						{
 							$('#notes').val('');
 							$('#notes_id').val('');
+							$('#flag').val('');
 							$('#addnotes').modal('hide');
 						}
 						else
@@ -20572,6 +20573,7 @@
 							var notedata = jQuery.parseJSON( data );
 							$('#notes').val(notedata.notes);
 							$('#notes_id').val(notedata.id);
+							$('#flag').val(notedata.flag);
 							$('#addnotes').modal('show');
 					    }
 				},
@@ -20579,6 +20581,7 @@
 					{
 							$('#notes').val('');
 							$('#notes_id').val('');
+							$('#flag').val('');
 							$('#addnotes').modal('hide');
 					}
 		});
@@ -20594,11 +20597,12 @@
 			
 				var notes_id = $('#notes_id').val();
 				var notes = $('#notes').val();
+				var flag = $('#flag').val();
 
 				$.ajax({
 					url : "<?php echo base_url();?>savebillofmaterialnotes",
 					type: "POST",
-					data : {'notes_id':notes_id,'notes':notes},
+					data : {'notes_id':notes_id,'notes':notes,'flag':flag},
 					success: function(data, textStatus, jqXHR)
 					{
 						var fetchResponse = $.parseJSON(data);
@@ -20630,7 +20634,6 @@
 				});
 				return false;
 	});
-	
 
 </script>  
 <?php } ?>
