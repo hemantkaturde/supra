@@ -82,6 +82,7 @@
                         <label for="status">Status</label>
                         <select class="form-control" name="status" id="status">
                             <option st-id="" value="NA">Select Status</option>
+                            <option value="NA">ALL </option>
                             <option value="paid">Paid </option>
                             <option value="unpaid">Unpaid</option>
                         </select>

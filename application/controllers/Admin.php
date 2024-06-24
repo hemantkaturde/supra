@@ -17062,11 +17062,12 @@ public function fetchPaymentdetailsreport($vendor_name,$supplier_name,$payment_d
 
 public function export_to_excel_payment_details($vendor_name,$supplier_name,$payment_details_no,$status) {
 
-    // create file name
-    $fileName = 'Payment_Details_Report -'.date('d-m-Y').'.xlsx';  
     // load excel library
     $empInfo = $this->admin_model->downlaodpaymentdetailsreportdata($vendor_name,$supplier_name,$payment_details_no,$status);
-
+    
+    // create file name
+    $fileName = 'Payment Details -'.date('d-m-Y').'.xlsx';  
+   
     $objPHPExcel = new PHPExcel();
     $objPHPExcel->setActiveSheetIndex(0);
     // set Header
