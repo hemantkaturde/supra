@@ -84,7 +84,7 @@
                                 </div>    
 
 
-                                <?php if($getexportdetailsforedit[0]['buyer_po']){
+                                <!-- <?php if($getexportdetailsforedit[0]['buyer_po']){
                                         $display='block';
                                         $selected_value = $getexportdetailsforedit[0]['sales_order_number'].'-'.$getexportdetailsforedit[0]['buyer_po_number'];
 
@@ -105,7 +105,7 @@
                                                 </select> 
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
 
                                 <div class="row">
                                     <div class="col-md-6">

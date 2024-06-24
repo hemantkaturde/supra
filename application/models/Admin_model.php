@@ -10967,7 +10967,7 @@ public function getpreexportcount($params){
     }
 
     $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_PREEXPORT.'.buyer_name');
-    $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_PREEXPORT.'.buyer_po');
+    // $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_PREEXPORT.'.buyer_po');
     
     $this->db->where(TBL_PREEXPORT.'.status', 1);
     $this->db->order_by(TBL_PREEXPORT.'.id','DESC');
@@ -10987,12 +10987,12 @@ public function getpreexportdata($params){
         $this->db->or_where(TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_PREEXPORT.".invoice_number LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_PREEXPORT.".mode_of_shipment LIKE '%".$params['search']['value']."%'");
-        $this->db->or_where(TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
+        // $this->db->or_where(TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_PREEXPORT.".remark LIKE '%".$params['search']['value']."%')");
     }
 
     $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_PREEXPORT.'.buyer_name');
-    $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_PREEXPORT.'.buyer_po');
+    // $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_PREEXPORT.'.buyer_po');
 
     $this->db->where(TBL_PREEXPORT.'.status', 1);
     $this->db->order_by(TBL_PREEXPORT.'.id','DESC');
@@ -11009,8 +11009,7 @@ public function getpreexportdata($params){
             $data[$counter]['pre_export_invoice_no'] =$value['pre_export_invoice_no'].'-'.'<b>'.$value['invoice_number'].'</b>';
             $data[$counter]['date'] =$value['date'];
             $data[$counter]['buyer_name'] =$value['buyer_name'];
-            $data[$counter]['buyer_po_number'] =$value['sales_order_number'];
-
+            //$data[$counter]['buyer_po_number'] =$value['sales_order_number'];
 
             $sum_of_export = $this->getSumetionofpreexportallrows($value['export_id']);
 
@@ -11107,7 +11106,7 @@ public function getpreexportdetailsforedit($id){
 
     $this->db->select('*,'.TBL_PREEXPORT.'.remark as preexportremark,'.TBL_PREEXPORT.'.id as export_id,'.TBL_PREEXPORT.'.buyer_name as buyer_id');
     $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_PREEXPORT.'.buyer_name');
-    $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_PREEXPORT.'.buyer_po');
+    // $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_PREEXPORT.'.buyer_po');
     $this->db->where(TBL_PREEXPORT.'.status', 1);
     $this->db->where(TBL_PREEXPORT.'.id',$id);
     $query = $this->db->get(TBL_PREEXPORT);
@@ -11121,7 +11120,7 @@ public function getbuyerpodetailsforexportdetails($id){
 
     $this->db->select('*,'.TBL_PREEXPORT.'.remark as preexportremark,'.TBL_PREEXPORT.'.id as export_id');
     $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_PREEXPORT.'.buyer_name');
-    $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_PREEXPORT.'.buyer_po');
+    // $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_PREEXPORT.'.buyer_po');
     $this->db->where(TBL_PREEXPORT.'.status', 1);
     $this->db->where(TBL_PREEXPORT.'.id',$id);
     $query = $this->db->get(TBL_PREEXPORT);
@@ -11134,7 +11133,7 @@ public function getbuyerpoitemdetails($po_id){
 
     $this->db->select(TBL_FINISHED_GOODS.'.fin_id,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name');
     $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
-    $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id',$po_id);
+    $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.pre_buyer_name',$po_id);
     $query = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
     $fetch_result = $query->result_array();
     return $fetch_result;
@@ -11278,10 +11277,10 @@ public function deletepreexportitemdetails($id){
 
 public function getbuyerpodetailsforexportdetailsedititemdetails($id){
 
-    $this->db->select('*,'.TBL_PREEXPORT_ITEM_DETAILS.'.remark as preexportremark,'.TBL_PREEXPORT.'.id as export_id,'.TBL_PREEXPORT_ITEM_DETAILS.'.part_number as part_number_id');
+    $this->db->select('*,'.TBL_PREEXPORT_ITEM_DETAILS.'.remark as preexportremark,'.TBL_PREEXPORT.'.id as export_id,'.TBL_PREEXPORT_ITEM_DETAILS.'.part_number as part_number_id,'.TBL_BUYER_MASTER.'.buyer_id');
     $this->db->join(TBL_PREEXPORT, TBL_PREEXPORT.'.id = '.TBL_PREEXPORT_ITEM_DETAILS.'.pre_export_id');
     $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_PREEXPORT_ITEM_DETAILS.'.part_number');
-    $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_PREEXPORT.'.buyer_po');
+    // $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_PREEXPORT.'.buyer_po');
     $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_PREEXPORT.'.buyer_name');
     $this->db->where(TBL_PREEXPORT_ITEM_DETAILS.'.status', 1);
     $this->db->where(TBL_PREEXPORT_ITEM_DETAILS.'.id',$id);

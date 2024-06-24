@@ -11511,7 +11511,7 @@ public function addnewfreexport(){
         $this->form_validation->set_rules('invoice_number','Invoice Number','trim|required');
         $this->form_validation->set_rules('date','Date','trim|required');
         $this->form_validation->set_rules('buyer_name','Buyer Name','trim|required');
-        $this->form_validation->set_rules('buyer_po_number','Buyer PO Number','trim|required');
+        $this->form_validation->set_rules('buyer_po_number','Buyer PO Number','trim');
         $this->form_validation->set_rules('total_no_of_pallets','Total No Of Pallets','trim');
         $this->form_validation->set_rules('total_weight_of_pallets','Total weight Of Pallets','trim');
         $this->form_validation->set_rules('pallet_1','Pallet 1','trim');
@@ -11692,7 +11692,7 @@ public function addpreexportitemdetails($id){
         $data['getexportetails']= $this->admin_model->getbuyerpodetailsforexportdetails($id);
         $data['getbuyerpoitemdetails']= $this->admin_model->getbuyerpoitemdetails($data['getexportetails'][0]['buyer_po']);
         $data['main_export_id']= $id;
-        $data['buyer_po_id']= $data['getexportetails'][0]['buyer_po'];
+        $data['buyer_po_id']= $data['getexportetails'][0]['buyer_id'];
         $this->loadViews("masters/addpreexportitemdetails", $this->global, $data, NULL);
     }
 }

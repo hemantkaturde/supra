@@ -32,7 +32,7 @@
                                         <th>Pre Export Number - Invoice Number</th>
                                         <th>Date</th>
                                         <th>Buyer Name</th>
-                                        <th>Buyer PO</th>
+                                        <!-- <th>Buyer PO</th> -->
                                         <th>Total Net Weight Of Shipment (in Kgs)</th>
                                         <th>Total Gross Weight (in Kgs)</th>
                                         <th>Total Gross Weight + Total Weight of Pallets (in Kgs)</th>
