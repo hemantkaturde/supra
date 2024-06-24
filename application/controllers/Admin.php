@@ -11690,7 +11690,8 @@ public function addpreexportitemdetails($id){
         $this->logrecord($process,$processFunction);
         $this->global['pageTitle'] = 'Add New Pre Export Item Details';
         $data['getexportetails']= $this->admin_model->getbuyerpodetailsforexportdetails($id);
-        $data['getbuyerpoitemdetails']= $this->admin_model->getbuyerpoitemdetails($data['getexportetails'][0]['buyer_po']);
+
+        $data['getbuyerpoitemdetails']= $this->admin_model->getbuyerpoitemdetails($data['getexportetails'][0]['buyer_id']);
         $data['main_export_id']= $id;
         $data['buyer_po_id']= $data['getexportetails'][0]['buyer_id'];
         $this->loadViews("masters/addpreexportitemdetails", $this->global, $data, NULL);

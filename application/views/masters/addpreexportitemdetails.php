@@ -14,7 +14,7 @@
         <h4>
             <p><b>Pre Export Invoice Number :</b> <?=$getexportetails[0]['pre_export_invoice_no'] ?></p>
             <p><b>Pre Export Buyer Name :</b> <?=$getexportetails[0]['buyer_name'] ?></p>
-            <p><b>Pre Export Buyer PO Number :</b> <?=$getexportetails[0]['sales_order_number'] ?></p>
+            <!-- <p><b>Pre Export Buyer PO Number :</b> <?=$getexportetails[0]['sales_order_number'] ?></p> -->
         </h4>
 
     </section>
