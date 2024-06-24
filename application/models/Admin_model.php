@@ -11152,9 +11152,11 @@ public function getpreexportitemdetailscount($params,$id){
         $this->db->where("(".TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_FINISHED_GOODS.".name LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_PREEXPORT_ITEM_DETAILS.".total_item_net_weight LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_PREEXPORT_ITEM_DETAILS.".remark LIKE '%".$params['search']['value']."%')");
     }
     $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_PREEXPORT_ITEM_DETAILS.'.part_number');
+    $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_PREEXPORT_ITEM_DETAILS.'.buyer_po_number_id');
     $this->db->where(TBL_PREEXPORT_ITEM_DETAILS.'.pre_export_id', $id);
     $this->db->where(TBL_PREEXPORT_ITEM_DETAILS.'.status', 1);
     $this->db->order_by(TBL_PREEXPORT_ITEM_DETAILS.'.id','DESC');
@@ -11171,11 +11173,13 @@ public function getpreexportitemdetailsdata($params,$id){
     {
         $this->db->where("(".TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_FINISHED_GOODS.".name LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_PREEXPORT_ITEM_DETAILS.".total_item_net_weight LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_PREEXPORT_ITEM_DETAILS.".remark LIKE '%".$params['search']['value']."%')");
     }
 
     $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_PREEXPORT_ITEM_DETAILS.'.part_number');
+    $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_PREEXPORT_ITEM_DETAILS.'.buyer_po_number_id');
     $this->db->where(TBL_PREEXPORT_ITEM_DETAILS.'.pre_export_id', $id);
     $this->db->where(TBL_PREEXPORT_ITEM_DETAILS.'.status', 1);
     $this->db->order_by(TBL_PREEXPORT_ITEM_DETAILS.'.id','DESC');
@@ -11192,6 +11196,7 @@ public function getpreexportitemdetailsdata($params,$id){
             $data[$counter]['part_number'] =$value['part_number'];
             $data[$counter]['part_description'] =$value['name'];
             // $data[$counter]['total_item_net_weight'] =$value['total_item_net_weight'];
+            $data[$counter]['sales_order_number'] =$value['sales_order_number'];
 
               $preexportitemid =  $this->getSumetionofpreexportattributes($value['preexportitemid']);
 
