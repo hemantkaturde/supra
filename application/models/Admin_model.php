@@ -3721,7 +3721,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editpackinginstraction/".$value['packinginstarctionid']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addpackinginstractiondetails/".$value['packinginstarctionid']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['packinginstarctionid']."' class='fa fa-trash-o deletepackinginstraction' aria-hidden='true'></i>  &nbsp ";
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editBuyerpo/".$value['buyerpoid']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-arrow-right' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editBuyerpo/".$value['buyerpoid']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-check-circle-o' aria-hidden='true'></i></a>   &nbsp ";
 
                 $counter++; 
             }
