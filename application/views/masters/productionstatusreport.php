@@ -151,7 +151,7 @@
 
                 <div class="col-md-12">
                     <div class="form-group">
-                        <label for="notes">Notes <span class="required">*</span></label>
+                        <label for="notes">Notes </label>
                         <textarea class="form-control" id="notes" name="notes" rows="3"></textarea>
                         <p class="error notes_error"></p>
                     </div>

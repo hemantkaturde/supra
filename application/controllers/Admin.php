@@ -16859,7 +16859,7 @@ public function savebillofmaterialnotes(){
     if($post_submit){
 
         $savebillofmaterialnotes_response = array();
-        $this->form_validation->set_rules('notes','Notes','trim|required');
+        $this->form_validation->set_rules('notes','Notes','trim');
 
         if($this->form_validation->run() == FALSE)
         {
