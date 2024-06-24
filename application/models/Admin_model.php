@@ -12246,13 +12246,13 @@ public function get_numberofcartoons($get_numberofcartoons){
 
             $this->db->select('*,'.TBL_PREEXPORT.'.remark as preexportremark,'.TBL_PREEXPORT.'.id as export_id');
             $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_PREEXPORT.'.buyer_name');
-            $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_PREEXPORT.'.buyer_po');
+            // $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_PREEXPORT.'.buyer_po');
             $this->db->where(TBL_PREEXPORT.'.invoice_number', trim($data[0]['buyer_invoice_number']));
             $this->db->where(TBL_PREEXPORT.'.status', 1);
 
             $query = $this->db->get(TBL_PREEXPORT);
             $fetch_result = $query->result_array();
-        
+
             $data = array();
             $counter = 0;
             if(count($fetch_result) > 0)
