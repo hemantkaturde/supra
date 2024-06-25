@@ -474,8 +474,11 @@ $route['deletechadebitnote'] = "admin/deletechadebitnote";
 $route['editchadebitnote/(:any)'] = "admin/editchadebitnote/$1";
 $route['salestrackingexcelreport'] = "admin/salestrackingexcelreport";
 $route['paymentdetailsreport'] = "admin/paymentdetailsreport";
-
 $route['downlaodchadebitnote/(:any)'] = "admin/downlaodchadebitnote/$1";
+
+$route['uspincoming'] = "admin/uspincoming";
+
+
 
 
 /* End of file routes.php */

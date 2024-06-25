@@ -17316,5 +17316,14 @@ public function downlaodchadebitnote($id){
 }  
 
 
+public function uspincoming(){
+    
+    $process = 'USP Incoming';
+    $processFunction = 'Admin/uspincoming';
+    $this->global['pageTitle'] = 'USP Incoming';
+    $this->loadViews("masters/uspincoming", $this->global, $data, NULL); 
+}
+
+
 
 }
