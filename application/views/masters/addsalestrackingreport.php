@@ -496,7 +496,7 @@
                                         <div class="form-group">
                                             <label for="debit_note_number">Debit Note Number</label>
                                                 <select class="form-control" name="debit_note_number" id="debit_note_number">
-                                                            <option st-id="" value="">Select Part Number</option>
+                                                            <option st-id="" value="">Select Debit Note Number</option>
                                                                 <?php foreach ($getchadebitenotenumber as $key => $value) {?>
                                                             <option value="<?php echo $value['id']; ?>"><?php echo $value['cha_debit_number']; ?></option>
                                                         <?php } ?>
