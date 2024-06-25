@@ -17300,7 +17300,7 @@ public function downlaodchadebitnote($id){
                             <p><b>Thanking You,</b></p>
                             <p>Yours truly</p>
                             <p style="vertical-align: text-top;font-size:12px;color:#206a9b"><b>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</b></p>
-                            <br/><img src="'.base_url().'assets/images/stmps/aprana_sign_cha.png" width="130" height="100">
+                            <br/><img src="'.base_url().'assets/images/stmps/aprana_sign_cha.png" width="150" height="150">
                             <p style="vertical-align: text-top;font-size:10px;color:#206a9b"><b>AUTHORIZED SIGNATORY</b></p>
                         </td>
                         <td style="text-align: center;" width="25%" valign="top">
