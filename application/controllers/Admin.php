@@ -12339,7 +12339,7 @@ public function addsalestrackingreport(){
         $data['invoicenumberfromPackaging']= $this->admin_model->invoicenumberfromPackaging();
         $data['getchamaster']= $this->admin_model->getchamaster();
         $data['getcreditnotenumber']= $this->admin_model->getcreditnotenumber();
-        $data['getdebitenotenumber']= $this->admin_model->getdebitenotenumber();
+        $data['getchadebitenotenumber']= $this->admin_model->getchadebitenotenumber();
         $this->loadViews("masters/addsalestrackingreport", $this->global, $data, NULL);
     }
 
@@ -15676,6 +15676,7 @@ public function getdebitnotedetailsbydebitenoteeid(){
     $debit_note_number=$this->input->post('debit_note_number');
     if($debit_note_number) {
         $debit_note_number_data = $this->admin_model->getdebitnotedetailsbydebitenoteeid($debit_note_number);
+
         if(count($debit_note_number_data) >= 1) {
             echo json_encode($debit_note_number_data[0]);
         } else {
@@ -15726,7 +15727,9 @@ public function editsalestrackingreport($id){
     $data['invoicenumberfromPackaging']= $this->admin_model->invoicenumberfromPackaging();
     $data['getchamaster']= $this->admin_model->getchamaster();
     $data['getcreditnotenumber']= $this->admin_model->getcreditnotenumber();
-    $data['getdebitenotenumber']= $this->admin_model->getdebitenotenumber();
+   // $data['getdebitenotenumber']= $this->admin_model->getdebitenotenumber();
+    $data['getchadebitenotenumber']= $this->admin_model->getchadebitenotenumber();
+
     $this->loadViews("masters/editsalestrackingreport", $this->global, $data, NULL);
 }
 

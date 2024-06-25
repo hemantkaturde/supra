@@ -495,22 +495,22 @@
                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="debit_note_number">Debit Note Number</label>
-                                                <!-- <select class="form-control" name="debit_note_number" id="debit_note_number">
+                                                <select class="form-control" name="debit_note_number" id="debit_note_number">
                                                             <option st-id="" value="">Select Part Number</option>
-                                                                <?php foreach ($getdebitenotenumber as $key => $value) {?>
-                                                            <option value="<?php echo $value['debit_id']; ?>"><?php echo $value['debit_note_number']; ?></option>
+                                                                <?php foreach ($getchadebitenotenumber as $key => $value) {?>
+                                                            <option value="<?php echo $value['id']; ?>"><?php echo $value['cha_debit_number']; ?></option>
                                                         <?php } ?>
                                                     <p class="error debit_note_number_error"></p>
-                                                </select> -->
-                                                <input type="text" class="form-control" id="debit_note_number" name="debit_note_number">
-                                                <p class="error debit_note_number_error"></p>
+                                                </select>
+                                                <!-- <input type="text" class="form-control" id="debit_note_number" name="debit_note_number">
+                                                <p class="error debit_note_number_error"></p> -->
                                         </div>
                                     </div>
 
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="debit_note_date">Debit Note Date</label>
-                                            <input type="text" class="form-control datepicker" id="debit_note_date" name="debit_note_date">
+                                            <input type="text" class="form-control datepicker" id="debit_note_date" name="debit_note_date" readonly>
                                             <p class="error debit_note_date_error"></p>
                                         </div>
                                     </div>
@@ -518,7 +518,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="receivable_amt_debit">Receivable Amt (Debit Note)</label>
-                                            <input type="text" class="form-control"  id="receivable_amt_debit" name="receivable_amt_debit">
+                                            <input type="text" class="form-control"  id="receivable_amt_debit" name="receivable_amt_debit" readonly>
                                             <p class="error receivable_amt_debit_error"></p>
                                         </div>
                                     </div>
@@ -526,7 +526,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="difference_debit_note_amt">Difference / Debit Note Amt</label>
-                                            <input type="text" class="form-control" id="difference_debit_note_amt" name="difference_debit_note_amt">
+                                            <input type="text" class="form-control" id="difference_debit_note_amt" name="difference_debit_note_amt" readonly>
                                             <p class="error difference_debit_note_amt_error"></p>
                                         </div>
                                     </div>
@@ -534,7 +534,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="debit_amount_reason">Debit Amount Reason</label>
-                                            <input type="text" class="form-control" id="debit_amount_reason" name="debit_amount_reason">
+                                            <input type="text" class="form-control" id="debit_amount_reason" name="debit_amount_reason" readonly>
                                             <p class="error debit_amount_reason_error"></p>
                                         </div>
                                     </div>

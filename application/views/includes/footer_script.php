@@ -20018,41 +20018,44 @@
 				 return false;
 	    });
 
-		// $(document).on('change','#debit_note_number',function(e){  
-		// 	e.preventDefault();
-		// 	var debit_note_number = $('#debit_note_number').val();
-        //     $.ajax({
-		// 		url : "<?php echo ADMIN_PATH;?>getdebitnotedetailsbydebitenoteeid",
-		// 		type: "POST",
-		// 		data : {'debit_note_number' : debit_note_number},
-		// 			success: function(data, textStatus, jqXHR)
-		// 			{
-		// 			    var get_buyerdata = jQuery.parseJSON( data );
+		$(document).on('change','#debit_note_number',function(e){  
+			e.preventDefault();
+			var debit_note_number = $('#debit_note_number').val();
+            $.ajax({
+				url : "<?php echo ADMIN_PATH;?>getdebitnotedetailsbydebitenoteeid",
+				type: "POST",
+				data : {'debit_note_number' : debit_note_number},
+					success: function(data, textStatus, jqXHR)
+					{
+					    var get_buyerdata = jQuery.parseJSON( data );
 
-		// 				$(".loader_ajax").hide();
-		// 					if(data == "failure")
-		// 						{
-		// 								$('#debit_note_date').val('');
-		// 								$('#difference_debit_note_amt').val('');
-		// 								$('#debit_amount_reason').val('');	
-		// 						}
-		// 						else
-		// 							{
-		// 								$('#debit_note_date').val(get_buyerdata.debit_note_date);
-		// 								$('#difference_debit_note_amt').val('');	
-		// 								$('#debit_amount_reason').val('');	
+						$(".loader_ajax").hide();
+							if(data == "failure")
+								{
+										$('#debit_note_date').val('');
+										$('#difference_debit_note_amt').val('');
+										$('#receivable_amt_debit').val('');	
+										$('#debit_amount_reason').val('');	
+										
+								}
+								else
+									{
+										$('#debit_note_date').val(get_buyerdata.cha_debit_note_date);
+										$('#receivable_amt_debit').val(get_buyerdata.bill_amount);	
+										$('#difference_debit_note_amt').val(get_buyerdata.debit_amount);	
+										$('#debit_amount_reason').val(get_buyerdata.subject);	
 											
-		// 							}
-		// 						    },
-		// 							error: function (jqXHR, textStatus, errorThrown)
-		// 								{
-		// 								  $('#debit_note_date').val('');
-		// 								  $('#difference_debit_note_amt').val('');	
-		// 								  $('#debit_amount_reason').val('');
-		// 								}
-		// 							});
-		// 		 return false;
-	    // });
+									}
+								    },
+									error: function (jqXHR, textStatus, errorThrown)
+										{
+										  $('#debit_note_date').val('');
+										  $('#difference_debit_note_amt').val('');	
+										  $('#debit_amount_reason').val('');
+										}
+									});
+				 return false;
+	    });
 
 		$(document).on('change', '#inv_amount,#brc_value', function(){	
 				

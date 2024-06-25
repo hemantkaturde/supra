@@ -490,18 +490,18 @@
                                 </div>
                                 
                                 <div class="row">
-                                   <div class="col-md-3">
+                                <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="debit_note_number">Debit Note Number</label>
-                                                <!-- <select class="form-control" name="debit_note_number" id="debit_note_number">
+                                                <select class="form-control" name="debit_note_number" id="debit_note_number">
                                                             <option st-id="" value="">Select Part Number</option>
-                                                                <?php foreach ($getdebitenotenumber as $key => $value) {?>
-                                                            <option value="<?php echo $value['debit_id']; ?>"><?php echo $value['debit_note_number']; ?></option>
+                                                                <?php foreach ($getchadebitenotenumber as $key => $value) {?>
+                                                            <option value="<?php echo $value['id']; ?>" <?php if($getsalestrackingdetailsforedit['debit_note_number']==$value['id']){ echo 'selected';} ?> ><?php echo $value['cha_debit_number']; ?></option>
                                                         <?php } ?>
                                                     <p class="error debit_note_number_error"></p>
-                                                </select> -->
-                                                <input type="text" class="form-control" id="debit_note_number" value="<?=$getsalestrackingdetailsforedit['debit_note_number']?>"  name="debit_note_number">
-                                                <p class="error debit_note_number_error"></p>
+                                                </select>
+                                                <!-- <input type="text" class="form-control" id="debit_note_number" name="debit_note_number">
+                                                <p class="error debit_note_number_error"></p> -->
                                         </div>
                                     </div>
 

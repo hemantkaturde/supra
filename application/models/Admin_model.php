@@ -12205,6 +12205,15 @@ public function getdebitenotenumber(){
 
 }
 
+public function getchadebitenotenumber(){
+    $this->db->select('*');
+    $this->db->where(TBL_CHA_DEBIT_NOTE.'.status', 1);
+    $query = $this->db->get(TBL_CHA_DEBIT_NOTE);
+    $data = $query->result_array();
+    return $data;
+
+}
+
 
 public function getcreditnotedetailsbycreditnoteid($credit_note_number){
 
@@ -12227,8 +12236,8 @@ public function getdebitnotedetailsbydebitenoteeid($debit_note_number){
     // $this->db->join(TBL_PACKING_INSTRACTION, TBL_PACKING_INSTRACTION.'.id = '.TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id');
     // $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_PACKING_INSTRACTION.'.buyer_name');
     // $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_PACKING_INSTRACTION.'.buyer_po_number');
-    $this->db->where(TBL_DEBIT_NOTE.'.debit_id', $debit_note_number);
-    $query = $this->db->get(TBL_DEBIT_NOTE);
+    $this->db->where(TBL_CHA_DEBIT_NOTE.'.id', $debit_note_number);
+    $query = $this->db->get(TBL_CHA_DEBIT_NOTE);
     $data = $query->result_array();
     return $data;
 }

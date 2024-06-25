@@ -29,7 +29,7 @@
                            <div class="row" style="background: #fff;margin-right: 1px;margin-left: 1px;margin-bottom: 12px;margin-top: 10px;">
                                 <div class="col-xs-3 text-left" style="margin-top: 10px;">
                                     <div class="form-group">
-                                        <label for="sales_tracking_report_name">Sales Tracking Report Name</label>
+                                        <label for="sales_tracking_report_name">Sales Tracking Report Name <span class="required">*</span></label>
                                             <select class="form-control" name="sales_tracking_report_name" id="sales_tracking_report_name">
                                                     <option value="">Select Sales Tracking Report</option>
                                                     <option value="foreign_bank_charges">FOREIGN BANK CHARGES</option>
