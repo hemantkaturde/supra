@@ -11046,7 +11046,6 @@ public function getpreexportdata($params){
             $data[$counter]['total_no_of_carttons'] =  $total_no_of_carttons;
             $data[$counter]['total_no_of_pallets'] =  $value['total_no_of_pallets'];
 
-
             $data[$counter]['remark'] =$value['mode_of_shipment'];
             $data[$counter]['action'] ='';
             $data[$counter]['action'] .= "<a href='".ADMIN_PATH."exportdetailsitemdetails/".$value['export_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>   &nbsp ";
@@ -12367,7 +12366,7 @@ public function getcompalinformdetailsforInvoice($id){
 public function getpreexportdetailsforInvoice($id){
 
     $this->db->select('*');
-    $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_PREEXPORT.'.buyer_po');
+    // $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_PREEXPORT.'.buyer_po');
     $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id  = '.TBL_PREEXPORT.'.buyer_name');
     $this->db->where(TBL_PREEXPORT.'.id', $id);
     $query = $this->db->get(TBL_PREEXPORT);
@@ -12378,9 +12377,10 @@ public function getpreexportdetailsforInvoice($id){
 
 public function getpreexportdetailsitemsforInvoice($id){
 
-    $this->db->select('*,'.TBL_PREEXPORT_ITEM_DETAILS.'.remark as item_remark,'.TBL_PREEXPORT_ITEM_DETAILS.'.pre_export_id,'.TBL_PREEXPORT_ITEM_DETAILS.'.id as itemidwwww');
+    $this->db->select('*,'.TBL_PREEXPORT_ITEM_DETAILS.'.remark as item_remark,'.TBL_PREEXPORT_ITEM_DETAILS.'.pre_export_id,'.TBL_PREEXPORT_ITEM_DETAILS.'.id as itemidwwww,'.TBL_BUYER_PO_MASTER.'.sales_order_number as po_number');
     $this->db->join(TBL_PREEXPORT, TBL_PREEXPORT.'.id = '.TBL_PREEXPORT_ITEM_DETAILS.'.pre_export_id');
     $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_PREEXPORT_ITEM_DETAILS.'.part_number');
+    $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_PREEXPORT_ITEM_DETAILS.'.buyer_po_number_id');
     $this->db->where(TBL_PREEXPORT_ITEM_DETAILS.'.pre_export_id', $id);
     $query = $this->db->get(TBL_PREEXPORT_ITEM_DETAILS);
     $row_data = $query->result_array();

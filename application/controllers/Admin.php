@@ -16157,6 +16157,7 @@ public function downloadpreexportform($id){
     
 
         foreach ($getpreexportdetailsitemsAttributeforInvoice as $key => $value1) {
+
             $CartItemattribute .= '
                     <tr style=" border-bottom: 1px solid #000;">
                         <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top">'.$value1['gross_per_box_weight'].' kgs</br></td>   
@@ -16165,7 +16166,7 @@ public function downloadpreexportform($id){
                         <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top">'.$value1['total_qty'].' pcs</td> 
                         <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top" >'.$value1['tg'].' kgs</td>   
                         <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top" >'.$value1['attribute_remark'].'</td>    
-                        <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top" ></td>     
+                        <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top" >'.$value1['total_net_weight_item'].'</td>     
                     </tr>';  
                     
                     $gross_per_box_weight += $value1['gross_per_box_weight'];
@@ -16175,13 +16176,19 @@ public function downloadpreexportform($id){
 
                     $total_gross_weight += $value1['tg'];
 
-                    $total_net_weight += $value1['total_net_weight_item'];
+                    if($value1['total_net_weight_item']){
+                        $total_net_weight += $value1['total_net_weight_item'];
+                    }else{
+                        $total_net_weight += 0;
+                    }
+
+                    
         }
     
 
            $CartItem .= '<div>
                         <p><b>'.$i.') '.$value['name'].'</b></p>
-                        <p>'.$value['part_number'].' </p>
+                        <p><b>Part Number : </b>'.$value['part_number'].str_repeat('&nbsp;',70).' <b>PO Number: '.$value['po_number'].'</b></p>
                         <p>'.$value['item_remark'].'</p>
                     </div>
                     <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:12px;border: 1px solid black;">
