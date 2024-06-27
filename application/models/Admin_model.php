@@ -9974,40 +9974,13 @@ class Admin_model extends CI_Model
 
 
     public function fetchbuyerpodetailsreportData($params,$buyer_name,$part_number,$from_date,$to_date){
-        // $this->db->select(TBL_BUYER_PO_MASTER.'.buyer_po_date,'.TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_BUYER_MASTER.'.buyer_name,'.TBL_BUYER_PO_MASTER.'.buyer_po_number,'.TBL_BUYER_PO_MASTER.'.date,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name,'.TBL_BUYER_PO_MASTER_ITEM.'.order_oty,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date,'.TBL_BUYER_PO_MASTER.'.id as buyer_po_idpo,'.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id as part_number_id_buyer_Po,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_number');
-        // $this->db->join(TBL_PACKING_INSTRACTION_DETAILS, TBL_BUYER_PO_MASTER_ITEM.'.part_number_id = '.TBL_PACKING_INSTRACTION_DETAILS.'.part_number','left');
-        // $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id');
-        // $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
-        // $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_BUYER_PO_MASTER.'.buyer_name_id');
-        // $this->db->join(TBL_PACKING_INSTRACTION, TBL_PACKING_INSTRACTION.'.id = '.TBL_BUYER_PO_MASTER.'.packing_instract_id');
-        // $this->db->join(TBL_PACKING_INSTRACTION, TBL_PACKING_INSTRACTION.'.id = '.TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id');
-        // $this->db->join(TBL_PACKING_INSTRACTION.' as a', 'a.buyer_po_number = '.TBL_BUYER_PO_MASTER.'.id','left');
-
-        $this->db->select('*,'.TBL_BUYER_MASTER.'.buyer_name');
+       
+        $this->db->select('*');
         $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id');
-        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_BUYER_PO_MASTER.'.buyer_name_id');
         $this->db->join(TBL_PACKING_INSTRACTION_DETAILS, TBL_BUYER_PO_MASTER_ITEM.'.part_number_id = '.TBL_PACKING_INSTRACTION_DETAILS.'.part_number','left');
+        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_BUYER_PO_MASTER.'.buyer_name_id');  
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
-        $this->db->join(TBL_PACKING_INSTRACTION, TBL_PACKING_INSTRACTION.'.id = '.TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id');
-        $this->db->join(TBL_PACKING_INSTRACTION.' as a', 'a.buyer_po_number = '.TBL_BUYER_PO_MASTER.'.id');
-
-
-
-        if($params['search']['value'] != "") 
-        {
-            $this->db->where("(".TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_BUYER_PO_MASTER.".buyer_po_number LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_BUYER_PO_MASTER.".buyer_po_date LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_BUYER_PO_MASTER.".delivery_date LIKE '%".$params['search']['value']."%'");
-            // $this->db->or_where(TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_qty LIKE '%".$params['search']['value']."%'");
-            // $this->db->or_where(TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_number LIKE '%".$params['search']['value']."%'");
-            // $this->db->or_where(TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_date LIKE '%".$params['search']['value']."%'");
-            // $this->db->or_where(TBL_PACKING_INSTRACTION_DETAILS.".remark LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_FINISHED_GOODS.".name LIKE '%".$params['search']['value']."%')");
-        }
-
+    
 
         if($buyer_name!='NA'){
             $this->db->where(TBL_BUYER_PO_MASTER.'.buyer_name_id', $buyer_name);
