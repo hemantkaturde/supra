@@ -32,6 +32,7 @@
                                         <th>PO Number</th>
                                         <th>Date</th>
                                         <th>Vendor Name</th>
+                                        <th>Vendor PO</th>
                                         <th>Buyer Name</th>
                                         <th>PO Confirmed </th>
                                         <th>PO Confirmed Date</th>
