@@ -10024,7 +10024,7 @@ class Admin_model extends CI_Model
         }
 
        // $this->db->group_by(array(TBL_PACKING_INSTRACTION_DETAILS.'.buyer_item_delivery_date',TBL_BUYER_PO_MASTER_ITEM.'.part_number_id',TBL_BUYER_PO_MASTER.'.sales_order_number'));        
-        //$this->db->group_by(TBL_PACKING_INSTRACTION_DETAILS.'.id');
+        $this->db->group_by(TBL_BUYER_PO_MASTER.'.buyer_po_number');
         $this->db->order_by(TBL_BUYER_PO_MASTER_ITEM.'.id','DESC');
 
         $this->db->limit($params['length'],$params['start']);
