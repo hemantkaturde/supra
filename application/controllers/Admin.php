@@ -15383,7 +15383,7 @@ public function downloadomsblasting($id){
             ';
 
             // <p>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</p>
-    $invoice_name =  $getblastingdetailsforinvoice['blasting_id'].'-A-'.$getblastingdetailsforinvoice['vendor_name'].'.pdf';
+    $invoice_name =  $getblastingdetailsforinvoice['blasting_id'].' A-'.$getblastingdetailsforinvoice['vendor_name'].'.pdf';
     $mpdf->WriteHTML($html);
     $mpdf->Output($invoice_name,'D'); // opens in browser
 
@@ -15633,7 +15633,7 @@ public function downloadomsmachinary($id){
             ';
 
             // <p>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</p>
-    $invoice_name =  $getblastingdetailsforinvoice['blasting_id'].'-B-'.$getblastingdetailsforinvoice['vendor_name'].'.pdf';
+    $invoice_name =  $getblastingdetailsforinvoice['blasting_id'].' B-'.$getblastingdetailsforinvoice['vendor_name'].'.pdf';
     $mpdf->WriteHTML($html);
     $mpdf->Output($invoice_name,'D'); // opens in browser
 
