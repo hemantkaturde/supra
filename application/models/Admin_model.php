@@ -1869,7 +1869,7 @@ class Admin_model extends CI_Model
     
     public function getSupplierpoconfirmationdata($params){
 
-        $this->db->select('*,'.TBL_SUPPLIER.'.supplier_name as sup_name,'.TBL_BUYER_MASTER.'.buyer_name as bu_name,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supllier_po_number');
+        $this->db->select('*,'.TBL_SUPPLIER.'.supplier_name as sup_name,'.TBL_BUYER_MASTER.'.buyer_name as bu_name,'.TBL_SUPPLIER_PO_MASTER.'.po_number as suppomaster,'.TBL_SUPPLIER_PO_CONFIRMATION.'.po_number as supplierconfirmpo,'.TBL_SUPPLIER_PO_CONFIRMATION.'.id as supplierconfimid');
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id  = '.TBL_SUPPLIER_PO_CONFIRMATION.'.buyer_po_id');
         $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id  = '.TBL_SUPPLIER_PO_CONFIRMATION.'.supplier_po_id');
         $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_SUPPLIER_PO_CONFIRMATION.'.supplier_po_number');
@@ -1897,19 +1897,19 @@ class Admin_model extends CI_Model
         {
             foreach ($fetch_result as $key => $value)
             {
-                $data[$counter]['po_number'] = $value['po_number'];
+                $data[$counter]['po_number'] = $value['supplierconfirmpo'];
                 $data[$counter]['date'] = $value['date'];
                 $data[$counter]['sup_name'] = $value['sup_name'];
-                $data[$counter]['sup_po'] = $value['supllier_po_number'];
+                $data[$counter]['sup_po'] = $value['suppomaster'];
                 $data[$counter]['buyer_name'] = $value['bu_name'];
                 $data[$counter]['po_confirmed'] = $value['po_confirmed'];
                 $data[$counter]['confirmed_date'] = $value['confirmed_date'];
                 $data[$counter]['confirmed_with'] = $value['confirmed_with'];
                 $data[$counter]['action'] = '';
                // $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewSupplierpoconfirmation/".$value['id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editSupplierpoconfirmation/".$value['id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editSupplierpoconfirmation/".$value['supplierconfimid']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
 
-                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['id']."' class='fa fa-trash-o deleteSupplierPoconfirmation' aria-hidden='true'></i>"; 
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['supplierconfimid']."' class='fa fa-trash-o deleteSupplierPoconfirmation' aria-hidden='true'></i>"; 
                 $counter++; 
             }
         }
