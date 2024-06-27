@@ -10152,7 +10152,7 @@ class Admin_model extends CI_Model
         }
 
         //$this->db->order_by(TBL_BUYER_PO_MASTER.'.id','DESC');
-        $this->db->group_by(TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
+       // $this->db->group_by(TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
         $query = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
         $fetch_result = $query->result_array();
 
@@ -10185,7 +10185,70 @@ class Admin_model extends CI_Model
 
         }
 
-         $data[] = array('total_order_aty'=>$total_order_aty,'export_qty'=>$export_qty);
+
+
+        $this->db->select(TBL_BUYER_PO_MASTER_ITEM.'.order_oty as total_order_aty,'.TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_BUYER_MASTER.'.buyer_name,'.TBL_BUYER_PO_MASTER.'.buyer_po_number,'.TBL_BUYER_PO_MASTER.'.date,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name,'.TBL_BUYER_PO_MASTER_ITEM.'.order_oty,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date,'.TBL_BUYER_PO_MASTER.'.id as buyer_po_idpo,'.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id as part_id');
+        // $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id');
+        // $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
+        // $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_BUYER_PO_MASTER.'.buyer_name_id');
+        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
+        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_BUYER_PO_MASTER.'.buyer_name_id');
+
+        if($buyer_name!='NA'){
+            $this->db->where(TBL_BUYER_PO_MASTER.'.buyer_name_id', $buyer_name);
+        }
+
+        if($part_number!='NA'){
+            $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.part_number_id', $part_number);
+        }
+
+
+        if($from_date!='NA'){
+            $fromdate = $from_date;
+            $this->db->where(TBL_BUYER_PO_MASTER.'.buyer_po_date >=', $fromdate);
+        }
+
+        if($to_date!='NA'){
+            $todate = $to_date;
+            $this->db->where(TBL_BUYER_PO_MASTER.'.buyer_po_date <=', $todate);
+        }
+
+        //$this->db->order_by(TBL_BUYER_PO_MASTER.'.id','DESC');
+       // $this->db->group_by(TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
+        $query = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
+        $fetch_result_1 = $query->result_array();
+
+    
+        $data = array();
+        $total_order_aty_1=0;
+        $counter = 0;
+        if(count($fetch_result_1) > 0)
+        {
+            foreach ($fetch_result_1 as $key => $value)
+            {
+
+                
+                if(trim($value['buyer_po_part_delivery_date'])=='0000-00-00'){
+
+                    $buyer_po_part_delivery_date = '';
+                }else{
+                    $buyer_po_part_delivery_date = $value['buyer_po_part_delivery_date'];
+                }
+
+            
+                $get_export_invoice_details =$this->getexportinvoicedetails($value['buyer_po_idpo'],$value['part_id'],$buyer_po_part_delivery_date,$value['buyer_invoice_number']);
+                //$get_export_invoice_details =$this->getexportinvoicedetails($value['buyer_po_idpo'],$value['part_number_id_buyer_Po'],$buyer_po_part_delivery_date,$value['buyer_invoice_number']);
+
+                $total_order_aty_1 = $total_order_aty + $value['total_order_aty'];
+                $counter++;
+            }
+
+        }
+
+
+
+         $data[] = array('total_order_aty'=>$total_order_aty_1,'export_qty'=>$export_qty);
          return $data;
 
         
