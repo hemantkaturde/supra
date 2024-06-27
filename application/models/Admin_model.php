@@ -10152,7 +10152,7 @@ class Admin_model extends CI_Model
         }
 
         //$this->db->order_by(TBL_BUYER_PO_MASTER.'.id','DESC');
-       // $this->db->group_by(TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
+        $this->db->group_by(TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
         $query = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
         $fetch_result = $query->result_array();
 
@@ -10178,7 +10178,7 @@ class Admin_model extends CI_Model
                 $get_export_invoice_details =$this->getexportinvoicedetails($value['buyer_po_idpo'],$value['part_id'],$buyer_po_part_delivery_date,$value['buyer_invoice_number']);
                 //$get_export_invoice_details =$this->getexportinvoicedetails($value['buyer_po_idpo'],$value['part_number_id_buyer_Po'],$buyer_po_part_delivery_date,$value['buyer_invoice_number']);
 
-                $total_order_aty = $value['total_order_aty'];
+                $total_order_aty = $total_order_aty + $value['total_order_aty'];
                 $export_qty = $export_qty + $get_export_invoice_details[0]['buyer_invoice_qty'];
                 $counter++;
             }
