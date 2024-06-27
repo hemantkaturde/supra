@@ -19117,8 +19117,11 @@
 						else
 						{
 							var data_part_details = jQuery.parseJSON( data );
+
+							var buyer_po_number_with_original_po = data_part_details.sales_order_number +'-'+ data_part_details.buyer_po_number
+
 							$('#part_description').val(data_part_details.name);
-							$('#buyer_po_number').val(data_part_details.sales_order_number);
+							$('#buyer_po_number').val(buyer_po_number_with_original_po);
 							$('#buyer_po_number_id').val(data_part_details.buyer_po_number_id);
 
 						}
@@ -19161,8 +19164,10 @@
 						else
 						{
 							var data_part_details = jQuery.parseJSON( data );
+							var buyer_po_number_with_original_po = data_part_details.sales_order_number +'-'+ data_part_details.buyer_po_number
+
 							$('#part_description').val(data_part_details.name);
-							$('#buyer_po_number').val(data_part_details.sales_order_number);
+							$('#buyer_po_number').val(buyer_po_number_with_original_po);
 							$('#buyer_po_number_id').val(data_part_details.buyer_po_number_id);
 
 						}

@@ -11132,8 +11132,9 @@ public function getbuyerpodetailsforexportdetails($id){
 
 public function getbuyerpoitemdetails($po_id){
 
-    $this->db->select(TBL_FINISHED_GOODS.'.fin_id,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name');
+    $this->db->select(TBL_FINISHED_GOODS.'.fin_id,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name,'.TBL_BUYER_PO_MASTER.'.buyer_po_number');
     $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
+    $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id');
     $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.pre_buyer_name',$po_id);
     $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.packaging_instraction','Open');
     $query = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
@@ -11236,7 +11237,7 @@ public function getpreexportitemdetailsdata($params,$id){
 public function get_preexport_item_details($part_number,$main_expot_id,$buyer_po_id,$buyer_name_id){
 
 
-    $this->db->select(TBL_FINISHED_GOODS.'.fin_id,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name,'.TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_BUYER_PO_MASTER.'.id as buyer_po_number_id');
+    $this->db->select(TBL_FINISHED_GOODS.'.fin_id,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name,'.TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_BUYER_PO_MASTER.'.id as buyer_po_number_id,'.TBL_BUYER_PO_MASTER.'.buyer_po_number');
     $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
     $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id');
     $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.pre_buyer_name',$buyer_name_id);

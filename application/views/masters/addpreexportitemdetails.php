@@ -43,7 +43,7 @@
                                                 <select class="form-control part_number" name="part_number" id="part_number">
                                                     <option st-id="" value="">Select Part Number</option>
                                                     <?php foreach ($getbuyerpoitemdetails as $key => $value) {?>
-                                                    <option value="<?php echo $value['fin_id']; ?>"><?php echo $value['part_number']; ?></option>
+                                                    <option value="<?php echo $value['fin_id']; ?>"><?php echo $value['part_number'].' - '.$value['buyer_po_number']; ?> </option>
                                                     <?php } ?>
                                                 </select>
                                             <p class="error part_number_error"></p>
