@@ -9966,7 +9966,7 @@ class Admin_model extends CI_Model
             $todate = $to_date;
             $this->db->where(TBL_BUYER_PO_MASTER.'.date <=', $todate);
         }
-        $this->db->group_by(array(TBL_BUYER_PO_MASTER.'.buyer_po_part_delivery_date',TBL_BUYER_PO_MASTER.'.sales_order_number'));        
+        $this->db->group_by(array(TBL_PACKING_INSTRACTION_DETAILS.'.buyer_po_part_delivery_date',TBL_BUYER_PO_MASTER.'.sales_order_number'));        
 
         $query = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
         $rowcount = $query->num_rows();
@@ -10020,7 +10020,7 @@ class Admin_model extends CI_Model
             $this->db->where(TBL_BUYER_PO_MASTER.'.date <=', $todate);
         }
 
-        $this->db->group_by(array(TBL_BUYER_PO_MASTER.'.buyer_po_part_delivery_date',TBL_BUYER_PO_MASTER.'.sales_order_number'));        
+        $this->db->group_by(array(TBL_PACKING_INSTRACTION_DETAILS.'.buyer_po_part_delivery_date',TBL_BUYER_PO_MASTER.'.sales_order_number'));        
         //$this->db->group_by(TBL_BUYER_PO_MASTER.'.buyer_po_part_delivery_date');
         $this->db->order_by(TBL_BUYER_PO_MASTER_ITEM.'.id','DESC');
 
