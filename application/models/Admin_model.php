@@ -9966,7 +9966,7 @@ class Admin_model extends CI_Model
             $todate = $to_date;
             $this->db->where(TBL_BUYER_PO_MASTER.'.date <=', $todate);
         }
-
+        $this->db->group_by(TBL_BUYER_PO_MASTER_ITEM.'.id');
         $query = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
         $rowcount = $query->num_rows();
         return $rowcount;
@@ -10019,7 +10019,7 @@ class Admin_model extends CI_Model
             $this->db->where(TBL_BUYER_PO_MASTER.'.date <=', $todate);
         }
 
-        //$this->db->group_by(array(TBL_BUYER_PO_MASTER_ITEM.'.id'));
+        $this->db->group_by(TBL_BUYER_PO_MASTER_ITEM.'.id');
         $this->db->order_by(TBL_BUYER_PO_MASTER_ITEM.'.id','DESC');
         //$this->db->group_by(TBL_BUYER_PO_MASTER.'.sales_order_number,');
 
