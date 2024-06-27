@@ -2469,7 +2469,7 @@ class Admin_model extends CI_Model
             $this->db->where(TBL_FINISHED_GOODS.'.status',1);
             $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id',$vendor_po_number);
             $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.id',$poitemid);
-            $this->db->where(TBL_FINISHED_GOODS.'.raw_id',$part_number);
+            $this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
             $query = $this->db->get(TBL_FINISHED_GOODS);
             $data = $query->result_array();
             return $data;
