@@ -111,7 +111,7 @@
                                             <th>Vendor Delivery Date</th>
                                             <th>Buyer Name</th>
                                             <th>Status</th>
-                                            <th>Form Name</th>
+                                            <th>Notes</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
