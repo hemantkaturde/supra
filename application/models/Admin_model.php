@@ -10224,7 +10224,7 @@ class Admin_model extends CI_Model
         {
             foreach ($fetch_result_1 as $key => $value)
             {
-                $total_order_aty_1 = $total_order_aty + $value['total_order_aty'];
+                $total_order_aty_1 = $total_order_aty_1 + $value['total_order_aty'];
                 $counter_1++;
             }
 
