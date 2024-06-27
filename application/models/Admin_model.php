@@ -9983,27 +9983,30 @@ class Admin_model extends CI_Model
         // $this->db->join(TBL_PACKING_INSTRACTION, TBL_PACKING_INSTRACTION.'.id = '.TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id');
         // $this->db->join(TBL_PACKING_INSTRACTION.' as a', 'a.buyer_po_number = '.TBL_BUYER_PO_MASTER.'.id','left');
 
-        $this->db->select('*');
+        $this->db->select('*,'.TBL_BUYER_MASTER.'.buyer_name');
         $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id');
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_BUYER_PO_MASTER.'.buyer_name_id');
         $this->db->join(TBL_PACKING_INSTRACTION_DETAILS, TBL_BUYER_PO_MASTER_ITEM.'.part_number_id = '.TBL_PACKING_INSTRACTION_DETAILS.'.part_number','left');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
+        $this->db->join(TBL_PACKING_INSTRACTION, TBL_PACKING_INSTRACTION.'.id = '.TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id');
+        $this->db->join(TBL_PACKING_INSTRACTION.' as a', 'a.buyer_po_number = '.TBL_BUYER_PO_MASTER.'.id');
 
 
-        // if($params['search']['value'] != "") 
-        // {
-        //     $this->db->where("(".TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_BUYER_PO_MASTER.".buyer_po_number LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_BUYER_PO_MASTER.".buyer_po_date LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_BUYER_PO_MASTER.".delivery_date LIKE '%".$params['search']['value']."%'");
-        //     // $this->db->or_where(TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_qty LIKE '%".$params['search']['value']."%'");
-        //     // $this->db->or_where(TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_number LIKE '%".$params['search']['value']."%'");
-        //     // $this->db->or_where(TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_date LIKE '%".$params['search']['value']."%'");
-        //     // $this->db->or_where(TBL_PACKING_INSTRACTION_DETAILS.".remark LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_FINISHED_GOODS.".name LIKE '%".$params['search']['value']."%')");
-        // }
+
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_PO_MASTER.".buyer_po_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_PO_MASTER.".buyer_po_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_PO_MASTER.".delivery_date LIKE '%".$params['search']['value']."%'");
+            // $this->db->or_where(TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_qty LIKE '%".$params['search']['value']."%'");
+            // $this->db->or_where(TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_number LIKE '%".$params['search']['value']."%'");
+            // $this->db->or_where(TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_date LIKE '%".$params['search']['value']."%'");
+            // $this->db->or_where(TBL_PACKING_INSTRACTION_DETAILS.".remark LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FINISHED_GOODS.".name LIKE '%".$params['search']['value']."%')");
+        }
 
 
         if($buyer_name!='NA'){
@@ -10053,28 +10056,24 @@ class Admin_model extends CI_Model
                 $data[$counter]['order_qty'] =$value['order_oty'];;
                 $data[$counter]['buyer_po_part_delivery_date'] =$buyer_po_part_delivery_date;
 
-                // $get_export_invoice_details =$this->getexportinvoicedetails($value['buyer_po_idpo'],$value['part_number_id_buyer_Po'],$buyer_po_part_delivery_date,$value['buyer_invoice_number']);
-                // if($get_export_invoice_details){
-                //     $buyer_invoice_number = $get_export_invoice_details[0]['buyer_invoice_number'];
-                //     $buyer_invoice_qty = $get_export_invoice_details[0]['buyer_invoice_qty'];
-                //     $buyer_invoice_date = $get_export_invoice_details[0]['buyer_invoice_date'];
-                //     $remark = $get_export_invoice_details[0]['remark'];
-                // }else{
-                //     $buyer_invoice_number = '';
-                //     $buyer_invoice_qty = '';
-                //     $buyer_invoice_date = '';
-                //     $remark = '';
-                // }
+                $get_export_invoice_details =$this->getexportinvoicedetails($value['buyer_po_idpo'],$value['part_number_id_buyer_Po'],$buyer_po_part_delivery_date,$value['buyer_invoice_number']);
+                if($get_export_invoice_details){
+                    $buyer_invoice_number = $get_export_invoice_details[0]['buyer_invoice_number'];
+                    $buyer_invoice_qty = $get_export_invoice_details[0]['buyer_invoice_qty'];
+                    $buyer_invoice_date = $get_export_invoice_details[0]['buyer_invoice_date'];
+                    $remark = $get_export_invoice_details[0]['remark'];
+                }else{
+                    $buyer_invoice_number = '';
+                    $buyer_invoice_qty = '';
+                    $buyer_invoice_date = '';
+                    $remark = '';
+                }
 
-                // $data[$counter]['export_invoice_number'] = $buyer_invoice_number;
-                // $data[$counter]['buyer_invoice_qty'] =$buyer_invoice_qty;
-                // $data[$counter]['buyer_invoice_date'] =$buyer_invoice_date;
+                $data[$counter]['export_invoice_number'] = $buyer_invoice_number;
+                $data[$counter]['buyer_invoice_qty'] =$buyer_invoice_qty;
+                $data[$counter]['buyer_invoice_date'] =$buyer_invoice_date;
 
-                $data[$counter]['export_invoice_number'] = 0;
-                $data[$counter]['buyer_invoice_qty'] =0;
-                $data[$counter]['buyer_invoice_date'] =0;
-
-                $data[$counter]['remark'] =0;
+                $data[$counter]['remark'] =$remark;
                 $counter++; 
             }
         }
