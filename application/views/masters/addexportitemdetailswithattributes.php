@@ -9,7 +9,7 @@
         <h4>
             <p><b>Pre Export Invoice Number :</b> <?=$getexportetails[0]['pre_export_invoice_no'] ?></p>
             <p><b>Pre Export Buyer Name :</b> <?=$getexportetails[0]['buyer_name'] ?></p>
-            <p><b>Pre Export Buyer PO Number :</b> <?=$getexportetails[0]['sales_order_number'] ?></p>
+            <p><b>Pre Export Buyer PO Number :</b> <?=$getexportetails[0]['sales_order_number'].' - '.$getexportetails[0]['buyer_po_number'] ?></p>
             <p><b>Part Number :</b> <?=$getexportetails[0]['part_number'] ?></p>
             <input type="hidden" class="main_export_id" id="main_export_id" value=<?=$main_export_id?> name="main_export_id">
             <input type="hidden" class="preexportitemdetailsid" id="preexportitemdetailsid" value="<?=$preexportitemdetailsid?>" name="preexportitemdetailsid">

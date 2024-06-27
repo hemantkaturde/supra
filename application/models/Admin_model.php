@@ -11290,7 +11290,7 @@ public function getbuyerpodetailsforexportdetailsedititemdetails($id){
     $this->db->select('*,'.TBL_PREEXPORT_ITEM_DETAILS.'.remark as preexportremark,'.TBL_PREEXPORT.'.id as export_id,'.TBL_PREEXPORT_ITEM_DETAILS.'.part_number as part_number_id,'.TBL_BUYER_MASTER.'.buyer_id');
     $this->db->join(TBL_PREEXPORT, TBL_PREEXPORT.'.id = '.TBL_PREEXPORT_ITEM_DETAILS.'.pre_export_id');
     $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_PREEXPORT_ITEM_DETAILS.'.part_number');
-    // $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_PREEXPORT.'.buyer_po');
+    $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_PREEXPORT_ITEM_DETAILS.'.buyer_po_number_id');
     $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_PREEXPORT.'.buyer_name');
     $this->db->where(TBL_PREEXPORT_ITEM_DETAILS.'.status', 1);
     $this->db->where(TBL_PREEXPORT_ITEM_DETAILS.'.id',$id);
