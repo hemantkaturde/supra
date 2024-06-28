@@ -6695,6 +6695,10 @@
 			var elemF = $(this);
 			e.preventDefault();
 
+
+			var bom_id_edit =  $('#bom_id_edit').val();
+
+
 			swal({
 				title: "Are you sure?",
 				text: "Delete Bill of Material Item ",
@@ -6723,7 +6727,13 @@
 											icon: "success",
 											button: "Ok",
 											},function(){ 
-												window.location.href = "<?php echo base_url().'addnewBillofmaterial'?>";
+
+												if(bom_id_edit){
+													window.location.href = "<?php echo base_url().'editbillofmaterial'?>"+bom_id_edit;
+												}else{
+													window.location.href = "<?php echo base_url().'addnewBillofmaterial'?>";
+												}
+												
 										
 										});	
 									}
