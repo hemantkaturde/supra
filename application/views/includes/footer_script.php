@@ -12655,10 +12655,13 @@
 			e.preventDefault();
 			var elemF = $(this);
 			var item_id = elemF.attr('data-id');
+			var vendor_supplier_name = $('#vendor_supplier_name').val();
+
+		
 			$.ajax({
 				url : "<?php echo base_url();?>geteditDebitnoteitemedit",
 				type: "POST",
-				data : 'id='+item_id,
+				data : 'id='+item_id+'&vendor_supplier_name='+vendor_supplier_name,
 				success: function(data, textStatus, jqXHR)
 				{
 					    var fetchResponse = $.parseJSON(data);

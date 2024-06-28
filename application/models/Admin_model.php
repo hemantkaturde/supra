@@ -8681,54 +8681,10 @@ class Admin_model extends CI_Model
   }
 
 
-  public function geteditDebitnoteitemedit($id){
+  public function geteditDebitnoteitemedit($id,$vendor_supplier_name){
 
-    $this->db->select(
-         TBL_DEBIT_NOTE_ITEM.'.id  as debit_note_item_id,'
-        .TBL_RAWMATERIAL.'.raw_id,'
-        .TBL_RAWMATERIAL.'.part_number,'
-        .TBL_RAWMATERIAL.'.type_of_raw_material as description,'
-        .TBL_DEBIT_NOTE_ITEM.'.invoice_no as invoice_no,'
-        .TBL_DEBIT_NOTE_ITEM.'.invoice_date as invoice_date,'
-        .TBL_DEBIT_NOTE_ITEM.'.invoice_qty as invoice_qty,'
-        .TBL_DEBIT_NOTE_ITEM.'.ok_qty as ok_qty,'
-        .TBL_DEBIT_NOTE_ITEM.'.less_quantity as less_quantity,'
-        .TBL_DEBIT_NOTE_ITEM.'.rejected_quantity as rejected_quantity,'
-        .TBL_DEBIT_NOTE_ITEM.'.received_quantity as received_quantity,'
-        .TBL_DEBIT_NOTE_ITEM.'.p_and_f_charges as p_and_f_charges,'
-        .TBL_DEBIT_NOTE_ITEM.'.rate as rate,'
-        .TBL_DEBIT_NOTE_ITEM.'.gst_rate as gst_rate,'
-        .TBL_DEBIT_NOTE_ITEM.'.debit_amount as debit_amount,'
-        .TBL_DEBIT_NOTE_ITEM.'.remark as remark,'
 
-        .TBL_DEBIT_NOTE_ITEM.'.SGST_value as SGST_value,'
-        .TBL_DEBIT_NOTE_ITEM.'.CGST_value as CGST_value,'
-        .TBL_DEBIT_NOTE_ITEM.'.IGST_value as IGST_value,'
-
-        .TBL_DEBIT_NOTE_ITEM.'.SGST_value_ok_val as SGST_value_ok_val,'
-        .TBL_DEBIT_NOTE_ITEM.'.CGST_value_ok_val as CGST_value_ok_val,'
-        .TBL_DEBIT_NOTE_ITEM.'.IGST_value_ok_val as IGST_value_ok_val,'
-
-        .TBL_DEBIT_NOTE_ITEM.'.total_qty_into_rate as total_qty_into_rate,'
-        .TBL_DEBIT_NOTE_ITEM.'.total_qty_normal_qty_plus_pnf as total_qty_normal_qty_plus_pnf,'
-        .TBL_DEBIT_NOTE_ITEM.'.total_normal_gst_value as total_normal_gst_value,'
-        .TBL_DEBIT_NOTE_ITEM.'.total_normal_gst_value_plus_total as total_normal_gst_value_plus_total,'
-
-        
-
-        
-    );
-    $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_DEBIT_NOTE_ITEM.'.part_number');
-    $this->db->where(TBL_DEBIT_NOTE_ITEM.'.id', $id);
-    $this->db->order_by(TBL_DEBIT_NOTE_ITEM.'.id','DESC');
-    $query = $this->db->get(TBL_DEBIT_NOTE_ITEM);
-    $fetch_result = $query->result_array();
-    // return $fetch_result;
-
-    if(count($fetch_result) > 0)
-    {
-      return $fetch_result;   
-    }else{
+    if($vendor_supplier_name=='vendor'){
 
         $this->db->select(
             TBL_DEBIT_NOTE_ITEM.'.id  as debit_note_item_id,'
@@ -8768,7 +8724,137 @@ class Admin_model extends CI_Model
 
        return $fetch_result_1;
 
+    }else{
+        $this->db->select(
+            TBL_DEBIT_NOTE_ITEM.'.id  as debit_note_item_id,'
+           .TBL_RAWMATERIAL.'.raw_id,'
+           .TBL_RAWMATERIAL.'.part_number,'
+           .TBL_RAWMATERIAL.'.type_of_raw_material as description,'
+           .TBL_DEBIT_NOTE_ITEM.'.invoice_no as invoice_no,'
+           .TBL_DEBIT_NOTE_ITEM.'.invoice_date as invoice_date,'
+           .TBL_DEBIT_NOTE_ITEM.'.invoice_qty as invoice_qty,'
+           .TBL_DEBIT_NOTE_ITEM.'.ok_qty as ok_qty,'
+           .TBL_DEBIT_NOTE_ITEM.'.less_quantity as less_quantity,'
+           .TBL_DEBIT_NOTE_ITEM.'.rejected_quantity as rejected_quantity,'
+           .TBL_DEBIT_NOTE_ITEM.'.received_quantity as received_quantity,'
+           .TBL_DEBIT_NOTE_ITEM.'.p_and_f_charges as p_and_f_charges,'
+           .TBL_DEBIT_NOTE_ITEM.'.rate as rate,'
+           .TBL_DEBIT_NOTE_ITEM.'.gst_rate as gst_rate,'
+           .TBL_DEBIT_NOTE_ITEM.'.debit_amount as debit_amount,'
+           .TBL_DEBIT_NOTE_ITEM.'.remark as remark,'
+   
+           .TBL_DEBIT_NOTE_ITEM.'.SGST_value as SGST_value,'
+           .TBL_DEBIT_NOTE_ITEM.'.CGST_value as CGST_value,'
+           .TBL_DEBIT_NOTE_ITEM.'.IGST_value as IGST_value,'
+   
+           .TBL_DEBIT_NOTE_ITEM.'.SGST_value_ok_val as SGST_value_ok_val,'
+           .TBL_DEBIT_NOTE_ITEM.'.CGST_value_ok_val as CGST_value_ok_val,'
+           .TBL_DEBIT_NOTE_ITEM.'.IGST_value_ok_val as IGST_value_ok_val,'
+   
+           .TBL_DEBIT_NOTE_ITEM.'.total_qty_into_rate as total_qty_into_rate,'
+           .TBL_DEBIT_NOTE_ITEM.'.total_qty_normal_qty_plus_pnf as total_qty_normal_qty_plus_pnf,'
+           .TBL_DEBIT_NOTE_ITEM.'.total_normal_gst_value as total_normal_gst_value,'
+           .TBL_DEBIT_NOTE_ITEM.'.total_normal_gst_value_plus_total as total_normal_gst_value_plus_total,'
+   
+        
+           
+       );
+       $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_DEBIT_NOTE_ITEM.'.part_number');
+       $this->db->where(TBL_DEBIT_NOTE_ITEM.'.id', $id);
+       $this->db->order_by(TBL_DEBIT_NOTE_ITEM.'.id','DESC');
+       $query = $this->db->get(TBL_DEBIT_NOTE_ITEM);
+       $fetch_result = $query->result_array();
+       return $fetch_result;
+
     }
+   
+
+    // $this->db->select(
+    //      TBL_DEBIT_NOTE_ITEM.'.id  as debit_note_item_id,'
+    //     .TBL_RAWMATERIAL.'.raw_id,'
+    //     .TBL_RAWMATERIAL.'.part_number,'
+    //     .TBL_RAWMATERIAL.'.type_of_raw_material as description,'
+    //     .TBL_DEBIT_NOTE_ITEM.'.invoice_no as invoice_no,'
+    //     .TBL_DEBIT_NOTE_ITEM.'.invoice_date as invoice_date,'
+    //     .TBL_DEBIT_NOTE_ITEM.'.invoice_qty as invoice_qty,'
+    //     .TBL_DEBIT_NOTE_ITEM.'.ok_qty as ok_qty,'
+    //     .TBL_DEBIT_NOTE_ITEM.'.less_quantity as less_quantity,'
+    //     .TBL_DEBIT_NOTE_ITEM.'.rejected_quantity as rejected_quantity,'
+    //     .TBL_DEBIT_NOTE_ITEM.'.received_quantity as received_quantity,'
+    //     .TBL_DEBIT_NOTE_ITEM.'.p_and_f_charges as p_and_f_charges,'
+    //     .TBL_DEBIT_NOTE_ITEM.'.rate as rate,'
+    //     .TBL_DEBIT_NOTE_ITEM.'.gst_rate as gst_rate,'
+    //     .TBL_DEBIT_NOTE_ITEM.'.debit_amount as debit_amount,'
+    //     .TBL_DEBIT_NOTE_ITEM.'.remark as remark,'
+
+    //     .TBL_DEBIT_NOTE_ITEM.'.SGST_value as SGST_value,'
+    //     .TBL_DEBIT_NOTE_ITEM.'.CGST_value as CGST_value,'
+    //     .TBL_DEBIT_NOTE_ITEM.'.IGST_value as IGST_value,'
+
+    //     .TBL_DEBIT_NOTE_ITEM.'.SGST_value_ok_val as SGST_value_ok_val,'
+    //     .TBL_DEBIT_NOTE_ITEM.'.CGST_value_ok_val as CGST_value_ok_val,'
+    //     .TBL_DEBIT_NOTE_ITEM.'.IGST_value_ok_val as IGST_value_ok_val,'
+
+    //     .TBL_DEBIT_NOTE_ITEM.'.total_qty_into_rate as total_qty_into_rate,'
+    //     .TBL_DEBIT_NOTE_ITEM.'.total_qty_normal_qty_plus_pnf as total_qty_normal_qty_plus_pnf,'
+    //     .TBL_DEBIT_NOTE_ITEM.'.total_normal_gst_value as total_normal_gst_value,'
+    //     .TBL_DEBIT_NOTE_ITEM.'.total_normal_gst_value_plus_total as total_normal_gst_value_plus_total,'
+
+        
+
+        
+    // );
+    // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_DEBIT_NOTE_ITEM.'.part_number');
+    // $this->db->where(TBL_DEBIT_NOTE_ITEM.'.id', $id);
+    // $this->db->order_by(TBL_DEBIT_NOTE_ITEM.'.id','DESC');
+    // $query = $this->db->get(TBL_DEBIT_NOTE_ITEM);
+    // $fetch_result = $query->result_array();
+    // // return $fetch_result;
+
+    // if(count($fetch_result) > 0)
+    // {
+    //   return $fetch_result;   
+    // }else{
+
+    //     $this->db->select(
+    //         TBL_DEBIT_NOTE_ITEM.'.id  as debit_note_item_id,'
+    //        .TBL_FINISHED_GOODS.'.fin_id as raw_id,'
+    //        .TBL_FINISHED_GOODS.'.part_number,'
+    //        .TBL_FINISHED_GOODS.'.name as description,'
+    //        .TBL_DEBIT_NOTE_ITEM.'.invoice_no as invoice_no,'
+    //        .TBL_DEBIT_NOTE_ITEM.'.invoice_date as invoice_date,'
+    //        .TBL_DEBIT_NOTE_ITEM.'.invoice_qty as invoice_qty,'
+    //        .TBL_DEBIT_NOTE_ITEM.'.ok_qty as ok_qty,'
+    //        .TBL_DEBIT_NOTE_ITEM.'.less_quantity as less_quantity,'
+    //        .TBL_DEBIT_NOTE_ITEM.'.rejected_quantity as rejected_quantity,'
+    //        .TBL_DEBIT_NOTE_ITEM.'.received_quantity as received_quantity,'
+    //        .TBL_DEBIT_NOTE_ITEM.'.p_and_f_charges as p_and_f_charges,'
+    //        .TBL_DEBIT_NOTE_ITEM.'.rate as rate,'
+    //        .TBL_DEBIT_NOTE_ITEM.'.gst_rate as gst_rate,'
+    //        .TBL_DEBIT_NOTE_ITEM.'.debit_amount as debit_amount,'
+    //        .TBL_DEBIT_NOTE_ITEM.'.remark as remark,'
+   
+    //        .TBL_DEBIT_NOTE_ITEM.'.SGST_value as SGST_value,'
+    //        .TBL_DEBIT_NOTE_ITEM.'.CGST_value as CGST_value,'
+    //        .TBL_DEBIT_NOTE_ITEM.'.IGST_value as IGST_value,'
+   
+    //        .TBL_DEBIT_NOTE_ITEM.'.SGST_value_ok_val as SGST_value_ok_val,'
+    //        .TBL_DEBIT_NOTE_ITEM.'.CGST_value_ok_val as CGST_value_ok_val,'
+    //        .TBL_DEBIT_NOTE_ITEM.'.IGST_value_ok_val as IGST_value_ok_val,'
+   
+           
+   
+           
+    //    );
+    //    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_DEBIT_NOTE_ITEM.'.part_number');
+    //    $this->db->where(TBL_DEBIT_NOTE_ITEM.'.id', $id);
+    //    $this->db->order_by(TBL_DEBIT_NOTE_ITEM.'.id','DESC');
+    //    $query_1 = $this->db->get(TBL_DEBIT_NOTE_ITEM);
+    //    $fetch_result_1 = $query_1->result_array();
+
+    //    return $fetch_result_1;
+
+    // }
 
   }
 

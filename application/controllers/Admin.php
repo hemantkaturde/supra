@@ -9985,7 +9985,7 @@ class Admin extends BaseController
 
         $post_submit = $this->input->post();
         if($post_submit){
-            $geteditDebitnoteitemedit = $this->admin_model->geteditDebitnoteitemedit(trim($this->input->post('id')));
+            $geteditDebitnoteitemedit = $this->admin_model->geteditDebitnoteitemedit(trim($this->input->post('id')),trim($this->input->post('vendor_supplier_name')));
             if($geteditDebitnoteitemedit){
                 $content = $geteditDebitnoteitemedit[0];
                 echo json_encode($content);
