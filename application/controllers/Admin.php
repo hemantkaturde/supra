@@ -15383,7 +15383,7 @@ public function downloadomsblasting($id){
             ';
 
             // <p>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</p>
-    $invoice_name =  $getblastingdetailsforinvoice['blasting_id'].' A-'.$getblastingdetailsforinvoice['vendor_name'].' (For Blasting).pdf';
+    $invoice_name =  $getblastingdetailsforinvoice['blasting_id'].' A- Divya industries (For Blasting).pdf';
     $mpdf->WriteHTML($html);
     $mpdf->Output($invoice_name,'D'); // opens in browser
 
