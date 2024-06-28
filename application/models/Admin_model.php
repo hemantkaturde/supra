@@ -10221,6 +10221,8 @@ class Admin_model extends CI_Model
 
         //$this->db->order_by(TBL_BUYER_PO_MASTER.'.id','DESC');
        // $this->db->group_by(TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
+       //$this->db->group_by(TBL_PACKING_INSTRACTION_DETAILS.'.createdDtm');
+
         $query = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
         $fetch_result_1 = $query->result_array();
 
