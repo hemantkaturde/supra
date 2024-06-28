@@ -5231,7 +5231,7 @@
 			
 			//$(".loader_ajax").show();
 			var part_number = $('#part_number').val();
-		    var vendor_po_number = $('#vendor_name').val();
+		    var vendor_po_number = $('#vendor_po_number').val();
 			var vendor_name = $('#vendor_name').val();
 
 
