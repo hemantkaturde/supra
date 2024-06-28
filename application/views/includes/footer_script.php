@@ -6237,7 +6237,7 @@
 									{
 										var data_row_material = jQuery.parseJSON( data );
 										$('#description').val(data_row_material.name);
-										$('#rm_order_qty').val(data_row_material.ram_supplier_order_qty);
+										$('#rm_order_qty').val(data_row_material.raSm_supplier_order_qty);
 										$('#rm_type').val(data_row_material.type_of_raw_material);
 										$('#slitting_size').val(data_row_material.sitting_size);
 										$('#diameter').val(data_row_material.diameter);
