@@ -2767,6 +2767,8 @@ class Admin_model extends CI_Model
 
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.pre_vendor_name');
         $this->db->where(TBL_SUPPLIER_PO_MASTER_ITEM.'.pre_supplier_name',$supplier_po_number);
+        $this->db->where(TBL_SUPPLIER_PO_MASTER_ITEM.'.pre_vendor_name',$vendor_po_number);
+
         $this->db->where(TBL_FINISHED_GOODS.'.status',1);
         $this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
         $query = $this->db->get(TBL_FINISHED_GOODS);
