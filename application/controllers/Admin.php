@@ -7519,7 +7519,7 @@ class Admin extends BaseController
         $data['vendorList']= $this->admin_model->fetchALLvendorList();
         $data['supplierList']= $this->admin_model->fetchALLsupplierList();
         $data['getdebitnoteditailsdata']= $this->admin_model->getdebitnoteditailsdata($id);
-        $data['getdebitnoteitemdetailsedit']= $this->admin_model->getdebitnoteitemdetailsedit($id);
+        $data['getdebitnoteitemdetailsedit']= $this->admin_model->getdebitnoteitemdetailsedit($id,trim($data['getdebitnoteditailsdata'][0]['supplier_vendor_name']));
         $data['totalDebitAndokQty'] = $this->admin_model->getTotalDebitAndokQtyedit($id)[0];
         $this->loadViews("masters/editdebitnoteform", $this->global, $data, NULL);
     }
