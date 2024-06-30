@@ -20978,3 +20978,63 @@
 
     </script>
 <?php } ?>
+
+
+<?php  if($pageTitle=='Sales Tracking Excel Report'){ ?>
+	<script type="text/javascript">
+
+		$(document).on('click','#Sales_Tracking_export_to_excel',function(e){
+			e.preventDefault();
+			$(".loader_ajax").show();
+
+			var sales_tracking_report_name  = $("#sales_tracking_report_name").val();
+            var buyer_name  = $("#buyer_name").val();
+
+			if(sales_tracking_report_name=='NA'){
+				$(".sales_tracking_report_name_error").html('<p>Sales Tracking Report</p>');
+				$(".loader_ajax").hide();
+				return;
+			}
+	
+			if($("#from_date").val()){
+				var from_date  = $("#from_date").val();
+			}else{
+				var from_date  = 'NA';
+			}
+
+			if($("#to_date").val()){
+				var to_date  = $("#to_date").val();
+            }else{
+				var to_date  = 'NA';
+			}
+
+
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>admin/download_sales_tracking_export_to_excel/"+sales_tracking_report_name+"/"+buyer_name+"/"+from_date+"/"+to_date,
+				type: "POST",
+				// data : {'hospitals' : hospitals, 'driver' : driver,'ride_start':ride_start,'ride_stop':ride_stop},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$(".sales_tracking_report_name_error").html("");
+						alert('No data fond');
+					}
+					else
+					{
+						$(".sales_tracking_report_name_error").html("");
+						window.location.href = "<?php echo ADMIN_PATH;?>admin/download_sales_tracking_export_to_excel/"+sales_tracking_report_name+"/"+buyer_name+"/"+from_date+"/"+to_date;
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					alert('No data fond');
+					$(".loader_ajax").hide();
+				}
+			});
+		return false;
+		});
+
+    </script>
+<?php } ?>

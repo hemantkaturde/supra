@@ -13951,6 +13951,66 @@ public function fetchsupplierporeportcount($params,$supplier_name,$supplier_po,$
         return  $fetch_result;
 
     }
+
+
+    public function downlaodsalestrackingportdata($sales_tracking_report_name,$buyer_name,$from_date,$to_date){
+
+        $this->db->select('*');
+        $this->db->join(TBL_PACKING_INSTRACTION_DETAILS, TBL_PACKING_INSTRACTION_DETAILS.'.id = '.TBL_SALES_TRACKING_REPORT.'.invoice_number');
+        $this->db->join(TBL_PACKING_INSTRACTION, TBL_PACKING_INSTRACTION.'.id = '.TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id');
+        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_PACKING_INSTRACTION.'.buyer_name');
+        $this->db->join(TBL_CHA_MASTER, TBL_CHA_MASTER.'.cha_id = '.TBL_SALES_TRACKING_REPORT.'.CHA_forwarder');
+        $this->db->where(TBL_SALES_TRACKING_REPORT.'.status', 1);
+        $this->db->order_by(TBL_SALES_TRACKING_REPORT.'.id','DESC');
+        $query = $this->db->get(TBL_SALES_TRACKING_REPORT);
+        $fetch_result = $query->result_array();
+
+        $data = array();
+        $counter = 0;
+        $i=0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['sr_no'] = $i++;
+                $data[$counter]['invoice_number'] = $value['buyer_invoice_number'];
+                $data[$counter]['buyer_invoice_date'] = $value['buyer_invoice_date'];
+                $data[$counter]['buyer_name'] = $value['buyer_name'];
+                $data[$counter]['currency'] = $value['currency'];
+                $data[$counter]['inv_amount'] = $value['inv_amount'];
+                $data[$counter]['port_code'] = $value['port_code'];
+                $data[$counter]['sb_no'] = $value['sb_no'];
+                $data[$counter]['sb_date'] = $value['sb_date'];
+                $data[$counter]['payment_recvd_date'] = $value['payment_recvd_date'];
+                $data[$counter]['payment_rcivd_amt'] = $value['payment_rcivd_amt'];
+                $data[$counter]['exchange_rate_as_per_sb'] = $value['exchange_rate_as_per_sb'];
+                $data[$counter]['brc_number_and_dt'] = $value['brc_number_and_dt'];
+                $data[$counter]['transaction_id'] = $value['transaction_id'];
+                $data[$counter]['brc_value'] = $value['brc_value'];
+                $data[$counter]['credit_note_number'] = $value['credit_note_number'];
+                $data[$counter]['foreign_bank_charges'] = $value['foreign_bank_charges'];
+                $data[$counter]['foreign_bank_charges_in_inr'] = $value['foreign_bank_charges_in_inr'];
+                $data[$counter]['currency'] = $value['currency'];
+                $data[$counter]['mode_of_shipment'] = $value['mode_of_shipment'];
+                $data[$counter]['bl_awb_no'] = $value['bl_awb_no'];
+                $data[$counter]['bl_awb_date'] = $value['bl_awb_date'];
+                $data[$counter]['cha_name'] = $value['cha_name'];
+                $data[$counter]['EGM_status'] = $value['EGM_status'];
+                $data[$counter]['fob_amount_rs'] = $value['fob_amount_rs'];
+
+                $data[$counter]['igst_value'] = $value['igst_value'];
+                $data[$counter]['igst_rcved_date'] = $value['igst_rcved_date'];
+                $data[$counter]['igst_rcved_amt'] = $value['igst_rcved_amt'];
+
+                $data[$counter]['payment_terms'] = $value['payment_terms'];
+                
+                
+
+                $counter++; 
+            }
+        }
+        return $data;
+    }
     
 
 }

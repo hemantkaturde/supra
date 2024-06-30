@@ -31,7 +31,7 @@
                                     <div class="form-group">
                                         <label for="sales_tracking_report_name">Sales Tracking Report Name <span class="required">*</span></label>
                                             <select class="form-control" name="sales_tracking_report_name" id="sales_tracking_report_name">
-                                                    <option value="">Select Sales Tracking Report</option>
+                                                    <option value="NA">Select Sales Tracking Report</option>
                                                     <option value="foreign_bank_charges">FOREIGN BANK CHARGES</option>
                                                     <option value="brc">BRC</option>
                                                     <option value="clearance_and_forwarding_pay">CLEARANCE AND FORWARDING PAY</option>
@@ -45,14 +45,14 @@
                                 </div>
                                 <div class="col-xs-3 text-left" style="margin-top: 10px;">
                                     <div class="form-group">
-                                        <label for="job_work_no">Buyer Name</label>
-                                             <select class="form-control" name="job_work_no" id="job_work_no">
-                                                    <option value="">Select Buyer Name</option>
-                                                    <?php foreach ($jobworkdetails as $key => $value) {?>
-                                                        <option value="<?php echo $value['id']; ?>"><?php echo $value['po_number']; ?></option>
+                                        <label for="buyer_name">Buyer Name</label>
+                                             <select class="form-control" name="buyer_name" id="buyer_name">
+                                                    <option value="NA">Select Buyer Name</option>
+                                                    <?php foreach ($buyerList as $key => $value) {?>
+                                                        <option value="<?php echo $value['buyer_id']; ?>"><?php echo $value['buyer_name']; ?></option>
                                                     <?php } ?>
                                             </select>
-                                            <p class="error job_work_no_error"></p>
+                                            <p class="error buyer_name_error"></p>
                                     </div>
                                 </div>
                                 <div class="col-xs-2 text-left" style="margin-top: 10px;">
@@ -72,7 +72,7 @@
                                 <div class="col-xs-2 text-left" style="margin-top: 10px;">
                                     <div class="form-group">
                                         <label for="date">Download Report</label>
-                                        <p><input type="button" id="ITC_export_to_excel"  class="btn btn-primary" value="Downlaod Report"/></p>
+                                        <p><input type="button" id="Sales_Tracking_export_to_excel"  class="btn btn-primary" value="Downlaod Report"/></p>
                                     </div>
                                 </div>
                             </div>
@@ -92,6 +92,11 @@
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
 <script>
+
+   $(document).ready(function(){
+			$("select").select2();
+   });
+
    $(function() {
 			$(".datepicker").datepicker({ 
 				// minDate: 0,
