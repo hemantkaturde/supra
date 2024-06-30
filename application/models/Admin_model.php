@@ -13965,16 +13965,16 @@ public function fetchsupplierporeportcount($params,$supplier_name,$supplier_po,$
         $query = $this->db->get(TBL_SALES_TRACKING_REPORT);
         $fetch_result = $query->result_array();
 
-        if($job_work_no!='NA'){
+        if($buyer_name!='NA'){
             $this->db->where(TBL_PACKING_INSTRACTION.'.buyer_name', $buyer_name);
         }
 
         if($from_date!='NA'){
-            $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_date >=", $fromdate);
+            $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_date >=", $from_date);
         }
 
         if($to_date!='NA'){
-            $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_date <=", $todate);
+            $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_date <=", $to_date);
         }
 
 
