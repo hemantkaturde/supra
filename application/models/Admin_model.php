@@ -13966,7 +13966,7 @@ public function fetchsupplierporeportcount($params,$supplier_name,$supplier_po,$
         $fetch_result = $query->result_array();
 
         if($buyer_name!='NA'){
-            $this->db->where(TBL_PACKING_INSTRACTION.'.buyer_name', $buyer_name);
+            $this->db->where(TBL_BUYER_MASTER.'.buyer_id', $buyer_name);
         }
 
         if($from_date!='NA'){
