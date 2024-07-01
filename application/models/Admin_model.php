@@ -7299,7 +7299,7 @@ class Admin_model extends CI_Model
         $this->db->where(TBL_INCOMING_DETAILS.'.vendor_name', $vendor_id);
         $this->db->where(TBL_INCOMING_DETAILS.'.vendor_po_number', $vendor_po_number);
         
-        $this->db->order_by(TBL_INCOMING_DETAILS.'.lot_no','ASC');
+        $this->db->order_by(TBL_INCOMING_DETAILS_ITEM.'.lot_no','ASC');
         $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.part_number', $part_number);
         //$this->db->where(TBL_VENDOR_PO_MASTER.'.supplier_name !=',"");
         //$this->db->where(TBL_VENDOR_PO_MASTER.'.supplier_po_number !=',"");
