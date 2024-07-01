@@ -12902,7 +12902,7 @@ public function getscrapcalculationreportdata($status){
     $this->db->join(TBL_SUPPLIER_PO_CONFIRMATION_ITEM, TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.supplier_po_confirmation_id= '.TBL_SUPPLIER_PO_CONFIRMATION.'.id');
     $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id= '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.part_number_id');
     $this->db->join(TBL_BUYER_MASTER, TBL_BILL_OF_MATERIAL.'.buyer_name= '.TBL_BUYER_MASTER.'.buyer_id');
-    $this->db->join(TBL_BILL_OF_MATERIAL_ITEM, TBL_BILL_OF_MATERIAL_ITEM.'.bom_id= '.TBL_BILL_OF_MATERIAL_ITEM.'.id');
+    $this->db->join(TBL_BILL_OF_MATERIAL_ITEM, TBL_BILL_OF_MATERIAL_ITEM.'.bom_id= '.TBL_BILL_OF_MATERIAL.'.id');
     $this->db->join(TBL_FINISHED_GOODS, TBL_BILL_OF_MATERIAL_ITEM.'.part_number= '.TBL_FINISHED_GOODS.'.fin_id');
 
     if($status!='NA'){
