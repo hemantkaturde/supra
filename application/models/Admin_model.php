@@ -14019,9 +14019,8 @@ public function fetchsupplierporeportcount($params,$supplier_name,$supplier_po,$
                 $data[$counter]['igst_rcved_amt'] = $value['igst_rcved_amt'];
 
                 $data[$counter]['payment_terms'] = $value['payment_terms'];
-                
-                
-
+            
+                $data[$counter]['clearance_done_by'] = $value['clearance_done_by'];
                 $counter++; 
             }
         }
