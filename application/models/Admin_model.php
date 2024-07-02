@@ -14021,6 +14021,20 @@ public function fetchsupplierporeportcount($params,$supplier_name,$supplier_po,$
                 $data[$counter]['payment_terms'] = $value['payment_terms'];
             
                 $data[$counter]['clearance_done_by'] = $value['clearance_done_by'];
+
+                $data[$counter]['carrier_bill_number'] = $value['carrier_bill_number'];
+                $data[$counter]['carrier_bill_date'] = $value['carrier_bill_date'];
+                $data[$counter]['bill_amt'] = $value['bill_amt'];
+                $data[$counter]['bill_paid_amount'] = $value['bill_paid_amount'];
+                $data[$counter]['tds_amt'] = $value['tds_amt'];
+                $data[$counter]['difference_debit_note_amt'] = $value['difference_debit_note_amt'];
+                $data[$counter]['debit_amount_reason'] = $value['debit_amount_reason'];
+                $data[$counter]['cheque_no'] = $value['cheque_no'];
+                $data[$counter]['bill_paid_date'] = $value['bill_paid_date'];
+
+
+
+
                 $counter++; 
             }
         }

@@ -17527,6 +17527,7 @@ public function download_sales_tracking_export_to_excel($sales_tracking_report_n
              $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['mode_of_shipment']);
              $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $element['cha_name']);
              $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, $element['clearance_done_by']);
+          
              $objPHPExcel->getActiveSheet()->SetCellValue('J' . $rowCount, $element['carrier_bill_number']);
              $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, $element['carrier_bill_date']);
              $objPHPExcel->getActiveSheet()->SetCellValue('L' . $rowCount, $element['bill_amt']);
