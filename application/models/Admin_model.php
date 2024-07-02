@@ -13983,7 +13983,7 @@ public function fetchsupplierporeportcount($params,$supplier_name,$supplier_po,$
 
         $data = array();
         $counter = 0;
-        $i=0;
+        $i=1;
         if(count($fetch_result) > 0)
         {
             foreach ($fetch_result as $key => $value)
