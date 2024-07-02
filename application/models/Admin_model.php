@@ -13958,8 +13958,8 @@ public function fetchsupplierporeportcount($params,$supplier_name,$supplier_po,$
 
     public function downlaodsalestrackingportdata($sales_tracking_report_name,$buyer_name,$from_date,$to_date){
 
-        $this->db->select('*');
-        $this->db->join(TBL_PACKING_INSTRACTION_DETAILS, TBL_PACKING_INSTRACTION_DETAILS.'.id = '.TBL_SALES_TRACKING_REPORT.'.invoice_number,'.TBL_CREDIT_NOTE.'.credit_note_number as credit_note_number_name');
+        $this->db->select('*,'.TBL_CREDIT_NOTE.'.credit_note_number as credit_note_number_name');
+        $this->db->join(TBL_PACKING_INSTRACTION_DETAILS, TBL_PACKING_INSTRACTION_DETAILS.'.id = '.TBL_SALES_TRACKING_REPORT.'.invoice_number');
         $this->db->join(TBL_PACKING_INSTRACTION, TBL_PACKING_INSTRACTION.'.id = '.TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id');
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_PACKING_INSTRACTION.'.buyer_name');
         $this->db->join(TBL_CHA_MASTER, TBL_CHA_MASTER.'.cha_id = '.TBL_SALES_TRACKING_REPORT.'.CHA_forwarder');
