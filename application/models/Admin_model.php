@@ -13959,10 +13959,12 @@ public function fetchsupplierporeportcount($params,$supplier_name,$supplier_po,$
     public function downlaodsalestrackingportdata($sales_tracking_report_name,$buyer_name,$from_date,$to_date){
 
         $this->db->select('*');
-        $this->db->join(TBL_PACKING_INSTRACTION_DETAILS, TBL_PACKING_INSTRACTION_DETAILS.'.id = '.TBL_SALES_TRACKING_REPORT.'.invoice_number');
+        $this->db->join(TBL_PACKING_INSTRACTION_DETAILS, TBL_PACKING_INSTRACTION_DETAILS.'.id = '.TBL_SALES_TRACKING_REPORT.'.invoice_number,'.TBL_CREDIT_NOTE.'.credit_note_number as credit_note_number_name');
         $this->db->join(TBL_PACKING_INSTRACTION, TBL_PACKING_INSTRACTION.'.id = '.TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id');
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_PACKING_INSTRACTION.'.buyer_name');
         $this->db->join(TBL_CHA_MASTER, TBL_CHA_MASTER.'.cha_id = '.TBL_SALES_TRACKING_REPORT.'.CHA_forwarder');
+        $this->db->join(TBL_CREDIT_NOTE, TBL_CREDIT_NOTE.'.id = '.TBL_SALES_TRACKING_REPORT.'.credit_note_number','left');
+
         $this->db->where(TBL_SALES_TRACKING_REPORT.'.status', 1);
         $this->db->order_by(TBL_SALES_TRACKING_REPORT.'.id','DESC');
         $query = $this->db->get(TBL_SALES_TRACKING_REPORT);
@@ -14003,7 +14005,7 @@ public function fetchsupplierporeportcount($params,$supplier_name,$supplier_po,$
                 $data[$counter]['brc_number_and_dt'] = $value['brc_number_and_dt'];
                 $data[$counter]['transaction_id'] = $value['transaction_id'];
                 $data[$counter]['brc_value'] = $value['brc_value'];
-                $data[$counter]['credit_note_number'] = $value['credit_note_number'];
+                $data[$counter]['credit_note_number'] = $value['credit_note_number_name'];
                 $data[$counter]['foreign_bank_charges'] = $value['foreign_bank_charges'];
                 $data[$counter]['foreign_bank_charges_in_inr'] = $value['foreign_bank_charges_in_inr'];
                 $data[$counter]['currency'] = $value['currency'];
