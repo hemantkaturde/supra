@@ -411,7 +411,7 @@
 
                                 <div class="col-md-6">
                                     <div class="container" style="width: 140%;">
-                                        <button type="button" class="btn btn-success btn-xl" data-toggle="modal" data-target="#addNewModal">Add New Items</button><br/><br/>
+                                        <button type="button" class="btn btn-success btn-xl addNewModal" data-toggle="modal" data-target="#addNewModal">Add New Items</button><br/><br/>
                                             <table class="table table-bordered" style="">
                                                 <thead style="background-color:#3c8dbc;color:#fff">
                                                     <tr>

@@ -4316,6 +4316,7 @@
 									
 									$('.supplier_po_number_error').val('');
 									$('#savenewsupplierconfrimationpo').prop('disabled', false);
+									$('.addNewModal').prop('disabled', false);
 							
 								}
 								else
@@ -4325,10 +4326,12 @@
 									if(data_row_material.supplier_po_number){
 										$('.supplier_po_number_error').html('Supplier PO Confirmation Alreday Exists For This Supplier PO');
 										$('#savenewsupplierconfrimationpo').prop('disabled', true);
+										$('.addNewModal').prop('disabled', true);
 									}else{
 
 										$('.supplier_po_number_error').html('');
 										$('#savenewsupplierconfrimationpo').prop('disabled', false);
+										$('.addNewModal').prop('disabled', false);
 									}
 
 									// console.log(data_row_material.vendor_po_number);
@@ -4340,6 +4343,7 @@
 							{
 								    $('.supplier_po_number_error').val('');
 									$('#savenewsupplierconfrimationpo').prop('disabled', false);
+									$('.addNewModal').prop('disabled', false);
 							}
 						});
 						return false;
@@ -4978,6 +4982,7 @@
 								{
 									$('.vendor_po_number_error').val('');
 									$('#savenewvendorconfrimationpo').prop('disabled', false);
+									$('.addNewModal').prop('disabled', false);
 							
 								}
 								else
@@ -4987,11 +4992,13 @@
 									if(data_row_material.vendor_po_number){
 										$('.vendor_po_number_error').html('Vendor PO Confirmation Alreday Exists For This Vendor PO');
 										$('#savenewvendorconfrimationpo').prop('disabled', true);
+										$('.addNewModal').prop('disabled', true);
 
 									}else{
 
 										$('.vendor_po_number_error').html('');
 										$('#savenewvendorconfrimationpo').prop('disabled', false);
+										$('.addNewModal').prop('disabled', false);
 
 									}
 
@@ -5004,6 +5011,7 @@
 							{
 								    $('.vendor_po_number_error').val('');
 									$('#savenewvendorconfrimationpo').prop('disabled', false);
+									$('.addNewModal').prop('disabled', false);
 
 							}
 						});
@@ -6811,7 +6819,9 @@
 								$(".loader_ajax").hide();
 								if(data == "failure")
 								{
-									$('.vendor_po_number_error').val('');
+									    $('.vendor_po_number_error').val('');
+									    $('#savenewBillofmaterail').prop('disabled', false);
+										$('.addNewModal').prop('disabled', false);
 							
 								}
 								else
@@ -6820,9 +6830,13 @@
 
 									if(data_row_material.vendor_po_number){
 										$('.vendor_po_number_error').html('Bill Of Material Alreday Exists For This Vendor PO');
+										$('#savenewBillofmaterail').prop('disabled', true);
+										$('.addNewModal').prop('disabled', true);
 									}else{
 
 										$('.vendor_po_number_error').html('');
+										$('#savenewBillofmaterail').prop('disabled', false);
+										$('.addNewModal').prop('disabled', false);
 									}
 
 									// console.log(data_row_material.vendor_po_number);
@@ -6833,6 +6847,8 @@
 							error: function (jqXHR, textStatus, errorThrown)
 							{
 								    $('.vendor_po_number_error').val('');
+									$('#savenewBillofmaterail').prop('disabled', false);
+									$('.addNewModal').prop('disabled', false);
 							}
 						});
 						return false;
@@ -7876,6 +7892,8 @@
 								if(data == "failure")
 								{
 									$('.vendor_po_number_error').val('');
+									$('#savenewvendorBillofmaterial').prop('disabled', false);
+                                    $('.addNewModal').prop('disabled', false);
 							
 								}
 								else
@@ -7884,9 +7902,16 @@
 
 									if(data_row_material.vendor_po_number){
 										$('.vendor_po_number_error').html('Vendor Bill Of Material Already Exists For This Vendor PO');
+
+										$('#savenewvendorBillofmaterial').prop('disabled', true);
+                                        $('.addNewModal').prop('disabled', true);
+
+
 									}else{
 
 										$('.vendor_po_number_error').html('');
+										$('#savenewvendorBillofmaterial').prop('disabled', false);
+                                        $('.addNewModal').prop('disabled', false);
 									}
 
 									// console.log(data_row_material.vendor_po_number);
@@ -7897,6 +7922,8 @@
 							error: function (jqXHR, textStatus, errorThrown)
 							{
 								    $('.vendor_po_number_error').val('');
+									$('#savenewvendorBillofmaterial').prop('disabled', false);
+                                    $('.addNewModal').prop('disabled', false);
 							}
 						});
 						return false;
