@@ -14031,6 +14031,11 @@ public function fetchsupplierporeportcount($params,$supplier_name,$supplier_po,$
                 $data[$counter]['debit_amount_reason'] = $value['debit_amount_reason'];
                 $data[$counter]['cheque_no'] = $value['cheque_no'];
                 $data[$counter]['bill_paid_date'] = $value['bill_paid_date'];
+                $data[$counter]['drawback'] = $value['drawback'];
+                $data[$counter]['dbk_recd_amount'] = $value['dbk_recd_amount'];
+                $data[$counter]['dbk_recd_date'] = $value['dbk_recd_date'];
+                
+
 
 
 
