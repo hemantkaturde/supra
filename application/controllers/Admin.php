@@ -14606,7 +14606,7 @@ public function downloadscrapreturn($id){
                 <tr style="border: 1px solid black;">
                     <td width="50%" style="padding: 10px;text-align: left;">
                         <p style="vertical-align: text-top;font-size:12px;color:#000080"><b>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</b></p>
-                        <p>'.date('d-m-Y').'</p>
+                        <p>'.date('d-m-Y',strtotime($getscrapreturnForInvoice['challan_date'])).'</p>
                         <p>Place: Mumbai</p>
                        
                         <br/><img src="'.base_url().'assets/images/stmps/supplierpostampsignature.png" width="130" height="100">
