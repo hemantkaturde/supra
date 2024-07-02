@@ -17505,6 +17505,16 @@ public function download_sales_tracking_export_to_excel($sales_tracking_report_n
          $objPHPExcel->getActiveSheet()->SetCellValue('G1', 'SEA / AIR');
          $objPHPExcel->getActiveSheet()->SetCellValue('H1', 'CHA  FORWARDER');   
          $objPHPExcel->getActiveSheet()->SetCellValue('I1', 'CLEARANCE DONE BY');  
+         $objPHPExcel->getActiveSheet()->SetCellValue('J1', 'CHA Bill No');  
+         $objPHPExcel->getActiveSheet()->SetCellValue('K1', 'DATE');  
+         $objPHPExcel->getActiveSheet()->SetCellValue('L1', 'AMOUNT');  
+         $objPHPExcel->getActiveSheet()->SetCellValue('M1', 'PAID AMOUNT');  
+         $objPHPExcel->getActiveSheet()->SetCellValue('N1', 'TDS AMOUNT');  
+         $objPHPExcel->getActiveSheet()->SetCellValue('O1', 'DEBIT AMOUNT'); 
+         $objPHPExcel->getActiveSheet()->SetCellValue('P1', 'REASON'); 
+         $objPHPExcel->getActiveSheet()->SetCellValue('Q1', 'CHEQUE NO'); 
+         $objPHPExcel->getActiveSheet()->SetCellValue('R1', 'DATE'); 
+
          // set Row
          $rowCount = 2;
          foreach ($empInfo as $element) {
@@ -17517,19 +17527,29 @@ public function download_sales_tracking_export_to_excel($sales_tracking_report_n
              $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['mode_of_shipment']);
              $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $element['cha_name']);
              $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, $element['clearance_done_by']);
+             $objPHPExcel->getActiveSheet()->SetCellValue('J' . $rowCount, $element['carrier_bill_number']);
+             $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, $element['carrier_bill_date']);
+             $objPHPExcel->getActiveSheet()->SetCellValue('L' . $rowCount, $element['bill_amt']);
+             $objPHPExcel->getActiveSheet()->SetCellValue('M' . $rowCount, $element['bill_paid_amount']);
+             $objPHPExcel->getActiveSheet()->SetCellValue('N' . $rowCount, $element['tds_amt']);
+             $objPHPExcel->getActiveSheet()->SetCellValue('O' . $rowCount, $element['difference_debit_note_amt']);
+             $objPHPExcel->getActiveSheet()->SetCellValue('P' . $rowCount, $element['debit_amount_reason']);
+             $objPHPExcel->getActiveSheet()->SetCellValue('Q' . $rowCount, $element['cheque_no']);
+             $objPHPExcel->getActiveSheet()->SetCellValue('R' . $rowCount, $element['bill_paid_date']);
+
              $rowCount++;
          }
  
-         foreach(range('A','I') as $columnID) {
+         foreach(range('A','R') as $columnID) {
              $objPHPExcel->getActiveSheet()->getColumnDimension($columnID)->setAutoSize(true);
          }
          /*********************Autoresize column width depending upon contents END***********************/
          
-         $objPHPExcel->getActiveSheet()->getStyle('A1:I1')->getFont()->setBold(true); //Make heading font bold
+         $objPHPExcel->getActiveSheet()->getStyle('A1:R1')->getFont()->setBold(true); //Make heading font bold
          
          /*********************Add color to heading START**********************/
          $objPHPExcel->getActiveSheet()
-                     ->getStyle('A1:I1')
+                     ->getStyle('A1:R1')
                      ->getFill()
                      ->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
                      ->getStartColor()
@@ -17740,37 +17760,37 @@ public function download_sales_tracking_export_to_excel($sales_tracking_report_n
         // set Header
         $objPHPExcel->getActiveSheet()->SetCellValue('A1', 'BUYER INV. NO');
         $objPHPExcel->getActiveSheet()->SetCellValue('B1', 'BUYER INVOICE DATE');
-        $objPHPExcel->getActiveSheet()->SetCellValue('C1', 'TOOLING INV NO');
-        $objPHPExcel->getActiveSheet()->SetCellValue('D1', 'BUYER NAME'); 
-        $objPHPExcel->getActiveSheet()->SetCellValue('E1', 'SEA / AIR');
-        $objPHPExcel->getActiveSheet()->SetCellValue('F1', 'PAYMENT TERM');
-        $objPHPExcel->getActiveSheet()->SetCellValue('G1', 'CURRENCY');
-        $objPHPExcel->getActiveSheet()->SetCellValue('H1', 'REMARKS');
+        // $objPHPExcel->getActiveSheet()->SetCellValue('C1', 'TOOLING INV NO');
+        $objPHPExcel->getActiveSheet()->SetCellValue('C1', 'BUYER NAME'); 
+        $objPHPExcel->getActiveSheet()->SetCellValue('D1', 'SEA / AIR');
+        $objPHPExcel->getActiveSheet()->SetCellValue('E1', 'PAYMENT TERM');
+        $objPHPExcel->getActiveSheet()->SetCellValue('F1', 'CURRENCY');
+        $objPHPExcel->getActiveSheet()->SetCellValue('G1', 'REMARKS');
 
         // set Row
         $rowCount = 2;
         foreach ($empInfo as $element) {
             $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $element['invoice_number']);
             $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $element['buyer_invoice_date']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, '');
-            $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['buyer_name']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['mode_of_shipment']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['payment_terms']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['currency']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, '');
+            // $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, '');
+            $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $element['buyer_name']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['mode_of_shipment']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['payment_terms']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['currency']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, '');
             $rowCount++;
         }
 
-        foreach(range('A','H') as $columnID) {
+        foreach(range('A','G') as $columnID) {
             $objPHPExcel->getActiveSheet()->getColumnDimension($columnID)->setAutoSize(true);
         }
         /*********************Autoresize column width depending upon contents END***********************/
         
-        $objPHPExcel->getActiveSheet()->getStyle('A1:H1')->getFont()->setBold(true); //Make heading font bold
+        $objPHPExcel->getActiveSheet()->getStyle('A1:G1')->getFont()->setBold(true); //Make heading font bold
         
         /*********************Add color to heading START**********************/
         $objPHPExcel->getActiveSheet()
-                    ->getStyle('A1:H1')
+                    ->getStyle('A1:G1')
                     ->getFill()
                     ->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
                     ->getStartColor()
