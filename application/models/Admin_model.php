@@ -8650,6 +8650,7 @@ class Admin_model extends CI_Model
            .TBL_BILL_OF_MATERIAL_ITEM.'.vendor_order_qty as vendor_order_qty,'
 
            .TBL_BILL_OF_MATERIAL_ITEM.'.actual_scrap_received_in_kgs as actual_scrap_recived,'
+
            .TBL_BILL_OF_MATERIAL_ITEM.'.remark as remark,'
        
            );

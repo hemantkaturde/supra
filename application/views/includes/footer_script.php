@@ -6240,6 +6240,7 @@
 										$('#vendor_order_qty').val('');
 
 
+
 									}
 									else
 									{
@@ -6255,6 +6256,8 @@
 										$('#net_weight_per_pcs').val(data_row_material.fg_net_weight);
 										$('#vendor_order_qty').val(data_row_material.vendor_or_qty);
 
+										
+
 									}
 								},
 								error: function (jqXHR, textStatus, errorThrown)
@@ -6269,7 +6272,6 @@
 										$('#gross_weight').val('');
 										$('#net_weight_per_pcs').val('');
 										$('#vendor_order_qty').val('');
-
 
 								}
 							});
@@ -6890,6 +6892,7 @@
 						$('#scrap').val(fetchResponse.scrap_in_kgs);
 						$('#actual_scrap_recived').val(fetchResponse.actual_scrap_recived);
 						$('#item_remark').val(fetchResponse.remark);
+
 				},
 				error: function (jqXHR, textStatus, errorThrown)
 			    {
