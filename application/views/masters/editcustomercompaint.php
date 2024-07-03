@@ -128,7 +128,7 @@
 
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="toatal_failure_qty">Toatal Failure Qty</label>
+                                            <label for="toatal_failure_qty">Total Failure Qty</label>
                                             <input type="text" class="form-control" id="toatal_failure_qty"  value="<?=$getcustomercompalindetailsdata[0]['toatal_failure_qty']?>" name="toatal_failure_qty">
                                             <p class="error toatal_failure_qty_error"></p>
                                         </div>
@@ -232,7 +232,7 @@
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="effective_action">Affective Action</label>
+                                            <label for="effective_action">Effective Action</label>
                                             <input type="text" class="form-control datepicker" id="effective_action" value="<?=$getcustomercompalindetailsdata[0]['effective_action']?>" name="effective_action">
                                             <p class="error effective_action_error"></p>
                                         </div>
