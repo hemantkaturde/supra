@@ -14086,6 +14086,7 @@ public function getpartdescriptionusingpartnumber($part_no){
 
     $this->db->select('*');
     $this->db->where(TBL_FINISHED_GOODS.'.fin_id', $part_no);
+    $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
     $query_result = $this->db->get(TBL_FINISHED_GOODS)->result_array();
 
     return $query_result;

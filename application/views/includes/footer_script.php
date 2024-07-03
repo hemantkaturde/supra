@@ -21181,15 +21181,19 @@
 							if(data == "failure")
 								{
 									$('#component_part_description').val('');
+									$('#order_qty').val('');
+									
 								}
 							else
 								{
 									$('#component_part_description').val(get_buyerdata.name);
+									$('#order_qty').val(get_buyerdata.order_oty);
 								}
 					},
 					error: function (jqXHR, textStatus, errorThrown)
 					   {
 							$('#component_part_description').val('');
+							$('#order_qty').val('');
 					   }
 				});
 			return false;
