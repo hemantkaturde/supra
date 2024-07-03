@@ -476,11 +476,23 @@ $route['salestrackingexcelreport'] = "admin/salestrackingexcelreport";
 $route['paymentdetailsreport'] = "admin/paymentdetailsreport";
 $route['downlaodchadebitnote/(:any)'] = "admin/downlaodchadebitnote/$1";
 
+
 $route['uspincoming'] = "admin/uspincoming";
+$route['customercompliant'] = "admin/customercompliant";
+$route['addnewcustomercomplaint'] = "admin/addnewcustomercomplaint";
+$route['getBuyerPonumberbyBuyeridforcoustomercomplint'] = "admin/getBuyerPonumberbyBuyeridforcoustomercomplint";
+$route['getpartsusingbuyerpo'] = "admin/getpartsusingbuyerpo";
+$route['getpartdescriptionusingpartnumber'] = "admin/getpartdescriptionusingpartnumber";
+$route['fetchcustomercompalintreport'] = "admin/fetchcustomercompalintreport";
+$route['editcustomercomplaint/(:any)'] = "admin/editcustomercomplaint/$1";
+$route['deletecustomercompalintreport'] = "admin/deletecustomercompalintreport";
 
 
 
 
+
+
+$route['suppliervendorcompliant'] = "admin/suppliervendorcompliant";
 /* End of file routes.php */
 $route['fetchproductionstatusreport'] = "admin/fetchproductionstatusreport";
 /* Location: ./application/config/routes.php */

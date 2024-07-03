@@ -20025,8 +20025,8 @@
 											$('#buyer_PO').val('');		
 											
 										}
-									});
-				 return false;
+				});
+			return false;
 	    });		
 
 		$(document).on('change','#credit_note_number',function(e){  
@@ -20290,23 +20290,23 @@
 		    });
 
 
-			$(document).on('click','.deletechadebitnote',function(e){
-			var elemF = $(this);
-			e.preventDefault();
+		$(document).on('click','.deletechadebitnote',function(e){
+				var elemF = $(this);
+				e.preventDefault();
 
-			swal({
-				title: "Are you sure?",
-				text: "Delete CHA Debit Note",
-				type: "warning",
-				showCancelButton: true,
-				closeOnClickOutside: false,
-				confirmButtonClass: "btn-sm btn-danger",
-				confirmButtonText: "Yes, delete it!",
-				cancelButtonText: "No, cancel plz!",
-				closeOnConfirm: false,
-				closeOnCancel: false
-			}, function(isConfirm) {
-				if (isConfirm) {
+				swal({
+					title: "Are you sure?",
+					text: "Delete CHA Debit Note",
+					type: "warning",
+					showCancelButton: true,
+					closeOnClickOutside: false,
+					confirmButtonClass: "btn-sm btn-danger",
+					confirmButtonText: "Yes, delete it!",
+					cancelButtonText: "No, cancel plz!",
+					closeOnConfirm: false,
+					closeOnCancel: false
+				}, function(isConfirm) {
+					if (isConfirm) {
 							$.ajax({
 								url : "<?php echo base_url();?>deletechadebitnote",
 								type: "POST",
@@ -21067,4 +21067,228 @@
 		});
 
     </script>
+<?php } ?>
+
+
+
+
+<?php  if($pageTitle=='Customer Compliant Report' || $pageTitle=='Add New Coustmor Complaint' || 'Edit Customer Complaint'){ ?>
+ <script type="text/javascript">
+
+        $(document).ready(function() { 
+				var dt = $('#view_customer_compalint_report').DataTable({
+					"columnDefs": [ 
+						{ className: "details-control", "targets": [ 0 ] },
+						{ "width": "10%", "targets": 0 },
+						{ "width": "10%", "targets": 1 },
+						{ "width": "10%", "targets": 2 },
+						{ "width": "10%", "targets": 3 },
+						{ "width": "10%", "targets": 4 },
+						{ "width": "10%", "targets": 5 },
+						{ "width": "10%", "targets": 6 },
+						{ "width": "10%", "targets": 7 },
+						{ "width": "10%", "targets": 8 },
+					
+					],
+					responsive: true,
+					"oLanguage": {
+						"sEmptyTable": "<i>No Customer Comaplint Found.</i>",
+					}, 
+					"bSort" : false,
+					"bFilter":true,
+					"bLengthChange": true,
+					"iDisplayLength": 10,   
+					"bProcessing": true,
+					"serverSide": true,
+					"ajax":{
+						url :"<?php echo base_url();?>fetchcustomercompalintreport",
+						type: "post",
+					},
+				});
+		});
+
+        $(document).on('change','#customer_name',function(e){  
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			var buyer_name = $('#customer_name').val();
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getBuyerPonumberbyBuyeridforcoustomercomplint",
+				type: "POST",
+				data : {'buyer_name' : buyer_name},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#customer_po').html('<option value="">Select Buyer PO Number</option>');
+					}
+					else
+					{
+						$('#customer_po').html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#customer_po').html();
+				}
+			});
+			return false;
+		});
+
+		$(document).on('change','#customer_po',function(e){  
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			var buyer_po = $('#customer_po').val();
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getpartsusingbuyerpo",
+				type: "POST",
+				data : {'buyer_po' : buyer_po},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#part_no').html('<option value="">Select Part Number</option>');
+					}
+					else
+					{
+						$('#part_no').html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#part_no').html();
+				}
+			});
+			return false;
+		});
+
+		$(document).on('change','#part_no',function(e){  
+			
+			e.preventDefault();
+			var part_no = $('#part_no').val();
+            $.ajax({
+				url : "<?php echo ADMIN_PATH;?>getpartdescriptionusingpartnumber",
+				type: "POST",
+				data : {'part_no' : part_no},
+					success: function(data, textStatus, jqXHR)
+					{
+					    var get_buyerdata = jQuery.parseJSON( data );
+
+						$(".loader_ajax").hide();
+							if(data == "failure")
+								{
+									$('#component_part_description').val('');
+								}
+							else
+								{
+									$('#component_part_description').val(get_buyerdata.name);
+								}
+					},
+					error: function (jqXHR, textStatus, errorThrown)
+					   {
+							$('#component_part_description').val('');
+					   }
+				});
+			return false;
+		});
+
+		$(document).on('click','#addnewcustomercomplaint',function(e){
+				e.preventDefault();
+				$(".loader_ajax").show();
+				var formData = new FormData($("#addnewcustomercomplaintform")[0]);
+			    var complaint_form_id = $("#complaint_form_id").val();
+			   
+				$.ajax({
+					url : "<?php echo base_url();?>addnewcustomercomplaint",
+					type: "POST",
+					data : formData,
+					cache: false,
+					contentType: false,
+					processData: false,
+					success: function(data, textStatus, jqXHR)
+					{
+						var fetchResponse = $.parseJSON(data);
+						if(fetchResponse.status == "failure")
+						{
+							$.each(fetchResponse.error, function (i, v)
+							{
+								$('.'+i+'_error').html(v);
+							});
+							$(".loader_ajax").hide();
+						}
+						else if(fetchResponse.status == 'success')
+						{
+							swal({
+								title: "Success",
+								text: "Customer Compalint Successfully Added!",
+								icon: "success",
+								button: "Ok",
+								},function(){ 
+									
+									window.location.href = "<?php echo base_url().'customercompliant'?>";
+							});		
+						}
+						
+					},
+					error: function (jqXHR, textStatus, errorThrown)
+					{
+					$(".loader_ajax").hide();
+					}
+				});
+				return false;
+		});
+
+		$(document).on('click','.deletecustomercompalintreport',function(e){
+				var elemF = $(this);
+				e.preventDefault();
+
+				swal({
+					title: "Are you sure?",
+					text: "Delete Customer Compalint",
+					type: "warning",
+					showCancelButton: true,
+					closeOnClickOutside: false,
+					confirmButtonClass: "btn-sm btn-danger",
+					confirmButtonText: "Yes, delete it!",
+					cancelButtonText: "No, cancel plz!",
+					closeOnConfirm: false,
+					closeOnCancel: false
+				}, function(isConfirm) {
+					if (isConfirm) {
+							$.ajax({
+								url : "<?php echo base_url();?>deletecustomercompalintreport",
+								type: "POST",
+								data : 'id='+elemF.attr('data-id'),
+								success: function(data, textStatus, jqXHR)
+								{
+									const obj = JSON.parse(data);
+								
+									if(obj.status=='success'){
+										swal({
+											title: "Deleted!",
+											text: "Customer Compalint Deleted Succesfully",
+											icon: "success",
+											button: "Ok",
+											},function(){ 
+												window.location.href = "<?php echo base_url().'customercompliant'?>";
+										});	
+									}
+
+								},
+								error: function (jqXHR, textStatus, errorThrown)
+								{
+									$(".loader_ajax").hide();
+								}
+							})
+						}
+						else {
+				swal("Cancelled", "Customer Compalint deletion cancelled ", "error");
+				}
+			});
+		});
+
+ </script>
 <?php } ?>

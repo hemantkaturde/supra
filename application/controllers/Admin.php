@@ -2768,6 +2768,24 @@ class Admin extends BaseController
 
 
 
+    public function getBuyerPonumberbyBuyeridforcoustomercomplint(){
+		if($this->input->post('buyer_name')) {
+			$getAllponumber = $this->admin_model->getBuyerPonumberbyBuyeridforcoustomercomplint($this->input->post('buyer_name'));
+			if(count($getAllponumber) >= 1) {
+                $content = $content.'<option value="">Select Buyer Number</option>';
+				foreach($getAllponumber as $value) {
+                        $content = $content.'<option value="'.$value["id"].'">'.$value["sales_order_number"].' - '.$value["buyer_po_number"].'</option>';
+				}
+				echo $content;
+			} else {
+				echo 'failure';
+			}
+		} else {
+			echo 'failure';
+		}
+
+    }
+
     
 
     public function getBuyerItemsforDisplay(){
@@ -17316,16 +17334,6 @@ public function downlaodchadebitnote($id){
 }  
 
 
-public function uspincoming(){
-    
-    $process = 'USP Incoming';
-    $processFunction = 'Admin/uspincoming';
-    $this->global['pageTitle'] = 'USP Incoming';
-    $this->loadViews("masters/uspincoming", $this->global, $data, NULL); 
-}
-
-
-
 public function download_sales_tracking_export_to_excel($sales_tracking_report_name,$buyer_name,$from_date,$to_date) {
 
 
@@ -17807,12 +17815,205 @@ public function download_sales_tracking_export_to_excel($sales_tracking_report_n
         $objWriter->save('php://output');
     }
 
+}
 
+
+public function uspincoming(){
+    $process = 'USP Incoming';
+    $processFunction = 'Admin/uspincoming';
+    $this->global['pageTitle'] = 'USP Incoming';
+    $this->loadViews("masters/uspincoming", $this->global, $data, NULL); 
+}
+
+
+public function customercompliant(){
+    $process = 'Customer Compliant Report';
+    $processFunction = 'Admin/customercompliant';
+    $this->global['pageTitle'] = 'Customer Compliant Report';
+    $this->loadViews("masters/customercompliant", $this->global, $data, NULL); 
+}
+
+
+public function addnewcustomercomplaint(){
+
+    $post_submit = $this->input->post();
+
+    if($post_submit){
+        $save_customer_complaint_response = array();
+        $this->form_validation->set_rules('report_number','Report Number','trim|required');
+        $this->form_validation->set_rules('customer_name','Customer Name','trim|required');
+        $this->form_validation->set_rules('customer_po','Customer PO','trim|required');
+        $this->form_validation->set_rules('part_no','Part No','trim|required');
+        if($this->form_validation->run() == FALSE)
+        {
+            $save_customer_complaint_response['status'] = 'failure';
+            $save_customer_complaint_response['error'] = array(
+                'report_number'=>strip_tags(form_error('report_number')),
+                'customer_name'=>strip_tags(form_error('customer_name')),
+                'customer_po'=>strip_tags(form_error('customer_po')),
+                'mode_of_Shipment'=>strip_tags(form_error('mode_of_Shipment')),
+                'part_no'=>strip_tags(form_error('part_no')));
+        }else{
+
+            $data = array(
+                'report_number'=> trim($this->input->post('report_number')),
+                'customer_name'=> trim($this->input->post('customer_name')),
+                'customer_po'=>trim($this->input->post('customer_po')),
+                'part_no'=>trim($this->input->post('part_no')),
+                'component_part_description'=>trim($this->input->post('component_part_description')),
+                'order_qty'=>trim($this->input->post('order_qty')),
+                'dispatch_qty'=>trim($this->input->post('dispatch_qty')),
+                'toatal_failure_qty'=>trim($this->input->post('toatal_failure_qty')),
+                'invoice_no'=>trim($this->input->post('invoice_no')),
+                'invoice_date'=>trim($this->input->post('invoice_date')),
+                'doc_complaint_no'=>trim($this->input->post('doc_complaint_no')),
+                'doc_complaint_date'=>trim($this->input->post('doc_complaint_date')),
+                'problem_description'=>trim($this->input->post('problem_description')),
+                'root_case'=>trim($this->input->post('root_case')),
+                'correction'=>trim($this->input->post('correction')),
+                'corrective_action_taken'=>trim($this->input->post('corrective_action_taken')),
+                'corrective_action_taken_responsibility'=>trim($this->input->post('corrective_action_taken_responsibility')),
+                'corrective_action_taken_responsibility_date'=>trim($this->input->post('corrective_action_taken_responsibility_date')),
+                'effective_action'=>trim($this->input->post('effective_action')),
+                'responsibility'=>trim($this->input->post('responsibility')),
+                'effective_date'=>trim($this->input->post('effective_date')),
+                'prepared_by'=>trim($this->input->post('prepared_by')),
+                'prepared_by_date'=>trim($this->input->post('prepared_by_date')),
+                'approved_by'=>trim($this->input->post('approved_by')),
+                'approved_by_date'=>trim($this->input->post('approved_by_date')),
+                'report_closed_by'=>trim($this->input->post('report_closed_by')),
+                'report_closed_by_date'=>trim($this->input->post('report_closed_by_date'))
+            );
+
+                if(trim($this->input->post('complaint_form_id'))){
+                    $complaint_form_id =trim($this->input->post('complaint_form_id'));
+                }else{
+                    $complaint_form_id ='';
+                }
+
+                $savecoustomercomplaintdata = $this->admin_model->savecoustomercomplaintdata($complaint_form_id,$data);
+
+                if($savecoustomercomplaintdata){
+                    $save_customer_complaint_response['status'] = 'success';
+                    $save_customer_complaint_response['error'] = array(
+                        'report_number'=>strip_tags(form_error('report_number')),
+                        'customer_name'=>strip_tags(form_error('customer_name')),
+                        'customer_po'=>strip_tags(form_error('customer_po')),
+                        'mode_of_Shipment'=>strip_tags(form_error('mode_of_Shipment')),
+                        'part_no'=>strip_tags(form_error('part_no')));
+            }
+        }
+        echo json_encode($save_customer_complaint_response);
+    }else{
+        $process = 'Add New Coustmor Complaint';
+        $processFunction = 'Admin/addnewcustomercomplaint';
+        $this->logrecord($process,$processFunction);
+        // $data['getPreviouscoustomercomplaint_number'] = $this->admin_model->getPreviousDebitnote_number();
+        $data['buyerList']= $this->admin_model->fetchAllbuyerList();
+        $this->global['pageTitle'] = 'Add New Coustmor Complaint';
+        $this->loadViews("masters/addnewcustomercomplaint", $this->global, $data, NULL);
+    }
+
+}
+
+
+public function getpartsusingbuyerpo(){
+    if($this->input->post('buyer_po')) {
+        $getAllitemdetailsponumber = $this->admin_model->getpartsusingbuyerpo($this->input->post('buyer_po'));
+        if(count($getAllitemdetailsponumber) >= 1) {
+            $content = $content.'<option value="">Select Buyer Number</option>';
+            foreach($getAllitemdetailsponumber as $value) {
+                    $content = $content.'<option value="'.$value["part_number_id"].'">'.$value["fgpart"].'</option>';
+            }
+            echo $content;
+        } else {
+            echo 'failure';
+        }
+    } else {
+        echo 'failure';
+    }
+
+}
+
+
+public function suppliervendorcompliant(){
+    $process = 'Supplier Vendor Compliant Report';
+    $processFunction = 'Admin/suppliervendorcompliant';
+    $this->global['pageTitle'] = 'Supplier Vendor Compliant Report';
+    $this->loadViews("masters/suppliervendorcompliant", $this->global, $data, NULL); 
+}
+
+
+public function getpartdescriptionusingpartnumber(){
+
+    $part_no=$this->input->post('part_no');
+    if($part_no) {
+        $part_no_data = $this->admin_model->getpartdescriptionusingpartnumber($part_no);
+        if(count($part_no_data) >= 1) {
+            echo json_encode($part_no_data[0]);
+        } else {
+            echo 'failure';
+        }
+    } else {
+        echo 'failure';
+    }
+}
+
+public function fetchcustomercompalintreport(){
+
+    $params = $_REQUEST;
+    $totalRecords = $this->admin_model->fetchcustomercompalintreportcount($params); 
+    $queryRecords = $this->admin_model->fetchcustomercompalintreportdata($params); 
+
+    $data = array();
+    foreach ($queryRecords as $key => $value)
+    {
+        $i = 0;
+        foreach($value as $v)
+        {
+            $data[$key][$i] = $v;
+            $i++;
+        }
+    }
+    $json_data = array(
+        "draw"            => intval( $params['draw'] ),   
+        "recordsTotal"    => intval( $totalRecords ),  
+        "recordsFiltered" => intval($totalRecords),
+        "data"            => $data   // total data array
+        );
+    echo json_encode($json_data);
+}
+
+
+public function deletecustomercompalintreport(){
+    $post_submit = $this->input->post();
+    if($post_submit){
+        $result = $this->admin_model->deletecustomercompalintreport(trim($this->input->post('id')));
+        if ($result) {
+                    $process = 'Delete Customer Compalint';
+                    $processFunction = 'Admin/deletecustomercompalintreport';
+                    $this->logrecord($process,$processFunction);
+                echo(json_encode(array('status'=>'success')));
+            }
+        else { echo(json_encode(array('status'=>'failed'))); }
+    }else{
+        echo(json_encode(array('status'=>'failed'))); 
+    }
 
 
 }
 
 
+public function editcustomercomplaint($id){
+
+    $process = 'Edit Customer Complaint';
+    $processFunction = 'Admin/editcustomercompaint';
+    $this->logrecord($process,$processFunction);
+    $this->global['pageTitle'] = 'Edit Customer Complaint';
+    $data['buyerList']= $this->admin_model->fetchAllbuyerList();
+    $data['getcustomercompalindetailsdata']= $this->admin_model->getcustomercompalindetailsdata($id);
+    $this->loadViews("masters/editcustomercompaint", $this->global, $data, NULL);
+}
 
 
 }

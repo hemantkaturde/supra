@@ -1504,6 +1504,27 @@ class Admin_model extends CI_Model
 		}
         return $query_result;
     }
+
+
+    
+    
+    public function getBuyerPonumberbyBuyeridforcoustomercomplint($buyer_name){
+
+        $this->db->select(TBL_BUYER_PO_MASTER.'.*');
+		$this->db->where(TBL_BUYER_PO_MASTER.'.buyer_name_id', $buyer_name);
+        $this->db->where(TBL_BUYER_PO_MASTER.'.status', 1);
+        //$this->db->where(TBL_BUYER_PO_MASTER.'.generate_po', 'YES');
+        //$this->db->or_where(TBL_BUYER_PO_MASTER.'.po_status', 'Open');
+        //$this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.part_number_id NOT IN (SELECT tbl_rawmaterial.raw_id FROM tbl_supplierpo_item join tbl_rawmaterial on tbl_supplierpo_item.part_number_id=tbl_rawmaterial.raw_id where pre_buyer_name='.$buyer_name.')', NULL, FALSE);
+        //$this->db->group_by(TBL_BUYER_PO_MASTER.'.sales_order_number');
+        $this->db->order_by('sales_order_number','ASC');
+        $query_result = $this->db->get(TBL_BUYER_PO_MASTER)->result_array();
+		
+		foreach($query_result as $key => $value) {
+			$query_result[$key]['selected'] = '';
+		}
+        return $query_result;
+    }
     
 
     public function getBuyerDeatilsbyid($buyer_po_id){
@@ -13538,7 +13559,8 @@ public function fetchsupplierporeportcount($params,$supplier_name,$supplier_po,$
         return $rowcount;
 
 
-    }
+}
+
 
     public function fetchsupplierporeportdata($params,$supplier_name,$supplier_po,$material_sent,$materila_recipt_confirmation){
         $this->db->select('*,'.TBL_RAWMATERIAL.'.part_number as part_number_fg');
@@ -14038,11 +14060,6 @@ public function fetchsupplierporeportcount($params,$supplier_name,$supplier_po,$
                 $data[$counter]['dbk_recd_amount'] = $value['dbk_recd_amount'];
                 $data[$counter]['dbk_recd_date'] = $value['dbk_recd_date'];
                 
-
-
-
-
-
                 $counter++; 
             }
         }
@@ -14050,8 +14067,161 @@ public function fetchsupplierporeportcount($params,$supplier_name,$supplier_po,$
     }
     
 
+public function getpartsusingbuyerpo($buyer_po){
+
+    $this->db->select(TBL_BUYER_PO_MASTER_ITEM.'.part_number_id,'.TBL_FINISHED_GOODS.'.part_number as fgpart');
+    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
+    $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id', $buyer_po);
+    $this->db->order_by(TBL_BUYER_PO_MASTER_ITEM.'.id','DESC');
+    $query_result = $this->db->get(TBL_BUYER_PO_MASTER_ITEM)->result_array();
+    
+    foreach($query_result as $key => $value) {
+        $query_result[$key]['selected'] = '';
+    }
+    return $query_result;
 }
 
+
+public function getpartdescriptionusingpartnumber($part_no){
+
+    $this->db->select('*');
+    $this->db->where(TBL_FINISHED_GOODS.'.fin_id', $part_no);
+    $query_result = $this->db->get(TBL_FINISHED_GOODS)->result_array();
+
+    return $query_result;
+
+}
+
+public function savecoustomercomplaintdata($id,$data){
+    if($id != '') {
+        $this->db->where('id', $id);
+        if($this->db->update(TBL_CUSTMOR_COMPALINT, $data)){
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    } else {
+        if($this->db->insert(TBL_CUSTMOR_COMPALINT, $data)) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+}
+
+
+
+public function fetchcustomercompalintreportcount($params){
+    $this->db->select('*,'.TBL_CUSTMOR_COMPALINT.'.id as coustmor_compalint_id');
+    $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_CUSTMOR_COMPALINT.'.customer_name');
+    $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_CUSTMOR_COMPALINT.'.customer_po');
+    $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.id = '.TBL_CUSTMOR_COMPALINT.'.part_no');
+    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
+
+    if($params['search']['value'] != "") 
+    {
+        $this->db->where("(".TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_CUSTMOR_COMPALINT.".report_number LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_FINISHED_GOODS.".name LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_CUSTMOR_COMPALINT.".order_qty LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_CUSTMOR_COMPALINT.".toatal_failure_qty LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_CUSTMOR_COMPALINT.".invoice_no LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_CUSTMOR_COMPALINT.".invoice_date LIKE '%".$params['search']['value']."%')");
+    }
+
+    $this->db->where(TBL_CUSTMOR_COMPALINT.'.status', 1);
+    $this->db->order_by(TBL_CUSTMOR_COMPALINT.'.id','DESC');
+    $query = $this->db->get(TBL_CUSTMOR_COMPALINT);
+    $rowcount = $query->num_rows();
+    return $rowcount;
+
+
+}
+
+public function fetchcustomercompalintreportdata($params){
+    $this->db->select('*,'.TBL_CUSTMOR_COMPALINT.'.id as coustmor_compalint_id');
+    $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_CUSTMOR_COMPALINT.'.customer_name');
+    $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_CUSTMOR_COMPALINT.'.customer_po');
+    $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.id = '.TBL_CUSTMOR_COMPALINT.'.part_no');
+    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
+
+    if($params['search']['value'] != "") 
+    {
+        $this->db->where("(".TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_CUSTMOR_COMPALINT.".report_number LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_FINISHED_GOODS.".name LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_CUSTMOR_COMPALINT.".order_qty LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_CUSTMOR_COMPALINT.".toatal_failure_qty LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_CUSTMOR_COMPALINT.".invoice_no LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_CUSTMOR_COMPALINT.".invoice_date LIKE '%".$params['search']['value']."%')");
+    }
+
+    $this->db->where(TBL_CUSTMOR_COMPALINT.'.status', 1);
+    $this->db->limit($params['length'],$params['start']);
+    $this->db->order_by(TBL_CUSTMOR_COMPALINT.'.id','DESC');
+    $query = $this->db->get(TBL_CUSTMOR_COMPALINT);
+    $fetch_result = $query->result_array();
+
+    $data = array();
+    $counter = 0;
+    if(count($fetch_result) > 0)
+    {
+        foreach ($fetch_result as $key => $value)
+        {
+            $data[$counter]['report_number'] = $value['report_number'];
+            $data[$counter]['buyer_name'] = $value['buyer_name'];
+            $data[$counter]['sales_order_number'] = $value['sales_order_number'];
+            $data[$counter]['part_number'] = $value['part_number'];
+            $data[$counter]['paer_dec'] = $value['name'];
+            $data[$counter]['order_qty'] = $value['order_qty'];
+            $data[$counter]['toatal_failure_qty'] = $value['toatal_failure_qty'];
+            $data[$counter]['invoice_no'] = $value['invoice_no'];
+            $data[$counter]['invoice_date'] = $value['invoice_date'];
+            $data[$counter]['action'] .='';
+            $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editcustomercomplaint/".$value['coustmor_compalint_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";
+            $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downlaodcustomercomplaint/".$value['coustmor_compalint_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
+            $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['coustmor_compalint_id']."' class='fa fa-trash-o deletecustomercompalintreport' aria-hidden='true'></i>"; 
+            $counter++; 
+        }
+    }
+
+    return $data;
+}
+
+
+public function deletecustomercompalintreport($id){
+
+    $this->db->where('id', $id);
+    //$this->db->delete(TBL_SUPPLIER);
+    if($this->db->delete(TBL_CUSTMOR_COMPALINT)){
+       return TRUE;
+    }else{
+       return FALSE;
+    }
+
+}
+
+
+public function getcustomercompalindetailsdata($id){
+
+    $this->db->select('*,'.TBL_CUSTMOR_COMPALINT.'.id as coustmor_compalint_id');
+    $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_CUSTMOR_COMPALINT.'.customer_name');
+    $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_CUSTMOR_COMPALINT.'.customer_po');
+    $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.id = '.TBL_CUSTMOR_COMPALINT.'.part_no');
+    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
+    $this->db->where(TBL_CUSTMOR_COMPALINT.'.id', $id);
+    $this->db->where(TBL_CUSTMOR_COMPALINT.'.status', 1);
+    $query = $this->db->get(TBL_CUSTMOR_COMPALINT);
+    $fetch_result = $query->result_array();
+    return $fetch_result;
+}
+
+
+}
 
 
 
