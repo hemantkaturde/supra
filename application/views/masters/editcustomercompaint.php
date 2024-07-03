@@ -233,7 +233,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="effective_action">Effective Action</label>
-                                            <input type="text" class="form-control datepicker" id="effective_action" value="<?=$getcustomercompalindetailsdata[0]['effective_action']?>" name="effective_action">
+                                            <input type="text" class="form-control" id="effective_action" value="<?=$getcustomercompalindetailsdata[0]['effective_action']?>" name="effective_action">
                                             <p class="error effective_action_error"></p>
                                         </div>
                                     </div>
