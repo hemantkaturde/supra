@@ -17,16 +17,20 @@
             </div>
         </div>
 
+        <input type="hidden" class="form-control" id="item_id" name="item_id"  value="<?=$item_id;?>" readonly>
+
         <div class="row">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="buyer_name">Stock Id</label>
+                    <input type="text" class="form-control" id="stock_id" name="stock_id"  value="<?=$getsearchstockvendordeatils[0]['stock_id_number'];?>"  style="background: #FFF;" readonly>
+                </div>
+            </div>
+
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="vendor_name">Vendor Name </label>
-                        <select class="form-control" name="vendor_name" id="vendor_name">
-                            <option st-id="" value="">Select Vendor Name</option>
-                                <?php foreach ($vendorList as $key => $value) {?>
-                                    <option value="<?php echo $value['ven_id']; ?>" ><?php echo $value['vendor_name']; ?></option>
-                                <?php } ?>
-                        </select>
+                        <input type="text" class="form-control" id="vendor_name" name="vendor_name" value="<?=$getsearchstockvendordeatils[0]['vendor_name'];?>" style="background: #FFF;" readonly>
                     <p class="error vendor_name_error"></p>
                 </div>
             </div>  
@@ -34,37 +38,24 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="vendor_po_number">Vendor PO Number</label>
-                        <select class="form-control vendor_po_for_buyer_details_ vendor_po_number_itam_mapping vendor_po_number_for_stock_data" name="vendor_po_number" id="vendor_po_number">
-                            <option st-id="" value="">Select Vendor PO Number</option>
-                        </select>
-                    <p class="error vendor_po_number_error"></p>
+                        <input type="text" class="form-control" id="vpo_number" name="vpo_number" value="<?=$getsearchstockvendordeatils[0]['vpo_number'];?>" style="background: #FFF;" readonly>
+                    <p class="error vpo_number_error"></p>
                 </div>
             </div>  
 
             <div class="col-md-2">
                 <div class="form-group">
-                    <label for="item_number">Part Number </label>
-                        <select class="form-control getbuyerorderqtyfrompartnumber" name="item_number" id="item_number">
-                            <option st-id="" value="">Select Part Name</option>
-                                <!-- <?php foreach ($getallitemsfromfgorrawmaterial as $key => $value) {?>
-                                    <option value="<?php echo $value['find_id']; ?>" ><?php echo $value['part_number']; ?></option>
-                                <?php } ?> -->
-                        </select>
-                    <p class="error item_number_error"></p>
+                    <label for="vendor_po_number">Part Number</label>
+                        <input type="text" class="form-control" id="part_number" name="part_number" value="<?=$getsearchstockvendordeatils[0]['fg_part_number'];?>" style="background: #FFF;" readonly>
+                    <p class="error part_number_error"></p>
                 </div>
             </div>  
-
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label for="buyer_name">Stock Id</label>
-                    <input type="text" class="form-control" id="stock_id" name="stock_id" readonly>
-                </div>
-            </div>  
+  
 
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="stock_date">Stock Date</label>
-                    <input type="text" class="form-control" id="stock_date" name="stock_date" readonly>
+                    <input type="text" class="form-control" id="stock_date" name="stock_date" value="<?=$getsearchstockvendordeatils[0]['stock_date'];?>"  style="background: #FFF;" readonly>
                 </div>
             </div>  
 
@@ -74,35 +65,35 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="buyer_name">Buyer Name </label>
-                    <input type="text" class="form-control" id="buyer_name" name="buyer_name" readonly>
+                    <input type="text" class="form-control" id="buyer_name" name="buyer_name" value="<?=$getsearchstockvendordeatils[0]['by_name'];?>" style="background: #FFF;" readonly>
                 </div>
             </div>
 
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="buyer_po_number">Buyer PO Number</label>
-                    <input type="text" class="form-control" id="buyer_po_number" name="buyer_po_number" readonly>
+                    <input type="text" class="form-control" id="buyer_po_number" name="buyer_po_number" value="<?=$getsearchstockvendordeatils[0]['sales_order_number'];?>" style="background: #FFF;" readonly>
                 </div>
             </div>  
 
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="buyer_delivery_date">Buyer Delivery Date</label>
-                    <input type="text" class="form-control" id="buyer_delivery_date" name="buyer_delivery_date" readonly>
+                    <input type="text" class="form-control" id="buyer_delivery_date" name="buyer_delivery_date" value="<?=$getsearchstockvendordeatils[0]['buyer_delivery_date'];?>" style="background: #FFF;" readonly>
                 </div>
             </div>  
 
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="buyer_po_date">Buyer PO Date</label>
-                    <input type="text" class="form-control" id="buyer_po_date" name="buyer_po_date" readonly>
+                    <input type="text" class="form-control" id="buyer_po_date" name="buyer_po_date" value="<?=$getsearchstockvendordeatils[0]['buyer_po_date'];?>" style="background: #FFF;" readonly>
                 </div>
             </div> 
 
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="buyer_order_qty">Buyer Order Qty</label>
-                    <input type="text" class="form-control" id="buyer_order_qty" name="buyer_order_qty" readonly>
+                    <input type="text" class="form-control" id="buyer_order_qty" name="buyer_order_qty" value="<?=$getsearchstockvendordeatils[0]['buyer_order_qty'];?>"  style="background: #FFF;" readonly>
                 </div>
             </div>  
 
@@ -152,7 +143,7 @@
                                 <div class="col-md-3" style="margin-top: 20px;">
                                 <div class="form-group">
                                     <label for="actual_received_qty_in_pcs">Actual Received Qty (In Pcs)</label>
-                                    <input type="text" class="form-control" id="actual_received_qty_in_pcs" name="actual_received_qty_in_pcs">
+                                    <input type="text" class="form-control" id="actual_received_qty_in_pcs" name="actual_received_qty_in_pcs" readonly>
                                     </div>
                                 </div>  
 

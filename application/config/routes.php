@@ -295,11 +295,9 @@ $route['saveStockformitem'] = "admin/saveStockformitem";
 $route['deleteStockformitem'] = "admin/deleteStockformitem";
 $route['deletestockform'] = "admin/deletestockform";
 $route['editstcokformdetails/(:any)'] = "admin/editstcokformdetails/$1";
-$route['searchstock'] = "admin/searchstock";
-$route['fetchsearchstockrecords'] = "admin/fetchsearchstockrecords";
+
 $route['getincominglotnumberbyvendor'] = "admin/getincominglotnumberbyvendor";
 $route['getinvoiceqtybyLotnumber'] = "admin/getinvoiceqtybyLotnumber";
-$route['getalltotalcalculationstockform'] = "admin/getalltotalcalculationstockform";
 $route['fetchexportrecordsitem'] = "admin/fetchexportrecordsitem";
 $route['fetchrejecteditem'] = "admin/fetchrejecteditem";
 $route['omschallan'] = "admin/omschallan";
@@ -475,8 +473,6 @@ $route['editchadebitnote/(:any)'] = "admin/editchadebitnote/$1";
 $route['salestrackingexcelreport'] = "admin/salestrackingexcelreport";
 $route['paymentdetailsreport'] = "admin/paymentdetailsreport";
 $route['downlaodchadebitnote/(:any)'] = "admin/downlaodchadebitnote/$1";
-
-
 $route['uspincoming'] = "admin/uspincoming";
 $route['customercompliant'] = "admin/customercompliant";
 $route['addnewcustomercomplaint'] = "admin/addnewcustomercomplaint";
@@ -486,13 +482,20 @@ $route['getpartdescriptionusingpartnumber'] = "admin/getpartdescriptionusingpart
 $route['fetchcustomercompalintreport'] = "admin/fetchcustomercompalintreport";
 $route['editcustomercomplaint/(:any)'] = "admin/editcustomercomplaint/$1";
 $route['deletecustomercompalintreport'] = "admin/deletecustomercompalintreport";
-
-
-
-
-
-
-$route['suppliervendorcompliant'] = "admin/suppliervendorcompliant";
-/* End of file routes.php */
 $route['fetchproductionstatusreport'] = "admin/fetchproductionstatusreport";
+$route['suppliervendorcompliant'] = "admin/suppliervendorcompliant";
+$route['searchstockreport'] = "admin/searchstockreport";
+$route['fetchserchstocksrport'] = "admin/fetchserchstocksrport";
+$route['searchstock/(:any)'] = "admin/searchstock/$1";
+$route['fetchsearchstockrecords/(:any)'] = "admin/fetchsearchstockrecords/$1";
+
+$route['getalltotalcalculationstockform/(:any)'] = "admin/getalltotalcalculationstockform/$1";
+
+
+
+/* End of file routes.php */
 /* Location: ./application/config/routes.php */
+
+
+
+

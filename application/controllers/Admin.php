@@ -8830,22 +8830,23 @@ class Admin extends BaseController
         }
     }
 
-    public function searchstock(){
+    public function searchstock($id){
+
         $process = 'Search Stock';
         $processFunction = 'Admin/searchstock';
         $this->logrecord($process,$processFunction);
         $this->global['pageTitle'] = 'Search Stock';
-        $data['vendorList']= $this->admin_model->fetchALLvendorList();
-        $data['buyerList']= $this->admin_model->fetchAllbuyerList();
+        $data['item_id']= $id;
+        $data['getsearchstockvendordeatils']= $this->admin_model->getsearchstockvendordeatils($id);
         $data['getallitemsfromfgorrawmaterial']= $this->admin_model->getallitemsfromfgorrawmaterial();
         $this->loadViews("masters/searchstock", $this->global, $data, NULL);  
     }
 
-    public function fetchsearchstockrecords(){
+    public function fetchsearchstockrecords($id){
 
         $params = $_REQUEST;
-        $totalRecords = $this->admin_model->getsearchstockformcount($params); 
-        $queryRecords = $this->admin_model->getsearchstockformdata($params); 
+        $totalRecords = $this->admin_model->getsearchstockformcount($params,$id); 
+        $queryRecords = $this->admin_model->getsearchstockformdata($params,$id); 
 
         $data = array();
         foreach ($queryRecords as $key => $value)
@@ -8905,8 +8906,8 @@ class Admin extends BaseController
 
     }
 
-    public function getalltotalcalculationstockform(){
-        $getalltotalcalculationstockform = $this->admin_model->getalltotalcalculationstockform();
+    public function getalltotalcalculationstockform($id){
+        $getalltotalcalculationstockform = $this->admin_model->getalltotalcalculationstockform($id);
 
         if($getalltotalcalculationstockform){
             $content = $getalltotalcalculationstockform[0];
@@ -18013,6 +18014,41 @@ public function editcustomercomplaint($id){
     $data['buyerList']= $this->admin_model->fetchAllbuyerList();
     $data['getcustomercompalindetailsdata']= $this->admin_model->getcustomercompalindetailsdata($id);
     $this->loadViews("masters/editcustomercompaint", $this->global, $data, NULL);
+}
+
+
+public function searchstockreport(){
+    $process = 'Search Stock Report';
+    $processFunction = 'Admin/searchstockreport';
+    $this->logrecord($process,$processFunction);
+    $this->global['pageTitle'] = 'Search Stock Report';
+    $this->loadViews("masters/searchstockreport", $this->global, $data, NULL);  
+
+}
+
+public function fetchserchstocksrport(){
+    $params = $_REQUEST;
+    $totalRecords = $this->admin_model->fetchserchstocksrportcount($params); 
+    $queryRecords = $this->admin_model->fetchserchstocksrportdata($params); 
+
+    $data = array();
+    foreach ($queryRecords as $key => $value)
+    {
+        $i = 0;
+        foreach($value as $v)
+        {
+            $data[$key][$i] = $v;
+            $i++;
+        }
+    }
+    $json_data = array(
+        "draw"            => intval( $params['draw'] ),   
+        "recordsTotal"    => intval( $totalRecords ),  
+        "recordsFiltered" => intval($totalRecords),
+        "data"            => $data   // total data array
+        );
+    echo json_encode($json_data);
+
 }
 
 
