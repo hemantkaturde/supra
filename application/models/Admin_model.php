@@ -14318,9 +14318,10 @@ public function fetchserchstocksrportdata($params){
 
 public function getsearchstockvendordeatils($id){
 
-    $this->db->select('*,'.TBL_BUYER_MASTER.'.buyer_name as by_name,'.TBL_VENDOR.'.vendor_name as ven_name,'.TBL_VENDOR_PO_MASTER.'.po_number as vpo_number,'.TBL_FINISHED_GOODS.'.part_number as fg_part_number,'.TBL_STOCKS_ITEM.'.id as search_stock_id');
+    $this->db->select('*,'.TBL_BUYER_MASTER.'.buyer_name as by_name,'.TBL_VENDOR.'.vendor_name as ven_name,'.TBL_VENDOR_PO_MASTER.'.po_number as vpo_number,'.TBL_FINISHED_GOODS.'.part_number as fg_part_number,'.TBL_STOCKS_ITEM.'.id as search_stock_id,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date');
     $this->db->join(TBL_STOCKS, TBL_STOCKS.'.stock_id = '.TBL_STOCKS_ITEM.'.stock_form_id');
     $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_STOCKS.'.buyer_po_number');
+    $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.part_number_id = '.TBL_STOCKS_ITEM.'.part_number');
     $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_STOCKS.'.buyer_name');
     $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_STOCKS.'.vendor_po_number');
     $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_STOCKS.'.vendor_name');

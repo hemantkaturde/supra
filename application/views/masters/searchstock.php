@@ -79,7 +79,7 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="buyer_delivery_date">Buyer Delivery Date</label>
-                    <input type="text" class="form-control" id="buyer_delivery_date" name="buyer_delivery_date" value="<?=$getsearchstockvendordeatils[0]['buyer_delivery_date'];?>" style="background: #FFF;" readonly>
+                    <input type="text" class="form-control" id="buyer_delivery_date" name="buyer_delivery_date" value="<?=$getsearchstockvendordeatils[0]['buyer_po_part_delivery_date'];?>" style="background: #FFF;" readonly>
                 </div>
             </div>  
 
