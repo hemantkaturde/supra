@@ -14307,7 +14307,7 @@ public function fetchserchstocksrportdata($params){
             // $data[$counter]['remark'] =  $value['item_remark'];
             $data[$counter]['previous_bal'] = '';
             $data[$counter]['action'] .='';
-            $data[$counter]['action'] .= "<a href='".ADMIN_PATH."searchstock/".$value['search_stock_id']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa fa-bars' aria-hidden='true'></i></a>   ";
+            $data[$counter]['action'] .= "<a href='".ADMIN_PATH."searchstock/".$value['search_stock_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa fa-bars' aria-hidden='true'></i></a>   ";
             $counter++; 
         }
     }
