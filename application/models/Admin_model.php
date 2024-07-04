@@ -7202,6 +7202,8 @@ class Admin_model extends CI_Model
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id  = '.TBL_STOCKS_ITEM.'.pre_vendor_po_number');
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_STOCKS_ITEM.'.pre_buyer_name');
         $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_STOCKS_ITEM.'.pre_buyer_po_id');
+        $this->db->join(TBL_INCOMING_DETAILS_ITEM, TBL_INCOMING_DETAILS_ITEM.'.id = '.TBL_STOCKS_ITEM.'.lot_number');
+
         $this->db->where(TBL_STOCKS_ITEM.'.stock_form_id IS NOT NULL');
         $this->db->where(TBL_STOCKS_ITEM.'.status', 1);
         $this->db->where(TBL_STOCKS_ITEM.'.id',$id);
@@ -7213,13 +7215,15 @@ class Admin_model extends CI_Model
     }
 
     public function getsearchstockformdata($params,$id){
-        $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name,'.TBL_STOCKS_ITEM.'.f_g_order_qty,'.TBL_STOCKS_ITEM.'.invoice_number,'.TBL_STOCKS_ITEM.'.invoice_date,'.TBL_STOCKS_ITEM.'.invoice_qty_In_pcs,'.TBL_STOCKS_ITEM.'.invoice_qty_In_kgs,'.TBL_STOCKS_ITEM.'.lot_number,'.TBL_STOCKS_ITEM.'.actual_received_qty_in_pcs,'.TBL_STOCKS_ITEM.'.actual_received_qty_in_kgs');
+        $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name,'.TBL_STOCKS_ITEM.'.f_g_order_qty,'.TBL_STOCKS_ITEM.'.invoice_number,'.TBL_STOCKS_ITEM.'.invoice_date,'.TBL_STOCKS_ITEM.'.invoice_qty_In_pcs,'.TBL_STOCKS_ITEM.'.invoice_qty_In_kgs,'.TBL_STOCKS_ITEM.'.lot_number,'.TBL_STOCKS_ITEM.'.actual_received_qty_in_pcs,'.TBL_STOCKS_ITEM.'.actual_received_qty_in_kgs,'.TBL_INCOMING_DETAILS_ITEM.'.lot_no as lotnumber');
         $this->db->join(TBL_STOCKS, TBL_STOCKS.'.stock_id  = '.TBL_STOCKS_ITEM.'.stock_form_id');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_STOCKS_ITEM.'.pre_vendor_name');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_STOCKS_ITEM.'.part_number');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id  = '.TBL_STOCKS_ITEM.'.pre_vendor_po_number');
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_STOCKS_ITEM.'.pre_buyer_name');
         $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_STOCKS_ITEM.'.pre_buyer_po_id');
+        $this->db->join(TBL_INCOMING_DETAILS_ITEM, TBL_INCOMING_DETAILS_ITEM.'.id = '.TBL_STOCKS_ITEM.'.lot_number');
+
 
         $this->db->where(TBL_STOCKS_ITEM.'.stock_form_id IS NOT NULL');
         $this->db->where(TBL_STOCKS_ITEM.'.id',$id);
@@ -7257,7 +7261,7 @@ class Admin_model extends CI_Model
 
                 $data[$counter]['invoice_qty_In_pcs'] =$invoice_qty_In_pcs;
                 $data[$counter]['invoice_qty_In_kgs'] =$invoice_qty_In_kgs;
-                $data[$counter]['lot_number'] =$value['lot_number'];
+                $data[$counter]['lot_number'] =$value['lotnumber'];
 
                 if($value['actual_received_qty_in_pcs']){
                     $actual_received_qty_in_pcs =round($value['actual_received_qty_in_pcs'], 2);
