@@ -7421,23 +7421,25 @@ class Admin_model extends CI_Model
         return $data;
     }
 
-    public function getexportrejecteditemcount($params){
+    public function getexportrejecteditemcount($params,$part_number){
         $this->db->select('*');
         $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
         $this->db->join(TBL_REJECTION_FORM, TBL_REJECTION_FORM.'.id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.rejection_form_id');
         $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.status', 1);
+        $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id',$part_number);
         $query = $this->db->get(TBL_REJECTION_FORM_REJECTED_ITEM);
         $rowcount = $query->num_rows();
         return $rowcount;
     }
 
-    public function getexportrejecteditemdata($params){
+    public function getexportrejecteditemdata($params,$id){
         $this->db->select('*,'.TBL_FINISHED_GOODS.'.net_weight as fg_net_weight');
         $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
         $this->db->join(TBL_REJECTION_FORM, TBL_REJECTION_FORM.'.id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.rejection_form_id');
         $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.status', 1);
+        $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id',$id);
         $this->db->order_by(TBL_REJECTION_FORM_REJECTED_ITEM.'.id ','DESC');
         $query = $this->db->get(TBL_REJECTION_FORM_REJECTED_ITEM);
         $fetch_result = $query->result_array();

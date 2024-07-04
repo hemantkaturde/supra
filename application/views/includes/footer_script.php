@@ -16014,31 +16014,31 @@
 	    //     });
 		// });
 
-		// $(document).ready(function() {
-		// 	var dt = $('#view_rejected_items').DataTable({
-	    //         "columnDefs": [ 
-	    //              { className: "details-control", "targets": [ 0 ] },
-	    //              { "width": "10%", "targets": 0 },
-	    //              { "width": "10%", "targets": 1 },
-		// 			 { "width": "10%", "targets": 2 },
-	    //              { "width": "10%", "targets": 3 },
-	    //         ],
-	    //         responsive: true,
-	    //         "oLanguage": {
-	    //             "sEmptyTable": "<i>No Rejected Items Found.</i>",
-	    //         }, 
-	    //         "bSort" : false,
-	    //         "bFilter":false,
-	    //         "bLengthChange": true,
-	    //         "iDisplayLength": 10,   
-	    //         "bProcessing": true,
-	    //         "serverSide": true,
-	    //         "ajax":{
-        //             url :"<?php echo base_url();?>fetchrejecteditem",
-        //             type: "post",
-	    //         },
-	    //     });
-		// });
+		$(document).ready(function() {
+			var dt = $('#view_rejected_items').DataTable({
+	            "columnDefs": [ 
+	                 { className: "details-control", "targets": [ 0 ] },
+	                 { "width": "10%", "targets": 0 },
+	                 { "width": "10%", "targets": 1 },
+					 { "width": "10%", "targets": 2 },
+	                 { "width": "10%", "targets": 3 },
+	            ],
+	            responsive: true,
+	            "oLanguage": {
+	                "sEmptyTable": "<i>No Rejected Items Found.</i>",
+	            }, 
+	            "bSort" : false,
+	            "bFilter":false,
+	            "bLengthChange": true,
+	            "iDisplayLength": 10,   
+	            "bProcessing": true,
+	            "serverSide": true,
+	            "ajax":{
+                    url :"<?php echo base_url();?>fetchrejecteditem/"+item_id,
+                    type: "post",
+	            },
+	        });
+		});
 
 
 
