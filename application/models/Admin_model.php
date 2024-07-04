@@ -7240,11 +7240,11 @@ class Admin_model extends CI_Model
                 $data[$counter]['f_g_order_qty'] =$value['f_g_order_qty'];
                 $data[$counter]['invoice_number'] =$value['invoice_number'];
                 $data[$counter]['invoice_date'] =$value['invoice_date'];
-                $data[$counter]['invoice_qty_In_pcs'] =$value['invoice_qty_In_pcs'];
-                $data[$counter]['invoice_qty_In_kgs'] =$value['invoice_qty_In_kgs'];
+                $data[$counter]['invoice_qty_In_pcs'] =round($value['invoice_qty_In_pcs'],2);
+                $data[$counter]['invoice_qty_In_kgs'] =round($value['invoice_qty_In_kgs'], 2);
                 $data[$counter]['lot_number'] =$value['lot_number'];
-                $data[$counter]['actual_received_qty_in_pcs'] =$value['actual_received_qty_in_pcs'];
-                $data[$counter]['actual_received_qty_in_kgs'] =$value['actual_received_qty_in_kgs'];
+                $data[$counter]['actual_received_qty_in_pcs'] =round($value['actual_received_qty_in_pcs'], 2);
+                $data[$counter]['actual_received_qty_in_kgs'] =round($value['actual_received_qty_in_kgs'],2);
                 $counter++; 
             }
         }
