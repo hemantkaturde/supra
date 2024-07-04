@@ -7240,11 +7240,40 @@ class Admin_model extends CI_Model
                 $data[$counter]['f_g_order_qty'] =$value['f_g_order_qty'];
                 $data[$counter]['invoice_number'] =$value['invoice_number'];
                 $data[$counter]['invoice_date'] =$value['invoice_date'];
-                $data[$counter]['invoice_qty_In_pcs'] =round($value['invoice_qty_In_pcs'],2);
-                $data[$counter]['invoice_qty_In_kgs'] =round($value['invoice_qty_In_kgs'], 2);
+
+
+
+                if($value['invoice_qty_In_pcs']){
+                    $invoice_qty_In_pcs =round($value['invoice_qty_In_pcs'], 2);
+                }else{
+                    $invoice_qty_In_pcs =0;
+                }
+
+                if($value['invoice_qty_In_kgs']){
+                    $invoice_qty_In_kgs =round($value['invoice_qty_In_kgs'], 2);
+                }else{
+                    $invoice_qty_In_kgs =0;
+                }
+
+                $data[$counter]['invoice_qty_In_pcs'] =$invoice_qty_In_pcs;
+                $data[$counter]['invoice_qty_In_kgs'] =$invoice_qty_In_kgs;
                 $data[$counter]['lot_number'] =$value['lot_number'];
-                $data[$counter]['actual_received_qty_in_pcs'] =round($value['actual_received_qty_in_pcs'], 2);
-                $data[$counter]['actual_received_qty_in_kgs'] =round($value['actual_received_qty_in_kgs'],2);
+
+                if($value['actual_received_qty_in_pcs']){
+                    $actual_received_qty_in_pcs =round($value['actual_received_qty_in_pcs'], 2);
+                }else{
+                    $actual_received_qty_in_pcs =0;
+                }
+
+
+                if($value['actual_received_qty_in_kgs']){
+                    $actual_received_qty_in_kgs =round($value['actual_received_qty_in_kgs'], 2);
+                }else{
+                    $actual_received_qty_in_kgs =0;
+                }
+
+                $data[$counter]['actual_received_qty_in_pcs'] = $actual_received_qty_in_pcs;
+                $data[$counter]['actual_received_qty_in_kgs'] = $actual_received_qty_in_kgs;
                 $counter++; 
             }
         }
