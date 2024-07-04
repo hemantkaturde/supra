@@ -20,6 +20,16 @@
         <input type="hidden" class="form-control" id="item_id" name="item_id"  value="<?=$item_id;?>" readonly>
 
         <div class="row">
+
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="vendor_po_number">Part Number</label>
+                        <input type="text" class="form-control" id="part_number" name="part_number" value="<?=$getsearchstockvendordeatils[0]['fg_part_number'];?>" style="background: #FFF;" readonly>
+                    <p class="error part_number_error"></p>
+                </div>
+            </div> 
+
+
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="buyer_name">Stock Id</label>
@@ -43,13 +53,7 @@
                 </div>
             </div>  
 
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label for="vendor_po_number">Part Number</label>
-                        <input type="text" class="form-control" id="part_number" name="part_number" value="<?=$getsearchstockvendordeatils[0]['fg_part_number'];?>" style="background: #FFF;" readonly>
-                    <p class="error part_number_error"></p>
-                </div>
-            </div>  
+          
   
 
             <div class="col-md-2">
@@ -78,7 +82,7 @@
 
             <div class="col-md-2">
                 <div class="form-group">
-                    <label for="buyer_delivery_date">Buyer Delivery Date</label>
+                    <label for="buyer_delivery_date">Buyer Part Delivery Date</label>
                     <input type="text" class="form-control" id="buyer_delivery_date" name="buyer_delivery_date" value="<?=$getsearchstockvendordeatils[0]['buyer_po_part_delivery_date'];?>" style="background: #FFF;" readonly>
                 </div>
             </div>  
