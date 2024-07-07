@@ -25,10 +25,70 @@
                             <div class="box-body">
                                 <div class="row">
 
+                                <?php
+                                        if($getPreviouscustomerCompalinformnumber['report_number']){
+                                                // $arr = str_split($getPreviousSalesOrderNumber['sales_order_number']);
+                                                // $i = end($arr);
+                                                // $inrno= "SQBO2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                                // $sales_order_number = $inrno;
+
+                                                $currentDate = new DateTime();
+
+                                                // Check if the current date is on or after April 1st
+                                                if ($currentDate >= new DateTime(date('Y') . '-04-01')) {
+                                                    // If it is, the financial year has started in the current calendar year
+                                                    //$startYear = date('Y');
+                                                    $startYear = date('y');
+                                                    $endYear = $startYear + 1;
+                                                } else {
+                                                    // If it is not, the financial year has started in the previous calendar year
+                                                    //$endYear = date('Y');
+                                                    $endYear = date('y');
+                                                    $startYear = $endYear - 1;
+                                                }
+
+                                                // Display the financial year
+                                                $financialYear = $startYear . '-' . $endYear;
+
+                                                $string = $getPreviouscustomerCompalinformnumber['report_number'];
+
+                                                $explod = explode("/",$string);
+                                                
+                                                $n = 4; // Number of characters to extract from the end
+                                                $lastNCharacters = substr($explod[1], -$n);
+                                                //$inrno= "SQBO2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+
+                                                $inrno= 'CC/'.($lastNCharacters+1)."/".$financialYear;
+                                                $report_no = $inrno;
+
+                                        }else{
+
+                                            $currentDate = new DateTime();
+
+                                            // Check if the current date is on or after April 1st
+                                            if ($currentDate >= new DateTime(date('Y') . '-04-01')) {
+                                                // If it is, the financial year has started in the current calendar year
+                                                //$startYear = date('Y');
+                                                $startYear = date('y');
+                                                $endYear = $startYear + 1;
+                                            } else {
+                                                // If it is not, the financial year has started in the previous calendar year
+                                                //$endYear = date('Y');
+                                                $endYear = date('y');
+                                                $startYear = $endYear - 1;
+                                            }
+
+                                            // Display the financial year
+                                            $financialYear = $startYear . '-' . $endYear;
+
+                                            $report_no = 'CC/'.'1/'.$financialYear;
+                                        }
+                                    ?>
+
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="report_number">Report No <span class="required">*</span></label>
-                                            <input type="text" class="form-control" id="report_number" name="report_number" value="1" readonly>
+                                            <input type="text" class="form-control" id="report_number" name="report_number" value="<?=$report_no?>" readonly>
                                         </div>
                                     </div>
                                     

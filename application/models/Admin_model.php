@@ -14152,7 +14152,7 @@ public function fetchcustomercompalintreportcount($params){
     $this->db->select('*,'.TBL_CUSTMOR_COMPALINT.'.id as coustmor_compalint_id');
     $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_CUSTMOR_COMPALINT.'.customer_name');
     $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_CUSTMOR_COMPALINT.'.customer_po');
-    $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.id = '.TBL_CUSTMOR_COMPALINT.'.part_no');
+    $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.part_number_id = '.TBL_CUSTMOR_COMPALINT.'.part_no');
     $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
 
     if($params['search']['value'] != "") 
@@ -14181,7 +14181,7 @@ public function fetchcustomercompalintreportdata($params){
     $this->db->select('*,'.TBL_CUSTMOR_COMPALINT.'.id as coustmor_compalint_id');
     $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_CUSTMOR_COMPALINT.'.customer_name');
     $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_CUSTMOR_COMPALINT.'.customer_po');
-    $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.id = '.TBL_CUSTMOR_COMPALINT.'.part_no');
+    $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.part_number_id = '.TBL_CUSTMOR_COMPALINT.'.part_no');
     $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
 
     if($params['search']['value'] != "") 
@@ -14367,6 +14367,18 @@ public function getsearchstockvendordeatils($id){
     $fetch_result = $query->result_array();
     return $fetch_result;
 
+}
+
+
+public function getPreviouscustomerCompalinformnumber(){
+
+    $this->db->select('report_number');
+    $this->db->where(TBL_CUSTMOR_COMPALINT.'.status', 1);
+    $this->db->limit(1);
+    $this->db->order_by(TBL_CUSTMOR_COMPALINT.'.id','DESC');
+    $query = $this->db->get(TBL_CUSTMOR_COMPALINT);
+    $rowcount = $query->result_array();
+    return $rowcount;
 }
 
 

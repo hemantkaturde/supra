@@ -17910,6 +17910,8 @@ public function addnewcustomercomplaint(){
         $processFunction = 'Admin/addnewcustomercomplaint';
         $this->logrecord($process,$processFunction);
         // $data['getPreviouscoustomercomplaint_number'] = $this->admin_model->getPreviousDebitnote_number();
+        $data['getPreviouscustomerCompalinformnumber']= $this->admin_model->getPreviouscustomerCompalinformnumber()[0];
+
         $data['buyerList']= $this->admin_model->fetchAllbuyerList();
         $this->global['pageTitle'] = 'Add New Coustmor Complaint';
         $this->loadViews("masters/addnewcustomercomplaint", $this->global, $data, NULL);
