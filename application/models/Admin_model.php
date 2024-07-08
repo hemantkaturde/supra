@@ -14291,7 +14291,7 @@ public function fetchserchstocksrportcount($params){
         $this->db->or_where(TBL_STOCKS_ITEM.".actual_received_qty_in_pcs LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_STOCKS_ITEM.".item_remark LIKE '%".$params['search']['value']."%')");
     }
-
+    $this->db->group_by(TBL_STOCKS_ITEM.'.id');
     $this->db->where(TBL_STOCKS_ITEM.'.status', 1);
     $this->db->order_by(TBL_STOCKS_ITEM.'.id','DESC');
     $query = $this->db->get(TBL_STOCKS_ITEM);
@@ -14325,7 +14325,8 @@ public function fetchserchstocksrportdata($params){
     }
 
     $this->db->where(TBL_STOCKS_ITEM.'.status', 1);
-    $this->db->limit($params['length'],$params['start']);
+    $this->db->where(TBL_STOCKS_ITEM.'.status', 1);
+    $this->db->group_by(TBL_STOCKS_ITEM.'.id');
     $this->db->order_by(TBL_STOCKS_ITEM.'.id','DESC');
     $query = $this->db->get(TBL_STOCKS_ITEM);
     $fetch_result = $query->result_array();
