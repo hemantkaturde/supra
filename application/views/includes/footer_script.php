@@ -15771,7 +15771,7 @@
 	<script type="text/javascript">    
 
         var item_id =  $('#item_id').val();
-		var part_number_id =  $('#part_number_id').val();
+		var vendor_po_item_id =  $('#vendor_po_item_id').val();
 		
         $(document).ready(function() {
 		    var dt = $('#view_stock_search_record').DataTable({
@@ -16036,7 +16036,7 @@
 	            "bProcessing": true,
 	            "serverSide": true,
 	            "ajax":{
-                    url :"<?php echo base_url();?>fetchrejecteditem/"+part_number_id,
+                    url :"<?php echo base_url();?>fetchrejecteditem/"+vendor_po_item_id,
                     type: "post",
 	            },
 	        });

@@ -18,7 +18,7 @@
         </div>
 
         <input type="hidden" class="form-control" id="item_id" name="item_id"  value="<?=$item_id;?>" readonly>
-        <input type="hidden" class="form-control" id="part_number_id" name="part_number_id"  value="<?=$getsearchstockvendordeatils[0]['part_number_id'];?>" readonly>
+        <input type="hidden" class="form-control" id="vendor_po_item_id" name="vendor_po_item_id"  value="<?=$getsearchstockvendordeatils[0]['vendor_po_item_id'];?>" readonly>
 
 
         <div class="row">
