@@ -29,7 +29,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="report_number">Report No <span class="required">*</span></label>
-                                            <input type="text" class="form-control" id="report_number" name="report_number" value="1" readonly>
+                                            <input type="text" class="form-control" id="report_number" value="<?=$getcustomercompalindetailsdata[0]['report_number']?>" name="report_number" readonly>
                                         </div>
                                     </div>
                                     

@@ -3342,6 +3342,7 @@ class Admin_model extends CI_Model
             $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_INCOMING_DETAILS.".reported_by LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_INCOMING_DETAILS.".updatedDtm LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_INCOMING_DETAILS.".reported_date LIKE '%".$params['search']['value']."%')");
         }
         $this->db->where(TBL_INCOMING_DETAILS.'.status', 1);        
@@ -3353,7 +3354,7 @@ class Admin_model extends CI_Model
 
     public function getincomingdeatilsdata($params){
 
-        $this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_INCOMING_DETAILS.'.id as incomigid');
+        $this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_INCOMING_DETAILS.'.id as incomigid,'.TBL_INCOMING_DETAILS.'.updatedDtm');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id= '.TBL_INCOMING_DETAILS.'.vendor_name');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id= '.TBL_INCOMING_DETAILS.'.vendor_po_number');
         
@@ -3363,6 +3364,7 @@ class Admin_model extends CI_Model
             $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_INCOMING_DETAILS.".reported_by LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_INCOMING_DETAILS.".updatedDtm LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_INCOMING_DETAILS.".reported_date LIKE '%".$params['search']['value']."%')");
         }
    
@@ -3386,11 +3388,18 @@ class Admin_model extends CI_Model
                     $reported_date = $value['reported_date'];
                 }
 
+                if($value['updatedDtm']=='0000-00-00'){
+                    $updatedDtm = '';
+                }else{
+                    $updatedDtm = $value['updatedDtm'];
+                }
+
                 $data[$counter]['incoming_details_id'] = $value['incoming_details_id'];
                 $data[$counter]['vendor_name'] = $value['vendorname'];
                 $data[$counter]['vendor_po_number'] = $value['po_number'];
                 $data[$counter]['reported_by'] = $value['reported_by'];
                 $data[$counter]['reported_date'] = $reported_date;
+                $data[$counter]['modified_date'] = $updatedDtm;
                 $data[$counter]['action'] = '';
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editincomingdetails/".$value['incomigid']."' style='cursor: pointer;'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['incomigid']."' class='fa fa-trash-o deleteIncomingDetails' aria-hidden='true'></i>"; 

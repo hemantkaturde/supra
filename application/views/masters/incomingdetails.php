@@ -34,6 +34,7 @@
                                         <th>Vendor P.O.No</th>
                                         <th>Report By</th>
                                         <th>Report Date</th>
+                                        <th>Modified Date</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
