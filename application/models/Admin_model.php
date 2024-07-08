@@ -7430,24 +7430,24 @@ class Admin_model extends CI_Model
         return $data;
     }
 
-    public function getexportrejecteditemcount($params,$vendor_po_item_id){
+    public function getexportrejecteditemcount($params,$part_number){
         $this->db->select('*');
         $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
         $this->db->join(TBL_REJECTION_FORM, TBL_REJECTION_FORM.'.id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.rejection_form_id');
         $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.status', 1);
-        $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id',$vendor_po_item_id);
+        $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id',$part_number);
         $query = $this->db->get(TBL_REJECTION_FORM_REJECTED_ITEM);
         $rowcount = $query->num_rows();
         return $rowcount;
     }
 
-    public function getexportrejecteditemdata($params,$vendor_po_item_id){
+    public function getexportrejecteditemdata($params,$part_number){
         $this->db->select('*,'.TBL_FINISHED_GOODS.'.net_weight as fg_net_weight');
         $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
         $this->db->join(TBL_REJECTION_FORM, TBL_REJECTION_FORM.'.id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.rejection_form_id');
-        $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id',$vendor_po_item_id);
+        $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id',$part_number);
         $this->db->order_by(TBL_REJECTION_FORM_REJECTED_ITEM.'.id ','DESC');
         $query = $this->db->get(TBL_REJECTION_FORM_REJECTED_ITEM);
         $fetch_result = $query->result_array();
@@ -14291,8 +14291,10 @@ public function fetchserchstocksrportcount($params){
         $this->db->or_where(TBL_STOCKS_ITEM.".actual_received_qty_in_pcs LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_STOCKS_ITEM.".item_remark LIKE '%".$params['search']['value']."%')");
     }
-    $this->db->group_by(TBL_STOCKS_ITEM.'.id');
+
     $this->db->where(TBL_STOCKS_ITEM.'.status', 1);
+    $this->db->group_by(TBL_STOCKS.'.stock_id_number');
+    $this->db->group_by(TBL_STOCKS_ITEM.'.part_number');
     $this->db->order_by(TBL_STOCKS_ITEM.'.id','DESC');
     $query = $this->db->get(TBL_STOCKS_ITEM);
     $rowcount = $query->num_rows();
@@ -14325,8 +14327,9 @@ public function fetchserchstocksrportdata($params){
     }
 
     $this->db->where(TBL_STOCKS_ITEM.'.status', 1);
-    $this->db->where(TBL_STOCKS_ITEM.'.status', 1);
-    $this->db->group_by(TBL_STOCKS_ITEM.'.id');
+    $this->db->group_by(TBL_STOCKS.'.stock_id_number');
+    $this->db->group_by(TBL_STOCKS_ITEM.'.part_number');
+    $this->db->limit($params['length'],$params['start']);
     $this->db->order_by(TBL_STOCKS_ITEM.'.id','DESC');
     $query = $this->db->get(TBL_STOCKS_ITEM);
     $fetch_result = $query->result_array();
@@ -14344,13 +14347,13 @@ public function fetchserchstocksrportdata($params){
             $data[$counter]['vendor_name'] = $value['ven_name'];
             $data[$counter]['v_po_number'] = $value['vpo_number'];
             $data[$counter]['fg_part_number'] = $value['fg_part_number'];
-            $data[$counter]['invoice_qty_In_pcs'] = $value['invoice_qty_In_pcs'];
-            $data[$counter]['actual_received_qty_in_pcs'] = $value['actual_received_qty_in_pcs'];
-            $data[$counter]['total_export_qty_in_pcs'] = '';
-            $data[$counter]['total_rejection_qty_in_pcs'] = '';
-            $data[$counter]['balance_qty_in_pcs'] = '';
-            // $data[$counter]['remark'] =  $value['item_remark'];
-            $data[$counter]['previous_bal'] = '';
+            // $data[$counter]['invoice_qty_In_pcs'] = $value['invoice_qty_In_pcs'];
+            // $data[$counter]['actual_received_qty_in_pcs'] = $value['actual_received_qty_in_pcs'];
+            // $data[$counter]['total_export_qty_in_pcs'] = '';
+            // $data[$counter]['total_rejection_qty_in_pcs'] = '';
+            // $data[$counter]['balance_qty_in_pcs'] = '';
+             $data[$counter]['remark'] =  $value['item_remark'];
+            // $data[$counter]['previous_bal'] = '';
             $data[$counter]['action'] .='';
             $data[$counter]['action'] .= "<a href='".ADMIN_PATH."searchstock/".$value['search_stock_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa fa-bars' aria-hidden='true'></i></a>   ";
             $counter++; 
@@ -14363,13 +14366,12 @@ public function fetchserchstocksrportdata($params){
 
 public function getsearchstockvendordeatils($id){
 
-    $this->db->select('*,'.TBL_BUYER_MASTER.'.buyer_name as by_name,'.TBL_VENDOR.'.vendor_name as ven_name,'.TBL_VENDOR_PO_MASTER.'.po_number as vpo_number,'.TBL_FINISHED_GOODS.'.part_number as fg_part_number,'.TBL_STOCKS_ITEM.'.id as search_stock_id,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date,'.TBL_STOCKS_ITEM.'.part_number as part_number_id,'.TBL_VENDOR_PO_MASTER_ITEM.'.id as vendor_po_item_id');
+    $this->db->select('*,'.TBL_BUYER_MASTER.'.buyer_name as by_name,'.TBL_VENDOR.'.vendor_name as ven_name,'.TBL_VENDOR_PO_MASTER.'.po_number as vpo_number,'.TBL_FINISHED_GOODS.'.part_number as fg_part_number,'.TBL_STOCKS_ITEM.'.id as search_stock_id,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date,'.TBL_STOCKS_ITEM.'.part_number as part_number_id');
     $this->db->join(TBL_STOCKS, TBL_STOCKS.'.stock_id = '.TBL_STOCKS_ITEM.'.stock_form_id');
     $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_STOCKS.'.buyer_po_number');
     $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.part_number_id = '.TBL_STOCKS_ITEM.'.part_number');
     $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_STOCKS.'.buyer_name');
     $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_STOCKS.'.vendor_po_number');
-    $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id = '.TBL_VENDOR_PO_MASTER.'.id');
     $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_STOCKS.'.vendor_name');
     $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_STOCKS_ITEM.'.part_number');   
     $this->db->where(TBL_STOCKS_ITEM.'.id', $id); 
