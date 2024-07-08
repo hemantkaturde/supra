@@ -7430,13 +7430,13 @@ class Admin_model extends CI_Model
         return $data;
     }
 
-    public function getexportrejecteditemcount($params,$part_number){
+    public function getexportrejecteditemcount($params,$vendor_po_item_id){
         $this->db->select('*');
         $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
         $this->db->join(TBL_REJECTION_FORM, TBL_REJECTION_FORM.'.id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.rejection_form_id');
         $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.status', 1);
-        $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id',$part_number);
+        $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id',$vendor_po_item_id);
         $query = $this->db->get(TBL_REJECTION_FORM_REJECTED_ITEM);
         $rowcount = $query->num_rows();
         return $rowcount;
