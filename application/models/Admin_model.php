@@ -7466,7 +7466,9 @@ class Admin_model extends CI_Model
                 $data[$counter]['rejection_number'] =$i++;
                 $data[$counter]['rejected_reason'] =$value['rejected_reason'];
                 $data[$counter]['qty_In_pcs'] =$value['qty_In_pcs'];
-                $data[$counter]['qty_In_kgs'] =$value['fg_net_weight'] * $value['qty_In_kgs'];
+                $data[$counter]['qty_In_kgs'] =$value['qty_In_kgs'];
+                //$data[$counter]['qty_In_kgs'] =$value['fg_net_weight'] * $value['qty_In_kgs'];
+
                 $counter++; 
             }
         }
