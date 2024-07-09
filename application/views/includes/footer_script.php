@@ -15775,6 +15775,7 @@
 		var vendor_po_item_id =  $('#vendor_po_item_id').val();
 		var sock_id =  $('#stock_id').val();
 		var part_number_id =  $('#part_number_id').val();
+		var buyer_po_number_id =  $('#buyer_po_number_id').val();
 
 
         $(document).ready(function() {
@@ -15993,32 +15994,32 @@
 
 		/* Commnet Starrt 04-07-2024*/
 
-		// $(document).ready(function() {
-		// 	var dt = $('#view_export_items').DataTable({
-	    //         "columnDefs": [ 
-	    //              { className: "details-control", "targets": [ 0 ] },
-	    //              { "width": "10%", "targets": 0 },
-	    //              { "width": "10%", "targets": 1 },
-		// 			 { "width": "10%", "targets": 2 },
-	    //              { "width": "10%", "targets": 3 },
-		// 			 { "width": "10%", "targets": 4 }
-	    //         ],
-	    //         responsive: true,
-	    //         "oLanguage": {
-	    //             "sEmptyTable": "<i>No Export Items Found.</i>",
-	    //         }, 
-	    //         "bSort" : false,
-	    //         "bFilter":false,
-	    //         "bLengthChange": true,
-	    //         "iDisplayLength": 10,   
-	    //         "bProcessing": true,
-	    //         "serverSide": true,
-	    //         "ajax":{
-        //             url :"<?php echo base_url();?>fetchexportrecordsitem",
-        //             type: "post",
-	    //         },
-	    //     });
-		// });
+		$(document).ready(function() {
+			var dt = $('#view_export_items').DataTable({
+	            "columnDefs": [ 
+	                 { className: "details-control", "targets": [ 0 ] },
+	                 { "width": "10%", "targets": 0 },
+	                 { "width": "10%", "targets": 1 },
+					 { "width": "10%", "targets": 2 },
+	                 { "width": "10%", "targets": 3 },
+					 { "width": "10%", "targets": 4 }
+	            ],
+	            responsive: true,
+	            "oLanguage": {
+	                "sEmptyTable": "<i>No Export Items Found.</i>",
+	            }, 
+	            "bSort" : false,
+	            "bFilter":false,
+	            "bLengthChange": true,
+	            "iDisplayLength": 10,   
+	            "bProcessing": true,
+	            "serverSide": true,
+	            "ajax":{
+                    url :"<?php echo base_url();?>admin/fetchexportrecordsitem/"+buyer_po_number_id+"/"+part_number_id,
+                    type: "post",
+	            },
+	        });
+		});
 
 		$(document).ready(function() {
 			var dt = $('#view_rejected_items').DataTable({

@@ -8916,10 +8916,10 @@ class Admin extends BaseController
         }
     }
 
-    public function fetchexportrecordsitem(){
+    public function fetchexportrecordsitem($buyer_po_number_id,$part_number_id){
         $params = $_REQUEST;
-        $totalRecords = $this->admin_model->getexportrecordsitemcount($params); 
-        $queryRecords = $this->admin_model->getexportrecordsitemdata($params); 
+        $totalRecords = $this->admin_model->getexportrecordsitemcount($params,$buyer_po_number_id,$part_number_id); 
+        $queryRecords = $this->admin_model->getexportrecordsitemdata($params,$buyer_po_number_id,$part_number_id); 
 
         $data = array();
         foreach ($queryRecords as $key => $value)

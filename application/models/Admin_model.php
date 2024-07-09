@@ -7398,19 +7398,25 @@ class Admin_model extends CI_Model
         return $data;
     }
 
-    public function getexportrecordsitemcount($params){
-
-        $this->db->select(TBL_STOCKS_ITEM.'.id');
-        $query = $this->db->get(TBL_STOCKS_ITEM);
+    public function getexportrecordsitemcount($params,$buyer_po_number_id,$part_number_id){
+        $this->db->select(TBL_PACKING_INSTRACTION.'.packing_instrauction_id,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_date,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_qty,'.TBL_PACKING_INSTRACTION.'.buyer_po_date,'.TBL_FINISHED_GOODS.'.net_weight');
+        $this->db->join(TBL_PACKING_INSTRACTION, TBL_PACKING_INSTRACTION.'.id = '.TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_PACKING_INSTRACTION_DETAILS.'.part_number');
+        $this->db->where(TBL_PACKING_INSTRACTION.'.buyer_po_number', $buyer_po_number_id);
+        $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.part_number', $part_number_id);
+        $this->db->order_by(TBL_PACKING_INSTRACTION_DETAILS.'.id','DESC');
+        $query = $this->db->get(TBL_PACKING_INSTRACTION_DETAILS);
         $rowcount = $query->num_rows();
         return $rowcount;
     }
 
-    public function getexportrecordsitemdata($params){
+    public function getexportrecordsitemdata($params,$buyer_po_number_id,$part_number_id){
         $this->db->select(TBL_PACKING_INSTRACTION.'.packing_instrauction_id,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_date,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_qty,'.TBL_PACKING_INSTRACTION.'.buyer_po_date,'.TBL_FINISHED_GOODS.'.net_weight');
         $this->db->join(TBL_PACKING_INSTRACTION, TBL_PACKING_INSTRACTION.'.id = '.TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_PACKING_INSTRACTION_DETAILS.'.part_number');
         $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.status', 1);
+        $this->db->where(TBL_PACKING_INSTRACTION.'.buyer_po_number', $buyer_po_number_id);
+        $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.part_number', $part_number_id);
         $this->db->order_by(TBL_PACKING_INSTRACTION_DETAILS.'.id','DESC');
         $query = $this->db->get(TBL_PACKING_INSTRACTION_DETAILS);
         $fetch_result = $query->result_array();
@@ -7424,7 +7430,8 @@ class Admin_model extends CI_Model
                 $data[$counter]['packing_instrauction_id'] =$value['packing_instrauction_id'];
                 $data[$counter]['buyer_invoice_date'] =$value['buyer_invoice_date'];
                 $data[$counter]['buyer_invoice_qty'] =$value['buyer_invoice_qty'];
-                $data[$counter]['export_qty_in_kgs'] = $value['buyer_invoice_qty'] *  $value['net_weight'];
+                //$data[$counter]['export_qty_in_kgs'] = $value['buyer_invoice_qty'] *  $value['net_weight'];
+                $data[$counter]['export_qty_in_kgs'] = '';
                 $data[$counter]['buyer_po_date'] =$value['buyer_po_date'];
                 $counter++; 
             }
@@ -14374,7 +14381,7 @@ public function fetchserchstocksrportdata($params){
 
 public function getsearchstockvendordeatils($stock_id){
 
-    $this->db->select('*,'.TBL_BUYER_MASTER.'.buyer_name as by_name,'.TBL_VENDOR.'.vendor_name as ven_name,'.TBL_VENDOR_PO_MASTER.'.po_number as vpo_number,'.TBL_FINISHED_GOODS.'.part_number as fg_part_number,'.TBL_STOCKS_ITEM.'.id as search_stock_id,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date,'.TBL_STOCKS_ITEM.'.part_number as part_number_id,'.TBL_STOCKS.'.stock_id as stock_id_form,'.TBL_VENDOR_PO_MASTER_ITEM.'.id as vendor_po_item_id,'.TBL_STOCKS_ITEM.'.part_number as search_stock_item_id,'.TBL_VENDOR_PO_MASTER.'.id as vendor_po_id');
+    $this->db->select('*,'.TBL_BUYER_MASTER.'.buyer_name as by_name,'.TBL_VENDOR.'.vendor_name as ven_name,'.TBL_VENDOR_PO_MASTER.'.po_number as vpo_number,'.TBL_FINISHED_GOODS.'.part_number as fg_part_number,'.TBL_STOCKS_ITEM.'.id as search_stock_id,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date,'.TBL_STOCKS_ITEM.'.part_number as part_number_id,'.TBL_STOCKS.'.stock_id as stock_id_form,'.TBL_VENDOR_PO_MASTER_ITEM.'.id as vendor_po_item_id,'.TBL_STOCKS_ITEM.'.part_number as search_stock_item_id,'.TBL_VENDOR_PO_MASTER.'.id as vendor_po_id,'.TBL_BUYER_PO_MASTER.'.id  as buyer_po_id');
     $this->db->join(TBL_STOCKS, TBL_STOCKS.'.stock_id = '.TBL_STOCKS_ITEM.'.stock_form_id');
     $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_STOCKS.'.buyer_po_number');
     $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.part_number_id = '.TBL_STOCKS_ITEM.'.part_number');
