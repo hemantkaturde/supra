@@ -15859,10 +15859,10 @@
 								{
 									var rejecteditems_data = jQuery.parseJSON( data );
 
-									var total_rejected_qty_kgs = parseFloat(rejecteditems_data.qty_In_kgs) * parseFloat(rejecteditems_data.fg_net_weight);
+									//var total_rejected_qty_kgs = parseFloat(rejecteditems_data.qty_In_kgs) * parseFloat(rejecteditems_data.fg_net_weight);
 
 									$('#total_rejected_qty_in_pcs').val(parseFloat(rejecteditems_data.total_rejected_qty_in_pcs).toFixed(2));
-									$('#total_rejected_qty_in_kgs').val(parseFloat(total_rejected_qty_kgs).toFixed(2));
+									$('#total_rejected_qty_in_kgs').val(parseFloat(rejecteditems_data.qty_In_kgs).toFixed(2));
 
 							         /*================================================================================= */
                                      
