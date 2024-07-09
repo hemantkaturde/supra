@@ -9867,9 +9867,9 @@ class Admin extends BaseController
     }
 
 
-    public function getallcalculationexportitems($vendor_po_item_id,$vendor_po_id){
+    public function getallcalculationexportitems($buyer_po_number_id,$part_number_id){
 
-        $getallcalculationexportitems = $this->admin_model->getallcalculationexportitems($vendor_po_item_id,$vendor_po_id);
+        $getallcalculationexportitems = $this->admin_model->getallcalculationexportitems($buyer_po_number_id,$part_number_id);
 
         if($getallcalculationexportitems){
             $content = $getallcalculationexportitems[0];

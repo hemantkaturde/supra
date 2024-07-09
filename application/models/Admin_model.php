@@ -8493,7 +8493,7 @@ class Admin_model extends CI_Model
   }
 
 
-  public function getallcalculationexportitems($vendor_po_item_id,$vendor_po_id){
+  public function getallcalculationexportitems($buyer_po_number_id,$part_number_id){
 
     // $this->db->select('sum(qty_In_pcs) as total_rejected_qty_in_pcs');
     // //$this->db->where(TBL_INCOMING_DETAILS_ITEM.'.part_number', $part_number);

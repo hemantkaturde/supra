@@ -15873,7 +15873,7 @@
 											$('#total_exp_qty_in_kgs').val('');
 
 											$.ajax({
-												url : "<?php echo ADMIN_PATH;?>admin/getallcalculationexportitems/"+vendor_po_item_id+"/"+vendor_po_id,
+												url : "<?php echo ADMIN_PATH;?>admin/getallcalculationexportitems/"+buyer_po_number_id+"/"+part_number_id,
 												type: "POST",
 												data : {'vendor_name' : ''},
 												success: function(data, textStatus, jqXHR)
@@ -15887,6 +15887,8 @@
 													else
 													{
 														var exportitems_data = jQuery.parseJSON( data );
+
+														console.log(exportitems_data);
 
 														var total_export_qty_kgs = parseFloat(exportitems_data.total_exp_qty_in_pcs) * parseFloat(exportitems_data.fg_net_weight);
 
