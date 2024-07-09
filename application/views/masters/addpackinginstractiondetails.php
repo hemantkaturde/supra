@@ -11,6 +11,7 @@
         </h1>
     </section>
 
+
     <section class="content">
         <div class="row">
             <div class="col-xs-12">
@@ -18,7 +19,15 @@
                     <div class="box box-primary">
                         <div class="box-header">
                             <h3 class="box-title">Add Packing Instructions Details</h3>
+                            <p> </p>
+                            <p><b>Packing Number : </b> <?=$packinginstarctiondetailsfordispaly[0]['packing_instrauction_id']; ?></p>
+                            <p><b>Buyer Name : </b> <?=$packinginstarctiondetailsfordispaly[0]['buyer_name_master']; ?></p>
+                            <p><b>Buyer PO : </b> <?=$packinginstarctiondetailsfordispaly[0]['sales_order_number'].' - '.$packinginstarctiondetailsfordispaly[0]['buyer_po_number']?></p>
+                           
                         </div>
+
+
+
                         <?php $this->load->helper("form"); ?>
                         <form role="form" id="addpackingdetailsform" action="<?php echo base_url() ?>addpackingdetailsform" method="post" role="form">
                             <div class="box-body">

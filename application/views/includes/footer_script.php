@@ -21335,7 +21335,7 @@
 						{ "width": "10%", "targets": 5 },
 						{ "width": "10%", "targets": 6 },
 						{ "width": "10%", "targets": 7 },
-						{ "width": "10%", "targets": 8 },
+						// { "width": "10%", "targets": 8 },
 						// { "width": "10%", "targets": 9 },
 						// { "width": "10%", "targets": 10 },
 						// { "width": "10%", "targets": 11 },

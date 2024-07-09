@@ -5697,12 +5697,11 @@ class Admin extends BaseController
 
     public function addpackinginstractiondetails($packinginstarctionid){
 
+        $data['packinginstarctiondetailsfordispaly']=  $this->admin_model->getpackinginstarction_detailsdata_by_id($packinginstarctionid);
         $packinginstarctionid=  $this->admin_model->getpackinginstarction_data_by_id(trim($packinginstarctionid));
+
         $buyer_po_number = $packinginstarctionid[0]['buyerpoid'];
-
-    
         $main_id = $packinginstarctionid[0]['main_id'];
-
 
         $process = 'Add Packing Instraction Details';
         $processFunction = 'Admin/addpackinginstractiondetails';

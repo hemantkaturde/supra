@@ -3893,17 +3893,29 @@ class Admin_model extends CI_Model
 
     public function getpackinginstarction_data_by_id($packinginstarctionid){
 
-        $this->db->select(TBL_BUYER_MASTER.'.buyer_name,'.TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_BUYER_PO_MASTER.'.buyer_po_number,'.TBL_PACKING_INSTRACTION.'.id as main_id,'.TBL_PACKING_INSTRACTION.'.buyer_po_number as buyerpoid'); 
+        $this->db->select(TBL_BUYER_MASTER.'.buyer_name,'.TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_BUYER_PO_MASTER.'.buyer_po_number,'.TBL_PACKING_INSTRACTION.'.id as main_id,'.TBL_PACKING_INSTRACTION.'.buyer_po_number as buyerpoid,'.TBL_PACKING_INSTRACTION.'.packing_instrauction_id'); 
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_PACKING_INSTRACTION.'.buyer_name');
         $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.buyer_name_id = '.TBL_BUYER_MASTER.'.buyer_id');
         $this->db->where(TBL_PACKING_INSTRACTION.'.id', $packinginstarctionid);
         $this->db->where(TBL_PACKING_INSTRACTION.'.status', 1);
         $query = $this->db->get(TBL_PACKING_INSTRACTION);
         $fetch_result = $query->result_array();
-
         return $fetch_result;
+        
     }
 
+    public function getpackinginstarction_detailsdata_by_id($packinginstarctionid){
+
+            $this->db->select(TBL_BUYER_MASTER.'.buyer_name as buyer_name_master,'.TBL_PACKING_INSTRACTION.'.id as packinginstarctionid,'.TBL_BUYER_PO_MASTER.'.id as buyerpoid,'.TBL_PACKING_INSTRACTION.'.packing_instrauction_id,'.TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_BUYER_PO_MASTER.'.buyer_po_number'); 
+            $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_PACKING_INSTRACTION.'.buyer_name');
+            $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_PACKING_INSTRACTION.'.buyer_po_number');
+            $this->db->where(TBL_PACKING_INSTRACTION.'.status', 1);
+            $this->db->where(TBL_PACKING_INSTRACTION.'.id',$packinginstarctionid);
+            $query = $this->db->get(TBL_PACKING_INSTRACTION);
+            $fetch_result = $query->result_array();
+            return $fetch_result;
+        }
+    
 
     public function savePackinginstarctiondetails($id,$data){
 
@@ -14374,7 +14386,7 @@ public function fetchserchstocksrportdata($params){
             // $data[$counter]['total_export_qty_in_pcs'] = '';
             // $data[$counter]['total_rejection_qty_in_pcs'] = '';
             // $data[$counter]['balance_qty_in_pcs'] = '';
-             $data[$counter]['remark'] =  $value['item_remark'];
+            //  $data[$counter]['remark'] =  $value['item_remark'];
             // $data[$counter]['previous_bal'] = '';
             $data[$counter]['action'] .='';
             $data[$counter]['action'] .= "<a href='".ADMIN_PATH."searchstock/".$value['search_stock_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa fa-bars' aria-hidden='true'></i></a>   ";

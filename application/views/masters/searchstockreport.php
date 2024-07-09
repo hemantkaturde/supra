@@ -35,7 +35,7 @@
                                         <th>Total Export Qty in Pcs</th>
                                         <th>Total Rejection Qty in Pcs</th>
                                         <th>Balance Qty in Pcs</th> -->
-                                        <th>Remarks</th>
+                                        <!-- <th>Remarks</th> -->
                                         <!-- <th>Previous Balance</th> -->
                                         <th>Action</th>
                                     </tr>
