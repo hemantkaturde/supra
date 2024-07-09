@@ -7427,12 +7427,12 @@ class Admin_model extends CI_Model
         {
             foreach ($fetch_result as $key => $value)
             {
-                $data[$counter]['packing_instrauction_id'] =$value['packing_instrauction_id'];
+                $data[$counter]['packing_instrauction_id'] =$value['buyer_invoice_number'];
                 $data[$counter]['buyer_invoice_date'] =$value['buyer_invoice_date'];
                 $data[$counter]['buyer_invoice_qty'] =$value['buyer_invoice_qty'];
                 $data[$counter]['export_qty_in_kgs'] = $value['buyer_invoice_qty'] *  $value['net_weight'];
                 //$data[$counter]['export_qty_in_kgs'] = '';
-                $data[$counter]['buyer_po_date'] =$value['buyer_po_date'];
+                $data[$counter]['buyer_po_date'] =$value['buyer_invoice_date'];
                 $counter++; 
             }
         }
