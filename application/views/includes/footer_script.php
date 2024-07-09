@@ -15931,7 +15931,7 @@
 																				// $('#ready_for_exp_kgs').val(ready_for_exp_kgs);
 
 																				$('#ready_for_exp_kgs').val('');
-																				var ready_for_exp_kgs = parseFloat($('#ready_for_exp_pcs').val()) + parseFloat(balenceitems_data.fg_net_weight);
+																				var ready_for_exp_kgs = parseFloat($('#ready_for_exp_pcs').val()) * parseFloat(balenceitems_data.fg_net_weight);
 																				$('#ready_for_exp_kgs').val(ready_for_exp_kgs);
 
 
