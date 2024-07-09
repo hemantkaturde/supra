@@ -17,12 +17,11 @@
             </div>
         </div>
 
-        <input type="hidden" class="form-control" id="item_id" name="item_id"  value="<?=$item_id;?>" readonly>
-        <input type="hidden" class="form-control" id="vendor_po_item_id" name="vendor_po_item_id"  value="<?=$getsearchstockvendordeatils[0]['vendor_po_item_id'];?>" readonly>
-
+        <input type="text" class="form-control" id="vendor_po_item_id" name="vendor_po_item_id"  value="<?=$getsearchstockvendordeatils[0]['vendor_po_item_id'];?>" readonly>
+        <input type="text" class="form-control" id="stock_id" name="stock_id"  value="<?=$getsearchstockvendordeatils[0]['stock_id_form'];?>" readonly>
+        <input type="text" class="form-control" id="part_number_id" name="part_number_id"  value="<?=$getsearchstockvendordeatils[0]['search_stock_item_id'];?>" readonly>
 
         <div class="row">
-
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="vendor_po_number">Part Number</label>

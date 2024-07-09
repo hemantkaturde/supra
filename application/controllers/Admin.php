@@ -8830,23 +8830,22 @@ class Admin extends BaseController
         }
     }
 
-    public function searchstock($id){
+    public function searchstock($stock_id){
 
         $process = 'Search Stock';
         $processFunction = 'Admin/searchstock';
         $this->logrecord($process,$processFunction);
         $this->global['pageTitle'] = 'Search Stock';
-        $data['item_id']= $id;
-        $data['getsearchstockvendordeatils']= $this->admin_model->getsearchstockvendordeatils($id);
+        $data['getsearchstockvendordeatils']= $this->admin_model->getsearchstockvendordeatils($stock_id);
         $data['getallitemsfromfgorrawmaterial']= $this->admin_model->getallitemsfromfgorrawmaterial();
         $this->loadViews("masters/searchstock", $this->global, $data, NULL);  
     }
 
-    public function fetchsearchstockrecords($id){
+    public function fetchsearchstockrecords($sock_id,$part_number_id){
 
         $params = $_REQUEST;
-        $totalRecords = $this->admin_model->getsearchstockformcount($params,$id); 
-        $queryRecords = $this->admin_model->getsearchstockformdata($params,$id); 
+        $totalRecords = $this->admin_model->getsearchstockformcount($params,$sock_id,$part_number_id); 
+        $queryRecords = $this->admin_model->getsearchstockformdata($params,$sock_id,$part_number_id); 
 
         $data = array();
         foreach ($queryRecords as $key => $value)
