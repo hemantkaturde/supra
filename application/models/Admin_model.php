@@ -7411,7 +7411,7 @@ class Admin_model extends CI_Model
     }
 
     public function getexportrecordsitemdata($params,$buyer_po_number_id,$part_number_id){
-        $this->db->select(TBL_PACKING_INSTRACTION.'.packing_instrauction_id,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_date,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_qty,'.TBL_PACKING_INSTRACTION.'.buyer_po_date,'.TBL_FINISHED_GOODS.'.net_weight');
+        $this->db->select(TBL_PACKING_INSTRACTION.'.packing_instrauction_id,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_date,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_qty,'.TBL_PACKING_INSTRACTION.'.buyer_po_date,'.TBL_FINISHED_GOODS.'.net_weight,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_number');
         $this->db->join(TBL_PACKING_INSTRACTION, TBL_PACKING_INSTRACTION.'.id = '.TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_PACKING_INSTRACTION_DETAILS.'.part_number');
         $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.status', 1);
