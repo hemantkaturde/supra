@@ -9879,9 +9879,9 @@ class Admin extends BaseController
     }
 
 
-    public function getallbalencecalculationexportitems(){
+    public function getallbalencecalculationexportitems($sock_id,$part_number_id){
 
-        $getallbalencecalculationexportitems = $this->admin_model->getallbalencecalculationexportitems();
+        $getallbalencecalculationexportitems = $this->admin_model->getallbalencecalculationexportitems($sock_id,$part_number_id);
         if($getallbalencecalculationexportitems){
             $content = $getallbalencecalculationexportitems[0];
             echo json_encode($content);

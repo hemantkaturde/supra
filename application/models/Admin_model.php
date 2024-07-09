@@ -8521,7 +8521,7 @@ class Admin_model extends CI_Model
   }
 
 
-  public function getallbalencecalculationexportitems(){
+  public function getallbalencecalculationexportitems($sock_id,$part_number_id){
 
     // $this->db->select('sum(qty_In_pcs) as total_rejected_qty_in_pcs');
     // //$this->db->where(TBL_INCOMING_DETAILS_ITEM.'.part_number', $part_number);
@@ -8535,6 +8535,8 @@ class Admin_model extends CI_Model
 
         $this->db->select('sum('.TBL_STOCKS_ITEM.'.balence_qty_in_pcs) as balence_qty_in_pcs,sum('.TBL_STOCKS_ITEM.'.balence_qty_in_kgs) as balence_qty_in_kgs');
         $this->db->where(TBL_STOCKS_ITEM.'.status', 1);
+        $this->db->where(TBL_STOCKS_ITEM.'.stock_form_id',$sock_id);
+        $this->db->where(TBL_STOCKS_ITEM.'.part_number',$part_number_id);
         $this->db->order_by(TBL_STOCKS_ITEM.'.id','DESC');
         $query = $this->db->get(TBL_STOCKS_ITEM);
         $fetch_result = $query->result_array();

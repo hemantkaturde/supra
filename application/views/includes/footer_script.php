@@ -15862,8 +15862,9 @@
 
 									//var total_rejected_qty_kgs = parseFloat(rejecteditems_data.qty_In_kgs) * parseFloat(rejecteditems_data.fg_net_weight);
 
+									var total_rejected_qty_kgs = parseFloat(rejecteditems_data.qty_In_kgs_rejection);
 									$('#total_rejected_qty_in_pcs').val(parseFloat(rejecteditems_data.total_rejected_qty_in_pcs).toFixed(2));
-									$('#total_rejected_qty_in_kgs').val(parseFloat(rejecteditems_data.qty_In_kgs_rejection).toFixed(2));
+									$('#total_rejected_qty_in_kgs').val(parseFloat(total_rejected_qty_kgs).toFixed(2));
 
 							         /*================================================================================= */
                                      
@@ -15898,7 +15899,7 @@
 																	$('#balence_qty_in_pcs').val('');
 																	$('#balence_qty_in_kgs').val('');
 																	$.ajax({
-																		url : "<?php echo ADMIN_PATH;?>getallbalencecalculationexportitems",
+																		url : "<?php echo ADMIN_PATH;?>admin/getallbalencecalculationexportitems/"+sock_id+"/"+part_number_id,
 																		type: "POST",
 																		// data : {'vendor_name' : ''},
 																		success: function(data, textStatus, jqXHR)
