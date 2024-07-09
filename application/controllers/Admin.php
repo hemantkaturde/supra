@@ -9857,6 +9857,7 @@ class Admin extends BaseController
     public function getallcalculationrejecteditems($vendor_po_item_id,$vendor_po_id){
 
         $getallcalculationrejecteditems = $this->admin_model->getallcalculationrejecteditems($vendor_po_item_id,$vendor_po_id);
+
         if($getallcalculationrejecteditems){
             $content = $getallcalculationrejecteditems[0];
             echo json_encode($content);
