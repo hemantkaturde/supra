@@ -8940,10 +8940,10 @@ class Admin extends BaseController
         echo json_encode($json_data);
     }
 
-    public function fetchrejecteditem($vendor_po_item_id){
+    public function fetchrejecteditem($vendor_po_item_id,$vendor_po_id){
         $params = $_REQUEST;
-        $totalRecords = $this->admin_model->getexportrejecteditemcount($params,$vendor_po_item_id); 
-        $queryRecords = $this->admin_model->getexportrejecteditemdata($params,$vendor_po_item_id); 
+        $totalRecords = $this->admin_model->getexportrejecteditemcount($params,$vendor_po_item_id,$vendor_po_id); 
+        $queryRecords = $this->admin_model->getexportrejecteditemdata($params,$vendor_po_item_id,$vendor_po_id); 
 
         $data = array();
         foreach ($queryRecords as $key => $value)
@@ -9854,9 +9854,9 @@ class Admin extends BaseController
         }
     }
 
-    public function getallcalculationrejecteditems(){
+    public function getallcalculationrejecteditems($vendor_po_item_id,$vendor_po_id){
 
-        $getallcalculationrejecteditems = $this->admin_model->getallcalculationrejecteditems();
+        $getallcalculationrejecteditems = $this->admin_model->getallcalculationrejecteditems($vendor_po_item_id,$vendor_po_id);
         if($getallcalculationrejecteditems){
             $content = $getallcalculationrejecteditems[0];
             echo json_encode($content);

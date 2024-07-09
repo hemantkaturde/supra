@@ -16,7 +16,7 @@
                 </ul>
             </div>
         </div>
-
+        <input type="text" class="form-control" id="vendor_po_id" name="vendor_po_id"  value="<?=$getsearchstockvendordeatils[0]['vendor_po_id'];?>" readonly>
         <input type="text" class="form-control" id="vendor_po_item_id" name="vendor_po_item_id"  value="<?=$getsearchstockvendordeatils[0]['vendor_po_item_id'];?>" readonly>
         <input type="text" class="form-control" id="stock_id" name="stock_id"  value="<?=$getsearchstockvendordeatils[0]['stock_id_form'];?>" readonly>
         <input type="text" class="form-control" id="part_number_id" name="part_number_id"  value="<?=$getsearchstockvendordeatils[0]['search_stock_item_id'];?>" readonly>

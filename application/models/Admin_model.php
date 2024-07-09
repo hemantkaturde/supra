@@ -7389,9 +7389,7 @@ class Admin_model extends CI_Model
 
     public function getalltotalcalculationstockform($sock_id,$part_number_id){
         // $this->db->select('sum(invoice_qty_In_pcs) as invoice_qty_In_pcs,sum(invoice_qty_In_kgs) as invoice_qty_In_kgs,sum(actual_received_qty_in_pcs) as actual_received_qty_in_pcs,sum(actual_received_qty_in_kgs) as actual_received_qty_in_kgs');
-
         $this->db->select('sum(invoice_qty_In_pcs) as invoice_qty_In_pcs,sum(invoice_qty_In_kgs) as invoice_qty_In_kgs,sum(actual_received_qty_in_pcs) as actual_received_qty_in_pcss,sum(actual_received_qty_in_kgs) as actual_received_qty_in_kgs');
-
         $this->db->where(TBL_STOCKS_ITEM.'.part_number', $part_number_id);
         $this->db->where(TBL_STOCKS_ITEM.'.stock_form_id',$sock_id);
         $this->db->where(TBL_STOCKS_ITEM.'.status',1);
@@ -7441,17 +7439,19 @@ class Admin_model extends CI_Model
         $this->db->join(TBL_REJECTION_FORM, TBL_REJECTION_FORM.'.id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.rejection_form_id');
         $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.status', 1);
         $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id',$part_number);
+    
         $query = $this->db->get(TBL_REJECTION_FORM_REJECTED_ITEM);
         $rowcount = $query->num_rows();
         return $rowcount;
     }
 
-    public function getexportrejecteditemdata($params,$part_number){
+    public function getexportrejecteditemdata($params,$part_number,$vendor_po_id){
         $this->db->select('*,'.TBL_FINISHED_GOODS.'.net_weight as fg_net_weight');
         $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
         $this->db->join(TBL_REJECTION_FORM, TBL_REJECTION_FORM.'.id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.rejection_form_id');
         $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id',$part_number);
+        $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.vendor_po_id',$vendor_po_id);
         $this->db->order_by(TBL_REJECTION_FORM_REJECTED_ITEM.'.id ','DESC');
         $query = $this->db->get(TBL_REJECTION_FORM_REJECTED_ITEM);
         $fetch_result = $query->result_array();
@@ -8457,7 +8457,7 @@ class Admin_model extends CI_Model
 
   }
 
-  public function getallcalculationrejecteditems(){
+  public function getallcalculationrejecteditems($vendor_po_item_id,$vendor_po_id){
 
     // $this->db->select('sum(qty_In_pcs) as total_rejected_qty_in_pcs');
     // //$this->db->where(TBL_INCOMING_DETAILS_ITEM.'.part_number', $part_number);
@@ -8474,6 +8474,8 @@ class Admin_model extends CI_Model
     $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
     $this->db->join(TBL_REJECTION_FORM, TBL_REJECTION_FORM.'.id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.rejection_form_id');
     $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.status', 1);
+    $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.vendor_po_id', $vendor_po_id);
+    $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.rejection_form_id', $vendor_po_item_id);
     $this->db->order_by(TBL_REJECTION_FORM_REJECTED_ITEM.'.id ','DESC');
     $query = $this->db->get(TBL_REJECTION_FORM_REJECTED_ITEM);
     $fetch_result = $query->result_array();
@@ -14370,7 +14372,7 @@ public function fetchserchstocksrportdata($params){
 
 public function getsearchstockvendordeatils($stock_id){
 
-    $this->db->select('*,'.TBL_BUYER_MASTER.'.buyer_name as by_name,'.TBL_VENDOR.'.vendor_name as ven_name,'.TBL_VENDOR_PO_MASTER.'.po_number as vpo_number,'.TBL_FINISHED_GOODS.'.part_number as fg_part_number,'.TBL_STOCKS_ITEM.'.id as search_stock_id,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date,'.TBL_STOCKS_ITEM.'.part_number as part_number_id,'.TBL_STOCKS.'.stock_id as stock_id_form,'.TBL_VENDOR_PO_MASTER_ITEM.'.id as vendor_po_item_id,'.TBL_STOCKS_ITEM.'.part_number as search_stock_item_id');
+    $this->db->select('*,'.TBL_BUYER_MASTER.'.buyer_name as by_name,'.TBL_VENDOR.'.vendor_name as ven_name,'.TBL_VENDOR_PO_MASTER.'.po_number as vpo_number,'.TBL_FINISHED_GOODS.'.part_number as fg_part_number,'.TBL_STOCKS_ITEM.'.id as search_stock_id,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date,'.TBL_STOCKS_ITEM.'.part_number as part_number_id,'.TBL_STOCKS.'.stock_id as stock_id_form,'.TBL_VENDOR_PO_MASTER_ITEM.'.id as vendor_po_item_id,'.TBL_STOCKS_ITEM.'.part_number as search_stock_item_id,'.TBL_VENDOR_PO_MASTER.'.id as vendor_po_id');
     $this->db->join(TBL_STOCKS, TBL_STOCKS.'.stock_id = '.TBL_STOCKS_ITEM.'.stock_form_id');
     $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_STOCKS.'.buyer_po_number');
     $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.part_number_id = '.TBL_STOCKS_ITEM.'.part_number');
