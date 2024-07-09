@@ -8905,8 +8905,8 @@ class Admin extends BaseController
 
     }
 
-    public function getalltotalcalculationstockform($id){
-        $getalltotalcalculationstockform = $this->admin_model->getalltotalcalculationstockform($id);
+    public function getalltotalcalculationstockform($sock_id,$part_number_id){
+        $getalltotalcalculationstockform = $this->admin_model->getalltotalcalculationstockform($sock_id,$part_number_id);
 
         if($getalltotalcalculationstockform){
             $content = $getalltotalcalculationstockform[0];

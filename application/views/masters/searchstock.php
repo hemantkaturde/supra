@@ -54,9 +54,6 @@
                 </div>
             </div>  
 
-          
-  
-
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="stock_date">Stock Date</label>
@@ -101,7 +98,6 @@
                     <input type="text" class="form-control" id="buyer_order_qty" name="buyer_order_qty" value="<?=$getsearchstockvendordeatils[0]['buyer_order_qty'];?>"  style="background: #FFF;" readonly>
                 </div>
             </div>  
-
         </div>
         
         <div class="row ">

@@ -15770,9 +15770,7 @@
 <?php if($pageTitle=='Search Stock'){ ?>
 	<script type="text/javascript">    
 
-        var item_id =  $('#item_id').val();
 		var vendor_po_item_id =  $('#vendor_po_item_id').val();
-		
 		var sock_id =  $('#stock_id').val();
 		var part_number_id =  $('#part_number_id').val();
 
@@ -15815,7 +15813,7 @@
 			$('#actual_received_qty_in_kgs').val('');
 
 			$.ajax({
-				url : "<?php echo ADMIN_PATH;?>getalltotalcalculationstockform/"+item_id,
+				url : "<?php echo ADMIN_PATH;?>admin/getalltotalcalculationstockform/"+sock_id+"/"+part_number_id,
 				type: "POST",
 				data : {'vendor_name' : ''},
 				success: function(data, textStatus, jqXHR)

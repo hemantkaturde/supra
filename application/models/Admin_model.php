@@ -7387,13 +7387,13 @@ class Admin_model extends CI_Model
         return $data;
     }
 
-    public function getalltotalcalculationstockform($id){
+    public function getalltotalcalculationstockform($sock_id,$part_number_id){
         // $this->db->select('sum(invoice_qty_In_pcs) as invoice_qty_In_pcs,sum(invoice_qty_In_kgs) as invoice_qty_In_kgs,sum(actual_received_qty_in_pcs) as actual_received_qty_in_pcs,sum(actual_received_qty_in_kgs) as actual_received_qty_in_kgs');
 
         $this->db->select('sum(invoice_qty_In_pcs) as invoice_qty_In_pcs,sum(invoice_qty_In_kgs) as invoice_qty_In_kgs,sum(actual_received_qty_in_pcs) as actual_received_qty_in_pcss,sum(actual_received_qty_in_kgs) as actual_received_qty_in_kgs');
 
-        //$this->db->where(TBL_INCOMING_DETAILS_ITEM.'.part_number', $part_number);
-        $this->db->where(TBL_STOCKS_ITEM.'.id',$id);
+        $this->db->where(TBL_STOCKS_ITEM.'.part_number', $part_number_id);
+        $this->db->where(TBL_STOCKS_ITEM.'.stock_form_id',$sock_id);
         $this->db->where(TBL_STOCKS_ITEM.'.status',1);
         $query = $this->db->get(TBL_STOCKS_ITEM);
         $data = $query->result_array();
