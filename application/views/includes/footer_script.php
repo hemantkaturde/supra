@@ -15872,7 +15872,7 @@
 											$('#total_exp_qty_in_kgs').val('');
 
 											$.ajax({
-												url : "<?php echo ADMIN_PATH;?>getallcalculationexportitems",
+												url : "<?php echo ADMIN_PATH;?>admin/getallcalculationexportitems/"+vendor_po_item_id+"/"+vendor_po_id,
 												type: "POST",
 												data : {'vendor_name' : ''},
 												success: function(data, textStatus, jqXHR)
@@ -15900,7 +15900,7 @@
 																	$.ajax({
 																		url : "<?php echo ADMIN_PATH;?>getallbalencecalculationexportitems",
 																		type: "POST",
-																		data : {'vendor_name' : ''},
+																		// data : {'vendor_name' : ''},
 																		success: function(data, textStatus, jqXHR)
 																		{
 																			$(".loader_ajax").hide();

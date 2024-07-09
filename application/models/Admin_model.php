@@ -8493,7 +8493,7 @@ class Admin_model extends CI_Model
   }
 
 
-  public function getallcalculationexportitems(){
+  public function getallcalculationexportitems($vendor_po_item_id,$vendor_po_id){
 
     // $this->db->select('sum(qty_In_pcs) as total_rejected_qty_in_pcs');
     // //$this->db->where(TBL_INCOMING_DETAILS_ITEM.'.part_number', $part_number);
@@ -8509,6 +8509,10 @@ class Admin_model extends CI_Model
         $this->db->join(TBL_PACKING_INSTRACTION, TBL_PACKING_INSTRACTION.'.id = '.TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_PACKING_INSTRACTION_DETAILS.'.part_number');
         $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.status', 1);
+        // $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.vendor_po_id', $vendor_po_id);
+        // $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id', $vendor_po_item_id);
+        $this->db->where(TBL_PACKING_INSTRACTION.'.buyer_po_number', $buyer_po_number_id);
+        $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.part_number', $part_number_id);
         $this->db->order_by(TBL_PACKING_INSTRACTION_DETAILS.'.id','DESC');
         $query = $this->db->get(TBL_PACKING_INSTRACTION_DETAILS);
         $fetch_result = $query->result_array();
