@@ -15918,7 +15918,6 @@
 																				$('#balence_qty_in_kgs').val(parseFloat(balenceitems_data.balence_qty_in_kgs).toFixed(2));
 
 
-
 																				$('#ready_for_exp_pcs').val('');
 																				var precalculation_ready_for_export =  parseFloat(invoice_qty_in_pcs_data.actual_received_qty_in_pcss) - parseFloat(rejecteditems_data.total_rejected_qty_in_pcs);
 																				var ready_for_exp_pcs = parseFloat(balenceitems_data.balence_qty_in_pcs) + parseFloat(precalculation_ready_for_export);
