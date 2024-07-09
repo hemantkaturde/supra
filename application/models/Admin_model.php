@@ -8533,7 +8533,8 @@ class Admin_model extends CI_Model
 
     // $this->db->select('*,'.TBL_FINISHED_GOODS.'.net_weight as fg_net_weight');
 
-        $this->db->select('sum('.TBL_STOCKS_ITEM.'.balence_qty_in_pcs) as balence_qty_in_pcs,sum('.TBL_STOCKS_ITEM.'.balence_qty_in_kgs) as balence_qty_in_kgs');
+        $this->db->select('sum('.TBL_STOCKS_ITEM.'.balence_qty_in_pcs) as balence_qty_in_pcs,sum('.TBL_STOCKS_ITEM.'.balence_qty_in_kgs) as balence_qty_in_kgs,'.TBL_FINISHED_GOODS.'.net_weight as fg_net_weight');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_STOCKS_ITEM.'.part_number');
         $this->db->where(TBL_STOCKS_ITEM.'.status', 1);
         $this->db->where(TBL_STOCKS_ITEM.'.stock_form_id',$sock_id);
         $this->db->where(TBL_STOCKS_ITEM.'.part_number',$part_number_id);
