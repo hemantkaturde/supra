@@ -12380,7 +12380,7 @@ public function getDebitnotedetailsforInvoicevendor($id){
 public function getDebitnoteitemdeatilsForInvoicevendor($id){
 
     // $this->db->select('*,'.TBL_RAWMATERIAL.'.gross_weight as rmgrossweight');
-    $this->db->select('*,'.TBL_FINISHED_GOODS.'.net_weight as raw_material_neight_weight,'.TBL_FINISHED_GOODS.'.part_number as fgpart,'.TBL_VENDOR_PO_MASTER_ITEM.'.unit as vendor_po_unit');
+    $this->db->select('*,'.TBL_FINISHED_GOODS.'.net_weight as raw_material_neight_weight,'.TBL_FINISHED_GOODS.'.part_number as fgpart,'.TBL_VENDOR_PO_MASTER_ITEM.'.unit as vendor_po_unit,'.TBL_DEBIT_NOTE_ITEM.'.rate as debit_note_rate');
     $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_DEBIT_NOTE_ITEM.'.part_number');
     $this->db->join(TBL_DEBIT_NOTE, TBL_DEBIT_NOTE.'.debit_id = '.TBL_DEBIT_NOTE_ITEM.'.debit_note_id');
     $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_DEBIT_NOTE.'.vendor_po');
