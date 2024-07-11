@@ -6217,6 +6217,10 @@
 				var vendor_po_number = $('#vendor_po_number').val();
 				var vendor_name = $('#vendor_name').val();
 
+				var supplier_po_number = $('#supplier_po_number').val();
+
+
+
 				if(vendor_name){
 					if(vendor_po_number){
 							$.ajax({

@@ -18355,7 +18355,7 @@ public function downlaodcustomercomplaint($id){
         <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
             <tr style="border: 1px solid black;" valign="top">
                 <td width="25%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
-                    <p>PREPARED BY: </p>
+                    <p>REPORT CLOSED BY: </p>
                 </td> 
 
                 <td width="50%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">

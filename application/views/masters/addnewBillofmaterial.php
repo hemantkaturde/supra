@@ -287,7 +287,7 @@
                                     
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                                <label for="supplier_po_number">Supplier PO Number</label>
+                                                <label for="supplier_po_number_id">Supplier PO Number</label>
                                                 <input type="text" class="form-control supplier_po_number" id="supplier_po_number" value="<?=$fetchALLpreBillofmaterailist[0]['pre_supplier_po_number']?>" name="supplier_po_number" readonly>
                                             <p class="error supplier_po_number_error"></p>
                                         </div>
