@@ -4560,7 +4560,9 @@ class Admin extends BaseController
         $data['vendorList']= $this->admin_model->fetchALLvendorListwithsupplier();
         $data['buyerList']= $this->admin_model->fetchAllbuyerList();
         $data['getbillofmaterialdataforedit']= $this->admin_model->getbillofmaterialdataforedit($billofmaterialid);
-        $data['fetchALLpreBillofmaterailistedit']= $this->admin_model->fetchALLpreBillofmaterailistedit($billofmaterialid);
+        $supplier_id =   $this->admin_model->getsupplieridfromponumber(trim($data['getbillofmaterialdataforedit']['supplier_po_number']));
+
+        $data['fetchALLpreBillofmaterailistedit']= $this->admin_model->fetchALLpreBillofmaterailistedit($billofmaterialid,trim($supplier_id['id']));
         $data['incoming_details']= $this->admin_model->fetchAllincomingdetailsList();
         $data['billofmaterialid']= $billofmaterialid;
         $this->loadViews("masters/editbillofmaterial", $this->global, $data, NULL);

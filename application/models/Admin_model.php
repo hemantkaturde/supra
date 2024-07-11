@@ -4070,7 +4070,20 @@ class Admin_model extends CI_Model
     }
 
 
-    public function fetchALLpreBillofmaterailistedit($billofmaterialid){
+    public function getsupplieridfromponumber($supplier_po_number){
+
+        $this->db->select('id');
+        $this->db->limit(1);
+        $this->db->where(TBL_SUPPLIER_PO_MASTER.'.po_number',$supplier_po_number);
+        $query = $this->db->get(TBL_SUPPLIER_PO_MASTER);
+        $rowcount = $query->row_array();
+        return $rowcount;
+
+
+    }
+
+
+    public function fetchALLpreBillofmaterailistedit($billofmaterialid,$supplier_id){
 
 
         // $this->db->select('*,'.TBL_FINISHED_GOODS.'.sac as sac_no,'.TBL_VENDOR_PO_MASTER_ITEM.'.rate as supplierrate,'.TBL_FINISHED_GOODS.'.groass_weight as fg_gross_weight,'.TBL_FINISHED_GOODS.'.net_weight as fg_net_weight');
@@ -4118,6 +4131,7 @@ class Admin_model extends CI_Model
         $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_BILL_OF_MATERIAL_ITEM.'.pre_buyer_po_number');
         $this->db->join(TBL_SUPPLIER_PO_MASTER_ITEM, TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id = '.TBL_RAWMATERIAL.'.raw_id');
         $this->db->where(TBL_BILL_OF_MATERIAL_ITEM.'.bom_id',$billofmaterialid);
+        $this->db->where(TBL_SUPPLIER_PO_MASTER_ITEM.'.supplier_po_id',$supplier_id);
         $this->db->group_by(TBL_BILL_OF_MATERIAL_ITEM.'.id');
         $query = $this->db->get(TBL_BILL_OF_MATERIAL_ITEM);
         $data = $query->result_array();
