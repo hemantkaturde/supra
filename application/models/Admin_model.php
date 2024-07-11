@@ -13183,6 +13183,8 @@ public function fetchproductionstatusreportcount($params,$vendor_name,$status,$p
         }
 
         $this->db->where(TBL_BILL_OF_MATERIAL.'.status', 1);
+        $this->db->group_by(TBL_BILL_OF_MATERIAL_ITEM.'.id');
+
         $this->db->order_by(TBL_BILL_OF_MATERIAL.'.id','DESC');
         $query_2 = $this->db->get(TBL_BILL_OF_MATERIAL);
         // $rowcount = $query->num_rows();
@@ -13279,7 +13281,9 @@ public function fetchproductionstatusreportdata($params,$vendor_name,$status,$pa
     }
 
     $this->db->where(TBL_BILL_OF_MATERIAL.'.status', 1);
+    $this->db->group_by(TBL_BILL_OF_MATERIAL_ITEM.'.id');
     $this->db->limit($params['length'],$params['start']);
+    
     $this->db->order_by(TBL_BILL_OF_MATERIAL.'.id','DESC');
     $query = $this->db->get(TBL_BILL_OF_MATERIAL);
     //$fetch_result = $query->result_array();
