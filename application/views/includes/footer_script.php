@@ -6867,10 +6867,11 @@
 			e.preventDefault();
 			var elemF = $(this);
 			var item_id = elemF.attr('data-id');
+			var supplier_po_id = elemF.attr('supplier-po-id');
 			$.ajax({
 				url : "<?php echo base_url();?>geteditBillofmaterialitem",
 				type: "POST",
-				data : 'id='+item_id,
+				data : 'id='+item_id+'&supplier_po_id='+supplier_po_id,
 				success: function(data, textStatus, jqXHR)
 				{
 					    var fetchResponse = $.parseJSON(data);

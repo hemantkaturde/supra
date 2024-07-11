@@ -230,7 +230,7 @@
 
 
                                                         <td>
-                                                        <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['biil_of_material_id'];?>' class='fa fa-pencil-square-o editBillofmaterialitem'  aria-hidden='true'></i>
+                                                        <i style='font-size: x-large;cursor: pointer' supplier-po-id='<?php echo $value['pre_supplier_po_number'];?>'  data-id='<?php echo $value['biil_of_material_id'];?>' class='fa fa-pencil-square-o editBillofmaterialitem'  aria-hidden='true'></i>
 
                                                         <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['biil_of_material_id'];?>' class='fa fa-trash-o deleteBillofmaterialitem' aria-hidden='true'></i>
                                                         </td>

@@ -8739,7 +8739,7 @@ class Admin_model extends CI_Model
   }
 
 
-  public function geteditBillofmaterialitem($id){
+  public function geteditBillofmaterialitem($id,$supplier_po_id){
 
         $this->db->select(
             TBL_BILL_OF_MATERIAL_ITEM.'.id as bill_of_material_item_id,'
@@ -8761,14 +8761,11 @@ class Admin_model extends CI_Model
            .TBL_BILL_OF_MATERIAL_ITEM.'.expected_qty as expected_qty,'
            .TBL_BILL_OF_MATERIAL_ITEM.'.vendor_actual_recived_qty as vendor_actual_recived_qty,'
            .TBL_BILL_OF_MATERIAL_ITEM.'.net_weight_per_pcs as net_weight_per_pcs,'
-           
            .TBL_BILL_OF_MATERIAL_ITEM.'.total_neight_weight as total_neight_weight,'
            .TBL_BILL_OF_MATERIAL_ITEM.'.short_excess as short_excess,'
            .TBL_BILL_OF_MATERIAL_ITEM.'.scrap_in_kgs as scrap_in_kgs,'
            .TBL_BILL_OF_MATERIAL_ITEM.'.vendor_order_qty as vendor_order_qty,'
-
            .TBL_BILL_OF_MATERIAL_ITEM.'.actual_scrap_received_in_kgs as actual_scrap_recived,'
-
            .TBL_BILL_OF_MATERIAL_ITEM.'.remark as remark,'
        
            );
@@ -8777,6 +8774,7 @@ class Admin_model extends CI_Model
            $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
            $this->db->join(TBL_SUPPLIER_PO_MASTER_ITEM, TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id = '.TBL_RAWMATERIAL.'.raw_id');
            $this->db->where(TBL_BILL_OF_MATERIAL_ITEM.'.id', $id);
+           $this->db->where(TBL_SUPPLIER_PO_MASTER_ITEM.'.supplier_po_id', $supplier_po_id);
            $query = $this->db->get(TBL_BILL_OF_MATERIAL_ITEM);
            $fetch_result = $query->result_array();
            return $fetch_result;
