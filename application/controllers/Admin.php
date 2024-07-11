@@ -17774,8 +17774,9 @@ public function download_sales_tracking_export_to_excel($sales_tracking_report_n
         $objPHPExcel->getActiveSheet()->SetCellValue('C1', 'BUYER NAME'); 
         $objPHPExcel->getActiveSheet()->SetCellValue('D1', 'SEA / AIR');
         $objPHPExcel->getActiveSheet()->SetCellValue('E1', 'PAYMENT TERM');
-        $objPHPExcel->getActiveSheet()->SetCellValue('F1', 'CURRENCY');
-        $objPHPExcel->getActiveSheet()->SetCellValue('G1', 'REMARKS');
+        $objPHPExcel->getActiveSheet()->SetCellValue('F1', 'AMOUNT');
+        $objPHPExcel->getActiveSheet()->SetCellValue('G1', 'CURRENCY');
+        $objPHPExcel->getActiveSheet()->SetCellValue('H1', 'REMARKS');
 
         // set Row
         $rowCount = 2;
@@ -17786,21 +17787,22 @@ public function download_sales_tracking_export_to_excel($sales_tracking_report_n
             $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $element['buyer']);
             $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['mode_of_shipment']);
             $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['payment_terms']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['currency']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, '');
+            $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, '');
+            $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['currency']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, '');
             $rowCount++;
         }
 
-        foreach(range('A','G') as $columnID) {
+        foreach(range('A','H') as $columnID) {
             $objPHPExcel->getActiveSheet()->getColumnDimension($columnID)->setAutoSize(true);
         }
         /*********************Autoresize column width depending upon contents END***********************/
         
-        $objPHPExcel->getActiveSheet()->getStyle('A1:G1')->getFont()->setBold(true); //Make heading font bold
+        $objPHPExcel->getActiveSheet()->getStyle('A1:H1')->getFont()->setBold(true); //Make heading font bold
         
         /*********************Add color to heading START**********************/
         $objPHPExcel->getActiveSheet()
-                    ->getStyle('A1:G1')
+                    ->getStyle('A1:H1')
                     ->getFill()
                     ->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
                     ->getStartColor()
