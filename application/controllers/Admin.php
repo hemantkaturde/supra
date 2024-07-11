@@ -18018,6 +18018,369 @@ public function editcustomercomplaint($id){
     $this->loadViews("masters/editcustomercompaint", $this->global, $data, NULL);
 }
 
+public function downlaodcustomercomplaint($id){
+
+    $getcustomercomplaintdetailsfordownalod = $this->admin_model->getcustomercomplaintdetailsfordownalod($id);
+
+    $mpdf = new \Mpdf\Mpdf();
+    $html = '<table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:13px">
+                <tr>
+                    <td width="100%" style="padding: 10px;text-align: center;">
+                        <H3> CUSTOMER COMPLAINT </H3>
+                    </td>
+                </tr>
+            </table>
+            
+            
+        <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:13px">
+            <tr style="border: 1px solid black;" valign="top">
+                <td width="25%" style="padding: 10px;text-align: center;">
+                     <h4>SUPRA QUALITY EXPORTS (I) PVT LTD</h4> 
+                </td> 
+
+                <td style="border-left: 1px solid black;padding: 10px;" width="50%" valign="top";text-align: center;>
+                   <h4>ANALYSIS AND CORRECTIVE ACTION REPORT</h4>
+                </td>
+
+                 <td style="border-left: 1px solid black;padding: 10px;" width="25%" valign="top";text-align: center;>
+                  <p>Report No: '.$getcustomercomplaintdetailsfordownalod[0]['report_number'].' </p>
+                </td>
+            </tr>
+        </table>
+        
+        
+         <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
+            <tr style="border: 1px solid black;" valign="top">
+                <td width="25%" style="padding: 5px;text-align: left;">
+                    <p>CUSTOMER NAME: </p>
+                </td> 
+
+                <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
+                    <p>'.$getcustomercomplaintdetailsfordownalod[0]['buyer_name'].' </p>
+                </td>
+
+                <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
+                    <p>CUSTOMER PO:</p>
+                </td>
+
+                <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
+                    <p>'.$getcustomercomplaintdetailsfordownalod[0]['sales_order_number'].' </p>
+                </td>
+            </tr>
+        </table>
+
+
+        <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
+            <tr style="border: 1px solid black;" valign="top">
+                <td width="25%" style="padding: 5px;text-align: left;">
+                    <p>PART NO: </p>
+                </td> 
+
+                <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
+                    <p>'.$getcustomercomplaintdetailsfordownalod[0]['part_number'].' </p>
+                </td>
+
+                <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
+                    <p>COMPONENT DESCRIPTION:</p>
+                </td>
+
+                <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
+                    <p>'.$getcustomercomplaintdetailsfordownalod[0]['name'].' </p>
+                </td>
+            </tr>
+        </table>
+        
+         <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
+            <tr style="border: 1px solid black;" valign="top">
+                <td width="25%" style="padding: 5px;text-align: left;">
+                    <p>ORDER QTY: </p>
+                </td> 
+
+                <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
+                    <p>'.$getcustomercomplaintdetailsfordownalod[0]['order_qty'].' </p>
+                </td>
+
+                <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
+                    <p>DISPATCH QTY:</p>
+                </td>
+
+                <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
+                    <p> </p>
+                </td>
+            </tr>
+        </table>
+
+
+         <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
+            <tr style="border: 1px solid black;" valign="top">
+                <td width="25%" style="padding: 5px;text-align: left;">
+                    <p>INVOICE NO: </p>
+                </td> 
+
+                <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
+                    <p>'.$getcustomercomplaintdetailsfordownalod[0]['invoice_no'].' </p>
+                </td>
+
+                <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
+                    <p>INVOICE DATE:</p>
+                </td>
+
+                <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
+                    <p>'.$getcustomercomplaintdetailsfordownalod[0]['invoice_date'].' </p>
+                </td>
+            </tr>
+        </table>
+
+         <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
+            <tr style="border: 1px solid black;" valign="top">
+                <td width="25%" style="padding: 5px;text-align: left;">
+                    <p>DOCUMENT DATE: </p>
+                </td> 
+
+                <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
+                    <p></p>
+                </td>
+
+                <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
+                    <p>TOTAL FAILURE QTY:</p>
+                </td>
+
+                <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
+                    <p>'.$getcustomercomplaintdetailsfordownalod[0]['toatal_failure_qty'].' </p>
+                </td>
+            </tr>
+        </table>
+
+         <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
+            <tr style="border: 1px solid black;" valign="top">
+                <td width="100%" style="padding: 5px;text-align: left;">
+                    <p>1.PROBLEM DESCRIPTION: </p>
+                </td> 
+            </tr>
+
+            <tr style="border: 1px solid black;" valign="top">
+                <td width="100%" style="padding: 5px;text-align: left;">
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                </td> 
+            </tr>
+         </table>
+
+         
+         <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
+            <tr style="border: 1px solid black;" valign="top">
+                <td width="100%" style="padding: 5px;text-align: left;">
+                    <p>2.ROOT CAUSE: </p>
+                </td> 
+            </tr>
+
+            <tr style="border: 1px solid black;" valign="top">
+                <td width="100%" style="padding: 5px;text-align: left;">
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                </td> 
+            </tr>
+         </table>
+
+
+           <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
+            <tr style="border: 1px solid black;" valign="top">
+                <td width="100%" style="padding: 5px;text-align: left;">
+                    <p>3.CORRECTION: </p>
+                </td> 
+            </tr>
+
+            <tr style="border: 1px solid black;" valign="top">
+                <td width="100%" style="padding: 5px;text-align: left;">
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                </td> 
+            </tr>
+         </table>
+
+          <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
+            <tr style="border: 1px solid black;" valign="top">
+                <td width="60%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
+                    <p>5.CORRECTION ACTION TAKEN: </p>
+                </td> 
+
+                <td width="20%" style="padding: 5px;text-align: center;border-right: #000000 1px solid">
+                    <p>RESPONSIBILITY: </p>
+                </td> 
+
+                  <td width="20%" style="padding: 5px;text-align: center;border-right: #000000 1px solid">
+                    <p>DATE: </p>
+                </td> 
+            </tr>
+         </table>
+         
+         
+           <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
+            <tr style="border: 1px solid black;" valign="top">
+                <td width="60%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                </td> 
+
+                <td width="20%" style="padding: 5px;text-align: center;border-right: #000000 1px solid">
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                </td> 
+
+                <td width="20%" style="padding: 5px;text-align: center;border-right: #000000 1px solid">
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                </td> 
+            </tr>
+         </table>
+
+         <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
+            <tr style="border: 1px solid black;" valign="top">
+                <td width="60%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
+                    <p>6.EFFECTIVE ACTION: </p>
+                </td> 
+
+                <td width="20%" style="padding: 5px;text-align: center;border-right: #000000 1px solid">
+                    <p>RESPONSIBILITY: </p>
+                </td> 
+
+                  <td width="20%" style="padding: 5px;text-align: center;border-right: #000000 1px solid">
+                    <p>DATE: </p>
+                </td> 
+            </tr>
+         </table>
+         
+         
+           <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
+            <tr style="border: 1px solid black;" valign="top">
+                <td width="60%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                </td> 
+
+                <td width="20%" style="padding: 5px;text-align: center;border-right: #000000 1px solid">
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                </td> 
+
+                <td width="20%" style="padding: 5px;text-align: center;border-right: #000000 1px solid">
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                </td> 
+            </tr>
+         </table>
+
+        <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
+            <tr style="border: 1px solid black;" valign="top">
+                <td width="25%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
+                    <p>PREPARED BY: </p>
+                </td> 
+
+                <td width="25%" style="padding: 5px;text-align: center;border-right: #000000 1px solid">
+                    <p>DATE: </p>
+                </td> 
+
+                <td width="25%" style="padding: 5px;text-align: center;border-right: #000000 1px solid">
+                    <p>APPROVED BY: </p>
+                </td> 
+
+                <td width="25%" style="padding: 5px;text-align: center;border-right: #000000 1px solid">
+                    <p>DATE: </p>
+                </td> 
+            </tr>
+         </table>
+
+
+           <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
+            <tr style="border: 1px solid black;" valign="top">
+                <td width="25%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                </td> 
+
+                <td width="25%" style="padding: 5px;text-align: center;border-right: #000000 1px solid">
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                </td> 
+
+                <td width="25%" style="padding: 5px;text-align: center;border-right: #000000 1px solid">
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                </td> 
+
+                <td width="25%" style="padding: 5px;text-align: center;border-right: #000000 1px solid">
+                    <p>'. str_repeat('&nbsp;', 5).'</p>
+                    <p>'. str_repeat('&nbsp;', 5).'</p>
+                </td> 
+            </tr>
+         </table>
+
+
+         
+        <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
+            <tr style="border: 1px solid black;" valign="top">
+                <td width="25%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
+                    <p>PREPARED BY: </p>
+                </td> 
+
+                <td width="50%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
+                    <p></p>
+                </td> 
+
+                <td width="12.5%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
+                    <p>DATE: </p>
+                </td> 
+
+                <td width="12.5%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
+                    <p> </p>
+                </td> 
+            </tr>
+         </table>
+         
+         ';
+      
+
+            // <p>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</p>
+    $invoice_name =  'customer_complaint_report.pdf';
+    $mpdf->WriteHTML($html);
+    $mpdf->Output($invoice_name,'D'); // opens in browser
+
+
+}
+
 
 public function searchstockreport(){
     $process = 'Search Stock Report';

@@ -488,9 +488,8 @@ $route['searchstockreport'] = "admin/searchstockreport";
 $route['fetchserchstocksrport'] = "admin/fetchserchstocksrport";
 $route['searchstock/(:any)'] = "admin/searchstock/$1";
 $route['fetchsearchstockrecords/(:any)'] = "admin/fetchsearchstockrecords/$1";
-
 $route['getalltotalcalculationstockform/(:any)'] = "admin/getalltotalcalculationstockform/$1";
-
+$route['downlaodcustomercomplaint/(:any)'] = "admin/downlaodcustomercomplaint/$1";
 
 
 /* End of file routes.php */

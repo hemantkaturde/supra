@@ -14273,6 +14273,23 @@ public function fetchcustomercompalintreportdata($params){
 }
 
 
+
+public function getcustomercomplaintdetailsfordownalod($id){
+
+    $this->db->select('*,'.TBL_CUSTMOR_COMPALINT.'.id as coustmor_compalint_id');
+    $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_CUSTMOR_COMPALINT.'.customer_name');
+    $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_CUSTMOR_COMPALINT.'.customer_po');
+    $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.part_number_id = '.TBL_CUSTMOR_COMPALINT.'.part_no');
+    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
+    $this->db->where(TBL_CUSTMOR_COMPALINT.'.status', 1);
+    $this->db->where(TBL_CUSTMOR_COMPALINT.'.id', $id);
+    $query = $this->db->get(TBL_CUSTMOR_COMPALINT);
+    $fetch_result = $query->result_array();
+    return $fetch_result;
+}
+
+
+
 public function deletecustomercompalintreport($id){
 
     $this->db->where('id', $id);
