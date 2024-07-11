@@ -3329,7 +3329,7 @@ class Admin_model extends CI_Model
         $query = $this->db->get(TBL_FINISHED_GOODS);
         $data = $query->result_array();
 
-
+        
 
 
         return $data;
@@ -4116,8 +4116,7 @@ class Admin_model extends CI_Model
         $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_BILL_OF_MATERIAL_ITEM.'.pre_vendor_po_number');
         $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_BILL_OF_MATERIAL_ITEM.'.pre_buyer_po_number');
-        // $this->db->join(TBL_SUPPLIER_PO_MASTER_ITEM, TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id = '.TBL_RAWMATERIAL.'.raw_id');
-        $this->db->join(TBL_SUPPLIER_PO_MASTER_ITEM, TBL_SUPPLIER_PO_MASTER_ITEM.'.po_number = '.TBL_BILL_OF_MATERIAL_ITEM.'.pre_supplier_po_number');
+        $this->db->join(TBL_SUPPLIER_PO_MASTER_ITEM, TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id = '.TBL_RAWMATERIAL.'.raw_id');
         $this->db->where(TBL_BILL_OF_MATERIAL_ITEM.'.bom_id',$billofmaterialid);
         $this->db->group_by(TBL_BILL_OF_MATERIAL_ITEM.'.id');
         $query = $this->db->get(TBL_BILL_OF_MATERIAL_ITEM);
