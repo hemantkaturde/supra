@@ -14111,7 +14111,6 @@ public function fetchsupplierporeportcount($params,$supplier_name,$supplier_po,$
                 $data[$counter]['credit_note_number'] = $value['credit_note_number_name'];
                 $data[$counter]['foreign_bank_charges'] = $value['foreign_bank_charges'];
                 $data[$counter]['foreign_bank_charges_in_inr'] = $value['foreign_bank_charges_in_inr'];
-                $data[$counter]['currency'] = $value['currency'];
                 $data[$counter]['mode_of_shipment'] = $value['mode_of_shipment'];
                 $data[$counter]['bl_awb_no'] = $value['bl_awb_no'];
                 $data[$counter]['bl_awb_date'] = $value['bl_awb_date'];
