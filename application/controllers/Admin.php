@@ -14961,7 +14961,7 @@ public function downlaoddebitnotevendor($id){
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['less_quantity'].' '.$value['vendor_po_unit'].'</td> 
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rejected_quantity'].' '.$value['vendor_po_unit'].'</td>    
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rate'].'</td>    
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.round($value['debit_amount'],2).'</td>    
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.number_format($value['debit_amount'],2).'</td>    
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$paid_amount.'</td>
                 </tr>';
           
