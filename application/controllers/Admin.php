@@ -9978,7 +9978,9 @@ class Admin extends BaseController
     public function geteditBillofmaterialitem(){
         $post_submit = $this->input->post();
         if($post_submit){
-            $geteditBillofmaterialitem = $this->admin_model->geteditBillofmaterialitem(trim($this->input->post('id')),trim($this->input->post('supplier_po_id')));
+            $supplier_id =   $this->admin_model->getsupplieridfromponumber(trim($this->input->post('supplier_po_id')));
+    
+            $geteditBillofmaterialitem = $this->admin_model->geteditBillofmaterialitem(trim($this->input->post('id')),trim($supplier_id['id']));
             if($geteditBillofmaterialitem){
                 $content = $geteditBillofmaterialitem[0];
                 echo json_encode($content);
