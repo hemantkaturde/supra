@@ -4949,11 +4949,7 @@ class Admin extends BaseController
     public function getItemdetailsdependonvendorpobom(){
 
         if($this->input->post('part_number')) {
-            $supplier_id =   $this->admin_model->getsupplieridfromponumber(trim($this->input->post('supplier_po_id')));
-
-            print_r($supplier_id);
-            exit;
-
+            $supplier_id =   $this->admin_model->getsupplieridfromponumber(trim($this->input->post('supplier_po_number')));
 
             $getPartNameBypartid = $this->admin_model->getItemdetailsdependonvendorpobom($this->input->post('part_number'),$this->input->post('vendor_po_number'),$this->input->post('vendor_name'),trim($supplier_id['id']));
         
