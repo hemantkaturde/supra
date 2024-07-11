@@ -6216,17 +6216,14 @@
 				var part_number = $('#part_number').val();
 				var vendor_po_number = $('#vendor_po_number').val();
 				var vendor_name = $('#vendor_name').val();
-
 				var supplier_po_number = $('#supplier_po_number').val();
-
-
 
 				if(vendor_name){
 					if(vendor_po_number){
 							$.ajax({
 								url : "<?php echo ADMIN_PATH;?>getItemdetailsdependonvendorpobom",
 								type: "POST",
-								data : {'part_number' : part_number,'vendor_po_number':vendor_po_number,'vendor_name':vendor_name},
+								data : {'part_number' : part_number,'vendor_po_number':vendor_po_number,'vendor_name':vendor_name,'supplier_po_number':supplier_po_number},
 								success: function(data, textStatus, jqXHR)
 								{
 									$(".loader_ajax").hide();

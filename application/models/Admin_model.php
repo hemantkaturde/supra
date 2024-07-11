@@ -3316,7 +3316,7 @@ class Admin_model extends CI_Model
         return $data;
     }
 
-    public function getItemdetailsdependonvendorpobom($part_number,$vendor_po_number,$vendor_name){
+    public function getItemdetailsdependonvendorpobom($part_number,$vendor_po_number,$vendor_name,$supplier_po_id){
         $this->db->select('*,'.TBL_FINISHED_GOODS.'.sac as sac_no,'.TBL_VENDOR_PO_MASTER_ITEM.'.rate as supplierrate,'.TBL_FINISHED_GOODS.'.groass_weight as fg_gross_weight,'.TBL_FINISHED_GOODS.'.net_weight as fg_net_weight,'.TBL_SUPPLIER_PO_MASTER_ITEM.'.order_oty as raSm_supplier_order_qty,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_or_qty');
         $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
         $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
@@ -3326,6 +3326,7 @@ class Admin_model extends CI_Model
         $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id',$vendor_po_number);
         $this->db->where(TBL_FINISHED_GOODS.'.status',1);
         $this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
+        $this->db->where(TBL_SUPPLIER_PO_MASTER_ITEM.'.supplier_po_id',$supplier_po_id);
         $query = $this->db->get(TBL_FINISHED_GOODS);
         $data = $query->result_array();
 
