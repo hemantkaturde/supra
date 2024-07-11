@@ -17787,7 +17787,7 @@ public function download_sales_tracking_export_to_excel($sales_tracking_report_n
             $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $element['buyer']);
             $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['mode_of_shipment']);
             $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['payment_terms']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, '');
+            $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['inv_amount']);
             $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['currency']);
             $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, '');
             $rowCount++;
