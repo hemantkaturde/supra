@@ -18107,7 +18107,7 @@ public function downlaodcustomercomplaint($id){
                 </td>
 
                 <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
-                    <p> </p>
+                    <p>'.$getcustomercomplaintdetailsfordownalod[0]['dispatch_qty'].' </p>
                 </td>
             </tr>
         </table>
@@ -18140,7 +18140,7 @@ public function downlaodcustomercomplaint($id){
                 </td> 
 
                 <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
-                    <p></p>
+                    <p>'.$getcustomercomplaintdetailsfordownalod[0]['doc_complaint_date'].'</p>
                 </td>
 
                 <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
