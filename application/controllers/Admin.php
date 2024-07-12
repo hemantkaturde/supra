@@ -4762,7 +4762,7 @@ class Admin extends BaseController
 			if(count($getVendoritemsonly) >= 1) {
                 $content = $content.'<option value="">Select Part Number</option>';
 				foreach($getVendoritemsonly as $value) {
-					$content = $content.'<option value="'.$value["fin_id"].'">'.$value["part_number"].'</option>';
+					$content = $content.'<option value="'.$value["fin_id"].'"  data_id="'.$value["vendor_po_item_id"].'"   >'.$value["part_number"].'</option>';
 				}
 				echo $content;
 			} else {
@@ -4951,7 +4951,7 @@ class Admin extends BaseController
         if($this->input->post('part_number')) {
             $supplier_id =   $this->admin_model->getsupplieridfromponumber(trim($this->input->post('supplier_po_number')));
 
-            $getPartNameBypartid = $this->admin_model->getItemdetailsdependonvendorpobom($this->input->post('part_number'),$this->input->post('vendor_po_number'),$this->input->post('vendor_name'),trim($supplier_id['id']));
+            $getPartNameBypartid = $this->admin_model->getItemdetailsdependonvendorpobom($this->input->post('part_number'),$this->input->post('vendor_po_number'),$this->input->post('vendor_name'),trim($supplier_id['id']),$this->input->post('poitemid'));
         
             if($getPartNameBypartid){
                 $content = $getPartNameBypartid[0];
@@ -18242,7 +18242,7 @@ public function downlaodcustomercomplaint($id){
                        <p>'. str_repeat('&nbsp;', 5).'</p>
                 </td> 
 
-                <td width="20%" style="padding: 5px;text-align: center;border-right: #000000 1px solid">
+                <td width="20%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
                        <p>'. str_repeat('&nbsp;', 5).'</p>
                        <p>'. $getcustomercomplaintdetailsfordownalod[0]['corrective_action_taken_responsibility'].'</p>
                        <p>'. str_repeat('&nbsp;', 5).'</p>
@@ -18250,7 +18250,7 @@ public function downlaodcustomercomplaint($id){
                        <p>'. str_repeat('&nbsp;', 5).'</p>
                 </td> 
 
-                <td width="20%" style="padding: 5px;text-align: center;border-right: #000000 1px solid">
+                <td width="20%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
                        <p>'. str_repeat('&nbsp;', 5).'</p>
                        <p>'. $getcustomercomplaintdetailsfordownalod[0]['corrective_action_taken_responsibility_date'].'</p>
                        <p>'. str_repeat('&nbsp;', 5).'</p>
