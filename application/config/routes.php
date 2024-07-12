@@ -295,7 +295,6 @@ $route['saveStockformitem'] = "admin/saveStockformitem";
 $route['deleteStockformitem'] = "admin/deleteStockformitem";
 $route['deletestockform'] = "admin/deletestockform";
 $route['editstcokformdetails/(:any)'] = "admin/editstcokformdetails/$1";
-
 $route['getincominglotnumberbyvendor'] = "admin/getincominglotnumberbyvendor";
 $route['getinvoiceqtybyLotnumber'] = "admin/getinvoiceqtybyLotnumber";
 $route['fetchexportrecordsitem'] = "admin/fetchexportrecordsitem";
@@ -349,7 +348,6 @@ $route['deleteenquiryformdata'] = "admin/deleteenquiryformdata";
 $route['deleteenquiryformitemdata'] = "admin/deleteenquiryformitemdata";
 $route['geteditenquiryformitemdata'] = "admin/geteditenquiryformitemdata";
 $route['getVendorPoconfirmationvendorlist'] = "admin/getVendorPoconfirmationvendorlist";
-/* ALL Downlaod Forms */
 $route['downlaodsupplierpo/(:any)'] = "admin/downlaodsupplierpo/$1";
 $route['downloadvendorpo/(:any)'] = "admin/downloadvendorpo/$1";
 $route['downloadvendorpowithoutsupplier/(:any)'] = "admin/downloadvendorpowithoutsupplier/$1";
@@ -374,7 +372,6 @@ $route['downlaod_production_status_report'] = "admin/downlaod_production_status_
 $route['getpreviousaddednotesfordisplay']  = "admin/getpreviousaddednotesfordisplay";
 $route['savebillofmaterialnotes']  = "admin/savebillofmaterialnotes";
 $route['getbuyerdetailsbybuteridoritemid'] = "admin/getbuyerdetailsbybuteridoritemid";
-/* ALL Edit Forms*/
 $route['getbuyeritemdataforitemedit'] = "admin/getbuyeritemdataforitemedit";
 $route['getSupplieritemdataforitemedit'] = "admin/getSupplieritemdataforitemedit";
 $route['getVendoritemdataforitemedit'] = "admin/getVendoritemdataforitemedit";
