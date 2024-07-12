@@ -18370,9 +18370,7 @@ public function downlaodcustomercomplaint($id){
                      <p>'. $getcustomercomplaintdetailsfordownalod[0]['report_closed_by_date'].'</p>
                 </td> 
             </tr>
-         </table>
-         
-         ';
+         </table>';
       
 
             // <p>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</p>
