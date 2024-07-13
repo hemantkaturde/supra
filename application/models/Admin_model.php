@@ -2492,6 +2492,10 @@ class Admin_model extends CI_Model
             $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.id',$poitemid);
             $query = $this->db->get(TBL_FINISHED_GOODS);
             $data = $query->result_array();
+            $abc = $this->db->last_query();
+
+            print_r($abc);
+            exit;
             return $data;
 
         }else{
