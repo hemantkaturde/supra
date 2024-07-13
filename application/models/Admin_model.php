@@ -2503,13 +2503,6 @@ class Admin_model extends CI_Model
             $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.id',$poitemid);
             $query = $this->db->get(TBL_VENDOR_PO_MASTER_ITEM);
             $data = $query->result_array();
-
-           $tes =  $this->db->last_query();
-
-           print_r($tes);
-           exit;
-
-
             return $data;
 
 
