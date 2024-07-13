@@ -2507,6 +2507,11 @@ class Admin_model extends CI_Model
             $this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
             $query = $this->db->get(TBL_FINISHED_GOODS);
             $data = $query->result_array();
+
+            $abc = $this->db->last_query();
+
+            print_r($abc);
+            exit;
             return $data;
         }
 
