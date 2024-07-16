@@ -18455,7 +18455,7 @@ public function getBuyerItemsforDisplaypackgininstarction(){
         
         // set heading
         //$this->table->set_heading('Part Number', 'Description', 'Order Qty','Unit', 'Rate','Value');
-        $this->table->set_heading('Packing Number','Part Number','Invoice Number', 'Buyer Invoice Date', 'Buyer Invoice Qty');
+        $this->table->set_heading('Packing Number','Part Number','Invoice Number', 'Buyer Invoice Date', 'Buyer Invoice Qty','Buyer Delivery Date');
 
         // set template
         $style = array('table_open'  => '<p><b>Packaging Instruction Items</b></p><table style="width: 70% !important; max-width: 100%;margin-bottom: 20px;" class="table">');
@@ -18463,7 +18463,7 @@ public function getBuyerItemsforDisplaypackgininstarction(){
         $this->table->set_template($style);
 
 
-        $this->db->select(TBL_PACKING_INSTRACTION.'.packing_instrauction_id,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_number,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_date,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_qty');
+        $this->db->select(TBL_PACKING_INSTRACTION.'.packing_instrauction_id,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_number,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_date,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_qty,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_item_delivery_date');
         $this->db->join(TBL_PACKING_INSTRACTION_DETAILS, TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id  = '.TBL_PACKING_INSTRACTION.'.id');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id  = '.TBL_PACKING_INSTRACTION_DETAILS.'.part_number');
         $this->db->where(TBL_PACKING_INSTRACTION.'.buyer_po_number',$buyer_po_number_id);
