@@ -18464,7 +18464,7 @@ public function getBuyerItemsforDisplaypackgininstarction(){
 
 
         $this->db->select(TBL_PACKING_INSTRACTION.'.packing_instrauction_id,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_number,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_date,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_qty,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_item_delivery_date');
-        $this->db->join(TBL_PACKING_INSTRACTION_DETAILS, TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id  = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
+        $this->db->join(TBL_PACKING_INSTRACTION_DETAILS, TBL_PACKING_INSTRACTION_DETAILS.'.part_number  = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
         $this->db->join(TBL_PACKING_INSTRACTION, TBL_PACKING_INSTRACTION.'.id  = '.TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id  = '.TBL_PACKING_INSTRACTION_DETAILS.'.part_number');
         $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id  = '.TBL_PACKING_INSTRACTION.'.buyer_po_number');
@@ -18475,11 +18475,6 @@ public function getBuyerItemsforDisplaypackgininstarction(){
         $query_result = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
         $data = $query_result->result_array();
 
-        $str = $this->db->last_query();
-
-        print_r($str);
-        exit;
-        
         if($data){
             echo $this->table->generate($query_result);
 
