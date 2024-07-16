@@ -5440,8 +5440,7 @@ class Admin extends BaseController
                      $checkLotnumberisexits= $this->admin_model->checkLotnumberisexitsedit(trim($this->input->post('incomingdetail_editid')),trim($this->input->post('lot_no')), trim($this->input->post('part_number')));
 
 
-                    
-
+            
                      if($checkLotnumberisexits){
 
                         $checkLotnumberisexitsaddedititem= $this->admin_model->checkLotnumberisexitsaddedititemedit(trim($this->input->post('lot_no')),trim($this->input->post('part_number')),trim($this->input->post('pre_vendor_po_number')),$incoiming_detail__item_id);
@@ -5449,12 +5448,18 @@ class Admin extends BaseController
                     
                         if($checkLotnumberisexitsaddedititem){
 
-                            $get_previous_balenace_qty = $this->admin_model->get_previous_item_balenace_qty_edit(trim($this->input->post('part_number')),trim($this->input->post('incomingdetail_editid')));
 
-                            if($get_previous_balenace_qty){
-                                $balence_qty = $get_previous_balenace_qty[0]['balance_qty']-trim($this->input->post('invoice_qty'));
-                            }else{
+                            if($incoiming_details_item_id){
                                 $balence_qty = trim($this->input->post('p_o_qty'))-trim($this->input->post('invoice_qty'));
+                            }else{
+
+                                $get_previous_balenace_qty = $this->admin_model->get_previous_item_balenace_qty_edit(trim($this->input->post('part_number')),trim($this->input->post('incomingdetail_editid')));
+                                if($get_previous_balenace_qty){
+                                    $balence_qty = $get_previous_balenace_qty[0]['balance_qty']-trim($this->input->post('invoice_qty'));
+                                }else{
+                                    $balence_qty = trim($this->input->post('p_o_qty'))-trim($this->input->post('invoice_qty'));
+                                }
+
                             }
 
                             $data = array(
@@ -5499,12 +5504,18 @@ class Admin extends BaseController
                      }else{
 
                     
-                            $get_previous_balenace_qty = $this->admin_model->get_previous_item_balenace_qty_edit(trim($this->input->post('part_number')),trim($this->input->post('incomingdetail_editid')));
 
-                            if($get_previous_balenace_qty){
-                                $balence_qty = $get_previous_balenace_qty[0]['balance_qty']-trim($this->input->post('invoice_qty'));
-                            }else{
+                            if($incoiming_details_item_id){
                                 $balence_qty = trim($this->input->post('p_o_qty'))-trim($this->input->post('invoice_qty'));
+                            }else{
+
+                                $get_previous_balenace_qty = $this->admin_model->get_previous_item_balenace_qty_edit(trim($this->input->post('part_number')),trim($this->input->post('incomingdetail_editid')));
+
+                                if($get_previous_balenace_qty){
+                                    $balence_qty = $get_previous_balenace_qty[0]['balance_qty']-trim($this->input->post('invoice_qty'));
+                                }else{
+                                    $balence_qty = trim($this->input->post('p_o_qty'))-trim($this->input->post('invoice_qty'));
+                                }
                             }
 
                             $data = array(
@@ -5562,12 +5573,18 @@ class Admin extends BaseController
 
                         if($checkLotnumberisexitsaddedititem){
 
-                            $get_previous_balenace_qty = $this->admin_model->get_previous_item_balenace_qty_add(trim($this->input->post('part_number')));
 
-                            if($get_previous_balenace_qty){
-                                $balence_qty = $get_previous_balenace_qty[0]['balance_qty']-trim($this->input->post('invoice_qty'));
-                            }else{
+                            if($incoiming_details_item_id){
                                 $balence_qty = trim($this->input->post('p_o_qty'))-trim($this->input->post('invoice_qty'));
+                            }else{
+
+                                $get_previous_balenace_qty = $this->admin_model->get_previous_item_balenace_qty_add(trim($this->input->post('part_number')));
+
+                                if($get_previous_balenace_qty){
+                                    $balence_qty = $get_previous_balenace_qty[0]['balance_qty']-trim($this->input->post('invoice_qty'));
+                                }else{
+                                    $balence_qty = trim($this->input->post('p_o_qty'))-trim($this->input->post('invoice_qty'));
+                                }
                             }
     
                             $data = array(
@@ -5609,14 +5626,21 @@ class Admin extends BaseController
                         }
                      }else{
 
-                        $get_previous_balenace_qty = $this->admin_model->get_previous_item_balenace_qty_add(trim($this->input->post('part_number')));
 
-                        if($get_previous_balenace_qty){
-                            $balence_qty = $get_previous_balenace_qty[0]['balance_qty']-trim($this->input->post('invoice_qty'));
-                        }else{
+                        
+                        if($incoiming_details_item_id){
                             $balence_qty = trim($this->input->post('p_o_qty'))-trim($this->input->post('invoice_qty'));
-                        }
+                        }else{
 
+                            $get_previous_balenace_qty = $this->admin_model->get_previous_item_balenace_qty_add(trim($this->input->post('part_number')));
+
+                            if($get_previous_balenace_qty){
+                                $balence_qty = $get_previous_balenace_qty[0]['balance_qty']-trim($this->input->post('invoice_qty'));
+                            }else{
+                                $balence_qty = trim($this->input->post('p_o_qty'))-trim($this->input->post('invoice_qty'));
+                            }
+                        }
+                        
                         $data = array(
                             'part_number'   => trim($this->input->post('part_number')),
                             'p_o_qty'       => trim($this->input->post('p_o_qty')),

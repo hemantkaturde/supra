@@ -375,7 +375,7 @@
 
                                                     
                                                     <div class="form-group row">
-                                                    <input type="hidden" class="form-control"  id="balance_qty" name="balance_qty" readonly>
+                                                    <input type="text" class="form-control"  id="balance_qty" name="balance_qty" readonly>
 
                                                         <label class="col-sm-3 col-form-label">FG Material Gross Weight <span class="required">*</span></label>
                                                         <div class="col-sm-9">
