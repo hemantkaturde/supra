@@ -9177,6 +9177,52 @@
 		});
 
 
+		$(document).on('change','.get_all_records_for_this_buyer_po',function(e){  
+			e.preventDefault();
+
+			var selectElement = document.getElementById("part_number");
+			// Get the selected option element
+			var selectedOption = selectElement.options[selectElement.selectedIndex];
+
+			// Get the value of the data-info attribute of the selected option
+			var poitemid = selectedOption.getAttribute("data_id");
+			var buyer_po_number_id = $('#buyer_po_number_id').val();
+			var part_number = $('#part_number').val();
+
+			$(".loader_ajax").show();
+			$("#buyer_po_item_list").html('');
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>admin/getBuyerItemsforDisplaypackgininstarction",
+				type: "POST",
+				data : {'poitemid' : poitemid,'buyer_po_number_id':buyer_po_number_id,'part_number':part_number},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						//$('#buyer_po_number').html('<option value="">Select Buyer PO Number</option>');
+					}
+					else
+					{
+						$("#packging_instraction-list").html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#packging_instraction-list').html();
+					$(".loader_ajax").hide();
+				}
+			});
+			return false;
+
+
+
+
+
+
+
+		});
 
 		</script>
 <?php } ?>

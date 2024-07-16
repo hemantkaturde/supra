@@ -65,11 +65,11 @@
                                 </div>
 
 
-                                <div class="col-md-8">
-                                    <div class="col-md-6">
+                                <div class="col-md-12">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="part_number">Select Part Number<span class="required">*</span></label>
-                                                <select class="form-control get_buyer_delivery_date" name="part_number" id="part_number">
+                                                <select class="form-control get_buyer_delivery_date get_all_records_for_this_buyer_po" name="part_number" id="part_number">
                                                     <option st-id="" value="">Select Part Number</option>
                                                         <?php foreach ($getbuyeritemdetails as $key => $value) {?>
                                                                 <option value="<?php echo $value['item_details']; ?>"  data_id="<?php echo $value['poitemid']; ?>"><?php echo $value['part_number']; ?></option>
@@ -119,6 +119,13 @@
                                         </div>
 
                                     </div>
+                                    <div class="col-md-6">
+                                      <div class="container">
+                                            <div id="packging_instraction-list">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 </div>
 
                             </div>  
@@ -130,7 +137,8 @@
                                 </div>
                             </div>
                         </form>
-                        <div class="col-md-12">
+                            
+                                 <div class="col-md-12">
                                         <table class="table">
                                             <thead>
                                                 <tr>
@@ -173,6 +181,7 @@
                                             </tbody>
                                         </table> 
                                 </div>
+                            
                     </div>
                 </div>
                 <!-- /.box -->
