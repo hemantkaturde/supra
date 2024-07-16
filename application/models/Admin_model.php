@@ -14105,7 +14105,7 @@ public function fetchsupplierporeportcount($params,$supplier_name,$supplier_po,$
         $this->db->join(TBL_CREDIT_NOTE, TBL_CREDIT_NOTE.'.id = '.TBL_SALES_TRACKING_REPORT.'.credit_note_number','left');
 
         $this->db->where(TBL_SALES_TRACKING_REPORT.'.status', 1);
-        $this->db->order_by(TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_number','ASC');
+        $this->db->order_by(TBL_SALES_TRACKING_REPORT.'.id','ASC');
         $query = $this->db->get(TBL_SALES_TRACKING_REPORT);
         $fetch_result = $query->result_array();
 
