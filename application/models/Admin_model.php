@@ -3637,7 +3637,7 @@ class Admin_model extends CI_Model
     }
 
     public function getPreviousrecordforbalenceqtyedit($incoming_details_item_id,$mainincoming,$part_number){
-        $this->db->select(TBL_INCOMING_DETAILS_ITEM.'.balance_qty as balance_qty');
+        $this->db->select('*,'.TBL_INCOMING_DETAILS_ITEM.'.id as incoming_details_item_id,'.TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id as mainincoming');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_INCOMING_DETAILS_ITEM.'.pre_vendor_po_number');
         $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.id < ',$incoming_details_item_id);
@@ -8122,13 +8122,25 @@ class Admin_model extends CI_Model
             foreach ($fetch_result as $key => $value)
             {
 
+                $CI =& get_instance();
+                $CI->load->model('Admin_model');
+                $result_previous_qty = $CI->Admin_model->getPreviousrecordforbalenceqtyedit($value['incoming_details_item_id'],$value['mainincoming'],$value['part_number']);
+                $balence_qty = $value['p_o_qty'] -$value['invoice_qty'];
+
+                    if($count == 1){
+                        $balence_qty_val =  $balence_qty;
+                    }else{
+                        $balence_qty_val =  $balence_qty;
+                    }
+
                 $data[$counter]['count'] = $counter+1;
                 $data[$counter]['part_number'] = $value['part_number'];
                 $data[$counter]['name'] = $value['name'];
                 $data[$counter]['part_number_with_lot'] = $value['part_number'].' - '.$value['lot_no'];
                 $data[$counter]['p_o_qty'] = $value['p_o_qty'];
                 $data[$counter]['invoice_qty'] = $value['invoice_qty'];
-                $data[$counter]['balance_qty'] = $value['balance_qty'];
+                // $data[$counter]['balance_qty'] = $value['balance_qty'];
+                $data[$counter]['balance_qty'] = $balence_qty_val;
 
                 $data[$counter]['invoice_qty_in_kgs'] = $value['invoice_qty_in_kgs'];
                 $data[$counter]['invoice_no'] = $value['invoice_no'];
