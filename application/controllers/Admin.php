@@ -17753,7 +17753,7 @@ public function download_sales_tracking_export_to_excel($sales_tracking_report_n
         foreach ($empInfo as $element) {
             $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $element['invoice_number']);
             $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $element['buyer_invoice_date']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $element['buyer_name']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $element['buyer']);
             $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['sb_no']);
             $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['sb_date']);
             $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['drawback']);

@@ -3637,6 +3637,7 @@ class Admin_model extends CI_Model
     }
 
     public function getPreviousrecordforbalenceqtyedit($incoming_details_item_id,$mainincoming,$part_number){
+
         $this->db->select('*,'.TBL_INCOMING_DETAILS_ITEM.'.id as incoming_details_item_id,'.TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id as mainincoming');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_INCOMING_DETAILS_ITEM.'.pre_vendor_po_number');
@@ -3647,6 +3648,7 @@ class Admin_model extends CI_Model
         $this->db->limit('1');
         $query = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
         $data = $query->result_array();
+
         return $data;
 
 
@@ -8106,7 +8108,7 @@ class Admin_model extends CI_Model
     }
 
     public function fetchincomingdeatilsitemlistadddataedit($params,$part_number_serach,$edit_id){
-        $this->db->select('*,'.TBL_INCOMING_DETAILS_ITEM.'.id as incoming_details_item_id');
+        $this->db->select('*,'.TBL_INCOMING_DETAILS_ITEM.'.id as incoming_details_item_id,'.TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id as mainincoming,'.TBL_INCOMING_DETAILS_ITEM.'.part_number as itempart_number');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_INCOMING_DETAILS_ITEM.'.pre_vendor_po_number');
         $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id',$edit_id);
@@ -8121,17 +8123,18 @@ class Admin_model extends CI_Model
         {
             foreach ($fetch_result as $key => $value)
             {
+                // $result_previous_qty = $this->getPreviousrecordforbalenceqtyedit($value['incoming_details_item_id'],$value['mainincoming'],$value['itempart_number']);
+               
+                
+                // if($result_previous_qty){
+                //     $balence_qty = $result_previous_qty[0]['balance_qty'] ;
 
-                $CI =& get_instance();
-                $CI->load->model('Admin_model');
-                $result_previous_qty = $CI->Admin_model->getPreviousrecordforbalenceqtyedit($value['incoming_details_item_id'],$value['mainincoming'],$value['part_number']);
-                $balence_qty = $value['p_o_qty'] -$value['invoice_qty'];
-
-                    if($count == 1){
-                        $balence_qty_val =  $balence_qty;
-                    }else{
-                        $balence_qty_val =  $balence_qty;
-                    }
+                // }else{
+        
+                //     $balence_qty = $value['balance_qty'] -$value['invoice_qty'];
+                //     //$balence_qty = 1;
+                // }
+               
 
                 $data[$counter]['count'] = $counter+1;
                 $data[$counter]['part_number'] = $value['part_number'];
@@ -8139,8 +8142,8 @@ class Admin_model extends CI_Model
                 $data[$counter]['part_number_with_lot'] = $value['part_number'].' - '.$value['lot_no'];
                 $data[$counter]['p_o_qty'] = $value['p_o_qty'];
                 $data[$counter]['invoice_qty'] = $value['invoice_qty'];
-                // $data[$counter]['balance_qty'] = $value['balance_qty'];
-                $data[$counter]['balance_qty'] = $balence_qty_val;
+                $data[$counter]['balance_qty'] = $value['balance_qty'];
+                // $data[$counter]['balance_qty'] = $balence_qty;
 
                 $data[$counter]['invoice_qty_in_kgs'] = $value['invoice_qty_in_kgs'];
                 $data[$counter]['invoice_no'] = $value['invoice_no'];
@@ -14102,7 +14105,7 @@ public function fetchsupplierporeportcount($params,$supplier_name,$supplier_po,$
         $this->db->join(TBL_CREDIT_NOTE, TBL_CREDIT_NOTE.'.id = '.TBL_SALES_TRACKING_REPORT.'.credit_note_number','left');
 
         $this->db->where(TBL_SALES_TRACKING_REPORT.'.status', 1);
-        $this->db->order_by(TBL_SALES_TRACKING_REPORT.'.id','ASC');
+        $this->db->order_by(TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_number','ASC');
         $query = $this->db->get(TBL_SALES_TRACKING_REPORT);
         $fetch_result = $query->result_array();
 
