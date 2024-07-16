@@ -9143,13 +9143,15 @@
 
 			                        var buyer_po_number_id = $('#buyer_po_number_id').val();
 									var part_number = $('#part_number').val();
+									var buyer_item_delivery_date = $('#buyer_item_delivery_date').val();
+									
 		
 									$('#buyer_item_delivery_date').val('');	
 
 									$.ajax({
 										url : "<?php echo ADMIN_PATH;?>getbuyerdetailsbybuteridoritemid",
 										type: "POST",
-										data : {'buyer_po_number_id' : buyer_po_number_id,'part_number':part_number,'poitemid':poitemid},
+										data : {'buyer_po_number_id' : buyer_po_number_id,'part_number':part_number,'poitemid':poitemid,'buyer_item_delivery_date':buyer_item_delivery_date},
 										success: function(data, textStatus, jqXHR)
 										{
 											var get_buyerdata = jQuery.parseJSON( data );
