@@ -18472,6 +18472,11 @@ public function getBuyerItemsforDisplaypackgininstarction(){
         $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.part_number',$part_number);
         $query_result = $this->db->get(TBL_PACKING_INSTRACTION);
         $data = $query_result->result_array();
+
+        $str = $this->db->last_query();
+
+        print_r($str);
+        exit;
         
         if($data){
             echo $this->table->generate($query_result);
