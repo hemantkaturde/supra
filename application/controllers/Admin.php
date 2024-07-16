@@ -18464,13 +18464,13 @@ public function getBuyerItemsforDisplaypackgininstarction(){
 
 
         $this->db->select(TBL_PACKING_INSTRACTION.'.packing_instrauction_id,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_number,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_date,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_qty,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_item_delivery_date');
-        $this->db->join(TBL_PACKING_INSTRACTION_DETAILS, TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id  = '.TBL_PACKING_INSTRACTION.'.id');
+        $this->db->join(TBL_PACKING_INSTRACTION_DETAILS, TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id  = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
+        $this->db->join(TBL_PACKING_INSTRACTION, TBL_PACKING_INSTRACTION.'.part_number_id  = '.TBL_PACKING_INSTRACTION_DETAILS.'.part_number');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id  = '.TBL_PACKING_INSTRACTION_DETAILS.'.part_number');
-        $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.part_number_id  = '.TBL_PACKING_INSTRACTION_DETAILS.'.part_number');
         $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.id',$poitemid);
         $this->db->where(TBL_PACKING_INSTRACTION.'.buyer_po_number',$buyer_po_number_id);
         $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.part_number',$part_number);
-        $query_result = $this->db->get(TBL_PACKING_INSTRACTION);
+        $query_result = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
         $data = $query_result->result_array();
 
         $str = $this->db->last_query();
