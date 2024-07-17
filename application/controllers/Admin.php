@@ -18474,7 +18474,7 @@ public function getBuyerItemsforDisplaypackgininstarction(){
 
         $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.id',$poitemid);
         $this->db->where(TBL_PACKING_INSTRACTION.'.buyer_po_number',$buyer_po_number_id);
-        $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date',$buyer_item_delivery_date);
+        $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.buyer_po_part_delivery_date',$buyer_item_delivery_date);
 
         $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.part_number',$part_number);
         $query_result = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
