@@ -11300,7 +11300,7 @@ public function getpreexportcount($params){
         $this->db->or_where(TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_PREEXPORT.".invoice_number LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_PREEXPORT.".mode_of_shipment LIKE '%".$params['search']['value']."%'");
-        $this->db->or_where(TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
+        // $this->db->or_where(TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_PREEXPORT.".remark LIKE '%".$params['search']['value']."%')");
     }
 
