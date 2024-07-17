@@ -18466,7 +18466,7 @@ public function getBuyerItemsforDisplaypackgininstarction(){
         $this->table->set_template($style);
 
 
-        $this->db->select(TBL_PACKING_INSTRACTION.'.packing_instrauction_id,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_number,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_date,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_qty,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_item_delivery_date');
+        $this->db->select(TBL_PACKING_INSTRACTION.'.packing_instrauction_id,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_number,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_date,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_qty,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date');
         $this->db->join(TBL_PACKING_INSTRACTION_DETAILS, TBL_PACKING_INSTRACTION_DETAILS.'.part_number  = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
         $this->db->join(TBL_PACKING_INSTRACTION, TBL_PACKING_INSTRACTION.'.id  = '.TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id  = '.TBL_PACKING_INSTRACTION_DETAILS.'.part_number');

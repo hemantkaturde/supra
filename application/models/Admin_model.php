@@ -3877,8 +3877,6 @@ class Admin_model extends CI_Model
         $query = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
         $data = $query->result_array();
         return $data;
-
-
     }
 
 
