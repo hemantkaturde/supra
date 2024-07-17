@@ -11691,19 +11691,19 @@ public function getpreexportitemdetailsattributedata($params,$id){
             if($value['gross_per_box_weight']){
               $gross_per_box_weight =  $value['gross_per_box_weight'];
             }else{
-              $gross_per_box_weight = '';
+              $gross_per_box_weight = 0;
             }
 
             if($value['total_gross_weight']){
                 $total_gross_weight =  $value['total_gross_weight'];
             }else{
-                $total_gross_weight = '';
+                $total_gross_weight = 0;
             }
 
             if($value['total_net_weight']){
                 $total_net_weight =  $value['total_net_weight'];
             }else{
-                $total_net_weight = '';
+                $total_net_weight = 0;
             }
 
             $data[$counter]['gross_per_box_weight'] =round($gross_per_box_weight,3);
