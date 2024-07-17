@@ -11742,7 +11742,7 @@ public function addpreexportitemdetails($id){
         $data['getexportetails']= $this->admin_model->getbuyerpodetailsforexportdetails($id);
         $data['getbuyerpoitemdetails']= $this->admin_model->getbuyerpoitemdetails($data['getexportetails'][0]['buyer_id']);
         $data['main_export_id']= $id;
-        $data['buyer_po_id']= $data['getexportetails'][0]['buyer_id'];
+        $data['buyer_po_id']= $data['getbuyerpoitemdetails'][0]['buyer_po_id'];
         $data['buyer_name_id']= $data['getexportetails'][0]['buyer_id'];
 
         $this->loadViews("masters/addpreexportitemdetails", $this->global, $data, NULL);

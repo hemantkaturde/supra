@@ -16,7 +16,6 @@
             <p><b>Pre Export Buyer Name :</b> <?=$getexportetails[0]['buyer_name'] ?></p>
             <!-- <p><b>Pre Export Buyer PO Number :</b> <?=$getexportetails[0]['sales_order_number'] ?></p> -->
         </h4>
-
     </section>
 
     <section class="content">
@@ -29,11 +28,9 @@
                         </div>
                         <?php $this->load->helper("form"); ?>
                         <form role="form" id="savenewpreexportitemdetailsform" action="<?php echo base_url() ?>savenewpreexportitemdetailsform" method="post" role="form">
-                            
                         <input type="hidden" class="main_export_id" id="main_export_id" value=<?=$main_export_id?> name="main_export_id">
-                        <input type="hidden" class="buyer_po_id" id="buyer_po_id" value=<?=$buyer_po_id?> name="buyer_po_id">
+                        <input type="hidden" class="buyer_po_id" id="buyer_po_id" value=<?=$buyer_po_id?>>
                         <input type="hidden" class="buyer_name_id" id="buyer_name_id" value=<?=$buyer_name_id?>>
-
 
                         <div class="box-body">
                                 <div class="row">
