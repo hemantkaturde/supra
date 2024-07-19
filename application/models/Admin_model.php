@@ -8541,7 +8541,7 @@ class Admin_model extends CI_Model
 
     // $this->db->select('*,'.TBL_FINISHED_GOODS.'.net_weight as fg_net_weight');
 
-    $this->db->select('sum(qty_In_pcs) as total_rejected_qty_in_pcs,'.TBL_FINISHED_GOODS.'.net_weight as fg_net_weight,'.TBL_REJECTION_FORM_REJECTED_ITEM.'.qty_In_kgs as qty_In_kgs_rejection');
+    $this->db->select('sum(qty_In_pcs) as total_rejected_qty_in_pcs,'.TBL_FINISHED_GOODS.'.net_weight as fg_net_weight,sum('.TBL_REJECTION_FORM_REJECTED_ITEM.').qty_In_kgs as qty_In_kgs_rejection');
     $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id');
     $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
     $this->db->join(TBL_REJECTION_FORM, TBL_REJECTION_FORM.'.id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.rejection_form_id');
