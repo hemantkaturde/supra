@@ -83,7 +83,7 @@
                                             foreach ($getpackingdetails_itemdetails as $key_details => $value_details) { 
                                                 ?>
                                                     <tr>
-                                                        <th scope="row"><?=$i;?></th>
+                                                        <th scope="row"><?=$i++;?></th>
                                                         <td><?=$value_details['part_number'];?></td>
                                                         <td><?=$value_details['name'];?></td>
                                                         <td><?=$value_details['buyer_invoice_number'];?></td>
