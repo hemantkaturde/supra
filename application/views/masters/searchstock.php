@@ -286,6 +286,12 @@
                                 </div>  
                             </div>  
 
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="stock_remark">Stock Remark</label>
+                                    <input type="text" class="form-control" id="stock_remark" name="stock_remark"  value="<?=$getsearchstockvendordeatils[0]['stock_remark'];?>"  readonly>
+                                </div>
+                            </div>
 
                         </div>
                     </div>
