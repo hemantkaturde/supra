@@ -16003,6 +16003,7 @@
 															$('#total_exp_qty_in_pcs').val(parseFloat(exportitems_data.total_exp_qty_in_pcs).toFixed(2));
 															$('#total_exp_qty_in_kgs').val(parseFloat(total_export_qty_kgs).toFixed(2));
 														}else{
+															// var total_export_qty_kgs = parseFloat(exportitems_data.total_exp_qty_in_pcs) * parseFloat(exportitems_data.fg_net_weight);
 
 															$('#total_exp_qty_in_pcs').val(0);
 															$('#total_exp_qty_in_kgs').val(0);
