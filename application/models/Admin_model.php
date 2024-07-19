@@ -1017,7 +1017,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['generate_po'] = $value['generate_po'];
                 $data[$counter]['po_status'] = $value['po_status'];
                 $data[$counter]['action'] = '';
-                //$data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewBuyerpo/".$value['id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>    &nbsp ";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewBuyerpo/".$value['id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>    &nbsp ";
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editBuyerpo/".$value['id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>    &nbsp";
                 // $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downloadbuyerpo/".$value['id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: 21px;cursor: pointer;' class='fa fa-file-pdf-o' aria-hidden='true'></i></a>    &nbsp";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['id']."' class='fa fa-trash-o deleteBuyerpo' aria-hidden='true'></i>"; 
