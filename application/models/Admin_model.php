@@ -13382,7 +13382,7 @@ public function getallproductionreportstatusdata($vendor_name,$status,$vendor_po
    
    
         //$this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendorname');
-        $this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_BILL_OF_MATERIAL_VENDOR.'.id as billofmaterialid,'.TBL_FINISHED_GOODS.'.part_number as partno,'.TBL_BUYER_MASTER.'.buyer_name as buyer, 2 as flag,'.TBL_BILL_OF_MATERIAL_VENDOR.'.bom_status,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_order_qty_co,'.TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.vendor_received_qty as vendor_received_qty_co,'.TBL_VENDOR_PO_MASTER.'.po_number as v_po_number,'.TBL_FINISHED_GOODS.'.name as part_description,'.TBL_VENDOR_PO_MASTER.'.delivery_date,'.TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.id as vendor_bill_item_id,"Vendor Bill Of Material" as flag,'.TBL_BILL_OF_MATERIAL_VENDOR.'.date as vpodate');
+        $this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_BILL_OF_MATERIAL_VENDOR.'.id as billofmaterialid,'.TBL_FINISHED_GOODS.'.part_number as partno,'.TBL_BUYER_MASTER.'.buyer_name as buyer, 2 as flag,'.TBL_BILL_OF_MATERIAL_VENDOR.'.bom_status,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_order_qty_co,'.TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.vendor_received_qty as vendor_received_qty_co_vendor_recived,'.TBL_VENDOR_PO_MASTER.'.po_number as v_po_number,'.TBL_FINISHED_GOODS.'.name as part_description,'.TBL_VENDOR_PO_MASTER.'.delivery_date,'.TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.id as vendor_bill_item_id,"Vendor Bill Of Material" as flag,'.TBL_BILL_OF_MATERIAL_VENDOR.'.date as vpodate');
         $this->db->join(TBL_BILL_OF_MATERIAL_VENDOR_ITEM, TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.vendor_bill_of_material_id= '.TBL_BILL_OF_MATERIAL_VENDOR.'.id');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id= '.TBL_BILL_OF_MATERIAL_VENDOR.'.vendor_name');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id= '.TBL_BILL_OF_MATERIAL_VENDOR.'.vendor_po_number');
@@ -13427,7 +13427,7 @@ public function getallproductionreportstatusdata($vendor_name,$status,$vendor_po
 
 
    
-    $this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_BILL_OF_MATERIAL.'.id as billofmaterialid,'.TBL_FINISHED_GOODS.'.part_number as partno,'.TBL_BUYER_MASTER.'.buyer_name as buyer, 2 as flag,'.TBL_BILL_OF_MATERIAL.'.bom_status,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_order_qty_co,'.TBL_BILL_OF_MATERIAL_ITEM.'.vendor_actual_recived_qty as vendor_received_qty_co,'.TBL_VENDOR_PO_MASTER.'.po_number as v_po_number,'.TBL_FINISHED_GOODS.'.name as part_description,'.TBL_VENDOR_PO_MASTER.'.delivery_date,'.TBL_VENDOR_PO_MASTER.'.date as vpodate,'.TBL_BUYER_PO_MASTER.'.delivery_date as bd,'.TBL_BILL_OF_MATERIAL_ITEM.'.notes as itemnote');
+    $this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_BILL_OF_MATERIAL.'.id as billofmaterialid,'.TBL_FINISHED_GOODS.'.part_number as partno,'.TBL_BUYER_MASTER.'.buyer_name as buyer, 2 as flag,'.TBL_BILL_OF_MATERIAL.'.bom_status,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_order_qty_co,'.TBL_BILL_OF_MATERIAL_ITEM.'.vendor_actual_recived_qty as vendor_received_qty_co_vendor_recived,'.TBL_VENDOR_PO_MASTER.'.po_number as v_po_number,'.TBL_FINISHED_GOODS.'.name as part_description,'.TBL_VENDOR_PO_MASTER.'.delivery_date,'.TBL_VENDOR_PO_MASTER.'.date as vpodate,'.TBL_BUYER_PO_MASTER.'.delivery_date as bd,'.TBL_BILL_OF_MATERIAL_ITEM.'.notes as itemnote');
     $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id= '.TBL_BILL_OF_MATERIAL.'.vendor_name');
     $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id= '.TBL_BILL_OF_MATERIAL.'.vendor_po_number');
     $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id= '.TBL_VENDOR_PO_MASTER.'.id');
@@ -13476,7 +13476,7 @@ public function getallproductionreportstatusdata($vendor_name,$status,$vendor_po
             $data[$counter]['vendorname'] = $value['vendorname'];
             $data[$counter]['vendor_order_qty'] = $value['vendor_order_qty_co'];
             $data[$counter]['vendor_received_qty'] = $value['expected_qty'];
-            $data[$counter]['vendor_received_qtys'] = $value['vendor_received_qty_co'];
+            $data[$counter]['vendor_received_qtys'] = $value['vendor_received_qty_co_vendor_recived'];
             $data[$counter]['delivery_date'] = $value['delivery_date'];
             $data[$counter]['buyer_name'] = $value['buyer'];   
             $data[$counter]['buyer_po_number'] = $value['sales_order_number'];
