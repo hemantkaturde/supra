@@ -14,7 +14,7 @@
 
         <p> Buyer PO Number : <?=$packingintractiondetails_data[0]['sales_order_number'].'-'.$packingintractiondetails_data[0]['buyer_po_number']?></p>
 
-        <input type="button" onclick="location.href = '<?php echo base_url() ?>exportdetails'" class="btn btn-success" value="Back" />
+        <input type="button" onclick="location.href = '<?php echo base_url() ?>exportdetails'" class="btn btn-primary" value="Back" />
     </section>
 
     <section class="content">
@@ -79,11 +79,11 @@
                                             
                                             <tbody>
                                             <?php
-                                            $i=1;
+                                            $ii=1;
                                             foreach ($getpackingdetails_itemdetails as $key_details => $value_details) { 
                                                 ?>
                                                     <tr>
-                                                        <th scope="row"><?=$i++;?></th>
+                                                        <th scope="row"><?=$ii++;?></th>
                                                         <td><?=$value_details['part_number'];?></td>
                                                         <td><?=$value_details['name'];?></td>
                                                         <td><?=$value_details['buyer_invoice_number'];?></td>
