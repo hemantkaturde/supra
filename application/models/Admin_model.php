@@ -13425,6 +13425,10 @@ public function getallproductionreportstatusdata($vendor_name,$status,$vendor_po
         $query1 = $query->result_array();
 
 
+        $this->db->last_query();
+
+        print_r( $query1);
+        exit;
 
    
     $this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_BILL_OF_MATERIAL.'.id as billofmaterialid,'.TBL_FINISHED_GOODS.'.part_number as partno,'.TBL_BUYER_MASTER.'.buyer_name as buyer, 2 as flag,'.TBL_BILL_OF_MATERIAL.'.bom_status,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_order_qty_co,'.TBL_BILL_OF_MATERIAL_ITEM.'.vendor_actual_recived_qty as vendor_received_qty_co_vendor_recived,'.TBL_VENDOR_PO_MASTER.'.po_number as v_po_number,'.TBL_FINISHED_GOODS.'.name as part_description,'.TBL_VENDOR_PO_MASTER.'.delivery_date,'.TBL_VENDOR_PO_MASTER.'.date as vpodate,'.TBL_BUYER_PO_MASTER.'.delivery_date as bd,'.TBL_BILL_OF_MATERIAL_ITEM.'.notes as itemnote');
