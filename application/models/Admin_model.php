@@ -13287,7 +13287,6 @@ public function fetchproductionstatusreportdata($params,$vendor_name,$status,$pa
     if($vendor_po!='NA'){
         $this->db->where(TBL_VENDOR_PO_MASTER.'.id', $vendor_po); 
     }
-    $this->db->where(TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.vendor_bill_of_material_id', 152);
 
     $this->db->where(TBL_BILL_OF_MATERIAL_VENDOR.'.status', 1);
     $this->db->limit($params['length'],$params['start']);
@@ -13335,7 +13334,6 @@ public function fetchproductionstatusreportdata($params,$vendor_name,$status,$pa
     }
 
     $this->db->where(TBL_BILL_OF_MATERIAL.'.status', 1);
-    $this->db->where(TBL_BILL_OF_MATERIAL_ITEM.'.bom_id', 152);
     $this->db->group_by(TBL_BILL_OF_MATERIAL_ITEM.'.id');
     $this->db->limit($params['length'],$params['start']);
     
@@ -13344,6 +13342,7 @@ public function fetchproductionstatusreportdata($params,$vendor_name,$status,$pa
     //$fetch_result = $query->result_array();
     $query2 = $query->result_array();
 
+    
     $fetch_result =   array_merge($query1, $query2);
     $data = array();
     $counter = 0;
