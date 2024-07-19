@@ -132,7 +132,7 @@
                                                         <th>Part Number</th>
                                                         <th>Description</th>
                                                         <th>Order Qty</th>
-                                                        <th>unit</th>
+                                                        <th>Unit</th>
                                                         <th>Rate</th>
                                                         <th>Value</th>
                                                         <th>Buyer PO Delivery Date</th>
