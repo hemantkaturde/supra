@@ -1390,7 +1390,7 @@ class Admin extends BaseController
             if($this->form_validation->run() == FALSE)
             {
                 $save_finished_goods_response['status'] = 'failure';
-                $save_finished_goods_response['error'] = array('part_number'=>strip_tags(form_error('part_number')), 'name'=>strip_tags(form_error('name')), 'hsn_code'=>strip_tags(form_error('hsn_code')), 'gross_weight'=>strip_tags(form_error('gross_weight')),'net_weight'=>strip_tags(form_error('net_weight')),'sac'=>strip_tags(form_error('sac')),'drawing_number'=>strip_tags(form_error('drawing_number')),'description_1'=>strip_tags(form_error('description_1')),'description_2'=>strip_tags(form_error('description_2')));
+                $save_finished_goods_response['error'] = array('part_number'=>strip_tags(form_error('part_number')), 'name'=>strip_tags(form_error('name')), 'hsn_code'=>strip_tags(form_error('hsn_code')), 'gross_weight'=>strip_tags(form_error('gross_weight')),'net_weight'=>strip_tags(form_error('net_weight')),'sac'=>strip_tags(form_error('sac')),'drawing_number'=>strip_tags(form_error('drawing_number')),'description_1'=>strip_tags(form_error('description_1')),'description_2'=>strip_tags(form_error('description_2')),'current_stock'=>strip_tags(form_error('description_2')));
             }else{
 
                 $data = array(
@@ -1402,7 +1402,8 @@ class Admin extends BaseController
                     'sac' =>   trim($this->input->post('sac')),
                     'drawing_number' =>    trim($this->input->post('drawing_number')),
                     'description_1' =>    trim($this->input->post('description_1')),
-                    'description_2' =>    trim($this->input->post('description_2'))
+                    'description_2' =>    trim($this->input->post('description_2')),
+                    'current_stock' =>    trim($this->input->post('current_stock'))
                 );
 
                 $checkIfexitsFinishedgoods = $this->admin_model->checkIfexitsFinishedgoods(trim($this->input->post('part_number')));
@@ -1413,7 +1414,7 @@ class Admin extends BaseController
                     $saveFinishedgoodsdata = $this->admin_model->saveFinishedgoodsdata('',$data);
                     if($saveFinishedgoodsdata){
                         $save_finished_goods_response['status'] = 'success';
-                        $save_finished_goods_response['error'] = array('part_number'=>'', 'name'=>'', 'hsn_code'=>'', 'gross_weight'=>'','net_weight'=>'','sac'=>'','drawing_number'=>'','description_1'=>'','description_2'=>'');
+                        $save_finished_goods_response['error'] = array('part_number'=>'', 'name'=>'', 'hsn_code'=>'', 'gross_weight'=>'','net_weight'=>'','sac'=>'','drawing_number'=>'','description_1'=>'','description_2'=>'','savenewfinishedgoods'=>'');
                     }
                 }
             }
@@ -1471,7 +1472,7 @@ class Admin extends BaseController
             if($this->form_validation->run() == FALSE)
             {
                 $update_finished_goods_response['status'] = 'failure';
-                $update_finished_goods_response['error'] = array('part_number'=>strip_tags(form_error('part_number')), 'name'=>strip_tags(form_error('name')), 'hsn_code'=>strip_tags(form_error('hsn_code')), 'gross_weight'=>strip_tags(form_error('gross_weight')),'net_weight'=>strip_tags(form_error('net_weight')),'sac'=>strip_tags(form_error('sac')),'drawing_number'=>strip_tags(form_error('drawing_number')),'description_1'=>strip_tags(form_error('description_1')),'description_2'=>strip_tags(form_error('description_2')));
+                $update_finished_goods_response['error'] = array('part_number'=>strip_tags(form_error('part_number')), 'name'=>strip_tags(form_error('name')), 'hsn_code'=>strip_tags(form_error('hsn_code')), 'gross_weight'=>strip_tags(form_error('gross_weight')),'net_weight'=>strip_tags(form_error('net_weight')),'sac'=>strip_tags(form_error('sac')),'drawing_number'=>strip_tags(form_error('drawing_number')),'description_1'=>strip_tags(form_error('description_1')),'description_2'=>strip_tags(form_error('description_2')),'current_stock'=>strip_tags(form_error('description_2')));
             }else{
 
                 $data = array(
@@ -1483,7 +1484,8 @@ class Admin extends BaseController
                     'sac' =>   trim($this->input->post('sac')),
                     'drawing_number' =>    trim($this->input->post('drawing_number')),
                     'description_1' =>    trim($this->input->post('description_1')),
-                    'description_2' =>    trim($this->input->post('description_2'))
+                    'description_2' =>    trim($this->input->post('description_2')),
+                    'current_stock' =>    trim($this->input->post('current_stock'))
                 );
 
                
@@ -1506,7 +1508,7 @@ class Admin extends BaseController
                         $updatedata = $this->admin_model->saveFinishedgoodsdata(trim($this->input->post('finished_goods_id')),$data);
                         if($updatedata){
                            $update_finished_goods_response['status'] = 'success';
-                           $update_finished_goods_response['error'] = array('part_number'=>'', 'name'=>'', 'hsn_code'=>'', 'gross_weight'=>'','net_weight'=>'','sac'=>'','drawing_number'=>'','description_1'=>'','description_2'=>'');
+                           $update_finished_goods_response['error'] = array('part_number'=>'', 'name'=>'', 'hsn_code'=>'', 'gross_weight'=>'','net_weight'=>'','sac'=>'','drawing_number'=>'','description_1'=>'','description_2'=>'','current_stock'=>'');
                         }
 
                     }

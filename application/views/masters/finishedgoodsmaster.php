@@ -36,6 +36,7 @@
                                         <th>Net Weight</th>
                                         <th>SAC</th>
                                         <th>Drawing Number</th>
+                                        <th>Current Stock</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
