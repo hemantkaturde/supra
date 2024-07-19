@@ -7280,7 +7280,7 @@ class Admin_model extends CI_Model
          $this->db->where(TBL_STOCKS_ITEM.'.part_number',$part_number_id);
          $this->db->where(TBL_STOCKS_ITEM.'.status', 1);
         // $this->db->group_by(TBL_STOCKS_ITEM.'.id');
-        $this->db->order_by(TBL_STOCKS_ITEM.'.id ','DESC');
+        $this->db->order_by(TBL_STOCKS_ITEM.'.id ','ASC');
         $query = $this->db->get(TBL_STOCKS_ITEM);
         $fetch_result = $query->result_array();
 
