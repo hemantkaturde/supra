@@ -136,6 +136,7 @@
                                                         <th>Rate</th>
                                                         <th>Value</th>
                                                         <th>Buyer PO Delivery Date</th>
+                                                        <th>Packaging Instruction</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -153,6 +154,7 @@
                                                         <td><?php echo $value['rate'];?></td>
                                                         <td><?php echo $value['value'];?></td>
                                                         <td><?php echo $value['buyer_po_part_delivery_date'];?></td>
+                                                        <td><?php echo $value['packaging_instraction'];?></td>
                                                     </tr>
                                                     <?php endforeach;?>
                                                 </tbody>
