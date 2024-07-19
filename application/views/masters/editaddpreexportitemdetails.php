@@ -38,7 +38,7 @@
 
                         
                         <div class="box-body">
-                                <div class="row">
+                                <!-- <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                                <label for="part_number">Part Number <span class="required">*</span></label>
@@ -51,7 +51,22 @@
                                             <p class="error part_number_error"></p>
                                         </div>
                                     </div>
-                                </div>    
+                                </div>     -->
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                               <label for="part_number">Part Number <span class="required">*</span></label>
+                                                <select class="form-control part_number" name="part_number" id="part_number">
+                                                    <option st-id="" value="">Select Part Number</option>
+                                                    <?php foreach ($getbuyerpoitemdetails as $key => $value) {?>
+                                                    <option <?php if($getexportetails[0]['part_number_id']==$value['fin_id']){ echo 'selected';} ?> value="<?php echo $value['fin_id']; ?>" data_buyer_po_number="<?php echo $value['buyer_po_number'];?>" data_buyer_po_date="<?php echo $value['buyer_po_part_delivery_date'];?>" ><?php echo $value['part_number'].' - '.$value['buyer_po_number']; ?> </option>
+                                                    <?php } ?>
+                                                </select>
+                                            <p class="error part_number_error"></p>
+                                        </div>
+                                    </div>
+                                </div>   
 
                                 <div class="row">
                                     <div class="col-md-6">
