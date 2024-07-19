@@ -8247,6 +8247,8 @@ class Admin_model extends CI_Model
             $this->db->or_where(TBL_REJECTION_FORM.".remark LIKE '%".$params['search']['value']."%')");
         }
         $this->db->where(TBL_REJECTION_FORM.'.status', 1);
+        $this->db->limit($params['length'],$params['start']);
+
         $this->db->order_by(TBL_REJECTION_FORM.'.id','DESC');
         $query = $this->db->get(TBL_REJECTION_FORM);
         $fetch_result = $query->result_array();
