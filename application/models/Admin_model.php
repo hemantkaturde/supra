@@ -7267,7 +7267,7 @@ class Admin_model extends CI_Model
 
     public function getsearchstockformdata($params,$sock_id,$part_number_id){
 
-         $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name,'.TBL_STOCKS_ITEM.'.f_g_order_qty,'.TBL_STOCKS_ITEM.'.invoice_number,'.TBL_STOCKS_ITEM.'.invoice_date,'.TBL_STOCKS_ITEM.'.invoice_qty_In_pcs,'.TBL_STOCKS_ITEM.'.invoice_qty_In_kgs,'.TBL_STOCKS_ITEM.'.lot_number,'.TBL_STOCKS_ITEM.'.actual_received_qty_in_pcs,'.TBL_STOCKS_ITEM.'.actual_received_qty_in_kgs,'.TBL_INCOMING_DETAILS_ITEM.'.lot_no as lotnumber,'.TBL_STOCKS_ITEM.'.part_number as search_stock_item_id');
+         $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name,'.TBL_STOCKS_ITEM.'.f_g_order_qty,'.TBL_STOCKS_ITEM.'.invoice_number,'.TBL_STOCKS_ITEM.'.invoice_date,'.TBL_STOCKS_ITEM.'.invoice_qty_In_pcs,'.TBL_STOCKS_ITEM.'.invoice_qty_In_kgs,'.TBL_STOCKS_ITEM.'.lot_number,'.TBL_STOCKS_ITEM.'.actual_received_qty_in_pcs,'.TBL_STOCKS_ITEM.'.actual_received_qty_in_kgs,'.TBL_INCOMING_DETAILS_ITEM.'.lot_no as lotnumber,'.TBL_STOCKS_ITEM.'.part_number as search_stock_item_id,'.TBL_STOCKS_ITEM.'.item_remark');
          $this->db->join(TBL_STOCKS, TBL_STOCKS.'.stock_id  = '.TBL_STOCKS_ITEM.'.stock_form_id');
          $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_STOCKS_ITEM.'.pre_vendor_name');
          $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_STOCKS_ITEM.'.part_number');
@@ -7334,6 +7334,7 @@ class Admin_model extends CI_Model
 
                 $data[$counter]['actual_received_qty_in_pcs'] = $actual_received_qty_in_pcs;
                 $data[$counter]['actual_received_qty_in_kgs'] = $actual_received_qty_in_kgs;
+                $data[$counter]['item_remark'] = $value['item_remark'];
                 $counter++; 
             }
         }

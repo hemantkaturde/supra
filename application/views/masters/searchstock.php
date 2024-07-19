@@ -120,6 +120,7 @@
                                         <th>Lot No</th>
                                         <th>Actual Received Qty In Pcs</th>
                                         <th>Actual Received Qty In Kgs</th>
+                                        <th>Remarks</th>
                                     </tr>
                                 </thead>
                                 <tbody>
