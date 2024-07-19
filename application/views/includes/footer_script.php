@@ -15963,7 +15963,7 @@
 								{
 									var rejecteditems_data = jQuery.parseJSON( data );
 									
-									//var total_rejected_qty_kgs = parseFloat(rejecteditems_data.qty_In_kgs) * parseFloat(rejecteditems_data.fg_net_weight);
+									var total_rejected_qty_kgs = parseFloat(rejecteditems_data.qty_In_kgs) * parseFloat(rejecteditems_data.fg_net_weight);
 
 										if(rejecteditems_data.qty_In_kgs_rejection && rejecteditems_data.total_rejected_qty_in_pcs){
 											var total_rejected_qty_kgs = parseFloat(rejecteditems_data.qty_In_kgs_rejection);
