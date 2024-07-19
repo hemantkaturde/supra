@@ -91,6 +91,30 @@
                                     </div>
 
                                     <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="generate_po">Generate PO <span class="required">*</span></label>
+                                                 <select class="form-control" name="generate_po" id="generate_po" readonly>
+                                                    <option value="">Select Generate PO </option>
+                                                    <option value="YES" <?php if($getbuyerpodetails[0]['generate_po']=='YES'){ echo 'selected';} ?>>YES</option>
+                                                    <option value="NO"  <?php if($getbuyerpodetails[0]['generate_po']=='NO'){ echo 'selected';} ?>>NO</option>
+                                                 </select>
+                                            <p class="error generate_po_error"></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="po_status">PO Status<span class="required">*</span></label>
+                                                 <select class="form-control" name="po_status" id="po_status" readonly>
+                                                    <option value="">Select PO Status </option>
+                                                    <option value="Open" <?php if($getbuyerpodetails[0]['po_status']=='Open'){ echo 'selected';} ?>>Open</option>
+                                                    <option value="Close"  <?php if($getbuyerpodetails[0]['po_status']=='Close'){ echo 'selected';} ?>>Close</option>
+                                                 </select>
+                                            <p class="error pre_po_status_error"></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="remark">Remark</label>
                                                   <textarea type="text" class="form-control"  id="remark"  name="remark" required readonly> <?=$getbuyerpodetails[0]['remark'];?></textarea>
@@ -111,6 +135,7 @@
                                                         <th>unit</th>
                                                         <th>Rate</th>
                                                         <th>Value</th>
+                                                        <th>Buyer PO Delivery Date</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -127,7 +152,7 @@
                                                         <td><?php echo $value['unit'];?></td>
                                                         <td><?php echo $value['rate'];?></td>
                                                         <td><?php echo $value['value'];?></td>
-                                                       
+                                                        <td><?php echo $value['buyer_po_part_delivery_date'];?></td>
                                                     </tr>
                                                     <?php endforeach;?>
                                                 </tbody>
