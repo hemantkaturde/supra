@@ -242,7 +242,12 @@
                                 </div>  
                             </div>  
 
-
+                 
+                            <div class="col-md-6" style="margin-top: 20px;">
+                                <div class="form-group">
+                                    <button type="button" id="update_stock"  class="btn btn-primary update_stock">Update Stock</button>
+                                </div>
+                            </div>  
                         </div>
                     </div>
                     <!-- /.box-body -->

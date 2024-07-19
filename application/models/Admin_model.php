@@ -13476,7 +13476,7 @@ public function getallproductionreportstatusdata($vendor_name,$status,$vendor_po
             $data[$counter]['vendorname'] = $value['vendorname'];
             $data[$counter]['vendor_order_qty'] = $value['vendor_order_qty_co'];
             $data[$counter]['vendor_received_qty'] = $value['expected_qty'];
-            $data[$counter]['vendor_received_qtys'] = $value['vendor_actual_recived_qty'];
+            $data[$counter]['vendor_received_qtys'] = $value['vendor_received_qty_co'];
             $data[$counter]['delivery_date'] = $value['delivery_date'];
             $data[$counter]['buyer_name'] = $value['buyer'];   
             $data[$counter]['buyer_po_number'] = $value['sales_order_number'];
