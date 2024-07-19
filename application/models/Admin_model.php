@@ -4,12 +4,23 @@ class Admin_model extends CI_Model
 {
 
     public function saveCompanydata($id,$data){
+           
+        if($id){
             $this->db->where('id', $id);
             if($this->db->update(TBL_COMPANY, $data)){
                 return TRUE;
             } else {
                 return FALSE;
             }
+        }else{
+            if($this->db->insert(TBL_COMPANY, $data)) {
+                return $this->db->insert_id();;
+            } else {
+                return FALSE;
+            }
+
+        }
+          
     }
 
     public function getSupplierCount($params){
