@@ -8347,6 +8347,8 @@ class Admin_model extends CI_Model
             $this->db->where("(".TBL_VENDOR_PO_MASTER_ITEM.".rejection_number LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_VENDOR_PO_MASTER_ITEM.".remark LIKE '%".$params['search']['value']."%')");
         }
+        $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id', $vendor_po_id);
+
         $this->db->order_by(TBL_VENDOR_PO_MASTER_ITEM.'.id','DESC');
         $query = $this->db->get(TBL_VENDOR_PO_MASTER_ITEM);
         $rowcount = $query->num_rows();
@@ -8363,6 +8365,8 @@ class Admin_model extends CI_Model
             $this->db->or_where(TBL_VENDOR_PO_MASTER_ITEM.".remark LIKE '%".$params['search']['value']."%')");
         }
         $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id', $vendor_po_id);
+        $this->db->limit($params['length'],$params['start']);
+
         $this->db->order_by(TBL_VENDOR_PO_MASTER_ITEM.'.id','DESC');
         $query = $this->db->get(TBL_VENDOR_PO_MASTER_ITEM);
         $fetch_result = $query->result_array();
