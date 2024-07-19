@@ -11754,7 +11754,7 @@ public function get_preexport_item_details(){
 
     $post_submit = $this->input->post();
     if($post_submit){
-        $getpreexportitemdetails = $this->admin_model->get_preexport_item_details(trim($this->input->post('part_number')),trim($this->input->post('main_export_id')),trim($this->input->post('buyer_po_id')),trim($this->input->post('buyer_name_id')));
+        $getpreexportitemdetails = $this->admin_model->get_preexport_item_details(trim($this->input->post('part_number')),trim($this->input->post('main_export_id')),trim($this->input->post('buyer_po_id')),trim($this->input->post('buyer_name_id')),trim($this->input->post('data_buyer_po_date')),trim($this->input->post('data_buyer_po_number')));
         if($getpreexportitemdetails){
             $content = $getpreexportitemdetails[0];
             echo json_encode($content);

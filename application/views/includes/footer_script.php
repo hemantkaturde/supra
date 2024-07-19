@@ -19271,11 +19271,19 @@
 				var main_export_id = $('#main_export_id').val();
 				var buyer_po_id = $('#buyer_po_id').val();
 				var buyer_name_id = $('#buyer_name_id').val();
+
+				var selectElement = document.getElementById("part_number");
+				// Get the selected option element
+				var selectedOption = selectElement.options[selectElement.selectedIndex];
+
+				// Get the value of the data-info attribute of the selected option
+				var data_buyer_po_number = selectedOption.getAttribute("data_buyer_po_number");
+				var data_buyer_po_date = selectedOption.getAttribute("data_buyer_po_date");
 				
 				$.ajax({
 					url : "<?php echo ADMIN_PATH;?>get_preexport_item_details",
 					type: "POST",
-					data : {'part_number' : part_number,'main_export_id' : main_export_id,'buyer_po_id':buyer_po_id,'buyer_name_id':buyer_name_id},
+					data : {'part_number' : part_number,'main_export_id' : main_export_id,'buyer_po_id':buyer_po_id,'buyer_name_id':buyer_name_id,'data_buyer_po_number':data_buyer_po_number,'data_buyer_po_date':data_buyer_po_date},
 					success: function(data, textStatus, jqXHR)
 					{
 						$(".loader_ajax").hide();
@@ -19319,10 +19327,18 @@
 				var buyer_po_id = $('#buyer_po_id').val();
 				var buyer_name_id = $('#buyer_name_id').val();
 				
+				var selectElement = document.getElementById("part_number");
+				// Get the selected option element
+				var selectedOption = selectElement.options[selectElement.selectedIndex];
+
+				// Get the value of the data-info attribute of the selected option
+				var data_buyer_po_number = selectedOption.getAttribute("data_buyer_po_number");
+				var data_buyer_po_date = selectedOption.getAttribute("data_buyer_po_date");
+				
 				$.ajax({
 					url : "<?php echo ADMIN_PATH;?>get_preexport_item_details",
 					type: "POST",
-					data : {'part_number' : part_number,'main_export_id' : main_export_id,'buyer_po_id':buyer_po_id,'buyer_name_id':buyer_name_id},
+					data : {'part_number' : part_number,'main_export_id' : main_export_id,'buyer_po_id':buyer_po_id,'buyer_name_id':buyer_name_id,'data_buyer_po_number':data_buyer_po_number,'data_buyer_po_date':data_buyer_po_date},
 					success: function(data, textStatus, jqXHR)
 					{
 						$(".loader_ajax").hide();
