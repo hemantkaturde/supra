@@ -14504,6 +14504,34 @@ public function getPreviouscustomerCompalinformnumber(){
 }
 
 
+public function  getAllitemcountofactualrecivedqty($savestockformid){
+
+    $this->db->select('sum(actual_received_qty_in_pcs) as actual_received_qty_in_pcs,part_number');
+    $this->db->where(TBL_STOCKS_ITEM.'.stock_form_id', $savestockformid); 
+    $this->db->where(TBL_STOCKS_ITEM.'.status', 1);
+    $query = $this->db->get(TBL_STOCKS_ITEM);
+    $fetch_result = $query->row_array();
+    return $fetch_result;
+
+}
+
+    
+public function update_current_stock($actual_received_qty_in_pcs,$fin_id){
+
+    $data = array(
+        'current_stock' =>$actual_received_qty_in_pcs
+    );
+
+    $this->db->where(TBL_FINISHED_GOODS.'.fin_id',$fin_id);
+    if($this->db->update(TBL_FINISHED_GOODS,$data)){
+        return TRUE;
+    }else{
+        return FALSE;
+    }
+}
+
+
+
 }
 
 
