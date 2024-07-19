@@ -15968,7 +15968,7 @@
 										if(rejecteditems_data.qty_In_kgs_rejection && rejecteditems_data.total_rejected_qty_in_pcs){
 											var total_rejected_qty_kgs = parseFloat(rejecteditems_data.qty_In_kgs_rejection);
 											$('#total_rejected_qty_in_pcs').val(parseFloat(rejecteditems_data.total_rejected_qty_in_pcs).toFixed(2));
-											$('#total_rejected_qty_in_kgs').val(parseFloat(total_rejected_qty_kgs).toFixed(2));
+											$('#total_rejected_qty_in_kgs').val(parseFloat(total_rejected_qty_kgs).toFixed(3));
 										}else{
 											var total_rejected_qty_kgs = parseFloat(rejecteditems_data.qty_In_kgs_rejection);
 											$('#total_rejected_qty_in_pcs').val(0);
@@ -16001,7 +16001,7 @@
 														if(exportitems_data.fg_net_weight && rejecteditems_data.total_exp_qty_in_pcs){
 															var total_export_qty_kgs = parseFloat(exportitems_data.total_exp_qty_in_pcs) * parseFloat(exportitems_data.fg_net_weight);
 															$('#total_exp_qty_in_pcs').val(parseFloat(exportitems_data.total_exp_qty_in_pcs).toFixed(2));
-															$('#total_exp_qty_in_kgs').val(parseFloat(total_export_qty_kgs).toFixed(2));
+															$('#total_exp_qty_in_kgs').val(parseFloat(total_export_qty_kgs).toFixed(3));
 														}else{
 															// var total_export_qty_kgs = parseFloat(exportitems_data.total_exp_qty_in_pcs) * parseFloat(exportitems_data.fg_net_weight);
 
@@ -16033,7 +16033,7 @@
 										
 
 																					$('#balence_qty_in_pcs').val(parseFloat(balenceitems_data.balence_qty_in_pcs).toFixed(2));
-																					$('#balence_qty_in_kgs').val(parseFloat(balenceitems_data.balence_qty_in_kgs).toFixed(2));
+																					$('#balence_qty_in_kgs').val(parseFloat(balenceitems_data.balence_qty_in_kgs).toFixed(3));
 
 
 																					$('#ready_for_exp_pcs').val('');
