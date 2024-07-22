@@ -16,8 +16,8 @@
             </div>
             <div class="col-xs-6 text-right">
                 <div class="form-group">
-                    <a class="btn btn-primary" href="<?php echo base_url(); ?>addnewBuyerpo">
-                        <i class="fa fa-plus"></i> Add Supplier Vendor</a>
+                    <a class="btn btn-primary" href="<?php echo base_url(); ?>addnewsuppliervendorcomplaint">
+                        <i class="fa fa-plus"></i> Add Supplier Vendor Compliant</a>
                 </div>
             </div>
         </div>
@@ -26,7 +26,7 @@
                 <div class="box">
                     <div class="box-body">   
                         <div class="panel-body">
-                            <table width="100%" class="table table-striped table-bordered table-hover" id="view_buyerpo">
+                            <table width="100%" class="table table-striped table-bordered table-hover" id="view_supplier_vendor_complaint">
                                 <thead>
                                     <tr style="background-color:#3c8dbc !important;color:#fff">
                                         <th>Report No.</th>

@@ -172,3 +172,4 @@ define('TBL_SALES_TRACKING_REPORT','tbl_sales_tracking_report');
 define('TBL_CHA_DEBIT_NOTE','tbl_cha_debit_note');
 define('TBL_CHA_DEBIT_NOTE_TRANSACTION','tbl_cha_debitnote_transaction');
 define('TBL_CUSTMOR_COMPALINT','tbl_coustomer_complaint');
+define('TBL_SUPPLIER_VENDOR_COMPALINT','tbl_supplier_vendor_complaint');

@@ -1,7 +1,10 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
+<script src="<?php echo base_url(); ?>assets/bootstrap/js/select2.js"></script>
+<link href="<?php echo base_url(); ?>assets/bootstrap/css/select2.css" rel="stylesheet" type="text/css" />
+<!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script> -->
 
 <script type="text/javascript">
 
@@ -20,10 +23,11 @@
 </script>
 
 <script type="text/javascript">
-//    $(document).ready(function(){
-// 			$("select").select2();
-// 	});
+   $(document).ready(function(){
+			$("select").select2();
+	});
 </script>
+
 
 <?php if($pageTitle=='Company Master'){ ?>
 <script type="text/javascript">
@@ -21503,6 +21507,157 @@
 						type: "post",
 					},
 				});
-		});
+		    });
 	</script>
 <?php }	?>
+
+
+
+<?php if($pageTitle=='Supplier Vendor Compliant Report' || $pageTitle=='Add New Supplier Vendor Compliant Report'){ ?>
+	    <script type="text/javascript">
+	        $(document).ready(function() { 
+				var dt = $('#view_supplier_vendor_complaint').DataTable({
+					"columnDefs": [ 
+						{ className: "details-control", "targets": [ 0 ] },
+						{ "width": "10%", "targets": 0 },
+						{ "width": "10%", "targets": 1 },
+						{ "width": "10%", "targets": 2 },
+						{ "width": "10%", "targets": 3 },
+						{ "width": "10%", "targets": 4 },
+						{ "width": "10%", "targets": 5 },
+						{ "width": "10%", "targets": 6 }
+					],
+					responsive: true,
+					"oLanguage": {
+						"sEmptyTable": "<i>No Supplier Vendor Compliant data Found.</i>",
+					}, 
+					"bSort" : false,
+					"bFilter":true,
+					"bLengthChange": true,
+					"iDisplayLength": 10,   
+					"bProcessing": true,
+					"serverSide": true,
+					"ajax":{
+						url :"<?php echo base_url();?>fetchsuppliervendorrport",
+						type: "post",
+					},
+				});
+		    });
+
+			$(document).on('click','#addnewsuppliervendorcomplaint',function(e){
+				e.preventDefault();
+				$(".loader_ajax").show();
+				var formData = new FormData($("#addnewsuppliervendorcomplaintform")[0]);
+			    // var complaint_form_id = $("#complaint_form_id").val();
+			   
+				$.ajax({
+					url : "<?php echo base_url();?>addnewsuppliervendorcomplaint",
+					type: "POST",
+					data : formData,
+					cache: false,
+					contentType: false,
+					processData: false,
+					success: function(data, textStatus, jqXHR)
+					{
+						var fetchResponse = $.parseJSON(data);
+						if(fetchResponse.status == "failure")
+						{
+							$.each(fetchResponse.error, function (i, v)
+							{
+								$('.'+i+'_error').html(v);
+							});
+							$(".loader_ajax").hide();
+						}
+						else if(fetchResponse.status == 'success')
+						{
+							swal({
+								title: "Success",
+								text: "Supplier Vendor Compalint Successfully Added!",
+								icon: "success",
+								button: "Ok",
+								},function(){ 
+									
+									window.location.href = "<?php echo base_url().'suppliervendorcompliant'?>";
+							});		
+						}
+						
+					},
+					error: function (jqXHR, textStatus, errorThrown)
+					{
+					$(".loader_ajax").hide();
+					}
+				});
+				return false;
+	     	});
+
+
+			$(document).on('change','#supplier_vendor',function(e){  
+
+				var supplier_vendor = $('#supplier_vendor').val();
+				if(supplier_vendor=='Supplier'){
+					$('#supplier_div').css('display','block');
+					$('#vendor_div').css('display','none');
+					$('#vendor_name').val('');
+				}
+
+				if(supplier_vendor=='Vendor'){
+					$('#supplier_div').css('display','none');
+					$('#vendor_div').css('display','block');
+					$('#supplier_name').val('');
+                }
+			});
+
+
+			$(document).on('click','.deletesuppliervendorcompalintreport',function(e){
+				var elemF = $(this);
+				e.preventDefault();
+
+				swal({
+					title: "Are you sure?",
+					text: "Delete Supplier Vendor Compalint",
+					type: "warning",
+					showCancelButton: true,
+					closeOnClickOutside: false,
+					confirmButtonClass: "btn-sm btn-danger",
+					confirmButtonText: "Yes, delete it!",
+					cancelButtonText: "No, cancel plz!",
+					closeOnConfirm: false,
+					closeOnCancel: false
+				}, function(isConfirm) {
+					if (isConfirm) {
+							$.ajax({
+								url : "<?php echo base_url();?>deletesuppliervendorcompalintreport",
+								type: "POST",
+								data : 'id='+elemF.attr('data-id'),
+								success: function(data, textStatus, jqXHR)
+								{
+									const obj = JSON.parse(data);
+								
+									if(obj.status=='success'){
+										swal({
+											title: "Deleted!",
+											text: "Supplier Vendor Compalint Deleted Succesfully",
+											icon: "success",
+											button: "Ok",
+											},function(){ 
+												window.location.href = "<?php echo base_url().'suppliervendorcompliant'?>";
+										});	
+									}
+
+								},
+								error: function (jqXHR, textStatus, errorThrown)
+								{
+									$(".loader_ajax").hide();
+								}
+							})
+						}
+						else {
+				swal("Cancelled", "Supplier Vendor Compalint deletion cancelled ", "error");
+				}
+			});
+		});
+
+
+			
+		</script>
+<?php } ?>

@@ -14531,6 +14531,138 @@ public function update_current_stock($actual_received_qty_in_pcs,$fin_id){
 }
 
 
+public function getsuppliervendorrportcount($params){
+
+    $this->db->select('*,'.TBL_CUSTMOR_COMPALINT.'.id as coustmor_compalint_id');
+    $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_CUSTMOR_COMPALINT.'.customer_name');
+    $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_CUSTMOR_COMPALINT.'.customer_po');
+    $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.part_number_id = '.TBL_CUSTMOR_COMPALINT.'.part_no');
+    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
+
+    // if($params['search']['value'] != "") 
+    // {
+    //     $this->db->where("(".TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
+    //     $this->db->or_where(TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
+    //     $this->db->or_where(TBL_CUSTMOR_COMPALINT.".report_number LIKE '%".$params['search']['value']."%'");
+    //     $this->db->or_where(TBL_FINISHED_GOODS.".name LIKE '%".$params['search']['value']."%'");
+    //     $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
+    //     $this->db->or_where(TBL_CUSTMOR_COMPALINT.".order_qty LIKE '%".$params['search']['value']."%'");
+    //     $this->db->or_where(TBL_CUSTMOR_COMPALINT.".toatal_failure_qty LIKE '%".$params['search']['value']."%'");
+    //     $this->db->or_where(TBL_CUSTMOR_COMPALINT.".invoice_no LIKE '%".$params['search']['value']."%'");
+    //     $this->db->or_where(TBL_CUSTMOR_COMPALINT.".invoice_date LIKE '%".$params['search']['value']."%')");
+    // }
+
+    $this->db->where(TBL_CUSTMOR_COMPALINT.'.status', 1);
+    $this->db->order_by(TBL_CUSTMOR_COMPALINT.'.id','DESC');
+    $query = $this->db->get(TBL_CUSTMOR_COMPALINT);
+    $rowcount = $query->num_rows();
+    return $rowcount;
+
+}
+
+
+
+public function getsuppliervendorrportdata($params){
+
+    $this->db->select('*,'.TBL_SUPPLIER_VENDOR_COMPALINT.'.id as suppliervendor_compalint_id');
+    // $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_PAYMENT_DETAILS.'.vendor_id','left');
+    // $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_PAYMENT_DETAILS.'.supplier_id','left');
+    // $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_PAYMENT_DETAILS.'.vendor_po','left');
+    // $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_PAYMENT_DETAILS.'.supplier_po','left');
+
+    // if($params['search']['value'] != "") 
+    // {
+    //     $this->db->where("(".TBL_PAYMENT_DETAILS.".payment_details_number LIKE '%".$params['search']['value']."%'");
+    //     $this->db->or_where(TBL_PAYMENT_DETAILS.".payment_details_date LIKE '%".$params['search']['value']."%'");
+    //     $this->db->or_where(TBL_PAYMENT_DETAILS.".bill_number LIKE '%".$params['search']['value']."%'");
+    //     $this->db->or_where(TBL_PAYMENT_DETAILS.".payment_status LIKE '%".$params['search']['value']."%'");
+
+    //     $this->db->or_where(TBL_SUPPLIER_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
+    //     $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+    //     $this->db->or_where(TBL_SUPPLIER.".supplier_name LIKE '%".$params['search']['value']."%'");
+    //     $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%')");
+    // }
+
+    // if($vendor_name!='NA'){
+    //     $this->db->where(TBL_PAYMENT_DETAILS.'.vendor_id', $vendor_name); 
+    // }
+
+    // if($supplier_name!='NA'){
+    //     $this->db->where(TBL_PAYMENT_DETAILS.'.supplier_id', $supplier_name); 
+    // }
+
+    
+    // if($payment_details_no!='NA'){
+    //     $this->db->where(TBL_PAYMENT_DETAILS.'.payment_details_id', $payment_details_no); 
+    // }
+
+    
+    // if($status!='NA'){
+    //     $this->db->where(TBL_PAYMENT_DETAILS.'.payment_status', $status); 
+    // }
+
+    $this->db->limit($params['length'],$params['start']);
+    $this->db->order_by(TBL_SUPPLIER_VENDOR_COMPALINT.'.id','DESC');
+    $query = $this->db->get(TBL_SUPPLIER_VENDOR_COMPALINT);
+    $fetch_result = $query->result_array();
+
+    $data = array();
+    $counter = 0;
+    if(count($fetch_result) > 0)
+    {
+        foreach ($fetch_result as $key => $value)
+        {
+            $data[$counter]['report_number'] = $value['report_number'];
+            $data[$counter]['stage'] = $value['stage'];
+            $data[$counter]['challan_number'] = $value['challan_number'];
+            $data[$counter]['challan_date'] = $value['challan_date'];
+            $data[$counter]['invoice_number'] = $value['invoice_number'];
+            $data[$counter]['invoice_date'] = $value['invoice_date'];
+            $data[$counter]['action'] = '';
+            // $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addpaymentdetailsdata/".$value['payment_details_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>   &nbsp ";
+            $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editpaymentdetails/".$value['suppliervendor_compalint_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+            $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['suppliervendor_compalint_id']."' class='fa fa-trash-o deletesuppliervendorcompalintreport' aria-hidden='true'></i>"; 
+            $counter++; 
+        }
+    }
+    return $data;
+
+    
+}
+
+
+public function savesuppliervendorcomplaintdata($id,$data){
+    if($id != '') {
+        $this->db->where('id', $id);
+        if($this->db->update(TBL_SUPPLIER_VENDOR_COMPALINT, $data)){
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    } else {
+        if($this->db->insert(TBL_SUPPLIER_VENDOR_COMPALINT, $data)) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+}
+
+
+
+public function deletesuppliervendorcompalintreport($id){
+
+    $this->db->where('id', $id);
+    //$this->db->delete(TBL_SUPPLIER);
+    if($this->db->delete(TBL_SUPPLIER_VENDOR_COMPALINT)){
+       return TRUE;
+    }else{
+       return FALSE;
+    }
+
+}
+
+
 
 }
 

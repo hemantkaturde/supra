@@ -17995,6 +17995,98 @@ public function suppliervendorcompliant(){
 }
 
 
+public function fetchsuppliervendorrport(){
+    $params = $_REQUEST;
+    $totalRecords = $this->admin_model->getsuppliervendorrportcount($params); 
+    $queryRecords = $this->admin_model->getsuppliervendorrportdata($params); 
+
+    $data = array();
+    foreach ($queryRecords as $key => $value)
+    {
+        $i = 0;
+        foreach($value as $v)
+        {
+            $data[$key][$i] = $v;
+            $i++;
+        }
+    }
+    $json_data = array(
+        "draw"            => intval( $params['draw'] ),   
+        "recordsTotal"    => intval( $totalRecords ),  
+        "recordsFiltered" => intval($totalRecords),
+        "data"            => $data   // total data array
+        );
+    echo json_encode($json_data);
+
+
+}
+
+
+public function addnewsuppliervendorcomplaint(){
+    $post_submit = $this->input->post();
+
+    if($post_submit){
+
+        $save_vendor_supplier_complaint_response = array();
+        $this->form_validation->set_rules('report_number','Report Number','trim|required');
+        $this->form_validation->set_rules('stage','Stage','trim|required');
+        $this->form_validation->set_rules('challan_no','Challan No','trim|required');
+        $this->form_validation->set_rules('challan_date','Challan Date','trim|required');
+
+        if($this->form_validation->run() == FALSE)
+        {
+            $save_vendor_supplier_complaint_response['status'] = 'failure';
+            $save_vendor_supplier_complaint_response['error'] = array(
+                'report_number'=>strip_tags(form_error('report_number')),
+                'stage'=>strip_tags(form_error('stage')),
+                'challan_no'=>strip_tags(form_error('challan_no')),
+                'challan_date'=>strip_tags(form_error('challan_date')),
+                'invoice_no'=>strip_tags(form_error('invoice_no')));
+        }else{
+
+            $data = array(
+                'report_number'=> trim($this->input->post('report_number')),
+                'stage'=> trim($this->input->post('stage')),
+                'challan_number'=>trim($this->input->post('challan_no')),
+                'challan_date'=>trim($this->input->post('challan_date')),
+                'invoice_number'=>trim($this->input->post('invoice_no')),
+                'invoice_date'=>trim($this->input->post('invoice_date'))
+            );
+
+                // if(trim($this->input->post('complaint_form_id'))){
+                //     $complaint_form_id =trim($this->input->post('complaint_form_id'));
+                // }else{
+                //     $complaint_form_id ='';
+                // }
+
+                $savecoustomercomplaintdata = $this->admin_model->savesuppliervendorcomplaintdata('',$data);
+
+                if($savecoustomercomplaintdata){
+                    $save_vendor_supplier_complaint_response['status'] = 'success';
+                    $save_vendor_supplier_complaint_response['error'] = array(
+                        'report_number'=>strip_tags(form_error('report_number')),
+                        'stage'=>strip_tags(form_error('stage')),
+                        'challan_no'=>strip_tags(form_error('challan_no')),
+                        'challan_date'=>strip_tags(form_error('challan_date')),
+                        'invoice_no'=>strip_tags(form_error('invoice_no')));
+            }
+        }
+        echo json_encode($save_vendor_supplier_complaint_response);
+
+    }else{
+
+            $process = 'Add New Supplier Vendor Compliant Report';
+            $processFunction = 'Admin/addnewsuppliervendorcomplaint';
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Add New Supplier Vendor Compliant Report';
+            $data['vendorList']= $this->admin_model->fetchALLvendorList();
+            $data['supplierList']= $this->admin_model->fetchALLsupplierList();
+            $this->loadViews("masters/addnewsuppliervendorcomplaint", $this->global, $data, NULL);
+    }
+}
+
+
+
 public function getpartdescriptionusingpartnumber(){
 
     $part_no=$this->input->post('part_no');
@@ -18506,6 +18598,25 @@ public function getBuyerItemsforDisplaypackgininstarction(){
    }
 }
 
+
+public function deletesuppliervendorcompalintreport(){
+
+    $post_submit = $this->input->post();
+    if($post_submit){
+        $result = $this->admin_model->deletesuppliervendorcompalintreport(trim($this->input->post('id')));
+        if ($result) {
+                    $process = 'Delete Supplier Vendor Compalint';
+                    $processFunction = 'Admin/deletesuppliervendorcompalintreport';
+                    $this->logrecord($process,$processFunction);
+                echo(json_encode(array('status'=>'success')));
+            }
+        else { echo(json_encode(array('status'=>'failed'))); }
+    }else{
+        echo(json_encode(array('status'=>'failed'))); 
+    }
+
+
+}
 
 
 }

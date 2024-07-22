@@ -487,6 +487,11 @@ $route['searchstock/(:any)'] = "admin/searchstock/$1";
 $route['fetchsearchstockrecords/(:any)'] = "admin/fetchsearchstockrecords/$1";
 $route['getalltotalcalculationstockform/(:any)'] = "admin/getalltotalcalculationstockform/$1";
 $route['downlaodcustomercomplaint/(:any)'] = "admin/downlaodcustomercomplaint/$1";
+$route['fetchsuppliervendorrport'] = "admin/fetchsuppliervendorrport";
+$route['addnewsuppliervendorcomplaint'] = "admin/addnewsuppliervendorcomplaint";
+$route['deletesuppliervendorcompalintreport'] = "admin/deletesuppliervendorcompalintreport";
+
+
 
 
 /* End of file routes.php */
