@@ -1,4 +1,10 @@
 
+<style>
+    .select2-container--default{
+
+       width: 353px !important;
+}
+    </style>
 
 <?php //print_r($fetchALLpreVendorpoconfirmationitemList);exit;?>
 

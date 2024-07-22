@@ -18619,4 +18619,89 @@ public function deletesuppliervendorcompalintreport(){
 }
 
 
+public function getSupplierPonumbeforsuppliervendorcompalint(){
+
+    $supplier_name=$this->input->post('supplier_name');
+
+    if($supplier_name) {
+        $getSupplierdetails = $this->admin_model->getSupplierPonumbeforsuppliervendorcompalint($supplier_name);
+        if(count($getSupplierdetails) >= 1) {
+            $content = $content.'<option value="">Select Supplier PO Number</option>';
+            foreach($getSupplierdetails as $value) {
+                    $content = $content.'<option value="'.$value["supplier_id"].'">'.$value["po_number"].'</option>';
+            }
+            echo $content;
+        } else {
+            echo 'failure';
+        }
+    } else {
+        echo 'failure';
+    }
+
+}
+
+public function getVendorPolistforvendorcompalint(){
+    $vendor_name=$this->input->post('vendor_name');
+    if($vendor_name) {
+        $getVendordetails = $this->admin_model->getVendorPolistforvendorcompalint($vendor_name);
+        if(count($getVendordetails) >= 1) {
+            $content = $content.'<option value="">Select Vendor PO Number</option>';
+            foreach($getVendordetails as $value) {
+                $content = $content.'<option value="'.$value["id"].'">'.$value["po_number"].'</option>';
+            }
+            echo $content;
+        } else {
+            echo 'failure';
+        }
+    } else {
+        echo 'failure';
+    }
+}
+
+
+public function getVendoritemonlyforsyppliervendorcompaint(){
+
+    $vendor_po_number=$this->input->post('vendor_po_number');
+    if($vendor_po_number) {
+        $getVendoritemsonly = $this->admin_model->getVendoritemonlyforsyppliervendorcompaint($vendor_po_number);
+        if(count($getVendoritemsonly) >= 1) {
+            $content = $content.'<option value="">Select Part Number</option>';
+            foreach($getVendoritemsonly as $value) {
+                $content = $content.'<option value="'.$value["fin_id"].'" data_id="'.$value["vendor_po_item_id"].'">'.$value["part_number"].'</option>';
+            }
+            echo $content;
+        } else {
+            echo 'failure';
+        }
+    } else {
+        echo 'failure';
+    }
+
+}
+
+
+public function getSuppliritemonlyforsuppliervendorcompalint(){
+
+    $supplier_po_number=$this->input->post('supplier_po_number');
+
+    $flag=$this->input->post('flag');
+    if($supplier_po_number) {
+        $getSupplieritemsonly = $this->admin_model->getSuppliritemonlyforsuppliervendorcompalint($supplier_po_number,$flag);
+        if(count($getSupplieritemsonly) >= 1) {
+            $content = $content.'<option value="">Select Part Number</option>';
+            foreach($getSupplieritemsonly as $value) {
+                $content = $content.'<option value="'.$value["item_id"].'" data_id="'.$value["supplier_po_item_id"].'">'.$value["part_number"].'</option>';
+            }
+            echo $content;
+        } else {
+            echo 'failure';
+        }
+    } else {
+        echo 'failure';
+    }
+
+}
+
+
+
 }

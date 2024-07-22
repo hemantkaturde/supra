@@ -1,3 +1,11 @@
+<style>
+    .select2-container--default{
+
+       width: 287px !important;
+}
+    </style>
+
+
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -94,14 +102,14 @@
                                     
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="stage">Stage</label>
+                                            <label for="stage">Stage <span class="required">*</span></label>
                                             <select class="form-control" name="stage" id="stage">
                                                   <option value="NA">Select Customer Name</option>
                                                   <option value="Incoming">Incoming</option>
                                                   <option value="Inprogress">Inprogress</option>
                                                   <option value="Find Inspection">Find Inspection</option>
                                                   <option value="At Vendor End">At Vendor End</option>
-                                                  <option value="At Supplier End">At Vendor End</option>
+                                                  <option value="At Supplier End">At Supplier End</option>
                                             </select>
                                             <p class="error stage_error"></p>
                                         </div>
@@ -181,11 +189,42 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-3">
+                                    <div class="col-md-3" id="supplier_po_number_div" style="display:none">
                                         <div class="form-group">
-                                            <label for="part_number">Part Number</label>
-                                            <input type="text" class="form-control" id="part_number" name="part_number">
-                                            <p class="error part_number_error"></p>
+                                            <label for="supplier_po_number">Supplier PO</label>
+                                            <select class="form-control" name="supplier_po_number" id="supplier_po_number">
+                                            </select> 
+                                            <p class="error supplier_po_number_error"></p>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-3" id="vendor_po_number_div"  style="display:none">
+                                        <div class="form-group">
+                                            <label for="vendor_po">Vendor PO</label>
+                                            <select class="form-control" name="vendor_po_number" id="vendor_po_number">
+                                            </select> 
+                                            <p class="error vendor_po_number_error"></p>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-3" id="supplier_part_number_div"  style="display:none">
+                                        <div class="form-group">
+                                            <label for="supplier_part_number">Part Number / Drawing No / Rev No</label>
+                                            <select class="form-control" name="supplier_part_number" id="supplier_part_number">
+                                            </select> 
+                                            <p class="error supplier_part_number_error"></p>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-3" id="vendor_part_number_div"  style="display:none">
+                                        <div class="form-group">
+                                            <label for="vendor_part_number">Part Number / Drawing No / Rev No</label>
+                                            <select class="form-control" name="vendor_part_number" id="vendor_part_number">
+                                            </select> 
+                                            <p class="error vendor_part_number_error"></p>
                                         </div>
                                     </div>
 
@@ -197,7 +236,6 @@
                                         </div>
                                     </div>
 
-
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="problem_occurs">Problem Occurs</label>
@@ -205,7 +243,9 @@
                                             <p class="error problem_occurs_error"></p>
                                         </div>
                                     </div>
+                                </div>
 
+                                <div class="row">
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="received_qty">Received Qty</label>
@@ -213,9 +253,7 @@
                                             <p class="error received_qty_error"></p>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="row">
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="order_qty">Order Quality</label>
@@ -235,9 +273,9 @@
 
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="total_failure_checked">Total Quality Checked</label>
-                                            <input type="text" class="form-control" id="total_failure_checked" name="total_failure_checked">
-                                            <p class="error total_failure_checked_error"></p>
+                                            <label for="total_quantity_checked">Total Quantity Checked</label>
+                                            <input type="text" class="form-control" id="total_quantity_checked" name="total_quantity_checked">
+                                            <p class="error total_quantity_checked_error"></p>
                                         </div>
                                     </div>
                                 </div>
@@ -268,18 +306,18 @@
                                             <p class="error correction_error"></p>
                                         </div>
                                     </div>
-
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label for="corrective_action_taken">Corrective Action Taken</label>
-                                            <input type="text" class="form-control" id="corrective_action_taken" name="corrective_action_taken">
-                                            <p class="error corrective_action_taken_error"></p>
-                                        </div>
-                                    </div>
                                 </div>
 
 
                                 <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="effective_action">Effective Action</label>
+                                            <input type="text" class="form-control" id="effective_action" name="effective_action">
+                                            <p class="error effective_action_error"></p>
+                                        </div>
+                                    </div>
+
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="responsibility_1">Responsibility</label>
@@ -288,6 +326,7 @@
                                         </div>
                                     </div>
 
+
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="date_1">Date</label>
@@ -295,8 +334,39 @@
                                             <p class="error date_1_error"></p>
                                         </div>
                                     </div>
+                                </div>
 
 
+
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="corrective_action_taken">Corrective Action Taken</label>
+                                            <input type="text" class="form-control" id="corrective_action_taken" name="corrective_action_taken">
+                                            <p class="error corrective_action_taken_error"></p>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="responsibility_2">Responsibility</label>
+                                            <input type="text" class="form-control" id="responsibility_2" name="responsibility_2">
+                                            <p class="error responsibility_2_error"></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="date_2">Date</label>
+                                            <input type="text" class="form-control" id="date_2" name="date_2">
+                                            <p class="error date_2_error"></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="prepared_by">Prepared  By</label>
@@ -312,10 +382,7 @@
                                             <p class="error date_2_error"></p>
                                         </div>
                                     </div>
-                                </div>
 
-
-                                <div class="row">
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="apprroved_by">Apprroved By</label>

@@ -709,6 +709,10 @@
     </section>
 </div>
 
+<style>
+.select2-container--default{ width: 353px !important; }     
+</style>
+
 
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/common.js" charset="utf-8"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />

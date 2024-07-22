@@ -1,3 +1,12 @@
+
+<style>
+    .select2-container--default{
+
+       width: 353px !important;
+}
+    </style>
+
+
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
