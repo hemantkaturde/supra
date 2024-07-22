@@ -14711,20 +14711,7 @@ public function getVendorPolistforvendorcompalint($supplier_name){
 
 
 public function getSuppliritemonlyforsuppliervendorcompalint($supplier_po_number,$flag){
-
-    if($flag=='Supplier'){
-          // $this->db->select('*');
-          // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
-          // $this->db->join(TBL_SUPPLIER_PO_MASTER_ITEM, TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id = '.TBL_RAWMATERIAL.'.raw_id');
-          // $this->db->where(TBL_FINISHED_GOODS.'.status',1);
-          // //$this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
-          // $this->db->group_by(TBL_FINISHED_GOODS.'.part_number');
-          // $this->db->where(TBL_SUPPLIER_PO_MASTER_ITEM.'.supplier_po_id',$supplier_po_number);
-          // $query = $this->db->get(TBL_FINISHED_GOODS);
-          // $data = $query->result_array();
-          // return $data;
-
-         
+     
 
           $this->db->select('*,'.TBL_RAWMATERIAL.'.raw_id as item_id,'.TBL_SUPPLIER_PO_MASTER_ITEM.'.id as supplier_po_item_id');
           // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
@@ -14736,37 +14723,6 @@ public function getSuppliritemonlyforsuppliervendorcompalint($supplier_po_number
           $query = $this->db->get(TBL_RAWMATERIAL);
           $data = $query->result_array();
           return $data;
-
-
-
-    }else{
-
-          // $this->db->select('*');
-          // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
-          // $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
-          // $this->db->where(TBL_FINISHED_GOODS.'.status',1);
-          // //$this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
-          // $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id',$supplier_po_number);
-          // $query = $this->db->get(TBL_FINISHED_GOODS);
-          // $data = $query->result_array();
-          // return $data;
-          
-
-          $this->db->select('*,'.TBL_FINISHED_GOODS.'.fin_id as item_id');
-          // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
-          $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
-          $this->db->where(TBL_FINISHED_GOODS.'.status',1);
-          //$this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
-
-          /* Comment 30-05-2024*/
-          //$this->db->where(TBL_FINISHED_GOODS.'.part_number NOT IN (SELECT tbl_finished_goods.part_number FROM tbl_vendorpo_item join tbl_finished_goods on tbl_vendorpo_item.part_number_id=tbl_finished_goods.fin_id where tbl_vendorpo_item.pre_buyer_po_number='.$supplier_po_number.')', NULL, FALSE);
-
-          $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id',$supplier_po_number);
-          $query = $this->db->get(TBL_FINISHED_GOODS);
-          $data = $query->result_array();
-          return $data;
-
-    }
 
   }
 

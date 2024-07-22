@@ -21780,7 +21780,7 @@
 				$("#supplier_part_number").html('');
 			
 				$.ajax({
-					url : "<?php echo ADMIN_PATH;?>getSuppliritemonlyforsuppliervendorcompalint",
+					url : "<?php echo ADMIN_PATH;?>admin/getSuppliritemonlyforsuppliervendorcompalint",
 					type: "POST",
 					data : {'supplier_po_number' : supplier_po_number},
 					success: function(data, textStatus, jqXHR)
