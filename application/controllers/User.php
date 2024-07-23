@@ -18,6 +18,7 @@ class User extends BaseController
     {
         parent::__construct();
         $this->load->model('user_model');
+        $this->load->model('admin_model');
         $this->isLoggedIn();
     }
     
@@ -32,6 +33,7 @@ class User extends BaseController
         $data['finishedTasksCount'] = $this->user_model->finishedTasksCount();
         $data['logsCount'] = $this->user_model->logsCount();
         $data['usersCount'] = $this->user_model->usersCount();
+        $data['finishgoodList']= $this->admin_model->fetchALLFinishgoodList();
 
         // if ($this->getUserStatus() == TRUE)
         // {

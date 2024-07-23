@@ -21975,3 +21975,51 @@
 
 		</script>
 <?php } ?>
+
+
+<?php if($pageTitle=='Admin : Home page'){ ?>
+	<script type="text/javascript">
+
+       $(document).ready(function() {
+		   $("#seachbypartnumberreport").dataTable().fnDestroy();
+			var part_number = $('#part_number').val();
+			seachbypartnumberreport(part_number);
+		});
+
+		$(document).on('change','#part_number',function(e){  
+			e.preventDefault();
+			$("#seachbypartnumberreport").dataTable().fnDestroy();
+			var part_number = $('#part_number').val();
+			seachbypartnumberreport(part_number);
+		});
+
+		function seachbypartnumberreport(part_number){
+
+				var dt = $('#seachbypartnumberreport').DataTable({
+					"columnDefs": [ 
+						{ className: "details-control", "targets": [ 0 ] },
+						{ "width": "10%", "targets": 0 },
+						{ "width": "10%", "targets": 1 },
+						{ "width": "10%", "targets": 2 },
+						{ "width": "1%", "targets": 3 },
+					],
+					responsive: true,
+					"oLanguage": {
+						"sEmptyTable": "<i>Data Not Preview Please Select part Number First.</i>",
+					}, 
+					"bSort" : false,
+					"bFilter":true,
+					"bLengthChange": true,
+					"iDisplayLength": 10,   
+					"bProcessing": true,
+					"serverSide": true,
+					"ajax":{
+						url :"<?php echo base_url();?>admin/fetchseachbypartnumberreport/"+part_number,
+						type: "post",
+					},
+				});
+
+		}
+		
+    </script>
+<?php } ?>
