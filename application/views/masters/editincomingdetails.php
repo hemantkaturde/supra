@@ -81,7 +81,13 @@
                                     <?php if($getAllitemdetails[0]['pre_report_date']=='0000-00-00'){
                                                     $report_date = '';
                                         }else{
-                                                    $report_date = $getAllitemdetails[0]['pre_report_date'];
+                                                    // $report_date = $getAllitemdetails[0]['pre_report_date'];
+                                                    if( $getAllitemdetails[0]['pre_report_date']){
+                                                        $report_date = $getAllitemdetails[0]['pre_report_date'];
+                                                    }else{
+                                                        $report_date =  date('Y-m-d');
+
+                                                    }
                                         }
                                         ?>
 

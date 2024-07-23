@@ -274,6 +274,18 @@
                                         </div>
                                     </div>
 
+                                    <div class="col-md-12" >
+                                            <div class="form-group">
+                                                    <label for="paid_unpaid">Paid/Unpaid </label>
+                                                    <select class="form-control paid_unpaid" name="paid_unpaid" id="paid_unpaid">
+                                                        <option st-id="" value="">Select Paid/Unpaid</option>
+                                                        <option value="Paid" <?php if($getChallanformlist[0]['pre_paid_unpaid']=='Paid'){ echo 'selected';} ?>>Paid</option>
+                                                        <option value="Unpaid" <?php if($getChallanformlist[0]['pre_paid_unpaid']=='Unpaid'){ echo 'selected';} ?>>Unpaid</option>
+                                                    </select>
+                                                <p class="error paid_unpaid_error"></p>
+                                            </div>
+                                    </div>
+
                                     <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="remark">Remark</label>
