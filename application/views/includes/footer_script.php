@@ -21512,8 +21512,7 @@
 <?php }	?>
 
 
-
-<?php if($pageTitle=='Supplier Vendor Compliant Report' || $pageTitle=='Add New Supplier Vendor Compliant Report'){ ?>
+<?php if($pageTitle=='Supplier Vendor Compliant Report' || $pageTitle=='Add New Supplier Vendor Compliant Report' ||  $pageTitle=='Edit Supplier Vendor Compliant Report'){ ?>
 	    <script type="text/javascript">
 	        $(document).ready(function() { 
 				var dt = $('#view_supplier_vendor_complaint').DataTable({
@@ -21525,7 +21524,7 @@
 						{ "width": "10%", "targets": 3 },
 						{ "width": "10%", "targets": 4 },
 						{ "width": "10%", "targets": 5 },
-						{ "width": "10%", "targets": 6 }
+						{ "width": "8%", "targets": 6 }
 					],
 					responsive: true,
 					"oLanguage": {
@@ -21543,6 +21542,105 @@
 					},
 				});
 		    });
+
+			$(document).ready(function() { 
+				var supplier_vendor = $('#vendor_supplier').val();
+				if(supplier_vendor=='Supplier'){
+					$('#supplier_div').css('display','block');
+					$('#vendor_div').css('display','none');
+					$('#vendor_name').val('');
+				}
+				if(supplier_vendor=='Vendor'){
+					$('#supplier_div').css('display','none');
+					$('#vendor_div').css('display','block');
+					$('#supplier_name').val('');
+				}
+			});
+
+			$(document).ready(function() { 
+
+				var supplier_vendor = $('#vendor_supplier').val();
+
+				if(supplier_vendor=='Supplier'){
+
+
+					$('#supplier_po_number_div').css('display','block');
+					$('#vendor_po_number_div').css('display','none');
+
+
+					var supplier_name = $('#supplier_name').val();
+					$.ajax({
+						url : "<?php echo ADMIN_PATH;?>admin/getSupplierPonumbeforsuppliervendorcompalint",
+						type: "POST",
+						data : {'supplier_name' : supplier_name},
+						success: function(data, textStatus, jqXHR)
+						{
+							$(".loader_ajax").hide();
+							if(data == "failure")
+							{
+								$('#supplier_po_number').html('<option value="">Select Supplier PO Number</option>');
+							}
+							else
+							{
+								// $('#supplier_po_number').html('<option value="">Select supplier PO Number</option>');
+								$('#supplier_po_number').html(data);
+
+							}
+						},
+						error: function (jqXHR, textStatus, errorThrown)
+						{
+							$('#supplier_po_number').html();
+							//$(".loader_ajax").hide();
+						}
+					});
+				return false;
+
+			   }
+
+			});
+
+			$(document).ready(function() { 
+
+				var supplier_vendor = $('#vendor_supplier').val();
+
+				if(supplier_vendor=='Vendor'){
+
+
+					//$(".loader_ajax").show();
+					// $("#customers-list").html('');
+					$('#supplier_po_number_div').css('display','none');
+					$('#vendor_po_number_div').css('display','block');
+
+					var vendor_name = $('#vendor_name').val();
+				
+					$.ajax({
+						url : "<?php echo ADMIN_PATH;?>getVendorPoconfirmationvendorlist",
+						type: "POST",
+						data : {'vendor_name' : vendor_name},
+						success: function(data, textStatus, jqXHR)
+						{
+							$(".loader_ajax").hide();
+							if(data == "failure")
+							{
+								$('#vendor_po_number').html('<option value="">Select Vendor PO Number</option>');
+							}
+							else
+							{
+								// $('#supplier_po_number').html('<option value="">Select supplier PO Number</option>');
+								$('#vendor_po_number').html(data);
+
+							}
+						},
+						error: function (jqXHR, textStatus, errorThrown)
+						{
+							$('#vendor_po_number').html();
+							//$(".loader_ajax").hide();
+						}
+					});
+					return false;
+			    }
+			});
+			
 
 			$(document).on('click','#addnewsuppliervendorcomplaint',function(e){
 				e.preventDefault();
@@ -21591,9 +21689,9 @@
 	     	});
 
 
-			$(document).on('change','#supplier_vendor',function(e){  
+			$(document).on('change','#vendor_supplier',function(e){  
 
-				var supplier_vendor = $('#supplier_vendor').val();
+				var supplier_vendor = $('#vendor_supplier').val();
 				if(supplier_vendor=='Supplier'){
 					$('#supplier_div').css('display','block');
 					$('#vendor_div').css('display','none');
@@ -21804,8 +21902,74 @@
 				return false;
 	    	});
 
-
-		
+			$(document).on('change','#supplier_part_number',function(e){  
+			         e.preventDefault();
 			
+						//$(".loader_ajax").show();
+						var supplier_part_number = $('#supplier_part_number').val();
+						var supplier_po_number = $('#supplier_po_number').val();
+						
+						$.ajax({
+							url : "<?php echo ADMIN_PATH;?>admin/getPartnumberdetailsforsupplierposuppliervendorpo",
+							type: "POST",
+							data : {'supplier_part_number' : supplier_part_number,'supplier_po_number':supplier_po_number},
+							success: function(data, textStatus, jqXHR)
+							{
+								$(".loader_ajax").hide();
+								if(data == "failure")
+								{
+									$('#part_description').val('');
+								}
+								else
+								{
+									var data_row_material = jQuery.parseJSON( data );
+									$('#part_description').val(data_row_material.type_of_raw_material);
+									
+								}
+							},
+							error: function (jqXHR, textStatus, errorThrown)
+							{
+									$('#part_description').val('');
+							}
+						});
+						return false;
+			
+		    });
+
+			$(document).on('change','#vendor_part_number',function(e){  
+			         e.preventDefault();
+			
+						//$(".loader_ajax").show();
+						var vendor_part_number = $('#vendor_part_number').val();
+						var vendor_po_number = $('#vendor_po_number').val();
+						
+						$.ajax({
+							url : "<?php echo ADMIN_PATH;?>admin/getPartnumberdetailsforsupplierposuppliervendorpovendor",
+							type: "POST",
+							data : {'vendor_part_number' : vendor_part_number,'vendor_po_number':vendor_po_number},
+							success: function(data, textStatus, jqXHR)
+							{
+								$(".loader_ajax").hide();
+								if(data == "failure")
+								{
+									$('#part_description').val('');
+								}
+								else
+								{
+									var data_row_material = jQuery.parseJSON( data );
+									$('#part_description').val(data_row_material.name);
+									
+								}
+							},
+							error: function (jqXHR, textStatus, errorThrown)
+							{
+									$('#part_description').val('');
+							}
+						});
+						return false;
+			
+		    });
+			
+
 		</script>
 <?php } ?>

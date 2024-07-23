@@ -490,6 +490,7 @@ $route['downlaodcustomercomplaint/(:any)'] = "admin/downlaodcustomercomplaint/$1
 $route['fetchsuppliervendorrport'] = "admin/fetchsuppliervendorrport";
 $route['addnewsuppliervendorcomplaint'] = "admin/addnewsuppliervendorcomplaint";
 $route['deletesuppliervendorcompalintreport'] = "admin/deletesuppliervendorcompalintreport";
+$route['editsuppliervendorcompalint/(:any)'] = "admin/editsuppliervendorcompalint/$1";
 
 
 

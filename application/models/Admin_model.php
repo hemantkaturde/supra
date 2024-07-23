@@ -14654,8 +14654,8 @@ public function getsuppliervendorrportdata($params){
             $data[$counter]['invoice_number'] = $value['invoice_number'];
             $data[$counter]['invoice_date'] = $value['invoice_date'];
             $data[$counter]['action'] = '';
-            // $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addpaymentdetailsdata/".$value['payment_details_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>   &nbsp ";
-            $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editpaymentdetails/".$value['suppliervendor_compalint_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+            $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editsuppliervendorcompalint/".$value['suppliervendor_compalint_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+            $data[$counter]['action'] .= "<a href='".ADMIN_PATH."/".$value['suppliervendor_compalint_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>   &nbsp ";
             $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['suppliervendor_compalint_id']."' class='fa fa-trash-o deletesuppliervendorcompalintreport' aria-hidden='true'></i>"; 
             $counter++; 
         }
@@ -14728,6 +14728,54 @@ public function getSuppliritemonlyforsuppliervendorcompalint($supplier_po_number
 
 
 
+  public function getPrevioussuppliercustomerCompalinformnumber(){
+
+    $this->db->select('report_number');
+    $this->db->limit(1);
+    $this->db->order_by(TBL_SUPPLIER_VENDOR_COMPALINT.'.id','DESC');
+    $query = $this->db->get(TBL_SUPPLIER_VENDOR_COMPALINT);
+    $rowcount = $query->result_array();
+    return $rowcount;
+}
+
+
+public function getPartnumberdetailsforsupplierposuppliervendorpo($supplier_part_number,$supplier_po_number){
+
+        $this->db->select('type_of_raw_material');
+        // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+        $this->db->join(TBL_SUPPLIER_PO_MASTER_ITEM, TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id = '.TBL_RAWMATERIAL.'.raw_id');
+        //$this->db->where(TBL_FINISHED_GOODS.'.status',1);
+        //$this->db->where(TBL_RAWMATERIAL.'.raw_id',$part_number);
+        $this->db->where(TBL_RAWMATERIAL.'.raw_id',$supplier_part_number);
+        $this->db->where(TBL_SUPPLIER_PO_MASTER_ITEM.'.supplier_po_id',$supplier_po_number);
+        $query = $this->db->get(TBL_RAWMATERIAL);
+        $data = $query->result_array();
+        return $data;
+}
+
+public function getPartnumberdetailsforsupplierposuppliervendorpovendor($vendor_part_number,$vendor_po_number){
+
+    $this->db->select('name');
+    // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+    $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
+    //$this->db->where(TBL_FINISHED_GOODS.'.status',1);
+    //$this->db->where(TBL_RAWMATERIAL.'.raw_id',$part_number);
+    $this->db->where(TBL_FINISHED_GOODS.'.fin_id',$vendor_part_number);
+    $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id',$vendor_po_number);
+    $query = $this->db->get(TBL_FINISHED_GOODS);
+    $data = $query->result_array();
+    return $data;
+}
+
+
+public function getsuppliervendorcomplaintdata($id){
+
+    $this->db->select('*,'.TBL_SUPPLIER_VENDOR_COMPALINT.'.id as suppliervendor_compalint_id');
+    $this->db->where(TBL_SUPPLIER_VENDOR_COMPALINT.'.id',$id);
+    $query = $this->db->get(TBL_SUPPLIER_VENDOR_COMPALINT);
+    $fetch_result = $query->row_array();
+    return $fetch_result;
+}
 
 
 

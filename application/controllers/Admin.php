@@ -18030,8 +18030,8 @@ public function addnewsuppliervendorcomplaint(){
         $save_vendor_supplier_complaint_response = array();
         $this->form_validation->set_rules('report_number','Report Number','trim|required');
         $this->form_validation->set_rules('stage','Stage','trim|required');
-        $this->form_validation->set_rules('challan_no','Challan No','trim|required');
-        $this->form_validation->set_rules('challan_date','Challan Date','trim|required');
+        $this->form_validation->set_rules('challan_no','Challan No','trim');
+        $this->form_validation->set_rules('challan_date','Challan Date','trim');
 
         if($this->form_validation->run() == FALSE)
         {
@@ -18050,7 +18050,39 @@ public function addnewsuppliervendorcomplaint(){
                 'challan_number'=>trim($this->input->post('challan_no')),
                 'challan_date'=>trim($this->input->post('challan_date')),
                 'invoice_number'=>trim($this->input->post('invoice_no')),
-                'invoice_date'=>trim($this->input->post('invoice_date'))
+                'invoice_date'=>trim($this->input->post('invoice_date')),
+                'vendor_supplier'=>trim($this->input->post('vendor_supplier')),
+                'supplier_id'=>trim($this->input->post('supplier_name')),
+                'vendor_id'=>trim($this->input->post('vendor_name')),
+                'supplier_po_id'=>trim($this->input->post('supplier_po_number')),
+                'vendor_po_id'=>trim($this->input->post('vendor_po_number')),
+                'vendor_part_number_id'=>trim($this->input->post('vendor_part_number')),
+                'supplier_part_number_id'=>trim($this->input->post('supplier_part_number')),
+                'part_description'=>trim($this->input->post('part_description')),
+                'problem_occurs'=>trim($this->input->post('problem_occurs')),
+                'received_qty'=>trim($this->input->post('received_qty')),
+                'order_qty'=>trim($this->input->post('order_qty')),
+                'total_failure_qty'=>trim($this->input->post('total_failure_qty')),
+                'total_quantity_checked'=>trim($this->input->post('total_quantity_checked')),
+                'problem_description'=>trim($this->input->post('problem_description')),
+                'root_case'=>trim($this->input->post('root_case')),
+                'correction'=>trim($this->input->post('correction')),
+                'effective_action'=>trim($this->input->post('effective_action')),
+                'responsibility_1'=>trim($this->input->post('responsibility_1')),
+                'date_1'=>trim($this->input->post('date_1')),
+                'corrective_action_taken'=>trim($this->input->post('corrective_action_taken')),
+                'responsibility_2'=>trim($this->input->post('responsibility_2')),
+                'date_2'=>trim($this->input->post('date_2')),
+                'prepared_by'=>trim($this->input->post('prepared_by')),
+                'date_3'=>trim($this->input->post('date_3')),
+                'apprroved_by'=>trim($this->input->post('apprroved_by')),
+                'date_4'=>trim($this->input->post('date_4')),
+                'report_close_by'=>trim($this->input->post('report_close_by')),
+                'date_5'=>trim($this->input->post('date_5')),
+                'accept_with_deviation'=>trim($this->input->post('accept_with_deviation')),
+                'do_not_accept_with_deviation'=>trim($this->input->post('do_not_accept_with_deviation')),
+                'remark'=>trim($this->input->post('remark'))
+
             );
 
                 // if(trim($this->input->post('complaint_form_id'))){
@@ -18081,10 +18113,24 @@ public function addnewsuppliervendorcomplaint(){
             $this->global['pageTitle'] = 'Add New Supplier Vendor Compliant Report';
             $data['vendorList']= $this->admin_model->fetchALLvendorList();
             $data['supplierList']= $this->admin_model->fetchALLsupplierList();
+            $data['getPrevioussuppliercustomerCompalinformnumber']= $this->admin_model->getPrevioussuppliercustomerCompalinformnumber()[0];
             $this->loadViews("masters/addnewsuppliervendorcomplaint", $this->global, $data, NULL);
     }
 }
 
+
+
+public function editsuppliervendorcompalint($id){
+    $process = 'Edit Supplier Vendor Compliant Report';
+    $processFunction = 'Admin/editsuppliervendorcompalint';
+    $this->logrecord($process,$processFunction);
+    $this->global['pageTitle'] = 'Edit Supplier Vendor Compliant Report';
+    $data['vendorList']= $this->admin_model->fetchALLvendorList();
+    $data['supplierList']= $this->admin_model->fetchALLsupplierList();
+    $data['getsuppliervendorcomplaintdata']= $this->admin_model->getsuppliervendorcomplaintdata($id);
+    $this->loadViews("masters/editsuppliervendorcompalint", $this->global, $data, NULL);
+
+}
 
 
 public function getpartdescriptionusingpartnumber(){
@@ -18703,5 +18749,43 @@ public function getSuppliritemonlyforsuppliervendorcompalint(){
 }
 
 
+
+public function getPartnumberdetailsforsupplierposuppliervendorpo(){
+
+    if($this->input->post('supplier_part_number')) {
+        $getPartNameBypartid = $this->admin_model->getPartnumberdetailsforsupplierposuppliervendorpo($this->input->post('supplier_part_number'),$this->input->post('supplier_po_number'));
+
+        if($getPartNameBypartid){
+            $content = $getPartNameBypartid[0];
+            echo json_encode($content);
+
+        }else{
+            echo 'failure';
+        }
+       
+    } else {
+        echo 'failure';
+    }
+}
+
+
+
+public function getPartnumberdetailsforsupplierposuppliervendorpovendor(){
+
+    if($this->input->post('vendor_part_number')) {
+        $getPartNameBypartid = $this->admin_model->getPartnumberdetailsforsupplierposuppliervendorpovendor($this->input->post('vendor_part_number'),$this->input->post('vendor_po_number'));
+
+        if($getPartNameBypartid){
+            $content = $getPartNameBypartid[0];
+            echo json_encode($content);
+
+        }else{
+            echo 'failure';
+        }
+       
+    } else {
+        echo 'failure';
+    }
+}
 
 }
