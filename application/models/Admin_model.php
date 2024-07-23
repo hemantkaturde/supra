@@ -5614,6 +5614,7 @@ class Admin_model extends CI_Model
         {
             $this->db->where("(".TBL_CHALLAN_FORM.".challan_no LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_CHALLAN_FORM.".challan_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CHALLAN_FORM.".paid_unpaid LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_SUPPLIER_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_USP.".usp_name LIKE '%".$params['search']['value']."%'");
@@ -5640,6 +5641,7 @@ class Admin_model extends CI_Model
         {
             $this->db->where("(".TBL_CHALLAN_FORM.".challan_no LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_CHALLAN_FORM.".challan_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CHALLAN_FORM.".paid_unpaid LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_SUPPLIER_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_USP.".usp_name LIKE '%".$params['search']['value']."%'");
@@ -5666,6 +5668,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['supplier_name'] = $value['supplier'];
                 $data[$counter]['supplier_po_number'] = $value['supplier_master'];
                 $data[$counter]['usp_name'] = $value['usp_name'];
+                $data[$counter]['paid_unpaid'] = $value['paid_unpaid'];
                 $data[$counter]['action'] = '';
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editchallanform/".$value['challan_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
             

@@ -7220,13 +7220,13 @@ class Admin extends BaseController
             $this->form_validation->set_rules('remark','Remark','trim');
             $this->form_validation->set_rules('vendor_supplier_name','vendor/supplier','trim|required');
             $this->form_validation->set_rules('usp','USP','trim');
-            $this->form_validation->set_rules('paid_unpaid','paid_unpaid','trim');
+            $this->form_validation->set_rules('paid_unpaid','paid_unpaid','trim|required');
 
 
             if($this->form_validation->run() == FALSE)
             {
                 $addmewchallanform_response['status'] = 'failure';
-                $addmewchallanform_response['error'] = array('vendor_supplier_name'=>strip_tags(form_error('vendor_supplier_name')),'challan_no'=>strip_tags(form_error('challan_no')),'challan_date'=>strip_tags(form_error('challan_date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'usp'=>strip_tags(form_error('usp')),'remark'=>strip_tags(form_error('remark')));
+                $addmewchallanform_response['error'] = array('vendor_supplier_name'=>strip_tags(form_error('vendor_supplier_name')),'challan_no'=>strip_tags(form_error('challan_no')),'challan_date'=>strip_tags(form_error('challan_date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'usp'=>strip_tags(form_error('usp')),'remark'=>strip_tags(form_error('remark')),'paid_unpaid'=>strip_tags(form_error('paid_unpaid')));
             }else{
 
                 $data = array(
@@ -7252,7 +7252,7 @@ class Admin extends BaseController
                     $saveNewchallan= $this->admin_model->savechallanformdetails($challanformid,$data);
                     if($saveNewchallan){
                         $addmewchallanform_response['status'] = 'success';
-                        $addmewchallanform_response['error'] = array('vendor_supplier_name'=>strip_tags(form_error('vendor_supplier_name')),'challan_no'=>strip_tags(form_error('challan_no')),'challan_date'=>strip_tags(form_error('challan_date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'usp'=>strip_tags(form_error('usp')),'remark'=>strip_tags(form_error('remark')),'paid_unpaid'=>strip_tags(form_error('remark')));
+                        $addmewchallanform_response['error'] = array('vendor_supplier_name'=>strip_tags(form_error('vendor_supplier_name')),'challan_no'=>strip_tags(form_error('challan_no')),'challan_date'=>strip_tags(form_error('challan_date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'usp'=>strip_tags(form_error('usp')),'remark'=>strip_tags(form_error('remark')),'paid_unpaid'=>strip_tags(form_error('paid_unpaid')));
                     }
                 }else{
                     $saveNewchallan= $this->admin_model->savechallanformdetails('',$data);
@@ -7260,7 +7260,7 @@ class Admin extends BaseController
                         $update_last_inserted_id_challan_form = $this->admin_model->update_last_inserted_id_challan_form($saveNewchallan);
                          if($update_last_inserted_id_challan_form){
                             $addmewchallanform_response['status'] = 'success';
-                            $addmewchallanform_response['error'] = array('vendor_supplier_name'=>strip_tags(form_error('vendor_supplier_name')),'challan_no'=>strip_tags(form_error('challan_no')),'challan_date'=>strip_tags(form_error('challan_date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'usp'=>strip_tags(form_error('usp')),'remark'=>strip_tags(form_error('remark')),'paid_unpaid'=>strip_tags(form_error('remark')));
+                            $addmewchallanform_response['error'] = array('vendor_supplier_name'=>strip_tags(form_error('vendor_supplier_name')),'challan_no'=>strip_tags(form_error('challan_no')),'challan_date'=>strip_tags(form_error('challan_date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'usp'=>strip_tags(form_error('usp')),'remark'=>strip_tags(form_error('remark')),'paid_unpaid'=>strip_tags(form_error('paid_unpaid')));
                          }
                      }
                 }

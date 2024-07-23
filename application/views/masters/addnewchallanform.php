@@ -276,7 +276,7 @@
 
                                     <div class="col-md-12" >
                                             <div class="form-group">
-                                                    <label for="paid_unpaid">Paid/Unpaid </label>
+                                                    <label for="paid_unpaid">Paid/Unpaid <span class="required">*</span></label>
                                                     <select class="form-control paid_unpaid" name="paid_unpaid" id="paid_unpaid">
                                                         <option st-id="" value="">Select Paid/Unpaid</option>
                                                         <option value="Paid" <?php if($getChallanformlist[0]['pre_paid_unpaid']=='Paid'){ echo 'selected';} ?>>Paid</option>

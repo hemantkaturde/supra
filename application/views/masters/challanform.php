@@ -36,6 +36,7 @@
                                         <th>Supplier Name</th>
                                         <th>Supplier PO</th>
                                         <th>USP Name</th>
+                                        <th>Paud / Unpaid</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
