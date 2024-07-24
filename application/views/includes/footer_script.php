@@ -20903,7 +20903,7 @@
 								button: "Ok",
 								},function(){ 
 									$('#addnotes').modal('hide');
-									//window.location.href = "<?php echo base_url().'productionstatusreport'?>";
+									window.location.href = "<?php echo base_url().'productionstatusreport'?>";
 							});		
 						}
 						

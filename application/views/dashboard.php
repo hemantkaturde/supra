@@ -98,7 +98,9 @@
                </select>
             </div>
          </div>
+      </div>
 
+      <div class="col-lg-12 col-xs-12">
          <div class="col-md-12">
             <div class="panel-body">
               <table width="100%" class="table table-striped table-bordered table-hover"
@@ -116,8 +118,7 @@
               </table>
             </div>
           </div>
-
-
+          </div>
       </div>
 </section>
 </div>
