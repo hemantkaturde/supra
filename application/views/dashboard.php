@@ -6,9 +6,9 @@
    </h1>
 </section>
 <section class="content">
-   <div class="row">
+   <!-- <div class="row">
       <div class="col-lg-3 col-xs-6">
-         <!-- small box -->
+       
          <div class="small-box bg-aqua">
             <div class="inner">
                <h3>
@@ -25,9 +25,8 @@
             </a>
          </div>
       </div>
-      <!-- ./col -->
       <div class="col-lg-3 col-xs-6">
-         <!-- small box -->
+
          <div class="small-box bg-green">
             <div class="inner">
                <h3>
@@ -44,9 +43,9 @@
             </a>
          </div>
       </div>
-      <!-- ./col -->
+    
       <div class="col-lg-3 col-xs-6">
-         <!-- small box -->
+        
          <div class="small-box bg-yellow">
             <div class="inner">
                <h3>
@@ -62,9 +61,9 @@
             </a>
          </div>
       </div>
-      <!-- ./col -->
+     
       <div class="col-lg-3 col-xs-6">
-         <!-- small box -->
+         
          <div class="small-box bg-red">
             <div class="inner">
                <h3>
@@ -80,8 +79,9 @@
             </a>
          </div>
       </div>
-      <!-- ./col -->
    </div>
+    -->
+   
    <div class="row" style="margin-right: 0px; margin-left: 0px;background:#fff">
       <div class="col-lg-12 col-xs-12">
         
