@@ -34,7 +34,7 @@
                                         <th>Supplier Name</th>
                                         <th>Supplier PO</th>
                                         <th>Buyer Name</th>
-                                        <th>PO Confirmed </th>
+                                        <th>Material Sent (Material Dispatch or Not) </th>
                                         <th>PO Confirmed Date</th>
                                         <th>Confirmed With</th>
                                         <th>Action</th>

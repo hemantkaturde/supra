@@ -6,7 +6,7 @@
    </h1>
 </section>
 <section class="content">
-   <!-- <div class="row">
+   <div class="row">
       <div class="col-lg-3 col-xs-6">
        
          <div class="small-box bg-aqua">
@@ -80,8 +80,8 @@
          </div>
       </div>
    </div>
-    -->
-   
+    
+
    <div class="row" style="margin-right: 0px; margin-left: 0px;background:#fff">
       <div class="col-lg-12 col-xs-12">
         
