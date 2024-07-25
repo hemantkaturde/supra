@@ -462,7 +462,7 @@
       
                     <li class="treeview <?php if($pageUrl=="productionstatusreport"){echo 'active';}?>">
                       <a href="#">
-                        <i class="fa fa-user"></i> <span class="menu_label">Kunal Sir</span>
+                        <i class="fa fa-user"></i> <span class="menu_label">Production Status</span>
                           <span class="pull-right-container">
                             <i class="fa fa-angle-left pull-right"></i>
                           </span>
