@@ -93,8 +93,17 @@
 
                                     <div class="col-md-12">
                                             <div class="form-group">
+                                                <label for="remark">Previous Report Date</label>
+                                                  <input type="text" class="form-control"  value="<?=$report_date ?>" id="previous_reported_date" name="previous_reported_date" readonly>
+                                                <p class="error previous_reported_date_error"></p>
+                                            </div>
+                                    </div>
+
+
+                                    <div class="col-md-12">
+                                            <div class="form-group">
                                                 <label for="remark">Report Date</label>
-                                                  <input type="text" class="form-control datepicker"  value="<?=$report_date ?>" id="reported_date" name="reported_date">
+                                                  <input type="text" class="form-control datepicker"  value="<?=date('Y-m-d')?>" id="reported_date" name="reported_date">
                                                 <p class="error reported_date_error"></p>
                                             </div>
                                     </div>
