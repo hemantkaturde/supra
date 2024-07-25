@@ -7099,7 +7099,7 @@ class Admin_model extends CI_Model
 
             
 
-            $this->db->select(TBL_FINISHED_GOODS.'.name,'.TBL_FINISHED_GOODS.'.net_weight,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_order_qty,'.TBL_BUYER_PO_MASTER_ITEM.'.order_oty as buyer_order_qty,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id,'.TBL_VENDOR_PO_MASTER_ITEM.'.vendor_qty as vendor_qtyvendor_qty,'.TBL_FINISHED_GOODS.'.hsn_code as finhsn_code');
+            $this->db->select(TBL_FINISHED_GOODS.'.name,'.TBL_FINISHED_GOODS.'.net_weight,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_order_qty,'.TBL_BUYER_PO_MASTER_ITEM.'.order_oty as buyer_order_qty,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id,'.TBL_VENDOR_PO_MASTER_ITEM.'.vendor_qty as vendor_qtyvendor_qty,'.TBL_FINISHED_GOODS.'.hsn_code as finhsn_code'.TBL_FINISHED_GOODS.'.current_stock');
             $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
             // $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
              //$this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.pre_vendor_name');
