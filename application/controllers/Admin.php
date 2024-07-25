@@ -13400,7 +13400,7 @@ public function downloadreworkrejectionvendor($id){
                 $subtotal+=$value['value'];
                 $raw_material_cost +=$value['row_material_cost'];
                 $grand_total +=$value['grand_total'];
-                $gst_rate = $value['gst_rate'];
+                $gst_rate += $value['gst_rate'];
 
                 if($value['gst_rate']=='CGST_SGST'){
                     $cgst_tax_rate = 9;
