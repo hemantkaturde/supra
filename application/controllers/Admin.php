@@ -14925,7 +14925,7 @@ public function downlaoddebitnote($id){
 
              <tr style="border: 1px solid black;">
                     <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;"><b>Total amount</b></td>    
-                    <td style="border: 1px solid black;padding: 5px;">'.round($total_amount,2).'</td>
+                    <td style="border: 1px solid black;padding: 5px;">'.number_format($total_amount,2).'</td>
               </tr>
 
               <tr style="border: 1px solid black;">
