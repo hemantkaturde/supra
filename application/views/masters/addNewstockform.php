@@ -407,7 +407,8 @@
                         
                         <div class="col-md-12">
                            <button type="button" class="btn btn-success btn-xl" data-toggle="modal" data-target="#addNewModal">Add New Items</button><br/><br/>
-                             <table class="table  table-bordered">
+                               <!-- <p>Note : In case of change of actual recd qty in between then you need to manual update previous stock of next enteries </p> -->
+                            <table class="table  table-bordered">
                                 <thead style="background-color: #3c8dbc;">
                                     <tr>
                                         <th scope="col">#</th>
