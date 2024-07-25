@@ -15383,6 +15383,7 @@
 										$('#invoice_qty_in_pcs').val('');
 										//$('#invoice_qty_in_kgs').val('');
 										$('#net_weight').val('');
+										$('#privious_balenace').val('');
 									}
 									else
 									{
@@ -15392,6 +15393,7 @@
 										$('#buyre_order_qty').val(data_finish_good.buyer_order_qty);
 										//$('#invoice_qty_in_pcs').val(data_finish_good.vendor_qtyvendor_qty);
 										$('#net_weight').val(data_finish_good.net_weight);
+										$('#privious_balenace').val(data_finish_good.current_stock);
 										
 									}
 								},
@@ -15403,6 +15405,7 @@
 										$('#invoice_qty_in_pcs').val('');
 										//$('#invoice_qty_in_kgs').val('');
 										$('#net_weight').val('');
+										$('#privious_balenace').val('');
 								}
 							});
 							return false;
@@ -15568,7 +15571,7 @@
 		$(document).on('click','.deleteStockformitem',function(e){
 
 			
-		var stock_id =   $('#stock_id_main').val();
+		 var stock_id =   $('#stock_id_main').val();
 		
 		 var elemF = $(this);
 			e.preventDefault();
@@ -15789,7 +15792,6 @@
 		   });
 	    });
 
-
 		$(document).on('click','.editStockformitem',function(e){  
 			e.preventDefault();
 
@@ -15865,12 +15867,10 @@
             return false;
 	    });
 
-
 		$(document).on('click','.closestockform', function(){
 			location.reload();
         });
 
-	
     </script>
 <?php } ?>
 
