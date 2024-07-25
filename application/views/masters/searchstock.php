@@ -267,6 +267,7 @@
                                         <th>Rejection Reason</th>
                                         <th>Rejection Qty in Pcs</th>
                                         <th>Rejection Qty in Kgs</th>
+                                        <th>Remarks</th>
                                     </tr>
                                 </thead>
                                 <tbody>

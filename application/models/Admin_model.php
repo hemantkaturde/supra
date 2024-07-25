@@ -7538,7 +7538,7 @@ class Admin_model extends CI_Model
     }
 
     public function getexportrejecteditemdata($params,$part_number,$vendor_po_id){
-        $this->db->select('*,'.TBL_FINISHED_GOODS.'.net_weight as fg_net_weight');
+        $this->db->select('*,'.TBL_FINISHED_GOODS.'.net_weight as fg_net_weight,'.TBL_REJECTION_FORM_REJECTED_ITEM.'.remark as remarksrej');
         $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
         $this->db->join(TBL_REJECTION_FORM, TBL_REJECTION_FORM.'.id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.rejection_form_id');
@@ -7559,6 +7559,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['rejected_reason'] =$value['rejected_reason'];
                 $data[$counter]['qty_In_pcs'] =$value['qty_In_pcs'];
                 $data[$counter]['qty_In_kgs'] =round($value['qty_In_kgs'],3);
+                $data[$counter]['remarks'] =$value['remarksrej'];
                 //$data[$counter]['qty_In_kgs'] =$value['fg_net_weight'] * $value['qty_In_kgs'];
 
                 $counter++; 
