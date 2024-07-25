@@ -16,8 +16,8 @@
                 </ul>
             </div>
 
-            <div class="col-xs-6 text-left">
-                <p> <b>Previous Balenace :</b> <?=$getsearchstockvendordeatils[0]['current_stock'];?> </p>
+            <div class="col-xs-6 text-right">
+                <h4> <b>Previous Balance :</b> <?=$getsearchstockvendordeatils[0]['current_stock'];?> <h4>
             </div>
         </div>
         <input type="hidden" class="form-control" id="vendor_po_id" name="vendor_po_id"  value="<?=$getsearchstockvendordeatils[0]['vendor_po_id'];?>" readonly>
