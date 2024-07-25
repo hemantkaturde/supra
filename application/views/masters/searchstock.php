@@ -77,7 +77,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="buyer_po_number">Buyer PO Number</label>
-                    <input type="text" class="form-control" id="buyer_po_number" name="buyer_po_number" value="<?=$getsearchstockvendordeatils[0]['sales_order_number'];?>" style="background: #FFF;" readonly>
+                    <input type="text" class="form-control" id="buyer_po_number" name="buyer_po_number" value="<?=$getsearchstockvendordeatils[0]['sales_order_number'].'-'.$getsearchstockvendordeatils[0]['buyer_po_number'];?>" style="background: #FFF;" readonly>
                 </div>
             </div>  
 
