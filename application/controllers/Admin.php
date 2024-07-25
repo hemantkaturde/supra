@@ -5582,7 +5582,14 @@ class Admin extends BaseController
 
 
                             if($incoiming_details_item_id){
-                                $balence_qty = trim($this->input->post('p_o_qty'))-trim($this->input->post('invoice_qty'));
+                                //$balence_qty = trim($this->input->post('p_o_qty'))-trim($this->input->post('invoice_qty'));
+                                $get_previous_balenace_qty = $this->admin_model->get_previous_item_balenace_qty_add_self_item(trim($this->input->post('part_number')),$incoiming_details_item_id);
+
+                                if($get_previous_balenace_qty){
+                                    $balence_qty = $get_previous_balenace_qty[0]['balance_qty']-trim($this->input->post('invoice_qty'));
+                                }else{
+                                    $balence_qty = trim($this->input->post('p_o_qty'))-trim($this->input->post('invoice_qty'));
+                                }
 
                             }else{
 
@@ -5636,8 +5643,16 @@ class Admin extends BaseController
 
 
                         
-                        if($incoiming_details_item_id){
-                            $balence_qty = trim($this->input->post('p_o_qty'))-trim($this->input->post('invoice_qty'));
+                        if($incoiming_detail__item_id){
+                            // $balence_qty = trim($this->input->post('p_o_qty'))-trim($this->input->post('invoice_qty'));
+                              //$balence_qty = trim($this->input->post('p_o_qty'))-trim($this->input->post('invoice_qty'));
+                              $get_previous_balenace_qty = $this->admin_model->get_previous_item_balenace_qty_add_self_item(trim($this->input->post('part_number')),$incoiming_detail__item_id);
+
+                              if($get_previous_balenace_qty){
+                                  $balence_qty = $get_previous_balenace_qty[0]['balance_qty']-trim($this->input->post('invoice_qty'));
+                              }else{
+                                  $balence_qty = trim($this->input->post('p_o_qty'))-trim($this->input->post('invoice_qty'));
+                              }
                         }else{
 
                             $get_previous_balenace_qty = $this->admin_model->get_previous_item_balenace_qty_add(trim($this->input->post('part_number')),'NA');
@@ -5648,6 +5663,7 @@ class Admin extends BaseController
                                 $balence_qty = trim($this->input->post('p_o_qty'))-trim($this->input->post('invoice_qty'));
                             }
                         }
+
                         
                         $data = array(
                             'part_number'   => trim($this->input->post('part_number')),

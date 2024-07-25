@@ -117,6 +117,11 @@
                                     </div>
                                 </div>
 
+                                <div>
+                                    <p><b>Note:</b> If you edit or delete any item entry you need to update the enteries
+                                        made after the edit/deleted entries for incoming balance qty in pcs </p>
+                                </div>
+
                                 <div class="col-md-6">
                                     <div class="container">
 

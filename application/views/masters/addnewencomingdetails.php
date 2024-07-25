@@ -20,9 +20,10 @@
                             <h3 class="box-title">Add Incoming Details</h3>
                         </div>
                         <?php $this->load->helper("form"); ?>
-                        <form role="form" id="addnewincomingdetailsform" action="<?php echo base_url() ?>addnewincomingdetailsform" method="post" role="form">
+                        <form role="form" id="addnewincomingdetailsform"
+                            action="<?php echo base_url() ?>addnewincomingdetailsform" method="post" role="form">
                             <div class="box-body">
-                                    <?php                                        
+                                <?php                                        
                                         $current_month = date("n"); // Get the current month without leading zeros
 
                                         if ($current_month >= 4) {
@@ -90,21 +91,25 @@
                                 <div class="col-md-4">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="incoming_no">Incoming ID No <span class="required">*</span></label>
-                                            <input type="text" class="form-control" id="incoming_no" name="incoming_no" value="<?php echo $incoming_details_id;?>" required readonly>
+                                            <label for="incoming_no">Incoming ID No <span
+                                                    class="required">*</span></label>
+                                            <input type="text" class="form-control" id="incoming_no" name="incoming_no"
+                                                value="<?php echo $incoming_details_id;?>" required readonly>
                                             <p class="error incoming_no_error"></p>
                                         </div>
                                     </div>
 
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                                <label for="vendor_name">Vendor Name <span class="required">*</span></label>
-                                                <select class="form-control " name="vendor_name" id="vendor_name">
-                                                    <option st-id="" value="">Select Vendor Name</option>
-                                                    <?php foreach ($vendorList as $key => $value) {?>
-                                                    <option value="<?php echo $value['ven_id']; ?>" <?php if($value['ven_id']==$getAllitemdetails[0]['pre_vendor_name']){ echo 'selected';} ?>><?php echo $value['vendor_name']; ?></option>
-                                                    <?php } ?>
-                                                </select>
+                                            <label for="vendor_name">Vendor Name <span class="required">*</span></label>
+                                            <select class="form-control " name="vendor_name" id="vendor_name">
+                                                <option st-id="" value="">Select Vendor Name</option>
+                                                <?php foreach ($vendorList as $key => $value) {?>
+                                                <option value="<?php echo $value['ven_id']; ?>"
+                                                    <?php if($value['ven_id']==$getAllitemdetails[0]['pre_vendor_name']){ echo 'selected';} ?>>
+                                                    <?php echo $value['vendor_name']; ?></option>
+                                                <?php } ?>
+                                            </select>
                                             <p class="error vendor_name_error"></p>
                                         </div>
                                     </div>
@@ -118,26 +123,32 @@
 
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                                <label for="vendor_po_number">Select Vendor PO Number <span class="required">*</span></label>
-                                                    <select class="form-control vendor_po_number_itam_mapping" name="vendor_po_number" id="vendor_po_number">
-                                                        <option st-id="" value="">Select Vendor Name</option>
-                                                        <option st-id="" value="<?=$getAllitemdetails[0]['pre_vendor_po_number']?>" selected ><?=$selected_value;?></option>
+                                            <label for="vendor_po_number">Select Vendor PO Number <span
+                                                    class="required">*</span></label>
+                                            <select class="form-control vendor_po_number_itam_mapping"
+                                                name="vendor_po_number" id="vendor_po_number">
+                                                <option st-id="" value="">Select Vendor Name</option>
+                                                <option st-id=""
+                                                    value="<?=$getAllitemdetails[0]['pre_vendor_po_number']?>" selected>
+                                                    <?=$selected_value;?></option>
 
-                                                    </select>
+                                            </select>
                                             <p class="error vendor_po_number_error"></p>
                                         </div>
                                     </div>
 
 
                                     <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="reported_by">Report By</label>
-                                                   <input type="text" class="form-control" id="reported_by" value="<?=$getAllitemdetails[0]['pre_reported_by'] ?>" name="reported_by">
-                                                <p class="error reported_by_error"></p>
-                                            </div>
+                                        <div class="form-group">
+                                            <label for="reported_by">Report By</label>
+                                            <input type="text" class="form-control" id="reported_by"
+                                                value="<?=$getAllitemdetails[0]['pre_reported_by'] ?>"
+                                                name="reported_by">
+                                            <p class="error reported_by_error"></p>
+                                        </div>
                                     </div>
 
-                                        <?php if($getAllitemdetails[0]['pre_report_date']=='0000-00-00'){
+                                    <?php if($getAllitemdetails[0]['pre_report_date']=='0000-00-00'){
                                                     $report_date =  date('Y-m-d');
                                         }else{
                                                    
@@ -152,38 +163,47 @@
                                         ?>
 
                                     <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="remark">Report Date</label>
-                                                  <input type="text" class="form-control datepicker"  value="<?=$report_date;?>" id="reported_date" name="reported_date">
-                                                <p class="error reported_date_error"></p>
-                                            </div>
+                                        <div class="form-group">
+                                            <label for="remark">Report Date</label>
+                                            <input type="text" class="form-control datepicker"
+                                                value="<?=$report_date;?>" id="reported_date" name="reported_date">
+                                            <p class="error reported_date_error"></p>
+                                        </div>
                                     </div>
 
                                     <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="remark">Remark</label>
-                                                  <textarea type="text" class="form-control"  id="remark"  name="remark"><?=$getAllitemdetails[0]['pre_remark'] ?></textarea>
-                                                <p class="error remark_error"></p>
-                                            </div>
+                                        <div class="form-group">
+                                            <label for="remark">Remark</label>
+                                            <textarea type="text" class="form-control" id="remark"
+                                                name="remark"><?=$getAllitemdetails[0]['pre_remark'] ?></textarea>
+                                            <p class="error remark_error"></p>
+                                        </div>
                                     </div>
                                 </div>
 
+                                <div>
+                                    <p><b>Note:</b> If you edit or delete any item entry you need to update the enteries
+                                        made after the edit/deleted entries for incoming balance qty in pcs </p>
+                                </div>
                                 <div class="col-md-6">
                                     <div class="container">
                                         <div style="display:flex">
-                                            <button type="button" class="btn btn-success btn-xl" data-toggle="modal" data-target="#addNewModal">Add New Items</button>
+                                            <button type="button" class="btn btn-success btn-xl" data-toggle="modal"
+                                                data-target="#addNewModal">Add New Items</button>
 
-                                            
-                                            <select class="form-control" name="part_number_serach" id="part_number_serach" style="width: 300px;margin-left: 30px;">
+
+                                            <select class="form-control" name="part_number_serach"
+                                                id="part_number_serach" style="width: 300px;margin-left: 30px;">
                                                 <option value="NA">Filer Item List By Part Name</option>
-                                                <?php foreach ($getAllitemdetailsforfilter as $key => $getAllitemdetails_val) {?>        
-                                                    <option value="<?php echo $getAllitemdetails_val['fin_id']; ?>"><?php echo $getAllitemdetails_val['part_number']; ?></option>
+                                                <?php foreach ($getAllitemdetailsforfilter as $key => $getAllitemdetails_val) {?>
+                                                <option value="<?php echo $getAllitemdetails_val['fin_id']; ?>">
+                                                    <?php echo $getAllitemdetails_val['part_number']; ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
-                                                                        
-                                        <br/><br/>
-                                            <!-- <table class="table table-bordered original_table" style="max-width: 68%;display: block;overflow-x: auto; white-space: nowrap;" id="view_incomingdetailss_item_on_add">
+
+                                        <br /><br />
+                                        <!-- <table class="table table-bordered original_table" style="max-width: 68%;display: block;overflow-x: auto; white-space: nowrap;" id="view_incomingdetailss_item_on_add">
                                                 <thead style="background-color:#3c8dbc;color:#fff">
                                                     <tr>
                                                         <th>Sr No.</th>
@@ -258,272 +278,323 @@
                                                 </tbody>
                                             </table> -->
 
-                                            <table class="table table-bordered original_table" style="max-width: 100%;display: block;overflow-x: auto; white-space: nowrap;width: 70%; !important" id="view_incomingdetailss_item_on_add">
-                                                <thead style="background-color:#3c8dbc;color:#fff">
-                                                    <tr>
-                                                        <th>Sr No.</th>
-                                                        <th>FG Part No</th>
-                                                        <th>Description</th>
-                                                        <th>Lot Number</th>
-                                                        <th>P.O.Qty (in Pcs)</th>
-                                                        <th>Invoice Qty (in Pcs)</th>
-                                                        <th>Balance Qty in Pcs</th>
-                                                        <th>Invoice Qty (in Kgs)</th>
-                                                        <th>Invoice No.</th>
-                                                        <th>Invoice Date.</th>
-                                                        <th>Net weight (in Kgs)</th>
-                                                        <th>Challan No.</th>
-                                                        <th>Challan Date.</th>
-                                                        <th>Received Date</th>
-                                                        <th>FG Material Gross Weight</th>
-                                                        <th>Units</th>
-                                                        <th>No. of Boxes / Goni / Bundle</th>
-                                                        <th>Remarks</th>
-                                                        <th>Action</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                </tbody>
-                                                <tfoot>
-                                                    <tr>
-                                                        <td><b>Total</b></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                    </tr>
-                                                </tfoot>
-                                            </table>
 
-                                            
+                                        <table class="table table-bordered original_table"
+                                            style="max-width: 100%;display: block;overflow-x: auto; white-space: nowrap;width: 70%; !important"
+                                            id="view_incomingdetailss_item_on_add">
+                                            <thead style="background-color:#3c8dbc;color:#fff">
+                                                <tr>
+                                                    <th>Sr No.</th>
+                                                    <th>FG Part No</th>
+                                                    <th>Description</th>
+                                                    <th>Lot Number</th>
+                                                    <th>P.O.Qty (in Pcs)</th>
+                                                    <th>Invoice Qty (in Pcs)</th>
+                                                    <th>Balance Qty in Pcs</th>
+                                                    <th>Invoice Qty (in Kgs)</th>
+                                                    <th>Invoice No.</th>
+                                                    <th>Invoice Date.</th>
+                                                    <th>Net weight (in Kgs)</th>
+                                                    <th>Challan No.</th>
+                                                    <th>Challan Date.</th>
+                                                    <th>Received Date</th>
+                                                    <th>FG Material Gross Weight</th>
+                                                    <th>Units</th>
+                                                    <th>No. of Boxes / Goni / Bundle</th>
+                                                    <th>Remarks</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <td><b>Total</b></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
                                     </div>
 
-                                      <!-- Add New Package Modal -->
-                                      <?php $this->load->helper("form"); ?>
 
-                                    <div class="modal fade" id="addNewModal" role="dialog" aria-labelledby="additem" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-                                      
+                                    <!-- Add New Package Modal -->
+                                    <?php $this->load->helper("form"); ?>
+
+                                    <div class="modal fade" id="addNewModal" role="dialog" aria-labelledby="additem"
+                                        aria-hidden="true" data-backdrop="static" data-keyboard="false">
+
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h3 class="modal-title" id="additem">Add New Item</h3>
-                                                </button>
-                                            </div>
-                                            <form role="form" id="saveincomingitemform" action="<?php echo base_url() ?>saveincomingitemform" method="post" role="form">
-                                            <input type="hidden" class="form-control"  id="incoiming_details_item_id" name="incoiming_details_item_id" required readonly>
-                                                <div class="modal-body">
+                                                <div class="modal-header">
+                                                    <h3 class="modal-title" id="additem">Add New Item</h3>
+                                                    </button>
+                                                </div>
+                                                <form role="form" id="saveincomingitemform"
+                                                    action="<?php echo base_url() ?>saveincomingitemform" method="post"
+                                                    role="form">
+                                                    <input type="hidden" class="form-control"
+                                                        id="incoiming_details_item_id" name="incoiming_details_item_id"
+                                                        required readonly>
+                                                    <div class="modal-body">
                                                         <div class="loader_ajax" style="display:none;">
-                                                            <div class="loader_ajax_inner"><img src="<?php echo ICONPATH;?>/preloader_ajax.gif"></div>
+                                                            <div class="loader_ajax_inner"><img
+                                                                    src="<?php echo ICONPATH;?>/preloader_ajax.gif">
+                                                            </div>
                                                         </div>
 
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">FG Part No <span class="required">*</span> (<small>Finished Goods Master</small>)</label>
-                                                        <div class="col-sm-9">
-                                                            <select class="form-control" name="part_number" id="part_number">
-                                                                <option st-id="" value="">Select Part Name</option>
-                                                                <?php foreach ($finishgoodList as $key => $value) {?>        
-                                                                    <option value="<?php echo $value['fin_id']; ?>"><?php echo $value['part_number']; ?></option>
-                                                                <?php } ?>
-                                                            </select>
-                                                            <p class="error part_number_error"></p>
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">FG Part No <span
+                                                                    class="required">*</span> (<small>Finished Goods
+                                                                    Master</small>)</label>
+                                                            <div class="col-sm-9">
+                                                                <select class="form-control" name="part_number"
+                                                                    id="part_number">
+                                                                    <option st-id="" value="">Select Part Name</option>
+                                                                    <?php foreach ($finishgoodList as $key => $value) {?>
+                                                                    <option value="<?php echo $value['fin_id']; ?>">
+                                                                        <?php echo $value['part_number']; ?></option>
+                                                                    <?php } ?>
+                                                                </select>
+                                                                <p class="error part_number_error"></p>
 
+                                                            </div>
                                                         </div>
-                                                    </div>
 
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">FG Part Description<span class="required">*</span></label>
-                                                        <div class="col-sm-9">
-                                                            <!-- <textarea type="text" class="form-control"  id="description"  name="description" required></textarea> -->
-                                                            <input type="text" class="form-control"  id="description" name="description" required readonly>
-                                                            <p class="error description_error"></p>
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">FG Part
+                                                                Description<span class="required">*</span></label>
+                                                            <div class="col-sm-9">
+                                                                <!-- <textarea type="text" class="form-control"  id="description"  name="description" required></textarea> -->
+                                                                <input type="text" class="form-control" id="description"
+                                                                    name="description" required readonly>
+                                                                <p class="error description_error"></p>
+                                                            </div>
                                                         </div>
-                                                    </div>
 
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">P.O.Qty (In Pcs)<span class="required">*</span></label>
-                                                        <div class="col-sm-9">
-                                                            <input type="number" class="form-control"  id="p_o_qty" name="p_o_qty" readonly>
-                                                            <p class="error p_o_qty_error"></p>
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">P.O.Qty (In Pcs)<span
+                                                                    class="required">*</span></label>
+                                                            <div class="col-sm-9">
+                                                                <input type="number" class="form-control" id="p_o_qty"
+                                                                    name="p_o_qty" readonly>
+                                                                <p class="error p_o_qty_error"></p>
+                                                            </div>
                                                         </div>
-                                                    </div>
 
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Net weight (In Kgs) <span class="required">*</span></label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" class="form-control"  id="net_weight" name="net_weight" readonly>
-                                                            <p class="error net_weight_error"></p>
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">Net weight (In Kgs)
+                                                                <span class="required">*</span></label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" class="form-control" id="net_weight"
+                                                                    name="net_weight" readonly>
+                                                                <p class="error net_weight_error"></p>
+                                                            </div>
                                                         </div>
-                                                    </div>
 
 
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Invoice No <span class="required">*</span></label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" class="form-control"  id="invoice_no" name="invoice_no">
-                                                            <p class="error invoice_no_error"></p>
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">Invoice No <span
+                                                                    class="required">*</span></label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" class="form-control" id="invoice_no"
+                                                                    name="invoice_no">
+                                                                <p class="error invoice_no_error"></p>
+                                                            </div>
                                                         </div>
-                                                    </div>
 
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Invoice Date <span class="required">*</span></label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" class="form-control datepicker"  id="invoice_date" name="invoice_date">
-                                                            <p class="error invoice_date_error"></p>
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">Invoice Date <span
+                                                                    class="required">*</span></label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" class="form-control datepicker"
+                                                                    id="invoice_date" name="invoice_date">
+                                                                <p class="error invoice_date_error"></p>
+                                                            </div>
                                                         </div>
-                                                    </div>
 
 
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Challan No <span class="required">*</span></label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" class="form-control"  id="challan_no" name="challan_no">
-                                                            <p class="error challan_no_error"></p>
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">Challan No <span
+                                                                    class="required">*</span></label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" class="form-control" id="challan_no"
+                                                                    name="challan_no">
+                                                                <p class="error challan_no_error"></p>
+                                                            </div>
                                                         </div>
-                                                    </div>
 
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Challan Date <span class="required">*</span></label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" class="form-control datepicker"  id="challan_date" name="challan_date">
-                                                            <p class="error challan_date_error"></p>
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">Challan Date <span
+                                                                    class="required">*</span></label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" class="form-control datepicker"
+                                                                    id="challan_date" name="challan_date">
+                                                                <p class="error challan_date_error"></p>
+                                                            </div>
                                                         </div>
-                                                    </div>
 
 
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Received Date <span class="required">*</span></label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" class="form-control datepicker"  id="received_date" name="received_date">
-                                                            <p class="error received_date_error"></p>
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">Received Date <span
+                                                                    class="required">*</span></label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" class="form-control datepicker"
+                                                                    id="received_date" name="received_date">
+                                                                <p class="error received_date_error"></p>
+                                                            </div>
                                                         </div>
-                                                    </div>
 
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Invoice Qty (in Pcs) <span class="required">*</span></label>
-                                                        <div class="col-sm-9">
-                                                            <input type="number" class="form-control"  id="invoice_qty" name="invoice_qty">
-                                                            <p class="error invoice_qty_error"></p>
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">Invoice Qty (in Pcs)
+                                                                <span class="required">*</span></label>
+                                                            <div class="col-sm-9">
+                                                                <input type="number" class="form-control"
+                                                                    id="invoice_qty" name="invoice_qty">
+                                                                <p class="error invoice_qty_error"></p>
+                                                            </div>
                                                         </div>
-                                                    </div>
 
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Invoice Qty (in Kgs) <span class="required">*</span></label>
-                                                        <div class="col-sm-9">
-                                                            <input type="number" class="form-control"  id="invoice_qty_in_kgs" name="invoice_qty_in_kgs" readonly>
-                                                            <p class="error invoice_qty_in_kgs_error"></p>
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">Invoice Qty (in Kgs)
+                                                                <span class="required">*</span></label>
+                                                            <div class="col-sm-9">
+                                                                <input type="number" class="form-control"
+                                                                    id="invoice_qty_in_kgs" name="invoice_qty_in_kgs"
+                                                                    readonly>
+                                                                <p class="error invoice_qty_in_kgs_error"></p>
+                                                            </div>
                                                         </div>
-                                                    </div>
 
-                                                    <!-- <div class="form-group row"> -->
+                                                        <!-- <div class="form-group row"> -->
                                                         <!-- <label class="col-sm-3 col-form-label">Balance Qty (in Pcs) <span class="required">*</span></label> -->
                                                         <!-- <div class="col-sm-9">
                                                             <input type="hidden" class="form-control"  id="balance_qty" name="balance_qty" readonly>
                                                             <p class="error balance_qty_error"></p>
                                                         </div> -->
-                                                    <!-- </div> -->
+                                                        <!-- </div> -->
 
-                                                    
-                                                    <div class="form-group row">
-                                                    <input type="text" class="form-control"  id="balance_qty" name="balance_qty" readonly>
 
-                                                        <label class="col-sm-3 col-form-label">FG Material Gross Weight <span class="required">*</span></label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" class="form-control"  id="fg_material_gross_weight" name="fg_material_gross_weight">
-                                                            <p class="error fg_material_gross_weight_error"></p>
+                                                        <div class="form-group row">
+                                                            <input type="text" class="form-control" id="balance_qty"
+                                                                name="balance_qty" readonly>
+
+                                                            <label class="col-sm-3 col-form-label">FG Material Gross
+                                                                Weight <span class="required">*</span></label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" class="form-control"
+                                                                    id="fg_material_gross_weight"
+                                                                    name="fg_material_gross_weight">
+                                                                <p class="error fg_material_gross_weight_error"></p>
+                                                            </div>
                                                         </div>
+
+
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">Units <span
+                                                                    class="required">*</span></label>
+                                                            <div class="col-sm-9">
+                                                                <select class="form-control" name="units" id="units">
+                                                                    <option value="">Select Part Name</option>
+                                                                    <option value="kgs">Kgs</option>
+                                                                    <option value="Pcs">Pcs</option>
+                                                                    <option value="Nos">Nos</option>
+                                                                    <option value="Sheet">Sheet</option>
+                                                                    <option value="Set">Set</option>
+                                                                </select>
+                                                                <p class="error units_error"></p>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">No. of Boxes / Goni /
+                                                                Bundle <span class="required">*</span></label>
+                                                            <div class="col-sm-9">
+                                                                <input type="number" class="form-control"
+                                                                    id="boxex_goni_bundle" name="boxex_goni_bundle">
+                                                                <p class="error boxex_goni_bundle_error"></p>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">Lot No. <span
+                                                                    class="required">*</span></label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" class="form-control" id="lot_no"
+                                                                    name="lot_no">
+                                                                <p class="error lot_no_error"></p>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">Remarks</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" class="form-control" id="remarks"
+                                                                    name="remarks">
+                                                                <p class="error remarks_error"></p>
+                                                            </div>
+                                                        </div>
+
                                                     </div>
 
-
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Units <span class="required">*</span></label>
-                                                        <div class="col-sm-9">
-                                                             <select class="form-control" name="units" id="units">
-                                                                <option value="">Select Part Name</option>
-                                                                <option value="kgs">Kgs</option>
-                                                                <option value="Pcs">Pcs</option>
-                                                                <option value="Nos">Nos</option>
-                                                                <option value="Sheet">Sheet</option>
-                                                                <option value="Set">Set</option>
-                                                             </select>
-                                                            <p class="error units_error"></p>
-                                                        </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button"
+                                                            class="btn btn-secondary btn-xl closeIncomingDetailsmodal"
+                                                            data-dismiss="modal">Close</button>
+                                                        <button type="submit" id="saveincomingitem"
+                                                            name="saveincomingitem" class="btn btn-primary"
+                                                            class="btn btn-success btn-xl">Save</button>
                                                     </div>
 
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">No. of Boxes / Goni / Bundle <span class="required">*</span></label>
-                                                        <div class="col-sm-9">
-                                                            <input type="number" class="form-control"  id="boxex_goni_bundle" name="boxex_goni_bundle">
-                                                            <p class="error boxex_goni_bundle_error"></p>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Lot No. <span class="required">*</span></label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" class="form-control"  id="lot_no" name="lot_no">
-                                                            <p class="error lot_no_error"></p>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Remarks</label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" class="form-control"  id="remarks" name="remarks">
-                                                            <p class="error remarks_error"></p>
-                                                        </div>
-                                                    </div>
-                                                
-                                                </div>
-
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary btn-xl closeIncomingDetailsmodal" data-dismiss="modal">Close</button>
-                                                    <button type="submit" id="saveincomingitem" name="saveincomingitem" class="btn btn-primary" class="btn btn-success btn-xl">Save</button>
-                                                </div>
-
-                                            </form>    
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                </div>
 
-                               
+                            </div>
 
-                            </div>    
-                            <!-- /.box-body -->
-                            <div class="box-footer">
-                                <div class="col-xs-8">
-                                    <?php if($getAllitemdetails){
+
+
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+                        <div class="col-xs-8">
+                            <?php if($getAllitemdetails){
                                         $disabled= '';
                                     }else{ 
                                         $disabled= 'disabled';
                                      } ?>
 
-                                    <input type="submit" id="saveincomingdetails" class="btn btn-primary" value="Submit" <?=$disabled ?> />
-                                    <input type="button" onclick="location.href = '<?php echo base_url() ?>incomingdetails'" class="btn btn-default" value="Back" />
-                                </div>
-                            </div>
-                        </form>
+                            <input type="submit" id="saveincomingdetails" class="btn btn-primary" value="Submit"
+                                <?=$disabled ?> />
+                            <input type="button" onclick="location.href = '<?php echo base_url() ?>incomingdetails'"
+                                class="btn btn-default" value="Back" />
+                        </div>
                     </div>
+                    </form>
                 </div>
-                <!-- /.box -->
             </div>
+            <!-- /.box -->
         </div>
-    </section>
+</div>
+</section>
 </div>
 
 
@@ -533,12 +604,12 @@
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
 <script>
-   $(function() {
-			$(".datepicker").datepicker({ 
-				// minDate: 0,
-				todayHighlight: true,
-                dateFormat: 'yy-mm-dd',
-				startDate: new Date()
-			});
-		});
+$(function() {
+    $(".datepicker").datepicker({
+        // minDate: 0,
+        todayHighlight: true,
+        dateFormat: 'yy-mm-dd',
+        startDate: new Date()
+    });
+});
 </script>
