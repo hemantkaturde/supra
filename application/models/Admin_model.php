@@ -3749,6 +3749,11 @@ class Admin_model extends CI_Model
         $this->db->limit(2,1);
         $query = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
         $data = $query->result_array();
+        $str = $this->db->last_query();
+        print_r($str);
+        exit;
+
+
         return $data;
 
     }
