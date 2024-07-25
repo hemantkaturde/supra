@@ -3745,15 +3745,10 @@ class Admin_model extends CI_Model
         $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id',$incomingdetail_editid);
         $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.part_number',$part_number);
         // $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.id < ',$incoming_details_item_id);
-        $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.id','DESC');
-        $this->db->limit(2,1);
+        $this->db->order_by(TBL_INCOMING_DETAILS_ITEM.'.id','DESC');
+        $this->db->limit(1);
         $query = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
         $data = $query->result_array();
-        $str = $this->db->last_query();
-        print_r($str);
-        exit;
-
-
         return $data;
 
     }
