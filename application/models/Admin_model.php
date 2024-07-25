@@ -5180,6 +5180,8 @@ class Admin_model extends CI_Model
         $this->db->select('*');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_REWORK_REJECTION.'.vendor_name','left');
         $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_REWORK_REJECTION.'.supplier_name','left');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_REWORK_REJECTION.'.vendor_po_number','left');
+        $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_REWORK_REJECTION.'.supplier_po_number','left');
 
         if($params['search']['value'] != "") 
         {
@@ -5244,7 +5246,7 @@ class Admin_model extends CI_Model
                     $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downloadreworkrejectionvendor/".$value['reworkrejectionid']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
                 }
                 
-                
+
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['reworkrejectionid']."' class='fa fa-trash-o deletereworkrejection' aria-hidden='true'></i>"; 
 
                 $counter++; 
