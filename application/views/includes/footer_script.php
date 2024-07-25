@@ -15393,7 +15393,12 @@
 										$('#buyre_order_qty').val(data_finish_good.buyer_order_qty);
 										//$('#invoice_qty_in_pcs').val(data_finish_good.vendor_qtyvendor_qty);
 										$('#net_weight').val(data_finish_good.net_weight);
-										$('#privious_balenace').val(data_finish_good.current_stock);
+										if(data_finish_good.current_stock){
+                                           var previous_bal =data_finish_good.current_stock;
+										}else{
+											var previous_bal =0;
+										}
+										$('#privious_balenace').val(previous_bal);
 										
 									}
 								},
