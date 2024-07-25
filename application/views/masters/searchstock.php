@@ -12,9 +12,10 @@
             <div class="col-xs-6 text-left">
                 <ul class="breadcrumb" style="background-color:#ecf0f5 !important">
                     <li class="completed"><a href="javascript:void(0);">Masters</a></li>
-                    <li class="active"><a href="javascript:void(0);"> Search Stock</a> <h2> <b>Previous Balance :</b> <?=$getsearchstockvendordeatils[0]['current_stock'];?> <h2></li>
+                    <li class="active"><a href="javascript:void(0);"> Search Stock</a></li>
                 </ul>
             </div>
+            <h2> <b>Previous Balance :</b> <?=$getsearchstockvendordeatils[0]['current_stock'];?> <h2>
         </div>
         <input type="hidden" class="form-control" id="vendor_po_id" name="vendor_po_id"  value="<?=$getsearchstockvendordeatils[0]['vendor_po_id'];?>" readonly>
         <input type="hidden" class="form-control" id="vendor_po_item_id" name="vendor_po_item_id"  value="<?=$getsearchstockvendordeatils[0]['vendor_po_item_id'];?>" readonly>
