@@ -5459,7 +5459,7 @@ class Admin extends BaseController
                                 if($get_previous_balenace_qty){
                                     $balence_qty = $get_previous_balenace_qty[0]['balance_qty']-trim($this->input->post('invoice_qty'));
                                 }else{
-                                    $balence_qty = 500-trim($this->input->post('invoice_qty'));
+                                    $balence_qty = trim($this->input->post('p_o_qty'))-trim($this->input->post('invoice_qty'));
                                 }
 
                             // }
@@ -5516,7 +5516,7 @@ class Admin extends BaseController
                                 if($get_previous_balenace_qty){
                                     $balence_qty = $get_previous_balenace_qty[0]['balance_qty']-trim($this->input->post('invoice_qty'));
                                 }else{
-                                    $balence_qty = 1200-trim($this->input->post('invoice_qty'));
+                                    $balence_qty = trim($this->input->post('p_o_qty'))-trim($this->input->post('invoice_qty'));
                                 }
                             // }
 
