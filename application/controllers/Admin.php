@@ -5451,18 +5451,18 @@ class Admin extends BaseController
                         if($checkLotnumberisexitsaddedititem){
 
 
-                            if($incoiming_details_item_id){
-                                $balence_qty = trim($this->input->post('p_o_qty'))-trim($this->input->post('invoice_qty'));
-                            }else{
+                            // if($incoiming_details_item_id){
+                            //     $balence_qty = trim($this->input->post('p_o_qty'))-trim($this->input->post('invoice_qty'));
+                            // }else{
 
                                 $get_previous_balenace_qty = $this->admin_model->get_previous_item_balenace_qty_edit(trim($this->input->post('part_number')),trim($this->input->post('incomingdetail_editid')));
                                 if($get_previous_balenace_qty){
                                     $balence_qty = $get_previous_balenace_qty[0]['balance_qty']-trim($this->input->post('invoice_qty'));
                                 }else{
-                                    $balence_qty = trim($this->input->post('p_o_qty'))-trim($this->input->post('invoice_qty'));
+                                    $balence_qty = 500-trim($this->input->post('invoice_qty'));
                                 }
 
-                            }
+                            // }
 
                             $data = array(
                                 'incoming_details_id' =>  $this->input->post('incomingdetail_editid'),
@@ -5516,7 +5516,7 @@ class Admin extends BaseController
                                 if($get_previous_balenace_qty){
                                     $balence_qty = $get_previous_balenace_qty[0]['balance_qty']-trim($this->input->post('invoice_qty'));
                                 }else{
-                                    $balence_qty = trim($this->input->post('p_o_qty'))-trim($this->input->post('invoice_qty'));
+                                    $balence_qty = 1200-trim($this->input->post('invoice_qty'));
                                 }
                             // }
 
