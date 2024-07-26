@@ -18876,7 +18876,7 @@ public function printstock($stock_id){
     foreach ($getexportrejecteditemdataforprint as $key => $value) {
         $CartItemRejection .= '
                 <tr style="style=border-left: 1px solid black;border-right: 1px solid black;">
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$i.'</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$j.'</td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rejected_reason'].'</td> 
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['qty_In_pcs'].'</td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.round($value['qty_In_kgs'],3).'</td>
@@ -18946,10 +18946,10 @@ public function printstock($stock_id){
              <table style=" width: 100%;border-collapse: collapse;border: #ccc 1px solid;font-family:cambria;font-size:12px">
                 <tr style="border: 1px solid black;">
                         <td style="border: 1px solid black;padding-left: 10px;">
-                            <p><b>Invoice Qty In Pcs :</b>'.round($rejected_qty_in_pcs,3).'</p>    
+                            <p><b>Total Rejected Qty Pcs :</b>'.round($rejected_qty_in_pcs,3).'</p>    
                         </td>  
                         <td style="border: 1px solid black;padding-left: 10px;">
-                            <p><b>Actual Recived Qty In Pcs :</b>'.round($rejected_qty_in_kgs,3).'</p>    
+                            <p><b>Total Rejected Qty Kgs :</b>'.round($rejected_qty_in_kgs,3).'</p>    
                         </td> 
                 </tr>
             </table>
