@@ -15,7 +15,10 @@
                     <li class="active"><a href="javascript:void(0);"> Search Stock</a></li>
                 </ul>
             </div>
-            <h2> <b>Previous Balance :</b> <?=$getsearchstockvendordeatils[0]['current_stock'];?> <h2>
+            <div class="col-xs-6" style="display:flex">
+                <div><h2> <b>Previous Balance :</b> <?=$getsearchstockvendordeatils[0]['current_stock'];?> </h2></div>
+                <div style="margin-top: 20px;margin-left: 207px;"><a href=<?=ADMIN_PATH.'printstock/'.$getsearchstockvendordeatils[0]['stock_id_form']?> style='cursor: pointer;' target='_blank'><button type="button" id="print_stock" class="btn btn-primary print_stock">Print Stock</button></a></div>
+            </div>
         </div>
         <input type="hidden" class="form-control" id="vendor_po_id" name="vendor_po_id"  value="<?=$getsearchstockvendordeatils[0]['vendor_po_id'];?>" readonly>
         <input type="hidden" class="form-control" id="vendor_po_item_id" name="vendor_po_item_id"  value="<?=$getsearchstockvendordeatils[0]['vendor_po_item_id'];?>" readonly>
@@ -127,7 +130,6 @@
                                 <tbody>
                                 </tbody>
                             </table>
-
 
                             <div class ="total_values" style="border-top: 1px solid black">
                                 <div class="col-md-3" style="margin-top: 20px;">

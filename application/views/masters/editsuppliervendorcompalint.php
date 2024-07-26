@@ -4,6 +4,7 @@
        width: 287px !important;
 }
     </style>
+  <?php //print_r($getsuppliervendorcomplaintdata['supplier_part_number_id']);exit; ?>
 
 
 <div class="content-wrapper">
@@ -131,6 +132,7 @@
                                     </div>
                                 </div>
 
+                              
                                 <div class="row">
                                     <div class="col-md-3" id="supplier_po_number_div" style="display:none">
                                         <div class="form-group">

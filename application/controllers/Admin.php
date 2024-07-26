@@ -18842,6 +18842,127 @@ public function fetchseachbypartnumberreport($part_number){
 
 }
 
+public function printstock($stock_id){
+
+    $getsearchstockvendordeatils= $this->admin_model->getsearchstockvendordeatils($stock_id);
+    $getsearchstockformdataforprint = $this->admin_model->getsearchstockformdataforprint($stock_id,$getsearchstockvendordeatils[0]['part_number_id']);
+    $getexportrejecteditemdataforprint  = $this->admin_model->getexportrejecteditemdataforprint($getsearchstockvendordeatils[0]['vendor_po_item_id'],$getsearchstockvendordeatils[0]['vendor_po_id']);
+
+    $CartItem = "";
+    $i=1;
+    $invoice_qty_in_pcs=0;
+    $actual_received_qty_in_pcs =0;
+    foreach ($getsearchstockformdataforprint as $key => $value) {
+        $CartItem .= '
+                <tr style="style=border-left: 1px solid black;border-right: 1px solid black;">
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$i.'</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['lot_number'].'</td> 
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['invoice_qty_In_pcs'].'</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['actual_received_qty_in_pcs'].'</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['invoice_number'].'</td> 
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['invoice_date'].'</td>    
+                </tr>';
+                $invoice_qty_in_pcs+=$value['invoice_qty_In_pcs'];
+                $actual_received_qty_in_pcs+=$value['actual_received_qty_in_pcs'];;
+            $i++;       
+    }
+
+
+
+    $CartItemRejection = "";
+    $j=1;
+    $rejected_qty_in_pcs=0;
+    $rejected_qty_in_kgs =0;
+    foreach ($getexportrejecteditemdataforprint as $key => $value) {
+        $CartItemRejection .= '
+                <tr style="style=border-left: 1px solid black;border-right: 1px solid black;">
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$i.'</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rejected_reason'].'</td> 
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['qty_In_pcs'].'</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.round($value['qty_In_kgs'],3).'</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['remarksrej'].'</td> 
+                </tr>';
+
+                 $rejected_qty_in_pcs+=$value['qty_In_pcs'];
+                 $rejected_qty_in_kgs+=$value['qty_In_kgs'];;
+            $j++;       
+    }
+
+
+
+
+    $mpdf = new \Mpdf\Mpdf();
+    // $html = $this->load->view('html_to_pdf',[],true);
+    $html = '<table style=" width: 100%;text-align: left;border-collapse: collapse;border: #cccccc 0px solid;font-family:cambria;">
+                <tr>
+                   <td><b>Vendor Name : </b>'.$getsearchstockvendordeatils[0]['vendor_name'].' </td>
+                </tr>
+                <tr>
+                  <td><b>Part Number  : </b>'.$getsearchstockvendordeatils[0]['fg_part_number'].' </td>
+                </tr>
+                 <tr>
+                  <td><b>PO Number    : </b>'.$getsearchstockvendordeatils[0]['sales_order_number'].' </td>
+                </tr>
+            </table>
+  
+
+            <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:12px">
+                <tr style="border: 1px solid black;">
+                    <th align="left" style="border: 1px solid black;text-align:center;padding: 10px;" margin-bottom: 10%;>Sr No</th>
+                    <th align="left" style="border: 1px solid black;text-align:center;padding: 10px;" margin-bottom: 10%;>Lot Number</th>
+                    <th align="left" style="border: 1px solid black;text-align:center;padding: 10px;" margin-bottom: 10%;>Invoice Qty In PCS</th>
+                    <th align="left" style="border: 1px solid black;text-align:center;padding: 10px;" margin-bottom: 10%;>Actual Received Qty In PCS</th>
+                    <th align="left" style="border: 1px solid black;text-align:center;padding: 10px;" margin-bottom: 10%;>Invoice Number</th>  
+                    <th align="left" style="border: 1px solid black;text-align:center;padding: 10px;" margin-bottom: 10%;>Invoice Date</th> 
+                </tr>
+                '.$CartItem.' 
+            </table>
+
+            <table style=" width: 100%;border-collapse: collapse;border: #ccc 1px solid;font-family:cambria;font-size:12px">
+                <tr style="border: 1px solid black;">
+                        <td style="border: 1px solid black;padding-left: 10px;">
+                            <p><b>Invoice Qty In Pcs :</b>'.$invoice_qty_in_pcs.'</p>    
+                        </td>  
+                        <td style="border: 1px solid black;padding-left: 10px;">
+                            <p><b>Actual Recived Qty In Pcs :</b>'.$actual_received_qty_in_pcs.'</p>    
+                        </td> 
+                </tr>
+            </table>
+        
+            <h4>Rejection Item Details </h4>
+            
+            <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:12px">
+                <tr style="border: 1px solid black;">
+                    <th align="left" style="border: 1px solid black;text-align:center;padding: 10px;" margin-bottom: 10%;>Rejection Number</th>
+                    <th align="left" style="border: 1px solid black;text-align:center;padding: 10px;" margin-bottom: 10%;>Rejection Reason</th>
+                    <th align="left" style="border: 1px solid black;text-align:center;padding: 10px;" margin-bottom: 10%;>Rejection Qty in Pcs</th>
+                    <th align="left" style="border: 1px solid black;text-align:center;padding: 10px;" margin-bottom: 10%;>Rejection Qty in Kgs</th>
+                    <th align="left" style="border: 1px solid black;text-align:center;padding: 10px;" margin-bottom: 10%;>Remarks</th>  
+                </tr>
+                '.$CartItemRejection.' 
+            </table>
+
+
+             <table style=" width: 100%;border-collapse: collapse;border: #ccc 1px solid;font-family:cambria;font-size:12px">
+                <tr style="border: 1px solid black;">
+                        <td style="border: 1px solid black;padding-left: 10px;">
+                            <p><b>Invoice Qty In Pcs :</b>'.round($rejected_qty_in_pcs,3).'</p>    
+                        </td>  
+                        <td style="border: 1px solid black;padding-left: 10px;">
+                            <p><b>Actual Recived Qty In Pcs :</b>'.round($rejected_qty_in_kgs,3).'</p>    
+                        </td> 
+                </tr>
+            </table>
+            
+            ';
+
+            // <p>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</p>
+    $invoice_name =  'stock.pdf';
+    $mpdf->WriteHTML($html);
+    $mpdf->Output($invoice_name,'D'); // opens in browser
+
+
+}
 
 
 }

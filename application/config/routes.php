@@ -491,6 +491,9 @@ $route['fetchsuppliervendorrport'] = "admin/fetchsuppliervendorrport";
 $route['addnewsuppliervendorcomplaint'] = "admin/addnewsuppliervendorcomplaint";
 $route['deletesuppliervendorcompalintreport'] = "admin/deletesuppliervendorcompalintreport";
 $route['editsuppliervendorcompalint/(:any)'] = "admin/editsuppliervendorcompalint/$1";
+$route['printstock/(:any)'] = "admin/printstock/$1";
+
+
 
 
 

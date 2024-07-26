@@ -7423,6 +7423,85 @@ class Admin_model extends CI_Model
         return $data;
     }
 
+
+    public function getsearchstockformdataforprint($sock_id,$part_number_id){
+
+        $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name,'.TBL_STOCKS_ITEM.'.f_g_order_qty,'.TBL_STOCKS_ITEM.'.invoice_number,'.TBL_STOCKS_ITEM.'.invoice_date,'.TBL_STOCKS_ITEM.'.invoice_qty_In_pcs,'.TBL_STOCKS_ITEM.'.invoice_qty_In_kgs,'.TBL_STOCKS_ITEM.'.lot_number,'.TBL_STOCKS_ITEM.'.actual_received_qty_in_pcs,'.TBL_STOCKS_ITEM.'.actual_received_qty_in_kgs,'.TBL_INCOMING_DETAILS_ITEM.'.lot_no as lotnumber,'.TBL_STOCKS_ITEM.'.part_number as search_stock_item_id,'.TBL_STOCKS_ITEM.'.item_remark');
+        $this->db->join(TBL_STOCKS, TBL_STOCKS.'.stock_id  = '.TBL_STOCKS_ITEM.'.stock_form_id');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_STOCKS_ITEM.'.pre_vendor_name');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_STOCKS_ITEM.'.part_number');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id  = '.TBL_STOCKS_ITEM.'.pre_vendor_po_number');
+        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_STOCKS_ITEM.'.pre_buyer_name');
+        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_STOCKS_ITEM.'.pre_buyer_po_id');
+        $this->db->join(TBL_INCOMING_DETAILS_ITEM, TBL_INCOMING_DETAILS_ITEM.'.id = '.TBL_STOCKS_ITEM.'.lot_number');
+        $this->db->where(TBL_STOCKS_ITEM.'.stock_form_id IS NOT NULL');
+        $this->db->where(TBL_STOCKS_ITEM.'.stock_form_id',$sock_id);
+        $this->db->where(TBL_STOCKS_ITEM.'.part_number',$part_number_id);
+        $this->db->where(TBL_STOCKS_ITEM.'.status', 1);
+       // $this->db->group_by(TBL_STOCKS_ITEM.'.id');
+       $this->db->order_by(TBL_STOCKS_ITEM.'.id ','ASC');
+       $query = $this->db->get(TBL_STOCKS_ITEM);
+       $fetch_result = $query->result_array();
+
+       $data = array();
+       $counter = 0;
+       if(count($fetch_result) > 0)
+       {
+           foreach ($fetch_result as $key => $value)
+           {
+               $data[$counter]['part_number'] =$value['part_number'];
+               $data[$counter]['part_description'] =$value['name'];
+               $data[$counter]['f_g_order_qty'] =$value['f_g_order_qty'];
+               $data[$counter]['invoice_number'] =$value['invoice_number'];
+               $data[$counter]['invoice_date'] =$value['invoice_date'];
+
+               if($value['invoice_qty_In_pcs']){
+                   $invoice_qty_In_pcs =round($value['invoice_qty_In_pcs'], 2);
+               }else{
+                   $invoice_qty_In_pcs =0;
+               }
+
+               if($value['invoice_qty_In_kgs']){
+                   $invoice_qty_In_kgs =round($value['invoice_qty_In_kgs'], 2);
+               }else{
+                   $invoice_qty_In_kgs =0;
+               }
+
+               $data[$counter]['invoice_qty_In_pcs'] =$invoice_qty_In_pcs;
+               $data[$counter]['invoice_qty_In_kgs'] =$invoice_qty_In_kgs;
+               $data[$counter]['lot_number'] =$value['lotnumber'];
+
+               if($value['actual_received_qty_in_pcs']){
+                   $actual_received_qty_in_pcs =round($value['actual_received_qty_in_pcs'], 2);
+               }else{
+                   $actual_received_qty_in_pcs =0;
+               }
+
+               // if($value['actual_received_qty_in_pcs']){
+               //     $actual_received_qty_in_pcs =0;
+               // }else{
+               //     $actual_received_qty_in_pcs =0;
+               // }
+               
+
+
+               if($value['actual_received_qty_in_kgs']){
+                   $actual_received_qty_in_kgs =round($value['actual_received_qty_in_kgs'], 2);
+               }else{
+                   $actual_received_qty_in_kgs =0;
+               }
+
+               $data[$counter]['actual_received_qty_in_pcs'] = $actual_received_qty_in_pcs;
+               $data[$counter]['actual_received_qty_in_kgs'] = $actual_received_qty_in_kgs;
+               $data[$counter]['item_remark'] = $value['item_remark'];
+               $counter++; 
+           }
+       }
+       return $data;
+   }
+
+
+
     public function checkLotnumberisexitsadd($lot_no,$part_number,$po_number){
 
         $this->db->select(TBL_INCOMING_DETAILS_ITEM.'.id ');
@@ -7579,6 +7658,37 @@ class Admin_model extends CI_Model
     }
 
     public function getexportrejecteditemdata($params,$part_number,$vendor_po_id){
+        $this->db->select('*,'.TBL_FINISHED_GOODS.'.net_weight as fg_net_weight,'.TBL_REJECTION_FORM_REJECTED_ITEM.'.remark as remarksrej');
+        $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
+        $this->db->join(TBL_REJECTION_FORM, TBL_REJECTION_FORM.'.id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.rejection_form_id');
+        $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id',$part_number);
+        $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.vendor_po_id',$vendor_po_id);
+        $this->db->order_by(TBL_REJECTION_FORM_REJECTED_ITEM.'.id ','DESC');
+        $query = $this->db->get(TBL_REJECTION_FORM_REJECTED_ITEM);
+        $fetch_result = $query->result_array();
+
+        $data = array();
+        $counter = 0;
+        $i=1;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['rejection_number'] =$i++;
+                $data[$counter]['rejected_reason'] =$value['rejected_reason'];
+                $data[$counter]['qty_In_pcs'] =$value['qty_In_pcs'];
+                $data[$counter]['qty_In_kgs'] =round($value['qty_In_kgs'],3);
+                $data[$counter]['remarks'] =$value['remarksrej'];
+                //$data[$counter]['qty_In_kgs'] =$value['fg_net_weight'] * $value['qty_In_kgs'];
+
+                $counter++; 
+            }
+        }
+        return $data;
+    }
+
+    public function getexportrejecteditemdataforprint($part_number,$vendor_po_id){
         $this->db->select('*,'.TBL_FINISHED_GOODS.'.net_weight as fg_net_weight,'.TBL_REJECTION_FORM_REJECTED_ITEM.'.remark as remarksrej');
         $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
