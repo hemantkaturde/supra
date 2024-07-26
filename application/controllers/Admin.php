@@ -5285,7 +5285,8 @@ class Admin extends BaseController
                         'vendor_po_number'=> trim($this->input->post('vendor_po_number')),
                         'reported_by' =>    trim($this->input->post('reported_by')),
                         'reported_date' =>    trim($this->input->post('reported_date')),
-                        'remark' =>    trim($this->input->post('remark'))
+                        'remark' =>    trim($this->input->post('remark')),
+                        'updatedDtm' => date("Y-m-d h:m:s"),
                     );
                        /* Check if vendor PO is Alreday Exits */
                     
