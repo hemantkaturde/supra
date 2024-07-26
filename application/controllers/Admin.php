@@ -18957,7 +18957,7 @@ public function printstock($stock_id){
             ';
 
             // <p>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</p>
-    $invoice_name =  'stock.pdf';
+    $invoice_name =  'stock_print.pdf';
     $mpdf->WriteHTML($html);
     $mpdf->Output($invoice_name,'D'); // opens in browser
 
