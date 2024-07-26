@@ -107,7 +107,7 @@
                                                   <option value="NA">Select Stage</option>
                                                   <option value="Incoming">Incoming</option>
                                                   <option value="Inprogress">Inprogress</option>
-                                                  <option value="Find Inspection">Find Inspection</option>
+                                                  <option value="Final Inspection">Final Inspection</option>
                                                   <option value="At Vendor End">At Vendor End</option>
                                                   <option value="At Supplier End">At Supplier End</option>
                                             </select>
@@ -236,13 +236,13 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-3">
+                                    <!-- <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="problem_occurs">Problem Occurs</label>
                                             <input type="text" class="form-control" id="problem_occurs" name="problem_occurs">
                                             <p class="error problem_occurs_error"></p>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
 
                                 <div class="row">

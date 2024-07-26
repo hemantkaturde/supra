@@ -50,7 +50,7 @@
                                                   <option value="NA">Select Stage</option>
                                                   <option value="Incoming" <?php if($getsuppliervendorcomplaintdata['stage']=='Incoming'){ echo 'selected'; } ?>>Incoming</option>
                                                   <option value="Inprogress" <?php if($getsuppliervendorcomplaintdata['stage']=='Inprogress'){ echo 'selected'; } ?>>Inprogress</option>
-                                                  <option value="Find Inspection" <?php if($getsuppliervendorcomplaintdata['stage']=='Find Inspection'){ echo 'selected'; } ?>>Find Inspection</option>
+                                                  <option value="Final Inspection" <?php if($getsuppliervendorcomplaintdata['stage']=='Final Inspection'){ echo 'selected'; } ?>>Find Inspection</option>
                                                   <option value="At Vendor End" <?php if($getsuppliervendorcomplaintdata['stage']=='At Vendor End'){ echo 'selected'; } ?>>At Vendor End</option>
                                                   <option value="At Supplier End" <?php if($getsuppliervendorcomplaintdata['stage']=='At Supplier End'){ echo 'selected'; } ?>>At Supplier End</option>
                                             </select>
@@ -179,13 +179,13 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-3">
+                                    <!-- <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="problem_occurs">Problem Occurs</label>
                                             <input type="text" class="form-control" id="problem_occurs" value="<?=$getsuppliervendorcomplaintdata['problem_occurs']?>"  name="problem_occurs">
                                             <p class="error problem_occurs_error"></p>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
 
                                 <div class="row">
