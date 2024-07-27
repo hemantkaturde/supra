@@ -3817,7 +3817,15 @@ class Admin extends BaseController
 			if(count($getVendordetails) >= 1) {
                 $content = $content.'<option value="">Select Vendor PO Number</option>';
 				foreach($getVendordetails as $value) {
-					$content = $content.'<option value="'.$value["id"].'">'.$value["po_number"].'</option>';
+
+                     if($this->input->post('vendor_po_id')==$value["id"]){
+                        $selected = 'selected';
+                     }else{ 
+                        $selected ='';
+                     }
+
+                     $content = $content.'<option value="'.$value["id"].'" '.$selected.'>'.$value["po_number"].'</option>';
+					
 				}
 				echo $content;
 			} else {
@@ -18112,13 +18120,13 @@ public function addnewsuppliervendorcomplaint(){
 
             );
 
-                // if(trim($this->input->post('complaint_form_id'))){
-                //     $complaint_form_id =trim($this->input->post('complaint_form_id'));
-                // }else{
-                //     $complaint_form_id ='';
-                // }
+                if(trim($this->input->post('suppliervendor_compalint_id'))){
+                    $suppliervendor_compalint_id =trim($this->input->post('suppliervendor_compalint_id'));
+                }else{
+                    $suppliervendor_compalint_id ='';
+                }
 
-                $savecoustomercomplaintdata = $this->admin_model->savesuppliervendorcomplaintdata('',$data);
+                $savecoustomercomplaintdata = $this->admin_model->savesuppliervendorcomplaintdata( $suppliervendor_compalint_id,$data);
 
                 if($savecoustomercomplaintdata){
                     $save_vendor_supplier_complaint_response['status'] = 'success';
@@ -18701,7 +18709,14 @@ public function getSupplierPonumbeforsuppliervendorcompalint(){
         if(count($getSupplierdetails) >= 1) {
             $content = $content.'<option value="">Select Supplier PO Number</option>';
             foreach($getSupplierdetails as $value) {
-                    $content = $content.'<option value="'.$value["supplier_id"].'">'.$value["po_number"].'</option>';
+                     if($this->input->post('supplier_po_id')==$value["supplier_id"]){
+                        $selected = 'selected';
+                     }else{
+                        $selected = '';
+                     }
+                    
+                     $content = $content.'<option value="'.$value["supplier_id"].'" '.$selected.'>'.$value["po_number"].'</option>';
+                   
             }
             echo $content;
         } else {
@@ -18740,7 +18755,14 @@ public function getVendoritemonlyforsyppliervendorcompaint(){
         if(count($getVendoritemsonly) >= 1) {
             $content = $content.'<option value="">Select Part Number</option>';
             foreach($getVendoritemsonly as $value) {
-                $content = $content.'<option value="'.$value["fin_id"].'" data_id="'.$value["vendor_po_item_id"].'">'.$value["part_number"].'</option>';
+
+                if($this->input->post('vendor_po_number')){
+                    $selected ='selected';
+                }else{
+                    $selected ='';
+                }
+
+                $content = $content.'<option value="'.$value["fin_id"].'" data_id="'.$value["vendor_po_item_id"].'" '.$selected.'>'.$value["part_number"].'</option>';
             }
             echo $content;
         } else {
@@ -18763,7 +18785,14 @@ public function getSuppliritemonlyforsuppliervendorcompalint(){
         if(count($getSupplieritemsonly) >= 1) {
             $content = $content.'<option value="">Select Part Number</option>';
             foreach($getSupplieritemsonly as $value) {
-                $content = $content.'<option value="'.$value["item_id"].'" data_id="'.$value["supplier_po_item_id"].'">'.$value["part_number"].'</option>';
+
+                if($this->input->post('supplier_part_number_id')){
+                   $selected = 'selected';
+                }else{
+                    $selected = '';
+                }
+
+                $content = $content.'<option value="'.$value["item_id"].'" data_id="'.$value["supplier_po_item_id"].'"  '.$selected.'>'.$value["part_number"].'</option>';
             }
             echo $content;
         } else {

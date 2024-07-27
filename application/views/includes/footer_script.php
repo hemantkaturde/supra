@@ -21565,16 +21565,18 @@
 
 				if(supplier_vendor=='Supplier'){
 
-
 					$('#supplier_po_number_div').css('display','block');
 					$('#vendor_po_number_div').css('display','none');
+					$('#supplier_part_number_div').css('display','block');
+					$('#vendor_part_number_div').css('display','none');
 
 
+					var supplier_po_id =$('#supplier_po_id').val();
 					var supplier_name = $('#supplier_name').val();
 					$.ajax({
 						url : "<?php echo ADMIN_PATH;?>admin/getSupplierPonumbeforsuppliervendorcompalint",
 						type: "POST",
-						data : {'supplier_name' : supplier_name},
+						data : {'supplier_name' : supplier_name,'supplier_po_id':supplier_po_id},
 						success: function(data, textStatus, jqXHR)
 						{
 							$(".loader_ajax").hide();
@@ -21586,6 +21588,38 @@
 							{
 								// $('#supplier_po_number').html('<option value="">Select supplier PO Number</option>');
 								$('#supplier_po_number').html(data);
+
+								$('#supplier_part_number_div').css('display','block');
+								$('#vendor_part_number_div').css('display','none');
+
+								var supplier_po_number = $('#supplier_po_number').val();
+								var supplier_part_number_id = $('#supplier_part_number_id').val();
+
+								$("#supplier_part_number").html('');
+							
+								$.ajax({
+									url : "<?php echo ADMIN_PATH;?>admin/getSuppliritemonlyforsuppliervendorcompalint",
+									type: "POST",
+									data : {'supplier_po_number' : supplier_po_number,'supplier_part_number_id':supplier_part_number_id},
+									success: function(data, textStatus, jqXHR)
+									{
+										$(".loader_ajax").hide();
+										if(data == "failure")
+										{
+											$('#supplier_part_number').html('<option value="">Select Part Number</option>');
+										}
+										else
+										{
+											$('#supplier_part_number').html(data);
+
+										}
+									},
+									error: function (jqXHR, textStatus, errorThrown)
+									{
+										$('#supplier_part_number').html();
+									}
+								});
+								return false;
 
 							}
 						},
@@ -21607,18 +21641,20 @@
 
 				if(supplier_vendor=='Vendor'){
 
-
 					//$(".loader_ajax").show();
 					// $("#customers-list").html('');
 					$('#supplier_po_number_div').css('display','none');
 					$('#vendor_po_number_div').css('display','block');
+					$('#supplier_part_number_div').css('display','none');
+					$('#vendor_part_number_div').css('display','block');
 
 					var vendor_name = $('#vendor_name').val();
+					var vendor_po_id = $('#vendor_po_id').val();
 				
 					$.ajax({
 						url : "<?php echo ADMIN_PATH;?>getVendorPoconfirmationvendorlist",
 						type: "POST",
-						data : {'vendor_name' : vendor_name},
+						data : {'vendor_name' : vendor_name,'vendor_po_id':vendor_po_id},
 						success: function(data, textStatus, jqXHR)
 						{
 							$(".loader_ajax").hide();
@@ -21631,6 +21667,43 @@
 								// $('#supplier_po_number').html('<option value="">Select supplier PO Number</option>');
 								$('#vendor_po_number').html(data);
 
+								var vendor_po_number = $('#vendor_po_number').val();
+
+								$('#supplier_part_number_div').css('display','none');
+								$('#vendor_part_number_div').css('display','block');
+
+								$("#vendor_part_number").html('');
+
+								var vendor_part_number_id =  $('#vendor_part_number_id').val();
+
+
+
+								$.ajax({
+									url : "<?php echo ADMIN_PATH;?>admin/getVendoritemonlyforsyppliervendorcompaint",
+									type: "POST",
+									data : {'vendor_po_number' : vendor_po_number,'vendor_part_number_id':vendor_part_number_id},
+									success: function(data, textStatus, jqXHR)
+									{
+										$(".loader_ajax").hide();
+										if(data == "failure")
+										{
+											$('#vendor_part_number').html('<option value="">Select Part Number</option>');
+										}
+										else
+										{
+											$('#vendor_part_number').html(data);
+
+										}
+									},
+									error: function (jqXHR, textStatus, errorThrown)
+									{
+										$('#vendor_part_number').html();
+									}
+								});
+								return false;
+
+								
+
 							}
 						},
 						error: function (jqXHR, textStatus, errorThrown)
@@ -21642,8 +21715,9 @@
 					return false;
 			    }
 			});
-			
+					
 
+	
 			$(document).on('click','#addnewsuppliervendorcomplaint',function(e){
 				e.preventDefault();
 				$(".loader_ajax").show();
@@ -21841,6 +21915,8 @@
 				$('#vendor_part_number_div').css('display','block');
 		
 				$("#vendor_part_number").html('');
+
+				
 			
 				$.ajax({
 					url : "<?php echo ADMIN_PATH;?>admin/getVendoritemonlyforsyppliervendorcompaint",
@@ -21903,6 +21979,10 @@
 				});
 				return false;
 	    	});
+
+
+
+
 
 			$(document).on('change','#supplier_part_number',function(e){  
 			         e.preventDefault();

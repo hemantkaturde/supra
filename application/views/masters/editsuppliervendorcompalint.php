@@ -4,7 +4,7 @@
        width: 287px !important;
 }
     </style>
-  <?php //print_r($getsuppliervendorcomplaintdata['supplier_part_number_id']);exit; ?>
+  <?php //print_r($getsuppliervendorcomplaintdata);exit; ?>
 
 
 <div class="content-wrapper">
@@ -34,7 +34,11 @@
                             <div class="box-body">
                                 <div class="row">
 
-                                    <input type="hidden" class="form-control" id="report_number" name="report_number" value="<?=$getsuppliervendorcomplaintdata['suppliervendor_compalint_id']?>" readonly>
+                                    <input type="hidden" class="form-control" id="suppliervendor_compalint_id" name="suppliervendor_compalint_id" value="<?=$getsuppliervendorcomplaintdata['suppliervendor_compalint_id']?>" readonly>
+                                    <input type="hidden" class="form-control" id="supplier_po_id" name="supplier_po_id" value="<?=$getsuppliervendorcomplaintdata['supplier_po_id']?>" readonly>
+                                    <input type="hidden" class="form-control" id="vendor_po_id" name="vendor_po_id" value="<?=$getsuppliervendorcomplaintdata['vendor_po_id']?>" readonly>
+                                    <input type="hidden" class="form-control" id="supplier_part_number_id" name="supplier_part_number_id" value="<?=$getsuppliervendorcomplaintdata['supplier_part_number_id']?>" readonly>
+                                    <input type="hidden" class="form-control" id="vendor_part_number_id" name="vendor_part_number_id" value="<?=$getsuppliervendorcomplaintdata['vendor_part_number_id']?>" readonly>
 
 
                                     <div class="col-md-3">
