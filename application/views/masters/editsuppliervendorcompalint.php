@@ -39,8 +39,6 @@
                                     <input type="hidden" class="form-control" id="vendor_po_id" name="vendor_po_id" value="<?=$getsuppliervendorcomplaintdata['vendor_po_id']?>" readonly>
                                     <input type="hidden" class="form-control" id="supplier_part_number_id" name="supplier_part_number_id" value="<?=$getsuppliervendorcomplaintdata['supplier_part_number_id']?>" readonly>
                                     <input type="hidden" class="form-control" id="vendor_part_number_id" name="vendor_part_number_id" value="<?=$getsuppliervendorcomplaintdata['vendor_part_number_id']?>" readonly>
-
-
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="report_number">Report No <span class="required">*</span></label>
