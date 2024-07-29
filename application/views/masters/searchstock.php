@@ -16,7 +16,7 @@
                 </ul>
             </div>
             <div class="col-xs-6" style="display:flex">
-                <div><h2> <b>Previous Balance :</b> <?=$getsearchstockvendordeatils[0]['current_stock'];?> </h2></div>
+                <div><h2> <b>Previous Balance :</b> <?=$getsearchstockvendordeatils[0]['previous_stock'];?> </h2></div>
                 <div style="margin-top: 20px;margin-left: 207px;"><a href=<?=ADMIN_PATH.'printstock/'.$getsearchstockvendordeatils[0]['stock_id_form']?> style='cursor: pointer;' target='_blank'><button type="button" id="print_stock" class="btn btn-primary print_stock">Print Stock</button></a></div>
             </div>
         </div>
@@ -25,6 +25,7 @@
         <input type="hidden" class="form-control" id="stock_id" name="stock_id"  value="<?=$getsearchstockvendordeatils[0]['stock_id_form'];?>" readonly>
         <input type="hidden" class="form-control" id="part_number_id" name="part_number_id"  value="<?=$getsearchstockvendordeatils[0]['search_stock_item_id'];?>" readonly>
         <input type="hidden" class="form-control" id="buyer_po_number_id" name="buyer_po_number_id"  value="<?=$getsearchstockvendordeatils[0]['buyer_po_id'];?>" readonly>
+        <input type="hidden" class="form-control" id="finishgood_id" name="finishgood_id"  value="<?=$getsearchstockvendordeatils[0]['finishgood_id'];?>" readonly>
 
 
         <div class="row">

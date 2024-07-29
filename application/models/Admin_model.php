@@ -507,6 +507,7 @@ class Admin_model extends CI_Model
             $this->db->or_where(TBL_FINISHED_GOODS.".groass_weight LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_FINISHED_GOODS.".net_weight LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_FINISHED_GOODS.".current_stock LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FINISHED_GOODS.".previous_stock LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_FINISHED_GOODS.".drawing_number LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_FINISHED_GOODS.".sac LIKE '%".$params['search']['value']."%')");
         }
@@ -528,6 +529,7 @@ class Admin_model extends CI_Model
             $this->db->or_where(TBL_FINISHED_GOODS.".groass_weight LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_FINISHED_GOODS.".net_weight LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_FINISHED_GOODS.".current_stock LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FINISHED_GOODS.".previous_stock LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_FINISHED_GOODS.".drawing_number LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_FINISHED_GOODS.".sac LIKE '%".$params['search']['value']."%')");
         }
@@ -550,6 +552,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['sac'] =  $value['sac'];
                 $data[$counter]['drawing_number'] =  $value['drawing_number'];
                 $data[$counter]['current_stock'] =  $value['current_stock'];
+                $data[$counter]['previous_stock'] =  $value['previous_stock'];
                 $data[$counter]['action'] = '';
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."updateFinishedgoods/".$value['fin_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['fin_id']."' class='fa fa-trash-o deletefinishedgoodsdata' aria-hidden='true'></i>"; 
@@ -14665,7 +14668,7 @@ public function fetchserchstocksrportdata($params){
 
 public function getsearchstockvendordeatils($stock_id){
 
-    $this->db->select('*,'.TBL_BUYER_MASTER.'.buyer_name as by_name,'.TBL_VENDOR.'.vendor_name as ven_name,'.TBL_VENDOR_PO_MASTER.'.po_number as vpo_number,'.TBL_FINISHED_GOODS.'.part_number as fg_part_number,'.TBL_STOCKS_ITEM.'.id as search_stock_id,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date,'.TBL_STOCKS_ITEM.'.part_number as part_number_id,'.TBL_STOCKS.'.stock_id as stock_id_form,'.TBL_VENDOR_PO_MASTER_ITEM.'.id as vendor_po_item_id,'.TBL_STOCKS_ITEM.'.part_number as search_stock_item_id,'.TBL_VENDOR_PO_MASTER.'.id as vendor_po_id,'.TBL_BUYER_PO_MASTER.'.id  as buyer_po_id,'.TBL_STOCKS.'.remark as stock_remark,'.TBL_BUYER_PO_MASTER.'.buyer_po_number as original_po');
+    $this->db->select('*,'.TBL_BUYER_MASTER.'.buyer_name as by_name,'.TBL_VENDOR.'.vendor_name as ven_name,'.TBL_VENDOR_PO_MASTER.'.po_number as vpo_number,'.TBL_FINISHED_GOODS.'.part_number as fg_part_number,'.TBL_STOCKS_ITEM.'.id as search_stock_id,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date,'.TBL_STOCKS_ITEM.'.part_number as part_number_id,'.TBL_STOCKS.'.stock_id as stock_id_form,'.TBL_VENDOR_PO_MASTER_ITEM.'.id as vendor_po_item_id,'.TBL_STOCKS_ITEM.'.part_number as search_stock_item_id,'.TBL_VENDOR_PO_MASTER.'.id as vendor_po_id,'.TBL_BUYER_PO_MASTER.'.id  as buyer_po_id,'.TBL_STOCKS.'.remark as stock_remark,'.TBL_BUYER_PO_MASTER.'.buyer_po_number as original_po,'.TBL_FINISHED_GOODS.'.fin_id as finishgood_id');
     $this->db->join(TBL_STOCKS, TBL_STOCKS.'.stock_id = '.TBL_STOCKS_ITEM.'.stock_form_id');
     $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_STOCKS.'.buyer_po_number');
     $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.part_number_id = '.TBL_STOCKS_ITEM.'.part_number');
@@ -14833,7 +14836,7 @@ public function getsuppliervendorrportdata($params){
             $data[$counter]['invoice_date'] = $value['invoice_date'];
             $data[$counter]['action'] = '';
             $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editsuppliervendorcompalint/".$value['suppliervendor_compalint_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
-            $data[$counter]['action'] .= "<a href='".ADMIN_PATH."/".$value['suppliervendor_compalint_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>   &nbsp ";
+            $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downlaodsuppliervendorcomplaint/".$value['suppliervendor_compalint_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>   &nbsp ";
             $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['suppliervendor_compalint_id']."' class='fa fa-trash-o deletesuppliervendorcompalintreport' aria-hidden='true'></i>"; 
             $counter++; 
         }
@@ -15043,7 +15046,29 @@ public function fetchseachbypartnumberreportdata($params,$part_number){
    
 }
 
+public function getsuppliervendorcomplaintdownalod($id){
+    $this->db->select('*,'.TBL_SUPPLIER_VENDOR_COMPALINT.'.id as suppliervendor_compalint_id');
+    $this->db->where(TBL_SUPPLIER_VENDOR_COMPALINT.'.id',$id);
+    $query = $this->db->get(TBL_SUPPLIER_VENDOR_COMPALINT);
+    $fetch_result = $query->result_array();
+    return $fetch_result;
+}
 
+
+public function updatestockaftercalculation($balence_qty_in_pcs,$finishgood_id){
+
+    $data = array(
+        'previous_stock' =>$balence_qty_in_pcs
+    );
+
+    $this->db->where(TBL_FINISHED_GOODS.'.fin_id',$finishgood_id);
+    if($this->db->update(TBL_FINISHED_GOODS,$data)){
+        return TRUE;
+    }else{
+        return FALSE;
+    }
+
+}
 
 
 }

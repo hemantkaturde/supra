@@ -773,13 +773,14 @@
 	            "columnDefs": [ 
 	                 { className: "details-control", "targets": [ 0 ] },
 	                 { "width": "10%", "targets": 0 },
-	                 { "width": "25%", "targets": 1 },
+	                 { "width": "20%", "targets": 1 },
 					 { "width": "10%", "targets": 2 },
 	                 { "width": "10%", "targets": 3 },
 	                 { "width": "10%", "targets": 4 },
-					 { "width": "10%", "targets": 5 },
+					 { "width": "8%", "targets": 5 },
 					 { "width": "15%", "targets": 6 },
-					 { "width": "10%", "targets": 7 }
+					 { "width": "10%", "targets": 7 },
+					 { "width": "10%", "targets": 8 }
 	            ],
 	            responsive: true,
 	            "oLanguage": {
@@ -16552,6 +16553,45 @@
 	                   
 		// });
 
+
+
+
+		$(document).on('click','#update_stock',function(e){
+			e.preventDefault();
+			$(".loader_ajax").show();
+		    var finishgood_id = $('#finishgood_id').val();
+			var balence_qty_in_pcs = $('#balence_qty_in_pcs').val();
+			var stock_id = $('#stock_id').val();
+			$.ajax({
+					url : "<?php echo ADMIN_PATH;?>admin/updatestockaftercalculation",
+					type: "POST",
+					 data : {'finishgood_id' : finishgood_id,'balence_qty_in_pcs':balence_qty_in_pcs},
+					success: function(data, textStatus, jqXHR)
+					{
+						$(".loader_ajax").hide();
+						if(data == "failure")
+						{
+							$(".report_type_error").html("");
+						}
+						else
+						{
+								swal({
+										title: "Success",
+										text: "Balance Qty Successfully Updated!",
+										icon: "success",
+										button: "Ok",
+									},function(){ 
+									window.location.href = "<?php echo base_url().'searchstock/'?>"+stock_id;
+							    });		
+						}
+					},
+					error: function (jqXHR, textStatus, errorThrown)
+					{
+						$(".loader_ajax").hide();
+					}
+				});
+			return false;
+    	});
 	
    </script>
 <?php } ?>

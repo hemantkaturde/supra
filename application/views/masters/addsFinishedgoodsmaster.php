@@ -51,15 +51,26 @@
                                             <p class="error hsn_code_error"></p>
                                         </div>
                                     </div>
+                                </div>
 
-                                    <div class="col-md-6">
+                                <div class="row">
+                                   <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="current_stock">Current Stock </label>
                                             <input type="number" class="form-control" id="current_stock" name="current_stock">
                                             <p class="error current_stock_error"></p>
                                         </div>
                                     </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="previous_stock">Previous Stock </label>
+                                            <input type="number" class="form-control" id="previous_stock" name="previous_stock">
+                                            <p class="error previous_stock_error"></p>
+                                        </div>
+                                    </div>
                                 </div>
+
 
                                 <div class="row">
                                     <div class="col-md-6">

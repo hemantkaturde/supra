@@ -1390,7 +1390,7 @@ class Admin extends BaseController
             if($this->form_validation->run() == FALSE)
             {
                 $save_finished_goods_response['status'] = 'failure';
-                $save_finished_goods_response['error'] = array('part_number'=>strip_tags(form_error('part_number')), 'name'=>strip_tags(form_error('name')), 'hsn_code'=>strip_tags(form_error('hsn_code')), 'gross_weight'=>strip_tags(form_error('gross_weight')),'net_weight'=>strip_tags(form_error('net_weight')),'sac'=>strip_tags(form_error('sac')),'drawing_number'=>strip_tags(form_error('drawing_number')),'description_1'=>strip_tags(form_error('description_1')),'description_2'=>strip_tags(form_error('description_2')),'current_stock'=>strip_tags(form_error('description_2')));
+                $save_finished_goods_response['error'] = array('part_number'=>strip_tags(form_error('part_number')), 'name'=>strip_tags(form_error('name')), 'hsn_code'=>strip_tags(form_error('hsn_code')), 'gross_weight'=>strip_tags(form_error('gross_weight')),'net_weight'=>strip_tags(form_error('net_weight')),'sac'=>strip_tags(form_error('sac')),'drawing_number'=>strip_tags(form_error('drawing_number')),'description_1'=>strip_tags(form_error('description_1')),'description_2'=>strip_tags(form_error('description_2')),'current_stock'=>strip_tags(form_error('current_stock')),'previous_stock'=>strip_tags(form_error('previous_stock')));
             }else{
 
                 $data = array(
@@ -1403,7 +1403,8 @@ class Admin extends BaseController
                     'drawing_number' =>    trim($this->input->post('drawing_number')),
                     'description_1' =>    trim($this->input->post('description_1')),
                     'description_2' =>    trim($this->input->post('description_2')),
-                    'current_stock' =>    trim($this->input->post('current_stock'))
+                    'current_stock' =>    trim($this->input->post('current_stock')),
+                    'previous_stock' =>    trim($this->input->post('previous_stock'))
                 );
 
                 $checkIfexitsFinishedgoods = $this->admin_model->checkIfexitsFinishedgoods(trim($this->input->post('part_number')));
@@ -1414,7 +1415,7 @@ class Admin extends BaseController
                     $saveFinishedgoodsdata = $this->admin_model->saveFinishedgoodsdata('',$data);
                     if($saveFinishedgoodsdata){
                         $save_finished_goods_response['status'] = 'success';
-                        $save_finished_goods_response['error'] = array('part_number'=>'', 'name'=>'', 'hsn_code'=>'', 'gross_weight'=>'','net_weight'=>'','sac'=>'','drawing_number'=>'','description_1'=>'','description_2'=>'','savenewfinishedgoods'=>'');
+                        $save_finished_goods_response['error'] = array('part_number'=>'', 'name'=>'', 'hsn_code'=>'', 'gross_weight'=>'','net_weight'=>'','sac'=>'','drawing_number'=>'','description_1'=>'','description_2'=>'','savenewfinishedgoods'=>'','previous_stock'=>'');
                     }
                 }
             }
@@ -1472,7 +1473,7 @@ class Admin extends BaseController
             if($this->form_validation->run() == FALSE)
             {
                 $update_finished_goods_response['status'] = 'failure';
-                $update_finished_goods_response['error'] = array('part_number'=>strip_tags(form_error('part_number')), 'name'=>strip_tags(form_error('name')), 'hsn_code'=>strip_tags(form_error('hsn_code')), 'gross_weight'=>strip_tags(form_error('gross_weight')),'net_weight'=>strip_tags(form_error('net_weight')),'sac'=>strip_tags(form_error('sac')),'drawing_number'=>strip_tags(form_error('drawing_number')),'description_1'=>strip_tags(form_error('description_1')),'description_2'=>strip_tags(form_error('description_2')),'current_stock'=>strip_tags(form_error('description_2')));
+                $update_finished_goods_response['error'] = array('part_number'=>strip_tags(form_error('part_number')), 'name'=>strip_tags(form_error('name')), 'hsn_code'=>strip_tags(form_error('hsn_code')), 'gross_weight'=>strip_tags(form_error('gross_weight')),'net_weight'=>strip_tags(form_error('net_weight')),'sac'=>strip_tags(form_error('sac')),'drawing_number'=>strip_tags(form_error('drawing_number')),'description_1'=>strip_tags(form_error('description_1')),'description_2'=>strip_tags(form_error('description_2')),'current_stock'=>strip_tags(form_error('current_stock')),'previous_stock'=>strip_tags(form_error('previous_stock')));
             }else{
 
                 $data = array(
@@ -1485,7 +1486,8 @@ class Admin extends BaseController
                     'drawing_number' =>    trim($this->input->post('drawing_number')),
                     'description_1' =>    trim($this->input->post('description_1')),
                     'description_2' =>    trim($this->input->post('description_2')),
-                    'current_stock' =>    trim($this->input->post('current_stock'))
+                    'current_stock' =>    trim($this->input->post('current_stock')),
+                    'previous_stock' =>    trim($this->input->post('previous_stock'))
                 );
 
                
@@ -1495,7 +1497,7 @@ class Admin extends BaseController
                     $updatefinishedgoodsdata = $this->admin_model->saveFinishedgoodsdata(trim($this->input->post('finished_goods_id')),$data);
                     if($updatefinishedgoodsdata){
                         $update_finished_goods_response['status'] = 'success';
-                        $update_finished_goods_response['error'] = array('part_number'=>'', 'name'=>'', 'hsn_code'=>'', 'gross_weight'=>'','net_weight'=>'','sac'=>'','drawing_number'=>'','description_1'=>'','description_2'=>'');
+                        $update_finished_goods_response['error'] = array('part_number'=>'', 'name'=>'', 'hsn_code'=>'', 'gross_weight'=>'','net_weight'=>'','sac'=>'','drawing_number'=>'','description_1'=>'','description_2'=>'','previous_stock'=>'');
                     }
 
                 }else{
@@ -1508,7 +1510,7 @@ class Admin extends BaseController
                         $updatedata = $this->admin_model->saveFinishedgoodsdata(trim($this->input->post('finished_goods_id')),$data);
                         if($updatedata){
                            $update_finished_goods_response['status'] = 'success';
-                           $update_finished_goods_response['error'] = array('part_number'=>'', 'name'=>'', 'hsn_code'=>'', 'gross_weight'=>'','net_weight'=>'','sac'=>'','drawing_number'=>'','description_1'=>'','description_2'=>'','current_stock'=>'');
+                           $update_finished_goods_response['error'] = array('part_number'=>'', 'name'=>'', 'hsn_code'=>'', 'gross_weight'=>'','net_weight'=>'','sac'=>'','drawing_number'=>'','description_1'=>'','description_2'=>'','current_stock'=>'','previous_stock'=>'');
                         }
 
                     }
@@ -18154,7 +18156,6 @@ public function addnewsuppliervendorcomplaint(){
 }
 
 
-
 public function editsuppliervendorcompalint($id){
     $process = 'Edit Supplier Vendor Compliant Report';
     $processFunction = 'Admin/editsuppliervendorcompalint';
@@ -18805,7 +18806,6 @@ public function getSuppliritemonlyforsuppliervendorcompalint(){
 }
 
 
-
 public function getPartnumberdetailsforsupplierposuppliervendorpo(){
 
     if($this->input->post('supplier_part_number')) {
@@ -18823,7 +18823,6 @@ public function getPartnumberdetailsforsupplierposuppliervendorpo(){
         echo 'failure';
     }
 }
-
 
 
 public function getPartnumberdetailsforsupplierposuppliervendorpovendor(){
@@ -18992,6 +18991,396 @@ public function printstock($stock_id){
 
 
 }
+
+public function downlaodsuppliervendorcomplaint($id){
+
+    $getsuppliervendorcomplaintdownalod = $this->admin_model->getsuppliervendorcomplaintdownalod($id);
+
+    $mpdf = new \Mpdf\Mpdf();
+    $html = '<table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:13px">
+                <tr>
+                    <td width="100%" style="padding: 10px;text-align: center;border: 1px solid black">
+                        <H3> SUPPLIER/VENDOR COMPLAINT </H3>
+                    </td>
+                </tr>
+            </table>
+            
+            
+        <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:13px">
+            <tr style="border: 1px solid black;" valign="top">
+                <td width="25%" style="padding: 10px;text-align: center;">
+                     <h4>SUPRA QUALITY EXPORTS (I) PVT LTD</h4> 
+                </td> 
+
+                <td style="border-left: 1px solid black;padding: 10px;" width="50%" valign="top";text-align: center;>
+                   <h4>ANALYSIS AND CORRECTIVE ACTION REPORT</h4>
+                </td>
+
+                 <td style="border-left: 1px solid black;padding: 10px;" width="25%" valign="top";text-align: center;>
+                  <p>Report No: '.$getsuppliervendorcomplaintdownalod[0]['report_number'].' </p>
+                </td>
+            </tr>
+        </table>
+        
+        
+         <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
+            <tr style="border: 1px solid black;" valign="top">
+                <td width="25%" style="padding: 5px;text-align: left;">
+                    <p>CUSTOMER NAME: </p>
+                </td> 
+
+                <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
+                    <p>'.$getsuppliervendorcomplaintdownalod[0]['buyer_name'].' </p>
+                </td>
+
+                <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
+                    <p>CUSTOMER PO:</p>
+                </td>
+
+                <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
+                    <p>'.$getcustomercomplaintdetailsfordownalod[0]['sales_order_number'].' </p>
+                </td>
+            </tr>
+        </table>
+
+
+        <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
+            <tr style="border: 1px solid black;" valign="top">
+                <td width="25%" style="padding: 5px;text-align: left;">
+                    <p>PART NO: </p>
+                </td> 
+
+                <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
+                    <p>'.$getcustomercomplaintdetailsfordownalod[0]['part_number'].' </p>
+                </td>
+
+                <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
+                    <p>COMPONENT DESCRIPTION:</p>
+                </td>
+
+                <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
+                    <p>'.$getcustomercomplaintdetailsfordownalod[0]['name'].' </p>
+                </td>
+            </tr>
+        </table>
+        
+         <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
+            <tr style="border: 1px solid black;" valign="top">
+                <td width="25%" style="padding: 5px;text-align: left;">
+                    <p>ORDER QTY: </p>
+                </td> 
+
+                <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
+                    <p>'.$getcustomercomplaintdetailsfordownalod[0]['order_qty'].' </p>
+                </td>
+
+                <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
+                    <p>DISPATCH QTY:</p>
+                </td>
+
+                <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
+                    <p>'.$getcustomercomplaintdetailsfordownalod[0]['dispatch_qty'].' </p>
+                </td>
+            </tr>
+        </table>
+
+
+         <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
+            <tr style="border: 1px solid black;" valign="top">
+                <td width="25%" style="padding: 5px;text-align: left;">
+                    <p>INVOICE NO: </p>
+                </td> 
+
+                <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
+                    <p>'.$getcustomercomplaintdetailsfordownalod[0]['invoice_no'].' </p>
+                </td>
+
+                <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
+                    <p>INVOICE DATE:</p>
+                </td>
+
+                <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
+                    <p>'.$getcustomercomplaintdetailsfordownalod[0]['invoice_date'].' </p>
+                </td>
+            </tr>
+        </table>
+
+         <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
+            <tr style="border: 1px solid black;" valign="top">
+                <td width="25%" style="padding: 5px;text-align: left;">
+                    <p>DOCUMENT DATE: </p>
+                </td> 
+
+                <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
+                    <p>'.$getcustomercomplaintdetailsfordownalod[0]['doc_complaint_date'].'</p>
+                </td>
+
+                <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
+                    <p>TOTAL FAILURE QTY:</p>
+                </td>
+
+                <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
+                    <p>'.$getcustomercomplaintdetailsfordownalod[0]['toatal_failure_qty'].' </p>
+                </td>
+            </tr>
+        </table>
+
+         <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
+            <tr style="border: 1px solid black;" valign="top">
+                <td width="100%" style="padding: 5px;text-align: left;">
+                    <p>1.PROBLEM DESCRIPTION: </p>
+                </td> 
+            </tr>
+
+            <tr style="border: 1px solid black;" valign="top">
+                <td width="100%" style="padding: 5px;text-align: left;">
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. $getcustomercomplaintdetailsfordownalod[0]['problem_description'].'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                </td> 
+            </tr>
+         </table>
+
+         
+         <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
+            <tr style="border: 1px solid black;" valign="top">
+                <td width="100%" style="padding: 5px;text-align: left;">
+                    <p>2.ROOT CAUSE: </p>
+                </td> 
+            </tr>
+
+            <tr style="border: 1px solid black;" valign="top">
+                <td width="100%" style="padding: 5px;text-align: left;">
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. $getcustomercomplaintdetailsfordownalod[0]['root_case'].'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                </td> 
+            </tr>
+         </table>
+
+
+           <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
+            <tr style="border: 1px solid black;" valign="top">
+                <td width="100%" style="padding: 5px;text-align: left;">
+                    <p>3.CORRECTION: </p>
+                </td> 
+            </tr>
+
+            <tr style="border: 1px solid black;" valign="top">
+                <td width="100%" style="padding: 5px;text-align: left;">
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. $getcustomercomplaintdetailsfordownalod[0]['corrective_action_taken'].'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                </td> 
+            </tr>
+         </table>
+
+          <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
+            <tr style="border: 1px solid black;" valign="top">
+                <td width="60%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
+                    <p>5.CORRECTION ACTION TAKEN: </p>
+                </td> 
+
+                <td width="20%" style="padding: 5px;text-align: center;border-right: #000000 1px solid">
+                    <p>RESPONSIBILITY: </p>
+                </td> 
+
+                  <td width="20%" style="padding: 5px;text-align: center;border-right: #000000 1px solid">
+                    <p>DATE: </p>
+                </td> 
+            </tr>
+         </table>
+         
+         
+           <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
+            <tr style="border: 1px solid black;" valign="top">
+                <td width="60%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. $getcustomercomplaintdetailsfordownalod[0]['correction'].'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                </td> 
+
+                <td width="20%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. $getcustomercomplaintdetailsfordownalod[0]['corrective_action_taken_responsibility'].'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                </td> 
+
+                <td width="20%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. $getcustomercomplaintdetailsfordownalod[0]['corrective_action_taken_responsibility_date'].'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                </td> 
+            </tr>
+         </table>
+
+         <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
+            <tr style="border: 1px solid black;" valign="top">
+                <td width="60%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
+                    <p>6.EFFECTIVE ACTION: </p>
+                </td> 
+
+                <td width="20%" style="padding: 5px;text-align: center;border-right: #000000 1px solid">
+                    <p>RESPONSIBILITY: </p>
+                </td> 
+
+                  <td width="20%" style="padding: 5px;text-align: center;border-right: #000000 1px solid">
+                    <p>DATE: </p>
+                </td> 
+            </tr>
+         </table>
+         
+         
+           <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
+            <tr style="border: 1px solid black;" valign="top">
+                <td width="60%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. $getcustomercomplaintdetailsfordownalod[0]['effective_action'].'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                </td> 
+
+                <td width="20%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. $getcustomercomplaintdetailsfordownalod[0]['responsibility'].'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                </td> 
+
+                <td width="20%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. $getcustomercomplaintdetailsfordownalod[0]['effective_date'].'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                </td> 
+            </tr>
+         </table>
+
+        <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
+            <tr style="border: 1px solid black;" valign="top">
+                <td width="25%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
+                    <p>PREPARED BY: </p>
+                </td> 
+
+                <td width="25%" style="padding: 5px;text-align: center;border-right: #000000 1px solid">
+                    <p>DATE: </p>
+                </td> 
+
+                <td width="25%" style="padding: 5px;text-align: center;border-right: #000000 1px solid">
+                    <p>APPROVED BY: </p>
+                </td> 
+
+                <td width="25%" style="padding: 5px;text-align: center;border-right: #000000 1px solid">
+                    <p>DATE: </p>
+                </td> 
+            </tr>
+         </table>
+
+
+           <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
+            <tr style="border: 1px solid black;" valign="top">
+                <td width="25%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
+                       <p>'. $getcustomercomplaintdetailsfordownalod[0]['prepared_by'].'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                </td> 
+
+                <td width="25%" style="padding: 5px;text-align: center;border-right: #000000 1px solid">
+                       <p>'. $getcustomercomplaintdetailsfordownalod[0]['prepared_by_date'].'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                </td> 
+
+                <td width="25%" style="padding: 5px;text-align: center;border-right: #000000 1px solid">
+                       <p>'. $getcustomercomplaintdetailsfordownalod[0]['approved_by'].'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                </td> 
+
+                <td width="25%" style="padding: 5px;text-align: center;border-right: #000000 1px solid">
+                       <p>'. $getcustomercomplaintdetailsfordownalod[0]['approved_by_date'].'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                </td> 
+            </tr>
+         </table>
+
+
+         
+        <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
+            <tr style="border: 1px solid black;" valign="top">
+                <td width="25%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
+                    <p>REPORT CLOSED BY: </p>
+                </td> 
+
+                <td width="50%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
+                   <p>'. $getcustomercomplaintdetailsfordownalod[0]['report_closed_by'].'</p>
+                </td> 
+
+                <td width="12.5%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
+                    <p>DATE: </p>
+                </td> 
+
+                <td width="12.5%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
+                     <p>'. $getcustomercomplaintdetailsfordownalod[0]['report_closed_by_date'].'</p>
+                </td> 
+            </tr>
+         </table>';
+      
+
+            // <p>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</p>
+    $invoice_name =  'supplier_vendor_complaint_report.pdf';
+    $mpdf->WriteHTML($html);
+    $mpdf->Output($invoice_name,'D'); // opens in browser
+
+
+}
+
+
+public function updatestockaftercalculation(){
+
+        $post_submit = $this->input->post();
+
+        if(!empty($post_submit)){
+            $updatestockcalculation_response = array();
+
+            $this->form_validation->set_rules('balence_qty_in_pcs','Balence Qty In PCS','trim|required');
+            $this->form_validation->set_rules('finishgood_id','Finishgood Id','trim|required');
+    
+            if($this->form_validation->run() == FALSE)
+            {
+                $updatestockcalculation_response['status'] = 'failure';
+                $updatestockcalculation_response['error'] = array('balence_qty_in_pcs'=>strip_tags(form_error('balence_qty_in_pcs')), 'finishgood_id'=>strip_tags(form_error('finishgood_id')));
+            }else{
+
+                $updatestockaftercalculation = $this->admin_model->updatestockaftercalculation(trim($this->input->post('balence_qty_in_pcs')),trim($this->input->post('finishgood_id')));
+            
+                if($updatestockaftercalculation){
+                    $updatestockcalculation_response['status'] = 'success';
+                    $updatestockcalculation_response['error'] = array('balence_qty_in_pcs'=>strip_tags(form_error('balence_qty_in_pcs')), 'finishgood_id'=>strip_tags(form_error('finishgood_id')));
+                }
+
+            }
+            echo json_encode($updatestockaftercalculation);
+        }
+
+}
+
+
+
+
+
 
 
 }
