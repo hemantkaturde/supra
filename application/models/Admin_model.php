@@ -15088,19 +15088,19 @@ public function getsuppliervendorcomplaintdownalod($id){
 public function updatestockaftercalculation($balence_qty_in_pcs,$finishgood_id,$stock_id){
 
     $data = array(
-        'previous_stock' =>$balence_qty_in_pcs
+        'current_stock' =>$balence_qty_in_pcs
     );
 
     $this->db->where(TBL_FINISHED_GOODS.'.fin_id',$finishgood_id);
     if($this->db->update(TBL_FINISHED_GOODS,$data)){
        // return TRUE;
 
-        $data = array(
+        $data1 = array(
             'previous_stock' =>$balence_qty_in_pcs
         );
 
         $this->db->where(TBL_STOCKS.'.stock_id',$stock_id);
-        if($this->db->update(TBL_STOCKS,$data)){
+        if($this->db->update(TBL_STOCKS,$data1)){
             return TRUE;
         }else{
             return FALSE;
