@@ -8918,6 +8918,9 @@ class Admin extends BaseController
         $this->global['pageTitle'] = 'Search Stock';
         $data['getsearchstockvendordeatils']= $this->admin_model->getsearchstockvendordeatils($stock_id);
         $data['getallitemsfromfgorrawmaterial']= $this->admin_model->getallitemsfromfgorrawmaterial();
+
+        $data['getpreviousstock']= $this->admin_model->getpreviousstock($data['getsearchstockvendordeatils'][0]['part_number_id'],$data['getsearchstockvendordeatils'][0]['stock_id']);
+
         $this->loadViews("masters/searchstock", $this->global, $data, NULL);  
     }
 
@@ -18929,7 +18932,7 @@ public function printstock($stock_id){
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$k.'</td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['packing_instrauction_id'].'</td> 
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['buyer_invoice_date'].'</td>
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.number_format($value['export_qty_in_kgs'],2).'</td> 
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.number_format($value['buyer_invoice_qty'],2).'</td> 
                 </tr>';
 
                  $export_qty_in_pcs+=$value['export_qty_in_kgs'];
@@ -19400,18 +19403,19 @@ public function updatestockaftercalculation(){
 
             $this->form_validation->set_rules('balence_qty_in_pcs','Balence Qty In PCS','trim|required');
             $this->form_validation->set_rules('finishgood_id','Finishgood Id','trim|required');
+            $this->form_validation->set_rules('stock_id','Stock Id','trim|required');
     
             if($this->form_validation->run() == FALSE)
             {
                 $updatestockcalculation_response['status'] = 'failure';
-                $updatestockcalculation_response['error'] = array('balence_qty_in_pcs'=>strip_tags(form_error('balence_qty_in_pcs')), 'finishgood_id'=>strip_tags(form_error('finishgood_id')));
+                $updatestockcalculation_response['error'] = array('balence_qty_in_pcs'=>strip_tags(form_error('balence_qty_in_pcs')), 'finishgood_id'=>strip_tags(form_error('finishgood_id')),'stock_id'=>strip_tags(form_error('stock_id')));
             }else{
 
-                $updatestockaftercalculation = $this->admin_model->updatestockaftercalculation(trim($this->input->post('balence_qty_in_pcs')),trim($this->input->post('finishgood_id')));
+                $updatestockaftercalculation = $this->admin_model->updatestockaftercalculation(trim($this->input->post('balence_qty_in_pcs')),trim($this->input->post('finishgood_id')),trim($this->input->post('stock_id')));
             
                 if($updatestockaftercalculation){
                     $updatestockcalculation_response['status'] = 'success';
-                    $updatestockcalculation_response['error'] = array('balence_qty_in_pcs'=>strip_tags(form_error('balence_qty_in_pcs')), 'finishgood_id'=>strip_tags(form_error('finishgood_id')));
+                    $updatestockcalculation_response['error'] = array('balence_qty_in_pcs'=>strip_tags(form_error('balence_qty_in_pcs')), 'finishgood_id'=>strip_tags(form_error('finishgood_id')),'stock_id'=>strip_tags(form_error('stock_id')));
                 }
 
             }

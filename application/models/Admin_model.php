@@ -15085,7 +15085,7 @@ public function getsuppliervendorcomplaintdownalod($id){
 }
 
 
-public function updatestockaftercalculation($balence_qty_in_pcs,$finishgood_id){
+public function updatestockaftercalculation($balence_qty_in_pcs,$finishgood_id,$stock_id){
 
     $data = array(
         'previous_stock' =>$balence_qty_in_pcs
@@ -15093,10 +15093,35 @@ public function updatestockaftercalculation($balence_qty_in_pcs,$finishgood_id){
 
     $this->db->where(TBL_FINISHED_GOODS.'.fin_id',$finishgood_id);
     if($this->db->update(TBL_FINISHED_GOODS,$data)){
-        return TRUE;
+       // return TRUE;
+
+        $data = array(
+            'previous_stock' =>$balence_qty_in_pcs
+        );
+
+        $this->db->where(TBL_STOCKS.'.stock_id',$stock_id);
+        if($this->db->update(TBL_STOCKS,$data)){
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+
     }else{
         return FALSE;
     }
+
+
+}
+
+
+public function getpreviousstock($part_number_id,$stock_id){
+    $this->db->select(TBL_STOCKS.'.previous_stock');
+    $this->db->join(TBL_STOCKS_ITEM, TBL_STOCKS_ITEM.'.stock_form_id = '.TBL_STOCKS.'.stock_id');
+    $this->db->where(TBL_STOCKS.'.stock_id <',$stock_id);
+    $query = $this->db->get(TBL_STOCKS);
+    $fetch_result = $query->row_array();
+    return $fetch_result;
+
 
 }
 

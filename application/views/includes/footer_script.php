@@ -16565,7 +16565,7 @@
 			$.ajax({
 					url : "<?php echo ADMIN_PATH;?>admin/updatestockaftercalculation",
 					type: "POST",
-					 data : {'finishgood_id' : finishgood_id,'balence_qty_in_pcs':balence_qty_in_pcs},
+					 data : {'finishgood_id' : finishgood_id,'balence_qty_in_pcs':balence_qty_in_pcs,'stock_id':stock_id},
 					success: function(data, textStatus, jqXHR)
 					{
 						$(".loader_ajax").hide();
