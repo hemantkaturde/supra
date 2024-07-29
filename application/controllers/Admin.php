@@ -18875,7 +18875,7 @@ public function printstock($stock_id){
     $getsearchstockvendordeatils= $this->admin_model->getsearchstockvendordeatils($stock_id);
     $getsearchstockformdataforprint = $this->admin_model->getsearchstockformdataforprint($stock_id,$getsearchstockvendordeatils[0]['part_number_id']);
     $getexportrejecteditemdataforprint  = $this->admin_model->getexportrejecteditemdataforprint($getsearchstockvendordeatils[0]['vendor_po_item_id'],$getsearchstockvendordeatils[0]['vendor_po_id']);
-    $getexportrecordsitemdataforprint = $this->admin_model->getexportrecordsitemdataforprint($getsearchstockvendordeatils[0]['buyer_po_id'],$getsearchstockvendordeatils[0]['vendor_po_id']);
+    $getexportrecordsitemdataforprint = $this->admin_model->getexportrecordsitemdataforprint($getsearchstockvendordeatils[0]['buyer_po_id'],$getsearchstockvendordeatils[0]['part_number_id']);
 
 
     $CartItem = "";
