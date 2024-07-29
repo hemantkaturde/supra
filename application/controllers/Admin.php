@@ -18923,13 +18923,13 @@ public function printstock($stock_id){
     // $html = $this->load->view('html_to_pdf',[],true);
     $html = '<table style=" width: 100%;text-align: left;border-collapse: collapse;border: #cccccc 0px solid;font-family:cambria;">
                 <tr>
-                   <td><b>Vendor Name : </b>'.$getsearchstockvendordeatils[0]['vendor_name'].' </td>
+                   <td><b>Vendor Name : </b>'.$getsearchstockvendordeatils[0]['vendor_name'].str_repeat('&nbsp;', 10).str_repeat('&nbsp;', 10).str_repeat('&nbsp;', 10).str_repeat('&nbsp;', 10).str_repeat('&nbsp;', 10).str_repeat('&nbsp;', 10).' <b>Previous Balence : </b>'.$getsearchstockvendordeatils[0]['previous_stock'].'</td>
                 </tr>
                 <tr>
-                  <td><b>Part Number  : </b>'.$getsearchstockvendordeatils[0]['fg_part_number'].' </td>
+                  <td><b>Part Description  : </b>'.$getsearchstockvendordeatils[0]['description'].' </td>
                 </tr>
                  <tr>
-                  <td><b>PO Number    : </b>'.$getsearchstockvendordeatils[0]['sales_order_number'].' </td>
+                  <td><b>PO Number    : </b>'.$getsearchstockvendordeatils[0]['vpo_number'].str_repeat('&nbsp;', 10).str_repeat('&nbsp;', 10).str_repeat('&nbsp;', 10).str_repeat('&nbsp;', 10).str_repeat('&nbsp;', 10).str_repeat('&nbsp;', 10).str_repeat('&nbsp;', 7).' <b>PO Qty : </b>'.$getsearchstockvendordeatils[0]['previous_stock'].' </td>
                 </tr>
             </table>
   
@@ -18948,10 +18948,10 @@ public function printstock($stock_id){
 
             <table style=" width: 100%;border-collapse: collapse;border: #ccc 1px solid;font-family:cambria;font-size:12px">
                 <tr style="border: 1px solid black;">
-                        <td style="border: 1px solid black;padding-left: 10px;">
+                        <td style="border: 1px solid black;padding: 10px;">
                             <p><b>Invoice Qty In Pcs :</b>'.$invoice_qty_in_pcs.'</p>    
                         </td>  
-                        <td style="border: 1px solid black;padding-left: 10px;">
+                        <td style="border: 1px solid black;padding: 10px;">
                             <p><b>Actual Recived Qty In Pcs :</b>'.$actual_received_qty_in_pcs.'</p>    
                         </td> 
                 </tr>
@@ -18961,7 +18961,7 @@ public function printstock($stock_id){
             
             <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:12px">
                 <tr style="border: 1px solid black;">
-                    <th align="left" style="border: 1px solid black;text-align:center;padding: 10px;" margin-bottom: 10%;>Rejection Number</th>
+                    <th align="left" style="border: 1px solid black;text-align:center;padding: 10px;" margin-bottom: 10%;>Sr No</th>
                     <th align="left" style="border: 1px solid black;text-align:center;padding: 10px;" margin-bottom: 10%;>Rejection Reason</th>
                     <th align="left" style="border: 1px solid black;text-align:center;padding: 10px;" margin-bottom: 10%;>Rejection Qty in Pcs</th>
                     <th align="left" style="border: 1px solid black;text-align:center;padding: 10px;" margin-bottom: 10%;>Rejection Qty in Kgs</th>
@@ -18973,10 +18973,10 @@ public function printstock($stock_id){
 
              <table style=" width: 100%;border-collapse: collapse;border: #ccc 1px solid;font-family:cambria;font-size:12px">
                 <tr style="border: 1px solid black;">
-                        <td style="border: 1px solid black;padding-left: 10px;">
+                        <td style="border: 1px solid black;padding: 10px;">
                             <p><b>Total Rejected Qty Pcs :</b>'.round($rejected_qty_in_pcs,3).'</p>    
                         </td>  
-                        <td style="border: 1px solid black;padding-left: 10px;">
+                        <td style="border: 1px solid black;padding: 10px;">
                             <p><b>Total Rejected Qty Kgs :</b>'.round($rejected_qty_in_kgs,3).'</p>    
                         </td> 
                 </tr>
@@ -19376,10 +19376,6 @@ public function updatestockaftercalculation(){
         }
 
 }
-
-
-
-
 
 
 
