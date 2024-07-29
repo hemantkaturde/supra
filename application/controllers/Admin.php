@@ -18929,7 +18929,7 @@ public function printstock($stock_id){
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$k.'</td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['packing_instrauction_id'].'</td> 
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['buyer_invoice_date'].'</td>
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['export_qty_in_kgs'].'</td> 
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.number_format($value['export_qty_in_kgs'],2).'</td> 
                 </tr>';
 
                  $export_qty_in_pcs+=$value['export_qty_in_kgs'];
@@ -18943,7 +18943,7 @@ public function printstock($stock_id){
     // $html = $this->load->view('html_to_pdf',[],true);
     $html = '<table style=" width: 100%;text-align: left;border-collapse: collapse;border: #cccccc 0px solid;font-family:cambria;">
                 <tr>
-                   <td><b>Vendor Name : </b>'.$getsearchstockvendordeatils[0]['vendor_name'].str_repeat('&nbsp;', 10).str_repeat('&nbsp;', 10).str_repeat('&nbsp;', 10).str_repeat('&nbsp;', 10).str_repeat('&nbsp;', 10).str_repeat('&nbsp;', 10).' <b>Previous Balence : </b>'.$getsearchstockvendordeatils[0]['previous_stock'].'</td>
+                   <td><b>Vendor Name : </b>'.$getsearchstockvendordeatils[0]['vendor_name'].str_repeat('&nbsp;', 10).str_repeat('&nbsp;', 10).str_repeat('&nbsp;', 10).str_repeat('&nbsp;', 10).str_repeat('&nbsp;', 10).' <b>Previous Balence : </b>'.$getsearchstockvendordeatils[0]['previous_stock'].'</td>
                 </tr>
                 <tr>
                   <td><b>Part Description  : </b>'.$getsearchstockvendordeatils[0]['description'].' </td>
