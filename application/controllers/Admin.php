@@ -18875,6 +18875,8 @@ public function printstock($stock_id){
     $getsearchstockvendordeatils= $this->admin_model->getsearchstockvendordeatils($stock_id);
     $getsearchstockformdataforprint = $this->admin_model->getsearchstockformdataforprint($stock_id,$getsearchstockvendordeatils[0]['part_number_id']);
     $getexportrejecteditemdataforprint  = $this->admin_model->getexportrejecteditemdataforprint($getsearchstockvendordeatils[0]['vendor_po_item_id'],$getsearchstockvendordeatils[0]['vendor_po_id']);
+    $getexportrecordsitemdataforprint = $this->admin_model->getexportrecordsitemdataforprint($getsearchstockvendordeatils[0]['buyer_po_id'],$getsearchstockvendordeatils[0]['vendor_po_id']);
+
 
     $CartItem = "";
     $i=1;
@@ -18914,6 +18916,24 @@ public function printstock($stock_id){
                  $rejected_qty_in_pcs+=$value['qty_In_pcs'];
                  $rejected_qty_in_kgs+=$value['qty_In_kgs'];;
             $j++;       
+    }
+
+
+    
+    $CartItemExport = "";
+    $k=1;
+    $export_qty_in_pcs =0;
+    foreach ($getexportrecordsitemdataforprint as $key => $value) {
+        $CartItemExport .= '
+                <tr style="style=border-left: 1px solid black;border-right: 1px solid black;">
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$k.'</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['packing_instrauction_id'].'</td> 
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['buyer_invoice_date'].'</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['export_qty_in_kgs'].'</td> 
+                </tr>';
+
+                 $export_qty_in_pcs+=$value['export_qty_in_kgs'];
+            $k++;       
     }
 
 
@@ -18970,7 +18990,6 @@ public function printstock($stock_id){
                 '.$CartItemRejection.' 
             </table>
 
-
              <table style=" width: 100%;border-collapse: collapse;border: #ccc 1px solid;font-family:cambria;font-size:12px">
                 <tr style="border: 1px solid black;">
                         <td style="border: 1px solid black;padding: 10px;">
@@ -18978,6 +18997,30 @@ public function printstock($stock_id){
                         </td>  
                         <td style="border: 1px solid black;padding: 10px;">
                             <p><b>Total Rejected Qty Kgs :</b>'.round($rejected_qty_in_kgs,3).'</p>    
+                        </td> 
+                </tr>
+            </table>
+
+
+            <h4>Export Item Details </h4>
+            
+            <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:12px">
+                <tr style="border: 1px solid black;">
+                    <th align="left" style="border: 1px solid black;text-align:center;padding: 10px;" margin-bottom: 10%;>Sr No</th>
+                    <th align="left" style="border: 1px solid black;text-align:center;padding: 10px;" margin-bottom: 10%;>Export Invoice No.</th>
+                    <th align="left" style="border: 1px solid black;text-align:center;padding: 10px;" margin-bottom: 10%;>Inv Date</th>
+                    <th align="left" style="border: 1px solid black;text-align:center;padding: 10px;" margin-bottom: 10%;>Export Qty In PCS</th>
+                </tr>
+                '.$CartItemExport.' 
+            </table>
+
+             <table style=" width: 100%;border-collapse: collapse;border: #ccc 1px solid;font-family:cambria;font-size:12px">
+                <tr style="border: 1px solid black;">
+                        <td style="border: 1px solid black;padding: 10px;">
+                            <p><b>Ready For Export In Pcs :</b>'.round($export_qty_in_pcs,3).'</p>    
+                        </td>  
+                        <td style="border: 1px solid black;padding: 10px;">
+                            <p><b>Balence Qty In Pcs :</b>'.round($export_qty_in_pcs,3).'</p>    
                         </td> 
                 </tr>
             </table>

@@ -7722,6 +7722,36 @@ class Admin_model extends CI_Model
         return $data;
     }
 
+
+    public function getexportrecordsitemdataforprint($buyer_po_number_id,$part_number_id){
+        $this->db->select(TBL_PACKING_INSTRACTION.'.packing_instrauction_id,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_date,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_qty,'.TBL_PACKING_INSTRACTION.'.buyer_po_date,'.TBL_FINISHED_GOODS.'.net_weight,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_number');
+        $this->db->join(TBL_PACKING_INSTRACTION, TBL_PACKING_INSTRACTION.'.id = '.TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_PACKING_INSTRACTION_DETAILS.'.part_number');
+        $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.status', 1);
+        $this->db->where(TBL_PACKING_INSTRACTION.'.buyer_po_number', $buyer_po_number_id);
+        $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.part_number', $part_number_id);
+        $this->db->order_by(TBL_PACKING_INSTRACTION_DETAILS.'.id','DESC');
+        $query = $this->db->get(TBL_PACKING_INSTRACTION_DETAILS);
+        $fetch_result = $query->result_array();
+
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['packing_instrauction_id'] =$value['buyer_invoice_number'];
+                $data[$counter]['buyer_invoice_date'] =$value['buyer_invoice_date'];
+                $data[$counter]['buyer_invoice_qty'] =$value['buyer_invoice_qty'];
+                $data[$counter]['export_qty_in_kgs'] = $value['buyer_invoice_qty'] *  $value['net_weight'];
+                //$data[$counter]['export_qty_in_kgs'] = '';
+                $data[$counter]['buyer_po_date'] =$value['buyer_invoice_date'];
+                $counter++; 
+            }
+        }
+        return $data;
+    }
+
     public function checkvendorpoisaredayexits($vendor_po_number){
         $this->db->select('count(*) as vendor_ids');
         $this->db->where(TBL_INCOMING_DETAILS.'.status', 1);
