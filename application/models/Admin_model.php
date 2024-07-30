@@ -7430,7 +7430,7 @@ class Admin_model extends CI_Model
 
     public function getsearchstockformdataforprint($sock_id,$part_number_id){
 
-        $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name,'.TBL_STOCKS_ITEM.'.f_g_order_qty,'.TBL_STOCKS_ITEM.'.invoice_number,'.TBL_STOCKS_ITEM.'.invoice_date,'.TBL_STOCKS_ITEM.'.invoice_qty_In_pcs,'.TBL_STOCKS_ITEM.'.invoice_qty_In_kgs,'.TBL_STOCKS_ITEM.'.lot_number,'.TBL_STOCKS_ITEM.'.actual_received_qty_in_pcs,'.TBL_STOCKS_ITEM.'.actual_received_qty_in_kgs,'.TBL_INCOMING_DETAILS_ITEM.'.lot_no as lotnumber,'.TBL_STOCKS_ITEM.'.part_number as search_stock_item_id,'.TBL_STOCKS_ITEM.'.item_remark');
+        $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name,'.TBL_STOCKS_ITEM.'.f_g_order_qty,'.TBL_STOCKS_ITEM.'.invoice_number,'.TBL_STOCKS_ITEM.'.invoice_date,'.TBL_STOCKS_ITEM.'.invoice_qty_In_pcs,'.TBL_STOCKS_ITEM.'.invoice_qty_In_kgs,'.TBL_STOCKS_ITEM.'.lot_number,'.TBL_STOCKS_ITEM.'.actual_received_qty_in_pcs,'.TBL_STOCKS_ITEM.'.actual_received_qty_in_kgs,'.TBL_INCOMING_DETAILS_ITEM.'.lot_no as lotnumber,'.TBL_STOCKS_ITEM.'.part_number as search_stock_item_id,'.TBL_STOCKS_ITEM.'.item_remark,'.TBL_STOCKS_ITEM.'.previous_balence');
         $this->db->join(TBL_STOCKS, TBL_STOCKS.'.stock_id  = '.TBL_STOCKS_ITEM.'.stock_form_id');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_STOCKS_ITEM.'.pre_vendor_name');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_STOCKS_ITEM.'.part_number');
@@ -7458,6 +7458,7 @@ class Admin_model extends CI_Model
                $data[$counter]['f_g_order_qty'] =$value['f_g_order_qty'];
                $data[$counter]['invoice_number'] =$value['invoice_number'];
                $data[$counter]['invoice_date'] =$value['invoice_date'];
+               $data[$counter]['previous_balence'] =$value['previous_balence'];
 
                if($value['invoice_qty_In_pcs']){
                    $invoice_qty_In_pcs =round($value['invoice_qty_In_pcs'], 2);
@@ -14699,7 +14700,7 @@ public function fetchserchstocksrportdata($params){
 
 public function getsearchstockvendordeatils($stock_id){
 
-    $this->db->select('*,'.TBL_BUYER_MASTER.'.buyer_name as by_name,'.TBL_VENDOR.'.vendor_name as ven_name,'.TBL_VENDOR_PO_MASTER.'.po_number as vpo_number,'.TBL_FINISHED_GOODS.'.part_number as fg_part_number,'.TBL_STOCKS_ITEM.'.id as search_stock_id,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date,'.TBL_STOCKS_ITEM.'.part_number as part_number_id,'.TBL_STOCKS.'.stock_id as stock_id_form,'.TBL_VENDOR_PO_MASTER_ITEM.'.id as vendor_po_item_id,'.TBL_STOCKS_ITEM.'.part_number as search_stock_item_id,'.TBL_VENDOR_PO_MASTER.'.id as vendor_po_id,'.TBL_BUYER_PO_MASTER.'.id  as buyer_po_id,'.TBL_STOCKS.'.remark as stock_remark,'.TBL_BUYER_PO_MASTER.'.buyer_po_number as original_po,'.TBL_FINISHED_GOODS.'.fin_id as finishgood_id,'.TBL_FINISHED_GOODS.'.name as description');
+    $this->db->select('*,'.TBL_BUYER_MASTER.'.buyer_name as by_name,'.TBL_VENDOR.'.vendor_name as ven_name,'.TBL_VENDOR_PO_MASTER.'.po_number as vpo_number,'.TBL_FINISHED_GOODS.'.part_number as fg_part_number,'.TBL_STOCKS_ITEM.'.id as search_stock_id,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date,'.TBL_STOCKS_ITEM.'.part_number as part_number_id,'.TBL_STOCKS.'.stock_id as stock_id_form,'.TBL_VENDOR_PO_MASTER_ITEM.'.id as vendor_po_item_id,'.TBL_STOCKS_ITEM.'.part_number as search_stock_item_id,'.TBL_VENDOR_PO_MASTER.'.id as vendor_po_id,'.TBL_BUYER_PO_MASTER.'.id  as buyer_po_id,'.TBL_STOCKS.'.remark as stock_remark,'.TBL_BUYER_PO_MASTER.'.buyer_po_number as original_po,'.TBL_FINISHED_GOODS.'.fin_id as finishgood_id,'.TBL_FINISHED_GOODS.'.name as description,'.TBL_FINISHED_GOODS.'.part_number as part_no');
     $this->db->join(TBL_STOCKS, TBL_STOCKS.'.stock_id = '.TBL_STOCKS_ITEM.'.stock_form_id');
     $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_STOCKS.'.buyer_po_number');
     $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.part_number_id = '.TBL_STOCKS_ITEM.'.part_number');

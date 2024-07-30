@@ -18892,6 +18892,7 @@ public function printstock($stock_id){
                 <tr style="style=border-left: 1px solid black;border-right: 1px solid black;">
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$i.'</td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['lot_number'].'</td> 
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['previous_balence'].'</td> 
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['invoice_qty_In_pcs'].'</td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['actual_received_qty_in_pcs'].'</td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['invoice_number'].'</td> 
@@ -18948,13 +18949,19 @@ public function printstock($stock_id){
     // $html = $this->load->view('html_to_pdf',[],true);
     $html = '<table style=" width: 100%;text-align: left;border-collapse: collapse;border: #cccccc 0px solid;font-family:cambria;">
                 <tr>
-                   <td><b>Vendor Name : </b>'.$getsearchstockvendordeatils[0]['vendor_name'].str_repeat('&nbsp;', 10).str_repeat('&nbsp;', 10).str_repeat('&nbsp;', 10).str_repeat('&nbsp;', 10).str_repeat('&nbsp;', 10).' <b>Previous Balence : </b>'.$getsearchstockvendordeatils[0]['previous_stock'].'</td>
+                   <td><b>Vendor Name : </b>'.$getsearchstockvendordeatils[0]['vendor_name'].'</td>
+                </tr>
+                <tr>
+                  <td><b>Part Number  : </b>'.$getsearchstockvendordeatils[0]['part_no'].' </td>
                 </tr>
                 <tr>
                   <td><b>Part Description  : </b>'.$getsearchstockvendordeatils[0]['description'].' </td>
                 </tr>
                  <tr>
-                  <td><b>PO Number    : </b>'.$getsearchstockvendordeatils[0]['vpo_number'].str_repeat('&nbsp;', 10).str_repeat('&nbsp;', 10).str_repeat('&nbsp;', 10).str_repeat('&nbsp;', 10).str_repeat('&nbsp;', 10).str_repeat('&nbsp;', 10).str_repeat('&nbsp;', 7).' <b>PO Qty : </b>'.$getsearchstockvendordeatils[0]['previous_stock'].' </td>
+                  <td><b>PO Number : </b>'.$getsearchstockvendordeatils[0]['vpo_number'].'</td>
+                </tr>
+                <tr>
+                  <td><b>PO Number : </b>'.$getsearchstockvendordeatils[0]['vpo_number'].'</td>
                 </tr>
             </table>
   
@@ -18963,6 +18970,7 @@ public function printstock($stock_id){
                 <tr style="border: 1px solid black;">
                     <th align="left" style="border: 1px solid black;text-align:center;padding: 10px;" margin-bottom: 10%;>Sr No</th>
                     <th align="left" style="border: 1px solid black;text-align:center;padding: 10px;" margin-bottom: 10%;>Lot Number</th>
+                    <th align="left" style="border: 1px solid black;text-align:center;padding: 10px;" margin-bottom: 10%;>Previous Balance</th>
                     <th align="left" style="border: 1px solid black;text-align:center;padding: 10px;" margin-bottom: 10%;>Invoice Qty In PCS</th>
                     <th align="left" style="border: 1px solid black;text-align:center;padding: 10px;" margin-bottom: 10%;>Actual Received Qty In PCS</th>
                     <th align="left" style="border: 1px solid black;text-align:center;padding: 10px;" margin-bottom: 10%;>Invoice Number</th>  
