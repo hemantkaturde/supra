@@ -8920,6 +8920,9 @@ class Admin extends BaseController
 
         $data['getpreviousstock']= $this->admin_model->getpreviousstock($data['getsearchstockvendordeatils'][0]['part_number_id'],$data['getsearchstockvendordeatils'][0]['stock_id']);
 
+
+
+        
         $this->loadViews("masters/searchstock", $this->global, $data, NULL);  
     }
 
