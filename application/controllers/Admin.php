@@ -8694,7 +8694,7 @@ class Admin extends BaseController
                     $getAllitemcountofactualrecivedqty = $this->admin_model->getAllitemcountofactualrecivedqty($stock_id);
                     $update_current_stock = $this->admin_model->update_current_stock($getAllitemcountofactualrecivedqty['actual_received_qty_in_pcs'],$getAllitemcountofactualrecivedqty['part_number']);
 
-                        
+                    
                 }else{
                     $data = array(
                         'stock_id_number' => trim($this->input->post('stock_id')),
@@ -8729,8 +8729,7 @@ class Admin extends BaseController
                     if($update_last_inserted_id_stock_from){
 
                             /*get Iteam actual recived qty for stock Update*/
-
-                            $getAllitemcountofactualrecivedqty = $this->admin_model->getAllitemcountofactualrecivedqty($savestockform);
+                            $getAllitemcountofactualrecivedqty = $this->admin_model->getAllitemcountofactualrecivedqty($savestockform);  
                             $update_current_stock = $this->admin_model->update_current_stock($getAllitemcountofactualrecivedqty['actual_received_qty_in_pcs'],$getAllitemcountofactualrecivedqty['part_number']);
 
                             if($update_current_stock ){

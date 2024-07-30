@@ -14743,27 +14743,27 @@ public function  getAllitemcountofactualrecivedqty($savestockformid){
 public function update_current_stock($actual_received_qty_in_pcs,$fin_id){
 
     
-    $this->db->select('sum(actual_received_qty_in_pcs) as actual_received_qty_in_pcs');
-    $this->db->where(TBL_STOCKS_ITEM.'.part_number', $fin_id); 
-    $query = $this->db->get(TBL_STOCKS_ITEM);
-    $fetch_result1 = $query->row_array();
+    // $this->db->select('sum(actual_received_qty_in_pcs) as actual_received_qty_in_pcs');
+    // $this->db->where(TBL_STOCKS_ITEM.'.part_number', $fin_id); 
+    // $query = $this->db->get(TBL_STOCKS_ITEM);
+    // $fetch_result1 = $query->row_array();
     
-    $current_stock = $fetch_result1['actual_received_qty_in_pcs'];
+    // $current_stock = $fetch_result1['actual_received_qty_in_pcs'];
 
 
-    // $this->db->select('current_stock');
-    // $this->db->where(TBL_FINISHED_GOODS.'.fin_id', $fin_id); 
-    // $this->db->where(TBL_FINISHED_GOODS.'.status', 1);
-    // $query = $this->db->get(TBL_FINISHED_GOODS);
-    // $fetch_result = $query->row_array();
+    $this->db->select('current_stock');
+    $this->db->where(TBL_FINISHED_GOODS.'.fin_id', $fin_id); 
+    $this->db->where(TBL_FINISHED_GOODS.'.status', 1);
+    $query = $this->db->get(TBL_FINISHED_GOODS);
+    $fetch_result = $query->row_array();
 
-    // if($fetch_result['current_stock']){
-    //     $previous_stock = $fetch_result['current_stock'];
-    // }else{
-    //     $previous_stock = 0;
-    // }
+    if($fetch_result['current_stock']){
+        $previous_stock = $fetch_result['current_stock'];
+    }else{
+        $previous_stock = 0;
+    }
    
-    // $current_stock = $previous_stock + $actual_received_qty_in_pcs;
+    $current_stock = $previous_stock + $actual_received_qty_in_pcs;
     $data = array(
         'current_stock' =>$current_stock
     );
