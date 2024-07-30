@@ -8692,7 +8692,7 @@ class Admin extends BaseController
                     $savestockform= $this->admin_model->savestockform($stock_id,$data);
 
                     $getAllitemcountofactualrecivedqty = $this->admin_model->getAllitemcountofactualrecivedqty($stock_id);
-                    $update_current_stock = $this->admin_model->update_current_stock(trim($this->input->post('actual_received_qty_in_pcs')),$getAllitemcountofactualrecivedqty['part_number']);
+                    $update_current_stock = $this->admin_model->update_current_stock($getAllitemcountofactualrecivedqty['actual_received_qty_in_pcs'],$getAllitemcountofactualrecivedqty['part_number']);
 
                     
                 }else{
