@@ -16,7 +16,7 @@
 // 			$(".datepicker").datepicker({ 
 // 				// minDate: 0,
 // 				todayHighlight: true,
-//                 dateFormat: 'yy-mm-dd',
+//                  dateFormat: 'yy-mm-dd',
 // 				startDate: new Date()
 // 			});
 // 		});
@@ -17619,7 +17619,7 @@
 		});
 
 		$("#to_date").datepicker({
-			        dateFormat: 'yy-mm-dd',
+			         dateFormat: 'yy-mm-dd',
 					controlType: 'select',
 					oneLine: true,
 					changeMonth: true,

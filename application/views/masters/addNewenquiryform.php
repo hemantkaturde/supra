@@ -585,7 +585,7 @@
    $(".datepicker").datepicker({ 
    	// minDate: 0,
    	todayHighlight: true,
-                dateFormat: 'yy-mm-dd',
+                 dateFormat: 'yy-mm-dd',
    	startDate: new Date()
    });
    });
