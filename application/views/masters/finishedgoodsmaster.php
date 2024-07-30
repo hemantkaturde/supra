@@ -37,7 +37,7 @@
                                         <th>SAC</th>
                                         <th>Drawing Number</th>
                                         <th>Current Stock</th>
-                                        <th>Previous Stock</th>
+                                        <!-- <th>Previous Stock</th> -->
                                         <th>Action</th>
                                     </tr>
                                 </thead>

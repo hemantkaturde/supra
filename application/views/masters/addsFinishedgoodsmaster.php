@@ -62,13 +62,13 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6">
+                                    <!-- <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="previous_stock">Previous Stock </label>
                                             <input type="number" class="form-control" id="previous_stock" name="previous_stock">
                                             <p class="error previous_stock_error"></p>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
 
 

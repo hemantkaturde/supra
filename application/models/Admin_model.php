@@ -507,7 +507,7 @@ class Admin_model extends CI_Model
             $this->db->or_where(TBL_FINISHED_GOODS.".groass_weight LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_FINISHED_GOODS.".net_weight LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_FINISHED_GOODS.".current_stock LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_FINISHED_GOODS.".previous_stock LIKE '%".$params['search']['value']."%'");
+            // $this->db->or_where(TBL_FINISHED_GOODS.".previous_stock LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_FINISHED_GOODS.".drawing_number LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_FINISHED_GOODS.".sac LIKE '%".$params['search']['value']."%')");
         }
@@ -529,7 +529,7 @@ class Admin_model extends CI_Model
             $this->db->or_where(TBL_FINISHED_GOODS.".groass_weight LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_FINISHED_GOODS.".net_weight LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_FINISHED_GOODS.".current_stock LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_FINISHED_GOODS.".previous_stock LIKE '%".$params['search']['value']."%'");
+            // $this->db->or_where(TBL_FINISHED_GOODS.".previous_stock LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_FINISHED_GOODS.".drawing_number LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_FINISHED_GOODS.".sac LIKE '%".$params['search']['value']."%')");
         }
@@ -552,7 +552,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['sac'] =  $value['sac'];
                 $data[$counter]['drawing_number'] =  $value['drawing_number'];
                 $data[$counter]['current_stock'] =  $value['current_stock'];
-                $data[$counter]['previous_stock'] =  $value['previous_stock'];
+                // $data[$counter]['previous_stock'] =  $value['previous_stock'];
                 $data[$counter]['action'] = '';
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."updateFinishedgoods/".$value['fin_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['fin_id']."' class='fa fa-trash-o deletefinishedgoodsdata' aria-hidden='true'></i>"; 
