@@ -14730,7 +14730,7 @@ public function getPreviouscustomerCompalinformnumber(){
 
 public function  getAllitemcountofactualrecivedqty($savestockformid){
 
-    $this->db->select('sum(actual_received_qty_in_pcs) as actual_received_qty_in_pcs,part_number');
+    $this->db->select('actual_received_qty_in_pcs as actual_received_qty_in_pcs,part_number');
     $this->db->where(TBL_STOCKS_ITEM.'.stock_form_id', $savestockformid); 
     $this->db->where(TBL_STOCKS_ITEM.'.status', 1);
     $this->db->order_by(TBL_STOCKS_ITEM.'.id','DESC');
