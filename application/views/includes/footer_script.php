@@ -16089,6 +16089,8 @@
 
 																					var previous_stock_bal = $('#previous_stock_bal').val();
 
+																					alert(previous_stock_bal);
+
 																					$('#balence_qty_in_kgs').val('');
 																					var precalculation_ready_for_export_kgs = (parseFloat(previous_stock_bal) + parseFloat(ready_for_exp_kgs)) - parseFloat(total_export_qty_kgs);
 
