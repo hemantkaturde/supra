@@ -16089,7 +16089,7 @@
 
 																					var previous_stock_bal = $('#previous_stock_bal').val();
 
-																					var plus_previous_bal = parseFloat(ready_for_exp_kgs) + parseFloat(previous_stock_bal);
+																					var plus_previous_bal = parseFloat(ready_for_exp_kgs);
 
 																					alert(plus_previous_bal);
 
