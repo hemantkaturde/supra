@@ -18961,7 +18961,7 @@ public function printstock($stock_id){
                   <td><b>PO Number : </b>'.$getsearchstockvendordeatils[0]['vpo_number'].'</td>
                 </tr>
                 <tr>
-                  <td><b>PO Number : </b>'.$getsearchstockvendordeatils[0]['vpo_number'].'</td>
+                  <td><b>PO Qty : </b>'.$getsearchstockvendordeatils[0]['vpo_number'].'</td>
                 </tr>
             </table>
   
