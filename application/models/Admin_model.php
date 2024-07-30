@@ -15122,7 +15122,7 @@ public function getpreviousstock($part_number_id,$stock_id){
     // $this->db->where(TBL_STOCKS.'.stock_id',$stock_id);
  
     // $this->db->order_by(TBL_STOCKS.'.stock_id','DESC');
-    // $this->db->limit(1);
+    $this->db->limit(1,1);
     $query = $this->db->get(TBL_STOCKS);
     $fetch_result = $query->row_array();
     return $fetch_result;
