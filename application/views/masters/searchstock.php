@@ -17,7 +17,7 @@
             </div>
             <div class="col-xs-6" style="display:flex">
                 <!-- <div><h2> <b>Previous Balance :</b> <?=$getpreviousstock['previous_stock'];?> </h2></div> -->
-                <div style="margin-top: 20px;margin-left: 207px;"><a href=<?=ADMIN_PATH.'printstock/'.$getsearchstockvendordeatils[0]['stock_id_form']?> style='cursor: pointer;' target='_blank'><button type="button" id="print_stock" class="btn btn-primary print_stock">Print Stock</button></a></div>
+                <div style="margin-top: 10px;margin-left: 500px;"><a href=<?=ADMIN_PATH.'printstock/'.$getsearchstockvendordeatils[0]['stock_id_form']?> style='cursor: pointer;' target='_blank'><button type="button" id="print_stock" class="btn btn-primary print_stock">Print Stock</button></a></div>
             </div>
         </div>
         <input type="hidden" class="form-control" id="vendor_po_id" name="vendor_po_id"  value="<?=$getsearchstockvendordeatils[0]['vendor_po_id'];?>" readonly>
@@ -125,6 +125,7 @@
                                         <th>Lot No</th>
                                         <th>Actual Received Qty In Pcs</th>
                                         <th>Actual Received Qty In Kgs</th>
+                                        <th>Previous Balance</th>
                                         <th>Remarks</th>
                                     </tr>
                                 </thead>

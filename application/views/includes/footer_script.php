@@ -15906,7 +15906,8 @@
 					 { "width": "5%", "targets": 7 },
 					 { "width": "10%", "targets": 8 },
 					 { "width": "15%", "targets": 9 },
-					 { "width": "15%", "targets": 10 }
+					 { "width": "15%", "targets": 10 },
+					 { "width": "15%", "targets": 11 }
 	            ],
 	            responsive: true,
 	            "oLanguage": {
