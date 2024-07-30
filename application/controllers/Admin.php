@@ -8922,7 +8922,7 @@ class Admin extends BaseController
 
 
 
-        
+
         $this->loadViews("masters/searchstock", $this->global, $data, NULL);  
     }
 
