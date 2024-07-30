@@ -27,7 +27,7 @@
         <input type="hidden" class="form-control" id="part_number_id" name="part_number_id"  value="<?=$getsearchstockvendordeatils[0]['search_stock_item_id'];?>" readonly>
         <input type="hidden" class="form-control" id="buyer_po_number_id" name="buyer_po_number_id"  value="<?=$getsearchstockvendordeatils[0]['buyer_po_id'];?>" readonly>
         <input type="hidden" class="form-control" id="finishgood_id" name="finishgood_id"  value="<?=$getsearchstockvendordeatils[0]['finishgood_id'];?>" readonly>
-        <input type="text" class="form-control" id="previous_stock_bal" name="previous_stock_bal"  value="<?=$getpreviousstock['previous_stock'];?>" readonly>
+        <input type="hidden" class="form-control" id="previous_stock_bal" name="previous_stock_bal"  value="<?=$getpreviousstock['previous_stock'];?>" readonly>
 
         <div class="row">
             <div class="col-md-2">
