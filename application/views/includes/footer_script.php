@@ -16090,7 +16090,7 @@
 																					var previous_stock_bal = $('#previous_stock_bal').val();
 
 																					$('#balence_qty_in_kgs').val('');
-																					var precalculation_ready_for_export_kgs = previous_stock_bal + parseFloat(ready_for_exp_kgs) - parseFloat(total_export_qty_kgs);
+																					var precalculation_ready_for_export_kgs = (parseFloat(previous_stock_bal) + parseFloat(ready_for_exp_kgs)) - parseFloat(total_export_qty_kgs);
 
 																					if(isNaN(precalculation_ready_for_export_kgs)){
 																						$('#balence_qty_in_kgs').val(0);
