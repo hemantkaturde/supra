@@ -16076,9 +16076,11 @@
 																						$('#ready_for_exp_kgs').val(ready_for_exp_kgs);
 																					}
 
+																					var previous_stock_bal = $('#previous_stock_bal').val();
+
 
 																					$('#balence_qty_in_pcs').val('');
-																					var precalculation_ready_for_export_pcs =  parseFloat(ready_for_exp_pcs) - parseFloat(exportitems_data.total_exp_qty_in_pcs);
+																					var precalculation_ready_for_export_pcs =  (parseFloat(previous_stock_bal) + parseFloat(ready_for_exp_pcs)) - parseFloat(exportitems_data.total_exp_qty_in_pcs);
 																					
 																					if(isNaN(precalculation_ready_for_export_pcs)){
 																					    $('#balence_qty_in_pcs').val(0);
@@ -16087,11 +16089,7 @@
 																					}
 
 
-																					var previous_stock_bal = $('#previous_stock_bal').val();
-
-																					var plus_previous_bal = parseFloat(total_export_qty_kgs);
-
-																					alert(plus_previous_bal);
+																				
 
 																					$('#balence_qty_in_kgs').val('');
 																					var precalculation_ready_for_export_kgs = (parseFloat(previous_stock_bal) + parseFloat(ready_for_exp_kgs)) - parseFloat(total_export_qty_kgs);
