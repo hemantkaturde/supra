@@ -2464,6 +2464,7 @@ class Admin_model extends CI_Model
         return $data;
 
     }
+    
 
 
     public function getVendoritemonlyforsyppliervendorcompaint($vendor_po_number){
@@ -2540,7 +2541,7 @@ class Admin_model extends CI_Model
     
             $this->db->where(TBL_FINISHED_GOODS.'.status',1);
             $this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
-            //$this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.id',$poitemid);
+            $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.id',$poitemid);
             $query = $this->db->get(TBL_FINISHED_GOODS);
             $data = $query->result_array();
             return $data;
