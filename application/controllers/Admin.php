@@ -9039,10 +9039,10 @@ class Admin extends BaseController
         echo json_encode($json_data);
     }
 
-    public function fetchrejecteditem($vendor_po_item_id,$vendor_po_id){
+    public function fetchrejecteditem($vendor_po_item_id,$vendor_po_id,$part_id){
         $params = $_REQUEST;
-        $totalRecords = $this->admin_model->getexportrejecteditemcount($params,$vendor_po_item_id,$vendor_po_id); 
-        $queryRecords = $this->admin_model->getexportrejecteditemdata($params,$vendor_po_item_id,$vendor_po_id); 
+        $totalRecords = $this->admin_model->getexportrejecteditemcount($params,$vendor_po_item_id,$vendor_po_id,$part_id); 
+        $queryRecords = $this->admin_model->getexportrejecteditemdata($params,$vendor_po_item_id,$vendor_po_id,$part_id); 
 
         $data = array();
         foreach ($queryRecords as $key => $value)

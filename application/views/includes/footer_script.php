@@ -16198,7 +16198,7 @@
 	            "bProcessing": true,
 	            "serverSide": true,
 	            "ajax":{
-                    url :"<?php echo base_url();?>admin/fetchrejecteditem/"+vendor_po_item_id+"/"+vendor_po_id,
+                    url :"<?php echo base_url();?>admin/fetchrejecteditem/"+vendor_po_item_id+"/"+vendor_po_id+"/"+part_number_id,
                     type: "post",
 	            },
 	        });
