@@ -8777,6 +8777,8 @@ class Admin_model extends CI_Model
     $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.status', 1);
     $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.vendor_po_id', $vendor_po_id);
     $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id', $vendor_po_item_id);
+    $this->db->where(TBL_FINISHED_GOODS.'.fin_id', 451);
+
     $this->db->order_by(TBL_REJECTION_FORM_REJECTED_ITEM.'.id ','DESC');
     $query = $this->db->get(TBL_REJECTION_FORM_REJECTED_ITEM);
     $fetch_result = $query->result_array();
