@@ -15080,7 +15080,15 @@ public function fetchseachbypartnumberreportdata($params,$part_number){
 }
 
 public function getsuppliervendorcomplaintdownalod($id){
-    $this->db->select('*,'.TBL_SUPPLIER_VENDOR_COMPALINT.'.id as suppliervendor_compalint_id');
+    $this->db->select(TBL_SUPPLIER_VENDOR_COMPALINT.'.*,'.TBL_SUPPLIER_VENDOR_COMPALINT.'.id as suppliervendor_compalint_id,'.TBL_SUPPLIER_VENDOR_COMPALINT.'.report_number,'.TBL_SUPPLIER.'.supplier_name,'.TBL_VENDOR.'.vendor_name,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_po,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po,'.TBL_FINISHED_GOODS.'.part_number as vendor_po_part,'.TBL_RAWMATERIAL.'.part_number as supplier_po_part');
+    $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_SUPPLIER_VENDOR_COMPALINT.'.supplier_id','left');
+    $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_SUPPLIER_VENDOR_COMPALINT.'.vendor_id','left');
+    $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_SUPPLIER_VENDOR_COMPALINT.'.supplier_po_id','left');
+    $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_SUPPLIER_VENDOR_COMPALINT.'.vendor_po_id','left');
+    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_SUPPLIER_VENDOR_COMPALINT.'.vendor_part_number_id','left');
+    $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_SUPPLIER_VENDOR_COMPALINT.'.supplier_part_number_id','left');
+
+
     $this->db->where(TBL_SUPPLIER_VENDOR_COMPALINT.'.id',$id);
     $query = $this->db->get(TBL_SUPPLIER_VENDOR_COMPALINT);
     $fetch_result = $query->result_array();

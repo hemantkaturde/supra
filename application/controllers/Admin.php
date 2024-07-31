@@ -19084,19 +19084,19 @@ public function downlaodsuppliervendorcomplaint($id){
          <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
             <tr style="border: 1px solid black;" valign="top">
                 <td width="25%" style="padding: 5px;text-align: left;">
-                    <p>CUSTOMER NAME: </p>
+                    <p>SUPPLIER/VENDOR Name: </p>
                 </td> 
 
                 <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
-                    <p>'.$getsuppliervendorcomplaintdownalod[0]['buyer_name'].' </p>
+                    <p>'.$getsuppliervendorcomplaintdownalod[0]['supplier_name'].$getsuppliervendorcomplaintdownalod[0]['vendor_name'].' </p>
                 </td>
 
                 <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
-                    <p>CUSTOMER PO:</p>
+                    <p>SUPPLIER/VENDOR PO:</p>
                 </td>
 
                 <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
-                    <p>'.$getcustomercomplaintdetailsfordownalod[0]['sales_order_number'].' </p>
+                    <p>'.$getsuppliervendorcomplaintdownalod[0]['supplier_po'].$getsuppliervendorcomplaintdownalod[0]['vendor_po'].' </p>
                 </td>
             </tr>
         </table>
@@ -19109,7 +19109,7 @@ public function downlaodsuppliervendorcomplaint($id){
                 </td> 
 
                 <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
-                    <p>'.$getcustomercomplaintdetailsfordownalod[0]['part_number'].' </p>
+                    <p>'.$getsuppliervendorcomplaintdownalod[0]['vendor_po_part'].$getsuppliervendorcomplaintdownalod[0]['supplier_po_part'].' </p>
                 </td>
 
                 <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
@@ -19117,7 +19117,7 @@ public function downlaodsuppliervendorcomplaint($id){
                 </td>
 
                 <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
-                    <p>'.$getcustomercomplaintdetailsfordownalod[0]['name'].' </p>
+                    <p>'.$getsuppliervendorcomplaintdownalod[0]['part_description'].' </p>
                 </td>
             </tr>
         </table>
