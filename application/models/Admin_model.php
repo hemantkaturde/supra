@@ -11716,7 +11716,7 @@ public function getbuyerpoitemdetails($po_id){
     $this->db->select(TBL_FINISHED_GOODS.'.fin_id,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name,'.TBL_BUYER_PO_MASTER.'.buyer_po_number,'.TBL_BUYER_PO_MASTER.'.id as buyer_po_id,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date');
     $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
     $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id');
-    $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.pre_buyer_name',$po_id);
+    $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id',$po_id);
     $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.packaging_instraction','Open');
     $query = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
     $fetch_result = $query->result_array();
