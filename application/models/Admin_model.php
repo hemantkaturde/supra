@@ -2855,7 +2855,6 @@ class Admin_model extends CI_Model
         $this->db->where(TBL_VENDOR_PO_MASTER.'.id',$vendor_po_number);
         $query = $this->db->get(TBL_VENDOR_PO_MASTER);
         $data = $query->result_array();
-        $str = $this->db->last_query();
         return $data;
 
 
