@@ -3873,6 +3873,8 @@ class Admin_model extends CI_Model
                 $data[$counter]['buyer_po'] = $value['sales_order_number'].' - '.$value['buyer_po_number'];
                 $data[$counter]['buyer_po_date'] = $value['buyer_po_date'];
                 $data[$counter]['action'] = '';
+
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewpackinginstraction/".$value['packinginstarctionid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editpackinginstraction/".$value['packinginstarctionid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addpackinginstractiondetails/".$value['packinginstarctionid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['packinginstarctionid']."' class='fa fa-trash-o deletepackinginstraction' aria-hidden='true'></i>  &nbsp ";
@@ -13849,7 +13851,8 @@ public function fetchadebitnotedata($params){
                 $data[$counter]['debit_amount'] = $value['debit_amount'];
                 $data[$counter]['payable_amount'] = $value['payable_amount'];
                 $data[$counter]['action'] .='';
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editchadebitnote/".$value['debit_note_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewchadebitnote/".$value['debit_note_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editchadebitnote/".$value['debit_note_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>  &nbsp";
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downlaodchadebitnote/".$value['debit_note_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['debit_note_id']."' class='fa fa-trash-o deletechadebitnote' aria-hidden='true'></i>"; 
                 $counter++; 

@@ -495,6 +495,9 @@ $route['printstock/(:any)'] = "admin/printstock/$1";
 $route['downlaodsuppliervendorcomplaint/(:any)'] = "admin/downlaodsuppliervendorcomplaint/$1";
 
 
+$route['viewpackinginstraction/(:any)'] = "admin/viewpackinginstraction/$1";
+$route['viewchadebitnote/(:any)'] = "admin/viewchadebitnote/$1";
+
 
 
 

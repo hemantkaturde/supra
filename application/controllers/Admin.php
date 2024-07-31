@@ -5886,6 +5886,20 @@ class Admin extends BaseController
 
     }
 
+
+    public function viewpackinginstraction($packinginstractionid){
+
+        $process = 'Edit Packing Instraction Details';
+        $processFunction = 'Admin/addpackinginstractiondetails';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Edit Packing Instraction Details';
+        $this->global['packinginstarctionid'] = $packinginstractionid;
+        $data['getdetailsofpackinginsraction'] =  $this->admin_model->getdetailsofpackinginsraction(trim($packinginstractionid));
+        $data['buyerList']= $this->admin_model->fetchAllbuyerList();
+        $this->loadViews("masters/viewpackinginstractiondetails", $this->global, $data, NULL);  
+
+}
+
     public function updatepackinginstraction(){
 
         $post_submit = $this->input->post();
@@ -17067,6 +17081,18 @@ public function editchadebitnote($id){
     $data['getcurrentorderdetails']= $this->admin_model->getcurrentorderdetails($id);
     $data['getchamaster']= $this->admin_model->getchamaster();
     $this->loadViews("masters/editchadebitnote", $this->global, $data, NULL);
+}
+
+public function viewchadebitnote($id){
+
+    $process = 'Edit CHA Debit Note';
+    $processFunction = 'Admin/editchadebitnote';
+    $this->logrecord($process,$processFunction);
+    $this->global['pageTitle'] = 'Edit CHA Debit Note';
+    $data['getchadebitnotedetails'] = $this->admin_model->getchadebitnotedetails($id);
+    $data['getcurrentorderdetails']= $this->admin_model->getcurrentorderdetails($id);
+    $data['getchamaster']= $this->admin_model->getchamaster();
+    $this->loadViews("masters/viewchadebitnote", $this->global, $data, NULL);
 }
 
 public function salestrackingexcelreport(){

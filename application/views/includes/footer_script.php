@@ -20084,7 +20084,7 @@
 						{ "width": "10%", "targets": 2 },
 						{ "width": "2%", "targets": 3 },
 						{ "width": "2%", "targets": 4 },
-						{ "width": "2%", "targets": 5 },
+						{ "width": "6%", "targets": 5 },
 					
 					],
 					responsive: true,
