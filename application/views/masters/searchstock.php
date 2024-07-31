@@ -6,9 +6,7 @@
             <small>Search</small>
         </h1>
     </section>
-
-    <?php  print_r($getsearchstockvendordeatils[0]); exit; ?>
-
+    
     <section class="content">
         <div class="row">
             <div class="col-xs-6 text-left">
