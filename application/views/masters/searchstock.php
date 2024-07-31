@@ -103,7 +103,7 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="buyer_order_qty">Buyer Order Qty</label>
-                    <input type="text" class="form-control" id="buyer_order_qty" name="buyer_order_qty" value="<?=$getsearchstockvendordeatils[0]['buyer_order_qty'];?>"  style="background: #FFF;" readonly>
+                    <input type="text" class="form-control" id="buyer_order_qty" name="buyer_order_qty" value="<?=$getsearchstockvendordeatils[0]['buyer_order_qty_buyeritem'];?>"  style="background: #FFF;" readonly>
                 </div>
             </div>  
         </div>
