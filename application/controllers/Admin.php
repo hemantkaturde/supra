@@ -18899,10 +18899,12 @@ public function printstock($stock_id){
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['invoice_date'].'</td>    
                 </tr>';
                 $invoice_qty_in_pcs+=$value['invoice_qty_In_pcs'];
-                $actual_received_qty_in_pcs+=$value['actual_received_qty_in_pcs'];;
+                $actual_received_qty_in_pcs+=$value['actual_received_qty_in_pcs'];
+
+                $balence_qty = $actual_received_qty_in_pcs + $value['previous_balence'];
+
             $i++;       
     }
-
 
 
     $CartItemRejection = "";
@@ -19033,7 +19035,7 @@ public function printstock($stock_id){
                             <p><b>Ready For Export In Pcs : </b>'.round($actual_received_qty_in_pcs,3).'</p>    
                         </td>  
                         <td style="border: 1px solid black;padding: 10px;">
-                            <p><b>Balence Qty In Pcs : </b>'.round($export_qty_in_pcs,3).'</p>    
+                            <p><b>Balence Qty In Pcs : </b>'.round($balence_qty,3).'</p>    
                         </td> 
                 </tr>
             </table>
