@@ -7068,6 +7068,8 @@ class Admin_model extends CI_Model
     
         if($chekc_if_supplie_name_exits['supplier_po_number']){
 
+            print_r('in loop supplier');
+            exit;
          
 
             $this->db->select(TBL_FINISHED_GOODS.'.name,'.TBL_FINISHED_GOODS.'.net_weight,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_order_qty,'.TBL_BUYER_PO_MASTER_ITEM.'.order_oty as buyer_order_qty,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id,'.TBL_VENDOR_PO_MASTER_ITEM.'.vendor_qty as vendor_qtyvendor_qty,'.TBL_FINISHED_GOODS.'.hsn_code as finhsn_code,'.TBL_RAWMATERIAL.'.type_of_raw_material,'.TBL_FINISHED_GOODS.'.current_stock');
@@ -7085,7 +7087,8 @@ class Admin_model extends CI_Model
 
         }else{
 
-        
+            print_r('in loop sdsdsd');
+            exit;
 
             // $this->db->select(TBL_FINISHED_GOODS.'.name,'.TBL_FINISHED_GOODS.'.net_weight,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_order_qty,'.TBL_BUYER_PO_MASTER_ITEM.'.order_oty as buyer_order_qty,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id,'.TBL_VENDOR_PO_MASTER_ITEM.'.vendor_qty as vendor_qtyvendor_qty,'.TBL_FINISHED_GOODS.'.hsn_code as finhsn_code');
             // //$this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
