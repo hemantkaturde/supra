@@ -7,7 +7,7 @@
         </h1>
     </section>
 
-    <?php  print_r($getsearchstockvendordeatils); exit; ?>
+    <?php  print_r($getsearchstockvendordeatils[0]); exit; ?>
 
     <section class="content">
         <div class="row">
