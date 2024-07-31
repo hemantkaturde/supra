@@ -7,6 +7,8 @@
         </h1>
     </section>
 
+    <?php  print_r($getsearchstockvendordeatils); exit; ?>
+
     <section class="content">
         <div class="row">
             <div class="col-xs-6 text-left">
