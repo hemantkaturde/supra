@@ -18905,7 +18905,7 @@ public function printstock($stock_id){
 
             $i++;       
     }
-    $balence_qty = $previous_balence - $previous_balence;
+    $balence_qty = $previous_balence - $actual_received_qty_in_pcs;
 
     $CartItemRejection = "";
     $j=1;
