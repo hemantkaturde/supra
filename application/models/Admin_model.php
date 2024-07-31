@@ -12216,7 +12216,8 @@ public function getfetchsalestrackingReportdata($params){
             $data[$counter]['igst_rcved_date'] =  $value['igst_rcved_date'];
             $data[$counter]['no_of_ctns'] =  $value['no_of_ctns'];
             $data[$counter]['action'] = '';
-            $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editsalestrackingreport/".$value['sales_tracking_report']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";
+            $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewsalestrackingreport/".$value['sales_tracking_report']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>  &nbsp";
+            $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editsalestrackingreport/".$value['sales_tracking_report']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>  &nbsp";
             $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['sales_tracking_report']."' class='fa fa-trash-o deletesalestracking' aria-hidden='true'></i>"; 
 
             $counter++; 

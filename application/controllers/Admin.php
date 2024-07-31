@@ -15854,6 +15854,20 @@ public function editsalestrackingreport($id){
     $this->loadViews("masters/editsalestrackingreport", $this->global, $data, NULL);
 }
 
+public function viewsalestrackingreport($id){
+    $process = 'Edit Tracking Report';
+    $processFunction = 'Admin/viewsalestrackingreport';
+    $this->logrecord($process,$processFunction);
+    $this->global['pageTitle'] = 'Edit Tracking Report';
+    $data['getsalestrackingdetailsforedit']= $this->admin_model->getsalestrackingdetailsforedit($id);
+    $data['invoicenumberfromPackaging']= $this->admin_model->invoicenumberfromPackaging();
+    $data['getchamaster']= $this->admin_model->getchamaster();
+    $data['getcreditnotenumber']= $this->admin_model->getcreditnotenumber();
+    // $data['getdebitenotenumber']= $this->admin_model->getdebitenotenumber();
+    $data['getchadebitenotenumber']= $this->admin_model->getchadebitenotenumber();
+    $this->loadViews("masters/viewsalestrackingreport", $this->global, $data, NULL);
+}
+
 public function checkifpartnumberisalreadyexists(){
 
     $post_submit = $this->input->post();
