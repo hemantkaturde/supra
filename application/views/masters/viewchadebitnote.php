@@ -215,20 +215,6 @@ $(document).ready(function() {
                                                     <p class="error total_error"></p>
                                                 </div>
                                             </div>
-
-                                            <?php if($i==1){ ?>
-                                            <div class="col-md-1">
-                                                <div class="form-group" style="margin-top: 23px;">
-                                                    <input  readonly type="button" id="add_more" class="btn btn-primary"
-                                                        value="+ Add More" />
-                                                </div>
-                                            </div>
-
-                                            <?php }else{ ?>
-
-                                                <button type="button" name="remove" id="<?=$i++; ?>" class="btn btn-danger btn_remove">X</button>
-
-                                            <?php } ?>
                                             
                                         </div>
 
