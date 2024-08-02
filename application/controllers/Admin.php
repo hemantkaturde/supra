@@ -8931,12 +8931,7 @@ class Admin extends BaseController
         $this->global['pageTitle'] = 'Search Stock';
         $data['getsearchstockvendordeatils']= $this->admin_model->getsearchstockvendordeatils($stock_id);
         $data['getallitemsfromfgorrawmaterial']= $this->admin_model->getallitemsfromfgorrawmaterial();
-
         $data['getpreviousstock']= $this->admin_model->getpreviousstock($data['getsearchstockvendordeatils'][0]['part_number_id'],$data['getsearchstockvendordeatils'][0]['stock_id']);
-
-
-
-
         $this->loadViews("masters/searchstock", $this->global, $data, NULL);  
     }
 
