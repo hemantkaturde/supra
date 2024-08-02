@@ -471,6 +471,8 @@ $route['salestrackingexcelreport'] = "admin/salestrackingexcelreport";
 $route['paymentdetailsreport'] = "admin/paymentdetailsreport";
 $route['downlaodchadebitnote/(:any)'] = "admin/downlaodchadebitnote/$1";
 $route['uspincoming'] = "admin/uspincoming";
+$route['addnewuspincoming'] = "admin/addnewuspincoming";
+
 $route['customercompliant'] = "admin/customercompliant";
 $route['addnewcustomercomplaint'] = "admin/addnewcustomercomplaint";
 $route['getBuyerPonumberbyBuyeridforcoustomercomplint'] = "admin/getBuyerPonumberbyBuyeridforcoustomercomplint";

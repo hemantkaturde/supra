@@ -17956,6 +17956,108 @@ public function uspincoming(){
     $this->loadViews("masters/uspincoming", $this->global, $data, NULL); 
 }
 
+public function fetchuspincomingdetails(){
+
+    $params = $_REQUEST;
+    $totalRecords = $this->admin_model->getUspincomingdetailscount($params); 
+    $queryRecords = $this->admin_model->getUspincomingdetailsdata($params); 
+
+    $data = array();
+    foreach ($queryRecords as $key => $value)
+    {
+        $i = 0;
+        foreach($value as $v)
+        {
+            $data[$key][$i] = $v;
+            $i++;
+        }
+    }
+    $json_data = array(
+        "draw"            => intval( $params['draw'] ),   
+        "recordsTotal"    => intval( $totalRecords ),  
+        "recordsFiltered" => intval($totalRecords),
+        "data"            => $data   // total data array
+        );
+    echo json_encode($json_data);
+
+
+}
+
+
+public function addnewuspincoming(){
+
+    $post_submit = $this->input->post();
+    if($post_submit){
+        $save_chadebitnote_response = array();
+        
+        $this->form_validation->set_rules('cha_debit_note_number','Cha Debit Note Number','trim|required');
+        $this->form_validation->set_rules('cha_debit_note_date','Cha debit Note Date','trim');
+        $this->form_validation->set_rules('taxable_amount','Taxable Amount','trim');
+        $this->form_validation->set_rules('cgst_sgst','Cgst Sgst','trim');
+        $this->form_validation->set_rules('bill_amount','Bill Amount','trim');
+        $this->form_validation->set_rules('debit_amount','Debit Amount','trim');
+        $this->form_validation->set_rules('amount_payable_before_tds','Amount Payable Before TDS','trim');
+        $this->form_validation->set_rules('less_tds','Less TDS','trim');
+        $this->form_validation->set_rules('payable_amount','Payable Amount','trim');
+
+        if($this->form_validation->run() == FALSE)
+        {
+            $save_chadebitnote_response['status'] = 'failure';
+            $save_chadebitnote_response['error'] = array('cha_debit_note_number'=>strip_tags(form_error('cha_debit_note_number')), 'cha_debit_note_date'=>strip_tags(form_error('cha_debit_note_date')), 'taxable_amount'=>strip_tags(form_error('taxable_amount')), 'cgst_sgst'=>strip_tags(form_error('cgst_sgst')),'bill_amount'=>strip_tags(form_error('bill_amount')),'debit_amount'=>strip_tags(form_error('debit_amount')),'amount_payable_before_tds'=>strip_tags(form_error('amount_payable_before_tds')),'less_tds'=>strip_tags(form_error('less_tds')),'payable_amount'=>strip_tags(form_error('payable_amount')));
+        }else{
+
+            $data = array(
+                'cha_debit_number' =>trim($this->input->post('cha_debit_note_number')),
+                'cha_debit_note_date'=>trim($this->input->post('cha_debit_note_date')),
+                'cha_name' =>trim($this->input->post('cha_name')),
+                'subject'  =>trim($this->input->post('subject')),
+                'invoice_1'  =>trim($this->input->post('invoice_1')),
+                'invoice_2'  =>trim($this->input->post('invoice_2')),
+                'invoice_3'  =>trim($this->input->post('invoice_3')),
+                'date_1'  =>trim($this->input->post('date_1')),
+                'date_2'  =>trim($this->input->post('date_2')),
+                'date_3'  =>trim($this->input->post('date_3')),
+                'taxable_amount'=>trim($this->input->post('taxable_amount')),
+                'cgst_sgst'=>trim($this->input->post('cgst_sgst')),
+                'bill_amount'=>trim($this->input->post('bill_amount')),
+                'debit_amount'=>trim($this->input->post('debit_amount_total')),
+                'amount_payable_before_tds'=>trim($this->input->post('amount_payable_before_tds')),
+                'less_tds'=>trim($this->input->post('less_tds')),
+                'remark'=>trim($this->input->post('remark')),
+                'payable_amount'=>trim($this->input->post('payable_amount'))
+            );
+
+            if($this->input->post('cha_debit_note_id')){
+
+                $cha_debit_note_id = trim($this->input->post('cha_debit_note_id'));
+            }else{
+
+                $cha_debit_note_id = '';
+            }
+            
+            $savechadebitnote= $this->admin_model->savechadebitnote($cha_debit_note_id,$data);
+            $save_chadebitnote_response['status'] = 'success';
+            $save_chadebitnote_response['error'] = array('cha_debit_note_number'=>strip_tags(form_error('cha_debit_note_number')), 'cha_debit_note_date'=>strip_tags(form_error('cha_debit_note_date')), 'taxable_amount'=>strip_tags(form_error('taxable_amount')), 'cgst_sgst'=>strip_tags(form_error('cgst_sgst')),'bill_amount'=>strip_tags(form_error('bill_amount')),'debit_amount'=>strip_tags(form_error('debit_amount')),'amount_payable_before_tds'=>strip_tags(form_error('amount_payable_before_tds')),'less_tds'=>strip_tags(form_error('less_tds')),'payable_amount'=>strip_tags(form_error('payable_amount')));
+            
+                
+          }
+
+        echo json_encode($save_chadebitnote_response);
+
+    }else{
+            $process = 'Add New USP incoming';
+            $processFunction = 'Admin/addnewUspincoming';
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Add New USP incoming';
+            // $data['getchamaster']= $this->admin_model->getchamaster();
+            // $data['getPreviousCHAdebitnotnumber']= $this->admin_model->getPreviousCHAdebitnotnumber()[0];
+            $this->loadViews("masters/addnewUspincoming", $this->global, $data, NULL);
+
+    }
+
+}
+
+
 
 public function customercompliant(){
     $process = 'Customer Compliant Report';
