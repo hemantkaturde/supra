@@ -18049,8 +18049,10 @@ public function addnewuspincoming(){
             $processFunction = 'Admin/addnewUspincoming';
             $this->logrecord($process,$processFunction);
             $this->global['pageTitle'] = 'Add New USP incoming';
-            // $data['getchamaster']= $this->admin_model->getchamaster();
-            // $data['getPreviousCHAdebitnotnumber']= $this->admin_model->getPreviousCHAdebitnotnumber()[0];
+            $data['vendorList']= $this->admin_model->fetchALLvendorList();
+            $data['getUSPmasterlist']= $this->admin_model->getUSPmasterlist();
+
+            
             $this->loadViews("masters/addnewUspincoming", $this->global, $data, NULL);
 
     }
