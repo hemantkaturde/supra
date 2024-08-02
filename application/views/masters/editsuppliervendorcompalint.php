@@ -203,7 +203,7 @@
 
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="order_qty">Order Quality</label>
+                                            <label for="order_qty">Order Quantity</label>
                                             <input type="text" class="form-control" id="order_qty" value="<?=$getsuppliervendorcomplaintdata['order_qty']?>" name="order_qty">
                                             <p class="error order_qty_error"></p>
                                         </div>
@@ -211,7 +211,7 @@
 
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="total_failure_qty">Total Failure Quality</label>
+                                            <label for="total_failure_qty">Total Failure Quantity</label>
                                             <input type="text" class="form-control" id="total_failure_qty" value="<?=$getsuppliervendorcomplaintdata['total_failure_qty']?>" name="total_failure_qty">
                                             <p class="error total_failure_qty_error"></p>
                                         </div>

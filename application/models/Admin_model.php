@@ -15214,6 +15214,15 @@ public function updatestockaftercalculation($balence_qty_in_pcs,$finishgood_id,$
     }
 
 
+    public function fetchALLchallanList(){
+        $this->db->select('challan_id,challan_no');
+        $this->db->where(TBL_CHALLAN_FORM.'.status',1);
+        $this->db->order_by(TBL_CHALLAN_FORM.'.challan_id','DESC');
+        $query = $this->db->get(TBL_CHALLAN_FORM);
+        $fetch_result = $query->result_array();
+        return $fetch_result;
+    }
+
 }
 
 

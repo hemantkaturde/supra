@@ -87,7 +87,7 @@
 
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="usp_date">USP Date <span class="required">*</span></label>
+                                            <label for="usp_date">USP Incoming Date <span class="required">*</span></label>
                                             <?php 
                                         if($getStockforminformation[0]['pre_stock_date']){
                                             $usp_date= $getStockforminformation[0]['pre_stock_date'];
@@ -114,7 +114,11 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-12">
+                                </div>
+
+
+                                <div class="col-md-4">
+                                   <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="vendor_po">Vendor Name</label>
                                             <select class="form-control" name="vendor_po" id="vendor_po">
@@ -126,6 +130,20 @@
                                                 <?php } ?>
                                             </select>
                                             <p class="error vendor_po_error"></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="vendor_po_id">Vendor PO Number</label>
+                                            <select class="form-control" name="vendor_po_id" id="vendor_po_id">
+                                                <option st-id="" value="">Select Vendor PO Number</option>
+                                                <?php foreach ($vendorpoList as $key => $value) {?>
+                                                <option value="<?php echo $value['id']; ?>">
+                                                    <?php echo $value['po_number']; ?></option>
+                                                <?php } ?>
+                                            </select>
+                                            <p class="error vendor_po_id_error"></p>
                                         </div>
                                     </div>
 
@@ -143,34 +161,15 @@
                                             <p class="error vendor_name_error"></p>
                                         </div>
                                     </div>
-                                </div>
-
-
-                                <div class="col-md-4">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="vendor_name">Vendor PO Number</label>
-                                            <select class="form-control" name="vendor_name" id="vendor_name">
-                                                <option st-id="" value="">Select Vendor Name</option>
-                                                <?php foreach ($vendorList as $key => $value) {?>
-                                                <option value="<?php echo $value['ven_id']; ?>">
-                                                    <?php echo $value['vendor_name']; ?></option>
-                                                <?php } ?>
-                                            </select>
-                                            <p class="error vendor_name_error"></p>
-                                        </div>
-                                    </div>
-
 
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="challan_number">Challan Number</label>
                                             <select class="form-control" name="challan_number" id="challan_number">
                                                 <option st-id="" value="">Select Vendor Name</option>
-                                                <?php foreach ($vendorList as $key => $value) {?>
-                                                <option value="<?php echo $value['ven_id']; ?>"
-                                                    <?php if($getStockforminformation[0]['pre_vendor_name']==$value['ven_id']){ echo 'selected'; }?>>
-                                                    <?php echo $value['vendor_name']; ?></option>
+                                                <?php foreach ($challanList as $key => $value) {?>
+                                                <option value="<?php echo $value['challan_id']; ?>">
+                                                    <?php echo $value['challan_no']; ?></option>
                                                 <?php } ?>
                                             </select>
                                             <p class="error challan_number_error"></p>
@@ -194,12 +193,9 @@
                                             <p class="error vendor_challan_date_error"></p>
                                         </div>
                                     </div>
-
-
                                 </div>
 
                                 <div class="col-md-4">
-
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="report_by">Report By</label>

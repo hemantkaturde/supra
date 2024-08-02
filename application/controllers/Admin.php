@@ -18051,8 +18051,8 @@ public function addnewuspincoming(){
             $this->global['pageTitle'] = 'Add New USP incoming';
             $data['vendorList']= $this->admin_model->fetchALLvendorList();
             $data['getUSPmasterlist']= $this->admin_model->getUSPmasterlist();
-
-            
+            $data['vendorpoList']= $this->admin_model->fetchALLvendorpoList();
+            $data['challanList']= $this->admin_model->fetchALLchallanList();
             $this->loadViews("masters/addnewUspincoming", $this->global, $data, NULL);
 
     }
