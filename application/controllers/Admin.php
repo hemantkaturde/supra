@@ -19245,6 +19245,26 @@ public function downlaodsuppliervendorcomplaint($id){
             </tr>
         </table>
 
+         <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
+            <tr style="border: 1px solid black;" valign="top">
+                <td width="25%" style="padding: 5px;text-align: left;">
+                    <p>STAGE: </p>
+                </td> 
+
+                <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
+                    <p>'.$getsuppliervendorcomplaintdownalod[0]['stage'].' </p>
+                </td>
+
+                <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
+                    <p>CHALLAN NO:</p>
+                </td>
+
+                <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
+                    <p>'.$getsuppliervendorcomplaintdownalod[0]['challan_number'].' </p>
+                </td>
+            </tr>
+        </table>
+
 
         <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
             <tr style="border: 1px solid black;" valign="top">
@@ -19273,15 +19293,15 @@ public function downlaodsuppliervendorcomplaint($id){
                 </td> 
 
                 <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
-                    <p>'.$getcustomercomplaintdetailsfordownalod[0]['order_qty'].' </p>
+                    <p>'.$getsuppliervendorcomplaintdownalod[0]['order_qty'].' </p>
                 </td>
 
                 <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
-                    <p>DISPATCH QTY:</p>
+                    <p>RECIVED QTY:</p>
                 </td>
 
                 <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
-                    <p>'.$getcustomercomplaintdetailsfordownalod[0]['dispatch_qty'].' </p>
+                    <p>'.$getsuppliervendorcomplaintdownalod[0]['received_qty'].' </p>
                 </td>
             </tr>
         </table>
@@ -19290,31 +19310,11 @@ public function downlaodsuppliervendorcomplaint($id){
          <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
             <tr style="border: 1px solid black;" valign="top">
                 <td width="25%" style="padding: 5px;text-align: left;">
-                    <p>INVOICE NO: </p>
+                    <p>TOTAL QTY CHECKED: </p>
                 </td> 
 
                 <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
-                    <p>'.$getcustomercomplaintdetailsfordownalod[0]['invoice_no'].' </p>
-                </td>
-
-                <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
-                    <p>INVOICE DATE:</p>
-                </td>
-
-                <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
-                    <p>'.$getcustomercomplaintdetailsfordownalod[0]['invoice_date'].' </p>
-                </td>
-            </tr>
-        </table>
-
-         <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
-            <tr style="border: 1px solid black;" valign="top">
-                <td width="25%" style="padding: 5px;text-align: left;">
-                    <p>DOCUMENT DATE: </p>
-                </td> 
-
-                <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
-                    <p>'.$getcustomercomplaintdetailsfordownalod[0]['doc_complaint_date'].'</p>
+                    <p>'.$getsuppliervendorcomplaintdownalod[0]['total_quantity_checked'].'</p>
                 </td>
 
                 <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
@@ -19322,7 +19322,7 @@ public function downlaodsuppliervendorcomplaint($id){
                 </td>
 
                 <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
-                    <p>'.$getcustomercomplaintdetailsfordownalod[0]['toatal_failure_qty'].' </p>
+                    <p>'.$getsuppliervendorcomplaintdownalod[0]['total_failure_qty'].' </p>
                 </td>
             </tr>
         </table>
@@ -19337,7 +19337,7 @@ public function downlaodsuppliervendorcomplaint($id){
             <tr style="border: 1px solid black;" valign="top">
                 <td width="100%" style="padding: 5px;text-align: left;">
                        <p>'. str_repeat('&nbsp;', 5).'</p>
-                       <p>'. $getcustomercomplaintdetailsfordownalod[0]['problem_description'].'</p>
+                       <p>'. $getsuppliervendorcomplaintdownalod[0]['problem_description'].'</p>
                        <p>'. str_repeat('&nbsp;', 5).'</p>
                        <p>'. str_repeat('&nbsp;', 5).'</p>
                        <p>'. str_repeat('&nbsp;', 5).'</p>
@@ -19356,7 +19356,7 @@ public function downlaodsuppliervendorcomplaint($id){
             <tr style="border: 1px solid black;" valign="top">
                 <td width="100%" style="padding: 5px;text-align: left;">
                        <p>'. str_repeat('&nbsp;', 5).'</p>
-                       <p>'. $getcustomercomplaintdetailsfordownalod[0]['root_case'].'</p>
+                       <p>'. $getsuppliervendorcomplaintdownalod[0]['root_case'].'</p>
                        <p>'. str_repeat('&nbsp;', 5).'</p>
                        <p>'. str_repeat('&nbsp;', 5).'</p>
                        <p>'. str_repeat('&nbsp;', 5).'</p>
@@ -19375,7 +19375,7 @@ public function downlaodsuppliervendorcomplaint($id){
             <tr style="border: 1px solid black;" valign="top">
                 <td width="100%" style="padding: 5px;text-align: left;">
                        <p>'. str_repeat('&nbsp;', 5).'</p>
-                       <p>'. $getcustomercomplaintdetailsfordownalod[0]['corrective_action_taken'].'</p>
+                       <p>'. $getsuppliervendorcomplaintdownalod[0]['correction'].'</p>
                        <p>'. str_repeat('&nbsp;', 5).'</p>
                        <p>'. str_repeat('&nbsp;', 5).'</p>
                        <p>'. str_repeat('&nbsp;', 5).'</p>
@@ -19404,7 +19404,7 @@ public function downlaodsuppliervendorcomplaint($id){
             <tr style="border: 1px solid black;" valign="top">
                 <td width="60%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
                        <p>'. str_repeat('&nbsp;', 5).'</p>
-                       <p>'. $getcustomercomplaintdetailsfordownalod[0]['correction'].'</p>
+                       <p>'. $getsuppliervendorcomplaintdownalod[0]['corrective_action_taken'].'</p>
                        <p>'. str_repeat('&nbsp;', 5).'</p>
                        <p>'. str_repeat('&nbsp;', 5).'</p>
                        <p>'. str_repeat('&nbsp;', 5).'</p>
@@ -19412,7 +19412,7 @@ public function downlaodsuppliervendorcomplaint($id){
 
                 <td width="20%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
                        <p>'. str_repeat('&nbsp;', 5).'</p>
-                       <p>'. $getcustomercomplaintdetailsfordownalod[0]['corrective_action_taken_responsibility'].'</p>
+                       <p>'. $getsuppliervendorcomplaintdownalod[0]['responsibility_2'].'</p>
                        <p>'. str_repeat('&nbsp;', 5).'</p>
                        <p>'. str_repeat('&nbsp;', 5).'</p>
                        <p>'. str_repeat('&nbsp;', 5).'</p>
@@ -19420,7 +19420,7 @@ public function downlaodsuppliervendorcomplaint($id){
 
                 <td width="20%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
                        <p>'. str_repeat('&nbsp;', 5).'</p>
-                       <p>'. $getcustomercomplaintdetailsfordownalod[0]['corrective_action_taken_responsibility_date'].'</p>
+                       <p>'. $getsuppliervendorcomplaintdownalod[0]['date_2'].'</p>
                        <p>'. str_repeat('&nbsp;', 5).'</p>
                        <p>'. str_repeat('&nbsp;', 5).'</p>
                        <p>'. str_repeat('&nbsp;', 5).'</p>
@@ -19449,7 +19449,7 @@ public function downlaodsuppliervendorcomplaint($id){
             <tr style="border: 1px solid black;" valign="top">
                 <td width="60%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
                        <p>'. str_repeat('&nbsp;', 5).'</p>
-                       <p>'. $getcustomercomplaintdetailsfordownalod[0]['effective_action'].'</p>
+                       <p>'. $getsuppliervendorcomplaintdownalod[0]['effective_action'].'</p>
                        <p>'. str_repeat('&nbsp;', 5).'</p>
                        <p>'. str_repeat('&nbsp;', 5).'</p>
                        <p>'. str_repeat('&nbsp;', 5).'</p>
@@ -19457,7 +19457,7 @@ public function downlaodsuppliervendorcomplaint($id){
 
                 <td width="20%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
                        <p>'. str_repeat('&nbsp;', 5).'</p>
-                       <p>'. $getcustomercomplaintdetailsfordownalod[0]['responsibility'].'</p>
+                       <p>'. $getsuppliervendorcomplaintdownalod[0]['responsibility_1'].'</p>
                        <p>'. str_repeat('&nbsp;', 5).'</p>
                        <p>'. str_repeat('&nbsp;', 5).'</p>
                        <p>'. str_repeat('&nbsp;', 5).'</p>
@@ -19465,7 +19465,7 @@ public function downlaodsuppliervendorcomplaint($id){
 
                 <td width="20%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
                        <p>'. str_repeat('&nbsp;', 5).'</p>
-                       <p>'. $getcustomercomplaintdetailsfordownalod[0]['effective_date'].'</p>
+                       <p>'. $getsuppliervendorcomplaintdownalod[0]['date_1'].'</p>
                        <p>'. str_repeat('&nbsp;', 5).'</p>
                        <p>'. str_repeat('&nbsp;', 5).'</p>
                        <p>'. str_repeat('&nbsp;', 5).'</p>
@@ -19497,22 +19497,22 @@ public function downlaodsuppliervendorcomplaint($id){
            <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
             <tr style="border: 1px solid black;" valign="top">
                 <td width="25%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
-                       <p>'. $getcustomercomplaintdetailsfordownalod[0]['prepared_by'].'</p>
+                       <p>'. $getsuppliervendorcomplaintdownalod[0]['prepared_by'].'</p>
                        <p>'. str_repeat('&nbsp;', 5).'</p>
                 </td> 
 
                 <td width="25%" style="padding: 5px;text-align: center;border-right: #000000 1px solid">
-                       <p>'. $getcustomercomplaintdetailsfordownalod[0]['prepared_by_date'].'</p>
+                       <p>'. $getsuppliervendorcomplaintdownalod[0]['date_3'].'</p>
                        <p>'. str_repeat('&nbsp;', 5).'</p>
                 </td> 
 
                 <td width="25%" style="padding: 5px;text-align: center;border-right: #000000 1px solid">
-                       <p>'. $getcustomercomplaintdetailsfordownalod[0]['approved_by'].'</p>
+                       <p>'. $getsuppliervendorcomplaintdownalod[0]['apprroved_by'].'</p>
                        <p>'. str_repeat('&nbsp;', 5).'</p>
                 </td> 
 
                 <td width="25%" style="padding: 5px;text-align: center;border-right: #000000 1px solid">
-                       <p>'. $getcustomercomplaintdetailsfordownalod[0]['approved_by_date'].'</p>
+                       <p>'. $getsuppliervendorcomplaintdownalod[0]['date_4'].'</p>
                        <p>'. str_repeat('&nbsp;', 5).'</p>
                 </td> 
             </tr>
@@ -19527,7 +19527,7 @@ public function downlaodsuppliervendorcomplaint($id){
                 </td> 
 
                 <td width="50%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
-                   <p>'. $getcustomercomplaintdetailsfordownalod[0]['report_closed_by'].'</p>
+                   <p>'. $getsuppliervendorcomplaintdownalod[0]['report_close_by'].'</p>
                 </td> 
 
                 <td width="12.5%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
@@ -19535,10 +19535,46 @@ public function downlaodsuppliervendorcomplaint($id){
                 </td> 
 
                 <td width="12.5%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
-                     <p>'. $getcustomercomplaintdetailsfordownalod[0]['report_closed_by_date'].'</p>
+                     <p>'. $getsuppliervendorcomplaintdownalod[0]['date_5'].'</p>
                 </td> 
             </tr>
-         </table>';
+         </table>
+         
+
+           <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
+            <tr style="border: 1px solid black;" valign="top">
+                <td width="33.33%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
+                    <p>Accept with Deviation: </p>
+                </td> 
+
+                <td width="33.33%" style="padding: 5px;text-align: center;border-right: #000000 1px solid">
+                    <p>Do Not Accept With Deviation: </p>
+                </td> 
+
+                <td width="33.33%" style="padding: 5px;text-align: center;border-right: #000000 1px solid">
+                    <p>Remark: </p>
+                </td> 
+            </tr>
+         </table>
+
+          <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
+            <tr style="border: 1px solid black;" valign="top">
+                <td width="33.33%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
+                    <p>'.$getsuppliervendorcomplaintdownalod[0]['accept_with_deviation'].'</p>
+                </td> 
+
+                <td width="33.33%" style="padding: 5px;text-align: center;border-right: #000000 1px solid">
+                    <p>'.$getsuppliervendorcomplaintdownalod[0]['do_not_accept_with_deviation'].'</p>
+                </td> 
+
+                <td width="33.33%" style="padding: 5px;text-align: center;border-right: #000000 1px solid">
+                    <p>'.$getsuppliervendorcomplaintdownalod[0]['remark'].' </p>
+                </td> 
+            </tr>
+         </table>
+         
+         
+         ';
       
 
             // <p>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</p>

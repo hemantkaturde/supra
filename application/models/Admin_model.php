@@ -15096,8 +15096,6 @@ public function getsuppliervendorcomplaintdownalod($id){
     $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_SUPPLIER_VENDOR_COMPALINT.'.vendor_po_id','left');
     $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_SUPPLIER_VENDOR_COMPALINT.'.vendor_part_number_id','left');
     $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_SUPPLIER_VENDOR_COMPALINT.'.supplier_part_number_id','left');
-
-
     $this->db->where(TBL_SUPPLIER_VENDOR_COMPALINT.'.id',$id);
     $query = $this->db->get(TBL_SUPPLIER_VENDOR_COMPALINT);
     $fetch_result = $query->result_array();
