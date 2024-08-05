@@ -7666,19 +7666,6 @@ class Admin_model extends CI_Model
 
     public function getexportrejecteditemdata($params,$part_number,$vendor_po_id,$part_id){
 
-        print_r($part_number);
-
-        print_r('br');
-
-        print_r($vendor_po_id);
-
-        print_r('br');
-
-        print_r($part_id);
-        
-        exit;
-
-
         $this->db->select('*,'.TBL_FINISHED_GOODS.'.net_weight as fg_net_weight,'.TBL_REJECTION_FORM_REJECTED_ITEM.'.remark as remarksrej');
         $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
