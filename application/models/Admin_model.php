@@ -7676,6 +7676,12 @@ class Admin_model extends CI_Model
 
         $this->db->order_by(TBL_REJECTION_FORM_REJECTED_ITEM.'.id ','DESC');
         $query = $this->db->get(TBL_REJECTION_FORM_REJECTED_ITEM);
+
+        $str = $this->db->last_query();
+
+        print_r($str);
+        exit;
+
         $fetch_result = $query->result_array();
 
         $data = array();
