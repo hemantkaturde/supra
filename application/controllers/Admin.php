@@ -19174,12 +19174,10 @@ public function printstock($stock_id){
                             <p><b>Ready For Export In Pcs : </b>'.round($actual_received_qty_in_pcs,3).'</p>    
                         </td>  
                         <td style="border: 1px solid black;padding: 10px;">
-                            <p><b>Balence Qty In Pcs : </b>'.round($balence_qty,3).'</p>    
+                            <p><b>Balence Qty In Pcs : </b>500</p>    
                         </td> 
                 </tr>
-            </table>
-            
-            ';
+            </table>';
 
             // <p>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</p>
     $invoice_name =  'stock_print.pdf';
