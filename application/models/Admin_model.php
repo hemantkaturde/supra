@@ -7675,14 +7675,8 @@ class Admin_model extends CI_Model
         //$this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id',$part_number);
         $this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_id);
 
-
         $this->db->order_by(TBL_REJECTION_FORM_REJECTED_ITEM.'.id ','DESC');
         $query = $this->db->get(TBL_REJECTION_FORM_REJECTED_ITEM);
-
-        $str = $this->db->last_query();
-
-        print_r($str);
-        exit;
 
         $fetch_result = $query->result_array();
 
