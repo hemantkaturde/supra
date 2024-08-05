@@ -7670,7 +7670,7 @@ class Admin_model extends CI_Model
         $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
         $this->db->join(TBL_REJECTION_FORM, TBL_REJECTION_FORM.'.id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.rejection_form_id');
-        $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id',$part_number);
+        //$this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id',$part_number);
         // $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.vendor_po_id',$vendor_po_id);
         $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id',$part_number);
 
