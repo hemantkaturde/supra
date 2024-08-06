@@ -492,7 +492,7 @@
 
 
                                                         <div class="form-group row">
-                                                            <input type="text" class="form-control" id="balance_qty"
+                                                            <input type="hidden" class="form-control" id="balance_qty"
                                                                 name="balance_qty" readonly>
 
                                                             <label class="col-sm-3 col-form-label">FG Material Gross
