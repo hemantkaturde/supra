@@ -13516,8 +13516,7 @@ public function fetchproductionstatusreportdata($params,$vendor_name,$status,$pa
     $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id= '.TBL_VENDOR_PO_MASTER.'.id');
     $this->db->join(TBL_BUYER_MASTER, TBL_BILL_OF_MATERIAL_VENDOR.'.buyer_name= '.TBL_BUYER_MASTER.'.buyer_id');
     $this->db->join(TBL_FINISHED_GOODS, TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.part_number_id= '.TBL_FINISHED_GOODS.'.fin_id');
-    $this->db->join(TBL_VENDOR_PO_MASTER_ITEM.' as a', TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.part_number_id= a.part_number_id');
-
+    
 
     if($params['search']['value'] != "") 
     {
@@ -13552,8 +13551,13 @@ public function fetchproductionstatusreportdata($params,$vendor_name,$status,$pa
     $this->db->group_by(TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.id');
     $query = $this->db->get(TBL_BILL_OF_MATERIAL_VENDOR);
     //$fetch_result = $query->result_array();
-    $query1 = $query->result_array();
+   // $query1 = $query->result_array();
 
+    $this->db->last_query();
+    $str = $this->db->last_query();
+
+    print_r($str);
+    exit;
 
    
     $this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_BILL_OF_MATERIAL.'.id as billofmaterialid,'.TBL_FINISHED_GOODS.'.part_number as partno,'.TBL_BUYER_MASTER.'.buyer_name as buyer, 2 as flag,'.TBL_BILL_OF_MATERIAL.'.bom_status,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_order_qty_co,'.TBL_BILL_OF_MATERIAL_ITEM.'.vendor_actual_recived_qty as vendor_received_qty_co,'.TBL_VENDOR_PO_MASTER.'.po_number as v_po_number,'.TBL_FINISHED_GOODS.'.name as part_description,'.TBL_VENDOR_PO_MASTER.'.delivery_date,'.TBL_BILL_OF_MATERIAL_ITEM.'.id as vendor_bill_item_id,"Bill Of Material" as flag,"bom" as notes_status,'.TBL_BILL_OF_MATERIAL_ITEM.'.notes');
