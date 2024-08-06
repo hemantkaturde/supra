@@ -2,11 +2,11 @@
    <!-- Content Header (Page header) -->
    <section class="content-header">
       <h1>
-         <i class="fa fa-users"></i> Edit OMS Challan
+         <i class="fa fa-users"></i> View OMS Challan
          <small>
             <ul class="breadcrumb" style="background-color:#ecf0f5 !important">
                <li class="completed"><a href="javascript:void(0);">Masters</a></li>
-               <li class="active"><a href="javascript:void(0);"> Edit Challan Details</a></li>
+               <li class="active"><a href="javascript:void(0);"> View OMS Challan Details</a></li>
             </ul>
          </small>
       </h1>
@@ -17,7 +17,7 @@
             <div class="box">
                <div class="box box-primary">
                   <div class="box-header">
-                     <h3 class="box-title">Edit OMS Challan Details</h3>
+                     <h3 class="box-title">View  OMS Challan Details</h3>
                   </div>
                   <?php $this->load->helper("form"); ?>
                   <form role="form" id="addnewomschallanform" action="#" method="post" role="form">
@@ -27,7 +27,7 @@
                                     <div class="form-group">
                                         <label for="blasting_id">Blasting Id<span class="required">*</span></label>
                                         <input type="hidden" class="form-control" id="oms_challan_id" name="oms_challan_id" value="<?=$getomsChllanData['challan_main_id'];?>" required readonly>
-                                            <input type="text" class="form-control" id="blasting_id" name="blasting_id" value="<?=$getomsChllanData['blasting_id'];?>" required readonly>
+                                            <input readonly type="text" class="form-control" id="blasting_id" name="blasting_id" value="<?=$getomsChllanData['blasting_id'];?>" required readonly>
                                             <p class="error blasting_id_error"></p>
                                     </div>
                                 </div>
@@ -36,7 +36,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="oms_challan_date">OMS Challan Date <span class="required">*</span></label>
-                                            <input type="text" class="form-control datepicker" id="oms_challan_date" name="oms_challan_date" value="<?=$getomsChllanData['omsdate'];?>"  required >
+                                            <input readonly type="text" class="form-control datepicker" id="oms_challan_date" name="oms_challan_date" value="<?=$getomsChllanData['omsdate'];?>"  required >
                                             <p class="error oms_challan_date_error"></p>
                                     </div>
                                 </div>
@@ -46,7 +46,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="vendor_name">Vendor Name <span class="required">*</span></label>
-                                                <select class="form-control" name="vendor_name" id="vendor_name">
+                                                <select readonly class="form-control" name="vendor_name" id="vendor_name">
                                                     <option st-id="" value="">Select Vendor Name</option>
                                                         <?php foreach ($vendorList as $key => $value) {?>
                                                             <option value="<?php echo $value['ven_id']; ?>" <?php if($getomsChllanData['vendor_name']==$value['ven_id']){ echo 'selected'; }?> ><?php echo $value['vendor_name']; ?></option>
@@ -66,7 +66,7 @@
                                             }
                                         ?>
                                         <label for="vendor_po_number">Select Vendor PO Number</label>
-                                            <select class="form-control vendor_po_for_item vendor_po_get_data" name="vendor_po_number" id="vendor_po_number">
+                                            <select readonly class="form-control vendor_po_for_item vendor_po_get_data" name="vendor_po_number" id="vendor_po_number">
                                                 <?php echo $po_number;?>
                                             </select>
                                         <p class="error vendor_po_number_error"></p>
@@ -87,7 +87,7 @@
 
                                     <div class="form-group">
                                         <label for="buyer_po">Vendor PO Date</label>
-                                            <input type="text" class="form-control" id="vendor_po_date" name="vendor_po_date" value="<?=$vendor_po_date ?>" required readonly>
+                                            <input readonly type="text" class="form-control" id="vendor_po_date" name="vendor_po_date" value="<?=$vendor_po_date ?>" required readonly>
                                             <p class="error vendor_po_date_error"></p>
                                     </div>
                                 </div>
@@ -95,7 +95,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="remark">Remark</label>
-                                        <input type="remark" class="form-control" id="remark" name="remark" value="<?=$getomsChllanData['omsremark'] ?>">
+                                        <input readonly type="remark" class="form-control" id="remark" name="remark" value="<?=$getomsChllanData['omsremark'] ?>">
                                         <p class="error remark_error"></p>
                                     </div>
                                 </div>
@@ -103,7 +103,6 @@
                         </div>  
                         
                         <div class="col-md-12">
-                           <button type="button" class="btn btn-success btn-xl" data-toggle="modal" data-target="#addNewModal">Add New Items</button><br/><br/>
                              <table class="table  table-bordered">
                                 <thead style="background-color: #3c8dbc;">
                                     <tr>
@@ -117,7 +116,6 @@
                                         <th scope="col">No of Bags</th>
                                         <th scope="col">HSN No</th>
                                         <th scope="col">Remark</th>
-                                        <th scope="col">Action</th>
                                     </tr>
                                     </thead>   
 
@@ -136,10 +134,7 @@
                                                 <td><?=$value['no_of_bags']?></td>
                                                 <td><?=$value['hsn_no']?></td>
                                                 <td><?=$value['omsremark']?></td>
-                                                <td>
-                                                   <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['omsid'];?>' class='fa fa-pencil-square-o editChallanformitem'  aria-hidden='true'></i>
-                                                   <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['omsid'];?>' class='fa fa-trash-o deleteOmschallnitem' aria-hidden='true'></i>
-                                                </td>
+                                        
                                             <tr>   
 
                                           <?php  } }else{ ?>
@@ -160,7 +155,6 @@
                             }else{
                             $button ="disabled";
                             } ?>
-                           <input type="submit" id="addnewomschallan" class="btn btn-primary" value="Submit" <?=$button?>>
                            <input type="button" onclick="location.href = '<?php echo base_url() ?>omschallan'" class="btn btn-default" value="Back" />
                         </div>
                      </div>
@@ -279,7 +273,6 @@
                                                 </div>
 
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary btn-xl closebillofmaterialmodal" data-dismiss="modal">Close</button>
                                                     <button type="submit" id="saveomschallan_item" name="saveomschallan_item" class="btn btn-primary" class="btn btn-success btn-xl">Save</button>
                                                 </div>
                                             </form>    

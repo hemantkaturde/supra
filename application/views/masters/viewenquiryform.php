@@ -2,7 +2,7 @@
    <!-- Content Header (Page header) -->
    <section class="content-header">
       <h1>
-         <i class="fa fa-users"></i> Edit Enquiry Form
+         <i class="fa fa-users"></i> View Enquiry Form
          <small>
             <ul class="breadcrumb" style="background-color:#ecf0f5 !important">
                <li class="completed"><a href="javascript:void(0);">Masters</a></li>
@@ -22,14 +22,14 @@
                   <?php $this->load->helper("form"); ?>
                   <form role="form" id="addnewenauiryform" action="#" method="post" role="form">
 
-                  <input type="hidden" class="form-control" id="enquiry_form_id" name="enquiry_form_id" value="<?=$getenquirydetailsforedit['enquiry_form_id'];?>" required readonly>
+                   <input readonly  type="hidden" class="form-control" id="enquiry_form_id" name="enquiry_form_id" value="<?=$getenquirydetailsforedit['enquiry_form_id'];?>" required readonly>
 
                         <div class="box-body">
                             <div class="col-md-4">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                             <label for="enquiry_number">Enquiry Number<span class="required">*</span></label>
-                                            <input type="text" class="form-control" id="enquiry_number" name="enquiry_number" value="<?=$getenquirydetailsforedit['enquiry_number'];?>" required readonly>
+                                             <input readonly  type="text" class="form-control" id="enquiry_number" name="enquiry_number" value="<?=$getenquirydetailsforedit['enquiry_number'];?>" required readonly>
                                             <p class="error enquiry_number_error"></p>
                                     </div>
                                 </div>
@@ -44,7 +44,7 @@
                                                 $date= date('Y-m-d'); 
                                             }
                                             ?>
-                                            <input type="text" class="form-control datepicker" id="enquiry_date" name="enquiry_date" value="<?=$date?>"  required >
+                                             <input readonly  type="text" class="form-control datepicker" id="enquiry_date" name="enquiry_date" value="<?=$date?>"  required >
                                             <p class="error enquiry_date_error"></p>
                                     </div>
                                 </div>
@@ -54,7 +54,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="buyer_enquiry_no">Buyer Name<span class="required">*</span></label>
-                                        <input type="buyer_enquiry_no" class="form-control" id="buyer_enquiry_no" name="buyer_enquiry_no" value="<?=$getenquirydetailsforedit['buyer_name'] ?>">
+                                         <input readonly  type="buyer_enquiry_no" class="form-control" id="buyer_enquiry_no" name="buyer_enquiry_no" value="<?=$getenquirydetailsforedit['buyer_name'] ?>">
                                         <p class="error buyer_enquiry_no_error"></p>
                                     </div>
                                 </div>
@@ -69,7 +69,7 @@
                                                 $buyer_enquiry_date= date('Y-m-d'); 
                                             }
                                             ?>
-                                        <input type="buyer_enquiry_date" class="form-control datepicker" id="buyer_enquiry_date" name="buyer_enquiry_date" value="<?=$buyer_enquiry_date; ?>">
+                                         <input readonly  type="buyer_enquiry_date" class="form-control datepicker" id="buyer_enquiry_date" name="buyer_enquiry_date" value="<?=$buyer_enquiry_date; ?>">
                                         <p class="error buyer_enquiry_date_error"></p>
                                     </div>
                                 </div>
@@ -79,7 +79,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="status">Status</label>
-                                            <select class="form-control" name="status" id="status">
+                                            <select readonly  class="form-control" name="status" id="status">
                                                 <option value="">Select Status</option>
                                                 <option value="Open"  <?php if($getenquirydetailsforedit['enquiry_status']=='Open'){ echo 'selected';} ?>>Open</option>
                                                 <option value="Close" <?php if($getenquirydetailsforedit['enquiry_status']=='Close'){ echo 'selected';} ?>>Close</option>
@@ -93,7 +93,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="remark">Remark</label>
-                                        <input type="remark" class="form-control" id="remark" name="remark" value="<?=$getenquirydetailsforedit['remark'] ?>">
+                                         <input readonly  type="remark" class="form-control" id="remark" name="remark" value="<?=$getenquirydetailsforedit['remark'] ?>">
                                         <p class="error remark_error"></p>
                                     </div>
                                 </div>
@@ -102,7 +102,6 @@
                         </div>  
                         
                         <div class="col-md-12">
-                           <button type="button" class="btn btn-success btn-xl" data-toggle="modal" data-target="#addNewModal">Add New Items</button><br/><br/>
                              <table class="table  table-bordered" style="max-width: 100%;display: block;overflow-x: auto; white-space: nowrap;">
                                 <thead style="background-color: #3c8dbc;">
                                     <tr>
@@ -175,10 +174,7 @@
                                                 <td><?=$value['vendor_name_5']?></td>
                                                 <td><?=$value['vendor_rate_5']?></td>
 
-                                                <td>
-                                                   <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['enquiry_form_id'];?>' class='fa fa-pencil-square-o editenquiryformitemdata'  aria-hidden='true'></i>
-                                                   <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['enquiry_form_id'];?>' class='fa fa-trash-o deleteenquiryformitemdata' aria-hidden='true'></i>
-                                                </td>
+                                               
                                             <tr>   
 
                                           <?php  } }else{ ?>
@@ -194,8 +190,8 @@
                      <!-- /.box-body -->
                      <div class="box-footer">
                         <div class="col-xs-8">
-                           <input type="submit" id="savenewenauiryform" class="btn btn-primary" value="Submit">
-                           <input type="button" onclick="location.href = '<?php echo base_url() ?>enquiryform'" class="btn btn-default" value="Back" />
+                           <!--  <input readonly  type="submit" id="savenewenauiryform" class="btn btn-primary" value="Submit"> -->
+                            <input readonly  type="button" onclick="location.href = '<?php echo base_url() ?>enquiryform'" class="btn btn-default" value="Back" />
                         </div>
                      </div>
                   </form>
@@ -219,7 +215,7 @@
                         <!-- </button> -->                        
                 </div>                                     
                 <form role="form" id="saveomschallanform" action="<?php echo base_url() ?>saveomschallanform" method="post" role="form">
-                <input type="hidden" class="form-control"  id="enquiry_form_item_id" name="enquiry_form_item_id" required readonly>
+                 <input readonly  type="hidden" class="form-control"  id="enquiry_form_item_id" name="enquiry_form_item_id" required readonly>
 
                     <div class="modal-body">
                         <div class="loader_ajax" style="display:none;">
@@ -229,7 +225,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="part_number">F.G Part Number <span class="required">*</span></label>
-                                        <select class="form-control" name="part_number" id="part_number">
+                                        <select readonly  class="form-control" name="part_number" id="part_number">
                                             <option st-id="" value="">Select F.G Part Number</option>
                                             <?php foreach ($partNumberlistforenquirylist as $key => $value) {?>
                                                 <option st-id="" value="<?=$value['fin_id']?>"><?=$value['part_number']?></option>
@@ -239,33 +235,33 @@
                                 </div>                   
                                 <div class="form-group">
                                     <label for="fg_description">F.G. Description</label>
-                                    <input type="text" class="form-control" id="fg_description" name="fg_description" readonly>
+                                     <input readonly  type="text" class="form-control" id="fg_description" name="fg_description" readonly>
                                     <p class="error fg_description_error"></p>
                                 </div>
                                 <div class="form-group">
                                     <label for="rm_description">R.M Description</label>
-                                    <input type="text" class="form-control" id="rm_description" name="rm_description">
+                                     <input readonly  type="text" class="form-control" id="rm_description" name="rm_description">
                                     <p class="error rm_description_error"></p>
                                 </div>               
                                 <div class="form-group">
                                     <label for="gross_weight">Gross Weight</label>
-                                    <input type="text" class="form-control" id="gross_weight" name="gross_weight">
+                                     <input readonly  type="text" class="form-control" id="gross_weight" name="gross_weight">
                                     <p class="error gross_weight_error"></p>
                                 </div>
                                 <div class="form-group">
                                     <label for="rm_size">Raw material grade</label>
-                                    <input type="text" class="form-control" id="rm_size" name="rm_size">
+                                     <input readonly  type="text" class="form-control" id="rm_size" name="rm_size">
                                     <p class="error rm_size_error"></p>
                                 </div>
                                 <div class="form-group">
                                     <label for="supplier_qty_in_kgs">Supplier Qty (in kgs)</label>
-                                    <input type="number" class="form-control" id="supplier_qty_in_kgs" name="supplier_qty_in_kgs" >
+                                     <input readonly  type="number" class="form-control" id="supplier_qty_in_kgs" name="supplier_qty_in_kgs" >
                                     <p class="error supplier_qty_in_kgs_error"></p>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="venodr_qty_in_pcs">Vendor Qty (in pcs)</label>
-                                    <input type="number" class="form-control" id="venodr_qty_in_pcs" name="venodr_qty_in_pcs" >
+                                     <input readonly  type="number" class="form-control" id="venodr_qty_in_pcs" name="venodr_qty_in_pcs" >
                                     <p class="error venodr_qty_in_pcs_error"></p>
                                 </div>
                             </div>
@@ -274,7 +270,7 @@
                                        <div class="row" style="display: inline-flex;">
                                             <div style="padding-right: 10px">
                                                 <label for="supplier_name_1">Supplier Name</label>
-                                                <select class="form-control" name="supplier_name_1" id="supplier_name_1" style="width: 240px">
+                                                <select readonly  class="form-control" name="supplier_name_1" id="supplier_name_1" style="width: 240px">
                                                     <option st-id="" value="">Select Supplier Name</option>
                                                     <?php foreach ($supplierList as $key => $value) {?>
                                                         <option st-id="" value="<?=$value['sup_id']?>"><?=$value['supplier_name']?></option>
@@ -284,7 +280,7 @@
                                             </div>
                                             <div>
                                                 <label for="rate_1">Rate</label>
-                                                <input type="text" class="form-control" id="rate_1" name="rate_1">
+                                                 <input readonly  type="text" class="form-control" id="rate_1" name="rate_1">
                                                 <p class="error rate_1_error"></p>
                                             </div>
                                         </div>
@@ -292,7 +288,7 @@
                                         <div class="row">
                                             <div>
                                                 <label for="remark_10">Remark </label>
-                                                <input type="text" class="form-control" id="remark_1" name="remark_1" style="width:95%;">
+                                                 <input readonly  type="text" class="form-control" id="remark_1" name="remark_1" style="width:95%;">
                                                 <p class="error remark_1_error"></p>
                                             </div>
                                         </div>
@@ -300,7 +296,7 @@
                                        <div class="row" style="display: inline-flex;">
                                             <div style="padding-right: 10px">
                                                 <label for="supplier_name_2">Supplier Name</label>
-                                                <select class="form-control" name="supplier_name_2" id="supplier_name_2" style="width: 240px">
+                                                <select readonly  class="form-control" name="supplier_name_2" id="supplier_name_2" style="width: 240px">
                                                     <option st-id="" value="">Select Supplier Name</option>
                                                     <?php foreach ($supplierList as $key => $value) {?>
                                                         <option st-id="" value="<?=$value['sup_id']?>"><?=$value['supplier_name']?></option>
@@ -310,7 +306,7 @@
                                             </div>
                                             <div>
                                                 <label for="rate_2">Rate</label>
-                                                <input type="text" class="form-control" id="rate_2" name="rate_2">
+                                                 <input readonly  type="text" class="form-control" id="rate_2" name="rate_2">
                                                 <p class="error rate_2_error"></p>
                                             </div>
                                         </div>
@@ -318,7 +314,7 @@
                                         <div class="row">
                                             <div>
                                                 <label for="remark_2">Remark </label>
-                                                <input type="text" class="form-control" id="remark_2" name="remark_2" style="width:95%;">
+                                                 <input readonly  type="text" class="form-control" id="remark_2" name="remark_2" style="width:95%;">
                                                 <p class="error remark_2_error"></p>
                                             </div>
                                         </div>
@@ -327,7 +323,7 @@
                                        <div class="row" style="display: inline-flex;">
                                             <div style="padding-right: 10px">
                                                 <label for="supplier_name_3">Supplier Name</label>
-                                                <select class="form-control" name="supplier_name_3" id="supplier_name_3" style="width: 240px">
+                                                <select readonly  class="form-control" name="supplier_name_3" id="supplier_name_3" style="width: 240px">
                                                     <option st-id="" value="">Select Supplier Name</option>
                                                     <?php foreach ($supplierList as $key => $value) {?>
                                                         <option st-id="" value="<?=$value['sup_id']?>"><?=$value['supplier_name']?></option>
@@ -337,7 +333,7 @@
                                             </div>
                                             <div>
                                                 <label for="rate_3">Rate</label>
-                                                <input type="text" class="form-control" id="rate_3" name="rate_3">
+                                                 <input readonly  type="text" class="form-control" id="rate_3" name="rate_3">
                                                 <p class="error rate_3_error"></p>
                                             </div>
                                         </div>
@@ -345,7 +341,7 @@
                                         <div class="row">
                                             <div>
                                                 <label for="remark_3">Remark </label>
-                                                <input type="text" class="form-control" id="remark_3" name="remark_3" style="width:95%;">
+                                                 <input readonly  type="text" class="form-control" id="remark_3" name="remark_3" style="width:95%;">
                                                 <p class="error remark_3_error"></p>
                                             </div>
                                         </div>
@@ -353,7 +349,7 @@
                                        <div class="row" style="display: inline-flex;">
                                             <div style="padding-right: 10px">
                                                 <label for="supplier_name_4">Supplier Name</label>
-                                                <select class="form-control" name="supplier_name_4" id="supplier_name_4" style="width: 240px">
+                                                <select readonly  class="form-control" name="supplier_name_4" id="supplier_name_4" style="width: 240px">
                                                     <option st-id="" value="">Select Supplier Name</option>
                                                     <?php foreach ($supplierList as $key => $value) {?>
                                                         <option st-id="" value="<?=$value['sup_id']?>"><?=$value['supplier_name']?></option>
@@ -363,7 +359,7 @@
                                             </div>
                                             <div>
                                                 <label for="rate_4">Rate</label>
-                                                <input type="text" class="form-control" id="rate_4" name="rate_4">
+                                                 <input readonly  type="text" class="form-control" id="rate_4" name="rate_4">
                                                 <p class="error rate_4_error"></p>
                                             </div>
                                         </div>
@@ -371,7 +367,7 @@
                                         <div class="row">
                                             <div>
                                                 <label for="remark_4">Remark </label>
-                                                <input type="text" class="form-control" id="remark_4" name="remark_4" style="width:95%;">
+                                                 <input readonly  type="text" class="form-control" id="remark_4" name="remark_4" style="width:95%;">
                                                 <p class="error remark_4_error"></p>
                                             </div>
                                         </div>
@@ -379,7 +375,7 @@
                                         <div class="row" style="display: inline-flex;">
                                             <div style="padding-right: 10px">
                                                 <label for="supplier_name_5">Supplier Name</label>
-                                                <select class="form-control" name="supplier_name_5" id="supplier_name_5" style="width: 240px">
+                                                <select readonly  class="form-control" name="supplier_name_5" id="supplier_name_5" style="width: 240px">
                                                     <option st-id="" value="">Select Supplier Name</option>
                                                     <?php foreach ($supplierList as $key => $value) {?>
                                                         <option st-id="" value="<?=$value['sup_id']?>"><?=$value['supplier_name']?></option>
@@ -389,7 +385,7 @@
                                             </div>
                                             <div>
                                                 <label for="rate_5">Rate</label>
-                                                <input type="text" class="form-control" id="rate_5" name="rate_5">
+                                                 <input readonly  type="text" class="form-control" id="rate_5" name="rate_5">
                                                 <p class="error rate_5_error"></p>
                                             </div>
                                         </div>
@@ -397,7 +393,7 @@
                                         <div class="row">
                                             <div>
                                                 <label for="remark_5">Remark </label>
-                                                <input type="text" class="form-control" id="remark_5" name="remark_5" style="width:95%;">
+                                                 <input readonly  type="text" class="form-control" id="remark_5" name="remark_5" style="width:95%;">
                                                 <p class="error remark_5_error"></p>
                                             </div>
                                         </div>
@@ -408,7 +404,7 @@
                                         <div class="row" style="display: inline-flex;">
                                             <div style="padding-right: 10px">
                                                 <label for="vendor_name_1">Vendor Name</label>
-                                                <select class="form-control" name="vendor_name_1" id="vendor_name_1" style="width: 240px">
+                                                <select readonly  class="form-control" name="vendor_name_1" id="vendor_name_1" style="width: 240px">
                                                     <option st-id="" value="">Select Vendor Name</option>
                                                     <?php foreach ($vendorList as $key => $value) {?>
                                                         <option st-id="" value="<?=$value['ven_id']?>"><?=$value['vendor_name']?></option>
@@ -418,7 +414,7 @@
                                             </div>
                                             <div>
                                                 <label for="venodr_rate_1">Rate</label>
-                                                <input type="text" class="form-control" id="venodr_rate_1" name="venodr_rate_1">
+                                                 <input readonly  type="text" class="form-control" id="venodr_rate_1" name="venodr_rate_1">
                                                 <p class="error venodr_rate_1_error"></p>
                                             </div>
                                         </div>
@@ -426,7 +422,7 @@
                                         <div class="row">
                                             <div>
                                                 <label for="remark_6">Remark </label>
-                                                <input type="text" class="form-control" id="remark_6" name="remark_6" style="width:95%;">
+                                                 <input readonly  type="text" class="form-control" id="remark_6" name="remark_6" style="width:95%;">
                                                 <p class="error remark_6_error"></p>
                                             </div>
                                         </div>
@@ -435,7 +431,7 @@
                                        <div class="row" style="display: inline-flex;">
                                             <div style="padding-right: 10px">
                                                 <label for="vendor_name_2">Vendor Name</label>
-                                                <select class="form-control" name="vendor_name_2" id="vendor_name_2" style="width: 240px">
+                                                <select readonly  class="form-control" name="vendor_name_2" id="vendor_name_2" style="width: 240px">
                                                     <option st-id="" value="">Select Vendor Name</option>
                                                     <?php foreach ($vendorList as $key => $value) {?>
                                                         <option st-id="" value="<?=$value['ven_id']?>"><?=$value['vendor_name']?></option>
@@ -445,7 +441,7 @@
                                             </div>
                                             <div>
                                                 <label for="venodr_rate_2">Rate</label>
-                                                <input type="text" class="form-control" id="venodr_rate_2" name="venodr_rate_2">
+                                                 <input readonly  type="text" class="form-control" id="venodr_rate_2" name="venodr_rate_2">
                                                 <p class="error venodr_rate_2_error"></p>
                                             </div>
                                         </div>
@@ -453,7 +449,7 @@
                                         <div class="row">
                                             <div>
                                                 <label for="remark_7">Remark </label>
-                                                <input type="text" class="form-control" id="remark_7" name="remark_7" style="width:95%;">
+                                                 <input readonly  type="text" class="form-control" id="remark_7" name="remark_7" style="width:95%;">
                                                 <p class="error remark_7_error"></p>
                                             </div>
                                         </div>
@@ -461,7 +457,7 @@
                                        <div class="row" style="display: inline-flex;">
                                             <div style="padding-right: 10px">
                                                 <label for="vendor_name_3">Vendor Name</label>
-                                                <select class="form-control" name="vendor_name_3" id="vendor_name_3" style="width: 240px">
+                                                <select readonly  class="form-control" name="vendor_name_3" id="vendor_name_3" style="width: 240px">
                                                     <option st-id="" value="">Select Vendor Name</option>
                                                     <?php foreach ($vendorList as $key => $value) {?>
                                                         <option st-id="" value="<?=$value['ven_id']?>"><?=$value['vendor_name']?></option>
@@ -471,7 +467,7 @@
                                             </div>
                                             <div>
                                                 <label for="venodr_rate_3">Rate</label>
-                                                <input type="text" class="form-control" id="venodr_rate_3" name="venodr_rate_3">
+                                                 <input readonly  type="text" class="form-control" id="venodr_rate_3" name="venodr_rate_3">
                                                 <p class="error venodr_rate_3_error"></p>
                                             </div>
                                         </div>
@@ -479,7 +475,7 @@
                                         <div class="row">
                                             <div>
                                                 <label for="remark_8">Remark </label>
-                                                <input type="text" class="form-control" id="remark_8" name="remark_8" style="width:95%;">
+                                                 <input readonly  type="text" class="form-control" id="remark_8" name="remark_8" style="width:95%;">
                                                 <p class="error remark_8_error"></p>
                                             </div>
                                         </div>
@@ -487,7 +483,7 @@
                                        <div class="row" style="display: inline-flex;">
                                             <div style="padding-right: 10px">
                                                 <label for="vendor_name_4">Vendor Name</label>
-                                                <select class="form-control" name="vendor_name_4" id="vendor_name_4" style="width: 240px">
+                                                <select readonly  class="form-control" name="vendor_name_4" id="vendor_name_4" style="width: 240px">
                                                     <option st-id="" value="">Select Vendor Name</option>
                                                     <?php foreach ($vendorList as $key => $value) {?>
                                                         <option st-id="" value="<?=$value['ven_id']?>"><?=$value['vendor_name']?></option>
@@ -497,7 +493,7 @@
                                             </div>
                                             <div>
                                                 <label for="venodr_rate_4">Rate</label>
-                                                <input type="text" class="form-control" id="venodr_rate_4" name="venodr_rate_4">
+                                                 <input readonly  type="text" class="form-control" id="venodr_rate_4" name="venodr_rate_4">
                                                 <p class="error venodr_rate_4_error"></p>
                                             </div>
                                         </div>
@@ -505,7 +501,7 @@
                                         <div class="row">
                                             <div>
                                                 <label for="remark_9">Remark </label>
-                                                <input type="text" class="form-control" id="remark_9" name="remark_9" style="width:95%;">
+                                                 <input readonly  type="text" class="form-control" id="remark_9" name="remark_9" style="width:95%;">
                                                 <p class="error remark_9_error"></p>
                                             </div>
                                         </div>
@@ -513,7 +509,7 @@
                                         <div class="row" style="display: inline-flex;">
                                             <div style="padding-right: 10px">
                                                 <label for="vendor_name_5">Vendor Name</label>
-                                                <select class="form-control" name="vendor_name_5" id="vendor_name_5" style="width: 240px">
+                                                <select readonly  class="form-control" name="vendor_name_5" id="vendor_name_5" style="width: 240px">
                                                    <option st-id="" value="">Select Vendor Name</option>
                                                     <?php foreach ($vendorList as $key => $value) {?>
                                                         <option st-id="" value="<?=$value['ven_id']?>"><?=$value['vendor_name']?></option>
@@ -523,7 +519,7 @@
                                             </div>
                                             <div>
                                                 <label for="venodr_rate_5">Rate</label>
-                                                <input type="text" class="form-control" id="venodr_rate_5" name="venodr_rate_5">
+                                                 <input readonly  type="text" class="form-control" id="venodr_rate_5" name="venodr_rate_5">
                                                 <p class="error venodr_rate_5_error"></p>
                                             </div>
                                         </div>
@@ -531,7 +527,7 @@
                                         <div class="row">
                                             <div>
                                                 <label for="remark_10">Remark </label>
-                                                <input type="text" class="form-control" id="remark_10" name="remark_10" style="width:95%;">
+                                                 <input readonly  type="text" class="form-control" id="remark_10" name="remark_10" style="width:95%;">
                                                 <p class="error remark_10_error"></p>
                                             </div>
                                         </div>
@@ -541,7 +537,6 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary btn-xl closebillofmaterialmodal" data-dismiss="modal">Close</button>
                         <button type="submit" id="saveenquiryform_item" name="saveenquiryform_item" class="btn btn-primary" class="btn btn-success btn-xl">Save</button>
                     </div>
                 </form>    

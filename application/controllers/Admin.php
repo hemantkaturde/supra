@@ -3791,6 +3791,23 @@ class Admin extends BaseController
     }
 
 
+    public function viewvendorpoconfirmation($vendor_po_confirmation_id){
+
+        $process = 'View Vendor PO Confirmation';
+        $processFunction = 'Admin/viewvendorpoconfirmation';
+        $this->logrecord($process,$processFunction);
+        $data['vendorList']= $this->admin_model->fetchALLvendorList();
+        $data['buyerList']= $this->admin_model->fetchAllbuyerList();
+        $data['venodr_po_confirmation_id']= $vendor_po_confirmation_id;
+        $data['getVendorpoconfirmationdetails']= $this->admin_model->getVendorpoconfirmationdetails($vendor_po_confirmation_id);
+        $data['fetchALLpreVendorpoconfirmationitemListedit']= $this->admin_model->fetchALLpreVendorpoconfirmationitemListedit($vendor_po_confirmation_id);
+        $this->global['pageTitle'] = 'View Vendor PO Confirmation';
+        $this->loadViews("masters/viewvendorpoconfirmation", $this->global, $data, NULL);
+
+    }
+
+
+
 
     public function getBuyerDetailsBysupplierponumber(){
         $supplier_po_number=$this->input->post('supplier_po_number');
@@ -4592,13 +4609,32 @@ class Admin extends BaseController
         $data['buyerList']= $this->admin_model->fetchAllbuyerList();
         $data['getbillofmaterialdataforedit']= $this->admin_model->getbillofmaterialdataforedit($billofmaterialid);
         $supplier_id =   $this->admin_model->getsupplieridfromponumber(trim($data['getbillofmaterialdataforedit']['supplier_po_number']));
-
         $data['fetchALLpreBillofmaterailistedit']= $this->admin_model->fetchALLpreBillofmaterailistedit($billofmaterialid,trim($supplier_id['id']));
         $data['incoming_details']= $this->admin_model->fetchAllincomingdetailsList();
         $data['billofmaterialid']= $billofmaterialid;
         $this->loadViews("masters/editbillofmaterial", $this->global, $data, NULL);
 
     }
+
+
+
+    public function viewbillofmaterial($billofmaterialid){
+
+        $process = 'View Bill Of Material';
+        $processFunction = 'Admin/editbillofmaterial';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'View Bill Of Material';
+        $data['vendorList']= $this->admin_model->fetchALLvendorListwithsupplier();
+        $data['buyerList']= $this->admin_model->fetchAllbuyerList();
+        $data['getbillofmaterialdataforedit']= $this->admin_model->getbillofmaterialdataforedit($billofmaterialid);
+        $supplier_id =   $this->admin_model->getsupplieridfromponumber(trim($data['getbillofmaterialdataforedit']['supplier_po_number']));
+        $data['fetchALLpreBillofmaterailistedit']= $this->admin_model->fetchALLpreBillofmaterailistedit($billofmaterialid,trim($supplier_id['id']));
+        $data['incoming_details']= $this->admin_model->fetchAllincomingdetailsList();
+        $data['billofmaterialid']= $billofmaterialid;
+        $this->loadViews("masters/viewbillofmaterial", $this->global, $data, NULL);
+
+    }
+
 
     public function deleteBillofmaterial(){
         $post_submit = $this->input->post();
@@ -4923,16 +4959,17 @@ class Admin extends BaseController
     }
 
 
-    public function viewVendorbillofmaterial($id){
+    public function viewVendorbillofmaterial($edit_id){
 
-        $process = 'View Vendor Bill of Material';
+        $process = 'View Vendor Bill Of Material';
         $processFunction = 'Admin/viewVendorbillofmaterial';
         $this->logrecord($process,$processFunction);
-        $this->global['pageTitle'] = 'View Vendor Bill of Material';
-        $data['getVendorbillofmaterialDetails']= $this->admin_model->getVendorbillofmaterialDetails($id)[0];
-        $data['getVendorbillofmaterialitem']= $this->admin_model->getVendorbillofmaterialitem($id);
         $data['buyerList']= $this->admin_model->fetchAllbuyerList();
-        $data['vendorList']= $this->admin_model->fetchALLvendorList();
+        $data['vendorList']= $this->admin_model->fetchALLvendorListwithoutsupplier();
+        $data['incoming_details']= $this->admin_model->fetchAllincomingdetailsList();
+        $data['fetchALLVendorbillofmaterialdetails']= $this->admin_model->fetchALLVendorbillofmaterialdetails($edit_id);
+        $data['fetchALLpreVendorpoitemListedit']= $this->admin_model->fetchALLpreVendorpoitemListedit($edit_id);
+        $this->global['pageTitle'] = 'View Vendor Bill Of Material';
         $this->loadViews("masters/viewVendorbillofmaterial", $this->global, $data, NULL);
 
 
@@ -6485,6 +6522,18 @@ class Admin extends BaseController
 
     }
 
+    public function viewjobwork($jobworkid){
+        $process = 'Edit Job Work';
+        $processFunction = 'Admin/editjobwork';
+        $this->global['pageTitle'] = 'Edit Job Work';
+        $data['jobworkid'] =$jobworkid;
+        $data['fetchALLprejobworkitemList']= $this->admin_model->fetchALLprejobworkitemListedit($jobworkid);
+        $data['vendorList']= $this->admin_model->fetchALLvendorList();
+        $data['getalljobworkdetails'] =  $this->admin_model->getalljobworkdetails(trim($jobworkid));
+        $this->loadViews("masters/viewjobwork", $this->global, $data, NULL);  
+
+    }
+
     public function scrapreturn(){
         $process = 'Scrap Return';
         $processFunction = 'Admin/scrapreturn';
@@ -6704,15 +6753,30 @@ class Admin extends BaseController
         $processFunction = 'Admin/editscrapreturn';
         $this->logrecord($process,$processFunction);
         $this->global['pageTitle'] = 'Edit Scrap Return';
-
         $data['supplierList']= $this->admin_model->fetchALLsupplierList();
         $data['vendorList']= $this->admin_model->fetchALLvendorList();
         $data['getScrapreturndetails']= $this->admin_model->getScrapreturndetails($scrapreturnid);
         $data['fetchALLprescrapreturndetailsforview']= $this->admin_model->fetchALLprescrapreturndetailsforview($scrapreturnid);
-
         $this->loadViews("masters/editscrapreturn", $this->global, $data, NULL);
 
     }
+
+
+    public function viewscrapreturn($scrapreturnid){
+
+        $process = 'View Scrap Return';
+        $processFunction = 'Admin/viewscrapreturn';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'View Scrap Return';
+        $data['supplierList']= $this->admin_model->fetchALLsupplierList();
+        $data['vendorList']= $this->admin_model->fetchALLvendorList();
+        $data['getScrapreturndetails']= $this->admin_model->getScrapreturndetails($scrapreturnid);
+        $data['fetchALLprescrapreturndetailsforview']= $this->admin_model->fetchALLprescrapreturndetailsforview($scrapreturnid);
+        $this->loadViews("masters/viewscrapreturn", $this->global, $data, NULL);
+
+    }
+
+
 
     public function currentorderstatus(){
 
@@ -7012,6 +7076,24 @@ class Admin extends BaseController
         $this->loadViews("masters/editreworkrejection", $this->global, $data, NULL);
 
     }
+
+
+    public function viewreworkrejection($id){
+
+        $process = 'View Rework Rejection';
+        $processFunction = 'Admin/viewreworkrejection';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'View Rework Rejection';
+        $data['vendorList']= $this->admin_model->fetchALLvendorList();
+        $data['supplierList']= $this->admin_model->fetchALLsupplierList();
+        $data['getReworkrejectiondetails']= $this->admin_model->getReworkrejectiondetails($id);
+        $data['getReworkRejectionitemslistforedit']= $this->admin_model->getReworkRejectionitemslistforedit($id);
+        // $data['fetchALLprescrapreturndetailsforview']= $this->admin_model->fetchALLprescrapreturndetailsforview($scrapreturnid);
+        $this->loadViews("masters/viewreworkrejection", $this->global, $data, NULL);
+
+    }
+
+    
 
     public function getbuyerpodetailsforvendorbillofmaterial(){
 
@@ -7481,6 +7563,21 @@ class Admin extends BaseController
 
     }
 
+
+    public Function viewchallanform($id){
+        $process = 'View Challan Form';
+        $processFunction = 'Admin/viewchallanform';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'View Challan Form';
+        $data['vendorList']= $this->admin_model->fetchALLvendorList();
+        $data['supplierList']= $this->admin_model->fetchALLsupplierList();
+        $data['getChallanformdetails']= $this->admin_model->getChallanformdetails($id);
+        $data['getUSPmasterlist']= $this->admin_model->getUSPmasterlist();
+        $data['getChallanformlistedit']= $this->admin_model->getChallanformlistedit($id);
+        $this->loadViews("masters/viewchallanform", $this->global, $data, NULL);
+
+    }
+
     public function deleteChallanformitem(){
 
         $post_submit = $this->input->post();
@@ -7639,6 +7736,21 @@ class Admin extends BaseController
         $data['getdebitnoteitemdetailsedit']= $this->admin_model->getdebitnoteitemdetailsedit($id,trim($data['getdebitnoteditailsdata'][0]['supplier_vendor_name']));
         $data['totalDebitAndokQty'] = $this->admin_model->getTotalDebitAndokQtyedit($id)[0];
         $this->loadViews("masters/editdebitnoteform", $this->global, $data, NULL);
+    }
+
+
+    public function viewdebitnoteform($id){
+
+        $process = 'View Debit Note Form';
+        $processFunction = 'Admin/viewdebitnoteform';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'View Debit Note Form';
+        $data['vendorList']= $this->admin_model->fetchALLvendorList();
+        $data['supplierList']= $this->admin_model->fetchALLsupplierList();
+        $data['getdebitnoteditailsdata']= $this->admin_model->getdebitnoteditailsdata($id);
+        $data['getdebitnoteitemdetailsedit']= $this->admin_model->getdebitnoteitemdetailsedit($id,trim($data['getdebitnoteditailsdata'][0]['supplier_vendor_name']));
+        $data['totalDebitAndokQty'] = $this->admin_model->getTotalDebitAndokQtyedit($id)[0];
+        $this->loadViews("masters/viewdebitnoteform", $this->global, $data, NULL);
     }
 
     public function deletedebitnote(){
@@ -9303,6 +9415,21 @@ class Admin extends BaseController
         
     }
 
+
+    public function viewomschallan($id){
+
+        $process = 'View OMS Chllan Form';
+        $processFunction = 'Admin/viewomschallan';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'View OMS Chllan Form';
+        $data['vendorList']= $this->admin_model->fetchALLvendorList();
+        $data['getomsitemlistforedit']= $this->admin_model->getomsitemlistforedit($id);
+        $data['getomsChllanData']= $this->admin_model->getomsChllanData($id);
+        $this->loadViews("masters/viewomschallan", $this->global, $data, NULL);
+
+        
+    }
+
     public function enquiryform(){
         $process = 'Enquiry Form';
         $processFunction = 'Admin/enquiryform';
@@ -9451,6 +9578,23 @@ class Admin extends BaseController
         $this->loadViews("masters/editenquiryform", $this->global, $data, NULL);
 
     }
+
+
+    public function vieweqnuiryformdatabyid($enquiryformid){
+
+        $process = 'View New Enquiry Form';
+        $processFunction = 'Admin/vieweqnuiryformdatabyid';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'View New Enquiry Form';
+        $data['vendorList']= $this->admin_model->fetchALLvendorList();
+        $data['supplierList']= $this->admin_model->fetchALLsupplierList();
+        $data['partNumberlistforenquirylist']= $this->admin_model->partNumberlistforenquirylist();
+        $data['getallenquiryformitemedit']= $this->admin_model->getallenquiryformitemedit($enquiryformid);
+        $data['getenquirydetailsforedit']= $this->admin_model->getenquirydetailsforedit($enquiryformid);
+        $this->loadViews("masters/viewenquiryform", $this->global, $data, NULL);
+
+    }
+
 
 
 
@@ -11489,6 +11633,21 @@ public function editcreditnote($id){
     $this->loadViews("masters/editcreditnote", $this->global, $data, NULL);
 
 }
+
+
+public function viewcreditnoteform($id){
+
+    $process = 'View Credit Note';
+    $processFunction = 'Admin/viewcreditnoteform';
+    $this->logrecord($process,$processFunction);
+    $this->global['pageTitle'] = 'View Credit Note';
+    $data['buyerList']= $this->admin_model->fetchAllbuyerList();
+    $data['getcreditenotedetails']= $this->admin_model->getcreditenotedetailsforedit($id);
+    $data['fetchALLpreCredititemList']= $this->admin_model->getcreditnoteitemdetails($id);
+    $this->loadViews("masters/viewcreditnoteform", $this->global, $data, NULL);
+
+}
+
 
 
 public function getbuyeritemonly(){

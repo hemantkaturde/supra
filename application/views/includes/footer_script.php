@@ -3583,7 +3583,7 @@
 	                 { "width": "10%", "targets": 5 },
 					 { "width": "10%", "targets": 6 },
 					 { "width": "10%", "targets": 7 },
-					 { "width": "7%", "targets": 8 },
+					 { "width": "10%", "targets": 8 },
 					
 	            ],
 	            responsive: true,
@@ -5041,7 +5041,7 @@
 					 { "width": "15%", "targets": 2 },
 	                 { "width": "10%", "targets": 3 },
 					 { "width": "15%", "targets": 4 },
-	                 { "width": "6%", "targets": 5 }
+	                 { "width": "8%", "targets": 5 }
 					
 	            ],
 	            responsive: true,
@@ -5686,7 +5686,7 @@
 					 { "width": "15%", "targets": 2 },
 	                 { "width": "10%", "targets": 3 },
 					 { "width": "15%", "targets": 4 },
-	                 { "width": "10%", "targets": 5 },
+	                 { "width": "7%", "targets": 5 },
 					
 	            ],
 	            responsive: true,
@@ -6931,7 +6931,7 @@
 					 { "width": "15%", "targets": 2 },
 	                 { "width": "10%", "targets": 3 },
 					 { "width": "15%", "targets": 4 },
-	                 { "width": "10%", "targets": 5 }					
+	                 { "width": "7%", "targets": 5 }					
 	            ],
 	            responsive: true,
 	            "oLanguage": {
@@ -10734,7 +10734,7 @@
 					 { "width": "10%", "targets": 5 },
 					 { "width": "10%", "targets": 6 },
 					 { "width": "10%", "targets": 7 },
-					 { "width": "8%", "targets": 8 },
+					 { "width": "10%", "targets": 8 },
 	            ],
 	            responsive: true,
 	            "oLanguage": {
@@ -11512,7 +11512,7 @@
 					 { "width": "10%", "targets": 4 },
 					 { "width": "10%", "targets": 5 },
 					 { "width": "5%", "targets": 6 },
-					 { "width": "7%", "targets": 7 }
+					 { "width": "10%", "targets": 7 }
 	            ],
 	            responsive: true,
 	            "oLanguage": {
@@ -16257,7 +16257,7 @@
 	                 { "width": "10%", "targets": 3 },
 					 { "width": "10%", "targets": 4 },
 					 { "width": "10%", "targets": 5 },
-					 { "width": "10%", "targets": 6 }
+					 { "width": "12%", "targets": 6 }
 	            ],
 	            responsive: true,
 	            "oLanguage": {
@@ -16718,7 +16718,7 @@
 					 { "width": "15%", "targets": 2 },
 	                 { "width": "15%", "targets": 3 },
 					 { "width": "15%", "targets": 4 },
-					 { "width": "8%", "targets": 5 }
+					 { "width": "12%", "targets": 5 }
 	            ],
 	            responsive: true,
 	            "oLanguage": {

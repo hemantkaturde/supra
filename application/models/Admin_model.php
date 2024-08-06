@@ -2344,6 +2344,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['confirmed_date'] = $value['confirmed_date'];
                 $data[$counter]['confirmed_with'] = $value['confirmed_with'];
                 $data[$counter]['action'] = '';
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewvendorpoconfirmation/".$value['vendor_po_con_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editvendorpoconfirmation/".$value['vendor_po_con_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['vendor_po_con_id']."' class='fa fa-trash-o deleteVendorPoconfirmation' aria-hidden='true'></i>"; 
                 $counter++; 
@@ -2758,6 +2759,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['vendor_po'] = $value['vendorpo'];
                 $data[$counter]['raw_material_supplier'] = $value['suppliername'];
                 $data[$counter]['action'] = '';
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewjobwork/".$value['jobworkid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editjobwork/".$value['jobworkid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downlaodjobworkchllan/".$value['jobworkid']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['jobworkid']."' class='fa fa-trash-o deleteJobwork' aria-hidden='true'></i>"; 
@@ -2953,6 +2955,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['vendor_name'] = $value['vendorname'];
                 $data[$counter]['bom_status'] = $value['bom_status'];
                 $data[$counter]['action'] = '';
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewbillofmaterial/".$value['billofmaterialid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editbillofmaterial/".$value['billofmaterialid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['billofmaterialid']."' class='fa fa-trash-o deleteBillofmaterial' aria-hidden='true'></i>"; 
                 $counter++; 
@@ -3121,6 +3124,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['vendor_name'] = $value['vendorname'];
                 $data[$counter]['bom_status'] = $value['bom_status'];
                 $data[$counter]['action'] = '';
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewVendorbillofmaterial/".$value['billofmaterialid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editvendorbillofmaterial/".$value['billofmaterialid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['billofmaterialid']."' class='fa fa-trash-o deletevendorBillofmaterial' aria-hidden='true'></i>"; 
                 $counter++; 
@@ -4619,6 +4623,8 @@ class Admin_model extends CI_Model
                 $data[$counter]['vendor_name'] = $value['vendor_name'];
                 $data[$counter]['supplier_name'] = $value['supplier_name'];
                 $data[$counter]['action'] = '';
+
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewscrapreturn/".$value['scrapretrunid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editscrapreturn/".$value['scrapretrunid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."getdownloadscrapreturn/".$value['scrapretrunid']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['scrapretrunid']."' class='fa fa-trash-o deletescrapreturn' aria-hidden='true'></i>"; 
@@ -5245,6 +5251,8 @@ class Admin_model extends CI_Model
                 $data[$counter]['supplier_name'] = $value['supplier'];
                 $data[$counter]['supplier_po_number'] = $value['supplier_master'];
                 $data[$counter]['action'] = '';
+
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewreworkrejection/".$value['reworkrejectionid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editreworkrejection/".$value['reworkrejectionid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
                 
                 if($value['vendor_supplier_name']=='supplier'){
@@ -5718,6 +5726,9 @@ class Admin_model extends CI_Model
                 $data[$counter]['usp_name'] = $value['usp_name'];
                 $data[$counter]['paid_unpaid'] = $value['paid_unpaid'];
                 $data[$counter]['action'] = '';
+
+
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewchallanform/".$value['challan_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editchallanform/".$value['challan_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
             
 
@@ -6110,6 +6121,9 @@ class Admin_model extends CI_Model
                 $data[$counter]['supplier_po_number'] = $value['supplier_master'];
                 $data[$counter]['po_date'] = $value['po_date'];
                 $data[$counter]['action'] = '';
+
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewdebitnoteform/".$value['debit_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
+
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editdebitnoteform/".$value['debit_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
                
                 if( $value['supplier_vendor_name']=='supplier'){
@@ -7843,6 +7857,8 @@ class Admin_model extends CI_Model
             $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%')");
         }
         $this->db->where(TBL_OMS_CHALLAN.'.status', 1);
+        $this->db->limit($params['length'],$params['start']);
+
         $this->db->order_by(TBL_OMS_CHALLAN.'.id','DESC');
         $query = $this->db->get(TBL_OMS_CHALLAN);
         $fetch_result = $query->result_array();
@@ -7860,6 +7876,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['vendor_po_date'] =$value['vendor_po_date'];
                 $data[$counter]['remark'] =$value['omsremark'];
                 $data[$counter]['action'] ='';
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewomschallan/".$value['oms_challan_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editomschallan/".$value['oms_challan_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downloadomsblasting/".$value['oms_challan_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'>B</i></a>  &nbsp";
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downloadomsmachinary/".$value['oms_challan_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'>M</i></a>  &nbsp";
@@ -8081,6 +8098,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['buyer_enquiry_date'] = $value['buyer_enquiry_date'];
                 $data[$counter]['remark'] =$value['remark'];
                 $data[$counter]['action'] ='';
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."vieweqnuiryformdatabyid/".$value['enquiry_form_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editeqnuiryformdatabyid/".$value['enquiry_form_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downloadenquiryformdata/".$value['enquiry_form_id']."' style='cursor: pointer;' target='_blank'><i style='font-size:21px;cursor: pointer;' class='fa fa-file-excel-o' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['enquiry_form_id']."' class='fa fa-trash-o deleteeqnuiryformdata' aria-hidden='true'></i>"; 
@@ -11258,6 +11276,7 @@ public function fetchcreditnoterecordstData($params){
             $data[$counter]['currency'] =$value['currency'];
             $data[$counter]['remark'] =$value['creditnoteremark'];
             $data[$counter]['action'] ='';
+            $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewcreditnoteform/".$value['cerdit_note_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
             $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editcreditnote/".$value['cerdit_note_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
             $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['cerdit_note_id']."' class='fa fa-trash-o deletecreditnote' aria-hidden='true'></i>"; 
             $counter++; 

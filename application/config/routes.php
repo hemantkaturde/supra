@@ -500,6 +500,19 @@ $route['downlaodsuppliervendorcomplaint/(:any)'] = "admin/downlaodsuppliervendor
 $route['viewpackinginstraction/(:any)'] = "admin/viewpackinginstraction/$1";
 $route['viewchadebitnote/(:any)'] = "admin/viewchadebitnote/$1";
 $route['viewsalestrackingreport/(:any)'] = "admin/viewsalestrackingreport/$1";
+$route['viewvendorpoconfirmation/(:any)'] = "admin/viewvendorpoconfirmation/$1";
+$route['viewbillofmaterial/(:any)'] = "admin/viewbillofmaterial/$1";
+$route['viewVendorbillofmaterial/(:any)'] = "admin/viewVendorbillofmaterial/$1";
+$route['viewjobwork/(:any)'] = "admin/viewjobwork/$1";
+$route['viewreworkrejection/(:any)'] = "admin/viewreworkrejection/$1";
+$route['viewchallanform/(:any)'] = "admin/viewchallanform/$1";
+$route['viewscrapreturn/(:any)'] = "admin/viewscrapreturn/$1";
+$route['viewomschallan/(:any)'] = "admin/viewomschallan/$1";
+$route['vieweqnuiryformdatabyid/(:any)'] = "admin/vieweqnuiryformdatabyid/$1";
+$route['viewdebitnoteform/(:any)'] = "admin/viewdebitnoteform/$1";
+$route['viewcreditnoteform/(:any)'] = "admin/viewcreditnoteform/$1";
+
+
 
 
 
