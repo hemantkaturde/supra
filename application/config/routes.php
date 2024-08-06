@@ -512,6 +512,7 @@ $route['vieweqnuiryformdatabyid/(:any)'] = "admin/vieweqnuiryformdatabyid/$1";
 $route['viewdebitnoteform/(:any)'] = "admin/viewdebitnoteform/$1";
 $route['viewcreditnoteform/(:any)'] = "admin/viewcreditnoteform/$1";
 $route['viewpaymentdetails/(:any)'] = "admin/viewpaymentdetails/$1";
+$route['viewpoddetails/(:any)'] = "admin/viewpoddetails/$1";
 
 
 

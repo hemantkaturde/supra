@@ -6555,6 +6555,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['supplier_po_number'] = $value['supplier_master'];
                 $data[$counter]['po_date'] = $value['po_date'];
                 $data[$counter]['action'] = '';
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewpoddetails/".$value['pod_details_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editpoddetails/".$value['pod_details_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['pod_details_id']."' class='fa fa-trash-o deletepoddetails' aria-hidden='true'></i>"; 
                 $counter++; 

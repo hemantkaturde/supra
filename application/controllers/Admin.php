@@ -8508,6 +8508,21 @@ class Admin extends BaseController
 
     }
 
+
+    
+    public function viewpoddetails($i){
+        $process = 'View POD Details';
+        $processFunction = 'Admin/viewpoddetails';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'View POD Details';
+        $data['vendorList']= $this->admin_model->fetchALLvendorList();
+        $data['supplierList']= $this->admin_model->fetchALLsupplierList();
+        $data['getpoddetailsforedit']= $this->admin_model->getpoddetailsforedit($i)[0];
+        $data['getpoddetailsforedititem']= $this->admin_model->getpoddetailsforedititem($i);
+        $this->loadViews("masters/viewpoddetails", $this->global, $data, NULL);
+
+    }
+
     public function qualityrecord(){
         $process = 'Qulity Record';
         $processFunction = 'Admin/qualityrecord';

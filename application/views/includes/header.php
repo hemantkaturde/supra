@@ -344,6 +344,7 @@
                     || $pageUrl=="viewdebitnoteform"
                     || $pageUrl=="viewcreditnoteform"
                     || $pageUrl=="viewpaymentdetails"
+                    || $pageUrl=="viewpoddetails"
                     ){echo 'active';}?>">
                       <a href="#">
                         <i class="fa fa-shopping-cart"></i> <span class="menu_label">Purchase</span>
@@ -368,7 +369,7 @@
                         <li class="line_height <?php if($pageUrl=="debitnote" || $pageUrl=="addnewdebitnote" || $pageUrl=="editdebitnoteform" || $pageUrl=='editdebitnoteform' || $pageUrl=="viewdebitnoteform"){echo 'active';}?>"><a href="<?php echo base_url(); ?>debitnote"><i class="fa fa-cubes"></i> Debit Note</a></li>
                         <li class="line_height <?php if($pageUrl=="paymentdetails" || $pageUrl=="addnewpaymentdetails" || $pageUrl=='addpaymentdetailsdata' || $pageUrl=='editpaymentdetails' || $pageUrl=="viewpaymentdetails"){echo 'active';}?>"><a href="<?php echo base_url(); ?>paymentdetails"><i class="fa fa-cubes"></i> Payment Details</a></li>
                         <li class="line_height <?php if($pageUrl=="paymentdetailsreport"){echo 'active';}?>"><a href="<?php echo base_url(); ?>paymentdetailsreport"><i class="fa fa-cubes"></i> Payment Details Report</a></li>
-                        <li class="line_height <?php if($pageUrl=="poddetails" || $pageUrl=='addNewPODdetails' ||  $pageUrl=='editpoddetails'){echo 'active';}?>"><a href="<?php echo base_url(); ?>poddetails"><i class="fa fa-cubes"></i> POD Details</a></li>
+                        <li class="line_height <?php if($pageUrl=="poddetails" || $pageUrl=='addNewPODdetails' ||  $pageUrl=='editpoddetails' || $pageUrl=="viewpoddetails"){echo 'active';}?>"><a href="<?php echo base_url(); ?>poddetails"><i class="fa fa-cubes"></i> POD Details</a></li>
                         <li class="line_height <?php if($pageUrl=="currentorderstatus"){echo 'active';}?>"><a href="<?php echo base_url(); ?>currentorderstatus"><i class="fa fa-cubes"></i> Current Order Status</a></li>
                         <li class="line_height <?php if($pageUrl=="itcreport"){echo 'active';}?>"><a href="<?php echo base_url(); ?>itcreport"><i class="fa fa-cubes"></i> ITC Report</a></li>
                         <li class="line_height <?php if($pageUrl=="creditnote" || $pageUrl=="addcreditnote" || $pageUrl=="editcreditnote" || $pageUrl=="viewcreditnoteform"){echo 'active';}?>"><a href="<?php echo base_url(); ?>creditnote"><i class="fa fa-cubes"></i> Credit Note</a></li>
