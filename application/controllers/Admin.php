@@ -2659,15 +2659,17 @@ class Admin extends BaseController
 
     public function viewSupplierpo($supplierpoid){
 
-        $process = 'View Supplier PO';
+        $process = 'Edit Supplier PO';
         $processFunction = 'Admin/viewSupplierpo';
         $this->logrecord($process,$processFunction);
-        $this->global['pageTitle'] = 'Supplier PO View';
+        $this->global['pageTitle'] = 'Edit Supplier PO';
         $data['supplierList']= $this->admin_model->fetchALLsupplierList();
+        $data['rowMaterialList']= $this->admin_model->fetchALLrowMaterialList();
         $data['buyerList']= $this->admin_model->fetchAllbuyerList();
         $data['vendorList']= $this->admin_model->fetchALLvendorList();
         $data['getSuplierpodetails']= $this->admin_model->getSuplierpodetails($supplierpoid);
         $data['fetchALLsupplieritemlistforview']= $this->admin_model->fetchALLsupplieritemlistforview($supplierpoid);
+        $data['buyerpoList']= $this->admin_model->fetchAllbuyerpoList($data['fetchALLsupplieritemlistforview'][0]['pre_buyer_name']);
         $this->loadViews("masters/viewSupplierpo", $this->global, $data, NULL);
 
     }
@@ -2675,7 +2677,7 @@ class Admin extends BaseController
     public function editSupplierpo($supplierpoid){
 
         $process = 'Edit Supplier PO';
-        $processFunction = 'Admin/viewSupplierpo';
+        $processFunction = 'Admin/editSupplierpo';
         $this->logrecord($process,$processFunction);
         $this->global['pageTitle'] = 'Edit Supplier PO';
         $data['supplierList']= $this->admin_model->fetchALLsupplierList();
@@ -3177,14 +3179,15 @@ class Admin extends BaseController
     public function viewVendorpo($vendorpoid){
 
             $process = 'View Vendor PO';
-            $processFunction = 'Admin/viewSupplierpo';
+            $processFunction = 'Admin/viewVendorpo';
             $this->logrecord($process,$processFunction);
-            $this->global['pageTitle'] = 'Vendor PO View';
+            $this->global['pageTitle'] = 'View Vendor PO';
             $data['supplierList']= $this->admin_model->fetchALLsupplierList();
             $data['buyerList']= $this->admin_model->fetchAllbuyerList();
             $data['vendorList']= $this->admin_model->fetchALLvendorList();
-            $data['getVendorpodetails']= $this->admin_model->getVendorpodetails($vendorpoid);
+            $data['getVendorpodetails']= $this->admin_model->getVendorpodetailsedit($vendorpoid);
             $data['fetchALLVendoritemlistforview']= $this->admin_model->fetchALLVendoritemlistforview($vendorpoid);
+            $data['finishgoodList']= $this->admin_model->fetchALLFinishgoodList();
             $this->loadViews("masters/viewVendorpo", $this->global, $data, NULL);
 
     }
@@ -3491,17 +3494,33 @@ class Admin extends BaseController
 
     public function viewSupplierpoconfirmation($supplierpoconfirmationid){
 
+        // $process = 'View Vendor PO';
+        // $processFunction = 'Admin/viewSupplierpo';
+        // $this->logrecord($process,$processFunction);
+        // $this->global['pageTitle'] = 'Vendor PO View';
+        // $data['supplierList']= $this->admin_model->fetchALLsupplierList();
+        // $data['buyerList']= $this->admin_model->fetchAllbuyerList();
+        // $data['vendorList']= $this->admin_model->fetchALLvendorList();
+        // $data['getSupplierpoconfirmationdetails']= $this->admin_model->getSupplierpoconfirmationdetails($supplierpoconfirmationid)[0];
+
+        // $data['fetchALLSupplierPOitemsforview']= $this->admin_model->fetchALLSupplierPOitemsforview($supplierpoconfirmationid);
+        // $this->loadViews("masters/viewSupplierpoconfirmation", $this->global, $data, NULL);
+
+
         $process = 'View Vendor PO';
-        $processFunction = 'Admin/viewSupplierpo';
+        $processFunction = 'Admin/viewSupplierpoconfirmation';
         $this->logrecord($process,$processFunction);
-        $this->global['pageTitle'] = 'Vendor PO View';
+        $this->global['pageTitle'] = 'View Vendor PO';
         $data['supplierList']= $this->admin_model->fetchALLsupplierList();
         $data['buyerList']= $this->admin_model->fetchAllbuyerList();
         $data['vendorList']= $this->admin_model->fetchALLvendorList();
+        $data['supplierpoconfirmationid'] = $supplierpoconfirmationid;
         $data['getSupplierpoconfirmationdetails']= $this->admin_model->getSupplierpoconfirmationdetails($supplierpoconfirmationid)[0];
-
         $data['fetchALLSupplierPOitemsforview']= $this->admin_model->fetchALLSupplierPOitemsforview($supplierpoconfirmationid);
         $this->loadViews("masters/viewSupplierpoconfirmation", $this->global, $data, NULL);
+
+
+        
 
     }
 
