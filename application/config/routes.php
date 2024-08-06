@@ -513,7 +513,9 @@ $route['viewdebitnoteform/(:any)'] = "admin/viewdebitnoteform/$1";
 $route['viewcreditnoteform/(:any)'] = "admin/viewcreditnoteform/$1";
 $route['viewpaymentdetails/(:any)'] = "admin/viewpaymentdetails/$1";
 $route['viewpoddetails/(:any)'] = "admin/viewpoddetails/$1";
-
+$route['viewqulityrecordform/(:any)'] = "admin/viewqulityrecordform/$1";
+$route['viewcustomercomplaint/(:any)'] = "admin/viewcustomercomplaint/$1";
+$route['viewsuppliervendorcompalint/(:any)'] = "admin/viewsuppliervendorcompalint/$1";
 
 
 

@@ -6915,6 +6915,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['buyer_name'] = $value['buyer_name'];
                 $data[$counter]['buyer_po'] = $value['sales_order_number'];
                 $data[$counter]['action'] = '';
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewqulityrecordform/".$value['quality_records_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editqulityrecordform/".$value['quality_records_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['quality_records_id']."' class='fa fa-trash-o deletequlityrecords' aria-hidden='true'></i>"; 
                 $counter++; 
@@ -14575,7 +14576,9 @@ public function fetchcustomercompalintreportdata($params){
             $data[$counter]['invoice_no'] = $value['invoice_no'];
             $data[$counter]['invoice_date'] = $value['invoice_date'];
             $data[$counter]['action'] .='';
-            $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editcustomercomplaint/".$value['coustmor_compalint_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";
+
+            $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewcustomercomplaint/".$value['coustmor_compalint_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
+            $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editcustomercomplaint/".$value['coustmor_compalint_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>    &nbsp";
             $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downlaodcustomercomplaint/".$value['coustmor_compalint_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
             $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['coustmor_compalint_id']."' class='fa fa-trash-o deletecustomercompalintreport' aria-hidden='true'></i>"; 
             $counter++; 
@@ -14901,6 +14904,7 @@ public function getsuppliervendorrportdata($params){
             $data[$counter]['invoice_number'] = $value['invoice_number'];
             $data[$counter]['invoice_date'] = $value['invoice_date'];
             $data[$counter]['action'] = '';
+            $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewsuppliervendorcompalint/".$value['suppliervendor_compalint_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
             $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editsuppliervendorcompalint/".$value['suppliervendor_compalint_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
             $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downlaodsuppliervendorcomplaint/".$value['suppliervendor_compalint_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>   &nbsp ";
             $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['suppliervendor_compalint_id']."' class='fa fa-trash-o deletesuppliervendorcompalintreport' aria-hidden='true'></i>"; 

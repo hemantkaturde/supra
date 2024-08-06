@@ -456,7 +456,16 @@
                       </ul>
                     </li>
 
-                    <li class="treeview <?php if($pageUrl=="qualityrecord" || $pageUrl=='addNewqualityrecord' || $pageUrl=='editqulityrecordform' || $pageUrl=="complaintform" || $pageUrl=="addcomplaintform" || $pageUrl=="editcomplainform" || $pageUrl=="suppliervendorcompliant" || $pageUrl=="addnewsuppliervendorcomplaint" || $pageUrl=="editsuppliervendorcompalint" || $pageUrl=="customercompliant" || $pageUrl=="addnewcustomercomplaint" || $pageUrl=="editcustomercomplaint"){echo 'active';}?>">
+                    <li class="treeview <?php if($pageUrl=="qualityrecord" 
+                    || $pageUrl=='addNewqualityrecord' 
+                    || $pageUrl=='editqulityrecordform' 
+                    || $pageUrl=="complaintform" || $pageUrl=="addcomplaintform" || $pageUrl=="editcomplainform" 
+                    || $pageUrl=="suppliervendorcompliant" || $pageUrl=="addnewsuppliervendorcomplaint" 
+                    || $pageUrl=="editsuppliervendorcompalint" || $pageUrl=="customercompliant" 
+                    || $pageUrl=="addnewcustomercomplaint" 
+                    || $pageUrl=="editcustomercomplaint"
+                    || $pageUrl=="viewqulityrecordform" || $pageUrl=="viewcustomercomplaint"
+                    ){echo 'active';}?>">
                       <a href="#">
                         <i class="fa fa-file-text-o"></i> <span class="menu_label">QC</span>
                           <span class="pull-right-container">
@@ -464,10 +473,10 @@
                           </span>
                       </a>
                       <ul class="treeview-menu" >
-                        <li class="line_height <?php if($pageUrl=="qualityrecord" || $pageUrl=='addNewqualityrecord' || $pageUrl=='editqulityrecordform'){echo 'active';}?>"><a href="<?php echo base_url(); ?>qualityrecord"><i class="fa fa-cubes"></i> Quality Record</a></li>
+                        <li class="line_height <?php if($pageUrl=="qualityrecord" || $pageUrl=='addNewqualityrecord' || $pageUrl=='editqulityrecordform'  || $pageUrl=="viewqulityrecordform"){echo 'active';}?>"><a href="<?php echo base_url(); ?>qualityrecord"><i class="fa fa-cubes"></i> Quality Record</a></li>
                         <!-- <li class="line_height <?php if($pageUrl=="complaintform" || $pageUrl=="addcomplaintform" || $pageUrl=="editcomplainform"){echo 'active';}?>"><a href="<?php echo base_url(); ?>complaintform"><i class="fa fa-cubes"></i> Complaint form</a></li> -->
-                        <li class="line_height <?php if($pageUrl=="customercompliant" || $pageUrl=="addnewcustomercomplaint" || $pageUrl=="editcustomercomplaint"){echo 'active';}?>"><a href="<?php echo base_url(); ?>customercompliant"><i class="fa fa-cubes"></i> Customer Compalint</a></li>
-                        <li class="line_height <?php if($pageUrl=="suppliervendorcompliant" || $pageUrl=="addnewsuppliervendorcomplaint" || $pageUrl=="editsuppliervendorcompalint"){echo 'active';}?>"><a href="<?php echo base_url(); ?>suppliervendorcompliant"><i class="fa fa-cubes"></i> Supplier Vendor Compalint</a></li>
+                        <li class="line_height <?php if($pageUrl=="customercompliant" || $pageUrl=="addnewcustomercomplaint" || $pageUrl=="editcustomercomplaint" || $pageUrl=="viewcustomercomplaint"){echo 'active';}?>"><a href="<?php echo base_url(); ?>customercompliant"><i class="fa fa-cubes"></i> Customer Compalint</a></li>
+                        <li class="line_height <?php if($pageUrl=="suppliervendorcompliant" || $pageUrl=="addnewsuppliervendorcomplaint" || $pageUrl=="editsuppliervendorcompalint" || $pageUrl=="viewsuppliervendorcompalint"){echo 'active';}?>"><a href="<?php echo base_url(); ?>suppliervendorcompliant"><i class="fa fa-cubes"></i> Supplier Vendor Compalint</a></li>
                       </ul>
                     </li>
       

@@ -8626,6 +8626,19 @@ class Admin extends BaseController
         $this->loadViews("masters/editnewqulityrecord", $this->global, $data, NULL);
     }
 
+
+    
+    public function viewqulityrecordform($qulity_record_id){
+        $process = 'View Qulity Record Form';
+        $processFunction = 'Admin/viewqulityrecordform';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'View Qulity Record Form';
+        $data['vendorList']= $this->admin_model->fetchALLvendorList();
+        $data['get_qulityrecorditemrecord_edit']= $this->admin_model->get_qulityrecorditemrecord_edit($qulity_record_id);
+        $data['getqualityrecords_details']= $this->admin_model->getqualityrecords_details($qulity_record_id);
+        $this->loadViews("masters/viewqulityrecordform", $this->global, $data, NULL);
+    }
+
     public function deletequlityrecords(){
         $post_submit = $this->input->post();
         if($post_submit){
@@ -18519,6 +18532,19 @@ public function editsuppliervendorcompalint($id){
 }
 
 
+public function viewsuppliervendorcompalint($id){
+    $process = 'View Supplier Vendor Compliant Report';
+    $processFunction = 'Admin/viewsuppliervendorcompalint';
+    $this->logrecord($process,$processFunction);
+    $this->global['pageTitle'] = 'View Supplier Vendor Compliant Report';
+    $data['vendorList']= $this->admin_model->fetchALLvendorList();
+    $data['supplierList']= $this->admin_model->fetchALLsupplierList();
+    $data['getsuppliervendorcomplaintdata']= $this->admin_model->getsuppliervendorcomplaintdata($id);
+    $this->loadViews("masters/viewsuppliervendorcompalint", $this->global, $data, NULL);
+
+}
+
+
 public function getpartdescriptionusingpartnumber(){
 
     $part_no=$this->input->post('part_no');
@@ -18588,6 +18614,17 @@ public function editcustomercomplaint($id){
     $data['buyerList']= $this->admin_model->fetchAllbuyerList();
     $data['getcustomercompalindetailsdata']= $this->admin_model->getcustomercompalindetailsdata($id);
     $this->loadViews("masters/editcustomercompaint", $this->global, $data, NULL);
+}
+
+public function viewcustomercomplaint($id){
+
+    $process = 'View Customer Complaint';
+    $processFunction = 'Admin/viewcustomercomplaint';
+    $this->logrecord($process,$processFunction);
+    $this->global['pageTitle'] = 'View Customer Complaint';
+    $data['buyerList']= $this->admin_model->fetchAllbuyerList();
+    $data['getcustomercompalindetailsdata']= $this->admin_model->getcustomercompalindetailsdata($id);
+    $this->loadViews("masters/viewcustomercomplaint", $this->global, $data, NULL);
 }
 
 public function downlaodcustomercomplaint($id){
