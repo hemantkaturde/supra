@@ -6425,6 +6425,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['payment_status'] = $value['payment_status'];
                 $data[$counter]['action'] = '';
                 // $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addpaymentdetailsdata/".$value['payment_details_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewpaymentdetails/".$value['payment_details_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editpaymentdetails/".$value['payment_details_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['payment_details_id']."' class='fa fa-trash-o deletepaymentdetails' aria-hidden='true'></i>"; 
                 $counter++; 

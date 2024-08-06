@@ -343,6 +343,7 @@
                     || $pageUrl=="vieweqnuiryformdatabyid"
                     || $pageUrl=="viewdebitnoteform"
                     || $pageUrl=="viewcreditnoteform"
+                    || $pageUrl=="viewpaymentdetails"
                     ){echo 'active';}?>">
                       <a href="#">
                         <i class="fa fa-shopping-cart"></i> <span class="menu_label">Purchase</span>
@@ -365,7 +366,7 @@
                         <li class="line_height <?php if($pageUrl=="omschallan" || $pageUrl=='addNewOMSChallan' ||  $pageUrl=='editomschallan' || $pageUrl=="viewomschallan"){echo 'active';}?>"><a href="<?php echo base_url(); ?>omschallan"><i class="fa fa-cubes"></i> OMS Challan</a></li>
                         <li class="line_height <?php if($pageUrl=="enquiryform" || $pageUrl=='addnewenquiryform' ||  $pageUrl=='editenquiryform' ||  $pageUrl=='editeqnuiryformdatabyid' || $pageUrl=="vieweqnuiryformdatabyid"){echo 'active';}?>"><a href="<?php echo base_url(); ?>enquiryform"><i class="fa fa-cubes"></i> Enquiry Form</a></li>
                         <li class="line_height <?php if($pageUrl=="debitnote" || $pageUrl=="addnewdebitnote" || $pageUrl=="editdebitnoteform" || $pageUrl=='editdebitnoteform' || $pageUrl=="viewdebitnoteform"){echo 'active';}?>"><a href="<?php echo base_url(); ?>debitnote"><i class="fa fa-cubes"></i> Debit Note</a></li>
-                        <li class="line_height <?php if($pageUrl=="paymentdetails" || $pageUrl=="addnewpaymentdetails" || $pageUrl=='addpaymentdetailsdata' || $pageUrl=='editpaymentdetails'){echo 'active';}?>"><a href="<?php echo base_url(); ?>paymentdetails"><i class="fa fa-cubes"></i> Payment Details</a></li>
+                        <li class="line_height <?php if($pageUrl=="paymentdetails" || $pageUrl=="addnewpaymentdetails" || $pageUrl=='addpaymentdetailsdata' || $pageUrl=='editpaymentdetails' || $pageUrl=="viewpaymentdetails"){echo 'active';}?>"><a href="<?php echo base_url(); ?>paymentdetails"><i class="fa fa-cubes"></i> Payment Details</a></li>
                         <li class="line_height <?php if($pageUrl=="paymentdetailsreport"){echo 'active';}?>"><a href="<?php echo base_url(); ?>paymentdetailsreport"><i class="fa fa-cubes"></i> Payment Details Report</a></li>
                         <li class="line_height <?php if($pageUrl=="poddetails" || $pageUrl=='addNewPODdetails' ||  $pageUrl=='editpoddetails'){echo 'active';}?>"><a href="<?php echo base_url(); ?>poddetails"><i class="fa fa-cubes"></i> POD Details</a></li>
                         <li class="line_height <?php if($pageUrl=="currentorderstatus"){echo 'active';}?>"><a href="<?php echo base_url(); ?>currentorderstatus"><i class="fa fa-cubes"></i> Current Order Status</a></li>

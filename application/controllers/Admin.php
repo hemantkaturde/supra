@@ -8168,6 +8168,19 @@ class Admin extends BaseController
 
     }
 
+
+    public function viewpaymentdetails($payment_details_id){
+        $process = 'View Payment Details';
+        $processFunction = 'Admin/viewpaymentdetails';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'View Payment Details';
+        $data['vendorList']= $this->admin_model->fetchALLvendorList();
+        $data['supplierList']= $this->admin_model->fetchALLsupplierList();
+        $data['getPaymentdetails'] = $this->admin_model->getPaymentdetails($payment_details_id);
+        $this->loadViews("masters/viewpaymentdetails", $this->global, $data, NULL);
+
+    }
+
     public function deletepaymentdetails(){
 
         $post_submit = $this->input->post();

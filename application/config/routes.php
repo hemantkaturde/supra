@@ -511,6 +511,7 @@ $route['viewomschallan/(:any)'] = "admin/viewomschallan/$1";
 $route['vieweqnuiryformdatabyid/(:any)'] = "admin/vieweqnuiryformdatabyid/$1";
 $route['viewdebitnoteform/(:any)'] = "admin/viewdebitnoteform/$1";
 $route['viewcreditnoteform/(:any)'] = "admin/viewcreditnoteform/$1";
+$route['viewpaymentdetails/(:any)'] = "admin/viewpaymentdetails/$1";
 
 
 
