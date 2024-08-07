@@ -13595,7 +13595,7 @@ public function fetchproductionstatusreportdata($params,$vendor_name,$status,$pa
    
     $this->db->where(TBL_BILL_OF_MATERIAL_VENDOR.'.status', 1);
     $this->db->order_by(TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.id','DESC');
-    $this->db->group_by(TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id',TBL_BILL_OF_MATERIAL_VENDOR.'.id');
+    $this->db->group_by(TBL_FINISHED_GOODS.'.fin_id',TBL_BILL_OF_MATERIAL_VENDOR.'.id');
 
     //$this->db->group_by(array(`tbl_vendor_bill_of_material`.`id`,`tbl_finished_goods`.`fin_id`));  // Produces: GROUP BY title, date
 
