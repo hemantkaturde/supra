@@ -13566,15 +13566,15 @@ public function fetchproductionstatusreportdata($params,$vendor_name,$status,$pa
     $this->db->join(TBL_FINISHED_GOODS, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id= '.TBL_FINISHED_GOODS.'.fin_id');
 
    
-    if($params['search']['value'] != "") 
-    {
-        $this->db->where("(".TBL_BILL_OF_MATERIAL_VENDOR.".bom_number LIKE '%".$params['search']['value']."%'");
-        $this->db->or_where(TBL_BILL_OF_MATERIAL_VENDOR.".date LIKE '%".$params['search']['value']."%'");
-        $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
-        $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
-        $this->db->or_where(TBL_BILL_OF_MATERIAL_VENDOR.".bom_status LIKE '%".$params['search']['value']."%'");
-        $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%')");
-    }
+    // if($params['search']['value'] != "") 
+    // {
+    //     $this->db->where("(".TBL_BILL_OF_MATERIAL_VENDOR.".bom_number LIKE '%".$params['search']['value']."%'");
+    //     $this->db->or_where(TBL_BILL_OF_MATERIAL_VENDOR.".date LIKE '%".$params['search']['value']."%'");
+    //     $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
+    //     $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+    //     $this->db->or_where(TBL_BILL_OF_MATERIAL_VENDOR.".bom_status LIKE '%".$params['search']['value']."%'");
+    //     $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%')");
+    // }
 
     if($vendor_name!='NA'){
         $this->db->where(TBL_BILL_OF_MATERIAL_VENDOR.'.vendor_name', $vendor_name); 
