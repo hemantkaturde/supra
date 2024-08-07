@@ -13561,7 +13561,7 @@ public function fetchproductionstatusreportdata($params,$vendor_name,$status,$pa
     $this->db->join(TBL_BILL_OF_MATERIAL_VENDOR_ITEM, TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.vendor_bill_of_material_id= '.TBL_BILL_OF_MATERIAL_VENDOR.'.id');
     $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id= '.TBL_BILL_OF_MATERIAL_VENDOR.'.vendor_name');
     $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id= '.TBL_BILL_OF_MATERIAL_VENDOR.'.vendor_po_number');
-    $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id= '.TBL_VENDOR_PO_MASTER.'.id');
+    $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id= '.TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.part_number_id');
     $this->db->join(TBL_BUYER_MASTER, TBL_BILL_OF_MATERIAL_VENDOR.'.buyer_name= '.TBL_BUYER_MASTER.'.buyer_id');
     $this->db->join(TBL_FINISHED_GOODS, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id= '.TBL_FINISHED_GOODS.'.fin_id');
    
@@ -13592,8 +13592,8 @@ public function fetchproductionstatusreportdata($params,$vendor_name,$status,$pa
         $this->db->where(TBL_VENDOR_PO_MASTER.'.id', $vendor_po); 
     }
    
-    $this->db->where(TBL_BILL_OF_MATERIAL_VENDOR.'.status', 1);
-    // $this->db->group_by(TBL_BILL_OF_MATERIAL_VENDOR.'.id',TBL_FINISHED_GOODS.'.fin_id');
+    // $this->db->where(TBL_BILL_OF_MATERIAL_VENDOR.'.status', 1);
+    $this->db->group_by(TBL_BILL_OF_MATERIAL_VENDOR.'.id',TBL_FINISHED_GOODS.'.part_number');
     $this->db->order_by(TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.id','DESC');
 
     $this->db->limit($params['length'],$params['start']);
