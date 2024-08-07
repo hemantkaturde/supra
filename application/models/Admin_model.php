@@ -13593,7 +13593,7 @@ public function fetchproductionstatusreportdata($params,$vendor_name,$status,$pa
         $this->db->where(TBL_VENDOR_PO_MASTER.'.id', $vendor_po); 
     }
    
-    $this->db->where(TBL_VENDOR_PO_MASTER.'.id', 222);
+    // $this->db->where(TBL_BILL_OF_MATERIAL_VENDOR.'.status', 1);
     $this->db->group_by(TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.id',TBL_BILL_OF_MATERIAL_VENDOR.'.id',TBL_FINISHED_GOODS.'.fin_id');
     $this->db->order_by(TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.id','DESC');
 
