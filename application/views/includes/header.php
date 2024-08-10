@@ -2,6 +2,7 @@
 <html>
 <?php  
  $pageUrl =$this->uri->segment(1);
+
 ?>
 <head>
     <meta charset="UTF-8">
@@ -153,136 +154,6 @@
             {
             ?>
 
-                    <!-- <li class="treeview <?php if($pageUrl=="companymaster"){echo 'active';}?>" >
-                      <a href="<?php echo base_url(); ?>companymaster">
-                        <i class="fa fa-building-o"></i> <span class="menu_label">Company Info</span>
-                      </a>
-                    </li> 
-
-                    <li class="treeview <?php if($pageUrl=="suppliermaster" || $pageUrl=="addnewSupplier" || $pageUrl=='updateSupplier' || $pageUrl=='rowmaterialmaster' || $pageUrl=='addnewmaterialdata' || $pageUrl=='updateRawmaterial' || $pageUrl=="vendormaster" || $pageUrl=='addnewVendor' || $pageUrl=='updateVendor' || $pageUrl=="uspmaster" || $pageUrl=="addnewUSP" || $pageUrl=="updateUSP" || $pageUrl=="finishedgoodsmaster" || $pageUrl=="addnewFinishedgoods" || $pageUrl=="updateFinishedgoods" || $pageUrl=="plattingmaster" || $pageUrl=="addnewPlatting" || $pageUrl=="updatePlattingmaster" || $pageUrl=="rejectionmaster" || $pageUrl=="addnewRejection" || $pageUrl=="updateRejectionmaster" || $pageUrl=="buyermaster" || $pageUrl=="addnewBuyer" || $pageUrl=="updateBuyer" || $pageUrl=="chamaster" || $pageUrl=='addnewCha' || $pageUrl=='updatecha'){echo 'active';}?>">
-                      <a href="#">
-                        <i class="fa fa-bars"></i> <span class="menu_label">Masters</span>
-                          <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                          </span>
-                      </a>
-                      <ul class="treeview-menu" >
-                        <li class="line_height <?php if($pageUrl=="suppliermaster" || $pageUrl=="addnewSupplier" || $pageUrl=='updateSupplier'){echo 'active';}?>"><a href="<?php echo base_url();?>suppliermaster"><i class="fa fa-cubes"></i> Supplier Master</a></li>
-                        <li class="line_height <?php if($pageUrl=="rowmaterialmaster" || $pageUrl=='addnewmaterialdata' || $pageUrl=='updateRawmaterial'){echo 'active';}?>"><a href="<?php echo base_url(); ?>rowmaterialmaster"><i class="fa fa-cubes"></i> Raw Material Master</a></li>
-                        <li class="line_height <?php if($pageUrl=="vendormaster" || $pageUrl=='addnewVendor' || $pageUrl=='updateVendor'){echo 'active';}?>"><a href="<?php echo base_url(); ?>vendormaster"><i class="fa fa-cubes"></i> Vendor Master</a></li>
-                        <li class="line_height <?php if($pageUrl=="uspmaster" || $pageUrl=="addnewUSP" || $pageUrl=="updateUSP"){echo 'active';}?>"><a href="<?php echo base_url();?>uspmaster"><i class="fa fa-cubes"></i> USP Master</a></li>
-                        <li class="line_height <?php if($pageUrl=="finishedgoodsmaster" || $pageUrl=="addnewFinishedgoods" || $pageUrl=="updateFinishedgoods"){echo 'active';}?>"><a href="<?php echo base_url();?>finishedgoodsmaster"><i class="fa fa-cubes"></i> Finished Goods Master</a></li>
-                        <li class="line_height <?php if($pageUrl=="plattingmaster" || $pageUrl=="addnewPlatting" || $pageUrl=="updatePlattingmaster" ){echo 'active';}?>"><a href="<?php echo base_url();?>plattingmaster"><i class="fa fa-cubes"></i> Platting Master</a></li>
-                        <li class="line_height <?php if($pageUrl=="rejectionmaster" || $pageUrl=="addnewRejection" || $pageUrl=="updateRejectionmaster"){echo 'active';}?>"><a href="<?php echo base_url();?>rejectionmaster"><i class="fa fa-cubes"></i> Rejection Reason Master</a></li>
-                        <li class="line_height <?php if($pageUrl=="buyermaster" || $pageUrl=="addnewBuyer" || $pageUrl=="updateBuyer"){echo 'active';}?>"><a href="<?php echo base_url();?>buyermaster"><i class="fa fa-cubes"></i> Buyer Master</a></li>
-                        <li class="line_height <?php if($pageUrl=="chamaster" || $pageUrl=='addnewCha' || $pageUrl=='updatecha'){echo 'active';}?>"><a href="<?php echo base_url(); ?>chamaster"><i class="fa fa-cubes"></i> CHA Master</a></li>
-                      </ul>
-                    </li>
-
-                    <li class="treeview <?php if($pageUrl=="buyerpo" || $pageUrl=="addnewBuyerpo" || $pageUrl=="editBuyerpo" || $pageUrl=="supplierpo" || $pageUrl=="addnewSupplierpo" || $pageUrl=="editSupplierpo" || $pageUrl=="viewBuyerpo" || $pageUrl=="buyerpoconfirmation" || $pageUrl=="viewSupplierpo" || $pageUrl=="vendorpo" || $pageUrl=="addnewVendorpo" || $pageUrl=="viewVendorpo" || $pageUrl=="supplierpoconfirmation" || $pageUrl=="addSupplierpoconfirmation" || $pageUrl=="viewSupplierpoconfirmation" || $pageUrl=="vendorpoconfirmation" || $pageUrl=="addVendorpoconfirmation" || $pageUrl=="billofmaterial" || $pageUrl=="addnewBillofmaterial" || $pageUrl=="vendorbillofmaterial" || $pageUrl=="addvendorBillofmaterial" || $pageUrl=="viewVendorbillofmaterial" || $pageUrl=="packinginstaruction" || $pageUrl=="exportdetails" || $pageUrl=="packagingform"  || $pageUrl=="rrchallan" || $pageUrl=="addnewpackinginstruction" || $pageUrl=="incomingdetails" || $pageUrl=="addnewencomingdetails" || $pageUrl=="addpackinginstractiondetails" ||  $pageUrl=="editpackinginstraction" ||  $pageUrl=="editincomingdetails" || $pageUrl=="addnewExportDetails" || $pageUrl=="editexportdetails" ||  $pageUrl=="addExportdetailsitems" || $pageUrl=="editVendorpo" || $pageUrl=="viewexportdetails" || $pageUrl=="currentorderstatus" || $pageUrl=="qualityrecord" || $pageUrl=='addNewqualityrecord' || $pageUrl=="stockform" || $pageUrl=='addNewstockform' || $pageUrl=='editstcokformdetails' || $pageUrl=='searchstock' || $pageUrl =="editSupplierpoconfirmation"  || $pageUrl=="editvendorpoconfirmation" || $pageUrl=="editbillofmaterial" || $pageUrl=="editvendorbillofmaterial" || $pageUrl=="stockrejectionform" || $pageUrl=="addnewrejectionform" ||  $pageUrl=="editrejetionform" || $pageUrl=='addrejectionformitemsdata' || $pageUrl=='viewrejectionformitemdetails' || $pageUrl=='editqulityrecordform' || $pageUrl=="buyerpodetailsreport" || $pageUrl=="itcreport" || $pageUrl=="complaintform" || $pageUrl=="addcomplaintform" || $pageUrl=="editcomplainform" || $pageUrl=="creditnote" || $pageUrl=="addcreditnote" || $pageUrl=="editcreditnote" || $pageUrl=="preexport" || $pageUrl=="addnewfreexport" || $pageUrl=="editpreexport" || $pageUrl=='exportdetailsitemdetails' || $pageUrl=='addpreexportitemdetails' || $pageUrl=='editaddpreexportitemdetails' || $pageUrl=='addexportitemdetailswithattributes' || $pageUrl=='addexportitemdetailswithattributesvalues' || $pageUrl=='editexportitemdetailswithattributesvalues' || $pageUrl=='salestrackingreport' || $pageUrl=="addsalestrackingreport" || $pageUrl=="editsalestrackingreport" || $pageUrl=="chadebitnote" ||  $pageUrl=="addchadebitnote" || $pageUrl=="scrapcalculationreport" || $pageUrl=="productionstatusreport" || $pageUrl=="supplierporeport" || $pageUrl=="editchadebitnote" ||  $pageUrl=="salestrackingexcelreport" || $pageUrl=="uspincoming" || $pageUrl=="customercompliant" || $pageUrl=="suppliervendorcompliant" || $pageUrl=="addnewcustomercomplaint" || $pageUrl=="editcustomercomplaint" || $pageUrl=="searchstockreport" || $pageUrl=="addnewsuppliervendorcomplaint" || $pageUrl=="editsuppliervendorcompalint"){echo 'active';}?>">
-                      <a href="#">
-                        <i class="fa fa-laptop"></i> <span class="menu_label">Miscellaneous</span>
-                          <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                          </span>
-                      </a>
-                      <ul class="treeview-menu" >
-                        <li class="line_height <?php if($pageUrl=="buyerpo" || $pageUrl=="addnewBuyerpo"  || $pageUrl=="viewBuyerpo" || $pageUrl=="editBuyerpo" ){echo 'active';}?>"><a href="<?php echo base_url(); ?>buyerpo"><i class="fa fa-cubes"></i> Buyer PO</a></li>
-                        <li class="line_height <?php if($pageUrl=="supplierpo" || $pageUrl=="addnewSupplierpo" || $pageUrl=="viewSupplierpo" || $pageUrl=="editSupplierpo"){echo 'active';}?>"><a href="<?php echo base_url(); ?>supplierpo"><i class="fa fa-cubes"></i> Supplier PO</a></li>
-                        <li class="line_height <?php if($pageUrl=="vendorpo" || $pageUrl=="addnewVendorpo" || $pageUrl=="viewVendorpo"  || $pageUrl=="addnewVendorpo" || $pageUrl=="editVendorpo"){echo 'active';}?>"><a href="<?php echo base_url(); ?>vendorpo"><i class="fa fa-cubes"></i> Vendor PO</a></li>
-                        <li class="line_height <?php if($pageUrl=="supplierpoconfirmation" || $pageUrl=="addSupplierpoconfirmation" || $pageUrl =="viewSupplierpoconfirmation" || $pageUrl =="editSupplierpoconfirmation" ){echo 'active';}?>"><a href="<?php echo base_url(); ?>supplierpoconfirmation"><i class="fa fa-cubes"></i> Supplier PO Confirmation</a></li>
-                        <li class="line_height <?php if($pageUrl=="vendorpoconfirmation" || $pageUrl=="addVendorpoconfirmation" || $pageUrl=="editvendorpoconfirmation"){echo 'active';}?>"><a href="<?php echo base_url(); ?>vendorpoconfirmation"><i class="fa fa-cubes"></i> Vendor PO Confirmation</a></li>
-                        <li class="line_height <?php if($pageUrl=="billofmaterial" || $pageUrl=="addnewBillofmaterial" || $pageUrl=="editbillofmaterial"){echo 'active';}?>"><a href="<?php echo base_url(); ?>billofmaterial"><i class="fa fa-cubes"></i> Bill of Material</a></li>
-                        <li class="line_height <?php if($pageUrl=="vendorbillofmaterial" || $pageUrl=="addvendorBillofmaterial" || $pageUrl=="viewVendorbillofmaterial" || $pageUrl=="editvendorbillofmaterial"){echo 'active';}?>"><a href="<?php echo base_url(); ?>vendorbillofmaterial"><i class="fa fa-cubes"></i> Vendor Bill of Material</a></li>
-                        <li class="line_height <?php if($pageUrl=="incomingdetails" || $pageUrl=="addnewencomingdetails" ||  $pageUrl=="editincomingdetails"){echo 'active';}?>"><a href="<?php echo base_url(); ?>incomingdetails"><i class="fa fa-cubes"></i> Incoming Details</a></li>
-                        <li class="line_height <?php if($pageUrl=="stockform" || $pageUrl=='addNewstockform' || $pageUrl=='editstcokformdetails' ){echo 'active';}?>"><a href="<?php echo base_url(); ?>stockform"><i class="fa fa-cubes"></i> Stock Form</a></li>
-                        <li class="line_height <?php if($pageUrl=="stockrejectionform" || $pageUrl=='addnewrejectionform' || $pageUrl=='editrejetionform' || $pageUrl=='addrejectionformitemsdata' || $pageUrl=='viewrejectionformitemdetails'){echo 'active';}?>"><a href="<?php echo base_url(); ?>stockrejectionform"><i class="fa fa-cubes"></i> Stock Rejection Form</a></li>
-                        <li class="line_height <?php if($pageUrl=="qualityrecord" || $pageUrl=='addNewqualityrecord' || $pageUrl=='editqulityrecordform'){echo 'active';}?>"><a href="<?php echo base_url(); ?>qualityrecord"><i class="fa fa-cubes"></i> Quality Record</a></li>
-                        <li class="line_height <?php if($pageUrl=="packinginstaruction" || $pageUrl=="addnewpackinginstruction" || $pageUrl=="addpackinginstractiondetails" || $pageUrl=="editpackinginstraction"){echo 'active';}?>"><a href="<?php echo base_url(); ?>packinginstaruction"><i class="fa fa-cubes"></i> Packing Instructions / Form</a></li>
-                        <li class="line_height <?php if($pageUrl=="exportdetails" || $pageUrl=="addnewExportDetails" || $pageUrl=="editexportdetails" || $pageUrl=="addExportdetailsitems" || $pageUrl=="viewexportdetails"){echo 'active';}?>"><a href="<?php echo base_url(); ?>exportdetails"><i class="fa fa-cubes"></i> Export Details</a></li>
-                        <li class="line_height <?php if($pageUrl=="currentorderstatus"){echo 'active';}?>"><a href="<?php echo base_url(); ?>currentorderstatus"><i class="fa fa-cubes"></i> Current Order Status</a></li>
-                        <li class="line_height <?php if($pageUrl=="buyerpodetailsreport"){echo 'active';}?>"><a href="<?php echo base_url(); ?>buyerpodetailsreport"><i class="fa fa-cubes"></i> Buyer PO Details</a></li>
-                        <li class="line_height <?php if($pageUrl=="complaintform" || $pageUrl=="addcomplaintform" || $pageUrl=="editcomplainform"){echo 'active';}?>"><a href="<?php echo base_url(); ?>complaintform"><i class="fa fa-cubes"></i> Complaint form</a></li>
-                        <li class="line_height <?php if($pageUrl=="itcreport"){echo 'active';}?>"><a href="<?php echo base_url(); ?>itcreport"><i class="fa fa-cubes"></i> ITC Report</a></li>
-                        <li class="line_height <?php if($pageUrl=="creditnote" || $pageUrl=="addcreditnote" || $pageUrl=="editcreditnote"){echo 'active';}?>"><a href="<?php echo base_url(); ?>creditnote"><i class="fa fa-cubes"></i> Credit Note</a></li>
-                        <li class="line_height <?php if($pageUrl=="preexport" || $pageUrl=="addnewfreexport" || $pageUrl=="editpreexport" || $pageUrl=='exportdetailsitemdetails' || $pageUrl=='addpreexportitemdetails' || $pageUrl=='editaddpreexportitemdetails' || $pageUrl=='addexportitemdetailswithattributes' || $pageUrl=='addexportitemdetailswithattributesvalues' || $pageUrl=='editexportitemdetailswithattributesvalues'){echo 'active';}?>"><a href="<?php echo base_url(); ?>preexport"><i class="fa fa-cubes"></i> Pre Export</a></li>
-                        <li class="line_height <?php if($pageUrl=="salestrackingreport" || $pageUrl=="addsalestrackingreport" || $pageUrl=="editsalestrackingreport"){echo 'active';}?>"><a href="<?php echo base_url(); ?>salestrackingreport"><i class="fa fa-cubes"></i> Sales Tracking Report</a></li>
-                        <li class="line_height <?php if($pageUrl=="salestrackingexcelreport"){echo 'active';}?>"><a href="<?php echo base_url(); ?>salestrackingexcelreport"><i class="fa fa-cubes"></i> Sales Tracking Excel Report</a></li>
-                        <li class="line_height <?php if($pageUrl=="chadebitnote" || $pageUrl=="addchadebitnote" || $pageUrl=="editchadebitnote" ){echo 'active';}?>"><a href="<?php echo base_url(); ?>chadebitnote"><i class="fa fa-cubes"></i> CHA Debit Note</a></li>
-                        <li class="line_height <?php if($pageUrl=="scrapcalculationreport"){echo 'active';}?>"><a href="<?php echo base_url(); ?>scrapcalculationreport"><i class="fa fa-cubes"></i> Scrap Calculation Report</a></li>
-                        <li class="line_height <?php if($pageUrl=="productionstatusreport"){echo 'active';}?>"><a href="<?php echo base_url(); ?>productionstatusreport"><i class="fa fa-cubes"></i> Production Status Report</a></li>
-                        <li class="line_height <?php if($pageUrl=="supplierporeport"){echo 'active';}?>"><a href="<?php echo base_url(); ?>supplierporeport"><i class="fa fa-cubes"></i> Supplier PO Confirmation Report</a></li>
-                        <li class="line_height <?php if($pageUrl=="uspincoming"){echo 'active';}?>"><a href="<?php echo base_url(); ?>uspincoming"><i class="fa fa-cubes"></i> USP Incoming</a></li>
-                        <li class="line_height <?php if($pageUrl=="customercompliant" || $pageUrl=="addnewcustomercomplaint" || $pageUrl=="editcustomercomplaint"){echo 'active';}?>"><a href="<?php echo base_url(); ?>customercompliant"><i class="fa fa-cubes"></i> Customer Compalint</a></li>
-                        <li class="line_height <?php if($pageUrl=="suppliervendorcompliant" || $pageUrl=="addnewsuppliervendorcomplaint" || $pageUrl=="editsuppliervendorcompalint"){echo 'active';}?>"><a href="<?php echo base_url(); ?>suppliervendorcompliant"><i class="fa fa-cubes"></i> Supplier Vendor Compalint</a></li>
-                        <li class="line_height <?php if($pageUrl=="searchstockreport" || $pageUrl=="searchstock"){echo 'active';}?>"><a href="<?php echo base_url(); ?>searchstockreport"><i class="fa fa-cubes"></i> Search Stock Report</a></li>
-
-                      </ul>
-                    </li>
-
-                    <li class="treeview <?php if($pageUrl=="jobWork" || $pageUrl=="addjobwork" || $pageUrl=="editjobwork" ||  $pageUrl=="scrapreturn" || $pageUrl=="addnewScrapreturn" || $pageUrl=="editscrapreturn" || $pageUrl=="reworkrejectionreturn" || $pageUrl=="addneworkrejection" || $pageUrl=="editreworkrejection" || $pageUrl=="challanform" || $pageUrl=="addchallanform" || $pageUrl=="editchallanform" || $pageUrl=="omschallan" || $pageUrl=='addNewOMSChallan' ||  $pageUrl=='editomschallan' || $pageUrl=='enquiryform' || $pageUrl=="editeqnuiryformdatabyid" || $pageUrl=='addnewenquiryform' ||  $pageUrl=='editenquiryform' || $pageUrl=='editeqnuiryformdata'){echo 'active';}?>">
-                      <a href="#">
-                        <i class="fa fa-file-text-o"></i> <span class="menu_label">Challans</span>
-                          <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                          </span>
-                      </a>
-                      <ul class="treeview-menu" >
-                        <li class="line_height <?php if($pageUrl=="jobWork" || $pageUrl=="addjobwork" || $pageUrl=="editjobwork"){echo 'active';}?>"><a href="<?php echo base_url(); ?>jobWork"><i class="fa fa-cubes"></i> Job Work</a></li>
-                        <li class="line_height <?php if($pageUrl=="reworkrejectionreturn" || $pageUrl=="addneworkrejection" || $pageUrl=="editreworkrejection"){echo 'active';}?>"><a href="<?php echo base_url(); ?>reworkrejectionreturn"><i class="fa fa-cubes"></i> Rework / Rejection Return (RR)</a></li>
-                        <li class="line_height <?php if($pageUrl=="challanform" || $pageUrl=="addchallanform" || $pageUrl=="editchallanform"){echo 'active';}?>"><a href="<?php echo base_url(); ?>challanform"><i class="fa fa-cubes"></i> Challan Form</a></li>                        
-                        <li class="line_height <?php if($pageUrl=="scrapreturn" || $pageUrl=="addnewScrapreturn" || $pageUrl=="editscrapreturn"){echo 'active';}?>"><a href="<?php echo base_url(); ?>scrapreturn"><i class="fa fa-cubes"></i> Scrap Return</a></li>
-                        <li class="line_height <?php if($pageUrl=="omschallan" || $pageUrl=='addNewOMSChallan' ||  $pageUrl=='editomschallan'){echo 'active';}?>"><a href="<?php echo base_url(); ?>omschallan"><i class="fa fa-cubes"></i> OMS Challan</a></li>
-                        <li class="line_height <?php if($pageUrl=="enquiryform" || $pageUrl=='addnewenquiryform' ||  $pageUrl=='editenquiryform' ||  $pageUrl=='editeqnuiryformdatabyid'){echo 'active';}?>"><a href="<?php echo base_url(); ?>enquiryform"><i class="fa fa-cubes"></i> Enquiry Form</a></li>
-                      </ul>
-                    </li>
-
-                    <li class="treeview <?php if($pageUrl=="debitnote" || $pageUrl=="addnewdebitnote" || $pageUrl=='editdebitnoteform' || $pageUrl=="paymentdetails" || $pageUrl=="addnewpaymentdetails" || $pageUrl=='editpaymentdetails' || $pageUrl=="poddetails" || $pageUrl=='addNewPODdetails' || $pageUrl=='addpaymentdetailsdata' || $pageUrl=='editpoddetails' || $pageUrl=="paymentdetailsreport"){echo 'active';}?>">
-                      <a href="#">
-                        <i class="fa fa-file-text-o"></i> <span class="menu_label">Debit Note</span>
-                          <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                          </span>
-                      </a>
-                      <ul class="treeview-menu" >
-                        <li class="line_height <?php if($pageUrl=="debitnote" || $pageUrl=="addnewdebitnote" || $pageUrl=="editdebitnoteform" || $pageUrl=='editdebitnoteform'){echo 'active';}?>"><a href="<?php echo base_url(); ?>debitnote"><i class="fa fa-cubes"></i> Debit Note</a></li>
-                        <li class="line_height <?php if($pageUrl=="paymentdetails" || $pageUrl=="addnewpaymentdetails" || $pageUrl=='addpaymentdetailsdata' || $pageUrl=='editpaymentdetails'){echo 'active';}?>"><a href="<?php echo base_url(); ?>paymentdetails"><i class="fa fa-cubes"></i> Payment Details</a></li>
-                        <li class="line_height <?php if($pageUrl=="poddetails" || $pageUrl=='addNewPODdetails' ||  $pageUrl=='editpoddetails'){echo 'active';}?>"><a href="<?php echo base_url(); ?>poddetails"><i class="fa fa-cubes"></i> POD Details</a></li>
-                        <li class="line_height <?php if($pageUrl=="paymentdetailsreport"){echo 'active';}?>"><a href="<?php echo base_url(); ?>paymentdetailsreport"><i class="fa fa-cubes"></i> Payment Details Report</a></li>
-                      </ul>
-                    </li>
-      
-                    <li class="treeview <?php if($pageUrl=="userListing" || $pageUrl=="addNew" || $pageUrl=="editOld"){echo 'active';}?>">
-                        <a href="#">
-                            <i class="fa fa-users "></i>
-                               <span class="menu_label"> Users</span> 
-                               <span class="pull-right-container">
-                                  <i class="fa fa-angle-left pull-right"></i>
-                              </span>
-                        </a>
-                        <ul class="treeview-menu" >
-                           <li class="line_height <?php if($pageUrl=="userListing" || $pageUrl=="addNew" || $pageUrl=="editOld"){echo 'active';}?>"><a href="<?php echo base_url(); ?>userListing"><i class="fa fa-user"></i> User</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="treeview <?php if($pageUrl=="log-history" || $pageUrl=="log-history-upload" || $pageUrl=="log-history-backup"){echo 'active';}?>">
-                        <a href="#">
-                            <i class="fa fa-archive"></i>
-                            <span class="menu_label">Log Records</span>
-                                <span class="pull-right-container">
-                                  <i class="fa fa-angle-left pull-right"></i>
-                              </span>
-                        </a>
-
-                        <ul class="treeview-menu" >
-                            <li class="line_height <?php if($pageUrl=="log-history"){echo 'active';}?>"><a href="<?php echo base_url(); ?>log-history"><i class="fa fa-archive"></i> Log Records</a></li>
-                            <li class="line_height <?php if($pageUrl=="log-history-upload"){echo 'active';}?>"><a href="<?php echo base_url(); ?>log-history-upload"><i class="fa fa-upload"></i> Upload Backup</a></li>
-                            <li class="line_height <?php if($pageUrl=="log-history-backup"){echo 'active';}?>"><a href="<?php echo base_url(); ?>log-history-backup"><i class="fa fa-archive"></i> Log Records Backup</a></li>
-                        </ul>
-                    </li> -->
-
-
-
 
                     <li class="treeview <?php if($pageUrl=="companymaster"){echo 'active';}?>" >
                       <a href="<?php echo base_url(); ?>companymaster">
@@ -319,8 +190,6 @@
                     || $pageUrl=="billofmaterial" || $pageUrl=="addnewBillofmaterial" || $pageUrl=="editbillofmaterial"
                     || $pageUrl=="vendorbillofmaterial" || $pageUrl=="addvendorBillofmaterial" || $pageUrl=="viewVendorbillofmaterial" || $pageUrl=="editvendorbillofmaterial"
                     || $pageUrl=="jobWork" || $pageUrl=="addjobwork" || $pageUrl=="editjobwork"
-                    || $pageUrl=="reworkrejectionreturn" || $pageUrl=="addneworkrejection" || $pageUrl=="editreworkrejection"
-                    || $pageUrl=="challanform" || $pageUrl=="addchallanform" || $pageUrl=="editchallanform"
                     || $pageUrl=="scrapreturn" || $pageUrl=="addnewScrapreturn" || $pageUrl=="editscrapreturn"
                     || $pageUrl=="scrapcalculationreport"
                     || $pageUrl=="omschallan" || $pageUrl=='addNewOMSChallan' ||  $pageUrl=='editomschallan'
@@ -336,8 +205,7 @@
                     || $pageUrl=="viewvendorpoconfirmation"
                     || $pageUrl=="viewbillofmaterial"
                     || $pageUrl=="viewjobwork"
-                    || $pageUrl=="viewreworkrejection"
-                    || $pageUrl=="viewchallanform"
+                 
                     || $pageUrl=="viewscrapreturn"
                     || $pageUrl=="viewomschallan"
                     || $pageUrl=="vieweqnuiryformdatabyid"
@@ -360,8 +228,6 @@
                         <li class="line_height <?php if($pageUrl=="billofmaterial" || $pageUrl=="addnewBillofmaterial" || $pageUrl=="editbillofmaterial" || $pageUrl=="viewbillofmaterial"){echo 'active';}?>"><a href="<?php echo base_url(); ?>billofmaterial"><i class="fa fa-cubes"></i> Bill of Material</a></li>
                         <li class="line_height <?php if($pageUrl=="vendorbillofmaterial" || $pageUrl=="addvendorBillofmaterial" || $pageUrl=="viewVendorbillofmaterial" || $pageUrl=="editvendorbillofmaterial"){echo 'active';}?>"><a href="<?php echo base_url(); ?>vendorbillofmaterial"><i class="fa fa-cubes"></i> Vendor Bill of Material</a></li>
                         <li class="line_height <?php if($pageUrl=="jobWork" || $pageUrl=="addjobwork" || $pageUrl=="editjobwork" || $pageUrl=="viewjobwork"){echo 'active';}?>"><a href="<?php echo base_url(); ?>jobWork"><i class="fa fa-cubes"></i> Job Work</a></li>
-                        <li class="line_height <?php if($pageUrl=="reworkrejectionreturn" || $pageUrl=="addneworkrejection" || $pageUrl=="editreworkrejection" || $pageUrl=="viewreworkrejection"){echo 'active';}?>"><a href="<?php echo base_url(); ?>reworkrejectionreturn"><i class="fa fa-cubes"></i> Rework / Rejection Return (RR)</a></li>
-                        <li class="line_height <?php if($pageUrl=="challanform" || $pageUrl=="addchallanform" || $pageUrl=="editchallanform" || $pageUrl=="viewchallanform"){echo 'active';}?>"><a href="<?php echo base_url(); ?>challanform"><i class="fa fa-cubes"></i> Challan Form</a></li>                        
                         <li class="line_height <?php if($pageUrl=="scrapreturn" || $pageUrl=="addnewScrapreturn" || $pageUrl=="editscrapreturn" || $pageUrl=="viewscrapreturn"){echo 'active';}?>"><a href="<?php echo base_url(); ?>scrapreturn"><i class="fa fa-cubes"></i> Scrap Return</a></li>
                         <li class="line_height <?php if($pageUrl=="scrapcalculationreport"){echo 'active';}?>"><a href="<?php echo base_url(); ?>scrapcalculationreport"><i class="fa fa-cubes"></i> Scrap Calculation Report</a></li>
                         <li class="line_height <?php if($pageUrl=="omschallan" || $pageUrl=='addNewOMSChallan' ||  $pageUrl=='editomschallan' || $pageUrl=="viewomschallan"){echo 'active';}?>"><a href="<?php echo base_url(); ?>omschallan"><i class="fa fa-cubes"></i> OMS Challan</a></li>
@@ -377,47 +243,19 @@
                       </ul>
                     </li>
 
-                    <!-- <li class="treeview <?php if($pageUrl=="buyerpo" || $pageUrl=="addnewBuyerpo" || $pageUrl=="editBuyerpo" || $pageUrl=="supplierpo" || $pageUrl=="addnewSupplierpo" || $pageUrl=="editSupplierpo" || $pageUrl=="viewBuyerpo" || $pageUrl=="buyerpoconfirmation" || $pageUrl=="viewSupplierpo" || $pageUrl=="vendorpo" || $pageUrl=="addnewVendorpo" || $pageUrl=="viewVendorpo" || $pageUrl=="supplierpoconfirmation" || $pageUrl=="addSupplierpoconfirmation" || $pageUrl=="viewSupplierpoconfirmation" || $pageUrl=="vendorpoconfirmation" || $pageUrl=="addVendorpoconfirmation" || $pageUrl=="billofmaterial" || $pageUrl=="addnewBillofmaterial" || $pageUrl=="vendorbillofmaterial" || $pageUrl=="addvendorBillofmaterial" || $pageUrl=="viewVendorbillofmaterial" || $pageUrl=="packinginstaruction" || $pageUrl=="exportdetails" || $pageUrl=="packagingform"  || $pageUrl=="rrchallan" || $pageUrl=="addnewpackinginstruction" || $pageUrl=="incomingdetails" || $pageUrl=="addnewencomingdetails" || $pageUrl=="addpackinginstractiondetails" ||  $pageUrl=="editpackinginstraction" ||  $pageUrl=="editincomingdetails" || $pageUrl=="addnewExportDetails" || $pageUrl=="editexportdetails" ||  $pageUrl=="addExportdetailsitems" || $pageUrl=="editVendorpo" || $pageUrl=="viewexportdetails" || $pageUrl=="currentorderstatus" || $pageUrl=="qualityrecord" || $pageUrl=='addNewqualityrecord' || $pageUrl=="stockform" || $pageUrl=='addNewstockform' || $pageUrl=='editstcokformdetails' || $pageUrl=='searchstock' || $pageUrl =="editSupplierpoconfirmation"  || $pageUrl=="editvendorpoconfirmation" || $pageUrl=="editbillofmaterial" || $pageUrl=="editvendorbillofmaterial" || $pageUrl=="stockrejectionform" || $pageUrl=="addnewrejectionform" ||  $pageUrl=="editrejetionform" || $pageUrl=='addrejectionformitemsdata' || $pageUrl=='viewrejectionformitemdetails' || $pageUrl=='editqulityrecordform' || $pageUrl=="buyerpodetailsreport" || $pageUrl=="itcreport" || $pageUrl=="complaintform" || $pageUrl=="addcomplaintform" || $pageUrl=="editcomplainform" || $pageUrl=="creditnote" || $pageUrl=="addcreditnote" || $pageUrl=="editcreditnote" || $pageUrl=="preexport" || $pageUrl=="addnewfreexport" || $pageUrl=="editpreexport" || $pageUrl=='exportdetailsitemdetails' || $pageUrl=='addpreexportitemdetails' || $pageUrl=='editaddpreexportitemdetails' || $pageUrl=='addexportitemdetailswithattributes' || $pageUrl=='addexportitemdetailswithattributesvalues' || $pageUrl=='editexportitemdetailswithattributesvalues' || $pageUrl=='salestrackingreport' || $pageUrl=="addsalestrackingreport" || $pageUrl=="editsalestrackingreport" || $pageUrl=="chadebitnote" ||  $pageUrl=="addchadebitnote" || $pageUrl=="scrapcalculationreport" || $pageUrl=="productionstatusreport" || $pageUrl=="supplierporeport" || $pageUrl=="editchadebitnote" ||  $pageUrl=="salestrackingexcelreport" || $pageUrl=="uspincoming" || $pageUrl=="customercompliant" || $pageUrl=="suppliervendorcompliant" || $pageUrl=="addnewcustomercomplaint" || $pageUrl=="editcustomercomplaint" || $pageUrl=="searchstockreport" || $pageUrl=="addnewsuppliervendorcomplaint" || $pageUrl=="editsuppliervendorcompalint" || $pageUrl="addnewuspincoming"){echo 'active';}?>">
-                      <a href="#">
-                        <i class="fa fa-laptop"></i> <span class="menu_label">Miscellaneous</span>
-                          <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                          </span>
-                      </a>
-                      <ul class="treeview-menu" >
-                        <li class="line_height <?php if($pageUrl=="supplierpo" || $pageUrl=="addnewSupplierpo" || $pageUrl=="viewSupplierpo" || $pageUrl=="editSupplierpo"){echo 'active';}?>"><a href="<?php echo base_url(); ?>supplierpo"><i class="fa fa-cubes"></i> Supplier PO</a></li>
-                        <li class="line_height <?php if($pageUrl=="vendorpo" || $pageUrl=="addnewVendorpo" || $pageUrl=="viewVendorpo"  || $pageUrl=="addnewVendorpo" || $pageUrl=="editVendorpo"){echo 'active';}?>"><a href="<?php echo base_url(); ?>vendorpo"><i class="fa fa-cubes"></i> Vendor PO</a></li>
-                        <li class="line_height <?php if($pageUrl=="supplierpoconfirmation" || $pageUrl=="addSupplierpoconfirmation" || $pageUrl =="viewSupplierpoconfirmation" || $pageUrl =="editSupplierpoconfirmation" ){echo 'active';}?>"><a href="<?php echo base_url(); ?>supplierpoconfirmation"><i class="fa fa-cubes"></i> Supplier PO Confirmation</a></li>
-                        <li class="line_height <?php if($pageUrl=="vendorpoconfirmation" || $pageUrl=="addVendorpoconfirmation" || $pageUrl=="editvendorpoconfirmation"){echo 'active';}?>"><a href="<?php echo base_url(); ?>vendorpoconfirmation"><i class="fa fa-cubes"></i> Vendor PO Confirmation</a></li>
-                        <li class="line_height <?php if($pageUrl=="billofmaterial" || $pageUrl=="addnewBillofmaterial" || $pageUrl=="editbillofmaterial"){echo 'active';}?>"><a href="<?php echo base_url(); ?>billofmaterial"><i class="fa fa-cubes"></i> Bill of Material</a></li>
-                        <li class="line_height <?php if($pageUrl=="vendorbillofmaterial" || $pageUrl=="addvendorBillofmaterial" || $pageUrl=="viewVendorbillofmaterial" || $pageUrl=="editvendorbillofmaterial"){echo 'active';}?>"><a href="<?php echo base_url(); ?>vendorbillofmaterial"><i class="fa fa-cubes"></i> Vendor Bill of Material</a></li>
-                        <li class="line_height <?php if($pageUrl=="incomingdetails" || $pageUrl=="addnewencomingdetails" ||  $pageUrl=="editincomingdetails"){echo 'active';}?>"><a href="<?php echo base_url(); ?>incomingdetails"><i class="fa fa-cubes"></i> Incoming Details</a></li>
-                        <li class="line_height <?php if($pageUrl=="stockform" || $pageUrl=='addNewstockform' || $pageUrl=='editstcokformdetails' ){echo 'active';}?>"><a href="<?php echo base_url(); ?>stockform"><i class="fa fa-cubes"></i> Stock Form</a></li>
-                        <li class="line_height <?php if($pageUrl=="stockrejectionform" || $pageUrl=='addnewrejectionform' || $pageUrl=='editrejetionform' || $pageUrl=='addrejectionformitemsdata' || $pageUrl=='viewrejectionformitemdetails'){echo 'active';}?>"><a href="<?php echo base_url(); ?>stockrejectionform"><i class="fa fa-cubes"></i> Stock Rejection Form</a></li>
-                        <li class="line_height <?php if($pageUrl=="qualityrecord" || $pageUrl=='addNewqualityrecord' || $pageUrl=='editqulityrecordform'){echo 'active';}?>"><a href="<?php echo base_url(); ?>qualityrecord"><i class="fa fa-cubes"></i> Quality Record</a></li>
-                        <li class="line_height <?php if($pageUrl=="packinginstaruction" || $pageUrl=="addnewpackinginstruction" || $pageUrl=="addpackinginstractiondetails" || $pageUrl=="editpackinginstraction"){echo 'active';}?>"><a href="<?php echo base_url(); ?>packinginstaruction"><i class="fa fa-cubes"></i> Packing Instructions / Form</a></li>
-                        <li class="line_height <?php if($pageUrl=="exportdetails" || $pageUrl=="addnewExportDetails" || $pageUrl=="editexportdetails" || $pageUrl=="addExportdetailsitems" || $pageUrl=="viewexportdetails"){echo 'active';}?>"><a href="<?php echo base_url(); ?>exportdetails"><i class="fa fa-cubes"></i> Export Details</a></li>
-                        <li class="line_height <?php if($pageUrl=="currentorderstatus"){echo 'active';}?>"><a href="<?php echo base_url(); ?>currentorderstatus"><i class="fa fa-cubes"></i> Current Order Status</a></li>
-                        <li class="line_height <?php if($pageUrl=="buyerpodetailsreport"){echo 'active';}?>"><a href="<?php echo base_url(); ?>buyerpodetailsreport"><i class="fa fa-cubes"></i> Buyer PO Details</a></li>
-                        <li class="line_height <?php if($pageUrl=="complaintform" || $pageUrl=="addcomplaintform" || $pageUrl=="editcomplainform"){echo 'active';}?>"><a href="<?php echo base_url(); ?>complaintform"><i class="fa fa-cubes"></i> Complaint form</a></li>
-                        <li class="line_height <?php if($pageUrl=="itcreport"){echo 'active';}?>"><a href="<?php echo base_url(); ?>itcreport"><i class="fa fa-cubes"></i> ITC Report</a></li>
-                        <li class="line_height <?php if($pageUrl=="creditnote" || $pageUrl=="addcreditnote" || $pageUrl=="editcreditnote"){echo 'active';}?>"><a href="<?php echo base_url(); ?>creditnote"><i class="fa fa-cubes"></i> Credit Note</a></li>
-                        <li class="line_height <?php if($pageUrl=="preexport" || $pageUrl=="addnewfreexport" || $pageUrl=="editpreexport" || $pageUrl=='exportdetailsitemdetails' || $pageUrl=='addpreexportitemdetails' || $pageUrl=='editaddpreexportitemdetails' || $pageUrl=='addexportitemdetailswithattributes' || $pageUrl=='addexportitemdetailswithattributesvalues' || $pageUrl=='editexportitemdetailswithattributesvalues'){echo 'active';}?>"><a href="<?php echo base_url(); ?>preexport"><i class="fa fa-cubes"></i> Pre Export</a></li>
-                        <li class="line_height <?php if($pageUrl=="salestrackingreport" || $pageUrl=="addsalestrackingreport" || $pageUrl=="editsalestrackingreport"){echo 'active';}?>"><a href="<?php echo base_url(); ?>salestrackingreport"><i class="fa fa-cubes"></i> Sales Tracking Report</a></li>
-                        <li class="line_height <?php if($pageUrl=="salestrackingexcelreport"){echo 'active';}?>"><a href="<?php echo base_url(); ?>salestrackingexcelreport"><i class="fa fa-cubes"></i> Sales Tracking Excel Report</a></li>
-                        <li class="line_height <?php if($pageUrl=="chadebitnote" || $pageUrl=="addchadebitnote" || $pageUrl=="editchadebitnote" ){echo 'active';}?>"><a href="<?php echo base_url(); ?>chadebitnote"><i class="fa fa-cubes"></i> CHA Debit Note</a></li>
-                        <li class="line_height <?php if($pageUrl=="scrapcalculationreport"){echo 'active';}?>"><a href="<?php echo base_url(); ?>scrapcalculationreport"><i class="fa fa-cubes"></i> Scrap Calculation Report</a></li>
-                        <li class="line_height <?php if($pageUrl=="productionstatusreport"){echo 'active';}?>"><a href="<?php echo base_url(); ?>productionstatusreport"><i class="fa fa-cubes"></i> Production Status Report</a></li>
-                        <li class="line_height <?php if($pageUrl=="supplierporeport"){echo 'active';}?>"><a href="<?php echo base_url(); ?>supplierporeport"><i class="fa fa-cubes"></i> Supplier PO Confirmation Report</a></li>
-                        <li class="line_height <?php if($pageUrl=="uspincoming"){echo 'active';}?>"><a href="<?php echo base_url(); ?>uspincoming"><i class="fa fa-cubes"></i> USP Incoming</a></li>
-                        <li class="line_height <?php if($pageUrl=="customercompliant" || $pageUrl=="addnewcustomercomplaint" || $pageUrl=="editcustomercomplaint"){echo 'active';}?>"><a href="<?php echo base_url(); ?>customercompliant"><i class="fa fa-cubes"></i> Customer Compalint</a></li>
-                        <li class="line_height <?php if($pageUrl=="suppliervendorcompliant" || $pageUrl=="addnewsuppliervendorcomplaint" || $pageUrl=="editsuppliervendorcompalint"){echo 'active';}?>"><a href="<?php echo base_url(); ?>suppliervendorcompliant"><i class="fa fa-cubes"></i> Supplier Vendor Compalint</a></li>
-                        <li class="line_height <?php if($pageUrl=="searchstockreport" || $pageUrl=="searchstock"){echo 'active';}?>"><a href="<?php echo base_url(); ?>searchstockreport"><i class="fa fa-cubes"></i> Search Stock Report</a></li>
 
-                      </ul>
-                    </li> -->
-
-                    <li class="treeview  <?php if($pageUrl=="incomingdetails" || $pageUrl=="addnewencomingdetails" ||  $pageUrl=="editincomingdetails" || $pageUrl=="uspincoming" || $pageUrl=="stockform" || $pageUrl=='addNewstockform' || $pageUrl=='editstcokformdetails' || $pageUrl=="stockrejectionform" || $pageUrl=='addnewrejectionform' || $pageUrl=='editrejetionform' || $pageUrl=='addrejectionformitemsdata' || $pageUrl=='viewrejectionformitemdetails' || $pageUrl=="searchstockreport" || $pageUrl=="searchstock" || $pageUrl=="preexport" || $pageUrl=="addnewfreexport" || $pageUrl=="editpreexport" || $pageUrl=='exportdetailsitemdetails' || $pageUrl=='addpreexportitemdetails' || $pageUrl=='editaddpreexportitemdetails' || $pageUrl=='addexportitemdetailswithattributes' || $pageUrl=='addexportitemdetailswithattributesvalues' || $pageUrl=='editexportitemdetailswithattributesvalues' || $pageUrl=="jobWork" || $pageUrl=="addjobwork" || $pageUrl=="editjobwork"){echo 'active';}?>">
+                    <li class="treeview  <?php if($pageUrl=="incomingdetails" || $pageUrl=="addnewencomingdetails" 
+                    ||  $pageUrl=="editincomingdetails" || $pageUrl=="uspincoming" || $pageUrl=="stockform" 
+                    || $pageUrl=='addNewstockform' || $pageUrl=='editstcokformdetails' || $pageUrl=="stockrejectionform" 
+                    || $pageUrl=='addnewrejectionform' || $pageUrl=='editrejetionform' || $pageUrl=='addrejectionformitemsdata' 
+                    || $pageUrl=='viewrejectionformitemdetails' || $pageUrl=="searchstockreport" || $pageUrl=="searchstock" 
+                    || $pageUrl=="preexport" || $pageUrl=="addnewfreexport" || $pageUrl=="editpreexport" 
+                    || $pageUrl=='exportdetailsitemdetails' || $pageUrl=='addpreexportitemdetails'
+                    || $pageUrl=='editaddpreexportitemdetails' || $pageUrl=='addexportitemdetailswithattributes' 
+                    || $pageUrl=='addexportitemdetailswithattributesvalues' || $pageUrl=='editexportitemdetailswithattributesvalues' 
+                    || $pageUrl=="reworkrejectionreturn" || $pageUrl=="addneworkrejection" || $pageUrl=="editreworkrejection" 
+                    || $pageUrl=="viewreworkrejection" || $pageUrl=="viewchallanform"
+                    || $pageUrl=="challanform" || $pageUrl=="addchallanform" || $pageUrl=="editchallanform"){echo 'active';}?>">
                       <a href="#">
                         <i class="fa fa-stack-exchange"></i> <span class="menu_label">Stock</span>
                           <span class="pull-right-container">
@@ -431,10 +269,8 @@
                         <li class="line_height <?php if($pageUrl=="stockrejectionform" || $pageUrl=='addnewrejectionform' || $pageUrl=='editrejetionform' || $pageUrl=='addrejectionformitemsdata' || $pageUrl=='viewrejectionformitemdetails'){echo 'active';}?>"><a href="<?php echo base_url(); ?>stockrejectionform"><i class="fa fa-cubes"></i> Stock Rejection Form</a></li>
                         <li class="line_height <?php if($pageUrl=="searchstockreport" || $pageUrl=="searchstock"){echo 'active';}?>"><a href="<?php echo base_url(); ?>searchstockreport"><i class="fa fa-cubes"></i> Search Stock Report</a></li>
                         <li class="line_height <?php if($pageUrl=="preexport" || $pageUrl=="addnewfreexport" || $pageUrl=="editpreexport" || $pageUrl=='exportdetailsitemdetails' || $pageUrl=='addpreexportitemdetails' || $pageUrl=='editaddpreexportitemdetails' || $pageUrl=='addexportitemdetailswithattributes' || $pageUrl=='addexportitemdetailswithattributesvalues' || $pageUrl=='editexportitemdetailswithattributesvalues'){echo 'active';}?>"><a href="<?php echo base_url(); ?>preexport"><i class="fa fa-cubes"></i> Pre Export</a></li>
-                        <li class="line_height <?php if($pageUrl=="jobWork" || $pageUrl=="addjobwork" || $pageUrl=="editjobwork"){echo 'active';}?>"><a href="<?php echo base_url(); ?>jobWork"><i class="fa fa-cubes"></i> Job Work</a></li>
-                        <li class="line_height <?php if($pageUrl=="reworkrejectionreturn" || $pageUrl=="addneworkrejection" || $pageUrl=="editreworkrejection"){echo 'active';}?>"><a href="<?php echo base_url(); ?>reworkrejectionreturn"><i class="fa fa-cubes"></i> Rework / Rejection Return (RR)</a></li>
-                        <li class="line_height <?php if($pageUrl=="challanform" || $pageUrl=="addchallanform" || $pageUrl=="editchallanform"){echo 'active';}?>"><a href="<?php echo base_url(); ?>challanform"><i class="fa fa-cubes"></i> Challan Form</a></li>                        
-
+                        <li class="line_height <?php if($pageUrl=="viewreworkrejection" || $pageUrl=="reworkrejectionreturn" || $pageUrl=="addneworkrejection" || $pageUrl=="editreworkrejection"){echo 'active';}?>"><a href="<?php echo base_url(); ?>reworkrejectionreturn"><i class="fa fa-cubes"></i> Rework / Rejection Return (RR)</a></li>
+                        <li class="line_height <?php if($pageUrl=="challanform" || $pageUrl=="viewchallanform" || $pageUrl=="addchallanform" || $pageUrl=="editchallanform"){echo 'active';}?>"><a href="<?php echo base_url(); ?>challanform"><i class="fa fa-cubes"></i> Challan Form</a></li>                        
                       </ul>
                     </li>
 
@@ -464,7 +300,7 @@
                     || $pageUrl=="editsuppliervendorcompalint" || $pageUrl=="customercompliant" 
                     || $pageUrl=="addnewcustomercomplaint" 
                     || $pageUrl=="editcustomercomplaint"
-                    || $pageUrl=="viewqulityrecordform" || $pageUrl=="viewcustomercomplaint"
+                    || $pageUrl=="viewqulityrecordform" || $pageUrl=="viewcustomercomplaint" || $pageUrl=="viewsuppliervendorcompalint"
                     ){echo 'active';}?>">
                       <a href="#">
                         <i class="fa fa-file-text-o"></i> <span class="menu_label">QC</span>
