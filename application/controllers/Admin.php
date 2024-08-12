@@ -19883,4 +19883,25 @@ public function getchallandatabychallannumber(){
 }
 
 
+public function getallchallanpartusingchallannumber(){
+
+    $challan_number=$this->input->post('challan_number');
+    if($challan_number) {
+        $getChallanitemsonly = $this->admin_model->getallchallanpartusingchallannumber($challan_number);
+        if(count($getChallanitemsonly) >= 1) {
+            $content = $content.'<option value="">Select Part Number</option>';
+            foreach($getChallanitemsonly as $value) {
+                $content = $content.'<option value="'.$value["fin_id"].'" data_id="'.$value["challan_form_item_id"].'">'.$value["part_number"].'</option>';
+            }
+            echo $content;
+        } else {
+            echo 'failure';
+        }
+    } else {
+        echo 'failure';
+    }
+
+}
+
+
 }

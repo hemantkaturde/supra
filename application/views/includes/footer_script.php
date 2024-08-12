@@ -21931,7 +21931,39 @@
 	    });
 
 
+		$(document).on('change','.challan_number_for_part_number',function(e){  
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			var challan_number = $('#challan_number').val();
+
+			$("#part_number").html('');
 		
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>admin/getallchallanpartusingchallannumber",
+				type: "POST",
+				data : {'challan_number' : challan_number},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#part_number').html('<option value="">Select Part Number</option>');
+					}
+					else
+					{
+						$('#part_number').html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#part_number').html();
+				}
+			});
+			return false;
+		});
+
+
 
     </script>
 <?php } ?>

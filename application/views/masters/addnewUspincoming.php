@@ -263,14 +263,12 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title" id="additem">Add New Item</h3>
-                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
-                <!-- <span aria-hidden="true">&times;</span> -->
                 </button>
             </div>
             <form role="form" id="saveBillofmaterialform" action="<?php echo base_url() ?>saveBillofmaterialform"
                 method="post" role="form">
 
-                <input type="hidden" class="form-control" id="stock_form_item_id" name="stock_form_item_id" required>
+                <!-- <input type="hidden" class="form-control" id="stock_form_item_id" name="stock_form_item_id" required> -->
 
                 <div class="modal-body">
                     <div class="loader_ajax" style="display:none;">
@@ -281,7 +279,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="part_number">Part Number <span class="required">*</span></label>
-                                <select class="form-control part_number_for_incoming_details" name="part_number"
+                                <select class="form-control" name="part_number"
                                     id="part_number">
                                     <option st-id="" value="">Select F.G Part Number</option>
                                 </select>

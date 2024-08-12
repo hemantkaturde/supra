@@ -15535,6 +15535,19 @@ public function updatestockaftercalculation($balence_qty_in_pcs,$finishgood_id,$
             }
         }
     }
+
+
+    public function getallchallanpartusingchallannumber($challan_number){
+
+        $this->db->select('*,'.TBL_CHALLAN_FORM_ITEM.'.id as challan_form_item_id');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.part_number = '.TBL_FINISHED_GOODS.'.fin_id');
+        //$this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
+        $this->db->where(TBL_CHALLAN_FORM_ITEM.'.challan_id',$challan_number);
+        $query = $this->db->get(TBL_CHALLAN_FORM_ITEM);
+        $data = $query->result_array();
+        return $data;
+
+    }
     
 
 }
