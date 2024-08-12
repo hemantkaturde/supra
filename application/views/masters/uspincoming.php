@@ -31,14 +31,10 @@
                                     <tr style="background-color:#3c8dbc !important;color:#fff">
                                         <th>Id Number</th>
                                         <th>Date</th>
-                                        <th>Vendor PO</th>
-                                        <th>Vendor Name</th>
-                                        <th>PO Date</th>
-                                        <th>Challan No</th>
                                         <th>USP Name</th>
+                                        <th>Challan No</th>
                                         <th>Challan Date</th>
                                         <th>Reported By</th>
-                                        <th>Reported Date</th>
                                         <th>Remark</th>
                                         <th>Action</th>
                                     </tr>

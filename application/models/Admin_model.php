@@ -15425,17 +15425,18 @@ public function updatestockaftercalculation($balence_qty_in_pcs,$finishgood_id,$
 
     public function getUspincomingdetailscount($params){
         $this->db->select('*');
-        // $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_REJECTION_FORM.'.vendor_id');
-        // $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_REJECTION_FORM.'.vendor_po_number');
+        $this->db->join(TBL_USP, TBL_USP.'.usp_id  = '.TBL_USP_INCOMING_FORM.'.usp_name_id');
+        $this->db->join(TBL_CHALLAN_FORM, TBL_CHALLAN_FORM.'.challan_id = '.TBL_USP_INCOMING_FORM.'.challan_number_id');
 
-        // if($params['search']['value'] != "") 
-        // {
-        //     $this->db->where("(".TBL_REJECTION_FORM.".rejection_number LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_REJECTION_FORM.".rejection_form_date LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_REJECTION_FORM.".remark LIKE '%".$params['search']['value']."%')");
-        // }
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_USP_INCOMING_FORM.".report_by LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_USP_INCOMING_FORM.".remark LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_USP.".usp_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CHALLAN_FORM.".challan_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_USP_INCOMING_FORM.".usp_id_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CHALLAN_FORM.".challan_no LIKE '%".$params['search']['value']."%')");
+        }
 
         $this->db->where(TBL_USP_INCOMING_FORM.'.status', 1);
         $this->db->order_by(TBL_USP_INCOMING_FORM.'.id','DESC');
@@ -15445,22 +15446,22 @@ public function updatestockaftercalculation($balence_qty_in_pcs,$finishgood_id,$
     }
 
     public function getUspincomingdetailsdata($params){
-        $this->db->select('*');
-        // $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_REJECTION_FORM.'.vendor_id');
-        // $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_REJECTION_FORM.'.vendor_po_number');
+        $this->db->select('*,'.TBL_USP_INCOMING_FORM.'.id as usp_incoming_id');
+        $this->db->join(TBL_USP, TBL_USP.'.usp_id  = '.TBL_USP_INCOMING_FORM.'.usp_name_id');
+        $this->db->join(TBL_CHALLAN_FORM, TBL_CHALLAN_FORM.'.challan_id = '.TBL_USP_INCOMING_FORM.'.challan_number_id');
 
-        // if($params['search']['value'] != "") 
-        // {
-        //     $this->db->where("(".TBL_REJECTION_FORM.".rejection_number LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_REJECTION_FORM.".rejection_form_date LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_REJECTION_FORM.".remark LIKE '%".$params['search']['value']."%')");
-        // }
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_USP_INCOMING_FORM.".report_by LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_USP_INCOMING_FORM.".remark LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_USP.".usp_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CHALLAN_FORM.".challan_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_USP_INCOMING_FORM.".usp_id_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_CHALLAN_FORM.".challan_no LIKE '%".$params['search']['value']."%')");
+        }
 
         $this->db->where(TBL_USP_INCOMING_FORM.'.status', 1);
         $this->db->limit($params['length'],$params['start']);
-
         $this->db->order_by(TBL_USP_INCOMING_FORM.'.id','DESC');
         $query = $this->db->get(TBL_USP_INCOMING_FORM);
         $fetch_result = $query->result_array();
@@ -15473,18 +15474,14 @@ public function updatestockaftercalculation($balence_qty_in_pcs,$finishgood_id,$
             {
                 $data[$counter]['usp_id_number'] =$value['usp_id_number'];
                 $data[$counter]['date'] =$value['date'];
-                $data[$counter]['select_vendor_po_challan_no'] =$value['select_vendor_po_challan_no'];
-                $data[$counter]['vendor_po_id'] = $value['vendor_po_id'];
-                $data[$counter]['challan_number_id'] =$value['challan_number_id'];
-                $data[$counter]['date_of_vendor_or_challan'] =$value['date_of_vendor_or_challan'];
-                $data[$counter]['vendor_name_id'] =$value['vendor_name_id'];
-                $data[$counter]['usp_name_id'] =$value['usp_name_id'];
+                $data[$counter]['usp_name'] =$value['usp_name'];
+                $data[$counter]['challan_number_id'] =$value['challan_no'];
+                $data[$counter]['challan_date'] =$value['challan_date'];
                 $data[$counter]['report_by'] =$value['report_by'];
-                $data[$counter]['report_date'] =$value['report_date'];
                 $data[$counter]['remark'] =$value['remark'];
                 $data[$counter]['action'] = '';
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editrejetionform/".$value['rejectionformid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
-                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['rejectionformid']."' class='fa fa-trash-o deleterejectionform' aria-hidden='true'></i>"; 
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editrejetionform/".$value['usp_incoming_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['usp_incoming_id']."' class='fa fa-trash-o deleteuspincoming' aria-hidden='true'></i>"; 
                 $counter++; 
             }
         }
@@ -15500,6 +15497,45 @@ public function updatestockaftercalculation($balence_qty_in_pcs,$finishgood_id,$
         $fetch_result = $query->result_array();
         return $fetch_result;
     }
+
+
+    public function getChallanPObychaid($usp_name){
+        $this->db->select('*');
+        $this->db->where(TBL_CHALLAN_FORM.'.usp_id', $usp_name);
+        $query = $this->db->get(TBL_CHALLAN_FORM);
+        $data = $query->result_array();
+        return $data;
+    }
+
+
+    public function getchallandatabychallannumber($challan_number){
+
+        $this->db->select('challan_date');
+        $this->db->where(TBL_CHALLAN_FORM.'.challan_id',$challan_number);
+        $query = $this->db->get(TBL_CHALLAN_FORM);
+        $data = $query->result_array();
+        return $data;
+    }
+
+
+    public function savenewuspincoming($id,$data){
+        if($id != '') {
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_USP_INCOMING_FORM, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_USP_INCOMING_FORM, $data)) {
+                // return TRUE;
+                return $this->db->insert_id();
+            } else {
+                return FALSE;
+            }
+        }
+    }
+    
 
 }
 

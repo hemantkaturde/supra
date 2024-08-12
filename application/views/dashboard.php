@@ -83,12 +83,10 @@
     
 
    <div class="row" style="margin-right: 0px; margin-left: 0px;background:#fff">
-      <div class="col-lg-12 col-xs-12">
-        
+      <div class="col-lg-12 col-xs-12">        
          <div class="col-md-3">
-            <h3> Search By Part Number</h3>
             <div class="form-group">
-               <label for="part_number">Part Number</label>
+               <h4> Search By Part Number</h4>
                <select class="form-control" name="part_number" id="part_number">
                   <option st-id="" value="NA">Select Part Number</option>
                   <?php foreach ($finishgoodList as $key => $value) {?>
@@ -98,11 +96,40 @@
                </select>
             </div>
          </div>
+
+         <div class="col-md-3">
+
+            <div class="form-group">
+               <h4> Search By Form</h4>
+               <select class="form-control" name="form_type" id="form_type">
+                  <option st-id="" value="NA">Select Form</option>
+                  <option st-id="" value="NA">Buyer PO</option>
+                  <option st-id="" value="NA">Supplier PO</option>
+                  <option st-id="" value="NA">Vendor PO</option>
+                  <option st-id="" value="NA">Supplier PO Confirmation</option>
+                  <option st-id="" value="NA">Vendor PO Confirmation</option>
+                  <option st-id="" value="NA">Job Work Challan</option>
+                  <option st-id="" value="NA">OMS Challan</option>
+                  <option st-id="" value="NA">Challan</option>
+                  <option st-id="" value="NA">Rework / Rejection Challan</option>
+                  <option st-id="" value="NA">Bill Of Material</option>
+                  <option st-id="" value="NA">Vendor Bill Of Material</option>
+                  <option st-id="" value="NA">Incomig Details</option>
+                  <option st-id="" value="NA">Stock</option>
+                  <option st-id="" value="NA">Rejection</option>
+                  <option st-id="" value="NA">Quality Record</option>
+                  <option st-id="" value="NA">Packaging Instrasction</option>
+                  <option st-id="" value="NA">Export Details</option>
+                  <option st-id="" value="NA">Sales Tracking</option>
+                  <option st-id="" value="NA">Coustomer Complaint</option>
+                  <option st-id="" value="NA">Supplier / Vendor Complaint</option>
+               </select>
+            </div>
+         </div>
       </div>
 
       <div class="col-lg-12 col-xs-12">
-         <div class="col-md-12">
-            <div class="panel-body">
+         <div class="">
               <table width="100%" class="table table-striped table-bordered table-hover"
                 id="seachbypartnumberreport">
                 <thead>
@@ -116,7 +143,6 @@
                 <tbody>
                 </tbody>
               </table>
-            </div>
           </div>
           </div>
       </div>

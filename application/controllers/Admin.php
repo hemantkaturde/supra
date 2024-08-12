@@ -18202,61 +18202,51 @@ public function addnewuspincoming(){
 
     $post_submit = $this->input->post();
     if($post_submit){
-        $save_chadebitnote_response = array();
-        
-        $this->form_validation->set_rules('cha_debit_note_number','Cha Debit Note Number','trim|required');
-        $this->form_validation->set_rules('cha_debit_note_date','Cha debit Note Date','trim');
-        $this->form_validation->set_rules('taxable_amount','Taxable Amount','trim');
-        $this->form_validation->set_rules('cgst_sgst','Cgst Sgst','trim');
-        $this->form_validation->set_rules('bill_amount','Bill Amount','trim');
-        $this->form_validation->set_rules('debit_amount','Debit Amount','trim');
-        $this->form_validation->set_rules('amount_payable_before_tds','Amount Payable Before TDS','trim');
-        $this->form_validation->set_rules('less_tds','Less TDS','trim');
-        $this->form_validation->set_rules('payable_amount','Payable Amount','trim');
+        $save_uspincoming_response = array();
+
+        $this->form_validation->set_rules('id_number','Id Number','trim|required');
+        $this->form_validation->set_rules('usp_date','USP Date','trim|required');
+        $this->form_validation->set_rules('usp_name','usp Name','trim|required');
+        $this->form_validation->set_rules('challan_number','Challan Number','trim');
+        $this->form_validation->set_rules('challan_date','Challan Date','trim');
+        $this->form_validation->set_rules('report_by','Report By','trim');
+        $this->form_validation->set_rules('remark','Remark','trim');
 
         if($this->form_validation->run() == FALSE)
         {
-            $save_chadebitnote_response['status'] = 'failure';
-            $save_chadebitnote_response['error'] = array('cha_debit_note_number'=>strip_tags(form_error('cha_debit_note_number')), 'cha_debit_note_date'=>strip_tags(form_error('cha_debit_note_date')), 'taxable_amount'=>strip_tags(form_error('taxable_amount')), 'cgst_sgst'=>strip_tags(form_error('cgst_sgst')),'bill_amount'=>strip_tags(form_error('bill_amount')),'debit_amount'=>strip_tags(form_error('debit_amount')),'amount_payable_before_tds'=>strip_tags(form_error('amount_payable_before_tds')),'less_tds'=>strip_tags(form_error('less_tds')),'payable_amount'=>strip_tags(form_error('payable_amount')));
+            $save_uspincoming_response['status'] = 'failure';
+            $save_uspincoming_response['error'] = array('id_number'=>strip_tags(form_error('id_number')), 'usp_date'=>strip_tags(form_error('usp_date')), 'usp_name'=>strip_tags(form_error('usp_name')), 'challan_number'=>strip_tags(form_error('challan_number')),'challan_date'=>strip_tags(form_error('challan_date')),'report_by'=>strip_tags(form_error('report_by')),'remark'=>strip_tags(form_error('remark')));
         }else{
 
             $data = array(
-                'cha_debit_number' =>trim($this->input->post('cha_debit_note_number')),
-                'cha_debit_note_date'=>trim($this->input->post('cha_debit_note_date')),
-                'cha_name' =>trim($this->input->post('cha_name')),
-                'subject'  =>trim($this->input->post('subject')),
-                'invoice_1'  =>trim($this->input->post('invoice_1')),
-                'invoice_2'  =>trim($this->input->post('invoice_2')),
-                'invoice_3'  =>trim($this->input->post('invoice_3')),
-                'date_1'  =>trim($this->input->post('date_1')),
-                'date_2'  =>trim($this->input->post('date_2')),
-                'date_3'  =>trim($this->input->post('date_3')),
-                'taxable_amount'=>trim($this->input->post('taxable_amount')),
-                'cgst_sgst'=>trim($this->input->post('cgst_sgst')),
-                'bill_amount'=>trim($this->input->post('bill_amount')),
-                'debit_amount'=>trim($this->input->post('debit_amount_total')),
-                'amount_payable_before_tds'=>trim($this->input->post('amount_payable_before_tds')),
-                'less_tds'=>trim($this->input->post('less_tds')),
-                'remark'=>trim($this->input->post('remark')),
-                'payable_amount'=>trim($this->input->post('payable_amount'))
+                'usp_id_number' =>trim($this->input->post('id_number')),
+                'date'=>trim($this->input->post('usp_date')),
+                'usp_name_id' =>trim($this->input->post('usp_name')),
+                'challan_number_id'  =>trim($this->input->post('challan_number')),
+                'challan_date'  =>trim($this->input->post('challan_date')),
+                'report_by'  =>trim($this->input->post('report_by')),
+                'remark'  =>trim($this->input->post('remark'))
             );
 
-            if($this->input->post('cha_debit_note_id')){
+            // if($this->input->post('cha_debit_note_id')){
+            //     $cha_debit_note_id = trim($this->input->post('cha_debit_note_id'));
+            // }else{
+            //     $cha_debit_note_id = '';
+            // }
+            
+            $savenewuspincoming= $this->admin_model->savenewuspincoming('',$data);
 
-                $cha_debit_note_id = trim($this->input->post('cha_debit_note_id'));
+            if($savenewuspincoming){
+                $save_uspincoming_response['status'] = 'success';
+                $save_uspincoming_response['error'] = array('id_number'=>strip_tags(form_error('id_number')), 'usp_date'=>strip_tags(form_error('usp_date')), 'usp_name'=>strip_tags(form_error('usp_name')), 'challan_number'=>strip_tags(form_error('challan_number')),'challan_date'=>strip_tags(form_error('challan_date')),'report_by'=>strip_tags(form_error('report_by')),'remark'=>strip_tags(form_error('remark')));
             }else{
-
-                $cha_debit_note_id = '';
+                $save_uspincoming_response['status'] = 'failure';
+                $save_uspincoming_response['error'] = array('id_number'=>strip_tags(form_error('id_number')), 'usp_date'=>strip_tags(form_error('usp_date')), 'usp_name'=>strip_tags(form_error('usp_name')), 'challan_number'=>strip_tags(form_error('challan_number')),'challan_date'=>strip_tags(form_error('challan_date')),'report_by'=>strip_tags(form_error('report_by')),'remark'=>strip_tags(form_error('remark')));
             }
-            
-            $savechadebitnote= $this->admin_model->savechadebitnote($cha_debit_note_id,$data);
-            $save_chadebitnote_response['status'] = 'success';
-            $save_chadebitnote_response['error'] = array('cha_debit_note_number'=>strip_tags(form_error('cha_debit_note_number')), 'cha_debit_note_date'=>strip_tags(form_error('cha_debit_note_date')), 'taxable_amount'=>strip_tags(form_error('taxable_amount')), 'cgst_sgst'=>strip_tags(form_error('cgst_sgst')),'bill_amount'=>strip_tags(form_error('bill_amount')),'debit_amount'=>strip_tags(form_error('debit_amount')),'amount_payable_before_tds'=>strip_tags(form_error('amount_payable_before_tds')),'less_tds'=>strip_tags(form_error('less_tds')),'payable_amount'=>strip_tags(form_error('payable_amount')));
-            
-                
+
           }
 
-        echo json_encode($save_chadebitnote_response);
+        echo json_encode($save_uspincoming_response);
 
     }else{
             $process = 'Add New USP incoming';
@@ -19852,6 +19842,45 @@ public function updatestockaftercalculation(){
 
 }
 
+
+public function getChallanPObychaid(){
+
+    $usp_name=$this->input->post('usp_name');
+    if($usp_name) {
+        $getChallandetailsdetails = $this->admin_model->getChallanPObychaid($usp_name);
+        if(count($getChallandetailsdetails) >= 1) {
+            $content = $content.'<option value="">Select Challan Number</option>';
+            foreach($getChallandetailsdetails as $value) {
+                $content = $content.'<option value="'.$value["challan_id"].'">'.$value["challan_no"].'</option>';
+            }
+            echo $content;
+        } else {
+            echo 'failure';
+        }
+    } else {
+        echo 'failure';
+    }
+}
+
+
+public function getchallandatabychallannumber(){
+
+    if($this->input->post('challan_number')) {
+        $getDetailsbytid = $this->admin_model->getchallandatabychallannumber($this->input->post('challan_number'));
+
+        if($getDetailsbytid){
+            $content = $getDetailsbytid[0];
+            echo json_encode($content);
+
+        }else{
+            echo 'failure';
+        }
+       
+    } else {
+        echo 'failure';
+    }
+
+}
 
 
 }

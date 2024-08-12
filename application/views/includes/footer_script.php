@@ -8,9 +8,9 @@
 
 <script type="text/javascript">
 
-//     $(document).ready(function(){
-// 			$("select").select2();
-// 	});
+    $(document).ready(function(){
+			$(".searchfilter").select2();
+	});
 
 //    $(function() {
 // 			$(".datepicker").datepicker({ 
@@ -21406,7 +21406,6 @@
 			});
 					
 
-	
 			$(document).on('click','#addnewsuppliervendorcomplaint',function(e){
 				e.preventDefault();
 				$(".loader_ajax").show();
@@ -21452,7 +21451,6 @@
 				});
 				return false;
 	     	});
-
 
 			$(document).on('change','#vendor_supplier',function(e){  
 
@@ -21670,9 +21668,6 @@
 	    	});
 
 
-
-
-
 			$(document).on('change','#supplier_part_number',function(e){  
 			         e.preventDefault();
 			
@@ -21794,31 +21789,26 @@
 <?php } ?>
 
 
-<?php if($pageTitle=='USP Incoming'){ ?>
+<?php if($pageTitle=='USP Incoming' || 'Add New USP incoming'){ ?>
 	<script type="text/javascript">
 
 		$(document).ready(function() { 
 			getallPatmentdetailsreport();
 		});
 
-
 		function getallPatmentdetailsreport(){
-
 			var dt = $('#view_usp_incoming').DataTable({
 				"columnDefs": [ 
 					{ className: "details-control", "targets": [ 0 ] },
-					{ "width": "10%", "targets": 0 },
+					{ "width": "15%", "targets": 0 },
 					{ "width": "10%", "targets": 1 },
 					{ "width": "10%", "targets": 2 },
 					{ "width": "10%", "targets": 3 },
-					{ "width": "10%", "targets": 4 },
-					{ "width": "10%", "targets": 5 },
-					{ "width": "10%", "targets": 6 },
+					{ "width": "15%", "targets": 4 },
+					{ "width": "15%", "targets": 5 },
+					{ "width": "15%", "targets": 6 },
 					{ "width": "10%", "targets": 7 },
-					{ "width": "10%", "targets": 8 },
-					{ "width": "10%", "targets": 9 },
-					{ "width": "10%", "targets": 10 },
-					{ "width": "10%", "targets": 11 },
+
 				],
 				responsive: true,
 				"oLanguage": {
@@ -21836,5 +21826,112 @@
 				},
 			});
 		}
+
+		$(document).on('change','#usp_name',function(e){  
+			e.preventDefault();
+			var usp_name = $('#usp_name').val();
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>getChallanPObychaid",
+				type: "POST",
+				data : {'usp_name' : usp_name},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#challan_number').html('<option value="">Select Challan Number</option>');
+					}
+					else
+					{
+						$('#challan_number').html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#challan_number').html();
+				}
+			});
+			return false;
+		});
+
+		$(document).on('change','#challan_number',function(e){  
+			    e.preventDefault();
+				    var challan_number = $('#challan_number').val();
+					$.ajax({
+							url : "<?php echo ADMIN_PATH;?>admin/getchallandatabychallannumber",
+							type: "POST",
+							data : {'challan_number' : challan_number},
+							success: function(data, textStatus, jqXHR)
+							{
+								$(".loader_ajax").hide();
+								if(data == "failure")
+								{
+									$('#challan_date').val('');
+								}
+								else
+								{
+									var data_row_challan_number = jQuery.parseJSON( data );
+									$('#challan_date').val(data_row_challan_number.challan_date);
+									
+								}
+							},
+							error: function (jqXHR, textStatus, errorThrown)
+							{
+									$('#challan_date').val('');
+							}
+					});
+				return false;
+		});
+
+		$(document).on('click','#addnewsupincomingformsubmit',function(e){
+				e.preventDefault();
+				$(".loader_ajax").show();
+				var formData = new FormData($("#addnewsupincomingform")[0]);
+			    // var complaint_form_id = $("#complaint_form_id").val();
+			   
+				$.ajax({
+					url : "<?php echo base_url();?>addnewuspincoming",
+					type: "POST",
+					data : formData,
+					cache: false,
+					contentType: false,
+					processData: false,
+					success: function(data, textStatus, jqXHR)
+					{
+						var fetchResponse = $.parseJSON(data);
+						if(fetchResponse.status == "failure")
+						{
+							$.each(fetchResponse.error, function (i, v)
+							{
+								$('.'+i+'_error').html(v);
+							});
+							$(".loader_ajax").hide();
+						}
+						else if(fetchResponse.status == 'success')
+						{
+							swal({
+								title: "Success",
+								text: "USP Incoming Successfully Added!",
+								icon: "success",
+								button: "Ok",
+								},function(){ 
+									
+									window.location.href = "<?php echo base_url().'uspincoming'?>";
+							});		
+						}
+						
+					},
+					error: function (jqXHR, textStatus, errorThrown)
+					{
+					$(".loader_ajax").hide();
+					}
+				});
+				return false;
+	    });
+
+
+		
+
     </script>
 <?php } ?>

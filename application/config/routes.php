@@ -518,6 +518,8 @@ $route['viewcustomercomplaint/(:any)'] = "admin/viewcustomercomplaint/$1";
 $route['viewsuppliervendorcompalint/(:any)'] = "admin/viewsuppliervendorcompalint/$1";
 
 
+$route['getChallanPObychaid'] = "admin/getChallanPObychaid";
+$route['getuspdate'] = "admin/getuspdate";
 
 
 

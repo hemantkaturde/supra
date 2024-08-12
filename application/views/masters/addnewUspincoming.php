@@ -20,64 +20,64 @@
                             <h3 class="box-title">Add New USP incoming</h3>
                         </div>
                         <?php $this->load->helper("form"); ?>
-                        <form role="form" id="addstockform" action="#" method="post" role="form">
+                        <form role="form" id="addnewsupincomingform" action="#" method="post" role="form">
                             <div class="box-body">
                                 <div class="col-md-4">
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="id_number">ID Number <span class="required">*</span></label>
                                             <?php
-                                        $current_month = date("n"); // Get the current month without leading zeros
+                                                $current_month = date("n"); // Get the current month without leading zeros
 
-                                        if ($current_month >= 4) {
-                                                // If the current month is April or later, the financial year is from April (current year) to March (next year)
-                                                $financial_year_indian = date("y") . "" . (date("y") + 1);
-                                        } else {
-                                                // If the current month is before April, the financial year is from April (last year) to March (current year)
-                                                $financial_year_indian = (date("y") - 1) . "" . date("y");
-                                        }
+                                                if ($current_month >= 4) {
+                                                        // If the current month is April or later, the financial year is from April (current year) to March (next year)
+                                                        $financial_year_indian = date("y") . "" . (date("y") + 1);
+                                                } else {
+                                                        // If the current month is before April, the financial year is from April (last year) to March (current year)
+                                                        $financial_year_indian = (date("y") - 1) . "" . date("y");
+                                                }
 
-                                        if($getPriviousstockid[0]['stock_id_number']){
-                                        
-                                            $getfinancial_year = substr($getPriviousstockid[0]['stock_id_number'], -8);
+                                                if($getPriviousstockid[0]['stock_id_number']){
+                                                
+                                                    $getfinancial_year = substr($getPriviousstockid[0]['stock_id_number'], -8);
 
-                                            $first_part_of_string = substr($getfinancial_year,0,4);
-                                            $year = substr($getfinancial_year,0,2);
+                                                    $first_part_of_string = substr($getfinancial_year,0,4);
+                                                    $year = substr($getfinancial_year,0,2);
 
-                                            // Current date
-                                            $currentDate = new DateTime();
-                                            
-                                            // Financial year in India starts from April 1st
-                                            $financialYearStart = new DateTime("$year-04-01");
-                                            
-                                            // Financial year in India ends on March 31st of the following year
-                                            $financialYearEnd = new DateTime(($year + 1) . "-03-31");
-                                            
-                                            // Check if the current date falls within the financial year
-                                            if ($currentDate >= $financialYearStart && $currentDate <= $financialYearEnd) {
-                                               
-                                                $string = $getPriviousstockid[0]['stock_id_number'];
-                                                $n = 4; // Number of characters to extract from the end
-                                                $lastNCharacters = substr($string, -$n);
-                                                $inrno= "USPID-".$financial_year_indian.'-'.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
-                                                $id_number = $inrno;
+                                                    // Current date
+                                                    $currentDate = new DateTime();
+                                                    
+                                                    // Financial year in India starts from April 1st
+                                                    $financialYearStart = new DateTime("$year-04-01");
+                                                    
+                                                    // Financial year in India ends on March 31st of the following year
+                                                    $financialYearEnd = new DateTime(($year + 1) . "-03-31");
+                                                    
+                                                    // Check if the current date falls within the financial year
+                                                    if ($currentDate >= $financialYearStart && $currentDate <= $financialYearEnd) {
+                                                    
+                                                        $string = $getPriviousstockid[0]['stock_id_number'];
+                                                        $n = 4; // Number of characters to extract from the end
+                                                        $lastNCharacters = substr($string, -$n);
+                                                        $inrno= "USPID-".$financial_year_indian.'-'.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                        $id_number = $inrno;
 
-                                            } else {
+                                                    } else {
 
-                                                $string = $getPriviousstockid[0]['stock_id_number'];
-                                                $n = 4; // Number of characters to extract from the end
-                                                $lastNCharacters = substr($string, -$n);
-                                                $inrno= "USPID-".$financial_year_indian.'-'.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
-                                                $id_number = $inrno;
+                                                        $string = $getPriviousstockid[0]['stock_id_number'];
+                                                        $n = 4; // Number of characters to extract from the end
+                                                        $lastNCharacters = substr($string, -$n);
+                                                        $inrno= "USPID-".$financial_year_indian.'-'.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                        $id_number = $inrno;
 
-                                                //$po_number = 'SQPO24250001';
-                                            }  
-                                          /* New Logic End Here */
+                                                        //$po_number = 'SQPO24250001';
+                                                    }  
+                                                /* New Logic End Here */
 
-                                        }else{
-                                            $id_number = 'USPID-'.$financial_year_indian.'-'.'0001';
-                                        }
-                                    ?>
+                                                }else{
+                                                    $id_number = 'USPID-'.$financial_year_indian.'-'.'0001';
+                                                }
+                                            ?>
                                             <input type="text" class="form-control" id="id_number" name="id_number"
                                                 value="<?=$id_number;?>" required>
                                             <p class="error id_number_error"></p>
@@ -89,69 +89,24 @@
                                         <div class="form-group">
                                             <label for="usp_date">USP Incoming Date <span class="required">*</span></label>
                                             <?php 
-                                        if($getStockforminformation[0]['pre_stock_date']){
-                                            $usp_date= $getStockforminformation[0]['pre_stock_date'];
-                                        }else{
-                                            $usp_date= date('Y-m-d'); 
-                                        }
-                                       ?>
+                                                if($getStockforminformation[0]['pre_stock_date']){
+                                                    $usp_date= $getStockforminformation[0]['pre_stock_date'];
+                                                }else{
+                                                    $usp_date= date('Y-m-d'); 
+                                                }
+                                            ?>
                                             <input type="text" class="form-control datepicker" id="usp_date"
                                                 name="usp_date" value="<?=$usp_date?>" required>
                                             <p class="error usp_date_error"></p>
                                         </div>
                                     </div>
-
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="vendor_challan">Select Vendor / Challan<span
-                                                    class="required">*</span></label>
-                                            <select class="form-control" name="vendor_challan" id="vendor_challan">
-                                                <option st-id="" value="NA">Select Vendor / Challan</option>
-                                                <option st-id="" value="Vendor">Vendor</option>
-                                                <option st-id="" value="Challan">Challan</option>
-                                            </select>
-                                            <p class="error vendor_challan_error"></p>
-                                        </div>
-                                    </div>
-
                                 </div>
 
-
                                 <div class="col-md-4">
-                                   <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="vendor_po">Vendor Name</label>
-                                            <select class="form-control" name="vendor_po" id="vendor_po">
-                                                <option st-id="" value="">Select Vendor Name</option>
-                                                <?php foreach ($vendorList as $key => $value) {?>
-                                                <option value="<?php echo $value['ven_id']; ?>"
-                                                    <?php if($getStockforminformation[0]['pre_vendor_name']==$value['ven_id']){ echo 'selected'; }?>>
-                                                    <?php echo $value['vendor_name']; ?></option>
-                                                <?php } ?>
-                                            </select>
-                                            <p class="error vendor_po_error"></p>
-                                        </div>
-                                    </div>
-
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="vendor_po_id">Vendor PO Number</label>
-                                            <select class="form-control" name="vendor_po_id" id="vendor_po_id">
-                                                <option st-id="" value="">Select Vendor PO Number</option>
-                                                <?php foreach ($vendorpoList as $key => $value) {?>
-                                                <option value="<?php echo $value['id']; ?>">
-                                                    <?php echo $value['po_number']; ?></option>
-                                                <?php } ?>
-                                            </select>
-                                            <p class="error vendor_po_id_error"></p>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="vendor_name">USP Name</label>
-                                            <select class="form-control" name="vendor_name" id="vendor_name">
+                                            <label for="usp_name">USP Name</label>
+                                            <select class="form-control searchfilter" name="usp_name" id="usp_name">
                                                 <option st-id="" value="">Select USP Name</option>
                                                 <?php foreach ($getUSPmasterlist as $key => $value) {?>
                                                 <option value="<?php echo $value['usp_id']; ?>">
@@ -165,12 +120,9 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="challan_number">Challan Number</label>
-                                            <select class="form-control" name="challan_number" id="challan_number">
-                                                <option st-id="" value="">Select Vendor Name</option>
-                                                <?php foreach ($challanList as $key => $value) {?>
-                                                <option value="<?php echo $value['challan_id']; ?>">
-                                                    <?php echo $value['challan_no']; ?></option>
-                                                <?php } ?>
+                                            <select class="form-control searchfilter challan_number_for_part_number" name="challan_number"
+                                                id="challan_number">
+                                                <option st-id="" value="">Select Challan Number</option>
                                             </select>
                                             <p class="error challan_number_error"></p>
                                         </div>
@@ -179,18 +131,10 @@
 
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="buyer_po">Date</label>
-                                            <?php 
-                                        if($getStockforminformation[0]['pre_vendor_po_date']){
-                                            $pre_vendor_po_date= $getStockforminformation[0]['pre_vendor_po_date'];
-                                        }else{
-                                            $pre_vendor_po_date= date('Y-m-d'); 
-                                        }
-                                       ?>
-
-                                            <input type="text" class="form-control" id="vendor_challan_date"
-                                                name="vendor_challan_date" value="<?=$pre_vendor_po_date?>" required>
-                                            <p class="error vendor_challan_date_error"></p>
+                                            <label for="challan_date">Challan Date</label>
+                                            <input type="text" class="form-control" id="challan_date"
+                                                name="challan_date" required readonly>
+                                            <p class="error challan_date_error"></p>
                                         </div>
                                     </div>
                                 </div>
@@ -200,25 +144,15 @@
                                         <div class="form-group">
                                             <label for="report_by">Report By</label>
                                             <input type="text" class="form-control" id="report_by" name="report_by"
-                                                value="<?=$total_invoice_qty_In_kgs;?>">
+                                                value="">
                                             <p class="error report_by_error"></p>
                                         </div>
                                     </div>
 
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="report_date">Report Date</label>
-                                            <input type="text" class="form-control" id="report_date" name="report_date"
-                                                value="<?=$total_invoice_qty_In_kgs;?>">
-                                            <p class="error report_date_error"></p>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-12">
-                                        <div class="form-group">
                                             <label for="remark">Remark</label>
-                                            <input type="remark" class="form-control" id="remark"
-                                                value="<?=$getStockforminformation[0]['pre_remark_item']?>"
+                                            <input type="remark" class="form-control" id="remark" value=""
                                                 name="remark">
                                             <p class="error remark_error"></p>
                                         </div>
@@ -299,14 +233,14 @@
                                 <div class="col-xs-8">
 
                                     <?php if($getItemlistStockform){ 
-                            $button ="";
-                            }else{
-                            $button ="disabled";
-                            } ?>
+                                        $button ="";
+                                        }else{
+                                        $button ="";
+                                    } ?>
 
-                                    <input type="submit" id="addnewstockform" class="btn btn-primary" value="Submit"
+                                    <input type="submit" id="addnewsupincomingformsubmit" class="btn btn-primary" value="Submit"
                                         <?=$button?>>
-                                    <input type="button" onclick="location.href = '<?php echo base_url() ?>stockform'"
+                                    <input type="button" onclick="location.href = '<?php echo base_url() ?>uspincoming'"
                                         class="btn btn-default" value="Back" />
                                 </div>
                             </div>
