@@ -2,11 +2,11 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            <i class="fa fa-users"></i> Add New USP incoming
+            <i class="fa fa-users"></i> Edit USP incoming
             <small>
                 <ul class="breadcrumb" style="background-color:#ecf0f5 !important">
                     <li class="completed"><a href="javascript:void(0);">Masters</a></li>
-                    <li class="active"><a href="javascript:void(0);"> Add New USP incoming</a></li>
+                    <li class="active"><a href="javascript:void(0);"> Edit USP incoming</a></li>
                 </ul>
             </small>
         </h1>
@@ -17,69 +17,22 @@
                 <div class="box">
                     <div class="box box-primary">
                         <div class="box-header">
-                            <h3 class="box-title">Add New USP incoming</h3>
+                            <h3 class="box-title">Edit USP incoming</h3>
                         </div>
                         <?php $this->load->helper("form"); ?>
                         <form role="form" id="addnewsupincomingform" action="#" method="post" role="form">
+
+                        <input type="hidden" class="form-control" id="usp_incoming_id" name="usp_incoming_id"
+                        value="<?=$getuspincomingdetailsforedit['usp_incoming_id'];?>" required>
+
                             <div class="box-body">
                                 <div class="col-md-4">
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="id_number">ID Number <span class="required">*</span></label>
-                                            <?php
-                                                $current_month = date("n"); // Get the current month without leading zeros
-
-                                                if ($current_month >= 4) {
-                                                        // If the current month is April or later, the financial year is from April (current year) to March (next year)
-                                                        $financial_year_indian = date("y") . "" . (date("y") + 1);
-                                                } else {
-                                                        // If the current month is before April, the financial year is from April (last year) to March (current year)
-                                                        $financial_year_indian = (date("y") - 1) . "" . date("y");
-                                                }
-
-                                                if($getPriviousstockid[0]['stock_id_number']){
-                                                
-                                                    $getfinancial_year = substr($getPriviousstockid[0]['stock_id_number'], -8);
-
-                                                    $first_part_of_string = substr($getfinancial_year,0,4);
-                                                    $year = substr($getfinancial_year,0,2);
-
-                                                    // Current date
-                                                    $currentDate = new DateTime();
-                                                    
-                                                    // Financial year in India starts from April 1st
-                                                    $financialYearStart = new DateTime("$year-04-01");
-                                                    
-                                                    // Financial year in India ends on March 31st of the following year
-                                                    $financialYearEnd = new DateTime(($year + 1) . "-03-31");
-                                                    
-                                                    // Check if the current date falls within the financial year
-                                                    if ($currentDate >= $financialYearStart && $currentDate <= $financialYearEnd) {
-                                                    
-                                                        $string = $getPriviousstockid[0]['stock_id_number'];
-                                                        $n = 4; // Number of characters to extract from the end
-                                                        $lastNCharacters = substr($string, -$n);
-                                                        $inrno= "USPID-".$financial_year_indian.'-'.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
-                                                        $id_number = $inrno;
-
-                                                    } else {
-
-                                                        $string = $getPriviousstockid[0]['stock_id_number'];
-                                                        $n = 4; // Number of characters to extract from the end
-                                                        $lastNCharacters = substr($string, -$n);
-                                                        $inrno= "USPID-".$financial_year_indian.'-'.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
-                                                        $id_number = $inrno;
-
-                                                        //$po_number = 'SQPO24250001';
-                                                    }  
-                                                /* New Logic End Here */
-
-                                                }else{
-                                                    $id_number = 'USPID-'.$financial_year_indian.'-'.'0001';
-                                                }
-                                            ?>
+                                        
                                             <input type="text" class="form-control" id="id_number" name="id_number"
-                                                value="<?=$id_number;?>" required>
+                                                value="<?=$getuspincomingdetailsforedit['usp_id_number'];?>" required>
                                             <p class="error id_number_error"></p>
                                         </div>
                                     </div>
@@ -88,15 +41,8 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="usp_date">USP Incoming Date <span class="required">*</span></label>
-                                            <?php 
-                                                if($getitemdetaiilsuspincoming[0]['pre_usp_date']){
-                                                    $usp_date= $getitemdetaiilsuspincoming[0]['pre_usp_date'];
-                                                }else{
-                                                    $usp_date= date('Y-m-d'); 
-                                                }
-                                            ?>
                                             <input type="text" class="form-control datepicker" id="usp_date"
-                                                name="usp_date" value="<?=$usp_date?>" required>
+                                                name="usp_date"value="<?=$getuspincomingdetailsforedit['date'];?>" required>
                                             <p class="error usp_date_error"></p>
                                         </div>
                                     </div>
@@ -109,7 +55,7 @@
                                             <select class="form-control searchfilter" name="usp_name" id="usp_name">
                                                 <option st-id="" value="">Select USP Name</option>
                                                 <?php foreach ($getUSPmasterlist as $key => $value) {?>
-                                                <option value="<?php echo $value['usp_id']; ?>" <?php if($getitemdetaiilsuspincoming[0]['pre_usp_name']==$value['usp_id']){ echo 'selected'; } ?> >
+                                                <option value="<?php echo $value['usp_id']; ?>" <?php if($getuspincomingdetailsforedit['usp_name_id']==$value['usp_id']){ echo 'selected'; } ?> >
                                                     <?php echo $value['usp_name']; ?></option>
                                                 <?php } ?>
                                             </select>
@@ -117,11 +63,11 @@
                                         </div>
                                     </div>
 
-                                    <?php if($getitemdetaiilsuspincoming[0]['pre_challan_number']){
-                                        $selected_value = $getitemdetaiilsuspincoming[0]['challan_no'];
+                                    <?php if($getuspincomingdetailsforedit['challan_no']){
+                                        $selected_value = $getuspincomingdetailsforedit['challan_no'];
 
                                     }else{
-                                        $selected_value = 'Select Buyer PO Number';
+                                        $selected_value = 'Select Challan Number';
                                     } ?>
 
 
@@ -132,7 +78,7 @@
                                                 id="challan_number">
                                                 <option st-id="" value="">Select Challan Number</option>
                                                 <option st-id=""
-                                                    value="<?=$getitemdetaiilsuspincoming[0]['pre_challan_number']?>" selected>
+                                                    value="<?=$getuspincomingdetailsforedit['challan_number_id']?>" selected>
                                                     <?=$selected_value;?></option>
 
                                             </select>
@@ -144,7 +90,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="challan_date">Challan Date</label>
-                                            <input type="text" class="form-control" id="challan_date" value="<?=$getitemdetaiilsuspincoming[0]['challan_date'] ?>"
+                                            <input type="text" class="form-control" id="challan_date" value="<?=$getuspincomingdetailsforedit['challan_date'] ?>"
                                                 name="challan_date" required readonly>
                                             <p class="error challan_date_error"></p>
                                         </div>
@@ -155,7 +101,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="report_by">Report By</label>
-                                            <input type="text" class="form-control" id="report_by" name="report_by" value="<?=$getitemdetaiilsuspincoming[0]['pre_report_by'] ?>"
+                                            <input type="text" class="form-control" id="report_by" name="report_by" value="<?=$getuspincomingdetailsforedit['report_by'] ?>"
                                                 value="">
                                             <p class="error report_by_error"></p>
                                         </div>
@@ -164,7 +110,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="remark">Remark</label>
-                                            <input type="text" class="form-control" id="remark" name="remark" value="<?=$getitemdetaiilsuspincoming[0]['itemremark'] ?>"
+                                            <input type="text" class="form-control" id="remark" name="remark" value="<?=$getuspincomingdetailsforedit['mainremark'] ?>"
                                                 value="">
                                             <p class="error remark_error"></p>
                                         </div>
@@ -173,7 +119,7 @@
                                     <!-- <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="remark">Remark</label>
-                                            <input type="remark" class="form-control" id="remark" value="" value="<?=$getitemdetaiilsuspincoming[0]['itemremark'] ?>"
+                                            <input type="remark" class="form-control" id="remark" value="" value="<?=$getitemdetaiilsuspincoming[0]['remark'] ?>"
                                                 name="remark">
                                             <p class="error remark_error"></p>
                                         </div>
@@ -210,9 +156,9 @@
                                     </thead>
 
                                     <?php 
-                                           if($getitemdetaiilsuspincoming){
+                                           if($getitemdetaiilsuspincomingedit){
                                                $i=1;
-                                            foreach ($getitemdetaiilsuspincoming as $key => $value) { ?>
+                                            foreach ($getitemdetaiilsuspincomingedit as $key => $value) { ?>
                                     <tr>
                                         <td><?php echo  $i++; ?></td>
                                         <td><?=$value['part_number']?></td>
@@ -259,7 +205,7 @@
                             <div class="box-footer">
                                 <div class="col-xs-8">
 
-                                    <?php if($getitemdetaiilsuspincoming){ 
+                                    <?php if($getitemdetaiilsuspincomingedit){ 
                                         $button ="";
                                         }else{
                                         $button ="disabled";

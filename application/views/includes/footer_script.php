@@ -21789,12 +21789,75 @@
 <?php } ?>
 
 
-<?php if($pageTitle=='USP Incoming' || 'Add New USP incoming'){ ?>
+<?php if($pageTitle=='USP Incoming' || $pageTitle=='Add New USP incoming' || $pageTitle=='Edit USP incoming'){ ?>
 	<script type="text/javascript">
 
 		$(document).ready(function() { 
 			getallPatmentdetailsreport();
 		});
+
+
+		$(document).ready(function() { 
+				    var challan_number = $('#challan_number').val();
+					$.ajax({
+							url : "<?php echo ADMIN_PATH;?>admin/getchallandatabychallannumber",
+							type: "POST",
+							data : {'challan_number' : challan_number},
+							success: function(data, textStatus, jqXHR)
+							{
+								$(".loader_ajax").hide();
+								if(data == "failure")
+								{
+									$('#challan_date').val('');
+								}
+								else
+								{
+									var data_row_challan_number = jQuery.parseJSON( data );
+									$('#challan_date').val(data_row_challan_number.challan_date);
+									
+								}
+							},
+							error: function (jqXHR, textStatus, errorThrown)
+							{
+									$('#challan_date').val('');
+							}
+					});
+				return false;
+		});
+
+
+		$(document).ready(function() { 
+			//$(".loader_ajax").show();
+			var challan_number = $('#challan_number').val();
+
+			$("#part_number").html('');
+		
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>admin/getallchallanpartusingchallannumber",
+				type: "POST",
+				data : {'challan_number' : challan_number},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#part_number').html('<option value="">Select Part Number</option>');
+					}
+					else
+					{
+						$('#part_number').html(data);
+
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#part_number').html();
+				}
+			});
+			return false;
+
+		});
+
 
 		function getallPatmentdetailsreport(){
 			var dt = $('#view_usp_incoming').DataTable({
@@ -21888,7 +21951,7 @@
 				e.preventDefault();
 				$(".loader_ajax").show();
 				var formData = new FormData($("#addnewsupincomingform")[0]);
-			    // var complaint_form_id = $("#complaint_form_id").val();
+			    var usp_incoming_id = $("#usp_incoming_id").val();
 			   
 				$.ajax({
 					url : "<?php echo base_url();?>addnewuspincoming",
@@ -21916,8 +21979,7 @@
 								icon: "success",
 								button: "Ok",
 								},function(){ 
-									
-									window.location.href = "<?php echo base_url().'uspincoming'?>";
+										window.location.href = "<?php echo base_url().'uspincoming'?>";
 							});		
 						}
 						
@@ -21929,7 +21991,6 @@
 				});
 				return false;
 	    });
-
 
 		$(document).on('change','.challan_number_for_part_number',function(e){  
 			e.preventDefault();
@@ -21963,6 +22024,177 @@
 			return false;
 		});
 
+		$(document).on('click','.deleteuspincoming',function(e){
+				var elemF = $(this);
+				e.preventDefault();
+
+				swal({
+					title: "Are you sure?",
+					text: "Delete USP Incoming",
+					type: "warning",
+					showCancelButton: true,
+					closeOnClickOutside: false,
+					confirmButtonClass: "btn-sm btn-danger",
+					confirmButtonText: "Yes, delete it!",
+					cancelButtonText: "No, cancel plz!",
+					closeOnConfirm: false,
+					closeOnCancel: false
+				}, function(isConfirm) {
+					if (isConfirm) {
+							$.ajax({
+								url : "<?php echo base_url();?>deleteuspincoming",
+								type: "POST",
+								data : 'id='+elemF.attr('data-id'),
+								success: function(data, textStatus, jqXHR)
+								{
+									const obj = JSON.parse(data);
+								
+									if(obj.status=='success'){
+										swal({
+											title: "Deleted!",
+											text: "USP Incoming Deleted Succesfully",
+											icon: "success",
+											button: "Ok",
+											},function(){ 
+												window.location.href = "<?php echo base_url().'uspincoming'?>";
+										});	
+									}
+
+								},
+								error: function (jqXHR, textStatus, errorThrown)
+								{
+									$(".loader_ajax").hide();
+								}
+							})
+						}
+						else {
+				swal("Cancelled", "USP Incoming deletion cancelled ", "error");
+				}
+			});
+		});
+
+		$(document).on('change','#part_number',function(e){  
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			var part_number = $('#part_number').val();
+			var challan_number = $('#challan_number').val();
+			
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>admin/getChallanformitemdetailsbychallanandaprt",
+				type: "POST",
+				data : {'part_number' : part_number,'challan_number':challan_number},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#description').value('');
+						$('#challan_qty').value('');
+						$('#net_weight_per_kgs_pcs').value('');
+					
+					}
+					else
+					{
+						var data_row = jQuery.parseJSON( data );
+
+						$('#description').val(data_row.description1);
+						$('#challan_qty').val(data_row.qty);
+						$('#net_weight_per_kgs_pcs').val(data_row.net_weight1);
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#description').html();
+					$('#challan_qty').html();
+					$('#net_weight_per_kgs_pcs').html('');
+					//$(".loader_ajax").hide();
+				}
+			});
+			return false;
+		});
+
+		$(document).on('click','#saveuspincoming_item',function(e){
+			e.preventDefault();
+			   $(".loader_ajax").show();
+
+			   var part_number =   $('#part_number').val();
+			   var description =   $('#description').val();
+			   var challan_qty =   $('#challan_qty').val();
+			   var net_weight_per_kgs_pcs =   $('#net_weight_per_kgs_pcs').val();
+			   var challan_no =   $('#challan_no').val();
+			   var challan_date_item =   $('#challan_date_item').val();
+			   var received_qty_in_pcs =   $('#received_qty_in_pcs').val();
+			   var received_qty_in_kgs = $('#received_qty_in_kgs').val();
+			   var gross_qty_in_includin_bg =   $('#gross_qty_in_includin_bg').val();
+			   var units =   $('#units').val();
+			   var no_of_bags =   $('#no_of_bags').val();
+			   var lot_no =   $('#lot_no').val();
+			   var itemremark =   $('#itemremark').val();
+			   var balance_qty_in_pcs =   $('#balance_qty_in_pcs').val();
+			   var balance_qty_in_kgs =   $('#balance_qty_in_kgs').val();
+			   var status =   $('#status').val();
+
+			   var pre_usp_date =   $('#usp_date').val();
+		       var pre_usp_name =   $('#usp_name').val();
+			   var pre_challan_number =   $('#challan_number').val();
+			   var pre_challan_date =   $('#challan_date').val();
+			   var pre_report_by =   $('#report_by').val();
+			   var pre_remark =   $('#remark').val();
+
+			   var usp_incoming_id = $("#usp_incoming_id").val();
+
+
+
+			   $.ajax({
+				url : "<?php echo base_url();?>admin/saveuspincoming_item_form",
+				type: "POST",
+				 //data : formData,
+				 data :{part_number:part_number,description:description,challan_qty:challan_qty,net_weight_per_kgs_pcs:net_weight_per_kgs_pcs,challan_no:challan_no,challan_date_item:challan_date_item,received_qty_in_pcs:received_qty_in_pcs,received_qty_in_kgs:received_qty_in_kgs,gross_qty_in_includin_bg:gross_qty_in_includin_bg,units:units,no_of_bags:no_of_bags,lot_no:lot_no,itemremark:itemremark,balance_qty_in_pcs:balance_qty_in_pcs,balance_qty_in_kgs:balance_qty_in_kgs,status:status,pre_usp_date:pre_usp_date,pre_usp_name:pre_usp_name,pre_challan_number:pre_challan_number,pre_challan_date:pre_challan_date,pre_report_by:pre_report_by,pre_remark:pre_remark,usp_incoming_id:usp_incoming_id},
+				 method: "POST",
+                // data :{package_id:package_id},
+                cache:false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+						$(".loader_ajax").hide();
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						swal({
+							title: "Success",
+							text: "Item Successfully Added!",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+								
+								if(usp_incoming_id){
+									window.location.href = "<?php echo base_url().'edituspincomig/'?>"+usp_incoming_id;	
+
+								}else{
+									window.location.href = "<?php echo base_url().'addnewuspincoming'?>";	
+
+								}
+							
+						});		
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			   });
+			return false;
+	    });
+
+
+		
 
 
     </script>

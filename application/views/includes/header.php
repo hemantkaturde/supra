@@ -245,7 +245,8 @@
 
 
                     <li class="treeview  <?php if($pageUrl=="incomingdetails" || $pageUrl=="addnewencomingdetails" 
-                    ||  $pageUrl=="editincomingdetails" || $pageUrl=="uspincoming" || $pageUrl=="stockform" 
+                    ||  $pageUrl=="editincomingdetails" || $pageUrl=="uspincoming" || $pageUrl=="addnewuspincoming" || $pageUrl=="edituspincomig"
+                    || $pageUrl=="stockform" 
                     || $pageUrl=='addNewstockform' || $pageUrl=='editstcokformdetails' || $pageUrl=="stockrejectionform" 
                     || $pageUrl=='addnewrejectionform' || $pageUrl=='editrejetionform' || $pageUrl=='addrejectionformitemsdata' 
                     || $pageUrl=='viewrejectionformitemdetails' || $pageUrl=="searchstockreport" || $pageUrl=="searchstock" 
@@ -264,7 +265,7 @@
                       </a>
                       <ul class="treeview-menu" >
                         <li class="line_height <?php if($pageUrl=="incomingdetails" || $pageUrl=="addnewencomingdetails" ||  $pageUrl=="editincomingdetails"){echo 'active';}?>"><a href="<?php echo base_url(); ?>incomingdetails"><i class="fa fa-cubes"></i> Incoming Details</a></li>
-                        <li class="line_height <?php if($pageUrl=="uspincoming"){echo 'active';}?>"><a href="<?php echo base_url(); ?>uspincoming"><i class="fa fa-cubes"></i> USP Incoming</a></li>
+                        <li class="line_height <?php if($pageUrl=="uspincoming" || $pageUrl=="addnewuspincoming" || $pageUrl=="edituspincomig"){echo 'active';}?>"><a href="<?php echo base_url(); ?>uspincoming"><i class="fa fa-cubes"></i> USP Incoming</a></li>
                         <li class="line_height <?php if($pageUrl=="stockform" || $pageUrl=='addNewstockform' || $pageUrl=='editstcokformdetails' ){echo 'active';}?>"><a href="<?php echo base_url(); ?>stockform"><i class="fa fa-cubes"></i> Stock Form</a></li>
                         <li class="line_height <?php if($pageUrl=="stockrejectionform" || $pageUrl=='addnewrejectionform' || $pageUrl=='editrejetionform' || $pageUrl=='addrejectionformitemsdata' || $pageUrl=='viewrejectionformitemdetails'){echo 'active';}?>"><a href="<?php echo base_url(); ?>stockrejectionform"><i class="fa fa-cubes"></i> Stock Rejection Form</a></li>
                         <li class="line_height <?php if($pageUrl=="searchstockreport" || $pageUrl=="searchstock"){echo 'active';}?>"><a href="<?php echo base_url(); ?>searchstockreport"><i class="fa fa-cubes"></i> Search Stock Report</a></li>

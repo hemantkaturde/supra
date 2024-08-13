@@ -18218,6 +18218,7 @@ public function addnewuspincoming(){
             $save_uspincoming_response['error'] = array('id_number'=>strip_tags(form_error('id_number')), 'usp_date'=>strip_tags(form_error('usp_date')), 'usp_name'=>strip_tags(form_error('usp_name')), 'challan_number'=>strip_tags(form_error('challan_number')),'challan_date'=>strip_tags(form_error('challan_date')),'report_by'=>strip_tags(form_error('report_by')),'remark'=>strip_tags(form_error('remark')));
         }else{
 
+
             $data = array(
                 'usp_id_number' =>trim($this->input->post('id_number')),
                 'date'=>trim($this->input->post('usp_date')),
@@ -18228,18 +18229,24 @@ public function addnewuspincoming(){
                 'remark'  =>trim($this->input->post('remark'))
             );
 
-            // if($this->input->post('cha_debit_note_id')){
-            //     $cha_debit_note_id = trim($this->input->post('cha_debit_note_id'));
-            // }else{
-            //     $cha_debit_note_id = '';
-            // }
+            if($this->input->post('usp_incoming_id')){
+                $usp_incoming_id = trim($this->input->post('usp_incoming_id'));
+            }else{
+                $usp_incoming_id = '';
+            }
             
-            $savenewuspincoming= $this->admin_model->savenewuspincoming('',$data);
+            $savenewuspincoming= $this->admin_model->savenewuspincoming($usp_incoming_id,$data);
 
             if($savenewuspincoming){
-                $save_uspincoming_response['status'] = 'success';
-                $save_uspincoming_response['error'] = array('id_number'=>strip_tags(form_error('id_number')), 'usp_date'=>strip_tags(form_error('usp_date')), 'usp_name'=>strip_tags(form_error('usp_name')), 'challan_number'=>strip_tags(form_error('challan_number')),'challan_date'=>strip_tags(form_error('challan_date')),'report_by'=>strip_tags(form_error('report_by')),'remark'=>strip_tags(form_error('remark')));
-            }else{
+
+                $update_last_inserted_id_in_uspincoming = $this->admin_model->update_last_inserted_id_in_uspincoming($savenewuspincoming);
+                if($update_last_inserted_id_in_uspincoming){
+                   
+                    $save_uspincoming_response['status'] = 'success';
+                    $save_uspincoming_response['error'] = array('id_number'=>strip_tags(form_error('id_number')), 'usp_date'=>strip_tags(form_error('usp_date')), 'usp_name'=>strip_tags(form_error('usp_name')), 'challan_number'=>strip_tags(form_error('challan_number')),'challan_date'=>strip_tags(form_error('challan_date')),'report_by'=>strip_tags(form_error('report_by')),'remark'=>strip_tags(form_error('remark')));
+                }
+
+           }else{
                 $save_uspincoming_response['status'] = 'failure';
                 $save_uspincoming_response['error'] = array('id_number'=>strip_tags(form_error('id_number')), 'usp_date'=>strip_tags(form_error('usp_date')), 'usp_name'=>strip_tags(form_error('usp_name')), 'challan_number'=>strip_tags(form_error('challan_number')),'challan_date'=>strip_tags(form_error('challan_date')),'report_by'=>strip_tags(form_error('report_by')),'remark'=>strip_tags(form_error('remark')));
             }
@@ -18257,9 +18264,26 @@ public function addnewuspincoming(){
             $data['getUSPmasterlist']= $this->admin_model->getUSPmasterlist();
             $data['vendorpoList']= $this->admin_model->fetchALLvendorpoList();
             $data['challanList']= $this->admin_model->fetchALLchallanList();
+            $data['getitemdetaiilsuspincoming']= $this->admin_model->getitemdetaiilsuspincoming();
             $this->loadViews("masters/addnewUspincoming", $this->global, $data, NULL);
 
     }
+
+}
+
+public function edituspincomig($id){
+
+    $process = 'Edit USP incoming';
+    $processFunction = 'Admin/edituspincomig';
+    $this->logrecord($process,$processFunction);
+    $this->global['pageTitle'] = 'Edit USP incoming';
+    $data['vendorList']= $this->admin_model->fetchALLvendorList();
+    $data['getUSPmasterlist']= $this->admin_model->getUSPmasterlist();
+    $data['vendorpoList']= $this->admin_model->fetchALLvendorpoList();
+    $data['challanList']= $this->admin_model->fetchALLchallanList();
+    $data['getuspincomingdetailsforedit']= $this->admin_model->getuspincomingdetailsforedit($id);
+    $data['getitemdetaiilsuspincomingedit']= $this->admin_model->getitemdetaiilsuspincomingedit($id);
+    $this->loadViews("masters/edituspincomig", $this->global, $data, NULL);
 
 }
 
@@ -19902,6 +19926,185 @@ public function getallchallanpartusingchallannumber(){
     }
 
 }
+
+
+public function deleteuspincoming(){
+    $post_submit = $this->input->post();
+    if($post_submit){
+        $result = $this->admin_model->deleteuspincoming(trim($this->input->post('id')));
+        if ($result) {
+                    $process = 'Delete USP Incoming';
+                    $processFunction = 'Admin/deleteuspincoming';
+                    $this->logrecord($process,$processFunction);
+                echo(json_encode(array('status'=>'success')));
+            }
+        else { echo(json_encode(array('status'=>'failed'))); }
+    }else{
+        echo(json_encode(array('status'=>'failed'))); 
+    }
+}
+
+
+public function getChallanformitemdetailsbychallanandaprt(){
+
+    if($this->input->post('part_number')) {
+        $getchallanformpartid = $this->admin_model->getChallanformitemdetailsbychallanandaprt(trim($this->input->post('part_number')),$this->input->post('challan_number'));
+
+        if($getchallanformpartid){
+            $content = $getchallanformpartid[0];
+            echo json_encode($content);
+
+        }else{
+            echo 'failure';
+        }
+       
+    } else {
+        echo 'failure';
+    }
+}
+
+
+public function saveuspincoming_item_form(){
+
+    $post_submit = $this->input->post();
+      
+    if($post_submit){
+        $save_usp_incoming_response = array();
+
+        $this->form_validation->set_rules('part_number','Part Number','trim|required');
+        $this->form_validation->set_rules('description','Part Name','trim|required');
+        $this->form_validation->set_rules('challan_qty','Challan Qty','trim');
+        $this->form_validation->set_rules('net_weight_per_kgs_pcs','Net Weight Per kgs pcs','trim');
+        $this->form_validation->set_rules('challan_no','Challan No','trim');
+        $this->form_validation->set_rules('challan_date_item','Challan Date Item','trim');
+        $this->form_validation->set_rules('received_qty_in_pcs','Received Qty In Pcs','trim');
+        $this->form_validation->set_rules('received_qty_in_kgs','Received Qty In kgs','trim');
+        $this->form_validation->set_rules('gross_qty_in_includin_bg','Gross Qty In Includin BG','trim');
+        $this->form_validation->set_rules('units','Units','trim');
+        $this->form_validation->set_rules('no_of_bags','No Of Bags','trim');
+        $this->form_validation->set_rules('lot_no','Lot_No','trim');
+        $this->form_validation->set_rules('itemremark','Remark','trim');
+        $this->form_validation->set_rules('balance_qty_in_pcs','Balance Qty In PCS','trim');
+        $this->form_validation->set_rules('balance_qty_in_kgs','Balance Qty In KGS','trim');
+        $this->form_validation->set_rules('status','Status','trim');
+
+    
+        if($this->form_validation->run() == FALSE)
+        {
+            $save_usp_incoming_response['status'] = 'failure';
+            $save_usp_incoming_response['error'] = array(
+            'part_number'=>strip_tags(form_error('part_number')), 
+            'description'=>strip_tags(form_error('description')), 
+            'challan_qty'=>strip_tags(form_error('challan_qty')), 
+            'net_weight_per_kgs_pcs'=>strip_tags(form_error('net_weight_per_kgs_pcs')),
+            'challan_no'=>strip_tags(form_error('challan_no')),
+            'challan_date_item'=>strip_tags(form_error('challan_date_item')),
+            'received_qty_in_pcs'=>strip_tags(form_error('received_qty_in_pcs')),
+            'received_qty_in_kgs'=>strip_tags(form_error('received_qty_in_kgs')),
+            'gross_qty_in_includin_bg'=>strip_tags(form_error('gross_qty_in_includin_bg')),
+            'units'=>strip_tags(form_error('units')),
+            'no_of_bags'=>strip_tags(form_error('no_of_bags')),
+            'lot_no'=>strip_tags(form_error('lot_no')),
+            'itemremark'=>strip_tags(form_error('itemremark')),
+            'balance_qty_in_pcs'=>strip_tags(form_error('balance_qty_in_pcs')),
+            'balance_qty_in_kgs'=>strip_tags(form_error('balance_qty_in_kgs')),
+            'status'=>strip_tags(form_error('status')),
+            );
+        }else{
+
+            if(trim($this->input->post('usp_incoming_id'))){
+
+                $data = array(
+                    'usp_incoming_id'     => trim($this->input->post('usp_incoming_id')),
+                    'part_number'   => trim($this->input->post('part_number')),
+                    'part_description'     => trim($this->input->post('description')),
+                    'challan_qty'    => trim($this->input->post('challan_qty')),
+                    'net_weight_per_pcs'  => trim($this->input->post('net_weight_per_kgs_pcs')),
+                    'challan_no' =>   trim($this->input->post('challan_no')),
+                    'challan_date' =>  trim($this->input->post('challan_date_item')),
+                    'received_qty_in_pcs' => trim($this->input->post('received_qty_in_pcs')),
+                    'received_qty_in_kgs'=>trim($this->input->post('received_qty_in_kgs')),
+                    'gross_weight_Including_bag'=>trim($this->input->post('gross_qty_in_includin_bg')),
+                    'units'=>trim($this->input->post('units')),
+                    'no_of_bags' =>trim($this->input->post('no_of_bags')),
+                    'lot_no' =>trim($this->input->post('lot_no')),
+                    'remark' =>trim($this->input->post('itemremark')),
+                    'balance_qty_in_pcs' =>trim($this->input->post('balance_qty_in_pcs')),
+                    'balance_qty_in_kgs' =>trim($this->input->post('balance_qty_in_kgs')),
+                    'status' =>trim($this->input->post('status')),
+                    
+                    'pre_usp_date' =>trim($this->input->post('pre_usp_date')),  
+                    'pre_usp_name' =>trim($this->input->post('pre_usp_name')), 
+                    'pre_challan_number' =>trim($this->input->post('pre_challan_number')),  
+                    'pre_challan_date' =>trim($this->input->post('pre_challan_date')), 
+                    'pre_report_by' =>trim($this->input->post('pre_report_by')), 
+                    'pre_remark' =>trim($this->input->post('pre_remark')),  
+                );
+
+
+            }else{
+                
+           
+
+                    $data = array(
+                        'part_number'   => trim($this->input->post('part_number')),
+                        'part_description'     => trim($this->input->post('description')),
+                        'challan_qty'    => trim($this->input->post('challan_qty')),
+                        'net_weight_per_pcs'  => trim($this->input->post('net_weight_per_kgs_pcs')),
+                        'challan_no' =>   trim($this->input->post('challan_no')),
+                        'challan_date' =>  trim($this->input->post('challan_date_item')),
+                        'received_qty_in_pcs' => trim($this->input->post('received_qty_in_pcs')),
+                        'received_qty_in_kgs'=>trim($this->input->post('received_qty_in_kgs')),
+                        'gross_weight_Including_bag'=>trim($this->input->post('gross_qty_in_includin_bg')),
+                        'units'=>trim($this->input->post('units')),
+                        'no_of_bags' =>trim($this->input->post('no_of_bags')),
+                        'lot_no' =>trim($this->input->post('lot_no')),
+                        'remark' =>trim($this->input->post('itemremark')),
+                        'balance_qty_in_pcs' =>trim($this->input->post('balance_qty_in_pcs')),
+                        'balance_qty_in_kgs' =>trim($this->input->post('balance_qty_in_kgs')),
+                        'status' =>trim($this->input->post('status')),
+                        
+                        'pre_usp_date' =>trim($this->input->post('pre_usp_date')),  
+                        'pre_usp_name' =>trim($this->input->post('pre_usp_name')), 
+                        'pre_challan_number' =>trim($this->input->post('pre_challan_number')),  
+                        'pre_challan_date' =>trim($this->input->post('pre_challan_date')), 
+                        'pre_report_by' =>trim($this->input->post('pre_report_by')), 
+                        'pre_remark' =>trim($this->input->post('pre_remark')),  
+                    );
+
+                }
+
+                $saveUSPincomingitemdata = $this->admin_model->saveuspincomingitemformdata('',$data);
+                if($saveUSPincomingitemdata){
+                    $save_usp_incoming_response['status'] = 'success';
+                    $save_usp_incoming_response['error'] = array(
+                        'part_number'=>strip_tags(form_error('part_number')), 
+                        'description'=>strip_tags(form_error('description')), 
+                        'challan_qty'=>strip_tags(form_error('challan_qty')), 
+                        'net_weight_per_kgs_pcs'=>strip_tags(form_error('net_weight_per_kgs_pcs')),
+                        'challan_no'=>strip_tags(form_error('challan_no')),
+                        'challan_date_item'=>strip_tags(form_error('challan_date_item')),
+                        'received_qty_in_pcs'=>strip_tags(form_error('received_qty_in_pcs')),
+                        'received_qty_in_kgs'=>strip_tags(form_error('received_qty_in_kgs')),
+                        'gross_qty_in_includin_bg'=>strip_tags(form_error('gross_qty_in_includin_bg')),
+                        'units'=>strip_tags(form_error('units')),
+                        'no_of_bags'=>strip_tags(form_error('no_of_bags')),
+                        'lot_no'=>strip_tags(form_error('lot_no')),
+                        'itemremark'=>strip_tags(form_error('itemremark')),
+                        'balance_qty_in_pcs'=>strip_tags(form_error('balance_qty_in_pcs')),
+                        'balance_qty_in_kgs'=>strip_tags(form_error('balance_qty_in_kgs')),
+                        'status'=>strip_tags(form_error('status')),
+                        );
+                }
+        }
+
+        echo json_encode($save_usp_incoming_response);
+
+    }
+
+
+}
+
 
 
 }

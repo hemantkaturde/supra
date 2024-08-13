@@ -520,10 +520,8 @@ $route['viewsuppliervendorcompalint/(:any)'] = "admin/viewsuppliervendorcompalin
 
 $route['getChallanPObychaid'] = "admin/getChallanPObychaid";
 $route['getuspdate'] = "admin/getuspdate";
-
-
-
-
+$route['deleteuspincoming'] = "admin/deleteuspincoming";
+$route['edituspincomig/(:any)'] = "admin/edituspincomig/$1";
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

@@ -174,3 +174,4 @@ define('TBL_CHA_DEBIT_NOTE_TRANSACTION','tbl_cha_debitnote_transaction');
 define('TBL_CUSTMOR_COMPALINT','tbl_coustomer_complaint');
 define('TBL_SUPPLIER_VENDOR_COMPALINT','tbl_supplier_vendor_complaint');
 define('TBL_USP_INCOMING_FORM','tbl_usp_incoming_form');
+define('TBL_USP_INCOMING_FORM_ITEM','tbl_usp_incoming_form_item');
