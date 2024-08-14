@@ -18265,6 +18265,7 @@ public function addnewuspincoming(){
             $data['vendorpoList']= $this->admin_model->fetchALLvendorpoList();
             $data['challanList']= $this->admin_model->fetchALLchallanList();
             $data['getitemdetaiilsuspincoming']= $this->admin_model->getitemdetaiilsuspincoming();
+            $data['getPrevioususpincomingnumber']= $this->admin_model->getPrevioususpincomingnumber()[0];
             $this->loadViews("masters/addnewUspincoming", $this->global, $data, NULL);
 
     }

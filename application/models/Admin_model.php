@@ -15759,6 +15759,17 @@ public function updatestockaftercalculation($balence_qty_in_pcs,$finishgood_id,$
     }
     
 
+    public function getPrevioususpincomingnumber(){
+
+        $this->db->select('usp_id_number');
+        $this->db->where(TBL_USP_INCOMING_FORM.'.status', 1);
+        $this->db->limit(1);
+        $this->db->order_by(TBL_USP_INCOMING_FORM.'.id','DESC');
+        $query = $this->db->get(TBL_USP_INCOMING_FORM);
+        $rowcount = $query->result_array();
+        return $rowcount;
+    }
+
 
 }
 

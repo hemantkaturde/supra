@@ -37,9 +37,12 @@
                                                         $financial_year_indian = (date("y") - 1) . "" . date("y");
                                                 }
 
-                                                if($getPriviousstockid[0]['stock_id_number']){
+
+
+
+                                                if($getPrevioususpincomingnumber['usp_id_number']){
                                                 
-                                                    $getfinancial_year = substr($getPriviousstockid[0]['stock_id_number'], -8);
+                                                    $getfinancial_year = substr($getPrevioususpincomingnumber['usp_id_number'], -8);
 
                                                     $first_part_of_string = substr($getfinancial_year,0,4);
                                                     $year = substr($getfinancial_year,0,2);
@@ -56,7 +59,7 @@
                                                     // Check if the current date falls within the financial year
                                                     if ($currentDate >= $financialYearStart && $currentDate <= $financialYearEnd) {
                                                     
-                                                        $string = $getPriviousstockid[0]['stock_id_number'];
+                                                        $string = $getPrevioususpincomingnumber['usp_id_number'];
                                                         $n = 4; // Number of characters to extract from the end
                                                         $lastNCharacters = substr($string, -$n);
                                                         $inrno= "USPID-".$financial_year_indian.'-'.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
@@ -64,7 +67,7 @@
 
                                                     } else {
 
-                                                        $string = $getPriviousstockid[0]['stock_id_number'];
+                                                        $string = $getPrevioususpincomingnumber['usp_id_number'];
                                                         $n = 4; // Number of characters to extract from the end
                                                         $lastNCharacters = substr($string, -$n);
                                                         $inrno= "USPID-".$financial_year_indian.'-'.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
