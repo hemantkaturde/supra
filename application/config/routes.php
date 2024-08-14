@@ -522,6 +522,9 @@ $route['getChallanPObychaid'] = "admin/getChallanPObychaid";
 $route['getuspdate'] = "admin/getuspdate";
 $route['deleteuspincoming'] = "admin/deleteuspincoming";
 $route['edituspincomig/(:any)'] = "admin/edituspincomig/$1";
+$route['deleteuspincomingitem'] = "admin/deleteuspincomingitem";
+
+
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

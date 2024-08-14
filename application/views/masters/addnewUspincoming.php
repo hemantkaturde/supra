@@ -236,13 +236,13 @@
                                         <td><?=$value['item_remark']?></td>
                                         <td>
                                             <i style='font-size: x-large;cursor: pointer'
-                                                data-id='<?php echo $value['stock_item_id'];?>'
+                                                data-id='<?php echo $value['uspincoming_item_id'];?>'
                                                 data_id_part_number='<?php echo $value['fin_id'];?>'
-                                                class='fa fa-pencil-square-o editStockformitem' aria-hidden='true'></i>
+                                                class='fa fa-pencil-square-o edituspincomingitem' aria-hidden='true'></i>
 
                                             <i style='font-size: x-large;cursor: pointer'
-                                                data-id='<?php echo $value['stock_item_id'];?>'
-                                                class='fa fa-trash-o deleteStockformitem' aria-hidden='true'></i>
+                                                data-id='<?php echo $value['uspincoming_item_id'];?>'
+                                                class='fa fa-trash-o deleteuspincomingitem' aria-hidden='true'></i>
                                         </td>
                                     <tr>
 

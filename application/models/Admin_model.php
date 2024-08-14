@@ -15771,6 +15771,17 @@ public function updatestockaftercalculation($balence_qty_in_pcs,$finishgood_id,$
     }
 
 
+    public function deleteuspincomingitem($id){
+        $this->db->where('id', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_USP_INCOMING_FORM_ITEM)){
+           return TRUE;
+        }else{
+           return FALSE;
+        }
+   }
+
+
 }
 
 

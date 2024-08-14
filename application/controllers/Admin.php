@@ -20106,6 +20106,23 @@ public function saveuspincoming_item_form(){
 
 }
 
+public function deleteuspincomingitem(){
+
+    $post_submit = $this->input->post();
+    if($post_submit){
+        $result = $this->admin_model->deleteuspincomingitem(trim($this->input->post('id')));
+        if ($result) {
+                    $process = 'Delete USP Incoming Item';
+                    $processFunction = 'Admin/deleteuspincomingitem';
+                    $this->logrecord($process,$processFunction);
+                echo(json_encode(array('status'=>'success')));
+            }
+        else { echo(json_encode(array('status'=>'failed'))); }
+    }else{
+        echo(json_encode(array('status'=>'failed'))); 
+    }
+
+}
 
 
 }
