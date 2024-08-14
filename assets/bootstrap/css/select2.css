@@ -637,5 +637,5 @@
 
 .select2-container--default{
 
-    width: 353px;
+    width: 353px !important;
 }

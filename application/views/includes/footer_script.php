@@ -6,11 +6,39 @@
 <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script> -->
 
+<script>
+    // Get the select input within the first div
+    $(document).ready(function() {
+        // Select the select element within the first div
+        var selectInput = $('#addNewModal').find('select');
+		selectInput.addClass('serachfilternotrequired');
+    });
+	 // Add a class to all select inputs on the page
+	$(document).ready(function() {
+        // Select all select elements and add the class
+        $('select').addClass('searchfilter');
+    });
+</script>
+
+
+<script>
+    $(document).ready(function() {
+        // Apply Select2 to all select inputs within the 'applySelect2' class
+        $('.searchfilter').select2();
+
+        // Remove Select2 from all select inputs within the 'removeSelect2' class
+        $('.serachfilternotrequired').each(function() {
+            // Destroy Select2 instance if it exists
+            $(this).select2('destroy');
+        });
+    });
+</script>
+
 <script type="text/javascript">
 
-    $(document).ready(function(){
-			$(".searchfilter").select2();
-	});
+    // $(document).ready(function(){
+	// 		$(".searchfilter").select2();
+	// });
 
 //    $(function() {
 // 			$(".datepicker").datepicker({ 
