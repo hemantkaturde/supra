@@ -354,7 +354,7 @@
 
                             <div class="form-group">
                                 <label for="received_qty_in_kgs">Received Qty (In Kgs)</label>
-                                <input type="text" class="form-control" id="received_qty_in_kgs" name="received_qty_in_kgs">
+                                <input type="text" class="form-control" id="received_qty_in_kgs" name="received_qty_in_kgs" readonly>
                                 <p class="error received_qty_in_kgs_error"></p>
                             </div>
                         </div>
@@ -416,7 +416,7 @@
                                 <label for="status">Status</label><span class="required">*</span>
                                      <select class="form-control" name="status" id="status">
                                         <option value="">Select Status</option>
-                                        <option value="Open">Open</option>
+                                        <option value="Open" selected>Open</option>
                                         <option value="Close">Close</option>
                                     </select>
                                 <p class="error status_error"></p>

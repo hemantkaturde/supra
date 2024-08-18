@@ -22221,8 +22221,6 @@
 			return false;
 	    });
 
-
-
 		$(document).on('click','.deleteuspincomingitem',function(e){
 				var elemF = $(this);
 				e.preventDefault();
@@ -22272,9 +22270,78 @@
 			});
 		});
 
+		$(document).on('change', '#received_qty_in_pcs', function(){	
+				 $("#received_qty_in_kgs").val();
 
-		
+				// $("#grand_total_main").val();
+			  
+				 if($("#net_weight_per_kgs_pcs").val()){
+					 var net_weight_per_kgs_pcs = $("#net_weight_per_kgs_pcs").val();
+				 }else{
+					 var net_weight_per_kgs_pcs = 0;
+				 }
+
+				 if($("#received_qty_in_pcs").val()){
+					 var received_qty_in_pcs = $("#received_qty_in_pcs").val();
+				 }else{
+					 var received_qty_in_pcs = 0;
+				 }
+
+				 var total_second_group = parseFloat(net_weight_per_kgs_pcs) * parseFloat(received_qty_in_pcs);
+
+				 $("#received_qty_in_kgs").val(total_second_group.toFixed(2));
+			
+		});
 
 
+
+		$(document).on('change', '#challan_qty,#received_qty_in_pcs', function(){	
+				 $("#balance_qty_in_pcs").val();
+
+				// $("#grand_total_main").val();
+			  
+				 if($("#challan_qty").val()){
+					 var challan_qty = $("#challan_qty").val();
+				 }else{
+					 var challan_qty = 0;
+				 }
+
+				 if($("#received_qty_in_pcs").val()){
+					 var received_qty_in_pcs = $("#received_qty_in_pcs").val();
+				 }else{
+					 var received_qty_in_pcs = 0;
+				 }
+
+				 var total_second_group = parseFloat(challan_qty) - parseFloat(received_qty_in_pcs);
+
+				 $("#balance_qty_in_pcs").val(total_second_group.toFixed(2));
+
+
+
+
+				 $("#balance_qty_in_kgs").val();
+
+				// $("#grand_total_main").val();
+
+				if($("#balance_qty_in_pcs").val()){
+					var balance_qty_in_pcs = $("#balance_qty_in_pcs").val();
+				}else{
+					var balance_qty_in_pcs = 0;
+				}
+
+				if($("#net_weight_per_kgs_pcs").val()){
+					var net_weight_per_kgs_pcs = $("#net_weight_per_kgs_pcs").val();
+				}else{
+					var net_weight_per_kgs_pcs = 0;
+				}
+
+				var total_second_group_2 = parseFloat(balance_qty_in_pcs) - parseFloat(net_weight_per_kgs_pcs);
+
+				$("#balance_qty_in_kgs").val(total_second_group_2.toFixed(2));
+
+
+		});
+
+	
     </script>
 <?php } ?>
