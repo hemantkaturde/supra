@@ -14,7 +14,7 @@
                <h3>
                   <?php if(isset($tasksCount)) { echo $tasksCount; } else { echo '0'; } ?>
                </h3>
-               <p>Tasks</p>
+               <p>Total Vendors</p>
             </div>
             <div class="icon">
                <i class="fa fa-tasks"></i>
@@ -32,7 +32,7 @@
                <h3>
                   <?php if(isset($finishedTasksCount)) { echo $finishedTasksCount; } else { echo '0'; } ?>
                </h3>
-               <p>More information</p>
+               <p>Total Supplier</p>
             </div>
             <div class="icon">
                <i class="ion ion-pie-graph"></i>
@@ -51,7 +51,7 @@
                <h3>
                   <?php if(isset($usersCount)) { echo $usersCount; } else { echo '0'; } ?>
                </h3>
-               <p>User</p>
+               <p>Total Finishgood / Row Material</p>
             </div>
             <div class="icon">
                <i class="ion ion-person"></i>
@@ -84,7 +84,7 @@
 
    <div class="row" style="margin-right: 0px; margin-left: 0px;background:#fff">
       <div class="col-lg-12 col-xs-12">        
-         <div class="col-md-3">
+         <div class="col-md-4">
             <div class="form-group">
                <h4> Search By Part Number</h4>
                <select class="form-control" name="part_number" id="part_number">
@@ -97,7 +97,7 @@
             </div>
          </div>
 
-         <div class="col-md-3">
+         <div class="col-md-4">
 
             <div class="form-group">
                <h4> Search By Form</h4>
