@@ -19334,12 +19334,14 @@ public function printstock($stock_id){
     $k=1;
     $export_qty_in_pcs =0;
     foreach ($getexportrecordsitemdataforprint as $key => $value) {
+
+        
         $CartItemExport .= '
                 <tr style="style=border-left: 1px solid black;border-right: 1px solid black;">
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$k.'</td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['packing_instrauction_id'].'</td> 
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['buyer_invoice_date'].'</td>
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.number_format($value['buyer_invoice_qty'],2).'</td> 
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['buyer_invoice_qty'].'</td> 
                 </tr>';
 
                  $export_qty_in_pcs+=$value['export_qty_in_kgs'];
