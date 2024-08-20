@@ -22335,7 +22335,7 @@
 					var net_weight_per_kgs_pcs = 0;
 				}
 
-				var total_second_group_2 = parseFloat(balance_qty_in_pcs) - parseFloat(net_weight_per_kgs_pcs);
+				var total_second_group_2 = parseFloat(balance_qty_in_pcs) * parseFloat(net_weight_per_kgs_pcs);
 
 				$("#balance_qty_in_kgs").val(total_second_group_2.toFixed(2));
 
