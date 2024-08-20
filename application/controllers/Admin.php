@@ -19298,7 +19298,12 @@ public function printstock($stock_id){
                 $invoice_qty_in_pcs+=$value['invoice_qty_In_pcs'];
                 $actual_received_qty_in_pcs+=$value['actual_received_qty_in_pcs'];
 
-                $previous_balence = $value['previous_balence'];
+            
+                if($value['previous_balence']){
+                    $previous_balence = $value['previous_balence'];
+                }else{
+                    $previous_balence = 0;
+                }
 
             $i++;       
     }
