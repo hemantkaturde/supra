@@ -19272,7 +19272,11 @@ public function fetchseachbypartnumberreport($part_number){
 
 }
 
-public function printstock($stock_id){
+public function printstock($stock_id,$balence_qty_in_pcs,$ready_for_exp_pcs){
+
+
+    // $ready_for_exp_pcs = $this->input->post('ready_for_exp_pcs');
+    // $balence_qty_in_pcs = $this->input->post('balence_qty_in_pcs');
 
     $getsearchstockvendordeatils= $this->admin_model->getsearchstockvendordeatils($stock_id);
     $getsearchstockformdataforprint = $this->admin_model->getsearchstockformdataforprint($stock_id,$getsearchstockvendordeatils[0]['part_number_id']);
@@ -19436,19 +19440,24 @@ public function printstock($stock_id){
              <table style=" width: 100%;border-collapse: collapse;border: #ccc 1px solid;font-family:cambria;font-size:12px">
                 <tr style="border: 1px solid black;">
                         <td style="border: 1px solid black;padding: 10px;">
-                            <p><b>Ready For Export In Pcs : </b>'.round($actual_received_qty_in_pcs,3).'</p>    
+                            <p><b>Ready For Export In Pcs : </b>'.round($ready_for_exp_pcs,3).'</p>    
                         </td>  
                         <td style="border: 1px solid black;padding: 10px;">
-                            <p><b>Balence Qty In Pcs : </b>500</p>    
+                            <p><b>Balence Qty In Pcs : </b>'.$balence_qty_in_pcs.'</p>    
                         </td> 
                 </tr>
             </table>';
+
+
+          
+            // header('Content-Length: '.filesize($file));
+            // readfile($file);
 
             // <p>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</p>
     $invoice_name =  'stock_print.pdf';
     $mpdf->WriteHTML($html);
     $mpdf->Output($invoice_name,'D'); // opens in browser
-
+    
 
 }
 

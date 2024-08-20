@@ -16268,6 +16268,50 @@
 				});
 			return false;
     	});
+
+
+		$(document).on('click','#print_stock',function(e){
+			e.preventDefault();
+			$(".loader_ajax").show();
+
+			var balence_qty_in_pcs = $('#balence_qty_in_pcs').val();
+			var ready_for_exp_pcs = $('#ready_for_exp_pcs').val();
+			var stock_id = $('#stock_id').val();
+
+			$.ajax({
+					url : "<?php echo ADMIN_PATH;?>admin/printstock/"+stock_id+'/'+balence_qty_in_pcs+'/'+ready_for_exp_pcs,
+					type: "POST",
+					 data : {'ready_for_exp_pcs' : ready_for_exp_pcs,'balence_qty_in_pcs':balence_qty_in_pcs,'stock_id':stock_id},
+					success: function(data, textStatus, jqXHR)
+					{
+
+						window.location.href = "<?php echo base_url().'admin/printstock/'?>"+stock_id+'/'+balence_qty_in_pcs+'/'+ready_for_exp_pcs;
+						$(".loader_ajax").hide();
+						// if(data == "failure")
+						// {
+						// 	$(".report_type_error").html("");
+						// }
+						// else
+						// {
+						// 		swal({
+						// 				title: "Success",
+						// 				text: "Balance Qty Successfully Updated!",
+						// 				icon: "success",
+						// 				button: "Ok",
+						// 			},function(){ 
+						// 			window.location.href = "<?php echo base_url().'admin/printstock/'?>"+stock_id;
+						// 	    });		
+						// }
+					},
+					error: function (jqXHR, textStatus, errorThrown)
+					{
+						$(".loader_ajax").hide();
+					}
+				});
+			return false;
+    	});
+
+
 	
    </script>
 <?php } ?>
@@ -21227,6 +21271,7 @@
 					},
 				});
 		    });
+
 	</script>
 <?php }	?>
 
@@ -22292,8 +22337,6 @@
 				 $("#received_qty_in_kgs").val(total_second_group.toFixed(2));
 			
 		});
-
-
 
 		$(document).on('change', '#challan_qty,#received_qty_in_pcs', function(){	
 				 $("#balance_qty_in_pcs").val();
