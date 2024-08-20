@@ -19364,7 +19364,7 @@ public function printstock($stock_id){
                   <td style="padding: 8px;"><b>Part Description  : </b>'.$getsearchstockvendordeatils[0]['description'].' </td>
                 </tr>
                  <tr>
-                  <td style="padding: 8px;"><b>PO Number : </b>'.$getsearchstockvendordeatils[0]['vpo_number'].'</td>
+                  <td style="padding: 8px;"><b>PO Number : </b>'.$getsearchstockvendordeatils[0]['vpo_number'].' - '.$getsearchstockvendordeatils[0]['original_po'].'</td>
                 </tr>
                 <tr>
                   <td style="padding: 8px;"><b>PO Qty : </b>'.$getsearchstockvendordeatils[0]['vendor_qty_po'].'</td>
