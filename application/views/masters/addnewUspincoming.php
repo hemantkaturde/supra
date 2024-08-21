@@ -369,7 +369,7 @@
                             <div class="form-group">
                                 <label for="units">Units</label><span class="required">*</span>
                                      <select class="form-control" name="units" id="units">
-                                        <option value="">Select Part Name</option>
+                                        <option value="">Select Unit</option>
                                         <option value="kgs">Kgs</option>
                                         <option value="Pcs">Pcs</option>
                                         <option value="Nos">Nos</option>
