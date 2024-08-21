@@ -7742,9 +7742,6 @@ class Admin_model extends CI_Model
 
         $fetch_result = $query->result_array();
 
-        print_r( $fetch_result);
-        exit;
-
         $data = array();
         $counter = 0;
         $i=1;
