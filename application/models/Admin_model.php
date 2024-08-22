@@ -15796,6 +15796,22 @@ public function updatestockaftercalculation($balence_qty_in_pcs,$finishgood_id,$
    }
 
 
+   public function checklotnumberisexitsornot($part_number,$lot_no,$pre_challan_number){
+
+    $this->db->select('*,'.TBL_USP_INCOMING_FORM_ITEM.'.id as uspincoming_item_id,'.TBL_USP_INCOMING_FORM_ITEM.'.status as item_status,'.TBL_USP_INCOMING_FORM_ITEM.'.pre_remark as itemremark');
+    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_USP_INCOMING_FORM_ITEM.'.part_number');
+    $this->db->join(TBL_CHALLAN_FORM, TBL_CHALLAN_FORM.'.challan_id = '.TBL_USP_INCOMING_FORM_ITEM.'.pre_challan_number');
+    $this->db->where(TBL_USP_INCOMING_FORM_ITEM.'.usp_incoming_id is NULL');
+    $this->db->where(TBL_USP_INCOMING_FORM_ITEM.'.part_number',$part_number);
+    $this->db->where(TBL_USP_INCOMING_FORM_ITEM.'.lot_no',$lot_no);
+    $this->db->where(TBL_USP_INCOMING_FORM_ITEM.'.pre_challan_number',$pre_challan_number);
+    $query = $this->db->get(TBL_USP_INCOMING_FORM_ITEM);
+    $data = $query->num_rows();
+    return $data;
+
+   }
+
+
 }
 
 

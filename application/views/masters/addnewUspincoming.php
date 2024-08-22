@@ -388,7 +388,7 @@
 
 
                             <div class="form-group">
-                                <label for="lot_no">Lot No</label>
+                                <label for="lot_no">Lot No <span class="required">*</span></label>
                                 <input type="text" class="form-control" id="lot_no"
                                     name="lot_no">
                                 <p class="error lot_no_error"></p>
