@@ -185,7 +185,7 @@
 
                                             <i style='font-size: x-large;cursor: pointer'
                                                 data-id='<?php echo $value['stock_item_id'];?>'
-                                                class='fa fa-trash-o deleteStockformitem' aria-hidden='true'></i>
+                                                class='fa fa-trash-o deleteuspincomingitem' aria-hidden='true'></i>
                                         </td>
                                     <tr>
 
@@ -214,7 +214,7 @@
                                     <input type="submit" id="addnewsupincomingformsubmit" class="btn btn-primary" value="Submit"
                                         <?=$button?>>
                                     <input type="button" onclick="location.href = '<?php echo base_url() ?>uspincoming'"
-                                        class="btn btn-default" value="Back" />
+                                        class="btn btn-default " value="Back" />
                                 </div>
                             </div>
                         </form>
