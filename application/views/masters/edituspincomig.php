@@ -176,7 +176,7 @@
                                         <td><?=$value['balance_qty_in_pcs']?></td>
                                         <td><?=$value['balance_qty_in_kgs']?></td>
                                         <td><?=$value['item_status']?></td>
-                                        <td><?=$value['item_remark']?></td>
+                                        <td><?=$value['itemremark']?></td>
                                         <td>
                                             <i style='font-size: x-large;cursor: pointer'
                                                 data-id='<?php echo $value['stock_item_id'];?>'
@@ -251,7 +251,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="part_number">Part Number <span class="required">*</span></label>
-                                <select class="form-control" name="part_number"
+                                <select class="form-control partnumberforpreviousbal" name="part_number"
                                     id="part_number">
                                     <option st-id="" value="">Select F.G Part Number</option>
                                 </select>
@@ -274,6 +274,12 @@
                                 <label for="net_weight_per_kgs_pcs">Net Weight Per / pcs (in kgs)</label>
                                 <input type="text" class="form-control" id="net_weight_per_kgs_pcs" name="net_weight_per_kgs_pcs" readonly>
                                 <p class="error net_weight_per_kgs_pcs_error"></p>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="previous_balance">Previous Balance</label>
+                                <input type="text" class="form-control" id="previous_balance" name="previous_balance" readonly>
+                                <p class="error previous_balance_error"></p>
                             </div>
 
                             <div class="form-group">

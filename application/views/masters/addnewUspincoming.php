@@ -233,7 +233,7 @@
                                         <td><?=$value['balance_qty_in_pcs']?></td>
                                         <td><?=$value['balance_qty_in_kgs']?></td>
                                         <td><?=$value['item_status']?></td>
-                                        <td><?=$value['item_remark']?></td>
+                                        <td><?=$value['itemremark']?></td>
                                         <td>
                                             <i style='font-size: x-large;cursor: pointer'
                                                 data-id='<?php echo $value['uspincoming_item_id'];?>'
