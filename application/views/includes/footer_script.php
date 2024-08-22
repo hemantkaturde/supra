@@ -22279,6 +22279,9 @@
 				var elemF = $(this);
 				e.preventDefault();
 
+				var usp_incoming_id = $('#usp_incoming_id').val();
+
+
 				swal({
 					title: "Are you sure?",
 					text: "Delete USP Incoming Item",
@@ -22307,7 +22310,15 @@
 											icon: "success",
 											button: "Ok",
 											},function(){ 
-												window.location.href = "<?php echo base_url().'addnewuspincoming'?>";
+
+
+                                                if(usp_incoming_id){
+													window.location.href = "<?php echo base_url().'edituspincomig/'?>"+usp_incoming_id;
+												}else{
+													window.location.href = "<?php echo base_url().'addnewuspincoming'?>";
+												}
+
+												
 										});	
 									}
 
