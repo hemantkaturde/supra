@@ -19984,7 +19984,7 @@ public function getChallanformitemdetailsbychallanandaprt(){
 public function partnumberforpreviousbal(){
 
     if($this->input->post('part_number')) {
-        $getchallanformpartid = $this->admin_model->partnumberforpreviousbal(trim($this->input->post('part_number')),$this->input->post('challan_number'));
+        $getchallanformpartid = $this->admin_model->partnumberforpreviousbal(trim($this->input->post('part_number')),$this->input->post('challan_number'),$this->input->post('usp_incoming_id'));
 
         if($getchallanformpartid){
             $content = $getchallanformpartid[0];

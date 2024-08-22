@@ -15741,6 +15741,8 @@ public function updatestockaftercalculation($balence_qty_in_pcs,$finishgood_id,$
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_USP_INCOMING_FORM_ITEM.'.part_number');
         $this->db->join(TBL_CHALLAN_FORM, TBL_CHALLAN_FORM.'.challan_id = '.TBL_USP_INCOMING_FORM_ITEM.'.pre_challan_number');
         $this->db->where(TBL_USP_INCOMING_FORM_ITEM.'.usp_incoming_id',$id);
+        $this->db->order_by(TBL_USP_INCOMING_FORM_ITEM.'.id','DESC');
+
         $query = $this->db->get(TBL_USP_INCOMING_FORM_ITEM);
         $data = $query->result_array();
         return $data;
@@ -15799,15 +15801,29 @@ public function updatestockaftercalculation($balence_qty_in_pcs,$finishgood_id,$
 
 
    
-   public function partnumberforpreviousbal($part_number,$challan_id){
+   public function partnumberforpreviousbal($part_number,$challan_id,$usp_incoming_id){
 
-        $this->db->select('balance_qty_in_pcs');
-        $this->db->where(TBL_USP_INCOMING_FORM_ITEM.'.usp_incoming_id is NULL');
-        $this->db->order_by(TBL_USP_INCOMING_FORM_ITEM.'.id','DESC');
-        $this->db->limit(1);
-        $query = $this->db->get(TBL_USP_INCOMING_FORM_ITEM);
-        $data2 = $query->result_array();
-        return $data2;
+        if($usp_incoming_id){
+            $this->db->select('balance_qty_in_pcs');
+            $this->db->where(TBL_USP_INCOMING_FORM_ITEM.'.usp_incoming_id',$usp_incoming_id);
+            $this->db->where(TBL_USP_INCOMING_FORM_ITEM.'.part_number',$part_number);
+            $this->db->order_by(TBL_USP_INCOMING_FORM_ITEM.'.id','DESC');
+            $this->db->limit(1);
+            $query = $this->db->get(TBL_USP_INCOMING_FORM_ITEM);
+            $data2 = $query->result_array();
+            return $data2;
+
+        }else{
+            $this->db->select('balance_qty_in_pcs');
+            $this->db->where(TBL_USP_INCOMING_FORM_ITEM.'.usp_incoming_id is NULL');
+            $this->db->order_by(TBL_USP_INCOMING_FORM_ITEM.'.id','DESC');
+            $this->db->limit(1);
+            $query = $this->db->get(TBL_USP_INCOMING_FORM_ITEM);
+            $data2 = $query->result_array();
+            return $data2;
+        }
+
+      
    }
 
 

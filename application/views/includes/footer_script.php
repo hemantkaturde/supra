@@ -22418,11 +22418,12 @@
 			//$(".loader_ajax").show();
 			var part_number = $('#part_number').val();
 			var challan_number = $('#challan_number').val();
+			var usp_incoming_id = $('#usp_incoming_id').val();
 			
 			$.ajax({
 				url : "<?php echo ADMIN_PATH;?>admin/partnumberforpreviousbal",
 				type: "POST",
-				data : {'part_number' : part_number,'challan_number':challan_number},
+				data : {'part_number' : part_number,'challan_number':challan_number,'usp_incoming_id':usp_incoming_id},
 				success: function(data, textStatus, jqXHR)
 				{
 					$(".loader_ajax").hide();
