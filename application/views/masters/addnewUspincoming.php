@@ -124,7 +124,7 @@
                                         $selected_value = $getitemdetaiilsuspincoming[0]['challan_no'];
 
                                     }else{
-                                        $selected_value = 'Select Buyer PO Number';
+                                        $selected_value = 'Select Challan Number';
                                     } ?>
 
 
@@ -308,7 +308,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="part_number">Part Number <span class="required">*</span></label>
-                                <select class="form-control" name="part_number"
+                                <select class="form-control partnumberforpreviousbal" name="part_number"
                                     id="part_number">
                                     <option st-id="" value="">Select F.G Part Number</option>
                                 </select>
@@ -331,6 +331,12 @@
                                 <label for="net_weight_per_kgs_pcs">Net Weight Per / pcs (in kgs)</label>
                                 <input type="text" class="form-control" id="net_weight_per_kgs_pcs" name="net_weight_per_kgs_pcs" readonly>
                                 <p class="error net_weight_per_kgs_pcs_error"></p>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="previous_balance">Previous Balance</label>
+                                <input type="text" class="form-control" id="previous_balance" name="previous_balance" readonly>
+                                <p class="error previous_balance_error"></p>
                             </div>
 
                             <div class="form-group">
@@ -426,7 +432,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btn-xl closestockform"
+                    <button type="button" class="btn btn-secondary btn-xl closeuspincoming_item"
                         data-dismiss="modal">Close</button>
                     <button type="submit" id="saveuspincoming_item" name="saveuspincoming_item" class="btn btn-primary"
                         class="btn btn-success btn-xl">Save</button>

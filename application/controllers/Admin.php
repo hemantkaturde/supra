@@ -19981,6 +19981,25 @@ public function getChallanformitemdetailsbychallanandaprt(){
 }
 
 
+public function partnumberforpreviousbal(){
+
+    if($this->input->post('part_number')) {
+        $getchallanformpartid = $this->admin_model->partnumberforpreviousbal(trim($this->input->post('part_number')),$this->input->post('challan_number'));
+
+        if($getchallanformpartid){
+            $content = $getchallanformpartid[0];
+            echo json_encode($content);
+
+        }else{
+            echo 'failure';
+        }
+       
+    } else {
+        echo 'failure';
+    }
+}
+
+
 public function saveuspincoming_item_form(){
 
     $post_submit = $this->input->post();
@@ -19999,7 +20018,7 @@ public function saveuspincoming_item_form(){
         $this->form_validation->set_rules('gross_qty_in_includin_bg','Gross Qty In Includin BG','trim');
         $this->form_validation->set_rules('units','Units','trim');
         $this->form_validation->set_rules('no_of_bags','No Of Bags','trim');
-        $this->form_validation->set_rules('lot_no','Lot_No','trim');
+        $this->form_validation->set_rules('lot_no','Lot No','trim|required');
         $this->form_validation->set_rules('itemremark','Remark','trim');
         $this->form_validation->set_rules('balance_qty_in_pcs','Balance Qty In PCS','trim');
         $this->form_validation->set_rules('balance_qty_in_kgs','Balance Qty In KGS','trim');
@@ -20087,6 +20106,7 @@ public function saveuspincoming_item_form(){
                         'remark' =>trim($this->input->post('itemremark')),
                         'balance_qty_in_pcs' =>trim($this->input->post('balance_qty_in_pcs')),
                         'balance_qty_in_kgs' =>trim($this->input->post('balance_qty_in_kgs')),
+                        'previous_balance' => trim($this->input->post('previous_balance')),
                         'status' =>trim($this->input->post('status')),
                         'pre_usp_date' =>trim($this->input->post('pre_usp_date')),  
                         'pre_usp_name' =>trim($this->input->post('pre_usp_name')), 

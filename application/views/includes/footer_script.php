@@ -22195,6 +22195,7 @@
 			   var challan_qty =   $('#challan_qty').val();
 			   var net_weight_per_kgs_pcs =   $('#net_weight_per_kgs_pcs').val();
 			   var challan_no =   $('#challan_no').val();
+			   var previous_balance =   $('#previous_balance').val();
 			   var challan_date_item =   $('#challan_date_item').val();
 			   var received_qty_in_pcs =   $('#received_qty_in_pcs').val();
 			   var received_qty_in_kgs = $('#received_qty_in_kgs').val();
@@ -22206,7 +22207,6 @@
 			   var balance_qty_in_pcs =   $('#balance_qty_in_pcs').val();
 			   var balance_qty_in_kgs =   $('#balance_qty_in_kgs').val();
 			   var status =   $('#status').val();
-
 			   var pre_usp_date =   $('#usp_date').val();
 		       var pre_usp_name =   $('#usp_name').val();
 			   var pre_challan_number =   $('#challan_number').val();
@@ -22216,13 +22216,11 @@
 
 			   var usp_incoming_id = $("#usp_incoming_id").val();
 
-
-
 			   $.ajax({
 				url : "<?php echo base_url();?>admin/saveuspincoming_item_form",
 				type: "POST",
 				 //data : formData,
-				 data :{part_number:part_number,description:description,challan_qty:challan_qty,net_weight_per_kgs_pcs:net_weight_per_kgs_pcs,challan_no:challan_no,challan_date_item:challan_date_item,received_qty_in_pcs:received_qty_in_pcs,received_qty_in_kgs:received_qty_in_kgs,gross_qty_in_includin_bg:gross_qty_in_includin_bg,units:units,no_of_bags:no_of_bags,lot_no:lot_no,itemremark:itemremark,balance_qty_in_pcs:balance_qty_in_pcs,balance_qty_in_kgs:balance_qty_in_kgs,status:status,pre_usp_date:pre_usp_date,pre_usp_name:pre_usp_name,pre_challan_number:pre_challan_number,pre_challan_date:pre_challan_date,pre_report_by:pre_report_by,pre_remark:pre_remark,usp_incoming_id:usp_incoming_id},
+				 data :{part_number:part_number,description:description,challan_qty:challan_qty,net_weight_per_kgs_pcs:net_weight_per_kgs_pcs,challan_no:challan_no,challan_date_item:challan_date_item,received_qty_in_pcs:received_qty_in_pcs,received_qty_in_kgs:received_qty_in_kgs,gross_qty_in_includin_bg:gross_qty_in_includin_bg,units:units,no_of_bags:no_of_bags,lot_no:lot_no,itemremark:itemremark,balance_qty_in_pcs:balance_qty_in_pcs,balance_qty_in_kgs:balance_qty_in_kgs,status:status,pre_usp_date:pre_usp_date,pre_usp_name:pre_usp_name,pre_challan_number:pre_challan_number,pre_challan_date:pre_challan_date,pre_report_by:pre_report_by,pre_remark:pre_remark,usp_incoming_id:usp_incoming_id,previous_balance:previous_balance},
 				 method: "POST",
                 // data :{package_id:package_id},
                 cache:false,
@@ -22355,7 +22353,22 @@
 					 var received_qty_in_pcs = 0;
 				 }
 
-				 var total_second_group = parseFloat(challan_qty) - parseFloat(received_qty_in_pcs);
+				 if($("#previous_balance").val()){
+					 var previous_balance = $("#previous_balance").val();
+				 }else{
+					 var previous_balance = 0;
+				 }
+
+				 if(previous_balance > 0){
+
+					var calcualtion_qty_pre = previous_balance;
+
+				 }else{
+					var calcualtion_qty_pre = challan_qty;
+				 }
+
+
+				 var total_second_group = parseFloat(calcualtion_qty_pre) - parseFloat(received_qty_in_pcs);
 
 				 $("#balance_qty_in_pcs").val(total_second_group.toFixed(2));
 
@@ -22385,6 +22398,42 @@
 
 		});
 
+		$(document).on('click','.closeuspincoming_item', function(){
+			location.reload();
+        });
+
+
+		$(document).on('change','.partnumberforpreviousbal',function(e){  
+			e.preventDefault();
+			//$(".loader_ajax").show();
+			var part_number = $('#part_number').val();
+			var challan_number = $('#challan_number').val();
+			
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>admin/partnumberforpreviousbal",
+				type: "POST",
+				data : {'part_number' : part_number,'challan_number':challan_number},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						$('#previous_balance').val(0);
+				
+					}
+					else
+					{
+						var data_row = jQuery.parseJSON( data );
+						$('#previous_balance').val(data_row.balance_qty_in_pcs);
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					$('#previous_balance').val(0);
+				}
+			});
+			return false;
+		});
 	
     </script>
 <?php } ?>
