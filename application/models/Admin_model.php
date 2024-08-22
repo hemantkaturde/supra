@@ -15312,28 +15312,14 @@ public function getsuppliervendorcomplaintdata($id){
 }
 
 
-public function fetchseachbypartnumberreportcount($params,$part_number){
+public function fetchseachbypartnumberreportcount($params,$part_number,$form_type){
 
 
     if($part_number!='NA'){
 
-
         $this->db->select('*');
         $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
-    
-    
-        // if($params['search']['value'] != "") 
-        // {
-        //     $this->db->where("(".TBL_CHALLAN_FORM.".challan_no LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_CHALLAN_FORM.".challan_date LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_CHALLAN_FORM.".paid_unpaid LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_SUPPLIER_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_USP.".usp_name LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_SUPPLIER.".supplier_name LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%')");
-        // }
         $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.part_number_id', $part_number); 
         $query = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
         $rowcount = $query->num_rows();
@@ -15344,34 +15330,32 @@ public function fetchseachbypartnumberreportcount($params,$part_number){
     }
 }
 
-public function fetchseachbypartnumberreportdata($params,$part_number){
+public function fetchseachbypartnumberreportdata($params,$part_number,$form_type){
 
     if($part_number!='NA'){
 
          
-    $this->db->select('*,'.TBL_BUYER_PO_MASTER.'.id as view_id');
-    $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id');
-    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
-    // $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_CHALLAN_FORM.'.supplier_name','left');
-    // $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_CHALLAN_FORM.'.vendor_po_number','left');
-    // $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_CHALLAN_FORM.'.supplier_po_number','left');
+        $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_BUYER_PO_MASTER.'.id as view_id,'.TBL_BUYER_PO_MASTER.'.sales_order_number as form_number,"Buyer PO" as form_name');
+        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
+        $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.part_number_id', $part_number); 
+        $this->db->limit($params['length'],$params['start']);
+        $this->db->order_by(TBL_BUYER_PO_MASTER_ITEM.'.id','DESC');
+        $query_buyer_po = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
+        $buyer_po_result = $query_buyer_po->result_array();
 
-    // if($params['search']['value'] != "") 
-    // {
-    //     $this->db->where("(".TBL_CHALLAN_FORM.".challan_no LIKE '%".$params['search']['value']."%'");
-    //     $this->db->or_where(TBL_CHALLAN_FORM.".challan_date LIKE '%".$params['search']['value']."%'");
-    //     $this->db->or_where(TBL_CHALLAN_FORM.".paid_unpaid LIKE '%".$params['search']['value']."%'");
-    //     $this->db->or_where(TBL_SUPPLIER_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
-    //     $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
-    //     $this->db->or_where(TBL_USP.".usp_name LIKE '%".$params['search']['value']."%'");
-    //     $this->db->or_where(TBL_SUPPLIER.".supplier_name LIKE '%".$params['search']['value']."%'");
-    //     $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%')");
-    // }
-    $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.part_number_id', $part_number); 
-    $this->db->limit($params['length'],$params['start']);
-    $this->db->order_by(TBL_BUYER_PO_MASTER_ITEM.'.id','DESC');
-    $query = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
-    $fetch_result = $query->result_array();
+
+        $this->db->select(TBL_RAWMATERIAL.'.part_number,'.TBL_SUPPLIER_PO_MASTER.'.id as view_id,'.TBL_SUPPLIER_PO_MASTER.'.po_number as form_number,"Supplier PO" as form_name');
+        $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.supplier_po_id');
+        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id');
+        $this->db->where(TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id', $part_number); 
+        $this->db->limit($params['length'],$params['start']);
+        $this->db->order_by(TBL_SUPPLIER_PO_MASTER_ITEM.'.id','DESC');
+        $vendor_buyer_po = $this->db->get(TBL_SUPPLIER_PO_MASTER_ITEM);
+        $vendor_po_result = $vendor_buyer_po->result_array();
+
+
+    $fetch_result = array_merge($buyer_po_result,$vendor_po_result);
 
     $data = array();
     $counter = 0;
@@ -15380,8 +15364,8 @@ public function fetchseachbypartnumberreportdata($params,$part_number){
         foreach ($fetch_result as $key => $value)
         {
             $data[$counter]['part_number'] = $value['part_number'];
-            $data[$counter]['sales_order_number'] = $value['sales_order_number'];
-            $data[$counter]['form_name'] = 'Buyer PO';
+            $data[$counter]['sales_order_number'] = $value['form_number'];
+            $data[$counter]['form_name'] = $value['form_name'];
             $data[$counter]['action'] = '';
             $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editBuyerpo/".$value['view_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-external-link' aria-hidden='true'></i></a>  &nbsp";
            

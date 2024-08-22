@@ -103,26 +103,23 @@
                <h4> Search By Form</h4>
                <select class="form-control" name="form_type" id="form_type">
                   <option st-id="" value="NA">Select Form</option>
-                  <option st-id="" value="NA">Buyer PO</option>
-                  <option st-id="" value="NA">Supplier PO</option>
-                  <option st-id="" value="NA">Vendor PO</option>
-                  <option st-id="" value="NA">Supplier PO Confirmation</option>
-                  <option st-id="" value="NA">Vendor PO Confirmation</option>
-                  <option st-id="" value="NA">Job Work Challan</option>
-                  <option st-id="" value="NA">OMS Challan</option>
-                  <option st-id="" value="NA">Challan</option>
-                  <option st-id="" value="NA">Rework / Rejection Challan</option>
-                  <option st-id="" value="NA">Bill Of Material</option>
-                  <option st-id="" value="NA">Vendor Bill Of Material</option>
-                  <option st-id="" value="NA">Incomig Details</option>
-                  <option st-id="" value="NA">Stock</option>
-                  <option st-id="" value="NA">Rejection</option>
-                  <option st-id="" value="NA">Quality Record</option>
-                  <option st-id="" value="NA">Packaging Instrasction</option>
-                  <option st-id="" value="NA">Export Details</option>
-                  <option st-id="" value="NA">Sales Tracking</option>
-                  <option st-id="" value="NA">Coustomer Complaint</option>
-                  <option st-id="" value="NA">Supplier / Vendor Complaint</option>
+                  <option st-id="" value="BuyerPO">Buyer PO</option>
+                  <option st-id="" value="SupplierPO">Supplier PO</option>
+                  <option st-id="" value="VendorPO">Vendor PO</option>
+                  <option st-id="" value="SupplierPOConfirmation">Supplier PO Confirmation</option>
+                  <option st-id="" value="VendorPOConfirmation">Vendor PO Confirmation</option>
+                  <option st-id="" value="JobWorkChallan">Job Work Challan</option>
+                  <option st-id="" value="OMSChallan">OMS Challan</option>
+                  <option st-id="" value="Challan">Challan</option>
+                  <option st-id="" value="ReworkRejectionChallan">Rework / Rejection Challan</option>
+                  <option st-id="" value="BillOfMaterial">Bill Of Material</option>
+                  <option st-id="" value="VendorBillOfMaterial">Vendor Bill Of Material</option>
+                  <option st-id="" value="IncomigDetails">Incomig Details</option>
+                  <option st-id="" value="Stock">Stock</option>
+                  <option st-id="" value="Rejection">Rejection</option>
+                  <option st-id="" value="QualityRecord">Quality Record</option>
+                  <option st-id="" value="PackagingInstrasction">Packaging Instrasction</option>
+                  <option st-id="" value="ExportDetails">Export Details</option>
                </select>
             </div>
          </div>

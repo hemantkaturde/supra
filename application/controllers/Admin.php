@@ -19246,11 +19246,11 @@ public function getPartnumberdetailsforsupplierposuppliervendorpovendor(){
 }
 
 
-public function fetchseachbypartnumberreport($part_number){
+public function fetchseachbypartnumberreport($part_number,$form_type){
 
     $params = $_REQUEST;
-    $totalRecords = $this->admin_model->fetchseachbypartnumberreportcount($params,$part_number); 
-    $queryRecords = $this->admin_model->fetchseachbypartnumberreportdata($params,$part_number); 
+    $totalRecords = $this->admin_model->fetchseachbypartnumberreportcount($params,$part_number,$form_type); 
+    $queryRecords = $this->admin_model->fetchseachbypartnumberreportdata($params,$part_number,$form_type); 
 
     $data = array();
     foreach ($queryRecords as $key => $value)

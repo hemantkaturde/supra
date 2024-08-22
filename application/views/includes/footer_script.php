@@ -21827,10 +21827,21 @@
 			e.preventDefault();
 			$("#seachbypartnumberreport").dataTable().fnDestroy();
 			var part_number = $('#part_number').val();
-			seachbypartnumberreport(part_number);
+			var form_type = $('#form_type').val();
+			seachbypartnumberreport(part_number,form_type);
 		});
 
-		function seachbypartnumberreport(part_number){
+
+        $(document).on('change','#form_type',function(e){  
+			e.preventDefault();
+			$("#seachbypartnumberreport").dataTable().fnDestroy();
+			var part_number = $('#part_number').val();
+			var form_type = $('#form_type').val();
+			seachbypartnumberreport(part_number,form_type);
+		});
+
+
+		function seachbypartnumberreport(part_number,form_type){
 
 				var dt = $('#seachbypartnumberreport').DataTable({
 					"columnDefs": [ 
@@ -21851,7 +21862,7 @@
 					"bProcessing": true,
 					"serverSide": true,
 					"ajax":{
-						url :"<?php echo base_url();?>admin/fetchseachbypartnumberreport/"+part_number,
+						url :"<?php echo base_url();?>admin/fetchseachbypartnumberreport/"+part_number+"/"+form_type,
 						type: "post",
 					},
 				});
@@ -22401,7 +22412,6 @@
 		$(document).on('click','.closeuspincoming_item', function(){
 			location.reload();
         });
-
 
 		$(document).on('change','.partnumberforpreviousbal',function(e){  
 			e.preventDefault();
