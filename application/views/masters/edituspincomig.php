@@ -365,7 +365,7 @@
                                 <label for="status">Status</label><span class="required">*</span>
                                      <select class="form-control" name="status" id="status">
                                         <option value="">Select Status</option>
-                                        <option value="Open">Open</option>
+                                        <option value="Open" selected>Open</option>
                                         <option value="Close">Close</option>
                                     </select>
                                 <p class="error status_error"></p>
