@@ -375,7 +375,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btn-xl closestockform"
+                    <button type="button" class="btn btn-secondary btn-xl closeuspincoming_item"
                         data-dismiss="modal">Close</button>
                     <button type="submit" id="saveuspincoming_item" name="saveuspincoming_item" class="btn btn-primary"
                         class="btn btn-success btn-xl">Save</button>
