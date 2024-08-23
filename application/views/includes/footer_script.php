@@ -21817,7 +21817,7 @@
 <?php if($pageTitle=='Admin : Home page'){ ?>
 	<script type="text/javascript">
 
-       $(document).ready(function() {
+        $(document).ready(function() {
 		   $("#seachbypartnumberreport").dataTable().fnDestroy();
 			var part_number = $('#part_number').val();
 			seachbypartnumberreport(part_number);
@@ -22227,11 +22227,13 @@
 
 			   var usp_incoming_id = $("#usp_incoming_id").val();
 
+			   var usp_incoming_item_id = $("#usp_incoming_item_id").val();
+
 			   $.ajax({
 				url : "<?php echo base_url();?>admin/saveuspincoming_item_form",
 				type: "POST",
 				 //data : formData,
-				 data :{part_number:part_number,description:description,challan_qty:challan_qty,net_weight_per_kgs_pcs:net_weight_per_kgs_pcs,challan_no:challan_no,challan_date_item:challan_date_item,received_qty_in_pcs:received_qty_in_pcs,received_qty_in_kgs:received_qty_in_kgs,gross_qty_in_includin_bg:gross_qty_in_includin_bg,units:units,no_of_bags:no_of_bags,lot_no:lot_no,itemremark:itemremark,balance_qty_in_pcs:balance_qty_in_pcs,balance_qty_in_kgs:balance_qty_in_kgs,status:status,pre_usp_date:pre_usp_date,pre_usp_name:pre_usp_name,pre_challan_number:pre_challan_number,pre_challan_date:pre_challan_date,pre_report_by:pre_report_by,pre_remark:pre_remark,usp_incoming_id:usp_incoming_id,previous_balance:previous_balance},
+				 data :{part_number:part_number,description:description,challan_qty:challan_qty,net_weight_per_kgs_pcs:net_weight_per_kgs_pcs,challan_no:challan_no,challan_date_item:challan_date_item,received_qty_in_pcs:received_qty_in_pcs,received_qty_in_kgs:received_qty_in_kgs,gross_qty_in_includin_bg:gross_qty_in_includin_bg,units:units,no_of_bags:no_of_bags,lot_no:lot_no,itemremark:itemremark,balance_qty_in_pcs:balance_qty_in_pcs,balance_qty_in_kgs:balance_qty_in_kgs,status:status,pre_usp_date:pre_usp_date,pre_usp_name:pre_usp_name,pre_challan_number:pre_challan_number,pre_challan_date:pre_challan_date,pre_report_by:pre_report_by,pre_remark:pre_remark,usp_incoming_id:usp_incoming_id,previous_balance:previous_balance,usp_incoming_item_id:usp_incoming_item_id},
 				 method: "POST",
                 // data :{package_id:package_id},
                 cache:false,
@@ -22456,6 +22458,50 @@
 			});
 			return false;
 		});
-	
+
+
+		$(document).on('click','.edituspincomingitem',function(e){  
+			e.preventDefault();
+
+			var elemF = $(this);
+			var item_id = elemF.attr('data-id');
+			
+				$.ajax({
+					url : "<?php echo base_url();?>admin/geteditUspincomingitemdatabyuspitemId",
+					type: "POST",
+					data : 'id='+item_id,
+					success: function(data, textStatus, jqXHR)
+						{
+							var fetchResponse = $.parseJSON(data);
+									$('#addNewModal').modal('show'); 
+									   $('#usp_incoming_item_id').val(fetchResponse.uspincoming_item_id); 
+									   $('#part_number').val(fetchResponse.fin_id);  
+								       $('#description').val(fetchResponse.name); 
+									   $('#challan_qty').val(fetchResponse.challan_qty); 
+									   $('#net_weight_per_kgs_pcs').val(fetchResponse.net_weight_per_pcs); 
+									   $('#previous_balance').val(fetchResponse.previous_balance); 
+									   $('#challan_no').val(fetchResponse.challan_no); 
+									   $('#invoice_date').val(fetchResponse.invoice_date); 
+									   $('#challan_date_item').val(fetchResponse.challan_date); 
+									   $('#received_qty_in_pcs').val(fetchResponse.rqip); 
+									   $('#received_qty_in_kgs').val(fetchResponse.rqik);    
+									   $('#gross_qty_in_includin_bg').val(fetchResponse.gross_weight_Including_bag);    
+									   $('#units').val(fetchResponse.units); 
+									   $('#no_of_bags').val(fetchResponse.no_of_bags); 
+									   $('#lot_no').val(fetchResponse.lot_no); 
+									   $('#itemremark').val(fetchResponse.itemremark); 
+									   $('#balance_qty_in_pcs').val(fetchResponse.balance_qty_in_pcs); 
+									   $('#balance_qty_in_kgs').val(fetchResponse.balance_qty_in_kgs); 
+									   $('#status').val(fetchResponse.itemstatus); 
+
+
+								},
+								error: function (jqXHR, textStatus, errorThrown)
+								{
+								   $(".loader_ajax").hide();
+								}
+						});
+			return false;
+	    });	
     </script>
 <?php } ?>

@@ -20077,8 +20077,14 @@ public function saveuspincoming_item_form(){
                     'pre_remark' =>trim($this->input->post('pre_remark')),  
                 );
 
+                  
+                if(trim($this->input->post('usp_incoming_item_id'))){
+                    $usp_incoming_item_id =  trim($this->input->post('usp_incoming_item_id'));
+                 }else{
+                   $usp_incoming_item_id = '' ;
+                 }
 
-                $saveUSPincomingitemdata = $this->admin_model->saveuspincomingitemformdata('',$data);
+                $saveUSPincomingitemdata = $this->admin_model->saveuspincomingitemformdata($usp_incoming_item_id,$data);
                     if($saveUSPincomingitemdata){
                         $save_usp_incoming_response['status'] = 'success';
                         $save_usp_incoming_response['error'] = array(
@@ -20105,8 +20111,6 @@ public function saveuspincoming_item_form(){
 
 
                 $checklotnumberisexitsornot = $this->admin_model->checklotnumberisexitsornot(trim($this->input->post('part_number')),trim($this->input->post('lot_no')),$this->input->post('pre_challan_number'));
-                
-            
                 if($checklotnumberisexitsornot > 0){
 
                     $save_usp_incoming_response['status'] = 'failure';
@@ -20141,7 +20145,15 @@ public function saveuspincoming_item_form(){
                     );
 
 
-                    $saveUSPincomingitemdata = $this->admin_model->saveuspincomingitemformdata('',$data);
+                   
+                   if(trim($this->input->post('usp_incoming_item_id'))){
+                      $usp_incoming_item_id =  trim($this->input->post('usp_incoming_item_id'));
+                   }else{
+                     $usp_incoming_item_id = '' ;
+                   }
+
+                
+                    $saveUSPincomingitemdata = $this->admin_model->saveuspincomingitemformdata($usp_incoming_item_id,$data);
                     if($saveUSPincomingitemdata){
                         $save_usp_incoming_response['status'] = 'success';
                         $save_usp_incoming_response['error'] = array(
@@ -20190,6 +20202,23 @@ public function deleteuspincomingitem(){
     }else{
         echo(json_encode(array('status'=>'failed'))); 
     }
+
+}
+
+
+public function geteditUspincomingitemdatabyuspitemId(){
+
+    $post_submit = $this->input->post();
+    if($post_submit){
+        $geteditUspincomingitemdatabyuspitemId = $this->admin_model->geteditUspincomingitemdatabyuspitemId(trim($this->input->post('id')));
+        if($geteditUspincomingitemdatabyuspitemId){
+            $content = $geteditUspincomingitemdatabyuspitemId[0];
+            echo json_encode($content);
+        }else{
+            echo 'failure';
+        }
+    }
+
 
 }
 

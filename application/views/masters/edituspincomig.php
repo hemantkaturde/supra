@@ -240,7 +240,7 @@
             <form role="form" id="saveuspincoming_item_form" action="<?php echo base_url() ?>saveuspincomingitemform"
                 method="post" role="form">
 
-                <!-- <input type="hidden" class="form-control" id="stock_form_item_id" name="stock_form_item_id" required> -->
+                <input type="hidden" class="form-control" id="usp_incoming_item_id" name="usp_incoming_item_id" required>
 
                 <div class="modal-body">
                     <div class="loader_ajax" style="display:none;">

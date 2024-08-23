@@ -15723,7 +15723,7 @@ public function updatestockaftercalculation($balence_qty_in_pcs,$finishgood_id,$
 
     public function getitemdetaiilsuspincoming(){
 
-        $this->db->select('*,'.TBL_USP_INCOMING_FORM_ITEM.'.id as uspincoming_item_id,'.TBL_USP_INCOMING_FORM_ITEM.'.status as item_status,'.TBL_USP_INCOMING_FORM_ITEM.'.pre_remark as itemremark');
+        $this->db->select('*,'.TBL_USP_INCOMING_FORM_ITEM.'.id as uspincoming_item_id,'.TBL_USP_INCOMING_FORM_ITEM.'.status as item_status,'.TBL_USP_INCOMING_FORM_ITEM.'.remark as itemremark');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_USP_INCOMING_FORM_ITEM.'.part_number');
         $this->db->join(TBL_CHALLAN_FORM, TBL_CHALLAN_FORM.'.challan_id = '.TBL_USP_INCOMING_FORM_ITEM.'.pre_challan_number');
         $this->db->where(TBL_USP_INCOMING_FORM_ITEM.'.usp_incoming_id is NULL');
@@ -15737,7 +15737,7 @@ public function updatestockaftercalculation($balence_qty_in_pcs,$finishgood_id,$
 
     public function getitemdetaiilsuspincomingedit($id){
 
-        $this->db->select('*,'.TBL_USP_INCOMING_FORM_ITEM.'.id as uspincoming_item_id,'.TBL_USP_INCOMING_FORM_ITEM.'.status as item_status,'.TBL_USP_INCOMING_FORM_ITEM.'.pre_remark as itemremark');
+        $this->db->select('*,'.TBL_USP_INCOMING_FORM_ITEM.'.id as uspincoming_item_id,'.TBL_USP_INCOMING_FORM_ITEM.'.status as item_status,'.TBL_USP_INCOMING_FORM_ITEM.'.remark as itemremark');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_USP_INCOMING_FORM_ITEM.'.part_number');
         $this->db->join(TBL_CHALLAN_FORM, TBL_CHALLAN_FORM.'.challan_id = '.TBL_USP_INCOMING_FORM_ITEM.'.pre_challan_number');
         $this->db->where(TBL_USP_INCOMING_FORM_ITEM.'.usp_incoming_id',$id);
@@ -15825,6 +15825,19 @@ public function updatestockaftercalculation($balence_qty_in_pcs,$finishgood_id,$
 
       
    }
+
+
+   
+   public function geteditUspincomingitemdatabyuspitemId($id){
+    
+    $this->db->select('*,'.TBL_USP_INCOMING_FORM_ITEM.'.id as uspincoming_item_id,'.TBL_USP_INCOMING_FORM_ITEM.'.status as item_status,'.TBL_USP_INCOMING_FORM_ITEM.'.pre_remark as itemremark,'.TBL_USP_INCOMING_FORM_ITEM.'.status as itemstatus,'.TBL_USP_INCOMING_FORM_ITEM.'.received_qty_In_pcs as rqip,'.TBL_USP_INCOMING_FORM_ITEM.'.received_qty_In_kgs rqik');
+    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_USP_INCOMING_FORM_ITEM.'.part_number');
+    $this->db->join(TBL_CHALLAN_FORM, TBL_CHALLAN_FORM.'.challan_id = '.TBL_USP_INCOMING_FORM_ITEM.'.pre_challan_number');
+    $this->db->where(TBL_USP_INCOMING_FORM_ITEM.'.id',$id);
+    $query = $this->db->get(TBL_USP_INCOMING_FORM_ITEM);
+    $data = $query->result_array();
+    return $data;
+}
 
 
 }
