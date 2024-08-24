@@ -15394,12 +15394,14 @@
 				var vendor_po_number = $('#vendor_po_number').val();
 				var vendor_name = $('#vendor_name').val();
 
+				var buyer_po_id = $('#buyer_po_id').val();
+
 				if(vendor_name){
 					if(vendor_po_number){
 							$.ajax({
 								url : "<?php echo ADMIN_PATH;?>getItemdetailsdependonvendorpoforstockform",
 								type: "POST",
-								data : {'part_number' : part_number,'vendor_po_number':vendor_po_number,'vendor_name':vendor_name},
+								data : {'part_number' : part_number,'vendor_po_number':vendor_po_number,'vendor_name':vendor_name,'buyer_po_id':buyer_po_id},
 								success: function(data, textStatus, jqXHR)
 								{
 									$(".loader_ajax").hide();
