@@ -20141,7 +20141,7 @@ public function saveuspincoming_item_form(){
                     }
 
                     if($usp_incoming_item_id){
-                        $checklotnumberisexitsornotadd = $this->admin_model->checklotnumberisexitsornotadd($usp_incoming_item_id,trim($this->input->post('lot_no')));
+                        $checklotnumberisexitsornotadd = $this->admin_model->checklotnumberisexitsornotadd($usp_incoming_item_id,trim($this->input->post('lot_no')),$this->input->post('pre_challan_number'),trim($this->input->post('part_number')));
                         if($checklotnumberisexitsornotadd > 0){
                             $saveUSPincomingitemdata = $this->admin_model->saveuspincomingitemformdata($usp_incoming_item_id,$data);
                             if($saveUSPincomingitemdata){
