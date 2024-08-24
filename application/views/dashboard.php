@@ -2,11 +2,11 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
    <h1>
-      Management panel
+      Dashboard
    </h1>
 </section>
 <section class="content">
-   <div class="row">
+   <!-- <div class="row">
       <div class="col-lg-3 col-xs-6">
        
          <div class="small-box bg-aqua">
@@ -79,7 +79,7 @@
             </a>
          </div>
       </div>
-   </div>
+   </div> -->
     
 
    <div class="row" style="margin-right: 0px; margin-left: 0px;background:#fff">
