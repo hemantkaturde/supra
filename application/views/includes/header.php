@@ -122,8 +122,10 @@
             <section class="sidebar">
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu">
+                    
                     <li class="header">
                     </li>
+
                     <li class="treeview">
                         <a href="<?php echo base_url(); ?>dashboard">
                             <i class="fa fa-dashboard"></i>
@@ -131,30 +133,7 @@
                             </i>
                         </a>
                     </li>
-                    <?php
-            // Rol definetion in application/config/constants.php
-            if($role == ROLE_ADMIN || $role == ROLE_MANAGER)
-            {
-            ?>
-                    <!-- <li class="treeview">
-                        <a href="<?php echo base_url(); ?>tasks">
-                            <i class="fa fa-tasks"></i>
-                            <span>Tasks</span>
-                        </a>
-                    </li>
-                    <li class="treeview">
-                        <a href="<?php echo base_url(); ?>addNewTask">
-                            <i class="fa fa-plus-circle"></i>
-                            <span>Add Task</span>
-                        </a>
-                    </li> -->
-                    <?php
-            }
-            if($role == ROLE_ADMIN)
-            {
-            ?>
-
-
+                
                     <li class="treeview <?php if($pageUrl=="companymaster"){echo 'active';}?>" >
                       <a href="<?php echo base_url(); ?>companymaster">
                         <i class="fa fa-building-o"></i> <span class="menu_label">Company Info</span>
@@ -181,39 +160,38 @@
                       </ul>
                     </li>
 
-                    
                     <li class="treeview <?php if($pageUrl=="supplierpo" || $pageUrl=="addnewSupplierpo" || $pageUrl=="viewSupplierpo" 
-                    || $pageUrl=="editSupplierpo" || $pageUrl=="vendorpo" || $pageUrl=="addnewVendorpo" || $pageUrl=="viewVendorpo"  
-                    || $pageUrl=="addnewVendorpo" || $pageUrl=="editVendorpo" || $pageUrl=="supplierpoconfirmation" || $pageUrl=="addSupplierpoconfirmation" 
-                    || $pageUrl =="viewSupplierpoconfirmation" || $pageUrl =="editSupplierpoconfirmation" 
-                    || $pageUrl=="vendorpoconfirmation" || $pageUrl=="addVendorpoconfirmation" || $pageUrl=="editvendorpoconfirmation"
-                    || $pageUrl=="billofmaterial" || $pageUrl=="addnewBillofmaterial" || $pageUrl=="editbillofmaterial"
-                    || $pageUrl=="vendorbillofmaterial" || $pageUrl=="addvendorBillofmaterial" || $pageUrl=="viewVendorbillofmaterial" || $pageUrl=="editvendorbillofmaterial"
-                    || $pageUrl=="jobWork" || $pageUrl=="addjobwork" || $pageUrl=="editjobwork"
-                    || $pageUrl=="scrapreturn" || $pageUrl=="addnewScrapreturn" || $pageUrl=="editscrapreturn"
-                    || $pageUrl=="scrapcalculationreport"
-                    || $pageUrl=="omschallan" || $pageUrl=='addNewOMSChallan' ||  $pageUrl=='editomschallan'
-                    || $pageUrl=="enquiryform" || $pageUrl=='addnewenquiryform' ||  $pageUrl=='editenquiryform' ||  $pageUrl=='editeqnuiryformdatabyid'
-                    || $pageUrl=="debitnote" || $pageUrl=="addnewdebitnote" || $pageUrl=="editdebitnoteform" || $pageUrl=='editdebitnoteform'
-                    || $pageUrl=="paymentdetails" || $pageUrl=="addnewpaymentdetails" || $pageUrl=='addpaymentdetailsdata' || $pageUrl=='editpaymentdetails'
-                    || $pageUrl=="paymentdetailsreport"
-                    || $pageUrl=="poddetails" || $pageUrl=='addNewPODdetails' ||  $pageUrl=='editpoddetails'
-                    || $pageUrl=="currentorderstatus"
-                    || $pageUrl=="itcreport"
-                    || $pageUrl=="creditnote" || $pageUrl=="addcreditnote" || $pageUrl=="editcreditnote"
-                    || $pageUrl=="supplierporeport"
-                    || $pageUrl=="viewvendorpoconfirmation"
-                    || $pageUrl=="viewbillofmaterial"
-                    || $pageUrl=="viewjobwork"
-                 
-                    || $pageUrl=="viewscrapreturn"
-                    || $pageUrl=="viewomschallan"
-                    || $pageUrl=="vieweqnuiryformdatabyid"
-                    || $pageUrl=="viewdebitnoteform"
-                    || $pageUrl=="viewcreditnoteform"
-                    || $pageUrl=="viewpaymentdetails"
-                    || $pageUrl=="viewpoddetails"
-                    ){echo 'active';}?>">
+                        || $pageUrl=="editSupplierpo" || $pageUrl=="vendorpo" || $pageUrl=="addnewVendorpo" || $pageUrl=="viewVendorpo"  
+                        || $pageUrl=="addnewVendorpo" || $pageUrl=="editVendorpo" || $pageUrl=="supplierpoconfirmation" || $pageUrl=="addSupplierpoconfirmation" 
+                        || $pageUrl =="viewSupplierpoconfirmation" || $pageUrl =="editSupplierpoconfirmation" 
+                        || $pageUrl=="vendorpoconfirmation" || $pageUrl=="addVendorpoconfirmation" || $pageUrl=="editvendorpoconfirmation"
+                        || $pageUrl=="billofmaterial" || $pageUrl=="addnewBillofmaterial" || $pageUrl=="editbillofmaterial"
+                        || $pageUrl=="vendorbillofmaterial" || $pageUrl=="addvendorBillofmaterial" || $pageUrl=="viewVendorbillofmaterial" || $pageUrl=="editvendorbillofmaterial"
+                        || $pageUrl=="jobWork" || $pageUrl=="addjobwork" || $pageUrl=="editjobwork"
+                        || $pageUrl=="scrapreturn" || $pageUrl=="addnewScrapreturn" || $pageUrl=="editscrapreturn"
+                        || $pageUrl=="scrapcalculationreport"
+                        || $pageUrl=="omschallan" || $pageUrl=='addNewOMSChallan' ||  $pageUrl=='editomschallan'
+                        || $pageUrl=="enquiryform" || $pageUrl=='addnewenquiryform' ||  $pageUrl=='editenquiryform' ||  $pageUrl=='editeqnuiryformdatabyid'
+                        || $pageUrl=="debitnote" || $pageUrl=="addnewdebitnote" || $pageUrl=="editdebitnoteform" || $pageUrl=='editdebitnoteform'
+                        || $pageUrl=="paymentdetails" || $pageUrl=="addnewpaymentdetails" || $pageUrl=='addpaymentdetailsdata' || $pageUrl=='editpaymentdetails'
+                        || $pageUrl=="paymentdetailsreport"
+                        || $pageUrl=="poddetails" || $pageUrl=='addNewPODdetails' ||  $pageUrl=='editpoddetails'
+                        || $pageUrl=="currentorderstatus"
+                        || $pageUrl=="itcreport"
+                        || $pageUrl=="creditnote" || $pageUrl=="addcreditnote" || $pageUrl=="editcreditnote"
+                        || $pageUrl=="supplierporeport"
+                        || $pageUrl=="viewvendorpoconfirmation"
+                        || $pageUrl=="viewbillofmaterial"
+                        || $pageUrl=="viewjobwork"
+                    
+                        || $pageUrl=="viewscrapreturn"
+                        || $pageUrl=="viewomschallan"
+                        || $pageUrl=="vieweqnuiryformdatabyid"
+                        || $pageUrl=="viewdebitnoteform"
+                        || $pageUrl=="viewcreditnoteform"
+                        || $pageUrl=="viewpaymentdetails"
+                        || $pageUrl=="viewpoddetails"
+                        ){echo 'active';}?>">
                       <a href="#">
                         <i class="fa fa-shopping-cart"></i> <span class="menu_label">Purchase</span>
                           <span class="pull-right-container">
@@ -243,20 +221,19 @@
                       </ul>
                     </li>
 
-
                     <li class="treeview  <?php if($pageUrl=="incomingdetails" || $pageUrl=="addnewencomingdetails" 
-                    ||  $pageUrl=="editincomingdetails" || $pageUrl=="uspincoming" || $pageUrl=="addnewuspincoming" || $pageUrl=="edituspincomig"
-                    || $pageUrl=="stockform" 
-                    || $pageUrl=='addNewstockform' || $pageUrl=='editstcokformdetails' || $pageUrl=="stockrejectionform" 
-                    || $pageUrl=='addnewrejectionform' || $pageUrl=='editrejetionform' || $pageUrl=='addrejectionformitemsdata' 
-                    || $pageUrl=='viewrejectionformitemdetails' || $pageUrl=="searchstockreport" || $pageUrl=="searchstock" 
-                    || $pageUrl=="preexport" || $pageUrl=="addnewfreexport" || $pageUrl=="editpreexport" 
-                    || $pageUrl=='exportdetailsitemdetails' || $pageUrl=='addpreexportitemdetails'
-                    || $pageUrl=='editaddpreexportitemdetails' || $pageUrl=='addexportitemdetailswithattributes' 
-                    || $pageUrl=='addexportitemdetailswithattributesvalues' || $pageUrl=='editexportitemdetailswithattributesvalues' 
-                    || $pageUrl=="reworkrejectionreturn" || $pageUrl=="addneworkrejection" || $pageUrl=="editreworkrejection" 
-                    || $pageUrl=="viewreworkrejection" || $pageUrl=="viewchallanform"
-                    || $pageUrl=="challanform" || $pageUrl=="addchallanform" || $pageUrl=="editchallanform"){echo 'active';}?>">
+                        ||  $pageUrl=="editincomingdetails" || $pageUrl=="uspincoming" || $pageUrl=="addnewuspincoming" || $pageUrl=="edituspincomig"
+                        || $pageUrl=="stockform" 
+                        || $pageUrl=='addNewstockform' || $pageUrl=='editstcokformdetails' || $pageUrl=="stockrejectionform" 
+                        || $pageUrl=='addnewrejectionform' || $pageUrl=='editrejetionform' || $pageUrl=='addrejectionformitemsdata' 
+                        || $pageUrl=='viewrejectionformitemdetails' || $pageUrl=="searchstockreport" || $pageUrl=="searchstock" 
+                        || $pageUrl=="preexport" || $pageUrl=="addnewfreexport" || $pageUrl=="editpreexport" 
+                        || $pageUrl=='exportdetailsitemdetails' || $pageUrl=='addpreexportitemdetails'
+                        || $pageUrl=='editaddpreexportitemdetails' || $pageUrl=='addexportitemdetailswithattributes' 
+                        || $pageUrl=='addexportitemdetailswithattributesvalues' || $pageUrl=='editexportitemdetailswithattributesvalues' 
+                        || $pageUrl=="reworkrejectionreturn" || $pageUrl=="addneworkrejection" || $pageUrl=="editreworkrejection" 
+                        || $pageUrl=="viewreworkrejection" || $pageUrl=="viewchallanform"
+                        || $pageUrl=="challanform" || $pageUrl=="addchallanform" || $pageUrl=="editchallanform"){echo 'active';}?>">
                       <a href="#">
                         <i class="fa fa-stack-exchange"></i> <span class="menu_label">Stock</span>
                           <span class="pull-right-container">
@@ -294,15 +271,15 @@
                     </li>
 
                     <li class="treeview <?php if($pageUrl=="qualityrecord" 
-                    || $pageUrl=='addNewqualityrecord' 
-                    || $pageUrl=='editqulityrecordform' 
-                    || $pageUrl=="complaintform" || $pageUrl=="addcomplaintform" || $pageUrl=="editcomplainform" 
-                    || $pageUrl=="suppliervendorcompliant" || $pageUrl=="addnewsuppliervendorcomplaint" 
-                    || $pageUrl=="editsuppliervendorcompalint" || $pageUrl=="customercompliant" 
-                    || $pageUrl=="addnewcustomercomplaint" 
-                    || $pageUrl=="editcustomercomplaint"
-                    || $pageUrl=="viewqulityrecordform" || $pageUrl=="viewcustomercomplaint" || $pageUrl=="viewsuppliervendorcompalint"
-                    ){echo 'active';}?>">
+                        || $pageUrl=='addNewqualityrecord' 
+                        || $pageUrl=='editqulityrecordform' 
+                        || $pageUrl=="complaintform" || $pageUrl=="addcomplaintform" || $pageUrl=="editcomplainform" 
+                        || $pageUrl=="suppliervendorcompliant" || $pageUrl=="addnewsuppliervendorcomplaint" 
+                        || $pageUrl=="editsuppliervendorcompalint" || $pageUrl=="customercompliant" 
+                        || $pageUrl=="addnewcustomercomplaint" 
+                        || $pageUrl=="editcustomercomplaint"
+                        || $pageUrl=="viewqulityrecordform" || $pageUrl=="viewcustomercomplaint" || $pageUrl=="viewsuppliervendorcompalint"
+                        ){echo 'active';}?>">
                       <a href="#">
                         <i class="fa fa-file-text-o"></i> <span class="menu_label">QC</span>
                           <span class="pull-right-container">
@@ -328,63 +305,43 @@
                       <li class="line_height <?php if($pageUrl=="productionstatusreport"){echo 'active';}?>"><a href="<?php echo base_url(); ?>productionstatusreport"><i class="fa fa-cubes"></i> Production Status Report</a></li>
                       </ul>
                     </li>
-      
-                    <li class="treeview <?php if($pageUrl=="userListing" || $pageUrl=="addNew" || $pageUrl=="editOld"){echo 'active';}?>">
-                        <a href="#">
-                            <i class="fa fa-users "></i>
-                               <span class="menu_label"> Users</span> 
-                               <span class="pull-right-container">
-                                  <i class="fa fa-angle-left pull-right"></i>
-                              </span>
-                        </a>
-                        <ul class="treeview-menu" >
-                           <li class="line_height <?php if($pageUrl=="userListing" || $pageUrl=="addNew" || $pageUrl=="editOld"){echo 'active';}?>"><a href="<?php echo base_url(); ?>userListing"><i class="fa fa-user"></i> User</a></li>
-                        </ul>
-                    </li>
 
-                    <li class="treeview <?php if($pageUrl=="log-history" || $pageUrl=="log-history-upload" || $pageUrl=="log-history-backup"){echo 'active';}?>">
-                        <a href="#">
-                            <i class="fa fa-archive"></i>
-                            <span class="menu_label">Log Records</span>
-                                <span class="pull-right-container">
-                                  <i class="fa fa-angle-left pull-right"></i>
-                              </span>
-                        </a>
+                    
+                    <?php 
+                       $roleText = $this->session->userdata('roleText');
+                       if($roleText=='Superadmin'){
+                    ?>
+                            <li class="treeview <?php if($pageUrl=="userListing" || $pageUrl=="addNew" || $pageUrl=="editOld"){echo 'active';}?>">
+                                <a href="#">
+                                    <i class="fa fa-users "></i>
+                                    <span class="menu_label"> Users</span> 
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu" >
+                                <li class="line_height <?php if($pageUrl=="userListing" || $pageUrl=="addNew" || $pageUrl=="editOld"){echo 'active';}?>"><a href="<?php echo base_url(); ?>userListing"><i class="fa fa-user"></i> User</a></li>
+                                </ul>
+                            </li>
 
-                        <ul class="treeview-menu" >
-                            <li class="line_height <?php if($pageUrl=="log-history"){echo 'active';}?>"><a href="<?php echo base_url(); ?>log-history"><i class="fa fa-archive"></i> Log Records</a></li>
-                            <li class="line_height <?php if($pageUrl=="log-history-upload"){echo 'active';}?>"><a href="<?php echo base_url(); ?>log-history-upload"><i class="fa fa-upload"></i> Upload Backup</a></li>
-                            <li class="line_height <?php if($pageUrl=="log-history-backup"){echo 'active';}?>"><a href="<?php echo base_url(); ?>log-history-backup"><i class="fa fa-archive"></i> Log Records Backup</a></li>
-                        </ul>
-                    </li>
+                            <li class="treeview <?php if($pageUrl=="log-history" || $pageUrl=="log-history-upload" || $pageUrl=="log-history-backup"){echo 'active';}?>">
+                                <a href="#">
+                                    <i class="fa fa-archive"></i>
+                                    <span class="menu_label">Log Records</span>
+                                        <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
 
-                    <!-- <li class="treeview">
-                        <a href="<?php echo base_url(); ?>log-history-upload">
-                            <i class="fa fa-upload"></i>
-                            <span>
-                                Upload Backup</span>
-                        </a>
-                    </li>
-                    <li class="treeview">
-                        <a href="<?php echo base_url(); ?>log-history-backup">
-                            <i class="fa fa-archive"></i>
-                            <span>Log Records Backup
-                            </span>
-                        </a>
-                    </li> -->
+                                <ul class="treeview-menu" >
+                                    <li class="line_height <?php if($pageUrl=="log-history"){echo 'active';}?>"><a href="<?php echo base_url(); ?>log-history"><i class="fa fa-archive"></i> Log Records</a></li>
+                                    <li class="line_height <?php if($pageUrl=="log-history-upload"){echo 'active';}?>"><a href="<?php echo base_url(); ?>log-history-upload"><i class="fa fa-upload"></i> Upload Backup</a></li>
+                                    <li class="line_height <?php if($pageUrl=="log-history-backup"){echo 'active';}?>"><a href="<?php echo base_url(); ?>log-history-backup"><i class="fa fa-archive"></i> Log Records Backup</a></li>
+                                </ul>
+                            </li>
                     <?php
-            }
-            if($role == ROLE_EMPLOYEE)
-            {
-            ?>
-                       <li class="treeview">
-                        <a href="<?php echo base_url(); ?>etasks">
-                            <i class="fa fa-tasks"></i>
-                            <span>Tasks</span>
-                        </a>
-                        <?php
-            }
-            ?>
+                        }
+                    ?>
                 </ul>
             </section>
             <!-- /.sidebar -->
