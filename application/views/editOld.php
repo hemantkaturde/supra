@@ -117,7 +117,7 @@ i verify
                             <!-- /.box-body -->
 
                             <div class="box-footer">
-                                <input type="submit" class="btn btn-primary" value="Send" />
+                                <input type="submit" class="btn btn-primary" value="Submit" />
                                 <input type="reset" class="btn btn-default" value="Reset" />
                             </div>
                         </form>
