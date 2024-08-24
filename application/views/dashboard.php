@@ -128,7 +128,7 @@
       <div class="col-lg-12 col-xs-12">
          <div class="">
               <table width="100%" class="table table-striped table-bordered table-hover"
-                id="seachbypartnumberreport">
+                id="">
                 <thead>
                     <tr style="background-color:#3c8dbc !important;color:#fff">
                       <th>Part Number</th>

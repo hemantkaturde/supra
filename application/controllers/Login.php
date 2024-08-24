@@ -105,7 +105,7 @@ class Login extends BaseController
                 {
                     $lastLogin = $this->login_model->lastLoginInfo($res->userId);
                     
-                    $process = 'Giriş';
+                    $process = 'Login';
                     $processFunction = 'Login/loginMe';
 
                     $sessionArray = array('userId'=>$res->userId,                    
