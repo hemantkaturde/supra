@@ -16628,7 +16628,7 @@ public function addchadebitnote(){
         $save_chadebitnote_response = array();
         
         $this->form_validation->set_rules('cha_debit_note_number','Cha Debit Note Number','trim|required');
-        $this->form_validation->set_rules('cha_debit_note_date','Cha debit Note Date','trim');
+        $this->form_validation->set_rules('cha_debit_note_date','Cha debit Note Date','trim|required');
         $this->form_validation->set_rules('taxable_amount','Taxable Amount','trim');
         $this->form_validation->set_rules('cgst_sgst','Cgst Sgst','trim');
         $this->form_validation->set_rules('bill_amount','Bill Amount','trim');
@@ -16636,11 +16636,12 @@ public function addchadebitnote(){
         $this->form_validation->set_rules('amount_payable_before_tds','Amount Payable Before TDS','trim');
         $this->form_validation->set_rules('less_tds','Less TDS','trim');
         $this->form_validation->set_rules('payable_amount','Payable Amount','trim');
+        $this->form_validation->set_rules('cha_name','Cha Name','trim|required');
 
         if($this->form_validation->run() == FALSE)
         {
             $save_chadebitnote_response['status'] = 'failure';
-            $save_chadebitnote_response['error'] = array('cha_debit_note_number'=>strip_tags(form_error('cha_debit_note_number')), 'cha_debit_note_date'=>strip_tags(form_error('cha_debit_note_date')), 'taxable_amount'=>strip_tags(form_error('taxable_amount')), 'cgst_sgst'=>strip_tags(form_error('cgst_sgst')),'bill_amount'=>strip_tags(form_error('bill_amount')),'debit_amount'=>strip_tags(form_error('debit_amount')),'amount_payable_before_tds'=>strip_tags(form_error('amount_payable_before_tds')),'less_tds'=>strip_tags(form_error('less_tds')),'payable_amount'=>strip_tags(form_error('payable_amount')));
+            $save_chadebitnote_response['error'] = array('cha_debit_note_number'=>strip_tags(form_error('cha_debit_note_number')), 'cha_debit_note_date'=>strip_tags(form_error('cha_debit_note_date')), 'taxable_amount'=>strip_tags(form_error('taxable_amount')), 'cgst_sgst'=>strip_tags(form_error('cgst_sgst')),'bill_amount'=>strip_tags(form_error('bill_amount')),'debit_amount'=>strip_tags(form_error('debit_amount')),'amount_payable_before_tds'=>strip_tags(form_error('amount_payable_before_tds')),'less_tds'=>strip_tags(form_error('less_tds')),'payable_amount'=>strip_tags(form_error('payable_amount')),'cha_name'=>strip_tags(form_error('cha_name')));
         }else{
 
             $data = array(

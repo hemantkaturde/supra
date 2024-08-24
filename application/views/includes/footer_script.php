@@ -20183,45 +20183,55 @@
 
 			    var cha_debit_note_id = $("#cha_debit_note_id").val();
 
+				var AWB_No = $("#AWB_No").val();
 
-				$.ajax({
-					url : "<?php echo base_url();?>addchadebitnote",
-					type: "POST",
-					data : formData,
-					cache: false,
-					contentType: false,
-					processData: false,
-					success: function(data, textStatus, jqXHR)
-					{
-						var fetchResponse = $.parseJSON(data);
-						if(fetchResponse.status == "failure")
+                if(AWB_No){
+					$.ajax({
+						url : "<?php echo base_url();?>addchadebitnote",
+						type: "POST",
+						data : formData,
+						cache: false,
+						contentType: false,
+						processData: false,
+						success: function(data, textStatus, jqXHR)
 						{
-							$.each(fetchResponse.error, function (i, v)
+							var fetchResponse = $.parseJSON(data);
+							if(fetchResponse.status == "failure")
 							{
-								$('.'+i+'_error').html(v);
-							});
-							$(".loader_ajax").hide();
-						}
-						else if(fetchResponse.status == 'success')
+								$.each(fetchResponse.error, function (i, v)
+								{
+									$('.'+i+'_error').html(v);
+								});
+								$(".loader_ajax").hide();
+							}
+							else if(fetchResponse.status == 'success')
+							{
+								swal({
+									title: "Success",
+									text: "CHA Debit Note Successfully Added!",
+									icon: "success",
+									button: "Ok",
+									},function(){ 
+										
+										window.location.href = "<?php echo base_url().'chadebitnote'?>";
+								});		
+							}
+							
+						},
+						error: function (jqXHR, textStatus, errorThrown)
 						{
-							swal({
-								title: "Success",
-								text: "CHA Debit Note Successfully Added!",
-								icon: "success",
-								button: "Ok",
-								},function(){ 
-									
-									window.location.href = "<?php echo base_url().'chadebitnote'?>";
-							});		
+						$(".loader_ajax").hide();
 						}
-						
-					},
-					error: function (jqXHR, textStatus, errorThrown)
-					{
+					});
+					return false;
+
+			    }else{
 					$(".loader_ajax").hide();
-					}
-				});
-				return false;
+					alert('AWB No is Requird');
+					return false;
+				}
+
+
 		    });
 
 
