@@ -16691,16 +16691,16 @@ public function addchadebitnote(){
                 
                     if(!empty($AWB_No)){
                         for($i = 0; $i < count($AWB_No); $i++){
-                            if(!empty($AWB_No[$i])){
+                            // if(!empty($AWB_No[$i])){
                                 $data1['AWB_No'] = $AWB_No[$i];
                                 $data1['debit_amount'] = $debit_amount[$i];
                                 $data1['SGST'] = $SGST[$i];
                                 $data1['CGST'] = $CGST[$i];
                                 $data1['total'] = $total[$i];
-                                $data1['cha_debit_id'] = $savechadebitnote;
+                                $data1['cha_debit_id'] = $cha_debit_note_id;
                               //  $this->db->where('cha_debit_id', $cha_debit_note_id);
                                 $this->db->insert(TBL_CHA_DEBIT_NOTE_TRANSACTION,$data1);
-                            }
+                            // }
                         }
                     }
 
