@@ -12,24 +12,12 @@ Users Log History</small>
       <div class="col-xs-12">
         <div class="box">
           <div class="box-header">
-            <h3 class="box-title"> Your log table size:
-              <?php
-                  if(isset($dbinfo->total_size))
-                  {
-                    echo $dbinfo->total_size;
-                  }
-                  else
-                  {
-                    echo '0';
-                  }
-                  
-                  ?>
-                MB</h3>
-            <div class="pull-right">
+  
+            <!-- <div class="pull-right">
               <a class="btn btn-danger" href="<?php echo base_url(); ?>backupLogTable">YedAdd and Delete</a>
             </div>
             <div class="box-tools">
-            </div>
+            </div> -->
           </div>
           <!-- /.box-header -->
           <div class="box-body table-responsive no-padding">
@@ -68,7 +56,7 @@ Users Log History</small>
                       <th>Scanner</th>
                       <th>ScannerAllInformation</th>
                       <th>Platform</th>
-                      <th>Tarih ve Zaman</th>
+                      <th>Activity Date</th>
                     </tr>
                   </thead>
                   <tbody>

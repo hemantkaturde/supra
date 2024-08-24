@@ -40,7 +40,7 @@ class Login extends BaseController
         }
         else
         {
-            $process = 'Hata';
+            $process = 'Login';
             $processFunction = 'Login/error';
             $this->logrecord($process,$processFunction);
             redirect('pageNotFound');
