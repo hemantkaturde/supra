@@ -38,10 +38,10 @@ class Admin extends BaseController
         else
         {
             // isAdmin / Admin role control function / This function used admin role control
-            if($this->isAdmin() == TRUE)
-            {
-                $this->accesslogincontrol();
-            }
+            // if($this->isAdmin() == TRUE)
+            // {
+            //     $this->accesslogincontrol();
+            // }
         }
     }
 	
