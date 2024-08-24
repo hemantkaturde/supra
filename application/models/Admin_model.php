@@ -15800,7 +15800,7 @@ public function updatestockaftercalculation($balence_qty_in_pcs,$finishgood_id,$
    }
 
 
-   public function checklotnumberisexitsornotedit($usp_incoming_item_id,$part_number,$lot_no,$pre_challan_number){
+   public function checklotnumberisexitsornotedit($usp_incoming_id,$usp_incoming_item_id,$lot_no,$pre_challan_number,$part_number){
 
     $this->db->select('*,'.TBL_USP_INCOMING_FORM_ITEM.'.id as uspincoming_item_id,'.TBL_USP_INCOMING_FORM_ITEM.'.status as item_status,'.TBL_USP_INCOMING_FORM_ITEM.'.pre_remark as itemremark');
     $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_USP_INCOMING_FORM_ITEM.'.part_number');
@@ -15809,11 +15809,34 @@ public function updatestockaftercalculation($balence_qty_in_pcs,$finishgood_id,$
     $this->db->where(TBL_USP_INCOMING_FORM_ITEM.'.part_number',$part_number);
     $this->db->where(TBL_USP_INCOMING_FORM_ITEM.'.lot_no',$lot_no);
     $this->db->where(TBL_USP_INCOMING_FORM_ITEM.'.pre_challan_number',$pre_challan_number);
+    $this->db->where(TBL_USP_INCOMING_FORM_ITEM.'.usp_incoming_id',$usp_incoming_id);
+
     $query = $this->db->get(TBL_USP_INCOMING_FORM_ITEM);
     $data = $query->num_rows();
     return $data;
 
 }
+
+
+public function checklotnumberisexitsornotedittime($usp_incoming_id,$usp_incoming_item_id,$lot_no,$pre_challan_number,$part_number){
+
+    $this->db->select('*,'.TBL_USP_INCOMING_FORM_ITEM.'.id as uspincoming_item_id,'.TBL_USP_INCOMING_FORM_ITEM.'.status as item_status,'.TBL_USP_INCOMING_FORM_ITEM.'.pre_remark as itemremark');
+    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_USP_INCOMING_FORM_ITEM.'.part_number');
+    $this->db->join(TBL_CHALLAN_FORM, TBL_CHALLAN_FORM.'.challan_id = '.TBL_USP_INCOMING_FORM_ITEM.'.pre_challan_number');
+    // $this->db->where(TBL_USP_INCOMING_FORM_ITEM.'.id',$usp_incoming_item_id);
+    $this->db->where(TBL_USP_INCOMING_FORM_ITEM.'.part_number',$part_number);
+    $this->db->where(TBL_USP_INCOMING_FORM_ITEM.'.lot_no',$lot_no);
+    $this->db->where(TBL_USP_INCOMING_FORM_ITEM.'.pre_challan_number',$pre_challan_number);
+    $this->db->where(TBL_USP_INCOMING_FORM_ITEM.'.usp_incoming_id',$usp_incoming_id);
+
+    $query = $this->db->get(TBL_USP_INCOMING_FORM_ITEM);
+    $data = $query->num_rows();
+    return $data;
+
+}
+
+
+
 
 
 public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre_challan_number,$part_number){

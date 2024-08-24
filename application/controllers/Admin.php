@@ -20083,27 +20083,109 @@ public function saveuspincoming_item_form(){
                         $usp_incoming_item_id = '' ;
                     }
 
-                    $saveUSPincomingitemdata = $this->admin_model->saveuspincomingitemformdata($usp_incoming_item_id,$data);
-                    if($saveUSPincomingitemdata){
-                        $save_usp_incoming_response['status'] = 'success';
-                        $save_usp_incoming_response['error'] = array(
-                            'part_number'=>strip_tags(form_error('part_number')), 
-                            'description'=>strip_tags(form_error('description')), 
-                            'challan_qty'=>strip_tags(form_error('challan_qty')), 
-                            'net_weight_per_kgs_pcs'=>strip_tags(form_error('net_weight_per_kgs_pcs')),
-                            'challan_no'=>strip_tags(form_error('challan_no')),
-                            'challan_date_item'=>strip_tags(form_error('challan_date_item')),
-                            'received_qty_in_pcs'=>strip_tags(form_error('received_qty_in_pcs')),
-                            'received_qty_in_kgs'=>strip_tags(form_error('received_qty_in_kgs')),
-                            'gross_qty_in_includin_bg'=>strip_tags(form_error('gross_qty_in_includin_bg')),
-                            'units'=>strip_tags(form_error('units')),
-                            'no_of_bags'=>strip_tags(form_error('no_of_bags')),
-                            'lot_no'=>strip_tags(form_error('lot_no')),
-                            'itemremark'=>strip_tags(form_error('itemremark')),
-                            'balance_qty_in_pcs'=>strip_tags(form_error('balance_qty_in_pcs')),
-                            'balance_qty_in_kgs'=>strip_tags(form_error('balance_qty_in_kgs')),
-                            'status'=>strip_tags(form_error('status')),
-                            );
+
+                    if($usp_incoming_item_id){
+                        $checklotnumberisexitsornotedit = $this->admin_model->checklotnumberisexitsornotedit(trim($this->input->post('usp_incoming_id')),$usp_incoming_item_id,trim($this->input->post('lot_no')),$this->input->post('pre_challan_number'),trim($this->input->post('part_number')));
+                        if($checklotnumberisexitsornotedit > 0){
+
+                            $saveUSPincomingitemdata = $this->admin_model->saveuspincomingitemformdata($usp_incoming_item_id,$data);
+                            if($saveUSPincomingitemdata){
+                                $save_usp_incoming_response['status'] = 'success';
+                                $save_usp_incoming_response['error'] = array(
+                                    'part_number'=>strip_tags(form_error('part_number')), 
+                                    'description'=>strip_tags(form_error('description')), 
+                                    'challan_qty'=>strip_tags(form_error('challan_qty')), 
+                                    'net_weight_per_kgs_pcs'=>strip_tags(form_error('net_weight_per_kgs_pcs')),
+                                    'challan_no'=>strip_tags(form_error('challan_no')),
+                                    'challan_date_item'=>strip_tags(form_error('challan_date_item')),
+                                    'received_qty_in_pcs'=>strip_tags(form_error('received_qty_in_pcs')),
+                                    'received_qty_in_kgs'=>strip_tags(form_error('received_qty_in_kgs')),
+                                    'gross_qty_in_includin_bg'=>strip_tags(form_error('gross_qty_in_includin_bg')),
+                                    'units'=>strip_tags(form_error('units')),
+                                    'no_of_bags'=>strip_tags(form_error('no_of_bags')),
+                                    'lot_no'=>strip_tags(form_error('lot_no')),
+                                    'itemremark'=>strip_tags(form_error('itemremark')),
+                                    'balance_qty_in_pcs'=>strip_tags(form_error('balance_qty_in_pcs')),
+                                    'balance_qty_in_kgs'=>strip_tags(form_error('balance_qty_in_kgs')),
+                                    'status'=>strip_tags(form_error('status')),
+                                    );
+                            }
+                          
+
+                        }else{
+
+
+                            $checklotnumberisexitsornotedittime = $this->admin_model->checklotnumberisexitsornotedittime(trim($this->input->post('usp_incoming_id')),$usp_incoming_item_id,trim($this->input->post('lot_no')),$this->input->post('pre_challan_number'),trim($this->input->post('part_number')));
+                            if($checklotnumberisexitsornotedittime > 0){
+                                $save_usp_incoming_response['status'] = 'failure';
+                                $save_usp_incoming_response['error'] = array('part_number'=>strip_tags(form_error('part_number')),'description'=>strip_tags(form_error('description')),'challan_qty'=>strip_tags(form_error('challan_qty')), 'net_weight_per_kgs_pcs'=>strip_tags(form_error('net_weight_per_kgs_pcs')),'challan_no'=>strip_tags(form_error('challan_no')),'challan_date_item'=>strip_tags(form_error('challan_date_item')),'received_qty_in_pcs'=>strip_tags(form_error('received_qty_in_pcs')),'received_qty_in_kgs'=>strip_tags(form_error('received_qty_in_kgs')),'gross_qty_in_includin_bg'=>strip_tags(form_error('gross_qty_in_includin_bg')),'units'=>strip_tags(form_error('units')),'no_of_bags'=>strip_tags(form_error('no_of_bags')),'lot_no'=>'Lot Number Already Exists','itemremark'=>strip_tags(form_error('itemremark')),'balance_qty_in_pcs'=>strip_tags(form_error('balance_qty_in_pcs')),'balance_qty_in_kgs'=>strip_tags(form_error('balance_qty_in_kgs')),'status'=>strip_tags(form_error('status')));
+                
+                            }else{
+
+
+                                $saveUSPincomingitemdata = $this->admin_model->saveuspincomingitemformdata($usp_incoming_item_id,$data);
+                                if($saveUSPincomingitemdata){
+                                    $save_usp_incoming_response['status'] = 'success';
+                                    $save_usp_incoming_response['error'] = array(
+                                        'part_number'=>strip_tags(form_error('part_number')), 
+                                        'description'=>strip_tags(form_error('description')), 
+                                        'challan_qty'=>strip_tags(form_error('challan_qty')), 
+                                        'net_weight_per_kgs_pcs'=>strip_tags(form_error('net_weight_per_kgs_pcs')),
+                                        'challan_no'=>strip_tags(form_error('challan_no')),
+                                        'challan_date_item'=>strip_tags(form_error('challan_date_item')),
+                                        'received_qty_in_pcs'=>strip_tags(form_error('received_qty_in_pcs')),
+                                        'received_qty_in_kgs'=>strip_tags(form_error('received_qty_in_kgs')),
+                                        'gross_qty_in_includin_bg'=>strip_tags(form_error('gross_qty_in_includin_bg')),
+                                        'units'=>strip_tags(form_error('units')),
+                                        'no_of_bags'=>strip_tags(form_error('no_of_bags')),
+                                        'lot_no'=>strip_tags(form_error('lot_no')),
+                                        'itemremark'=>strip_tags(form_error('itemremark')),
+                                        'balance_qty_in_pcs'=>strip_tags(form_error('balance_qty_in_pcs')),
+                                        'balance_qty_in_kgs'=>strip_tags(form_error('balance_qty_in_kgs')),
+                                        'status'=>strip_tags(form_error('status')),
+                                        );
+                                }
+
+                            }
+
+
+                        }
+
+                    }else{
+
+                        
+                        $checklotnumberisexitsornotedittime = $this->admin_model->checklotnumberisexitsornotedittime(trim($this->input->post('usp_incoming_id')),$usp_incoming_item_id,trim($this->input->post('lot_no')),$this->input->post('pre_challan_number'),trim($this->input->post('part_number')));
+                        if($checklotnumberisexitsornotedittime > 0){
+                            $save_usp_incoming_response['status'] = 'failure';
+                            $save_usp_incoming_response['error'] = array('part_number'=>strip_tags(form_error('part_number')),'description'=>strip_tags(form_error('description')),'challan_qty'=>strip_tags(form_error('challan_qty')), 'net_weight_per_kgs_pcs'=>strip_tags(form_error('net_weight_per_kgs_pcs')),'challan_no'=>strip_tags(form_error('challan_no')),'challan_date_item'=>strip_tags(form_error('challan_date_item')),'received_qty_in_pcs'=>strip_tags(form_error('received_qty_in_pcs')),'received_qty_in_kgs'=>strip_tags(form_error('received_qty_in_kgs')),'gross_qty_in_includin_bg'=>strip_tags(form_error('gross_qty_in_includin_bg')),'units'=>strip_tags(form_error('units')),'no_of_bags'=>strip_tags(form_error('no_of_bags')),'lot_no'=>'Lot Number Already Exists','itemremark'=>strip_tags(form_error('itemremark')),'balance_qty_in_pcs'=>strip_tags(form_error('balance_qty_in_pcs')),'balance_qty_in_kgs'=>strip_tags(form_error('balance_qty_in_kgs')),'status'=>strip_tags(form_error('status')));
+            
+                        }else{
+
+                            $saveUSPincomingitemdata = $this->admin_model->saveuspincomingitemformdata($usp_incoming_item_id,$data);
+                            if($saveUSPincomingitemdata){
+                                $save_usp_incoming_response['status'] = 'success';
+                                $save_usp_incoming_response['error'] = array(
+                                    'part_number'=>strip_tags(form_error('part_number')), 
+                                    'description'=>strip_tags(form_error('description')), 
+                                    'challan_qty'=>strip_tags(form_error('challan_qty')), 
+                                    'net_weight_per_kgs_pcs'=>strip_tags(form_error('net_weight_per_kgs_pcs')),
+                                    'challan_no'=>strip_tags(form_error('challan_no')),
+                                    'challan_date_item'=>strip_tags(form_error('challan_date_item')),
+                                    'received_qty_in_pcs'=>strip_tags(form_error('received_qty_in_pcs')),
+                                    'received_qty_in_kgs'=>strip_tags(form_error('received_qty_in_kgs')),
+                                    'gross_qty_in_includin_bg'=>strip_tags(form_error('gross_qty_in_includin_bg')),
+                                    'units'=>strip_tags(form_error('units')),
+                                    'no_of_bags'=>strip_tags(form_error('no_of_bags')),
+                                    'lot_no'=>strip_tags(form_error('lot_no')),
+                                    'itemremark'=>strip_tags(form_error('itemremark')),
+                                    'balance_qty_in_pcs'=>strip_tags(form_error('balance_qty_in_pcs')),
+                                    'balance_qty_in_kgs'=>strip_tags(form_error('balance_qty_in_kgs')),
+                                    'status'=>strip_tags(form_error('status')),
+                                    );
+                            }
+
+                        }
+
                     }
 
             }else{
