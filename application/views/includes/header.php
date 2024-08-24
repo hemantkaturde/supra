@@ -306,34 +306,36 @@
                       </ul>
                     </li>
 
-                    <li class="treeview <?php if($pageUrl=="userListing" || $pageUrl=="addNew" || $pageUrl=="editOld"){echo 'active';}?>">
-                        <a href="#">
-                            <i class="fa fa-users "></i>
-                               <span class="menu_label"> Users</span> 
-                               <span class="pull-right-container">
-                                  <i class="fa fa-angle-left pull-right"></i>
-                              </span>
-                        </a>
-                        <ul class="treeview-menu" >
-                           <li class="line_height <?php if($pageUrl=="userListing" || $pageUrl=="addNew" || $pageUrl=="editOld"){echo 'active';}?>"><a href="<?php echo base_url(); ?>userListing"><i class="fa fa-user"></i> User</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="treeview <?php if($pageUrl=="log-history" || $pageUrl=="log-history-upload" || $pageUrl=="log-history-backup"){echo 'active';}?>">
-                        <a href="#">
-                            <i class="fa fa-archive"></i>
-                            <span class="menu_label">Log Records</span>
+                    <?php  if( $this->session->userdata('roleText')=='Superadmin'){ ?>
+                        <li class="treeview <?php if($pageUrl=="userListing" || $pageUrl=="addNew" || $pageUrl=="editOld"){echo 'active';}?>">
+                            <a href="#">
+                                <i class="fa fa-users "></i>
+                                <span class="menu_label"> Users</span> 
                                 <span class="pull-right-container">
-                                  <i class="fa fa-angle-left pull-right"></i>
-                              </span>
-                        </a>
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu" >
+                            <li class="line_height <?php if($pageUrl=="userListing" || $pageUrl=="addNew" || $pageUrl=="editOld"){echo 'active';}?>"><a href="<?php echo base_url(); ?>userListing"><i class="fa fa-user"></i> User</a></li>
+                            </ul>
+                        </li>
 
-                        <ul class="treeview-menu" >
-                            <li class="line_height <?php if($pageUrl=="log-history"){echo 'active';}?>"><a href="<?php echo base_url(); ?>log-history"><i class="fa fa-archive"></i> Log Records</a></li>
-                            <li class="line_height <?php if($pageUrl=="log-history-upload"){echo 'active';}?>"><a href="<?php echo base_url(); ?>log-history-upload"><i class="fa fa-upload"></i> Upload Backup</a></li>
-                            <li class="line_height <?php if($pageUrl=="log-history-backup"){echo 'active';}?>"><a href="<?php echo base_url(); ?>log-history-backup"><i class="fa fa-archive"></i> Log Records Backup</a></li>
-                        </ul>
-                    </li>
+                        <li class="treeview <?php if($pageUrl=="log-history" || $pageUrl=="log-history-upload" || $pageUrl=="log-history-backup"){echo 'active';}?>">
+                            <a href="#">
+                                <i class="fa fa-archive"></i>
+                                <span class="menu_label">Log Records</span>
+                                    <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+
+                            <ul class="treeview-menu" >
+                                <li class="line_height <?php if($pageUrl=="log-history"){echo 'active';}?>"><a href="<?php echo base_url(); ?>log-history"><i class="fa fa-archive"></i> Log Records</a></li>
+                                <li class="line_height <?php if($pageUrl=="log-history-upload"){echo 'active';}?>"><a href="<?php echo base_url(); ?>log-history-upload"><i class="fa fa-upload"></i> Upload Backup</a></li>
+                                <li class="line_height <?php if($pageUrl=="log-history-backup"){echo 'active';}?>"><a href="<?php echo base_url(); ?>log-history-backup"><i class="fa fa-archive"></i> Log Records Backup</a></li>
+                            </ul>
+                        </li>
+                    <?php }  ?>
          
                 </ul>
             </section>
