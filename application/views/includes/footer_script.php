@@ -20227,7 +20227,7 @@
 
 			    }else{
 					$(".loader_ajax").hide();
-					alert('AWB No is Requird');
+					alert('AWB No is Required');
 					return false;
 				}
 
