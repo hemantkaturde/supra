@@ -1709,6 +1709,16 @@ class Admin_model extends CI_Model
     }
 
 
+    public function fetchALLRawmaterialList(){
+        $this->db->select('*');
+        $this->db->where(TBL_RAWMATERIAL.'.status', 1);
+        $this->db->order_by(TBL_RAWMATERIAL.'.part_number', 'ASC');
+        $query = $this->db->get(TBL_RAWMATERIAL);
+        $data = $query->result_array();
+        return $data;
+    }
+
+
     public function fetchALLFinishgoodListforbuyerpodetailreport(){
         $this->db->select('*');
         $this->db->where(TBL_FINISHED_GOODS.'.status', 1);
@@ -3465,6 +3475,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['reported_date'] = $reported_date;
                 $data[$counter]['modified_date'] = $updatedDtm;
                 $data[$counter]['action'] = '';
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewincomingdetails/".$value['incomigid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editincomingdetails/".$value['incomigid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['incomigid']."' class='fa fa-trash-o deleteIncomingDetails' aria-hidden='true'></i>"; 
                 $counter++; 
@@ -15316,10 +15327,10 @@ public function getsuppliervendorcomplaintdata($id){
 }
 
 
-public function fetchseachbypartnumberreportcount($params,$part_number,$form_type){
+public function fetchseachbypartnumberreportcount($params,$finish_good_part_number,$form_type_finish_good){
 
 
-    if($part_number!='NA'){
+    if($finish_good_part_number!='NA'){
 
         $this->db->select('*');
         $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id');
@@ -15334,54 +15345,166 @@ public function fetchseachbypartnumberreportcount($params,$part_number,$form_typ
     }
 }
 
-public function fetchseachbypartnumberreportdata($params,$part_number,$form_type){
+public function fetchseachbypartnumberreportdata($params,$finish_good_part_number,$form_type_finish_good){
 
-    if($part_number!='NA'){
+    if($finish_good_part_number!='NA'){
 
-         
-        $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_BUYER_PO_MASTER.'.id as view_id,'.TBL_BUYER_PO_MASTER.'.sales_order_number as form_number,"Buyer PO" as form_name');
-        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id');
-        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
-        $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.part_number_id', $part_number); 
-        $this->db->limit($params['length'],$params['start']);
-        $this->db->order_by(TBL_BUYER_PO_MASTER_ITEM.'.id','DESC');
-        $query_buyer_po = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
-        $buyer_po_result = $query_buyer_po->result_array();
-
-
-        $this->db->select(TBL_RAWMATERIAL.'.part_number,'.TBL_SUPPLIER_PO_MASTER.'.id as view_id,'.TBL_SUPPLIER_PO_MASTER.'.po_number as form_number,"Supplier PO" as form_name');
-        $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.supplier_po_id');
-        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id');
-        $this->db->where(TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id', $part_number); 
-        $this->db->limit($params['length'],$params['start']);
-        $this->db->order_by(TBL_SUPPLIER_PO_MASTER_ITEM.'.id','DESC');
-        $vendor_buyer_po = $this->db->get(TBL_SUPPLIER_PO_MASTER_ITEM);
-        $vendor_po_result = $vendor_buyer_po->result_array();
+        if($form_type_finish_good=='NA'){
+            $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_BUYER_PO_MASTER.'.id as view_id,'.TBL_BUYER_PO_MASTER.'.sales_order_number as form_number,"Buyer PO" as form_name');
+            $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id');
+            $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
+            $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.part_number_id', $finish_good_part_number); 
+            $this->db->limit($params['length'],$params['start']);
+            $this->db->order_by(TBL_BUYER_PO_MASTER_ITEM.'.id','DESC');
+            $query_buyer_po = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
+            $buyer_po_result = $query_buyer_po->result_array();
 
 
-    $fetch_result = array_merge($buyer_po_result,$vendor_po_result);
+            $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_VENDOR_PO_MASTER.'.id as view_id,'.TBL_VENDOR_PO_MASTER.'.po_number as form_number,"Vendor PO" as form_name');
+            $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id');
+            $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
+            $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id', $finish_good_part_number); 
+            $this->db->limit($params['length'],$params['start']);
+            $this->db->order_by(TBL_VENDOR_PO_MASTER_ITEM.'.id','DESC');
+            $query_vendor_po = $this->db->get(TBL_VENDOR_PO_MASTER_ITEM);
+            $vendor_po_result = $query_vendor_po->result_array();
 
-    $data = array();
-    $counter = 0;
-    if(count($fetch_result) > 0)
-    {
-        foreach ($fetch_result as $key => $value)
+
+
+            $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_VENDOR_PO_CONFIRMATION.'.id as view_id,'.TBL_VENDOR_PO_CONFIRMATION.'.po_number as form_number,"Vendor PO Confirmation" as form_name');
+            $this->db->join(TBL_VENDOR_PO_CONFIRMATION, TBL_VENDOR_PO_CONFIRMATION.'.id = '.TBL_VENDOR_PO_CONFIRMATION_ITEM.'.vendor_po_confirmation_id');
+            $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_CONFIRMATION_ITEM.'.part_number_id');
+            $this->db->where(TBL_VENDOR_PO_CONFIRMATION_ITEM.'.part_number_id', $finish_good_part_number); 
+            $this->db->limit($params['length'],$params['start']);
+            $this->db->order_by(TBL_VENDOR_PO_CONFIRMATION_ITEM.'.id','DESC');
+            $query_vendor_po_confirmation = $this->db->get(TBL_VENDOR_PO_CONFIRMATION_ITEM);
+            $vendor_po_confirmation_result = $query_vendor_po_confirmation->result_array();
+
+
+            $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_JOB_WORK.'.id as view_id,'.TBL_JOB_WORK.'.po_number as form_number,"Job Work Challan" as form_name');
+            $this->db->join(TBL_JOB_WORK, TBL_JOB_WORK.'.id = '.TBL_JOB_WORK_ITEM.'.jobwork_id');
+            $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_JOB_WORK_ITEM.'.part_number_id');
+            $this->db->where(TBL_JOB_WORK_ITEM.'.part_number_id', $finish_good_part_number); 
+            $this->db->limit($params['length'],$params['start']);
+            $this->db->order_by(TBL_JOB_WORK_ITEM.'.id','DESC');
+            $query_job_work_challan_ = $this->db->get(TBL_JOB_WORK_ITEM);
+            $job_work_challan_result = $query_job_work_challan_->result_array();
+
+
+        }else{
+
+                if($form_type_finish_good=='BuyerPO'){
+                    $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_BUYER_PO_MASTER.'.id as view_id,'.TBL_BUYER_PO_MASTER.'.sales_order_number as form_number,"Buyer PO" as form_name');
+                    $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id');
+                    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
+                    $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.part_number_id', $finish_good_part_number); 
+                    $this->db->limit($params['length'],$params['start']);
+                    $this->db->order_by(TBL_BUYER_PO_MASTER_ITEM.'.id','DESC');
+                    $query_buyer_po = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
+                    $buyer_po_result = $query_buyer_po->result_array();
+                }else{
+                    $buyer_po_result = array();
+                }
+
+
+                if($form_type_finish_good=='VendorPO'){
+                    $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_VENDOR_PO_MASTER.'.id as view_id,'.TBL_VENDOR_PO_MASTER.'.po_number as form_number,"Vendor PO" as form_name');
+                    $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id');
+                    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
+                    $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id', $finish_good_part_number); 
+                    $this->db->limit($params['length'],$params['start']);
+                    $this->db->order_by(TBL_VENDOR_PO_MASTER_ITEM.'.id','DESC');
+                    $query_vendor_po = $this->db->get(TBL_VENDOR_PO_MASTER_ITEM);
+                    $vendor_po_result = $query_vendor_po->result_array();
+                }else{
+                    $vendor_po_result = array();
+                }
+
+
+                if($form_type_finish_good=='VendorPOConfirmation'){
+                    $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_VENDOR_PO_CONFIRMATION.'.id as view_id,'.TBL_VENDOR_PO_CONFIRMATION.'.po_number as form_number,"Vendor PO Confirmation" as form_name');
+                    $this->db->join(TBL_VENDOR_PO_CONFIRMATION, TBL_VENDOR_PO_CONFIRMATION.'.id = '.TBL_VENDOR_PO_CONFIRMATION_ITEM.'.vendor_po_confirmation_id');
+                    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_CONFIRMATION_ITEM.'.part_number_id');
+                    $this->db->where(TBL_VENDOR_PO_CONFIRMATION_ITEM.'.part_number_id', $finish_good_part_number); 
+                    $this->db->limit($params['length'],$params['start']);
+                    $this->db->order_by(TBL_VENDOR_PO_CONFIRMATION_ITEM.'.id','DESC');
+                    $query_vendor_po_confirmation = $this->db->get(TBL_VENDOR_PO_CONFIRMATION_ITEM);
+                    $vendor_po_confirmation_result = $query_vendor_po_confirmation->result_array();
+                }else{
+                    $vendor_po_confirmation_result = array();
+                }
+
+
+                if($form_type_finish_good=='VendorPOConfirmation'){
+                    $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_JOB_WORK.'.id as view_id,'.TBL_JOB_WORK.'.po_number as form_number,"Job Work Challan" as form_name');
+                    $this->db->join(TBL_JOB_WORK, TBL_JOB_WORK.'.id = '.TBL_JOB_WORK_ITEM.'.jobwork_id');
+                    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_JOB_WORK_ITEM.'.part_number_id');
+                    $this->db->where(TBL_JOB_WORK_ITEM.'.part_number_id', $finish_good_part_number); 
+                    $this->db->limit($params['length'],$params['start']);
+                    $this->db->order_by(TBL_JOB_WORK_ITEM.'.id','DESC');
+                    $query_job_work_challan_ = $this->db->get(TBL_JOB_WORK_ITEM);
+                    $job_work_challan_result = $query_job_work_challan_->result_array();
+                }else{
+                    $job_work_challan_result = array();
+                }
+       }
+
+        
+
+
+        $fetch_result = array_merge($buyer_po_result,$vendor_po_result,$vendor_po_confirmation_result,$job_work_challan_result);
+
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
         {
-            $data[$counter]['part_number'] = $value['part_number'];
-            $data[$counter]['sales_order_number'] = $value['form_number'];
-            $data[$counter]['form_name'] = $value['form_name'];
-            $data[$counter]['action'] = '';
-            $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editBuyerpo/".$value['view_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-external-link' aria-hidden='true'></i></a>  &nbsp";
-           
-            $counter++; 
+            foreach ($fetch_result as $key => $value)
+            {
+                if($value['form_name']=='Buyer PO'){
+                    $color ='#008000';
+                }
+
+                if($value['form_name']=='Vendor PO'){
+                    $color ='#FF0000';
+                }
+                
+                if($value['form_name']=='Vendor PO Confirmation'){
+                    $color ='#0000FF';
+                }
+
+                if($value['form_name']=='Job Work Challan'){
+                    $color ='#C11C84';
+                }
+
+
+                $data[$counter]['part_number'] = $value['part_number'];
+                $data[$counter]['sales_order_number'] = $value['form_number'];
+                $data[$counter]['form_name'] = '<b><p style="color:'.$color.'">'.$value['form_name'].'</p></b>';
+                $data[$counter]['action'] = '';
+
+                if($value['form_name']=='Buyer PO'){
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editBuyerpo/".$value['view_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-external-link' aria-hidden='true'></i></a>  &nbsp";
+                }
+
+                if($value['form_name']=='Vendor PO'){
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editVendorpo/".$value['view_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-external-link' aria-hidden='true'></i></a>  &nbsp";
+                }
+
+                if($value['form_name']=='Vendor PO Confirmation'){
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editvendorpoconfirmation/".$value['view_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-external-link' aria-hidden='true'></i></a>  &nbsp";
+                }
+
+                if($value['form_name']=='Job Work Challan'){
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editjobwork/".$value['view_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-external-link' aria-hidden='true'></i></a>  &nbsp";
+                }
+
+                $counter++; 
+            }
         }
-    }
-    return $data;
+        return $data;
 
     }else{
-
-        return array();
-
+            return array();
     }
     
    
@@ -15499,6 +15622,8 @@ public function updatestockaftercalculation($balence_qty_in_pcs,$finishgood_id,$
                 $data[$counter]['report_by'] =$value['report_by'];
                 $data[$counter]['remark'] =$value['mainremark'];
                 $data[$counter]['action'] = '';
+
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewuspincomig/".$value['usp_incoming_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."edituspincomig/".$value['usp_incoming_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['usp_incoming_id']."' class='fa fa-trash-o deleteuspincoming' aria-hidden='true'></i>"; 
                 $counter++; 

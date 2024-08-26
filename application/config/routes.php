@@ -225,6 +225,7 @@ $route['getVendorPonumberbyVendorid'] = "admin/getVendorPonumberbyVendorid";
 $route['addnewencomingdetails'] = "admin/addnewencomingdetails";
 $route['fetchincomingdeatils'] = "admin/fetchincomingdeatils";
 $route['editincomingdetails/(:any)'] = "admin/editincomingdetails/$1";
+$route['viewincomingdetails/(:any)'] = "admin/viewincomingdetails/$1";
 $route['deleteIncomingDetails'] = "admin/deleteIncomingDetails";
 $route['saveincomingitem'] = "admin/saveincomingitem";
 $route['deleteIncomingDetailsitem'] = "admin/deleteIncomingDetailsitem";
@@ -522,6 +523,8 @@ $route['getChallanPObychaid'] = "admin/getChallanPObychaid";
 $route['getuspdate'] = "admin/getuspdate";
 $route['deleteuspincoming'] = "admin/deleteuspincoming";
 $route['edituspincomig/(:any)'] = "admin/edituspincomig/$1";
+$route['viewuspincomig/(:any)'] = "admin/viewuspincomig/$1";
+
 $route['deleteuspincomingitem'] = "admin/deleteuspincomingitem";
 
 

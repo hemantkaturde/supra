@@ -34,7 +34,8 @@ class User extends BaseController
         $data['logsCount'] = $this->user_model->logsCount();
         $data['usersCount'] = $this->user_model->usersCount();
         $data['finishgoodList']= $this->admin_model->fetchALLFinishgoodList();
-
+        $data['rawmaterialList']= $this->admin_model->fetchALLRawmaterialList();
+        
         // if ($this->getUserStatus() == TRUE)
         // {
         //     $this->session->set_flashdata('error', 'Please change your Priority Password for your security.');

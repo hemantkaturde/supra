@@ -635,7 +635,14 @@
     border-color: #5897fb
 }
 
-.select2-container--default{
+/* .select2-container--default{
 
     width: 353px !important;
+} */
+
+
+
+.select2-container--default{
+
+    width: 280px !important;
 }

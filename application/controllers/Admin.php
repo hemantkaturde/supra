@@ -5464,6 +5464,23 @@ class Admin extends BaseController
     }
 
 
+    public function viewincomingdetails($id){
+
+        $process = 'Edit Incoming Details';
+        $processFunction = 'Admin/viewincomingdetails';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Edit Incoming Details';
+        $data['vendorList']= $this->admin_model->fetchALLvendorList();
+        $data['getPreviousincomingdetails']= $this->admin_model->getPreviousincomingdetails();
+        $data['getPreviousincomingdetailsforedit']= $this->admin_model->getPreviousincomingdetailsforedit($id);
+        $data['getAllitemdetails']= $this->admin_model->getAllitemdetailsforedit($id);
+        $data['getAllitemdetailsforfilteredit']= $this->admin_model->getAllitemdetailsforfilteredit($id);
+        $data['edit_id']= $id;
+        $this->loadViews("masters/viewincomingdetails", $this->global, $data, NULL);
+
+    }
+
+
     public function saveincomingitem(){
         $post_submit = $this->input->post();
         if($post_submit){
@@ -18290,6 +18307,22 @@ public function edituspincomig($id){
 }
 
 
+public function viewuspincomig($id){
+
+    $process = 'Edit USP incoming';
+    $processFunction = 'Admin/viewuspincomig';
+    $this->logrecord($process,$processFunction);
+    $this->global['pageTitle'] = 'Edit USP incoming';
+    $data['vendorList']= $this->admin_model->fetchALLvendorList();
+    $data['getUSPmasterlist']= $this->admin_model->getUSPmasterlist();
+    $data['vendorpoList']= $this->admin_model->fetchALLvendorpoList();
+    $data['challanList']= $this->admin_model->fetchALLchallanList();
+    $data['getuspincomingdetailsforedit']= $this->admin_model->getuspincomingdetailsforedit($id);
+    $data['getitemdetaiilsuspincomingedit']= $this->admin_model->getitemdetaiilsuspincomingedit($id);
+    $this->loadViews("masters/viewuspincomig", $this->global, $data, NULL);
+
+}
+
 
 public function customercompliant(){
     $process = 'Customer Compliant Report';
@@ -19247,11 +19280,11 @@ public function getPartnumberdetailsforsupplierposuppliervendorpovendor(){
 }
 
 
-public function fetchseachbypartnumberreport($part_number,$form_type){
+public function fetchseachbypartnumberreport($finish_good_part_number,$form_type_finish_good){
 
     $params = $_REQUEST;
-    $totalRecords = $this->admin_model->fetchseachbypartnumberreportcount($params,$part_number,$form_type); 
-    $queryRecords = $this->admin_model->fetchseachbypartnumberreportdata($params,$part_number,$form_type); 
+    $totalRecords = $this->admin_model->fetchseachbypartnumberreportcount($params,$finish_good_part_number,$form_type_finish_good); 
+    $queryRecords = $this->admin_model->fetchseachbypartnumberreportdata($params,$finish_good_part_number,$form_type_finish_good); 
 
     $data = array();
     foreach ($queryRecords as $key => $value)

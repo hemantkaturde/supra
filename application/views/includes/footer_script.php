@@ -21831,29 +21831,30 @@
 
         $(document).ready(function() {
 		   $("#seachbypartnumberreport").dataTable().fnDestroy();
-			var part_number = $('#part_number').val();
-			seachbypartnumberreport(part_number);
+		   var finish_good_part_number = $('#finish_good_part_number').val();
+		   var form_type_finish_good = $('#form_type_finish_good').val();
+		   seachbypartnumberreport(finish_good_part_number,form_type_finish_good);
 		});
 
-		$(document).on('change','#part_number',function(e){  
+		$(document).on('change','#finish_good_part_number',function(e){  
 			e.preventDefault();
 			$("#seachbypartnumberreport").dataTable().fnDestroy();
-			var part_number = $('#part_number').val();
-			var form_type = $('#form_type').val();
-			seachbypartnumberreport(part_number,form_type);
+			var finish_good_part_number = $('#finish_good_part_number').val();
+			var form_type_finish_good = $('#form_type_finish_good').val();
+			seachbypartnumberreport(finish_good_part_number,form_type_finish_good);
 		});
 
 
-        $(document).on('change','#form_type',function(e){  
+        $(document).on('change','#form_type_finish_good',function(e){  
 			e.preventDefault();
 			$("#seachbypartnumberreport").dataTable().fnDestroy();
-			var part_number = $('#part_number').val();
-			var form_type = $('#form_type').val();
-			seachbypartnumberreport(part_number,form_type);
+			var finish_good_part_number = $('#finish_good_part_number').val();
+			var form_type_finish_good = $('#form_type_finish_good').val();
+			seachbypartnumberreport(finish_good_part_number,form_type_finish_good);
 		});
 
 
-		function seachbypartnumberreport(part_number,form_type){
+		function seachbypartnumberreport(finish_good_part_number,form_type_finish_good){
 
 				var dt = $('#seachbypartnumberreport').DataTable({
 					"columnDefs": [ 
@@ -21874,7 +21875,7 @@
 					"bProcessing": true,
 					"serverSide": true,
 					"ajax":{
-						url :"<?php echo base_url();?>admin/fetchseachbypartnumberreport/"+part_number+"/"+form_type,
+						url :"<?php echo base_url();?>admin/fetchseachbypartnumberreport/"+finish_good_part_number+"/"+form_type_finish_good,
 						type: "post",
 					},
 				});

@@ -84,11 +84,11 @@
 
    <div class="row" style="margin-right: 0px; margin-left: 0px;background:#fff">
       <div class="col-lg-12 col-xs-12">        
-         <div class="col-md-4">
+         <div class="col-md-3">
             <div class="form-group">
-               <h4> Search By Part Number</h4>
-               <select class="form-control" name="part_number" id="part_number">
-                  <option st-id="" value="NA">Select Part Number</option>
+               <h4>Finish Good Part Number</h4>
+               <select class="form-control" name="finish_good_part_number" id="finish_good_part_number">
+                  <option st-id="" value="NA">Select Finish Good Part Number</option>
                   <?php foreach ($finishgoodList as $key => $value) {?>
                   <option value="<?php echo $value['fin_id']; ?>"><?php echo $value['part_number']; ?>
                   </option>
@@ -97,16 +97,15 @@
             </div>
          </div>
 
-         <div class="col-md-4">
-
+         <div class="col-md-3">
             <div class="form-group">
-               <h4> Search By Form</h4>
-               <select class="form-control" name="form_type" id="form_type">
-                  <option st-id="" value="NA">Select Form</option>
+               <h4> Finish Good Form</h4>
+               <select class="form-control" name="form_type_finish_good" id="form_type_finish_good">
+                  <option st-id="" value="NA">Select Finish Good Form</option>
                   <option st-id="" value="BuyerPO">Buyer PO</option>
-                  <option st-id="" value="SupplierPO">Supplier PO</option>
+                  <!-- <option st-id="" value="SupplierPO">Supplier PO</option> -->
                   <option st-id="" value="VendorPO">Vendor PO</option>
-                  <option st-id="" value="SupplierPOConfirmation">Supplier PO Confirmation</option>
+                  <!-- <option st-id="" value="SupplierPOConfirmation">Supplier PO Confirmation</option> -->
                   <option st-id="" value="VendorPOConfirmation">Vendor PO Confirmation</option>
                   <option st-id="" value="JobWorkChallan">Job Work Challan</option>
                   <option st-id="" value="OMSChallan">OMS Challan</option>
@@ -116,10 +115,35 @@
                   <option st-id="" value="VendorBillOfMaterial">Vendor Bill Of Material</option>
                   <option st-id="" value="IncomigDetails">Incomig Details</option>
                   <option st-id="" value="Stock">Stock</option>
-                  <option st-id="" value="Rejection">Rejection</option>
+                  <option st-id="" value="Rejection">Rework Rejection</option>
                   <option st-id="" value="QualityRecord">Quality Record</option>
                   <option st-id="" value="PackagingInstrasction">Packaging Instrasction</option>
                   <option st-id="" value="ExportDetails">Export Details</option>
+               </select>
+            </div>
+         </div>
+
+         <div class="col-md-3">
+            <div class="form-group">
+               <h4>Raw Material Part Number</h4>
+               <select class="form-control" name="raw_material_part_number" id="raw_material_part_number">
+                  <option st-id="" value="NA">Select Raw Material Part Number</option>
+                  <?php foreach ($rawmaterialList as $key => $value) {?>
+                  <option value="<?php echo $value['raw_id']; ?>"><?php echo $value['part_number']; ?>
+                  </option>
+                  <?php } ?>
+               </select>
+            </div>
+         </div>
+
+         <div class="col-md-3">
+            <div class="form-group">
+               <h4> Raw Material Form</h4>
+               <select class="form-control" name="form_type_raw_material" id="form_type_raw_material">
+                  <option st-id="" value="NA">Select Raw Material Form</option>
+                  <option st-id="" value="SupplierPO">Supplier PO</option>
+                  <option st-id="" value="SupplierPOConfirmation">Supplier PO Confirmation</option>      
+                  <option st-id="" value="Challan">Challan</option>
                </select>
             </div>
          </div>
@@ -128,7 +152,7 @@
       <div class="col-lg-12 col-xs-12">
          <div class="">
               <table width="100%" class="table table-striped table-bordered table-hover"
-                id="">
+                id="seachbypartnumberreport">
                 <thead>
                     <tr style="background-color:#3c8dbc !important;color:#fff">
                       <th>Part Number</th>
