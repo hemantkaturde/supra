@@ -15393,6 +15393,96 @@ public function fetchseachbypartnumberreportdata($params,$finish_good_part_numbe
             $job_work_challan_result = $query_job_work_challan_->result_array();
 
 
+            $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_OMS_CHALLAN.'.id as view_id,'.TBL_OMS_CHALLAN.'.blasting_id as form_number,"OMS Challan" as form_name');
+            $this->db->join(TBL_OMS_CHALLAN, TBL_OMS_CHALLAN.'.id = '.TBL_OMS_CHALLAN_ITEM.'.oms_chllan_id');
+            $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_OMS_CHALLAN_ITEM.'.part_number');
+            $this->db->where(TBL_OMS_CHALLAN_ITEM.'.part_number', $finish_good_part_number); 
+            $this->db->limit($params['length'],$params['start']);
+            $this->db->order_by(TBL_OMS_CHALLAN_ITEM.'.id','DESC');
+            $query_oms_challan = $this->db->get(TBL_OMS_CHALLAN_ITEM);
+            $oms_challan_challan_result = $query_oms_challan->result_array();
+
+
+            $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_CHALLAN_FORM.'.challan_id  as view_id,'.TBL_CHALLAN_FORM.'.challan_no as form_number,"Challan" as form_name');
+            $this->db->join(TBL_CHALLAN_FORM, TBL_CHALLAN_FORM.'.challan_id  = '.TBL_CHALLAN_FORM_ITEM.'.challan_id');
+            $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_CHALLAN_FORM_ITEM.'.part_number');
+            $this->db->where(TBL_CHALLAN_FORM_ITEM.'.part_number', $finish_good_part_number); 
+            $this->db->limit($params['length'],$params['start']);
+            $this->db->order_by(TBL_CHALLAN_FORM_ITEM.'.id','DESC');
+            $query_challan = $this->db->get(TBL_CHALLAN_FORM_ITEM);
+            $challan_result = $query_challan->result_array();
+
+
+            $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_REWORK_REJECTION.'.id  as view_id,'.TBL_REWORK_REJECTION.'.challan_no as form_number,"Rework Rejection" as form_name');
+            $this->db->join(TBL_REWORK_REJECTION, TBL_REWORK_REJECTION.'.id   = '.TBL_REWORK_REJECTION_ITEM.'.rework_rejection_id');
+            $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_REWORK_REJECTION_ITEM.'.part_number');
+            $this->db->where(TBL_REWORK_REJECTION_ITEM.'.part_number', $finish_good_part_number); 
+            $this->db->limit($params['length'],$params['start']);
+            $this->db->order_by(TBL_REWORK_REJECTION_ITEM.'.id','DESC');
+            $query_rework_rejection = $this->db->get(TBL_REWORK_REJECTION_ITEM);
+            $rework_rejection_result = $query_rework_rejection->result_array();
+
+
+            $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_BILL_OF_MATERIAL.'.id  as view_id,'.TBL_BILL_OF_MATERIAL.'.bom_number as form_number,"Bill Of Material" as form_name');
+            $this->db->join(TBL_BILL_OF_MATERIAL, TBL_BILL_OF_MATERIAL.'.id   = '.TBL_BILL_OF_MATERIAL_ITEM.'.bom_id');
+            $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BILL_OF_MATERIAL_ITEM.'.part_number');
+            $this->db->where(TBL_BILL_OF_MATERIAL_ITEM.'.part_number', $finish_good_part_number); 
+            $this->db->limit($params['length'],$params['start']);
+            $this->db->order_by(TBL_BILL_OF_MATERIAL_ITEM.'.id','DESC');
+            $query_bill_of_material = $this->db->get(TBL_BILL_OF_MATERIAL_ITEM);
+            $query_bill_of_material_result = $query_bill_of_material->result_array();
+
+
+            $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_BILL_OF_MATERIAL_VENDOR.'.id  as view_id,'.TBL_BILL_OF_MATERIAL_VENDOR.'.bom_number as form_number,"Vendor Bill Of Material" as form_name');
+            $this->db->join(TBL_BILL_OF_MATERIAL_VENDOR, TBL_BILL_OF_MATERIAL_VENDOR.'.id   = '.TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.vendor_bill_of_material_id');
+            $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.part_number_id');
+            $this->db->where(TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.part_number_id', $finish_good_part_number); 
+            $this->db->limit($params['length'],$params['start']);
+            $this->db->order_by(TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.id','DESC');
+            $query_bill_of_material_vendor = $this->db->get(TBL_BILL_OF_MATERIAL_VENDOR_ITEM);
+            $query_bill_of_material_vendor_result = $query_bill_of_material_vendor->result_array();
+
+
+            $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_INCOMING_DETAILS.'.id  as view_id,'.TBL_INCOMING_DETAILS.'.incoming_details_id as form_number,"Incoming Details" as form_name');
+            $this->db->join(TBL_INCOMING_DETAILS, TBL_INCOMING_DETAILS.'.id   = '.TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id');
+            $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
+            $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.part_number', $finish_good_part_number); 
+            $this->db->limit($params['length'],$params['start']);
+            $this->db->order_by(TBL_INCOMING_DETAILS_ITEM.'.id','DESC');
+            $query_incoming_details = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
+            $query_incoming_details_result = $query_incoming_details->result_array();
+
+            $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_STOCKS.'.stock_id  as view_id,'.TBL_STOCKS.'.stock_id_number as form_number,"Stock Form" as form_name');
+            $this->db->join(TBL_STOCKS, TBL_STOCKS.'.stock_id   = '.TBL_STOCKS_ITEM.'.stock_form_id');
+            $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_STOCKS_ITEM.'.part_number');
+            $this->db->where(TBL_STOCKS_ITEM.'.part_number', $finish_good_part_number); 
+            $this->db->limit($params['length'],$params['start']);
+            $this->db->order_by(TBL_STOCKS_ITEM.'.id','DESC');
+            $query_Stock = $this->db->get(TBL_STOCKS_ITEM);
+            $query_query_Stock_result = $query_Stock->result_array(); 
+
+
+            $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_QUALITY_RECORDS.'.quality_records_id   as view_id,'.TBL_QUALITY_RECORDS.'.quality_records_number as form_number,"Quality Record" as form_name');
+            $this->db->join(TBL_QUALITY_RECORDS, TBL_QUALITY_RECORDS.'.quality_records_id    = '.TBL_QUALITY_RECORDS_ITEM.'.quality_records_id');
+            $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_QUALITY_RECORDS_ITEM.'.part_number');
+            $this->db->where(TBL_QUALITY_RECORDS_ITEM.'.part_number', $finish_good_part_number); 
+            $this->db->limit($params['length'],$params['start']);
+            $this->db->order_by(TBL_QUALITY_RECORDS_ITEM.'.id','DESC');
+            $query_quality_records = $this->db->get(TBL_QUALITY_RECORDS_ITEM);
+            $query_quality_records_result = $query_quality_records->result_array(); 
+
+
+            $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_PACKING_INSTRACTION.'.id   as view_id,'.TBL_PACKING_INSTRACTION.'.packing_instrauction_id as form_number,"Packaging Instrasction" as form_name');
+            $this->db->join(TBL_PACKING_INSTRACTION, TBL_PACKING_INSTRACTION.'.id    = '.TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id');
+            $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_PACKING_INSTRACTION_DETAILS.'.part_number');
+            $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.part_number', $finish_good_part_number); 
+            $this->db->limit($params['length'],$params['start']);
+            $this->db->order_by(TBL_PACKING_INSTRACTION_DETAILS.'.id','DESC');
+            $query_packing_instract = $this->db->get(TBL_PACKING_INSTRACTION_DETAILS);
+            $query_packing_instract_result = $query_packing_instract->result_array(); 
+
+
+
         }else{
 
                 if($form_type_finish_good=='BuyerPO'){
@@ -15449,12 +15539,142 @@ public function fetchseachbypartnumberreportdata($params,$finish_good_part_numbe
                 }else{
                     $job_work_challan_result = array();
                 }
+
+
+                if($form_type_finish_good=='OMSChallan'){
+                    $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_OMS_CHALLAN.'.id as view_id,'.TBL_OMS_CHALLAN.'.blasting_id as form_number,"OMS Challan" as form_name');
+                    $this->db->join(TBL_OMS_CHALLAN, TBL_OMS_CHALLAN.'.id = '.TBL_OMS_CHALLAN_ITEM.'.oms_chllan_id');
+                    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_OMS_CHALLAN_ITEM.'.part_number');
+                    $this->db->where(TBL_OMS_CHALLAN_ITEM.'.part_number', $finish_good_part_number); 
+                    $this->db->limit($params['length'],$params['start']);
+                    $this->db->order_by(TBL_OMS_CHALLAN_ITEM.'.id','DESC');
+                    $query_oms_challan = $this->db->get(TBL_OMS_CHALLAN_ITEM);
+                    $oms_challan_challan_result = $query_oms_challan->result_array();
+                }else{
+                    $oms_challan_challan_result = array();
+                }
+
+
+                if($form_type_finish_good=='Challan'){
+                    $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_CHALLAN_FORM.'.challan_id  as view_id,'.TBL_CHALLAN_FORM.'.challan_no as form_number,"Challan" as form_name');
+                    $this->db->join(TBL_CHALLAN_FORM, TBL_CHALLAN_FORM.'.challan_id  = '.TBL_CHALLAN_FORM_ITEM.'.challan_id');
+                    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_CHALLAN_FORM_ITEM.'.part_number');
+                    $this->db->where(TBL_CHALLAN_FORM_ITEM.'.part_number', $finish_good_part_number); 
+                    $this->db->limit($params['length'],$params['start']);
+                    $this->db->order_by(TBL_CHALLAN_FORM_ITEM.'.id','DESC');
+                    $query_challan = $this->db->get(TBL_CHALLAN_FORM_ITEM);
+                    $challan_result = $query_challan->result_array();
+                }else{
+                    $challan_result = array();
+                }
+
+
+
+                if($form_type_finish_good=='ReworkRejectionChallan'){
+                    $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_REWORK_REJECTION.'.id  as view_id,'.TBL_REWORK_REJECTION.'.challan_no as form_number,"Rework Rejection" as form_name');
+                    $this->db->join(TBL_REWORK_REJECTION, TBL_REWORK_REJECTION.'.id   = '.TBL_REWORK_REJECTION_ITEM.'.rework_rejection_id');
+                    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_REWORK_REJECTION_ITEM.'.part_number');
+                    $this->db->where(TBL_REWORK_REJECTION_ITEM.'.part_number', $finish_good_part_number); 
+                    $this->db->limit($params['length'],$params['start']);
+                    $this->db->order_by(TBL_REWORK_REJECTION_ITEM.'.id','DESC');
+                    $query_rework_rejection = $this->db->get(TBL_REWORK_REJECTION_ITEM);
+                    $rework_rejection_result = $query_rework_rejection->result_array();
+                }else{
+                    $rework_rejection_result = array();
+                }
+
+
+
+                if($form_type_finish_good=='BillOfMaterial'){
+                    $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_BILL_OF_MATERIAL.'.id  as view_id,'.TBL_BILL_OF_MATERIAL.'.bom_number as form_number,"Bill Of Material" as form_name');
+                    $this->db->join(TBL_BILL_OF_MATERIAL, TBL_BILL_OF_MATERIAL.'.id   = '.TBL_BILL_OF_MATERIAL_ITEM.'.bom_id');
+                    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BILL_OF_MATERIAL_ITEM.'.part_number');
+                    $this->db->where(TBL_BILL_OF_MATERIAL_ITEM.'.part_number', $finish_good_part_number); 
+                    $this->db->limit($params['length'],$params['start']);
+                    $this->db->order_by(TBL_BILL_OF_MATERIAL_ITEM.'.id','DESC');
+                    $query_bill_of_material = $this->db->get(TBL_BILL_OF_MATERIAL_ITEM);
+                    $query_bill_of_material_result = $query_bill_of_material->result_array();
+                }else{
+                    $query_bill_of_material_result = array();
+                }
+
+                if($form_type_finish_good=='BillOfMaterial'){
+                    $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_BILL_OF_MATERIAL_VENDOR.'.id  as view_id,'.TBL_BILL_OF_MATERIAL_VENDOR.'.bom_number as form_number,"Vendor Bill Of Material" as form_name');
+                    $this->db->join(TBL_BILL_OF_MATERIAL_VENDOR, TBL_BILL_OF_MATERIAL_VENDOR.'.id   = '.TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.vendor_bill_of_material_id');
+                    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.part_number_id');
+                    $this->db->where(TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.part_number_id', $finish_good_part_number); 
+                    $this->db->limit($params['length'],$params['start']);
+                    $this->db->order_by(TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.id','DESC');
+                    $query_bill_of_material_vendor = $this->db->get(TBL_BILL_OF_MATERIAL_VENDOR_ITEM);
+                    $query_bill_of_material_vendor_result = $query_bill_of_material_vendor->result_array();
+                }else{
+                    $query_bill_of_material_vendor_result = array();
+                }
+
+
+                if($form_type_finish_good=='IncomigDetails'){
+                    $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_INCOMING_DETAILS.'.id  as view_id,'.TBL_INCOMING_DETAILS.'.incoming_details_id as form_number,"Incoming Details" as form_name');
+                    $this->db->join(TBL_INCOMING_DETAILS, TBL_INCOMING_DETAILS.'.id   = '.TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id');
+                    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
+                    $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.part_number', $finish_good_part_number); 
+                    $this->db->limit($params['length'],$params['start']);
+                    $this->db->order_by(TBL_INCOMING_DETAILS_ITEM.'.id','DESC');
+                    $query_incoming_details = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
+                    $query_incoming_details_result = $query_incoming_details->result_array();
+                }else{
+                    $query_incoming_details_result = array();
+                }
+
+
+
+                if($form_type_finish_good=='Stock'){
+                    $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_STOCKS.'.stock_id  as view_id,'.TBL_STOCKS.'.stock_id_number as form_number,"Stock Form" as form_name');
+                    $this->db->join(TBL_STOCKS, TBL_STOCKS.'.stock_id   = '.TBL_STOCKS_ITEM.'.stock_form_id');
+                    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_STOCKS_ITEM.'.part_number');
+                    $this->db->where(TBL_STOCKS_ITEM.'.part_number', $finish_good_part_number); 
+                    $this->db->limit($params['length'],$params['start']);
+                    $this->db->order_by(TBL_STOCKS_ITEM.'.id','DESC');
+                    $query_Stock = $this->db->get(TBL_STOCKS_ITEM);
+                    $query_query_Stock_result = $query_Stock->result_array();
+                }else{
+                    $query_query_Stock_result = array();
+                }
+
+
+                if($form_type_finish_good=='QualityRecord'){
+                    $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_QUALITY_RECORDS.'.quality_records_id   as view_id,'.TBL_QUALITY_RECORDS.'.quality_records_number as form_number,"Quality Record" as form_name');
+                    $this->db->join(TBL_QUALITY_RECORDS, TBL_QUALITY_RECORDS.'.quality_records_id    = '.TBL_QUALITY_RECORDS_ITEM.'.quality_records_id');
+                    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_QUALITY_RECORDS_ITEM.'.part_number');
+                    $this->db->where(TBL_QUALITY_RECORDS_ITEM.'.part_number', $finish_good_part_number); 
+                    $this->db->limit($params['length'],$params['start']);
+                    $this->db->order_by(TBL_QUALITY_RECORDS_ITEM.'.id','DESC');
+                    $query_quality_records = $this->db->get(TBL_QUALITY_RECORDS_ITEM);
+                    $query_quality_records_result = $query_quality_records->result_array(); 
+                }else{
+                    $query_quality_records_result = array();
+                }
+
+                if($form_type_finish_good=='PackagingInstrasction'){
+                    $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_PACKING_INSTRACTION.'.id   as view_id,'.TBL_PACKING_INSTRACTION.'.packing_instrauction_id as form_number,"Packaging Instrasction" as form_name');
+                    $this->db->join(TBL_PACKING_INSTRACTION, TBL_PACKING_INSTRACTION.'.id    = '.TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id');
+                    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_PACKING_INSTRACTION_DETAILS.'.part_number');
+                    $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.part_number', $finish_good_part_number); 
+                    $this->db->limit($params['length'],$params['start']);
+                    $this->db->order_by(TBL_PACKING_INSTRACTION_DETAILS.'.id','DESC');
+                    $query_packing_instract = $this->db->get(TBL_PACKING_INSTRACTION_DETAILS);
+                    $query_packing_instract_result = $query_packing_instract->result_array(); 
+                }else{
+                    $query_packing_instract_result = array();
+                }
+    
+
+    
        }
 
         
 
 
-        $fetch_result = array_merge($buyer_po_result,$vendor_po_result,$vendor_po_confirmation_result,$job_work_challan_result);
+        $fetch_result = array_merge($buyer_po_result,$vendor_po_result,$vendor_po_confirmation_result,$job_work_challan_result,$oms_challan_challan_result,$challan_result,$rework_rejection_result,$query_bill_of_material_result,$query_bill_of_material_vendor_result,$query_incoming_details_result,$query_query_Stock_result,$query_quality_records_result,$query_packing_instract_result);
 
         $data = array();
         $counter = 0;
@@ -15463,7 +15683,7 @@ public function fetchseachbypartnumberreportdata($params,$finish_good_part_numbe
             foreach ($fetch_result as $key => $value)
             {
                 if($value['form_name']=='Buyer PO'){
-                    $color ='#008000';
+                    $color ='#FF0000';
                 }
 
                 if($value['form_name']=='Vendor PO'){
@@ -15471,11 +15691,47 @@ public function fetchseachbypartnumberreportdata($params,$finish_good_part_numbe
                 }
                 
                 if($value['form_name']=='Vendor PO Confirmation'){
-                    $color ='#0000FF';
+                    $color ='#FF0000';
                 }
 
                 if($value['form_name']=='Job Work Challan'){
-                    $color ='#C11C84';
+                    $color ='#FF0000';
+                }
+
+                if($value['form_name']=='OMS Challan'){
+                    $color ='#FF0000';
+                }
+
+                if($value['form_name']=='Challan'){
+                    $color ='#FF0000';
+                }
+
+                if($value['form_name']=='Rework Rejection'){
+                    $color ='#FF0000';
+                }
+
+                if($value['form_name']=='Bill Of Material'){
+                    $color ='#FF0000';
+                }
+
+                if($value['form_name']=='Vendor Bill Of Material'){
+                    $color ='#FF0000';
+                }
+
+                if($value['form_name']=='Incoming Details'){
+                    $color ='#FF0000';
+                }
+
+                if($value['form_name']=='Stock Form'){
+                    $color ='#FF0000';
+                }
+
+                if($value['form_name']=='Quality Record'){
+                    $color ='#FF0000';
+                }
+
+                if($value['form_name']=='Packaging Instrasction'){
+                    $color ='#FF0000';
                 }
 
 
@@ -15498,6 +15754,44 @@ public function fetchseachbypartnumberreportdata($params,$finish_good_part_numbe
 
                 if($value['form_name']=='Job Work Challan'){
                     $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editjobwork/".$value['view_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-external-link' aria-hidden='true'></i></a>  &nbsp";
+                }
+
+                if($value['form_name']=='OMS Challan'){
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editomschallan/".$value['view_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-external-link' aria-hidden='true'></i></a>  &nbsp";
+                }
+
+                if($value['form_name']=='Challan'){
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editchallanform/".$value['view_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-external-link' aria-hidden='true'></i></a>  &nbsp";
+                }
+
+                if($value['form_name']=='Rework Rejection'){
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editreworkrejection/".$value['view_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-external-link' aria-hidden='true'></i></a>  &nbsp";
+                }
+
+                if($value['form_name']=='Bill Of Material'){
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editbillofmaterial/".$value['view_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-external-link' aria-hidden='true'></i></a>  &nbsp";
+                }
+
+                if($value['form_name']=='Vendor Bill Of Material'){
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editvendorbillofmaterial/".$value['view_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-external-link' aria-hidden='true'></i></a>  &nbsp";
+                }
+
+
+                if($value['form_name']=='Incoming Details'){
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editincomingdetails/".$value['view_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-external-link' aria-hidden='true'></i></a>  &nbsp";
+                }
+
+
+                if($value['form_name']=='Stock Form'){
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editstcokformdetails/".$value['view_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-external-link' aria-hidden='true'></i></a>  &nbsp";
+                }
+
+                if($value['form_name']=='Quality Record'){
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editqulityrecordform/".$value['view_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-external-link' aria-hidden='true'></i></a>  &nbsp";
+                }
+
+                if($value['form_name']=='Packaging Instrasction'){
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addpackinginstractiondetails/".$value['view_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-external-link' aria-hidden='true'></i></a>  &nbsp";
                 }
 
                 $counter++; 
