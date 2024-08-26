@@ -15329,7 +15329,7 @@ public function getsuppliervendorcomplaintdata($id){
 }
 
 
-public function fetchseachbypartnumberreportcount($params,$finish_good_part_number,$form_type_finish_good){
+public function fetchseachbypartnumberreportcount($params,$finish_good_part_number,$form_type_finish_good,$raw_material_part_number,$form_type_raw_material){
 
 
     if($finish_good_part_number!='NA'){
@@ -15641,10 +15641,9 @@ public function fetchseachbypartnumberreportcount($params,$finish_good_part_numb
     
 }
 
-public function fetchseachbypartnumberreportdata($params,$finish_good_part_number,$form_type_finish_good){
+public function fetchseachbypartnumberreportdata($params,$finish_good_part_number,$form_type_finish_good,$raw_material_part_number,$form_type_raw_material){
 
     if($finish_good_part_number!='NA'){
-
         if($form_type_finish_good=='NA'){
             $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_BUYER_PO_MASTER.'.id as view_id,'.TBL_BUYER_PO_MASTER.'.sales_order_number as form_number,"Buyer PO" as form_name');
             $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id');
@@ -15766,7 +15765,7 @@ public function fetchseachbypartnumberreportdata($params,$finish_good_part_numbe
             $query_quality_records_result = $query_quality_records->result_array(); 
 
 
-            $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_PACKING_INSTRACTION.'.id   as view_id,'.TBL_PACKING_INSTRACTION.'.packing_instrauction_id as form_number,"Packaging Instrasction" as form_name');
+            $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_PACKING_INSTRACTION.'.id   as view_id,'.TBL_PACKING_INSTRACTION.'.packing_instrauction_id as form_number,"Packaging Instructions" as form_name');
             $this->db->join(TBL_PACKING_INSTRACTION, TBL_PACKING_INSTRACTION.'.id    = '.TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id');
             $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_PACKING_INSTRACTION_DETAILS.'.part_number');
             $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.part_number', $finish_good_part_number); 
@@ -15821,7 +15820,7 @@ public function fetchseachbypartnumberreportdata($params,$finish_good_part_numbe
                 }
 
 
-                if($form_type_finish_good=='VendorPOConfirmation'){
+                if($form_type_finish_good=='JobWorkChallan'){
                     $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_JOB_WORK.'.id as view_id,'.TBL_JOB_WORK.'.po_number as form_number,"Job Work Challan" as form_name');
                     $this->db->join(TBL_JOB_WORK, TBL_JOB_WORK.'.id = '.TBL_JOB_WORK_ITEM.'.jobwork_id');
                     $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_JOB_WORK_ITEM.'.part_number_id');
@@ -15951,7 +15950,7 @@ public function fetchseachbypartnumberreportdata($params,$finish_good_part_numbe
 
 
                 if($form_type_finish_good=='PackagingInstrasction'){
-                    $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_PACKING_INSTRACTION.'.id   as view_id,'.TBL_PACKING_INSTRACTION.'.packing_instrauction_id as form_number,"Packaging Instrasction" as form_name');
+                    $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_PACKING_INSTRACTION.'.id   as view_id,'.TBL_PACKING_INSTRACTION.'.packing_instrauction_id as form_number,"Packaging Instructions" as form_name');
                     $this->db->join(TBL_PACKING_INSTRACTION, TBL_PACKING_INSTRACTION.'.id    = '.TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id');
                     $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_PACKING_INSTRACTION_DETAILS.'.part_number');
                     $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.part_number', $finish_good_part_number); 
@@ -16024,7 +16023,7 @@ public function fetchseachbypartnumberreportdata($params,$finish_good_part_numbe
                     $color ='#C71585';
                 }
 
-                if($value['form_name']=='Packaging Instrasction'){
+                if($value['form_name']=='Packaging Instructions'){
                     $color ='#D2691E';
                 }
 
@@ -16084,7 +16083,7 @@ public function fetchseachbypartnumberreportdata($params,$finish_good_part_numbe
                     $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editqulityrecordform/".$value['view_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-external-link' aria-hidden='true'></i></a>  &nbsp";
                 }
 
-                if($value['form_name']=='Packaging Instrasction'){
+                if($value['form_name']=='Packaging Instructions'){
                     $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addpackinginstractiondetails/".$value['view_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-external-link' aria-hidden='true'></i></a>  &nbsp";
                 }
 
@@ -16094,7 +16093,101 @@ public function fetchseachbypartnumberreportdata($params,$finish_good_part_numbe
         return $data;
 
     }else{
-            return array();
+        if($raw_material_part_number!='NA'){
+            if($form_type_raw_material=='NA'){
+                $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_SUPPLIER_PO_MASTER.'.id as view_id,'.TBL_SUPPLIER_PO_MASTER.'.po_number as form_number,"Supplier PO" as form_name');
+                $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.supplier_po_id');
+                $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id');
+                $this->db->where(TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id', $raw_material_part_number); 
+                $this->db->limit($params['length'],$params['start']);
+                $this->db->order_by(TBL_SUPPLIER_PO_MASTER_ITEM.'.id','DESC');
+                $query_supplier_po = $this->db->get(TBL_SUPPLIER_PO_MASTER_ITEM);
+                $supplier_po_result = $query_supplier_po->result_array();
+
+                $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_VENDOR_PO_MASTER.'.id as view_id,'.TBL_VENDOR_PO_MASTER.'.po_number as form_number,"Vendor PO" as form_name');
+                $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id');
+                $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
+                $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id', $raw_material_part_number); 
+                $this->db->where(TBL_VENDOR_PO_MASTER.'.supplier_name!=',""); 
+                $this->db->where(TBL_VENDOR_PO_MASTER.'.supplier_po_number!=',""); 
+                $this->db->limit($params['length'],$params['start']);
+                $this->db->order_by(TBL_VENDOR_PO_MASTER_ITEM.'.id','DESC');
+                $query_vendor_po = $this->db->get(TBL_VENDOR_PO_MASTER_ITEM);
+                $vendor_po_result = $query_vendor_po->result_array();
+
+
+            }else{
+                if($form_type_raw_material=='SupplierPO'){
+                    $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_SUPPLIER_PO_MASTER.'.id as view_id,'.TBL_SUPPLIER_PO_MASTER.'.po_number as form_number,"Supplier PO" as form_name');
+                    $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.supplier_po_id');
+                    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id');
+                    $this->db->where(TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id', $raw_material_part_number); 
+                    $this->db->limit($params['length'],$params['start']);
+                    $this->db->order_by(TBL_SUPPLIER_PO_MASTER_ITEM.'.id','DESC');
+                    $query_supplier_po = $this->db->get(TBL_SUPPLIER_PO_MASTER_ITEM);
+                    $supplier_po_result = $query_supplier_po->result_array();
+                }else{
+                    $supplier_po_result = array();
+                }
+
+
+                if($form_type_raw_material=='VendorPO'){
+                    $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_VENDOR_PO_MASTER.'.id as view_id,'.TBL_VENDOR_PO_MASTER.'.po_number as form_number,"Vendor PO" as form_name');
+                    $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id');
+                    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
+                    $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id', $raw_material_part_number); 
+                    $this->db->where(TBL_VENDOR_PO_MASTER.'.supplier_name!=',""); 
+                    $this->db->where(TBL_VENDOR_PO_MASTER.'.supplier_po_number!=',""); 
+                    $this->db->limit($params['length'],$params['start']);
+                    $this->db->order_by(TBL_VENDOR_PO_MASTER_ITEM.'.id','DESC');
+                    $query_vendor_po = $this->db->get(TBL_VENDOR_PO_MASTER_ITEM);
+                    $vendor_po_result = $query_vendor_po->result_array();
+                }else{
+                    $vendor_po_result = array();
+                }
+
+
+            }
+
+            $fetch_result = array_merge($supplier_po_result,$vendor_po_result);
+
+            $data = array();
+            $counter = 0;
+            if(count($fetch_result) > 0)
+            {
+                foreach ($fetch_result as $key => $value)
+                {
+                    if($value['form_name']=='Supplier PO'){
+                        $color ='#800080';
+                    }
+
+                    if($value['form_name']=='Vendor PO'){
+                        $color ='#800080';
+                    }
+
+                    $data[$counter]['part_number'] = $value['part_number'];
+                    $data[$counter]['sales_order_number'] = $value['form_number'];
+                    $data[$counter]['form_name'] = '<b><p style="color:'.$color.'">'.$value['form_name'].'</p></b>';
+                    $data[$counter]['action'] = '';
+    
+                    if($value['form_name']=='Supplier PO'){
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editSupplierpo/".$value['view_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-external-link' aria-hidden='true'></i></a>  &nbsp";
+                    }
+
+                    if($value['form_name']=='Vendor PO'){
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editVendorpo/".$value['view_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-external-link' aria-hidden='true'></i></a>  &nbsp";
+                    }
+
+                
+                    $counter++; 
+                }
+            }
+            return $data;
+
+        }else{
+           return array();
+        }
+
     }
     
    

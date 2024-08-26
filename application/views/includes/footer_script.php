@@ -21833,7 +21833,9 @@
 		   $("#seachbypartnumberreport").dataTable().fnDestroy();
 		   var finish_good_part_number = $('#finish_good_part_number').val();
 		   var form_type_finish_good = $('#form_type_finish_good').val();
-		   seachbypartnumberreport(finish_good_part_number,form_type_finish_good);
+		   var raw_material_part_number = $('#raw_material_part_number').val();
+		   var form_type_raw_material = $('#form_type_raw_material').val();
+		   seachbypartnumberreport(finish_good_part_number,form_type_finish_good,raw_material_part_number,form_type_raw_material);
 		});
 
 		$(document).on('change','#finish_good_part_number',function(e){  
@@ -21841,7 +21843,9 @@
 			$("#seachbypartnumberreport").dataTable().fnDestroy();
 			var finish_good_part_number = $('#finish_good_part_number').val();
 			var form_type_finish_good = $('#form_type_finish_good').val();
-			seachbypartnumberreport(finish_good_part_number,form_type_finish_good);
+			var raw_material_part_number = $('#raw_material_part_number').val();
+			var form_type_raw_material = $('#form_type_raw_material').val();
+			seachbypartnumberreport(finish_good_part_number,form_type_finish_good,raw_material_part_number,form_type_raw_material);
 		});
 
 
@@ -21850,11 +21854,35 @@
 			$("#seachbypartnumberreport").dataTable().fnDestroy();
 			var finish_good_part_number = $('#finish_good_part_number').val();
 			var form_type_finish_good = $('#form_type_finish_good').val();
-			seachbypartnumberreport(finish_good_part_number,form_type_finish_good);
+			var raw_material_part_number = $('#raw_material_part_number').val();
+			var form_type_raw_material = $('#form_type_raw_material').val();
+			seachbypartnumberreport(finish_good_part_number,form_type_finish_good,raw_material_part_number,form_type_raw_material);
 		});
 
 
-		function seachbypartnumberreport(finish_good_part_number,form_type_finish_good){
+		$(document).on('change','#raw_material_part_number',function(e){  
+			e.preventDefault();
+			$("#seachbypartnumberreport").dataTable().fnDestroy();
+			var finish_good_part_number = $('#finish_good_part_number').val();
+			var form_type_finish_good = $('#form_type_finish_good').val();
+			var raw_material_part_number = $('#raw_material_part_number').val();
+			var form_type_raw_material = $('#form_type_raw_material').val();
+			seachbypartnumberreport(finish_good_part_number,form_type_finish_good,raw_material_part_number,form_type_raw_material);
+		});
+
+
+        $(document).on('change','#form_type_raw_material',function(e){  
+			e.preventDefault();
+			$("#seachbypartnumberreport").dataTable().fnDestroy();
+			var finish_good_part_number = $('#finish_good_part_number').val();
+			var form_type_finish_good = $('#form_type_finish_good').val();
+			var raw_material_part_number = $('#raw_material_part_number').val();
+			var form_type_raw_material = $('#form_type_raw_material').val();
+			seachbypartnumberreport(finish_good_part_number,form_type_finish_good,raw_material_part_number,form_type_raw_material);
+		});
+
+
+		function seachbypartnumberreport(finish_good_part_number,form_type_finish_good,raw_material_part_number,form_type_raw_material){
 
 				var dt = $('#seachbypartnumberreport').DataTable({
 					"columnDefs": [ 
@@ -21875,7 +21903,7 @@
 					"bProcessing": true,
 					"serverSide": true,
 					"ajax":{
-						url :"<?php echo base_url();?>admin/fetchseachbypartnumberreport/"+finish_good_part_number+"/"+form_type_finish_good,
+						url :"<?php echo base_url();?>admin/fetchseachbypartnumberreport/"+finish_good_part_number+"/"+form_type_finish_good+"/"+raw_material_part_number+"/"+form_type_raw_material,
 						type: "post",
 					},
 				});

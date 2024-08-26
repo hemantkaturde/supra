@@ -106,10 +106,10 @@
                   <!-- <option st-id="" value="SupplierPO">Supplier PO</option> -->
                   <option st-id="" value="VendorPO">Vendor PO (Without Supplier)</option>
                   <!-- <option st-id="" value="SupplierPOConfirmation">Supplier PO Confirmation</option> -->
-                  <option st-id="" value="VendorPOConfirmation">Vendor PO Confirmation (Without Supplier)</option>
+                  <option st-id="" value="VendorPOConfirmation">Vendor PO Confirmation</option>
                   <option st-id="" value="JobWorkChallan">Job Work Challan</option>
                   <option st-id="" value="OMSChallan">OMS Challan (Without Supplier)</option>
-                  <option st-id="" value="Challan">Challan</option>
+                  <option st-id="" value="Challan">Challan (Without Supplier)</option>
                   <option st-id="" value="ReworkRejectionChallan">Rework / Rejection Challan (Without Supplier)</option>
                   <option st-id="" value="BillOfMaterial">Bill Of Material</option>
                   <option st-id="" value="VendorBillOfMaterial">Vendor Bill Of Material</option>
@@ -141,9 +141,8 @@
                   <option st-id="" value="NA">Select Raw Material Form</option>
                   <option st-id="" value="SupplierPO">Supplier PO</option>
                   <option st-id="" value="VendorPO">Vendor PO (With Supplier)</option>
-                  <option st-id="" value="VendorPOConfirmation">Vendor PO Confirmation (With Supplier)</option>
-                  <option st-id="" value="SupplierPOConfirmation">Supplier PO Confirmation</option>      
-                  <option st-id="" value="Challan">Challan</option>
+                  <option st-id="" value="SupplierPOConfirmation">Supplier PO Confirmation (With Supplier)</option>      
+                  <option st-id="" value="Challan">Challan (With Supplier)</option>
                </select>
             </div>
          </div>
