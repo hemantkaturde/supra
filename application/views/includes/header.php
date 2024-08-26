@@ -236,6 +236,7 @@
                         || $pageUrl=="challanform" || $pageUrl=="addchallanform" || $pageUrl=="editchallanform"
                         || $pageUrl=="viewincomingdetails"
                         || $pageUrl=="viewuspincomig"
+                        || $pageUrl=="viewstcokformdetails"
                         ){echo 'active';}?>">
                       <a href="#">
                         <i class="fa fa-stack-exchange"></i> <span class="menu_label">Stock</span>
@@ -246,7 +247,7 @@
                       <ul class="treeview-menu" >
                         <li class="line_height <?php if($pageUrl=="incomingdetails" || $pageUrl=="addnewencomingdetails" ||  $pageUrl=="editincomingdetails" ||  $pageUrl=="viewincomingdetails"){echo 'active';}?>"><a href="<?php echo base_url(); ?>incomingdetails"><i class="fa fa-cubes"></i> Incoming Details</a></li>
                         <li class="line_height <?php if($pageUrl=="uspincoming" || $pageUrl=="addnewuspincoming" || $pageUrl=="edituspincomig" || $pageUrl=="viewuspincomig"){echo 'active';}?>"><a href="<?php echo base_url(); ?>uspincoming"><i class="fa fa-cubes"></i> USP Incoming</a></li>
-                        <li class="line_height <?php if($pageUrl=="stockform" || $pageUrl=='addNewstockform' || $pageUrl=='editstcokformdetails' ){echo 'active';}?>"><a href="<?php echo base_url(); ?>stockform"><i class="fa fa-cubes"></i> Stock Form</a></li>
+                        <li class="line_height <?php if($pageUrl=="stockform" || $pageUrl=='addNewstockform' || $pageUrl=='editstcokformdetails' || $pageUrl=="viewstcokformdetails" ){echo 'active';}?>"><a href="<?php echo base_url(); ?>stockform"><i class="fa fa-cubes"></i> Stock Form</a></li>
                         <li class="line_height <?php if($pageUrl=="stockrejectionform" || $pageUrl=='addnewrejectionform' || $pageUrl=='editrejetionform' || $pageUrl=='addrejectionformitemsdata' || $pageUrl=='viewrejectionformitemdetails'){echo 'active';}?>"><a href="<?php echo base_url(); ?>stockrejectionform"><i class="fa fa-cubes"></i> Stock Rejection Form</a></li>
                         <li class="line_height <?php if($pageUrl=="searchstockreport" || $pageUrl=="searchstock"){echo 'active';}?>"><a href="<?php echo base_url(); ?>searchstockreport"><i class="fa fa-cubes"></i> Search Stock Report</a></li>
                         <li class="line_height <?php if($pageUrl=="preexport" || $pageUrl=="addnewfreexport" || $pageUrl=="editpreexport" || $pageUrl=='exportdetailsitemdetails' || $pageUrl=='addpreexportitemdetails' || $pageUrl=='editaddpreexportitemdetails' || $pageUrl=='addexportitemdetailswithattributes' || $pageUrl=='addexportitemdetailswithattributesvalues' || $pageUrl=='editexportitemdetailswithattributesvalues'){echo 'active';}?>"><a href="<?php echo base_url(); ?>preexport"><i class="fa fa-cubes"></i> Pre Export</a></li>

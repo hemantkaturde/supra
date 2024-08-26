@@ -296,6 +296,8 @@ $route['saveStockformitem'] = "admin/saveStockformitem";
 $route['deleteStockformitem'] = "admin/deleteStockformitem";
 $route['deletestockform'] = "admin/deletestockform";
 $route['editstcokformdetails/(:any)'] = "admin/editstcokformdetails/$1";
+$route['viewstcokformdetails/(:any)'] = "admin/viewstcokformdetails/$1";
+
 $route['getincominglotnumberbyvendor'] = "admin/getincominglotnumberbyvendor";
 $route['getinvoiceqtybyLotnumber'] = "admin/getinvoiceqtybyLotnumber";
 $route['fetchexportrecordsitem'] = "admin/fetchexportrecordsitem";

@@ -15102,7 +15102,7 @@
 					 { "width": "8%", "targets": 6 },
 					 { "width": "8%", "targets": 7 },
 					 { "width": "8%", "targets": 8 },
-					 { "width": "10%", "targets":9 }
+					 { "width": "12%", "targets":9 }
 	            ],
 	            responsive: true,
 	            "oLanguage": {

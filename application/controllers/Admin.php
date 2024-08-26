@@ -8972,6 +8972,20 @@ class Admin extends BaseController
         $this->loadViews("masters/editStockform", $this->global, $data, NULL);
     }
 
+
+    public function viewstcokformdetails($stock_id){
+
+        $process = 'Edit Stock Form';
+        $processFunction = 'Admin/viewstcokformdetails';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Edit Stock Form';
+        $data['vendorList']= $this->admin_model->fetchALLvendorList();
+        $data['getItemlistStockformedit']= $this->admin_model->getItemlistStockformedit($stock_id);
+        $data['getStockdetailsData']= $this->admin_model->getStockdetailsData($stock_id);
+        $data['getAlltotalcalculation']= $this->admin_model->getAlltotalcalculationedit($stock_id);
+        $this->loadViews("masters/viewstcokformdetails", $this->global, $data, NULL);
+    }
+
     public function saveStockformitem(){
         $post_submit = $this->input->post();
         if($post_submit){

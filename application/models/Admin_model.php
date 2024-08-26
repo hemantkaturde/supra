@@ -7236,6 +7236,8 @@ class Admin_model extends CI_Model
                 $data[$counter]['buyer_po_date'] = $value['buyer_po_date'];
                 $data[$counter]['buyer_delivery_date'] = $value['delivery_date'];
                 $data[$counter]['action'] = '';
+
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewstcokformdetails/".$value['stock_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editstcokformdetails/".$value['stock_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."stockrejectionform' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-ban' aria-hidden='true'></i></a>   &nbsp ";
                 // $data[$counter]['action'] .= "<a href='".ADMIN_PATH."searchstock' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-stack-exchange' aria-hidden='true'></i></a>   &nbsp ";
