@@ -16116,6 +16116,25 @@ public function fetchseachbypartnumberreportdata($params,$finish_good_part_numbe
                 $vendor_po_result = $query_vendor_po->result_array();
 
 
+                $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_SUPPLIER_PO_CONFIRMATION.'.id as view_id,'.TBL_SUPPLIER_PO_CONFIRMATION.'.po_number as form_number,"Supplier PO Confirmation" as form_name');
+                $this->db->join(TBL_SUPPLIER_PO_CONFIRMATION, TBL_SUPPLIER_PO_CONFIRMATION.'.id = '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.supplier_po_confirmation_id');
+                $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.part_number_id');
+                $this->db->where(TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.part_number_id', $raw_material_part_number); 
+                $this->db->limit($params['length'],$params['start']);
+                $this->db->order_by(TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.id','DESC');
+                $query_supplier_po_confirmation = $this->db->get(TBL_SUPPLIER_PO_CONFIRMATION_ITEM);
+                $supplier_supplier_po_confirmation_result = $query_supplier_po_confirmation->result_array();
+
+                $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_CHALLAN_FORM.'.challan_id  as view_id,'.TBL_CHALLAN_FORM.'.challan_no as form_number,"Challan" as form_name');
+                $this->db->join(TBL_CHALLAN_FORM, TBL_CHALLAN_FORM.'.challan_id  = '.TBL_CHALLAN_FORM_ITEM.'.challan_id');
+                $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_CHALLAN_FORM_ITEM.'.part_number');
+                $this->db->where(TBL_CHALLAN_FORM_ITEM.'.part_number', $raw_material_part_number); 
+                $this->db->limit($params['length'],$params['start']);
+                $this->db->order_by(TBL_CHALLAN_FORM_ITEM.'.id','DESC');
+                $query_challan = $this->db->get(TBL_CHALLAN_FORM_ITEM);
+                $challan_result = $query_challan->result_array();
+
+
             }else{
                 if($form_type_raw_material=='SupplierPO'){
                     $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_SUPPLIER_PO_MASTER.'.id as view_id,'.TBL_SUPPLIER_PO_MASTER.'.po_number as form_number,"Supplier PO" as form_name');
@@ -16146,10 +16165,37 @@ public function fetchseachbypartnumberreportdata($params,$finish_good_part_numbe
                     $vendor_po_result = array();
                 }
 
+                if($form_type_raw_material=='SupplierPOConfirmation'){
+                    $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_SUPPLIER_PO_CONFIRMATION.'.id as view_id,'.TBL_SUPPLIER_PO_CONFIRMATION.'.po_number as form_number,"Supplier PO Confirmation" as form_name');
+                    $this->db->join(TBL_SUPPLIER_PO_CONFIRMATION, TBL_SUPPLIER_PO_CONFIRMATION.'.id = '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.supplier_po_confirmation_id');
+                    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.part_number_id');
+                    $this->db->where(TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.part_number_id', $raw_material_part_number); 
+                    $this->db->limit($params['length'],$params['start']);
+                    $this->db->order_by(TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.id','DESC');
+                    $query_supplier_po_confirmation = $this->db->get(TBL_SUPPLIER_PO_CONFIRMATION_ITEM);
+                    $supplier_supplier_po_confirmation_result = $query_supplier_po_confirmation->result_array();
+                }else{
+                    $supplier_supplier_po_confirmation_result = array();
+                }
+
+
+                if($form_type_raw_material=='Challan'){
+                    $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_CHALLAN_FORM.'.challan_id  as view_id,'.TBL_CHALLAN_FORM.'.challan_no as form_number,"Challan" as form_name');
+                    $this->db->join(TBL_CHALLAN_FORM, TBL_CHALLAN_FORM.'.challan_id  = '.TBL_CHALLAN_FORM_ITEM.'.challan_id');
+                    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_CHALLAN_FORM_ITEM.'.part_number');
+                    $this->db->where(TBL_CHALLAN_FORM_ITEM.'.part_number', $raw_material_part_number); 
+                    $this->db->limit($params['length'],$params['start']);
+                    $this->db->order_by(TBL_CHALLAN_FORM_ITEM.'.id','DESC');
+                    $query_challan = $this->db->get(TBL_CHALLAN_FORM_ITEM);
+                    $challan_result = $query_challan->result_array();
+                }else{
+                    $challan_result = array();
+                }
+
 
             }
 
-            $fetch_result = array_merge($supplier_po_result,$vendor_po_result);
+            $fetch_result = array_merge($supplier_po_result,$vendor_po_result,$supplier_supplier_po_confirmation_result,$challan_result);
 
             $data = array();
             $counter = 0;
@@ -16165,6 +16211,15 @@ public function fetchseachbypartnumberreportdata($params,$finish_good_part_numbe
                         $color ='#800080';
                     }
 
+                    if($value['form_name']=='Supplier PO Confirmation'){
+                        $color ='#800080';
+                    }
+
+                    if($value['form_name']=='Challan'){
+                        $color ='#800080';
+                    }
+                    
+
                     $data[$counter]['part_number'] = $value['part_number'];
                     $data[$counter]['sales_order_number'] = $value['form_number'];
                     $data[$counter]['form_name'] = '<b><p style="color:'.$color.'">'.$value['form_name'].'</p></b>';
@@ -16176,6 +16231,14 @@ public function fetchseachbypartnumberreportdata($params,$finish_good_part_numbe
 
                     if($value['form_name']=='Vendor PO'){
                         $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editVendorpo/".$value['view_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-external-link' aria-hidden='true'></i></a>  &nbsp";
+                    }
+
+                    if($value['form_name']=='Supplier PO Confirmation'){
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editSupplierpoconfirmation/".$value['view_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-external-link' aria-hidden='true'></i></a>  &nbsp";
+                    }
+
+                    if($value['form_name']=='Challan'){
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editchallanform/".$value['view_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-external-link' aria-hidden='true'></i></a>  &nbsp";
                     }
 
                 
