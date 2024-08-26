@@ -106,9 +106,9 @@
                   <!-- <option st-id="" value="SupplierPO">Supplier PO</option> -->
                   <option st-id="" value="VendorPO">Vendor PO (Without Supplier)</option>
                   <!-- <option st-id="" value="SupplierPOConfirmation">Supplier PO Confirmation</option> -->
-                  <option st-id="" value="VendorPOConfirmation">Vendor PO Confirmation</option>
+                  <option st-id="" value="VendorPOConfirmation">Vendor PO Confirmation (Without Supplier)</option>
                   <option st-id="" value="JobWorkChallan">Job Work Challan</option>
-                  <option st-id="" value="OMSChallan">OMS Challan</option>
+                  <option st-id="" value="OMSChallan">OMS Challan (Without Supplier)</option>
                   <option st-id="" value="Challan">Challan</option>
                   <option st-id="" value="ReworkRejectionChallan">Rework / Rejection Challan (Without Supplier)</option>
                   <option st-id="" value="BillOfMaterial">Bill Of Material</option>
@@ -116,8 +116,7 @@
                   <option st-id="" value="IncomigDetails">Incomig Details</option>
                   <option st-id="" value="Stock">Stock</option>
                   <option st-id="" value="QualityRecord">Quality Record</option>
-                  <option st-id="" value="PackagingInstrasction">Packaging Instrasction</option>
-                  <option st-id="" value="ExportDetails">Export Details</option>
+                  <option st-id="" value="PackagingInstrasction">Packaging Instrasction / Export Details</option>
                </select>
             </div>
          </div>
