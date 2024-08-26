@@ -140,6 +140,8 @@
                <select class="form-control" name="form_type_raw_material" id="form_type_raw_material">
                   <option st-id="" value="NA">Select Raw Material Form</option>
                   <option st-id="" value="SupplierPO">Supplier PO</option>
+                  <option st-id="" value="VendorPO">Vendor PO (With Supplier)</option>
+                  <option st-id="" value="VendorPOConfirmation">Vendor PO Confirmation (With Supplier)</option>
                   <option st-id="" value="SupplierPOConfirmation">Supplier PO Confirmation</option>      
                   <option st-id="" value="Challan">Challan</option>
                </select>
