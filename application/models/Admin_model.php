@@ -16204,19 +16204,19 @@ public function fetchseachbypartnumberreportdata($params,$finish_good_part_numbe
                 foreach ($fetch_result as $key => $value)
                 {
                     if($value['form_name']=='Supplier PO'){
-                        $color ='#800080';
+                        $color ='Red';
                     }
 
                     if($value['form_name']=='Vendor PO'){
-                        $color ='#800080';
+                        $color ='Blue';
                     }
 
                     if($value['form_name']=='Supplier PO Confirmation'){
-                        $color ='#800080';
+                        $color ='Green';
                     }
 
                     if($value['form_name']=='Challan'){
-                        $color ='#800080';
+                        $color ='black';
                     }
                     
 
