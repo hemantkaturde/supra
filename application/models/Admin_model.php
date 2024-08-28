@@ -1034,10 +1034,28 @@ class Admin_model extends CI_Model
                 $data[$counter]['generate_po'] = $value['generate_po'];
                 $data[$counter]['po_status'] = $value['po_status'];
                 $data[$counter]['action'] = '';
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewBuyerpo/".$value['id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>    &nbsp ";
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editBuyerpo/".$value['id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>    &nbsp";
-                // $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downloadbuyerpo/".$value['id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: 21px;cursor: pointer;' class='fa fa-file-pdf-o' aria-hidden='true'></i></a>    &nbsp";
-                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['id']."' class='fa fa-trash-o deleteBuyerpo' aria-hidden='true'></i>"; 
+
+
+                if($this->session->userdata('roleText')=='Superadmin'){
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewBuyerpo/".$value['id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>    &nbsp ";
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editBuyerpo/".$value['id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>    &nbsp";
+                    // $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downloadbuyerpo/".$value['id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: 21px;cursor: pointer;' class='fa fa-file-pdf-o' aria-hidden='true'></i></a>    &nbsp";
+                    $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['id']."' class='fa fa-trash-o deleteBuyerpo' aria-hidden='true'></i>"; 
+                }else{
+
+                    if($this->session->userdata('roleText')=='Sales'){
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewBuyerpo/".$value['id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>    &nbsp ";
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editBuyerpo/".$value['id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>    &nbsp";
+                        // $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downloadbuyerpo/".$value['id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: 21px;cursor: pointer;' class='fa fa-file-pdf-o' aria-hidden='true'></i></a>    &nbsp";
+                        $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['id']."' class='fa fa-trash-o deleteBuyerpo' aria-hidden='true'></i>"; 
+            
+                    }else{
+
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewBuyerpo/".$value['id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>    &nbsp ";
+                    }
+                }
+              
+              
                 $counter++; 
             }
         }
@@ -3475,9 +3493,21 @@ class Admin_model extends CI_Model
                 $data[$counter]['reported_date'] = $reported_date;
                 $data[$counter]['modified_date'] = $updatedDtm;
                 $data[$counter]['action'] = '';
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewincomingdetails/".$value['incomigid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editincomingdetails/".$value['incomigid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
-                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['incomigid']."' class='fa fa-trash-o deleteIncomingDetails' aria-hidden='true'></i>"; 
+
+                if($this->session->userdata('roleText')=='Superadmin'){
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewincomingdetails/".$value['incomigid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editincomingdetails/".$value['incomigid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+                    $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['incomigid']."' class='fa fa-trash-o deleteIncomingDetails' aria-hidden='true'></i>"; 
+                }else{
+                    if($this->session->userdata('roleText')==' Stock'){
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewincomingdetails/".$value['incomigid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editincomingdetails/".$value['incomigid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+                        $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['incomigid']."' class='fa fa-trash-o deleteIncomingDetails' aria-hidden='true'></i>"; 
+                    }else{
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewincomingdetails/".$value['incomigid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
+                    }
+                }
+
                 $counter++; 
             }
         }
@@ -3889,12 +3919,25 @@ class Admin_model extends CI_Model
                 $data[$counter]['buyer_po_date'] = $value['buyer_po_date'];
                 $data[$counter]['action'] = '';
 
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewpackinginstraction/".$value['packinginstarctionid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editpackinginstraction/".$value['packinginstarctionid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addpackinginstractiondetails/".$value['packinginstarctionid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>   &nbsp ";
-                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['packinginstarctionid']."' class='fa fa-trash-o deletepackinginstraction' aria-hidden='true'></i>  &nbsp ";
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editBuyerpo/".$value['buyerpoid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-check-circle-o' aria-hidden='true'></i></a>   &nbsp ";
 
+                if($this->session->userdata('roleText')=='Superadmin'){
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewpackinginstraction/".$value['packinginstarctionid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editpackinginstraction/".$value['packinginstarctionid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addpackinginstractiondetails/".$value['packinginstarctionid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>   &nbsp ";
+                    $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['packinginstarctionid']."' class='fa fa-trash-o deletepackinginstraction' aria-hidden='true'></i>  &nbsp ";
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editBuyerpo/".$value['buyerpoid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-check-circle-o' aria-hidden='true'></i></a>   &nbsp ";
+                }else{
+
+                    if($this->session->userdata('roleText')=='Sales'){
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewpackinginstraction/".$value['packinginstarctionid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editpackinginstraction/".$value['packinginstarctionid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addpackinginstractiondetails/".$value['packinginstarctionid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>   &nbsp ";
+                        $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['packinginstarctionid']."' class='fa fa-trash-o deletepackinginstraction' aria-hidden='true'></i>  &nbsp ";
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editBuyerpo/".$value['buyerpoid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-check-circle-o' aria-hidden='true'></i></a>   &nbsp ";
+                    }else{
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewpackinginstraction/".$value['packinginstarctionid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
+                    }
+                }
                 $counter++; 
             }
         }
@@ -5263,17 +5306,39 @@ class Admin_model extends CI_Model
                 $data[$counter]['supplier_po_number'] = $value['supplier_master'];
                 $data[$counter]['action'] = '';
 
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewreworkrejection/".$value['reworkrejectionid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editreworkrejection/".$value['reworkrejectionid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
-                
-                if($value['vendor_supplier_name']=='supplier'){
-                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downloadreworkrejection/".$value['reworkrejectionid']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
-                }else{
-                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downloadreworkrejectionvendor/".$value['reworkrejectionid']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
-                }
-                
 
-                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['reworkrejectionid']."' class='fa fa-trash-o deletereworkrejection' aria-hidden='true'></i>"; 
+
+                if($this->session->userdata('roleText')=='Superadmin'){
+
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewreworkrejection/".$value['reworkrejectionid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editreworkrejection/".$value['reworkrejectionid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+                    
+                    if($value['vendor_supplier_name']=='supplier'){
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downloadreworkrejection/".$value['reworkrejectionid']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
+                    }else{
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downloadreworkrejectionvendor/".$value['reworkrejectionid']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
+                    }
+                    $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['reworkrejectionid']."' class='fa fa-trash-o deletereworkrejection' aria-hidden='true'></i>"; 
+
+                }else{
+
+                    if($this->session->userdata('roleText')==' Stock'){
+
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewreworkrejection/".$value['reworkrejectionid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editreworkrejection/".$value['reworkrejectionid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+                        
+                        if($value['vendor_supplier_name']=='supplier'){
+                            $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downloadreworkrejection/".$value['reworkrejectionid']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
+                        }else{
+                            $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downloadreworkrejectionvendor/".$value['reworkrejectionid']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
+                        }
+                        $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['reworkrejectionid']."' class='fa fa-trash-o deletereworkrejection' aria-hidden='true'></i>"; 
+
+                    }else{
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewreworkrejection/".$value['reworkrejectionid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
+                    }
+
+                }
 
                 $counter++; 
             }
@@ -5739,18 +5804,37 @@ class Admin_model extends CI_Model
                 $data[$counter]['action'] = '';
 
 
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewchallanform/".$value['challan_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editchallanform/".$value['challan_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
-            
+                if($this->session->userdata('roleText')=='Superadmin'){
 
-                if($value['vendor_supplier_type']=='supplier'){
-                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downloadchallanform/".$value['challan_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewchallanform/".$value['challan_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editchallanform/".$value['challan_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+                    if($value['vendor_supplier_type']=='supplier'){
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downloadchallanform/".$value['challan_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
+                    }else{
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downloadchallanformvendor/".$value['challan_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
+                    }
+                    $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['challan_id']."' class='fa fa-trash-o deletechallanform' aria-hidden='true'></i>"; 
                 }else{
-                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downloadchallanformvendor/".$value['challan_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
+
+                    if($this->session->userdata('roleText')=='Stock'){
+
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewchallanform/".$value['challan_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editchallanform/".$value['challan_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+                        if($value['vendor_supplier_type']=='supplier'){
+                            $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downloadchallanform/".$value['challan_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
+                        }else{
+                            $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downloadchallanformvendor/".$value['challan_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
+                        }
+                        $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['challan_id']."' class='fa fa-trash-o deletechallanform' aria-hidden='true'></i>";     
+
+                    }else{
+
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewchallanform/".$value['challan_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
+                    }
+
                 }
-            
-               
-                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['challan_id']."' class='fa fa-trash-o deletechallanform' aria-hidden='true'></i>"; 
+                
+                
                 $counter++; 
             }
         }
@@ -6926,9 +7010,21 @@ class Admin_model extends CI_Model
                 $data[$counter]['buyer_name'] = $value['buyer_name'];
                 $data[$counter]['buyer_po'] = $value['sales_order_number'];
                 $data[$counter]['action'] = '';
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewqulityrecordform/".$value['quality_records_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editqulityrecordform/".$value['quality_records_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
-                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['quality_records_id']."' class='fa fa-trash-o deletequlityrecords' aria-hidden='true'></i>"; 
+
+                if($this->session->userdata('roleText')=='Superadmin'){
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewqulityrecordform/".$value['quality_records_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editqulityrecordform/".$value['quality_records_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+                    $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['quality_records_id']."' class='fa fa-trash-o deletequlityrecords' aria-hidden='true'></i>"; 
+                }else{
+
+                    if($this->session->userdata('roleText')=='QC'){
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewqulityrecordform/".$value['quality_records_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editqulityrecordform/".$value['quality_records_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+                        $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['quality_records_id']."' class='fa fa-trash-o deletequlityrecords' aria-hidden='true'></i>"; 
+                    }else{
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewqulityrecordform/".$value['quality_records_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
+                    }
+                }
                 $counter++; 
             }
         }
@@ -7237,11 +7333,24 @@ class Admin_model extends CI_Model
                 $data[$counter]['buyer_delivery_date'] = $value['delivery_date'];
                 $data[$counter]['action'] = '';
 
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewstcokformdetails/".$value['stock_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editstcokformdetails/".$value['stock_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."stockrejectionform' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-ban' aria-hidden='true'></i></a>   &nbsp ";
-                // $data[$counter]['action'] .= "<a href='".ADMIN_PATH."searchstock' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-stack-exchange' aria-hidden='true'></i></a>   &nbsp ";
-                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['stock_id']."' class='fa fa-trash-o deletestockform' aria-hidden='true'></i>"; 
+                if($this->session->userdata('roleText')=='Superadmin'){
+
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewstcokformdetails/".$value['stock_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editstcokformdetails/".$value['stock_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."stockrejectionform' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-ban' aria-hidden='true'></i></a>   &nbsp ";
+                    $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['stock_id']."' class='fa fa-trash-o deletestockform' aria-hidden='true'></i>"; 
+                }else{
+
+                    if($this->session->userdata('roleText')==' Stock'){
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewstcokformdetails/".$value['stock_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editstcokformdetails/".$value['stock_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."stockrejectionform' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-ban' aria-hidden='true'></i></a>   &nbsp ";
+                        $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['stock_id']."' class='fa fa-trash-o deletestockform' aria-hidden='true'></i>"; 
+                    }else{
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewstcokformdetails/".$value['stock_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
+                    }
+
+                }
                 $counter++; 
             }
         }
@@ -8564,10 +8673,28 @@ class Admin_model extends CI_Model
                 $data[$counter]['vendor_po_number'] = $value['po_number'];
                 $data[$counter]['remark'] =$value['rejectionremark'];
                 $data[$counter]['action'] = '';
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editrejetionform/".$value['rejectionformid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addrejectionformitemsdata/".$value['rejectionformid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>   &nbsp ";
-                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['rejectionformid']."' class='fa fa-trash-o deleterejectionform' aria-hidden='true'></i>"; 
 
+
+                if($this->session->userdata('roleText')=='Superadmin'){
+
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editrejetionform/".$value['rejectionformid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addrejectionformitemsdata/".$value['rejectionformid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>   &nbsp ";
+                    $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['rejectionformid']."' class='fa fa-trash-o deleterejectionform' aria-hidden='true'></i>"; 
+                }else{
+
+                    if($this->session->userdata('roleText')==' Stock'){
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editrejetionform/".$value['rejectionformid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addrejectionformitemsdata/".$value['rejectionformid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>   &nbsp ";
+                        $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['rejectionformid']."' class='fa fa-trash-o deleterejectionform' aria-hidden='true'></i>"; 
+
+                    }else{
+
+
+
+                    }
+
+                }
+                
                 $counter++; 
             }
         }
@@ -11848,10 +11975,26 @@ public function getpreexportdata($params){
 
             $data[$counter]['remark'] =$value['mode_of_shipment'];
             $data[$counter]['action'] ='';
-            $data[$counter]['action'] .= "<a href='".ADMIN_PATH."exportdetailsitemdetails/".$value['export_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>   &nbsp ";
-            $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editpreexport/".$value['export_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
-            $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downloadpreexportform/".$value['export_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
-            $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['export_id']."' class='fa fa-trash-o deletepreexport' aria-hidden='true'></i>"; 
+
+            if($this->session->userdata('roleText')=='Superadmin'){
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."exportdetailsitemdetails/".$value['export_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editpreexport/".$value['export_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downloadpreexportform/".$value['export_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['export_id']."' class='fa fa-trash-o deletepreexport' aria-hidden='true'></i>"; 
+            }else{
+                if($this->session->userdata('roleText')==' Stock'){
+
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."exportdetailsitemdetails/".$value['export_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>   &nbsp ";
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editpreexport/".$value['export_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downloadpreexportform/".$value['export_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
+                    $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['export_id']."' class='fa fa-trash-o deletepreexport' aria-hidden='true'></i>"; 
+          
+                }else{
+
+
+                }
+            }
+            
             $counter++; 
         }
     }
@@ -12433,10 +12576,21 @@ public function getfetchsalestrackingReportdata($params){
             $data[$counter]['igst_rcved_date'] =  $value['igst_rcved_date'];
             $data[$counter]['no_of_ctns'] =  $value['no_of_ctns'];
             $data[$counter]['action'] = '';
-            $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewsalestrackingreport/".$value['sales_tracking_report']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>  &nbsp";
-            $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editsalestrackingreport/".$value['sales_tracking_report']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>  &nbsp";
-            $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['sales_tracking_report']."' class='fa fa-trash-o deletesalestracking' aria-hidden='true'></i>"; 
 
+            if($this->session->userdata('roleText')=='Superadmin'){
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewsalestrackingreport/".$value['sales_tracking_report']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>  &nbsp";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editsalestrackingreport/".$value['sales_tracking_report']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>  &nbsp";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['sales_tracking_report']."' class='fa fa-trash-o deletesalestracking' aria-hidden='true'></i>"; 
+            }else{
+                if($this->session->userdata('roleText')=='Sales'){
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewsalestrackingreport/".$value['sales_tracking_report']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>  &nbsp";
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editsalestrackingreport/".$value['sales_tracking_report']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>  &nbsp";
+                    $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['sales_tracking_report']."' class='fa fa-trash-o deletesalestracking' aria-hidden='true'></i>"; 
+                }else{
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewsalestrackingreport/".$value['sales_tracking_report']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>  &nbsp";
+                }
+
+            }
             $counter++; 
         }
     }
@@ -14163,10 +14317,23 @@ public function fetchadebitnotedata($params){
                 $data[$counter]['debit_amount'] = $value['debit_amount'];
                 $data[$counter]['payable_amount'] = $value['payable_amount'];
                 $data[$counter]['action'] .='';
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewchadebitnote/".$value['debit_note_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editchadebitnote/".$value['debit_note_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>  &nbsp";
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downlaodchadebitnote/".$value['debit_note_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
-                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['debit_note_id']."' class='fa fa-trash-o deletechadebitnote' aria-hidden='true'></i>"; 
+
+                if($this->session->userdata('roleText')=='Superadmin'){
+
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewchadebitnote/".$value['debit_note_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editchadebitnote/".$value['debit_note_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>  &nbsp";
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downlaodchadebitnote/".$value['debit_note_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
+                    $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['debit_note_id']."' class='fa fa-trash-o deletechadebitnote' aria-hidden='true'></i>"; 
+                }else{
+                    if($this->session->userdata('roleText')=='Sales'){
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewchadebitnote/".$value['debit_note_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editchadebitnote/".$value['debit_note_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>  &nbsp";
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downlaodchadebitnote/".$value['debit_note_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
+                        $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['debit_note_id']."' class='fa fa-trash-o deletechadebitnote' aria-hidden='true'></i>"; 
+                    }else{
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewchadebitnote/".$value['debit_note_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
+                    }
+                }
                 $counter++; 
             }
         }
@@ -14860,10 +15027,22 @@ public function fetchcustomercompalintreportdata($params){
             $data[$counter]['invoice_date'] = $value['invoice_date'];
             $data[$counter]['action'] .='';
 
-            $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewcustomercomplaint/".$value['coustmor_compalint_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
-            $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editcustomercomplaint/".$value['coustmor_compalint_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>    &nbsp";
-            $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downlaodcustomercomplaint/".$value['coustmor_compalint_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
-            $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['coustmor_compalint_id']."' class='fa fa-trash-o deletecustomercompalintreport' aria-hidden='true'></i>"; 
+            if($this->session->userdata('roleText')=='Superadmin'){
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewcustomercomplaint/".$value['coustmor_compalint_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editcustomercomplaint/".$value['coustmor_compalint_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>    &nbsp";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downlaodcustomercomplaint/".$value['coustmor_compalint_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['coustmor_compalint_id']."' class='fa fa-trash-o deletecustomercompalintreport' aria-hidden='true'></i>"; 
+            }else{
+                if($this->session->userdata('roleText')=='QC'){
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewcustomercomplaint/".$value['coustmor_compalint_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editcustomercomplaint/".$value['coustmor_compalint_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>    &nbsp";
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downlaodcustomercomplaint/".$value['coustmor_compalint_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
+                    $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['coustmor_compalint_id']."' class='fa fa-trash-o deletecustomercompalintreport' aria-hidden='true'></i>"; 
+                }else{
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewcustomercomplaint/".$value['coustmor_compalint_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
+                }
+
+            }
             $counter++; 
         }
     }
@@ -15204,10 +15383,25 @@ public function getsuppliervendorrportdata($params){
             $data[$counter]['invoice_number'] = $value['invoice_number'];
             $data[$counter]['invoice_date'] = $value['invoice_date'];
             $data[$counter]['action'] = '';
-            $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewsuppliervendorcompalint/".$value['suppliervendor_compalint_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
-            $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editsuppliervendorcompalint/".$value['suppliervendor_compalint_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
-            $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downlaodsuppliervendorcomplaint/".$value['suppliervendor_compalint_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>   &nbsp ";
-            $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['suppliervendor_compalint_id']."' class='fa fa-trash-o deletesuppliervendorcompalintreport' aria-hidden='true'></i>"; 
+
+            if($this->session->userdata('roleText')=='Superadmin'){
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewsuppliervendorcompalint/".$value['suppliervendor_compalint_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editsuppliervendorcompalint/".$value['suppliervendor_compalint_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downlaodsuppliervendorcomplaint/".$value['suppliervendor_compalint_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['suppliervendor_compalint_id']."' class='fa fa-trash-o deletesuppliervendorcompalintreport' aria-hidden='true'></i>"; 
+            }else{
+
+                if($this->session->userdata('roleText')=='QC'){
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewsuppliervendorcompalint/".$value['suppliervendor_compalint_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editsuppliervendorcompalint/".$value['suppliervendor_compalint_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downlaodsuppliervendorcomplaint/".$value['suppliervendor_compalint_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>   &nbsp ";
+                    $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['suppliervendor_compalint_id']."' class='fa fa-trash-o deletesuppliervendorcompalintreport' aria-hidden='true'></i>"; 
+                }else{
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewsuppliervendorcompalint/".$value['suppliervendor_compalint_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
+                }
+
+            }
+           
             $counter++; 
         }
     }
@@ -16369,9 +16563,21 @@ public function updatestockaftercalculation($balence_qty_in_pcs,$finishgood_id,$
                 $data[$counter]['remark'] =$value['mainremark'];
                 $data[$counter]['action'] = '';
 
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewuspincomig/".$value['usp_incoming_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."edituspincomig/".$value['usp_incoming_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
-                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['usp_incoming_id']."' class='fa fa-trash-o deleteuspincoming' aria-hidden='true'></i>"; 
+                if($this->session->userdata('roleText')=='Superadmin'){
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewuspincomig/".$value['usp_incoming_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."edituspincomig/".$value['usp_incoming_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+                    $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['usp_incoming_id']."' class='fa fa-trash-o deleteuspincoming' aria-hidden='true'></i>"; 
+                }else{
+
+                    if($this->session->userdata('roleText')==' Stock'){
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewuspincomig/".$value['usp_incoming_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."edituspincomig/".$value['usp_incoming_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+                        $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['usp_incoming_id']."' class='fa fa-trash-o deleteuspincoming' aria-hidden='true'></i>"; 
+                    }else{
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewuspincomig/".$value['usp_incoming_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
+                    }
+                }
+                
                 $counter++; 
             }
         }

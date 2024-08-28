@@ -16,8 +16,11 @@
             </div>
             <div class="col-xs-6 text-right">
                 <div class="form-group">
+                <?php if($this->session->userdata('roleText')=='Superadmin' || $this->session->userdata('roleText')=='QC' ){ ?>
+
                     <a class="btn btn-primary" href="<?php echo base_url(); ?>addnewsuppliervendorcomplaint">
                         <i class="fa fa-plus"></i> Add Supplier Vendor Compliant</a>
+                <?php } ?>
                 </div>
             </div>
         </div>

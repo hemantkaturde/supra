@@ -16,8 +16,11 @@
             </div>
             <div class="col-xs-6 text-right">
                 <div class="form-group">
+                <?php if($this->session->userdata('roleText')=='Superadmin' || $this->session->userdata('roleText')=='Sales' ){ ?>
                     <a class="btn btn-primary" href="<?php echo base_url(); ?>addnewpackinginstruction">
                         <i class="fa fa-plus"></i> Add Packing Instructions</a>
+                 <?php } ?>
+
                 </div>
             </div>
         </div>
