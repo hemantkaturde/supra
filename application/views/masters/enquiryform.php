@@ -16,8 +16,10 @@
             </div>
             <div class="col-xs-6 text-right">
                 <div class="form-group">
+                   <?php if($this->session->userdata('roleText')=='Superadmin' || $this->session->userdata('roleText')=='Purchase' ){ ?>
                     <a class="btn btn-primary" href="<?php echo base_url(); ?>addnewenquiryform">
                         <i class="fa fa-plus"></i> Add Enquiry Form</a>
+                    <?php } ?>
                 </div>
             </div>
         </div>
