@@ -17748,17 +17748,17 @@ public function download_sales_tracking_export_to_excel($sales_tracking_report_n
         foreach ($empInfo as $element) {
             $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $element['sr_no']);
             $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $element['invoice_number']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $element['buyer_invoice_date']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, date('d-m-Y',strtotime($element['buyer_invoice_date'])));
             $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['buyer_name']);
             $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['currency']);
             $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['inv_amount']);
             $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['port_code']);
             $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $element['sb_no']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, $element['sb_date']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('J' . $rowCount, $element['payment_recvd_date']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, date('d-m-Y',strtotime($element['sb_date'])));
+            $objPHPExcel->getActiveSheet()->SetCellValue('J' . $rowCount, date('d-m-Y',strtotime($element['payment_recvd_date'])));
             $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, $element['payment_rcivd_amt']);
             $objPHPExcel->getActiveSheet()->SetCellValue('L' . $rowCount, $element['exchange_rate_as_per_sb']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('M' . $rowCount, $element['brc_number_and_dt']);   
+            $objPHPExcel->getActiveSheet()->SetCellValue('M' . $rowCount, date('d-m-Y',strtotime($element['brc_number_and_dt'])));   
             $objPHPExcel->getActiveSheet()->SetCellValue('N' . $rowCount, $element['transaction_id']);   
             $objPHPExcel->getActiveSheet()->SetCellValue('O' . $rowCount, $element['brc_value']);   
             $objPHPExcel->getActiveSheet()->SetCellValue('P' . $rowCount, $element['credit_note_number']);   
@@ -17826,17 +17826,17 @@ public function download_sales_tracking_export_to_excel($sales_tracking_report_n
            foreach ($empInfo as $element) {
                $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $element['sr_no']);
                $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $element['invoice_number']);
-               $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $element['buyer_invoice_date']);
+               $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, date('d-m-Y',strtotime($element['buyer_invoice_date'])));
                $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['buyer_name']);
                $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['mode_of_shipment']);
                $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['currency']);
                $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['inv_amount']);
                $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $element['port_code']);
                $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, $element['sb_no']);
-               $objPHPExcel->getActiveSheet()->SetCellValue('J' . $rowCount, $element['sb_date']);
-               $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, $element['payment_recvd_date']);
+               $objPHPExcel->getActiveSheet()->SetCellValue('J' . $rowCount, date('d-m-Y',strtotime($element['sb_date'])));
+               $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, date('d-m-Y',strtotime($element['payment_recvd_date'])));
                $objPHPExcel->getActiveSheet()->SetCellValue('L' . $rowCount, $element['payment_rcivd_amt']);
-               $objPHPExcel->getActiveSheet()->SetCellValue('M' . $rowCount, $element['brc_number_and_dt']);   
+               $objPHPExcel->getActiveSheet()->SetCellValue('M' . $rowCount, date('d-m-Y',strtotime($element['brc_number_and_dt'])));   
                $objPHPExcel->getActiveSheet()->SetCellValue('N' . $rowCount, $element['transaction_id']);   
                $objPHPExcel->getActiveSheet()->SetCellValue('O' . $rowCount, $element['brc_value']);   
                $objPHPExcel->getActiveSheet()->SetCellValue('P' . $rowCount, $element['credit_note_number']);   
@@ -17904,22 +17904,22 @@ public function download_sales_tracking_export_to_excel($sales_tracking_report_n
              $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $element['invoice_number']);
              $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $element['buyer_name']);
              $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $element['bl_awb_no']);
-             $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['bl_awb_date']);
+             $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, date('d-m-Y',strtotime($element['bl_awb_date'])));
              $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['sb_no']);
-             $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['sb_date']);
+             $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, date('d-m-Y',strtotime($element['sb_date'])));
              $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['mode_of_shipment']);
              $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $element['cha_name']);
              $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, $element['clearance_done_by']);
           
              $objPHPExcel->getActiveSheet()->SetCellValue('J' . $rowCount, $element['carrier_bill_number']);
-             $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, $element['carrier_bill_date']);
+             $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, date('d-m-Y',strtotime($element['carrier_bill_date'])));
              $objPHPExcel->getActiveSheet()->SetCellValue('L' . $rowCount, $element['bill_amt']);
              $objPHPExcel->getActiveSheet()->SetCellValue('M' . $rowCount, $element['bill_paid_amount']);
              $objPHPExcel->getActiveSheet()->SetCellValue('N' . $rowCount, $element['tds_amt']);
              $objPHPExcel->getActiveSheet()->SetCellValue('O' . $rowCount, $element['difference_debit_note_amt']);
              $objPHPExcel->getActiveSheet()->SetCellValue('P' . $rowCount, $element['debit_amount_reason']);
              $objPHPExcel->getActiveSheet()->SetCellValue('Q' . $rowCount, $element['cheque_no']);
-             $objPHPExcel->getActiveSheet()->SetCellValue('R' . $rowCount, $element['bill_paid_date']);
+             $objPHPExcel->getActiveSheet()->SetCellValue('R' . $rowCount, date('d-m-Y',strtotime($element['bill_paid_date'])));
 
              $rowCount++;
          }
@@ -17972,11 +17972,11 @@ public function download_sales_tracking_export_to_excel($sales_tracking_report_n
          $rowCount = 2;
          foreach ($empInfo as $element) {
              $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $element['invoice_number']);
-             $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $element['buyer_invoice_date']);
+             $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, date('d-m-Y',strtotime($element['buyer_invoice_date'])));
              $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $element['mode_of_shipment']);
              $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['port_code']);
              $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['sb_no']);
-             $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['sb_date']);
+             $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, date('d-m-Y',strtotime($element['sb_date'])));
              $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['EGM_status']);
              $rowCount++;
          }
@@ -18034,15 +18034,15 @@ public function download_sales_tracking_export_to_excel($sales_tracking_report_n
          $rowCount = 2;
          foreach ($empInfo as $element) {
              $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $element['invoice_number']);
-             $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $element['buyer_invoice_date']);
+             $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, date('d-m-Y',strtotime($element['buyer_invoice_date'])));
              $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $element['mode_of_shipment']);
              $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['inv_amount']);
              $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['exchange_rate_as_per_sb']);
              $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['sb_no']);
-             $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['sb_date']);
+             $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, date('d-m-Y',strtotime($element['sb_date'])));
              $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $element['fob_amount_rs']);
              $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, $element['igst_value']);
-             $objPHPExcel->getActiveSheet()->SetCellValue('J' . $rowCount, $element['igst_rcved_date']);
+             $objPHPExcel->getActiveSheet()->SetCellValue('J' . $rowCount, date('d-m-Y',strtotime($element['igst_rcved_date'])));
              $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, $element['igst_rcved_amt']);
              $rowCount++;
          }
@@ -18096,13 +18096,13 @@ public function download_sales_tracking_export_to_excel($sales_tracking_report_n
         $rowCount = 2;
         foreach ($empInfo as $element) {
             $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $element['invoice_number']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $element['buyer_invoice_date']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, date('d-m-Y',strtotime($element['buyer_invoice_date'])));
             $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $element['buyer']);
             $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['sb_no']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['sb_date']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, date('d-m-Y',strtotime($element['sb_date'])));
             $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['drawback']);
             $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['dbk_recd_amount']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $element['dbk_recd_date']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, date('d-m-Y',strtotime($element['dbk_recd_date'])));
             $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, '');
             $rowCount++;
         }
@@ -18156,7 +18156,7 @@ public function download_sales_tracking_export_to_excel($sales_tracking_report_n
         $rowCount = 2;
         foreach ($empInfo as $element) {
             $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $element['invoice_number']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $element['buyer_invoice_date']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, date('d-m-Y',strtotime($element['buyer_invoice_date'])));
             // $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, '');
             $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $element['buyer']);
             $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['mode_of_shipment']);
