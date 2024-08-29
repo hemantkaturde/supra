@@ -16288,16 +16288,17 @@
 
 			var balence_qty_in_pcs = $('#balence_qty_in_pcs').val();
 			var ready_for_exp_pcs = $('#ready_for_exp_pcs').val();
+			var total_exp_qty_in_pcs = $('#total_exp_qty_in_pcs').val();
 			var stock_id = $('#stock_id').val();
 
 			$.ajax({
-					url : "<?php echo ADMIN_PATH;?>admin/printstock/"+stock_id+'/'+balence_qty_in_pcs+'/'+ready_for_exp_pcs,
+					url : "<?php echo ADMIN_PATH;?>admin/printstock/"+stock_id+'/'+balence_qty_in_pcs+'/'+ready_for_exp_pcs+'/'+total_exp_qty_in_pcs,
 					type: "POST",
-					 data : {'ready_for_exp_pcs' : ready_for_exp_pcs,'balence_qty_in_pcs':balence_qty_in_pcs,'stock_id':stock_id},
+					 data : {'ready_for_exp_pcs' : ready_for_exp_pcs,'balence_qty_in_pcs':balence_qty_in_pcs,'stock_id':stock_id,'total_exp_qty_in_pcs':total_exp_qty_in_pcs},
 					success: function(data, textStatus, jqXHR)
 					{
 
-						window.location.href = "<?php echo base_url().'admin/printstock/'?>"+stock_id+'/'+balence_qty_in_pcs+'/'+ready_for_exp_pcs;
+						window.location.href = "<?php echo base_url().'admin/printstock/'?>"+stock_id+'/'+balence_qty_in_pcs+'/'+ready_for_exp_pcs+'/'+total_exp_qty_in_pcs;
 						$(".loader_ajax").hide();
 						// if(data == "failure")
 						// {

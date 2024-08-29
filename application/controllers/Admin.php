@@ -19325,7 +19325,7 @@ public function fetchseachbypartnumberreport($finish_good_part_number,$form_type
 
 }
 
-public function printstock($stock_id,$balence_qty_in_pcs,$ready_for_exp_pcs){
+public function printstock($stock_id,$balence_qty_in_pcs,$ready_for_exp_pcs,$total_exp_qty_in_pcs){
 
 
     // $ready_for_exp_pcs = $this->input->post('ready_for_exp_pcs');
@@ -19494,6 +19494,9 @@ public function printstock($stock_id,$balence_qty_in_pcs,$ready_for_exp_pcs){
                 <tr style="border: 1px solid black;">
                         <td style="border: 1px solid black;padding: 10px;">
                             <p><b>Ready For Export In Pcs : </b>'.round($ready_for_exp_pcs,3).'</p>    
+                        </td>  
+                         <td style="border: 1px solid black;padding: 10px;">
+                            <p><b>Total Export In Pcs : </b>'.round($total_exp_qty_in_pcs,3).'</p>    
                         </td>  
                         <td style="border: 1px solid black;padding: 10px;">
                             <p><b>Balance Qty In Pcs : </b>'.$balence_qty_in_pcs.'</p>    
