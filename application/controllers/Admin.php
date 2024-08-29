@@ -9135,13 +9135,13 @@ class Admin extends BaseController
         }
     }
 
-    public function searchstock($stock_id){
+    public function searchstock($stock_id,$item_id){
 
         $process = 'Search Stock';
         $processFunction = 'Admin/searchstock';
         $this->logrecord($process,$processFunction);
         $this->global['pageTitle'] = 'Search Stock';
-        $data['getsearchstockvendordeatils']= $this->admin_model->getsearchstockvendordeatils($stock_id);
+        $data['getsearchstockvendordeatils']= $this->admin_model->getsearchstockvendordeatils($stock_id,$item_id);
         $data['getallitemsfromfgorrawmaterial']= $this->admin_model->getallitemsfromfgorrawmaterial();
         $data['getpreviousstock']= $this->admin_model->getpreviousstock($data['getsearchstockvendordeatils'][0]['part_number_id'],$data['getsearchstockvendordeatils'][0]['stock_id']);
         $this->loadViews("masters/searchstock", $this->global, $data, NULL);  
