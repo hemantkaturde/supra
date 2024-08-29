@@ -162,6 +162,20 @@
                                         </div>
                                     </div>
 
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                                <label for="mode_of_communication">Mode of Communication</label>
+                                                <select class="form-control" name="mode_of_communication" id="mode_of_communication">
+                                                    <option st-id="" value="">Select Mode of Communication</option>
+                                                    <option st-id="" value="By Call" <?php if($getSupplierpoconfirmationdetails['mode_of_communication']=='By Call'){ echo 'selected';} ?>>By Call</option>
+                                                    <option st-id="" value="By Email" <?php if($getSupplierpoconfirmationdetails['mode_of_communication']=='By Email'){ echo 'selected';} ?>>By Email</option>
+                                                    <option st-id="" value="By WhatsApp" <?php if($getSupplierpoconfirmationdetails['mode_of_communication']=='By WhatsApp'){ echo 'selected';} ?>>By WhatsApp</option>                                        
+                                                </select>
+                                            <p class="error mode_of_communication_error"></p>
+                                        </div>
+                                    </div>
+
+
 
                                     <div class="col-md-12">
                                             <div class="form-group">

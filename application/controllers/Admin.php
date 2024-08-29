@@ -3224,13 +3224,14 @@ class Admin extends BaseController
             $this->form_validation->set_rules('confirmed_with','Confirmed With','trim|required');
             $this->form_validation->set_rules('confirmed_with','Material Sent','trim');
             $this->form_validation->set_rules('material_receipt_confirmation','Material Receipt Confirmation','trim');
+            $this->form_validation->set_rules('mode_of_communication','Mode of Communication','trim');
             $this->form_validation->set_rules('remark','Remark','trim');
 
 
             if($this->form_validation->run() == FALSE)
             {
                 $save_supplierconfirmation_response['status'] = 'failure';
-                $save_supplierconfirmation_response['error'] = array( 'po_number'=>strip_tags(form_error('po_number')),'date'=>strip_tags(form_error('date')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'po_confirmed'=>strip_tags(form_error('po_confirmed')),'confirmed_date'=>strip_tags(form_error('confirmed_date')),'confirmed_with'=>strip_tags(form_error('confirmed_with')),'remark'=>strip_tags(form_error('remark')));
+                $save_supplierconfirmation_response['error'] = array( 'po_number'=>strip_tags(form_error('po_number')),'date'=>strip_tags(form_error('date')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'po_confirmed'=>strip_tags(form_error('po_confirmed')),'confirmed_date'=>strip_tags(form_error('confirmed_date')),'confirmed_with'=>strip_tags(form_error('confirmed_with')),'remark'=>strip_tags(form_error('remark')),'mode_of_communication'=>strip_tags(form_error('mode_of_communication')));
             }else{
 
 
@@ -3248,6 +3249,7 @@ class Admin extends BaseController
                     'confirmed_with' =>    trim($this->input->post('confirmed_with')),
                     'material_sent' =>    trim($this->input->post('material_sent')),
                     'material_receipt_confirmation' =>    trim($this->input->post('material_receipt_confirmation')),
+                    'mode_of_communication'=>trim($this->input->post('mode_of_communication')),
                     'remark' =>    trim($this->input->post('remark')),
                 );
 
@@ -3261,7 +3263,7 @@ class Admin extends BaseController
                         $update_last_inserted_id_supplier_po_confirmation = $this->admin_model->update_last_inserted_id_supplier_po_confirmation($saveSupplierpoconfirmationdata);
                         if($update_last_inserted_id_supplier_po_confirmation){
                              $save_supplierconfirmation_response['status'] = 'success';
-                             $save_supplierconfirmation_response['error'] = array( 'po_number'=>strip_tags(form_error('po_number')),'date'=>strip_tags(form_error('date')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'po_confirmed'=>strip_tags(form_error('po_confirmed')),'confirmed_date'=>strip_tags(form_error('confirmed_date')),'confirmed_with'=>strip_tags(form_error('confirmed_with')),'remark'=>strip_tags(form_error('remark')));
+                             $save_supplierconfirmation_response['error'] = array( 'po_number'=>strip_tags(form_error('po_number')),'date'=>strip_tags(form_error('date')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'po_confirmed'=>strip_tags(form_error('po_confirmed')),'confirmed_date'=>strip_tags(form_error('confirmed_date')),'confirmed_with'=>strip_tags(form_error('confirmed_with')),'remark'=>strip_tags(form_error('remark')),'mode_of_communication'=>strip_tags(form_error('mode_of_communication')));
                          }
                     }
                // }
