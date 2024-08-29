@@ -16073,9 +16073,8 @@
 																				var balenceitems_data = jQuery.parseJSON( data );
 
 										
-																				    console.log(balence_qty_in_pcs);
-																					console.log('Hemant');
-
+																				    // console.log(balence_qty_in_pcs);
+																					// console.log('Hemant');
 
 																					$('#balence_qty_in_pcs').val(parseFloat(balenceitems_data.balence_qty_in_pcs).toFixed(2));
 																					$('#balence_qty_in_kgs').val(parseFloat(balenceitems_data.balence_qty_in_kgs).toFixed(3));
@@ -16124,10 +16123,13 @@
 																					}
 
 
-																				
+																					var balence_qty_in_pcs_calculation = $('#balence_qty_in_pcs').val();
 
 																					$('#balence_qty_in_kgs').val('');
-																					var precalculation_ready_for_export_kgs = (parseFloat(previous_stock_bal) + parseFloat(ready_for_exp_kgs)) - parseFloat(total_export_qty_kgs);
+																					// var precalculation_ready_for_export_kgs = (parseFloat(previous_stock_bal) + parseFloat(ready_for_exp_kgs)) - parseFloat(total_export_qty_kgs);
+
+																					 var precalculation_ready_for_export_kgs = (parseFloat(balence_qty_in_pcs_calculation)) * parseFloat(balenceitems_data.fg_net_weigh);
+
 
 																					if(isNaN(precalculation_ready_for_export_kgs)){
 																						$('#balence_qty_in_kgs').val(0);
