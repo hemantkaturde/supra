@@ -173,6 +173,19 @@
                                         </div>
                                     </div>
 
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                                <label for="usp_status">USP Status</label>
+                                                <select class="form-control searchfilter" name="usp_status" id="usp_status">
+                                                    <option st-id="" value="">Select Status</option>
+                                                    <option st-id="" value="Open" <?php if($getitemdetaiilsuspincoming[0]['pre_status']=='Open'){ echo 'selected'; } ?>>Open</option>
+                                                    <option st-id="" value="Close" <?php if($getitemdetaiilsuspincoming[0]['pre_status']=='Close'){ echo 'selected'; } ?>>Close</option>
+                                                </select>
+                                            <p class="error usp_status_error"></p>
+                                        </div>
+                                    </div>
+
+
                                     <!-- <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="remark">Remark</label>

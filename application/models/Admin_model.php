@@ -16766,6 +16766,7 @@ public function updatestockaftercalculation($balence_qty_in_pcs,$finishgood_id,$
             $this->db->or_where(TBL_USP.".usp_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_CHALLAN_FORM.".challan_date LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_USP_INCOMING_FORM.".usp_id_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_USP_INCOMING_FORM.".usp_status LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_CHALLAN_FORM.".challan_no LIKE '%".$params['search']['value']."%')");
         }
 
@@ -16788,6 +16789,7 @@ public function updatestockaftercalculation($balence_qty_in_pcs,$finishgood_id,$
             $this->db->or_where(TBL_USP.".usp_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_CHALLAN_FORM.".challan_date LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_USP_INCOMING_FORM.".usp_id_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_USP_INCOMING_FORM.".usp_status LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_CHALLAN_FORM.".challan_no LIKE '%".$params['search']['value']."%')");
         }
 
@@ -16809,6 +16811,7 @@ public function updatestockaftercalculation($balence_qty_in_pcs,$finishgood_id,$
                 $data[$counter]['challan_number_id'] =$value['challan_no'];
                 $data[$counter]['challan_date'] =$value['challan_date'];
                 $data[$counter]['report_by'] =$value['report_by'];
+                $data[$counter]['usp_status'] =$value['usp_status'];
                 $data[$counter]['remark'] =$value['mainremark'];
                 $data[$counter]['action'] = '';
 

@@ -22008,6 +22008,8 @@
 					{ "width": "15%", "targets": 5 },
 					{ "width": "15%", "targets": 6 },
 					{ "width": "10%", "targets": 7 },
+					{ "width": "10%", "targets": 8 },
+
 
 				],
 				responsive: true,
@@ -22277,6 +22279,7 @@
 			   var pre_challan_date =   $('#challan_date').val();
 			   var pre_report_by =   $('#report_by').val();
 			   var pre_remark =   $('#remark').val();
+			   var pre_status =   $('#usp_status').val();
 
 			   var usp_incoming_id = $("#usp_incoming_id").val();
 
@@ -22286,7 +22289,7 @@
 				url : "<?php echo base_url();?>admin/saveuspincoming_item_form",
 				type: "POST",
 				 //data : formData,
-				 data :{part_number:part_number,description:description,challan_qty:challan_qty,net_weight_per_kgs_pcs:net_weight_per_kgs_pcs,challan_no:challan_no,challan_date_item:challan_date_item,received_qty_in_pcs:received_qty_in_pcs,received_qty_in_kgs:received_qty_in_kgs,gross_qty_in_includin_bg:gross_qty_in_includin_bg,units:units,no_of_bags:no_of_bags,lot_no:lot_no,itemremark:itemremark,balance_qty_in_pcs:balance_qty_in_pcs,balance_qty_in_kgs:balance_qty_in_kgs,status:status,pre_usp_date:pre_usp_date,pre_usp_name:pre_usp_name,pre_challan_number:pre_challan_number,pre_challan_date:pre_challan_date,pre_report_by:pre_report_by,pre_remark:pre_remark,usp_incoming_id:usp_incoming_id,previous_balance:previous_balance,usp_incoming_item_id:usp_incoming_item_id},
+				 data :{part_number:part_number,description:description,challan_qty:challan_qty,net_weight_per_kgs_pcs:net_weight_per_kgs_pcs,challan_no:challan_no,challan_date_item:challan_date_item,received_qty_in_pcs:received_qty_in_pcs,received_qty_in_kgs:received_qty_in_kgs,gross_qty_in_includin_bg:gross_qty_in_includin_bg,units:units,no_of_bags:no_of_bags,lot_no:lot_no,itemremark:itemremark,balance_qty_in_pcs:balance_qty_in_pcs,balance_qty_in_kgs:balance_qty_in_kgs,status:status,pre_usp_date:pre_usp_date,pre_usp_name:pre_usp_name,pre_challan_number:pre_challan_number,pre_challan_date:pre_challan_date,pre_report_by:pre_report_by,pre_remark:pre_remark,usp_incoming_id:usp_incoming_id,previous_balance:previous_balance,usp_incoming_item_id:usp_incoming_item_id,pre_status:pre_status},
 				 method: "POST",
                 // data :{package_id:package_id},
                 cache:false,

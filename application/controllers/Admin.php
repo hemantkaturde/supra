@@ -18252,11 +18252,13 @@ public function addnewuspincoming(){
         $this->form_validation->set_rules('challan_date','Challan Date','trim');
         $this->form_validation->set_rules('report_by','Report By','trim');
         $this->form_validation->set_rules('remark','Remark','trim');
+        $this->form_validation->set_rules('usp_status','USP Staus','trim');
+
 
         if($this->form_validation->run() == FALSE)
         {
             $save_uspincoming_response['status'] = 'failure';
-            $save_uspincoming_response['error'] = array('id_number'=>strip_tags(form_error('id_number')), 'usp_date'=>strip_tags(form_error('usp_date')), 'usp_name'=>strip_tags(form_error('usp_name')), 'challan_number'=>strip_tags(form_error('challan_number')),'challan_date'=>strip_tags(form_error('challan_date')),'report_by'=>strip_tags(form_error('report_by')),'remark'=>strip_tags(form_error('remark')));
+            $save_uspincoming_response['error'] = array('id_number'=>strip_tags(form_error('id_number')), 'usp_date'=>strip_tags(form_error('usp_date')), 'usp_name'=>strip_tags(form_error('usp_name')), 'challan_number'=>strip_tags(form_error('challan_number')),'challan_date'=>strip_tags(form_error('challan_date')),'report_by'=>strip_tags(form_error('report_by')),'remark'=>strip_tags(form_error('remark')),'usp_status'=>strip_tags(form_error('usp_status')));
         }else{
 
 
@@ -18267,6 +18269,7 @@ public function addnewuspincoming(){
                 'challan_number_id'  =>trim($this->input->post('challan_number')),
                 'challan_date'  =>trim($this->input->post('challan_date')),
                 'report_by'  =>trim($this->input->post('report_by')),
+                'usp_status'  =>trim($this->input->post('usp_status')),
                 'remark'  =>trim($this->input->post('remark'))
             );
 
@@ -18284,12 +18287,12 @@ public function addnewuspincoming(){
                 if($update_last_inserted_id_in_uspincoming){
                    
                     $save_uspincoming_response['status'] = 'success';
-                    $save_uspincoming_response['error'] = array('id_number'=>strip_tags(form_error('id_number')), 'usp_date'=>strip_tags(form_error('usp_date')), 'usp_name'=>strip_tags(form_error('usp_name')), 'challan_number'=>strip_tags(form_error('challan_number')),'challan_date'=>strip_tags(form_error('challan_date')),'report_by'=>strip_tags(form_error('report_by')),'remark'=>strip_tags(form_error('remark')));
+                    $save_uspincoming_response['error'] = array('id_number'=>strip_tags(form_error('id_number')), 'usp_date'=>strip_tags(form_error('usp_date')), 'usp_name'=>strip_tags(form_error('usp_name')), 'challan_number'=>strip_tags(form_error('challan_number')),'challan_date'=>strip_tags(form_error('challan_date')),'report_by'=>strip_tags(form_error('report_by')),'remark'=>strip_tags(form_error('remark')),'usp_status'=>strip_tags(form_error('usp_status')));
                 }
 
            }else{
                 $save_uspincoming_response['status'] = 'failure';
-                $save_uspincoming_response['error'] = array('id_number'=>strip_tags(form_error('id_number')), 'usp_date'=>strip_tags(form_error('usp_date')), 'usp_name'=>strip_tags(form_error('usp_name')), 'challan_number'=>strip_tags(form_error('challan_number')),'challan_date'=>strip_tags(form_error('challan_date')),'report_by'=>strip_tags(form_error('report_by')),'remark'=>strip_tags(form_error('remark')));
+                $save_uspincoming_response['error'] = array('id_number'=>strip_tags(form_error('id_number')), 'usp_date'=>strip_tags(form_error('usp_date')), 'usp_name'=>strip_tags(form_error('usp_name')), 'challan_number'=>strip_tags(form_error('challan_number')),'challan_date'=>strip_tags(form_error('challan_date')),'report_by'=>strip_tags(form_error('report_by')),'remark'=>strip_tags(form_error('remark')),'usp_status'=>strip_tags(form_error('usp_status')));
             }
 
           }
@@ -20135,6 +20138,7 @@ public function saveuspincoming_item_form(){
                         'pre_challan_date' =>trim($this->input->post('pre_challan_date')), 
                         'pre_report_by' =>trim($this->input->post('pre_report_by')), 
                         'pre_remark' =>trim($this->input->post('pre_remark')),  
+                        'pre_status' =>trim($this->input->post('pre_status')),  
                     );
 
                     if(trim($this->input->post('usp_incoming_item_id'))){
@@ -20274,6 +20278,7 @@ public function saveuspincoming_item_form(){
                         'pre_challan_date' =>trim($this->input->post('pre_challan_date')), 
                         'pre_report_by' =>trim($this->input->post('pre_report_by')), 
                         'pre_remark' =>trim($this->input->post('pre_remark')),  
+                        'pre_status'=>trim($this->input->post('pre_status')),
                     );
 
                     if(trim($this->input->post('usp_incoming_item_id'))){

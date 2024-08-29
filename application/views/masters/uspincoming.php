@@ -37,6 +37,7 @@
                                         <th>Challan No</th>
                                         <th>Challan Date</th>
                                         <th>Reported By</th>
+                                        <th>USP Status</th>
                                         <th>Remark</th>
                                         <th>Action</th>
                                     </tr>
