@@ -16125,12 +16125,11 @@
 
 																					var balence_qty_in_pcs_calculation = $('#balence_qty_in_pcs').val();
 
-																					alert(balence_qty_in_pcs_calculation);
 
 																					$('#balence_qty_in_kgs').val('');
 																					// var precalculation_ready_for_export_kgs = (parseFloat(previous_stock_bal) + parseFloat(ready_for_exp_kgs)) - parseFloat(total_export_qty_kgs);
 
-																					 var precalculation_ready_for_export_kgs = parseFloat($('#balence_qty_in_pcs').val()) * parseFloat(balenceitems_data.fg_net_weigh);
+																					 var precalculation_ready_for_export_kgs = parseFloat($('#balence_qty_in_pcs').val()) * parseFloat(balenceitems_data.fg_net_weight);
 
 
 																					if(isNaN(precalculation_ready_for_export_kgs)){
