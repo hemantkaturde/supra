@@ -381,6 +381,19 @@
                                     </div>
 
                                     <div class="col-md-12">
+                                        <div class="form-group">
+                                                <label for="mode_of_communication">Mode of Communication</label>
+                                                <select class="form-control" name="mode_of_communication" id="mode_of_communication">
+                                                    <option st-id="" value="">Select Mode of Communication</option>
+                                                    <option st-id="" value="By Call">By Call</option>
+                                                    <option st-id="" value="By Email">By Email</option>
+                                                    <option st-id="" value="By WhatsApp">By WhatsApp</option>                                        
+                                                </select>
+                                            <p class="error mode_of_communication_error"></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="remark">Remark</label>
                                                   <textarea type="text" class="form-control"  id="remark"  value="" name="remark" required><?=$fetchALLpreVendorpoconfirmationitemList[0]['remark_vendor_po_confrimation']?></textarea>

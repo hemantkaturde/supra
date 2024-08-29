@@ -3691,13 +3691,14 @@ class Admin extends BaseController
             $this->form_validation->set_rules('po_confirmed','PO Confirmed','trim|required');
             $this->form_validation->set_rules('confirmed_date','Confirmed Date','trim|required');
             $this->form_validation->set_rules('confirmed_with','Confirmed With','trim|required');
+            $this->form_validation->set_rules('mode_of_communication','Mode Of Communication','trim');
             $this->form_validation->set_rules('remark','Remark','trim');
 
 
             if($this->form_validation->run() == FALSE)
             {
                 $save_vendorconfirmation_response['status'] = 'failure';
-                $save_vendorconfirmation_response['error'] = array( 'po_number'=>strip_tags(form_error('po_number')),'date'=>strip_tags(form_error('date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'buyer_name'=>strip_tags(form_error('buyer_name')),'po_confirmed'=>strip_tags(form_error('po_confirmed')),'confirmed_date'=>strip_tags(form_error('confirmed_date')),'confirmed_with'=>strip_tags(form_error('confirmed_with')),'remark'=>strip_tags(form_error('remark')));
+                $save_vendorconfirmation_response['error'] = array( 'po_number'=>strip_tags(form_error('po_number')),'date'=>strip_tags(form_error('date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'buyer_name'=>strip_tags(form_error('buyer_name')),'po_confirmed'=>strip_tags(form_error('po_confirmed')),'confirmed_date'=>strip_tags(form_error('confirmed_date')),'confirmed_with'=>strip_tags(form_error('confirmed_with')),'remark'=>strip_tags(form_error('remark')),'mode_of_communication'=>strip_tags(form_error('mode_of_communication')));
             }else{
                 
                 $venodr_po_confirmation_id = trim($this->input->post('venodr_po_confirmation_id'));
@@ -3713,6 +3714,7 @@ class Admin extends BaseController
                     'po_confirmed' =>    trim($this->input->post('po_confirmed')),
                     'confirmed_date' =>    trim($this->input->post('confirmed_date')),
                     'confirmed_with' =>    trim($this->input->post('confirmed_with')),
+                    'mode_of_communication' => trim($this->input->post('mode_of_communication')),
                     'remark' =>    trim($this->input->post('remark')),
                 );
 
@@ -3728,7 +3730,7 @@ class Admin extends BaseController
                         $update_last_inserted_id_vendor_po_confirmation = $this->admin_model->update_last_inserted_id_vendor_po_confirmation($saveVendorpoconfirmationdata);
                         if($update_last_inserted_id_vendor_po_confirmation){
                              $save_vendorconfirmation_response['status'] = 'success';
-                             $save_vendorconfirmation_response['error'] = array( 'po_number'=>strip_tags(form_error('po_number')),'date'=>strip_tags(form_error('date')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'po_confirmed'=>strip_tags(form_error('po_confirmed')),'confirmed_date'=>strip_tags(form_error('confirmed_date')),'confirmed_with'=>strip_tags(form_error('confirmed_with')),'remark'=>strip_tags(form_error('remark')));
+                             $save_vendorconfirmation_response['error'] = array( 'po_number'=>strip_tags(form_error('po_number')),'date'=>strip_tags(form_error('date')),'supplier_name'=>strip_tags(form_error('supplier_name')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'po_confirmed'=>strip_tags(form_error('po_confirmed')),'confirmed_date'=>strip_tags(form_error('confirmed_date')),'confirmed_with'=>strip_tags(form_error('confirmed_with')),'remark'=>strip_tags(form_error('remark')),'mode_of_communication'=>strip_tags(form_error('mode_of_communication')));
                          }
                     }
 
