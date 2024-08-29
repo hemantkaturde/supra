@@ -12770,6 +12770,7 @@ public function getfetchsalestrackingReportdata($params){
             $data[$counter]['igst_rcved_amt'] =  $value['igst_rcved_amt'];
             $data[$counter]['igst_rcved_date'] =  $value['igst_rcved_date'];
             $data[$counter]['no_of_ctns'] =  $value['no_of_ctns'];
+            $data[$counter]['EGM_status'] =  $value['EGM_status'];
             $data[$counter]['action'] = '';
 
             if($this->session->userdata('roleText')=='Superadmin'){

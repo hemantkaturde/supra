@@ -41,6 +41,7 @@
                                         <th>Igst Rcved Amt</th>
                                         <th>Igst Rcved Date</th>
                                         <th>No. Of Ctns</th>
+                                        <th>EGM Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
