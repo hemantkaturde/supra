@@ -16073,6 +16073,9 @@
 																				var balenceitems_data = jQuery.parseJSON( data );
 
 										
+																				    console.log(balence_qty_in_pcs);
+																					console.log('Hemant');
+
 
 																					$('#balence_qty_in_pcs').val(parseFloat(balenceitems_data.balence_qty_in_pcs).toFixed(2));
 																					$('#balence_qty_in_kgs').val(parseFloat(balenceitems_data.balence_qty_in_kgs).toFixed(3));
