@@ -11053,7 +11053,7 @@ class Admin_model extends CI_Model
             $this->db->where(TBL_BUYER_PO_MASTER.'.date <=', $todate);
         }
 
-        $this->db->group_by(TBL_PACKING_INSTRACTION_DETAILS.'.id');
+      //  $this->db->group_by(TBL_PACKING_INSTRACTION_DETAILS.'.id');
         $this->db->order_by(TBL_BUYER_PO_MASTER_ITEM.'.id','DESC');
         $this->db->limit($params['length'],$params['start']);
         $query = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
