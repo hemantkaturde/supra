@@ -100,7 +100,7 @@
 
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="country">Country</label>
+                                            <label for="country">Country<span class="required">*</span></label>
                                             <input type="text" class="form-control" id="country"   value="<?=$data['country']?>" name="country">
                                             <p class="error country_error"></p>
                                         </div>
