@@ -12735,6 +12735,25 @@ public function getfetchsalestrackingReportcount($params){
     $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_PACKING_INSTRACTION.'.buyer_po_number');
     $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id  = '.TBL_BUYER_PO_MASTER.'.buyer_name_id');
     $this->db->join(TBL_CHA_MASTER, TBL_CHA_MASTER.'.cha_id = '.TBL_SALES_TRACKING_REPORT.'.CHA_forwarder');
+   
+       
+    if($params['search']['value'] != "") 
+    {
+        $this->db->where("(".TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_number LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_SALES_TRACKING_REPORT.".clearance_done_by LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_SALES_TRACKING_REPORT.".mode_of_shipment LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_SALES_TRACKING_REPORT.".payment_terms LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_SALES_TRACKING_REPORT.".inv_amount LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_SALES_TRACKING_REPORT.".igst_rcved_amt LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_SALES_TRACKING_REPORT.".igst_rcved_date LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_SALES_TRACKING_REPORT.".no_of_ctns LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_SALES_TRACKING_REPORT.".EGM_status LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_SALES_TRACKING_REPORT.".igst_value LIKE '%".$params['search']['value']."%')");
+    }
+
+   
+   
     $this->db->where(TBL_SALES_TRACKING_REPORT.'.status', 1);
     $query = $this->db->get(TBL_SALES_TRACKING_REPORT);
     $rowcount = $query->num_rows();
@@ -12749,6 +12768,24 @@ public function getfetchsalestrackingReportdata($params){
     $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_PACKING_INSTRACTION.'.buyer_po_number');
     $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id  = '.TBL_BUYER_PO_MASTER.'.buyer_name_id');
     $this->db->join(TBL_CHA_MASTER, TBL_CHA_MASTER.'.cha_id = '.TBL_SALES_TRACKING_REPORT.'.CHA_forwarder');
+   
+    if($params['search']['value'] != "") 
+    {
+        $this->db->where("(".TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_number LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_SALES_TRACKING_REPORT.".clearance_done_by LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_SALES_TRACKING_REPORT.".mode_of_shipment LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_SALES_TRACKING_REPORT.".payment_terms LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_SALES_TRACKING_REPORT.".inv_amount LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_SALES_TRACKING_REPORT.".igst_rcved_amt LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_SALES_TRACKING_REPORT.".igst_rcved_date LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_SALES_TRACKING_REPORT.".no_of_ctns LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_SALES_TRACKING_REPORT.".EGM_status LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_SALES_TRACKING_REPORT.".igst_value LIKE '%".$params['search']['value']."%')");
+    }
+
+   
+   
     $this->db->where(TBL_SALES_TRACKING_REPORT.'.status', 1);    
     $this->db->limit($params['length'],$params['start']);
     $this->db->order_by(TBL_SALES_TRACKING_REPORT.'.id','DESC');
