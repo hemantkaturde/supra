@@ -22000,15 +22000,15 @@
 			var dt = $('#view_usp_incoming').DataTable({
 				"columnDefs": [ 
 					{ className: "details-control", "targets": [ 0 ] },
-					{ "width": "15%", "targets": 0 },
+					{ "width": "12%", "targets": 0 },
 					{ "width": "10%", "targets": 1 },
 					{ "width": "10%", "targets": 2 },
 					{ "width": "10%", "targets": 3 },
-					{ "width": "15%", "targets": 4 },
+					{ "width": "10%", "targets": 4 },
 					{ "width": "15%", "targets": 5 },
-					{ "width": "15%", "targets": 6 },
+					{ "width": "10%", "targets": 6 },
 					{ "width": "10%", "targets": 7 },
-					{ "width": "10%", "targets": 8 },
+					{ "width": "15%", "targets": 8 },
 
 
 				],
