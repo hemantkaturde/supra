@@ -97,6 +97,14 @@
                                             <p class="error GSTIN_error"></p>
                                         </div>
                                     </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="country">Country</label>
+                                            <input type="text" class="form-control" id="country"   value="<?=$data['country']?>" name="country">
+                                            <p class="error country_error"></p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <!-- /.box-body -->

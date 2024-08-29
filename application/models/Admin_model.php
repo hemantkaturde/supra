@@ -851,6 +851,7 @@ class Admin_model extends CI_Model
             $this->db->or_where(TBL_BUYER_MASTER.".mobile LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_BUYER_MASTER.".contact_person LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_BUYER_MASTER.".email LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_MASTER.".country LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_BUYER_MASTER.".GSTIN LIKE '%".$params['search']['value']."%')");
         }
 
@@ -872,6 +873,7 @@ class Admin_model extends CI_Model
             $this->db->or_where(TBL_BUYER_MASTER.".mobile LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_BUYER_MASTER.".contact_person LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_BUYER_MASTER.".email LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_MASTER.".country LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_BUYER_MASTER.".GSTIN LIKE '%".$params['search']['value']."%')");
         }
         $this->db->where(TBL_BUYER_MASTER.'.status', 1);
@@ -892,6 +894,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['mobile'] = $value['mobile'];
                 $data[$counter]['contact_person'] = $value['contact_person'];
                 $data[$counter]['GSTIN'] = $value['GSTIN'];
+                $data[$counter]['country'] = $value['country'];
                 $data[$counter]['action'] = '';
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."updateBuyer/".$value['buyer_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['buyer_id']."' class='fa fa-trash-o deleteBuyer' aria-hidden='true'></i>"; 

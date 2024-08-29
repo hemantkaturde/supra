@@ -36,6 +36,7 @@
                                         <th>Mobile</th>
                                         <th>Contact Person</th>
                                         <th>GSTIN</th>
+                                        <th>Country</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>

@@ -1929,11 +1929,12 @@ class Admin extends BaseController
             $this->form_validation->set_rules('contact_person','Contact Person','trim|max_length[50]');
             $this->form_validation->set_rules('email','Email','trim|valid_email|max_length[50]');
             $this->form_validation->set_rules('GSTIN','GSTIN','trim|max_length[50]');
+            $this->form_validation->set_rules('country','Country','trim|required|max_length[50]');
 
             if($this->form_validation->run() == FALSE)
             {
                 $save_buyer_response['status'] = 'failure';
-                $save_buyer_response['error'] = array('buyer_name'=>strip_tags(form_error('buyer_name')), 'currency'=>strip_tags(form_error('currency')), 'address'=>strip_tags(form_error('address')), 'landline'=>strip_tags(form_error('landline')),'contact_person'=>strip_tags(form_error('contact_person')),'mobile'=>strip_tags(form_error('mobile')),'email'=>strip_tags(form_error('email')),'GSTIN'=>strip_tags(form_error('GSTIN')));
+                $save_buyer_response['error'] = array('buyer_name'=>strip_tags(form_error('buyer_name')), 'currency'=>strip_tags(form_error('currency')), 'address'=>strip_tags(form_error('address')), 'landline'=>strip_tags(form_error('landline')),'contact_person'=>strip_tags(form_error('contact_person')),'mobile'=>strip_tags(form_error('mobile')),'email'=>strip_tags(form_error('email')),'GSTIN'=>strip_tags(form_error('GSTIN')),'country'=>strip_tags(form_error('country')));
             }else{
 
                 $data = array(
@@ -1944,7 +1945,8 @@ class Admin extends BaseController
                     'mobile' =>   trim($this->input->post('mobile')),
                     'contact_person' => trim($this->input->post('contact_person')),
                     'email' =>    trim($this->input->post('email')),
-                    'GSTIN' =>    trim($this->input->post('GSTIN'))
+                    'GSTIN' =>    trim($this->input->post('GSTIN')),
+                    'country' => trim($this->input->post('country')),
                 );
 
                 $checkIfexitsbuyer = $this->admin_model->checkIfexitsbuyer(trim($this->input->post('buyer_name')));
@@ -1955,7 +1957,7 @@ class Admin extends BaseController
                     $saveBuyerdata = $this->admin_model->saveBuyerdata('',$data);
                     if($saveBuyerdata){
                         $save_buyer_response['status'] = 'success';
-                        $save_buyer_response['error'] = array('buyer_name'=>'', 'currency'=>'', 'address'=>'', 'landline'=>'','contact_person'=>'','mobile'=>'','email'=>'','GSTIN'=>'');
+                        $save_buyer_response['error'] = array('buyer_name'=>'', 'currency'=>'', 'address'=>'', 'landline'=>'','contact_person'=>'','mobile'=>'','email'=>'','GSTIN'=>'','country'=>'');
                     }
                 }
             }
@@ -2008,11 +2010,13 @@ class Admin extends BaseController
             $this->form_validation->set_rules('contact_person','Contact Person','trim|max_length[50]');
             $this->form_validation->set_rules('email','Email','trim|valid_email|max_length[50]');
             $this->form_validation->set_rules('GSTIN','GSTIN','trim|max_length[50]');
+            $this->form_validation->set_rules('country','Country','trim|required|max_length[50]');
+
 
             if($this->form_validation->run() == FALSE)
             {
                 $update_buyer_response['status'] = 'failure';
-                $update_buyer_response['error'] = array('buyer_name'=>strip_tags(form_error('buyer_name')), 'currency'=>strip_tags(form_error('currency')), 'address'=>strip_tags(form_error('address')), 'landline'=>strip_tags(form_error('landline')),'contact_person'=>strip_tags(form_error('contact_person')),'mobile'=>strip_tags(form_error('mobile')),'email'=>strip_tags(form_error('email')),'GSTIN'=>strip_tags(form_error('GSTIN')));
+                $update_buyer_response['error'] = array('buyer_name'=>strip_tags(form_error('buyer_name')), 'currency'=>strip_tags(form_error('currency')), 'address'=>strip_tags(form_error('address')), 'landline'=>strip_tags(form_error('landline')),'contact_person'=>strip_tags(form_error('contact_person')),'mobile'=>strip_tags(form_error('mobile')),'email'=>strip_tags(form_error('email')),'GSTIN'=>strip_tags(form_error('GSTIN')),'country'=>strip_tags(form_error('country')));
             }else{
 
                 $data = array(
@@ -2023,7 +2027,8 @@ class Admin extends BaseController
                     'mobile' =>   trim($this->input->post('mobile')),
                     'contact_person' => trim($this->input->post('contact_person')),
                     'email' =>    trim($this->input->post('email')),
-                    'GSTIN' =>    trim($this->input->post('GSTIN'))
+                    'GSTIN' =>    trim($this->input->post('GSTIN')),
+                    'country'=> trim($this->input->post('country'))
                 );
 
               
@@ -2033,7 +2038,7 @@ class Admin extends BaseController
                     $saveBuyerdata = $this->admin_model->saveBuyerdata(trim($this->input->post('buyer_id')),$data);
                     if($saveBuyerdata){
                         $update_buyer_response['status'] = 'success';
-                        $update_buyer_response['error'] = array('buyer_name'=>'', 'currency'=>'', 'address'=>'', 'landline'=>'','contact_person'=>'','mobile'=>'','email'=>'','GSTIN'=>'');
+                        $update_buyer_response['error'] = array('buyer_name'=>'', 'currency'=>'', 'address'=>'', 'landline'=>'','contact_person'=>'','mobile'=>'','email'=>'','GSTIN'=>'','country'=>'');
                     }
 
                 }else{
@@ -2046,7 +2051,7 @@ class Admin extends BaseController
                         $updatedata = $this->admin_model->saveBuyerdata(trim($this->input->post('buyer_id')),$data);
                         if($updatedata){
                            $update_buyer_response['status'] = 'success';
-                           $update_buyer_response['error'] = array('buyer_name'=>'', 'currency'=>'', 'address'=>'', 'landline'=>'','contact_person'=>'','mobile'=>'','email'=>'','GSTIN'=>'');
+                           $update_buyer_response['error'] = array('buyer_name'=>'', 'currency'=>'', 'address'=>'', 'landline'=>'','contact_person'=>'','mobile'=>'','email'=>'','GSTIN'=>'','country'=>'');
                        }
 
                     }
