@@ -11201,7 +11201,7 @@ class Admin_model extends CI_Model
                          foreach ($getPackging_items_for_buyer_po_item as $key => $value2) {
 
                            
-                            echo $value2['buyer_invoice_number'];
+                            echo $value2;
 
                             $counteqqqr++;
 
