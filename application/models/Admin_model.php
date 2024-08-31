@@ -11110,12 +11110,11 @@ class Admin_model extends CI_Model
 
     public function fetchbuyerpodetailsreportCount($params,$buyer_name,$part_number,$from_date,$to_date){
         
-        $this->db->select(TBL_BUYER_PO_MASTER.'.buyer_po_date,'.TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_BUYER_MASTER.'.buyer_name,'.TBL_BUYER_PO_MASTER.'.buyer_po_number,'.TBL_BUYER_PO_MASTER.'.date,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name,'.TBL_BUYER_PO_MASTER_ITEM.'.order_oty,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date,'.TBL_BUYER_PO_MASTER.'.id as buyer_po_idpo');
-        $this->db->join(TBL_PACKING_INSTRACTION_DETAILS, TBL_PACKING_INSTRACTION_DETAILS.'.part_number = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id','left');
+        $this->db->select(TBL_BUYER_PO_MASTER.'.buyer_po_date,'.TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_BUYER_MASTER.'.buyer_name,'.TBL_BUYER_PO_MASTER.'.buyer_po_number,'.TBL_BUYER_PO_MASTER.'.date,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name,'.TBL_BUYER_PO_MASTER_ITEM.'.order_oty,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date,'.TBL_BUYER_PO_MASTER.'.id as buyer_po_idpo,'.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id as part_number_id_buyer_Po');
         $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_BUYER_PO_MASTER.'.buyer_name_id');
-    
+        // $this->db->where(TBL_FINISHED_GOODS.'.fin_id=',923);
 
         if($params['search']['value'] != "") 
         {
@@ -11125,12 +11124,9 @@ class Admin_model extends CI_Model
             $this->db->or_where(TBL_BUYER_PO_MASTER.".buyer_po_date LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_BUYER_PO_MASTER.".delivery_date LIKE '%".$params['search']['value']."%'");
-            // $this->db->or_where(TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_qty LIKE '%".$params['search']['value']."%'");
-            // $this->db->or_where(TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_number LIKE '%".$params['search']['value']."%'");
-            // $this->db->or_where(TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_date LIKE '%".$params['search']['value']."%'");
-            // $this->db->or_where(TBL_PACKING_INSTRACTION_DETAILS.".remark LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_FINISHED_GOODS.".name LIKE '%".$params['search']['value']."%')");
         }
+
 
         if($buyer_name!='NA'){
             $this->db->where(TBL_BUYER_PO_MASTER.'.buyer_name_id', $buyer_name);
@@ -11150,11 +11146,115 @@ class Admin_model extends CI_Model
             $this->db->where(TBL_BUYER_PO_MASTER.'.date <=', $todate);
         }
 
-        $this->db->group_by(TBL_BUYER_PO_MASTER_ITEM.'.id');
 
+        $this->db->order_by(TBL_BUYER_PO_MASTER_ITEM.'.id','DESC');
+        $this->db->limit($params['length'],$params['start']);
         $query = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
-        $rowcount = $query->num_rows();
-        return $rowcount;
+        $fetch_result = $query->result_array();
+
+        $data = array();
+        $counter = 0;
+        $data_packaing_details = array();
+        $counter_packaing_details = 0;
+       
+      
+
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+
+                $getPackging_items_for_buyer_po_item = $this->getPackging_items_for_buyer_po_item($value['buyer_po_idpo'],$value['part_number_id_buyer_Po'],$value['buyer_po_part_delivery_date']);
+
+              
+               
+                 if($getPackging_items_for_buyer_po_item){
+                   
+                    if(count($getPackging_items_for_buyer_po_item) > 0){
+
+                        foreach ($getPackging_items_for_buyer_po_item as $key => $value_2) {
+                          
+                            if(trim($value['buyer_po_part_delivery_date'])=='0000-00-00'){
+                                $buyer_po_part_delivery_date = '';
+                            }else{
+                                $buyer_po_part_delivery_date = $value['buyer_po_part_delivery_date'];
+                            }
+
+                            $data_packaing_details[$counter_packaing_details]['buyer_name'] =$value['buyer_name'];
+                            $data_packaing_details[$counter_packaing_details]['sales_order_number'] =$value['sales_order_number'].'-'.$value['buyer_po_number'];
+                            $data_packaing_details[$counter_packaing_details]['buyer_po_date'] =$value['buyer_po_date'];
+                            $data_packaing_details[$counter_packaing_details]['part_number'] =$value['part_number'];
+                            $data_packaing_details[$counter_packaing_details]['type_of_raw_material'] =$value['name'];
+                            $data_packaing_details[$counter_packaing_details]['order_qty'] =$value['order_oty'];
+                            $data_packaing_details[$counter_packaing_details]['buyer_po_part_delivery_date'] =$buyer_po_part_delivery_date;
+
+                            $get_export_invoice_details =$this->getexportinvoicedetails($value['buyer_po_idpo'],$value['part_number_id_buyer_Po'],$buyer_po_part_delivery_date,$value_2['buyer_invoice_number']);
+                            if($get_export_invoice_details){
+                                $buyer_invoice_number = $get_export_invoice_details[0]['buyer_invoice_number'];
+                                $buyer_invoice_qty = $get_export_invoice_details[0]['buyer_invoice_qty'];
+                                $buyer_invoice_date = $get_export_invoice_details[0]['buyer_invoice_date'];
+                                $remark = $get_export_invoice_details[0]['remark'];
+                            }else{
+                                $buyer_invoice_number = '';
+                                $buyer_invoice_qty = '';
+                                $buyer_invoice_date = '';
+                                $remark = '';
+                            }
+
+                            $data_packaing_details[$counter_packaing_details]['export_invoice_number'] = $buyer_invoice_number;
+                            $data_packaing_details[$counter_packaing_details]['buyer_invoice_qty'] =$buyer_invoice_qty;
+                            $data_packaing_details[$counter_packaing_details]['buyer_invoice_date'] =$buyer_invoice_date;
+                            $data_packaing_details[$counter_packaing_details]['remark'] =$remark;
+                            
+                            $counter_packaing_details++;
+
+                        }                 
+
+                    
+                    }
+        
+                
+                }else{
+                            
+                        if(trim($value['buyer_po_part_delivery_date'])=='0000-00-00'){
+                            $buyer_po_part_delivery_date = '';
+                        }else{
+                            $buyer_po_part_delivery_date = $value['buyer_po_part_delivery_date'];
+                        }
+
+                        $data[$counter]['buyer_name'] =$value['buyer_name'];
+                        $data[$counter]['sales_order_number'] =$value['sales_order_number'].'-'.$value['buyer_po_number'];
+                        $data[$counter]['buyer_po_date'] =$value['buyer_po_date'];
+                        $data[$counter]['part_number'] =$value['part_number'];
+                        $data[$counter]['type_of_raw_material'] =$value['name'];
+                        $data[$counter]['order_qty'] =$value['order_oty'];
+                        $data[$counter]['buyer_po_part_delivery_date'] =$buyer_po_part_delivery_date;
+
+                        $get_export_invoice_details =$this->getexportinvoicedetails($value['buyer_po_idpo'],$value['part_number_id_buyer_Po'],$buyer_po_part_delivery_date,$value['buyer_invoice_number']);
+                        if($get_export_invoice_details){
+                            $buyer_invoice_number = $get_export_invoice_details[0]['buyer_invoice_number'];
+                            $buyer_invoice_qty = $get_export_invoice_details[0]['buyer_invoice_qty'];
+                            $buyer_invoice_date = $get_export_invoice_details[0]['buyer_invoice_date'];
+                            $remark = $get_export_invoice_details[0]['remark'];
+                        }else{
+                            $buyer_invoice_number = '';
+                            $buyer_invoice_qty = '';
+                            $buyer_invoice_date = '';
+                            $remark = '';
+                        }
+
+                        $data[$counter]['export_invoice_number'] = $buyer_invoice_number;
+                        $data[$counter]['buyer_invoice_qty'] =$buyer_invoice_qty;
+                        $data[$counter]['buyer_invoice_date'] =$buyer_invoice_date;
+                        $data[$counter]['remark'] =$remark;
+                }
+
+               $counter++;  
+            }
+        }
+
+       $array_mearge = array_merge($data_packaing_details,$data);
+       return count($array_mearge);
 
     }
 
@@ -11337,9 +11437,6 @@ class Admin_model extends CI_Model
         // $query = $this->db->get(TBL_PACKING_INSTRACTION_DETAILS);
         // $fetch_result = $query->result_array();
         // return $fetch_result;
-
-    
-
 
             $this->db->select(TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_number,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_qty,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_date,'.TBL_PACKING_INSTRACTION_DETAILS.'.remark');
             $this->db->join(TBL_PACKING_INSTRACTION, TBL_PACKING_INSTRACTION.'.id = '.TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id');
