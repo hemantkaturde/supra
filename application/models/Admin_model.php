@@ -11921,15 +11921,16 @@ class Admin_model extends CI_Model
                             $get_export_invoice_details =$this->getexportinvoicedetails($value['buyer_po_idpo'],$value['part_number_id_buyer_Po'],$buyer_po_part_delivery_date,$value_2['buyer_invoice_number']);
                             if($get_export_invoice_details){
 
-                                if(trim($value['buyer_invoice_date'])=='0000-00-00'){
+
+                                if(trim($get_export_invoice_details[0]['buyer_invoice_date'])=='0000-00-00'){
                                     $buyer_invoice_date_date_format = '';
                                 }else{
-                                    $buyer_invoice_date_date_format =  date("d-m-Y", strtotime($value['buyer_invoice_date']));
+                                    $buyer_invoice_date_date_format =  date("d-m-Y", strtotime($get_export_invoice_details[0]['buyer_invoice_date']));
                                 }
-
+                                
                                 $buyer_invoice_number = $get_export_invoice_details[0]['buyer_invoice_number'];
                                 $buyer_invoice_qty = $get_export_invoice_details[0]['buyer_invoice_qty'];
-                                $buyer_invoice_date = $buyer_invoice_date_date_format;
+                                $buyer_invoice_date =  $buyer_invoice_date_date_format;
                                 $remark = $get_export_invoice_details[0]['remark'];
                             }else{
                                 $buyer_invoice_number = '';
@@ -11980,10 +11981,10 @@ class Admin_model extends CI_Model
                         $get_export_invoice_details =$this->getexportinvoicedetails($value['buyer_po_idpo'],$value['part_number_id_buyer_Po'],$buyer_po_part_delivery_date,$value['buyer_invoice_number']);
                         if($get_export_invoice_details){
 
-                            if(trim($value['buyer_invoice_date'])=='0000-00-00'){
+                            if(trim($get_export_invoice_details[0]['buyer_invoice_date'])=='0000-00-00'){
                                 $buyer_invoice_date_date_format = '';
                             }else{
-                                $buyer_invoice_date_date_format =  date("d-m-Y", strtotime($value['buyer_invoice_date']));
+                                $buyer_invoice_date_date_format =  date("d-m-Y", strtotime($get_export_invoice_details[0]['buyer_invoice_date']));
                             }
     
                             $buyer_invoice_number = $get_export_invoice_details[0]['buyer_invoice_number'];
