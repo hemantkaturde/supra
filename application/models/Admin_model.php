@@ -11236,14 +11236,14 @@ class Admin_model extends CI_Model
                             $data_packaing_details[$counter_packaing_details]['buyer_invoice_date'] =$buyer_invoice_date;
                             $data_packaing_details[$counter_packaing_details]['remark'] =$remark;
                             
-                            $counter_packaing_details++;
+                          
 
                         }                 
 
                     
                     }
         
-                   
+                    $counter_packaing_details++;
                     
                 // }else{
                             
