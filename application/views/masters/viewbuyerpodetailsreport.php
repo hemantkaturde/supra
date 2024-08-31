@@ -105,7 +105,7 @@
                                     </div>
                                     <div class="col-xs-3 text-left" style="margin-top: 10px;">
                                         <div class="form-group">
-                                                <label for="balenace_export_qty">Balenace Export Qty</label>
+                                                <label for="balenace_export_qty">Balance Export Qty</label>
                                                 <input type="text" class="form-control"  id="balenace_export_qty" name="balenace_export_qty"  readonly>
                                         </div>
                                     </div>
