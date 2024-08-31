@@ -11186,7 +11186,8 @@ class Admin_model extends CI_Model
         $data = array();
         $counter = 0;
 
-       
+        $data_packaing_details = array();
+                    $counter_packaing_details = 0;
 
         if(count($fetch_result) > 0)
         {
@@ -11197,8 +11198,7 @@ class Admin_model extends CI_Model
 
                
                 if($getPackging_items_for_buyer_po_item){
-                    $data_packaing_details = array();
-                    $counter_packaing_details = 0;
+                   
                     if(count($getPackging_items_for_buyer_po_item) > 0){
 
 
@@ -11242,7 +11242,7 @@ class Admin_model extends CI_Model
                             $data_packaing_details[$counter]['buyer_invoice_date'] =$buyer_invoice_date;
                             $data_packaing_details[$counter]['remark'] =$remark;
                             
-                            //$counter_packaing_details++;
+                            $counter_packaing_details++;
 
                         }                 
 
