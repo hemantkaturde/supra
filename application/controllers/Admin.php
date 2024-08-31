@@ -17775,13 +17775,11 @@ public function download_sales_tracking_export_to_excel($sales_tracking_report_n
             }
 
 
-            if($element['brc_number_and_dt']){
+            if($element['brc_number_and_dt'] || $element['brc_number_and_dt']!='0000-00-00'){
                 $brc_number_and_dt =date('d-m-Y',strtotime($element['brc_number_and_dt']));
             }else{
                 $brc_number_and_dt='';
             }
-
-
 
             $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $element['sr_no']);
             $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $element['invoice_number']);
@@ -17881,7 +17879,7 @@ public function download_sales_tracking_export_to_excel($sales_tracking_report_n
                     $payment_recvd_date='';
                 }
 
-                if($element['brc_number_and_dt']){
+                if($element['brc_number_and_dt'] || $element['brc_number_and_dt']!='0000-00-00'){
                     $brc_number_and_dt =date('d-m-Y',strtotime($element['brc_number_and_dt']));
                 }else{
                     $brc_number_and_dt='';
