@@ -11197,7 +11197,7 @@ class Admin_model extends CI_Model
 
 
                 print_r($getPackging_items_for_buyer_po_item);
-                exit;
+                // exit;
 
 
 
