@@ -11890,25 +11890,46 @@ class Admin_model extends CI_Model
 
                         foreach ($getPackging_items_for_buyer_po_item as $key => $value_2) {
                           
+                            // if(trim($value['buyer_po_part_delivery_date'])=='0000-00-00'){
+                            //     $buyer_po_part_delivery_date = '';
+                            // }else{
+                            //     $buyer_po_part_delivery_date = $value['buyer_po_part_delivery_date'];
+                            // }
+
                             if(trim($value['buyer_po_part_delivery_date'])=='0000-00-00'){
                                 $buyer_po_part_delivery_date = '';
                             }else{
                                 $buyer_po_part_delivery_date = $value['buyer_po_part_delivery_date'];
+    
+                                $buyer_delivey_date =  date("d-m-Y", strtotime($value['buyer_po_part_delivery_date']));
+                            }
+    
+                            if(trim($value['buyer_po_date'])=='0000-00-00'){
+                                $buyer_po_date = '';
+                            }else{
+                                $buyer_po_date =  date("d-m-Y", strtotime($value['buyer_po_date']));
                             }
 
                             $data_packaing_details[$counter_packaing_details]['buyer_name'] =$value['buyer_name'];
                             $data_packaing_details[$counter_packaing_details]['sales_order_number'] =$value['sales_order_number'].'-'.$value['buyer_po_number'];
-                            $data_packaing_details[$counter_packaing_details]['buyer_po_date'] =$value['buyer_po_date'];
+                            $data_packaing_details[$counter_packaing_details]['buyer_po_date'] =$buyer_po_date;
                             $data_packaing_details[$counter_packaing_details]['part_number'] =$value['part_number'];
                             $data_packaing_details[$counter_packaing_details]['name'] =$value['name'];
                             $data_packaing_details[$counter_packaing_details]['order_qty'] =$value['order_oty'];
-                            $data_packaing_details[$counter_packaing_details]['buyer_po_part_delivery_date'] =$buyer_po_part_delivery_date;
+                            $data_packaing_details[$counter_packaing_details]['buyer_po_part_delivery_date'] =$buyer_delivey_date;
 
                             $get_export_invoice_details =$this->getexportinvoicedetails($value['buyer_po_idpo'],$value['part_number_id_buyer_Po'],$buyer_po_part_delivery_date,$value_2['buyer_invoice_number']);
                             if($get_export_invoice_details){
+
+                                if(trim($value['buyer_invoice_date'])=='0000-00-00'){
+                                    $buyer_invoice_date_date_format = '';
+                                }else{
+                                    $buyer_invoice_date_date_format =  date("d-m-Y", strtotime($value['buyer_invoice_date']));
+                                }
+
                                 $buyer_invoice_number = $get_export_invoice_details[0]['buyer_invoice_number'];
                                 $buyer_invoice_qty = $get_export_invoice_details[0]['buyer_invoice_qty'];
-                                $buyer_invoice_date = $get_export_invoice_details[0]['buyer_invoice_date'];
+                                $buyer_invoice_date = $buyer_invoice_date_date_format;
                                 $remark = $get_export_invoice_details[0]['remark'];
                             }else{
                                 $buyer_invoice_number = '';
@@ -11936,21 +11957,38 @@ class Admin_model extends CI_Model
                             $buyer_po_part_delivery_date = '';
                         }else{
                             $buyer_po_part_delivery_date = $value['buyer_po_part_delivery_date'];
+
+                            $buyer_delivey_date =  date("d-m-Y", strtotime($value['buyer_po_part_delivery_date']));
                         }
+
+                        if(trim($value['buyer_po_date'])=='0000-00-00'){
+                            $buyer_po_date = '';
+                        }else{
+                            $buyer_po_date =  date("d-m-Y", strtotime($value['buyer_po_date']));
+                        }
+
+                     
 
                         $data[$counter]['buyer_name'] =$value['buyer_name'];
                         $data[$counter]['sales_order_number'] =$value['sales_order_number'].'-'.$value['buyer_po_number'];
-                        $data[$counter]['buyer_po_date'] =$value['buyer_po_date'];
+                        $data[$counter]['buyer_po_date'] =$buyer_po_date;
                         $data[$counter]['part_number'] =$value['part_number'];
-                        $data[$counter]['type_of_raw_material'] =$value['name'];
+                        $data[$counter]['name'] =$value['name'];
                         $data[$counter]['order_qty'] =$value['order_oty'];
-                        $data[$counter]['buyer_po_part_delivery_date'] =$buyer_po_part_delivery_date;
+                        $data[$counter]['buyer_po_part_delivery_date'] =$buyer_delivey_date;
 
                         $get_export_invoice_details =$this->getexportinvoicedetails($value['buyer_po_idpo'],$value['part_number_id_buyer_Po'],$buyer_po_part_delivery_date,$value['buyer_invoice_number']);
                         if($get_export_invoice_details){
+
+                            if(trim($value['buyer_invoice_date'])=='0000-00-00'){
+                                $buyer_invoice_date_date_format = '';
+                            }else{
+                                $buyer_invoice_date_date_format =  date("d-m-Y", strtotime($value['buyer_invoice_date']));
+                            }
+    
                             $buyer_invoice_number = $get_export_invoice_details[0]['buyer_invoice_number'];
                             $buyer_invoice_qty = $get_export_invoice_details[0]['buyer_invoice_qty'];
-                            $buyer_invoice_date = $get_export_invoice_details[0]['buyer_invoice_date'];
+                            $buyer_invoice_date = $buyer_invoice_date_date_format;
                             $remark = $get_export_invoice_details[0]['remark'];
                         }else{
                             $buyer_invoice_number = '';
