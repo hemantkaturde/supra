@@ -11178,6 +11178,25 @@ class Admin_model extends CI_Model
         }
 
 
+        if($buyer_name!='NA'){
+            $this->db->where(TBL_BUYER_PO_MASTER.'.buyer_name_id', $buyer_name);
+        }
+
+        if($part_number!='NA'){
+            $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.part_number_id', $part_number);
+        }
+
+        if($from_date!='NA'){
+            $fromdate = $from_date;
+            $this->db->where(TBL_BUYER_PO_MASTER.'.date >=', $fromdate);
+        }
+
+        if($to_date!='NA'){
+            $todate = $to_date;
+            $this->db->where(TBL_BUYER_PO_MASTER.'.date <=', $todate);
+        }
+
+
         $this->db->order_by(TBL_BUYER_PO_MASTER_ITEM.'.id','DESC');
         $this->db->limit($params['length'],$params['start']);
         $query = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
@@ -11274,10 +11293,10 @@ class Admin_model extends CI_Model
                             $remark = '';
                         }
 
-                            $buyer_invoice_number = '';
-                            $buyer_invoice_qty = '';
-                            $buyer_invoice_date = '';
-                            $remark = '';
+                            // $buyer_invoice_number = '';
+                            // $buyer_invoice_qty = '';
+                            // $buyer_invoice_date = '';
+                            // $remark = '';
 
                         $data[$counter]['export_invoice_number'] = $buyer_invoice_number;
                         $data[$counter]['buyer_invoice_qty'] =$buyer_invoice_qty;
