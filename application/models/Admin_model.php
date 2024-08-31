@@ -11204,8 +11204,7 @@ class Admin_model extends CI_Model
                     if(count($getPackging_items_for_buyer_po_item) > 0){
 
                         print_r($getPackging_items_for_buyer_po_item );
-                        exit;
-        
+                       
         
 
                        
