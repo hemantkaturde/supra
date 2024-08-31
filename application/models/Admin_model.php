@@ -11186,8 +11186,7 @@ class Admin_model extends CI_Model
         $data = array();
         $counter = 0;
 
-        $data_packaing_details = array();
-        $counter_packaing_details = 0;
+       
 
         if(count($fetch_result) > 0)
         {
@@ -11196,9 +11195,10 @@ class Admin_model extends CI_Model
 
                 $getPackging_items_for_buyer_po_item = $this->getPackging_items_for_buyer_po_item($value['buyer_po_idpo'],$value['part_number_id_buyer_Po']);
 
-            
+               
                 if($getPackging_items_for_buyer_po_item){
-
+                    $data_packaing_details = array();
+                    $counter_packaing_details = 0;
                     if(count($getPackging_items_for_buyer_po_item) > 0){
 
 
