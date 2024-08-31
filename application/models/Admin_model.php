@@ -11268,7 +11268,7 @@ class Admin_model extends CI_Model
         $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.part_number', $part_number);
         // $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.buyer_item_delivery_date', $buyer_po_part_delivery_date);
         //  $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_number', $buyer_invoice_number);
-        $this->db->group_by(TBL_PACKING_INSTRACTION_DETAILS.'.id');
+        // $this->db->group_by(TBL_PACKING_INSTRACTION_DETAILS.'.id');
         $query = $this->db->get(TBL_PACKING_INSTRACTION_DETAILS);
         $fetch_result = $query->result_array();
         return $fetch_result;
