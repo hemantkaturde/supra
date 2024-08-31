@@ -113,10 +113,11 @@
                   <option st-id="" value="ReworkRejectionChallan">Rework / Rejection Challan (Without Supplier)</option>
                   <option st-id="" value="BillOfMaterial">Bill Of Material</option>
                   <option st-id="" value="VendorBillOfMaterial">Vendor Bill Of Material</option>
-                  <option st-id="" value="IncomigDetails">Incomig Details</option>
+                  <option st-id="" value="IncomigDetails">Incoming Details</option>
                   <option st-id="" value="Stock">Stock</option>
+                  <option st-id="" value="StockRejection">Stock Rejection</option>
                   <option st-id="" value="QualityRecord">Quality Record</option>
-                  <option st-id="" value="PackagingInstrasction">Packaging Instrasction / Export Details</option>
+                  <option st-id="" value="PackagingInstrasction">Packaging Instructions / Export Details</option>
                </select>
             </div>
          </div>
