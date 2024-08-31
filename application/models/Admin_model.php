@@ -11204,7 +11204,7 @@ class Admin_model extends CI_Model
                     if(count($getPackging_items_for_buyer_po_item) > 0){
 
                      
-                        foreach ($getPackging_items_for_buyer_po_item[$counter_packaing_details] as $key => $value_2) {
+                        foreach ($getPackging_items_for_buyer_po_item[$counter_packaing_details] as $value_2) {
 
                           
                           
