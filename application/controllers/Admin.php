@@ -19338,7 +19338,7 @@ public function printstock($stock_id,$balence_qty_in_pcs,$ready_for_exp_pcs,$tot
     // $ready_for_exp_pcs = $this->input->post('ready_for_exp_pcs');
     // $balence_qty_in_pcs = $this->input->post('balence_qty_in_pcs');
 
-    $getsearchstockvendordeatils= $this->admin_model->getsearchstockvendordeatils($stock_id);
+    $getsearchstockvendordeatils= $this->admin_model->getsearchstockvendordeatilsforprint($stock_id);
     $getsearchstockformdataforprint = $this->admin_model->getsearchstockformdataforprint($stock_id,$getsearchstockvendordeatils[0]['part_number_id']);
     $getexportrejecteditemdataforprint  = $this->admin_model->getexportrejecteditemdataforprint($getsearchstockvendordeatils[0]['fin_id'],$getsearchstockvendordeatils[0]['vendor_po_id']);
     $getexportrecordsitemdataforprint = $this->admin_model->getexportrecordsitemdataforprint($getsearchstockvendordeatils[0]['buyer_po_id'],$getsearchstockvendordeatils[0]['part_number_id']);
