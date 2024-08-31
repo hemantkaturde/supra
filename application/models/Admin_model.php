@@ -11289,7 +11289,7 @@ class Admin_model extends CI_Model
             }
         }
 
-       $array_mearge = array_merge($counter_packaing_details,$data);
+       $array_mearge = array_merge($data_packaing_details,$data);
        return $array_mearge;
     }
 
