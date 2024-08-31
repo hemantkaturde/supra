@@ -18306,8 +18306,8 @@ public function download_sales_tracking_export_to_excel($sales_tracking_report_n
             }
 
 
-            $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount,  $buyer_invoice_date);
-            $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, date('d-m-Y',strtotime($element['buyer_invoice_date'])));
+            $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $element['invoice_number']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $buyer_invoice_date);
             // $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, '');
             $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $element['buyer']);
             $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['mode_of_shipment']);
