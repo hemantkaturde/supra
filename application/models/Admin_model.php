@@ -11204,6 +11204,9 @@ class Admin_model extends CI_Model
                         $counter_packaing_details = 0;
                         foreach ($getPackging_items_for_buyer_po_item as $key => $value_2) {
 
+                            print_r($value_2);
+                            exit;
+
 
                             if(trim($value['buyer_po_part_delivery_date'])=='0000-00-00'){
                                 $buyer_po_part_delivery_date = '';
