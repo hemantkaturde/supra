@@ -11202,7 +11202,7 @@ class Admin_model extends CI_Model
 
 
                             print_r($getPackging_items_for_buyer_po_item);
-                            exit;
+                            
 
                            
                             if(trim($value['buyer_po_part_delivery_date'])=='0000-00-00'){
