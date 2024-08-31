@@ -11195,8 +11195,20 @@ class Admin_model extends CI_Model
 
                 if($getPackging_items_for_buyer_po_item){
 
-                    print_r($getPackging_items_for_buyer_po_item);
+                    if(count($getPackging_items_for_buyer_po_item) > 0){
 
+
+                         foreach ($getPackging_items_for_buyer_po_item as $key => $value2) {
+
+                            echo $value2;
+                            # code...
+                         }
+
+
+                    }
+        
+                   
+                    
                 }else{
                             
                         if(trim($value['buyer_po_part_delivery_date'])=='0000-00-00'){
