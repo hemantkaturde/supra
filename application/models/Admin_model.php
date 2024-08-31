@@ -11195,16 +11195,18 @@ class Admin_model extends CI_Model
 
                 $getPackging_items_for_buyer_po_item = $this->getPackging_items_for_buyer_po_item($value['buyer_po_idpo'],$value['part_number_id_buyer_Po']);
 
-                print_r($getPackging_items_for_buyer_po_item );
-                exit;
-
-
+              
                
                 // if($getPackging_items_for_buyer_po_item){
                     $data_packaing_details = array();
                     $counter_packaing_details = 0;
                    
                     if(count($getPackging_items_for_buyer_po_item) > 0){
+
+                        print_r($getPackging_items_for_buyer_po_item );
+                        exit;
+        
+        
 
                        
                         foreach ($getPackging_items_for_buyer_po_item as $key => $value_2) {
