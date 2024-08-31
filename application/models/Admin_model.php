@@ -16109,7 +16109,7 @@ public function getsearchstockvendordeatilsforprint($stock_id,$item_id){
     $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_STOCKS.'.vendor_name');
     $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_STOCKS_ITEM.'.part_number');   
     $this->db->where(TBL_STOCKS.'.stock_id', $stock_id); 
-    $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.part_number_id', $item_id); 
+    $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id', $item_id); 
 
     $this->db->where(TBL_STOCKS_ITEM.'.status', 1);
     $query = $this->db->get(TBL_STOCKS_ITEM);
