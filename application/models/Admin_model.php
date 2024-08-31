@@ -11211,13 +11211,13 @@ class Admin_model extends CI_Model
                                 $buyer_po_part_delivery_date = $value['buyer_po_part_delivery_date'];
                             }
 
-                            $data_packaing_details[$counter_packaing_details]['buyer_name'] =$value['buyer_name'];
-                            $data_packaing_details[$counter_packaing_details]['sales_order_number'] =$value['sales_order_number'].'-'.$value['buyer_po_number'];
-                            $data_packaing_details[$counter_packaing_details]['buyer_po_date'] =$value['buyer_po_date'];
-                            $data_packaing_details[$counter_packaing_details]['part_number'] =$value['part_number'];
-                            $data_packaing_details[$counter_packaing_details]['type_of_raw_material'] =$value['name'];
-                            $data_packaing_details[$counter_packaing_details]['order_qty'] =$value['order_oty'];
-                            $data_packaing_details[$counter_packaing_details]['buyer_po_part_delivery_date'] =$buyer_po_part_delivery_date;
+                            $data_packaing_details[$counter]['buyer_name'] =$value['buyer_name'];
+                            $data_packaing_details[$counter]['sales_order_number'] =$value['sales_order_number'].'-'.$value['buyer_po_number'];
+                            $data_packaing_details[$counter]['buyer_po_date'] =$value['buyer_po_date'];
+                            $data_packaing_details[$counter]['part_number'] =$value['part_number'];
+                            $data_packaing_details[$counter]['type_of_raw_material'] =$value['name'];
+                            $data_packaing_details[$counter]['order_qty'] =$value['order_oty'];
+                            $data_packaing_details[$counter]['buyer_po_part_delivery_date'] =$buyer_po_part_delivery_date;
 
                             $get_export_invoice_details =$this->getexportinvoicedetails($value['buyer_po_idpo'],$value['part_number_id_buyer_Po'],$buyer_po_part_delivery_date,$value_2['buyer_invoice_number']);
                             if($get_export_invoice_details){
@@ -11237,12 +11237,12 @@ class Admin_model extends CI_Model
                                 $buyer_invoice_date = '';
                                 $remark = '';
 
-                            $data_packaing_details[$counter_packaing_details]['export_invoice_number'] = $buyer_invoice_number;
-                            $data_packaing_details[$counter_packaing_details]['buyer_invoice_qty'] =$buyer_invoice_qty;
-                            $data_packaing_details[$counter_packaing_details]['buyer_invoice_date'] =$buyer_invoice_date;
-                            $data_packaing_details[$counter_packaing_details]['remark'] =$remark;
+                            $data_packaing_details[$counter]['export_invoice_number'] = $buyer_invoice_number;
+                            $data_packaing_details[$counter]['buyer_invoice_qty'] =$buyer_invoice_qty;
+                            $data_packaing_details[$counter]['buyer_invoice_date'] =$buyer_invoice_date;
+                            $data_packaing_details[$counter]['remark'] =$remark;
                             
-                            $counter_packaing_details++;
+                            //$counter_packaing_details++;
 
                         }                 
 
