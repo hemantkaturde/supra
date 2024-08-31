@@ -11214,7 +11214,7 @@ class Admin_model extends CI_Model
             foreach ($fetch_result as $key => $value)
             {
 
-                $getPackging_items_for_buyer_po_item = $this->getPackging_items_for_buyer_po_item($value['buyer_po_idpo'],$value['part_number_id_buyer_Po']);
+                $getPackging_items_for_buyer_po_item = $this->getPackging_items_for_buyer_po_item($value['buyer_po_idpo'],$value['part_number_id_buyer_Po'],$value['buyer_po_part_delivery_date']);
 
               
                
@@ -11319,7 +11319,7 @@ class Admin_model extends CI_Model
         $this->db->join(TBL_PACKING_INSTRACTION, TBL_PACKING_INSTRACTION.'.id = '.TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id');
         $this->db->where(TBL_PACKING_INSTRACTION.'.buyer_po_number', $buyer_po_id);
         $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.part_number', $part_number);
-        // $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.buyer_item_delivery_date', $buyer_po_part_delivery_date);
+        $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.buyer_item_delivery_date', $buyer_po_part_delivery_date);
         //  $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_number', $buyer_invoice_number);
         // $this->db->group_by(TBL_PACKING_INSTRACTION_DETAILS.'.id');
         $query = $this->db->get(TBL_PACKING_INSTRACTION_DETAILS);
