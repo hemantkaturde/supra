@@ -11038,9 +11038,9 @@ public function exportbuyerdetailsrecord($buyer_name,$part_number,$from_date,$to
         $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $element['buyer_po_date']);
         $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['part_number']);
         $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['name']);
-        $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['order_oty']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['order_qty']);
         $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['buyer_po_part_delivery_date']);
-        $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $element['buyer_invoice_number']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $element['export_invoice_number']);
         $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, $element['buyer_invoice_qty']);
         $objPHPExcel->getActiveSheet()->SetCellValue('J' . $rowCount, $element['buyer_invoice_date']);
         $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, $element['remark']);

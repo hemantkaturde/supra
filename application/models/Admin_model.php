@@ -11900,7 +11900,7 @@ class Admin_model extends CI_Model
                             $data_packaing_details[$counter_packaing_details]['sales_order_number'] =$value['sales_order_number'].'-'.$value['buyer_po_number'];
                             $data_packaing_details[$counter_packaing_details]['buyer_po_date'] =$value['buyer_po_date'];
                             $data_packaing_details[$counter_packaing_details]['part_number'] =$value['part_number'];
-                            $data_packaing_details[$counter_packaing_details]['type_of_raw_material'] =$value['name'];
+                            $data_packaing_details[$counter_packaing_details]['name'] =$value['name'];
                             $data_packaing_details[$counter_packaing_details]['order_qty'] =$value['order_oty'];
                             $data_packaing_details[$counter_packaing_details]['buyer_po_part_delivery_date'] =$buyer_po_part_delivery_date;
 
