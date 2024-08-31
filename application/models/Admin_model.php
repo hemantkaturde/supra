@@ -11313,7 +11313,7 @@ class Admin_model extends CI_Model
     }
 
 
-    public function getPackging_items_for_buyer_po_item($buyer_po_id,$part_number){
+    public function getPackging_items_for_buyer_po_item($buyer_po_id,$part_number,$buyer_po_part_delivery_date){
 
         $this->db->select(TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_number,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_qty,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_date,'.TBL_PACKING_INSTRACTION_DETAILS.'.remark,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_number');
         $this->db->join(TBL_PACKING_INSTRACTION, TBL_PACKING_INSTRACTION.'.id = '.TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id');
