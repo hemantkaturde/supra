@@ -11200,9 +11200,47 @@ class Admin_model extends CI_Model
 
                          foreach ($getPackging_items_for_buyer_po_item as $key => $value2) {
 
-                           
-                            echo $value2;
 
+                            print_r($value2);
+                            exit;
+
+                           
+                            if(trim($value['buyer_po_part_delivery_date'])=='0000-00-00'){
+                                $buyer_po_part_delivery_date = '';
+                            }else{
+                                $buyer_po_part_delivery_date = $value['buyer_po_part_delivery_date'];
+                            }
+
+                            $data[$counter]['buyer_name'] =$value['buyer_name'];
+                            $data[$counter]['sales_order_number'] =$value['sales_order_number'].'-'.$value['buyer_po_number'];
+                            $data[$counter]['buyer_po_date'] =$value['buyer_po_date'];
+                            $data[$counter]['part_number'] =$value['part_number'];
+                            $data[$counter]['type_of_raw_material'] =$value['name'];
+                            $data[$counter]['order_qty'] =$value['order_oty'];
+                            $data[$counter]['buyer_po_part_delivery_date'] =$buyer_po_part_delivery_date;
+
+                            $get_export_invoice_details =$this->getexportinvoicedetails($value['buyer_po_idpo'],$value['part_number_id_buyer_Po'],$buyer_po_part_delivery_date,$value2['buyer_invoice_number']);
+                            if($get_export_invoice_details){
+                                $buyer_invoice_number = $get_export_invoice_details[0]['buyer_invoice_number'];
+                                $buyer_invoice_qty = $get_export_invoice_details[0]['buyer_invoice_qty'];
+                                $buyer_invoice_date = $get_export_invoice_details[0]['buyer_invoice_date'];
+                                $remark = $get_export_invoice_details[0]['remark'];
+                            }else{
+                                $buyer_invoice_number = '';
+                                $buyer_invoice_qty = '';
+                                $buyer_invoice_date = '';
+                                $remark = '';
+                            }
+
+                                $buyer_invoice_number = '';
+                                $buyer_invoice_qty = '';
+                                $buyer_invoice_date = '';
+                                $remark = '';
+
+                            $data[$counter]['export_invoice_number'] = $buyer_invoice_number;
+                            $data[$counter]['buyer_invoice_qty'] =$buyer_invoice_qty;
+                            $data[$counter]['buyer_invoice_date'] =$buyer_invoice_date;
+                            $data[$counter]['remark'] =$remark;
                             $counteqqqr++;
 
                          }
@@ -11262,7 +11300,7 @@ class Admin_model extends CI_Model
 
     public function getPackging_items_for_buyer_po_item($buyer_po_id,$part_number){
 
-        $this->db->select(TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_number,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_qty,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_date,'.TBL_PACKING_INSTRACTION_DETAILS.'.remark');
+        $this->db->select(TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_number,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_qty,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_date,'.TBL_PACKING_INSTRACTION_DETAILS.'.remark,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_number');
         $this->db->join(TBL_PACKING_INSTRACTION, TBL_PACKING_INSTRACTION.'.id = '.TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id');
         $this->db->where(TBL_PACKING_INSTRACTION.'.buyer_po_number', $buyer_po_id);
         $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.part_number', $part_number);
