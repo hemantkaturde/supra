@@ -16094,7 +16094,7 @@ public function getsearchstockvendordeatils($stock_id,$item_id){
 }
 
 
-public function getsearchstockvendordeatilsforprint($stock_id){
+public function getsearchstockvendordeatilsforprint($stock_id,$item_id){
 
     $this->db->select('*,'.TBL_BUYER_MASTER.'.buyer_name as by_name,'.TBL_VENDOR.'.vendor_name as ven_name,'.TBL_VENDOR_PO_MASTER.'.po_number as vpo_number,'.TBL_FINISHED_GOODS.'.part_number as fg_part_number,'.TBL_STOCKS_ITEM.'.id as search_stock_id,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date,'.TBL_STOCKS_ITEM.'.part_number as part_number_id,'.TBL_STOCKS.'.stock_id as stock_id_form,'.TBL_VENDOR_PO_MASTER_ITEM.'.id as vendor_po_item_id,'.TBL_STOCKS_ITEM.'.part_number as search_stock_item_id,'.TBL_VENDOR_PO_MASTER.'.id as vendor_po_id,'.TBL_BUYER_PO_MASTER.'.id  as buyer_po_id,'.TBL_STOCKS.'.remark as stock_remark,'.TBL_BUYER_PO_MASTER.'.buyer_po_number as original_po,'.TBL_FINISHED_GOODS.'.fin_id as finishgood_id,'.TBL_FINISHED_GOODS.'.name as description,'.TBL_FINISHED_GOODS.'.part_number as part_no,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_qty_po,'.TBL_BUYER_PO_MASTER_ITEM.'.order_oty as buyer_order_qty_buyeritem,'.TBL_FINISHED_GOODS.'.fin_id');
     $this->db->join(TBL_STOCKS, TBL_STOCKS.'.stock_id = '.TBL_STOCKS_ITEM.'.stock_form_id');
@@ -16109,7 +16109,7 @@ public function getsearchstockvendordeatilsforprint($stock_id){
     $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_STOCKS.'.vendor_name');
     $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_STOCKS_ITEM.'.part_number');   
     $this->db->where(TBL_STOCKS.'.stock_id', $stock_id); 
-    // $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.part_number_id', $item_id); 
+    $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.part_number_id', $item_id); 
 
     $this->db->where(TBL_STOCKS_ITEM.'.status', 1);
     $query = $this->db->get(TBL_STOCKS_ITEM);
