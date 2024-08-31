@@ -11197,11 +11197,12 @@ class Admin_model extends CI_Model
 
                
                 // if($getPackging_items_for_buyer_po_item){
+                    $data_packaing_details = array();
+                    $counter_packaing_details = 0;
                    
                     if(count($getPackging_items_for_buyer_po_item) > 0){
 
-                        $data_packaing_details = array();
-                        $counter_packaing_details = 0;
+                       
                         foreach ($getPackging_items_for_buyer_po_item as $key => $value_2) {
 
                             if(trim($value['buyer_po_part_delivery_date'])=='0000-00-00'){
@@ -11236,14 +11237,14 @@ class Admin_model extends CI_Model
                             $data_packaing_details[$counter_packaing_details]['buyer_invoice_date'] =$buyer_invoice_date;
                             $data_packaing_details[$counter_packaing_details]['remark'] =$remark;
                             
-                          
+                            $counter_packaing_details++;
 
                         }                 
 
                     
                     }
         
-                    $counter_packaing_details++;
+                   
                     
                 // }else{
                             
@@ -11286,10 +11287,11 @@ class Admin_model extends CI_Model
                 // }
 
 
-               // $counter++; 
+               // $counter++;  
+               return $data_packaing_details;
             }
         }
-        return $data_packaing_details;
+      //  return $data_packaing_details;
     }
 
 
