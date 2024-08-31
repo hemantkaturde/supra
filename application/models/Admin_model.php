@@ -11246,11 +11246,11 @@ class Admin_model extends CI_Model
 
                         }                 
 
-                        $counter_packaing_details++;
+                       
 
                     }
         
-                   
+                    $counter_packaing_details++;
                     
                 }else{
                             
