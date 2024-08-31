@@ -17775,12 +17775,6 @@ public function download_sales_tracking_export_to_excel($sales_tracking_report_n
             }
 
 
-            if($element['brc_number_and_dt'] || $element['brc_number_and_dt']!='0000-00-00'){
-                $brc_number_and_dt =date('d-m-Y',strtotime($element['brc_number_and_dt']));
-            }else{
-                $brc_number_and_dt='';
-            }
-
             $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $element['sr_no']);
             $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $element['invoice_number']);
             $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $buyer_invoice_date);
@@ -17793,7 +17787,7 @@ public function download_sales_tracking_export_to_excel($sales_tracking_report_n
             $objPHPExcel->getActiveSheet()->SetCellValue('J' . $rowCount, $payment_recvd_date);
             $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, $element['payment_rcivd_amt']);
             $objPHPExcel->getActiveSheet()->SetCellValue('L' . $rowCount, $element['exchange_rate_as_per_sb']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('M' . $rowCount, $brc_number_and_dt);   
+            $objPHPExcel->getActiveSheet()->SetCellValue('M' . $rowCount, $element['brc_number_and_dt']);   
             $objPHPExcel->getActiveSheet()->SetCellValue('N' . $rowCount, $element['transaction_id']);   
             $objPHPExcel->getActiveSheet()->SetCellValue('O' . $rowCount, $element['brc_value']);   
             $objPHPExcel->getActiveSheet()->SetCellValue('P' . $rowCount, $element['credit_note_number']);   
@@ -17879,11 +17873,6 @@ public function download_sales_tracking_export_to_excel($sales_tracking_report_n
                     $payment_recvd_date='';
                 }
 
-                if($element['brc_number_and_dt'] || $element['brc_number_and_dt']!='0000-00-00'){
-                    $brc_number_and_dt =date('d-m-Y',strtotime($element['brc_number_and_dt']));
-                }else{
-                    $brc_number_and_dt='';
-                }
 
                $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $element['sr_no']);
                $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $element['invoice_number']);
@@ -17897,7 +17886,7 @@ public function download_sales_tracking_export_to_excel($sales_tracking_report_n
                $objPHPExcel->getActiveSheet()->SetCellValue('J' . $rowCount, $sb_date);
                $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, $payment_recvd_date);
                $objPHPExcel->getActiveSheet()->SetCellValue('L' . $rowCount, $element['payment_rcivd_amt']);
-               $objPHPExcel->getActiveSheet()->SetCellValue('M' . $rowCount, $brc_number_and_dt);   
+               $objPHPExcel->getActiveSheet()->SetCellValue('M' . $rowCount, $element['brc_number_and_dt']);   
                $objPHPExcel->getActiveSheet()->SetCellValue('N' . $rowCount, $element['transaction_id']);   
                $objPHPExcel->getActiveSheet()->SetCellValue('O' . $rowCount, $element['brc_value']);   
                $objPHPExcel->getActiveSheet()->SetCellValue('P' . $rowCount, $element['credit_note_number']);   
