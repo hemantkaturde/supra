@@ -11201,7 +11201,7 @@ class Admin_model extends CI_Model
                          foreach ($getPackging_items_for_buyer_po_item as $key => $value2) {
 
 
-                            print_r($value2);
+                            print_r($getPackging_items_for_buyer_po_item);
                             exit;
 
                            
