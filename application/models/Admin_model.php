@@ -8872,9 +8872,7 @@ class Admin_model extends CI_Model
                         $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['rejectionformid']."' class='fa fa-trash-o deleterejectionform' aria-hidden='true'></i>"; 
 
                     }else{
-
-
-
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addrejectionformitemsdata/".$value['rejectionformid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>   &nbsp ";
                     }
 
                 }
