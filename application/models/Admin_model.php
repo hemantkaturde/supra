@@ -11288,7 +11288,9 @@ class Admin_model extends CI_Model
                $counter++;  
             }
         }
-       return $data;
+
+       $array_mearge = array_merge($counter_packaing_details,$data);
+       return $array_mearge;
     }
 
 
