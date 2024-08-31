@@ -11185,7 +11185,9 @@ class Admin_model extends CI_Model
 
         $data = array();
         $counter = 0;
-
+        $data_packaing_details = array();
+        $counter_packaing_details = 0;
+       
       
 
         if(count($fetch_result) > 0)
@@ -11198,18 +11200,17 @@ class Admin_model extends CI_Model
               
                
                 // if($getPackging_items_for_buyer_po_item){
-                    $data_packaing_details = array();
-                    $counter_packaing_details = 0;
                    
                     if(count($getPackging_items_for_buyer_po_item) > 0){
 
                      
-                        foreach ($getPackging_items_for_buyer_po_item[$counter_packaing_details] as $value_2) {
+                     
+                        foreach ($getPackging_items_for_buyer_po_item as $key => $value_2) {
 
                           
-                          
-                            print_r($value_2);
-                            exit;
+                            
+
+
                           
                             if(trim($value['buyer_po_part_delivery_date'])=='0000-00-00'){
                                 $buyer_po_part_delivery_date = '';
