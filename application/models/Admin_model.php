@@ -11164,6 +11164,7 @@ class Admin_model extends CI_Model
         $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_BUYER_PO_MASTER.'.buyer_name_id');
+        $this->db->where(TBL_FINISHED_GOODS.'.part_number=',923);
 
         if($params['search']['value'] != "") 
         {
@@ -11188,6 +11189,18 @@ class Admin_model extends CI_Model
         {
             foreach ($fetch_result as $key => $value)
             {
+
+
+
+
+                $getPackging_items_for_buyer_po_item = $this->getPackging_items_for_buyer_po_item($value['buyer_po_idpo'],$value['part_number_id_buyer_Po']);
+
+
+                print_r($getPackging_items_for_buyer_po_item);
+                exit;
+
+
+
                 if(trim($value['buyer_po_part_delivery_date'])=='0000-00-00'){
 
                     $buyer_po_part_delivery_date = '';
@@ -11203,18 +11216,18 @@ class Admin_model extends CI_Model
                 $data[$counter]['order_qty'] =$value['order_oty'];
                 $data[$counter]['buyer_po_part_delivery_date'] =$buyer_po_part_delivery_date;
 
-                // $get_export_invoice_details =$this->getexportinvoicedetails($value['buyer_po_idpo'],$value['part_number_id_buyer_Po'],$buyer_po_part_delivery_date,$value['buyer_invoice_number']);
-                // if($get_export_invoice_details){
-                //     $buyer_invoice_number = $get_export_invoice_details[0]['buyer_invoice_number'];
-                //     $buyer_invoice_qty = $get_export_invoice_details[0]['buyer_invoice_qty'];
-                //     $buyer_invoice_date = $get_export_invoice_details[0]['buyer_invoice_date'];
-                //     $remark = $get_export_invoice_details[0]['remark'];
-                // }else{
-                //     $buyer_invoice_number = '';
-                //     $buyer_invoice_qty = '';
-                //     $buyer_invoice_date = '';
-                //     $remark = '';
-                // }
+                $get_export_invoice_details =$this->getexportinvoicedetails($value['buyer_po_idpo'],$value['part_number_id_buyer_Po'],$buyer_po_part_delivery_date,$value['buyer_invoice_number']);
+                if($get_export_invoice_details){
+                    $buyer_invoice_number = $get_export_invoice_details[0]['buyer_invoice_number'];
+                    $buyer_invoice_qty = $get_export_invoice_details[0]['buyer_invoice_qty'];
+                    $buyer_invoice_date = $get_export_invoice_details[0]['buyer_invoice_date'];
+                    $remark = $get_export_invoice_details[0]['remark'];
+                }else{
+                    $buyer_invoice_number = '';
+                    $buyer_invoice_qty = '';
+                    $buyer_invoice_date = '';
+                    $remark = '';
+                }
 
                     $buyer_invoice_number = '';
                     $buyer_invoice_qty = '';
@@ -11231,6 +11244,21 @@ class Admin_model extends CI_Model
         return $data;
     }
 
+
+    public function getPackging_items_for_buyer_po_item($buyer_po_id,$part_number){
+
+        $this->db->select(TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_number,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_qty,'.TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_date,'.TBL_PACKING_INSTRACTION_DETAILS.'.remark');
+        $this->db->join(TBL_PACKING_INSTRACTION, TBL_PACKING_INSTRACTION.'.id = '.TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id');
+        $this->db->where(TBL_PACKING_INSTRACTION.'.buyer_po_number', $buyer_po_id);
+        $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.part_number', $part_number);
+        // $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.buyer_item_delivery_date', $buyer_po_part_delivery_date);
+        //  $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_number', $buyer_invoice_number);
+        $this->db->group_by(TBL_PACKING_INSTRACTION_DETAILS.'.id');
+        $query = $this->db->get(TBL_PACKING_INSTRACTION_DETAILS);
+        $fetch_result = $query->result_array();
+        return $fetch_result;
+
+    }
 
     
 
