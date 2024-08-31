@@ -11204,10 +11204,6 @@ class Admin_model extends CI_Model
                         $counter_packaing_details = 0;
                         foreach ($getPackging_items_for_buyer_po_item as $key => $value_2) {
 
-                            print_r($value_2);
-                            
-
-
                             if(trim($value['buyer_po_part_delivery_date'])=='0000-00-00'){
                                 $buyer_po_part_delivery_date = '';
                             }else{
@@ -11235,11 +11231,6 @@ class Admin_model extends CI_Model
                                 $remark = '';
                             }
 
-                                $buyer_invoice_number = '';
-                                $buyer_invoice_qty = '';
-                                $buyer_invoice_date = '';
-                                $remark = '';
-
                             $data_packaing_details[$counter_packaing_details]['export_invoice_number'] = $buyer_invoice_number;
                             $data_packaing_details[$counter_packaing_details]['buyer_invoice_qty'] =$buyer_invoice_qty;
                             $data_packaing_details[$counter_packaing_details]['buyer_invoice_date'] =$buyer_invoice_date;
@@ -11249,8 +11240,7 @@ class Admin_model extends CI_Model
 
                         }                 
 
-                       
-
+                    
                     }
         
                    
