@@ -11288,7 +11288,7 @@ class Admin_model extends CI_Model
                $counter++;  
             }
         }
-       return $data_packaing_details;
+       return $data;
     }
 
 
