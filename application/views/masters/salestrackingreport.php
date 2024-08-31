@@ -35,13 +35,17 @@
                                         <th>Buyer Name</th>
                                         <th>Clearance Done By</th>
                                         <th>Mode of Shipment</th>
-                                        <th>Payment Terms</th>
-                                        <th>Inv. Amount</th>
-                                        <th>Igst Value</th>
-                                        <th>Igst Rcved Amt</th>
-                                        <th>Igst Rcved Date</th>
-                                        <th>No. Of Ctns</th>
                                         <th>EGM Status</th>
+                                        <!-- <th>Payment Terms</th> -->
+                                        <th>Inv. Amount</th>
+                                        <th>Dbk Recd Amount</th>
+                                        <!-- <th>Igst Value</th> -->
+                                        <th>Igst Rcved Amt</th>
+                                        <th>Brc Number & Date</th>
+
+                                        <th>BL/Awb Date</th>
+                                        <!-- <th>No. Of Ctns</th> -->
+                                        
                                         <th>Action</th>
                                     </tr>
                                 </thead>

@@ -13369,10 +13369,10 @@ public function getfetchsalestrackingReportcount($params){
         $this->db->or_where(TBL_SALES_TRACKING_REPORT.".payment_terms LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_SALES_TRACKING_REPORT.".inv_amount LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_SALES_TRACKING_REPORT.".igst_rcved_amt LIKE '%".$params['search']['value']."%'");
-        $this->db->or_where(TBL_SALES_TRACKING_REPORT.".igst_rcved_date LIKE '%".$params['search']['value']."%'");
-        $this->db->or_where(TBL_SALES_TRACKING_REPORT.".no_of_ctns LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_SALES_TRACKING_REPORT.".bl_awb_date LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_SALES_TRACKING_REPORT.".brc_number_and_dt LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_SALES_TRACKING_REPORT.".EGM_status LIKE '%".$params['search']['value']."%'");
-        $this->db->or_where(TBL_SALES_TRACKING_REPORT.".igst_value LIKE '%".$params['search']['value']."%')");
+        $this->db->or_where(TBL_SALES_TRACKING_REPORT.".dbk_recd_amount LIKE '%".$params['search']['value']."%')");
     }
 
    
@@ -13385,7 +13385,7 @@ public function getfetchsalestrackingReportcount($params){
 
 public function getfetchsalestrackingReportdata($params){
 
-    $this->db->select('*,'.TBL_SALES_TRACKING_REPORT.'.id as sales_tracking_report,'.TBL_BUYER_MASTER.'.buyer_name');
+    $this->db->select('*,'.TBL_SALES_TRACKING_REPORT.'.id as sales_tracking_report,'.TBL_BUYER_MASTER.'.buyer_name,'.TBL_SALES_TRACKING_REPORT.'.dbk_recd_amount as dbk_amt');
     $this->db->join(TBL_PACKING_INSTRACTION_DETAILS, TBL_PACKING_INSTRACTION_DETAILS.'.id = '.TBL_SALES_TRACKING_REPORT.'.invoice_number');
     $this->db->join(TBL_PACKING_INSTRACTION, TBL_PACKING_INSTRACTION.'.id = '.TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id');
     $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_PACKING_INSTRACTION.'.buyer_po_number');
@@ -13401,10 +13401,10 @@ public function getfetchsalestrackingReportdata($params){
         $this->db->or_where(TBL_SALES_TRACKING_REPORT.".payment_terms LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_SALES_TRACKING_REPORT.".inv_amount LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_SALES_TRACKING_REPORT.".igst_rcved_amt LIKE '%".$params['search']['value']."%'");
-        $this->db->or_where(TBL_SALES_TRACKING_REPORT.".igst_rcved_date LIKE '%".$params['search']['value']."%'");
-        $this->db->or_where(TBL_SALES_TRACKING_REPORT.".no_of_ctns LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_SALES_TRACKING_REPORT.".bl_awb_date LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_SALES_TRACKING_REPORT.".brc_number_and_dt LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_SALES_TRACKING_REPORT.".EGM_status LIKE '%".$params['search']['value']."%'");
-        $this->db->or_where(TBL_SALES_TRACKING_REPORT.".igst_value LIKE '%".$params['search']['value']."%')");
+        $this->db->or_where(TBL_SALES_TRACKING_REPORT.".dbk_recd_amount LIKE '%".$params['search']['value']."%')");
     }
 
    
@@ -13424,13 +13424,16 @@ public function getfetchsalestrackingReportdata($params){
             $data[$counter]['CHA_forwarder'] =  $value['buyer_name'];
             $data[$counter]['clearance_done_by'] =  $value['clearance_done_by'];
             $data[$counter]['mode_of_shipment'] = $value['mode_of_shipment'];
-            $data[$counter]['payment_terms'] =  $value['payment_terms'];
-            $data[$counter]['inv_amount'] =  $value['inv_amount'];
-            $data[$counter]['igst_value'] =  $value['igst_value'];
-            $data[$counter]['igst_rcved_amt'] =  $value['igst_rcved_amt'];
-            $data[$counter]['igst_rcved_date'] =  $value['igst_rcved_date'];
-            $data[$counter]['no_of_ctns'] =  $value['no_of_ctns'];
             $data[$counter]['EGM_status'] =  $value['EGM_status'];
+            // $data[$counter]['payment_terms'] =  $value['payment_terms'];
+            $data[$counter]['inv_amount'] =  $value['inv_amount'];
+            $data[$counter]['dbk_recd_amount'] =  $value['dbk_amt'];
+            // $data[$counter]['igst_value'] =  $value['igst_value'];
+            $data[$counter]['igst_rcved_amt'] =  $value['igst_rcved_amt'];
+            $data[$counter]['brc_number_and_dt'] =  $value['brc_number_and_dt'];
+            $data[$counter]['bl_awb_date'] =  $value['bl_awb_date'];
+            // $data[$counter]['no_of_ctns'] =  $value['no_of_ctns'];
+         
             $data[$counter]['action'] = '';
 
             if($this->session->userdata('roleText')=='Superadmin'){
