@@ -16728,7 +16728,7 @@ public function fetchseachbypartnumberreportdata($params,$finish_good_part_numbe
             $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id');
             $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
             $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.part_number_id', $finish_good_part_number); 
-            $this->db->limit($params['length'],$params['start']);
+            // $this->db->limit($params['length'],$params['start']);
             $this->db->order_by(TBL_BUYER_PO_MASTER_ITEM.'.id','DESC');
             $query_buyer_po = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
             $buyer_po_result = $query_buyer_po->result_array();
@@ -16738,7 +16738,7 @@ public function fetchseachbypartnumberreportdata($params,$finish_good_part_numbe
             $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id');
             $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
             $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id', $finish_good_part_number); 
-            $this->db->limit($params['length'],$params['start']);
+            // $this->db->limit($params['length'],$params['start']);
             $this->db->order_by(TBL_VENDOR_PO_MASTER_ITEM.'.id','DESC');
             $query_vendor_po = $this->db->get(TBL_VENDOR_PO_MASTER_ITEM);
             $vendor_po_result = $query_vendor_po->result_array();
@@ -16749,7 +16749,7 @@ public function fetchseachbypartnumberreportdata($params,$finish_good_part_numbe
             $this->db->join(TBL_VENDOR_PO_CONFIRMATION, TBL_VENDOR_PO_CONFIRMATION.'.id = '.TBL_VENDOR_PO_CONFIRMATION_ITEM.'.vendor_po_confirmation_id');
             $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_CONFIRMATION_ITEM.'.part_number_id');
             $this->db->where(TBL_VENDOR_PO_CONFIRMATION_ITEM.'.part_number_id', $finish_good_part_number); 
-            $this->db->limit($params['length'],$params['start']);
+            // $this->db->limit($params['length'],$params['start']);
             $this->db->order_by(TBL_VENDOR_PO_CONFIRMATION_ITEM.'.id','DESC');
             $query_vendor_po_confirmation = $this->db->get(TBL_VENDOR_PO_CONFIRMATION_ITEM);
             $vendor_po_confirmation_result = $query_vendor_po_confirmation->result_array();
@@ -16759,7 +16759,7 @@ public function fetchseachbypartnumberreportdata($params,$finish_good_part_numbe
             $this->db->join(TBL_JOB_WORK, TBL_JOB_WORK.'.id = '.TBL_JOB_WORK_ITEM.'.jobwork_id');
             $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_JOB_WORK_ITEM.'.part_number_id');
             $this->db->where(TBL_JOB_WORK_ITEM.'.part_number_id', $finish_good_part_number); 
-            $this->db->limit($params['length'],$params['start']);
+            // $this->db->limit($params['length'],$params['start']);
             $this->db->order_by(TBL_JOB_WORK_ITEM.'.id','DESC');
             $query_job_work_challan_ = $this->db->get(TBL_JOB_WORK_ITEM);
             $job_work_challan_result = $query_job_work_challan_->result_array();
@@ -16769,7 +16769,7 @@ public function fetchseachbypartnumberreportdata($params,$finish_good_part_numbe
             $this->db->join(TBL_OMS_CHALLAN, TBL_OMS_CHALLAN.'.id = '.TBL_OMS_CHALLAN_ITEM.'.oms_chllan_id');
             $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_OMS_CHALLAN_ITEM.'.part_number');
             $this->db->where(TBL_OMS_CHALLAN_ITEM.'.part_number', $finish_good_part_number); 
-            $this->db->limit($params['length'],$params['start']);
+            // $this->db->limit($params['length'],$params['start']);
             $this->db->order_by(TBL_OMS_CHALLAN_ITEM.'.id','DESC');
             $query_oms_challan = $this->db->get(TBL_OMS_CHALLAN_ITEM);
             $oms_challan_challan_result = $query_oms_challan->result_array();
@@ -16779,7 +16779,7 @@ public function fetchseachbypartnumberreportdata($params,$finish_good_part_numbe
             $this->db->join(TBL_CHALLAN_FORM, TBL_CHALLAN_FORM.'.challan_id  = '.TBL_CHALLAN_FORM_ITEM.'.challan_id');
             $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_CHALLAN_FORM_ITEM.'.part_number');
             $this->db->where(TBL_CHALLAN_FORM_ITEM.'.part_number', $finish_good_part_number); 
-            $this->db->limit($params['length'],$params['start']);
+            // $this->db->limit($params['length'],$params['start']);
             $this->db->order_by(TBL_CHALLAN_FORM_ITEM.'.id','DESC');
             $query_challan = $this->db->get(TBL_CHALLAN_FORM_ITEM);
             $challan_result = $query_challan->result_array();
@@ -16789,7 +16789,7 @@ public function fetchseachbypartnumberreportdata($params,$finish_good_part_numbe
             $this->db->join(TBL_REWORK_REJECTION, TBL_REWORK_REJECTION.'.id   = '.TBL_REWORK_REJECTION_ITEM.'.rework_rejection_id');
             $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_REWORK_REJECTION_ITEM.'.part_number');
             $this->db->where(TBL_REWORK_REJECTION_ITEM.'.part_number', $finish_good_part_number); 
-            $this->db->limit($params['length'],$params['start']);
+            // $this->db->limit($params['length'],$params['start']);
             $this->db->order_by(TBL_REWORK_REJECTION_ITEM.'.id','DESC');
             $query_rework_rejection = $this->db->get(TBL_REWORK_REJECTION_ITEM);
             $rework_rejection_result = $query_rework_rejection->result_array();
@@ -16799,7 +16799,7 @@ public function fetchseachbypartnumberreportdata($params,$finish_good_part_numbe
             $this->db->join(TBL_BILL_OF_MATERIAL, TBL_BILL_OF_MATERIAL.'.id   = '.TBL_BILL_OF_MATERIAL_ITEM.'.bom_id');
             $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BILL_OF_MATERIAL_ITEM.'.part_number');
             $this->db->where(TBL_BILL_OF_MATERIAL_ITEM.'.part_number', $finish_good_part_number); 
-            $this->db->limit($params['length'],$params['start']);
+            // $this->db->limit($params['length'],$params['start']);
             $this->db->order_by(TBL_BILL_OF_MATERIAL_ITEM.'.id','DESC');
             $query_bill_of_material = $this->db->get(TBL_BILL_OF_MATERIAL_ITEM);
             $query_bill_of_material_result = $query_bill_of_material->result_array();
@@ -16809,7 +16809,7 @@ public function fetchseachbypartnumberreportdata($params,$finish_good_part_numbe
             $this->db->join(TBL_BILL_OF_MATERIAL_VENDOR, TBL_BILL_OF_MATERIAL_VENDOR.'.id   = '.TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.vendor_bill_of_material_id');
             $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.part_number_id');
             $this->db->where(TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.part_number_id', $finish_good_part_number); 
-            $this->db->limit($params['length'],$params['start']);
+            // $this->db->limit($params['length'],$params['start']);
             $this->db->order_by(TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.id','DESC');
             $query_bill_of_material_vendor = $this->db->get(TBL_BILL_OF_MATERIAL_VENDOR_ITEM);
             $query_bill_of_material_vendor_result = $query_bill_of_material_vendor->result_array();
@@ -16819,7 +16819,7 @@ public function fetchseachbypartnumberreportdata($params,$finish_good_part_numbe
             $this->db->join(TBL_INCOMING_DETAILS, TBL_INCOMING_DETAILS.'.id   = '.TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id');
             $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
             $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.part_number', $finish_good_part_number); 
-            $this->db->limit($params['length'],$params['start']);
+            // $this->db->limit($params['length'],$params['start']);
             $this->db->order_by(TBL_INCOMING_DETAILS_ITEM.'.id','DESC');
             $query_incoming_details = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
             $query_incoming_details_result = $query_incoming_details->result_array();
@@ -16828,7 +16828,7 @@ public function fetchseachbypartnumberreportdata($params,$finish_good_part_numbe
             $this->db->join(TBL_STOCKS, TBL_STOCKS.'.stock_id   = '.TBL_STOCKS_ITEM.'.stock_form_id');
             $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_STOCKS_ITEM.'.part_number');
             $this->db->where(TBL_STOCKS_ITEM.'.part_number', $finish_good_part_number); 
-            $this->db->limit($params['length'],$params['start']);
+            // $this->db->limit($params['length'],$params['start']);
             $this->db->order_by(TBL_STOCKS_ITEM.'.id','DESC');
             $query_Stock = $this->db->get(TBL_STOCKS_ITEM);
             $query_query_Stock_result = $query_Stock->result_array(); 
@@ -16838,7 +16838,7 @@ public function fetchseachbypartnumberreportdata($params,$finish_good_part_numbe
             $this->db->join(TBL_QUALITY_RECORDS, TBL_QUALITY_RECORDS.'.quality_records_id    = '.TBL_QUALITY_RECORDS_ITEM.'.quality_records_id');
             $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_QUALITY_RECORDS_ITEM.'.part_number');
             $this->db->where(TBL_QUALITY_RECORDS_ITEM.'.part_number', $finish_good_part_number); 
-            $this->db->limit($params['length'],$params['start']);
+            // $this->db->limit($params['length'],$params['start']);
             $this->db->order_by(TBL_QUALITY_RECORDS_ITEM.'.id','DESC');
             $query_quality_records = $this->db->get(TBL_QUALITY_RECORDS_ITEM);
             $query_quality_records_result = $query_quality_records->result_array(); 
@@ -16848,11 +16848,22 @@ public function fetchseachbypartnumberreportdata($params,$finish_good_part_numbe
             $this->db->join(TBL_PACKING_INSTRACTION, TBL_PACKING_INSTRACTION.'.id    = '.TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id');
             $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_PACKING_INSTRACTION_DETAILS.'.part_number');
             $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.part_number', $finish_good_part_number); 
-            $this->db->limit($params['length'],$params['start']);
+            // $this->db->limit($params['length'],$params['start']);
             $this->db->order_by(TBL_PACKING_INSTRACTION_DETAILS.'.id','DESC');
             $query_packing_instract = $this->db->get(TBL_PACKING_INSTRACTION_DETAILS);
             $query_packing_instract_result = $query_packing_instract->result_array(); 
 
+
+
+            $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_REJECTION_FORM.'.id as view_id,'.TBL_REJECTION_FORM.'.rejection_number as form_number,"Stock Rejection" as form_name');
+            $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id');
+            $this->db->join(TBL_REJECTION_FORM, TBL_REJECTION_FORM.'.id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.rejection_form_id');
+            $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
+            $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id', $finish_good_part_number); 
+            // $this->db->limit($params['length'],$params['start']);
+            $this->db->order_by(TBL_REJECTION_FORM_REJECTED_ITEM.'.id','DESC');
+            $query_stock_rejection_ = $this->db->get(TBL_REJECTION_FORM_REJECTED_ITEM);
+            $stock_rejection_result = $query_stock_rejection_->result_array();
 
 
         }else{
@@ -17042,11 +17053,26 @@ public function fetchseachbypartnumberreportdata($params,$finish_good_part_numbe
                 }
 
 
+            if($form_type_finish_good=='StockRejection'){
+                $this->db->select(TBL_FINISHED_GOODS.'.part_number,'.TBL_REJECTION_FORM.'.id as view_id,'.TBL_REJECTION_FORM.'.rejection_number as form_number,"Stock Rejection" as form_name');
+                $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id');
+                $this->db->join(TBL_REJECTION_FORM, TBL_REJECTION_FORM.'.id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.rejection_form_id');
+                $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
+                $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id', $finish_good_part_number); 
+                // $this->db->limit($params['length'],$params['start']);
+                $this->db->order_by(TBL_REJECTION_FORM_REJECTED_ITEM.'.id','DESC');
+                $query_stock_rejection_ = $this->db->get(TBL_REJECTION_FORM_REJECTED_ITEM);
+                $stock_rejection_result = $query_stock_rejection_->result_array();
+
+            }else{
+                $stock_rejection_result = array();
+            }
+
     
        }
 
     
-        $fetch_result = array_merge($buyer_po_result,$vendor_po_result,$vendor_po_confirmation_result,$job_work_challan_result,$oms_challan_challan_result,$challan_result,$rework_rejection_result,$query_bill_of_material_result,$query_bill_of_material_vendor_result,$query_incoming_details_result,$query_query_Stock_result,$query_quality_records_result,$query_packing_instract_result);
+        $fetch_result = array_merge($buyer_po_result,$vendor_po_result,$vendor_po_confirmation_result,$job_work_challan_result,$oms_challan_challan_result,$challan_result,$rework_rejection_result,$query_bill_of_material_result,$query_bill_of_material_vendor_result,$query_incoming_details_result,$query_query_Stock_result,$query_quality_records_result,$query_packing_instract_result,$stock_rejection_result);
 
         $data = array();
         $counter = 0;
@@ -17106,6 +17132,10 @@ public function fetchseachbypartnumberreportdata($params,$finish_good_part_numbe
                     $color ='#D2691E';
                 }
 
+                
+                if($value['form_name']=='Stock Rejection'){
+                    $color ='#D2691E';
+                }
 
                 $data[$counter]['part_number'] = $value['part_number'];
                 $data[$counter]['sales_order_number'] = $value['form_number'];
@@ -17166,6 +17196,10 @@ public function fetchseachbypartnumberreportdata($params,$finish_good_part_numbe
                     $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addpackinginstractiondetails/".$value['view_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-external-link' aria-hidden='true'></i></a>  &nbsp";
                 }
 
+                if($value['form_name']=='Stock Rejection'){
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addrejectionformitemsdata/".$value['view_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-external-link' aria-hidden='true'></i></a>  &nbsp";
+                }
+
                 $counter++; 
             }
         }
@@ -17178,7 +17212,7 @@ public function fetchseachbypartnumberreportdata($params,$finish_good_part_numbe
                 $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.supplier_po_id');
                 $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id');
                 $this->db->where(TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id', $raw_material_part_number); 
-                $this->db->limit($params['length'],$params['start']);
+                // $this->db->limit($params['length'],$params['start']);
                 $this->db->order_by(TBL_SUPPLIER_PO_MASTER_ITEM.'.id','DESC');
                 $query_supplier_po = $this->db->get(TBL_SUPPLIER_PO_MASTER_ITEM);
                 $supplier_po_result = $query_supplier_po->result_array();
@@ -17189,7 +17223,7 @@ public function fetchseachbypartnumberreportdata($params,$finish_good_part_numbe
                 $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id', $raw_material_part_number); 
                 $this->db->where(TBL_VENDOR_PO_MASTER.'.supplier_name!=',""); 
                 $this->db->where(TBL_VENDOR_PO_MASTER.'.supplier_po_number!=',""); 
-                $this->db->limit($params['length'],$params['start']);
+                // $this->db->limit($params['length'],$params['start']);
                 $this->db->order_by(TBL_VENDOR_PO_MASTER_ITEM.'.id','DESC');
                 $query_vendor_po = $this->db->get(TBL_VENDOR_PO_MASTER_ITEM);
                 $vendor_po_result = $query_vendor_po->result_array();
@@ -17199,7 +17233,7 @@ public function fetchseachbypartnumberreportdata($params,$finish_good_part_numbe
                 $this->db->join(TBL_SUPPLIER_PO_CONFIRMATION, TBL_SUPPLIER_PO_CONFIRMATION.'.id = '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.supplier_po_confirmation_id');
                 $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.part_number_id');
                 $this->db->where(TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.part_number_id', $raw_material_part_number); 
-                $this->db->limit($params['length'],$params['start']);
+                // $this->db->limit($params['length'],$params['start']);
                 $this->db->order_by(TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.id','DESC');
                 $query_supplier_po_confirmation = $this->db->get(TBL_SUPPLIER_PO_CONFIRMATION_ITEM);
                 $supplier_supplier_po_confirmation_result = $query_supplier_po_confirmation->result_array();
@@ -17208,7 +17242,7 @@ public function fetchseachbypartnumberreportdata($params,$finish_good_part_numbe
                 $this->db->join(TBL_CHALLAN_FORM, TBL_CHALLAN_FORM.'.challan_id  = '.TBL_CHALLAN_FORM_ITEM.'.challan_id');
                 $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_CHALLAN_FORM_ITEM.'.part_number');
                 $this->db->where(TBL_CHALLAN_FORM_ITEM.'.part_number', $raw_material_part_number); 
-                $this->db->limit($params['length'],$params['start']);
+                // $this->db->limit($params['length'],$params['start']);
                 $this->db->order_by(TBL_CHALLAN_FORM_ITEM.'.id','DESC');
                 $query_challan = $this->db->get(TBL_CHALLAN_FORM_ITEM);
                 $challan_result = $query_challan->result_array();
@@ -17220,7 +17254,7 @@ public function fetchseachbypartnumberreportdata($params,$finish_good_part_numbe
                     $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.supplier_po_id');
                     $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id');
                     $this->db->where(TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id', $raw_material_part_number); 
-                    $this->db->limit($params['length'],$params['start']);
+                    // $this->db->limit($params['length'],$params['start']);
                     $this->db->order_by(TBL_SUPPLIER_PO_MASTER_ITEM.'.id','DESC');
                     $query_supplier_po = $this->db->get(TBL_SUPPLIER_PO_MASTER_ITEM);
                     $supplier_po_result = $query_supplier_po->result_array();
@@ -17236,7 +17270,7 @@ public function fetchseachbypartnumberreportdata($params,$finish_good_part_numbe
                     $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id', $raw_material_part_number); 
                     $this->db->where(TBL_VENDOR_PO_MASTER.'.supplier_name!=',""); 
                     $this->db->where(TBL_VENDOR_PO_MASTER.'.supplier_po_number!=',""); 
-                    $this->db->limit($params['length'],$params['start']);
+                    // $this->db->limit($params['length'],$params['start']);
                     $this->db->order_by(TBL_VENDOR_PO_MASTER_ITEM.'.id','DESC');
                     $query_vendor_po = $this->db->get(TBL_VENDOR_PO_MASTER_ITEM);
                     $vendor_po_result = $query_vendor_po->result_array();
@@ -17249,7 +17283,7 @@ public function fetchseachbypartnumberreportdata($params,$finish_good_part_numbe
                     $this->db->join(TBL_SUPPLIER_PO_CONFIRMATION, TBL_SUPPLIER_PO_CONFIRMATION.'.id = '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.supplier_po_confirmation_id');
                     $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.part_number_id');
                     $this->db->where(TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.part_number_id', $raw_material_part_number); 
-                    $this->db->limit($params['length'],$params['start']);
+                    // $this->db->limit($params['length'],$params['start']);
                     $this->db->order_by(TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.id','DESC');
                     $query_supplier_po_confirmation = $this->db->get(TBL_SUPPLIER_PO_CONFIRMATION_ITEM);
                     $supplier_supplier_po_confirmation_result = $query_supplier_po_confirmation->result_array();
@@ -17263,7 +17297,7 @@ public function fetchseachbypartnumberreportdata($params,$finish_good_part_numbe
                     $this->db->join(TBL_CHALLAN_FORM, TBL_CHALLAN_FORM.'.challan_id  = '.TBL_CHALLAN_FORM_ITEM.'.challan_id');
                     $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_CHALLAN_FORM_ITEM.'.part_number');
                     $this->db->where(TBL_CHALLAN_FORM_ITEM.'.part_number', $raw_material_part_number); 
-                    $this->db->limit($params['length'],$params['start']);
+                    // $this->db->limit($params['length'],$params['start']);
                     $this->db->order_by(TBL_CHALLAN_FORM_ITEM.'.id','DESC');
                     $query_challan = $this->db->get(TBL_CHALLAN_FORM_ITEM);
                     $challan_result = $query_challan->result_array();
