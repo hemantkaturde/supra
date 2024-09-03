@@ -14194,7 +14194,7 @@ public function getpreexportdetailsforInvoice($id){
 
 public function getpreexportdetailsitemsforInvoice($id){
 
-    $this->db->select('*,'.TBL_PREEXPORT_ITEM_DETAILS.'.remark as item_remark,'.TBL_PREEXPORT_ITEM_DETAILS.'.pre_export_id,'.TBL_PREEXPORT_ITEM_DETAILS.'.id as itemidwwww,'.TBL_BUYER_PO_MASTER.'.sales_order_number as po_number');
+    $this->db->select('*,'.TBL_PREEXPORT_ITEM_DETAILS.'.remark as item_remark,'.TBL_PREEXPORT_ITEM_DETAILS.'.pre_export_id,'.TBL_PREEXPORT_ITEM_DETAILS.'.id as itemidwwww,'.TBL_BUYER_PO_MASTER.'.sales_order_number as po_number,'.TBL_BUYER_PO_MASTER.'.id as buyer_po_id,'.TBL_FINISHED_GOODS.'.fin_id as part_number_id');
     $this->db->join(TBL_PREEXPORT, TBL_PREEXPORT.'.id = '.TBL_PREEXPORT_ITEM_DETAILS.'.pre_export_id');
     $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_PREEXPORT_ITEM_DETAILS.'.part_number');
     $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_PREEXPORT_ITEM_DETAILS.'.buyer_po_number_id');
@@ -14202,6 +14202,18 @@ public function getpreexportdetailsitemsforInvoice($id){
     $query = $this->db->get(TBL_PREEXPORT_ITEM_DETAILS);
     $row_data = $query->result_array();
     return $row_data;
+}
+
+
+public function getbuyeritemorderqty($buyer_po_id,$part_number_id){
+
+    $this->db->select(TBL_BUYER_PO_MASTER_ITEM.'.order_oty');
+    $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id', $buyer_po_id);
+    $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.part_number_id', $part_number_id);
+    $query = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
+    $row_data = $query->result_array();
+    return $row_data;
+
 }
 
 
