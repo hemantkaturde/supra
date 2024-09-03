@@ -16862,7 +16862,7 @@ public function fetchseachbypartnumberreportdata($params,$finish_good_part_numbe
             $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id', $finish_good_part_number); 
             // $this->db->limit($params['length'],$params['start']);
             $this->db->order_by(TBL_REJECTION_FORM_REJECTED_ITEM.'.id','DESC');
-            $this->db->group_by(TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id');
+            $this->db->group_by(TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id',TBL_REJECTION_FORM.'.id');
             $query_stock_rejection_ = $this->db->get(TBL_REJECTION_FORM_REJECTED_ITEM);
             $stock_rejection_result = $query_stock_rejection_->result_array();
 
@@ -17062,7 +17062,7 @@ public function fetchseachbypartnumberreportdata($params,$finish_good_part_numbe
                 $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id', $finish_good_part_number); 
                 // $this->db->limit($params['length'],$params['start']);
                 $this->db->order_by(TBL_REJECTION_FORM_REJECTED_ITEM.'.id','DESC');
-                $this->db->group_by(TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id');
+                $this->db->group_by(TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id',TBL_REJECTION_FORM.'.id');
                 $query_stock_rejection_ = $this->db->get(TBL_REJECTION_FORM_REJECTED_ITEM);
                 $stock_rejection_result = $query_stock_rejection_->result_array();
 
