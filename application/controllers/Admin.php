@@ -17930,7 +17930,7 @@ public function download_sales_tracking_export_to_excel($sales_tracking_report_n
          $objPHPExcel->setActiveSheetIndex(0);
          // set Header
          $objPHPExcel->getActiveSheet()->SetCellValue('A1', 'INV.NO');
-         $objPHPExcel->getActiveSheet()->SetCellValue('B1', 'NAME OF CUSTOMER');
+         $objPHPExcel->getActiveSheet()->SetCellValue('B1', 'BUYER NAME');
          $objPHPExcel->getActiveSheet()->SetCellValue('C1', 'BL NO');
          $objPHPExcel->getActiveSheet()->SetCellValue('D1', 'BL DATE'); 
          $objPHPExcel->getActiveSheet()->SetCellValue('E1', 'S/B NO');
