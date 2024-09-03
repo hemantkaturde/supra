@@ -9125,7 +9125,7 @@ class Admin_model extends CI_Model
 
   }
 
-  public function getallcalculationrejecteditems($vendor_po_item_id,$vendor_po_id){
+  public function getallcalculationrejecteditems($vendor_po_item_id,$vendor_po_id,$finishgood_id){
 
     // $this->db->select('sum(qty_In_pcs) as total_rejected_qty_in_pcs');
     // //$this->db->where(TBL_INCOMING_DETAILS_ITEM.'.part_number', $part_number);
@@ -9143,7 +9143,9 @@ class Admin_model extends CI_Model
     $this->db->join(TBL_REJECTION_FORM, TBL_REJECTION_FORM.'.id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.rejection_form_id');
     $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.status', 1);
     $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.vendor_po_id', $vendor_po_id);
-    $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id', $vendor_po_item_id);
+    // $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id', $vendor_po_item_id);
+    $this->db->where(TBL_FINISHED_GOODS.'.fin_id', $finishgood_id);
+
     $this->db->order_by(TBL_REJECTION_FORM_REJECTED_ITEM.'.id ','DESC');
     $query = $this->db->get(TBL_REJECTION_FORM_REJECTED_ITEM);
     $fetch_result = $query->result_array();

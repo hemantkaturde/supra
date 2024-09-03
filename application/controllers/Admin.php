@@ -10192,9 +10192,9 @@ class Admin extends BaseController
         }
     }
 
-    public function getallcalculationrejecteditems($vendor_po_item_id,$vendor_po_id){
+    public function getallcalculationrejecteditems($vendor_po_item_id,$vendor_po_id,$finishgood_id){
 
-        $getallcalculationrejecteditems = $this->admin_model->getallcalculationrejecteditems($vendor_po_item_id,$vendor_po_id);
+        $getallcalculationrejecteditems = $this->admin_model->getallcalculationrejecteditems($vendor_po_item_id,$vendor_po_id,$finishgood_id);
 
         if($getallcalculationrejecteditems){
             $content = $getallcalculationrejecteditems[0];

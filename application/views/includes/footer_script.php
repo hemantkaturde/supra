@@ -15914,12 +15914,12 @@
 <?php if($pageTitle=='Search Stock'){ ?>
 	<script type="text/javascript">    
 
-
 		var vendor_po_id =  $('#vendor_po_id').val();
 		var vendor_po_item_id =  $('#vendor_po_item_id').val();
 		var sock_id =  $('#stock_id').val();
 		var part_number_id =  $('#part_number_id').val();
 		var buyer_po_number_id =  $('#buyer_po_number_id').val();
+		var finishgood_id =  $('#finishgood_id').val();
 
 
         $(document).ready(function() {
@@ -15991,7 +15991,7 @@
 						$('#total_rejected_qty_in_kgs').val('');
 
 						$.ajax({
-							url : "<?php echo ADMIN_PATH;?>admin/getallcalculationrejecteditems/"+vendor_po_item_id+"/"+vendor_po_id,
+							url : "<?php echo ADMIN_PATH;?>admin/getallcalculationrejecteditems/"+vendor_po_item_id+"/"+vendor_po_id+"/"+finishgood_id,
 							type: "POST",
 							data : {'vendor_name' : '','vendor_item_id':''},
 							success: function(data, textStatus, jqXHR)
