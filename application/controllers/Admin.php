@@ -240,21 +240,18 @@ class Admin extends BaseController
      */
     function logHistory($userId = NULL)
     {
-            $data['dbinfo'] = $this->user_model->gettablemb('tbl_log','cias');
-            if(isset($data['dbinfo']->total_size))
-            {
-                if(($data['dbinfo']->total_size)>1000){
-                    $this->backupLogTable();
-                }
-            }
-            $data['userRecords'] = $this->user_model->logHistory($userId);
+            // $data['dbinfo'] = $this->user_model->gettablemb('tbl_log','cias');
+            // if(isset($data['dbinfo']->total_size))
+            // {
+            //     if(($data['dbinfo']->total_size)>1000){
+            //         $this->backupLogTable();
+            //     }
+            // }
 
-            $process = 'Log Records';
+            $process = 'Log History';
             $processFunction = 'Admin/logHistory';
             $this->logrecord($process,$processFunction);
-
-            $this->global['pageTitle'] = 'Admin : Log Records';
-            
+            $this->global['pageTitle'] = 'Log History';
             $this->loadViews("logHistory", $this->global, $data, NULL);
     }
 
@@ -459,6 +456,35 @@ class Admin extends BaseController
     }
 
 
+     /**
+     * This function used to Log Listing
+     */
+    public function fetchlogrecord(){
+
+        $params = $_REQUEST;
+        $totalRecords = $this->admin_model->getLoghistoryCount($params); 
+        $queryRecords = $this->admin_model->getLoghistorydata($params); 
+
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+        echo json_encode($json_data);
+     }
+
+
     /**
      * This function is used to load the Comapny Master
      */
@@ -529,6 +555,7 @@ class Admin extends BaseController
         $this->global['pageTitle'] = 'Supplier Master';
         $this->loadViews("masters/supplierMaster", $this->global, $data, NULL);
     }
+
 
     /**
      * This function is used to load the Supplier Master Listing

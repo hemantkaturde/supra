@@ -22562,3 +22562,39 @@
 	    });	
     </script>
 <?php } ?>
+
+
+<?php if($pageTitle=='Log History'){ ?>
+<script type="text/javascript">
+		$(document).ready(function() {
+				var dt = $('#log_record_view').DataTable({
+					"columnDefs": [ 
+						{ className: "details-control", "targets": [ 0 ] },
+						{ "width": "10%", "targets": 0 },
+						{ "width": "20%", "targets": 1 },
+						{ "width": "10%", "targets": 2 },
+						{ "width": "8%", "targets": 3 },
+						{ "width": "10%", "targets": 4 },
+						{ "width": "10%", "targets": 5 },
+						{ "width": "5%", "targets": 6 },
+						{ "width": "5%", "targets": 7 },
+					],
+					responsive: true,
+					"oLanguage": {
+						"sEmptyTable": "<i>No CHA Found.</i>",
+					}, 
+					"bSort" : false,
+					"bFilter":true,
+					"bLengthChange": true,
+					"iDisplayLength": 10,   
+					"bProcessing": true,
+					"serverSide": true,
+					"ajax":{
+						url :"<?php echo base_url();?>admin/fetchlogrecord",
+						type: "post",
+					},
+				});
+		});
+
+</script>
+<?php } ?>

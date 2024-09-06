@@ -17915,6 +17915,73 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 }
 
 
+    public function getLoghistoryCount($params){
+
+        $this->db->select('*');       
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_LOG_RECORD.".userName LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_LOG_RECORD.".process LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_LOG_RECORD.".processFunction LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_LOG_RECORD.".userRoleId LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_LOG_RECORD.".userRoleText LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_LOG_RECORD.".userIp LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_LOG_RECORD.".userAgent LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_LOG_RECORD.".agentString LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_LOG_RECORD.".createdDtm LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_LOG_RECORD.".platform LIKE '%".$params['search']['value']."%')");
+        }
+
+        $query = $this->db->get(TBL_LOG_RECORD);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+    }
+
+    public function getLoghistorydata($params){
+        $this->db->select('*');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_LOG_RECORD.".userName LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_LOG_RECORD.".process LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_LOG_RECORD.".processFunction LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_LOG_RECORD.".userRoleId LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_LOG_RECORD.".userRoleText LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_LOG_RECORD.".userIp LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_LOG_RECORD.".userAgent LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_LOG_RECORD.".agentString LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_LOG_RECORD.".createdDtm LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_LOG_RECORD.".platform LIKE '%".$params['search']['value']."%')");
+        }
+
+        $this->db->limit($params['length'],$params['start']);
+        $this->db->order_by(TBL_LOG_RECORD.'.id','DESC');
+        $query = $this->db->get(TBL_LOG_RECORD);
+        $fetch_result = $query->result_array();
+
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                // $data[$counter]['id'] = $value['id'];
+                $data[$counter]['userName'] = $value['userName'];
+                $data[$counter]['process'] = $value['process'];
+                $data[$counter]['processFunction'] = $value['processFunction'];
+                $data[$counter]['userRoleId'] = $value['userRoleId'];
+                $data[$counter]['userRoleText'] = $value['userRoleText'];
+                $data[$counter]['userIp'] = $value['userIp'];
+                $data[$counter]['userAgent'] = $value['userAgent'];
+                $data[$counter]['agentString'] = $value['agentString'];
+                $data[$counter]['platform'] =  $value['platform'];
+                $data[$counter]['createdDtm'] =  $value['createdDtm'];
+                $counter++; 
+            }
+        }
+        return $data;
+    }
+
+
 }
 
 

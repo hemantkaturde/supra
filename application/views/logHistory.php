@@ -3,8 +3,7 @@
   <section class="content-header">
     <h1>
       <i class="fa fa-users"></i> Log History
-      <small>
-Users Log History</small>
+      <small>Users Log History</small>
     </h1>
   </section>
   <section class="content">
@@ -21,32 +20,11 @@ Users Log History</small>
           </div>
           <!-- /.box-header -->
           <div class="box-body table-responsive no-padding">
-            <?php
-                    $this->load->helper('form');
-                    $error = $this->session->flashdata('error');
-                    if($error)
-                    {
-                ?>
-              <div class="alert alert-danger alert-dismissable">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                <?php echo $this->session->flashdata('error'); ?>
-              </div>
-              <?php } ?>
-              <?php  
-                    $success = $this->session->flashdata('success');
-                    if($success)
-                    {
-                ?>
-              <div class="alert alert-success alert-dismissable">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                <?php echo $this->session->flashdata('success'); ?>
-              </div>
-              <?php } ?>
               <div class="panel-body">
-                <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                <table width="100%" class="table table-striped table-bordered table-hover" id="log_record_view">
                   <thead>
                     <tr>
-                      <th>ID</th>
+                      <!-- <th>ID</th> -->
                       <th>UserName</th>
                       <th>Process</th>
                       <th>Process Function</th>
@@ -60,51 +38,6 @@ Users Log History</small>
                     </tr>
                   </thead>
                   <tbody>
-                    <?php
-                      if(!empty($userRecords))
-                      {
-                          foreach($userRecords as $record)
-                          {
-                      ?>
-                      <tr>
-                        <td>
-                          <?php echo $record->id ?>
-                        </td>
-                        <td>
-                          <?php echo $record->userName ?>
-                        </td>
-                        <td>
-                          <?php echo $record->process ?>
-                        </td>
-                        <td>
-                          <?php echo $record->processFunction ?>
-                        </td>
-                        <td>
-                          <?php echo $record->userRoleId ?>
-                        </td>
-                        <td>
-                          <?php echo $record->userRoleText ?>
-                        </td>
-                        <td>
-                          <?php echo $record->userIp ?>
-                        </td>
-                        <td>
-                          <?php echo $record->userAgent ?>
-                        </td>
-                        <td>
-                          <?php echo $record->agentString ?>
-                        </td>
-                        <td>
-                          <?php echo $record->platform ?>
-                        </td>
-                        <td>
-                          <?php echo $record->createdDtm ?>
-                        </td>
-                      </tr>
-                      <?php
-                          }
-                      }
-                      ?>
                   </tbody>
                 </table>
               </div>
