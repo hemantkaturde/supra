@@ -7497,7 +7497,7 @@ class Admin_model extends CI_Model
                     $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['stock_id']."' class='fa fa-trash-o deletestockform' aria-hidden='true'></i>"; 
                 }else{
 
-                    if($this->session->userdata('roleText')==' Stock'){
+                    if($this->session->userdata('roleText')=='Stock'){
                         $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewstcokformdetails/".$value['stock_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
                         $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editstcokformdetails/".$value['stock_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
                         $data[$counter]['action'] .= "<a href='".ADMIN_PATH."stockrejectionform' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-ban' aria-hidden='true'></i></a>   &nbsp ";
