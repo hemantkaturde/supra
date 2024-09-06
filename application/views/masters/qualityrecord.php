@@ -2,7 +2,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            <i class="fa fa-users"></i> Qulity Record Form
+            <i class="fa fa-users"></i> Quality Record Form
             <small>Add,Edit,Delete</small>
         </h1>
     </section>
@@ -11,14 +11,14 @@
             <div class="col-xs-6 text-left">
                 <ul class="breadcrumb" style="background-color:#ecf0f5 !important">
                     <li class="completed"><a href="javascript:void(0);">Masters</a></li>
-                    <li class="active"><a href="javascript:void(0);"> Qulity Record Form</a></li>
+                    <li class="active"><a href="javascript:void(0);"> Quality Record Form</a></li>
                 </ul>
             </div>
             <div class="col-xs-6 text-right">
                 <div class="form-group">
                 <?php if($this->session->userdata('roleText')=='Superadmin' || $this->session->userdata('roleText')=='QC' ){ ?>
                     <a class="btn btn-primary" href="<?php echo base_url(); ?>addNewqualityrecord">
-                        <i class="fa fa-plus"></i> Add Qulity Record Form</a>
+                        <i class="fa fa-plus"></i> Add Quality Record Form</a>
                  <?php } ?>
                 </div>
             </div>
