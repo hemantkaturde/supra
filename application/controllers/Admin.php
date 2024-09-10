@@ -8833,6 +8833,26 @@ class Admin extends BaseController
 
     }
 
+
+    public function getItemdetailsdependonvendorpoforstockformOMSChallan(){
+        if($this->input->post('part_number')) {
+            $getPartNameBypartid = $this->admin_model->getItemdetailsdependonvendorpoforstockformOMSChallan($this->input->post('part_number'),$this->input->post('vendor_po_number'),$this->input->post('vendor_name'));
+        
+            if($getPartNameBypartid){
+                $content = $getPartNameBypartid[0];
+                echo json_encode($content);
+
+            }else{
+                echo 'failure';
+            }
+           
+        } else {
+            echo 'failure';
+        }
+
+    }
+
+
     public function stockform(){
         $process = 'Stock Form';
         $processFunction = 'Admin/stockform';

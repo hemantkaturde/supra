@@ -16593,7 +16593,7 @@
 				if(vendor_name){
 					if(vendor_po_number){
 							$.ajax({
-								url : "<?php echo ADMIN_PATH;?>getItemdetailsdependonvendorpoforstockform",
+								url : "<?php echo ADMIN_PATH;?>admin/getItemdetailsdependonvendorpoforstockformOMSChallan",
 								type: "POST",
 								data : {'part_number' : part_number,'vendor_po_number':vendor_po_number,'vendor_name':vendor_name},
 								success: function(data, textStatus, jqXHR)
