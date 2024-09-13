@@ -191,6 +191,10 @@
                         || $pageUrl=="viewcreditnoteform"
                         || $pageUrl=="viewpaymentdetails"
                         || $pageUrl=="viewpoddetails"
+                        || $pageUrl=="buyerpo" 
+                        || $pageUrl=="addnewBuyerpo"  
+                        || $pageUrl=="viewBuyerpo" 
+                        || $pageUrl=="editBuyerpo"
                         ){echo 'active';}?>">
                       <a href="#">
                         <i class="fa fa-shopping-cart"></i> <span class="menu_label">Purchase</span>
@@ -199,6 +203,7 @@
                           </span>
                       </a>
                       <ul class="treeview-menu" >
+                        <li class="line_height <?php if($pageUrl=="buyerpo" || $pageUrl=="addnewBuyerpo"  || $pageUrl=="viewBuyerpo" || $pageUrl=="editBuyerpo" ){echo 'active';}?>"><a href="<?php echo base_url(); ?>buyerpo"><i class="fa fa-cubes"></i> Buyer PO</a></li>
                         <li class="line_height <?php if($pageUrl=="supplierpo" || $pageUrl=="addnewSupplierpo" || $pageUrl=="viewSupplierpo" || $pageUrl=="editSupplierpo"){echo 'active';}?>"><a href="<?php echo base_url(); ?>supplierpo"><i class="fa fa-cubes"></i> Supplier PO</a></li>
                         <li class="line_height <?php if($pageUrl=="vendorpo" || $pageUrl=="addnewVendorpo" || $pageUrl=="viewVendorpo"  || $pageUrl=="addnewVendorpo" || $pageUrl=="editVendorpo"){echo 'active';}?>"><a href="<?php echo base_url(); ?>vendorpo"><i class="fa fa-cubes"></i> Vendor PO</a></li> 
                         <li class="line_height <?php if($pageUrl=="supplierpoconfirmation" || $pageUrl=="addSupplierpoconfirmation" || $pageUrl =="viewSupplierpoconfirmation" || $pageUrl =="editSupplierpoconfirmation" ){echo 'active';}?>"><a href="<?php echo base_url(); ?>supplierpoconfirmation"><i class="fa fa-cubes"></i> Supplier PO Confirmation</a></li>
@@ -256,7 +261,7 @@
                       </ul>
                     </li>
 
-                    <li class="treeview <?php if($pageUrl=="buyerpo" || $pageUrl=="addnewBuyerpo"  || $pageUrl=="viewBuyerpo" || $pageUrl=="editBuyerpo" || $pageUrl=="packinginstaruction" || $pageUrl=="addnewpackinginstruction" || $pageUrl=="addpackinginstractiondetails" || $pageUrl=="editpackinginstraction" || $pageUrl=="exportdetails" || $pageUrl=="addnewExportDetails" || $pageUrl=="editexportdetails" || $pageUrl=="addExportdetailsitems" || $pageUrl=="viewexportdetails" || $pageUrl=="buyerpodetailsreport" || $pageUrl=="chadebitnote" || $pageUrl=="addchadebitnote" || $pageUrl=="editchadebitnote" || $pageUrl=="salestrackingreport" || $pageUrl=="addsalestrackingreport" || $pageUrl=="editsalestrackingreport" || $pageUrl=="salestrackingexcelreport" || $pageUrl=="viewpackinginstraction" || $pageUrl=="viewchadebitnote" || $pageUrl=="viewsalestrackingreport"){echo 'active';}?>">
+                    <li class="treeview <?php if($pageUrl=="packinginstaruction" || $pageUrl=="addnewpackinginstruction" || $pageUrl=="addpackinginstractiondetails" || $pageUrl=="editpackinginstraction" || $pageUrl=="exportdetails" || $pageUrl=="addnewExportDetails" || $pageUrl=="editexportdetails" || $pageUrl=="addExportdetailsitems" || $pageUrl=="viewexportdetails" || $pageUrl=="buyerpodetailsreport" || $pageUrl=="chadebitnote" || $pageUrl=="addchadebitnote" || $pageUrl=="editchadebitnote" || $pageUrl=="salestrackingreport" || $pageUrl=="addsalestrackingreport" || $pageUrl=="editsalestrackingreport" || $pageUrl=="salestrackingexcelreport" || $pageUrl=="viewpackinginstraction" || $pageUrl=="viewchadebitnote" || $pageUrl=="viewsalestrackingreport"){echo 'active';}?>">
                       <a href="#">
                         <i class="fa fa-money"></i> <span class="menu_label">Sales</span>
                           <span class="pull-right-container">
