@@ -16144,6 +16144,12 @@
 																					if(total_exp_qty_in_pcs==0){
 																						$('#balence_qty_in_pcs').val(ready_for_exp_pcs);
 																					}
+
+																					var total_exp_qty_in_kgs = $('#total_exp_qty_in_kgs').val();
+
+																					if(total_exp_qty_in_kgs==0){
+																						$('#balence_qty_in_kgs').val(precalculation_ready_for_export_kgs);
+																					}
 																			}
 																		},
 																		error: function (jqXHR, textStatus, errorThrown)
