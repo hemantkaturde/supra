@@ -2625,7 +2625,7 @@ class Admin_model extends CI_Model
             $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
             $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
             $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.pre_vendor_name');
-            $this->db->join(TBL_SUPPLIER_PO_CONFIRMATION_ITEM, TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.part_number_id = '.TBL_RAWMATERIAL.'.raw_id');
+            // $this->db->join(TBL_SUPPLIER_PO_CONFIRMATION_ITEM, TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.part_number_id = '.TBL_RAWMATERIAL.'.raw_id');
             $this->db->join(TBL_SUPPLIER_PO_CONFIRMATION_ITEM.' as a', 'a.vendor_id = '.TBL_VENDOR.'.ven_id');
             $this->db->join(TBL_SUPPLIER_PO_CONFIRMATION_ITEM.' as b', 'a.part_number_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
 
