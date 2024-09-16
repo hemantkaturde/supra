@@ -2642,9 +2642,10 @@ class Admin_model extends CI_Model
 
             $this->db->select('*,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_order_qty,'.TBL_VENDOR_PO_MASTER_ITEM.'.vendor_qty as supplier_order_qty,'.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.sent_qty as supplier_sent_qty');            $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
             $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
-            $this->db->join(TBL_SUPPLIER_PO_CONFIRMATION_ITEM, TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.part_number_id = '.TBL_RAWMATERIAL.'.raw_id');
             $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id');
             $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_VENDOR_PO_MASTER.'.supplier_po_number = '.TBL_SUPPLIER_PO_MASTER.'.id');
+            $this->db->join(TBL_SUPPLIER_PO_CONFIRMATION, TBL_SUPPLIER_PO_CONFIRMATION.'.supplier_po_number = '.TBL_SUPPLIER_PO_MASTER.'.id');
+            $this->db->join(TBL_SUPPLIER_PO_CONFIRMATION_ITEM, TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.supplier_po_confirmation_id = '.TBL_SUPPLIER_PO_CONFIRMATION.'.id');
 
 
             // $this->db->join(TBL_VENDOR_PO_MASTER_ITEM.' as c','c.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
