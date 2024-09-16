@@ -2641,7 +2641,7 @@ class Admin_model extends CI_Model
 
 
             $this->db->select('*,000 as vendor_order_qty,000 as supplier_order_qty,500 as supplier_sent_qty');
-            $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.part_number = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
+            $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
 
             // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
             // $this->db->join(TBL_VENDOR_PO_MASTER_ITEM.' as c','c.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
