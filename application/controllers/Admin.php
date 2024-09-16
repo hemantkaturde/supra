@@ -17019,7 +17019,7 @@ public function downloadenquiryformdata($id){
 
             $html.= '<tr style="text-align:left;border: 1px solid;">';
             $html.= '<td style="text-align:left;border: 1px solid;">Gross Weight</td>';
-            $html.= '<td style="text-align:left;border: 1px solid;">'.$value['groass_weight'].'</td>';
+            $html.= '<td style="text-align:left;border: 1px solid;">'.$value['engroass_weight'].'</td>';
             $html.= '<td style="text-align:left;border: 1px solid;"></td>';
             $html.= '<td style="text-align:left;border: 1px solid;"></td>';
             $html.= '<td style="text-align:left;border: 1px solid;"></td>';
