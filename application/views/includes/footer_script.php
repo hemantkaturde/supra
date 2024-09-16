@@ -16148,7 +16148,7 @@
 																					var total_exp_qty_in_kgs = $('#total_exp_qty_in_kgs').val();
 
 																					if(total_exp_qty_in_kgs==0){
-																						$('#balence_qty_in_kgs').val(precalculation_ready_for_export_kgs);
+																						$('#balence_qty_in_kgs').val(ready_for_exp_kgs);
 																					}
 																			}
 																		},
