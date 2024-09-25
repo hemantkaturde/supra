@@ -5463,7 +5463,7 @@ class Admin_model extends CI_Model
 
                 }else{
 
-                    if($this->session->userdata('roleText')==' Stock'){
+                    if($this->session->userdata('roleText')=='Stock'){
 
                         $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewreworkrejection/".$value['reworkrejectionid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
                         $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editreworkrejection/".$value['reworkrejectionid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
@@ -12890,7 +12890,7 @@ public function getpreexportdata($params){
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downloadpreexportform/".$value['export_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['export_id']."' class='fa fa-trash-o deletepreexport' aria-hidden='true'></i>"; 
             }else{
-                if($this->session->userdata('roleText')==' Stock'){
+                if($this->session->userdata('roleText')=='Stock'){
 
                     $data[$counter]['action'] .= "<a href='".ADMIN_PATH."exportdetailsitemdetails/".$value['export_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>   &nbsp ";
                     $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editpreexport/".$value['export_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
