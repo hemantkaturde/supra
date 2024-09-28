@@ -18,15 +18,14 @@
     <![endif]-->
 </head>
 
-<body class="login-page" style="background-image: url('<?=base_url()?>/assets/images/login_background.jpg');background-size: 1550px 700px;background-repeat: no-repeat;">
+<body class="login-page" style="background-image: url('<?=base_url()?>/assets/images/login_background.jpg');background-size: 1550px 700px;background-repeat: no-repeat;margin-top: -25px;!important">
   <div class="login-box">
-    <div class="login-logo">
-      <a href="#">
-        <b>Admin</b>
-        <p style="font-size: inherit;font-weight: lighter;">Supra Quality Export India Pvt Ltd</p>
+    <div class="login-logo" style="font-size: 25px; !important">
+      <a href="#"><img src="<?=base_url().'/assets/images/db_logo.png';?>" alt="" style="height:150px;width:150px"></img> </a>
+        <p style="font-size: inherit;font-weight: bolder;">Supra Quality Export India Pvt Ltd</p>
+        <b>ERP SYSTEM</b>
     </div>
-    <div class="login-logo">
-    </div>
+  
     <!-- /.login-logo -->
     <div class="login-box-body">
       <p class="login-box-msg">Login</p>
@@ -82,7 +81,7 @@
           </div>
         </form>
 
-        <a href="<?php echo base_url() ?>forgotPassword">Forgot Password</a>
+        <!-- <a href="<?php echo base_url() ?>forgotPassword">Forgot Password</a> -->
         <br>
 
     </div>
