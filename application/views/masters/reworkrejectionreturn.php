@@ -16,7 +16,7 @@
             </div>
             <div class="col-xs-6 text-right">
                 <div class="form-group">
-                    <?php if($this->session->userdata('roleText')=='Superadmin' || $this->session->userdata('roleText')=='Stock' ){ ?>
+                    <?php if($this->session->userdata('roleText')=='Superadmin' || $this->session->userdata('roleText')=='Stock' || $this->session->userdata('roleText')=='Purchase'){ ?>
                         <a class="btn btn-primary" href="<?php echo base_url(); ?>addneworkrejection">
                             <i class="fa fa-plus"></i> Add Rework / Rejection Return (RR)</a>
                     <?php } ?>

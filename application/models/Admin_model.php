@@ -5463,7 +5463,7 @@ class Admin_model extends CI_Model
 
                 }else{
 
-                    if($this->session->userdata('roleText')=='Stock'){
+                    if($this->session->userdata('roleText')=='Stock' || $this->session->userdata('roleText')=='Purchase' ){
 
                         $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewreworkrejection/".$value['reworkrejectionid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
                         $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editreworkrejection/".$value['reworkrejectionid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
@@ -5957,7 +5957,7 @@ class Admin_model extends CI_Model
                     $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['challan_id']."' class='fa fa-trash-o deletechallanform' aria-hidden='true'></i>"; 
                 }else{
 
-                    if($this->session->userdata('roleText')=='Stock'){
+                    if($this->session->userdata('roleText')=='Stock' || $this->session->userdata('roleText')=='Purchase'){
 
                         $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewchallanform/".$value['challan_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
                         $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editchallanform/".$value['challan_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";

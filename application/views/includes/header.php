@@ -183,7 +183,6 @@
                         || $pageUrl=="viewvendorpoconfirmation"
                         || $pageUrl=="viewbillofmaterial"
                         || $pageUrl=="viewjobwork"
-                    
                         || $pageUrl=="viewscrapreturn"
                         || $pageUrl=="viewomschallan"
                         || $pageUrl=="vieweqnuiryformdatabyid"
