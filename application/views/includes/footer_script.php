@@ -15600,7 +15600,7 @@
 				 
 				 var total_one_group = parseFloat(net_weight) *  parseFloat(actaul_recived_qty_in_pics);
 
-				 $("#actaul_recived_qty_in_kgs").val(total_one_group);
+				 $("#actaul_recived_qty_in_kgs").val(total_one_group.toFixed(2));
 			
 		});
 
