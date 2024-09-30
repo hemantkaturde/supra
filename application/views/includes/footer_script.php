@@ -15981,9 +15981,9 @@
 
 						var invoice_qty_in_pcs_data = jQuery.parseJSON( data );
 						$('#invoice_qty_in_pcs').val(parseFloat(invoice_qty_in_pcs_data.invoice_qty_In_pcs).toFixed(2));
-						$('#invoice_qty_in_kgs').val(parseFloat(invoice_qty_in_pcs_data.invoice_qty_In_kgs).toFixed(2));
+						$('#invoice_qty_in_kgs').val(parseFloat(invoice_qty_in_pcs_data.invoice_qty_In_kgs).toFixed(3));
 						$('#actual_received_qty_in_pcs').val(parseFloat(invoice_qty_in_pcs_data.actual_received_qty_in_pcss).toFixed(2));
-						$('#actual_received_qty_in_kgs').val(parseFloat(invoice_qty_in_pcs_data.actual_received_qty_in_kgs).toFixed(2));
+						$('#actual_received_qty_in_kgs').val(parseFloat(invoice_qty_in_pcs_data.actual_received_qty_in_kgs).toFixed(3));
 
 
 						/*================================================================================= */
@@ -16105,7 +16105,7 @@
 																					if(isNaN(ready_for_exp_kgs)){
 																				    	$('#ready_for_exp_kgs').val(0);
 																					}else{
-																						$('#ready_for_exp_kgs').val(ready_for_exp_kgs);
+																						$('#ready_for_exp_kgs').val(ready_for_exp_kgs.toFixed(3));
 																					}
 
 																					var previous_stock_bal = $('#previous_stock_bal').val();
@@ -16148,7 +16148,7 @@
 																					var total_exp_qty_in_kgs = $('#total_exp_qty_in_kgs').val();
 
 																					if(total_exp_qty_in_kgs==0){
-																						$('#balence_qty_in_kgs').val(ready_for_exp_kgs);
+																						$('#balence_qty_in_kgs').val(ready_for_exp_kgs.toFixed(3));
 																					}
 																			}
 																		},
