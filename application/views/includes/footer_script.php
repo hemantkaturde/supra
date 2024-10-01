@@ -1882,7 +1882,7 @@
 
 			if(buyer_name && buyer_po_number){
 				$.ajax({
-					url : "<?php echo ADMIN_PATH;?>checkBuyerpoand",
+					url : "<?php echo ADMIN_PATH;?>checkBuyerpoandbuyeralredayexists",
 					type: "POST",
 					data : {'buyer_name' : buyer_name},
 					success: function(data, textStatus, jqXHR)
