@@ -1886,14 +1886,18 @@
 					data : {'buyer_name' : buyer_name},
 					success: function(data, textStatus, jqXHR)
 					{
-						swal({
+						if(data == "failure")
+						{
+						}else{
+						        swal({
 								title: "Record Exists Notification",
 								text: "Buyer po Already Exists for this Buyer PO and Buyer. Do you Still want to Insert The record ?",
 								icon: "success",
 								button: "Ok",
 									},function(){ 
 												
-								});		
+								});	
+							}	
 					},
 					error: function (jqXHR, textStatus, errorThrown)
 					{
