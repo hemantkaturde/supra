@@ -1872,7 +1872,6 @@
 			return false;
 		});
 
-
 		$(document).on('change','#buyer_po_number,#buyer_name',function(e){  
 			e.preventDefault();
 
