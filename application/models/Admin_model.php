@@ -18072,6 +18072,20 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
+    public function checkBuyerpoandbuyeralredayexists($buyer_po_number,$buyer_name){
+
+        $this->db->select('*');
+        // $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_BILL_OF_MATERIAL.'.vendor_po_number');
+        // $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_BILL_OF_MATERIAL.'.buyer_po_number');
+        // $this->db->where(TBL_INCOMING_DETAILS.'.status', 1);
+        $this->db->where(TBL_BUYER_PO_MASTER.'.buyer_name_id', $buyer_name);
+        $this->db->where(TBL_BUYER_PO_MASTER.'.buyer_po_number', $buyer_po_number);
+        $query = $this->db->get(TBL_BUYER_PO_MASTER);
+        $row_data = $query->row_array();
+        return $row_data;
+    }
+
+
 }
 
 

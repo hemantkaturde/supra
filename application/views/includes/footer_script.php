@@ -1872,6 +1872,38 @@
 			return false;
 		});
 
+
+		$(document).on('change','#buyer_po_number,#buyer_name',function(e){  
+			e.preventDefault();
+
+			//$(".loader_ajax").show();
+			var buyer_po_number = $('#buyer_po_number').val();
+			var buyer_name = $('#buyer_name').val();
+
+			if(buyer_name && buyer_po_number){
+				$.ajax({
+					url : "<?php echo ADMIN_PATH;?>checkBuyerpoand",
+					type: "POST",
+					data : {'buyer_name' : buyer_name},
+					success: function(data, textStatus, jqXHR)
+					{
+						swal({
+								title: "Record Exists Notification",
+								text: "Buyer po Already Exists for this Buyer PO and Buyer. Do you Still want to Insert The record ?",
+								icon: "success",
+								button: "Ok",
+									},function(){ 
+												
+								});		
+					},
+					error: function (jqXHR, textStatus, errorThrown)
+					{
+						
+					}
+				});
+				return false;
+			}
+		});
     </script>
 <?php } ?>
 

@@ -106,6 +106,7 @@ $route['updateBuyer/(:any)'] = "admin/updateBuyer/$1";
 $route['deleteBuyer'] = "admin/deleteBuyer";
 $route['buyerpo'] = "admin/buyerpo";
 $route['addnewBuyerpo'] = "admin/addnewBuyerpo";
+$route['checkBuyerpoandbuyeralredayexists'] = "admin/checkBuyerpoandbuyeralredayexists";
 $route['fetchrBuyerpolist'] = "admin/fetchrBuyerpolist";
 $route['deleteBuyerpo'] = "admin/deleteBuyerpo";
 $route['supplierpo'] = "admin/supplierpo";

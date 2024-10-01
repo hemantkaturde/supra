@@ -2234,6 +2234,32 @@ class Admin extends BaseController
      }
 
 
+
+     public function checkBuyerpoandbuyeralredayexists(){
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+           $buyer_po_number =  trim($this->input->post('buyer_po_number'));
+           $buyer_name =  trim($this->input->post('buyer_name'));
+    
+           if($buyer_po_number && $buyer_name ){
+
+                $checkBuyerpoandbuyeralredayexists = $this->admin_model->checkBuyerpoandbuyeralredayexists($buyer_po_number,$buyer_name);
+                if(count($checkBuyerpoandbuyeralredayexists) >= 1) {
+                    echo 'success';
+                }else{
+    
+                    echo 'failure';
+                }
+           }else{
+            echo 'failure';
+           }
+        }else{
+    
+            echo 'failure';
+        }
+     }
+
     /**
      * This function is used to Delete the Buyer Master
      */
