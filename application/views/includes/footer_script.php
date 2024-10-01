@@ -1883,7 +1883,7 @@
 				$.ajax({
 					url : "<?php echo ADMIN_PATH;?>checkBuyerpoandbuyeralredayexists",
 					type: "POST",
-					data : {'buyer_name' : buyer_name},
+					data : {'buyer_name' : buyer_name,'buyer_po_number':buyer_po_number},
 					success: function(data, textStatus, jqXHR)
 					{
 						if(data == "failure")
