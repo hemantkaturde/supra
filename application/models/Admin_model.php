@@ -14485,7 +14485,7 @@ public function getEnquiryInforowdata($id){
 
 
 
-public function fetchscrapcalculationreportcount($params,$status){
+public function fetchscrapcalculationreportcount($params,$status,$vendor_name){
 
 
     /* Bill of material Data */
@@ -14522,6 +14522,10 @@ public function fetchscrapcalculationreportcount($params,$status){
         $this->db->where("(".TBL_RAWMATERIAL.".type_of_raw_material LIKE '%".str_replace("%20", " ", $status)."%')");
     }
 
+    if($vendor_name!='NA'){
+     $this->db->like(TBL_VENDOR.'.ven_id', $vendor_name);
+    }
+
     $this->db->group_by(TBL_BILL_OF_MATERIAL_ITEM.'.id');
     $query = $this->db->get(TBL_BILL_OF_MATERIAL);
     $rowcount = $query->num_rows();
@@ -14529,7 +14533,7 @@ public function fetchscrapcalculationreportcount($params,$status){
 
 }
 
-public function fetchscrapcalculationreportdata($params,$status){
+public function fetchscrapcalculationreportdata($params,$status,$vendor_name){
 
   
     /* Bill of material Data */
@@ -14566,9 +14570,12 @@ public function fetchscrapcalculationreportdata($params,$status){
   
     if($status!='NA'){
         // $this->db->Like(TBL_RAWMATERIAL.'.type_of_raw_material', "%".$status."");
-
         $this->db->where("(".TBL_RAWMATERIAL.".type_of_raw_material LIKE '%".str_replace("%20", " ", $status)."%')");
 
+    }
+
+    if($vendor_name!='NA'){
+        $this->db->like(TBL_VENDOR.'.ven_id', $vendor_name);
     }
 
     $this->db->where(TBL_BILL_OF_MATERIAL.'.status', 1);
@@ -14605,7 +14612,7 @@ public function fetchscrapcalculationreportdata($params,$status){
 
 
 
-public function getscrapcalculationreportdata($status){
+public function getscrapcalculationreportdata($status,$vendor_name_value){
 
     /* Bill of material Data */
     $this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_BILL_OF_MATERIAL.'.id as billofmaterialid,'.TBL_FINISHED_GOODS.'.part_number as partno,'.TBL_BUYER_MASTER.'.buyer_name as buyer, 2 as flag,'.TBL_BILL_OF_MATERIAL.'.bom_status,'.TBL_BILL_OF_MATERIAL_ITEM.'.rm_actual_aty as vendor_order_qty_co,'.TBL_BILL_OF_MATERIAL_ITEM.'.vendor_actual_recived_qty as vendor_received_qty_co,'.TBL_VENDOR_PO_MASTER.'.po_number as v_po_number,'.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.sent_qty_pcs,'.TBL_FINISHED_GOODS.'.name,'.TBL_RAWMATERIAL.'.type_of_raw_material');
@@ -14622,6 +14629,10 @@ public function getscrapcalculationreportdata($status){
     if($status!='NA'){
        // $this->db->like(TBL_RAWMATERIAL.'.type_of_raw_material', "%".$status."%");
         $this->db->where("(".TBL_RAWMATERIAL.".type_of_raw_material LIKE '%".str_replace("%20", " ", $status)."%')");
+    }
+
+    if($vendor_name!='NA'){
+        $this->db->like(TBL_VENDOR.'.ven_id', $vendor_name_value);
     }
 
     $this->db->where(TBL_BILL_OF_MATERIAL.'.status', 1);

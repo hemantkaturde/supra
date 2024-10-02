@@ -20428,17 +20428,28 @@
 	$(document).ready(function() {
 		$("#view_scrap_calculation_report").dataTable().fnDestroy();
 		var status = $('#status').val();
-		getallCurrentOrserReport(status);
+		var vendor_name = $('#vendor_name').val();
+		getallCurrentOrserReport(status,vendor_name);
 	});
 
 	$(document).on('change','#status',function(e){  
 		e.preventDefault();
 		$("#view_scrap_calculation_report").dataTable().fnDestroy();
 		var status = $('#status').val();
-		getallCurrentOrserReport(status);
+		var vendor_name = $('#vendor_name').val();
+		getallCurrentOrserReport(status,vendor_name);
 	});
 
-	function getallCurrentOrserReport(status){
+
+	$(document).on('change','#vendor_name',function(e){  
+		e.preventDefault();
+		$("#view_scrap_calculation_report").dataTable().fnDestroy();
+		var status = $('#status').val();
+		var vendor_name = $('#vendor_name').val();
+		getallCurrentOrserReport(status,vendor_name);
+	});
+
+	function getallCurrentOrserReport(status,vendor_name){
 
 			var dt = $('#view_scrap_calculation_report').DataTable({
 				"columnDefs": [ 
@@ -20463,7 +20474,7 @@
 				"bProcessing": true,
 				"serverSide": true,
 				"ajax":{
-					url :"<?php echo base_url();?>admin/fetchscrapcalculationreport/"+status,
+					url :"<?php echo base_url();?>admin/fetchscrapcalculationreport/"+status+"/"+vendor_name,
 					type: "post",
 				},
 			});
@@ -20482,8 +20493,18 @@
 			var status_value = 'NA';
 		}
 
+
+		var vendor_name         =    $("#vendor_name").val();
+
+		if(vendor_name){
+			var vendor_name_value = vendor_name;
+		}else{
+
+			var vendor_name_value = 'NA';
+		}
+
 		$.ajax({
-			url : "<?php echo ADMIN_PATH;?>admin/downlaod_scrap_calculation_report/"+status_value,
+			url : "<?php echo ADMIN_PATH;?>admin/downlaod_scrap_calculation_report/"+status_value+"/"+vendor_name_value,
 			type: "POST",
 			// data : {'hospitals' : hospitals, 'driver' : driver,'ride_start':ride_start,'ride_stop':ride_stop},
 			success: function(data, textStatus, jqXHR)
@@ -20497,7 +20518,7 @@
 				else
 				{
 					$(".report_type_error").html("");
-					window.location.href = "<?php echo ADMIN_PATH;?>admin/downlaod_scrap_calculation_report/"+status_value;
+					window.location.href = "<?php echo ADMIN_PATH;?>admin/downlaod_scrap_calculation_report/"+status_value+"/"+vendor_name_value;
 				}
 			},
 			error: function (jqXHR, textStatus, errorThrown)

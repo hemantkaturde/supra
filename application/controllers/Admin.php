@@ -17087,11 +17087,11 @@ public function scrapcalculationreport(){
     $this->loadViews("masters/scrapcalculationreport", $this->global, $data, NULL);  
 }
 
-public function fetchscrapcalculationreport($status){
+public function fetchscrapcalculationreport($status,$vendor_name){
 
     $params = $_REQUEST;
-    $totalRecords = $this->admin_model->fetchscrapcalculationreportcount($params,$status); 
-    $queryRecords = $this->admin_model->fetchscrapcalculationreportdata($params,$status); 
+    $totalRecords = $this->admin_model->fetchscrapcalculationreportcount($params,$status,$vendor_name); 
+    $queryRecords = $this->admin_model->fetchscrapcalculationreportdata($params,$status,$vendor_name); 
 
     $data = array();
     foreach ($queryRecords as $key => $value)
@@ -17113,13 +17113,13 @@ public function fetchscrapcalculationreport($status){
 
 }
 
-public function downlaod_scrap_calculation_report($status) {
+public function downlaod_scrap_calculation_report($status,$vendor_name_value) {
 
     
     // create file name
     $fileName = 'Scrap_Calculation_Report_Report -'.date('d-m-Y').'.xlsx';  
     // load excel library
-    $empInfo = $this->admin_model->getscrapcalculationreportdata($status);
+    $empInfo = $this->admin_model->getscrapcalculationreportdata($status,$vendor_name_value);
     $objPHPExcel = new PHPExcel();
     $objPHPExcel->setActiveSheetIndex(0);
     // set Header
