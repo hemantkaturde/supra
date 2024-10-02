@@ -11396,7 +11396,7 @@ public function exportitcreportITC($ITC_report,$job_work_no,$from_date,$to_date)
                     $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, 'Goods received back from JW');
                     $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, 'Part No '.$element['part_number']);
                     $objPHPExcel->getActiveSheet()->SetCellValue('J' . $rowCount, 'Pieces');
-                    $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, '');
+                    $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount,  $element['vendor_actual_recived_qty']);
                     $rowCount++;
                 }
             
