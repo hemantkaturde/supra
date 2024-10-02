@@ -17141,7 +17141,7 @@ public function downlaod_scrap_calculation_report($status,$vendor_name_value) {
     foreach ($empInfo as $element) {
         $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $element['vendorname']);
         $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $element['bom_number']);
-        $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $element['date']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, date("d-m-Y", strtotime($element['date'])));
         $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['fg_part_number']);
         $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['rm_type']);
         $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['rm_actual_aty']);
