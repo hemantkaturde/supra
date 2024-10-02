@@ -12129,6 +12129,7 @@ class Admin_model extends CI_Model
         if($to_date!='NA'){
             $this->db->where(TBL_JOB_WORK.".date <=", $todate);
         }
+        $this->db->group_by(TBL_JOB_WORK.'.id');
 
         $query = $this->db->get(TBL_JOB_WORK_ITEM);
         $fetch_result = $query->result_array();
