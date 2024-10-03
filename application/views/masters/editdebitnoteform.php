@@ -204,24 +204,6 @@
                                                 <p class="error tds_amount_error"></p>
                                             </div>
                                     </div>
-
-
-                                    <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="text_label">Text Label</label>
-                                                  <input type="text" class="form-control" value="<?=$getdebitnoteditailsdata[0]['text_label']?>" id="text_label" name="text_label" required>
-                                                <p class="error text_label_error"></p>
-                                            </div>
-                                    </div>
-
-                                    
-                                    <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="text_amount_charge">Amount</label>
-                                                  <input type="text" class="form-control"  value="<?=$getdebitnoteditailsdata[0]['text_amount']?>" id="text_amount" name="text_amount" required>
-                                                <p class="error text_amount_error"></p>
-                                            </div>
-                                    </div>
                                     
                                     <?php 
                                      if($getdebitnoteditailsdata[0]['freight_amount_charge']){
@@ -269,7 +251,22 @@
                                             </div>
                                     </div>
                                     
+                                    <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="text_label">Text Label</label>
+                                                  <input type="text" class="form-control" value="<?=$getdebitnoteditailsdata[0]['text_label']?>" id="text_label" name="text_label" required>
+                                                <p class="error text_label_error"></p>
+                                            </div>
+                                    </div>
 
+                                    
+                                    <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="text_amount_charge">Amount</label>
+                                                  <input type="text" class="form-control"  value="<?=$getdebitnoteditailsdata[0]['text_amount']?>" id="text_amount" name="text_amount" required>
+                                                <p class="error text_amount_error"></p>
+                                            </div>
+                                    </div>
 
 
                                     <div class="col-md-12">
