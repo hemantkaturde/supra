@@ -15475,7 +15475,7 @@ public function downlaoddebitnotevendor($id){
 
         /*03-10-2024 As Per new Logic*/
         $subtotalpluspandrcharges_TaX = $subtotalpluspandrcharges * $igst_tax_rate / 100;
-        $total_tax_val_after_pnf = 'IGST @ '.$igst_tax_rate.'%'.round($subtotalpluspandrcharges_TaX,2);
+        $total_tax_rate = 'IGST @ '.$igst_tax_rate.'%'.round($subtotalpluspandrcharges_TaX,2);
 
         $tax_value = '
             <tr style="border: 1px solid black;">
@@ -15487,7 +15487,9 @@ public function downlaoddebitnotevendor($id){
        
      }
 
-  
+     $total_amount_new_logic = $subtotalpluspandrcharges_TaX + $subtotalpluspandrcharges;
+
+
     $mpdf = new \Mpdf\Mpdf();
     // $html = $this->load->view('html_to_pdf',[],true);
     $html = '<table style=" width: 100%;text-align: center;border-collapse: collapse;font-family:cambria;">
@@ -15580,7 +15582,7 @@ public function downlaoddebitnotevendor($id){
 
              <tr style="border: 1px solid black;">
                     <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;"><b>Total amount</b></td>    
-                    <td style="border: 1px solid black;padding: 5px;">'.round($total_amount,2).'</td>
+                    <td style="border: 1px solid black;padding: 5px;">'.round($total_amount_new_logic,2).'</td>
               </tr>
 
               <tr style="border: 1px solid black;">
