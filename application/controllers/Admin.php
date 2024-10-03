@@ -15403,7 +15403,7 @@ public function downlaoddebitnotevendor($id){
             $total_pnf_charges += 0;
         }
 
-        $paid_amount = $value['rate'] * $value['ok_qty'];
+        $paid_amount = round($value['rate'],2) * round($value['ok_qty'],2);
         $total_paid_amount += $value['rate'] * $value['ok_qty'];
         $total_debit_amount +=$value['debit_amount'];
 
