@@ -15480,7 +15480,7 @@ public function downlaoddebitnotevendor($id){
         $tax_value = '
             <tr style="border: 1px solid black;">
                 <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;">IGST @ '.$igst_tax_rate.'%</td>    
-                <td style="border: 1px solid black;padding: 5px;">'.round($total_tax_val_after_pnf,2).'</td>
+                <td style="border: 1px solid black;padding: 5px;">'.round($subtotalpluspandrcharges_TaX,2).'</td>
             </tr>';
 
       
