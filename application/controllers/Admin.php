@@ -15470,17 +15470,20 @@ public function downlaoddebitnotevendor($id){
             $total_tax_rate = 'CGST @ '.$cgst_tax_rate.'% = '.round($cgst_tax_value,2).'<br/> SGST @ '.$sgst_tax_rate.'% = '.round($sgst_tax_value,2);
 
      }else{
-        $tax_value = '
-            <tr style="border: 1px solid black;">
-                <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;">IGST @ '.$igst_tax_rate.'%</td>    
-                <td style="border: 1px solid black;padding: 5px;">'.round($igst_tax_value,2).'</td>
-            </tr>';
 
         // $total_tax_rate = 'IGST @ '.$igst_tax_rate.'%'.round($igst_tax_value,2);
 
         /*03-10-2024 As Per new Logic*/
         $subtotalpluspandrcharges_TaX = $subtotalpluspandrcharges * $igst_tax_rate / 100;
-        $total_tax_rate = 'IGST @ '.$igst_tax_rate.'%'.round($subtotalpluspandrcharges_TaX,2);
+        $total_tax_val_after_pnf = 'IGST @ '.$igst_tax_rate.'%'.round($subtotalpluspandrcharges_TaX,2);
+
+        $tax_value = '
+            <tr style="border: 1px solid black;">
+                <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;">IGST @ '.$igst_tax_rate.'%</td>    
+                <td style="border: 1px solid black;padding: 5px;">'.round($total_tax_val_after_pnf,2).'</td>
+            </tr>';
+
+      
        
      }
 
