@@ -15562,7 +15562,7 @@ public function downlaoddebitnotevendor($id){
 
                 <tr style="border: 1px solid black;">               
                     <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;;padding: 5px;;font-family:cambria;font-size:14px;"><b>Total </b></td>    
-                    <td style="border: 1px solid black;padding: 5px;">'.$sub_total_amount+$total_pnf_charges.'</td>
+                    <td style="border: 1px solid black;padding: 5px;">'.number_format($sub_total_amount+$total_pnf_charges,2).'</td>
                 </tr>
 
              '. $tax_value.'
