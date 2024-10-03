@@ -15491,6 +15491,8 @@ public function downlaoddebitnotevendor($id){
             $wehavedebitamount = $total_debit_amount +$extra_text_label_val_for_calculation;
             $calculate_tax_on_wehavedebit_value = $wehavedebitamount *  $loop_tax_rate / 100;
             $calculate_tax_on_wehavedebit_lebel = 'IGST @  '.$wehavedebitamount *  $loop_tax_rate / 100;
+
+            $totalwehavedebit = $wehavedebitamount+$calculate_tax_on_wehavedebit_value;
        
      }
 
@@ -15601,11 +15603,11 @@ public function downlaoddebitnotevendor($id){
 
               <tr style="border: 1px solid black;">
                 <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;"><b>Cheque Amt</b></td>    
-                <td style="border: 1px solid black;padding: 5px">'.round($getDebitnotedetailsforInvoice['grand_total_main'] - $getDebitnotedetailsforInvoice['tds_amount'] ,2).'</td>
+                <td style="border: 1px solid black;padding: 5px">'.round($getDebitnotedetailsforInvoice['grand_total_main'] - $getDebitnotedetailsforInvoice['tds_amount'] -$totalwehavedebit,2).'</td>
               </tr>
 
               <tr style="border: 1px solid black;">
-                <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;">We Have Debit Amt = '.$wehavedebitamount.' <br/> '.$calculate_tax_on_wehavedebit_lebel.'<br>____________<br/>'.round($wehavedebitamount+$calculate_tax_on_wehavedebit_value,2).'</td>    
+                <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;">We Have Debit Amt = '.$wehavedebitamount.' <br/> '.$calculate_tax_on_wehavedebit_lebel.'<br>____________<br/>'.round($totalwehavedebit,2).'</td>    
                 <td style="border: 1px solid black;padding: 5px">'.$getDebitnotedetailsforInvoice['tds_amount'].'<br/><br/>'.round($total_amount_debit,2).'<br/>____________<br/>'.$getDebitnotedetailsforInvoice['tds_amount']+round($total_amount_debit,2).'</td>
               </tr>
 
