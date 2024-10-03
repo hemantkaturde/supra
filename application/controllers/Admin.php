@@ -15357,6 +15357,7 @@ public function downlaoddebitnotevendor($id){
     $total_paid_amount = 0;
     $total_debit_amount =0;
     $total_amount =0;
+    $sub_total_amount =0;
     $cgst_tax_rate = 0;
     $sgst_tax_rate = 0;
     $igst_tax_rate = 0;
@@ -15444,6 +15445,7 @@ public function downlaoddebitnotevendor($id){
 
                 }
 
+                $sub_total_amount += $paid_amount;
                 $total_amount +=   $sgst_tax_value+$cgst_tax_value+$igst_tax_value+$paid_amount;
                 $total_amount_debit +=   $sgst_tax_value+$cgst_tax_value+$igst_tax_value+$value['debit_amount'];
             $ii++;       
@@ -15560,7 +15562,7 @@ public function downlaoddebitnotevendor($id){
 
                 <tr style="border: 1px solid black;">               
                     <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;;padding: 5px;;font-family:cambria;font-size:14px;"><b>Total </b></td>    
-                    <td style="border: 1px solid black;padding: 5px;"></td>
+                    <td style="border: 1px solid black;padding: 5px;">'.$sub_total_amount+$total_pnf_charges.'</td>
                 </tr>
 
              '. $tax_value.'
