@@ -15453,6 +15453,8 @@ public function downlaoddebitnotevendor($id){
 
   
 
+    
+    $subtotalpluspandrcharges = $sub_total_amount + $total_pnf_charges;
 
      if($gst_rate=='CGST_SGST' || $gst_rate=='CGST_SGST_6'){
         $tax_value = '<tr style="border: 1px solid black;">               
@@ -15474,7 +15476,12 @@ public function downlaoddebitnotevendor($id){
                 <td style="border: 1px solid black;padding: 5px;">'.round($igst_tax_value,2).'</td>
             </tr>';
 
-        $total_tax_rate = 'IGST @ '.$igst_tax_rate.'%'.round($igst_tax_value,2);
+        // $total_tax_rate = 'IGST @ '.$igst_tax_rate.'%'.round($igst_tax_value,2);
+
+        /*03-10-2024 As Per new Logic*/
+        $subtotalpluspandrcharges_TaX = $subtotalpluspandrcharges * $igst_tax_rate / 100;
+        $total_tax_rate = 'IGST @ '.$igst_tax_rate.'%'.round($subtotalpluspandrcharges_TaX,2);
+       
      }
 
   
@@ -15562,7 +15569,7 @@ public function downlaoddebitnotevendor($id){
 
                 <tr style="border: 1px solid black;">               
                     <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;;padding: 5px;;font-family:cambria;font-size:14px;"><b>Total </b></td>    
-                    <td style="border: 1px solid black;padding: 5px;">'.number_format($sub_total_amount+$total_pnf_charges,2).'</td>
+                    <td style="border: 1px solid black;padding: 5px;">'.number_format($subtotalpluspandrcharges,2).'</td>
                 </tr>
 
              '. $tax_value.'
