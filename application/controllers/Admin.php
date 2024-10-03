@@ -15478,6 +15478,7 @@ public function downlaoddebitnotevendor($id){
         /*03-10-2024 As Per new Logic*/
         $subtotalpluspandrcharges_TaX = $subtotalpluspandrcharges * $igst_tax_rate / 100;
         $total_tax_rate = 'IGST @ '.$igst_tax_rate.'%'.round($subtotalpluspandrcharges_TaX,2);
+        $loop_tax_rate = $igst_tax_rate;
 
         $tax_value = '
             <tr style="border: 1px solid black;">
@@ -15486,12 +15487,16 @@ public function downlaoddebitnotevendor($id){
             </tr>';
 
       
+
+            $wehavedebitamount = $total_debit_amount +$extra_text_label_val_for_calculation;
+
+            $calculate_tax_on_wehavedebit = 'IGST @  '.$wehavedebitamount *  $loop_tax_rate / 100;
        
      }
 
      $total_amount_new_logic = $subtotalpluspandrcharges_TaX + $subtotalpluspandrcharges;
 
-     $wehavedebitamount = $total_debit_amount +$extra_text_label_val_for_calculation;
+    
 
 
     $mpdf = new \Mpdf\Mpdf();
@@ -15600,7 +15605,7 @@ public function downlaoddebitnotevendor($id){
               </tr>
 
               <tr style="border: 1px solid black;">
-                <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;">We Have Debit Amt = '.$wehavedebitamount.' <br/> '.$total_tax_rate.'<br>____________<br/>'.round($total_amount_debit,2).'</td>    
+                <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;">We Have Debit Amt = '.$wehavedebitamount.' <br/> '.$calculate_tax_on_wehavedebit.'<br>____________<br/>'.round($total_amount_debit,2).'</td>    
                 <td style="border: 1px solid black;padding: 5px">'.$getDebitnotedetailsforInvoice['tds_amount'].'<br/><br/>'.round($total_amount_debit,2).'<br/>____________<br/>'.$getDebitnotedetailsforInvoice['tds_amount']+round($total_amount_debit,2).'</td>
               </tr>
 
