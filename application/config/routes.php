@@ -529,6 +529,8 @@ $route['edituspincomig/(:any)'] = "admin/edituspincomig/$1";
 $route['viewuspincomig/(:any)'] = "admin/viewuspincomig/$1";
 
 $route['deleteuspincomingitem'] = "admin/deleteuspincomingitem";
+$route['addscraprejection'] = "admin/addscraprejection";
+
 
 
 

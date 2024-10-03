@@ -7730,6 +7730,8 @@ class Admin extends BaseController
                         'total_amount_of_ok_qty_amt' =>  trim($this->input->post('total_debit_amount_ok_qty')),
                         'chq_amount' => trim($this->input->post('chq_amt')),
                         'p_and_f_charges' =>  trim($this->input->post('p_and_f_charges')),
+                        'text_label' =>  trim($this->input->post('text_label')),
+                        'text_amount' =>  trim($this->input->post('text_amount')),
                         'tds_amount' =>  trim($this->input->post('tds_amount')),
                         'freight_amount_charge' =>  trim($this->input->post('freight_amount_charge')),
                         'grand_total_main' =>  trim($this->input->post('grand_total_main')),
@@ -7931,6 +7933,8 @@ class Admin extends BaseController
                         'pre_supplier_po_number' =>    trim($this->input->post('pre_supplier_po_number')),
                         'pre_po_date' =>    trim($this->input->post('pre_po_date')),
                         'pre_remark' =>    trim($this->input->post('pre_remark')),
+                        'pre_text_amount' =>    trim($this->input->post('pre_text_amount')),
+                        'pre_text_label' =>    trim($this->input->post('pre_text_label')),
                     );
 
 
@@ -7978,6 +7982,8 @@ class Admin extends BaseController
                         'pre_supplier_po_number' =>    trim($this->input->post('pre_supplier_po_number')),
                         'pre_po_date' =>    trim($this->input->post('pre_po_date')),
                         'pre_remark' =>    trim($this->input->post('pre_remark')),
+                        'pre_text_amount' =>    trim($this->input->post('pre_text_amount')),
+                        'pre_text_label' =>    trim($this->input->post('pre_text_label')),
                     );
 
                 }
@@ -15355,6 +15361,7 @@ public function downlaoddebitnotevendor($id){
     $sgst_tax_rate = 0;
     $igst_tax_rate = 0;
     $gst_rate ='';
+    $total_pnf_charges =0;
 
     $item_count =count($getDebitnoteitemdeatilsForInvoice);
 
@@ -15368,6 +15375,17 @@ public function downlaoddebitnotevendor($id){
         $padding_bottom = '10px';
     }
 
+
+    if($getDebitnotedetailsforInvoice['text_label']){
+        $extra_text_label_val = '<tr style="border: 1px solid black;text-align:left">
+                                    <td colspan="6" style="border: 1px solid black;text-align:left;padding: 10px;" margin-bottom: 10%;>'.$getDebitnotedetailsforInvoice['text_label'].'</td>
+                                    <td  style="border: 1px solid black;text-align:left;padding: 10px;" margin-bottom: 10%;>'.$getDebitnotedetailsforInvoice['text_amount'].'</td>
+                                    <td  style="border: 1px solid black;text-align:left;padding: 10px;" margin-bottom: 10%;>'.$getDebitnotedetailsforInvoice['text_amount'].'</td>
+                                    <td  style="border: 1px solid black;text-align:left;padding: 10px;" margin-bottom: 10%;></td>
+                                </tr>';
+    }else{
+        $extra_text_label_val ="";
+    }
     
     foreach ($getDebitnoteitemdeatilsForInvoice as $key => $value) {
 
@@ -15375,6 +15393,13 @@ public function downlaoddebitnotevendor($id){
             $net_weigth = $value['qty'] * $value['raw_material_neight_weight'];
         }else{
             $net_weigth ='';
+        }
+
+
+        if($value['p_nf_charges']){
+            $total_pnf_charges += $value['p_nf_charges'];
+        }else{
+            $total_pnf_charges += 0;
         }
 
         $paid_amount = $value['rate'] * $value['ok_qty'];
@@ -15391,11 +15416,9 @@ public function downlaoddebitnotevendor($id){
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rejected_quantity'].' '.$value['vendor_po_unit'].'</td>    
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['debit_note_rate'].'</td>    
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.round($value['debit_amount'],2).'</td>    
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$paid_amount.'</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.round($paid_amount,2).'</td>
                 </tr>';
-          
-
-              
+                        
                 $gst_rate = $value['gst_rate'];
 
                 if($value['gst_rate']=='CGST_SGST'){
@@ -15423,7 +15446,6 @@ public function downlaoddebitnotevendor($id){
 
                 $total_amount +=   $sgst_tax_value+$cgst_tax_value+$igst_tax_value+$paid_amount;
                 $total_amount_debit +=   $sgst_tax_value+$cgst_tax_value+$igst_tax_value+$value['debit_amount'];
-
             $ii++;       
     }
 
@@ -15529,7 +15551,12 @@ public function downlaoddebitnotevendor($id){
                     <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>Debit Amt</th>
                     <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>Paid Amt</th>
                 </tr>
-                '.$CartItem.' 
+                '.$CartItem.$extra_text_label_val.' 
+
+                <tr style="border: 1px solid black;">               
+                    <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;;padding: 5px;;font-family:cambria;font-size:14px;"><b>P and F Charges </b></td>    
+                    <td style="border: 1px solid black;padding: 5px;">'.$total_pnf_charges.'</td>
+                </tr>
 
                 <tr style="border: 1px solid black;">               
                     <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;;padding: 5px;;font-family:cambria;font-size:14px;"><b>Total </b></td>    
@@ -20625,6 +20652,21 @@ public function geteditUspincomingitemdatabyuspitemId(){
     }
 
 
+}
+
+
+public function addscraprejection(){
+
+    $data['rejection_form_id']= $_GET['rejection_form_id'];
+    $data['vendor_po_item_id']= $_GET['vendor_po_item_id'];
+    $data['vendor_po_id']=  $_GET['vendor_po_id'];
+    $getstockrejectionformitemdataitemdetailsforedit = $this->admin_model->getstockrejectionformitemdataitemdetailsforedit(trim($_GET['vendor_po_id']));
+    $data['net_weight_fg'] =  $getstockrejectionformitemdataitemdetailsforedit[0]['net_weight_fg'];
+    $process = 'View Rejection Form Data';
+    $processFunction = 'Admin/editrejetionform';
+    $this->logrecord($process,$processFunction);
+    $this->global['pageTitle'] = 'View Rejection Form Data';
+    $this->loadViews("masters/viewrejectionformitemdetails", $this->global, $data, NULL);
 }
 
 

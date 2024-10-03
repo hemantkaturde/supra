@@ -283,14 +283,34 @@
                                     </div>
                                     
 
-                                    <div class="col-md-12">
+                                    <!-- <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="freight_amount_charge">Courier/Return Charges<span class="required">*</span></label>
                                                   <input type="text" class="form-control"  value="0" id="freight_amount_charge" name="freight_amount_charge" required>
                                                 <p class="error freight_amount_charge_error"></p>
                                             </div>
-                                    </div>
+                                    </div> -->
+
                                     
+                                    <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="text_label">Text Label</label>
+                                                  <input type="text" class="form-control" value="<?=$getdebitnoteitemdetails[0]['pre_text_label']?>" id="text_label" name="text_label" required>
+                                                <p class="error text_label_error"></p>
+                                            </div>
+                                    </div>
+
+                                    
+                                    <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="text_amount_charge">Amount</label>
+                                                  <input type="text" class="form-control"  value="<?=$getdebitnoteitemdetails[0]['pre_text_amount']?>" id="text_amount" name="text_amount" required>
+                                                <p class="error text_amount_error"></p>
+                                            </div>
+                                    </div>
+
+                                    
+                                    <input type="hidden" class="form-control"  value="0" id="freight_amount_charge" name="freight_amount_charge" required>
                                     <input type="hidden" class="form-control" value="<?=$totalDebitAndokQty['p_and_f_charges']?>"  id="p_and_f_charges_main" name="p_and_f_charges_main">
 
                                     <div class="col-md-12">

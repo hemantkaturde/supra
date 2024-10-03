@@ -9082,8 +9082,7 @@ class Admin_model extends CI_Model
 
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;color: #3c8dbc;' data-toggle='modal' data-target='#addNewModal'  rejection-form-id='".$id."' vendor-po-id='".$vendor_po_id."'  vendor_po_item_id='".$value['id']."' net_weight='".$value['net_weight_fg']."'  class='fa fa-plus-circle addrejectionitemdata' aria-hidden='true'></i>  &nbsp "; 
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewrejectionformitemdetails?rejection_form_id=".$id.'&vendor_po_item_id='.$value['id'].'&vendor_po_id='.$vendor_po_id."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-eye' aria-hidden='true'></i></a>   &nbsp ";
-
-                // $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addrejectionformitemsdatamultientries?rejection_form_id=".$id.'&vendor_po_item_id='.$value['id'].'&vendor_po_id='.$vendor_po_id."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addscraprejection?rejection_form_id=".$id.'&vendor_po_item_id='.$value['id'].'&vendor_po_id='.$vendor_po_id."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-minus-circle' aria-hidden='true'></i></a>   &nbsp ";
                 // $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addrejectionformitemsdatamultientries?rejection_form_id=".$id.'&vendor_po_item_id='.$value['id'].'&vendor_po_id='.$vendor_po_id."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>   &nbsp ";
                  $counter++; 
             }
@@ -13985,7 +13984,7 @@ public function getDebitnotedetailsforInvoicevendor($id){
 public function getDebitnoteitemdeatilsForInvoicevendor($id){
 
     // $this->db->select('*,'.TBL_RAWMATERIAL.'.gross_weight as rmgrossweight');
-    $this->db->select('*,'.TBL_FINISHED_GOODS.'.net_weight as raw_material_neight_weight,'.TBL_FINISHED_GOODS.'.part_number as fgpart,'.TBL_VENDOR_PO_MASTER_ITEM.'.unit as vendor_po_unit,'.TBL_DEBIT_NOTE_ITEM.'.rate as debit_note_rate');
+    $this->db->select('*,'.TBL_FINISHED_GOODS.'.net_weight as raw_material_neight_weight,'.TBL_FINISHED_GOODS.'.part_number as fgpart,'.TBL_VENDOR_PO_MASTER_ITEM.'.unit as vendor_po_unit,'.TBL_DEBIT_NOTE_ITEM.'.rate as debit_note_rate,'.TBL_DEBIT_NOTE_ITEM.'.p_and_f_charges as p_nf_charges');
     $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_DEBIT_NOTE_ITEM.'.part_number');
     $this->db->join(TBL_DEBIT_NOTE, TBL_DEBIT_NOTE.'.debit_id = '.TBL_DEBIT_NOTE_ITEM.'.debit_note_id');
     $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_DEBIT_NOTE.'.vendor_po');
