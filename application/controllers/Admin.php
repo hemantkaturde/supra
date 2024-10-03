@@ -15592,7 +15592,7 @@ public function downlaoddebitnotevendor($id){
 
               <tr style="border: 1px solid black;">
                 <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;"><b>Cheque Amt</b></td>    
-                <td style="border: 1px solid black;padding: 5px">'.$getDebitnotedetailsforInvoice['chq_amount'].'</td>
+                <td style="border: 1px solid black;padding: 5px">'.round($getDebitnotedetailsforInvoice['grand_total_main'] - $getDebitnotedetailsforInvoice['tds_amount'] - $total_amount_new_logic ,2).'</td>
               </tr>
 
               <tr style="border: 1px solid black;">
