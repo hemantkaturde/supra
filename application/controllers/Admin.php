@@ -15384,8 +15384,10 @@ public function downlaoddebitnotevendor($id){
                                     <td  style="border: 1px solid black;text-align:left;padding: 10px;" margin-bottom: 10%;>'.$getDebitnotedetailsforInvoice['text_amount'].'</td>
                                     <td  style="border: 1px solid black;text-align:left;padding: 10px;" margin-bottom: 10%;></td>
                                 </tr>';
+        $extra_text_label_val_for_calculation =$getDebitnotedetailsforInvoice['text_amount'];
     }else{
         $extra_text_label_val ="";
+        $extra_text_label_val_for_calculation =0;
     }
     
     foreach ($getDebitnoteitemdeatilsForInvoice as $key => $value) {
@@ -15488,6 +15490,8 @@ public function downlaoddebitnotevendor($id){
      }
 
      $total_amount_new_logic = $subtotalpluspandrcharges_TaX + $subtotalpluspandrcharges;
+
+     $wehavedebitamount = $total_debit_amount +$extra_text_label_val_for_calculation;
 
 
     $mpdf = new \Mpdf\Mpdf();
@@ -15592,11 +15596,11 @@ public function downlaoddebitnotevendor($id){
 
               <tr style="border: 1px solid black;">
                 <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;"><b>Cheque Amt</b></td>    
-                <td style="border: 1px solid black;padding: 5px">'.round($getDebitnotedetailsforInvoice['grand_total_main'] - $getDebitnotedetailsforInvoice['tds_amount'] - $total_amount_new_logic ,2).'</td>
+                <td style="border: 1px solid black;padding: 5px">'.round($getDebitnotedetailsforInvoice['grand_total_main'] - $getDebitnotedetailsforInvoice['tds_amount'] ,2).'</td>
               </tr>
 
               <tr style="border: 1px solid black;">
-                <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;">We Have Debit Amt = '.round($total_debit_amount,2).' <br/> '.$total_tax_rate.'<br>____________<br/>'.round($total_amount_debit,2).'</td>    
+                <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;">We Have Debit Amt = '.$wehavedebitamount.' <br/> '.$total_tax_rate.'<br>____________<br/>'.round($total_amount_debit,2).'</td>    
                 <td style="border: 1px solid black;padding: 5px">'.$getDebitnotedetailsforInvoice['tds_amount'].'<br/><br/>'.round($total_amount_debit,2).'<br/>____________<br/>'.$getDebitnotedetailsforInvoice['tds_amount']+round($total_amount_debit,2).'</td>
               </tr>
 
