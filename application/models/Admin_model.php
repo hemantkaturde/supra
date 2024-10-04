@@ -14635,7 +14635,7 @@ public function getscrapcalculationreportdata($status,$vendor_name_value){
     }
 
     if($vendor_name!='NA'){
-        $this->db->like(TBL_VENDOR.'.ven_id', $vendor_name_value);
+        $this->db->where(TBL_BILL_OF_MATERIAL.'.vendor_name', $vendor_name_value);
     }
 
     $this->db->where(TBL_BILL_OF_MATERIAL.'.status', 1);
