@@ -15486,12 +15486,9 @@ public function downlaoddebitnotevendor($id){
                 <td style="border: 1px solid black;padding: 5px;">'.round($subtotalpluspandrcharges_TaX,2).'</td>
             </tr>';
 
-      
-
             $wehavedebitamount = $total_debit_amount +$extra_text_label_val_for_calculation;
             $calculate_tax_on_wehavedebit_value = $wehavedebitamount *  $loop_tax_rate / 100;
             $calculate_tax_on_wehavedebit_lebel = 'IGST @  '.$wehavedebitamount *  $loop_tax_rate / 100;
-
             $totalwehavedebit = $wehavedebitamount+$calculate_tax_on_wehavedebit_value;
        
      }
@@ -15499,8 +15496,6 @@ public function downlaoddebitnotevendor($id){
      $total_amount_new_logic = $subtotalpluspandrcharges_TaX + $subtotalpluspandrcharges;
 
     
-
-
     $mpdf = new \Mpdf\Mpdf();
     // $html = $this->load->view('html_to_pdf',[],true);
     $html = '<table style=" width: 100%;text-align: center;border-collapse: collapse;font-family:cambria;">

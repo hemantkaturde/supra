@@ -14526,7 +14526,7 @@ public function fetchscrapcalculationreportcount($params,$status,$vendor_name){
     }
 
     if($vendor_name!='NA'){
-     $this->db->like(TBL_VENDOR.'.ven_id', $vendor_name);
+        $this->db->where(TBL_BILL_OF_MATERIAL.'.vendor_name', $vendor_name);
     }
 
     $this->db->group_by(TBL_BILL_OF_MATERIAL_ITEM.'.id');
@@ -14578,7 +14578,7 @@ public function fetchscrapcalculationreportdata($params,$status,$vendor_name){
     }
 
     if($vendor_name!='NA'){
-        $this->db->like(TBL_VENDOR.'.ven_id', $vendor_name);
+        $this->db->where(TBL_BILL_OF_MATERIAL.'.vendor_name', $vendor_name);
     }
 
     $this->db->where(TBL_BILL_OF_MATERIAL.'.status', 1);
