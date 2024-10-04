@@ -14634,8 +14634,8 @@ public function getscrapcalculationreportdata($status,$vendor_name_value){
         $this->db->where("(".TBL_RAWMATERIAL.".type_of_raw_material LIKE '%".str_replace("%20", " ", $status)."%')");
     }
 
-    if($vendor_name!='NA'){
-        $this->db->where(TBL_VENDOR.'.ven_id', $vendor_name_value);
+    if($vendor_name_value!='NA'){
+        $this->db->where(TBL_BILL_OF_MATERIAL.'.vendor_name', $vendor_name_value);
     }
 
     $this->db->where(TBL_BILL_OF_MATERIAL.'.status', 1);
