@@ -1355,6 +1355,172 @@ class Admin extends BaseController
      }
 
 
+      /**
+     * This function is used to load the Sampling Method Master
+     */
+    public function samplingmaster(){
+        $process = 'Sampling Master';
+        $processFunction = 'Admin/samplingmaster';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Sampling Master';
+        $this->loadViews("masters/samplingmaster", $this->global, $data, NULL);
+    }
+
+    /**
+     * This function is used to load the Sampling Master Listing
+     */
+     public function fetchSamplingmaster(){
+        $params = $_REQUEST;
+        $totalRecords = $this->admin_model->getSamplingmasterCount($params); 
+        $queryRecords = $this->admin_model->getSamplingmasterData($params); 
+
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval( $totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
+            "data"            => $data   // total data array
+            );
+        echo json_encode($json_data);
+     }
+
+      /**
+     * This function is used to Add the USP Master
+     */
+
+     public function addnewSamplingmaster(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $save_sampling_response = array();
+
+            $this->form_validation->set_rules('sampling_method_name','Sampling Name','trim|required');
+            $this->form_validation->set_rules('remark','Remark','trim');
+
+            if($this->form_validation->run() == FALSE)
+            {
+                $save_sampling_response['status'] = 'failure';
+                $save_sampling_response['error'] = array('sampling_method_name'=>strip_tags(form_error('sampling_method_name')), 'remark'=>strip_tags(form_error('remark')));
+            }else{
+
+                $data = array(
+                    'sampling_method_name'   => trim($this->input->post('sampling_method_name')),
+                    'remark' =>    trim($this->input->post('remark'))
+                );
+
+                $checkIfexitssampling = $this->admin_model->checkIfexitssampling(trim($this->input->post('sampling_method_name')));
+                if($checkIfexitssampling > 0){
+                    $save_sampling_response['status'] = 'failure';
+                    $save_sampling_response['error'] = array('sampling_method_name'=>'Sampling Name Alreday Exits');
+                }else{
+                    $saveUSPdata = $this->admin_model->saveSamplingdata('',$data);
+                    if($saveUSPdata){
+                        $save_sampling_response['status'] = 'success';
+                        $save_sampling_response['error'] = array('sampling_method_name'=>'', 'remark'=>'');
+                    }
+                }
+            }
+            echo json_encode($save_sampling_response);
+        }else{
+            $process = 'Add Sampling Master';
+            $processFunction = 'Admin/addnewSamplingmaster';
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Add Sampling Master';
+            $this->loadViews("masters/addnewSamplingmaster", $this->global, $data, NULL);
+        }
+     }
+
+
+
+     public function updatesampling($id){
+        $post_submit = $this->input->post();
+        if($post_submit){
+
+            $update_sampling_response = array();
+            $this->form_validation->set_rules('sampling_method_name','Sampling Name','trim|required');
+            $this->form_validation->set_rules('remark','Remark','trim');
+
+            if($this->form_validation->run() == FALSE)
+            {
+                $update_sampling_response['status'] = 'failure';
+                $update_sampling_response['error'] = array('sampling_method_name'=>strip_tags(form_error('sampling_method_name')), 'remark'=>strip_tags(form_error('remark')));
+            }else{
+
+                $data = array(
+                    'sampling_method_name'   => trim($this->input->post('sampling_method_name')),
+                    'remark' =>    trim($this->input->post('remark'))
+                );
+
+                $checkIfexitssamplingupdate = $this->admin_model->checkIfexitssamplingupdate(trim($this->input->post('sampling_method_id')),trim($this->input->post('sampling_method_name')));
+
+                if($checkIfexitssamplingupdate > 0){
+                    $updateSupplierdata = $this->admin_model->saveSamplingdata(trim($this->input->post('sampling_method_id')),$data);
+                    if($updateSupplierdata){
+                        $update_sampling_response['status'] = 'success';
+                        $update_sampling_response['error'] = array('sampling_method_name'=>'', 'remark'=>'');
+                    }
+
+                }else{
+
+                    $checkIfexitssampling = $this->admin_model->checkIfexitssampling(trim($this->input->post('sampling_method_name')));
+                    if($checkIfexitssampling > 0){
+                        $update_sampling_response['status'] = 'failure';
+                        $update_sampling_response['error'] = array('sampling_method_name'=>'Sampling Name Alreday Exits');
+                    }else{
+                        $updateSupplierdata = $this->admin_model->saveSamplingdata(trim($this->input->post('sampling_method_id')),$data);
+                        if($updateSupplierdata){
+                           $update_sampling_response['status'] = 'success';
+                           $update_sampling_response['error'] = array('sampling_method_name'=>'', 'remark'=>'');
+                        }
+
+                    }
+                }
+           
+            }
+            echo json_encode($update_sampling_response);
+        }else{
+            $process = 'Edit Sampling';
+            $processFunction = 'Admin/updateUSP';
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Edit Sampling';
+            $data['getsamplingdata'] = $this->admin_model->getSamplingdetails($id);
+            $this->loadViews("masters/updatesampling", $this->global, $data, NULL);
+
+        }
+
+     }
+
+
+      /**
+     * This function is used to Delete the Sampling Master
+     */
+
+     public function deletesampling(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->deletesampling(trim($this->input->post('id')));
+            if ($result) {
+                        $process = 'Sampling Delete';
+                        $processFunction = 'Admin/deletesampling';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
+     }
+
+
+
      /**
      * This function is used to load the USP Master
      */

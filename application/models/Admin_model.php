@@ -434,12 +434,72 @@ class Admin_model extends CI_Model
         return $data;
     }
 
+
+    public function getSamplingmasterCount($params){
+
+        $this->db->select('*');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_SAMPLING_MASTER.".sampling_method_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SAMPLING_MASTER.".remark LIKE '%".$params['search']['value']."%')");
+        }
+
+        $this->db->where(TBL_SAMPLING_MASTER.'.status', 1);
+        $query = $this->db->get(TBL_SAMPLING_MASTER);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+    }
+
+    public function getSamplingmasterData($params){
+
+        $this->db->select('*');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_SAMPLING_MASTER.".sampling_method_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SAMPLING_MASTER.".remark LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_SAMPLING_MASTER.'.status', 1);
+        $this->db->limit($params['length'],$params['start']);
+        $this->db->order_by(TBL_SAMPLING_MASTER.'.id','DESC');
+        $query = $this->db->get(TBL_SAMPLING_MASTER);
+        $fetch_result = $query->result_array();
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['sampling_method_name'] = $value['sampling_method_name'];              
+                $data[$counter]['remark'] =  $value['remark'];
+                $data[$counter]['action'] = '';
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."updatesampling/".$value['id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['id']."' class='fa fa-trash-o deletesampling' aria-hidden='true'></i>"; 
+ 
+                $counter++; 
+            }
+        }
+
+        return $data;
+    }
+
     public function checkIfexitsusp($vendor_name){
 
         $this->db->select('*');
         $this->db->where(TBL_USP.'.usp_name', $vendor_name);
         $this->db->where(TBL_USP.'.status', 1);
         $query = $this->db->get(TBL_USP);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+
+    }
+
+
+    public function checkIfexitssampling($sampling_method_name){
+
+        $this->db->select('*');
+        $this->db->where(TBL_SAMPLING_MASTER.'.sampling_method_name', $sampling_method_name);
+        $this->db->where(TBL_SAMPLING_MASTER.'.status', 1);
+        $query = $this->db->get(TBL_SAMPLING_MASTER);
         $rowcount = $query->num_rows();
         return $rowcount;
 
@@ -462,10 +522,38 @@ class Admin_model extends CI_Model
         }
     }
 
+
+    public function saveSamplingdata($id,$data){
+        if($id != '') {
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_SAMPLING_MASTER, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_SAMPLING_MASTER, $data)) {
+                return $this->db->insert_id();;
+            } else {
+                return FALSE;
+            }
+        }
+    }
+
     public function deleteUSP($id){
         $this->db->where('usp_id', $id);
         //$this->db->delete(TBL_SUPPLIER);
         if($this->db->delete(TBL_USP)){
+           return TRUE;
+        }else{
+           return FALSE;
+        }
+    }
+
+    public function deletesampling($id){
+        $this->db->where('id', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_SAMPLING_MASTER)){
            return TRUE;
         }else{
            return FALSE;
@@ -483,8 +571,19 @@ class Admin_model extends CI_Model
 
     }
 
-    public function checkifexituspdate($id,$usp_name){
 
+    public function getSamplingdetails($id){
+
+        $this->db->select('*');
+        $this->db->where(TBL_SAMPLING_MASTER.'.id', $id);
+        $this->db->where(TBL_SAMPLING_MASTER.'.status', 1);
+        $query = $this->db->get(TBL_SAMPLING_MASTER);
+        $data = $query->result_array();
+        return $data;
+
+    }
+
+    public function checkifexituspdate($id,$usp_name){
         $this->db->select('*');
         $this->db->where(TBL_USP.'.usp_id', $id);
         $this->db->where(TBL_USP.'.usp_name', $usp_name);
@@ -492,8 +591,17 @@ class Admin_model extends CI_Model
         $query = $this->db->get(TBL_USP);
         $data = $query->num_rows();
         return $data;
+    }
 
 
+    public function checkIfexitssamplingupdate($sampling_method_id,$sampling_method_name){
+        $this->db->select('*');
+        $this->db->where(TBL_SAMPLING_MASTER.'.id', $sampling_method_id);
+        $this->db->where(TBL_SAMPLING_MASTER.'.sampling_method_name', $sampling_method_name);
+        $this->db->where(TBL_SAMPLING_MASTER.'.status', 1);
+        $query = $this->db->get(TBL_SAMPLING_MASTER);
+        $data = $query->num_rows();
+        return $data;
     }
 
     public function getfinishedCount($params){

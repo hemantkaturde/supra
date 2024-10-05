@@ -176,3 +176,4 @@ define('TBL_SUPPLIER_VENDOR_COMPALINT','tbl_supplier_vendor_complaint');
 define('TBL_USP_INCOMING_FORM','tbl_usp_incoming_form');
 define('TBL_USP_INCOMING_FORM_ITEM','tbl_usp_incoming_form_item');
 define('TBL_LOG_RECORD','tbl_log');
+define('TBL_SAMPLING_MASTER','tbl_sampling_master');

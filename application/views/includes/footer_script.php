@@ -794,6 +794,175 @@
 <?php } ?>
 
 
+
+<?php if($pageTitle=='Sampling Master'  || $pageTitle=="Add Sampling Master" || $pageTitle=="Edit Sampling"){ ?>
+	<script type="text/javascript">
+		$(document).ready(function() {
+            var dt = $('#view_smapling_method').DataTable({
+	            "columnDefs": [ 
+	                 { className: "details-control", "targets": [ 0 ] },
+	                 { "width": "80%", "targets": 0 },
+	                 { "width": "80", "targets": 1 },
+					 { "width": "5", "targets": 2 }
+	            ],
+	            responsive: true,
+	            "oLanguage": {
+	                "sEmptyTable": "<i>No Smapling Found.</i>",
+	            }, 
+	            "bSort" : false,
+	            "bFilter":true,
+	            "bLengthChange": true,
+	            "iDisplayLength": 10,   
+	            "bProcessing": true,
+	            "serverSide": true,
+	            "ajax":{
+                    url :"<?php echo base_url();?>fetchSamplingmaster",
+                    type: "post",
+	            },
+	        });
+	    });
+
+		$(document).on('click','#savenewsampling',function(e){
+			e.preventDefault();
+			$(".loader_ajax").show();
+			var formData = new FormData($("#addnewsamplingform")[0]);
+
+			$.ajax({
+				url : "<?php echo base_url();?>addnewSamplingmaster",
+				type: "POST",
+				data : formData,
+				cache: false,
+		        contentType: false,
+		        processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+						$(".loader_ajax").hide();
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						swal({
+							title: "Success",
+							text: "Sampling Successfully Added!",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+								window.location.href = "<?php echo base_url().'samplingmaster'?>";
+						});		
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			});
+			return false;
+	    });
+
+		$(document).on('click','#editsampling',function(e){
+			e.preventDefault();
+			$(".loader_ajax").show();
+			var formData = new FormData($("#editsamplingform")[0]);
+            var sampling_method_id = $("#sampling_method_id").val();
+			$.ajax({
+				url : "<?php echo base_url();?>updatesampling/"+sampling_method_id,
+				type: "POST",
+				data : formData,
+				cache: false,
+		        contentType: false,
+		        processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+						$(".loader_ajax").hide();
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						swal({
+							title: "Success",
+							text: "Sampling Successfully Updated!",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+								window.location.href = "<?php echo base_url().'samplingmaster'?>";
+						});		
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			});
+			return false;
+	    });
+
+		$(document).on('click','.deletesampling',function(e){
+				var elemF = $(this);
+				e.preventDefault();
+
+				swal({
+					title: "Are you sure?",
+					text: "Delete Sampling",
+					type: "warning",
+					showCancelButton: true,
+					closeOnClickOutside: false,
+					confirmButtonClass: "btn-sm btn-danger",
+					confirmButtonText: "Yes, delete it!",
+					cancelButtonText: "No, cancel plz!",
+					closeOnConfirm: false,
+					closeOnCancel: false
+				}, function(isConfirm) {
+					if (isConfirm) {
+								$.ajax({
+									url : "<?php echo base_url();?>deletesampling",
+									type: "POST",
+									data : 'id='+elemF.attr('data-id'),
+									success: function(data, textStatus, jqXHR)
+									{
+										const obj = JSON.parse(data);
+									
+										if(obj.status=='success'){
+											swal({
+												title: "Deleted!",
+												text: "Sampling Deleted Succesfully",
+												icon: "success",
+												button: "Ok",
+												},function(){ 
+													window.location.href = "<?php echo base_url().'samplingmaster'?>";
+											});	
+										}
+
+									},
+									error: function (jqXHR, textStatus, errorThrown)
+									{
+										$(".loader_ajax").hide();
+									}
+								})
+							}
+							else {
+					swal("Cancelled", "USP deletion cancelled ", "error");
+					}
+				});
+		});
+
+	</script>
+<?php } ?>
+
+
 <?php if($pageTitle=='Finished Goods Master' || $pageTitle=='Add Finished Goods' || $pageTitle=='Update Finished Goods'){ ?>
 	<script type="text/javascript">
 		$(document).ready(function() {

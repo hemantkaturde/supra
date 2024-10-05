@@ -140,7 +140,7 @@
                       </a>
                     </li> 
 
-                    <li class="treeview <?php if($pageUrl=="suppliermaster" || $pageUrl=="addnewSupplier" || $pageUrl=='updateSupplier' || $pageUrl=='rowmaterialmaster' || $pageUrl=='addnewmaterialdata' || $pageUrl=='updateRawmaterial' || $pageUrl=="vendormaster" || $pageUrl=='addnewVendor' || $pageUrl=='updateVendor' || $pageUrl=="uspmaster" || $pageUrl=="addnewUSP" || $pageUrl=="updateUSP" || $pageUrl=="finishedgoodsmaster" || $pageUrl=="addnewFinishedgoods" || $pageUrl=="updateFinishedgoods" || $pageUrl=="plattingmaster" || $pageUrl=="addnewPlatting" || $pageUrl=="updatePlattingmaster" || $pageUrl=="rejectionmaster" || $pageUrl=="addnewRejection" || $pageUrl=="updateRejectionmaster" || $pageUrl=="buyermaster" || $pageUrl=="addnewBuyer" || $pageUrl=="updateBuyer" || $pageUrl=="chamaster" || $pageUrl=='addnewCha' || $pageUrl=='updatecha'){echo 'active';}?>">
+                    <li class="treeview <?php if($pageUrl=="suppliermaster" || $pageUrl=="addnewSupplier" || $pageUrl=='updateSupplier' || $pageUrl=='rowmaterialmaster' || $pageUrl=='addnewmaterialdata' || $pageUrl=='updateRawmaterial' || $pageUrl=="vendormaster" || $pageUrl=='addnewVendor' || $pageUrl=='updateVendor' || $pageUrl=="uspmaster" || $pageUrl=="addnewUSP" || $pageUrl=="updateUSP" || $pageUrl=="finishedgoodsmaster" || $pageUrl=="addnewFinishedgoods" || $pageUrl=="updateFinishedgoods" || $pageUrl=="plattingmaster" || $pageUrl=="addnewPlatting" || $pageUrl=="updatePlattingmaster" || $pageUrl=="rejectionmaster" || $pageUrl=="addnewRejection" || $pageUrl=="updateRejectionmaster" || $pageUrl=="buyermaster" || $pageUrl=="addnewBuyer" || $pageUrl=="updateBuyer" || $pageUrl=="chamaster" || $pageUrl=='addnewCha' || $pageUrl=='updatecha' || $pageUrl=="samplingmaster" || $pageUrl=="addnewSamplingmaster" || $pageUrl=="updatesampling"){echo 'active';}?>">
                       <a href="#">
                         <i class="fa fa-bars"></i> <span class="menu_label">Masters</span>
                           <span class="pull-right-container">
@@ -157,6 +157,8 @@
                         <li class="line_height <?php if($pageUrl=="rejectionmaster" || $pageUrl=="addnewRejection" || $pageUrl=="updateRejectionmaster"){echo 'active';}?>"><a href="<?php echo base_url();?>rejectionmaster"><i class="fa fa-cubes"></i> Rejection Reason Master</a></li>
                         <li class="line_height <?php if($pageUrl=="buyermaster" || $pageUrl=="addnewBuyer" || $pageUrl=="updateBuyer"){echo 'active';}?>"><a href="<?php echo base_url();?>buyermaster"><i class="fa fa-cubes"></i> Buyer Master</a></li>
                         <li class="line_height <?php if($pageUrl=="chamaster" || $pageUrl=='addnewCha' || $pageUrl=='updatecha'){echo 'active';}?>"><a href="<?php echo base_url(); ?>chamaster"><i class="fa fa-cubes"></i> CHA Master</a></li>
+                        <li class="line_height <?php if($pageUrl=="teammaster" || $pageUrl=='addnewteam' || $pageUrl=='updateteam'){echo 'active';}?>"><a href="<?php echo base_url(); ?>chamaster"><i class="fa fa-cubes"></i> Team Master</a></li>
+                        <li class="line_height <?php if($pageUrl=="samplingmaster" || $pageUrl=='addnewSamplingmaster' || $pageUrl=="updatesampling"){echo 'active';}?>"><a href="<?php echo base_url(); ?>samplingmaster"><i class="fa fa-cubes"></i>  Sampling Master</a></li>
                       </ul>
                     </li>
 

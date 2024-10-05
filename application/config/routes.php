@@ -530,7 +530,14 @@ $route['viewuspincomig/(:any)'] = "admin/viewuspincomig/$1";
 
 $route['deleteuspincomingitem'] = "admin/deleteuspincomingitem";
 $route['addscraprejection'] = "admin/addscraprejection";
+$route['deleteuspincomingitem'] = "admin/deleteuspincomingitem";
 
+
+$route['samplingmaster'] = "admin/samplingmaster";
+$route['fetchSamplingmaster'] = "admin/fetchSamplingmaster";
+$route['addnewSamplingmaster'] = "admin/addnewSamplingmaster";
+$route['deletesampling'] = "admin/deletesampling";
+$route['updatesampling/(:any)'] = "admin/updatesampling/$1";
 
 
 
