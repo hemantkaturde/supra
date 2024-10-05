@@ -29,7 +29,7 @@
                             <table width="100%" class="table table-striped table-bordered table-hover" id="view_smapling_method">
                                 <thead>
                                     <tr style="background-color:#3c8dbc !important;color:#fff">
-                                        <th>USP Name</th>
+                                        <th>Sampling Name</th>
                                         <th>Remark</th>
                                         <th>Action</th>
                                     </tr>
