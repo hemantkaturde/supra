@@ -15638,6 +15638,8 @@ public function downlaoddebitnotevendor($id){
 
             $total_tax_rate = 'CGST @ '.$cgst_tax_rate.'% = '.round($cgst_tax_value,2).'<br/> SGST @ '.$sgst_tax_rate.'% = '.round($sgst_tax_value,2);
 
+            $total_debit_amount = round($cgst_tax_value,2) + round($sgst_tax_value,2)  + $sub_total_amount;
+
      }else{
 
         // $total_tax_rate = 'IGST @ '.$igst_tax_rate.'%'.round($igst_tax_value,2);
@@ -15653,15 +15655,11 @@ public function downlaoddebitnotevendor($id){
                 <td style="border: 1px solid black;padding: 5px;">'.round($subtotalpluspandrcharges_TaX,2).'</td>
             </tr>';
 
-           
-            $calculate_tax_on_wehavedebit_value = $wehavedebitamount *  $loop_tax_rate / 100;
-            $calculate_tax_on_wehavedebit_lebel = 'IGST @  '.$wehavedebitamount *  $loop_tax_rate / 100;
-            $totalwehavedebit = $wehavedebitamount+$calculate_tax_on_wehavedebit_value;
-       
+        $total_debit_amount = $subtotalpluspandrcharges_TaX + $sub_total_amount;
      }
     
 
-    $total_debit_amount = $subtotalpluspandrcharges_TaX + $sub_total_amount;
+    
     $tds_amount = $getDebitnotedetailsforInvoice['tds_amount'];
     
     $mpdf = new \Mpdf\Mpdf();
