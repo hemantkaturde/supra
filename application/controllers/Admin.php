@@ -15531,8 +15531,7 @@ public function downlaoddebitnotevendor($id){
     $sgst_tax_rate = 0;
     $igst_tax_rate = 0;
     $gst_rate ='';
-    $total_pnf_charges =0;
-
+ 
     $item_count =count($getDebitnoteitemdeatilsForInvoice);
 
     if($item_count==1){
@@ -15588,7 +15587,7 @@ public function downlaoddebitnotevendor($id){
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rejected_quantity'].' '.$value['vendor_po_unit'].'</td>    
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['debit_note_rate'].'</td>    
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.round($value['debit_amount'],2).'</td>    
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.number_format($paid_amount,2).'</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top"></td>
                 </tr>';
                         
                 $gst_rate = $value['gst_rate'];
@@ -15616,7 +15615,7 @@ public function downlaoddebitnotevendor($id){
 
                 }
 
-                $sub_total_amount += $paid_amount;
+                // $sub_total_amount += $paid_amount;
                 $total_amount +=   $sgst_tax_value+$cgst_tax_value+$igst_tax_value+$paid_amount;
                 $total_amount_debit +=   $sgst_tax_value+$cgst_tax_value+$igst_tax_value+$value['debit_amount'];
             $ii++;       
@@ -15625,7 +15624,7 @@ public function downlaoddebitnotevendor($id){
   
 
     
-    $subtotalpluspandrcharges = $sub_total_amount + $total_pnf_charges;
+    // $subtotalpluspandrcharges = $sub_total_amount + $total_pnf_charges;
 
      if($gst_rate=='CGST_SGST' || $gst_rate=='CGST_SGST_6'){
         $tax_value = '<tr style="border: 1px solid black;">               
@@ -15655,7 +15654,7 @@ public function downlaoddebitnotevendor($id){
                 <td style="border: 1px solid black;padding: 5px;">'.round($subtotalpluspandrcharges_TaX,2).'</td>
             </tr>';
 
-            $wehavedebitamount = $total_debit_amount +$extra_text_label_val_for_calculation;
+           
             $calculate_tax_on_wehavedebit_value = $wehavedebitamount *  $loop_tax_rate / 100;
             $calculate_tax_on_wehavedebit_lebel = 'IGST @  '.$wehavedebitamount *  $loop_tax_rate / 100;
             $totalwehavedebit = $wehavedebitamount+$calculate_tax_on_wehavedebit_value;
@@ -15663,7 +15662,7 @@ public function downlaoddebitnotevendor($id){
      }
 
      $total_amount_new_logic = $subtotalpluspandrcharges_TaX + $subtotalpluspandrcharges;
-
+     $sub_total_amount = $total_debit_amount +$extra_text_label_val_for_calculation;
     
     $mpdf = new \Mpdf\Mpdf();
     // $html = $this->load->view('html_to_pdf',[],true);
@@ -15738,18 +15737,13 @@ public function downlaoddebitnotevendor($id){
                     <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>Rej Qty</th>  
                     <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>Rate</th>
                     <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>Debit Amt</th>
-                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>Paid Amt</th>
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;></th>
                 </tr>
                 '.$CartItem.$extra_text_label_val.' 
 
                 <tr style="border: 1px solid black;">               
-                    <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;;padding: 5px;;font-family:cambria;font-size:14px;"><b>P and F Charges </b></td>    
-                    <td style="border: 1px solid black;padding: 5px;">'.$total_pnf_charges.'</td>
-                </tr>
-
-                <tr style="border: 1px solid black;">               
                     <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;;padding: 5px;;font-family:cambria;font-size:14px;"><b>Total </b></td>    
-                    <td style="border: 1px solid black;padding: 5px;">'.number_format($subtotalpluspandrcharges,2).'</td>
+                    <td style="border: 1px solid black;padding: 5px;">'.number_format($sub_total_amount,2).'</td>
                 </tr>
 
              '. $tax_value.'
