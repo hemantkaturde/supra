@@ -224,13 +224,16 @@
                                     <input type="hidden" class="form-control"  value="<?=$cr ?>" id="freight_amount_charge" name="freight_amount_charge" required>
                                     <input type="hidden" class="form-control" value="<?=$totalDebitAndokQty['p_and_f_charges']?>"  id="p_and_f_charges_main" name="p_and_f_charges_main">
 
-                                    <div class="col-md-12">
+
+                                    <input type="hidden" class="form-control"  value="<?=$getdebitnoteditailsdata[0]['chq_amount']?>" id="chq_amt" name="chq_amt" required>
+
+                                    <!-- <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="chq_amt">Chq Amount <span class="required">*</span></label>
                                                   <input type="text" class="form-control"  value="<?=$getdebitnoteditailsdata[0]['chq_amount']?>" id="chq_amt" name="chq_amt" required>
                                                 <p class="error chq_amt_error"></p>
                                             </div>
-                                    </div>
+                                    </div> -->
                                     
 
                                       <?php if($getdebitnoteditailsdata[0]['grand_total_main']){ 
@@ -245,7 +248,6 @@
 
 
                                         <input type="hidden" class="form-control"  value="<?=round($totalDebitAndokQty['total_normal_gst_value_plus_total'],2)?>" id="grand_total_main" name="grand_total_main" required>
-                                        <input type="hidden" class="form-control" value="<?=$getdebitnoteditailsdata[0]['text_label']?>" id="text_label" name="text_label" required>
 
 
                                     <!-- <div class="col-md-12">
@@ -254,7 +256,7 @@
                                                   <input type="text" class="form-control"  value="<?=round($totalDebitAndokQty['total_normal_gst_value_plus_total'],2)?>" id="grand_total_main" name="grand_total_main" required>
                                                 <p class="error grand_total_main_error"></p>
                                             </div>
-                                    </div>
+                                    </div>-->
                                     
                                     <div class="col-md-12">
                                             <div class="form-group">
@@ -262,7 +264,7 @@
                                                   <input type="text" class="form-control" value="<?=$getdebitnoteditailsdata[0]['text_label']?>" id="text_label" name="text_label" required>
                                                 <p class="error text_label_error"></p>
                                             </div>
-                                    </div> -->
+                                    </div> 
 
                                     
                                     <div class="col-md-12">
