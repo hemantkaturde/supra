@@ -441,9 +441,12 @@ class Admin_model extends CI_Model
         if($params['search']['value'] != "") 
         {
             $this->db->where("(".TBL_SAMPLING_MASTER.".sampling_method_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SAMPLING_MASTER.".measuring_size LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SAMPLING_MASTER.".type LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_SAMPLING_MASTER.".remark LIKE '%".$params['search']['value']."%')");
         }
-
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id  = '.TBL_SAMPLING_MASTER.'.part_number_id');
         $this->db->where(TBL_SAMPLING_MASTER.'.status', 1);
         $query = $this->db->get(TBL_SAMPLING_MASTER);
         $rowcount = $query->num_rows();
@@ -456,8 +459,12 @@ class Admin_model extends CI_Model
         if($params['search']['value'] != "") 
         {
             $this->db->where("(".TBL_SAMPLING_MASTER.".sampling_method_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SAMPLING_MASTER.".measuring_size LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SAMPLING_MASTER.".type LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_SAMPLING_MASTER.".remark LIKE '%".$params['search']['value']."%')");
         }
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id  = '.TBL_SAMPLING_MASTER.'.part_number_id');
         $this->db->where(TBL_SAMPLING_MASTER.'.status', 1);
         $this->db->limit($params['length'],$params['start']);
         $this->db->order_by(TBL_SAMPLING_MASTER.'.id','DESC');
@@ -469,7 +476,10 @@ class Admin_model extends CI_Model
         {
             foreach ($fetch_result as $key => $value)
             {
-                $data[$counter]['sampling_method_name'] = $value['sampling_method_name'];              
+                $data[$counter]['part_number'] = $value['part_number'];    
+                $data[$counter]['sampling_method_name'] = $value['sampling_method_name'];   
+                $data[$counter]['measuring_size'] = $value['measuring_size'];  
+                $data[$counter]['type'] = $value['type'];                       
                 $data[$counter]['remark'] =  $value['remark'];
                 $data[$counter]['action'] = '';
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."updatesampling/".$value['id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";

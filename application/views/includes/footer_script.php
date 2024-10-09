@@ -801,9 +801,12 @@
             var dt = $('#view_smapling_method').DataTable({
 	            "columnDefs": [ 
 	                 { className: "details-control", "targets": [ 0 ] },
-	                 { "width": "80%", "targets": 0 },
-	                 { "width": "80", "targets": 1 },
-					 { "width": "5", "targets": 2 }
+	                 { "width": "20%", "targets": 0 },
+	                 { "width": "20", "targets": 1 },
+					 { "width": "10", "targets": 2 },
+					 { "width": "10", "targets": 3 },
+					 { "width": "20", "targets": 4 },
+					 { "width": "10", "targets": 5 }
 	            ],
 	            responsive: true,
 	            "oLanguage": {
