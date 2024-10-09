@@ -1403,6 +1403,9 @@ class Admin extends BaseController
             $save_sampling_response = array();
 
             $this->form_validation->set_rules('sampling_method_name','Sampling Name','trim|required');
+            $this->form_validation->set_rules('part_number_id','Part Number Id','trim|required');
+            $this->form_validation->set_rules('measuring_size','Measuring Size','trim|required');
+            $this->form_validation->set_rules('type','Type','trim|required');
             $this->form_validation->set_rules('remark','Remark','trim');
 
             if($this->form_validation->run() == FALSE)
@@ -1412,7 +1415,10 @@ class Admin extends BaseController
             }else{
 
                 $data = array(
+                    'part_number_id' => trim($this->input->post('part_number_id')),
                     'sampling_method_name'   => trim($this->input->post('sampling_method_name')),
+                    'measuring_size' => trim($this->input->post('measuring_size')),
+                    'type' => trim($this->input->post('type')),
                     'remark' =>    trim($this->input->post('remark'))
                 );
 
@@ -1434,6 +1440,7 @@ class Admin extends BaseController
             $processFunction = 'Admin/addnewSamplingmaster';
             $this->logrecord($process,$processFunction);
             $this->global['pageTitle'] = 'Add Sampling Master';
+            $data['finishgoodList']= $this->admin_model->fetchALLFinishgoodList();
             $this->loadViews("masters/addnewSamplingmaster", $this->global, $data, NULL);
         }
      }
@@ -1446,7 +1453,11 @@ class Admin extends BaseController
 
             $update_sampling_response = array();
             $this->form_validation->set_rules('sampling_method_name','Sampling Name','trim|required');
+            $this->form_validation->set_rules('part_number_id','Part Number Id','trim|required');
+            $this->form_validation->set_rules('measuring_size','Measuring Size','trim|required');
+            $this->form_validation->set_rules('type','Type','trim|required');
             $this->form_validation->set_rules('remark','Remark','trim');
+
 
             if($this->form_validation->run() == FALSE)
             {
@@ -1455,7 +1466,10 @@ class Admin extends BaseController
             }else{
 
                 $data = array(
+                    'part_number_id' => trim($this->input->post('part_number_id')),
                     'sampling_method_name'   => trim($this->input->post('sampling_method_name')),
+                    'measuring_size' => trim($this->input->post('measuring_size')),
+                    'type' => trim($this->input->post('type')),
                     'remark' =>    trim($this->input->post('remark'))
                 );
 
@@ -1492,6 +1506,7 @@ class Admin extends BaseController
             $this->logrecord($process,$processFunction);
             $this->global['pageTitle'] = 'Edit Sampling';
             $data['getsamplingdata'] = $this->admin_model->getSamplingdetails($id);
+            $data['finishgoodList']= $this->admin_model->fetchALLFinishgoodList();
             $this->loadViews("masters/updatesampling", $this->global, $data, NULL);
 
         }

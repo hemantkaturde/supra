@@ -1,3 +1,4 @@
+
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -23,6 +24,21 @@
                         <?php $this->load->helper("form"); ?>
                         <form role="form" id="addnewsamplingform" action="<?php echo base_url() ?>addnewsamplingform" method="post" role="form">
                             <div class="box-body">
+                                
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="part_number">Part Number<span class="required">*</span></label>
+                                                <select class="form-control" name="part_number_id" id="part_number_id" style="width: 390px !important;">
+                                                    <option st-id="" value="">Select Part Name</option>
+                                                        <?php foreach ($finishgoodList as $key => $value) {?>        
+                                                            <option value="<?php echo $value['fin_id']; ?>"><?php echo $value['part_number']; ?></option>
+                                                        <?php } ?>
+                                                </select>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -33,6 +49,31 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="measuring_size">Measuring Size <span class="required">*</span></label>
+                                            <input type="text" class="form-control" id="measuring_size " name="measuring_size" required>
+                                            <p class="error measuring_size_error"></p>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="sampling_method_name">Type<span class="required">*</span></label>
+                                                <select class="form-control" name="type" id="type">
+                                                    <option st-id="" value="">Select Part Name</option>
+                                                        <option value="GO">GO</option>
+                                                        <option value="NOGO">NOGO</option>
+                                                </select>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="row">
                                     <div class="col-md-6">
                                             <div class="form-group">
