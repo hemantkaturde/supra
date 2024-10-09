@@ -15772,7 +15772,7 @@ public function downlaoddebitnotevendor($id){
            
 
                 <tr style="border: 1px solid black;">
-                <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;"><b>Payable Amount To Vendor (Inv Value - Total Debit Amt)</b></td>    
+                <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;"><b>Payable Amount To Vendor</b> <br>(Inv Value - Total Debit Amt)</br></td>    
                 <td style="border: 1px solid black;padding: 5px"><b>'.round($getDebitnotedetailsforInvoice['vendor_inv_value']-($tds_amount+$total_debit_amount),2).'</b></td>
                 </tr>
           
