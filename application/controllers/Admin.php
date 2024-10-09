@@ -15626,7 +15626,9 @@ public function downlaoddebitnotevendor($id){
     
 
      if($gst_rate=='CGST_SGST' || $gst_rate=='CGST_SGST_6'){
-        $tax_value = '<tr style="border: 1px solid black;">               
+       
+       
+           $tax_value = '<tr style="border: 1px solid black;">               
             <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;">CGST @ '.$cgst_tax_rate.'% </td>    
                 <td style="border: 1px solid black;padding: 5px;">'.round($cgst_tax_value,2).'</td>
             </tr>
@@ -15659,7 +15661,6 @@ public function downlaoddebitnotevendor($id){
      }
     
 
-    
     $tds_amount = $getDebitnotedetailsforInvoice['tds_amount'];
     
     $mpdf = new \Mpdf\Mpdf();
