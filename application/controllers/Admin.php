@@ -15322,7 +15322,7 @@ public function downlaoddebitnote($id){
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rejected_quantity'].' '.$value['supplier_po_unit'].'</td>    
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rate'].'</td>    
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.round($value['debit_amount'],2).'</td>    
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$paid_amount.'</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top"></td>
                 </tr>';
           
 
@@ -15467,7 +15467,7 @@ public function downlaoddebitnote($id){
                     <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>Rej Qty</th>  
                     <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>Rate</th>
                     <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>Debit Amt</th>
-                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>Paid Amt</th>
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;></th>
                 </tr>
                 '.$CartItem.$extra_text_label_val.' 
 
