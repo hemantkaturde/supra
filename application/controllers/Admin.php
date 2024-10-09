@@ -15661,7 +15661,7 @@ public function downlaoddebitnotevendor($id){
      }
     
 
-     $total_amount_new_logic = $subtotalpluspandrcharges_TaX + $subtotalpluspandrcharges;
+    $total_debit_amount = $subtotalpluspandrcharges_TaX + $sub_total_amount;
     
     $mpdf = new \Mpdf\Mpdf();
     // $html = $this->load->view('html_to_pdf',[],true);
@@ -15749,8 +15749,8 @@ public function downlaoddebitnotevendor($id){
             
 
              <tr style="border: 1px solid black;">
-                    <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;"><b>Total amount</b></td>    
-                    <td style="border: 1px solid black;padding: 5px;">'.round($total_amount_new_logic,2).'</td>
+                    <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;"><b>Total Debit amount</b></td>    
+                    <td style="border: 1px solid black;padding: 5px;">'.round($total_debit_amount,2).'</td>
               </tr>
 
               <tr style="border: 1px solid black;">
