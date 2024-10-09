@@ -15755,7 +15755,7 @@ public function downlaoddebitnotevendor($id){
               </tr>
 
               <tr style="border: 1px solid black;">
-                <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;">Less TDS</td>    
+                <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;">TDS</td>    
                 <td style="border: 1px solid black;padding: 5px;">'.$tds_amount.'</td>
               </tr>
 
