@@ -15392,7 +15392,8 @@ public function downlaoddebitnote($id){
         $total_debit_amount = $subtotalpluspandrcharges_TaX + $sub_total_amount;
      }
 
-  
+     $tds_amount = $getDebitnotedetailsforInvoice['tds_amount'];
+
     $mpdf = new \Mpdf\Mpdf();
     // $html = $this->load->view('html_to_pdf',[],true);
     $html = '<table style=" width: 100%;text-align: center;border-collapse: collapse;font-family:cambria;">
