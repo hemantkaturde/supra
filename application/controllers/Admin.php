@@ -15622,9 +15622,8 @@ public function downlaoddebitnotevendor($id){
     }
 
   
-
+    $sub_total_amount = $total_debit_amount +$extra_text_label_val_for_calculation;
     
-    // $subtotalpluspandrcharges = $sub_total_amount + $total_pnf_charges;
 
      if($gst_rate=='CGST_SGST' || $gst_rate=='CGST_SGST_6'){
         $tax_value = '<tr style="border: 1px solid black;">               
@@ -15644,7 +15643,7 @@ public function downlaoddebitnotevendor($id){
         // $total_tax_rate = 'IGST @ '.$igst_tax_rate.'%'.round($igst_tax_value,2);
 
         /*03-10-2024 As Per new Logic*/
-        $subtotalpluspandrcharges_TaX = $subtotalpluspandrcharges * $igst_tax_rate / 100;
+        $subtotalpluspandrcharges_TaX = $sub_total_amount * $igst_tax_rate / 100;
         $total_tax_rate = 'IGST @ '.$igst_tax_rate.'%'.round($subtotalpluspandrcharges_TaX,2);
         $loop_tax_rate = $igst_tax_rate;
 
@@ -15660,9 +15659,9 @@ public function downlaoddebitnotevendor($id){
             $totalwehavedebit = $wehavedebitamount+$calculate_tax_on_wehavedebit_value;
        
      }
+    
 
      $total_amount_new_logic = $subtotalpluspandrcharges_TaX + $subtotalpluspandrcharges;
-     $sub_total_amount = $total_debit_amount +$extra_text_label_val_for_calculation;
     
     $mpdf = new \Mpdf\Mpdf();
     // $html = $this->load->view('html_to_pdf',[],true);
