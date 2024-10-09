@@ -15662,6 +15662,7 @@ public function downlaoddebitnotevendor($id){
     
 
     $total_debit_amount = $subtotalpluspandrcharges_TaX + $sub_total_amount;
+    $tds_amount = $getDebitnotedetailsforInvoice['tds_amount'];
     
     $mpdf = new \Mpdf\Mpdf();
     // $html = $this->load->view('html_to_pdf',[],true);
@@ -15755,7 +15756,7 @@ public function downlaoddebitnotevendor($id){
 
               <tr style="border: 1px solid black;">
                 <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;">Less TDS</td>    
-                <td style="border: 1px solid black;padding: 5px;">'.$getDebitnotedetailsforInvoice['tds_amount'].'</td>
+                <td style="border: 1px solid black;padding: 5px;">'.$tds_amount.'</td>
               </tr>
 
               <tr style="border: 1px solid black;">
