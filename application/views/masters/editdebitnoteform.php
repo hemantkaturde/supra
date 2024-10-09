@@ -278,6 +278,15 @@
 
                                     <div class="col-md-12">
                                             <div class="form-group">
+                                                <label for="vendor_inv_value">Vendor Invoice Value</label>
+                                                  <input type="text" class="form-control"  value="<?=$getdebitnoteditailsdata[0]['vendor_inv_value']?>" id="vendor_inv_value" name="vendor_inv_value" required>
+                                                <p class="error vendor_inv_value_error"></p>
+                                            </div>
+                                    </div>
+
+
+                                    <div class="col-md-12">
+                                            <div class="form-group">
                                                 <label for="remark">Remark</label>
                                                   <textarea type="text" class="form-control"  id="remark"  name="remark" required> <?=$getdebitnoteditailsdata[0]['debit_remark'];?></textarea>
                                                 <p class="error remark_error"></p>

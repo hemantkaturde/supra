@@ -7898,6 +7898,7 @@ class Admin extends BaseController
                         'p_and_f_charges' =>  trim($this->input->post('p_and_f_charges')),
                         'text_label' =>  trim($this->input->post('text_label')),
                         'text_amount' =>  trim($this->input->post('text_amount')),
+                        'vendor_inv_value' =>  trim($this->input->post('vendor_inv_value')),
                         'tds_amount' =>  trim($this->input->post('tds_amount')),
                         'freight_amount_charge' =>  trim($this->input->post('freight_amount_charge')),
                         'grand_total_main' =>  trim($this->input->post('grand_total_main')),
@@ -8101,6 +8102,7 @@ class Admin extends BaseController
                         'pre_remark' =>    trim($this->input->post('pre_remark')),
                         'pre_text_amount' =>    trim($this->input->post('pre_text_amount')),
                         'pre_text_label' =>    trim($this->input->post('pre_text_label')),
+                        'pre_vendor_inv_value' =>    trim($this->input->post('pre_vendor_inv_value')),
                     );
 
 
@@ -8150,6 +8152,7 @@ class Admin extends BaseController
                         'pre_remark' =>    trim($this->input->post('pre_remark')),
                         'pre_text_amount' =>    trim($this->input->post('pre_text_amount')),
                         'pre_text_label' =>    trim($this->input->post('pre_text_label')),
+                        'pre_vendor_inv_value' =>    trim($this->input->post('pre_vendor_inv_value')),
                     );
 
                 }
@@ -8164,7 +8167,7 @@ class Admin extends BaseController
                 $savedebitnoteitemdetails= $this->admin_model->savedebitnoteitemdetails($debitnoteitemid,$data);
                 if($savedebitnoteitemdetails){
                     $savdebitnoteitem_response['status'] = 'success';
-                    $savdebitnoteitem_response['error'] = array('part_number'=>strip_tags(form_error('part_number')),'description'=>strip_tags(form_error('description')), 'invoice_no'=>strip_tags(form_error('invoice_no')), 'invoice_date'=>strip_tags(form_error('invoice_date')),'invoice_qty'=>strip_tags(form_error('invoice_qty')), 'ok_qty'=>strip_tags(form_error('ok_qty')), 'rejected_quantity'=>strip_tags(form_error('rejected_quantity')),'received_quantity'=>strip_tags(form_error('received_quantity')),'rate'=>strip_tags(form_error('rate')), 'gst_rate'=>strip_tags(form_error('gst_rate')),'sgst_value'=>strip_tags(form_error('sgst_value')),'cgst_value'=>strip_tags(form_error('cgst_value')),'igst_rate'=>strip_tags(form_error('igst_rate')),'grand_total'=>strip_tags(form_error('grand_total')),'item_remark'=>strip_tags(form_error('item_remark')));
+                    $savdebitnoteitem_response['error'] = array('part_number'=>strip_tags(form_error('part_number')),'description'=>strip_tags(form_error('description')), 'invoice_no'=>strip_tags(form_error('invoice_no')), 'invoice_date'=>strip_tags(form_error('invoice_date')),'invoice_qty'=>strip_tags(form_error('invoice_qty')), 'ok_qty'=>strip_tags(form_error('ok_qty')), 'rejected_quantity'=>strip_tags(form_error('rejected_quantity')),'received_quantity'=>strip_tags(form_error('received_quantity')),'rate'=>strip_tags(form_error('rate')), 'gst_rate'=>strip_tags(form_error('gst_rate')),'sgst_value'=>strip_tags(form_error('sgst_value')),'cgst_value'=>strip_tags(form_error('cgst_value')),'igst_rate'=>strip_tags(form_error('igst_rate')),'grand_total'=>strip_tags(form_error('grand_total')),'item_remark'=>strip_tags(form_error('item_remark')),'pre_vendor_inv_value'=>strip_tags(form_error('pre_vendor_inv_value')));
                 }
 
             }
