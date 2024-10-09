@@ -243,7 +243,12 @@
 
                                         }  ?>
 
-                                    <div class="col-md-12">
+
+                                        <input type="hidden" class="form-control"  value="<?=round($totalDebitAndokQty['total_normal_gst_value_plus_total'],2)?>" id="grand_total_main" name="grand_total_main" required>
+                                        <input type="hidden" class="form-control" value="<?=$getdebitnoteditailsdata[0]['text_label']?>" id="text_label" name="text_label" required>
+
+
+                                    <!-- <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="freight_amount_charge">Grand Total <span class="required">*</span></label>
                                                   <input type="text" class="form-control"  value="<?=round($totalDebitAndokQty['total_normal_gst_value_plus_total'],2)?>" id="grand_total_main" name="grand_total_main" required>
@@ -257,7 +262,7 @@
                                                   <input type="text" class="form-control" value="<?=$getdebitnoteditailsdata[0]['text_label']?>" id="text_label" name="text_label" required>
                                                 <p class="error text_label_error"></p>
                                             </div>
-                                    </div>
+                                    </div> -->
 
                                     
                                     <div class="col-md-12">

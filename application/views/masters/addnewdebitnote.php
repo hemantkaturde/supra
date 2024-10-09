@@ -294,24 +294,26 @@
                                 
                                     <input type="hidden" class="form-control"  value="0" id="freight_amount_charge" name="freight_amount_charge" required>
                                     <input type="hidden" class="form-control" value="<?=$totalDebitAndokQty['p_and_f_charges']?>"  id="p_and_f_charges_main" name="p_and_f_charges_main">
+                                    <input type="hidden" class="form-control"  value="" id="chq_amt" name="chq_amt" required>
+                                    <input type="hidden" class="form-control" id="grand_total_main" value="<?=$totalDebitAndokQty['grandtotal']?>"  name="grand_total_main" required>
 
-                                    <div class="col-md-12">
+                                    <!-- <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="chq_amt">Chq Amount <span class="required">*</span></label>
                                                   <input type="text" class="form-control"  value="" id="chq_amt" name="chq_amt" required>
                                                 <p class="error chq_amt_error"></p>
                                             </div>
                                     </div>
-                                    
+                                     -->
 
 
-                                    <div class="col-md-12">
+                                    <!-- <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="freight_amount_charge">Grand Total <span class="required">*</span></label>
-                                                  <input type="text" class="form-control" id="grand_total_main" value="<?=$totalDebitAndokQty['grandtotal']?>"  name="grand_total_main" required>
+                                                  <input type="hidden" class="form-control" id="grand_total_main" value="<?=$totalDebitAndokQty['grandtotal']?>"  name="grand_total_main" required>
                                                 <p class="error grand_total_main_error"></p>
                                             </div>
-                                    </div>
+                                    </div> -->
 
 
                                     <div class="col-md-12">
