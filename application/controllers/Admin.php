@@ -20989,6 +20989,7 @@ public function addqcchallan(){
             $this->global['pageTitle'] = 'Add QC Challan';
             $data['vendorList']= $this->admin_model->fetchALLvendorList();
             $data['getqcitemdetails']= $this->admin_model->getqcitemdetails();
+            $data['getpreviouschallannumber']= $this->admin_model->getpreviouschallannumber();
             $this->loadViews("masters/addqcchallan", $this->global, $data, NULL);
 
     }

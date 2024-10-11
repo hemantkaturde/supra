@@ -37,7 +37,7 @@
                                                 $financial_year_indian = (date("y") - 1) . "" . date("y");
                                         }
 
-                                        if($getqcitemdetails[0]['challan_number']){
+                                        if($getpreviouschallannumber[0]['challan_number']){
                                             // $arr = str_split($getPriviousstockid[0]['stock_id_number']);
                                             // $i = end($arr);
                                             // $inrno= "SQSD2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
@@ -51,7 +51,7 @@
                                             // $inrno= "SQSD2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
                                             // $stock_form_id = $inrno;
 
-                                            $getfinancial_year = substr($getqcitemdetails[0]['challan_number'], -8);
+                                            $getfinancial_year = substr($getpreviouschallannumber[0]['challan_number'], -8);
 
                                             $first_part_of_string = substr($getfinancial_year,0,4);
                                             $year = substr($getfinancial_year,0,2);
@@ -68,7 +68,7 @@
                                             // Check if the current date falls within the financial year
                                             if ($currentDate >= $financialYearStart && $currentDate <= $financialYearEnd) {
                                                
-                                                $string = $getqcitemdetails[0]['challan_number'];
+                                                $string = $getpreviouschallannumber[0]['challan_number'];
                                                 $n = 4; // Number of characters to extract from the end
                                                 $lastNCharacters = substr($string, -$n);
                                                 $inrno= "QC".'-'.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT).'/'.$financial_year_indian;
@@ -76,7 +76,7 @@
 
                                             } else {
 
-                                                $string = $getqcitemdetails[0]['challan_number'];
+                                                $string = $getpreviouschallannumber[0]['challan_number'];
                                                 $n = 4; // Number of characters to extract from the end
                                                 $lastNCharacters = substr($string, -$n);
                                                 $inrno= "QC".'-'.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT).'/'.$financial_year_indian;

@@ -18404,6 +18404,19 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }  
 
 
+    
+    public function getpreviouschallannumber(){
+
+        $this->db->select('challan_number');
+        $this->db->where(TBL_QC_CHALLAN.'.status', 1);
+        $this->db->limit(1);
+        $this->db->order_by(TBL_QC_CHALLAN.'.id','DESC');
+        $query = $this->db->get(TBL_QC_CHALLAN);
+        $rowcount = $query->result_array();
+        return $rowcount;
+    }
+
+
 }
 
 
