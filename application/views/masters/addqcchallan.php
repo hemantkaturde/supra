@@ -74,17 +74,17 @@
 
                                                 $n = 4; // Number of characters to extract from the end
                                                 $lastNCharacters = substr($explod[1], -$n);
-                                                $inrno= "QC".'-'.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT).'/'.$financial_year_indian;
+                                                $inrno= "QC".'/'.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT).'/'.$financial_year_indian;
                                                 $challan_number = $inrno;
 
                                             } else {
 
+                                              
                                                 $string = $getpreviouschallannumber[0]['challan_number'];
-                                                $n = 4; // Number of characters to extract from the end
-
                                                 $explod = explode("/",$string);
+                                                $n = 4; // Number of characters to extract from the end
                                                 $lastNCharacters = substr($explod[1], -$n);
-                                                $inrno= "QC".'-'.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT).'/'.$financial_year_indian;
+                                                $inrno= "QC".'/'.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT).'/'.$financial_year_indian;
                                                 $challan_number = $inrno;
 
                                                 //$po_number = 'SQPO24250001';
