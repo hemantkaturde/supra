@@ -125,6 +125,8 @@ $route['getBuyerPonumberbyBuyerid'] = "admin/getBuyerPonumberbyBuyerid";
 $route['getBuyerPonumberbyBuyeridvendorpo'] = "admin/getBuyerPonumberbyBuyeridvendorpo";
 $route['getBuyerPonumberbyBuyeridforsupplierandvendorpo'] = "admin/getBuyerPonumberbyBuyeridforsupplierandvendorpo";
 $route['getSuppliritemonlyforgetbuyeritemonly'] = "admin/getSuppliritemonlyforgetbuyeritemonly";
+$route['getSuppliritemonlyforgetbuyeritemonlyfrompo'] = "admin/getSuppliritemonlyforgetbuyeritemonlyfrompo";
+
 $route['getBuyerItemsforDisplay'] = "admin/getBuyerItemsforDisplay";
 $route['getBuyerItemsforDisplayBybuyerid'] = "admin/getBuyerItemsforDisplayBybuyerid";
 $route['vendorpo'] = "admin/vendorpo";
