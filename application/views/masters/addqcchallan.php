@@ -69,8 +69,11 @@
                                             if ($currentDate >= $financialYearStart && $currentDate <= $financialYearEnd) {
                                                
                                                 $string = $getpreviouschallannumber[0]['challan_number'];
+
+                                                $explod = explode("/",$string);
+
                                                 $n = 4; // Number of characters to extract from the end
-                                                $lastNCharacters = substr($string, -$n);
+                                                $lastNCharacters = substr($explod[1], -$n);
                                                 $inrno= "QC".'-'.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT).'/'.$financial_year_indian;
                                                 $challan_number = $inrno;
 
@@ -78,7 +81,9 @@
 
                                                 $string = $getpreviouschallannumber[0]['challan_number'];
                                                 $n = 4; // Number of characters to extract from the end
-                                                $lastNCharacters = substr($string, -$n);
+
+                                                $explod = explode("/",$string);
+                                                $lastNCharacters = substr($explod[1], -$n);
                                                 $inrno= "QC".'-'.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT).'/'.$financial_year_indian;
                                                 $challan_number = $inrno;
 
@@ -87,7 +92,7 @@
                                           /* New Logic End Here */
 
                                         }else{
-                                            $challan_number = 'QC'.'-'.'0001'.'/'.$financial_year_indian;
+                                            $challan_number = 'QC'.'/'.'0001'.'/'.$financial_year_indian;
                                         }
                                     ?>
                                         <input type="text" class="form-control" id="challan_number" name="challan_number" value="<?=$challan_number;?>" required readonly>
