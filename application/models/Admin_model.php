@@ -2249,7 +2249,7 @@ class Admin_model extends CI_Model
 
             /* Comment 30-05-2024*/
             //$this->db->where(TBL_FINISHED_GOODS.'.part_number NOT IN (SELECT tbl_finished_goods.part_number FROM tbl_vendorpo_item join tbl_finished_goods on tbl_vendorpo_item.part_number_id=tbl_finished_goods.fin_id where tbl_vendorpo_item.pre_buyer_po_number='.$supplier_po_number.')', NULL, FALSE);
-
+            $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.item_po_status','from_po');
             $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id',$supplier_po_number);
             $query = $this->db->get(TBL_FINISHED_GOODS);
             $data = $query->result_array();
