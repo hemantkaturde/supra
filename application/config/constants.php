@@ -177,3 +177,5 @@ define('TBL_USP_INCOMING_FORM','tbl_usp_incoming_form');
 define('TBL_USP_INCOMING_FORM_ITEM','tbl_usp_incoming_form_item');
 define('TBL_LOG_RECORD','tbl_log');
 define('TBL_SAMPLING_MASTER','tbl_sampling_master');
+define('TBL_QC_CHALLAN','tbl_qc_challan');
+define('TBL_QC_CHALLAN_ITEM','tbl_qc_challan_item');

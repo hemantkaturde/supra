@@ -18218,6 +18218,168 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
+    public function getqcchallancount($params){
+
+        $this->db->select('*');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_QC_CHALLAN.'.vendor_id');
+ 
+         if($params['search']['value'] != "") 
+         {
+            $this->db->where("(".TBL_QC_CHALLAN.".challan_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_QC_CHALLAN.".challan_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_QC_CHALLAN.".remark LIKE '%".$params['search']['value']."%')");
+         }
+ 
+         $this->db->limit($params['length'],$params['start']);
+         $this->db->order_by(TBL_QC_CHALLAN.'.id','DESC');
+         $query = $this->db->get(TBL_QC_CHALLAN);
+         $rowcount = $query->num_rows();
+         return $rowcount;
+    }
+
+
+    public function getqcchallandata($params){
+
+       $this->db->select('*');
+       $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_QC_CHALLAN.'.vendor_id');
+
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_QC_CHALLAN.".challan_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_QC_CHALLAN.".challan_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_QC_CHALLAN.".remark LIKE '%".$params['search']['value']."%')");
+        }
+
+        $this->db->limit($params['length'],$params['start']);
+        $this->db->order_by(TBL_QC_CHALLAN.'.id','DESC');
+        $query = $this->db->get(TBL_QC_CHALLAN);
+        $fetch_result = $query->result_array();
+
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['challan_number'] = $value['challan_number'];
+                $data[$counter]['challan_date'] = $value['challan_date'];
+                $data[$counter]['vendor_name'] = $value['vendor_name'];
+                $data[$counter]['remark'] = $value['remark'];
+
+                $data[$counter]['action'] = '';
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewqcchallan/".$value['id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editqcchallan/".$value['id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['id']."' class='fa fa-trash-o deleteqcchllan' aria-hidden='true'></i>"; 
+                $counter++; 
+            }
+        }
+        return $data;
+        
+    }
+
+
+    public function saveQCnoteitemdetails($id,$data){
+
+        if($id){
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_QC_CHALLAN_ITEM, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        }else{
+            if($this->db->insert(TBL_QC_CHALLAN_ITEM, $data)) {
+                return $this->db->insert_id();;
+            } else {
+                return FALSE;
+            }
+
+        }
+
+    }
+
+
+    public function getqcitemdetails(){
+
+        $this->db->select('*');
+        $this->db->where(TBL_QC_CHALLAN_ITEM.'.qc_challan_id IS NULL');
+        $query = $this->db->get(TBL_QC_CHALLAN_ITEM);
+        $data = $query->result_array();
+        return $data;
+
+    }
+
+
+    public function deleteQcchllanitem($id){
+
+        $this->db->where('id', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_QC_CHALLAN_ITEM)){
+           return TRUE;
+        }else{
+           return FALSE;
+        }
+
+    }
+    public function deleteqcchllan($id){
+        
+        $this->db->where('id', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_QC_CHALLAN)){
+           $this->db->where('qc_challan_id', $id);
+           //$this->db->delete(TBL_SUPPLIER);
+           if($this->db->delete(TBL_QC_CHALLAN_ITEM)){
+            return TRUE;
+           }else{
+            return FALSE;
+           }
+        }else{
+           return FALSE;
+        }
+
+    }
+
+    
+
+    public function saveqcchallandetails($id,$data){
+
+        if($id){
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_QC_CHALLAN, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        }else{
+            if($this->db->insert(TBL_QC_CHALLAN, $data)) {
+                return $this->db->insert_id();;
+            } else {
+                return FALSE;
+            }
+
+        }
+
+    }
+
+
+    public function update_last_inserted_id_QC_challan($saveqcchallandetails){
+
+        $data = array(
+            'qc_challan_id' =>$saveqcchallandetails
+        );
+
+        $this->db->where(TBL_QC_CHALLAN_ITEM.'.qc_challan_id IS NULL');
+        if($this->db->update(TBL_QC_CHALLAN_ITEM,$data)){
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+
+    }  
+
+
 }
 
 

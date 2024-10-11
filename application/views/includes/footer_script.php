@@ -22842,3 +22842,284 @@
 
 </script>
 <?php } ?>
+
+
+<?php if($pageTitle=='QC Challan' || $pageTitle=='Add QC Challan'){ ?>
+	<script type="text/javascript">
+            $(document).ready(function() {
+				var dt = $('#view_qc_challan').DataTable({
+					"columnDefs": [ 
+						{ className: "details-control", "targets": [ 0 ] },
+						{ "width": "10%", "targets": 0 },
+						{ "width": "10%", "targets": 1 },
+						{ "width": "20%", "targets": 2 },
+						{ "width": "25%", "targets": 3 },
+						{ "width": "8%", "targets": 4 }
+					],
+					responsive: true,
+					"oLanguage": {
+						"sEmptyTable": "<i>No QC Challan Found.</i>",
+					}, 
+					"bSort" : false,
+					"bFilter":true,
+					"bLengthChange": true,
+					"iDisplayLength": 10,   
+					"bProcessing": true,
+					"serverSide": true,
+					"ajax":{
+						url :"<?php echo base_url();?>fetchqcchallan",
+						type: "post",
+					},
+				});
+     		});
+
+
+			$(document).on('click','#addqcchallanform',function(e){
+					e.preventDefault();
+					$(".loader_ajax").show();
+
+					var formData = new FormData($("#addqchallanformid")[0]);
+					$.ajax({
+						url : "<?php echo base_url();?>addqcchallan",
+						type: "POST",
+						data : formData,
+						cache: false,
+						contentType: false,
+						processData: false,
+						success: function(data, textStatus, jqXHR)
+						{
+							var fetchResponse = $.parseJSON(data);
+							if(fetchResponse.status == "failure")
+							{
+								$.each(fetchResponse.error, function (i, v)
+								{
+									$('.'+i+'_error').html(v);
+								});
+								$(".loader_ajax").hide();
+							}
+							else if(fetchResponse.status == 'success')
+							{
+								swal({
+									title: "Success",
+									text: "Qc Challan Form Successfully Added!",
+									icon: "success",
+									button: "Ok",
+									},function(){ 
+										
+										window.location.href = "<?php echo base_url().'qcchallan'?>";
+								});		
+							}
+							
+						},
+						error: function (jqXHR, textStatus, errorThrown)
+						{
+							$(".loader_ajax").hide();
+						}
+					});
+					return false;
+			});
+
+			$(document).on('click','#saveQcchallan_item',function(e){
+			   e.preventDefault();
+			   $(".loader_ajax").show();
+			   var formData = new FormData($("#saveQcchallanitemform")[0]);
+
+			   var field_1 =   $('#field_1').val();
+			   var field_2 =   $('#field_2').val();
+			   var field_3 =   $('#field_3').val();
+			   var field_4 =   $('#field_4').val();
+			   var field_5 =   $('#field_5').val();
+			   var field_6 =   $('#field_6').val();
+			   var remark  =    $('#item_remark').val();
+
+			   var pre_date =   $('#challan_date').val();
+			   var pre_vendor_name =   $('#vendor_name').val();
+			   var pre_remark =   $('#remark').val();
+
+			
+			   $.ajax({
+				url : "<?php echo base_url();?>saveQcchallanitem",
+				type: "POST",
+				 //data : formData,
+				 data :{field_1:field_1,field_2:field_2,field_3:field_3,field_4:field_4,field_5:field_5,field_6:field_6,remark:remark,pre_date:pre_date,pre_vendor_name:pre_vendor_name,pre_remark:pre_remark},
+				 method: "POST",
+                // data :{package_id:package_id},
+                cache:false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+						$(".loader_ajax").hide();
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						swal({
+							title: "Success",
+							text: "Item Successfully Added!",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+
+								// if(debit_id){
+								// 	window.location.href = "<?php echo base_url().'editdebitnoteform/'?>"+debit_id;
+								// }else{
+									window.location.href = "<?php echo base_url().'addqcchallan'?>";
+								// }
+							
+						});		
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			   });
+			 return false;
+	        });
+
+			$(document).on('click','.deleteQcchllanitem',function(e){
+				var elemF = $(this);
+				e.preventDefault();
+				swal({
+					title: "Are you sure?",
+					text: "Delete QC Challan Item ",
+					type: "warning",
+					showCancelButton: true,
+					closeOnClickOutside: false,
+					confirmButtonClass: "btn-sm btn-danger",
+					confirmButtonText: "Yes, delete it!",
+					cancelButtonText: "No, cancel plz!",
+					closeOnConfirm: false,
+					closeOnCancel: false
+				}, function(isConfirm) {
+					if (isConfirm) {
+								$.ajax({
+									url : "<?php echo base_url();?>deleteQcchllanitem",
+									type: "POST",
+									data : 'id='+elemF.attr('data-id'),
+									success: function(data, textStatus, jqXHR)
+									{
+										const obj = JSON.parse(data);
+									
+										if(obj.status=='success'){
+											swal({
+												title: "Deleted!",
+												text: "QC Challan Item Deleted Succesfully",
+												icon: "success",
+												button: "Ok",
+												},function(){ 
+														window.location.href = "<?php echo base_url().'addqcchallan'?>";
+											});	
+										}
+
+									},
+									error: function (jqXHR, textStatus, errorThrown)
+									{
+										$(".loader_ajax").hide();
+									}
+								})
+							}
+							else {
+					swal("Cancelled", "OMS Challan Item deletion cancelled ", "error");
+					}
+				});
+	        });
+
+
+			$(document).on('click','.deleteqcchllan',function(e){
+				var elemF = $(this);
+				e.preventDefault();
+				swal({
+					title: "Are you sure?",
+					text: "Delete QC Challan ",
+					type: "warning",
+					showCancelButton: true,
+					closeOnClickOutside: false,
+					confirmButtonClass: "btn-sm btn-danger",
+					confirmButtonText: "Yes, delete it!",
+					cancelButtonText: "No, cancel plz!",
+					closeOnConfirm: false,
+					closeOnCancel: false
+				}, function(isConfirm) {
+					if (isConfirm) {
+								$.ajax({
+									url : "<?php echo base_url();?>deleteqcchllan",
+									type: "POST",
+									data : 'id='+elemF.attr('data-id'),
+									success: function(data, textStatus, jqXHR)
+									{
+										const obj = JSON.parse(data);
+									
+										if(obj.status=='success'){
+											swal({
+												title: "Deleted!",
+												text: "QC Challan Deleted Succesfully",
+												icon: "success",
+												button: "Ok",
+												},function(){ 
+														window.location.href = "<?php echo base_url().'qcchallan'?>";
+											});	
+										}
+
+									},
+									error: function (jqXHR, textStatus, errorThrown)
+									{
+										$(".loader_ajax").hide();
+									}
+								})
+							}
+							else {
+					swal("Cancelled", "OMS Challan deletion cancelled ", "error");
+					}
+				});
+	        });
+
+
+		
+			// $(document).on('click','.editChallanformitem',function(e){  
+			// 	e.preventDefault();
+			// 	var elemF = $(this);
+			// 	var item_id = elemF.attr('data-id');
+			// 	$.ajax({
+			// 		url : "<?php echo base_url();?>geteditChallanformitemforedititem",
+			// 		type: "POST",
+			// 		data : 'id='+item_id,
+			// 		success: function(data, textStatus, jqXHR)
+			// 		{
+			// 			    var fetchResponse = $.parseJSON(data);
+			// 				$('#addNewModal').modal('show'); 
+
+			// 				$('#oms_challan_item_id').val(fetchResponse.omschallanid); 
+			// 				$('#part_number').val(fetchResponse.part_number);  
+			// 				$('#fg_description').val(fetchResponse.fg_description);  
+			// 				$('#rm_description').val(fetchResponse.rm_description);  
+			// 				$('#gross_weight').val(fetchResponse.gross_weight);  
+			// 				$('#unit').val(fetchResponse.unit);  
+			// 				$('#calculation').val(fetchResponse.calculation);  
+			// 				$('#net_weight').val(fetchResponse.net_weight);  
+			// 				$('#qty').val(fetchResponse.qty);  
+			// 				$('#hsn_no').val(fetchResponse.hsn_no);  
+			// 				$('#no_of_bags').val(fetchResponse.no_of_bags);  
+			// 				$('#itemremark').val(fetchResponse.remark);  
+							
+			// 		},
+			// 		error: function (jqXHR, textStatus, errorThrown)
+			// 	    {
+			// 	   	   $(".loader_ajax").hide();
+			// 	    }
+			// 	});
+			// 	return false;
+			// });
+
+			$(document).on('click','.closeQcchallanform',function(e){  
+				location.reload();
+			});
+
+    </script>
+<?php } ?>

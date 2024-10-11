@@ -540,6 +540,15 @@ $route['deletesampling'] = "admin/deletesampling";
 $route['updatesampling/(:any)'] = "admin/updatesampling/$1";
 
 
+$route['qcchallan'] = "admin/qcchallan";
+$route['fetchqcchallan'] = "admin/fetchqcchallan";
+$route['addqcchallan'] = "admin/addqcchallan";
+$route['saveQcchallanitem'] = "admin/saveQcchallanitem";
+$route['deleteQcchllanitem'] = "admin/deleteQcchllanitem";
+$route['deleteqcchllan'] = "admin/deleteqcchllan";
+
+
+
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

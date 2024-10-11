@@ -20894,5 +20894,188 @@ public function addscraprejection(){
     $this->loadViews("masters/viewrejectionformitemdetails", $this->global, $data, NULL);
 }
 
+public function qcchallan(){
+    $process = 'QC Challan';
+    $processFunction = 'Admin/qcchallan';
+    $this->logrecord($process,$processFunction);
+    $this->global['pageTitle'] = 'QC Challan';
+    $this->loadViews("masters/qcchallan", $this->global, $data, NULL);
+}
+
+
+public function fetchqcchallan(){
+
+    $params = $_REQUEST;
+    $totalRecords = $this->admin_model->getqcchallancount($params); 
+    $queryRecords = $this->admin_model->getqcchallandata($params); 
+
+    $data = array();
+    foreach ($queryRecords as $key => $value)
+    {
+        $i = 0;
+        foreach($value as $v)
+        {
+            $data[$key][$i] = $v;
+            $i++;
+        }
+    }
+    $json_data = array(
+        "draw"            => intval( $params['draw'] ),   
+        "recordsTotal"    => intval( $totalRecords ),  
+        "recordsFiltered" => intval($totalRecords),
+        "data"            => $data   // total data array
+        );
+    echo json_encode($json_data);
+
+}
+
+
+public function addqcchallan(){
+
+    $post_submit = $this->input->post();
+    if($post_submit){
+
+        $save_QC_Chllan_response = array();
+        $this->form_validation->set_rules('challan_number','Challan Number','trim|required');
+        $this->form_validation->set_rules('challan_date','Challan Date','trim|required');
+        $this->form_validation->set_rules('vendor_name','Vendor Name','trim|required');
+        $this->form_validation->set_rules('remark','Part No','trim');
+
+        if($this->form_validation->run() == FALSE)
+        {
+            $save_QC_Chllan_response['status'] = 'failure';
+            $save_QC_Chllan_response['error'] = array(
+                'challan_number'=>strip_tags(form_error('challan_number')),
+                'challan_date'=>strip_tags(form_error('challan_date')),
+                'vendor_name'=>strip_tags(form_error('vendor_name')),
+                'remark'=>strip_tags(form_error('remark')));
+        }else{
+
+            $data = array(
+                'challan_number'=> trim($this->input->post('challan_number')),
+                'challan_date'=> trim($this->input->post('challan_date')),
+                'vendor_id'=>trim($this->input->post('vendor_name')),
+                'remark'=>trim($this->input->post('remark')),
+            );
+
+                $saveqcchallandetails = $this->admin_model->saveqcchallandetails('',$data);
+
+                if($saveqcchallandetails){
+
+                    $update_last_inserted_id_QC_challan = $this->admin_model->update_last_inserted_id_QC_challan($saveqcchallandetails);
+                    if($update_last_inserted_id_QC_challan){
+
+                        $save_QC_Chllan_response['status'] = 'success';
+                        $save_QC_Chllan_response['error'] = array(
+                            'challan_number'=>strip_tags(form_error('challan_number')),
+                            'challan_date'=>strip_tags(form_error('challan_date')),
+                            'vendor_name'=>strip_tags(form_error('vendor_name')),
+                            'remark'=>strip_tags(form_error('remark')));
+                    }
+            }
+        }
+        echo json_encode($save_QC_Chllan_response);
+
+    }else{
+            $process = 'Add QC Challan';
+            $processFunction = 'Admin/addqcchallan';
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Add QC Challan';
+            $data['vendorList']= $this->admin_model->fetchALLvendorList();
+            $data['getqcitemdetails']= $this->admin_model->getqcitemdetails();
+            $this->loadViews("masters/addqcchallan", $this->global, $data, NULL);
+
+    }
+
+
+
+}
+
+
+public function saveQcchallanitem(){
+
+    $post_submit = $this->input->post();
+    if($post_submit){
+        $savQcchllanitem_response = array();
+        $this->form_validation->set_rules('field_1','Field 1','trim');
+        $this->form_validation->set_rules('field_2','Field 2','trim');
+        $this->form_validation->set_rules('field_3','Field 3','trim');
+        $this->form_validation->set_rules('field_4','Field 4','trim');
+        $this->form_validation->set_rules('field_5','Field 5','trim');
+        $this->form_validation->set_rules('field_6','Field 6','trim');
+        $this->form_validation->set_rules('remark','remark','trim');
+
+        if($this->form_validation->run() == FALSE)
+        {
+            $savQcchllanitem_response['status'] = 'failure';
+            $savQcchllanitem_response['error'] = array('field_1'=>strip_tags(form_error('field_1')),'field_2'=>strip_tags(form_error('field_2')), 'field_3'=>strip_tags(form_error('field_3')), 'field_4'=>strip_tags(form_error('field_4')),'field_5'=>strip_tags(form_error('field_5')), 'field_6'=>strip_tags(form_error('field_6')),'remark'=>strip_tags(form_error('remark')));
+       
+        }else{
+                $data = array(
+                    'field_1' =>  trim($this->input->post('field_1')),
+                    'field_2' =>  trim($this->input->post('field_2')),
+                    'field_3' =>  trim($this->input->post('field_3')),
+                    'field_4' =>  trim($this->input->post('field_4')),
+                    'field_5' =>  trim($this->input->post('field_5')),
+                    'field_6' =>  trim($this->input->post('field_6')),
+                    'remark' =>  trim($this->input->post('remark')),
+                    'pre_date' =>  trim($this->input->post('pre_date')),
+                    'pre_vendor_name' =>  trim($this->input->post('pre_vendor_name')),
+                    'pre_remark' =>  trim($this->input->post('pre_remark')),
+                );
+            
+            $saveQCnoteitemdetails= $this->admin_model->saveQCnoteitemdetails('',$data);
+            if($saveQCnoteitemdetails){
+                $savQcchllanitem_response['status'] = 'success';
+                $savQcchllanitem_response['error'] = array('field_1'=>strip_tags(form_error('field_1')),'field_2'=>strip_tags(form_error('field_2')), 'field_3'=>strip_tags(form_error('field_3')), 'field_4'=>strip_tags(form_error('field_4')),'field_5'=>strip_tags(form_error('field_5')), 'field_6'=>strip_tags(form_error('field_6')),'remark'=>strip_tags(form_error('remark')));
+            }
+
+        }
+
+        echo json_encode($savQcchllanitem_response);
+    }
+
+}
+
+
+public function deleteQcchllanitem(){
+
+    $post_submit = $this->input->post();
+    if($post_submit){
+        $result = $this->admin_model->deleteQcchllanitem(trim($this->input->post('id')));
+        if ($result) {
+                    $process = 'Delete QC Challan';
+                    $processFunction = 'Admin/deleteQcchllanitem';
+                    $this->logrecord($process,$processFunction);
+                echo(json_encode(array('status'=>'success')));
+            }
+        else { echo(json_encode(array('status'=>'failed'))); }
+    }else{
+        echo(json_encode(array('status'=>'failed'))); 
+    }
+
+}
+
+public function deleteqcchllan(){
+
+    $post_submit = $this->input->post();
+    if($post_submit){
+        $result = $this->admin_model->deleteqcchllan(trim($this->input->post('id')));
+        if ($result) {
+                    $process = 'Delete QC Challan';
+                    $processFunction = 'Admin/deleteqcchllan';
+                    $this->logrecord($process,$processFunction);
+                echo(json_encode(array('status'=>'success')));
+            }
+        else { echo(json_encode(array('status'=>'failed'))); }
+    }else{
+        echo(json_encode(array('status'=>'failed'))); 
+    }
+
+}
+
+
+
+
 
 }
