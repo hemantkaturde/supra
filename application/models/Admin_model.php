@@ -18304,7 +18304,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     public function getqcitemdetails(){
 
         $this->db->select('*');
-        $this->db->where(TBL_QC_CHALLAN_ITEM.'.qc_challan_id IS NULL');
+        $this->db->where(TBL_QC_CHALLAN_ITEM.'.qc_challan_id',0);
         $query = $this->db->get(TBL_QC_CHALLAN_ITEM);
         $data = $query->result_array();
         return $data;
@@ -18394,7 +18394,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             'qc_challan_id' =>$saveqcchallandetails
         );
 
-        $this->db->where(TBL_QC_CHALLAN_ITEM.'.qc_challan_id IS NULL');
+        $this->db->where(TBL_QC_CHALLAN_ITEM.'.qc_challan_id',0);
         if($this->db->update(TBL_QC_CHALLAN_ITEM,$data)){
             return TRUE;
         }else{
