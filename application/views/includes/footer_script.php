@@ -22991,6 +22991,8 @@
 			$(document).on('click','.deleteQcchllanitem',function(e){
 				var elemF = $(this);
 				e.preventDefault();
+				var qc_challan_id =   $('#qc_challan_id').val();
+
 				swal({
 					title: "Are you sure?",
 					text: "Delete QC Challan Item ",
@@ -23019,7 +23021,14 @@
 												icon: "success",
 												button: "Ok",
 												},function(){ 
+
+													if(qc_challan_id){
+														window.location.href = "<?php echo base_url().'editqcchallan/'?>"+qc_challan_id;
+													}else{
 														window.location.href = "<?php echo base_url().'addqcchallan'?>";
+													}
+																			
+													//window.location.href = "<?php echo base_url().'addqcchallan'?>";
 											});	
 										}
 
