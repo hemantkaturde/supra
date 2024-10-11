@@ -159,7 +159,7 @@
                                                 </button>
                                             </div>
                                             <form role="form" id="saveQcchallanitemform" action="<?php echo base_url() ?>saveQcchallanitemform" method="post" role="form">
-                                            <input type="hidden" class="form-control"  id="stock_form_item_id" name="stock_form_item_id" required readonly>
+                                            <input type="hidden" class="form-control"  id="qc_challan_item_id" name="qc_challan_item_id" required readonly>
 
                                              <div class="modal-body">
                                                     <div class="loader_ajax" style="display:none;">
