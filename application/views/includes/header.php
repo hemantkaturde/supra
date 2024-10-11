@@ -289,7 +289,7 @@
                         || $pageUrl=="addnewcustomercomplaint" 
                         || $pageUrl=="editcustomercomplaint"
                         || $pageUrl=="viewqulityrecordform" || $pageUrl=="viewcustomercomplaint" || $pageUrl=="viewsuppliervendorcompalint"
-                        || $pageUrl=="qcchallan" || $pageUrl=="addqcchallan"
+                        || $pageUrl=="qcchallan" || $pageUrl=="addqcchallan" || $pageUrl=='editqcchallan' || $pageUrl=='viewqcchallan'
                         ){echo 'active';}?>">
                       <a href="#">
                         <i class="fa fa-file-text-o"></i> <span class="menu_label">QC</span>
@@ -302,7 +302,7 @@
                         <!-- <li class="line_height <?php if($pageUrl=="complaintform" || $pageUrl=="addcomplaintform" || $pageUrl=="editcomplainform"){echo 'active';}?>"><a href="<?php echo base_url(); ?>complaintform"><i class="fa fa-cubes"></i> Complaint form</a></li> -->
                         <li class="line_height <?php if($pageUrl=="customercompliant" || $pageUrl=="addnewcustomercomplaint" || $pageUrl=="editcustomercomplaint" || $pageUrl=="viewcustomercomplaint"){echo 'active';}?>"><a href="<?php echo base_url(); ?>customercompliant"><i class="fa fa-cubes"></i> Customer Compalint</a></li>
                         <li class="line_height <?php if($pageUrl=="suppliervendorcompliant" || $pageUrl=="addnewsuppliervendorcomplaint" || $pageUrl=="editsuppliervendorcompalint" || $pageUrl=="viewsuppliervendorcompalint"){echo 'active';}?>"><a href="<?php echo base_url(); ?>suppliervendorcompliant"><i class="fa fa-cubes"></i> Supplier Vendor Compalint</a></li>
-                        <li class="line_height <?php if($pageUrl=="qcchallan" || $pageUrl=="addqcchallan"){echo 'active';}?>"><a href="<?php echo base_url(); ?>qcchallan"><i class="fa fa-cubes"></i> QC Challan</a></li>
+                        <li class="line_height <?php if($pageUrl=="qcchallan" || $pageUrl=="addqcchallan" || $pageUrl=='editqcchallan' || $pageUrl=='viewqcchallan'){echo 'active';}?>"><a href="<?php echo base_url(); ?>qcchallan"><i class="fa fa-cubes"></i> QC Challan</a></li>
                       </ul>
                     </li>
       

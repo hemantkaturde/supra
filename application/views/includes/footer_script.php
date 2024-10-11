@@ -22844,7 +22844,7 @@
 <?php } ?>
 
 
-<?php if($pageTitle=='QC Challan' || $pageTitle=='Add QC Challan'){ ?>
+<?php if($pageTitle=='QC Challan' || $pageTitle=='Add QC Challan' || $pageTitle=='Edit QC Challan'){ ?>
 	<script type="text/javascript">
             $(document).ready(function() {
 				var dt = $('#view_qc_challan').DataTable({
@@ -22877,7 +22877,8 @@
 			$(document).on('click','#addqcchallanform',function(e){
 					e.preventDefault();
 					$(".loader_ajax").show();
-
+					
+					var qc_challan_id =   $('#qc_challan_id').val();
 					var formData = new FormData($("#addqchallanformid")[0]);
 					$.ajax({
 						url : "<?php echo base_url();?>addqcchallan",
@@ -22906,7 +22907,9 @@
 									button: "Ok",
 									},function(){ 
 										
-										window.location.href = "<?php echo base_url().'qcchallan'?>";
+											window.location.href = "<?php echo base_url().'qcchallan'?>";
+
+										
 								});		
 							}
 							
@@ -22936,12 +22939,14 @@
 			   var pre_vendor_name =   $('#vendor_name').val();
 			   var pre_remark =   $('#remark').val();
 
-			
+			   var qc_challan_id =   $('#qc_challan_id').val();
+
+		
 			   $.ajax({
 				url : "<?php echo base_url();?>saveQcchallanitem",
 				type: "POST",
 				 //data : formData,
-				 data :{field_1:field_1,field_2:field_2,field_3:field_3,field_4:field_4,field_5:field_5,field_6:field_6,remark:remark,pre_date:pre_date,pre_vendor_name:pre_vendor_name,pre_remark:pre_remark},
+				 data :{field_1:field_1,field_2:field_2,field_3:field_3,field_4:field_4,field_5:field_5,field_6:field_6,remark:remark,pre_date:pre_date,pre_vendor_name:pre_vendor_name,pre_remark:pre_remark,qc_challan_id:qc_challan_id},
 				 method: "POST",
                 // data :{package_id:package_id},
                 cache:false,
@@ -22965,11 +22970,11 @@
 							button: "Ok",
 							},function(){ 
 
-								// if(debit_id){
-								// 	window.location.href = "<?php echo base_url().'editdebitnoteform/'?>"+debit_id;
-								// }else{
+								if(qc_challan_id){
+									window.location.href = "<?php echo base_url().'editqcchallan/'?>"+qc_challan_id;
+								}else{
 									window.location.href = "<?php echo base_url().'addqcchallan'?>";
-								// }
+								 }
 							
 						});		
 				    }

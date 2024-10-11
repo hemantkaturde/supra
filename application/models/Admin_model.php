@@ -18312,6 +18312,30 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
+    public function getqcitemdetailsedit($id){
+
+        $this->db->select('*');
+        $this->db->where(TBL_QC_CHALLAN_ITEM.'.qc_challan_id',$id);
+        $query = $this->db->get(TBL_QC_CHALLAN_ITEM);
+        $data = $query->result_array();
+        return $data;
+
+    }
+
+
+    public function getqcdetailsforedit($id){
+
+        $this->db->select('*,'.TBL_QC_CHALLAN.'.id as qc_challan_id');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_QC_CHALLAN.'.vendor_id');
+        $this->db->where(TBL_QC_CHALLAN.'.id',$id);
+        $query = $this->db->get(TBL_QC_CHALLAN);
+        $fetch_result = $query->result_array();
+        return $fetch_result;
+    }
+
+    
+
+
     public function deleteQcchllanitem($id){
 
         $this->db->where('id', $id);
@@ -18324,7 +18348,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     }
     public function deleteqcchllan($id){
-        
+
         $this->db->where('id', $id);
         //$this->db->delete(TBL_SUPPLIER);
         if($this->db->delete(TBL_QC_CHALLAN)){

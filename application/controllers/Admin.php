@@ -20951,14 +20951,20 @@ public function addqcchallan(){
                 'remark'=>strip_tags(form_error('remark')));
         }else{
 
-            $data = array(
-                'challan_number'=> trim($this->input->post('challan_number')),
-                'challan_date'=> trim($this->input->post('challan_date')),
-                'vendor_id'=>trim($this->input->post('vendor_name')),
-                'remark'=>trim($this->input->post('remark')),
-            );
+                $data = array(
+                    'challan_number'=> trim($this->input->post('challan_number')),
+                    'challan_date'=> trim($this->input->post('challan_date')),
+                    'vendor_id'=>trim($this->input->post('vendor_name')),
+                    'remark'=>trim($this->input->post('remark')),
+                );
 
-                $saveqcchallandetails = $this->admin_model->saveqcchallandetails('',$data);
+                if(trim($this->input->post('qc_challan_id'))){
+                    $qc_challan_id = $this->input->post('qc_challan_id');
+                }else{
+                    $qc_challan_id = '';
+                }
+
+                $saveqcchallandetails = $this->admin_model->saveqcchallandetails($qc_challan_id,$data);
 
                 if($saveqcchallandetails){
 
@@ -21011,7 +21017,17 @@ public function saveQcchallanitem(){
             $savQcchllanitem_response['error'] = array('field_1'=>strip_tags(form_error('field_1')),'field_2'=>strip_tags(form_error('field_2')), 'field_3'=>strip_tags(form_error('field_3')), 'field_4'=>strip_tags(form_error('field_4')),'field_5'=>strip_tags(form_error('field_5')), 'field_6'=>strip_tags(form_error('field_6')),'remark'=>strip_tags(form_error('remark')));
        
         }else{
+
+            if(trim($this->input->post('qc_challan_id'))){
+  
+                 $qc_challan_id = trim($this->input->post('qc_challan_id'));
+
+            }else{
+                $qc_challan_id = '';
+            }
+
                 $data = array(
+                    'qc_challan_id' => $qc_challan_id,
                     'field_1' =>  trim($this->input->post('field_1')),
                     'field_2' =>  trim($this->input->post('field_2')),
                     'field_3' =>  trim($this->input->post('field_3')),
@@ -21073,6 +21089,36 @@ public function deleteqcchllan(){
     }
 
 }
+
+
+public function editqcchallan($id){
+
+    $process = 'Edit QC Challan';
+    $processFunction = 'Admin/editqcchallan';
+    $this->logrecord($process,$processFunction);
+    $this->global['pageTitle'] = 'Edit QC Challan';
+    $data['vendorList']= $this->admin_model->fetchALLvendorList();
+    $data['getqcitemdetailsedit']= $this->admin_model->getqcitemdetailsedit($id);
+    $data['getqcdetailsforedit']= $this->admin_model->getqcdetailsforedit($id);
+    $this->loadViews("masters/editqcchallan", $this->global, $data, NULL);
+
+
+}
+
+public function viewqcchallan($id){
+
+    $process = 'View QC Challan';
+    $processFunction = 'Admin/editqcchallan';
+    $this->logrecord($process,$processFunction);
+    $this->global['pageTitle'] = 'View QC Challan';
+    $data['vendorList']= $this->admin_model->fetchALLvendorList();
+    $data['getqcitemdetailsedit']= $this->admin_model->getqcitemdetailsedit($id);
+    $data['getqcdetailsforedit']= $this->admin_model->getqcdetailsforedit($id);
+    $this->loadViews("masters/viewqcchallan", $this->global, $data, NULL);
+
+
+}
+
 
 
 

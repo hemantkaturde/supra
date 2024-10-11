@@ -2,11 +2,11 @@
    <!-- Content Header (Page header) -->
    <section class="content-header">
       <h1>
-         <i class="fa fa-users"></i> Add New QC Challan
+         <i class="fa fa-users"></i> Edit QC Challan
          <small>
             <ul class="breadcrumb" style="background-color:#ecf0f5 !important">
                <li class="completed"><a href="javascript:void(0);">Masters</a></li>
-               <li class="active"><a href="javascript:void(0);"> QC Challan Details</a></li>
+               <li class="active"><a href="javascript:void(0);"> Edit QC Challan Details</a></li>
             </ul>
          </small>
       </h1>
@@ -17,7 +17,7 @@
             <div class="box">
                <div class="box box-primary">
                   <div class="box-header">
-                     <h3 class="box-title">Add New QC Challan Details</h3>
+                     <h3 class="box-title"> Edit QC Challan Details</h3>
                   </div>
                   <?php $this->load->helper("form"); ?>
                   <form role="form" id="addqchallanformid" action="#" method="post" role="form">
@@ -25,72 +25,12 @@
                         <div class="col-md-4">
                             <div class="col-md-12">
                                 <div class="form-group">
+
+                                    <input type="hidden" class="form-control" id="qc_challan_id" name="qc_challan_id" value="<?=$getqcdetailsforedit[0]['qc_challan_id'];?>" required readonly>
+
+
                                     <label for="challan_number">Challan Number <span class="required">*</span></label>
-                                    <?php
-                                        $current_month = date("n"); // Get the current month without leading zeros
-
-                                        if ($current_month >= 4) {
-                                                // If the current month is April or later, the financial year is from April (current year) to March (next year)
-                                                $financial_year_indian = date("y") . "" . (date("y") + 1);
-                                        } else {
-                                                // If the current month is before April, the financial year is from April (last year) to March (current year)
-                                                $financial_year_indian = (date("y") - 1) . "" . date("y");
-                                        }
-
-                                        if($getqcitemdetails[0]['challan_number']){
-                                            // $arr = str_split($getPriviousstockid[0]['stock_id_number']);
-                                            // $i = end($arr);
-                                            // $inrno= "SQSD2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
-                                            // $stock_form_id = $inrno;
-
-
-                                            // Old Logic Start Here Comment Here 18-04-2024
-                                            // $string = $getPriviousstockid[0]['stock_id_number'];
-                                            // $n = 4; // Number of characters to extract from the end
-                                            // $lastNCharacters = substr($string, -$n);
-                                            // $inrno= "SQSD2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
-                                            // $stock_form_id = $inrno;
-
-                                            $getfinancial_year = substr($getqcitemdetails[0]['challan_number'], -8);
-
-                                            $first_part_of_string = substr($getfinancial_year,0,4);
-                                            $year = substr($getfinancial_year,0,2);
-
-                                            // Current date
-                                            $currentDate = new DateTime();
-                                            
-                                            // Financial year in India starts from April 1st
-                                            $financialYearStart = new DateTime("$year-04-01");
-                                            
-                                            // Financial year in India ends on March 31st of the following year
-                                            $financialYearEnd = new DateTime(($year + 1) . "-03-31");
-                                            
-                                            // Check if the current date falls within the financial year
-                                            if ($currentDate >= $financialYearStart && $currentDate <= $financialYearEnd) {
-                                               
-                                                $string = $getqcitemdetails[0]['challan_number'];
-                                                $n = 4; // Number of characters to extract from the end
-                                                $lastNCharacters = substr($string, -$n);
-                                                $inrno= "SQID".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
-                                                $challan_number = $inrno;
-
-                                            } else {
-
-                                                $string = $getqcitemdetails[0]['challan_number'];
-                                                $n = 4; // Number of characters to extract from the end
-                                                $lastNCharacters = substr($string, -$n);
-                                                $inrno= "SQID".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
-                                                $challan_number = $inrno;
-
-                                                //$po_number = 'SQPO24250001';
-                                            }  
-                                          /* New Logic End Here */
-
-                                        }else{
-                                            $challan_number = 'SQSD'.$financial_year_indian.'0001';
-                                        }
-                                    ?>
-                                        <input type="text" class="form-control" id="challan_number" name="challan_number" value="<?=$challan_number;?>" required readonly>
+                                        <input type="text" class="form-control" id="challan_number" name="challan_number" value="<?=$getqcdetailsforedit[0]['challan_number'];?>" required readonly>
                                         <p class="error challan_number_error"></p>
                                 </div>
                             </div>
@@ -100,8 +40,8 @@
                                 <div class="form-group">
                                     <label for="challan_date">Challan Date <span class="required">*</span></label>
                                         <?php 
-                                        if($getqcitemdetails[0]['pre_challan_date']){
-                                            $date= $getqcitemdetails[0]['pre_challan_date'];
+                                        if($getqcdetailsforedit[0]['challan_date']){
+                                            $date= $getqcdetailsforedit[0]['challan_date'];
                                         }else{
                                             $date= date('Y-m-d'); 
                                         }
@@ -118,8 +58,8 @@
                                     <label for="vendor_name">Vendor Name <span class="required">*</span></label>
                                             <select class="form-control" name="vendor_name" id="vendor_name">
                                                 <option st-id="" value="">Select Vendor Name</option>
-                                                    <?php foreach ($vendorList as $key => $value) {?>
-                                                        <option value="<?php echo $value['ven_id']; ?>" <?php if($getqcitemdetails[0]['pre_vendor_name']==$value['ven_id']){ echo 'selected'; }?> ><?php echo $value['vendor_name']; ?></option>
+                                                    <?php foreach ($vendorList as $key => $value) { ?>
+                                                        <option value="<?php echo $value['ven_id']; ?>" <?php if($getqcdetailsforedit[0]['vendor_id']==$value['ven_id']){ echo 'selected'; }?> ><?php echo $value['vendor_name']; ?></option>
                                                     <?php } ?>
                                             </select>
                                         <p class="error vendor_name_error"></p>
@@ -129,7 +69,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                         <label for="remark">Remark</label>
-                                        <input type="remark" class="form-control" id="remark" value="<?=$getqcitemdetails[0]['pre_remark']?>" name="remark">
+                                        <input type="remark" class="form-control" id="remark" value="<?=$getqcdetailsforedit[0]['remark']?>" name="remark">
                                         <p class="error remark_error"></p>
                                 </div>
                             </div>
@@ -154,9 +94,9 @@
                                     </thead>   
 
                                          <?php 
-                                           if($getqcitemdetails){
+                                           if($getqcitemdetailsedit){
                                                $i=1;
-                                            foreach ($getqcitemdetails as $key => $value) { ?>
+                                            foreach ($getqcitemdetailsedit as $key => $value) { ?>
                                             <tr>
                                                 <td><?php echo  $i++; ?></td>
                                                 <td><?=$value['field_1']?></td>
@@ -186,7 +126,7 @@
                      <div class="box-footer">
                         <div class="col-xs-8">
 
-                            <?php if($getqcitemdetails){ 
+                            <?php if($getqcitemdetailsedit){ 
                             $button ="";
                             }else{
                             $button ="disabled";
