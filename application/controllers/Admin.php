@@ -21172,6 +21172,139 @@ public function getqcchallanitemdata(){
 }
 
 
+public function downlaodqcchallan($id){
+
+    $getQcchallanforInvoice = $this->admin_model->getQcchallanforInvoice($id);
+    $getQcchallanforInvoiceitemdetails = $this->admin_model->getQcchallanforInvoiceitemdetails($id);
+
+    $i=1;
+    $CartItem = "";
+    foreach ($getQcchallanforInvoiceitemdetails as $key => $value) {
+        $CartItem .= ' <tr style="border: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;">';
+               
+            $CartItem .= ' <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$i.'</td>';
+            if($value['field_1']){
+               $CartItem .= ' <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['field_1'].'</br></td>'; 
+            }
+            if($value['field_2']){
+               $CartItem .= ' <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['field_2'].'</td>';
+            }
+            if($value['field_3']){
+                $CartItem .= ' <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['field_3'].'</td>';
+            }
+            if($value['field_4']){ 
+                $CartItem .= ' <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['field_4'].'</td> ';
+            }
+            if($value['field_5']){ 
+                $CartItem .= ' <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['field_5'].'</td>  '; 
+            }
+            if($value['field_6']){
+                $CartItem .= ' <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['field_6'].'</td>  ';  
+            }
+            $CartItem .= ' </tr>';
+
+        $i++;       
+    }
+
+
+  
+    $mpdf = new \Mpdf\Mpdf();
+    // $html = $this->load->view('html_to_pdf',[],true);
+    $html = '<table style=" width: 100%;text-align: center;border-collapse: collapse;font-family:cambria;">
+                <tr>
+                  <td rowspan="2"><img src="'.base_url().'assets/images/supra_logo_1.jpg" width="80" height="80"></td>
+                  <td style="color:#000080"><h2>SUPRA QUALITY EXPORTS (I) PVT. LTD</h2></td>
+                  <td rowspan="2"><img src="'.base_url().'assets/images/logo_2.png" width="80" height="80"></td>
+                </tr> 
+                <tr>
+                  <td style="font-weight: bold;">
+                    <p>MANUFACTURER & EXPORTERS OF:</p>
+                    <p>PRECISION TURNED COMPONENTS, STAMPED /PRESSED PARTS IN FERROUS & NON-FERROUS METAL</p>
+                    <p>MOULDED & EXTRUDED PLASTIC AND RUBBER COMPONENTS</p> 
+                  </td>
+                </tr>
+            </table>
+            <hr>
+            <table style=" width: 100%;text-align: center;margin-top:10px;margin-bottom:10px;font-family:cambria;">
+                    <tr>
+                        <td style="color:red;font-size:15px">
+                          <u><p><h3>QC CHALLAN</h3></p>
+                        </td>
+                    </tr>
+            </table>
+
+            <table style=" width: 100%;text-align: left;border-collapse: collapse;font-family:cambria;font-size:13px;">
+                <tr>
+                    <td width="50%">
+                        <div>
+                            <p>To,</p>
+                            <p><b>'.$getQcchallanforInvoice['cha_name'].'</b></p>
+                            <p>'.$getQcchallanforInvoice['address'].'</p>
+                            <p><b>Contact No:</b> '.$getQcchallanforInvoice['mobile'].' / '.$getQcchallanforInvoice['landline'].'</p>
+                            <p><b>Contact Person:</b> '.$getQcchallanforInvoice['contact_person'].'</p>
+                            <p><b>Email:</b> '.$getQcchallanforInvoice['email'].'</p>
+                            <p style="color:red">GSTIN:'.$getQcchallanforInvoice['GSTIN'].'</p>
+                        <div>    
+                    </td> 
+                    <td style="font-size:13px;" width="50%" valign="top">
+                        <div>
+                            <p><b></b>'. str_repeat('&nbsp;', 5).'<span style="color:red"></span></p>
+                            <p><b>DEBIT NOTE NO :</b> '.'<span style="color:red">'.$getQcchallanforInvoice['challan_number'].'</span></p>
+                            <p>&nbsp;</p>
+                            <p><b>Date :</b> '.date('d-m-Y',strtotime($getQcchallanforInvoice['challan_date'])).'</p>
+                            <p>&nbsp;</p>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+             <table style=" width: 100%;text-align: center;margin-top:10px;margin-bottom:10px;font-family:cambria;">
+                    <tr>
+                        <td style="font-size:15px">
+                          <u><p><h3>DUE HEIGHT GAUGES</h3></p>
+                        </td>
+                    </tr>
+            </table>
+
+            <table style="border: 1px solid black;margin-top:10px;width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:12px">
+                '.$CartItem.'                           
+            </table>
+
+         
+            <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:12px">
+                  
+                   <tr style="border: 1px solid black;">
+                        <td style="border: 1px solid black;padding-left: 10px;" width="75%;">
+                            <p>Recived The Above-mentioned goods order & condition & returned the duplicate duly sealed & Signed </p>
+                        </td>
+                        <td style="border: 1px solid black;text-align: center;" width="25%" valign="top">
+                            <p style="vertical-align: text-top;font-size:12px;color:#206a9b"><b>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</b></p>
+                            <br/><img src="'.base_url().'assets/images/stmps/supplierpostampsignature.png" width="130" height="100">
+                            <p style="vertical-align: text-top;font-size:10px;color:#206a9b"><b>AUTHORIZED SIGNATORY</b></p>
+                        </td> 
+                </tr>
+            </table>
+            
+             <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:12px">
+                  
+                   <tr style="border: 1px solid black;">
+                        <td style="border: 1px solid black;padding-left: 10px;" width="75%;">
+                            <p> Receiver`s Signature</p>
+                            <p>'. str_repeat('&nbsp;', 5).'</p>
+                            <p>'. str_repeat('&nbsp;', 5).'</p>
+                            <p>'. str_repeat('&nbsp;', 5).'</p>
+                        </td>
+                </tr>
+            </table>';
+
+
+            // <p>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</p>
+    $invoice_name =  $getQcchallanforInvoice['challan_number'].' - '.$getQcchallanforInvoice['vname'].'.pdf';
+    $mpdf->WriteHTML($html);
+    $mpdf->Output($invoice_name,'D'); // opens in browser
+
+
+}
 
 
 

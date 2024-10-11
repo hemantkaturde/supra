@@ -18340,12 +18340,36 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['action'] = '';
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewqcchallan/".$value['id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editqcchallan/".$value['id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downlaodqcchallan/".$value['id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['id']."' class='fa fa-trash-o deleteqcchllan' aria-hidden='true'></i>"; 
                 $counter++; 
             }
         }
         return $data;
         
+    }
+
+
+    public function getQcchallanforInvoice($id){
+
+         $this->db->select('*,'.TBL_VENDOR.'.vendor_name as vname');
+         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_QC_CHALLAN.'.vendor_id');
+         $this->db->where(TBL_QC_CHALLAN.'.id',$id);
+         $query = $this->db->get(TBL_QC_CHALLAN);
+         $fetch_result = $query->row_array();
+         return  $fetch_result;
+
+    }
+
+
+    public function getQcchallanforInvoiceitemdetails($id){
+
+        $this->db->select('*');
+        $this->db->join(TBL_QC_CHALLAN, TBL_QC_CHALLAN.'.id = '.TBL_QC_CHALLAN_ITEM.'.qc_challan_id');
+        $this->db->where(TBL_QC_CHALLAN_ITEM.'.qc_challan_id',$id);
+        $query = $this->db->get(TBL_QC_CHALLAN_ITEM);
+        $fetch_result = $query->result_array();
+        return  $fetch_result;
     }
 
 
