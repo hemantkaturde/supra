@@ -256,6 +256,8 @@
                                                         <th>Rate</th>
                                                         <th>Value</th>
                                                         <th>Buyer PO Delivery Date</th>
+                                                        <th>Packaging Instraction</th>
+                                                        <th>Item PO Status</th>
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>
@@ -274,6 +276,8 @@
                                                         <td><?php echo $value['rate'];?></td>
                                                         <td><?php echo $value['value'];?></td>
                                                         <td><?php echo $value['buyer_po_part_delivery_date'];?></td>
+                                                        <td><?php echo $value['packaging_instraction'];?></td>
+                                                        <td><?php echo $value['item_po_status'];?></td>
                                                         <td>
                                                           <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['id'];?>' class='fa fa-pencil-square-o editbuyerpoitem'  aria-hidden='true'></i>
                                                           <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['id'];?>' class='fa fa-trash-o deleteBuyerpoitem' aria-hidden='true'></i>
