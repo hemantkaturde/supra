@@ -1816,12 +1816,14 @@
 			   var generate_po =   $('#generate_po').val();
 			   var po_status =   $('#po_status').val();
 			   var packaging_instraction =   $('#packaging_instraction').val();
+			   var item_po_status =   $('#item_po_status').val();
+
 						 
 			$.ajax({
 				url : "<?php echo base_url();?>addbuyeritem",
 				type: "POST",
 				 //data : formData,
-				 data :{part_number:part_number,description:description,qty:qty,rate:rate,value:value,buyer_po_part_delivery_date:buyer_po_part_delivery_date,buyer_po_number:buyer_po_number,date:date,buyer_po_date:buyer_po_date,buyer_name:buyer_name,currency:currency,delivery_date:delivery_date,remark:remark,unit:unit,po_id:po_id,buyer_po_item_id:buyer_po_item_id,generate_po:generate_po,po_status:po_status,packaging_instraction:packaging_instraction},
+				 data :{part_number:part_number,description:description,qty:qty,rate:rate,value:value,buyer_po_part_delivery_date:buyer_po_part_delivery_date,buyer_po_number:buyer_po_number,date:date,buyer_po_date:buyer_po_date,buyer_name:buyer_name,currency:currency,delivery_date:delivery_date,remark:remark,unit:unit,po_id:po_id,buyer_po_item_id:buyer_po_item_id,generate_po:generate_po,po_status:po_status,packaging_instraction:packaging_instraction,item_po_status:item_po_status},
 				// method: "POST",
                 // data :{package_id:package_id},
                 cache:false,
@@ -2034,6 +2036,7 @@
 						$('#value').val(fetchResponse.value); 
 						$('#buyer_po_part_delivery_date').val(fetchResponse.buyer_po_part_delivery_date);  
 						$('#packaging_instraction').val(fetchResponse.packaging_instraction);  
+						$('#item_po_status').val(fetchResponse.item_po_status);  
 					
 				},
 				error: function (jqXHR, textStatus, errorThrown)

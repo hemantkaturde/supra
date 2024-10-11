@@ -2632,6 +2632,7 @@ class Admin extends BaseController
             $this->form_validation->set_rules('unit','Unit','trim');
             $this->form_validation->set_rules('buyer_po_delivery_date','Buyer PO Delivery Date','trim');
             $this->form_validation->set_rules('packaging_instraction','Packaging Instraction','trim');
+            $this->form_validation->set_rules('item_po_status','Item PO Status','trim|required');
         
             if($this->form_validation->run() == FALSE)
             {
@@ -2650,6 +2651,7 @@ class Admin extends BaseController
                             'value' =>   trim($this->input->post('value')),
                             'unit' =>  trim($this->input->post('unit')),
                             'buyer_po_part_delivery_date' => trim($this->input->post('buyer_po_part_delivery_date')),
+                            'item_po_status' => trim($this->input->post('item_po_status')),
                             'pre_buyer_po_number'=>trim($this->input->post('buyer_po_number')),
                             'pre_date'=>trim($this->input->post('date')),
                             'pre_buyer_po_date'=>trim($this->input->post('buyer_po_date')),
@@ -2671,6 +2673,7 @@ class Admin extends BaseController
                                 'value' =>   trim($this->input->post('value')),
                                 'unit' =>  trim($this->input->post('unit')),
                                 'buyer_po_part_delivery_date' => trim($this->input->post('buyer_po_part_delivery_date')),
+                                'item_po_status' => trim($this->input->post('item_po_status')),
                                 'pre_buyer_po_number'=>trim($this->input->post('buyer_po_number')),
                                 'pre_date'=>trim($this->input->post('date')),
                                 'pre_buyer_po_date'=>trim($this->input->post('buyer_po_date')),

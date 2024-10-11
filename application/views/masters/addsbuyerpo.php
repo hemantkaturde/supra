@@ -388,6 +388,18 @@
                                                             <p class="error packaging_instraction_error"></p>
                                                         </div>
                                                     </div>
+
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-3 col-form-label">Item PO Status<span class="required">*</span></label>
+                                                        <div class="col-sm-9">
+                                                             <select class="form-control" name="item_po_status" id="item_po_status">
+                                                                <option value="">Select Item PO Status</option>
+                                                                <option value="from_po" selected>From PO</option>
+                                                                <option value="from_stock">From Stock</option>
+                                                             </select>
+                                                            <p class="error item_po_status_error"></p>
+                                                        </div>
+                                                    </div>
                                                 </div>
 
                                                 <div class="modal-footer">
