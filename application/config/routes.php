@@ -550,6 +550,7 @@ $route['deleteQcchllanitem'] = "admin/deleteQcchllanitem";
 $route['deleteqcchllan'] = "admin/deleteqcchllan";
 $route['editqcchallan/(:any)'] = "admin/editqcchallan/$1";
 $route['viewqcchallan/(:any)'] = "admin/viewqcchallan/$1";
+$route['getqcchallanitemdata'] = "admin/getqcchallanitemdata";
 
 
 

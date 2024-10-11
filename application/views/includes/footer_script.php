@@ -22944,12 +22944,14 @@
 
 			   var qc_challan_id =   $('#qc_challan_id').val();
 
+			   var qc_challan_item_id = $('#qc_challan_item_id').val();
+
 		
 			   $.ajax({
 				url : "<?php echo base_url();?>saveQcchallanitem",
 				type: "POST",
 				 //data : formData,
-				 data :{field_1:field_1,field_2:field_2,field_3:field_3,field_4:field_4,field_5:field_5,field_6:field_6,remark:remark,pre_date:pre_date,pre_vendor_name:pre_vendor_name,pre_remark:pre_remark,qc_challan_id:qc_challan_id},
+				 data :{field_1:field_1,field_2:field_2,field_3:field_3,field_4:field_4,field_5:field_5,field_6:field_6,remark:remark,pre_date:pre_date,pre_vendor_name:pre_vendor_name,pre_remark:pre_remark,qc_challan_id:qc_challan_id,qc_challan_item_id:qc_challan_item_id},
 				 method: "POST",
                 // data :{package_id:package_id},
                 cache:false,
@@ -23098,41 +23100,35 @@
 	        });
 
 
-		
-			// $(document).on('click','.editChallanformitem',function(e){  
-			// 	e.preventDefault();
-			// 	var elemF = $(this);
-			// 	var item_id = elemF.attr('data-id');
-			// 	$.ajax({
-			// 		url : "<?php echo base_url();?>geteditChallanformitemforedititem",
-			// 		type: "POST",
-			// 		data : 'id='+item_id,
-			// 		success: function(data, textStatus, jqXHR)
-			// 		{
-			// 			    var fetchResponse = $.parseJSON(data);
-			// 				$('#addNewModal').modal('show'); 
-
-			// 				$('#oms_challan_item_id').val(fetchResponse.omschallanid); 
-			// 				$('#part_number').val(fetchResponse.part_number);  
-			// 				$('#fg_description').val(fetchResponse.fg_description);  
-			// 				$('#rm_description').val(fetchResponse.rm_description);  
-			// 				$('#gross_weight').val(fetchResponse.gross_weight);  
-			// 				$('#unit').val(fetchResponse.unit);  
-			// 				$('#calculation').val(fetchResponse.calculation);  
-			// 				$('#net_weight').val(fetchResponse.net_weight);  
-			// 				$('#qty').val(fetchResponse.qty);  
-			// 				$('#hsn_no').val(fetchResponse.hsn_no);  
-			// 				$('#no_of_bags').val(fetchResponse.no_of_bags);  
-			// 				$('#itemremark').val(fetchResponse.remark);  
+			$(document).on('click','.editQcchllanitem',function(e){  
+				e.preventDefault();
+				var elemF = $(this);
+				var item_id = elemF.attr('data-id');
+				$.ajax({
+					url : "<?php echo base_url();?>getqcchallanitemdata",
+					type: "POST",
+					data : 'id='+item_id,
+					success: function(data, textStatus, jqXHR)
+					{
+						    var fetchResponse = $.parseJSON(data);
+							$('#addNewModal').modal('show'); 
+							$('#qc_challan_item_id').val(fetchResponse.id); 
+							$('#field_1').val(fetchResponse.field_1);  
+							$('#field_2').val(fetchResponse.field_2);  
+							$('#field_3').val(fetchResponse.field_3);  
+							$('#field_4').val(fetchResponse.field_4);  
+							$('#field_5').val(fetchResponse.field_5);  
+							$('#field_6').val(fetchResponse.field_6);  
+							$('#item_remark').val(fetchResponse.remark);  
 							
-			// 		},
-			// 		error: function (jqXHR, textStatus, errorThrown)
-			// 	    {
-			// 	   	   $(".loader_ajax").hide();
-			// 	    }
-			// 	});
-			// 	return false;
-			// });
+					},
+					error: function (jqXHR, textStatus, errorThrown)
+				    {
+				   	   $(".loader_ajax").hide();
+				    }
+				});
+				return false;
+			});
 
 			$(document).on('click','.closeQcchallanform',function(e){  
 				location.reload();

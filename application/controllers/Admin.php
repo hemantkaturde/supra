@@ -21068,8 +21068,17 @@ public function saveQcchallanitem(){
                     'pre_vendor_name' =>  trim($this->input->post('pre_vendor_name')),
                     'pre_remark' =>  trim($this->input->post('pre_remark')),
                 );
+
+                if(trim($this->input->post('qc_challan_item_id'))){
+  
+                    $qc_challan_item_id = trim($this->input->post('qc_challan_item_id'));
+   
+               }else{
+                   $qc_challan_item_id = '';
+               }
+
             
-            $saveQCnoteitemdetails= $this->admin_model->saveQCnoteitemdetails('',$data);
+            $saveQCnoteitemdetails= $this->admin_model->saveQCnoteitemdetails($qc_challan_item_id,$data);
             if($saveQCnoteitemdetails){
                 $savQcchllanitem_response['status'] = 'success';
                 $savQcchllanitem_response['error'] = array('field_1'=>strip_tags(form_error('field_1')),'field_2'=>strip_tags(form_error('field_2')), 'field_3'=>strip_tags(form_error('field_3')), 'field_4'=>strip_tags(form_error('field_4')),'field_5'=>strip_tags(form_error('field_5')), 'field_6'=>strip_tags(form_error('field_6')),'remark'=>strip_tags(form_error('remark')));
@@ -21144,10 +21153,23 @@ public function viewqcchallan($id){
     $data['getqcitemdetailsedit']= $this->admin_model->getqcitemdetailsedit($id);
     $data['getqcdetailsforedit']= $this->admin_model->getqcdetailsforedit($id);
     $this->loadViews("masters/viewqcchallan", $this->global, $data, NULL);
-
-
 }
 
+
+public function getqcchallanitemdata(){
+
+    $post_submit = $this->input->post();
+    if($post_submit){
+        $geteditPODitem = $this->admin_model->getqcchallanitemdata(trim($this->input->post('id')));
+        if($geteditPODitem){
+            $content = $geteditPODitem[0];
+            echo json_encode($content);
+        }else{
+            echo 'failure';
+        }
+    }
+
+}
 
 
 
