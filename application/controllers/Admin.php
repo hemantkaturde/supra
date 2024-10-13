@@ -21180,10 +21180,10 @@ public function downlaodqcchallan($id){
     $count_of_rows_for_space = count($getQcchallanforInvoiceitemdetails);
 
 
-    if($count_of_rows_for_space > 14){
-       $margin_top='10px';
+    if($count_of_rows_for_space > 13){
+       $devheight='10px';
     }else{
-       $margin_top='350px';
+       $devheight='500px';
     }
 
 
@@ -21276,12 +21276,14 @@ public function downlaodqcchallan($id){
                     </tr>
             </table>
 
-            <table style="border: 1px solid black;margin-top:10px;width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:12px">
-                '.$CartItem.'                           
-            </table>
+            <div style="border:1.5px solid black;height:'.$devheight.'"> 
+                <table style="border: 1px solid black;margin-top:10px;width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin:10px;font-family:cambria;font-size:12px">
+                    '.$CartItem.'                           
+                </table>
+            </div>
 
          
-            <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:'.$margin_top.';margin-bottom:2px;font-family:cambria;font-size:12px">
+            <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:2px;font-family:cambria;font-size:12px">
                   
                    <tr style="border: 1px solid black;">
                         <td style="border: 1px solid black;padding-left: 10px;" width="75%;">
