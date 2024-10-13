@@ -21231,9 +21231,11 @@ public function downlaodqcchallan($id){
                     <p>
                         229 to 232, Bharat Industrial Estate,
                         L.B.S. Marg, Bhandup West, Mumbai – 400078. INDIA.
-                        Tel: 0091 25950907  / +91 22 25954141
-                        GSTIN : 27AAJCS7869M1ZB
                     </p>
+                     <p> Tel: 0091 25950907  / +91 22 25954141</p> 
+                       
+                   
+                    <p> GSTIN : 27AAJCS7869M1ZB</>
                   </td>
                 </tr>
             </table>
