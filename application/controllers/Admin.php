@@ -21242,8 +21242,8 @@ public function downlaodqcchallan($id){
                         </td>
                     </tr>
             </table>
-
-            <table style=" width: 100%;text-align: left;border-collapse: collapse;font-family:cambria;font-size:13px;">
+           <div style="border:1.5px solid black;height:'.$devheight.'"> 
+             <table style=" width: 100%;text-align: left;border-collapse: collapse;font-family:cambria;margin:10px;font-size:13px;">
                 <tr>
                     <td width="50%">
                         <div>
@@ -21276,7 +21276,7 @@ public function downlaodqcchallan($id){
                     </tr>
             </table>
 
-            <div style="border:1.5px solid black;height:'.$devheight.'"> 
+            
                 <table style="border: 1px solid black;margin-top:10px;width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin:10px;font-family:cambria;font-size:12px">
                     '.$CartItem.'                           
                 </table>
