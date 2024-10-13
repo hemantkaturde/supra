@@ -21180,10 +21180,10 @@ public function downlaodqcchallan($id){
     $count_of_rows_for_space = count($getQcchallanforInvoiceitemdetails);
 
 
-    if($count_of_rows_for_space > 13){
+    if($count_of_rows_for_space > 10){
        $devheight='10px';
     }else{
-       $devheight='450px';
+       $devheight='400px';
     }
 
 
