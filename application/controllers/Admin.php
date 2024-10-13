@@ -21228,9 +21228,8 @@ public function downlaodqcchallan($id){
                 </tr> 
                 <tr>
                   <td style="font-weight: bold;">
-                    <p>MANUFACTURER & EXPORTERS OF:</p>
-                    <p>PRECISION TURNED COMPONENTS, STAMPED /PRESSED PARTS IN FERROUS & NON-FERROUS METAL</p>
-                    <p>MOULDED & EXTRUDED PLASTIC AND RUBBER COMPONENTS</p> 
+                    <p> Bharat Industrial Estate, 230, Maruti Mandir Rd, Rajiv Gandhi Nagar, Bhandup West, Mumbai, Maharashtra 400078 ,Tel:0091 - 25950907 / 25954141 GSTIN NO : 27AAJCS7869M1ZB</p>
+                    
                   </td>
                 </tr>
             </table>
@@ -21248,7 +21247,7 @@ public function downlaodqcchallan($id){
                     <td width="50%" style="border-bottom: 1px solid black;border-right: 1px solid black">
                         <div>
                             <p>To,</p>
-                            <p><b>'.$getQcchallanforInvoice['cha_name'].'</b></p>
+                            <p><b>'.$getQcchallanforInvoice['vendor_name'].'</b></p>
                             <p>'.$getQcchallanforInvoice['address'].'</p>
                             <p><b>Contact No:</b> '.$getQcchallanforInvoice['mobile'].' / '.$getQcchallanforInvoice['landline'].'</p>
                             <p><b>Contact Person:</b> '.$getQcchallanforInvoice['contact_person'].'</p>
