@@ -21243,9 +21243,9 @@ public function downlaodqcchallan($id){
                     </tr>
             </table>
            <div style="border:1.5px solid black;height:'.$devheight.'"> 
-             <table style=" width: 100%;text-align: left;border-collapse: collapse;font-family:cambria;margin:10px;font-size:13px;">
+             <table style=" width: 100%;text-align: left;border-collapse: collapse;font-family:cambria;margin:0px;font-size:13px;">
                 <tr>
-                    <td width="50%">
+                    <td width="50%" style="border-bottom: 1px solid black;border-right: 1px solid black">
                         <div>
                             <p>To,</p>
                             <p><b>'.$getQcchallanforInvoice['cha_name'].'</b></p>
@@ -21256,7 +21256,7 @@ public function downlaodqcchallan($id){
                             <p style="color:red">GSTIN:'.$getQcchallanforInvoice['GSTIN'].'</p>
                         <div>    
                     </td> 
-                    <td style="font-size:13px;" width="50%" valign="top">
+                    <td style="font-size:13px;border-bottom: 1px solid black" width="50%" valign="top">
                         <div>
                             <p><b></b>'. str_repeat('&nbsp;', 5).'<span style="color:red"></span></p>
                             <p><b>CHALLAN NO :</b> '.'<span style="color:red">'.$getQcchallanforInvoice['challan_number'].'</span></p>
