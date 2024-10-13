@@ -21032,7 +21032,7 @@ public function saveQcchallanitem(){
     $post_submit = $this->input->post();
     if($post_submit){
         $savQcchllanitem_response = array();
-        $this->form_validation->set_rules('field_1','Field 1','trim');
+        $this->form_validation->set_rules('field_1','Field 1','trim|required');
         $this->form_validation->set_rules('field_2','Field 2','trim');
         $this->form_validation->set_rules('field_3','Field 3','trim');
         $this->form_validation->set_rules('field_4','Field 4','trim');

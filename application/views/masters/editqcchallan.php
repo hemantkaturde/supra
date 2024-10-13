@@ -169,8 +169,8 @@
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <div class="form-group">
-                                                                <label for="field_1">Field 1</label>
-                                                                <input type="text" class="form-control" id="field_1" name="field_1">
+                                                                <label for="field_1">Field 1 <span class="required">*</span></label>
+                                                                <input type="text" class="form-control" id="field_1" name="field_1" required>
                                                                 <p class="error field_1_error"></p>
                                                             </div>
                                                         
