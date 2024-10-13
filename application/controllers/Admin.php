@@ -21177,6 +21177,16 @@ public function downlaodqcchallan($id){
     $getQcchallanforInvoice = $this->admin_model->getQcchallanforInvoice($id);
     $getQcchallanforInvoiceitemdetails = $this->admin_model->getQcchallanforInvoiceitemdetails($id);
 
+    $count_of_rows_for_space = count($getQcchallanforInvoiceitemdetails);
+
+
+    if($count_of_rows_for_space > 14){
+       $margin_top='10px';
+    }else{
+       $margin_top='350px';
+    }
+
+
     $i=1;
     $CartItem = "";
     foreach ($getQcchallanforInvoiceitemdetails as $key => $value) {
@@ -21249,7 +21259,7 @@ public function downlaodqcchallan($id){
                     <td style="font-size:13px;" width="50%" valign="top">
                         <div>
                             <p><b></b>'. str_repeat('&nbsp;', 5).'<span style="color:red"></span></p>
-                            <p><b>DEBIT NOTE NO :</b> '.'<span style="color:red">'.$getQcchallanforInvoice['challan_number'].'</span></p>
+                            <p><b>CHALLAN NO :</b> '.'<span style="color:red">'.$getQcchallanforInvoice['challan_number'].'</span></p>
                             <p>&nbsp;</p>
                             <p><b>Date :</b> '.date('d-m-Y',strtotime($getQcchallanforInvoice['challan_date'])).'</p>
                             <p>&nbsp;</p>
@@ -21271,7 +21281,7 @@ public function downlaodqcchallan($id){
             </table>
 
          
-            <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:350px;margin-bottom:2px;font-family:cambria;font-size:12px">
+            <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:'.$margin_top.';margin-bottom:2px;font-family:cambria;font-size:12px">
                   
                    <tr style="border: 1px solid black;">
                         <td style="border: 1px solid black;padding-left: 10px;" width="75%;">
