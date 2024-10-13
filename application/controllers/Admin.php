@@ -1473,7 +1473,7 @@ class Admin extends BaseController
                     'remark' =>    trim($this->input->post('remark'))
                 );
 
-                $checkIfexitssamplingupdate = $this->admin_model->checkIfexitssamplingupdate(trim($this->input->post('part_number_id')),trim($this->input->post('sampling_method_name')));
+                $checkIfexitssamplingupdate = $this->admin_model->checkIfexitssamplingupdate(trim($this->input->post('sampling_method_id')),trim($this->input->post('part_number_id')));
 
                 if($checkIfexitssamplingupdate > 0){
                     $updateSupplierdata = $this->admin_model->saveSamplingdata(trim($this->input->post('sampling_method_id')),$data);
