@@ -21271,21 +21271,21 @@ public function downlaodqcchallan($id){
             </table>
 
          
-            <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:12px">
+            <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:400px;margin-bottom:2px;font-family:cambria;font-size:12px">
                   
                    <tr style="border: 1px solid black;">
                         <td style="border: 1px solid black;padding-left: 10px;" width="75%;">
-                            <p>Recived The Above-mentioned goods order & condition & returned the duplicate duly sealed & Signed </p>
+                            <p>Received the above-mentioned goods in good order & condition & returned the duplicate duly sealed & signed </p>
                         </td>
                         <td style="border: 1px solid black;text-align: center;" width="25%" valign="top">
                             <p style="vertical-align: text-top;font-size:12px;color:#206a9b"><b>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</b></p>
-                            <br/><img src="'.base_url().'assets/images/stmps/supplierpostampsignature.png" width="130" height="100">
+                            <br/><img src="'.base_url().'assets/images/stmps/qc_challan.png" width="130" height="100">
                             <p style="vertical-align: text-top;font-size:10px;color:#206a9b"><b>AUTHORIZED SIGNATORY</b></p>
                         </td> 
                 </tr>
             </table>
             
-             <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:12px">
+             <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:0px;margin-bottom:10px;font-family:cambria;font-size:12px">
                   
                    <tr style="border: 1px solid black;">
                         <td style="border: 1px solid black;padding-left: 10px;" width="75%;">
