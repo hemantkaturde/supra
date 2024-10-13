@@ -30,9 +30,6 @@
                                 <thead>
                                     <tr style="background-color:#3c8dbc !important;color:#fff">
                                         <th>Part Name</th>
-                                        <th>Sampling Name</th>
-                                        <th>Measuring Size</th>
-                                        <th>Type</th>
                                         <th>Remark</th>
                                         <th>Action</th>
                                     </tr>

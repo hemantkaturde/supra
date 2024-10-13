@@ -35,11 +35,13 @@
                                                             <option value="<?php echo $value['fin_id']; ?>"><?php echo $value['part_number']; ?></option>
                                                         <?php } ?>
                                                 </select>
+                                                <p class="error part_number_id_error"></p>
+
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="row">
+                                <!-- <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="sampling_method_name">Sampling Name <span class="required">*</span></label>
@@ -48,9 +50,9 @@
 
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
 
-                                <div class="row">
+                                <!-- <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="measuring_size">Measuring Size <span class="required">*</span></label>
@@ -59,9 +61,9 @@
 
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
 
-                                <div class="row">
+                                <!-- <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="sampling_method_name">Type<span class="required">*</span></label>
@@ -72,7 +74,7 @@
                                                 </select>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
 
                                 <div class="row">
                                     <div class="col-md-6">

@@ -1402,35 +1402,35 @@ class Admin extends BaseController
         if($post_submit){
             $save_sampling_response = array();
 
-            $this->form_validation->set_rules('sampling_method_name','Sampling Name','trim|required');
+            // $this->form_validation->set_rules('sampling_method_name','Sampling Name','trim|required');
             $this->form_validation->set_rules('part_number_id','Part Number Id','trim|required');
-            $this->form_validation->set_rules('measuring_size','Measuring Size','trim|required');
-            $this->form_validation->set_rules('type','Type','trim|required');
+            // $this->form_validation->set_rules('measuring_size','Measuring Size','trim|required');
+            // $this->form_validation->set_rules('type','Type','trim|required');
             $this->form_validation->set_rules('remark','Remark','trim');
 
             if($this->form_validation->run() == FALSE)
             {
                 $save_sampling_response['status'] = 'failure';
-                $save_sampling_response['error'] = array('sampling_method_name'=>strip_tags(form_error('sampling_method_name')), 'remark'=>strip_tags(form_error('remark')));
+                $save_sampling_response['error'] = array('part_number_id'=>strip_tags(form_error('part_number_id')), 'remark'=>strip_tags(form_error('remark')));
             }else{
 
                 $data = array(
                     'part_number_id' => trim($this->input->post('part_number_id')),
-                    'sampling_method_name'   => trim($this->input->post('sampling_method_name')),
-                    'measuring_size' => trim($this->input->post('measuring_size')),
-                    'type' => trim($this->input->post('type')),
+                    // 'sampling_method_name'   => trim($this->input->post('sampling_method_name')),
+                    // 'measuring_size' => trim($this->input->post('measuring_size')),
+                    // 'type' => trim($this->input->post('type')),
                     'remark' =>    trim($this->input->post('remark'))
                 );
 
-                $checkIfexitssampling = $this->admin_model->checkIfexitssampling(trim($this->input->post('sampling_method_name')));
+                $checkIfexitssampling = $this->admin_model->checkIfexitssampling(trim($this->input->post('part_number_id')));
                 if($checkIfexitssampling > 0){
                     $save_sampling_response['status'] = 'failure';
-                    $save_sampling_response['error'] = array('sampling_method_name'=>'Sampling Name Alreday Exits');
+                    $save_sampling_response['error'] = array('part_number_id'=>'Part Number Alreday Exits');
                 }else{
                     $saveUSPdata = $this->admin_model->saveSamplingdata('',$data);
                     if($saveUSPdata){
                         $save_sampling_response['status'] = 'success';
-                        $save_sampling_response['error'] = array('sampling_method_name'=>'', 'remark'=>'');
+                        $save_sampling_response['error'] = array('part_number_id'=>'', 'remark'=>'');
                     }
                 }
             }
@@ -1452,47 +1452,47 @@ class Admin extends BaseController
         if($post_submit){
 
             $update_sampling_response = array();
-            $this->form_validation->set_rules('sampling_method_name','Sampling Name','trim|required');
+            //$this->form_validation->set_rules('sampling_method_name','Sampling Name','trim|required');
             $this->form_validation->set_rules('part_number_id','Part Number Id','trim|required');
-            $this->form_validation->set_rules('measuring_size','Measuring Size','trim|required');
-            $this->form_validation->set_rules('type','Type','trim|required');
+            // $this->form_validation->set_rules('measuring_size','Measuring Size','trim|required');
+            // $this->form_validation->set_rules('type','Type','trim|required');
             $this->form_validation->set_rules('remark','Remark','trim');
 
 
             if($this->form_validation->run() == FALSE)
             {
                 $update_sampling_response['status'] = 'failure';
-                $update_sampling_response['error'] = array('sampling_method_name'=>strip_tags(form_error('sampling_method_name')), 'remark'=>strip_tags(form_error('remark')));
+                $update_sampling_response['error'] = array('part_number_id'=>strip_tags(form_error('part_number_id')), 'remark'=>strip_tags(form_error('remark')));
             }else{
 
                 $data = array(
                     'part_number_id' => trim($this->input->post('part_number_id')),
-                    'sampling_method_name'   => trim($this->input->post('sampling_method_name')),
-                    'measuring_size' => trim($this->input->post('measuring_size')),
-                    'type' => trim($this->input->post('type')),
+                    // 'sampling_method_name'   => trim($this->input->post('sampling_method_name')),
+                    // 'measuring_size' => trim($this->input->post('measuring_size')),
+                    // 'type' => trim($this->input->post('type')),
                     'remark' =>    trim($this->input->post('remark'))
                 );
 
-                $checkIfexitssamplingupdate = $this->admin_model->checkIfexitssamplingupdate(trim($this->input->post('sampling_method_id')),trim($this->input->post('sampling_method_name')));
+                $checkIfexitssamplingupdate = $this->admin_model->checkIfexitssamplingupdate(trim($this->input->post('part_number_id')),trim($this->input->post('sampling_method_name')));
 
                 if($checkIfexitssamplingupdate > 0){
                     $updateSupplierdata = $this->admin_model->saveSamplingdata(trim($this->input->post('sampling_method_id')),$data);
                     if($updateSupplierdata){
                         $update_sampling_response['status'] = 'success';
-                        $update_sampling_response['error'] = array('sampling_method_name'=>'', 'remark'=>'');
+                        $update_sampling_response['error'] = array('part_number_id'=>'', 'remark'=>'');
                     }
 
                 }else{
 
-                    $checkIfexitssampling = $this->admin_model->checkIfexitssampling(trim($this->input->post('sampling_method_name')));
+                    $checkIfexitssampling = $this->admin_model->checkIfexitssampling(trim($this->input->post('part_number_id')));
                     if($checkIfexitssampling > 0){
                         $update_sampling_response['status'] = 'failure';
-                        $update_sampling_response['error'] = array('sampling_method_name'=>'Sampling Name Alreday Exits');
+                        $update_sampling_response['error'] = array('part_number_id'=>'Part Number Alreday Exits');
                     }else{
                         $updateSupplierdata = $this->admin_model->saveSamplingdata(trim($this->input->post('sampling_method_id')),$data);
                         if($updateSupplierdata){
                            $update_sampling_response['status'] = 'success';
-                           $update_sampling_response['error'] = array('sampling_method_name'=>'', 'remark'=>'');
+                           $update_sampling_response['error'] = array('part_number_id'=>'', 'remark'=>'');
                         }
 
                     }
