@@ -21228,8 +21228,13 @@ public function downlaodqcchallan($id){
                 </tr> 
                 <tr>
                   <td style="font-weight: bold;">
-                    <p> Bharat Industrial Estate, 230, Maruti Mandir Rd, Rajiv Gandhi Nagar, Bhandup West, Mumbai, Maharashtra 400078 ,Tel:0091 - 25950907 / 25954141 GSTIN NO : 27AAJCS7869M1ZB</p>
-                    
+                    <p>
+                        229 to 232, Bharat Industrial Estate,
+                        L.B.S. Marg, Bhandup West, Mumbai – 400078. INDIA.
+                        Tel: +91 22 66959505 / +91 22 66600196
+                        +91 22 62390222 / +91 22 46061497 / +91 22 35115396
+                        GSTIN : 27AAJCS7869M1ZB
+                    </p>
                   </td>
                 </tr>
             </table>
