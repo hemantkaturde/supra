@@ -21183,7 +21183,7 @@ public function downlaodqcchallan($id){
     if($count_of_rows_for_space > 13){
        $devheight='10px';
     }else{
-       $devheight='500px';
+       $devheight='450px';
     }
 
 
