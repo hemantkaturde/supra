@@ -1535,6 +1535,18 @@ class Admin extends BaseController
      }
 
 
+    /**
+     * This function is used to load the Sampling Method Master
+     */
+    public function addsamplingmethod($id){
+        $process = 'Sampling Method Master';
+        $processFunction = 'Admin/addsamplingmethod';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Sampling Method Master';
+        $this->global['sampling_id'] = $id;
+        $this->loadViews("masters/addsamplingmethod", $this->global, $data, NULL);
+    }
+
 
      /**
      * This function is used to load the USP Master
@@ -21323,6 +21335,124 @@ public function downlaodqcchallan($id){
 
 }
 
+
+public function teammaster(){
+
+    $process = 'Team Master';
+    $processFunction = 'Admin/teammaster';
+    $this->logrecord($process,$processFunction);
+    $this->global['pageTitle'] = 'Team Master';
+    $this->loadViews("masters/teammaster", $this->global, $data, NULL);
+
+}
+
+
+public function fetchteammaster(){
+
+    $params = $_REQUEST;
+    $totalRecords = $this->admin_model->getteammastercount($params); 
+    $queryRecords = $this->admin_model->getteammasterdata($params); 
+
+    $data = array();
+    foreach ($queryRecords as $key => $value)
+    {
+        $i = 0;
+        foreach($value as $v)
+        {
+            $data[$key][$i] = $v;
+            $i++;
+        }
+    }
+    $json_data = array(
+        "draw"            => intval( $params['draw'] ),   
+        "recordsTotal"    => intval( $totalRecords ),  
+        "recordsFiltered" => intval($totalRecords),
+        "data"            => $data   // total data array
+        );
+    echo json_encode($json_data);
+
+}
+
+
+public function addteam(){
+
+    $post_submit = $this->input->post();
+    if($post_submit){
+
+        $save_team_response = array();
+        $this->form_validation->set_rules('team_name','Team Name','trim|required');
+        $this->form_validation->set_rules('remark','Part No','trim');
+
+        if($this->form_validation->run() == FALSE)
+        {
+            $save_team_response['status'] = 'failure';
+            $save_team_response['error'] = array('team_name'=>strip_tags(form_error('team_name')),'remark'=>strip_tags(form_error('remark')));
+        }else{
+
+                $data = array(
+                    'team_name'=> trim($this->input->post('team_name')),
+                    'remark'=>trim($this->input->post('remark')),
+                );
+
+                if(trim($this->input->post('team_master_id'))){
+                    $team_master_id = trim($this->input->post('team_master_id'));
+                }else{
+                    $team_master_id = '';
+                }
+
+                $checkteamexistsornot = $this->admin_model->checkteamexistsornot(trim($this->input->post('team_name')));
+                if($checkteamexistsornot > 0){
+                    $save_team_response['status'] = 'failure';
+                    $save_team_response['error'] = array('team_name'=>'Team Alreday Exits');
+                }else{
+                    $saveTeamdata = $this->admin_model->saveTeammasterdata($team_master_id,$data);
+                    if($saveTeamdata){
+                        $save_team_response['status'] = 'success';
+                        $save_team_response['error'] = array('team_name'=>'', 'remark'=>'');
+                    }
+                }
+            }
+            echo json_encode($save_team_response); 
+    }else{
+        $process = 'Add Team';
+        $processFunction = 'Admin/addteam';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Add Team';
+        $this->loadViews("masters/addteam", $this->global, $data, NULL);
+    }
+
+}
+
+
+public function deleteteammaster(){
+
+    $post_submit = $this->input->post();
+    if($post_submit){
+        $result = $this->admin_model->deleteteammaster(trim($this->input->post('id')));
+        if ($result) {
+                    $process = 'Delete Team Master';
+                    $processFunction = 'Admin/deleteteammaster';
+                    $this->logrecord($process,$processFunction);
+                echo(json_encode(array('status'=>'success')));
+            }
+        else { echo(json_encode(array('status'=>'failed'))); }
+    }else{
+        echo(json_encode(array('status'=>'failed'))); 
+    }
+
+
+}
+
+
+public function updateteammaster($id){
+
+    $process = 'Edit Team Master';
+    $processFunction = 'Admin/updateteammaster';
+    $this->logrecord($process,$processFunction);
+    $this->global['pageTitle'] = 'Edit Team Master';
+    $data['getteammasterforedit']= $this->admin_model->getteammasterforedit($id);
+    $this->loadViews("masters/updateteammaster", $this->global, $data, NULL);
+}
 
 
 }

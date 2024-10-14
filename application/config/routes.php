@@ -540,6 +540,8 @@ $route['fetchSamplingmaster'] = "admin/fetchSamplingmaster";
 $route['addnewSamplingmaster'] = "admin/addnewSamplingmaster";
 $route['deletesampling'] = "admin/deletesampling";
 $route['updatesampling/(:any)'] = "admin/updatesampling/$1";
+$route['addsamplingmethod/(:any)'] = "admin/addsamplingmethod/$1";
+
 
 
 $route['qcchallan'] = "admin/qcchallan";
@@ -552,6 +554,16 @@ $route['editqcchallan/(:any)'] = "admin/editqcchallan/$1";
 $route['viewqcchallan/(:any)'] = "admin/viewqcchallan/$1";
 $route['getqcchallanitemdata'] = "admin/getqcchallanitemdata";
 $route['downlaodqcchallan/(:any)'] = "admin/downlaodqcchallan/$1";
+
+
+
+$route['teammaster'] = "admin/teammaster";
+$route['fetchteammaster'] = "admin/fetchteammaster";
+$route['addteam'] = "admin/addteam";
+$route['deleteteammaster'] = "admin/deleteteammaster";
+$route['updateteammaster/(:any)'] = "admin/updateteammaster/$1";
+
+
 
 
 

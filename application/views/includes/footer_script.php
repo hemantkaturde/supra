@@ -23133,3 +23133,128 @@
 
     </script>
 <?php } ?>
+
+<?php if($pageTitle=='Team Master' || $pageTitle=='Add Team'){ ?>
+	<script type="text/javascript">
+            $(document).ready(function() {
+				var dt = $('#team_master').DataTable({
+					"columnDefs": [ 
+						{ className: "details-control", "targets": [ 0 ] },
+						{ "width": "25%", "targets": 0 },
+						{ "width": "10%", "targets": 1 },
+						{ "width": "20%", "targets": 2 },
+						{ "width": "8%", "targets": 3 },
+						
+					],
+					responsive: true,
+					"oLanguage": {
+						"sEmptyTable": "<i>No Team Master Found.</i>",
+					}, 
+					"bSort" : false,
+					"bFilter":true,
+					"bLengthChange": true,
+					"iDisplayLength": 10,   
+					"bProcessing": true,
+					"serverSide": true,
+					"ajax":{
+						url :"<?php echo base_url();?>fetchteammaster",
+						type: "post",
+					},
+				});
+     		});
+
+			$(document).on('click','#savenewteam',function(e){
+					e.preventDefault();
+					$(".loader_ajax").show();
+					
+					var formData = new FormData($("#addnewteamform")[0]);
+					$.ajax({
+						url : "<?php echo base_url();?>addteam",
+						type: "POST",
+						data : formData,
+						cache: false,
+						contentType: false,
+						processData: false,
+						success: function(data, textStatus, jqXHR)
+						{
+							var fetchResponse = $.parseJSON(data);
+							if(fetchResponse.status == "failure")
+							{
+								$.each(fetchResponse.error, function (i, v)
+								{
+									$('.'+i+'_error').html(v);
+								});
+								$(".loader_ajax").hide();
+							}
+							else if(fetchResponse.status == 'success')
+							{
+								swal({
+									title: "Success",
+									text: "New Team Successfully Added!",
+									icon: "success",
+									button: "Ok",
+									},function(){ 
+										
+											window.location.href = "<?php echo base_url().'teammaster'?>";
+								});		
+							}
+							
+						},
+						error: function (jqXHR, textStatus, errorThrown)
+						{
+							$(".loader_ajax").hide();
+						}
+					});
+					return false;
+			});
+
+			$(document).on('click','.deleteteammaster',function(e){
+				var elemF = $(this);
+				e.preventDefault();
+				swal({
+					title: "Are you sure?",
+					text: "Delete Team Master",
+					type: "warning",
+					showCancelButton: true,
+					closeOnClickOutside: false,
+					confirmButtonClass: "btn-sm btn-danger",
+					confirmButtonText: "Yes, delete it!",
+					cancelButtonText: "No, cancel plz!",
+					closeOnConfirm: false,
+					closeOnCancel: false
+				}, function(isConfirm) {
+					if (isConfirm) {
+								$.ajax({
+									url : "<?php echo base_url();?>deleteteammaster",
+									type: "POST",
+									data : 'id='+elemF.attr('data-id'),
+									success: function(data, textStatus, jqXHR)
+									{
+										const obj = JSON.parse(data);
+									
+										if(obj.status=='success'){
+											swal({
+												title: "Deleted!",
+												text: "Team Master Deleted Succesfully",
+												icon: "success",
+												button: "Ok",
+												},function(){ 
+														window.location.href = "<?php echo base_url().'teammaster'?>";
+											});	
+										}
+
+									},
+									error: function (jqXHR, textStatus, errorThrown)
+									{
+										$(".loader_ajax").hide();
+									}
+								})
+							}
+							else {
+					swal("Cancelled", "Team Master deletion cancelled ", "error");
+					}
+				});
+	        });
+
+	</script>
+<?php } ?>
