@@ -18,6 +18,9 @@
             <div class="col-xs-6 text-right">
                 <div class="form-group">
                     <input type="hidden" class="form-control" id="sampling_master_id" value="<?=$id?>" name="sampling_master_id">
+                    <a class="btn btn-primary" href="<?php echo base_url() ?>samplingmaster">
+                       <i class="fa fa-arrow-left"></i> Back</a>
+
                     <a class="btn btn-primary" href="<?php echo base_url() ?>addnewSamplingmethod/<?php echo $id ?>">
                         <i class="fa fa-plus"></i> Add Sampling Method</a>
                 </div>
