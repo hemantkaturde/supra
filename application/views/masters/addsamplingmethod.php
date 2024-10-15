@@ -1,3 +1,4 @@
+<?php $id = $sampling_id; ?>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -16,9 +17,18 @@
             </div>
             <div class="col-xs-6 text-right">
                 <div class="form-group">
-                    <a class="btn btn-primary" href="<?php echo base_url(); ?>addnewSamplingmaster">
+                    <input type="hidden" class="form-control" id="sampling_master_id" value="<?=$id?>" name="sampling_master_id">
+                    <a class="btn btn-primary" href="<?php echo base_url() ?>addnewSamplingmethod/<?php echo $id ?>">
                         <i class="fa fa-plus"></i> Add Sampling Method</a>
                 </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-6 text-left">
+              <ul class="breadcrumb" style="background-color:#ecf0f5 !important">
+                <h4><b>Part Number :</b> <?=$getSamplingdetails[0]['part_number'] ?></h4>
+              </ul>
             </div>
         </div>
         <div class="row">
@@ -29,7 +39,9 @@
                             <table width="100%" class="table table-striped table-bordered table-hover" id="view_smapling_method">
                                 <thead>
                                     <tr style="background-color:#3c8dbc !important;color:#fff">
-                                        <th>Part Name</th>
+                                        <th>Instrument Name</th>
+                                        <th>Measuring Size</th>
+                                        <th>Type</th>
                                         <th>Remark</th>
                                         <th>Action</th>
                                     </tr>

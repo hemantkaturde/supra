@@ -541,6 +541,10 @@ $route['addnewSamplingmaster'] = "admin/addnewSamplingmaster";
 $route['deletesampling'] = "admin/deletesampling";
 $route['updatesampling/(:any)'] = "admin/updatesampling/$1";
 $route['addsamplingmethod/(:any)'] = "admin/addsamplingmethod/$1";
+$route['fetchsamplingmethodtrans/(:any)'] = "admin/fetchsamplingmethodtrans/$1";
+$route['addnewSamplingmethod/(:any)'] = "admin/addnewSamplingmethod/$1";
+$route['deletesamplingmethod'] = "admin/deletesamplingmethod";
+$route['updatesamplingmethodtrans/(:any)'] = "admin/updatesamplingmethodtrans/$1";
 
 
 

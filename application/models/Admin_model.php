@@ -18617,6 +18617,124 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         return  $fetch_result;
 
     }
+ 
+    public function getsamplingmethodtranscount($params,$id){
+
+        $this->db->select('*');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_SAMPLING_MASTER_TRANS.".instrument_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SAMPLING_MASTER_TRANS.".type LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SAMPLING_MASTER_TRANS.".remark LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SAMPLING_MASTER_TRANS.".measuring_size LIKE '%".$params['search']['value']."%')");
+        }
+
+        $this->db->where(TBL_SAMPLING_MASTER_TRANS.'.status', 1);
+        $this->db->where(TBL_SAMPLING_MASTER_TRANS.'.sampling_master_id', $id);
+        $query = $this->db->get(TBL_SAMPLING_MASTER_TRANS);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+    }
+
+    public function getsamplingmethodtransdata($params,$id){
+
+        $this->db->select('*');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_SAMPLING_MASTER_TRANS.".instrument_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SAMPLING_MASTER_TRANS.".type LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SAMPLING_MASTER_TRANS.".remark LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SAMPLING_MASTER_TRANS.".measuring_size LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_SAMPLING_MASTER_TRANS.'.status', 1);
+        $this->db->where(TBL_SAMPLING_MASTER_TRANS.'.sampling_master_id', $id);
+        $this->db->limit($params['length'],$params['start']);
+        $this->db->order_by(TBL_SAMPLING_MASTER_TRANS.'.id','DESC');
+        $query = $this->db->get(TBL_SAMPLING_MASTER_TRANS);
+        $fetch_result = $query->result_array();
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['instrument_name'] = $value['instrument_name'];
+                $data[$counter]['measuring_size'] =  $value['measuring_size'];
+                $data[$counter]['type'] =  $value['type'];
+                $data[$counter]['remark'] =  $value['remark'];
+                $data[$counter]['action'] = '';
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."updatesamplingmethodtrans/".$value['id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['id']."' class='fa fa-trash-o deletesamplingmethod' aria-hidden='true'></i>"; 
+                $counter++; 
+            }
+        }
+
+        return $data;
+    }
+
+    public function checksamplingmethodalredayexists($sampling_master_id,$instrument_name){
+
+        $this->db->select('*');
+        $this->db->where(TBL_SAMPLING_MASTER_TRANS.'.sampling_master_id', $sampling_master_id);
+        $this->db->where(TBL_SAMPLING_MASTER_TRANS.'.instrument_name', $instrument_name);
+        $this->db->where(TBL_SAMPLING_MASTER_TRANS.'.status', 1);
+        $query = $this->db->get(TBL_SAMPLING_MASTER_TRANS);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+
+    }
+
+    public function saveSamplingmasterdata($id,$data){
+
+        if($id){
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_SAMPLING_MASTER_TRANS, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        }else{
+            if($this->db->insert(TBL_SAMPLING_MASTER_TRANS, $data)) {
+                return $this->db->insert_id();;
+            } else {
+                return FALSE;
+            }
+
+        }
+
+    }
+
+    public function deletesamplingmethod($id){ 
+        $this->db->where('id', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_SAMPLING_MASTER_TRANS)){
+           return TRUE;
+        }else{
+           return FALSE;
+        }
+    }
+
+
+    public function getSamplingmethod($id){
+
+        $this->db->select('*');
+        $this->db->where(TBL_SAMPLING_MASTER.'.id',$id);
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id  = '.TBL_SAMPLING_MASTER.'.part_number_id');
+        $query = $this->db->get(TBL_SAMPLING_MASTER);
+        $data = $query->result_array();
+        return $data;
+
+    }
+
+    public function getsamplingmasterdataforedit($id){
+        $this->db->select('*');
+        $this->db->where(TBL_SAMPLING_MASTER_TRANS.'.id',$id);
+        $query = $this->db->get(TBL_SAMPLING_MASTER_TRANS);
+        $data = $query->result_array();
+        return $data;
+
+    }
+    
 
 }
 

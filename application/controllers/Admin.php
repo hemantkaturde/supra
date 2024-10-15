@@ -1539,11 +1539,13 @@ class Admin extends BaseController
      * This function is used to load the Sampling Method Master
      */
     public function addsamplingmethod($id){
-        $process = 'Sampling Method Master';
+        $process = 'Sampling Method';
         $processFunction = 'Admin/addsamplingmethod';
         $this->logrecord($process,$processFunction);
-        $this->global['pageTitle'] = 'Sampling Method Master';
-        $this->global['sampling_id'] = $id;
+        $this->global['pageTitle'] = 'Sampling Method';
+        $data['sampling_id'] = $id;
+        $data['getSamplingdetails'] = $this->admin_model->getSamplingmethod(trim($id));
+
         $this->loadViews("masters/addsamplingmethod", $this->global, $data, NULL);
     }
 
@@ -21474,6 +21476,154 @@ public function updateteammaster($id){
     $this->global['pageTitle'] = 'Edit Team Master';
     $data['getteammasterforedit']= $this->admin_model->getteammasterforedit($id);
     $this->loadViews("masters/updateteammaster", $this->global, $data, NULL);
+}
+
+
+public function fetchsamplingmethodtrans($id){
+
+    $params = $_REQUEST;
+    $totalRecords = $this->admin_model->getsamplingmethodtranscount($params,$id); 
+    $queryRecords = $this->admin_model->getsamplingmethodtransdata($params,$id); 
+
+    $data = array();
+    foreach ($queryRecords as $key => $value)
+    {
+        $i = 0;
+        foreach($value as $v)
+        {
+            $data[$key][$i] = $v;
+            $i++;
+        }
+    }
+    $json_data = array(
+        "draw"            => intval( $params['draw'] ),   
+        "recordsTotal"    => intval( $totalRecords ),  
+        "recordsFiltered" => intval($totalRecords),
+        "data"            => $data   // total data array
+        );
+    echo json_encode($json_data);
+
+}
+
+
+public function addnewSamplingmethod($id){
+
+
+    $post_submit = $this->input->post();
+    if($post_submit){
+        $save_sampling_response = array();
+        $this->form_validation->set_rules('instrument_name','Instrument Name','trim|required');
+        $this->form_validation->set_rules('measuring_size','Measuring Size','trim|required');
+        $this->form_validation->set_rules('type','Type','trim|required');
+        $this->form_validation->set_rules('remark','Remark','trim');
+
+        if($this->form_validation->run() == FALSE)
+        {
+            $save_sampling_response['status'] = 'failure';
+            $save_sampling_response['error'] = array('instrument_name'=>strip_tags(form_error('instrument_name')),'measuring_size'=>strip_tags(form_error('measuring_size')),'type'=>strip_tags(form_error('type')),'remark'=>strip_tags(form_error('remark')));
+        }else{
+
+                $data = array(
+                    'sampling_master_id'=> trim($this->input->post('sampling_master_id')),
+                    'instrument_name'=> trim($this->input->post('instrument_name')),
+                    'measuring_size'=>trim($this->input->post('measuring_size')),
+                    'type'=>trim($this->input->post('type')),
+                    'remark'=>trim($this->input->post('remark')),
+                );
+
+                $checksamplingmethodalredayexists = $this->admin_model->checksamplingmethodalredayexists(trim($this->input->post('sampling_master_id')),trim($this->input->post('instrument_name')));
+                if($checksamplingmethodalredayexists > 0){
+                    $save_sampling_response['status'] = 'failure';
+                    $save_sampling_response['error'] = array('instrument_name'=>'Sampling Method Alreday Exits');
+                }else{
+                    $saveSamplingdata = $this->admin_model->saveSamplingmasterdata('',$data);
+                    if($saveSamplingdata){
+                        $save_sampling_response['status'] = 'success';
+                        $save_sampling_response['error'] = array('instrument_name'=>'', 'remark'=>'');
+                    }
+                }
+            }
+            echo json_encode($save_sampling_response); 
+    }else{
+        $process = 'Add New Sampling Method';
+        $processFunction = 'Admin/addnewSamplingmethod';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Add New Sampling Method';
+        $data['sampling_master_id'] = $id;
+        $this->loadViews("masters/addnewSamplingmethod", $this->global, $data, NULL);
+    }
+
+
+}
+
+
+public function deletesamplingmethod(){
+
+    $post_submit = $this->input->post();
+    if($post_submit){
+        $result = $this->admin_model->deletesamplingmethod(trim($this->input->post('id')));
+        if ($result) {
+                    $process = 'Delete Sampling Method Master';
+                    $processFunction = 'Admin/deletesamplingmethod';
+                    $this->logrecord($process,$processFunction);
+                echo(json_encode(array('status'=>'success')));
+            }
+        else { echo(json_encode(array('status'=>'failed'))); }
+    }else{
+        echo(json_encode(array('status'=>'failed'))); 
+    }
+
+
+}
+
+
+public function updatesamplingmethodtrans($id){
+
+    $post_submit = $this->input->post();
+    if($post_submit){
+        $save_sampling_response = array();
+        $this->form_validation->set_rules('instrument_name','Instrument Name','trim|required');
+        $this->form_validation->set_rules('measuring_size','Measuring Size','trim|required');
+        $this->form_validation->set_rules('type','Type','trim|required');
+        $this->form_validation->set_rules('remark','Remark','trim');
+
+        if($this->form_validation->run() == FALSE)
+        {
+            $save_sampling_response['status'] = 'failure';
+            $save_sampling_response['error'] = array('instrument_name'=>strip_tags(form_error('instrument_name')),'measuring_size'=>strip_tags(form_error('measuring_size')),'type'=>strip_tags(form_error('type')),'remark'=>strip_tags(form_error('remark')));
+        }else{
+
+                $data = array(
+                    'sampling_master_id'=> trim($this->input->post('sampling_master_id')),
+                    'instrument_name'=> trim($this->input->post('instrument_name')),
+                    'measuring_size'=>trim($this->input->post('measuring_size')),
+                    'type'=>trim($this->input->post('type')),
+                    'remark'=>trim($this->input->post('remark')),
+                );
+
+                $checksamplingmethodalredayexists = $this->admin_model->checksamplingmethodalredayexists(trim($this->input->post('sampling_master_id')),trim($this->input->post('instrument_name')));
+                if($checksamplingmethodalredayexists > 0){
+                    $save_sampling_response['status'] = 'failure';
+                    $save_sampling_response['error'] = array('instrument_name'=>'Sampling Method Alreday Exits');
+                }else{
+                    $saveSamplingdata = $this->admin_model->saveSamplingmasterdata('',$data);
+                    if($saveSamplingdata){
+                        $save_sampling_response['status'] = 'success';
+                        $save_sampling_response['error'] = array('instrument_name'=>'', 'remark'=>'');
+                    }
+                }
+            }
+            echo json_encode($save_sampling_response); 
+    }else{
+
+        $process = 'Update Sampling Method';
+        $processFunction = 'Admin/updatesamplingmethodtrans';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Update Sampling Method';
+        $data['getsamplingmasterdataforedit']= $this->admin_model->getsamplingmasterdataforedit($id);
+        $this->loadViews("masters/updatesamplingmethodtrans", $this->global, $data, NULL);
+
+    }
 }
 
 
