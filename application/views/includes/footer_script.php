@@ -23338,6 +23338,52 @@
 				return false;
 		});
 
+		$(document).on('click','#updatenewsamplingmethodsubmit',function(e){
+				e.preventDefault();
+				$(".loader_ajax").show();
+
+				var sampling_master_id =   $('#sampling_master_id').val();
+				var formData = new FormData($("#addnewsamplingmethodfrom")[0]);
+
+				$.ajax({
+					url : "<?php echo base_url();?>updatesamplingmethodtrans/"+sampling_master_id,
+					type: "POST",
+					data : formData,
+					cache: false,
+					contentType: false,
+					processData: false,
+					success: function(data, textStatus, jqXHR)
+					{
+						var fetchResponse = $.parseJSON(data);
+						if(fetchResponse.status == "failure")
+						{
+							$.each(fetchResponse.error, function (i, v)
+							{
+								$('.'+i+'_error').html(v);
+							});
+							$(".loader_ajax").hide();
+						}
+						else if(fetchResponse.status == 'success')
+						{
+							swal({
+								title: "Success",
+								text: "Sampling Method Successfully Added!",
+								icon: "success",
+								button: "Ok",
+								},function(){ 
+									window.location.href = "<?php echo base_url().'addsamplingmethod/'?>"+sampling_master_id;
+							});		
+						}
+						
+					},
+					error: function (jqXHR, textStatus, errorThrown)
+					{
+					$(".loader_ajax").hide();
+					}
+				});
+				return false;
+		});
+
 		// $(document).on('click','#updatecha',function(e){
 		// 		e.preventDefault();
 		// 		$(".loader_ajax").show();

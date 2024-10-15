@@ -21531,17 +21531,17 @@ public function addnewSamplingmethod($id){
                     'remark'=>trim($this->input->post('remark')),
                 );
 
-                $checksamplingmethodalredayexists = $this->admin_model->checksamplingmethodalredayexists(trim($this->input->post('sampling_master_id')),trim($this->input->post('instrument_name')));
-                if($checksamplingmethodalredayexists > 0){
-                    $save_sampling_response['status'] = 'failure';
-                    $save_sampling_response['error'] = array('instrument_name'=>'Sampling Method Alreday Exits');
-                }else{
+                // $checksamplingmethodalredayexists = $this->admin_model->checksamplingmethodalredayexists(trim($this->input->post('sampling_master_id')),trim($this->input->post('instrument_name')));
+                // if($checksamplingmethodalredayexists > 0){
+                //     $save_sampling_response['status'] = 'failure';
+                //     $save_sampling_response['error'] = array('instrument_name'=>'Sampling Method Alreday Exits');
+                // }else{
                     $saveSamplingdata = $this->admin_model->saveSamplingmasterdata('',$data);
                     if($saveSamplingdata){
                         $save_sampling_response['status'] = 'success';
                         $save_sampling_response['error'] = array('instrument_name'=>'', 'remark'=>'');
                     }
-                }
+                // }
             }
             echo json_encode($save_sampling_response); 
     }else{
@@ -21601,16 +21601,18 @@ public function updatesamplingmethodtrans($id){
                     'remark'=>trim($this->input->post('remark')),
                 );
 
-                $checksamplingmethodalredayexists = $this->admin_model->checksamplingmethodalredayexists(trim($this->input->post('sampling_master_id')),trim($this->input->post('instrument_name')));
-                if($checksamplingmethodalredayexists > 0){
-                    $save_sampling_response['status'] = 'failure';
-                    $save_sampling_response['error'] = array('instrument_name'=>'Sampling Method Alreday Exits');
-                }else{
-                    $saveSamplingdata = $this->admin_model->saveSamplingmasterdata('',$data);
+                $sampling_master_id = trim($this->input->post('sampling_master_id'));
+
+                // $checksamplingmethodalredayexists = $this->admin_model->checksamplingmethodalredayexists(trim($this->input->post('sampling_master_id')),trim($this->input->post('instrument_name')));
+                // if($checksamplingmethodalredayexists > 0){
+                //     $save_sampling_response['status'] = 'failure';
+                //     $save_sampling_response['error'] = array('instrument_name'=>'Instrument Name Alreday Exits');
+                // }else{
+                    $saveSamplingdata = $this->admin_model->saveSamplingmasterdata($sampling_master_id,$data);
                     if($saveSamplingdata){
                         $save_sampling_response['status'] = 'success';
                         $save_sampling_response['error'] = array('instrument_name'=>'', 'remark'=>'');
-                    }
+                // }
                 }
             }
             echo json_encode($save_sampling_response); 
