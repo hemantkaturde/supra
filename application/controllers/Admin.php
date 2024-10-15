@@ -21312,7 +21312,7 @@ public function downlaodqcchallan($id){
              <table style=" width: 100%;text-align: center;margin-top:10px;margin-bottom:10px;font-family:cambria;">
                     <tr>
                         <td style="font-size:15px">
-                          <u><p><h3>DUE HEIGHT GAUGES</h3></p>
+                          <u><p><h3>DUE GAUGES / INSTRUMENT</h3></p>
                         </td>
                     </tr>
             </table>

@@ -20709,10 +20709,7 @@
 </script>  
 <?php } ?>
 
-
-
 <?php if($pageTitle=='Production Status Report'){ ?>
-
 <script type="text/javascript">
   
 	$(document).ready(function() {
@@ -20948,7 +20945,6 @@
 </script>  
 <?php } ?>
 
-
 <?php if($pageTitle=='Supplier PO Confirmation Report'){ ?>
 	<script type="text/javascript">
 
@@ -21074,7 +21070,6 @@
 
     </script>  
 <?php } ?>
-
 
 <?php if($pageTitle=='Payment Details Report'){ ?>
 	<script type="text/javascript">
@@ -21213,7 +21208,6 @@
     </script>
 <?php } ?>
 
-
 <?php  if($pageTitle=='Sales Tracking Excel Report'){ ?>
 	<script type="text/javascript">
 
@@ -21272,7 +21266,6 @@
 
     </script>
 <?php } ?>
-
 
 <?php  if($pageTitle=='Customer Compliant Report' || $pageTitle=='Add New Coustmor Complaint' || 'Edit Customer Complaint'){ ?>
  <script type="text/javascript">
@@ -21500,7 +21493,6 @@
  </script>
 <?php } ?>
 
-
 <?php if($pageTitle=='Search Stock Report'){ ?>
 	<script type="text/javascript">
 
@@ -21543,7 +21535,6 @@
 
 	</script>
 <?php }	?>
-
 
 <?php if($pageTitle=='Supplier Vendor Compliant Report' || $pageTitle=='Add New Supplier Vendor Compliant Report' ||  $pageTitle=='Edit Supplier Vendor Compliant Report'){ ?>
 	    <script type="text/javascript">
@@ -22082,7 +22073,6 @@
 		</script>
 <?php } ?>
 
-
 <?php if($pageTitle=='Admin : Home page'){ ?>
 	<script type="text/javascript">
 
@@ -22169,7 +22159,6 @@
 		
     </script>
 <?php } ?>
-
 
 <?php if($pageTitle=='USP Incoming' || $pageTitle=='Add New USP incoming' || $pageTitle=='Edit USP incoming'){ ?>
 	<script type="text/javascript">
@@ -22807,7 +22796,6 @@
     </script>
 <?php } ?>
 
-
 <?php if($pageTitle=='Log History'){ ?>
 <script type="text/javascript">
 		$(document).ready(function() {
@@ -22843,7 +22831,6 @@
 </script>
 <?php } ?>
 
-
 <?php if($pageTitle=='QC Challan' || $pageTitle=='Add QC Challan' || $pageTitle=='Edit QC Challan'){ ?>
 	<script type="text/javascript">
             $(document).ready(function() {
@@ -22872,7 +22859,6 @@
 					},
 				});
      		});
-
 
 			$(document).on('click','#addqcchallanform',function(e){
 					e.preventDefault();
@@ -23047,7 +23033,6 @@
 				});
 	        });
 
-
 			$(document).on('click','.deleteqcchllan',function(e){
 				var elemF = $(this);
 				e.preventDefault();
@@ -23095,7 +23080,6 @@
 					}
 				});
 	        });
-
 
 			$(document).on('click','.editQcchllanitem',function(e){  
 				e.preventDefault();
@@ -23259,10 +23243,9 @@
 	</script>
 <?php } ?>
 
-
 <?php if($pageTitle=='Sampling Method' || $pageTitle=='Add New Sampling Method' || $pageTitle=='Update Sampling Method' ){ ?>
 	<script type="text/javascript">
-		 $(document).ready(function() {
+		$(document).ready(function() {
 			var sampling_master_id =   $('#sampling_master_id').val();
 
 			var dt = $('#view_smapling_method').DataTable({
@@ -23290,7 +23273,7 @@
 						type: "post",
 					},
 				});
-     	 });
+     	});
 		 
 		$(document).on('click','#savenewsamplingmethodsubmit',function(e){
 				e.preventDefault();
