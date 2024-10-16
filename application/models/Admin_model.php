@@ -559,7 +559,12 @@ class Admin_model extends CI_Model
         $this->db->where('id', $id);
         //$this->db->delete(TBL_SUPPLIER);
         if($this->db->delete(TBL_SAMPLING_MASTER)){
-           return TRUE;
+           $this->db->where('sampling_master_id', $id);
+           if($this->db->delete(TBL_SAMPLING_MASTER_TRANS)){
+            return TRUE;
+           }else{
+            return FALSE;
+           }
         }else{
            return FALSE;
         }
@@ -18602,7 +18607,13 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->where('id', $id);
         //$this->db->delete(TBL_SUPPLIER);
         if($this->db->delete(TBL_TEAM_MASTER)){
-           return TRUE;
+           $this->db->where('team_id', $id);
+           if($this->db->delete(TBL_TEAM_MASTER_TRANS)){
+             return TRUE;
+           }else{
+            return FALSE;
+           }
+
         }else{
            return FALSE;
         }

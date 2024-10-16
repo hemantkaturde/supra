@@ -26,7 +26,8 @@
                         <form role="form" id="addnewsamplingmethodfrom" action="<?php echo base_url() ?>addnewsamplingmethod" method="post" role="form">
                             <div class="box-body">
 
-                            <input type="hidden" class="form-control" id="sampling_master_id" value="<?=$data['id'];?>" name="sampling_master_id" required>
+                            <input type="hidden" class="form-control" id="sampling_master_id" value="<?=$data['sampling_master_id'];?>" name="sampling_master_id" required>
+                            <input type="hidden" class="form-control" id="sampling_method_id" value="<?=$data['id'];?>" name="sampling_method_id" required>
 
                                 <div class="row">
                                     <div class="col-md-6">

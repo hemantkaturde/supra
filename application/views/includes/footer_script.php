@@ -23325,6 +23325,7 @@
 				e.preventDefault();
 				$(".loader_ajax").show();
 
+				var sampling_method_id =   $('#sampling_method_id').val();
 				var sampling_master_id =   $('#sampling_master_id').val();
 				var formData = new FormData($("#addnewsamplingmethodfrom")[0]);
 

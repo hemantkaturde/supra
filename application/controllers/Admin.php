@@ -21601,14 +21601,14 @@ public function updatesamplingmethodtrans($id){
                     'remark'=>trim($this->input->post('remark')),
                 );
 
-                $sampling_master_id = trim($this->input->post('sampling_master_id'));
+                $sampling_method_id = trim($this->input->post('sampling_method_id'));
 
                 // $checksamplingmethodalredayexists = $this->admin_model->checksamplingmethodalredayexists(trim($this->input->post('sampling_master_id')),trim($this->input->post('instrument_name')));
                 // if($checksamplingmethodalredayexists > 0){
                 //     $save_sampling_response['status'] = 'failure';
                 //     $save_sampling_response['error'] = array('instrument_name'=>'Instrument Name Alreday Exits');
                 // }else{
-                    $saveSamplingdata = $this->admin_model->saveSamplingmasterdata($sampling_master_id,$data);
+                    $saveSamplingdata = $this->admin_model->saveSamplingmasterdata($sampling_method_id,$data);
                     if($saveSamplingdata){
                         $save_sampling_response['status'] = 'success';
                         $save_sampling_response['error'] = array('instrument_name'=>'', 'remark'=>'');
@@ -21775,10 +21775,6 @@ public function updateteammember($id){
     $data['getteammemberdataforedit']= $this->admin_model->getteammemberdataforedit($id);
     $this->loadViews("masters/updateteammember", $this->global, $data, NULL);
 }
-
-
-
-
 
 
 }
