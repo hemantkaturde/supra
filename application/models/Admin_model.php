@@ -18558,7 +18558,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['team_name'] = $value['team_name'];
                 $data[$counter]['total_team_member'] =  '';
                 $data[$counter]['remark'] =  $value['remark'];
-                $data[$counter]['action'] = '';
+                $data[$counter]['action'] = $this->getallteammemberlist()['team_member_list'];
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."updateteammaster/".$value['id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addteammembers/".$value['id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['id']."' class='fa fa-trash-o deleteteammaster' aria-hidden='true'></i>"; 
@@ -18567,6 +18567,18 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         }
 
         return $data;
+    }
+
+
+    public function getallteammemberlist($team_id){
+
+        $this->db->select('GROUP_CONCAT(product_type.tName SEPARATOR ",") as team_member_list');
+        $this->db->where(TBL_TEAM_MASTER_TRANS.'.team_id', $team_id);
+        $this->db->group_by(TBL_TEAM_MASTER_TRANS.'.team_id');
+        $query = $this->db->get(TBL_TEAM_MASTER_TRANS);
+        $fetch_result = $query->result_array();
+        return $fetch_result['0'];
+
     }
 
 
