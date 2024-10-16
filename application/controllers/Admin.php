@@ -21422,21 +21422,23 @@ public function addteam(){
 
                 if(trim($this->input->post('team_master_id'))){
                     $team_master_id = trim($this->input->post('team_master_id'));
+                    
                 }else{
                     $team_master_id = '';
                 }
 
-                $checkteamexistsornot = $this->admin_model->checkteamexistsornot(trim($this->input->post('team_name')));
-                if($checkteamexistsornot > 0){
-                    $save_team_response['status'] = 'failure';
-                    $save_team_response['error'] = array('team_name'=>'Team Alreday Exits');
-                }else{
+
+                // $checkteamexistsornot = $this->admin_model->checkteamexistsornot(trim($this->input->post('team_name')));
+                // if($checkteamexistsornot > 0){
+                //     $save_team_response['status'] = 'failure';
+                //     $save_team_response['error'] = array('team_name'=>'Team Alreday Exits');
+                // }else{
                     $saveTeamdata = $this->admin_model->saveTeammasterdata($team_master_id,$data);
                     if($saveTeamdata){
                         $save_team_response['status'] = 'success';
                         $save_team_response['error'] = array('team_name'=>'', 'remark'=>'');
                     }
-                }
+                // }
             }
             echo json_encode($save_team_response); 
     }else{
