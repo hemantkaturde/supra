@@ -2,7 +2,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            <i class="fa fa-users"></i> Stock Rejection Form Item Details
+            <i class="fa fa-users"></i> Scrap Rejection Details
             <small>Add,Edit,Delete</small>
         </h1>
     </section>
@@ -11,13 +11,16 @@
             <div class="col-xs-6 text-left">
                 <ul class="breadcrumb" style="background-color:#ecf0f5 !important">
                     <li class="completed"><a href="javascript:void(0);">Masters</a></li>
-                    <li class="active"><a href="javascript:void(0);"> Stock Rejection Form Item Details</a></li>
+                    <li class="active"><a href="javascript:void(0);"> Scrap Rejection Item Details</a></li>
                 </ul>
             </div>
 
             <div class="col-xs-6 text-right">
                 <div class="form-group">
-                   <input type="button" onclick="location.href = '<?php echo base_url() ?>addrejectionformitemsdata/<?=$rejection_form_id?>'" class="btn  btn-primary" value="Back" />
+                     <p><b>Vendor Name</b> : <?=$getalldataofeditrejectionform['vendor_name']; ?></p>
+                     <p><b>Vendor PO</b> : <?=$getalldataofeditrejectionform['po_number']; ?></p>
+                     <input type="button" class="btn  btn-primary" value="Add Scrap Rejection " />
+                     <input type="button" onclick="location.href = '<?php echo base_url() ?>addrejectionformitemsdata/<?=$rejection_form_id?>'" class="btn  btn-primary" value="Back" />
                 </div>
             </div>
 
@@ -29,16 +32,15 @@
         <input type="hidden" class="form-control"  id="net_weight_fg" name="net_weight_fg"  value="<?=$net_weight_fg?>">   
 
         <div class="row">
-            <div class="col-xs-10">
+            <div class="col-xs-12">
                 <div class="box">
                     <div class="box-body">   
                         <div class="panel-body">
                             <table width="100%" class="table table-striped table-bordered table-hover" id="view_stock_rejection_form_ttem_details">
                                 <thead>
                                     <tr style="background-color:#3c8dbc !important;color:#fff">
-                                        <th>Rejection Reason</th>
-                                        <th>Qty (In Pcs)</th>
-                                        <th>Qty (In Kgs)</th>
+                                        <th>Scrap Date</th>
+                                        <th>Scrap Type</th>
                                         <th>Remark</th>
                                         <th>Action</th>
                                     </tr>

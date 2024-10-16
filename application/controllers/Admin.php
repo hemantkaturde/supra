@@ -20949,13 +20949,15 @@ public function addscraprejection(){
     $data['rejection_form_id']= $_GET['rejection_form_id'];
     $data['vendor_po_item_id']= $_GET['vendor_po_item_id'];
     $data['vendor_po_id']=  $_GET['vendor_po_id'];
-    $getstockrejectionformitemdataitemdetailsforedit = $this->admin_model->getstockrejectionformitemdataitemdetailsforedit(trim($_GET['vendor_po_id']));
-    $data['net_weight_fg'] =  $getstockrejectionformitemdataitemdetailsforedit[0]['net_weight_fg'];
-    $process = 'View Rejection Form Data';
-    $processFunction = 'Admin/editrejetionform';
+    // $getstockrejectionformitemdataitemdetailsforedit = $this->admin_model->getstockrejectionformitemdataitemdetailsforedit(trim($_GET['vendor_po_id']));
+    // $data['net_weight_fg'] =  $getstockrejectionformitemdataitemdetailsforedit[0]['net_weight_fg'];
+    $process = 'Add Scrap Rejection Form Data';
+    $processFunction = 'Admin/addscraprejection';
+
+    $data['getalldataofeditrejectionform']= $this->admin_model->getalldataofeditrejectionform(trim($data['rejection_form_id']));
     $this->logrecord($process,$processFunction);
-    $this->global['pageTitle'] = 'View Rejection Form Data';
-    $this->loadViews("masters/viewrejectionformitemdetails", $this->global, $data, NULL);
+    $this->global['pageTitle'] = 'Add Scrap Rejection Form Data';
+    $this->loadViews("masters/addscraprejection", $this->global, $data, NULL);
 }
 
 public function qcchallan(){
