@@ -23118,7 +23118,7 @@
     </script>
 <?php } ?>
 
-<?php if($pageTitle=='Team Master' || $pageTitle=='Add Team'){ ?>
+<?php if($pageTitle=='Team Master' || $pageTitle=='Add Team' || $pageTitle=="Edit Team Master"){ ?>
 	<script type="text/javascript">
             $(document).ready(function() {
 				var dt = $('#team_master').DataTable({
