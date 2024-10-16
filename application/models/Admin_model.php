@@ -18735,6 +18735,134 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     }
     
+    
+    public function getTeamdetails($id){
+        $this->db->select('*');
+        $this->db->where(TBL_TEAM_MASTER.'.id',$id);
+        $query = $this->db->get(TBL_TEAM_MASTER);
+        $data = $query->result_array();
+        return $data;
+    }
+
+
+    public function getteammasterlistcount($params,$id){
+
+        $this->db->select('*');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_TEAM_MASTER_TRANS.".team_member_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_TEAM_MASTER_TRANS.".remark LIKE '%".$params['search']['value']."%')");
+        }
+
+        $this->db->where(TBL_TEAM_MASTER_TRANS.'.status', 1);
+        $this->db->where(TBL_TEAM_MASTER_TRANS.'.team_id', $id);
+        $query = $this->db->get(TBL_TEAM_MASTER_TRANS);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+    }
+
+    public function getteammasterlistdata($params,$id){
+
+        $this->db->select('*');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_TEAM_MASTER_TRANS.".team_member_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_TEAM_MASTER_TRANS.".remark LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_TEAM_MASTER_TRANS.'.status', 1);
+        $this->db->where(TBL_TEAM_MASTER_TRANS.'.team_id', $id);
+        $this->db->limit($params['length'],$params['start']);
+        $this->db->order_by(TBL_TEAM_MASTER_TRANS.'.id','DESC');
+        $query = $this->db->get(TBL_TEAM_MASTER_TRANS);
+        $fetch_result = $query->result_array();
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['team_name'] = $value['team_member_name'];
+                $data[$counter]['remark'] =  $value['remark'];
+                $data[$counter]['action'] = '';
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."updateteammember/".$value['id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['id']."' class='fa fa-trash-o deleteteammember' aria-hidden='true'></i>"; 
+                $counter++; 
+            }
+        }
+
+        return $data;
+    }
+
+
+    public function teammemberisexistexists($main_team_id,$team_member_name){
+
+        $this->db->select('*');
+        $this->db->where(TBL_TEAM_MASTER_TRANS.'.team_id', $main_team_id);
+        $this->db->where(TBL_TEAM_MASTER_TRANS.'.team_member_name', $team_member_name);
+        $this->db->where(TBL_TEAM_MASTER_TRANS.'.status', 1);
+        $query = $this->db->get(TBL_TEAM_MASTER_TRANS);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+
+    }
+
+
+    public function teammemberisexistexistsforedit($team_member_id,$main_team_id,$team_member_name){
+
+        $this->db->select('*');
+        $this->db->where(TBL_TEAM_MASTER_TRANS.'.team_id', $main_team_id);
+        $this->db->where(TBL_TEAM_MASTER_TRANS.'.team_member_name', $team_member_name);
+        $this->db->where(TBL_TEAM_MASTER_TRANS.'.id', $team_member_id);
+        $this->db->where(TBL_TEAM_MASTER_TRANS.'.status', 1);
+        $query = $this->db->get(TBL_TEAM_MASTER_TRANS);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+
+    }
+
+    public function saveTeammastermemberdata($id,$data){
+
+        if($id){
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_TEAM_MASTER_TRANS, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        }else{
+            if($this->db->insert(TBL_TEAM_MASTER_TRANS, $data)) {
+                return $this->db->insert_id();
+            } else {
+                return FALSE;
+            }
+
+        }
+
+    }
+
+    public function deleteteammember($id){
+
+        $this->db->where('id', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_TEAM_MASTER_TRANS)){
+           return TRUE;
+        }else{
+           return FALSE;
+        }
+
+    }
+
+    public function getteammemberdataforedit($id){
+
+        $this->db->select('*');
+        $this->db->where(TBL_TEAM_MASTER_TRANS.'.id',$id);
+        $query = $this->db->get(TBL_TEAM_MASTER_TRANS);
+        $data = $query->result_array();
+        return $data;
+
+    }
+
+
 
 }
 

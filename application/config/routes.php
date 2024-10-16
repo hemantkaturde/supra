@@ -566,6 +566,12 @@ $route['fetchteammaster'] = "admin/fetchteammaster";
 $route['addteam'] = "admin/addteam";
 $route['deleteteammaster'] = "admin/deleteteammaster";
 $route['updateteammaster/(:any)'] = "admin/updateteammaster/$1";
+$route['addteammembers/(:any)'] = "admin/addteammembers/$1";
+$route['fetchteammemberlist/(:any)'] = "admin/fetchteammemberlist/$1";
+$route['addteammemberaction/(:any)'] = "admin/addteammemberaction/$1";
+$route['deleteteammember'] = "admin/deleteteammember";
+$route['updateteammember/(:any)'] = "admin/updateteammember/$1";
+
 
 
 

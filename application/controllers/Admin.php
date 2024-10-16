@@ -21628,5 +21628,157 @@ public function updatesamplingmethodtrans($id){
     }
 }
 
+public function addteammembers($id){
+    $process = 'Add Team Member';
+    $processFunction = 'Admin/addsamplingmethod';
+    $this->logrecord($process,$processFunction);
+    $this->global['pageTitle'] = 'Add Team Member';
+    $data['team_id'] = $id;
+    $data['getTeamdetails'] = $this->admin_model->getTeamdetails(trim($id));
+    $this->loadViews("masters/addteammembers", $this->global, $data, NULL);  
+}
+
+public function addteammemberaction($id){
+
+    $post_submit = $this->input->post();
+    if($post_submit){
+        $save_team_master_response = array();
+        $this->form_validation->set_rules('team_member_name','Team Member Name','trim|required');
+        $this->form_validation->set_rules('remark','Remark','trim');
+
+        if($this->form_validation->run() == FALSE)
+        {
+            $save_team_master_response['status'] = 'failure';
+            $save_team_master_response['error'] = array('team_member_name'=>strip_tags(form_error('team_member_name')),'remark'=>strip_tags(form_error('remark')));
+        }else{
+
+                $data = array(
+                    'team_member_name'=> trim($this->input->post('team_member_name')),
+                    'team_id' => trim($this->input->post('main_team_id')),
+                    'remark'=>trim($this->input->post('remark')),
+                );
+
+                if(trim($this->input->post('team_member_id'))){
+                    $teammemberisexistexistsforedit = $this->admin_model->teammemberisexistexistsforedit(trim($this->input->post('team_member_id')),trim($this->input->post('main_team_id')),trim($this->input->post('team_member_name')));
+
+                    if($teammemberisexistexistsforedit){
+                        $saveSamplingdata = $this->admin_model->saveTeammastermemberdata(trim($this->input->post('team_member_id')),$data);
+                        if($saveSamplingdata){
+                            $save_team_master_response['status'] = 'success';
+                            $save_team_master_response['error'] = array('team_member_name'=>'', 'remark'=>'');
+                        }
+                    }else{
+
+                        $teammemberisexistexists = $this->admin_model->teammemberisexistexists(trim($this->input->post('main_team_id')),trim($this->input->post('team_member_name')));
+                        if($teammemberisexistexists > 0){
+                            $save_team_master_response['status'] = 'failure';
+                            $save_team_master_response['error'] = array('team_member_name'=>'Team Member Alreday Exits');
+                        }else{
+
+                            if(trim($this->input->post('team_member_id'))){
+                                 $team_member_id = trim($this->input->post('team_member_id'));
+                            }else{
+                                 $team_member_id = '';
+                            }
+
+                            $saveSamplingdata = $this->admin_model->saveTeammastermemberdata($team_member_id,$data);
+                            if($saveSamplingdata){
+                                $save_team_master_response['status'] = 'success';
+                                $save_team_master_response['error'] = array('team_member_name'=>'', 'remark'=>'');
+                            }
+                         }
+
+                    }
+
+                }else{
+
+                    $teammemberisexistexists = $this->admin_model->teammemberisexistexists(trim($this->input->post('main_team_id')),trim($this->input->post('team_member_name')));
+                    if($teammemberisexistexists > 0){
+                        $save_team_master_response['status'] = 'failure';
+                        $save_team_master_response['error'] = array('team_member_name'=>'Team Member Alreday Exits');
+                    }else{
+                        $saveSamplingdata = $this->admin_model->saveTeammastermemberdata('',$data);
+                        if($saveSamplingdata){
+                            $save_team_master_response['status'] = 'success';
+                            $save_team_master_response['error'] = array('team_member_name'=>'', 'remark'=>'');
+                        }
+                     }
+                }
+               
+            }
+            echo json_encode($save_team_master_response); 
+    }else{
+
+            $process = 'Add New Team Member Action';
+            $processFunction = 'Admin/addsamplingmethod';
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Add New Team Member Action';
+            $data['team_id'] = $id;
+            $data['getTeamdetails'] = $this->admin_model->getTeamdetails(trim($id));
+            $this->loadViews("masters/addteammemberaction", $this->global, $data, NULL);
+
+    }
+
+}
+
+public function fetchteammemberlist($id){
+
+    $params = $_REQUEST;
+    $totalRecords = $this->admin_model->getteammasterlistcount($params,$id); 
+    $queryRecords = $this->admin_model->getteammasterlistdata($params,$id); 
+
+    $data = array();
+    foreach ($queryRecords as $key => $value)
+    {
+        $i = 0;
+        foreach($value as $v)
+        {
+            $data[$key][$i] = $v;
+            $i++;
+        }
+    }
+    $json_data = array(
+        "draw"            => intval( $params['draw'] ),   
+        "recordsTotal"    => intval( $totalRecords ),  
+        "recordsFiltered" => intval($totalRecords),
+        "data"            => $data   // total data array
+        );
+    echo json_encode($json_data);
+
+}
+
+public function deleteteammember(){
+
+    $post_submit = $this->input->post();
+    if($post_submit){
+        $result = $this->admin_model->deleteteammember(trim($this->input->post('id')));
+        if ($result) {
+                    $process = 'Delete Team Member';
+                    $processFunction = 'Admin/deleteteammember';
+                    $this->logrecord($process,$processFunction);
+                echo(json_encode(array('status'=>'success')));
+            }
+        else { echo(json_encode(array('status'=>'failed'))); }
+    }else{
+        echo(json_encode(array('status'=>'failed'))); 
+    }
+
+
+}
+
+public function updateteammember($id){
+
+    $process = 'Update Team Member';
+    $processFunction = 'Admin/updateteammember';
+    $this->logrecord($process,$processFunction);
+    $this->global['pageTitle'] = 'Update Team Member';
+    $data['getteammemberdataforedit']= $this->admin_model->getteammemberdataforedit($id);
+    $this->loadViews("masters/updateteammember", $this->global, $data, NULL);
+}
+
+
+
+
+
 
 }

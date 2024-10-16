@@ -23463,3 +23463,137 @@
 
     </script>
 <?php } ?>
+
+
+<?php if($pageTitle=='Add Team Member' || $pageTitle=='Add New Team Member Action' || $pageTitle=='Update Team Member'){ ?>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			var team_id =   $('#team_id').val();
+			var dt = $('#view_team_member_list').DataTable({
+					"columnDefs": [ 
+						{ className: "details-control", "targets": [ 0 ] },
+						{ "width": "50%", "targets": 0 },
+						{ "width": "40%", "targets": 1 },	
+						{ "width": "10%", "targets": 2 },						
+					
+					],
+					responsive: true,
+					"oLanguage": {
+						"sEmptyTable": "<i>Team Member List Not Found.</i>",
+					}, 
+					"bSort" : false,
+					"bFilter":true,
+					"bLengthChange": true,
+					"iDisplayLength": 10,   
+					"bProcessing": true,
+					"serverSide": true,
+					"ajax":{
+						url :"<?php echo base_url();?>fetchteammemberlist/"+team_id,
+						type: "post",
+					},
+				});
+     	});
+
+		$(document).on('click','#addnewteammemberfromsubmit',function(e){
+					e.preventDefault();
+					$(".loader_ajax").show();
+					var main_team_id =   $('#main_team_id').val();
+
+					var formData = new FormData($("#addnewteammemberfrom")[0]);
+					$.ajax({
+						url : "<?php echo base_url();?>addteammemberaction/"+main_team_id,
+						type: "POST",
+						data : formData,
+						cache: false,
+						contentType: false,
+						processData: false,
+						success: function(data, textStatus, jqXHR)
+						{
+							var fetchResponse = $.parseJSON(data);
+							if(fetchResponse.status == "failure")
+							{
+								$.each(fetchResponse.error, function (i, v)
+								{
+									$('.'+i+'_error').html(v);
+								});
+								$(".loader_ajax").hide();
+							}
+							else if(fetchResponse.status == 'success')
+							{
+								swal({
+									title: "Success",
+									text: "Team Member Successfully Added!",
+									icon: "success",
+									button: "Ok",
+									},function(){ 
+										
+											window.location.href = "<?php echo base_url().'addteammembers/'?>"+main_team_id;
+								});		
+							}
+							
+						},
+						error: function (jqXHR, textStatus, errorThrown)
+						{
+							$(".loader_ajax").hide();
+						}
+					});
+					return false;
+		});
+
+		$(document).on('click','.deleteteammember',function(e){
+				var elemF = $(this);
+				e.preventDefault();
+
+				var main_team_id =   $('#team_id').val();
+
+				swal({
+					title: "Are you sure?",
+					text: "Delete Team Master",
+					type: "warning",
+					showCancelButton: true,
+					closeOnClickOutside: false,
+					confirmButtonClass: "btn-sm btn-danger",
+					confirmButtonText: "Yes, delete it!",
+					cancelButtonText: "No, cancel plz!",
+					closeOnConfirm: false,
+					closeOnCancel: false
+				}, function(isConfirm) {
+					if (isConfirm) {
+								$.ajax({
+									url : "<?php echo base_url();?>deleteteammember",
+									type: "POST",
+									data : 'id='+elemF.attr('data-id'),
+									success: function(data, textStatus, jqXHR)
+									{
+										const obj = JSON.parse(data);
+									
+										if(obj.status=='success'){
+											swal({
+												title: "Deleted!",
+												text: "Team Member Deleted Succesfully",
+												icon: "success",
+												button: "Ok",
+												},function(){ 
+														window.location.href = "<?php echo base_url().'addteammembers/'?>"+main_team_id;
+											});	
+										}
+
+									},
+									error: function (jqXHR, textStatus, errorThrown)
+									{
+										$(".loader_ajax").hide();
+									}
+								})
+							}
+							else {
+					swal("Cancelled", "Team Member deletion cancelled ", "error");
+					}
+				});
+	    });
+
+
+
+		
+
+	</script>
+<?php }  ?>

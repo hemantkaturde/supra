@@ -181,5 +181,5 @@ define('TBL_QC_CHALLAN','tbl_qc_challan');
 define('TBL_QC_CHALLAN_ITEM','tbl_qc_challan_item');
 define('TBL_TEAM_MASTER','tbl_team_master');
 define('TBL_SAMPLING_MASTER_TRANS','tbl_sampling_methods_trans');
-
+define('TBL_TEAM_MASTER_TRANS','tbl_team_master_trans');
 
