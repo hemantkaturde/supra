@@ -18572,7 +18572,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     public function getallteammemberlist($team_id){
 
-        $this->db->select('GROUP_CONCAT(product_type.team_member_name SEPARATOR ",") as team_member_list');
+        $this->db->select('GROUP_CONCAT(team_member_name SEPARATOR ",") as team_member_list');
         $this->db->where(TBL_TEAM_MASTER_TRANS.'.team_id', $team_id);
         $this->db->group_by(TBL_TEAM_MASTER_TRANS.'.team_id');
         $query = $this->db->get(TBL_TEAM_MASTER_TRANS);
