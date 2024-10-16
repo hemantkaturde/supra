@@ -18556,9 +18556,9 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             foreach ($fetch_result as $key => $value)
             {
                 $data[$counter]['team_name'] = $value['team_name'];
-                $data[$counter]['total_team_member'] =  '';
+                $data[$counter]['total_team_member'] =  $this->getallteammemberlist($value['id'])['team_member_list'];
                 $data[$counter]['remark'] =  $value['remark'];
-                $data[$counter]['action'] = $this->getallteammemberlist($value['id'])['team_member_list'];
+                $data[$counter]['action'] = '';
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."updateteammaster/".$value['id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addteammembers/".$value['id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['id']."' class='fa fa-trash-o deleteteammaster' aria-hidden='true'></i>"; 
