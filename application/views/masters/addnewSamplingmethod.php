@@ -56,7 +56,7 @@
                                                     <option st-id="" value="">Select Part Name</option>
                                                         <option value="GO">GO</option>
                                                         <option value="NOGO">NOGO</option>
-                                                        <option value="NOGO">GO/NOGO</option>
+                                                        <option value="GO/NOGO">GO/NOGO</option>
                                                 </select>
                                         </div>
                                     </div>
