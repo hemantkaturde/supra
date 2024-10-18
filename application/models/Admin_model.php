@@ -18945,7 +18945,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['scrap_type'] =$value['scrap_type'];
                 $data[$counter]['scrap_remark'] =$value['scrap_remark'];
                 $data[$counter]['action'] = '';
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."updateteammaster/".$value['scrap_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;color:#3c8dbc' data-id='".$value['scrap_id']."' class='fa fa-pencil-square-o' aria-hidden='true'></i> ";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['scrap_id']."' class='fa fa-trash-o deletescrapdetails' aria-hidden='true'></i>"; 
                 $counter++; 
             }
