@@ -76,13 +76,12 @@
                   <div class="loader_ajax_inner"><img src="<?php echo ICONPATH;?>/preloader_ajax.gif"></div>
                </div>
                
-               <input type="hidden" class="form-control"  id="rejection_form_id" name="rejection_form_id"  value="<?=$rejection_form_id?>">   
+                <input type="hidden" class="form-control"  id="rejection_form_id" name="rejection_form_id"  value="<?=$rejection_form_id?>">   
                 <input type="hidden" class="form-control"  id="vendor_po_item_id" name="vendor_po_item_id"  value="<?=$vendor_po_item_id?>">   
                 <input type="hidden" class="form-control"  id="vendor_po_id" name="vendor_po_id"  value="<?=$vendor_po_id?>">   
 
 
-
-               <input type="hidden" class="form-control"  id="rejection_form_id_popup" name="rejection_form_id_popup">
+               <input type="hidden" class="form-control"  id="scrap_rejection_details_id_popup" name="scrap_rejection_details_id_popup">
 
                <div class="form-group row">
                   <label class="col-sm-4 col-form-label">Scrap Date  <span class="required">*</span></label>
@@ -94,7 +93,24 @@
                <div class="form-group row">
                   <label class="col-sm-4 col-form-label">Scrap Type<span class="required">*</span></label>
                   <div class="col-sm-8">
-                     <input type="text" class="form-control"  id="scrap_type" name="scrap_type">
+                        <select class="form-control serachfilternotrequired searchfilter" name="scrap_type" id="scrap_type">
+                            <option st-id="" value="">Select Status</option>
+                            <option value="Brass">Brass</option>
+                            <option value="Copper">Copper</option>
+                            <option value="Aluminium">Aluminium</option>
+                            <option value="SS 304">SS 304</option>
+                            <option value="SS 316">SS 316</option>
+                            <option value="SS 303">SS 303</option>
+                            <option value="SS 316 L">SS 316 L</option>
+                            <option value="SS 304 L">SS 304 L</option>
+                            <option value="SS 316 Ti">SS 316 Ti</option>
+                            <option value="Duplex">Duplex</option>
+                            <option value="Inconnel">Inconnel</option>
+                            <option value="PFTE- Teflon Sheet">PFTE- Teflon Sheet</option>
+                            <option value="EN1A Leaded">EN1A Leaded</option>
+                            <option value="EN1A Non – Leaded">EN1A Non – Leaded</option>
+                            <option value="MS">MS</option>
+                        </select>
                      <p class="error scrap_type_error"></p>
                   </div>
                </div>

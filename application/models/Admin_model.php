@@ -18945,7 +18945,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['scrap_type'] =$value['scrap_type'];
                 $data[$counter]['scrap_remark'] =$value['scrap_remark'];
                 $data[$counter]['action'] = '';
-                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;color:#3c8dbc' data-id='".$value['scrap_id']."' class='fa fa-pencil-square-o' aria-hidden='true'></i> ";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;color:#3c8dbc' data-id='".$value['scrap_id']."' class='fa fa-pencil-square-o updatescrapdetails' aria-hidden='true'></i> ";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['scrap_id']."' class='fa fa-trash-o deletescrapdetails' aria-hidden='true'></i>"; 
                 $counter++; 
             }
@@ -18956,7 +18956,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     public function savescraprejectiondetailsdata($id,$data){
 
         if($id){
-            $this->db->where('id', $id);
+            $this->db->where('scrap_id', $id);
             if($this->db->update(TBL_SCRAP_REJECTION_DETAILS, $data)){
                 return TRUE;
             } else {
@@ -18984,6 +18984,17 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         }else{
            return FALSE;
         }
+
+    }
+
+
+    public function getscrapdetailsdata($id){
+
+        $this->db->select('*');
+        $this->db->where(TBL_SCRAP_REJECTION_DETAILS.'.scrap_id', $id);
+        $query = $this->db->get(TBL_SCRAP_REJECTION_DETAILS);
+        $fetch_result = $query->result_array();
+        return $fetch_result;
 
     }
 

@@ -23681,7 +23681,6 @@
 		});
 
 
-
 		$(document).on('click','.deletescrapdetails',function(e){
 				var elemF = $(this);
 				e.preventDefault();
@@ -23734,6 +23733,33 @@
 					}
 				});
 	    });
+
+
+		$(document).on('click','.updatescrapdetails',function(e){  
+			e.preventDefault();
+			var elemF = $(this);
+			var item_id = elemF.attr('data-id');		
+			$.ajax({
+				url : "<?php echo base_url();?>admin/geteupdatescrapdetails",
+				type: "POST",
+				data : 'id='+item_id,
+				success: function(data, textStatus, jqXHR)
+				{
+					    var fetchResponse = $.parseJSON(data);
+						$('#exampleModal').modal('show'); 
+						$('#scrap_rejection_details_id_popup').val(fetchResponse.scrap_id); 
+						$('#scrap_date').val(fetchResponse.scrap_date);  
+						$('#scrap_type').val(fetchResponse.scrap_type);  
+						$('#remark').val(fetchResponse.scrap_remark);  
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			});
+			return false;
+		});
+
 
 	</script>
 <?php } ?>

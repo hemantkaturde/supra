@@ -21836,7 +21836,14 @@ public function savescraprejectiondetails(){
                 'vendor_po_id'=>trim($this->input->post('vendor_po_id')),
             );
 
-            $savescraprejectiondetailsdata = $this->admin_model->savescraprejectiondetailsdata('',$data);
+
+            if(trim($this->input->post('scrap_rejection_details_id_popup'))){
+                $scrap_rejection_details_id_popup = trim($this->input->post('scrap_rejection_details_id_popup'));
+            }else{
+                $scrap_rejection_details_id_popup = '';
+            }
+
+            $savescraprejectiondetailsdata = $this->admin_model->savescraprejectiondetailsdata($scrap_rejection_details_id_popup,$data);
             if($savescraprejectiondetailsdata){
                 $save_rejectiondetails_response['status'] = 'success';
                 $save_rejectiondetails_response['error'] = array('scrap_date'=>'', 'scrap_type'=>'' ,'remark'=>'');
@@ -21864,6 +21871,22 @@ public function deletescrapdetails(){
     }
 
 
+
+}
+
+
+public function geteupdatescrapdetails(){
+
+    $post_submit = $this->input->post();
+    if($post_submit){
+        $getscrapdetailsdata = $this->admin_model->getscrapdetailsdata(trim($this->input->post('id')));
+        if($getscrapdetailsdata){
+            $content = $getscrapdetailsdata[0];
+            echo json_encode($content);
+        }else{
+            echo 'failure';
+        }
+    }
 
 }
 

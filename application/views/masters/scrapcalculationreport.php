@@ -44,8 +44,6 @@
                                                     <option value="EN1A Leaded">EN1A Leaded</option>
                                                     <option value="EN1A Non – Leaded">EN1A Non – Leaded</option>
                                                     <option value="MS">MS</option>
-
-                                                    
                                                 </select>
                                                 <p class="error status_error"></p>
                                         </div>
