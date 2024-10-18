@@ -20951,12 +20951,15 @@ public function addscraprejection(){
     $data['vendor_po_id']=  $_GET['vendor_po_id'];
     // $getstockrejectionformitemdataitemdetailsforedit = $this->admin_model->getstockrejectionformitemdataitemdetailsforedit(trim($_GET['vendor_po_id']));
     // $data['net_weight_fg'] =  $getstockrejectionformitemdataitemdetailsforedit[0]['net_weight_fg'];
-    $process = 'Add Scrap Rejection Form Data';
+    $process = 'Add Scrap Rejection Form Details';
     $processFunction = 'Admin/addscraprejection';
 
     $data['getalldataofeditrejectionform']= $this->admin_model->getalldataofeditrejectionform(trim($data['rejection_form_id']));
+    $data['getitemdetailsusingvendorpoitems']= $this->admin_model->getitemdetailsusingvendorpoitems(trim($data['vendor_po_item_id']));
+
+
     $this->logrecord($process,$processFunction);
-    $this->global['pageTitle'] = 'Add Scrap Rejection Form Data';
+    $this->global['pageTitle'] = 'Add Scrap Rejection Form Details';
     $this->loadViews("masters/addscraprejection", $this->global, $data, NULL);
 }
 
@@ -21778,6 +21781,90 @@ public function updateteammember($id){
     $this->global['pageTitle'] = 'Update Team Member';
     $data['getteammemberdataforedit']= $this->admin_model->getteammemberdataforedit($id);
     $this->loadViews("masters/updateteammember", $this->global, $data, NULL);
+}
+
+
+public function fetchscarprejectiondetails($rejection_form_id,$vendor_po_item_id,$vendor_po_id){
+
+    $params = $_REQUEST;
+    $totalRecords = $this->admin_model->getscarprejectiondetailscount($params,$rejection_form_id,$vendor_po_item_id,$vendor_po_id); 
+    $queryRecords = $this->admin_model->getscarprejectiondetailsdata($params,$rejection_form_id,$vendor_po_item_id,$vendor_po_id); 
+
+    $data = array();
+    foreach ($queryRecords as $key => $value)
+    {
+        $i = 0;
+        foreach($value as $v)
+        {
+            $data[$key][$i] = $v;
+            $i++;
+        }
+    }
+    $json_data = array(
+        "draw"            => intval( $params['draw'] ),   
+        "recordsTotal"    => intval( $totalRecords ),  
+        "recordsFiltered" => intval($totalRecords),
+        "data"            => $data   // total data array
+        );
+    echo json_encode($json_data);
+
+}
+
+
+public function savescraprejectiondetails(){
+    $post_submit = $this->input->post();
+    if($post_submit){
+ 
+        $save_rejectiondetails_response = array();
+        $this->form_validation->set_rules('scrap_date','Scrap Date','trim|required');
+        $this->form_validation->set_rules('scrap_type','Scrap Type','trim|required');
+        $this->form_validation->set_rules('remark','Remark','trim');
+
+        if($this->form_validation->run() == FALSE)
+        {
+            $save_rejectiondetails_response['status'] = 'failure';
+            $save_rejectiondetails_response['error'] = array('scrap_date'=>strip_tags(form_error('scrap_date')),'scrap_type'=>strip_tags(form_error('scrap_type')),'remark'=>strip_tags(form_error('remark')));
+        }else{
+
+
+            $data = array(
+                'scrap_date'=> trim($this->input->post('scrap_date')),
+                'scrap_type'=> trim($this->input->post('scrap_type')),
+                'scrap_remark'=>trim($this->input->post('remark')),
+                'rejection_form_id'=>trim($this->input->post('rejection_form_id')),
+                'vendor_po_item_id'=>trim($this->input->post('vendor_po_item_id')),
+                'vendor_po_id'=>trim($this->input->post('vendor_po_id')),
+            );
+
+            $savescraprejectiondetailsdata = $this->admin_model->savescraprejectiondetailsdata('',$data);
+            if($savescraprejectiondetailsdata){
+                $save_rejectiondetails_response['status'] = 'success';
+                $save_rejectiondetails_response['error'] = array('scrap_date'=>'', 'scrap_type'=>'' ,'remark'=>'');
+            }
+        }
+
+        echo json_encode($save_rejectiondetails_response); 
+
+    }
+}
+
+public function deletescrapdetails(){
+    $post_submit = $this->input->post();
+    if($post_submit){
+        $result = $this->admin_model->deletescrapdetails(trim($this->input->post('id')));
+        if ($result) {
+                    $process = 'Delete Scrap Details';
+                    $processFunction = 'Admin/deletescrapdetails';
+                    $this->logrecord($process,$processFunction);
+                echo(json_encode(array('status'=>'success')));
+            }
+        else { echo(json_encode(array('status'=>'failed'))); }
+    }else{
+        echo(json_encode(array('status'=>'failed'))); 
+    }
+
+
+
 }
 
 

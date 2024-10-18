@@ -9203,6 +9203,18 @@ class Admin_model extends CI_Model
 
     }
 
+    public function getitemdetailsusingvendorpoitems($item_id){
+
+        $this->db->select('part_number');
+        $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
+        $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.id',$item_id);
+        $this->db->group_by(TBL_FINISHED_GOODS.'.status',1);
+        $query = $this->db->get(TBL_FINISHED_GOODS);
+        $data = $query->row_array();
+        return $data;
+
+    }
+
     public function deleterejectionform($id){
         $this->db->where('id ', $id);
         //$this->db->delete(TBL_SUPPLIER);
@@ -18886,6 +18898,94 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
+    public function getscarprejectiondetailscount($params,$rejection_form_id,$vendor_po_item_id,$vendor_po_id){
+        $this->db->select('*');
+
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_SCRAP_REJECTION_DETAILS.".scrap_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SCRAP_REJECTION_DETAILS.".scrap_remark LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SCRAP_REJECTION_DETAILS.".scrap_type LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_SCRAP_REJECTION_DETAILS.'.rejection_form_id', $rejection_form_id);
+        $this->db->where(TBL_SCRAP_REJECTION_DETAILS.'.vendor_po_item_id', $vendor_po_item_id);
+        $this->db->where(TBL_SCRAP_REJECTION_DETAILS.'.vendor_po_id', $vendor_po_id);
+
+        $query = $this->db->get(TBL_SCRAP_REJECTION_DETAILS);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+    }
+
+    public function getscarprejectiondetailsdata($params,$rejection_form_id,$vendor_po_item_id,$vendor_po_id){
+        $this->db->select('*');
+
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_SCRAP_REJECTION_DETAILS.".scrap_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SCRAP_REJECTION_DETAILS.".scrap_remark LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SCRAP_REJECTION_DETAILS.".scrap_type LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_SCRAP_REJECTION_DETAILS.'.rejection_form_id', $rejection_form_id);
+        $this->db->where(TBL_SCRAP_REJECTION_DETAILS.'.vendor_po_item_id', $vendor_po_item_id);
+        $this->db->where(TBL_SCRAP_REJECTION_DETAILS.'.vendor_po_id', $vendor_po_id);
+
+        $this->db->limit($params['length'],$params['start']);
+
+        $this->db->order_by(TBL_SCRAP_REJECTION_DETAILS.'.scrap_id','DESC');
+        $query = $this->db->get(TBL_SCRAP_REJECTION_DETAILS);
+        $fetch_result = $query->result_array();
+
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['scrap_date'] =$value['scrap_date'];
+                $data[$counter]['scrap_type'] =$value['scrap_type'];
+                $data[$counter]['scrap_remark'] =$value['scrap_remark'];
+                $data[$counter]['action'] = '';
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."updateteammaster/".$value['scrap_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['scrap_id']."' class='fa fa-trash-o deletescrapdetails' aria-hidden='true'></i>"; 
+                $counter++; 
+            }
+        }
+        return $data;
+    }
+
+    public function savescraprejectiondetailsdata($id,$data){
+
+        if($id){
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_SCRAP_REJECTION_DETAILS, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        }else{
+            if($this->db->insert(TBL_SCRAP_REJECTION_DETAILS, $data)) {
+                return $this->db->insert_id();
+            } else {
+                return FALSE;
+            }
+
+        }
+
+
+    }
+
+
+    public function deletescrapdetails($id){
+
+        $this->db->where('scrap_id', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_SCRAP_REJECTION_DETAILS)){
+           return TRUE;
+        }else{
+           return FALSE;
+        }
+
+    }
 
 }
 

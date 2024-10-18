@@ -23591,10 +23591,149 @@
 					}
 				});
 	    });
-
-
-
-		
-
 	</script>
 <?php }  ?>
+
+
+<?php if($pageTitle=='Add Scrap Rejection Form Details'){?>
+	<script type="text/javascript">
+
+        $(document).ready(function() {
+			var rejection_form_id =   $('#rejection_form_id').val();
+			var vendor_po_item_id =   $('#vendor_po_item_id').val();
+			var vendor_po_id =   $('#vendor_po_id').val();
+
+			    var dt = $('#view_stock_rejectiondetails').DataTable({
+					"columnDefs": [ 
+						{ className: "details-control", "targets": [ 0 ] },
+						{ "width": "30%", "targets": 0 },
+						{ "width": "30%", "targets": 1 },	
+						{ "width": "30%", "targets": 2 },	
+						{ "width": "8%", "targets": 3 },						
+					
+					],
+					responsive: true,
+					"oLanguage": {
+						"sEmptyTable": "<i>Scrap Rejection Details Not Found.</i>",
+					}, 
+					"bSort" : false,
+					"bFilter":true,
+					"bLengthChange": true,
+					"iDisplayLength": 10,   
+					"bProcessing": true,
+					"serverSide": true,
+					"ajax":{
+						url :"<?php echo base_url();?>admin/fetchscarprejectiondetails/"+rejection_form_id+"/"+vendor_po_item_id+"/"+vendor_po_id,
+						type: "post",
+					},
+				});
+        });
+
+		$(document).on('click','.closescraprejection',function(e){  
+				location.reload();
+		});
+
+		$(document).on('click','#savescraprejectiondetails',function(e){
+			e.preventDefault();
+				var rejection_form_id =   $('#rejection_form_id').val();
+				var vendor_po_item_id =   $('#vendor_po_item_id').val();
+				var vendor_po_id =   $('#vendor_po_id').val();
+				var formData = new FormData($("#savescraprejectiondetailsform")[0]);
+
+				$.ajax({
+						url : "<?php echo base_url();?>savescraprejectiondetails",
+						type: "POST",
+						data : formData,
+						cache: false,
+						contentType: false,
+						processData: false,
+						success: function(data, textStatus, jqXHR)
+						{
+							var fetchResponse = $.parseJSON(data);
+							if(fetchResponse.status == "failure")
+							{
+								$.each(fetchResponse.error, function (i, v)
+								{
+									$('.'+i+'_error').html(v);
+								});
+								$(".loader_ajax").hide();
+							}
+							else if(fetchResponse.status == 'success')
+							{
+								swal({
+									title: "Success",
+									text: "Scrap Details Successfully Added!",
+									icon: "success",
+									button: "Ok",
+									},function(){ 
+										
+											window.location.href = "<?php echo base_url()?>addscraprejection?rejection_form_id="+rejection_form_id+'&vendor_po_item_id='+vendor_po_item_id+'&vendor_po_id='+vendor_po_id;
+								});		
+							}
+							
+						},
+						error: function (jqXHR, textStatus, errorThrown)
+						{
+							$(".loader_ajax").hide();
+						}
+				});
+				return false;
+		});
+
+
+
+		$(document).on('click','.deletescrapdetails',function(e){
+				var elemF = $(this);
+				e.preventDefault();
+
+				var rejection_form_id =   $('#rejection_form_id').val();
+				var vendor_po_item_id =   $('#vendor_po_item_id').val();
+				var vendor_po_id =   $('#vendor_po_id').val();
+
+				swal({
+					title: "Are you sure?",
+					text: "Delete Scrap Details",
+					type: "warning",
+					showCancelButton: true,
+					closeOnClickOutside: false,
+					confirmButtonClass: "btn-sm btn-danger",
+					confirmButtonText: "Yes, delete it!",
+					cancelButtonText: "No, cancel plz!",
+					closeOnConfirm: false,
+					closeOnCancel: false
+				}, function(isConfirm) {
+					if (isConfirm) {
+								$.ajax({
+									url : "<?php echo base_url();?>admin/deletescrapdetails",
+									type: "POST",
+									data : 'id='+elemF.attr('data-id'),
+									success: function(data, textStatus, jqXHR)
+									{
+										const obj = JSON.parse(data);
+									
+										if(obj.status=='success'){
+											swal({
+												title: "Deleted!",
+												text: "Scrap Details Deleted Succesfully",
+												icon: "success",
+												button: "Ok",
+												},function(){ 
+													window.location.href = "<?php echo base_url()?>addscraprejection?rejection_form_id="+rejection_form_id+'&vendor_po_item_id='+vendor_po_item_id+'&vendor_po_id='+vendor_po_id;
+												});	
+										}
+
+									},
+									error: function (jqXHR, textStatus, errorThrown)
+									{
+										$(".loader_ajax").hide();
+									}
+								})
+							}
+							else {
+					swal("Cancelled", "Scrap Details deletion cancelled ", "error");
+					}
+				});
+	    });
+
+	</script>
+<?php } ?>

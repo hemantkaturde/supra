@@ -575,6 +575,7 @@ $route['updateteammember/(:any)'] = "admin/updateteammember/$1";
 
 
 
+$route['savescraprejectiondetails'] = "admin/savescraprejectiondetails";
 
 
 
