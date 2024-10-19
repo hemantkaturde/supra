@@ -10383,7 +10383,7 @@ class Admin extends BaseController
         $mpdf = new \Mpdf\Mpdf();
         // $html = $this->load->view('html_to_pdf',[],true);
         $html = '<div>
-                        <p><b>Vendor Name : </b> '.$getalldataofeditrejectionform['rejection_number'].'</p>
+                        <p><b>Vendor Name : </b> '.$getalldataofeditrejectionform['vendor_name'].'</p>
                         <p><b>Vendor PO : </b>'.$getalldataofeditrejectionform['po_number'].'</p>
                         <p><b>Part Number : </b>'.$getitemdetailsusingvendorpoitems['part_number'].'</p>
                        
