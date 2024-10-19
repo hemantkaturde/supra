@@ -10372,7 +10372,7 @@ class Admin extends BaseController
                         <td style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$j.'</td>
                         <td style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rejected_reason'].'</br></td>   
                         <td style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['qty_In_pcs'].'</td>
-                        <td style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.round($value['qty_In_kgs'],3).'</td>
+                        <td style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.number_format($value['qty_In_kgs'],3).'</td>
                         <td style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['remark'].'</td> 
                     </tr>';
                     $qty_In_pcs+=$value['qty_In_pcs'];
