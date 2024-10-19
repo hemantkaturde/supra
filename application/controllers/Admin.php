@@ -10343,6 +10343,87 @@ class Admin extends BaseController
 
     }
 
+
+    public function printrejectiondetails($rejection_form_id,$vendor_po_item_id,$vendor_po_id){
+
+        $getalldataofeditrejectionform= $this->admin_model->getalldataofeditrejectionform($rejection_form_id);
+        $getitemdetailsusingvendorpoitems= $this->admin_model->getitemdetailsusingvendorpoitems(trim($vendor_po_item_id));
+        $getallscrapdetailsforprint =  $this->admin_model->getallscrapdetailsforprint($rejection_form_id,$vendor_po_item_id,$vendor_po_id);
+        $getRejectionitemsrejecteddetails =  $this->admin_model->getRejectionitemsrejecteddetails($rejection_form_id,$vendor_po_item_id,$vendor_po_id);
+        
+        $CartItem='';
+        $j=1;
+        foreach ($getallscrapdetailsforprint as $key => $value) {
+            $CartItem .= '
+                    <tr style=border: 1px solid black;border-right: 1px solid black;>
+                        <td style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['scrap_type'].'</td>
+                    </tr>';
+            $j++;       
+        }
+    
+
+        $CartItem1='';
+        $j=1;
+        $qty_In_pcs =0;
+        $$qty_In_kgs =0;
+        foreach ($getRejectionitemsrejecteddetails as $key => $value) {
+            $CartItem1 .= '
+                    <tr>
+                        <td style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$j.'</td>
+                        <td style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rejected_reason'].'</br></td>   
+                        <td style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['qty_In_pcs'].'</td>
+                        <td style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.round($value['qty_In_kgs'],3).'</td>
+                        <td style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['remark'].'</td> 
+                    </tr>';
+                    $qty_In_pcs+=$value['qty_In_pcs'];
+                    $qty_In_kgs+=$value['qty_In_kgs'];
+                $j++;       
+        }
+        
+        $mpdf = new \Mpdf\Mpdf();
+        // $html = $this->load->view('html_to_pdf',[],true);
+        $html = '<div>
+                        <p><b>Vendor Name : </b> '.$getalldataofeditrejectionform['rejection_number'].'</p>
+                        <p><b>Vendor PO : </b>'.$getalldataofeditrejectionform['po_number'].'</p>
+                        <p><b>Part Number : </b>'.$getitemdetailsusingvendorpoitems['part_number'].'</p>
+                       
+                </div>
+                <table style="width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:12px">
+                    <tr>
+                        <th style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 5px;border-bottom:1px solid black" valign="top">Type of Raw Material</th>   
+                    </tr>
+                '.$CartItem.'
+                </table><br>
+                
+                
+                <table style="width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:12px">
+                    <tr style=border: 1px solid black;border-right: 1px solid black;>
+                        <th style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 5px;border-bottom:1px solid black" valign="top">Scrap Rejection No</th> 
+                        <th style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 5px;border-bottom:1px solid black" valign="top">Rejection Reason</th> 
+                        <th style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 5px;border-bottom:1px solid black" valign="top">Qty (In Pcs)</th> 
+                        <th style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 5px;border-bottom:1px solid black" valign="top">Qty (In Kgs)</th> 
+                        <th style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 5px;border-bottom:1px solid black" valign="top">Remark</th> 
+                    </tr>
+                    '.$CartItem1.'
+                       <tr style=border: 1px solid black;border-right: 1px solid black;>
+                        <th style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 5px;border-bottom:1px solid black" valign="top"></th> 
+                        <th style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 5px;border-bottom:1px solid black" valign="top"></th> 
+                        <th style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 5px;border-bottom:1px solid black" valign="top">'.$qty_In_pcs.' Pcs</th> 
+                        <th style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 5px;border-bottom:1px solid black" valign="top">'.$qty_In_kgs.' kgs</th> 
+                        <th style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 5px;border-bottom:1px solid black" valign="top"></th> 
+                    </tr>
+                </table>
+                
+                ';
+
+                // <p>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</p>
+        $invoice_name =  'Scrap_Rejection.pdf';
+        $mpdf->WriteHTML($html);
+        $mpdf->Output($invoice_name,'D'); // opens in browser
+
+    
+    }
+
     public function saverejectedformitemdata(){
         $post_submit = $this->input->post();
         if($post_submit){
@@ -21890,5 +21971,40 @@ public function geteupdatescrapdetails(){
 
 }
 
+
+public function cbam(){
+    $process = 'CBAM Report';
+    $processFunction = 'Admin/CBAM';
+    $this->logrecord($process,$processFunction);
+    $this->global['pageTitle'] = 'CBAM Report';
+    $data['vendorList']= $this->admin_model->fetchALLvendorList();
+    $this->loadViews("masters/CBAM", $this->global, $data, NULL);
+}
+
+public function fetchcbamreport(){
+
+    $params = $_REQUEST;
+    $totalRecords = $this->admin_model->gettcbamreportcount($params); 
+    $queryRecords = $this->admin_model->gettcbamreportdata($params); 
+
+    $data = array();
+    foreach ($queryRecords as $key => $value)
+    {
+        $i = 0;
+        foreach($value as $v)
+        {
+            $data[$key][$i] = $v;
+            $i++;
+        }
+    }
+    $json_data = array(
+        "draw"            => intval( $params['draw'] ),   
+        "recordsTotal"    => intval( $totalRecords ),  
+        "recordsFiltered" => intval($totalRecords),
+        "data"            => $data   // total data array
+        );
+    echo json_encode($json_data);
+
+}
 
 }

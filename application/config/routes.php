@@ -572,10 +572,11 @@ $route['addteammemberaction/(:any)'] = "admin/addteammemberaction/$1";
 $route['deleteteammember'] = "admin/deleteteammember";
 $route['updateteammember/(:any)'] = "admin/updateteammember/$1";
 
-
-
-
 $route['savescraprejectiondetails'] = "admin/savescraprejectiondetails";
+
+$route['cbam'] = "admin/cbam";
+
+
 
 
 

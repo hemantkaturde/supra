@@ -9282,7 +9282,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;color: #3c8dbc;' data-toggle='modal' data-target='#addNewModal'  rejection-form-id='".$id."' vendor-po-id='".$vendor_po_id."'  vendor_po_item_id='".$value['id']."' net_weight='".$value['net_weight_fg']."'  class='fa fa-plus-circle addrejectionitemdata' aria-hidden='true'></i>  &nbsp "; 
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewrejectionformitemdetails?rejection_form_id=".$id.'&vendor_po_item_id='.$value['id'].'&vendor_po_id='.$vendor_po_id."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-eye' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addscraprejection?rejection_form_id=".$id.'&vendor_po_item_id='.$value['id'].'&vendor_po_id='.$vendor_po_id."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-minus-circle' aria-hidden='true'></i></a>   &nbsp ";
-                // $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addrejectionformitemsdatamultientries?rejection_form_id=".$id.'&vendor_po_item_id='.$value['id'].'&vendor_po_id='.$vendor_po_id."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."admin/printrejectiondetails/".$id.'/'.$value['id'].'/'.$vendor_po_id."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>   &nbsp ";
                  $counter++; 
             }
         }
@@ -18996,6 +18996,121 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $fetch_result = $query->result_array();
         return $fetch_result;
 
+    }
+
+
+    public function gettcbamreportcount($params){
+
+        $draw = $params['draw'];
+        $start = $params['start'];
+        $length = $params['length'];
+        $searchValue = $params['search']['value'];
+        
+
+        $this->db->select('id as table_id');
+        $this->db->order_by(TBL_BILL_OF_MATERIAL_ITEM.'.id','DESC');
+        $query_1 = $this->db->get(TBL_BILL_OF_MATERIAL_ITEM);
+        $fetch_result_1 = $query_1->result_array();
+
+
+        $this->db->select('id as table_id');
+        $this->db->order_by(TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.id','DESC');
+        $query_2 = $this->db->get(TBL_BILL_OF_MATERIAL_VENDOR_ITEM);
+        $fetch_result_2 = $query_2->result_array();
+
+        $merged_array = array_merge($fetch_result_1, $fetch_result_2);
+
+
+        if (!empty($searchValue)) {
+            $filtered_array = array_filter($merged_array, function($item) use ($searchValue) {
+                return strpos(strtolower($item), strtolower($searchValue)) !== false;
+            });
+        } else {
+            $filtered_array = $merged_array;
+        }
+
+            // Total number of records
+            $totalData = count($merged_array);
+            $totalFiltered = count($filtered_array);
+
+            return $totalFiltered;
+
+            
+
+    }
+
+
+    public function gettcbamreportdata($params){
+
+
+        $draw = $params['draw'];
+        $start = $params['start'];
+        $length = $params['length'];
+        $searchValue = $params['search']['value'];
+
+        $this->db->select('id as table_id');
+        $this->db->order_by(TBL_BILL_OF_MATERIAL_ITEM.'.id','DESC');
+        $query_1 = $this->db->get(TBL_BILL_OF_MATERIAL_ITEM);
+        $fetch_result_1 = $query_1->result_array();
+
+
+        $this->db->select('id as table_id');
+        $this->db->order_by(TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.id','DESC');
+        $query_2 = $this->db->get(TBL_BILL_OF_MATERIAL_VENDOR_ITEM);
+        $fetch_result_2 = $query_2->result_array();
+
+        $merged_array = array_merge($fetch_result_1, $fetch_result_2);
+
+
+        if (!empty($searchValue)) {
+            $filtered_array = array_filter($merged_array, function($item) use ($searchValue) {
+                return strpos($item, $searchValue) !== false;
+            });
+        } else {
+            $filtered_array = $merged_array;
+        }
+
+        //     // Total number of records
+        //     $totalData = count($merged_array);
+        //     $totalFiltered = count($filtered_array);
+
+        //     // Slice the array to get the current page of data
+        //     $data = array_slice($filtered_array, $start, $length);
+
+        // $filteredArray = array_filter($merged_array, function($value) use ($searchValue) {
+        //     return strpos($value, $searchValue) !== false; // Filter condition
+        // });
+        
+        // Display the filtered array
+        print_r($filteredArray);
+    
+
+        
+    }
+
+
+    public function getallscrapdetailsforprint($rejection_form_id,$vendor_po_item_id,$vendor_po_id){
+
+        $this->db->select('*');
+        $this->db->where(TBL_SCRAP_REJECTION_DETAILS.'.rejection_form_id', $rejection_form_id);
+        $this->db->where(TBL_SCRAP_REJECTION_DETAILS.'.vendor_po_item_id', $vendor_po_item_id);
+        $this->db->where(TBL_SCRAP_REJECTION_DETAILS.'.vendor_po_id', $vendor_po_id);
+        $this->db->order_by(TBL_SCRAP_REJECTION_DETAILS.'.scrap_id','DESC');
+        $query = $this->db->get(TBL_SCRAP_REJECTION_DETAILS);
+        $fetch_result = $query->result_array();
+        return  $fetch_result;
+    }
+
+
+    public function getRejectionitemsrejecteddetails($rejection_form_id,$vendor_po_item_id,$vendor_po_id){
+
+        $this->db->select('*,'.TBL_REJECTION_FORM_REJECTED_ITEM.'.id as rejection_item_id');
+        $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id', $vendor_po_item_id);
+        $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.rejection_form_id', $rejection_form_id);
+        $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.vendor_po_id', $vendor_po_id);
+        $query = $this->db->get(TBL_REJECTION_FORM_REJECTED_ITEM);
+        $fetch_result = $query->result_array();
+        return  $fetch_result;
     }
 
 }

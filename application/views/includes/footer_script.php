@@ -17435,7 +17435,7 @@
 	                 { "width": "20%", "targets": 0 },
 	                 { "width": "20%", "targets": 1 },
 					 { "width": "20%", "targets": 2 },
-	                 { "width": "6%", "targets": 3 }
+	                 { "width": "8%", "targets": 3 }
 	            ],
 	            responsive: true,
 	            "oLanguage": {
@@ -23760,6 +23760,44 @@
 			return false;
 		});
 
-
 	</script>
+<?php } ?>
+
+
+<?php if($pageTitle=='CBAM Report'){?>
+	<script type="text/javascript">
+
+            $(document).ready(function() {
+			    var dt = $('#view_scrap_calculation_report').DataTable({
+					"columnDefs": [ 
+						{ className: "details-control", "targets": [ 0 ] },
+						{ "width": "10%", "targets": 0 },
+						{ "width": "10%", "targets": 1 },	
+						{ "width": "10%", "targets": 2 },	
+						{ "width": "10%", "targets": 3 },	
+						{ "width": "10%", "targets": 4 },
+						{ "width": "10%", "targets": 5 },	
+						{ "width": "10%", "targets": 6 },	
+						{ "width": "10%", "targets": 7 },			
+						{ "width": "10%", "targets": 8 },			
+						{ "width": "10%", "targets": 9 },						
+					
+					],
+					responsive: true,
+					"oLanguage": {
+						"sEmptyTable": "<i>CBAM Not Found.</i>",
+					}, 
+					"bSort" : false,
+					"bFilter":true,
+					"bLengthChange": true,
+					"iDisplayLength": 10,   
+					"bProcessing": true,
+					"serverSide": true,
+					"ajax":{
+						url :"<?php echo base_url();?>admin/fetchcbamreport",
+						type: "post",
+					},
+				});
+            });
+    </script>
 <?php } ?>

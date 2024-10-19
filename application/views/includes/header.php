@@ -306,7 +306,14 @@
                         <li class="line_height <?php if($pageUrl=="qcchallan" || $pageUrl=="addqcchallan" || $pageUrl=='editqcchallan' || $pageUrl=='viewqcchallan'){echo 'active';}?>"><a href="<?php echo base_url(); ?>qcchallan"><i class="fa fa-cubes"></i> QC Challan</a></li>
                       </ul>
                     </li>
-      
+
+            
+                    <li class="treeview <?php if($pageUrl=="cbam"){echo 'active';}?>" >
+                      <a href="<?php echo base_url(); ?>cbam">
+                        <i class="fa fa-file-excel-o"></i> <span class="menu_label">CBAM</span>
+                      </a>
+                    </li> 
+
                     <li class="treeview <?php if($pageUrl=="productionstatusreport"){echo 'active';}?>">
                       <a href="#">
                         <i class="fa fa-user"></i> <span class="menu_label">Production Status</span>
