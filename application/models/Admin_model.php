@@ -19001,39 +19001,11 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     public function gettcbamreportcount($params){
 
-        $draw = $params['draw'];
-        $start = $params['start'];
-        $length = $params['length'];
-        $searchValue = $params['search']['value'];
-        
-
-        $this->db->select('id as table_id');
-        $this->db->order_by(TBL_BILL_OF_MATERIAL_ITEM.'.id','DESC');
-        $query_1 = $this->db->get(TBL_BILL_OF_MATERIAL_ITEM);
-        $fetch_result_1 = $query_1->result_array();
+      
 
 
-        $this->db->select('id as table_id');
-        $this->db->order_by(TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.id','DESC');
-        $query_2 = $this->db->get(TBL_BILL_OF_MATERIAL_VENDOR_ITEM);
-        $fetch_result_2 = $query_2->result_array();
 
-        $merged_array = array_merge($fetch_result_1, $fetch_result_2);
-
-
-        if (!empty($searchValue)) {
-            $filtered_array = array_filter($merged_array, function($item) use ($searchValue) {
-                return strpos(strtolower($item), strtolower($searchValue)) !== false;
-            });
-        } else {
-            $filtered_array = $merged_array;
-        }
-
-            // Total number of records
-            $totalData = count($merged_array);
-            $totalFiltered = count($filtered_array);
-
-            return $totalFiltered;
+            return 10;
 
             
 
@@ -19042,50 +19014,51 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     public function gettcbamreportdata($params){
 
-
         $draw = $params['draw'];
         $start = $params['start'];
         $length = $params['length'];
-        $searchValue = $params['search']['value'];
+        //$search = $params['search']['value'];
 
-        $this->db->select('id as table_id');
+        $this->db->select(TBL_BILL_OF_MATERIAL.'.supplier_name,'.TBL_BILL_OF_MATERIAL.'.supplier_po_number');
+        $this->db->join(TBL_BILL_OF_MATERIAL, TBL_BILL_OF_MATERIAL.'.id = '.TBL_BILL_OF_MATERIAL_ITEM.'.bom_id');
         $this->db->order_by(TBL_BILL_OF_MATERIAL_ITEM.'.id','DESC');
         $query_1 = $this->db->get(TBL_BILL_OF_MATERIAL_ITEM);
         $fetch_result_1 = $query_1->result_array();
 
 
-        $this->db->select('id as table_id');
+        $this->db->select('"" as supplier_name,"" as supplier_po_number');
         $this->db->order_by(TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.id','DESC');
         $query_2 = $this->db->get(TBL_BILL_OF_MATERIAL_VENDOR_ITEM);
         $fetch_result_2 = $query_2->result_array();
 
-        $merged_array = array_merge($fetch_result_1, $fetch_result_2);
+        $mergedData = array_merge($fetch_result_1, $fetch_result_2);
+
+        $search = $this->input->post('search')['value'];
+             if (!empty($search)) {
+                    $mergedData = array_filter($mergedData, function($item) use ($search) {
+                        // Search across multiple columns (example: 'name', 'age')
+                        return stripos($item['table_id'], $search) !== false ||  // Search in 'name'
+                               stripos($item['supplier_name'], $search) !== false;    // Search in 'age'
+                });
+            }
 
 
-        if (!empty($searchValue)) {
-            $filtered_array = array_filter($merged_array, function($item) use ($searchValue) {
-                return strpos($item, $searchValue) !== false;
-            });
-        } else {
-            $filtered_array = $merged_array;
-        }
+        // Get the total count before pagination
+        $totalData = count($mergedData);
 
-        //     // Total number of records
-        //     $totalData = count($merged_array);
-        //     $totalFiltered = count($filtered_array);
-
-        //     // Slice the array to get the current page of data
-        //     $data = array_slice($filtered_array, $start, $length);
-
-        // $filteredArray = array_filter($merged_array, function($value) use ($searchValue) {
-        //     return strpos($value, $searchValue) !== false; // Filter condition
-        // });
+        // Apply ordering
+        $orderColumn = $this->input->post('order')[0]['column'];
+        $orderDirection = $this->input->post('order')[0]['dir'];
+        usort($mergedData, function ($a, $b) use ($orderColumn, $orderDirection) {
+            return ($orderDirection == 'asc') ? strcmp($a[$orderColumn], $b[$orderColumn]) : strcmp($b[$orderColumn], $a[$orderColumn]);
+        });
         
-        // Display the filtered array
-        print_r($filteredArray);
-    
+        // Pagination (limit and offset)
+        $limit = $this->input->post('length');
+        $offset = $this->input->post('start');
+        $pagedData = array_slice($mergedData, $offset, $limit);
 
-        
+        return $pagedData;
     }
 
 
