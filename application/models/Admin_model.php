@@ -19037,10 +19037,11 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                                || stripos($item['type_of_raw_material'], $search) !== false
                                || stripos($item['HSN_code'], $search) !== false
                                || stripos($item['sent_qty'], $search) !== false
+                               || stripos($item['part_number'], $search) !== false
                                || stripos($item['po_number'], $search) !== false
                                || stripos($item['recived_qty'], $search) !== false
                                || stripos($item['netw'], $search) !== false
-                               || stripos($item['hsncode'], $search) !== false;
+                               || stripos($item['hsn_code'], $search) !== false;
                                
                 });
             }
@@ -19079,6 +19080,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id = '.TBL_VENDOR_PO_MASTER.'.id');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
         $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_BILL_OF_MATERIAL_ITEM.'.part_number');
+        $this->db->join(TBL_FINISHED_GOODS.' as a', 'a.part_number = '.TBL_RAWMATERIAL.'.part_number');
+
         $this->db->order_by(TBL_BILL_OF_MATERIAL_ITEM.'.id','DESC');
         $query_1 = $this->db->get(TBL_BILL_OF_MATERIAL_ITEM);
         $fetch_result_1 = $query_1->result_array();
@@ -19105,10 +19108,11 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                                     || stripos($item['type_of_raw_material'], $search) !== false
                                     || stripos($item['HSN_code'], $search) !== false
                                     || stripos($item['sent_qty'], $search) !== false
+                                    || stripos($item['part_number'], $search) !== false
                                     || stripos($item['po_number'], $search) !== false
                                     || stripos($item['recived_qty'], $search) !== false
                                     || stripos($item['netw'], $search) !== false
-                                    || stripos($item['hsncode'], $search) !== false;
+                                    || stripos($item['hsn_code'], $search) !== false;
                 });
             }
 
