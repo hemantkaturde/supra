@@ -105,7 +105,7 @@
                 <div class="col-md-6 login-form-1 fixed-height">
                     <div class="login-logo" style="font-size: 25px; !important">
                       <a href="#"><img src="<?=base_url().'/assets/images/db_logo.png';?>" alt="" style="height:150px;width:150px;    font-size: 25px; margin-top: -52px;"></img> </a>
-                        <p style="font-size: inherit;font-weight: bolder;">Supra Quality Export India Pvt Ltd</p>
+                        <p style="font-size: inherit;font-weight: bolder;">Supra Quality Exports India Pvt Ltd</p>
                           <p style="text-align: justify;"><small style="font-weight: 400 !important;font-size: 74%;">A-92, Road No.16, Wagle Industrial Estate, Thane (W) 400604</small> </p>
                           <p style="text-align: justify;"><small style="font-weight: 400 !important;font-size: 74%;"><i class="fa fa-phone" aria-hidden="true"></i> +9122 66959505 / 66600196 / 62390222</small></p>
                           <p style="text-align: justify;"><small style="font-weight: 400 !important;font-size: 74%;"><i class="fa fa-phone" aria-hidden="true"></i> +9122 46061497 / 35115396</small></p>
