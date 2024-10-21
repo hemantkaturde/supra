@@ -19000,14 +19000,68 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
 
     public function gettcbamreportcount($params){
+        $draw = $params['draw'];
+        $start = $params['start'];
+        $length = $params['length'];
+        //$search = $params['search']['value'];
 
-      
+        $this->db->select(TBL_BILL_OF_MATERIAL.'.supplier_name,'.TBL_BILL_OF_MATERIAL.'.supplier_po_number,'.TBL_RAWMATERIAL.'.type_of_raw_material,'.TBL_RAWMATERIAL.'.HSN_code,"" as sent_qty,'.TBL_VENDOR_PO_MASTER.'.po_number,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_BILL_OF_MATERIAL_ITEM.'.vendor_actual_recived_qty as recived_qty,'.TBL_FINISHED_GOODS.'.net_weight as netw,'.TBL_FINISHED_GOODS.'.hsn_code as hsncode');
+        $this->db->join(TBL_BILL_OF_MATERIAL, TBL_BILL_OF_MATERIAL.'.id = '.TBL_BILL_OF_MATERIAL_ITEM.'.bom_id');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_BILL_OF_MATERIAL.'.vendor_po_number');
+        $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id = '.TBL_VENDOR_PO_MASTER.'.id');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
+        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_BILL_OF_MATERIAL_ITEM.'.part_number');
+        $this->db->order_by(TBL_BILL_OF_MATERIAL_ITEM.'.id','DESC');
+        $query_1 = $this->db->get(TBL_BILL_OF_MATERIAL_ITEM);
+        $fetch_result_1 = $query_1->result_array();
 
 
+        $this->db->select('"" as supplier_name,"" as supplier_po_number,"" as type_of_raw_material,"" as HSN_code,"" as sent_qty,'.TBL_VENDOR_PO_MASTER.'.po_number,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.vendor_received_qty as recived_qty,'.TBL_FINISHED_GOODS.'.net_weight as netw,'.TBL_FINISHED_GOODS.'.hsn_code as hsncode');
+        $this->db->join(TBL_BILL_OF_MATERIAL_VENDOR, TBL_BILL_OF_MATERIAL_VENDOR.'.id  = '.TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.vendor_bill_of_material_id');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_BILL_OF_MATERIAL_VENDOR.'.vendor_po_number');
+        $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id = '.TBL_VENDOR_PO_MASTER.'.id');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.part_number_id');
+        $this->db->order_by(TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.id','DESC');
+        $query_2 = $this->db->get(TBL_BILL_OF_MATERIAL_VENDOR_ITEM);
+        $fetch_result_2 = $query_2->result_array();
 
-            return 10;
+        $mergedData = array_merge($fetch_result_1, $fetch_result_2);
 
-            
+        $search = $this->input->post('search')['value'];
+             if (!empty($search)) {
+                    $mergedData = array_filter($mergedData, function($item) use ($search) {
+                        // Search across multiple columns (example: 'name', 'age')
+                        return stripos($item['table_id'], $search) !== false 
+                               || stripos($item['supplier_name'], $search) !== false
+                               || stripos($item['supplier_po_number'], $search) !== false
+                               || stripos($item['type_of_raw_material'], $search) !== false
+                               || stripos($item['HSN_code'], $search) !== false
+                               || stripos($item['sent_qty'], $search) !== false
+                               || stripos($item['po_number'], $search) !== false
+                               || stripos($item['recived_qty'], $search) !== false
+                               || stripos($item['netw'], $search) !== false
+                               || stripos($item['hsncode'], $search) !== false;
+                               
+                });
+            }
+
+
+        // Get the total count before pagination
+        $totalData = count($mergedData);
+
+        // // Apply ordering
+        // $orderColumn = $this->input->post('order')[0]['column'];
+        // $orderDirection = $this->input->post('order')[0]['dir'];
+        // usort($mergedData, function ($a, $b) use ($orderColumn, $orderDirection) {
+        //     return ($orderDirection == 'asc') ? strcmp($a[$orderColumn], $b[$orderColumn]) : strcmp($b[$orderColumn], $a[$orderColumn]);
+        // });
+        
+        // // Pagination (limit and offset)
+        // $limit = $this->input->post('length');
+        // $offset = $this->input->post('start');
+        // $pagedData = array_slice($mergedData, $offset, $limit);
+
+        return count($mergedData);
 
     }
 
@@ -19019,14 +19073,22 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $length = $params['length'];
         //$search = $params['search']['value'];
 
-        $this->db->select(TBL_BILL_OF_MATERIAL.'.supplier_name,'.TBL_BILL_OF_MATERIAL.'.supplier_po_number');
+        $this->db->select(TBL_BILL_OF_MATERIAL.'.supplier_name,'.TBL_BILL_OF_MATERIAL.'.supplier_po_number,'.TBL_RAWMATERIAL.'.type_of_raw_material,'.TBL_RAWMATERIAL.'.HSN_code,"" as sent_qty,'.TBL_VENDOR_PO_MASTER.'.po_number,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_BILL_OF_MATERIAL_ITEM.'.vendor_actual_recived_qty as recived_qty,'.TBL_FINISHED_GOODS.'.net_weight as netw,'.TBL_FINISHED_GOODS.'.hsn_code as hsncode');
         $this->db->join(TBL_BILL_OF_MATERIAL, TBL_BILL_OF_MATERIAL.'.id = '.TBL_BILL_OF_MATERIAL_ITEM.'.bom_id');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_BILL_OF_MATERIAL.'.vendor_po_number');
+        $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id = '.TBL_VENDOR_PO_MASTER.'.id');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
+        $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_BILL_OF_MATERIAL_ITEM.'.part_number');
         $this->db->order_by(TBL_BILL_OF_MATERIAL_ITEM.'.id','DESC');
         $query_1 = $this->db->get(TBL_BILL_OF_MATERIAL_ITEM);
         $fetch_result_1 = $query_1->result_array();
 
 
-        $this->db->select('"" as supplier_name,"" as supplier_po_number');
+        $this->db->select('"" as supplier_name,"" as supplier_po_number,"" as type_of_raw_material,"" as HSN_code,"" as sent_qty,'.TBL_VENDOR_PO_MASTER.'.po_number,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.vendor_received_qty as recived_qty,'.TBL_FINISHED_GOODS.'.net_weight as netw,'.TBL_FINISHED_GOODS.'.hsn_code as hsncode');
+        $this->db->join(TBL_BILL_OF_MATERIAL_VENDOR, TBL_BILL_OF_MATERIAL_VENDOR.'.id  = '.TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.vendor_bill_of_material_id');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_BILL_OF_MATERIAL_VENDOR.'.vendor_po_number');
+        $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id = '.TBL_VENDOR_PO_MASTER.'.id');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.part_number_id');
         $this->db->order_by(TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.id','DESC');
         $query_2 = $this->db->get(TBL_BILL_OF_MATERIAL_VENDOR_ITEM);
         $fetch_result_2 = $query_2->result_array();
@@ -19037,8 +19099,16 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
              if (!empty($search)) {
                     $mergedData = array_filter($mergedData, function($item) use ($search) {
                         // Search across multiple columns (example: 'name', 'age')
-                        return stripos($item['table_id'], $search) !== false ||  // Search in 'name'
-                               stripos($item['supplier_name'], $search) !== false;    // Search in 'age'
+                        return stripos($item['table_id'], $search) !== false 
+                                    || stripos($item['supplier_name'], $search) !== false
+                                    || stripos($item['supplier_po_number'], $search) !== false
+                                    || stripos($item['type_of_raw_material'], $search) !== false
+                                    || stripos($item['HSN_code'], $search) !== false
+                                    || stripos($item['sent_qty'], $search) !== false
+                                    || stripos($item['po_number'], $search) !== false
+                                    || stripos($item['recived_qty'], $search) !== false
+                                    || stripos($item['netw'], $search) !== false
+                                    || stripos($item['hsncode'], $search) !== false;
                 });
             }
 
