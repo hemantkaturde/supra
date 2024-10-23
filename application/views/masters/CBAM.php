@@ -66,7 +66,7 @@
 
                             <div class="panel-body">
                                 <table width="100%" class="table table-striped table-bordered table-hover"
-                                    id="view_scrap_calculation_report">
+                                    id="view_CBAM_calculation_report">
                                     <thead>
                                         <tr style="background-color:#3c8dbc !important;color:#fff">
                                             <th>Supplier Name</th>

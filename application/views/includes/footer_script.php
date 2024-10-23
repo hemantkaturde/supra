@@ -23768,7 +23768,7 @@
 	<script type="text/javascript">
 
             $(document).ready(function() {
-			    var dt = $('#view_scrap_calculation_report').DataTable({
+			    var dt = $('#view_CBAM_calculation_report').DataTable({
 					"columnDefs": [ 
 						{ className: "details-control", "targets": [ 0 ] },
 						{ "width": "10%", "targets": 0 },
