@@ -19145,9 +19145,9 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
        
         // $this->db->join(TBL_SUPPLIER_PO_CONFIRMATION_ITEM.' as b', 'b.part_number_id = '.TBL_BILL_OF_MATERIAL_ITEM.'.part_number');
 
-        // if($vendor_name!='NA'){
-        //     $this->db->where(TBL_VENDOR_PO_MASTER.'.vendor_name', $vendor_name);
-        // }        
+        if($vendor_name!='NA'){
+            $this->db->where(TBL_VENDOR_PO_MASTER.'.vendor_name', $vendor_name);
+        }        
 
         // if($from_date!='NA'){
         //     $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_date >=", $from_date);
