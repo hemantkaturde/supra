@@ -19174,7 +19174,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     public function export_to_excel_cbam_report($vendor_name,$from_date,$to_date){
 
-        $this->db->select(TBL_BILL_OF_MATERIAL.'.supplier_name,'.TBL_BILL_OF_MATERIAL.'.supplier_po_number,'.TBL_SUPPLIER_PO_MASTER.'.date,'.TBL_RAWMATERIAL.'.type_of_raw_material,'.TBL_FINISHED_GOODS.'.hsn_code as HSN_code,'.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.sent_qty as sent_qty,'.TBL_VENDOR_PO_MASTER.'.po_number,'.TBL_VENDOR.'.vendor_name,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_BILL_OF_MATERIAL_ITEM.'.vendor_actual_recived_qty as recived_qty,'.TBL_FINISHED_GOODS.'.net_weight as netw,'.TBL_FINISHED_GOODS.'.hsn_code as hsncode');
+        $this->db->select(TBL_BILL_OF_MATERIAL.'.supplier_name,'.TBL_BILL_OF_MATERIAL.'.supplier_po_number,'.TBL_SUPPLIER_PO_MASTER.'.date,'.TBL_RAWMATERIAL.'.type_of_raw_material,'.TBL_FINISHED_GOODS.'.hsn_code as HSN_code,'.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.sent_qty as sent_qty,'.TBL_VENDOR_PO_MASTER.'.po_number,'.TBL_VENDOR.'.vendor_name,'.TBL_VENDOR_PO_MASTER.'.date as vendor_po_date,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_BILL_OF_MATERIAL_ITEM.'.vendor_actual_recived_qty as recived_qty,'.TBL_FINISHED_GOODS.'.net_weight as netw,'.TBL_FINISHED_GOODS.'.hsn_code as hsncode');
         $this->db->join(TBL_BILL_OF_MATERIAL, TBL_BILL_OF_MATERIAL.'.id = '.TBL_BILL_OF_MATERIAL_ITEM.'.bom_id');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_BILL_OF_MATERIAL.'.vendor_po_number');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_VENDOR_PO_MASTER.'.vendor_name');
@@ -19206,7 +19206,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $fetch_result_1 = $query_1->result_array();
 
 
-        $this->db->select('"" as supplier_name,"" as supplier_po_number,"" as date,"" as type_of_raw_material,"" as HSN_code,"" as sent_qty,'.TBL_VENDOR_PO_MASTER.'.po_number,'.TBL_VENDOR.'.vendor_name,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.vendor_received_qty as recived_qty,'.TBL_FINISHED_GOODS.'.net_weight as netw,'.TBL_FINISHED_GOODS.'.hsn_code as hsncode');
+        $this->db->select('"" as supplier_name,"" as supplier_po_number,"" as date,"" as type_of_raw_material,"" as HSN_code,"" as sent_qty,'.TBL_VENDOR_PO_MASTER.'.po_number,'.TBL_VENDOR.'.vendor_name,'.TBL_VENDOR_PO_MASTER.'.date as vendor_po_date,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.vendor_received_qty as recived_qty,'.TBL_FINISHED_GOODS.'.net_weight as netw,'.TBL_FINISHED_GOODS.'.hsn_code as hsncode');
         $this->db->join(TBL_BILL_OF_MATERIAL_VENDOR, TBL_BILL_OF_MATERIAL_VENDOR.'.id  = '.TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.vendor_bill_of_material_id');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_BILL_OF_MATERIAL_VENDOR.'.vendor_po_number');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_VENDOR_PO_MASTER.'.vendor_name');

@@ -22026,10 +22026,11 @@ public function export_to_excel_cbam_report($vendor_name,$from_date,$to_date) {
         $objPHPExcel->getActiveSheet()->SetCellValue('F1', 'Raw Material sent Qty (in Kgs)');
         $objPHPExcel->getActiveSheet()->SetCellValue('G1', 'Vendor PO NO');
         $objPHPExcel->getActiveSheet()->SetCellValue('H1', 'Vendor Name');  
-        $objPHPExcel->getActiveSheet()->SetCellValue('I1', 'FG Part No.');  
-        $objPHPExcel->getActiveSheet()->SetCellValue('J1', 'FG Received Qty (in Pcs)');  
-        $objPHPExcel->getActiveSheet()->SetCellValue('K1', 'FG Net Weight (in Kgs)');  
-        $objPHPExcel->getActiveSheet()->SetCellValue('L1', 'FG HSN Code');  
+        $objPHPExcel->getActiveSheet()->SetCellValue('I1', 'Vendor PO Name');  
+        $objPHPExcel->getActiveSheet()->SetCellValue('J1', 'FG Part No.');  
+        $objPHPExcel->getActiveSheet()->SetCellValue('K1', 'FG Received Qty (in Pcs)');  
+        $objPHPExcel->getActiveSheet()->SetCellValue('L1', 'FG Net Weight (in Kgs)');  
+        $objPHPExcel->getActiveSheet()->SetCellValue('M1', 'FG HSN Code');  
         
         // set Row
         $rowCount = 2;
@@ -22050,23 +22051,24 @@ public function export_to_excel_cbam_report($vendor_name,$from_date,$to_date) {
             $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['sent_qty']);
             $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['po_number']);
             $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $element['vendor_name']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, $element['part_number']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('J' . $rowCount, $element['recived_qty']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, $element['netw']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('L' . $rowCount, $element['hsncode']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, $element['vendor_po_date']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('J' . $rowCount, $element['part_number']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, $element['recived_qty']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('L' . $rowCount, $element['netw']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('M' . $rowCount, $element['hsncode']);
             $rowCount++;
         }
 
-        foreach(range('A','L') as $columnID) {
+        foreach(range('A','M') as $columnID) {
             $objPHPExcel->getActiveSheet()->getColumnDimension($columnID)->setAutoSize(true);
         }
         /*********************Autoresize column width depending upon contents END***********************/
         
-        $objPHPExcel->getActiveSheet()->getStyle('A1:L1')->getFont()->setBold(true); //Make heading font bold
+        $objPHPExcel->getActiveSheet()->getStyle('A1:M1')->getFont()->setBold(true); //Make heading font bold
         
         /*********************Add color to heading START**********************/
         $objPHPExcel->getActiveSheet()
-                    ->getStyle('A1:L1')
+                    ->getStyle('A1:M1')
                     ->getFill()
                     ->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
                     ->getStartColor()
