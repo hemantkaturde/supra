@@ -77,6 +77,7 @@
                                             <th>Raw Material sent Qty (in Kgs)</th>
                                             <th>Vendor PO NO.</th>
                                             <th>Vendor Name</th>
+                                            <th>Vendor PO Date</th>
                                             <th>FG Part No.</th>
                                             <th>FG Received Qty (in Pcs)</th>
                                             <th>FG Net Weight (in Kgs)</th>

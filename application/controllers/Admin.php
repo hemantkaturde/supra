@@ -22083,4 +22083,14 @@ public function export_to_excel_cbam_report($vendor_name,$from_date,$to_date) {
 
 }
 
+
+public function hourly_inspection_report(){
+    $process = 'Hourly Inspection Report';
+    $processFunction = 'Admin/hourly_inspection_report';
+    $this->logrecord($process,$processFunction);
+    $this->global['pageTitle'] = 'Hourly Inspection Report';
+    $data['vendorList']= $this->admin_model->fetchALLvendorList();
+    $this->loadViews("masters/hourly_inspection_report", $this->global, $data, NULL);
+}
+
 }
