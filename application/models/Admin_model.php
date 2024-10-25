@@ -19021,11 +19021,11 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         }        
 
         if($from_date!='NA'){
-            $this->db->where(TBL_SUPPLIER_PO_MASTER.".date >=", $from_date);
+            $this->db->where(TBL_VENDOR_PO_MASTER.".date >=", $from_date);
         }
 
         if($to_date!='NA'){
-            $this->db->where(TBL_SUPPLIER_PO_MASTER.".date <=", $to_date);
+            $this->db->where(TBL_VENDOR_PO_MASTER.".date <=", $to_date);
         }
 
 
@@ -19048,11 +19048,11 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         }        
 
         if($from_date!='NA'){
-            $this->db->where(TBL_SUPPLIER_PO_MASTER.".date >=", $from_date);
+            $this->db->where(TBL_VENDOR_PO_MASTER.".date >=", $from_date);
         }
 
         if($to_date!='NA'){
-            $this->db->where(TBL_SUPPLIER_PO_MASTER.".date <=", $to_date);
+            $this->db->where(TBL_VENDOR_PO_MASTER.".date <=", $to_date);
         }
 
         $this->db->order_by(TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.id','DESC');
@@ -19125,13 +19125,12 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         }        
 
         if($from_date!='NA'){
-            $this->db->where(TBL_SUPPLIER_PO_MASTER.".date >=", $from_date);
+            $this->db->where(TBL_VENDOR_PO_MASTER.".date >=", $from_date);
         }
 
         if($to_date!='NA'){
-            $this->db->where(TBL_SUPPLIER_PO_MASTER.".date <=", $to_date);
+            $this->db->where(TBL_VENDOR_PO_MASTER.".date <=", $to_date);
         }
-
 
         $this->db->order_by(TBL_BILL_OF_MATERIAL_ITEM.'.id','DESC');
         $query_1 = $this->db->get(TBL_BILL_OF_MATERIAL_ITEM);
@@ -19152,11 +19151,11 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         }        
 
         if($from_date!='NA'){
-            $this->db->where(TBL_SUPPLIER_PO_MASTER.".date >=", $from_date);
+            $this->db->where(TBL_VENDOR_PO_MASTER.".date >=", $from_date);
         }
 
         if($to_date!='NA'){
-            $this->db->where(TBL_SUPPLIER_PO_MASTER.".date <=", $to_date);
+            $this->db->where(TBL_VENDOR_PO_MASTER.".date <=", $to_date);
         }
 
         $this->db->order_by(TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.id','DESC');
