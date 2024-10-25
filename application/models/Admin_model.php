@@ -19030,7 +19030,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
 
         $this->db->order_by(TBL_BILL_OF_MATERIAL_ITEM.'.id','DESC');
-        $this->db->group_by(TBL_BILL_OF_MATERIAL_ITEM.'.id',TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.part_number_id');
+        $this->db->group_by(TBL_BILL_OF_MATERIAL_ITEM.'.id');
         $query_1 = $this->db->get(TBL_BILL_OF_MATERIAL_ITEM);
         $fetch_result_1 = $query_1->result_array();
 
@@ -19137,7 +19137,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         }
 
         $this->db->order_by(TBL_BILL_OF_MATERIAL_ITEM.'.id','DESC');
-        $this->db->group_by(TBL_BILL_OF_MATERIAL_ITEM.'.id',TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.part_number_id');
+        $this->db->group_by(TBL_BILL_OF_MATERIAL_ITEM.'.id');
         $query_1 = $this->db->get(TBL_BILL_OF_MATERIAL_ITEM);
         $fetch_result_1 = $query_1->result_array();
 
