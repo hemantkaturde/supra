@@ -57,7 +57,7 @@
                                         <div style="margin-top:22px">
                                             <!-- <input type="button"  class="btn btn-primary" value="Search" id="search" name="search" /> -->
                                             <input type="button" class="btn btn-primary" value="Export To Excel"
-                                                id="export_to_excel" name="export_to_excel" />
+                                                id="export_to_excel_cbam_report" name="export_to_excel_cbam_report" />
                                         </div>
                                     </div>
                                 </div>
@@ -71,10 +71,12 @@
                                         <tr style="background-color:#3c8dbc !important;color:#fff">
                                             <th>Supplier Name</th>
                                             <th>Supplier PO No</th>
+                                            <th>Supplier PO Date</th>
                                             <th>Raw Material Type</th>
                                             <th>Raw Material HSN Code</th>
                                             <th>Raw Material sent Qty (in Kgs)</th>
                                             <th>Vendor PO NO.</th>
+                                            <th>Vendor Name</th>
                                             <th>FG Part No.</th>
                                             <th>FG Received Qty (in Pcs)</th>
                                             <th>FG Net Weight (in Kgs)</th>

@@ -21981,11 +21981,11 @@ public function cbam(){
     $this->loadViews("masters/CBAM", $this->global, $data, NULL);
 }
 
-public function fetchcbamreport(){
+public function fetchcbamreport($from_date,$to_date,$vendor_name){
 
     $params = $_REQUEST;
-    $totalRecords = $this->admin_model->gettcbamreportcount($params); 
-    $queryRecords = $this->admin_model->gettcbamreportdata($params); 
+    $totalRecords = $this->admin_model->gettcbamreportcount($params,$from_date,$to_date,$vendor_name); 
+    $queryRecords = $this->admin_model->gettcbamreportdata($params,$from_date,$to_date,$vendor_name); 
 
     $data = array();
     foreach ($queryRecords as $key => $value)
@@ -22004,6 +22004,82 @@ public function fetchcbamreport(){
         "data"            => $data   // total data array
         );
     echo json_encode($json_data);
+
+}
+
+
+public function export_to_excel_cbam_report($vendor_name,$from_date,$to_date) {
+
+        // create file name
+        $fileName = 'CBAM Report -'.date('d-m-Y').'.xlsx';  
+        // load excel library
+        $empInfo = $this->admin_model->export_to_excel_cbam_report($vendor_name,$from_date,$to_date);
+
+        $objPHPExcel = new PHPExcel();
+        $objPHPExcel->setActiveSheetIndex(0);
+        // set Header
+        $objPHPExcel->getActiveSheet()->SetCellValue('A1', 'Supplier Name');
+        $objPHPExcel->getActiveSheet()->SetCellValue('B1', 'Supplier PO No');
+        $objPHPExcel->getActiveSheet()->SetCellValue('C1', 'Supplier PO Date');
+        $objPHPExcel->getActiveSheet()->SetCellValue('D1', 'Raw Material Type'); 
+        $objPHPExcel->getActiveSheet()->SetCellValue('E1', 'Raw Material HSN Code');
+        $objPHPExcel->getActiveSheet()->SetCellValue('F1', 'Raw Material sent Qty (in Kgs)');
+        $objPHPExcel->getActiveSheet()->SetCellValue('G1', 'Vendor PO NO');
+        $objPHPExcel->getActiveSheet()->SetCellValue('H1', 'Vendor Name');  
+        $objPHPExcel->getActiveSheet()->SetCellValue('I1', 'FG Part No.');  
+        $objPHPExcel->getActiveSheet()->SetCellValue('J1', 'FG Received Qty (in Pcs)');  
+        $objPHPExcel->getActiveSheet()->SetCellValue('K1', 'FG Net Weight (in Kgs)');  
+        $objPHPExcel->getActiveSheet()->SetCellValue('L1', 'FG HSN Code');  
+        
+        // set Row
+        $rowCount = 2;
+        foreach ($empInfo as $element) {
+
+            // if($element['buyer_invoice_date']!='0000-00-00'){
+            //     $buyer_invoice_date =date('d-m-Y',strtotime($element['buyer_invoice_date']));
+            // }else{
+            //     $buyer_invoice_date='';
+            // }
+
+
+            $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $element['supplier_name']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $element['supplier_po_number']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $element['date']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['type_of_raw_material']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['HSN_code']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['sent_qty']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['po_number']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $element['vendor_name']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, $element['part_number']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('J' . $rowCount, $element['recived_qty']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, $element['netw']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('L' . $rowCount, $element['hsncode']);
+            $rowCount++;
+        }
+
+        foreach(range('A','L') as $columnID) {
+            $objPHPExcel->getActiveSheet()->getColumnDimension($columnID)->setAutoSize(true);
+        }
+        /*********************Autoresize column width depending upon contents END***********************/
+        
+        $objPHPExcel->getActiveSheet()->getStyle('A1:L1')->getFont()->setBold(true); //Make heading font bold
+        
+        /*********************Add color to heading START**********************/
+        $objPHPExcel->getActiveSheet()
+                    ->getStyle('A1:L1')
+                    ->getFill()
+                    ->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
+                    ->getStartColor()
+                    ->setARGB('99ff99');
+
+
+        $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
+        
+        header('Content-Type: application/vnd.ms-excel');
+        header("Content-Disposition: attachment;Filename=$fileName.xls");
+        header('Cache-Control: max-age=0');
+        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+        $objWriter->save('php://output');
 
 }
 
