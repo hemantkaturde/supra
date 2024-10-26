@@ -19113,6 +19113,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->select(TBL_BILL_OF_MATERIAL.'.supplier_name,'.TBL_BILL_OF_MATERIAL.'.supplier_po_number,'.TBL_SUPPLIER_PO_MASTER.'.date,'.TBL_RAWMATERIAL.'.type_of_raw_material,'.TBL_RAWMATERIAL.'.HSN_code,'.TBL_BILL_OF_MATERIAL_ITEM.'.rm_actual_aty as sent_qty,'.TBL_VENDOR_PO_MASTER.'.po_number,'.TBL_VENDOR.'.vendor_name,'.TBL_VENDOR_PO_MASTER.'.date as vendor_po_date,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_BILL_OF_MATERIAL_ITEM.'.vendor_actual_recived_qty as recived_qty,'.TBL_FINISHED_GOODS.'.net_weight as netw,'.TBL_FINISHED_GOODS.'.hsn_code as hsncode');
         //$this->db->select(TBL_BILL_OF_MATERIAL.'.supplier_name,'.TBL_BILL_OF_MATERIAL.'.supplier_po_number,'.TBL_SUPPLIER_PO_MASTER.'.date,'.TBL_RAWMATERIAL.'.type_of_raw_material');
         $this->db->join(TBL_BILL_OF_MATERIAL, TBL_BILL_OF_MATERIAL.'.id = '.TBL_BILL_OF_MATERIAL_ITEM.'.bom_id');
+        
+        
         $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.po_number = '.TBL_BILL_OF_MATERIAL.'.supplier_po_number');
         $this->db->join(TBL_SUPPLIER_PO_MASTER_ITEM, TBL_SUPPLIER_PO_MASTER_ITEM.'.supplier_po_id = '.TBL_SUPPLIER_PO_MASTER.'.id');
 
@@ -19141,7 +19143,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         }
 
         $this->db->order_by(TBL_BILL_OF_MATERIAL_ITEM.'.id','DESC');
-        $this->db->group_by( array(TBL_BILL_OF_MATERIAL_ITEM.'.part_number'));
+        $this->db->group_by( array(TBL_BILL_OF_MATERIAL_ITEM.'.id'));
 
         $query_1 = $this->db->get(TBL_BILL_OF_MATERIAL_ITEM);
         $fetch_result_1 = $query_1->result_array();
