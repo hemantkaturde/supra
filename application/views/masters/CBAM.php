@@ -71,7 +71,6 @@
                                         <tr style="background-color:#3c8dbc !important;color:#fff">
                                             <th>Supplier Name</th>
                                             <th>Supplier PO No</th>
-                                            <th>Supplier PO Date</th>
                                             <th>Raw Material Type</th>
                                             <th>Raw Material HSN Code</th>
                                             <th>Raw Material sent Qty (in Kgs)</th>
