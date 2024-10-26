@@ -19121,6 +19121,9 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id = '.TBL_VENDOR_PO_MASTER.'.id');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
 
+        $this->db->join(TBL_FINISHED_GOODS.' as a', 'a.part_number = '.TBL_RAWMATERIAL.'.part_number');
+
+
 
         if($vendor_name!='NA'){
             $this->db->where(TBL_VENDOR_PO_MASTER.'.vendor_name', $vendor_name);
