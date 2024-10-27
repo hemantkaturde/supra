@@ -22035,11 +22035,11 @@ public function export_to_excel_cbam_report($vendor_name,$from_date,$to_date) {
         $rowCount = 2;
         foreach ($empInfo as $element) {
 
-            // if($element['buyer_invoice_date']!='0000-00-00'){
-            //     $buyer_invoice_date =date('d-m-Y',strtotime($element['buyer_invoice_date']));
-            // }else{
-            //     $buyer_invoice_date='';
-            // }
+            if($element['vendor_po_date']){
+                $vendor_po_date =date('d-m-Y',strtotime($element['vendor_po_date']));
+            }else{
+                $vendor_po_date='';
+            }
 
 
             $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $element['supplier_name']);
@@ -22049,7 +22049,7 @@ public function export_to_excel_cbam_report($vendor_name,$from_date,$to_date) {
             $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['sent_qty']);
             $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['po_number']);
             $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['vendor_name']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $element['vendor_po_date']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $vendor_po_date);
             $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, $element['part_number']);
             $objPHPExcel->getActiveSheet()->SetCellValue('J' . $rowCount, $element['recived_qty']);
             $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, $element['netw']);
