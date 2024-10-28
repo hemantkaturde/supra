@@ -44,7 +44,7 @@ class User extends BaseController
 
 
         if( $this->session->userdata('roleText')=='Team'){
-            $this->loadViews("hourly_inspection_report", $this->global, $data , NULL);
+            $this->loadViews("masters/hourly_inspection_report", $this->global, $data , NULL);
         }else{
             $this->loadViews("dashboard", $this->global, $data , NULL);
 
