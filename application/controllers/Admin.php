@@ -77,6 +77,8 @@ class Admin extends BaseController
     {
             $data['roles'] = $this->user_model->getUserRoles();
 
+            $data['team'] = $this->admin_model->getAllteammaster();
+
             $this->global['pageTitle'] = 'Admin : Add User';
 
             $this->loadViews("addNew", $this->global, $data, NULL);
@@ -95,6 +97,7 @@ class Admin extends BaseController
             $this->form_validation->set_rules('password','Password','required|max_length[20]');
             $this->form_validation->set_rules('cpassword','Confirm Password','trim|required|matches[password]|max_length[20]');
             $this->form_validation->set_rules('role','Role','trim|required|numeric');
+            $this->form_validation->set_rules('team','team','trim');
             $this->form_validation->set_rules('mobile','Mobile Number','required|min_length[10]');
             
             if($this->form_validation->run() == FALSE)
@@ -107,9 +110,10 @@ class Admin extends BaseController
                 $email = $this->security->xss_clean($this->input->post('email'));
                 $password = $this->input->post('password');
                 $roleId = $this->input->post('role');
+                $team_id = $this->input->post('team');
                 $mobile = $this->security->xss_clean($this->input->post('mobile'));
                 
-                $userInfo = array('email'=>$email, 'password'=>getHashedPassword($password), 'roleId'=>$roleId, 'name'=> $name,
+                $userInfo = array('email'=>$email, 'password'=>getHashedPassword($password), 'roleId'=>$roleId,'team_id'=>$team_id, 'name'=> $name,
                                     'mobile'=>$mobile, 'createdBy'=>$this->vendorId, 'createdDtm'=>date('Y-m-d H:i:s'));
                                     
                 $result = $this->user_model->addNewUser($userInfo);
@@ -144,6 +148,8 @@ class Admin extends BaseController
             
             $data['roles'] = $this->user_model->getUserRoles();
             $data['userInfo'] = $this->user_model->getUserInfo($userId);
+            $data['team'] = $this->admin_model->getAllteammaster();
+
 
             $this->global['pageTitle'] = 'Admin : Edit User';
             
@@ -165,6 +171,7 @@ class Admin extends BaseController
             $this->form_validation->set_rules('password','Password','matches[cpassword]|max_length[20]');
             $this->form_validation->set_rules('cpassword','Confirm Password','matches[password]|max_length[20]');
             $this->form_validation->set_rules('role','Role','trim|required|numeric');
+            $this->form_validation->set_rules('team','team','trim');
             $this->form_validation->set_rules('mobile','Mobile Number','required|min_length[10]');
             
             if($this->form_validation->run() == FALSE)
@@ -177,18 +184,19 @@ class Admin extends BaseController
                 $email = $this->security->xss_clean($this->input->post('email'));
                 $password = $this->input->post('password');
                 $roleId = $this->input->post('role');
+                $team_id = $this->input->post('team');
                 $mobile = $this->security->xss_clean($this->input->post('mobile'));
                 
                 $userInfo = array();
                 
                 if(empty($password))
                 {
-                    $userInfo = array('email'=>$email, 'roleId'=>$roleId, 'name'=>$name,
+                    $userInfo = array('email'=>$email, 'roleId'=>$roleId, 'name'=>$name,'team_id'=>$team_id,
                                     'mobile'=>$mobile, 'status'=>0, 'updatedBy'=>$this->vendorId, 'updatedDtm'=>date('Y-m-d H:i:s'));
                 }
                 else
                 {
-                    $userInfo = array('email'=>$email, 'password'=>getHashedPassword($password), 'roleId'=>$roleId,
+                    $userInfo = array('email'=>$email, 'password'=>getHashedPassword($password), 'roleId'=>$roleId, 'team_id'=>$team_id,
                         'name'=>ucwords($name), 'mobile'=>$mobile,'status'=>0, 'updatedBy'=>$this->vendorId, 
                         'updatedDtm'=>date('Y-m-d H:i:s'));
                 }

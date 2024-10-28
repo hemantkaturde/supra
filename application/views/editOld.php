@@ -4,7 +4,7 @@ $userId = '';
 $name = '';
 $email = '';
 $mobile = '';
-$roleId = '';
+$team_id = '';
 
 if(!empty($userInfo))
 {
@@ -15,6 +15,7 @@ if(!empty($userInfo))
         $email = $uf->email;
         $mobile = $uf->mobile;
         $roleId = $uf->roleId;
+        $team_id = $uf->team_id;
     }
 }
 
@@ -113,6 +114,35 @@ i verify
                                         </div>
                                     </div>
                                 </div>
+
+
+                                
+                            <div class="row" id="row_team" style="display:none">
+                            
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="role">Team</label>
+                                    <div>
+                                    <select class="form-control required"  style="color:black !important" id="team" name="team">
+                                        <option value="0">Please select Team</option>
+                                        <?php
+                                        if(!empty($team))
+                                        {
+                                            foreach ($team as $key => $teammaster)
+                                            {
+                                                ?>
+                                            <option value="<?php echo $teammaster['id']  ?>"  <?php if($teammaster['id'] == $team_id) {echo "selected=selected";} ?>>
+                                                <?php echo $teammaster['team_name'] ?>
+                                            </option>
+                                            <?php
+                                            }
+                                        }
+                                        ?>
+                                    </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                             </div>
                             <!-- /.box-body -->
 

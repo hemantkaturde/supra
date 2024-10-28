@@ -23942,3 +23942,31 @@
 
     </script>
 <?php } ?>
+
+
+<?php if($pageTitle=='Admin : Add User' || $pageTitle=='Admin : Edit User'){?>
+	<script type="text/javascript">
+           
+			$(document).ready(function() {
+				var role = $('#role').val();
+				
+				if(role==7){
+					$('#row_team').show(); 
+				}else{
+					$('#row_team').hide(); 
+				}
+			});
+
+		 
+		   $(document).on('change','#role',function(e){  
+				var role = $('#role').val();
+               
+				if(role==7){
+					$('#row_team').show(); 
+				}else{
+					$('#row_team').hide(); 
+				}
+			});
+
+    </script>
+<?php } ?>

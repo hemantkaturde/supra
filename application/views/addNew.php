@@ -68,6 +68,7 @@ Edit</small>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="role">Authority</label>
+                                        <div>
                                         <select class="form-control required"  style="color:black !important" id="role" name="role">
                                             <option value="0">Please select Authority</option>
                                             <?php
@@ -84,6 +85,35 @@ Edit</small>
                                             }
                                             ?>
                                         </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row" id="row_team" style="display:none">
+                            
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="role">Team</label>
+                                        <div>
+                                        <select class="form-control required"  style="color:black !important" id="team" name="team">
+                                            <option value="0">Please select Team</option>
+                                            <?php
+                                            if(!empty($team))
+                                            {
+                                                foreach ($team as $key => $teammaster)
+                                                {
+                                                    ?>
+                                                <option value="<?php echo $teammaster['id']  ?>">
+                                                    <?php echo $teammaster['team_name'] ?>
+                                                </option>
+                                                <?php
+                                                }
+                                            }
+                                            ?>
+                                        </select>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
