@@ -61,7 +61,7 @@ class Admin extends BaseController
             
             // $data['userRecords'] = $this->user_model->userListing($searchText, $returns["page"], $returns["segment"]);
 
-            $data['userRecords'] = 0;
+            $data['userRecords'] = 50;
 
             
             $process = 'User Listing';
