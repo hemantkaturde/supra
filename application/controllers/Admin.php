@@ -59,10 +59,7 @@ class Admin extends BaseController
 
 			$returns = $this->paginationCompress ( "userListing/", $count, 10 );
             
-            // $data['userRecords'] = $this->user_model->userListing($searchText, $returns["page"], $returns["segment"]);
-
-            $data['userRecords'] = 50;
-
+            $data['userRecords'] = $this->user_model->userListing($searchText, $returns["page"], $returns["segment"]);
             
             $process = 'User Listing';
             $processFunction = 'Admin/userListing';
