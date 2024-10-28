@@ -5683,6 +5683,7 @@ class Admin extends BaseController
             //$data['getitemdetails']= $this->admin_model->getitemdetails();
             $data['getAllitemdetails']= $this->admin_model->getAllitemdetails();
             $data['getAllitemdetailsforfilter']= $this->admin_model->getAllitemdetailsforfilter();
+            $data['getAllteammaster']= $this->admin_model->getAllteammaster();
             $this->loadViews("masters/addnewencomingdetails", $this->global, $data, NULL);
 
         }
@@ -5744,6 +5745,7 @@ class Admin extends BaseController
         $data['getAllitemdetails']= $this->admin_model->getAllitemdetailsforedit($id);
         $data['getAllitemdetailsforfilteredit']= $this->admin_model->getAllitemdetailsforfilteredit($id);
         $data['edit_id']= $id;
+        $data['getAllteammaster']= $this->admin_model->getAllteammaster();
         $this->loadViews("masters/editincomingdetails", $this->global, $data, NULL);
 
     }
@@ -5787,6 +5789,8 @@ class Admin extends BaseController
             $this->form_validation->set_rules('units','Units','trim|required');
             $this->form_validation->set_rules('boxex_goni_bundle','Box Goni Bundle','trim|required');
             $this->form_validation->set_rules('lot_no','Lot No','trim|required');
+            $this->form_validation->set_rules('assign_team','Assign Team','trim');
+            $this->form_validation->set_rules('working_hrs_status','Working hrs status','trim');
             $this->form_validation->set_rules('remarks','Remarks','trim');
 
             if($this->form_validation->run() == FALSE)
@@ -5856,6 +5860,8 @@ class Admin extends BaseController
                                 'units' =>    trim($this->input->post('units')),
                                 'boxex_goni_bundle' =>    trim($this->input->post('boxex_goni_bundle')),
                                 'lot_no'=>    trim($this->input->post('lot_no')),
+                                'assign_team' =>    trim($this->input->post('assign_team')),
+                                'working_hrs_status'=>    trim($this->input->post('working_hrs_status')),
                                 'remarks' =>    trim($this->input->post('remarks')),
                                 'pre_vendor_name' =>  trim($this->input->post('pre_vendor_name')),
                                 'pre_vendor_po_number' =>  trim($this->input->post('pre_vendor_po_number')),
@@ -5912,6 +5918,8 @@ class Admin extends BaseController
                                 'units' =>    trim($this->input->post('units')),
                                 'boxex_goni_bundle' =>    trim($this->input->post('boxex_goni_bundle')),
                                 'lot_no'=>    trim($this->input->post('lot_no')),
+                                'assign_team' =>    trim($this->input->post('assign_team')),
+                                'working_hrs_status'=>    trim($this->input->post('working_hrs_status')),
                                 'remarks' =>    trim($this->input->post('remarks')),
                                 'pre_vendor_name' =>  trim($this->input->post('pre_vendor_name')),
                                 'pre_vendor_po_number' =>  trim($this->input->post('pre_vendor_po_number')),

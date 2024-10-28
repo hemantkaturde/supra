@@ -439,6 +439,33 @@
                                                     </div>
 
                                                     <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">Assign Team</label>
+                                                            <div class="col-sm-9">
+                                                                <select class="form-control" name="assign_team"
+                                                                    id="assign_team">
+                                                                    <option st-id="" value="">Select Team </option>
+                                                                    <?php foreach ($getAllteammaster as $key => $value) {?>
+                                                                    <option value="<?php echo $value['id']; ?>">
+                                                                        <?php echo $value['team_name']; ?></option>
+                                                                    <?php } ?>
+                                                                </select>
+                                                                <p class="error assign_team_error"></p>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">Working Hrs Status</label>
+                                                            <div class="col-sm-9">
+                                                                <select class="form-control" name="working_hrs_status"
+                                                                    id="working_hrs_status">
+                                                                    <option st-id="" value="Open">Open</option>
+                                                                    <option st-id="" value="Close">Close</option>
+                                                                </select>
+                                                                <p class="error working_hrs_status_error"></p>
+                                                            </div>
+                                                        </div>
+
+                                                    <div class="form-group row">
                                                         <label class="col-sm-3 col-form-label">Remarks</label>
                                                         <div class="col-sm-9">
                                                             <input type="text" class="form-control"  id="remarks" name="remarks">

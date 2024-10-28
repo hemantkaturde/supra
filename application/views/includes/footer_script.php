@@ -8520,6 +8520,8 @@
 			   var units =   $('#units').val();
 			   var boxex_goni_bundle =   $('#boxex_goni_bundle').val();
 			   var lot_no =   $('#lot_no').val();
+			   var assign_team =   $('#assign_team').val();
+			   var working_hrs_status =   $('#working_hrs_status').val();
 			   var remarks =   $('#remarks').val();
 
 			   var pre_vendor_name =   $('#vendor_name').val();
@@ -8537,7 +8539,7 @@
 				url : "<?php echo base_url();?>saveincomingitem",
 				type: "POST",
 				 //data : formData,
-				 data :{ part_number:part_number,description:description,p_o_qty:p_o_qty,net_weight:net_weight,invoice_no:invoice_no,invoice_date:invoice_date,challan_no:challan_no,challan_date:challan_date,received_date:received_date,invoice_qty:invoice_qty,invoice_qty_in_kgs:invoice_qty_in_kgs,balance_qty:balance_qty,fg_material_gross_weight:fg_material_gross_weight,units:units,boxex_goni_bundle:boxex_goni_bundle,remarks:remarks,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_reported_by:pre_reported_by,pre_report_date:pre_report_date,pre_remark:pre_remark,incomingdetail_editid:incomingdetail_editid,lot_no:lot_no,incoiming_details_item_id:incoiming_details_item_id},
+				 data :{ part_number:part_number,description:description,p_o_qty:p_o_qty,net_weight:net_weight,invoice_no:invoice_no,invoice_date:invoice_date,challan_no:challan_no,challan_date:challan_date,received_date:received_date,invoice_qty:invoice_qty,invoice_qty_in_kgs:invoice_qty_in_kgs,balance_qty:balance_qty,fg_material_gross_weight:fg_material_gross_weight,units:units,boxex_goni_bundle:boxex_goni_bundle,remarks:remarks,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_reported_by:pre_reported_by,pre_report_date:pre_report_date,pre_remark:pre_remark,incomingdetail_editid:incomingdetail_editid,lot_no:lot_no,incoiming_details_item_id:incoiming_details_item_id,assign_team:assign_team,working_hrs_status:working_hrs_status},
 				// method: "POST",
                 // data :{package_id:package_id},
                 cache:false,
@@ -8913,6 +8915,9 @@
 						$('#invoice_qty_in_kgs').val(fetchResponse.invoice_qty_in_kgs);
 						$('#balance_qty').val(fetchResponse.balance_qty);
 						$('#fg_material_gross_weight').val(fetchResponse.fg_material_gross_weight);
+
+						$('#assign_team').val(fetchResponse.assign_team);
+						$('#working_hrs_status').val(fetchResponse.working_hrs_status);
 
 						$('#units').val(fetchResponse.units);
 						$('#boxex_goni_bundle').val(fetchResponse.boxex_goni_bundle);

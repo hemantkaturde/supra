@@ -9657,6 +9657,8 @@ class Admin_model extends CI_Model
     .TBL_INCOMING_DETAILS_ITEM.'.lot_no as lot_no,'
     .TBL_INCOMING_DETAILS_ITEM.'.remarks as remarks,'
     .TBL_INCOMING_DETAILS_ITEM.'.part_number as part_number,'
+    .TBL_INCOMING_DETAILS_ITEM.'.assign_team as assign_team,'
+    .TBL_INCOMING_DETAILS_ITEM.'.working_hrs_status as working_hrs_status,'
 
     // .TBL_FINISHED_GOODS.'.sitting_size,'
     // .TBL_FINISHED_GOODS.'.thickness,'
@@ -19322,6 +19324,15 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $query = $this->db->get(TBL_REJECTION_FORM_REJECTED_ITEM);
         $fetch_result = $query->result_array();
         return  $fetch_result;
+    }
+
+    public function getAllteammaster(){
+   
+        $this->db->select('*');
+        $query = $this->db->get(TBL_TEAM_MASTER);
+        $data = $query->result_array();
+        return $data;
+
     }
 
 }
