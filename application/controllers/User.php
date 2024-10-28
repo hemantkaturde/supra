@@ -42,7 +42,14 @@ class User extends BaseController
         //     redirect('loadChangePass');
         // }
 
-        $this->loadViews("dashboard", $this->global, $data , NULL);
+
+        if( $this->session->userdata('roleText')=='Team'){
+            $this->loadViews("hourly_inspection_report", $this->global, $data , NULL);
+        }else{
+            $this->loadViews("dashboard", $this->global, $data , NULL);
+
+        }
+
     }
 
     /**
