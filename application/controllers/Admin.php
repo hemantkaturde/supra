@@ -1211,7 +1211,7 @@ class Admin extends BaseController
             $save_usp_response = array();
 
             $this->form_validation->set_rules('usp_name','USP Name','trim|required|max_length[128]');
-            $this->form_validation->set_rules('landline','Landline','trim|required|max_length[128]');
+            $this->form_validation->set_rules('landline','Landline','trim');
             $this->form_validation->set_rules('address','Address','trim|required');
             $this->form_validation->set_rules('phone_1','Phone 1','trim|numeric|max_length[50]');
             $this->form_validation->set_rules('contact_person','Contact Person','trim|max_length[50]');
@@ -1294,7 +1294,7 @@ class Admin extends BaseController
             $update_supplier_response = array();
 
             $this->form_validation->set_rules('usp_name','USP Name','trim|required|max_length[128]');
-            $this->form_validation->set_rules('landline','Landline','trim|required|max_length[128]');
+            $this->form_validation->set_rules('landline','Landline','trim');
             $this->form_validation->set_rules('address','Address','trim|required');
             $this->form_validation->set_rules('phone_1','Phone 1','trim|numeric|max_length[50]');
             $this->form_validation->set_rules('contact_person','Contact Person','trim|max_length[50]');
