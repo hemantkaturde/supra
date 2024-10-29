@@ -39,7 +39,7 @@
                                                     <th scope="col">Part Number</th>
                                                     <th scope="col">Buyer PO Part Delivery Date</th>
                                                     <th scope="col">Part Number</th>
-                                                    <th scope="col">Description</th>
+                                                    <th scope="col">Order Qty</th>
                                                     <!-- <th scope="col">Rate</th>
                                                     <th scope="col">Value</th> -->
                                                 </tr>
