@@ -8365,7 +8365,7 @@ class Admin extends BaseController
                             'amount_paid'  =>  trim($this->input->post('amount_paid')),
                             'tds'  =>  trim($this->input->post('tds')),
                             'debit_note_amount'  =>  trim($this->input->post('debit_note_amount')),
-                            'debit_note_no' =>  trim($this->input->post('debit_note_amount')),
+                            'debit_note_no' =>  trim($this->input->post('debit_note_no')),
                             'payment_status' =>  trim($this->input->post('payment_status')),
                             'remark' =>  trim($this->input->post('remark'))
                         );
@@ -8460,7 +8460,7 @@ class Admin extends BaseController
                                 'amount_paid'  =>  trim($this->input->post('amount_paid')),
                                 'tds'  =>  trim($this->input->post('tds')),
                                 'debit_note_amount'  =>  trim($this->input->post('debit_note_amount')),
-                                'debit_note_no' =>  trim($this->input->post('debit_note_amount')),
+                                'debit_note_no' =>  trim($this->input->post('debit_note_no')),
                                 'payment_status' =>  trim($this->input->post('payment_status')),
                                 'remark' =>  trim($this->input->post('remark'))
                             );
