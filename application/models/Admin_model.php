@@ -2384,7 +2384,7 @@ class Admin_model extends CI_Model
               //$this->db->where(TBL_RAWMATERIAL.'.part_number NOT IN (SELECT tbl_rawmaterial.part_number FROM tbl_supplierpo_item join tbl_rawmaterial on tbl_supplierpo_item.part_number_id=tbl_rawmaterial.raw_id where pre_buyer_po_number='.$supplier_po_number.')', NULL, FALSE);
               // $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.part_number_id NOT IN (SELECT part_number_id FROM tbl_supplierpo_item where pre_buyer_po_number='.$supplier_po_number.')', NULL, FALSE);
               $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id',$supplier_po_number);
-              //$this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.item_po_status','from_po');
+              $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.item_po_status','from_po');
 
               $query = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
               $data = $query->result_array();
