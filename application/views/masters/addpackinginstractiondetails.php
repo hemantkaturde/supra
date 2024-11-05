@@ -72,7 +72,7 @@
                                                 <select class="form-control get_buyer_delivery_date get_all_records_for_this_buyer_po" name="part_number" id="part_number">
                                                     <option st-id="" value="">Select Part Number</option>
                                                         <?php foreach ($getbuyeritemdetails as $key => $value) {?>
-                                                                <option value="<?php echo $value['item_details']; ?>"  data_id="<?php echo $value['poitemid']; ?>"><?php echo $value['part_number']; ?></option>
+                                                                <option value="<?php echo $value['item_details']; ?>"  data_id="<?php echo $value['poitemid']; ?>"><?php echo $value['part_number'].'&nbsp&nbsp&nbsp&nbsp-&nbsp&nbsp&nbsp&nbsp&nbsp'.$value['item_po_status']; ?>  </option>
                                                         <?php } ?>
                                                 </select> 
                                             <p class="error part_number_error"></p>
