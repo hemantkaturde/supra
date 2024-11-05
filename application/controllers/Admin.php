@@ -11150,6 +11150,8 @@ public function downlaodsupplierpo($id){
     $getsupplierdeatilsForInvoice = $this->admin_model->getsupplierdeatilsForInvoice($id);
     $getsupplierItemdeatilsForInvoice = $this->admin_model->getsupplierItemdeatilsForInvoice($id);
 
+    $getCompanyAddressdetails = $this->admin_model->getCompanyAddressdetails($id);
+
     if($getsupplierdeatilsForInvoice['quatation_date']!='0000-00-00'){
         $quatation_date =  date('d-m-Y',strtotime($getsupplierdeatilsForInvoice['quatation_date']));
     }else{
@@ -11217,11 +11219,10 @@ public function downlaodsupplierpo($id){
             <table style="width: 100%;text-align: left;border-collapse: collapse;border: #ccc 0px solid;font-family:cambria;">
                     <tr>
                         <td width="60%">
-                          <p><b>Office:</b> 229 to 232, Bharat Industrial Estate,
-                          <p> L.B.S. Marg, Bhandup West, Mumbai – 400078. INDIA.</b>
-                          <p>Tel: +91 22 66959505 / +91 22 66600196 </p>
-                          <p>+91 22 62390222 / +91 22 46061497 / +91 22 35115396 </p>
-                          <p style="color:#206a9b"><b>GSTIN : 27AAJCS7869M1ZB </b></p>
+                          <p><b>Office:</b> '.$getCompanyAddressdetails['company_address'].'</p>
+                          <p>Tel: '.$getCompanyAddressdetails['phone_1'].' </p>
+                          <p>'.$getCompanyAddressdetails['phone_2'].'</p>
+                          <p style="color:#206a9b"><b>GSTIN : '.$getCompanyAddressdetails['GSTIN'].'</b></p>
                         </td>
                         <td width="40%">
                             <p><b>Email:</b></p> 
@@ -13342,6 +13343,9 @@ public function downloadvendorpo($id){
     $getvendorItemdeatilsForInvoice = $this->admin_model->getvendorItemdeatilsForInvoice($id);
     $getsuppliertemdeatilsForInvoiceonvendorpo = $this->admin_model->getsuppliertemdeatilsForInvoiceonvendorpo(trim($getvendordeatilsForInvoice['supplier_po_id']));
 
+    $getCompanyAddressdetails = $this->admin_model->getCompanyAddressdetails($id);
+
+
     if($getvendordeatilsForInvoice['ven_quatation_date']!='0000-00-00'){
         $quatation_date =  date('d-m-Y',strtotime($getvendordeatilsForInvoice['ven_quatation_date']));
     }else{
@@ -13427,11 +13431,10 @@ public function downloadvendorpo($id){
             <table style="width: 100%;text-align: left;border-collapse: collapse;border: #ccc 0px solid;font-family:cambria;">
                     <tr>
                         <td width="60%">
-                          <p><b>Office:</b> 229 to 232, Bharat Industrial Estate,
-                          <p> L.B.S. Marg, Bhandup West, Mumbai – 400078. INDIA.</b>
-                          <p>Tel: +91 22 66959505 / +91 22 66600196 </p>
-                          <p>+91 22 62390222 / +91 22 46061497 / +91 22 35115396 </p>
-                          <p style="color:#206a9b"><b>GSTIN : 27AAJCS7869M1ZB </b></p>
+                          <p><b>Office:</b> '.$getCompanyAddressdetails['company_address'].'</p>
+                          <p>Tel: '.$getCompanyAddressdetails['phone_1'].' </p>
+                          <p>'.$getCompanyAddressdetails['phone_2'].'</p>
+                          <p style="color:#206a9b"><b>GSTIN : '.$getCompanyAddressdetails['GSTIN'].'</b></p>
                         </td>
                         <td width="40%">
                             <p><b>Email:</b></p> 
@@ -14050,6 +14053,7 @@ public function downloadreworkrejectionvendor($id){
 
     $getReworkrejectionforInvoice = $this->admin_model->getReworkrejectionforInvoicevendor($id);
     $getReworkRejectionitemdeatilsForInvoice = $this->admin_model->getReworkRejectionitemdeatilsForInvoicevendor($id);
+    $getCompanyAddressdetails = $this->admin_model->getCompanyAddressdetails($id);
 
    
     $CartItem = "";
@@ -14182,11 +14186,10 @@ public function downloadreworkrejectionvendor($id){
             <table style="width: 100%;text-align: left;border-collapse: collapse;border: #ccc 0px solid;font-family:cambria;">
                     <tr>
                         <td width="60%">
-                          <p><b>Office:</b> 229 to 232, Bharat Industrial Estate,
-                          <p> L.B.S. Marg, Bhandup West, Mumbai – 400078. INDIA.</b>
-                          <p>Tel: +91 22 66959505 / +91 22 66600196 </p>
-                          <p>+91 22 62390222 / +91 22 46061497 / +91 22 35115396 </p>
-                          <p style="color:#206a9b"><b>GSTIN : 27AAJCS7869M1ZB </b></p>
+                          <p><b>Office:</b> '.$getCompanyAddressdetails['company_address'].'</p>
+                          <p>Tel: '.$getCompanyAddressdetails['phone_1'].' </p>
+                          <p>'.$getCompanyAddressdetails['phone_2'].'</p>
+                          <p style="color:#206a9b"><b>GSTIN : '.$getCompanyAddressdetails['GSTIN'].'</b></p>
                         </td>
                         <td width="40%">
                             <p><b>Email:</b></p> 
@@ -14455,6 +14458,7 @@ public function downloadchallanform($id){
 
     $getChallanformdetailsforInvoice = $this->admin_model->getChallanformdetailsforInvoice($id);
     $getChallanformditemdeatilsForInvoice = $this->admin_model->getChallanformditemdeatilsForInvoice($id);
+    $getCompanyAddressdetails = $this->admin_model->getCompanyAddressdetails($id);
 
    
     $CartItem = "";
@@ -14609,11 +14613,10 @@ public function downloadchallanform($id){
             <table style="width: 100%;text-align: left;border-collapse: collapse;border: #ccc 0px solid;font-family:cambria;">
                     <tr>
                         <td width="60%">
-                          <p><b>Office:</b> 229 to 232, Bharat Industrial Estate,
-                          <p> L.B.S. Marg, Bhandup West, Mumbai – 400078. INDIA.</b>
-                          <p>Tel: +91 22 66959505 / +91 22 66600196 </p>
-                          <p>+91 22 62390222 / +91 22 46061497 / +91 22 35115396 </p>
-                          <p style="color:#206a9b"><b>GSTIN : 27AAJCS7869M1ZB </b></p>
+                          <p><b>Office:</b> '.$getCompanyAddressdetails['company_address'].'</p>
+                          <p>Tel: '.$getCompanyAddressdetails['phone_1'].' </p>
+                          <p>'.$getCompanyAddressdetails['phone_2'].'</p>
+                          <p style="color:#206a9b"><b>GSTIN : '.$getCompanyAddressdetails['GSTIN'].'</b></p>
                         </td>
                         <td width="40%">
                             <p><b>Email:</b></p> 
@@ -14718,6 +14721,7 @@ public function downloadchallanformvendor($id){
 
     $getChallanformdetailsforInvoice = $this->admin_model->getchallanformInvoicevendor($id);
     $getChallanformditemdeatilsForInvoice = $this->admin_model->getchallanformeatilsForInvoicevendor($id);
+    $getCompanyAddressdetails = $this->admin_model->getCompanyAddressdetails($id);
 
    
     $CartItem = "";
@@ -14868,11 +14872,10 @@ public function downloadchallanformvendor($id){
             <table style="width: 100%;text-align: left;border-collapse: collapse;border: #ccc 0px solid;font-family:cambria;">
                     <tr>
                         <td width="60%">
-                          <p><b>Office:</b> 229 to 232, Bharat Industrial Estate,
-                          <p> L.B.S. Marg, Bhandup West, Mumbai – 400078. INDIA.</b>
-                          <p>Tel: +91 22 66959505 / +91 22 66600196 </p>
-                          <p>+91 22 62390222 / +91 22 46061497 / +91 22 35115396 </p>
-                          <p style="color:#206a9b"><b>GSTIN : 27AAJCS7869M1ZB </b></p>
+                          <p><b>Office:</b> '.$getCompanyAddressdetails['company_address'].'</p>
+                          <p>Tel: '.$getCompanyAddressdetails['phone_1'].' </p>
+                          <p>'.$getCompanyAddressdetails['phone_2'].'</p>
+                          <p style="color:#206a9b"><b>GSTIN : '.$getCompanyAddressdetails['GSTIN'].'</b></p>
                         </td>
                         <td width="40%">
                             <p><b>Email:</b></p> 
@@ -14975,6 +14978,9 @@ public function downlaodjobworkchllan($id){
 
     $getJobworkchallandetailsForInvoice = $this->admin_model->getJobworkchallandetailsForInvoice($id);
     $getJobworkchallanItemdeatilsForInvoice = $this->admin_model->getJobworkchallanItemdeatilsForInvoice($id);
+
+    $getCompanyAddressdetails = $this->admin_model->getCompanyAddressdetails($id);
+
 
     $CartItem = "";
     $i =1;
@@ -15091,11 +15097,11 @@ public function downlaodjobworkchllan($id){
             <table style="width: 100%;text-align: left;border-collapse: collapse;border: #ccc 0px solid;font-family:cambria;">
                     <tr>
                         <td width="60%">
-                          <p><b>Office:</b> 229 to 232, Bharat Industrial Estate,
-                          <p> L.B.S. Marg, Bhandup West, Mumbai – 400078. INDIA.</b>
-                          <p>Tel: +91 22 66959505 / +91 22 66600196 </p>
-                          <p>+91 22 62390222 / +91 22 46061497 / +91 22 35115396 </p>
-                          <p style="color:#206a9b"><b>GSTIN : 27AAJCS7869M1ZB </b></p>
+                          <p><b>Office:</b> '.$getCompanyAddressdetails['company_address'].'</p>
+                          <p>Tel: '.$getCompanyAddressdetails['phone_1'].' </p>
+                          <p>'.$getCompanyAddressdetails['phone_2'].'</p>
+                          <p style="color:#206a9b"><b>GSTIN : '.$getCompanyAddressdetails['GSTIN'].'</b></p>
+
                         </td>
                         <td width="40%">
                             <p><b>Email:</b></p> 
@@ -15190,6 +15196,8 @@ public function downloadscrapreturn($id){
 
     $getscrapreturnForInvoice = $this->admin_model->getscrapreturnForInvoice($id);
     $getscrapreturnItemdeatilsForInvoice = $this->admin_model->getscrapreturnItemdeatilsForInvoice($id);
+    $getCompanyAddressdetails = $this->admin_model->getCompanyAddressdetails($id);
+
 
     $mpdf = new \Mpdf\Mpdf();
     // $html = $this->load->view('html_to_pdf',[],true);
@@ -15197,11 +15205,10 @@ public function downloadscrapreturn($id){
                 <tr style="border: 1px solid black;" valign="top">
                     <td width="50%" style="padding: 10px;text-align: left;">
                         <p><h3 style="color:#000080">SUPRA QUALITY EXPORTS INDIA PVT LTD </h3></p>
-                        <p>229 to 232, Bharat Industrial Estate,</p>
-                        <p>L.B.S. Marg, Bhandup West, Mumbai – 400078. INDIA.</p>
-                        <p></p>
-                        <p></p>
-                        <p><span style="color:#000080">GSTIN : 27AAJCS7869M1ZB</span></p>
+                          <p>'.$getCompanyAddressdetails['company_address'].'</p>
+                          <p></p>
+                          <p></p>
+                          <p style="color:#206a9b"><b>GSTIN : '.$getCompanyAddressdetails['GSTIN'].'</b></p>
                     </td> 
 
                     <td style="border-left: 1px solid black;padding: 10px;" width="50%" valign="top">
@@ -16029,6 +16036,8 @@ public function downloadomsblasting($id){
 
     $getblastingdetailsforinvoice = $this->admin_model->getblastingdetailsforinvoice($id);
     $getblastingItemdeatilsForInvoice = $this->admin_model->getblastingItemdeatilsForInvoice($id);
+    $getCompanyAddressdetails = $this->admin_model->getCompanyAddressdetails($id);
+
 
     $mpdf = new \Mpdf\Mpdf();
     // $html = $this->load->view('html_to_pdf',[],true);
@@ -16036,11 +16045,10 @@ public function downloadomsblasting($id){
                 <tr style="border: 1px solid black;" valign="top">
                     <td width="50%" style="padding: 10px;text-align: left;">
                         <p><h3 style="color:#000080">SUPRA QUALITY EXPORTS INDIA PVT LTD </h3></p>
-                        <p>229 to 232, Bharat Industrial Estate,</p>
-                        <p>L.B.S. Marg, Bhandup West, Mumbai – 400078. INDIA.</p>
-                        <p></p>
-                        <p></p>
-                        <p><span style="color:#000080">GSTIN : 27AAJCS7869M1ZB</span></p>
+                            <p>'.$getCompanyAddressdetails['company_address'].'</p>
+                            <p></p>
+                            <p></p>
+                            <p style="color:#206a9b"><b>GSTIN : '.$getCompanyAddressdetails['GSTIN'].'</b></p>
                     </td> 
 
                     <td style="border-left: 1px solid black;padding: 10px;" width="50%" valign="top">
@@ -16273,17 +16281,19 @@ public function downloadomsmachinary($id){
     $getblastingdetailsforinvoice = $this->admin_model->getblastingdetailsforinvoice($id);
     $getblastingItemdeatilsForInvoice = $this->admin_model->getblastingItemdeatilsForInvoice($id);
 
+    $getCompanyAddressdetails = $this->admin_model->getCompanyAddressdetails($id);
+
+
     $mpdf = new \Mpdf\Mpdf();
     // $html = $this->load->view('html_to_pdf',[],true);
     $html = '<table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:13px">
                 <tr style="border: 1px solid black;" valign="top">
                     <td width="50%" style="padding: 8px;text-align: left;">
                         <p><h3 style="color:#000080">SUPRA QUALITY EXPORTS INDIA PVT LTD </h3></p>
-                        <p>229 to 232, Bharat Industrial Estate,</p>
-                        <p>L.B.S. Marg, Bhandup West, Mumbai – 400078. INDIA.</p>
-                        <p></p>
-                        <p></p>
-                        <p><span style="color:#000080">GSTIN : 27AAJCS7869M1ZB</span></p>
+                            <p>'.$getCompanyAddressdetails['company_address'].'</p>
+                            <p></p>
+                            <p></p>
+                            <p style="color:#206a9b"><b>GSTIN : '.$getCompanyAddressdetails['GSTIN'].'</b></p>
                     </td> 
 
                     <td style="border-left: 1px solid black;padding: 8px;" width="50%" valign="top">
@@ -21330,6 +21340,9 @@ public function downlaodqcchallan($id){
 
     $getQcchallanforInvoice = $this->admin_model->getQcchallanforInvoice($id);
     $getQcchallanforInvoiceitemdetails = $this->admin_model->getQcchallanforInvoiceitemdetails($id);
+    $getCompanyAddressdetails = $this->admin_model->getCompanyAddressdetails($id);
+
+
 
     $count_of_rows_for_space = count($getQcchallanforInvoiceitemdetails);
 
@@ -21382,14 +21395,11 @@ public function downlaodqcchallan($id){
                 </tr> 
                 <tr>
                   <td style="font-weight: bold;">
-                    <p>
-                        229 to 232, Bharat Industrial Estate,
-                        L.B.S. Marg, Bhandup West, Mumbai – 400078. INDIA.
-                    </p>
-                     <p> Tel: 0091 25950907  / +91 22 25954141</p> 
-                       
-                   
-                    <p> GSTIN : 27AAJCS7869M1ZB</>
+                  <p><b>Office:</b> '.$getCompanyAddressdetails['company_address'].'</p>
+                          <p>Tel: '.$getCompanyAddressdetails['phone_1'].' </p>
+                          <p>'.$getCompanyAddressdetails['phone_2'].'</p>
+                          <p style="color:#206a9b"><b>GSTIN : '.$getCompanyAddressdetails['GSTIN'].'</b></p>
+
                   </td>
                 </tr>
             </table>

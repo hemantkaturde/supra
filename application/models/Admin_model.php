@@ -19358,10 +19358,16 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
     public function getAllteammaster(){
-   
         $this->db->select('*');
         $query = $this->db->get(TBL_TEAM_MASTER);
         $data = $query->result_array();
+        return $data;
+    }
+
+    public function getCompanyAddressdetails(){
+        $this->db->select('*');
+        $query = $this->db->get(TBL_COMPANY);
+        $data = $query->row_array();
         return $data;
 
     }
