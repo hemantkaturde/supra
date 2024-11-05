@@ -4346,6 +4346,22 @@ class Admin_model extends CI_Model
         return $data;
     }
 
+    public function getbuyerpoitemstatusfor_fromstockitem($part_number,$buyer_po_number,){
+        
+        $this->db->select('current_stock,item_po_status');
+        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
+        $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.item_po_status','from_stock');
+        $this->db->where(TBL_BUYER_PO_MASTER.'.id',$buyer_po_number);
+        $this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
+        $query = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
+        $data = $query->row_array();
+        return $data;
+    }
+
+
+    
+
 
     public function getdetailsofpackinginsraction($packinginstractionid){
 
@@ -4474,6 +4490,21 @@ class Admin_model extends CI_Model
         );
         $this->db->where(TBL_BILL_OF_MATERIAL_ITEM.'.bom_id IS NULL');
         if($this->db->update(TBL_BILL_OF_MATERIAL_ITEM,$data)){
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+
+    }
+
+
+    public function update_cuuent_stock($part_number,$final_qty_for_update){
+
+        $data = array(
+            'current_stock' => $final_qty_for_update
+        );
+        $this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
+        if($this->db->update(TBL_FINISHED_GOODS,$data)){
             return TRUE;
         }else{
             return FALSE;

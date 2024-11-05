@@ -6221,7 +6221,6 @@ class Admin extends BaseController
            
             }else{
 
-
                 $data = array(
                     'packing_instract_id'   => trim($this->input->post('main_id')),
                     'part_number'  => trim($this->input->post('part_number')),
@@ -6241,10 +6240,19 @@ class Admin extends BaseController
 
                 $savePackinginstarction= $this->admin_model->savePackinginstarctiondetails($packing_details_item_id,$data);
 
-                if($savePackinginstarction){
-                    $add_packing_instraction_details_response['status'] = 'success';
-                    $add_packing_instraction_details_response['error'] = array( 'incoming_no'=>strip_tags(form_error('incoming_no')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'reported_by'=>strip_tags(form_error('reported_by')),'reported_date'=>strip_tags(form_error('reported_date')),'remark'=>strip_tags(form_error('remark')),'buyer_item_delivery_date'=>strip_tags(form_error('buyer_item_delivery_date')));
-                }
+                if($savePackinginstarction){                    
+                    /*check if buyer po item is from po or from stock*/
+                    /*Need Buyer PO ID and Item ID like Finish_goods_id*/
+                    $getbuyerpoitemstatusfor_fromstockitem = $this->admin_model->getbuyerpoitemstatusfor_fromstockitem(trim($this->input->post('part_number')),trim($this->input->post('buyer_po_number_id')));
+                    if($getbuyerpoitemstatusfor_fromstockitem){
+                        /*Update Qty To the Finish Goods Table */
+                        $final_qty_for_update = trim($getbuyerpoitemstatusfor_fromstockitem['current_stock']) - trim($this->input->post('buyer_invoice_qty'));
+                        $getbuyerpoitemstatusfor_fromstockitem = $this->admin_model->update_cuuent_stock(trim($this->input->post('part_number')), $final_qty_for_update);
+                    }
+        
+                        $add_packing_instraction_details_response['status'] = 'success';
+                        $add_packing_instraction_details_response['error'] = array( 'incoming_no'=>strip_tags(form_error('incoming_no')),'vendor_name'=>strip_tags(form_error('vendor_name')),'vendor_po_number'=>strip_tags(form_error('vendor_po_number')),'reported_by'=>strip_tags(form_error('reported_by')),'reported_date'=>strip_tags(form_error('reported_date')),'remark'=>strip_tags(form_error('remark')),'buyer_item_delivery_date'=>strip_tags(form_error('buyer_item_delivery_date')));
+                    }
 
 
             }
@@ -6253,6 +6261,7 @@ class Admin extends BaseController
 
         }
     }
+
 
     public function editpackinginstraction($packinginstractionid){
 
