@@ -13805,6 +13805,8 @@ public function downloadreworkrejection($id){
     $getReworkrejectionforInvoice = $this->admin_model->getReworkrejectionforInvoicesupplier($id);
     $getReworkRejectionitemdeatilsForInvoice = $this->admin_model->getReworkRejectionitemdeatilsForInvoice($id);
 
+    $getCompanyAddressdetails = $this->admin_model->getCompanyAddressdetails($id);
+
    
     $CartItem = "";
     $supplierItem = "";
@@ -13935,11 +13937,11 @@ public function downloadreworkrejection($id){
             <table style="width: 100%;text-align: left;border-collapse: collapse;border: #ccc 0px solid;font-family:cambria;">
                     <tr>
                         <td width="60%">
-                          <p><b>Office:</b> 229 to 232, Bharat Industrial Estate,
-                          <p> L.B.S. Marg, Bhandup West, Mumbai – 400078. INDIA.</b>
-                          <p>Tel: +91 22 66959505 / +91 22 66600196 </p>
-                          <p>+91 22 62390222 / +91 22 46061497 / +91 22 35115396 </p>
-                          <p style="color:#206a9b"><b>GSTIN : 27AAJCS7869M1ZB </b></p>
+                          <p><b>Office:</b> '.$getCompanyAddressdetails['company_address'].'</p>
+                          <p>Tel: '.$getCompanyAddressdetails['phone_1'].' </p>
+                          <p>'.$getCompanyAddressdetails['phone_2'].'</p>
+                          <p style="color:#206a9b"><b>GSTIN : '.$getCompanyAddressdetails['GSTIN'].'</b></p>
+
                         </td>
                         <td width="40%">
                             <p><b>Email:</b></p> 
