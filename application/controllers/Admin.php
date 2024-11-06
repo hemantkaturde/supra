@@ -517,9 +517,9 @@ class Admin extends BaseController
                 $updatecompany_response = array();
 
                 $this->form_validation->set_rules('company_name','Company Name','trim|required|max_length[128]');
-                $this->form_validation->set_rules('phone_1','Phone 1','trim|required|numeric|max_length[128]');
+                $this->form_validation->set_rules('phone_1','Phone 1','trim|required|max_length[128]');
                 $this->form_validation->set_rules('company_address','Company Address','trim|required');
-                $this->form_validation->set_rules('phone_2','Phone 2','trim|numeric|max_length[50]');
+                $this->form_validation->set_rules('phone_2','Phone 2','trim|max_length[50]');
                 $this->form_validation->set_rules('Website','Website','trim|required|max_length[50]');
                 $this->form_validation->set_rules('email','Email','trim|required|valid_email|max_length[50]');
                 $this->form_validation->set_rules('GSTIN','GSTIN','trim|required|max_length[50]');
