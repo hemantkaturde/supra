@@ -13151,16 +13151,17 @@
 		    var dt = $('#view_payment_details').DataTable({
 	            "columnDefs": [ 
 	                 { className: "details-control", "targets": [ 0 ] },
-	                 { "width": "10%", "targets": 0 },
+	                 { "width": "4%", "targets": 0 },
 	                 { "width": "10%", "targets": 1 },
-					 { "width": "10%", "targets": 2 },
-	                 { "width": "10%", "targets": 3 },
+					 { "width": "8%", "targets": 2 },
+	                 { "width": "8%", "targets": 3 },
 					 { "width": "10%", "targets": 4 },
 					 { "width": "10%", "targets": 5 },
 					 { "width": "10%", "targets": 6 },
 					 { "width": "10%", "targets": 7 },
 					 { "width": "10%", "targets": 8 },
 					 { "width": "10%", "targets": 9 },
+					 { "width": "15%", "targets": 10 },
 	            ],
 	            responsive: true,
 	            "oLanguage": {
@@ -13633,6 +13634,44 @@
 				}
 			});
 			return false;
+		});
+
+
+
+		$(document).on('click','#email_payment_details',function(e){
+			e.preventDefault();
+			$(".loader_ajax").show();
+			
+			let selectedRows = [];
+			$(".select-item:checked").each(function() {
+				const position = $(this).val();
+				selectedRows.push(position);
+			});
+
+		    $.ajax({
+				url : "<?php echo ADMIN_PATH;?>emailpaymentdetails",
+				type: "POST",
+				data : {'selectedRows' : selectedRows},
+					success: function(data, textStatus, jqXHR)
+					{
+						$(".loader_ajax").hide();
+							if(data == "failure")
+								{
+									/* failure */
+								}
+							else
+								{
+									/* Success */
+								
+								}
+							},
+					error: function (jqXHR, textStatus, errorThrown)
+						{	
+								    //$(".loader_ajax").hide();
+					    }
+			});
+			return false;        	
+		
 		});
 
     </script>

@@ -23,7 +23,22 @@
                 </div>
             </div>
         </div>
+
+
         <div class="row">
+
+        <div class="row" style="margin-left:4px">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <div style="margin-top:22px">
+                            <!-- <input type="button"  class="btn btn-primary" value="Search" id="search" name="search" /> -->
+                            <input type="button" class="btn btn-primary" value="Email Payment Details" id="email_payment_details"
+                                name="email_payment_details" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-body">   
@@ -31,6 +46,7 @@
                             <table width="100%" class="table table-striped table-bordered table-hover" id="view_payment_details">
                                 <thead>
                                     <tr style="background-color:#3c8dbc !important;color:#fff">
+                                        <th>Select</th>
                                         <th>Payment Details No</th>
                                         <th>Payment Date</th>
                                         <th>Bill No</th>

@@ -26,6 +26,8 @@ class Admin extends BaseController
         $this->load->model('admin_model');
         $this->load->library('form_validation');
         $this->load->library('excel');
+        $this->load->library('email');
+
         // Datas -> libraries ->BaseController / This function used load user sessions
         $this->datas();
         // isLoggedIn / Login control function /  This function used login control
@@ -22137,5 +22139,70 @@ public function hourly_inspection_report(){
     $data['vendorList']= $this->admin_model->fetchALLvendorList();
     $this->loadViews("masters/hourly_inspection_report", $this->global, $data, NULL);
 }
+
+
+public function emailpaymentdetails(){
+
+    $selectedrows=$this->input->post();
+
+    if($selectedrows){
+
+        $getallpaymentdetailsforbulkmail = $this->admin_model->getallpaymentdetailsforbulkmail($selectedrows);
+
+        // foreach ($getallpaymentdetailsforbulkmail as $key => $value) {
+        //     print_r($value);
+           
+        // }
+
+
+            // Recipient's email address
+            $to = "hemantkaturde123@gmail.com";
+
+            // Subject of the email
+            $subject = "Test HTML Email from PHP";
+
+            // Dynamic content (e.g., recipient's name)
+            $recipient_name = "John Doe";
+
+            // HTML Email Body
+            $message = "
+            <html>
+            <head>
+            <title>Test HTML Email</title>
+            </head>
+            <body>
+            <h1>Hello, $recipient_name!</h1>
+            <p>This is an HTML email sent using PHP's <strong>mail()</strong> function.</p>
+            <p>Here is a <a href='https://www.example.com'>link</a> to a website for more information.</p>
+            <p>Best regards,</p>
+            <p>Your Company</p>
+            </body>
+            </html>
+            ";
+
+            // Set the headers for HTML email
+            $headers = "MIME-Version: 1.0" . "\r\n";
+            $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";  // Ensures HTML formatting
+            $headers .= "From: supraportal@supraexports.in" . "\r\n";  // The sender's email address
+            $headers .= "Reply-To: supraportal@supraexports.in" . "\r\n";  // The reply-to email address
+            $headers .= "X-Mailer: PHP/" . phpversion();  // Info about the PHP version
+
+            // Send the email
+            if(mail($to, $subject, $message, $headers)) {
+                echo "Email sent successfully!";
+            } else {
+                echo "Failed to send email.";
+            }
+
+
+	   
+
+
+    }
+
+
+
+}
+
 
 }

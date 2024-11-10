@@ -579,6 +579,8 @@ $route['cbam'] = "admin/cbam";
 
 
 $route['hourly_inspection_report'] = "admin/hourly_inspection_report";
+$route['emailpaymentdetails'] = "admin/emailpaymentdetails";
+
 
 
 

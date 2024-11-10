@@ -184,3 +184,9 @@ define('TBL_SAMPLING_MASTER_TRANS','tbl_sampling_methods_trans');
 define('TBL_TEAM_MASTER_TRANS','tbl_team_master_trans');
 define('TBL_SCRAP_REJECTION_DETAILS','tbl_scrap_rejection_details');
 
+
+define('SMTP_HOST','mail.supraexports.in');
+define('SMTP_USER','supraportal@supraexports.in');
+define('SMTP_PASS','tR(OyPzdk3h[');
+define('SMTP_PORT','587');
+

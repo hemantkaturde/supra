@@ -6887,6 +6887,7 @@ class Admin_model extends CI_Model
         {
             foreach ($fetch_result as $key => $value)
             {
+                $data[$counter]['checkbox'] = '<input type="checkbox" class="select-item payment_details_checkbox_'.$value['payment_details_id'].'" name="payment_details_checkbox_'.$value['payment_details_id'].'" value="'.$value['payment_details_id'].'" />';
                 $data[$counter]['payment_details_number'] = $value['payment_details_number'];
                 $data[$counter]['payment_details_date'] = $value['payment_details_date'];
                 $data[$counter]['bill_no'] = $value['bill_number'];
@@ -6918,6 +6919,19 @@ class Admin_model extends CI_Model
             }
         }
         return $data;
+    }
+
+
+    public function getallpaymentdetailsforbulkmail($selectedrows){
+
+        $this->db->select('*');
+        $this->db->where(TBL_PAYMENT_DETAILS.'.status', 1);
+        $this->db->where(TBL_PAYMENT_DETAILS.'.status', 1);
+        $this->db->where_in(TBL_PAYMENT_DETAILS.'.payment_details_id ', $selectedrows['selectedRows']);
+        $query = $this->db->get(TBL_PAYMENT_DETAILS);
+        $result_array = $query->result_array();
+        return $result_array;
+
     }
 
 
