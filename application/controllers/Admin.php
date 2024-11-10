@@ -22159,26 +22159,84 @@ public function emailpaymentdetails(){
             $to = "hemantkaturde123@gmail.com";
 
             // Subject of the email
-            $subject = "Test HTML Email from PHP";
+            $subject = "Payment details - Suppiler/Vendor Name -  " .date('m-d-Y h:i:s a', time());
 
             // Dynamic content (e.g., recipient's name)
             $recipient_name = "John Doe";
 
-            // HTML Email Body
+    
+    
+
             $message = "
-            <html>
-            <head>
-            <title>Test HTML Email</title>
-            </head>
-            <body>
-            <h1>Hello, $recipient_name!</h1>
-            <p>This is an HTML email sent using PHP's <strong>mail()</strong> function.</p>
-            <p>Here is a <a href='https://www.example.com'>link</a> to a website for more information.</p>
-            <p>Best regards,</p>
-            <p>Your Company</p>
-            </body>
-            </html>
-            ";
+<html>
+<head>
+  <title>HTML Table in Email</title>
+  <style>
+    /* Add some CSS styles for the table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    table, th, td {
+      border: 1px solid #ddd;
+    }
+    th, td {
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+  </style>
+</head>
+<body>
+     <h1>Dear Sir, $recipient_name!</h1>
+                    <p>Please find the payment details for  your reference, and kindly confirm the same.</p>
+                    
+
+  <table>
+    <tr>
+      <th>Product</th>
+      <th>Price</th>
+      <th>Quantity Sold</th>
+      <th>Total Sales</th>
+    </tr>
+    <tr>
+      <td>Product A</td>
+      <td>$20</td>
+      <td>50</td>
+      <td>$1000</td>
+    </tr>
+    <tr>
+      <td>Product B</td>
+      <td>$15</td>
+      <td>75</td>
+      <td>$1125</td>
+    </tr>
+    <tr>
+      <td>Product C</td>
+      <td>$30</td>
+      <td>40</td>
+      <td>$1200</td>
+    </tr>
+  </table>
+
+  <p>Best regards,</p>
+  <p>Your Company</p>
+</body>
+</html>
+";
+
+
+            // <p>Here is a <a href='https://www.example.com'>link</a> to a website for more information.</p>
+            // <p>Best regards,</p>
+            // <p>Your Company</p>
+
+
+           // kunalsupraexports@gmail.com/purchase2@supraexports.in/purchase1@supraexports.in/ purchase@supraexports.in
 
             // Set the headers for HTML email
             $headers = "MIME-Version: 1.0" . "\r\n";
