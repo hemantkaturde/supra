@@ -22191,7 +22191,7 @@ public function emailpaymentdetails(){
                     </style>
                     </head>
                     <body>
-                        <h6>Dear Sir, $recipient_name!</h6>
+                        <p><b>Dear Sir,<b></p>
                         <p>Please find the payment details for  your reference, and kindly confirm the same.</p>
                                         
                     <table>
@@ -22225,7 +22225,7 @@ public function emailpaymentdetails(){
                         </tr>
                     </table>
 
-                    <p>Best Regards,</p>
+                    <p><b>Best Regards,</b></p>
                     <p>Supra Quality Exports (I) Pvt. Ltd </p>
                     <p>Plot no A/92, Opp. Manba Finance, </p>
                     <p>Road No 16, Wagle Estate , Thane-400604. </p>
