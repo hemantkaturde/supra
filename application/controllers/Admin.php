@@ -22149,10 +22149,18 @@ public function emailpaymentdetails(){
 
         $getallpaymentdetailsforbulkmail = $this->admin_model->getallpaymentdetailsforbulkmail($selectedrows);
 
-        // foreach ($getallpaymentdetailsforbulkmail as $key => $value) {
-        //     print_r($value);
-           
-        // }
+
+         $table_data = '';
+
+        foreach ($getallpaymentdetailsforbulkmail as $key => $value) {
+            $table_data .='<tr>
+                            <td>'.$value['payment_details_number'].'</td>
+                            <td>'.$value['payment_details_date'].'</td>
+                            <td>'.$value['amount_paid'].'</td>
+                            <td>'.$value['tds'].'</td>
+                            <td>'.$value['debit_note_amount'].'</td>
+                        </tr>';  
+        }
 
 
             // Recipient's email address
@@ -22202,27 +22210,7 @@ public function emailpaymentdetails(){
                             <th>TDS</th>
                             <th>Debit Note</th>
                         </tr>
-                        <tr>
-                            <td>Product A</td>
-                            <td>$20</td>
-                            <td>50</td>
-                            <td>$1000</td>
-                            <td>$1000</td>
-                        </tr>
-                        <tr>
-                            <td>Product B</td>
-                            <td>$15</td>
-                            <td>75</td>
-                            <td>$1125</td>
-                            <td>$1000</td>
-                        </tr>
-                        <tr>
-                            <td>Product C</td>
-                            <td>$30</td>
-                            <td>40</td>
-                            <td>$1200</td>
-                            <td>$1000</td>
-                        </tr>
+                      ".$table_data."
                     </table>
 
                     <p><b>Best Regards,</b></p>
