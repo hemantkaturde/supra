@@ -22165,70 +22165,75 @@ public function emailpaymentdetails(){
             $recipient_name = "John Doe";
 
     
-    
-
             $message = "
-<html>
-<head>
-  <title>HTML Table in Email</title>
-  <style>
-    /* Add some CSS styles for the table */
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    table, th, td {
-      border: 1px solid #ddd;
-    }
-    th, td {
-      padding: 8px;
-      text-align: left;
-    }
-    th {
-      background-color: #f2f2f2;
-    }
-    tr:nth-child(even) {
-      background-color: #f9f9f9;
-    }
-  </style>
-</head>
-<body>
-     <h1>Dear Sir, $recipient_name!</h1>
-                    <p>Please find the payment details for  your reference, and kindly confirm the same.</p>
-                    
+                    <html>
+                    <head>
+                    <title>HTML Table in Email</title>
+                    <style>
+                        /* Add some CSS styles for the table */
+                        table {
+                        width: 100%;
+                        border-collapse: collapse;
+                        }
+                        table, th, td {
+                        border: 1px solid #ddd;
+                        }
+                        th, td {
+                        padding: 8px;
+                        text-align: left;
+                        }
+                        th {
+                        background-color: #f2f2f2;
+                        }
+                        tr:nth-child(even) {
+                        background-color: #f9f9f9;
+                        }
+                    </style>
+                    </head>
+                    <body>
+                        <h6>Dear Sir, $recipient_name!</h6>
+                        <p>Please find the payment details for  your reference, and kindly confirm the same.</p>
+                                        
+                    <table>
+                        <tr>
+                            <th>Inv No</th>
+                            <th>Inv date</th>
+                            <th>Paid Amt</th>
+                            <th>TDS</th>
+                            <th>Debit Note</th>
+                        </tr>
+                        <tr>
+                            <td>Product A</td>
+                            <td>$20</td>
+                            <td>50</td>
+                            <td>$1000</td>
+                            <td>$1000</td>
+                        </tr>
+                        <tr>
+                            <td>Product B</td>
+                            <td>$15</td>
+                            <td>75</td>
+                            <td>$1125</td>
+                            <td>$1000</td>
+                        </tr>
+                        <tr>
+                            <td>Product C</td>
+                            <td>$30</td>
+                            <td>40</td>
+                            <td>$1200</td>
+                            <td>$1000</td>
+                        </tr>
+                    </table>
 
-  <table>
-    <tr>
-      <th>Product</th>
-      <th>Price</th>
-      <th>Quantity Sold</th>
-      <th>Total Sales</th>
-    </tr>
-    <tr>
-      <td>Product A</td>
-      <td>$20</td>
-      <td>50</td>
-      <td>$1000</td>
-    </tr>
-    <tr>
-      <td>Product B</td>
-      <td>$15</td>
-      <td>75</td>
-      <td>$1125</td>
-    </tr>
-    <tr>
-      <td>Product C</td>
-      <td>$30</td>
-      <td>40</td>
-      <td>$1200</td>
-    </tr>
-  </table>
-
-  <p>Best regards,</p>
-  <p>Your Company</p>
-</body>
-</html>
-";
+                    <p>Best Regards,</p>
+                    <p>Supra Quality Exports (I) Pvt. Ltd </p>
+                    <p>Plot no A/92, Opp. Manba Finance, </p>
+                    <p>Road No 16, Wagle Estate , Thane-400604. </p>
+                    <p>9152095890 / 02245176493. </p>
+                    <p>Mail: purchase@supraexports.in</p>
+                    </body>
+                    </html>
+                    ";
 
 
             // <p>Here is a <a href='https://www.example.com'>link</a> to a website for more information.</p>
@@ -22241,7 +22246,8 @@ public function emailpaymentdetails(){
             // Set the headers for HTML email
             $headers = "MIME-Version: 1.0" . "\r\n";
             $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";  // Ensures HTML formatting
-            $headers .= "From: supraportal@supraexports.in" . "\r\n";  // The sender's email address
+            //$headers .= "From: supraportal@supraexports.in" . "\r\n";  // The sender's email address
+            $headers .= "From: 'Supra Quality Exports (I) Pvt. Ltd' <supraportal@supraexports.in>" . "\r\n";  // The "From" field with name and email address
             $headers .= "Reply-To: supraportal@supraexports.in" . "\r\n";  // The reply-to email address
             $headers .= "X-Mailer: PHP/" . phpversion();  // Info about the PHP version
 
