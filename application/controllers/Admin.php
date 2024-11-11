@@ -8060,6 +8060,8 @@ class Admin extends BaseController
         $processFunction = 'Admin/paymentdetails';
         $this->logrecord($process,$processFunction);
         $this->global['pageTitle'] = 'Payment Details';
+        $data['vendorList']= $this->admin_model->fetchALLvendorList();
+        $data['supplierList']= $this->admin_model->fetchALLsupplierList();
         $this->loadViews("masters/paymentdetails", $this->global, $data, NULL);  
     }
 
@@ -8287,10 +8289,11 @@ class Admin extends BaseController
 
     }
 
-    public function fetchPaymentdetails(){
+    public function fetchPaymentdetails($vendor_name,$supplier_name,$from_date,$to_date){
         $params = $_REQUEST;
-        $totalRecords = $this->admin_model->getPaymentcount($params); 
-        $queryRecords = $this->admin_model->getPaymentdata($params); 
+       
+        $totalRecords = $this->admin_model->getPaymentcount($params,$vendor_name,$supplier_name,$from_date,$to_date); 
+        $queryRecords = $this->admin_model->getPaymentdata($params,$vendor_name,$supplier_name,$from_date,$to_date); 
 
         $data = array();
         foreach ($queryRecords as $key => $value)
@@ -22147,10 +22150,17 @@ public function emailpaymentdetails(){
 
     if($selectedrows){
 
+        $vendor_name=$this->input->post('vendor_name');
+        $supplier_name=$this->input->post('supplier_name');
+
+        $getvendorsuppliernamebyselectedid = $this->admin_model->getvendorsuppliernamebyselectedid($vendor_name,$supplier_name);
+
+        $toemail = $getvendorsuppliernamebyselectedid[0]['toemail'];
+        $toname = $getvendorsuppliernamebyselectedid[0]['toname'];
+
+
         $getallpaymentdetailsforbulkmail = $this->admin_model->getallpaymentdetailsforbulkmail($selectedrows);
-
-
-         $table_data = '';
+        $table_data = '';
 
         foreach ($getallpaymentdetailsforbulkmail as $key => $value) {
             $table_data .='<tr>
@@ -22164,10 +22174,10 @@ public function emailpaymentdetails(){
 
 
             // Recipient's email address
-            $to = "hemantkaturde123@gmail.com";
+            $to = $toemail;
 
             // Subject of the email
-            $subject = "Payment details - Suppiler/Vendor Name -  " .date('m-d-Y h:i:s a', time());
+            $subject = "Payment details - ".$toname." -  " .date('m-d-Y h:i:s a', time());
 
             // Dynamic content (e.g., recipient's name)
             $recipient_name = "John Doe";
@@ -22228,8 +22238,7 @@ public function emailpaymentdetails(){
             // <p>Best regards,</p>
             // <p>Your Company</p>
 
-
-           // kunalsupraexports@gmail.com/purchase2@supraexports.in/purchase1@supraexports.in/ purchase@supraexports.in
+            $cc = "kunalsupraexports@gmail.com, purchase2@supraexports.in, purchase1@supraexports.in,purchase@supraexports.in";
 
             // Set the headers for HTML email
             $headers = "MIME-Version: 1.0" . "\r\n";
@@ -22237,18 +22246,24 @@ public function emailpaymentdetails(){
             //$headers .= "From: supraportal@supraexports.in" . "\r\n";  // The sender's email address
             $headers .= "From: 'Supra Quality Exports (I) Pvt. Ltd' <supraportal@supraexports.in>" . "\r\n";  // The "From" field with name and email address
             $headers .= "Reply-To: supraportal@supraexports.in" . "\r\n";  // The reply-to email address
+            $headers .= "Cc: $cc" . "\r\n";  // The CC recipient field
             $headers .= "X-Mailer: PHP/" . phpversion();  // Info about the PHP version
 
             // Send the email
             if(mail($to, $subject, $message, $headers)) {
-                echo "Email sent successfully!";
+                
+                $process = 'Payment Details Email Sent to';
+                $processFunction = 'Admin/emailpaymentdetails';
+                $this->logrecord($process,$processFunction);
+
+                $email_sent_response['status'] = 'failure';
+                echo json_encode($email_sent_response);
+                
             } else {
-                echo "Failed to send email.";
+                $email_sent_response['status'] = 'success';
+                echo json_encode($email_sent_response);
+
             }
-
-
-	   
-
 
     }
 

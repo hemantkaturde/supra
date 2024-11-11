@@ -6829,7 +6829,7 @@ class Admin_model extends CI_Model
 
     }
 
-    public function getPaymentcount($params){
+    public function getPaymentcount($params,$vendor_name,$supplier_name,$from_date,$to_date){
 
        
         $this->db->select('*,'.TBL_SUPPLIER.'.supplier_name as supplier,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_pomaster,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_master,'.TBL_PAYMENT_DETAILS.'.payment_details_id  as debit_id');
@@ -6850,13 +6850,30 @@ class Admin_model extends CI_Model
             $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%')");
         }
 
+         if($vendor_name!='NA'){
+            $this->db->where(TBL_PAYMENT_DETAILS.'.vendor_id', $vendor_name);
+        }    
+        
+        if($supplier_name!='NA'){
+            $this->db->where(TBL_PAYMENT_DETAILS.'.supplier_id', $supplier_name);
+        }        
+
+        if($from_date!='NA'){
+            $this->db->where(TBL_PAYMENT_DETAILS.".payment_details_date >=", $from_date);
+        }
+
+        if($to_date!='NA'){
+            $this->db->where(TBL_PAYMENT_DETAILS.".payment_details_date <=", $to_date);
+        }
+
+
         $this->db->where(TBL_PAYMENT_DETAILS.'.status', 1);
         $query = $this->db->get(TBL_PAYMENT_DETAILS);
         $rowcount = $query->num_rows();
         return $rowcount;
     }
 
-    public function getPaymentdata($params){
+    public function getPaymentdata($params,$vendor_name,$supplier_name,$from_date,$to_date){
         $this->db->select('*,'.TBL_SUPPLIER.'.supplier_name as supplier,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_pomaster,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_master,'.TBL_PAYMENT_DETAILS.'.payment_details_id as debit_id');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_PAYMENT_DETAILS.'.vendor_id','left');
         $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_PAYMENT_DETAILS.'.supplier_id','left');
@@ -6874,6 +6891,24 @@ class Admin_model extends CI_Model
             $this->db->or_where(TBL_SUPPLIER.".supplier_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%')");
         }
+
+        if($vendor_name!='NA'){
+            $this->db->where(TBL_PAYMENT_DETAILS.'.vendor_id', $vendor_name);
+        }    
+        
+        if($supplier_name!='NA'){
+            $this->db->where(TBL_PAYMENT_DETAILS.'.supplier_id', $supplier_name);
+        }        
+
+        if($from_date!='NA'){
+            $this->db->where(TBL_PAYMENT_DETAILS.".payment_details_date >=", $from_date);
+        }
+
+        if($to_date!='NA'){
+            $this->db->where(TBL_PAYMENT_DETAILS.".payment_details_date <=", $to_date);
+        }
+
+        
 
         $this->db->where(TBL_PAYMENT_DETAILS.'.status', 1);
         $this->db->limit($params['length'],$params['start']);
@@ -6922,10 +6957,32 @@ class Admin_model extends CI_Model
     }
 
 
+    public function getvendorsuppliernamebyselectedid($vendor_name,$supplier_name){
+
+    
+        if($supplier_name!='NA'){
+            $this->db->select('supplier_name as toname,email as toemail');
+            $this->db->where(TBL_SUPPLIER.'.sup_id', $supplier_name);
+            $query = $this->db->get(TBL_SUPPLIER);
+            $result_array = $query->result_array();
+            return $result_array;
+        }
+
+        if($vendor_name!='NA'){
+            $this->db->select('email as toemail,vendor_name as toname');
+            $this->db->where(TBL_VENDOR.'.ven_id', $vendor_name);
+            $query = $this->db->get(TBL_VENDOR);
+            $result_array = $query->result_array();
+            return $result_array;
+        }
+
+    
+    }
+
+
     public function getallpaymentdetailsforbulkmail($selectedrows){
 
         $this->db->select('*');
-        $this->db->where(TBL_PAYMENT_DETAILS.'.status', 1);
         $this->db->where(TBL_PAYMENT_DETAILS.'.status', 1);
         $this->db->where_in(TBL_PAYMENT_DETAILS.'.payment_details_id ', $selectedrows['selectedRows']);
         $query = $this->db->get(TBL_PAYMENT_DETAILS);

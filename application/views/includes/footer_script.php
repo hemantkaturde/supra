@@ -13147,38 +13147,209 @@
 
 <?php if($pageTitle=='Payment Details' || $pageTitle=='Add New Payment Details' || $pageTitle=='Edit Payment Details'){ ?>
 	<script type="text/javascript">
-		$(document).ready(function() {
-		    var dt = $('#view_payment_details').DataTable({
-	            "columnDefs": [ 
-	                 { className: "details-control", "targets": [ 0 ] },
-	                 { "width": "4%", "targets": 0 },
-	                 { "width": "10%", "targets": 1 },
-					 { "width": "8%", "targets": 2 },
-	                 { "width": "8%", "targets": 3 },
-					 { "width": "10%", "targets": 4 },
-					 { "width": "10%", "targets": 5 },
-					 { "width": "10%", "targets": 6 },
-					 { "width": "10%", "targets": 7 },
-					 { "width": "10%", "targets": 8 },
-					 { "width": "10%", "targets": 9 },
-					 { "width": "15%", "targets": 10 },
-	            ],
-	            responsive: true,
-	            "oLanguage": {
-	                "sEmptyTable": "<i>No Payment Details Found.</i>",
-	            }, 
-	            "bSort" : false,
-	            "bFilter":true,
-	            "bLengthChange": true,
-	            "iDisplayLength": 10,   
-	            "bProcessing": true,
-	            "serverSide": true,
-	            "ajax":{
-                    url :"<?php echo base_url();?>fetchPaymentdetails",
-                    type: "post",
-	            },
-	        });
-	    });
+		
+			$(document).on('change','#vendor_supplier_name',function(e){  
+				var vendor_supplier_name = $('#vendor_supplier_name').val();
+				if(vendor_supplier_name=='Vendor'){
+					$('#vendor_name_div').css('display','block');
+					$('#supplier_name_div').css('display','none');
+					$('#supplier_name_div').val('');
+				}
+				if(vendor_supplier_name=='Supplier'){
+					$('#supplier_name_div').css('display','block');
+					$('#vendor_name_div').css('display','none');
+					$('#vendor_name_div').val('');
+
+				}
+			});
+
+			$(document).ready(function() {
+				 if($('#vendor_name_id').val()){
+					var vendor_name =$('#vendor_name_id').val();
+				 }else{
+					var vendor_name ='NA';
+				 }
+
+				 if($('#supplier_name_id').val()){
+					var supplier_name =$('#supplier_name_id').val();
+				 }else{
+					var supplier_name ='NA';
+				 }
+
+
+				 if($('#from_date').val()){
+					var from_date = $('#from_date').val();
+				 }else{
+					var from_date ='NA';
+				 }
+
+				 if($('#to_date').val()){
+					var to_date = $('#to_date').val();
+				}else{
+					var to_date ='NA';
+				 }
+
+				 getPaymentdetailsData(vendor_name,supplier_name,from_date,to_date);
+			 });
+
+
+			$(document).on('change','#vendor_name_id',function(e){  
+			    $("#view_payment_details").dataTable().fnDestroy();
+				if($('#vendor_name_id').val()){
+					var vendor_name =$('#vendor_name_id').val();
+				 }else{
+					var vendor_name ='NA';
+				 }
+
+				 if($('#supplier_name_id').val()){
+					var supplier_name =$('#supplier_name_id').val();
+				 }else{
+					var supplier_name ='NA';
+				 }
+
+
+				 if($('#from_date').val()){
+					var from_date = $('#from_date').val();
+				 }else{
+					var from_date ='NA';
+				 }
+
+				 if($('#to_date').val()){
+					var to_date = $('#to_date').val();
+				}else{
+					var to_date ='NA';
+				 }
+				getPaymentdetailsData(vendor_name,supplier_name,from_date,to_date);
+			});
+
+			$(document).on('change','#supplier_name_id',function(e){  
+				$("#view_payment_details").dataTable().fnDestroy();	
+				if($('#vendor_name_id').val()){
+					var vendor_name =$('#vendor_name_id').val();
+				 }else{
+					var vendor_name ='NA';
+				 }
+
+				 if($('#supplier_name_id').val()){
+					var supplier_name =$('#supplier_name_id').val();
+				 }else{
+					var supplier_name ='NA';
+				 }
+
+
+				 if($('#from_date').val()){
+					var from_date = $('#from_date').val();
+				 }else{
+					var from_date ='NA';
+				 }
+
+				 if($('#to_date').val()){
+					var to_date = $('#to_date').val();
+				}else{
+					var to_date ='NA';
+				 }
+				getPaymentdetailsData(vendor_name,supplier_name,from_date,to_date);
+			});
+
+
+		    $(document).on('change','#from_date',function(e){  
+				e.preventDefault();
+				 $("#view_payment_details").dataTable().fnDestroy();
+				 if($('#vendor_name_id').val()){
+					var vendor_name =$('#vendor_name_id').val();
+				 }else{
+					var vendor_name ='NA';
+				 }
+
+				 if($('#supplier_name_id').val()){
+					var supplier_name =$('#supplier_name_id').val();
+				 }else{
+					var supplier_name ='NA';
+				 }
+
+
+				 if($('#from_date').val()){
+					var from_date = $('#from_date').val();
+				 }else{
+					var from_date ='NA';
+				 }
+
+				 if($('#to_date').val()){
+					var to_date = $('#to_date').val();
+				}else{
+					var to_date ='NA';
+				 }
+					getPaymentdetailsData(vendor_name,supplier_name,from_date,to_date);
+				});
+
+
+			$(document).on('change','#to_date',function(e){  
+				e.preventDefault();
+				 $("#view_payment_details").dataTable().fnDestroy();
+				 if($('#vendor_name_id').val()){
+					var vendor_name =$('#vendor_name_id').val();
+				 }else{
+					var vendor_name ='NA';
+				 }
+
+				 if($('#supplier_name_id').val()){
+					var supplier_name =$('#supplier_name_id').val();
+				 }else{
+					var supplier_name ='NA';
+				 }
+
+
+				 if($('#from_date').val()){
+					var from_date = $('#from_date').val();
+				 }else{
+					var from_date ='NA';
+				 }
+
+				 if($('#to_date').val()){
+					var to_date = $('#to_date').val();
+				}else{
+					var to_date ='NA';
+				 }
+				 
+				getPaymentdetailsData(vendor_name,supplier_name,from_date,to_date);
+			});
+		
+
+		function getPaymentdetailsData(vendor_name,supplier_name,from_date,to_date){
+
+					var dt = $('#view_payment_details').DataTable({
+					"columnDefs": [ 
+						{ className: "details-control", "targets": [ 0 ] },
+						{ "width": "4%", "targets": 0 },
+						{ "width": "10%", "targets": 1 },
+						{ "width": "8%", "targets": 2 },
+						{ "width": "8%", "targets": 3 },
+						{ "width": "10%", "targets": 4 },
+						{ "width": "10%", "targets": 5 },
+						{ "width": "10%", "targets": 6 },
+						{ "width": "10%", "targets": 7 },
+						{ "width": "10%", "targets": 8 },
+						{ "width": "10%", "targets": 9 },
+						{ "width": "15%", "targets": 10 },
+					],
+					responsive: true,
+					"oLanguage": {
+						"sEmptyTable": "<i>No Payment Details Found.</i>",
+					}, 
+					"bSort" : false,
+					"bFilter":true,
+					"bLengthChange": true,
+					"iDisplayLength": 10,   
+					"bProcessing": true,
+					"serverSide": true,
+					"ajax":{
+						url :"<?php echo base_url();?>admin/fetchPaymentdetails/"+vendor_name+"/"+supplier_name+"/"+from_date+"/"+to_date,
+						type: "post",
+					},
+				});
+			}
+		
+
 
 		$(document).ready(function() {
 			var vendor_supplier_name = $('#vendor_supplier_name').val();
@@ -13637,7 +13808,6 @@
 		});
 
 
-
 		$(document).on('click','#email_payment_details',function(e){
 			e.preventDefault();
 			$(".loader_ajax").show();
@@ -13647,30 +13817,63 @@
 				const position = $(this).val();
 				selectedRows.push(position);
 			});
+		
+			    if($('#vendor_name_id').val()){
+					var vendor_name =$('#vendor_name_id').val();
+				 }else{
+					var vendor_name ='NA';
+				 }
 
-		    $.ajax({
-				url : "<?php echo ADMIN_PATH;?>emailpaymentdetails",
-				type: "POST",
-				data : {'selectedRows' : selectedRows},
-					success: function(data, textStatus, jqXHR)
-					{
-						$(".loader_ajax").hide();
-							if(data == "failure")
-								{
-									/* failure */
-								}
-							else
-								{
-									/* Success */
-								
-								}
-							},
-					error: function (jqXHR, textStatus, errorThrown)
-						{	
-								    //$(".loader_ajax").hide();
-					    }
-			});
-			return false;        	
+				 if($('#supplier_name_id').val()){
+					var supplier_name =$('#supplier_name_id').val();
+				 }else{
+					var supplier_name ='NA';
+				 }
+
+			if(selectedRows){
+
+				$.ajax({
+					url : "<?php echo ADMIN_PATH;?>admin/emailpaymentdetails",
+					type: "POST",
+					data : {'selectedRows' : selectedRows,'vendor_name':vendor_name,'supplier_name':supplier_name},
+						success: function(data, textStatus, jqXHR)
+						{
+							$(".loader_ajax").hide();
+								if(data == "failure")
+									{
+										// swal({
+										// 		title: "Failed!",
+										// 		text: "Email Failed",
+										// 		icon: "success",
+										// 		button: "Ok",
+										// 		},function(){ 
+										// 			window.location.href = "<?php echo base_url().'paymentdetails/'?>";
+										// 	});	
+									}
+								else
+									{
+										swal({
+												title: "Success!",
+												text: "Email Succesfully Sent",
+												icon: "success",
+												button: "Ok",
+												},function(){ 
+													window.location.href = "<?php echo base_url().'paymentdetails/'?>";
+											});	
+									
+									}
+								},
+						error: function (jqXHR, textStatus, errorThrown)
+							{	
+										//$(".loader_ajax").hide();
+							}
+				});
+				return false;  
+		    }else{
+
+				alert('Please Select Payment Details');
+			}
+      	
 		
 		});
 
