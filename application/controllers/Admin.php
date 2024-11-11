@@ -22238,7 +22238,7 @@ public function emailpaymentdetails(){
             // <p>Best regards,</p>
             // <p>Your Company</p>
 
-            $cc = "kunalsupraexports@gmail.com, purchase2@supraexports.in, purchase1@supraexports.in,purchase@supraexports.in";
+            $cc = "kunalsupraexports@gmail.com,purchase2@supraexports.in,purchase1@supraexports.in,purchase@supraexports.in,priyeshjoshi@qelocityindia.com,info@dmla.in";
 
             // Set the headers for HTML email
             $headers = "MIME-Version: 1.0" . "\r\n";
