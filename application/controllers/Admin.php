@@ -22163,9 +22163,16 @@ public function emailpaymentdetails(){
         $table_data = '';
 
         foreach ($getallpaymentdetailsforbulkmail as $key => $value) {
+
+             if($value['bill_date']){
+               $bill_date =  date('d-m-Y',strtotime($value['bill_date']));
+             }else{
+               $bill_date = '';
+             }
+
             $table_data .='<tr>
                             <td>'.$value['bill_number'].'</td>
-                            <td>'.date('m-d-Y',$value['bill_date']).'</td>
+                            <td>'.$bill_date.'</td>
                             <td>'.$value['amount_paid'].'</td>
                             <td>'.$value['tds'].'</td>
                             <td>'.$value['debit_note_no'].'</td>
