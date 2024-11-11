@@ -22256,11 +22256,11 @@ public function emailpaymentdetails(){
                 $processFunction = 'Admin/emailpaymentdetails';
                 $this->logrecord($process,$processFunction);
 
-                $email_sent_response['status'] = 'failure';
+                $email_sent_response['status'] = 'success';
                 echo json_encode($email_sent_response);
                 
             } else {
-                $email_sent_response['status'] = 'success';
+                $email_sent_response['status'] = 'failure';
                 echo json_encode($email_sent_response);
 
             }

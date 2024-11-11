@@ -13830,7 +13830,7 @@
 					var supplier_name ='NA';
 				 }
 
-			if(selectedRows){
+			if(selectedRows.length > 0){
 
 				$.ajax({
 					url : "<?php echo ADMIN_PATH;?>admin/emailpaymentdetails",
@@ -13838,17 +13838,18 @@
 					data : {'selectedRows' : selectedRows,'vendor_name':vendor_name,'supplier_name':supplier_name},
 						success: function(data, textStatus, jqXHR)
 						{
-							$(".loader_ajax").hide();
-								if(data == "failure")
+							var get_vendorpodata = jQuery.parseJSON( data );
+
+								if(get_vendorpodata.status == "failure")
 									{
-										// swal({
-										// 		title: "Failed!",
-										// 		text: "Email Failed",
-										// 		icon: "success",
-										// 		button: "Ok",
-										// 		},function(){ 
-										// 			window.location.href = "<?php echo base_url().'paymentdetails/'?>";
-										// 	});	
+										swal({
+												title: "Failed!",
+												text: "Email Failed - Due to Some Technical Issue",
+												icon: "success",
+												button: "Ok",
+												},function(){ 
+													window.location.href = "<?php echo base_url().'paymentdetails/'?>";
+											});	
 									}
 								else
 									{
@@ -13865,13 +13866,15 @@
 								},
 						error: function (jqXHR, textStatus, errorThrown)
 							{	
-										//$(".loader_ajax").hide();
+										$(".loader_ajax").hide();
 							}
 				});
 				return false;  
 		    }else{
 
 				alert('Please Select Payment Details');
+				$(".loader_ajax").hide();
+				//window.location.href = "<?php echo base_url().'paymentdetails/'?>";
 			}
       	
 		
