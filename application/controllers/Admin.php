@@ -22249,7 +22249,9 @@ public function emailpaymentdetails(){
             //$headers .= "From: supraportal@supraexports.in" . "\r\n";  // The sender's email address
             $headers .= "From: 'Supra Quality Exports (I) Pvt. Ltd' <supraportal@supraexports.in>" . "\r\n";  // The "From" field with name and email address
             $headers .= "Reply-To: supraportal@supraexports.in" . "\r\n";  // The reply-to email address
-            $headers .= "Cc: $cc" . "\r\n";  // The CC recipient field
+            // $headers .= "Cc: $cc" . "\r\n";  // The CC recipient field
+            $headers .= "CC: kunalsupraexports@gmail.com, priyeshjoshi@qelocityindia.com, info@dmla.in, hemantkaturde123@gmail.com\r\n"; // Multiple CC addresses
+
             $headers .= "X-Mailer: PHP/" . phpversion();  // Info about the PHP version
 
             // Send the email
