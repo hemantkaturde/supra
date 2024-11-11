@@ -22164,11 +22164,11 @@ public function emailpaymentdetails(){
 
         foreach ($getallpaymentdetailsforbulkmail as $key => $value) {
             $table_data .='<tr>
-                            <td>'.$value['payment_details_number'].'</td>
-                            <td>'.$value['payment_details_date'].'</td>
+                            <td>'.$value['bill_number'].'</td>
+                            <td>'.date('m-d-Y',$value['bill_date']).'</td>
                             <td>'.$value['amount_paid'].'</td>
                             <td>'.$value['tds'].'</td>
-                            <td>'.$value['debit_note_amount'].'</td>
+                            <td>'.$value['debit_note_no'].'</td>
                         </tr>';  
         }
 
