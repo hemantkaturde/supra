@@ -13830,54 +13830,60 @@
 					var supplier_name ='NA';
 				 }
 
-			if(selectedRows.length > 0){
 
-				$.ajax({
-					url : "<?php echo ADMIN_PATH;?>admin/emailpaymentdetails",
-					type: "POST",
-					data : {'selectedRows' : selectedRows,'vendor_name':vendor_name,'supplier_name':supplier_name},
-						success: function(data, textStatus, jqXHR)
-						{
-							var get_vendorpodata = jQuery.parseJSON( data );
+				 var vendor_supplier_name = $('#vendor_supplier_name').val();
 
-								if(get_vendorpodata.status == "failure")
+				 if(vendor_supplier_name!='NA'){
+					if(selectedRows.length > 0){
+
+							$.ajax({
+								url : "<?php echo ADMIN_PATH;?>admin/emailpaymentdetails",
+								type: "POST",
+								data : {'selectedRows' : selectedRows,'vendor_name':vendor_name,'supplier_name':supplier_name},
+									success: function(data, textStatus, jqXHR)
 									{
-										swal({
-												title: "Failed!",
-												text: "Email Failed - Due to Some Technical Issue",
-												icon: "success",
-												button: "Ok",
-												},function(){ 
-													window.location.href = "<?php echo base_url().'paymentdetails/'?>";
-											});	
-									}
-								else
-									{
-										swal({
-												title: "Success!",
-												text: "Email Succesfully Sent",
-												icon: "success",
-												button: "Ok",
-												},function(){ 
-													window.location.href = "<?php echo base_url().'paymentdetails/'?>";
-											});	
-									
-									}
-								},
-						error: function (jqXHR, textStatus, errorThrown)
-							{	
-										$(".loader_ajax").hide();
+										var get_vendorpodata = jQuery.parseJSON( data );
+
+											if(get_vendorpodata.status == "failure")
+												{
+													swal({
+															title: "Failed!",
+															text: "Email Failed - Due to Some Technical Issue",
+															icon: "success",
+															button: "Ok",
+															},function(){ 
+																window.location.href = "<?php echo base_url().'paymentdetails/'?>";
+														});	
+												}
+											else
+												{
+													swal({
+															title: "Success!",
+															text: "Email Succesfully Sent",
+															icon: "success",
+															button: "Ok",
+															},function(){ 
+																window.location.href = "<?php echo base_url().'paymentdetails/'?>";
+														});	
+												
+												}
+											},
+									error: function (jqXHR, textStatus, errorThrown)
+										{	
+													$(".loader_ajax").hide();
+										}
+							});
+							return false;  
+							}else{
+
+							alert('Please Select Payment Details');
+							$(".loader_ajax").hide();
+							//window.location.href = "<?php echo base_url().'paymentdetails/'?>";
 							}
-				});
-				return false;  
-		    }else{
-
-				alert('Please Select Payment Details');
-				$(".loader_ajax").hide();
-				//window.location.href = "<?php echo base_url().'paymentdetails/'?>";
-			}
-      	
-		
+				 }else{
+					alert('Please Select Vendor / Supplier  Payment Details');
+					$(".loader_ajax").hide();
+				 }
 		});
 
     </script>
