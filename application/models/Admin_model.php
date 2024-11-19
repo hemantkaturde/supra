@@ -3586,6 +3586,12 @@ class Admin_model extends CI_Model
         $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id',$vendor_po_number);
         $query = $this->db->get(TBL_FINISHED_GOODS);
         $data = $query->result_array();
+
+        $str = $this->db->last_query();
+
+        print_r($str);
+        exit;
+
         return $data;
     }
 
