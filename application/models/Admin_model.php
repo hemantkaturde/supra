@@ -12423,29 +12423,31 @@ class Admin_model extends CI_Model
         // $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_JOB_WORK.'.vendor_name');
 
 
-        //         SELECT `tbl_bill_of_materail_item`.`vendor_actual_recived_qty` 
-        // FROM `tbl_jobwork_item` 
-        // JOIN `tbl_jobwork` ON `tbl_jobwork`.`id` = `tbl_jobwork_item`.`jobwork_id` 
-        // JOIN `tbl_bill_of_material` ON `tbl_bill_of_material`.`vendor_po_number` = `tbl_jobwork`.`vendor_po_number` 
-        // JOIN `tbl_bill_of_materail_item` ON `tbl_bill_of_materail_item`.`bom_id` = `tbl_bill_of_material`.`id` 
-        // -- JOIN `tbl_bill_of_material` ON `tbl_bill_of_material`.`id` = `tbl_bill_of_materail_item`.`bom_id` 
-        // JOIN `tbl_bill_of_material` as `a` ON `a`.`vendor_po_number` = `tbl_jobwork`.`vendor_po_number` 
-        // JOIN `tbl_finished_goods` ON `tbl_finished_goods`.`fin_id` = `tbl_jobwork_item`.`part_number_id` 
-        // JOIN `tbl_vendor` ON `tbl_vendor`.`ven_id` = `tbl_jobwork`.`vendor_name` 
-
-        // where tbl_jobwork_item.jobwork_id=421 or tbl_jobwork_item.jobwork_id=422
-        // GROUP BY `tbl_jobwork_item`.`id`;
-
+//         SELECT `tbl_vendor`.`GSTIN`, `tbl_jobwork`.`po_number`, `tbl_jobwork`.`date`, `tbl_finished_goods`.`part_number`, `tbl_jobwork_item`.`unit`, `tbl_jobwork_item`.`rm_actual_qty`, `tbl_jobwork_item`.`total`, `tbl_jobwork_item`.`gst_rate`, `tbl_bill_of_materail_item`.`vendor_actual_recived_qty`
+// FROM `tbl_jobwork_item` 
+// JOIN `tbl_jobwork` ON `tbl_jobwork`.`id` = `tbl_jobwork_item`.`jobwork_id` 
+// JOIN `tbl_bill_of_material` ON `tbl_bill_of_material`.`vendor_po_number` = `tbl_jobwork`.`vendor_po_number` 
+// JOIN `tbl_bill_of_materail_item` ON `tbl_bill_of_materail_item`.`bom_id` = `tbl_bill_of_material`.`id` 
+// -- JOIN `tbl_bill_of_material` ON `tbl_bill_of_material`.`id` = `tbl_bill_of_materail_item`.`bom_id` 
+// JOIN `tbl_bill_of_material` as `a` ON `a`.`vendor_po_number` = `tbl_jobwork`.`vendor_po_number` 
+// JOIN `tbl_finished_goods` ON `tbl_finished_goods`.`fin_id` = `tbl_jobwork_item`.`part_number_id` 
+// JOIN `tbl_vendor` ON `tbl_vendor`.`ven_id` = `tbl_jobwork`.`vendor_name` 
 
 
         $this->db->select(TBL_VENDOR.'.GSTIN,'.TBL_JOB_WORK.'.po_number,'.TBL_JOB_WORK.'.date,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_JOB_WORK_ITEM.'.unit,'.TBL_JOB_WORK_ITEM.'.rm_actual_qty,'.TBL_JOB_WORK_ITEM.'.total,'.TBL_JOB_WORK_ITEM.'.gst_rate,'.TBL_BILL_OF_MATERIAL_ITEM.'.vendor_actual_recived_qty');
         $this->db->join(TBL_JOB_WORK, TBL_JOB_WORK.'.id = '.TBL_JOB_WORK_ITEM.'.jobwork_id');
         $this->db->join(TBL_BILL_OF_MATERIAL, TBL_BILL_OF_MATERIAL.'.vendor_po_number = '.TBL_JOB_WORK.'.vendor_po_number');
-        $this->db->join(TBL_BILL_OF_MATERIAL_ITEM, TBL_BILL_OF_MATERIAL_ITEM.'.bom_id  = '.TBL_JOB_WORK_ITEM.'.id');
-        // $this->db->join(TBL_BILL_OF_MATERIAL, TBL_BILL_OF_MATERIAL.'.id  = '.TBL_BILL_OF_MATERIAL_ITEM.'.bom_id');
-        $this->db->join(TBL_BILL_OF_MATERIAL.' as a', 'a.vendor_po_number = '.TBL_JOB_WORK.'.vendor_po_number');
+        $this->db->join(TBL_BILL_OF_MATERIAL_ITEM, TBL_BILL_OF_MATERIAL_ITEM.'.bom_id  = '.TBL_BILL_OF_MATERIAL.'.id');
+        $this->db->join(TBL_BILL_OF_MATERIAL.' as a', 'a.vendor_po_number  = '.TBL_BILL_OF_MATERIAL_ITEM.'.vendor_po_number');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_JOB_WORK_ITEM.'.part_number_id');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_JOB_WORK.'.vendor_name');
+       
+        // $this->db->join(TBL_BILL_OF_MATERIAL_ITEM, TBL_BILL_OF_MATERIAL_ITEM.'.part_number  = '.TBL_JOB_WORK_ITEM.'.part_number_id');
+        // $this->db->join(TBL_BILL_OF_MATERIAL, TBL_BILL_OF_MATERIAL.'.id  = '.TBL_BILL_OF_MATERIAL_ITEM.'.bom_id');
+        // $this->db->join(TBL_BILL_OF_MATERIAL.' as a', 'a.vendor_po_number = '.TBL_JOB_WORK.'.vendor_po_number');
+        // $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_JOB_WORK_ITEM.'.part_number_id');
+        // $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_JOB_WORK.'.vendor_name');
+
 
 
         if($job_work_no!='NA'){
@@ -12465,7 +12467,6 @@ class Admin_model extends CI_Model
 
         $query = $this->db->get(TBL_JOB_WORK_ITEM);
         $fetch_result = $query->result_array();
-
         return $fetch_result;
 
     }
