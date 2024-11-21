@@ -4895,9 +4895,6 @@ class Admin extends BaseController
     }
 
     public function editbillofmaterial($billofmaterialid){
-
-        echo $billofmaterialid;
-
         $process = 'Edit Bill Of Material';
         $processFunction = 'Admin/editbillofmaterial';
         $this->logrecord($process,$processFunction);
