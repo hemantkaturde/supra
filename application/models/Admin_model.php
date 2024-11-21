@@ -3584,13 +3584,10 @@ class Admin_model extends CI_Model
         //$this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id',$buyer_po_number);
         $this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
         $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id',$vendor_po_number);
+        $this->db->order_by(TBL_BUYER_PO_MASTER_ITEM.'.id','desc');
         $query = $this->db->get(TBL_FINISHED_GOODS);
         $data = $query->result_array();
 
-        $str = $this->db->last_query();
-
-        print_r($str);
-        exit;
 
         return $data;
     }
