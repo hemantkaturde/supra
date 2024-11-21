@@ -15245,11 +15245,10 @@ public function fetchproductionstatusreportdata($params,$vendor_name,$status,$pa
     $this->db->where(TBL_BILL_OF_MATERIAL_VENDOR.'.status', 1);
     $this->db->limit($params['length'],$params['start']);
     $this->db->order_by(TBL_BILL_OF_MATERIAL_VENDOR.'.id','DESC');
-    $this->db->group_by(TBL_VENDOR_PO_MASTER_ITEM.'.id',TBL_VENDOR_PO_MASTER.'.id');
+    $this->db->group_by(TBL_VENDOR_PO_MASTER_ITEM.'.id');
     $query = $this->db->get(TBL_BILL_OF_MATERIAL_VENDOR_ITEM);
     //$fetch_result = $query->result_array();
     $query1 = $query->result_array();
-
 
 
 
@@ -15289,6 +15288,8 @@ public function fetchproductionstatusreportdata($params,$vendor_name,$status,$pa
     }
 
     $this->db->where(TBL_BILL_OF_MATERIAL.'.status', 1);
+    $this->db->where(TBL_BILL_OF_MATERIAL_ITEM.'.status', 1);
+
     $this->db->group_by(TBL_BILL_OF_MATERIAL_ITEM.'.id');
     $this->db->limit($params['length'],$params['start']);
     
@@ -15296,7 +15297,6 @@ public function fetchproductionstatusreportdata($params,$vendor_name,$status,$pa
     $query = $this->db->get(TBL_BILL_OF_MATERIAL);
     //$fetch_result = $query->result_array();
     $query2 = $query->result_array();
-
     
     $fetch_result =   array_merge($query1, $query2);
     $data = array();
