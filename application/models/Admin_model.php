@@ -12443,6 +12443,7 @@ class Admin_model extends CI_Model
         $this->db->join(TBL_BILL_OF_MATERIAL, TBL_BILL_OF_MATERIAL.'.vendor_po_number = '.TBL_JOB_WORK.'.vendor_po_number');
         $this->db->join(TBL_BILL_OF_MATERIAL_ITEM, TBL_BILL_OF_MATERIAL_ITEM.'.bom_id  = '.TBL_JOB_WORK_ITEM.'.id');
         // $this->db->join(TBL_BILL_OF_MATERIAL, TBL_BILL_OF_MATERIAL.'.id  = '.TBL_BILL_OF_MATERIAL_ITEM.'.bom_id');
+        $this->db->join(TBL_BILL_OF_MATERIAL.' as a', 'a.vendor_po_number = '.TBL_JOB_WORK.'.vendor_po_number');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_JOB_WORK_ITEM.'.part_number_id');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_JOB_WORK.'.vendor_name');
 
