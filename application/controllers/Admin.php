@@ -22139,7 +22139,47 @@ public function hourly_inspection_report(){
     $this->logrecord($process,$processFunction);
     $this->global['pageTitle'] = 'Hourly Inspection Report';
     $data['vendorList']= $this->admin_model->fetchALLvendorList();
+
+    // if($this->session->userdata('roleText')=='Team'){
+    //     $userId = $this->session->userdata("userId");
+    //     $getIncomingdetails =  $this->admin_model->getIncomingdetailsforhourly_inspection_report($userId);
+    // }else{
+    //     $userId = '';
+    // }
+
     $this->loadViews("masters/hourly_inspection_report", $this->global, $data, NULL);
+}
+
+
+public function fetchthrlyreportlist(){
+    
+    if($this->session->userdata('roleText')=='Team'){
+        $userId = $this->session->userdata("userId");
+    }else{
+        $userId = 'NA';
+    }
+
+    $params = $_REQUEST;
+    $totalRecords = $this->admin_model->fetchthrlyreportlistcount($params,$userId); 
+    $queryRecords = $this->admin_model->fetchthrlyreportlistdata($params,$userId); 
+
+    $data = array();
+    foreach ($queryRecords as $key => $value)
+    {
+        $i = 0;
+        foreach($value as $v)
+        {
+            $data[$key][$i] = $v;
+            $i++;
+        }
+    }
+    $json_data = array(
+        "draw"            => intval( $params['draw'] ),   
+        "recordsTotal"    => intval( $totalRecords ),  
+        "recordsFiltered" => intval($totalRecords),
+        "data"            => $data   // total data array
+        );
+    echo json_encode($json_data);
 }
 
 

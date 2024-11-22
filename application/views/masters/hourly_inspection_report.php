@@ -11,45 +11,29 @@
                 <div class="box">
                     <div class="box-body">   
                         <div class="panel-body">
-
-                        <div class="container mt-5">
-                            <h2>Responsive Bootstrap Table</h2>
-                            <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover">
-                                <thead class="table-dark">
-                                    <tr>
-                                    <th>#</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Role</th>
+                            <table width="100%" class="table table-striped table-bordered table-hover" id="view_hourly_inspection_report">
+                                <thead>
+                                    <tr style="background-color:#3c8dbc !important;color:#fff">
+                                        <th>FG Part No</th>
+                                        <th>Description</th>
+                                        <th>Lot Number</th>
+                                        <th>P.O.Qty (in Pcs)</th>
+                                        <th>Invoice Qty (in Pcs)</th>
+                                        <th>Balance Qty in Pcs</th>
+                                        <th>Invoice Qty (in Kgs)</th>
+                                        <th>Net weight (in Kgs)	</th>
+                                        <th>Challan No</th>
+                                        <th>Challan Date</th>
+                                        <th>Received Date</th>
+                                        <th>FG Material Gross Weight</th>
+                                        <th>Units</th>
+                                        <th>No. of Boxes / Goni / Bundle</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                    <td>1</td>
-                                    <td>John Doe</td>
-                                    <td>johndoe@example.com</td>
-                                    <td>Admin</td>
-                                    </tr>
-                                    <tr>
-                                    <td>2</td>
-                                    <td>Jane Smith</td>
-                                    <td>janesmith@example.com</td>
-                                    <td>User</td>
-                                    </tr>
-                                    <tr>
-                                    <td>3</td>
-                                    <td>Michael Brown</td>
-                                    <td>michaelbrown@example.com</td>
-                                    <td>Moderator</td>
-                                    </tr>
                                 </tbody>
-                                </table>
-                            </div>
-                            </div>
-                            
-                           
-
+                            </table>
                         </div>
                     </div>
                     <!-- /.box-body -->

@@ -24221,3 +24221,50 @@
 
     </script>
 <?php } ?>
+
+<?php if($pageTitle=='Hourly Inspection Report'){  ?>
+	<script type="text/javascript">
+        $(document).ready(function() {
+			var team_id =   $('#team_id').val();
+			var dt = $('#view_hourly_inspection_report').DataTable({
+					"columnDefs": [ 
+						{ className: "details-control", "targets": [ 0 ] },
+						{ "width": "10%", "targets": 0 },
+						{ "width": "10%", "targets": 1 },	
+						{ "width": "10%", "targets": 2 },	
+						{ "width": "10%", "targets": 3 },
+						{ "width": "10%", "targets": 4 },	
+						{ "width": "10%", "targets": 5 },
+						{ "width": "10%", "targets": 6 },
+						{ "width": "10%", "targets": 7 },					
+						{ "width": "10%", "targets": 8 },
+						{ "width": "10%", "targets": 9 },
+						{ "width": "10%", "targets": 10 },
+						{ "width": "10%", "targets": 11 },
+						{ "width": "10%", "targets": 12 },
+						{ "width": "10%", "targets": 13 },
+						// { "width": "10%", "targets": 14 },
+						// { "width": "10%", "targets": 15 },
+						// { "width": "10%", "targets": 16 },
+						// { "width": "10%", "targets": 17 },
+					
+					],
+					responsive: true,
+					"oLanguage": {
+						"sEmptyTable": "<i>Hourly Inspection Report List Not Found.</i>",
+					}, 
+					"bSort" : false,
+					"bFilter":true,
+					"bLengthChange": true,
+					"iDisplayLength": 10,   
+					"bProcessing": true,
+					"serverSide": true,
+					"ajax":{
+						url :"<?php echo base_url();?>fetchthrlyreportlist",
+						type: "post",
+					},
+				});
+     	});
+
+	</script>
+<?php } ?>

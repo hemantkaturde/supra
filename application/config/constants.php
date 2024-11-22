@@ -110,6 +110,8 @@ define('MAIL_PATH',                             '/usr/sbin/sendmail');
 
 /* Application Tables*/
 
+
+define('TBL_USERS','tbl_users');
 define('TBL_COMPANY','tbl_compnayinfo');
 define('TBL_SUPPLIER','tbl_supplier');
 define('TBL_RAWMATERIAL','tbl_rawmaterial');

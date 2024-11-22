@@ -582,6 +582,7 @@ $route['hourly_inspection_report'] = "admin/hourly_inspection_report";
 $route['emailpaymentdetails'] = "admin/emailpaymentdetails";
 
 
+$route['fetchthrlyreportlist'] = "admin/fetchthrlyreportlist";
 
 
 

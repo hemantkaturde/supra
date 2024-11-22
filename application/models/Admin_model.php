@@ -19477,6 +19477,74 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     }
 
+    public function fetchthrlyreportlistcount($params,$userId){
+
+        $this->db->select('*');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_INCOMING_DETAILS_ITEM.".team_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".remark LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id  = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
+        $this->db->join(TBL_TEAM_MASTER, TBL_TEAM_MASTER.'.id  = '.TBL_INCOMING_DETAILS_ITEM.'.assign_team');
+        $this->db->join(TBL_USERS, TBL_USERS.'.team_id  = '.TBL_TEAM_MASTER.'.id');
+        $this->db->where(TBL_USERS.".userId", $userId);
+
+        $query = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+    }
+
+    public function fetchthrlyreportlistdata($params,$userId){
+
+        $this->db->select('*');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_INCOMING_DETAILS_ITEM.".team_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".remark LIKE '%".$params['search']['value']."%')");
+        }
+
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id  = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
+        $this->db->join(TBL_TEAM_MASTER, TBL_TEAM_MASTER.'.id  = '.TBL_INCOMING_DETAILS_ITEM.'.assign_team');
+        $this->db->join(TBL_USERS, TBL_USERS.'.team_id  = '.TBL_TEAM_MASTER.'.id');
+        $this->db->where(TBL_USERS.".userId", $userId);
+
+        $this->db->limit($params['length'],$params['start']);
+        $this->db->order_by(TBL_INCOMING_DETAILS_ITEM.'.id','DESC');
+        $query = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
+        $fetch_result = $query->result_array();
+        $data = array();
+        $counter = 0;
+        $i = 1;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['part_number'] = $value['part_number'];
+                $data[$counter]['name'] = $value['name'];
+                $data[$counter]['lot_no'] = $value['lot_no'];
+                $data[$counter]['p_o_qty'] = $value['p_o_qty'];
+                $data[$counter]['invoice_qty'] = $value['invoice_qty'];
+                $data[$counter]['balance_qty'] = $value['balance_qty'];
+                $data[$counter]['invoice_qty_in_kgs'] = $value['invoice_qty_in_kgs'];
+                $data[$counter]['net_weight_kgs'] = '';
+                $data[$counter]['challan_no'] = $value['challan_no'];
+                $data[$counter]['challan_date'] = $value['challan_date'];
+                $data[$counter]['received_date'] = $value['received_date'];
+                $data[$counter]['fg_material_gross_weight'] = "";
+                $data[$counter]['units'] = $value['units'];
+                $data[$counter]['goni'] = $value['boxex_goni_bundle'];
+               
+                $data[$counter]['action'] = '';
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."updatehourlyworkingreport/".$value['id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>   ";
+                $counter++; 
+            }
+        }
+
+        return $data;
+    }
+
+
 }
 
 
