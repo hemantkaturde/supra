@@ -22323,4 +22323,15 @@ public function emailpaymentdetails(){
 }
 
 
+public function updatehourlyworkingreportdata(){
+
+    $process = 'Update Hourly Workingreportdata';
+    $processFunction = 'Admin/updatehourlyworkingreportdata';
+    $this->logrecord($process,$processFunction);
+    $this->global['pageTitle'] = 'Update Hourly Workingreportdata';
+    $this->loadViews("masters/updatehourlyworkingreportdata", $this->global, $data, NULL);
+
+}
+
+
 }

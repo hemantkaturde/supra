@@ -583,6 +583,7 @@ $route['emailpaymentdetails'] = "admin/emailpaymentdetails";
 
 
 $route['fetchthrlyreportlist'] = "admin/fetchthrlyreportlist";
+$route['updatehourlyworkingreportdata/(:any)'] = "admin/updatehourlyworkingreportdata/$1";
 
 
 

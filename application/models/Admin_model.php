@@ -19536,7 +19536,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['goni'] = $value['boxex_goni_bundle'];
                
                 $data[$counter]['action'] = '';
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."updatehourlyworkingreport/".$value['id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>   ";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."updatehourlyworkingreportdata/".$value['id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>   ";
                 $counter++; 
             }
         }

@@ -44,7 +44,14 @@ class User extends BaseController
 
 
         if( $this->session->userdata('roleText')=='Team'){
+
+            $process = 'Hourly Inspection Report';
+            $processFunction = 'Admin/hourly_inspection_report';
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Hourly Inspection Report';
+            $data['vendorList']= $this->admin_model->fetchALLvendorList();
             $this->loadViews("masters/hourly_inspection_report", $this->global, $data , NULL);
+
         }else{
             $this->loadViews("dashboard", $this->global, $data , NULL);
 
@@ -222,7 +229,7 @@ class User extends BaseController
      */
     function pageNotFound()
     {
-        $this->global['pageTitle'] = 'Admin : 404 - Sayfa Bulunamadı';
+        $this->global['pageTitle'] = 'Admin : Page Not Found';
         
         $this->loadViews("404", $this->global, NULL, NULL);
     }
