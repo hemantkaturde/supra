@@ -2475,7 +2475,7 @@ class Admin extends BaseController
             $result = $this->admin_model->deleteBuyerpo(trim($this->input->post('id')));
             if ($result) {
                         $process = 'Buyer PO Delete';
-                        $processFunction = 'Admin/deleteRejection';
+                        $processFunction = 'Admin/deleteBuyerpo';
                         $this->logrecord($process,$processFunction);
                         
                     echo(json_encode(array('status'=>'success')));
@@ -22323,12 +22323,17 @@ public function emailpaymentdetails(){
 }
 
 
-public function updatehourlyworkingreportdata(){
+public function updatehourlyworkingreportdata($incoming_details_id){
 
     $process = 'Update Hourly Workingreportdata';
     $processFunction = 'Admin/updatehourlyworkingreportdata';
     $this->logrecord($process,$processFunction);
     $this->global['pageTitle'] = 'Update Hourly Workingreportdata';
+
+    /*Get Hrly Detials for hrly inspection Report*/
+    $data['getteamdetailsforhrlyinsectionreport'] = $this->admin_model->getteamdetailsforhrlyinsectionreport($incoming_details_id);
+    $data['getallteamdetailsusingteamid'] = $this->admin_model->getallteamdetailsusingteamid($getteamdetailsforhrlyinsectionreport[0]['team_master_id']);
+    
     $this->loadViews("masters/updatehourlyworkingreportdata", $this->global, $data, NULL);
 
 }

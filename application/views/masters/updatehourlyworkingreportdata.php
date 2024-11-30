@@ -13,11 +13,20 @@
         }
     </style>
 
+
+<?php
+
+// print_r($getteamdetailsforhrlyinsectionreport['0']['part_number']);
+// exit;
+
+?>
+
+
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            <i class="fa fa-users"></i> Hourly Inspection Report
+            <i class="fa fa-users"></i> Daily Production Summary
         </h1>
     </section>
     <section class="content">
@@ -32,31 +41,33 @@
                                         <td colspan="16">SUPRA QUALITY EXPORTS (I) PVT. LTD</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="16">SAMPLING INSPECTION RECORD SHEET</td>
+                                        <td colspan="16">VISUAL INSPECTION RECORD SHEET</td>
                                     </tr>
                                     <tr>
                                         <td>Description</td>
-                                        <td colspan="4"></td>
+                                        <td colspan="4" style="text-align: left;"><?=$getteamdetailsforhrlyinsectionreport['0']['description'];?></td>
                                         <td>Part No.</td>
-                                        <td colspan="4"></td>
+                                        <td colspan="4" style="text-align: left;"><?=$getteamdetailsforhrlyinsectionreport['0']['part_number'];?></td>
                                         <td>Lot No.</td>
-                                        <td colspan="4"></td>
+                                        <td colspan="4" style="text-align: left;"><?=$getteamdetailsforhrlyinsectionreport['0']['lot_no'];?></td>
                                     </tr>
                                     <tr>
                                         <td colspan="16"></td>
                                     </tr>
                                     <tr>
                                         <td>Vendor Name</td>
-                                        <td colspan="4"></td>
+                                        <td colspan="4" style="text-align: left;"><?=$getteamdetailsforhrlyinsectionreport['0']['vendor_name'];?></td>
                                         <td>Order QTY</td>
-                                        <td colspan="4"></td>
+                                        <td colspan="4" style="text-align: left;"><?=$getteamdetailsforhrlyinsectionreport['0']['invoice_qty'];?></td>
                                         <td>Rec QTY</td>
-                                        <td colspan="4"></td>
+                                        <td colspan="4" style="text-align: left;"><?=$getteamdetailsforhrlyinsectionreport['0']['received_date'];?></td>
                                     </tr>
                                     <tr>
                                         <td>Department</td>
-                                        <td colspan="5">RRR</td>
-                                        <td colspan="9"></td>
+                                        <td colspan="5" style="text-align: left;"></td>
+                                        <td colspan="5">Target Qty</td>
+                                        <td colspan="4"></td>
+                                     
                                     </tr>
                                     <tr>
                                         <td rowspan="2">NAME</td>
@@ -77,6 +88,7 @@
                                         <td colspan="2">TOTAL HOURS</td>
                                         <td colspan="2">Sign</td>
                                     </tr>
+<!--                                   
                                     <tr>
                                         <td></td>
                                         <td></td>
@@ -226,7 +238,33 @@
                                         <td></td>
                                         <td colspan="2"></td>
                                         <td colspan="2"></td>
+                                    </tr> -->
+
+                                    <?php  
+                                    foreach($getallteamdetailsusingteamid as $key => $value) { ?>
+                                     <tr>
+                                        <td><?=$value['team_member_name']?></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td colspan="2"></td>
+                                        <td colspan="2"></td>
+                                     </tr>
+                                    <?php  } ?>
+
+                                    <tr>
+                                        <td colspan="15" style="background:pink"></td>
                                     </tr>
+
+
+
                                     <tr>
                                         <td>Name</td>
                                         <td colspan="5">Method of Testing</td>

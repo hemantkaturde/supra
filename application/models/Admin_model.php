@@ -19497,7 +19497,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     public function fetchthrlyreportlistdata($params,$userId){
 
-        $this->db->select('*');
+        $this->db->select('*,'.TBL_TEAM_MASTER.'.id as team_master_id,'.TBL_INCOMING_DETAILS_ITEM.'.id as incoming_details_id');
         if($params['search']['value'] != "") 
         {
             $this->db->where("(".TBL_INCOMING_DETAILS_ITEM.".team_name LIKE '%".$params['search']['value']."%'");
@@ -19536,12 +19536,38 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['goni'] = $value['boxex_goni_bundle'];
                
                 $data[$counter]['action'] = '';
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."updatehourlyworkingreportdata/".$value['id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>   ";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."updatehourlyworkingreportdata/".$value['incoming_details_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>   ";
                 $counter++; 
             }
         }
 
         return $data;
+    }
+
+
+    public function getteamdetailsforhrlyinsectionreport($incoming_details_id){
+        $this->db->select('*,'.TBL_TEAM_MASTER.'.id as team_master_id,'.TBL_FINISHED_GOODS.'.name as description');
+        $this->db->join(TBL_INCOMING_DETAILS, TBL_INCOMING_DETAILS.'.id  = '.TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_INCOMING_DETAILS.'.vendor_name');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id  = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
+        $this->db->join(TBL_TEAM_MASTER, TBL_TEAM_MASTER.'.id  = '.TBL_INCOMING_DETAILS_ITEM.'.assign_team');
+        $this->db->join(TBL_USERS, TBL_USERS.'.team_id  = '.TBL_TEAM_MASTER.'.id');
+        $this->db->where(TBL_INCOMING_DETAILS_ITEM.".id", $incoming_details_id);
+        $query = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
+        $fetch_result = $query->result_array();
+        return $fetch_result;
+    }
+
+
+    public function getallteamdetailsusingteamid($team_master_id){
+
+        $this->db->select('*');
+        $query = $this->db->get(TBL_TEAM_MASTER_TRANS);
+        $this->db->where(TBL_TEAM_MASTER_TRANS.".team_id", $team_master_id);
+        $this->db->where(TBL_TEAM_MASTER_TRANS.".status", 1);
+        $data = $query->result_array();
+        return $data;
+
     }
 
 

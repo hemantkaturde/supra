@@ -2,7 +2,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            <i class="fa fa-users"></i> Hourly Inspection Report
+            <i class="fa fa-users"></i> Daily Production Summary
         </h1>
     </section>
     <section class="content">
