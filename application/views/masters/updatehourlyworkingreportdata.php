@@ -1,5 +1,12 @@
 <style>
-        table {
+       
+       
+       .table-container {
+        overflow-x: auto; /* Horizontal scroll if the table overflows */
+        white-space: nowrap; /* Prevent text wrapping inside table cells */
+    }
+       
+       table {
             border-collapse: collapse;
             width: 100%;
         }
@@ -14,13 +21,37 @@
     </style>
 
 
-<?php
+<style>
+        /* Define print styles */
+        @media print {
+            @page {
+                size: A4 portrait; /* Ensure portrait orientation */
+                margin: 1cm;
+            }
 
-// print_r($getteamdetailsforhrlyinsectionreport['0']['part_number']);
-// exit;
+            body {
+                margin: 0;
+                padding: 0;
+            }
 
-?>
+            /* Hide everything except the specific content to print */
+            body * {
+                visibility: hidden;
+            }
 
+            /* Make only the print-container visible */
+            .print-container, .print-container * {
+                visibility: visible;
+            }
+
+            .print-container {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+            }
+        }
+    </style>
 
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -29,14 +60,16 @@
             <i class="fa fa-users"></i> Daily Production Summary
         </h1>
     </section>
+    
     <section class="content">
         <div class="row">
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-body">   
                         <div class="panel-body">                        
-                            <body>
-                                <table>
+                            <div class="table-container">
+
+                                <table class="table-responsive" styl="max-width: 68%; display: block; overflow-x: auto; white-space: nowrap; width: 70%;">
                                     <tr>
                                         <td colspan="16">SUPRA QUALITY EXPORTS (I) PVT. LTD</td>
                                     </tr>
@@ -66,7 +99,7 @@
                                         <td>Department</td>
                                         <td colspan="5" style="text-align: left;"></td>
                                         <td colspan="5">Target Qty</td>
-                                        <td colspan="4"></td>
+                                        <td colspan="4"><?=$getteamdetailsforhrlyinsectionreport['0']['target_qty'];?></td>
                                      
                                     </tr>
                                     <tr>
@@ -88,268 +121,37 @@
                                         <td colspan="2">TOTAL HOURS</td>
                                         <td colspan="2">Sign</td>
                                     </tr>
-<!--                                   
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td colspan="2"></td>
-                                        <td colspan="2"></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td colspan="2"></td>
-                                        <td colspan="2"></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td colspan="2"></td>
-                                        <td colspan="2"></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td colspan="2"></td>
-                                        <td colspan="2"></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td colspan="2"></td>
-                                        <td colspan="2"></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td colspan="2"></td>
-                                        <td colspan="2"></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td colspan="2"></td>
-                                        <td colspan="2"></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td colspan="2"></td>
-                                        <td colspan="2"></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td colspan="2"></td>
-                                        <td colspan="2"></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td colspan="2"></td>
-                                        <td colspan="2"></td>
-                                    </tr> -->
+
 
                                     <?php  
                                     foreach($getallteamdetailsusingteamid as $key => $value) { ?>
                                      <tr>
                                         <td><?=$value['team_member_name']?></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td><textarea id="w3review" name="w3review" class="form-control"  rows="3" cols="20"></textarea></td>
+                                        <td><textarea id="w3review" name="w3review" class="form-control"  rows="3" cols="20"></textarea></td>
+                                        <td><textarea id="w3review" name="w3review" class="form-control"  rows="3" cols="20"></textarea></td>
+                                        <td><textarea id="w3review" name="w3review" class="form-control"  rows="3" cols="20"></textarea></td>
+                                        <td><textarea id="w3review" name="w3review" class="form-control"  rows="3" cols="20"></textarea></td>
+                                        <td><textarea id="w3review" name="w3review" class="form-control"  rows="3" cols="20"></textarea></td>
+                                        <td><textarea id="w3review" name="w3review" class="form-control"  rows="3" cols="20"></textarea></td>
+                                        <td><textarea id="w3review" name="w3review" class="form-control"  rows="3" cols="20"></textarea></td>
+                                        <td><textarea id="w3review" name="w3review" class="form-control"  rows="3" cols="20"></textarea></td>
+                                        <td><textarea id="w3review" name="w3review" class="form-control"  rows="3" cols="20"></textarea></td>
                                         <td colspan="2"></td>
                                         <td colspan="2"></td>
                                      </tr>
                                     <?php  } ?>
 
                                     <tr>
-                                        <td colspan="15" style="background:pink"></td>
-                                    </tr>
-
-
-
-                                    <tr>
-                                        <td>Name</td>
-                                        <td colspan="5">Method of Testing</td>
-                                        <td colspan="3">Total Check QTY</td>
-                                        <td colspan="3">Accepted QTY</td>
-                                        <td colspan="2">Rej QTY</td>
-                                        <td>Remarks</td>
+                                        <td colspan="15" style="text-align: left;">Remark</td>
                                     </tr>
                                     <tr>
-                                        <td></td>
-                                        <td colspan="5">THREAD RING GUAGE WITH PIN</td>
-                                        <td colspan="3"></td>
-                                        <td colspan="3"></td>
-                                        <td colspan="2"></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td colspan="5">THREAD RING GUAGE WITH PIN</td>
-                                        <td colspan="3"></td>
-                                        <td colspan="3"></td>
-                                        <td colspan="2"></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td colspan="5">THREAD RING GUAGE</td>
-                                        <td colspan="3"></td>
-                                        <td colspan="3"></td>
-                                        <td colspan="2"></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td colspan="5">THREAD PLUG GUAGE WITH PIN</td>
-                                        <td colspan="3"></td>
-                                        <td colspan="3"></td>
-                                        <td colspan="2"></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td colspan="5">THREAD PLUG GUAGE </td>
-                                        <td colspan="3"></td>
-                                        <td colspan="3"></td>
-                                        <td colspan="2"></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td colspan="5">PIN GUAGE</td>
-                                        <td colspan="3"></td>
-                                        <td colspan="3"></td>
-                                        <td colspan="2"></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td colspan="5">VERNER CALIPER</td>
-                                        <td colspan="3"></td>
-                                        <td colspan="3"></td>
-                                        <td colspan="2"></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td colspan="5">PROFILE GUAGE </td>
-                                        <td colspan="3"></td>
-                                        <td colspan="3"></td>
-                                        <td colspan="2"></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td colspan="5">Slip Guage</td>
-                                        <td colspan="3"></td>
-                                        <td colspan="3"></td>
-                                        <td colspan="2"></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="16" style="text-align: left;" >HOD ;-</td>
+                                        <td colspan="15">  
+                                            <input type="text" class="form-control" placeholder="Enter Remark">
+                                        </td>
                                     </tr>
                                 </table>
-                            </body>
+                            </div>
                         </div>
                     </div>
                     <!-- /.box-body -->
@@ -360,3 +162,27 @@
     </section>
 </div>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/common.js" charset="utf-8"></script>
+
+<script>
+        function printDiv(divId) {
+            // Get the HTML of the specified div
+            var printContents = document.getElementById(divId).innerHTML;
+
+            // Open a new window
+            var printWindow = window.open('', '', 'height=600,width=800');
+
+            // Write the content to the new window
+            printWindow.document.write('<html><head><title>Print</title>');
+            printWindow.document.write('<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">');
+            printWindow.document.write('<style>@media print { @page { size: A4 portrait; margin: 1cm; }}</style>');
+            printWindow.document.write('</head><body>');
+            printWindow.document.write(printContents);
+            printWindow.document.write('</body></html>');
+
+            // Close the document to prepare for printing
+            printWindow.document.close();
+
+            // Trigger the print dialog
+            printWindow.print();
+        }
+    </script>

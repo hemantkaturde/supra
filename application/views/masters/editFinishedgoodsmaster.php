@@ -65,14 +65,14 @@
                                             <p class="error current_stock_error"></p>
                                         </div>
                                     </div>
-                                 <!-- 
+                                
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="previous_stock">Previous Stock </label>
-                                            <input type="number" class="form-control" id="previous_stock" value="<?=$data['previous_stock']?>"  name="previous_stock">
-                                            <p class="error previous_stock_error"></p>
+                                            <label for="target_qty">Target Qty</label>
+                                            <input type="number" class="form-control" id="target_qty" value="<?=$data['target_qty']?>" name="target_qty">
+                                            <p class="error target_qty_error"></p>
                                         </div>
-                                    </div> -->
+                                    </div>
                                 </div>
 
                                 <div class="row">

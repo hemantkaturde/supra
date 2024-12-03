@@ -19524,14 +19524,14 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['name'] = $value['name'];
                 $data[$counter]['lot_no'] = $value['lot_no'];
                 $data[$counter]['p_o_qty'] = $value['p_o_qty'];
-                $data[$counter]['invoice_qty'] = $value['invoice_qty'];
-                $data[$counter]['balance_qty'] = $value['balance_qty'];
-                $data[$counter]['invoice_qty_in_kgs'] = $value['invoice_qty_in_kgs'];
-                $data[$counter]['net_weight_kgs'] = '';
+                // $data[$counter]['invoice_qty'] = $value['invoice_qty'];
+                // $data[$counter]['balance_qty'] = $value['balance_qty'];
+                // $data[$counter]['invoice_qty_in_kgs'] = $value['invoice_qty_in_kgs'];
+                // $data[$counter]['net_weight_kgs'] = '';
                 $data[$counter]['challan_no'] = $value['challan_no'];
                 $data[$counter]['challan_date'] = $value['challan_date'];
                 $data[$counter]['received_date'] = $value['received_date'];
-                $data[$counter]['fg_material_gross_weight'] = "";
+                // $data[$counter]['fg_material_gross_weight'] = "";
                 $data[$counter]['units'] = $value['units'];
                 $data[$counter]['goni'] = $value['boxex_goni_bundle'];
                

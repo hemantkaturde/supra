@@ -18,14 +18,14 @@
                                         <th>Description</th>
                                         <th>Lot Number</th>
                                         <th>P.O.Qty (in Pcs)</th>
-                                        <th>Invoice Qty (in Pcs)</th>
+                                        <!-- <th>Invoice Qty (in Pcs)</th>
                                         <th>Balance Qty in Pcs</th>
                                         <th>Invoice Qty (in Kgs)</th>
-                                        <th>Net weight (in Kgs)	</th>
+                                        <th>Net weight (in Kgs)	</th> -->
                                         <th>Challan No</th>
                                         <th>Challan Date</th>
                                         <th>Received Date</th>
-                                        <th>FG Material Gross Weight</th>
+                                        <!-- <th>FG Material Gross Weight</th> -->
                                         <th>Units</th>
                                         <th>No. of Boxes / Goni / Bundle</th>
                                         <th>Action</th>
