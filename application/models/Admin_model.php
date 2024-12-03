@@ -19546,7 +19546,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
 
     public function getteamdetailsforhrlyinsectionreport($incoming_details_id){
-        $this->db->select('*,'.TBL_TEAM_MASTER.'.id as team_master_id,'.TBL_FINISHED_GOODS.'.name as description');
+        $this->db->select('*,'.TBL_TEAM_MASTER.'.id as team_master_id,'.TBL_FINISHED_GOODS.'.name as description,'.TBL_TEAM_MASTER.'.remark as HOD');
         $this->db->join(TBL_INCOMING_DETAILS, TBL_INCOMING_DETAILS.'.id  = '.TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_INCOMING_DETAILS.'.vendor_name');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id  = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
