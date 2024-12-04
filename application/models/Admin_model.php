@@ -17877,7 +17877,20 @@ public function updatestockaftercalculation($balence_qty_in_pcs,$finishgood_id,$
         $this->db->order_by(TBL_STOCKS.'.stock_id','DESC');
         $query = $this->db->get(TBL_STOCKS);
         $fetch_result = $query->row_array();
-        return $fetch_result;
+
+        if(count($fetch_result)>1){
+            return $fetch_result;
+        }else{
+            $this->db->select(TBL_STOCKS.'.previous_stock');
+            // $this->db->join(TBL_STOCKS_ITEM, TBL_STOCKS_ITEM.'.stock_form_id = '.TBL_STOCKS.'.stock_id');
+            $this->db->where(TBL_STOCKS.'.stock_id <',$stock_id);
+            //$this->db->order_by(TBL_STOCKS.'.stock_id','DESC');
+            $query = $this->db->get(TBL_STOCKS);
+            $fetch_result = $query->row_array();
+            return $fetch_result;
+        }
+
+        
     }
 
     public function getUspincomingdetailscount($params){
