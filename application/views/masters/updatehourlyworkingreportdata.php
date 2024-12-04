@@ -4,7 +4,7 @@
        .table-container {
         overflow-x: auto; /* Horizontal scroll if the table overflows */
         white-space: nowrap; /* Prevent text wrapping inside table cells */
-    }
+       }
        
        table {
             border-collapse: collapse;
@@ -20,38 +20,6 @@
         }
     </style>
 
-
-<style>
-        /* Define print styles */
-        @media print {
-            @page {
-                size: A4 portrait; /* Ensure portrait orientation */
-                margin: 1cm;
-            }
-
-            body {
-                margin: 0;
-                padding: 0;
-            }
-
-            /* Hide everything except the specific content to print */
-            body * {
-                visibility: hidden;
-            }
-
-            /* Make only the print-container visible */
-            .print-container, .print-container * {
-                visibility: visible;
-            }
-
-            .print-container {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-            }
-        }
-    </style>
 
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -151,6 +119,12 @@
                                         </td>
                                     </tr>
                                 </table>
+
+                                <div class="btn-group" role="group" aria-label="Basic example" style="float: inline-end;">
+                                    <button type="button" class="btn btn-secondary">Left</button>
+                                    <button type="button" class="btn btn-secondary">Middle</button>
+                                    <button type="button" class="btn btn-secondary">Right</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -162,27 +136,3 @@
     </section>
 </div>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/common.js" charset="utf-8"></script>
-
-<script>
-        function printDiv(divId) {
-            // Get the HTML of the specified div
-            var printContents = document.getElementById(divId).innerHTML;
-
-            // Open a new window
-            var printWindow = window.open('', '', 'height=600,width=800');
-
-            // Write the content to the new window
-            printWindow.document.write('<html><head><title>Print</title>');
-            printWindow.document.write('<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">');
-            printWindow.document.write('<style>@media print { @page { size: A4 portrait; margin: 1cm; }}</style>');
-            printWindow.document.write('</head><body>');
-            printWindow.document.write(printContents);
-            printWindow.document.write('</body></html>');
-
-            // Close the document to prepare for printing
-            printWindow.document.close();
-
-            // Trigger the print dialog
-            printWindow.print();
-        }
-    </script>
