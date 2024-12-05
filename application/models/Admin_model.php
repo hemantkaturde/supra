@@ -6168,11 +6168,14 @@ class Admin_model extends CI_Model
 
                 if($this->session->userdata('roleText')=='Superadmin'){
 
+
                     $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewchallanform/".$value['challan_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
                     $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editchallanform/".$value['challan_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
                     if($value['vendor_supplier_type']=='supplier'){
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downloadgetepasssup/".$value['challan_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-ticket' aria-hidden='true'></i></a>   &nbsp ";
                         $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downloadchallanform/".$value['challan_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
                     }else{
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downloadgetepassvendor/".$value['challan_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-ticket' aria-hidden='true'></i></a>   &nbsp ";
                         $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downloadchallanformvendor/".$value['challan_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
                     }
                     $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['challan_id']."' class='fa fa-trash-o deletechallanform' aria-hidden='true'></i>"; 
@@ -6180,6 +6183,8 @@ class Admin_model extends CI_Model
 
                     if($this->session->userdata('roleText')=='Stock' || $this->session->userdata('roleText')=='Purchase'){
 
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downloadgetepass/".$value['challan_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-ticket' aria-hidden='true'></i></a>   &nbsp ";
+                        
                         $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewchallanform/".$value['challan_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
                         $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editchallanform/".$value['challan_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
                         if($value['vendor_supplier_type']=='supplier'){

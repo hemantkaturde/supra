@@ -585,8 +585,8 @@ $route['emailpaymentdetails'] = "admin/emailpaymentdetails";
 $route['fetchthrlyreportlist'] = "admin/fetchthrlyreportlist";
 $route['updatehourlyworkingreportdata/(:any)'] = "admin/updatehourlyworkingreportdata/$1";
 
-
-
+$route['downloadgetepasssup/(:any)'] = "admin/downloadgetepasssup/$1";
+$route['downloadgetepassvendor/(:any)'] = "admin/downloadgetepassvendor/$1";
 
 
 /* End of file routes.php */
