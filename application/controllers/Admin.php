@@ -15336,24 +15336,6 @@ public function downloadgetepassvendor($id){
     </tr>';
 
 
-     if($gst_rate=='CGST_SGST' || $gst_rate=='CGST_SGST_6'){
-        $tax_value = '<tr style="border: 1px solid black;">               
-            <td colspan="6"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>(+) '.$cgst_tax_rate.' CGST </b></td>    
-                <td style="border: 1px solid black;padding-left: 10px;">'.$cgst_tax_value.'</td>
-            </tr>
-
-            <tr style="border: 1px solid black;">
-
-                <td colspan="6"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>(+) '.$sgst_tax_rate.' SGST </b></td>    
-                <td style="border: 1px solid black;padding-left: 10px;">'.$sgst_tax_value.'</td>
-            </tr>';
-     }else{
-        $tax_value = '
-            <tr style="border: 1px solid black;">
-                <td colspan="6"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>(+) '.$igst_tax_rate.' IGST </b></td>    
-                <td style="border: 1px solid black;padding-left: 10px;">'.$igst_tax_value.'</td>
-            </tr>';
-     }
 
   
     $mpdf = new \Mpdf\Mpdf();
