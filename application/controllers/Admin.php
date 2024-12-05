@@ -14753,7 +14753,7 @@ public function downloadgetepasssup($id){
     $item_count =count($getChallanformditemdeatilsForInvoice);
 
     if($item_count==1){
-        $padding_bottom = '200px';
+        $padding_bottom = '300px';
     }else if($item_count==2){
         $padding_bottom = '40px';
     }else if($item_count==3){
@@ -14803,39 +14803,9 @@ public function downloadgetepasssup($id){
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$ii.'</td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['type_of_raw_material'].'</br></td> 
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['part_number'].'</td>
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['type_of_raw_material'].'</td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['type_of_raw_platting'].'</td> 
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.trim($value['qty']).'</td>    
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['value'].'/-'.'</td>
                 </tr>';
-                $subtotal+=$value['value'];
-                $raw_material_cost +=$value['row_material_cost'];
-                $grand_total +=$value['grand_total'];
-                $gst_rate = $value['gst_rate'];
-
-                if($value['gst_rate']=='CGST_SGST'){
-                    $cgst_tax_rate = 9;
-                    $sgst_tax_rate = 9;
-
-                    $cgst_tax_value = $value['gst_value']/2;
-                    $sgst_tax_value = $value['gst_value']/2;
-
-                }else if($value['gst_rate']=='CGST_SGST_6'){
-                    $cgst_tax_rate = 6;
-                    $sgst_tax_rate = 6;
-
-                    $cgst_tax_value = $value['gst_value']/2;
-                    $sgst_tax_value = $value['gst_value']/2;
-
-                }else if($value['gst_rate']=='IGST'){
-                    $igst_tax_rate = 18;
-                    $igst_tax_value = $value['gst_value'];
-                }else if($value['gst_rate']=='IGST_12'){
-                    $igst_tax_rate = 12;
-                    $igst_tax_value = $value['gst_value'];
-
-                }
-
             $ii++;       
     }
 
@@ -14845,29 +14815,7 @@ public function downloadgetepasssup($id){
         <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
         <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
         <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-        <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-        <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
     </tr>';
-
-
-     if($gst_rate=='CGST_SGST' || $gst_rate=='CGST_SGST_6'){
-        $tax_value = '<tr style="border: 1px solid black;">               
-            <td colspan="6"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>(+) '.$cgst_tax_rate.' CGST </b></td>    
-                <td style="border: 1px solid black;padding-left: 10px;">'.$cgst_tax_value.'</td>
-            </tr>
-
-            <tr style="border: 1px solid black;">
-
-                <td colspan="6"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>(+) '.$sgst_tax_rate.' SGST </b></td>    
-                <td style="border: 1px solid black;padding-left: 10px;">'.$sgst_tax_value.'</td>
-            </tr>';
-     }else{
-        $tax_value = '
-            <tr style="border: 1px solid black;">
-                <td colspan="6"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>(+) '.$igst_tax_rate.' IGST </b></td>    
-                <td style="border: 1px solid black;padding-left: 10px;">'.$igst_tax_value.'</td>
-            </tr>';
-     }
 
   
     $mpdf = new \Mpdf\Mpdf();
@@ -14933,25 +14881,10 @@ public function downloadgetepasssup($id){
                     <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%; width="10%">SR.NO.</th>
                     <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%; width="30%">F.G. PART DESCRIPTION</th>
                     <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%; width="20%">F.G. PART NO</th>  
-                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%; width="10%">RM TYPE</th> 
                     <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%; width="10%">PROCESS</th>  
                     <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%; width="10%">QTY IN PCS</th>  
-                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%; width="10%">AMOUNT</th>
                 </tr>
-                '.$CartItem.$space.' 
-
-            <tr style="border: 1px solid black;">               
-                <td colspan="6"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>Total Raw Material Cost </b></td>    
-                <td style="border: 1px solid black;padding-left: 10px;">'. $raw_material_cost.'</td>
-            </tr>
-             '. $tax_value.'
-            
-
-            <tr style="border: 1px solid black;">
-                    <td colspan="6"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>TOTAL</b></td>    
-                    <td style="border: 1px solid black;padding-left: 10px;">'.$grand_total.'/-'.'</td>
-              </tr>
-          
+                '.$CartItem.$space.'       
             </table>
 
             <table style=" width: 100%;border-collapse: collapse;border: #ccc 1px solid;font-family:cambria;font-size:12px">
@@ -14965,18 +14898,16 @@ public function downloadgetepasssup($id){
             <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:12px">
                   
                    <tr style="border: 1px solid black;">
-                        <td style="border: 1px solid black;padding-left: 10px;" width="75%;" valign="top">
-                            <div style="margin-bottom:10px;">
-                                <p><b>Received the above-mentioned goods in good order & condition & 
-                                returned the Duplicate Duty sealed & signed.</b></p>
-                            </div>
-                            <br>
-
-                           
-                            <p><b>Dispatched By: </b>'.$getChallanformdetailsforInvoice['dispatched_by'].'</p>
-                            <p><b>No.of Bags/ Boxes/ Goni: </b>'.$getChallanformdetailsforInvoice['no_of_bags_boxs_goni'].'</p>
-                            <p><b>Total Gross Weight: </b>'.$getChallanformdetailsforInvoice['total_gross_weight_in_kgs'].'</p>
-                            <p><b>Total Net Weight: </b>'.$getChallanformdetailsforInvoice['total_netweight_in_kgs'].'</p>
+                         <td style="border: 1px solid black;padding-left: 10px;" width="75%;" valign="top">
+                            <p><b>'.str_repeat('&nbsp;', 5).'</b></p>
+                            <p><b>'.str_repeat('&nbsp;', 5).'</b></p>
+                            <p><b>Taken By:</b></p>
+                            <p>Goods/items Checked as per above list and found Correct.</p>
+                            <p>Signature:</p>
+                             <p><b>'.str_repeat('&nbsp;', 5).'</b></p>
+                             <p><b>'.str_repeat('&nbsp;', 5).'</b></p>
+                             <p><b>'.str_repeat('&nbsp;', 5).'</b></p>
+                            <p><b>Status: Returnable / Non Returnable</p>
                           
                         </td>
                         <td style="border: 1px solid black;text-align: center;" width="25%" valign="top">
