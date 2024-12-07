@@ -7835,10 +7835,10 @@ class Admin extends BaseController
                         'pre_usp_id' =>    trim($this->input->post('pre_usp_id')),
                         'pre_remark' =>    trim($this->input->post('pre_remark')),
 
-                        'dispatched_by' =>    trim($this->input->post('dispatched_by')),
-                        'total_gross_weight_in_kgs' =>    trim($this->input->post('total_gross_weight_in_kgs')),
-                        'total_netweight_in_kgs' =>    trim($this->input->post('total_netweight_in_kgs')),
-                        'no_of_bags_boxs_goni' =>    trim($this->input->post('no_of_bags_boxs_goni')),
+                        'pre_dispatched_by' =>    trim($this->input->post('dispatched_by')),
+                        'pre_total_netweight_in_kgs' =>    trim($this->input->post('total_gross_weight_in_kgs')),
+                        'pre_total_netweight_in_kgs' =>    trim($this->input->post('total_netweight_in_kgs')),
+                        'pre_paid_unpaid' =>    trim($this->input->post('no_of_bags_boxs_goni')),
                     );
                 }else{
 
@@ -14755,11 +14755,11 @@ public function downloadgetepasssup($id){
     if($item_count==1){
         $padding_bottom = '300px';
     }else if($item_count==2){
-        $padding_bottom = '80px';
+        $padding_bottom = '280px';
     }else if($item_count==3){
-        $padding_bottom = '20px';
+        $padding_bottom = '250px';
     }else{
-        $padding_bottom = '20px';
+        $padding_bottom = '80px';
     }
 
 
@@ -14912,7 +14912,7 @@ public function downloadgetepasssup($id){
                         </td>
                         <td style="border: 1px solid black;text-align: center;" width="25%" valign="top">
                             <p style="vertical-align: text-top;font-size:12px;color:#206a9b"><b>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</b></p>
-                            <br/><img src="'.base_url().'assets/images/stmps/rr_challan.png" width="130" height="100">
+                            <br/><img src="'.base_url().'assets/images/stmps/comman_stamp.png" width="130" height="100">
                             <p style="vertical-align: text-top;font-size:10px;color:#206a9b"><b>AUTHORIZED SIGNATORY</b></p>
                         </td> 
                 </tr>
@@ -15207,11 +15207,11 @@ public function downloadgetepassvendor($id){
     if($item_count==1){
         $padding_bottom = '300px';
     }else if($item_count==2){
-        $padding_bottom = '80px';
+        $padding_bottom = '280px';
     }else if($item_count==3){
-        $padding_bottom = '20px';
+        $padding_bottom = '250px';
     }else{
-        $padding_bottom = '20px';
+        $padding_bottom = '80px';
     }
 
 
@@ -15366,7 +15366,7 @@ public function downloadgetepassvendor($id){
                         </td>
                         <td style="border: 1px solid black;text-align: center;" width="25%" valign="top">
                             <p style="vertical-align: text-top;font-size:12px;color:#206a9b"><b>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</b></p>
-                            <br/><img src="'.base_url().'assets/images/stmps/rr_challan.png" width="130" height="100">
+                            <br/><img src="'.base_url().'assets/images/stmps/comman_stamp.png" width="130" height="100">
                             <p style="vertical-align: text-top;font-size:10px;color:#206a9b"><b>AUTHORIZED SIGNATORY</b></p>
                         </td> 
                 </tr>
