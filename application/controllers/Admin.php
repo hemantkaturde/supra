@@ -14737,6 +14737,11 @@ public function downloadgetepasssup($id){
     $getChallanformditemdeatilsForInvoice = $this->admin_model->getChallanformditemdeatilsForInvoice($id);
     $getCompanyAddressdetails = $this->admin_model->getCompanyAddressdetails($id);
 
+    $challan_no = $getChallanformdetailsforInvoice['rrchallaon'];
+    $replacement = "SQGP";
+    $final_date_pass = $replacement . substr($challan_no, 4);
+
+
    
     $CartItem = "";
     $supplierItem = "";
@@ -14866,7 +14871,7 @@ public function downloadgetepasssup($id){
                     <td style="border-left: 1px solid black;padding-left: 15px;font-size:13px;" width="50%" valign="top">
                         <div>
                             <p><b></b>'. str_repeat('&nbsp;', 5).'<span style="color:red"></span></p>
-                            <p><b>CHALLAN NO :</b> '.'<span style="color:red">'.$getChallanformdetailsforInvoice['rrchallaon'].'</span></p>
+                            <p><b>CHALLAN NO :</b> '.'<span style="color:red">'.$final_date_pass.'</span></p>
                             <p>&nbsp;</p>
                             <p><b>CHALLAN DATE :</b> '.date('d-m-Y',strtotime($getChallanformdetailsforInvoice['challan_date'])).'</p>
                             <p>&nbsp;</p>
@@ -15189,7 +15194,12 @@ public function downloadgetepassvendor($id){
     $getChallanformditemdeatilsForInvoice = $this->admin_model->getchallanformeatilsForInvoicevendor($id);
     $getCompanyAddressdetails = $this->admin_model->getCompanyAddressdetails($id);
 
-   
+    $challan_no = $getChallanformdetailsforInvoice['rrchallaon'];
+    $replacement = "SQGP";
+    $final_date_pass = $replacement . substr($challan_no, 4);
+
+
+
     $CartItem = "";
     $supplierItem = "";
     $i =1;
@@ -15317,7 +15327,7 @@ public function downloadgetepassvendor($id){
                     <td style="border-left: 1px solid black;padding-left: 15px;font-size:13px;" width="50%" valign="top">
                         <div>
                             <p><b></b>'. str_repeat('&nbsp;', 5).'<span style="color:red"></span></p>
-                            <p><b>GATE PASS NO :</b> '.'<span style="color:red">'.$getChallanformdetailsforInvoice['rrchallaon'].'</span></p>
+                            <p><b>GATE PASS NO :</b> '.'<span style="color:red">'.$final_date_pass.'</span></p>
                             <p>&nbsp;</p>
                             <p><b>GATE PASS DATE :</b> '.date('d-m-Y',strtotime($getChallanformdetailsforInvoice['challan_date'])).'</p>
                             <p>&nbsp;</p>
