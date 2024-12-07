@@ -14757,7 +14757,7 @@ public function downloadgetepasssup($id){
     }else if($item_count==2){
         $padding_bottom = '250px';
     }else if($item_count==3){
-        $padding_bottom = '180px';
+        $padding_bottom = '160px';
     }else{
         $padding_bottom = '80px';
     }
@@ -15209,7 +15209,7 @@ public function downloadgetepassvendor($id){
     }else if($item_count==2){
         $padding_bottom = '250px';
     }else if($item_count==3){
-        $padding_bottom = '180px';
+        $padding_bottom = '160px';
     }else{
         $padding_bottom = '80px';
     }
