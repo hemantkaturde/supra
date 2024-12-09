@@ -36,6 +36,11 @@
                     <div class="box-body">   
                         <div class="panel-body">                        
                             <div class="table-container">
+                            <form id="dataForm">
+
+                                 <input type="hidden" id="incoming_item_id" name="incoming_item_id" value="<?=$getteamdetailsforhrlyinsectionreport['0']['incoming_item_id'];?>">
+                                 <input type="hidden" id="team_master_main_id" name="team_master_main_id" value="<?=$getteamdetailsforhrlyinsectionreport['0']['team_master_id'];?>">
+
 
                                 <table class="table-responsive" styl="max-width: 68%; display: block; overflow-x: auto; white-space: nowrap; width: 70%;">
                                     <tr>
@@ -92,20 +97,25 @@
 
 
                                     <?php  
-                                    foreach($getallteamdetailsusingteamid as $key => $value) { ?>
+                                    foreach($getallteamdetailsusingteamid as $key => $value) { 
+                                        
+                                        ?>
                                      <tr>
                                         <td><?=$value['team_member_name']?></td>
-                                        <td><textarea id="w3review" name="w3review" class="form-control"  rows="3" cols="20"></textarea></td>
-                                        <td><textarea id="w3review" name="w3review" class="form-control"  rows="3" cols="20"></textarea></td>
-                                        <td><textarea id="w3review" name="w3review" class="form-control"  rows="3" cols="20"></textarea></td>
-                                        <td><textarea id="w3review" name="w3review" class="form-control"  rows="3" cols="20"></textarea></td>
-                                        <td><textarea id="w3review" name="w3review" class="form-control"  rows="3" cols="20"></textarea></td>
-                                        <td><textarea id="w3review" name="w3review" class="form-control"  rows="3" cols="20"></textarea></td>
-                                        <td><textarea id="w3review" name="w3review" class="form-control"  rows="3" cols="20"></textarea></td>
-                                        <td><textarea id="w3review" name="w3review" class="form-control"  rows="3" cols="20"></textarea></td>
-                                        <td><textarea id="w3review" name="w3review" class="form-control"  rows="3" cols="20"></textarea></td>
-                                        <td><textarea id="w3review" name="w3review" class="form-control"  rows="3" cols="20"></textarea></td>
-                                        <td colspan="2"></td>
+                                        <td> <input type="hidden" name="team_id[]" value="<?=$value['id']?>">  
+                                            <textarea id="textarea_9_10" name="textarea_9_10[]" data-index='<?=$key?>' class="form-control textarea_9_10"  rows="3" cols="20"> </textarea>
+                                        </td>
+                                        
+                                        <td><textarea id="textarea_10_11" name="textarea_10_11[]" class="form-control textarea_10_11"  data-index='<?=$key?>' rows="3" cols="20"></textarea></td>
+                                        <td><textarea id="textarea_11_12" name="textarea_11_12[]" class="form-control textarea_11_12" data-index='<?=$key?>' rows="3" cols="20"></textarea></td>
+                                        <td><textarea id="textarea_12_01" name="textarea_12_01[]" class="form-control textarea_12_01" data-index='<?=$key?>' rows="3" cols="20"></textarea></td>
+                                        <td><textarea id="textarea_01_230" name="textarea_01_230[]" class="form-control textarea_01_230" data-index='<?=$key?>' rows="3" cols="20"></textarea></td>
+                                        <td><textarea id="textarea_230_330" name="textarea_230_330[]" class="form-control textarea_230_330" data-index='<?=$key?>' rows="3" cols="20"></textarea></td>
+                                        <td><textarea id="textarea_330_430" name="textarea_330_430[]" class="form-control textarea_330_430" data-index='<?=$key?>' rows="3" cols="20"></textarea></td>
+                                        <td><textarea id="textarea_430_530" name="textarea_430_530[]" class="form-control textarea_430_530" data-index='<?=$key?>' rows="3" cols="20"></textarea></td>
+                                        <td><textarea id="textarea_530_630" name="textarea_530_630[]" class="form-control textarea_530_630" data-index='<?=$key?>' rows="3" cols="20"></textarea></td>
+                                        <td><textarea id="textarea_630_700" name="textarea_630_700[]" class="form-control textarea_630_700" data-index='<?=$key?>' rows="3" cols="20"></textarea></td>
+                                        <td colspan="2"><textarea id="textarea_total_hrs" name="textarea_total_hrs[] textarea_630_700" data-index='<?=$key?>' class="form-control"  rows="3" cols="20"></textarea></td>
                                         <td colspan="2"></td>
                                      </tr>
                                     <?php  } ?>
@@ -115,16 +125,18 @@
                                     </tr>
                                     <tr>
                                         <td colspan="15">  
-                                            <input type="text" class="form-control" placeholder="Enter Remark">
+                                            <input type="text" class="form-control" id="remark_of_hrly_report" name="remark_of_hrly_report" placeholder="Enter Remark">
                                         </td>
                                     </tr>
                                 </table>
 
-                                <div class="btn-group" role="group" aria-label="Basic example" style="float: inline-end;">
-                                    <button type="button" class="btn btn-secondary">Left</button>
-                                    <button type="button" class="btn btn-secondary">Middle</button>
-                                    <button type="button" class="btn btn-secondary">Right</button>
+                                <div class="btn-group" role="group" aria-label="Basic example" style="float: inline-end;margin-top:10px;">
+                                    <button type="button" id="update_data_hrly_inspection" class="btn btn-primary" style="margin-right:10px;"><i class="fa fa-save"></i> Update Data</button>
+                                    <button type="button" id="download_report" class="btn btn-primary"><i class="fa fa-file-excel-o"></i> Downlaod Report</button>
                                 </div>
+
+                                    </form>
+                                
                             </div>
                         </div>
                     </div>

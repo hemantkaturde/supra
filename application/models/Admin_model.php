@@ -19569,7 +19569,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
 
     public function getteamdetailsforhrlyinsectionreport($incoming_details_id){
-        $this->db->select('*,'.TBL_TEAM_MASTER.'.id as team_master_id,'.TBL_FINISHED_GOODS.'.name as description,'.TBL_TEAM_MASTER.'.remark as HOD');
+        $this->db->select('*,'.TBL_TEAM_MASTER.'.id as team_master_id,'.TBL_FINISHED_GOODS.'.name as description,'.TBL_TEAM_MASTER.'.remark as HOD,'.TBL_INCOMING_DETAILS_ITEM.'.id as incoming_item_id');
         $this->db->join(TBL_INCOMING_DETAILS, TBL_INCOMING_DETAILS.'.id  = '.TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_INCOMING_DETAILS.'.vendor_name');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id  = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
@@ -19592,6 +19592,43 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         return $data;
 
     }
+
+
+    public function updatehrlyinspectionreport($data){
+
+    
+         // Prepare the data for insertion
+         $insert_data = [
+            'incoming_item_id' => $data['time_slots']['incoming_item_id'],
+            'team_master_main_id' => $data['time_slots']['team_master_main_id'],
+            'team_id' => $data['time_slots']['employee_id'],
+            'textarea_9_10' => $data['time_slots']['9_to_10'],
+            'textarea_10_11' => $data['time_slots']['10_to_11'],
+            'textarea_11_12' => $data['time_slots']['11_to_12'],
+            'textarea_12_01' => $data['time_slots']['12_to_1'],
+            'textarea_01_230' => $data['time_slots']['1_to_2_30'],
+            'textarea_230_330'=> $data['time_slots']['2_30_to_3_30'],
+            'textarea_330_430'=> $data['time_slots']['3_30_to_4_30'],
+            'textarea_430_530'=> $data['time_slots']['4_30_to_5_30'],
+            'textarea_530_630'=> $data['time_slots']['5_30_to_6_30'],
+            'textarea_630_700'=> $data['time_slots']['6_30_to_7'],
+            'textarea_total_hrs'=> $data['time_slots']['textarea_total_hrs'],
+            'remark_of_hrly_report' => $data['time_slots']['remark_of_hrly_report'],
+            'date' => date('Y-m-d'),
+            ];
+
+
+        // Insert the data into the database
+        return $this->db->insert('tbl_hrly_production_summary', $insert_data);
+
+    }
+
+
+
+    public function getdataupdatehrlyinspectionreport()
+        {
+           echo "sjdfh";
+        }
 
 
 }

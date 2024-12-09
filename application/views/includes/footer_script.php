@@ -24222,7 +24222,7 @@
     </script>
 <?php } ?>
 
-<?php if($pageTitle=='Hourly Inspection Report'){  ?>
+<?php if($pageTitle=='Hourly Inspection Report' || $pageTitle=='Update Hourly Workingreportdata'){  ?>
 	<script type="text/javascript">
         $(document).ready(function() {
 			var team_id =   $('#team_id').val();
@@ -24266,5 +24266,60 @@
 				});
      	});
 
+
+		 $(document).on('click','#update_data_hrly_inspection',function(e){
+					e.preventDefault();
+					$(".loader_ajax").show();
+					//var main_team_id =   $('#main_team_id').val();
+					//var textarea_10_11 =   $('#textarea_10_11').val();
+
+					var formData = $('#dataForm').serialize();
+	
+					$.ajax({
+						url : "<?php echo base_url();?>updatehrlyinspectionreport",
+						type: "POST",
+						data : formData,
+						
+						success: function(data, textStatus, jqXHR)
+						{
+							var fetchResponse = $.parseJSON(data);
+
+			
+							if(fetchResponse.status == "failure")
+							{
+								$.each(fetchResponse.error, function (i, v)
+								{
+									$('.'+i+'_error').html(v);
+								});
+								$(".loader_ajax").hide();
+							}
+							else if(fetchResponse.status == 'success')
+							{
+								swal({
+									title: "Success",
+									text: "Team Member Successfully Added!",
+									icon: "success",
+									button: "Ok",
+									},function(){ 
+										
+											window.location.href = "<?php echo base_url().'updatehourlyworkingreportdata/'?>"+908;
+								});		
+							}
+							
+						},
+						error: function (jqXHR, textStatus, errorThrown)
+						{
+							$(".loader_ajax").hide();
+						}
+					});
+					return false;
+		});
+
+
+
+
+
 	</script>
 <?php } ?>
+
+

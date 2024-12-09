@@ -22740,9 +22740,62 @@ public function updatehourlyworkingreportdata($incoming_details_id){
     /*Get Hrly Detials for hrly inspection Report*/
     $data['getteamdetailsforhrlyinsectionreport'] = $this->admin_model->getteamdetailsforhrlyinsectionreport($incoming_details_id);
     $data['getallteamdetailsusingteamid'] = $this->admin_model->getallteamdetailsusingteamid($getteamdetailsforhrlyinsectionreport[0]['team_master_id']);
-    
+
+    $data['report_datassss'] = $this->admin_model->getdataupdatehrlyinspectionreport();  // Fetch all data
+
     $this->loadViews("masters/updatehourlyworkingreportdata", $this->global, $data, NULL);
 
+}
+
+
+public function updatehrlyinspectionreport(){
+
+    $save_hry_inspection_response =array();
+
+    $formData = $_POST; // $_POST will be an associative array of form data
+
+    $data =array();
+    foreach ($formData as $key => $value) {
+        $data[] = $value;
+    }
+    
+     // Parse the main details
+     $employee_ids = $data[2];  // Array of employee IDs
+     $remark = $data[14];  // Remark from the input
+     
+     // Loop through the employee IDs
+     foreach ($employee_ids as $index => $employee_id) {
+         $time_slots = [
+             'incoming_item_id' => $data[0],
+             'team_master_main_id' => $data[1],   // 9 to 10
+             'employee_id' => $employee_ids[$index],   // 9 to 10
+             '9_to_10' => $data[3][$index],   // 9 to 10
+             '10_to_11' => $data[4][$index],  // 10 to 11
+             '11_to_12' => $data[5][$index],  // 11 to 12
+             '12_to_1' => $data[6][$index],   // 12 to 1
+             '1_to_2_30' => $data[7][$index], // 1 to 2:30
+             '2_30_to_3_30' => $data[8][$index], // 2:30 to 3:30
+             '3_30_to_4_30' => $data[9][$index], // 3:30 to 4:30
+             '4_30_to_5_30' => $data[10][$index], // 4:30 to 5:30
+             '5_30_to_6_30' => $data[11][$index], // 5:30 to 6:30
+             '6_30_to_7' => $data[12][$index], // 6:30 to 7
+             'textarea_total_hrs' => $data[13][$index],
+             'remark_of_hrly_report'=>$remark,
+         ];
+
+         // Insert the data into the database
+         $result = $this->admin_model->updatehrlyinspectionreport([
+             'time_slots' => $time_slots,        
+         ]);
+
+         if($result){
+            $save_hry_inspection_response['status'] = 'success';
+            $save_hry_inspection_response['error'] = array('scrap_date'=>'', 'scrap_type'=>'' ,'remark'=>'');
+        }
+
+     }
+
+     echo json_encode($save_hry_inspection_response); 
 }
 
 
