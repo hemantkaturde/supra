@@ -22739,10 +22739,8 @@ public function updatehourlyworkingreportdata($incoming_details_id){
 
     /*Get Hrly Detials for hrly inspection Report*/
     $data['getteamdetailsforhrlyinsectionreport'] = $this->admin_model->getteamdetailsforhrlyinsectionreport($incoming_details_id);
-    $data['getallteamdetailsusingteamid'] = $this->admin_model->getallteamdetailsusingteamid($getteamdetailsforhrlyinsectionreport[0]['team_master_id']);
-
-    $data['report_datassss'] = $this->admin_model->getdataupdatehrlyinspectionreport();  // Fetch all data
-
+    $data['getallteamdetailsusingteamid'] = $this->admin_model->getallteamdetailsusingteamid($data['getteamdetailsforhrlyinsectionreport'][0]['team_master_id']);
+    
     $this->loadViews("masters/updatehourlyworkingreportdata", $this->global, $data, NULL);
 
 }
@@ -22758,7 +22756,7 @@ public function updatehrlyinspectionreport(){
     foreach ($formData as $key => $value) {
         $data[] = $value;
     }
-    
+
      // Parse the main details
      $employee_ids = $data[2];  // Array of employee IDs
      $remark = $data[14];  // Remark from the input
@@ -22797,6 +22795,124 @@ public function updatehrlyinspectionreport(){
 
      echo json_encode($save_hry_inspection_response); 
 }
+
+
+public function download_report_hrly_inspection($incoming_item_id,$team_master_main_id){
+
+    // create file name
+    $fileName = 'Daily Production Summary -'.date('d-m-Y').'.xls';  
+    // load excel library
+    $date = date('Y-m-d');
+    $empInfo = $this->admin_model->get_download_report_hrly_inspection($incoming_item_id,$team_master_main_id,$date);
+
+    // Create a new PHPExcel object
+    $objPHPExcel = new PHPExcel();
+    $sheet = $objPHPExcel->getActiveSheet();
+
+    // Set metadata
+    $sheet->mergeCells('A1:M1');
+    $sheet->setCellValue('A1', 'SUPRA QUALITY EXPORTS (I) PVT. LTD');
+    $sheet->getStyle('A1')->applyFromArray([
+        'font' => ['bold' => true, 'size' => 14],
+        'alignment' => ['horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER]
+    ]);
+    $sheet->mergeCells('A2:M2');
+    $sheet->setCellValue('A2', 'VISUAL INSPECTION RECORD SHEET');
+    $sheet->getStyle('A2')->applyFromArray([
+        'font' => ['bold' => true, 'size' => 12],
+        'alignment' => ['horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER]
+    ]);
+
+    // Add headers with colorful background
+    $sheet->setCellValue('A4', 'Description')->setCellValue('B4', 'SS Schraubkopf G 1 1/2 Zoll');
+    $sheet->setCellValue('C4', 'Vendor Name')->setCellValue('D4', 'Bijoy Engineering');
+    $sheet->setCellValue('A5', 'Part No.')->setCellValue('B5', '271130');
+    $sheet->setCellValue('C5', 'Order QTY')->setCellValue('D5', '2000');
+    $sheet->setCellValue('E5', 'Rec QTY')->setCellValue('F5', '2024-08-07');
+    $sheet->setCellValue('G5', 'Target Qty')->setCellValue('H5', '500');
+
+    $boldHeaders = ['A4', 'C4', 'A5', 'C5', 'E5', 'G5'];
+
+    foreach ($boldHeaders as $cell) {
+        $sheet->getStyle($cell)->applyFromArray([
+            'font' => ['bold' => true]
+        ]);
+    }
+
+    // Style headers
+    $sheet->getStyle('A7:M7')->applyFromArray([
+        'fill' => [
+            'type' => PHPExcel_Style_Fill::FILL_SOLID,
+            'color' => ['rgb' => 'FFCC00'], // Yellow
+        ],
+        'font' => ['bold' => true],
+        'alignment' => ['horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER],
+        'borders' => [
+            'allborders' => ['style' => PHPExcel_Style_Border::BORDER_THIN],
+        ],
+    ]);
+
+    // Table headers
+    $sheet->setCellValue('A7', 'NAME');
+    $sheet->setCellValue('B7', '9 to 10');
+    $sheet->setCellValue('C7', '10 to 11');
+    $sheet->setCellValue('D7', '11 to 12');
+    $sheet->setCellValue('E7', '12 to 1');
+    $sheet->setCellValue('F7', '1 to 2:30');
+    $sheet->setCellValue('G7', '2:30 to 3:30');
+    $sheet->setCellValue('H7', '3:30 to 4:30');
+    $sheet->setCellValue('I7', '4:30 to 5:30');
+    $sheet->setCellValue('J7', '5:30 to 6:30');
+    $sheet->setCellValue('K7', '6:30 to 7');
+    $sheet->setCellValue('L7', 'TOTAL HOURS');
+    $sheet->setCellValue('M7', 'Sign');
+
+    $row = 8;
+    foreach ($empInfo as $item) {
+
+        $sheet->setCellValue('A' . $row, $item['team_id']);
+        $sheet->setCellValue('B' . $row, $item['textarea_9_10']);
+        $sheet->setCellValue('C' . $row, $item['textarea_10_11']);
+        $sheet->setCellValue('D' . $row, $item['textarea_11_12']);
+        $sheet->setCellValue('E' . $row, $item['textarea_01_230']);
+        $sheet->setCellValue('F' . $row, $item['textarea_230_330']);
+        $sheet->setCellValue('G' . $row, $item['textarea_330_430']);
+        $sheet->setCellValue('H' . $row, $item['textarea_430_530']);
+        $sheet->setCellValue('I' . $row, $item['textarea_530_630']);
+        $sheet->setCellValue('J' . $row, $item['textarea_630_700']);
+        $sheet->setCellValue('K' . $row, $item['textarea_total_hrs']);
+        $sheet->setCellValue('L' . $row, $item['textarea_total_hrs']);
+        $sheet->setCellValue('M' . $row, $item['textarea_total_hrs']);
+        
+        $row++;
+    }
+
+
+
+    // Remark section
+    $sheet->mergeCells('A' . ($row + 1) . ':M' . ($row + 1));
+    $sheet->setCellValue('A' . ($row + 1), 'Remark');
+    $sheet->setCellValue('M' . ($row + 1), '');
+    $sheet->getStyle('A' . ($row + 1))->getFont()->setBold(true);
+
+    // Set column widths
+    foreach (range('A', 'M') as $col) {
+        $sheet->getColumnDimension($col)->setAutoSize(true);
+    }
+
+    // Set filename and save
+    header('Content-Type: application/vnd.ms-excel');
+    header('Content-Disposition: attachment;filename="inspection_report.xls"');
+    header('Cache-Control: max-age=0');
+
+    // Save the Excel file
+    $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+    $objWriter->save('php://output');
+    exit;
+
+}
+
+
 
 
 }

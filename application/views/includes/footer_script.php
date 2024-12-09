@@ -24267,7 +24267,7 @@
      	});
 
 
-		 $(document).on('click','#update_data_hrly_inspection',function(e){
+		$(document).on('click','#update_data_hrly_inspection',function(e){
 					e.preventDefault();
 					$(".loader_ajax").show();
 					//var main_team_id =   $('#main_team_id').val();
@@ -24316,8 +24316,40 @@
 		});
 
 
+		$(document).on('click','#download_report_hrly_inspection',function(e){
+			e.preventDefault();
+			$(".loader_ajax").show();
 
-
+			var incoming_item_id  = $("#incoming_item_id").val();
+            var team_master_main_id  = $("#team_master_main_id").val();
+			
+		
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>admin/download_report_hrly_inspection/"+incoming_item_id+"/"+team_master_main_id,
+				type: "POST",
+				// data : {'hospitals' : hospitals, 'driver' : driver,'ride_start':ride_start,'ride_stop':ride_stop},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						//$(".sales_tracking_report_name_error").html("");
+						alert('No data fond');
+					}
+					else
+					{
+						//$(".sales_tracking_report_name_error").html("");
+						window.location.href = "<?php echo ADMIN_PATH;?>admin/download_report_hrly_inspection/"+incoming_item_id+"/"+team_master_main_id;
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					alert('No data fond');
+					$(".loader_ajax").hide();
+				}
+			});
+			return false;
+		});
 
 	</script>
 <?php } ?>

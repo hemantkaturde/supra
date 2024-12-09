@@ -19585,9 +19585,9 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     public function getallteamdetailsusingteamid($team_master_id){
 
         $this->db->select('*');
-        $query = $this->db->get(TBL_TEAM_MASTER_TRANS);
-        $this->db->where(TBL_TEAM_MASTER_TRANS.".team_id", $team_master_id);
+        $this->db->where(TBL_TEAM_MASTER_TRANS.".team_id", trim($team_master_id));
         $this->db->where(TBL_TEAM_MASTER_TRANS.".status", 1);
+        $query = $this->db->get(TBL_TEAM_MASTER_TRANS);
         $data = $query->result_array();
         return $data;
 
@@ -19596,6 +19596,12 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     public function updatehrlyinspectionreport($data){
 
+
+        $incoming_item_id = $data['time_slots']['incoming_item_id'];
+        $team_master_id = $data['time_slots']['team_master_main_id'];
+        $team_id = $data['time_slots']['employee_id'];
+        $date =  date('Y-m-d');
+        # check if data is already Exists
     
          // Prepare the data for insertion
          $insert_data = [
@@ -19618,17 +19624,54 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             ];
 
 
-        // Insert the data into the database
-        return $this->db->insert('tbl_hrly_production_summary', $insert_data);
+            
+        $check_if_exists =  $this->get_hourly_report($incoming_item_id,$team_master_id,$team_id,$date);
+
+        if($check_if_exists){
+
+            $this->db->where('team_id', $team_id);
+            $this->db->where('team_master_main_id', $team_master_id);
+            $this->db->where('incoming_item_id', $incoming_item_id);
+            $this->db->where('date', $date);
+            if($this->db->update(TBL_HRLY_PRODUCTION_SUMMERY, $insert_data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+
+        }else{
+           // Insert the data into the database
+           return $this->db->insert(TBL_HRLY_PRODUCTION_SUMMERY, $insert_data);
+        }
 
     }
 
-
-
-    public function getdataupdatehrlyinspectionreport()
+    // In your model (e.g., Hourly_model.php)
+    public function get_hourly_report($incoming_item_id,$team_master_id,$team_id,$date)
         {
-           echo "sjdfh";
+            
+            $this->db->select('*');
+            $this->db->where('team_id', $team_id);
+            $this->db->where('team_master_main_id', $team_master_id);
+            $this->db->where('incoming_item_id', $incoming_item_id);
+            $this->db->where('date', $date);
+            $query = $this->db->get('tbl_hrly_production_summary');
+            return $query->result();  // Return the results as an array of objects
         }
+
+  public function get_download_report_hrly_inspection($incoming_item_id,$team_master_main_id,$date){
+
+    $this->db->select('team_id,textarea_9_10,textarea_10_11,textarea_11_12,textarea_11_12,textarea_01_230,textarea_230_330,textarea_330_430,textarea_430_530,textarea_530_630,textarea_630_700,textarea_total_hrs');
+    $this->db->where('team_master_main_id', $team_master_main_id);
+    $this->db->where('incoming_item_id', $incoming_item_id);
+    $this->db->where('date', $date);
+    $query = $this->db->get('tbl_hrly_production_summary');
+    $data = $query->result_array();
+    return $data;  // Return the results as an array of objec
+
+  }
+
+
 
 
 }
