@@ -22805,6 +22805,9 @@ public function download_report_hrly_inspection($incoming_item_id,$team_master_m
     $date = date('Y-m-d');
     $empInfo = $this->admin_model->get_download_report_hrly_inspection($incoming_item_id,$team_master_main_id,$date);
 
+    $getteamdetailsforhrlyinsectionreport = $this->admin_model->getteamdetailsforhrlyinsectionreport($incoming_item_id);
+
+
     // Create a new PHPExcel object
     $objPHPExcel = new PHPExcel();
     $sheet = $objPHPExcel->getActiveSheet();
@@ -22824,12 +22827,12 @@ public function download_report_hrly_inspection($incoming_item_id,$team_master_m
     ]);
 
     // Add headers with colorful background
-    $sheet->setCellValue('A4', 'Description')->setCellValue('B4', 'SS Schraubkopf G 1 1/2 Zoll');
-    $sheet->setCellValue('C4', 'Vendor Name')->setCellValue('D4', 'Bijoy Engineering');
-    $sheet->setCellValue('A5', 'Part No.')->setCellValue('B5', '271130');
-    $sheet->setCellValue('C5', 'Order QTY')->setCellValue('D5', '2000');
-    $sheet->setCellValue('E5', 'Rec QTY')->setCellValue('F5', '2024-08-07');
-    $sheet->setCellValue('G5', 'Target Qty')->setCellValue('H5', '500');
+    $sheet->setCellValue('A4', 'Description')->setCellValue('B4', $getteamdetailsforhrlyinsectionreport['0']['description']);
+    $sheet->setCellValue('C4', 'Vendor Name')->setCellValue('D4', $getteamdetailsforhrlyinsectionreport['0']['vendor_name']);
+    $sheet->setCellValue('A5', 'Part No.')->setCellValue('B5', $getteamdetailsforhrlyinsectionreport['0']['part_number']);
+    $sheet->setCellValue('C5', 'Order QTY')->setCellValue('D5', $getteamdetailsforhrlyinsectionreport['0']['p_o_qty']);
+    $sheet->setCellValue('E5', 'Rec QTY')->setCellValue('F5', $getteamdetailsforhrlyinsectionreport['0']['invoice_qty']);
+    $sheet->setCellValue('G5', 'Target Qty')->setCellValue('H5', $getteamdetailsforhrlyinsectionreport['0']['target_qty']);
 
     $boldHeaders = ['A4', 'C4', 'A5', 'C5', 'E5', 'G5'];
 
@@ -22870,7 +22873,7 @@ public function download_report_hrly_inspection($incoming_item_id,$team_master_m
     $row = 8;
     foreach ($empInfo as $item) {
 
-        $sheet->setCellValue('A' . $row, $item['team_id']);
+        $sheet->setCellValue('A' . $row, $item['team_member_name']);
         $sheet->setCellValue('B' . $row, $item['textarea_9_10']);
         $sheet->setCellValue('C' . $row, $item['textarea_10_11']);
         $sheet->setCellValue('D' . $row, $item['textarea_11_12']);

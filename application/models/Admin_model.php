@@ -19659,17 +19659,18 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             return $query->result();  // Return the results as an array of objects
         }
 
-  public function get_download_report_hrly_inspection($incoming_item_id,$team_master_main_id,$date){
+    public function get_download_report_hrly_inspection($incoming_item_id,$team_master_main_id,$date){
 
-    $this->db->select('team_id,textarea_9_10,textarea_10_11,textarea_11_12,textarea_11_12,textarea_01_230,textarea_230_330,textarea_330_430,textarea_430_530,textarea_530_630,textarea_630_700,textarea_total_hrs');
-    $this->db->where('team_master_main_id', $team_master_main_id);
-    $this->db->where('incoming_item_id', $incoming_item_id);
-    $this->db->where('date', $date);
-    $query = $this->db->get('tbl_hrly_production_summary');
-    $data = $query->result_array();
-    return $data;  // Return the results as an array of objec
+        $this->db->select(TBL_TEAM_MASTER_TRANS.'.team_member_name,textarea_9_10,textarea_10_11,textarea_11_12,textarea_11_12,textarea_01_230,textarea_230_330,textarea_330_430,textarea_430_530,textarea_530_630,textarea_630_700,textarea_total_hrs');
+        $this->db->join(TBL_TEAM_MASTER_TRANS, TBL_TEAM_MASTER_TRANS.'.id  =tbl_hrly_production_summary.team_id');
+        $this->db->where('team_master_main_id', $team_master_main_id);
+        $this->db->where('incoming_item_id', $incoming_item_id);
+        $this->db->where('date', $date);
+        $query = $this->db->get('tbl_hrly_production_summary');
+        $data = $query->result_array();
+        return $data;  // Return the results as an array of objec
 
-  }
+    }
 
 
 

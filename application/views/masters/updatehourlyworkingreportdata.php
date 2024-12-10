@@ -64,14 +64,14 @@
                                         <td>Vendor Name</td>
                                         <td colspan="4" style="text-align: left;"><?=$getteamdetailsforhrlyinsectionreport['0']['vendor_name'];?></td>
                                         <td>Order QTY</td>
-                                        <td colspan="4" style="text-align: left;"><?=$getteamdetailsforhrlyinsectionreport['0']['invoice_qty'];?></td>
+                                        <td colspan="4" style="text-align: left;"><?=$getteamdetailsforhrlyinsectionreport['0']['p_o_qty'];?></td>
                                         <td>Rec QTY</td>
-                                        <td colspan="4" style="text-align: left;"><?=$getteamdetailsforhrlyinsectionreport['0']['received_date'];?></td>
+                                        <td colspan="4" style="text-align: left;"><?=$getteamdetailsforhrlyinsectionreport['0']['invoice_qty'];?></td>
                                     </tr>
                                     <tr>
                                         <td>HOD</td>
                                         <td colspan="5" style="text-align: left;"><?=$getteamdetailsforhrlyinsectionreport['0']['HOD'];?></td>
-                                        <td colspan="5">Target Qty</td>
+                                        <td colspan="5" style="text-align: left;">Target Qty</td>
                                         <td colspan="4"  style="text-align: left;"><?=$getteamdetailsforhrlyinsectionreport['0']['target_qty'];?></td>
                                      
                                     </tr>
