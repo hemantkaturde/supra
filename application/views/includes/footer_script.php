@@ -24270,7 +24270,7 @@
 		$(document).on('click','#update_data_hrly_inspection',function(e){
 					e.preventDefault();
 					$(".loader_ajax").show();
-					//var main_team_id =   $('#main_team_id').val();
+					var incoming_item_id =   $('#incoming_item_id').val();
 					//var textarea_10_11 =   $('#textarea_10_11').val();
 
 					var formData = $('#dataForm').serialize();
@@ -24302,7 +24302,7 @@
 									button: "Ok",
 									},function(){ 
 										
-											window.location.href = "<?php echo base_url().'updatehourlyworkingreportdata/'?>"+908;
+											window.location.href = "<?php echo base_url().'updatehourlyworkingreportdata/'?>"+incoming_item_id;
 								});		
 							}
 							
