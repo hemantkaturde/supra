@@ -22820,7 +22820,7 @@ public function download_report_hrly_inspection($incoming_item_id,$team_master_m
         'alignment' => ['horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER]
     ]);
     $sheet->mergeCells('A2:M2');
-    $sheet->setCellValue('A2', 'VISUAL INSPECTION RECORD SHEET');
+    $sheet->setCellValue('A2', 'VISUAL INSPECTION RECORD SHEET '.date('Y-m-d'));
     $sheet->getStyle('A2')->applyFromArray([
         'font' => ['bold' => true, 'size' => 12],
         'alignment' => ['horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER]
