@@ -19559,24 +19559,30 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['invoice_date'] =  date("d-m-Y", strtotime($value['invoice_date']));
                 $data[$counter]['challan_no'] = $value['challan_no'];
                 $data[$counter]['challan_date'] = date("d-m-Y", strtotime($value['challan_date']));
-                $data[$counter]['received_date'] = $value['received_date'];
+                $data[$counter]['received_date'] = date("d-m-Y", strtotime($value['received_date']));
                 // $data[$counter]['fg_material_gross_weight'] = "";
                 $data[$counter]['units'] = $value['units'];
                 $data[$counter]['goni'] = $value['boxex_goni_bundle'];
                
                 $data[$counter]['action'] = '';
 
-                if($value['name']){
-                     if($value['userId']==$this->session->userdata("userId")){
-                        $data[$counter]['action'] .= "<a id='assign_team_to_item'  data-id='".$value['incoming_details_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>";
-                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."updatehourlyworkingreportdata/".$value['incoming_details_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a> ";
-                     }
-                }else{
+                if($this->session->userdata('roleText')=='Superadmin'){
                     $data[$counter]['action'] .= "<a id='assign_team_to_item'  data-id='".$value['incoming_details_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>";
                     $data[$counter]['action'] .= "<a href='".ADMIN_PATH."updatehourlyworkingreportdata/".$value['incoming_details_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a> ";
-                
-                }
+                }else{
 
+                    if($value['name']){
+                        if($value['userId']==$this->session->userdata("userId")){
+                           $data[$counter]['action'] .= "<a id='assign_team_to_item'  data-id='".$value['incoming_details_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>";
+                           $data[$counter]['action'] .= "<a href='".ADMIN_PATH."updatehourlyworkingreportdata/".$value['incoming_details_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a> ";
+                        }
+                   }else{
+                       $data[$counter]['action'] .= "<a id='assign_team_to_item'  data-id='".$value['incoming_details_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>";
+                       $data[$counter]['action'] .= "<a href='".ADMIN_PATH."updatehourlyworkingreportdata/".$value['incoming_details_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a> ";
+                   
+                   }
+
+                }
                 $counter++; 
             }
         }
