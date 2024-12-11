@@ -145,7 +145,7 @@
 
                                 <div class="btn-group" role="group" aria-label="Basic example" style="float: inline-end;margin-top:10px;">
                                     <button type="button" id="update_data_hrly_inspection" class="btn btn-primary" style="margin-right:10px;"><i class="fa fa-save"></i> Update Data</button>
-                                    <button type="button" id="download_report_hrly_inspection" class="btn btn-primary"><i class="fa fa-file-excel-o"></i> Downlaod Report</button>
+                                    <button type="button" id="download_report_hrly_inspection" class="btn btn-primary"><i class="fa fa-file-excel-o"></i> Download Report</button>
                                 </div>
 
                                 </form>
