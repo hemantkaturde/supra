@@ -24298,7 +24298,7 @@
 							{
 								swal({
 									title: "Success",
-									text: "Team Member Successfully Added!",
+									text: "Hourly Report Successfully Added!",
 									icon: "success",
 									button: "Ok",
 									},function(){ 
