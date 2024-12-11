@@ -19517,13 +19517,16 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     public function fetchthrlyreportlistdata($params,$userId){
 
-        $this->db->select('*,'.TBL_TEAM_MASTER.'.id as team_master_id,'.TBL_INCOMING_DETAILS_ITEM.'.id as incoming_details_id');
+        $this->db->select('*,'.TBL_TEAM_MASTER.'.id as team_master_id,'.TBL_INCOMING_DETAILS_ITEM.'.id as incoming_details_id,'.TBL_VENDOR_PO_MASTER.'.po_number as vpo_number');
         if($params['search']['value'] != "") 
         {
             $this->db->where("(".TBL_INCOMING_DETAILS_ITEM.".team_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".remark LIKE '%".$params['search']['value']."%')");
         }
         $this->db->join(TBL_INCOMING_DETAILS, TBL_INCOMING_DETAILS.'.id  = '.TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id');
+
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id  = '.TBL_INCOMING_DETAILS.'.vendor_po_number');
+
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id  = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
         $this->db->join(TBL_TEAM_MASTER, TBL_TEAM_MASTER.'.id  = '.TBL_INCOMING_DETAILS_ITEM.'.assign_team');
         $this->db->join(TBL_USERS, TBL_USERS.'.team_id  = '.TBL_TEAM_MASTER.'.id');
@@ -19548,11 +19551,11 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 // $data[$counter]['balance_qty'] = $value['balance_qty'];
                 // $data[$counter]['invoice_qty_in_kgs'] = $value['invoice_qty_in_kgs'];
                 // $data[$counter]['net_weight_kgs'] = '';
-                $data[$counter]['vendor_po_number'] = $value['vendor_po_number'];
+                $data[$counter]['vendor_po_number'] = $value['vpo_number'];
                 $data[$counter]['invoice_no'] = $value['invoice_no'];
-                
+                $data[$counter]['invoice_date'] =  date("d-m-Y", strtotime($value['invoice_date']));
                 $data[$counter]['challan_no'] = $value['challan_no'];
-                $data[$counter]['challan_date'] = $value['challan_date'];
+                $data[$counter]['challan_date'] = date("d-m-Y", strtotime($value['challan_date']));
                 $data[$counter]['received_date'] = $value['received_date'];
                 // $data[$counter]['fg_material_gross_weight'] = "";
                 $data[$counter]['units'] = $value['units'];

@@ -22,8 +22,9 @@
                                         <th>Balance Qty in Pcs</th>
                                         <th>Invoice Qty (in Kgs)</th>
                                         <th>Net weight (in Kgs)	</th> -->
-                                        <th>PO No</th>
+                                        <th>Vendor PO No</th>
                                         <th>Invoice No</th>
+                                        <th>Invoice Date</th>
                                         <th>Challan No</th>
                                         <th>Challan Date</th>
                                         <th>Received Date</th>
