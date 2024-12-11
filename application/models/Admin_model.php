@@ -19566,6 +19566,10 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                
                 $data[$counter]['action'] = '';
 
+                if($this->session->userdata('roleText')=='Superadmin'){
+                    $data[$counter]['action'] .= "<a id='assign_team_to_item'  data-id='".$value['incoming_details_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>";
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."updatehourlyworkingreportdata/".$value['incoming_details_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a> ";
+                }else{
 
                     if($value['name']){
                         if($value['userId']==$this->session->userdata("userId")){
@@ -19577,6 +19581,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."updatehourlyworkingreportdata/".$value['incoming_details_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a> ";
                    
                    }
+
+                }
                 $counter++; 
             }
         }
