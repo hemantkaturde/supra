@@ -22806,6 +22806,7 @@ public function download_report_hrly_inspection($incoming_item_id,$team_master_m
     $date = date('Y-m-d');
     $empInfo = $this->admin_model->get_download_report_hrly_inspection($incoming_item_id,$team_master_main_id,$date);
 
+
     $getteamdetailsforhrlyinsectionreport = $this->admin_model->getteamdetailsforhrlyinsectionreport($incoming_item_id);
 
 
@@ -22830,6 +22831,7 @@ public function download_report_hrly_inspection($incoming_item_id,$team_master_m
     // Add headers with colorful background
     $sheet->setCellValue('A4', 'Description')->setCellValue('B4', $getteamdetailsforhrlyinsectionreport['0']['description']);
     $sheet->setCellValue('C4', 'Vendor Name')->setCellValue('D4', $getteamdetailsforhrlyinsectionreport['0']['vendor_name'].' - '.$getteamdetailsforhrlyinsectionreport['0']['v_po_number']);
+    $sheet->setCellValue('E4', 'Lot No')->setCellValue('F4', $getteamdetailsforhrlyinsectionreport['0']['lot_no']);
     $sheet->setCellValue('A5', 'Part No.')->setCellValue('B5', $getteamdetailsforhrlyinsectionreport['0']['part_number']);
     $sheet->setCellValue('C5', 'Order QTY')->setCellValue('D5', $getteamdetailsforhrlyinsectionreport['0']['p_o_qty']);
     $sheet->setCellValue('E5', 'Rec QTY')->setCellValue('F5', $getteamdetailsforhrlyinsectionreport['0']['invoice_qty']);
@@ -22892,11 +22894,11 @@ public function download_report_hrly_inspection($incoming_item_id,$team_master_m
     }
 
 
-
     // Remark section
-    $sheet->mergeCells('A' . ($row + 1) . ':M' . ($row + 1));
+    $sheet->mergeCells('B' . ($row + 1) . ':M' . ($row + 1));
     $sheet->setCellValue('A' . ($row + 1), 'Remark');
-    $sheet->setCellValue('M' . ($row + 1), '');
+    $sheet->setCellValue('B' . ($row + 1),  $empInfo[0]['remark_of_hrly_report']);
+    //$sheet->setCellValue('M' . ($row + 1),  $empInfo[0]['remark_of_hrly_report']);
     $sheet->getStyle('A' . ($row + 1))->getFont()->setBold(true);
 
     // Set column widths

@@ -19670,7 +19670,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     public function get_download_report_hrly_inspection($incoming_item_id,$team_master_main_id,$date){
 
-        $this->db->select(TBL_TEAM_MASTER_TRANS.'.team_member_name,textarea_9_10,textarea_10_11,textarea_11_12,textarea_11_12,textarea_01_230,textarea_230_330,textarea_330_430,textarea_430_530,textarea_530_630,textarea_630_700,textarea_total_hrs,textarea_12_01');
+        $this->db->select(TBL_TEAM_MASTER_TRANS.'.team_member_name,textarea_9_10,textarea_10_11,textarea_11_12,textarea_11_12,textarea_01_230,textarea_230_330,textarea_330_430,textarea_430_530,textarea_530_630,textarea_630_700,textarea_total_hrs,textarea_12_01,remark_of_hrly_report');
         $this->db->join(TBL_TEAM_MASTER_TRANS, TBL_TEAM_MASTER_TRANS.'.id  =tbl_hrly_production_summary.team_id');
         $this->db->where('team_master_main_id', $team_master_main_id);
         $this->db->where('incoming_item_id', $incoming_item_id);
