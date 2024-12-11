@@ -19547,7 +19547,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             foreach ($fetch_result as $key => $value)
             {
                 $data[$counter]['part_number'] = $value['part_number'];
-                $data[$counter]['name'] = $value['name'];
+                $data[$counter]['name'] = $value['team_name'];
                 $data[$counter]['lot_no'] = $value['lot_no'];
                 $data[$counter]['p_o_qty'] = $value['p_o_qty'];
                 // $data[$counter]['invoice_qty'] = $value['invoice_qty'];
@@ -19567,15 +19567,11 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['action'] = '';
 
                 if($value['name']){
-
                      if($value['userId']==$this->session->userdata("userId")){
                         $data[$counter]['action'] .= "<a id='assign_team_to_item'  data-id='".$value['incoming_details_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>";
                         $data[$counter]['action'] .= "<a href='".ADMIN_PATH."updatehourlyworkingreportdata/".$value['incoming_details_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a> ";
                      }
-                     
-
                 }else{
-
                     $data[$counter]['action'] .= "<a id='assign_team_to_item'  data-id='".$value['incoming_details_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>";
                     $data[$counter]['action'] .= "<a href='".ADMIN_PATH."updatehourlyworkingreportdata/".$value['incoming_details_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a> ";
                 
