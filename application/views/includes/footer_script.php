@@ -24230,17 +24230,18 @@
 					"columnDefs": [ 
 						{ className: "details-control", "targets": [ 0 ] },
 						{ "width": "10%", "targets": 0 },
-						{ "width": "15%", "targets": 1 },	
-						{ "width": "10%", "targets": 2 },	
-						{ "width": "10%", "targets": 3 },
-						{ "width": "10%", "targets": 4 },	
-						{ "width": "10%", "targets": 5 },
+						{ "width": "10%", "targets": 1 },	
+						{ "width": "8%", "targets": 2 },	
+						{ "width": "8%", "targets": 3 },
+						{ "width": "8%", "targets": 4 },	
+						{ "width": "8%", "targets": 5 },
 						{ "width": "10%", "targets": 6 },
 						{ "width": "10%", "targets": 7 },					
 						{ "width": "10%", "targets": 8 },
 						{ "width": "10%", "targets": 9 },
-					    { "width": "10%", "targets": 10 },
-						{ "width": "10%", "targets": 11 },
+					    { "width": "8%", "targets": 10 },
+						{ "width": "8%", "targets": 11 },
+						{ "width": "15%", "targets": 12 },
 						// { "width": "10%", "targets": 11 },
 						// { "width": "10%", "targets": 12 },
 						// { "width": "10%", "targets": 13 },
@@ -24351,6 +24352,62 @@
 			});
 			return false;
 		});
+
+		$(document).on('click','#assign_team_to_item',function(e){
+			var elemF = $(this);
+			var data_id = elemF.attr('data-id');
+			$("#selected_item_id").val(data_id);
+			$("#registerModal").modal('show');
+		});
+
+
+		$(document).on('click','#submit_assign_item',function(e){
+
+			e.preventDefault();
+			$(".loader_ajax").show();
+					
+			var formData = new FormData($("#assign_team_form")[0]);
+					$.ajax({
+						url : "<?php echo base_url();?>saveAssignitem",
+						type: "POST",
+						data : formData,
+						cache: false,
+						contentType: false,
+						processData: false,
+						success: function(data, textStatus, jqXHR)
+						{
+							var fetchResponse = $.parseJSON(data);
+							if(fetchResponse.status == "failure")
+							{
+								$.each(fetchResponse.error, function (i, v)
+								{
+									$('.'+i+'_error').html(v);
+								});
+								$(".loader_ajax").hide();
+							}
+							else if(fetchResponse.status == 'success')
+							{
+								swal({
+									title: "Success",
+									text: "Team Successfully Assign!",
+									icon: "success",
+									button: "Ok",
+									},function(){ 
+										
+										window.location.href = "<?php echo base_url().'hourly_inspection_report'?>";
+								});		
+							}
+							
+						},
+						error: function (jqXHR, textStatus, errorThrown)
+						{
+							$(".loader_ajax").hide();
+						}
+					});
+					return false;
+	
+		});
+
 
 	</script>
 <?php } ?>

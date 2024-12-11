@@ -19508,10 +19508,9 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->join(TBL_INCOMING_DETAILS, TBL_INCOMING_DETAILS.'.id  = '.TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id  = '.TBL_INCOMING_DETAILS.'.vendor_po_number');
 
-        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id  = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
-        $this->db->join(TBL_TEAM_MASTER, TBL_TEAM_MASTER.'.id  = '.TBL_INCOMING_DETAILS_ITEM.'.assign_team');
-        $this->db->join(TBL_USERS, TBL_USERS.'.team_id  = '.TBL_TEAM_MASTER.'.id');
-        $this->db->where(TBL_USERS.".userId", $userId);
+        $this->db->join(TBL_TEAM_MASTER, TBL_TEAM_MASTER.'.id  = '.TBL_INCOMING_DETAILS_ITEM.'.assign_team','left');
+        $this->db->join(TBL_USERS, TBL_USERS.'.team_id  = '.TBL_TEAM_MASTER.'.id','left');
+        //$this->db->where(TBL_USERS.".userId", $userId);
 
         $query = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
         $rowcount = $query->num_rows();
@@ -19530,9 +19529,9 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id  = '.TBL_INCOMING_DETAILS.'.vendor_po_number');
 
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id  = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
-        $this->db->join(TBL_TEAM_MASTER, TBL_TEAM_MASTER.'.id  = '.TBL_INCOMING_DETAILS_ITEM.'.assign_team');
-        $this->db->join(TBL_USERS, TBL_USERS.'.team_id  = '.TBL_TEAM_MASTER.'.id');
-        $this->db->where(TBL_USERS.".userId", $userId);
+        $this->db->join(TBL_TEAM_MASTER, TBL_TEAM_MASTER.'.id  = '.TBL_INCOMING_DETAILS_ITEM.'.assign_team','left');
+        $this->db->join(TBL_USERS, TBL_USERS.'.team_id  = '.TBL_TEAM_MASTER.'.id','left');
+        //$this->db->where(TBL_USERS.".userId", $userId);
 
         $this->db->limit($params['length'],$params['start']);
         $this->db->order_by(TBL_INCOMING_DETAILS_ITEM.'.id','DESC');
@@ -19564,7 +19563,22 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['goni'] = $value['boxex_goni_bundle'];
                
                 $data[$counter]['action'] = '';
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."updatehourlyworkingreportdata/".$value['incoming_details_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>   ";
+
+                if($value['name']){
+
+                     if($value['userId']==$this->session->userdata("userId")){
+                        $data[$counter]['action'] .= "<a id='assign_team_to_item'  data-id='".$value['incoming_details_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>";
+                        $data[$counter]['action'] .= "<a href='".ADMIN_PATH."updatehourlyworkingreportdata/".$value['incoming_details_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a> ";
+                     }
+                     
+
+                }else{
+
+                    $data[$counter]['action'] .= "<a id='assign_team_to_item'  data-id='".$value['incoming_details_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>";
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."updatehourlyworkingreportdata/".$value['incoming_details_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a> ";
+                
+                }
+
                 $counter++; 
             }
         }
@@ -19684,6 +19698,16 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
+    public function saveAssignitem_data($id,$data){
+
+        $this->db->where('id', $id);
+        if($this->db->update(TBL_INCOMING_DETAILS_ITEM, $data)){
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+
+    }
 
 
 }

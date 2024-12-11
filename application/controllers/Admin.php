@@ -22546,7 +22546,7 @@ public function hourly_inspection_report(){
     $this->logrecord($process,$processFunction);
     $this->global['pageTitle'] = 'Hourly Inspection Report';
     $data['vendorList']= $this->admin_model->fetchALLvendorList();
-
+    $data['getAllteammaster']= $this->admin_model->getAllteammaster();
     // if($this->session->userdata('roleText')=='Team'){
     //     $userId = $this->session->userdata("userId");
     //     $getIncomingdetails =  $this->admin_model->getIncomingdetailsforhourly_inspection_report($userId);
@@ -22919,7 +22919,40 @@ public function download_report_hrly_inspection($incoming_item_id,$team_master_m
 
 }
 
+public function saveAssignitem(){
+    $post_submit = $this->input->post();
+    $saveAssignitem_response = array();
 
+    if($post_submit){
+
+        $this->form_validation->set_rules('assign_team','Assign Team','trim|required');
+        $this->form_validation->set_rules('working_hrs_status','Working HRS Status','trim|required');
+        $this->form_validation->set_rules('assign_date','Assign Date','trim|required');
+
+        if($this->form_validation->run() == FALSE)
+        {
+            $saveAssignitem_response['status'] = 'failure';
+            $saveAssignitem_response['error'] = array('assign_team'=>strip_tags(form_error('assign_team')),'working_hrs_status'=>strip_tags(form_error('working_hrs_status')),'assign_date'=>strip_tags(form_error('assign_date')));
+        }else{
+
+               
+                $selected_item_id= trim($this->input->post('assign_team'));
+                $data = array(
+                    'assign_team'=> trim($this->input->post('assign_team')),
+                    'working_hrs_status'=> trim($this->input->post('working_hrs_status')),
+                    'assign_date'=>date("Y-m-d", strtotime(trim($this->input->post('assign_date')))),
+                );
+
+                $saveAssignitem_data = $this->admin_model->saveAssignitem_data($selected_item_id,$data);
+                if($saveAssignitem_data){
+                    $saveAssignitem_response['status'] = 'success';
+                    $saveAssignitem_response['error'] = array('assign_team'=>'', 'working_hrs_status'=>'' ,'assign_date'=>'');
+                }
+            }
+    
+    }
+    echo json_encode($saveAssignitem_response); 
+}
 
 
 }

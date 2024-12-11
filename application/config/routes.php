@@ -589,6 +589,7 @@ $route['downloadgetepasssup/(:any)'] = "admin/downloadgetepasssup/$1";
 $route['downloadgetepassvendor/(:any)'] = "admin/downloadgetepassvendor/$1";
 
 $route['updatehrlyinspectionreport'] = "admin/updatehrlyinspectionreport";
+$route['saveAssignitem'] = "admin/saveAssignitem";
 
 
 
