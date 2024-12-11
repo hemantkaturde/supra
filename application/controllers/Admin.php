@@ -22836,8 +22836,9 @@ public function download_report_hrly_inspection($incoming_item_id,$team_master_m
     $sheet->setCellValue('C5', 'Order QTY')->setCellValue('D5', $getteamdetailsforhrlyinsectionreport['0']['p_o_qty']);
     $sheet->setCellValue('E5', 'Rec QTY')->setCellValue('F5', $getteamdetailsforhrlyinsectionreport['0']['invoice_qty']);
     $sheet->setCellValue('G5', 'Target Qty')->setCellValue('H5', $getteamdetailsforhrlyinsectionreport['0']['target_qty']);
+    $sheet->setCellValue('G4', 'HOD')->setCellValue('H4', $getteamdetailsforhrlyinsectionreport['0']['HOD']);
 
-    $boldHeaders = ['A4', 'C4', 'A5', 'C5', 'E5', 'G5'];
+    $boldHeaders = ['A4', 'C4', 'A5', 'C5', 'E5', 'G5','E4','D6','G4'];
 
     foreach ($boldHeaders as $cell) {
         $sheet->getStyle($cell)->applyFromArray([
