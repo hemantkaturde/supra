@@ -22936,7 +22936,7 @@ public function saveAssignitem(){
         }else{
 
                
-                $selected_item_id= trim($this->input->post('assign_team'));
+                $selected_item_id= trim($this->input->post('selected_item_id'));
                 $data = array(
                     'assign_team'=> trim($this->input->post('assign_team')),
                     'working_hrs_status'=> trim($this->input->post('working_hrs_status')),
