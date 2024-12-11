@@ -24298,7 +24298,7 @@
 							{
 								swal({
 									title: "Success",
-									text: "Hourly Report Successfully Added!",
+									text: "Hourly Report Successfully Updated!",
 									icon: "success",
 									button: "Ok",
 									},function(){ 
