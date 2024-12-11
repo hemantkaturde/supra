@@ -19511,6 +19511,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->join(TBL_TEAM_MASTER, TBL_TEAM_MASTER.'.id  = '.TBL_INCOMING_DETAILS_ITEM.'.assign_team','left');
         $this->db->join(TBL_USERS, TBL_USERS.'.team_id  = '.TBL_TEAM_MASTER.'.id','left');
         //$this->db->where(TBL_USERS.".userId", $userId);
+        $this->db->where(TBL_INCOMING_DETAILS_ITEM.".working_hrs_status", 'Open');
 
         $query = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
         $rowcount = $query->num_rows();
@@ -19532,6 +19533,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->join(TBL_TEAM_MASTER, TBL_TEAM_MASTER.'.id  = '.TBL_INCOMING_DETAILS_ITEM.'.assign_team','left');
         $this->db->join(TBL_USERS, TBL_USERS.'.team_id  = '.TBL_TEAM_MASTER.'.id','left');
         //$this->db->where(TBL_USERS.".userId", $userId);
+        $this->db->where(TBL_INCOMING_DETAILS_ITEM.".working_hrs_status", 'Open');
 
         $this->db->limit($params['length'],$params['start']);
         $this->db->order_by(TBL_INCOMING_DETAILS_ITEM.'.id','DESC');
