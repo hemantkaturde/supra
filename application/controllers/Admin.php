@@ -22829,7 +22829,7 @@ public function download_report_hrly_inspection($incoming_item_id,$team_master_m
 
     // Add headers with colorful background
     $sheet->setCellValue('A4', 'Description')->setCellValue('B4', $getteamdetailsforhrlyinsectionreport['0']['description']);
-    $sheet->setCellValue('C4', 'Vendor Name')->setCellValue('D4', $getteamdetailsforhrlyinsectionreport['0']['vendor_name']);
+    $sheet->setCellValue('C4', 'Vendor Name')->setCellValue('D4', $getteamdetailsforhrlyinsectionreport['0']['vendor_name'].' - '.$getteamdetailsforhrlyinsectionreport['0']['v_po_number']);
     $sheet->setCellValue('A5', 'Part No.')->setCellValue('B5', $getteamdetailsforhrlyinsectionreport['0']['part_number']);
     $sheet->setCellValue('C5', 'Order QTY')->setCellValue('D5', $getteamdetailsforhrlyinsectionreport['0']['p_o_qty']);
     $sheet->setCellValue('E5', 'Rec QTY')->setCellValue('F5', $getteamdetailsforhrlyinsectionreport['0']['invoice_qty']);
@@ -22878,15 +22878,15 @@ public function download_report_hrly_inspection($incoming_item_id,$team_master_m
         $sheet->setCellValue('B' . $row, $item['textarea_9_10']);
         $sheet->setCellValue('C' . $row, $item['textarea_10_11']);
         $sheet->setCellValue('D' . $row, $item['textarea_11_12']);
-        $sheet->setCellValue('E' . $row, $item['textarea_01_230']);
-        $sheet->setCellValue('F' . $row, $item['textarea_230_330']);
-        $sheet->setCellValue('G' . $row, $item['textarea_330_430']);
-        $sheet->setCellValue('H' . $row, $item['textarea_430_530']);
-        $sheet->setCellValue('I' . $row, $item['textarea_530_630']);
-        $sheet->setCellValue('J' . $row, $item['textarea_630_700']);
-        $sheet->setCellValue('K' . $row, $item['textarea_total_hrs']);
+        $sheet->setCellValue('E' . $row, $item['textarea_12_01']);
+        $sheet->setCellValue('F' . $row, $item['textarea_01_230']);
+        $sheet->setCellValue('G' . $row, $item['textarea_230_330']);
+        $sheet->setCellValue('H' . $row, $item['textarea_330_430']);
+        $sheet->setCellValue('I' . $row, $item['textarea_430_530']);
+        $sheet->setCellValue('J' . $row, $item['textarea_530_630']);
+        $sheet->setCellValue('K' . $row, $item['textarea_630_700']);
         $sheet->setCellValue('L' . $row, $item['textarea_total_hrs']);
-        $sheet->setCellValue('M' . $row, $item['textarea_total_hrs']);
+        $sheet->setCellValue('M' . $row, '');
         
         $row++;
     }
