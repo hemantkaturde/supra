@@ -47,7 +47,7 @@
                                         <td colspan="16">SUPRA QUALITY EXPORTS (I) PVT. LTD </td>
                                     </tr>
                                     <tr>
-                                        <td colspan="16">VISUAL INSPECTION RECORD SHEET  <b> <?= '&nbsp&nbsp'.date('d-m-Y');?> </b></td>
+                                        <td colspan="16">VISUAL INSPECTION RECORD SHEET  </td>
                                     </tr>
                                     <tr>
                                         <td>Description</td>
@@ -62,7 +62,7 @@
                                     </tr>
                                     <tr>
                                         <td>Vendor Name</td>
-                                        <td colspan="4" style="text-align: left;"><?=$getteamdetailsforhrlyinsectionreport['0']['vendor_name'];?></td>
+                                        <td colspan="4" style="text-align: left;"><?=$getteamdetailsforhrlyinsectionreport['0']['vendor_name'].' - '.$getteamdetailsforhrlyinsectionreport['0']['v_po_number'];?></td>
                                         <td>Order QTY</td>
                                         <td colspan="4" style="text-align: left;"><?=$getteamdetailsforhrlyinsectionreport['0']['p_o_qty'];?></td>
                                         <td>Rec QTY</td>
@@ -115,6 +115,7 @@
                                      <tr>
                                         <td><?=$value['team_member_name']?></td>
                                         <td> <input type="hidden" name="team_id[]" value="<?=$value['id']?>">  
+                                             <input type="hidden" name="created_date" value="<?=$report_data[0]->date?>">
                                             <textarea id="textarea_9_10" name="textarea_9_10[]" data-index='<?=$key?>' class="form-control textarea_9_10"  rows="3" cols="20"><?=$report_data[0]->textarea_9_10; ?></textarea>
                                         </td>
                                         

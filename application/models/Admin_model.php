@@ -19505,6 +19505,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             $this->db->where("(".TBL_INCOMING_DETAILS_ITEM.".team_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".remark LIKE '%".$params['search']['value']."%')");
         }
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id  = '.TBL_INCOMING_DETAILS.'.vendor_po_number');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id  = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
         $this->db->join(TBL_TEAM_MASTER, TBL_TEAM_MASTER.'.id  = '.TBL_INCOMING_DETAILS_ITEM.'.assign_team');
         $this->db->join(TBL_USERS, TBL_USERS.'.team_id  = '.TBL_TEAM_MASTER.'.id');
@@ -19572,8 +19573,9 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
 
     public function getteamdetailsforhrlyinsectionreport($incoming_details_id){
-        $this->db->select('*,'.TBL_TEAM_MASTER.'.id as team_master_id,'.TBL_FINISHED_GOODS.'.name as description,'.TBL_TEAM_MASTER.'.remark as HOD,'.TBL_INCOMING_DETAILS_ITEM.'.id as incoming_item_id');
+        $this->db->select('*,'.TBL_TEAM_MASTER.'.id as team_master_id,'.TBL_FINISHED_GOODS.'.name as description,'.TBL_TEAM_MASTER.'.remark as HOD,'.TBL_INCOMING_DETAILS_ITEM.'.id as incoming_item_id,'.TBL_VENDOR.'.vendor_name as vname,'.TBL_VENDOR_PO_MASTER.'.po_number as v_po_number');
         $this->db->join(TBL_INCOMING_DETAILS, TBL_INCOMING_DETAILS.'.id  = '.TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id  = '.TBL_INCOMING_DETAILS.'.vendor_po_number');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_INCOMING_DETAILS.'.vendor_name');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id  = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
         $this->db->join(TBL_TEAM_MASTER, TBL_TEAM_MASTER.'.id  = '.TBL_INCOMING_DETAILS_ITEM.'.assign_team');
@@ -19603,7 +19605,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $incoming_item_id = $data['time_slots']['incoming_item_id'];
         $team_master_id = $data['time_slots']['team_master_main_id'];
         $team_id = $data['time_slots']['employee_id'];
-        $date =  date('Y-m-d');
+        $date =  $data['time_slots']['date'];
         # check if data is already Exists
     
          // Prepare the data for insertion
@@ -19657,7 +19659,10 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             $this->db->where('team_id', $team_id);
             $this->db->where('team_master_main_id', $team_master_id);
             $this->db->where('incoming_item_id', $incoming_item_id);
-            $this->db->where('date', $date);
+            //  $this->db->where('date', $date);
+            $this->db->where('working_hrs_status', 'Open');
+            $this->db->join(TBL_INCOMING_DETAILS_ITEM, TBL_INCOMING_DETAILS_ITEM.'.id  = tbl_hrly_production_summary.incoming_item_id');
+
             $query = $this->db->get('tbl_hrly_production_summary');
             return $query->result();  // Return the results as an array of objects
         }
@@ -19668,7 +19673,9 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->join(TBL_TEAM_MASTER_TRANS, TBL_TEAM_MASTER_TRANS.'.id  =tbl_hrly_production_summary.team_id');
         $this->db->where('team_master_main_id', $team_master_main_id);
         $this->db->where('incoming_item_id', $incoming_item_id);
-        $this->db->where('date', $date);
+       // $this->db->where('date', $date);
+        $this->db->where('working_hrs_status', 'Open');
+        $this->db->join(TBL_INCOMING_DETAILS_ITEM, TBL_INCOMING_DETAILS_ITEM.'.id  = tbl_hrly_production_summary.incoming_item_id');
         $query = $this->db->get('tbl_hrly_production_summary');
         $data = $query->result_array();
         return $data;  // Return the results as an array of objec
