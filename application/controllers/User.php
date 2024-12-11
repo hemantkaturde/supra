@@ -50,6 +50,8 @@ class User extends BaseController
             $this->logrecord($process,$processFunction);
             $this->global['pageTitle'] = 'Hourly Inspection Report';
             $data['vendorList']= $this->admin_model->fetchALLvendorList();
+            $data['getAllteammaster']= $this->admin_model->getAllteammaster();
+
             $this->loadViews("masters/hourly_inspection_report", $this->global, $data , NULL);
 
         }else{
