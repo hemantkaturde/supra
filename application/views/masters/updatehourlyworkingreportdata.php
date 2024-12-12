@@ -159,7 +159,7 @@
                                             <td colspan="16">SUPRA QUALITY EXPORTS (I) PVT. LTD </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="16">SAMPLE RECORD TEST   |  Sampling Qty <input type="text" id="incoming_item_id" name="incoming_item_id"></td>
+                                            <td colspan="16">SAMPLE RECORD TEST   |  Sampling Qty <input type="text" id="sampling_qty" name="sampling_qty"></td>
                                         </tr>
                                     
                                         <tr>

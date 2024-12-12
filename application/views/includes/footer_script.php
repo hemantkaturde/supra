@@ -24467,8 +24467,7 @@
 			var incoming_item_id  = $("#incoming_item_id").val();
             var sampling_method_id  = $("#sampling_method_id").val();
 
-			alert(sampling_method_id);
-			
+	
 		
 			$.ajax({
 				url : "<?php echo ADMIN_PATH;?>admin/download_report_hrly_sampling_record/"+incoming_item_id+"/"+sampling_method_id,
