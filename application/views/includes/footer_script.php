@@ -21053,7 +21053,7 @@
 				else
 				{
 					$(".report_type_error").html("");
-					window.location.href = "<?php echo ADMIN_PATH;?>admin/downlaod_scrap_calculation_report/"+status_value+"/"+vendor_name_value+"/"+from_date+"/"+to_date,
+					window.location.href = "<?php echo ADMIN_PATH;?>admin/downlaod_scrap_calculation_report/"+status_value+"/"+vendor_name_value+"/"+from_date+"/"+to_date;
 				}
 			},
 			error: function (jqXHR, textStatus, errorThrown)
