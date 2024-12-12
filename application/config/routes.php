@@ -591,6 +591,9 @@ $route['downloadgetepassvendor/(:any)'] = "admin/downloadgetepassvendor/$1";
 $route['updatehrlyinspectionreport'] = "admin/updatehrlyinspectionreport";
 $route['saveAssignitem'] = "admin/saveAssignitem";
 
+$route['update_data_hrly_sampling_record'] = "admin/update_data_hrly_sampling_record";
+
+
 
 
 

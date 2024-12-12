@@ -153,15 +153,13 @@
                                
                                 <form id="second_data_from" style="margin-top:60px;">
                                     <input type="hidden" id="incoming_item_id" name="incoming_item_id" value="<?=$getteamdetailsforhrlyinsectionreport['0']['incoming_item_id'];?>">
-                                    <input type="hidden" id="team_master_main_id" name="team_master_main_id" value="<?=$getteamdetailsforhrlyinsectionreport['0']['team_master_id'];?>">
-
 
                                     <table class="table-responsive" styl="max-width: 68%; display: block; overflow-x: auto; white-space: nowrap; width: 70%;">
                                         <tr>
                                             <td colspan="16">SUPRA QUALITY EXPORTS (I) PVT. LTD </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="16">SAMPLE RECORD TEST  </td>
+                                            <td colspan="16">SAMPLE RECORD TEST   |  Sampling Qty <input type="text" id="incoming_item_id" name="incoming_item_id"></td>
                                         </tr>
                                     
                                         <tr>
@@ -176,38 +174,44 @@
 
                                         <?php  
                                         $comman_remark = '';
-                                        foreach($getallteamdetailsusingteamid as $key => $value) { 
+                                        foreach($getallitemsamplingmethods as $key => $value) { 
 
         
                                         $incoming_item_id =   $getteamdetailsforhrlyinsectionreport['0']['incoming_item_id'];
-                                        $team_master_id =   $getteamdetailsforhrlyinsectionreport['0']['team_master_id'];
-                                        $team_id  =   $value['id'];
+                                        $sampling_method_id =   $value['sampling_method_id'];
+                                        $sampling_trans_method_id  =   $value['sampling_trans_method_id'];
+
                                         $date = date('Y-m-d');
 
                                         $this->load->model('admin_model');
 
                                         // Fetch data directly in the view
-                                        $report_data = $this->admin_model->get_hourly_report($incoming_item_id,$team_master_id,$team_id,$date);                                     
+                                        $sampling_data = $this->admin_model->get_sampling_data($incoming_item_id,$sampling_method_id,$sampling_trans_method_id,$date);    
+                                                                         
                                         
                                             ?>
                                         <tr>
-                                            <td><?=$value['team_member_name']?></td>
-                                            <td> <input type="hidden" name="team_id[]" value="<?=$value['id']?>">  
-                                                <input type="hidden" name="created_date" value="<?=$report_data[0]->date?>">
+                                            <td><?=$value['instrument_name']?></td>
+                                            <td>
+                                                
+                                                 <input type="hidden" name="sampling_method_id" id="sampling_method_id" value="<?=$sampling_method_id?>">
+                                                 <input type="hidden" name="sampling_trans_method_id[]"  value="<?=$value['sampling_trans_method_id']?>">  
+                                                 <input type="hidden" name="created_date" value="<?=$sampling_data[0]->created_date?>">
+                                                 <?=$value['measuring_size']?>
                                             </td>
                                             
-                                            <td></td>
-                                            <td></td>
-                                            <td><textarea id="textarea_notes" name="textarea_notes[]" class="form-control textarea_notes" data-index='<?=$key?>' rows="3" cols="20"><?=$report_data[0]->textarea_01_230; ?></textarea></td>
+                                            <td><?=$value['type']?></td>
+                                            <td><?=$value['remark']?></td>
+                                            <td><textarea id="textarea_notes" name="textarea_notes[]" class="form-control textarea_notes" data-index='<?=$key?>' rows="3" cols="20"><?=$sampling_data[0]->textarea_notes; ?></textarea></td>
                                         </tr>
-                                        <?php  $comman_remark = $report_data[0]->remark_of_hrly_report; } ?>
+                                        <?php  $comman_remark_samplimg = $sampling_data[0]->remark_of_sampling_report; } ?>
 
                                         <tr>
                                             <td colspan="15" style="text-align: left;">Remark</td>
                                         </tr>
                                         <tr>
                                             <td colspan="15">  
-                                                <input type="text" class="form-control" id="remark_of_sampling_report" name="remark_of_sampling_report" placeholder="Enter Remark" value="<?=$comman_remark; ?>">
+                                                <input type="text" class="form-control" id="remark_of_sampling_report" name="remark_of_sampling_report" placeholder="Enter Remark" value="<?=$comman_remark_samplimg; ?>">
                                             </td>
                                         </tr>
                                     </table>

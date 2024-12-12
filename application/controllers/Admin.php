@@ -22740,6 +22740,8 @@ public function updatehourlyworkingreportdata($incoming_details_id){
     /*Get Hrly Detials for hrly inspection Report*/
     $data['getteamdetailsforhrlyinsectionreport'] = $this->admin_model->getteamdetailsforhrlyinsectionreport($incoming_details_id);
     $data['getallteamdetailsusingteamid'] = $this->admin_model->getallteamdetailsusingteamid($data['getteamdetailsforhrlyinsectionreport'][0]['team_master_id']);
+
+    $data['getallitemsamplingmethods'] = $this->admin_model->getallitemsamplingmethods($incoming_details_id);
     
     $this->loadViews("masters/updatehourlyworkingreportdata", $this->global, $data, NULL);
 
@@ -22952,6 +22954,156 @@ public function saveAssignitem(){
     
     }
     echo json_encode($saveAssignitem_response); 
+}
+
+
+public function update_data_hrly_sampling_record(){
+
+    $update_data_hrly_sampling_record =array();
+
+    $formData = $_POST; // $_POST will be an associative array of form data
+
+    $data =array();
+    foreach ($formData as $key => $value) {
+        $data[] = $value;
+    }
+
+  
+     // Parse the main details
+     $sampling_method = $data[2];  // Array of employee IDs
+     $remark = $data[5];  // Remark from the input
+     
+     // Loop through the employee IDs
+     foreach ($sampling_method as $index => $employee_id) {
+         $sampling_data = [
+             'incoming_item_id' => $data[0],
+             'sampling_method_id' => $data[1],
+             'sampling_trans_method_id' => $sampling_method[$index],
+             'created_date' => $data[3],
+             'textarea_notes' => $data[4][$index],
+             'remark_of_sampling_report' => $remark,
+         ];
+
+         // Insert the data into the database
+         $result = $this->admin_model->update_data_hrly_sampling_record([
+             'sampling_data' => $sampling_data,        
+         ]);
+
+
+         if($result){
+            $update_data_hrly_sampling_record['status'] = 'success';
+            $update_data_hrly_sampling_record['error'] = array('scrap_date'=>'', 'scrap_type'=>'' ,'remark'=>'');
+        }
+
+     }
+
+     echo json_encode($update_data_hrly_sampling_record); 
+}
+
+
+public function download_report_hrly_sampling_record($incoming_item_id,$sampling_method_id){
+
+    // create file name
+    $fileName = 'Sampling Record Test -'.date('d-m-Y').'.xls';  
+    // load excel library
+    $date = date('Y-m-d');
+    $empInfo = $this->admin_model->get_download_report_sampling_record($incoming_item_id,$sampling_method_id,$date);
+
+
+    $getteamdetailsforhrlyinsectionreport = $this->admin_model->getteamdetailsforhrlyinsectionreport($incoming_item_id);
+
+
+    // Create a new PHPExcel object
+    $objPHPExcel = new PHPExcel();
+    $sheet = $objPHPExcel->getActiveSheet();
+
+    // Set metadata
+    $sheet->mergeCells('A1:M1');
+    $sheet->setCellValue('A1', 'SUPRA QUALITY EXPORTS (I) PVT. LTD');
+    $sheet->getStyle('A1')->applyFromArray([
+        'font' => ['bold' => true, 'size' => 14],
+        'alignment' => ['horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER]
+    ]);
+    $sheet->mergeCells('A2:M2');
+    $sheet->setCellValue('A2', 'SAMPLING RECORD TEST REPORT '.date('Y-m-d'));
+    $sheet->getStyle('A2')->applyFromArray([
+        'font' => ['bold' => true, 'size' => 12],
+        'alignment' => ['horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER]
+    ]);
+
+    // Add headers with colorful background
+    $sheet->setCellValue('A4', 'Description')->setCellValue('B4', $getteamdetailsforhrlyinsectionreport['0']['description']);
+    $sheet->setCellValue('C4', 'Vendor Name')->setCellValue('D4', $getteamdetailsforhrlyinsectionreport['0']['vendor_name'].' - '.$getteamdetailsforhrlyinsectionreport['0']['v_po_number']);
+    $sheet->setCellValue('E4', 'Lot No')->setCellValue('F4', $getteamdetailsforhrlyinsectionreport['0']['lot_no']);
+    $sheet->setCellValue('A5', 'Part No.')->setCellValue('B5', $getteamdetailsforhrlyinsectionreport['0']['part_number']);
+    $sheet->setCellValue('C5', 'Order QTY')->setCellValue('D5', $getteamdetailsforhrlyinsectionreport['0']['p_o_qty']);
+    $sheet->setCellValue('E5', 'Rec QTY')->setCellValue('F5', $getteamdetailsforhrlyinsectionreport['0']['invoice_qty']);
+    $sheet->setCellValue('G5', 'Target Qty')->setCellValue('H5', $getteamdetailsforhrlyinsectionreport['0']['target_qty']);
+    $sheet->setCellValue('G4', 'HOD')->setCellValue('H4', $getteamdetailsforhrlyinsectionreport['0']['HOD']);
+
+    $boldHeaders = ['A4', 'C4', 'A5', 'C5', 'E5', 'G5','E4','D6','G4'];
+
+    foreach ($boldHeaders as $cell) {
+        $sheet->getStyle($cell)->applyFromArray([
+            'font' => ['bold' => true]
+        ]);
+    }
+
+    // Style headers
+    $sheet->getStyle('A7:H7')->applyFromArray([
+        'fill' => [
+            'type' => PHPExcel_Style_Fill::FILL_SOLID,
+            'color' => ['rgb' => 'FFCC00'], // Yellow
+        ],
+        'font' => ['bold' => true],
+        'alignment' => ['horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER],
+        'borders' => [
+            'allborders' => ['style' => PHPExcel_Style_Border::BORDER_THIN],
+        ],
+    ]);
+
+    // Table headers
+    $sheet->setCellValue('A7', 'Measurement Name');
+    $sheet->setCellValue('B7', 'Measurement Size');
+    $sheet->setCellValue('C7', 'Type');
+    $sheet->setCellValue('D7', 'Remark');
+    $sheet->setCellValue('E7', 'Notes');
+
+    $row = 8;
+    foreach ($empInfo as $item) {
+
+        $sheet->setCellValue('A' . $row, $item['instrument_name']);
+        $sheet->setCellValue('B' . $row, $item['measuring_size']);
+        $sheet->setCellValue('C' . $row, $item['type']);
+        $sheet->setCellValue('D' . $row, $item['remark']);
+        $sheet->setCellValue('E' . $row, $item['textarea_notes']);   
+        $row++;
+    }
+
+
+    // Remark section
+    $sheet->mergeCells('B' . ($row + 1) . ':H' . ($row + 1));
+    $sheet->setCellValue('A' . ($row + 1), 'Remark');
+    $sheet->setCellValue('B' . ($row + 1),  $empInfo[0]['remark_of_sampling_report']);
+    //$sheet->setCellValue('M' . ($row + 1),  $empInfo[0]['remark_of_hrly_report']);
+    $sheet->getStyle('A' . ($row + 1))->getFont()->setBold(true);
+
+    // Set column widths
+    foreach (range('A', 'H') as $col) {
+        $sheet->getColumnDimension($col)->setAutoSize(true);
+    }
+
+    // Set filename and save
+    header('Content-Type: application/vnd.ms-excel');
+    header('Content-Disposition: attachment;filename="samplimg_record_test_report.xls"');
+    header('Cache-Control: max-age=0');
+
+    // Save the Excel file
+    $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+    $objWriter->save('php://output');
+    exit;
+
+
 }
 
 

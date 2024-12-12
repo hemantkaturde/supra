@@ -19606,6 +19606,21 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
+    public function getallitemsamplingmethods($incoming_details_id){
+        $this->db->select('*,'.TBL_FINISHED_GOODS.'.name as description,'.TBL_INCOMING_DETAILS_ITEM.'.id as incoming_item_id,'.TBL_VENDOR.'.vendor_name as vname,'.TBL_VENDOR_PO_MASTER.'.po_number as v_po_number,'.TBL_SAMPLING_MASTER.'.id  as sampling_method_id,'.TBL_SAMPLING_MASTER_TRANS.'.id as sampling_trans_method_id');
+        $this->db->join(TBL_INCOMING_DETAILS, TBL_INCOMING_DETAILS.'.id  = '.TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id  = '.TBL_INCOMING_DETAILS.'.vendor_po_number');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_INCOMING_DETAILS.'.vendor_name');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id  = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
+        $this->db->join(TBL_SAMPLING_MASTER, TBL_SAMPLING_MASTER.'.part_number_id  = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
+        $this->db->join(TBL_SAMPLING_MASTER_TRANS, TBL_SAMPLING_MASTER_TRANS.'.sampling_master_id  = '.TBL_SAMPLING_MASTER.'.id');
+        $this->db->where(TBL_INCOMING_DETAILS_ITEM.".id", $incoming_details_id);
+        $query = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
+        $fetch_result = $query->result_array();
+        return $fetch_result;
+    }
+
+
     public function getallteamdetailsusingteamid($team_master_id){
 
         $this->db->select('*');
@@ -19686,6 +19701,21 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             return $query->result();  // Return the results as an array of objects
         }
 
+
+    public function get_sampling_data($incoming_item_id,$sampling_method_id,$sampling_trans_method_id,$date){
+
+
+        $this->db->select('*');
+        $this->db->where('sampling_trans_method_id', $sampling_trans_method_id);
+        $this->db->where('sampling_method_id', $sampling_method_id);
+        $this->db->where('incoming_item_id', $incoming_item_id);
+        //  $this->db->where('date', $date);
+        $query = $this->db->get(TBL_SAMPLING_RECORD_TEST);
+        return $query->result();  // Return the results as an array of objects
+    }
+
+
+
     public function get_download_report_hrly_inspection($incoming_item_id,$team_master_main_id,$date){
 
         $this->db->select(TBL_TEAM_MASTER_TRANS.'.team_member_name,textarea_9_10,textarea_10_11,textarea_11_12,textarea_11_12,textarea_01_230,textarea_230_330,textarea_330_430,textarea_430_530,textarea_530_630,textarea_630_700,textarea_total_hrs,textarea_12_01,remark_of_hrly_report');
@@ -19702,6 +19732,20 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
+    public function get_download_report_sampling_record($incoming_item_id,$sampling_method_id,$date){
+
+        $this->db->select('*');
+        $this->db->join(TBL_SAMPLING_MASTER_TRANS, TBL_SAMPLING_MASTER_TRANS.'.id  ='.TBL_SAMPLING_RECORD_TEST.'.sampling_trans_method_id');
+        $this->db->where('sampling_method_id', $sampling_method_id);
+        $this->db->where('incoming_item_id', $incoming_item_id);
+ 
+        $query = $this->db->get(TBL_SAMPLING_RECORD_TEST);
+        $data = $query->result_array();
+        return $data;  // Return the results as an array of objec
+
+    }
+
+
     public function saveAssignitem_data($id,$data){
 
         $this->db->where('id', $id);
@@ -19710,6 +19754,52 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         } else {
             return FALSE;
         }
+
+    }
+
+
+    
+    public function update_data_hrly_sampling_record($data){
+
+
+        $incoming_item_id = $data['sampling_data']['incoming_item_id'];
+        $sampling_method_id = $data['sampling_data']['sampling_method_id'];
+        $sampling_trans_method_id = $data['sampling_data']['sampling_trans_method_id'];
+        $date =  $data['sampling_data']['created_date'];
+        $textarea_notes =  $data['sampling_data']['textarea_notes'];
+        $remark_of_sampling_report =  $data['sampling_data']['remark_of_sampling_report'];
+        # check if data is already Exists
+    
+         // Prepare the data for insertion
+         $insert_data = [
+            'incoming_item_id' => $incoming_item_id,
+            'sampling_method_id' => $sampling_method_id,
+            'sampling_trans_method_id' => $sampling_trans_method_id,
+            'created_date' => date('Y-m-d'),
+            'textarea_notes' => $textarea_notes,
+            'remark_of_sampling_report' => $remark_of_sampling_report,
+            ];
+
+      
+
+          $check_if_exists =  $this->get_sampling_data($incoming_item_id,$sampling_method_id,$sampling_trans_method_id,$date);
+
+            if($check_if_exists){
+
+                $this->db->where('sampling_trans_method_id', $sampling_trans_method_id);
+                $this->db->where('sampling_method_id', $sampling_method_id);
+                $this->db->where('incoming_item_id', $incoming_item_id);
+                $this->db->where('created_date', $date);
+                if($this->db->update(TBL_SAMPLING_RECORD_TEST, $insert_data)){
+                    return TRUE;
+                } else {
+                    return FALSE;
+                }
+
+            }else{
+            // Insert the data into the database
+            return $this->db->insert(TBL_SAMPLING_RECORD_TEST, $insert_data);
+            }
 
     }
 

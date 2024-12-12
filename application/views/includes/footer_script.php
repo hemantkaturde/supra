@@ -24409,6 +24409,95 @@
 		});
 
 
+		$(document).on('click','#update_data_hrly_sampling_record',function(e){
+					e.preventDefault();
+					$(".loader_ajax").show();
+					var incoming_item_id =   $('#incoming_item_id').val();
+					//var textarea_10_11 =   $('#textarea_10_11').val();
+
+					var formData = $('#second_data_from').serialize();
+	
+					$.ajax({
+						url : "<?php echo base_url();?>update_data_hrly_sampling_record",
+						type: "POST",
+						data : formData,
+						
+						success: function(data, textStatus, jqXHR)
+						{
+							var fetchResponse = $.parseJSON(data);
+
+			
+							if(fetchResponse.status == "failure")
+							{
+								$.each(fetchResponse.error, function (i, v)
+								{
+									$('.'+i+'_error').html(v);
+								});
+								$(".loader_ajax").hide();
+							}
+							else if(fetchResponse.status == 'success')
+							{
+								swal({
+									title: "Success",
+									text: "Sampling Record Test Successfully Updated!",
+									icon: "success",
+									button: "Ok",
+									},function(){ 
+										
+											window.location.href = "<?php echo base_url().'updatehourlyworkingreportdata/'?>"+incoming_item_id;
+								});		
+							}
+							
+						},
+						error: function (jqXHR, textStatus, errorThrown)
+						{
+							$(".loader_ajax").hide();
+						}
+					});
+					return false;
+		});
+
+
+
+
+		$(document).on('click','#download_report_hrly_sampling_record',function(e){
+			e.preventDefault();
+			$(".loader_ajax").show();
+
+			var incoming_item_id  = $("#incoming_item_id").val();
+            var sampling_method_id  = $("#sampling_method_id").val();
+
+			alert(sampling_method_id);
+			
+		
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>admin/download_report_hrly_sampling_record/"+incoming_item_id+"/"+sampling_method_id,
+				type: "POST",
+				// data : {'hospitals' : hospitals, 'driver' : driver,'ride_start':ride_start,'ride_stop':ride_stop},
+				success: function(data, textStatus, jqXHR)
+				{
+					$(".loader_ajax").hide();
+					if(data == "failure")
+					{
+						//$(".sales_tracking_report_name_error").html("");
+						alert('No data fond');
+					}
+					else
+					{
+						//$(".sales_tracking_report_name_error").html("");
+						window.location.href = "<?php echo ADMIN_PATH;?>admin/download_report_hrly_sampling_record/"+incoming_item_id+"/"+sampling_method_id;
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+				{
+					alert('No data fond');
+					$(".loader_ajax").hide();
+				}
+			});
+			return false;
+		});
+
+
 	</script>
 <?php } ?>
 
