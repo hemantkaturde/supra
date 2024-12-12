@@ -207,11 +207,15 @@
                                         <?php  $comman_remark_samplimg = $sampling_data[0]->remark_of_sampling_report; } ?>
 
                                         <tr>
-                                            <td colspan="15" style="text-align: left;">Remark  |  Sampling Qty <input type="text" id="sampling_qty" value="<?=$sampling_data[0]->sampling_qty; ?>" name="sampling_qty"></td>
+                                            <td colspan="15" style="text-align: left;"> Sampling Qty  &nbsp&nbsp<input type="text"  id="sampling_qty" value="<?=$sampling_data[0]->sampling_qty; ?>" name="sampling_qty"></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td colspan="15" style="text-align: left;">Remark</td>
                                         </tr>
                                         <tr>
                                             <td colspan="15">  
-                                                <input type="text" class="form-control" id="remark_of_sampling_report" name="remark_of_sampling_report" placeholder="Enter Remark" value="<?=$comman_remark_samplimg; ?>">
+                                               <input type="text" class="form-control" id="remark_of_sampling_report" name="remark_of_sampling_report" placeholder="Enter Remark" value="<?=$comman_remark_samplimg; ?>">
                                             </td>
                                         </tr>
                                     </table>
