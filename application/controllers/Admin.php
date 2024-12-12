@@ -23085,8 +23085,8 @@ public function download_report_hrly_sampling_record($incoming_item_id,$sampling
     $sheet->mergeCells('B' . ($row + 1) . ':H' . ($row + 1));
     $sheet->setCellValue('A' . ($row + 1), 'Sampling Qty');
     $sheet->setCellValue('B' . ($row + 1),  $empInfo[0]['sampling_qty']);
-    $sheet->setCellValue('A' . ($row + 1), 'Remark');
-    $sheet->setCellValue('B' . ($row + 1),  $empInfo[0]['remark_of_sampling_report']);
+    $sheet->setCellValue('A' . ($row + 2), 'Remark');
+    $sheet->setCellValue('B' . ($row + 2),  $empInfo[0]['remark_of_sampling_report']);
     //$sheet->setCellValue('M' . ($row + 1),  $empInfo[0]['remark_of_hrly_report']);
     $sheet->getStyle('A' . ($row + 1))->getFont()->setBold(true);
 
