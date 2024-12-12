@@ -20861,7 +20861,24 @@
 		$("#view_scrap_calculation_report").dataTable().fnDestroy();
 		var status = $('#status').val();
 		var vendor_name = $('#vendor_name').val();
-		getallCurrentOrserReport(status,vendor_name);
+		// var from_date = $('#from_date').val();
+        // var to_date = $('#to_date').val();
+
+		 if($('#from_date').val()){
+			var from_date = $('#from_date').val();
+		 }else{
+			var from_date = 'NA';
+		 }
+
+		 if($('#to_date').val()){
+			var to_date = $('#to_date').val();
+		 }else{
+			var to_date = 'NA';
+		 }
+
+
+
+		getallCurrentOrserReport(status,vendor_name,from_date,to_date);
 	});
 
 	$(document).on('change','#status',function(e){  
@@ -20869,7 +20886,19 @@
 		$("#view_scrap_calculation_report").dataTable().fnDestroy();
 		var status = $('#status').val();
 		var vendor_name = $('#vendor_name').val();
-		getallCurrentOrserReport(status,vendor_name);
+		if($('#from_date').val()){
+			var from_date = $('#from_date').val();
+		 }else{
+			var from_date = 'NA';
+		 }
+
+		 if($('#to_date').val()){
+			var to_date = $('#to_date').val();
+		 }else{
+			var to_date = 'NA';
+		 }
+
+		getallCurrentOrserReport(status,vendor_name,from_date,to_date);
 	});
 
 
@@ -20878,10 +20907,69 @@
 		$("#view_scrap_calculation_report").dataTable().fnDestroy();
 		var status = $('#status').val();
 		var vendor_name = $('#vendor_name').val();
-		getallCurrentOrserReport(status,vendor_name);
+		if($('#from_date').val()){
+			var from_date = $('#from_date').val();
+		 }else{
+			var from_date = 'NA';
+		 }
+
+		 if($('#to_date').val()){
+			var to_date = $('#to_date').val();
+		 }else{
+			var to_date = 'NA';
+		 }
+
+		getallCurrentOrserReport(status,vendor_name,from_date,to_date);
 	});
 
-	function getallCurrentOrserReport(status,vendor_name){
+
+	$(document).on('change','#from_date',function(e){  
+		e.preventDefault();
+		$("#view_scrap_calculation_report").dataTable().fnDestroy();
+		var status = $('#status').val();
+		var vendor_name = $('#vendor_name').val();
+		if($('#from_date').val()){
+			var from_date = $('#from_date').val();
+		 }else{
+			var from_date = 'NA';
+		 }
+
+		 if($('#to_date').val()){
+			var to_date = $('#to_date').val();
+		 }else{
+			var to_date = 'NA';
+		 }
+
+		getallCurrentOrserReport(status,vendor_name,from_date,to_date);
+
+    });
+
+
+	$(document).on('change','#to_date',function(e){  
+		e.preventDefault();
+		$("#view_scrap_calculation_report").dataTable().fnDestroy();
+		var status = $('#status').val();
+		var vendor_name = $('#vendor_name').val();
+		if($('#from_date').val()){
+			var from_date = $('#from_date').val();
+		 }else{
+			var from_date = 'NA';
+		 }
+
+		 if($('#to_date').val()){
+			var to_date = $('#to_date').val();
+		 }else{
+			var to_date = 'NA';
+		 }
+
+		getallCurrentOrserReport(status,vendor_name,from_date,to_date);
+
+    });
+
+
+
+	function getallCurrentOrserReport(status,vendor_name,from_date,to_date){
+
 
 			var dt = $('#view_scrap_calculation_report').DataTable({
 				"columnDefs": [ 
@@ -20906,7 +20994,7 @@
 				"bProcessing": true,
 				"serverSide": true,
 				"ajax":{
-					url :"<?php echo base_url();?>admin/fetchscrapcalculationreport/"+status+"/"+vendor_name,
+					url :"<?php echo base_url();?>admin/fetchscrapcalculationreport/"+status+"/"+vendor_name+"/"+from_date+"/"+to_date,
 					type: "post",
 				},
 			});
@@ -20935,8 +21023,23 @@
 			var vendor_name_value = 'NA';
 		}
 
+
+		 if($('#from_date').val()){
+			var from_date = $('#from_date').val();
+		 }else{
+			var from_date = 'NA';
+		 }
+
+		 if($('#to_date').val()){
+			var to_date = $('#to_date').val();
+		 }else{
+			var to_date = 'NA';
+		 }
+
+
+
 		$.ajax({
-			url : "<?php echo ADMIN_PATH;?>admin/downlaod_scrap_calculation_report/"+status_value+"/"+vendor_name_value,
+			url : "<?php echo ADMIN_PATH;?>admin/downlaod_scrap_calculation_report/"+status_value+"/"+vendor_name_value+"/"+from_date+"/"+to_date,
 			type: "POST",
 			// data : {'hospitals' : hospitals, 'driver' : driver,'ride_start':ride_start,'ride_stop':ride_stop},
 			success: function(data, textStatus, jqXHR)
@@ -20950,7 +21053,7 @@
 				else
 				{
 					$(".report_type_error").html("");
-					window.location.href = "<?php echo ADMIN_PATH;?>admin/downlaod_scrap_calculation_report/"+status_value+"/"+vendor_name_value;
+					window.location.href = "<?php echo ADMIN_PATH;?>admin/downlaod_scrap_calculation_report/"+status_value+"/"+vendor_name_value+"/"+from_date+"/"+to_date,
 				}
 			},
 			error: function (jqXHR, textStatus, errorThrown)

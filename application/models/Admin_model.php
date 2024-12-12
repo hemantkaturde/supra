@@ -14829,7 +14829,7 @@ public function getEnquiryInforowdata($id){
 
 
 
-public function fetchscrapcalculationreportcount($params,$status,$vendor_name){
+public function fetchscrapcalculationreportcount($params,$status,$vendor_name,$from_date,$to_date){
 
 
     /* Bill of material Data */
@@ -14870,6 +14870,15 @@ public function fetchscrapcalculationreportcount($params,$status,$vendor_name){
         $this->db->where(TBL_BILL_OF_MATERIAL.'.vendor_name', $vendor_name);
     }
 
+    if($from_date!='NA'){
+        $this->db->where(TBL_VENDOR_PO_MASTER.'.date >=', $from_date);
+    }
+
+    if($to_date!='NA'){
+        $this->db->where(TBL_VENDOR_PO_MASTER.'.date <=', $to_date);
+    }
+    
+
     $this->db->group_by(TBL_BILL_OF_MATERIAL_ITEM.'.id');
     $query = $this->db->get(TBL_BILL_OF_MATERIAL);
     $rowcount = $query->num_rows();
@@ -14877,9 +14886,8 @@ public function fetchscrapcalculationreportcount($params,$status,$vendor_name){
 
 }
 
-public function fetchscrapcalculationreportdata($params,$status,$vendor_name){
+public function fetchscrapcalculationreportdata($params,$status,$vendor_name,$from_date,$to_date){
 
-  
     /* Bill of material Data */
     $this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_BILL_OF_MATERIAL.'.id as billofmaterialid,'.TBL_FINISHED_GOODS.'.part_number as partno,'.TBL_BUYER_MASTER.'.buyer_name as buyer, 2 as flag,'.TBL_BILL_OF_MATERIAL.'.bom_status,'.TBL_BILL_OF_MATERIAL_ITEM.'.rm_actual_aty as vendor_order_qty_co,'.TBL_BILL_OF_MATERIAL_ITEM.'.vendor_actual_recived_qty as vendor_received_qty_co,'.TBL_VENDOR_PO_MASTER.'.po_number as v_po_number,'.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.sent_qty_pcs,'.TBL_FINISHED_GOODS.'.name,'.TBL_RAWMATERIAL.'.type_of_raw_material');
     
@@ -14915,11 +14923,18 @@ public function fetchscrapcalculationreportdata($params,$status,$vendor_name){
     if($status!='NA'){
         // $this->db->Like(TBL_RAWMATERIAL.'.type_of_raw_material', "%".$status."");
         $this->db->where("(".TBL_RAWMATERIAL.".type_of_raw_material LIKE '%".str_replace("%20", " ", $status)."%')");
-
     }
 
     if($vendor_name!='NA'){
         $this->db->where(TBL_BILL_OF_MATERIAL.'.vendor_name', $vendor_name);
+    }
+
+    if($from_date!='NA'){
+        $this->db->where(TBL_VENDOR_PO_MASTER.'.date >=', $from_date);
+    }
+
+    if($to_date!='NA'){
+        $this->db->where(TBL_VENDOR_PO_MASTER.'.date <=', $to_date);
     }
 
     $this->db->where(TBL_BILL_OF_MATERIAL.'.status', 1);
@@ -14956,7 +14971,7 @@ public function fetchscrapcalculationreportdata($params,$status,$vendor_name){
 
 
 
-public function getscrapcalculationreportdata($status,$vendor_name_value){
+public function getscrapcalculationreportdata($status,$vendor_name_value,$from_date,$to_date){
 
     /* Bill of material Data */
     $this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_BILL_OF_MATERIAL.'.id as billofmaterialid,'.TBL_FINISHED_GOODS.'.part_number as partno,'.TBL_BUYER_MASTER.'.buyer_name as buyer, 2 as flag,'.TBL_BILL_OF_MATERIAL.'.bom_status,'.TBL_BILL_OF_MATERIAL_ITEM.'.rm_actual_aty as vendor_order_qty_co,'.TBL_BILL_OF_MATERIAL_ITEM.'.vendor_actual_recived_qty as vendor_received_qty_co,'.TBL_VENDOR_PO_MASTER.'.po_number as v_po_number,'.TBL_SUPPLIER_PO_CONFIRMATION_ITEM.'.sent_qty_pcs,'.TBL_FINISHED_GOODS.'.name,'.TBL_RAWMATERIAL.'.type_of_raw_material');
@@ -14978,6 +14993,15 @@ public function getscrapcalculationreportdata($status,$vendor_name_value){
     if($vendor_name_value!='NA'){
         $this->db->where(TBL_BILL_OF_MATERIAL.'.vendor_name', $vendor_name_value);
     }
+
+    if($from_date!='NA'){
+        $this->db->where(TBL_VENDOR_PO_MASTER.'.date >=', $from_date);
+    }
+
+    if($to_date!='NA'){
+        $this->db->where(TBL_VENDOR_PO_MASTER.'.date <=', $to_date);
+    }
+
 
     $this->db->where(TBL_BILL_OF_MATERIAL.'.status', 1);
     $this->db->group_by(TBL_BILL_OF_MATERIAL_ITEM.'.id');

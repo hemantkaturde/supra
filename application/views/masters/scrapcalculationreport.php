@@ -60,6 +60,21 @@
                                               </select>
                                         </div>
                                     </div>
+
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="from_date">From Date</label>
+                                            <input type="text" class="form-control datepicker" id="from_date" name="from_date" autocomplete="off">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <div class="to_date">
+                                            <label for="to_date">To Date</label>
+                                            <input type="text" class="form-control datepicker" id="to_date" name="to_date" autocomplete="off" >
+                                        </div>
+                                    </div>
+                                    
                                     
                                     <div class="col-md-2">
                                         <div class="form-group">
