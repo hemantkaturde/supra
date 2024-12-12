@@ -19616,7 +19616,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
 
     public function getteamdetailsforhrlyinsectionreport($incoming_details_id){
-        $this->db->select('*,'.TBL_TEAM_MASTER.'.id as team_master_id,'.TBL_FINISHED_GOODS.'.name as description,'.TBL_TEAM_MASTER.'.remark as HOD,'.TBL_INCOMING_DETAILS_ITEM.'.id as incoming_item_id,'.TBL_VENDOR.'.vendor_name as vname,'.TBL_VENDOR_PO_MASTER.'.po_number as v_po_number');
+        $this->db->select('*,'.TBL_TEAM_MASTER.'.id as team_master_id,'.TBL_FINISHED_GOODS.'.name as description,'.TBL_TEAM_MASTER.'.remark as HOD,'.TBL_INCOMING_DETAILS_ITEM.'.id as incoming_item_id,'.TBL_VENDOR.'.vendor_name as vname,'.TBL_VENDOR_PO_MASTER.'.po_number as v_po_number,'.TBL_TEAM_MASTER.'.team_name as team_name_for_report');
         $this->db->join(TBL_INCOMING_DETAILS, TBL_INCOMING_DETAILS.'.id  = '.TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id  = '.TBL_INCOMING_DETAILS.'.vendor_po_number');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_INCOMING_DETAILS.'.vendor_name');

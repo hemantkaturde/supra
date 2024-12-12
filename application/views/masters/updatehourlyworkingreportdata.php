@@ -70,7 +70,7 @@
                                         </tr>
                                         <tr>
                                             <td>HOD</td>
-                                            <td colspan="5" style="text-align: left;"><?=$getteamdetailsforhrlyinsectionreport['0']['HOD'];?></td>
+                                            <td colspan="5" style="text-align: left;"><?=$getteamdetailsforhrlyinsectionreport['0']['HOD'].'-'.$getteamdetailsforhrlyinsectionreport['0']['team_name_for_report'];?></td>
                                             <td colspan="5" style="text-align: left;">Target Qty</td>
                                             <td colspan="4"  style="text-align: left;"><?=$getteamdetailsforhrlyinsectionreport['0']['target_qty'];?></td>
                                         

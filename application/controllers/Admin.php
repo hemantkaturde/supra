@@ -22838,7 +22838,7 @@ public function download_report_hrly_inspection($incoming_item_id,$team_master_m
     $sheet->setCellValue('C5', 'Order QTY')->setCellValue('D5', $getteamdetailsforhrlyinsectionreport['0']['p_o_qty']);
     $sheet->setCellValue('E5', 'Rec QTY')->setCellValue('F5', $getteamdetailsforhrlyinsectionreport['0']['invoice_qty']);
     $sheet->setCellValue('G5', 'Target Qty')->setCellValue('H5', $getteamdetailsforhrlyinsectionreport['0']['target_qty']);
-    $sheet->setCellValue('G4', 'HOD')->setCellValue('H4', $getteamdetailsforhrlyinsectionreport['0']['HOD']);
+    $sheet->setCellValue('G4', 'HOD')->setCellValue('H4', $getteamdetailsforhrlyinsectionreport['0']['HOD'].'-'.$getteamdetailsforhrlyinsectionreport['0']['team_name_for_report']);
 
     $boldHeaders = ['A4', 'C4', 'A5', 'C5', 'E5', 'G5','E4','D6','G4'];
 
@@ -23039,7 +23039,7 @@ public function download_report_hrly_sampling_record($incoming_item_id,$sampling
     $sheet->setCellValue('C5', 'Order QTY')->setCellValue('D5', $getteamdetailsforhrlyinsectionreport['0']['p_o_qty']);
     $sheet->setCellValue('E5', 'Rec QTY')->setCellValue('F5', $getteamdetailsforhrlyinsectionreport['0']['invoice_qty']);
     $sheet->setCellValue('G5', 'Target Qty')->setCellValue('H5', $getteamdetailsforhrlyinsectionreport['0']['target_qty']);
-    $sheet->setCellValue('G4', 'HOD')->setCellValue('H4', $getteamdetailsforhrlyinsectionreport['0']['HOD']);
+    $sheet->setCellValue('G4', 'HOD')->setCellValue('H4', $getteamdetailsforhrlyinsectionreport['0']['HOD'].'-'.$getteamdetailsforhrlyinsectionreport['0']['team_name_for_report']);
 
     $boldHeaders = ['A4', 'C4', 'A5', 'C5', 'E5', 'G5','E4','D6','G4'];
 
