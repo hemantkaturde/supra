@@ -23082,7 +23082,7 @@ public function download_report_hrly_sampling_record($incoming_item_id,$sampling
 
 
     // Remark section
-    $sheet->mergeCells('B' . ($row + 1) . ':H' . ($row + 1));
+    //$sheet->mergeCells('B' . ($row + 1) . ':H' . ($row + 1));
     $sheet->setCellValue('A' . ($row + 1), 'Sampling Qty');
     $sheet->setCellValue('B' . ($row + 1),  $empInfo[0]['sampling_qty']);
     $sheet->setCellValue('A' . ($row + 2), 'Remark');
