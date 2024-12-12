@@ -22967,21 +22967,21 @@ public function update_data_hrly_sampling_record(){
     foreach ($formData as $key => $value) {
         $data[] = $value;
     }
-
-    
   
      // Parse the main details
-     $sampling_method = $data[3];  // Array of employee IDs
+     $sampling_method = $data[2];  // Array of employee IDs
      $remark = $data[6];  // Remark from the input
      
      // Loop through the employee IDs
      foreach ($sampling_method as $index => $employee_id) {
          $sampling_data = [
              'incoming_item_id' => $data[0],
-             'sampling_method_id' => $data[2],
+             
+             'sampling_method_id' => $data[1],
              'sampling_trans_method_id' => $sampling_method[$index],
-             'created_date' => $data[4],
-             'textarea_notes' => $data[5][$index],
+             'created_date' => $data[3],
+             'textarea_notes' => $data[4][$index],
+             'sampling_qty'=> $data[5],
              'remark_of_sampling_report' => $remark,
          ];
 

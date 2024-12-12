@@ -159,7 +159,7 @@
                                             <td colspan="16">SUPRA QUALITY EXPORTS (I) PVT. LTD </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="16">SAMPLE RECORD TEST   |  Sampling Qty <input type="text" id="sampling_qty" name="sampling_qty"></td>
+                                            <td colspan="16">SAMPLE RECORD TEST  </td>
                                         </tr>
                                     
                                         <tr>
@@ -207,7 +207,7 @@
                                         <?php  $comman_remark_samplimg = $sampling_data[0]->remark_of_sampling_report; } ?>
 
                                         <tr>
-                                            <td colspan="15" style="text-align: left;">Remark</td>
+                                            <td colspan="15" style="text-align: left;">Remark  |  Sampling Qty <input type="text" id="sampling_qty" value="<?=$sampling_data[0]->sampling_qty; ?>" name="sampling_qty"></td>
                                         </tr>
                                         <tr>
                                             <td colspan="15">  

@@ -19792,6 +19792,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $date =  $data['sampling_data']['created_date'];
         $textarea_notes =  $data['sampling_data']['textarea_notes'];
         $remark_of_sampling_report =  $data['sampling_data']['remark_of_sampling_report'];
+        $sampling_qty =  $data['sampling_data']['sampling_qty'];
         # check if data is already Exists
     
          // Prepare the data for insertion
@@ -19802,6 +19803,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             'created_date' => date('Y-m-d'),
             'textarea_notes' => $textarea_notes,
             'remark_of_sampling_report' => $remark_of_sampling_report,
+            'sampling_qty' => $sampling_qty,
             ];
 
       
