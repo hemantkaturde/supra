@@ -163,12 +163,11 @@
                                         </tr>
                                     
                                         <tr>
-                                            <td>Measurement Name</td>
+                                            <td>Instrument Name</td>
                                             <td>Measurement Size</td>
                                             <td>Type</td>
                                             <td>Remark</td>
                                             <td>Notes</td>
-                                          
                                         </tr>
 
 
