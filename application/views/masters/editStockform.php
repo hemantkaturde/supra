@@ -479,7 +479,7 @@
 
                                                             <div class="form-group">
                                                                 <label for="invoice_qty_in_pcs">Invoice Qty (In Pcs) </label>
-                                                                <input type="text" class="form-control" id="invoice_qty_in_pcs" value="0" name="invoice_qty_in_pcs">
+                                                                <input type="number" class="form-control" id="invoice_qty_in_pcs" value="0" name="invoice_qty_in_pcs">
                                                                 <p class="error invoice_qty_in_pcs_error"></p>
                                                             </div>
 
