@@ -479,13 +479,13 @@
 
                                                             <div class="form-group">
                                                                 <label for="invoice_qty_in_pcs">Invoice Qty (In Pcs) </label>
-                                                                <input type="text" class="form-control" id="invoice_qty_in_pcs" name="invoice_qty_in_pcs">
+                                                                <input type="text" class="form-control" id="invoice_qty_in_pcs" value="0" name="invoice_qty_in_pcs">
                                                                 <p class="error invoice_qty_in_pcs_error"></p>
                                                             </div>
 
                                                             <div class="form-group">
                                                                 <label for="invoice_qty_in_kgs">Invoice Qty (In Kgs) </label>
-                                                                <input type="text" class="form-control" id="invoice_qty_in_kgs" name="invoice_qty_in_kgs" readonly>
+                                                                <input type="text" class="form-control" id="invoice_qty_in_kgs" value="0" name="invoice_qty_in_kgs" readonly>
                                                                 <p class="error invoice_qty_in_kgs_error"></p>
                                                             </div>
                                                         
