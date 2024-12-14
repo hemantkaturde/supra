@@ -17513,7 +17513,7 @@ public function downloadpreexportform($id){
                     <tr>
                         <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top"><b>Gross Wt per Box</b></td>   
                         <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top"><b>No. of Cartoons</b></td>
-                        <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top"><b>Qty Per Qty</b></td>
+                        <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top"><b>Qty Per box</b></td>
                         <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top"><b>Total Qty</b></td> 
                         <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top"><b>Gross Weight with Ctns</b></td>  
                         <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top"><b>Box Size</b></td>    
