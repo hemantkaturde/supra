@@ -10393,6 +10393,8 @@ class Admin extends BaseController
         $getitemdetailsusingvendorpoitems= $this->admin_model->getitemdetailsusingvendorpoitems(trim($vendor_po_item_id));
         $getallscrapdetailsforprint =  $this->admin_model->getallscrapdetailsforprint($rejection_form_id,$vendor_po_item_id,$vendor_po_id);
         $getRejectionitemsrejecteddetails =  $this->admin_model->getRejectionitemsrejecteddetails($rejection_form_id,$vendor_po_item_id,$vendor_po_id);
+
+
         
         $CartItem='';
         $j=1;
@@ -15911,7 +15913,7 @@ public function downlaoddebitnote($id){
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['ok_qty'].' '.$value['supplier_po_unit'].'</td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['less_quantity'].' '.$value['supplier_po_unit'].'</td> 
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rejected_quantity'].' '.$value['supplier_po_unit'].'</td>    
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rate'].'</td>    
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['debit_note_rate'].'</td>    
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.round($value['debit_amount'],2).'</td>    
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top"></td>
                 </tr>';
