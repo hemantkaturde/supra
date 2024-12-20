@@ -19524,13 +19524,26 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     public function fetchthrlyreportlistcount($params,$userId){
 
         $this->db->select('*');
+        
         if($params['search']['value'] != "") 
         {
-            $this->db->where("(".TBL_INCOMING_DETAILS_ITEM.".team_name LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".remark LIKE '%".$params['search']['value']."%')");
+            $this->db->where("(".TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_TEAM_MASTER.".team_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".lot_no LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".p_o_qty LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".invoice_no LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".invoice_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".challan_no LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".challan_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".received_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".units LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".boxex_goni_bundle LIKE '%".$params['search']['value']."%')");
         }
+
         $this->db->join(TBL_INCOMING_DETAILS, TBL_INCOMING_DETAILS.'.id  = '.TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id  = '.TBL_INCOMING_DETAILS.'.vendor_po_number');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id  = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
 
         $this->db->join(TBL_TEAM_MASTER, TBL_TEAM_MASTER.'.id  = '.TBL_INCOMING_DETAILS_ITEM.'.assign_team','left');
         $this->db->join(TBL_USERS, TBL_USERS.'.team_id  = '.TBL_TEAM_MASTER.'.id','left');
@@ -19547,8 +19560,23 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->select('*,'.TBL_TEAM_MASTER.'.id as team_master_id,'.TBL_INCOMING_DETAILS_ITEM.'.id as incoming_details_id,'.TBL_VENDOR_PO_MASTER.'.po_number as vpo_number');
         if($params['search']['value'] != "") 
         {
-            $this->db->where("(".TBL_INCOMING_DETAILS_ITEM.".team_name LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".remark LIKE '%".$params['search']['value']."%')");
+            // $this->db->where("(".TBL_FINISHED_GOODS.".team_name LIKE '%".$params['search']['value']."%'");
+            // $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".remark LIKE '%".$params['search']['value']."%')");
+
+            $this->db->where("(".TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_TEAM_MASTER.".team_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".lot_no LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".p_o_qty LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".invoice_no LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".invoice_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".challan_no LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".challan_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".received_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".units LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".boxex_goni_bundle LIKE '%".$params['search']['value']."%')");
+
+
         }
         $this->db->join(TBL_INCOMING_DETAILS, TBL_INCOMING_DETAILS.'.id  = '.TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id  = '.TBL_INCOMING_DETAILS.'.vendor_po_number');
