@@ -9365,7 +9365,7 @@ class Admin_model extends CI_Model
     }
 
     public function getstockrejectionformitemdata($params,$vendor_po_id,$id){
-        $this->db->select('*,'.TBL_FINISHED_GOODS.'.net_weight as net_weight_fg,'.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
+        $this->db->select('*,'.TBL_FINISHED_GOODS.'.net_weight as net_weight_fg,'.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id as vendor_part_number');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
 
         if($params['search']['value'] != "") 
@@ -9394,7 +9394,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;color: #3c8dbc;' data-toggle='modal' data-target='#addNewModal'  rejection-form-id='".$id."' vendor-po-id='".$vendor_po_id."'  vendor_po_item_id='".$value['id']."' net_weight='".$value['net_weight_fg']."'  class='fa fa-plus-circle addrejectionitemdata' aria-hidden='true'></i>  &nbsp "; 
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewrejectionformitemdetails?rejection_form_id=".$id.'&vendor_po_item_id='.$value['id'].'&vendor_po_id='.$vendor_po_id."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-eye' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addscraprejection?rejection_form_id=".$id.'&vendor_po_item_id='.$value['id'].'&vendor_po_id='.$vendor_po_id."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-minus-circle' aria-hidden='true'></i></a>   &nbsp ";
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."admin/printrejectiondetails/".$id.'/'.$value['id'].'/'.$vendor_po_id.'/'.$part_number_id."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."admin/printrejectiondetails/".$id.'/'.$value['id'].'/'.$vendor_po_id.'/'.$value['vendor_part_number']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>   &nbsp ";
                  $counter++; 
             }
         }
