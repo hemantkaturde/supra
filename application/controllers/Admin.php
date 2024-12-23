@@ -10402,7 +10402,7 @@ class Admin extends BaseController
             foreach ($getstockrejectiondata as $key => $value) {
 
                 $CartItem_1 .= '
-                        <tr style="style=border-left: 1px solid black;border-right: 1px solid black;">
+                        <tr style="style=border-left: 1px solid black;border-right: 1px solid black;style=border: 1px solid black;border-bottom: 1px solid black;">
                             <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$i.'</td>
                             <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['lot_number'].'</td> 
                             <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['previous_balence'].'</td> 
