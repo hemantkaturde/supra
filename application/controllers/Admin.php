@@ -10387,18 +10387,15 @@ class Admin extends BaseController
     }
 
 
-    public function printrejectiondetails($rejection_form_id,$vendor_po_item_id,$vendor_po_id){
+    public function printrejectiondetails($rejection_form_id,$vendor_po_item_id,$vendor_po_id,$part_number_id){
 
         $getalldataofeditrejectionform= $this->admin_model->getalldataofeditrejectionform($rejection_form_id);
         $getitemdetailsusingvendorpoitems= $this->admin_model->getitemdetailsusingvendorpoitems(trim($vendor_po_item_id));
         $getallscrapdetailsforprint =  $this->admin_model->getallscrapdetailsforprint($rejection_form_id,$vendor_po_item_id,$vendor_po_id);
         $getRejectionitemsrejecteddetails =  $this->admin_model->getRejectionitemsrejecteddetails($rejection_form_id,$vendor_po_item_id,$vendor_po_id);
-        $getstockrejectiondata =  $this->admin_model->getstockrejectiondata($vendor_po_item_id,$vendor_po_id);
+        $getstockrejectiondata =  $this->admin_model->getstockrejectiondata($part_number_id,$vendor_po_id);
 
-        print_r($getstockrejectiondata);
-        exit;
-
-                
+               
             $CartItem_1 = "";
             $i=1;
         

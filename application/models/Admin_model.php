@@ -9365,7 +9365,7 @@ class Admin_model extends CI_Model
     }
 
     public function getstockrejectionformitemdata($params,$vendor_po_id,$id){
-        $this->db->select('*,'.TBL_FINISHED_GOODS.'.net_weight as net_weight_fg');
+        $this->db->select('*,'.TBL_FINISHED_GOODS.'.net_weight as net_weight_fg,'.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
 
         if($params['search']['value'] != "") 
@@ -9394,7 +9394,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;color: #3c8dbc;' data-toggle='modal' data-target='#addNewModal'  rejection-form-id='".$id."' vendor-po-id='".$vendor_po_id."'  vendor_po_item_id='".$value['id']."' net_weight='".$value['net_weight_fg']."'  class='fa fa-plus-circle addrejectionitemdata' aria-hidden='true'></i>  &nbsp "; 
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewrejectionformitemdetails?rejection_form_id=".$id.'&vendor_po_item_id='.$value['id'].'&vendor_po_id='.$vendor_po_id."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-eye' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addscraprejection?rejection_form_id=".$id.'&vendor_po_item_id='.$value['id'].'&vendor_po_id='.$vendor_po_id."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-minus-circle' aria-hidden='true'></i></a>   &nbsp ";
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."admin/printrejectiondetails/".$id.'/'.$value['id'].'/'.$vendor_po_id."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."admin/printrejectiondetails/".$id.'/'.$value['id'].'/'.$vendor_po_id.'/'.$part_number_id."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>   &nbsp ";
                  $counter++; 
             }
         }
@@ -19875,8 +19875,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->join(TBL_INCOMING_DETAILS_ITEM, TBL_INCOMING_DETAILS_ITEM.'.id = '.TBL_STOCKS_ITEM.'.lot_number');
         $this->db->where(TBL_STOCKS_ITEM.'.stock_form_id IS NOT NULL');
         // $this->db->where(TBL_STOCKS_ITEM.'.stock_form_id',$sock_id);
-       // $this->db->where(TBL_STOCKS_ITEM.'.part_number',$vendor_po_item_id);
-        $this->db->where(TBL_STOCKS_ITEM.'.pre_vendor_po_number',$vendor_po_id);
+        $this->db->where(TBL_STOCKS_ITEM.'.part_number',$part_number_id);
+        $this->db->where(TBL_STOCKS.'.vendor_po_number',$vendor_po_id);
         $this->db->where(TBL_STOCKS_ITEM.'.status', 1);
        // $this->db->group_by(TBL_STOCKS_ITEM.'.id');
        $this->db->order_by(TBL_STOCKS_ITEM.'.id ','ASC');
