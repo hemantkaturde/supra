@@ -10395,6 +10395,8 @@ class Admin extends BaseController
         $getRejectionitemsrejecteddetails =  $this->admin_model->getRejectionitemsrejecteddetails($rejection_form_id,$vendor_po_item_id,$vendor_po_id);
         $getstockrejectiondata =  $this->admin_model->getstockrejectiondata($vendor_po_item_id,$vendor_po_id);
 
+        print_r($getstockrejectiondata);
+        exit;
 
                 
             $CartItem_1 = "";
