@@ -10403,12 +10403,12 @@ class Admin extends BaseController
 
                 $CartItem_1 .= '
                         <tr style="style=border-left: 1px solid black;border-right: 1px solid black;border-bottom: 1px solid black">
-                            <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$i.'</td>
-                            <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['lot_number'].'</td> 
-                            <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['previous_balence'].'</td> 
-                            <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['invoice_qty_In_pcs'].'</td>
-                            <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['actual_received_qty_in_pcs'].'</td>
-                            <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['invoice_number'].'</td> 
+                            <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;border-bottom: 1px solid black" valign="top">'.$i.'</td>
+                            <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;border-bottom: 1px solid black" valign="top">'.$value['lot_number'].'</td> 
+                            <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;border-bottom: 1px solid black" valign="top">'.$value['previous_balence'].'</td> 
+                            <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;border-bottom: 1px solid black" valign="top">'.$value['invoice_qty_In_pcs'].'</td>
+                            <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;border-bottom: 1px solid black" valign="top">'.$value['actual_received_qty_in_pcs'].'</td>
+                            <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;border-bottom: 1px solid black" valign="top">'.$value['invoice_number'].'</td> 
                             <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;border-bottom: 1px solid black" valign="top">'.date("d-m-Y", strtotime($value['invoice_date'])).'</td>    
                         </tr>';
                     
