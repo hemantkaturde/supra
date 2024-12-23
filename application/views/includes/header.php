@@ -256,6 +256,7 @@
                           || $pageUrl=="viewuspincomig"
                           || $pageUrl=="viewstcokformdetails"
                           || $pageUrl=="addscraprejection"
+                          || $pageUrl=="searchstock"
                           ){echo 'active';}?>">
                         <a href="#">
                           <i class="fa fa-stack-exchange"></i> <span class="menu_label">Stock</span>

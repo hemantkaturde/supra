@@ -10393,7 +10393,29 @@ class Admin extends BaseController
         $getitemdetailsusingvendorpoitems= $this->admin_model->getitemdetailsusingvendorpoitems(trim($vendor_po_item_id));
         $getallscrapdetailsforprint =  $this->admin_model->getallscrapdetailsforprint($rejection_form_id,$vendor_po_item_id,$vendor_po_id);
         $getRejectionitemsrejecteddetails =  $this->admin_model->getRejectionitemsrejecteddetails($rejection_form_id,$vendor_po_item_id,$vendor_po_id);
+        $getstockrejectiondata =  $this->admin_model->getstockrejectiondata($vendor_po_item_id,$vendor_po_id);
 
+
+                
+            $CartItem_1 = "";
+            $i=1;
+        
+            foreach ($getstockrejectiondata as $key => $value) {
+
+                $CartItem_1 .= '
+                        <tr style="style=border-left: 1px solid black;border-right: 1px solid black;">
+                            <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$i.'</td>
+                            <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['lot_number'].'</td> 
+                            <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['previous_balence'].'</td> 
+                            <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['invoice_qty_In_pcs'].'</td>
+                            <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['actual_received_qty_in_pcs'].'</td>
+                            <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['invoice_number'].'</td> 
+                            <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.date("d-m-Y", strtotime($value['invoice_date'])).'</td>    
+                        </tr>';
+                    
+
+                    $i++;       
+            }
 
         
         $CartItem='';
@@ -10458,8 +10480,19 @@ class Admin extends BaseController
                         <th style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 5px;border-bottom:1px solid black" valign="top"></th> 
                     </tr>
                 </table>
-                
-                ';
+                <h3>Stock Entries</h3>
+
+                <table style="width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:12px">
+                    <tr style=border: 1px solid black;border-right: 1px solid black;>
+                        <th style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 5px;border-bottom:1px solid black" valign="top">Sr No</th> 
+                        <th style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 5px;border-bottom:1px solid black" valign="top">Lot Number</th> 
+                        <th style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 5px;border-bottom:1px solid black" valign="top">Previous Balance</th> 
+                        <th style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 5px;border-bottom:1px solid black" valign="top">Invoice Qty In PCS</th> 
+                        <th style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 5px;border-bottom:1px solid black" valign="top">Actual Received Qty In PCS</th> 
+                        <th style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 5px;border-bottom:1px solid black" valign="top">Invoice Number</th> 
+                        <th style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 5px;border-bottom:1px solid black" valign="top">Invoice Date</th> 
+                    </tr>'.$CartItem_1.'
+                </table>';
 
                 // <p>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</p>
         $invoice_name =  'Scrap_Rejection.pdf';
@@ -20394,7 +20427,6 @@ public function fetchseachbypartnumberreport($finish_good_part_number,$form_type
 
 public function printstock($stock_id,$balence_qty_in_pcs,$ready_for_exp_pcs,$total_exp_qty_in_pcs,$part_number_id){
 
-
     // $ready_for_exp_pcs = $this->input->post('ready_for_exp_pcs');
     // $balence_qty_in_pcs = $this->input->post('balence_qty_in_pcs');
 
@@ -20543,7 +20575,7 @@ public function printstock($stock_id,$balence_qty_in_pcs,$ready_for_exp_pcs,$tot
                             <p><b>Total Rejected Qty Kgs : </b>'.round($rejected_qty_in_kgs,3).'</p>    
                         </td> 
                 </tr>
-            </table>
+             </table>
 
 
             <h4>Export Item Details </h4>
