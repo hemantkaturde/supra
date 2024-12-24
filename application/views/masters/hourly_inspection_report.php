@@ -17,6 +17,7 @@
                                         <th>FG Part No</th>
                                         <th>Team Name</th>
                                         <th>Lot Number</th>
+                                        <th>Invoice Qty (in Pcs)</th>
                                         <th>P.O.Qty (in Pcs)</th>
                                         <!-- <th>Invoice Qty (in Pcs)</th>
                                         <th>Balance Qty in Pcs</th>

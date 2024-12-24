@@ -19536,6 +19536,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".invoice_date LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".challan_no LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".challan_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".invoice_qty LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".received_date LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".units LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".boxex_goni_bundle LIKE '%".$params['search']['value']."%')");
@@ -19572,6 +19573,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".invoice_date LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".challan_no LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".challan_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".invoice_qty LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".received_date LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".units LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".boxex_goni_bundle LIKE '%".$params['search']['value']."%')");
@@ -19601,6 +19603,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['part_number'] = $value['part_number'];
                 $data[$counter]['name'] = $value['team_name'];
                 $data[$counter]['lot_no'] = $value['lot_no'];
+                $data[$counter]['invoice_qty_in_pcs'] = $value['invoice_qty'];
                 $data[$counter]['p_o_qty'] = $value['p_o_qty'];
                 // $data[$counter]['invoice_qty'] = $value['invoice_qty'];
                 // $data[$counter]['balance_qty'] = $value['balance_qty'];
