@@ -8506,7 +8506,7 @@ class Admin_model extends CI_Model
         $this->db->where(TBL_STOCKS_ITEM.'.status', 1);
         $this->db->where(TBL_STOCKS_ITEM.'.stock_form_id',$stock_id);
        // $this->db->group_by(TBL_STOCKS_ITEM.'.id');
-        $this->db->group_by(TBL_INCOMING_DETAILS_ITEM.'.id');
+        $this->db->group_by(TBL_STOCKS_ITEM.'.id');
         $query = $this->db->get(TBL_STOCKS_ITEM);
         $data = $query->result_array();
 
