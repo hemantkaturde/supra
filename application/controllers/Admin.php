@@ -23199,7 +23199,16 @@ public function addnewscraptype(){
                 'remark'=>trim($this->input->post('remark')),
             );
 
-            $saveAssignitem_data = $this->admin_model->saveSacrptype('',$data);
+            if(trim($this->input->post('scrap_type_id'))){
+                $scrap_type_id = $this->input->post('scrap_type_id');
+            }else{
+                $scrap_type_id ='';
+            }
+
+    
+
+            $saveAssignitem_data = $this->admin_model->saveSacrptype($scrap_type_id,$data);
+            
             if($saveAssignitem_data){
                 $saveSacrptype_response['status'] = 'success';
                 $saveSacrptype_response['error'] = array('scrap_type'=>'', 'hsn_code'=>'' ,'remark'=>'');
@@ -23235,6 +23244,18 @@ public function deletescraptype(){
     }
 
 }
+
+
+ public function editscraptype($id){
+        $process = 'Edit Scrap Type';
+        $processFunction = 'Admin/editscraptype';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Edit Scrap Type';
+        $data['geteditscraptype']= $this->admin_model->geteditscraptype($id);
+        $this->loadViews("masters/editscraptype", $this->global, $data, NULL);
+ }
+
+
 
 
 }

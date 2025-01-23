@@ -24601,7 +24601,7 @@
 <?php } ?>
 
 
-<?php if($pageTitle=='Scrap Type' || $pageTitle=='Add New Scrap Type'){ ?>
+<?php if($pageTitle=='Scrap Type' || $pageTitle=='Add New Scrap Type' || $pageTitle=='Edit Scrap Type'){ ?>
 	<script type="text/javascript">
         $(document).ready(function() {
 			var dt = $('#view_scrap_type').DataTable({
@@ -24633,6 +24633,8 @@
 		$(document).on('click','#savenewscraptype',function(e){
 			e.preventDefault();
 			$(".loader_ajax").show();
+
+			var scrap_type_id =   $('#scrap_type_id').val();
 					
 			var formData = new FormData($("#addnewscraptypeform")[0]);
 			    $.ajax({
@@ -24723,6 +24725,51 @@
 					}
 				});
 	    });
+
+
+		$(document).on('click','#editscraptype',function(e){
+				e.preventDefault();
+				$(".loader_ajax").show();
+				var formData = new FormData($("#updatechaform")[0]);
+				var cha_id = $("#cha_id").val();
+				$.ajax({
+					url : "<?php echo base_url();?>updatecha/"+cha_id,
+					type: "POST",
+					data : formData,
+					cache: false,
+					contentType: false,
+					processData: false,
+					success: function(data, textStatus, jqXHR)
+					{
+						var fetchResponse = $.parseJSON(data);
+						if(fetchResponse.status == "failure")
+						{
+							$.each(fetchResponse.error, function (i, v)
+							{
+								$('.'+i+'_error').html(v);
+							});
+							$(".loader_ajax").hide();
+						}
+						else if(fetchResponse.status == 'success')
+						{
+							swal({
+								title: "Success",
+								text: "CHA Successfully Updated!",
+								icon: "success",
+								button: "Ok",
+								},function(){ 
+									window.location.href = "<?php echo base_url().'chamaster'?>";
+							});		
+						}
+						
+					},
+					error: function (jqXHR, textStatus, errorThrown)
+					{
+					$(".loader_ajax").hide();
+					}
+				});
+				return false;
+		});
 
 
 	</script>

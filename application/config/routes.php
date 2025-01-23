@@ -596,6 +596,7 @@ $route['scraptype'] = "admin/scraptype";
 $route['fetchscraptypelist'] = "admin/fetchscraptypelist";
 $route['addnewscraptype'] = "admin/addnewscraptype";
 
+$route['editscraptype/(:any)'] = "admin/editscraptype/$1";
 
 
 /* End of file routes.php */

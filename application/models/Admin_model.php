@@ -19990,7 +19990,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['hsn_code'] =  $value['hsn_code'];
                 $data[$counter]['remark'] =  $value['remark'];
                 $data[$counter]['action'] = '';
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."updateteammember/".$value['id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editscraptype/".$value['id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['id']."' class='fa fa-trash-o deletescraptype' aria-hidden='true'></i>"; 
                 $counter++; 
             }
@@ -20032,7 +20032,15 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     }
 
+    public function geteditscraptype($id){
 
+        $this->db->select('*');
+        $this->db->where(TBL_SCRAP_TYPE.'.id',$id);
+        $query = $this->db->get(TBL_SCRAP_TYPE);
+        $data = $query->result_array();
+        return $data;
+
+    }
 
 
 }
