@@ -22440,8 +22440,6 @@ public function deletescrapdetails(){
         echo(json_encode(array('status'=>'failed'))); 
     }
 
-
-
 }
 
 
@@ -23216,6 +23214,24 @@ public function addnewscraptype(){
         $this->logrecord($process,$processFunction);
         $this->global['pageTitle'] = 'Add New Scrap Type';
         $this->loadViews("masters/addnewscraptype", $this->global, $data, NULL);
+    }
+
+}
+
+public function deletescraptype(){
+
+    $post_submit = $this->input->post();
+    if($post_submit){
+        $result = $this->admin_model->deletescraptype(trim($this->input->post('id')));
+        if ($result) {
+                    $process = 'Delete Scrap Details';
+                    $processFunction = 'Admin/deletescraptype';
+                    $this->logrecord($process,$processFunction);
+                echo(json_encode(array('status'=>'success')));
+            }
+        else { echo(json_encode(array('status'=>'failed'))); }
+    }else{
+        echo(json_encode(array('status'=>'failed'))); 
     }
 
 }

@@ -19991,7 +19991,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['remark'] =  $value['remark'];
                 $data[$counter]['action'] = '';
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."updateteammember/".$value['id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";
-                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['id']."' class='fa fa-trash-o deleteteammember' aria-hidden='true'></i>"; 
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['id']."' class='fa fa-trash-o deletescraptype' aria-hidden='true'></i>"; 
                 $counter++; 
             }
         }
@@ -20020,6 +20020,17 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     }
 
+    public function deletescraptype($id){
+
+        $this->db->where('id', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_SCRAP_TYPE)){
+           return TRUE;
+        }else{
+           return FALSE;
+        }
+
+    }
 
 
 
