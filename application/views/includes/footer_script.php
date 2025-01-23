@@ -24560,9 +24560,6 @@
 					return false;
 		});
 
-
-
-
 		$(document).on('click','#download_report_hrly_sampling_record',function(e){
 			e.preventDefault();
 			$(".loader_ajax").show();
@@ -24599,6 +24596,84 @@
 			return false;
 		});
 
+
+	</script>
+<?php } ?>
+
+
+<?php if($pageTitle=='Scrap Type' || $pageTitle=='Add New Scrap Type'){ ?>
+	<script type="text/javascript">
+        $(document).ready(function() {
+			var dt = $('#view_scrap_type').DataTable({
+					"columnDefs": [ 
+						{ className: "details-control", "targets": [ 0 ] },
+						{ "width": "10%", "targets": 0 },
+						{ "width": "10%", "targets": 1 },	
+						{ "width": "30%", "targets": 2 },	
+						{ "width": "5%", "targets": 3 }
+					
+					],
+					responsive: true,
+					"oLanguage": {
+						"sEmptyTable": "<i>Scrap Type List Not Found.</i>",
+					}, 
+					"bSort" : false,
+					"bFilter":true,
+					"bLengthChange": true,
+					"iDisplayLength": 10,   
+					"bProcessing": true,
+					"serverSide": true,
+					"ajax":{
+						url :"<?php echo base_url();?>fetchscraptypelist",
+						type: "post",
+					},
+				});
+     	});
+
+
+		$(document).on('click','#savenewscraptype',function(e){
+			e.preventDefault();
+			$(".loader_ajax").show();
+					
+			var formData = new FormData($("#addnewscraptypeform")[0]);
+			    $.ajax({
+						url : "<?php echo base_url();?>addnewscraptype",
+						type: "POST",
+						data : formData,
+						cache: false,
+						contentType: false,
+						processData: false,
+						success: function(data, textStatus, jqXHR)
+						{
+							var fetchResponse = $.parseJSON(data);
+							if(fetchResponse.status == "failure")
+							{
+								$.each(fetchResponse.error, function (i, v)
+								{
+									$('.'+i+'_error').html(v);
+								});
+								$(".loader_ajax").hide();
+							}
+							else if(fetchResponse.status == 'success')
+							{
+								swal({
+									title: "Success",
+									text: "Scrap Type Added Successfully!",
+									icon: "success",
+									button: "Ok",
+									},function(){ 
+										window.location.href = "<?php echo base_url().'scraptype'?>";
+								});		
+							}
+							
+						},
+						error: function (jqXHR, textStatus, errorThrown)
+						{
+							$(".loader_ajax").hide();
+						}
+				});
+				return false;
+			});
 
 	</script>
 <?php } ?>

@@ -185,11 +185,9 @@ define('TBL_TEAM_MASTER','tbl_team_master');
 define('TBL_SAMPLING_MASTER_TRANS','tbl_sampling_methods_trans');
 define('TBL_TEAM_MASTER_TRANS','tbl_team_master_trans');
 define('TBL_SCRAP_REJECTION_DETAILS','tbl_scrap_rejection_details');
-
 define('TBL_HRLY_PRODUCTION_SUMMERY','tbl_hrly_production_summary');
-
 define('TBL_SAMPLING_RECORD_TEST','tbl_sampling_record_test');
-
+define('TBL_SCRAP_TYPE','tbl_scrap_type');
 
 
 define('SMTP_HOST','mail.supraexports.in');

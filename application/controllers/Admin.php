@@ -23142,4 +23142,83 @@ public function download_report_hrly_sampling_record($incoming_item_id,$sampling
 }
 
 
+public function scraptype(){
+
+    $process = 'Scrap Type';
+    $processFunction = 'Admin/scraptype';
+    $this->logrecord($process,$processFunction);
+    $this->global['pageTitle'] = 'Scrap Type';
+    $this->loadViews("masters/scraptype", $this->global, $data, NULL);
+}
+
+
+public function fetchscraptypelist(){
+
+    $params = $_REQUEST;
+    $totalRecords = $this->admin_model->getscarptypelistcount($params); 
+    $queryRecords = $this->admin_model->getscarptypelistdata($params); 
+
+    $data = array();
+    foreach ($queryRecords as $key => $value)
+    {
+        $i = 0;
+        foreach($value as $v)
+        {
+            $data[$key][$i] = $v;
+            $i++;
+        }
+    }
+    $json_data = array(
+        "draw"            => intval( $params['draw'] ),   
+        "recordsTotal"    => intval( $totalRecords ),  
+        "recordsFiltered" => intval($totalRecords),
+        "data"            => $data   // total data array
+        );
+    echo json_encode($json_data);
+
+}
+
+
+public function addnewscraptype(){
+    $post_submit = $this->input->post();
+    $saveSacrptype_response = array();
+
+    if($post_submit){
+
+        $this->form_validation->set_rules('scrap_type','Scrap Type','trim|required');
+        $this->form_validation->set_rules('hsn_code','HSN Code','trim|required');
+        $this->form_validation->set_rules('remark','Remark','trim');
+
+        if($this->form_validation->run() == FALSE)
+        {
+            $saveSacrptype_response['status'] = 'failure';
+            $saveSacrptype_response['error'] = array('scrap_type'=>strip_tags(form_error('scrap_type')),'hsn_code'=>strip_tags(form_error('hsn_code')),'remark'=>strip_tags(form_error('remark')));
+        }else{
+
+            $data = array(
+                'scrap_type_name'=> trim($this->input->post('scrap_type')),
+                'hsn_code'=> trim($this->input->post('hsn_code')),
+                'remark'=>trim($this->input->post('remark')),
+            );
+
+            $saveAssignitem_data = $this->admin_model->saveSacrptype('',$data);
+            if($saveAssignitem_data){
+                $saveSacrptype_response['status'] = 'success';
+                $saveSacrptype_response['error'] = array('scrap_type'=>'', 'hsn_code'=>'' ,'remark'=>'');
+            }
+
+        }
+        echo json_encode($saveSacrptype_response); 
+    }else{
+
+        $process = 'Add New Scrap Type';
+        $processFunction = 'Admin/addnewscraptype';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Add New Scrap Type';
+        $this->loadViews("masters/addnewscraptype", $this->global, $data, NULL);
+    }
+
+}
+
+
 }
