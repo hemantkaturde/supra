@@ -245,6 +245,12 @@
                                                                 <input type="text" class="form-control"  id="SGST_value" name="SGST_value">
                                                                 <p class="error SGST_value_error"></p>
                                                             </div>
+
+                                                            <label class="col-sm-2 col-form-label">IGST Value</label>
+                                                            <div class="col-sm-4">
+                                                                <input type="text" class="form-control"  id="SGST_value" name="SGST_value">
+                                                                <p class="error SGST_value_error"></p>
+                                                            </div>
                                                     </div>
 
 
