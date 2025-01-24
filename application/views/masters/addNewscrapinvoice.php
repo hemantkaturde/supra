@@ -240,10 +240,10 @@
                                                                 <p class="error CGST_value_error"></p>
                                                             </div>
 
-                                                            <label class="col-sm-2 col-form-label">IGST Value</label>
+                                                            <label class="col-sm-2 col-form-label">SGST Value</label>
                                                             <div class="col-sm-4">
-                                                                <input type="text" class="form-control"  id="IGST_value" name="IGST_value">
-                                                                <p class="error IGST_value_error"></p>
+                                                                <input type="text" class="form-control"  id="SGST_value" name="SGST_value">
+                                                                <p class="error SGST_value_error"></p>
                                                             </div>
                                                     </div>
 
