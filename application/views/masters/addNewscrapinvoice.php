@@ -234,10 +234,16 @@
 
 
                                                     <div class="form-group row">
-                                                            <label class="col-sm-3 col-form-label">GST</label>
-                                                            <div class="col-sm-9">
-                                                                <input type="text" class="form-control"  id="gst" name="gst">
-                                                                <p class="error gst_error"></p>
+                                                            <label class="col-sm-2 col-form-label">CGST Value</label>
+                                                            <div class="col-sm-4">
+                                                                <input type="text" class="form-control"  id="CGST_value" name="CGST_value">
+                                                                <p class="error CGST_value_error"></p>
+                                                            </div>
+
+                                                            <label class="col-sm-2 col-form-label">IGST Value</label>
+                                                            <div class="col-sm-4">
+                                                                <input type="text" class="form-control"  id="IGST_value" name="IGST_value">
+                                                                <p class="error IGST_value_error"></p>
                                                             </div>
                                                     </div>
 
