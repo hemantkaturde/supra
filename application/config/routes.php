@@ -595,8 +595,14 @@ $route['update_data_hrly_sampling_record'] = "admin/update_data_hrly_sampling_re
 $route['scraptype'] = "admin/scraptype";
 $route['fetchscraptypelist'] = "admin/fetchscraptypelist";
 $route['addnewscraptype'] = "admin/addnewscraptype";
-
 $route['editscraptype/(:any)'] = "admin/editscraptype/$1";
+$route['scrap_invoice'] = "admin/scrap_invoice";
+$route['fetchscrapinvoice'] = "admin/fetchscrapinvoice";
+$route['addnewscrapinvoice'] = "admin/addnewscrapinvoice";
+
+$route['savescrapinvoiceitem'] = "admin/savescrapinvoiceitem";
+
+
 
 
 /* End of file routes.php */

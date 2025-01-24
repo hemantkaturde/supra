@@ -24776,3 +24776,135 @@
 <?php } ?>
 
 
+<?php if($pageTitle=='Scarp Invoice' || $pageTitle=='Add New Scrap Invoice'){ ?>
+	<script type="text/javascript">
+            $(document).ready(function() {
+			    var dt = $('#view_scarp_invoice').DataTable({
+					"columnDefs": [ 
+						{ className: "details-control", "targets": [ 0 ] },
+						{ "width": "25%", "targets": 0 },
+						{ "width": "25%", "targets": 1 },	
+						{ "width": "25%", "targets": 2 },
+						{ "width": "5%", "targets": 3 },
+					
+					],
+					responsive: true,
+					"oLanguage": {
+						"sEmptyTable": "<i>Scrap Invoice List Not Found.</i>",
+					}, 
+					"bSort" : false,
+					"bFilter":true,
+					"bLengthChange": true,
+					"iDisplayLength": 10,   
+					"bProcessing": true,
+					"serverSide": true,
+					"ajax":{
+						url :"<?php echo base_url();?>fetchscrapinvoice",
+						type: "post",
+					},
+				});
+         	});
+
+			$(document).on('click','#savescrapinvoiceitem',function(e){
+				e.preventDefault();
+				$(".loader_ajax").show();
+			
+				var scrap_type_name =   $('#scrap_type_name').val();
+				var inspection_report_no =   $('#inspection_report_no').val();
+				var qty =   $('#qty').val();
+				var unit =   $('#unit').val();
+				var rate =   $('#rate').val();
+				var amount = $('#amount').val();
+				var gst = $('#gst').val();
+				var item_remark = $('#item_remark').val();
+
+				
+				$.ajax({
+					url : "<?php echo base_url();?>savescrapinvoiceitem",
+					type: "POST",
+					//data : formData,
+					data :{ scrap_type_name :scrap_type_name,inspection_report_no:inspection_report_no,qty:qty,unit:unit,rate:rate,amount:amount,gst:gst,item_remark:item_remark},
+					method: "POST",
+					// data :{package_id:package_id},
+					cache:false,
+					success: function(data, textStatus, jqXHR)
+					{
+						var fetchResponse = $.parseJSON(data);
+						if(fetchResponse.status == "failure")
+						{
+							$.each(fetchResponse.error, function (i, v)
+							{
+								$('.'+i+'_error').html(v);
+							});
+							$(".loader_ajax").hide();
+						}
+						else if(fetchResponse.status == 'success')
+						{
+							swal({
+								title: "Success",
+								text: "Item Successfully Added!",
+								icon: "success",
+								button: "Ok",
+								},function(){ 
+									window.location.href = "<?php echo base_url().'addnewscrapinvoice'?>";
+							});		
+						}
+						
+					},
+					error: function (jqXHR, textStatus, errorThrown)
+					{
+					$(".loader_ajax").hide();
+					}
+				});
+				return false;
+			});
+
+
+			$(document).on('click','#savenewscrapinvoice',function(e){
+				e.preventDefault();
+				$(".loader_ajax").show();
+						
+				var formData = new FormData($("#addnewSupplierform")[0]);
+			    $.ajax({
+						url : "<?php echo base_url();?>addnewscrapinvoice",
+						type: "POST",
+						data : formData,
+						cache: false,
+						contentType: false,
+						processData: false,
+						success: function(data, textStatus, jqXHR)
+						{
+							var fetchResponse = $.parseJSON(data);
+							if(fetchResponse.status == "failure")
+							{
+								$.each(fetchResponse.error, function (i, v)
+								{
+									$('.'+i+'_error').html(v);
+								});
+								$(".loader_ajax").hide();
+							}
+							else if(fetchResponse.status == 'success')
+							{
+								swal({
+									title: "Success",
+									text: "Scrap Type Added Successfully!",
+									icon: "success",
+									button: "Ok",
+									},function(){ 
+										window.location.href = "<?php echo base_url().'scrap_invoice'?>";
+								});		
+							}
+							
+						},
+						error: function (jqXHR, textStatus, errorThrown)
+						{
+							$(".loader_ajax").hide();
+						}
+				});
+				return false;
+	    	});
+
+	</script>
+<?php } ?>
+
+

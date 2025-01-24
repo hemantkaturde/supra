@@ -20041,6 +20041,138 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         return $data;
 
     }
+    
+    public function getscrapinvoicecount(){
+
+         $this->db->select('*'); 
+         if($params['search']['value'] != "") 
+         {
+            $this->db->where("(".TBL_SCRAP_INVOICE.".scrap_invoice_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SCRAP_INVOICE.".buyer_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SCRAP_INVOICE.".remark LIKE '%".$params['search']['value']."%')");
+         }
+ 
+         $this->db->limit($params['length'],$params['start']);
+         $this->db->order_by(TBL_SCRAP_INVOICE.'.id','DESC');
+         $query = $this->db->get(TBL_SCRAP_INVOICE);
+         $rowcount = $query->num_rows();
+         return $rowcount;
+
+    }
+
+
+    public function getscrapinvoicedata(){
+
+        $this->db->select('*,'.TBL_BUYER_MASTER.'.buyer_name as buyername');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_SCRAP_INVOICE.".scrap_invoice_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SCRAP_INVOICE.".buyer_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SCRAP_INVOICE.".remark LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id  = '.TBL_SCRAP_INVOICE.'.buyer_name');
+
+        $this->db->where(TBL_SCRAP_INVOICE.'.status', 1);
+        $this->db->limit($params['length'],$params['start']);
+        $this->db->order_by(TBL_SCRAP_INVOICE.'.id','DESC');
+        $query = $this->db->get(TBL_SCRAP_INVOICE);
+        $fetch_result = $query->result_array();
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['scrap_invoice_number'] = $value['scrap_invoice_number'];
+                $data[$counter]['invoice_date'] =  $value['invoice_date'];
+                $data[$counter]['buyer_name'] =  $value['buyername'];
+                // $data[$counter]['remark'] =  $value['remark'];
+                $data[$counter]['action'] = '';
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editscraptype/".$value['id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['id']."' class='fa fa-trash-o deletescraptype' aria-hidden='true'></i>"; 
+                $counter++; 
+            }
+        }
+
+        return $data;
+
+    }
+
+
+    public function fetchALLScraptypeList(){
+        $this->db->select('*');
+        $query = $this->db->get(TBL_SCRAP_TYPE);
+        $data = $query->result_array();
+        return $data;
+    }
+
+    public function saveinvoiceitemsdetails($id,$data){
+
+        if($id){
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_SCRAP_INVOICE_ITEM, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        }else{
+            if($this->db->insert(TBL_SCRAP_INVOICE_ITEM, $data)) {
+                return $this->db->insert_id();
+            } else {
+                return FALSE;
+            }
+
+        }
+
+    }
+
+
+    public function getpreviousaddeditem(){
+
+        $this->db->select('*');
+        $this->db->join(TBL_SCRAP_TYPE, TBL_SCRAP_TYPE.'.id  = '.TBL_SCRAP_INVOICE_ITEM.'.scrap_type');
+        $this->db->where(TBL_SCRAP_INVOICE_ITEM.'.scrap_invoice_id IS NULL');
+        $query = $this->db->get(TBL_SCRAP_INVOICE_ITEM);
+        $data = $query->result_array();
+        return $data;
+    }
+
+
+    public function saveSacrpinvoice($id,$data){
+        if($id){
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_SCRAP_INVOICE, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        }else{
+            if($this->db->insert(TBL_SCRAP_INVOICE, $data)) {
+                return $this->db->insert_id();
+            } else {
+                return FALSE;
+            }
+
+        }
+
+    }
+
+
+    public function update_last_inserted_id_to_scarpitem($savenewinvoice_data){
+
+        $data = array(
+            'scrap_invoice_id' => $savenewinvoice_data
+        );
+        $this->db->where(TBL_SCRAP_INVOICE_ITEM.'.scrap_invoice_id IS NULL');
+        if($this->db->update(TBL_SCRAP_INVOICE_ITEM,$data)){
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+
+    }
+
+
 
 
 }

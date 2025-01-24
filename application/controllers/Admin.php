@@ -23246,16 +23246,143 @@ public function deletescraptype(){
 }
 
 
- public function editscraptype($id){
+public function editscraptype($id){
         $process = 'Edit Scrap Type';
         $processFunction = 'Admin/editscraptype';
         $this->logrecord($process,$processFunction);
         $this->global['pageTitle'] = 'Edit Scrap Type';
         $data['geteditscraptype']= $this->admin_model->geteditscraptype($id);
         $this->loadViews("masters/editscraptype", $this->global, $data, NULL);
- }
+}
+
+public function scrap_invoice(){
+
+    $process = 'Scarp Invoice';
+    $processFunction = 'Admin/scrap_invoice';
+    $this->logrecord($process,$processFunction);
+    $this->global['pageTitle'] = 'Scarp Invoice';
+    $this->loadViews("masters/scrap_invoice", $this->global, $data, NULL);
+
+}
+
+public function fetchscrapinvoice(){
+
+    $params = $_REQUEST;
+    $totalRecords = $this->admin_model->getscrapinvoicecount($params); 
+    $queryRecords = $this->admin_model->getscrapinvoicedata($params); 
+
+    $data = array();
+    foreach ($queryRecords as $key => $value)
+    {
+        $i = 0;
+        foreach($value as $v)
+        {
+            $data[$key][$i] = $v;
+            $i++;
+        }
+    }
+    $json_data = array(
+        "draw"            => intval( $params['draw'] ),   
+        "recordsTotal"    => intval( $totalRecords ),  
+        "recordsFiltered" => intval($totalRecords),
+        "data"            => $data   // total data array
+        );
+    echo json_encode($json_data);
+
+}
+
+
+public function addnewscrapinvoice(){
+
+    $post_submit = $this->input->post();
+    $addnewscrapinvoice_response = array();
+    if($post_submit){
+
+        $this->form_validation->set_rules('scrap_invoice_id','Scrap Invoice Id','trim|required');
+        $this->form_validation->set_rules('invoice_date','Invoice Date','trim|required');
+        $this->form_validation->set_rules('buyer_name','Buyer Name','trim|required');
+        $this->form_validation->set_rules('remark','Remark','trim');
+
+        if($this->form_validation->run() == FALSE)
+        {
+            $addnewscrapinvoice_response['status'] = 'failure';
+            $addnewscrapinvoice_response['error'] = array('scrap_invoice_id'=>strip_tags(form_error('scrap_invoice_id')),'invoice_date'=>strip_tags(form_error('invoice_date')),'buyer_name'=>strip_tags(form_error('buyer_name')),'remark'=>strip_tags(form_error('remark')));
+        }else{
+
+            $data = array(
+                'scrap_invoice_number'=> trim($this->input->post('scrap_invoice_id')),
+                'invoice_date'=> trim($this->input->post('invoice_date')),
+                'buyer_name'=>trim($this->input->post('buyer_name')),
+            );
+
+            $savenewinvoice_data = $this->admin_model->saveSacrpinvoice('',$data);
+
+            if($savenewinvoice_data){
+                $update_last_inserted_id_to_scarpitem = $this->admin_model->update_last_inserted_id_to_scarpitem($savenewinvoice_data);
+                if($update_last_inserted_id_to_scarpitem){
+                    $addnewscrapinvoice_response['status'] = 'success';
+                    $addnewscrapinvoice_response['error'] = array('scrap_invoice_id'=>strip_tags(form_error('scrap_invoice_id')),'invoice_date'=>strip_tags(form_error('invoice_date')),'buyer_name'=>strip_tags(form_error('buyer_name')),'remark'=>strip_tags(form_error('remark')));
+                }
+            }
+
+        }
+        echo json_encode($addnewscrapinvoice_response); 
+    }else{
+
+        $process = 'Add New Scrap Invoice';
+        $processFunction = 'Admin/addNewscrapinvoice';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Add New Scrap Invoice';
+        $data['buyerList']= $this->admin_model->fetchAllbuyerList();
+        $data['scraptypeList']= $this->admin_model->fetchALLScraptypeList();
+        $data['get_previousadded_item']= $this->admin_model->getpreviousaddeditem();
+        $this->loadViews("masters/addNewscrapinvoice", $this->global, $data, NULL);
+    }
+}
 
 
 
+public function savescrapinvoiceitem(){
+
+    $post_submit = $this->input->post();
+    if($post_submit){
+
+        $savescrapinvoice_response = array();
+        $this->form_validation->set_rules('scrap_type_name','Scrap Type Name','trim|required');
+        $this->form_validation->set_rules('HSN_code','HSN code','trim');
+        $this->form_validation->set_rules('qty','Qty','trim');
+        $this->form_validation->set_rules('unit','Unit','trim|required');
+        $this->form_validation->set_rules('rate','Rate','trim|required');
+        $this->form_validation->set_rules('amount','Amount','trim|required');
+        $this->form_validation->set_rules('gst','gst','trim|required');
+        $this->form_validation->set_rules('item_remark','Item Remark','trim');
+
+        if($this->form_validation->run() == FALSE)
+        {
+            $savescrapinvoice_response['status'] = 'failure';
+            $savescrapinvoice_response['error'] = array('scrap_type_name'=>strip_tags(form_error('scrap_type_name')),'HSN_code'=>strip_tags(form_error('HSN_code')),'qty'=>strip_tags(form_error('qty')),'unit'=>strip_tags(form_error('unit')),'rate'=>strip_tags(form_error('rate')),'amount'=>strip_tags(form_error('amount')),'gst'=>strip_tags(form_error('gst')),'gst_rate'=>strip_tags(form_error('gst_rate')),'item_remark'=>strip_tags(form_error('item_remark')));
+       
+        }else{
+    
+                $data = array(
+                    'scrap_type' =>  trim($this->input->post('scrap_type_name')),
+                     // 'description' =>  trim($this->input->post('description')),
+                    'qty' =>  trim($this->input->post('quantity')),
+                    'unit' =>  trim($this->input->post('unit')),
+                    'rate' =>  trim($this->input->post('rate')),
+                    'amount' =>  trim($this->input->post('amount')),
+                    'GST_rate' =>  trim($this->input->post('GST')),
+                    'remark'  =>  trim($this->input->post('item_remark')),
+                );
+
+            $saveinvoiceitemsdetails= $this->admin_model->saveinvoiceitemsdetails('',$data);
+            if($saveinvoiceitemsdetails){
+                $savescrapinvoice_response['status'] = 'success';
+                $savescrapinvoice_response['error'] = array('scrap_type_name'=>strip_tags(form_error('scrap_type_name')),'HSN_code'=>strip_tags(form_error('HSN_code')),'qty'=>strip_tags(form_error('qty')),'unit'=>strip_tags(form_error('unit')),'rate'=>strip_tags(form_error('rate')),'amount'=>strip_tags(form_error('amount')),'gst'=>strip_tags(form_error('gst')),'gst_rate'=>strip_tags(form_error('gst_rate')),'item_remark'=>strip_tags(form_error('item_remark')));
+            }
+        }
+        echo json_encode($savescrapinvoice_response);
+    }
+}
 
 }

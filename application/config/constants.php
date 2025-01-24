@@ -188,6 +188,8 @@ define('TBL_SCRAP_REJECTION_DETAILS','tbl_scrap_rejection_details');
 define('TBL_HRLY_PRODUCTION_SUMMERY','tbl_hrly_production_summary');
 define('TBL_SAMPLING_RECORD_TEST','tbl_sampling_record_test');
 define('TBL_SCRAP_TYPE','tbl_scrap_type');
+define('TBL_SCRAP_INVOICE','tbl_sacrp_invoice');
+define('TBL_SCRAP_INVOICE_ITEM','tbl_scrap_invoice_item');
 
 
 define('SMTP_HOST','mail.supraexports.in');
