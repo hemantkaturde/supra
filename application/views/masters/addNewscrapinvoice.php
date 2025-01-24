@@ -217,11 +217,36 @@
                                                             </div>
                                                     </div>
 
+
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-3 col-form-label">GST Rate</label>
+                                                        <div class="col-sm-9">
+                                                             <select class="form-control" name="gst_rate" id="gst_rate">
+                                                                <option value="">Select GST Rate</option>
+                                                                <option value="cgst_sgst_12">CGST + SGST (9% + 9%)</option>
+                                                                <option value="cgst_sgst_6">CGST + SGST (6% + 6%)</option>
+                                                                <option value="igst_18">IGST (18%)</option>
+                                                                <option value="igst_12">IGST (12%)</option>
+                                                             </select>
+                                                            <p class="error gst_rate_error"></p>
+                                                        </div>
+                                                    </div>
+
+
                                                     <div class="form-group row">
                                                             <label class="col-sm-3 col-form-label">GST</label>
                                                             <div class="col-sm-9">
                                                                 <input type="text" class="form-control"  id="gst" name="gst">
                                                                 <p class="error gst_error"></p>
+                                                            </div>
+                                                    </div>
+
+
+                                                    <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">Grand Total</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" class="form-control"  id="grand_total" name="grand_total">
+                                                                <p class="error grand_total_error"></p>
                                                             </div>
                                                     </div>
 
