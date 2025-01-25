@@ -23245,7 +23245,6 @@ public function deletescraptype(){
 
 }
 
-
 public function editscraptype($id){
         $process = 'Edit Scrap Type';
         $processFunction = 'Admin/editscraptype';
@@ -23336,10 +23335,11 @@ public function addnewscrapinvoice(){
         $data['buyerList']= $this->admin_model->fetchAllbuyerList();
         $data['scraptypeList']= $this->admin_model->fetchALLScraptypeList();
         $data['get_previousadded_item']= $this->admin_model->getpreviousaddeditem();
+
+
         $this->loadViews("masters/addNewscrapinvoice", $this->global, $data, NULL);
     }
 }
-
 
 
 public function savescrapinvoiceitem(){
@@ -23351,11 +23351,18 @@ public function savescrapinvoiceitem(){
         $this->form_validation->set_rules('scrap_type_name','Scrap Type Name','trim|required');
         $this->form_validation->set_rules('HSN_code','HSN code','trim');
         $this->form_validation->set_rules('qty','Qty','trim');
-        $this->form_validation->set_rules('unit','Unit','trim|required');
-        $this->form_validation->set_rules('rate','Rate','trim|required');
-        $this->form_validation->set_rules('amount','Amount','trim|required');
-        $this->form_validation->set_rules('gst','gst','trim|required');
+        $this->form_validation->set_rules('unit','Unit','trim');
+        $this->form_validation->set_rules('rate','Rate','trim');
+        $this->form_validation->set_rules('amount','Amount','trim');
+        $this->form_validation->set_rules('gst_rate','Gst Rate','trim');
+        $this->form_validation->set_rules('CGST_value','CGST value','trim');
+        $this->form_validation->set_rules('SGST_value','SGST value','trim');
+        $this->form_validation->set_rules('IGST_value','IGST value','trim');
+        $this->form_validation->set_rules('grand_total','Grand Total','trim');
         $this->form_validation->set_rules('item_remark','Item Remark','trim');
+
+
+        
 
         if($this->form_validation->run() == FALSE)
         {
@@ -23367,11 +23374,15 @@ public function savescrapinvoiceitem(){
                 $data = array(
                     'scrap_type' =>  trim($this->input->post('scrap_type_name')),
                      // 'description' =>  trim($this->input->post('description')),
-                    'qty' =>  trim($this->input->post('quantity')),
+                    'qty' =>  trim($this->input->post('qty')),
                     'unit' =>  trim($this->input->post('unit')),
                     'rate' =>  trim($this->input->post('rate')),
                     'amount' =>  trim($this->input->post('amount')),
-                    'GST_rate' =>  trim($this->input->post('GST')),
+                    'GST_rate' =>  trim($this->input->post('gst_rate')),
+                    'CGST_value' =>  trim($this->input->post('CGST_value')),
+                    'SGST_value' =>  trim($this->input->post('SGST_value')),
+                    'IGST_value' =>  trim($this->input->post('IGST_value')),
+                    'grand_total'  =>  trim($this->input->post('grand_total')),
                     'remark'  =>  trim($this->input->post('item_remark')),
                 );
 
@@ -23397,5 +23408,6 @@ public function gethsncodefromscraptype(){
         }
     }
 }
+
 
 }

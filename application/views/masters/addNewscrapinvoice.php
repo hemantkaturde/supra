@@ -105,12 +105,12 @@
                                                         <td><?php echo $count;?></td>
                                                         <td><?php echo $value['scrap_type_name'];?></td>
                                                         <td><?php echo $value['hsn_code'];?></td>
-                                                        <td><?php echo $value['qty'];?></td>
+                                                        <td><?php echo $value['scrap_type_qty'];?></td>
                                                         <td><?php echo $value['unit'];?></td>
                                                         <td><?php echo $value['rate'];?></td>
                                                         <td><?php echo $value['amount'];?></td>
                                                         <td><?php echo $value['GST_rate'];?></td>
-                                                        <td><?php echo $value['GST_value'];?></td>
+                                                        <td><?php echo $value['grand_total'];?></td>
                                                         <td><?php echo $value['remark'];?></td>
                                                         <td>
                                                             <!-- <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['supplirid'];?>' class='fa fa-pencil-square-o editSupplierpoitem'  aria-hidden='true'></i> -->
@@ -223,8 +223,8 @@
                                                         <div class="col-sm-9">
                                                              <select class="form-control" name="gst_rate" id="gst_rate">
                                                                 <option value="">Select GST Rate</option>
-                                                                <option value="cgst_sgst_12">CGST + SGST (9% + 9%)</option>
-                                                                <option value="cgst_sgst_6">CGST + SGST (6% + 6%)</option>
+                                                                <option value="cgst_sgst_18">CGST + SGST (9% + 9%)</option>
+                                                                <option value="cgst_sgst_12">CGST + SGST (6% + 6%)</option>
                                                                 <option value="igst_18">IGST (18%)</option>
                                                                 <option value="igst_12">IGST (12%)</option>
                                                              </select>
@@ -234,6 +234,7 @@
 
 
                                                     <div class="form-group row">
+                                                        <div id="CGST_SGST_Div" style="display:none">
                                                             <label class="col-sm-2 col-form-label">CGST Value</label>
                                                             <div class="col-sm-4">
                                                                 <input type="text" class="form-control"  id="CGST_value" name="CGST_value">
@@ -245,12 +246,14 @@
                                                                 <input type="text" class="form-control"  id="SGST_value" name="SGST_value">
                                                                 <p class="error SGST_value_error"></p>
                                                             </div>
-
+                                                        </div>    
+                                                        <div id="IGST_Div" style="display:none">
                                                             <label class="col-sm-2 col-form-label">IGST Value</label>
                                                             <div class="col-sm-4">
-                                                                <input type="text" class="form-control"  id="SGST_value" name="SGST_value">
-                                                                <p class="error SGST_value_error"></p>
+                                                                <input type="text" class="form-control"  id="IGST_value" name="IGST_value">
+                                                                <p class="error IGST_value_error"></p>
                                                             </div>
+                                                        </div>
                                                     </div>
 
 

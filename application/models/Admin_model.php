@@ -20129,7 +20129,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     public function getpreviousaddeditem(){
 
-        $this->db->select('*');
+        $this->db->select('*,'.TBL_SCRAP_INVOICE_ITEM.'.qty as scrap_type_qty');
         $this->db->join(TBL_SCRAP_TYPE, TBL_SCRAP_TYPE.'.id  = '.TBL_SCRAP_INVOICE_ITEM.'.scrap_type');
         $this->db->where(TBL_SCRAP_INVOICE_ITEM.'.scrap_invoice_id IS NULL');
         $query = $this->db->get(TBL_SCRAP_INVOICE_ITEM);
