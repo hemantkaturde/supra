@@ -601,7 +601,7 @@ $route['fetchscrapinvoice'] = "admin/fetchscrapinvoice";
 $route['addnewscrapinvoice'] = "admin/addnewscrapinvoice";
 
 $route['savescrapinvoiceitem'] = "admin/savescrapinvoiceitem";
-
+$route['gethsncodefromscraptype'] = "admin/gethsncodefromscraptype";
 
 
 

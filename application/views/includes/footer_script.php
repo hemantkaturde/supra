@@ -24859,7 +24859,6 @@
 				return false;
 			});
 
-
 			$(document).on('click','#savenewscrapinvoice',function(e){
 				e.preventDefault();
 				$(".loader_ajax").show();
@@ -24903,6 +24902,36 @@
 				});
 				return false;
 	    	});
+
+			$(document).on('change','#scrap_type_name',function(e){ 		
+				e.preventDefault();
+				var scrap_type_name = $('#scrap_type_name').val();
+				$.ajax({
+					url : "<?php echo ADMIN_PATH;?>gethsncodefromscraptype",
+					type: "POST",
+					data : {'scrap_type_name' : scrap_type_name},
+						success: function(data, textStatus, jqXHR)
+						{
+							var get_hsncode_data = jQuery.parseJSON( data );
+
+							$(".loader_ajax").hide();
+								if(data == "failure")
+									{
+										$('#HSN_code').val('');										
+									}
+								else
+									{
+										$('#HSN_code').val(get_hsncode_data.hsn_code);
+									}
+						},
+						error: function (jqXHR, textStatus, errorThrown)
+						{
+								$('#HSN_code').val('');
+						}
+					});
+				return false;
+			});
+
 
 	</script>
 <?php } ?>

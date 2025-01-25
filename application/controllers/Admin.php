@@ -23385,4 +23385,17 @@ public function savescrapinvoiceitem(){
     }
 }
 
+public function gethsncodefromscraptype(){
+    $post_submit = $this->input->post();
+    if($post_submit){
+        $getHSNcodefromscraptype = $this->admin_model->gethsncodefromscraptype(trim($this->input->post('scrap_type_name')));
+        if($getHSNcodefromscraptype){
+            $content = $getHSNcodefromscraptype[0];
+            echo json_encode($content);
+        }else{
+            echo 'failure';
+        }
+    }
+}
+
 }

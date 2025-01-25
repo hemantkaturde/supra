@@ -20172,6 +20172,13 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     }
 
+    public function gethsncodefromscraptype($scrap_type_name){
+        $this->db->select('*');
+        $this->db->where(TBL_SCRAP_TYPE.'.id',$scrap_type_name);
+        $query = $this->db->get(TBL_SCRAP_TYPE);
+        $data = $query->result_array();
+        return $data;
+    }
 
 
 
