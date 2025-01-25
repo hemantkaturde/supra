@@ -23361,9 +23361,6 @@ public function savescrapinvoiceitem(){
         $this->form_validation->set_rules('grand_total','Grand Total','trim');
         $this->form_validation->set_rules('item_remark','Item Remark','trim');
 
-
-        
-
         if($this->form_validation->run() == FALSE)
         {
             $savescrapinvoice_response['status'] = 'failure';
@@ -23408,6 +23405,47 @@ public function gethsncodefromscraptype(){
         }
     }
 }
+
+
+public function deletescrapinvoicedata(){
+
+    $post_submit = $this->input->post();
+    if($post_submit){
+        $result = $this->admin_model->deletescrapinvoicedata(trim($this->input->post('id')));
+        if ($result) {
+                    $process = 'Delete Scrap Invoice Details';
+                    $processFunction = 'Admin/deletescrapinvoicedata';
+                    $this->logrecord($process,$processFunction);
+                echo(json_encode(array('status'=>'success')));
+            }
+        else { echo(json_encode(array('status'=>'failed'))); }
+    }else{
+        echo(json_encode(array('status'=>'failed'))); 
+    }
+
+}
+
+
+public function deleteScrapinvoiceitem(){
+
+    $post_submit = $this->input->post();
+    if($post_submit){
+        $result = $this->admin_model->deleteScrapinvoiceitem(trim($this->input->post('id')));
+        if ($result) {
+                    $process = 'Delete Scrap Invoice Details';
+                    $processFunction = 'Admin/deleteScrapinvoiceitem';
+                    $this->logrecord($process,$processFunction);
+                echo(json_encode(array('status'=>'success')));
+            }
+        else { echo(json_encode(array('status'=>'failed'))); }
+    }else{
+        echo(json_encode(array('status'=>'failed'))); 
+    }
+
+}
+
+
+
 
 
 }

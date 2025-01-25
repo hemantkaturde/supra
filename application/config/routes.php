@@ -602,8 +602,9 @@ $route['addnewscrapinvoice'] = "admin/addnewscrapinvoice";
 
 $route['savescrapinvoiceitem'] = "admin/savescrapinvoiceitem";
 $route['gethsncodefromscraptype'] = "admin/gethsncodefromscraptype";
+$route['deletescrapinvoicedata'] = "admin/deletescrapinvoicedata";
 
-
+$route['deleteScrapinvoiceitem'] = "admin/deleteScrapinvoiceitem";
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

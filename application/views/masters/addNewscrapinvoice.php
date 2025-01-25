@@ -113,8 +113,8 @@
                                                         <td><?php echo $value['grand_total'];?></td>
                                                         <td><?php echo $value['remark'];?></td>
                                                         <td>
-                                                            <!-- <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['supplirid'];?>' class='fa fa-pencil-square-o editSupplierpoitem'  aria-hidden='true'></i> -->
-                                                            <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['supplirid'];?>' class='fa fa-trash-o deleteSupplierpoitem' aria-hidden='true'></i>
+                                                            <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['scrap_invoice_id'];?>' class='fa fa-pencil-square-o'  aria-hidden='true'></i>
+                                                            <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['scrap_invoice_id'];?>' class='fa fa-trash-o deleteScrapinvoiceitem' aria-hidden='true'></i>
                                                         </td>
                                                     </tr>
                                                     <?php endforeach;?>

@@ -20089,7 +20089,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 // $data[$counter]['remark'] =  $value['remark'];
                 $data[$counter]['action'] = '';
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editscraptype/".$value['id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";
-                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['id']."' class='fa fa-trash-o deletescraptype' aria-hidden='true'></i>"; 
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['id']."' class='fa fa-trash-o deletescrapinvoicedata' aria-hidden='true'></i>"; 
                 $counter++; 
             }
         }
@@ -20129,7 +20129,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     public function getpreviousaddeditem(){
 
-        $this->db->select('*,'.TBL_SCRAP_INVOICE_ITEM.'.qty as scrap_type_qty');
+        $this->db->select('*,'.TBL_SCRAP_INVOICE_ITEM.'.qty as scrap_type_qty,'.TBL_SCRAP_INVOICE_ITEM.'.id as scrap_invoice_id');
         $this->db->join(TBL_SCRAP_TYPE, TBL_SCRAP_TYPE.'.id  = '.TBL_SCRAP_INVOICE_ITEM.'.scrap_type');
         $this->db->where(TBL_SCRAP_INVOICE_ITEM.'.scrap_invoice_id IS NULL');
         $query = $this->db->get(TBL_SCRAP_INVOICE_ITEM);
@@ -20178,6 +20178,35 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $query = $this->db->get(TBL_SCRAP_TYPE);
         $data = $query->result_array();
         return $data;
+    }
+
+    public function deletescrapinvoicedata($id){
+
+        $this->db->where('id', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_SCRAP_INVOICE)){
+            $this->db->where('scrap_invoice_id', $id);
+            //$this->db->delete(TBL_SUPPLIER);
+            if($this->db->delete(TBL_SCRAP_INVOICE_ITEM)){
+              return TRUE;
+            }else{
+              return FALSE;
+            }
+        }else{
+           return FALSE;
+        }
+    }
+
+    public function deleteScrapinvoiceitem($id){
+
+        $this->db->where('id', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_SCRAP_INVOICE_ITEM)){
+              return TRUE;
+        }else{
+           return FALSE;
+        }
+
     }
 
 
