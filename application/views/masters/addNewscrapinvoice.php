@@ -32,7 +32,7 @@
                                   
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="scrap_invoice_id">PO Number<span class="required">*</span></label>
+                                            <label for="scrap_invoice_id">Scrap Invoice No<span class="required">*</span></label>
                                             <input type="text" class="form-control" id="scrap_invoice_id" name="scrap_invoice_id" value="<?=$po_number?>" required readonly>
                                             <p class="error scrap_invoice_id_error"></p>
                                         </div>
