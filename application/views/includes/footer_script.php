@@ -24776,7 +24776,7 @@
 <?php } ?>
 
 
-<?php if($pageTitle=='Scarp Invoice' || $pageTitle=='Add New Scrap Invoice'){ ?>
+<?php if($pageTitle=='Scarp Invoice' || $pageTitle=='Add New Scrap Invoice' || $pageTitle=='Edit Scrap Invoice'){ ?>
 	<script type="text/javascript">
             $(document).ready(function() {
 			    var dt = $('#view_scarp_invoice').DataTable({
@@ -24826,12 +24826,15 @@
 				var buyer_name = $('#buyer_name').val();
 				var remark = $('#remark').val();
 
+				var scrap_invoice_id_main =   $('#scrap_invoice_id_main').val();
+
+
 				
 				$.ajax({
 					url : "<?php echo base_url();?>savescrapinvoiceitem",
 					type: "POST",
 					//data : formData,
-					data :{ scrap_type_name :scrap_type_name,inspection_report_no:inspection_report_no,qty:qty,unit:unit,rate:rate,amount:amount,gst_rate:gst_rate,CGST_value:CGST_value,SGST_value:SGST_value,IGST_value:IGST_value,grand_total:grand_total,item_remark:item_remark,invoice_date:invoice_date,buyer_name:buyer_name,remark:remark},
+					data :{ scrap_type_name :scrap_type_name,inspection_report_no:inspection_report_no,qty:qty,unit:unit,rate:rate,amount:amount,gst_rate:gst_rate,CGST_value:CGST_value,SGST_value:SGST_value,IGST_value:IGST_value,grand_total:grand_total,item_remark:item_remark,invoice_date:invoice_date,buyer_name:buyer_name,remark:remark,scrap_invoice_id_main:scrap_invoice_id_main},
 					method: "POST",
 					// data :{package_id:package_id},
 					cache:false,
@@ -24853,8 +24856,12 @@
 								text: "Item Successfully Added!",
 								icon: "success",
 								button: "Ok",
-								},function(){ 
-									window.location.href = "<?php echo base_url().'addnewscrapinvoice'?>";
+								},function(){
+									if(scrap_invoice_id_main){
+										window.location.href = "<?php echo base_url().'editscrapinvoice'?>"+scrap_invoice_id_main;
+									}else{
+										window.location.href = "<?php echo base_url().'addnewscrapinvoice'?>";
+									}
 							});		
 						}
 						
@@ -24870,7 +24877,8 @@
 			$(document).on('click','#savenewscrapinvoice',function(e){
 				e.preventDefault();
 				$(".loader_ajax").show();
-						
+				var scrap_invoice_id_main =   $('#scrap_invoice_id_main').val();
+
 				var formData = new FormData($("#addnewSupplierform")[0]);
 			    $.ajax({
 						url : "<?php echo base_url();?>addnewscrapinvoice",
@@ -25080,10 +25088,11 @@
 				});
 	        });
 
-
 			$(document).on('click','.deleteScrapinvoiceitem',function(e){
 				var elemF = $(this);
 				e.preventDefault();
+
+				var scrap_invoice_id_main =   $('#scrap_invoice_id_main').val();
 
 				swal({
 					title: "Are you sure?",
@@ -25113,7 +25122,11 @@
 												icon: "success",
 												button: "Ok",
 												},function(){ 
-													window.location.href = "<?php echo base_url()?>addnewscrapinvoice";
+													if(scrap_invoice_id_main){
+														window.location.href = "<?php echo base_url()?>editscrapinvoice/"+scrap_invoice_id_main;
+													}else{
+														window.location.href = "<?php echo base_url()?>addnewscrapinvoice";
+													}
 												});	
 										}
 
@@ -25129,7 +25142,6 @@
 					}
 				});
 	        });
-
 
 	</script>
 <?php } ?>

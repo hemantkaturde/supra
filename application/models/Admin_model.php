@@ -20088,7 +20088,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['buyer_name'] =  $value['buyername'];
                 // $data[$counter]['remark'] =  $value['remark'];
                 $data[$counter]['action'] = '';
-                // $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editscraptype/".$value['id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editscrapinvoice/".$value['id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['id']."' class='fa fa-trash-o deletescrapinvoicedata' aria-hidden='true'></i>"; 
                 $counter++; 
             }
@@ -20132,6 +20132,17 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->select('*,'.TBL_SCRAP_INVOICE_ITEM.'.qty as scrap_type_qty,'.TBL_SCRAP_INVOICE_ITEM.'.id as scrap_invoice_id');
         $this->db->join(TBL_SCRAP_TYPE, TBL_SCRAP_TYPE.'.id  = '.TBL_SCRAP_INVOICE_ITEM.'.scrap_type');
         $this->db->where(TBL_SCRAP_INVOICE_ITEM.'.scrap_invoice_id IS NULL');
+        $query = $this->db->get(TBL_SCRAP_INVOICE_ITEM);
+        $data = $query->result_array();
+        return $data;
+    }
+
+    
+    public function get_previousadded_item_edit($id){
+
+        $this->db->select('*,'.TBL_SCRAP_INVOICE_ITEM.'.qty as scrap_type_qty,'.TBL_SCRAP_INVOICE_ITEM.'.id as scrap_invoice_id');
+        $this->db->join(TBL_SCRAP_TYPE, TBL_SCRAP_TYPE.'.id  = '.TBL_SCRAP_INVOICE_ITEM.'.scrap_type');
+        $this->db->where(TBL_SCRAP_INVOICE_ITEM.'.scrap_invoice_id',$id);
         $query = $this->db->get(TBL_SCRAP_INVOICE_ITEM);
         $data = $query->result_array();
         return $data;
@@ -20220,6 +20231,20 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         return $rowcount;
 
     }
+
+    public function getallscrapinvoicedetailsforedit($id){
+
+        $this->db->select('*,'.TBL_BUYER_MASTER.'.buyer_name as buyername,'.TBL_SCRAP_INVOICE.'.remark as scrap_remark,'.TBL_SCRAP_INVOICE.'.id as scrapinv_id');
+        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id  = '.TBL_SCRAP_INVOICE.'.buyer_name');
+        $this->db->where(TBL_SCRAP_INVOICE.'.status', 1);
+        $this->db->where(TBL_SCRAP_INVOICE.'.id', $id);
+        $query = $this->db->get(TBL_SCRAP_INVOICE);
+        $fetch_result = $query->result_array();
+        return $fetch_result;
+
+    }
+
+
 
 }
 

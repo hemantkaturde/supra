@@ -605,6 +605,10 @@ $route['gethsncodefromscraptype'] = "admin/gethsncodefromscraptype";
 $route['deletescrapinvoicedata'] = "admin/deletescrapinvoicedata";
 
 $route['deleteScrapinvoiceitem'] = "admin/deleteScrapinvoiceitem";
+$route['editscrapinvoice/(:any)'] = "admin/editscrapinvoice/$1";
+
+
+
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

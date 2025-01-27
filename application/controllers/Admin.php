@@ -23312,18 +23312,26 @@ public function addnewscrapinvoice(){
                 'scrap_invoice_number'=> trim($this->input->post('scrap_invoice_id')),
                 'invoice_date'=> trim($this->input->post('invoice_date')),
                 'buyer_name'=>trim($this->input->post('buyer_name')),
+                'remark'=>trim($this->input->post('remark')),
             );
 
-            $savenewinvoice_data = $this->admin_model->saveSacrpinvoice('',$data);
-
-            if($savenewinvoice_data){
-                $update_last_inserted_id_to_scarpitem = $this->admin_model->update_last_inserted_id_to_scarpitem($savenewinvoice_data);
-                if($update_last_inserted_id_to_scarpitem){
+            $scrap_invoice_id_main = $this->input->post('scrap_invoice_id_main');
+            if($scrap_invoice_id_main){
+                $savenewinvoice_data = $this->admin_model->saveSacrpinvoice($scrap_invoice_id_main,$data);
+                if($savenewinvoice_data){
                     $addnewscrapinvoice_response['status'] = 'success';
                     $addnewscrapinvoice_response['error'] = array('scrap_invoice_id'=>strip_tags(form_error('scrap_invoice_id')),'invoice_date'=>strip_tags(form_error('invoice_date')),'buyer_name'=>strip_tags(form_error('buyer_name')),'remark'=>strip_tags(form_error('remark')));
                 }
+            }else{
+                $savenewinvoice_data = $this->admin_model->saveSacrpinvoice('',$data);
+                if($savenewinvoice_data){
+                    $update_last_inserted_id_to_scarpitem = $this->admin_model->update_last_inserted_id_to_scarpitem($savenewinvoice_data);
+                    if($update_last_inserted_id_to_scarpitem){
+                        $addnewscrapinvoice_response['status'] = 'success';
+                        $addnewscrapinvoice_response['error'] = array('scrap_invoice_id'=>strip_tags(form_error('scrap_invoice_id')),'invoice_date'=>strip_tags(form_error('invoice_date')),'buyer_name'=>strip_tags(form_error('buyer_name')),'remark'=>strip_tags(form_error('remark')));
+                    }
+                }
             }
-
         }
         echo json_encode($addnewscrapinvoice_response); 
     }else{
@@ -23371,10 +23379,19 @@ public function savescrapinvoiceitem(){
             $savescrapinvoice_response['error'] = array('scrap_type_name'=>strip_tags(form_error('scrap_type_name')),'HSN_code'=>strip_tags(form_error('HSN_code')),'qty'=>strip_tags(form_error('qty')),'unit'=>strip_tags(form_error('unit')),'rate'=>strip_tags(form_error('rate')),'amount'=>strip_tags(form_error('amount')),'gst'=>strip_tags(form_error('gst')),'gst_rate'=>strip_tags(form_error('gst_rate')),'item_remark'=>strip_tags(form_error('item_remark')),'invoice_date'=>strip_tags(form_error('invoice_date')),'buyer_name'=>strip_tags(form_error('buyer_name')),'remark'=>strip_tags(form_error('remark')));
        
         }else{
+
+                $scrap_invoice_id_main =  trim($this->input->post('scrap_invoice_id_main'));
+
+                if($scrap_invoice_id_main){
+
+                    $scrap_id = $scrap_invoice_id_main;
+                }else{
+                    $scrap_id = '';
+                }
     
                 $data = array(
                     'scrap_type' =>  trim($this->input->post('scrap_type_name')),
-                     // 'description' =>  trim($this->input->post('description')),
+                    'scrap_invoice_id' =>  $scrap_id,
                     'qty' =>  trim($this->input->post('qty')),
                     'unit' =>  trim($this->input->post('unit')),
                     'rate' =>  trim($this->input->post('rate')),
@@ -23451,6 +23468,20 @@ public function deleteScrapinvoiceitem(){
 
 }
 
+
+public function editscrapinvoice($id){
+
+    $process = 'Edit Scrap Invoice';
+    $processFunction = 'Admin/editscrapinvoice';
+    $this->logrecord($process,$processFunction);
+    $this->global['pageTitle'] = 'Edit Scrap Invoice';
+    $data['buyerList']= $this->admin_model->fetchAllbuyerList();
+    $data['scraptypeList']= $this->admin_model->fetchALLScraptypeList();
+    $data['get_previousadded_item_edit']= $this->admin_model->get_previousadded_item_edit($id);
+    $data['getallscrapinvoicedetailsforedit'] = $this->admin_model->getallscrapinvoicedetailsforedit($id);
+    $this->loadViews("masters/editscrapinvoice", $this->global, $data, NULL);
+
+}
 
 
 

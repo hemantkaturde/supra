@@ -211,6 +211,7 @@
                           || $pageUrl=="editBuyerpo"
                           || $pageUrl=="scrap_invoice"
                           || $pageUrl=="addnewscrapinvoice"
+                          || $pageUrl=="editscrapinvoice"
                           ){echo 'active';}?>">
                         <a href="#">
                           <i class="fa fa-shopping-cart"></i> <span class="menu_label">Purchase</span>
@@ -239,7 +240,7 @@
                           <li class="line_height <?php if($pageUrl=="itcreport"){echo 'active';}?>"><a href="<?php echo base_url(); ?>itcreport"><i class="fa fa-cubes"></i> ITC Report</a></li>
                           <li class="line_height <?php if($pageUrl=="creditnote" || $pageUrl=="addcreditnote" || $pageUrl=="editcreditnote" || $pageUrl=="viewcreditnoteform"){echo 'active';}?>"><a href="<?php echo base_url(); ?>creditnote"><i class="fa fa-cubes"></i> Credit Note</a></li>
                           <li class="line_height <?php if($pageUrl=="supplierporeport"){echo 'active';}?>"><a href="<?php echo base_url(); ?>supplierporeport"><i class="fa fa-cubes"></i> Supplier PO Confirmation Report</a></li>
-                          <li class="line_height <?php if($pageUrl=="scrap_invoice" || $pageUrl=="addnewscrapinvoice"){echo 'active';}?>"><a href="<?php echo base_url(); ?>scrap_invoice"><i class="fa fa-cubes"></i> Scrap Invoice</a></li>
+                          <li class="line_height <?php if($pageUrl=="scrap_invoice" || $pageUrl=="addnewscrapinvoice"  || $pageUrl=="editscrapinvoice"){echo 'active';}?>"><a href="<?php echo base_url(); ?>scrap_invoice"><i class="fa fa-cubes"></i> Scrap Invoice</a></li>
                         </ul>
                       </li>
 
