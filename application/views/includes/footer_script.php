@@ -24822,12 +24822,16 @@
 				var grand_total = $('#grand_total').val();
 				var item_remark = $('#item_remark').val();
 
+				var invoice_date = $('#invoice_date').val();
+				var buyer_name = $('#buyer_name').val();
+				var remark = $('#remark').val();
+
 				
 				$.ajax({
 					url : "<?php echo base_url();?>savescrapinvoiceitem",
 					type: "POST",
 					//data : formData,
-					data :{ scrap_type_name :scrap_type_name,inspection_report_no:inspection_report_no,qty:qty,unit:unit,rate:rate,amount:amount,gst_rate:gst_rate,CGST_value:CGST_value,SGST_value:SGST_value,IGST_value:IGST_value,grand_total:grand_total,item_remark:item_remark},
+					data :{ scrap_type_name :scrap_type_name,inspection_report_no:inspection_report_no,qty:qty,unit:unit,rate:rate,amount:amount,gst_rate:gst_rate,CGST_value:CGST_value,SGST_value:SGST_value,IGST_value:IGST_value,grand_total:grand_total,item_remark:item_remark,invoice_date:invoice_date,buyer_name:buyer_name,remark:remark},
 					method: "POST",
 					// data :{package_id:package_id},
 					cache:false,

@@ -23361,10 +23361,14 @@ public function savescrapinvoiceitem(){
         $this->form_validation->set_rules('grand_total','Grand Total','trim');
         $this->form_validation->set_rules('item_remark','Item Remark','trim');
 
+        $this->form_validation->set_rules('invoice_date','Invoice Date','trim');
+        $this->form_validation->set_rules('buyer_name','Buyer Name','trim');
+        $this->form_validation->set_rules('remark','Remark','trim');
+
         if($this->form_validation->run() == FALSE)
         {
             $savescrapinvoice_response['status'] = 'failure';
-            $savescrapinvoice_response['error'] = array('scrap_type_name'=>strip_tags(form_error('scrap_type_name')),'HSN_code'=>strip_tags(form_error('HSN_code')),'qty'=>strip_tags(form_error('qty')),'unit'=>strip_tags(form_error('unit')),'rate'=>strip_tags(form_error('rate')),'amount'=>strip_tags(form_error('amount')),'gst'=>strip_tags(form_error('gst')),'gst_rate'=>strip_tags(form_error('gst_rate')),'item_remark'=>strip_tags(form_error('item_remark')));
+            $savescrapinvoice_response['error'] = array('scrap_type_name'=>strip_tags(form_error('scrap_type_name')),'HSN_code'=>strip_tags(form_error('HSN_code')),'qty'=>strip_tags(form_error('qty')),'unit'=>strip_tags(form_error('unit')),'rate'=>strip_tags(form_error('rate')),'amount'=>strip_tags(form_error('amount')),'gst'=>strip_tags(form_error('gst')),'gst_rate'=>strip_tags(form_error('gst_rate')),'item_remark'=>strip_tags(form_error('item_remark')),'invoice_date'=>strip_tags(form_error('invoice_date')),'buyer_name'=>strip_tags(form_error('buyer_name')),'remark'=>strip_tags(form_error('remark')));
        
         }else{
     
@@ -23381,12 +23385,15 @@ public function savescrapinvoiceitem(){
                     'IGST_value' =>  trim($this->input->post('IGST_value')),
                     'grand_total'  =>  trim($this->input->post('grand_total')),
                     'remark'  =>  trim($this->input->post('item_remark')),
+                    'pre_date'  =>  trim($this->input->post('invoice_date')),
+                    'pre_buyer_name'  =>  trim($this->input->post('buyer_name')),
+                    'pre_remark'  =>  trim($this->input->post('remark')),
                 );
 
             $saveinvoiceitemsdetails= $this->admin_model->saveinvoiceitemsdetails('',$data);
             if($saveinvoiceitemsdetails){
                 $savescrapinvoice_response['status'] = 'success';
-                $savescrapinvoice_response['error'] = array('scrap_type_name'=>strip_tags(form_error('scrap_type_name')),'HSN_code'=>strip_tags(form_error('HSN_code')),'qty'=>strip_tags(form_error('qty')),'unit'=>strip_tags(form_error('unit')),'rate'=>strip_tags(form_error('rate')),'amount'=>strip_tags(form_error('amount')),'gst'=>strip_tags(form_error('gst')),'gst_rate'=>strip_tags(form_error('gst_rate')),'item_remark'=>strip_tags(form_error('item_remark')));
+                $savescrapinvoice_response['error'] = array('scrap_type_name'=>strip_tags(form_error('scrap_type_name')),'HSN_code'=>strip_tags(form_error('HSN_code')),'qty'=>strip_tags(form_error('qty')),'unit'=>strip_tags(form_error('unit')),'rate'=>strip_tags(form_error('rate')),'amount'=>strip_tags(form_error('amount')),'gst'=>strip_tags(form_error('gst')),'gst_rate'=>strip_tags(form_error('gst_rate')),'item_remark'=>strip_tags(form_error('item_remark')),'invoice_date'=>strip_tags(form_error('invoice_date')),'buyer_name'=>strip_tags(form_error('buyer_name')),'remark'=>strip_tags(form_error('remark')));
             }
         }
         echo json_encode($savescrapinvoice_response);
