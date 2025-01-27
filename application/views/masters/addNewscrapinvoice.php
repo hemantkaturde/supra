@@ -187,7 +187,7 @@
                                                         <label class="col-sm-3 col-form-label">Unit</label>
                                                         <div class="col-sm-9">
                                                              <select class="form-control" name="unit" id="unit">
-                                                                <option value="">Select Part Name</option>
+                                                                <option value="">Select Unit</option>
                                                                 <option value="kgs" selected>Kgs</option>
                                                                 <!-- <option value="Pcs">Pcs</option>
                                                                 <option value="Nos">Nos</option>
