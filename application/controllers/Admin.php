@@ -23335,7 +23335,7 @@ public function addnewscrapinvoice(){
         $data['buyerList']= $this->admin_model->fetchAllbuyerList();
         $data['scraptypeList']= $this->admin_model->fetchALLScraptypeList();
         $data['get_previousadded_item']= $this->admin_model->getpreviousaddeditem();
-
+        $data['getPreviousscrapinvoice_number'] = $this->admin_model->getPreviousscrapinvoice_number();
 
         $this->loadViews("masters/addNewscrapinvoice", $this->global, $data, NULL);
     }

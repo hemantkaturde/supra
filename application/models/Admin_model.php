@@ -20209,6 +20209,18 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     }
 
+    public function getPreviousscrapinvoice_number(){
+
+        $this->db->select('scrap_invoice_number');
+        $this->db->where(TBL_SCRAP_INVOICE.'.status', 1);
+        $this->db->limit(1);
+        $this->db->order_by(TBL_SCRAP_INVOICE.'.id','DESC');
+        $query = $this->db->get(TBL_SCRAP_INVOICE);
+        $rowcount = $query->result_array();
+        return $rowcount;
+
+    }
+
 
 
 }
