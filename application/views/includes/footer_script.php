@@ -24858,7 +24858,7 @@
 								button: "Ok",
 								},function(){
 									if(scrap_invoice_id_main){
-										window.location.href = "<?php echo base_url().'editscrapinvoice'?>"+scrap_invoice_id_main;
+										window.location.href = "<?php echo base_url().'editscrapinvoice/'?>"+scrap_invoice_id_main;
 									}else{
 										window.location.href = "<?php echo base_url().'addnewscrapinvoice'?>";
 									}
