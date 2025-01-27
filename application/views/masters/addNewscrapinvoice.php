@@ -27,7 +27,6 @@
 
                                      <?php 
                                          $po_number = 'SQSI24250001';
-
                                      ?>
                                   
                                     <div class="col-md-12">
@@ -39,8 +38,8 @@
                                     </div>
 
 
-                                     <?php if($fetchALLpresupplieritemList[0]['pre_date']){
-                                        $date= $fetchALLpresupplieritemList[0]['pre_date'];
+                                     <?php if($get_previousadded_item[0]['pre_date']){
+                                        $date= $get_previousadded_item[0]['pre_date'];
                                      }else{
                                         $date= date('Y-m-d');
                                      } ?>
@@ -59,7 +58,7 @@
                                                 <select class="form-control" name="buyer_name" id="buyer_name">
                                                     <option st-id="" value="">Select Buyer Name</option>
                                                     <?php foreach ($buyerList as $key => $value) {?>
-                                                    <option value="<?php echo $value['buyer_id']; ?>" <?php if($value['buyer_id']==$fetchALLpresupplieritemList[0]['pre_buyer_name']){ echo 'selected';} ?> ><?php echo $value['buyer_name']; ?></option>
+                                                    <option value="<?php echo $value['buyer_id']; ?>" <?php if($value['buyer_id']==$get_previousadded_item[0]['pre_buyer_name']){ echo 'selected';} ?> ><?php echo $value['buyer_name']; ?></option>
                                                     <?php } ?>
                                                 </select>
                                             <p class="error buyer_name_error"></p>
@@ -70,7 +69,7 @@
                                     <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="remark">Remark</label>
-                                                  <textarea type="text" class="form-control"  id="remark"  name="remark" required> <?=$fetchALLpresupplieritemList[0]['pre_remark'];?></textarea>
+                                                  <textarea type="text" class="form-control"  id="remark"  name="remark" required> <?=$get_previousadded_item[0]['pre_remark'];?></textarea>
                                                 <p class="error remark_error"></p>
                                             </div>
                                     </div>
