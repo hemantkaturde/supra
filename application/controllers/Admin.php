@@ -23484,6 +23484,23 @@ public function editscrapinvoice($id){
 }
 
 
+public function getscrapinvoiceitemdata(){
+
+    $post_submit = $this->input->post();
+    if($post_submit){
+        $geteditPODitem = $this->admin_model->getscrapinvoiceitemdata(trim($this->input->post('id')));
+        if($geteditPODitem){
+            $content = $geteditPODitem[0];
+            echo json_encode($content);
+        }else{
+            echo 'failure';
+        }
+    }
+
+
+}
+
+
 
 
 }

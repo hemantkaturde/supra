@@ -25148,21 +25148,23 @@
 				e.preventDefault();
 				var elemF = $(this);
 				var item_id = elemF.attr('data-id');
+				
 				$.ajax({
-					url : "<?php echo base_url();?>getqcchallanitemdata",
+					url : "<?php echo base_url();?>getscrapinvoiceitemdata",
 					type: "POST",
 					data : 'id='+item_id,
 					success: function(data, textStatus, jqXHR)
 					{
 						    var fetchResponse = $.parseJSON(data);
 							$('#addNewModal').modal('show'); 
-							$('#qc_challan_item_id').val(fetchResponse.id); 
-							$('#field_1').val(fetchResponse.field_1);  
-							$('#field_2').val(fetchResponse.field_2);  
-							$('#field_3').val(fetchResponse.field_3);  
-							$('#field_4').val(fetchResponse.field_4);  
-							$('#field_5').val(fetchResponse.field_5);  
-							$('#field_6').val(fetchResponse.field_6);  
+							$('#scrap_type_name').val(fetchResponse.scrap_type); 
+							$('#HSN_code').val(fetchResponse.id); 
+							$('#qty').val(fetchResponse.qty);  
+							$('#unit').val(fetchResponse.unit);  
+							$('#rate').val(fetchResponse.rate);  
+							$('#amount').val(fetchResponse.amount);  
+							$('#gst_rate').val(fetchResponse.gst_rate);  
+							// $('#field_6').val(fetchResponse.field_6);  
 							$('#item_remark').val(fetchResponse.remark);  
 							
 					},
