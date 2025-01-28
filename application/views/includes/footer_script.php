@@ -25181,14 +25181,14 @@
 							if(fetchResponse.GST_rate=='igst_18'){
 								$('#CGST_SGST_Div').css('display', 'none');
 				            	$('#IGST_Div').css('display', 'block');
-								$('#IGST_value').val(fetchResponse.CGST_value);  
+								$('#IGST_value').val(fetchResponse.IGST_value);  
 							}
 
 							if(fetchResponse.GST_rate=='igst_12'){
 
 								$('#CGST_SGST_Div').css('display', 'none');
 								$('#IGST_Div').css('display', 'block');
-								$('#IGST_value').val(fetchResponse.CGST_value);  
+								$('#IGST_value').val(fetchResponse.IGST_value);  
 							}
 
 							$('#grand_total').val(fetchResponse.grand_total);  
