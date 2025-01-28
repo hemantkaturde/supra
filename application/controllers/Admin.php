@@ -23646,9 +23646,9 @@ public function downloadscrapinvoic($id){
                     <td style="font-size:13px;" width="50%" valign="top">
                         <div>
                             <p><b></b>'. str_repeat('&nbsp;', 5).'<span style="color:red"></span></p>
-                            <p><b>SCARP INVOICE NO :</b> '.'<span style="color:red">'.$getScrapinvoicedetails[0]['scrap_invoice_number'].'</span></p>
+                            <p><b>Invoice No :</b> '.'<span style="color:red">'.$getScrapinvoicedetails[0]['scrap_invoice_number'].'</span></p>
                             <p>&nbsp;</p>
-                            <p><b>Date :</b> '.date('d-m-Y',strtotime($getScrapinvoicedetails[0]['invoice_date'])).'</p>
+                            <p><b>Invoice Date :</b> '.date('d-m-Y',strtotime($getScrapinvoicedetails[0]['invoice_date'])).'</p>
                             <p>&nbsp;</p>
                         </div>
                     </td>
