@@ -23674,7 +23674,7 @@ public function downloadscrapinvoic($id){
                     </tr>  
                     <tr style="border: 1px solid black;">
                         <td colspan="5"  style="text-align: left;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>Amount In Word :</b></td>    
-                        <td style="border: 1px solid black;padding-left: 10px;">'.$total_amount.'</td>
+                        <td style="border: 1px solid black;padding-left: 10px;"></td>
                     </tr>                           
             </table>
             <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:12px">
