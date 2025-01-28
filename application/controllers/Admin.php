@@ -23510,6 +23510,8 @@ public function downloadscrapinvoic($id){
 
     $getScrapinvoicedetails = $this->admin_model->getScrapinvoicedetails($id);
     $getScrapinvoiceItemdetails = $this->admin_model->getScrapinvoiceItemdetails($id);
+    $getCompanyAddressdetails = $this->admin_model->getCompanyAddressdetails($id);
+
 
     $item_count =count($getScrapinvoiceItemdetails);
 
@@ -23622,6 +23624,22 @@ public function downloadscrapinvoic($id){
                 </tr>
             </table>
             <hr>
+            <table style="width: 100%;text-align: left;border-collapse: collapse;border: #ccc 0px solid;font-family:cambria;">
+                    <tr>
+                        <td width="60%">
+                          <p><b>Office:</b> '.$getCompanyAddressdetails['company_address'].'</p>
+                          <p>Tel: '.$getCompanyAddressdetails['phone_1'].' </p>
+                          <p>'.$getCompanyAddressdetails['phone_2'].'</p>
+                          <p style="color:#206a9b"><b>GSTIN : '.$getCompanyAddressdetails['GSTIN'].'</b></p>
+                        </td>
+                        <td width="40%">
+                            <p><b>Email:</b></p> 
+                            <p style="color:#206a9b">purchase@supraexports.in</p>
+                            <p style="color:#206a9b">purchase1@supraexports.in</p>
+                            <p style="color:#206a9b">purchase2@supraexports.in</p>
+                        </td>  
+                    </tr>
+            </table>
             <table style=" width: 100%;text-align: center;margin-top:10px;margin-bottom:10px;font-family:cambria;">
                     <tr>
                         <td style="color:red;font-size:15px">
