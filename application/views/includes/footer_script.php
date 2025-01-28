@@ -25143,6 +25143,36 @@
 				});
 	        });
 
+
+			$(document).on('click','.editscrapinvoiceitem',function(e){  
+				e.preventDefault();
+				var elemF = $(this);
+				var item_id = elemF.attr('data-id');
+				$.ajax({
+					url : "<?php echo base_url();?>getqcchallanitemdata",
+					type: "POST",
+					data : 'id='+item_id,
+					success: function(data, textStatus, jqXHR)
+					{
+						    var fetchResponse = $.parseJSON(data);
+							$('#addNewModal').modal('show'); 
+							$('#qc_challan_item_id').val(fetchResponse.id); 
+							$('#field_1').val(fetchResponse.field_1);  
+							$('#field_2').val(fetchResponse.field_2);  
+							$('#field_3').val(fetchResponse.field_3);  
+							$('#field_4').val(fetchResponse.field_4);  
+							$('#field_5').val(fetchResponse.field_5);  
+							$('#field_6').val(fetchResponse.field_6);  
+							$('#item_remark').val(fetchResponse.remark);  
+							
+					},
+					error: function (jqXHR, textStatus, errorThrown)
+				    {
+				   	   $(".loader_ajax").hide();
+				    }
+				});
+				return false;
+			});
 	</script>
 <?php } ?>
 

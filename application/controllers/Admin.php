@@ -23386,7 +23386,7 @@ public function savescrapinvoiceitem(){
 
                     $scrap_id = $scrap_invoice_id_main;
                 }else{
-                    $scrap_id = '';
+                    $scrap_id = NULL;
                 }
     
                 $data = array(

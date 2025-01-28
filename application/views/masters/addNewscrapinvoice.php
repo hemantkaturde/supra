@@ -182,7 +182,7 @@
                                                         <td><?php echo $value['grand_total'];?></td>
                                                         <td><?php echo $value['remark'];?></td>
                                                         <td>
-                                                            <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['scrap_invoice_id'];?>' class='fa fa-pencil-square-o'  aria-hidden='true'></i>
+                                                            <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['scrap_invoice_id'];?>' class='fa fa-pencil-square-o editscrapinvoiceitem'  aria-hidden='true'></i>
                                                             <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['scrap_invoice_id'];?>' class='fa fa-trash-o deleteScrapinvoiceitem' aria-hidden='true'></i>
                                                         </td>
                                                     </tr>
@@ -216,7 +216,9 @@
                                                         <div class="loader_ajax" style="display:none;">
                                                             <div class="loader_ajax_inner"><img src="<?php echo ICONPATH;?>/preloader_ajax.gif"></div>
                                                         </div>
-                                                   
+
+                                                        <input type="text" class="form-control"  id="scrap_invoice_item_id" name="scrap_invoice_item_id">
+
                                                         <div class="form-group row">
                                                             <label class="col-sm-3 col-form-label">Scrap Type <span class="required">*</span></label>
                                                             <div class="col-sm-9">
