@@ -25142,7 +25142,6 @@
 				});
 	        });
 
-
 			$(document).on('click','.editscrapinvoiceitem',function(e){  
 				e.preventDefault();
 				var elemF = $(this);
@@ -25156,7 +25155,7 @@
 					{
 						    var fetchResponse = $.parseJSON(data);
 							$('#addNewModal').modal('show'); 
-							$('#scrap_invoice_item_id').val(fetchResponse.id); 
+							$('#scrap_invoice_item_id').val(fetchResponse.scrp_invoice_item_id); 
 							$('#scrap_type_name').val(fetchResponse.scrap_type); 
 							$('#HSN_code').val(fetchResponse.hsn_code); 
 							$('#qty').val(fetchResponse.qty);  

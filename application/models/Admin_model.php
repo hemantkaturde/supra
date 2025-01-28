@@ -20248,7 +20248,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     public function getscrapinvoiceitemdata($id){
 
-        $this->db->select('*');
+        $this->db->select('*,'.TBL_SCRAP_INVOICE_ITEM.'.id as scrp_invoice_item_id');
         $this->db->join(TBL_SCRAP_TYPE, TBL_SCRAP_TYPE.'.id  = '.TBL_SCRAP_INVOICE_ITEM.'.scrap_type');
         $this->db->where(TBL_SCRAP_INVOICE_ITEM.'.id', $id);
         $query = $this->db->get(TBL_SCRAP_INVOICE_ITEM);
