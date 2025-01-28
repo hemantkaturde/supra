@@ -24827,14 +24827,13 @@
 				var remark = $('#remark').val();
 
 				var scrap_invoice_id_main =   $('#scrap_invoice_id_main').val();
+				var scrap_invoice_item_id =   $('#scrap_invoice_item_id').val();
 
-
-				
 				$.ajax({
 					url : "<?php echo base_url();?>savescrapinvoiceitem",
 					type: "POST",
 					//data : formData,
-					data :{ scrap_type_name :scrap_type_name,inspection_report_no:inspection_report_no,qty:qty,unit:unit,rate:rate,amount:amount,gst_rate:gst_rate,CGST_value:CGST_value,SGST_value:SGST_value,IGST_value:IGST_value,grand_total:grand_total,item_remark:item_remark,invoice_date:invoice_date,buyer_name:buyer_name,remark:remark,scrap_invoice_id_main:scrap_invoice_id_main},
+					data :{ scrap_type_name :scrap_type_name,inspection_report_no:inspection_report_no,qty:qty,unit:unit,rate:rate,amount:amount,gst_rate:gst_rate,CGST_value:CGST_value,SGST_value:SGST_value,IGST_value:IGST_value,grand_total:grand_total,item_remark:item_remark,invoice_date:invoice_date,buyer_name:buyer_name,remark:remark,scrap_invoice_id_main:scrap_invoice_id_main,scrap_invoice_item_id:scrap_invoice_item_id},
 					method: "POST",
 					// data :{package_id:package_id},
 					cache:false,
@@ -25157,6 +25156,7 @@
 					{
 						    var fetchResponse = $.parseJSON(data);
 							$('#addNewModal').modal('show'); 
+							$('#scrap_invoice_item_id').val(fetchResponse.id); 
 							$('#scrap_type_name').val(fetchResponse.scrap_type); 
 							$('#HSN_code').val(fetchResponse.id); 
 							$('#qty').val(fetchResponse.qty);  

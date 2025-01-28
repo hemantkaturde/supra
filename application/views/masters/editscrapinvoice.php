@@ -140,6 +140,9 @@
                                             </div>
                                             <form role="form" id="addscrapinvoiceitemform" action="<?php echo base_url() ?>addscrapinvoiceitemform" method="post" role="form">
 
+                                            <input type="hidden" class="form-control" id="scrap_invoice_item_id" name="scrap_invoice_item_id" required readonly>
+
+
                                                 <div class="modal-body">
                                                         <div class="loader_ajax" style="display:none;">
                                                             <div class="loader_ajax_inner"><img src="<?php echo ICONPATH;?>/preloader_ajax.gif"></div>

@@ -23407,7 +23407,17 @@ public function savescrapinvoiceitem(){
                     'pre_remark'  =>  trim($this->input->post('remark')),
                 );
 
-            $saveinvoiceitemsdetails= $this->admin_model->saveinvoiceitemsdetails('',$data);
+
+                $scrap_invoice_item_id =  trim($this->input->post('scrap_invoice_item_id'));
+
+                if($scrap_invoice_item_id){
+
+                    $scrap_invoice_item_id_main = $scrap_invoice_item_id;
+                }else{
+                    $scrap_invoice_item_id_main = '';
+                }
+
+            $saveinvoiceitemsdetails= $this->admin_model->saveinvoiceitemsdetails($scrap_invoice_item_id_main,$data);
             if($saveinvoiceitemsdetails){
                 $savescrapinvoice_response['status'] = 'success';
                 $savescrapinvoice_response['error'] = array('scrap_type_name'=>strip_tags(form_error('scrap_type_name')),'HSN_code'=>strip_tags(form_error('HSN_code')),'qty'=>strip_tags(form_error('qty')),'unit'=>strip_tags(form_error('unit')),'rate'=>strip_tags(form_error('rate')),'amount'=>strip_tags(form_error('amount')),'gst'=>strip_tags(form_error('gst')),'gst_rate'=>strip_tags(form_error('gst_rate')),'item_remark'=>strip_tags(form_error('item_remark')),'invoice_date'=>strip_tags(form_error('invoice_date')),'buyer_name'=>strip_tags(form_error('buyer_name')),'remark'=>strip_tags(form_error('remark')));
