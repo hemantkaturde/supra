@@ -23648,9 +23648,9 @@ public function downloadscrapinvoic($id){
                     </tr>
             </table>
 
-            <table style="width: 100%;text-align: left;border-collapse: collapse;font-family:cambria;font-size:13px;">
+            <table style="width: 100%;text-align: left;border-collapse: collapse;font-family:cambria;font-size:13px;border: 1px solid black">
                 <tr>
-                    <td width="50%">
+                    <td width="50%" style="padding-left: 15px;">
                         <div>
                             <p>To,</p>
                             <p><b>'.$getScrapinvoicedetails[0]['buyer_name'].'</b></p>
@@ -23661,7 +23661,7 @@ public function downloadscrapinvoic($id){
                             <p style="color:red">GSTIN:'.$getScrapinvoicedetails[0]['GSTIN'].'</p>
                         <div>    
                     </td> 
-                    <td style="font-size:13px;" width="50%" valign="top">
+                    <td style="border-left: 1px solid black;padding-left: 15px;font-size:13px" width="50%">
                         <div>
                             <p><b></b>'. str_repeat('&nbsp;', 5).'<span style="color:red"></span></p>
                             <p><b>Invoice No :</b> '.'<span style="color:red">'.$getScrapinvoicedetails[0]['scrap_invoice_number'].'</span></p>
