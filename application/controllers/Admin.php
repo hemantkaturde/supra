@@ -23693,7 +23693,7 @@ public function downloadscrapinvoic($id){
                         <td style="border: 1px solid black;padding-left: 10px;">'.$total_amount.'</td>
                     </tr>  
                     <tr style="border: 1px solid black;">
-                        <td colspan="5"  style="text-align: left;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;">'.$this->amount_in_word($subtotal).'</td>    
+                        <td colspan="5"  style="text-align: left;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;">'.$this->amount_in_word($total_amount).'</td>    
                         <td style="border: 1px solid black;padding-left: 10px;"></td>
                     </tr>                           
             </table>
