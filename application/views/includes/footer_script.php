@@ -25163,8 +25163,36 @@
 							$('#unit').val(fetchResponse.unit);  
 							$('#rate').val(fetchResponse.rate);  
 							$('#amount').val(fetchResponse.amount);  
-							$('#gst_rate').val(fetchResponse.gst_rate);  
-							// $('#field_6').val(fetchResponse.field_6);  
+							$('#gst_rate').val(fetchResponse.GST_rate);  
+							
+							if(fetchResponse.GST_rate=='cgst_sgst_18'){
+								$('#CGST_SGST_Div').css('display', 'block');
+				            	$('#IGST_Div').css('display', 'none');
+								$('#CGST_value').val(fetchResponse.CGST_value);  
+								$('#SGST_value').val(fetchResponse.SGST_value);  
+							}
+
+							if(fetchResponse.GST_rate=='cgst_sgst_12'){
+								$('#CGST_SGST_Div').css('display', 'block');
+								$('#IGST_Div').css('display', 'none');
+								$('#CGST_value').val(fetchResponse.CGST_value);  
+								$('#SGST_value').val(fetchResponse.SGST_value);  
+							}
+
+							if(fetchResponse.GST_rate=='igst_18'){
+								$('#CGST_SGST_Div').css('display', 'none');
+				            	$('#IGST_Div').css('display', 'block');
+								$('#IGST_value').val(fetchResponse.CGST_value);  
+							}
+
+							if(fetchResponse.GST_rate=='igst_12'){
+
+								$('#CGST_SGST_Div').css('display', 'none');
+								$('#IGST_Div').css('display', 'block');
+								$('#IGST_value').val(fetchResponse.CGST_value);  
+							}
+
+							$('#grand_total').val(fetchResponse.grand_total);  
 							$('#item_remark').val(fetchResponse.remark);  
 							
 					},
