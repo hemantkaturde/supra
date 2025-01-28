@@ -23560,25 +23560,26 @@ public function downloadscrapinvoic($id){
                     $cgst_tax_rate = 9;
                     $sgst_tax_rate = 9;
 
-                    $cgst_tax_value = $value['CGST_value'];
-                    $sgst_tax_value = $value['SGST_value'];
+                    $cgst_tax_value += $value['CGST_value'];
+                    $sgst_tax_value += $value['SGST_value'];
 
                 }else if($value['GST_rate']=='cgst_sgst_12'){
                     $cgst_tax_rate = 6;
                     $sgst_tax_rate = 6;
 
-                    $cgst_tax_value = $value['CGST_value'];
-                    $sgst_tax_value = $value['SGST_value'];
+                    $cgst_tax_value += $value['CGST_value'];
+                    $sgst_tax_value += $value['SGST_value'];
 
                 }else if($value['GST_rate']=='igst_18'){
                     $igst_tax_rate = 18;
-                    $igst_tax_value = $value['IGST_value'];
+                    $igst_tax_value += $value['IGST_value'];
                 }else if($value['GST_rate']=='igst_12'){
                     $igst_tax_rate = 12;
-                    $igst_tax_value = $value['IGST_value'];
-
+                    $igst_tax_value += $value['IGST_value'];
                 }
 
+                $net_amount +=$value['amount'];
+                $total_amount += $value['grand_total'];
         $i++;       
     }
 
