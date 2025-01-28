@@ -25158,7 +25158,7 @@
 							$('#addNewModal').modal('show'); 
 							$('#scrap_invoice_item_id').val(fetchResponse.id); 
 							$('#scrap_type_name').val(fetchResponse.scrap_type); 
-							$('#HSN_code').val(fetchResponse.id); 
+							$('#HSN_code').val(fetchResponse.hsn_code); 
 							$('#qty').val(fetchResponse.qty);  
 							$('#unit').val(fetchResponse.unit);  
 							$('#rate').val(fetchResponse.rate);  
