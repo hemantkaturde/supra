@@ -21789,8 +21789,6 @@ public function downlaodqcchallan($id){
     $getQcchallanforInvoiceitemdetails = $this->admin_model->getQcchallanforInvoiceitemdetails($id);
     $getCompanyAddressdetails = $this->admin_model->getCompanyAddressdetails($id);
 
-
-
     $count_of_rows_for_space = count($getQcchallanforInvoiceitemdetails);
 
 
@@ -21799,7 +21797,6 @@ public function downlaodqcchallan($id){
     }else{
        $devheight='550px';
     }
-
 
     $i=1;
     $CartItem = "";
@@ -21831,7 +21828,6 @@ public function downlaodqcchallan($id){
     }
 
 
-  
     $mpdf = new \Mpdf\Mpdf();
     // $html = $this->load->view('html_to_pdf',[],true);
     $html = '<table style=" width: 100%;text-align: center;border-collapse: collapse;font-family:cambria;">
@@ -23510,6 +23506,196 @@ public function getscrapinvoiceitemdata(){
 
 }
 
+public function downloadscrapinvoic($id){
+
+    $getScrapinvoicedetails = $this->admin_model->getScrapinvoicedetails($id);
+    $getScrapinvoiceItemdetails = $this->admin_model->getScrapinvoiceItemdetails($id);
+
+    $item_count =count($getScrapinvoiceItemdetails);
+
+    if($item_count==1){
+        $padding_bottom = '150px';
+    }else if($item_count==2){
+        $padding_bottom = '28px';
+    }else if($item_count==3){
+        $padding_bottom = '20px';
+    }else{
+        $padding_bottom = '10px';
+    }
+
+    $cgst_tax_rate = 0;
+    $sgst_tax_rate = 0;
+    $igst_tax_rate = 0;
+    $net_amount = 0;
+    $total_amount = 0;
+    $gst_rate ='';
+ 
+
+    $space = '<tr>
+        <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+        <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+        <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+        <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+        <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+    </tr>';
+
+
+    $i=1;
+    $CartItem = "";
+    foreach ($getScrapinvoiceItemdetails as $key => $value) {
+
+        $CartItem .= '
+                <tr style="border-left: 1px solid black;border-right: 1px solid black;">
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$i.'</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['scrap_type_name'].'</br></td> 
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['hsn_code'].'</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['qty'].'</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rate'].'</td> 
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['amount'].'</td>    
+                </tr>';
+
+                $gst_rate = $value['GST_rate'];
+
+                if($value['GST_rate']=='cgst_sgst_18'){
+                    $cgst_tax_rate = 9;
+                    $sgst_tax_rate = 9;
+
+                    $cgst_tax_value = $value['CGST_value'];
+                    $sgst_tax_value = $value['SGST_value'];
+
+                }else if($value['GST_rate']=='cgst_sgst_12'){
+                    $cgst_tax_rate = 6;
+                    $sgst_tax_rate = 6;
+
+                    $cgst_tax_value = $value['CGST_value'];
+                    $sgst_tax_value = $value['SGST_value'];
+
+                }else if($value['GST_rate']=='igst_18'){
+                    $igst_tax_rate = 18;
+                    $igst_tax_value = $value['IGST_value'];
+                }else if($value['GST_rate']=='igst_12'){
+                    $igst_tax_rate = 12;
+                    $igst_tax_value = $value['IGST_value'];
+
+                }
+
+        $i++;       
+    }
+
+    
+    if($gst_rate=='cgst_sgst_18' || $gst_rate=='cgst_sgst_12'){
+        $tax_value = '<tr style="border: 1px solid black;">               
+            <td colspan="5"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>(+) '.$cgst_tax_rate.' % CGST </b></td>    
+                <td style="border: 1px solid black;padding-left: 10px;">'.$cgst_tax_value.'</td>
+            </tr>
+
+            <tr style="border: 1px solid black;">
+                <td colspan="5"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>(+) '.$sgst_tax_rate.' % SGST </b></td>    
+                <td style="border: 1px solid black;padding-left: 10px;">'.$sgst_tax_value.'</td>
+            </tr>';
+     }else{
+        $tax_value = '
+            <tr style="border: 1px solid black;">
+                <td colspan="5"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>(+) '.$igst_tax_rate.' % IGST </b></td>    
+                <td style="border: 1px solid black;padding-left: 10px;">'.$igst_tax_value.'</td>
+            </tr>';
+     }
+
+
+    $mpdf = new \Mpdf\Mpdf();
+    // $html = $this->load->view('html_to_pdf',[],true);
+    $html = '<table style=" width: 100%;text-align: center;border-collapse: collapse;font-family:cambria;">
+                <tr>
+                  <td rowspan="2"><img src="'.base_url().'assets/images/supra_logo_1.jpg" width="80" height="80"></td>
+                  <td style="color:#000080"><h2>SUPRA QUALITY EXPORTS (I) PVT. LTD</h2></td>
+                  <td rowspan="2"><img src="'.base_url().'assets/images/logo_2.png" width="80" height="80"></td>
+                </tr> 
+                <tr>
+                  <td style="font-weight: bold;">
+                    <p>MANUFACTURER & EXPORTERS OF:</p>
+                    <p>PRECISION TURNED COMPONENTS, STAMPED /PRESSED PARTS IN FERROUS & NON-FERROUS METAL</p>
+                    <p>MOULDED & EXTRUDED PLASTIC AND RUBBER COMPONENTS</p> 
+                  </td>
+                </tr>
+            </table>
+            <hr>
+            <table style=" width: 100%;text-align: center;margin-top:10px;margin-bottom:10px;font-family:cambria;">
+                    <tr>
+                        <td style="color:red;font-size:15px">
+                          <u><p><h3>SCARP INVOICE</h3></p>
+                        </td>
+                    </tr>
+            </table>
+
+            <table style="width: 100%;text-align: left;border-collapse: collapse;font-family:cambria;font-size:13px;">
+                <tr>
+                    <td width="50%">
+                        <div>
+                            <p>To,</p>
+                            <p><b>'.$getScrapinvoicedetails[0]['buyer_name'].'</b></p>
+                            <p>'.$getScrapinvoicedetails[0]['address'].'</p>
+                            <p><b>Contact No:</b> '.$getScrapinvoicedetails[0]['mobile'].' / '.$getScrapinvoicedetails[0]['landline'].'</p>
+                            <p><b>Contact Person:</b> '.$getScrapinvoicedetails[0]['contact_person'].'</p>
+                            <p><b>Email:</b> '.$getScrapinvoicedetails[0]['email'].'</p>
+                            <p style="color:red">GSTIN:'.$getScrapinvoicedetails[0]['GSTIN'].'</p>
+                        <div>    
+                    </td> 
+                    <td style="font-size:13px;" width="50%" valign="top">
+                        <div>
+                            <p><b></b>'. str_repeat('&nbsp;', 5).'<span style="color:red"></span></p>
+                            <p><b>DEBIT NOTE NO :</b> '.'<span style="color:red">'.$getScrapinvoicedetails[0]['scrap_invoice_number'].'</span></p>
+                            <p>&nbsp;</p>
+                            <p><b>Date :</b> '.date('d-m-Y',strtotime($getScrapinvoicedetails[0]['invoice_date'])).'</p>
+                            <p>&nbsp;</p>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+            <table style="border: 1px solid black;margin-top:10px;width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:12px">
+                <tr style="border: 1px solid black;">
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>Sr. No</th>
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>Description</th>  
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>HSN Code</th> 
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>Qty In kgs</th>  
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>Rate</th>  
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>Amount</th>  
+                </tr>
+                '.$CartItem.$space.'
+                    <tr style="border: 1px solid black;">
+                        <td colspan="5"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>Net Amount</b></td>    
+                        <td style="border: 1px solid black;padding-left: 10px;">'.$net_amount.'</td>
+                    </tr>
+                '.$tax_value.'
+                    <tr style="border: 1px solid black;">
+                        <td colspan="5"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>Total Amount</b></td>    
+                        <td style="border: 1px solid black;padding-left: 10px;">'.$total_amount.'</td>
+                    </tr>  
+                    <tr style="border: 1px solid black;">
+                        <td colspan="5"  style="text-align: left;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>Amount In Word :</b></td>    
+                        <td style="border: 1px solid black;padding-left: 10px;">'.$total_amount.'</td>
+                    </tr>                           
+            </table>
+            <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:12px">
+                  
+                   <tr style="border: 1px solid black;">
+                        <td style="border: 1px solid black;padding-left: 10px;" width="75%;" valign="top">
+                            <p><b>Remark :</b></p>
+                            <p><b>'.$getScrapinvoicedetails[0]['remark'].'</b></p>
+                        </td>
+                        <td style="border: 1px solid black;text-align: center;" width="25%" valign="top">
+                            <p style="vertical-align: text-top;font-size:12px;color:#206a9b"><b>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</b></p>
+                            <br/><img src="'.base_url().'assets/images/stmps/supra_scrap.png" width="130" height="100">
+                            <p style="vertical-align: text-top;font-size:10px;color:#206a9b"><b>AUTHORIZED SIGNATORY</b></p>
+                        </td> 
+                </tr>
+            </table>';
+
+            // <p>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</p>
+    $invoice_name =  $getScrapinvoicedetails[0]['scrap_invoice_number'].' - '.$getScrapinvoicedetails[0]['buyer_name'].'.pdf';
+    $mpdf->WriteHTML($html);
+    $mpdf->Output($invoice_name,'D'); // opens in browser
+}
 
 
 
