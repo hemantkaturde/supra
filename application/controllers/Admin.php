@@ -23629,6 +23629,7 @@ public function downloadscrapinvoic($id){
                         <td width="60%">
                           <p><b>Office:</b> '.$getCompanyAddressdetails['company_address'].'</p>
                           <p>Tel: 9152095894 / 02245176493 </p>
+                          <p>CIN: U51900MH2006PTC160688 </p>
                           <p style="color:#206a9b"><b>GSTIN : '.$getCompanyAddressdetails['GSTIN'].'</b></p>
                         </td>
                         <td width="40%">
@@ -23666,7 +23667,7 @@ public function downloadscrapinvoic($id){
                             <p>&nbsp;</p>
                             <p><b>Invoice Date :</b> '.date('d-m-Y',strtotime($getScrapinvoicedetails[0]['invoice_date'])).'</p>
                             <p>&nbsp;</p>
-                            <p><b>Payment Terms :</b> 100% Advanced</p>
+                            <p><b>Payment Terms :</b> 100% Advance</p>
                         </div>
                     </td>
                 </tr>
