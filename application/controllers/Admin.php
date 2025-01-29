@@ -23628,22 +23628,20 @@ public function downloadscrapinvoic($id){
                     <tr>
                         <td width="60%">
                           <p><b>Office:</b> '.$getCompanyAddressdetails['company_address'].'</p>
-                          <p>Tel: '.$getCompanyAddressdetails['phone_1'].' </p>
-                          <p>'.$getCompanyAddressdetails['phone_2'].'</p>
+                          <p>Tel: 9152095894 / 02245176493 </p>
                           <p style="color:#206a9b"><b>GSTIN : '.$getCompanyAddressdetails['GSTIN'].'</b></p>
                         </td>
                         <td width="40%">
                             <p><b>Email:</b></p> 
                             <p style="color:#206a9b">purchase@supraexports.in</p>
-                            <p style="color:#206a9b">purchase1@supraexports.in</p>
-                            <p style="color:#206a9b">purchase2@supraexports.in</p>
+                            <p style="color:#206a9b">accounts@supraexports.in</p>
                         </td>  
                     </tr>
             </table>
             <table style=" width: 100%;text-align: center;margin-top:10px;margin-bottom:10px;font-family:cambria;">
                     <tr>
                         <td style="color:red;font-size:15px">
-                          <u><p><h3>SCARP INVOICE</h3></p>
+                          <u><p><h3>INVOICE</h3></p>
                         </td>
                     </tr>
             </table>
@@ -23668,6 +23666,7 @@ public function downloadscrapinvoic($id){
                             <p>&nbsp;</p>
                             <p><b>Invoice Date :</b> '.date('d-m-Y',strtotime($getScrapinvoicedetails[0]['invoice_date'])).'</p>
                             <p>&nbsp;</p>
+                            <p><b>Payment Terms :</b> 100% Advanced</p>
                         </div>
                     </td>
                 </tr>
@@ -23690,10 +23689,10 @@ public function downloadscrapinvoic($id){
                 '.$tax_value.'
                     <tr style="border: 1px solid black;">
                         <td colspan="5"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>Total Amount</b></td>    
-                        <td style="border: 1px solid black;padding-left: 10px;">'.$total_amount.'</td>
+                        <td style="border: 1px solid black;padding-left: 10px;">'.round($total_amount).'</td>
                     </tr>  
                     <tr style="border: 1px solid black;">
-                        <td colspan="5"  style="text-align: left;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;">'.$this->amount_in_word($total_amount).'</td>    
+                        <td colspan="5"  style="text-align: left;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;">'.$this->amount_in_word(round($total_amount)).'</td>    
                         <td style="border: 1px solid black;padding-left: 10px;"></td>
                     </tr>                           
             </table>
