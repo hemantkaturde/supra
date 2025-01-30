@@ -4439,7 +4439,7 @@ class Admin_model extends CI_Model
 
         $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id', $main_id);
         $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.status', 1);
-        $this->db->group_by(TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
+        $this->db->group_by(TBL_PACKING_INSTRACTION_DETAILS.'.part_number');
         
         $query = $this->db->get(TBL_PACKING_INSTRACTION_DETAILS);
         $fetch_result = $query->result_array();
