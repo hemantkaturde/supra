@@ -6168,6 +6168,88 @@ class Admin extends BaseController
 
     }
 
+    public function downloaddirectstock($id){
+
+        $getsearchstockvendordeatils= $this->admin_model->getsearchstockvendordeatilsforprint($stock_id,$part_number_id);
+        $getexportrecordsitemdataforprint = $this->admin_model->getexportrecordsitemdataforprint($getsearchstockvendordeatils[0]['buyer_po_id'],$getsearchstockvendordeatils[0]['part_number_id']);
+    
+
+        $CartItemExport = "";
+        $k=1;
+        $export_qty_in_pcs =0;
+        foreach ($getexportrecordsitemdataforprint as $key => $value) {
+            $CartItemExport .= '
+                    <tr style="style=border-left: 1px solid black;border-right: 1px solid black;">
+                        <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$k.'</td>
+                        <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['packing_instrauction_id'].'</td> 
+                        <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.date("d-m-Y", strtotime($value['buyer_invoice_date'])).'</td>
+                        <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['buyer_invoice_qty'].'</td> 
+                    </tr>';
+    
+                     $export_qty_in_pcs+=$value['export_qty_in_kgs'];
+                $k++;       
+        }
+    
+
+    
+        $mpdf = new \Mpdf\Mpdf();
+        // $html = $this->load->view('html_to_pdf',[],true);
+        $html = '<table style=" width: 100%;text-align: left;border-collapse: collapse;border: #cccccc 0px solid;font-family:cambria;">
+                    <tr>
+                       <td style="padding: 8px;"><b>Buyer Name : </b>'.$getsearchstockvendordeatils[0]['vendor_name'].'</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 8px;"><b>Buyer PO  : </b>'.$getsearchstockvendordeatils[0]['part_no'].' </td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 8px;"><b>Part Number  : </b>'.$getsearchstockvendordeatils[0]['description'].' </td>
+                    </tr>
+                     <tr>
+                      <td style="padding: 8px;"><b>Part Description : </b>'.$getsearchstockvendordeatils[0]['vpo_number'].' - '.$getsearchstockvendordeatils[0]['original_po'].'</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 8px;"><b>Buyer Order Qty : </b>'.$getsearchstockvendordeatils[0]['vendor_qty_po'].'</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 8px;"><b>PO Status : </b>  Form Stock Directly</td>
+                    </tr>
+                </table>
+
+                <h4>Export Item Details </h4>
+                <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:5px;font-family:cambria;font-size:12px">
+                    <tr style="border: 1px solid black;">
+                        <th align="left" style="border: 1px solid black;text-align:center;padding: 10px;" margin-bottom: 10%;>Sr No</th>
+                        <th align="left" style="border: 1px solid black;text-align:center;padding: 10px;" margin-bottom: 10%;>Export Invoice No.</th>
+                        <th align="left" style="border: 1px solid black;text-align:center;padding: 10px;" margin-bottom: 10%;>Inv Date</th>
+                        <th align="left" style="border: 1px solid black;text-align:center;padding: 10px;" margin-bottom: 10%;>Export Qty In PCS</th>
+                    </tr>
+                    '.$CartItemExport.' 
+                </table>
+    
+                 <table style=" width: 100%;border-collapse: collapse;border: #ccc 1px solid;font-family:cambria;font-size:12px">
+                    <tr style="border: 1px solid black;">
+                            <td style="border: 1px solid black;padding: 10px;">
+                                <p><b>Ready For Export In Pcs : </b>'.round($ready_for_exp_pcs,3).'</p>    
+                            </td>  
+                             <td style="border: 1px solid black;padding: 10px;">
+                                <p><b>Total Export In Pcs : </b>'.round($total_exp_qty_in_pcs,3).'</p>    
+                            </td>  
+                            <td style="border: 1px solid black;padding: 10px;">
+                                <p><b>Balance Qty In Pcs : </b>'.$balence_qty_in_pcs.'</p>    
+                            </td> 
+                    </tr>
+                </table>';
+
+                // header('Content-Length: '.filesize($file));
+                // readfile($file);
+    
+                // <p>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</p>
+        $invoice_name =  'stock_print.pdf';
+        $mpdf->WriteHTML($html);
+        $mpdf->Output($invoice_name,'D'); // opens in browser
+
+    }
+
 
     public function  getbuyerdetailsbybuteridoritemid(){
 

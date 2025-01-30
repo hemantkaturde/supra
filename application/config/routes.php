@@ -608,6 +608,7 @@ $route['deleteScrapinvoiceitem'] = "admin/deleteScrapinvoiceitem";
 $route['editscrapinvoice/(:any)'] = "admin/editscrapinvoice/$1";
 $route['getscrapinvoiceitemdata'] = "admin/getscrapinvoiceitemdata";
 $route['downloadscrapinvoic/(:any)'] = "admin/downloadscrapinvoic/$1";
+$route['downloaddirectstock/(:any)'] = "admin/downloaddirectstock/$1";
 
 
 
