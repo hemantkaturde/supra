@@ -6170,7 +6170,7 @@ class Admin extends BaseController
 
     public function downloaddirectstock($id){
 
-        $getsearchstockvendordeatils= $this->admin_model->getsearchstockvendordeatilsforprint($stock_id,$part_number_id);
+        $getsearchstockvendordeatils= $this->admin_model->getstockdirectprint($id);
         $getexportrecordsitemdataforprint = $this->admin_model->getexportrecordsitemdataforprint($getsearchstockvendordeatils[0]['buyer_po_id'],$getsearchstockvendordeatils[0]['part_number_id']);
     
 
@@ -6196,19 +6196,19 @@ class Admin extends BaseController
         // $html = $this->load->view('html_to_pdf',[],true);
         $html = '<table style=" width: 100%;text-align: left;border-collapse: collapse;border: #cccccc 0px solid;font-family:cambria;">
                     <tr>
-                       <td style="padding: 8px;"><b>Buyer Name : </b>'.$getsearchstockvendordeatils[0]['vendor_name'].'</td>
+                       <td style="padding: 8px;"><b>Buyer Name : </b>'.$getsearchstockvendordeatils[0]['buyer_name'].'</td>
                     </tr>
                     <tr>
-                      <td style="padding: 8px;"><b>Buyer PO  : </b>'.$getsearchstockvendordeatils[0]['part_no'].' </td>
+                      <td style="padding: 8px;"><b>Buyer PO  : </b>'.$getsearchstockvendordeatils[0]['buyer_po_number'].' </td>
                     </tr>
                     <tr>
-                      <td style="padding: 8px;"><b>Part Number  : </b>'.$getsearchstockvendordeatils[0]['description'].' </td>
+                      <td style="padding: 8px;"><b>Part Number  : </b>'.$getsearchstockvendordeatils[0]['part_number'].' </td>
                     </tr>
                      <tr>
-                      <td style="padding: 8px;"><b>Part Description : </b>'.$getsearchstockvendordeatils[0]['vpo_number'].' - '.$getsearchstockvendordeatils[0]['original_po'].'</td>
+                      <td style="padding: 8px;"><b>Part Description : </b>'.$getsearchstockvendordeatils[0]['name'].' - '.$getsearchstockvendordeatils[0]['buyer_po_number'].'</td>
                     </tr>
                     <tr>
-                      <td style="padding: 8px;"><b>Buyer Order Qty : </b>'.$getsearchstockvendordeatils[0]['vendor_qty_po'].'</td>
+                      <td style="padding: 8px;"><b>Buyer Order Qty : </b>'.$getsearchstockvendordeatils[0]['buyer_invoice_qty'].'</td>
                     </tr>
                     <tr>
                       <td style="padding: 8px;"><b>PO Status : </b>  Form Stock Directly</td>
@@ -6227,17 +6227,31 @@ class Admin extends BaseController
                 </table>
     
                  <table style=" width: 100%;border-collapse: collapse;border: #ccc 1px solid;font-family:cambria;font-size:12px">
-                    <tr style="border: 1px solid black;">
+                        <tr style="border: 1px solid black;">
                             <td style="border: 1px solid black;padding: 10px;">
-                                <p><b>Ready For Export In Pcs : </b>'.round($ready_for_exp_pcs,3).'</p>    
+                                <p><b>Previous Stock : </b>'.round($ready_for_exp_pcs,3).'</p>    
                             </td>  
+                        </tr>
+                        <tr style="border: 1px solid black;">
                              <td style="border: 1px solid black;padding: 10px;">
-                                <p><b>Total Export In Pcs : </b>'.round($total_exp_qty_in_pcs,3).'</p>    
+                                <p><b>Balance : </b>'.round($total_exp_qty_in_pcs,3).'</p>    
                             </td>  
+                        </tr>
+                        <tr style="border: 1px solid black;">
                             <td style="border: 1px solid black;padding: 10px;">
-                                <p><b>Balance Qty In Pcs : </b>'.$balence_qty_in_pcs.'</p>    
+                                <p><b>Export Qty In Pcs : </b>'.$balence_qty_in_pcs.'</p>    
                             </td> 
-                    </tr>
+                        </tr>
+                        <tr style="border: 1px solid black;">
+                            <td style="border: 1px solid black;padding: 10px;">
+                                <p><b>Current Stock : </b>'.$balence_qty_in_pcs.'</p>    
+                            </td> 
+                        </tr>
+                         <tr style="border: 1px solid black;">
+                            <td style="border: 1px solid black;padding: 10px;">
+                                <p><b>Bal Qty In pcs : </b>'.$balence_qty_in_pcs.'</p>    
+                            </td> 
+                        </tr>
                 </table>';
 
                 // header('Content-Length: '.filesize($file));
