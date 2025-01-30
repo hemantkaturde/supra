@@ -4435,11 +4435,10 @@ class Admin_model extends CI_Model
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_PACKING_INSTRACTION_DETAILS.'.part_number');
 
         /*New item Details*/
-        $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.part_number_id = '.TBL_PACKING_INSTRACTION_DETAILS.'.part_number');
+       // $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.part_number_id = '.TBL_PACKING_INSTRACTION_DETAILS.'.part_number');
 
         $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id', $main_id);
         $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.status', 1);
-        $this->db->group_by(TBL_PACKING_INSTRACTION_DETAILS.'.part_number');
         
         $query = $this->db->get(TBL_PACKING_INSTRACTION_DETAILS);
         $fetch_result = $query->result_array();

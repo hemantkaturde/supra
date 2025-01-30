@@ -172,9 +172,8 @@
                                                         <td><?=$value_details['box_qty'];?></td>
                                                         <td><?=$value_details['remark'];?></td>
                                                         <td>
-                                                            <?php if($value_details['item_po_status']=='from_stock'){ ?>
-                                                              <a href='<?=ADMIN_PATH.'downloaddirectstock/'.$value_details['packing_instaction_details'];?>' ><i style='font-size: x-large;cursor: pointer;' class='fa fa-files-o' aria-hidden='true'></i></a>
-                                                            <?php } ?>
+                                                           
+                                                            <a href='<?=ADMIN_PATH.'downloaddirectstock/'.$value_details['packing_instaction_details'];?>' ><i style='font-size: x-large;cursor: pointer;' class='fa fa-files-o' aria-hidden='true'></i></a>
                                                             <a href='<?=ADMIN_PATH.'downloadpackinginstraction/'.$value_details['packing_instaction_details'];?>' ><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>
                                                             <i style='font-size: x-large;cursor: pointer'  main-id='<?=$main_id; ?>'   data-id='<?=$value_details['packing_instaction_details'];?>' class='fa fa-pencil-square-o editpackinginstractionsubitem'  aria-hidden='true'></i>
                                                             <i style='font-size: x-large;cursor: pointer;' main-id='<?=$main_id; ?>' fin_id='<?=$value_details['fin_id'];?>'  data-id='<?=$value_details['packing_instaction_details'];?>' class='fa fa-trash-o deletepackinginstractionsubitem' aria-hidden='true'></i>
