@@ -23781,7 +23781,7 @@ public function downloadscrapinvoic($id){
                 '.$tax_value.'
                     <tr style="border: 1px solid black;">
                         <td colspan="5"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>Round Off</b></td>    
-                        <td style="border: 1px solid black;padding-left: 10px;">'.round($net_amount) - $net_amount.'</td>
+                        <td style="border: 1px solid black;padding-left: 10px;">'.round(round($net_amount) - $net_amount,3).'</td>
                     </tr>  
                     <tr style="border: 1px solid black;">
                         <td colspan="5"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>Total Amount</b></td>    
