@@ -6211,6 +6211,9 @@ class Admin extends BaseController
                       <td style="padding: 8px;"><b>Buyer Order Qty : </b>'.$getsearchstockvendordeatils[0]['buyer_order_qty'].'</td>
                     </tr>
                     <tr>
+                      <td style="padding: 8px;"><b>Buyer PO Part Delivery Date : </b>'.$getsearchstockvendordeatils[0]['buyer_po_part_delivery_date'].'</td>
+                    </tr>
+                    <tr>
                       <td style="padding: 8px;"><b>PO Status : </b>  Form Stock Directly</td>
                     </tr>
                 </table>
