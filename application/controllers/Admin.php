@@ -6183,7 +6183,7 @@ class Admin extends BaseController
                         <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$k.'</td>
                         <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['packing_instrauction_id'].'</td> 
                         <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.date("d-m-Y", strtotime($value['buyer_invoice_date'])).'</td>
-                        <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['export_qty_in_kgs'].'</td> 
+                        <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['buyer_invoice_qty'].'</td> 
                     </tr>';
     
                      $export_qty_in_pcs=0;
@@ -6199,13 +6199,13 @@ class Admin extends BaseController
                        <td style="padding: 8px;"><b>Buyer Name : </b>'.$getsearchstockvendordeatils[0]['buyer_name'].'</td>
                     </tr>
                     <tr>
-                      <td style="padding: 8px;"><b>Buyer PO  : </b>'.$getsearchstockvendordeatils[0]['buyer_po_number'].' </td>
+                      <td style="padding: 8px;"><b>Buyer PO Number  : </b>'.$getsearchstockvendordeatils[0]['buyer_po_number'].' </td>
                     </tr>
                     <tr>
                       <td style="padding: 8px;"><b>Part Number  : </b>'.$getsearchstockvendordeatils[0]['part_number'].' </td>
                     </tr>
                      <tr>
-                      <td style="padding: 8px;"><b>Part Description : </b>'.$getsearchstockvendordeatils[0]['name'].' - '.$getsearchstockvendordeatils[0]['buyer_po_number'].'</td>
+                      <td style="padding: 8px;"><b>Part Description : </b>'.$getsearchstockvendordeatils[0]['name'].'</td>
                     </tr>
                     <tr>
                       <td style="padding: 8px;"><b>Buyer Order Qty : </b>'.$getsearchstockvendordeatils[0]['buyer_invoice_qty'].'</td>
