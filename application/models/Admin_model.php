@@ -20286,11 +20286,12 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     public function getstockdirectprint($id){
      
-        $this->db->select('*,'.TBL_PACKING_INSTRACTION_DETAILS.'.id as packing_instaction_details,'.TBL_BUYER_PO_MASTER.'.id as buyer_po_id,'.TBL_PACKING_INSTRACTION_DETAILS.'.part_number as part_number_id'); 
+        $this->db->select('*,'.TBL_PACKING_INSTRACTION_DETAILS.'.id as packing_instaction_details,'.TBL_BUYER_PO_MASTER.'.id as buyer_po_id,'.TBL_PACKING_INSTRACTION_DETAILS.'.part_number as part_number_id,'.TBL_BUYER_PO_MASTER_ITEM.'.order_oty as buyer_order_qty'); 
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_PACKING_INSTRACTION_DETAILS.'.part_number');
         $this->db->join(TBL_PACKING_INSTRACTION, TBL_PACKING_INSTRACTION.'.id = '.TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id');
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_PACKING_INSTRACTION.'.buyer_name');
         $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_PACKING_INSTRACTION.'.buyer_po_number');
+        $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id = '.TBL_PACKING_INSTRACTION.'.id and '. TBL_BUYER_PO_MASTER_ITEM.'.part_number = '.TBL_PACKING_INSTRACTION.'.part_number_id');
         $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.id', $id);
         $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.status', 1);
         $query = $this->db->get(TBL_PACKING_INSTRACTION_DETAILS);

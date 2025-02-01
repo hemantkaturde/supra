@@ -6208,7 +6208,7 @@ class Admin extends BaseController
                       <td style="padding: 8px;"><b>Part Description : </b>'.$getsearchstockvendordeatils[0]['name'].'</td>
                     </tr>
                     <tr>
-                      <td style="padding: 8px;"><b>Buyer Order Qty : </b>'.$getsearchstockvendordeatils[0]['buyer_invoice_qty'].'</td>
+                      <td style="padding: 8px;"><b>Buyer Order Qty : </b>'.$getsearchstockvendordeatils[0]['buyer_order_qty'].'</td>
                     </tr>
                     <tr>
                       <td style="padding: 8px;"><b>PO Status : </b>  Form Stock Directly</td>
