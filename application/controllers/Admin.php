@@ -6186,7 +6186,7 @@ class Admin extends BaseController
                         <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['buyer_invoice_qty'].'</td> 
                     </tr>';
     
-                     $export_qty_in_pcs=0;
+                     $export_qty_in_pcs=+$value['buyer_invoice_qty'];
                 $k++;       
         }
     
@@ -6229,7 +6229,7 @@ class Admin extends BaseController
                  <table style=" width: 100%;border-collapse: collapse;border: #ccc 1px solid;font-family:cambria;font-size:12px">
                         <tr style="border: 1px solid black;">
                             <td style="border: 1px solid black;padding: 10px;">
-                                <p><b>Previous Stock Balance: </b>'.$getsearchstockvendordeatils[0]['previous_stock'].'</p>    
+                                <p><b>Previous Stock Balance: </b>'.$getsearchstockvendordeatils[0]['previous_stock'] + $export_qty_in_pcs.'</p>    
                             </td>  
                         </tr>
                     
