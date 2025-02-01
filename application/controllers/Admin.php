@@ -6183,7 +6183,7 @@ class Admin extends BaseController
                         <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$k.'</td>
                         <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['packing_instrauction_id'].'</td> 
                         <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.date("d-m-Y", strtotime($value['buyer_invoice_date'])).'</td>
-                        <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['buyer_invoice_qty'].'</td> 
+                        <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['export_qty_in_kgs'].'</td> 
                     </tr>';
     
                      $export_qty_in_pcs+=$value['export_qty_in_kgs'];
@@ -6229,27 +6229,18 @@ class Admin extends BaseController
                  <table style=" width: 100%;border-collapse: collapse;border: #ccc 1px solid;font-family:cambria;font-size:12px">
                         <tr style="border: 1px solid black;">
                             <td style="border: 1px solid black;padding: 10px;">
-                                <p><b>Previous Stock : </b>'.round($ready_for_exp_pcs,3).'</p>    
+                                <p><b>Previous Stock Balance: </b>'.round($getsearchstockvendordeatils[0]['previous_stock'],3).'</p>    
                             </td>  
                         </tr>
-                        <tr style="border: 1px solid black;">
-                             <td style="border: 1px solid black;padding: 10px;">
-                                <p><b>Balance : </b>'.round($total_exp_qty_in_pcs,3).'</p>    
-                            </td>  
-                        </tr>
+                    
                         <tr style="border: 1px solid black;">
                             <td style="border: 1px solid black;padding: 10px;">
-                                <p><b>Export Qty In Pcs : </b>'.$balence_qty_in_pcs.'</p>    
+                                <p><b>Total Export Qty In Pcs : </b>'.round($export_qty_in_pcs,3).'</p>    
                             </td> 
                         </tr>
                         <tr style="border: 1px solid black;">
                             <td style="border: 1px solid black;padding: 10px;">
                                 <p><b>Current Stock : </b>'.$balence_qty_in_pcs.'</p>    
-                            </td> 
-                        </tr>
-                         <tr style="border: 1px solid black;">
-                            <td style="border: 1px solid black;padding: 10px;">
-                                <p><b>Bal Qty In pcs : </b>'.$balence_qty_in_pcs.'</p>    
                             </td> 
                         </tr>
                 </table>';
