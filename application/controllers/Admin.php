@@ -6186,7 +6186,7 @@ class Admin extends BaseController
                         <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['export_qty_in_kgs'].'</td> 
                     </tr>';
     
-                     $export_qty_in_pcs+=$value['export_qty_in_kgs'];
+                     $export_qty_in_pcs=0;
                 $k++;       
         }
     
