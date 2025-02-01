@@ -9371,21 +9371,19 @@
 		
 		
 		$(document).on('change','.get_buyer_delivery_date',function(e){  
-			e.preventDefault();
-			//$(".loader_ajax").show();
-			// var elemF = $(this);
-			// var item_id = elemF.getAttribute('data-id');
+				e.preventDefault();
+				//$(".loader_ajax").show();
+				// var elemF = $(this);
+				// var item_id = elemF.getAttribute('data-id');
 
-			var selectElement = document.getElementById("part_number");
-			// Get the selected option element
-			var selectedOption = selectElement.options[selectElement.selectedIndex];
+				var selectElement = document.getElementById("part_number");
+				// Get the selected option element
+				var selectedOption = selectElement.options[selectElement.selectedIndex];
 
-			// Get the value of the data-info attribute of the selected option
-			var poitemid = selectedOption.getAttribute("data_id");
+				// Get the value of the data-info attribute of the selected option
+				var poitemid = selectedOption.getAttribute("data_id");
 
 			
-
-
 			                        var buyer_po_number_id = $('#buyer_po_number_id').val();
 									var part_number = $('#part_number').val();
 									var buyer_item_delivery_date = $('#buyer_item_delivery_date').val();
@@ -9411,46 +9409,45 @@
 											{
 												
 												$('#buyer_item_delivery_date').val(get_buyerdata.buyer_po_part_delivery_date);	
-
-
-
+												$('#item_po_status').val(get_buyerdata.item_po_status);	
+												
 												var selectElement = document.getElementById("part_number");
-			// Get the selected option element
-			var selectedOption = selectElement.options[selectElement.selectedIndex];
+												// Get the selected option element
+												var selectedOption = selectElement.options[selectElement.selectedIndex];
 
-			// Get the value of the data-info attribute of the selected option
-			var poitemid = selectedOption.getAttribute("data_id");
-			var buyer_po_number_id = $('#buyer_po_number_id').val();
-			var part_number = $('#part_number').val();
-			var buyer_item_delivery_date = $('#buyer_item_delivery_date').val();
+												// Get the value of the data-info attribute of the selected option
+												var poitemid = selectedOption.getAttribute("data_id");
+												var buyer_po_number_id = $('#buyer_po_number_id').val();
+												var part_number = $('#part_number').val();
+												var buyer_item_delivery_date = $('#buyer_item_delivery_date').val();
 
 
-			$(".loader_ajax").show();
-			$("#buyer_po_item_list").html('');
-			$.ajax({
-				url : "<?php echo ADMIN_PATH;?>admin/getBuyerItemsforDisplaypackgininstarction",
-				type: "POST",
-				data : {'poitemid' : poitemid,'buyer_po_number_id':buyer_po_number_id,'part_number':part_number,'buyer_item_delivery_date':buyer_item_delivery_date},
-				success: function(data, textStatus, jqXHR)
-				{
-					$(".loader_ajax").hide();
-					if(data == "failure")
-					{
-						//$('#buyer_po_number').html('<option value="">Select Buyer PO Number</option>');
-					}
-					else
-					{
-						$("#packging_instraction-list").html(data);
+												$(".loader_ajax").show();
+												$("#buyer_po_item_list").html('');
+												$.ajax({
+													url : "<?php echo ADMIN_PATH;?>admin/getBuyerItemsforDisplaypackgininstarction",
+													type: "POST",
+													data : {'poitemid' : poitemid,'buyer_po_number_id':buyer_po_number_id,'part_number':part_number,'buyer_item_delivery_date':buyer_item_delivery_date},
+													success: function(data, textStatus, jqXHR)
+													{
+														$(".loader_ajax").hide();
+														if(data == "failure")
+														{
+															//$('#buyer_po_number').html('<option value="">Select Buyer PO Number</option>');
+														}
+														else
+														{
+															$("#packging_instraction-list").html(data);
 
-					}
-				},
-				error: function (jqXHR, textStatus, errorThrown)
-				{
-					$('#packging_instraction-list').html();
-					$(".loader_ajax").hide();
-				}
-			});
-			return false;
+														}
+													},
+													error: function (jqXHR, textStatus, errorThrown)
+													{
+														$('#packging_instraction-list').html();
+														$(".loader_ajax").hide();
+													}
+												});
+												return false;
 
 
 											}

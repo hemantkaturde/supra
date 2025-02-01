@@ -6333,7 +6333,8 @@ class Admin extends BaseController
                     'buyer_invoice_qty' =>    trim($this->input->post('buyer_invoice_qty')),
                     'box_qty' =>    trim($this->input->post('box_qty')),
                     'remark' =>    trim($this->input->post('remark')),
-                    'buyer_item_delivery_date' =>    trim($this->input->post('buyer_item_delivery_date'))
+                    'buyer_item_delivery_date' =>    trim($this->input->post('buyer_item_delivery_date')),
+                    'item_po_status' =>    trim($this->input->post('item_po_status'))
                 );
 
                 if(trim($this->input->post('packing_details_item_id'))){
