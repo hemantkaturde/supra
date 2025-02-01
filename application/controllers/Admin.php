@@ -6199,7 +6199,7 @@ class Admin extends BaseController
                        <td style="padding: 8px;"><b>Buyer Name : </b>'.$getsearchstockvendordeatils[0]['buyer_name'].'</td>
                     </tr>
                     <tr>
-                      <td style="padding: 8px;"><b>Buyer PO Number  : </b>'.$getsearchstockvendordeatils[0]['buyer_po_number'].' </td>
+                      <td style="padding: 8px;"><b>Buyer PO Number  : </b>'.$getsearchstockvendordeatils[0]['buyer_po_number'].' - '.$getsearchstockvendordeatils[0]['sales_order_number'].' </td>
                     </tr>
                     <tr>
                       <td style="padding: 8px;"><b>Part Number  : </b>'.$getsearchstockvendordeatils[0]['part_number'].' </td>
