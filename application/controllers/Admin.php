@@ -6229,7 +6229,7 @@ class Admin extends BaseController
                  <table style=" width: 100%;border-collapse: collapse;border: #ccc 1px solid;font-family:cambria;font-size:12px">
                         <tr style="border: 1px solid black;">
                             <td style="border: 1px solid black;padding: 10px;">
-                                <p><b>Previous Stock Balance: </b>'.$getsearchstockvendordeatils[0]['previous_stock'].'</p>    
+                                <p><b>Previous Stock Balance: </b>'.$getsearchstockvendordeatils[0]['current_stock'] + $export_qty_in_pcs.'</p>    
                             </td>  
                         </tr>
                     
@@ -6240,7 +6240,7 @@ class Admin extends BaseController
                         </tr>
                         <tr style="border: 1px solid black;">
                             <td style="border: 1px solid black;padding: 10px;">
-                                <p><b>Current Stock : </b>'.$balence_qty_in_pcs.'</p>    
+                                <p><b>Current Stock : </b>'.$getsearchstockvendordeatils[0]['current_stock'].'</p>    
                             </td> 
                         </tr>
                 </table>';
