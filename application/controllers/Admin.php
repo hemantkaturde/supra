@@ -23645,8 +23645,8 @@ public function downloadscrapinvoic($id){
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['scrap_type_name'].'</br></td> 
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['hsn_code'].'</td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['qty'].'</td>
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rate'].'</td> 
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['amount'].'</td>    
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rate'].' /-'.'</td> 
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['amount'].' /-'.'</td>    
                 </tr>';
 
                 $gst_rate = $value['GST_rate'];
@@ -23780,8 +23780,12 @@ public function downloadscrapinvoic($id){
                     </tr>
                 '.$tax_value.'
                     <tr style="border: 1px solid black;">
+                        <td colspan="5"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>Round Off</b></td>    
+                        <td style="border: 1px solid black;padding-left: 10px;">'.round($net_amount) - $net_amount.'</td>
+                    </tr>  
+                    <tr style="border: 1px solid black;">
                         <td colspan="5"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>Total Amount</b></td>    
-                        <td style="border: 1px solid black;padding-left: 10px;">'.round($total_amount).'</td>
+                        <td style="border: 1px solid black;padding-left: 10px;">'.round($net_amount).'</td>
                     </tr>  
                     <tr style="border: 1px solid black;">
                         <td colspan="5"  style="text-align: left;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;">'.$this->amount_in_word(round($total_amount)).'</td>    
