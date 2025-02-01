@@ -6229,13 +6229,13 @@ class Admin extends BaseController
                  <table style=" width: 100%;border-collapse: collapse;border: #ccc 1px solid;font-family:cambria;font-size:12px">
                         <tr style="border: 1px solid black;">
                             <td style="border: 1px solid black;padding: 10px;">
-                                <p><b>Previous Stock Balance: </b>'.round($getsearchstockvendordeatils[0]['previous_stock'],3).'</p>    
+                                <p><b>Previous Stock Balance: </b>'.$getsearchstockvendordeatils[0]['previous_stock'].'</p>    
                             </td>  
                         </tr>
                     
                         <tr style="border: 1px solid black;">
                             <td style="border: 1px solid black;padding: 10px;">
-                                <p><b>Total Export Qty In Pcs : </b>'.round($export_qty_in_pcs,3).'</p>    
+                                <p><b>Total Export Qty In Pcs : </b>'.$export_qty_in_pcs.'</p>    
                             </td> 
                         </tr>
                         <tr style="border: 1px solid black;">
