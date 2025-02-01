@@ -6214,7 +6214,7 @@ class Admin extends BaseController
                       <td style="padding: 8px;"><b>Buyer PO Part Delivery Date : </b>'.date("d-m-Y", strtotime($getsearchstockvendordeatils[0]['buyer_po_part_delivery_date'])).'</td>
                     </tr>
                     <tr>
-                      <td style="padding: 8px;"><b>PO Status : </b>  Form Stock Directly</td>
+                      <td style="padding: 8px;"><b>PO Status : </b>  From Stock Directly</td>
                     </tr>
                 </table>
 
