@@ -5172,13 +5172,15 @@ class Admin extends BaseController
             $this->form_validation->set_rules('buyer_order_qty','Buyer Order Qty','trim|required');
             $this->form_validation->set_rules('vendor_order_qty','Vendor Order Qty','trim|required');
             $this->form_validation->set_rules('vendor_received_qty','Vendor Received Qty','trim|required');
+            $this->form_validation->set_rules('vbom_status_item','Vbom Status Item','trim|required');
             $this->form_validation->set_rules('balanced_aty','Balanced Qty','trim|required');
+
             $this->form_validation->set_rules('item_remark','Item Remark','trim');
 
             if($this->form_validation->run() == FALSE)
             {
                 $save_billofmaterial_response['status'] = 'failure';
-                $save_billofmaterial_response['error'] = array('part_number'=>strip_tags(form_error('part_number')), 'description'=>strip_tags(form_error('description')), 'buyer_order_qty'=>strip_tags(form_error('buyer_order_qty')), 'vendor_order_qty'=>strip_tags(form_error('vendor_order_qty')),'vendor_received_qty'=>strip_tags(form_error('vendor_received_qty')),'balanced_aty'=>strip_tags(form_error('balanced_aty')));
+                $save_billofmaterial_response['error'] = array('part_number'=>strip_tags(form_error('part_number')), 'description'=>strip_tags(form_error('description')), 'buyer_order_qty'=>strip_tags(form_error('buyer_order_qty')), 'vendor_order_qty'=>strip_tags(form_error('vendor_order_qty')),'vendor_received_qty'=>strip_tags(form_error('vendor_received_qty')),'balanced_aty'=>strip_tags(form_error('balanced_aty')),'vbom_status_item'=>strip_tags(form_error('vbom_status_item')));
             }else{
 
                 $editvbmid = trim($this->input->post('editvbmid'));
@@ -5230,7 +5232,7 @@ class Admin extends BaseController
                     
                     if($saveVendorbillofmaterilitemdata){
                         $save_billofmaterial_response['status'] = 'success';
-                        $save_billofmaterial_response['error'] = array('part_number'=>strip_tags(form_error('part_number')), 'description'=>strip_tags(form_error('description')), 'buyer_order_qty'=>strip_tags(form_error('buyer_order_qty')), 'vendor_order_qty'=>strip_tags(form_error('vendor_order_qty')),'vendor_received_aty'=>strip_tags(form_error('vendor_received_aty')),'balanced_aty'=>strip_tags(form_error('balanced_aty')));
+                        $save_billofmaterial_response['error'] = array('part_number'=>strip_tags(form_error('part_number')), 'description'=>strip_tags(form_error('description')), 'buyer_order_qty'=>strip_tags(form_error('buyer_order_qty')), 'vendor_order_qty'=>strip_tags(form_error('vendor_order_qty')),'vendor_received_aty'=>strip_tags(form_error('vendor_received_aty')),'balanced_aty'=>strip_tags(form_error('balanced_aty')),'vbom_status_item'=>strip_tags(form_error('vbom_status_item')));
                     }
                 //  }
                 
