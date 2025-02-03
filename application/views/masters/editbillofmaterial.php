@@ -431,6 +431,17 @@
                                                         </div>
                                                     </div>
 
+
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-4 col-form-label">BOM Status<span class="required">*</span></label>
+                                                        <div class="col-sm-8">
+                                                            <select class="form-control" name="bom_status_item" id="bom_status_item">
+                                                                 <option st-id="" value="">Select BOM Status</option>
+                                                                 <option value="Open" selected>Open</option>
+                                                                 <option value="Close">Close</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
                                           
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Remark</label>

@@ -7145,6 +7145,8 @@
 						$('#scrap').val(fetchResponse.scrap_in_kgs);
 						$('#actual_scrap_recived').val(fetchResponse.actual_scrap_recived);
 						$('#item_remark').val(fetchResponse.remark);
+						$('#bom_status_item').val(fetchResponse.bom_status_item);
+						
 
 				},
 				error: function (jqXHR, textStatus, errorThrown)
