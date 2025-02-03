@@ -9849,6 +9849,7 @@ class Admin_model extends CI_Model
 
         .TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.balenced_qty as balenced_qty,'
         .TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.item_remark as item_remark,'
+        .TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.vbom_status_item as vbom_status_item'
         
         
 
