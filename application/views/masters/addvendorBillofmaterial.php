@@ -526,6 +526,16 @@
                                                         </div>
                                                     </div>
 
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-4 col-form-label">VBOM Status<span class="required">*</span></label>
+                                                        <div class="col-sm-8">
+                                                            <select class="form-control" name="vbom_status_item" id="vbom_status_item">
+                                                                 <option st-id="" value="">Select VBOM Status</option>
+                                                                 <option value="Open" selected>Open</option>
+                                                                 <option value="Close">Close</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
 
                                                     <div class="form-group row">
                                                         <label class="col-sm-4 col-form-label">Remark</label>

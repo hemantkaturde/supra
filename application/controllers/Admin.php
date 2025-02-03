@@ -5198,7 +5198,7 @@ class Admin extends BaseController
                     'vendor_received_qty'=> trim($this->input->post('vendor_received_qty')),
                     'balenced_qty'=> trim($this->input->post('balanced_aty')),
                     'item_remark'=> trim($this->input->post('item_remark')),
-
+                    'vbom_status_item'=> trim($this->input->post('vbom_status_item')),
                     'pre_bom_date'=> trim($this->input->post('pre_date')),
                     'pre_vendor_name' => trim($this->input->post('pre_vendor_name')),
                     'pre_vendor_po_number' => trim($this->input->post('pre_vendor_po_number')),

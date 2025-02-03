@@ -7736,7 +7736,7 @@
 			   var vendor_received_qty =   $('#vendor_received_qty').val();
 			   var balanced_aty =   $('#balanced_aty').val();
 			   var item_remark =   $('#item_remark').val();
-
+			   var vbom_status_item =   $('#vbom_status_item').val();
 
 			   var pre_date =   $('#date').val();
 			   var pre_vendor_name =   $('#vendor_name').val();
@@ -7759,7 +7759,7 @@
 				url : "<?php echo base_url();?>saveVendorbilloamaterialitems",
 				type: "POST",
 				 //data : formData,
-				 data :{part_number:part_number,description:description,buyer_order_qty:buyer_order_qty,vendor_order_qty:vendor_order_qty,vendor_received_qty:vendor_received_qty,balanced_aty:balanced_aty,item_remark:item_remark,pre_date:pre_date,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_buyer_name:pre_buyer_name,pre_buyer_po_number:pre_buyer_po_number,pre_buyer_po_date:pre_buyer_po_date,pre_buyer_delivery_date:pre_buyer_delivery_date,pre_bom_status:pre_bom_status,pre_remark:pre_remark,pre_incoming_details:pre_incoming_details,editvbmid:editvbmid,vendor_bill_of_material_item_id:vendor_bill_of_material_item_id},
+				 data :{part_number:part_number,description:description,buyer_order_qty:buyer_order_qty,vendor_order_qty:vendor_order_qty,vendor_received_qty:vendor_received_qty,balanced_aty:balanced_aty,item_remark:item_remark,pre_date:pre_date,pre_vendor_name:pre_vendor_name,pre_vendor_po_number:pre_vendor_po_number,pre_buyer_name:pre_buyer_name,pre_buyer_po_number:pre_buyer_po_number,pre_buyer_po_date:pre_buyer_po_date,pre_buyer_delivery_date:pre_buyer_delivery_date,pre_bom_status:pre_bom_status,pre_remark:pre_remark,pre_incoming_details:pre_incoming_details,editvbmid:editvbmid,vendor_bill_of_material_item_id:vendor_bill_of_material_item_id,vbom_status_item:vbom_status_item},
 				// method: "POST",
                 // data :{package_id:package_id},
                 cache:false,
@@ -8213,6 +8213,7 @@
 
 						$('#balanced_aty').val(fetchResponse.balenced_qty);
 						$('#item_remark').val(fetchResponse.item_remark);
+						$('#vbom_status_item').val(fetchResponse.vbom_status_item);
 				},
 				error: function (jqXHR, textStatus, errorThrown)
 			    {
