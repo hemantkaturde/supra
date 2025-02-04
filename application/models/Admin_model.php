@@ -15172,7 +15172,7 @@ public function fetchproductionstatusreportcount($params,$vendor_name,$status,$p
         }
 
         if($status!='NA'){
-            $this->db->where(TBL_BILL_OF_MATERIAL_ITEM.'.vbom_status_item', $status); 
+            $this->db->where(TBL_BILL_OF_MATERIAL_ITEM.'.bom_status_item', $status); 
         }
 
         if($part_number!='NA'){
