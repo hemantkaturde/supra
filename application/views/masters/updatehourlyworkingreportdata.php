@@ -34,7 +34,7 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-body">   
-                        <div class="panel-body">                        
+                        <div class="panel-body" style="font-size: initial !important;">                        
                             <div class="table-container">
                                 <form id="dataForm">
 
