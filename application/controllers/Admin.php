@@ -23795,7 +23795,6 @@ public function downloadscrapinvoic($id){
                     </tr>                           
             </table>
             <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:12px">
-                  
                    <tr style="border: 1px solid black;">
                         <td style="border: 1px solid black;padding-left: 10px;" width="75%;" valign="top">
                             <p><b>Remark :</b></p>
