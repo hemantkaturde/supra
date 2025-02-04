@@ -69,7 +69,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="target_qty">Target Qty</label>
-                                            <input type="number" class="form-control" id="target_qty" value="<?=$data['target_qty']?>" name="target_qty">
+                                            <input type="text" class="form-control" id="target_qty" value="<?=$data['target_qty']?>" name="target_qty">
                                             <p class="error target_qty_error"></p>
                                         </div>
                                     </div>
