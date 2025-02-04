@@ -22987,7 +22987,7 @@ public function download_report_hrly_inspection($incoming_item_id,$team_master_m
     $sheet->setCellValue('C7', '10 to 11');
     $sheet->setCellValue('D7', '11 to 12');
     $sheet->setCellValue('E7', '12 to 1');
-    $sheet->setCellValue('F7', '1 to 2:30');
+    $sheet->setCellValue('F7', '1:30 to 2:30');
     $sheet->setCellValue('G7', '2:30 to 3:30');
     $sheet->setCellValue('H7', '3:30 to 4:30');
     $sheet->setCellValue('I7', '4:30 to 5:30');
