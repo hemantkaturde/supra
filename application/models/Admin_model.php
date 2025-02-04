@@ -5452,7 +5452,7 @@ class Admin_model extends CI_Model
 
         /* Vendor Bill of material Data */
         // $this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_BILL_OF_MATERIAL_VENDOR.'.id as billofmaterialid,'.TBL_FINISHED_GOODS.'.part_number as partno,'.TBL_BUYER_MASTER.'.buyer_name as buyer,1 as flag,'.TBL_BILL_OF_MATERIAL_VENDOR.'.bom_status,'.TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.vendor_order_qty as vendor_order_qty_co,'.TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.vendor_received_qty as vendor_received_qty_co,'.TBL_VENDOR_PO_MASTER.'.po_number as v_po_number');
-        $this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_BILL_OF_MATERIAL_VENDOR.'.id as billofmaterialid,'.TBL_FINISHED_GOODS.'.part_number as partno,'.TBL_BUYER_MASTER.'.buyer_name as buyer,1 as flag,'.TBL_BILL_OF_MATERIAL_VENDOR.'.bom_status,'.TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.vendor_order_qty as vendor_order_qty_co,'.TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.vendor_received_qty as vendor_received_qty_co,'.TBL_VENDOR_PO_MASTER.'.po_number as v_po_number');
+        $this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_BILL_OF_MATERIAL_VENDOR.'.id as billofmaterialid,'.TBL_FINISHED_GOODS.'.part_number as partno,'.TBL_BUYER_MASTER.'.buyer_name as buyer,1 as flag,'.TBL_BILL_OF_MATERIAL_VENDOR.'.bom_status,'.TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.vendor_order_qty as vendor_order_qty_co,'.TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.vendor_received_qty as vendor_received_qty_co,'.TBL_VENDOR_PO_MASTER.'.po_number as v_po_number,'.TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.vbom_status_item as item_bom_status');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id= '.TBL_BILL_OF_MATERIAL_VENDOR.'.vendor_name');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id= '.TBL_BILL_OF_MATERIAL_VENDOR.'.vendor_po_number');
         // $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id= '.TBL_VENDOR_PO_MASTER.'.id');
@@ -5497,6 +5497,7 @@ class Admin_model extends CI_Model
                             '.TBL_BILL_OF_MATERIAL.'.bom_status,
                             '.TBL_BILL_OF_MATERIAL_ITEM.'.vendor_order_qty as vendor_order_qty_co,
                             '.TBL_BILL_OF_MATERIAL_ITEM.'.vendor_actual_recived_qty as vendor_received_qty_co,
+                            '.TBL_BILL_OF_MATERIAL_ITEM.'.bom_status_item as item_bom_status,
                             '.TBL_VENDOR_PO_MASTER.'.po_number as v_po_number');
 
                             $this->db->join(TBL_BILL_OF_MATERIAL, TBL_BILL_OF_MATERIAL.'.id= '.TBL_BILL_OF_MATERIAL_ITEM.'.bom_id');
@@ -5560,7 +5561,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['vendor_received_qty'] = $value['vendor_received_qty_co'];
                 $data[$counter]['buyer_name'] = $value['buyer'];
                
-                $data[$counter]['status'] = $value['bom_status'];
+                $data[$counter]['status'] = $value['item_bom_status'];
 
                   if($value['flag']==1){
                     $flag = 'Vendor Bill of Material';
@@ -15246,7 +15247,7 @@ public function fetchproductionstatusreportdata($params,$vendor_name,$status,$pa
     // $query1 = $query->result_array();
 
 
-    $this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_BILL_OF_MATERIAL_VENDOR.'.id as billofmaterialid,'.TBL_FINISHED_GOODS.'.part_number as partno,'.TBL_BUYER_MASTER.'.buyer_name as buyer, 2 as flag,'.TBL_BILL_OF_MATERIAL_VENDOR.'.bom_status,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_order_qty_co,'.TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.vendor_received_qty as vendor_received_qty_co,'.TBL_VENDOR_PO_MASTER.'.po_number as v_po_number,'.TBL_FINISHED_GOODS.'.name as part_description,'.TBL_VENDOR_PO_MASTER.'.delivery_date,'.TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.id as vendor_bill_item_id,"Vendor Bill Of Material" as flag,"vbom" as notes_status,'.TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.notes');
+    $this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_BILL_OF_MATERIAL_VENDOR.'.id as billofmaterialid,'.TBL_FINISHED_GOODS.'.part_number as partno,'.TBL_BUYER_MASTER.'.buyer_name as buyer, 2 as flag,'.TBL_BILL_OF_MATERIAL_VENDOR.'.bom_status,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_order_qty_co,'.TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.vendor_received_qty as vendor_received_qty_co,'.TBL_VENDOR_PO_MASTER.'.po_number as v_po_number,'.TBL_FINISHED_GOODS.'.name as part_description,'.TBL_VENDOR_PO_MASTER.'.delivery_date,'.TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.id as vendor_bill_item_id,"Vendor Bill Of Material" as flag,"vbom" as notes_status,'.TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.notes,'.TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.vbom_status_item as item_bom_status');
     $this->db->join(TBL_BILL_OF_MATERIAL_VENDOR, TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.vendor_bill_of_material_id= '.TBL_BILL_OF_MATERIAL_VENDOR.'.id');
     $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id= '.TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.part_number_id');
     $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id= '.TBL_BILL_OF_MATERIAL_VENDOR.'.vendor_name');
@@ -15270,7 +15271,7 @@ public function fetchproductionstatusreportdata($params,$vendor_name,$status,$pa
     }
 
     if($status!='NA'){
-        $this->db->where(TBL_BILL_OF_MATERIAL_VENDOR.'.bom_status', $status); 
+        $this->db->where(TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.vbom_status_item', $status); 
     }
 
     
@@ -15292,7 +15293,7 @@ public function fetchproductionstatusreportdata($params,$vendor_name,$status,$pa
 
 
 
-    $this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_BILL_OF_MATERIAL.'.id as billofmaterialid,'.TBL_FINISHED_GOODS.'.part_number as partno,'.TBL_BUYER_MASTER.'.buyer_name as buyer, 2 as flag,'.TBL_BILL_OF_MATERIAL.'.bom_status,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_order_qty_co,'.TBL_BILL_OF_MATERIAL_ITEM.'.vendor_actual_recived_qty as vendor_received_qty_co,'.TBL_VENDOR_PO_MASTER.'.po_number as v_po_number,'.TBL_FINISHED_GOODS.'.name as part_description,'.TBL_VENDOR_PO_MASTER.'.delivery_date,'.TBL_BILL_OF_MATERIAL_ITEM.'.id as vendor_bill_item_id,"Bill Of Material" as flag,"bom" as notes_status,'.TBL_BILL_OF_MATERIAL_ITEM.'.notes');
+    $this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_BILL_OF_MATERIAL.'.id as billofmaterialid,'.TBL_FINISHED_GOODS.'.part_number as partno,'.TBL_BUYER_MASTER.'.buyer_name as buyer, 2 as flag,'.TBL_BILL_OF_MATERIAL.'.bom_status,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_order_qty_co,'.TBL_BILL_OF_MATERIAL_ITEM.'.vendor_actual_recived_qty as vendor_received_qty_co,'.TBL_VENDOR_PO_MASTER.'.po_number as v_po_number,'.TBL_FINISHED_GOODS.'.name as part_description,'.TBL_VENDOR_PO_MASTER.'.delivery_date,'.TBL_BILL_OF_MATERIAL_ITEM.'.id as vendor_bill_item_id,"Bill Of Material" as flag,"bom" as notes_status,'.TBL_BILL_OF_MATERIAL_ITEM.'.notes,'.TBL_BILL_OF_MATERIAL_ITEM.'.bom_status_item as item_bom_status');
     $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id= '.TBL_BILL_OF_MATERIAL.'.vendor_name');
     $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id= '.TBL_BILL_OF_MATERIAL.'.vendor_po_number');
     $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id= '.TBL_VENDOR_PO_MASTER.'.id');
@@ -15315,7 +15316,7 @@ public function fetchproductionstatusreportdata($params,$vendor_name,$status,$pa
     }
 
     if($status!='NA'){
-        $this->db->where(TBL_BILL_OF_MATERIAL.'.bom_status', $status); 
+        $this->db->where(TBL_BILL_OF_MATERIAL_ITEM.'.bom_status_item', $status);  
     }
 
     
@@ -15355,7 +15356,7 @@ public function fetchproductionstatusreportdata($params,$vendor_name,$status,$pa
             $data[$counter]['vendor_received_qtys'] = $value['vendor_received_qty_co'];
             $data[$counter]['delivery_date'] = $value['delivery_date'];
             $data[$counter]['buyer_name'] = $value['buyer'];
-            $data[$counter]['status'] = $value['bom_status'];
+            $data[$counter]['status'] = $value['item_bom_status'];
             $data[$counter]['notes'] = $value['notes'];
 
             if($value['notes']){
