@@ -85,7 +85,7 @@
                                             <td>10 to 11</td>
                                             <td>11 to 12</td>
                                             <td>12 to 1</td>
-                                            <td>1 to 2:30</td>
+                                            <td>1:30 to 2:30</td>
                                             <td>2:30 to 3:30</td>
                                             <td>3:30 to 4:30</td>
                                             <td>4:30 to 5:30</td>
