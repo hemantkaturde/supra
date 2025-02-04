@@ -5391,7 +5391,7 @@ class Admin_model extends CI_Model
         }
 
         if($status!='NA'){
-            $this->db->where(TBL_BILL_OF_MATERIAL_VENDOR.'.bom_status', $status); 
+            $this->db->where(TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.vbom_status_item', $status); 
         }
 
         $this->db->where(TBL_BILL_OF_MATERIAL_VENDOR.'.status', 1);
@@ -5429,9 +5429,9 @@ class Admin_model extends CI_Model
         }
 
         if($status!='NA'){
-            $this->db->where(TBL_BILL_OF_MATERIAL.'.bom_status', $status); 
+            $this->db->where(TBL_BILL_OF_MATERIAL_ITEM.'.bom_status_item', $status); 
         }
-
+      
         $this->db->where(TBL_BILL_OF_MATERIAL.'.status', 1);
         $this->db->limit($params['length'],$params['start']);
         $this->db->order_by(TBL_BILL_OF_MATERIAL.'.id','DESC');
