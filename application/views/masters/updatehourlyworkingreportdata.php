@@ -116,19 +116,19 @@
                                             <td><?=$value['team_member_name']?></td>
                                             <td> <input type="hidden" name="team_id[]" value="<?=$value['id']?>">  
                                                 <input type="hidden" name="created_date" value="<?=$report_data[0]->date?>">
-                                                <textarea id="textarea_9_10" name="textarea_9_10[]" data-index='<?=$key?>' class="form-control textarea_9_10"  rows="3" cols="20"><?=$report_data[0]->textarea_9_10; ?></textarea>
+                                                <textarea id="textarea_9_10" name="textarea_9_10[]" data-index='<?=$key?>' class="form-control textarea_9_10"  rows="3" cols="1000"><?=$report_data[0]->textarea_9_10; ?></textarea>
                                             </td>
                                             
-                                            <td><textarea id="textarea_10_11" name="textarea_10_11[]" class="form-control textarea_10_11"  data-index='<?=$key?>' rows="3" cols="20"><?=$report_data[0]->textarea_10_11; ?></textarea></td>
-                                            <td><textarea id="textarea_11_12" name="textarea_11_12[]" class="form-control textarea_11_12" data-index='<?=$key?>' rows="3" cols="20"><?=$report_data[0]->textarea_11_12; ?></textarea></td>
-                                            <td><textarea id="textarea_12_01" name="textarea_12_01[]" class="form-control textarea_12_01" data-index='<?=$key?>' rows="3" cols="20"><?=$report_data[0]->textarea_12_01; ?></textarea></td>
-                                            <td><textarea id="textarea_01_230" name="textarea_01_230[]" class="form-control textarea_01_230" data-index='<?=$key?>' rows="3" cols="20"><?=$report_data[0]->textarea_01_230; ?></textarea></td>
-                                            <td><textarea id="textarea_230_330" name="textarea_230_330[]" class="form-control textarea_230_330" data-index='<?=$key?>' rows="3" cols="20"><?=$report_data[0]->textarea_230_330; ?></textarea></td>
-                                            <td><textarea id="textarea_330_430" name="textarea_330_430[]" class="form-control textarea_330_430" data-index='<?=$key?>' rows="3" cols="20"><?=$report_data[0]->textarea_330_430; ?></textarea></td>
-                                            <td><textarea id="textarea_430_530" name="textarea_430_530[]" class="form-control textarea_430_530" data-index='<?=$key?>' rows="3" cols="20"><?=$report_data[0]->textarea_430_530; ?></textarea></td>
-                                            <td><textarea id="textarea_530_630" name="textarea_530_630[]" class="form-control textarea_530_630" data-index='<?=$key?>' rows="3" cols="20"><?=$report_data[0]->textarea_530_630; ?></textarea></td>
-                                            <td><textarea id="textarea_630_700" name="textarea_630_700[]" class="form-control textarea_630_700" data-index='<?=$key?>' rows="3" cols="20"><?=$report_data[0]->textarea_630_700; ?></textarea></td>
-                                            <td colspan="2"><textarea id="textarea_total_hrs" name="textarea_total_hrs[] textarea_630_700" data-index='<?=$key?>' class="form-control"  rows="3" cols="20"><?=$report_data[0]->textarea_total_hrs; ?></textarea></td>
+                                            <td><textarea id="textarea_10_11" name="textarea_10_11[]" class="form-control textarea_10_11"  data-index='<?=$key?>' rows="3" cols="1000"><?=$report_data[0]->textarea_10_11; ?></textarea></td>
+                                            <td><textarea id="textarea_11_12" name="textarea_11_12[]" class="form-control textarea_11_12" data-index='<?=$key?>' rows="3" cols="1000"><?=$report_data[0]->textarea_11_12; ?></textarea></td>
+                                            <td><textarea id="textarea_12_01" name="textarea_12_01[]" class="form-control textarea_12_01" data-index='<?=$key?>' rows="3" cols="1000"><?=$report_data[0]->textarea_12_01; ?></textarea></td>
+                                            <td><textarea id="textarea_01_230" name="textarea_01_230[]" class="form-control textarea_01_230" data-index='<?=$key?>' rows="3" cols="1000"><?=$report_data[0]->textarea_01_230; ?></textarea></td>
+                                            <td><textarea id="textarea_230_330" name="textarea_230_330[]" class="form-control textarea_230_330" data-index='<?=$key?>' rows="3" cols="1000"><?=$report_data[0]->textarea_230_330; ?></textarea></td>
+                                            <td><textarea id="textarea_330_430" name="textarea_330_430[]" class="form-control textarea_330_430" data-index='<?=$key?>' rows="3" cols="1000"><?=$report_data[0]->textarea_330_430; ?></textarea></td>
+                                            <td><textarea id="textarea_430_530" name="textarea_430_530[]" class="form-control textarea_430_530" data-index='<?=$key?>' rows="3" cols="1000"><?=$report_data[0]->textarea_430_530; ?></textarea></td>
+                                            <td><textarea id="textarea_530_630" name="textarea_530_630[]" class="form-control textarea_530_630" data-index='<?=$key?>' rows="3" cols="1000"><?=$report_data[0]->textarea_530_630; ?></textarea></td>
+                                            <td><textarea id="textarea_630_700" name="textarea_630_700[]" class="form-control textarea_630_700" data-index='<?=$key?>' rows="3" cols="1000"><?=$report_data[0]->textarea_630_700; ?></textarea></td>
+                                            <td colspan="2"><textarea id="textarea_total_hrs" name="textarea_total_hrs[] textarea_630_700" data-index='<?=$key?>' class="form-control"  rows="3" cols="1000"><?=$report_data[0]->textarea_total_hrs; ?></textarea></td>
                                             <td colspan="2"></td>
                                         </tr>
                                         <?php  $comman_remark = $report_data[0]->remark_of_hrly_report; } ?>
