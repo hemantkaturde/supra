@@ -15124,7 +15124,7 @@ public function fetchproductionstatusreportcount($params,$vendor_name,$status,$p
         }
     
         if($status!='NA'){
-            $this->db->where(TBL_BILL_OF_MATERIAL_VENDOR.'.bom_status', $status); 
+            $this->db->where(TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.vbom_status_item', $status); 
         }
     
         
@@ -15172,10 +15172,9 @@ public function fetchproductionstatusreportcount($params,$vendor_name,$status,$p
         }
 
         if($status!='NA'){
-            $this->db->where(TBL_BILL_OF_MATERIAL.'.bom_status', $status); 
+            $this->db->where(TBL_BILL_OF_MATERIAL_ITEM.'.vbom_status_item', $status); 
         }
 
-        
         if($part_number!='NA'){
             $this->db->where(TBL_BILL_OF_MATERIAL_ITEM.'.part_number', $part_number); 
         }
