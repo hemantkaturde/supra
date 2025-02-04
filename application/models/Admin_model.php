@@ -19547,6 +19547,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".challan_no LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".challan_date LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".invoice_qty LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".received_date LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".units LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".boxex_goni_bundle LIKE '%".$params['search']['value']."%')");
@@ -19554,8 +19555,9 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
         $this->db->join(TBL_INCOMING_DETAILS, TBL_INCOMING_DETAILS.'.id  = '.TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id  = '.TBL_INCOMING_DETAILS.'.vendor_po_number');
-        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id  = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_VENDOR_PO_MASTER.'.vendor_name');
 
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id  = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
         $this->db->join(TBL_TEAM_MASTER, TBL_TEAM_MASTER.'.id  = '.TBL_INCOMING_DETAILS_ITEM.'.assign_team','left');
         $this->db->join(TBL_USERS, TBL_USERS.'.team_id  = '.TBL_TEAM_MASTER.'.id','left');
         //$this->db->where(TBL_USERS.".userId", $userId);
@@ -19584,6 +19586,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".challan_no LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".challan_date LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".invoice_qty LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".received_date LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".units LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".boxex_goni_bundle LIKE '%".$params['search']['value']."%')");
@@ -19592,6 +19595,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         }
         $this->db->join(TBL_INCOMING_DETAILS, TBL_INCOMING_DETAILS.'.id  = '.TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id  = '.TBL_INCOMING_DETAILS.'.vendor_po_number');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_VENDOR_PO_MASTER.'.vendor_name');
 
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id  = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
         $this->db->join(TBL_TEAM_MASTER, TBL_TEAM_MASTER.'.id  = '.TBL_INCOMING_DETAILS_ITEM.'.assign_team','left');
@@ -19614,7 +19618,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['name'] = $value['team_name'];
                 $data[$counter]['lot_no'] = $value['lot_no'];
                 $data[$counter]['invoice_qty_in_pcs'] = $value['invoice_qty'];
-                $data[$counter]['p_o_qty'] = $value['p_o_qty'];
+                // $data[$counter]['p_o_qty'] = $value['p_o_qty'];
+                $data[$counter]['vendor_name'] = $value['vendor_name'];
                 // $data[$counter]['invoice_qty'] = $value['invoice_qty'];
                 // $data[$counter]['balance_qty'] = $value['balance_qty'];
                 // $data[$counter]['invoice_qty_in_kgs'] = $value['invoice_qty_in_kgs'];
