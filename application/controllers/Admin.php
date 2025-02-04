@@ -7336,7 +7336,7 @@ class Admin extends BaseController
                 $objPHPExcel->getActiveSheet()->SetCellValue('T' . $rowCount, $element['vendor_delivery_date']);
                 $objPHPExcel->getActiveSheet()->SetCellValue('U' . $rowCount, $element['item_remark']);
                 $objPHPExcel->getActiveSheet()->SetCellValue('V' . $rowCount, $element['form_name']);
-                $objPHPExcel->getActiveSheet()->SetCellValue('W' . $rowCount, $element['bom_status']);
+                $objPHPExcel->getActiveSheet()->SetCellValue('W' . $rowCount, $element['item_status_bom']);
 
                 
                 $rowCount++;

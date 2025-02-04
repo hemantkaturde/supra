@@ -5192,6 +5192,7 @@ class Admin_model extends CI_Model
          TBL_FINISHED_GOODS.'.net_weight as net_Weight_per_pcs_in_kgs',
          TBL_VENDOR_PO_MASTER.'.delivery_date as vendor_delivery_date',
          TBL_BILL_OF_MATERIAL_VENDOR.'.bom_status as bom_status',
+         TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.vbom_status_item as item_status_bom',
          TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.item_remark as item_remark'));
 
         if($vendor_name!='NA'){
@@ -5199,7 +5200,7 @@ class Admin_model extends CI_Model
         }
                         
         if($status!='NA'){
-            $this->db->where(TBL_BILL_OF_MATERIAL_VENDOR.'.bom_status', $status); 
+            $this->db->where(TBL_BILL_OF_MATERIAL_VENDOR_ITEM.'.vbom_status_item', $status); 
         }
 
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id= '.TBL_BILL_OF_MATERIAL_VENDOR.'.vendor_name');
@@ -5239,16 +5240,17 @@ class Admin_model extends CI_Model
         TBL_BILL_OF_MATERIAL_ITEM.'.remark as item_remark',
         TBL_BILL_OF_MATERIAL_ITEM.'.expected_qty as expected_qty',
         TBL_BILL_OF_MATERIAL_ITEM.'.rm_actual_aty as raw_material_actual_recd_qty',
+        TBL_BILL_OF_MATERIAL_ITEM.'.bom_status_item as item_status_bom',
         TBL_SUPPLIER_PO_MASTER_ITEM.'.order_oty as raw_material_order_qty',
     ));
 
-      if($vendor_name!='NA'){
-         $this->db->where(TBL_BILL_OF_MATERIAL.'.vendor_name', $vendor_name); 
-     }
-                     
-     if($status!='NA'){
-         $this->db->where(TBL_BILL_OF_MATERIAL.'.bom_status', $status); 
-     }
+        if($vendor_name!='NA'){
+            $this->db->where(TBL_BILL_OF_MATERIAL.'.vendor_name', $vendor_name); 
+        }
+                       
+        if($status!='NA'){
+            $this->db->where(TBL_BILL_OF_MATERIAL_ITEM.'.bom_status_item', $status); 
+        }
 
 
      $this->db->join(TBL_BILL_OF_MATERIAL_ITEM, TBL_BILL_OF_MATERIAL_ITEM.'.bom_id= '.TBL_BILL_OF_MATERIAL.'.id');
