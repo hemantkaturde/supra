@@ -72,7 +72,7 @@ Edit</small>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="password">Password</label>
+                                            <label for="password">Password <input id="show_password" type="checkbox" />Show password</label>
                                             <input type="password" class="form-control" id="password" placeholder="Password" name="password" maxlength="20">
                                         </div>
                                     </div>
@@ -187,4 +187,27 @@ i verify
         </section>
     </div>
 
-    <script src="<?php echo base_url(); ?>assets/js/editUser.js" type="text/javascript"></script>
+    <!-- <script src="<?php echo base_url(); ?>assets/js/editUser.js" type="text/javascript"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+
+$(document).ready(function(){
+
+$('#show_password').change(function(){
+
+  if($(this).is(':checked'))
+    {
+      
+        $('#password').attr('type','text');
+      
+      }
+  else
+    {
+        $('#password').attr('type','password');
+      }
+  
+
+});
+
+});
+</script>
