@@ -564,7 +564,7 @@
                                                                 <label class="col-sm-3 col-form-label">Working Hrs Status</label>
                                                                 <div class="col-sm-9">
                                                                     <select class="form-control" name="working_hrs_status"
-                                                                        id="working_hrs_status" <?=$readonly;?> >
+                                                                        id="working_hrs_status">
                                                                         <option st-id="" value="Open" selected>Open</option>
                                                                         <option st-id="" value="Close">Close</option>
                                                                     </select>
@@ -576,7 +576,7 @@
                                                                 <label class="col-sm-3 col-form-label">Working Hrs Status</label>
                                                                 <div class="col-sm-9">
                                                                     <select class="form-control" name="working_hrs_status"
-                                                                        id="working_hrs_status" <?=$readonly;?> >
+                                                                        id="working_hrs_status" readonly >
                                                                         <option st-id="" value="Open" selected>Open</option>
                                                                     </select>
                                                                     <p class="error working_hrs_status_error"></p>
