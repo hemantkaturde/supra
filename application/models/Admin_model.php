@@ -20055,7 +20055,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     }
     
-    public function getscrapinvoicecount(){
+    public function getscrapinvoicecount($params){
 
          $this->db->select('*'); 
          if($params['search']['value'] != "") 
@@ -20064,8 +20064,6 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             $this->db->or_where(TBL_SCRAP_INVOICE.".buyer_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_SCRAP_INVOICE.".remark LIKE '%".$params['search']['value']."%')");
          }
- 
-         $this->db->limit($params['length'],$params['start']);
          $this->db->order_by(TBL_SCRAP_INVOICE.'.id','DESC');
          $query = $this->db->get(TBL_SCRAP_INVOICE);
          $rowcount = $query->num_rows();
@@ -20074,7 +20072,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
-    public function getscrapinvoicedata(){
+    public function getscrapinvoicedata($params){
 
         $this->db->select('*,'.TBL_BUYER_MASTER.'.buyer_name as buyername');
         if($params['search']['value'] != "") 
@@ -20312,34 +20310,30 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
 
     public function getfetchUserCount($params){
-        $this->db->select('BaseTbl.userId, BaseTbl.email, BaseTbl.name, BaseTbl.mobile, Role.role');
-        $this->db->from('tbl_users as BaseTbl');
-        $this->db->join('tbl_roles as Role', 'Role.roleId = BaseTbl.roleId');
-        if(!empty($params)) {
-            $likeCriteria = "(BaseTbl.email  LIKE '%".$params['search']['value']."%'
-                            OR  BaseTbl.name  LIKE '%".$params['search']['value']."%'
-                            OR  Role.role  LIKE '%".$params['search']['value']."%'
-                            OR  BaseTbl.mobile  LIKE '%".$params['search']['value']."%')";
-            $this->db->where($likeCriteria);
+        $this->db->select('*'); 
+        $this->db->join(TBL_ROLES, TBL_ROLES.'.roleId  = '.TBL_USERS.'.roleId');
+        if($params['search']['value'] != "") 
+        {
+           $this->db->where("(".TBL_USERS.".email LIKE '%".$params['search']['value']."%'");
+           $this->db->or_where(TBL_USERS.".name LIKE '%".$params['search']['value']."%'");
+           $this->db->or_where(TBL_ROLES.".role LIKE '%".$params['search']['value']."%'");
+           $this->db->or_where(TBL_USERS.".mobile LIKE '%".$params['search']['value']."%')");
         }
-        $this->db->where('BaseTbl.isDeleted', 0);
-        $query = $this->db->get('tbl_users');
-        return $query->num_rows();
-
+        $query = $this->db->get(TBL_USERS);
+        $rowcount = $query->num_rows();
+        return $rowcount;
     }
 
     public function getfetchUserdata($params){
-        $this->db->select('BaseTbl.userId, BaseTbl.email, BaseTbl.name, BaseTbl.mobile, Role.role');
-        $this->db->from('tbl_users as BaseTbl');
-        $this->db->join('tbl_roles as Role', 'Role.roleId = BaseTbl.roleId');
-        if(!empty($params)) {
-            $likeCriteria = "(BaseTbl.email  LIKE '%".$params['search']['value']."%'
-                            OR  BaseTbl.name  LIKE '%".$params['search']['value']."%'
-                            OR  Role.role  LIKE '%".$params['search']['value']."%'
-                            OR  BaseTbl.mobile  LIKE '%".$params['search']['value']."%')";
-            $this->db->where($likeCriteria);
-        }
-        $this->db->where('BaseTbl.isDeleted', 0);
+        $this->db->select(TBL_USERS.'.userId,'.TBL_USERS.'.email,'.TBL_USERS.'.name,'.TBL_USERS.'.mobile,'.TBL_ROLES.'.role');
+        $this->db->join(TBL_ROLES, TBL_ROLES.'.roleId  = '.TBL_USERS.'.roleId');
+         if($params['search']['value'] != "") 
+            {
+                $this->db->where("(".TBL_USERS.".email LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where(TBL_USERS.".name LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where(TBL_ROLES.".role LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where(TBL_USERS.".mobile LIKE '%".$params['search']['value']."%')");
+            }
         $this->db->limit($params['length'],$params['start']);
         $query = $this->db->get('tbl_users');
         $fetch_result = $query->result_array();
