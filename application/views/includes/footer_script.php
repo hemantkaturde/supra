@@ -278,6 +278,40 @@
 </script>
 <?php } ?>
 
+<?php if($pageTitle=='Admin : User Listing'){ ?>
+	<script type="text/javascript">
+            $(document).ready(function() {
+            var dt = $('#userlisting').DataTable({
+	            "columnDefs": [ 
+	                 { className: "details-control", "targets": [ 0 ] },
+	                 { "width": "10%", "targets": 0 },
+	                 { "width": "20%", "targets": 1 },
+					 { "width": "10%", "targets": 2 },
+	                 { "width": "10%", "targets": 3 },
+	                 { "width": "10%", "targets": 4 },
+					 { "width": "8%", "targets": 5 },
+	            ],
+	            responsive: true,
+	            "oLanguage": {
+	                "sEmptyTable": "<i>No User Found.</i>",
+	            }, 
+	            "bSort" : false,
+	            "bFilter":true,
+	            "bLengthChange": true,
+	            "iDisplayLength": 10,   
+	            "bProcessing": true,
+	            "serverSide": true,
+	            "ajax":{
+                    url :"<?php echo base_url();?>fetchUser",
+                    type: "post",
+	            },
+	        });
+	    });
+	</script>
+<?php } ?>
+
+
+
 <?php if($pageTitle=='Row Material Master' || $pageTitle=='Add Material Master' || $pageTitle=='Edit Raw Material Master'){ ?>
 	<script type="text/javascript">
 		$(document).ready(function() {

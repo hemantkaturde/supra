@@ -157,6 +157,7 @@ class BaseController extends CI_Controller {
 		$this->pagination->initialize ( $config );
 		$page = $config ['per_page'];
 		$segment = $this->uri->segment ( $segment );
+
 	
 		return array (
 				"page" => $page,

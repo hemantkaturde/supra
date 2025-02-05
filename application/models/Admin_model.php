@@ -20309,6 +20309,68 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
+
+
+    public function getfetchUserCount($params){
+        $this->db->select('BaseTbl.userId, BaseTbl.email, BaseTbl.name, BaseTbl.mobile, Role.role');
+        $this->db->from('tbl_users as BaseTbl');
+        $this->db->join('tbl_roles as Role', 'Role.roleId = BaseTbl.roleId','left');
+        if(!empty($params)) {
+            $likeCriteria = "(BaseTbl.email  LIKE '%".$params['search']['value']."%'
+                            OR  BaseTbl.name  LIKE '%".$params['search']['value']."%'
+                            OR  Role.role  LIKE '%".$params['search']['value']."%'
+                            OR  BaseTbl.mobile  LIKE '%".$params['search']['value']."%')";
+            $this->db->where($likeCriteria);
+        }
+        $this->db->where('BaseTbl.isDeleted', 0);
+        $query = $this->db->get('tbl_users');
+        return $query->num_rows();
+
+    }
+
+    public function getfetchUserdata($params){
+        $this->db->select('BaseTbl.userId, BaseTbl.email, BaseTbl.name, BaseTbl.mobile, Role.role');
+        $this->db->from('tbl_users as BaseTbl');
+        $this->db->join('tbl_roles as Role', 'Role.roleId = BaseTbl.roleId','left');
+        if(!empty($params)) {
+            $likeCriteria = "(BaseTbl.email  LIKE '%".$params['search']['value']."%'
+                            OR  BaseTbl.name  LIKE '%".$params['search']['value']."%'
+                            OR  Role.role  LIKE '%".$params['search']['value']."%'
+                            OR  BaseTbl.mobile  LIKE '%".$params['search']['value']."%')";
+            $this->db->where($likeCriteria);
+        }
+        $this->db->where('BaseTbl.isDeleted', 0);
+        $this->db->limit($params['length'],$params['start']);
+        $query = $this->db->get('tbl_users');
+        $fetch_result = $query->result_array();
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['userId'] = $value['userId'];
+             
+                $data[$counter]['name'] =  $value['name'];
+                $data[$counter]['email'] =  $value['email'];
+                $data[$counter]['mobile'] =  $value['mobile'];
+                $data[$counter]['role'] =  $value['role'];
+                //$data[$counter]['remark'] =  $value['remark'];
+                $userid = $value['userId'];
+                $data[$counter]['action'] = '';
+                $data[$counter]['action'] .= "<a class='btn btn-sm btn-primary href=".base_url().'log-history/'.$userid." title='Log History'><i class='fa fa-history'></i></a>   &nbsp";
+                $data[$counter]['action'] .= "<a class='btn btn-sm btn-info' href=".base_url().'editOld/'.$userid." title='Edit'><i class='fa fa-pencil'></i></a>";
+                $data[$counter]['action'] .= "<a class='btn btn-sm btn-danger deleteUser' href='#' data-userid=".$record->userId." title='Sil'><i class='fa fa-trash'></i></a>"; 
+                $counter++; 
+            }
+        }
+
+        return $data;
+
+
+    }
+
+
 }
 
 ?>
