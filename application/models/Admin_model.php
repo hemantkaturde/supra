@@ -20352,8 +20352,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 //$data[$counter]['remark'] =  $value['remark'];
                 $userid = $value['userId'];
                 $data[$counter]['action'] = '';
-                $data[$counter]['action'] .= "<a class='btn btn-sm btn-primary href=".base_url().'log-history/'.$userid." title='Log History'><i class='fa fa-history'></i></a>   &nbsp";
-                $data[$counter]['action'] .= "<a class='btn btn-sm btn-info' href=".base_url().'editOld/'.$userid." title='Edit'><i class='fa fa-pencil'></i></a>";
+                //$data[$counter]['action'] .= "<a class='btn btn-sm btn-primary href=".base_url().'log-history/'.$userid." title='Log History'><i class='fa fa-history'></i></a>   &nbsp";
+                $data[$counter]['action'] .= "<a class='btn btn-sm btn-info' href=".base_url().'editOld/'.$userid." title='Edit'><i class='fa fa-pencil'></i></a>  &nbsp";
                 $data[$counter]['action'] .= "<a class='btn btn-sm btn-danger deleteUser' href='#' data-userid=". $userid." title='Sil'><i class='fa fa-trash'></i></a>"; 
                 $counter++; 
             }

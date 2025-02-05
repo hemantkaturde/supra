@@ -103,8 +103,10 @@ class User extends BaseController
         $this->form_validation->set_rules('fname','Full Name','trim|required|max_length[128]');
         $this->form_validation->set_rules('email','Email','trim|required|valid_email|max_length[128]');
         $this->form_validation->set_rules('oldpassword','Old password','max_length[20]');
-        $this->form_validation->set_rules('cpassword','Password','matches[cpassword2]|max_length[20]');
-        $this->form_validation->set_rules('cpassword2','Confirm Password','matches[cpassword]|max_length[20]');
+        // $this->form_validation->set_rules('cpassword','Password','matches[cpassword2]|max_length[20]');
+        // $this->form_validation->set_rules('cpassword2','Confirm Password','matches[cpassword]|max_length[20]');
+        $this->form_validation->set_rules('cpassword','Password','max_length[20]');
+        $this->form_validation->set_rules('cpassword2','Confirm Password','max_length[20]');
         $this->form_validation->set_rules('mobile','Mobile Number','required|min_length[10]');
         
         if($this->form_validation->run() == FALSE)
@@ -128,19 +130,19 @@ class User extends BaseController
             }
             else
             {
-                $resultPas = $this->user_model->matchOldPassword($this->vendorId, $oldPassword);
+                // $resultPas = $this->user_model->matchOldPassword($this->vendorId, $oldPassword);
             
-                if(empty($resultPas))
-                {
-                $this->session->set_flashdata('nomatch', 'Your Old Password doğru değil');
-                redirect('userEdit');
-                }
-                else
-                {
+                // if(empty($resultPas))
+                // {
+                // $this->session->set_flashdata('nomatch', 'Your Old Password doğru değil');
+                // redirect('userEdit');
+                // }
+                // else
+                // {
                 $userInfo = array('email'=>$email, 'password'=>getHashedPassword($password),
                     'name'=>ucwords($name), 'mobile'=>$mobile,'status'=>1, 'updatedBy'=>$this->vendorId, 
                     'updatedDtm'=>date('Y-m-d H:i:s'));
-                }
+                // }
             }
             
             $result = $this->user_model->editUser($userInfo, $userId);

@@ -15,6 +15,7 @@ if(!empty($userInfo))
         $email = $uf->email;
         $mobile = $uf->mobile;
         $roleId = $uf->roleId;
+        $password = $uf->password;
         $team_id = $uf->team_id;
     }
 }
