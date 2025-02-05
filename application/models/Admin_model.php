@@ -20314,7 +20314,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     public function getfetchUserCount($params){
         $this->db->select('BaseTbl.userId, BaseTbl.email, BaseTbl.name, BaseTbl.mobile, Role.role');
         $this->db->from('tbl_users as BaseTbl');
-        $this->db->join('tbl_roles as Role', 'Role.roleId = BaseTbl.roleId','left');
+        $this->db->join('tbl_roles as Role', 'Role.roleId = BaseTbl.roleId');
         if(!empty($params)) {
             $likeCriteria = "(BaseTbl.email  LIKE '%".$params['search']['value']."%'
                             OR  BaseTbl.name  LIKE '%".$params['search']['value']."%'
@@ -20331,7 +20331,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     public function getfetchUserdata($params){
         $this->db->select('BaseTbl.userId, BaseTbl.email, BaseTbl.name, BaseTbl.mobile, Role.role');
         $this->db->from('tbl_users as BaseTbl');
-        $this->db->join('tbl_roles as Role', 'Role.roleId = BaseTbl.roleId','left');
+        $this->db->join('tbl_roles as Role', 'Role.roleId = BaseTbl.roleId');
         if(!empty($params)) {
             $likeCriteria = "(BaseTbl.email  LIKE '%".$params['search']['value']."%'
                             OR  BaseTbl.name  LIKE '%".$params['search']['value']."%'
@@ -20360,7 +20360,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['action'] = '';
                 $data[$counter]['action'] .= "<a class='btn btn-sm btn-primary href=".base_url().'log-history/'.$userid." title='Log History'><i class='fa fa-history'></i></a>   &nbsp";
                 $data[$counter]['action'] .= "<a class='btn btn-sm btn-info' href=".base_url().'editOld/'.$userid." title='Edit'><i class='fa fa-pencil'></i></a>";
-                $data[$counter]['action'] .= "<a class='btn btn-sm btn-danger deleteUser' href='#' data-userid=".$record->userId." title='Sil'><i class='fa fa-trash'></i></a>"; 
+                $data[$counter]['action'] .= "<a class='btn btn-sm btn-danger deleteUser' href='#' data-userid=". $userid." title='Sil'><i class='fa fa-trash'></i></a>"; 
                 $counter++; 
             }
         }
