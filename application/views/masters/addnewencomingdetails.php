@@ -559,24 +559,31 @@
                                                             </div>
                                                         </div>
 
-                                                        <?php  if( $this->session->userdata('roleText')=='Team' || $this->session->userdata('roleText')=='Superadmin' ){ 
-                                                            $readonly = '';
-                                                         }else{ 
-                                                            $readonly = 'readonly';
-                                                         } ?>
-
-
-                                                        <div class="form-group row">
-                                                            <label class="col-sm-3 col-form-label">Working Hrs Status</label>
-                                                            <div class="col-sm-9">
-                                                                <select class="form-control" name="working_hrs_status"
-                                                                    id="working_hrs_status" <?=$readonly;?> >
-                                                                    <option st-id="" value="Open" selected>Open</option>
-                                                                    <option st-id="" value="Close">Close</option>
-                                                                </select>
-                                                                <p class="error working_hrs_status_error"></p>
+                                                        <?php  if( $this->session->userdata('roleText')=='Team' || $this->session->userdata('roleText')=='Superadmin' ){ ?>
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-3 col-form-label">Working Hrs Status</label>
+                                                                <div class="col-sm-9">
+                                                                    <select class="form-control" name="working_hrs_status"
+                                                                        id="working_hrs_status" <?=$readonly;?> >
+                                                                        <option st-id="" value="Open" selected>Open</option>
+                                                                    </select>
+                                                                    <p class="error working_hrs_status_error"></p>
+                                                                </div>
                                                             </div>
-                                                        </div>
+                                                            
+                                                        <?php }else{ ?>
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-3 col-form-label">Working Hrs Status</label>
+                                                                <div class="col-sm-9">
+                                                                    <select class="form-control" name="working_hrs_status"
+                                                                        id="working_hrs_status" <?=$readonly;?> >
+                                                                        <option st-id="" value="Open" selected>Open</option>
+                                                                        <option st-id="" value="Close">Close</option>
+                                                                    </select>
+                                                                    <p class="error working_hrs_status_error"></p>
+                                                                </div>
+                                                            </div>
+                                                        <?php } ?>
 
                                                         <div class="form-group row">
                                                             <label class="col-sm-3 col-form-label">Remarks</label>
