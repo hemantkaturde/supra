@@ -65,8 +65,14 @@
           <!-- Registration form -->
           <form id="assign_team_form" name="assign_team_form">
           <input type="hidden" id="selected_item_id" name="selected_item_id">
+
           <div class="form-group">
-              <label class="col-sm-4 col-form-label">Assign Team <span class="required">*</span></label>
+          <label class="col-sm-4 col-form-label">Team Name :</label>
+               <label id="previous_team_name" name="previous_team_name"></label>
+          </div>
+
+          <div class="form-group">
+              <label class="col-sm-4 col-form-label">Change Team <span class="required">*</span></label>
                 <select class="form-control" name="assign_team" id="assign_team">
                      <option st-id="" value="">Select Team </option>
                         <?php foreach ($getAllteammaster as $key => $value) {?>

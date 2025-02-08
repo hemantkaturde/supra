@@ -24496,7 +24496,10 @@
 		$(document).on('click','#assign_team_to_item',function(e){
 			var elemF = $(this);
 			var data_id = elemF.attr('data-id');
+			var previous_team_name = elemF.attr('previous_team_name');
+
 			$("#selected_item_id").val(data_id);
+			$("#previous_team_name").text(previous_team_name);
 			$("#registerModal").modal('show');
 		});
 
