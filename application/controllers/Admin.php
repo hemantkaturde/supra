@@ -17230,9 +17230,14 @@ public function checkifpartnumberisalreadyexists(){
        $part_number =  trim($this->input->post('part_number'));
        $main_id =  trim($this->input->post('main_id'));
 
-       if($part_number && $main_id ){
+       if($part_number && $main_id){
 
             $checkifpartnumberisalreadyexists = $this->admin_model->checkifpartnumberisalreadyexists($part_number,$main_id);
+
+            print_r($checkifpartnumberisalreadyexists);
+            print_r('Hemant k');
+            exit;
+
             if(count($checkifpartnumberisalreadyexists) >= 1) {
 
                 echo 'success';
