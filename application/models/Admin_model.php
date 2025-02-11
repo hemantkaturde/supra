@@ -4349,7 +4349,7 @@ class Admin_model extends CI_Model
         return $data;
     }
 
-    public function getbuyerpoitemstatusfor_fromstockitem($part_number,$buyer_po_number,){
+    public function getbuyerpoitemstatusfor_fromstockitem($part_number,$buyer_po_number){
         
         $this->db->select('current_stock,item_po_status');
         $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id');
