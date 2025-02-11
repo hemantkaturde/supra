@@ -6387,6 +6387,7 @@ class Admin extends BaseController
                     $getbuyerpoitemstatusfor_fromstockitem = $this->admin_model->getbuyerpoitemstatusfor_fromstockitem(trim($this->input->post('part_number')),trim($this->input->post('buyer_po_number_id')));
                  
                     print_r($getbuyerpoitemstatusfor_fromstockitem);
+                    print_r('Hemsmt');
                     exit;
                  
                     if($getbuyerpoitemstatusfor_fromstockitem){
