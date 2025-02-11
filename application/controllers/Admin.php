@@ -6385,6 +6385,15 @@ class Admin extends BaseController
                     $getbuyerpoitemstatusfor_fromstockitem = $this->admin_model->getbuyerpoitemstatusfor_fromstockitem(trim($this->input->post('part_number')),trim($this->input->post('buyer_po_number_id')));
                     if($getbuyerpoitemstatusfor_fromstockitem){
                         /*Update Qty To the Finish Goods Table */
+
+                        print_r($getbuyerpoitemstatusfor_fromstockitem);
+
+                        print_r('Hemant');
+
+                        print_r(trim($this->input->post('buyer_invoice_qty')));
+                        exit;
+
+
                         $final_qty_for_update = trim($getbuyerpoitemstatusfor_fromstockitem['current_stock']) - trim($this->input->post('buyer_invoice_qty'));
                         $getbuyerpoitemstatusfor_fromstockitem = $this->admin_model->update_cuuent_stock(trim($this->input->post('part_number')), $final_qty_for_update);
                     }
