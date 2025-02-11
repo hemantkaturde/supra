@@ -17234,17 +17234,19 @@ public function checkifpartnumberisalreadyexists(){
 
             $checkifpartnumberisalreadyexists = $this->admin_model->checkifpartnumberisalreadyexists($part_number,$main_id);
 
-            print_r($checkifpartnumberisalreadyexists);
-            print_r('Hemant k');
-            exit;
+            if($checkifpartnumberisalreadyexists){
 
-            if(count($checkifpartnumberisalreadyexists) >= 1) {
+                    if(count($checkifpartnumberisalreadyexists) >= 1) {
 
-                echo 'success';
+                        echo 'success';
+                    }else{
+
+                        echo 'failure';
+                    }
             }else{
-
                 echo 'failure';
             }
+
        }else{
         echo 'failure';
        }
