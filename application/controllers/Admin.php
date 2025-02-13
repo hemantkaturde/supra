@@ -17685,6 +17685,7 @@ public function downloadpreexportform($id){
                         <p><b>'.$i.') '.$value['name'].'</b></p>
                         <p><b>Part Number : </b>'.$value['part_number'].str_repeat('&nbsp;',50).' <b>PO Number: '.$value['buyer_po_number'].'</b></p>
                         <p><b>Buyer Order Qty : </b>'.$getbuyeritemorderqty[0]['order_oty'].'</p>
+                        <p><b>Buyer PO Part Delivery Date : </b>'.$getbuyeritemorderqty[0]['buyer_po_part_delivery_date'].'</p>
                         <p>'.$value['item_remark'].'</p>
                     </div>
                     <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:12px;border: 1px solid black;">
