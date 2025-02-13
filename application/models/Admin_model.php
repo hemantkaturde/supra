@@ -14653,7 +14653,7 @@ public function getpreexportdetailsitemsforInvoice($id){
 
 public function getbuyeritemorderqty($buyer_po_id,$part_number_id){
 
-    $this->db->select(TBL_BUYER_PO_MASTER_ITEM.'.order_oty');
+    $this->db->select(TBL_BUYER_PO_MASTER_ITEM.'.order_oty,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date');
     $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id', $buyer_po_id);
     $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.part_number_id', $part_number_id);
     $query = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
