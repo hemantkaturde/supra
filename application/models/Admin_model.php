@@ -16329,6 +16329,7 @@ public function fetchcustomercompalintreportcount($params){
     }
 
     $this->db->where(TBL_CUSTMOR_COMPALINT.'.status', 1);
+    $this->db->group_by(TBL_CUSTMOR_COMPALINT.'.id');
     $this->db->order_by(TBL_CUSTMOR_COMPALINT.'.id','DESC');
     $query = $this->db->get(TBL_CUSTMOR_COMPALINT);
     $rowcount = $query->num_rows();
@@ -16359,6 +16360,7 @@ public function fetchcustomercompalintreportdata($params){
 
     $this->db->where(TBL_CUSTMOR_COMPALINT.'.status', 1);
     $this->db->limit($params['length'],$params['start']);
+    $this->db->group_by(TBL_CUSTMOR_COMPALINT.'.id');
     $this->db->order_by(TBL_CUSTMOR_COMPALINT.'.id','DESC');
     $query = $this->db->get(TBL_CUSTMOR_COMPALINT);
     $fetch_result = $query->result_array();
