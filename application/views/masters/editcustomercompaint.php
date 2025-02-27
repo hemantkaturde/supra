@@ -24,7 +24,7 @@
                         <form role="form" id="addnewcustomercomplaintform" action="<?php echo base_url() ?>addnewcustomercomplaint" method="post" role="form">
                             <div class="box-body">
                                 <div class="row">
-                                <input type="hidden" class="form-control" id="complaint_form_id" name="complaint_form_id" value="<?=$getcustomercompalindetailsdata[0]['Customer_Complaint_id']?>"  readonly>
+                                <input type="hidden" class="form-control" id="complaint_form_id" name="complaint_form_id" value="<?=$getcustomercompalindetailsdata[0]['coustmor_compalint_id']?>"  readonly>
 
                                     <div class="col-md-3">
                                         <div class="form-group">
