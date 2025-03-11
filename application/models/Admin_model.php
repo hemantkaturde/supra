@@ -20378,21 +20378,55 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
 
     public function updatebuyeridinsupplierpo($buyer_po_number,$buyer_name){
-        $data_for_supplier = array('buyer_name'=>$buyer_name);
-        $this->db->where('buyer_po_number', $buyer_po_number);
-        if($this->db->update(TBL_SUPPLIER_PO_MASTER, $data_for_supplier)){
-            $last_id = $this->db->insert_id();
-            $data_for_supplier_item = array('pre_buyer_name'=>$buyer_name);
-            $this->db->where('supplier_po_id', $last_id);
-            if($this->db->update(TBL_SUPPLIER_PO_MASTER_ITEM, $data_for_supplier_item)){
-                return TRUE;
+
+        $this->db->select('id'); 
+        $this->db->where(TBL_SUPPLIER_PO_MASTER.'.buyer_po_number', $buyer_po_number);
+        $this->db->where(TBL_SUPPLIER_PO_MASTER.'.status', 1);
+        $query = $this->db->get(TBL_SUPPLIER_PO_MASTER);
+        $fetch_result = $query->result_array();
+
+        
+
+        foreach ($fetch_result as $row) {
+            $id = $row['id'];
+
+            print_r($id);
+            exit;
+
+            $data_for_supplier = array('buyer_name'=>$buyer_name);
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_SUPPLIER_PO_MASTER, $data_for_supplier)){
+                $data_for_supplier_item = array('pre_buyer_name'=>$buyer_name);
+                $this->db->where('supplier_po_id', $id);
+                if($this->db->update(TBL_SUPPLIER_PO_MASTER_ITEM, $data_for_supplier_item)){
+                    return TRUE;
+                }else{
+                    return FALSE;
+                }
+
             }else{
                 return FALSE;
             }
-        } else {
-            return FALSE;
+
         }
-}
+
+
+
+        // $data_for_supplier = array('buyer_name'=>$buyer_name);
+        // $this->db->where('buyer_po_number', $buyer_po_number);
+        // if($this->db->update(TBL_SUPPLIER_PO_MASTER, $data_for_supplier)){
+        //     $last_id = $this->db->insert_id();
+        //     $data_for_supplier_item = array('pre_buyer_name'=>$buyer_name);
+        //     $this->db->where('supplier_po_id', $last_id);
+        //     if($this->db->update(TBL_SUPPLIER_PO_MASTER_ITEM, $data_for_supplier_item)){
+        //         return TRUE;
+        //     }else{
+        //         return FALSE;
+        //     }
+        // } else {
+        //     return FALSE;
+        // }
+    }
 
 
 }
