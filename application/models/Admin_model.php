@@ -20368,6 +20368,16 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
+    public function updatebuyeridwhenchangedata($po_id,$data){
+            $this->db->where('buyer_po_id', $po_id);
+            if($this->db->update(TBL_BUYER_PO_MASTER_ITEM, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+    }
+
+
 }
 
 ?>
