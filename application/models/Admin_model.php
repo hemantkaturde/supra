@@ -20385,7 +20385,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
             $data_for_supplier_item = array('pre_buyer_name'=>$buyer_name);
             $this->db->where('supplier_po_id', $last_id);
-            if($this->db->update(TBL_SUPPLIER_PO_MASTER_ITEM, $data_for_supplier)){
+            if($this->db->update(TBL_SUPPLIER_PO_MASTER_ITEM, $data_for_supplier_item)){
                 return TRUE;
             }else{
                 return FALSE;
