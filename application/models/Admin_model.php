@@ -20389,10 +20389,6 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
         foreach ($fetch_result as $row) {
             $id = $row['id'];
-
-            print_r($id);
-            exit;
-
             $data_for_supplier = array('buyer_name'=>$buyer_name);
             $this->db->where('id', $id);
             if($this->db->update(TBL_SUPPLIER_PO_MASTER, $data_for_supplier)){
