@@ -2465,10 +2465,14 @@ class Admin extends BaseController
                                 /* update buyer id once buyer is update after 11-03-2025 */
                                 $updatebuyeidinitemdata = $this->admin_model->updatebuyeridwhenchangedata($po_id,$update_buyer_po_data);
                                 if($updatebuyeidinitemdata){
-                                    $save_buyerpo_response['status'] = 'success';
-                                    $save_buyerpo_response['error'] = array('sales_order_number'=>strip_tags(form_error('sales_order_number')), 'date'=>strip_tags(form_error('date')), 'buyer_po_number'=>strip_tags(form_error('buyer_po_number')), 'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'buyer_name'=>strip_tags(form_error('buyer_name')),'currency'=>strip_tags(form_error('currency')),'rate'=>strip_tags(form_error('rate')),'value'=>strip_tags(form_error('value')),'part_number'=>strip_tags(form_error('part_number')),'order_quantity'=>strip_tags(form_error('order_quantity')),'description'=>strip_tags(form_error('description')),'delivery_date'=>strip_tags(form_error('delivery_date')),'generate_po'=>strip_tags(form_error('generate_po')),'remark'=>strip_tags(form_error('remark')));
-                                }
-                                /* update buyer id once buyer is update after 11-03-2025 */
+                                     /* update buyer name id in supplier po based on buyer po */
+                                        $updatebuyeridinsupplierpodata = $this->admin_model->updatebuyeridinsupplierpo(trim($this->input->post('buyer_po_number')),trim($this->input->post('buyer_name')));
+                                         if($updatebuyeridinsupplierpodata){
+                                            $save_buyerpo_response['status'] = 'success';
+                                            $save_buyerpo_response['error'] = array('sales_order_number'=>strip_tags(form_error('sales_order_number')), 'date'=>strip_tags(form_error('date')), 'buyer_po_number'=>strip_tags(form_error('buyer_po_number')), 'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'buyer_name'=>strip_tags(form_error('buyer_name')),'currency'=>strip_tags(form_error('currency')),'rate'=>strip_tags(form_error('rate')),'value'=>strip_tags(form_error('value')),'part_number'=>strip_tags(form_error('part_number')),'order_quantity'=>strip_tags(form_error('order_quantity')),'description'=>strip_tags(form_error('description')),'delivery_date'=>strip_tags(form_error('delivery_date')),'generate_po'=>strip_tags(form_error('generate_po')),'remark'=>strip_tags(form_error('remark')));
+                                         }
+                                    }
+                                    /* update buyer id once buyer is update after 11-03-2025 */
                         }
 
                 }

@@ -20367,7 +20367,6 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     }
 
-
     public function updatebuyeridwhenchangedata($po_id,$data){
             $this->db->where('buyer_po_id', $po_id);
             if($this->db->update(TBL_BUYER_PO_MASTER_ITEM, $data)){
@@ -20376,6 +20375,17 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 return FALSE;
             }
     }
+
+
+    public function updatebuyeridinsupplierpo($buyer_po_number,$buyer_name){
+        $data_for_supplier = array('buyer_name'=>$buyer_name);
+        $this->db->where('buyer_po_number', $buyer_po_number);
+        if($this->db->update(TBL_SUPPLIER_PO_MASTER, $data_for_supplier)){
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+}
 
 
 }
