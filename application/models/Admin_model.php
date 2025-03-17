@@ -15343,7 +15343,7 @@ public function fetchproductionstatusreportdata($params,$vendor_name,$status,$pa
     $this->db->where(TBL_BILL_OF_MATERIAL.'.status', 1);
     $this->db->where(TBL_BILL_OF_MATERIAL_ITEM.'.status', 1);
 
-    $this->db->group_by(TBL_BILL_OF_MATERIAL_ITEM.'.id');
+    $this->db->group_by(TBL_VENDOR_PO_MASTER_ITEM.'.id');
     $this->db->limit($params['length'],$params['start']);
     
     $this->db->order_by(TBL_BILL_OF_MATERIAL.'.id','DESC');
@@ -15352,9 +15352,6 @@ public function fetchproductionstatusreportdata($params,$vendor_name,$status,$pa
     $query2 = $query->result_array();
 
     $str = $this->db->last_query();
-
-    print_r($str);
-    exit;
     
     $fetch_result =   array_merge($query1, $query2);
     $data = array();
