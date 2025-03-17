@@ -1790,13 +1790,16 @@
 				closeOnCancel: false
 			}, function(isConfirm) {
 				if (isConfirm) {
+					        /*check if buyer Po is already type with supplier PO and Other Things*/
 							$.ajax({
-								url : "<?php echo base_url();?>deleteBuyerpo",
+								url : "<?php echo base_url();?>checkifbuyerpoisexitsinsupplierpo",
 								type: "POST",
 								data : 'id='+elemF.attr('data-id'),
 								success: function(data, textStatus, jqXHR)
 								{
 									const obj = JSON.parse(data);
+
+									alert(obj.status);
 								
 									if(obj.status=='success'){
 										swal({
@@ -1807,12 +1810,38 @@
 											},function(){ 
 												window.location.href = "<?php echo base_url().'buyerpo'?>";
 										});	
-									}
+									}else{
 
+										// $.ajax({
+										// 		url : "<?php echo base_url();?>deleteBuyerpo",
+										// 		type: "POST",
+										// 		data : 'id='+elemF.attr('data-id'),
+										// 		success: function(data, textStatus, jqXHR)
+										// 		{
+										// 			const obj = JSON.parse(data);
+												
+										// 			if(obj.status=='success'){
+										// 				swal({
+										// 					title: "Deleted!",
+										// 					text: "Buyer PO Deleted Succesfully",
+										// 					icon: "success",
+										// 					button: "Ok",
+										// 					},function(){ 
+										// 						window.location.href = "<?php echo base_url().'buyerpo'?>";
+										// 				});	
+										// 			}
+
+										// 		},
+										// 		error: function (jqXHR, textStatus, errorThrown)
+										// 		{
+										// 			$(".loader_ajax").hide();
+										// 		}
+										// })
+									}
 								},
 								error: function (jqXHR, textStatus, errorThrown)
 								{
-									$(".loader_ajax").hide();
+								  $(".loader_ajax").hide();	
 								}
 							})
 						}

@@ -2541,6 +2541,25 @@ class Admin extends BaseController
      }
 
 
+     public function checkifbuyerpoisexitsinsupplierpo(){
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->checkifbuyerpoisexitsinsupplierpo(trim($this->input->post('id')));
+
+            if ($result) {
+                        $process = 'Check if Buyerpo is Exits in Supplierpo';
+                        $processFunction = 'Admin/checkifbuyerpoisexitsinsupplierpo';
+                        $this->logrecord($process,$processFunction);
+                        
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
+     }
+
 
     /**
      * This function is used to laod suppllierpo
