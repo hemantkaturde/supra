@@ -15340,10 +15340,10 @@ public function fetchproductionstatusreportdata($params,$vendor_name,$status,$pa
         $this->db->where(TBL_VENDOR_PO_MASTER.'.id', $vendor_po); 
     }
 
-    $this->db->where(TBL_BILL_OF_MATERIAL.'.status', 1);
-    $this->db->where(TBL_BILL_OF_MATERIAL_ITEM.'.status', 1);
+    // $this->db->where(TBL_BILL_OF_MATERIAL.'.status', 1);
+    // $this->db->where(TBL_BILL_OF_MATERIAL_ITEM.'.status', 1);
 
-    $this->db->group_by(TBL_BILL_OF_MATERIAL_ITEM.'.id');
+    //$this->db->group_by(TBL_BILL_OF_MATERIAL_ITEM.'.id');
     $this->db->limit($params['length'],$params['start']);
     
     $this->db->order_by(TBL_BILL_OF_MATERIAL_ITEM.'.id','DESC');
