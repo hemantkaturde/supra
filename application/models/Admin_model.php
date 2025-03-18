@@ -15150,9 +15150,9 @@ public function fetchproductionstatusreportcount($params,$vendor_name,$status,$p
         $this->db->where(TBL_BILL_OF_MATERIAL_VENDOR.'.status', 1);
         $this->db->limit($params['length'],$params['start']);
         $this->db->order_by(TBL_BILL_OF_MATERIAL_VENDOR.'.id','DESC');
-        $query = $this->db->get(TBL_BILL_OF_MATERIAL_VENDOR);
+        $query11 = $this->db->get(TBL_BILL_OF_MATERIAL_VENDOR);
         //$fetch_result = $query->result_array();
-        $query1 = $query->result_array();
+        $query1 = $query11->result_array();
 
         
 
@@ -15168,6 +15168,7 @@ public function fetchproductionstatusreportcount($params,$vendor_name,$status,$p
         // $this->db->join(TBL_BILL_OF_MATERIAL_ITEM, TBL_BILL_OF_MATERIAL.'.id= '.TBL_BILL_OF_MATERIAL_ITEM.'.bom_id');
         // $this->db->join(TBL_FINISHED_GOODS, TBL_BILL_OF_MATERIAL_ITEM.'.part_number= '.TBL_FINISHED_GOODS.'.fin_id');
 
+     
         $this->db->select(TBL_VENDOR.'.vendor_name as vendorname,'.TBL_BILL_OF_MATERIAL.'.id as billofmaterialid,'.TBL_FINISHED_GOODS.'.part_number as partno,'.TBL_BUYER_MASTER.'.buyer_name as buyer, 2 as flag,'.TBL_BILL_OF_MATERIAL.'.bom_status,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_order_qty_co,'.TBL_BILL_OF_MATERIAL_ITEM.'.vendor_actual_recived_qty as vendor_received_qty_co,'.TBL_VENDOR_PO_MASTER.'.po_number as v_po_number,'.TBL_FINISHED_GOODS.'.name as part_description,'.TBL_VENDOR_PO_MASTER.'.delivery_date,'.TBL_BILL_OF_MATERIAL_ITEM.'.id as vendor_bill_item_id,"Bill Of Material" as flag,"bom" as notes_status,'.TBL_BILL_OF_MATERIAL_ITEM.'.notes,'.TBL_BILL_OF_MATERIAL_ITEM.'.bom_status_item as item_bom_status,'.TBL_BILL_OF_MATERIAL_ITEM.'.expected_qty,'.TBL_VENDOR_PO_MASTER.'.date');
         $this->db->join(TBL_BILL_OF_MATERIAL, TBL_BILL_OF_MATERIAL.'.id= '.TBL_BILL_OF_MATERIAL_ITEM.'.bom_id');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id= '.TBL_BILL_OF_MATERIAL.'.vendor_po_number');
@@ -15180,7 +15181,7 @@ public function fetchproductionstatusreportcount($params,$vendor_name,$status,$p
         if($params['search']['value'] != "") 
         {
             $this->db->where("(".TBL_BILL_OF_MATERIAL.".bom_number LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_BILL_OF_MATERIAL.".date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".date LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_BILL_OF_MATERIAL.".bom_status LIKE '%".$params['search']['value']."%'");
@@ -15192,26 +15193,23 @@ public function fetchproductionstatusreportcount($params,$vendor_name,$status,$p
         }
 
         if($status!='NA'){
-            $this->db->where(TBL_BILL_OF_MATERIAL_ITEM.'.bom_status_item', $status); 
+            $this->db->where(TBL_BILL_OF_MATERIAL_ITEM.'.bom_status_item', $status);  
         }
 
+        
         if($part_number!='NA'){
             $this->db->where(TBL_BILL_OF_MATERIAL_ITEM.'.part_number', $part_number); 
         }
 
         if($vendor_po!='NA'){
-            $this->db->where(TBL_BILL_OF_MATERIAL.'.vendor_po_number', $vendor_po); 
+            $this->db->where(TBL_VENDOR_PO_MASTER.'.id', $vendor_po); 
         }
 
         // $this->db->where(TBL_BILL_OF_MATERIAL.'.status', 1);
-        // $this->db->group_by(TBL_BILL_OF_MATERIAL_ITEM.'.id');
-
-        // $this->db->order_by(TBL_BILL_OF_MATERIAL.'.id','DESC');
-        // $query_2 = $this->db->get(TBL_BILL_OF_MATERIAL);
-        // // $rowcount = $query->num_rows();
-        // $query2 = $query_2->result_array();
+        // $this->db->where(TBL_BILL_OF_MATERIAL_ITEM.'.status', 1);
 
         $this->db->group_by(TBL_VENDOR_PO_MASTER_ITEM.'.id');
+        $this->db->limit($params['length'],$params['start']);
         
         $this->db->order_by(TBL_BILL_OF_MATERIAL_ITEM.'.id','DESC');
         $query = $this->db->get(TBL_BILL_OF_MATERIAL_ITEM);
