@@ -15203,13 +15203,20 @@ public function fetchproductionstatusreportcount($params,$vendor_name,$status,$p
             $this->db->where(TBL_BILL_OF_MATERIAL.'.vendor_po_number', $vendor_po); 
         }
 
-        $this->db->where(TBL_BILL_OF_MATERIAL.'.status', 1);
-        $this->db->group_by(TBL_BILL_OF_MATERIAL_ITEM.'.id');
+        // $this->db->where(TBL_BILL_OF_MATERIAL.'.status', 1);
+        // $this->db->group_by(TBL_BILL_OF_MATERIAL_ITEM.'.id');
 
-        $this->db->order_by(TBL_BILL_OF_MATERIAL.'.id','DESC');
-        $query_2 = $this->db->get(TBL_BILL_OF_MATERIAL);
-        // $rowcount = $query->num_rows();
-        $query2 = $query_2->result_array();
+        // $this->db->order_by(TBL_BILL_OF_MATERIAL.'.id','DESC');
+        // $query_2 = $this->db->get(TBL_BILL_OF_MATERIAL);
+        // // $rowcount = $query->num_rows();
+        // $query2 = $query_2->result_array();
+
+        $this->db->group_by(TBL_VENDOR_PO_MASTER_ITEM.'.id');
+        
+        $this->db->order_by(TBL_BILL_OF_MATERIAL_ITEM.'.id','DESC');
+        $query = $this->db->get(TBL_BILL_OF_MATERIAL_ITEM);
+        //$fetch_result = $query->result_array();
+        $query2 = $query->result_array();
 
         $fetch_result =   array_merge($query1, $query2);
         return count($fetch_result);
