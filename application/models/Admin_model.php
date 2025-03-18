@@ -15299,6 +15299,13 @@ public function fetchproductionstatusreportdata($params,$vendor_name,$status,$pa
     $this->db->group_by(TBL_VENDOR_PO_MASTER_ITEM.'.id');
     $query = $this->db->get(TBL_BILL_OF_MATERIAL_VENDOR_ITEM);
     //$fetch_result = $query->result_array();
+
+    $str = $this->db->last_query();
+
+    print_r($str);
+    exit;
+
+
     $query1 = $query->result_array();
 
 
