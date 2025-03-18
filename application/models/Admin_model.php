@@ -15300,12 +15300,6 @@ public function fetchproductionstatusreportdata($params,$vendor_name,$status,$pa
     $query = $this->db->get(TBL_BILL_OF_MATERIAL_VENDOR_ITEM);
     //$fetch_result = $query->result_array();
 
-    $str = $this->db->last_query();
-
-    print_r($str);
-    exit;
-
-
     $query1 = $query->result_array();
 
 
@@ -15359,6 +15353,8 @@ public function fetchproductionstatusreportdata($params,$vendor_name,$status,$pa
     $query2 = $query->result_array();
 
     $str = $this->db->last_query();
+    print_r($str);
+    exit;
     
     $fetch_result =   array_merge($query1, $query2);
     $data = array();
