@@ -15360,7 +15360,7 @@ public function fetchproductionstatusreportdata($params,$vendor_name,$status,$pa
     $this->db->group_by(TBL_VENDOR_PO_MASTER_ITEM.'.id');
     $this->db->limit($params['length'],$params['start']);
     
-    $this->db->order_by(TBL_VENDOR_PO_MASTER_ITEM.'.id','DESC');
+    $this->db->order_by(TBL_BILL_OF_MATERIAL.'.id','DESC');
     $query = $this->db->get(TBL_BILL_OF_MATERIAL_ITEM);
     //$fetch_result = $query->result_array();
     $query2 = $query->result_array();
@@ -15542,7 +15542,7 @@ public function getallproductionreportstatusdata($vendor_name,$status,$vendor_po
     $this->db->group_by(TBL_VENDOR_PO_MASTER_ITEM.'.id');
     $this->db->limit($params['length'],$params['start']);
     
-    $this->db->order_by(TBL_BILL_OF_MATERIAL_ITEM.'.id','DESC');
+    $this->db->order_by(TBL_BILL_OF_MATERIAL.'.id','DESC');
     $query = $this->db->get(TBL_BILL_OF_MATERIAL_ITEM);
     //$fetch_result = $query->result_array();
     $query2 = $query->result_array();
