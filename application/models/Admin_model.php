@@ -1237,7 +1237,7 @@ class Admin_model extends CI_Model
         $this->db->where(TBL_SUPPLIER_PO_MASTER.'.buyer_po_number', $id);
         //$this->db->where(TBL_SUPPLIER_PO_MASTER.'.status', 1);
         $query = $this->db->get(TBL_SUPPLIER_PO_MASTER);
-        $rowcount = $query->num_rows();
+        $rowcount = $query->result_array();
         return $rowcount;
     }
 

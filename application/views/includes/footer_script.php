@@ -1804,7 +1804,7 @@
 									if(obj.status=='success'){
 										swal({
 											title: "Deleted!",
-											text: "Buyer PO Deleted Succesfully",
+											text: "Record Alreday in USe",
 											icon: "success",
 											button: "Ok",
 											},function(){ 
