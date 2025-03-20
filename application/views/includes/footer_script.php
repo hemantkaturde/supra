@@ -1801,7 +1801,7 @@
 
 									if(obj.status=='success'){
 										swal({
-											title: "Deleted!",
+											title: "Already in use!",
 											text: "This buyer po is linked to supplier po",
 											icon: "success",
 											button: "Ok",
