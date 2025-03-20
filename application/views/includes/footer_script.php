@@ -1803,7 +1803,8 @@
 										swal({
 											title: "Already in use!",
 											text: "This buyer po is linked to supplier po",
-											icon: "success",
+											type: "danger",
+											// icon: "success",
 											button: "Ok",
 											},function(){ 
 												window.location.href = "<?php echo base_url().'buyerpo'?>";
