@@ -1799,12 +1799,10 @@
 								{
 									const obj = JSON.parse(data);
 
-									alert(obj.status);
-								
 									if(obj.status=='success'){
 										swal({
 											title: "Deleted!",
-											text: "Record Alreday in USe",
+											text: "This buyer po is linked to supplier po",
 											icon: "success",
 											button: "Ok",
 											},function(){ 
@@ -1812,31 +1810,31 @@
 										});	
 									}else{
 
-										// $.ajax({
-										// 		url : "<?php echo base_url();?>deleteBuyerpo",
-										// 		type: "POST",
-										// 		data : 'id='+elemF.attr('data-id'),
-										// 		success: function(data, textStatus, jqXHR)
-										// 		{
-										// 			const obj = JSON.parse(data);
+										$.ajax({
+												url : "<?php echo base_url();?>deleteBuyerpo",
+												type: "POST",
+												data : 'id='+elemF.attr('data-id'),
+												success: function(data, textStatus, jqXHR)
+												{
+													const obj = JSON.parse(data);
 												
-										// 			if(obj.status=='success'){
-										// 				swal({
-										// 					title: "Deleted!",
-										// 					text: "Buyer PO Deleted Succesfully",
-										// 					icon: "success",
-										// 					button: "Ok",
-										// 					},function(){ 
-										// 						window.location.href = "<?php echo base_url().'buyerpo'?>";
-										// 				});	
-										// 			}
+													if(obj.status=='success'){
+														swal({
+															title: "Deleted!",
+															text: "Buyer PO Deleted Succesfully",
+															icon: "success",
+															button: "Ok",
+															},function(){ 
+																window.location.href = "<?php echo base_url().'buyerpo'?>";
+														});	
+													}
 
-										// 		},
-										// 		error: function (jqXHR, textStatus, errorThrown)
-										// 		{
-										// 			$(".loader_ajax").hide();
-										// 		}
-										// })
+												},
+												error: function (jqXHR, textStatus, errorThrown)
+												{
+													$(".loader_ajax").hide();
+												}
+										})
 									}
 								},
 								error: function (jqXHR, textStatus, errorThrown)
