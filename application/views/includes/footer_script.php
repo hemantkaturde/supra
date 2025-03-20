@@ -1849,8 +1849,8 @@
 													swal({
 														title: "Already in use!",
 														text: "This buyer po is linked to vendor po",
-														type: "danger",
-														// icon: "success",
+														//type: "success",
+														icon: "success",
 														button: "Ok",
 														},function(){ 
 															window.location.href = "<?php echo base_url().'buyerpo'?>";
