@@ -1241,6 +1241,16 @@ class Admin_model extends CI_Model
         return $rowcount;
     }
 
+
+    public function checkifbuyerpoisexitsinvendorpo($id){
+        $this->db->select('*');
+        $this->db->where(TBL_VENDOR_PO_MASTER.'.buyer_po_number', $id);
+        //$this->db->where(TBL_SUPPLIER_PO_MASTER.'.status', 1);
+        $query = $this->db->get(TBL_VENDOR_PO_MASTER);
+        $rowcount = $query->result_array();
+        return $rowcount;
+    }
+
     public function getPreviousSalesOrderNumber(){
 
         $this->db->select('sales_order_number');

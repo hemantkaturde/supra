@@ -1810,31 +1810,85 @@
 												window.location.href = "<?php echo base_url().'buyerpo'?>";
 										});	
 									}else{
+										
+										// $.ajax({
+										// 		url : "<?php echo base_url();?>deleteBuyerpo",
+										// 		type: "POST",
+										// 		data : 'id='+elemF.attr('data-id'),
+										// 		success: function(data, textStatus, jqXHR)
+										// 		{
+										// 			const obj = JSON.parse(data);
+												
+										// 			if(obj.status=='success'){
+										// 				swal({
+										// 					title: "Deleted!",
+										// 					text: "Buyer PO Deleted Succesfully",
+										// 					icon: "success",
+										// 					button: "Ok",
+										// 					},function(){ 
+										// 						window.location.href = "<?php echo base_url().'buyerpo'?>";
+										// 				});	
+										// 			}
+
+										// 		},
+										// 		error: function (jqXHR, textStatus, errorThrown)
+										// 		{
+										// 			$(".loader_ajax").hide();
+										// 		}
+										// })
 
 										$.ajax({
-												url : "<?php echo base_url();?>deleteBuyerpo",
-												type: "POST",
-												data : 'id='+elemF.attr('data-id'),
-												success: function(data, textStatus, jqXHR)
-												{
-													const obj = JSON.parse(data);
-												
-													if(obj.status=='success'){
-														swal({
-															title: "Deleted!",
-															text: "Buyer PO Deleted Succesfully",
-															icon: "success",
-															button: "Ok",
-															},function(){ 
-																window.location.href = "<?php echo base_url().'buyerpo'?>";
-														});	
-													}
+										    url : "<?php echo base_url();?>checkifbuyerpoisexitsinvendorpo",
+											type: "POST",
+											data : 'id='+elemF.attr('data-id'),
+											success: function(data, textStatus, jqXHR)
+											{
+												const obj = JSON.parse(data);
 
-												},
-												error: function (jqXHR, textStatus, errorThrown)
-												{
-													$(".loader_ajax").hide();
+												if(obj.status=='success'){
+													swal({
+														title: "Already in use!",
+														text: "This buyer po is linked to vendor po",
+														type: "danger",
+														// icon: "success",
+														button: "Ok",
+														},function(){ 
+															window.location.href = "<?php echo base_url().'buyerpo'?>";
+													});	
+												}else{
+													
+													$.ajax({
+															url : "<?php echo base_url();?>deleteBuyerpo",
+															type: "POST",
+															data : 'id='+elemF.attr('data-id'),
+															success: function(data, textStatus, jqXHR)
+															{
+																const obj = JSON.parse(data);
+															
+																if(obj.status=='success'){
+																	swal({
+																		title: "Deleted!",
+																		text: "Buyer PO Deleted Succesfully",
+																		icon: "success",
+																		button: "Ok",
+																		},function(){ 
+																			window.location.href = "<?php echo base_url().'buyerpo'?>";
+																	});	
+																}
+
+															},
+															error: function (jqXHR, textStatus, errorThrown)
+															{
+																$(".loader_ajax").hide();
+															}
+													})
+
 												}
+											},
+											error: function (jqXHR, textStatus, errorThrown)
+											{
+											$(".loader_ajax").hide();	
+											}
 										})
 									}
 								},

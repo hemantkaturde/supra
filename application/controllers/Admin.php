@@ -2560,6 +2560,27 @@ class Admin extends BaseController
         }
      }
 
+     public function checkifbuyerpoisexitsinvendorpo(){
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->checkifbuyerpoisexitsinvendorpo(trim($this->input->post('id')));
+
+            if ($result) {
+                        $process = 'Check if Buyerpo is Exits in Vendorpo';
+                        $processFunction = 'Admin/checkifbuyerpoisexitsinvendorpo';
+                        $this->logrecord($process,$processFunction);
+                        
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
+     }
+
+     
+
 
     /**
      * This function is used to laod suppllierpo

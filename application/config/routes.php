@@ -611,6 +611,7 @@ $route['downloadscrapinvoic/(:any)'] = "admin/downloadscrapinvoic/$1";
 $route['downloaddirectstock/(:any)'] = "admin/downloaddirectstock/$1";
 
 $route['checkifbuyerpoisexitsinsupplierpo'] = "admin/checkifbuyerpoisexitsinsupplierpo";
+$route['checkifbuyerpoisexitsinvendorpo'] = "admin/checkifbuyerpoisexitsinvendorpo";
 
 
 
