@@ -20476,6 +20476,36 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
+
+    public function updatebuyeridinvendorpoanditem($buyer_po_number,$buyer_name){
+
+        $this->db->select('id'); 
+        $this->db->where(TBL_VENDOR_PO_MASTER.'.buyer_po_number', $buyer_po_number);
+        $this->db->where(TBL_VENDOR_PO_MASTER.'.status', 1);
+        $query = $this->db->get(TBL_VENDOR_PO_MASTER);
+        $fetch_result = $query->result_array();
+
+        foreach ($fetch_result as $row) {
+            $id = $row['id'];
+            $data_for_vendor_po = array('buyer_name'=>$buyer_name);
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_VENDOR_PO_MASTER, $data_for_vendor_po)){
+                $data_for_vendor_item = array('pre_buyer_name'=>$buyer_name);
+                $this->db->where('vendor_po_id', $id);
+                if($this->db->update(TBL_VENDOR_PO_MASTER_ITEM, $data_for_vendor_item)){
+                    return TRUE;
+                }else{
+                    return FALSE;
+                }
+
+            }else{
+                return FALSE;
+            }
+
+        }
+    }
+
+
 }
 
 ?>
