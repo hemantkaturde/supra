@@ -20436,7 +20436,6 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $query = $this->db->get(TBL_SUPPLIER_PO_MASTER);
         $fetch_result = $query->result_array();
 
-        
 
         foreach ($fetch_result as $row) {
             $id = $row['id'];
@@ -20445,18 +20444,23 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             if($this->db->update(TBL_SUPPLIER_PO_MASTER, $data_for_supplier)){
                 $data_for_supplier_item = array('pre_buyer_name'=>$buyer_name);
                 $this->db->where('supplier_po_id', $id);
-                if($this->db->update(TBL_SUPPLIER_PO_MASTER_ITEM, $data_for_supplier_item)){
-                    return TRUE;
-                }else{
-                    return FALSE;
-                }
+                $this->db->update(TBL_SUPPLIER_PO_MASTER_ITEM, $data_for_supplier_item);
+                // if($this->db->update(TBL_SUPPLIER_PO_MASTER_ITEM, $data_for_supplier_item)){
+                //     return TRUE;
+                // }else{
+                //     return FALSE;
+                // }
 
-            }else{
-                return FALSE;
+
+                // if($this->db->update(TBL_SUPPLIER_PO_MASTER_ITEM, $data_for_supplier_item)){
+                //     return TRUE;
+                // }else{
+                //     return FALSE;
+                // }
+
             }
-
         }
-
+        return TRUE;
 
 
         // $data_for_supplier = array('buyer_name'=>$buyer_name);
@@ -20492,17 +20496,17 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             if($this->db->update(TBL_VENDOR_PO_MASTER, $data_for_vendor_po)){
                 $data_for_vendor_item = array('pre_buyer_name'=>$buyer_name);
                 $this->db->where('vendor_po_id', $id);
-                if($this->db->update(TBL_VENDOR_PO_MASTER_ITEM, $data_for_vendor_item)){
-                    return TRUE;
-                }else{
-                    return FALSE;
-                }
+                $this->db->update(TBL_VENDOR_PO_MASTER_ITEM, $data_for_vendor_item);
 
-            }else{
-                return FALSE;
+                // if($this->db->update(TBL_VENDOR_PO_MASTER_ITEM, $data_for_vendor_item)){
+                //     return TRUE;
+                // }else{
+                //     return FALSE;
+                // }
+
             }
-
         }
+        return TRUE;
     }
 
 
