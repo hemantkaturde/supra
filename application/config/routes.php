@@ -613,6 +613,7 @@ $route['downloaddirectstock/(:any)'] = "admin/downloaddirectstock/$1";
 $route['checkifbuyerpoisexitsinsupplierpo'] = "admin/checkifbuyerpoisexitsinsupplierpo";
 $route['checkifbuyerpoisexitsinvendorpo'] = "admin/checkifbuyerpoisexitsinvendorpo";
 
+$route['checkifsupplierisexitsinvendorpo'] = "admin/checkifsupplierisexitsinvendorpo";
 
 
 $route['fetchUser'] = "admin/fetchUser";

@@ -2361,34 +2361,59 @@
 				closeOnCancel: false
 			}, function(isConfirm) {
 				if (isConfirm) {
-							$.ajax({
-								url : "<?php echo base_url();?>deleteSupplierpo",
+
+				    	$.ajax({
+								url : "<?php echo base_url();?>checkifsupplierisexitsinvendorpo",
 								type: "POST",
 								data : 'id='+elemF.attr('data-id'),
 								success: function(data, textStatus, jqXHR)
 								{
 									const obj = JSON.parse(data);
-								
+
 									if(obj.status=='success'){
 										swal({
-											title: "Deleted!",
-											text: "Supplier PO Deleted Succesfully",
+											title: "Already in use!",
+											text: "This Supplier po is linked to vendor po",
+											//type: "danger",
 											icon: "success",
 											button: "Ok",
 											},function(){ 
 												window.location.href = "<?php echo base_url().'supplierpo'?>";
 										});	
-									}
+									}else{
+										
+											$.ajax({
+												url : "<?php echo base_url();?>deleteSupplierpo",
+												type: "POST",
+												data : 'id='+elemF.attr('data-id'),
+												success: function(data, textStatus, jqXHR)
+												{
+													const obj = JSON.parse(data);
+												
+													if(obj.status=='success'){
+														swal({
+															title: "Deleted!",
+															text: "Supplier PO Deleted Succesfully",
+															icon: "success",
+															button: "Ok",
+															},function(){ 
+																window.location.href = "<?php echo base_url().'supplierpo'?>";
+														});	
+													}
 
-								},
-								error: function (jqXHR, textStatus, errorThrown)
-								{
-									$(".loader_ajax").hide();
+												},
+												error: function (jqXHR, textStatus, errorThrown)
+												{
+													$(".loader_ajax").hide();
+												}
+											})
+
+									}
 								}
 							})
 						}
 						else {
-				swal("Cancelled", "Supplier PO deletion cancelled ", "error");
+				     swal("Cancelled", "Supplier PO deletion cancelled ", "error");
 				}
 			});
 		});
