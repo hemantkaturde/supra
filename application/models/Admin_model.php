@@ -20490,8 +20490,6 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         // }
     }
 
-
-
     public function updatebuyeridinvendorpoanditem($buyer_po_number,$buyer_name){
 
         $this->db->select('id'); 
@@ -20515,6 +20513,40 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 //     return FALSE;
                 // }
 
+            }
+        }
+        return TRUE;
+    }
+
+
+    public function updateSupplieridinsupplierpo($po_id,$supplier_name){
+
+        $data = array('pre_supplier_name'=>$supplier_name);
+        $this->db->where('supplier_po_id', $po_id);
+        if($this->db->update(TBL_SUPPLIER_PO_MASTER_ITEM, $data)){
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+
+
+    public function updateSupplieridinvendorpoandvendorpoitem($supplier_po_number,$supplier_name){
+       
+        $this->db->select('id'); 
+        $this->db->where(TBL_VENDOR_PO_MASTER.'.supplier_po_number', $supplier_po_number);
+        $this->db->where(TBL_VENDOR_PO_MASTER.'.status', 1);
+        $query = $this->db->get(TBL_VENDOR_PO_MASTER);
+        $fetch_result = $query->result_array();
+
+        foreach ($fetch_result as $row) {
+            $id = $row['id'];
+            $data_for_vendor = array('supplier_name'=>$supplier_name);
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_VENDOR_PO_MASTER, $data_for_vendor)){
+                $data_for_vendor_item = array('pre_supplier_name'=>$supplier_name);
+                $this->db->where('supplier_po_id', $id);
+                $this->db->update(TBL_VENDOR_PO_MASTER_ITEM, $data_for_vendor_item);
             }
         }
         return TRUE;
