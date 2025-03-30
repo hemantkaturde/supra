@@ -1232,7 +1232,7 @@ class Admin_model extends CI_Model
         }
     }
 
-    public function checkifbuyerpoisexitsinsupplierpo($id){
+    public function checkifbuyerpoisexitsinsupplierpo($id){     
         $this->db->select('*');
         $this->db->where(TBL_SUPPLIER_PO_MASTER.'.buyer_po_number', $id);
         //$this->db->where(TBL_SUPPLIER_PO_MASTER.'.status', 1);
