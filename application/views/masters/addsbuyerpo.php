@@ -28,6 +28,8 @@
 
                                         $current_month = date("n"); // Get the current month without leading zeros
 
+                                        echo $current_month;
+
                                         if ($current_month >= 4) {
                                                 // If the current month is April or later, the financial year is from April (current year) to March (next year)
                                                 $financial_year_indian = date("y") . "" . (date("y") + 1);
@@ -36,6 +38,7 @@
                                                 $financial_year_indian = (date("y") - 1) . "" . date("y");
                                         }
 
+                                   
                                         if($getPreviousSalesOrderNumber['sales_order_number']){
                                                 // $arr = str_split($getPreviousSalesOrderNumber['sales_order_number']);
                                                 // $i = end($arr);
