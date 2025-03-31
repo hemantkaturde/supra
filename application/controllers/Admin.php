@@ -2496,6 +2496,11 @@ class Admin extends BaseController
                                                 $save_buyerpo_response['error'] = array('sales_order_number'=>strip_tags(form_error('sales_order_number')), 'date'=>strip_tags(form_error('date')), 'buyer_po_number'=>strip_tags(form_error('buyer_po_number')), 'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'buyer_name'=>strip_tags(form_error('buyer_name')),'currency'=>strip_tags(form_error('currency')),'rate'=>strip_tags(form_error('rate')),'value'=>strip_tags(form_error('value')),'part_number'=>strip_tags(form_error('part_number')),'order_quantity'=>strip_tags(form_error('order_quantity')),'description'=>strip_tags(form_error('description')),'delivery_date'=>strip_tags(form_error('delivery_date')),'generate_po'=>strip_tags(form_error('generate_po')),'remark'=>strip_tags(form_error('remark')));
                                             }
 
+
+
+                                            $updatebuyeridSupplierpoconfirmationitem = $this->admin_model->updatebuyeridSupplierpoconfirmationitem($po_id,trim($this->input->post('buyer_name')));
+
+
                                         }
                                     }
                                     /* update buyer id once buyer is update after 11-03-2025 */
