@@ -108,11 +108,11 @@
                                                     $po_number = 'SQPO'.$financial_year_indian.'0001';
                                                 }  
                                                 
-                                            }else{
-                                                $po_number = 'SQPO'.$financial_year_indian.'0001';
+                                                }else{
+                                                    $po_number = 'SQPO'.$financial_year_indian.'0001';
 
-                                            }
-                                                
+                                                }
+                                                    
 
                                                
                                             }else{

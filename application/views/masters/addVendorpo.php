@@ -37,9 +37,17 @@
                                         }
                                     
                                         if($getPrevioussupplierPONumber['po_number']){
-                                            
+
+
                                            $getPrevioussupplierPONumber_number = substr($getPrevioussupplierPONumber['po_number'], -4);
                                            $getPreviousPONumber_number = substr($getPreviousPONumber['po_number'], -4);
+
+
+                                           $getfinancial_year = substr($getPreviousvendorPONumber['po_number'], -8);
+                                           $first_part_of_string = substr($getfinancial_year,0,4);
+
+                                           if($first_part_of_string == $financial_year_indian){
+                                        
 
                                            if($getPrevioussupplierPONumber_number > $getPreviousPONumber_number){
 
@@ -178,6 +186,10 @@
                                                     }   
 
                                            }
+                                        }else{
+                                            $po_number = 'SQPO'.$financial_year_indian.'0001';
+
+                                        }
                                         
 
                                         }else{
