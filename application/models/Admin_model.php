@@ -1232,7 +1232,7 @@ class Admin_model extends CI_Model
         }
     }
 
-    public function checkifbuyerpoisexitsinsupplierpo($id){
+    public function checkifbuyerpoisexitsinsupplierpo($id){     
         $this->db->select('*');
         $this->db->where(TBL_SUPPLIER_PO_MASTER.'.buyer_po_number', $id);
         //$this->db->where(TBL_SUPPLIER_PO_MASTER.'.status', 1);
@@ -20545,7 +20545,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             $this->db->where('id', $id);
             if($this->db->update(TBL_VENDOR_PO_MASTER, $data_for_vendor)){
                 $data_for_vendor_item = array('pre_supplier_name'=>$supplier_name);
-                $this->db->where('supplier_po_id', $id);
+                $this->db->where('vendor_po_id', $id);
                 $this->db->update(TBL_VENDOR_PO_MASTER_ITEM, $data_for_vendor_item);
             }
         }
