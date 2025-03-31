@@ -73,7 +73,21 @@
                                                   $invoice_number = $inrno;
   
                                               } else {
-  
+
+                                                $getfinancial_year = substr($getPreviousPreexport['pre_export_invoice_no'], -8);
+
+                                                $first_part_of_string = substr($getfinancial_year,0,4);
+
+                                                if($first_part_of_string == $financial_year_indian){
+
+                                                    $string = $getPreviousPreexport['pre_export_invoice_no'];
+                                                    $n = 4; // Number of characters to extract from the end
+                                                    $lastNCharacters = substr($string, -$n);
+                                                    $inrno= "PEI".$financial_year_indian.'/'.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                    $invoice_number = $inrno;
+
+                                                }else{
+
                                                     $string = $getPreviousPreexport['pre_export_invoice_no'];
                                                     $n = 4; // Number of characters to extract from the end
                                                     $lastNCharacters1 = substr($string, -$n);
@@ -94,6 +108,7 @@
                                                     $lastNCharacters = substr($string1, -$n);
                                                     $inrno= "PEI".$financial_year_indian.'/'.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
                                                     $invoice_number = $inrno;
+                                                }
   
                                                   //$po_number = 'SQPO24250001';
                                               }  
