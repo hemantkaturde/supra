@@ -41,7 +41,7 @@
                                            $getPrevioussupplierPONumber_number = substr($getPrevioussupplierPONumber['po_number'], -4);
                                            $getPreviousPONumber_number = substr($getPreviousPONumber['po_number'], -4);
 
-                                           if($getPreviousPONumber_number > $getPrevioussupplierPONumber_number){
+                                           if($getPreviousPONumber_number < $getPrevioussupplierPONumber_number){
 
                                          
                                                     if($getPrevioussupplierPONumber_number){
