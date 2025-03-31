@@ -41,7 +41,9 @@
                                             // $inrno= "SQPD2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
                                             // $POD_details_number = $inrno;
 
+                                            if($first_part_of_string == $financial_year_indian){
 
+                                            }else{}
                                             
                                               // New Logic Start Here 
                                               $getfinancial_year = substr($getPreviousPODdetails_number[0]['pod_details_number'], -8);
@@ -68,6 +70,16 @@
                                                   $POD_details_number = $inrno;
   
                                               } else {
+
+
+                                                if($first_part_of_string == $financial_year_indian){
+                                                    $string = $getPreviousPODdetails_number[0]['pod_details_number'];
+                                                    $n = 4; // Number of characters to extract from the end
+                                                    $lastNCharacters = substr($string, -$n);
+                                                    $inrno= "SQPD".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                    $POD_details_number = $inrno;
+
+                                                }else{
   
                                                     $string = $getPreviousPODdetails_number[0]['pod_details_number'];
                                                     $n = 4; // Number of characters to extract from the end
@@ -91,6 +103,7 @@
                                                     $POD_details_number = $inrno;
   
                                                   //$po_number = 'SQPO24250001';
+                                                }
                                               }  
                                             /* New Logic End Here */
 

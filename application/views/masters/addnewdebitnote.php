@@ -75,6 +75,18 @@
                                                   $debit_note_number = $inrno;
   
                                               } else {
+
+
+                                                if($first_part_of_string == $financial_year_indian){
+
+                                                    $string = $getPreviousDebitnote_number[0]['debit_note_number'];
+                                                    $n = 4; // Number of characters to extract from the end
+                                                    $lastNCharacters = substr($string, -$n);
+                                                    $inrno= "SQDN".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                    $debit_note_number = $inrno;
+
+                                                }else{
+
   
                                                     $string = $getPreviousDebitnote_number[0]['debit_note_number'];
                                                     $n = 4; // Number of characters to extract from the end
@@ -98,6 +110,7 @@
                                                     $debit_note_number = $inrno;
   
                                                   //$po_number = 'SQPO24250001';
+                                                }
                                               }  
                                             /* New Logic End Here */
 
