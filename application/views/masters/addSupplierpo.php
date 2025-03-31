@@ -48,9 +48,9 @@
 
                                               $first_part_of_string = substr($getfinancial_year,0,4);
                                            
-                                         
+                                              if($first_part_of_string == $financial_year_indian){
                                            
-                                            if($getPreviousPONumber_number > $getPreviousvendorPONumber_number){
+                                                if($getPreviousPONumber_number > $getPreviousvendorPONumber_number){
                                               
                                                 if($getPreviousvendorPONumber_number){
                                                    
@@ -105,11 +105,15 @@
                                                       /* New Logic End Here */
 
                                                 }else{
-                                                 
-                                                    
-                                             
                                                     $po_number = 'SQPO'.$financial_year_indian.'0001';
-                                                }     
+                                                }  
+                                                
+                                            }else{
+                                                $po_number = 'SQPO'.$financial_year_indian.'0001';
+
+                                            }
+                                                
+
                                                
                                             }else{
                                                 if($getPreviousPONumber_number){
