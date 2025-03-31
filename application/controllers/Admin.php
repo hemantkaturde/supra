@@ -2630,6 +2630,27 @@ class Admin extends BaseController
      }
 
 
+
+     public function checkifsupplieridisinsupplierpoconfirm(){
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->checkifsupplieridisinsupplierpoconfirm(trim($this->input->post('id')));
+
+            if ($result) {
+                        $process = 'Check if Supplier PO is Exits in Supplierpo';
+                        $processFunction = 'Admin/checkifsupplieridisinsupplierpoconfirm';
+                        $this->logrecord($process,$processFunction);
+                        
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
+     }
+
+
     /**
      * This function is used to laod suppllierpo
      */

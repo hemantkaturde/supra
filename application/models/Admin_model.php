@@ -1252,6 +1252,17 @@ class Admin_model extends CI_Model
     }
 
 
+    public function checkifsupplieridisinsupplierpoconfirm($id){
+        $this->db->select('*');
+        $this->db->where(TBL_SUPPLIER_PO_CONFIRMATION.'.supplier_po_number', $id);
+        //$this->db->where(TBL_SUPPLIER_PO_MASTER.'.status', 1);
+        $query = $this->db->get(TBL_SUPPLIER_PO_CONFIRMATION);
+        $rowcount = $query->result_array();
+        return $rowcount;
+    }
+
+
+
 
     public function checkifbuyerpoisexitsinvendorpo($id){
         $this->db->select('*');

@@ -614,7 +614,7 @@ $route['checkifbuyerpoisexitsinsupplierpo'] = "admin/checkifbuyerpoisexitsinsupp
 $route['checkifbuyerpoisexitsinvendorpo'] = "admin/checkifbuyerpoisexitsinvendorpo";
 
 $route['checkifsupplierisexitsinvendorpo'] = "admin/checkifsupplierisexitsinvendorpo";
-
+$route['checkifsupplieridisinsupplierpoconfirm'] = "admin/checkifsupplieridisinsupplierpoconfirm";
 
 $route['fetchUser'] = "admin/fetchUser";
 
