@@ -70,6 +70,21 @@
 
                                         } else {
 
+
+                                            $getfinancial_year = substr($getPreviousscrapinvoice_number[0]['scrap_invoice_number'], -8);
+
+                                            $first_part_of_string = substr($getfinancial_year,0,4);
+    
+                                            if($first_part_of_string == $financial_year_indian){
+
+                                                $string = $getPreviousscrapinvoice_number[0]['scrap_invoice_number'];
+                                                $n = 4; // Number of characters to extract from the end
+                                                $lastNCharacters = substr($string, -$n);
+                                                $inrno= "SQSI".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                $POD_details_number = $inrno;
+
+                                            }else{
+
                                                 $string = $getPreviousscrapinvoice_number[0]['scrap_invoice_number'];
                                                 $n = 4; // Number of characters to extract from the end
                                                 $lastNCharacters1 = substr($string, -$n);
@@ -90,6 +105,7 @@
                                                 $lastNCharacters = substr($string1, -$n);
                                                 $inrno= "SQSI".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
                                                 $POD_details_number = $inrno;
+                                            }
 
                                             //$po_number = 'SQPO24250001';
                                         }  
