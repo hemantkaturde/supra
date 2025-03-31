@@ -69,6 +69,20 @@
 
                                             } else {
 
+                                                $getfinancial_year = substr($getpriviousscrapreturn['challan_id'], -8);
+
+                                                $first_part_of_string = substr($getfinancial_year,0,4);
+
+                                                if($first_part_of_string == $financial_year_indian){
+
+                                                    $string = $getpriviousscrapreturn['challan_id'];
+                                                    $n = 4; // Number of characters to extract from the end
+                                                    $lastNCharacters = substr($string, -$n);
+                                                    $inrno= "SQSR".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                    $challan_id = $inrno;
+
+                                                }else{
+
                                                   $string = $getpriviousscrapreturn['challan_id'];
                                                   $n = 4; // Number of characters to extract from the end
                                                   $lastNCharacters1 = substr($string, -$n);
@@ -89,6 +103,7 @@
                                                   $lastNCharacters = substr($string1, -$n);
                                                   $inrno= "SQSR".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
                                                   $challan_id = $inrno;
+                                                }
 
                                                 //$po_number = 'SQPO24250001';
                                             }  
