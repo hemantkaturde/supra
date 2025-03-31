@@ -26,6 +26,8 @@
                                 <div class="col-md-4">
                                     <?php
 
+                                        $current_month = date("n"); // Get the current month without leading zeros
+
                                         if ($current_month >= 4) {
                                                 // If the current month is April or later, the financial year is from April (current year) to March (next year)
                                                 $financial_year_indian = date("y") . "" . (date("y") + 1);
