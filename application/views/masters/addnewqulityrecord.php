@@ -73,19 +73,34 @@
 
                                             } else {
 
-                                                $string = $get_prevoius_QR_REcord[0]['quality_records_number'];
-                                                $n = 4; // Number of characters to extract from the end
-                                                $lastNCharacters1 = substr($string1, -$n);
-                                                
-                                                if($lastNCharacters1  > 0){
-                                                    $string1 =$get_prevoius_QR_REcord[0]['quality_records_number'];
-                                                }else{
-                                                    $string1 =0;
-                                                }
+                                                $getfinancial_year = substr($get_prevoius_QR_REcord[0]['quality_records_number'], -8);
 
-                                                $lastNCharacters = substr($string1, -$n);
-                                                $inrno= "SQID".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
-                                                $quality_records_number = $inrno;
+                                                $first_part_of_string = substr($getfinancial_year,0,4);
+
+                                                if($first_part_of_string == $financial_year_indian){
+
+                                                    $string = $get_prevoius_QR_REcord[0]['quality_records_number'];
+                                                    $n = 4; // Number of characters to extract from the end
+                                                    $lastNCharacters = substr($string, -$n);
+                                                    $inrno= "SQID".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                    $quality_records_number = $inrno;
+
+                                                }else{
+                                                    
+                                                    $string = $get_prevoius_QR_REcord[0]['quality_records_number'];
+                                                    $n = 4; // Number of characters to extract from the end
+                                                    $lastNCharacters1 = substr($string1, -$n);
+                                                    
+                                                    if($lastNCharacters1  > 0){
+                                                        $string1 =$get_prevoius_QR_REcord[0]['quality_records_number'];
+                                                    }else{
+                                                        $string1 =0;
+                                                    }
+
+                                                    $lastNCharacters = substr($string1, -$n);
+                                                    $inrno= "SQID".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                    $quality_records_number = $inrno;
+                                             }
 
                                                 //$po_number = 'SQPO24250001';
                                             }  
