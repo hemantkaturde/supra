@@ -43,7 +43,7 @@
                                            $getPreviousPONumber_number = substr($getPreviousPONumber['po_number'], -4);
 
 
-                                           $getfinancial_year = substr($getPreviousvendorPONumber['po_number'], -8);
+                                           $getfinancial_year = substr($getPrevioussupplierPONumber['po_number'], -8);
                                            $first_part_of_string = substr($getfinancial_year,0,4);
 
                                            if($first_part_of_string == $financial_year_indian){
