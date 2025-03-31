@@ -80,6 +80,7 @@
                                         // }
 
 
+                                     
                                         if($getPreviousvendorBomnumber['bom_number']){
                                             $getPreviousvendorbomPONumber_number = substr($getPreviousvendorBomnumber['bom_number'], -4);
                                             $getPreviousBomnumber_number = substr($getPreviousBomnumber['bom_number'], -4);
@@ -213,6 +214,7 @@
                                                 $po_number = 'SQBM24250001';
                                             }
                                         }
+
 
                                     ?>
                                     
