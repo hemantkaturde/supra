@@ -20553,6 +20553,28 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
+    public function updateSupplieridinSupplierpoconfirmation($supplier_po_number,$supplier_name){
+       
+        $this->db->select('id'); 
+        $this->db->where(TBL_SUPPLIER_PO_CONFIRMATION.'.supplier_po_number', $supplier_po_number);
+        $this->db->where(TBL_SUPPLIER_PO_CONFIRMATION.'.status', 1);
+        $query = $this->db->get(TBL_SUPPLIER_PO_CONFIRMATION);
+        $fetch_result = $query->result_array();
+
+        foreach ($fetch_result as $row) {
+            $id = $row['id'];
+            $data_for_vendor = array('supplier_po_id'=>$supplier_name);
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_SUPPLIER_PO_CONFIRMATION, $data_for_vendor)){
+                $data_for_vendor_item = array('pre_supplier_po_number'=>$supplier_name);
+                $this->db->where('supplier_po_confirmation_id', $id);
+                $this->db->update(TBL_SUPPLIER_PO_CONFIRMATION_ITEM, $data_for_vendor_item);
+            }
+        }
+        return TRUE;
+    }
+
+
 }
 
 ?>
