@@ -28,7 +28,7 @@
 
                                         $current_month = date("n"); // Get the current month without leading zeros
 
-                                        $current_date = date(); // 
+                                        $current_date =  date("Y/m/d"); // 
 
                                         echo $current_month.'-'.$current_date;
 
