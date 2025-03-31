@@ -50,7 +50,7 @@
                                            
                                          
                                            
-                                            if($first_part_of_string == $financial_year_indian){
+                                            if($getPreviousPONumber_number > $getPreviousvendorPONumber_number){
                                               
                                                 if($getPreviousvendorPONumber_number){
                                                    
