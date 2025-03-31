@@ -89,6 +89,20 @@ $(document).ready(function() {
 
                                     } else {
 
+                                        $getfinancial_year = substr($getPreviousCHAdebitnotnumber['cha_debit_number'], -8);
+
+                                        $first_part_of_string = substr($getfinancial_year,0,4);
+
+                                        if($first_part_of_string == $financial_year_indian){
+
+                                            $string = $getPreviousCHAdebitnotnumber['cha_debit_number'];
+                                            $n = 4; // Number of characters to extract from the end
+                                            $lastNCharacters = substr($string, -$n);
+                                            $inrno= "EXDN".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                            $CHA_debit_number = $inrno;
+
+                                        }else{
+
                                         $string = $getPreviousCHAdebitnotnumber['cha_debit_number'];
                                         $n = 4; // Number of characters to extract from the end
                                         $lastNCharacters1 = substr($string, -$n);
@@ -107,6 +121,7 @@ $(document).ready(function() {
                                         $lastNCharacters = substr($string1, -$n);
                                         $inrno= "EXDN".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
                                         $CHA_debit_number = $inrno;
+                                     }
 
                                     }  
                                     /* New Logic End Here */
