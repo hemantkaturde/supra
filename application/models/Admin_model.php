@@ -20594,6 +20594,9 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                     $query1 = $this->db->get(TBL_SUPPLIER_PO_CONFIRMATION);
                     $fetch_result1 = $query1->result_array();
 
+                    print_r($fetch_result1);
+                    exit;
+
                     foreach ($fetch_result1 as $row1) {
                         $id1 = $row1['id'];
                         $data_for_vendor_po = array('buyer_po_id'=>$buyer_name);
