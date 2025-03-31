@@ -84,7 +84,7 @@
                                         if($getPreviousvendorBomnumber['bom_number']){
                                             $getPreviousvendorbomPONumber_number = substr($getPreviousvendorBomnumber['bom_number'], -4);
                                             $getPreviousBomnumber_number = substr($getPreviousBomnumber['bom_number'], -4);
-                                            if($getPreviousvendorbomPONumber_number > $getPreviousBomnumber_number){
+                                            if($getPreviousvendorbomPONumber_number < $getPreviousBomnumber_number){
 
                                                 if($getPreviousvendorbomPONumber_number){
                                                  
