@@ -46,7 +46,6 @@
                            
                                                 // get last digit of string 
 
-
                                                 $getfinancial_year = substr($getPreviousSalesOrderNumber['sales_order_number'], -8);
 
                                                 $first_part_of_string = substr($getfinancial_year,0,4);
@@ -66,10 +65,7 @@
 
                                                  $inrnossss= "SQBO".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
 
-
                                                  $sales_order_number = $inrnossss;
-
-
 
                                                 }else{
                                                         $lastDigit = substr($getPreviousSalesOrderNumber['sales_order_number'], -1);
@@ -118,8 +114,6 @@
                                                         $sales_order_number = $inrno;
 
                                                 }
-
-
 
                                         }else{
                                             $sales_order_number = 'SQBO'.$financialYear.'0001';
