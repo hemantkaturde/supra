@@ -69,6 +69,21 @@
                                                  $po_number = $inrno;
  
                                              } else {
+
+                                                $getfinancial_year = substr($getPreviousjobworkponumber['po_number'], -8);
+
+                                                $first_part_of_string = substr($getfinancial_year,0,4);
+
+                                                if($first_part_of_string == $financial_year_indian){
+
+                                                    $string = $getPreviousjobworkponumber['po_number'];
+                                                    $n = 4; // Number of characters to extract from the end
+                                                    $lastNCharacters = substr($string, -$n);
+                                                    $inrno= "SQJW".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                    $po_number = $inrno;
+
+
+                                                }else{
  
                                                    $string = $getPreviousjobworkponumber['po_number'];
                                                    $n = 4; // Number of characters to extract from the end
@@ -92,6 +107,7 @@
                                                    $po_number = $inrno;
  
                                                  //$po_number = 'SQPO24250001';
+                                                }
                                              }  
                                            /* New Logic End Here */
                                         }else{
