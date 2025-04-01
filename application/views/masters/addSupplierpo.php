@@ -125,13 +125,32 @@
                                                 }else{
 
 
+                                                    $getfinancial_year = substr($getPreviousvendorPONumber_number['po_number'], -8);
 
-                                                    $string = $getPreviousvendorPONumber_number;
+                                                    $first_part_of_string = substr($getfinancial_year,0,4);
+
+                                                    if($first_part_of_string == $financial_year_indian){
+
+                                                    $string = $getPreviousvendorPONumber_number['po_number'];
                                                     $n = 4; // Number of characters to extract from the end
                                                     $lastNCharacters = substr($string, -$n);
                                                     $inrno= "SQPO".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
                                                     $po_number = $inrno;
                                                    // $po_number = 'SQPO'.$financial_year_indian.'0001';
+                                                    }else{
+
+                                                        
+                                                        
+                                                    $string = 0;
+                                                    $n = 4; // Number of characters to extract from the end
+                                                    $lastNCharacters = substr($string, -$n);
+                                                    $inrno= "SQPO".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                    $po_number = $inrno;
+                                                   // $po_number = 'SQPO'.$financial_year_indian.'0001';
+
+
+
+                                                    }
                                                 }  
                                                 
                                                 }else{
