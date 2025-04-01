@@ -135,13 +135,13 @@
 
                                             }else{
 
-                                                $getfinancial_year = substr($getPreviousBomnumber['po_number'], -8);
+                                                $getfinancial_year = substr($getPreviousBomnumber['bom_number'], -8);
 
                                                 $first_part_of_string = substr($getfinancial_year,0,4);
 
                                                 if($first_part_of_string == $financial_year_indian){
 
-                                                    $string = $getPreviousBomnumber['po_number'];
+                                                    $string = $getPreviousBomnumber['bom_number'];
                                                     $n = 4; // Number of characters to extract from the end
                                                     $lastNCharacters = substr($string, -$n);
                                                     $inrno= "SQBM".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
