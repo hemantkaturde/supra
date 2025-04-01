@@ -25,151 +25,142 @@
                             <div class="box-body">
                                 <div class="col-md-4">
                                     <?php
-                                        // Old Code Comment here 
-                                        // if($getPreviousvendorBomnumber['bom_number']){
-                                        //     $getPreviousvendorbomPONumber_number = substr($getPreviousvendorBomnumber['bom_number'], -4);
-                                        //     $getPreviousBomnumber_number = substr($getPreviousBomnumber['bom_number'], -4);
-                                        //     if($getPreviousvendorbomPONumber_number > $getPreviousBomnumber_number){
 
-                                        //         if($getPreviousvendorbomPONumber_number){
-                                        //             // $arr = str_split($getPreviousvendorbomPONumber_number);
-                                        //             // $i = end($arr);
-                                        //             // $inrno= "SQBM2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
-                                        //             // $po_number = $inrno;
+                                        $current_month = date("n"); // Get the current month without leading zeros
 
-                                        //             $string = $getPreviousvendorbomPONumber_number;
-                                        //             $n = 4; // Number of characters to extract from the end
-                                        //             $lastNCharacters = substr($string, -$n);
-                                        //             $inrno= "SQBM2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
-                                        //             $po_number = $inrno;
+                                        if ($current_month >= 4) {
+                                                // If the current month is April or later, the financial year is from April (current year) to March (next year)
+                                                $financial_year_indian = date("y") . "" . (date("y") + 1);
+                                        } else {
+                                                // If the current month is before April, the financial year is from April (last year) to March (current year)
+                                                $financial_year_indian = (date("y") - 1) . "" . date("y");
+                                        }
 
-
-
-                                        //         }else{
-                                        //             $po_number = 'SQBM23240001';
-                                        //         }     
-                                        //     }else{
-                                        //         if($getPreviousBomnumber_number){
-                                        //             // $arr = str_split($getPreviousBomnumber_number);
-                                        //             // $i = end($arr);
-                                        //             // $inrno= "SQBM2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
-                                        //             // $po_number = $inrno;
-
-                                        //             $string = $getPreviousBomnumber_number;
-                                        //             $n = 4; // Number of characters to extract from the end
-                                        //             $lastNCharacters = substr($string, -$n);
-                                        //             $inrno= "SQBM2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
-                                        //             $po_number = $inrno;
-
-
-                                        //         }else{
-                                        //             $po_number = 'SQBM23240001';
-                                        //         }  
-                                        //     }
-
-                                        // }else{
-
-                                        //     if($getPreviousBomnumber['bom_number']){
-                                        //         $arr = str_split($getPreviousBomnumber['bom_number']);
-                                        //         $i = end($arr);
-                                        //         $inrno= "SQBM2324".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
-                                        //         $po_number = $inrno;
-                                        //     }else{
-                                        //         $po_number = 'SQBM23240001';
-                                        //     }
-                                        // }
-
-
-                                     
                                         if($getPreviousvendorBomnumber['bom_number']){
                                             $getPreviousvendorbomPONumber_number = substr($getPreviousvendorBomnumber['bom_number'], -4);
                                             $getPreviousBomnumber_number = substr($getPreviousBomnumber['bom_number'], -4);
-                                            if($getPreviousvendorbomPONumber_number < $getPreviousBomnumber_number){
+                                         
+                                            $getfinancial_year = substr($getPreviousvendorBomnumber['bom_number'], -8);
+                                            $first_part_of_string = substr($getfinancial_year,0,4);
+ 
+                                            if($first_part_of_string == $financial_year_indian){
+                                         
 
-                                                if($getPreviousvendorbomPONumber_number){
-                                                 
-                                                    $getfinancial_year = substr($getPreviousvendorBomnumber['bom_number'], -8);
-        
-                                                    // Function to check if a given year is the current Indian financial year
-                                                    $year = substr($getfinancial_year,0,2);
+                                                if($getPreviousvendorbomPONumber_number > $getPreviousBomnumber_number){
 
-                                                    // Current date
-                                                    $currentDate = new DateTime();
+                                                    if($getPreviousvendorbomPONumber_number){
                                                     
-                                                    // Financial year in India starts from April 1st
-                                                    $financialYearStart = new DateTime("$year-04-01");
-                                                    
-                                                    // Financial year in India ends on March 31st of the following year
-                                                    $financialYearEnd = new DateTime(($year + 1) . "-03-31");
-                                                    
-                                                    // Check if the current date falls within the financial year
-                                                    if ($currentDate >= $financialYearStart && $currentDate <= $financialYearEnd) {
-                                                       
-                                                        $string = $getPreviousvendorbomPONumber_number;
-                                                        $n = 4; // Number of characters to extract from the end
-                                                        $lastNCharacters = substr($string, -$n);
-                                                        $inrno= "SQBM2425".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
-                                                        $po_number = $inrno;
+                                                        $getfinancial_year = substr($getPreviousvendorBomnumber['bom_number'], -8);
+            
+                                                        // Function to check if a given year is the current Indian financial year
+                                                        $year = substr($getfinancial_year,0,2);
 
-                                                    } else {
-
-                                                        $string = $getPreviousBomnumber_number;
-                                                        $n = 4; // Number of characters to extract from the end
-                                                        $lastNCharacters = substr($string, -$n);
-                                                        $inrno= "SQBM2425".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
-                                                        $po_number = $inrno;
-
-                                                        //$po_number = 'SQPO24250001';
-                                                    }  
-                                                  /* New Logic End Here */
-
-                                                }else{
-                                                    $po_number = 'SQBM24250001';
-                                                }     
-                                            }else{
-                                                if($getPreviousBomnumber_number){
-
-                                                      
-                                                    /* New Logic Statrt Here */ 
-                                                      /* get finaicial Year from the Serial Number*/
-                                                      $getfinancial_year = substr($getPreviousBomnumber['bom_number'], -8);
-        
-                                                      // Function to check if a given year is the current Indian financial year
-                                                      $year = substr($getfinancial_year,0,2);
-
-                                                      // Current date
-                                                      $currentDate = new DateTime();
-                                                      
-                                                      // Financial year in India starts from April 1st
-                                                      $financialYearStart = new DateTime("$year-04-01");
-                                                      
-                                                      // Financial year in India ends on March 31st of the following year
-                                                      $financialYearEnd = new DateTime(($year + 1) . "-03-31");
-                                                      
-                                                      // Check if the current date falls within the financial year
-                                                      if ($currentDate >= $financialYearStart && $currentDate <= $financialYearEnd) {
-                                                         
-                                                            $string = $getPreviousBomnumber['bom_number'];
-                                                            $n = 4; // Number of characters to extract from the end
-                                                            $lastNCharacters = substr($string, -$n);
-                                                            $inrno= "SQBM2425".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
-                                                            $po_number = $inrno;
-
-                                                      } else {
+                                                        // Current date
+                                                        $currentDate = new DateTime();
+                                                        
+                                                        // Financial year in India starts from April 1st
+                                                        $financialYearStart = new DateTime("$year-04-01");
+                                                        
+                                                        // Financial year in India ends on March 31st of the following year
+                                                        $financialYearEnd = new DateTime(($year + 1) . "-03-31");
+                                                        
+                                                        // Check if the current date falls within the financial year
+                                                        if ($currentDate >= $financialYearStart && $currentDate <= $financialYearEnd) {
+                                                        
                                                             $string = $getPreviousvendorbomPONumber_number;
                                                             $n = 4; // Number of characters to extract from the end
                                                             $lastNCharacters = substr($string, -$n);
-                                                            $inrno= "SQBM2425".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                            $inrno= "SQBM".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
                                                             $po_number = $inrno;
 
-                                                      }  
-                                                    /* New Logic End Here */
-                                                  
+                                                        } else {
 
+                                                            $string = $getPreviousBomnumber_number;
+                                                            $n = 4; // Number of characters to extract from the end
+                                                            $lastNCharacters = substr($string, -$n);
+                                                            $inrno= "SQBM".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                            $po_number = $inrno;
+
+                                                            //$po_number = 'SQPO24250001';
+                                                        }  
+                                                    /* New Logic End Here */
+
+                                                    }else{
+                                                        $po_number = 'SQBM'.$financial_year_indian.'0001';
+                                                    }     
                                                 }else{
-                                                    $po_number = 'SQBM24250001';
-                                                }  
+                                                    if($getPreviousBomnumber_number){
+
+                                                        
+                                                        /* New Logic Statrt Here */ 
+                                                        /* get finaicial Year from the Serial Number*/
+                                                        $getfinancial_year = substr($getPreviousBomnumber['bom_number'], -8);
+            
+                                                        // Function to check if a given year is the current Indian financial year
+                                                        $year = substr($getfinancial_year,0,2);
+
+                                                        // Current date
+                                                        $currentDate = new DateTime();
+                                                        
+                                                        // Financial year in India starts from April 1st
+                                                        $financialYearStart = new DateTime("$year-04-01");
+                                                        
+                                                        // Financial year in India ends on March 31st of the following year
+                                                        $financialYearEnd = new DateTime(($year + 1) . "-03-31");
+                                                        
+                                                        // Check if the current date falls within the financial year
+                                                        if ($currentDate >= $financialYearStart && $currentDate <= $financialYearEnd) {
+                                                            
+                                                                $string = $getPreviousBomnumber['bom_number'];
+                                                                $n = 4; // Number of characters to extract from the end
+                                                                $lastNCharacters = substr($string, -$n);
+                                                                $inrno= "SQBM".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                                $po_number = $inrno;
+
+                                                        } else {
+                                                                $string = $getPreviousvendorbomPONumber_number;
+                                                                $n = 4; // Number of characters to extract from the end
+                                                                $lastNCharacters = substr($string, -$n);
+                                                                $inrno= "SQBM".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                                $po_number = $inrno;
+
+                                                        }  
+                                                        /* New Logic End Here */
+                                                    
+
+                                                    }else{
+                                                        $po_number = 'SQBM'.$financial_year_indian.'0001';
+                                                    }  
+                                                }
+
+                                            }else{
+
+                                                $getfinancial_year = substr($getPreviousBomnumber['po_number'], -8);
+
+                                                $first_part_of_string = substr($getfinancial_year,0,4);
+
+                                                if($first_part_of_string == $financial_year_indian){
+
+                                                    $string = $getPreviousBomnumber['po_number'];
+                                                    $n = 4; // Number of characters to extract from the end
+                                                    $lastNCharacters = substr($string, -$n);
+                                                    $inrno= "SQBM".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                    $po_number = $inrno;
+                                                }else{
+
+                                                    $string = 0;
+                                                    $n = 4; // Number of characters to extract from the end
+                                                    $lastNCharacters = substr($string, -$n);
+                                                    $inrno= "SQBM". $financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                    $po_number = $inrno;
+
+                                                }
+
+
+
+
                                             }
+
 
                                         }else{
 
@@ -198,20 +189,20 @@
                                                           $string = $getPreviousBomnumber['bom_number'];
                                                           $n = 4; // Number of characters to extract from the end
                                                           $lastNCharacters = substr($string, -$n);
-                                                          $inrno= "SQBM2425".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                          $inrno= "SQBM".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
                                                           $po_number = $inrno;
 
                                                       } else {
                                                           $string = $getPreviousvendorbomPONumber_number;
                                                           $n = 4; // Number of characters to extract from the end
                                                           $lastNCharacters = substr($string, -$n);
-                                                          $inrno= "SQBM2425".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                          $inrno= "SQBM".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
                                                           $po_number = $inrno;
 
                                                       }  
                                                     /* New Logic End Here */
                                             }else{
-                                                $po_number = 'SQBM24250001';
+                                                $po_number = 'SQBM'.$financial_year_indian.'0001';
                                             }
                                         }
 
