@@ -53,7 +53,7 @@
                                            
                                                if($getPreviousvendorPONumber_number > $getPreviousPONumber_number){
 
-                                                echo "in first condition";
+                                            
                                               
                                                     if($getPreviousvendorPONumber_number){
                                                         echo "in 2 condition";
@@ -157,7 +157,6 @@
                                                 
                                                 }else{
                                                    // $po_number = 'SQPO'.$financial_year_indian.'0001';
-                                                   echo "in 3 condition";
                                                    $getfinancial_year = substr($getPreviousPONumber['po_number'], -8);
 
                                                    $first_part_of_string = substr($getfinancial_year,0,4);
@@ -185,7 +184,6 @@
 
                                                
                                                 }else{
-                                                    echo "in 33 condition";
                                                     if($getPreviousPONumber_number){
                                                         // $arr = str_split($getPreviousPONumber_number);
                                                         // $i = end($arr);
@@ -257,7 +255,6 @@
                                                 }
 
                                                 }else{
-                                                    echo "in 6 condition";
                                         
                                                 if($getPreviousPONumber['po_number']){
                                                 // $arr = str_split($getPreviousPONumber['po_number']);
