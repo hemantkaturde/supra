@@ -185,7 +185,7 @@
 
                                                
                                                 }else{
-                                                    echo "in 3 condition";
+                                                    echo "in 33 condition";
                                                     if($getPreviousPONumber_number){
                                                         // $arr = str_split($getPreviousPONumber_number);
                                                         // $i = end($arr);
