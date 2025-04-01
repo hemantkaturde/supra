@@ -82,7 +82,7 @@
                                                             $string = $getPreviousVendorPoconfirmationNumber_number;
                                                             $n = 4; // Number of characters to extract from the end
                                                             $lastNCharacters = substr($string, -$n);
-                                                            $inrno= "SQFU2425".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                            $inrno= "SQFU".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
                                                             $po_number = $inrno;
 
                                                         } else {
@@ -90,7 +90,7 @@
                                                             $string = $getPreviousSupplierPoconfirmationNumber_number;
                                                             $n = 4; // Number of characters to extract from the end
                                                             $lastNCharacters = substr($string, -$n);
-                                                            $inrno= "SQFU2425".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                            $inrno= "SQFU".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
                                                             $po_number = $inrno;
 
                                                             //$po_number = 'SQPO24250001';
@@ -98,7 +98,7 @@
                                                     /* New Logic End Here */
 
                                                     }else{
-                                                        $po_number = 'SQFU24250001';
+                                                        $po_number = 'SQFU'.$financial_year_indian.'0001';
                                                     }   
 
                                                 }else{
@@ -128,20 +128,20 @@
                                                                 $string = $getPreviousSupplierPoconfirmationNumber['po_number'];
                                                                 $n = 4; // Number of characters to extract from the end
                                                                 $lastNCharacters = substr($string, -$n);
-                                                                $inrno= "SQFU2425".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                                $inrno= "SQFU". $financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
                                                                 $po_number = $inrno;
 
                                                         } else {
                                                                 $string = $getPreviousVendorPoconfirmationNumber_number;
                                                                 $n = 4; // Number of characters to extract from the end
                                                                 $lastNCharacters = substr($string, -$n);
-                                                                $inrno= "SQFU2425".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                                $inrno= "SQFU".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
                                                                 $po_number = $inrno;
 
                                                         }  
                                                         /* New Logic End Here */
                                                     }else{
-                                                        $po_number = 'SQFU24250001';
+                                                        $po_number = 'SQFU'.$financial_year_indian.'0001';
                                                     }   
                                                 }
 
@@ -156,14 +156,14 @@
                                                     $string = $getPreviousSupplierPoconfirmationNumber['po_number'];
                                                     $n = 4; // Number of characters to extract from the end
                                                     $lastNCharacters = substr($string, -$n);
-                                                    $inrno= "SQFU2425".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                    $inrno= "SQFU".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
                                                     $po_number = $inrno;
                                                 }else{
 
                                                     $string = 0;
                                                     $n = 4; // Number of characters to extract from the end
                                                     $lastNCharacters = substr($string, -$n);
-                                                    $inrno= "SQFU2425".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                    $inrno= "SQFU". $financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
                                                     $po_number = $inrno;
 
                                                 }
@@ -202,21 +202,21 @@
                                                           $string = $getPreviousSupplierPoconfirmationNumber['po_number'];
                                                           $n = 4; // Number of characters to extract from the end
                                                           $lastNCharacters = substr($string, -$n);
-                                                          $inrno= "SQFU2425".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                          $inrno= "SQFU". $financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
                                                           $po_number = $inrno;
 
                                                       } else {
                                                           $string = $getPreviousVendorPoconfirmationNumber_number;
                                                           $n = 4; // Number of characters to extract from the end
                                                           $lastNCharacters = substr($string, -$n);
-                                                          $inrno= "SQFU2425".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                          $inrno= "SQFU".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
                                                           $po_number = $inrno;
 
                                                       }  
                                                     /* New Logic End Here */
 
                                             }else{
-                                                $po_number = 'SQFU24250001';
+                                                $po_number = 'SQFU'.$financial_year_indian.'0001';
                                             }
                                             
                                         } 
