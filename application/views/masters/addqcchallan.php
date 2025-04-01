@@ -79,7 +79,12 @@
 
                                             } else {
 
-                                                if($first_part_of_string== $financial_year_indian){
+                                                $string = $getpreviouschallannumber[0]['challan_number'];
+                                                $parts = explode("/", $string);
+                                                $lastYear = end($parts);
+                                             
+
+                                                if($lastYear== $financial_year_indian){
  
                                                     $string = $getpreviouschallannumber[0]['challan_number'];
                                                     $explod = explode("/",$string);
@@ -91,7 +96,7 @@
                                                 }else{
 
                                                 
-                                                    $string = 0;
+                                                    $string =0;
                                                     $explod = explode("/",$string);
                                                     $n = 4; // Number of characters to extract from the end
                                                     $lastNCharacters = substr($explod[1], -$n);
