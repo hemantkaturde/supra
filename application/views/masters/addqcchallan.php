@@ -79,13 +79,25 @@
 
                                             } else {
 
-                                              
-                                                $string = $getpreviouschallannumber[0]['challan_number'];
-                                                $explod = explode("/",$string);
-                                                $n = 4; // Number of characters to extract from the end
-                                                $lastNCharacters = substr($explod[1], -$n);
-                                                $inrno= "QC".'/'.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT).'/'.$financial_year_indian;
-                                                $challan_number = $inrno;
+                                                if($first_part_of_string== $financial_year_indian){
+ 
+                                                    $string = $getpreviouschallannumber[0]['challan_number'];
+                                                    $explod = explode("/",$string);
+                                                    $n = 4; // Number of characters to extract from the end
+                                                    $lastNCharacters = substr($explod[1], -$n);
+                                                    $inrno= "QC".'/'.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT).'/'.$financial_year_indian;
+                                                    $challan_number = $inrno;
+    
+                                                }else{
+
+                                                
+                                                    $string = 0;
+                                                    $explod = explode("/",$string);
+                                                    $n = 4; // Number of characters to extract from the end
+                                                    $lastNCharacters = substr($explod[1], -$n);
+                                                    $inrno= "QC".'/'.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT).'/'.$financial_year_indian;
+                                                    $challan_number = $inrno;
+                                                }
 
                                                 //$po_number = 'SQPO24250001';
                                             }  
