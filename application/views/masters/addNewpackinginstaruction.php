@@ -77,6 +77,13 @@
 
                                             } else {
 
+
+                                                $numericPart = substr($getpreviouspackinginstarction[0]['packing_instrauction_id'], 2);
+
+                                                $firstFourDigits = substr($numericPart, 0, 4);
+
+                                               
+
                                                 $string = $getpreviouspackinginstarction[0]['packing_instrauction_id'];
                                                 $n = 4; // Number of characters to extract from the end
                                                 $lastNCharacters1 = substr($string, -$n);
@@ -87,10 +94,21 @@
                                                     $string1 =0;
                                                 }
 
-                                                $n = 4; // Number of characters to extract from the end
-                                                $lastNCharacters = substr($string1, -$n);
-                                                $inrno= "PI".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
-                                                $packing_instrauction_id = $inrno;
+                                                if($firstFourDigits== $financial_year_indian){
+                                                    $n = 4; // Number of characters to extract from the end
+                                                    $lastNCharacters = substr($string1, -$n);
+                                                    $inrno= "PI".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                    $packing_instrauction_id = $inrno;
+
+                                                }else{
+
+                                                    $n = 4; // Number of characters to extract from the end
+                                                    $lastNCharacters = 0;
+                                                    $inrno= "PI".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                    $packing_instrauction_id = $inrno;
+                                                }
+
+                                              
 
                                                 //$po_number = 'SQPO24250001';
                                             }  
