@@ -41,37 +41,61 @@
 
 
 
-                                            if($getpreviuousenquirynumber['enquiry_number']){
-                                                // $arr = str_split($getpreviuousenquirynumber['enquiry_number']);
-                                                // $i = end($arr);
-                                                // $inrno= str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
-                                                // $enquiry_number = $inrno;
+                                            // if($getpreviuousenquirynumber['enquiry_number']){
+                                            //     // $arr = str_split($getpreviuousenquirynumber['enquiry_number']);
+                                            //     // $i = end($arr);
+                                            //     // $inrno= str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                            //     // $enquiry_number = $inrno;
 
-                                                $getfinancial_year = substr($getpreviuousenquirynumber['enquiry_number'], -8);
+                                            //     $getfinancial_year = substr($getpreviuousenquirynumber['enquiry_number'], -8);
 
-                                                $first_part_of_string = substr($getfinancial_year,0,4);
+                                            //     $first_part_of_string = substr($getfinancial_year,0,4);
 
-                                                if($first_part_of_string==$financial_year_indian){
+                                            //     if($first_part_of_string==$financial_year_indian){
 
-                                                    $string = $getpreviuousenquirynumber['enquiry_number'];
-                                                    $n = 4; // Number of characters to extract from the end
-                                                    $lastNCharacters = substr($string, -$n);
-                                                    $inrno= str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
-                                                    $enquiry_number = $inrno;
+                                            //         $string = $getpreviuousenquirynumber['enquiry_number'];
+                                            //         $n = 4; // Number of characters to extract from the end
+                                            //         $lastNCharacters = substr($string, -$n);
+                                            //         $inrno= str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                            //         $enquiry_number = $inrno;
 
-                                                }else{
+                                            //     }else{
 
-                                                    $string = 0;
-                                                    $n = 4; // Number of characters to extract from the end
-                                                    $lastNCharacters = substr($string, -$n);
-                                                    $inrno= str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
-                                                    $enquiry_number = $inrno;
+                                            //         $string = 0;
+                                            //         $n = 4; // Number of characters to extract from the end
+                                            //         $lastNCharacters = substr($string, -$n);
+                                            //         $inrno= str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                            //         $enquiry_number = $inrno;
 
+                                            //     }
+
+                                            // }else{
+                                            //     $enquiry_number = '0001';
+                                            // }
+
+                                            if (!empty($getpreviuousenquirynumber['enquiry_number'])) {
+                                                $previous_enquiry_number = $getpreviuousenquirynumber['enquiry_number'];
+                                            
+                                                // Extract financial year (last 4 digits)
+                                                $previous_financial_year = substr($previous_enquiry_number, -4);
+                                            
+                                                if ($previous_financial_year == $financial_year_indian) {
+                                                    // Extract the sequential number (first 4 digits)
+                                                    $previous_number = substr($previous_enquiry_number, 0, 4);
+                                                    $new_number = str_pad((int)$previous_number + 1, 4, '0', STR_PAD_LEFT);
+                                                } else {
+                                                    // Reset sequence if financial year has changed
+                                                    $new_number = '0001';
                                                 }
-
-                                            }else{
-                                                $enquiry_number = '0001';
+                                            } else {
+                                                // First entry case
+                                                $new_number = '0001';
                                             }
+                                            
+                                            // Format the new enquiry number
+                                            $enquiry_number = $new_number . '/' . $financial_year_indian;
+                                        
+                                            
                                         ?>
                                             <input type="text" class="form-control" id="enquiry_number" name="enquiry_number" value="<?=$enquiry_number;?>" required readonly>
                                             <p class="error enquiry_number_error"></p>
