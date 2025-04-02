@@ -77,13 +77,30 @@
                                                     $rejection_number = $inrno;
     
                                                 } else {
+
+                                                    $getfinancial_year = substr($getPreviousrejectionformnumber['rejection_number'], -8);
+
+                                                    $first_part_of_string = substr($getfinancial_year,0,4);
+        
+                                                    if($first_part_of_string == $financial_year_indian){
+
+                                                        $string = $getPreviousrejectionformnumber['rejection_number'];
+                                                        $n = 4; // Number of characters to extract from the end
+                                                        $lastNCharacters = substr($string, -$n);
+                                                        $inrno= "SQID".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                        $rejection_number = $inrno;
+        
+                                                    }else{
+                                                        $string = 0;
+                                                        $n = 4; // Number of characters to extract from the end
+                                                        $lastNCharacters = substr($string, -$n);
+                                                        $inrno= "SQID".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                        $rejection_number = $inrno;
+        
+
+                                                    }
     
-                                                    $string = $getPreviousrejectionformnumber['rejection_number'];
-                                                    $n = 4; // Number of characters to extract from the end
-                                                    $lastNCharacters = substr($string, -$n);
-                                                    $inrno= "SQID".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
-                                                    $rejection_number = $inrno;
-    
+                                                  
                                                     //$po_number = 'SQPO24250001';
                                                 }  
                                               /* New Logic End Here */
