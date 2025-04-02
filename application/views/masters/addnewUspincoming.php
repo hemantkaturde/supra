@@ -40,99 +40,69 @@
 
 
 
-                                                // if($getPrevioususpincomingnumber['usp_id_number']){
+                                                if($getPrevioususpincomingnumber['usp_id_number']){
                                                 
-                                                //     $getfinancial_year = substr($getPrevioususpincomingnumber['usp_id_number'], -8);
+                                                    // $getfinancial_year = substr($getPrevioususpincomingnumber['usp_id_number'], -8);
 
-                                                //     $first_part_of_string = substr($getfinancial_year,0,4);
-                                                //     $year = substr($getfinancial_year,0,2);
+                                                    // $first_part_of_string = substr($getfinancial_year,0,4);
+                                                    // $year = substr($getfinancial_year,0,2);
+                                                    $string = $getPrevioususpincomingnumber['usp_id_number'];
+                                                    $parts = explode("-", $string);
+                                                    $year = $parts[1]; // Extracts "252
 
-                                                //     // Current date
-                                                //     $currentDate = new DateTime();
-                                                    
-                                                //     // Financial year in India starts from April 1st
-                                                //     $financialYearStart = new DateTime("$year-04-01");
-                                                    
-                                                //     // Financial year in India ends on March 31st of the following year
-                                                //     $financialYearEnd = new DateTime(($year + 1) . "-03-31");
-                                                    
-                                                //     // Check if the current date falls within the financial year
-                                                //     if ($currentDate >= $financialYearStart && $currentDate <= $financialYearEnd) {
-                                                    
-                                                //         $string = $getPrevioususpincomingnumber['usp_id_number'];
-                                                //         $n = 4; // Number of characters to extract from the end
-                                                //         $lastNCharacters = substr($string, -$n);
-                                                //         $inrno= "USPID-".$financial_year_indian.'-'.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
-                                                //         $id_number = $inrno;
-
-                                                //     } else {
-
-
-                                                //         $getfinancial_year = substr($getPrevioususpincomingnumber['usp_id_number'], -8);
-
-                                                //         $first_part_of_string = substr($getfinancial_year,0,4);
-            
-                                                //         if($first_part_of_string == $financial_year_indian){
-
-                                                //             $string = $getPrevioususpincomingnumber['usp_id_number'];
-                                                //             $n = 4; // Number of characters to extract from the end
-                                                //             $lastNCharacters = substr($string, -$n);
-                                                //             $inrno= "USPID-".$financial_year_indian.'-'.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
-                                                //             $id_number = $inrno;
-
-                                                //         }else{
-
-                                                //             $string = 0;
-                                                //             $n = 4; // Number of characters to extract from the end
-                                                //             $lastNCharacters = substr($string, -$n);
-                                                //             $inrno= "USPID-".$financial_year_indian.'-'.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
-                                                //             $id_number = $inrno;
-                                                //         }
-
-                                                //         //$po_number = 'SQPO24250001';
-                                                //     }  
-                                                // /* New Logic End Here */
-
-                                                // }else{
-                                                //     $id_number = 'USPID-'.$financial_year_indian.'-'.'0001';
-                                                // }
-
-                                                if ($getPrevioususpincomingnumber['usp_id_number']) {
-
-                                                    // Extract the last 8 characters (financial year and sequence)
-                                                    $getfinancial_year = substr($getPrevioususpincomingnumber['usp_id_number'], -8);
-                                                    $first_part_of_string = substr($getfinancial_year, 0, 4);
-                                                    $year = substr($getfinancial_year, 0, 2);
-                                                
                                                     // Current date
                                                     $currentDate = new DateTime();
-                                                
-                                                    // Define the financial year range
+                                                    
+                                                    // Financial year in India starts from April 1st
                                                     $financialYearStart = new DateTime("$year-04-01");
+                                                    
+                                                    // Financial year in India ends on March 31st of the following year
                                                     $financialYearEnd = new DateTime(($year + 1) . "-03-31");
-                                                
-                                                    // Extract the last 4 digits for the series number
-                                                    $string = $getPrevioususpincomingnumber['usp_id_number'];
-                                                    $lastNCharacters = substr($string, -4);
-                                                    $nextSeriesNumber = str_pad((int)$lastNCharacters + 1, 4, '0', STR_PAD_LEFT);
-                                                
-                                                    // Check if the current financial year matches
+                                                    
+                                                    // Check if the current date falls within the financial year
                                                     if ($currentDate >= $financialYearStart && $currentDate <= $financialYearEnd) {
-                                                        $id_number = "USPID-$financial_year_indian-$nextSeriesNumber";
+                                                    
+                                                        $string = $getPrevioususpincomingnumber['usp_id_number'];
+                                                        $n = 4; // Number of characters to extract from the end
+                                                        $lastNCharacters = substr($string, -$n);
+                                                        $inrno= "USPID-".$financial_year_indian.'-'.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                        $id_number = $inrno;
+
                                                     } else {
-                                                        if ($first_part_of_string == $financial_year_indian) {
-                                                            $id_number = "USPID-$financial_year_indian-$nextSeriesNumber";
-                                                        } else {
-                                                            // Reset the series if it's a new financial year
-                                                            $id_number = "USPID-$financial_year_indian-0001";
+
+
+                                                        // $getfinancial_year = substr($getPrevioususpincomingnumber['usp_id_number'], -8);
+
+                                                        // $first_part_of_string = substr($getfinancial_year,0,4);
+
+                                                        $string = $getPrevioususpincomingnumber['usp_id_number'];
+                                                        $parts = explode("-", $string);
+                                                        $year = $parts[1]; // Extracts "252
+            
+                                                        if($year == $financial_year_indian){
+
+                                                            $string = $getPrevioususpincomingnumber['usp_id_number'];
+                                                            $n = 4; // Number of characters to extract from the end
+                                                            $lastNCharacters = substr($string, -$n);
+                                                            $inrno= "USPID-".$financial_year_indian.'-'.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                            $id_number = $inrno;
+
+                                                        }else{
+
+                                                            $string = 0;
+                                                            $n = 4; // Number of characters to extract from the end
+                                                            $lastNCharacters = substr($string, -$n);
+                                                            $inrno= "USPID-".$financial_year_indian.'-'.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                            $id_number = $inrno;
                                                         }
-                                                    }
-                                                } else {
-                                                    // Start from the first ID if no previous record exists
-                                                    $id_number = "USPID-$financial_year_indian-0001";
+
+                                                        //$po_number = 'SQPO24250001';
+                                                    }  
+                                                /* New Logic End Here */
+
+                                                }else{
+                                                    $id_number = 'USPID-'.$financial_year_indian.'-'.'0001';
                                                 }
-                                                
-                                                
                                             ?>
                                             <input type="text" class="form-control" id="id_number" name="id_number"
                                                 value="<?=$id_number;?>" required>
