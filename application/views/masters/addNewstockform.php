@@ -76,12 +76,26 @@
 
                                             } else {
 
-                                                $string = $getPriviousstockid[0]['stock_id_number'];
-                                                $n = 4; // Number of characters to extract from the end
-                                                $lastNCharacters = substr($string, -$n);
-                                                $inrno= "SQID".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
-                                                $stock_form_id = $inrno;
+                                                $getfinancial_year = substr($getPriviousstockid[0]['stock_id_number'], -8);
 
+                                                $first_part_of_string = substr($getfinancial_year,0,4);
+    
+                                                if($first_part_of_string == $financial_year_indian){
+
+                                                    $string = $getPriviousstockid[0]['stock_id_number'];
+                                                    $n = 4; // Number of characters to extract from the end
+                                                    $lastNCharacters = substr($string, -$n);
+                                                    $inrno= "SQID".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                    $stock_form_id = $inrno;
+
+                                                }else{
+
+                                                    $string = 0;
+                                                    $n = 4; // Number of characters to extract from the end
+                                                    $lastNCharacters = substr($string, -$n);
+                                                    $inrno= "SQID".$financial_year_indian.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                    $stock_form_id = $inrno;
+                                                }
                                                 //$po_number = 'SQPO24250001';
                                             }  
                                           /* New Logic End Here */
