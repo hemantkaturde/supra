@@ -28,15 +28,15 @@
                                         <label for="blasting_id">Blasting Id<span class="required">*</span></label>
                                         <?php
 
-                                            $current_month = date("n"); // Get the current month without leading zeros
+                                            // $current_month = date("n"); // Get the current month without leading zeros
 
-                                            if ($current_month >= 4) {
-                                                    // If the current month is April or later, the financial year is from April (current year) to March (next year)
-                                                    $financial_year_indian = date("y") . "" . (date("y") + 1);
-                                            } else {
-                                                    // If the current month is before April, the financial year is from April (last year) to March (current year)
-                                                    $financial_year_indian = (date("y") - 1) . "" . date("y");
-                                            }
+                                            // if ($current_month >= 4) {
+                                            //         // If the current month is April or later, the financial year is from April (current year) to March (next year)
+                                            //         $financial_year_indian = date("y") . "" . (date("y") + 1);
+                                            // } else {
+                                            //         // If the current month is before April, the financial year is from April (last year) to March (current year)
+                                            //         $financial_year_indian = (date("y") - 1) . "" . date("y");
+                                            // }
 
 
                                             // if($getpreviuousblasterId['blasting_id']){
@@ -70,14 +70,25 @@
                                             //     $stock_form_id = 'JW/'.$financial_year_indian.'/0001';
                                             // }
 
-                                            if (!empty($getpreviuousblasterId['blasting_id'])) {
+                                            $current_month = date("n"); // Get current month
+                                            $current_year = date("Y");
+
+                                            // Determine financial year (4-digit format like 2024 or 2025)
+                                            if ($current_month >= 4) {
+                                                $financial_year = $current_year; // Start of FY is current year
+                                            } else {
+                                                $financial_year = $current_year - 1; // Before April, FY started last year
+                                            }
+
+                                            
+                                           if (!empty($getpreviuousblasterId['blasting_id'])) {
                                                 $previous_id = $getpreviuousblasterId['blasting_id']; // e.g., JW/2025/0012
                                                 $parts = explode("/", $previous_id); // Split into parts: ["JW", "2025", "0012"]
                                             
                                                 $prev_fy = isset($parts[1]) ? $parts[1] : null;
                                                 $prev_number = isset($parts[2]) ? (int)$parts[2] : 0;
                                             
-                                                if ($prev_fy == $financial_year_indian) {
+                                                if ($prev_fy == $financial_year) {
                                                     // Same financial year: increment number
                                                     $new_number = str_pad($prev_number + 1, 4, "0", STR_PAD_LEFT);
                                                 } else {
@@ -85,10 +96,10 @@
                                                     $new_number = "0001";
                                                 }
                                             
-                                                $stock_form_id = "JW/" . $financial_year_indian . "/" . $new_number;
+                                                $stock_form_id = "JW/" . $financial_year . "/" . $new_number;
                                             } else {
                                                 // First ever ID
-                                                $stock_form_id = "JW/" . $financial_year_indian . "/0001";
+                                                $stock_form_id = "JW/" . $financial_year . "/0001";
                                             }
 
 
