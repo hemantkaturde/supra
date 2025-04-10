@@ -27,22 +27,65 @@
                                     <div class="form-group">
                                         <label for="blasting_id">Blasting Id<span class="required">*</span></label>
                                         <?php
-                                            if($getpreviuousblasterId['blasting_id']){
-                                                // $arr = str_split($getpreviuousblasterId['blasting_id']);
-                                                // $i = end($arr);
-                                                // $inrno= "JW/".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
-                                                // $stock_form_id = $inrno;
-
-                                                $string = $getpreviuousblasterId['blasting_id'];
-                                                $n = 4; // Number of characters to extract from the end
-                                                $lastNCharacters = substr($string, -$n);
-                                                $inrno= "JW/".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
-                                                $stock_form_id = $inrno;
 
 
-                                            }else{
-                                                $stock_form_id = 'JW/0001';
+                                            // $current_month = date("n"); // Get the current month without leading zeros
+
+                                            // if ($current_month >= 4) {
+                                            //         // If the current month is April or later, the financial year is from April (current year) to March (next year)
+                                            //         $financial_year_indian = date("y") . "" . (date("y") + 1);
+                                            // } else {
+                                            //         // If the current month is before April, the financial year is from April (last year) to March (current year)
+                                            //         $financial_year_indian = (date("y") - 1) . "" . date("y");
+                                            // }
+
+
+
+                                            // if($getpreviuousblasterId['blasting_id']){
+                                            //     // $arr = str_split($getpreviuousblasterId['blasting_id']);
+                                            //     // $i = end($arr);
+                                            //     // $inrno= "JW/".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                            //     // $stock_form_id = $inrno;
+
+                                            //     $string = $getpreviuousblasterId['blasting_id'];
+                                            //     $n = 4; // Number of characters to extract from the end
+                                            //     $lastNCharacters = substr($string, -$n);
+                                            //     $inrno= "JW/".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                            //     $stock_form_id = $inrno;
+
+
+                                            // }else{
+                                            //     $stock_form_id = 'JW/0001';
+                                            // }
+
+
+                                            // Get the current month (1 to 12)
+                                            $current_month = date("n");
+
+                                            // Determine the Indian financial year
+                                            if ($current_month >= 4) {
+                                                // From April (current year) to March (next year)
+                                                $financial_year_indian = date("y") . (date("y") + 1);
+                                            } else {
+                                                // From April (last year) to March (current year)
+                                                $financial_year_indian = (date("y") - 1) . date("y");
                                             }
+
+                                            // Generate the stock form ID
+                                            if (!empty($getpreviuousblasterId['blasting_id'])) {
+                                                $string = $getpreviuousblasterId['blasting_id'];
+
+                                                // Get last 4 digits (assumed to be a number)
+                                                $lastNCharacters = substr($string, -4);
+
+                                                // Increment the number and format it with leading zeros
+                                                $inrno = "JW/" . str_pad((int)$lastNCharacters + 1, 4, "0", STR_PAD_LEFT);
+                                                $stock_form_id = $inrno;
+                                            } else {
+                                                // Starting ID if none exists
+                                                $stock_form_id = "JW/0001";
+                                            }
+
                                         ?>
                                             <input type="text" class="form-control" id="blasting_id" name="blasting_id" value="<?=$stock_form_id;?>" required readonly>
                                             <p class="error blasting_id_error"></p>
