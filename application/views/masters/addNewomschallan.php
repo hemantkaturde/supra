@@ -28,62 +28,41 @@
                                         <label for="blasting_id">Blasting Id<span class="required">*</span></label>
                                         <?php
 
+                                            $current_month = date("n"); // Get the current month without leading zeros
 
-                                            // $current_month = date("n"); // Get the current month without leading zeros
-
-                                            // if ($current_month >= 4) {
-                                            //         // If the current month is April or later, the financial year is from April (current year) to March (next year)
-                                            //         $financial_year_indian = date("y") . "" . (date("y") + 1);
-                                            // } else {
-                                            //         // If the current month is before April, the financial year is from April (last year) to March (current year)
-                                            //         $financial_year_indian = (date("y") - 1) . "" . date("y");
-                                            // }
-
-
-
-                                            // if($getpreviuousblasterId['blasting_id']){
-                                            //     // $arr = str_split($getpreviuousblasterId['blasting_id']);
-                                            //     // $i = end($arr);
-                                            //     // $inrno= "JW/".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
-                                            //     // $stock_form_id = $inrno;
-
-                                            //     $string = $getpreviuousblasterId['blasting_id'];
-                                            //     $n = 4; // Number of characters to extract from the end
-                                            //     $lastNCharacters = substr($string, -$n);
-                                            //     $inrno= "JW/".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
-                                            //     $stock_form_id = $inrno;
-
-
-                                            // }else{
-                                            //     $stock_form_id = 'JW/0001';
-                                            // }
-
-
-                                            // Get the current month (1 to 12)
-                                            $current_month = date("n");
-
-                                            // Determine the Indian financial year
                                             if ($current_month >= 4) {
-                                                // From April (current year) to March (next year)
-                                                $financial_year_indian = date("y") . (date("y") + 1);
+                                                    // If the current month is April or later, the financial year is from April (current year) to March (next year)
+                                                    $financial_year_indian = date("y") . "" . (date("y") + 1);
                                             } else {
-                                                // From April (last year) to March (current year)
-                                                $financial_year_indian = (date("y") - 1) . date("y");
+                                                    // If the current month is before April, the financial year is from April (last year) to March (current year)
+                                                    $financial_year_indian = (date("y") - 1) . "" . date("y");
                                             }
 
-                                            if (!empty($getpreviuousblasterId['blasting_id'])) {
-                                                $string = $getpreviuousblasterId['blasting_id']; // e.g., JW/0216
+
+                                            if($getpreviuousblasterId['blasting_id']){
+                                                // $arr = str_split($getpreviuousblasterId['blasting_id']);
+                                                // $i = end($arr);
+                                                // $inrno= "JW/".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                                // $stock_form_id = $inrno;
+
+                                                if ($previous_financial_year == $financial_year_indian) {
+
+                                                    $string = $getpreviuousblasterId['blasting_id'];
+                                                    $n = 4; // Number of characters to extract from the end
+                                                    $lastNCharacters = substr($string, -$n);
+                                                    $inrno= "JW/".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                                    $stock_form_id = $inrno;
+
+                                                }else{
+
+                                                    $stock_form_id ='JW/0001';
+
+                                                }
+
                                             
-                                                // Extract the numeric part after "JW/"
-                                                $parts = explode("/", $string);
-                                                $number = isset($parts[1]) ? (int)$parts[1] : 0;
-                                            
-                                                // Increment and format with leading zeros
-                                                $new_number = str_pad($number + 1, 4, "0", STR_PAD_LEFT);
-                                                $stock_form_id = "JW/" . $new_number;
-                                            } else {
-                                                // First ID if none exists
-                                                $stock_form_id = "JW/0001";
+
+                                            }else{
+                                                $stock_form_id = 'JW/0001';
                                             }
                                         ?>
                                             <input type="text" class="form-control" id="blasting_id" name="blasting_id" value="<?=$stock_form_id;?>" required readonly>
