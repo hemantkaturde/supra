@@ -71,21 +71,20 @@
                                                 $financial_year_indian = (date("y") - 1) . date("y");
                                             }
 
-                                            // Generate the stock form ID
                                             if (!empty($getpreviuousblasterId['blasting_id'])) {
-                                                $string = $getpreviuousblasterId['blasting_id'];
-
-                                                // Get last 4 digits (assumed to be a number)
-                                                $lastNCharacters = substr($string, -4);
-
-                                                // Increment the number and format it with leading zeros
-                                                $inrno = "JW/" . str_pad((int)$lastNCharacters + 1, 4, "0", STR_PAD_LEFT);
-                                                $stock_form_id = $inrno;
+                                                $string = $getpreviuousblasterId['blasting_id']; // e.g., JW/0216
+                                            
+                                                // Extract the numeric part after "JW/"
+                                                $parts = explode("/", $string);
+                                                $number = isset($parts[1]) ? (int)$parts[1] : 0;
+                                            
+                                                // Increment and format with leading zeros
+                                                $new_number = str_pad($number + 1, 4, "0", STR_PAD_LEFT);
+                                                $stock_form_id = "JW/" . $new_number;
                                             } else {
-                                                // Starting ID if none exists
+                                                // First ID if none exists
                                                 $stock_form_id = "JW/0001";
                                             }
-
                                         ?>
                                             <input type="text" class="form-control" id="blasting_id" name="blasting_id" value="<?=$stock_form_id;?>" required readonly>
                                             <p class="error blasting_id_error"></p>
