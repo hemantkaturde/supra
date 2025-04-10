@@ -77,7 +77,7 @@
                                                 $prev_fy = isset($parts[1]) ? $parts[1] : null;
                                                 $prev_number = isset($parts[2]) ? (int)$parts[2] : 0;
                                             
-                                                if ($prev_fy == $financial_year) {
+                                                if ($prev_fy == $financial_year_indian) {
                                                     // Same financial year: increment number
                                                     $new_number = str_pad($prev_number + 1, 4, "0", STR_PAD_LEFT);
                                                 } else {
@@ -85,10 +85,10 @@
                                                     $new_number = "0001";
                                                 }
                                             
-                                                $stock_form_id = "JW/" . $financial_year . "/" . $new_number;
+                                                $stock_form_id = "JW/" . $financial_year_indian . "/" . $new_number;
                                             } else {
                                                 // First ever ID
-                                                $stock_form_id = "JW/" . $financial_year . "/0001";
+                                                $stock_form_id = "JW/" . $financial_year_indian . "/0001";
                                             }
 
 
