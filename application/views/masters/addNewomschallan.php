@@ -39,31 +39,59 @@
                                             }
 
 
-                                            if($getpreviuousblasterId['blasting_id']){
-                                                // $arr = str_split($getpreviuousblasterId['blasting_id']);
-                                                // $i = end($arr);
-                                                // $inrno= "JW/".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
-                                                // $stock_form_id = $inrno;
+                                            // if($getpreviuousblasterId['blasting_id']){
+                                            //     // $arr = str_split($getpreviuousblasterId['blasting_id']);
+                                            //     // $i = end($arr);
+                                            //     // $inrno= "JW/".str_pad((int)$i+1, 4, 0, STR_PAD_LEFT);
+                                            //     // $stock_form_id = $inrno;
+                                            //     $previous_enquiry_number = $getpreviuousblasterId['blasting_id'];
+                                            
+                                            //     // Extract financial year (last 4 digits)
+                                            //     $previous_financial_year = substr($previous_enquiry_number, -4);
+                                            
 
-                                                if ($previous_financial_year == $financial_year_indian) {
+                                            //     if ($previous_financial_year == $financial_year_indian) {
 
-                                                    $string = $getpreviuousblasterId['blasting_id'];
-                                                    $n = 4; // Number of characters to extract from the end
-                                                    $lastNCharacters = substr($string, -$n);
-                                                    $inrno= "JW/".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
-                                                    $stock_form_id = $inrno;
+                                            //         $string = $getpreviuousblasterId['blasting_id'];
+                                            //         $n = 4; // Number of characters to extract from the end
+                                            //         $lastNCharacters = substr($string, -$n);
+                                            //         $inrno= "JW/".$financial_year_indian.'/'.str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
+                                            //         $stock_form_id = $inrno;
 
-                                                }else{
+                                            //     }else{
 
-                                                    $stock_form_id ='JW/0001';
+                                            //         $stock_form_id ='JW/'.$financial_year_indian.'/0001';
 
-                                                }
+                                            //     }
 
                                             
 
-                                            }else{
-                                                $stock_form_id = 'JW/0001';
+                                            // }else{
+                                            //     $stock_form_id = 'JW/'.$financial_year_indian.'/0001';
+                                            // }
+
+                                            if (!empty($getpreviuousblasterId['blasting_id'])) {
+                                                $previous_id = $getpreviuousblasterId['blasting_id']; // e.g., JW/2025/0012
+                                                $parts = explode("/", $previous_id); // Split into parts: ["JW", "2025", "0012"]
+                                            
+                                                $prev_fy = isset($parts[1]) ? $parts[1] : null;
+                                                $prev_number = isset($parts[2]) ? (int)$parts[2] : 0;
+                                            
+                                                if ($prev_fy == $financial_year) {
+                                                    // Same financial year: increment number
+                                                    $new_number = str_pad($prev_number + 1, 4, "0", STR_PAD_LEFT);
+                                                } else {
+                                                    // New financial year: start fresh
+                                                    $new_number = "0001";
+                                                }
+                                            
+                                                $stock_form_id = "JW/" . $financial_year . "/" . $new_number;
+                                            } else {
+                                                // First ever ID
+                                                $stock_form_id = "JW/" . $financial_year . "/0001";
                                             }
+
+
                                         ?>
                                             <input type="text" class="form-control" id="blasting_id" name="blasting_id" value="<?=$stock_form_id;?>" required readonly>
                                             <p class="error blasting_id_error"></p>
