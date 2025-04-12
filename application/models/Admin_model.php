@@ -2114,7 +2114,7 @@ class Admin_model extends CI_Model
             $this->db->or_where(TBL_SUPPLIER_PO_CONFIRMATION.".date LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_SUPPLIER.".supplier_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_SUPPLIER_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_SUPPLIER_PO_CONFIRMATION.".material_receipt_confirmation LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER_PO_CONFIRMATION.".material_sent LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_SUPPLIER_PO_CONFIRMATION.".confirmed_date LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_SUPPLIER_PO_CONFIRMATION.".po_confirmed LIKE '%".$params['search']['value']."%'");
@@ -2142,7 +2142,7 @@ class Admin_model extends CI_Model
             $this->db->or_where(TBL_SUPPLIER_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_SUPPLIER_PO_CONFIRMATION.".confirmed_date LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_SUPPLIER_PO_CONFIRMATION.".material_receipt_confirmation LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_SUPPLIER_PO_CONFIRMATION.".material_sent LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_SUPPLIER_PO_CONFIRMATION.".po_confirmed LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%')");
         }
@@ -2163,7 +2163,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['sup_name'] = $value['sup_name'];
                 $data[$counter]['sup_po'] = $value['suppomaster'];
                 $data[$counter]['buyer_name'] = $value['bu_name'];
-                $data[$counter]['material_receipt_confirmation'] = $value['mrc'];
+                $data[$counter]['material_sent'] = $value['material_sent'];
                 $data[$counter]['confirmed_date'] = $value['confirmed_date'];
                 $data[$counter]['confirmed_with'] = $value['confirmed_with'];
                 $data[$counter]['action'] = '';
