@@ -36,6 +36,7 @@
                                         <th>Buyer Name</th>
                                         <th>Buyer PO Number</th>
                                         <th>Buyer PO Date</th>
+                                        <th>Stock Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>

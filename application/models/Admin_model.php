@@ -4275,6 +4275,17 @@ class Admin_model extends CI_Model
                 $data[$counter]['buyer_name'] = $value['buyer_name_master'];
                 $data[$counter]['buyer_po'] = $value['sales_order_number'].' - '.$value['buyer_po_number'];
                 $data[$counter]['buyer_po_date'] = $value['buyer_po_date'];
+
+              
+                $checkitemisfromstockorfrompo = $this->checkitemisfromstockorfrompo($value['packinginstarctionid']);
+
+                if($checkitemisfromstockorfrompo[0]['item_po_status']=='from_stock'){
+                    $data[$counter]['stock_status'] ='From Stock';
+                }else{
+                    $data[$counter]['stock_status'] ='From PO';
+                }
+             
+
                 $data[$counter]['action'] = '';
 
 
@@ -4304,6 +4315,27 @@ class Admin_model extends CI_Model
 
 
     }
+    
+
+
+
+    public function checkitemisfromstockorfrompo($packinginstarctionid){
+
+        $data['packinginstarctiondetailsfordispaly']=  $this->getpackinginstarction_detailsdata_by_id($packinginstarctionid);
+        $packinginstarctionid=  $this->getpackinginstarction_data_by_id(trim($packinginstarctionid));
+
+        $buyer_po_number = $packinginstarctionid[0]['buyerpoid'];
+        $main_id = $packinginstarctionid[0]['main_id'];
+      
+        $data['main_id'] =$main_id;
+        $getpackingdetails_itemdetails =  $this->getpackingdetails_itemdetails(trim($main_id));
+
+        return $getpackingdetails_itemdetails;
+       
+    }
+
+
+
 
     public function checkIpackinginstraction($packing_instrauction_id){
 

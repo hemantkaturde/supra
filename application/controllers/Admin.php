@@ -6339,9 +6339,8 @@ class Admin extends BaseController
         $data['getbuyeritemdetails'] =  $this->admin_model->getbuyeritemdetails(trim($buyer_po_number));
         $data['getpackingdetails_itemdetails'] =  $this->admin_model->getpackingdetails_itemdetails(trim($main_id));
         $this->loadViews("masters/addpackinginstractiondetails", $this->global, $data, NULL);  
-
-
     }
+
 
     public function downloaddirectstock($id){
 
