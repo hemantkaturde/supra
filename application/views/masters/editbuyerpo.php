@@ -286,6 +286,14 @@
                                                             <p class="error item_po_status_error"></p>
                                                         </div>
                                                     </div>
+
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-3 col-form-label">Inco Terms</label>
+                                                        <div class="col-sm-9">
+                                                            <input type="text" class="form-control"  id="inco_terms" name="inco_terms">
+                                                            <p class="error inco_terms_error"></p>
+                                                        </div>
+                                                    </div>
                                     
                                                 </div>
 

@@ -9705,7 +9705,7 @@ class Admin_model extends CI_Model
 
   public function getbuyeritemdataforitemedit($id){
 
-    $this->db->select(TBL_BUYER_PO_MASTER_ITEM.'.id as buyer_item_id,'.TBL_FINISHED_GOODS.'.fin_id,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name as description,'.TBL_BUYER_PO_MASTER_ITEM.'.order_oty,'.TBL_BUYER_PO_MASTER_ITEM.'.unit,'.TBL_BUYER_PO_MASTER_ITEM.'.rate,'.TBL_BUYER_PO_MASTER_ITEM.'.value,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date,'.TBL_BUYER_PO_MASTER_ITEM.'.packaging_instraction,'.TBL_BUYER_PO_MASTER_ITEM.'.item_po_status');
+    $this->db->select(TBL_BUYER_PO_MASTER_ITEM.'.id as buyer_item_id,'.TBL_FINISHED_GOODS.'.fin_id,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name as description,'.TBL_BUYER_PO_MASTER_ITEM.'.order_oty,'.TBL_BUYER_PO_MASTER_ITEM.'.unit,'.TBL_BUYER_PO_MASTER_ITEM.'.rate,'.TBL_BUYER_PO_MASTER_ITEM.'.value,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date,'.TBL_BUYER_PO_MASTER_ITEM.'.packaging_instraction,'.TBL_BUYER_PO_MASTER_ITEM.'.item_po_status,'.TBL_BUYER_PO_MASTER_ITEM.'.inco_terms');
     $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
     $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.id', $id);
     $this->db->order_by(TBL_BUYER_PO_MASTER_ITEM.'.id','DESC');
