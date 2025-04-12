@@ -2129,7 +2129,7 @@ class Admin_model extends CI_Model
     
     public function getSupplierpoconfirmationdata($params){
 
-        $this->db->select('*,'.TBL_SUPPLIER.'.supplier_name as sup_name,'.TBL_BUYER_MASTER.'.buyer_name as bu_name,'.TBL_SUPPLIER_PO_MASTER.'.po_number as suppomaster,'.TBL_SUPPLIER_PO_CONFIRMATION.'.po_number as supplierconfirmpo,'.TBL_SUPPLIER_PO_CONFIRMATION.'.id as supplierconfimid');
+        $this->db->select('*,'.TBL_SUPPLIER.'.supplier_name as sup_name,'.TBL_BUYER_MASTER.'.buyer_name as bu_name,'.TBL_SUPPLIER_PO_MASTER.'.po_number as suppomaster,'.TBL_SUPPLIER_PO_CONFIRMATION.'.po_number as supplierconfirmpo,'.TBL_SUPPLIER_PO_CONFIRMATION.'.id as supplierconfimid,'.TBL_SUPPLIER_PO_CONFIRMATION.'.material_receipt_confirmation as mrc');
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id  = '.TBL_SUPPLIER_PO_CONFIRMATION.'.buyer_po_id');
         $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id  = '.TBL_SUPPLIER_PO_CONFIRMATION.'.supplier_po_id');
         $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_SUPPLIER_PO_CONFIRMATION.'.supplier_po_number');
@@ -2163,7 +2163,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['sup_name'] = $value['sup_name'];
                 $data[$counter]['sup_po'] = $value['suppomaster'];
                 $data[$counter]['buyer_name'] = $value['bu_name'];
-                $data[$counter]['material_receipt_confirmation'] = $value['material_receipt_confirmation'];
+                $data[$counter]['material_receipt_confirmation'] = $value['mrc'];
                 $data[$counter]['confirmed_date'] = $value['confirmed_date'];
                 $data[$counter]['confirmed_with'] = $value['confirmed_with'];
                 $data[$counter]['action'] = '';
