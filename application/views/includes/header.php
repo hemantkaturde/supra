@@ -219,6 +219,7 @@
                               <i class="fa fa-angle-left pull-right"></i>
                             </span>
                         </a>
+
                         <ul class="treeview-menu" >
                           <li class="line_height <?php if($pageUrl=="buyerpo" || $pageUrl=="addnewBuyerpo"  || $pageUrl=="viewBuyerpo" || $pageUrl=="editBuyerpo" ){echo 'active';}?>"><a href="<?php echo base_url(); ?>buyerpo"><i class="fa fa-cubes"></i> Buyer PO</a></li>
                           <li class="line_height <?php if($pageUrl=="supplierpo" || $pageUrl=="addnewSupplierpo" || $pageUrl=="viewSupplierpo" || $pageUrl=="editSupplierpo"){echo 'active';}?>"><a href="<?php echo base_url(); ?>supplierpo"><i class="fa fa-cubes"></i> Supplier PO</a></li>
@@ -296,6 +297,8 @@
                             <li class="line_height <?php if($pageUrl=="chadebitnote" || $pageUrl=="addchadebitnote" || $pageUrl=="editchadebitnote" || $pageUrl=="viewchadebitnote"){echo 'active';}?>"><a href="<?php echo base_url(); ?>chadebitnote"><i class="fa fa-cubes"></i> CHA Debit Note</a></li>
                             <li class="line_height <?php if($pageUrl=="salestrackingreport" || $pageUrl=="addsalestrackingreport" || $pageUrl=="editsalestrackingreport" || $pageUrl=="viewsalestrackingreport"){echo 'active';}?>"><a href="<?php echo base_url(); ?>salestrackingreport"><i class="fa fa-cubes"></i> Sales Tracking Report</a></li>
                             <li class="line_height <?php if($pageUrl=="salestrackingexcelreport"){echo 'active';}?>"><a href="<?php echo base_url(); ?>salestrackingexcelreport"><i class="fa fa-cubes"></i> Sales Tracking Excel Report</a></li>
+                            <li class="line_height <?php if($pageUrl=="debitnote" || $pageUrl=="addnewdebitnote" || $pageUrl=="editdebitnoteform" || $pageUrl=='editdebitnoteform' || $pageUrl=="viewdebitnoteform"){echo 'active';}?>"><a href="<?php echo base_url(); ?>debitnote"><i class="fa fa-cubes"></i> Debit Note</a></li>
+                            <li class="line_height <?php if($pageUrl=="creditnote" || $pageUrl=="addcreditnote" || $pageUrl=="editcreditnote" || $pageUrl=="viewcreditnoteform"){echo 'active';}?>"><a href="<?php echo base_url(); ?>creditnote"><i class="fa fa-cubes"></i> Credit Note</a></li>
                         </ul>
                       </li>
 
