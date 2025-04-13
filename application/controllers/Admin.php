@@ -24003,5 +24003,16 @@ public function downloadscrapinvoic($id){
 }
 
 
+public function packingmaster(){
+
+    $process = 'Packing Master';
+    $processFunction = 'Admin/packingmaster';
+    $this->logrecord($process,$processFunction);
+    $this->global['pageTitle'] = 'Packing Master';
+    $this->loadViews("masters/packingmaster", $this->global, $data, NULL);
+
+
+}
+
 
 }
