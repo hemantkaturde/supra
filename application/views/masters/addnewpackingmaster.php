@@ -36,7 +36,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="address">HSN Code <span class="required">*</span></label>
+                                                <label for="address">HSN Code</label>
                                                 <input type="text" class="form-control" id="hsn_code" name="hsn_code">
                                                 <p class="error hsn_code_error"></p>
                                             </div>
