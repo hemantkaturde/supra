@@ -24004,13 +24004,96 @@ public function downloadscrapinvoic($id){
 
 
 public function packingmaster(){
-
     $process = 'Packing Master';
     $processFunction = 'Admin/packingmaster';
     $this->logrecord($process,$processFunction);
     $this->global['pageTitle'] = 'Packing Master';
     $this->loadViews("masters/packingmaster", $this->global, $data, NULL);
+}
 
+public function fetchpackingmaster(){
+    $params = $_REQUEST;
+    $totalRecords = $this->admin_model->getpackingmastercount($params); 
+    $queryRecords = $this->admin_model->getpackingmasterdata($params); 
+
+    $data = array();
+    foreach ($queryRecords as $key => $value)
+    {
+        $i = 0;
+        foreach($value as $v)
+        {
+            $data[$key][$i] = $v;
+            $i++;
+        }
+    }
+    $json_data = array(
+        "draw"            => intval( $params['draw'] ),   
+        "recordsTotal"    => intval( $totalRecords ),  
+        "recordsFiltered" => intval($totalRecords),
+        "data"            => $data   // total data array
+        );
+    echo json_encode($json_data);
+}
+
+
+
+public function addnewpackingmaster(){
+
+    $post_submit = $this->input->post();
+    $addnewpackingmaster_response = array();
+    if($post_submit){
+    
+        $this->form_validation->set_rules('description','Description','trim|required');
+        $this->form_validation->set_rules('hsn_code','HSN Code');
+        $this->form_validation->set_rules('remark','Remark','trim');
+
+        if($this->form_validation->run() == FALSE)
+        {
+            $addnewpackingmaster_response['status'] = 'failure';
+            $addnewpackingmaster_response['error'] = array('description'=>strip_tags(form_error('description')),'hsn_code'=>strip_tags(form_error('hsn_code')),'remark'=>strip_tags(form_error('remark')));
+        }else{
+
+            $data = array(
+                'description'=> trim($this->input->post('description')),
+                'HSN'=> trim($this->input->post('hsn_code')),
+                'remark'=>trim($this->input->post('remark')),
+            );
+
+            $savePackingmaster_data = $this->admin_model->savePackingmaster('',$data);
+            
+            if($savePackingmaster_data){
+                $addnewpackingmaster_response['status'] = 'success';
+                $addnewpackingmaster_response['error'] = array('description'=>'', 'hsn_code'=>'' ,'remark'=>'');
+            }
+        }
+        echo json_encode($addnewpackingmaster_response); 
+
+    }else{
+        $process = 'Add New Packing Master';
+        $processFunction = 'Admin/addnewpackingmaster';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Add New Packing Master';
+        $this->loadViews("masters/addnewpackingmaster", $this->global, $data, NULL);
+    }
+
+}
+
+
+public function deletepackingmasterdata(){
+
+    $post_submit = $this->input->post();
+    if($post_submit){
+        $result = $this->admin_model->deletepackingmasterdata(trim($this->input->post('id')));
+        if ($result) {
+                    $process = 'Dlete Packing Master';
+                    $processFunction = 'Admin/deletepackingmasterdata';
+                    $this->logrecord($process,$processFunction);
+                echo(json_encode(array('status'=>'success')));
+            }
+        else { echo(json_encode(array('status'=>'failed'))); }
+    }else{
+        echo(json_encode(array('status'=>'failed'))); 
+    }
 
 }
 

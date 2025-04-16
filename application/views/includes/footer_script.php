@@ -25384,3 +25384,130 @@
 <?php } ?>
 
 
+
+
+<?php if($pageTitle=='Packing Master' || $pageTitle=='Add New Packing Master' || $pageTitle=="Edit Packing Master"){ ?>
+	<script type="text/javascript">
+            $(document).ready(function() {
+				var dt = $('#view_packing_master').DataTable({
+					"columnDefs": [ 
+						{ className: "details-control", "targets": [ 0 ] },
+						{ "width": "25%", "targets": 0 },
+						{ "width": "10%", "targets": 1 },
+						{ "width": "20%", "targets": 2 },
+						{ "width": "8%", "targets": 3 },
+						
+					],
+					responsive: true,
+					"oLanguage": {
+						"sEmptyTable": "<i>No Packing Master Found.</i>",
+					}, 
+					"bSort" : false,
+					"bFilter":true,
+					"bLengthChange": true,
+					"iDisplayLength": 10,   
+					"bProcessing": true,
+					"serverSide": true,
+					"ajax":{
+						url :"<?php echo base_url();?>fetchpackingmaster",
+						type: "post",
+					},
+				});
+     		});
+
+			$(document).on('click','#savenewpackingmaster',function(e){
+				e.preventDefault();
+				$(".loader_ajax").show();
+				var formData = new FormData($("#addnewpackingmasterform")[0]);
+				        $.ajax({
+							url : "<?php echo base_url();?>addnewpackingmaster",
+							type: "POST",
+							data : formData,
+							cache: false,
+							contentType: false,
+							processData: false,
+							success: function(data, textStatus, jqXHR)
+							{
+								var fetchResponse = $.parseJSON(data);
+								if(fetchResponse.status == "failure")
+								{
+									$.each(fetchResponse.error, function (i, v)
+									{
+										$('.'+i+'_error').html(v);
+									});
+									$(".loader_ajax").hide();
+								}
+								else if(fetchResponse.status == 'success')
+								{
+									swal({
+										title: "Success",
+										text: "Packing Master Added Successfully!",
+										icon: "success",
+										button: "Ok",
+										},function(){ 
+											window.location.href = "<?php echo base_url().'packingmaster'?>";
+									});		
+								}
+								
+							},
+							error: function (jqXHR, textStatus, errorThrown)
+							{
+								$(".loader_ajax").hide();
+							}
+					});
+				return false;
+			});
+
+
+			$(document).on('click','.deletepackingmasterdata',function(e){
+				var elemF = $(this);
+				e.preventDefault();
+
+				swal({
+					title: "Are you sure?",
+					text: "Delete Packing Master",
+					type: "warning",
+					showCancelButton: true,
+					closeOnClickOutside: false,
+					confirmButtonClass: "btn-sm btn-danger",
+					confirmButtonText: "Yes, delete it!",
+					cancelButtonText: "No, cancel plz!",
+					closeOnConfirm: false,
+					closeOnCancel: false
+				}, function(isConfirm) {
+					if (isConfirm) {
+								$.ajax({
+									url : "<?php echo base_url();?>deletepackingmasterdata",
+									type: "POST",
+									data : 'id='+elemF.attr('data-id'),
+									success: function(data, textStatus, jqXHR)
+									{
+										const obj = JSON.parse(data);
+									
+										if(obj.status=='success'){
+											swal({
+												title: "Deleted!",
+												text: "Packing Master Data Succesfully Deleted",
+												icon: "success",
+												button: "Ok",
+												},function(){ 
+													window.location.href = "<?php echo base_url()?>packingmaster";
+												});	
+										}
+
+									},
+									error: function (jqXHR, textStatus, errorThrown)
+									{
+										$(".loader_ajax").hide();
+									}
+								})
+							}
+							else {
+					swal("Cancelled", "Packing Master Data deletion cancelled ", "error");
+					}
+				});
+	        });
+
+	</script>
+<?php } ?>
+

@@ -621,7 +621,9 @@ $route['fetchUser'] = "admin/fetchUser";
 
 
 $route['packingmaster'] = "admin/packingmaster";
-
+$route['addnewpackingmaster'] = "admin/addnewpackingmaster";
+$route['fetchpackingmaster'] = "admin/fetchpackingmaster";
+$route['deletepackingmasterdata'] = "admin/deletepackingmasterdata";
 
 
 

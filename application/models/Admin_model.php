@@ -20711,6 +20711,91 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
+    public function getpackingmastercount($params){
+
+        $this->db->select('*');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_PACKING_MASTER.".description LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_PACKING_MASTER.".HSN LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_PACKING_MASTER.".remark LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_PACKING_MASTER.'.status', 1); 
+        $query = $this->db->get(TBL_PACKING_MASTER);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+    }
+
+    public function getpackingmasterdata($params){
+
+        $this->db->select('*');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_PACKING_MASTER.".description LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_PACKING_MASTER.".HSN LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_PACKING_MASTER.".remark LIKE '%".$params['search']['value']."%')");
+        }
+
+        $this->db->where(TBL_PACKING_MASTER.'.status', 1);
+        $this->db->limit($params['length'],$params['start']);
+        $this->db->order_by(TBL_PACKING_MASTER.'.id','DESC');
+        $query = $this->db->get(TBL_PACKING_MASTER);
+        $fetch_result = $query->result_array();
+
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['description'] = $value['description'];
+                $data[$counter]['HSN'] = $value['HSN'];
+                $data[$counter]['remark'] = $value['remark'];
+                $data[$counter]['action'] = '';
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editpackingmaster/".$value['id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['id']."' class='fa fa-trash-o deletepackingmasterdata' aria-hidden='true'></i>"; 
+            
+                $counter++; 
+            }
+        }
+
+        return $data;
+
+    }
+
+    public function savePackingmaster($id,$data){
+
+        if($id){
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_PACKING_MASTER, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        }else{
+            if($this->db->insert(TBL_PACKING_MASTER, $data)) {
+                return $this->db->insert_id();
+            } else {
+                return FALSE;
+            }
+
+        }
+
+    }
+
+    public function deletepackingmasterdata($id){
+
+        $this->db->where('id', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_PACKING_MASTER)){
+              return TRUE;
+        }else{
+           return FALSE;
+        }
+
+    }
+
+
 }
 
 ?>

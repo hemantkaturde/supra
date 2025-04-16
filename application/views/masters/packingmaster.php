@@ -16,7 +16,7 @@
             </div>
             <div class="col-xs-6 text-right">
                 <div class="form-group">
-                    <a class="btn btn-primary" href="<?php echo base_url(); ?>addnewVendor">
+                    <a class="btn btn-primary" href="<?php echo base_url(); ?>addnewpackingmaster">
                         <i class="fa fa-plus"></i> Add Packing Master</a>
                 </div>
             </div>
