@@ -24057,7 +24057,15 @@ public function addnewpackingmaster(){
                 'remark'=>trim($this->input->post('remark')),
             );
 
-            $savePackingmaster_data = $this->admin_model->savePackingmaster('',$data);
+            $packing_master_id =trim($this->input->post('packing_master_id'));
+
+            if($packing_master_id){
+                 $edit_id = $packing_master_id;
+            }else{
+                 $edit_id = '';
+            }
+
+            $savePackingmaster_data = $this->admin_model->savePackingmaster($edit_id,$data);
             
             if($savePackingmaster_data){
                 $addnewpackingmaster_response['status'] = 'success';

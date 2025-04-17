@@ -40,7 +40,7 @@
                                     <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="address">HSN Code</label>
-                                                <input type="text" class="form-control" id="hsn_code" name="hsn_code" value="<?php echo $getpreviouspackingmasterdata[0]['hsn_code'] ?>">
+                                                <input type="text" class="form-control" id="hsn_code" name="hsn_code" value="<?php echo $getpreviouspackingmasterdata[0]['HSN'] ?>">
                                                 <p class="error hsn_code_error"></p>
                                             </div>
                                     </div>
