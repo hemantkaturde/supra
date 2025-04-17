@@ -24035,8 +24035,6 @@ public function fetchpackingmaster(){
     echo json_encode($json_data);
 }
 
-
-
 public function addnewpackingmaster(){
 
     $post_submit = $this->input->post();
@@ -24078,6 +24076,14 @@ public function addnewpackingmaster(){
 
 }
 
+public function editpackingmaster($id){
+    $process = 'Edit Packing Master';
+    $processFunction = 'Admin/editpackingmaster';
+    $this->logrecord($process,$processFunction);
+    $this->global['pageTitle'] = 'Edit Packing Master';
+    $data['getpreviouspackingmasterdata']= $this->admin_model->getpreviouspackingmasterdata($id);
+    $this->loadViews("masters/editpackingmaster", $this->global, $data, NULL);
+}
 
 public function deletepackingmasterdata(){
 
