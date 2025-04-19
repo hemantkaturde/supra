@@ -626,6 +626,10 @@ $route['fetchpackingmaster'] = "admin/fetchpackingmaster";
 $route['deletepackingmasterdata'] = "admin/deletepackingmasterdata";
 
 
+$route['packing_challan'] = "admin/packing_challan";
+$route['addnewpackingchallan'] = "admin/addnewpackingchallan";
+
+
 
 
 /* End of file routes.php */

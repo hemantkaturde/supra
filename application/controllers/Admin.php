@@ -24098,4 +24098,35 @@ public function deletepackingmasterdata(){
 }
 
 
+public function packing_challan(){
+    $process = 'Packing Challan';
+    $processFunction = 'Admin/packingchallan';
+    $this->logrecord($process,$processFunction);
+    $this->global['pageTitle'] = 'Packing Challan';
+    $this->loadViews("masters/packingchallan", $this->global, $data, NULL);
+}
+
+public function addnewpackingchallan(){
+
+        $post_submit = $this->input->post();
+        $addnewpackingmaster_response = array();
+        if($post_submit){
+
+
+
+
+
+
+
+
+        }else{
+            $process = 'Add New Packing Challan';
+            $processFunction = 'Admin/addnewpackingchallan';
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Add New Packing Challan';
+            $this->loadViews("masters/addnewpackingchallan", $this->global, $data, NULL);
+        }
+}
+
+
 }

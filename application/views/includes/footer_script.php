@@ -25511,3 +25511,39 @@
 	</script>
 <?php } ?>
 
+
+<?php if($pageTitle=='Packing Challan'){ ?>
+	<script type="text/javascript">
+            $(document).ready(function() {
+				var dt = $('#view_packing_challan').DataTable({
+					"columnDefs": [ 
+						{ className: "details-control", "targets": [ 0 ] },
+						{ "width": "15%", "targets": 0 },
+						{ "width": "10%", "targets": 1 },
+						{ "width": "10%", "targets": 2 },
+						{ "width": "10%", "targets": 3 },
+						{ "width": "10%", "targets": 4 },
+						{ "width": "10%", "targets": 5 },
+						{ "width": "5%", "targets": 6 },
+						
+					],
+					responsive: true,
+					"oLanguage": {
+						"sEmptyTable": "<i>No Packing Challan Found.</i>",
+					}, 
+					"bSort" : false,
+					"bFilter":true,
+					"bLengthChange": true,
+					"iDisplayLength": 10,   
+					"bProcessing": true,
+					"serverSide": true,
+					"ajax":{
+						url :"<?php echo base_url();?>fetchpackingmaster",
+						type: "post",
+					},
+				});
+     		});
+
+
+    </script>
+<?php } ?>
