@@ -214,8 +214,8 @@
                                                         <td><?php echo $value['grand_total'];?></td>
                                                         <td><?php echo $value['item_remark'];?></td>
                                                         <td>
-                                                            <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['packing_challan_id'];?>' class='fa fa-pencil-square-o editscrapinvoiceitem'  aria-hidden='true'></i>
-                                                            <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['packing_challan_id'];?>' class='fa fa-trash-o deleteScrapinvoiceitem' aria-hidden='true'></i>
+                                                            <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['packing_challan_id'];?>' class='fa fa-pencil-square-o editpackingchallanitem'  aria-hidden='true'></i>
+                                                            <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['packing_challan_id'];?>' class='fa fa-trash-o deletepackingchallanitem' aria-hidden='true'></i>
                                                         </td>
                                                     </tr>
                                                     <?php endforeach;?>
@@ -367,12 +367,12 @@
                             <!-- /.box-body -->
                             <div class="box-footer">
                                 <div class="col-xs-8">
-                                    <?php if($get_previousadded_item){
+                                    <?php if($get_previous_added_item_details){
                                         $disabled= '';
                                     }else{ 
                                         $disabled= 'disabled';
                                      } ?>
-                                    <input type="submit" id="savenewpackingchallan" class="btn btn-primary" value="Submit" />
+                                    <input type="submit" id="savenewpackingchallan" class="btn btn-primary" value="Submit"  <?=$disabled?>/>
                                     <input type="button" onclick="location.href = '<?php echo base_url() ?>packing_challan'" class="btn btn-default" value="Back" />
                                 </div>
                             </div>

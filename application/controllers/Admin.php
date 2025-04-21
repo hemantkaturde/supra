@@ -24260,5 +24260,39 @@ public function savepackingchallanitem(){
 
 }
 
+public function deletepackinchallandata(){
+
+    $post_submit = $this->input->post();
+    if($post_submit){
+        $result = $this->admin_model->deletepackinchallandata(trim($this->input->post('id')));
+        if ($result) {
+                    $process = 'Delete Packing Challan';
+                    $processFunction = 'Admin/deletepackinchallandata';
+                    $this->logrecord($process,$processFunction);
+                echo(json_encode(array('status'=>'success')));
+            }
+        else { echo(json_encode(array('status'=>'failed'))); }
+    }else{
+        echo(json_encode(array('status'=>'failed'))); 
+    }
+
+}
+
+public function deletepackingchallanitem(){
+    $post_submit = $this->input->post();
+    if($post_submit){
+        $result = $this->admin_model->deletepackingchallanitem(trim($this->input->post('id')));
+        if ($result) {
+                    $process = 'Delete Packing Challan Item';
+                    $processFunction = 'Admin/deletepackingchallanitem';
+                    $this->logrecord($process,$processFunction);
+                echo(json_encode(array('status'=>'success')));
+            }
+        else { echo(json_encode(array('status'=>'failed'))); }
+    }else{
+        echo(json_encode(array('status'=>'failed'))); 
+    }
+}
+
 
 }

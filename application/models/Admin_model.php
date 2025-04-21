@@ -20852,8 +20852,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['total_weight'] = $value['total_weight'];
                 $data[$counter]['total_goni'] = $value['total_goni'];
                 $data[$counter]['action'] = '';
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editpackingmaster/".$value['id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";
-                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['id']."' class='fa fa-trash-o deletepackingmasterdata' aria-hidden='true'></i>"; 
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editpackingchallan/".$value['id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['id']."' class='fa fa-trash-o deletepackinchallandata' aria-hidden='true'></i>"; 
             
                 $counter++; 
             }
@@ -20943,7 +20943,31 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         }
     }
 
+    public function deletepackinchallandata($id){
 
+        $this->db->where('id', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_PACKING_CHALLAN)){
+            //   return TRUE;
+              $this->db->where('packing_challan_id', $id);
+              //$this->db->delete(TBL_SUPPLIER);
+              if($this->db->delete(TBL_PACKING_CHALLAN_ITEM)){
+                    return TRUE;
+              }
+        }else{
+           return FALSE;
+        }
+    }
+
+    public function deletepackingchallanitem($id){
+        $this->db->where('id', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_PACKING_CHALLAN_ITEM)){
+            return TRUE;
+        }else{
+           return FALSE;
+        }
+    }
 
 
 }

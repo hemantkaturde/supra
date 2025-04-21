@@ -25676,7 +25676,6 @@
 			
 		    });
 
-		
 			$(document).on('click','#savepackingchallanitem',function(e){
 				e.preventDefault();
 				$(".loader_ajax").show();
@@ -25745,6 +25744,104 @@
 				return false;
 			});
 
+			$(document).on('click','.deletepackinchallandata',function(e){
+				var elemF = $(this);
+				e.preventDefault();
+
+				swal({
+					title: "Are you sure?",
+					text: "Delete Packing Challan",
+					type: "warning",
+					showCancelButton: true,
+					closeOnClickOutside: false,
+					confirmButtonClass: "btn-sm btn-danger",
+					confirmButtonText: "Yes, delete it!",
+					cancelButtonText: "No, cancel plz!",
+					closeOnConfirm: false,
+					closeOnCancel: false
+				}, function(isConfirm) {
+					if (isConfirm) {
+								$.ajax({
+									url : "<?php echo base_url();?>deletepackinchallandata",
+									type: "POST",
+									data : 'id='+elemF.attr('data-id'),
+									success: function(data, textStatus, jqXHR)
+									{
+										const obj = JSON.parse(data);
+									
+										if(obj.status=='success'){
+											swal({
+												title: "Deleted!",
+												text: "Packing Challan Succesfully Deleted",
+												icon: "success",
+												button: "Ok",
+												},function(){ 
+													window.location.href = "<?php echo base_url()?>packing_challan";
+												});	
+										}
+
+									},
+									error: function (jqXHR, textStatus, errorThrown)
+									{
+										$(".loader_ajax").hide();
+									}
+								})
+							}
+							else {
+					swal("Cancelled", "Packing Challan Data deletion cancelled ", "error");
+					}
+				});
+	        });
+
+
+			$(document).on('click','.deletepackingchallanitem',function(e){
+				var elemF = $(this);
+				e.preventDefault();
+
+				swal({
+					title: "Are you sure?",
+					text: "Delete Packing Challan Item",
+					type: "warning",
+					showCancelButton: true,
+					closeOnClickOutside: false,
+					confirmButtonClass: "btn-sm btn-danger",
+					confirmButtonText: "Yes, delete it!",
+					cancelButtonText: "No, cancel plz!",
+					closeOnConfirm: false,
+					closeOnCancel: false
+				}, function(isConfirm) {
+					if (isConfirm) {
+								$.ajax({
+									url : "<?php echo base_url();?>deletepackingchallanitem",
+									type: "POST",
+									data : 'id='+elemF.attr('data-id'),
+									success: function(data, textStatus, jqXHR)
+									{
+										const obj = JSON.parse(data);
+									
+										if(obj.status=='success'){
+											swal({
+												title: "Deleted!",
+												text: "Packing Challan Item Succesfully Deleted",
+												icon: "success",
+												button: "Ok",
+												},function(){ 
+													window.location.href = "<?php echo base_url()?>addnewpackingchallan";
+												});	
+										}
+
+									},
+									error: function (jqXHR, textStatus, errorThrown)
+									{
+										$(".loader_ajax").hide();
+									}
+								})
+							}
+							else {
+					swal("Cancelled", "Packing Challan Data deletion cancelled ", "error");
+					}
+				});
+	        });
 
     </script>
 <?php } ?>
