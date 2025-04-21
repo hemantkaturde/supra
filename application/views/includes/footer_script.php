@@ -25608,7 +25608,6 @@
 			
 		    });
 
-
 			$(document).on('change', '#gst_rate', function(){	
 				
 			    var gst_rate =  $("#gst_rate").val();
@@ -25676,5 +25675,76 @@
 				}
 			
 		    });
+
+		
+			$(document).on('click','#savepackingchallanitem',function(e){
+				e.preventDefault();
+				$(".loader_ajax").show();
+			
+				var discription_of_packing_material =   $('#discription_of_packing_material').val();
+				var quantity_in_gonis =   $('#quantity_in_gonis').val();
+				var qty_in_kgs =   $('#qty_in_kgs').val();
+				var rate =   $('#rate').val();
+				var amount =   $('#amount').val();
+				var gst_rate = $('#gst_rate').val();
+				var CGST_value = $('#CGST_value').val();
+				var SGST_value = $('#SGST_value').val();
+				var IGST_value = $('#IGST_value').val();
+				var grand_total = $('#grand_total').val();
+				var item_remark = $('#item_remark').val();
+
+				var pre_packing_challan_date = $('#packing_challan_date').val();
+				var pre_vendor_id = $('#vendor_name').val();
+				var pre_dispatched_by = $('#dispatched_by').val();
+				var pre_total_weight =   $('#total_weight').val();
+				var pre_total_goni =   $('#total_goni').val();
+				var pre_remark =   $('#remark').val();
+
+
+				$.ajax({
+					url : "<?php echo base_url();?>savepackingchallanitem",
+					type: "POST",
+					//data : formData,
+					data :{ discription_of_packing_material:discription_of_packing_material,quantity_in_gonis:quantity_in_gonis,qty_in_kgs:qty_in_kgs,rate:rate,amount:amount,gst_rate:gst_rate,CGST_value:CGST_value,SGST_value:SGST_value,IGST_value:IGST_value,grand_total:grand_total,item_remark:item_remark,pre_packing_challan_date:pre_packing_challan_date,pre_vendor_id:pre_vendor_id,pre_dispatched_by:pre_dispatched_by,pre_total_weight:pre_total_weight,pre_total_goni:pre_total_goni,pre_remark:pre_remark},
+					method: "POST",
+					// data :{package_id:package_id},
+					cache:false,
+					success: function(data, textStatus, jqXHR)
+					{
+						var fetchResponse = $.parseJSON(data);
+						if(fetchResponse.status == "failure")
+						{
+							$.each(fetchResponse.error, function (i, v)
+							{
+								$('.'+i+'_error').html(v);
+							});
+							$(".loader_ajax").hide();
+						}
+						else if(fetchResponse.status == 'success')
+						{
+							swal({
+								title: "Success",
+								text: "Item Successfully Added!",
+								icon: "success",
+								button: "Ok",
+								},function(){
+									// if(scrap_invoice_id_main){
+									// 	window.location.href = "<?php echo base_url().'editscrapinvoice/'?>"+scrap_invoice_id_main;
+									// }else{
+										window.location.href = "<?php echo base_url().'addnewpackingchallan'?>";
+									// }
+							});		
+						}
+						
+					},
+					error: function (jqXHR, textStatus, errorThrown)
+					{
+					$(".loader_ajax").hide();
+					}
+				});
+				return false;
+			});
+
+
     </script>
 <?php } ?>

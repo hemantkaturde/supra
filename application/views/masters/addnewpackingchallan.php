@@ -118,8 +118,8 @@
                                     </div>
 
 
-                                     <?php if($get_previousadded_item[0]['pre_date']){
-                                        $date= $get_previousadded_item[0]['pre_date'];
+                                     <?php if($get_previous_added_item_details[0]['pre_packing_challan_date']){
+                                        $date= $get_previous_added_item_details[0]['pre_packing_challan_date'];
                                      }else{
                                         $date= date('Y-m-d');
                                      } ?>
@@ -138,7 +138,7 @@
                                                 <select class="form-control" name="vendor_name" id="vendor_name">
                                                     <option st-id="" value="">Select Vendor Name</option>
                                                     <?php foreach ($vendorList as $key => $value) {?>
-                                                    <option value="<?php echo $value['ven_id']; ?>" <?php if($value['ven_id']==$get_previousadded_item[0]['pre_buyer_name']){ echo 'selected';} ?> ><?php echo $value['vendor_name']; ?></option>
+                                                    <option value="<?php echo $value['ven_id']; ?>" <?php if($value['ven_id']==$get_previous_added_item_details[0]['pre_vendor_id']){ echo 'selected';} ?> ><?php echo $value['vendor_name']; ?></option>
                                                     <?php } ?>
                                                 </select>
                                             <p class="error vendor_name_error"></p>
@@ -148,7 +148,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="date">Dispatched By</label>
-                                            <input type="text" class="form-control" id="dispatched_by" name="dispatched_by">
+                                            <input type="text" class="form-control" id="dispatched_by" value="<?=$get_previous_added_item_details[0]['pre_dispatched_by']?>" name="dispatched_by">
                                             <p class="error dispatched_by_error"></p>
                                         </div>
                                     </div>
@@ -156,7 +156,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="date">Total Weight</label>
-                                            <input type="text" class="form-control" id="total_weight" name="total_weight">
+                                            <input type="text" class="form-control" id="total_weight" value="<?=$get_previous_added_item_details[0]['pre_total_weight']?>" name="total_weight">
                                             <p class="error total_weight_error"></p>
                                         </div>
                                     </div>
@@ -164,7 +164,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="date">Total Goni</label>
-                                            <input type="text" class="form-control" id="total_goni" name="total_goni">
+                                            <input type="text" class="form-control" id="total_goni" value="<?=$get_previous_added_item_details[0]['pre_total_goni']?>" name="total_goni">
                                             <p class="error total_goni_error"></p>
                                         </div>
                                     </div>
@@ -173,7 +173,7 @@
                                     <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="remark">Remark</label>
-                                                  <textarea type="text" class="form-control"  id="remark"  name="remark"></textarea>
+                                                  <textarea type="text" class="form-control"  id="remark"  name="remark"><?=$get_previous_added_item_details[0]['pre_remark']?></textarea>
                                                 <p class="error remark_error"></p>
                                             </div>
                                     </div>
@@ -200,23 +200,22 @@
                                                 <tbody>
                                                     <?php
                                                         $count=0;
-                                                           foreach ($get_previousadded_item as $key => $value) :
+                                                           foreach ($get_previous_added_item_details as $key => $value) :
                                                            $count++;
                                                     ?>
                                                     <tr>
                                                         <td><?php echo $count;?></td>
-                                                        <td><?php echo $value['scrap_type_name'];?></td>
-                                                        <td><?php echo $value['hsn_code'];?></td>
-                                                        <td><?php echo $value['scrap_type_qty'];?></td>
-                                                        <td><?php echo $value['unit'];?></td>
+                                                        <td><?php echo $value['description'];?></td>
+                                                        <td><?php echo $value['quantity_in_gonis'];?></td>
+                                                        <td><?php echo $value['qty_in_kgs'];?></td>
                                                         <td><?php echo $value['rate'];?></td>
                                                         <td><?php echo $value['amount'];?></td>
-                                                        <td><?php echo $value['GST_rate'];?></td>
+                                                        <td><?php echo $value['gst_rate'];?></td>
                                                         <td><?php echo $value['grand_total'];?></td>
-                                                        <td><?php echo $value['remark'];?></td>
+                                                        <td><?php echo $value['item_remark'];?></td>
                                                         <td>
-                                                            <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['scrap_invoice_id'];?>' class='fa fa-pencil-square-o editscrapinvoiceitem'  aria-hidden='true'></i>
-                                                            <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['scrap_invoice_id'];?>' class='fa fa-trash-o deleteScrapinvoiceitem' aria-hidden='true'></i>
+                                                            <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['packing_challan_id'];?>' class='fa fa-pencil-square-o editscrapinvoiceitem'  aria-hidden='true'></i>
+                                                            <i style='font-size: x-large;cursor: pointer' data-id='<?php echo $value['packing_challan_id'];?>' class='fa fa-trash-o deleteScrapinvoiceitem' aria-hidden='true'></i>
                                                         </td>
                                                     </tr>
                                                     <?php endforeach;?>
@@ -265,7 +264,7 @@
                                                    
 
                                                         <div class="form-group row">
-                                                            <label class="col-sm-3 col-form-label">Quantity in Gonis</label>
+                                                            <label class="col-sm-3 col-form-label">Quantity in Gonis <span class="required">*</span></label>
                                                             <div class="col-sm-9">
                                                                 <input type="text" class="form-control"  id="quantity_in_gonis" name="quantity_in_gonis">
                                                                 <p class="error quantity_in_gonis_error"></p>
@@ -283,7 +282,7 @@
 
 
                                                         <div class="form-group row">
-                                                            <label class="col-sm-3 col-form-label">Rate</label>
+                                                            <label class="col-sm-3 col-form-label">Rate <span class="required">*</span></label>
                                                                 <div class="col-sm-9">
                                                                     <input type="text" class="form-control"  id="rate" name="rate">
                                                                     <p class="error rate_error"></p>

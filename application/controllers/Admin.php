@@ -24132,6 +24132,7 @@ public function addnewpackingchallan(){
             $this->form_validation->set_rules('total_weight','Total Weight','trim');
             $this->form_validation->set_rules('total_goni','Total Goni','trim');
             $this->form_validation->set_rules('remark','Remark','trim');
+            
     
             if($this->form_validation->run() == FALSE)
             {
@@ -24151,9 +24152,12 @@ public function addnewpackingchallan(){
 
                 $savepackignchallan= $this->admin_model->savepackignchallan('',$data);
                 if($savepackignchallan){
-                    $addnewpackingchallan_response['status'] = 'success';
-                    $addnewpackingchallan_response['error'] = array('packing_challan_id'=>strip_tags(form_error('packing_challan_id')),'packing_challan_date'=>strip_tags(form_error('packing_challan_date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'dispatched_by'=>strip_tags(form_error('dispatched_by')),'total_weight'=>strip_tags(form_error('total_weight')),'total_goni'=>strip_tags(form_error('total_goni')));
-                }
+                        $update_last_inserted_id_in_packingchallanid = $this->admin_model->update_last_inserted_id_in_packingchallanid($savepackignchallan);
+                            if($update_last_inserted_id_in_packingchallanid){    
+                                $addnewpackingchallan_response['status'] = 'success';
+                                $addnewpackingchallan_response['error'] = array('packing_challan_id'=>strip_tags(form_error('packing_challan_id')),'packing_challan_date'=>strip_tags(form_error('packing_challan_date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'dispatched_by'=>strip_tags(form_error('dispatched_by')),'total_weight'=>strip_tags(form_error('total_weight')),'total_goni'=>strip_tags(form_error('total_goni')));
+                            }
+                    }
             }
 
             echo json_encode($addnewpackingchallan_response); 
@@ -24164,9 +24168,8 @@ public function addnewpackingchallan(){
             $this->global['pageTitle'] = 'Add New Packing Challan';
             $data['vendorList']= $this->admin_model->fetchALLvendorList();
             $data['getPreviousPackingchallannumber']= $this->admin_model->getPreviousPackingchallannumber();
-
             $data['description_of_packing_material']= $this->admin_model->description_of_packing_material();
-
+            $data['get_previous_added_item_details']= $this->admin_model->get_previous_added_item_details();
             $this->loadViews("masters/addnewpackingchallan", $this->global, $data, NULL);
         }
 }
@@ -24194,6 +24197,66 @@ public function fetchpackingchallan(){
         "data"            => $data   // total data array
         );
     echo json_encode($json_data);
+
+}
+
+public function savepackingchallanitem(){
+
+    $post_submit = $this->input->post();
+    if($post_submit){
+
+        $savepackingchallan_item_response = array();
+        $this->form_validation->set_rules('discription_of_packing_material','Discription of Packing Material','trim|required');
+        $this->form_validation->set_rules('quantity_in_gonis','Quantity In Gonis','trim');
+        $this->form_validation->set_rules('qty_in_kgs','Qty In Kgs','trim');
+        $this->form_validation->set_rules('rate','Rate','trim');
+        $this->form_validation->set_rules('amount','Amount','trim');
+        $this->form_validation->set_rules('gst_rate','Gst Rate','trim');
+        $this->form_validation->set_rules('CGST_value','CGST value','trim');
+        $this->form_validation->set_rules('SGST_value','SGST value','trim');
+        $this->form_validation->set_rules('IGST_value','IGST value','trim');
+        $this->form_validation->set_rules('grand_total','Grand Total','trim');
+        $this->form_validation->set_rules('item_remark','Item Remark','trim');
+
+        if($this->form_validation->run() == FALSE)
+        {
+            $savepackingchallan_item_response['status'] = 'failure';
+            $savepackingchallan_item_response['error'] = array('discription_of_packing_material'=>strip_tags(form_error('discription_of_packing_material')),'quantity_in_gonis'=>strip_tags(form_error('quantity_in_gonis')),'qty_in_kgs'=>strip_tags(form_error('qty_in_kgs')),'rate'=>strip_tags(form_error('rate')),'amount'=>strip_tags(form_error('amount')),'gst_rate'=>strip_tags(form_error('gst_rate')),'item_remark'=>strip_tags(form_error('item_remark')));
+       
+        }else{
+            
+            $data = array(
+                'discription_of_packing_material_id' =>  trim($this->input->post('discription_of_packing_material')),
+                'quantity_in_gonis' =>  trim($this->input->post('quantity_in_gonis')),
+                'qty_in_kgs' =>  trim($this->input->post('qty_in_kgs')),
+                'rate' =>  trim($this->input->post('rate')),
+                'amount' =>  trim($this->input->post('amount')),
+                'GST_rate' =>  trim($this->input->post('gst_rate')),
+                'CGST_value' =>  trim($this->input->post('CGST_value')),
+                'SGST_value' =>  trim($this->input->post('SGST_value')),
+                'IGST_value' =>  trim($this->input->post('IGST_value')),
+                'grand_total'  =>  trim($this->input->post('grand_total')),
+                'item_remark'  =>  trim($this->input->post('item_remark')),
+
+                'pre_packing_challan_date'  =>  trim($this->input->post('pre_packing_challan_date')),
+                'pre_vendor_id'  =>  trim($this->input->post('pre_vendor_id')),
+                'pre_dispatched_by'  =>  trim($this->input->post('pre_dispatched_by')),
+                'pre_total_weight'  =>  trim($this->input->post('pre_total_weight')),
+                'pre_total_goni'  =>  trim($this->input->post('pre_total_goni')),
+                'pre_remark'  =>  trim($this->input->post('pre_remark')),
+
+            );
+
+
+            $savepackingchallanitem= $this->admin_model->savepackingchallanitem('',$data);
+            if($savepackingchallanitem){
+                $savepackingchallan_item_response['status'] = 'success';
+                $savepackingchallan_item_response['error'] = array('discription_of_packing_material'=>strip_tags(form_error('discription_of_packing_material')),'quantity_in_gonis'=>strip_tags(form_error('quantity_in_gonis')),'qty_in_kgs'=>strip_tags(form_error('qty_in_kgs')),'rate'=>strip_tags(form_error('rate')),'amount'=>strip_tags(form_error('amount')),'gst_rate'=>strip_tags(form_error('gst_rate')),'item_remark'=>strip_tags(form_error('item_remark')));
+            }
+
+            echo json_encode($savepackingchallan_item_response);
+        }
+    }
 
 }
 

@@ -20901,6 +20901,49 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     }
 
+    public function savepackingchallanitem($id,$data){
+
+        if($id){
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_PACKING_CHALLAN_ITEM, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        }else{
+            if($this->db->insert(TBL_PACKING_CHALLAN_ITEM, $data)) {
+                return $this->db->insert_id();
+            } else {
+                return FALSE;
+            }
+        }
+
+    }
+
+
+    public function get_previous_added_item_details(){
+
+        $this->db->select('*,'.TBL_PACKING_CHALLAN_ITEM.'.id as packing_challan_id');
+        $this->db->join(TBL_PACKING_MASTER, TBL_PACKING_MASTER.'.id  = '.TBL_PACKING_CHALLAN_ITEM.'.discription_of_packing_material_id');
+        $this->db->where(TBL_PACKING_CHALLAN_ITEM.'.packing_challan_id IS NULL');
+        $query = $this->db->get(TBL_PACKING_CHALLAN_ITEM);
+        $data = $query->result_array();
+        return $data;
+    }
+
+    public function update_last_inserted_id_in_packingchallanid($savepackignchallan){
+        $data = array(
+            'packing_challan_id' => $savepackignchallan
+        );
+        $this->db->where(TBL_PACKING_CHALLAN_ITEM.'.packing_challan_id IS NULL');
+        if($this->db->update(TBL_PACKING_CHALLAN_ITEM,$data)){
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+    }
+
+
 
 
 }
