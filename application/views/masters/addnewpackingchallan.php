@@ -234,7 +234,6 @@
                                       <!-- Add New Package Modal -->
                                     <?php $this->load->helper("form"); ?>
                                     <div class="modal fade" id="addNewModal" role="dialog" aria-labelledby="additem" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-                                      
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                             <div class="modal-header">
@@ -255,7 +254,7 @@
                                                             <label class="col-sm-3 col-form-label">Description Of Packing Material<span class="required">*</span></label>
                                                             <div class="col-sm-9">
                                                                 <select class="form-control" name="discription_of_packing_material" id="discription_of_packing_material">
-                                                                    <option st-id="" value="">Description Of Packing Material</option>
+                                                                    <option st-id="" value="">Select Description Of Packing Material</option>
                                                                     <?php foreach ($description_of_packing_material as $key => $value) {?>        
                                                                         <option value="<?php echo $value['id']; ?>"><?php echo $value['description']; ?></option>
                                                                     <?php } ?>
