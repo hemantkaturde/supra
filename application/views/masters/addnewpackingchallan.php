@@ -265,10 +265,10 @@
                                                    
 
                                                         <div class="form-group row">
-                                                            <label class="col-sm-3 col-form-label">Quantity</label>
+                                                            <label class="col-sm-3 col-form-label">Quantity in Gonis</label>
                                                             <div class="col-sm-9">
-                                                                <input type="text" class="form-control"  id="quantity" name="quantity">
-                                                                <p class="error quantity_error"></p>
+                                                                <input type="text" class="form-control"  id="quantity_in_gonis" name="quantity_in_gonis">
+                                                                <p class="error quantity_in_gonis_error"></p>
                                                             </div>
                                                         </div>
 
@@ -276,8 +276,8 @@
                                                         <div class="form-group row">
                                                             <label class="col-sm-3 col-form-label">Qty in kgs</label>
                                                             <div class="col-sm-9">
-                                                                <input type="text" class="form-control"  id="qty" name="qty">
-                                                                <p class="error qty_error"></p>
+                                                                <input type="text" class="form-control"  id="qty_in_kgs" name="qty_in_kgs">
+                                                                <p class="error qty_in_kgs_error"></p>
                                                             </div>
                                                         </div>
 

@@ -25543,8 +25543,7 @@
 				});
      		});
 
-
-			 $(document).on('click','#savenewpackingchallan',function(e){
+			$(document).on('click','#savenewpackingchallan',function(e){
 				e.preventDefault();
 				$(".loader_ajax").show();
 				var formData = new FormData($("#addnewpackingchallanform")[0]);
@@ -25587,6 +25586,95 @@
 				return false;
 			});
 
+			$(document).on('change', '#quantity_in_gonis,#rate', function(){	
+				
+			    $("#quantity_in_gonis").val();
+				$("#rate").val();
 
+				 if($("#quantity_in_gonis").val()){
+					 var quantity_in_gonis = $("#quantity_in_gonis").val();
+				 }else{
+					 var quantity_in_gonis = 0;
+				 }
+
+				 if($("#rate").val()){
+					 var rate = $("#rate").val();
+				 }else{
+					 var rate = 0;
+				 }
+
+				 var total_amount = parseFloat(quantity_in_gonis) *  parseFloat(rate);
+				 $("#amount").val(total_amount);
+			
+		    });
+
+
+			$(document).on('change', '#gst_rate', function(){	
+				
+			    var gst_rate =  $("#gst_rate").val();
+				var amount =  $("#amount").val();
+
+				if(gst_rate=='cgst_sgst_18'){
+
+					$('#CGST_SGST_Div').css('display', 'block');
+					$('#IGST_Div').css('display', 'none');
+
+					var calculate_total_gst = amount * 18/100;
+
+                    var tax_division_1 = calculate_total_gst / 2;
+					var tax_division_2 = calculate_total_gst / 2;
+
+					$("#CGST_value").val(tax_division_1);
+					$("#SGST_value").val(tax_division_2);
+
+					var grand_total = parseFloat(amount) + parseFloat(calculate_total_gst);
+					$("#grand_total").val(grand_total);
+				}
+
+				if(gst_rate=='cgst_sgst_12'){
+
+					$('#CGST_SGST_Div').css('display', 'block');
+					$('#IGST_Div').css('display', 'none');
+
+					var calculate_total_gst = amount * 12/100;
+
+					var tax_division_1 = calculate_total_gst / 2;
+					var tax_division_2 = calculate_total_gst / 2;
+
+					$("#CGST_value").val(tax_division_1);
+					$("#SGST_value").val(tax_division_2);
+
+					var grand_total = parseFloat(amount) + parseFloat(calculate_total_gst);
+					$("#grand_total").val(grand_total);
+				}
+									
+				if(gst_rate=='igst_18'){
+
+					$('#CGST_SGST_Div').css('display', 'none');
+					$('#IGST_Div').css('display', 'block');
+
+					var calculate_total_gst = amount * 18/100;
+
+
+					$("#IGST_value").val(calculate_total_gst);
+
+					var grand_total = parseFloat(amount) + parseFloat(calculate_total_gst);
+					$("#grand_total").val(grand_total);
+				}
+						
+				if(gst_rate=='igst_12'){
+
+					$('#CGST_SGST_Div').css('display', 'none');
+					$('#IGST_Div').css('display', 'block');
+
+					var calculate_total_gst = amount * 12/100;
+
+					$("#IGST_value").val(calculate_total_gst);
+
+					var grand_total = parseFloat(amount) + parseFloat(calculate_total_gst);
+					$("#grand_total").val(grand_total);
+				}
+			
+		    });
     </script>
 <?php } ?>
