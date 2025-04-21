@@ -25511,7 +25511,7 @@
 <?php } ?>
 
 
-<?php if($pageTitle=='Packing Challan'){ ?>
+<?php if($pageTitle=='Packing Challan' || $pageTitle=='Add New Packing Challan'){ ?>
 	<script type="text/javascript">
             $(document).ready(function() {
 				var dt = $('#view_packing_challan').DataTable({
@@ -25537,11 +25537,55 @@
 					"bProcessing": true,
 					"serverSide": true,
 					"ajax":{
-						url :"<?php echo base_url();?>fetchpackingmaster",
+						url :"<?php echo base_url();?>fetchpackingchallan",
 						type: "post",
 					},
 				});
      		});
+
+
+			 $(document).on('click','#savenewpackingchallan',function(e){
+				e.preventDefault();
+				$(".loader_ajax").show();
+				var formData = new FormData($("#addnewpackingchallanform")[0]);
+				        $.ajax({
+							url : "<?php echo base_url();?>addnewpackingchallan",
+							type: "POST",
+							data : formData,
+							cache: false,
+							contentType: false,
+							processData: false,
+							success: function(data, textStatus, jqXHR)
+							{
+								var fetchResponse = $.parseJSON(data);
+								if(fetchResponse.status == "failure")
+								{
+									$.each(fetchResponse.error, function (i, v)
+									{
+										$('.'+i+'_error').html(v);
+									});
+									$(".loader_ajax").hide();
+								}
+								else if(fetchResponse.status == 'success')
+								{
+									swal({
+										title: "Success",
+										text: "Packing Challan Added Successfully!",
+										icon: "success",
+										button: "Ok",
+										},function(){ 
+											window.location.href = "<?php echo base_url().'packing_challan'?>";
+									});		
+								}
+								
+							},
+							error: function (jqXHR, textStatus, errorThrown)
+							{
+								$(".loader_ajax").hide();
+							}
+					});
+				return false;
+			});
 
 
     </script>

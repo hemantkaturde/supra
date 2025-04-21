@@ -629,6 +629,8 @@ $route['editpackingmaster/(:any)'] = "admin/editpackingmaster/$1";
 
 $route['packing_challan'] = "admin/packing_challan";
 $route['addnewpackingchallan'] = "admin/addnewpackingchallan";
+$route['fetchpackingchallan'] = "admin/fetchpackingchallan";
+
 
 
 

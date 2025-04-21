@@ -192,6 +192,7 @@ define('TBL_SCRAP_TYPE','tbl_scrap_type');
 define('TBL_SCRAP_INVOICE','tbl_sacrp_invoice');
 define('TBL_SCRAP_INVOICE_ITEM','tbl_scrap_invoice_item');
 define('TBL_PACKING_MASTER','tbl_packing_master');
+define('TBL_PACKING_CHALLAN','tbl_packing_challan');
 
 
 define('SMTP_HOST','mail.supraexports.in');

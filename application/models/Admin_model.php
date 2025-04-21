@@ -20804,6 +20804,105 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     }
 
+    public function getpackingChallancount($params){
+
+        $this->db->select('*');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_PACKING_CHALLAN.".packing_challan_id LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_PACKING_CHALLAN.".packing_challan_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_PACKING_CHALLAN.".total_goni LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_PACKING_CHALLAN.".dispatched_by LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_PACKING_CHALLAN.".total_weight LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_PACKING_CHALLAN.'.status', 1); 
+        $query = $this->db->get(TBL_PACKING_CHALLAN);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+    }
+
+    public function getpackingChallandata($params){
+
+        $this->db->select('*');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_PACKING_CHALLAN.".packing_challan_id LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_PACKING_CHALLAN.".packing_challan_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_PACKING_CHALLAN.".total_goni LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_PACKING_CHALLAN.".dispatched_by LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_PACKING_CHALLAN.".total_weight LIKE '%".$params['search']['value']."%')");
+        }
+
+        $this->db->where(TBL_PACKING_CHALLAN.'.status', 1);
+        $this->db->limit($params['length'],$params['start']);
+        $this->db->order_by(TBL_PACKING_CHALLAN.'.id','DESC');
+        $query = $this->db->get(TBL_PACKING_CHALLAN);
+        $fetch_result = $query->result_array();
+
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['packing_challan_id'] = $value['packing_challan_id'];
+                $data[$counter]['packing_challan_date'] = $value['packing_challan_date'];
+                $data[$counter]['vendor_id'] = $value['vendor_id'];
+                $data[$counter]['dispatched_by'] = $value['dispatched_by'];
+                $data[$counter]['total_weight'] = $value['total_weight'];
+                $data[$counter]['total_goni'] = $value['total_goni'];
+                $data[$counter]['action'] = '';
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editpackingmaster/".$value['id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['id']."' class='fa fa-trash-o deletepackingmasterdata' aria-hidden='true'></i>"; 
+            
+                $counter++; 
+            }
+        }
+
+        return $data;
+
+    }
+
+    public function savepackignchallan($id,$data){
+        if($id){
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_PACKING_CHALLAN, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        }else{
+            if($this->db->insert(TBL_PACKING_CHALLAN, $data)) {
+                return $this->db->insert_id();
+            } else {
+                return FALSE;
+            }
+        }
+    }
+
+    public function getPreviousPackingchallannumber(){
+        $this->db->select('packing_challan_id');
+        $this->db->where(TBL_PACKING_CHALLAN.'.status', 1);
+        $this->db->limit(1);
+        $this->db->order_by(TBL_PACKING_CHALLAN.'.id','DESC');
+        $query = $this->db->get(TBL_PACKING_CHALLAN);
+        $rowcount = $query->result_array();
+        return $rowcount;
+
+    }
+
+    public function description_of_packing_material(){
+        $this->db->select('*');
+        $this->db->where(TBL_PACKING_MASTER.'.status', 1);
+        $this->db->order_by(TBL_PACKING_MASTER.'.id','DESC');
+        $query = $this->db->get(TBL_PACKING_MASTER);
+        $fetch_result = $query->result_array();
+        return $fetch_result;
+
+    }
+
+
+
 }
 
 ?>

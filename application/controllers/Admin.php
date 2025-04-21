@@ -24111,7 +24111,6 @@ public function deletepackingmasterdata(){
 
 }
 
-
 public function packing_challan(){
     $process = 'Packing Challan';
     $processFunction = 'Admin/packingchallan';
@@ -24123,23 +24122,79 @@ public function packing_challan(){
 public function addnewpackingchallan(){
 
         $post_submit = $this->input->post();
-        $addnewpackingmaster_response = array();
+        $addnewpackingchallan_response = array();
         if($post_submit){
 
+            $this->form_validation->set_rules('packing_challan_id','Packing Challan Id','trim|required');
+            $this->form_validation->set_rules('packing_challan_date','Packing Challan Date','trim|required');
+            $this->form_validation->set_rules('vendor_name','Vendor Name','trim|required');
+            $this->form_validation->set_rules('dispatched_by','Dispatched By','trim');
+            $this->form_validation->set_rules('total_weight','Total Weight','trim');
+            $this->form_validation->set_rules('total_goni','Total Goni','trim');
+            $this->form_validation->set_rules('remark','Remark','trim');
+    
+            if($this->form_validation->run() == FALSE)
+            {
+                $addnewpackingchallan_response['status'] = 'failure';
+                $addnewpackingchallan_response['error'] = array('packing_challan_id'=>strip_tags(form_error('packing_challan_id')),'packing_challan_date'=>strip_tags(form_error('packing_challan_date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'dispatched_by'=>strip_tags(form_error('dispatched_by')),'total_weight'=>strip_tags(form_error('total_weight')),'total_goni'=>strip_tags(form_error('total_goni')));
+            }else{
 
+                $data = array(
+                    'packing_challan_id' =>  trim($this->input->post('packing_challan_id')),
+                    'packing_challan_date' =>  trim($this->input->post('packing_challan_date')),
+                    'vendor_id' =>  trim($this->input->post('vendor_name')),
+                    'dispatched_by' =>  trim($this->input->post('dispatched_by')),
+                    'total_weight' =>  trim($this->input->post('total_weight')),
+                    'total_goni' =>  trim($this->input->post('total_goni')),
+                    'remark' =>  trim($this->input->post('remark')),
+                );
 
+                $savepackignchallan= $this->admin_model->savepackignchallan('',$data);
+                if($savepackignchallan){
+                    $addnewpackingchallan_response['status'] = 'success';
+                    $addnewpackingchallan_response['error'] = array('packing_challan_id'=>strip_tags(form_error('packing_challan_id')),'packing_challan_date'=>strip_tags(form_error('packing_challan_date')),'vendor_name'=>strip_tags(form_error('vendor_name')),'dispatched_by'=>strip_tags(form_error('dispatched_by')),'total_weight'=>strip_tags(form_error('total_weight')),'total_goni'=>strip_tags(form_error('total_goni')));
+                }
+            }
 
-
-
-
-
+            echo json_encode($addnewpackingchallan_response); 
         }else{
             $process = 'Add New Packing Challan';
             $processFunction = 'Admin/addnewpackingchallan';
             $this->logrecord($process,$processFunction);
             $this->global['pageTitle'] = 'Add New Packing Challan';
+            $data['vendorList']= $this->admin_model->fetchALLvendorList();
+            $data['getPreviousPackingchallannumber']= $this->admin_model->getPreviousPackingchallannumber();
+
+            $data['description_of_packing_material']= $this->admin_model->description_of_packing_material();
+
             $this->loadViews("masters/addnewpackingchallan", $this->global, $data, NULL);
         }
+}
+
+public function fetchpackingchallan(){
+
+    $params = $_REQUEST;
+    $totalRecords = $this->admin_model->getpackingChallancount($params); 
+    $queryRecords = $this->admin_model->getpackingChallandata($params); 
+
+    $data = array();
+    foreach ($queryRecords as $key => $value)
+    {
+        $i = 0;
+        foreach($value as $v)
+        {
+            $data[$key][$i] = $v;
+            $i++;
+        }
+    }
+    $json_data = array(
+        "draw"            => intval( $params['draw'] ),   
+        "recordsTotal"    => intval( $totalRecords ),  
+        "recordsFiltered" => intval($totalRecords),
+        "data"            => $data   // total data array
+        );
+    echo json_encode($json_data);
+
 }
 
 
