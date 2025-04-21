@@ -20795,6 +20795,14 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     }
 
+    public function getpreviouspackingmasterdata($id){
+        $this->db->select('*'); 
+        $this->db->where(TBL_PACKING_MASTER.'.id', $id);
+        $query = $this->db->get(TBL_PACKING_MASTER);
+        $fetch_result = $query->result_array();
+        return $fetch_result;
+
+    }
 
 }
 

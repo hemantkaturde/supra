@@ -25458,7 +25458,6 @@
 				return false;
 			});
 
-
 			$(document).on('click','.deletepackingmasterdata',function(e){
 				var elemF = $(this);
 				e.preventDefault();
