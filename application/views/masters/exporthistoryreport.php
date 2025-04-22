@@ -72,6 +72,7 @@
                                             <th>Buyer Name</th>    
                                             <th>Part No</th>
                                             <th>Buyer po</th>
+                                            <th>Buyer po Date</th>
                                             <th>Order Qty</th>
                                             <th>Export qty</th>
                                             <th>Buyer Invoice Number</th>

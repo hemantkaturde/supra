@@ -21052,6 +21052,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id  = '.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id');
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id  = '.TBL_BUYER_PO_MASTER.'.buyer_name_id');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id  = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
+        
 
         // if($params['search']['value'] != "") 
         // {
@@ -21078,6 +21079,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['buyer_name'] = $value['buyer_name'];
                 $data[$counter]['part_number'] = $value['part_number'];
                 $data[$counter]['sales_order_number'] = $value['sales_order_number'];
+                $data[$counter]['date'] = $value['date'];
                 $data[$counter]['order_oty'] = $value['order_oty'];
                 $data[$counter]['total_weight'] = $value['total_weight'];
                 $data[$counter]['total_goni'] = $value['total_goni'];
