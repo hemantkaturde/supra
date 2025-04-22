@@ -24151,7 +24151,16 @@ public function addnewpackingchallan(){
                     'remark' =>  trim($this->input->post('remark')),
                 );
 
-                $savepackignchallan= $this->admin_model->savepackignchallan('',$data);
+
+                $packingchallan_id = trim($this->input->post('packingchallanid'));
+                
+                if($packingchallan_id){
+                 $packingchallanid= $packingchallan_id;
+                }else{
+                 $packingchallanid ='';
+                }
+
+                $savepackignchallan= $this->admin_model->savepackignchallan($packingchallanid,$data);
                 if($savepackignchallan){
                         $update_last_inserted_id_in_packingchallanid = $this->admin_model->update_last_inserted_id_in_packingchallanid($savepackignchallan);
                             if($update_last_inserted_id_in_packingchallanid){    
@@ -24226,9 +24235,16 @@ public function savepackingchallanitem(){
             $savepackingchallan_item_response['error'] = array('discription_of_packing_material'=>strip_tags(form_error('discription_of_packing_material')),'quantity_in_gonis'=>strip_tags(form_error('quantity_in_gonis')),'qty_in_kgs'=>strip_tags(form_error('qty_in_kgs')),'rate'=>strip_tags(form_error('rate')),'amount'=>strip_tags(form_error('amount')),'gst_rate'=>strip_tags(form_error('gst_rate')),'item_remark'=>strip_tags(form_error('item_remark')));
        
         }else{
+
+            if(trim($this->input->post('packingchallanid'))){
+                $packingchallanid = trim($this->input->post('packingchallanid'));
+            }else{
+                $packingchallanid = NULL;
+            }
             
             $data = array(
                 'discription_of_packing_material_id' =>  trim($this->input->post('discription_of_packing_material')),
+                'packing_challan_id' => $packingchallanid,
                 'quantity_in_gonis' =>  trim($this->input->post('quantity_in_gonis')),
                 'qty_in_kgs' =>  trim($this->input->post('qty_in_kgs')),
                 'rate' =>  trim($this->input->post('rate')),
@@ -24294,6 +24310,19 @@ public function deletepackingchallanitem(){
     }else{
         echo(json_encode(array('status'=>'failed'))); 
     }
+}
+
+public function editpackingchallan($id){
+    $process = 'Edit Packing Challan';
+    $processFunction = 'Admin/editpackingchallan';
+    $this->logrecord($process,$processFunction);
+    $this->global['pageTitle'] = 'Edit Packing Challan';
+    $data['vendorList']= $this->admin_model->fetchALLvendorList();
+    $data['getpreviouspackingchallandata']= $this->admin_model->getpreviouspackingchallandata($id);
+    $data['description_of_packing_material']= $this->admin_model->description_of_packing_material();
+    $data['get_previous_added_item_details_edit']= $this->admin_model->get_previous_added_item_details_edit($id);
+    $data['gettotalcountoftotalkgsandtotalgoni']= $this->admin_model->gettotalcountoftotalkgsandtotalgoni($id);
+    $this->loadViews("masters/editpackingchallan", $this->global, $data, NULL);
 }
 
 

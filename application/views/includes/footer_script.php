@@ -25511,7 +25511,7 @@
 <?php } ?>
 
 
-<?php if($pageTitle=='Packing Challan' || $pageTitle=='Add New Packing Challan'){ ?>
+<?php if($pageTitle=='Packing Challan' || $pageTitle=='Add New Packing Challan' || $pageTitle=='Edit Packing Challan'){ ?>
 	<script type="text/javascript">
             $(document).ready(function() {
 				var dt = $('#view_packing_challan').DataTable({
@@ -25700,12 +25700,14 @@
 				var pre_total_goni =   $('#total_goni').val();
 				var pre_remark =   $('#remark').val();
 
+				var packingchallanid = $('#packingchallanid').val();
+
 
 				$.ajax({
 					url : "<?php echo base_url();?>savepackingchallanitem",
 					type: "POST",
 					//data : formData,
-					data :{ discription_of_packing_material:discription_of_packing_material,quantity_in_gonis:quantity_in_gonis,qty_in_kgs:qty_in_kgs,rate:rate,amount:amount,gst_rate:gst_rate,CGST_value:CGST_value,SGST_value:SGST_value,IGST_value:IGST_value,grand_total:grand_total,item_remark:item_remark,pre_packing_challan_date:pre_packing_challan_date,pre_vendor_id:pre_vendor_id,pre_dispatched_by:pre_dispatched_by,pre_total_weight:pre_total_weight,pre_total_goni:pre_total_goni,pre_remark:pre_remark},
+					data :{ discription_of_packing_material:discription_of_packing_material,quantity_in_gonis:quantity_in_gonis,qty_in_kgs:qty_in_kgs,rate:rate,amount:amount,gst_rate:gst_rate,CGST_value:CGST_value,SGST_value:SGST_value,IGST_value:IGST_value,grand_total:grand_total,item_remark:item_remark,pre_packing_challan_date:pre_packing_challan_date,pre_vendor_id:pre_vendor_id,pre_dispatched_by:pre_dispatched_by,pre_total_weight:pre_total_weight,pre_total_goni:pre_total_goni,pre_remark:pre_remark,packingchallanid:packingchallanid},
 					method: "POST",
 					// data :{package_id:package_id},
 					cache:false,
@@ -25728,11 +25730,11 @@
 								icon: "success",
 								button: "Ok",
 								},function(){
-									// if(scrap_invoice_id_main){
-									// 	window.location.href = "<?php echo base_url().'editscrapinvoice/'?>"+scrap_invoice_id_main;
-									// }else{
+									 if(packingchallanid){
+									 	window.location.href = "<?php echo base_url().'editpackingchallan/'?>"+packingchallanid;
+									 }else{
 										window.location.href = "<?php echo base_url().'addnewpackingchallan'?>";
-									// }
+									 }
 							});		
 						}
 						

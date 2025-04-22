@@ -20807,6 +20807,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     public function getpackingChallancount($params){
 
         $this->db->select('*');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_PACKING_CHALLAN.'.vendor_id');
         if($params['search']['value'] != "") 
         {
             $this->db->where("(".TBL_PACKING_CHALLAN.".packing_challan_id LIKE '%".$params['search']['value']."%'");
@@ -20823,7 +20824,9 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     public function getpackingChallandata($params){
 
-        $this->db->select('*');
+        $this->db->select('*,'.TBL_PACKING_CHALLAN.'.id as packingchallanid');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_PACKING_CHALLAN.'.vendor_id');
+
         if($params['search']['value'] != "") 
         {
             $this->db->where("(".TBL_PACKING_CHALLAN.".packing_challan_id LIKE '%".$params['search']['value']."%'");
@@ -20847,14 +20850,14 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             {
                 $data[$counter]['packing_challan_id'] = $value['packing_challan_id'];
                 $data[$counter]['packing_challan_date'] = $value['packing_challan_date'];
-                $data[$counter]['vendor_id'] = $value['vendor_id'];
+                $data[$counter]['vendor_id'] = $value['vendor_name'];
                 $data[$counter]['dispatched_by'] = $value['dispatched_by'];
                 $data[$counter]['total_weight'] = $value['total_weight'];
                 $data[$counter]['total_goni'] = $value['total_goni'];
                 $data[$counter]['qty_in_kgs'] = $value['qty_in_kgs'];
                 $data[$counter]['action'] = '';
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editpackingchallan/".$value['id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";
-                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['id']."' class='fa fa-trash-o deletepackinchallandata' aria-hidden='true'></i>"; 
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editpackingchallan/".$value['packingchallanid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['packingchallanid']."' class='fa fa-trash-o deletepackinchallandata' aria-hidden='true'></i>"; 
             
                 $counter++; 
             }
@@ -20979,6 +20982,26 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $data = $query->result_array();
         return $data;
 
+    }
+
+    public function getpreviouspackingchallandata($id){
+
+        $this->db->select('*,'.TBL_PACKING_CHALLAN.'.id as packingchallanid');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_PACKING_CHALLAN.'.vendor_id');
+        $this->db->where(TBL_PACKING_CHALLAN.'.id', $id);
+        $query = $this->db->get(TBL_PACKING_CHALLAN);
+        $fetch_result = $query->result_array();
+        return $fetch_result;
+    }
+
+    public function get_previous_added_item_details_edit($id){
+
+        $this->db->select('*,'.TBL_PACKING_CHALLAN_ITEM.'.id as packing_challan_id');
+        $this->db->join(TBL_PACKING_MASTER, TBL_PACKING_MASTER.'.id  = '.TBL_PACKING_CHALLAN_ITEM.'.discription_of_packing_material_id');
+        $this->db->where(TBL_PACKING_CHALLAN_ITEM.'.packing_challan_id',$id);
+        $query = $this->db->get(TBL_PACKING_CHALLAN_ITEM);
+        $data = $query->result_array();
+        return $data;
     }
 
 
