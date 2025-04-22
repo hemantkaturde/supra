@@ -21004,6 +21004,17 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         return $data;
     }
 
+    public function gettotalcountoftotalkgsandtotalgoniedit($id){
+
+        $this->db->select('sum(qty_in_kgs) as total_qty_in_kgs,sum(quantity_in_gonis) as total_quantity_in_gonis');
+        $this->db->join(TBL_PACKING_MASTER, TBL_PACKING_MASTER.'.id  = '.TBL_PACKING_CHALLAN_ITEM.'.discription_of_packing_material_id');
+        $this->db->where(TBL_PACKING_CHALLAN_ITEM.'.packing_challan_id',$id);
+        $query = $this->db->get(TBL_PACKING_CHALLAN_ITEM);
+        $data = $query->result_array();
+        return $data;
+
+    }
+
 
 }
 

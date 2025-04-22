@@ -24321,7 +24321,7 @@ public function editpackingchallan($id){
     $data['getpreviouspackingchallandata']= $this->admin_model->getpreviouspackingchallandata($id);
     $data['description_of_packing_material']= $this->admin_model->description_of_packing_material();
     $data['get_previous_added_item_details_edit']= $this->admin_model->get_previous_added_item_details_edit($id);
-    $data['gettotalcountoftotalkgsandtotalgoni']= $this->admin_model->gettotalcountoftotalkgsandtotalgoni($id);
+    $data['gettotalcountoftotalkgsandtotalgoniedit']= $this->admin_model->gettotalcountoftotalkgsandtotalgoniedit($id);
     $this->loadViews("masters/editpackingchallan", $this->global, $data, NULL);
 }
 
