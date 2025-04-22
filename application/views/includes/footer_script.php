@@ -25701,13 +25701,14 @@
 				var pre_remark =   $('#remark').val();
 
 				var packingchallanid = $('#packingchallanid').val();
+				var packing_challan_item_id = $('#packing_challan_item_id').val();
 
 
 				$.ajax({
 					url : "<?php echo base_url();?>savepackingchallanitem",
 					type: "POST",
 					//data : formData,
-					data :{ discription_of_packing_material:discription_of_packing_material,quantity_in_gonis:quantity_in_gonis,qty_in_kgs:qty_in_kgs,rate:rate,amount:amount,gst_rate:gst_rate,CGST_value:CGST_value,SGST_value:SGST_value,IGST_value:IGST_value,grand_total:grand_total,item_remark:item_remark,pre_packing_challan_date:pre_packing_challan_date,pre_vendor_id:pre_vendor_id,pre_dispatched_by:pre_dispatched_by,pre_total_weight:pre_total_weight,pre_total_goni:pre_total_goni,pre_remark:pre_remark,packingchallanid:packingchallanid},
+					data :{ discription_of_packing_material:discription_of_packing_material,quantity_in_gonis:quantity_in_gonis,qty_in_kgs:qty_in_kgs,rate:rate,amount:amount,gst_rate:gst_rate,CGST_value:CGST_value,SGST_value:SGST_value,IGST_value:IGST_value,grand_total:grand_total,item_remark:item_remark,pre_packing_challan_date:pre_packing_challan_date,pre_vendor_id:pre_vendor_id,pre_dispatched_by:pre_dispatched_by,pre_total_weight:pre_total_weight,pre_total_goni:pre_total_goni,pre_remark:pre_remark,packingchallanid:packingchallanid,packing_challan_item_id:packing_challan_item_id},
 					method: "POST",
 					// data :{package_id:package_id},
 					cache:false,
@@ -25796,7 +25797,6 @@
 				});
 	        });
 
-
 			$(document).on('click','.deletepackingchallanitem',function(e){
 				var elemF = $(this);
 				e.preventDefault();
@@ -25845,6 +25845,66 @@
 					}
 				});
 	        });
+
+			$(document).on('click','.editpackingchallanitem',function(e){  
+				e.preventDefault();
+				var elemF = $(this);
+				var item_id = elemF.attr('data-id');
+				
+				$.ajax({
+					url : "<?php echo base_url();?>getpackingchallanitamdata",
+					type: "POST",
+					data : 'id='+item_id,
+					success: function(data, textStatus, jqXHR)
+					{
+						    var fetchResponse = $.parseJSON(data);
+							$('#addNewModal').modal('show'); 
+							$('#packing_challan_item_id').val(fetchResponse.pckinginvoiceitemid); 
+							$('#discription_of_packing_material').val(fetchResponse.discription_of_packing_material_id); 
+							$('#quantity_in_gonis').val(fetchResponse.quantity_in_gonis); 
+							$('#qty_in_kgs').val(fetchResponse.qty_in_kgs);  
+							$('#rate').val(fetchResponse.rate);  
+							$('#amount').val(fetchResponse.amount);  
+							$('#gst_rate').val(fetchResponse.gst_rate);  
+							
+							if(fetchResponse.gst_rate=='cgst_sgst_18'){
+								$('#CGST_SGST_Div').css('display', 'block');
+				            	$('#IGST_Div').css('display', 'none');
+								$('#CGST_value').val(fetchResponse.CGST_value);  
+								$('#SGST_value').val(fetchResponse.SGST_value);  
+							}
+
+							if(fetchResponse.gst_rate=='cgst_sgst_12'){
+								$('#CGST_SGST_Div').css('display', 'block');
+								$('#IGST_Div').css('display', 'none');
+								$('#CGST_value').val(fetchResponse.CGST_value);  
+								$('#SGST_value').val(fetchResponse.SGST_value);  
+							}
+
+							if(fetchResponse.gst_rate=='igst_18'){
+								$('#CGST_SGST_Div').css('display', 'none');
+				            	$('#IGST_Div').css('display', 'block');
+								$('#IGST_value').val(fetchResponse.IGST_value);  
+							}
+
+							if(fetchResponse.gst_rate=='igst_12'){
+
+								$('#CGST_SGST_Div').css('display', 'none');
+								$('#IGST_Div').css('display', 'block');
+								$('#IGST_value').val(fetchResponse.IGST_value);  
+							}
+
+							$('#grand_total').val(fetchResponse.grand_total);  
+							$('#item_remark').val(fetchResponse.item_remark);  
+							
+					},
+					error: function (jqXHR, textStatus, errorThrown)
+				    {
+				   	   $(".loader_ajax").hide();
+				    }
+				});
+				return false;
+			});
 
     </script>
 <?php } ?>

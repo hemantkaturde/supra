@@ -23783,8 +23783,6 @@ public function getscrapinvoiceitemdata(){
             echo 'failure';
         }
     }
-
-
 }
 
 public function downloadscrapinvoic($id){
@@ -24265,8 +24263,13 @@ public function savepackingchallanitem(){
 
             );
 
-
-            $savepackingchallanitem= $this->admin_model->savepackingchallanitem('',$data);
+            if(trim($this->input->post('packing_challan_item_id'))){
+                $packing_challan_item_id = trim($this->input->post('packing_challan_item_id'));
+            }else{
+                $packing_challan_item_id = NULL;
+            }
+            
+            $savepackingchallanitem= $this->admin_model->savepackingchallanitem($packing_challan_item_id,$data);
             if($savepackingchallanitem){
                 $savepackingchallan_item_response['status'] = 'success';
                 $savepackingchallan_item_response['error'] = array('discription_of_packing_material'=>strip_tags(form_error('discription_of_packing_material')),'quantity_in_gonis'=>strip_tags(form_error('quantity_in_gonis')),'qty_in_kgs'=>strip_tags(form_error('qty_in_kgs')),'rate'=>strip_tags(form_error('rate')),'amount'=>strip_tags(form_error('amount')),'gst_rate'=>strip_tags(form_error('gst_rate')),'item_remark'=>strip_tags(form_error('item_remark')));
@@ -24323,6 +24326,21 @@ public function editpackingchallan($id){
     $data['get_previous_added_item_details_edit']= $this->admin_model->get_previous_added_item_details_edit($id);
     $data['gettotalcountoftotalkgsandtotalgoniedit']= $this->admin_model->gettotalcountoftotalkgsandtotalgoniedit($id);
     $this->loadViews("masters/editpackingchallan", $this->global, $data, NULL);
+}
+
+
+public function getpackingchallanitamdata(){
+
+    $post_submit = $this->input->post();
+    if($post_submit){
+        $geteditPODitem = $this->admin_model->getpackingchallanitamdata(trim($this->input->post('id')));
+        if($geteditPODitem){
+            $content = $geteditPODitem[0];
+            echo json_encode($content);
+        }else{
+            echo 'failure';
+        }
+    }
 }
 
 

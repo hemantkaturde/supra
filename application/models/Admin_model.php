@@ -21015,6 +21015,15 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     }
 
+    public function getpackingchallanitamdata($id){
+        $this->db->select('*,'.TBL_PACKING_CHALLAN_ITEM.'.id as pckinginvoiceitemid');
+        $this->db->join(TBL_PACKING_MASTER, TBL_PACKING_MASTER.'.id  = '.TBL_PACKING_CHALLAN_ITEM.'.discription_of_packing_material_id');
+        $this->db->where(TBL_PACKING_CHALLAN_ITEM.'.id',$id);
+        $query = $this->db->get(TBL_PACKING_CHALLAN_ITEM);
+        $fetch_result = $query->result_array();
+        return $fetch_result;
+    }
+
 
 }
 

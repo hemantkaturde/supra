@@ -255,7 +255,7 @@
                                                             <div class="loader_ajax_inner"><img src="<?php echo ICONPATH;?>/preloader_ajax.gif"></div>
                                                         </div>
 
-                                                        <!-- <input type="text" class="form-control"  id="scrap_invoice_item_id" name="scrap_invoice_item_id"> -->
+                                                        <input type="hidden" class="form-control"  id="packing_challan_item_id" name="packing_challan_item_id">
 
                                                         <div class="form-group row">
                                                             <label class="col-sm-3 col-form-label">Description Of Packing Material<span class="required">*</span></label>

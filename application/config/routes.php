@@ -634,7 +634,7 @@ $route['savepackingchallanitem'] = "admin/savepackingchallanitem";
 $route['deletepackinchallandata'] = "admin/deletepackinchallandata";
 $route['deletepackingchallanitem'] = "admin/deletepackingchallanitem";
 $route['editpackingchallan/(:any)'] = "admin/editpackingchallan/$1";
-
+$route['getpackingchallanitamdata'] = "admin/getpackingchallanitamdata";
 
 
 
