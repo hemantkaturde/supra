@@ -147,7 +147,7 @@
 
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="date">Dispatched By</label>
+                                            <label for="dispatched_by">Dispatched By</label>
                                             <input type="text" class="form-control" id="dispatched_by" value="<?=$get_previous_added_item_details[0]['pre_dispatched_by']?>" name="dispatched_by">
                                             <p class="error dispatched_by_error"></p>
                                         </div>
@@ -155,7 +155,7 @@
 
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="date">Total Weight</label>
+                                            <label for="total_weight">Total Weight</label>
                                             <input type="text" class="form-control" id="total_weight" value="<?=$get_previous_added_item_details[0]['pre_total_weight']?>" name="total_weight">
                                             <p class="error total_weight_error"></p>
                                         </div>
@@ -163,9 +163,17 @@
 
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="date">Total Goni</label>
-                                            <input type="text" class="form-control" id="total_goni" value="<?=$get_previous_added_item_details[0]['pre_total_goni']?>" name="total_goni">
+                                            <label for="total_goni">Total Goni</label>
+                                            <input type="text" class="form-control" id="total_goni" value="<?=$gettotalcountoftotalkgsandtotalgoni[0]['total_quantity_in_gonis']?>" name="total_goni">
                                             <p class="error total_goni_error"></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="qty_in_kgs">Qty in kgs</label>
+                                            <input type="text" class="form-control" id="qty_in_kgs" value="<?=$gettotalcountoftotalkgsandtotalgoni[0]['total_qty_in_kgs']?>" name="qty_in_kgs">
+                                            <p class="error qty_in_kgs_error"></p>
                                         </div>
                                     </div>
 
@@ -187,7 +195,7 @@
                                                     <tr>
                                                         <th>Sr No</th>
                                                         <th>Description Of packing Material</th>
-                                                        <th>Quantity</th>
+                                                        <th>Quantity in Gonis</th>
                                                         <th>Qty in kgs</th>
                                                         <th>Rate</th>
                                                         <th>Amount</th>

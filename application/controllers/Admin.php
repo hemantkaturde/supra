@@ -24170,6 +24170,7 @@ public function addnewpackingchallan(){
             $data['getPreviousPackingchallannumber']= $this->admin_model->getPreviousPackingchallannumber();
             $data['description_of_packing_material']= $this->admin_model->description_of_packing_material();
             $data['get_previous_added_item_details']= $this->admin_model->get_previous_added_item_details();
+            $data['gettotalcountoftotalkgsandtotalgoni']= $this->admin_model->gettotalcountoftotalkgsandtotalgoni();
             $this->loadViews("masters/addnewpackingchallan", $this->global, $data, NULL);
         }
 }
