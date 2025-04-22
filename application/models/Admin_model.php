@@ -21026,6 +21026,73 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         return $fetch_result;
     }
 
+    
+    public function getexporthistoryreportcount($params){
+
+        $this->db->select('*');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_PACKING_CHALLAN.'.vendor_id');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_PACKING_CHALLAN.".packing_challan_id LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_PACKING_CHALLAN.".packing_challan_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_PACKING_CHALLAN.".total_goni LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_PACKING_CHALLAN.".dispatched_by LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_PACKING_CHALLAN.".total_weight LIKE '%".$params['search']['value']."%')");
+        }
+        $this->db->where(TBL_PACKING_CHALLAN.'.status', 1); 
+        $query = $this->db->get(TBL_PACKING_CHALLAN);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+    }
+
+    public function getexporthistoryreportdata($params){
+
+        $this->db->select('*');
+        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id  = '.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id');
+        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id  = '.TBL_BUYER_PO_MASTER.'.buyer_name_id');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id  = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
+
+        // if($params['search']['value'] != "") 
+        // {
+        //     $this->db->where("(".TBL_PACKING_CHALLAN.".packing_challan_id LIKE '%".$params['search']['value']."%'");
+        //     $this->db->or_where(TBL_PACKING_CHALLAN.".packing_challan_date LIKE '%".$params['search']['value']."%'");
+        //     $this->db->or_where(TBL_PACKING_CHALLAN.".total_goni LIKE '%".$params['search']['value']."%'");
+        //     $this->db->or_where(TBL_PACKING_CHALLAN.".dispatched_by LIKE '%".$params['search']['value']."%'");
+        //     $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+        //     $this->db->or_where(TBL_PACKING_CHALLAN.".total_weight LIKE '%".$params['search']['value']."%')");
+        // }
+
+        // $this->db->where(TBL_PACKING_CHALLAN.'.status', 1);
+        $this->db->limit($params['length'],$params['start']);
+        // $this->db->order_by(TBL_PACKING_CHALLAN.'.id','DESC');
+        $query = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
+        $fetch_result = $query->result_array();
+
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['buyer_name'] = $value['buyer_name'];
+                $data[$counter]['part_number'] = $value['part_number'];
+                $data[$counter]['sales_order_number'] = $value['sales_order_number'];
+                $data[$counter]['order_oty'] = $value['order_oty'];
+                $data[$counter]['total_weight'] = $value['total_weight'];
+                $data[$counter]['total_goni'] = $value['total_goni'];
+                $data[$counter]['qty_in_kgs'] = $value['qty_in_kgs'];
+                $data[$counter]['qty_in_kgs1'] ='';
+                $data[$counter]['qty_in_kgs2'] ='';
+                $data[$counter]['qty_in_kgs3'] ='';
+
+                $counter++; 
+            }
+        }
+
+        return $data;
+
+    }
 
 }
 

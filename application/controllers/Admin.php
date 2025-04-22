@@ -24328,7 +24328,6 @@ public function editpackingchallan($id){
     $this->loadViews("masters/editpackingchallan", $this->global, $data, NULL);
 }
 
-
 public function getpackingchallanitamdata(){
 
     $post_submit = $this->input->post();
@@ -24341,6 +24340,42 @@ public function getpackingchallanitamdata(){
             echo 'failure';
         }
     }
+}
+
+public function export_history_report(){
+
+    $process = 'Export History Report';
+    $processFunction = 'Admin/exporthistoryreport';
+    $this->logrecord($process,$processFunction);
+    $this->global['pageTitle'] = 'Export History Report';
+    $this->loadViews("masters/exporthistoryreport", $this->global, $data, NULL);
+}
+
+
+public function fetchexporthistoryreport(){
+
+    $params = $_REQUEST;
+    $totalRecords = $this->admin_model->getexporthistoryreportcount($params); 
+    $queryRecords = $this->admin_model->getexporthistoryreportdata($params); 
+
+    $data = array();
+    foreach ($queryRecords as $key => $value)
+    {
+        $i = 0;
+        foreach($value as $v)
+        {
+            $data[$key][$i] = $v;
+            $i++;
+        }
+    }
+    $json_data = array(
+        "draw"            => intval( $params['draw'] ),   
+        "recordsTotal"    => intval( $totalRecords ),  
+        "recordsFiltered" => intval($totalRecords),
+        "data"            => $data   // total data array
+        );
+    echo json_encode($json_data);
+
 }
 
 

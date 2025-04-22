@@ -637,6 +637,12 @@ $route['editpackingchallan/(:any)'] = "admin/editpackingchallan/$1";
 $route['getpackingchallanitamdata'] = "admin/getpackingchallanitamdata";
 
 
+$route['export_history_report'] = "admin/export_history_report";
+
+$route['fetchexporthistoryreport'] = "admin/fetchexporthistoryreport";
+
+
+
 
 
 /* End of file routes.php */
