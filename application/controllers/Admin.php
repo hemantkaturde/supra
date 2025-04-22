@@ -24147,6 +24147,7 @@ public function addnewpackingchallan(){
                     'dispatched_by' =>  trim($this->input->post('dispatched_by')),
                     'total_weight' =>  trim($this->input->post('total_weight')),
                     'total_goni' =>  trim($this->input->post('total_goni')),
+                    'qty_in_kgs' =>  trim($this->input->post('total_qty_in_kgs')),
                     'remark' =>  trim($this->input->post('remark')),
                 );
 

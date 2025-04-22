@@ -37,6 +37,7 @@
                                         <th>Dispatched By</th>
                                         <th>Total Weight</th>
                                         <th>Total Goni</th>
+                                        <th>Total Qty in kgs</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>

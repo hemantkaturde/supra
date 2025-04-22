@@ -171,9 +171,9 @@
 
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="qty_in_kgs">Qty in kgs</label>
-                                            <input type="text" class="form-control" id="qty_in_kgs" value="<?=$gettotalcountoftotalkgsandtotalgoni[0]['total_qty_in_kgs']?>" name="qty_in_kgs">
-                                            <p class="error qty_in_kgs_error"></p>
+                                            <label for="total_qty_in_kgs">Total Qty in kgs</label>
+                                            <input type="text" class="form-control" id="total_qty_in_kgs" value="<?=$gettotalcountoftotalkgsandtotalgoni[0]['total_qty_in_kgs']?>" name="total_qty_in_kgs">
+                                            <p class="error total_qty_in_kgs_error"></p>
                                         </div>
                                     </div>
 

@@ -20851,6 +20851,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['dispatched_by'] = $value['dispatched_by'];
                 $data[$counter]['total_weight'] = $value['total_weight'];
                 $data[$counter]['total_goni'] = $value['total_goni'];
+                $data[$counter]['qty_in_kgs'] = $value['qty_in_kgs'];
                 $data[$counter]['action'] = '';
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editpackingchallan/".$value['id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['id']."' class='fa fa-trash-o deletepackinchallandata' aria-hidden='true'></i>"; 
