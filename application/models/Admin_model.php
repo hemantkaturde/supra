@@ -20814,6 +20814,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             $this->db->or_where(TBL_PACKING_CHALLAN.".packing_challan_date LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_PACKING_CHALLAN.".total_goni LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_PACKING_CHALLAN.".dispatched_by LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_PACKING_CHALLAN.".total_weight LIKE '%".$params['search']['value']."%')");
         }
         $this->db->where(TBL_PACKING_CHALLAN.'.status', 1); 
@@ -20833,6 +20834,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             $this->db->or_where(TBL_PACKING_CHALLAN.".packing_challan_date LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_PACKING_CHALLAN.".total_goni LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_PACKING_CHALLAN.".dispatched_by LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_PACKING_CHALLAN.".total_weight LIKE '%".$params['search']['value']."%')");
         }
 
