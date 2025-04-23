@@ -21054,7 +21054,9 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id  = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
         $this->db->join(TBL_PACKING_INSTRACTION, TBL_PACKING_INSTRACTION.'.buyer_po_number = '.TBL_BUYER_PO_MASTER.'.id');
         $this->db->join(TBL_PACKING_INSTRACTION_DETAILS, TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id = '.TBL_PACKING_INSTRACTION.'.id  and '.TBL_PACKING_INSTRACTION_DETAILS.'.part_number= '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
-        
+        $this->db->join(TBL_PREEXPORT, TBL_PREEXPORT.'.buyer_po = '.TBL_BUYER_PO_MASTER.'.id');
+        $this->db->join(TBL_PREEXPORT_ITEM_DETAILS, TBL_PREEXPORT_ITEM_DETAILS.'.pre_export_id = '.TBL_PREEXPORT.'.id  and '.TBL_PREEXPORT_ITEM_DETAILS.'.part_number= '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
+
 
         // if($params['search']['value'] != "") 
         // {
@@ -21086,9 +21088,9 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['export_qty'] = $value['buyer_invoice_qty'];
                 $data[$counter]['buyer_invoice_number'] = $value['buyer_invoice_number'];
                 $data[$counter]['buyer_invoice_date'] = $value['buyer_invoice_date'];
-                $data[$counter]['qty_in_kgs1'] ='';
-                $data[$counter]['qty_in_kgs2'] ='';
-                $data[$counter]['qty_in_kgs3'] ='';
+                $data[$counter]['mode_of_shipment'] =$value['mode_of_shipment'];
+                $data[$counter]['current_stock'] =$value['current_stock'];
+                $data[$counter]['qty_in_kgs3'] =$value['order_oty']- $value['buyer_invoice_qty'];
 
                 $counter++; 
             }
