@@ -21121,6 +21121,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                          .TBL_VENDOR.'.GSTIN as ven_GSTIN,'
                          .TBL_PACKING_CHALLAN.'.packing_challan_date as packing_challan_date,'
                          .TBL_PACKING_CHALLAN.'.packing_challan_id as packing_challan_id,'
+                         .TBL_PACKING_CHALLAN.'.remark as remark,'
                         );
         $this->db->where(TBL_PACKING_CHALLAN.'.id', $id);
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_PACKING_CHALLAN.'.vendor_id');
@@ -21133,7 +21134,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     public function getpackingchallanitemdetailsForInvoice($id){
         $this->db->select('*,'.TBL_PACKING_CHALLAN_ITEM.'.id as pckinginvoiceitemid');
         $this->db->join(TBL_PACKING_MASTER, TBL_PACKING_MASTER.'.id  = '.TBL_PACKING_CHALLAN_ITEM.'.discription_of_packing_material_id');
-        $this->db->where(TBL_PACKING_CHALLAN_ITEM.'.id',$id);
+        $this->db->where(TBL_PACKING_CHALLAN_ITEM.'.packing_challan_id',$id);
         $query = $this->db->get(TBL_PACKING_CHALLAN_ITEM);
         $fetch_result = $query->result_array();
         return $fetch_result;

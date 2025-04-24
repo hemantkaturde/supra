@@ -24214,6 +24214,7 @@ public function downlaodpackingchallandata($id){
     $getvendordetailsForpackingchallan = $this->admin_model->getvendordetailsForpackingchallan($id);
     $getpackingchallanitemdetailsForInvoice = $this->admin_model->getpackingchallanitemdetailsForInvoice($id);
 
+
     $getCompanyAddressdetails = $this->admin_model->getCompanyAddressdetails($id);
 
     if($getvendordetailsForpackingchallan['packing_challan_date']!='0000-00-00'){
@@ -24242,11 +24243,11 @@ public function downlaodpackingchallandata($id){
         $CartItem .= '
                 <tr style="style=border-left: 1px solid black;border-right: 1px solid black;">
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$i.'</td>
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['type_of_raw_material'].' <br>Vendor Qty-'.$value['vendor_qty'].' pcs, HSN Code - '.$value['HSN_code'].'</br> <br>Gross Weight-'.$value['rmgrossweight'].' kgs </br><br>'.$value['description_1'].'</br><br>'.$value['description_2'].'</br></td>   
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['part_number'].'</td>
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['order_oty'].'</td>
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['unit'].'</td> 
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['unit'].'</td> 
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['description'].'</br></td>   
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['quantity_in_gonis'].'</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['qty_in_kgs'].'</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rate'].'</td> 
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['amount'].'</td> 
 
                 </tr>';
                 $subtotal+=$value['value'];
