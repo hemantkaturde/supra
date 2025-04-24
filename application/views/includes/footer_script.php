@@ -25751,7 +25751,6 @@
 			$(document).on('click','.deletepackinchallandata',function(e){
 				var elemF = $(this);
 				e.preventDefault();
-
 				swal({
 					title: "Are you sure?",
 					text: "Delete Packing Challan",
@@ -25780,7 +25779,9 @@
 												icon: "success",
 												button: "Ok",
 												},function(){ 
-													window.location.href = "<?php echo base_url()?>packing_challan";
+												
+														window.location.href = "<?php echo base_url()?>packing_challan";
+											
 												});	
 										}
 
@@ -25800,6 +25801,7 @@
 			$(document).on('click','.deletepackingchallanitem',function(e){
 				var elemF = $(this);
 				e.preventDefault();
+				var packingchallanid = $('#packingchallanid').val();
 
 				swal({
 					title: "Are you sure?",
@@ -25829,8 +25831,14 @@
 												icon: "success",
 												button: "Ok",
 												},function(){ 
-													window.location.href = "<?php echo base_url()?>addnewpackingchallan";
-												});	
+
+
+													if(packingchallanid){
+														window.location.href = "<?php echo base_url()?>editpackingchallan/"+packingchallanid;
+													}else{
+														window.location.href = "<?php echo base_url()?>addnewpackingchallan";
+													}
+													});	
 										}
 
 									},

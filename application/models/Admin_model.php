@@ -21122,6 +21122,9 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                          .TBL_PACKING_CHALLAN.'.packing_challan_date as packing_challan_date,'
                          .TBL_PACKING_CHALLAN.'.packing_challan_id as packing_challan_id,'
                          .TBL_PACKING_CHALLAN.'.remark as remark,'
+                         .TBL_PACKING_CHALLAN.'.dispatched_by as dispatched_by,'
+                         .TBL_PACKING_CHALLAN.'.total_goni as total_goni,'
+                         .TBL_PACKING_CHALLAN.'.qty_in_kgs as qty_in_kgs,'
                         );
         $this->db->where(TBL_PACKING_CHALLAN.'.id', $id);
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_PACKING_CHALLAN.'.vendor_id');

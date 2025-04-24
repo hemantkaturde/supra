@@ -15878,6 +15878,7 @@ public function downlaodjobworkchllan($id){
                 </tr>
                 '.$CartItem.$space.' 
 
+
                 <tr style="border: 1px solid black;">               
                     <td colspan="4"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>Packing & Forwarding </b></td>    
                     <td style="border: 1px solid black;padding-left: 10px;">'. $packing_forwarding.'</td>
@@ -24226,6 +24227,9 @@ public function downlaodpackingchallandata($id){
     $CartItem = "";
     $i =1;
     $subtotal = 0;
+    $grand_total = 0;
+
+    $igst_tax_value =0;
 
     $item_count =count($getpackingchallanitemdetailsForInvoice);
 
@@ -24251,6 +24255,32 @@ public function downlaodpackingchallandata($id){
 
                 </tr>';
                 $subtotal+=$value['value'];
+                $gst_rate = $value['gst_rate'];
+
+                $grand_total +=$value['grand_total'];
+
+                if($value['gst_rate']=='cgst_sgst_18'){
+                    $cgst_tax_rate = 9;
+                    $sgst_tax_rate = 9;
+
+                    $cgst_tax_value = $value['SGST_value'];
+                    $sgst_tax_value = $value['CGST_value'];
+
+                }else if($value['gst_rate']=='cgst_sgst_12'){
+                    $cgst_tax_rate = 6;
+                    $sgst_tax_rate = 6;
+
+                    $cgst_tax_value = $value['SGST_value'];
+                    $sgst_tax_value = $value['CGST_value'];
+
+                }else if($value['gst_rate']=='igst_18'){
+                    $igst_tax_rate = 18;
+                    $igst_tax_value += $value['IGST_value'];
+                }else if($value['gst_rate']=='igst_12'){
+                    $igst_tax_rate = 12;
+                    $igst_tax_value += $value['IGST_value'];
+
+                }
             $i++;       
     }
 
@@ -24263,6 +24293,26 @@ public function downlaodpackingchallandata($id){
         <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
 
         </tr>';
+
+        if($gst_rate=='cgst_sgst_18' || $gst_rate=='cgst_sgst_12'){
+            $tax_value = '<tr style="border: 1px solid black;">               
+                <td colspan="5"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>(+) '.$cgst_tax_rate.' % CGST </b></td>    
+                    <td style="border: 1px solid black;padding-left: 10px;">'.$cgst_tax_value.'</td>
+                </tr>
+    
+                <tr style="border: 1px solid black;">
+                    <td colspan="5"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>(+) '.$sgst_tax_rate.' % SGST </b></td>    
+                    <td style="border: 1px solid black;padding-left: 10px;">'.$sgst_tax_value.'</td>
+                </tr>';
+         }else{
+            $tax_value = '
+                <tr style="border: 1px solid black;">
+                    <td colspan="5"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>(+) '.$igst_tax_rate.' % IGST </b></td>    
+                    <td style="border: 1px solid black;padding-left: 10px;">'.$igst_tax_value.'</td>
+                </tr>';
+         }
+    
+
 
     $mpdf = new \Mpdf\Mpdf();
     // $html = $this->load->view('html_to_pdf',[],true);
@@ -24340,7 +24390,26 @@ public function downlaodpackingchallandata($id){
                     <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>RATE</th>  
                     <th align="left"  style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>AMOUNT</th>
                 </tr>
-                '.$CartItem.$space.' 
+                '.$CartItem.$space.'
+
+                <tr style="border-left: 1px solid black;border-right: 1px solid black;">
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;"></td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;padding-left: 15px;"><p><b>Delivery Address</b></p>
+                        <p> Through '.$getvendordetailsForpackingchallan['dispatched_by'].'</p>
+                        <p>'.$getvendordetailsForpackingchallan['total_goni'].'-goni'.' - '.$getvendordetailsForpackingchallan['qty_in_kgs'].' -kgs</p>
+                      
+                    </td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;"></td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;"></td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;"></td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;"></td>
+                </tr>
+                '. $tax_value.'
+            
+                <tr style="border: 1px solid black;">
+                        <td colspan="5"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>GRAND TOTAL</b></td>    
+                        <td style="border: 1px solid black;padding-left: 10px;">'.$grand_total.'/-'.'</td>
+                </tr>
             </table>
 
             <table style=" width: 100%;border-collapse: collapse;border: #ccc 1px solid;font-family:cambria;font-size:12px">
@@ -24355,12 +24424,7 @@ public function downlaodpackingchallandata($id){
                   
                    <tr style="border: 1px solid black;">
                         <td style="border: 1px solid black;padding-left: 10px;" width="75%;">
-                            <p><b>NOTE :</b></p>
-                            <p><b>1. Confirmation of PO is Mandatory</b></p>
-                            <p><b>2. Mentioning P.O.No. on Invoice is Mandatory</b></p>
-                            <p><b>3. Once order issued & accepted, cannot be cancelled</b></p>
-                            <p><b>4. Essence of this order is delivering the specified quality product on time.</b></p>
-                            <p><b>5. If any Prices issue, should inform in 24hrs after receipt of P.O.</b></p>
+                            <p>TEST</p>
                         </td>
                         <td style="border: 1px solid black;text-align: center;" width="25%" valign="top">
                             <p style="vertical-align: text-top;font-size:12px;color:#206a9b"><b>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</b></p>
