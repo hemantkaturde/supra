@@ -25524,7 +25524,7 @@
 						{ "width": "10%", "targets": 4 },
 						{ "width": "10%", "targets": 5 },
 						{ "width": "10%", "targets": 6 },
-						{ "width": "5%", "targets": 7 },
+						{ "width": "8%", "targets": 7 },
 						
 					],
 					responsive: true,

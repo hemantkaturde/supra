@@ -20858,6 +20858,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['total_goni'] = $value['total_goni'];
                 $data[$counter]['qty_in_kgs'] = $value['qty_in_kgs'];
                 $data[$counter]['action'] = '';
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downlaodpackingchallandata/".$value['packingchallanid']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editpackingchallan/".$value['packingchallanid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['packingchallanid']."' class='fa fa-trash-o deletepackinchallandata' aria-hidden='true'></i>"; 
             
@@ -21108,6 +21109,36 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         return $data;
 
     }
+
+
+    public function getvendordetailsForpackingchallan($id){
+        $this->db->select(TBL_VENDOR.'.vendor_name as vendor_name,'
+                         .TBL_VENDOR.'.address as ven_address,'
+                         .TBL_VENDOR.'.landline as ven_landline,'
+                         .TBL_VENDOR.'.contact_person as ven_contact_person,'
+                         .TBL_VENDOR.'.mobile as mobile,'
+                         .TBL_VENDOR.'.email as ven_email,'
+                         .TBL_VENDOR.'.GSTIN as ven_GSTIN,'
+                         .TBL_PACKING_CHALLAN.'.packing_challan_date as packing_challan_date,'
+                         .TBL_PACKING_CHALLAN.'.packing_challan_id as packing_challan_id,'
+                        );
+        $this->db->where(TBL_PACKING_CHALLAN.'.id', $id);
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_PACKING_CHALLAN.'.vendor_id');
+        $query = $this->db->get(TBL_PACKING_CHALLAN);
+        $fetch_result = $query->row_array();
+        return $fetch_result;
+    }
+
+
+    public function getpackingchallanitemdetailsForInvoice($id){
+        $this->db->select('*,'.TBL_PACKING_CHALLAN_ITEM.'.id as pckinginvoiceitemid');
+        $this->db->join(TBL_PACKING_MASTER, TBL_PACKING_MASTER.'.id  = '.TBL_PACKING_CHALLAN_ITEM.'.discription_of_packing_material_id');
+        $this->db->where(TBL_PACKING_CHALLAN_ITEM.'.id',$id);
+        $query = $this->db->get(TBL_PACKING_CHALLAN_ITEM);
+        $fetch_result = $query->result_array();
+        return $fetch_result;
+    }
+
 
 }
 
