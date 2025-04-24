@@ -24394,7 +24394,7 @@ public function downlaodpackingchallandata($id){
 
                 <tr style="border-left: 1px solid black;border-right: 1px solid black;">
                     <td style="border-left: 1px solid black;border-right: 1px solid black;"></td>
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;padding-left: 15px;"><p><b>Delivery Address</b></p>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;padding-left: 15px;">
                         <p> Through '.$getvendordetailsForpackingchallan['dispatched_by'].'</p>
                         <p>'.$getvendordetailsForpackingchallan['total_goni'].'-goni'.' - '.$getvendordetailsForpackingchallan['qty_in_kgs'].' -kgs</p>
                       
