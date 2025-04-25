@@ -24425,13 +24425,14 @@ public function downlaodpackingchallandata($id){
                    <tr style="border: 1px solid black;">
                         <td style="border: 1px solid black;padding-left: 10px;" width="75%;" valign="top">
                             <p>Received the above-mentioned goods in good order & condition & returned the duplicate duly sealed & signed.</p>
-                            <p> </p>
-                            <p> </p>
+                            <p> <br><br></p>
+                            <p> <br><br></p>
+                            <p> <br><br></p>
                             <p> Receivers Signature </p>
                         </td>
                         <td style="border: 1px solid black;text-align: center;" width="25%" valign="top">
                             <p style="vertical-align: text-top;font-size:12px;color:#206a9b"><b>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</b></p>
-                            <br/><img src="'.base_url().'assets/images/stmps/supplierpostampsignature.png" width="130" height="100">
+                            <br/><img src="'.base_url().'assets/images/stmps/packingchallansignature.png" width="130" height="100">
                             <p style="vertical-align: text-top;font-size:10px;color:#206a9b"><b>AUTHORIZED SIGNATORY</b></p>
                         </td> 
                 </tr>
