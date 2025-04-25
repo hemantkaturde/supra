@@ -24234,13 +24234,13 @@ public function downlaodpackingchallandata($id){
     $item_count =count($getpackingchallanitemdetailsForInvoice);
 
     if($item_count==1){
-        $padding_bottom = '95px';
+        $padding_bottom = '200px';
     }else if($item_count==2){
-        $padding_bottom = '28px';
+        $padding_bottom = '150px';
     }else if($item_count==3){
-        $padding_bottom = '10px';
+        $padding_bottom = '110px';
     }else{
-        $padding_bottom = '10px';
+        $padding_bottom = '90px';
     }
 
     foreach ($getpackingchallanitemdetailsForInvoice as $key => $value) {
@@ -24263,15 +24263,15 @@ public function downlaodpackingchallandata($id){
                     $cgst_tax_rate = 9;
                     $sgst_tax_rate = 9;
 
-                    $cgst_tax_value = $value['SGST_value'];
-                    $sgst_tax_value = $value['CGST_value'];
+                    $cgst_tax_value += $value['SGST_value'];
+                    $sgst_tax_value += $value['CGST_value'];
 
                 }else if($value['gst_rate']=='cgst_sgst_12'){
                     $cgst_tax_rate = 6;
                     $sgst_tax_rate = 6;
 
-                    $cgst_tax_value = $value['SGST_value'];
-                    $sgst_tax_value = $value['CGST_value'];
+                    $cgst_tax_value += $value['SGST_value'];
+                    $sgst_tax_value += $value['CGST_value'];
 
                 }else if($value['gst_rate']=='igst_18'){
                     $igst_tax_rate = 18;
@@ -24396,7 +24396,7 @@ public function downlaodpackingchallandata($id){
                     <td style="border-left: 1px solid black;border-right: 1px solid black;"></td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;padding-left: 15px;">
                         <p> Through '.$getvendordetailsForpackingchallan['dispatched_by'].'</p>
-                        <p>'.$getvendordetailsForpackingchallan['total_goni'].'-goni'.' - '.$getvendordetailsForpackingchallan['qty_in_kgs'].' -kgs</p>
+                        <p>'.$getvendordetailsForpackingchallan['total_goni'].' Gonis'.' - '.$getvendordetailsForpackingchallan['qty_in_kgs'].' kgs</p>
                       
                     </td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;"></td>
@@ -24425,6 +24425,9 @@ public function downlaodpackingchallandata($id){
                    <tr style="border: 1px solid black;">
                         <td style="border: 1px solid black;padding-left: 10px;" width="75%;" valign="top">
                             <p>Received the above-mentioned goods in good order & condition & returned the duplicate duly sealed & signed.</p>
+                            <p> </p>
+                            <p> </p>
+                            <p> Receivers Signature </p>
                         </td>
                         <td style="border: 1px solid black;text-align: center;" width="25%" valign="top">
                             <p style="vertical-align: text-top;font-size:12px;color:#206a9b"><b>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</b></p>
@@ -24583,7 +24586,6 @@ public function export_history_report(){
     $this->global['pageTitle'] = 'Export History Report';
     $this->loadViews("masters/exporthistoryreport", $this->global, $data, NULL);
 }
-
 
 public function fetchexporthistoryreport(){
 
