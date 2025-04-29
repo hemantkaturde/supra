@@ -21050,6 +21050,25 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         //     $this->db->or_where(TBL_PACKING_CHALLAN.".total_weight LIKE '%".$params['search']['value']."%')");
         // }
         // $this->db->where(TBL_PACKING_CHALLAN.'.status', 1); 
+
+
+        if($part_number!='NA'){
+            $this->db->where(TBL_FINISHED_GOODS.'.fin_id', $part_number);
+        }     
+
+
+        if($buyer_name!='NA'){
+            $this->db->where(TBL_BUYER_MASTER.'.buyer_id', $buyer_name);
+        }        
+    
+        if($from_date!='NA'){
+            $this->db->where(TBL_BUYER_PO_MASTER_ITEM.".date >=", $from_date);
+        }
+    
+        if($to_date!='NA'){
+            $this->db->where(TBL_BUYER_PO_MASTER_ITEM.".date <=", $to_date);
+        }
+
         $this->db->order_by(TBL_BUYER_PO_MASTER_ITEM.'.id','DESC');
         $query = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
         $rowcount = $query->num_rows();
@@ -21077,6 +21096,24 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         //     $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
         //     $this->db->or_where(TBL_PACKING_CHALLAN.".total_weight LIKE '%".$params['search']['value']."%')");
         // }
+
+        if($part_number!='NA'){
+            $this->db->where(TBL_FINISHED_GOODS.'.fin_id', $part_number);
+        }     
+
+
+        if($buyer_name!='NA'){
+            $this->db->where(TBL_BUYER_MASTER.'.buyer_id', $buyer_name);
+        }        
+    
+        if($from_date!='NA'){
+            $this->db->where(TBL_BUYER_PO_MASTER_ITEM.".date >=", $from_date);
+        }
+    
+        if($to_date!='NA'){
+            $this->db->where(TBL_BUYER_PO_MASTER_ITEM.".date <=", $to_date);
+        }
+
 
         // $this->db->where(TBL_PACKING_CHALLAN.'.status', 1);
         $this->db->limit($params['length'],$params['start']);
@@ -21142,7 +21179,6 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $fetch_result = $query->result_array();
         return $fetch_result;
     }
-
 
 }
 

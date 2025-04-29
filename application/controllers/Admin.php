@@ -24590,12 +24590,7 @@ public function export_history_report(){
     $this->loadViews("masters/exporthistoryreport", $this->global, $data, NULL);
 }
 
-<<<<<<< HEAD
-
 public function fetchexporthistoryreport($from_date,$to_date,$buyer_name,$part_number){
-=======
-public function fetchexporthistoryreport(){
->>>>>>> bd9cd7554d52f6626ae036ae9a3ef879ab3ffb57
 
     $params = $_REQUEST;
     $totalRecords = $this->admin_model->getexporthistoryreportcount($params,$from_date,$to_date,$buyer_name,$part_number); 

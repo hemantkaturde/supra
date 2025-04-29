@@ -25924,8 +25924,21 @@
 
             $(document).ready(function() {
 				$("#view_export_history_report_calculation_report").dataTable().fnDestroy();
-				var from_date = $('#from_date').val();
-				var to_date = $('#to_date').val();
+				
+
+				if($('#from_date').val()){
+					var from_date = $('#from_date').val();
+				}else{
+					var from_date ='NA';
+				}
+
+				if($('#to_date').val()){
+					var to_date = $('#to_date').val();
+				}else{
+					var to_date ='NA';
+				}
+
+
 				var buyer_name = $('#buyer_name').val();
 				var part_number = $('#part_number').val();
 				getExportHistoryreport(from_date,to_date,buyer_name,part_number);
@@ -25933,8 +25946,19 @@
 
 			$(document).on('change','#part_number',function(e){  
 				$("#view_export_history_report_calculation_report").dataTable().fnDestroy();
-				var from_date = $('#from_date').val();
-				var to_date = $('#to_date').val();
+			
+				if($('#from_date').val()){
+					var from_date = $('#from_date').val();
+				}else{
+					var from_date ='NA';
+				}
+
+				if($('#to_date').val()){
+					var to_date = $('#to_date').val();
+				}else{
+					var to_date ='NA';
+				}
+
 				var buyer_name = $('#buyer_name').val();
 				var part_number = $('#part_number').val();
 				getExportHistoryreport(from_date,to_date,buyer_name,part_number);
@@ -25942,8 +25966,19 @@
 
 			$(document).on('change','#buyer_name',function(e){  
 				$("#view_export_history_report_calculation_report").dataTable().fnDestroy();
-				var from_date = $('#from_date').val();
-				var to_date = $('#to_date').val();
+			
+				if($('#from_date').val()){
+					var from_date = $('#from_date').val();
+				}else{
+					var from_date ='NA';
+				}
+
+				if($('#to_date').val()){
+					var to_date = $('#to_date').val();
+				}else{
+					var to_date ='NA';
+				}
+
 				var buyer_name = $('#buyer_name').val();
 				var part_number = $('#part_number').val();
 				getExportHistoryreport(from_date,to_date,buyer_name,part_number);
