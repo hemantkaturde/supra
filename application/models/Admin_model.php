@@ -21051,7 +21051,6 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         // }
         // $this->db->where(TBL_PACKING_CHALLAN.'.status', 1); 
 
-
         if($part_number!='NA'){
             $this->db->where(TBL_FINISHED_GOODS.'.fin_id', $part_number);
         }     
@@ -21062,11 +21061,11 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         }        
     
         if($from_date!='NA'){
-            $this->db->where(TBL_BUYER_PO_MASTER_ITEM.".date >=", $from_date);
+            $this->db->where(TBL_BUYER_PO_MASTER.".date >=", $from_date);
         }
     
         if($to_date!='NA'){
-            $this->db->where(TBL_BUYER_PO_MASTER_ITEM.".date <=", $to_date);
+            $this->db->where(TBL_BUYER_PO_MASTER.".date <=", $to_date);
         }
 
         $this->db->order_by(TBL_BUYER_PO_MASTER_ITEM.'.id','DESC');
@@ -21107,11 +21106,11 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         }        
     
         if($from_date!='NA'){
-            $this->db->where(TBL_BUYER_PO_MASTER_ITEM.".date >=", $from_date);
+            $this->db->where(TBL_BUYER_PO_MASTER.".date >=", $from_date);
         }
     
         if($to_date!='NA'){
-            $this->db->where(TBL_BUYER_PO_MASTER_ITEM.".date <=", $to_date);
+            $this->db->where(TBL_BUYER_PO_MASTER.".date <=", $to_date);
         }
 
 

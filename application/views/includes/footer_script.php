@@ -25985,6 +25985,53 @@
 	     	});
 
 
+			 $(document).on('change','#from_date',function(e){  
+				e.preventDefault();
+				$("#view_export_history_report_calculation_report").dataTable().fnDestroy();
+			
+				if($('#from_date').val()){
+					var from_date = $('#from_date').val();
+				}else{
+					var from_date ='NA';
+				}
+
+				if($('#to_date').val()){
+					var to_date = $('#to_date').val();
+				}else{
+					var to_date ='NA';
+				}
+
+				var buyer_name = $('#buyer_name').val();
+				var part_number = $('#part_number').val();
+				getExportHistoryreport(from_date,to_date,buyer_name,part_number);
+			});
+
+
+			$(document).on('change','#from_date',function(e){  
+				e.preventDefault();
+				$("#view_export_history_report_calculation_report").dataTable().fnDestroy();
+			
+				if($('#from_date').val()){
+					var from_date = $('#from_date').val();
+				}else{
+					var from_date ='NA';
+				}
+
+				if($('#to_date').val()){
+					var to_date = $('#to_date').val();
+				}else{
+					var to_date ='NA';
+				}
+
+				var buyer_name = $('#buyer_name').val();
+				var part_number = $('#part_number').val();
+				getExportHistoryreport(from_date,to_date,buyer_name,part_number);
+			});
+
+
+
+
+
 			function getExportHistoryreport(from_date,to_date,buyer_name,part_number){
              
 				var dt = $('#view_export_history_report_calculation_report').DataTable({
