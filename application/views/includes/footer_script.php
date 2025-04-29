@@ -25984,29 +25984,6 @@
 				getExportHistoryreport(from_date,to_date,buyer_name,part_number);
 	     	});
 
-
-			 $(document).on('change','#from_date',function(e){  
-				e.preventDefault();
-				$("#view_export_history_report_calculation_report").dataTable().fnDestroy();
-			
-				if($('#from_date').val()){
-					var from_date = $('#from_date').val();
-				}else{
-					var from_date ='NA';
-				}
-
-				if($('#to_date').val()){
-					var to_date = $('#to_date').val();
-				}else{
-					var to_date ='NA';
-				}
-
-				var buyer_name = $('#buyer_name').val();
-				var part_number = $('#part_number').val();
-				getExportHistoryreport(from_date,to_date,buyer_name,part_number);
-			});
-
-
 			$(document).on('change','#from_date',function(e){  
 				e.preventDefault();
 				$("#view_export_history_report_calculation_report").dataTable().fnDestroy();
@@ -26028,9 +26005,26 @@
 				getExportHistoryreport(from_date,to_date,buyer_name,part_number);
 			});
 
+			$(document).on('change','#from_date',function(e){  
+				e.preventDefault();
+				$("#view_export_history_report_calculation_report").dataTable().fnDestroy();
+			
+				if($('#from_date').val()){
+					var from_date = $('#from_date').val();
+				}else{
+					var from_date ='NA';
+				}
 
+				if($('#to_date').val()){
+					var to_date = $('#to_date').val();
+				}else{
+					var to_date ='NA';
+				}
 
-
+				var buyer_name = $('#buyer_name').val();
+				var part_number = $('#part_number').val();
+				getExportHistoryreport(from_date,to_date,buyer_name,part_number);
+			});
 
 			function getExportHistoryreport(from_date,to_date,buyer_name,part_number){
              
@@ -26067,6 +26061,52 @@
 				});
             
 			}
+
+		
+			$(document).on('click','#export_to_excel_exporthistroy_report',function(e){
+				e.preventDefault();
+				$(".loader_ajax").show();
+
+
+				if($('#from_date').val()){
+					var from_date = $('#from_date').val();
+				}else{
+					var from_date ='NA';
+				}
+
+				if($('#to_date').val()){
+					var to_date = $('#to_date').val();
+				}else{
+					var to_date ='NA';
+				}
+
+				var part_number = $('#part_number').val();
+				var buyer_name = $('#buyer_name').val();
+
+				$.ajax({
+					url : "<?php echo ADMIN_PATH;?>admin/downlaod_export_to_excel_report/"+part_number+"/"+buyer_name+"/"+from_date+"/"+to_date,
+					type: "POST",
+					success: function(data, textStatus, jqXHR)
+			         {
+
+						$(".loader_ajax").hide();
+						if(data == "failure")
+						{
+							// $(".sales_tracking_report_name_error").html("");
+							alert('No data fond');
+						}
+						else
+						{
+							// $(".sales_tracking_report_name_error").html("");
+							 window.location.href = "<?php echo ADMIN_PATH;?>admin/downlaod_export_to_excel_report/"+part_number+"/"+buyer_name+"/"+from_date+"/"+to_date;
+						}
+			
+
+					 }
+				});
+
+				return false;
+	        });
 
     </script>
 <?php } ?>
