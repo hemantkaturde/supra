@@ -4510,7 +4510,7 @@ class Admin_model extends CI_Model
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_PACKING_INSTRACTION_DETAILS.'.part_number');
 
         /*New item Details*/
-       // $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.part_number_id = '.TBL_PACKING_INSTRACTION_DETAILS.'.part_number');
+        // $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.part_number_id = '.TBL_PACKING_INSTRACTION_DETAILS.'.part_number');
 
         $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id', $main_id);
         $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.status', 1);
@@ -20858,6 +20858,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['total_goni'] = $value['total_goni'];
                 $data[$counter]['qty_in_kgs'] = $value['qty_in_kgs'];
                 $data[$counter]['action'] = '';
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downlaodpackingchallandata/".$value['packingchallanid']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editpackingchallan/".$value['packingchallanid']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['packingchallanid']."' class='fa fa-trash-o deletepackinchallandata' aria-hidden='true'></i>"; 
             
@@ -21029,30 +21030,43 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     
     public function getexporthistoryreportcount($params,$from_date,$to_date,$buyer_name,$part_number){
 
-        $this->db->select('*');
-        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_PACKING_CHALLAN.'.vendor_id');
-        if($params['search']['value'] != "") 
-        {
-            $this->db->where("(".TBL_PACKING_CHALLAN.".packing_challan_id LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_PACKING_CHALLAN.".packing_challan_date LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_PACKING_CHALLAN.".total_goni LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_PACKING_CHALLAN.".dispatched_by LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_PACKING_CHALLAN.".total_weight LIKE '%".$params['search']['value']."%')");
-        }
-        $this->db->where(TBL_PACKING_CHALLAN.'.status', 1); 
-        $query = $this->db->get(TBL_PACKING_CHALLAN);
+        $this->db->select('*,'.TBL_BUYER_MASTER.'.buyer_name as by_name,'.TBL_FINISHED_GOODS.'.part_number as p_name');
+        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id  = '.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id');
+        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id  = '.TBL_BUYER_PO_MASTER.'.buyer_name_id');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id  = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
+        $this->db->join(TBL_PACKING_INSTRACTION, TBL_PACKING_INSTRACTION.'.buyer_po_number = '.TBL_BUYER_PO_MASTER.'.id');
+        $this->db->join(TBL_PACKING_INSTRACTION_DETAILS, TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id = '.TBL_PACKING_INSTRACTION.'.id  and '.TBL_PACKING_INSTRACTION_DETAILS.'.part_number= '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
+        $this->db->join(TBL_PREEXPORT, TBL_PREEXPORT.'.buyer_po = '.TBL_BUYER_PO_MASTER.'.id');
+        $this->db->join(TBL_PREEXPORT_ITEM_DETAILS, TBL_PREEXPORT_ITEM_DETAILS.'.pre_export_id = '.TBL_PREEXPORT.'.id  and '.TBL_PREEXPORT_ITEM_DETAILS.'.part_number= '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
+
+
+        // if($params['search']['value'] != "") 
+        // {
+        //     $this->db->where("(".TBL_PACKING_CHALLAN.".packing_challan_id LIKE '%".$params['search']['value']."%'");
+        //     $this->db->or_where(TBL_PACKING_CHALLAN.".packing_challan_date LIKE '%".$params['search']['value']."%'");
+        //     $this->db->or_where(TBL_PACKING_CHALLAN.".total_goni LIKE '%".$params['search']['value']."%'");
+        //     $this->db->or_where(TBL_PACKING_CHALLAN.".dispatched_by LIKE '%".$params['search']['value']."%'");
+        //     $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+        //     $this->db->or_where(TBL_PACKING_CHALLAN.".total_weight LIKE '%".$params['search']['value']."%')");
+        // }
+        // $this->db->where(TBL_PACKING_CHALLAN.'.status', 1); 
+        $this->db->order_by(TBL_BUYER_PO_MASTER_ITEM.'.id','DESC');
+        $query = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
         $rowcount = $query->num_rows();
         return $rowcount;
     }
 
     public function getexporthistoryreportdata($params,$from_date,$to_date,$buyer_name,$part_number){
 
-        $this->db->select('*');
+        $this->db->select('*,'.TBL_BUYER_MASTER.'.buyer_name as by_name,'.TBL_FINISHED_GOODS.'.part_number as p_name');
         $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id  = '.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id');
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id  = '.TBL_BUYER_PO_MASTER.'.buyer_name_id');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id  = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
-        
+        $this->db->join(TBL_PACKING_INSTRACTION, TBL_PACKING_INSTRACTION.'.buyer_po_number = '.TBL_BUYER_PO_MASTER.'.id');
+        $this->db->join(TBL_PACKING_INSTRACTION_DETAILS, TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id = '.TBL_PACKING_INSTRACTION.'.id  and '.TBL_PACKING_INSTRACTION_DETAILS.'.part_number= '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
+        $this->db->join(TBL_PREEXPORT, TBL_PREEXPORT.'.buyer_po = '.TBL_BUYER_PO_MASTER.'.id');
+        $this->db->join(TBL_PREEXPORT_ITEM_DETAILS, TBL_PREEXPORT_ITEM_DETAILS.'.pre_export_id = '.TBL_PREEXPORT.'.id  and '.TBL_PREEXPORT_ITEM_DETAILS.'.part_number= '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
+
 
         // if($params['search']['value'] != "") 
         // {
@@ -21066,7 +21080,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
         // $this->db->where(TBL_PACKING_CHALLAN.'.status', 1);
         $this->db->limit($params['length'],$params['start']);
-        // $this->db->order_by(TBL_PACKING_CHALLAN.'.id','DESC');
+        $this->db->order_by(TBL_BUYER_PO_MASTER_ITEM.'.id','DESC');
         $query = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
         $fetch_result = $query->result_array();
 
@@ -21076,17 +21090,17 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         {
             foreach ($fetch_result as $key => $value)
             {
-                $data[$counter]['buyer_name'] = $value['buyer_name'];
-                $data[$counter]['part_number'] = $value['part_number'];
+                $data[$counter]['buyer_name'] = $value['by_name'];
+                $data[$counter]['part_number'] = $value['p_name'];
                 $data[$counter]['sales_order_number'] = $value['sales_order_number'];
                 $data[$counter]['date'] = $value['date'];
                 $data[$counter]['order_oty'] = $value['order_oty'];
-                $data[$counter]['total_weight'] = $value['total_weight'];
-                $data[$counter]['total_goni'] = $value['total_goni'];
-                $data[$counter]['qty_in_kgs'] = $value['qty_in_kgs'];
-                $data[$counter]['qty_in_kgs1'] ='';
-                $data[$counter]['qty_in_kgs2'] ='';
-                $data[$counter]['qty_in_kgs3'] ='';
+                $data[$counter]['export_qty'] = $value['buyer_invoice_qty'];
+                $data[$counter]['buyer_invoice_number'] = $value['buyer_invoice_number'];
+                $data[$counter]['buyer_invoice_date'] = $value['buyer_invoice_date'];
+                $data[$counter]['mode_of_shipment'] =$value['mode_of_shipment'];
+                $data[$counter]['current_stock'] =$value['current_stock'];
+                $data[$counter]['qty_in_kgs3'] =$value['order_oty']- $value['buyer_invoice_qty'];
 
                 $counter++; 
             }
@@ -21095,6 +21109,40 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         return $data;
 
     }
+
+
+    public function getvendordetailsForpackingchallan($id){
+        $this->db->select(TBL_VENDOR.'.vendor_name as vendor_name,'
+                         .TBL_VENDOR.'.address as ven_address,'
+                         .TBL_VENDOR.'.landline as ven_landline,'
+                         .TBL_VENDOR.'.contact_person as ven_contact_person,'
+                         .TBL_VENDOR.'.mobile as mobile,'
+                         .TBL_VENDOR.'.email as ven_email,'
+                         .TBL_VENDOR.'.GSTIN as ven_GSTIN,'
+                         .TBL_PACKING_CHALLAN.'.packing_challan_date as packing_challan_date,'
+                         .TBL_PACKING_CHALLAN.'.packing_challan_id as packing_challan_id,'
+                         .TBL_PACKING_CHALLAN.'.remark as remark,'
+                         .TBL_PACKING_CHALLAN.'.dispatched_by as dispatched_by,'
+                         .TBL_PACKING_CHALLAN.'.total_goni as total_goni,'
+                         .TBL_PACKING_CHALLAN.'.qty_in_kgs as qty_in_kgs,'
+                        );
+        $this->db->where(TBL_PACKING_CHALLAN.'.id', $id);
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_PACKING_CHALLAN.'.vendor_id');
+        $query = $this->db->get(TBL_PACKING_CHALLAN);
+        $fetch_result = $query->row_array();
+        return $fetch_result;
+    }
+
+
+    public function getpackingchallanitemdetailsForInvoice($id){
+        $this->db->select('*,'.TBL_PACKING_CHALLAN_ITEM.'.id as pckinginvoiceitemid');
+        $this->db->join(TBL_PACKING_MASTER, TBL_PACKING_MASTER.'.id  = '.TBL_PACKING_CHALLAN_ITEM.'.discription_of_packing_material_id');
+        $this->db->where(TBL_PACKING_CHALLAN_ITEM.'.packing_challan_id',$id);
+        $query = $this->db->get(TBL_PACKING_CHALLAN_ITEM);
+        $fetch_result = $query->result_array();
+        return $fetch_result;
+    }
+
 
 }
 

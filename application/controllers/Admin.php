@@ -11675,7 +11675,6 @@ public function downlaodsupplierpo($id){
 }
 
 
-
 public function getpreviousshortexcess(){
 
     $post_submit = $this->input->post();
@@ -15878,6 +15877,7 @@ public function downlaodjobworkchllan($id){
                     <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%; width="10%">Raw Material Value</th>  
                 </tr>
                 '.$CartItem.$space.' 
+
 
                 <tr style="border: 1px solid black;">               
                     <td colspan="4"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>Packing & Forwarding </b></td>    
@@ -24209,6 +24209,243 @@ public function fetchpackingchallan(){
 
 }
 
+
+public function downlaodpackingchallandata($id){
+   
+    $getvendordetailsForpackingchallan = $this->admin_model->getvendordetailsForpackingchallan($id);
+    $getpackingchallanitemdetailsForInvoice = $this->admin_model->getpackingchallanitemdetailsForInvoice($id);
+
+
+    $getCompanyAddressdetails = $this->admin_model->getCompanyAddressdetails($id);
+
+    if($getvendordetailsForpackingchallan['packing_challan_date']!='0000-00-00'){
+        $challan_date =  date('d-m-Y',strtotime($getvendordetailsForpackingchallan['packing_challan_date']));
+    }else{
+        $challan_date = '';
+    }
+
+    $CartItem = "";
+    $i =1;
+    $subtotal = 0;
+    $grand_total = 0;
+
+    $igst_tax_value =0;
+
+    $item_count =count($getpackingchallanitemdetailsForInvoice);
+
+    if($item_count==1){
+        $padding_bottom = '200px';
+    }else if($item_count==2){
+        $padding_bottom = '150px';
+    }else if($item_count==3){
+        $padding_bottom = '110px';
+    }else{
+        $padding_bottom = '90px';
+    }
+
+    foreach ($getpackingchallanitemdetailsForInvoice as $key => $value) {
+        $CartItem .= '
+                <tr style="style=border-left: 1px solid black;border-right: 1px solid black;">
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$i.'</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['description'].'</br></td>   
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['qty_in_kgs'].'</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['quantity_in_gonis'].'</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rate'].'</td> 
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['amount'].'</td> 
+
+                </tr>';
+                $subtotal+=$value['value'];
+                $gst_rate = $value['gst_rate'];
+
+                $grand_total +=$value['grand_total'];
+
+                if($value['gst_rate']=='cgst_sgst_18'){
+                    $cgst_tax_rate = 9;
+                    $sgst_tax_rate = 9;
+
+                    $cgst_tax_value += $value['SGST_value'];
+                    $sgst_tax_value += $value['CGST_value'];
+
+                }else if($value['gst_rate']=='cgst_sgst_12'){
+                    $cgst_tax_rate = 6;
+                    $sgst_tax_rate = 6;
+
+                    $cgst_tax_value += $value['SGST_value'];
+                    $sgst_tax_value += $value['CGST_value'];
+
+                }else if($value['gst_rate']=='igst_18'){
+                    $igst_tax_rate = 18;
+                    $igst_tax_value += $value['IGST_value'];
+                }else if($value['gst_rate']=='igst_12'){
+                    $igst_tax_rate = 12;
+                    $igst_tax_value += $value['IGST_value'];
+
+                }
+            $i++;       
+    }
+
+    $space = '<tr>
+        <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+        <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+        <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+        <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+        <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+        <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+
+        </tr>';
+
+        if($gst_rate=='cgst_sgst_18' || $gst_rate=='cgst_sgst_12'){
+            $tax_value = '<tr style="border: 1px solid black;">               
+                <td colspan="5"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>(+) '.$cgst_tax_rate.' % CGST </b></td>    
+                    <td style="border: 1px solid black;padding-left: 10px;">'.$cgst_tax_value.'</td>
+                </tr>
+    
+                <tr style="border: 1px solid black;">
+                    <td colspan="5"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>(+) '.$sgst_tax_rate.' % SGST </b></td>    
+                    <td style="border: 1px solid black;padding-left: 10px;">'.$sgst_tax_value.'</td>
+                </tr>';
+         }else{
+            $tax_value = '
+                <tr style="border: 1px solid black;">
+                    <td colspan="5"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>(+) '.$igst_tax_rate.' % IGST </b></td>    
+                    <td style="border: 1px solid black;padding-left: 10px;">'.$igst_tax_value.'</td>
+                </tr>';
+         }
+    
+
+
+    $mpdf = new \Mpdf\Mpdf();
+    // $html = $this->load->view('html_to_pdf',[],true);
+    $html = '<table style=" width: 100%;text-align: center;border-collapse: collapse;border: #cccccc 0px solid;font-family:cambria;">
+                <tr>
+                  <td rowspan="2"><img src="'.base_url().'assets/images/supra_logo_1.jpg" width="80" height="80"></td>
+                  <td style="color:#000080"><h2>SUPRA QUALITY EXPORTS (I) PVT. LTD</h2></td>
+                  <td rowspan="2"><img src="'.base_url().'assets/images/logo_2.png"width="80" height="80"></td>
+                </tr>
+                <tr>
+                  <td style="font-weight: bold;">
+                    <p>MANUFACTURER & EXPORTERS OF:</p>
+                    <p>PRECISION TURNED COMPONENTS, STAMPED /PRESSED PARTS IN FERROUS & NON-FERROUS METAL</p>
+                    <p>MOULDED & EXTRUDED PLASTIC AND RUBBER COMPONENTS</p> 
+                  </td>
+                </tr>
+            </table>
+            <hr>
+            <table style="width: 100%;text-align: left;border-collapse: collapse;border: #ccc 0px solid;font-family:cambria;">
+                    <tr>
+                        <td width="60%">
+                          <p><b>Office:</b> '.$getCompanyAddressdetails['company_address'].'</p>
+                          <p>Tel: '.$getCompanyAddressdetails['phone_1'].' </p>
+                          <p>'.$getCompanyAddressdetails['phone_2'].'</p>
+                          <p style="color:#206a9b"><b>GSTIN : '.$getCompanyAddressdetails['GSTIN'].'</b></p>
+                        </td>
+                        <td width="40%">
+                            <p><b>Email:</b></p> 
+                            <p style="color:#206a9b">purchase@supraexports.in</p>
+                            <p style="color:#206a9b">purchase1@supraexports.in</p>
+                            <p style="color:#206a9b">purchase2@supraexports.in</p>
+                        </td>  
+                    </tr>
+            </table>
+
+            <table style=" width: 100%;text-align: center;border-collapse: collapse;border: #ccc 0px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;">
+                    <tr>
+                        <td style="color:red;font-size:15px">
+                          <u><p><h3>PACKING CHALLAN</h3></p>
+                        </td>
+                    </tr>
+            </table>
+
+            <table style=" width: 100%;text-align: left;border-collapse: collapse;font-family:cambria;font-size:13px;border: #ccc 1px solid">
+                <tr style="border: 1px solid black;">
+                    <td width="50%" style="padding-left: 15px;">
+                        <div>
+                            <p>To,</p>
+                            <p><b>'.$getvendordetailsForpackingchallan['vendor_name'].'</b></p>
+                            <p>'.$getvendordetailsForpackingchallan['ven_address'].'</p>
+                            <p><b>Contact No:</b> '.$getvendordetailsForpackingchallan['mobile'].' / '.$getvendordetailsForpackingchallan['ven_landline'].'</p>
+                            <p><b>Contact Person:</b> '.$getvendordetailsForpackingchallan['ven_contact_person'].'</p>
+                            <p><b>Email:</b> '.$getvendordetailsForpackingchallan['ven_email'].'</p>
+                            <p style="color:red">GSTIN:'.$getvendordetailsForpackingchallan['ven_GSTIN'].'</p>
+                        <div>    
+                    </td> 
+                    <td style="border-left: 1px solid black;padding-left: 15px;font-size:13px" width="50%" >
+                        <div>
+                            <p><b>Challan No :</b> '.'<span style="color:red">'.$getvendordetailsForpackingchallan['packing_challan_id'].'</span></p>
+                            <p>&nbsp;</p>
+                            <p><b>Challan Date :</b> '.date('d-m-Y',strtotime($challan_date)).'</p>
+                            <p>&nbsp;</p>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+
+            <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:12px">
+                <tr style="border: 1px solid black;">
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>SR.NO.</th>
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>DESCRIPTION OF GOODS</th>
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>QTY In Kgs</th>  
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>QTY In Gonis</th>  
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>RATE</th>  
+                    <th align="left"  style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>AMOUNT</th>
+                </tr>
+                '.$CartItem.$space.'
+
+                <tr style="border-left: 1px solid black;border-right: 1px solid black;">
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;"></td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;padding-left: 15px;">
+                        <p> Through '.$getvendordetailsForpackingchallan['dispatched_by'].'</p>
+                        <p>'.$getvendordetailsForpackingchallan['total_goni'].' Gonis'.' - '.$getvendordetailsForpackingchallan['qty_in_kgs'].' kgs</p>
+                      
+                    </td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;"></td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;"></td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;"></td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;"></td>
+                </tr>
+                '. $tax_value.'
+            
+                <tr style="border: 1px solid black;">
+                        <td colspan="5"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>GRAND TOTAL</b></td>    
+                        <td style="border: 1px solid black;padding-left: 10px;">'.$grand_total.'/-'.'</td>
+                </tr>
+            </table>
+
+            <table style=" width: 100%;border-collapse: collapse;border: #ccc 1px solid;font-family:cambria;font-size:12px">
+                <tr style="border: 1px solid black;">
+                        <td style="border: 1px solid black;padding-left: 10px;">
+                            <p><b>Remark :</b>'.$getvendordetailsForpackingchallan['remark'].'</p>    
+                    </td>   
+                </tr>
+            </table>
+
+            <table style=" width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:12px">
+                  
+                   <tr style="border: 1px solid black;">
+                        <td style="border: 1px solid black;padding-left: 10px;" width="75%;" valign="top">
+                            <p>Received the above-mentioned goods in good order & condition & returned the duplicate duly sealed & signed.</p>
+                            <p> <br><br></p>
+                            <p> <br><br></p>
+                            <p> <br><br></p>
+                            <p> Receivers Signature </p>
+                        </td>
+                        <td style="border: 1px solid black;text-align: center;" width="25%" valign="top">
+                            <p style="vertical-align: text-top;font-size:12px;color:#206a9b"><b>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</b></p>
+                            <br/><img src="'.base_url().'assets/images/stmps/packingchallansignature.png" width="130" height="100">
+                            <p style="vertical-align: text-top;font-size:10px;color:#206a9b"><b>AUTHORIZED SIGNATORY</b></p>
+                        </td> 
+                </tr>
+            </table>';
+
+            // <p>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</p>
+    $invoice_name =  $getvendordetailsForpackingchallan['packing_challan_id'].' - '.$getvendordetailsForpackingchallan['vendor_name'].'.pdf';
+    $mpdf->WriteHTML($html);
+    $mpdf->Output($invoice_name,'D'); // opens in browser
+}
+
+
+
 public function savepackingchallanitem(){
 
     $post_submit = $this->input->post();
@@ -24353,8 +24590,12 @@ public function export_history_report(){
     $this->loadViews("masters/exporthistoryreport", $this->global, $data, NULL);
 }
 
+<<<<<<< HEAD
 
 public function fetchexporthistoryreport($from_date,$to_date,$buyer_name,$part_number){
+=======
+public function fetchexporthistoryreport(){
+>>>>>>> bd9cd7554d52f6626ae036ae9a3ef879ab3ffb57
 
     $params = $_REQUEST;
     $totalRecords = $this->admin_model->getexporthistoryreportcount($params,$from_date,$to_date,$buyer_name,$part_number); 

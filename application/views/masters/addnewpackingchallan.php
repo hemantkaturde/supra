@@ -164,7 +164,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="total_goni">Total Goni</label>
-                                            <input type="text" class="form-control" id="total_goni" value="<?=$gettotalcountoftotalkgsandtotalgoni[0]['total_quantity_in_gonis']?>" name="total_goni">
+                                            <input type="text" class="form-control" id="total_goni" value="<?=round($gettotalcountoftotalkgsandtotalgoni[0]['total_quantity_in_gonis'],2)?>" name="total_goni">
                                             <p class="error total_goni_error"></p>
                                         </div>
                                     </div>
@@ -172,7 +172,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="total_qty_in_kgs">Total Qty in kgs</label>
-                                            <input type="text" class="form-control" id="total_qty_in_kgs" value="<?=$gettotalcountoftotalkgsandtotalgoni[0]['total_qty_in_kgs']?>" name="total_qty_in_kgs">
+                                            <input type="text" class="form-control" id="total_qty_in_kgs" value="<?=round($gettotalcountoftotalkgsandtotalgoni[0]['total_qty_in_kgs'],2)?>" name="total_qty_in_kgs">
                                             <p class="error total_qty_in_kgs_error"></p>
                                         </div>
                                     </div>
