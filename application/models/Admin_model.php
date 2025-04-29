@@ -21027,7 +21027,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
     
-    public function getexporthistoryreportcount($params){
+    public function getexporthistoryreportcount($params,$from_date,$to_date,$buyer_name,$part_number){
 
         $this->db->select('*');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_PACKING_CHALLAN.'.vendor_id');
@@ -21046,7 +21046,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         return $rowcount;
     }
 
-    public function getexporthistoryreportdata($params){
+    public function getexporthistoryreportdata($params,$from_date,$to_date,$buyer_name,$part_number){
 
         $this->db->select('*');
         $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id  = '.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id');

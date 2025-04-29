@@ -25913,7 +25913,37 @@
 
 <?php if($pageTitle=='Export History Report'){ ?>
 	<script type="text/javascript">
+
             $(document).ready(function() {
+				$("#view_export_history_report_calculation_report").dataTable().fnDestroy();
+				var from_date = $('#from_date').val();
+				var to_date = $('#to_date').val();
+				var buyer_name = $('#buyer_name').val();
+				var part_number = $('#part_number').val();
+				getExportHistoryreport(from_date,to_date,buyer_name,part_number);
+			});
+
+			$(document).on('change','#part_number',function(e){  
+				$("#view_export_history_report_calculation_report").dataTable().fnDestroy();
+				var from_date = $('#from_date').val();
+				var to_date = $('#to_date').val();
+				var buyer_name = $('#buyer_name').val();
+				var part_number = $('#part_number').val();
+				getExportHistoryreport(from_date,to_date,buyer_name,part_number);
+	     	});
+
+			$(document).on('change','#buyer_name',function(e){  
+				$("#view_export_history_report_calculation_report").dataTable().fnDestroy();
+				var from_date = $('#from_date').val();
+				var to_date = $('#to_date').val();
+				var buyer_name = $('#buyer_name').val();
+				var part_number = $('#part_number').val();
+				getExportHistoryreport(from_date,to_date,buyer_name,part_number);
+	     	});
+
+
+			function getExportHistoryreport(from_date,to_date,buyer_name,part_number){
+             
 				var dt = $('#view_export_history_report_calculation_report').DataTable({
 					"columnDefs": [ 
 						{ className: "details-control", "targets": [ 0 ] },
@@ -25941,10 +25971,12 @@
 					"bProcessing": true,
 					"serverSide": true,
 					"ajax":{
-						url :"<?php echo base_url();?>fetchexporthistoryreport",
+						url :"<?php echo base_url();?>admin/fetchexporthistoryreport/"+from_date+"/"+to_date+"/"+buyer_name+"/"+part_number,
 						type: "post",
 					},
 				});
-     		});
+            
+			}
+
     </script>
 <?php } ?>

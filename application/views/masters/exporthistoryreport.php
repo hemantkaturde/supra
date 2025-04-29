@@ -23,34 +23,49 @@
                         <?php $this->load->helper("form"); ?>
                         <div class="box-body">
                             <div class="row" style="margin-left:4px">
+
+                               <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="part_number">Part Number</label>
+                                        <select class="form-control" name="part_number" id="part_number">
+                                            <option value="NA">Select Part Number</option>
+                                            <?php foreach ($finishgoodList as $key => $value) {?>
+                                            <option value="<?php echo $value['fin_id']; ?>">
+                                                <?php echo $value['part_number']; ?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+                                </div>
+
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="from_date">From Date <span class="required">*</span></label>
+                                        <label for="buyer_name">Buyer Name</label>
+                                        <select class="form-control" name="buyer_name" id="buyer_name">
+                                            <option value="NA">Select Vendor Name</option>
+                                            <?php foreach ($buyerList as $key => $value) {?>
+                                            <option value="<?php echo $value['buyer_id']; ?>">
+                                                <?php echo $value['buyer_name']; ?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="from_date">From Date</label>
                                         <input type="text" class="form-control datepicker" placeholder="Select From Date" id="from_date" name="from_date">
                                         <p class="error from_date_error"></p>
                                     </div>
                                 </div>
 
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <div class="form-group">
-                                        <label for="to_date">To Date <span class="required">*</span></label>
+                                        <label for="to_date">To Date </label>
                                         <input type="text" class="form-control datepicker" placeholder="Select To Date" id="to_date" name="to_date">
                                         <p class="error to_date_error"></p>
                                     </div>
                                 </div>
 
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="email">Vendor Name</label>
-                                        <select class="form-control" name="vendor_name" id="vendor_name">
-                                            <option value="NA">Select Vendor Name</option>
-                                            <?php foreach ($vendorList as $key => $value) {?>
-                                            <option value="<?php echo $value['ven_id']; ?>">
-                                                <?php echo $value['vendor_name']; ?></option>
-                                            <?php } ?>
-                                        </select>
-                                    </div>
-                                </div>
 
                                 <div class="col-md-2">
                                     <div class="form-group">

@@ -24348,15 +24348,17 @@ public function export_history_report(){
     $processFunction = 'Admin/exporthistoryreport';
     $this->logrecord($process,$processFunction);
     $this->global['pageTitle'] = 'Export History Report';
+    $data['finishgoodList']= $this->admin_model->fetchALLFinishgoodList();
+    $data['buyerList']= $this->admin_model->fetchAllbuyerList();
     $this->loadViews("masters/exporthistoryreport", $this->global, $data, NULL);
 }
 
 
-public function fetchexporthistoryreport(){
+public function fetchexporthistoryreport($from_date,$to_date,$buyer_name,$part_number){
 
     $params = $_REQUEST;
-    $totalRecords = $this->admin_model->getexporthistoryreportcount($params); 
-    $queryRecords = $this->admin_model->getexporthistoryreportdata($params); 
+    $totalRecords = $this->admin_model->getexporthistoryreportcount($params,$from_date,$to_date,$buyer_name,$part_number); 
+    $queryRecords = $this->admin_model->getexporthistoryreportdata($params,$from_date,$to_date,$buyer_name,$part_number); 
 
     $data = array();
     foreach ($queryRecords as $key => $value)
