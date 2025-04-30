@@ -643,6 +643,8 @@ $route['fetchexporthistoryreport'] = "admin/fetchexporthistoryreport";
 $route['downlaodpackingchallandata/(:any)'] = "admin/downlaodpackingchallandata/$1";
 
 
+$route['checkvendorpoisenggwithvendorpoconfirmation'] = "admin/checkvendorpoisenggwithvendorpoconfirmation";
+
 
 
 

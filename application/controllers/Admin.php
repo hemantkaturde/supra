@@ -24686,6 +24686,27 @@ public function downlaod_export_to_excel_report($part_number,$buyer_name,$from_d
 }
 
 
+public function checkvendorpoisenggwithvendorpoconfirmation(){
+
+    $post_submit = $this->input->post();
+    if($post_submit){
+        $result = $this->admin_model->checkvendorpoisenggwithvendorpoconfirmation(trim($this->input->post('id')));
+
+        if ($result) {
+                    $process = 'Check if Supplier PO is Exits in Supplierpo';
+                    $processFunction = 'Admin/checkvendorpoisenggwithvendorpoconfirmation';
+                    $this->logrecord($process,$processFunction);
+                    
+                echo(json_encode(array('status'=>'success')));
+            }
+        else { echo(json_encode(array('status'=>'failed'))); }
+    }else{
+        echo(json_encode(array('status'=>'failed'))); 
+    }
+ }
+
+
+
 
 
 }

@@ -21250,6 +21250,16 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     }
 
+
+    public function checkvendorpoisenggwithvendorpoconfirmation($id){
+        $this->db->select('*');
+        $this->db->where(TBL_VENDOR_PO_CONFIRMATION.'.vendor_po_number', $id);
+        //$this->db->where(TBL_SUPPLIER_PO_MASTER.'.status', 1);
+        $query = $this->db->get(TBL_VENDOR_PO_CONFIRMATION);
+        $rowcount = $query->result_array();
+        return $rowcount;
+    }
+
 }
 
 ?>
