@@ -21128,7 +21128,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             {
                 $data[$counter]['buyer_name'] = $value['by_name'];
                 $data[$counter]['part_number'] = $value['p_name'];
-                $data[$counter]['sales_order_number'] = $value['sales_order_number'];
+                $data[$counter]['sales_order_number'] = $value['sales_order_number'].'-'.$value['buyer_po_number'];
                 $data[$counter]['date'] = $value['date'];
                 $data[$counter]['order_oty'] = $value['order_oty'];
                 $data[$counter]['export_qty'] = $value['buyer_invoice_qty'];

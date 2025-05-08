@@ -41,7 +41,7 @@
                                     <div class="form-group">
                                         <label for="buyer_name">Buyer Name</label>
                                         <select class="form-control" name="buyer_name" id="buyer_name">
-                                            <option value="NA">Select Vendor Name</option>
+                                            <option value="NA">Select Buyer Name</option>
                                             <?php foreach ($buyerList as $key => $value) {?>
                                             <option value="<?php echo $value['buyer_id']; ?>">
                                                 <?php echo $value['buyer_name']; ?></option>
