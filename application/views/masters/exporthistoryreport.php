@@ -89,6 +89,7 @@
                                             <th>Buyer po</th>
                                             <th>Buyer po Date</th>
                                             <th>Order Qty</th>
+                                            <th>Prevous Qty-</th>
                                             <th>Export qty</th>
                                             <th>Buyer Invoice Number</th>
                                             <th>Buyer Invoice Date</th>
