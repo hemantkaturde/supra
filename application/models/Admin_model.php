@@ -21260,6 +21260,79 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         return $rowcount;
     }
 
+
+    public function updatevendorchangeinvendorpodata($vendor_id,$update_vendor_po_data){
+
+            $this->db->where('pre_vendor_po_number', $vendor_id);
+            if($this->db->update(TBL_VENDOR_PO_CONFIRMATION_ITEM, $update_vendor_po_data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+
+    }
+
+
+      public function updatevendorchangeinvendorpodatamain($vendor_id,$update_vendor_po_data){
+
+            $this->db->where('vendor_po_number', $vendor_id);
+            if($this->db->update(TBL_VENDOR_PO_CONFIRMATION, $update_vendor_po_data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+
+    }
+
+
+     public function updatebillofmaterialdata($vendor_id,$update_Bill_of_iteam_data){
+
+            $this->db->where('pre_vendor_po_number', $vendor_id);
+            if($this->db->update(TBL_BILL_OF_MATERIAL_ITEM, $update_Bill_of_iteam_data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+
+    }
+
+      public function updatebillofmaterialmain($vendor_id,$update_bill_of_po_datamain){
+
+            $this->db->where('vendor_po_number', $vendor_id);
+            if($this->db->update(TBL_BILL_OF_MATERIAL, $update_bill_of_po_datamain)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+
+    }
+
+
+    
+     public function updatevbillofmaterialdata($vendor_id,$update_Bill_of_iteam_data){
+
+            $this->db->where('pre_vendor_po_number', $vendor_id);
+            if($this->db->update(TBL_BILL_OF_MATERIAL_ITEM, $update_Bill_of_iteam_data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+
+    }
+
+      public function updatevbillofmaterialmain($vendor_id,$update_bill_of_po_datamain){
+
+            $this->db->where('vendor_po_number', $vendor_id);
+            if($this->db->update(TBL_BILL_OF_MATERIAL, $update_bill_of_po_datamain)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+
+    }
+
+
+
 }
 
 ?>
