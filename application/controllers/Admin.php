@@ -2484,7 +2484,7 @@ class Admin extends BaseController
                                         }else{
 
                                             /*Update IF Direct Vendor Withput Supplier*/
-
+                                            
                                             $updatebuyeridinvendorpoanditem = $this->admin_model->updatebuyeridinvendorpoanditem($po_id,trim($this->input->post('buyer_name')));
 
                                             if($updatebuyeridinvendorpoanditem){
@@ -2496,15 +2496,11 @@ class Admin extends BaseController
                                                 $save_buyerpo_response['error'] = array('sales_order_number'=>strip_tags(form_error('sales_order_number')), 'date'=>strip_tags(form_error('date')), 'buyer_po_number'=>strip_tags(form_error('buyer_po_number')), 'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'buyer_name'=>strip_tags(form_error('buyer_name')),'currency'=>strip_tags(form_error('currency')),'rate'=>strip_tags(form_error('rate')),'value'=>strip_tags(form_error('value')),'part_number'=>strip_tags(form_error('part_number')),'order_quantity'=>strip_tags(form_error('order_quantity')),'description'=>strip_tags(form_error('description')),'delivery_date'=>strip_tags(form_error('delivery_date')),'generate_po'=>strip_tags(form_error('generate_po')),'remark'=>strip_tags(form_error('remark')));
                                             }
 
-
-
-
-
                                         }
 
                                     }
                                     /* update buyer id once buyer is update after 11-03-2025 */
-                            //    $updatebuyeridSupplierpoconfirmationitem = $this->admin_model->updatebuyeridSupplierpoconfirmationitem($po_id,trim($this->input->post('buyer_name')));
+                                    // $updatebuyeridSupplierpoconfirmationitem = $this->admin_model->updatebuyeridSupplierpoconfirmationitem($po_id,trim($this->input->post('buyer_name')));
     
                                 $save_buyerpo_response['status'] = 'success';
                                 $save_buyerpo_response['error'] = array('sales_order_number'=>strip_tags(form_error('sales_order_number')), 'date'=>strip_tags(form_error('date')), 'buyer_po_number'=>strip_tags(form_error('buyer_po_number')), 'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'buyer_name'=>strip_tags(form_error('buyer_name')),'currency'=>strip_tags(form_error('currency')),'rate'=>strip_tags(form_error('rate')),'value'=>strip_tags(form_error('value')),'part_number'=>strip_tags(form_error('part_number')),'order_quantity'=>strip_tags(form_error('order_quantity')),'description'=>strip_tags(form_error('description')),'delivery_date'=>strip_tags(form_error('delivery_date')),'generate_po'=>strip_tags(form_error('generate_po')),'remark'=>strip_tags(form_error('remark')));
@@ -3390,6 +3386,43 @@ class Admin extends BaseController
                         if($saveVensorpodata){
                             $update_last_inserted_id = $this->admin_model->update_last_inserted_id_vendor_po($saveVensorpodata);
                             if($update_last_inserted_id){
+
+                             
+                                 /* Update Vendor PO ID in vendorpoconfirmation */
+                                  $update_vendor_po_data = array('pre_vendor_name' => trim($this->input->post('vendor_name')));
+                                 /* Update Vendor PO ID in vendorpoconfirmation Item */
+                                  $updatevendorchangeinvendorpodata = $this->admin_model->updatevendorchangeinvendorpodata($vendor_id,$update_vendor_po_data);
+                                  if($updatevendorchangeinvendorpodata){
+                                   /* Update Vendor PO ID in vendorpoconfirmation Main */
+                                    $update_vendor_po_datamain = array('vendor_name' => trim($this->input->post('vendor_name')));
+                                    $updatevendorchangeinvendorpodatamain = $this->admin_model->updatevendorchangeinvendorpodatamain($vendor_id,$update_vendor_po_datamain);
+                                  }
+
+
+                                  
+                                 /* Update Vendor PO ID in Bill of Material */
+                                  $update_Bill_of_iteam_data = array('pre_vendor_name' => trim($this->input->post('vendor_name')));
+                                 /* Update Vendor PO ID in Bill of Material Item */
+                                  $updatebillofmaterialdata = $this->admin_model->updatebillofmaterialdata($vendor_id,$update_Bill_of_iteam_data);
+                                  if($updatebillofmaterialdata){
+                                   /* Update Vendor PO ID in Bill of Material Main */
+                                    $update_bill_of_po_datamain = array('vendor_name' => trim($this->input->post('vendor_name')));
+                                    $updatebillofmaterialmain = $this->admin_model->updatebillofmaterialmain($vendor_id,$update_bill_of_po_datamain);
+                                  }
+
+                                        
+                                 /* Update Vendor PO ID in Bill of Material */
+                                  $update_VendorBill_of_iteam_data = array('pre_vendor_name' => trim($this->input->post('vendor_name')));
+                                 /* Update Vendor PO ID in Bill of Material Item */
+                                  $updatevbillofmaterialdata = $this->admin_model->updatevbillofmaterialdata($vendor_id,$update_VendorBill_of_iteam_data);
+                                  if($updatevbillofmaterialdata){
+                                   /* Update Vendor PO ID in Bill of Material Main */
+                                    $update_VendorBill_of_po_datamain = array('vendor_name' => trim($this->input->post('vendor_name')));
+                                    $updatevbillofmaterialmain = $this->admin_model->updatevbillofmaterialmain($vendor_id,$update_VendorBill_of_po_datamain);
+                                  }
+
+
+
                                 $save_vendorpo_response['status'] = 'success';
                                 $save_vendorpo_response['error'] = array('po_number'=>strip_tags(form_error('po_number')),'date'=>strip_tags(form_error('date')), 'supplier_name'=>strip_tags(form_error('supplier_name')),'buyer_name'=>strip_tags(form_error('buyer_name')),'vendor_name'=>strip_tags(form_error('vendor_name')),'total_amount'=>strip_tags(form_error('total_amount')),'quatation_ref_no'=>strip_tags(form_error('quatation_ref_no')),'quatation_date'=>strip_tags(form_error('quatation_date')),'delivery_date'=>strip_tags(form_error('delivery_date')),'delivery'=>strip_tags(form_error('delivery')),'work_order'=>strip_tags(form_error('work_order')),'remark'=>strip_tags(form_error('remark')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')));
                             }
