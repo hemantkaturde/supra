@@ -21096,9 +21096,9 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         //     $this->db->or_where(TBL_PACKING_CHALLAN.".total_weight LIKE '%".$params['search']['value']."%')");
         // }
 
-        // if($part_number!='NA'){
-            $this->db->where(TBL_FINISHED_GOODS.'.fin_id', 265);
-        // }     
+        if($part_number!='NA'){
+            $this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
+         }     
 
 
         if($buyer_name!='NA'){
@@ -21193,9 +21193,9 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         //     $this->db->or_where(TBL_PACKING_CHALLAN.".total_weight LIKE '%".$params['search']['value']."%')");
         // }
 
-        // if($part_number!='NA'){
-            $this->db->where(TBL_FINISHED_GOODS.'.fin_id', 265);
-        // }     
+        if($part_number!='NA'){
+            $this->db->where(TBL_FINISHED_GOODS.'.fin_id', $part_number);
+         }     
 
 
         if($buyer_name!='NA'){
