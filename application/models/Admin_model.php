@@ -21076,7 +21076,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     public function getexporthistoryreportdata($params,$from_date,$to_date,$buyer_name,$part_number){
 
-        $this->db->select('*,'.TBL_BUYER_MASTER.'.buyer_name as by_name,'.TBL_FINISHED_GOODS.'.part_number as p_name,'.TBL_BUYER_PO_MASTER.'.buyer_po_number as original');
+        $this->db->select('*,'.TBL_BUYER_MASTER.'.buyer_name as by_name,'.TBL_FINISHED_GOODS.'.part_number as p_name,'.TBL_BUYER_PO_MASTER.'.buyer_po_number as original,'.TBL_BUYER_PO_MASTER_ITEM.'.id as buyer_item_number,'.TBL_PACKING_INSTRACTION_DETAILS.'.id as packgaing_instructin_id');
         $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id  = '.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id');
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id  = '.TBL_BUYER_PO_MASTER.'.buyer_name_id');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id  = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
@@ -21096,9 +21096,9 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         //     $this->db->or_where(TBL_PACKING_CHALLAN.".total_weight LIKE '%".$params['search']['value']."%')");
         // }
 
-        if($part_number!='NA'){
-            $this->db->where(TBL_FINISHED_GOODS.'.fin_id', $part_number);
-        }     
+        // if($part_number!='NA'){
+            $this->db->where(TBL_FINISHED_GOODS.'.fin_id', 265);
+        // }     
 
 
         if($buyer_name!='NA'){
@@ -21116,7 +21116,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
         // $this->db->where(TBL_PACKING_CHALLAN.'.status', 1);
         $this->db->limit($params['length'],$params['start']);
-        $this->db->order_by(TBL_BUYER_PO_MASTER_ITEM.'.id','DESC');
+        $this->db->order_by(TBL_PACKING_INSTRACTION_DETAILS.'.id','DESC');
         $query = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
         $fetch_result = $query->result_array();
 
@@ -21126,17 +21126,39 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         {
             foreach ($fetch_result as $key => $value)
             {
+
+
+                $packgaing_instructin_id= $value['packgaing_instructin_id'];
+
+                $getPreviousbaldependsonpackgingid = $this->getPreviousbaldependsonpackgingid($packgaing_instructin_id,$part_number,$buyer_name,$from_date,$to_date);
+
+
+                if($getPreviousbaldependsonpackgingid){
+                    $previous_stock = $value['order_oty']- $getPreviousbaldependsonpackgingid[0]['buyer_invoice_qty'];
+                }else{
+                    $previous_stock = 0;
+                }
+               
+                if( $previous_stock == 0){
+                      $bal_qty = $value['order_oty']-$value['buyer_invoice_qty'];
+                }else{
+
+                  $bal_qty = $previous_stock -$value['buyer_invoice_qty'];
+                     
+                }
+
                 $data[$counter]['buyer_name'] = $value['by_name'];
                 $data[$counter]['part_number'] = $value['p_name'];
                 $data[$counter]['sales_order_number'] = $value['sales_order_number'].'-'.$value['original'];
                 $data[$counter]['date'] = $value['date'];
                 $data[$counter]['order_oty'] = $value['order_oty'];
+                $data[$counter]['prvious_bal'] = $previous_stock;
                 $data[$counter]['export_qty'] = $value['buyer_invoice_qty'];
                 $data[$counter]['buyer_invoice_number'] = $value['buyer_invoice_number'];
                 $data[$counter]['buyer_invoice_date'] = $value['buyer_invoice_date'];
                 $data[$counter]['mode_of_shipment'] =$value['mode_of_shipment'];
                 $data[$counter]['current_stock'] =$value['current_stock'];
-                $data[$counter]['qty_in_kgs3'] =$value['order_oty']- $value['buyer_invoice_qty'];
+                $data[$counter]['qty_in_kgs3'] =$bal_qty;
 
                 $counter++; 
             }
@@ -21145,6 +21167,62 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         return $data;
 
     }
+
+
+
+    public function getPreviousbaldependsonpackgingid($packgaing_instructin_id,$part_number,$buyer_name,$from_date,$to_date){
+
+
+        $this->db->select('*,'.TBL_BUYER_MASTER.'.buyer_name as by_name,'.TBL_FINISHED_GOODS.'.part_number as p_name,'.TBL_BUYER_PO_MASTER.'.buyer_po_number as original,'.TBL_BUYER_PO_MASTER_ITEM.'.id as buyer_item_number,'.TBL_PACKING_INSTRACTION_DETAILS.'.id as packgaing_instructin_id');
+        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id  = '.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id');
+        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id  = '.TBL_BUYER_PO_MASTER.'.buyer_name_id');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id  = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
+        $this->db->join(TBL_PACKING_INSTRACTION, TBL_PACKING_INSTRACTION.'.buyer_po_number = '.TBL_BUYER_PO_MASTER.'.id');
+        $this->db->join(TBL_PACKING_INSTRACTION_DETAILS, TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id = '.TBL_PACKING_INSTRACTION.'.id  and '.TBL_PACKING_INSTRACTION_DETAILS.'.part_number= '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
+        $this->db->join(TBL_PREEXPORT, TBL_PREEXPORT.'.buyer_po = '.TBL_BUYER_PO_MASTER.'.id');
+        $this->db->join(TBL_PREEXPORT_ITEM_DETAILS, TBL_PREEXPORT_ITEM_DETAILS.'.pre_export_id = '.TBL_PREEXPORT.'.id  and '.TBL_PREEXPORT_ITEM_DETAILS.'.part_number= '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
+
+
+        // if($params['search']['value'] != "") 
+        // {
+        //     $this->db->where("(".TBL_PACKING_CHALLAN.".packing_challan_id LIKE '%".$params['search']['value']."%'");
+        //     $this->db->or_where(TBL_PACKING_CHALLAN.".packing_challan_date LIKE '%".$params['search']['value']."%'");
+        //     $this->db->or_where(TBL_PACKING_CHALLAN.".total_goni LIKE '%".$params['search']['value']."%'");
+        //     $this->db->or_where(TBL_PACKING_CHALLAN.".dispatched_by LIKE '%".$params['search']['value']."%'");
+        //     $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+        //     $this->db->or_where(TBL_PACKING_CHALLAN.".total_weight LIKE '%".$params['search']['value']."%')");
+        // }
+
+        // if($part_number!='NA'){
+            $this->db->where(TBL_FINISHED_GOODS.'.fin_id', 265);
+        // }     
+
+
+        if($buyer_name!='NA'){
+            $this->db->where(TBL_BUYER_MASTER.'.buyer_id', $buyer_name);
+        }        
+    
+        if($from_date!='NA'){
+            $this->db->where(TBL_BUYER_PO_MASTER.".date >=", $from_date);
+        }
+    
+        if($to_date!='NA'){
+            $this->db->where(TBL_BUYER_PO_MASTER.".date <=", $to_date);
+        }
+
+         $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.id <', $packgaing_instructin_id);
+
+        // $this->db->where(TBL_PACKING_CHALLAN.'.status', 1);
+        $this->db->order_by(TBL_BUYER_PO_MASTER_ITEM.'.id','DESC');
+        $this->db->limit(1);
+        $query = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
+        $fetch_result = $query->result_array();
+         
+        return $fetch_result;
+
+
+    }
+
 
 
     public function getvendordetailsForpackingchallan($id){
