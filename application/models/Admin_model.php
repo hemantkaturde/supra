@@ -21173,7 +21173,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     public function getPreviousbaldependsonpackgingid($packgaing_instructin_id,$part_number,$buyer_name,$from_date,$to_date){
 
 
-        $this->db->select('*,'.TBL_BUYER_MASTER.'.buyer_name as by_name,'.TBL_FINISHED_GOODS.'.part_number as p_name,'.TBL_BUYER_PO_MASTER.'.buyer_po_number as original,'.TBL_BUYER_PO_MASTER_ITEM.'.id as buyer_item_number,'.TBL_PACKING_INSTRACTION_DETAILS.'.id as packgaing_instructin_id');
+        $this->db->select('buyer_invoice_qty');
         $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id  = '.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id');
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id  = '.TBL_BUYER_PO_MASTER.'.buyer_name_id');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id  = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
@@ -21258,8 +21258,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
     public function downlaodexporthistoryreportdata($part_number,$buyer_name,$from_date,$to_date){
-
-        $this->db->select('*,'.TBL_BUYER_MASTER.'.buyer_name as by_name,'.TBL_FINISHED_GOODS.'.part_number as p_name');
+       $this->db->select('*,'.TBL_BUYER_MASTER.'.buyer_name as by_name,'.TBL_FINISHED_GOODS.'.part_number as p_name,'.TBL_BUYER_PO_MASTER.'.buyer_po_number as original,'.TBL_BUYER_PO_MASTER_ITEM.'.id as buyer_item_number,'.TBL_PACKING_INSTRACTION_DETAILS.'.id as packgaing_instructin_id,'.TBL_BUYER_PO_MASTER.'.date as buyer_po_date');
         $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id  = '.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id');
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id  = '.TBL_BUYER_PO_MASTER.'.buyer_name_id');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id  = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
@@ -21280,8 +21279,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         // }
 
         if($part_number!='NA'){
-            $this->db->where(TBL_FINISHED_GOODS.'.fin_id', $part_number);
-        }     
+            $this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
+         }     
 
 
         if($buyer_name!='NA'){
@@ -21298,7 +21297,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
 
         // $this->db->where(TBL_PACKING_CHALLAN.'.status', 1);
-        $this->db->order_by(TBL_BUYER_PO_MASTER_ITEM.'.id','DESC');
+        $this->db->order_by(TBL_PACKING_INSTRACTION_DETAILS.'.id','DESC');
         $query = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
         $fetch_result = $query->result_array();
 
@@ -21308,23 +21307,46 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         {
             foreach ($fetch_result as $key => $value)
             {
+
+
+                $packgaing_instructin_id= $value['packgaing_instructin_id'];
+
+                $getPreviousbaldependsonpackgingid = $this->getPreviousbaldependsonpackgingid($packgaing_instructin_id,$part_number,$buyer_name,$from_date,$to_date);
+
+
+                if($getPreviousbaldependsonpackgingid){
+                    $previous_stock = $value['order_oty']- $getPreviousbaldependsonpackgingid[0]['buyer_invoice_qty'];
+                }else{
+                    $previous_stock = 0;
+                }
+               
+                if( $previous_stock == 0){
+                      $bal_qty = $value['order_oty']-$value['buyer_invoice_qty'];
+                }else{
+
+                  $bal_qty = $previous_stock -$value['buyer_invoice_qty'];
+                     
+                }
+
                 $data[$counter]['buyer_name'] = $value['by_name'];
                 $data[$counter]['part_number'] = $value['p_name'];
-                $data[$counter]['sales_order_number'] = $value['sales_order_number'];
-                $data[$counter]['date'] = $value['date'];
+                $data[$counter]['sales_order_number'] = $value['sales_order_number'].'-'.$value['original'];
+                $data[$counter]['date'] = $value['buyer_po_date'];
                 $data[$counter]['order_oty'] = $value['order_oty'];
+                $data[$counter]['prvious_bal'] = $previous_stock;
                 $data[$counter]['export_qty'] = $value['buyer_invoice_qty'];
                 $data[$counter]['buyer_invoice_number'] = $value['buyer_invoice_number'];
                 $data[$counter]['buyer_invoice_date'] = $value['buyer_invoice_date'];
                 $data[$counter]['mode_of_shipment'] =$value['mode_of_shipment'];
                 $data[$counter]['current_stock'] =$value['current_stock'];
-                $data[$counter]['qty_in_kgs3'] =$value['order_oty']- $value['buyer_invoice_qty'];
+                $data[$counter]['qty_in_kgs3'] =$bal_qty;
 
                 $counter++; 
             }
         }
 
         return $data;
+
 
     }
 
