@@ -21040,15 +21040,17 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->join(TBL_PREEXPORT_ITEM_DETAILS, TBL_PREEXPORT_ITEM_DETAILS.'.pre_export_id = '.TBL_PREEXPORT.'.id  and '.TBL_PREEXPORT_ITEM_DETAILS.'.part_number= '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
 
 
-        // if($params['search']['value'] != "") 
-        // {
-        //     $this->db->where("(".TBL_PACKING_CHALLAN.".packing_challan_id LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_PACKING_CHALLAN.".packing_challan_date LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_PACKING_CHALLAN.".total_goni LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_PACKING_CHALLAN.".dispatched_by LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_PACKING_CHALLAN.".total_weight LIKE '%".$params['search']['value']."%')");
-        // }
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_PO_MASTER.".date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_PO_MASTER_ITEM.".order_oty LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_PREEXPORT.".mode_of_shipment LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_qty LIKE '%".$params['search']['value']."%')");
+        }
         // $this->db->where(TBL_PACKING_CHALLAN.'.status', 1); 
 
         if($part_number!='NA'){
@@ -21083,18 +21085,20 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->join(TBL_PACKING_INSTRACTION, TBL_PACKING_INSTRACTION.'.buyer_po_number = '.TBL_BUYER_PO_MASTER.'.id');
         $this->db->join(TBL_PACKING_INSTRACTION_DETAILS, TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id = '.TBL_PACKING_INSTRACTION.'.id  and '.TBL_PACKING_INSTRACTION_DETAILS.'.part_number= '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
         $this->db->join(TBL_PREEXPORT, TBL_PREEXPORT.'.buyer_po = '.TBL_BUYER_PO_MASTER.'.id');
-        $this->db->join(TBL_PREEXPORT_ITEM_DETAILS, TBL_PREEXPORT_ITEM_DETAILS.'.pre_export_id = '.TBL_PREEXPORT.'.id  and '.TBL_PREEXPORT_ITEM_DETAILS.'.part_number= '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id','left');
+        $this->db->join(TBL_PREEXPORT_ITEM_DETAILS, TBL_PREEXPORT_ITEM_DETAILS.'.pre_export_id = '.TBL_PREEXPORT.'.id  and '.TBL_PREEXPORT_ITEM_DETAILS.'.part_number= '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
 
 
-        // if($params['search']['value'] != "") 
-        // {
-        //     $this->db->where("(".TBL_PACKING_CHALLAN.".packing_challan_id LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_PACKING_CHALLAN.".packing_challan_date LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_PACKING_CHALLAN.".total_goni LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_PACKING_CHALLAN.".dispatched_by LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_PACKING_CHALLAN.".total_weight LIKE '%".$params['search']['value']."%')");
-        // }
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_PO_MASTER.".date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_PO_MASTER_ITEM.".order_oty LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_PREEXPORT.".mode_of_shipment LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_qty LIKE '%".$params['search']['value']."%')");
+        }
 
         if($part_number!='NA'){
             $this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
@@ -21183,15 +21187,17 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->join(TBL_PREEXPORT_ITEM_DETAILS, TBL_PREEXPORT_ITEM_DETAILS.'.pre_export_id = '.TBL_PREEXPORT.'.id  and '.TBL_PREEXPORT_ITEM_DETAILS.'.part_number= '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
 
 
-        // if($params['search']['value'] != "") 
-        // {
-        //     $this->db->where("(".TBL_PACKING_CHALLAN.".packing_challan_id LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_PACKING_CHALLAN.".packing_challan_date LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_PACKING_CHALLAN.".total_goni LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_PACKING_CHALLAN.".dispatched_by LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_PACKING_CHALLAN.".total_weight LIKE '%".$params['search']['value']."%')");
-        // }
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_PO_MASTER.".date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BUYER_PO_MASTER_ITEM.".order_oty LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_PREEXPORT.".mode_of_shipment LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_qty LIKE '%".$params['search']['value']."%')");
+        }
 
         if($part_number!='NA'){
             $this->db->where(TBL_FINISHED_GOODS.'.fin_id', $part_number);
