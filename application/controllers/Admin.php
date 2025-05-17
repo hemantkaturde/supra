@@ -5025,6 +5025,10 @@ class Admin extends BaseController
 
 
 
+            // print_r( trim($this->input->post('buyer_po_number_proper')));
+            // exit;
+
+
             if($this->form_validation->run() == FALSE)
             {
                 $save_Billofmaterial_response['status'] = 'failure';
