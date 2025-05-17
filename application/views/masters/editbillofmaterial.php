@@ -112,7 +112,7 @@
                                                     <select class="form-control buyer_po_number  buyer_po_number_for_itam_mapping buyer_po_number_for_itam_display autobuyerpo" name="buyer_po_number" id="buyer_po_number">
                                                         <!-- <option st-id="" value="">Select Buyer PO</option> -->
 
-                                                        <option st-id="" value="<?=$getbillofmaterialdataforedit['buyer_po_number'] ?>"><?=$getbillofmaterialdataforedit['sales_order_number'].'-'.$getbillofmaterialdataforedit['bp_number'] ?></option>
+                                                        <option st-id="" value="<?=$getbillofmaterialdataforedit['bill_buyer_po_number'] ?>"><?=$getbillofmaterialdataforedit['sales_order_number'].'-'.$getbillofmaterialdataforedit['bp_number'] ?></option>
                                                     </select>
                                             <p class="error buyer_po_number_error"></p>
                                         </div>

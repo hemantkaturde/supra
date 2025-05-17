@@ -3348,6 +3348,9 @@ class Admin_model extends CI_Model
         .TBL_VENDOR_PO_MASTER.'.po_number,'
         .TBL_VENDOR_PO_MASTER.'.id as vendor_po_id,'
         .TBL_BILL_OF_MATERIAL.'.buyer_name as bill_of_buyer_id,'
+
+        .TBL_BILL_OF_MATERIAL.'.buyer_po_number as bill_buyer_po_number,'
+
         .TBL_BUYER_PO_MASTER.'.sales_order_number,'
         .TBL_BILL_OF_MATERIAL.'.buyer_po_number,'
         .TBL_BILL_OF_MATERIAL.'.buyer_po_date,'
