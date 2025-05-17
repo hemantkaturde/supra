@@ -5023,11 +5023,8 @@ class Admin extends BaseController
             $this->form_validation->set_rules('incoming_details','Incoming Details','trim');
             $this->form_validation->set_rules('remark','Remark','trim');
 
-
-
             // print_r( trim($this->input->post('buyer_po_number_proper')));
             // exit;
-
 
             if($this->form_validation->run() == FALSE)
             {
