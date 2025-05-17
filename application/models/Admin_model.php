@@ -21135,16 +21135,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     $this->db->distinct();
 
     $this->db->select([
-        TBL_BUYER_MASTER.'.buyer_name as by_name',
-        TBL_FINISHED_GOODS.'.part_number as p_name',
-        TBL_BUYER_PO_MASTER.'.buyer_po_number as original',
-        TBL_BUYER_PO_MASTER_ITEM.'.id as buyer_item_number',
-        TBL_PACKING_INSTRACTION_DETAILS.'.id as packgaing_instructin_id',
-        TBL_BUYER_PO_MASTER.'.date as buyer_po_date',
-        TBL_BUYER_PO_MASTER_ITEM.'.order_oty',
-        TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_date',
-        TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_qty',
-        TBL_PREEXPORT.'.mode_of_shipment'
+       '*,'.TBL_BUYER_MASTER.'.buyer_name as by_name,'.TBL_FINISHED_GOODS.'.part_number as p_name,'.TBL_BUYER_PO_MASTER.'.buyer_po_number as original,'.TBL_BUYER_PO_MASTER_ITEM.'.id as buyer_item_number,'.TBL_PACKING_INSTRACTION_DETAILS.'.id as packgaing_instructin_id,'.TBL_BUYER_PO_MASTER.'.date as buyer_po_date'
     ]);
 
         $this->db->from(TBL_BUYER_PO_MASTER_ITEM);
