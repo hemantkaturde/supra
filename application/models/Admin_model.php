@@ -21466,12 +21466,12 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['buyer_name'] = $value['by_name'];
                 $data[$counter]['part_number'] = $value['p_name'];
                 $data[$counter]['sales_order_number'] = $value['sales_order_number'].'-'.$value['original'];
-                $data[$counter]['date'] = $value['buyer_po_date'];
+                $data[$counter]['date'] =  date("d-m-Y", strtotime($value['buyer_po_date']));
                 $data[$counter]['order_oty'] = $value['order_oty'];
                 $data[$counter]['prvious_bal'] = $previous_stock;
                 $data[$counter]['export_qty'] = $value['buyer_invoice_qty'];
                 $data[$counter]['buyer_invoice_number'] = $value['buyer_invoice_number'];
-                $data[$counter]['buyer_invoice_date'] = $value['buyer_invoice_date'];
+                $data[$counter]['buyer_invoice_date'] =  date("d-m-Y", strtotime($value['buyer_invoice_date']));
                 $data[$counter]['mode_of_shipment'] =$value['mode_of_shipment'];
                 $data[$counter]['current_stock'] =$value['current_stock'];
                 $data[$counter]['qty_in_kgs3'] =$bal_qty;
