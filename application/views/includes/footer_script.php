@@ -7951,8 +7951,6 @@
 			   var pre_bom_status =   $('#bom_status').val();
 			   var pre_remark =   $('#remark').val();
 
-			   alert(pre_buyer_po_number);
-
 			   var pre_incoming_details =   $('#incoming_details').val();
 
 

@@ -5016,7 +5016,7 @@ class Admin extends BaseController
             $this->form_validation->set_rules('supplier_po_number','Supplier PO  Number','trim');
             $this->form_validation->set_rules('supplier_po_date','Supplier PO Date','trim');
             $this->form_validation->set_rules('buyer_name','Buyer_name','trim|required');
-            $this->form_validation->set_rules('buyer_po_number','Buyer PO Number','trim|required');
+            $this->form_validation->set_rules('buyer_po_number_proper','Buyer PO Number','trim|required');
             $this->form_validation->set_rules('buyer_po_date','Buyer PO Date','trim|required');
             $this->form_validation->set_rules('buyer_delivery_date','Buyer Delivery Date','trim|required');
             $this->form_validation->set_rules('bom_status','BOM Status','trim|required');
@@ -5036,7 +5036,7 @@ class Admin extends BaseController
                                                                 'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),
                                                                 'supplier_po_date'=>strip_tags(form_error('supplier_po_date')),
                                                                 'buyer_name'=>strip_tags(form_error('buyer_name')),
-                                                                'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),
+                                                                'buyer_po_number'=>strip_tags(form_error('buyer_po_number_proper')),
                                                                 'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),
                                                                 'buyer_delivery_date'=>strip_tags(form_error('buyer_delivery_date')),
                                                                 'buyer_delivery_date'=>strip_tags(form_error('buyer_delivery_date')),
@@ -5056,7 +5056,7 @@ class Admin extends BaseController
                     'supplier_po_number'=> trim($this->input->post('supplier_po_number')),
                     'supplier_po_date'=>trim($this->input->post('supplier_po_date')),
                     'buyer_name' =>    trim($this->input->post('buyer_name')),
-                    'buyer_po_number' =>    trim($this->input->post('buyer_po_number')),
+                    'buyer_po_number' =>    trim($this->input->post('buyer_po_number_proper')),
                     'buyer_po_date' =>    trim($this->input->post('buyer_po_date')),
                     'buyer_delivery_date' =>    trim($this->input->post('buyer_delivery_date')),
                     'bom_status' =>    trim($this->input->post('bom_status')),
@@ -5077,7 +5077,7 @@ class Admin extends BaseController
                         'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),
                         'supplier_po_date'=>strip_tags(form_error('supplier_po_date')),
                         'buyer_name'=>strip_tags(form_error('buyer_name')),
-                        'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),
+                        'buyer_po_number'=>strip_tags(form_error('buyer_po_number_proper')),
                         'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),
                         'buyer_delivery_date'=>strip_tags(form_error('buyer_delivery_date')),
                         'buyer_delivery_date'=>strip_tags(form_error('buyer_delivery_date')),
@@ -5102,7 +5102,7 @@ class Admin extends BaseController
                                 'supplier_po_number'=>strip_tags(form_error('supplier_po_number')),
                                 'supplier_po_date'=>strip_tags(form_error('supplier_po_date')),
                                 'buyer_name'=>strip_tags(form_error('buyer_name')),
-                                'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),
+                                'buyer_po_number'=>strip_tags(form_error('buyer_po_number_proper')),
                                 'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),
                                 'buyer_delivery_date'=>strip_tags(form_error('buyer_delivery_date')),
                                 'buyer_delivery_date'=>strip_tags(form_error('buyer_delivery_date')),
