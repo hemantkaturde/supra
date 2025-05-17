@@ -21591,6 +21591,58 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
+     public function updatebuyeridinsupplierpoconfirmationitem($po_id,$buyer_name){
+
+            $update_data = array('pre_buyer_name' => $buyer_name);
+            $this->db->where('pre_buyer_po_number', $po_id);
+            if($this->db->update(TBL_SUPPLIER_PO_CONFIRMATION_ITEM, $update_data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+
+    }
+
+
+
+    public function updatebuyeridinsupplierpoconfirmation($po_id,$buyer_name){
+
+            $update_data = array('buyer_po_id' => $buyer_name);
+            $this->db->where('buyer_po_id', $po_id);
+            if($this->db->update(TBL_SUPPLIER_PO_CONFIRMATION, $update_data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+    }
+
+
+
+      public function update_buyer_id_in_bill_of_material_item($po_id,$update_buyer_id_in_bill_of_material_item){
+            $this->db->where('pre_buyer_po_number', $po_id);
+            if($this->db->update(TBL_BILL_OF_MATERIAL_ITEM, $update_buyer_id_in_bill_of_material_item)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+
+    }
+
+
+       public function update_buyer_id_in_bill_of_material($po_id,$update_buyer_id_in_bill_of_material){
+            $this->db->where('buyer_po_number', $po_id);
+            if($this->db->update(TBL_BILL_OF_MATERIAL, $update_buyer_id_in_bill_of_material)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+
+    }
+
+
+
+
+
 
 }
 
