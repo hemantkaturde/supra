@@ -3423,6 +3423,18 @@ class Admin extends BaseController
 
 
 
+                                  /* Update Vendor id job work item*/
+                                  $update_vendor_id_in_job_work_item = array('pre_vendor_name' => trim($this->input->post('vendor_name')));
+                                  /* Update Vendor PO ID in Bill of Material Item */
+                                  $update_vendor_id_in_job_work_item = $this->admin_model->update_vendor_id_in_job_work_item($vendor_id,$update_vendor_id_in_job_work_item);
+                                  if($update_vendor_id_in_job_work_item){
+                                   /* Update Vendor PO ID in Bill of Material Main */
+                                    $update_VendorBill_of_po_in_job_work_main = array('vendor_name' => trim($this->input->post('vendor_name')));
+                                    $updatevendornameinjobworkmain = $this->admin_model->update_VendorBill_of_po_in_job_work_main($vendor_id,$update_VendorBill_of_po_in_job_work_main);
+                                  }
+
+
+
                                 $save_vendorpo_response['status'] = 'success';
                                 $save_vendorpo_response['error'] = array('po_number'=>strip_tags(form_error('po_number')),'date'=>strip_tags(form_error('date')), 'supplier_name'=>strip_tags(form_error('supplier_name')),'buyer_name'=>strip_tags(form_error('buyer_name')),'vendor_name'=>strip_tags(form_error('vendor_name')),'total_amount'=>strip_tags(form_error('total_amount')),'quatation_ref_no'=>strip_tags(form_error('quatation_ref_no')),'quatation_date'=>strip_tags(form_error('quatation_date')),'delivery_date'=>strip_tags(form_error('delivery_date')),'delivery'=>strip_tags(form_error('delivery')),'work_order'=>strip_tags(form_error('work_order')),'remark'=>strip_tags(form_error('remark')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'supplier_po_number'=>strip_tags(form_error('supplier_po_number')));
                             }

@@ -638,11 +638,8 @@ $route['getpackingchallanitamdata'] = "admin/getpackingchallanitamdata";
 
 
 $route['export_history_report'] = "admin/export_history_report";
-
 $route['fetchexporthistoryreport'] = "admin/fetchexporthistoryreport";
 $route['downlaodpackingchallandata/(:any)'] = "admin/downlaodpackingchallandata/$1";
-
-
 $route['checkvendorpoisenggwithvendorpoconfirmation'] = "admin/checkvendorpoisenggwithvendorpoconfirmation";
 
 

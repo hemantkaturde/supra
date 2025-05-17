@@ -21568,6 +21568,30 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
 
 
+    public function update_vendor_id_in_job_work_item($vendor_id,$update_vendor_id_in_job_work_item){
+
+            $this->db->where('pre_vendor_po_number', $vendor_id);
+            if($this->db->update(TBL_JOB_WORK_ITEM, $update_vendor_id_in_job_work_item)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+
+    }
+
+      public function update_VendorBill_of_po_in_job_work_main($vendor_id,$update_VendorBill_of_po_in_job_work_main){
+
+            $this->db->where('vendor_po_number', $vendor_id);
+            if($this->db->update(TBL_JOB_WORK, $update_VendorBill_of_po_in_job_work_main)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+
+    }
+
+
+
 }
 
 ?>
