@@ -4639,6 +4639,7 @@ class Admin_model extends CI_Model
         .TBL_BILL_OF_MATERIAL_ITEM.'.id as biil_of_material_id,'
         .TBL_BILL_OF_MATERIAL_ITEM.'.pre_buyer_name as pre_buyer_name_id_bom,'
         .TBL_BILL_OF_MATERIAL_ITEM.'.pre_vendor_name as vendor_biil_of_materil,'
+         .TBL_BILL_OF_MATERIAL_ITEM.'.pre_buyer_po_number as pre_buyer_po_number_original,'
         
         .TBL_RAWMATERIAL.'.type_of_raw_material');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BILL_OF_MATERIAL_ITEM.'.part_number');
