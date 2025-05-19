@@ -5065,9 +5065,6 @@ class Admin extends BaseController
                     'remark' =>    trim($this->input->post('remark')),
                 );
 
-                print_r($data);
-                exit;
-
                 // $checkIfexitsBillofmaterial = $this->admin_model->checkIfexitsBillofmaterial(trim($this->input->post('bom_number')));
                 // if($checkIfexitsBillofmaterial > 0){
 
