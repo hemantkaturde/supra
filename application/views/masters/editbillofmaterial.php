@@ -109,7 +109,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                                 <label for="buyer_po_number">Select Buyer PO <span class="required">*</span></label>
-                                                    <select class="form-control buyer_po_number  buyer_po_number_for_itam_mapping buyer_po_number_for_itam_display autobuyerpo" name="buyer_po_number" id="buyer_po_number">
+                                                    <select class="form-control buyer_po_number  buyer_po_number_for_itam_mapping buyer_po_number_for_itam_display autobuyerpo" name="buyer_po_number_proper" id="buyer_po_number">
                                                         <!-- <option st-id="" value="">Select Buyer PO</option> -->
 
                                                         <option st-id="" value="<?=$getbillofmaterialdataforedit['bill_buyer_po_number'] ?>"><?=$getbillofmaterialdataforedit['sales_order_number'].'-'.$getbillofmaterialdataforedit['bp_number'] ?></option>
