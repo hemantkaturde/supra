@@ -3284,7 +3284,7 @@ class Admin_model extends CI_Model
 
     public function getBillofmaterialdata($params){
 
-        $this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_BILL_OF_MATERIAL.'.id as billofmaterialid');
+        $this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_BILL_OF_MATERIAL.'.id as billofmaterialid,'.TBL_BILL_OF_MATERIAL.'.date bomdate');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id= '.TBL_BILL_OF_MATERIAL.'.vendor_name');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id= '.TBL_BILL_OF_MATERIAL.'.vendor_po_number');
 
@@ -3310,7 +3310,7 @@ class Admin_model extends CI_Model
             foreach ($fetch_result as $key => $value)
             {
                 $data[$counter]['bom_number'] = $value['bom_number'];
-                $data[$counter]['date'] = $value['date'];
+                $data[$counter]['date'] = $value['bomdate'];
                 $data[$counter]['vendor_po_number'] = $value['po_number'];
                 //$data[$counter]['vendor_number'] = $value['vendor_number'];
                 $data[$counter]['vendor_name'] = $value['vendorname'];
