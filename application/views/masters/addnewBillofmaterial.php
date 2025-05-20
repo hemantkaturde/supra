@@ -206,7 +206,6 @@
                                             }
                                         }
 
-
                                     ?>
                                     
                                     <div class="col-md-12">
@@ -217,8 +216,8 @@
                                         </div>
                                     </div>
 
-                                    <?php if($fetchALLpreBillofmaterailist[0]['pre_date']){
-                                        $date= $fetchALLpreBillofmaterailist[0]['pre_date'];
+                                    <?php if($fetchALLpreBillofmaterailist[0]['bom_pre_date']){
+                                        $date= $fetchALLpreBillofmaterailist[0]['bom_pre_date'];
                                      }else{
                                         $date= date('Y-m-d');
                                      } ?>

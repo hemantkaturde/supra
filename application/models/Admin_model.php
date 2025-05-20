@@ -4633,13 +4633,16 @@ class Admin_model extends CI_Model
         .TBL_BILL_OF_MATERIAL_ITEM.'.remark,'
         .TBL_VENDOR_PO_MASTER.'.po_number as vendorponumnber,'
         .TBL_BILL_OF_MATERIAL_ITEM.'.pre_supplier_po_number,'
+
+        .TBL_BILL_OF_MATERIAL_ITEM.'.pre_date as bom_pre_date,'
+
         .TBL_BUYER_PO_MASTER.'.sales_order_number,'
         .TBL_BILL_OF_MATERIAL_ITEM.'.pre_remark as bom_remark,'
         .TBL_SUPPLIER_PO_MASTER_ITEM.'.order_oty as rmsupplier_order_qty,'
         .TBL_BILL_OF_MATERIAL_ITEM.'.id as biil_of_material_id,'
         .TBL_BILL_OF_MATERIAL_ITEM.'.pre_buyer_name as pre_buyer_name_id_bom,'
         .TBL_BILL_OF_MATERIAL_ITEM.'.pre_vendor_name as vendor_biil_of_materil,'
-         .TBL_BILL_OF_MATERIAL_ITEM.'.pre_buyer_po_number as pre_buyer_po_number_original,'
+        .TBL_BILL_OF_MATERIAL_ITEM.'.pre_buyer_po_number as pre_buyer_po_number_original,'
         
         .TBL_RAWMATERIAL.'.type_of_raw_material');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BILL_OF_MATERIAL_ITEM.'.part_number');
