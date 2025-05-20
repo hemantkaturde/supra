@@ -21623,7 +21623,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
 
 
-      public function update_buyer_id_in_bill_of_material_item($po_id,$update_buyer_id_in_bill_of_material_item){
+    public function update_buyer_id_in_bill_of_material_item($po_id,$update_buyer_id_in_bill_of_material_item){
             $this->db->where('pre_buyer_po_number', $po_id);
             if($this->db->update(TBL_BILL_OF_MATERIAL_ITEM, $update_buyer_id_in_bill_of_material_item)){
                 return TRUE;
@@ -21634,9 +21634,32 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
-       public function update_buyer_id_in_bill_of_material($po_id,$update_buyer_id_in_bill_of_material){
+    public function update_buyer_id_in_bill_of_material($po_id,$update_buyer_id_in_bill_of_material){
             $this->db->where('buyer_po_number', $po_id);
             if($this->db->update(TBL_BILL_OF_MATERIAL, $update_buyer_id_in_bill_of_material)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+
+    }
+
+
+
+     public function update_buyer_id_in_vendor_bill_of_material_item($po_id,$update_buyer_id_in_vendor_bill_of_material_item){
+            $this->db->where('pre_buyer_po_number', $po_id);
+            if($this->db->update(TBL_BILL_OF_MATERIAL_VENDOR_ITEM, $update_buyer_id_in_vendor_bill_of_material_item)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+
+    }
+
+
+    public function update_buyer_id_in_vendor_bill_of_material($po_id,$update_buyer_id_in_vendor_bill_of_material){
+            $this->db->where('buyer_po_number', $po_id);
+            if($this->db->update(TBL_BILL_OF_MATERIAL_VENDOR, $update_buyer_id_in_vendor_bill_of_material)){
                 return TRUE;
             } else {
                 return FALSE;
