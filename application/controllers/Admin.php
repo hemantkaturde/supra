@@ -2525,6 +2525,19 @@ class Admin extends BaseController
 
 
 
+                                    /* Update buyer id in Stock item First*/
+                                    $update_buyer_id_in_stock_item = array('pre_buyer_name' => trim($this->input->post('buyer_name')));
+                                    /* Update Vendor PO ID in Bill of Material Item */
+                                    $update_buyer_id_in_stock_item = $this->admin_model->update_buyer_id_in_stock_item($po_id,$update_buyer_id_in_stock_item);
+                                    if($update_buyer_id_in_stock_item){
+                                    /* Update Vendor PO ID in Bill of Material Main */
+                                        $update_buyer_id_in_stock = array('buyer_name' => trim($this->input->post('buyer_name')));
+                                        $update_buyer_id_in_stock = $this->admin_model->update_buyer_id_in_stock($po_id,$update_buyer_id_in_stock);
+                                    }
+
+
+
+
 
                                     /* update buyer id once buyer is update after 11-03-2025 */
                                     // $updatebuyeridSupplierpoconfirmationitem = $this->admin_model->updatebuyeridSupplierpoconfirmationitem($po_id,trim($this->input->post('buyer_name')));
