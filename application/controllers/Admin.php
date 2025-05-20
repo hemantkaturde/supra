@@ -2501,15 +2501,15 @@ class Admin extends BaseController
                                     }
 
 
-                                    // /* Update buyer id in Bill of materail item First*/
-                                    // $update_buyer_id_in_bill_of_material_item = array('pre_buyer_name' => trim($this->input->post('buyer_name')));
-                                    // /* Update Vendor PO ID in Bill of Material Item */
-                                    // $update_buyer_id_in_bill_of_material_item = $this->admin_model->update_buyer_id_in_bill_of_material_item($po_id,$update_buyer_id_in_bill_of_material_item);
-                                    // if($update_buyer_id_in_bill_of_material_item){
-                                    // /* Update Vendor PO ID in Bill of Material Main */
-                                    //     $update_buyer_id_in_bill_of_material = array('buyer_name' => trim($this->input->post('buyer_name')));
-                                    //     $update_buyer_id_in_bill_of_material = $this->admin_model->update_buyer_id_in_bill_of_material($po_id,$update_buyer_id_in_bill_of_material);
-                                    // }
+                                    /* Update buyer id in Bill of materail item First*/
+                                    $update_buyer_id_in_bill_of_material_item = array('pre_buyer_name' => trim($this->input->post('buyer_name')));
+                                    /* Update Vendor PO ID in Bill of Material Item */
+                                    $update_buyer_id_in_bill_of_material_item = $this->admin_model->update_buyer_id_in_bill_of_material_item($po_id,$update_buyer_id_in_bill_of_material_item);
+                                    if($update_buyer_id_in_bill_of_material_item){
+                                    /* Update Vendor PO ID in Bill of Material Main */
+                                        $update_buyer_id_in_bill_of_material = array('buyer_name' => trim($this->input->post('buyer_name')));
+                                        $update_buyer_id_in_bill_of_material = $this->admin_model->update_buyer_id_in_bill_of_material($po_id,$update_buyer_id_in_bill_of_material);
+                                    }
 
 
 
