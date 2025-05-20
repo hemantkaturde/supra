@@ -21668,9 +21668,9 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
-        public function update_buyer_id_in_stock_item($po_id,$update_buyer_id_in_stock_item){
+    public function update_buyer_id_in_stock_item($po_id,$update_buyer_id_in_stock_item){
             $this->db->where('pre_buyer_po_id', $po_id);
-            if($this->db->update(TBL_BILL_OF_MATERIAL_VENDOR_ITEM, $update_buyer_id_in_stock_item)){
+            if($this->db->update(TBL_STOCKS_ITEM, $update_buyer_id_in_stock_item)){
                 return TRUE;
             } else {
                 return FALSE;
@@ -21681,7 +21681,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     public function update_buyer_id_in_stock($po_id,$update_buyer_id_in_stock){
             $this->db->where('buyer_po_number', $po_id);
-            if($this->db->update(TBL_BILL_OF_MATERIAL_VENDOR, $update_buyer_id_in_stock)){
+            if($this->db->update(TBL_STOCKS, $update_buyer_id_in_stock)){
                 return TRUE;
             } else {
                 return FALSE;
