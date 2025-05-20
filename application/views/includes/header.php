@@ -353,6 +353,12 @@
                         </a>
                       </li> 
 
+                      <li class="treeview <?php if($pageUrl=="export_inspection_report"){echo 'active';}?>" >
+                        <a href="<?php echo base_url(); ?>export_inspection_report">
+                          <i class="fa fa-file-excel-o"></i> <span class="menu_label">Export Hourly Inspection</span>
+                        </a>
+                      </li> 
+
                       <li class="treeview <?php if($pageUrl=="productionstatusreport"){echo 'active';}?>">
                         <a href="#">
                           <i class="fa fa-user"></i> <span class="menu_label">Production Status</span>

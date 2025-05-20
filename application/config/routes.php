@@ -643,6 +643,12 @@ $route['downlaodpackingchallandata/(:any)'] = "admin/downlaodpackingchallandata/
 $route['checkvendorpoisenggwithvendorpoconfirmation'] = "admin/checkvendorpoisenggwithvendorpoconfirmation";
 
 
+$route['export_inspection_report'] = "admin/export_inspection_report_dwnload";
+
+
+
+
+
 
 
 /* End of file routes.php */

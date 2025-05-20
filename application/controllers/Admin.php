@@ -24791,7 +24791,23 @@ public function checkvendorpoisenggwithvendorpoconfirmation(){
     }else{
         echo(json_encode(array('status'=>'failed'))); 
     }
- }
+}
+
+
+public function export_inspection_report_dwnload(){
+
+    $process = 'Export Hourly Inspection';
+    $processFunction = 'Admin/export_inspection_report_dwnload';
+    $this->logrecord($process,$processFunction);
+    $this->global['pageTitle'] = 'Export Hourly Inspection';
+    $data['getAllteammaster']= $this->admin_model->getAllteammaster();
+    $this->loadViews("masters/export_inspection_report_dwnload", $this->global, $data, NULL);
+
+
+}
+
+
+
 
 
 
