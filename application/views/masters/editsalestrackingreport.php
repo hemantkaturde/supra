@@ -252,7 +252,7 @@
 
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="transaction_id">Transaction Id</label>
+                                            <label for="transaction_id">Transaction Id / Advice No.</label>
                                             <input type="text" class="form-control" id="transaction_id" value="<?=$getsalestrackingdetailsforedit['transaction_id']?>" name="transaction_id" required>
                                             <p class="error transaction_id_error"></p>
                                         </div>

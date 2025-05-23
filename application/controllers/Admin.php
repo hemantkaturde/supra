@@ -24724,8 +24724,8 @@ public function downlaod_export_to_excel_report($part_number,$buyer_name,$from_d
     $objPHPExcel->getActiveSheet()->SetCellValue('H1', 'Buyer Invoice Number');  
     $objPHPExcel->getActiveSheet()->SetCellValue('I1', 'Buyer Invoice Date');  
     $objPHPExcel->getActiveSheet()->SetCellValue('J1', 'Mode Of Shipment');  
-    $objPHPExcel->getActiveSheet()->SetCellValue('K1', 'Stock');  
-    $objPHPExcel->getActiveSheet()->SetCellValue('L1', 'Balance qty');  
+    // $objPHPExcel->getActiveSheet()->SetCellValue('K1', 'Stock');  
+    $objPHPExcel->getActiveSheet()->SetCellValue('K1', 'Exported');  
 
 
     // set Row
@@ -24741,22 +24741,22 @@ public function downlaod_export_to_excel_report($part_number,$buyer_name,$from_d
         $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $element['buyer_invoice_number']);
         $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, $element['buyer_invoice_date']);
         $objPHPExcel->getActiveSheet()->SetCellValue('J' . $rowCount, $element['mode_of_shipment']);
-        $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, $element['current_stock']);
-        $objPHPExcel->getActiveSheet()->SetCellValue('L' . $rowCount, $element['qty_in_kgs3']);
+        // $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, $element['current_stock']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, $element['qty_in_kgs3']);
 
         $rowCount++;
     }
 
-    foreach(range('A','L') as $columnID) {
+    foreach(range('A','K') as $columnID) {
         $objPHPExcel->getActiveSheet()->getColumnDimension($columnID)->setAutoSize(true);
     }
     /*********************Autoresize column width depending upon contents END***********************/
     
-    $objPHPExcel->getActiveSheet()->getStyle('A1:L1')->getFont()->setBold(true); //Make heading font bold
+    $objPHPExcel->getActiveSheet()->getStyle('A1:K1')->getFont()->setBold(true); //Make heading font bold
     
     /*********************Add color to heading START**********************/
     $objPHPExcel->getActiveSheet()
-                ->getStyle('A1:L1')
+                ->getStyle('A1:K1')
                 ->getFill()
                 ->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
                 ->getStartColor()

@@ -94,8 +94,8 @@
                                             <th>Buyer Invoice Number</th>
                                             <th>Buyer Invoice Date</th>
                                             <th>Mode Of Shipment</th>
-                                            <th>Stock</th>
-                                            <th>Balance qty</th>
+                                            <!-- <th>Stock</th> -->
+                                            <th>Exported</th>
                                         </tr>
                                     </thead>
                                     <tbody>
