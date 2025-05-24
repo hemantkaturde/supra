@@ -14799,7 +14799,7 @@ public function downloadpackinginstraction($packing_details_item_id){
                     <td style="text-align:left;padding: 10px;width:60%">'.$getPackingInstructionData[0]['part_number'].'</td>
                 </tr>
                 <tr>
-                    <td style="text-align:left;margin-top: 10px;width:30%;font-size:17px"><b>Quantity</b></td>
+                    <td style="text-align:left;margin-top: 10px;width:30%;font-size:17px"><b>Quantity In PCS</b></td>
                     <td style="text-align:left;padding: 10px;width:10%"></td>
                     <td style="text-align:left;padding: 10px;width:60%">'.$getPackingInstructionData[0]['box_qty'].'</td>
                 </tr>
@@ -14841,7 +14841,7 @@ public function downloadpackinginstraction($packing_details_item_id){
                     <td style="text-align:left;padding: 10px;width:60%">'.$getPackingInstructionData[0]['part_number'].'</td>
                 </tr>
                 <tr>
-                    <td style="text-align:left;margin-top: 10px;width:30%;font-size:17px"><b>Quantity</b></td>
+                    <td style="text-align:left;margin-top: 10px;width:30%;font-size:17px"><b>Quantity In PCS</b></td>
                     <td style="text-align:left;padding: 10px;width:10%"></td>
                     <td style="text-align:left;padding: 10px;width:60%">'.$getPackingInstructionData[0]['box_qty'].'</td>
                 </tr>
