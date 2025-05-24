@@ -18692,7 +18692,7 @@
 				    else
 				    {
 						$(".report_type_error").html("");
-				    	window.location.href = "<?php echo ADMIN_PATH;?>admin/exportbuyerdetailsrecord/"+buyer_name+"/"+part_number+"/"+from_date+"/"+to_date;
+				    	window.location.href = "<?php echo ADMIN_PATH;?>admin/exportbuyerdetailsrecord/"+buyer_name+"/"+part_number+"/"+from_date+"/"+to_date+"/"+packing_ins_status;
 				    }
 				},
 				error: function (jqXHR, textStatus, errorThrown)
