@@ -20059,6 +20059,7 @@
 						{ "width": "8%", "targets": 4 },
 						{ "width": "8%", "targets": 5 },
 						{ "width": "5%", "targets": 6 },
+						{ "width": "5%", "targets": 7 },
 					],
 					responsive: true,
 					"oLanguage": {

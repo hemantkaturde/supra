@@ -44,6 +44,7 @@
                                     <tr style="background-color:#3c8dbc !important;color:#fff">
                                         <th>Gross Per Box Weight</th>
                                         <th>No of Cartoons</th>
+                                        <th>No Of Packets </th>
                                         <th>Total Gross Weight</th>
                                         <th>Per Box PCS</th>
                                         <th>Total Qty</th>

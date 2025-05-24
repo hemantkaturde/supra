@@ -13621,6 +13621,7 @@ public function getpreexportitemdetailsattributecount($params,$id){
     {
         $this->db->where("(".TBL_PREEXPORT_ITEM_ATTRIBUTES.".gross_per_box_weight LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_PREEXPORT_ITEM_ATTRIBUTES.".no_of_cartoons LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_PREEXPORT_ITEM_ATTRIBUTES.".no_of_packtes LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_PREEXPORT_ITEM_ATTRIBUTES.".per_box_PCS LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_PREEXPORT_ITEM_ATTRIBUTES.".total_qty LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_PREEXPORT_ITEM_ATTRIBUTES.".total_gross_weight LIKE '%".$params['search']['value']."%'");
@@ -13644,6 +13645,7 @@ public function getpreexportitemdetailsattributedata($params,$id){
     {
         $this->db->where("(".TBL_PREEXPORT_ITEM_ATTRIBUTES.".gross_per_box_weight LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_PREEXPORT_ITEM_ATTRIBUTES.".no_of_cartoons LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_PREEXPORT_ITEM_ATTRIBUTES.".no_of_packtes LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_PREEXPORT_ITEM_ATTRIBUTES.".per_box_PCS LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_PREEXPORT_ITEM_ATTRIBUTES.".total_qty LIKE '%".$params['search']['value']."%'");
         $this->db->or_where(TBL_PREEXPORT_ITEM_ATTRIBUTES.".total_gross_weight LIKE '%".$params['search']['value']."%'");
@@ -13685,6 +13687,7 @@ public function getpreexportitemdetailsattributedata($params,$id){
 
             $data[$counter]['gross_per_box_weight'] =round($gross_per_box_weight,3);
             $data[$counter]['no_of_cartoons'] =$value['no_of_cartoons'];
+            $data[$counter]['no_of_packtes'] =$value['no_of_packtes'];
             $data[$counter]['total_gross_weight'] =round($total_gross_weight,3);
             $data[$counter]['per_box_PCS'] =$value['per_box_PCS'];
             $data[$counter]['total_qty'] =$value['total_qty'];
