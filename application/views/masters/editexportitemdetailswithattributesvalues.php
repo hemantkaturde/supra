@@ -58,6 +58,16 @@
                                         </div>
                                     </div>
                                 </div>   
+
+                                 <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                               <label for="no_of_packtes">No Of Packets <span class="required">*</span></label>
+                                               <input type="number" class="form-control" id="no_of_packtes" name="no_of_packtes" value="<?=$getpreexportidbyattributesid[0]['no_of_packtes']?>">
+                                            <p class="error no_of_packtes_error"></p>
+                                        </div>
+                                    </div>
+                                </div>   
                                 
                                 <div class="row">
                                     <div class="col-md-6">
