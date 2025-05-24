@@ -49,12 +49,23 @@
 
             <div class="col-xs-3 text-left" style="margin-top: 10px;">
                 <div class="form-group">
+                    <label for="packing_ins_status">Packing Instruction Status</label>
+                        <select class="form-control" name="packing_ins_status" id="packing_ins_status">
+                            <option st-id="" value="">Select Packing Instruction Status</option>
+                            <option st-id="" value="Open">Open</option>
+                            <option st-id="" value="Close">Close</option>
+                        </select>
+                </div>
+            </div>
+
+            <div class="col-xs-4 text-left" style="margin-top: 10px;">
+                <div class="form-group">
                     <label for="date">From Date</label>
                         <input type="text" class="form-control datepicker" placeholder="Select From Date" id="from_date" name="from_date">
                         <p class="error date_error"></p>
                 </div>
             </div>
-            <div class="col-xs-3 text-left" style="margin-top: 10px;">
+            <div class="col-xs-4 text-left" style="margin-top: 10px;">
                 <div class="form-group">
                     <label for="date">To Date</label>
                         <input type="text" class="form-control datepicker" placeholder="Select To Date" id="to_date"  name="to_date">
