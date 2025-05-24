@@ -49,12 +49,24 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                               <label for="no_of_cartoons">No Of Cartoons <span class="required">*</span></label>
+                                               <label for="no_of_cartoons">No Of Cartons <span class="required">*</span></label>
                                                <input type="number" class="form-control" id="no_of_cartoons" name="no_of_cartoons">
                                             <p class="error no_of_cartoons_error"></p>
                                         </div>
                                     </div>
                                 </div>   
+
+
+                                  <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                               <label for="no_of_packtes">No Of Packets <span class="required">*</span></label>
+                                               <input type="number" class="form-control" id="no_of_packtes" name="no_of_packtes" value="0">
+                                            <p class="error no_of_packtes_error"></p>
+                                        </div>
+                                    </div>
+                                </div>   
+                                
                                 
                                 <div class="row">
                                     <div class="col-md-6">

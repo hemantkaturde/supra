@@ -12999,6 +12999,7 @@ public function addexportitemdetailswithattributesvalues($id){
         $saveexportdetailsattributes_response = array();
         $this->form_validation->set_rules('gross_per_box_weight','Gross Per Box Weight','trim|required');
         $this->form_validation->set_rules('no_of_cartoons','No Of Cartoons','trim|required');
+        $this->form_validation->set_rules('no_of_packtes','No Of Packtes','trim|required');
         $this->form_validation->set_rules('total_qty','Total Qty','trim|required');
         $this->form_validation->set_rules('total_net_weight','Total Net Weight','trim');
         $this->form_validation->set_rules('total_gross_weight','Total Gross Weight','trim');
@@ -13007,7 +13008,7 @@ public function addexportitemdetailswithattributesvalues($id){
         if($this->form_validation->run() == FALSE)
         {
             $saveexportdetailsattributes_response['status'] = 'failure';
-            $saveexportdetailsattributes_response['error'] = array('gross_per_box_weight'=>strip_tags(form_error('gross_per_box_weight')),'no_of_cartoons'=>strip_tags(form_error('no_of_cartoons')),'total_qty'=>strip_tags(form_error('total_qty')),'total_net_weight'=>strip_tags(form_error('total_net_weight')),'total_gross_weight'=>strip_tags(form_error('total_gross_weight')),'remark'=>strip_tags(form_error('remark')));
+            $saveexportdetailsattributes_response['error'] = array('gross_per_box_weight'=>strip_tags(form_error('gross_per_box_weight')),'no_of_cartoons'=>strip_tags(form_error('no_of_cartoons')),'total_qty'=>strip_tags(form_error('total_qty')),'total_net_weight'=>strip_tags(form_error('total_net_weight')),'total_gross_weight'=>strip_tags(form_error('total_gross_weight')),'remark'=>strip_tags(form_error('remark')),'no_of_packtes'=>strip_tags(form_error('no_of_packtes')));
         }else{
 
 
@@ -13020,6 +13021,7 @@ public function addexportitemdetailswithattributesvalues($id){
                 'total_qty'=>$this->input->post('total_qty'),
                 'total_net_weight'=>$this->input->post('total_net_weight'),
                 'total_gross_weight'=>$this->input->post('total_gross_weight'),
+                'no_of_packtes'=>$this->input->post('no_of_packtes'),
                 'remark'=>$this->input->post('remark'),
             );
            
