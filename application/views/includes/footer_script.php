@@ -18669,9 +18669,16 @@
 				var to_date = 'NA';
 			}
 
+
+			if($("#packing_ins_status").val()){
+					var packing_ins_status = $("#packing_ins_status").val();
+			}else{
+					var packing_ins_status = 'NA';
+			}
+
  
 			$.ajax({
-				url : "<?php echo ADMIN_PATH;?>admin/exportbuyerdetailsrecord/"+buyer_name+"/"+part_number+"/"+from_date+"/"+to_date,
+				url : "<?php echo ADMIN_PATH;?>admin/exportbuyerdetailsrecord/"+buyer_name+"/"+part_number+"/"+from_date+"/"+to_date+"/"+packing_ins_status,
 				type: "POST",
 				// data : {'hospitals' : hospitals, 'driver' : driver,'ride_start':ride_start,'ride_stop':ride_stop},
 				success: function(data, textStatus, jqXHR)

@@ -11828,13 +11828,13 @@ public function calculatesumofallbuyerdetails($buyer_name,$part_number,$from_dat
 }
 
 
-public function exportbuyerdetailsrecord($buyer_name,$part_number,$from_date,$to_date){
+public function exportbuyerdetailsrecord($buyer_name,$part_number,$from_date,$to_date,$packing_ins_status){
 
     
     // create file name
     $fileName = 'Buyer Order & Exports Report -'.date('d-m-Y').'.xlsx';  
     // load excel library
-    $empInfo = $this->admin_model->exportbuyerdetailsrecord($buyer_name,$part_number,$from_date,$to_date);
+    $empInfo = $this->admin_model->exportbuyerdetailsrecord($buyer_name,$part_number,$from_date,$to_date,$packing_ins_status);
 
     $objPHPExcel = new PHPExcel();
     $objPHPExcel->setActiveSheetIndex(0);
