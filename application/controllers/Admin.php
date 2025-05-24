@@ -24737,7 +24737,7 @@ public function downlaod_export_to_excel_report($part_number,$buyer_name,$from_d
     $objPHPExcel->getActiveSheet()->SetCellValue('I1', 'Buyer Invoice Date');  
     $objPHPExcel->getActiveSheet()->SetCellValue('J1', 'Mode Of Shipment');  
     // $objPHPExcel->getActiveSheet()->SetCellValue('K1', 'Stock');  
-    $objPHPExcel->getActiveSheet()->SetCellValue('K1', 'Exported');  
+    $objPHPExcel->getActiveSheet()->SetCellValue('K1', 'Balance qty to be exported');  
 
 
     // set Row

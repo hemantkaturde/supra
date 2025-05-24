@@ -102,7 +102,7 @@
                                             <th>Buyer Invoice Date</th>
                                             <th>Mode Of Shipment</th>
                                             <!-- <th>Stock</th> -->
-                                            <th>Exported</th>
+                                            <th>Balance qty to be exported</th>
                                         </tr>
                                     </thead>
                                     <tbody>
