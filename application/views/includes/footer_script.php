@@ -20206,8 +20206,14 @@
 						var no_of_cartoons = 0;
 					}
 
+					if($("#no_of_packtes").val()){
+						var no_of_packtes = $("#no_of_packtes").val();
+					}else{
+						var no_of_packtes = 0;
+					}
+
 					//var less_qty_rejected_qty = parseFloat(less_quantity) +  parseFloat(rejected_quantity);
-					var total_qty = parseFloat(per_boc_pcs) *  parseFloat(no_of_cartoons);
+					var total_qty = parseFloat(per_boc_pcs) *  parseFloat(no_of_cartoons + no_of_packtes);
 	
 					$("#total_qty").val(total_qty);
 
@@ -20232,8 +20238,14 @@
 						var no_of_cartoons = 0;
 					}
 
+					if($("#no_of_packtes").val()){
+						var no_of_packtes = $("#no_of_packtes").val();
+					}else{
+						var no_of_packtes = 0;
+					}
+
 					//var less_qty_rejected_qty = parseFloat(less_quantity) +  parseFloat(rejected_quantity);
-					var total_gross_weight = parseFloat(gross_per_box_weight) *  parseFloat(no_of_cartoons);
+					var total_gross_weight = parseFloat(gross_per_box_weight) *  parseFloat(no_of_cartoons + no_of_packtes);
 
 					$("#total_gross_weight").val(total_gross_weight);
 
