@@ -13374,6 +13374,10 @@ public function addsalestrackingreport(){
         $this->form_validation->set_rules('realised_amt_in_inr','realised_amt_in_inr','trim');
         $this->form_validation->set_rules('bank_charges_inr','bank_charges_inr','trim');
         $this->form_validation->set_rules('receivable_amt_debit','receivable_amt_debit','trim');
+
+
+        $this->form_validation->set_rules('foreign_bank_charges_in_inr_remark','foreign_bank_charges_in_inr_remark','trim');
+        $this->form_validation->set_rules('bill_paid_amount_remark','bill_paid_amount_remark','trim');
         
 
         if($this->form_validation->run() == FALSE)
@@ -13416,6 +13420,8 @@ public function addsalestrackingreport(){
                 'EGM_status'=>strip_tags(form_error('EGM_status')),
                 'payment_status'=>strip_tags(form_error('payment_status')),
                 'receivable_amt_debit' =>strip_tags(form_error('receivable_amt_debit')),
+                'foreign_bank_charges_in_inr_remark' =>strip_tags(form_error('foreign_bank_charges_in_inr_remark')),
+                'bill_paid_amount_remark' =>strip_tags(form_error('bill_paid_amount_remark')),
                 'exchange_rate_as_per_sb'=>strip_tags(form_error('exchange_rate_as_per_sb')));
 
         }else{
@@ -13472,6 +13478,8 @@ public function addsalestrackingreport(){
                 'payment_rcivd_amt'=>trim($this->input->post('payment_rcivd_amt')),
                 'realised_amt_in_inr'=>trim($this->input->post('realised_amt_in_inr')),
                 'bank_charges_inr'=>trim($this->input->post('bank_charges_inr')),
+                'foreign_bank_charges_in_inr_remark' =>trim($this->input->post('foreign_bank_charges_in_inr_remark')),
+                'bill_paid_amount_remark' =>trim($this->input->post('bill_paid_amount_remark')),
                 'receivable_amt_debit'=>trim($this->input->post('receivable_amt_debit'))
             );
 
@@ -13523,6 +13531,8 @@ public function addsalestrackingreport(){
                         'EGM_status'=>strip_tags(form_error('EGM_status')),
                         'payment_status'=>strip_tags(form_error('payment_status')),
                         'receivable_amt_debit' =>strip_tags(form_error('receivable_amt_debit')),
+                        'foreign_bank_charges_in_inr_remark' =>strip_tags(form_error('foreign_bank_charges_in_inr_remark')),
+                        'bill_paid_amount_remark' =>strip_tags(form_error('bill_paid_amount_remark')),
                         'exchange_rate_as_per_sb'=>strip_tags(form_error('exchange_rate_as_per_sb')));
              
             }

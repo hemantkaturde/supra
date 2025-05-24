@@ -283,6 +283,16 @@
                                             <p class="error foreign_bank_charges_in_inr_error"></p>
                                         </div>
                                     </div>
+
+
+                                     <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="foreign_bank_charges_in_inr_remark">Remark</label>
+                                            <input type="text" class="form-control" id="foreign_bank_charges_in_inr_remark" value="<?=$getsalestrackingdetailsforedit['foreign_bank_charges_in_inr_remark']?>" name="foreign_bank_charges_in_inr_remark">
+                                            <p class="error foreign_bank_charges_in_inr_remark_error"></p>
+                                        </div>
+                                    </div>
+
                                 </div>
 
 
@@ -328,6 +338,14 @@
                                             <label for="bill_paid_amount">Bill Paid Amount</label>
                                             <input type="text" class="form-control" id="bill_paid_amount" name="bill_paid_amount" value="<?=$getsalestrackingdetailsforedit['bill_paid_amount']?>">
                                             <p class="error bill_paid_amount_error"></p>
+                                        </div>
+                                    </div>
+
+                                     <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="bill_paid_amount_remark">Remark</label>
+                                            <input type="text" class="form-control" id="bill_paid_amount_remark" value="<?=$getsalestrackingdetailsforedit['bill_paid_amount_remark']?>" name="bill_paid_amount_remark">
+                                            <p class="error bill_paid_amount_remark_error"></p>
                                         </div>
                                     </div>
                                 </div>
