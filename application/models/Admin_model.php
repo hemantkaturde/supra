@@ -11606,7 +11606,7 @@ class Admin_model extends CI_Model
    /*31-08-2024*/
 
 
-    public function fetchbuyerpodetailsreportCount($params,$buyer_name,$part_number,$from_date,$to_date){
+    public function fetchbuyerpodetailsreportCount($params,$buyer_name,$part_number,$from_date,$to_date,$packing_ins_status){
         
         $this->db->select(TBL_BUYER_PO_MASTER.'.buyer_po_date,'.TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_BUYER_MASTER.'.buyer_name,'.TBL_BUYER_PO_MASTER.'.buyer_po_number,'.TBL_BUYER_PO_MASTER.'.date,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name,'.TBL_BUYER_PO_MASTER_ITEM.'.order_oty,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date,'.TBL_BUYER_PO_MASTER.'.id as buyer_po_idpo,'.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id as part_number_id_buyer_Po');
         $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id');
@@ -11642,6 +11642,10 @@ class Admin_model extends CI_Model
         if($to_date!='NA'){
             $todate = $to_date;
             $this->db->where(TBL_BUYER_PO_MASTER.'.date <=', $todate);
+        }
+
+        if($packing_ins_status!='NA'){
+            $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.packaging_instraction', $packing_ins_status);
         }
 
 
@@ -11756,7 +11760,7 @@ class Admin_model extends CI_Model
 
     }
 
-    public function fetchbuyerpodetailsreportData($params,$buyer_name,$part_number,$from_date,$to_date){
+    public function fetchbuyerpodetailsreportData($params,$buyer_name,$part_number,$from_date,$to_date,$packing_ins_status){
 
         $this->db->select(TBL_BUYER_PO_MASTER.'.buyer_po_date,'.TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_BUYER_MASTER.'.buyer_name,'.TBL_BUYER_PO_MASTER.'.buyer_po_number,'.TBL_BUYER_PO_MASTER.'.date,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name,'.TBL_BUYER_PO_MASTER_ITEM.'.order_oty,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date,'.TBL_BUYER_PO_MASTER.'.id as buyer_po_idpo,'.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id as part_number_id_buyer_Po,'.TBL_BUYER_PO_MASTER_ITEM.'.packaging_instraction as packing_instrauction_status');
         $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id');
@@ -11792,6 +11796,10 @@ class Admin_model extends CI_Model
         if($to_date!='NA'){
             $todate = $to_date;
             $this->db->where(TBL_BUYER_PO_MASTER.'.date <=', $todate);
+        }
+
+        if($packing_ins_status!='NA'){
+            $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.packaging_instraction', $packing_ins_status);
         }
 
 
@@ -12108,7 +12116,7 @@ class Admin_model extends CI_Model
 
 
     
-    public function calculatesumofallbuyerdetails($buyer_name,$part_number,$from_date,$to_date){
+    public function calculatesumofallbuyerdetails($buyer_name,$part_number,$from_date,$to_date,$packing_ins_status){
 
         $this->db->select(TBL_BUYER_PO_MASTER.'.buyer_po_date,'.TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_BUYER_MASTER.'.buyer_name,'.TBL_BUYER_PO_MASTER.'.buyer_po_number,'.TBL_BUYER_PO_MASTER.'.date,'.TBL_FINISHED_GOODS.'.part_number,'.TBL_FINISHED_GOODS.'.name,'.TBL_BUYER_PO_MASTER_ITEM.'.order_oty,'.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_part_delivery_date,'.TBL_BUYER_PO_MASTER.'.id as buyer_po_idpo,'.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id as part_number_id_buyer_Po,'.TBL_BUYER_PO_MASTER_ITEM.'.order_oty as total_order_aty');
         $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id');
@@ -12144,6 +12152,10 @@ class Admin_model extends CI_Model
         if($to_date!='NA'){
             $todate = $to_date;
             $this->db->where(TBL_BUYER_PO_MASTER.'.date <=', $todate);
+        }
+
+         if($packing_ins_status!='NA'){
+            $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.packaging_instraction', $packing_ins_status);
         }
 
 

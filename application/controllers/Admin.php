@@ -11790,10 +11790,10 @@ public function buyerpodetailsreport(){
 }
 
 
-public function fetchbuyerpodetailsreport($buyer_name,$part_number,$from_date,$to_date){
+public function fetchbuyerpodetailsreport($buyer_name,$part_number,$from_date,$to_date,$packing_ins_status){
     $params = $_REQUEST;
-    $totalRecords = $this->admin_model->fetchbuyerpodetailsreportCount($params,$buyer_name,$part_number,$from_date,$to_date); 
-    $queryRecords = $this->admin_model->fetchbuyerpodetailsreportData($params,$buyer_name,$part_number,$from_date,$to_date); 
+    $totalRecords = $this->admin_model->fetchbuyerpodetailsreportCount($params,$buyer_name,$part_number,$from_date,$to_date,$packing_ins_status); 
+    $queryRecords = $this->admin_model->fetchbuyerpodetailsreportData($params,$buyer_name,$part_number,$from_date,$to_date,$packing_ins_status); 
 
     $data = array();
     foreach ($queryRecords as $key => $value)
@@ -11816,9 +11816,9 @@ public function fetchbuyerpodetailsreport($buyer_name,$part_number,$from_date,$t
 }
 
 
-public function calculatesumofallbuyerdetails($buyer_name,$part_number,$from_date,$to_date){
+public function calculatesumofallbuyerdetails($buyer_name,$part_number,$from_date,$to_date,$packing_ins_status){
 
-    $vendor_po_number_stock_data = $this->admin_model->calculatesumofallbuyerdetails($buyer_name,$part_number,$from_date,$to_date);
+    $vendor_po_number_stock_data = $this->admin_model->calculatesumofallbuyerdetails($buyer_name,$part_number,$from_date,$to_date,$packing_ins_status);
     if(count($vendor_po_number_stock_data) >= 1) {
         echo json_encode($vendor_po_number_stock_data[0]);
     } else {

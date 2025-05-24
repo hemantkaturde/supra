@@ -18345,7 +18345,13 @@
 				var to_date = 'NA';
 			}
 
-			getAlldatausingfilter(buyer_name,part_number,from_date,to_date);
+			if($("#packing_ins_status").val()){
+				var packing_ins_status = $("#packing_ins_status").val();
+			}else{
+				var packing_ins_status = 'NA';
+			}
+
+			getAlldatausingfilter(buyer_name,part_number,from_date,to_date,packing_ins_status);
 
 		});
 
@@ -18385,8 +18391,14 @@
 				}else{
 					var to_date = 'NA';
 				}
+
+				if($("#packing_ins_status").val()){
+					var packing_ins_status = $("#packing_ins_status").val();
+				}else{
+					var packing_ins_status = 'NA';
+				}
 				
-				getAlldatausingfilter(buyer_name,part_number,from_date,to_date);
+				getAlldatausingfilter(buyer_name,part_number,from_date,to_date,packing_ins_status);
 			}
 		});
 
@@ -18423,8 +18435,15 @@
 				}else{
 					var to_date = 'NA';
 				}
+
 				
-				getAlldatausingfilter(buyer_name,part_number,from_date,to_date);
+				if($("#packing_ins_status").val()){
+					var packing_ins_status = $("#packing_ins_status").val();
+				}else{
+					var packing_ins_status = 'NA';
+				}
+				
+				getAlldatausingfilter(buyer_name,part_number,from_date,to_date,packing_ins_status);
 			}
 		});
 
@@ -18454,8 +18473,15 @@
 			}else{
 				var to_date = 'NA';
 			}
+		
+			if($("#packing_ins_status").val()){
+				var packing_ins_status = $("#packing_ins_status").val();
+			}else{
+				var packing_ins_status = 'NA';
+			}	
+			
 
-			getAlldatausingfilter(buyer_name,part_number,from_date,to_date);
+			getAlldatausingfilter(buyer_name,part_number,from_date,to_date,packing_ins_status);
 
 			
 		});
@@ -18487,12 +18513,57 @@
 				var to_date = 'NA';
 			}
 
-			getAlldatausingfilter(buyer_name,part_number,from_date,to_date);
+			if($("#packing_ins_status").val()){
+					var packing_ins_status = $("#packing_ins_status").val();
+			}else{
+					var packing_ins_status = 'NA';
+			}
+
+			getAlldatausingfilter(buyer_name,part_number,from_date,to_date,packing_ins_status);
 
 			
 		});
 
-		function getAlldatausingfilter(buyer_name,part_number,from_date,to_date){
+
+		$(document).on('change','#packing_ins_status',function(e){
+			e.preventDefault();
+			$("#view_buyer_PO_details_report").dataTable().fnDestroy();
+			if($("#buyer_name").val()){
+				var buyer_name = $("#buyer_name").val();
+			}else{
+				var buyer_name = 'NA';
+			}
+
+			if($("#part_number").val()){
+				var part_number = $("#part_number").val();
+			}else{
+				var part_number = 'NA';
+			}
+
+			if($("#from_date").val()){
+				var from_date = $("#from_date").val();
+			}else{
+				var from_date = 'NA';
+			}
+
+			if($("#to_date").val()){
+				var to_date = $("#to_date").val();
+			}else{
+				var to_date = 'NA';
+			}
+
+			if($("#packing_ins_status").val()){
+					var packing_ins_status = $("#packing_ins_status").val();
+			}else{
+					var packing_ins_status = 'NA';
+			}
+
+			getAlldatausingfilter(buyer_name,part_number,from_date,to_date,packing_ins_status);
+
+			
+		});
+
+		function getAlldatausingfilter(buyer_name,part_number,from_date,to_date,packing_ins_status){
 			$("#view_buyer_PO_details_report").dataTable().fnDestroy();
 			var dt = $('#view_buyer_PO_details_report').DataTable({
 	            "columnDefs": [ 
@@ -18521,14 +18592,14 @@
 	            "bProcessing": true,
 	            "serverSide": true,
 	            "ajax":{
-                    url :"<?php echo base_url();?>admin/fetchbuyerpodetailsreport/"+buyer_name+"/"+part_number+"/"+from_date+"/"+to_date,
+                    url :"<?php echo base_url();?>admin/fetchbuyerpodetailsreport/"+buyer_name+"/"+part_number+"/"+from_date+"/"+to_date+"/"+packing_ins_status,
                     type: "post",
 	            },
 	        });
 
 
 			$.ajax({
-				url : "<?php echo ADMIN_PATH;?>admin/calculatesumofallbuyerdetails/"+buyer_name+"/"+part_number+"/"+from_date+"/"+to_date,
+				url : "<?php echo ADMIN_PATH;?>admin/calculatesumofallbuyerdetails/"+buyer_name+"/"+part_number+"/"+from_date+"/"+to_date+"/"+packing_ins_status,
 				type: "POST",
 				data : {'flag' : 'sum of all buyer details'},
 					success: function(data, textStatus, jqXHR)
