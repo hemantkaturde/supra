@@ -20190,9 +20190,9 @@
 		    });
 
 
-			$(document).on('change', '#per_boc_pcs,#no_of_cartoons', function(){	
+			$(document).on('change', '#per_boc_pcs,#no_of_cartoons,#no_of_packtes', function(){	
 
-				if($("#per_boc_pcs").val() && $("#no_of_cartoons").val()){
+				if($("#per_boc_pcs").val() && $("#no_of_cartoons").val()  && $("#no_of_packtes").val()){
 
 					if($("#per_boc_pcs").val()){
 						var per_boc_pcs = $("#per_boc_pcs").val();
@@ -20222,9 +20222,9 @@
 		    });
 
 
-			$(document).on('change', '#gross_per_box_weight,#no_of_cartoons', function(){	
+			$(document).on('change', '#gross_per_box_weight,#no_of_cartoons,#no_of_packtes', function(){	
 
-				if($("#gross_per_box_weight").val() && $("#no_of_cartoons").val()){
+				if($("#gross_per_box_weight").val() && $("#no_of_cartoons").val() && $("#no_of_packtes").val()){
 
 					if($("#gross_per_box_weight").val()){
 						var gross_per_box_weight = $("#gross_per_box_weight").val();
