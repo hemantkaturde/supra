@@ -645,6 +645,7 @@ $route['checkvendorpoisenggwithvendorpoconfirmation'] = "admin/checkvendorpoisen
 
 $route['export_inspection_report'] = "admin/export_inspection_report_dwnload";
 
+$route['getcurrentlivestock'] = "admin/getcurrentlivestock";
 
 
 

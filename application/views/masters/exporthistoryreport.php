@@ -27,7 +27,7 @@
                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="part_number">Part Number</label>
-                                        <select class="form-control" name="part_number" id="part_number">
+                                        <select class="form-control part_number_for_current_stock" name="part_number" id="part_number">
                                             <option value="NA">Select Part Number</option>
                                             <?php foreach ($finishgoodList as $key => $value) {?>
                                             <option value="<?php echo $value['fin_id']; ?>">
@@ -78,6 +78,13 @@
                                 </div>
                             </div>
 
+                            <div class="row" style="margin-left:4px">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                       <label for="to_date">Current Stock</label>  <input type="text" class="form-control part_wise_current_stock_inpute" id="part_wise_current_stock_inpute" name="part_wise_current_stock_inpute" readonly>
+                                    </div>
+                                </div>
+                            </div>
 
                             <div class="panel-body">
                                 <table width="100%" class="table table-striped table-bordered table-hover"

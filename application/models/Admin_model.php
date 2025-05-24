@@ -21693,8 +21693,19 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             } else {
                 return FALSE;
             }
-
     }
+
+
+    public function getcurrentlivestock($part_number_for_current_stock){
+
+        $this->db->select('current_stock');
+        $this->db->where(TBL_FINISHED_GOODS.'.status',1);
+        $this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number_for_current_stock);
+        $query = $this->db->get(TBL_FINISHED_GOODS);
+        $data = $query->result_array();
+        return $data;
+    }
+
 
 
 

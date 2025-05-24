@@ -24819,6 +24819,18 @@ public function export_inspection_report_dwnload(){
 }
 
 
+public function getcurrentlivestock() {
+        if($this->input->post('part_number_for_current_stock')) {
+                $getCurrentlivestock = $this->admin_model->getcurrentlivestock($this->input->post('part_number_for_current_stock'));
+                $content = $getCurrentlivestock[0]['current_stock'];
+                echo $content;
+        } else {
+            echo 'failure';
+        }
+}
+
+
+
 
 
 

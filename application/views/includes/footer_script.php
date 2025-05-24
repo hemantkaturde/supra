@@ -25997,6 +25997,41 @@
 				getExportHistoryreport(from_date,to_date,buyer_name,part_number);
 	     	});
 
+
+			$(document).on('change','.part_number_for_current_stock',function(e){  
+				
+					e.preventDefault();
+					$('#part_wise_current_stock_inpute').html();
+				
+					//$(".loader_ajax").show();
+					var part_number_for_current_stock = $('.part_number_for_current_stock').val();
+
+					$.ajax({
+						url : "<?php echo ADMIN_PATH;?>getcurrentlivestock",
+						type: "POST",
+						data : {'part_number_for_current_stock' : part_number_for_current_stock},
+						success: function(data, textStatus, jqXHR)
+						{
+							$(".loader_ajax").hide();
+							if(data == "failure")
+							{
+								$('#part_wise_current_stock_inpute').value('');
+							}
+							else
+							{
+								$('#part_wise_current_stock_inpute').val(data);
+							}
+						},
+						error: function (jqXHR, textStatus, errorThrown)
+						{
+							$('#part_wise_current_stock_inpute').html();
+							//$(".loader_ajax").hide();
+						}
+					});
+					return false;
+
+	        });
+
 			$(document).on('change','#buyer_name',function(e){  
 				$("#view_export_history_report_calculation_report").dataTable().fnDestroy();
 			
@@ -26096,7 +26131,6 @@
             
 			}
 
-		
 			$(document).on('click','#export_to_excel_exporthistroy_report',function(e){
 				e.preventDefault();
 				$(".loader_ajax").show();
@@ -26141,6 +26175,9 @@
 
 				return false;
 	        });
+
+
+
 
     </script>
 <?php } ?>
