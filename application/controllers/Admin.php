@@ -18548,13 +18548,13 @@ public function downlaod_production_status_report($vendor_name,$status,$vendor_p
     foreach ($empInfo as $element) {
         $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $element['vendorname']);
         $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $element['v_po_number']);
-        $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $element['vpodate']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, date("d-m-Y", strtotime($element['vpodate'])));
         $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['fg_part_number']);
         $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['part_description']);
         $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['vendor_order_qty']);
         $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['vendor_received_qty']);
         $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $element['vendor_received_qtys']);
-        $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, $element['delivery_date']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, date("d-m-Y", strtotime($element['delivery_date'])));
         $objPHPExcel->getActiveSheet()->SetCellValue('J' . $rowCount, $element['buyer_name']);
         $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, $element['status']);
         $objPHPExcel->getActiveSheet()->SetCellValue('L' . $rowCount, $element['itemnote']);   
