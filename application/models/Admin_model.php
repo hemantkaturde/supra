@@ -21528,6 +21528,27 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
+      public function checkvendorpoisassigninVBM($id){
+        $this->db->select('*');
+        $this->db->where(TBL_BILL_OF_MATERIAL_VENDOR.'.vendor_po_number', $id);
+        //$this->db->where(TBL_SUPPLIER_PO_MASTER.'.status', 1);
+        $query = $this->db->get(TBL_BILL_OF_MATERIAL_VENDOR);
+        $rowcount = $query->result_array();
+        return $rowcount;
+    }
+
+
+      public function checkvendorpoisassigninBM($id){
+        $this->db->select('*');
+        $this->db->where(TBL_BILL_OF_MATERIAL.'.vendor_po_number', $id);
+        //$this->db->where(TBL_SUPPLIER_PO_MASTER.'.status', 1);
+        $query = $this->db->get(TBL_BILL_OF_MATERIAL);
+        $rowcount = $query->result_array();
+        return $rowcount;
+    }
+
+
+
     public function updatevendorchangeinvendorpodata($vendor_id,$update_vendor_po_data){
 
             $this->db->where('pre_vendor_po_number', $vendor_id);

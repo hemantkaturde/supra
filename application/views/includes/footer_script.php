@@ -3399,9 +3399,11 @@
 			}, function(isConfirm) {
 				if (isConfirm) {
 
-                            /*Check If vendor po is already used in vendor PO Confirmation*/
+
+				        	/*Check If vendor po is already used in vendor Bill Of Material*/
 							$.ajax({
-								url : "<?php echo base_url();?>checkvendorpoisenggwithvendorpoconfirmation",
+
+								url : "<?php echo base_url();?>checkvendorpoisassigninVBM",
 								type: "POST",
 								data : 'id='+elemF.attr('data-id'),
 								success: function(data, textStatus, jqXHR)
@@ -3411,7 +3413,7 @@
 									if(obj.status=='success'){
 										swal({
 											title: "Already in use!",
-											text: "This Vendor PO is linked to Vendor po Confirmation",
+											text: "This Vendor PO is linked to Vendor Bill of Material",
 											//type: "danger",
 											icon: "success",
 											button: "Ok",
@@ -3420,31 +3422,95 @@
 										});	
 									}else{
 
-										$.ajax({
-											url : "<?php echo base_url();?>deleteVendorpo",
-											type: "POST",
-											data : 'id='+elemF.attr('data-id'),
-											success: function(data, textStatus, jqXHR)
-											{
-												const obj = JSON.parse(data);
-											
-												if(obj.status=='success'){
-													swal({
-														title: "Deleted!",
-														text: "Vendor PO Deleted Succesfully",
-														icon: "success",
-														button: "Ok",
-														},function(){ 
-															window.location.href = "<?php echo base_url().'vendorpo'?>";
-													});	
-												}
 
-											},
-											error: function (jqXHR, textStatus, errorThrown)
-											{
-												$(".loader_ajax").hide();
-											}
-										})
+										   $.ajax({
+
+												url : "<?php echo base_url();?>checkvendorpoisassigninBM",
+												type: "POST",
+												data : 'id='+elemF.attr('data-id'),
+												success: function(data, textStatus, jqXHR)
+												{
+													const obj = JSON.parse(data);
+												
+													if(obj.status=='success'){
+														swal({
+															title: "Already in use!",
+															text: "This Vendor PO is linked to Bill of Material",
+															//type: "danger",
+															icon: "success",
+															button: "Ok",
+															},function(){ 
+																window.location.href = "<?php echo base_url().'vendorpo'?>";
+														});	
+													}else{
+
+
+															/*Check If vendor po is already used in vendor PO Confirmation*/
+															$.ajax({
+																url : "<?php echo base_url();?>checkvendorpoisenggwithvendorpoconfirmation",
+																type: "POST",
+																data : 'id='+elemF.attr('data-id'),
+																success: function(data, textStatus, jqXHR)
+																{
+																	const obj = JSON.parse(data);
+																
+																	if(obj.status=='success'){
+																		swal({
+																			title: "Already in use!",
+																			text: "This Vendor PO is linked to Vendor po Confirmation",
+																			//type: "danger",
+																			icon: "success",
+																			button: "Ok",
+																			},function(){ 
+																				window.location.href = "<?php echo base_url().'vendorpo'?>";
+																		});	
+																	}else{
+
+																		$.ajax({
+																			url : "<?php echo base_url();?>deleteVendorpo",
+																			type: "POST",
+																			data : 'id='+elemF.attr('data-id'),
+																			success: function(data, textStatus, jqXHR)
+																			{
+																				const obj = JSON.parse(data);
+																			
+																				if(obj.status=='success'){
+																					swal({
+																						title: "Deleted!",
+																						text: "Vendor PO Deleted Succesfully",
+																						icon: "success",
+																						button: "Ok",
+																						},function(){ 
+																							window.location.href = "<?php echo base_url().'vendorpo'?>";
+																					});	
+																				}
+
+																			},
+																			error: function (jqXHR, textStatus, errorThrown)
+																			{
+																				$(".loader_ajax").hide();
+																			}
+																		})
+																	}
+
+																},
+																error: function (jqXHR, textStatus, errorThrown)
+																{
+																	$(".loader_ajax").hide();
+																}
+															})
+															/*Check If vendor po is already used in vendor PO Confirmation*/
+																						
+
+													}
+
+												},
+												error: function (jqXHR, textStatus, errorThrown)
+												{
+													$(".loader_ajax").hide();
+												}
+											});
+
 									}
 
 								},
@@ -3452,9 +3518,8 @@
 								{
 									$(".loader_ajax").hide();
 								}
-							})
-
-                            /*Check If vendor po is already used in vendor PO Confirmation*/
+							});
+                       
 						}
 						else {
 				swal("Cancelled", "Vendor PO deletion cancelled ", "error");

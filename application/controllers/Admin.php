@@ -24795,8 +24795,50 @@ public function checkvendorpoisenggwithvendorpoconfirmation(){
         $result = $this->admin_model->checkvendorpoisenggwithvendorpoconfirmation(trim($this->input->post('id')));
 
         if ($result) {
-                    $process = 'Check if Supplier PO is Exits in Supplierpo';
+                    $process = 'Check if Vendor PO is Exits in vendorpoconfirmation';
                     $processFunction = 'Admin/checkvendorpoisenggwithvendorpoconfirmation';
+                    $this->logrecord($process,$processFunction);
+                    
+                echo(json_encode(array('status'=>'success')));
+            }
+        else { echo(json_encode(array('status'=>'failed'))); }
+    }else{
+        echo(json_encode(array('status'=>'failed'))); 
+    }
+}
+
+
+
+public function checkvendorpoisassigninVBM(){
+
+    $post_submit = $this->input->post();
+    if($post_submit){
+        $result = $this->admin_model->checkvendorpoisassigninVBM(trim($this->input->post('id')));
+
+        if ($result) {
+                    $process = 'Check if Vendor PO is Exits in Vendor Bill of Material';
+                    $processFunction = 'Admin/checkvendorpoisassigninVBM';
+                    $this->logrecord($process,$processFunction);
+                    
+                echo(json_encode(array('status'=>'success')));
+            }
+        else { echo(json_encode(array('status'=>'failed'))); }
+    }else{
+        echo(json_encode(array('status'=>'failed'))); 
+    }
+}
+
+
+
+public function checkvendorpoisassigninBM(){
+
+    $post_submit = $this->input->post();
+    if($post_submit){
+        $result = $this->admin_model->checkvendorpoisassigninBM(trim($this->input->post('id')));
+
+        if ($result) {
+                    $process = 'Check if Vendor PO is Exits in Bill of Material';
+                    $processFunction = 'Admin/checkvendorpoisassigninBM';
                     $this->logrecord($process,$processFunction);
                     
                 echo(json_encode(array('status'=>'success')));
