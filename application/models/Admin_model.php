@@ -15477,13 +15477,13 @@ public function fetchproductionstatusreportdata($params,$vendor_name,$status,$pa
         {
             $data[$counter]['vendorname'] = $value['vendorname'];
             $data[$counter]['bom_number'] = $value['v_po_number'];
-            $data[$counter]['date'] = $value['date'];
+            $data[$counter]['date'] = date("d-m-Y", strtotime($value['date']));
             $data[$counter]['fg_part_number'] = $value['partno'];
             $data[$counter]['part_description'] = $value['part_description'];
             $data[$counter]['vendor_order_qty'] = $value['vendor_order_qty_co'];
             $data[$counter]['vendor_received_qty'] = $value['expected_qty'];
             $data[$counter]['vendor_received_qtys'] = $value['vendor_received_qty_co'];
-            $data[$counter]['delivery_date'] = $value['delivery_date'];
+            $data[$counter]['delivery_date'] = date("d-m-Y", strtotime($value['delivery_date']));
             $data[$counter]['buyer_name'] = $value['buyer'];
             $data[$counter]['status'] = $value['item_bom_status'];
             $data[$counter]['notes'] = $value['notes'];
