@@ -18547,8 +18547,8 @@ public function downlaod_production_status_report($vendor_name,$status,$vendor_p
     $rowCount = 2;
     foreach ($empInfo as $element) {
 
-        if($element['vpodate']){
-           $vpodate =  date("d-m-Y", strtotime($element['vpodate']));
+        if($element['date']){
+           $vpodate =  date("d-m-Y", strtotime($element['date']));
         }else{
            $vpodate ='';
         }

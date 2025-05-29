@@ -15671,6 +15671,7 @@ public function getallproductionreportstatusdata($vendor_name,$status,$vendor_po
             $data[$counter]['buyer_delivery_date'] = $value['bd'];   
             $data[$counter]['status'] = $value['item_bom_status'];
             $data[$counter]['itemnote'] = $value['itemnote'];
+            $data[$counter]['date'] = date("d-m-Y", strtotime($value['date']));
 
             $counter++; 
         }
