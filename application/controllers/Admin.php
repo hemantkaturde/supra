@@ -2774,10 +2774,15 @@ class Admin extends BaseController
                                 $updateSupplieridinsupplierpo = $this->admin_model->updateSupplieridinsupplierpo(trim($this->input->post('sup_id')),trim($this->input->post('supplier_name')));
 
                                 /*Update Supplier Name In Vendor PO Item and Vendor PO*/
-                                $updateSupplieridinvendorpoandvendorpoitem  = $this->admin_model->updateSupplieridinvendorpoandvendorpoitem(trim($this->input->post('sup_id')),trim($this->input->post('supplier_name')));
+                                 $updateSupplieridinvendorpoandvendorpoitem  = $this->admin_model->updateSupplieridinvendorpoandvendorpoitem(trim($this->input->post('sup_id')),trim($this->input->post('supplier_name')));
 
                                  /*Update Supplier Name In Supplier PO Confirmation*/
                                  $updateSupplieridinSupplierpoconfirmation  = $this->admin_model->updateSupplieridinSupplierpoconfirmation(trim($this->input->post('sup_id')),trim($this->input->post('supplier_name')));
+
+                                 /*Update Supplier Name In BOM*/
+                                 $updateSupplieridinBOM  = $this->admin_model->updateSupplieridinBOM(trim($this->input->post('po_number')),trim($this->input->post('supplier_actual_name')));
+
+
                             }
                         }
                         $save_supplierpo_response['status'] = 'success';
