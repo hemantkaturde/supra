@@ -20745,7 +20745,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
 
 
-        public function updateSupplieridinBOM($po_number,$supplier_actual_name){
+    public function updateSupplieridinBOM($po_number,$supplier_actual_name){
        
         $this->db->select('id'); 
         $this->db->where(TBL_BILL_OF_MATERIAL.'.supplier_po_number', $po_number);
