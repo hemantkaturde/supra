@@ -10390,7 +10390,7 @@ class Admin_model extends CI_Model
   }
   
 
-  public function geteditpackinginstractionsubitem( $id){
+  public function geteditpackinginstractionsubitem($id){
 
         $this->db->select('*');
         $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.id', $id);

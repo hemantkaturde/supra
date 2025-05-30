@@ -9554,6 +9554,7 @@
 						$('#buyer_invoice_date').val(fetchResponse.buyer_invoice_date); 
 						$('#buyer_item_delivery_date').val(fetchResponse.buyer_item_delivery_date); 
 						$('#box_qty').val(fetchResponse.box_qty); 
+						$('#item_po_status').val(fetchResponse.item_po_status); 
 						$('#remark').val(fetchResponse.remark); 
 					
 				},
