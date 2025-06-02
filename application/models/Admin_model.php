@@ -13008,7 +13008,7 @@ public function getCebitnoteitemdeatilsForInvoice($id){
     // $this->db->select('*,'.TBL_RAWMATERIAL.'.gross_weight as rmgrossweight');
     $this->db->select('*');
     // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_CREDIT_NOTE_ITEM.'.part_number');
-    // $this->db->join(TBL_SUPPLIER_PO_MASTER_ITEM, TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id = '.TBL_CREDIT_NOTE_ITEM.'.part_number');
+    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_CREDIT_NOTE_ITEM.'.part_number');
     $this->db->where(TBL_CREDIT_NOTE_ITEM.'.credit_note_id', $id);
     $this->db->group_by(TBL_CREDIT_NOTE_ITEM.'.id');
     $query = $this->db->get(TBL_CREDIT_NOTE_ITEM);
