@@ -24967,7 +24967,7 @@ public function downlaodcreditnote($id){
                         <div>
                             <p>To,</p>
                             <p><b>REF/SQEIPL :</b>'.$getCreditnotedetailsforInvoice['credit_note_number'].'</p>
-                            <p><b>DATE : </b>'.$getCreditnotedetailsforInvoice['address'].'</p>
+                            <p><b>Address : </b>'.$getCreditnotedetailsforInvoice['address'].'</p>
                             <p><b>Buyer Name & Add : </b>'.$getCreditnotedetailsforInvoice['buyer_name'].' / '.$getCreditnotedetailsforInvoice['address'].'</p>
                             <p><b>Buyer PO Number : </b>'.$getCreditnotedetailsforInvoice['sales_order_number'].'</p>
                         <div>    
