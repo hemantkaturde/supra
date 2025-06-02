@@ -12954,12 +12954,15 @@ public function fetchcreditnoterecordstData($params){
             if($this->session->userdata('roleText')=='Superadmin'){
 
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewcreditnoteform/".$value['cerdit_note_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downlaodcreditnote/".$value['cerdit_note_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editcreditnote/".$value['cerdit_note_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['cerdit_note_id']."' class='fa fa-trash-o deletecreditnote' aria-hidden='true'></i>"; 
             }else{
 
                 if($this->session->userdata('roleText')=='Purchase' || $this->session->userdata('roleText')=='Sales'){
                     $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewcreditnoteform/".$value['cerdit_note_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downlaodcreditnote/".$value['cerdit_note_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
+
                     $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editcreditnote/".$value['cerdit_note_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
                     $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['cerdit_note_id']."' class='fa fa-trash-o deletecreditnote' aria-hidden='true'></i>"; 
                 }else{
@@ -12971,6 +12974,46 @@ public function fetchcreditnoterecordstData($params){
         }
     }
     return $data;
+}
+
+
+
+public function getCreditnotedetailsforInvoice($id){
+    $this->db->select(TBL_CREDIT_NOTE.'.*,'.
+                     TBL_BUYER_MASTER.'.buyer_name as buyer_name,'
+                    .TBL_BUYER_MASTER.'.address as address,'
+                    .TBL_BUYER_MASTER.'.landline as landline,'
+                    .TBL_BUYER_MASTER.'.contact_person as contact_person,'
+                    .TBL_BUYER_MASTER.'.mobile as ven_mobile,'
+                    .TBL_BUYER_MASTER.'.email as ven_email,'
+                    .TBL_BUYER_MASTER.'.GSTIN as ven_GSTIN,'
+                    .TBL_BUYER_PO_MASTER.'.sales_order_number as sales_order_number,'
+                    .TBL_BUYER_PO_MASTER.'.date as ven_date,'
+                    .TBL_BUYER_PO_MASTER.'.remark as remark,'
+                    .TBL_CREDIT_NOTE.'.credit_note_number as credit_note_number,'
+                    .TBL_CREDIT_NOTE.'.remark as credit_note_remark,'
+        
+        );
+        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_CREDIT_NOTE.'.buyer_po_number');
+        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_CREDIT_NOTE.'.buyer_name');
+        $this->db->where(TBL_CREDIT_NOTE.'.id', $id);
+        $query = $this->db->get(TBL_CREDIT_NOTE);
+        $fetch_result = $query->row_array();
+        return $fetch_result;
+}
+
+
+public function getCebitnoteitemdeatilsForInvoice($id){
+
+    // $this->db->select('*,'.TBL_RAWMATERIAL.'.gross_weight as rmgrossweight');
+    $this->db->select('*');
+    // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_CREDIT_NOTE_ITEM.'.part_number');
+    // $this->db->join(TBL_SUPPLIER_PO_MASTER_ITEM, TBL_SUPPLIER_PO_MASTER_ITEM.'.part_number_id = '.TBL_CREDIT_NOTE_ITEM.'.part_number');
+    $this->db->where(TBL_CREDIT_NOTE_ITEM.'.credit_note_id', $id);
+    $this->db->group_by(TBL_CREDIT_NOTE_ITEM.'.id');
+    $query = $this->db->get(TBL_CREDIT_NOTE_ITEM);
+    $fetch_result = $query->result_array();
+    return $fetch_result;
 }
 
 

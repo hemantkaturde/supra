@@ -651,7 +651,7 @@ $route['getcurrentlivestock'] = "admin/getcurrentlivestock";
 $route['checkvendorpoisassigninVBM'] = "admin/checkvendorpoisassigninVBM";
 $route['checkvendorpoisassigninBM'] = "admin/checkvendorpoisassigninBM";
 
-
+$route['downlaodcreditnote/(:any)'] = "admin/downlaodcreditnote/$1";
 
 
 
