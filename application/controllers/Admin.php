@@ -25005,7 +25005,7 @@ public function downlaodcreditnote($id){
             </table>';
 
             // <p>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</p>
-    $invoice_name =  $getDebitnotedetailsforInvoice['debit_note_number'].' - '.$getDebitnotedetailsforInvoice['supplier_name'].'.pdf';
+    $invoice_name =  $getCreditnotedetailsforInvoice['credit_note_number'].' - '.$getCreditnotedetailsforInvoice['buyer_name'].'.pdf';
     $mpdf->WriteHTML($html);
     $mpdf->Output($invoice_name,'D'); // opens in browser
 
