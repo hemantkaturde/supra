@@ -12540,6 +12540,8 @@ public function editcreditnote($id){
     $data['buyerList']= $this->admin_model->fetchAllbuyerList();
     $data['getcreditenotedetails']= $this->admin_model->getcreditenotedetailsforedit($id);
     $data['fetchALLpreCredititemList']= $this->admin_model->getcreditnoteitemdetails($id);
+            $data['exportInvoiceList']= $this->admin_model->fetchexportInvoiceList();
+
     $this->loadViews("masters/editcreditnote", $this->global, $data, NULL);
 
 }

@@ -209,9 +209,9 @@
                                                         <div class="col-sm-8">
                                                             <select class="form-control invoice_number" name="invoice_number" id="invoice_number">
                                                                 <option st-id="" value="">Select Invoice Name</option>
-                                                                <!-- <?php foreach ($exportInvoiceList as $key => $value) {?>        
+                                                                 <?php foreach ($exportInvoiceList as $key => $value) {?>        
                                                                     <option value="<?php echo $value['id']; ?>"><?php echo $value['buyer_invoice_number']; ?></option>
-                                                                <?php } ?> -->
+                                                                <?php } ?>
                                                             </select>
                                                             <p class="error invoice_number_error"></p>
                                                         </div>
