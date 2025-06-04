@@ -24927,7 +24927,6 @@ public function downlaodcreditnote($id){
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['invoice_no'].'<br/>'.date('d-m-Y',strtotime($value['invoice_date'])).'</td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['hsn_code'].'</td> 
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['qty'].'</td>
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['price'].'</td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['invoice_value'].'</td> 
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['recivable_amount'].'</td>    
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['diff_credite_note_value'].'</td>    
@@ -24988,7 +24987,6 @@ public function downlaodcreditnote($id){
                     <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>INV. NO. AND DATE</th>
                     <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>HSN CODE  </th>  
                     <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>QTY</th> 
-                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>UNIT</th>  
                     <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>INVOICE AMOUNT</th>  
                     <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>RECEIVABLE AMOUNT</th>  
                     <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>DIFFERENCE</th>
