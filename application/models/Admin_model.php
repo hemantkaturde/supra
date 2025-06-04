@@ -13011,6 +13011,7 @@ public function getCebitnoteitemdeatilsForInvoice($id){
     $this->db->select('*');
     // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_CREDIT_NOTE_ITEM.'.part_number');
     $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_CREDIT_NOTE_ITEM.'.part_number');
+    $this->db->join(TBL_PACKING_INSTRACTION_DETAILS, TBL_PACKING_INSTRACTION_DETAILS.'.id = '.TBL_CREDIT_NOTE_ITEM.'.invoice_no');
     $this->db->where(TBL_CREDIT_NOTE_ITEM.'.credit_note_id', $id);
     $this->db->group_by(TBL_CREDIT_NOTE_ITEM.'.id');
     $query = $this->db->get(TBL_CREDIT_NOTE_ITEM);
