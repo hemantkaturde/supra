@@ -12982,6 +12982,7 @@ public function getCreditnotedetailsforInvoice($id){
     $this->db->select(TBL_CREDIT_NOTE.'.*,'.
                      TBL_BUYER_MASTER.'.buyer_name as buyer_name,'
                     .TBL_BUYER_MASTER.'.address as address,'
+                    .TBL_BUYER_PO_MASTER.'.buyer_po_number as original_buyer_po_number,'
                     .TBL_BUYER_MASTER.'.landline as landline,'
                     .TBL_BUYER_MASTER.'.contact_person as contact_person,'
                     .TBL_BUYER_MASTER.'.mobile as ven_mobile,'
@@ -12992,6 +12993,7 @@ public function getCreditnotedetailsforInvoice($id){
                     .TBL_BUYER_PO_MASTER.'.remark as remark,'
                     .TBL_CREDIT_NOTE.'.credit_note_number as credit_note_number,'
                     .TBL_CREDIT_NOTE.'.remark as credit_note_remark,'
+                    .TBL_CREDIT_NOTE.'.date as credit_note_date,'
         
         );
         $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_CREDIT_NOTE.'.buyer_po_number');

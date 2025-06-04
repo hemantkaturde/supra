@@ -24961,15 +24961,23 @@ public function downlaodcreditnote($id){
                     </tr>
             </table>
 
+             <table style=" width: 100%;text-align: left;margin-top:10px;margin-bottom:10px;font-family:cambria;">
+                    <tr>
+                        <td>
+                          <p><b>Date :</b> '.date('d-m-Y',strtotime($getCreditnotedetailsforInvoice['credit_note_date'])).'</p>
+                        </td>
+                    </tr>
+             </table>
+
             <table style=" width: 100%;text-align: left;border-collapse: collapse;font-family:cambria;font-size:13px;">
                 <tr>
                     <td width="50%">
                         <div>
                             <p>To,</p>
                             <p><b>REF/SQEIPL :</b>'.$getCreditnotedetailsforInvoice['credit_note_number'].'</p>
-                            <p><b>DATE : </b>'.$getCreditnotedetailsforInvoice['address'].'</p>
-                            <p><b>Buyer Name & Add : </b>'.$getCreditnotedetailsforInvoice['buyer_name'].' / '.$getCreditnotedetailsforInvoice['address'].'</p>
-                            <p><b>Buyer PO Number : </b>'.$getCreditnotedetailsforInvoice['sales_order_number'].'</p>
+                            <p><b>Address : </b>'.$getCreditnotedetailsforInvoice['address'].'</p>
+                            <p><b>Buyer Name : </b>'.$getCreditnotedetailsforInvoice['buyer_name'].'</p>
+                            <p><b>Buyer PO Number : </b>'.$getCreditnotedetailsforInvoice['original_buyer_po_number'].'</p>
                         <div>    
                     </td> 
                 </tr>
