@@ -12962,7 +12962,6 @@ public function fetchcreditnoterecordstData($params){
                 if($this->session->userdata('roleText')=='Purchase' || $this->session->userdata('roleText')=='Sales'){
                     $data[$counter]['action'] .= "<a href='".ADMIN_PATH."viewcreditnoteform/".$value['cerdit_note_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-file-text-o' aria-hidden='true'></i></a>   &nbsp ";
                     $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downlaodcreditnote/".$value['cerdit_note_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
-
                     $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editcreditnote/".$value['cerdit_note_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
                     $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['cerdit_note_id']."' class='fa fa-trash-o deletecreditnote' aria-hidden='true'></i>"; 
                 }else{
