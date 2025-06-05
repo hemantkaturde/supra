@@ -40,7 +40,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="date">Date <span class="required">*</span></label>
-                                             <input readonly  type="text" class="form-control datepicker"  value="<?=$getcreditenotedetails['date']?>" id="date" name="date" required>
+                                             <input readonly  type="text" class="form-control datepicker"  value="<?=$getcreditenotedetails['credit_note_date']?>" id="date" name="date" required>
                                             <p class="error date_error"></p>
                                         </div>
                                     </div>
