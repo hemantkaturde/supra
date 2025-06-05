@@ -12917,7 +12917,7 @@ class Admin_model extends CI_Model
 }
 
 public function fetchcreditnoterecordstData($params){
-    $this->db->select('*,'.TBL_BUYER_MASTER.'.buyer_name as buyer,'.TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_CREDIT_NOTE.'.id as cerdit_note_id,'.TBL_CREDIT_NOTE.'.remark as creditnoteremark');
+    $this->db->select('*,'.TBL_BUYER_MASTER.'.buyer_name as buyer,'.TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_CREDIT_NOTE.'.id as cerdit_note_id,'.TBL_CREDIT_NOTE.'.remark as creditnoteremark,'.TBL_CREDIT_NOTE.'.date as crdit_note_date');
 
     if($params['search']['value'] != "") 
     {
@@ -12944,7 +12944,7 @@ public function fetchcreditnoterecordstData($params){
         foreach ($fetch_result as $key => $value)
         {
             $data[$counter]['credit_note_number'] =$value['credit_note_number'];
-            $data[$counter]['date'] =$value['date'];
+            $data[$counter]['date'] =$value['crdit_note_date'];
             $data[$counter]['buyer_name'] =$value['buyer'];
             $data[$counter]['buyer_po_number'] =$value['sales_order_number'];
             $data[$counter]['currency'] =$value['currency'];
@@ -13008,7 +13008,7 @@ public function getCreditnotedetailsforInvoice($id){
 public function getCebitnoteitemdeatilsForInvoice($id){
 
     // $this->db->select('*,'.TBL_RAWMATERIAL.'.gross_weight as rmgrossweight');
-    $this->db->select('*');
+    $this->db->select('*,'.TBL_CREDIT_NOTE_ITEM.'.remark as cr_remark');
     // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_CREDIT_NOTE_ITEM.'.part_number');
     $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_CREDIT_NOTE_ITEM.'.part_number');
     $this->db->join(TBL_PACKING_INSTRACTION_DETAILS, TBL_PACKING_INSTRACTION_DETAILS.'.id = '.TBL_CREDIT_NOTE_ITEM.'.invoice_no');
@@ -13053,7 +13053,7 @@ public function deletecreditnoteitem($id){
 
 
 public function getcreditenotedetailsforedit($id){
-    $this->db->select('*,'.TBL_BUYER_MASTER.'.buyer_name as buyer,'.TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_CREDIT_NOTE.'.id as cerdit_note_id,'.TBL_BUYER_PO_MASTER.'.id as buyer_po_number_id,'.TBL_CREDIT_NOTE.'.remark as creditnoteremark');
+    $this->db->select('*,'.TBL_BUYER_MASTER.'.buyer_name as buyer,'.TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_CREDIT_NOTE.'.id as cerdit_note_id,'.TBL_BUYER_PO_MASTER.'.id as buyer_po_number_id,'.TBL_CREDIT_NOTE.'.remark as creditnoteremark,'.TBL_CREDIT_NOTE.'.date as credit_note_date');
     $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_CREDIT_NOTE.'.buyer_po_number');
     $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_CREDIT_NOTE.'.buyer_name');
     $this->db->where(TBL_CREDIT_NOTE.'.status', 1);
