@@ -118,7 +118,7 @@
                                                         <th>Inv Value</th>
                                                         <th>Recived Amount</th>
                                                         <th>Credit Note value</th>
-                                                        <th>Remark</th>
+                                                        <th>Reason</th>
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>
@@ -275,7 +275,7 @@
 
 
                                                     <div class="form-group row">
-                                                        <label class="col-sm-4 col-form-label">Remark</label>
+                                                        <label class="col-sm-4 col-form-label">Reason</label>
                                                         <div class="col-sm-8">
                                                            <textarea type="text" class="form-control"  id="item_remark"  name="item_remark"></textarea>
                                                            <p class="error item_remark_error"></p>

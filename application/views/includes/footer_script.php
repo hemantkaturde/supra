@@ -19671,7 +19671,7 @@
 						$('#invoice_date').val(fetchResponse.invoice_date); 
 						$('#qty').val(fetchResponse.qty); 
 						$('#rate').val(fetchResponse.price); 
-						$('#invoice_value').val(fetchResponse.price); 
+						$('#invoice_value').val(fetchResponse.invoice_value); 
 						$('#recivable_amount').val(fetchResponse.recivable_amount); 
 						$('#diff_value').val(fetchResponse.diff_credite_note_value); 
 					    $('#item_remark').val(fetchResponse.remark); 
