@@ -20348,11 +20348,30 @@ public function downlaodcustomercomplaint($id){
             </tr>
          </table>
 
+
+             <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
+            <tr style="border: 1px solid black;" valign="top">
+                <td width="100%" style="padding: 5px;text-align: left;">
+                    <p>2.CORRECTION: </p>
+                </td> 
+            </tr>
+
+            <tr style="border: 1px solid black;" valign="top">
+                <td width="100%" style="padding: 5px;text-align: left;">
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. $getcustomercomplaintdetailsfordownalod[0]['correction'].'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                       <p>'. str_repeat('&nbsp;', 5).'</p>
+                </td> 
+            </tr>
+         </table>
+
          
          <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
             <tr style="border: 1px solid black;" valign="top">
                 <td width="100%" style="padding: 5px;text-align: left;">
-                    <p>2.ROOT CAUSE: </p>
+                    <p>3.ROOT CAUSE: </p>
                 </td> 
             </tr>
 
@@ -20368,23 +20387,7 @@ public function downlaodcustomercomplaint($id){
          </table>
 
 
-           <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
-            <tr style="border: 1px solid black;" valign="top">
-                <td width="100%" style="padding: 5px;text-align: left;">
-                    <p>3.CORRECTION: </p>
-                </td> 
-            </tr>
-
-            <tr style="border: 1px solid black;" valign="top">
-                <td width="100%" style="padding: 5px;text-align: left;">
-                       <p>'. str_repeat('&nbsp;', 5).'</p>
-                       <p>'. $getcustomercomplaintdetailsfordownalod[0]['corrective_action_taken'].'</p>
-                       <p>'. str_repeat('&nbsp;', 5).'</p>
-                       <p>'. str_repeat('&nbsp;', 5).'</p>
-                       <p>'. str_repeat('&nbsp;', 5).'</p>
-                </td> 
-            </tr>
-         </table>
+       
 
           <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
             <tr style="border: 1px solid black;" valign="top">
@@ -20407,7 +20410,7 @@ public function downlaodcustomercomplaint($id){
             <tr style="border: 1px solid black;" valign="top">
                 <td width="60%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
                        <p>'. str_repeat('&nbsp;', 5).'</p>
-                       <p>'. $getcustomercomplaintdetailsfordownalod[0]['correction'].'</p>
+                       <p>'. $getcustomercomplaintdetailsfordownalod[0]['corrective_action_taken'].'</p>
                        <p>'. str_repeat('&nbsp;', 5).'</p>
                        <p>'. str_repeat('&nbsp;', 5).'</p>
                        <p>'. str_repeat('&nbsp;', 5).'</p>
