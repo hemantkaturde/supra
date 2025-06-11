@@ -20349,28 +20349,17 @@ public function downlaodcustomercomplaint($id){
          </table>
 
 
-<<<<<<< HEAD
              <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
             <tr style="border: 1px solid black;" valign="top">
                 <td width="100%" style="padding: 5px;text-align: left;">
                     <p>2.CORRECTION: </p>
-=======
-          <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
-            <tr style="border: 1px solid black;" valign="top">
-                <td width="100%" style="padding: 5px;text-align: left;">
-                    <p>3.ROOT CAUSE: </p>
->>>>>>> dfa62d90f7a2740e77627f4c848dd0530fab8b3d
                 </td> 
             </tr>
 
             <tr style="border: 1px solid black;" valign="top">
                 <td width="100%" style="padding: 5px;text-align: left;">
                        <p>'. str_repeat('&nbsp;', 5).'</p>
-<<<<<<< HEAD
                        <p>'. $getcustomercomplaintdetailsfordownalod[0]['correction'].'</p>
-=======
-                       <p>'. $getcustomercomplaintdetailsfordownalod[0]['corrective_action_taken'].'</p>
->>>>>>> dfa62d90f7a2740e77627f4c848dd0530fab8b3d
                        <p>'. str_repeat('&nbsp;', 5).'</p>
                        <p>'. str_repeat('&nbsp;', 5).'</p>
                        <p>'. str_repeat('&nbsp;', 5).'</p>
@@ -20382,11 +20371,7 @@ public function downlaodcustomercomplaint($id){
          <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
             <tr style="border: 1px solid black;" valign="top">
                 <td width="100%" style="padding: 5px;text-align: left;">
-<<<<<<< HEAD
                     <p>3.ROOT CAUSE: </p>
-=======
-                    <p>2.IMMEDIATE ACTION TAKEN: </p>
->>>>>>> dfa62d90f7a2740e77627f4c848dd0530fab8b3d
                 </td> 
             </tr>
 
