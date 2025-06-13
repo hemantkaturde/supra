@@ -21375,7 +21375,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['buyer_invoice_number'] = $value['buyer_invoice_number'];
                 $data[$counter]['buyer_invoice_date'] = $value['buyer_invoice_date'];
                 $data[$counter]['mode_of_shipment'] =$value['mode_of_shipment'];
-                $data[$counter]['current_stock'] =$value['current_stock'];
+                // $data[$counter]['current_stock'] =$value['current_stock'];
                 $data[$counter]['qty_in_kgs3'] =$bal_qty;
 
                 $counter++; 
