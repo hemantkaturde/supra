@@ -21426,7 +21426,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         }
 
 
-         if ($from_date != 'NA') {
+         if ($buyerpoid != 'NA') {
             $this->db->where(TBL_BUYER_PO_MASTER.".id", $buyerpoid);
         }
 
