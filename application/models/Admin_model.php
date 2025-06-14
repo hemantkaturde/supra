@@ -21187,7 +21187,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     public function getexporthistoryreportdata($params,$from_date,$to_date,$buyer_name,$part_number){
 
 
-        $this->db->select('*,'.TBL_BUYER_MASTER.'.buyer_name as by_name,'.TBL_FINISHED_GOODS.'.part_number as p_name,'.TBL_BUYER_PO_MASTER.'.buyer_po_number as original,'.TBL_BUYER_PO_MASTER_ITEM.'.id as buyer_item_number,'.TBL_PACKING_INSTRACTION_DETAILS.'.id as packgaing_instructin_id,'.TBL_BUYER_PO_MASTER.'.buyer_po_date as buyer_po_date,'.TBL_BUYER_PO_MASTER.'.id as buyerpoid,'.TBL_PACKING_INSTRACTION.'.id as packgaing_instructin_id_main');
+        $this->db->select('*,'.TBL_BUYER_MASTER.'.buyer_name as by_name,'.TBL_FINISHED_GOODS.'.part_number as p_name,'.TBL_BUYER_PO_MASTER.'.buyer_po_number as original,'.TBL_BUYER_PO_MASTER_ITEM.'.id as buyer_item_number,'.TBL_PACKING_INSTRACTION_DETAILS.'.id as packgaing_instructin_id,'.TBL_BUYER_PO_MASTER.'.buyer_po_date as buyer_po_date,'.TBL_BUYER_PO_MASTER.'.id as buyerpoid,'.TBL_PACKING_INSTRACTION.'.id as packgaing_instructin_id_main,'.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
         $this->db->from(TBL_BUYER_PO_MASTER_ITEM);
         $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id');
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_BUYER_PO_MASTER.'.buyer_name_id');
@@ -21249,7 +21249,9 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
                 $buyerpoid  = $value['buyerpoid'];
 
-                $getPreviousbaldependsonpackgingid = $this->getPreviousbaldependsonpackgingid($buyerpoid,$packgaing_instructin_id,$packgaing_instructin_details_id,$part_number,$buyer_name,$from_date,$to_date);
+                $part_number_id  = $value['part_number_id'];
+
+                $getPreviousbaldependsonpackgingid = $this->getPreviousbaldependsonpackgingid($buyerpoid,$packgaing_instructin_id,$packgaing_instructin_details_id,$part_number_id,$buyer_name,$from_date,$to_date);
 
 
                 if($getPreviousbaldependsonpackgingid[0]['buyer_invoice_qty']){
