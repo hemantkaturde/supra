@@ -21251,8 +21251,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
                 $getPreviousbaldependsonpackgingid = $this->getPreviousbaldependsonpackgingid($buyerpoid,$packgaing_instructin_id,$packgaing_instructin_details_id,$part_number,$buyer_name,$from_date,$to_date);
 
-                if($getPreviousbaldependsonpackgingid[0]['buyer_invoice_qty']){
-                    $previous_stock = ($value['order_oty']-$value['buyer_invoice_qty'])-$getPreviousbaldependsonpackgingid[0]['buyer_invoice_qty'];
+                if($getPreviousbaldependsonpackgingid[0]['previous_bal']){
+                    $previous_stock = $value['order_oty']- $getPreviousbaldependsonpackgingid[0]['previous_bal'];
                 }else{
                     $previous_stock = 0;
 
@@ -21290,7 +21290,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     public function getPreviousbaldependsonpackgingid($buyerpoid,$packgaing_instructin_id,$packgaing_instructin_details_id,$part_number,$buyer_name,$from_date,$to_date){
 
 
-        $this->db->select('buyer_invoice_qty');
+        $this->db->select(TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_qty',TBL_BUYER_PO_MASTER_ITEM.'.order_oty');
         $this->db->from(TBL_BUYER_PO_MASTER_ITEM);
         $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id');
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_BUYER_PO_MASTER.'.buyer_name_id');
@@ -21314,21 +21314,29 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         //     $this->db->where(TBL_BUYER_PO_MASTER.".id", $buyerpoid);
         // }
 
-
        
-            $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.".id <", $packgaing_instructin_details_id);
-        
-
-    
-            $this->db->where(TBL_PACKING_INSTRACTION_DETAILS .".packing_instract_id", $packgaing_instructin_id);
-        
-
+        $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.".id <", $packgaing_instructin_details_id);
+        $this->db->where(TBL_PACKING_INSTRACTION_DETAILS .".packing_instract_id", $packgaing_instructin_id);
         //$this->db->group_by(TBL_PACKING_INSTRACTION_DETAILS.'.id');
         $this->db->order_by(TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_date', 'DESC');
         $this->db->limit(1);
         $query = $this->db->get();
         $fetch_result = $query->result_array();
         return $fetch_result;
+
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['previous_bal'] = $value['order_oty']-$value['buyer_invoice_qty'];
+                $counter++; 
+            }
+
+        }
+     return $data;
+
     }
 
 
