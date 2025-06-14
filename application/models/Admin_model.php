@@ -21253,7 +21253,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
 
                 if($getPreviousbaldependsonpackgingid[0]['prev_bal']){
-                    $previous_stock = $value['prev_bal'];
+                    $previous_stock = $getPreviousbaldependsonpackgingid[0]['prev_bal'];
                 }else{
                     $previous_stock = 0;
 
