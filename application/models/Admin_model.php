@@ -21358,7 +21358,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 }
                
                 if( $previous_stock == 0){
-                      $bal_qty = $value['order_oty']-$value['buyer_invoice_qty'];
+                   $bal_qty = $value['order_oty']-$value['buyer_invoice_qty'];
                 }else{
 
                   $bal_qty = $previous_stock -$value['buyer_invoice_qty'];
@@ -21439,7 +21439,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         }
 
 
-        $this->db->group_by(TBL_BUYER_PO_MASTER_ITEM.'.id');
+        $this->db->group_by(TBL_PACKING_INSTRACTION_DETAILS.'.id');
         $this->db->order_by(TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_date', 'DESC');
         $this->db->limit($params['length'], $params['start']);
         $query = $this->db->get();
