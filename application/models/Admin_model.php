@@ -21264,6 +21264,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                    $bal_qty = $previous_stock -$getPreviousbaldependsonpackgingid[0]['buyer_invoice_qty'];
                 }
 
+                
                 $data[$counter]['buyer_name'] = $value['by_name'];
                 $data[$counter]['part_number'] = $value['p_name'];
                 $data[$counter]['sales_order_number'] = $value['sales_order_number'].'-'.$value['original'];
