@@ -21303,9 +21303,9 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->join(TBL_PREEXPORT, TBL_PREEXPORT_ITEM_DETAILS.'.pre_export_id = '.TBL_PREEXPORT.'.id');
 
 
-        if ($part_number != 'NA') {
-            $this->db->where(TBL_FINISHED_GOODS.'.fin_id', $part_number);
-        }
+        // if ($part_number != 'NA') {
+        //     $this->db->where(TBL_FINISHED_GOODS.'.fin_id', $part_number);
+        // }
 
         // if ($buyer_name != 'NA') {
         //     $this->db->where(TBL_BUYER_MASTER.'.buyer_id', $buyer_name);
@@ -21317,13 +21317,13 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         // }
 
 
-        if ($packgaing_instructin_details_id != 'NA') {
-            $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.".id >", $packgaing_instructin_details_id);
-        }
+       
+            $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.".id <", $packgaing_instructin_details_id);
+        
 
-        if ($packgaing_instructin_id != 'NA') {
+    
             $this->db->where(TBL_PACKING_INSTRACTION_DETAILS .".packing_instract_id", $packgaing_instructin_id);
-        }
+        
 
         //$this->db->group_by(TBL_PACKING_INSTRACTION_DETAILS.'.id');
         $this->db->order_by(TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_date', 'DESC');
