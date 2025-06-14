@@ -21318,7 +21318,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
 
         if ($packgaing_instructin_details_id != 'NA') {
-            $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.".id <", $packgaing_instructin_details_id);
+            $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.".id >", $packgaing_instructin_details_id);
         }
 
         if ($packgaing_instructin_id != 'NA') {
