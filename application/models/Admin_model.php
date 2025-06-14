@@ -21252,8 +21252,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $getPreviousbaldependsonpackgingid = $this->getPreviousbaldependsonpackgingid($buyerpoid,$packgaing_instructin_id,$packgaing_instructin_details_id,$part_number,$buyer_name,$from_date,$to_date);
 
 
-                if($getPreviousbaldependsonpackgingid[0]['buyer_invoice_qty']){
-                    $previous_stock = $value['order_oty'] - $getPreviousbaldependsonpackgingid[0]['buyer_invoice_qty'];
+                if($getPreviousbaldependsonpackgingid[0]['prev_bal']){
+                    $previous_stock = $value['prev_bal'];
                 }else{
                     $previous_stock = 0;
 
@@ -21336,6 +21336,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             foreach ($fetch_result as $key => $value)
             {
                 $data[$counter]['buyer_invoice_qty'] = $value['buyer_invoice_qty'];
+
+                 $data[$counter]['prev_bal'] = $value['order_oty'] - $value['buyer_invoice_qty'];
                 $counter++; 
             }
 
