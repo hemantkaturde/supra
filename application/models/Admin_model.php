@@ -21302,9 +21302,9 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->join(TBL_PREEXPORT, TBL_PREEXPORT_ITEM_DETAILS.'.pre_export_id = '.TBL_PREEXPORT.'.id');
 
 
-        if ($part_number != 'NA') {
+        // if ($part_number != 'NA') {
             $this->db->where(TBL_FINISHED_GOODS.'.fin_id', $part_number);
-        }
+        // }
 
         // if ($buyer_name != 'NA') {
         //     $this->db->where(TBL_BUYER_MASTER.'.buyer_id', $buyer_name);
