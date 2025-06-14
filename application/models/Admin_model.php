@@ -21251,23 +21251,20 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
                 $getPreviousbaldependsonpackgingid = $this->getPreviousbaldependsonpackgingid($buyerpoid,$packgaing_instructin_id,$packgaing_instructin_details_id,$part_number,$buyer_name,$from_date,$to_date);
 
-
                 if($getPreviousbaldependsonpackgingid){
-                    $previous_stock = $value['order_oty']- $getPreviousbaldependsonpackgingid[0]['buyer_invoice_qty'];
-
-                    $bal_qty = 500;
+                    $previous_stock = 500000;
                 }else{
                     $previous_stock = 0;
-                    $bal_qty = $value['order_oty']-$value['buyer_invoice_qty'];
+
                 }
                
-                // if( $previous_stock == 0){
-                //    $bal_qty = $value['order_oty']-$value['buyer_invoice_qty'];
-                // }else{
+                if( $previous_stock == 0){
+                   $bal_qty = $value['order_oty']-$value['buyer_invoice_qty'];
+                }else{
 
-                //   $bal_qty = $previous_stock -$value['buyer_invoice_qty'];
+                   $bal_qty = $previous_stock -$value['buyer_invoice_qty'];
                      
-                // }
+                }
 
                 $data[$counter]['buyer_name'] = $value['by_name'];
                 $data[$counter]['part_number'] = $value['p_name'];
