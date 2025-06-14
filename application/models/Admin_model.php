@@ -21307,14 +21307,14 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             $this->db->where(TBL_FINISHED_GOODS.'.fin_id', $part_number);
         }
 
-        if ($buyer_name != 'NA') {
-            $this->db->where(TBL_BUYER_MASTER.'.buyer_id', $buyer_name);
-        }
+        // if ($buyer_name != 'NA') {
+        //     $this->db->where(TBL_BUYER_MASTER.'.buyer_id', $buyer_name);
+        // }
 
 
-        if ($buyerpoid != 'NA') {
-            $this->db->where(TBL_BUYER_PO_MASTER.".id", $buyerpoid);
-        }
+        // if ($buyerpoid != 'NA') {
+        //     $this->db->where(TBL_BUYER_PO_MASTER.".id", $buyerpoid);
+        // }
 
 
         if ($packgaing_instructin_details_id != 'NA') {
