@@ -21322,7 +21322,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->limit(1);
         $query = $this->db->get();
         $fetch_result = $query->result_array();
-        return $fetch_result;
+        // return $fetch_result;
 
         $data = array();
         $counter = 0;
