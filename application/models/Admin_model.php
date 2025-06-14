@@ -21256,13 +21256,12 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                     $previous_stock = $value['order_oty'] - $getPreviousbaldependsonpackgingid[0]['buyer_invoice_qty'];
                 }else{
                     $previous_stock = 0;
-
                 }
                
-                if( $previous_stock == 0){
+                if($previous_stock == 0){
                    $bal_qty = $value['order_oty']-$value['buyer_invoice_qty'];
                 }else{
-                   $bal_qty = $previous_stock -$value['buyer_invoice_qty'];
+                   $bal_qty = $previous_stock -$getPreviousbaldependsonpackgingid[0]['buyer_invoice_qty'];
                 }
 
                 $data[$counter]['buyer_name'] = $value['by_name'];
@@ -21319,15 +21318,11 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.".id <", $packgaing_instructin_details_id);
         // $this->db->where(TBL_PACKING_INSTRACTION_DETAILS .".packing_instract_id", $packgaing_instructin_id);
         //$this->db->group_by(TBL_PACKING_INSTRACTION_DETAILS.'.id');
-        $this->db->order_by(TBL_PACKING_INSTRACTION_DETAILS.'.id', 'ASC');
+        $this->db->order_by(TBL_PACKING_INSTRACTION_DETAILS.'.id', 'DESC');
         $this->db->limit(1);
         $query = $this->db->get();
         $fetch_result = $query->result_array();
-        // return $fetch_result;
-
-        // print_r($this->db->last_query());
-
-        // exit;
+  
 
         $data = array();
         $counter = 0;
@@ -21336,8 +21331,6 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             foreach ($fetch_result as $key => $value)
             {
                 $data[$counter]['buyer_invoice_qty'] = $value['buyer_invoice_qty'];
-
-                 $data[$counter]['prev_bal'] = $value['order_oty'] - $value['buyer_invoice_qty'];
                 $counter++; 
             }
 
