@@ -21291,7 +21291,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     public function getPreviousbaldependsonpackgingid($buyerpoid,$packgaing_instructin_id,$packgaing_instructin_details_id,$part_number,$buyer_name,$from_date,$to_date){
 
 
-        $this->db->select(sum(TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_qty') ,TBL_BUYER_PO_MASTER_ITEM.'.order_oty');
+        $this->db->select('SUM(' . TBL_PACKING_INSTRACTION_DETAILS . '.buyer_invoice_qty) AS total_buyer_invoice_qty');
+
         $this->db->from(TBL_BUYER_PO_MASTER_ITEM);
         $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id');
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_BUYER_PO_MASTER.'.buyer_name_id');
@@ -21338,7 +21339,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         {
             foreach ($fetch_result as $key => $value)
             {
-                $data[$counter]['buyer_invoice_qty'] = $value['buyer_invoice_qty'];
+                $data[$counter]['buyer_invoice_qty'] = $value['total_buyer_invoice_qty'];
                 $counter++; 
             }
 
