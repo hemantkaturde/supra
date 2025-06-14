@@ -21319,7 +21319,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.".id <", $packgaing_instructin_details_id);
         // $this->db->where(TBL_PACKING_INSTRACTION_DETAILS .".packing_instract_id", $packgaing_instructin_id);
         //$this->db->group_by(TBL_PACKING_INSTRACTION_DETAILS.'.id');
-        $this->db->order_by(TBL_PACKING_INSTRACTION_DETAILS.'.id', 'ASC');
+        $this->db->order_by(TBL_PACKING_INSTRACTION_DETAILS.'.id', 'DESC');
         $this->db->limit(1);
         $query = $this->db->get();
         $fetch_result = $query->result_array();
@@ -21337,7 +21337,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             {
                 $data[$counter]['buyer_invoice_qty'] = $value['buyer_invoice_qty'];
 
-                 $data[$counter]['prev_bal'] = $value['order_oty'] - $value['buyer_invoice_qty'];
+                $data[$counter]['prev_bal'] = $value['order_oty'] - $value['buyer_invoice_qty'];
                 $counter++; 
             }
 
