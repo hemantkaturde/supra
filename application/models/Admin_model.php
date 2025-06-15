@@ -21420,10 +21420,9 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             $this->db->where(TBL_BUYER_PO_MASTER.".date <=", $to_date);
         }
 
-        $this->db->group_by(TBL_BUYER_PO_MASTER_ITEM.'.id');
-
+        $this->db->group_by(TBL_PACKING_INSTRACTION_DETAILS.'.id');
+        $this->db->order_by(TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_date', 'DESC');
         // $this->db->where(TBL_PACKING_CHALLAN.'.status', 1);
-        $this->db->order_by(TBL_PACKING_INSTRACTION_DETAILS.'.id','DESC');
         $query = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
         $fetch_result = $query->result_array();
 
