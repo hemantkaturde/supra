@@ -21263,13 +21263,11 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                     $previous_stock = 0;
                 }
                
-                // if($previous_stock == 0){
-                //    $bal_qty = $value['order_oty']-$value['buyer_invoice_qty'];
-                // }else{
-                //    $bal_qty = $previous_stock -$value['buyer_invoice_qty'];
-                // }
-
-                $bal_qty =0;
+                if($previous_stock == 0){
+                   $bal_qty = $value['order_oty']-$value['buyer_invoice_qty'];
+                }else{
+                   $bal_qty = $previous_stock -$value['buyer_invoice_qty'];
+                }
 
                 $data[$counter]['buyer_name'] = $value['by_name'];
                 $data[$counter]['part_number'] = $value['p_name'];
