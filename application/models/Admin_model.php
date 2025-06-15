@@ -21176,9 +21176,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
         $this->db->group_by(TBL_PACKING_INSTRACTION_DETAILS.'.id');
         $this->db->order_by(TBL_PACKING_INSTRACTION_DETAILS.'.buyer_invoice_date', 'DESC');
-        $this->db->limit($params['length'], $params['start']);
         $query = $this->db->get();
-        // $fetch_result = $query->result_array();
+        //$fetch_result = $query->result_array();
 
         $rowcount = $query->num_rows();
         return $rowcount;
