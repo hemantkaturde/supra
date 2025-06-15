@@ -21244,10 +21244,9 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
                 $packgaing_instructin_id= $value['packgaing_instructin_id_main'];
                 $packgaing_instructin_details_id= $value['packgaing_instructin_id'];
-
                 $buyerpoid  = $value['buyerpoid'];
-
                 $part_number_id  = $value['part_number_id'];
+
 
                 $getPreviousbaldependsonpackgingid = $this->getPreviousbaldependsonpackgingid($buyerpoid,$packgaing_instructin_id,$packgaing_instructin_details_id,$part_number_id,$buyer_name,$from_date,$to_date);
 
@@ -21379,7 +21378,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     //     $this->db->join(TBL_PREEXPORT_ITEM_DETAILS, TBL_PREEXPORT_ITEM_DETAILS.'.pre_export_id = '.TBL_PREEXPORT.'.id  and '.TBL_PREEXPORT_ITEM_DETAILS.'.part_number= '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
 
 
-       $this->db->select('*,'.TBL_BUYER_MASTER.'.buyer_name as by_name,'.TBL_FINISHED_GOODS.'.part_number as p_name,'.TBL_BUYER_PO_MASTER.'.buyer_po_number as original,'.TBL_BUYER_PO_MASTER_ITEM.'.id as buyer_item_number,'.TBL_PACKING_INSTRACTION_DETAILS.'.id as packgaing_instructin_id,'.TBL_BUYER_PO_MASTER.'.buyer_po_date as buyer_po_date,'.TBL_BUYER_PO_MASTER.'.id as buyerpoid');
+        $this->db->select('*,'.TBL_BUYER_MASTER.'.buyer_name as by_name,'.TBL_FINISHED_GOODS.'.part_number as p_name,'.TBL_BUYER_PO_MASTER.'.buyer_po_number as original,'.TBL_BUYER_PO_MASTER_ITEM.'.id as buyer_item_number,'.TBL_PACKING_INSTRACTION_DETAILS.'.id as packgaing_instructin_id,'.TBL_BUYER_PO_MASTER.'.buyer_po_date as buyer_po_date,'.TBL_BUYER_PO_MASTER.'.id as buyerpoid,'.TBL_PACKING_INSTRACTION.'.id as packgaing_instructin_id_main,'.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
         $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id  = '.TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id');
         $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id  = '.TBL_BUYER_PO_MASTER.'.buyer_name_id');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id  = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
@@ -21436,25 +21435,25 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             {
 
 
-                $packgaing_instructin_id= $value['packgaing_instructin_id'];
+                $packgaing_instructin_id= $value['packgaing_instructin_id_main'];
+                $packgaing_instructin_details_id= $value['packgaing_instructin_id'];
+                $buyerpoid  = $value['buyerpoid'];
+                $part_number_id  = $value['part_number_id'];
+                
 
-                $buyerpoid= $value['buyerpoid'];
+                $getPreviousbaldependsonpackgingid = $this->getPreviousbaldependsonpackgingid($buyerpoid,$packgaing_instructin_id,$packgaing_instructin_details_id,$part_number_id,$buyer_name,$from_date,$to_date);
 
-                $getPreviousbaldependsonpackgingid = $this->getPreviousbaldependsonpackgingid($buyerpoid,$packgaing_instructin_id,$part_number,$buyer_name,$from_date,$to_date);
-
-
-                if($getPreviousbaldependsonpackgingid){
-                    $previous_stock = $value['order_oty']- $getPreviousbaldependsonpackgingid[0]['buyer_invoice_qty'];
+                if($getPreviousbaldependsonpackgingid['buyer_invoice_qty']){
+                    
+                    $previous_stock = $value['order_oty'] - $getPreviousbaldependsonpackgingid['buyer_invoice_qty'];
                 }else{
                     $previous_stock = 0;
                 }
                
-                if( $previous_stock == 0){
-                      $bal_qty = $value['order_oty']-$value['buyer_invoice_qty'];
+                if($previous_stock == 0){
+                   $bal_qty = $value['order_oty']-$value['buyer_invoice_qty'];
                 }else{
-
-                  $bal_qty = $previous_stock -$value['buyer_invoice_qty'];
-                     
+                   $bal_qty = $previous_stock -$value['buyer_invoice_qty'];
                 }
 
                 $data[$counter]['buyer_name'] = $value['by_name'];
