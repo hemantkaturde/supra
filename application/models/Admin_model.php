@@ -20798,13 +20798,13 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $query = $this->db->get(TBL_BILL_OF_MATERIAL);
         $fetch_result = $query->result_array();
 
-
-        print_r($po_number);
-        exit;
-
         foreach ($fetch_result as $row) {
             $id = $row['id'];
             $data_for_vendor = array('supplier_name'=>$supplier_actual_name);
+
+
+            
+
             $this->db->where('id', $id);
             if($this->db->update(TBL_BILL_OF_MATERIAL, $data_for_vendor)){
                 $data_for_vendor_item = array('pre_supplier_name'=>$supplier_actual_name);
