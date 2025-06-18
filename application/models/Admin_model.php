@@ -20799,7 +20799,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $fetch_result = $query->result_array();
 
 
-        print_r($fetch_result);
+        print_r($supplier_actual_name);
         exit;
 
         foreach ($fetch_result as $row) {
