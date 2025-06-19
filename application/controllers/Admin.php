@@ -2778,7 +2778,7 @@ class Admin extends BaseController
                                  $updateSupplieridinSupplierpoconfirmation  = $this->admin_model->updateSupplieridinSupplierpoconfirmation(trim($this->input->post('sup_id')),trim($this->input->post('supplier_name')));
 
                                  /*Update Supplier Name In BOM*/
-                                 $updateSupplieridinBOM  = $this->admin_model->updateSupplieridinBOM(trim($this->input->post('po_number')),trim($this->input->post('supplier_actual_name')));
+                                 $updateSupplieridinBOM  = $this->admin_model->updateSupplieridinBOM(trim($this->input->post('po_number')),trim($this->input->post('supplier_name')));
 
 
                             }

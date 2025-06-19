@@ -20790,7 +20790,17 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
 
 
-    public function updateSupplieridinBOM($po_number,$supplier_actual_name){
+    public function updateSupplieridinBOM($po_number,$supplier_id){
+
+
+        /*get actual supplier name by id*/
+
+      
+        $this->db->select('supplier_name');
+        $this->db->where(TBL_SUPPLIER.'.status', 1);
+        $this->db->where(TBL_SUPPLIER.'.sup_id', $supplier_id);
+        $query_supplier_id = $this->db->get(TBL_SUPPLIER);
+        $data_supplier = $query_supplier_id->result_array();
        
         $this->db->select('id'); 
         $this->db->where(TBL_BILL_OF_MATERIAL.'.supplier_po_number', $po_number);
@@ -20800,14 +20810,11 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
         foreach ($fetch_result as $row) {
             $id = $row['id'];
-            $data_for_vendor = array('supplier_name'=>$supplier_actual_name);
-
-
-            
+            $data_for_vendor = array('supplier_name'=>$data_supplier[0]['supplier_name']);
 
             $this->db->where('id', $id);
             if($this->db->update(TBL_BILL_OF_MATERIAL, $data_for_vendor)){
-                $data_for_vendor_item = array('pre_supplier_name'=>$supplier_actual_name);
+                $data_for_vendor_item = array('pre_supplier_name'=>$data_supplier[0]['supplier_name']);
                 $this->db->where('bom_id', $id);
                 $this->db->update(TBL_BILL_OF_MATERIAL_ITEM, $data_for_vendor_item);
             }

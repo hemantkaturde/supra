@@ -57,18 +57,6 @@
                                         </div>
                                     </div>
 
-                                                    <?php foreach ($supplierList as $key => $value) {
-                                                        
-                                                        if($value['sup_id']==$getSuplierpodetails[0]['supplier_name']){
-                                                            $supplier_actual_name = $value['supplier_name'];
-                                                        }
-                                                     
-                                                     }?>
-
-
-                                     <input type="hidden" class="form-control" id="supplier_actual_name" name="supplier_actual_name" value="<?=$supplier_actual_name?>">
-       
-
 
                                     <?php
                                     if($getSuplierpodetails[0]['supplier_po_number']){
