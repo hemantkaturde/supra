@@ -24877,15 +24877,139 @@ public function checkvendorpoisassigninBM(){
 
 public function export_inspection_report_dwnload(){
 
-    $process = 'Export Hourly Inspection';
+    $process = 'Export Hourly Inspection Download';
     $processFunction = 'Admin/export_inspection_report_dwnload';
     $this->logrecord($process,$processFunction);
-    $this->global['pageTitle'] = 'Export Hourly Inspection';
+    $this->global['pageTitle'] = 'Export Hourly Inspection Download';
     $data['getAllteammaster']= $this->admin_model->getAllteammaster();
     $this->loadViews("masters/export_inspection_report_dwnload", $this->global, $data, NULL);
-
-
 }
+
+
+public function export_inspection_report_dwnload_pdf($id){
+
+    $getCreditnotedetailsforInvoice = $this->admin_model->getCreditnotedetailsforInvoice($id);
+    $getCebitnoteitemdeatilsForInvoice = $this->admin_model->getCebitnoteitemdeatilsForInvoice($id);
+
+    // print_r($getCebitnoteitemdeatilsForInvoice);
+    // exit;
+
+    $CartItem = "";
+    $supplierItem = "";
+    $i =1;
+    $ii =1;
+    $subtotal = 0;
+
+    $item_count =count($getCebitnoteitemdeatilsForInvoice);
+
+    if($item_count==1){
+        $padding_bottom = '200px';
+    }else if($item_count==2){
+        $padding_bottom = '40px';
+    }else if($item_count==3){
+        $padding_bottom = '10px';
+    }else{
+        $padding_bottom = '10px';
+    }
+
+    
+    foreach ($getCebitnoteitemdeatilsForInvoice as $key => $value) {
+        $CartItem .= '
+                <tr style="border-left: 1px solid black;border-right: 1px solid black;border-bottom: 1px solid black">
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['buyer_invoice_number'].'<br/>'.date('d-m-Y',strtotime($value['invoice_date'])).'</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['hsn_code'].'</td> 
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['qty'].'</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['invoice_value'].'</td> 
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['recivable_amount'].'</td>    
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['diff_credite_note_value'].'</td>    
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['cr_remark'].'</td>    
+                </tr>';
+        $ii++;       
+    }
+
+    $mpdf = new \Mpdf\Mpdf();
+    // $html = $this->load->view('html_to_pdf',[],true);
+    $html = '<table style=" width: 100%;text-align: center;border-collapse: collapse;font-family:cambria;">
+                <tr>
+                  <td rowspan="2"><img src="'.base_url().'assets/images/supra_logo_1.jpg" width="80" height="80"></td>
+                  <td style="color:#000080"><h2>SUPRA QUALITY EXPORTS (I) PVT. LTD</h2></td>
+                  <td rowspan="2"><img src="'.base_url().'assets/images/logo_2.png"width="80" height="80"></td>
+                </tr>
+                <tr>
+                  <td style="font-weight: bold;">
+                    <p>MANUFACTURER & EXPORTERS OF:</p>
+                    <p>PRECISION TURNED COMPONENTS, STAMPED /PRESSED PARTS IN FERROUS & NON-FERROUS METAL</p>
+                    <p>MOULDED & EXTRUDED PLASTIC AND RUBBER COMPONENTS</p> 
+                  </td>
+                </tr>
+            </table>
+            <hr>
+            <table style=" width: 100%;text-align: center;margin-top:10px;margin-bottom:10px;font-family:cambria;">
+                    <tr>
+                        <td style="color:red;font-size:15px">
+                          <u><p><h3>CREDIT NOTE</h3></p>
+                        </td>
+                    </tr>
+            </table>
+
+             <table style=" width: 100%;text-align: left;margin-top:10px;margin-bottom:10px;font-family:cambria;">
+                    <tr>
+                        <td>
+                          <p><b>Date :</b> '.date('d-m-Y',strtotime($getCreditnotedetailsforInvoice['credit_note_date'])).'</p>
+                        </td>
+                    </tr>
+             </table>
+
+            <table style=" width: 100%;text-align: left;border-collapse: collapse;font-family:cambria;font-size:13px;">
+                <tr>
+                    <td width="50%">
+                        <div>
+                            <p>To,</p>
+                            <p><b>REF/SQEIPL :</b>'.$getCreditnotedetailsforInvoice['credit_note_number'].'</p>
+                            <p><b>Buyer Name : </b>'.$getCreditnotedetailsforInvoice['buyer_name'].'</p>
+                            <p><b>Address : </b>'.$getCreditnotedetailsforInvoice['address'].'</p>
+                            <p><b>Buyer PO Number : </b>'.$getCreditnotedetailsforInvoice['original_buyer_po_number'].'</p>
+                        <div>    
+                    </td> 
+                </tr>
+            </table>
+
+            <table style="margin-top:10px;width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:12px">
+                <tr style="border: 1px solid black;">
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>INV. NO. AND DATE</th>
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>HSN CODE  </th>  
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>QTY</th> 
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>INVOICE AMOUNT</th>  
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>RECEIVABLE AMOUNT</th>  
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>DIFFERENCE</th>
+                    <th align="left" style="border: 1px solid black;text-align:center;" margin-bottom: 10%;>REASON</th>
+                </tr>
+                '.$CartItem.$extra_text_label_val.' 
+        
+            </table>
+
+            <table style=" width: 100%;text-align: left;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:12px">
+                   <tr >
+                        <td style="padding-left: 10px;" width="75%;" valign="top">
+                            <p>Thanking You,</p>
+                            <p>Yours truly</p>
+                            <p style="vertical-align: text-top;font-size:12px;color:#206a9b"><b>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</b></p>
+                            <br/><img src="'.base_url().'assets/images/stmps/aprana_sign_cha.png" width="130" height="100">
+                            <p style="vertical-align: text-top;font-size:10px;color:#206a9b"><b>AUTHORIZED SIGNATORY</b></p>
+                        </td>
+                        <td style="text-align: center;" width="25%" valign="top">
+                        </td> 
+                </tr>
+            </table>';
+
+            // <p>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</p>
+    $invoice_name =  $getCreditnotedetailsforInvoice['credit_note_number'].' - '.$getCreditnotedetailsforInvoice['buyer_name'].'.pdf';
+    $mpdf->WriteHTML($html);
+    $mpdf->Output($invoice_name,'D'); // opens in browser
+
+} 
+
+
 
 
 public function getcurrentlivestock() {

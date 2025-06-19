@@ -47,9 +47,8 @@
                                         </div>
 
                                         <div class="">
-                                                    <button type="submit" id="savebuyeritem" name="savebuyeritem" class="btn btn-primary" class="btn btn-success btn-xl">Export to pdf</button>
-
-                                                    <button type="button" class="btn btn-secondary btn-xl" data-dismiss="modal">Close</button>
+                                                <button type="submit" id="export_inspection_report_downlaod" name="export_inspection_report_downlaod" class="btn btn-primary" class="btn btn-success btn-xl">Export to pdf</button>
+                                                <button type="button" class="btn btn-secondary btn-xl" data-dismiss="modal">Close</button>
                                         </div>
                                     </div>
                                     

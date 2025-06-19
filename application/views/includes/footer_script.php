@@ -26332,9 +26332,15 @@
 
 				return false;
 	        });
-
-
-
-
     </script>
+<?php } ?>
+
+
+<?php if($pageTitle=='Export History Report'){  ?>
+   <script type="text/javascript">
+
+	 
+	 
+
+   </script>
 <?php } ?>
