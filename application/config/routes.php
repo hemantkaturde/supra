@@ -653,6 +653,9 @@ $route['checkvendorpoisassigninBM'] = "admin/checkvendorpoisassigninBM";
 
 $route['downlaodcreditnote/(:any)'] = "admin/downlaodcreditnote/$1";
 
+$route['vendor_rejection_form'] = "admin/vendor_rejection_form";
+
+
 
 
 /* End of file routes.php */

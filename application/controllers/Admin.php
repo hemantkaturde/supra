@@ -25146,6 +25146,15 @@ public function downlaodcreditnote($id){
 
 
 
+public function vendor_rejection_form(){
+
+    $process = 'Vendor Rejection Form';
+    $processFunction = 'Admin/vendor_rejection_form';
+    $this->logrecord($process,$processFunction);
+    $this->global['pageTitle'] = 'Vendor Rejection Form';
+    $this->loadViews("masters/vendor_rejection_form", $this->global, $data, NULL);
+
+}
 
 
 
