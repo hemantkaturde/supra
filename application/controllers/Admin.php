@@ -25152,7 +25152,37 @@ public function vendor_rejection_form(){
     $processFunction = 'Admin/vendor_rejection_form';
     $this->logrecord($process,$processFunction);
     $this->global['pageTitle'] = 'Vendor Rejection Form';
+    $data['vendorList']= $this->admin_model->fetchALLvendorList();
+    $data['finishgoodList']= $this->admin_model->fetchALLFinishgoodList();
     $this->loadViews("masters/vendor_rejection_form", $this->global, $data, NULL);
+
+}
+
+
+public function fetchvendorrejectionreport(){
+
+
+    $params = $_REQUEST;
+    $totalRecords = $this->admin_model->getvendorrejectionreportcount($params,$from_date,$to_date,$buyer_name,$part_number); 
+    $queryRecords = $this->admin_model->getvendorrejectionreportdata($params,$from_date,$to_date,$buyer_name,$part_number); 
+
+    $data = array();
+    foreach ($queryRecords as $key => $value)
+    {
+        $i = 0;
+        foreach($value as $v)
+        {
+            $data[$key][$i] = $v;
+            $i++;
+        }
+    }
+    $json_data = array(
+        "draw"            => intval( $params['draw'] ),   
+        "recordsTotal"    => intval( $totalRecords ),  
+        "recordsFiltered" => intval($totalRecords),
+        "data"            => $data   // total data array
+        );
+    echo json_encode($json_data);
 
 }
 

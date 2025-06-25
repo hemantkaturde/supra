@@ -26344,3 +26344,69 @@
 
    </script>
 <?php } ?>
+
+
+
+
+<?php if($pageTitle=='Vendor Rejection Form'){  ?>
+   <script type="text/javascript">
+
+
+        $(document).ready(function() {
+				
+			$("#view_vendor_rejection_report").dataTable().fnDestroy();
+				
+
+			if($('#from_date').val()){
+				var from_date = $('#from_date').val();
+			}else{
+				var from_date ='NA';
+			}
+
+			if($('#to_date').val()){
+				var to_date = $('#to_date').val();
+			}else{
+				var to_date ='NA';
+			}
+
+
+			var vendor_name = $('#vendor_name').val();
+			var part_number = $('#part_number').val();
+
+
+			getVendorRejectionreport(from_date,to_date,vendor_name,part_number);
+		});
+	 
+
+        function getVendorRejectionreport(from_date,to_date,vendor_name,part_number){
+             
+				var dt = $('#view_vendor_rejection_report').DataTable({
+					"columnDefs": [ 
+						{ className: "details-control", "targets": [ 0 ] },
+						{ "width": "10%", "targets": 0 },
+						{ "width": "10%", "targets": 1 },
+						{ "width": "10%", "targets": 2 },
+						{ "width": "10%", "targets": 3 },
+						{ "width": "10%", "targets": 4 },
+					],
+					responsive: true,
+					"oLanguage": {
+						"sEmptyTable": "<i>No Packing History Report Found.</i>",
+					}, 
+					"bSort" : false,
+					"bFilter":true,
+					"bLengthChange": true,
+					"iDisplayLength": 10,   
+					"bProcessing": true,
+					"serverSide": true,
+					"ajax":{
+						url :"<?php echo base_url();?>admin/fetchvendorrejectionreport/"+from_date+"/"+to_date+"/"+vendor_name+"/"+part_number,
+						type: "post",
+					},
+				});
+            
+		}
+	 
+
+   </script>
+<?php } ?>

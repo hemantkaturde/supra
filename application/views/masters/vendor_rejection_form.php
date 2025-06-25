@@ -39,12 +39,12 @@
 
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="buyer_name">Vendor Name</label>
-                                        <select class="form-control" name="buyer_name" id="buyer_name">
+                                        <label for="vendor_name">Vendor Name</label>
+                                        <select class="form-control" name="vendor_name" id="vendor_name">
                                             <option value="NA">Select Buyer Name</option>
-                                            <?php foreach ($buyerList as $key => $value) {?>
-                                            <option value="<?php echo $value['buyer_id']; ?>">
-                                                <?php echo $value['buyer_name']; ?></option>
+                                            <?php foreach ($vendorList as $key => $value) {?>
+                                            <option value="<?php echo $value['ven_id']; ?>">
+                                                <?php echo $value['vendor_name']; ?></option>
                                             <?php } ?>
                                         </select>
                                     </div>
@@ -72,20 +72,17 @@
                                         <div style="margin-top:22px">
                                             <!-- <input type="button"  class="btn btn-primary" value="Search" id="search" name="search" /> -->
                                             <input type="button" class="btn btn-primary" value="Export To Excel"
-                                                id="export_to_excel_exporthistroy_report" name="export_to_excel_exporthistroy_report" />
+                                                id="export_to_excel_vendor_rejection_report" name="export_to_excel_vendor_rejection_report" />
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-        
-
                             <div class="panel-body">
                                 <table width="100%" class="table table-striped table-bordered table-hover"
-                                    id="">
+                                    id="view_vendor_rejection_report">
                                     <thead>
                                         <tr style="background-color:#3c8dbc !important;color:#fff">
-                                            
                                             <th>Part No</th>
                                             <th>Vendor Name</th>    
                                             <th>Vendor PO No</th>
