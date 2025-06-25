@@ -86,6 +86,7 @@
                                             <th>Part No</th>
                                             <th>Vendor Name</th>    
                                             <th>Vendor PO No</th>
+                                            <th>Vendor PO Date</th>
                                             <th>Received Qty</th>
                                             <th>Rejected Qty</th>
                                         </tr>

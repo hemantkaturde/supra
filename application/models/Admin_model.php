@@ -21729,6 +21729,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_VENDOR_PO_MASTER.'.vendor_name');
         $this->db->join(TBL_REJECTION_FORM, TBL_REJECTION_FORM.'.id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.rejection_form_id');
+         $this->db->group_by(TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id');
         $query = $this->db->get(TBL_REJECTION_FORM_REJECTED_ITEM);
         $rowcount = $query->num_rows();
         return $rowcount;
@@ -21737,7 +21738,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     public function getvendorrejectionreportdata($params,$from_date,$to_date,$buyer_name,$part_number){
 
 
-        $this->db->select('*,'.TBL_FINISHED_GOODS.'.net_weight as fg_net_weight,'.TBL_REJECTION_FORM_REJECTED_ITEM.'.remark as remarksrej,'.TBL_VENDOR.'.vendor_name as vendor_name_text,'.TBL_VENDOR_PO_MASTER.'.po_number as po_number_text,'.TBL_REJECTION_FORM_REJECTED_ITEM.'.id as main_rejected_id,'.TBL_FINISHED_GOODS.'.fin_id as item_id,'.TBL_VENDOR_PO_MASTER.'.id as vendor_po_id');
+        $this->db->select('*,'.TBL_FINISHED_GOODS.'.net_weight as fg_net_weight,'.TBL_REJECTION_FORM_REJECTED_ITEM.'.remark as remarksrej,'.TBL_VENDOR.'.vendor_name as vendor_name_text,'.TBL_VENDOR_PO_MASTER.'.po_number as po_number_text,'.TBL_REJECTION_FORM_REJECTED_ITEM.'.id as main_rejected_id,'.TBL_FINISHED_GOODS.'.fin_id as item_id,'.TBL_VENDOR_PO_MASTER.'.id as vendor_po_id,'.TBL_VENDOR_PO_MASTER_ITEM.'.id as item_id_for_rjection,'.TBL_VENDOR_PO_MASTER.'.date as vendor_po_date');
         $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id');
@@ -21746,6 +21747,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
         $this->db->order_by(TBL_REJECTION_FORM_REJECTED_ITEM.'.id ','DESC');
         $this->db->limit($params['length'], $params['start']);
+        $this->db->group_by(TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id');
         $query = $this->db->get(TBL_REJECTION_FORM_REJECTED_ITEM);
         $fetch_result = $query->result_array();
 
@@ -21757,13 +21759,12 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             foreach ($fetch_result as $key => $value)
             {
 
-                $get_rejected_qty_from_rejection_reson_table = $this->get_rejected_qty_from_rejection_reson_table($value['main_rejected_id'],$value['vendor_po_id'],$value['item_id']);
-
-        
+                $get_rejected_qty_from_rejection_reson_table = $this->get_rejected_qty_from_rejection_reson_table($value['main_rejected_id'],$value['vendor_po_id'],$value['item_id_for_rjection']);
 
                 $data[$counter]['part_number'] =$value['part_number'];
                 $data[$counter]['vendor_name'] =$value['vendor_name_text'];
                 $data[$counter]['po_number_text'] =$value['po_number_text'];
+                $data[$counter]['po_number_date'] =$value['vendor_po_date'];
                 $data[$counter]['received_qty'] ='';
                 $data[$counter]['rejected_qty'] = $get_rejected_qty_from_rejection_reson_table[0]['qty_In_pcs'];
                 $counter++; 
@@ -21776,11 +21777,11 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     public function get_rejected_qty_from_rejection_reson_table($main_rejected_id,$vendor_po_id,$item_id){
 
-
+     
         $this->db->select('SUM(qty_In_pcs) as qty_In_pcs');
         $this->db->where('vendor_po_id', $vendor_po_id);
         $this->db->where('item_id', $item_id);
-        $this->db->where('rejection_form_id', $main_rejected_id);
+        //$this->db->where('rejection_form_id', $main_rejected_id);
         $query = $this->db->get(TBL_REJECTION_FORM_REJECTED_ITEM);
         $fetch_result = $query->result_array();
 
