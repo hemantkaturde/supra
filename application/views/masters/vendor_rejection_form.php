@@ -39,7 +39,7 @@
 
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="buyer_name">Buyer Name</label>
+                                        <label for="buyer_name">Vendor Name</label>
                                         <select class="form-control" name="buyer_name" id="buyer_name">
                                             <option value="NA">Select Buyer Name</option>
                                             <?php foreach ($buyerList as $key => $value) {?>
@@ -78,31 +78,19 @@
                                 </div>
                             </div>
 
-                            <div class="row" style="margin-left:4px">
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                       <label for="to_date">Current Stock</label>  <input type="text" class="form-control part_wise_current_stock_inpute" id="part_wise_current_stock_inpute" name="part_wise_current_stock_inpute" readonly>
-                                    </div>
-                                </div>
-                            </div>
+        
 
                             <div class="panel-body">
                                 <table width="100%" class="table table-striped table-bordered table-hover"
-                                    id="view_export_history_report_calculation_report">
+                                    id="">
                                     <thead>
                                         <tr style="background-color:#3c8dbc !important;color:#fff">
-                                            <th>Buyer Name</th>    
+                                            
                                             <th>Part No</th>
-                                            <th>Buyer po</th>
-                                            <th>Buyer po Date</th>
-                                            <th>Order Qty</th>
-                                            <th>Previous Bal</th>
-                                            <th>Export qty</th>
-                                            <th>Buyer Invoice Number</th>
-                                            <th>Buyer Invoice Date</th>
-                                            <th>Mode Of Shipment</th>
-                                            <!-- <th>Stock</th> -->
-                                            <th>Balance qty to be exported</th>
+                                            <th>Vendor Name</th>    
+                                            <th>Vendor PO No</th>
+                                            <th>Received Qty</th>
+                                            <th>Rejected Qty</th>
                                         </tr>
                                     </thead>
                                     <tbody>
