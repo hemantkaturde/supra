@@ -21761,11 +21761,14 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
                 $get_rejected_qty_from_rejection_reson_table = $this->get_rejected_qty_from_rejection_reson_table($value['main_rejected_id'],$value['vendor_po_id'],$value['item_id_for_rjection']);
 
+                $get_stock_item_details = $this->getstockItemdetilasforvendorrejectionreport($value['vendor_po_id'],$value['item_id']);
+
+
                 $data[$counter]['part_number'] =$value['part_number'];
                 $data[$counter]['vendor_name'] =$value['vendor_name_text'];
                 $data[$counter]['po_number_text'] =$value['po_number_text'];
                 $data[$counter]['po_number_date'] =$value['vendor_po_date'];
-                $data[$counter]['received_qty'] ='';
+                $data[$counter]['received_qty'] =$get_stock_item_details[0]['invoice_qty_In_pcs'];
                 $data[$counter]['rejected_qty'] = $get_rejected_qty_from_rejection_reson_table[0]['qty_In_pcs'];
                 $counter++; 
             }
@@ -21777,7 +21780,6 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     public function get_rejected_qty_from_rejection_reson_table($main_rejected_id,$vendor_po_id,$item_id){
 
-     
         $this->db->select('SUM(qty_In_pcs) as qty_In_pcs');
         $this->db->where('vendor_po_id', $vendor_po_id);
         $this->db->where('item_id', $item_id);
@@ -21786,8 +21788,23 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $fetch_result = $query->result_array();
 
         return $fetch_result;
-
     }
+
+
+  public function getstockItemdetilasforvendorrejectionreport($vendor_po_id,$item_id){
+        $this->db->select('SUM(invoice_qty_In_pcs) as invoice_qty_In_pcs');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_STOCKS_ITEM.'.part_number');
+        //$this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
+        $this->db->where(TBL_STOCKS_ITEM.'.status', 1);
+        $this->db->where(TBL_STOCKS_ITEM.'.pre_vendor_po_number', $vendor_po_id);
+        $this->db->where(TBL_STOCKS_ITEM.'.part_number',$item_id);
+        // $this->db->group_by(TBL_STOCKS_ITEM.'.id');
+        $this->db->group_by(TBL_STOCKS_ITEM.'.id');
+        $query = $this->db->get(TBL_STOCKS_ITEM);
+        $data = $query->result_array();
+        return $data;
+    }
+
 
 }
 
