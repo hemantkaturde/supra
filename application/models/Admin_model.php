@@ -21738,7 +21738,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     public function getvendorrejectionreportdata($params,$from_date,$to_date,$buyer_name,$part_number){
 
 
-        $this->db->select('*,'.TBL_FINISHED_GOODS.'.net_weight as fg_net_weight,'.TBL_REJECTION_FORM_REJECTED_ITEM.'.remark as remarksrej,'.TBL_VENDOR.'.vendor_name as vendor_name_text,'.TBL_VENDOR_PO_MASTER.'.po_number as po_number_text,'.TBL_REJECTION_FORM_REJECTED_ITEM.'.id as main_rejected_id,'.TBL_FINISHED_GOODS.'.fin_id as item_id,'.TBL_VENDOR_PO_MASTER.'.id as vendor_po_id,'.TBL_VENDOR_PO_MASTER_ITEM.'.id as item_id_for_rjection,'.TBL_VENDOR_PO_MASTER.'.date as vendor_po_date');
+        $this->db->select('*,'.TBL_FINISHED_GOODS.'.net_weight as fg_net_weight,'.TBL_REJECTION_FORM_REJECTED_ITEM.'.remark as remarksrej,'.TBL_VENDOR.'.vendor_name as vendor_name_text,'.TBL_VENDOR_PO_MASTER.'.po_number as po_number_text,'.TBL_REJECTION_FORM_REJECTED_ITEM.'.id as main_rejected_id,'.TBL_FINISHED_GOODS.'.fin_id as item_id,'.TBL_VENDOR_PO_MASTER.'.id as vendor_po_id,'.TBL_VENDOR_PO_MASTER_ITEM.'.id as item_id_for_rjection,'.TBL_VENDOR_PO_MASTER.'.date as vendor_po_date,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_order_qty');
         $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id');
@@ -21768,6 +21768,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['vendor_name'] =$value['vendor_name_text'];
                 $data[$counter]['po_number_text'] =$value['po_number_text'];
                 $data[$counter]['po_number_date'] =$value['vendor_po_date'];
+                $data[$counter]['vendor_order_qty'] =$value['vendor_order_qty'];
                 $data[$counter]['received_qty'] =$get_stock_item_details[0]['invoice_qty_In_pcs'];
                 $data[$counter]['rejected_qty'] = $get_rejected_qty_from_rejection_reson_table[0]['qty_In_pcs'];
                 $counter++; 

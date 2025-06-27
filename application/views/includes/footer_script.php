@@ -26389,10 +26389,11 @@
 						{ "width": "10%", "targets": 3 },
 						{ "width": "10%", "targets": 4 },
 						{ "width": "10%", "targets": 5 },
+						{ "width": "10%", "targets": 6 },
 					],
 					responsive: true,
 					"oLanguage": {
-						"sEmptyTable": "<i>No Packing History Report Found.</i>",
+						"sEmptyTable": "<i>No Vendor Reject Report Found.</i>",
 					}, 
 					"bSort" : false,
 					"bFilter":true,
