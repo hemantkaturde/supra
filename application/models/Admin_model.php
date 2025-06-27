@@ -21797,7 +21797,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         //$this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
         $this->db->where(TBL_STOCKS_ITEM.'.status', 1);
         $this->db->where(TBL_STOCKS_ITEM.'.pre_vendor_po_number', $vendor_po_id);
-        $this->db->where(TBL_STOCKS_ITEM.'.part_number',$item_id);
+        // $this->db->where(TBL_STOCKS_ITEM.'.part_number',$item_id);
         // $this->db->group_by(TBL_STOCKS_ITEM.'.id');
         $this->db->group_by(TBL_STOCKS_ITEM.'.id');
         $query = $this->db->get(TBL_STOCKS_ITEM);
