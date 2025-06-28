@@ -25202,9 +25202,9 @@ public function downlaod_vendor_rejection_report($from_date,$to_date,$vendor_nam
             $objPHPExcel->getActiveSheet()->SetCellValue('C1', 'Vendor PO No');
             $objPHPExcel->getActiveSheet()->SetCellValue('D1', 'Vendor PO Date'); 
             $objPHPExcel->getActiveSheet()->SetCellValue('E1', 'Vendor PO Qty');
-            $objPHPExcel->getActiveSheet()->SetCellValue('F1', 'Rejected Reasons');   
-            $objPHPExcel->getActiveSheet()->SetCellValue('G1', 'Received Qty');  
-            $objPHPExcel->getActiveSheet()->SetCellValue('H1', 'Rejected Qty');  
+            $objPHPExcel->getActiveSheet()->SetCellValue('F1', 'Received Qty');   
+            $objPHPExcel->getActiveSheet()->SetCellValue('G1', 'Rejected Qty');  
+            $objPHPExcel->getActiveSheet()->SetCellValue('H1', 'Rejected Reasons');  
 
             // set Row
             $rowCount = 2;
