@@ -26351,64 +26351,203 @@
 <?php if($pageTitle=='Vendor Rejection Form'){  ?>
    <script type="text/javascript">
 
+			$(document).ready(function() {
+					
+				$("#view_vendor_rejection_report").dataTable().fnDestroy();
+					
 
-        $(document).ready(function() {
+				if($('#from_date').val()){
+					var from_date = $('#from_date').val();
+				}else{
+					var from_date ='NA';
+				}
+
+				if($('#to_date').val()){
+					var to_date = $('#to_date').val();
+				}else{
+					var to_date ='NA';
+				}
+
+
+				var vendor_name = $('#vendor_name').val();
+				var part_number = $('#part_number').val();
+
+
+				getVendorRejectionreport(from_date,to_date,vendor_name,part_number);
+			});
+
+			$(document).on('change','#part_number',function(e){  
+				$("#view_vendor_rejection_report").dataTable().fnDestroy();
+					
+
+				if($('#from_date').val()){
+					var from_date = $('#from_date').val();
+				}else{
+					var from_date ='NA';
+				}
+
+				if($('#to_date').val()){
+					var to_date = $('#to_date').val();
+				}else{
+					var to_date ='NA';
+				}
+
+
+				var vendor_name = $('#vendor_name').val();
+				var part_number = $('#part_number').val();
+
+
+				getVendorRejectionreport(from_date,to_date,vendor_name,part_number);
+			});
+
+		    $(document).on('change','#vendor_name',function(e){  
+			
+				$("#view_vendor_rejection_report").dataTable().fnDestroy();
 				
-			$("#view_vendor_rejection_report").dataTable().fnDestroy();
+				if($('#from_date').val()){
+					var from_date = $('#from_date').val();
+				}else{
+					var from_date ='NA';
+				}
+
+				if($('#to_date').val()){
+					var to_date = $('#to_date').val();
+				}else{
+					var to_date ='NA';
+				}
+
+				var vendor_name = $('#vendor_name').val();
+				var part_number = $('#part_number').val();
+
+				getVendorRejectionreport(from_date,to_date,vendor_name,part_number);
+	     	});
+
+			$(document).on('change','#from_date',function(e){  
+				e.preventDefault();
+				$("#view_vendor_rejection_report").dataTable().fnDestroy();
 				
 
-			if($('#from_date').val()){
-				var from_date = $('#from_date').val();
-			}else{
-				var from_date ='NA';
+				if($('#from_date').val()){
+					var from_date = $('#from_date').val();
+				}else{
+					var from_date ='NA';
+				}
+
+				if($('#to_date').val()){
+					var to_date = $('#to_date').val();
+				}else{
+					var to_date ='NA';
+				}
+
+
+				var vendor_name = $('#vendor_name').val();
+				var part_number = $('#part_number').val();
+
+				getVendorRejectionreport(from_date,to_date,vendor_name,part_number);
+			});
+
+			$(document).on('change','#from_date',function(e){  
+				e.preventDefault();
+				$("#view_vendor_rejection_report").dataTable().fnDestroy();
+				
+
+				if($('#from_date').val()){
+					var from_date = $('#from_date').val();
+				}else{
+					var from_date ='NA';
+				}
+
+				if($('#to_date').val()){
+					var to_date = $('#to_date').val();
+				}else{
+					var to_date ='NA';
+				}
+
+
+				var vendor_name = $('#vendor_name').val();
+				var part_number = $('#part_number').val();
+
+				getVendorRejectionreport(from_date,to_date,vendor_name,part_number);
+			});
+	
+			function getVendorRejectionreport(from_date,to_date,vendor_name,part_number){
+				
+					var dt = $('#view_vendor_rejection_report').DataTable({
+						"columnDefs": [ 
+							{ className: "details-control", "targets": [ 0 ] },
+							{ "width": "10%", "targets": 0 },
+							{ "width": "10%", "targets": 1 },
+							{ "width": "10%", "targets": 2 },
+							{ "width": "10%", "targets": 3 },
+							{ "width": "10%", "targets": 4 },
+							{ "width": "10%", "targets": 5 },
+							{ "width": "10%", "targets": 6 },
+							{ "width": "10%", "targets": 7 },
+						],
+						responsive: true,
+						"oLanguage": {
+							"sEmptyTable": "<i>No Vendor Reject Report Found.</i>",
+						}, 
+						"bSort" : false,
+						"bFilter":true,
+						"bLengthChange": true,
+						"iDisplayLength": 10,   
+						"bProcessing": true,
+						"serverSide": true,
+						"ajax":{
+							url :"<?php echo base_url();?>admin/fetchvendorrejectionreport/"+from_date+"/"+to_date+"/"+vendor_name+"/"+part_number,
+							type: "post",
+						},
+					});
+				
 			}
 
-			if($('#to_date').val()){
-				var to_date = $('#to_date').val();
-			}else{
-				var to_date ='NA';
-			}
+
+			$(document).on('click','#export_to_excel_vendor_rejection_report',function(e){
+				e.preventDefault();
+				$(".loader_ajax").show();
 
 
-			var vendor_name = $('#vendor_name').val();
-			var part_number = $('#part_number').val();
+				if($('#from_date').val()){
+					var from_date = $('#from_date').val();
+				}else{
+					var from_date ='NA';
+				}
 
+				if($('#to_date').val()){
+					var to_date = $('#to_date').val();
+				}else{
+					var to_date ='NA';
+				}
 
-			getVendorRejectionreport(from_date,to_date,vendor_name,part_number);
-		});
-	 
+				var vendor_name = $('#vendor_name').val();
+				var part_number = $('#part_number').val();
 
-        function getVendorRejectionreport(from_date,to_date,vendor_name,part_number){
-             
-				var dt = $('#view_vendor_rejection_report').DataTable({
-					"columnDefs": [ 
-						{ className: "details-control", "targets": [ 0 ] },
-						{ "width": "10%", "targets": 0 },
-						{ "width": "10%", "targets": 1 },
-						{ "width": "10%", "targets": 2 },
-						{ "width": "10%", "targets": 3 },
-						{ "width": "10%", "targets": 4 },
-						{ "width": "10%", "targets": 5 },
-						{ "width": "10%", "targets": 6 },
-					],
-					responsive: true,
-					"oLanguage": {
-						"sEmptyTable": "<i>No Vendor Reject Report Found.</i>",
-					}, 
-					"bSort" : false,
-					"bFilter":true,
-					"bLengthChange": true,
-					"iDisplayLength": 10,   
-					"bProcessing": true,
-					"serverSide": true,
-					"ajax":{
-						url :"<?php echo base_url();?>admin/fetchvendorrejectionreport/"+from_date+"/"+to_date+"/"+vendor_name+"/"+part_number,
-						type: "post",
-					},
+				$.ajax({
+					url : "<?php echo ADMIN_PATH;?>admin/downlaod_vendor_rejection_report/"+from_date+"/"+to_date+"/"+vendor_name+"/"+part_number,
+					type: "POST",
+					success: function(data, textStatus, jqXHR)
+			         {
+
+						$(".loader_ajax").hide();
+						if(data == "failure")
+						{
+							// $(".sales_tracking_report_name_error").html("");
+							alert('No data fond');
+						}
+						else
+						{
+							// $(".sales_tracking_report_name_error").html("");
+							 window.location.href = "<?php echo ADMIN_PATH;?>admin/downlaod_vendor_rejection_report/"+from_date+"/"+to_date+"/"+vendor_name+"/"+part_number;
+						}
+			
+
+					 }
 				});
-            
-		}
-	 
 
+				return false;
+	        });
+
+	
    </script>
 <?php } ?>

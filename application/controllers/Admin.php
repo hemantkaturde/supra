@@ -25159,12 +25159,12 @@ public function vendor_rejection_form(){
 }
 
 
-public function fetchvendorrejectionreport(){
+public function fetchvendorrejectionreport($from_date,$to_date,$vendor_name,$part_number){
 
 
     $params = $_REQUEST;
-    $totalRecords = $this->admin_model->getvendorrejectionreportcount($params,$from_date,$to_date,$buyer_name,$part_number); 
-    $queryRecords = $this->admin_model->getvendorrejectionreportdata($params,$from_date,$to_date,$buyer_name,$part_number); 
+    $totalRecords = $this->admin_model->getvendorrejectionreportcount($params,$from_date,$to_date,$vendor_name,$part_number); 
+    $queryRecords = $this->admin_model->getvendorrejectionreportdata($params,$from_date,$to_date,$vendor_name,$part_number); 
 
     $data = array();
     foreach ($queryRecords as $key => $value)
@@ -25186,6 +25186,64 @@ public function fetchvendorrejectionreport(){
 
 }
 
+
+public function downlaod_vendor_rejection_report($from_date,$to_date,$vendor_name,$part_number){
+
+
+            // create file name
+            $fileName = 'Vendor Rejection Report -'.date('d-m-Y').'.xlsx';  
+            // load excel library
+            $empInfo = $this->admin_model->getallvendorrejectiondetailsdata($from_date,$to_date,$vendor_name,$part_number);
+            $objPHPExcel = new PHPExcel();
+            $objPHPExcel->setActiveSheetIndex(0);
+            // set Header
+            $objPHPExcel->getActiveSheet()->SetCellValue('A1', 'Part No');
+            $objPHPExcel->getActiveSheet()->SetCellValue('B1', 'Vendor Name');
+            $objPHPExcel->getActiveSheet()->SetCellValue('C1', 'Vendor PO No');
+            $objPHPExcel->getActiveSheet()->SetCellValue('D1', 'Vendor PO Date'); 
+            $objPHPExcel->getActiveSheet()->SetCellValue('E1', 'Vendor PO Qty');
+            $objPHPExcel->getActiveSheet()->SetCellValue('F1', 'Rejected Reasons');   
+            $objPHPExcel->getActiveSheet()->SetCellValue('G1', 'Received Qty');  
+            $objPHPExcel->getActiveSheet()->SetCellValue('H1', 'Rejected Qty');  
+
+            // set Row
+            $rowCount = 2;
+            foreach ($empInfo as $element) {
+                $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $element['part_number']);
+                $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $element['vendor_name']);
+                $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $element['po_number_text']);
+                $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['po_number_date']);
+                $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['vendor_order_qty']);
+                $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['rejected_reasons']);
+                $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['received_qty']);
+                $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $element['rejected_qty']);
+                $rowCount++;
+            }
+
+            foreach(range('A','H') as $columnID) {
+                $objPHPExcel->getActiveSheet()->getColumnDimension($columnID)->setAutoSize(true);
+			}
+			/*********************Autoresize column width depending upon contents END***********************/
+			
+            $objPHPExcel->getActiveSheet()->getStyle('A1:H1')->getFont()->setBold(true); //Make heading font bold
+			
+			/*********************Add color to heading START**********************/
+            $objPHPExcel->getActiveSheet()
+						->getStyle('A1:H1')
+						->getFill()
+						->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
+						->getStartColor()
+						->setARGB('99ff99');
+
+
+            $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
+              
+            header('Content-Type: application/vnd.ms-excel');
+			header("Content-Disposition: attachment;Filename=$fileName.xls");
+			header('Cache-Control: max-age=0');
+			$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+			$objWriter->save('php://output');
+}
 
 
 

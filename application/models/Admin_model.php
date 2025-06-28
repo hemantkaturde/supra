@@ -21721,7 +21721,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
 
 
-    public function getvendorrejectionreportcount($params,$from_date,$to_date,$buyer_name,$part_number){
+    public function getvendorrejectionreportcount($params,$from_date,$to_date,$vendor_name,$part_number){
        
         $this->db->select('*,'.TBL_FINISHED_GOODS.'.net_weight as fg_net_weight,'.TBL_REJECTION_FORM_REJECTED_ITEM.'.remark as remarksrej,'.TBL_VENDOR.'.vendor_name as vendor_name_text,'.TBL_VENDOR_PO_MASTER.'.po_number as po_number_text');
         $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id');
@@ -21729,13 +21729,30 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_VENDOR_PO_MASTER.'.vendor_name');
         $this->db->join(TBL_REJECTION_FORM, TBL_REJECTION_FORM.'.id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.rejection_form_id');
-         $this->db->group_by(TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id');
+
+        if($part_number!='NA'){
+            $this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
+        }     
+
+        if($vendor_name!='NA'){
+            $this->db->where(TBL_VENDOR_PO_MASTER.'.vendor_name', $vendor_name);
+        }        
+    
+        if($from_date!='NA'){
+            $this->db->where(TBL_VENDOR_PO_MASTER.".date >=", $from_date);
+        }
+    
+        if($to_date!='NA'){
+            $this->db->where(TBL_VENDOR_PO_MASTER.".date <=", $to_date);
+        }
+
+        $this->db->group_by(TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id');
         $query = $this->db->get(TBL_REJECTION_FORM_REJECTED_ITEM);
         $rowcount = $query->num_rows();
         return $rowcount;
     }
 
-    public function getvendorrejectionreportdata($params,$from_date,$to_date,$buyer_name,$part_number){
+    public function getvendorrejectionreportdata($params,$from_date,$to_date,$vendor_name,$part_number){
 
 
         $this->db->select('*,'.TBL_FINISHED_GOODS.'.net_weight as fg_net_weight,'.TBL_REJECTION_FORM_REJECTED_ITEM.'.remark as remarksrej,'.TBL_VENDOR.'.vendor_name as vendor_name_text,'.TBL_VENDOR_PO_MASTER.'.po_number as po_number_text,'.TBL_REJECTION_FORM_REJECTED_ITEM.'.id as main_rejected_id,'.TBL_FINISHED_GOODS.'.fin_id as item_id,'.TBL_VENDOR_PO_MASTER.'.id as vendor_po_id,'.TBL_VENDOR_PO_MASTER_ITEM.'.id as item_id_for_rjection,'.TBL_VENDOR_PO_MASTER.'.date as vendor_po_date,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_order_qty');
@@ -21744,6 +21761,23 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_VENDOR_PO_MASTER.'.vendor_name');
         $this->db->join(TBL_REJECTION_FORM, TBL_REJECTION_FORM.'.id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.rejection_form_id');
+
+
+        if($part_number!='NA'){
+            $this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
+        }     
+
+        if($vendor_name!='NA'){
+            $this->db->where(TBL_VENDOR_PO_MASTER.'.vendor_name', $vendor_name);
+        }        
+    
+        if($from_date!='NA'){
+            $this->db->where(TBL_VENDOR_PO_MASTER.".date >=", $from_date);
+        }
+    
+        if($to_date!='NA'){
+            $this->db->where(TBL_VENDOR_PO_MASTER.".date <=", $to_date);
+        }
 
         $this->db->order_by(TBL_REJECTION_FORM_REJECTED_ITEM.'.id ','DESC');
         $this->db->limit($params['length'], $params['start']);
@@ -21760,15 +21794,14 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             {
 
                 $get_rejected_qty_from_rejection_reson_table = $this->get_rejected_qty_from_rejection_reson_table($value['main_rejected_id'],$value['vendor_po_id'],$value['item_id_for_rjection']);
-
                 $get_stock_item_details = $this->getstockItemdetilasforvendorrejectionreport($value['vendor_po_id'],$value['item_id']);
-
 
                 $data[$counter]['part_number'] =$value['part_number'];
                 $data[$counter]['vendor_name'] =$value['vendor_name_text'];
                 $data[$counter]['po_number_text'] =$value['po_number_text'];
                 $data[$counter]['po_number_date'] =$value['vendor_po_date'];
                 $data[$counter]['vendor_order_qty'] =$value['vendor_order_qty'];
+                $data[$counter]['rejected_reasons'] = $get_rejected_qty_from_rejection_reson_table[0]['rejected_reasons'];
                 $data[$counter]['received_qty'] =$get_stock_item_details[0]['invoice_qty_In_pcs'];
                 $data[$counter]['rejected_qty'] = $get_rejected_qty_from_rejection_reson_table[0]['qty_In_pcs'];
                 $counter++; 
@@ -21776,12 +21809,70 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         }
         return $data;
 
-    }   
+    }  
+
+
+    public function getallvendorrejectiondetailsdata($from_date,$to_date,$vendor_name,$part_number){
+
+
+        $this->db->select('*,'.TBL_FINISHED_GOODS.'.net_weight as fg_net_weight,'.TBL_REJECTION_FORM_REJECTED_ITEM.'.remark as remarksrej,'.TBL_VENDOR.'.vendor_name as vendor_name_text,'.TBL_VENDOR_PO_MASTER.'.po_number as po_number_text,'.TBL_REJECTION_FORM_REJECTED_ITEM.'.id as main_rejected_id,'.TBL_FINISHED_GOODS.'.fin_id as item_id,'.TBL_VENDOR_PO_MASTER.'.id as vendor_po_id,'.TBL_VENDOR_PO_MASTER_ITEM.'.id as item_id_for_rjection,'.TBL_VENDOR_PO_MASTER.'.date as vendor_po_date,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_order_qty');
+        $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_VENDOR_PO_MASTER.'.vendor_name');
+        $this->db->join(TBL_REJECTION_FORM, TBL_REJECTION_FORM.'.id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.rejection_form_id');
+
+
+        if($part_number!='NA'){
+            $this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
+        }     
+
+        if($vendor_name!='NA'){
+            $this->db->where(TBL_VENDOR_PO_MASTER.'.vendor_name', $vendor_name);
+        }        
+    
+        if($from_date!='NA'){
+            $this->db->where(TBL_VENDOR_PO_MASTER.".date >=", $from_date);
+        }
+    
+        if($to_date!='NA'){
+            $this->db->where(TBL_VENDOR_PO_MASTER.".date <=", $to_date);
+        }
+
+        $this->db->order_by(TBL_REJECTION_FORM_REJECTED_ITEM.'.id ','DESC');
+        $this->db->group_by(TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id');
+        $query = $this->db->get(TBL_REJECTION_FORM_REJECTED_ITEM);
+        $fetch_result = $query->result_array();
+            $data = array();
+        $counter = 0;
+        $i=1;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+
+                $get_rejected_qty_from_rejection_reson_table = $this->get_rejected_qty_from_rejection_reson_table($value['main_rejected_id'],$value['vendor_po_id'],$value['item_id_for_rjection']);
+                $get_stock_item_details = $this->getstockItemdetilasforvendorrejectionreport($value['vendor_po_id'],$value['item_id']);
+
+                $data[$counter]['part_number'] =$value['part_number'];
+                $data[$counter]['vendor_name'] =$value['vendor_name_text'];
+                $data[$counter]['po_number_text'] =$value['po_number_text'];
+                $data[$counter]['po_number_date'] =$value['vendor_po_date'];
+                $data[$counter]['vendor_order_qty'] =$value['vendor_order_qty'];
+                $data[$counter]['rejected_reasons'] = $get_rejected_qty_from_rejection_reson_table[0]['rejected_reasons'];
+                $data[$counter]['received_qty'] =$get_stock_item_details[0]['invoice_qty_In_pcs'];
+                $data[$counter]['rejected_qty'] = $get_rejected_qty_from_rejection_reson_table[0]['qty_In_pcs'];
+                $counter++; 
+            }
+        }
+        return $data;
+
+    }
 
 
     public function get_rejected_qty_from_rejection_reson_table($main_rejected_id,$vendor_po_id,$item_id){
 
-        $this->db->select('SUM(qty_In_pcs) as qty_In_pcs');
+        $this->db->select('SUM(qty_In_pcs) as qty_In_pcs,rejected_reason,GROUP_CONCAT(DISTINCT rejected_reason SEPARATOR ", ") as rejected_reasons');
         $this->db->where('vendor_po_id', $vendor_po_id);
         $this->db->where('item_id', $item_id);
         //$this->db->where('rejection_form_id', $main_rejected_id);
