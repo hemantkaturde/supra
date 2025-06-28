@@ -25214,9 +25214,9 @@ public function downlaod_vendor_rejection_report($from_date,$to_date,$vendor_nam
                 $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $element['po_number_text']);
                 $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['po_number_date']);
                 $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['vendor_order_qty']);
-                $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['rejected_reasons']);
-                $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['received_qty']);
-                $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $element['rejected_qty']);
+                $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['received_qty']);
+                $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['rejected_qty']);
+                $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $element['rejected_reasons']);
                 $rowCount++;
             }
 

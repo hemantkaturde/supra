@@ -21801,9 +21801,9 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['po_number_text'] =$value['po_number_text'];
                 $data[$counter]['po_number_date'] =$value['vendor_po_date'];
                 $data[$counter]['vendor_order_qty'] =$value['vendor_order_qty'];
-                $data[$counter]['rejected_reasons'] = $get_rejected_qty_from_rejection_reson_table[0]['rejected_reasons'];
                 $data[$counter]['received_qty'] =$get_stock_item_details[0]['invoice_qty_In_pcs'];
                 $data[$counter]['rejected_qty'] = $get_rejected_qty_from_rejection_reson_table[0]['qty_In_pcs'];
+                 $data[$counter]['rejected_reasons'] = $get_rejected_qty_from_rejection_reson_table[0]['reason_with_qty'];
                 $counter++; 
             }
         }
@@ -21854,14 +21854,15 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $get_rejected_qty_from_rejection_reson_table = $this->get_rejected_qty_from_rejection_reson_table($value['main_rejected_id'],$value['vendor_po_id'],$value['item_id_for_rjection']);
                 $get_stock_item_details = $this->getstockItemdetilasforvendorrejectionreport($value['vendor_po_id'],$value['item_id']);
 
+            
                 $data[$counter]['part_number'] =$value['part_number'];
                 $data[$counter]['vendor_name'] =$value['vendor_name_text'];
                 $data[$counter]['po_number_text'] =$value['po_number_text'];
                 $data[$counter]['po_number_date'] =$value['vendor_po_date'];
                 $data[$counter]['vendor_order_qty'] =$value['vendor_order_qty'];
-                $data[$counter]['rejected_reasons'] = $get_rejected_qty_from_rejection_reson_table[0]['rejected_reasons'];
                 $data[$counter]['received_qty'] =$get_stock_item_details[0]['invoice_qty_In_pcs'];
                 $data[$counter]['rejected_qty'] = $get_rejected_qty_from_rejection_reson_table[0]['qty_In_pcs'];
+                $data[$counter]['rejected_reasons'] = $get_rejected_qty_from_rejection_reson_table[0]['reason_with_qty'];
                 $counter++; 
             }
         }
@@ -21872,7 +21873,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     public function get_rejected_qty_from_rejection_reson_table($main_rejected_id,$vendor_po_id,$item_id){
 
-        $this->db->select('SUM(qty_In_pcs) as qty_In_pcs,rejected_reason,GROUP_CONCAT(DISTINCT rejected_reason SEPARATOR ", ") as rejected_reasons');
+        $this->db->select('SUM(qty_In_pcs) as qty_In_pcs,rejected_reason,GROUP_CONCAT(DISTINCT rejected_reason SEPARATOR ", ") as rejected_reasons,GROUP_CONCAT(CONCAT(rejected_reason, " (", qty_In_pcs, ")") SEPARATOR ", ") AS reason_with_qty');
         $this->db->where('vendor_po_id', $vendor_po_id);
         $this->db->where('item_id', $item_id);
         //$this->db->where('rejection_form_id', $main_rejected_id);
@@ -21884,7 +21885,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
 
   public function getstockItemdetilasforvendorrejectionreport($vendor_po_id,$item_id){
-        $this->db->select('SUM(invoice_qty_In_pcs) as invoice_qty_In_pcs');
+        $this->db->select('SUM(invoice_qty_In_pcs) as invoice_qty_In_pcs,GROUP_CONCAT(DISTINCT invoice_qty_In_pcs SEPARATOR ", ") as invoice_qty_In_pcs_values');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_STOCKS_ITEM.'.part_number');
         //$this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
         $this->db->where(TBL_STOCKS_ITEM.'.status', 1);

@@ -88,9 +88,9 @@
                                             <th>Vendor PO No</th>
                                             <th>Vendor PO Date</th>
                                             <th>Vendor PO Qty</th>
-                                            <th>Rejected Reasons</th>
                                             <th>Received Qty</th>
                                             <th>Rejected Qty</th>
+                                            <th>Rejected Reasons</th>
                                         </tr>
                                     </thead>
                                     <tbody>

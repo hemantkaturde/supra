@@ -26354,8 +26354,7 @@
 			$(document).ready(function() {
 					
 				$("#view_vendor_rejection_report").dataTable().fnDestroy();
-					
-
+				
 				if($('#from_date').val()){
 					var from_date = $('#from_date').val();
 				}else{
@@ -26501,7 +26500,6 @@
 					});
 				
 			}
-
 
 			$(document).on('click','#export_to_excel_vendor_rejection_report',function(e){
 				e.preventDefault();
