@@ -21859,7 +21859,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['po_number_text'] =$value['po_number_text'];
                 $data[$counter]['po_number_date'] =$value['vendor_po_date'];
                 $data[$counter]['vendor_order_qty'] =$value['vendor_order_qty'];
-                $data[$counter]['received_qty'] =$get_stock_item_details[0]['invoice_qty_In_pcs'];
+                $data[$counter]['received_qty'] =$get_stock_item_details[0]['invoice_qty_In_pcs'].' ('.$get_stock_item_details[0]['invoice_qty_In_pcs_values'].')';
                 $data[$counter]['rejected_qty'] = $get_rejected_qty_from_rejection_reson_table[0]['qty_In_pcs'];
                 $data[$counter]['rejected_reasons'] = $get_rejected_qty_from_rejection_reson_table[0]['reason_with_qty'];
                 $counter++; 
