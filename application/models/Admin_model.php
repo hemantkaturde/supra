@@ -5480,7 +5480,7 @@ class Admin_model extends CI_Model
         }
 
         $this->db->where(TBL_BILL_OF_MATERIAL_VENDOR.'.status', 1);
-        $this->db->limit($params['length'],$params['start']);
+        // $this->db->limit($params['length'],$params['start']);
         $this->db->order_by(TBL_BILL_OF_MATERIAL_VENDOR.'.id','DESC');
         $query_res = $this->db->get(TBL_BILL_OF_MATERIAL_VENDOR);
         // $fetch_result = $query->result_array();
@@ -5518,7 +5518,7 @@ class Admin_model extends CI_Model
         }
       
         $this->db->where(TBL_BILL_OF_MATERIAL.'.status', 1);
-        $this->db->limit($params['length'],$params['start']);
+        // $this->db->limit($params['length'],$params['start']);
         $this->db->order_by(TBL_BILL_OF_MATERIAL.'.id','DESC');
         $query = $this->db->get(TBL_BILL_OF_MATERIAL);
         // $fetch_result = $query->result_array();
