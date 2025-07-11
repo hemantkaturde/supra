@@ -21884,7 +21884,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
 
   public function getstockItemdetilasforvendorrejectionreport($vendor_po_id,$item_id){
-        $this->db->select('SUM(invoice_qty_In_pcs) as invoice_qty_In_pcs,GROUP_CONCAT(DISTINCT invoice_qty_In_pcs SEPARATOR ", ") as invoice_qty_In_pcs_values');
+        $this->db->select('SUM(invoice_qty_In_pcs) as invoice_qty_In_pcs,GROUP_CONCAT(invoice_qty_In_pcs SEPARATOR ", ") as invoice_qty_In_pcs_values');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_STOCKS_ITEM.'.part_number');
         //$this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
         $this->db->where(TBL_STOCKS_ITEM.'.status', 1);
