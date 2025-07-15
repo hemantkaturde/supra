@@ -507,7 +507,7 @@
 
                                                             <div class="form-group">
                                                                 <label for="privious_balenace">Previous Balenced</label>
-                                                                <input type="text" class="form-control" id="privious_balenace" value="0" name="privious_balenace">
+                                                                <input type="text" class="form-control" id="privious_balenace" value="0" name="privious_balenace" readonly>
                                                                 <p class="error privious_balenace_error"></p>
                                                             </div>
                                                         
