@@ -192,7 +192,7 @@
 
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="correction">Immeditate Action Taken:</label>
+                                            <label for="correction">Immeditate Action Taken</label>
                                             <input type="text" class="form-control" id="correction"  value="<?=$getcustomercompalindetailsdata[0]['correction']?>" name="correction">
                                             <p class="error correction_error"></p>
                                         </div>
