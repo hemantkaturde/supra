@@ -14159,6 +14159,7 @@ public function downloadvendorpowithoutsupplier($id){
                             <p><b>3. Once order issued & accepted, cannot be cancelled</b></p>
                             <p><b>4. Essence of this order is delivering the specified quality product on time.</b></p>
                             <p><b>5. If any Prices issue, should inform in 24hrs after receipt of P.O.</b></p>
+                            <p><b>Mill test certificate is compulsory for this supply.Until this we are unable to process your invoice.</b></p>
                         </td>
                         <td style="border: 1px solid black;text-align: center;" width="25%" valign="top">
                             <p style="vertical-align: text-top;font-size:12px;color:#206a9b"><b>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</b></p>
