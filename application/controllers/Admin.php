@@ -19696,6 +19696,76 @@ public function download_sales_tracking_export_to_excel($sales_tracking_report_n
         $objWriter->save('php://output');
     }
 
+    if($sales_tracking_report_name=='rodtep'){
+
+        // create file name
+        $fileName = 'RODTEP -'.date('d-m-Y').'.xlsx';  
+        // load excel library
+        $empInfo = $this->admin_model->downlaodsalestrackingportdata($sales_tracking_report_name,$buyer_name,$from_date,$to_date);
+
+        $objPHPExcel = new PHPExcel();
+        $objPHPExcel->setActiveSheetIndex(0);
+        // set Header
+        $objPHPExcel->getActiveSheet()->SetCellValue('A1', 'INV. NO.');
+        $objPHPExcel->getActiveSheet()->SetCellValue('B1', 'INV. DATE');
+        // $objPHPExcel->getActiveSheet()->SetCellValue('C1', 'TOOLING INV NO');
+        $objPHPExcel->getActiveSheet()->SetCellValue('C1', 'SB. NO.'); 
+        $objPHPExcel->getActiveSheet()->SetCellValue('D1', 'SB. DATE');
+        $objPHPExcel->getActiveSheet()->SetCellValue('E1', 'PORT CODE');
+        $objPHPExcel->getActiveSheet()->SetCellValue('F1', 'FOB AMOUNT (Rs.)');
+        $objPHPExcel->getActiveSheet()->SetCellValue('G1', 'RODTEP (AMOUNT) AS PER SB');
+        $objPHPExcel->getActiveSheet()->SetCellValue('H1', 'RODTEP RECD (AMOUNT)');
+        $objPHPExcel->getActiveSheet()->SetCellValue('I1', 'Escript Number (License No)');
+
+        // set Row
+        $rowCount = 2;
+        foreach ($empInfo as $element) {
+
+
+            if($element['buyer_invoice_date']!='0000-00-00'){
+                $buyer_invoice_date =date('d-m-Y',strtotime($element['buyer_invoice_date']));
+            }else{
+                $buyer_invoice_date='';
+            }
+
+
+            $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $element['invoice_number']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $buyer_invoice_date);
+            // $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, '');
+            $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $element['buyer']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['mode_of_shipment']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['payment_terms']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['inv_amount']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['currency']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, '');
+            $rowCount++;
+        }
+
+        foreach(range('A','I') as $columnID) {
+            $objPHPExcel->getActiveSheet()->getColumnDimension($columnID)->setAutoSize(true);
+        }
+        /*********************Autoresize column width depending upon contents END***********************/
+        
+        $objPHPExcel->getActiveSheet()->getStyle('A1:I1')->getFont()->setBold(true); //Make heading font bold
+        
+        /*********************Add color to heading START**********************/
+        $objPHPExcel->getActiveSheet()
+                    ->getStyle('A1:I1')
+                    ->getFill()
+                    ->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
+                    ->getStartColor()
+                    ->setARGB('99ff99');
+
+
+        $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
+        
+        header('Content-Type: application/vnd.ms-excel');
+        header("Content-Disposition: attachment;Filename=$fileName.xls");
+        header('Cache-Control: max-age=0');
+        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+        $objWriter->save('php://output');
+    }
+
 }
 
 

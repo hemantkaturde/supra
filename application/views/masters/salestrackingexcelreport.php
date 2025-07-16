@@ -39,6 +39,7 @@
                                                     <option value="igst">IGST</option>
                                                     <option value="drawback">DRAWBACK</option>
                                                     <option value="buyer_pay_os">BUYER PAY OS</option>
+                                                    <option value="rodtep">RODTEP</option>
                                             </select>
                                             <p class="error sales_tracking_report_name_error"></p>
                                     </div>
