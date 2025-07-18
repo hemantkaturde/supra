@@ -16446,6 +16446,10 @@ public function fetchsupplierporeportcount($params,$supplier_name,$supplier_po,$
                 $data[$counter]['drawback'] = $value['drawback'];
                 $data[$counter]['dbk_recd_amount'] = $value['dbk_recd_amount'];
                 $data[$counter]['dbk_recd_date'] = $value['dbk_recd_date'];
+
+                $data[$counter]['rod_tep_amount_as_per_sb'] = $value['rod_tep_amount_as_per_sb'];
+                $data[$counter]['rodtep'] = $value['rodtep'];
+                $data[$counter]['escript_number_license_no'] = $value['escript_number_license_no'];
                 
                 $counter++; 
             }
