@@ -19741,8 +19741,8 @@ public function download_sales_tracking_export_to_excel($sales_tracking_report_n
             $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['port_code']);
             $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['fob_amount_rs']);
             $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['rod_tep_amount_as_per_sb']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, '');
-            $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, '');
+            $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $element['rodtep']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, $element['escript_number_license_no']);
             $rowCount++;
         }
 
