@@ -566,6 +566,15 @@
                                         </div>
                                     </div>
 
+                                    
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="rod_tep_amount_as_per_sb">Rod Tep (Amount) As Per Sb</label>
+                                            <input type="text" class="form-control" id="rod_tep_amount_as_per_sb"  value="<?=$getsalestrackingdetailsforedit['rod_tep_amount_as_per_sb']?>"  name="rod_tep_amount_as_per_sb">
+                                            <p class="error rod_tep_amount_as_per_sb_error"></p>
+                                        </div>
+                                    </div>
+
 
                                     <div class="col-md-3">
                                         <div class="form-group">

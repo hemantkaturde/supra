@@ -42,10 +42,8 @@
                                         <!-- <th>Igst Value</th> -->
                                         <th>Igst Rcved Amt</th>
                                         <th>Brc Number & Date</th>
-
                                         <th>BL/Awb Date</th>
                                         <!-- <th>No. Of Ctns</th> -->
-                                        
                                         <th>Action</th>
                                     </tr>
                                 </thead>

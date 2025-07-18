@@ -13388,7 +13388,8 @@ public function addsalestrackingreport(){
 
         $this->form_validation->set_rules('foreign_bank_charges_in_inr_remark','foreign_bank_charges_in_inr_remark','trim');
         $this->form_validation->set_rules('bill_paid_amount_remark','bill_paid_amount_remark','trim');
-        
+        $this->form_validation->set_rules('rod_tep_amount_as_per_sb','rod_tep_amount_as_per_sb','trim');
+
 
         if($this->form_validation->run() == FALSE)
         {
@@ -13432,6 +13433,7 @@ public function addsalestrackingreport(){
                 'receivable_amt_debit' =>strip_tags(form_error('receivable_amt_debit')),
                 'foreign_bank_charges_in_inr_remark' =>strip_tags(form_error('foreign_bank_charges_in_inr_remark')),
                 'bill_paid_amount_remark' =>strip_tags(form_error('bill_paid_amount_remark')),
+                'rod_tep_amount_as_per_sb' =>strip_tags(form_error('rod_tep_amount_as_per_sb')),
                 'exchange_rate_as_per_sb'=>strip_tags(form_error('exchange_rate_as_per_sb')));
 
         }else{
@@ -13490,6 +13492,7 @@ public function addsalestrackingreport(){
                 'bank_charges_inr'=>trim($this->input->post('bank_charges_inr')),
                 'foreign_bank_charges_in_inr_remark' =>trim($this->input->post('foreign_bank_charges_in_inr_remark')),
                 'bill_paid_amount_remark' =>trim($this->input->post('bill_paid_amount_remark')),
+                'rod_tep_amount_as_per_sb' =>trim($this->input->post('rod_tep_amount_as_per_sb')),
                 'receivable_amt_debit'=>trim($this->input->post('receivable_amt_debit'))
             );
 
@@ -13543,6 +13546,7 @@ public function addsalestrackingreport(){
                         'receivable_amt_debit' =>strip_tags(form_error('receivable_amt_debit')),
                         'foreign_bank_charges_in_inr_remark' =>strip_tags(form_error('foreign_bank_charges_in_inr_remark')),
                         'bill_paid_amount_remark' =>strip_tags(form_error('bill_paid_amount_remark')),
+                        'rod_tep_amount_as_per_sb' =>strip_tags(form_error('rod_tep_amount_as_per_sb')),
                         'exchange_rate_as_per_sb'=>strip_tags(form_error('exchange_rate_as_per_sb')));
              
             }
