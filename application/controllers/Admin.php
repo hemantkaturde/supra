@@ -19649,7 +19649,12 @@ public function download_sales_tracking_export_to_excel($sales_tracking_report_n
         $objPHPExcel->getActiveSheet()->SetCellValue('E1', 'PAYMENT TERM');
         $objPHPExcel->getActiveSheet()->SetCellValue('F1', 'AMOUNT');
         $objPHPExcel->getActiveSheet()->SetCellValue('G1', 'CURRENCY');
-        $objPHPExcel->getActiveSheet()->SetCellValue('H1', 'REMARKS');
+        $objPHPExcel->getActiveSheet()->SetCellValue('H1', 'Payment Recvd Date');
+        $objPHPExcel->getActiveSheet()->SetCellValue('I1', 'Payment Recvd Amt');
+        $objPHPExcel->getActiveSheet()->SetCellValue('J1', 'Payment Exchange Rate');
+        $objPHPExcel->getActiveSheet()->SetCellValue('K1', 'Realised Amt In Inr');
+        $objPHPExcel->getActiveSheet()->SetCellValue('L1', 'OUTSTANDING');
+        $objPHPExcel->getActiveSheet()->SetCellValue('M1', 'Remarks');
 
         // set Row
         $rowCount = 2;
@@ -19663,6 +19668,8 @@ public function download_sales_tracking_export_to_excel($sales_tracking_report_n
             }
 
 
+            $OUTSTANDING = $element['inv_amount'] - $element['payment_rcivd_amt'];
+
             $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $element['invoice_number']);
             $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $buyer_invoice_date);
             // $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, '');
@@ -19671,20 +19678,25 @@ public function download_sales_tracking_export_to_excel($sales_tracking_report_n
             $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['payment_terms']);
             $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['inv_amount']);
             $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['currency']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, '');
+            $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $element['payment_recvd_date']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, $element['payment_rcivd_amt']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('J' . $rowCount, $element['payment_exchange_amt']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, $element['currency']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('L' . $rowCount, $OUTSTANDING);
+            $objPHPExcel->getActiveSheet()->SetCellValue('M' . $rowCount, '');
             $rowCount++;
         }
 
-        foreach(range('A','H') as $columnID) {
+        foreach(range('A','M') as $columnID) {
             $objPHPExcel->getActiveSheet()->getColumnDimension($columnID)->setAutoSize(true);
         }
         /*********************Autoresize column width depending upon contents END***********************/
         
-        $objPHPExcel->getActiveSheet()->getStyle('A1:H1')->getFont()->setBold(true); //Make heading font bold
+        $objPHPExcel->getActiveSheet()->getStyle('A1:M1')->getFont()->setBold(true); //Make heading font bold
         
         /*********************Add color to heading START**********************/
         $objPHPExcel->getActiveSheet()
-                    ->getStyle('A1:H1')
+                    ->getStyle('A1:M1')
                     ->getFill()
                     ->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
                     ->getStartColor()
