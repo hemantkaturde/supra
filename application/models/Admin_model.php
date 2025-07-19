@@ -16450,6 +16450,7 @@ public function fetchsupplierporeportcount($params,$supplier_name,$supplier_po,$
                 $data[$counter]['rod_tep_amount_as_per_sb'] = $value['rod_tep_amount_as_per_sb'];
                 $data[$counter]['rodtep'] = $value['rodtep'];
                 $data[$counter]['escript_number_license_no'] = $value['escript_number_license_no'];
+                $data[$counter]['payment_exchange_amt'] = $value['payment_exchange_amt'];
                 
                 $counter++; 
             }
