@@ -19668,7 +19668,7 @@ public function download_sales_tracking_export_to_excel($sales_tracking_report_n
             }
 
 
-            $OUTSTANDING = intval($element['inv_amount']) - ($element['payment_rcivd_amt']);
+            $OUTSTANDING = intval($element['inv_amount']) - intval($element['payment_rcivd_amt']);
 
             $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $element['invoice_number']);
             $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $buyer_invoice_date);
