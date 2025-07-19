@@ -19668,6 +19668,13 @@ public function download_sales_tracking_export_to_excel($sales_tracking_report_n
             }
 
 
+            if($element['payment_recvd_date']!='0000-00-00'){
+                $payment_recvd_date =date('d-m-Y',strtotime($element['payment_recvd_date']));
+            }else{
+                $payment_recvd_date='';
+            }
+
+
             $OUTSTANDING = intval($element['inv_amount']) - intval($element['payment_rcivd_amt']);
 
             $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $element['invoice_number']);
@@ -19678,10 +19685,10 @@ public function download_sales_tracking_export_to_excel($sales_tracking_report_n
             $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['payment_terms']);
             $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['inv_amount']);
             $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['currency']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $element['payment_recvd_date']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $payment_recvd_date);
             $objPHPExcel->getActiveSheet()->SetCellValue('I' . $rowCount, $element['payment_rcivd_amt']);
             $objPHPExcel->getActiveSheet()->SetCellValue('J' . $rowCount, $element['payment_exchange_amt']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, $element['currency']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('K' . $rowCount, $element['realised_amt_in_inr']);
             $objPHPExcel->getActiveSheet()->SetCellValue('L' . $rowCount, $OUTSTANDING);
             $objPHPExcel->getActiveSheet()->SetCellValue('M' . $rowCount, '');
             $rowCount++;
