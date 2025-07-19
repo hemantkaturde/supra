@@ -16775,8 +16775,8 @@ public function getsearchstockvendordeatils($stock_id,$item_id){
     
     /*19-07-2025*/
     $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_VENDOR_PO_MASTER.'.supplier_po_number','left');
-    $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_SUPPLIER.'.sup_id','left');
-    
+  $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER_PO_MASTER.'.supplier_name = '.TBL_SUPPLIER.'.sup_id','left');
+  
     $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_STOCKS.'.vendor_name');
     $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_STOCKS_ITEM.'.part_number');   
     $this->db->where(TBL_STOCKS.'.stock_id', $stock_id); 
