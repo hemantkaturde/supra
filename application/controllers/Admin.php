@@ -19090,7 +19090,6 @@ public function downlaodchadebitnote($id){
 
 public function download_sales_tracking_export_to_excel($sales_tracking_report_name,$buyer_name,$from_date,$to_date) {
 
-
     if($sales_tracking_report_name=='foreign_bank_charges'){
 
         // create file name
@@ -19632,6 +19631,7 @@ public function download_sales_tracking_export_to_excel($sales_tracking_report_n
     }
 
     if($sales_tracking_report_name=='buyer_pay_os'){
+        
 
         // create file name
         $fileName = 'BUYER PAY OS -'.date('d-m-Y').'.xlsx';  
