@@ -134,8 +134,6 @@
                     <input type="text" class="form-control" id="row_material_rm_type" name="row_material_rm_type" value="<?=$getsearchstockvendordeatils[0]['row_material_rm_type'];?>" style="background: #FFF;" readonly>
                 </div>
             </div>
-
-           
         </div>
 
 

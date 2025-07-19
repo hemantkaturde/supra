@@ -17044,14 +17044,20 @@
 			var stock_id = $('#stock_id').val();
 			var part_number_id = $('#part_number_id').val();
 
+
+			var supplier_name = $('#supplier_name').val();
+			var supplier_po_number = $('#supplier_po_number').val();
+			var row_material_rm_type = $('#row_material_rm_type').val();
+
+
 			$.ajax({
-					url : "<?php echo ADMIN_PATH;?>admin/printstock/"+stock_id+'/'+balence_qty_in_pcs+'/'+ready_for_exp_pcs+'/'+total_exp_qty_in_pcs+'/'+part_number_id,
+					url : "<?php echo ADMIN_PATH;?>admin/printstock/"+stock_id+'/'+balence_qty_in_pcs+'/'+ready_for_exp_pcs+'/'+total_exp_qty_in_pcs+'/'+part_number_id+'/'+supplier_name+'/'+supplier_po_number+'/'+row_material_rm_type,
 					type: "POST",
-					 data : {'ready_for_exp_pcs' : ready_for_exp_pcs,'balence_qty_in_pcs':balence_qty_in_pcs,'stock_id':stock_id,'total_exp_qty_in_pcs':total_exp_qty_in_pcs,'part_number_id':part_number_id},
+					 data : {'ready_for_exp_pcs' : ready_for_exp_pcs,'balence_qty_in_pcs':balence_qty_in_pcs,'stock_id':stock_id,'total_exp_qty_in_pcs':total_exp_qty_in_pcs,'part_number_id':part_number_id,'supplier_name':supplier_name,'supplier_po_number':supplier_po_number,'row_material_rm_type':row_material_rm_type},
 					success: function(data, textStatus, jqXHR)
 					{
 
-						window.location.href = "<?php echo base_url().'admin/printstock/'?>"+stock_id+'/'+balence_qty_in_pcs+'/'+ready_for_exp_pcs+'/'+total_exp_qty_in_pcs+'/'+part_number_id;
+						window.location.href = "<?php echo base_url().'admin/printstock/'?>"+stock_id+'/'+balence_qty_in_pcs+'/'+ready_for_exp_pcs+'/'+total_exp_qty_in_pcs+'/'+part_number_id+'/'+supplier_name+'/'+supplier_po_number+'/'+row_material_rm_type,
 						$(".loader_ajax").hide();
 						// if(data == "failure")
 						// {

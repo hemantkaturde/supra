@@ -20924,7 +20924,7 @@ public function fetchseachbypartnumberreport($finish_good_part_number,$form_type
 
 }
 
-public function printstock($stock_id,$balence_qty_in_pcs,$ready_for_exp_pcs,$total_exp_qty_in_pcs,$part_number_id){
+public function printstock($stock_id,$balence_qty_in_pcs,$ready_for_exp_pcs,$total_exp_qty_in_pcs,$part_number_id,$supplier_name,$supplier_po_number,$row_material_rm_type){
 
     // $ready_for_exp_pcs = $this->input->post('ready_for_exp_pcs');
     // $balence_qty_in_pcs = $this->input->post('balence_qty_in_pcs');
@@ -21024,6 +21024,17 @@ public function printstock($stock_id,$balence_qty_in_pcs,$ready_for_exp_pcs,$tot
                 </tr>
                 <tr>
                   <td style="padding: 8px;"><b>PO Qty : </b>'.$getsearchstockvendordeatils[0]['vendor_qty_po'].'</td>
+                </tr>
+
+                <tr>
+                  <td style="padding: 8px;"><b>Raw Material supplier name : </b>'.$supplier_name.'</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px;"><b>Supplier PO : </b>'.$supplier_po_number.'</td>
+                </tr>
+
+                <tr>
+                  <td style="padding: 8px;"><b>RM Type : </b>'.$row_material_rm_type.'</td>
                 </tr>
             </table>
   
