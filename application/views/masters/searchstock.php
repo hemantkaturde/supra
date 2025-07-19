@@ -115,7 +115,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="supplier_name">Raw Material supplier name</label>
-                    <input type="text" class="form-control" id="supplier_name" name="supplier_name" value="<?=$getsearchstockvendordeatils[0]['supplier_name'];?>" style="background: #FFF;" readonly>
+                    <input type="text" class="form-control" id="supplier_name" name="supplier_name" value="<?=$getsearchstockvendordeatils[0]['supplier_name_actual'];?>" style="background: #FFF;" readonly>
                 </div>
             </div>
 
