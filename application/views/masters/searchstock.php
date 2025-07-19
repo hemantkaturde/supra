@@ -120,9 +120,13 @@
             </div>
 
     
-        
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="supplier_po_number">Supplier PO </label>
+                    <input type="text" class="form-control" id="supplier_po_number" name="supplier_po_number" value="<?=$getsearchstockvendordeatils[0]['supplier_po_number_actual'];?>" style="background: #FFF;" readonly>
+                </div>
+            </div>
 
-       
            
         </div>
 
