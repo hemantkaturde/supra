@@ -127,6 +127,14 @@
                 </div>
             </div>
 
+
+             <div class="col-md-3">
+                <div class="form-group">
+                    <label for="row_material_rm_type">Supplier PO </label>
+                    <input type="text" class="form-control" id="row_material_rm_type" name="row_material_rm_type" value="<?=$getsearchstockvendordeatils[0]['row_material_rm_type'];?>" style="background: #FFF;" readonly>
+                </div>
+            </div>
+
            
         </div>
 
