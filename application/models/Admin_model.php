@@ -9870,6 +9870,14 @@ class Admin_model extends CI_Model
     .TBL_INCOMING_DETAILS_ITEM.'.assign_team as assign_team,'
     .TBL_INCOMING_DETAILS_ITEM.'.working_hrs_status as working_hrs_status,'
 
+
+    .TBL_INCOMING_DETAILS_ITEM.'.lr_no as lr_no,'
+    .TBL_INCOMING_DETAILS_ITEM.'.difference_of_gr_weight as difference_of_gr_weight,'
+    .TBL_INCOMING_DETAILS_ITEM.'.material_match_to_drawing as material_match_to_drawing,'
+    .TBL_INCOMING_DETAILS_ITEM.'.material_grade as material_grade,'
+    .TBL_INCOMING_DETAILS_ITEM.'.next_process as next_process,'
+    .TBL_INCOMING_DETAILS_ITEM.'.qc_person_name as qc_person_name,'
+
     // .TBL_FINISHED_GOODS.'.sitting_size,'
     // .TBL_FINISHED_GOODS.'.thickness,'
     );
