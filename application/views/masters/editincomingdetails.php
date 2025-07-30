@@ -111,7 +111,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="remark">Additional Process</label>
-                                            <input type="text" class="form-control datepicker"
+                                            <input type="text" class="form-control"
                                                 value="<?=$getPreviousincomingdetailsforedit[0]['additional_process'] ?>" id="additional_process" name="additional_process">
                                             <p class="error additional_process_error"></p>
                                         </div>
