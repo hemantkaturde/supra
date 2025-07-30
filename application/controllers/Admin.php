@@ -6223,6 +6223,17 @@ class Admin extends BaseController
                                 'boxex_goni_bundle' =>    trim($this->input->post('boxex_goni_bundle')),
                                 'lot_no'=>    trim($this->input->post('lot_no')),
                                 'assign_team' =>   trim($this->input->post('assign_team')),
+
+                                
+                                'lr_no' =>   trim($this->input->post('lr_no')),
+                                'difference_of_gr_weight' =>   trim($this->input->post('difference_of_gr_weight')),
+                                'material_match_to_drawing' =>   trim($this->input->post('material_match_to_drawing')),
+                                'material_grade' =>   trim($this->input->post('material_grade')),
+                                'next_process' =>   trim($this->input->post('next_process')),
+                                'qc_person_name' =>   trim($this->input->post('qc_person_name')),
+
+
+
                                 'working_hrs_status' =>   trim($this->input->post('working_hrs_status')),
                                 'remarks' =>    trim($this->input->post('remarks')),
                                 'pre_vendor_name' =>  trim($this->input->post('pre_vendor_name')),
@@ -6308,6 +6319,15 @@ class Admin extends BaseController
                                 'pre_reported_by' =>  trim($this->input->post('pre_reported_by')),
                                 'pre_report_date' =>  trim($this->input->post('pre_report_date')),
                                 'pre_remark' =>  trim($this->input->post('pre_remark')),
+
+                                
+                                'lr_no' =>   trim($this->input->post('lr_no')),
+                                'difference_of_gr_weight' =>   trim($this->input->post('difference_of_gr_weight')),
+                                'material_match_to_drawing' =>   trim($this->input->post('material_match_to_drawing')),
+                                'material_grade' =>   trim($this->input->post('material_grade')),
+                                'next_process' =>   trim($this->input->post('next_process')),
+                                'qc_person_name' =>   trim($this->input->post('qc_person_name')),
+
                             );
 
                             
@@ -6373,6 +6393,15 @@ class Admin extends BaseController
                             'pre_reported_by' =>  trim($this->input->post('pre_reported_by')),
                             'pre_report_date' =>  trim($this->input->post('pre_report_date')),
                             'pre_remark' =>  trim($this->input->post('pre_remark')),
+
+                            
+                                'lr_no' =>   trim($this->input->post('lr_no')),
+                                'difference_of_gr_weight' =>   trim($this->input->post('difference_of_gr_weight')),
+                                'material_match_to_drawing' =>   trim($this->input->post('material_match_to_drawing')),
+                                'material_grade' =>   trim($this->input->post('material_grade')),
+                                'next_process' =>   trim($this->input->post('next_process')),
+                                'qc_person_name' =>   trim($this->input->post('qc_person_name')),
+
                         );
 
 
