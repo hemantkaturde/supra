@@ -651,7 +651,7 @@
 
 
                                                         <div class="form-group row">
-                                                            <label class="col-sm-3 col-form-label">QC Person namespace</label>
+                                                            <label class="col-sm-3 col-form-label">QC Person Name</label>
                                                             <div class="col-sm-9">
                                                                 <input type="text" class="form-control" id="qc_person_name"
                                                                     name="qc_person_name">
