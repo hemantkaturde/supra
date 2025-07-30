@@ -465,6 +465,65 @@
                                                             </div>
                                                         </div>
 
+
+                                                          <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">LR No</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" class="form-control" id="lr_no"
+                                                                    name="lr_no">
+                                                                <p class="error lr_no_error"></p>
+                                                            </div>
+                                                        </div>
+
+                                
+                                                         <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">Difference of GR Weight</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" class="form-control" id="difference_of_gr_weight"
+                                                                    name="difference_of_gr_weight">
+                                                                <p class="error difference_of_gr_weight_error"></p>
+                                                            </div>
+                                                        </div>
+
+
+                                                         <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">Material Match To Drawing</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" class="form-control" id="material_match_to_drawing"
+                                                                    name="material_match_to_drawing">
+                                                                <p class="error material_match_to_drawing_error"></p>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">Material Grade</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" class="form-control" id="material_grade"
+                                                                    name="material_grade">
+                                                                <p class="error material_grade_error"></p>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">Next Process</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" class="form-control" id="next_process"
+                                                                    name="next_process">
+                                                                <p class="error next_process_error"></p>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">QC Person namespace</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" class="form-control" id="qc_person_name"
+                                                                    name="qc_person_name">
+                                                                <p class="error qc_person_name_error"></p>
+                                                            </div>
+                                                        </div>
+
                                                     <div class="form-group row">
                                                         <label class="col-sm-3 col-form-label">Remarks</label>
                                                         <div class="col-sm-9">

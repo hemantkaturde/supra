@@ -6076,6 +6076,17 @@ class Admin extends BaseController
             $this->form_validation->set_rules('lot_no','Lot No','trim|required');
             $this->form_validation->set_rules('assign_team','Assign Team','trim');
             $this->form_validation->set_rules('working_hrs_status','Working hrs status','trim');
+
+
+            $this->form_validation->set_rules('lr_no','LR_NO','trim');
+            $this->form_validation->set_rules('difference_of_gr_weight','Difference of gr weight','trim');
+            $this->form_validation->set_rules('material_match_to_drawing','Material Match To Drawing','trim');
+            $this->form_validation->set_rules('material_grade','Material Grade','trim');
+            $this->form_validation->set_rules('next_process','Next Process','trim');
+            $this->form_validation->set_rules('qc_person_name','QC Person Name','trim');
+
+
+
             $this->form_validation->set_rules('remarks','Remarks','trim');
 
             if($this->form_validation->run() == FALSE)
@@ -6147,6 +6158,14 @@ class Admin extends BaseController
                                 'lot_no'=>    trim($this->input->post('lot_no')),
                                 'assign_team' =>   trim($this->input->post('assign_team')),
                                 'working_hrs_status' =>   trim($this->input->post('working_hrs_status')),
+
+                                'lr_no' =>   trim($this->input->post('lr_no')),
+                                'difference_of_gr_weight' =>   trim($this->input->post('difference_of_gr_weight')),
+                                'material_match_to_drawing' =>   trim($this->input->post('material_match_to_drawing')),
+                                'material_grade' =>   trim($this->input->post('material_grade')),
+                                'next_process' =>   trim($this->input->post('next_process')),
+                                'qc_person_name' =>   trim($this->input->post('qc_person_name')),
+
                                 'remarks' =>    trim($this->input->post('remarks')),
                                 'pre_vendor_name' =>  trim($this->input->post('pre_vendor_name')),
                                 'pre_vendor_po_number' =>  trim($this->input->post('pre_vendor_po_number')),
