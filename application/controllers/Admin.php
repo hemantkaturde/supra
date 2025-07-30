@@ -5860,6 +5860,7 @@ class Admin extends BaseController
                             'vendor_po_number'=> trim($this->input->post('vendor_po_number')),
                             'reported_by' =>    trim($this->input->post('reported_by')),
                             'reported_date' =>    trim($this->input->post('reported_date')),
+                            'additional_process' =>    trim($this->input->post('additional_process')),
                             'remark' =>    trim($this->input->post('remark')),
                             'updatedDtm' => date("Y-m-d h:m:s"),
                         );
@@ -5893,6 +5894,7 @@ class Admin extends BaseController
                                     'vendor_po_number'=> trim($this->input->post('vendor_po_number')),
                                     'reported_by' =>    trim($this->input->post('reported_by')),
                                     'reported_date' =>    trim($this->input->post('reported_date')),
+                                    'additional_process' =>    trim($this->input->post('additional_process')),
                                     'remark' =>    trim($this->input->post('remark')),
                                     'updatedDtm' => date("Y-m-d h:m:s"),
                                 );
@@ -5918,6 +5920,8 @@ class Admin extends BaseController
                         'vendor_po_number'=> trim($this->input->post('vendor_po_number')),
                         'reported_by' =>    trim($this->input->post('reported_by')),
                         'reported_date' =>    trim($this->input->post('reported_date')),
+                        'additional_process' =>    trim($this->input->post('additional_process')),
+
                         'remark' =>    trim($this->input->post('remark')),
                         'updatedDtm' => date("Y-m-d h:m:s"),
                     );
@@ -6053,8 +6057,6 @@ class Admin extends BaseController
     public function saveincomingitem(){
         $post_submit = $this->input->post();
 
-
-
         if($post_submit){
             $save_incoming_details_items = array();
 
@@ -6171,6 +6173,7 @@ class Admin extends BaseController
                                 'pre_vendor_po_number' =>  trim($this->input->post('pre_vendor_po_number')),
                                 'pre_reported_by' =>  trim($this->input->post('pre_reported_by')),
                                 'pre_report_date' =>  trim($this->input->post('pre_report_date')),
+                                'pre_additional_process' =>  trim($this->input->post('pre_additional_process')),
                                 'pre_remark' =>  trim($this->input->post('pre_remark')),
                             );
 
@@ -6240,6 +6243,7 @@ class Admin extends BaseController
                                 'pre_vendor_po_number' =>  trim($this->input->post('pre_vendor_po_number')),
                                 'pre_reported_by' =>  trim($this->input->post('pre_reported_by')),
                                 'pre_report_date' =>  trim($this->input->post('pre_report_date')),
+                                'pre_additional_process' =>  trim($this->input->post('pre_additional_process')),
                                 'pre_remark' =>  trim($this->input->post('pre_remark')),
                             );
 
@@ -6318,6 +6322,7 @@ class Admin extends BaseController
                                 'pre_vendor_po_number' =>  trim($this->input->post('pre_vendor_po_number')),
                                 'pre_reported_by' =>  trim($this->input->post('pre_reported_by')),
                                 'pre_report_date' =>  trim($this->input->post('pre_report_date')),
+                                'pre_additional_process' =>  trim($this->input->post('pre_additional_process')),
                                 'pre_remark' =>  trim($this->input->post('pre_remark')),
 
                                 
@@ -6392,6 +6397,7 @@ class Admin extends BaseController
                             'pre_vendor_po_number' =>  trim($this->input->post('pre_vendor_po_number')),
                             'pre_reported_by' =>  trim($this->input->post('pre_reported_by')),
                             'pre_report_date' =>  trim($this->input->post('pre_report_date')),
+                            'pre_additional_process' =>  trim($this->input->post('pre_additional_process')),
                             'pre_remark' =>  trim($this->input->post('pre_remark')),
 
                             
