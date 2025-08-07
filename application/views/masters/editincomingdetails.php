@@ -524,12 +524,14 @@
                                                         </div>
 
 
-                                                        
-                                                        <div class="col-md-12">
-                                                            <div class="form-group">
-                                                                <label for="remark">Additional Process</label>
-                                                                <input type="text" class="form-control" id="additional_process" name="additional_process">
-                                                                <p class="error additional_process_error"></p>
+                                                       
+                                                        <div class="form-group row">
+                                                            <div class="col-sm-3 col-form-label">
+                                                                 <div class="col-sm-9">
+                                                                    <label for="remark">Additional Process</label>
+                                                                    <input type="text" class="form-control" id="additional_process" name="additional_process">
+                                                                    <p class="error additional_process_error"></p>
+                                                                </div>
                                                             </div>
                                                         </div>
 
