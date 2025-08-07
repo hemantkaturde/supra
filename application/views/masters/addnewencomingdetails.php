@@ -188,14 +188,14 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-12">
+                                    <!-- <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="remark">Additional Process</label>
                                             <input type="text" class="form-control"
                                                 value="<?=$getAllitemdetails[0]['pre_additional_process'] ?>" id="additional_process" name="additional_process">
                                             <p class="error additional_process_error"></p>
                                         </div>
-                                    </div>
+                                    </div> -->
 
                                     <div class="col-md-12">
                                         <div class="form-group">
@@ -655,6 +655,15 @@
                                                                 <input type="text" class="form-control" id="next_process"
                                                                     name="next_process">
                                                                 <p class="error next_process_error"></p>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <label for="remark">Additional Process</label>
+                                                                <input type="text" class="form-control" id="additional_process" name="additional_process">
+                                                                <p class="error additional_process_error"></p>
                                                             </div>
                                                         </div>
 

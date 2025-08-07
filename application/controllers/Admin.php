@@ -6086,7 +6086,7 @@ class Admin extends BaseController
             $this->form_validation->set_rules('material_grade','Material Grade','trim');
             $this->form_validation->set_rules('next_process','Next Process','trim');
             $this->form_validation->set_rules('qc_person_name','QC Person Name','trim');
-
+            $this->form_validation->set_rules('additional_process','Additional process','trim');
 
 
             $this->form_validation->set_rules('remarks','Remarks','trim');
@@ -6166,6 +6166,8 @@ class Admin extends BaseController
                                 'material_match_to_drawing' =>   trim($this->input->post('material_match_to_drawing')),
                                 'material_grade' =>   trim($this->input->post('material_grade')),
                                 'next_process' =>   trim($this->input->post('next_process')),
+                                'additional_process' =>   trim($this->input->post('additional_process')),
+                                
                                 'qc_person_name' =>   trim($this->input->post('qc_person_name')),
 
                                 'remarks' =>    trim($this->input->post('remarks')),
@@ -6233,6 +6235,7 @@ class Admin extends BaseController
                                 'material_match_to_drawing' =>   trim($this->input->post('material_match_to_drawing')),
                                 'material_grade' =>   trim($this->input->post('material_grade')),
                                 'next_process' =>   trim($this->input->post('next_process')),
+                                'additional_process' =>   trim($this->input->post('additional_process')),
                                 'qc_person_name' =>   trim($this->input->post('qc_person_name')),
 
 
@@ -6331,6 +6334,7 @@ class Admin extends BaseController
                                 'material_match_to_drawing' =>   trim($this->input->post('material_match_to_drawing')),
                                 'material_grade' =>   trim($this->input->post('material_grade')),
                                 'next_process' =>   trim($this->input->post('next_process')),
+                                'additional_process' =>   trim($this->input->post('additional_process')),
                                 'qc_person_name' =>   trim($this->input->post('qc_person_name')),
 
                             );
@@ -6406,6 +6410,7 @@ class Admin extends BaseController
                                 'material_match_to_drawing' =>   trim($this->input->post('material_match_to_drawing')),
                                 'material_grade' =>   trim($this->input->post('material_grade')),
                                 'next_process' =>   trim($this->input->post('next_process')),
+                                'additional_process' =>   trim($this->input->post('additional_process')),
                                 'qc_person_name' =>   trim($this->input->post('qc_person_name')),
 
                         );
