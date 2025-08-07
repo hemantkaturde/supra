@@ -9211,6 +9211,8 @@
 						$('#material_grade').val(fetchResponse.material_grade);
 						$('#next_process').val(fetchResponse.next_process);
 						$('#qc_person_name').val(fetchResponse.qc_person_name);
+                        $('#additional_process').val(fetchResponse.additional_process);
+						
 
 						$('#units').val(fetchResponse.units);
 						$('#boxex_goni_bundle').val(fetchResponse.boxex_goni_bundle);
