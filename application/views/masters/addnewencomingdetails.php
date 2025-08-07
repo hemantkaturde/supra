@@ -633,9 +633,15 @@
                                                          <div class="form-group row">
                                                             <label class="col-sm-3 col-form-label">Material Match To Drawing</label>
                                                             <div class="col-sm-9">
-                                                                <input type="text" class="form-control" id="material_match_to_drawing"
+                                                                <!-- <input type="text" class="form-control" id="material_match_to_drawing"
                                                                     name="material_match_to_drawing">
-                                                                <p class="error material_match_to_drawing_error"></p>
+                                                                <p class="error material_match_to_drawing_error"></p> -->
+                                                                 <select class="form-control" name="material_match_to_drawing"
+                                                                        id="material_match_to_drawing" readonly >
+                                                                        <option st-id="" value="YES" selected>YES</option>
+                                                                        <option st-id="" value="NO">NO</option>
+                                                                  </select>
+                                                                  <p class="error material_match_to_drawing_error"></p>
                                                             </div>
                                                         </div>
 
