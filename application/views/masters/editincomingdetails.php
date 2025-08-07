@@ -502,7 +502,7 @@
                                                                     name="material_match_to_drawing">
                                                                 <p class="error material_match_to_drawing_error"></p> -->
                                                                    <select class="form-control" name="material_match_to_drawing"
-                                                                        id="material_match_to_drawing" readonly >
+                                                                        id="material_match_to_drawing" >
                                                                         <option st-id="" value="YES" selected>YES</option>
                                                                         <option st-id="" value="NO">NO</option>
                                                                   </select>
