@@ -25421,4 +25421,82 @@ public function tdir(){
 }
 
 
+public function addTDIR(){
+
+    $post_submit = $this->input->post();
+    if($post_submit){
+        $save_uspincoming_response = array();
+
+        // $this->form_validation->set_rules('id_number','Id Number','trim|required');
+        // $this->form_validation->set_rules('usp_date','USP Date','trim|required');
+        // $this->form_validation->set_rules('usp_name','usp Name','trim|required');
+        // $this->form_validation->set_rules('challan_number','Challan Number','trim');
+        // $this->form_validation->set_rules('challan_date','Challan Date','trim');
+        // $this->form_validation->set_rules('report_by','Report By','trim');
+        // $this->form_validation->set_rules('remark','Remark','trim');
+        // $this->form_validation->set_rules('usp_status','USP Staus','trim');
+
+
+        // if($this->form_validation->run() == FALSE)
+        // {
+        //     $save_uspincoming_response['status'] = 'failure';
+        //     $save_uspincoming_response['error'] = array('id_number'=>strip_tags(form_error('id_number')), 'usp_date'=>strip_tags(form_error('usp_date')), 'usp_name'=>strip_tags(form_error('usp_name')), 'challan_number'=>strip_tags(form_error('challan_number')),'challan_date'=>strip_tags(form_error('challan_date')),'report_by'=>strip_tags(form_error('report_by')),'remark'=>strip_tags(form_error('remark')),'usp_status'=>strip_tags(form_error('usp_status')));
+        // }else{
+
+
+        //     $data = array(
+        //         'usp_id_number' =>trim($this->input->post('id_number')),
+        //         'date'=>trim($this->input->post('usp_date')),
+        //         'usp_name_id' =>trim($this->input->post('usp_name')),
+        //         'challan_number_id'  =>trim($this->input->post('challan_number')),
+        //         'challan_date'  =>trim($this->input->post('challan_date')),
+        //         'report_by'  =>trim($this->input->post('report_by')),
+        //         'usp_status'  =>trim($this->input->post('usp_status')),
+        //         'remark'  =>trim($this->input->post('remark'))
+        //     );
+
+        //     if($this->input->post('usp_incoming_id')){
+        //         $usp_incoming_id = trim($this->input->post('usp_incoming_id'));
+        //     }else{
+        //         $usp_incoming_id = '';
+        //     }
+            
+        //     $savenewuspincoming= $this->admin_model->savenewuspincoming($usp_incoming_id,$data);
+
+        //     if($savenewuspincoming){
+
+        //         $update_last_inserted_id_in_uspincoming = $this->admin_model->update_last_inserted_id_in_uspincoming($savenewuspincoming);
+        //         if($update_last_inserted_id_in_uspincoming){
+                   
+        //             $save_uspincoming_response['status'] = 'success';
+        //             $save_uspincoming_response['error'] = array('id_number'=>strip_tags(form_error('id_number')), 'usp_date'=>strip_tags(form_error('usp_date')), 'usp_name'=>strip_tags(form_error('usp_name')), 'challan_number'=>strip_tags(form_error('challan_number')),'challan_date'=>strip_tags(form_error('challan_date')),'report_by'=>strip_tags(form_error('report_by')),'remark'=>strip_tags(form_error('remark')),'usp_status'=>strip_tags(form_error('usp_status')));
+        //         }
+
+        //    }else{
+        //         $save_uspincoming_response['status'] = 'failure';
+        //         $save_uspincoming_response['error'] = array('id_number'=>strip_tags(form_error('id_number')), 'usp_date'=>strip_tags(form_error('usp_date')), 'usp_name'=>strip_tags(form_error('usp_name')), 'challan_number'=>strip_tags(form_error('challan_number')),'challan_date'=>strip_tags(form_error('challan_date')),'report_by'=>strip_tags(form_error('report_by')),'remark'=>strip_tags(form_error('remark')),'usp_status'=>strip_tags(form_error('usp_status')));
+        //     }
+
+        //   }
+
+        // echo json_encode($save_uspincoming_response);
+
+    }else{
+            $process = 'Add New TDIR';
+            $processFunction = 'Admin/addTDIR';
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Add New TDIR';
+            // $data['vendorList']= $this->admin_model->fetchALLvendorList();
+            // $data['getUSPmasterlist']= $this->admin_model->getUSPmasterlist();
+            // $data['vendorpoList']= $this->admin_model->fetchALLvendorpoList();
+            // $data['challanList']= $this->admin_model->fetchALLchallanList();
+            // $data['getitemdetaiilsuspincoming']= $this->admin_model->getitemdetaiilsuspincoming();
+            // $data['getPrevioususpincomingnumber']= $this->admin_model->getPrevioususpincomingnumber()[0];
+            $this->loadViews("masters/addTDIR", $this->global, $data, NULL);
+
+    }
+
+}
+
+
 }
