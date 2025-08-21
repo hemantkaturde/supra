@@ -43,31 +43,17 @@
                                     id="view_production_status_report">
                                     <thead>
                                         <tr style="background-color:#3c8dbc !important;color:#fff">
-                                           <th>Report No</th>
-                                            <th>Vendor Name</th>
-                                            <th>Vendor PO No</th>
-                                            <th>Vendor PO Date</th>
-                                            <th>Part No</th>
-                                            <th>Part Name</th>
-                                            <th>Material Type</th>
-                                            <th>Additional Process</th>
-                                            <th>Vendor Order Qty</th>
-                                            <th>Buyer Name</th>
-                                            <th>Buyer PO No</th>
-                                            <th>Buyer PO Date</th>
-                                            <th>Order Qty</th>
-                                            <th>Vendor Delivery Date</th>
-                                            <th>Invoice Qty</th>
-                                            <th>Invoice Date</th>
-                                            <th>Lot No</th>
-                                            <th>Lot Qty</th>
-                                            <th>Checking Status</th>
-                                            <th>Checked By</th>
+                                            <th>Report no.</th>
+                                            <th>Vendor name</th>
+                                            <th>Vendor po. no.</th>
+                                            <th>Part no.</th>
+                                            <th>Part name</th>
+                                            <th>Buyer name</th>
+                                            <th>Inspection date</th>
+                                            <th>Checked by</th>
                                             <th>Remarks</th>
-                                            <th>Status</th>
-                                            <th>Notes</th>
                                             <th>Action</th>
-                                                                                </tr>
+                                          </tr>
                                     </thead>
                                     <tbody>
 

@@ -26570,3 +26570,87 @@
 	
    </script>
 <?php } ?>
+
+
+<?php if($pageTitle=='Add New TDIR'){ ?>
+ <script type="text/javascript">
+	$(document).ready(function() { 
+
+				    var supplier_vendor = $('#vendor_name').val();
+					//$(".loader_ajax").show();
+					// $("#customers-list").html('');
+					$('#supplier_po_number_div').css('display','none');
+					$('#vendor_po_number_div').css('display','block');
+					$('#supplier_part_number_div').css('display','none');
+					$('#vendor_part_number_div').css('display','block');
+
+					var vendor_name = $('#vendor_name').val();
+					var vendor_po_id = $('#vendor_po_id').val();
+				
+					$.ajax({
+						url : "<?php echo ADMIN_PATH;?>getVendorPoconfirmationvendorlist",
+						type: "POST",
+						data : {'vendor_name' : vendor_name,'vendor_po_id':vendor_po_id},
+						success: function(data, textStatus, jqXHR)
+						{
+							$(".loader_ajax").hide();
+							if(data == "failure")
+							{
+								$('#vendor_po_number').html('<option value="">Select Vendor PO Number</option>');
+							}
+							else
+							{
+								// $('#supplier_po_number').html('<option value="">Select supplier PO Number</option>');
+								$('#vendor_po_number').html(data);
+
+								var vendor_po_number = $('#vendor_po_number').val();
+
+								$('#supplier_part_number_div').css('display','none');
+								$('#vendor_part_number_div').css('display','block');
+
+								$("#vendor_part_number").html('');
+
+								var vendor_part_number_id =  $('#vendor_part_number_id').val();
+
+
+
+								$.ajax({
+									url : "<?php echo ADMIN_PATH;?>admin/getVendoritemonlyforsyppliervendorcompaint",
+									type: "POST",
+									data : {'vendor_po_number' : vendor_po_number,'vendor_part_number_id':vendor_part_number_id},
+									success: function(data, textStatus, jqXHR)
+									{
+										$(".loader_ajax").hide();
+										if(data == "failure")
+										{
+											$('#vendor_part_number').html('<option value="">Select Part Number</option>');
+										}
+										else
+										{
+											$('#vendor_part_number').html(data);
+
+										}
+									},
+									error: function (jqXHR, textStatus, errorThrown)
+									{
+										$('#vendor_part_number').html();
+									}
+								});
+								return false;
+
+								
+
+							}
+						},
+						error: function (jqXHR, textStatus, errorThrown)
+						{
+							$('#vendor_po_number').html();
+							//$(".loader_ajax").hide();
+						}
+					});
+					return false;
+			    
+			});
+
+    </script>
+<?php } ?>

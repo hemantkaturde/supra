@@ -25486,7 +25486,7 @@ public function addTDIR(){
             $processFunction = 'Admin/addTDIR';
             $this->logrecord($process,$processFunction);
             $this->global['pageTitle'] = 'Add New TDIR';
-            // $data['vendorList']= $this->admin_model->fetchALLvendorList();
+            $data['vendorList']= $this->admin_model->fetchALLvendorList();
             // $data['getUSPmasterlist']= $this->admin_model->getUSPmasterlist();
             // $data['vendorpoList']= $this->admin_model->fetchALLvendorpoList();
             // $data['challanList']= $this->admin_model->fetchALLchallanList();
