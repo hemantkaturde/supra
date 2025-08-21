@@ -25413,4 +25413,12 @@ public function downlaod_vendor_rejection_report($from_date,$to_date,$vendor_nam
 
 
 
+public function tdir(){
+    $process = 'TDIR Report';
+    $processFunction = 'Admin/tdir';
+    $this->global['pageTitle'] = 'TDIR Report';
+    $this->loadViews("masters/tdir_report", $this->global, $data, NULL);  
+}
+
+
 }

@@ -655,6 +655,8 @@ $route['downlaodcreditnote/(:any)'] = "admin/downlaodcreditnote/$1";
 
 $route['vendor_rejection_form'] = "admin/vendor_rejection_form";
 
+$route['tdir'] = "admin/tdir";
+
 
 
 
