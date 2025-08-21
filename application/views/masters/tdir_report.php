@@ -4,22 +4,38 @@
         <h1>
             <i class="fa fa-users"></i> Tracking of Dimenstional Inspection Report
             <small>
-                <ul class="breadcrumb" style="background-color:#ecf0f5 !important">
+                <!-- <ul class="breadcrumb" style="background-color:#ecf0f5 !important">
                     <li class="completed"><a href="javascript:void(0);">Masters</a></li>
                     <li class="active"><a href="javascript:void(0);">Tracking of Dimenstional Inspection Report</a></li>
-                </ul>
+                </ul> -->
             </small>
         </h1>
     </section>
 
     <section class="content">
+
+    <div class="row">
+            <div class="col-xs-6 text-left">
+                <ul class="breadcrumb" style="background-color:#ecf0f5 !important">
+                    <li class="completed"><a href="javascript:void(0);">Masters</a></li>
+                    <li class="active"><a href="javascript:void(0);">Tracking of Dimenstional Inspection Report</a></li>
+                </ul>
+            </div>
+            <div class="col-xs-6 text-right">
+                <div class="form-group">
+                <?php if($this->session->userdata('roleText')=='Superadmin' || $this->session->userdata('roleText')=='Purchase' || $this->session->userdata('roleText')=='QC'){ ?>
+                    <a class="btn btn-primary" href="<?php echo base_url(); ?>addTDIR">
+                        <i class="fa fa-plus"></i> Add TDIR</a>
+                <?php } ?>
+                </div>
+            </div>
+        </div>
+
+
         <div class="row">
             <div class="col-xs-12">
                 <div class="box">
-                    <div class="box box-primary">
-                        <div class="box-header">
-                            <h3 class="box-title">Tracking of Dimenstional Inspection Report</h3>
-                        </div>
+                    <div class="box box-primary"> 
                         <?php $this->load->helper("form"); ?>
                         <div class="box-body">
                             <div class="panel-body">
