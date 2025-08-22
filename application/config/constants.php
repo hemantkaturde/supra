@@ -195,6 +195,8 @@ define('TBL_PACKING_MASTER','tbl_packing_master');
 define('TBL_PACKING_CHALLAN','tbl_packing_challan');
 define('TBL_PACKING_CHALLAN_ITEM','tbl_packing_challan_item');
 
+define('TBL_TDIR','tbl_tdir');
+
 
 define('SMTP_HOST','mail.supraexports.in');
 define('SMTP_USER','supraportal@supraexports.in');

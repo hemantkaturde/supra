@@ -26574,23 +26574,21 @@
 
 <?php if($pageTitle=='Add New TDIR'){ ?>
  <script type="text/javascript">
-	$(document).ready(function() { 
-
-				    var supplier_vendor = $('#vendor_name').val();
+	            $(document).ready(function() { 
+				    // var supplier_vendor = $('#vendor_name').val();
 					//$(".loader_ajax").show();
 					// $("#customers-list").html('');
-					$('#supplier_po_number_div').css('display','none');
-					$('#vendor_po_number_div').css('display','block');
-					$('#supplier_part_number_div').css('display','none');
-					$('#vendor_part_number_div').css('display','block');
+					// $('#supplier_po_number_div').css('display','none');
+					// $('#vendor_po_number_div').css('display','block');
+					// $('#supplier_part_number_div').css('display','none');
+					// $('#vendor_part_number_div').css('display','block');
 
 					var vendor_name = $('#vendor_name').val();
-					var vendor_po_id = $('#vendor_po_id').val();
 				
 					$.ajax({
 						url : "<?php echo ADMIN_PATH;?>getVendorPoconfirmationvendorlist",
 						type: "POST",
-						data : {'vendor_name' : vendor_name,'vendor_po_id':vendor_po_id},
+						data : {'vendor_name' : vendor_name},
 						success: function(data, textStatus, jqXHR)
 						{
 							$(".loader_ajax").hide();
@@ -26603,40 +26601,40 @@
 								// $('#supplier_po_number').html('<option value="">Select supplier PO Number</option>');
 								$('#vendor_po_number').html(data);
 
-								var vendor_po_number = $('#vendor_po_number').val();
+								// var vendor_po_number = $('#vendor_po_number').val();
 
-								$('#supplier_part_number_div').css('display','none');
-								$('#vendor_part_number_div').css('display','block');
+								// $('#supplier_part_number_div').css('display','none');
+								// $('#vendor_part_number_div').css('display','block');
 
-								$("#vendor_part_number").html('');
+								// $("#vendor_part_number").html('');
 
-								var vendor_part_number_id =  $('#vendor_part_number_id').val();
+								// var vendor_part_number_id =  $('#vendor_part_number_id').val();
 
 
 
-								$.ajax({
-									url : "<?php echo ADMIN_PATH;?>admin/getVendoritemonlyforsyppliervendorcompaint",
-									type: "POST",
-									data : {'vendor_po_number' : vendor_po_number,'vendor_part_number_id':vendor_part_number_id},
-									success: function(data, textStatus, jqXHR)
-									{
-										$(".loader_ajax").hide();
-										if(data == "failure")
-										{
-											$('#vendor_part_number').html('<option value="">Select Part Number</option>');
-										}
-										else
-										{
-											$('#vendor_part_number').html(data);
+								// $.ajax({
+								// 	url : "<?php echo ADMIN_PATH;?>admin/getVendoritemonlyforsyppliervendorcompaint",
+								// 	type: "POST",
+								// 	data : {'vendor_po_number' : vendor_po_number,'vendor_part_number_id':vendor_part_number_id},
+								// 	success: function(data, textStatus, jqXHR)
+								// 	{
+								// 		$(".loader_ajax").hide();
+								// 		if(data == "failure")
+								// 		{
+								// 			$('#vendor_part_number').html('<option value="">Select Part Number</option>');
+								// 		}
+								// 		else
+								// 		{
+								// 			$('#vendor_part_number').html(data);
 
-										}
-									},
-									error: function (jqXHR, textStatus, errorThrown)
-									{
-										$('#vendor_part_number').html();
-									}
-								});
-								return false;
+								// 		}
+								// 	},
+								// 	error: function (jqXHR, textStatus, errorThrown)
+								// 	{
+								// 		$('#vendor_part_number').html();
+								// 	}
+								// });
+								// return false;
 
 								
 
@@ -26650,7 +26648,224 @@
 					});
 					return false;
 			    
-			});
+			    });
+
+				$(document).on('change','#vendor_name',function(e){  
+				       e.preventDefault();
+						var vendor_name = $('#vendor_name').val();
+						$.ajax({
+							url : "<?php echo ADMIN_PATH;?>getVendorPoconfirmationvendorlist",
+							type: "POST",
+							data : {'vendor_name' : vendor_name},
+							success: function(data, textStatus, jqXHR)
+							{
+								$(".loader_ajax").hide();
+								if(data == "failure")
+								{
+									$('#vendor_po_number').html('<option value="">Select Vendor PO Number</option>');
+								}
+								else
+								{
+									// $('#supplier_po_number').html('<option value="">Select supplier PO Number</option>');
+									$('#vendor_po_number').html(data);
+									$('#vendor_part_number').html('<option value="">Select Part Number</option>');
+								}
+							},
+							error: function (jqXHR, textStatus, errorThrown)
+							{
+								$('#vendor_po_number').html();
+								//$(".loader_ajax").hide();
+								$('#vendor_part_number').html('<option value="">Select Part Number</option>');
+							}
+						});
+						return false;
+				});
+
+				$(document).on('change','#vendor_po_number',function(e){  
+				       e.preventDefault();
+					   var vendor_po_number = $('#vendor_po_number').val();
+
+						$.ajax({
+							url : "<?php echo ADMIN_PATH;?>admin/getVendoritemonlyforsyppliervendorcompaint",
+							type: "POST",
+							data : {'vendor_po_number' : vendor_po_number},
+							success: function(data, textStatus, jqXHR)
+								{
+											$(".loader_ajax").hide();
+											if(data == "failure")
+											{
+												$('#vendor_part_number').html('<option value="">Select Part Number</option>');
+												
+											}
+											else
+											{
+												$('#vendor_part_number').html(data);
+
+												var part_number = $('#vendor_part_number').val();
+												$.ajax({
+													url : "<?php echo ADMIN_PATH;?>getvendorpartdetialstdir_report",
+													type: "POST",
+													data : {'part_number' : part_number},
+														success: function(data, textStatus, jqXHR)
+														{
+															var get_vendoritem_data = jQuery.parseJSON( data );
+
+															$(".loader_ajax").hide();
+																if(data == "failure")
+																	{
+																		$('#part_name').val('');
+																		$('#order_qty').val('');
+																		$('#vendor_order_qty').val('');
+																		
+																	}
+																else
+																	{
+																		$('#part_name').val(get_vendoritem_data.name);
+																		$('#order_qty').val(get_vendoritem_data.order_oty);
+																		$('#vendor_order_qty').val(get_vendoritem_data.vendor_qty);
+																	}
+														},
+														error: function (jqXHR, textStatus, errorThrown)
+														{
+																$('#part_name').val('');
+																$('#order_qty').val('');
+																$('#vendor_order_qty').val('');
+														}
+													});
+												return false;
+
+
+											}
+								},
+								error: function (jqXHR, textStatus, errorThrown)
+									{
+										$('#vendor_part_number').html();
+									}
+						});
+						return false;
+
+				});
+				
+
+				$(document).on('change','#vendor_part_number',function(e){  
+			
+					e.preventDefault();
+					var part_number = $('#vendor_part_number').val();
+					$.ajax({
+						url : "<?php echo ADMIN_PATH;?>getvendorpartdetialstdir_report",
+						type: "POST",
+						data : {'part_number' : part_number},
+							success: function(data, textStatus, jqXHR)
+							{
+								var get_vendoritem_data = jQuery.parseJSON( data );
+
+								$(".loader_ajax").hide();
+									if(data == "failure")
+										{
+											$('#part_name').val('');
+											$('#order_qty').val('');
+											$('#vendor_order_qty').val('');
+											
+										}
+									else
+										{
+											$('#part_name').val(get_vendoritem_data.name);
+											$('#order_qty').val(get_vendoritem_data.order_oty);
+											$('#vendor_order_qty').val(get_vendoritem_data.vendor_qty);
+										}
+							},
+							error: function (jqXHR, textStatus, errorThrown)
+							{
+									$('#part_name').val('');
+									$('#order_qty').val('');
+									$('#vendor_order_qty').val('');
+							}
+						});
+					return false;
+				});
+
+
+				$(document).on('change','.vendor_po_number_for_buyer_details',function(e){  
+		            	e.preventDefault();
+			
+		         	//$(".loader_ajax").show();
+			            var vendor_po_number = $('#vendor_po_number').val();
+		
+		
+						$.ajax({
+							url : "<?php echo ADMIN_PATH;?>getbuyerdetialsbyvendorponumberfortdir",
+							type: "POST",
+							data : {'vendor_po_number' : vendor_po_number},
+							success: function(data, textStatus, jqXHR)
+							{
+								$(".loader_ajax").hide();
+								if(data == "failure")
+								{
+									$('#buyer_name').val('');
+									$('#buyer_po_date').val('');
+								}
+								else
+								{
+									var data_row_material = jQuery.parseJSON( data );
+									$('#buyer_name').val(data_row_material.buyer_name);
+									$('#buyer_po_date').val(data_row_material.buyer_po_date);
+							}
+							},
+							error: function (jqXHR, textStatus, errorThrown)
+							{
+								    $('#buyer_name').val('');
+									$('#buyer_po_date').val('');
+								    //$(".loader_ajax").hide();
+							}
+						});
+						return false;
+	        	});
+
+				$(document).on('click','#savenewTDIR',function(e){
+					e.preventDefault();
+					$(".loader_ajax").show();
+					var formData = new FormData($("#addTDIRform")[0]);
+
+					$.ajax({
+						url : "<?php echo base_url();?>addTDIR",
+						type: "POST",
+						data : formData,
+						cache: false,
+						contentType: false,
+						processData: false,
+						success: function(data, textStatus, jqXHR)
+						{
+							var fetchResponse = $.parseJSON(data);
+							if(fetchResponse.status == "failure")
+							{
+								$.each(fetchResponse.error, function (i, v)
+								{
+									$('.'+i+'_error').html(v);
+								});
+								$(".loader_ajax").hide();
+							}
+							else if(fetchResponse.status == 'success')
+							{
+								swal({
+									title: "Success",
+									text: "TDIR Successfully Added!",
+									icon: "success",
+									button: "Ok",
+									},function(){ 
+										$("#modal-md").hide();
+										window.location.href = "<?php echo base_url().'tdir'?>";
+								});		
+							}
+							
+						},
+						error: function (jqXHR, textStatus, errorThrown)
+						{
+						$(".loader_ajax").hide();
+						}
+					});
+					return false;
+				});
+			
 
     </script>
 <?php } ?>

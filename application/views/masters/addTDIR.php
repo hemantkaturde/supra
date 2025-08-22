@@ -21,7 +21,7 @@
                             <h3 class="box-title">Add Tracking of Dimenstional Inspection Report</h3>
                         </div>
                         <?php $this->load->helper("form"); ?>
-                        <form role="form" id="addsalestrackingreport" action="<?php echo base_url() ?>addsalestrackingreport" method="post" role="form">
+                        <form role="form" id="addTDIRform" action="#" method="post" role="form">
                             <div class="box-body">
 
                             
@@ -29,7 +29,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="report_number">Report Number<span class="required">*</span></label>
-                                            <input type="text" class="form-control" id="report_number" name="report_number">
+                                            <input type="text" class="form-control" value="2526/149" id="report_number" name="report_number">
                                         </div>
                                     </div>
 
@@ -51,7 +51,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="vendor_po">Vendor PO</label>
-                                            <select class="form-control" name="vendor_po_number" id="vendor_po_number">
+                                            <select class="form-control vendor_po_number_for_buyer_details" name="vendor_po_number" id="vendor_po_number">
                                             </select> 
                                             <p class="error vendor_po_number_error"></p>
                                         </div>
@@ -59,9 +59,9 @@
 
                                      <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="inv_amount">Vendor PO Date</label>
-                                              <input type="text" class="form-control" id="inv_amount" name="inv_amount">
-                                            <p class="error inv_amount_error"></p>
+                                            <label for="vendor_po_date">Vendor PO Date</label>
+                                              <input type="text" class="form-control" id="vendor_po_date" name="vendor_po_date">
+                                            <p class="error vendor_po_date_error"></p>
                                         </div>
                                     </div>
                                    
@@ -72,10 +72,10 @@
 
                                  <div class="col-md-3">
                                        <div class="form-group">
-                                            <label for="supplier_part_number">Part Number</label>
-                                            <select class="form-control" name="supplier_part_number" id="supplier_part_number">
+                                            <label for="vendor_part_number">Part Number</label>
+                                            <select class="form-control" name="vendor_part_number" id="vendor_part_number">
                                             </select> 
-                                            <p class="error supplier_part_number_error"></p>
+                                            <p class="error vendor_part_number_error"></p>
                                         </div>
                                     </div>
 
@@ -83,26 +83,26 @@
                                     
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="igst_value">Part Name</label>
-                                            <input type="text" class="form-control" id="igst_value" name="igst_value">
-                                            <p class="error igst_value_error"></p>
+                                            <label for="part_name">Part Name</label>
+                                            <input type="text" class="form-control" id="part_name" name="part_name">
+                                            <p class="error part_name_error"></p>
                                         </div>
                                     </div>
 
 
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="igst_rcved_amt">Vendor Order Qty</label>
-                                            <input type="text" class="form-control" id="igst_rcved_amt" name="igst_rcved_amt">
-                                            <p class="error igst_rcved_amt_error"></p>
+                                            <label for="vendor_order_qty">Vendor Order Qty</label>
+                                            <input type="text" class="form-control" id="vendor_order_qty" name="vendor_order_qty">
+                                            <p class="error vendor_order_qty_error"></p>
                                         </div>
                                     </div>
 
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="igst_rcved_amt">Buyer Name</label>
-                                            <input type="text" class="form-control" id="igst_rcved_amt" name="igst_rcved_amt">
-                                            <p class="error igst_rcved_amt_error"></p>
+                                            <label for="buyer_name">Buyer Name</label>
+                                            <input type="text" class="form-control" id="buyer_name" name="buyer_name">
+                                            <p class="error buyer_name_error"></p>
                                         </div>
                                     </div>
                                 </div>
@@ -110,26 +110,26 @@
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="igst_rcved_date">Buyer PO Date</label>
-                                            <input type="text" class="form-control datepicker" id="igst_rcved_date" name="igst_rcved_date">
-                                            <p class="error igst_rcved_date_error"></p>
+                                            <label for="buyer_po_date">Buyer PO Date</label>
+                                            <input type="text" class="form-control" id="buyer_po_date" name="buyer_po_date">
+                                            <p class="error buyer_po_date_error"></p>
                                         </div>
                                     </div>
                                     
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="no_of_ctns">Order Qty</label>
-                                            <input type="text" class="form-control" id="no_of_ctns" name="no_of_ctns" required readonly>
-                                            <p class="error no_of_ctns_error"></p>
+                                            <label for="order_qty">Order Qty</label>
+                                            <input type="text" class="form-control" id="order_qty" name="order_qty">
+                                            <p class="error order_qty_error"></p>
                                         </div>
                                     </div>
 
                                 
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="port_of_discharge">Material Type</label>
-                                            <input type="text" class="form-control"  id="port_of_discharge" name="port_of_discharge">
-                                            <p class="error port_of_discharge_error"></p>
+                                            <label for="material_type">Material Type</label>
+                                            <input type="text" class="form-control"  id="material_type" name="material_type">
+                                            <p class="error material_type_error"></p>
                                         </div>
                                     </div>
                                 </div>
@@ -137,23 +137,23 @@
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="sb_no">Additional Process</label>
-                                            <input type="text" class="form-control" id="sb_no" name="sb_no">
-                                            <p class="error sb_no_error"></p>
+                                            <label for="additional_process">Additional Process</label>
+                                            <input type="text" class="form-control" id="additional_process" name="additional_process">
+                                            <p class="error additional_process_error"></p>
                                         </div>
                                     </div>
 
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="sb_no">Remarks</label>
-                                            <input type="text" class="form-control" id="sb_no" name="sb_no">
-                                            <p class="error sb_no_error"></p>
+                                            <label for="remarks">Remarks</label>
+                                            <input type="text" class="form-control" id="remarks" name="remarks">
+                                            <p class="error remarks_error"></p>
                                     </div>
                                      </div>
                                     
                                 </div>
 
-                                <div class="row">
+                                <!-- <div class="row">
                                  <div class="col-md-12">
                                    <h2>Incoming Lots</h2>
 
@@ -225,13 +225,13 @@
                                     </div>
 
                                     </div>
-                                </div>
+                                </div> -->
 
                             </div>
                             <!-- /.box-body -->
                             <div class="box-footer">
-                                <input type="submit" id="savenewsalestracking" class="btn btn-primary" value="Submit" />
-                                <input type="button" onclick="location.href = '<?php echo base_url() ?>salestrackingreport'" class="btn btn-default" value="Back" />
+                                <input type="submit" id="savenewTDIR" class="btn btn-primary" value="Submit" />
+                                <input type="button" onclick="location.href = '<?php echo base_url() ?>tdir'" class="btn btn-default" value="Back" />
                             </div>
                         </form>
                     </div>
@@ -257,7 +257,7 @@
    });
 </script>
 
-<style>
+<!-- <style>
 
 
   h2 {
@@ -333,4 +333,4 @@
   .btn:hover {
     background: #0056b3;
   }
-</style>
+</style> -->

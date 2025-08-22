@@ -21920,6 +21920,49 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
+    public function getvendorpartdetialstdir_report($part_no){
+
+        $this->db->select('*');
+        $this->db->where(TBL_FINISHED_GOODS.'.fin_id', $part_no);
+        $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
+        $query_result = $this->db->get(TBL_FINISHED_GOODS)->result_array();
+        return $query_result;
+    }
+
+
+    public function getbuyerdetialsbyvendorponumberfortdir($vendor_po_number){
+
+        $this->db->select(TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_BUYER_MASTER.'.buyer_name,'.TBL_BUYER_PO_MASTER.'.buyer_po_date');
+        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id  = '.TBL_VENDOR_PO_MASTER.'.buyer_name');
+        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_VENDOR_PO_MASTER.'.buyer_po_number');
+        $this->db->where(TBL_VENDOR_PO_MASTER.'.id',$vendor_po_number);
+        $query_result = $this->db->get(TBL_VENDOR_PO_MASTER)->result_array();
+        return $query_result;
+    }
+
+
+
+     public function savetdir($id,$data){
+           
+        if($id){
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_TDIR, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        }else{
+            if($this->db->insert(TBL_TDIR, $data)) {
+                return $this->db->insert_id();;
+            } else {
+                return FALSE;
+            }
+
+        }
+          
+    }
+
+
 }
 
 ?>

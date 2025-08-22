@@ -25425,61 +25425,72 @@ public function addTDIR(){
 
     $post_submit = $this->input->post();
     if($post_submit){
-        $save_uspincoming_response = array();
+        $save_TDIR_response = array();
 
-        // $this->form_validation->set_rules('id_number','Id Number','trim|required');
-        // $this->form_validation->set_rules('usp_date','USP Date','trim|required');
-        // $this->form_validation->set_rules('usp_name','usp Name','trim|required');
-        // $this->form_validation->set_rules('challan_number','Challan Number','trim');
-        // $this->form_validation->set_rules('challan_date','Challan Date','trim');
-        // $this->form_validation->set_rules('report_by','Report By','trim');
-        // $this->form_validation->set_rules('remark','Remark','trim');
-        // $this->form_validation->set_rules('usp_status','USP Staus','trim');
+        $this->form_validation->set_rules('report_number','Report Number','trim|required');
+        $this->form_validation->set_rules('vendor_name','Vendor Name','trim|required');
+        $this->form_validation->set_rules('vendor_po_number','Vendor PO Number','trim|required');
+        $this->form_validation->set_rules('vendor_po_date','Vendor PO Date','trim');
+        $this->form_validation->set_rules('vendor_part_number','Vendor Part Number','trim|required');
+        $this->form_validation->set_rules('part_name','Part Name','trim');
+        $this->form_validation->set_rules('vendor_order_qty','Vendor Order Qty','trim');
+        $this->form_validation->set_rules('buyer_name','Buyer Name','trim');
+        $this->form_validation->set_rules('buyer_po_date','Buyer PO Date','trim');
+        $this->form_validation->set_rules('order_qty','Order Qty','trim');
+
+        $this->form_validation->set_rules('material_type','Material Type','trim');
+        $this->form_validation->set_rules('additional_process','Additional Process','trim');
+        $this->form_validation->set_rules('remarks','Remarks','trim');
 
 
-        // if($this->form_validation->run() == FALSE)
-        // {
-        //     $save_uspincoming_response['status'] = 'failure';
-        //     $save_uspincoming_response['error'] = array('id_number'=>strip_tags(form_error('id_number')), 'usp_date'=>strip_tags(form_error('usp_date')), 'usp_name'=>strip_tags(form_error('usp_name')), 'challan_number'=>strip_tags(form_error('challan_number')),'challan_date'=>strip_tags(form_error('challan_date')),'report_by'=>strip_tags(form_error('report_by')),'remark'=>strip_tags(form_error('remark')),'usp_status'=>strip_tags(form_error('usp_status')));
-        // }else{
+        if($this->form_validation->run() == FALSE)
+        {
+            $save_TDIR_response['status'] = 'failure';
+            $save_TDIR_response['error'] = array('report_number'=>strip_tags(form_error('report_number')), 'vendor_name'=>strip_tags(form_error('vendor_name')), 'vendor_po_date'=>strip_tags(form_error('vendor_po_date')), 'vendor_part_number'=>strip_tags(form_error('vendor_part_number')),'part_name'=>strip_tags(form_error('part_name')),'vendor_order_qty'=>strip_tags(form_error('vendor_order_qty')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'order_qty'=>strip_tags(form_error('order_qty')),'material_type'=>strip_tags(form_error('material_type')),'additional_process'=>strip_tags(form_error('additional_process')));
+        }else{
 
 
-        //     $data = array(
-        //         'usp_id_number' =>trim($this->input->post('id_number')),
-        //         'date'=>trim($this->input->post('usp_date')),
-        //         'usp_name_id' =>trim($this->input->post('usp_name')),
-        //         'challan_number_id'  =>trim($this->input->post('challan_number')),
-        //         'challan_date'  =>trim($this->input->post('challan_date')),
-        //         'report_by'  =>trim($this->input->post('report_by')),
-        //         'usp_status'  =>trim($this->input->post('usp_status')),
-        //         'remark'  =>trim($this->input->post('remark'))
-        //     );
+            $data = array(
+                'report_number'        => trim($this->input->post('report_number')),
+                'vendor_name'          => trim($this->input->post('vendor_name')),
+                'vendor_po'          => trim($this->input->post('vendor_po_number')),
+                'vendor_po_date'       => trim($this->input->post('vendor_po_date')),
+                'part_number'   => trim($this->input->post('vendor_part_number')),
+                'part_name'            => trim($this->input->post('part_name')),
+                'vendor_order_qty'     => trim($this->input->post('vendor_order_qty')),
+                'buyer_name'           => trim($this->input->post('buyer_name')),
+                'buyer_po_date'        => trim($this->input->post('buyer_po_date')),
+                'order_qty'            => trim($this->input->post('order_qty')),
+                'material_type'        => trim($this->input->post('material_type')),
+                'additional_process'   => trim($this->input->post('additional_process')),
+                'remarks'              => trim($this->input->post('remarks'))
+            );
 
-        //     if($this->input->post('usp_incoming_id')){
-        //         $usp_incoming_id = trim($this->input->post('usp_incoming_id'));
-        //     }else{
-        //         $usp_incoming_id = '';
-        //     }
+            if($this->input->post('tdir_id')){
+                $tdir_id = trim($this->input->post('tdir_id'));
+            }else{
+                $tdir_id = '';
+            }
             
-        //     $savenewuspincoming= $this->admin_model->savenewuspincoming($usp_incoming_id,$data);
+         $savetdir= $this->admin_model->savetdir($tdir_id,$data);
 
-        //     if($savenewuspincoming){
+         if($savetdir){
 
-        //         $update_last_inserted_id_in_uspincoming = $this->admin_model->update_last_inserted_id_in_uspincoming($savenewuspincoming);
-        //         if($update_last_inserted_id_in_uspincoming){
+                // $update_last_inserted_id_in_uspincoming = $this->admin_model->update_last_inserted_id_in_uspincoming($savenewuspincoming);
+                // if($update_last_inserted_id_in_uspincoming){
                    
-        //             $save_uspincoming_response['status'] = 'success';
-        //             $save_uspincoming_response['error'] = array('id_number'=>strip_tags(form_error('id_number')), 'usp_date'=>strip_tags(form_error('usp_date')), 'usp_name'=>strip_tags(form_error('usp_name')), 'challan_number'=>strip_tags(form_error('challan_number')),'challan_date'=>strip_tags(form_error('challan_date')),'report_by'=>strip_tags(form_error('report_by')),'remark'=>strip_tags(form_error('remark')),'usp_status'=>strip_tags(form_error('usp_status')));
-        //         }
+                    $save_TDIR_response['status'] = 'success';
+                    $save_TDIR_response['error'] = array('report_number'=>strip_tags(form_error('report_number')), 'vendor_name'=>strip_tags(form_error('vendor_name')), 'vendor_po_date'=>strip_tags(form_error('vendor_po_date')), 'vendor_part_number'=>strip_tags(form_error('vendor_part_number')),'part_name'=>strip_tags(form_error('part_name')),'vendor_order_qty'=>strip_tags(form_error('vendor_order_qty')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'order_qty'=>strip_tags(form_error('order_qty')),'material_type'=>strip_tags(form_error('material_type')),'additional_process'=>strip_tags(form_error('additional_process')));
+                // }
 
-        //    }else{
-        //         $save_uspincoming_response['status'] = 'failure';
-        //         $save_uspincoming_response['error'] = array('id_number'=>strip_tags(form_error('id_number')), 'usp_date'=>strip_tags(form_error('usp_date')), 'usp_name'=>strip_tags(form_error('usp_name')), 'challan_number'=>strip_tags(form_error('challan_number')),'challan_date'=>strip_tags(form_error('challan_date')),'report_by'=>strip_tags(form_error('report_by')),'remark'=>strip_tags(form_error('remark')),'usp_status'=>strip_tags(form_error('usp_status')));
-        //     }
+           }else{
+                $save_TDIR_response['status'] = 'failure';
+                $save_TDIR_response['error'] = array('report_number'=>strip_tags(form_error('report_number')), 'vendor_name'=>strip_tags(form_error('vendor_name')), 'vendor_po_date'=>strip_tags(form_error('vendor_po_date')), 'vendor_part_number'=>strip_tags(form_error('vendor_part_number')),'part_name'=>strip_tags(form_error('part_name')),'vendor_order_qty'=>strip_tags(form_error('vendor_order_qty')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'order_qty'=>strip_tags(form_error('order_qty')),'material_type'=>strip_tags(form_error('material_type')),'additional_process'=>strip_tags(form_error('additional_process')));
+           }
 
-        //   }
+          }
 
-        // echo json_encode($save_uspincoming_response);
+        echo json_encode($save_TDIR_response);
 
     }else{
             $process = 'Add New TDIR';
@@ -25487,16 +25498,50 @@ public function addTDIR(){
             $this->logrecord($process,$processFunction);
             $this->global['pageTitle'] = 'Add New TDIR';
             $data['vendorList']= $this->admin_model->fetchALLvendorList();
-            // $data['getUSPmasterlist']= $this->admin_model->getUSPmasterlist();
-            // $data['vendorpoList']= $this->admin_model->fetchALLvendorpoList();
-            // $data['challanList']= $this->admin_model->fetchALLchallanList();
-            // $data['getitemdetaiilsuspincoming']= $this->admin_model->getitemdetaiilsuspincoming();
-            // $data['getPrevioususpincomingnumber']= $this->admin_model->getPrevioususpincomingnumber()[0];
             $this->loadViews("masters/addTDIR", $this->global, $data, NULL);
 
     }
 
 }
+
+
+public function getvendorpartdetialstdir_report(){
+
+    $part_no=$this->input->post('part_number');
+    if($part_no) {
+        $part_no_data = $this->admin_model->getvendorpartdetialstdir_report($part_no);
+        if(count($part_no_data) >= 1) {
+            echo json_encode($part_no_data[0]);
+        } else {
+            echo 'failure';
+        }
+    } else {
+        echo 'failure';
+    }
+}
+
+
+public function getbuyerdetialsbyvendorponumberfortdir(){
+
+    $vendor_po_number=$this->input->post('vendor_po_number');
+    if($vendor_po_number) {
+        $buyer_po_data = $this->admin_model->getbuyerdetialsbyvendorponumberfortdir($vendor_po_number);
+        if(count($buyer_po_data) >= 1) {
+            echo json_encode($buyer_po_data[0]);
+        } else {
+            echo 'failure';
+        }
+    } else {
+        echo 'failure';
+    }
+}
+
+
+
+
+
+
+
 
 
 }
