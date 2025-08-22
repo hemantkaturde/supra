@@ -21963,6 +21963,72 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
+      public function gettdirreportcount($params){
+
+         $this->db->select('*'); 
+        //  if($params['search']['value'] != "") 
+        //  {
+        //     $this->db->where("(".TBL_SCRAP_INVOICE.".scrap_invoice_number LIKE '%".$params['search']['value']."%'");
+        //     $this->db->or_where(TBL_SCRAP_INVOICE.".buyer_name LIKE '%".$params['search']['value']."%'");
+        //     $this->db->or_where(TBL_SCRAP_INVOICE.".remark LIKE '%".$params['search']['value']."%')");
+        //  }
+         $this->db->order_by(TBL_TDIR.'.id','DESC');
+         $query = $this->db->get(TBL_TDIR);
+         $rowcount = $query->num_rows();
+         return $rowcount;
+
+    }
+
+
+    public function gettdirreportdata($params){
+
+        $this->db->select('*');
+        // if($params['search']['value'] != "") 
+        // {
+        //     $this->db->where("(".TBL_SCRAP_INVOICE.".scrap_invoice_number LIKE '%".$params['search']['value']."%'");
+        //     $this->db->or_where(TBL_SCRAP_INVOICE.".buyer_name LIKE '%".$params['search']['value']."%'");
+        //     $this->db->or_where(TBL_SCRAP_INVOICE.".remark LIKE '%".$params['search']['value']."%')");
+        // }
+        //$this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id  = '.TBL_SCRAP_INVOICE.'.buyer_name');
+
+        $this->db->where(TBL_TDIR.'.status', 1);
+        // $this->db->limit($params['length'],$params['start']);
+        $this->db->order_by(TBL_TDIR.'.id','DESC');
+        $query = $this->db->get(TBL_TDIR);
+        $fetch_result = $query->result_array();
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['report_number'] = $value['report_number'];
+                $data[$counter]['vendor_name'] =  $value['vendor_name'];
+                $data[$counter]['vendor_po'] =  $value['vendor_po'];
+                $data[$counter]['part_number'] =  $value['part_number'];
+                $data[$counter]['part_name'] =  $value['part_name'];
+                $data[$counter]['vendor_order_qty'] =  $value['vendor_order_qty'];
+
+                $data[$counter]['buyer_name'] =  $value['buyer_name'];
+                $data[$counter]['checked_by'] =  '';
+                $data[$counter]['remark'] =  '';
+
+
+                 
+                $data[$counter]['action'] = '';
+
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."admin/incoming_lots/".$value['id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>    &nbsp";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."edit_tdir/".$value['id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['id']."' class='fa fa-trash-o deletescrapinvoicedata' aria-hidden='true'></i>"; 
+                $counter++; 
+            }
+        }
+
+        return $data;
+
+    }
+
+
 }
 
 ?>

@@ -25537,6 +25537,41 @@ public function getbuyerdetialsbyvendorponumberfortdir(){
 }
 
 
+public function fetchtdirreport(){
+    $params = $_REQUEST;
+    $totalRecords = $this->admin_model->gettdirreportcount($params); 
+    $queryRecords = $this->admin_model->gettdirreportdata($params); 
+
+    $data = array();
+    foreach ($queryRecords as $key => $value)
+    {
+        $i = 0;
+        foreach($value as $v)
+        {
+            $data[$key][$i] = $v;
+            $i++;
+        }
+    }
+    $json_data = array(
+        "draw"            => intval( $params['draw'] ),   
+        "recordsTotal"    => intval( $totalRecords ),  
+        "recordsFiltered" => intval($totalRecords),
+        "data"            => $data   // total data array
+        );
+    echo json_encode($json_data);
+
+}
+
+
+public function incoming_lots($tdir_id){
+
+    $process = 'Incoming Lots TDIR Report';
+    $processFunction = 'Admin/tdir';
+    $this->global['pageTitle'] = 'Incoming Lots TDIR Report';
+    $this->loadViews("masters/incoming_lots_tdir_report", $this->global, $data, NULL); 
+
+}
+
 
 
 

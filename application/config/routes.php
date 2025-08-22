@@ -657,6 +657,11 @@ $route['vendor_rejection_form'] = "admin/vendor_rejection_form";
 
 $route['tdir'] = "admin/tdir";
 $route['addTDIR'] = "admin/addTDIR";
+$route['fetchtdirreport'] = "admin/fetchtdirreport";
+$route['incoming_lots/(:any)'] = "admin/incoming_lots/$1";
+
+
+
 
 $route['getvendorpartdetialstdir_report'] = "admin/getvendorpartdetialstdir_report";
 $route['getbuyerdetialsbyvendorponumberfortdir'] = "admin/getbuyerdetialsbyvendorponumberfortdir";

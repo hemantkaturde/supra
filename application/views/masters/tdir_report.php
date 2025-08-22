@@ -40,7 +40,7 @@
                         <div class="box-body">
                             <div class="panel-body">
                                 <table width="100%" class="table table-striped table-bordered table-hover"
-                                    id="view_production_status_report">
+                                    id="view_tdir_report">
                                     <thead>
                                         <tr style="background-color:#3c8dbc !important;color:#fff">
                                             <th>Report no.</th>

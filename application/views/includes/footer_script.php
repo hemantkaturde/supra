@@ -26572,8 +26572,41 @@
 <?php } ?>
 
 
-<?php if($pageTitle=='Add New TDIR'){ ?>
+<?php if($pageTitle=='Add New TDIR' || $pageTitle=='TDIR Report'){ ?>
  <script type="text/javascript">
+
+
+				$(document).ready(function() {
+					var dt = $('#view_tdir_report').DataTable({
+						"columnDefs": [ 
+							{ className: "details-control", "targets": [ 0 ] },
+							{ "width": "15%", "targets": 0 },
+							{ "width": "10%", "targets": 1 },
+							{ "width": "10%", "targets": 2 },
+							{ "width": "10%", "targets": 3 },
+							{ "width": "10%", "targets": 4 },
+							{ "width": "10%", "targets": 5 },
+							{ "width": "10%", "targets": 6 },
+							{ "width": "8%", "targets": 7 },
+							
+						],
+						responsive: true,
+						"oLanguage": {
+							"sEmptyTable": "<i>No TDIR Report Found.</i>",
+						}, 
+						"bSort" : false,
+						"bFilter":true,
+						"bLengthChange": true,
+						"iDisplayLength": 10,   
+						"bProcessing": true,
+						"serverSide": true,
+						"ajax":{
+							url :"<?php echo base_url();?>fetchtdirreport",
+							type: "post",
+						},
+					});
+				});
+
 	            $(document).ready(function() { 
 				    // var supplier_vendor = $('#vendor_name').val();
 					//$(".loader_ajax").show();
