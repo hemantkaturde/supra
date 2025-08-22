@@ -123,33 +123,16 @@
                                             <p class="error order_qty_error"></p>
                                         </div>
                                     </div>
-
-                                
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label for="material_type">Material Type</label>
-                                            <input type="text" class="form-control"  id="material_type" name="material_type">
-                                            <p class="error material_type_error"></p>
-                                        </div>
-                                    </div>
                                 </div>
                                
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="additional_process">Additional Process</label>
-                                            <input type="text" class="form-control" id="additional_process" name="additional_process">
-                                            <p class="error additional_process_error"></p>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-3">
-                                        <div class="form-group">
                                             <label for="remarks">Remarks</label>
                                             <input type="text" class="form-control" id="remarks" name="remarks">
                                             <p class="error remarks_error"></p>
+                                        </div>
                                     </div>
-                                     </div>
                                     
                                 </div>
 

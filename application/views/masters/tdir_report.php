@@ -49,8 +49,7 @@
                                             <th>Part no.</th>
                                             <th>Part name</th>
                                             <th>Buyer name</th>
-                                            <th>Inspection date</th>
-                                            <th>Checked by</th>
+                                            <th>Ordey Qty</th>
                                             <th>Remarks</th>
                                             <th>Action</th>
                                           </tr>
