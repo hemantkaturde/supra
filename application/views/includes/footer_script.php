@@ -26686,7 +26686,7 @@
 				$(document).ready(function() { 
 
 
-					   e.preventDefault();
+					
 					   var vendor_po_number = $('#vendor_po_id').val();
 
 						$.ajax({
