@@ -51,7 +51,7 @@
                                         <div class="form-group">
                                             <label for="vendor_po">Vendor PO</label>
                                             <select class="form-control vendor_po_number_for_buyer_details vendor_po_number_for_vendor_po_date" name="vendor_po_number" id="vendor_po_number">
-                                                 <option value="<?php echo $getTdirdata[0]['vendor_po_id_for_edit']; ?>"><?php echo $getTdirdata[0]['po_number']; ?></option>
+                                                 <option value="<?php echo $getTdirdata[0]['vendor_po_id_for_edit']; ?>" selected><?php echo $getTdirdata[0]['po_number']; ?></option>
                                             </select> 
                                             <p class="error vendor_po_number_error"></p>
                                         </div>
