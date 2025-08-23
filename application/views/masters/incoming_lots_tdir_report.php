@@ -12,9 +12,6 @@
         </h1>
     </section>
 
-    <?php print_r($getTdirdata);exit;?>
-
-
     <section class="content">
         <div class="row">
             <div class="col-xs-12">
