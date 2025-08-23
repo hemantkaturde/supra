@@ -25598,8 +25598,8 @@ public function deletetdirreport(){
     if($post_submit){
         $result = $this->admin_model->deletetdirreport(trim($this->input->post('id')));
         if ($result) {
-                    $process = 'Delete Packing Challan';
-                    $processFunction = 'Admin/deletepackinchallandata';
+                    $process = 'Delete TDIR';
+                    $processFunction = 'Admin/deletetdirreport';
                     $this->logrecord($process,$processFunction);
                 echo(json_encode(array('status'=>'success')));
             }
