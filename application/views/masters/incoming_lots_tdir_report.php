@@ -41,9 +41,7 @@
 
                                     <?php  
                                     
-                                    print_r($getincoinglotdetailsfortdir);
-                                    exit;
-                                    
+                          
                                     foreach ($getincoinglotdetailsfortdir as $key => $value) { ?>
                                       
                                   
