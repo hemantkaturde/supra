@@ -25593,8 +25593,11 @@ public function incoming_lots($tdir_id){
 
     $process = 'Incoming Lots TDIR Report';
     $processFunction = 'Admin/tdir';
-    $this->global['pageTitle'] = 'Incoming Lots TDIR Report';
+
     $data['getTdirdata']= $this->admin_model->getTdirdata($tdir_id);
+
+    $this->global['pageTitle'] = 'Incoming Lots TDIR Report';
+   
     $this->loadViews("masters/incoming_lots_tdir_report", $this->global, $data, NULL); 
 
 }

@@ -12,6 +12,9 @@
         </h1>
     </section>
 
+    <?php print_r($getTdirdata);exit;?>
+
+
     <section class="content">
         <div class="row">
             <div class="col-xs-12">
@@ -23,6 +26,7 @@
                               <h4>
                                   <p><b>Report Number :</b> <?=$getTdirdata[0]['report_number'] ?></p>
                                   <p><b>Vendor PO Number :</b> <?=$getTdirdata[0]['po_number'] ?></p>
+                                  <p><b>Vendor Name :</b> <?=$getTdirdata[0]['po_number'] ?></p>
                                   <p><b>Part Number :</b> <?=$getexportetails[0]['part_number_label'] ?></p>
                                   <p><b>Vendor Order Qty :</b> <?=$getexportetails[0]['vendor_order_qty'] ?></p>
                               </h4>
