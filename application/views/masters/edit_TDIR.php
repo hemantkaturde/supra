@@ -24,8 +24,9 @@
                         <form role="form" id="addTDIRform" action="#" method="post" role="form">
                             <div class="box-body">
 
-                                                                        <input type="hidden" class="form-control" value="<?php echo $getTdirdata[0]['vendor_po']; ?>" id="vendor_po_id" name="vendor_po_id">
-                                                                        <input type="hidden" class="form-control" value="<?php echo $getTdirdata[0]['fin_id']; ?>" id="part_number_id" name="part_number_id">
+                                <input type="hidden" class="form-control" value="<?php echo $getTdirdata[0]['vendor_po']; ?>" id="vendor_po_id" name="vendor_po_id">
+                                <input type="hidden" class="form-control" value="<?php echo $getTdirdata[0]['fin_id']; ?>" id="part_number_id" name="part_number_id">
+                                <input type="hidden" class="form-control" value="<?php echo $getTdirdata[0]['tdir_id']; ?>" id="tdir_id" name="tdir_id">
 
                     
                                 <div class="row">
@@ -134,82 +135,7 @@
                                             <p class="error remarks_error"></p>
                                         </div>
                                     </div>
-                                    
                                 </div>
-
-                                <!-- <div class="row">
-                                 <div class="col-md-12">
-                                   <h2>Incoming Lots</h2>
-
-                                    <div class="lots-container">
-
-                                    
-                                    <div class="lot-box">
-                                        <h3>Lot 1</h3>
-                                        <div class="lot-details">
-                                        <p><strong>Invoice Qty:</strong> 2636</p>
-                                        <p><strong>Invoice Date:</strong> xx-yy-zz</p>
-                                        </div>
-                                        <div class="form-section">
-                                        <label>Qty:</label>
-                                        <input type="number" placeholder="Enter qty">
-                                        
-                                        <label>Checking:</label>
-                                        <input type="checkbox"> Done
-                                        
-                                        <label>Checked By:</label>
-                                        <input type="text" placeholder="Enter name">
-
-                                        <button class="btn">Save</button>
-                                        </div>
-                                    </div>
-
-                                   
-                                    <div class="lot-box">
-                                        <h3>Lot 2</h3>
-                                        <div class="lot-details">
-                                        <p><strong>Invoice Qty:</strong> --</p>
-                                        <p><strong>Invoice Date:</strong> --</p>
-                                        </div>
-                                        <div class="form-section">
-                                        <label>Qty:</label>
-                                        <input type="number" placeholder="Enter qty">
-                                        
-                                        <label>Checking:</label>
-                                        <input type="checkbox"> Done
-                                        
-                                        <label>Checked By:</label>
-                                        <input type="text" placeholder="Enter name">
-
-                                        <button class="btn">Save</button>
-                                        </div>
-                                    </div>
-
-                                   
-                                    <div class="lot-box">
-                                        <h3>Lot 3</h3>
-                                        <div class="lot-details">
-                                        <p><strong>Invoice Qty:</strong> --</p>
-                                        <p><strong>Invoice Date:</strong> --</p>
-                                        </div>
-                                        <div class="form-section">
-                                        <label>Qty:</label>
-                                        <input type="number" placeholder="Enter qty">
-                                        
-                                        <label>Checking:</label>
-                                        <input type="checkbox"> Done
-                                        
-                                        <label>Checked By:</label>
-                                        <input type="text" placeholder="Enter name">
-
-                                        <button class="btn">Save</button>
-                                        </div>
-                                    </div>
-
-                                    </div>
-
-                                    </div>
-                                </div> -->
 
                             </div>
                             <!-- /.box-body -->
@@ -240,81 +166,3 @@
     });
    });
 </script>
-
-<!-- <style>
-
-
-  h2 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-
-  .lots-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    justify-content: center;
-  }
-
-  .lot-box {
-    flex: 1 1 300px;
-    background: #fff;
-    border: 2px solid #333;
-    border-radius: 8px;
-    padding: 15px;
-    box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
-  }
-
-  .lot-box h3 {
-    margin-top: 0;
-    font-size: 18px;
-    text-align: center;
-    background: #eee;
-    padding: 8px;
-    border-radius: 6px;
-  }
-
-  .lot-details p {
-    margin: 6px 0;
-    font-size: 14px;
-  }
-
-  .form-section {
-    margin-top: 15px;
-    padding: 10px;
-    background: #f1f1f1;
-    border-radius: 6px;
-  }
-
-  .form-section label {
-    display: block;
-    font-size: 13px;
-    margin: 5px 0 3px;
-  }
-
-  .form-section input[type="text"], 
-  .form-section input[type="number"] {
-    width: 100%;
-    padding: 6px;
-    border: 1px solid #aaa;
-    border-radius: 4px;
-  }
-
-  .form-section input[type="checkbox"] {
-    margin-right: 6px;
-  }
-
-  .btn {
-    margin-top: 10px;
-    padding: 8px 14px;
-    background: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-
-  .btn:hover {
-    background: #0056b3;
-  }
-</style> -->
