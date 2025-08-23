@@ -26683,6 +26683,75 @@
 			    
 			    });
 
+				$(document).ready(function() { 
+
+
+					   e.preventDefault();
+					   var vendor_po_number = $('#vendor_po_number').val();
+
+						$.ajax({
+							url : "<?php echo ADMIN_PATH;?>admin/getVendoritemonlyforTDIR",
+							type: "POST",
+							data : {'vendor_po_number' : vendor_po_number},
+							success: function(data, textStatus, jqXHR)
+								{
+											$(".loader_ajax").hide();
+											if(data == "failure")
+											{
+												$('#vendor_part_number').html('<option value="">Select Part Number</option>');
+												
+											}
+											else
+											{
+												$('#vendor_part_number').html(data);
+
+												// var part_number = $('#vendor_part_number').val();
+
+												// $.ajax({
+												// 	url : "<?php echo ADMIN_PATH;?>getvendorpartdetialstdir_report",
+												// 	type: "POST",
+												// 	data : {'part_number' : part_number},
+												// 		success: function(data, textStatus, jqXHR)
+												// 		{
+												// 			var get_vendoritem_data = jQuery.parseJSON( data );
+
+												// 			$(".loader_ajax").hide();
+												// 				if(data == "failure")
+												// 					{
+												// 						$('#part_name').val('');
+												// 						$('#order_qty').val('');
+												// 						$('#vendor_order_qty').val('');
+																		
+												// 					}
+												// 				else
+												// 					{
+												// 						$('#part_name').val(get_vendoritem_data.name);
+												// 						$('#order_qty').val(get_vendoritem_data.order_oty);
+												// 						$('#vendor_order_qty').val(get_vendoritem_data.vendor_qty);
+												// 					}
+												// 		},
+												// 		error: function (jqXHR, textStatus, errorThrown)
+												// 		{
+												// 				$('#part_name').val('');
+												// 				$('#order_qty').val('');
+												// 				$('#vendor_order_qty').val('');
+												// 		}
+												// 	});
+												// return false;
+
+
+											}
+								},
+								error: function (jqXHR, textStatus, errorThrown)
+									{
+										$('#vendor_part_number').html();
+									}
+						});
+						return false;
+
+				});
+
+
 				$(document).on('change','#vendor_name',function(e){  
 				       e.preventDefault();
 						var vendor_name = $('#vendor_name').val();
