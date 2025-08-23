@@ -22075,7 +22075,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     public function getincoinglotdetailsfortdir($vendor_po_id, $part_number_id){
         $this->db->select('*');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id  = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
-        $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.pre_vendor_po_number',$vendor_po_id);
+        $this->db->join(TBL_INCOMING_DETAILS, TBL_INCOMING_DETAILS.'.id  = '.TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id');
+        $this->db->where(TBL_INCOMING_DETAILS.'.vendor_po_number',$vendor_po_id);
         $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.part_number',$part_number_id);
         $query = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
         $fetch_result = $query->result_array();
