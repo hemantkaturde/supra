@@ -49,8 +49,8 @@
                                     <div class="lot-box">
                                         <h3>Lot 1</h3>
                                         <div class="lot-details">
-                                        <p><strong>Invoice Qty:</strong> 2636</p>
-                                        <p><strong>Invoice Date:</strong> xx-yy-zz</p>
+                                        <p><strong>Invoice Qty:</strong> <?=$value['invoice_qty']  ?></p>
+                                        <p><strong>Invoice Date:</strong> <?=$value['invoice_date']  ?></p>
                                         </div>
                                         <div class="form-section">
                                         <label>Qty:</label>
