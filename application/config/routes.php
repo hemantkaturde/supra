@@ -659,6 +659,7 @@ $route['tdir'] = "admin/tdir";
 $route['addTDIR'] = "admin/addTDIR";
 $route['fetchtdirreport'] = "admin/fetchtdirreport";
 $route['incoming_lots/(:any)'] = "admin/incoming_lots/$1";
+$route['deletetdirreport/(:any)'] = "admin/deletetdirreport/$1";
 
 
 

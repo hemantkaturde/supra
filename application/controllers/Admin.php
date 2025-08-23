@@ -25543,7 +25543,7 @@ public function getVendoritemonlyforTDIR(){
         if(count($getVendoritemsonly) >= 1) {
             $content = $content.'<option value="">Select Part Number</option>';
             foreach($getVendoritemsonly as $value) {
-                
+
                 $content = $content.'<option value="'.$value["fin_id"].'" data_id="'.$value["vendor_po_item_id"].'">'.$value["part_number"].'</option>';
             }
             echo $content;
@@ -25590,6 +25590,23 @@ public function incoming_lots($tdir_id){
     $this->global['pageTitle'] = 'Incoming Lots TDIR Report';
     $this->loadViews("masters/incoming_lots_tdir_report", $this->global, $data, NULL); 
 
+}
+
+public function deletetdirreport(){
+
+    $post_submit = $this->input->post();
+    if($post_submit){
+        $result = $this->admin_model->deletetdirreport(trim($this->input->post('id')));
+        if ($result) {
+                    $process = 'Delete Packing Challan';
+                    $processFunction = 'Admin/deletepackinchallandata';
+                    $this->logrecord($process,$processFunction);
+                echo(json_encode(array('status'=>'success')));
+            }
+        else { echo(json_encode(array('status'=>'failed'))); }
+    }else{
+        echo(json_encode(array('status'=>'failed'))); 
+    }
 }
 
 
