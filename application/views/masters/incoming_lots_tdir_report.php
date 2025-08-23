@@ -24,8 +24,7 @@
                         <form role="form" id="addTDIRform" action="#" method="post" role="form">
                             <div class="box-body">
 
-                        
-
+                            
                                 <div class="row">
                                  <div class="col-md-12">
                                    <h2>Incoming Lots</h2>
@@ -101,11 +100,7 @@
                                 </div>
 
                             </div>
-                            <!-- /.box-body -->
-                            <div class="box-footer">
-                                <input type="submit" id="savenewTDIR" class="btn btn-primary" value="Submit" />
-                                <input type="button" onclick="location.href = '<?php echo base_url() ?>tdir'" class="btn btn-default" value="Back" />
-                            </div>
+                        
                         </form>
                     </div>
                 </div>
