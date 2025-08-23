@@ -25543,14 +25543,8 @@ public function getVendoritemonlyforTDIR(){
         if(count($getVendoritemsonly) >= 1) {
             $content = $content.'<option value="">Select Part Number</option>';
             foreach($getVendoritemsonly as $value) {
-
-                if($this->input->post('vendor_po_number')){
-                    $selected ='selected';
-                }else{
-                    $selected ='';
-                }
-
-                $content = $content.'<option value="">Select Part Number</option><option value="'.$value["fin_id"].'" data_id="'.$value["vendor_po_item_id"].'" '.$selected.'>'.$value["part_number"].'</option>';
+                
+                $content = $content.'<option value="'.$value["fin_id"].'" data_id="'.$value["vendor_po_item_id"].'">'.$value["part_number"].'</option>';
             }
             echo $content;
         } else {
