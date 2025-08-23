@@ -40,7 +40,7 @@
                                                     <select class="form-control" name="vendor_name" id="vendor_name">
                                                         <option st-id="" value="">Select Vendor Name</option>
                                                         <?php foreach ($vendorList as $key => $value) {?>
-                                                        <option value="<?php echo $value['ven_id']; ?>" <?php if($value['ven_id']==$getTdirdata[0]['vendor_name']){ echo 'selected';} ?>><?php echo $value['vendor_name']; ?></option>
+                                                        <option value="<?php echo $value['ven_id']; ?>" <?php if($value['ven_id']==$getTdirdata[0]['tdir_vendor_id']){ echo 'selected';} ?>><?php echo $value['vendor_name']; ?></option>
                                                         <?php } ?>
                                                     </select>
                                             <p class="error vendor_name_error"></p>
