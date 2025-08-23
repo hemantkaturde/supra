@@ -26687,7 +26687,7 @@
 
 
 					   e.preventDefault();
-					   var vendor_po_number = $('#vendor_po_number').val();
+					   var vendor_po_number = $('#vendor_po_id').val();
 
 						$.ajax({
 							url : "<?php echo ADMIN_PATH;?>admin/getVendoritemonlyforTDIR",
