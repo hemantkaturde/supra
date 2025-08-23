@@ -26733,39 +26733,39 @@
 											{
 												$('#vendor_part_number').html(data);
 
-												var part_number = $('#vendor_part_number').val();
+												// var part_number = $('#vendor_part_number').val();
 
-												$.ajax({
-													url : "<?php echo ADMIN_PATH;?>getvendorpartdetialstdir_report",
-													type: "POST",
-													data : {'part_number' : part_number},
-														success: function(data, textStatus, jqXHR)
-														{
-															var get_vendoritem_data = jQuery.parseJSON( data );
+												// $.ajax({
+												// 	url : "<?php echo ADMIN_PATH;?>getvendorpartdetialstdir_report",
+												// 	type: "POST",
+												// 	data : {'part_number' : part_number},
+												// 		success: function(data, textStatus, jqXHR)
+												// 		{
+												// 			var get_vendoritem_data = jQuery.parseJSON( data );
 
-															$(".loader_ajax").hide();
-																if(data == "failure")
-																	{
-																		$('#part_name').val('');
-																		$('#order_qty').val('');
-																		$('#vendor_order_qty').val('');
+												// 			$(".loader_ajax").hide();
+												// 				if(data == "failure")
+												// 					{
+												// 						$('#part_name').val('');
+												// 						$('#order_qty').val('');
+												// 						$('#vendor_order_qty').val('');
 																		
-																	}
-																else
-																	{
-																		$('#part_name').val(get_vendoritem_data.name);
-																		$('#order_qty').val(get_vendoritem_data.order_oty);
-																		$('#vendor_order_qty').val(get_vendoritem_data.vendor_qty);
-																	}
-														},
-														error: function (jqXHR, textStatus, errorThrown)
-														{
-																$('#part_name').val('');
-																$('#order_qty').val('');
-																$('#vendor_order_qty').val('');
-														}
-													});
-												return false;
+												// 					}
+												// 				else
+												// 					{
+												// 						$('#part_name').val(get_vendoritem_data.name);
+												// 						$('#order_qty').val(get_vendoritem_data.order_oty);
+												// 						$('#vendor_order_qty').val(get_vendoritem_data.vendor_qty);
+												// 					}
+												// 		},
+												// 		error: function (jqXHR, textStatus, errorThrown)
+												// 		{
+												// 				$('#part_name').val('');
+												// 				$('#order_qty').val('');
+												// 				$('#vendor_order_qty').val('');
+												// 		}
+												// 	});
+												// return false;
 
 
 											}
@@ -26804,7 +26804,7 @@
 										{
 											$('#part_name').val(get_vendoritem_data.name);
 											$('#order_qty').val(get_vendoritem_data.order_oty);
-											$('#vendor_order_qty').val(get_vendoritem_data.order_oty);
+											$('#vendor_order_qty').val(get_vendoritem_data.vendor_qty);
 										}
 							},
 							error: function (jqXHR, textStatus, errorThrown)
