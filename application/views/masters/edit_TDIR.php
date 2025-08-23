@@ -25,6 +25,9 @@
                             <div class="box-body">
 
                             
+                            <?php print_r($getTdirdata);exit; ?>
+
+
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="form-group">
