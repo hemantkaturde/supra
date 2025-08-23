@@ -26620,7 +26620,7 @@
 					$.ajax({
 						url : "<?php echo ADMIN_PATH;?>getVendorPoconfirmationvendorlist",
 						type: "POST",
-						data : {'vendor_name' : vendor_name},
+						data : {'vendor_name' : vendor_name,'vendor_po_id':vendor_po_id},
 						success: function(data, textStatus, jqXHR)
 						{
 							$(".loader_ajax").hide();
