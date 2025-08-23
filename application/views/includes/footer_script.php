@@ -26731,6 +26731,7 @@
 											}
 											else
 											{
+												$('#vendor_part_number').html('<option value="">Select Part Number</option>');
 												$('#vendor_part_number').html(data);
 
 												// var part_number = $('#vendor_part_number').val();
