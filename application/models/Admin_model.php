@@ -21982,7 +21982,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     public function gettdirreportdata($params){
 
-        $this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendor_name_label,'.TBL_TDIR.'.part_number as part_number_label');
+        $this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendor_name_label,'.TBL_FINISHED_GOODS.'.part_number as part_number_label');
         // if($params['search']['value'] != "") 
         // {
         //     $this->db->where("(".TBL_SCRAP_INVOICE.".scrap_invoice_number LIKE '%".$params['search']['value']."%'");
