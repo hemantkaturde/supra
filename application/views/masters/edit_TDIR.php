@@ -85,7 +85,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="part_name">Part Name</label>
-                                            <input type="text" class="form-control"  value="<?php echo $getTdirdata[0]['part_number_label']; ?>" id="part_name" name="part_name">
+                                            <input type="text" class="form-control"  value="<?php echo $getTdirdata[0]['name']; ?>" id="part_name" name="part_name">
                                             <p class="error part_name_error"></p>
                                         </div>
                                     </div>
