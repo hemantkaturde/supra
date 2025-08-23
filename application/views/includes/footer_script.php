@@ -26734,6 +26734,7 @@
 												$('#vendor_part_number').html(data);
 
 												var part_number = $('#vendor_part_number').val();
+
 												$.ajax({
 													url : "<?php echo ADMIN_PATH;?>getvendorpartdetialstdir_report",
 													type: "POST",
