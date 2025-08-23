@@ -22012,7 +22012,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['part_name'] =  $value['name'];
                 $data[$counter]['buyer_name'] =  $value['buyer_name_label'];
                 $data[$counter]['vendor_order_qty'] =  $value['vendor_order_qty'];
-                $data[$counter]['remark'] =  '';
+                $data[$counter]['remark'] =  $value['remarks'];
 
                 $data[$counter]['action'] = '';
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."admin/incoming_lots/".$value['id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-square-o' aria-hidden='true'></i></a>    &nbsp";
