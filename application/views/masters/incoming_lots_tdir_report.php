@@ -19,12 +19,19 @@
                     <div class="box box-primary">
                         <div class="box-header">
                             <h3 class="box-title">Add Tracking of Dimenstional Inspection Report</h3>
+
+                              <h4>
+                                  <p><b>Report Number :</b> <?=$getTdirdata[0]['report_number'] ?></p>
+                                  <p><b>Vendor PO Number :</b> <?=$getTdirdata[0]['po_number'] ?></p>
+                                  <p><b>Part Number :</b> <?=$getexportetails[0]['part_number_label'] ?></p>
+                                  <p><b>Vendor Order Qty :</b> <?=$getexportetails[0]['vendor_order_qty'] ?></p>
+                              </h4>
                         </div>
                         <?php $this->load->helper("form"); ?>
                         <form role="form" id="addTDIRform" action="#" method="post" role="form">
                             <div class="box-body">
 
-                            
+
                                 <div class="row">
                                  <div class="col-md-12">
                                    <h2>Incoming Lots</h2>
