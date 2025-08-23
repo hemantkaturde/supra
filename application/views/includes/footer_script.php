@@ -26803,7 +26803,7 @@
 										{
 											$('#part_name').val(get_vendoritem_data.name);
 											$('#order_qty').val(get_vendoritem_data.order_oty);
-											$('#vendor_order_qty').val(get_vendoritem_data.vendor_qty);
+											$('#vendor_order_qty').val(get_vendoritem_data.order_oty);
 										}
 							},
 							error: function (jqXHR, textStatus, errorThrown)
