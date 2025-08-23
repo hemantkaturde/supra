@@ -25609,7 +25609,16 @@ public function deletetdirreport(){
     }
 }
 
+public function edit_tdir($tdir_id){
 
+        $process = 'Edit TDIR';
+        $processFunction = 'Admin/editTDIR';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Edit TDIR';
+        $data['vendorList']= $this->admin_model->fetchALLvendorList();
+        $this->loadViews("masters/edit_TDIR", $this->global, $data, NULL);
+
+}
 
 
 
