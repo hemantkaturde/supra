@@ -21982,7 +21982,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     public function gettdirreportdata($params){
 
-        $this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendor_name_label');
+        $this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendor_name_label,'.TBL_TDIR.'.part_number as part_number_label');
         // if($params['search']['value'] != "") 
         // {
         //     $this->db->where("(".TBL_SCRAP_INVOICE.".scrap_invoice_number LIKE '%".$params['search']['value']."%'");
@@ -21990,6 +21990,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         //     $this->db->or_where(TBL_SCRAP_INVOICE.".remark LIKE '%".$params['search']['value']."%')");
         // }
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id  = '.TBL_TDIR.'.vendor_po');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id  = '.TBL_TDIR.'.part_number');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_TDIR.'.vendor_name');
 
         $this->db->where(TBL_TDIR.'.status', 1);
@@ -22006,8 +22007,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['report_number'] = $value['report_number'];
                 $data[$counter]['vendor_name'] =  $value['vendor_name_label'];
                 $data[$counter]['vendor_po'] =  $value['po_number'];
-                $data[$counter]['part_number'] =  $value['part_number'];
-                $data[$counter]['part_name'] =  $value['part_name'];
+                $data[$counter]['part_number'] =  $value['part_number_label'];
+                $data[$counter]['part_name'] =  $value['name'];
                 $data[$counter]['buyer_name'] =  $value['buyer_name'];
                 $data[$counter]['vendor_order_qty'] =  $value['vendor_order_qty'];
                 $data[$counter]['remark'] =  '';
