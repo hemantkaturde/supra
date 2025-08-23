@@ -73,7 +73,7 @@
                                  <div class="col-md-3">
                                        <div class="form-group">
                                             <label for="vendor_part_number">Part Number</label>
-                                            <select class="form-control" name="vendor_part_number" id="vendor_part_number">
+                                            <select class="form-control vendor_part_number_get_data" name="vendor_part_number" id="vendor_part_number">
                                             </select> 
                                             <p class="error vendor_part_number_error"></p>
                                         </div>

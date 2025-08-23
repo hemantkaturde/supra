@@ -26780,7 +26780,7 @@
 				});
 				
 
-				$(document).on('change','#vendor_part_number',function(e){  
+				$(document).on('change','.vendor_part_number_get_data',function(e){  
 			
 					e.preventDefault();
 					var part_number = $('#vendor_part_number').val();
