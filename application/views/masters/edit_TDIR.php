@@ -25,7 +25,7 @@
                             <div class="box-body">
 
                             
-                            <?php print_r($getTdirdata);exit; ?>
+                            <?php print_r($getTdirdata[0]['report_number']);exit; ?>
 
 
                                 <div class="row">
