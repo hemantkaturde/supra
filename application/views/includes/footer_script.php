@@ -26718,7 +26718,7 @@
 					   var vendor_po_number = $('#vendor_po_number').val();
 
 						$.ajax({
-							url : "<?php echo ADMIN_PATH;?>admin/getVendoritemonlyforsyppliervendorcompaint",
+							url : "<?php echo ADMIN_PATH;?>admin/getVendoritemonlyforTDIR",
 							type: "POST",
 							data : {'vendor_po_number' : vendor_po_number},
 							success: function(data, textStatus, jqXHR)
@@ -26731,7 +26731,6 @@
 											}
 											else
 											{
-												$('#vendor_part_number').html('<option value="">Select Part Number</option>');
 												$('#vendor_part_number').html(data);
 
 												// var part_number = $('#vendor_part_number').val();

@@ -25535,6 +25535,34 @@ public function getbuyerdetialsbyvendorponumberfortdir(){
 }
 
 
+public function getVendoritemonlyforTDIR(){
+
+    $vendor_po_number=$this->input->post('vendor_po_number');
+    if($vendor_po_number) {
+        $getVendoritemsonly = $this->admin_model->getVendoritemonlyforsyppliervendorcompaint($vendor_po_number);
+        if(count($getVendoritemsonly) >= 1) {
+            $content = $content.'<option value="">Select Part Number</option>';
+            foreach($getVendoritemsonly as $value) {
+
+                if($this->input->post('vendor_po_number')){
+                    $selected ='selected';
+                }else{
+                    $selected ='';
+                }
+
+                $content = $content.'<option value="">Select Part Number</option><option value="'.$value["fin_id"].'" data_id="'.$value["vendor_po_item_id"].'" '.$selected.'>'.$value["part_number"].'</option>';
+            }
+            echo $content;
+        } else {
+            echo 'failure';
+        }
+    } else {
+        echo 'failure';
+    }
+
+}
+
+
 public function fetchtdirreport(){
     $params = $_REQUEST;
     $totalRecords = $this->admin_model->gettdirreportcount($params); 
