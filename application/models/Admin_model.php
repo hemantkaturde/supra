@@ -22072,14 +22072,13 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
 
     
-    public function getincoinglotdetailsfortdir($id){
-        $this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendor_name_label,'.TBL_FINISHED_GOODS.'.part_number as part_number_label,'.TBL_TDIR.'.buyer_name as buyer_name_label,'.TBL_TDIR.'.id as tdir_id,'.TBL_TDIR.'.vendor_name as tdir_vendor_id,'.TBL_VENDOR_PO_MASTER.'.id as vendor_po_id_for_edit');
-        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id  = '.TBL_TDIR.'.vendor_po');
-        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id  = '.TBL_TDIR.'.part_number');
-        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_TDIR.'.vendor_name');
-        $this->db->where(TBL_TDIR.'.status', 1);
-        $this->db->where(TBL_TDIR.'.id',$id);
-        $query = $this->db->get(TBL_TDIR);
+    public function getincoinglotdetailsfortdir($vendor_po_id, $part_number_id){
+        $this->db->select('*');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id  = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
+        $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.status', 1);
+        $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.pre_vendor_po_number',$vendor_po_id);
+        $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.part_number',$part_number_id);
+        $query = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
         $fetch_result = $query->result_array();
         return $fetch_result;
     }

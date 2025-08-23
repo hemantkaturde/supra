@@ -39,6 +39,9 @@
 
                                     <div class="lots-container">
 
+                                    <?php  foreach ($getincoinglotdetailsfortdir as $key => $value) { ?>
+                                      
+                                  
                                     
                                     <div class="lot-box">
                                         <h3>Lot 1</h3>
@@ -60,7 +63,10 @@
                                         </div>
                                     </div>
 
-                                   
+                                     <?php }  ?>
+
+
+<!--                                    
                                     <div class="lot-box">
                                         <h3>Lot 2</h3>
                                         <div class="lot-details">
@@ -79,10 +85,10 @@
 
                                         <button class="btn">Save</button>
                                         </div>
-                                    </div>
+                                    </div> -->
 
                                    
-                                    <div class="lot-box">
+                                    <!-- <div class="lot-box">
                                         <h3>Lot 3</h3>
                                         <div class="lot-details">
                                         <p><strong>Invoice Qty:</strong> --</p>
@@ -100,7 +106,7 @@
 
                                         <button class="btn">Save</button>
                                         </div>
-                                    </div>
+                                    </div> -->
 
                                     </div>
 
