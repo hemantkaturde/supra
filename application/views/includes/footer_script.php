@@ -26688,11 +26688,12 @@
 
 					
 					   var vendor_po_number = $('#vendor_po_id').val();
-
+ var part_number_id = $('#part_number_id').val();
+					   
 						$.ajax({
 							url : "<?php echo ADMIN_PATH;?>admin/getVendoritemonlyforTDIR",
 							type: "POST",
-							data : {'vendor_po_number' : vendor_po_number},
+							data : {'vendor_po_number' : vendor_po_numberm,'part_number_id':part_number_id},
 							success: function(data, textStatus, jqXHR)
 								{
 											$(".loader_ajax").hide();
