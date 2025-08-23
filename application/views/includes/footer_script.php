@@ -26693,7 +26693,7 @@
 						$.ajax({
 							url : "<?php echo ADMIN_PATH;?>admin/getVendoritemonlyforTDIR",
 							type: "POST",
-							data : {'vendor_po_number' : vendor_po_numberm,'part_number_id':part_number_id},
+							data : {'vendor_po_number' : vendor_po_number,'part_number_id':part_number_id},
 							success: function(data, textStatus, jqXHR)
 								{
 											$(".loader_ajax").hide();
