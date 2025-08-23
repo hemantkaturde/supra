@@ -25616,6 +25616,10 @@ public function edit_tdir($tdir_id){
         $this->logrecord($process,$processFunction);
         $this->global['pageTitle'] = 'Edit TDIR';
         $data['vendorList']= $this->admin_model->fetchALLvendorList();
+
+        $data['getTdirdata']= $this->admin_model->getTdirdata($tdir_id);
+
+
         $this->loadViews("masters/edit_TDIR", $this->global, $data, NULL);
 
 }

@@ -26572,7 +26572,7 @@
 <?php } ?>
 
 
-<?php if($pageTitle=='Add New TDIR' || $pageTitle=='TDIR Report'){ ?>
+<?php if($pageTitle=='Add New TDIR' || $pageTitle=='TDIR Report' ||  $pageTitle=='Edit TDIR'){ ?>
  <script type="text/javascript">
 
 
@@ -27051,7 +27051,7 @@
 						swal("Cancelled", "TDIR Data deletion cancelled ", "error");
 						}
 					});
-	        });
+	            });
 
     </script>
 <?php } ?>
