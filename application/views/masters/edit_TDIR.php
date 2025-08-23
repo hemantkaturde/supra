@@ -25,14 +25,12 @@
                             <div class="box-body">
 
                             
-                            <?php print_r($getTdirdata[0]['report_number']);exit; ?>
-
-
+                    
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="report_number">Report Number<span class="required">*</span></label>
-                                            <input type="text" class="form-control" value="2526/149" id="report_number" name="report_number">
+                                            <input type="text" class="form-control" value="<?php echo $getTdirdata[0]['report_number']; ?>" id="report_number" name="report_number">
                                         </div>
                                     </div> 
                                     
@@ -42,7 +40,7 @@
                                                     <select class="form-control" name="vendor_name" id="vendor_name">
                                                         <option st-id="" value="">Select Vendor Name</option>
                                                         <?php foreach ($vendorList as $key => $value) {?>
-                                                        <option value="<?php echo $value['ven_id']; ?>" <?php if($value['ven_id']==$fetchALLprescrapreturndetails[0]['pre_vendor_name']){ echo 'selected';} ?>><?php echo $value['vendor_name']; ?></option>
+                                                        <option value="<?php echo $value['ven_id']; ?>" <?php if($value['ven_id']==$getTdirdata[0]['vendor_name']){ echo 'selected';} ?>><?php echo $value['vendor_name']; ?></option>
                                                         <?php } ?>
                                                     </select>
                                             <p class="error vendor_name_error"></p>
@@ -61,7 +59,7 @@
                                      <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="vendor_po_date">Vendor PO Date</label>
-                                              <input type="text" class="form-control" id="vendor_po_date" name="vendor_po_date">
+                                              <input type="text" class="form-control"  value="<?php echo $getTdirdata[0]['vendor_po_date']; ?>" id="vendor_po_date"  name="vendor_po_date">
                                             <p class="error vendor_po_date_error"></p>
                                         </div>
                                     </div>
@@ -94,7 +92,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="vendor_order_qty">Vendor Order Qty</label>
-                                            <input type="text" class="form-control" id="vendor_order_qty" name="vendor_order_qty">
+                                            <input type="text" class="form-control" id="vendor_order_qty" value="<?php echo $getTdirdata[0]['vendor_order_qty']; ?>" name="vendor_order_qty">
                                             <p class="error vendor_order_qty_error"></p>
                                         </div>
                                     </div>
@@ -112,7 +110,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="buyer_po_date">Buyer PO Date</label>
-                                            <input type="text" class="form-control" id="buyer_po_date" name="buyer_po_date">
+                                            <input type="text" class="form-control" id="buyer_po_date"  value="<?php echo $getTdirdata[0]['buyer_po_date']; ?>" name="buyer_po_date">
                                             <p class="error buyer_po_date_error"></p>
                                         </div>
                                     </div>
@@ -130,7 +128,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="remarks">Remarks</label>
-                                            <input type="text" class="form-control" id="remarks" name="remarks">
+                                            <input type="text" class="form-control" id="remarks" value="<?php echo $getTdirdata[0]['remarks']; ?>" name="remarks">
                                             <p class="error remarks_error"></p>
                                         </div>
                                     </div>
