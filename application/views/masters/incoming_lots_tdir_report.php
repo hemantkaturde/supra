@@ -39,7 +39,12 @@
 
                                     <div class="lots-container">
 
-                                    <?php  foreach ($getincoinglotdetailsfortdir as $key => $value) { ?>
+                                    <?php  
+                                    
+                                    print_r($getincoinglotdetailsfortdir);
+                                    exit;
+                                    
+                                    foreach ($getincoinglotdetailsfortdir as $key => $value) { ?>
                                       
                                   
                                     
