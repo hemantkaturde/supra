@@ -116,13 +116,13 @@
                                         </div>
                                     </div>
                                     
-                                    <div class="col-md-3">
+                                    <!-- <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="order_qty">Order Qty</label>
                                             <input type="text" class="form-control" id="order_qty" name="order_qty">
                                             <p class="error order_qty_error"></p>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                                
                                 <div class="row">
