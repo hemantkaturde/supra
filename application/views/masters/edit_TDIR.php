@@ -24,7 +24,7 @@
                         <form role="form" id="addTDIRform" action="#" method="post" role="form">
                             <div class="box-body">
 
-                                                                        <input type="text" class="form-control" value="<?php echo $getTdirdata[0]['vendor_po']; ?>" id="vendor_po_id" name="vendor_po_id">
+                                                                        <input type="hidden" class="form-control" value="<?php echo $getTdirdata[0]['vendor_po']; ?>" id="vendor_po_id" name="vendor_po_id">
 
                     
                                 <div class="row">

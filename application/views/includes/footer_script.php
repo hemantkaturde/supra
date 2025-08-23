@@ -26616,6 +26616,7 @@
 					// $('#vendor_part_number_div').css('display','block');
 
 					var vendor_name = $('#vendor_name').val();
+					var vendor_po_id = $('#vendor_po_id').val();
 				
 					$.ajax({
 						url : "<?php echo ADMIN_PATH;?>getVendorPoconfirmationvendorlist",
