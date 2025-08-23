@@ -662,8 +662,6 @@ $route['incoming_lots/(:any)'] = "admin/incoming_lots/$1";
 $route['deletetdirreport'] = "admin/deletetdirreport";
 
 
-
-
 $route['getvendorpartdetialstdir_report'] = "admin/getvendorpartdetialstdir_report";
 $route['getbuyerdetialsbyvendorponumberfortdir'] = "admin/getbuyerdetialsbyvendorponumberfortdir";
 
