@@ -21970,7 +21970,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             {
                 $this->db->where("(".TBL_TDIR.".report_number LIKE '%".$params['search']['value']."%'");
                 $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
-                $this->db->or_where(TBL_VENDOR.".po_number LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
                 $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
                 $this->db->or_where(TBL_FINISHED_GOODS.".name LIKE '%".$params['search']['value']."%'");
                 $this->db->or_where(TBL_TDIR.".buyer_name LIKE '%".$params['search']['value']."%'");
@@ -21997,7 +21997,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         {
             $this->db->where("(".TBL_TDIR.".report_number LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_VENDOR.".po_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_FINISHED_GOODS.".name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_TDIR.".buyer_name LIKE '%".$params['search']['value']."%'");
