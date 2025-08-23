@@ -26897,6 +26897,111 @@
 					});
 					return false;
 				});
+
+
+				// $(document).on('change','.vendor_po_number_for_buyer_details',function(e){  
+		        //     	e.preventDefault();
+			
+		        //  	//$(".loader_ajax").show();
+			    //         var vendor_po_number = $('#vendor_po_number').val();
+		
+		
+				// 		$.ajax({
+				// 			url : "<?php echo ADMIN_PATH;?>getbuyerdetialsbyvendorponumberfortdir",
+				// 			type: "POST",
+				// 			data : {'vendor_po_number' : vendor_po_number},
+				// 			success: function(data, textStatus, jqXHR)
+				// 			{
+				// 				$(".loader_ajax").hide();
+				// 				if(data == "failure")
+				// 				{
+				// 					$('#buyer_name').val('');
+				// 					$('#buyer_po_date').val('');
+				// 				}
+				// 				else
+				// 				{
+				// 					var data_row_material = jQuery.parseJSON( data );
+				// 					$('#buyer_name').val(data_row_material.buyer_name);
+				// 					$('#buyer_po_date').val(data_row_material.buyer_po_date);
+				// 			}
+				// 			},
+				// 			error: function (jqXHR, textStatus, errorThrown)
+				// 			{
+				// 				    $('#buyer_name').val('');
+				// 					$('#buyer_po_date').val('');
+				// 				    //$(".loader_ajax").hide();
+				// 			}
+				// 		});
+				// 		return false;
+	        	// });
+
+
+
+				// $(document).on('change','.vendor_po_number_for_vendor_po_date',function(e){  
+		        //     	e.preventDefault();
+			
+		        //  	//$(".loader_ajax").show();
+			    //         var vendor_po_number = $('#vendor_po_number').val();
+		
+				// 		$.ajax({
+				// 			url : "<?php echo ADMIN_PATH;?>getbuyerdetialsbyvendorponumberfortdir",
+				// 			type: "POST",
+				// 			data : {'vendor_po_number' : vendor_po_number},
+				// 			success: function(data, textStatus, jqXHR)
+				// 			{
+				// 				$(".loader_ajax").hide();
+				// 				if(data == "failure")
+				// 				{
+				// 					$('#vendor_po_date').val('');
+				// 				}
+				// 				else
+				// 				{
+				// 					var data_row_material = jQuery.parseJSON( data );
+				// 					$('#vendor_po_date').val(data_row_material.buyer_name);
+				// 			}
+				// 			},
+				// 			error: function (jqXHR, textStatus, errorThrown)
+				// 			{
+				// 				    $('#buyer_name').val('');
+				// 				    //$(".loader_ajax").hide();
+				// 			}
+				// 		});
+				// 		return false;
+	        	// });
+
+
+
+				$(document).on('change','.vendor_po_number_for_vendor_po_date',function(e){  
+					e.preventDefault();
+					//$(".loader_ajax").show();
+					// $("#customers-list").html('');
+					var vendor_po_id = $('#vendor_po_number').val();
+					$.ajax({
+						url : "<?php echo ADMIN_PATH;?>get_vendorpodata",
+						type: "POST",
+						data : {'vendor_po_id' : vendor_po_id},
+						success: function(data, textStatus, jqXHR)
+						{
+							$(".loader_ajax").hide();
+							if(data == "failure")
+							{
+								$('#vendor_po_date').val('');
+							}
+							else
+							{
+								var get_vendorpodata = jQuery.parseJSON( data );
+								$('#vendor_po_date').val(get_vendorpodata.date);
+
+							}
+						},
+						error: function (jqXHR, textStatus, errorThrown)
+						{
+							$('#vendor_po_date').val('');
+						}
+					});
+					return false;
+				});
+
 			
 
     </script>

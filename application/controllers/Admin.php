@@ -9169,8 +9169,6 @@ class Admin extends BaseController
 		} else {
 			echo 'failure';
 		}
-
-
     }
 
     public function get_supplierpodata(){

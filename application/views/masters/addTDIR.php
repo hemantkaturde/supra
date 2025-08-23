@@ -51,7 +51,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="vendor_po">Vendor PO</label>
-                                            <select class="form-control vendor_po_number_for_buyer_details" name="vendor_po_number" id="vendor_po_number">
+                                            <select class="form-control vendor_po_number_for_buyer_details vendor_po_number_for_vendor_po_date" name="vendor_po_number" id="vendor_po_number">
                                             </select> 
                                             <p class="error vendor_po_number_error"></p>
                                         </div>
