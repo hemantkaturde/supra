@@ -26586,7 +26586,7 @@
 							{ "width": "10%", "targets": 3 },
 							{ "width": "10%", "targets": 4 },
 							{ "width": "10%", "targets": 5 },
-							{ "width": "10%", "targets": 6 },
+							{ "width": "8%", "targets": 6 },
 							
 						],
 						responsive: true,
