@@ -26688,7 +26688,7 @@
 
 					
 					   var vendor_po_number = $('#vendor_po_id').val();
- var part_number_id = $('#part_number_id').val();
+                       var part_number_id = $('#part_number_id').val();
 					   
 						$.ajax({
 							url : "<?php echo ADMIN_PATH;?>admin/getVendoritemonlyforTDIR",
