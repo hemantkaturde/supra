@@ -21982,14 +21982,14 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     public function gettdirreportdata($params){
 
-        $this->db->select('*');
+        $this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendor_name_label');
         // if($params['search']['value'] != "") 
         // {
         //     $this->db->where("(".TBL_SCRAP_INVOICE.".scrap_invoice_number LIKE '%".$params['search']['value']."%'");
         //     $this->db->or_where(TBL_SCRAP_INVOICE.".buyer_name LIKE '%".$params['search']['value']."%'");
         //     $this->db->or_where(TBL_SCRAP_INVOICE.".remark LIKE '%".$params['search']['value']."%')");
         // }
-        //$this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id  = '.TBL_SCRAP_INVOICE.'.buyer_name');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_TDIR.'.vendor_name');
 
         $this->db->where(TBL_TDIR.'.status', 1);
         // $this->db->limit($params['length'],$params['start']);
@@ -22003,7 +22003,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             foreach ($fetch_result as $key => $value)
             {
                 $data[$counter]['report_number'] = $value['report_number'];
-                $data[$counter]['vendor_name'] =  $value['vendor_name'];
+                $data[$counter]['vendor_name'] =  $value['vendor_name_label'];
                 $data[$counter]['vendor_po'] =  $value['vendor_po'];
                 $data[$counter]['part_number'] =  $value['part_number'];
                 $data[$counter]['part_name'] =  $value['part_name'];
