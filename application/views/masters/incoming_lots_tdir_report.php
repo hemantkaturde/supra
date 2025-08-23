@@ -25,7 +25,7 @@
                                   <p><b>Vendor Name :</b> <?=$getTdirdata[0]['vendor_name_label'] ?></p>
                                   <p><b>Vendor PO Number :</b> <?=$getTdirdata[0]['po_number'] ?></p>
                                   <p><b>Part Number :</b> <?=$getTdirdata[0]['part_number_label'] ?></p>
-                                  <p><b>Vendor Order Qty :</b> <?=$getTdirdata[0]['order_qty'] ?></p>
+                                  <p><b>Vendor Order Qty :</b> <?=$getTdirdata[0]['vendor_order_qty'] ?></p>
                               </h4>
                         </div>
                         <?php $this->load->helper("form"); ?>
