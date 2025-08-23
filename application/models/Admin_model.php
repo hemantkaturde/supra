@@ -21966,12 +21966,16 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
       public function gettdirreportcount($params){
 
          $this->db->select('*'); 
-        //  if($params['search']['value'] != "") 
-        //  {
-        //     $this->db->where("(".TBL_SCRAP_INVOICE.".scrap_invoice_number LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_SCRAP_INVOICE.".buyer_name LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_SCRAP_INVOICE.".remark LIKE '%".$params['search']['value']."%')");
-        //  }
+           if($params['search']['value'] != "") 
+            {
+                $this->db->where("(".TBL_TDIR.".report_number LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where(TBL_VENDOR.".po_number LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where(TBL_FINISHED_GOODS.".name LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where(TBL_TDIR.".buyer_name LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where(TBL_TDIR.".remark LIKE '%".$params['search']['value']."%')");
+            }
 
          $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id  = '.TBL_TDIR.'.vendor_po');
          $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id  = '.TBL_TDIR.'.part_number');
@@ -21988,19 +21992,24 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     public function gettdirreportdata($params){
 
         $this->db->select('*,'.TBL_VENDOR.'.vendor_name as vendor_name_label,'.TBL_FINISHED_GOODS.'.part_number as part_number_label,'.TBL_TDIR.'.buyer_name as buyer_name_label,'.TBL_TDIR.'.id as tdir_id');
-        // if($params['search']['value'] != "") 
-        // {
-        //     $this->db->where("(".TBL_SCRAP_INVOICE.".scrap_invoice_number LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_SCRAP_INVOICE.".buyer_name LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_SCRAP_INVOICE.".remark LIKE '%".$params['search']['value']."%')");
-        // }
+       
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_TDIR.".report_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".po_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FINISHED_GOODS.".name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_TDIR.".buyer_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_TDIR.".remark LIKE '%".$params['search']['value']."%')");
+        }
 
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id  = '.TBL_TDIR.'.vendor_po');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id  = '.TBL_TDIR.'.part_number');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_TDIR.'.vendor_name');
 
         $this->db->where(TBL_TDIR.'.status', 1);
-        // $this->db->limit($params['length'],$params['start']);
+        $this->db->limit($params['length'],$params['start']);
         $this->db->order_by(TBL_TDIR.'.id','DESC');
         $query = $this->db->get(TBL_TDIR);
         $fetch_result = $query->result_array();
