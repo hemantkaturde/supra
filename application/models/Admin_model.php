@@ -21972,6 +21972,11 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         //     $this->db->or_where(TBL_SCRAP_INVOICE.".buyer_name LIKE '%".$params['search']['value']."%'");
         //     $this->db->or_where(TBL_SCRAP_INVOICE.".remark LIKE '%".$params['search']['value']."%')");
         //  }
+
+         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id  = '.TBL_TDIR.'.vendor_po');
+         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id  = '.TBL_TDIR.'.part_number');
+         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_TDIR.'.vendor_name');
+
          $this->db->order_by(TBL_TDIR.'.id','DESC');
          $query = $this->db->get(TBL_TDIR);
          $rowcount = $query->num_rows();
