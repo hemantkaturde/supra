@@ -26,7 +26,7 @@
 
                                <?php 
 
-                                 print_r($getPreviousReportnumber);exit;
+                                 print_r($getPreviousReportnumber[0]['report_number']);exit;
 
 
                                 ?>
