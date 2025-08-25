@@ -24,6 +24,13 @@
                         <form role="form" id="addTDIRform" action="#" method="post" role="form">
                             <div class="box-body">
 
+                               <?php 
+
+                                 print_r($getPreviousReportnumber);exit;
+
+
+                                ?>
+
                             
                                 <div class="row">
                                     <div class="col-md-3">

@@ -25496,6 +25496,9 @@ public function addTDIR(){
             $this->logrecord($process,$processFunction);
             $this->global['pageTitle'] = 'Add New TDIR';
             $data['vendorList']= $this->admin_model->fetchALLvendorList();
+
+            $data['getPreviousReportnumber']= $this->admin_model->getPreviousReportnumber();
+
             $this->loadViews("masters/addTDIR", $this->global, $data, NULL);
 
     }

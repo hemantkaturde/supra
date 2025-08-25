@@ -22083,6 +22083,16 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         return $fetch_result;
     }
 
+    public function getPreviousReportnumber(){
+        $this->db->select('*');
+        $this->db->where(TBL_TDIR.'.status', 1);
+        $this->db->order_by(TBL_TDIR.'.id','DESC');
+        $this->db->limit(1);
+        $query = $this->db->get(TBL_TDIR);
+        $fetch_result = $query->result_array();
+        return $fetch_result;
+    }
+
 
 }
 
