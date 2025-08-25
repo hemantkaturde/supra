@@ -10,11 +10,7 @@
                 </ul>
             </small>
         </h1>
-    </section>
-    
-    <section class="content">
-
-         <div class="row">
+        <div class="row">
             <div class="col-xs-6 text-right">
                 <div class="form-group">
                     <a class="btn btn-primary" href="<?php echo base_url(); ?>tdir">
@@ -22,7 +18,9 @@
                 </div>
             </div>
         </div>
-
+    </section>
+    
+    <section class="content">
         <div class="row">
             <div class="col-xs-12">
                 <div class="box">
