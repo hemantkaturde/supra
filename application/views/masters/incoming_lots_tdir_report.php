@@ -11,7 +11,7 @@
             </small>
         </h1>
         <div class="row">
-            <div class="col-xs-6 text-right">
+            <div class="col-xs-12 text-right">
                 <div class="form-group">
                     <a class="btn btn-primary" href="<?php echo base_url(); ?>tdir">
                         <i class="fa fa-arrow-left"></i> Back</a>
