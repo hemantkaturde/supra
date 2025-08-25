@@ -25639,6 +25639,24 @@ public function edit_tdir($tdir_id){
 }
 
 
+     public function savetdirlotdetails() {
+        $data = [
+            'lot_id'     => $this->input->post('lot_id'),
+            'qty'        => $this->input->post('qty'),
+            'checking'   => $this->input->post('checking') ? 1 : 0,
+            'checked_by' => $this->input->post('checked_by'),
+            'created_at' => date('Y-m-d H:i:s')
+        ];
+
+        if ($this->admin_model->insert_entry($data)) {
+            $this->session->set_flashdata('success', 'Lot saved successfully!');
+        } else {
+            $this->session->set_flashdata('error', 'Something went wrong.');
+        }
+
+        //redirect($_SERVER['HTTP_REFERER']); // Go back to same page
+    }
+
 
 
 

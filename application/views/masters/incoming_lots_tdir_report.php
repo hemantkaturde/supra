@@ -19,7 +19,7 @@
             </div>
         </div>
     </section>
-    
+
     <section class="content">
         <div class="row">
             <div class="col-xs-12">
@@ -28,13 +28,13 @@
                         <div class="box-header">
                             <h3 class="box-title">Add Tracking of Dimenstional Inspection Report</h3>
 
-                              <h4>
-                                  <p><b>Report Number :</b> <?=$getTdirdata[0]['report_number'] ?></p>
-                                  <p><b>Vendor Name :</b> <?=$getTdirdata[0]['vendor_name_label'] ?></p>
-                                  <p><b>Vendor PO Number :</b> <?=$getTdirdata[0]['po_number'] ?></p>
-                                  <p><b>Part Number :</b> <?=$getTdirdata[0]['part_number_label'] ?></p>
-                                  <p><b>Vendor Order Qty :</b> <?=$getTdirdata[0]['vendor_order_qty'] ?></p>
-                              </h4>
+                            <h4>
+                                <p><b>Report Number :</b> <?=$getTdirdata[0]['report_number'] ?></p>
+                                <p><b>Vendor Name :</b> <?=$getTdirdata[0]['vendor_name_label'] ?></p>
+                                <p><b>Vendor PO Number :</b> <?=$getTdirdata[0]['po_number'] ?></p>
+                                <p><b>Part Number :</b> <?=$getTdirdata[0]['part_number_label'] ?></p>
+                                <p><b>Vendor Order Qty :</b> <?=$getTdirdata[0]['vendor_order_qty'] ?></p>
+                            </h4>
                         </div>
                         <?php $this->load->helper("form"); ?>
                         <form role="form" id="addTDIRform" action="#" method="post" role="form">
@@ -42,92 +42,84 @@
 
 
                                 <div class="row">
-                                 <div class="col-md-12">
-                                   <h2>Incoming Lots</h2>
+                                    <div class="col-md-12">
+                                        <h2>Incoming Lots</h2>
 
-                                    <div class="lots-container">
+                                        <div class="lots-container">
 
-                                    <?php  
+                                            <?php  
                                     
                           
-                                    foreach ($getincoinglotdetailsfortdir as $key => $value) { ?>
-                                      
-                                  
-                                    
-                                    <div class="lot-box">
-                                        <h3>Lot 1</h3>
-                                        <div class="lot-details">
-                                        <p><strong>Invoice Qty:</strong> <?=$value['invoice_qty']  ?></p>
-                                        <p><strong>Invoice Date:</strong> <?=$value['invoice_date']  ?></p>
-                                        <p><strong>Material Grade:</strong> <?=$value['material_grade']  ?></p>
-                                        <p><strong>Additional Process:</strong> <?=$value['additional_process']  ?></p>
+                                    // foreach ($getincoinglotdetailsfortdir as $key => $value) { ?>
+
+
+                                            <!-- <div class="lot-box">
+                                                <h3>Lot 1</h3>
+                                                <div class="lot-details">
+                                                    <p><strong>Invoice Qty:</strong> <?=$value['invoice_qty']  ?></p>
+                                                    <p><strong>Invoice Date:</strong> <?=$value['invoice_date']  ?></p>
+                                                    <p><strong>Material Grade:</strong> <?=$value['material_grade']  ?>
+                                                    </p>
+                                                    <p><strong>Additional Process:</strong>
+                                                        <?=$value['additional_process']  ?></p>
+                                                </div>
+                                                <div class="form-section">
+                                                    <label>Qty:</label>
+                                                    <input type="number" placeholder="Enter qty">
+
+                                                    <label>Checking:</label>
+                                                    <input type="checkbox"> Done
+
+                                                    <label>Checked By:</label>
+                                                    <input type="text" placeholder="Enter name">
+
+                                                    <button class="btn">Save</button>
+                                                </div>
+                                            </div> -->
+
+                                            <?php //}  ?>
+
+
+                                            <?php foreach ($getincoinglotdetailsfortdir as $key => $value) { ?>
+                                              <div class="lot-box">
+                                                  <h3>Lot <?= $key + 1 ?></h3>
+
+                                                  <div class="lot-details">
+                                                      <p><strong>Invoice Qty:</strong> <?= $value['invoice_qty'] ?></p>
+                                                      <p><strong>Invoice Date:</strong> <?= $value['invoice_date'] ?></p>
+                                                      <p><strong>Material Grade:</strong> <?= $value['material_grade'] ?></p>
+                                                      <p><strong>Additional Process:</strong> <?= $value['additional_process'] ?></p>
+                                                  </div>
+
+                                                  <!-- CodeIgniter form -->
+                                                  <?= form_open('admin/savetdirlotdetails', ['method' => 'post']) ?>
+                                                      <input type="hidden" name="lot_id" value="<?= $value['id'] ?>">
+
+                                                      <div class="form-section">
+                                                          <label>Qty:</label>
+                                                          <input type="number" name="qty" required placeholder="Enter qty">
+
+                                                          <label>Checking:</label>
+                                                          <input type="checkbox" name="checking" value="1"> Done
+
+                                                          <label>Checked By:</label>
+                                                          <input type="text" name="checked_by" required placeholder="Enter name">
+
+                                                          <button type="submit" class="btn">Save</button>
+                                                      </div>
+                                                  <?= form_close() ?>
+                                              </div>
+                                          <?php } ?>
+
+
+
                                         </div>
-                                        <div class="form-section">
-                                        <label>Qty:</label>
-                                        <input type="number" placeholder="Enter qty">
-                                        
-                                        <label>Checking:</label>
-                                        <input type="checkbox"> Done
-                                        
-                                        <label>Checked By:</label>
-                                        <input type="text" placeholder="Enter name">
-
-                                        <button class="btn">Save</button>
-                                        </div>
-                                    </div>
-
-                                     <?php }  ?>
-
-
-<!--                                    
-                                    <div class="lot-box">
-                                        <h3>Lot 2</h3>
-                                        <div class="lot-details">
-                                        <p><strong>Invoice Qty:</strong> --</p>
-                                        <p><strong>Invoice Date:</strong> --</p>
-                                        </div>
-                                        <div class="form-section">
-                                        <label>Qty:</label>
-                                        <input type="number" placeholder="Enter qty">
-                                        
-                                        <label>Checking:</label>
-                                        <input type="checkbox"> Done
-                                        
-                                        <label>Checked By:</label>
-                                        <input type="text" placeholder="Enter name">
-
-                                        <button class="btn">Save</button>
-                                        </div>
-                                    </div> -->
-
-                                   
-                                    <!-- <div class="lot-box">
-                                        <h3>Lot 3</h3>
-                                        <div class="lot-details">
-                                        <p><strong>Invoice Qty:</strong> --</p>
-                                        <p><strong>Invoice Date:</strong> --</p>
-                                        </div>
-                                        <div class="form-section">
-                                        <label>Qty:</label>
-                                        <input type="number" placeholder="Enter qty">
-                                        
-                                        <label>Checking:</label>
-                                        <input type="checkbox"> Done
-                                        
-                                        <label>Checked By:</label>
-                                        <input type="text" placeholder="Enter name">
-
-                                        <button class="btn">Save</button>
-                                        </div>
-                                    </div> -->
-
-                                    </div>
 
                                     </div>
                                 </div>
 
                             </div>
-                        
+
                         </form>
                     </div>
                 </div>
@@ -142,82 +134,80 @@
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
 <script>
-   $(function() {
-    $(".datepicker").datepicker({ 
+$(function() {
+    $(".datepicker").datepicker({
         // minDate: 0,
         todayHighlight: true,
-                     dateFormat: 'yy-mm-dd',
+        dateFormat: 'yy-mm-dd',
         startDate: new Date()
     });
-   });
+});
 </script>
 
 
 
- <style>
-
-
-  h2 {
+<style>
+h2 {
     text-align: center;
     margin-bottom: 20px;
-  }
+}
 
-  .lots-container {
+.lots-container {
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
     justify-content: center;
-  }
+}
 
-  .lot-box {
+.lot-box {
     flex: 1 1 300px;
     background: #fff;
     border: 2px solid #333;
     border-radius: 8px;
     padding: 15px;
-    box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
-  }
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+}
 
-  .lot-box h3 {
+.lot-box h3 {
     margin-top: 0;
     font-size: 18px;
     text-align: center;
     background: #eee;
     padding: 8px;
     border-radius: 6px;
-  }
+}
 
-  .lot-details p {
+.lot-details p {
     margin: 6px 0;
     font-size: 14px;
-  }
+}
 
-  .form-section {
+.form-section {
     margin-top: 15px;
     padding: 10px;
     background: #f1f1f1;
     border-radius: 6px;
-  }
+}
 
-  .form-section label {
+.form-section label {
     display: block;
     font-size: 13px;
     margin: 5px 0 3px;
-  }
+}
 
-  .form-section input[type="text"], 
-  .form-section input[type="number"] {
+.form-section input[type="text"],
+.form-section input[type="number"] {
     width: 100%;
     padding: 6px;
     border: 1px solid #aaa;
     border-radius: 4px;
-  }
+}
 
-  .form-section input[type="checkbox"] {
+.form-section input[type="checkbox"] {
     margin-right: 6px;
-  }
+}
 
-  .btn {
+.btn {
     margin-top: 10px;
     padding: 8px 14px;
     background: #007bff;
@@ -225,9 +215,9 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
-  }
+}
 
-  .btn:hover {
+.btn:hover {
     background: #0056b3;
-  }
+}
 </style>
