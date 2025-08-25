@@ -92,7 +92,8 @@
                                                   </div>
 
                                                   <!-- CodeIgniter form -->
-                                                  <?= form_open('admin/savetdirlotdetails', ['method' => 'post']) ?>
+                                        
+                                                    <form role="form" id="savenewpreexportform" action="<?php echo base_url() ?>admin/savetdirlotdetails" method="post" role="form">
                                                       <input type="hidden" name="lot_id" value="<?= $value['id'] ?>">
 
                                                       <div class="form-section">
@@ -107,7 +108,7 @@
 
                                                           <button type="submit" class="btn">Save</button>
                                                       </div>
-                                                  <?= form_close() ?>
+                                                    </form>
                                               </div>
                                           <?php } ?>
 
