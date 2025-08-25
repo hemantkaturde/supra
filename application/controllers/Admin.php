@@ -25648,6 +25648,10 @@ public function edit_tdir($tdir_id){
             'created_at' => date('Y-m-d H:i:s')
         ];
 
+
+        print_r($data);
+        exit;
+
         if ($this->admin_model->insert_entry($data)) {
             $this->session->set_flashdata('success', 'Lot saved successfully!');
         } else {
