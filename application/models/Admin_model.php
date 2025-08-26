@@ -7932,7 +7932,7 @@ class Admin_model extends CI_Model
     }
 
     public function getstockformdata($params){
-        $this->db->select(TBL_STOCKS.'.stock_id,'.TBL_STOCKS.'.stock_id_number,'.TBL_STOCKS.'.stock_date,'.TBL_VENDOR_PO_MASTER.'.po_number as venor_po_number,'.TBL_VENDOR_PO_MASTER.'.date as vendor_po_date,'.TBL_VENDOR.'.vendor_name,'.TBL_BUYER_MASTER.'.buyer_name,'.TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_BUYER_PO_MASTER.'.date as buyer_po_date,'.TBL_BUYER_PO_MASTER.'.delivery_date as delivery_date');
+        $this->db->select(TBL_STOCKS.'.stock_id,'.TBL_STOCKS.'.stock_id_number,'.TBL_STOCKS.'.stock_date,'.TBL_VENDOR_PO_MASTER.'.po_number as venor_po_number,'.TBL_VENDOR_PO_MASTER.'.date as vendor_po_date,'.TBL_VENDOR.'.vendor_name,'.TBL_BUYER_MASTER.'.buyer_name,'.TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_BUYER_PO_MASTER.'.date as buyer_po_date,'.TBL_BUYER_PO_MASTER.'.delivery_date as delivery_date,'.TBL_BUYER_PO_MASTER.'.buyer_po_number');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_STOCKS.'.vendor_po_number');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_STOCKS.'.vendor_name');
         $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_STOCKS.'.buyer_po_number');
@@ -16749,7 +16749,7 @@ public function fetchserchstocksrportdata($params){
             $data[$counter]['stock_id_number'] = $value['stock_id_number'];
             $data[$counter]['stock_date'] = $value['stock_date'];
             $data[$counter]['buyer_name'] = $value['by_name'];
-            $data[$counter]['sales_order_number'] = $value['sales_order_number'];
+            $data[$counter]['sales_order_number'] = $value['sales_order_number'].'-'.$value['buyer_po_number'];
             $data[$counter]['vendor_name'] = $value['ven_name'];
             $data[$counter]['v_po_number'] = $value['vpo_number'];
             $data[$counter]['fg_part_number'] = $value['fg_part_number'];
