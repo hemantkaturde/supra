@@ -18022,6 +18022,7 @@ public function downloadpreexportform($id){
     // $html = $this->load->view('html_to_pdf',[],true);
     $html = '<div style="text-align:center"> 
                  <p>'.$getpreexportdetailsforInvoice['buyer_name'].' - '.$getpreexportdetailsforInvoice['mode_of_shipment'].'</p>
+                 <p>'.$getpreexportdetailsforInvoice['invoice_number'].'</p>
             </div>'.$CartItem.'
                 
             <div>
