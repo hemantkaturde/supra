@@ -21093,6 +21093,10 @@ public function printstock($stock_id,$balence_qty_in_pcs,$ready_for_exp_pcs,$tot
                 <tr>
                   <td style="padding: 8px;"><b>RM Type : </b></td>
                 </tr>
+
+                 <tr>
+                  <td style="padding: 8px;"><b>Expected Qty : </b></td>
+                </tr>
             </table>
   
 
