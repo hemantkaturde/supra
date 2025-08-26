@@ -16667,6 +16667,8 @@ public function getcustomercompalindetailsdata($id){
     $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
     $this->db->where(TBL_CUSTMOR_COMPALINT.'.id', $id);
     $this->db->where(TBL_CUSTMOR_COMPALINT.'.status', 1);
+    $this->db->group_by(TBL_CUSTMOR_COMPALINT.'.id');
+
     $query = $this->db->get(TBL_CUSTMOR_COMPALINT);
     $fetch_result = $query->result_array();
     return $fetch_result;
