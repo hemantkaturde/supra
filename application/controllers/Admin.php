@@ -21084,14 +21084,14 @@ public function printstock($stock_id,$balence_qty_in_pcs,$ready_for_exp_pcs,$tot
                 </tr>
 
                 <tr>
-                  <td style="padding: 8px;"><b>Raw Material supplier name : </b></td>
+                  <td style="padding: 8px;"><b>Raw Material supplier name : </b>'.$getsearchstockvendordeatils[0]['supplier_name_actual'].'</td>
                 </tr>
                 <tr>
-                  <td style="padding: 8px;"><b>Supplier PO : </b></td>
+                  <td style="padding: 8px;"><b>Supplier PO : </b>'.$getsearchstockvendordeatils[0]['supplier_po_number_actual'].'</td>
                 </tr>
 
                 <tr>
-                  <td style="padding: 8px;"><b>RM Type : </b></td>
+                  <td style="padding: 8px;"><b>RM Type : </b>'.$getsearchstockvendordeatils[0]['row_material_rm_type'].'</td>
                 </tr>
 
                  <tr>
