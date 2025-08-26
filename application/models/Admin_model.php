@@ -5588,10 +5588,14 @@ class Admin_model extends CI_Model
                             '.TBL_BILL_OF_MATERIAL_ITEM.'.vendor_actual_recived_qty as vendor_received_qty_co,
                             '.TBL_BILL_OF_MATERIAL_ITEM.'.bom_status_item as item_bom_status,
                             '.TBL_VENDOR_PO_MASTER.'.date as vendor_po_date,
+                            '.TBL_VENDOR.'.vendor_name as vendorname,
                             '.TBL_VENDOR_PO_MASTER.'.po_number as v_po_number');
 
                             $this->db->join(TBL_BILL_OF_MATERIAL, TBL_BILL_OF_MATERIAL.'.id= '.TBL_BILL_OF_MATERIAL_ITEM.'.bom_id');
                             $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id= '.TBL_BILL_OF_MATERIAL.'.vendor_po_number');
+                            $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id= '.TBL_BILL_OF_MATERIAL.'.vendor_name');
+
+                            
                            // $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id= '.TBL_VENDOR_PO_MASTER.'.id');
 
                           // $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id= '.TBL_BILL_OF_MATERIAL_ITEM.'.part_number');
@@ -5645,6 +5649,7 @@ class Admin_model extends CI_Model
             foreach ($fetch_result as $key => $value)
             {
                 $data[$counter]['bom_number'] = $value['v_po_number'];
+                $data[$counter]['vendor_name'] = $value['vendorname'];
                 $data[$counter]['date'] = $value['vendor_po_date'];
                 $data[$counter]['fg_part_number'] = $value['partno'];
                 $data[$counter]['vendor_order_qty'] = $value['vendor_order_qty_co'];
