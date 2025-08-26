@@ -22094,7 +22094,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     
     public function getincoinglotdetailsfortdir($vendor_po_id, $part_number_id){
-        $this->db->select('*');
+        $this->db->select('*,'.TBL_INCOMING_DETAILS_ITEM.'.id as incomping_details_item_id,'.TBL_INCOMING_DETAILS.'.id as incoming_id');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id  = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
         $this->db->join(TBL_INCOMING_DETAILS, TBL_INCOMING_DETAILS.'.id  = '.TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id');
         $this->db->where(TBL_INCOMING_DETAILS.'.vendor_po_number',$vendor_po_id);
@@ -22112,6 +22112,25 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $query = $this->db->get(TBL_TDIR);
         $fetch_result = $query->result_array();
         return $fetch_result;
+    }
+
+
+      public function savetdirincomingdata($id,$data){
+        if($id != '') {
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_TDIR_INCOMING_LOT_DATA, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_TDIR_INCOMING_LOT_DATA, $data)) {
+                // return TRUE;
+                return $this->db->insert_id();
+            } else {
+                return FALSE;
+            }
+        }
     }
 
 

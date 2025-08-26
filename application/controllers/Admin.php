@@ -25599,14 +25599,14 @@ public function fetchtdirreport(){
 
 public function incoming_lots($tdir_id){
 
-    $process = 'Incoming Lots TDIR Report';
+    $process = 'Incoming Lots Data';
     $processFunction = 'Admin/tdir';
 
     $data['getTdirdata']= $this->admin_model->getTdirdata($tdir_id);
 
     $data['getincoinglotdetailsfortdir']= $this->admin_model->getincoinglotdetailsfortdir($data['getTdirdata'][0]['vendor_po'],$data['getTdirdata'][0]['fin_id']);
 
-    $this->global['pageTitle'] = 'Incoming Lots TDIR Report';   
+    $this->global['pageTitle'] = 'Incoming Lots Data';   
     $this->loadViews("masters/incoming_lots_tdir_report", $this->global, $data, NULL); 
 
 }
@@ -25645,25 +25645,46 @@ public function edit_tdir($tdir_id){
 
 
      public function savetdirlotdetails() {
-        $data = [
-            'lot_id'     => $this->input->post('lot_id'),
-            'qty'        => $this->input->post('qty'),
-            'checking'   => $this->input->post('checking') ? 1 : 0,
-            'checked_by' => $this->input->post('checked_by'),
-            'created_at' => date('Y-m-d H:i:s')
-        ];
+       
+         $post_submit = $this->input->post();
+         if($post_submit){
+            $save_TDIR_incoming_data_response = array();
 
+            $this->form_validation->set_rules('qty','Qty','trim|required');
+            $this->form_validation->set_rules('checking','Checking','trim|required');
+            $this->form_validation->set_rules('checked_by','Checked By','trim|required');
 
-        print_r($data);
-        exit;
+            if($this->form_validation->run() == FALSE)
+            {
+                $save_TDIR_incoming_data_response['status'] = 'failure';
+                $save_TDIR_incoming_data_response['error'] = array('qty'=>strip_tags(form_error('qty')), 'checking'=>strip_tags(form_error('checking')), 'checked_by'=>strip_tags(form_error('checked_by')));
+            }else{
 
-        if ($this->admin_model->insert_entry($data)) {
-            $this->session->set_flashdata('success', 'Lot saved successfully!');
-        } else {
-            $this->session->set_flashdata('error', 'Something went wrong.');
-        }
+                    $data = array( 
+                        'incoming_id'    => $this->input->post('incoming_id'),
+                        'incomping_details_item_id'    => $this->input->post('incomping_details_item_id'),
+                        'vendor_po_id'    => $this->input->post('vendor_po_id'),
+                        'fin_part_id'    => $this->input->post('fin_part_id'),
+                        'tdir_id'    => $this->input->post('tdir_id'),
+                        'qty'        => $this->input->post('qty'),
+                        'checking'   => $this->input->post('checking') ? 1 : 0,
+                        'checked_by' => $this->input->post('checked_by'),   
+                    );
 
-        //redirect($_SERVER['HTTP_REFERER']); // Go back to same page
+                    $savetdirincomingdata= $this->admin_model->savetdirincomingdata('',$data);
+                    if($savetdirincomingdata){
+                            $save_TDIR_incoming_data_response['status'] = 'success';
+                            $save_TDIR_incoming_data_response['error'] = array('qty'=>strip_tags(form_error('qty')), 'checking'=>strip_tags(form_error('checking')), 'checked_by'=>strip_tags(form_error('checked_by')));
+                    }else{
+                            $save_TDIR_incoming_data_response['status'] = 'failure';
+                            $save_TDIR_incoming_data_response['error'] = array('qty'=>strip_tags(form_error('qty')), 'checking'=>strip_tags(form_error('checking')), 'checked_by'=>strip_tags(form_error('checked_by')));
+                    }
+            }
+
+             echo json_encode($save_TDIR_incoming_data_response);
+
+         }
+
     }
 
 
