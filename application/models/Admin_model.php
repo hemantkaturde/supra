@@ -16710,7 +16710,7 @@ public function fetchserchstocksrportcount($params){
 }
 
 public function fetchserchstocksrportdata($params){
-    $this->db->select('*,'.TBL_BUYER_MASTER.'.buyer_name as by_name,'.TBL_VENDOR.'.vendor_name as ven_name,'.TBL_VENDOR_PO_MASTER.'.po_number as vpo_number,'.TBL_FINISHED_GOODS.'.part_number as fg_part_number,'.TBL_STOCKS.'.stock_id  as search_stock_id,'.TBL_FINISHED_GOODS.'.fin_id as item_id');
+    $this->db->select('*,'.TBL_BUYER_MASTER.'.buyer_name as by_name,'.TBL_VENDOR.'.vendor_name as ven_name,'.TBL_VENDOR_PO_MASTER.'.po_number as vpo_number,'.TBL_FINISHED_GOODS.'.part_number as fg_part_number,'.TBL_STOCKS.'.stock_id  as search_stock_id,'.TBL_FINISHED_GOODS.'.fin_id as item_id,'.TBL_BUYER_PO_MASTER.'.buyer_po_number as po_number_buyer');
     $this->db->join(TBL_STOCKS, TBL_STOCKS.'.stock_id = '.TBL_STOCKS_ITEM.'.stock_form_id');
     $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_STOCKS.'.buyer_po_number');
     $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_STOCKS.'.buyer_name');
@@ -16749,7 +16749,7 @@ public function fetchserchstocksrportdata($params){
             $data[$counter]['stock_id_number'] = $value['stock_id_number'];
             $data[$counter]['stock_date'] = $value['stock_date'];
             $data[$counter]['buyer_name'] = $value['by_name'];
-            $data[$counter]['sales_order_number'] = $value['sales_order_number'].'-'.$value['buyer_po_number'];
+            $data[$counter]['sales_order_number'] = $value['sales_order_number'].'-'.$value['po_number_buyer'];
             $data[$counter]['vendor_name'] = $value['ven_name'];
             $data[$counter]['v_po_number'] = $value['vpo_number'];
             $data[$counter]['fg_part_number'] = $value['fg_part_number'];
