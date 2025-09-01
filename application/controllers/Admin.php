@@ -25651,13 +25651,24 @@ public function edit_tdir($tdir_id){
         $lots = $this->input->post('lots');
         if (!empty($lots)) {
             foreach ($lots as &$lot) {
-                $lot['checking'] = isset($lot['checking']) ? 1 : 0;
+                //$lot['checking'] = isset($lot['checking']) ? 1 : 0;
+                $data = array(
+
+                   'incoming_id'    => $lot['incoming_id'],
+                   'incomping_details_item_id'    => $lot['incomping_details_item_id'],
+                   'vendor_po_id'    => $lot['vendor_po_id'],
+                   'fin_part_id'    => $lot['fin_part_id'],
+                   'tdir_id'    => $lot['tdir_id'],
+                   'qty'        => $lot['qty'],
+                   'checking'   => isset($lot['checking']) ? 1 : 0,
+                   'checked_by' => $lot['checked_by']
+                ); 
+
             }
 
-            print_r($lot);
-            exit;
+        
 
-            $savetdirincomingdata= $this->admin_model->savetdirincomingdata('',$lots);
+            $savetdirincomingdata= $this->admin_model->savetdirincomingdata('',$data);
 
             if($savetdirincomingdata){
                 $save_TDIR_incoming_data_response['status'] = 'success';
