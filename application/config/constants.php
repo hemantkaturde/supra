@@ -194,9 +194,8 @@ define('TBL_SCRAP_INVOICE_ITEM','tbl_scrap_invoice_item');
 define('TBL_PACKING_MASTER','tbl_packing_master');
 define('TBL_PACKING_CHALLAN','tbl_packing_challan');
 define('TBL_PACKING_CHALLAN_ITEM','tbl_packing_challan_item');
-
 define('TBL_TDIR','tbl_tdir');
-
+define('TBL_TDIR_INCOMING_LOT_DATA','tbl_tdir_incoming_lot_data');
 
 define('SMTP_HOST','mail.supraexports.in');
 define('SMTP_USER','supraportal@supraexports.in');

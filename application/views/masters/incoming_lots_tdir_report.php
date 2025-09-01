@@ -20,6 +20,11 @@
         </div>
     </section>
 
+    
+    <input type="hidden" class="form-control" value="<?php echo $getTdirdata[0]['vendor_po']; ?>" id="vendor_po_id" name="vendor_po_id">
+    <input type="hidden" class="form-control" value="<?php echo $getTdirdata[0]['tdir_id']; ?>" id="tdir_id" name="tdir_id">
+
+
     <section class="content">
         <div class="row">
             <div class="col-xs-12">
@@ -37,7 +42,6 @@
                             </h4>
                         </div>
                         <?php $this->load->helper("form"); ?>
-                        <form role="form" id="addTDIRform" action="#" method="post" role="form">
                             <div class="box-body">
 
 
@@ -92,9 +96,16 @@
                                                   </div>
 
                                                   <!-- CodeIgniter form -->
+
                                         
-                                                    <form role="form" id="savenewpreexportform" action="<?php echo base_url() ?>admin/savetdirlotdetails" method="post" role="form">
-                                                      <input type="hidden" name="lot_id" value="<?= $value['id'] ?>">
+                                                    <form role="form" id="submittdirincominglotdataform" action="#" method="post" role="form">
+                                            
+                                                        <input type="hidden" id="incoming_id" name="incoming_id" value="<?= $value['incoming_id'] ?>">
+                                                        <input type="hidden" id="incomping_details_item_id" name="incomping_details_item_id" value="<?= $value['incomping_details_item_id'] ?>">
+                                                        <input type="hidden" id="fin_part_id" name="fin_part_id" value="<?= $value['fin_id'] ?>">
+                                                        <input type="hidden" id="vendor_po_id" name="vendor_po_id" value="<?php echo $getTdirdata[0]['vendor_po']; ?>" >
+                                                        <input type="hidden" id="tdir_id" name="tdir_id" value="<?php echo $getTdirdata[0]['tdir_id']; ?>" >
+
 
                                                       <div class="form-section">
                                                           <label>Qty:</label>
@@ -106,22 +117,17 @@
                                                           <label>Checked By:</label>
                                                           <input type="text" name="checked_by" required placeholder="Enter name">
 
-                                                          <button type="submit" class="btn">Save</button>
+                                                          <button type="submit" id="submittdirincominglotdata" class="btn">Save</button>
                                                       </div>
                                                     </form>
                                               </div>
                                           <?php } ?>
-
-
-
                                         </div>
 
                                     </div>
                                 </div>
 
                             </div>
-
-                        </form>
                     </div>
                 </div>
                 <!-- /.box -->

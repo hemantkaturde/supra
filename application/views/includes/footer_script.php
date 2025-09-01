@@ -10409,6 +10409,7 @@
 						{ "width": "10%", "targets": 5 },
 						{ "width": "10%", "targets": 6 },
 						{ "width": "10%", "targets": 7 },
+						{ "width": "10%", "targets": 8 },
 					],
 					responsive: true,
 					"oLanguage": {
@@ -26572,7 +26573,7 @@
 <?php } ?>
 
 
-<?php if($pageTitle=='Add New TDIR' || $pageTitle=='TDIR Report' ||  $pageTitle=='Edit TDIR'){ ?>
+<?php if($pageTitle=='Add New TDIR' || $pageTitle=='TDIR Report' ||  $pageTitle=='Edit TDIR' ||  $pageTitle=='Incoming Lots Data'){ ?>
  <script type="text/javascript">
 
 
@@ -27123,6 +27124,55 @@
 						}
 					});
 	            });
+
+
+
+				$(document).on('click','#submittdirincominglotdata',function(e){
+					e.preventDefault();
+					$(".loader_ajax").show();
+					var formData = new FormData($("#submittdirincominglotdataform")[0]);
+
+					 var tdir_id = $('#tdir_id').val();
+
+					$.ajax({
+						url : "<?php echo base_url();?>admin/savetdirlotdetails",
+						type: "POST",
+						data : formData,
+						cache: false,
+						contentType: false,
+						processData: false,
+						success: function(data, textStatus, jqXHR)
+						{
+							var fetchResponse = $.parseJSON(data);
+							if(fetchResponse.status == "failure")
+							{
+								$.each(fetchResponse.error, function (i, v)
+								{
+									$('.'+i+'_error').html(v);
+								});
+								$(".loader_ajax").hide();
+							}
+							else if(fetchResponse.status == 'success')
+							{
+								swal({
+									title: "Success",
+									text: "TDIR Incoming Data Successfully Added!",
+									icon: "success",
+									button: "Ok",
+									},function(){ 
+										$("#modal-md").hide();
+										window.location.href = "<?php echo base_url().'incoming_lots/'?>"+tdir_id;
+								});		
+							}
+							
+						},
+						error: function (jqXHR, textStatus, errorThrown)
+						{
+						$(".loader_ajax").hide();
+						}
+					});
+					return false;
+				});
 
     </script>
 <?php } ?>
