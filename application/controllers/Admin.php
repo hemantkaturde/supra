@@ -25654,6 +25654,9 @@ public function edit_tdir($tdir_id){
                 $lot['checking'] = isset($lot['checking']) ? 1 : 0;
             }
 
+            print_r($lot);
+            exit;
+
             $savetdirincomingdata= $this->admin_model->savetdirincomingdata('',$lots);
 
             if($savetdirincomingdata){
