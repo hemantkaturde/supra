@@ -25660,6 +25660,23 @@ public function edit_tdir($tdir_id){
                 $save_TDIR_incoming_data_response['error'] = array('qty'=>strip_tags(form_error('qty')), 'checking'=>strip_tags(form_error('checking')), 'checked_by'=>strip_tags(form_error('checked_by')));
             }else{
 
+
+
+                 $lots = $this->input->post('lots');
+    if (!empty($lots)) {
+        foreach ($lots as &$lot) {
+            $lot['checking'] = isset($lot['checking']) ? 1 : 0;
+            $lot['created_at'] = date('Y-m-d H:i:s');
+        }
+
+        print_r($lots);
+        exit;
+       // $this->Tdir_model->save_multiple_lot_data($lots);
+    }
+
+
+
+
                     $data = array( 
                         'incoming_id'    => $this->input->post('incoming_id'),
                         'incomping_details_item_id'    => $this->input->post('incomping_details_item_id'),
@@ -25672,6 +25689,9 @@ public function edit_tdir($tdir_id){
                     );
 
                     $savetdirincomingdata= $this->admin_model->savetdirincomingdata('',$data);
+
+
+
                     if($savetdirincomingdata){
                             $save_TDIR_incoming_data_response['status'] = 'success';
                             $save_TDIR_incoming_data_response['error'] = array('qty'=>strip_tags(form_error('qty')), 'checking'=>strip_tags(form_error('checking')), 'checked_by'=>strip_tags(form_error('checked_by')));

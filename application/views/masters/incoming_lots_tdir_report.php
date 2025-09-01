@@ -100,14 +100,14 @@
                                         
                                                     <form role="form" id="submittdirincominglotdataform" action="#" method="post" role="form">
                                             
-                                                        <input type="hidden" id="incoming_id" name="incoming_id" value="<?= $value['incoming_id'] ?>">
+                                                        <!-- <input type="hidden" id="incoming_id" name="incoming_id" value="<?= $value['incoming_id'] ?>">
                                                         <input type="hidden" id="incomping_details_item_id" name="incomping_details_item_id" value="<?= $value['incomping_details_item_id'] ?>">
                                                         <input type="hidden" id="fin_part_id" name="fin_part_id" value="<?= $value['fin_id'] ?>">
                                                         <input type="hidden" id="vendor_po_id" name="vendor_po_id" value="<?php echo $getTdirdata[0]['vendor_po']; ?>" >
-                                                        <input type="hidden" id="tdir_id" name="tdir_id" value="<?php echo $getTdirdata[0]['tdir_id']; ?>" >
+                                                        <input type="hidden" id="tdir_id" name="tdir_id" value="<?php echo $getTdirdata[0]['tdir_id']; ?>" > -->
 
 
-                                                      <div class="form-section">
+                                                      <!-- <div class="form-section">
                                                           <label>Qty:</label>
                                                           <input type="number" name="qty" required placeholder="Enter qty">
 
@@ -118,10 +118,28 @@
                                                           <input type="text" name="checked_by" required placeholder="Enter name">
 
                                                           <button type="submit" id="submittdirincominglotdata" class="btn">Save</button>
-                                                      </div>
+                                                      </div> -->
+
+                                                            <input type="hidden" name="lots[<?= $key ?>][incoming_id]" value="<?= $value['incoming_id'] ?>">
+                                                            <input type="hidden" name="lots[<?= $key ?>][incomping_details_item_id]" value="<?= $value['incomping_details_item_id'] ?>">
+                                                            <input type="hidden" name="lots[<?= $key ?>][fin_part_id]" value="<?= $value['fin_id'] ?>">
+                                                            <input type="hidden" name="lots[<?= $key ?>][vendor_po_id]" value="<?= $getTdirdata[0]['vendor_po'] ?>">
+                                                            <input type="hidden" name="lots[<?= $key ?>][tdir_id]" value="<?= $getTdirdata[0]['tdir_id'] ?>">
+
+                                                            <label>Qty:</label>
+                                                            <input type="number" name="lots[<?= $key ?>][qty]" required>
+
+                                                            <label>Checking:</label>
+                                                            <input type="checkbox" name="lots[<?= $key ?>][checking]" value="1">
+
+                                                            <label>Checked By:</label>
+                                                            <input type="text" name="lots[<?= $key ?>][checked_by]" required>
+
+                                                          <button type="submit" id="submittdirincominglotdata" class="btn">Save</button>
+
                                                     </form>
                                               </div>
-                                          <?php } ?>
+                                            <?php } ?>
                                         </div>
 
                                     </div>
