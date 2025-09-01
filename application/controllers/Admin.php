@@ -25645,6 +25645,22 @@ public function edit_tdir($tdir_id){
 
 
      public function savetdirlotdetails() {
+
+
+                         $lots = $this->input->post('lots');
+    if (!empty($lots)) {
+        foreach ($lots as &$lot) {
+            $lot['checking'] = isset($lot['checking']) ? 1 : 0;
+            $lot['created_at'] = date('Y-m-d H:i:s');
+        }
+
+        print_r($lots);
+        exit;
+       // $this->Tdir_model->save_multiple_lot_data($lots);
+    }
+exit;
+
+
        
          $post_submit = $this->input->post();
          if($post_submit){
@@ -25662,17 +25678,6 @@ public function edit_tdir($tdir_id){
 
 
 
-                 $lots = $this->input->post('lots');
-    if (!empty($lots)) {
-        foreach ($lots as &$lot) {
-            $lot['checking'] = isset($lot['checking']) ? 1 : 0;
-            $lot['created_at'] = date('Y-m-d H:i:s');
-        }
-
-        print_r($lots);
-        exit;
-       // $this->Tdir_model->save_multiple_lot_data($lots);
-    }
 
 
 
