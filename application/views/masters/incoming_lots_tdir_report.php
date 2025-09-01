@@ -88,7 +88,7 @@
                                                       <p><strong>Invoice Qty:</strong> <?= $value['invoice_qty'] ?></p>
                                                       <p><strong>Invoice Date:</strong> <?= $value['invoice_date'] ?></p>
                                                       <p><strong>Material Grade:</strong> <?= $value['material_grade'] ?></p>
-                                                      <p><strong>Additional Process:</strong> <?= $value['additional_process'] ?></p>
+                                                      <p><strong>Additional Process:</strong> <?= $value['additional_process_part'] ?></p>
                                                   </div>
 
                                                   <!-- CodeIgniter form -->
