@@ -111,8 +111,14 @@
                                                                     <input type="number" class="form-control" name="lots[<?= $key ?>][qty]" Value="<?= $getincomingcheckedbydata[$key]['qty']?>" required>
                                                                 </div>
 
+                                                                <?php  if($getincomingcheckedbydata[$key]['checking']==1){ 
+                                                                      $checked = 'checked';
+                                                                 }else{
+                                                                       $checked = 'checked';
+                                                                 } ?>
+
                                                                 <div class="form-check mb-3">
-                                                                    <input class="form-check-input" type="checkbox" name="lots[<?= $key ?>][checking]" value="<?= $getincomingcheckedbydata[$key]['checked_by'] ?? '' ?>" id="check_<?= $key ?>">
+                                                                    <input class="form-check-input" type="checkbox" name="lots[<?= $key ?>][checking]" value="<?= $getincomingcheckedbydata[$key]['checking'] ?? '' ?>" id="check_<?= $key ?>" $checked>
                                                                     <label class="form-check-label" for="check_<?= $key ?>">Checking Done</label>
                                                                 </div>
 
