@@ -25678,19 +25678,35 @@ public function edit_tdir($tdir_id){
 
             // Insert new lots
             if (!empty($insertData)) {
-                $this->db->insert_batch('tbl_tdir_incoming_lot_data', $insertData);
+               $savetdirincomingdata = $this->db->insert_batch('tbl_tdir_incoming_lot_data', $insertData);
                 // $savetdirincomingdata= $this->admin_model->savetdirincomingdata('',$insertData);
+                if($savetdirincomingdata){
+                  $save_TDIR_incoming_data_response['status'] = 'success';
+                  $save_TDIR_incoming_data_response['error'] = array('qty'=>strip_tags(form_error('qty')), 'checking'=>strip_tags(form_error('checking')), 'checked_by'=>strip_tags(form_error('checked_by')));
+                }else{
+                  $save_TDIR_incoming_data_response['status'] = 'failure';
+                  $save_TDIR_incoming_data_response['error'] = array('qty'=>strip_tags(form_error('qty')), 'checking'=>strip_tags(form_error('checking')), 'checked_by'=>strip_tags(form_error('checked_by')));
+                }
             }
 
             // Update existing lots
             if (!empty($updateData)) {
-               $this->db->update_batch('tbl_tdir_incoming_lot_data', $updateData, 'lot_id');
+                $updatetdirincomingdata = $this->db->update_batch('tbl_tdir_incoming_lot_data', $updateData, 'id');
                 //$savetdirincomingdata= $this->admin_model->savetdirincomingdata('',$updateData);
+
+                if($updatetdirincomingdata){
+                  $save_TDIR_incoming_data_response['status'] = 'success';
+                  $save_TDIR_incoming_data_response['error'] = array('qty'=>strip_tags(form_error('qty')), 'checking'=>strip_tags(form_error('checking')), 'checked_by'=>strip_tags(form_error('checked_by')));
+                }else{
+                  $save_TDIR_incoming_data_response['status'] = 'failure';
+                  $save_TDIR_incoming_data_response['error'] = array('qty'=>strip_tags(form_error('qty')), 'checking'=>strip_tags(form_error('checking')), 'checked_by'=>strip_tags(form_error('checked_by')));
+                }
             }
 
-            $this->session->set_flashdata('success', 'Lots saved/updated successfully!');
+            //$this->session->set_flashdata('success', 'Lots saved/updated successfully!');
         }
 
+        echo json_encode($save_TDIR_incoming_data_response);
        // redirect('incoming_lots');
     
 
