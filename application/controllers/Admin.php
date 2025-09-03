@@ -25644,42 +25644,104 @@ public function edit_tdir($tdir_id){
 }
 
 
-     public function savetdirlotdetails() {
+    public function savetdirlotdetails() {
 
-        $save_TDIR_incoming_data_response = array();
 
+       
+
+  
         $lots = $this->input->post('lots');
+
         if (!empty($lots)) {
-            foreach ($lots as &$lot) {
-                //$lot['checking'] = isset($lot['checking']) ? 1 : 0;
-                $data = array(
+            $insertData = [];
+            $updateData = [];
 
-                   'incoming_id'    => $lot['incoming_id'],
-                   'incomping_details_item_id'    => $lot['incomping_details_item_id'],
-                   'vendor_po_id'    => $lot['vendor_po_id'],
-                   'fin_part_id'    => $lot['fin_part_id'],
-                   'tdir_id'    => $lot['tdir_id'],
-                   'qty'        => $lot['qty'],
-                   'checking'   => isset($lot['checking']) ? 1 : 0,
-                   'checked_by' => $lot['checked_by']
-                ); 
+            foreach ($lots as $lot) {
+                // check if record already exists for this lot_id
+                $existing = $this->db->get_where('incoming_lot_details', ['lot_id' => $lot['lot_id']])->row_array();
 
+                $data = [
+                      'incoming_id'    => $lot['incoming_id'],
+                      'incomping_details_item_id'    => $lot['incomping_details_item_id'],
+                      'vendor_po_id'    => $lot['vendor_po_id'],
+                      'fin_part_id'    => $lot['fin_part_id'],
+                      'tdir_id'    => $lot['tdir_id'],
+                      'qty'        => $lot['qty'],
+                      'checking'   => isset($lot['checking']) ? 1 : 0,
+                      'checked_by' => $lot['checked_by']
+                ];
+
+                if ($existing) {
+                    // record exists -> update
+                    $updateData[] = $data;
+                } else {
+                    // record does not exist -> insert
+                    $insertData[] = $data;
+                }
             }
+
+            // Insert new lots
+            if (!empty($insertData)) {
+               // $this->db->insert_batch('incoming_lot_details', $insertData);
+                 $savetdirincomingdata= $this->admin_model->savetdirincomingdata('',$insertData);
+            }
+
+            // Update existing lots
+            if (!empty($updateData)) {
+               // $this->db->update_batch('incoming_lot_details', $updateData, 'lot_id');
+                $savetdirincomingdata= $this->admin_model->savetdirincomingdata('',$updateData);
+            }
+
+            $this->session->set_flashdata('success', 'Lots saved/updated successfully!');
+        }
+
+       // redirect('incoming_lots');
+    
+
+
+
+
+
+
+
+        /*==============================================================================================*/
+
+        // $save_TDIR_incoming_data_response = array();
+
+        // $lots = $this->input->post('lots');
+        // if (!empty($lots)) {
+        //     foreach ($lots as &$lot) {
+        //         //$lot['checking'] = isset($lot['checking']) ? 1 : 0;
+        //         $data = array(
+
+        //            'incoming_id'    => $lot['incoming_id'],
+        //            'incomping_details_item_id'    => $lot['incomping_details_item_id'],
+        //            'vendor_po_id'    => $lot['vendor_po_id'],
+        //            'fin_part_id'    => $lot['fin_part_id'],
+        //            'tdir_id'    => $lot['tdir_id'],
+        //            'qty'        => $lot['qty'],
+        //            'checking'   => isset($lot['checking']) ? 1 : 0,
+        //            'checked_by' => $lot['checked_by']
+        //         ); 
+
+        //     }
 
         
 
-            $savetdirincomingdata= $this->admin_model->savetdirincomingdata('',$data);
+        //     $savetdirincomingdata= $this->admin_model->savetdirincomingdata('',$data);
 
-            if($savetdirincomingdata){
-                $save_TDIR_incoming_data_response['status'] = 'success';
-                $save_TDIR_incoming_data_response['error'] = array('qty'=>strip_tags(form_error('qty')), 'checking'=>strip_tags(form_error('checking')), 'checked_by'=>strip_tags(form_error('checked_by')));
-            }else{
-                $save_TDIR_incoming_data_response['status'] = 'failure';
-                $save_TDIR_incoming_data_response['error'] = array('qty'=>strip_tags(form_error('qty')), 'checking'=>strip_tags(form_error('checking')), 'checked_by'=>strip_tags(form_error('checked_by')));
-            }
+        //     if($savetdirincomingdata){
+        //         $save_TDIR_incoming_data_response['status'] = 'success';
+        //         $save_TDIR_incoming_data_response['error'] = array('qty'=>strip_tags(form_error('qty')), 'checking'=>strip_tags(form_error('checking')), 'checked_by'=>strip_tags(form_error('checked_by')));
+        //     }else{
+        //         $save_TDIR_incoming_data_response['status'] = 'failure';
+        //         $save_TDIR_incoming_data_response['error'] = array('qty'=>strip_tags(form_error('qty')), 'checking'=>strip_tags(form_error('checking')), 'checked_by'=>strip_tags(form_error('checked_by')));
+        //     }
 
-        echo json_encode($save_TDIR_incoming_data_response);
-        }
+        // echo json_encode($save_TDIR_incoming_data_response);
+
+
+        // }
 
         //  $post_submit = $this->input->post();
         //  if($post_submit){

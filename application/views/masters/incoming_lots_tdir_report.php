@@ -83,7 +83,7 @@
 
                                             <?php //}  ?>
 
-
+                                        <form role="form" id="submittdirincominglotdataform" action="#" method="post" role="form">
                                             <?php foreach ($getincoinglotdetailsfortdir as $key => $value) { ?>
                                               <div class="lot-box">
                                                   <h3>Lot <?= $key + 1 ?></h3>
@@ -98,7 +98,7 @@
                                                   <!-- CodeIgniter form -->
 
                                         
-                                                    <form role="form" id="submittdirincominglotdataform" action="#" method="post" role="form">
+                                                    <!-- <form role="form" id="submittdirincominglotdataform" action="#" method="post" role="form"> -->
                                             
                                                         <!-- <input type="hidden" id="incoming_id" name="incoming_id" value="<?= $value['incoming_id'] ?>">
                                                         <input type="hidden" id="incomping_details_item_id" name="incomping_details_item_id" value="<?= $value['incomping_details_item_id'] ?>">
@@ -135,11 +135,11 @@
                                                             <label>Checked By:</label>
                                                             <input type="text" name="lots[<?= $key ?>][checked_by]" required>
 
-                                                          <button type="submit" id="submittdirincominglotdata" class="btn">Save</button>
-
-                                                    </form>
+                                                    <!-- </form> -->
                                               </div>
                                             <?php } ?>
+                                                <button type="submit" id="submittdirincominglotdata" class="btn">Save</button>
+                                            </form>
                                         </div>
 
                                     </div>
