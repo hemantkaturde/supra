@@ -118,7 +118,7 @@
 
                                                                 <div class="mb-3">
                                                                     <label class="form-label">Checked By</label>
-                                                                    <input type="text" class="form-control" name="lots[<?= $key ?>][checked_by]" required>
+                                                                    <input type="text" class="form-control" name="lots[<?= $key ?>][checked_by]" Value="<?= $getincomingcheckedbydata[$key]['checked_by']?>" required>
                                                                 </div>
                                                             </div>
                                                         </div>
