@@ -85,8 +85,6 @@
 
                                         
                                            <div class="container-fluid py-4">
-                                            <h2 class="text-center mb-4">Incoming Lots</h2>
-
                                             <form id="submittdirincominglotdataform" method="post">
                                                 <div class="row">
                                                     <?php foreach ($getincoinglotdetailsfortdir as $key => $value) { ?>
