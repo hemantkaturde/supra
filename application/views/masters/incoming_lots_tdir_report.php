@@ -84,7 +84,6 @@
                                             <?php //}  ?>
 
 
-                                            <?php print_r($getincomingcheckedbydata); exit; ?>
                                         
                                            <div class="container-fluid py-4">
                                             <form id="submittdirincominglotdataform" method="post">
@@ -109,7 +108,7 @@
                                                                 <!-- Form Inputs -->
                                                                 <div class="mb-3">
                                                                     <label class="form-label">Qty</label>
-                                                                    <input type="number" class="form-control" name="lots[<?= $key ?>][qty]" required>
+                                                                    <input type="number" class="form-control" name="lots[<?= $key ?>][qty]" Value="<?= $getincomingcheckedbydata[$key]['qty']?>" required>
                                                                 </div>
 
                                                                 <div class="form-check mb-3">
