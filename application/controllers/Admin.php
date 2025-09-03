@@ -25606,6 +25606,9 @@ public function incoming_lots($tdir_id){
 
     $data['getincoinglotdetailsfortdir']= $this->admin_model->getincoinglotdetailsfortdir($data['getTdirdata'][0]['vendor_po'],$data['getTdirdata'][0]['fin_id']);
 
+    $data['getincomingcheckedbydata']= $this->admin_model->getincomingcheckedbydata($tdir_id);
+
+
     $this->global['pageTitle'] = 'Incoming Lots Data';   
     $this->loadViews("masters/incoming_lots_tdir_report", $this->global, $data, NULL); 
 

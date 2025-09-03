@@ -22104,6 +22104,17 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         return $fetch_result;
     }
 
+
+     public function getincomingcheckedbydata($tdir_id){
+        $this->db->select('*');
+        $this->db->where(TBL_TDIR_INCOMING_LOT_DATA.'.tdir_id',$tdir_id);
+        $query = $this->db->get(TBL_TDIR_INCOMING_LOT_DATA);
+        $fetch_result = $query->result_array();
+        return $fetch_result;
+    }
+
+
+
     public function getPreviousReportnumber(){
         $this->db->select('*');
         $this->db->where(TBL_TDIR.'.status', 1);

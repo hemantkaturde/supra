@@ -83,6 +83,8 @@
 
                                             <?php //}  ?>
 
+
+                                            <?php print_r($getincomingcheckedbydata); exit; ?>
                                         
                                            <div class="container-fluid py-4">
                                             <form id="submittdirincominglotdataform" method="post">
