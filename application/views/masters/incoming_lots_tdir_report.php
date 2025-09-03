@@ -118,7 +118,7 @@
                                                                  } ?>
 
                                                                 <div class="form-check mb-3">
-                                                                    <input class="form-check-input" type="checkbox" name="lots[<?= $key ?>][checking]" value="<?= $getincomingcheckedbydata[$key]['checking'] ?? '' ?>" id="check_<?= $key ?>" $checked>
+                                                                    <input class="form-check-input" type="checkbox" name="lots[<?= $key ?>][checking]" value="<?= $getincomingcheckedbydata[$key]['checking'] ?? '' ?>" id="check_<?= $key ?>" <?php echo $checked ?> >
                                                                     <label class="form-check-label" for="check_<?= $key ?>">Checking Done</label>
                                                                 </div>
 
