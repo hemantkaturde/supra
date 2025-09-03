@@ -112,7 +112,7 @@
                                                                 </div>
 
                                                                 <div class="form-check mb-3">
-                                                                    <input class="form-check-input" type="checkbox" name="lots[<?= $key ?>][checking]" value="1" id="check_<?= $key ?>">
+                                                                    <input class="form-check-input" type="checkbox" name="lots[<?= $key ?>][checking]" value="<?= $getincomingcheckedbydata[$key]['checked_by'] ?? '' ?>" id="check_<?= $key ?>">
                                                                     <label class="form-check-label" for="check_<?= $key ?>">Checking Done</label>
                                                                 </div>
 
