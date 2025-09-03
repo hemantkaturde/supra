@@ -105,6 +105,8 @@
                                                                 <input type="hidden" name="lots[<?= $key ?>][vendor_po_id]" value="<?= $getTdirdata[0]['vendor_po'] ?>">
                                                                 <input type="hidden" name="lots[<?= $key ?>][tdir_id]" value="<?= $getTdirdata[0]['tdir_id'] ?>">
 
+                                                                <input type="hidden" name="lots[<?= $key ?>][lot_id]" value="<?= $getincomingcheckedbydata[$key]['id'] ?>">
+
                                                                 <!-- Form Inputs -->
                                                                 <div class="mb-3">
                                                                     <label class="form-label">Qty</label>
