@@ -87,10 +87,10 @@
                                         
                                            <div class="container-fluid py-4">
                                             <form id="submittdirincominglotdataform" method="post">
-                                                <div class="row">
+                                                <div class="row g-4 justify-content-center">
                                                     <?php foreach ($getincoinglotdetailsfortdir as $key => $value) { ?>
-                                                        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                                                            <div class="lot-box h-100">
+                                                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                                                            <div class="lot-box">
                                                                 <div class="lot-title">Lot <?= $key + 1 ?></div>
 
                                                                 <p><strong>Invoice Qty:</strong> <?= $value['invoice_qty'] ?></p>
@@ -139,7 +139,7 @@
                                                     </button>
                                                 </div>
                                             </form>
-                                        </div>
+                                           </div>
 
 
 
@@ -175,102 +175,37 @@ $(function() {
 
 
 <style>
-h2 {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.lots-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    justify-content: center;
-}
-
-.lot-box {
-    flex: 1 1 300px;
-    background: #fff;
-    border: 2px solid #333;
-    border-radius: 8px;
-    padding: 15px;
-    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.lot-box h3 {
-    margin-top: 0;
-    font-size: 18px;
-    text-align: center;
-    background: #eee;
-    padding: 8px;
-    border-radius: 6px;
-}
-
-.lot-details p {
-    margin: 6px 0;
-    font-size: 14px;
-}
-
-.form-section {
-    margin-top: 15px;
-    padding: 10px;
-    background: #f1f1f1;
-    border-radius: 6px;
-}
-
-.form-section label {
-    display: block;
-    font-size: 13px;
-    margin: 5px 0 3px;
-}
-
-.form-section input[type="text"],
-.form-section input[type="number"] {
-    width: 100%;
-    padding: 6px;
-    border: 1px solid #aaa;
-    border-radius: 4px;
-}
-
-.form-section input[type="checkbox"] {
-    margin-right: 6px;
-}
-
-.btn {
-    margin-top: 10px;
-    padding: 8px 14px;
-    background: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.btn:hover {
-    background: #0056b3;
-}
-</style>
-
-<style>
-    body {
-        background: #f8f9fa; /* light gray page background */
-    }
     .lot-box {
         background: #ffffff;
+        border: 2px solid #e0e0e0;
         border-radius: 12px;
         padding: 20px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);
         transition: transform 0.2s ease-in-out;
     }
     .lot-box:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+        transform: scale(1.02);
     }
     .lot-title {
+        font-size: 20px;
         font-weight: 600;
-        background: #f1f3f5;
-        padding: 10px;
-        border-radius: 8px;
         text-align: center;
-        margin-bottom: 10px;
+        background: #f8f9fa;
+        padding: 10px;
+        border-radius: 10px;
+        margin-bottom: 15px;
+    }
+    .container-fluid {
+        background: #f4f6f9;
+        min-height: 100vh;
+        padding: 30px;
+    }
+    .form-label {
+        font-weight: 600;
+    }
+    .btn-primary {
+        font-size: 18px;
+        font-weight: 500;
+        border-radius: 10px;
     }
 </style>
