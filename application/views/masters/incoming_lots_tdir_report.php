@@ -84,52 +84,55 @@
                                             <?php //}  ?>
 
                                         
-                                            <form role="form" id="submittdirincominglotdataform" action="#" method="post">
+                                           <div class="container-fluid py-4">
+                                            <h2 class="text-center mb-4">Incoming Lots</h2>
+
+                                            <form id="submittdirincominglotdataform" method="post">
                                                 <div class="row">
                                                     <?php foreach ($getincoinglotdetailsfortdir as $key => $value) { ?>
                                                         <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                                                            <div class="card shadow-sm h-100">
-                                                                <div class="card-header bg-light">
-                                                                    <h5 class="mb-0">Lot <?= $key + 1 ?></h5>
+                                                            <div class="lot-box h-100">
+                                                                <div class="lot-title">Lot <?= $key + 1 ?></div>
+
+                                                                <p><strong>Invoice Qty:</strong> <?= $value['invoice_qty'] ?></p>
+                                                                <p><strong>Invoice Date:</strong> <?= $value['invoice_date'] ?></p>
+                                                                <p><strong>Material Grade:</strong> <?= $value['material_grade'] ?></p>
+                                                                <p><strong>Additional Process:</strong> <?= $value['additional_process_part'] ?></p>
+
+                                                                <!-- Hidden Inputs -->
+                                                                <input type="hidden" name="lots[<?= $key ?>][incoming_id]" value="<?= $value['incoming_id'] ?>">
+                                                                <input type="hidden" name="lots[<?= $key ?>][incomping_details_item_id]" value="<?= $value['incomping_details_item_id'] ?>">
+                                                                <input type="hidden" name="lots[<?= $key ?>][fin_part_id]" value="<?= $value['fin_id'] ?>">
+                                                                <input type="hidden" name="lots[<?= $key ?>][vendor_po_id]" value="<?= $getTdirdata[0]['vendor_po'] ?>">
+                                                                <input type="hidden" name="lots[<?= $key ?>][tdir_id]" value="<?= $getTdirdata[0]['tdir_id'] ?>">
+
+                                                                <!-- Form Inputs -->
+                                                                <div class="mb-3">
+                                                                    <label class="form-label">Qty</label>
+                                                                    <input type="number" class="form-control" name="lots[<?= $key ?>][qty]" required>
                                                                 </div>
-                                                                <div class="card-body">
-                                                                    <p><strong>Invoice Qty:</strong> <?= $value['invoice_qty'] ?></p>
-                                                                    <p><strong>Invoice Date:</strong> <?= $value['invoice_date'] ?></p>
-                                                                    <p><strong>Material Grade:</strong> <?= $value['material_grade'] ?></p>
-                                                                    <p><strong>Additional Process:</strong> <?= $value['additional_process_part'] ?></p>
 
-                                                                    <!-- Hidden Inputs -->
-                                                                    <input type="hidden" name="lots[<?= $key ?>][incoming_id]" value="<?= $value['incoming_id'] ?>">
-                                                                    <input type="hidden" name="lots[<?= $key ?>][incomping_details_item_id]" value="<?= $value['incomping_details_item_id'] ?>">
-                                                                    <input type="hidden" name="lots[<?= $key ?>][fin_part_id]" value="<?= $value['fin_id'] ?>">
-                                                                    <input type="hidden" name="lots[<?= $key ?>][vendor_po_id]" value="<?= $getTdirdata[0]['vendor_po'] ?>">
-                                                                    <input type="hidden" name="lots[<?= $key ?>][tdir_id]" value="<?= $getTdirdata[0]['tdir_id'] ?>">
+                                                                <div class="form-check mb-3">
+                                                                    <input class="form-check-input" type="checkbox" name="lots[<?= $key ?>][checking]" value="1" id="check_<?= $key ?>">
+                                                                    <label class="form-check-label" for="check_<?= $key ?>">Checking Done</label>
+                                                                </div>
 
-                                                                    <!-- Form Fields -->
-                                                                    <div class="mb-3">
-                                                                        <label class="form-label">Qty</label>
-                                                                        <input type="number" class="form-control" name="lots[<?= $key ?>][qty]" required>
-                                                                    </div>
-
-                                                                    <div class="form-check mb-3">
-                                                                        <input class="form-check-input" type="checkbox" name="lots[<?= $key ?>][checking]" value="1" id="check_<?= $key ?>">
-                                                                        <label class="form-check-label" for="check_<?= $key ?>">Checking Done</label>
-                                                                    </div>
-
-                                                                    <div class="mb-3">
-                                                                        <label class="form-label">Checked By</label>
-                                                                        <input type="text" class="form-control" name="lots[<?= $key ?>][checked_by]" required>
-                                                                    </div>
+                                                                <div class="mb-3">
+                                                                    <label class="form-label">Checked By</label>
+                                                                    <input type="text" class="form-control" name="lots[<?= $key ?>][checked_by]" required>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     <?php } ?>
                                                 </div>
 
-                                                <div class="text-center mt-3">
-                                                    <button type="submit" id="submittdirincominglotdata" class="btn btn-primary px-4">Save All</button>
+                                                <div class="text-center">
+                                                    <button type="submit" id="submittdirincominglotdata" class="btn btn-primary px-5 py-2">
+                                                        Save All
+                                                    </button>
                                                 </div>
-                                           </form>
+                                            </form>
+                                        </div>
 
 
 
@@ -238,4 +241,29 @@ h2 {
 .btn:hover {
     background: #0056b3;
 }
+</style>
+
+<style>
+    body {
+        background: #f8f9fa; /* light gray page background */
+    }
+    .lot-box {
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        transition: transform 0.2s ease-in-out;
+    }
+    .lot-box:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    }
+    .lot-title {
+        font-weight: 600;
+        background: #f1f3f5;
+        padding: 10px;
+        border-radius: 8px;
+        text-align: center;
+        margin-bottom: 10px;
+    }
 </style>
