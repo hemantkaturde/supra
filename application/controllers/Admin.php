@@ -25678,14 +25678,14 @@ public function edit_tdir($tdir_id){
 
             // Insert new lots
             if (!empty($insertData)) {
-               // $this->db->insert_batch('incoming_lot_details', $insertData);
-                 $savetdirincomingdata= $this->admin_model->savetdirincomingdata('',$insertData);
+                $this->db->insert_batch('tbl_tdir_incoming_lot_data', $insertData);
+                // $savetdirincomingdata= $this->admin_model->savetdirincomingdata('',$insertData);
             }
 
             // Update existing lots
             if (!empty($updateData)) {
-               // $this->db->update_batch('incoming_lot_details', $updateData, 'lot_id');
-                $savetdirincomingdata= $this->admin_model->savetdirincomingdata('',$updateData);
+               $this->db->update_batch('tbl_tdir_incoming_lot_data', $updateData, 'lot_id');
+                //$savetdirincomingdata= $this->admin_model->savetdirincomingdata('',$updateData);
             }
 
             $this->session->set_flashdata('success', 'Lots saved/updated successfully!');
