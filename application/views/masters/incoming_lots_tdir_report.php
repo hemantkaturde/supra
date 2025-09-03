@@ -114,11 +114,11 @@
                                                                 <?php  if($getincomingcheckedbydata[$key]['checking']==1){ 
                                                                       $checked = 'checked';
                                                                  }else{
-                                                                       $checked = 'checked';
+                                                                       $checked = '';
                                                                  } ?>
 
                                                                 <div class="form-check mb-3">
-                                                                    <input class="form-check-input" type="checkbox" name="lots[<?= $key ?>][checking]" value="<?= $getincomingcheckedbydata[$key]['checking'] ?? '' ?>" id="check_<?= $key ?>" <?php echo $checked ?> >
+                                                                    <input class="form-check-input" type="checkbox" name="lots[<?= $key ?>][checking]" value="<?= $getincomingcheckedbydata[$key]['checking'] ?? '' ?>" id="check_<?= $key ?>" <?php echo $checked; ?> >
                                                                     <label class="form-check-label" for="check_<?= $key ?>">Checking Done</label>
                                                                 </div>
 
