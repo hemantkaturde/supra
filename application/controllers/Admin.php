@@ -25646,10 +25646,6 @@ public function edit_tdir($tdir_id){
 
     public function savetdirlotdetails() {
 
-
-       
-
-  
         $lots = $this->input->post('lots');
 
         if (!empty($lots)) {
@@ -25658,7 +25654,7 @@ public function edit_tdir($tdir_id){
 
             foreach ($lots as $lot) {
                 // check if record already exists for this lot_id
-                $existing = $this->db->get_where('incoming_lot_details', ['lot_id' => $lot['lot_id']])->row_array();
+                $existing = $this->db->get_where('tbl_tdir_incoming_lot_data', ['id' => $lot['lot_id']])->row_array();
 
                 $data = [
                       'incoming_id'    => $lot['incoming_id'],
