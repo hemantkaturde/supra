@@ -54,7 +54,7 @@
                                             <?php  
                                     
                           
-                                    // foreach ($getincoinglotdetailsfortdir as $key => $value) { ?>
+                                          // foreach ($getincoinglotdetailsfortdir as $key => $value) { ?>
 
 
                                             <!-- <div class="lot-box">
@@ -83,63 +83,56 @@
 
                                             <?php //}  ?>
 
-                                        <form role="form" id="submittdirincominglotdataform" action="#" method="post" role="form">
-                                            <?php foreach ($getincoinglotdetailsfortdir as $key => $value) { ?>
-                                              <div class="lot-box">
-                                                  <h3>Lot <?= $key + 1 ?></h3>
-
-                                                  <div class="lot-details">
-                                                      <p><strong>Invoice Qty:</strong> <?= $value['invoice_qty'] ?></p>
-                                                      <p><strong>Invoice Date:</strong> <?= $value['invoice_date'] ?></p>
-                                                      <p><strong>Material Grade:</strong> <?= $value['material_grade'] ?></p>
-                                                      <p><strong>Additional Process:</strong> <?= $value['additional_process_part'] ?></p>
-                                                  </div>
-
-                                                  <!-- CodeIgniter form -->
-
                                         
-                                                    <!-- <form role="form" id="submittdirincominglotdataform" action="#" method="post" role="form"> -->
-                                            
-                                                        <!-- <input type="hidden" id="incoming_id" name="incoming_id" value="<?= $value['incoming_id'] ?>">
-                                                        <input type="hidden" id="incomping_details_item_id" name="incomping_details_item_id" value="<?= $value['incomping_details_item_id'] ?>">
-                                                        <input type="hidden" id="fin_part_id" name="fin_part_id" value="<?= $value['fin_id'] ?>">
-                                                        <input type="hidden" id="vendor_po_id" name="vendor_po_id" value="<?php echo $getTdirdata[0]['vendor_po']; ?>" >
-                                                        <input type="hidden" id="tdir_id" name="tdir_id" value="<?php echo $getTdirdata[0]['tdir_id']; ?>" > -->
+                                            <form role="form" id="submittdirincominglotdataform" action="#" method="post">
+                                                <div class="row">
+                                                    <?php foreach ($getincoinglotdetailsfortdir as $key => $value) { ?>
+                                                        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                                                            <div class="card shadow-sm h-100">
+                                                                <div class="card-header bg-light">
+                                                                    <h5 class="mb-0">Lot <?= $key + 1 ?></h5>
+                                                                </div>
+                                                                <div class="card-body">
+                                                                    <p><strong>Invoice Qty:</strong> <?= $value['invoice_qty'] ?></p>
+                                                                    <p><strong>Invoice Date:</strong> <?= $value['invoice_date'] ?></p>
+                                                                    <p><strong>Material Grade:</strong> <?= $value['material_grade'] ?></p>
+                                                                    <p><strong>Additional Process:</strong> <?= $value['additional_process_part'] ?></p>
+
+                                                                    <!-- Hidden Inputs -->
+                                                                    <input type="hidden" name="lots[<?= $key ?>][incoming_id]" value="<?= $value['incoming_id'] ?>">
+                                                                    <input type="hidden" name="lots[<?= $key ?>][incomping_details_item_id]" value="<?= $value['incomping_details_item_id'] ?>">
+                                                                    <input type="hidden" name="lots[<?= $key ?>][fin_part_id]" value="<?= $value['fin_id'] ?>">
+                                                                    <input type="hidden" name="lots[<?= $key ?>][vendor_po_id]" value="<?= $getTdirdata[0]['vendor_po'] ?>">
+                                                                    <input type="hidden" name="lots[<?= $key ?>][tdir_id]" value="<?= $getTdirdata[0]['tdir_id'] ?>">
+
+                                                                    <!-- Form Fields -->
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">Qty</label>
+                                                                        <input type="number" class="form-control" name="lots[<?= $key ?>][qty]" required>
+                                                                    </div>
+
+                                                                    <div class="form-check mb-3">
+                                                                        <input class="form-check-input" type="checkbox" name="lots[<?= $key ?>][checking]" value="1" id="check_<?= $key ?>">
+                                                                        <label class="form-check-label" for="check_<?= $key ?>">Checking Done</label>
+                                                                    </div>
+
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">Checked By</label>
+                                                                        <input type="text" class="form-control" name="lots[<?= $key ?>][checked_by]" required>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    <?php } ?>
+                                                </div>
+
+                                                <div class="text-center mt-3">
+                                                    <button type="submit" id="submittdirincominglotdata" class="btn btn-primary px-4">Save All</button>
+                                                </div>
+                                           </form>
 
 
-                                                      <!-- <div class="form-section">
-                                                          <label>Qty:</label>
-                                                          <input type="number" name="qty" required placeholder="Enter qty">
 
-                                                          <label>Checking:</label>
-                                                          <input type="checkbox" name="checking" value="1"> Done
-
-                                                          <label>Checked By:</label>
-                                                          <input type="text" name="checked_by" required placeholder="Enter name">
-
-                                                          <button type="submit" id="submittdirincominglotdata" class="btn">Save</button>
-                                                      </div> -->
-
-                                                            <input type="hidden" name="lots[<?= $key ?>][incoming_id]" value="<?= $value['incoming_id'] ?>">
-                                                            <input type="hidden" name="lots[<?= $key ?>][incomping_details_item_id]" value="<?= $value['incomping_details_item_id'] ?>">
-                                                            <input type="hidden" name="lots[<?= $key ?>][fin_part_id]" value="<?= $value['fin_id'] ?>">
-                                                            <input type="hidden" name="lots[<?= $key ?>][vendor_po_id]" value="<?= $getTdirdata[0]['vendor_po'] ?>">
-                                                            <input type="hidden" name="lots[<?= $key ?>][tdir_id]" value="<?= $getTdirdata[0]['tdir_id'] ?>">
-
-                                                            <label>Qty:</label>
-                                                            <input type="number" name="lots[<?= $key ?>][qty]" required>
-
-                                                            <label>Checking:</label>
-                                                            <input type="checkbox" name="lots[<?= $key ?>][checking]" value="1">
-
-                                                            <label>Checked By:</label>
-                                                            <input type="text" name="lots[<?= $key ?>][checked_by]" required>
-
-                                                    <!-- </form> -->
-                                              </div>
-                                            <?php } ?>
-                                                <button type="submit" id="submittdirincominglotdata" class="btn">Save</button>
-                                            </form>
                                         </div>
 
                                     </div>
