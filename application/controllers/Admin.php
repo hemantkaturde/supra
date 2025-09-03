@@ -25660,6 +25660,7 @@ public function edit_tdir($tdir_id){
                 $existing = $this->db->get_where('tbl_tdir_incoming_lot_data', ['id' => $lot['lot_id']])->row_array();
 
                 $data = [
+                      'id'  => $lot['lot_id'],
                       'incoming_id'    => $lot['incoming_id'],
                       'incomping_details_item_id'    => $lot['incomping_details_item_id'],
                       'vendor_po_id'    => $lot['vendor_po_id'],
