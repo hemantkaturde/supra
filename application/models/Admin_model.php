@@ -22051,7 +22051,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
                 $data[$counter]['action'] = '';
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."incoming_lots/".$value['tdir_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-square-o' aria-hidden='true'></i></a>    &nbsp";
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."edit_tdir/".$value['tdir_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   ";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."edit_tdir/".$value['tdir_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."tdir_attachment/".$value['tdir_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-paperclip' aria-hidden='true'></i></a>    &nbsp";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['tdir_id']."' class='fa fa-trash-o deletetdirreport' aria-hidden='true'></i>"; 
                 $counter++; 
             }
