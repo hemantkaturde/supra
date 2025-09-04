@@ -14013,7 +14013,7 @@ public function downloadvendorpo($id){
             <table style=" width: 100%;border-collapse: collapse;border: #ccc 1px solid;font-family:cambria;font-size:12px">
                 <tr style="border: 1px solid black;">
                         <td style="border: 1px solid black;padding-left: 10px;">
-                            <p><b>Remark :</b>'.$getvendordeatilsForInvoice['ven_remark'].'</p>    
+                            <p><b>Remark :</b><span style="color:red">'.$getvendordeatilsForInvoice['ven_remark'].'<span></p>    
                     </td>   
                 </tr>
             </table>
