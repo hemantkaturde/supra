@@ -25601,14 +25601,9 @@ public function incoming_lots($tdir_id){
 
     $process = 'Incoming Lots Data';
     $processFunction = 'Admin/tdir';
-
     $data['getTdirdata']= $this->admin_model->getTdirdata($tdir_id);
-
     $data['getincoinglotdetailsfortdir']= $this->admin_model->getincoinglotdetailsfortdir($data['getTdirdata'][0]['vendor_po'],$data['getTdirdata'][0]['fin_id']);
-
     $data['getincomingcheckedbydata']= $this->admin_model->getincomingcheckedbydata($tdir_id);
-
-
     $this->global['pageTitle'] = 'Incoming Lots Data';   
     $this->loadViews("masters/incoming_lots_tdir_report", $this->global, $data, NULL); 
 
@@ -25647,7 +25642,7 @@ public function edit_tdir($tdir_id){
 }
 
 
-    public function savetdirlotdetails() {
+public function savetdirlotdetails() {
 
         $lots = $this->input->post('lots');
 
@@ -25807,8 +25802,15 @@ public function edit_tdir($tdir_id){
 
         //  }
 
-    }
+}
 
+public function tdir_attachment($tdir_id){
+    $process = 'TDIR Attachment';
+    $processFunction = 'Admin/tdir';
+    $data['tdir_id']= $tdir_id;
+    $this->global['pageTitle'] = 'TDIR Attachment';   
+    $this->loadViews("masters/tdir_attachment", $this->global, $data, NULL); 
+}
 
 
 
