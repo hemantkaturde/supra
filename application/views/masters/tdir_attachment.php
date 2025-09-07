@@ -18,7 +18,7 @@
             <div class="col-xs-6 text-left">
                 <ul class="breadcrumb" style="background-color:#ecf0f5 !important">
                     <li class="completed"><a href="javascript:void(0);">Masters</a></li>
-                    <li class="active"><a href="javascript:void(0);">Tracking of Dimenstional Inspection Report</a></li>
+                    <li class="active"><a href="javascript:void(0);">TDIR Attachment</a></li>
                 </ul>
             </div>
             <div class="col-xs-6 text-right">
@@ -40,7 +40,7 @@
                         <div class="box-body">
                             <div class="panel-body">
                                 <table width="100%" class="table table-striped table-bordered table-hover"
-                                    id="view_tdir_report">
+                                    id="view_tdir_attachedment">
                                     <thead>
                                         <tr style="background-color:#3c8dbc !important;color:#fff">
                                             <th>Attachment Name</th>
