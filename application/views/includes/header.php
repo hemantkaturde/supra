@@ -380,7 +380,7 @@
                       </li>
 
 
-                      <li class="treeview <?php if($pageUrl=="tdir"){echo 'active';}?>" >
+                      <li class="treeview <?php if($pageUrl=="tdir" || $pageUrl=="tdir_attachment"){echo 'active';}?>" >
                         <a href="<?php echo base_url(); ?>tdir">
                           <i class="fa fa-file-excel-o"></i> <span class="menu_label">TDIR Report</span>
                         </a>
