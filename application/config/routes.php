@@ -667,6 +667,11 @@ $route['getvendorpartdetialstdir_report'] = "admin/getvendorpartdetialstdir_repo
 $route['getbuyerdetialsbyvendorponumberfortdir'] = "admin/getbuyerdetialsbyvendorponumberfortdir";
 
 
+$route['tdir_attachment/(:any)'] = "admin/tdir_attachment/$1";
+
+
+
+
 
 
 
