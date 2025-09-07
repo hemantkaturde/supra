@@ -25812,6 +25812,13 @@ public function tdir_attachment($tdir_id){
     $this->loadViews("masters/tdir_attachment", $this->global, $data, NULL); 
 }
 
+public function addTDIRattachment(){
+
+
+    
+
+
+}
 
 
 
