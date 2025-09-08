@@ -23,6 +23,9 @@
             </div>
             <div class="col-xs-6 text-right">
                 <div class="form-group">
+                     <a href="<?php echo base_url().'/tdir';?>" class="btn btn-primary">
+                          <i class="fa fa-arrow-left"></i> Back
+                        </a>
                 <?php if($this->session->userdata('roleText')=='Superadmin' || $this->session->userdata('roleText')=='Purchase' || $this->session->userdata('roleText')=='QC'){ ?>
                     <!-- <a class="btn btn-primary" href="<?php echo base_url(); ?>addTDIRattachment">
                         <i class="fa fa-plus"></i> Add TDIR Attachment</a> -->
