@@ -27094,7 +27094,6 @@
 					return false;
 				});
 
-
 				$(document).ready(function() {
 					var tdirid = $('#tdirid').val();
 					var dt = $('#view_tdir_attachedment').DataTable({
@@ -27119,7 +27118,6 @@
 						},
 					});
 				});
-
 
 		     	$(document).on('click','#uploadBtn',function(e){
 				    e.preventDefault();
@@ -27158,6 +27156,55 @@
 					});
 				});
 
+
+				$(document).on('click','.deletetdirattachment',function(e){
+					var elemF = $(this);
+					e.preventDefault();
+	                var tdirid = $('#tdirid').val();
+					swal({
+						title: "Are you sure?",
+						text: "Delete TDIR Attachment",
+						type: "warning",
+						showCancelButton: true,
+						closeOnClickOutside: false,
+						confirmButtonClass: "btn-sm btn-danger",
+						confirmButtonText: "Yes, delete it!",
+						cancelButtonText: "No, cancel plz!",
+						closeOnConfirm: false,
+						closeOnCancel: false
+					}, function(isConfirm) {
+						if (isConfirm) {
+									$.ajax({
+										url : "<?php echo base_url();?>deletetdirattachment",
+										type: "POST",
+										data : 'id='+elemF.attr('data-id'),
+										success: function(data, textStatus, jqXHR)
+										{
+											const obj = JSON.parse(data);
+										
+											if(obj.status=='success'){
+												swal({
+													title: "Deleted!",
+													text: "TDIR Attachment Succesfully Deleted",
+													icon: "success",
+													button: "Ok",
+													},function(){ 
+														window.location.href = "<?php echo base_url()?>tdir_attachment/"+tdirid;
+													});	
+											}
+
+										},
+										error: function (jqXHR, textStatus, errorThrown)
+										{
+											$(".loader_ajax").hide();
+										}
+									})
+								}
+								else {
+						swal("Cancelled", "TDIR Attachment deletion cancelled ", "error");
+						}
+					});
+	            });
 
     </script>
 <?php } ?>

@@ -25878,6 +25878,24 @@ public function fetchtdirattachment($tdir_id){
 
 }
 
+public function deletetdirattachment(){
+
+ $post_submit = $this->input->post();
+    if($post_submit){
+        $result = $this->admin_model->deletetdirattachment(trim($this->input->post('id')));
+        if ($result) {
+                    $process = 'Delete TDIR Attachment';
+                    $processFunction = 'Admin/deletetdirattachment';
+                    $this->logrecord($process,$processFunction);
+                echo(json_encode(array('status'=>'success')));
+            }
+        else { echo(json_encode(array('status'=>'failed'))); }
+    }else{
+        echo(json_encode(array('status'=>'failed'))); 
+    }
+
+}
+
 
 
 }

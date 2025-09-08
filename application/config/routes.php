@@ -648,6 +648,8 @@ $route['edit_tdir/(:any)'] = "admin/edit_tdir/$1";
 $route['getvendorpartdetialstdir_report'] = "admin/getvendorpartdetialstdir_report";
 $route['getbuyerdetialsbyvendorponumberfortdir'] = "admin/getbuyerdetialsbyvendorponumberfortdir";
 $route['tdir_attachment/(:any)'] = "admin/tdir_attachment/$1";
+$route['deletetdirattachment'] = "admin/deletetdirattachment";
+
 
 // $route['fetchtdirattachment/(:tdirid)'] = "admin/fetchtdirattachment/$1";
 

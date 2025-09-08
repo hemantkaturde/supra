@@ -22152,8 +22152,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->select('*');
         if($params['search']['value'] != "") 
         {
-            $this->db->where("(".TBL_TDIR_ATTACHMENT.".report_number LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_TDIR_ATTACHMENT.".remarks LIKE '%".$params['search']['value']."%')");
+            $this->db->where("(".TBL_TDIR_ATTACHMENT.".attachment LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_TDIR_ATTACHMENT.".attachment LIKE '%".$params['search']['value']."%')");
         }
 
         $this->db->where(TBL_TDIR_ATTACHMENT.'.tdir_id', $tdir_id);
@@ -22169,8 +22169,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->select('*');
         if($params['search']['value'] != "") 
         {
-            $this->db->where("(".TBL_TDIR_ATTACHMENT.".report_number LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_TDIR_ATTACHMENT.".remarks LIKE '%".$params['search']['value']."%')");
+            $this->db->where("(".TBL_TDIR_ATTACHMENT.".attachment LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_TDIR_ATTACHMENT.".attachment LIKE '%".$params['search']['value']."%')");
         }
 
         $this->db->where(TBL_TDIR_ATTACHMENT.'.tdir_id', $tdir_id);
@@ -22186,16 +22186,32 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             foreach ($fetch_result as $key => $value)
             {
                 $data[$counter]['attachment'] =  $value['attachment'];
-
                 $data[$counter]['action'] = '';
                 $data[$counter]['action'] .= "<a href='".FILEPATH."/".$value['attachment']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-download' aria-hidden='true'></i></a>    &nbsp";
-                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['id']."' class='fa fa-trash-o deletetdirreport' aria-hidden='true'></i>"; 
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['id']."' class='fa fa-trash-o deletetdirattachment' aria-hidden='true'></i>"; 
                 $counter++; 
             }
         }
 
         return $data;
 
+    }
+
+
+     public function deletetdirattachment($id){
+
+        $this->db->where('id', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_TDIR_ATTACHMENT)){
+               return TRUE;
+            //   $this->db->where('packing_challan_id', $id);
+            //   //$this->db->delete(TBL_SUPPLIER);
+            //   if($this->db->delete(TBL_PACKING_CHALLAN_ITEM)){
+            //         return TRUE;
+            //   }
+        }else{
+           return FALSE;
+        }
     }
 
 
