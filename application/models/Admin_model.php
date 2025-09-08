@@ -21984,7 +21984,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
-      public function gettdirreportcount($params){
+    public function gettdirreportcount($params){
 
          $this->db->select('*'); 
            if($params['search']['value'] != "") 
@@ -22144,6 +22144,60 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             }
         }
     }
+
+
+    
+    public function gettdirtattachmentcount($params){
+
+        $this->db->select('*');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_TDIR_ATTACHMENT.".report_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_TDIR_ATTACHMENT.".remarks LIKE '%".$params['search']['value']."%')");
+        }
+
+        $this->db->where(TBL_TDIR_ATTACHMENT.'.tdir_id', $tdir_id);
+        $this->db->where(TBL_TDIR_ATTACHMENT.'.status', 1);
+        $query = $this->db->get(TBL_TDIR_ATTACHMENT);
+        $rowcount = $query->num_rows();
+        return $rowcount;
+    }
+
+
+    public function gettdirtattachmentdata($params,$tdir_id){
+
+        $this->db->select('*');
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_TDIR_ATTACHMENT.".report_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_TDIR_ATTACHMENT.".remarks LIKE '%".$params['search']['value']."%')");
+        }
+
+        $this->db->where(TBL_TDIR_ATTACHMENT.'.tdir_id', $tdir_id);
+        $this->db->where(TBL_TDIR_ATTACHMENT.'.status', 1);
+        $this->db->limit($params['length'],$params['start']);
+        $this->db->order_by(TBL_TDIR_ATTACHMENT.'.id','DESC');
+        $query = $this->db->get(TBL_TDIR_ATTACHMENT);
+        $fetch_result = $query->result_array();
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['attachment'] =  $value['attachment'];
+
+                $data[$counter]['action'] = '';
+                $data[$counter]['action'] .= "<a href='".FILEPATH."/".$value['attachment']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-download' aria-hidden='true'></i></a>    &nbsp";
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['id']."' class='fa fa-trash-o deletetdirreport' aria-hidden='true'></i>"; 
+                $counter++; 
+            }
+        }
+
+        return $data;
+
+    }
+
 
 
 }

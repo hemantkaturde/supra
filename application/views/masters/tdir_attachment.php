@@ -24,8 +24,11 @@
             <div class="col-xs-6 text-right">
                 <div class="form-group">
                 <?php if($this->session->userdata('roleText')=='Superadmin' || $this->session->userdata('roleText')=='Purchase' || $this->session->userdata('roleText')=='QC'){ ?>
-                    <a class="btn btn-primary" href="<?php echo base_url(); ?>addTDIRattachment">
-                        <i class="fa fa-plus"></i> Add TDIR Attachment</a>
+                    <!-- <a class="btn btn-primary" href="<?php echo base_url(); ?>addTDIRattachment">
+                        <i class="fa fa-plus"></i> Add TDIR Attachment</a> -->
+                        <a href="#fileModal" class="btn btn-primary" data-toggle="modal">
+                          <i class="fa fa-plus"></i> Add TDIR Attachment
+                        </a>
                 <?php } ?>
                 </div>
             </div>
@@ -63,6 +66,39 @@
                 </div>
             </div>
     </section>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="fileModal" tabindex="-1" role="dialog"  data-backdrop="static" aria-labelledby="fileModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="fileModalLabel">Upload TDIR Attachment</h4>
+      </div>
+
+      <div class="modal-body">
+        <form id="fileUploadForm" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="fileInput">Choose File <span class="required">*</span></label>
+            <input type="file" class="form-control" id="fileInput" name="file" required>
+          </div>
+          <input type="hidden" class="form-control" id="tdirid" name="tdirid" value="<?=$tdir_id;?>">
+        </form>
+        <div id="uploadResponse" class="alert" style="display:none;"></div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button type="submit" id="uploadBtn" class="btn btn-primary">Upload</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 

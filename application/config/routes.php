@@ -616,17 +616,11 @@ $route['checkifbuyerpoisexitsinvendorpo'] = "admin/checkifbuyerpoisexitsinvendor
 $route['checkifsupplierisexitsinvendorpo'] = "admin/checkifsupplierisexitsinvendorpo";
 $route['checkifsupplieridisinsupplierpoconfirm'] = "admin/checkifsupplieridisinsupplierpoconfirm";
 $route['fetchUser'] = "admin/fetchUser";
-
-
-
-
 $route['packingmaster'] = "admin/packingmaster";
 $route['addnewpackingmaster'] = "admin/addnewpackingmaster";
 $route['fetchpackingmaster'] = "admin/fetchpackingmaster";
 $route['deletepackingmasterdata'] = "admin/deletepackingmasterdata";
 $route['editpackingmaster/(:any)'] = "admin/editpackingmaster/$1";
-
-
 $route['packing_challan'] = "admin/packing_challan";
 $route['addnewpackingchallan'] = "admin/addnewpackingchallan";
 $route['fetchpackingchallan'] = "admin/fetchpackingchallan";
@@ -635,39 +629,27 @@ $route['deletepackinchallandata'] = "admin/deletepackinchallandata";
 $route['deletepackingchallanitem'] = "admin/deletepackingchallanitem";
 $route['editpackingchallan/(:any)'] = "admin/editpackingchallan/$1";
 $route['getpackingchallanitamdata'] = "admin/getpackingchallanitamdata";
-
-
 $route['export_history_report'] = "admin/export_history_report";
 $route['fetchexporthistoryreport'] = "admin/fetchexporthistoryreport";
 $route['downlaodpackingchallandata/(:any)'] = "admin/downlaodpackingchallandata/$1";
 $route['checkvendorpoisenggwithvendorpoconfirmation'] = "admin/checkvendorpoisenggwithvendorpoconfirmation";
-
-
 $route['export_inspection_report'] = "admin/export_inspection_report_dwnload";
-
 $route['getcurrentlivestock'] = "admin/getcurrentlivestock";
-
-
 $route['checkvendorpoisassigninVBM'] = "admin/checkvendorpoisassigninVBM";
 $route['checkvendorpoisassigninBM'] = "admin/checkvendorpoisassigninBM";
-
 $route['downlaodcreditnote/(:any)'] = "admin/downlaodcreditnote/$1";
-
 $route['vendor_rejection_form'] = "admin/vendor_rejection_form";
-
 $route['tdir'] = "admin/tdir";
 $route['addTDIR'] = "admin/addTDIR";
 $route['fetchtdirreport'] = "admin/fetchtdirreport";
 $route['incoming_lots/(:any)'] = "admin/incoming_lots/$1";
 $route['deletetdirreport'] = "admin/deletetdirreport";
 $route['edit_tdir/(:any)'] = "admin/edit_tdir/$1";
-
-
 $route['getvendorpartdetialstdir_report'] = "admin/getvendorpartdetialstdir_report";
 $route['getbuyerdetialsbyvendorponumberfortdir'] = "admin/getbuyerdetialsbyvendorponumberfortdir";
-
-
 $route['tdir_attachment/(:any)'] = "admin/tdir_attachment/$1";
+
+// $route['fetchtdirattachment/(:tdirid)'] = "admin/fetchtdirattachment/$1";
 
 
 

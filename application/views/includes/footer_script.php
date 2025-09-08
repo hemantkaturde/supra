@@ -26573,7 +26573,7 @@
 <?php } ?>
 
 
-<?php if($pageTitle=='Add New TDIR' || $pageTitle=='TDIR Report' ||  $pageTitle=='Edit TDIR' ||  $pageTitle=='Incoming Lots Data'){ ?>
+<?php if($pageTitle=='Add New TDIR' || $pageTitle=='TDIR Report' ||  $pageTitle=='Edit TDIR' ||  $pageTitle=='Incoming Lots Data' || $pageTitle=='TDIR Attachment'){ ?>
  <script type="text/javascript">
 
 
@@ -26686,8 +26686,6 @@
 
 				$(document).ready(function() { 
 
-
-					
 					   var vendor_po_number = $('#vendor_po_id').val();
                        var part_number_id = $('#part_number_id').val();
 					   
@@ -26850,7 +26848,6 @@
 						return false;
 
 				});
-				
 
 				$(document).on('change','.vendor_part_number_get_data',function(e){  
 			
@@ -26888,7 +26885,6 @@
 						});
 					return false;
 				});
-
 
 				$(document).on('change','.vendor_po_number_for_buyer_details',function(e){  
 		            	e.preventDefault();
@@ -26971,79 +26967,6 @@
 					return false;
 				});
 
-
-				// $(document).on('change','.vendor_po_number_for_buyer_details',function(e){  
-		        //     	e.preventDefault();
-			
-		        //  	//$(".loader_ajax").show();
-			    //         var vendor_po_number = $('#vendor_po_number').val();
-		
-		
-				// 		$.ajax({
-				// 			url : "<?php echo ADMIN_PATH;?>getbuyerdetialsbyvendorponumberfortdir",
-				// 			type: "POST",
-				// 			data : {'vendor_po_number' : vendor_po_number},
-				// 			success: function(data, textStatus, jqXHR)
-				// 			{
-				// 				$(".loader_ajax").hide();
-				// 				if(data == "failure")
-				// 				{
-				// 					$('#buyer_name').val('');
-				// 					$('#buyer_po_date').val('');
-				// 				}
-				// 				else
-				// 				{
-				// 					var data_row_material = jQuery.parseJSON( data );
-				// 					$('#buyer_name').val(data_row_material.buyer_name);
-				// 					$('#buyer_po_date').val(data_row_material.buyer_po_date);
-				// 			}
-				// 			},
-				// 			error: function (jqXHR, textStatus, errorThrown)
-				// 			{
-				// 				    $('#buyer_name').val('');
-				// 					$('#buyer_po_date').val('');
-				// 				    //$(".loader_ajax").hide();
-				// 			}
-				// 		});
-				// 		return false;
-	        	// });
-
-
-
-				// $(document).on('change','.vendor_po_number_for_vendor_po_date',function(e){  
-		        //     	e.preventDefault();
-			
-		        //  	//$(".loader_ajax").show();
-			    //         var vendor_po_number = $('#vendor_po_number').val();
-		
-				// 		$.ajax({
-				// 			url : "<?php echo ADMIN_PATH;?>getbuyerdetialsbyvendorponumberfortdir",
-				// 			type: "POST",
-				// 			data : {'vendor_po_number' : vendor_po_number},
-				// 			success: function(data, textStatus, jqXHR)
-				// 			{
-				// 				$(".loader_ajax").hide();
-				// 				if(data == "failure")
-				// 				{
-				// 					$('#vendor_po_date').val('');
-				// 				}
-				// 				else
-				// 				{
-				// 					var data_row_material = jQuery.parseJSON( data );
-				// 					$('#vendor_po_date').val(data_row_material.buyer_name);
-				// 			}
-				// 			},
-				// 			error: function (jqXHR, textStatus, errorThrown)
-				// 			{
-				// 				    $('#buyer_name').val('');
-				// 				    //$(".loader_ajax").hide();
-				// 			}
-				// 		});
-				// 		return false;
-	        	// });
-
-
-
 				$(document).on('change','.vendor_po_number_for_vendor_po_date',function(e){  
 					e.preventDefault();
 					//$(".loader_ajax").show();
@@ -27074,7 +26997,6 @@
 					});
 					return false;
 				});
-
 
 				$(document).on('click','.deletetdirreport',function(e){
 					var elemF = $(this);
@@ -27125,8 +27047,6 @@
 					});
 	            });
 
-
-
 				$(document).on('click','#submittdirincominglotdata',function(e){
 					e.preventDefault();
 					$(".loader_ajax").show();
@@ -27173,6 +27093,71 @@
 					});
 					return false;
 				});
+
+
+				$(document).ready(function() {
+					var tdirid = $('#tdirid').val();
+					var dt = $('#view_tdir_attachedment').DataTable({
+						"columnDefs": [ 
+							{ className: "details-control", "targets": [ 0 ] },
+							{ "width": "35%", "targets": 0 },
+							{ "width": "5%", "targets": 1 },		
+						],
+						responsive: true,
+						"oLanguage": {
+							"sEmptyTable": "<i>No TDIR Attachment Found.</i>",
+						}, 
+						"bSort" : false,
+						"bFilter":true,
+						"bLengthChange": true,
+						"iDisplayLength": 10,   
+						"bProcessing": true,
+						"serverSide": true,
+						"ajax":{
+							url :"<?php echo base_url();?>admin/fetchtdirattachment/"+tdirid,
+							type: "post",
+						},
+					});
+				});
+
+
+		     	$(document).on('click','#uploadBtn',function(e){
+				    e.preventDefault();
+					$(".loader_ajax").show();
+					var formData = new FormData($('#fileUploadForm')[0]);
+					var tdirid = $('#tdirid').val();
+					$.ajax({
+						url : "<?php echo base_url();?>admin/addTDIRattachment",
+						type: 'POST',
+						data: formData,
+						contentType: false,
+						processData: false,
+						dataType: 'json',
+						success: function (response) {
+							$('#uploadResponse').removeClass('alert-success alert-danger').show();
+							if (response.status === 'success') {
+								// $('#uploadResponse').addClass('alert-success').html('File uploaded successfully: ' + response.file_name);
+								// $('#fileUploadForm')[0].reset();
+
+								swal({
+									title: "Success",
+									text: "TDIR Successfully Added!",
+									icon: "success",
+									button: "Ok",
+									},function(){ 
+										$("#modal-md").hide();
+										window.location.href = "<?php echo base_url().'tdir_attachment/'?>"+tdirid;
+								});		
+
+								$(".loader_ajax").hide();
+
+							} else {
+								$('#uploadResponse').addClass('alert-danger').html(response.message);
+							}
+						}
+					});
+				});
+
 
     </script>
 <?php } ?>
