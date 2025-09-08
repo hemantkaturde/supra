@@ -20,6 +20,13 @@
                     <li class="completed"><a href="javascript:void(0);">Masters</a></li>
                     <li class="active"><a href="javascript:void(0);">TDIR Attachment</a></li>
                 </ul>
+                   <h4>
+                                <p><b>Report Number :</b> <?=$getTdirdata[0]['report_number'] ?></p>
+                                <p><b>Vendor Name :</b> <?=$getTdirdata[0]['vendor_name_label'] ?></p>
+                                <p><b>Vendor PO Number :</b> <?=$getTdirdata[0]['po_number'] ?></p>
+                                <p><b>Part Number :</b> <?=$getTdirdata[0]['part_number_label'] ?></p>
+                                <p><b>Vendor Order Qty :</b> <?=$getTdirdata[0]['vendor_order_qty'] ?></p>
+                            </h4>
             </div>
             <div class="col-xs-6 text-right">
                 <div class="form-group">

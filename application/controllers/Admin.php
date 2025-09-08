@@ -25808,7 +25808,8 @@ public function tdir_attachment($tdir_id){
     $process = 'TDIR Attachment';
     $processFunction = 'Admin/tdir';
     $data['tdir_id']= $tdir_id;
-    $this->global['pageTitle'] = 'TDIR Attachment';   
+    $this->global['pageTitle'] = 'TDIR Attachment';  
+    $data['getTdirdata']= $this->admin_model->getTdirdata($tdir_id);
     $this->loadViews("masters/tdir_attachment", $this->global, $data, NULL); 
 }
 
