@@ -25821,7 +25821,7 @@ public function addTDIRattachment(){
                 if (!empty($_FILES['file']['name'])) {
                     $config['upload_path']   = './uploads/';
                     $config['allowed_types'] = 'jpg|jpeg|png|pdf|doc|docx';
-                    $config['max_size']      = 2048;
+                    $config['max_size']      = 5000;
 
                     $this->load->library('upload', $config);
 
