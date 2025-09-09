@@ -142,7 +142,7 @@
                                         <div class="form-group">
                                             <label for="vendor_po_number">Select Vendor PO Number <span
                                                     class="required">*</span></label>
-                                            <select class="form-control vendor_po_number_itam_mapping"
+                                            <select class="form-control vendor_po_number_itam_mapping vendor_po_for_rejection_data"
                                                 name="vendor_po_number" id="vendor_po_number">
                                                 <option st-id="" value="">Select Vendor Name</option>
                                                 <option st-id=""
@@ -357,6 +357,13 @@
                                                 </tr>
                                             </tfoot>
                                         </table>
+                                    </div>
+
+                                    <div class="container">
+                                         
+                                         <div id="rejection-list">
+                                         </div>
+
                                     </div>
 
 
