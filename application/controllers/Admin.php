@@ -25897,8 +25897,7 @@ public function deletetdirattachment(){
 
 }
 
-
-  public function getRejectionitemdetailsforDisplay(){
+public function getRejectionitemdetailsforDisplay(){
 
         $post_submit = $this->input->post();
 
@@ -25988,8 +25987,7 @@ public function deletetdirattachment(){
             }
     
        }
-    }
-
+}
 
 
 }
