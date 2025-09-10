@@ -25933,7 +25933,7 @@ public function getRejectionitemdetailsforDisplay(){
             $this->db->select(
                 TBL_REJECTION_FORM.'.rejection_number,'.
                 TBL_FINISHED_GOODS.'.part_number,'.
-                'SUM('.TBL_REJECTION_FORM_REJECTED_ITEM.'.qty_in_kgs) as total_order_qty'
+                'SUM('.TBL_REJECTION_FORM_REJECTED_ITEM.'.qty_In_pcs) as total_order_qty'
             );
 
             $this->db->from(TBL_REJECTION_FORM);
