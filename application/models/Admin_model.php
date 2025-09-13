@@ -16910,7 +16910,7 @@ public function update_current_stock($actual_received_qty_in_pcs,$fin_id){
 
 public function getsuppliervendorrportcount($params){
 
-    $this->db->select('*,'.TBL_CUSTMOR_COMPALINT.'.id as coustmor_compalint_id');
+     $this->db->select('*,'.TBL_SUPPLIER_VENDOR_COMPALINT.'.id as suppliervendor_compalint_id');
     // $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_CUSTMOR_COMPALINT.'.customer_name');
     // $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_CUSTMOR_COMPALINT.'.customer_po');
     // $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.part_number_id = '.TBL_CUSTMOR_COMPALINT.'.part_no');
@@ -16929,7 +16929,6 @@ public function getsuppliervendorrportcount($params){
     //     $this->db->or_where(TBL_CUSTMOR_COMPALINT.".invoice_date LIKE '%".$params['search']['value']."%')");
     // }
 
-    $this->db->order_by(TBL_SUPPLIER_VENDOR_COMPALINT.'.id','DESC');
     $query = $this->db->get(TBL_SUPPLIER_VENDOR_COMPALINT);
     $rowcount = $query->num_rows();
     return $rowcount;
