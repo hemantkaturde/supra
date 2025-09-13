@@ -1486,7 +1486,7 @@ class Admin_model extends CI_Model
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
         // $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_BUYER_PO_MASTER_ITEM.'.pre_buyer_name','left');
         $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id IS NULL');
-        $this->db->order_by(TBL_BUYER_PO_MASTER_ITEM.'.id','desc');
+        $this->db->order_by(TBL_BUYER_PO_MASTER_ITEM.'.id','ASC');
         $query = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
         $data = $query->result_array();
         return $data;
@@ -1541,6 +1541,7 @@ class Admin_model extends CI_Model
         $this->db->select('*');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
         $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id',$buyerpoid);
+        $this->db->order_by(TBL_BUYER_PO_MASTER_ITEM.'.id','ASC');
         $query = $this->db->get(TBL_BUYER_PO_MASTER_ITEM);
         $data = $query->result_array();
         return $data;
