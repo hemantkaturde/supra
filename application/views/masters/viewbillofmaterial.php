@@ -242,6 +242,9 @@
                                          <div id="incoming_details_item_list">
                                          </div>
 
+                                         <div id="rejection-list">
+                                         </div>
+
                                     </div>
 
                                       <!-- Add New Package Modal -->
