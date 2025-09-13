@@ -62,7 +62,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                                 <label for="vendor_po_number">Select Vendor PO Number <span class="required">*</span></label>
-                                                     <select readonly  class="form-control vendor_po_for_item vendor_name_for_buyer_name vendor_po_number_for_view_item vendor_po_for_buyer_details_ vendor_po_for_incoming_details vendor_po_for_buyer_details_date_and_podetails" name="vendor_po_number" id="vendor_po_number">
+                                                     <select readonly  class="form-control vendor_po_for_item vendor_name_for_buyer_name vendor_po_number_for_view_item vendor_po_for_buyer_details_ vendor_po_for_incoming_details vendor_po_for_buyer_details_date_and_podetails vendor_po_for_rejection_data" name="vendor_po_number" id="vendor_po_number">
                                                         <option st-id="" value="<?=$fetchALLVendorbillofmaterialdetails['vendor_po_number']?>" selected><?=$fetchALLVendorbillofmaterialdetails['vendor_po_number_po'];?></option>
                                                     </select>
                                             <p class="error vendor_po_number_error"></p>
@@ -200,6 +200,9 @@
 
                                          <div id="incoming_details_item_list">
                                          </div>
+
+                                          <div id="rejection-list">
+                                          </div>
                                     </div>
 
                                       <!-- Add New Package Modal -->
