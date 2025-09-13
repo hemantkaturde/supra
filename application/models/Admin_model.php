@@ -16382,11 +16382,6 @@ public function fetchsupplierporeportcount($params,$supplier_name,$supplier_po,$
 
     public function downlaodsalestrackingportdata($sales_tracking_report_name,$buyer_name,$from_date,$to_date){
 
-        
-            print_r($from_date);
-            print_r($to_date);
-            exit;
-
         $this->db->select('*,'.TBL_CREDIT_NOTE.'.credit_note_number as credit_note_number_name,'.TBL_BUYER_MASTER.'.buyer_name as buyer_name,'.TBL_BUYER_MASTER.'.currency as buyer_currency');
         $this->db->join(TBL_PACKING_INSTRACTION_DETAILS, TBL_PACKING_INSTRACTION_DETAILS.'.id = '.TBL_SALES_TRACKING_REPORT.'.invoice_number');
         $this->db->join(TBL_PACKING_INSTRACTION, TBL_PACKING_INSTRACTION.'.id = '.TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id');
@@ -16405,19 +16400,22 @@ public function fetchsupplierporeportcount($params,$supplier_name,$supplier_po,$
             $this->db->where(TBL_BUYER_MASTER.'.buyer_id', $buyer_name);
         }
 
-        if($from_date!='NA'){
+        // if($from_date!='NA'){
+        //     $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_date >=", $from_date);
+        // }
 
-            print_r($from_date);
-            print_r($to_date);
-            exit;
-
-            $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_date >=", $from_date);
-        }
-
-        if($to_date!='NA'){
-            $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_date <=", $to_date);
-        }
+        // if($to_date!='NA'){
+        //     $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_date <=", $to_date);
+        // }
         
+        if ($from_date != 'NA' && $to_date != 'NA') {
+            $this->db->where("DATE(".TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_date) >=", $from_date);
+            $this->db->where("DATE(".TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_date) <=", $to_date);
+        } elseif ($from_date != 'NA') {
+            $this->db->where("DATE(".TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_date) >=", $from_date);
+        } elseif ($to_date != 'NA') {
+            $this->db->where("DATE(".TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_date) <=", $to_date);
+        }
 
 
         $data = array();
