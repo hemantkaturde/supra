@@ -6178,7 +6178,7 @@
 <?php } ?>
 
 
-<?php if($pageTitle=='Bill of Material' || $pageTitle=="Add New Bill Of Material" || $pageTitle=="Edit Bill Of Material"){ ?>
+<?php if($pageTitle=='Bill of Material' || $pageTitle=="Add New Bill Of Material" || $pageTitle=="Edit Bill Of Material" || $pageTitle=="View Bill Of Material"){ ?>
 
 	<script type="text/javascript">
         $(document).ready(function() {
