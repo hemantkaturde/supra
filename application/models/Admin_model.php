@@ -16929,9 +16929,8 @@ public function getsuppliervendorrportcount($params){
     //     $this->db->or_where(TBL_CUSTMOR_COMPALINT.".invoice_date LIKE '%".$params['search']['value']."%')");
     // }
 
-    $this->db->where(TBL_CUSTMOR_COMPALINT.'.status', 1);
-    $this->db->order_by(TBL_CUSTMOR_COMPALINT.'.id','DESC');
-    $query = $this->db->get(TBL_CUSTMOR_COMPALINT);
+    $this->db->order_by(TBL_SUPPLIER_VENDOR_COMPALINT.'.id','DESC');
+    $query = $this->db->get(TBL_SUPPLIER_VENDOR_COMPALINT);
     $rowcount = $query->num_rows();
     return $rowcount;
 
