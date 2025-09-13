@@ -277,6 +277,13 @@
                                             </table>
                                     </div>
 
+                                    <div class="container">
+                                         
+                                         <div id="rejection-list">
+                                         </div>
+
+                                    </div>
+
                                       <!-- Add New Package Modal -->
                                       <?php $this->load->helper("form"); ?>
 

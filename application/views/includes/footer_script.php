@@ -9255,6 +9255,35 @@
           return false;
         });
 
+
+		 $(document).ready(function() {
+
+			var vendor_po_number = $("#vendor_po_number").val();
+			$("#rejection-list").html('');
+
+			$.ajax({
+				url: "<?php echo ADMIN_PATH; ?>admin/getRejectionitemdetailsforDisplay",
+				type: "POST",
+				data: { vendor_po_number: vendor_po_number },
+				success: function (data) {
+					$(".loader_ajax").hide();
+
+					if (data !== "failure") {
+						$("#rejection-list").html(data);
+					} 
+					// else you can show an alert or empty message if needed
+				},
+				error: function (jqXHR, textStatus, errorThrown) {
+					$(".loader_ajax").hide();
+					console.error("Error fetching buyer details:", textStatus, errorThrown);
+					// Optionally show error message to user
+				}
+			});
+
+          return false;
+
+		 });
+
 	
    </script>
 <?php } ?>
