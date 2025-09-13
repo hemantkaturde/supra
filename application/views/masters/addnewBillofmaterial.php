@@ -258,7 +258,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                                 <label for="vendor_po_number">Select Vendor PO Number <span class="required">*</span></label>
-                                                    <select class="form-control vendor_po_number_itam_mapping vendor_po_number_for_view_item vendor_po_for_buyer_details_ vendor_po_for_incoming_details vendor_po_for_buyer_details_date_and_podetails" name="vendor_po_number" id="vendor_po_number">
+                                                    <select class="form-control vendor_po_number_itam_mapping vendor_po_number_for_view_item vendor_po_for_buyer_details_ vendor_po_for_incoming_details vendor_po_for_buyer_details_date_and_podetails vendor_po_for_rejection_data" name="vendor_po_number" id="vendor_po_number">
                                                         <option st-id="" value="">Select Vendor Name</option>
                                                         <option st-id="" value="<?=$fetchALLpreBillofmaterailist[0]['pre_vendor_po_number']?>" Selected><?=$selected_value;?></option>
                                                     </select>
@@ -475,6 +475,9 @@
                                          </div>
 
                                          <div id="incoming_details_item_list">
+                                         </div>
+
+                                         <div id="rejection-list">
                                          </div>
 
                                     </div>
