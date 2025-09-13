@@ -316,7 +316,7 @@
 
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="root_case">Root Case</label>
+                                            <label for="root_case">Root Cause</label>
                                             <input type="text" class="form-control" id="root_case" name="root_case">
                                             <p class="error root_case_error"></p>
                                         </div>
