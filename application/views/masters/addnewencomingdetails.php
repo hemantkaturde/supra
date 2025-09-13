@@ -360,10 +360,8 @@
                                     </div>
 
                                     <div class="container">
-                                         
                                          <div id="rejection-list">
                                          </div>
-
                                     </div>
 
 
