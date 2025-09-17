@@ -16392,8 +16392,7 @@ public function fetchsupplierporeportcount($params,$supplier_name,$supplier_po,$
 
         $this->db->where(TBL_SALES_TRACKING_REPORT.'.status', 1);
         $this->db->order_by(TBL_SALES_TRACKING_REPORT.'.id','ASC');
-        $query = $this->db->get(TBL_SALES_TRACKING_REPORT);
-        $fetch_result = $query->result_array();
+       
 
         
 
@@ -16401,23 +16400,33 @@ public function fetchsupplierporeportcount($params,$supplier_name,$supplier_po,$
             $this->db->where(TBL_BUYER_MASTER.'.buyer_id', $buyer_name);
         }
 
-        // if($from_date!='NA'){
-        //     $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_date >=", $from_date);
-        // }
-
-        // if($to_date!='NA'){
-        //     $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_date <=", $to_date);
-        // }
-        
-        if ($from_date != 'NA' && $to_date != 'NA') {
-            $this->db->where("DATE(".TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_date) >=", $from_date);
-            $this->db->where("DATE(".TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_date) <=", $to_date);
-        } elseif ($from_date != 'NA') {
-            $this->db->where("DATE(".TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_date) >=", $from_date);
-        } elseif ($to_date != 'NA') {
-            $this->db->where("DATE(".TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_date) <=", $to_date);
+        if($from_date!='NA'){
+            $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_date >=", $from_date);
         }
 
+        if($to_date!='NA'){
+            $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_date <=", $to_date);
+        }
+
+
+        //  print_r($from_date);
+
+        //  print_r('<br>');
+        //   print_r($to_date);
+        //  exit;
+        
+        
+        // if ($from_date != 'NA' && $to_date != 'NA') {
+        //     $this->db->where("DATE(".TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_date) >=", $from_date);
+        //     $this->db->where("DATE(".TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_date) <=", $to_date);
+        // } elseif ($from_date != 'NA') {
+        //     $this->db->where("DATE(".TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_date) >=", $from_date);
+        // } elseif ($to_date != 'NA') {
+        //     $this->db->where("DATE(".TBL_PACKING_INSTRACTION_DETAILS.".buyer_invoice_date) <=", $to_date);
+        // }
+
+        $query = $this->db->get(TBL_SALES_TRACKING_REPORT);
+        $fetch_result = $query->result_array();
 
         $data = array();
         $counter = 0;
