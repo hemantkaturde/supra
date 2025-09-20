@@ -4291,8 +4291,10 @@ class Admin_model extends CI_Model
 
                 if($checkitemisfromstockorfrompo[0]['item_po_status']=='from_stock'){
                     $data[$counter]['stock_status'] ='From Stock';
-                }else{
+                }else if($checkitemisfromstockorfrompo[0]['item_po_status']=='from_po'){
                     $data[$counter]['stock_status'] ='From PO';
+                }else{
+                    $data[$counter]['stock_status'] ='';
                 }
              
 
