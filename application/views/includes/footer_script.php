@@ -27027,10 +27027,11 @@
 			
 					e.preventDefault();
 					var part_number = $('#vendor_part_number').val();
+					var vendor_po_number = $('#vendor_po_number').val();
 					$.ajax({
 						url : "<?php echo ADMIN_PATH;?>getvendorpartdetialstdir_report",
 						type: "POST",
-						data : {'part_number' : part_number},
+						data : {'part_number' : part_number,'vendor_po_number' : vendor_po_number},
 							success: function(data, textStatus, jqXHR)
 							{
 								var get_vendoritem_data = jQuery.parseJSON( data );

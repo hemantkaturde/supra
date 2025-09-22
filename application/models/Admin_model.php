@@ -21966,6 +21966,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
         $this->db->select('*');
         $this->db->where(TBL_FINISHED_GOODS.'.fin_id', $part_no);
+         $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id', $vendor_po_number);
         $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
         $query_result = $this->db->get(TBL_FINISHED_GOODS)->result_array();
         return $query_result;
