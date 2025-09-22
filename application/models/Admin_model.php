@@ -21962,7 +21962,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
-    public function getvendorpartdetialstdir_report($part_no){
+    public function getvendorpartdetialstdir_report($part_no,$vendor_po_number){
 
         $this->db->select('*');
         $this->db->where(TBL_FINISHED_GOODS.'.fin_id', $part_no);
