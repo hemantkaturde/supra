@@ -4291,8 +4291,10 @@ class Admin_model extends CI_Model
 
                 if($checkitemisfromstockorfrompo[0]['item_po_status']=='from_stock'){
                     $data[$counter]['stock_status'] ='From Stock';
-                }else{
+                }else if($checkitemisfromstockorfrompo[0]['item_po_status']=='from_po'){
                     $data[$counter]['stock_status'] ='From PO';
+                }else{
+                    $data[$counter]['stock_status'] ='';
                 }
              
 
@@ -21960,10 +21962,11 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
-    public function getvendorpartdetialstdir_report($part_no){
+    public function getvendorpartdetialstdir_report($part_no,$vendor_po_number){
 
         $this->db->select('*');
         $this->db->where(TBL_FINISHED_GOODS.'.fin_id', $part_no);
+         $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id', $vendor_po_number);
         $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
         $query_result = $this->db->get(TBL_FINISHED_GOODS)->result_array();
         return $query_result;
