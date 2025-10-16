@@ -1059,11 +1059,13 @@ class Admin extends BaseController
             $this->form_validation->set_rules('mobile_2','Mobile 2','trim|numeric|max_length[50]');
             $this->form_validation->set_rules('fax','Fax','trim|max_length[50]');
             $this->form_validation->set_rules('GSTIN','GSTIN','trim|max_length[50]');
+            $this->form_validation->set_rules('city','City','trim|max_length[50]');
+            $this->form_validation->set_rules('rate','Rate','trim|max_length[50]');
 
             if($this->form_validation->run() == FALSE)
             {
                 $save_vendor_response['status'] = 'failure';
-                $save_vendor_response['error'] = array('vendor_name'=>strip_tags(form_error('vendor_name')), 'landline'=>strip_tags(form_error('landline')), 'address'=>strip_tags(form_error('address')), 'phone_1'=>strip_tags(form_error('phone_1')),'contact_person'=>strip_tags(form_error('contact_person')),'mobile'=>strip_tags(form_error('mobile')),'email'=>strip_tags(form_error('email')),'mobile_2'=>strip_tags(form_error('mobile_2')),'fax'=>strip_tags(form_error('fax')),'GSTIN'=>strip_tags(form_error('GSTIN')));
+                $save_vendor_response['error'] = array('vendor_name'=>strip_tags(form_error('vendor_name')), 'landline'=>strip_tags(form_error('landline')), 'address'=>strip_tags(form_error('address')), 'phone_1'=>strip_tags(form_error('phone_1')),'contact_person'=>strip_tags(form_error('contact_person')),'mobile'=>strip_tags(form_error('mobile')),'email'=>strip_tags(form_error('email')),'mobile_2'=>strip_tags(form_error('mobile_2')),'fax'=>strip_tags(form_error('fax')),'GSTIN'=>strip_tags(form_error('GSTIN')),'city'=>strip_tags(form_error('city')),'rate'=>strip_tags(form_error('rate')));
             }else{
 
                 $data = array(
@@ -1076,7 +1078,9 @@ class Admin extends BaseController
                     'email' =>    trim($this->input->post('email')),
                     'mobile2' =>    trim($this->input->post('mobile_2')),
                     'fax' =>    trim($this->input->post('fax')),
-                    'GSTIN' =>    trim($this->input->post('GSTIN'))
+                    'GSTIN' =>    trim($this->input->post('GSTIN')),
+                    'city' =>    trim($this->input->post('city')),
+                    'rate' =>    trim($this->input->post('rate'))
                 );
 
                 $checkifexitsvendor = $this->admin_model->checkifexitsvendor(trim($this->input->post('vendor_name')));
@@ -1087,7 +1091,7 @@ class Admin extends BaseController
                     $saveVendordata = $this->admin_model->saveVendordata('',$data);
                     if($saveVendordata){
                         $save_vendor_response['status'] = 'success';
-                        $save_vendor_response['error'] = array('vendor_name'=>'', 'landline'=>'', 'address'=>'', 'phone_1'=>'','contact_person'=>'','mobile'=>'','email'=>'','mobile_2'=>'','fax'=>'','GSTIN'=>'');
+                        $save_vendor_response['error'] = array('vendor_name'=>strip_tags(form_error('vendor_name')), 'landline'=>strip_tags(form_error('landline')), 'address'=>strip_tags(form_error('address')), 'phone_1'=>strip_tags(form_error('phone_1')),'contact_person'=>strip_tags(form_error('contact_person')),'mobile'=>strip_tags(form_error('mobile')),'email'=>strip_tags(form_error('email')),'mobile_2'=>strip_tags(form_error('mobile_2')),'fax'=>strip_tags(form_error('fax')),'GSTIN'=>strip_tags(form_error('GSTIN')),'city'=>strip_tags(form_error('city')),'rate'=>strip_tags(form_error('rate')));
                     }
                 }
             }
@@ -1122,6 +1126,9 @@ class Admin extends BaseController
             $this->form_validation->set_rules('fax','Fax','trim|max_length[50]');
             $this->form_validation->set_rules('GSTIN','GSTIN','trim|max_length[50]');
 
+            $this->form_validation->set_rules('city','City','trim|max_length[50]');
+            $this->form_validation->set_rules('rate','Rate','trim|max_length[50]');
+
             if($this->form_validation->run() == FALSE)
             {
                 $update_vendor_response['status'] = 'failure';
@@ -1138,7 +1145,9 @@ class Admin extends BaseController
                     'email' =>    trim($this->input->post('email')),
                     'mobile2' =>    trim($this->input->post('mobile_2')),
                     'fax' =>    trim($this->input->post('fax')),
-                    'GSTIN' =>    trim($this->input->post('GSTIN'))
+                    'GSTIN' =>    trim($this->input->post('GSTIN')),
+                    'city' =>    trim($this->input->post('city')),
+                    'rate' =>    trim($this->input->post('rate'))
                 );
 
                 $checkifexitvendorsupdate = $this->admin_model->checkifexitvendorsupdate(trim($this->input->post('vendor_id')),trim($this->input->post('vendor_name')));

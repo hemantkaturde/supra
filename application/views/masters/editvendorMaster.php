@@ -113,6 +113,32 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                  <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                             <label for="city">City</label>
+                                                <select class="form-control city" name="city" id="city">
+                                                    <option st-id="" value="">Select City</option>
+                                                    <option value="Mumbai" <?= ($data['city'] == 'Mumbai') ? 'selected' : '' ?>>Mumbai</option>
+                                                    <option value="Rajkot" <?= ($data['city'] == 'Rajkot') ? 'selected' : '' ?>>Rajkot</option>
+                                                    <option value="Jamnagar" <?= ($data['city'] == 'Jamnagar') ? 'selected' : '' ?>>Jamnagar</option>
+
+
+                                                </select>
+                                            <p class="error fax_error"></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="rate">Rate</label>
+                                            <input type="text" class="form-control" id="rate" value="<?=$data['rate']?>"  name="rate">
+                                            <p class="error rate_error"></p>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                             <!-- /.box-body -->
                             <div class="box-footer">
