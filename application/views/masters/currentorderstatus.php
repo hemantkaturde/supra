@@ -73,6 +73,9 @@
                                                     <th>Order Qty</th>
                                                     <th>Received Qty</th>
                                                     <th>Buyer Name</th>
+                                                    <th>Buyer PO</th>
+                                                    <th>Buyer Order Qty</th>
+                                                    <th>Buyer Delivery Date</th>
                                                     <th>Status</th>
                                                     <th>Form Name</th>
                                                 </tr>
