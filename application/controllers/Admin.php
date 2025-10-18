@@ -10886,7 +10886,7 @@ class Admin extends BaseController
                         <td style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$q.'</td>
                         <td style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value3['scrap_date'].'</br></td>   
                         <td style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value3['scrap_type'].'</td>
-                        <td style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value3['scrap_remark'].'</td> 
+                        <td style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.date("d-m-Y", strtotime($value3['scrap_remark'])).'</td> 
                     </tr>';
                 $j++;       
         }
