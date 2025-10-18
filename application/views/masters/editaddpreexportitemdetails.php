@@ -59,8 +59,16 @@
                                                <label for="part_number">Part Number <span class="required">*</span></label>
                                                 <select class="form-control part_number" name="part_number" id="part_number">
                                                     <option st-id="" value="">Select Part Number</option>
-                                                    <?php foreach ($getbuyerpoitemdetails as $key => $value) {?>
-                                                    <option <?php if($getexportetails[0]['part_number_id']==$value['fin_id']){ echo 'selected';} ?> value="<?php echo $value['fin_id']; ?>" data_buyer_po_number="<?php echo $value['buyer_po_number'];?>" data_buyer_po_date="<?php echo $value['buyer_po_part_delivery_date'];?>" ><?php echo $value['part_number'].' - '.$value['buyer_po_number']; ?> </option>
+                                                    <?php foreach ($getbuyerpoitemdetails as $key => $value) {
+                                                        
+                                                        if($value['buyer_po_part_delivery_date']=='0000-00-00'){
+                                                            $buyer_po_part_delivery_date ="";
+                                                        }else{
+                                                             $buyer_po_part_delivery_date = ' - '.date("d-m-Y", strtotime($value['buyer_po_part_delivery_date']));
+                                                        }   
+                                                        
+                                                        ?>
+                                                    <option <?php if($getexportetails[0]['part_number_id']==$value['fin_id']){ echo 'selected';} ?> value="<?php echo $value['fin_id']; ?>" data_buyer_po_number="<?php echo $value['buyer_po_number'];?>" data_buyer_po_date="<?php echo $value['buyer_po_part_delivery_date'];?>" ><?php echo $value['part_number'].' - '.$value['buyer_po_number']. $buyer_po_part_delivery_date; ?> </option>
                                                     <?php } ?>
                                                 </select>
                                             <p class="error part_number_error"></p>
