@@ -22237,6 +22237,20 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
+    public function getscraprejectiondetails($part_number_id,$vendor_po_item_id,$vendor_po_id){
+
+        $this->db->select('*,'.TBL_SCRAP_REJECTION_DETAILS.'.scrap_id as rejection_item_id');
+        $this->db->where(TBL_SCRAP_REJECTION_DETAILS.'.vendor_po_item_id', $vendor_po_item_id);
+        $this->db->where(TBL_SCRAP_REJECTION_DETAILS.'.rejection_form_id', $rejection_form_id);
+        $this->db->where(TBL_SCRAP_REJECTION_DETAILS.'.vendor_po_id', $vendor_po_id);
+        $this->db->order_by(TBL_SCRAP_REJECTION_DETAILS.'.scrap_id','DESC');
+        $query = $this->db->get(TBL_SCRAP_REJECTION_DETAILS);
+        $fetch_result = $query->result_array();
+        return  $fetch_result;
+
+    }
+
+
 
 }
 

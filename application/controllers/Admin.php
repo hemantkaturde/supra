@@ -10822,6 +10822,8 @@ class Admin extends BaseController
         $getallscrapdetailsforprint =  $this->admin_model->getallscrapdetailsforprint($rejection_form_id,$vendor_po_item_id,$vendor_po_id);
         $getRejectionitemsrejecteddetails =  $this->admin_model->getRejectionitemsrejecteddetails($rejection_form_id,$vendor_po_item_id,$vendor_po_id);
         $getstockrejectiondata =  $this->admin_model->getstockrejectiondata($part_number_id,$vendor_po_id);
+       
+        $getscraprejectiondetails =  $this->admin_model->getscraprejectiondetails($part_number_id,$vendor_po_item_id,$vendor_po_id);
 
                
             $CartItem_1 = "";
@@ -10873,6 +10875,21 @@ class Admin extends BaseController
                     $qty_In_kgs+=$value['qty_In_kgs'];
                 $j++;       
         }
+
+
+
+        $CartItem3='';
+        $q=1;
+        foreach ($getscraprejectiondetails as $key => $value3) {
+            $CartItem3 .= '
+                    <tr>
+                        <td style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$q.'</td>
+                        <td style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value3['scrap_date'].'</br></td>   
+                        <td style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value3['scrap_type'].'</td>
+                        <td style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value3['scrap_remark'].'</td> 
+                    </tr>';
+                $j++;       
+        }
         
         $mpdf = new \Mpdf\Mpdf();
         // $html = $this->load->view('html_to_pdf',[],true);
@@ -10919,7 +10936,20 @@ class Admin extends BaseController
                         <th style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 5px;border-bottom:1px solid black" valign="top">Invoice Number</th> 
                         <th style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 5px;border-bottom:1px solid black" valign="top">Invoice Date</th> 
                     </tr>'.$CartItem_1.'
-                </table>';
+                </table>
+                
+                 <h3>Scrap Rejection Details</h3>
+
+                 <table style="width: 100%;text-align: left;border-collapse: collapse;border: #ccc 1px solid;margin-top:10px;margin-bottom:10px;font-family:cambria;font-size:12px">
+                    <tr style=border: 1px solid black;border-right: 1px solid black;>
+                        <th style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 5px;border-bottom:1px solid black" valign="top">Sr No</th> 
+                        <th style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 5px;border-bottom:1px solid black" valign="top">Scrap Date</th> 
+                        <th style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 5px;border-bottom:1px solid black" valign="top">Scrap Type</th> 
+                        <th style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 5px;border-bottom:1px solid black" valign="top">Remark</th> 
+                    </tr>'.$CartItem3.'
+                </table>
+                
+                ';
 
                 // <p>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</p>
         $invoice_name =  'Scrap_Rejection.pdf';
