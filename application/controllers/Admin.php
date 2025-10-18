@@ -10823,7 +10823,7 @@ class Admin extends BaseController
         $getRejectionitemsrejecteddetails =  $this->admin_model->getRejectionitemsrejecteddetails($rejection_form_id,$vendor_po_item_id,$vendor_po_id);
         $getstockrejectiondata =  $this->admin_model->getstockrejectiondata($part_number_id,$vendor_po_id);
        
-        $getscraprejectiondetails =  $this->admin_model->getscraprejectiondetails($part_number_id,$vendor_po_item_id,$vendor_po_id);
+        $getscraprejectiondetails =  $this->admin_model->getscraprejectiondetails($rejection_form_id,$vendor_po_item_id,$vendor_po_id);
 
                
             $CartItem_1 = "";
