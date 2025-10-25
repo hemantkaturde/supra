@@ -17975,106 +17975,209 @@ public function downloadpreexportform($id){
     //$getpreexportdetailsitemsAttributeforInvoice = $this->admin_model->getpreexportdetailsitemsAttributeforInvoice($id);
     $getpreexportallcountdataforinvoice = $this->admin_model->getpreexportallcountdataforinvoice($id);
 
-    $CartItem = '';
-    $i =1;
+    // $CartItem = '';
+    // $i =1;
 
-   
 
-     foreach ($getpreexportdetailsitemsforInvoice as $key => $value) {
+    //  foreach ($getpreexportdetailsitemsforInvoice as $key => $value) {
 
-        $getbuyeritemorderqty = $this->admin_model->getbuyeritemorderqty($value['buyer_po_id'],$value['part_number_id']);
+    //     $getbuyeritemorderqty = $this->admin_model->getbuyeritemorderqty($value['buyer_po_id'],$value['part_number_id']);
 
-        $getpreexportdetailsitemsAttributeforInvoice = $this->admin_model->getpreexportdetailsitemsAttributeforInvoice($value['pre_export_id'],$value['itemidwwww']);
-        $CartItemattribute='';
+    //     $getpreexportdetailsitemsAttributeforInvoice = $this->admin_model->getpreexportdetailsitemsAttributeforInvoice($value['pre_export_id'],$value['itemidwwww']);
+    //     $CartItemattribute='';
 
-        $gross_per_box_weight =0;
-        $no_of_cartoons =0;
-        $per_box_PCS =0;
-        $total_qty =0;
-        $total_gross_weight = 0;
-        $total_net_weight =0;
+    //     $gross_per_box_weight =0;
+    //     $no_of_cartoons =0;
+    //     $per_box_PCS =0;
+    //     $total_qty =0;
+    //     $total_gross_weight = 0;
+    //     $total_net_weight =0;
     
-      
+    //     $global_carton_end = 0; 
 
-        foreach ($getpreexportdetailsitemsAttributeforInvoice as $key => $value1) {
+    //     foreach ($getpreexportdetailsitemsAttributeforInvoice as $key => $value1) {
 
-            $CartItemattribute .= '
-                    <tr style=" border-bottom: 1px solid #000;">
-                        <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top">'.$value1['gross_per_box_weight'].' kgs</br></td>   
-                        <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top">'.$value1['no_of_cartoons'].' ctns </td>
-                        <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top">'.$value1['per_box_PCS'].' pcs</td>
-                        <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top">'.$value1['total_qty'].' pcs</td> 
-                        <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top" >'.$value1['tg'].' kgs</td>   
-                        <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top" >'.$value1['attribute_remark'].'</td>    
-                        <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top" >'.$value1['total_net_weight_item'].'</td>     
-                    </tr>';  
+    //         $CartItemattribute .= '
+    //                 <tr style=" border-bottom: 1px solid #000;">
+    //                     <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top">'.$value1['gross_per_box_weight'].' kgs</br></td>   
+    //                     <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top">'.$value1['no_of_cartoons'].' ctns </td>
+    //                     <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top">'.$value1['per_box_PCS'].' pcs</td>
+    //                     <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top">'.$value1['total_qty'].' pcs</td> 
+    //                     <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top" >'.$value1['tg'].' kgs</td>   
+    //                     <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top" >'.$value1['attribute_remark'].'</td>    
+    //                     <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top" >'.$value1['total_net_weight_item'].'</td>     
+    //                 </tr>';  
                     
-                    $gross_per_box_weight += $value1['gross_per_box_weight'];
-                    $no_of_cartoons += $value1['no_of_cartoons'];
-                    $per_box_PCS += $value1['per_box_PCS'];
-                    $total_qty += $value1['total_qty'];
+    //                 $gross_per_box_weight += $value1['gross_per_box_weight'];
+    //                 $no_of_cartoons += $value1['no_of_cartoons'];
+    //                 $per_box_PCS += $value1['per_box_PCS'];
+    //                 $total_qty += $value1['total_qty'];
 
-                    $total_gross_weight += $value1['tg'];
+    //                 $total_gross_weight += $value1['tg'];
 
-                    if($value1['total_net_weight_item']){
-                        $total_net_weight += $value1['total_net_weight_item'];
-                    }else{
-                        $total_net_weight += 0;
-                    }
+    //                 if($value1['total_net_weight_item']){
+    //                     $total_net_weight += $value1['total_net_weight_item'];
+    //                 }else{
+    //                     $total_net_weight += 0;
+    //                 }
 
-                $start = 0;
-                if ($no_of_cartoons == 0) {
-                    $carton_range = "Carton No : 0";
-                } else {
-                    // Start after previous record’s last carton
-                    $start = ($global_carton_end == 0) ? 1 : $global_carton_end + 1;
-                    $end = $start + $no_of_cartoons - 1;
 
-                    $carton_range = "Carton No : Carton No $start TO $end";
+    //             $start = 0;
+                
+    //                         // ✅ Carton Number Calculation (Fixed Logic)
+    //             if ($no_of_cartoons == 0) {
+    //                 $carton_range = "Carton No : 0";
+    //             } else {
+    //                 // Start for current record
+    //                 $start = ($global_carton_end == 0) ? 1 : $global_carton_end + 1;
 
-                    // Update for next product
-                    $global_carton_end = $end;
-                }
+    //                 // Calculate end carton number
+    //                 $end = $start + $no_of_cartoons - 1;
 
-                $cortoon_number_count = $carton_range;
+    //                 // Prepare text
+    //                 $carton_range = "Carton No : Carton No $start TO $end";
+
+    //                 // ⚙️ Update global end for next record
+    //                 $global_carton_end = $end;  // ✅ NO +1 here (previously caused your 1-carton skip)
+    //             }
+
+    //             $cortoon_number_count = $carton_range;
                     
-        }
+    //     }
     
 
-           $CartItem .= '<div>
-                        <p><b>'.$i.') '.$value['name'].'</b></p>
-                        <p><b>Part Number : </b>'.$value['part_number'].str_repeat('&nbsp;',50).' <b>PO Number: '.$value['buyer_po_number'].'</b></p>
-                        <p><b>Buyer Order Qty : </b>'.$getbuyeritemorderqty[0]['order_oty'].'</p>
-                        <p><b>Buyer PO Part Delivery Date : </b>'.date('d-m-Y',strtotime($getbuyeritemorderqty[0]['buyer_po_part_delivery_date'])).'</p>
-                        <p>'.$value['item_remark'].'</p>
-                    </div>
-                    <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:12px;border: 1px solid black;">
-                    <tr>
-                        <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top"><b>Gross Wt per Box</b></td>   
-                        <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top"><b>No. of Cartoons</b></td>
-                        <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top"><b>Qty Per box</b></td>
-                        <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top"><b>Total Qty</b></td> 
-                        <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top"><b>Gross Weight with Ctns</b></td>  
-                        <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top"><b>Box Size</b></td>    
-                        <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top"><b>Net Weight</b></td>    
-                    </tr>
-                       '.$CartItemattribute.'
-                        <tr>
-                                <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top"><b>Total</b></td>   
-                                <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top"><b>'.$no_of_cartoons.' ctns </b></td>
-                                <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top"><b></td>
-                                <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top"><b>'.$total_qty.' pcs</b></td> 
-                                <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top"><b>'.number_format($total_gross_weight,3).' kgs</b></td>   
-                                <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top"> </td>   
-                                <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top"><b>'.number_format($total_net_weight,3).' kgs</b></td>    
-                        </tr>
-                    </table>
+    //        $CartItem .= '<div>
+    //                     <p><b>'.$i.') '.$value['name'].'</b></p>
+    //                     <p><b>Part Number : </b>'.$value['part_number'].str_repeat('&nbsp;',50).' <b>PO Number: '.$value['buyer_po_number'].'</b></p>
+    //                     <p><b>Buyer Order Qty : </b>'.$getbuyeritemorderqty[0]['order_oty'].'</p>
+    //                     <p><b>Buyer PO Part Delivery Date : </b>'.date('d-m-Y',strtotime($getbuyeritemorderqty[0]['buyer_po_part_delivery_date'])).'</p>
+    //                     <p>'.$value['item_remark'].'</p>
+    //                 </div>
+    //                 <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:12px;border: 1px solid black;">
+    //                 <tr>
+    //                     <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top"><b>Gross Wt per Box</b></td>   
+    //                     <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top"><b>No. of Cartoons</b></td>
+    //                     <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top"><b>Qty Per box</b></td>
+    //                     <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top"><b>Total Qty</b></td> 
+    //                     <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top"><b>Gross Weight with Ctns</b></td>  
+    //                     <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top"><b>Box Size</b></td>    
+    //                     <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top"><b>Net Weight</b></td>    
+    //                 </tr>
+    //                    '.$CartItemattribute.'
+    //                     <tr>
+    //                             <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top"><b>Total</b></td>   
+    //                             <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top"><b>'.$no_of_cartoons.' ctns </b></td>
+    //                             <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top"><b></td>
+    //                             <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top"><b>'.$total_qty.' pcs</b></td> 
+    //                             <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top"><b>'.number_format($total_gross_weight,3).' kgs</b></td>   
+    //                             <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top"> </td>   
+    //                             <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top"><b>'.number_format($total_net_weight,3).' kgs</b></td>    
+    //                     </tr>
+    //                 </table>
 
-                    <p> Carton No : '. $cortoon_number_count .'</p>';
+    //                 <p> Carton No : '. $cortoon_number_count .'</p>';
                 
 
+    //         $i++;
+    //  }
+
+    $CartItem = '';
+        $i = 1;
+
+        // ✅ Keep this outside the loop — so carton numbering continues globally
+        $global_carton_end = 0;
+
+        foreach ($getpreexportdetailsitemsforInvoice as $key => $value) {
+
+            $getbuyeritemorderqty = $this->admin_model->getbuyeritemorderqty($value['buyer_po_id'], $value['part_number_id']);
+            $getpreexportdetailsitemsAttributeforInvoice = $this->admin_model->getpreexportdetailsitemsAttributeforInvoice($value['pre_export_id'], $value['itemidwwww']);
+
+            $CartItemattribute = '';
+            $gross_per_box_weight = 0;
+            $no_of_cartoons = 0;
+            $per_box_PCS = 0;
+            $total_qty = 0;
+            $total_gross_weight = 0;
+            $total_net_weight = 0;
+
+            // 🔹 Loop through attributes
+            foreach ($getpreexportdetailsitemsAttributeforInvoice as $key1 => $value1) {
+                $CartItemattribute .= '
+                    <tr style="border-bottom: 1px solid #000;">
+                        <td style="text-align:left;padding:5px;border:1px solid black;" valign="top">'.$value1['gross_per_box_weight'].' kgs</td>   
+                        <td style="text-align:left;padding:5px;border:1px solid black;" valign="top">'.$value1['no_of_cartoons'].' ctns</td>
+                        <td style="text-align:left;padding:5px;border:1px solid black;" valign="top">'.$value1['per_box_PCS'].' pcs</td>
+                        <td style="text-align:left;padding:5px;border:1px solid black;" valign="top">'.$value1['total_qty'].' pcs</td> 
+                        <td style="text-align:left;padding:5px;border:1px solid black;" valign="top">'.$value1['tg'].' kgs</td>   
+                        <td style="text-align:left;padding:5px;border:1px solid black;" valign="top">'.$value1['attribute_remark'].'</td>    
+                        <td style="text-align:left;padding:5px;border:1px solid black;" valign="top">'.$value1['total_net_weight_item'].'</td>     
+                    </tr>';  
+
+                // Sum totals
+                $gross_per_box_weight += $value1['gross_per_box_weight'];
+                $no_of_cartoons += $value1['no_of_cartoons'];
+                $per_box_PCS += $value1['per_box_PCS'];
+                $total_qty += $value1['total_qty'];
+                $total_gross_weight += $value1['tg'];
+                $total_net_weight += ($value1['total_net_weight_item']) ? $value1['total_net_weight_item'] : 0;
+            }
+
+            // ✅ Carton Number Calculation (moved outside inner loop)
+            if ($no_of_cartoons == 0) {
+                $carton_range = "Carton No : 0";
+            } else {
+                // Start from previous end + 1, or 1 for the first product
+                $start = ($global_carton_end == 0) ? 1 : $global_carton_end + 1;
+
+                // Calculate end
+                $end = $start + $no_of_cartoons - 1;
+
+                $carton_range = "Carton No : Carton No $start TO $end";
+
+                // Update global end for next product
+                $global_carton_end = $end;
+            }
+
+            $cortoon_number_count = $carton_range;
+
+            // ✅ HTML layout
+            $CartItem .= '
+                <div>
+                    <p><b>'.$i.') '.$value['name'].'</b></p>
+                    <p><b>Part Number : </b>'.$value['part_number'].str_repeat('&nbsp;',50).' 
+                    <b>PO Number: '.$value['buyer_po_number'].'</b></p>
+                    <p><b>Buyer Order Qty : </b>'.$getbuyeritemorderqty[0]['order_oty'].'</p>
+                    <p><b>Buyer PO Part Delivery Date : </b>'.date('d-m-Y',strtotime($getbuyeritemorderqty[0]['buyer_po_part_delivery_date'])).'</p>
+                    <p>'.$value['item_remark'].'</p>
+                </div>
+
+                <table style="width:100%;border-collapse:collapse;border:1px solid black;font-family:Times New Roman;font-size:12px;">
+                    <tr>
+                        <td style="padding:5px;border:1px solid black;"><b>Gross Wt per Box</b></td>
+                        <td style="padding:5px;border:1px solid black;"><b>No. of Cartons</b></td>
+                        <td style="padding:5px;border:1px solid black;"><b>Qty Per box</b></td>
+                        <td style="padding:5px;border:1px solid black;"><b>Total Qty</b></td>
+                        <td style="padding:5px;border:1px solid black;"><b>Gross Weight with Ctns</b></td>
+                        <td style="padding:5px;border:1px solid black;"><b>Box Size</b></td>
+                        <td style="padding:5px;border:1px solid black;"><b>Net Weight</b></td>
+                    </tr>
+                    '.$CartItemattribute.'
+                    <tr>
+                        <td style="padding:5px;border:1px solid black;"><b>Total</b></td>
+                        <td style="padding:5px;border:1px solid black;"><b>'.$no_of_cartoons.' ctns</b></td>
+                        <td style="padding:5px;border:1px solid black;"></td>
+                        <td style="padding:5px;border:1px solid black;"><b>'.$total_qty.' pcs</b></td>
+                        <td style="padding:5px;border:1px solid black;"><b>'.number_format($total_gross_weight,3).' kgs</b></td>
+                        <td style="padding:5px;border:1px solid black;"></td>
+                        <td style="padding:5px;border:1px solid black;"><b>'.number_format($total_net_weight,3).' kgs</b></td>
+                    </tr>
+                </table>
+
+                <p>'.$cortoon_number_count.'</p>
+            ';
+
             $i++;
-     }
+        }
 
 
     
