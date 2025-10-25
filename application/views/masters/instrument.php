@@ -102,7 +102,8 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label>Measuring Size</label>
-                <select name="measuring_size" id="measuring_size" class="form-control serachfilternotrequired">
+                <input type="text" name="measuring_size" id="measuring_size" class="form-control">
+                <!-- <select name="measuring_size" id="measuring_size" class="form-control serachfilternotrequired">
                   <option value="">Select Measuring Size</option>
                   <option>1-10</option>
                   <option>10-20</option>
@@ -114,7 +115,7 @@
                   <option>70-80</option>
                   <option>80-90</option>
                   <option>90-100</option>
-                </select>
+                </select> -->
               </div>
             </div>
 
