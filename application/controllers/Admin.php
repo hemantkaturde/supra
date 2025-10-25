@@ -17994,6 +17994,7 @@ public function downloadpreexportform($id){
         $total_gross_weight = 0;
         $total_net_weight =0;
     
+      
 
         foreach ($getpreexportdetailsitemsAttributeforInvoice as $key => $value1) {
 
@@ -18021,6 +18022,21 @@ public function downloadpreexportform($id){
                         $total_net_weight += 0;
                     }
 
+                      $start = 0;
+                if ($no_of_cartoons == 0) {
+                    $carton_range = "Carton No : 0";
+                } else {
+                    // Start after previous record’s last carton
+                    $start = ($global_carton_end == 0) ? 1 : $global_carton_end + 1;
+                    $end = $start + $no_of_cartoons - 1;
+
+                    $carton_range = "Carton No : Carton No $start TO $end";
+
+                    // Update for next product
+                    $global_carton_end = $end;
+                }
+
+                $cortoon_number_count = $carton_range;
                     
         }
     
@@ -18052,7 +18068,11 @@ public function downloadpreexportform($id){
                                 <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top"> </td>   
                                 <td style="text-align:left;padding: 5px;border: 1px solid black;" valign="top"><b>'.number_format($total_net_weight,3).' kgs</b></td>    
                         </tr>
-                    </table>';
+                    </table>
+
+                    <p> Carton No : '. $cortoon_number_count .'</p>';
+                
+
             $i++;
      }
 
