@@ -27407,7 +27407,7 @@
 						],
 						responsive: true,
 						"oLanguage": {
-							"sEmptyTable": "<i>No TDIR Report Found.</i>",
+							"sEmptyTable": "<i>No Instrumens Found.</i>",
 						}, 
 						"bSort" : false,
 						"bFilter":true,
