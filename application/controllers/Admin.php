@@ -26030,5 +26030,74 @@ public function getRejectionitemdetailsforDisplay(){
        }
 }
 
+public function instrument()
+{
+    $process = 'Instrument Master';
+    $processFunction = 'Admin/instrument';
+    $this->global['pageTitle'] = 'Instrument Master';  
+    $this->loadViews("masters/instrument", $this->global, NULL, NULL); 
+}
+
+public function fetchtintrument()
+{
+    $params = $_REQUEST;
+    $totalRecords = $this->admin_model->fetchtintrumentcount($params); 
+    $queryRecords = $this->admin_model->fetchtintrumentdata($params); 
+
+    $data = array();
+    foreach ($queryRecords as $key => $value)
+    {
+        $i = 0;
+        foreach($value as $v)
+        {
+            $data[$key][$i] = $v;
+            $i++;
+        }
+    }
+    $json_data = array(
+        "draw"            => intval( $params['draw'] ),   
+        "recordsTotal"    => intval( $totalRecords ),  
+        "recordsFiltered" => intval($totalRecords),
+        "data"            => $data   // total data array
+        );
+    echo json_encode($json_data);
+
+}
+
+public function editintrument($id)
+{
+    $data = $this->admin_model->get_instrument_by_id($id);
+    echo json_encode($data);
+}
+
+public function saveintrument()
+{
+    $id = $this->input->post('id');
+    $data = [
+        'instrument_name' => $this->input->post('instrument_name'),
+        'grade' => $this->input->post('grade'),
+        'measuring_size' => $this->input->post('measuring_size'),
+        'unit' => $this->input->post('unit'),
+        'class' => $this->input->post('class'),
+        'type' => $this->input->post('type'),
+        'qty' => $this->input->post('qty'),
+        'remark' => $this->input->post('remark')
+    ];
+
+    if ($id == '') {
+        $this->admin_model->save_instrument($data);
+        echo json_encode(['status'=>true,'message'=>'Instrument Added Successfully']);
+    } else {
+        $this->admin_model->update_instrument($id, $data);
+        echo json_encode(['status'=>true,'message'=>'Instrument Updated Successfully']);
+    }
+}
+
+public function deleteintrument($id)
+{
+    $this->admin_model->delete_instrument($id);
+    echo json_encode(['status'=>true,'message'=>'Instrument Deleted Successfully']);
+}
+
 
 }

@@ -651,6 +651,12 @@ $route['tdir_attachment/(:any)'] = "admin/tdir_attachment/$1";
 $route['deletetdirattachment'] = "admin/deletetdirattachment";
 
 
+$route['instrument'] = "admin/instrument";
+$route['fetchtintrument'] = "admin/fetchtintrument";
+
+
+
+
 // $route['fetchtdirattachment/(:tdirid)'] = "admin/fetchtdirattachment/$1";
 
 

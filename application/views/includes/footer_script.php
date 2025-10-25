@@ -27386,3 +27386,125 @@
 
     </script>
 <?php } ?>
+
+
+
+<?php if($pageTitle=='Instrument Master'){ ?>
+	<script type="text/javascript">
+
+	    $(document).ready(function() {
+				var dt = $('#view_instrument').DataTable({
+						"columnDefs": [ 
+							{ className: "details-control", "targets": [ 0 ] },
+							{ "width": "15%", "targets": 0 },
+							{ "width": "10%", "targets": 1 },
+							{ "width": "10%", "targets": 2 },
+							{ "width": "10%", "targets": 3 },
+							{ "width": "10%", "targets": 4 },
+							{ "width": "10%", "targets": 5 },
+							{ "width": "8%", "targets": 6 },
+							
+						],
+						responsive: true,
+						"oLanguage": {
+							"sEmptyTable": "<i>No TDIR Report Found.</i>",
+						}, 
+						"bSort" : false,
+						"bFilter":true,
+						"bLengthChange": true,
+						"iDisplayLength": 10,   
+						"bProcessing": true,
+						"serverSide": true,
+						"ajax":{
+							url :"<?php echo base_url();?>fetchtintrument",
+							type: "post",
+						},
+					});
+			
+	    });
+
+		function openModal() {
+			$('#instrumentForm')[0].reset();
+			$('#id').val('');
+			$('.modal-title').text('Add Instrument');
+			$('#instrumentModal').modal('show');  // ✅ Bootstrap 3 style
+		}
+
+		$('#instrumentForm').on('submit', function(e){
+			e.preventDefault();
+			$.ajax({
+				url: '<?php echo base_url();?>admin/saveintrument',
+				type: 'POST',
+				data: $(this).serialize(),
+				dataType: 'json',
+				success: function(res){
+				if(res.status){
+					// Swal.fire('Success', res.message, 'success');
+					$('#instrumentModal').hide('show');
+					window.location.href = "<?php echo base_url()?>instrument/";
+
+				}
+				}
+			});
+		});
+
+		function editData(id) {
+			$.get('<?php echo base_url();?>admin/editintrument/' + id, function (res) {
+				let d = JSON.parse(res);
+
+				$('#id').val(d.id);
+
+				$('#instrument_name').val($.trim(d.instrument_name));
+				$('#grade').val($.trim(d.grade));
+				$('#measuring_size').val($.trim(d.measuring_size));
+				$('#unit').val($.trim(d.unit));
+				$('#class').val($.trim(d.class));
+				$('#type').val($.trim(d.type));
+				$('#qty').val($.trim(d.qty));
+				$('#remark').val($.trim(d.remark));
+
+				$('.modal-title').text('Edit Instrument');
+
+				// wait to ensure modal animation completes, then open
+				// setTimeout(() => {
+				$('#instrumentModal').modal('show');
+				// }, 300);
+			});
+		}
+
+		function deleteData(id){
+		            swal({
+						title: "Are you sure?",
+						text: "Delete Instrument",
+						type: "warning",
+						showCancelButton: true,
+						closeOnClickOutside: false,
+						confirmButtonClass: "btn-sm btn-danger",
+						confirmButtonText: "Yes, delete it!",
+						cancelButtonText: "No, cancel plz!",
+						closeOnConfirm: false,
+						closeOnCancel: false
+					}, function(isConfirm) {
+						if (isConfirm) { 
+		                 	        $.get('<?php echo base_url();?>admin/deleteintrument/' + id, function(res){
+										let d = JSON.parse(res);
+									    if(d.status){
+											swal({
+													title: "Deleted!",
+													text: "Instrument Succesfully Deleted",
+													icon: "success",
+													button: "Ok",
+												},function(){ 
+														window.location.href = "<?php echo base_url()?>instrument";
+											});	
+						                }
+					                });
+					      }
+						  else {
+						swal("Cancelled", "Instrument deletion cancelled ", "error");
+						}
+				    });
+		}
+
+	</script> 
+<?php } ?>
