@@ -18022,7 +18022,7 @@ public function downloadpreexportform($id){
                         $total_net_weight += 0;
                     }
 
-                      $start = 0;
+                $start = 0;
                 if ($no_of_cartoons == 0) {
                     $carton_range = "Carton No : 0";
                 } else {
