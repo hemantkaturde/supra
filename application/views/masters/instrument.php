@@ -70,7 +70,7 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label>Instrument Name <span class="text-danger">*</span></label>
-                <select name="instrument_name" id="instrument_name" class="form-control serachfilternotrequired">
+                <select name="instrument_name" id="instrument_name" class="form-control serachfilternotrequired" required>
                   <option value="">Select</option>
                   <option>TRG</option>
                   <option>TPG</option>
