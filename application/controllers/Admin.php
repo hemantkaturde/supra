@@ -26222,5 +26222,41 @@ public function deleteintrument($id)
     echo json_encode(['status'=>true,'message'=>'Instrument Deleted Successfully']);
 }
 
+public function angadia_report(){
+    $process = 'Angadia Report';
+    $processFunction = 'Admin/angadia_report';
+    $this->global['pageTitle'] = 'Angadia Report';  
+    $this->loadViews("masters/angadia_report", $this->global, NULL, NULL); 
+}
+
+public function fetchanagdiareport(){
+
+    $params = $_REQUEST;
+    $totalRecords = $this->admin_model->fetchanagdiareportcount($params); 
+    $queryRecords = $this->admin_model->fetchanagdiareportdata($params); 
+
+    $data = array();
+    foreach ($queryRecords as $key => $value)
+    {
+        $i = 0;
+        foreach($value as $v)
+        {
+            $data[$key][$i] = $v;
+            $i++;
+        }
+    }
+    $json_data = array(
+        "draw"            => intval( $params['draw'] ),   
+        "recordsTotal"    => intval( $totalRecords ),  
+        "recordsFiltered" => intval($totalRecords),
+        "data"            => $data   // total data array
+        );
+    echo json_encode($json_data);
+
+}
+
+
+
+
 
 }

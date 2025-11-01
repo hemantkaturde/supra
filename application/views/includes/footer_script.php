@@ -27508,3 +27508,39 @@
 
 	</script> 
 <?php } ?>
+
+
+<?php if($pageTitle=='Angadia Report'){ ?>
+	<script type="text/javascript">
+            $(document).ready(function() {
+				   var dt = $('#anagdia_report_table').DataTable({
+						"columnDefs": [ 
+							{ className: "details-control", "targets": [ 0 ] },
+							{ "width": "15%", "targets": 0 },
+							{ "width": "10%", "targets": 1 },
+							{ "width": "10%", "targets": 2 },
+							{ "width": "10%", "targets": 3 },
+							{ "width": "10%", "targets": 4 },
+							{ "width": "10%", "targets": 5 },
+							{ "width": "8%", "targets": 6 },
+							{ "width": "8%", "targets": 7 },
+							
+						],
+						responsive: true,
+						"oLanguage": {
+							"sEmptyTable": "<i>No Angadia Found.</i>",
+						}, 
+						"bSort" : false,
+						"bFilter":true,
+						"bLengthChange": true,
+						"iDisplayLength": 10,   
+						"bProcessing": true,
+						"serverSide": true,
+						"ajax":{
+							url :"<?php echo base_url();?>admin/fetchanagdiareport",
+							type: "post",
+						},
+				    });
+	        });
+    </script> 
+<?php } ?>
