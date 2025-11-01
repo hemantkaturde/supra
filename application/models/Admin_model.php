@@ -22354,14 +22354,17 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     public function fetchanagdiareportcount($params){
 
         $this->db->select('*');
-        // if($params['search']['value'] != "") 
-        // {
-        //     $this->db->where("(".TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_FINISHED_GOODS.".name LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_PREEXPORT_ITEM_DETAILS.".total_item_net_weight LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_PREEXPORT_ITEM_DETAILS.".remark LIKE '%".$params['search']['value']."%')");
-        // }
+        
+         if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_INCOMING_DETAILS_ITEM.".lr_no LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".received_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".rate LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".boxex_goni_bundle LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".fg_material_gross_weight LIKE '%".$params['search']['value']."%')");
+        }
+
         //$this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_PREEXPORT_ITEM_DETAILS.'.part_number');
         $this->db->join(TBL_INCOMING_DETAILS, TBL_INCOMING_DETAILS.'.id = '.TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_INCOMING_DETAILS.'.vendor_name');
@@ -22375,14 +22378,15 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     public function fetchanagdiareportdata($params){
         $this->db->select('*,'.TBL_VENDOR.'.vendor_name as ven_name,'.TBL_VENDOR.'.rate as vendor_rate');
-        // if($params['search']['value'] != "") 
-        // {
-        //     $this->db->where("(".TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_FINISHED_GOODS.".name LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_PREEXPORT_ITEM_DETAILS.".total_item_net_weight LIKE '%".$params['search']['value']."%'");
-        //     $this->db->or_where(TBL_PREEXPORT_ITEM_DETAILS.".remark LIKE '%".$params['search']['value']."%')");
-        // }
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_INCOMING_DETAILS_ITEM.".lr_no LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".received_date LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".rate LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".boxex_goni_bundle LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".fg_material_gross_weight LIKE '%".$params['search']['value']."%')");
+        }
         
 
         // $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_PREEXPORT_ITEM_DETAILS.'.part_number');
