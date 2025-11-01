@@ -66,8 +66,8 @@
                                         <th>Date</th>
                                         <th>Vendor Name</th>
                                         <th>Invoice No</th>
-                                        <th>Boxes No</th>
-                                        <th>Total Kgs</th>
+                                        <th>Boxes No (No.of Boxes)</th>
+                                        <th>Total (In Kgs)</th>
                                         <th>Rate</th>
                                         <th>Amount</th>
                                     </tr>
