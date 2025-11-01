@@ -22407,7 +22407,13 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['boxex_goni_bundle'] =$value['boxex_goni_bundle'];
                 $data[$counter]['fg_material_gross_weight'] =$value['fg_material_gross_weight'];
                 $data[$counter]['rate'] =$value['vendor_rate'];
-                $data[$counter]['total_amount'] =$value['vendor_rate'] * $value['fg_material_gross_weight'];
+
+                $vendor_rate = is_numeric($value['vendor_rate']) ? (float)$value['vendor_rate'] : 0;
+                $gross_weight = is_numeric($value['fg_material_gross_weight']) ? (float)$value['fg_material_gross_weight'] : 0;
+
+                $data[$counter]['total_amount'] = $vendor_rate * $gross_weight;
+
+                //$data[$counter]['total_amount'] =$value['vendor_rate'] * $value['fg_material_gross_weight'];
                 $counter++; 
             }
         }
