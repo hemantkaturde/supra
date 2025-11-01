@@ -22412,7 +22412,11 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['rate'] =$value['vendor_rate'];
                 $vendor_rate = is_numeric($value['vendor_rate']) ? (float)$value['vendor_rate'] : 0;
                 $gross_weight = is_numeric($value['fg_material_gross_weight']) ? (float)$value['fg_material_gross_weight'] : 0;
-                $data[$counter]['total_amount'] = $vendor_rate * $gross_weight;
+
+                $total_amount = $vendor_rate * $gross_weight;
+
+                // Round to 2 decimal digits
+                $data[$counter]['total_amount'] = number_format($total_amount, 2, '.', '');
                 //$data[$counter]['total_amount'] =$value['vendor_rate'] * $value['fg_material_gross_weight'];
                 $counter++; 
             }
