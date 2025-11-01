@@ -22354,20 +22354,19 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     public function fetchanagdiareportcount($params){
 
         $this->db->select('*');
-        if($params['search']['value'] != "") 
-        {
-            $this->db->where("(".TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_FINISHED_GOODS.".name LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_PREEXPORT_ITEM_DETAILS.".total_item_net_weight LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_PREEXPORT_ITEM_DETAILS.".remark LIKE '%".$params['search']['value']."%')");
-        }
+        // if($params['search']['value'] != "") 
+        // {
+        //     $this->db->where("(".TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
+        //     $this->db->or_where(TBL_FINISHED_GOODS.".name LIKE '%".$params['search']['value']."%'");
+        //     $this->db->or_where(TBL_PREEXPORT_ITEM_DETAILS.".total_item_net_weight LIKE '%".$params['search']['value']."%'");
+        //     $this->db->or_where(TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
+        //     $this->db->or_where(TBL_PREEXPORT_ITEM_DETAILS.".remark LIKE '%".$params['search']['value']."%')");
+        // }
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_PREEXPORT_ITEM_DETAILS.'.part_number');
-        $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_PREEXPORT_ITEM_DETAILS.'.buyer_po_number_id');
-        $this->db->where(TBL_PREEXPORT_ITEM_DETAILS.'.pre_export_id', $id);
-        $this->db->where(TBL_PREEXPORT_ITEM_DETAILS.'.status', 1);
-        $this->db->order_by(TBL_PREEXPORT_ITEM_DETAILS.'.id','DESC');
-        $query = $this->db->get(TBL_PREEXPORT_ITEM_DETAILS);
+        $this->db->join(TBL_INCOMING_DETAILS, TBL_INCOMING_DETAILS.'.id = '.TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_INCOMING_DETAILS.'.vendor_name');
+        $this->db->order_by(TBL_INCOMING_DETAILS_ITEM.'.id','DESC');
+        $query = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
         $rowcount = $query->num_rows();
         return $rowcount;
 
@@ -22407,12 +22406,9 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['boxex_goni_bundle'] =$value['boxex_goni_bundle'];
                 $data[$counter]['fg_material_gross_weight'] =$value['fg_material_gross_weight'];
                 $data[$counter]['rate'] =$value['vendor_rate'];
-
                 $vendor_rate = is_numeric($value['vendor_rate']) ? (float)$value['vendor_rate'] : 0;
                 $gross_weight = is_numeric($value['fg_material_gross_weight']) ? (float)$value['fg_material_gross_weight'] : 0;
-
                 $data[$counter]['total_amount'] = $vendor_rate * $gross_weight;
-
                 //$data[$counter]['total_amount'] =$value['vendor_rate'] * $value['fg_material_gross_weight'];
                 $counter++; 
             }
