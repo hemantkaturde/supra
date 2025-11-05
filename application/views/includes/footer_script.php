@@ -27669,9 +27669,9 @@ $(document).ready(function() {
     });
 
     // Optional: Export to Excel button (you can connect later)
-    $('#export_excel').click(function() {
+    // $('#export_excel').click(function() {
         //alert("Export functionality coming soon!");
-    });
+    // });
 });
 
 
