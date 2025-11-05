@@ -22351,78 +22351,161 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
-    public function fetchanagdiareportcount($params){
+    // public function fetchanagdiareportcount($params){
 
-        $this->db->select('*');
+    //     $this->db->select('*');
         
-         if($params['search']['value'] != "") 
-        {
-            $this->db->where("(".TBL_INCOMING_DETAILS_ITEM.".lr_no LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".received_date LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_VENDOR.".rate LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".boxex_goni_bundle LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".fg_material_gross_weight LIKE '%".$params['search']['value']."%')");
-        }
+    //      if($params['search']['value'] != "") 
+    //     {
+    //         $this->db->where("(".TBL_INCOMING_DETAILS_ITEM.".lr_no LIKE '%".$params['search']['value']."%'");
+    //         $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".received_date LIKE '%".$params['search']['value']."%'");
+    //         $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+    //         $this->db->or_where(TBL_VENDOR.".rate LIKE '%".$params['search']['value']."%'");
+    //         $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".boxex_goni_bundle LIKE '%".$params['search']['value']."%'");
+    //         $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".fg_material_gross_weight LIKE '%".$params['search']['value']."%')");
+    //     }
 
-        //$this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_PREEXPORT_ITEM_DETAILS.'.part_number');
+    //     //$this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_PREEXPORT_ITEM_DETAILS.'.part_number');
+    //     $this->db->join(TBL_INCOMING_DETAILS, TBL_INCOMING_DETAILS.'.id = '.TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id');
+    //     $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_INCOMING_DETAILS.'.vendor_name');
+    //     $this->db->order_by(TBL_INCOMING_DETAILS_ITEM.'.id','DESC');
+    //     $query = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
+    //     $rowcount = $query->num_rows();
+    //     return $rowcount;
+
+    // }
+
+
+    // public function fetchanagdiareportdata($params){
+    //     $this->db->select('*,'.TBL_VENDOR.'.vendor_name as ven_name,'.TBL_VENDOR.'.rate as vendor_rate');
+    //     if($params['search']['value'] != "") 
+    //     {
+    //         $this->db->where("(".TBL_INCOMING_DETAILS_ITEM.".lr_no LIKE '%".$params['search']['value']."%'");
+    //         $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".received_date LIKE '%".$params['search']['value']."%'");
+    //         $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+    //         $this->db->or_where(TBL_VENDOR.".rate LIKE '%".$params['search']['value']."%'");
+    //         $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".boxex_goni_bundle LIKE '%".$params['search']['value']."%'");
+    //         $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".fg_material_gross_weight LIKE '%".$params['search']['value']."%')");
+    //     }
+        
+
+    //     // $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_PREEXPORT_ITEM_DETAILS.'.part_number');
+    //     $this->db->join(TBL_INCOMING_DETAILS, TBL_INCOMING_DETAILS.'.id = '.TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id');
+    //     $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_INCOMING_DETAILS.'.vendor_name');
+    //     $this->db->order_by(TBL_INCOMING_DETAILS_ITEM.'.id','DESC');
+    //     $this->db->limit($params['length'],$params['start']);
+    //     $query = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
+    //     $fetch_result = $query->result_array();
+
+    //     $data = array();
+    //     $counter = 0;
+    //     if(count($fetch_result) > 0)
+    //     {
+    //         foreach ($fetch_result as $key => $value)
+    //         {
+    //             $data[$counter]['lr_no'] =$value['lr_no'];
+    //             $data[$counter]['received_date'] =$value['received_date'];
+    //             $data[$counter]['vendor_name'] =$value['ven_name'];
+    //             $data[$counter]['invoice_no'] =$value['invoice_no'];
+    //             $data[$counter]['boxex_goni_bundle'] =$value['boxex_goni_bundle'];
+    //             $data[$counter]['fg_material_gross_weight'] =$value['fg_material_gross_weight'];
+    //             $data[$counter]['rate'] =$value['vendor_rate'];
+    //             $vendor_rate = is_numeric($value['vendor_rate']) ? (float)$value['vendor_rate'] : 0;
+    //             $gross_weight = is_numeric($value['fg_material_gross_weight']) ? (float)$value['fg_material_gross_weight'] : 0;
+
+    //             $total_amount = $vendor_rate * $gross_weight;
+
+    //             // Round to 2 decimal digits
+    //             $data[$counter]['total_amount'] = number_format($total_amount, 2, '.', '');
+    //             //$data[$counter]['total_amount'] =$value['vendor_rate'] * $value['fg_material_gross_weight'];
+    //             $counter++; 
+    //         }
+    //     }
+    //     return $data;
+    // }
+
+
+    public function fetchanagdiareportcount($params)
+    {
+        $this->db->select('COUNT(*) as total');
         $this->db->join(TBL_INCOMING_DETAILS, TBL_INCOMING_DETAILS.'.id = '.TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_INCOMING_DETAILS.'.vendor_name');
-        $this->db->order_by(TBL_INCOMING_DETAILS_ITEM.'.id','DESC');
-        $query = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
-        $rowcount = $query->num_rows();
-        return $rowcount;
 
+        // 🔍 Search Filter
+        if (!empty($params['search_by_any'])) {
+            $search = $this->db->escape_like_str($params['search_by_any']);
+            $this->db->group_start();
+            $this->db->like(TBL_INCOMING_DETAILS_ITEM.'.lr_no', $search);
+            $this->db->or_like(TBL_INCOMING_DETAILS_ITEM.'.invoice_no', $search);
+            $this->db->or_like(TBL_VENDOR.'.vendor_name', $search);
+            $this->db->or_like(TBL_INCOMING_DETAILS_ITEM.'.boxex_goni_bundle', $search);
+            $this->db->or_like(TBL_INCOMING_DETAILS_ITEM.'.fg_material_gross_weight', $search);
+            $this->db->group_end();
+        }
+
+        // 📅 Date Range Filter
+        if (!empty($params['from_date']) && !empty($params['to_date'])) {
+            $this->db->where("DATE(".TBL_INCOMING_DETAILS_ITEM.".received_date) >=", $params['from_date']);
+            $this->db->where("DATE(".TBL_INCOMING_DETAILS_ITEM.".received_date) <=", $params['to_date']);
+        }
+
+        $query = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
+        $result = $query->row();
+        return $result ? (int)$result->total : 0;
     }
 
 
-    public function fetchanagdiareportdata($params){
-        $this->db->select('*,'.TBL_VENDOR.'.vendor_name as ven_name,'.TBL_VENDOR.'.rate as vendor_rate');
-        if($params['search']['value'] != "") 
-        {
-            $this->db->where("(".TBL_INCOMING_DETAILS_ITEM.".lr_no LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".received_date LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_VENDOR.".rate LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".boxex_goni_bundle LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_INCOMING_DETAILS_ITEM.".fg_material_gross_weight LIKE '%".$params['search']['value']."%')");
-        }
-        
 
-        // $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_PREEXPORT_ITEM_DETAILS.'.part_number');
+    public function fetchanagdiareportdata($params)
+    {
+        $this->db->select('*, '.TBL_VENDOR.'.vendor_name as ven_name, '.TBL_VENDOR.'.rate as vendor_rate');
         $this->db->join(TBL_INCOMING_DETAILS, TBL_INCOMING_DETAILS.'.id = '.TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_INCOMING_DETAILS.'.vendor_name');
-        $this->db->order_by(TBL_INCOMING_DETAILS_ITEM.'.id','DESC');
-        $this->db->limit($params['length'],$params['start']);
+
+        // 🔍 Text search filter
+        if (!empty($params['search_by_any'])) {
+            $search = $this->db->escape_like_str($params['search_by_any']);
+            $this->db->group_start();
+            $this->db->like(TBL_INCOMING_DETAILS_ITEM.'.lr_no', $search);
+            $this->db->or_like(TBL_INCOMING_DETAILS_ITEM.'.invoice_no', $search);
+            $this->db->or_like(TBL_VENDOR.'.vendor_name', $search);
+            $this->db->or_like(TBL_INCOMING_DETAILS_ITEM.'.boxex_goni_bundle', $search);
+            $this->db->or_like(TBL_INCOMING_DETAILS_ITEM.'.fg_material_gross_weight', $search);
+            $this->db->group_end();
+        }
+
+        // 📅 Date range filter
+        if (!empty($params['from_date']) && !empty($params['to_date'])) {
+            $this->db->where("DATE(".TBL_INCOMING_DETAILS_ITEM.".received_date) >=", $params['from_date']);
+            $this->db->where("DATE(".TBL_INCOMING_DETAILS_ITEM.".received_date) <=", $params['to_date']);
+        }
+
+        $this->db->order_by(TBL_INCOMING_DETAILS_ITEM.'.id', 'DESC');
+        $this->db->limit($params['length'], $params['start']);
         $query = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
         $fetch_result = $query->result_array();
 
         $data = array();
-        $counter = 0;
-        if(count($fetch_result) > 0)
-        {
-            foreach ($fetch_result as $key => $value)
-            {
-                $data[$counter]['lr_no'] =$value['lr_no'];
-                $data[$counter]['received_date'] =$value['received_date'];
-                $data[$counter]['vendor_name'] =$value['ven_name'];
-                $data[$counter]['invoice_no'] =$value['invoice_no'];
-                $data[$counter]['boxex_goni_bundle'] =$value['boxex_goni_bundle'];
-                $data[$counter]['fg_material_gross_weight'] =$value['fg_material_gross_weight'];
-                $data[$counter]['rate'] =$value['vendor_rate'];
-                $vendor_rate = is_numeric($value['vendor_rate']) ? (float)$value['vendor_rate'] : 0;
-                $gross_weight = is_numeric($value['fg_material_gross_weight']) ? (float)$value['fg_material_gross_weight'] : 0;
+        foreach ($fetch_result as $value) {
+            $vendor_rate = is_numeric($value['vendor_rate']) ? (float)$value['vendor_rate'] : 0;
+            $gross_weight = is_numeric($value['fg_material_gross_weight']) ? (float)$value['fg_material_gross_weight'] : 0;
+            $total_amount = number_format($vendor_rate * $gross_weight, 2, '.', '');
 
-                $total_amount = $vendor_rate * $gross_weight;
-
-                // Round to 2 decimal digits
-                $data[$counter]['total_amount'] = number_format($total_amount, 2, '.', '');
-                //$data[$counter]['total_amount'] =$value['vendor_rate'] * $value['fg_material_gross_weight'];
-                $counter++; 
-            }
+            $data[] = array(
+                'lr_no' => $value['lr_no'],
+                'received_date' => $value['received_date'],
+                'vendor_name' => $value['ven_name'],
+                'invoice_no' => $value['invoice_no'],
+                'boxex_goni_bundle' => $value['boxex_goni_bundle'],
+                'fg_material_gross_weight' => $value['fg_material_gross_weight'],
+                'rate' => $value['vendor_rate'],
+                'total_amount' => $total_amount
+            );
         }
+
         return $data;
     }
+
 
 }
 

@@ -26229,30 +26229,92 @@ public function angadia_report(){
     $this->loadViews("masters/angadia_report", $this->global, NULL, NULL); 
 }
 
-public function fetchanagdiareport(){
+// public function fetchanagdiareport(){
 
-    $params = $_REQUEST;
-    $totalRecords = $this->admin_model->fetchanagdiareportcount($params); 
-    $queryRecords = $this->admin_model->fetchanagdiareportdata($params); 
+//     $params = $_REQUEST;
+//     $totalRecords = $this->admin_model->fetchanagdiareportcount($params); 
+//     $queryRecords = $this->admin_model->fetchanagdiareportdata($params); 
+
+//     $data = array();
+//     foreach ($queryRecords as $key => $value)
+//     {
+//         $i = 0;
+//         foreach($value as $v)
+//         {
+//             $data[$key][$i] = $v;
+//             $i++;
+//         }
+//     }
+//     $json_data = array(
+//         "draw"            => intval( $params['draw'] ),   
+//         "recordsTotal"    => intval( $totalRecords ),  
+//         "recordsFiltered" => intval($totalRecords),
+//         "data"            => $data   // total data array
+//         );
+//     echo json_encode($json_data);
+
+// }
+
+
+public function fetchanagdiareport()
+{
+    $params = $this->input->post(); // ✅ safer than $_REQUEST
+
+    $totalRecords = $this->admin_model->fetchanagdiareportcount($params);
+    $queryRecords = $this->admin_model->fetchanagdiareportdata($params);
 
     $data = array();
-    foreach ($queryRecords as $key => $value)
-    {
-        $i = 0;
-        foreach($value as $v)
-        {
-            $data[$key][$i] = $v;
-            $i++;
-        }
+    foreach ($queryRecords as $key => $value) {
+        $data[] = $value;
     }
-    $json_data = array(
-        "draw"            => intval( $params['draw'] ),   
-        "recordsTotal"    => intval( $totalRecords ),  
-        "recordsFiltered" => intval($totalRecords),
-        "data"            => $data   // total data array
-        );
-    echo json_encode($json_data);
 
+    $json_data = array(
+        "draw" => intval($params['draw']),
+        "recordsTotal" => intval($totalRecords),
+        "recordsFiltered" => intval($totalRecords),
+        "data" => $data
+    );
+
+    echo json_encode($json_data);
+}
+
+
+public function export_angadia_excel()
+{
+    // Load helper
+    $this->load->helper('download');
+
+    // Collect filters
+    $params = array(
+        'search_by_any' => $this->input->get('search_by_any'),
+        'from_date' => $this->input->get('from_date'),
+        'to_date' => $this->input->get('to_date')
+    );
+
+    // Fetch filtered data
+    $data = $this->admin_model->fetchanagdiareportdata($params);
+
+    // Prepare CSV content
+    $filename = "Angadia_Report_" . date('Y-m-d_H-i-s') . ".csv";
+    $csv = "LR No,Date,Vendor Name,Invoice No,Boxes No (No.of Boxes),Total (In Kgs),Rate,Amount\n";
+
+    if (!empty($data)) {
+        foreach ($data as $row) {
+            $csv .= '"' . $row['lr_no'] . '",';
+            $csv .= '"' . $row['received_date'] . '",';
+            $csv .= '"' . $row['vendor_name'] . '",';
+            $csv .= '"' . $row['invoice_no'] . '",';
+            $csv .= '"' . $row['boxex_goni_bundle'] . '",';
+            $csv .= '"' . $row['fg_material_gross_weight'] . '",';
+            $csv .= '"' . $row['rate'] . '",';
+            $csv .= '"' . $row['total_amount'] . "\"\n";
+        }
+    } else {
+        $csv .= "No records found.\n";
+    }
+
+    // Trigger file download
+    force_download($filename, $csv);
 }
 
 

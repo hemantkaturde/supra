@@ -27512,35 +27512,180 @@
 
 <?php if($pageTitle=='Angadia Report'){ ?>
 	<script type="text/javascript">
-            $(document).ready(function() {
-				   var dt = $('#anagdia_report_table').DataTable({
-						"columnDefs": [ 
-							{ className: "details-control", "targets": [ 0 ] },
-							{ "width": "15%", "targets": 0 },
-							{ "width": "10%", "targets": 1 },
-							{ "width": "10%", "targets": 2 },
-							{ "width": "10%", "targets": 3 },
-							{ "width": "10%", "targets": 4 },
-							{ "width": "10%", "targets": 5 },
-							{ "width": "8%", "targets": 6 },
-							{ "width": "8%", "targets": 7 },
+
+
+            // $(document).ready(function() {
+
+			// 	$("#anagdia_report_table").dataTable().fnDestroy();
+			
+			// 	if($('#from_date').val()){
+			// 		var from_date = $('#from_date').val();
+			// 	}else{
+			// 		var from_date ='NA';
+			// 	}
+
+			// 	if($('#to_date').val()){
+			// 		var to_date = $('#to_date').val();
+			// 	}else{
+			// 		var to_date ='NA';
+			// 	}
+
+			// 	if($('#search_by_any').val()){
+			// 		var search_by_any = $('#search_by_any').val();
+			// 	}else{
+			// 		var search_by_any ='NA';
+			// 	}
+
+			// 	getanghadiareport(search_by_any,from_date,to_date);
+	        // });
+
+
+			// $(document).on('change','#from_date',function(e){  
+			// 	e.preventDefault();
+			// 	$("#anagdia_report_table").dataTable().fnDestroy();
+			
+			// 	if($('#from_date').val()){
+			// 		var from_date = $('#from_date').val();
+			// 	}else{
+			// 		var from_date ='NA';
+			// 	}
+
+			// 	if($('#to_date').val()){
+			// 		var to_date = $('#to_date').val();
+			// 	}else{
+			// 		var to_date ='NA';
+			// 	}
+
+			// 	if($('#search_by_any').val()){
+			// 		var search_by_any = $('#search_by_any').val();
+			// 	}else{
+			// 		var search_by_any ='NA';
+			// 	}
+
+			// 	getanghadiareport(search_by_any,from_date,to_date);
+			// });
+
+
+			// $(document).on('change','#to_date',function(e){  
+			// 	e.preventDefault();
+			// 	$("#anagdia_report_table").dataTable().fnDestroy();
+			
+			// 	if($('#from_date').val()){
+			// 		var from_date = $('#from_date').val();
+			// 	}else{
+			// 		var from_date ='NA';
+			// 	}
+
+			// 	if($('#to_date').val()){
+			// 		var to_date = $('#to_date').val();
+			// 	}else{
+			// 		var to_date ='NA';
+			// 	}
+
+			// 	if($('#search_by_any').val()){
+			// 		var search_by_any = $('#search_by_any').val();
+			// 	}else{
+			// 		var search_by_any ='NA';
+			// 	}
+
+			// 	getanghadiareport(search_by_any,from_date,to_date);
+			// });
+
+
+		    // function getanghadiareport(search_by_any,from_date,to_date){
+			// 	   var dt = $('#anagdia_report_table').DataTable({
+			// 			"columnDefs": [ 
+			// 				{ className: "details-control", "targets": [ 0 ] },
+			// 				{ "width": "15%", "targets": 0 },
+			// 				{ "width": "10%", "targets": 1 },
+			// 				{ "width": "10%", "targets": 2 },
+			// 				{ "width": "10%", "targets": 3 },
+			// 				{ "width": "10%", "targets": 4 },
+			// 				{ "width": "10%", "targets": 5 },
+			// 				{ "width": "8%", "targets": 6 },
+			// 				{ "width": "8%", "targets": 7 },
 							
-						],
-						responsive: true,
-						"oLanguage": {
-							"sEmptyTable": "<i>No Angadia Found.</i>",
-						}, 
-						"bSort" : false,
-						"bFilter":true,
-						"bLengthChange": true,
-						"iDisplayLength": 10,   
-						"bProcessing": true,
-						"serverSide": true,
-						"ajax":{
-							url :"<?php echo base_url();?>admin/fetchanagdiareport",
-							type: "post",
-						},
-				    });
-	        });
+			// 			],
+			// 			responsive: true,
+			// 			"oLanguage": {
+			// 				"sEmptyTable": "<i>No Angadia Found.</i>",
+			// 			}, 
+			// 			"bSort" : false,
+			// 			"bFilter":true,
+			// 			"bLengthChange": true,
+			// 			"iDisplayLength": 10,   
+			// 			"bProcessing": true,
+			// 			"serverSide": true,
+			// 			"ajax":{
+			// 				url :"<?php echo base_url();?>admin/fetchanagdiareport/"+search_by_any+"/"+from_date+"/"+to_date,
+			// 				type: "post",
+			// 			},
+			// 	    });
+			// }
+
+
+
+$(document).ready(function() {
+
+  
+
+    // Initialize DataTable
+    var table = $('#anagdia_report_table').DataTable({
+        "processing": true,
+        "serverSide": true,
+        "bSort": false,
+        "ajax": {
+            "url": "<?php echo base_url(); ?>admin/fetchanagdiareport",
+            "type": "POST",
+            "data": function(d) {
+                d.search_by_any = $('#search_by_any').val();
+                d.from_date = $('#from_date').val();
+                d.to_date = $('#to_date').val();
+            }
+        },
+        "columns": [
+            { "data": "lr_no" },
+            { "data": "received_date" },
+            { "data": "vendor_name" },
+            { "data": "invoice_no" },
+            { "data": "boxex_goni_bundle" },
+            { "data": "fg_material_gross_weight" },
+            { "data": "rate" },
+            { "data": "total_amount" }
+        ],
+        "language": {
+            "emptyTable": "<i>No Angadia Found.</i>"
+        }
+    });
+
+    // 🔍 Live search when typing
+    $('#search_by_any').on('keyup', function() {
+        table.ajax.reload();
+    });
+
+    // 📅 From / To date change
+    $('#from_date, #to_date').on('change', function() {
+        table.ajax.reload();
+    });
+
+    // Optional: Export to Excel button (you can connect later)
+    $('#export_excel').click(function() {
+        alert("Export functionality coming soon!");
+    });
+});
+
+
+$('#export_excel').on('click', function() {
+    var search_by_any = $('#search_by_any').val() || '';
+    var from_date = $('#from_date').val() || '';
+    var to_date = $('#to_date').val() || '';
+
+    var exportUrl = "<?php echo base_url(); ?>admin/export_angadia_excel?search_by_any=" + encodeURIComponent(search_by_any) + "&from_date=" + from_date + "&to_date=" + to_date;
+
+    window.location.href = exportUrl; // 👈 triggers file download
+});
+
+
+
     </script> 
 <?php } ?>

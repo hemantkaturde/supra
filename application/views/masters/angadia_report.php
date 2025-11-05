@@ -41,12 +41,12 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-2">
+                            <!-- <div class="col-md-2">
                                 <div class="form-group">
                                     <label>&nbsp;</label><br>
                                     <button type="button" class="btn btn-primary" id="search_btn">Search</button>
                                 </div>
-                            </div>
+                            </div> -->
 
                             <div class="col-md-2">
                                 <div class="form-group">
