@@ -26295,7 +26295,16 @@ public function export_angadia_excel()
     $data = $this->admin_model->fetchanagdiareportdata($params);
 
     // Prepare CSV content
-    $filename = "Angadia_Report_" . date('Y-m-d_H-i-s') . ".csv";
+
+    if( $this->input->get('from_date') && $this->input->get('to_date')){
+
+            $filename = "Sai Krupa Express " . $this->input->get('from_date') .' - ' .$this->input->get('to_date'). ".csv";
+    }else{
+
+            $filename = "Sai Krupa Express " . date('Y-m-d_H-i-s') . ".csv";
+
+    }
+
     $csv = "LR No,Date,Vendor Name,Vendor City,Invoice No,Boxes No (No.of Boxes),Total (In Kgs),Rate,Amount\n";
 
     if (!empty($data)) {
