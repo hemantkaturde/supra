@@ -65,6 +65,7 @@
                                         <th>LR No</th>
                                         <th>Date</th>
                                         <th>Vendor Name</th>
+                                        <th>City</th>
                                         <th>Invoice No</th>
                                         <th>Boxes No (No.of Boxes)</th>
                                         <th>Total (In Kgs)</th>

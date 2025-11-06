@@ -26296,13 +26296,14 @@ public function export_angadia_excel()
 
     // Prepare CSV content
     $filename = "Angadia_Report_" . date('Y-m-d_H-i-s') . ".csv";
-    $csv = "LR No,Date,Vendor Name,Invoice No,Boxes No (No.of Boxes),Total (In Kgs),Rate,Amount\n";
+    $csv = "LR No,Date,Vendor Name,Vendor City,Invoice No,Boxes No (No.of Boxes),Total (In Kgs),Rate,Amount\n";
 
     if (!empty($data)) {
         foreach ($data as $row) {
             $csv .= '"' . $row['lr_no'] . '",';
             $csv .= '"' . $row['received_date'] . '",';
             $csv .= '"' . $row['vendor_name'] . '",';
+            $csv .= '"' . $row['vendor_city'] . '",';
             $csv .= '"' . $row['invoice_no'] . '",';
             $csv .= '"' . $row['boxex_goni_bundle'] . '",';
             $csv .= '"' . $row['fg_material_gross_weight'] . '",';

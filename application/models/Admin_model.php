@@ -22438,6 +22438,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             $this->db->like(TBL_INCOMING_DETAILS_ITEM.'.lr_no', $search);
             $this->db->or_like(TBL_INCOMING_DETAILS_ITEM.'.invoice_no', $search);
             $this->db->or_like(TBL_VENDOR.'.vendor_name', $search);
+            $this->db->or_like(TBL_VENDOR.'.city', $search);
             $this->db->or_like(TBL_INCOMING_DETAILS_ITEM.'.boxex_goni_bundle', $search);
             $this->db->or_like(TBL_INCOMING_DETAILS_ITEM.'.fg_material_gross_weight', $search);
             $this->db->group_end();
@@ -22458,7 +22459,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     public function fetchanagdiareportdata($params)
     {
-        $this->db->select('*, '.TBL_VENDOR.'.vendor_name as ven_name, '.TBL_VENDOR.'.rate as vendor_rate');
+        $this->db->select('*, '.TBL_VENDOR.'.vendor_name as ven_name, '.TBL_VENDOR.'.rate as vendor_rate,'.TBL_VENDOR.'.city as vendor_city');
         $this->db->join(TBL_INCOMING_DETAILS, TBL_INCOMING_DETAILS.'.id = '.TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_INCOMING_DETAILS.'.vendor_name');
 
@@ -22469,6 +22470,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             $this->db->like(TBL_INCOMING_DETAILS_ITEM.'.lr_no', $search);
             $this->db->or_like(TBL_INCOMING_DETAILS_ITEM.'.invoice_no', $search);
             $this->db->or_like(TBL_VENDOR.'.vendor_name', $search);
+            $this->db->or_like(TBL_VENDOR.'.city', $search);
             $this->db->or_like(TBL_INCOMING_DETAILS_ITEM.'.boxex_goni_bundle', $search);
             $this->db->or_like(TBL_INCOMING_DETAILS_ITEM.'.fg_material_gross_weight', $search);
             $this->db->group_end();
@@ -22495,6 +22497,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 'lr_no' => $value['lr_no'],
                 'received_date' => $value['received_date'],
                 'vendor_name' => $value['ven_name'],
+                'vendor_city' => $value['vendor_city'],
                 'invoice_no' => $value['invoice_no'],
                 'boxex_goni_bundle' => $value['boxex_goni_bundle'],
                 'fg_material_gross_weight' => $value['fg_material_gross_weight'],

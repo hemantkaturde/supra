@@ -27647,6 +27647,7 @@ $(document).ready(function() {
             { "data": "lr_no" },
             { "data": "received_date" },
             { "data": "vendor_name" },
+			{ "data": "vendor_city" },
             { "data": "invoice_no" },
             { "data": "boxex_goni_bundle" },
             { "data": "fg_material_gross_weight" },
