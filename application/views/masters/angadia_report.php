@@ -23,7 +23,8 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="search_by_any">Search By Any</label>
-                                    <input type="text" class="form-control" id="search_by_any" placeholder="Search By Any">
+                                   
+                                    <input type="text" class="form-control" id="search_by_any" placeholder="Search By Vendor Name, City, Invoice No.">
                                 </div>
                             </div>
 
