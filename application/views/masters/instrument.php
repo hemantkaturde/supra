@@ -80,6 +80,71 @@
                   <option>Slip Gauge</option>
                   <option>Radius Gauge</option>
                   <option>Micrometer</option>
+                  <option>REJECTED VERNIER</option>
+                  <option>PROFILE GAUGE</option>
+                  <option>DIGITAL MICROMETER</option>
+                  <option>BLADE MICROMETER</option>
+                  <option>TUBE MICROMETER</option>
+                  <option>DEPTH MICROMETER</option>
+                  <option>DIGITAL VERNIER CALIPER</option>
+                  <option>VERNIER CALIPER</option>
+                  <option>DIAL VERNIER CALIPER</option>
+                  <option>DIGITAL INSIDE GROOVE CALIPER</option>
+                  <option>INSIDE GROOVE CALIPER</option>
+                  <option>DIGITAL HEIGHT GAUGE</option>
+                  <option>VERNIER HEIGHT GAUGE</option>
+                  <option>DIGITAL PITCH MICROMETER</option>
+                  <option>BEVEL PROTECTOR</option>
+                  <option>BORE GAUGE</option>
+                  <option>LEVER DIAL</option>
+                  <option>PLUNGER DIAL</option>
+                  <option>OHMS METER</option>
+                  <option>PRESSURE GAUGE</option>
+                  <option>RUBBER HARDNESS TESTER</option>
+                  <option>TORQUE WRENCH</option>
+                  <option>SURFACE PLATE</option>
+                  <option>SURFACE ROUGHNESS COMPARATOR</option>
+                  <option>SURFACE ROUGHNESS TESTER</option>
+                  <option>HARDNESS TESTER</option>
+                  <option>ROUND FILE (SMALL)</option>
+                  <option>ROUND FILE (BIG)</option>
+                  <option>FLAT FILE (SMALL)</option>
+                  <option>FLAT FILE (BIG)</option>
+                  <option>TRIANGLE FILE (SMALL)</option>
+                  <option>TRIANGLE FILE (BIG)</option>
+                  <option>DIAMOND FILE</option>
+                  <option>THREAD TAPP</option>
+                  <option>V BLOCK</option>
+                  <option>TAPP WRENCH</option>
+                  <option>RIMMER</option>
+                  <option>DRILL</option>
+                  <option>SAW BLADES</option>
+                  <option>SCREWDRIVER</option>
+                  <option>VISE</option>
+                  <option>C-CLAMP</option>
+                  <option>MANDRELS</option>
+                  <option>CHUCKS</option>
+                  <option>GRINDING BELT</option>
+                  <option>BUFFING WHEEL</option>
+                  <option>GLOVES</option>
+                  <option>SPANNER</option>
+                  <option>PIPE SPANNER</option>
+                  <option>ALLEN KEY SET</option>
+                  <option>ALLEN BOLT</option>
+                  <option>POLISH PAPER</option>
+                  <option>PLIER</option>
+                  <option>SCRUBBER</option>
+                  <option>YELLOW DEBBURING CUTTER</option>
+                  <option>ENGRAVER TOOL</option>
+                  <option>ENGRAVER MACHINE</option>
+                  <option>ADVANCE MICRO TEST MACHINE</option>
+                  <option>METAL BRUSH</option>
+                  <option>BRUSH</option>
+                  <option>PAINTING ROLLER</option>
+                  <option>MASKS</option>
+                  <option>THINNER / ACETONE</option>
+                  <option>COTTON WASTE</option>
+                  <option>SAFETY GLASSES</option>
                 </select>
               </div>
             </div>
