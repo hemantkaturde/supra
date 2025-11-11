@@ -19139,6 +19139,9 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             foreach ($fetch_result as $key => $value)
             {
                 $data[$counter]['instrument_name'] = $value['instrument_name'];
+                $data[$counter]['grade'] =  $value['grade'];
+                $data[$counter]['unit'] =  $value['unit'];
+                $data[$counter]['class'] =  $value['class'];
                 $data[$counter]['measuring_size'] =  $value['measuring_size'];
                 $data[$counter]['type'] =  $value['type'];
                 $data[$counter]['remark'] =  $value['remark'];

@@ -43,6 +43,9 @@
                                 <thead>
                                     <tr style="background-color:#3c8dbc !important;color:#fff">
                                         <th>Instrument Name</th>
+                                        <th>Grade</th>
+                                        <th>Unit</th>
+                                        <th>Class</th>
                                         <th>Measuring Size</th>
                                         <th>Type</th>
                                         <th>Remark</th>
