@@ -184,7 +184,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="measuring_size">Measuring Size <span class="required">*</span></label>
-                                            <input type="text" class="form-control" id="measuring_size"  value="<?=$data['measuring_size'];?>" name="measuring_size" required>
+                                            <input type="text" class="form-control" id="measuring_size"  value="<?=$data['measuring_size'];?>" name="measuring_size">
                                             <p class="error measuring_size_error"></p>
 
                                         </div>
