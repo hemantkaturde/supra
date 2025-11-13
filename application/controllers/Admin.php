@@ -22822,7 +22822,7 @@ public function addnewSamplingmethod($id){
     if($post_submit){
         $save_sampling_response = array();
         $this->form_validation->set_rules('instrument_name','Instrument Name','trim|required');
-        $this->form_validation->set_rules('measuring_size','Measuring Size','trim|required');
+        $this->form_validation->set_rules('measuring_size','Measuring Size','trim');
         $this->form_validation->set_rules('type','Type','trim');
         $this->form_validation->set_rules('remark','Remark','trim');
 
@@ -22895,7 +22895,7 @@ public function updatesamplingmethodtrans($id){
     if($post_submit){
         $save_sampling_response = array();
         $this->form_validation->set_rules('instrument_name','Instrument Name','trim|required');
-        $this->form_validation->set_rules('measuring_size','Measuring Size','trim|required');
+        $this->form_validation->set_rules('measuring_size','Measuring Size','trim');
         $this->form_validation->set_rules('type','Type','trim|required');
         $this->form_validation->set_rules('remark','Remark','trim');
 
