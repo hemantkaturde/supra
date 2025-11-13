@@ -183,7 +183,7 @@
                                <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="measuring_size">Measuring Size <span class="required">*</span></label>
+                                            <label for="measuring_size">Measuring Size</label>
                                             <input type="text" class="form-control" id="measuring_size"  value="<?=$data['measuring_size'];?>" name="measuring_size">
                                             <p class="error measuring_size_error"></p>
 
@@ -194,7 +194,7 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="sampling_method_name">Type<span class="required">*</span></label>
+                                            <label for="sampling_method_name">Type</label>
                                                 <select class="form-control" name="type" id="type">
                                                     <option st-id="" value="">Select Part Name</option>
                                                         <option value="GO" <?php if($data['type']=='GO'){ echo 'Selected';} ?>>GO</option>

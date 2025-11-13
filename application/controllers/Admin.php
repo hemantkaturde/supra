@@ -22896,7 +22896,7 @@ public function updatesamplingmethodtrans($id){
         $save_sampling_response = array();
         $this->form_validation->set_rules('instrument_name','Instrument Name','trim|required');
         $this->form_validation->set_rules('measuring_size','Measuring Size','trim');
-        $this->form_validation->set_rules('type','Type','trim|required');
+        $this->form_validation->set_rules('type','Type','trim');
         $this->form_validation->set_rules('remark','Remark','trim');
 
         if($this->form_validation->run() == FALSE)
@@ -22910,6 +22910,9 @@ public function updatesamplingmethodtrans($id){
                     'instrument_name'=> trim($this->input->post('instrument_name')),
                     'measuring_size'=>trim($this->input->post('measuring_size')),
                     'type'=>trim($this->input->post('type')),
+                    'grade'=>trim($this->input->post('grade')),
+                    'unit'=>trim($this->input->post('unit')),
+                    'class'=>trim($this->input->post('class')),
                     'remark'=>trim($this->input->post('remark')),
                 );
 
