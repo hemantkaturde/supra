@@ -19073,10 +19073,10 @@ public function fetchPaymentdetailsreport($vendor_supplier_name,$vendor_name,$su
 }
 
 
-public function export_to_excel_payment_details($vendor_name,$supplier_name,$payment_details_no,$status) {
+public function export_to_excel_payment_details($vendor_supplier_name,$vendor_name,$supplier_name,$payment_details_no,$status) {
 
     // load excel library
-    $empInfo = $this->admin_model->downlaodpaymentdetailsreportdata($vendor_name,$supplier_name,$payment_details_no,$status);
+    $empInfo = $this->admin_model->downlaodpaymentdetailsreportdata($vendor_supplier_name,$vendor_name,$supplier_name,$payment_details_no,$status);
     
     // create file name
     $fileName = 'Payment Details -'.date('d-m-Y').'.xlsx';  
