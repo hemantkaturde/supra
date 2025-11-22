@@ -27127,7 +27127,7 @@
 							{
 								swal({
 									title: "Success",
-									text: "TDIR Successfully Added!",
+									text: "Inspection Report Successfully Added!",
 									icon: "success",
 									button: "Ok",
 									},function(){ 
