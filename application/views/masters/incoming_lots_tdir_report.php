@@ -2,11 +2,11 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            <i class="fa fa-users"></i> Add New Tracking of Dimenstional Inspection Report
+            <i class="fa fa-users"></i> Add New Inspection Report
             <small>
                 <ul class="breadcrumb" style="background-color:#ecf0f5 !important">
                     <li class="completed"><a href="javascript:void(0);">Masters</a></li>
-                    <li class="active"><a href="javascript:void(0);">Tracking of Dimenstional Inspection Report</a></li>
+                    <li class="active"><a href="javascript:void(0);">Inspection Report</a></li>
                 </ul>
             </small>
         </h1>
@@ -31,10 +31,10 @@
                 <div class="box">
                     <div class="box box-primary">
                         <div class="box-header">
-                            <h3 class="box-title">Add Tracking of Dimenstional Inspection Report</h3>
+                            <h3 class="box-title">Add Inspection Report</h3>
 
                             <h4>
-                                <p><b>Report Number :</b> <?=$getTdirdata[0]['report_number'] ?></p>
+                                <p><b>Inspection Report Number :</b> <?=$getTdirdata[0]['report_number'] ?></p>
                                 <p><b>Vendor Name :</b> <?=$getTdirdata[0]['vendor_name_label'] ?></p>
                                 <p><b>Vendor PO Number :</b> <?=$getTdirdata[0]['po_number'] ?></p>
                                 <p><b>Part Number :</b> <?=$getTdirdata[0]['part_number_label'] ?></p>

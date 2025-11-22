@@ -2,7 +2,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            <i class="fa fa-users"></i> Tracking of Dimenstional Inspection Report
+            <i class="fa fa-users"></i> Inspection Report
             <small>
                 <!-- <ul class="breadcrumb" style="background-color:#ecf0f5 !important">
                     <li class="completed"><a href="javascript:void(0);">Masters</a></li>
@@ -43,7 +43,7 @@
                                     id="view_tdir_report">
                                     <thead>
                                         <tr style="background-color:#3c8dbc !important;color:#fff">
-                                            <th>Report no.</th>
+                                            <th>Inspection Report no.</th>
                                             <th>Vendor name</th>
                                             <th>Vendor po. no.</th>
                                             <th>Part no.</th>

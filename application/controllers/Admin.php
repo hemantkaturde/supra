@@ -16163,10 +16163,10 @@ public function downloadscrapreturn($id){
                 <tr style="border: 1px solid black;">
                     <td width="50%" style="padding: 10px;text-align: left;valign="top"">
                         <p>Part-I </p>
-                        <p>'. str_repeat('&nbsp;', 5).'</p>
-                        <p>'. str_repeat('&nbsp;', 5).'</p>
-                        <p>'. str_repeat('&nbsp;', 5).'</p>
-                        <p>'. str_repeat('&nbsp;', 5).'</p>
+                        <p>Form</p>
+                        <p>'.$getscrapreturnForInvoice['vendor_name'].'</p>
+                        <p>To</p>
+                        <p>'.$getscrapreturnForInvoice['supplier_name'].'</p>
                     </td> 
 
                     <td style="border-left: 1px solid black;padding: 10px;" width="50%" valign="top">

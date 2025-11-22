@@ -2,7 +2,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            <i class="fa fa-users"></i> TDIR Attachment
+            <i class="fa fa-users"></i> Inspection Report Attachment
             <small>
                 <!-- <ul class="breadcrumb" style="background-color:#ecf0f5 !important">
                     <li class="completed"><a href="javascript:void(0);">Masters</a></li>
@@ -21,7 +21,7 @@
                     <li class="active"><a href="javascript:void(0);">TDIR Attachment</a></li>
                 </ul>
                    <h4>
-                                <p><b>Report Number :</b> <?=$getTdirdata[0]['report_number'] ?></p>
+                                <p><b>Inspection Report Number :</b> <?=$getTdirdata[0]['report_number'] ?></p>
                                 <p><b>Vendor Name :</b> <?=$getTdirdata[0]['vendor_name_label'] ?></p>
                                 <p><b>Vendor PO Number :</b> <?=$getTdirdata[0]['po_number'] ?></p>
                                 <p><b>Part Number :</b> <?=$getTdirdata[0]['part_number_label'] ?></p>
@@ -37,7 +37,7 @@
                     <!-- <a class="btn btn-primary" href="<?php echo base_url(); ?>addTDIRattachment">
                         <i class="fa fa-plus"></i> Add TDIR Attachment</a> -->
                         <a href="#fileModal" class="btn btn-primary" data-toggle="modal">
-                          <i class="fa fa-plus"></i> Add TDIR Attachment
+                          <i class="fa fa-plus"></i> Add Inspection Report Attachment
                         </a>
                 <?php } ?>
                 </div>
@@ -88,7 +88,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-        <h4 class="modal-title" id="fileModalLabel">Upload TDIR Attachment</h4>
+        <h4 class="modal-title" id="fileModalLabel">Upload Inspection Report Attachment</h4>
       </div>
 
       <div class="modal-body">

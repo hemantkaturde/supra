@@ -386,7 +386,7 @@
 
                       <li class="treeview <?php if($pageUrl=="tdir" || $pageUrl=="tdir_attachment" || $pageUrl=="addTDIRattachment"){echo 'active';}?>" >
                         <a href="<?php echo base_url(); ?>tdir">
-                          <i class="fa fa-file-excel-o"></i> <span class="menu_label">TDIR Report</span>
+                          <i class="fa fa-file-excel-o"></i> <span class="menu_label">Inspection Report</span>
                         </a>
                       </li> 
 

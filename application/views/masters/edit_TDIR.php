@@ -2,11 +2,11 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            <i class="fa fa-users"></i> Edit Tracking of Dimenstional Inspection Report
+            <i class="fa fa-users"></i> Edit Inspection Report
             <small>
                 <ul class="breadcrumb" style="background-color:#ecf0f5 !important">
                     <li class="completed"><a href="javascript:void(0);">Masters</a></li>
-                    <li class="active"><a href="javascript:void(0);">Tracking of Dimenstional Inspection Report</a></li>
+                    <li class="active"><a href="javascript:void(0);">Inspection Report</a></li>
                 </ul>
             </small>
         </h1>
@@ -18,7 +18,7 @@
                 <div class="box">
                     <div class="box box-primary">
                         <div class="box-header">
-                            <h3 class="box-title">Edit Tracking of Dimenstional Inspection Report</h3>
+                            <h3 class="box-title">Inspection Report</h3>
                         </div>
                         <?php $this->load->helper("form"); ?>
                         <form role="form" id="addTDIRform" action="#" method="post" role="form">
@@ -32,7 +32,7 @@
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="report_number">Report Number<span class="required">*</span></label>
+                                            <label for="report_number">Inspection Report Number<span class="required">*</span></label>
                                             <input type="text" class="form-control" value="<?php echo $getTdirdata[0]['report_number']; ?>" id="report_number" name="report_number">
                                         </div>
                                     </div> 
