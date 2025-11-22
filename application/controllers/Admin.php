@@ -26304,10 +26304,10 @@ public function export_angadia_excel()
 
     if( $this->input->get('from_date') && $this->input->get('to_date')){
 
-            $filename = "Sai Krupa Express Transport" . $this->input->get('from_date') .' - ' .$this->input->get('to_date'). ".csv";
+            $filename = "Sai Krupa Express Transport " . $this->input->get('from_date') .' - ' .$this->input->get('to_date'). ".csv";
     }else{
 
-            $filename = "Sai Krupa Express Transport" . date('Y-m-d_H-i-s') . ".csv";
+            $filename = "Sai Krupa Express Transport " . date('d-m-Y') . ".csv";
 
     }
 
