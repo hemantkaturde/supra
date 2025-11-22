@@ -1,11 +1,11 @@
 <div class="content-wrapper">
     <section class="content-header">
         <h1>
-            <i class="fa fa-file"></i> Sai Krup Express Transport Report
+            <i class="fa fa-file"></i> Sai Krupa Express Transport Report
             <small>
                 <ul class="breadcrumb" style="background-color:#ecf0f5 !important">
                     <li><a href="javascript:void(0);">Reports</a></li>
-                    <li class="active"><a href="javascript:void(0);">Sai Krup Express Transport Report</a></li>
+                    <li class="active"><a href="javascript:void(0);">Sai Krupa Express Transport Report</a></li>
                 </ul>
             </small>
         </h1>
@@ -16,7 +16,7 @@
             <div class="col-xs-12">
                 <div class="box box-primary">
                     <div class="box-header">
-                        <h3 class="box-title">Sai Krup Express Transport Report</h3>
+                        <h3 class="box-title">Sai Krupa Express Transport Report</h3>
                     </div>
                     <div class="box-body">
                         <div class="row" style="margin-left:4px">
