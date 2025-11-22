@@ -16300,7 +16300,7 @@ public function fetchsupplierporeportcount($params,$supplier_name,$supplier_po,$
     }
 
 
-    public function downlaodpaymentdetailsreportdata($vendor_name,$supplier_name,$payment_details_no,$status){
+    public function downlaodpaymentdetailsreportdata($vendor_supplier_name,$vendor_name,$supplier_name,$payment_details_no,$status){
 
         $this->db->select('*,'.TBL_SUPPLIER.'.supplier_name as supplier,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_pomaster,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_master,'.TBL_PAYMENT_DETAILS.'.payment_details_id as debit_id');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_PAYMENT_DETAILS.'.vendor_id','left');
@@ -16328,6 +16328,9 @@ public function fetchsupplierporeportcount($params,$supplier_name,$supplier_po,$
             $this->db->where(TBL_PAYMENT_DETAILS.'.payment_status', $status); 
         }
     
+        if($vendor_supplier_name!='NA'){
+            $this->db->where(TBL_PAYMENT_DETAILS.'.supplier_vendor_name', strtolower($vendor_supplier_name)); 
+        }
       
         $this->db->where(TBL_PAYMENT_DETAILS.'.status', 1);
         $this->db->order_by(TBL_PAYMENT_DETAILS.'.payment_details_id','DESC');

@@ -21997,7 +21997,7 @@
 <?php if($pageTitle=='Payment Details Report'){ ?>
 	<script type="text/javascript">
 		$(document).ready(function() {
-						    $("#view_payment_details_report").dataTable().fnDestroy();
+			$("#view_payment_details_report").dataTable().fnDestroy();
 
 			var vendor_supplier_name = $('#vendor_supplier_name').val();
       		var vendor_name = $('#vendor_name_id').val();
@@ -22119,6 +22119,7 @@
 		$(document).on('click','#export_to_excel_payment_details',function(e){
 			e.preventDefault();
 			$(".loader_ajax").show();
+			  var vendor_supplier_name = $('#vendor_supplier_name').val();
 		    var vendor_name = $('#vendor_name_id').val();
 			var supplier_name =$('#supplier_name_id').val();
 
@@ -22128,7 +22129,7 @@
 
 
 			$.ajax({
-					url : "<?php echo ADMIN_PATH;?>admin/export_to_excel_payment_details/"+vendor_name+"/"+supplier_name+"/"+payment_details_no+"/"+status,
+					url : "<?php echo ADMIN_PATH;?>admin/export_to_excel_payment_details/"+vendor_supplier_name+"/"+vendor_name+"/"+supplier_name+"/"+payment_details_no+"/"+status,
 					type: "POST",
 					// data : {'hospitals' : hospitals, 'driver' : driver,'ride_start':ride_start,'ride_stop':ride_stop},
 					success: function(data, textStatus, jqXHR)
@@ -22142,7 +22143,7 @@
 						else
 						{
 							$(".report_type_error").html("");
-							window.location.href = "<?php echo ADMIN_PATH;?>admin/export_to_excel_payment_details/"+vendor_name+"/"+supplier_name+"/"+payment_details_no+"/"+status;
+							window.location.href = "<?php echo ADMIN_PATH;?>admin/export_to_excel_payment_details/"+vendor_supplier_name+"/"+vendor_name+"/"+supplier_name+"/"+payment_details_no+"/"+status;
 						}
 					},
 					error: function (jqXHR, textStatus, errorThrown)
