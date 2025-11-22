@@ -251,7 +251,7 @@
                           <li class="line_height <?php if($pageUrl=="supplierporeport"){echo 'active';}?>"><a href="<?php echo base_url(); ?>supplierporeport"><i class="fa fa-cubes"></i> Supplier PO Confirmation Report</a></li>
                           <li class="line_height <?php if($pageUrl=="scrap_invoice" || $pageUrl=="addnewscrapinvoice"  || $pageUrl=="editscrapinvoice"){echo 'active';}?>"><a href="<?php echo base_url(); ?>scrap_invoice"><i class="fa fa-cubes"></i> Scrap Invoice</a></li>
                           <li class="line_height <?php if($pageUrl=="packing_challan" || $pageUrl=="addnewpackingchallan" || $pageUrl== "editpackingchallan"){echo 'active';}?>"><a href="<?php echo base_url(); ?>packing_challan"><i class="fa fa-cubes"></i> Packing Challan</a></li>
-                          <li class="line_height <?php if($pageUrl=="angadia_report"){echo 'active';}?>"><a href="<?php echo base_url(); ?>angadia_report"><i class="fa fa-cubes"></i> Anagadia Report</a></li>
+                          <li class="line_height <?php if($pageUrl=="angadia_report"){echo 'active';}?>"><a href="<?php echo base_url(); ?>angadia_report"><i class="fa fa-cubes"></i> Sai Krupa Express Report</a></li>
                         </ul>
                       </li>
 
