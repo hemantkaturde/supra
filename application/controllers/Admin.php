@@ -19102,7 +19102,7 @@ public function export_to_excel_payment_details($vendor_supplier_name,$vendor_na
         $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $element['supplier_name']);
         $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $element['payment_details_number']);
         $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['bill_no']);
-        $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['bill_date']);
+        $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, date("d-m-Y", strtotime($element['bill_date'])));
         $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['bill_amount']);
         $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['tds']);
         $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $element['debit_note_amount']);
