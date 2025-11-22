@@ -16163,7 +16163,7 @@ public function downloadscrapreturn($id){
                 <tr style="border: 1px solid black;">
                     <td width="50%" style="padding: 10px;text-align: left;valign="top"">
                         <p>Part-I </p>
-                        <p>Form</p>
+                        <p>From</p>
                         <p>'.$getscrapreturnForInvoice['vendor_name'].'</p>
                         <p>To</p>
                         <p>'.$getscrapreturnForInvoice['supplier_name'].'</p>
