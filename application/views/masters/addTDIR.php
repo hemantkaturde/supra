@@ -226,6 +226,15 @@
                                             <p class="error order_qty_error"></p>
                                         </div>
                                     </div> -->
+
+                                      <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="qty_in_pcs_for_export_purposr">Qty in PCS (For Export Purpose)</label>
+                                            <input type="text" class="form-control" id="qty_in_pcs_for_export_purposr" name="qty_in_pcs_for_export_purposr">
+                                            <p style="color:red">(Note: filed not to be entered by QC)</p>
+                                            <p class="error qty_in_pcs_for_export_purposr_error"></p>
+                                        </div>
+                                    </div>
                                 </div>
                                
                                 <div class="row">
@@ -235,8 +244,7 @@
                                             <input type="text" class="form-control" id="remarks" name="remarks">
                                             <p class="error remarks_error"></p>
                                         </div>
-                                    </div>
-                                    
+                                    </div> 
                                 </div>
 
                                 <!-- <div class="row">

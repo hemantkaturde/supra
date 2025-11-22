@@ -25613,6 +25613,7 @@ public function addTDIR(){
         $this->form_validation->set_rules('material_type','Material Type','trim');
         $this->form_validation->set_rules('additional_process','Additional Process','trim');
         $this->form_validation->set_rules('remarks','Remarks','trim');
+        $this->form_validation->set_rules('qty_in_pcs_for_export_purposr','qty_in_pcs_for_export_purposr','trim');
 
 
         if($this->form_validation->run() == FALSE)
@@ -25635,7 +25636,8 @@ public function addTDIR(){
                 'order_qty'            => trim($this->input->post('order_qty')),
                 'material_type'        => trim($this->input->post('material_type')),
                 'additional_process'   => trim($this->input->post('additional_process')),
-                'remarks'              => trim($this->input->post('remarks'))
+                'remarks'              => trim($this->input->post('remarks')),
+                'qty_in_pcs_for_export_purposr' => trim($this->input->post('qty_in_pcs_for_export_purposr')),
             );
 
             if($this->input->post('tdir_id')){
