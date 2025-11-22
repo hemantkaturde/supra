@@ -16161,7 +16161,7 @@ public function fetchsupplierporeportcount($params,$supplier_name,$supplier_po,$
     }
     
 
-    public function getPaymentdetsilsreportcount($params,$vendor_name,$supplier_name,$payment_details_no,$status){
+    public function getPaymentdetsilsreportcount($params,$vendor_supplier_name,$vendor_name,$supplier_name,$payment_details_no,$status){
 
        
         $this->db->select('*,'.TBL_SUPPLIER.'.supplier_name as supplier,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_pomaster,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_master,'.TBL_PAYMENT_DETAILS.'.payment_details_id  as debit_id');
@@ -16182,6 +16182,12 @@ public function fetchsupplierporeportcount($params,$supplier_name,$supplier_po,$
             $this->db->or_where(TBL_SUPPLIER.".supplier_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%')");
         }
+
+
+        if($vendor_supplier_name){
+            $this->db->where(TBL_PAYMENT_DETAILS.'.supplier_vendor_name', $vendor_supplier_name); 
+        }
+
 
         if($vendor_name!='NA'){
             $this->db->where(TBL_PAYMENT_DETAILS.'.vendor_id', $vendor_name); 
@@ -16207,7 +16213,7 @@ public function fetchsupplierporeportcount($params,$supplier_name,$supplier_po,$
         return $rowcount;
     }
 
-    public function getPaymentdetsilsreportdata($params,$vendor_name,$supplier_name,$payment_details_no,$status){
+    public function getPaymentdetsilsreportdata($params,$vendor_supplier_name,$vendor_name,$supplier_name,$payment_details_no,$status){
         $this->db->select('*,'.TBL_SUPPLIER.'.supplier_name as supplier,'.TBL_VENDOR.'.vendor_name as vendorname,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_pomaster,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_master,'.TBL_PAYMENT_DETAILS.'.payment_details_id as debit_id');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_PAYMENT_DETAILS.'.vendor_id','left');
         $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_PAYMENT_DETAILS.'.supplier_id','left');
@@ -16225,6 +16231,11 @@ public function fetchsupplierporeportcount($params,$supplier_name,$supplier_po,$
             $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_SUPPLIER.".supplier_name LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%')");
+        }
+
+
+         if($vendor_supplier_name){
+            $this->db->where(TBL_PAYMENT_DETAILS.'.supplier_vendor_name', $vendor_supplier_name); 
         }
 
         if($vendor_name!='NA'){

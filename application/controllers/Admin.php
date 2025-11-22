@@ -19047,10 +19047,10 @@ public function paymentdetailsreport(){
 }
 
 
-public function fetchPaymentdetailsreport($vendor_name,$supplier_name,$payment_details_no,$status){
+public function fetchPaymentdetailsreport($vendor_supplier_name,$vendor_name,$supplier_name,$payment_details_no,$status){
     $params = $_REQUEST;
-    $totalRecords = $this->admin_model->getPaymentdetsilsreportcount($params,$vendor_name,$supplier_name,$payment_details_no,$status); 
-    $queryRecords = $this->admin_model->getPaymentdetsilsreportdata($params,$vendor_name,$supplier_name,$payment_details_no,$status); 
+    $totalRecords = $this->admin_model->getPaymentdetsilsreportcount($params,$vendor_supplier_name,$vendor_name,$supplier_name,$payment_details_no,$status); 
+    $queryRecords = $this->admin_model->getPaymentdetsilsreportdata($params,$vendor_supplier_name,$vendor_name,$supplier_name,$payment_details_no,$status); 
 
     $data = array();
     foreach ($queryRecords as $key => $value)
