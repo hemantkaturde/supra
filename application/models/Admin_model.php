@@ -16184,8 +16184,8 @@ public function fetchsupplierporeportcount($params,$supplier_name,$supplier_po,$
         }
 
 
-        if($vendor_supplier_name){
-            $this->db->where(TBL_PAYMENT_DETAILS.'.supplier_vendor_name', $vendor_supplier_name); 
+        if($vendor_supplier_name!='NA'){
+            $this->db->where(TBL_PAYMENT_DETAILS.'.supplier_vendor_name', strtolower($vendor_supplier_name)); 
         }
 
 
@@ -16234,8 +16234,8 @@ public function fetchsupplierporeportcount($params,$supplier_name,$supplier_po,$
         }
 
 
-         if($vendor_supplier_name){
-            $this->db->where(TBL_PAYMENT_DETAILS.'.supplier_vendor_name', $vendor_supplier_name); 
+         if($vendor_supplier_name!='NA'){
+            $this->db->where(TBL_PAYMENT_DETAILS.'.supplier_vendor_name', strtolower($vendor_supplier_name)); 
         }
 
         if($vendor_name!='NA'){
