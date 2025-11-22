@@ -14876,11 +14876,7 @@ public function downloadpackinginstraction($packing_details_item_id){
                     <td style="text-align:left;padding: 10px;width:10%"></td>
                     <td style="text-align:left;padding: 10px;width:60%">'.$getPackingInstructionData[0]['box_qty'].'</td>
                 </tr>
-                <tr>
-                    <td style="text-align:left;margin-top: 10px;width:30%;font-size:17px"><b>Final Check Signature</b></td>
-                    <td style="text-align:left;padding: 10px;width:10%"></td>
-                    <td style="text-align:left;padding: 10px;width:60%"></td>
-                </tr>
+                
             </table>   <br/>
 
             <table style="width:80%;font-size:18px;font-family:cambria;" border="0.5">
@@ -14917,11 +14913,7 @@ public function downloadpackinginstraction($packing_details_item_id){
                     <td style="text-align:left;padding: 10px;width:10%"></td>
                     <td style="text-align:left;padding: 10px;width:60%">'.$getPackingInstructionData[0]['box_qty'].'</td>
                 </tr>
-                <tr>
-                    <td style="text-align:left;margin-top: 10px;width:30%;font-size:17px"><b>Final Check Signature</b></td>
-                    <td style="text-align:left;padding: 10px;width:10%"></td>
-                    <td style="text-align:left;padding: 10px;width:60%"></td>
-                </tr>
+               
             </table>
             <br/>
 
@@ -14959,11 +14951,7 @@ public function downloadpackinginstraction($packing_details_item_id){
                     <td style="text-align:left;padding: 10px;width:10%"></td>
                     <td style="text-align:left;padding: 10px;width:60%">'.$getPackingInstructionData[0]['box_qty'].'</td>
                 </tr>
-                <tr>
-                    <td style="text-align:left;margin-top: 10px;width:30%;font-size:17px"><b>Final Check Signature</b></td>
-                    <td style="text-align:left;padding: 10px;width:10%"></td>
-                    <td style="text-align:left;padding: 10px;width:60%"></td>
-                </tr>
+        
             </table>
             ';
 
