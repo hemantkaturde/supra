@@ -26307,7 +26307,7 @@ public function export_angadia_excel()
             $filename = "Sai Krupa Express Transport " . $this->input->get('from_date') .' - ' .$this->input->get('to_date'). ".csv";
     }else{
 
-            $filename = "Sai Krupa Express Transport " . date('d-m-Y') . ".csv";
+            $filename = "Sai Krupa Express Transport.csv";
 
     }
 
