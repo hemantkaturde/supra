@@ -2233,6 +2233,8 @@ class Admin extends BaseController
                     'email' =>    trim($this->input->post('email')),
                     'GSTIN' =>    trim($this->input->post('GSTIN')),
                     'country' => trim($this->input->post('country')),
+                    'buyer_short_name' => trim($this->input->post('buyer_short_name')),
+                    'buyer_country_short_name' => trim($this->input->post('buyer_country_short_name')),
                 );
 
                 $checkIfexitsbuyer = $this->admin_model->checkIfexitsbuyer(trim($this->input->post('buyer_name')));
@@ -2314,7 +2316,9 @@ class Admin extends BaseController
                     'contact_person' => trim($this->input->post('contact_person')),
                     'email' =>    trim($this->input->post('email')),
                     'GSTIN' =>    trim($this->input->post('GSTIN')),
-                    'country'=> trim($this->input->post('country'))
+                    'country'=> trim($this->input->post('country')),
+                    'buyer_short_name' => trim($this->input->post('buyer_short_name')),
+                    'buyer_country_short_name' => trim($this->input->post('buyer_country_short_name')),
                 );
 
               

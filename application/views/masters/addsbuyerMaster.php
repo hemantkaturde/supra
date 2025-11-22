@@ -102,6 +102,22 @@
                                             <p class="error country_error"></p>
                                         </div>
                                     </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="buyer_short_name">Buyer Short Name</label>
+                                            <input type="text" class="form-control" id="buyer_short_name" name="buyer_short_name">
+                                            <p class="error buyer_short_name_error"></p>
+                                        </div>
+                                    </div>
+
+                                     <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="buyer_country_short_name">Buyer Country Short Name</label>
+                                            <input type="text" class="form-control" id="buyer_country_short_name" name="buyer_country_short_name">
+                                            <p class="error buyer_country_short_name_error"></p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <!-- /.box-body -->
