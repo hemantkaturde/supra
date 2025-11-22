@@ -25,7 +25,7 @@
                 <div class="form-group">
                 <?php if($this->session->userdata('roleText')=='Superadmin' || $this->session->userdata('roleText')=='Purchase' || $this->session->userdata('roleText')=='QC'){ ?>
                     <a class="btn btn-primary" href="<?php echo base_url(); ?>addTDIR">
-                        <i class="fa fa-plus"></i> Add TDIR</a>
+                        <i class="fa fa-plus"></i> Add Inspection Report</a>
                 <?php } ?>
                 </div>
             </div>
