@@ -18,7 +18,7 @@
             <div class="col-xs-6 text-left">
                 <ul class="breadcrumb" style="background-color:#ecf0f5 !important">
                     <li class="completed"><a href="javascript:void(0);">Masters</a></li>
-                    <li class="active"><a href="javascript:void(0);">Tracking of Dimenstional Inspection Report</a></li>
+                    <li class="active"><a href="javascript:void(0);">Inspection Report</a></li>
                 </ul>
             </div>
             <div class="col-xs-6 text-right">

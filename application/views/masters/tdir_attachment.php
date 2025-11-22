@@ -18,7 +18,7 @@
             <div class="col-xs-6 text-left">
                 <ul class="breadcrumb" style="background-color:#ecf0f5 !important">
                     <li class="completed"><a href="javascript:void(0);">Masters</a></li>
-                    <li class="active"><a href="javascript:void(0);">TDIR Attachment</a></li>
+                    <li class="active"><a href="javascript:void(0);">Attachment</a></li>
                 </ul>
                    <h4>
                                 <p><b>Inspection Report Number :</b> <?=$getTdirdata[0]['report_number'] ?></p>
