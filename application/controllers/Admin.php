@@ -26327,7 +26327,13 @@ public function export_angadia_excel()
     force_download($filename, $csv);
 }
 
+public function reworkrecordform(){
+    $process = 'Rework Record Form';
+    $processFunction = 'Admin/reworkrecordform';
+    $this->global['pageTitle'] = 'Rework Record Form';  
+    $this->loadViews("masters/reworkrecordform", $this->global, NULL, NULL); 
 
+}
 
 
 

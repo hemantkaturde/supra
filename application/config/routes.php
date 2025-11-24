@@ -300,7 +300,6 @@ $route['deleteStockformitem'] = "admin/deleteStockformitem";
 $route['deletestockform'] = "admin/deletestockform";
 $route['editstcokformdetails/(:any)'] = "admin/editstcokformdetails/$1";
 $route['viewstcokformdetails/(:any)'] = "admin/viewstcokformdetails/$1";
-
 $route['getincominglotnumberbyvendor'] = "admin/getincominglotnumberbyvendor";
 $route['getinvoiceqtybyLotnumber'] = "admin/getinvoiceqtybyLotnumber";
 $route['fetchexportrecordsitem'] = "admin/fetchexportrecordsitem";
@@ -478,7 +477,6 @@ $route['paymentdetailsreport'] = "admin/paymentdetailsreport";
 $route['downlaodchadebitnote/(:any)'] = "admin/downlaodchadebitnote/$1";
 $route['uspincoming'] = "admin/uspincoming";
 $route['addnewuspincoming'] = "admin/addnewuspincoming";
-
 $route['customercompliant'] = "admin/customercompliant";
 $route['addnewcustomercomplaint'] = "admin/addnewcustomercomplaint";
 $route['getBuyerPonumberbyBuyeridforcoustomercomplint'] = "admin/getBuyerPonumberbyBuyeridforcoustomercomplint";
@@ -501,8 +499,6 @@ $route['deletesuppliervendorcompalintreport'] = "admin/deletesuppliervendorcompa
 $route['editsuppliervendorcompalint/(:any)'] = "admin/editsuppliervendorcompalint/$1";
 $route['printstock/(:any)'] = "admin/printstock/$1";
 $route['downlaodsuppliervendorcomplaint/(:any)'] = "admin/downlaodsuppliervendorcomplaint/$1";
-
-
 $route['viewpackinginstraction/(:any)'] = "admin/viewpackinginstraction/$1";
 $route['viewchadebitnote/(:any)'] = "admin/viewchadebitnote/$1";
 $route['viewsalestrackingreport/(:any)'] = "admin/viewsalestrackingreport/$1";
@@ -522,19 +518,14 @@ $route['viewpoddetails/(:any)'] = "admin/viewpoddetails/$1";
 $route['viewqulityrecordform/(:any)'] = "admin/viewqulityrecordform/$1";
 $route['viewcustomercomplaint/(:any)'] = "admin/viewcustomercomplaint/$1";
 $route['viewsuppliervendorcompalint/(:any)'] = "admin/viewsuppliervendorcompalint/$1";
-
-
 $route['getChallanPObychaid'] = "admin/getChallanPObychaid";
 $route['getuspdate'] = "admin/getuspdate";
 $route['deleteuspincoming'] = "admin/deleteuspincoming";
 $route['edituspincomig/(:any)'] = "admin/edituspincomig/$1";
 $route['viewuspincomig/(:any)'] = "admin/viewuspincomig/$1";
-
 $route['deleteuspincomingitem'] = "admin/deleteuspincomingitem";
 $route['addscraprejection'] = "admin/addscraprejection";
 $route['deleteuspincomingitem'] = "admin/deleteuspincomingitem";
-
-
 $route['samplingmaster'] = "admin/samplingmaster";
 $route['fetchSamplingmaster'] = "admin/fetchSamplingmaster";
 $route['addnewSamplingmaster'] = "admin/addnewSamplingmaster";
@@ -545,9 +536,6 @@ $route['fetchsamplingmethodtrans/(:any)'] = "admin/fetchsamplingmethodtrans/$1";
 $route['addnewSamplingmethod/(:any)'] = "admin/addnewSamplingmethod/$1";
 $route['deletesamplingmethod'] = "admin/deletesamplingmethod";
 $route['updatesamplingmethodtrans/(:any)'] = "admin/updatesamplingmethodtrans/$1";
-
-
-
 $route['qcchallan'] = "admin/qcchallan";
 $route['fetchqcchallan'] = "admin/fetchqcchallan";
 $route['addqcchallan'] = "admin/addqcchallan";
@@ -558,9 +546,6 @@ $route['editqcchallan/(:any)'] = "admin/editqcchallan/$1";
 $route['viewqcchallan/(:any)'] = "admin/viewqcchallan/$1";
 $route['getqcchallanitemdata'] = "admin/getqcchallanitemdata";
 $route['downlaodqcchallan/(:any)'] = "admin/downlaodqcchallan/$1";
-
-
-
 $route['teammaster'] = "admin/teammaster";
 $route['fetchteammaster'] = "admin/fetchteammaster";
 $route['addteam'] = "admin/addteam";
@@ -571,27 +556,17 @@ $route['fetchteammemberlist/(:any)'] = "admin/fetchteammemberlist/$1";
 $route['addteammemberaction/(:any)'] = "admin/addteammemberaction/$1";
 $route['deleteteammember'] = "admin/deleteteammember";
 $route['updateteammember/(:any)'] = "admin/updateteammember/$1";
-
 $route['savescraprejectiondetails'] = "admin/savescraprejectiondetails";
-
 $route['cbam'] = "admin/cbam";
-
-
-
 $route['hourly_inspection_report'] = "admin/hourly_inspection_report";
 $route['emailpaymentdetails'] = "admin/emailpaymentdetails";
-
-
 $route['fetchthrlyreportlist'] = "admin/fetchthrlyreportlist";
 $route['updatehourlyworkingreportdata/(:any)'] = "admin/updatehourlyworkingreportdata/$1";
-
 $route['downloadgetepasssup/(:any)'] = "admin/downloadgetepasssup/$1";
 $route['downloadgetepassvendor/(:any)'] = "admin/downloadgetepassvendor/$1";
-
 $route['updatehrlyinspectionreport'] = "admin/updatehrlyinspectionreport";
 $route['saveAssignitem'] = "admin/saveAssignitem";
 $route['update_data_hrly_sampling_record'] = "admin/update_data_hrly_sampling_record";
-
 $route['scraptype'] = "admin/scraptype";
 $route['fetchscraptypelist'] = "admin/fetchscraptypelist";
 $route['addnewscraptype'] = "admin/addnewscraptype";
@@ -599,20 +574,16 @@ $route['editscraptype/(:any)'] = "admin/editscraptype/$1";
 $route['scrap_invoice'] = "admin/scrap_invoice";
 $route['fetchscrapinvoice'] = "admin/fetchscrapinvoice";
 $route['addnewscrapinvoice'] = "admin/addnewscrapinvoice";
-
 $route['savescrapinvoiceitem'] = "admin/savescrapinvoiceitem";
 $route['gethsncodefromscraptype'] = "admin/gethsncodefromscraptype";
 $route['deletescrapinvoicedata'] = "admin/deletescrapinvoicedata";
-
 $route['deleteScrapinvoiceitem'] = "admin/deleteScrapinvoiceitem";
 $route['editscrapinvoice/(:any)'] = "admin/editscrapinvoice/$1";
 $route['getscrapinvoiceitemdata'] = "admin/getscrapinvoiceitemdata";
 $route['downloadscrapinvoic/(:any)'] = "admin/downloadscrapinvoic/$1";
 $route['downloaddirectstock/(:any)'] = "admin/downloaddirectstock/$1";
-
 $route['checkifbuyerpoisexitsinsupplierpo'] = "admin/checkifbuyerpoisexitsinsupplierpo";
 $route['checkifbuyerpoisexitsinvendorpo'] = "admin/checkifbuyerpoisexitsinvendorpo";
-
 $route['checkifsupplierisexitsinvendorpo'] = "admin/checkifsupplierisexitsinvendorpo";
 $route['checkifsupplieridisinsupplierpoconfirm'] = "admin/checkifsupplieridisinsupplierpoconfirm";
 $route['fetchUser'] = "admin/fetchUser";
@@ -649,13 +620,11 @@ $route['getvendorpartdetialstdir_report'] = "admin/getvendorpartdetialstdir_repo
 $route['getbuyerdetialsbyvendorponumberfortdir'] = "admin/getbuyerdetialsbyvendorponumberfortdir";
 $route['tdir_attachment/(:any)'] = "admin/tdir_attachment/$1";
 $route['deletetdirattachment'] = "admin/deletetdirattachment";
-
-
 $route['instrument'] = "admin/instrument";
 $route['fetchtintrument'] = "admin/fetchtintrument";
-
-
 $route['angadia_report'] = "admin/angadia_report";
+$route['reworkrecordform'] = "admin/reworkrecordform";
+
 
 
 
