@@ -2,7 +2,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            <i class="fa fa-users"></i> Rework Rekection Form
+            <i class="fa fa-users"></i> Rework Record Form
             <small>Add,Delete</small>
         </h1>
     </section>
@@ -11,13 +11,13 @@
             <div class="col-xs-6 text-left">
                 <ul class="breadcrumb" style="background-color:#ecf0f5 !important">
                     <li class="completed"><a href="javascript:void(0);">Stock </a></li>
-                    <li class="active"><a href="javascript:void(0);">Rework Rekection Form</a></li>
+                    <li class="active"><a href="javascript:void(0);">Rework Record Form</a></li>
                 </ul>
             </div>
             <div class="col-xs-6 text-right">
                 <div class="form-group">
-                    <a class="btn btn-primary" href="<?php echo base_url(); ?>addteam">
-                        <i class="fa fa-plus"></i> Add Rework Rekection Form </a>
+                    <a class="btn btn-primary" href="<?php echo base_url(); ?>addreworkrecord">
+                        <i class="fa fa-plus"></i> Add Rework Record Form </a>
                 </div>
             </div>
         </div>
@@ -26,7 +26,7 @@
                 <div class="box">
                     <div class="box-body">   
                         <div class="panel-body">
-                            <table width="100%" class="table table-striped table-bordered table-hover" id="team_master">
+                            <table width="100%" class="table table-striped table-bordered table-hover" id="rework_record_list">
                                 <thead>
                                     <tr style="background-color:#3c8dbc !important;color:#fff">
                                         <th>Rework Record No</th>

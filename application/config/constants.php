@@ -196,8 +196,9 @@ define('TBL_PACKING_CHALLAN','tbl_packing_challan');
 define('TBL_PACKING_CHALLAN_ITEM','tbl_packing_challan_item');
 define('TBL_TDIR','tbl_tdir');
 define('TBL_TDIR_INCOMING_LOT_DATA','tbl_tdir_incoming_lot_data');
-
 define('TBL_TDIR_ATTACHMENT','tbl_tdir_attachment');
+define('TBL_REWORK_RECORD','tbl_rework_record');
+
 
 
 define('SMTP_HOST','mail.supraexports.in');

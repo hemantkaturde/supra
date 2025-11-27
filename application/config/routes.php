@@ -624,6 +624,8 @@ $route['instrument'] = "admin/instrument";
 $route['fetchtintrument'] = "admin/fetchtintrument";
 $route['angadia_report'] = "admin/angadia_report";
 $route['reworkrecordform'] = "admin/reworkrecordform";
+$route['addreworkrecord'] = "admin/addreworkrecord";
+
 
 
 

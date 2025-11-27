@@ -22527,6 +22527,123 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
+    public function fetchreworkrecordlistcount($params)
+    {
+            $this->db->select('COUNT(*) as total');
+            $this->db->join(TBL_INCOMING_DETAILS, TBL_INCOMING_DETAILS.'.id = '.TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id');
+            $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_INCOMING_DETAILS.'.vendor_name');
+
+            // 🔍 Search Filter
+            if (!empty($params['search_by_any'])) {
+                $search = $this->db->escape_like_str($params['search_by_any']);
+                $this->db->group_start();
+                $this->db->like(TBL_INCOMING_DETAILS_ITEM.'.lr_no', $search);
+                $this->db->or_like(TBL_INCOMING_DETAILS_ITEM.'.invoice_no', $search);
+                $this->db->or_like(TBL_VENDOR.'.vendor_name', $search);
+                $this->db->or_like(TBL_VENDOR.'.city', $search);
+                $this->db->or_like(TBL_INCOMING_DETAILS_ITEM.'.boxex_goni_bundle', $search);
+                $this->db->or_like(TBL_INCOMING_DETAILS_ITEM.'.fg_material_gross_weight', $search);
+                $this->db->group_end();
+            }
+
+            // 📅 Date Range Filter
+            if (!empty($params['from_date']) && !empty($params['to_date'])) {
+                $this->db->where("DATE(".TBL_INCOMING_DETAILS_ITEM.".received_date) >=", $params['from_date']);
+                $this->db->where("DATE(".TBL_INCOMING_DETAILS_ITEM.".received_date) <=", $params['to_date']);
+            }
+
+            $query = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
+            $result = $query->row();
+            return $result ? (int)$result->total : 0;
+    }
+
+    public function fetchreworkrecordlistdata($params)
+    {
+            $this->db->select('*, '.TBL_VENDOR.'.vendor_name as ven_name, '.TBL_VENDOR.'.rate as vendor_rate,'.TBL_VENDOR.'.city as vendor_city');
+            $this->db->join(TBL_INCOMING_DETAILS, TBL_INCOMING_DETAILS.'.id = '.TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id');
+            $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_INCOMING_DETAILS.'.vendor_name');
+
+            // 🔍 Text search filter
+            if (!empty($params['search_by_any'])) {
+                $search = $this->db->escape_like_str($params['search_by_any']);
+                $this->db->group_start();
+                $this->db->like(TBL_REWORK_RECORD.'.lr_no', $search);
+                $this->db->or_like(TBL_REWORK_RECORD.'.invoice_no', $search);
+                $this->db->or_like(TBL_REWORK_RECORD.'.vendor_name', $search);
+                $this->db->or_like(TBL_REWORK_RECORD.'.city', $search);
+                $this->db->or_like(TBL_REWORK_RECORD.'.boxex_goni_bundle', $search);
+                $this->db->or_like(TBL_REWORK_RECORD.'.fg_material_gross_weight', $search);
+                $this->db->group_end();
+            }
+
+            // 📅 Date range filter
+            if (!empty($params['from_date']) && !empty($params['to_date'])) {
+                $this->db->where("DATE(".TBL_REWORK_RECORD.".received_date) >=", $params['from_date']);
+                $this->db->where("DATE(".TBL_REWORK_RECORD.".received_date) <=", $params['to_date']);
+            }
+
+            $this->db->order_by(TBL_REWORK_RECORD.'.id', 'DESC');
+            $this->db->limit($params['length'], $params['start']);
+            $query = $this->db->get(TBL_REWORK_RECORD);
+            $fetch_result = $query->result_array();
+
+            $data = array();
+            foreach ($fetch_result as $value) {
+                $vendor_rate = is_numeric($value['vendor_rate']) ? (float)$value['vendor_rate'] : 0;
+                $gross_weight = is_numeric($value['fg_material_gross_weight']) ? (float)$value['fg_material_gross_weight'] : 0;
+                $total_amount = number_format($vendor_rate * $gross_weight, 2, '.', '');
+
+                $data[] = array(
+                    'lr_no' => $value['lr_no'],
+                    'received_date' => $value['received_date'],
+                    'vendor_name' => $value['ven_name'],
+                    'vendor_city' => $value['vendor_city'],
+                    'invoice_no' => $value['invoice_no'],
+                    'boxex_goni_bundle' => $value['boxex_goni_bundle'],
+                    'fg_material_gross_weight' => $value['fg_material_gross_weight'],
+                    'rate' => $value['vendor_rate'],
+                    'total_amount' => $total_amount
+                );
+            }
+
+            return $data;
+    }
+
+
+
+    public function vendor_part_number_get_data_reword_record($part_no,$vendor_po_number){
+
+        $this->db->select('*');
+        $this->db->where(TBL_FINISHED_GOODS.'.fin_id', $part_no);
+         $this->db->where(TBL_SUPPLIER_VENDOR_COMPALINT.'.vendor_po_id', $vendor_po_number);
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_SUPPLIER_VENDOR_COMPALINT.'.vendor_part_number_id');
+        $query_result = $this->db->get(TBL_SUPPLIER_VENDOR_COMPALINT)->result_array();
+        return $query_result;
+    }
+
+
+    public function saveReworkRecord($id,$data){
+         if($id != '') {
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_REWORK_RECORD, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_REWORK_RECORD, $data)) {
+                // return TRUE;
+                return $this->db->insert_id();
+            } else {
+                return FALSE;
+            }
+        }
+
+    }
+
+
+
+
 }
 
 ?>

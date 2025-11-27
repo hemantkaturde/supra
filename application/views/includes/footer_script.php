@@ -27710,10 +27710,226 @@ $('#export_excel').on('click', function() {
 
     var exportUrl = "<?php echo base_url(); ?>admin/export_angadia_excel?search_by_any=" + encodeURIComponent(search_by_any) + "&from_date=" + from_date + "&to_date=" + to_date;
 
-    window.location.href = exportUrl; // 👈 triggers file download
+    window.location.href = exportUrl;
 });
 
 
 
-    </script> 
+</script> 
+<?php } ?>
+
+
+<?php if($pageTitle=='Sales Tracking Excel Report' || $pageTitle=='Add Rework Record Form'){ ?>
+            <script type="text/javascript">
+				$(document).ready(function() {
+					var dt = $('#rework_record_list').DataTable({
+						"columnDefs": [ 
+							{ className: "details-control", "targets": [ 0 ] },
+							{ "width": "15%", "targets": 0 },
+							{ "width": "10%", "targets": 1 },
+							{ "width": "10%", "targets": 2 },
+							{ "width": "10%", "targets": 3 },
+							{ "width": "10%", "targets": 4 },
+							{ "width": "10%", "targets": 5 },
+							{ "width": "10%", "targets": 6 },
+							{ "width": "10%", "targets": 7 },
+							{ "width": "10%", "targets": 8 },
+							{ "width": "8%", "targets": 9 },
+							
+						],
+						responsive: true,
+						"oLanguage": {
+							"sEmptyTable": "<i>No Rework Record Found.</i>",
+						}, 
+						"bSort" : false,
+						"bFilter":true,
+						"bLengthChange": true,
+						"iDisplayLength": 10,   
+						"bProcessing": true,
+						"serverSide": true,
+						"ajax":{
+							url :"<?php echo base_url();?>fetchreworkrecordlist",
+							type: "post",
+						},
+					});
+				});
+				$(document).on('change','#vendor_name',function(e){  
+				       e.preventDefault();
+						var vendor_name = $('#vendor_name').val();
+						$.ajax({
+							url : "<?php echo ADMIN_PATH;?>getVendorPoconfirmationvendorlist",
+							type: "POST",
+							data : {'vendor_name' : vendor_name},
+							success: function(data, textStatus, jqXHR)
+							{
+								$(".loader_ajax").hide();
+								if(data == "failure")
+								{
+									$('#vendor_po_number').html('<option value="">Select Vendor PO Number</option>');
+								}
+								else
+								{
+									// $('#supplier_po_number').html('<option value="">Select supplier PO Number</option>');
+									$('#vendor_po_number').html(data);
+									$('#vendor_part_number').html('<option value="">Select Part Number</option>');
+								}
+							},
+							error: function (jqXHR, textStatus, errorThrown)
+							{
+								$('#vendor_po_number').html();
+								//$(".loader_ajax").hide();
+								$('#vendor_part_number').html('<option value="">Select Part Number</option>');
+							}
+						});
+						return false;
+				});
+
+				$(document).on('change','#vendor_po_number',function(e){  
+				       e.preventDefault();
+					   var vendor_po_number = $('#vendor_po_number').val();
+
+						$.ajax({
+							url : "<?php echo ADMIN_PATH;?>admin/getVendoritemonlyforTDIR",
+							type: "POST",
+							data : {'vendor_po_number' : vendor_po_number},
+							success: function(data, textStatus, jqXHR)
+								{
+											$(".loader_ajax").hide();
+											if(data == "failure")
+											{
+												$('#vendor_part_number').html('<option value="">Select Part Number</option>');
+												
+											}
+											else
+											{
+												$('#vendor_part_number').html(data);
+
+												// var part_number = $('#vendor_part_number').val();
+
+												// $.ajax({
+												// 	url : "<?php echo ADMIN_PATH;?>getvendorpartdetialstdir_report",
+												// 	type: "POST",
+												// 	data : {'part_number' : part_number},
+												// 		success: function(data, textStatus, jqXHR)
+												// 		{
+												// 			var get_vendoritem_data = jQuery.parseJSON( data );
+
+												// 			$(".loader_ajax").hide();
+												// 				if(data == "failure")
+												// 					{
+												// 						$('#part_name').val('');
+												// 						$('#order_qty').val('');
+												// 						$('#vendor_order_qty').val('');
+																		
+												// 					}
+												// 				else
+												// 					{
+												// 						$('#part_name').val(get_vendoritem_data.name);
+												// 						$('#order_qty').val(get_vendoritem_data.order_oty);
+												// 						$('#vendor_order_qty').val(get_vendoritem_data.vendor_qty);
+												// 					}
+												// 		},
+												// 		error: function (jqXHR, textStatus, errorThrown)
+												// 		{
+												// 				$('#part_name').val('');
+												// 				$('#order_qty').val('');
+												// 				$('#vendor_order_qty').val('');
+												// 		}
+												// 	});
+												// return false;
+
+
+											}
+								},
+								error: function (jqXHR, textStatus, errorThrown)
+									{
+										$('#vendor_part_number').html();
+									}
+						});
+						return false;
+
+				});
+
+				$(document).on('change','.vendor_part_number_get_data_reword_record',function(e){  
+			
+					e.preventDefault();
+					var part_number = $('#vendor_part_number').val();
+					var vendor_po_number = $('#vendor_po_number').val();
+					$.ajax({
+						url : "<?php echo ADMIN_PATH;?>admin/vendor_part_number_get_data_reword_record",
+						type: "POST",
+						data : {'part_number' : part_number,'vendor_po_number' : vendor_po_number},
+							success: function(data, textStatus, jqXHR)
+							{
+								var get_vendoritem_data = jQuery.parseJSON( data );
+
+								$(".loader_ajax").hide();
+									if(data == "failure")
+										{
+											$('#part_description').val('');		
+											$('#inspection_report_no').val('');		
+												
+										}
+									else
+										{
+											$('#part_description').val(get_vendoritem_data.name);
+											$('#inspection_report_no').val(get_vendoritem_data.report_number);
+										}
+							},
+							error: function (jqXHR, textStatus, errorThrown)
+							{
+									$('#part_description').val('');
+									$('#inspection_report_no').val('');		
+							}
+						});
+					return false;
+				});
+
+				$(document).on('click','#savereworkrecordform',function(e){
+					e.preventDefault();
+					$(".loader_ajax").show();
+					var formData = new FormData($("#addnewpackingchallanform")[0]);
+							$.ajax({
+								url : "<?php echo base_url();?>addreworkrecord",
+								type: "POST",
+								data : formData,
+								cache: false,
+								contentType: false,
+								processData: false,
+								success: function(data, textStatus, jqXHR)
+								{
+									var fetchResponse = $.parseJSON(data);
+									if(fetchResponse.status == "failure")
+									{
+										$.each(fetchResponse.error, function (i, v)
+										{
+											$('.'+i+'_error').html(v);
+										});
+										$(".loader_ajax").hide();
+									}
+									else if(fetchResponse.status == 'success')
+									{
+										swal({
+											title: "Success",
+											text: "Rework Record Added Successfully!",
+											icon: "success",
+											button: "Ok",
+											},function(){ 
+												window.location.href = "<?php echo base_url().'reworkrecordform'?>";
+										});		
+									}
+									
+								},
+								error: function (jqXHR, textStatus, errorThrown)
+								{
+									$(".loader_ajax").hide();
+								}
+						});
+					return false;
+			    });
+
+				
+
+
+			</script> 
 <?php } ?>

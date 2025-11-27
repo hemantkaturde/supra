@@ -26336,5 +26336,134 @@ public function reworkrecordform(){
 }
 
 
+public function fetchreworkrecordlist(){
+
+    $params = $_REQUEST;
+    $totalRecords = $this->admin_model->fetchreworkrecordlistcount($params); 
+    $queryRecords = $this->admin_model->fetchreworkrecordlistdata($params); 
+
+    $data = array();
+    foreach ($queryRecords as $key => $value)
+    {
+        $i = 0;
+        foreach($value as $v)
+        {
+            $data[$key][$i] = $v;
+            $i++;
+        }
+    }
+    $json_data = array(
+        "draw"            => intval( $params['draw'] ),   
+        "recordsTotal"    => intval( $totalRecords ),  
+        "recordsFiltered" => intval($totalRecords),
+        "data"            => $data   // total data array
+        );
+    echo json_encode($json_data);
+
+}
+
+
+
+public function addreworkrecord(){
+
+    $post_submit = $this->input->post();
+    if($post_submit){
+
+            $rework_response = array();
+            $this->form_validation->set_rules('rework_record_no', 'Rework Record No', 'trim|required');
+            $this->form_validation->set_rules('date', 'Date', 'trim|required');
+            $this->form_validation->set_rules('vendor_name', 'Vendor Name', 'trim|required');
+            $this->form_validation->set_rules('team', 'Team', 'trim|required');
+            $this->form_validation->set_rules('vendor_po', 'Vendor PO', 'trim');
+            $this->form_validation->set_rules('status', 'Status', 'trim|required');
+            $this->form_validation->set_rules('vendor_part_number', 'FG Part Number', 'trim|required');
+            $this->form_validation->set_rules('remark', 'Remark', 'trim');
+            $this->form_validation->set_rules('part_description', 'Part Description', 'trim');
+            $this->form_validation->set_rules('inspection_report_no', 'Inspection Report No', 'trim');
+
+            if ($this->form_validation->run() == FALSE)
+            {
+                $rework_response['status'] = 'failure';
+                $rework_response['error'] = array(
+                    'rework_record_no'       => strip_tags(form_error('rework_record_no')),
+                    'date'                   => strip_tags(form_error('date')),
+                    'vendor_name'            => strip_tags(form_error('vendor_name')),
+                    'team'                   => strip_tags(form_error('team')),
+                    'vendor_po'              => strip_tags(form_error('vendor_po')),
+                    'status'                 => strip_tags(form_error('status')),
+                    'part_no'                => strip_tags(form_error('vendor_part_number')),
+                    'remark'                 => strip_tags(form_error('remark')),
+                    'part_description'       => strip_tags(form_error('part_description')),
+                    'inspection_report_no'   => strip_tags(form_error('inspection_report_no'))
+                );
+
+            } 
+            else 
+            {
+                $data = array(
+                    'rework_record_no'       => trim($this->input->post('rework_record_no')),
+                    'date'                   => trim($this->input->post('date')),
+                    'vendor_name'            => trim($this->input->post('vendor_name')),
+                    'team'                   => trim($this->input->post('team')),
+                    'vendor_po'              => trim($this->input->post('vendor_po')),
+                    'status'                 => trim($this->input->post('status')),
+                    'part_no'                => trim($this->input->post('vendor_part_number')),
+                    'remark'                 => trim($this->input->post('remark')),
+                    'part_description'       => trim($this->input->post('part_description')),
+                    'inspection_report_no'   => trim($this->input->post('inspection_report_no'))
+                );
+
+                $saveRework = $this->Admin_model->saveReworkRecord('', $data);
+                if ($saveRework)
+                {
+                    $rework_response['status'] = 'success';
+                    $rework_response['error'] = array(
+                        'rework_record_no'       => strip_tags(form_error('rework_record_no')),
+                        'date'                   => strip_tags(form_error('date')),
+                        'vendor_name'            => strip_tags(form_error('vendor_name')),
+                        'team'                   => strip_tags(form_error('team')),
+                        'vendor_po'              => strip_tags(form_error('vendor_po')),
+                        'status'                 => strip_tags(form_error('status')),
+                        'part_no'            => strip_tags(form_error('part_number')),
+                        'remark'                 => strip_tags(form_error('remark')),
+                        'part_description'       => strip_tags(form_error('part_description')),
+                        'inspection_report_no'   => strip_tags(form_error('inspection_report_no')),
+                    );
+                }
+            }
+
+            echo json_encode($rework_response);
+    }else{
+
+        $process = 'Add Rework Record Form';
+        $processFunction = 'Admin/addreworkrecord';
+        $this->global['pageTitle'] = 'Add Rework Record Form';  
+        $data['team'] = $this->admin_model->getAllteammaster();
+        $data['vendorList']= $this->admin_model->fetchALLvendorList();
+        $this->loadViews("masters/addreworkrecord", $this->global, $data, NULL); 
+
+    }
+
+}
+
+
+public function vendor_part_number_get_data_reword_record(){
+
+    $part_no=$this->input->post('part_number');
+    $vendor_po_number=$this->input->post('vendor_po_number');
+    if($part_no) {
+        $part_no_data = $this->admin_model->vendor_part_number_get_data_reword_record($part_no,$vendor_po_number);
+        if(count($part_no_data) >= 1) {
+            echo json_encode($part_no_data[0]);
+        } else {
+            echo 'failure';
+        }
+    } else {
+        echo 'failure';
+    }
+}
+
+
+
 
 }
