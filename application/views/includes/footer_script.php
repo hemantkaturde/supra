@@ -27979,37 +27979,5 @@ $('#export_excel').on('click', function() {
 	            });
 
 
-				$(document).ready(function() {
-
-						var vendor_name = $('#vendor_name').val();
-						$.ajax({
-							url : "<?php echo ADMIN_PATH;?>getVendorPoconfirmationvendorlist",
-							type: "POST",
-							data : {'vendor_name' : vendor_name},
-							success: function(data, textStatus, jqXHR)
-							{
-								$(".loader_ajax").hide();
-								if(data == "failure")
-								{
-									$('#vendor_po_number').html('<option value="">Select Vendor PO Number</option>');
-								}
-								else
-								{
-									// $('#supplier_po_number').html('<option value="">Select supplier PO Number</option>');
-									$('#vendor_po_number').html(data);
-									$('#vendor_part_number').html('<option value="">Select Part Number</option>');
-								}
-							},
-							error: function (jqXHR, textStatus, errorThrown)
-							{
-								$('#vendor_po_number').html();
-								//$(".loader_ajax").hide();
-								$('#vendor_part_number').html('<option value="">Select Part Number</option>');
-							}
-						});
-						return false;
-
-			    });
-
 			</script> 
 <?php } ?>

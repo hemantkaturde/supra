@@ -88,6 +88,7 @@
                                             </div>
                                              <select class="form-control" name="vendor_po_number" id="vendor_po_number">
                                                  <option value="">Select Vendor PO</option>
+                                                 <option value="<?=$getreworkrecorddatabyid[0]['vendor_po']; ?>" selected><?php echo $getreworkrecorddatabyid[0]['po_number']; ?></option>
                                             </select>
                                              <p class="error vendor_po_number_error"></p>
                                         </div>
@@ -107,6 +108,8 @@
                                     </div>
                                 </div>
 
+
+
                                 <!-- ROW 4 -->
                                 <div class="row">
                                     <div class="col-md-6">
@@ -115,7 +118,8 @@
                                                 <label>FG Part Number <span class="required">*</span></label>
                                             </div>
                                              <select class="form-control vendor_part_number_get_data_reword_record" name="vendor_part_number" id="vendor_part_number">
-                                                <option value="Open">Select Part Number</option>
+                                                <option value="">Select Part Number</option>
+                                                 <option value="<?=$getreworkrecorddatabyid[0]['part_no']; ?>" selected><?php echo $getreworkrecorddatabyid[0]['part_number']; ?></option>
                                             </select>
                                             <p class="error part_no_error"></p>
                                         </div>
@@ -135,7 +139,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Part Description</label>
-                                            <input type="text" class="form-control" name="part_description" id="part_description" readonly>
+                                            <input type="text" class="form-control" name="part_description" id="part_description" value="<?php echo $getreworkrecorddatabyid[0]['part_description'];?>" readonly>
                                              <p class="error part_description_error"></p>
                                         </div>
                                     </div>
@@ -146,7 +150,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Compalint No</label>
-                                            <input type="text" class="form-control" name="inspection_report_no" id="inspection_report_no">
+                                            <input type="text" class="form-control" name="inspection_report_no" id="inspection_report_no" value="<?php echo $getreworkrecorddatabyid[0]['inspection_report_no'];?>">
                                             <p class="error inspection_report_no_error"></p>
 
                                         </div>
