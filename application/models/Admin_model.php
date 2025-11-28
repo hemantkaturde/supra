@@ -22607,6 +22607,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                     'remarks' => $value['remarksas_rework'],
                     'action' => $actions
                 );
+
+                $counter++;
             }
 
             return $data;
