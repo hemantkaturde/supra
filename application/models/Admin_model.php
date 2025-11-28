@@ -22580,6 +22580,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             $fetch_result = $query->result_array();
 
             $data = array();
+             $counter = 0;
             foreach ($fetch_result as $value) {
 
                         
