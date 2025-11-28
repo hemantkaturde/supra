@@ -22533,7 +22533,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_REWORK_RECORD.'.vendor_name');
             $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_REWORK_RECORD.'.vendor_po');
             $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_REWORK_RECORD.'.part_no');
-            $this->db->join(TBL_TEAM_MASTER, TBL_TEAM_MASTER.'.id = '.TBL_REWORK_RECORD.'.team');
+            $this->db->join(TBL_TEAM_MASTER, TBL_TEAM_MASTER.'.id = '.TBL_REWORK_RECORD.'.team','left');
 
             // 🔍 Text search filter
             if (!empty($params['search_by_any'])) {
@@ -22559,7 +22559,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_REWORK_RECORD.'.vendor_name');
             $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_REWORK_RECORD.'.vendor_po');
             $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_REWORK_RECORD.'.part_no');
-            $this->db->join(TBL_TEAM_MASTER, TBL_TEAM_MASTER.'.id = '.TBL_REWORK_RECORD.'.team');
+            $this->db->join(TBL_TEAM_MASTER, TBL_TEAM_MASTER.'.id = '.TBL_REWORK_RECORD.'.team','left');
 
             // 🔍 Text search filter
             if (!empty($params['search_by_any'])) {
@@ -22585,7 +22585,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
                 $actions ="";
                 /** 🔽 Action Icons */
-                $actions .= "<a href='".ADMIN_PATH."edit_tdir/".$value['rework_id']."' style='cursor:pointer;' target='_blank'>
+                $actions .= "<a href='".ADMIN_PATH."edit_rework_record/".$value['rework_id']."' style='cursor:pointer;' target='_blank'>
                                 <i style='font-size:x-large;cursor:pointer;' class='fa fa-pencil-square-o'></i>
                             </a> &nbsp;";
 
@@ -22615,6 +22615,19 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             return $data;
     }
 
+
+    public function getreworkrecorddatabyid($id){
+
+            $this->db->select('*,'.TBL_VENDOR.'.vendor_name as actual_vendor_name,'.TBL_REWORK_RECORD.'.status as rework_record_status,'.TBL_REWORK_RECORD.'.remarks as remarksas_rework,'.TBL_REWORK_RECORD.'.id as rework_id');
+            $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_REWORK_RECORD.'.vendor_name');
+            $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_REWORK_RECORD.'.vendor_po');
+            $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_REWORK_RECORD.'.part_no');
+            $this->db->join(TBL_TEAM_MASTER, TBL_TEAM_MASTER.'.id = '.TBL_REWORK_RECORD.'.team','left');
+            $this->db->where(TBL_REWORK_RECORD.'.id', $id);
+            $query = $this->db->get(TBL_REWORK_RECORD);
+            $fetch_result = $query->result_array();
+            return  $fetch_result;
+    }
 
 
     public function vendor_part_number_get_data_reword_record($part_no,$vendor_po_number){

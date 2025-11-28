@@ -26400,6 +26400,17 @@ public function addreworkrecord(){
             } 
             else 
             {
+
+                    $rework_id_post = trim($this->input->post('rework_id'));
+
+                    if($rework_id_post){
+                        $rework_id = trim($this->input->post('rework_id'));
+                    }else{
+                        $rework_id = "";
+                    }
+
+
+
                 $data = array(
                     'rework_record_no'       => trim($this->input->post('rework_record_no')),
                     'date'                   => trim($this->input->post('date')),
@@ -26413,7 +26424,7 @@ public function addreworkrecord(){
                     'inspection_report_no'   => trim($this->input->post('inspection_report_no'))
                 );
 
-                $saveRework = $this->admin_model->saveReworkRecord('', $data);
+                $saveRework = $this->admin_model->saveReworkRecord($rework_id, $data);
                 if($saveRework)
                 {
                     $rework_response['status'] = 'success';
@@ -26482,6 +26493,17 @@ public function deletereworkrecordreport(){
                 echo(json_encode(array('status'=>'failed'))); 
             }
 
+}
+
+
+public function edit_rework_record($id){
+        $process = 'Edit Rework Record Form';
+        $processFunction = 'Admin/editreworkrecord';
+        $this->global['pageTitle'] = 'Edit Rework Record Form';  
+        $data['team'] = $this->admin_model->getAllteammaster();
+        $data['vendorList']= $this->admin_model->fetchALLvendorList();
+        $data['getreworkrecorddatabyid']= $this->admin_model->getreworkrecorddatabyid($id);
+        $this->loadViews("masters/editreworkrecord", $this->global, $data, NULL); 
 }
 
 

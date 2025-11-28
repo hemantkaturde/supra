@@ -2,7 +2,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            <i class="fa fa-users"></i> Add New Rework Record
+            <i class="fa fa-users"></i> Edit Rework Record
             <small>
                 <ul class="breadcrumb" style="background-color:#ecf0f5 !important">
                     <li class="completed"><a href="javascript:void(0);">Masters</a></li>
@@ -12,24 +12,26 @@
         </h1>
     </section>
 
+
     <section class="content">
         <div class="row">
             <div class="col-xs-8">
                 <div class="box">
                     <div class="box box-primary">
                         <div class="box-header">
-                            <h3 class="box-title">Add New Rework Record Details</h3>
+                            <h3 class="box-title">Edit Rework Record Details</h3>
                         </div>
                         <?php $this->load->helper("form"); ?>
                        <form role="form" id="addnewpackingchallanform" action="<?php echo base_url() ?>addreworkrecord" method="post">
                             <div class="box-body">
+                                <input type="hidden" class="form-control" name="rework_id"  value="<?=$getreworkrecorddatabyid[0]['rework_id']?>" required>
 
                                 <!-- ROW 1 -->
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Rework Record No <span class="required">*</span></label>
-                                            <input type="text" class="form-control" name="rework_record_no" value="<?php echo $auto_no; ?>" readonly>
+                                            <input type="text" class="form-control" name="rework_record_no" value="<?=$getreworkrecorddatabyid[0]['rework_record_no']?>" readonly>
                                             <p class="error rework_record_no_error"></p>
                                         </div>
                                     </div>
@@ -37,7 +39,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Date <span class="required">*</span></label>
-                                            <input type="date" class="form-control" name="date" required>
+                                            <input type="date" class="form-control" name="date"  value="<?=$getreworkrecorddatabyid[0]['date']?>" required>
                                             <p class="error date_error"></p>
                                         </div>
                                     </div>
@@ -53,7 +55,7 @@
                                              <select class="form-control" name="vendor_name" id="vendor_name">
                                                 <option st-id="" value="">Select Vendor Name</option>
                                                 <?php foreach ($vendorList as $key => $value) {?>
-                                                <option value="<?php echo $value['ven_id']; ?>">
+                                                <option value="<?php echo $value['ven_id']; ?>" <?php if($value['ven_id']==$getreworkrecorddatabyid[0]['vendor_name']){ echo 'selected';} ?>>
                                                     <?php echo $value['vendor_name']; ?></option>
                                                 <?php } ?>
                                             </select>
@@ -69,7 +71,7 @@
                                             <select class="form-control" name="team" id="team">
                                                 <option value="">Select Team</option>
                                                 <?php foreach ($team as $key => $teammaster) { ?>
-                                                    <option value="<?php echo $teammaster['id']; ?>"><?php echo $teammaster['team_name']; ?></option>
+                                                    <option value="<?php echo $teammaster['id']; ?>" <?php if($teammaster['id']==$getreworkrecorddatabyid[0]['team']){ echo 'selected';} ?>><?php echo $teammaster['team_name']; ?></option>
                                                 <?php } ?>
                                             </select>
                                              <p class="error team_error"></p>
@@ -97,8 +99,8 @@
                                               <label>Status <span class="required">*</span></label>
                                             </div>
                                             <select class="form-control" name="status">
-                                                <option value="Open">Open</option>
-                                                <option value="Closed">Closed</option>
+                                                <option value="Open" <?php if("Open"==$getreworkrecorddatabyid[0]['rework_record_status']){ echo 'selected';} ?>>Open</option>
+                                                <option value="Closed" <?php if("Closed"==$getreworkrecorddatabyid[0]['rework_record_status']){ echo 'selected';} ?>>Closed</option>
                                             </select>
                                              <p class="error status_error"></p>
                                         </div>
@@ -122,7 +124,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Remark</label>
-                                            <textarea class="form-control" name="remark"></textarea>
+                                            <textarea class="form-control" name="remark"><?php echo $getreworkrecorddatabyid[0]['remarksas_rework']; ?></textarea>
                                             <p class="error remark_error"></p>
                                         </div>
                                     </div>
