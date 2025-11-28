@@ -27719,7 +27719,7 @@ $('#export_excel').on('click', function() {
 <?php } ?>
 
 
-<?php if($pageTitle=='Sales Tracking Excel Report' || $pageTitle=='Add Rework Record Form'){ ?>
+<?php if($pageTitle=='Rework Record Form' || $pageTitle=='Add Rework Record Form'){ ?>
             <script type="text/javascript">
 				$(document).ready(function() {
 					var dt = $('#rework_record_list').DataTable({

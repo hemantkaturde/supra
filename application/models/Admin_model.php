@@ -22529,57 +22529,49 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     public function fetchreworkrecordlistcount($params)
     {
-            $this->db->select('COUNT(*) as total');
-            $this->db->join(TBL_INCOMING_DETAILS, TBL_INCOMING_DETAILS.'.id = '.TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id');
-            $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_INCOMING_DETAILS.'.vendor_name');
+            $this->db->select('*');
+            $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_REWORK_RECORD.'.vendor_name');
+            $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_REWORK_RECORD.'.vendor_po');
+            $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_REWORK_RECORD.'.part_no');
+            $this->db->join(TBL_TEAM_MASTER, TBL_TEAM_MASTER.'.id = '.TBL_REWORK_RECORD.'.team');
 
-            // 🔍 Search Filter
+            // 🔍 Text search filter
             if (!empty($params['search_by_any'])) {
                 $search = $this->db->escape_like_str($params['search_by_any']);
                 $this->db->group_start();
-                $this->db->like(TBL_INCOMING_DETAILS_ITEM.'.lr_no', $search);
-                $this->db->or_like(TBL_INCOMING_DETAILS_ITEM.'.invoice_no', $search);
+                $this->db->like(TBL_REWORK_RECORD.'.rework_record_no', $search);
+                $this->db->or_like(TBL_REWORK_RECORD.'.date', $search);
                 $this->db->or_like(TBL_VENDOR.'.vendor_name', $search);
-                $this->db->or_like(TBL_VENDOR.'.city', $search);
-                $this->db->or_like(TBL_INCOMING_DETAILS_ITEM.'.boxex_goni_bundle', $search);
-                $this->db->or_like(TBL_INCOMING_DETAILS_ITEM.'.fg_material_gross_weight', $search);
+                $this->db->or_like(TBL_VENDOR_PO_MASTER.'.po_number', $search);
+                $this->db->or_like(TBL_REWORK_RECORD.'.boxex_goni_bundle', $search);
+                $this->db->or_like(TBL_REWORK_RECORD.'.fg_material_gross_weight', $search);
                 $this->db->group_end();
             }
 
-            // 📅 Date Range Filter
-            if (!empty($params['from_date']) && !empty($params['to_date'])) {
-                $this->db->where("DATE(".TBL_INCOMING_DETAILS_ITEM.".received_date) >=", $params['from_date']);
-                $this->db->where("DATE(".TBL_INCOMING_DETAILS_ITEM.".received_date) <=", $params['to_date']);
-            }
-
-            $query = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
+            $query = $this->db->get(TBL_REWORK_RECORD);
             $result = $query->row();
             return $result ? (int)$result->total : 0;
     }
 
     public function fetchreworkrecordlistdata($params)
     {
-            $this->db->select('*, '.TBL_VENDOR.'.vendor_name as ven_name, '.TBL_VENDOR.'.rate as vendor_rate,'.TBL_VENDOR.'.city as vendor_city');
-            $this->db->join(TBL_INCOMING_DETAILS, TBL_INCOMING_DETAILS.'.id = '.TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id');
-            $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_INCOMING_DETAILS.'.vendor_name');
+            $this->db->select('*,'.TBL_VENDOR.'.vendor_name as actual_vendor_name,'.TBL_REWORK_RECORD.'.status as rework_record_status,'.TBL_REWORK_RECORD.'.remarks as remarksas_rework');
+            $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_REWORK_RECORD.'.vendor_name');
+            $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_REWORK_RECORD.'.vendor_po');
+            $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_REWORK_RECORD.'.part_no');
+            $this->db->join(TBL_TEAM_MASTER, TBL_TEAM_MASTER.'.id = '.TBL_REWORK_RECORD.'.team');
 
             // 🔍 Text search filter
             if (!empty($params['search_by_any'])) {
                 $search = $this->db->escape_like_str($params['search_by_any']);
                 $this->db->group_start();
-                $this->db->like(TBL_REWORK_RECORD.'.lr_no', $search);
-                $this->db->or_like(TBL_REWORK_RECORD.'.invoice_no', $search);
-                $this->db->or_like(TBL_REWORK_RECORD.'.vendor_name', $search);
-                $this->db->or_like(TBL_REWORK_RECORD.'.city', $search);
+                $this->db->like(TBL_REWORK_RECORD.'.rework_record_no', $search);
+                $this->db->or_like(TBL_REWORK_RECORD.'.date', $search);
+                $this->db->or_like(TBL_VENDOR.'.vendor_name', $search);
+                $this->db->or_like(TBL_VENDOR_PO_MASTER.'.po_number', $search);
                 $this->db->or_like(TBL_REWORK_RECORD.'.boxex_goni_bundle', $search);
                 $this->db->or_like(TBL_REWORK_RECORD.'.fg_material_gross_weight', $search);
                 $this->db->group_end();
-            }
-
-            // 📅 Date range filter
-            if (!empty($params['from_date']) && !empty($params['to_date'])) {
-                $this->db->where("DATE(".TBL_REWORK_RECORD.".received_date) >=", $params['from_date']);
-                $this->db->where("DATE(".TBL_REWORK_RECORD.".received_date) <=", $params['to_date']);
             }
 
             $this->db->order_by(TBL_REWORK_RECORD.'.id', 'DESC');
@@ -22589,19 +22581,16 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
             $data = array();
             foreach ($fetch_result as $value) {
-                $vendor_rate = is_numeric($value['vendor_rate']) ? (float)$value['vendor_rate'] : 0;
-                $gross_weight = is_numeric($value['fg_material_gross_weight']) ? (float)$value['fg_material_gross_weight'] : 0;
-                $total_amount = number_format($vendor_rate * $gross_weight, 2, '.', '');
-
                 $data[] = array(
-                    'lr_no' => $value['lr_no'],
-                    'received_date' => $value['received_date'],
-                    'vendor_name' => $value['ven_name'],
-                    'vendor_city' => $value['vendor_city'],
-                    'invoice_no' => $value['invoice_no'],
-                    'boxex_goni_bundle' => $value['boxex_goni_bundle'],
-                    'fg_material_gross_weight' => $value['fg_material_gross_weight'],
-                    'rate' => $value['vendor_rate'],
+                    'rework_record_no' => $value['rework_record_no'],
+                    'date' => $value['date'],
+                    'vendor_name' => $value['actual_vendor_name'],
+                    'po_number' => $value['po_number'],
+                    'part_number' => $value['part_number'],
+                    'name' => $value['name'],
+                    'team_name' => $value['team_name'],
+                    'rework_record_status' => $value['rework_record_status'],
+                    'remarks' => $value['remarksas_rework'],
                     'total_amount' => $total_amount
                 );
             }
@@ -22640,6 +22629,40 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         }
 
     }
+
+
+  public function generateReworkRecordNo()
+    {
+        $month = date('m');
+        $year  = date('Y');
+
+        if($month >= 4){
+            $fyStart = $year;
+            $fyEnd   = $year + 1;
+        } else {
+            $fyStart = $year - 1;
+            $fyEnd   = $year;
+        }
+
+        $fyShort = substr($fyStart, -2) . substr($fyEnd, -2);
+
+        $this->db->like('rework_record_no', 'SQRR' . $fyShort);
+        $this->db->order_by('id', 'DESC');
+        $query = $this->db->get('tbl_rework_record');
+
+        if($query->num_rows() > 0){
+            $last = $query->row()->rework_record_no;
+            $lastCount = intval(substr($last, -3));
+            $newCount = $lastCount + 1;
+        } else {
+            $newCount = 1;
+        }
+
+        $running = str_pad($newCount, 3, '0', STR_PAD_LEFT);
+
+        return "SQRR" . $fyShort . $running;
+    }
+
 
 
 

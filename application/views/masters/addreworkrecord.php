@@ -21,7 +21,7 @@
                             <h3 class="box-title">Add New Rework Record Details</h3>
                         </div>
                         <?php $this->load->helper("form"); ?>
-                       <form role="form" id="addreworkrecord" action="<?php echo base_url() ?>addreworkrecord" method="post">
+                       <form role="form" id="addnewpackingchallanform" action="<?php echo base_url() ?>addreworkrecord" method="post">
                             <div class="box-body">
 
                                 <!-- ROW 1 -->

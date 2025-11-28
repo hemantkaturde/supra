@@ -26389,7 +26389,7 @@ public function addreworkrecord(){
                     'date'                   => strip_tags(form_error('date')),
                     'vendor_name'            => strip_tags(form_error('vendor_name')),
                     'team'                   => strip_tags(form_error('team')),
-                    'vendor_po'              => strip_tags(form_error('vendor_po')),
+                    'vendor_po'              => strip_tags(form_error('vendor_po_number')),
                     'status'                 => strip_tags(form_error('status')),
                     'part_no'                => strip_tags(form_error('vendor_part_number')),
                     'remark'                 => strip_tags(form_error('remark')),
@@ -26405,16 +26405,16 @@ public function addreworkrecord(){
                     'date'                   => trim($this->input->post('date')),
                     'vendor_name'            => trim($this->input->post('vendor_name')),
                     'team'                   => trim($this->input->post('team')),
-                    'vendor_po'              => trim($this->input->post('vendor_po')),
+                    'vendor_po'              => trim($this->input->post('vendor_po_number')),
                     'status'                 => trim($this->input->post('status')),
                     'part_no'                => trim($this->input->post('vendor_part_number')),
-                    'remark'                 => trim($this->input->post('remark')),
+                    'remarks'                 => trim($this->input->post('remark')),
                     'part_description'       => trim($this->input->post('part_description')),
                     'inspection_report_no'   => trim($this->input->post('inspection_report_no'))
                 );
 
-                $saveRework = $this->Admin_model->saveReworkRecord('', $data);
-                if ($saveRework)
+                $saveRework = $this->admin_model->saveReworkRecord('', $data);
+                if($saveRework)
                 {
                     $rework_response['status'] = 'success';
                     $rework_response['error'] = array(
@@ -26422,7 +26422,7 @@ public function addreworkrecord(){
                         'date'                   => strip_tags(form_error('date')),
                         'vendor_name'            => strip_tags(form_error('vendor_name')),
                         'team'                   => strip_tags(form_error('team')),
-                        'vendor_po'              => strip_tags(form_error('vendor_po')),
+                        'vendor_po'              => strip_tags(form_error('vendor_po_number')),
                         'status'                 => strip_tags(form_error('status')),
                         'part_no'            => strip_tags(form_error('part_number')),
                         'remark'                 => strip_tags(form_error('remark')),
@@ -26440,6 +26440,8 @@ public function addreworkrecord(){
         $this->global['pageTitle'] = 'Add Rework Record Form';  
         $data['team'] = $this->admin_model->getAllteammaster();
         $data['vendorList']= $this->admin_model->fetchALLvendorList();
+        $data['auto_no'] = $this->admin_model->generateReworkRecordNo();
+
         $this->loadViews("masters/addreworkrecord", $this->global, $data, NULL); 
 
     }
