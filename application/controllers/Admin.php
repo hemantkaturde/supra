@@ -26373,7 +26373,7 @@ public function addreworkrecord(){
             $this->form_validation->set_rules('rework_record_no', 'Rework Record No', 'trim|required');
             $this->form_validation->set_rules('date', 'Date', 'trim|required');
             $this->form_validation->set_rules('vendor_name', 'Vendor Name', 'trim|required');
-            $this->form_validation->set_rules('team', 'Team', 'trim|required');
+            $this->form_validation->set_rules('team', 'Team', 'trim');
             $this->form_validation->set_rules('vendor_po', 'Vendor PO', 'trim');
             $this->form_validation->set_rules('status', 'Status', 'trim|required');
             $this->form_validation->set_rules('vendor_part_number', 'FG Part Number', 'trim|required');

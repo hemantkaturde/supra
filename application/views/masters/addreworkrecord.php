@@ -64,7 +64,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div>
-                                               <label>Team <span class="required">*</span></label>
+                                               <label>Team</label>
                                             </div>
                                             <select class="form-control" name="team" id="team">
                                                 <option value="">Select Team</option>
@@ -143,7 +143,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Inspection Report No</label>
+                                            <label>Compalint No</label>
                                             <input type="text" class="form-control" name="inspection_report_no" id="inspection_report_no">
                                             <p class="error inspection_report_no_error"></p>
 
