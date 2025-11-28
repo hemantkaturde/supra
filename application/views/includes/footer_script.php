@@ -27725,7 +27725,7 @@ $('#export_excel').on('click', function() {
 					var dt = $('#rework_record_list').DataTable({
 						"columnDefs": [ 
 							{ className: "details-control", "targets": [ 0 ] },
-							{ "width": "15%", "targets": 0 },
+							{ "width": "10%", "targets": 0 },
 							{ "width": "10%", "targets": 1 },
 							{ "width": "10%", "targets": 2 },
 							{ "width": "10%", "targets": 3 },
@@ -27734,7 +27734,7 @@ $('#export_excel').on('click', function() {
 							{ "width": "10%", "targets": 6 },
 							{ "width": "10%", "targets": 7 },
 							{ "width": "10%", "targets": 8 },
-							{ "width": "8%", "targets": 9 },
+							{ "width": "10%", "targets": 9 },
 							
 						],
 						responsive: true,
@@ -27927,6 +27927,55 @@ $('#export_excel').on('click', function() {
 						});
 					return false;
 			    });
+
+					$(document).on('click','.deletereworkrecordreport',function(e){
+					var elemF = $(this);
+					e.preventDefault();
+
+					swal({
+						title: "Are you sure?",
+						text: "Delete Rework Record",
+						type: "warning",
+						showCancelButton: true,
+						closeOnClickOutside: false,
+						confirmButtonClass: "btn-sm btn-danger",
+						confirmButtonText: "Yes, delete it!",
+						cancelButtonText: "No, cancel plz!",
+						closeOnConfirm: false,
+						closeOnCancel: false
+					}, function(isConfirm) {
+						if (isConfirm) {
+									$.ajax({
+										url : "<?php echo base_url();?>deletereworkrecordreport",
+										type: "POST",
+										data : 'id='+elemF.attr('data-id'),
+										success: function(data, textStatus, jqXHR)
+										{
+											const obj = JSON.parse(data);
+										
+											if(obj.status=='success'){
+												swal({
+													title: "Deleted!",
+													text: "Rework Record Succesfully Deleted",
+													icon: "success",
+													button: "Ok",
+													},function(){ 
+														window.location.href = "<?php echo base_url()?>reworkrecordform";
+													});	
+											}
+
+										},
+										error: function (jqXHR, textStatus, errorThrown)
+										{
+											$(".loader_ajax").hide();
+										}
+									})
+								}
+								else {
+						swal("Cancelled", "Rework Record deletion cancelled ", "error");
+						}
+					});
+	            });
 
 				
 

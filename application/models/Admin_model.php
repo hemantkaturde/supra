@@ -22555,7 +22555,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     public function fetchreworkrecordlistdata($params)
     {
-            $this->db->select('*,'.TBL_VENDOR.'.vendor_name as actual_vendor_name,'.TBL_REWORK_RECORD.'.status as rework_record_status,'.TBL_REWORK_RECORD.'.remarks as remarksas_rework');
+            $this->db->select('*,'.TBL_VENDOR.'.vendor_name as actual_vendor_name,'.TBL_REWORK_RECORD.'.status as rework_record_status,'.TBL_REWORK_RECORD.'.remarks as remarksas_rework,'.TBL_REWORK_RECORD.'.id as rework_id');
             $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_REWORK_RECORD.'.vendor_name');
             $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_REWORK_RECORD.'.vendor_po');
             $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_REWORK_RECORD.'.part_no');
@@ -22581,6 +22581,20 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
             $data = array();
             foreach ($fetch_result as $value) {
+
+                        
+                /** 🔽 Action Icons */
+                $actions .= "<a href='".ADMIN_PATH."edit_tdir/".$value['rework_id']."' style='cursor:pointer;' target='_blank'>
+                                <i style='font-size:x-large;cursor:pointer;' class='fa fa-pencil-square-o'></i>
+                            </a> &nbsp;";
+
+                $actions .= "<a href='".ADMIN_PATH."tdir_attachment/".$value['rework_id']."' style='cursor:pointer;' target='_blank'>
+                                <i style='font-size:x-large;cursor:pointer;' class='fa fa-plus-square-o'></i>
+                            </a> &nbsp;";
+
+                $actions .= "<i style='font-size:x-large;cursor:pointer;' data-id='".$value['rework_id']."' class='fa fa-trash-o deletereworkrecordreport'></i>";
+
+
                 $data[] = array(
                     'rework_record_no' => $value['rework_record_no'],
                     'date' => $value['date'],
@@ -22591,7 +22605,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                     'team_name' => $value['team_name'],
                     'rework_record_status' => $value['rework_record_status'],
                     'remarks' => $value['remarksas_rework'],
-                    'total_amount' => $total_amount
+                    'action' => $actions
                 );
             }
 
@@ -22664,6 +22678,22 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
+
+     public function deletereworkrecordreport($id){
+
+        $this->db->where('id', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_REWORK_RECORD)){
+               return TRUE;
+            //   $this->db->where('packing_challan_id', $id);
+            //   //$this->db->delete(TBL_SUPPLIER);
+            //   if($this->db->delete(TBL_PACKING_CHALLAN_ITEM)){
+            //         return TRUE;
+            //   }
+        }else{
+           return FALSE;
+        }
+    }
 
 
 
