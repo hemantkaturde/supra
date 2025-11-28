@@ -25761,6 +25761,73 @@ public function fetchtdirreport(){
 }
 
 
+public function printinspectionreportlabel($id)
+{
+      // mPDF settings
+$mpdf = new \Mpdf\Mpdf([
+    'mode' => 'utf-8',
+    'format' => 'A4',
+    'margin_left' => 10,
+    'margin_right' => 10,
+    'margin_top' => 10,
+    'margin_bottom' => 10
+]);
+
+$totalLabels = 16;
+
+$html = '
+<table style="width:100%; border-collapse:separate; border-spacing:20px 18px;">
+';
+
+for ($i = 1; $i <= $totalLabels; $i++) {
+
+    if ($i % 2 == 1) {
+        $html .= "<tr>";
+    }
+
+    $html .= '
+       <td style="width:50%; vertical-align:top;">
+
+    <!-- TOP BOX -->
+    <div style="border:1px solid #000; padding:10px;">
+
+        <div align="center" style="font-weight:bold; font-size:14px; margin-bottom:8px;">
+            BUSH FAST CONNECTION MALE
+        </div>
+
+        <div align="center" style="font-size:12px; margin-bottom:5px;">
+            PART NO-11203820
+        </div>
+
+        <div align="center" style="font-size:12px; margin-bottom:5px;">
+            QTY-231
+        </div>
+
+    </div>
+
+    <!-- BOTTOM BOX -->
+    <div style="border:1px solid #000; border-top:none; padding:8px;">
+        <div align="center" style="font-size:12px;">
+            REPORT NO-25-1025
+        </div>
+    </div>
+
+</td>
+    ';
+
+    if ($i % 2 == 0) {
+        $html .= "</tr>";
+    }
+}
+
+$html .= '</table>';
+
+$mpdf->WriteHTML($html);
+$mpdf->Output("labels_final_inline.pdf", "D");
+}
+
+
+
 public function incoming_lots($tdir_id){
 
     $process = 'Incoming Lots Data';

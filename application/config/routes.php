@@ -628,7 +628,7 @@ $route['addreworkrecord'] = "admin/addreworkrecord";
 $route['fetchreworkrecordlist'] = "admin/fetchreworkrecordlist";
 $route['deletereworkrecordreport'] = "admin/deletereworkrecordreport";
 $route['edit_rework_record/(:any)'] = "admin/edit_rework_record/$1";
-
+$route['printinspectionreportlabel/(:any)'] = "admin/printinspectionreportlabel/$1";
 
 
 
