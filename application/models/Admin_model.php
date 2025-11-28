@@ -22583,7 +22583,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
              $counter = 0;
             foreach ($fetch_result as $value) {
 
-                        
+                $actions ="";
                 /** 🔽 Action Icons */
                 $actions .= "<a href='".ADMIN_PATH."edit_tdir/".$value['rework_id']."' style='cursor:pointer;' target='_blank'>
                                 <i style='font-size:x-large;cursor:pointer;' class='fa fa-pencil-square-o'></i>
