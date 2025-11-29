@@ -25771,8 +25771,8 @@ $getTdirdata= $this->admin_model->getTdirdata($id);
   $mpdf = new \Mpdf\Mpdf([
         'mode' => 'utf-8',
         'format' => 'A4',
-        'margin_left' => 10,
-        'margin_right' => 10,
+        'margin_left' => 8,
+        'margin_right' => 8,
         'margin_top' => 10,
         'margin_bottom' => 10
     ]);
