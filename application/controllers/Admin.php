@@ -25763,67 +25763,80 @@ public function fetchtdirreport(){
 
 public function printinspectionreportlabel($id)
 {
-      // mPDF settings
-$mpdf = new \Mpdf\Mpdf([
-    'mode' => 'utf-8',
-    'format' => 'A4',
-    'margin_left' => 10,
-    'margin_right' => 10,
-    'margin_top' => 10,
-    'margin_bottom' => 10
-]);
 
-$totalLabels = 16;
 
-$html = '
-<table style="width:100%; border-collapse:separate; border-spacing:20px 18px;">
-';
+$getTdirdata= $this->admin_model->getTdirdata($id);
 
-for ($i = 1; $i <= $totalLabels; $i++) {
+// mPDF settings
+  $mpdf = new \Mpdf\Mpdf([
+        'mode' => 'utf-8',
+        'format' => 'A4',
+        'margin_left' => 10,
+        'margin_right' => 10,
+        'margin_top' => 10,
+        'margin_bottom' => 10
+    ]);
 
-    if ($i % 2 == 1) {
-        $html .= "<tr>";
+    $totalLabels = 16;
+
+    $html = '';
+
+    for ($i = 1; $i <= $totalLabels; $i++) {
+
+        // Every label box (50% width)
+        $html .= '
+        <div style="
+            width:48%; 
+            float:left; 
+            margin-bottom:20px;
+            margin-right:2%;
+        ">
+
+            <!-- TOP BOX -->
+            <div style="
+                border:1px solid #000; 
+                padding:10px; 
+                text-align:center;
+            ">
+
+                <div align="center" style="font-weight:bold; font-size:12px; margin-bottom:8px;">
+                   '.$getTdirdata[0]['vendor_name'].'
+                </div>
+
+                <div align="center" style="font-size:10px; margin-bottom:5px;">
+                    '.$getTdirdata[0]['part_number'].'
+                </div>
+
+                <div align="center" style="font-size:10px;">
+                    QTY-'.$getTdirdata[0]['order_qty'].'
+                </div>
+
+            </div>
+
+            <!-- BOTTOM BOX -->
+            <div style="
+                border:1px solid #000; 
+                border-top:none; 
+                padding:8px; 
+                text-align:center;
+                background:grey;
+            ">
+                <div align="center" style="font-size:12px;">
+                    '.$getTdirdata[0]['report_number'].'
+                </div>
+            </div>
+
+        </div>
+        ';
+
+        // After every 2 labels → clear float
+        if ($i % 2 == 0) {
+            $html .= '<div style="clear:both;"></div>';
+        }
     }
 
-    $html .= '
-       <td style="width:50%; vertical-align:top;">
-
-    <!-- TOP BOX -->
-    <div style="border:1px solid #000; padding:10px;">
-
-        <div align="center" style="font-weight:bold; font-size:14px; margin-bottom:8px;">
-            BUSH FAST CONNECTION MALE
-        </div>
-
-        <div align="center" style="font-size:12px; margin-bottom:5px;">
-            PART NO-11203820
-        </div>
-
-        <div align="center" style="font-size:12px; margin-bottom:5px;">
-            QTY-231
-        </div>
-
-    </div>
-
-    <!-- BOTTOM BOX -->
-    <div style="border:1px solid #000; border-top:none; padding:8px;">
-        <div align="center" style="font-size:12px;">
-            REPORT NO-25-1025
-        </div>
-    </div>
-
-</td>
-    ';
-
-    if ($i % 2 == 0) {
-        $html .= "</tr>";
-    }
-}
-
-$html .= '</table>';
-
-$mpdf->WriteHTML($html);
-$mpdf->Output("labels_final_inline.pdf", "D");
+    $mpdf->WriteHTML($html);
+    $mpdf->Output("inspection report label.pdf", "D");
 }
 
 
