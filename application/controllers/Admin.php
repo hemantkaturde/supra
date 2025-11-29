@@ -2359,6 +2359,93 @@ class Admin extends BaseController
     }
 
 
+    public function printBuyerdetails($id){
+
+        $getBuyergmasterdata = $this->admin_model->getBuyergmasterdata($id);
+
+
+        $mpdf = new \Mpdf\Mpdf([
+            'mode' => 'utf-8',
+            'format' => 'A4',
+            'margin_left' => 10,
+            'margin_right' => 10,
+            'margin_top' => 10,
+            'margin_bottom' => 10
+        ]);
+
+        $logo = 'assets/images/logo_2_old.png'; // update as needed
+
+        function getToSection($logo, $withLogo = true) {
+
+            $logoHtml = $withLogo ? '
+                <div style="width:30%; text-align:right;">
+                    <img src="'.$logo.'" style="width:90px;" />
+                </div>
+            ' : '
+                <div style="width:30%;"></div>
+            ';
+
+            return '
+            <div style="display:flex; flex-direction:row; width:100%;">
+
+                <!-- LEFT COLUMN (70%) -->
+                <div style="width:70%; font-size:14px; line-height:22px;">
+                    <b>To,</b><br>
+                    <b>ZOPPAS INDUSTRIES IRCA SPA</b><br>
+                    Via Podgora, 26<br>
+                    31029 Vittorio Veneto (TV) Italy<br>
+                    P.IVA / VAT CODE 011686600262<br>
+                    Italy<br><br>
+                    <b>KIND. ATTN.: SONIA</b><br>
+                    TEL. +390438490029<br>
+                    EMAIL ID: sonia.dalcol@zoppas.com
+                </div>
+
+                <!-- RIGHT COLUMN (30% LOGO) -->
+                '.$logoHtml.'
+
+            </div>';
+        }
+
+        $from_section = '
+        <div style="font-size:14px; line-height:22px; margin-top:10px;">
+            <b>FROM:</b><br>
+            <b>M/s. SUPRA QUALITY EXPORTS (INDIA) PVT LTD</b><br>
+            A/92 ROAD NO. 16, OPPOSITE MANABA FINANCE<br>
+            WAGLE ESTATE, THANE WEST 400604<br>
+            TEL : 0 22 4517 6496 / 0 22 4517 6495<br>
+            E-MAIL: sales@supraexports.in
+        </div>
+        ';
+
+        $html = '
+        <style>
+        .section {
+            padding: 20px 10px;
+            height: 48%;
+            border-bottom: 1px dashed #000;
+        }
+        </style>
+
+        <!-- FIRST BLOCK (with logo) -->
+        <div class="section">
+            '. getToSection($logo, true) .'
+            <br>'.$from_section.'
+        </div>
+
+        <!-- SECOND BLOCK (with logo again) -->
+        <div class="section">
+            '. getToSection($logo, true) .'
+            <br>'.$from_section.'
+        </div>
+        ';
+
+        $mpdf->WriteHTML($html);
+        $mpdf->Output("buyer-details.pdf", "I");
+
+    }
+
+
      /**
      * This function is used to laod buyerpo
      */

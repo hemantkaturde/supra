@@ -631,6 +631,7 @@ $route['edit_rework_record/(:any)'] = "admin/edit_rework_record/$1";
 $route['printinspectionreportlabel/(:any)'] = "admin/printinspectionreportlabel/$1";
 $route['reworkrecordlotnumberrecord/(:any)'] = "admin/reworkrecordlotnumberrecord/$1";
 $route['fetchreworkrecordincomingdetailslist/(:any)'] = "admin/fetchreworkrecordincomingdetailslist/$1";
+$route['printBuyerdetails/(:any)'] = "admin/printBuyerdetails/$1";
 
 
 
