@@ -275,6 +275,7 @@
                           || $pageUrl=="searchstock"
                           || $pageUrl=="reworkrecordform"
                           || $pageUrl=="edit_rework_record"
+                          || $pageUrl=="reworkrecordlotnumberrecord"
                           ){echo 'active';}?>">
                         <a href="#">
                           <i class="fa fa-stack-exchange"></i> <span class="menu_label">Stock</span>
@@ -291,7 +292,7 @@
                           <li class="line_height <?php if($pageUrl=="preexport" || $pageUrl=="addnewfreexport" || $pageUrl=="editpreexport" || $pageUrl=='exportdetailsitemdetails' || $pageUrl=='addpreexportitemdetails' || $pageUrl=='editaddpreexportitemdetails' || $pageUrl=='addexportitemdetailswithattributes' || $pageUrl=='addexportitemdetailswithattributesvalues' || $pageUrl=='editexportitemdetailswithattributesvalues'){echo 'active';}?>"><a href="<?php echo base_url(); ?>preexport"><i class="fa fa-cubes"></i> Pre Export</a></li>
                           <li class="line_height <?php if($pageUrl=="viewreworkrejection" || $pageUrl=="reworkrejectionreturn" || $pageUrl=="addneworkrejection" || $pageUrl=="editreworkrejection"){echo 'active';}?>"><a href="<?php echo base_url(); ?>reworkrejectionreturn"><i class="fa fa-cubes"></i> Rework / Rejection Return (RR)</a></li>
                           <li class="line_height <?php if($pageUrl=="challanform" || $pageUrl=="viewchallanform" || $pageUrl=="addchallanform" || $pageUrl=="editchallanform"){echo 'active';}?>"><a href="<?php echo base_url(); ?>challanform"><i class="fa fa-cubes"></i> Challan Form</a></li>                        
-                          <li class="line_height <?php if($pageUrl=="reworkrecordform" || $pageUrl=="edit_rework_record"){echo 'active';}?>"><a href="<?php echo base_url(); ?>reworkrecordform"><i class="fa fa-cubes"></i> Rework Record Form</a></li>                        
+                          <li class="line_height <?php if($pageUrl=="reworkrecordform" || $pageUrl=="edit_rework_record"  || $pageUrl=="reworkrecordlotnumberrecord"){echo 'active';}?>"><a href="<?php echo base_url(); ?>reworkrecordform"><i class="fa fa-cubes"></i> Rework Record Form</a></li>                        
                         </ul>
                       </li>
 

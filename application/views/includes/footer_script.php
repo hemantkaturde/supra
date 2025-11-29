@@ -27713,13 +27713,11 @@ $('#export_excel').on('click', function() {
     window.location.href = exportUrl;
 });
 
-
-
 </script> 
 <?php } ?>
 
 
-<?php if($pageTitle=='Rework Record Form' || $pageTitle=='Add Rework Record Form' || $pageTitle=='Edit Rework Record Form'){ ?>
+<?php if($pageTitle=='Rework Record Form' || $pageTitle=='Add Rework Record Form' || $pageTitle=='Edit Rework Record Form' || $pageTitle=='Rework Rejection Lot Number Details'){ ?>
             <script type="text/javascript">
 				$(document).ready(function() {
 					var dt = $('#rework_record_list').DataTable({
@@ -27752,6 +27750,34 @@ $('#export_excel').on('click', function() {
 							type: "post",
 						},
 					});
+
+
+
+					var dt = $('#rework_record_incoming_item_list').DataTable({
+						"columnDefs": [ 
+							{ className: "details-control", "targets": [ 0 ] },
+							{ "width": "10%", "targets": 0 },
+							{ "width": "10%", "targets": 1 },
+							{ "width": "10%", "targets": 2 },
+							{ "width": "10%", "targets": 3 },
+						],
+						responsive: true,
+						"oLanguage": {
+							"sEmptyTable": "<i>No Rework Record Incoing Lot Found.</i>",
+						}, 
+						"bSort" : false,
+						"bFilter":true,
+						"bLengthChange": true,
+						"iDisplayLength": 10,   
+						"bProcessing": true,
+						"serverSide": true,
+						"ajax":{
+							url :"<?php echo base_url();?>fetchreworkrecordincomingdetailslist",
+							type: "post",
+						},
+					});
+
+
 				});
 
 				$(document).on('change','#vendor_name',function(e){  
@@ -27977,6 +28003,9 @@ $('#export_excel').on('click', function() {
 						}
 					});
 	            });
+
+
+
 
 
 			</script> 

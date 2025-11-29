@@ -26587,5 +26587,22 @@ public function edit_rework_record($id){
 }
 
 
+public function reworkrecordlotnumberrecord($id){
+
+        $process = 'Rework Rejection Lot Number Details';
+        $processFunction = 'Admin/editreworkrecord';
+        $this->global['pageTitle'] = 'Rework Rejection Lot Number Details';  
+        $data['getreworkrecorddatabyid']= $this->admin_model->getreworkrecorddatabyid($id);
+        $this->loadViews("masters/reworkrecordlotnumberrecord", $this->global, $data, NULL); 
+}
+
+
+public function fetchreworkrecordincomingdetailslist($id){
+
+    
+
+
+}
+
 
 }
