@@ -22715,6 +22715,89 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
+     public function reworkrecordincomingdetailslistcount($params)
+    {
+            $this->db->select('*');
+            $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_REWORK_RECORD.'.vendor_name');
+            $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_REWORK_RECORD.'.vendor_po');
+            $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_REWORK_RECORD.'.part_no');
+            $this->db->join(TBL_TEAM_MASTER, TBL_TEAM_MASTER.'.id = '.TBL_REWORK_RECORD.'.team','left');
+
+            // 🔍 Text search filter
+            if (!empty($params['search_by_any'])) {
+                $search = $this->db->escape_like_str($params['search_by_any']);
+                $this->db->group_start();
+                $this->db->like(TBL_REWORK_RECORD.'.rework_record_no', $search);
+                $this->db->or_like(TBL_REWORK_RECORD.'.date', $search);
+                $this->db->or_like(TBL_VENDOR.'.vendor_name', $search);
+                $this->db->or_like(TBL_VENDOR_PO_MASTER.'.po_number', $search);
+                $this->db->or_like(TBL_REWORK_RECORD.'.boxex_goni_bundle', $search);
+                $this->db->or_like(TBL_REWORK_RECORD.'.fg_material_gross_weight', $search);
+                $this->db->group_end();
+            }
+
+            $query = $this->db->get(TBL_REWORK_RECORD);
+            $result = $query->row();
+            return $result ? (int)$result->total : 0;
+    }
+
+    public function reworkrecordincomingdetailslistdata($params)
+    {
+            $this->db->select('*');
+            // $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_REWORK_RECORD.'.vendor_name');
+            // $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_REWORK_RECORD.'.vendor_po');
+            // $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_REWORK_RECORD.'.part_no');
+            // $this->db->join(TBL_TEAM_MASTER, TBL_TEAM_MASTER.'.id = '.TBL_REWORK_RECORD.'.team','left');
+
+            // Text search filter
+            // if (!empty($params['search_by_any'])) {
+            //     $search = $this->db->escape_like_str($params['search_by_any']);
+            //     $this->db->group_start();
+            //     $this->db->like(TBL_REWORK_RECORD.'.rework_record_no', $search);
+            //     $this->db->or_like(TBL_REWORK_RECORD.'.date', $search);
+            //     $this->db->or_like(TBL_VENDOR.'.vendor_name', $search);
+            //     $this->db->or_like(TBL_VENDOR_PO_MASTER.'.po_number', $search);
+            //     $this->db->or_like(TBL_REWORK_RECORD.'.boxex_goni_bundle', $search);
+            //     $this->db->or_like(TBL_REWORK_RECORD.'.fg_material_gross_weight', $search);
+            //     $this->db->group_end();
+            // }
+
+            $this->db->order_by(TBL_INCOMING_DETAILS_ITEM.'.id', 'DESC');
+            $this->db->limit($params['length'], $params['start']);
+            $query = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
+            $fetch_result = $query->result_array();
+
+            $data = array();
+             $counter = 0;
+            foreach ($fetch_result as $value) {
+
+                $actions ="";
+                /** 🔽 Action Icons */
+                // $actions .= "<a href='".ADMIN_PATH."edit_rework_record/".$value['rework_id']."' style='cursor:pointer;' target='_blank'>
+                //                 <i style='font-size:x-large;cursor:pointer;' class='fa fa-pencil-square-o'></i>
+                //             </a> &nbsp;";
+
+                $actions .= "<a href='".ADMIN_PATH."reworkrecordlotnumberrecord/".$value['rework_id']."' style='cursor:pointer;' target='_blank'>
+                                <i style='font-size:x-large;cursor:pointer;' class='fa fa-plus-square-o'></i>
+                            </a> &nbsp;";
+
+                // $actions .= "<i style='font-size:x-large;cursor:pointer;' data-id='".$value['rework_id']."' class='fa fa-trash-o deletereworkrecordreport'></i>";
+
+
+                $data[] = array(
+                    'lot_no' => $value['lot_no'],
+                    'invoice_qty' => $value['invoice_qty'],
+                    'invoice_date' => $value['invoice_date'],
+                    'action' => $actions
+                );
+
+                $counter++;
+            }
+
+            return $data;
+    }
+
+
 
 }
 

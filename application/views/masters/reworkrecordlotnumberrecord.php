@@ -23,7 +23,6 @@
                         <div class="panel-body">
                             <h4>
                                 <input type="hidden" class="form-control" value="<?php echo $getreworkrecorddatabyid[0]['rework_id']; ?>" id="tdir_id" name="tdir_id">
-
                                 <p><b>Rework Record No :</b> <?=$getreworkrecorddatabyid[0]['rework_record_no'] ?></p>
                                 <p><b>Vendor Name :</b> <?=$getreworkrecorddatabyid[0]['actual_vendor_name'] ?></p>
                                 <p><b>Vendor PO Number :</b> <?=$getreworkrecorddatabyid[0]['po_number'] ?></p>
@@ -31,6 +30,11 @@
                                 <p><b>FG. Part Description :</b> <?=$getreworkrecorddatabyid[0]['name'] ?></p>
                                 <p><b>Team :</b> <?=$getreworkrecorddatabyid[0]['team_name'] ?></p>
                             </h4>
+
+                            <input type="hidden" class="form-control" value="<?=$getreworkrecorddatabyid[0]['vendor_po']?>" id="vendor_po" name="vendor_po">
+                            <input type="hidden" class="form-control" value="<?=$getreworkrecorddatabyid[0]['part_no']?>" id="part_no" name="part_no">
+
+
                             <table width="100%" class="table table-striped table-bordered table-hover" id="rework_record_incoming_item_list">
                                 <thead>
                                     <tr style="background-color:#3c8dbc !important;color:#fff">

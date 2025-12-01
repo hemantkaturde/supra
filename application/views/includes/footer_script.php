@@ -27751,7 +27751,8 @@ $('#export_excel').on('click', function() {
 						},
 					});
 
-
+					var vendor_po = $('#vendor_po').val();
+					var part_no = $('#part_no').val();
 
 					var dt = $('#rework_record_incoming_item_list').DataTable({
 						"columnDefs": [ 
@@ -27772,7 +27773,7 @@ $('#export_excel').on('click', function() {
 						"bProcessing": true,
 						"serverSide": true,
 						"ajax":{
-							url :"<?php echo base_url();?>fetchreworkrecordincomingdetailslist",
+							url :"<?php echo base_url();?>admin/fetchreworkrecordincomingdetailslist/"+vendor_po+"/"+part_no,
 							type: "post",
 						},
 					});
