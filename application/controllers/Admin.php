@@ -2378,34 +2378,36 @@ class Admin extends BaseController
         function getToSection($logo, $withLogo = true) {
 
             $logoHtml = $withLogo ? '
-                <div style="width:30%; text-align:right;">
-                    <img src="'.$logo.'" style="width:90px;" />
-                </div>
+                <td style="width:30%; text-align:right; vertical-align:middle;">
+                    <img src="'.$logo.'" style="width:100px;" />
+                </td>
             ' : '
-                <div style="width:30%;"></div>
+                <td style="width:30%;"></td>
             ';
 
             return '
-            <div style="display:flex; flex-direction:row; width:100%;">
+            <table width="100%" style="border-collapse:collapse;">
+                <tr>
 
-                <!-- LEFT COLUMN (70%) -->
-                <div style="width:70%; font-size:14px; line-height:22px;">
-                    <b>To,</b><br>
-                    <b>ZOPPAS INDUSTRIES IRCA SPA</b><br>
-                    Via Podgora, 26<br>
-                    31029 Vittorio Veneto (TV) Italy<br>
-                    P.IVA / VAT CODE 011686600262<br>
-                    Italy<br><br>
-                    <b>KIND. ATTN.: SONIA</b><br>
-                    TEL. +390438490029<br>
-                    EMAIL ID: sonia.dalcol@zoppas.com
-                </div>
+                    <!-- LEFT COLUMN -->
+                    <td style="width:70%; font-size:14px; line-height:22px; vertical-align:top;">
+                        <b>To,</b><br>
+                        <b>ZOPPAS INDUSTRIES IRCA SPA</b><br>
+                        Via Podgora, 26<br>
+                        31029 Vittorio Veneto (TV) Italy<br>
+                        P.IVA / VAT CODE 011686600262<br>
+                        Italy<br><br>
+                        <b>KIND. ATTN.: SONIA</b><br>
+                        TEL. +390438490029<br>
+                        EMAIL ID: sonia.dalcol@zoppas.com
+                    </td>
 
-                <!-- RIGHT COLUMN (30% LOGO) -->
-                '.$logoHtml.'
-
-            </div>';
+                    <!-- RIGHT COLUMN LOGO -->
+                    '.$logoHtml.'
+                </tr>
+            </table>';
         }
+
 
         $from_section = '
         <div style="font-size:14px; line-height:22px; margin-top:10px;">
