@@ -25894,7 +25894,7 @@ $getTdirdata= $this->admin_model->getTdirdata($id);
             ">
 
                 <div align="center" style="font-weight:bold; font-size:12px; margin-bottom:8px;">
-                   '.$getTdirdata[0]['vendor_name'].'
+                   '.$getTdirdata[0]['name'].'
                 </div>
 
                 <div align="center" style="font-size:10px; margin-bottom:5px;">
@@ -25902,7 +25902,7 @@ $getTdirdata= $this->admin_model->getTdirdata($id);
                 </div>
 
                 <div align="center" style="font-size:10px;">
-                    QTY-'.$getTdirdata[0]['order_qty'].'
+                    QTY-'.$getTdirdata[0]['order_qty'].' (In Kgs)
                 </div>
 
             </div>
