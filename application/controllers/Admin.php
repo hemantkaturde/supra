@@ -2363,6 +2363,9 @@ class Admin extends BaseController
 
         $getBuyergmasterdata = $this->admin_model->getBuyergmasterdata($id);
 
+        // print_r($getBuyergmasterdata[0]);
+        // exit;
+
 
         $mpdf = new \Mpdf\Mpdf([
             'mode' => 'utf-8',
@@ -2373,7 +2376,7 @@ class Admin extends BaseController
             'margin_bottom' => 10
         ]);
 
-        $logo = 'assets/images/logo_2_old.png'; // update as needed
+        $logo = 'assets/images/supra_login_logo.jpg'; // update as needed
 
         function getToSection($logo, $withLogo = true) {
 
@@ -2391,15 +2394,13 @@ class Admin extends BaseController
 
                     <!-- LEFT COLUMN -->
                     <td style="width:70%; font-size:14px; line-height:22px; vertical-align:top;">
-                        <b>To,</b><br>
-                        <b>ZOPPAS INDUSTRIES IRCA SPA</b><br>
-                        Via Podgora, 26<br>
-                        31029 Vittorio Veneto (TV) Italy<br>
-                        P.IVA / VAT CODE 011686600262<br>
-                        Italy<br><br>
-                        <b>KIND. ATTN.: SONIA</b><br>
-                        TEL. +390438490029<br>
-                        EMAIL ID: sonia.dalcol@zoppas.com
+                       
+                    <b>From:</b><br>
+                        <b>M/s. SUPRA QUALITY EXPORTS (INDIA) PVT LTD</b><br>
+                        A/92 ROAD NO. 16, OPPOSITE MANABA FINANCE<br>
+                        WAGLE ESTATE, THANE WEST 400604<br>
+                        TEL : 0 22 4517 6496 / 0 22 4517 6495<br>
+                        E-MAIL: sales@supraexports.in
                     </td>
 
                     <!-- RIGHT COLUMN LOGO -->
@@ -2411,12 +2412,15 @@ class Admin extends BaseController
 
         $from_section = '
         <div style="font-size:14px; line-height:22px; margin-top:10px;">
-            <b>FROM:</b><br>
-            <b>M/s. SUPRA QUALITY EXPORTS (INDIA) PVT LTD</b><br>
-            A/92 ROAD NO. 16, OPPOSITE MANABA FINANCE<br>
-            WAGLE ESTATE, THANE WEST 400604<br>
-            TEL : 0 22 4517 6496 / 0 22 4517 6495<br>
-            E-MAIL: sales@supraexports.in
+             <b>To:</b><br>
+             <b>'.$getBuyergmasterdata[0]['buyer_name'].'</b>
+                        <br>
+                        '.$getBuyergmasterdata[0]['address'].'<br>
+                        <b>KIND. ATTN.: '.$getBuyergmasterdata[0]['contact_person'].'</b>
+                        <br>
+                        TEL. '.$getBuyergmasterdata[0]['mobile'].'<br>
+                        EMAIL ID: '.$getBuyergmasterdata[0]['email'].'
+           
         </div>
         ';
 
