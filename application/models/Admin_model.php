@@ -22715,38 +22715,37 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
-     public function reworkrecordincomingdetailslistcount($params)
+     public function reworkrecordincomingdetailslistcount($params,$vendor_po,$part_no)
     {
-            $this->db->select('*');
-            $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_REWORK_RECORD.'.vendor_name');
-            $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_REWORK_RECORD.'.vendor_po');
-            $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_REWORK_RECORD.'.part_no');
-            $this->db->join(TBL_TEAM_MASTER, TBL_TEAM_MASTER.'.id = '.TBL_REWORK_RECORD.'.team','left');
+             $this->db->select('*');
+            // $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_REWORK_RECORD.'.vendor_name');
+            $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_INCOMING_DETAILS_ITEM.'.pre_vendor_po_number');
+            $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
 
-            // 🔍 Text search filter
-            if (!empty($params['search_by_any'])) {
-                $search = $this->db->escape_like_str($params['search_by_any']);
-                $this->db->group_start();
-                $this->db->like(TBL_REWORK_RECORD.'.rework_record_no', $search);
-                $this->db->or_like(TBL_REWORK_RECORD.'.date', $search);
-                $this->db->or_like(TBL_VENDOR.'.vendor_name', $search);
-                $this->db->or_like(TBL_VENDOR_PO_MASTER.'.po_number', $search);
-                $this->db->or_like(TBL_REWORK_RECORD.'.boxex_goni_bundle', $search);
-                $this->db->or_like(TBL_REWORK_RECORD.'.fg_material_gross_weight', $search);
-                $this->db->group_end();
-            }
+            // // 🔍 Text search filter
+            // if (!empty($params['search_by_any'])) {
+            //     $search = $this->db->escape_like_str($params['search_by_any']);
+            //     $this->db->group_start();
+            //     $this->db->like(TBL_REWORK_RECORD.'.rework_record_no', $search);
+            //     $this->db->or_like(TBL_REWORK_RECORD.'.date', $search);
+            //     $this->db->or_like(TBL_VENDOR.'.vendor_name', $search);
+            //     $this->db->or_like(TBL_VENDOR_PO_MASTER.'.po_number', $search);
+            //     $this->db->or_like(TBL_REWORK_RECORD.'.boxex_goni_bundle', $search);
+            //     $this->db->or_like(TBL_REWORK_RECORD.'.fg_material_gross_weight', $search);
+            //     $this->db->group_end();
+            // }
 
-            $query = $this->db->get(TBL_REWORK_RECORD);
+            $query = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
             $result = $query->row();
             return $result ? (int)$result->total : 0;
     }
 
-    public function reworkrecordincomingdetailslistdata($params)
+    public function reworkrecordincomingdetailslistdata($params,$vendor_po,$part_no)
     {
             $this->db->select('*');
             // $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_REWORK_RECORD.'.vendor_name');
-            // $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_REWORK_RECORD.'.vendor_po');
-            // $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_REWORK_RECORD.'.part_no');
+            $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_INCOMING_DETAILS_ITEM.'.pre_vendor_po_number');
+            $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
             // $this->db->join(TBL_TEAM_MASTER, TBL_TEAM_MASTER.'.id = '.TBL_REWORK_RECORD.'.team','left');
 
             // Text search filter
@@ -22761,6 +22760,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             //     $this->db->or_like(TBL_REWORK_RECORD.'.fg_material_gross_weight', $search);
             //     $this->db->group_end();
             // }
+            $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.pre_vendor_po_number', $vendor_po);
+            $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.part_number', $vendor_po);
 
             $this->db->order_by(TBL_INCOMING_DETAILS_ITEM.'.id', 'DESC');
             $this->db->limit($params['length'], $params['start']);

@@ -26684,11 +26684,11 @@ public function reworkrecordlotnumberrecord($id){
 }
 
 
-public function fetchreworkrecordincomingdetailslist($id){
+public function fetchreworkrecordincomingdetailslist($vendor_po,$part_no){
 
    $params = $_REQUEST;
-    $totalRecords = $this->admin_model->reworkrecordincomingdetailslistcount($params); 
-    $queryRecords = $this->admin_model->reworkrecordincomingdetailslistdata($params); 
+    $totalRecords = $this->admin_model->reworkrecordincomingdetailslistcount($params,$vendor_po,$part_no); 
+    $queryRecords = $this->admin_model->reworkrecordincomingdetailslistdata($params,$vendor_po,$part_no); 
 
     $data = array();
     foreach ($queryRecords as $key => $value)
