@@ -2399,7 +2399,7 @@ class Admin extends BaseController
                         <b>M/s. SUPRA QUALITY EXPORTS (INDIA) PVT LTD</b><br>
                         A/92 ROAD NO. 16, OPPOSITE MANABA FINANCE<br>
                         WAGLE ESTATE, THANE WEST 400604<br>
-                        TEL : 0 22 4517 6496 / 0 22 4517 6495<br>
+                        TEL : 022 45176496 / 022 45176495<br>
                         E-MAIL: sales@supraexports.in
                     </td>
 
@@ -2418,7 +2418,8 @@ class Admin extends BaseController
                         '.$getBuyergmasterdata[0]['address'].'<br>
                         <b>KIND. ATTN.: '.$getBuyergmasterdata[0]['contact_person'].'</b>
                         <br>
-                        TEL. '.$getBuyergmasterdata[0]['mobile'].'<br>
+                        TEL. '.$getBuyergmasterdata[0]['landline'].'<br>
+                        Mob. '.$getBuyergmasterdata[0]['mobile'].'<br>
                         EMAIL ID: '.$getBuyergmasterdata[0]['email'].'
            
         </div>
