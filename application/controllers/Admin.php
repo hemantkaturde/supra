@@ -25916,7 +25916,7 @@ $getTdirdata= $this->admin_model->getTdirdata($id);
                 background:grey;
             ">
                 <div align="center" style="font-size:12px;">
-                     Report No'.$getTdirdata[0]['report_number'].'
+                     Report No '.$getTdirdata[0]['report_number'].'
                 </div>
             </div>
 
