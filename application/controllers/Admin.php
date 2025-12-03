@@ -2448,7 +2448,7 @@ class Admin extends BaseController
         ';
 
         $mpdf->WriteHTML($html);
-        $mpdf->Output("buyer-details.pdf", "I");
+        $mpdf->Output($getBuyergmasterdata[0]['buyer_name']."-buyer details.pdf", "D");
 
     }
 
@@ -25897,11 +25897,11 @@ $getTdirdata= $this->admin_model->getTdirdata($id);
                    '.$getTdirdata[0]['name'].'
                 </div>
 
-                <div align="center" style="font-size:10px; margin-bottom:5px;">
+                <div align="center" style="font-size:12px; margin-bottom:5px;">
                     '.$getTdirdata[0]['part_number'].'
                 </div>
 
-                <div align="center" style="font-size:10px;">
+                <div align="center" style="font-size:12px;">
                     QTY-'.$getTdirdata[0]['vendor_order_qty'].' (In Pcs)
                 </div>
 
@@ -25911,12 +25911,12 @@ $getTdirdata= $this->admin_model->getTdirdata($id);
             <div style="
                 border:1px solid #000; 
                 border-top:none; 
-                padding:8px; 
+                padding:12px; 
                 text-align:center;
                 background:grey;
             ">
                 <div align="center" style="font-size:12px;">
-                     Report No '.$getTdirdata[0]['report_number'].'
+                     Report No : '.$getTdirdata[0]['report_number'].'
                 </div>
             </div>
 
@@ -25930,7 +25930,7 @@ $getTdirdata= $this->admin_model->getTdirdata($id);
     }
 
     $mpdf->WriteHTML($html);
-    $mpdf->Output("inspection report label.pdf", "D");
+    $mpdf->Output("Export Label.pdf", "D");
 }
 
 
