@@ -28,6 +28,7 @@
                                 <p><b>Vendor PO Number :</b> <?=$getreworkrecorddatabyid[0]['po_number'] ?></p>
                                 <p><b>FG. Part Number :</b> <?=$getreworkrecorddatabyid[0]['part_number'] ?></p>
                                 <p><b>FG. Part Description :</b> <?=$getreworkrecorddatabyid[0]['name'] ?></p>
+                                <p><b>Inspection Report No :</b> <?=$getreworkrecorddatabyid[0]['inspection_report_no'] ?></p>
                                 <p><b>Team :</b> <?=$getreworkrecorddatabyid[0]['team_name'] ?></p>
                             </h4>
 
