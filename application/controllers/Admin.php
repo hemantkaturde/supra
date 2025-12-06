@@ -26724,11 +26724,7 @@ public function fetchreworkrecordincomingdetailslist($vendor_po,$part_no){
 
 public function downloadpreexportlabel($preexport_id,$total_no_of_carttons){
 
-
-
         $getpreexportbuyerdata = $this->admin_model->getpreexportbuyerdata($preexport_id);
-
-
 
         $mpdf = new \Mpdf\Mpdf([
             'mode' => 'utf-8',
@@ -26827,34 +26823,103 @@ public function downloadpreexportlabel($preexport_id,$total_no_of_carttons){
 
         $i = 0;   // MUST start from 0 (NOT total cartons)
 
-foreach ($labels as $l) {
+        foreach ($labels as $l) {
 
-    // Start row every 2 labels
-    if ($i % 2 == 0) {
-        $html .= "<tr>";
-    }
+            // Start row every 2 labels
+            if ($i % 2 == 0) {
+                $html .= "<tr>";
+            }
 
-    $html .= '
-        <td>
-            '.$l[0].'<br>
-            '.$l[1].'<br>
-            '.$l[2].'<br><br>
-            <span class="crtn">CRTN NO: '.$l[3].'</span>
-        </td>
-    ';
+            $html .= '
+                <td>
+                    '.$l[0].'<br>
+                    '.$l[1].'<br>
+                    '.$l[2].'<br><br>
+                    <span class="crtn">CRTN NO: '.$l[3].'</span>
+                </td>
+            ';
 
-    // Close row after 2 columns OR if it's the last label
-    if ($i % 2 == 1 || $i == count($labels) - 1) {
-        $html .= "</tr>";
-    }
+            // Close row after 2 columns OR if it's the last label
+            if ($i % 2 == 1 || $i == count($labels) - 1) {
+                $html .= "</tr>";
+            }
 
-    $i++;
-}
+            $i++;
+        }
 
         $html .= '</table>';
         $mpdf->WriteHTML($html);
         $mpdf->Output("Caton label ".$getpreexportbuyerdata[0]['buyer_name'].".pdf","D");
- }
+}
+
+
+
+public function saverejectionreworkitemdataform(){
+
+    $post_submit = $this->input->post();
+    if($post_submit){
+
+        $saverejectionreworkitemdataform_response = array();
+        $this->form_validation->set_rules('rejected_reason','Rejected Reason','trim|required');
+        $this->form_validation->set_rules('rework_qty_in_pcs','Quantity In Gonis','trim|required');
+        $this->form_validation->set_rules('after_rework_ok_in_pcs','After Rework Ok In pcs','trim');
+        $this->form_validation->set_rules('after_rework_rej_qty_in_pcs','After Rework Rej Qty In pcs','trim');
+        $this->form_validation->set_rules('rework_done_by','Rework Done By','trim');
+        $this->form_validation->set_rules('rework_checked_by','Rework Checked By','trim');
+
+
+        if($this->form_validation->run() == FALSE)
+        {
+            $saverejectionreworkitemdataform_response['status'] = 'failure';
+            $saverejectionreworkitemdataform_response['error'] = array('rejected_reason'=>strip_tags(form_error('rejected_reason')),'rework_qty_in_pcs'=>strip_tags(form_error('rework_qty_in_pcs')),'after_rework_ok_in_pcs'=>strip_tags(form_error('after_rework_ok_in_pcs')),'after_rework_rej_qty_in_pcs'=>strip_tags(form_error('after_rework_rej_qty_in_pcs')),'rework_done_by'=>strip_tags(form_error('rework_done_by')),'rework_checked_by'=>strip_tags(form_error('rework_checked_by')));
+       
+        }else{
+
+            if(trim($this->input->post('packingchallanid'))){
+                $packingchallanid = trim($this->input->post('packingchallanid'));
+            }else{
+                $packingchallanid = NULL;
+            }
+            
+            $data = array(
+                'main_rework_resaon_id' =>  trim($this->input->post('incoming_item_data_id')),
+                'incoming_item_id' =>  trim($this->input->post('rework_id')),
+                'rejected_reason' =>  trim($this->input->post('quantity_in_gonis')),
+                'qty_in_pcs' =>  trim($this->input->post('rework_qty_in_pcs')),
+                'after_rework_ok_in_pcs' =>  trim($this->input->post('after_rework_ok_in_pcs')),
+                'after_rework_ok_in_pcs' =>  trim($this->input->post('after_rework_rej_qty_in_pcs')),
+                'rework_done_by' =>  trim($this->input->post('rework_done_by')),
+                'rework_checked_by' =>  trim($this->input->post('rework_checked_by'))
+            );
+
+            // if(trim($this->input->post('packing_challan_item_id'))){
+            //     $packing_challan_item_id = trim($this->input->post('packing_challan_item_id'));
+            // }else{
+            //     $packing_challan_item_id = NULL;
+            // }
+            
+            $saverejectionreworkitemdataform= $this->admin_model->saverejectionreworkitemdataform('',$data);
+            if($saverejectionreworkitemdataform){
+                $saverejectionreworkitemdataform_response['status'] = 'success';
+                $saverejectionreworkitemdataform_response['error'] = array('rejected_reason'=>strip_tags(form_error('rejected_reason')),'rework_qty_in_pcs'=>strip_tags(form_error('rework_qty_in_pcs')),'after_rework_ok_in_pcs'=>strip_tags(form_error('after_rework_ok_in_pcs')),'after_rework_rej_qty_in_pcs'=>strip_tags(form_error('after_rework_rej_qty_in_pcs')),'rework_done_by'=>strip_tags(form_error('rework_done_by')),'rework_checked_by'=>strip_tags(form_error('rework_checked_by')));
+            }
+
+            echo json_encode($saverejectionreworkitemdataform_response);
+        }
+    }
+
+}
+
+
+public function viewreworkrecordreasondata($incoming_details_item_id){
+
+        $process = 'Rework Record Resaon Data';
+        $processFunction = 'Admin/editreworkrecord';
+        $this->global['pageTitle'] = 'Rework Record Resaon Data';  
+        $data['incoming_details_item_id']= $incoming_details_item_id;
+        $this->loadViews("masters/viewreworkrecordreasondata", $this->global, $data, NULL); 
+}
+
 
 
 }

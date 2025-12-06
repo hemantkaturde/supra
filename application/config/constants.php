@@ -198,6 +198,8 @@ define('TBL_TDIR','tbl_tdir');
 define('TBL_TDIR_INCOMING_LOT_DATA','tbl_tdir_incoming_lot_data');
 define('TBL_TDIR_ATTACHMENT','tbl_tdir_attachment');
 define('TBL_REWORK_RECORD','tbl_rework_record');
+define('TBL_REWORK_RECORD_REASON_DATA','tbl_rework_record_reason_data');
+
 
 
 

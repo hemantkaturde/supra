@@ -633,6 +633,11 @@ $route['reworkrecordlotnumberrecord/(:any)'] = "admin/reworkrecordlotnumberrecor
 $route['fetchreworkrecordincomingdetailslist/(:any)'] = "admin/fetchreworkrecordincomingdetailslist/$1";
 $route['printBuyerdetails/(:any)'] = "admin/printBuyerdetails/$1";
 $route['downloadpreexportlabel/(:any)'] = "admin/downloadpreexportlabel/$1";
+$route['saverejectionreworkitemdataform'] = "admin/saverejectionreworkitemdataform";
+
+$route['viewreworkrecordreasondata/(:any)'] = "admin/viewreworkrecordreasondata/$1";
+
+
 
 
 

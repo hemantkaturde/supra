@@ -28007,10 +28007,60 @@ $('#export_excel').on('click', function() {
 
 
 				$(document).on('click','.addreworkreasondata',function(e){
-
-			         
-
+					var elemF = $(this);
+			        var incoming_item_data_id = elemF.attr('data-id');
+					var rework_id = elemF.attr('rework_id');
+					$('#incoming_item_data_id').val(incoming_item_data_id);
+					
 				});
+
+
+				$(document).on('click','#saverejectionreworkitemdata',function(e){
+					e.preventDefault();
+					$(".loader_ajax").show();
+
+					var rework_id = $('#rework_id').val();
+
+					var formData = new FormData($("#saverejectionreworkitemdataform")[0]);
+							$.ajax({
+								url : "<?php echo base_url();?>saverejectionreworkitemdataform",
+								type: "POST",
+								data : formData,
+								cache: false,
+								contentType: false,
+								processData: false,
+								success: function(data, textStatus, jqXHR)
+								{
+									var fetchResponse = $.parseJSON(data);
+									if(fetchResponse.status == "failure")
+									{
+										$.each(fetchResponse.error, function (i, v)
+										{
+											$('.'+i+'_error').html(v);
+										});
+										$(".loader_ajax").hide();
+									}
+									else if(fetchResponse.status == 'success')
+									{
+										swal({
+											title: "Success",
+											text: "Rework Record Reason Successfully!",
+											icon: "success",
+											button: "Ok",
+											},function(){ 
+												window.location.href = "<?php echo base_url().'reworkrecordlotnumberrecord/'?>"+rework_id;
+										});		
+									}
+									
+								},
+								error: function (jqXHR, textStatus, errorThrown)
+								{
+									$(".loader_ajax").hide();
+								}
+						});
+					return false;
+			    });
+
 
 
 

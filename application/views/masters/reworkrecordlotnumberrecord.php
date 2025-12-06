@@ -69,14 +69,14 @@
             <h3 class="modal-title" id="additem">Rework Details</h3>
             </button>
          </div>
-         <form role="form" id="saverejectedformitemdataform" action="<?php echo base_url() ?>saverejectedformitemdataform" method="post" role="form">
+         <form role="form" id="saverejectionreworkitemdataform" action="<?php echo base_url() ?>saverejectionreworkitemdataform" method="post" role="form">
             <div class="modal-body">
                <div class="loader_ajax" style="display:none;">
                   <div class="loader_ajax_inner"><img src="<?php echo ICONPATH;?>/preloader_ajax.gif"></div>
                </div>
 
-               <input type="hidden" class="form-control"  id="rework_record_main_form_id" name="rework_record_main_form_id">
-               <input type="hidden" class="form-control"  id="incoming_id" name="incoming_id">
+               <input type="hidden" class="form-control"  id="incoming_item_data_id" name="incoming_item_data_id">
+               <input type="hidden" class="form-control"  id="rework_id" name="rework_id" value=<?php echo $getreworkrecorddatabyid[0]['rework_id']?>>
 
                <div class="form-group row">
                   <label class="col-sm-4 col-form-label">Reason <span class="required">*</span></label>
@@ -88,8 +88,8 @@
                <div class="form-group row">
                   <label class="col-sm-4 col-form-label">Rework Qty (in pcs) <span class="required">*</span></label>
                   <div class="col-sm-8">
-                     <input type="number" class="form-control"  id="qty_in_pcs" name="qty_in_pcs">
-                     <p class="error qty_in_pcs_error"></p>
+                     <input type="number" class="form-control"  id="rework_qty_in_pcs" name="rework_qty_in_pcs">
+                     <p class="error rework_qty_in_pcs_error"></p>
                   </div>
                </div>
                <div class="form-group row">
@@ -122,8 +122,8 @@
                </div>
             </div>
             <div class="modal-footer">
-               <button type="button" class="btn btn-secondary btn-xl closesaverejectedform" data-dismiss="modal">Close</button>
-               <button type="submit" id="saverejectedformitemdata" name="saverejectedformitemdata" class="btn btn-primary" class="btn btn-success btn-xl">Save</button>
+               <button type="button" class="btn btn-secondary btn-xl closerejectionreworkitemdata" data-dismiss="modal">Close</button>
+               <button type="submit" id="saverejectionreworkitemdata" name="saverejectionreworkitemdata" class="btn btn-primary" class="btn btn-success btn-xl">Save</button>
             </div>
          </form>
       </div>
