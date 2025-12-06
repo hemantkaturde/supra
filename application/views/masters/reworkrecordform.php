@@ -35,6 +35,7 @@
                                         <th>Vendor PO</th>
                                         <th>FG. Part Number</th>
                                         <th>FG. Part Description</th>
+                                        <th>Inspection Report No</th>
                                         <th>Team</th>
                                         <th>Status</th>
                                         <th>Remark</th>

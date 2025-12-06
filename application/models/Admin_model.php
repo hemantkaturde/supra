@@ -22609,6 +22609,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                     'po_number' => $value['po_number'],
                     'part_number' => $value['part_number'],
                     'name' => $value['name'],
+                    'inspection_report_no' => $value['inspection_report_no'],
                     'team_name' => $value['team_name'],
                     'rework_record_status' => $value['rework_record_status'],
                     'remarks' => $value['remarksas_rework'],

@@ -37,7 +37,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Date <span class="required">*</span></label>
-                                            <input type="date" class="form-control" name="date" required>
+                                            <input type="text" class="form-control datepicker" name="date" required>
                                             <p class="error date_error"></p>
                                         </div>
                                     </div>
