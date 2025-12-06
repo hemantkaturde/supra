@@ -25871,7 +25871,7 @@ $getTdirdata= $this->admin_model->getTdirdata($id);
         'margin_bottom' => 10
     ]);
 
-    $totalLabels = 14;
+    $totalLabels = 12;
 
     $html = '';
 
@@ -25896,15 +25896,15 @@ $getTdirdata= $this->admin_model->getTdirdata($id);
                 margin-left:3%;
             ">
 
-                <div align="center" style="font-weight:bold; font-size:16px; margin-bottom:8px;">
+                <div align="center" style="font-weight:bold; font-size:15px; margin-bottom:8px;">
                    '.$getTdirdata[0]['name'].'
                 </div>
 
-                <div align="center" style="font-size:14px; margin-bottom:5px;">
+                <div align="center" style="font-size:13px; margin-bottom:5px;">
                     PART NO - '.$getTdirdata[0]['part_number'].'
                 </div>
 
-                <div align="center" style="font-size:14px;">
+                <div align="center" style="font-size:13px;">
                     QTY-'.$getTdirdata[0]['vendor_order_qty'].' (In Pcs)
                 </div>
 
@@ -25920,7 +25920,7 @@ $getTdirdata= $this->admin_model->getTdirdata($id);
                 margin-right:3%;
                 margin-left:3%;
             ">
-                <div align="center" style="font-size:14px;">
+                <div align="center" style="font-size:13px;">
                      Report No : '.$getTdirdata[0]['report_number'].'
                 </div>
             </div>
