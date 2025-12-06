@@ -143,7 +143,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Compalint No</label>
+                                            <label>Inspection Report No</label>
                                             <input type="text" class="form-control" name="inspection_report_no" id="inspection_report_no">
                                             <p class="error inspection_report_no_error"></p>
 
