@@ -13416,7 +13416,9 @@ public function getpreexportdata($params){
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."exportdetailsitemdetails/".$value['export_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editpreexport/".$value['export_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downloadpreexportform/".$value['export_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
-                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['export_id']."' class='fa fa-trash-o deletepreexport' aria-hidden='true'></i>"; 
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['export_id']."' class='fa fa-trash-o deletepreexport' aria-hidden='true'></i>  &nbsp"; 
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."admin/downloadpreexportlabel/".$value['export_id'].'/'.$total_no_of_carttons."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-tags' aria-hidden='true'></i></a>  &nbsp";
+
             }else{
                 if($this->session->userdata('roleText')=='Stock'){
 
@@ -13424,7 +13426,8 @@ public function getpreexportdata($params){
                     $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editpreexport/".$value['export_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp ";
                     $data[$counter]['action'] .= "<a href='".ADMIN_PATH."downloadpreexportform/".$value['export_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>  &nbsp";
                     $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['export_id']."' class='fa fa-trash-o deletepreexport' aria-hidden='true'></i>"; 
-          
+                    $data[$counter]['action'] .= "<a href='".ADMIN_PATH."admin/downloadpreexportlabel/".$value['export_id'].'/'.$total_no_of_carttons."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-tags' aria-hidden='true'></i></a>  &nbsp";
+
                 }else{
 
 
@@ -22798,6 +22801,16 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             return $data;
     }
 
+
+    public function getpreexportbuyerdata($preexport_id){
+        $this->db->select('*,'.TBL_PREEXPORT.'.remark as preexportremark,'.TBL_PREEXPORT.'.id as export_id');
+        $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_PREEXPORT.'.buyer_name');
+        $this->db->where(TBL_PREEXPORT.'.id', $preexport_id);
+        $query = $this->db->get(TBL_PREEXPORT);
+        $fetch_result = $query->result_array();
+
+        return $fetch_result;
+    }
 
 
 }

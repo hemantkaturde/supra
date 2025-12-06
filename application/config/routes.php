@@ -632,6 +632,8 @@ $route['printinspectionreportlabel/(:any)'] = "admin/printinspectionreportlabel/
 $route['reworkrecordlotnumberrecord/(:any)'] = "admin/reworkrecordlotnumberrecord/$1";
 $route['fetchreworkrecordincomingdetailslist/(:any)'] = "admin/fetchreworkrecordincomingdetailslist/$1";
 $route['printBuyerdetails/(:any)'] = "admin/printBuyerdetails/$1";
+$route['downloadpreexportlabel/(:any)'] = "admin/downloadpreexportlabel/$1";
+
 
 
 

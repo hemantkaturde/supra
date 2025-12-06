@@ -26717,4 +26717,91 @@ public function fetchreworkrecordincomingdetailslist($vendor_po,$part_no){
 }
 
 
+public function downloadpreexportlabel($preexport_id,$total_no_of_carttons){
+
+
+
+    $getpreexportbuyerdata = $this->admin_model->getpreexportbuyerdata($preexport_id);
+
+
+
+        $mpdf = new \Mpdf\Mpdf([
+            'mode' => 'utf-8',
+            'format' => 'A4',
+            'margin_left' => 0,
+            'margin_right' => 0,
+            'margin_top' => 0,
+            'margin_bottom' => 0
+        ]);
+
+        $labels = [
+            ["SUPRA",$getpreexportbuyerdata[0]['buyer_short_name'],$getpreexportbuyerdata[0]['buyer_country_short_name'],"1/".$total_no_of_carttons],
+            ["SUPRA",$getpreexportbuyerdata[0]['buyer_short_name'],$getpreexportbuyerdata[0]['buyer_country_short_name'],"2/".$total_no_of_carttons],
+            ["SUPRA",$getpreexportbuyerdata[0]['buyer_short_name'],$getpreexportbuyerdata[0]['buyer_country_short_name'],"3/".$total_no_of_carttons],
+            ["SUPRA",$getpreexportbuyerdata[0]['buyer_short_name'],$getpreexportbuyerdata[0]['buyer_country_short_name'],"4/".$total_no_of_carttons],
+            ["SUPRA",$getpreexportbuyerdata[0]['buyer_short_name'],$getpreexportbuyerdata[0]['buyer_country_short_name'],"5/".$total_no_of_carttons],
+            ["SUPRA",$getpreexportbuyerdata[0]['buyer_short_name'],$getpreexportbuyerdata[0]['buyer_country_short_name'],"6/".$total_no_of_carttons]
+        ];
+
+        $html = '
+        <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        td {
+            width: 50%;           /* 2 columns */
+            height: 33%;          /* 3 rows */
+            border: 1px solid #000;
+            text-align: center;
+            vertical-align: middle;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            font-size: 40pt;
+        }
+
+        .crtn {
+            margin-top: 8px;
+            font-size: 30pt;
+        }
+        </style>
+
+        <table>
+        ';
+
+        $i = $total_no_of_carttons;
+        foreach ($labels as $l) {
+
+            if ($i % 2 == 0) {
+                $html .= "<tr>";
+            }
+
+            $html .= '
+                <td>
+                    '.$l[0].'<br>
+                    '.$l[1].'<br>
+                    '.$l[2].'<br><br>
+                    <span class="crtn">CRTN NO: '.$l[3].'</span>
+                </td>
+            ';
+
+            if ($i % 2 == 1) {
+                $html .= "</tr>";
+            }
+
+            $i++;
+        }
+
+        $html .= '</table>';
+
+        $mpdf->WriteHTML($html);
+        $mpdf->Output("labels.pdf","I");
+
+
+
+
+ }
+
+
 }
