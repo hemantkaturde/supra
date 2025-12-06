@@ -26734,14 +26734,24 @@ public function downloadpreexportlabel($preexport_id,$total_no_of_carttons){
             'margin_bottom' => 0
         ]);
 
-        $labels = [
-            ["SUPRA",$getpreexportbuyerdata[0]['buyer_short_name'],$getpreexportbuyerdata[0]['buyer_country_short_name'],"1/".$total_no_of_carttons],
-            ["SUPRA",$getpreexportbuyerdata[0]['buyer_short_name'],$getpreexportbuyerdata[0]['buyer_country_short_name'],"2/".$total_no_of_carttons],
-            ["SUPRA",$getpreexportbuyerdata[0]['buyer_short_name'],$getpreexportbuyerdata[0]['buyer_country_short_name'],"3/".$total_no_of_carttons],
-            ["SUPRA",$getpreexportbuyerdata[0]['buyer_short_name'],$getpreexportbuyerdata[0]['buyer_country_short_name'],"4/".$total_no_of_carttons],
-            ["SUPRA",$getpreexportbuyerdata[0]['buyer_short_name'],$getpreexportbuyerdata[0]['buyer_country_short_name'],"5/".$total_no_of_carttons],
-            ["SUPRA",$getpreexportbuyerdata[0]['buyer_short_name'],$getpreexportbuyerdata[0]['buyer_country_short_name'],"6/".$total_no_of_carttons]
-        ];
+        // $labels = [
+        //     ["SUPRA",$getpreexportbuyerdata[0]['buyer_short_name'],$getpreexportbuyerdata[0]['buyer_country_short_name'],"1/".$total_no_of_carttons],
+        //     ["SUPRA",$getpreexportbuyerdata[0]['buyer_short_name'],$getpreexportbuyerdata[0]['buyer_country_short_name'],"2/".$total_no_of_carttons],
+        //     ["SUPRA",$getpreexportbuyerdata[0]['buyer_short_name'],$getpreexportbuyerdata[0]['buyer_country_short_name'],"3/".$total_no_of_carttons],
+        //     ["SUPRA",$getpreexportbuyerdata[0]['buyer_short_name'],$getpreexportbuyerdata[0]['buyer_country_short_name'],"4/".$total_no_of_carttons],
+        //     ["SUPRA",$getpreexportbuyerdata[0]['buyer_short_name'],$getpreexportbuyerdata[0]['buyer_country_short_name'],"5/".$total_no_of_carttons],
+        //     ["SUPRA",$getpreexportbuyerdata[0]['buyer_short_name'],$getpreexportbuyerdata[0]['buyer_country_short_name'],"6/".$total_no_of_carttons]
+        // ];
+
+
+        $total = $total_no_of_carttons;  // dynamic total cartons
+
+        $labels = [];
+
+        for ($i = 1; $i <= $total; $i++) {
+            $labels[] = ["SUPRA",$getpreexportbuyerdata[0]['buyer_short_name'],$getpreexportbuyerdata[0]['buyer_country_short_name'], $i . "/" . $total];
+        }
+
 
         $html = '
         <style>
