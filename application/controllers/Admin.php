@@ -26922,4 +26922,33 @@ public function viewreworkrecordreasondata($incoming_details_item_id){
 
 
 
+
+
+public function fetchreworkrecordreasondetails($incoming_details_item_id){
+
+    $params = $_REQUEST;
+    $totalRecords = $this->admin_model->fetchreworkrecordreasondetailscount($params,$incoming_details_item_id); 
+    $queryRecords = $this->admin_model->fetchreworkrecordreasondetailsdata($params,$incoming_details_item_id); 
+
+    $data = array();
+    foreach ($queryRecords as $key => $value)
+    {
+        $i = 0;
+        foreach($value as $v)
+        {
+            $data[$key][$i] = $v;
+            $i++;
+        }
+    }
+    $json_data = array(
+        "draw"            => intval( $params['draw'] ),   
+        "recordsTotal"    => intval( $totalRecords ),  
+        "recordsFiltered" => intval($totalRecords),
+        "data"            => $data   // total data array
+        );
+    echo json_encode($json_data);
+}
+
+
+
 }
