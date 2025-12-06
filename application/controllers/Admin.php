@@ -26768,7 +26768,8 @@ public function downloadpreexportlabel($preexport_id,$total_no_of_carttons){
             vertical-align: middle;
             font-family: Arial, sans-serif;
             font-weight: bold;
-            font-size: 40pt;
+            font-size: 38pt;
+            margin-top: 8px;
         }
 
         .crtn {
@@ -26806,11 +26807,7 @@ public function downloadpreexportlabel($preexport_id,$total_no_of_carttons){
         $html .= '</table>';
 
         $mpdf->WriteHTML($html);
-        $mpdf->Output("labels.pdf","I");
-
-
-
-
+        $mpdf->Output("Caton label ".$getpreexportbuyerdata[0]['buyer_name'].".pdf","D");
  }
 
 
