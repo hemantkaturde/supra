@@ -28006,6 +28006,11 @@ $('#export_excel').on('click', function() {
 	            });
 
 
+				$(document).on('click','.addreworkreasondata',function(e){
+
+			         
+
+				});
 
 
 

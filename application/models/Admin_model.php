@@ -22746,7 +22746,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     public function reworkrecordincomingdetailslistdata($params,$vendor_po,$part_no)
     {
-            $this->db->select('*');
+            $this->db->select('*,'.TBL_INCOMING_DETAILS_ITEM.'.id as incoming_details_item_id');
             // $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_REWORK_RECORD.'.vendor_name');
             $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_INCOMING_DETAILS_ITEM.'.pre_vendor_po_number');
             $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
@@ -22782,11 +22782,13 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 //                 <i style='font-size:x-large;cursor:pointer;' class='fa fa-pencil-square-o'></i>
                 //             </a> &nbsp;";
 
-                $actions .= "<a href='".ADMIN_PATH."reworkrecordlotnumberrecord/".$value['rework_id']."' style='cursor:pointer;' target='_blank'>
-                                <i style='font-size:x-large;cursor:pointer;' class='fa fa-plus-square-o'></i>
-                            </a> &nbsp;";
+                // $actions .= "<a href='".ADMIN_PATH."reworkrecordlotnumberrecord/".$value['rework_id']."' style='cursor:pointer;' target='_blank'>
+                //                 <i style='font-size:x-large;cursor:pointer;' class='fa fa-plus-square-o'></i>
+                //             </a> &nbsp;";
 
-                // $actions .= "<i style='font-size:x-large;cursor:pointer;' data-id='".$value['rework_id']."' class='fa fa-trash-o deletereworkrecordreport'></i>";
+                // $actions .= "<i style='font-size:x-large;cursor:pointer;' data-id='".$value['rework_id']."' class='fa fa-plus-square-o addreworkreasondata'></i>";
+                $actions .= "<i style='font-size: x-large;cursor: pointer;color: #3c8dbc;' data-toggle='modal' data-target='#addNewModal' data-id='".$value['incoming_details_item_id']."' rework_id='".$value['rework_id']."' class='fa fa-plus-square-o addreworkreasondata' aria-hidden='true'></i>  &nbsp "; 
+
 
 
                 $data[] = array(

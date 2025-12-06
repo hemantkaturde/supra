@@ -57,3 +57,74 @@
     </section>
 </div>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/common.js" charset="utf-8"></script>
+
+
+
+<?php $this->load->helper("form"); ?>
+<div class="modal fade" id="addNewModal" role="dialog" aria-labelledby="additem" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+   <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h3 class="modal-title" id="additem">Rework Details</h3>
+            </button>
+         </div>
+         <form role="form" id="saverejectedformitemdataform" action="<?php echo base_url() ?>saverejectedformitemdataform" method="post" role="form">
+            <div class="modal-body">
+               <div class="loader_ajax" style="display:none;">
+                  <div class="loader_ajax_inner"><img src="<?php echo ICONPATH;?>/preloader_ajax.gif"></div>
+               </div>
+
+               <input type="hidden" class="form-control"  id="rework_record_main_form_id" name="rework_record_main_form_id">
+               <input type="hidden" class="form-control"  id="incoming_id" name="incoming_id">
+
+               <div class="form-group row">
+                  <label class="col-sm-4 col-form-label">Reason <span class="required">*</span></label>
+                  <div class="col-sm-8">
+                     <input type="type" class="form-control"  id="rejected_reason" name="rejected_reason" required>
+                     <p class="error rejected_reason_error"></p>
+                  </div>
+               </div>
+               <div class="form-group row">
+                  <label class="col-sm-4 col-form-label">Rework Qty (in pcs) <span class="required">*</span></label>
+                  <div class="col-sm-8">
+                     <input type="number" class="form-control"  id="qty_in_pcs" name="qty_in_pcs">
+                     <p class="error qty_in_pcs_error"></p>
+                  </div>
+               </div>
+               <div class="form-group row">
+                  <label class="col-sm-4 col-form-label">After Rework OK Qty (in pcs)</label>
+                  <div class="col-sm-8">
+                     <input type="number" class="form-control"  id="after_rework_ok_in_pcs" name="after_rework_ok_in_pcs">
+                     <p class="error after_rework_ok_in_pcs_error"></p>
+                  </div>
+               </div>
+               <div class="form-group row">
+                  <label class="col-sm-4 col-form-label">After Rework Rej Qty (in pcs)</label>
+                  <div class="col-sm-8">
+                     <textarea type="text" class="form-control"  id="after_rework_rej_qty_in_pcs"  name="after_rework_rej_qty_in_pcs"></textarea>
+                     <p class="error after_rework_rej_qty_in_pcs_error"></p>
+                  </div>
+               </div>
+               <div class="form-group row">
+                  <label class="col-sm-4 col-form-label">Rework Done By</label>
+                  <div class="col-sm-8">
+                     <textarea type="text" class="form-control"  id="rework_done_by"  name="rework_done_by"></textarea>
+                     <p class="error rework_done_by_error"></p>
+                  </div>
+               </div>
+               <div class="form-group row">
+                  <label class="col-sm-4 col-form-label">Rework Checked By</label>
+                  <div class="col-sm-8">
+                     <textarea type="text" class="form-control"  id="rework_checked_by"  name="rework_checked_by"></textarea>
+                     <p class="error rework_checked_by_error"></p>
+                  </div>
+               </div>
+            </div>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-secondary btn-xl closesaverejectedform" data-dismiss="modal">Close</button>
+               <button type="submit" id="saverejectedformitemdata" name="saverejectedformitemdata" class="btn btn-primary" class="btn btn-success btn-xl">Save</button>
+            </div>
+         </form>
+      </div>
+   </div>
+</div>
