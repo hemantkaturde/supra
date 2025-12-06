@@ -101,21 +101,21 @@
                <div class="form-group row">
                   <label class="col-sm-4 col-form-label">After Rework Rej Qty (in pcs)</label>
                   <div class="col-sm-8">
-                     <textarea type="text" class="form-control"  id="after_rework_rej_qty_in_pcs"  name="after_rework_rej_qty_in_pcs"></textarea>
+                     <input type="text" class="form-control"  id="after_rework_rej_qty_in_pcs"  name="after_rework_rej_qty_in_pcs"></input>
                      <p class="error after_rework_rej_qty_in_pcs_error"></p>
                   </div>
                </div>
                <div class="form-group row">
                   <label class="col-sm-4 col-form-label">Rework Done By</label>
                   <div class="col-sm-8">
-                     <textarea type="text" class="form-control"  id="rework_done_by"  name="rework_done_by"></textarea>
+                     <input type="text" class="form-control"  id="rework_done_by"  name="rework_done_by"></input>
                      <p class="error rework_done_by_error"></p>
                   </div>
                </div>
                <div class="form-group row">
                   <label class="col-sm-4 col-form-label">Rework Checked By</label>
                   <div class="col-sm-8">
-                     <textarea type="text" class="form-control"  id="rework_checked_by"  name="rework_checked_by"></textarea>
+                     <input type="text" class="form-control"  id="rework_checked_by"  name="rework_checked_by"></input>
                      <p class="error rework_checked_by_error"></p>
                   </div>
                </div>
