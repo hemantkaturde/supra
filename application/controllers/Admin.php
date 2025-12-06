@@ -26773,27 +26773,53 @@ public function downloadpreexportlabel($preexport_id,$total_no_of_carttons){
         ';
 
         $i = $total_no_of_carttons;
+        // foreach ($labels as $l) {
+
+        //     if ($i % 2 == 0) {
+        //         $html .= "<tr>";
+        //     }
+
+        //     $html .= '
+        //         <td>
+        //             '.$l[0].'<br>
+        //             '.$l[1].'<br>
+        //             '.$l[2].'<br><br>
+        //             <span class="crtn">CRTN NO: '.$l[3].'</span>
+        //         </td>
+        //     ';
+
+        //     if ($i % 2 == 1) {
+        //         $html .= "</tr>";
+        //     }
+
+        //     $i++;
+        // }
+
+
         foreach ($labels as $l) {
 
-            if ($i % 2 == 0) {
-                $html .= "<tr>";
-            }
+                // Start a new row on every 2 labels
+                if ($i % 2 == 0) {
+                    $html .= "<tr>";
+                }
 
-            $html .= '
-                <td>
-                    '.$l[0].'<br>
-                    '.$l[1].'<br>
-                    '.$l[2].'<br><br>
-                    <span class="crtn">CRTN NO: '.$l[3].'</span>
-                </td>
-            ';
+                $html .= '
+                    <td>
+                        '.$l[0].'<br>
+                        '.$l[1].'<br>
+                        '.$l[2].'<br><br>
+                        <span class="crtn">CRTN NO: '.$l[3].'</span>
+                    </td>
+                ';
 
-            if ($i % 2 == 1) {
-                $html .= "</tr>";
-            }
+                // Close row after 2 labels
+                if ($i % 2 == 1) {
+                    $html .= "</tr>";
+                }
 
-            $i++;
-        }
+                $i++;
+            } 
+
 
         $html .= '</table>';
 
