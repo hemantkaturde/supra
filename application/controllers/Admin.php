@@ -25871,7 +25871,7 @@ $getTdirdata= $this->admin_model->getTdirdata($id);
         'margin_bottom' => 10
     ]);
 
-    $totalLabels = 16;
+    $totalLabels = 14;
 
     $html = '';
 
@@ -25883,7 +25883,8 @@ $getTdirdata= $this->admin_model->getTdirdata($id);
             width:48%; 
             float:left; 
             margin-bottom:20px;
-            margin-right:2%;
+            margin-right:1%;
+            margin-left:1%;
         ">
 
             <!-- TOP BOX -->
@@ -25891,17 +25892,19 @@ $getTdirdata= $this->admin_model->getTdirdata($id);
                 border:1px solid #000; 
                 padding:10px; 
                 text-align:center;
+                margin-right:3%;
+                margin-left:3%;
             ">
 
-                <div align="center" style="font-weight:bold; font-size:12px; margin-bottom:8px;">
+                <div align="center" style="font-weight:bold; font-size:16px; margin-bottom:8px;">
                    '.$getTdirdata[0]['name'].'
                 </div>
 
-                <div align="center" style="font-size:12px; margin-bottom:5px;">
-                    '.$getTdirdata[0]['part_number'].'
+                <div align="center" style="font-size:14px; margin-bottom:5px;">
+                    PART NO - '.$getTdirdata[0]['part_number'].'
                 </div>
 
-                <div align="center" style="font-size:12px;">
+                <div align="center" style="font-size:14px;">
                     QTY-'.$getTdirdata[0]['vendor_order_qty'].' (In Pcs)
                 </div>
 
@@ -25914,8 +25917,10 @@ $getTdirdata= $this->admin_model->getTdirdata($id);
                 padding:12px; 
                 text-align:center;
                 background:grey;
+                margin-right:3%;
+                margin-left:3%;
             ">
-                <div align="center" style="font-size:12px;">
+                <div align="center" style="font-size:14px;">
                      Report No : '.$getTdirdata[0]['report_number'].'
                 </div>
             </div>
