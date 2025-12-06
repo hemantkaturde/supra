@@ -166,3 +166,20 @@
     </section>
 </div>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/common.js" charset="utf-8"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
+<script>
+   $(document).ready(function(){
+			$("select").select2();
+   });
+   
+   $(function() {
+    $(".datepicker").datepicker({ 
+        // minDate: 0,
+        todayHighlight: true,
+                     dateFormat: 'yy-mm-dd',
+        startDate: new Date()
+    });
+   });
+</script>
