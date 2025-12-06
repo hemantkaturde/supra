@@ -22640,9 +22640,9 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
         $this->db->select('*');
         $this->db->where(TBL_FINISHED_GOODS.'.fin_id', $part_no);
-         $this->db->where(TBL_SUPPLIER_VENDOR_COMPALINT.'.vendor_po_id', $vendor_po_number);
-        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_SUPPLIER_VENDOR_COMPALINT.'.vendor_part_number_id');
-        $query_result = $this->db->get(TBL_SUPPLIER_VENDOR_COMPALINT)->result_array();
+         $this->db->where(TBL_TDIR.'.vendor_po', $vendor_po_number);
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_TDIR.'.part_number');
+        $query_result = $this->db->get(TBL_TDIR)->result_array();
         return $query_result;
     }
 
