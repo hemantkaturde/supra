@@ -26744,32 +26744,32 @@ public function downloadpreexportlabel($preexport_id,$total_no_of_carttons){
 
 
         $html = '
-        <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
+            <style>
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
 
-        td {
-            width: 50%;           /* 2 columns */
-            height: 33%;          /* 3 rows */
-            border: 1px solid #000;
-            text-align: center;
-            vertical-align: middle;
-            font-family: Arial, sans-serif;
-            font-weight: bold;
-            font-size: 34pt;
-            margin-top: 8px;
-            padding-top: 5%; 
-        }
+            td {
+                width: 50%;           /* 2 columns */
+                height: 33%;          /* 3 rows */
+                border: 1px solid #000;
+                text-align: center;
+                vertical-align: middle;
+                font-family: Arial, sans-serif;
+                font-weight: bold;
+                font-size: 34pt;
+                margin-top: 8px;
+                padding-top: 5%; 
+            }
 
-        .crtn {
-            margin-top: 8px;
-            font-size: 30pt;
-        }
-        </style>
+            .crtn {
+                margin-top: 8px;
+                font-size: 30pt;
+            }
+            </style>
 
-        <table>
+            <table>
         ';
 
         $i = $total_no_of_carttons;
@@ -26802,7 +26802,6 @@ public function downloadpreexportlabel($preexport_id,$total_no_of_carttons){
                 if ($i % 2 == 0) {
                     $html .= "<tr>";
                 }
-
                 $html .= '
                     <td>
                         '.$l[0].'<br>
@@ -26818,8 +26817,7 @@ public function downloadpreexportlabel($preexport_id,$total_no_of_carttons){
                 }
 
                 $i++;
-            } 
-
+        } 
 
         $html .= '</table>';
 
