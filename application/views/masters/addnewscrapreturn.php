@@ -244,7 +244,7 @@
                                                         <div class="col-sm-8">
                                                             <select class="form-control" name="description" id="description">
                                                                 <option st-id="" value="">Select Description</option>
-                                                                    <option value="Brass Genrated Scrap">Brass Genrated Scrap</option>
+                                                                    <option value="Brass Generated Scrap">Brass Generated Scrap</option>
                                                                     <option value="Brass REjection PCS">Brass Rejection PCS</option>
                                                             </select>
                                                             <p class="error description_error"></p>
