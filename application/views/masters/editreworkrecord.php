@@ -39,7 +39,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Date <span class="required">*</span></label>
-                                            <input type="date" class="form-control" name="date"  value="<?=$getreworkrecorddatabyid[0]['date']?>" required>
+                                            <input type="date" class="form-control" name="date"  value="<?=$getreworkrecorddatabyid[0]['reword_record_date']?>" required>
                                             <p class="error date_error"></p>
                                         </div>
                                     </div>

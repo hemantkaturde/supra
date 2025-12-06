@@ -22561,7 +22561,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     public function fetchreworkrecordlistdata($params)
     {
-            $this->db->select('*,'.TBL_VENDOR.'.vendor_name as actual_vendor_name,'.TBL_REWORK_RECORD.'.status as rework_record_status,'.TBL_REWORK_RECORD.'.remarks as remarksas_rework,'.TBL_REWORK_RECORD.'.id as rework_id');
+            $this->db->select('*,'.TBL_VENDOR.'.vendor_name as actual_vendor_name,'.TBL_REWORK_RECORD.'.status as rework_record_status,'.TBL_REWORK_RECORD.'.remarks as remarksas_rework,'.TBL_REWORK_RECORD.'.id as rework_id,'.TBL_REWORK_RECORD.'.date as rework_record_date');
             $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_REWORK_RECORD.'.vendor_name');
             $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_REWORK_RECORD.'.vendor_po');
             $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_REWORK_RECORD.'.part_no');
@@ -22604,7 +22604,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
                 $data[] = array(
                     'rework_record_no' => $value['rework_record_no'],
-                    'date' => $value['date'],
+                    'date' => $value['rework_record_date'],
                     'vendor_name' => $value['actual_vendor_name'],
                     'po_number' => $value['po_number'],
                     'part_number' => $value['part_number'],
@@ -22625,7 +22625,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     public function getreworkrecorddatabyid($id){
 
-            $this->db->select('*,'.TBL_VENDOR.'.vendor_name as actual_vendor_name,'.TBL_REWORK_RECORD.'.status as rework_record_status,'.TBL_REWORK_RECORD.'.remarks as remarksas_rework,'.TBL_REWORK_RECORD.'.id as rework_id');
+            $this->db->select('*,'.TBL_VENDOR.'.vendor_name as actual_vendor_name,'.TBL_REWORK_RECORD.'.status as rework_record_status,'.TBL_REWORK_RECORD.'.remarks as remarksas_rework,'.TBL_REWORK_RECORD.'.id as rework_id,'.TBL_REWORK_RECORD.'.date as reword_record_date');
             $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_REWORK_RECORD.'.vendor_name');
             $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_REWORK_RECORD.'.vendor_po');
             $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_REWORK_RECORD.'.part_no');
