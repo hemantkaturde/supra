@@ -26748,7 +26748,7 @@ public function downloadpreexportlabel($preexport_id,$total_no_of_carttons){
 
         $labels = [];
 
-        for ($i = 0; $i <= $total; $i++) {
+        for ($i = 1; $i <= $total; $i++) {
             $labels[] = ["SUPRA",$getpreexportbuyerdata[0]['buyer_short_name'],$getpreexportbuyerdata[0]['buyer_country_short_name'], $i . "/" . $total];
         }
 
