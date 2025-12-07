@@ -22878,7 +22878,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $actions ="";
                 /** 🔽 Action Icons */
                 $actions .= "<a href='".ADMIN_PATH."viewreworkrecordreasondata/".$value['rework_resaon_id']."' style='cursor:pointer;' target='_blank'>
-                                <i style='font-size:x-large;cursor:pointer;' class='fa fa-eye'></i>
+                                <i style='font-size:x-large;cursor:pointer;' class='fa fa-pencil-square-o'></i>
                             </a> &nbsp;";
 
 
