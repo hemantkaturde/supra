@@ -15,6 +15,11 @@
                     <li class="active"><a href="javascript:void(0);">Rework Record Incoming Details</a></li>
                 </ul>
             </div>
+              <div class="col-xs-6 text-right">
+                <div class="form-group">
+                   <input type="button" onclick="location.href = '<?php echo base_url() ?>reworkrecordform'" class="btn  btn-primary" value="Back" />
+                </div>
+            </div>
         </div>
         <div class="row">
             <div class="col-xs-12">
