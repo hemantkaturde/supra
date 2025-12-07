@@ -28061,7 +28061,6 @@ $('#export_excel').on('click', function() {
 			    });
 
 
-
 				$(document).ready(function() {
 
 
@@ -28096,7 +28095,6 @@ $('#export_excel').on('click', function() {
 
 
 				});
-
 
 
 				$(document).on('click','.deletereworkrecordreasondata',function(e){
@@ -28148,8 +28146,6 @@ $('#export_excel').on('click', function() {
 					});
 	            });
 
-
-
 				$(document).on('click','.editreworkrecordreport',function(e){  
 					e.preventDefault();
 					var elemF = $(this);
@@ -28179,10 +28175,6 @@ $('#export_excel').on('click', function() {
 					});
 					return false;
 				});
-
-
-
-
 
 				$(document).on('click','#editrejectionreworkitemdata',function(e){
 					e.preventDefault();
@@ -28229,7 +28221,6 @@ $('#export_excel').on('click', function() {
 						});
 					return false;
 			    });
-
 
 
 			</script> 
