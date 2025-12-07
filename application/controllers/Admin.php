@@ -26882,12 +26882,12 @@ public function saverejectionreworkitemdataform(){
             }
             
             $data = array(
-                'main_rework_resaon_id' =>  trim($this->input->post('incoming_item_data_id')),
-                'incoming_item_id' =>  trim($this->input->post('rework_id')),
-                'rejected_reason' =>  trim($this->input->post('quantity_in_gonis')),
+                'main_rework_resaon_id' =>  trim($this->input->post('rework_id')),
+                'incoming_item_id' =>  trim($this->input->post('incoming_item_data_id')),
+                'rejected_reason' =>  trim($this->input->post('rejected_reason')),
                 'qty_in_pcs' =>  trim($this->input->post('rework_qty_in_pcs')),
                 'after_rework_ok_in_pcs' =>  trim($this->input->post('after_rework_ok_in_pcs')),
-                'after_rework_ok_in_pcs' =>  trim($this->input->post('after_rework_rej_qty_in_pcs')),
+                'after_rework_rej_qty_in_pcs' =>  trim($this->input->post('after_rework_rej_qty_in_pcs')),
                 'rework_done_by' =>  trim($this->input->post('rework_done_by')),
                 'rework_checked_by' =>  trim($this->input->post('rework_checked_by'))
             );
@@ -26925,6 +26925,7 @@ public function viewreworkrecordreasondata($incoming_details_item_id){
 
 
 public function fetchreworkrecordreasondetails($incoming_details_item_id){
+
 
     $params = $_REQUEST;
     $totalRecords = $this->admin_model->fetchreworkrecordreasondetailscount($params,$incoming_details_item_id); 

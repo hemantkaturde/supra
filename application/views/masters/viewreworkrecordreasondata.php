@@ -12,7 +12,7 @@
                 <ul class="breadcrumb" style="background-color:#ecf0f5 !important">
                     <li class="completed"><a href="javascript:void(0);">Masters</a></li>
                     <li class="active"><a href="javascript:void(0);"> Rework Record Reason Details</a></li>
-                    <input readonly  type="hideen" class="form-control" id="incoming_details_item_id" value="<?=$incoming_details_item_id?>" name="incoming_details_item_id" readonly>
+                    <input readonly  type="text" class="form-control" id="incoming_details_item_id" value="<?=$incoming_details_item_id?>" name="incoming_details_item_id" readonly>
 
                 </ul>
             </div>
@@ -22,7 +22,7 @@
                 <div class="box">
                     <div class="box-body">   
                         <div class="panel-body">
-                            <table width="100%" class="table table-striped table-bordered table-hover" id="rework_record_reason_details">
+                            <table width="100%" class="table table-striped table-bordered table-hover rework_record_reason_details" id="rework_record_reason_details">
                                 <thead>
                                     <tr style="background-color:#3c8dbc !important;color:#fff">
                                         <th>Reason</th>
@@ -47,3 +47,16 @@
     </section>
 </div>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/common.js" charset="utf-8"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
+<script>
+   $(function() {
+   $(".datepicker").datepicker({ 
+   	// minDate: 0,
+   	todayHighlight: true,
+                 dateFormat: 'yy-mm-dd',
+   	startDate: new Date()
+   });
+   });
+</script>

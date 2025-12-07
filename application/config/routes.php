@@ -637,8 +637,6 @@ $route['saverejectionreworkitemdataform'] = "admin/saverejectionreworkitemdatafo
 
 $route['viewreworkrecordreasondata/(:any)'] = "admin/viewreworkrecordreasondata/$1";
 
-$route['fetchreworkrecordreasondetails/(:any)'] = "admin/fetchreworkrecordreasondetails/$1";
-
 
 
 

@@ -27778,41 +27778,6 @@ $('#export_excel').on('click', function() {
 						},
 					});
 
-
-                    var incoming_details_item_id = $('#incoming_details_item_id').val();
-
-					var dt = $('#rework_record_reason_details').DataTable({
-						"columnDefs": [ 
-							{ className: "details-control", "targets": [ 0 ] },
-							{ "width": "10%", "targets": 0 },
-							{ "width": "10%", "targets": 1 },
-							{ "width": "10%", "targets": 2 },
-							{ "width": "10%", "targets": 3 },
-							{ "width": "10%", "targets": 4 },
-							{ "width": "10%", "targets": 5 },
-							{ "width": "10%", "targets": 6 },
-							{ "width": "10%", "targets": 7 },
-							{ "width": "10%", "targets": 8 },
-							{ "width": "10%", "targets": 9 },
-							
-						],
-						responsive: true,
-						"oLanguage": {
-							"sEmptyTable": "<i>No Rework Record Found.</i>",
-						}, 
-						"bSort" : false,
-						"bFilter":true,
-						"bLengthChange": true,
-						"iDisplayLength": 10,   
-						"bProcessing": true,
-						"serverSide": true,
-						"ajax":{
-							url :"<?php echo base_url();?>admin/fetchreworkrecordreasondetails/288",
-							type: "post",
-						},
-					});
-
-
 				});
 
 				$(document).on('change','#vendor_name',function(e){  
@@ -28095,6 +28060,42 @@ $('#export_excel').on('click', function() {
 					return false;
 			    });
 
+
+
+				$(document).ready(function() {
+
+
+				 var incoming_details_item_id = $('#incoming_details_item_id').val();
+
+					var dt = $('#rework_record_reason_details').DataTable({
+						"columnDefs": [ 
+							{ className: "details-control", "targets": [ 0 ] },
+							{ "width": "10%", "targets": 0 },
+							{ "width": "10%", "targets": 1 },
+							{ "width": "10%", "targets": 2 },
+							{ "width": "10%", "targets": 3 },
+							{ "width": "10%", "targets": 4 },
+							{ "width": "10%", "targets": 5 },
+							{ "width": "10%", "targets": 6 },
+						],
+						responsive: true,
+						"oLanguage": {
+							"sEmptyTable": "<i>No Rework Record Found.</i>",
+						}, 
+						"bSort" : false,
+						"bFilter":true,
+						"bLengthChange": true,
+						"iDisplayLength": 10,   
+						"bProcessing": true,
+						"serverSide": true,
+						"ajax":{
+							url :"<?php echo base_url();?>admin/fetchreworkrecordreasondetails/"+incoming_details_item_id,
+							type: "post",
+						},
+					});
+
+
+				});
 
 
 

@@ -22839,10 +22839,9 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
        public function fetchreworkrecordreasondetailscount($params,$incoming_details_item_id)
     {
-             $this->db->select('*');
-            // $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_REWORK_RECORD.'.vendor_name');
-            $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_INCOMING_DETAILS_ITEM.'.pre_vendor_po_number');
-            $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
+            $this->db->select('*');
+            $this->db->where(TBL_REWORK_RECORD_REASON_DATA.'.incoming_item_id', $incoming_details_item_id);
+            $this->db->order_by(TBL_REWORK_RECORD_REASON_DATA.'.rework_resaon_id', 'DESC');
 
             // // 🔍 Text search filter
             // if (!empty($params['search_by_any'])) {
@@ -22857,7 +22856,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             //     $this->db->group_end();
             // }
 
-            $query = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
+            $query = $this->db->get(TBL_REWORK_RECORD_REASON_DATA);
             $result = $query->row();
             return $result ? (int)$result->total : 0;
     }
@@ -22865,10 +22864,9 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     public function fetchreworkrecordreasondetailsdata($params,$incoming_details_item_id)
     {
             $this->db->select('*');
-            $this->db->where(TBL_REWORK_RECORD_REASON_DATA.'.pre_vendor_po_number', $vendor_po);
-            $this->db->where(TBL_REWORK_RECORD_REASON_DATA.'.part_number', $part_no);
+            $this->db->where(TBL_REWORK_RECORD_REASON_DATA.'.incoming_item_id', $incoming_details_item_id);
 
-            $this->db->order_by(TBL_REWORK_RECORD_REASON_DATA.'.id', 'DESC');
+            $this->db->order_by(TBL_REWORK_RECORD_REASON_DATA.'.rework_resaon_id', 'DESC');
             $this->db->limit($params['length'], $params['start']);
             $query = $this->db->get(TBL_REWORK_RECORD_REASON_DATA);
             $fetch_result = $query->result_array();
@@ -22879,7 +22877,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
                 $actions ="";
                 /** 🔽 Action Icons */
-                $actions .= "<a href='".ADMIN_PATH."viewreworkrecordreasondata/".$value['incoming_details_item_id']."' style='cursor:pointer;' target='_blank'>
+                $actions .= "<a href='".ADMIN_PATH."viewreworkrecordreasondata/".$value['rework_resaon_id']."' style='cursor:pointer;' target='_blank'>
                                 <i style='font-size:x-large;cursor:pointer;' class='fa fa-eye'></i>
                             </a> &nbsp;";
 
