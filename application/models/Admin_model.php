@@ -22542,15 +22542,14 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             $this->db->join(TBL_TEAM_MASTER, TBL_TEAM_MASTER.'.id = '.TBL_REWORK_RECORD.'.team','left');
 
             // 🔍 Text search filter
-            if (!empty($params['search_by_any'])) {
-                $search = $this->db->escape_like_str($params['search_by_any']);
+            if (!empty($params['search']['value'])) {
                 $this->db->group_start();
-                $this->db->like(TBL_REWORK_RECORD.'.rework_record_no', $search);
-                $this->db->or_like(TBL_REWORK_RECORD.'.date', $search);
-                $this->db->or_like(TBL_VENDOR.'.vendor_name', $search);
-                $this->db->or_like(TBL_VENDOR_PO_MASTER.'.po_number', $search);
-                $this->db->or_like(TBL_REWORK_RECORD.'.boxex_goni_bundle', $search);
-                $this->db->or_like(TBL_REWORK_RECORD.'.fg_material_gross_weight', $search);
+                $this->db->like(TBL_REWORK_RECORD.'.rework_record_no', $params['search']['value']);
+                $this->db->or_like(TBL_REWORK_RECORD.'.date', $params['search']['value']);
+                $this->db->or_like(TBL_VENDOR.'.vendor_name', $params['search']['value']);
+                $this->db->or_like(TBL_VENDOR_PO_MASTER.'.po_number', $params['search']['value']);
+                $this->db->or_like(TBL_REWORK_RECORD.'.boxex_goni_bundle',$params['search']['value']);
+                $this->db->or_like(TBL_REWORK_RECORD.'.fg_material_gross_weight', $params['search']['value']);
                 $this->db->group_end();
             }
 
@@ -22568,15 +22567,14 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             $this->db->join(TBL_TEAM_MASTER, TBL_TEAM_MASTER.'.id = '.TBL_REWORK_RECORD.'.team','left');
 
             // 🔍 Text search filter
-            if (!empty($params['search_by_any'])) {
-                $search = $this->db->escape_like_str($params['search_by_any']);
+            if (!empty($params['search']['value'])) {
                 $this->db->group_start();
-                $this->db->like(TBL_REWORK_RECORD.'.rework_record_no', $search);
-                $this->db->or_like(TBL_REWORK_RECORD.'.date', $search);
-                $this->db->or_like(TBL_VENDOR.'.vendor_name', $search);
-                $this->db->or_like(TBL_VENDOR_PO_MASTER.'.po_number', $search);
-                $this->db->or_like(TBL_REWORK_RECORD.'.boxex_goni_bundle', $search);
-                $this->db->or_like(TBL_REWORK_RECORD.'.fg_material_gross_weight', $search);
+                $this->db->like(TBL_REWORK_RECORD.'.rework_record_no', $params['search']['value']);
+                $this->db->or_like(TBL_REWORK_RECORD.'.date', $params['search']['value']);
+                $this->db->or_like(TBL_VENDOR.'.vendor_name', $params['search']['value']);
+                $this->db->or_like(TBL_VENDOR_PO_MASTER.'.po_number', $params['search']['value']);
+                $this->db->or_like(TBL_REWORK_RECORD.'.boxex_goni_bundle',$params['search']['value']);
+                $this->db->or_like(TBL_REWORK_RECORD.'.fg_material_gross_weight', $params['search']['value']);
                 $this->db->group_end();
             }
 
@@ -22726,18 +22724,13 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_INCOMING_DETAILS_ITEM.'.pre_vendor_po_number');
             $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
 
-            // // 🔍 Text search filter
-            // if (!empty($params['search_by_any'])) {
-            //     $search = $this->db->escape_like_str($params['search_by_any']);
-            //     $this->db->group_start();
-            //     $this->db->like(TBL_REWORK_RECORD.'.rework_record_no', $search);
-            //     $this->db->or_like(TBL_REWORK_RECORD.'.date', $search);
-            //     $this->db->or_like(TBL_VENDOR.'.vendor_name', $search);
-            //     $this->db->or_like(TBL_VENDOR_PO_MASTER.'.po_number', $search);
-            //     $this->db->or_like(TBL_REWORK_RECORD.'.boxex_goni_bundle', $search);
-            //     $this->db->or_like(TBL_REWORK_RECORD.'.fg_material_gross_weight', $search);
-            //     $this->db->group_end();
-            // }
+            if (!empty($params['search']['value'])) {
+                $this->db->group_start();
+                $this->db->like(TBL_INCOMING_DETAILS_ITEM.'.lot_no',  $params['search']['value']);
+                $this->db->or_like(TBL_INCOMING_DETAILS_ITEM.'.invoice_qty',  $params['search']['value']);
+                $this->db->or_like(TBL_INCOMING_DETAILS_ITEM.'.invoice_date',  $params['search']['value']);
+                $this->db->group_end();
+            }
 
             $query = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
             $result = $query->row();
@@ -22754,17 +22747,13 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             // $this->db->join(TBL_TEAM_MASTER, TBL_TEAM_MASTER.'.id = '.TBL_REWORK_RECORD.'.team','left');
 
             // Text search filter
-            // if (!empty($params['search_by_any'])) {
-            //     $search = $this->db->escape_like_str($params['search_by_any']);
-            //     $this->db->group_start();
-            //     $this->db->like(TBL_REWORK_RECORD.'.rework_record_no', $search);
-            //     $this->db->or_like(TBL_REWORK_RECORD.'.date', $search);
-            //     $this->db->or_like(TBL_VENDOR.'.vendor_name', $search);
-            //     $this->db->or_like(TBL_VENDOR_PO_MASTER.'.po_number', $search);
-            //     $this->db->or_like(TBL_REWORK_RECORD.'.boxex_goni_bundle', $search);
-            //     $this->db->or_like(TBL_REWORK_RECORD.'.fg_material_gross_weight', $search);
-            //     $this->db->group_end();
-            // }
+            if (!empty($params['search']['value'])) {
+                $this->db->group_start();
+                $this->db->like(TBL_INCOMING_DETAILS_ITEM.'.lot_no',  $params['search']['value']);
+                $this->db->or_like(TBL_INCOMING_DETAILS_ITEM.'.invoice_qty',  $params['search']['value']);
+                $this->db->or_like(TBL_INCOMING_DETAILS_ITEM.'.invoice_date',  $params['search']['value']);
+                $this->db->group_end();
+            }
             $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.pre_vendor_po_number', $vendor_po);
             $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.part_number', $part_no);
 
