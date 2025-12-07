@@ -12,7 +12,7 @@
                 <ul class="breadcrumb" style="background-color:#ecf0f5 !important">
                     <li class="completed"><a href="javascript:void(0);">Masters</a></li>
                     <li class="active"><a href="javascript:void(0);"> Rework Record Reason Details</a></li>
-                    <input readonly  type="text" class="form-control" id="incoming_details_item_id" value="<?=$incoming_details_item_id?>" name="incoming_details_item_id" readonly>
+                    <input readonly  type="hidden" class="form-control" id="incoming_details_item_id" value="<?=$incoming_details_item_id?>" name="incoming_details_item_id" readonly>
 
                 </ul>
             </div>
