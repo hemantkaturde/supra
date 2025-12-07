@@ -28150,6 +28150,34 @@ $('#export_excel').on('click', function() {
 
 
 
-
+				$(document).on('click','.editreworkrecordreport',function(e){  
+					e.preventDefault();
+					var elemF = $(this);
+					var rework_rejection_id = elemF.attr('data-id');		
+					$.ajax({
+						url : "<?php echo base_url();?>admin/getreworkrecordreporteditdata",
+						type: "POST",
+						data : 'id='+rework_rejection_id,
+						success: function(data, textStatus, jqXHR)
+						{
+								var fetchResponse = $.parseJSON(data);
+								$('#addNewModal').modal('show'); 
+								$('#rework_reson_id_main').val(fetchResponse.rework_resaon_id); 
+								$('#incoming_item_data_id').val(fetchResponse.incoming_item_id); 
+								$('#rework_id').val(fetchResponse.rework_resaon_id);  
+								$('#rejected_reason').val(fetchResponse.rejected_reason);  
+								$('#rework_qty_in_pcs').val(fetchResponse.qty_in_pcs);  
+								$('#after_rework_ok_in_pcs').val(fetchResponse.after_rework_ok_in_pcs);  
+								$('#after_rework_rej_qty_in_pcs').val(fetchResponse.after_rework_rej_qty_in_pcs);  
+								$('#rework_done_by').val(fetchResponse.rework_done_by); 
+								$('#rework_checked_by').val(fetchResponse.rework_checked_by); 
+						},
+						error: function (jqXHR, textStatus, errorThrown)
+						{
+						$(".loader_ajax").hide();
+						}
+					});
+					return false;
+				});
 			</script> 
 <?php } ?>

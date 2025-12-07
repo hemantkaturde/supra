@@ -22878,12 +22878,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $actions ="";
                 /** 🔽 Action Icons */
 
-                $actions .= "<i style='font-size:x-large;cursor:pointer;' data-id='".$value['rework_resaon_id']."' class='fa fa-pencil-square-o deletereworkrecordreport'></i> &nbsp";
-
-
+                $actions .= "<i style='font-size:x-large;cursor:pointer;' data-id='".$value['rework_resaon_id']."' class='fa fa-pencil-square-o editreworkrecordreport'></i> &nbsp";
                 $actions .= "<i style='font-size:x-large;cursor:pointer;' data-id='".$value['rework_resaon_id']."' class='fa fa-trash-o deletereworkrecordreasondata'></i>";
-
-
 
                 $data[] = array(
                     'rejected_reason' => $value['rejected_reason'],
@@ -22917,6 +22913,17 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
            return FALSE;
         }
 
+
+    }
+
+
+    public function getreworkrecordreporteditdata($id){
+
+        $this->db->select('*');
+        $this->db->where(TBL_REWORK_RECORD_REASON_DATA.'.rework_resaon_id', $id);
+        $query = $this->db->get(TBL_REWORK_RECORD_REASON_DATA);
+        $fetch_result = $query->result_array();
+        return $fetch_result;
 
     }
 

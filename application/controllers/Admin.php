@@ -26875,11 +26875,7 @@ public function saverejectionreworkitemdataform(){
        
         }else{
 
-            if(trim($this->input->post('packingchallanid'))){
-                $packingchallanid = trim($this->input->post('packingchallanid'));
-            }else{
-                $packingchallanid = NULL;
-            }
+       
             
             $data = array(
                 'main_rework_resaon_id' =>  trim($this->input->post('rework_id')),
@@ -26892,13 +26888,13 @@ public function saverejectionreworkitemdataform(){
                 'rework_checked_by' =>  trim($this->input->post('rework_checked_by'))
             );
 
-            // if(trim($this->input->post('packing_challan_item_id'))){
-            //     $packing_challan_item_id = trim($this->input->post('packing_challan_item_id'));
-            // }else{
-            //     $packing_challan_item_id = NULL;
-            // }
+            if(trim($this->input->post('rework_reson_id_main'))){
+                $rework_reson_id_main = trim($this->input->post('rework_reson_id_main'));
+            }else{
+                $rework_reson_id_main = NULL;
+            }
             
-            $saverejectionreworkitemdataform= $this->admin_model->saverejectionreworkitemdataform('',$data);
+            $saverejectionreworkitemdataform= $this->admin_model->saverejectionreworkitemdataform($rework_reson_id_main,$data);
             if($saverejectionreworkitemdataform){
                 $saverejectionreworkitemdataform_response['status'] = 'success';
                 $saverejectionreworkitemdataform_response['error'] = array('rejected_reason'=>strip_tags(form_error('rejected_reason')),'rework_qty_in_pcs'=>strip_tags(form_error('rework_qty_in_pcs')),'after_rework_ok_in_pcs'=>strip_tags(form_error('after_rework_ok_in_pcs')),'after_rework_rej_qty_in_pcs'=>strip_tags(form_error('after_rework_rej_qty_in_pcs')),'rework_done_by'=>strip_tags(form_error('rework_done_by')),'rework_checked_by'=>strip_tags(form_error('rework_checked_by')));
@@ -26966,6 +26962,23 @@ public function deletereworkrecordreasondata(){
             }else{
                 echo(json_encode(array('status'=>'failed'))); 
             }
+
+
+}
+
+
+public function getreworkrecordreporteditdata(){
+
+  $post_submit = $this->input->post();
+    if($post_submit){
+        $getreworkrecordreporteditdata = $this->admin_model->getreworkrecordreporteditdata(trim($this->input->post('id')));
+        if($getreworkrecordreporteditdata){
+            $content = $getreworkrecordreporteditdata[0];
+            echo json_encode($content);
+        }else{
+            echo 'failure';
+        }
+    }
 
 
 }
