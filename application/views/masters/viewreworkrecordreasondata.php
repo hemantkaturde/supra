@@ -13,8 +13,12 @@
                     <li class="completed"><a href="javascript:void(0);">Masters</a></li>
                     <li class="active"><a href="javascript:void(0);"> Rework Record Reason Details</a></li>
                     <input readonly  type="hidden" class="form-control" id="incoming_details_item_id" value="<?=$incoming_details_item_id?>" name="incoming_details_item_id" readonly>
-
                 </ul>
+            </div>
+             <div class="col-xs-6 text-right">
+                <div class="form-group">
+                   <input type="button" onclick="location.href = '<?php echo base_url() ?>reworkrecordlotnumberrecord/'<?=$incoming_details_item_id?>" class="btn  btn-primary" value="Back" />
+                </div>
             </div>
         </div>
         <div class="row">

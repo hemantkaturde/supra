@@ -28099,5 +28099,57 @@ $('#export_excel').on('click', function() {
 
 
 
+				$(document).on('click','.deletereworkrecordreasondata',function(e){
+					var elemF = $(this);
+					e.preventDefault();
+                     var incoming_details_item_id = $('#incoming_details_item_id').val();
+					swal({
+						title: "Are you sure?",
+						text: "Delete Rework Record Reason",
+						type: "warning",
+						showCancelButton: true,
+						closeOnClickOutside: false,
+						confirmButtonClass: "btn-sm btn-danger",
+						confirmButtonText: "Yes, delete it!",
+						cancelButtonText: "No, cancel plz!",
+						closeOnConfirm: false,
+						closeOnCancel: false
+					}, function(isConfirm) {
+						if (isConfirm) {
+									$.ajax({
+										url : "<?php echo base_url();?>deletereworkrecordreasondata",
+										type: "POST",
+										data : 'id='+elemF.attr('data-id'),
+										success: function(data, textStatus, jqXHR)
+										{
+											const obj = JSON.parse(data);
+										
+											if(obj.status=='success'){
+												swal({
+													title: "Deleted!",
+													text: "Rework Record Reason Succesfully Deleted",
+													icon: "success",
+													button: "Ok",
+													},function(){ 
+														window.location.href = "<?php echo base_url()?>viewreworkrecordreasondata/"+incoming_details_item_id;
+													});	
+											}
+
+										},
+										error: function (jqXHR, textStatus, errorThrown)
+										{
+											$(".loader_ajax").hide();
+										}
+									})
+								}
+								else {
+						swal("Cancelled", "Rework Record Reason deletion cancelled ", "error");
+						}
+					});
+	            });
+
+
+
+
 			</script> 
 <?php } ?>

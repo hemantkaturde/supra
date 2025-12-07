@@ -26951,5 +26951,25 @@ public function fetchreworkrecordreasondetails($incoming_details_item_id){
 }
 
 
+public function deletereworkrecordreasondata(){
+
+            $post_submit = $this->input->post();
+            if($post_submit){
+                $result = $this->admin_model->deletereworkrecordreasondata(trim($this->input->post('id')));
+                if ($result) {
+                            $process = 'Rework Record Record Delete';
+                            $processFunction = 'Admin/deletereworkrecordreasondata';
+                            $this->logrecord($process,$processFunction);
+                        echo(json_encode(array('status'=>'success')));
+                    }
+                else { echo(json_encode(array('status'=>'failed'))); }
+            }else{
+                echo(json_encode(array('status'=>'failed'))); 
+            }
+
+
+}
+
+
 
 }

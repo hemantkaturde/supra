@@ -22877,9 +22877,12 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
                 $actions ="";
                 /** 🔽 Action Icons */
-                $actions .= "<a href='".ADMIN_PATH."viewreworkrecordreasondata/".$value['rework_resaon_id']."' style='cursor:pointer;' target='_blank'>
-                                <i style='font-size:x-large;cursor:pointer;' class='fa fa-pencil-square-o'></i>
-                            </a> &nbsp;";
+
+                $actions .= "<i style='font-size:x-large;cursor:pointer;' data-id='".$value['rework_resaon_id']."' class='fa fa-pencil-square-o deletereworkrecordreport'></i> &nbsp";
+
+
+                $actions .= "<i style='font-size:x-large;cursor:pointer;' data-id='".$value['rework_resaon_id']."' class='fa fa-trash-o deletereworkrecordreasondata'></i>";
+
 
 
                 $data[] = array(
@@ -22896,6 +22899,25 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             }
 
             return $data;
+    }
+
+
+    public function deletereworkrecordreasondata($id){
+
+        $this->db->where('rework_resaon_id', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_REWORK_RECORD_REASON_DATA)){
+               return TRUE;
+            //   $this->db->where('packing_challan_id', $id);
+            //   //$this->db->delete(TBL_SUPPLIER);
+            //   if($this->db->delete(TBL_PACKING_CHALLAN_ITEM)){
+            //         return TRUE;
+            //   }
+        }else{
+           return FALSE;
+        }
+
+
     }
 
 
