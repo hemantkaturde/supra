@@ -4141,7 +4141,61 @@ class Admin extends BaseController
 
     }
 
+   public function verifydabatables($var1,$table)
+    {
+        $config = array(
+            'hostname' => TH_DB_HOST,
+            'username' => TH_DB_USER,
+            'password' => TH_DB_PASSWORD,
+            'database' => $var1,
+            'dbdriver' => 'mysqli',
+            'pconnect' => FALSE,
+            'db_debug' => TRUE
+        );
 
+        $DB = $this->load->database($config, TRUE);
+        
+        if (!$DB->table_exists($table)) {
+            exit("❌ Table '$table' not found in database '$dbname'");
+        }
+
+        $rows = $DB->get($table)->result_array();
+
+        if (empty($rows)) {
+            exit("⚠️ No data found in table '$table'");
+        }
+
+        $fields = $DB->field_data($table);
+        $primary_key = "";
+
+        foreach ($fields as $f) {
+            if ($f->primary_key == 1) {
+                $primary_key = $f->name;
+                break;
+            }
+        }
+
+        if ($primary_key == "") {
+            exit("❌ No primary key found in table '$table'");
+        }
+        foreach ($rows as $r) {
+
+         $updated_data = [];
+
+            foreach ($r as $col => $val) {
+                if ($col == $primary_key) {
+                    continue;
+                }
+                if ($val !== null && $val !== "") {
+                    $updated_data[$col] = $this->encrypt_value((string)$val);
+                }
+            }
+            $DB->where($primary_key, $r[$primary_key]);
+            $DB->update($table, $updated_data);
+        }
+
+        echo "✔ <b>$dbname</b>, Table: <b>$table</b>";
+    }
 
     public function deleteSupplierPoconfirmation(){
 
@@ -26979,10 +27033,6 @@ public function getreworkrecordreporteditdata(){
             echo 'failure';
         }
     }
-
-
 }
-
-
 
 }

@@ -206,4 +206,17 @@ class BaseController extends CI_Controller {
 		$this->load->model('login_model');
 		$this->login_model->loginsert($logInfo);
 	}
+
+    public function encrypt_value($string)
+    {
+        $key = "MY_SECRET_KEY_123";
+        $out = "";
+
+        for ($i = 0; $i < strlen($string); $i++) {
+            $out .= chr(ord($string[$i]) ^ ord($key[$i % strlen($key)]));
+        }
+
+        return base64_encode($out);
+    }
+	
 }
