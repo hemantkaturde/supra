@@ -15,9 +15,13 @@
                     <input readonly  type="hidden" class="form-control" id="incoming_details_item_id" value="<?=$incoming_details_item_id?>" name="incoming_details_item_id" readonly>
                 </ul>
             </div>
+
              <div class="col-xs-6 text-right">
                 <div class="form-group">
-                   <input type="button" onclick="location.href = '<?php echo base_url() ?>reworkrecordlotnumberrecord/'<?=$incoming_details_item_id?>" class="btn  btn-primary" value="Back" />
+                   <!-- <input type="button" onclick="location.href = '<?php echo base_url() ?>reworkrecordlotnumberrecord/'<?=$main_rework_data?>" class="btn  btn-primary" value="Back" /> -->
+
+                                      <input type="button" onclick="location.href = '<?php echo base_url() ?>reworkrecordlotnumberrecord/<?=$main_rework_data?>'" class="btn  btn-primary" value="Back" />
+
                 </div>
             </div>
         </div>

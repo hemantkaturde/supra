@@ -26967,6 +26967,10 @@ public function viewreworkrecordreasondata($incoming_details_item_id){
         $processFunction = 'Admin/editreworkrecord';
         $this->global['pageTitle'] = 'Rework Record Resaon Data';  
         $data['incoming_details_item_id']= $incoming_details_item_id;
+
+        $queryRecords = $this->admin_model->fetchreworkrecordreasondetailsdataforidonly($incoming_details_item_id); 
+        $data['main_rework_data']= $queryRecords[0]['main_rework_resaon_id'];
+
         $this->loadViews("masters/viewreworkrecordreasondata", $this->global, $data, NULL); 
 }
 

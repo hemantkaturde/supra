@@ -22746,6 +22746,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     public function reworkrecordincomingdetailslistdata($params,$vendor_po,$part_no)
     {
+        
             $this->db->select('*,'.TBL_INCOMING_DETAILS_ITEM.'.id as incoming_details_item_id');
             // $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_REWORK_RECORD.'.vendor_name');
             $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_INCOMING_DETAILS_ITEM.'.pre_vendor_po_number');
@@ -22895,6 +22896,20 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             }
 
             return $data;
+    }
+
+
+     public function fetchreworkrecordreasondetailsdataforidonly($incoming_details_item_id)
+    {
+            $this->db->select('*');
+            $this->db->where(TBL_REWORK_RECORD_REASON_DATA.'.incoming_item_id', $incoming_details_item_id);
+
+            $this->db->order_by(TBL_REWORK_RECORD_REASON_DATA.'.rework_resaon_id', 'DESC');
+            $this->db->limit($params['length'], $params['start']);
+            $query = $this->db->get(TBL_REWORK_RECORD_REASON_DATA);
+            $fetch_result = $query->result_array();
+
+            return $fetch_result;
     }
 
 
