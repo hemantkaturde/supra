@@ -75,7 +75,7 @@
             <h3 class="modal-title" id="additem">Rework Details</h3>
             </button>
          </div>
-         <form role="form" id="saverejectionreworkitemdataform" action="<?php echo base_url() ?>saverejectionreworkitemdataform" method="post" role="form">
+         <form role="form" id="editrejectionreworkitemdataform" action="<?php echo base_url() ?>editrejectionreworkitemdataform" method="post" role="form">
             <div class="modal-body">
                <div class="loader_ajax" style="display:none;">
                   <div class="loader_ajax_inner"><img src="<?php echo ICONPATH;?>/preloader_ajax.gif"></div>
@@ -130,7 +130,7 @@
             </div>
             <div class="modal-footer">
                <button type="button" class="btn btn-secondary btn-xl closerejectionreworkitemdata" data-dismiss="modal">Close</button>
-               <button type="submit" id="saverejectionreworkitemdata" name="saverejectionreworkitemdata" class="btn btn-primary" class="btn btn-success btn-xl">Save</button>
+               <button type="submit" id="editrejectionreworkitemdata" name="editrejectionreworkitemdata" class="btn btn-primary" class="btn btn-success btn-xl">Save</button>
             </div>
          </form>
       </div>
