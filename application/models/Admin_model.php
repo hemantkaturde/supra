@@ -22844,18 +22844,19 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             $this->db->where(TBL_REWORK_RECORD_REASON_DATA.'.incoming_item_id', $incoming_details_item_id);
             $this->db->order_by(TBL_REWORK_RECORD_REASON_DATA.'.rework_resaon_id', 'DESC');
 
-            // // 🔍 Text search filter
-            // if (!empty($params['search_by_any'])) {
-            //     $search = $this->db->escape_like_str($params['search_by_any']);
-            //     $this->db->group_start();
-            //     $this->db->like(TBL_REWORK_RECORD.'.rework_record_no', $search);
-            //     $this->db->or_like(TBL_REWORK_RECORD.'.date', $search);
-            //     $this->db->or_like(TBL_VENDOR.'.vendor_name', $search);
-            //     $this->db->or_like(TBL_VENDOR_PO_MASTER.'.po_number', $search);
-            //     $this->db->or_like(TBL_REWORK_RECORD.'.boxex_goni_bundle', $search);
-            //     $this->db->or_like(TBL_REWORK_RECORD.'.fg_material_gross_weight', $search);
-            //     $this->db->group_end();
-            // }
+         
+            // 🔍 Text search filter
+            if (!empty($params['search']['value'])) {
+                $this->db->group_start();
+                $this->db->like(TBL_REWORK_RECORD_REASON_DATA.'.rejected_reason', $params['search']['value']);
+                $this->db->or_like(TBL_REWORK_RECORD_REASON_DATA.'.qty_in_pcs', $params['search']['value']);
+                $this->db->or_like(TBL_REWORK_RECORD_REASON_DATA.'.after_rework_ok_in_pcs',$params['search']['value']);
+                $this->db->or_like(TBL_REWORK_RECORD_REASON_DATA.'.after_rework_rej_qty_in_pcs', $params['search']['value']);
+                $this->db->or_like(TBL_REWORK_RECORD_REASON_DATA.'.rework_done_by',$params['search']['value']);
+                $this->db->or_like(TBL_REWORK_RECORD_REASON_DATA.'.rework_checked_by', $params['search']['value']);
+                $this->db->group_end();
+            }
+
 
             $query = $this->db->get(TBL_REWORK_RECORD_REASON_DATA);
             $result = $query->row();
@@ -22866,6 +22867,20 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     {
             $this->db->select('*');
             $this->db->where(TBL_REWORK_RECORD_REASON_DATA.'.incoming_item_id', $incoming_details_item_id);
+
+
+            // 🔍 Text search filter
+            if (!empty($params['search']['value'])) {
+                $this->db->group_start();
+                $this->db->like(TBL_REWORK_RECORD_REASON_DATA.'.rejected_reason', $params['search']['value']);
+                $this->db->or_like(TBL_REWORK_RECORD_REASON_DATA.'.qty_in_pcs', $params['search']['value']);
+                $this->db->or_like(TBL_REWORK_RECORD_REASON_DATA.'.after_rework_ok_in_pcs',$params['search']['value']);
+                $this->db->or_like(TBL_REWORK_RECORD_REASON_DATA.'.after_rework_rej_qty_in_pcs', $params['search']['value']);
+                $this->db->or_like(TBL_REWORK_RECORD_REASON_DATA.'.rework_done_by',$params['search']['value']);
+                $this->db->or_like(TBL_REWORK_RECORD_REASON_DATA.'.rework_checked_by', $params['search']['value']);
+                $this->db->group_end();
+            }
+
 
             $this->db->order_by(TBL_REWORK_RECORD_REASON_DATA.'.rework_resaon_id', 'DESC');
             $this->db->limit($params['length'], $params['start']);
