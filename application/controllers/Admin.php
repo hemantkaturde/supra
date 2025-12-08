@@ -2381,9 +2381,11 @@ class Admin extends BaseController
 
         function getToSection($logo, $withLogo = true) {
 
+            //  <img src="'.$logo.'" style="width:100px;" />
+
             $logoHtml = $withLogo ? '
                 <td style="width:40%; text-align:left; vertical-align:middle;">
-                    <img src="'.$logo.'" style="width:100px;" />
+                   
                 </td>
             ' : '
                 <td style="width:40%;"></td>
