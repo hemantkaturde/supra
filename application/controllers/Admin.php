@@ -25970,11 +25970,10 @@ $getTdirdata= $this->admin_model->getTdirdata($id);
                 border-top:none; 
                 padding:12px; 
                 text-align:center;
-                background:grey;
                 margin-right:3%;
                 margin-left:3%;
             ">
-                <div align="center" style="font-size:13px;">
+                <div align="center" style="font-size:15px;">
                      Report No : '.$getTdirdata[0]['report_number'].'
                 </div>
             </div>
