@@ -2401,7 +2401,7 @@ class Admin extends BaseController
                     <b>M/s. SUPRA QUALITY EXPORTS (INDIA) PVT LTD</b><br>
                     A/92 ROAD NO. 16, OPPOSITE MANABA FINANCE<br>
                     WAGLE ESTATE, THANE WEST 400604<br>
-                    Tel: +91 22 45176493 / 45176494 /45176495<br>
+                    Tel: +91 22 45176493 / 45176494 / 45176495<br>
                     E-MAIL: sales@supraexports.in
                 </td>
                     
@@ -25962,7 +25962,7 @@ $getTdirdata= $this->admin_model->getTdirdata($id);
                 </div>
 
                 <div align="center" style="font-size:13px;">
-                    QTY-'.$getTdirdata[0]['vendor_order_qty'].' (In Pcs)
+                    QTY-'.$getTdirdata[0]['qty_in_pcs_for_export_purposr'].' (In Pcs)
                 </div>
 
             </div>
