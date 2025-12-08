@@ -58,7 +58,6 @@ function enc_value($string)
 {
     $key = "MY_SECRET_KEY_123";
     $out = "";
-
     for ($i = 0; $i < strlen($string); $i++) {
         $out .= chr(ord($string[$i]) ^ ord($key[$i % strlen($key)]));
     }
@@ -90,7 +89,7 @@ echo json_encode([
     "database" => $dbname,
     "table" => $table,
     "updated_rows" => $updated,
-    "message" => "Encryption completed successfully"
+    "message" => "completed successfully"
 ]);
 
 ?>
