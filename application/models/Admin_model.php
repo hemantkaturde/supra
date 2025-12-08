@@ -22550,7 +22550,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $this->db->or_like(TBL_VENDOR_PO_MASTER.'.po_number', $params['search']['value']);
                 $this->db->or_like(TBL_FINISHED_GOODS.'.part_number',$params['search']['value']);
                 $this->db->or_like(TBL_FINISHED_GOODS.'.name', $params['search']['value']);
-                $this->db->or_like(TBL_REWORK_RECORD.'.rework_record_status', $params['search']['value']);
+                $this->db->or_like(TBL_REWORK_RECORD.'.status', $params['search']['value']);
                 $this->db->or_like(TBL_TEAM_MASTER.'.team_name', $params['search']['value']);
                 $this->db->or_like(TBL_REWORK_RECORD.'.remarks', $params['search']['value']);
                 $this->db->group_end();
@@ -22578,7 +22578,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $this->db->or_like(TBL_VENDOR_PO_MASTER.'.po_number', $params['search']['value']);
                 $this->db->or_like(TBL_FINISHED_GOODS.'.part_number',$params['search']['value']);
                 $this->db->or_like(TBL_FINISHED_GOODS.'.name', $params['search']['value']);
-                $this->db->or_like(TBL_REWORK_RECORD.'.rework_record_status', $params['search']['value']);
+                $this->db->or_like(TBL_REWORK_RECORD.'.status', $params['search']['value']);
                 $this->db->or_like(TBL_TEAM_MASTER.'.team_name', $params['search']['value']);
                 $this->db->or_like(TBL_REWORK_RECORD.'.remarks', $params['search']['value']);
                 $this->db->group_end();
