@@ -2396,7 +2396,7 @@ class Admin extends BaseController
                 <tr>
 
                     <!-- LEFT COLUMN -->
-                  <td style="width:100%;font-size:16px; line-height:22px;">
+                  <td style="font-size:16px; line-height:22px;">
                     <b>From:</b><br>
                     <b>M/s. SUPRA QUALITY EXPORTS (INDIA) PVT LTD</b><br>
                     A/92 ROAD NO. 16, OPPOSITE MANABA FINANCE<br>
