@@ -2376,7 +2376,8 @@ class Admin extends BaseController
             'margin_bottom' => 10
         ]);
 
-        $logo = 'assets/images/supra_login_logo.jpg'; // update as needed
+        //$logo = 'assets/images/supra_login_logo.jpg'; // update as needed
+        $logo = ''; // update as needed
 
         function getToSection($logo, $withLogo = true) {
 
@@ -2393,13 +2394,13 @@ class Admin extends BaseController
                 <tr>
 
                     <!-- LEFT COLUMN -->
-                    <td style="width:60%; font-size:14px; line-height:22px; vertical-align:top;">
+                    <td style="width:60%; font-size:16px; line-height:22px; vertical-align:top;">
                        
                     <b>From:</b><br>
                         <b>M/s. SUPRA QUALITY EXPORTS (INDIA) PVT LTD</b><br>
                         A/92 ROAD NO. 16, OPPOSITE MANABA FINANCE<br>
                         WAGLE ESTATE, THANE WEST 400604<br>
-                        TEL : 022 45176496 / 022 45176495<br>
+                        Tel: +91 22 4517 6493 / 4517 6494 / 4517 6495 / 4517 6496
                         E-MAIL: sales@supraexports.in
                     </td>
 
@@ -2411,7 +2412,7 @@ class Admin extends BaseController
 
 
         $from_section = '
-        <div style="font-size:14px; line-height:22px; margin-top:10px;width:50%;">
+        <div style="font-size:16px; line-height:22px; margin-top:10px;width:50%;">
              <b>To:</b><br>
              <b>'.$getBuyergmasterdata[0]['buyer_name'].'</b>
                         <br>
