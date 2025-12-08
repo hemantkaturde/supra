@@ -2396,7 +2396,7 @@ class Admin extends BaseController
                 <tr>
 
                     <!-- LEFT COLUMN -->
-                    <td style="width:60%; font-size:16px; line-height:22px; vertical-align:top;">
+                    <td style="width:80%; font-size:16px; line-height:22px; vertical-align:top;">
                        
                     <b>From:</b><br>
                         <b>M/s. SUPRA QUALITY EXPORTS (INDIA) PVT LTD</b><br>
@@ -2414,7 +2414,7 @@ class Admin extends BaseController
 
 
         $from_section = '
-        <div style="font-size:16px; line-height:22px; margin-top:10px;width:50%;">
+        <div style="font-size:16px; line-height:22px; margin-top:10px;width:80%;">
              <b>To:</b><br>
              <b>'.$getBuyergmasterdata[0]['buyer_name'].'</b>
                         <br>
