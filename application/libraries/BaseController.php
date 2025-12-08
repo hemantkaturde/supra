@@ -64,6 +64,21 @@ class BaseController extends CI_Controller {
 		}
 	}
 
+
+	/**
+	 * This function is used to Verify the user password
+	 */
+	public function enc_value($string)
+		{
+			$key = "MY_SECRET_KEY_123";
+			$out = "";
+
+			for ($i = 0; $i < strlen($string); $i++) {
+				$out .= chr(ord($string[$i]) ^ ord($key[$i % strlen($key)]));
+			}
+
+			return base64_encode($out);
+	}
 	/**
 	 * This function is used to get the user's status from the user table
 	 */
@@ -205,18 +220,5 @@ class BaseController extends CI_Controller {
 		
 		$this->load->model('login_model');
 		$this->login_model->loginsert($logInfo);
-	}
-
-    public function encrypt_value($string)
-    {
-        $key = "MY_SECRET_KEY_123";
-        $out = "";
-
-        for ($i = 0; $i < strlen($string); $i++) {
-            $out .= chr(ord($string[$i]) ^ ord($key[$i % strlen($key)]));
-        }
-
-        return base64_encode($out);
-    }
-	
+	}	
 }

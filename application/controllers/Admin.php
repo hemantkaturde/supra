@@ -4187,7 +4187,7 @@ class Admin extends BaseController
                     continue;
                 }
                 if ($val !== null && $val !== "") {
-                    $updated_data[$col] = $this->encrypt_value((string)$val);
+                    $updated_data[$col] = $this->enc_value((string)$val);
                 }
             }
             $DB->where($primary_key, $r[$primary_key]);
