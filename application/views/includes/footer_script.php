@@ -28225,3 +28225,787 @@ $('#export_excel').on('click', function() {
 
 			</script> 
 <?php } ?>
+
+
+<!-- Store form -->
+<?php if ($pageTitle == 'Add New Store Form' || $pageTitle == 'Store Form' || $pageTitle == 'Edit Storeform') { ?>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			var dt = $('#view_store_form').DataTable({
+				"columnDefs": [{
+						className: "details-control",
+						"targets": [0]
+					},
+					{
+						"width": "15%",
+						"targets": 0
+					},
+					{
+						"width": "10%",
+						"targets": 1
+					},
+					{
+						"width": "10%",
+						"targets": 2
+					},
+					{
+						"width": "10%",
+						"targets": 3
+					},
+					{
+						"width": "10%",
+						"targets": 4
+					},
+					{
+						"width": "15%",
+						"targets": 5
+					},
+					{
+						"width": "10%",
+						"targets": 6
+					},
+
+				],
+				responsive: true,
+				"oLanguage": {
+					"sEmptyTable": "<i>No Store Form Found.</i>",
+				},
+				"bSort": false,
+				"bFilter": true,
+				"bLengthChange": true,
+				"iDisplayLength": 10,
+				"bProcessing": true,
+				"serverSide": true,
+				"ajax": {
+					url: "<?php echo base_url(); ?>fetchstoreform",
+					type: "post",
+				},
+			});
+		});
+
+		$(document).on('click', '#savenewTicket', function(e) {
+			e.preventDefault();
+			$(".loader_ajax").show();
+			var formData = new FormData($("#addTicketForm")[0]);
+
+			$.ajax({
+				url: "<?php echo base_url(); ?>addStoreForm",
+				type: "POST",
+				data: formData,
+				cache: false,
+				contentType: false,
+				processData: false,
+				success: function(data, textStatus, jqXHR) {
+					var fetchResponse = $.parseJSON(data);
+
+					if (fetchResponse.status == "failure") {
+						$.each(fetchResponse.error, function(i, v) {
+							$('.' + i + '_error').html(v);
+						});
+						$(".loader_ajax").hide();
+					} else if (fetchResponse.status == 'success') {
+						swal({
+							title: "Success",
+							text: "Ticket Successfully Added!",
+							icon: "success",
+							button: "Ok",
+						}, function() {
+							$("#modal-md").hide();
+							window.location.href = "<?php echo base_url() . 'storeform' ?>";
+						});
+					}
+
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+					$(".loader_ajax").hide();
+				}
+			});
+			return false;
+		});
+
+		$(document).on('change', '#teamTicket', function(e) {
+			var team_id = $(this).val();
+			if (team_id == "") {
+				$('#team_member').val("");
+				return;
+			}
+
+			$.ajax({
+				url: "<?= base_url('admin/getTeamMembers'); ?>",
+				type: "POST",
+				data: {
+					team_id: team_id
+				},
+				dataType: "json",
+				success: function(response) {
+
+					if (response.length > 0) {
+
+						let options = '<option value="">Select Team Member</option>';
+
+						response.forEach(item => {
+							options += `<option value="${item.id}">${item.team_member_name}</option>`;
+						});
+
+						$('#team_member').html(options);
+
+					} else {
+						$('#team_member').html('<option value="">No Members Found</option>');
+					}
+				}
+			});
+
+		});
+
+		$(document).on('click', '.deletetdirreport', function(e) {
+			var elemF = $(this);
+			e.preventDefault();
+
+			swal({
+				title: "Are you sure?",
+				text: "Delete Store Form",
+				type: "warning",
+				showCancelButton: true,
+				closeOnClickOutside: false,
+				confirmButtonClass: "btn-sm btn-danger",
+				confirmButtonText: "Yes, delete it!",
+				cancelButtonText: "No, cancel plz!",
+				closeOnConfirm: false,
+				closeOnCancel: false
+			}, function(isConfirm) {
+				if (isConfirm) {
+					$.ajax({
+						url: "<?php echo base_url(); ?>deletetstoreform",
+						type: "POST",
+						data: 'id=' + elemF.attr('data-id'),
+						success: function(data, textStatus, jqXHR) {
+							const obj = JSON.parse(data);
+
+							if (obj.status == 'success') {
+								swal({
+									title: "Deleted!",
+									text: "Store Form Succesfully Deleted",
+									icon: "success",
+									button: "Ok",
+								}, function() {
+									window.location.href = "<?php echo base_url() ?>storeform";
+								});
+							}
+
+						},
+						error: function(jqXHR, textStatus, errorThrown) {
+							$(".loader_ajax").hide();
+						}
+					})
+				} else {
+					swal("Cancelled", "Store Form Data deletion cancelled ", "error");
+				}
+			});
+		});
+	</script>
+<?php } ?>
+
+<?php if ($pageTitle == 'Add Instrument Store Form') { ?>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			var part_no = $('#part_no').val();
+			var ticket_no = $('#ticket_no').val();
+			var dt = $('#addInstrumentStoreform').DataTable({
+				"columnDefs": [{
+						className: "details-control",
+						"targets": [0]
+					},
+					{
+						"width": "15%",
+						"targets": 0
+					},
+					{
+						"width": "10%",
+						"targets": 1
+					},
+					{
+						"width": "10%",
+						"targets": 2
+					},
+					{
+						"width": "10%",
+						"targets": 3
+					},
+					{
+						"width": "10%",
+						"targets": 4
+					},
+					{
+						"width": "10%",
+						"targets": 5
+					},
+					{
+						"width": "8%",
+						"targets": 6
+					},
+
+				],
+				responsive: true,
+				"oLanguage": {
+					"sEmptyTable": "<i>No Instrument Found.</i>",
+				},
+				"bSort": false,
+				"bFilter": true,
+				"bLengthChange": true,
+				"iDisplayLength": 10,
+				"bProcessing": true,
+				"serverSide": true,
+				"ajax": {
+					url: "<?php echo base_url(); ?>fetchaddInstrumentStoreform/" + part_no + "/" + ticket_no,
+					type: "post",
+				},
+			});
+		});
+
+		$(document).on("click", ".addrejectionitemdata", function() {
+
+			$("#partId_popup").val($(this).data("part_id"));
+			$("#ticket_no_popup").val($(this).data("ticket_no"));
+			$("#instrument_name_popup").val($(this).data("instrument_name"));
+			$("#measuring_size_popup").val($(this).data("measuring_size"));
+			$("#qty_popup").val($(this).data("qty"));
+		});
+
+
+		$(document).on('click','#editstoreformqtyassigndata',function(e){
+			e.preventDefault();
+			$(".loader_ajax").show();
+
+			var partId = $("#partId_popup").val();
+			var ticket_no_popup = $('#ticket_no_popup').val();
+			var instrument_name_popup = $('#instrument_name_popup').val();
+			var measuring_size_popup = $('#measuring_size_popup').val();
+			var qty_popup = $('#qty_popup').val();
+			var qty_assign = $('#qty_assign').val();
+			var qty_remark = $('#qty_remark').val();
+			var qty_removed = $('#qty_removed').val();
+			
+			$.ajax({
+				url: "<?php echo base_url('editstoreformqtyassigndata'); ?>",
+				type: "POST",
+				data: {"ticket_no_popup": ticket_no_popup,"instrument_name_popup":instrument_name_popup, "measuring_size_popup":measuring_size_popup,"qty_popup":qty_popup, "qty_assign":qty_assign, "qty_remark":qty_remark, "qty_removed": qty_removed},
+				dataType: "json",
+                cache:false,
+				success: function(fetchResponse, textStatus, jqXHR)
+				{
+					// var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+						$(".loader_ajax").hide();
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+							swal({
+									title: "Success",
+									text: "Quantity Assigned!",
+									icon: "success",
+									button: "Ok",
+									},function(){ 
+										window.location.href = "<?php echo base_url().'addInstrumentStoreform/'?>"+"/"+partId+"/"+ticket_no_popup;
+							   });	
+	
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			});
+			return false;
+	    });
+
+
+		$(document).on('click','#editstoreformqtyremovedata',function(e){
+			e.preventDefault();
+			$(".loader_ajax").show();
+
+			var partId = $("#partId_popup").val();
+			var ticket_no_popup = $('#ticket_no_popup').val();
+			var instrument_name_popup = $('#instrument_name_popup').val();
+			var measuring_size_popup = $('#measuring_size_popup').val();
+			var qty_popup = $('#qty_popup').val();
+			var qty_assign = $('#qty_assign').val();
+			var qty_remark = $('#qty_rec_remark').val();
+			var qty_removed = $('#qty_removed').val();
+
+			
+			$.ajax({
+				url: "<?php echo base_url('editstoreformqtyremovedata'); ?>",
+				type: "POST",
+				data: {"ticket_no_popup": ticket_no_popup,"instrument_name_popup":instrument_name_popup, "measuring_size_popup":measuring_size_popup,"qty_popup":qty_popup, "qty_assign":qty_assign, "qty_remark":qty_remark, "qty_removed": qty_removed},
+				dataType: "json",
+                cache:false,
+				success: function(fetchResponse, textStatus, jqXHR)
+				{
+					// var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+						$(".loader_ajax").hide();
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+							swal({
+									title: "Success",
+									text: "Quantity Received!",
+									icon: "success",
+									button: "Ok",
+									},function(){ 
+										window.location.href = "<?php echo base_url().'addInstrumentStoreform/'?>"+"/"+partId+"/"+ticket_no_popup;
+							   });	
+	
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			});
+			return false;
+	    });
+
+	</script>
+<?php } ?>
+
+<?php if ($pageTitle == 'Assigned Quantity Details') { ?>
+	<script type="text/javascript">
+			$(document).ready(function() {
+
+				var ticket_no = $("#ticket_no").val();
+				var instrument_name = $("#instrument_name").val();
+				var measuring_size = $("#measuring_size").val();
+				var part_id = $("#part_id").val();
+				
+
+				var dt = $('#assign_qty_list_view').DataTable({
+					"columnDefs": [{
+							className: "details-control",
+							"targets": [0]
+						},
+						{
+							"width": "15%",
+							"targets": 0
+						},
+						{
+							"width": "10%",
+							"targets": 1
+						},
+						{
+							"width": "10%",
+							"targets": 2
+						},
+						{
+							"width": "10%",
+							"targets": 3
+						},
+						{
+							"width": "10%",
+							"targets": 4
+						},
+					],
+					responsive: true,
+					"oLanguage": {
+						"sEmptyTable": "<i>No Assign Quantity Found.</i>"
+					},
+					bSort: false,
+					bFilter: true,
+					bLengthChange: true,
+					iDisplayLength: 10,
+					processing: true,
+					serverSide: true,
+					ajax: {
+						url: "<?php echo base_url(); ?>fetchviewassigninstqtytforticket",
+						type: "POST",
+						data: function (d) {
+							d.ticket_no       = $("#ticket_no").val();
+							d.instrument_name = $("#instrument_name").val();
+							d.measuring_size  = $("#measuring_size").val();
+							d.part_id = $("#part_id").val();
+						}
+					}
+				});
+			});
+
+			$(document).on('click', '.editassignqtyitem', function(e) {
+				e.preventDefault();
+
+				var elemF = $(this);
+				var item_id = elemF.attr('data-id');
+
+				$("#partsId_popup").val($(this).data("part_id"));
+				$("#partId_popup").val($(this).data("id"));
+				$("#ticket_no_popup").val($(this).data("ticket_no"));
+				$("#instrument_name_popup").val($(this).data("instrument_name"));
+				$("#measuring_size_popup").val($(this).data("measuring_size"));
+				$("#qty_popup").val($(this).data("qty_live"));
+				$.ajax({
+					url: "<?php echo base_url(); ?>geteditassignqtyitem",
+					type: "POST",
+					data: 'id=' + item_id,
+					success: function(data, textStatus, jqXHR) {
+						var fetchResponse = $.parseJSON(data);
+						$('#addNewModal').modal('show');
+						$('#assigned_id').val(fetchResponse.id);
+						$('#qty_assign').val(fetchResponse.qty_assign);
+						$('#qty_remark').val(fetchResponse.qty_remark);
+						$('#ticket_no').val(fetchResponse.ticket_no);
+						$('#instrument_name').val(fetchResponse.instrument_name);
+						$('#measuring_size').val(fetchResponse.measuring_size);
+					},
+					error: function(jqXHR, textStatus, errorThrown) {
+						$(".loader_ajax").hide();
+					}
+				});
+				return false;
+			});
+
+			$(document).on('click','#editstoreformqtyassigndata',function(e){
+				e.preventDefault();
+				$(".loader_ajax").show();
+
+				var partsId = $("#partsId_popup").val();
+				var partId = $("#partId_popup").val();
+				var ticket_no_popup = $('#ticket_no_popup').val();
+				var instrument_name_popup = $('#instrument_name_popup').val();
+				var measuring_size_popup = $('#measuring_size_popup').val();
+				var qty_popup = $('#qty_popup').val();
+				var qty_assign = $('#qty_assign').val();
+				var qty_remark = $('#qty_remark').val();
+				
+				$.ajax({
+					url: "<?php echo base_url('editstoreformqtyassigndata'); ?>",
+					type: "POST",
+					data: {"ticket_no_popup": ticket_no_popup,"instrument_name_popup":instrument_name_popup, "measuring_size_popup":measuring_size_popup,"qty_popup":qty_popup, "qty_assign":qty_assign, "qty_remark":qty_remark,"assigned_id":partId},
+					dataType: "json",
+					cache:false,
+					success: function(fetchResponse, textStatus, jqXHR)
+					{
+						// var fetchResponse = $.parseJSON(data);
+						if(fetchResponse.status == "failure")
+						{
+							$.each(fetchResponse.error, function (i, v)
+							{
+								$('.'+i+'_error').html(v);
+							});
+							$(".loader_ajax").hide();
+						}
+						else if(fetchResponse.status == 'success')
+						{
+								swal({
+									title: "Success",
+									text: "Assigned Quantity Updated",
+									icon: "success",
+									button: "Ok",
+								}, function () {
+									window.location.href = "<?php echo base_url('viewassigninstqtytforticket'); ?>?ticket_no=" 
+										+ ticket_no_popup 
+										+ "&instrument_name=" + instrument_name_popup 
+										+ "&measuring_size=" + measuring_size_popup
+										+ "&part_id=" + partsId;
+								});
+
+		
+						}
+						
+					},
+					error: function (jqXHR, textStatus, errorThrown)
+					{
+					$(".loader_ajax").hide();
+					}
+				});
+				return false;
+			});
+
+			$(document).on('click', '.deleteassignqty', function(e) {
+
+				var elemF = $(this);
+				e.preventDefault();
+				var instrument_name_popup = $(this).data("instrument_name");
+				var ticket_no = $(this).data("ticket_no") ;
+				var measuring_size = $(this).data("measuring_size");
+				var part_id = $(this).data("part_id");
+				// alert(part_id)
+
+				$("#partsId_popup").val(part_id);
+				$("#partId_popup").val(part_id);
+				$("#ticket_no_popup").val(ticket_no);
+				$("#instrument_name_popup").val(instrument_name_popup);
+				$("#measuring_size_popup").val(measuring_size);
+
+				swal({
+					title: "Are you sure?",
+					text: "Delete Assigned Quantity",
+					type: "warning",
+					showCancelButton: true,
+					closeOnClickOutside: false,
+					confirmButtonClass: "btn-sm btn-danger",
+					confirmButtonText: "Yes, delete it!",
+					cancelButtonText: "No, cancel plz!",
+					closeOnConfirm: false,
+					closeOnCancel: false
+				}, function(isConfirm) {
+					if (isConfirm) {
+						$.ajax({
+							url: "<?php echo base_url(); ?>deleteassignqty",
+							type: "POST",
+							data: 'id=' + elemF.attr('data-id'),
+							success: function(data, textStatus, jqXHR) {
+								const obj = JSON.parse(data);
+
+								if (obj.status == 'success') {
+									swal({
+										title: "Deleted!",
+										text: "Assigned Quantity Deleted",
+										icon: "success",
+										button: "Ok",
+									}, function() {
+										window.location.href = "<?php echo base_url('viewassigninstqtytforticket'); ?>?ticket_no=" 
+											+ ticket_no
+											+ "&instrument_name=" + instrument_name_popup 
+											+ "&measuring_size=" + measuring_size
+											+ "&part_id="+part_id;
+									});
+								}
+
+							},
+							error: function(jqXHR, textStatus, errorThrown) {
+								$(".loader_ajax").hide();
+							}
+						})
+					} else {
+						swal("Cancelled", "Assigned Quantity deletion cancelled ", "error");
+					}
+				});
+			});
+
+	</script>
+<?php } ?>
+
+<?php if ($pageTitle == 'Recevied Quantity Details') { ?>
+	<script type="text/javascript">
+			$(document).ready(function() {
+
+				var ticket_no = $("#ticket_no").val();
+				var instrument_name = $("#instrument_name").val();
+				var measuring_size = $("#measuring_size").val();
+				var part_id = $("#part_id").val();
+				
+
+				var dt = $('#received_qty_list_view').DataTable({
+					"columnDefs": [{
+							className: "details-control",
+							"targets": [0]
+						},
+						{
+							"width": "15%",
+							"targets": 0
+						},
+						{
+							"width": "10%",
+							"targets": 1
+						},
+						{
+							"width": "10%",
+							"targets": 2
+						},
+						{
+							"width": "10%",
+							"targets": 3
+						},
+						{
+							"width": "10%",
+							"targets": 4
+						},
+					],
+					responsive: true,
+					"oLanguage": {
+						"sEmptyTable": "<i>No Received Quantity Found.</i>"
+					},
+					bSort: false,
+					bFilter: true,
+					bLengthChange: true,
+					iDisplayLength: 10,
+					processing: true,
+					serverSide: true,
+					ajax: {
+						url: "<?php echo base_url(); ?>fetchviewremovedinstqtytforticket",
+						type: "POST",
+						data: function (d) {
+							d.ticket_no       = $("#ticket_no").val();
+							d.instrument_name = $("#instrument_name").val();
+							d.measuring_size  = $("#measuring_size").val();
+							d.part_id = $("#part_id").val();
+						}
+					}
+				});
+			});
+
+			$(document).on('click', '.editassignqtyitem', function(e) {
+				e.preventDefault();
+
+				var elemF = $(this);
+				var item_id = elemF.attr('data-id');
+
+				$("#partsId_popup").val($(this).data("part_id"));
+				$("#partId_popup").val($(this).data("id"));
+				$("#ticket_no_popup").val($(this).data("ticket_no"));
+				$("#instrument_name_popup").val($(this).data("instrument_name"));
+				$("#measuring_size_popup").val($(this).data("measuring_size"));
+				$("#qty_popup").val($(this).data("qty_live"));
+				$.ajax({
+					url: "<?php echo base_url(); ?>geteditassignqtyitem",
+					type: "POST",
+					data: 'id=' + item_id,
+					success: function(data, textStatus, jqXHR) {
+						var fetchResponse = $.parseJSON(data);
+						$('#addNewModal').modal('show');
+						$('#assigned_id').val(fetchResponse.id);
+						$('#qty_removed').val(fetchResponse.qty_removed);
+						$('#qty_remark').val(fetchResponse.qty_remark);
+						$('#ticket_no').val(fetchResponse.ticket_no);
+						$('#instrument_name').val(fetchResponse.instrument_name);
+						$('#measuring_size').val(fetchResponse.measuring_size);
+					},
+					error: function(jqXHR, textStatus, errorThrown) {
+						$(".loader_ajax").hide();
+					}
+				});
+				return false;
+			});
+
+			$(document).on('click','#editstoreformqtyremovedata',function(e){
+				e.preventDefault();
+				$(".loader_ajax").show();
+
+				var partsId = $("#partsId_popup").val();
+				var partId = $("#partId_popup").val();
+				var ticket_no_popup = $('#ticket_no_popup').val();
+				var instrument_name_popup = $('#instrument_name_popup').val();
+				var measuring_size_popup = $('#measuring_size_popup').val();
+				var qty_popup = $('#qty_popup').val();
+				var qty_removed = $('#qty_removed').val();
+				var qty_remark= $('#qty_rec_remark').val();
+
+				
+				$.ajax({
+					url: "<?php echo base_url('editstoreformqtyremovedata'); ?>",
+					type: "POST",
+					data: {"ticket_no_popup": ticket_no_popup,"instrument_name_popup":instrument_name_popup, "measuring_size_popup":measuring_size_popup,"qty_popup":qty_popup, "qty_removed":qty_removed, "qty_remark":qty_remark,"assigned_id":partId},
+					dataType: "json",
+					cache:false,
+					success: function(fetchResponse, textStatus, jqXHR)
+					{
+						// var fetchResponse = $.parseJSON(data);
+						if(fetchResponse.status == "failure")
+						{
+							$.each(fetchResponse.error, function (i, v)
+							{
+								$('.'+i+'_error').html(v);
+							});
+							$(".loader_ajax").hide();
+						}
+						else if(fetchResponse.status == 'success')
+						{
+								swal({
+									title: "Success",
+									text: "Quantity Received",
+									icon: "success",
+									button: "Ok",
+								}, function () {
+									window.location.href = "<?php echo base_url('viewremovedinstqtytforticket'); ?>?ticket_no=" 
+										+ ticket_no_popup 
+										+ "&instrument_name=" + instrument_name_popup 
+										+ "&measuring_size=" + measuring_size_popup
+										+ "&part_id=" + partsId;
+								});
+
+		
+						}
+						
+					},
+					error: function (jqXHR, textStatus, errorThrown)
+					{
+					$(".loader_ajax").hide();
+					}
+				});
+				return false;
+			});
+
+			$(document).on('click', '.deleteassignqty', function(e) {
+
+					var elemF = $(this);
+					e.preventDefault();
+					var instrument_name_popup = $(this).data("instrument_name");
+					var ticket_no = $(this).data("ticket_no") ;
+					var measuring_size = $(this).data("measuring_size");
+					var part_id = $(this).data("part_id");
+					// alert(part_id)
+
+					$("#partsId_popup").val(part_id);
+					$("#partId_popup").val(part_id);
+					$("#ticket_no_popup").val(ticket_no);
+					$("#instrument_name_popup").val(instrument_name_popup);
+					$("#measuring_size_popup").val(measuring_size);
+
+					swal({
+						title: "Are you sure?",
+						text: "Delete Received Quantity",
+						type: "warning",
+						showCancelButton: true,
+						closeOnClickOutside: false,
+						confirmButtonClass: "btn-sm btn-danger",
+						confirmButtonText: "Yes, delete it!",
+						cancelButtonText: "No, cancel plz!",
+						closeOnConfirm: false,
+						closeOnCancel: false
+					}, function(isConfirm) {
+						if (isConfirm) {
+							$.ajax({
+								url: "<?php echo base_url(); ?>deleteassignqty",
+								type: "POST",
+								data: 'id=' + elemF.attr('data-id'),
+								success: function(data, textStatus, jqXHR) {
+									const obj = JSON.parse(data);
+
+									if (obj.status == 'success') {
+										swal({
+											title: "Deleted!",
+											text: "Received Quantity Deleted",
+											icon: "success",
+											button: "Ok",
+										}, function() {
+											window.location.href = "<?php echo base_url('viewremovedinstqtytforticket'); ?>?ticket_no=" 
+												+ ticket_no
+												+ "&instrument_name=" + instrument_name_popup 
+												+ "&measuring_size=" + measuring_size
+												+ "&part_id="+part_id;
+										});
+									}
+
+								},
+								error: function(jqXHR, textStatus, errorThrown) {
+									$(".loader_ajax").hide();
+								}
+							})
+						} else {
+							swal("Cancelled", "Received Quantity deletion cancelled ", "error");
+						}
+					});
+			});
+
+	</script>
+<?php } ?>

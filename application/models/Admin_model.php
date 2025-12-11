@@ -22953,6 +22953,688 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
+    ////////Code for Store Form//////////////////
+
+    public function part_number()
+    {
+        $this->db->select('fg.fin_id , fg.part_number, sm.id');
+        $this->db->from(TBL_SAMPLING_MASTER . ' sm');
+        $this->db->join(TBL_FINISHED_GOODS . ' fg', 'fg.fin_id = sm.part_number_id', 'left');
+        $this->db->where('sm.status', 1);
+        $this->db->order_by('sm.id', 'DESC');
+
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function getTeamMembersByTeamId($team_id)
+    {
+        $this->db->select('id , team_member_name');
+        $this->db->where('team_id', $team_id);
+        $query = $this->db->get(TBL_TEAM_MASTER_TRANS);
+        return $query->result_array();
+    }
+
+    public function getLastTicketNo()
+    {
+        $this->db->select('ticket_no');
+        $this->db->order_by('ticket_id', 'DESC');
+        $this->db->limit(1);
+        $query = $this->db->get(TBL_STOREFORM_TICKETS);
+        return $query->row_array();
+    }
+
+    public function save_ticket($ticket_id = NULL, $data = array())
+    {
+        if ($ticket_id) {
+            $this->db->where('ticket_id', $ticket_id);
+            return $this->db->update(TBL_STOREFORM_TICKETS, $data);
+        } else {
+            return $this->db->insert(TBL_STOREFORM_TICKETS, $data);
+        }
+    }
+
+    public function getstoreformticketcount($params)
+    {
+        $this->db->select('*');
+
+        if ($params['search']['value'] != "") 
+        {
+            $search = $params['search']['value'];
+            $this->db->where("("
+                .TBL_STOREFORM_TICKETS.".ticket_no LIKE '%$search%' 
+                OR ".TBL_STOREFORM_TICKETS.".ticket_date LIKE '%$search%'
+                OR ".TBL_FINISHED_GOODS.".part_number LIKE '%$search%'
+                OR ".TBL_TEAM_MASTER.".team_name LIKE '%$search%'
+                OR ".TBL_TEAM_MASTER_TRANS.".team_member_name LIKE '%$search%'
+                OR ".TBL_STOREFORM_TICKETS.".status LIKE '%$search%'
+                OR ".TBL_STOREFORM_TICKETS.".remarks LIKE '%$search%'
+            )");
+        }
+
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_STOREFORM_TICKETS.'.parts_id', 'left');
+        $this->db->join(TBL_TEAM_MASTER, TBL_TEAM_MASTER.'.id = '.TBL_STOREFORM_TICKETS.'.team_id', 'left');
+        $this->db->join(TBL_TEAM_MASTER_TRANS, TBL_TEAM_MASTER_TRANS.'.id = '.TBL_STOREFORM_TICKETS.'.team_member_id', 'left');
+
+        $this->db->order_by(TBL_STOREFORM_TICKETS.'.ticket_id', 'DESC');
+
+        $query = $this->db->get(TBL_STOREFORM_TICKETS);
+        return $query->num_rows();
+    }
+
+    public function getstoreformticketcountdata($params)
+    {
+        $this->db->select('
+                '.TBL_STOREFORM_TICKETS.'.*,
+                '.TBL_STOREFORM_TICKETS.'.ticket_id as ticket_id_label,
+                '.TBL_FINISHED_GOODS.'.part_number,
+                '.TBL_TEAM_MASTER.'.team_name,
+                '.TBL_TEAM_MASTER_TRANS.'.team_member_name
+            ');
+
+            if ($params['search']['value'] != "") 
+            {
+                $search = $params['search']['value'];
+                $this->db->where("("
+                    .TBL_STOREFORM_TICKETS.".ticket_no LIKE '%$search%' 
+                    OR ".TBL_STOREFORM_TICKETS.".ticket_date LIKE '%$search%'
+                    OR ".TBL_FINISHED_GOODS.".part_number LIKE '%$search%'
+                    OR ".TBL_TEAM_MASTER.".team_name LIKE '%$search%'
+                    OR ".TBL_TEAM_MASTER_TRANS.".team_member_name LIKE '%$search%'
+                    OR ".TBL_STOREFORM_TICKETS.".status LIKE '%$search%'
+                    OR ".TBL_STOREFORM_TICKETS.".remarks LIKE '%$search%'
+                )");
+            }
+
+            $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_STOREFORM_TICKETS.'.parts_id', 'left');
+            $this->db->join(TBL_TEAM_MASTER, TBL_TEAM_MASTER.'.id = '.TBL_STOREFORM_TICKETS.'.team_id', 'left');
+            $this->db->join(TBL_TEAM_MASTER_TRANS, TBL_TEAM_MASTER_TRANS.'.id = '.TBL_STOREFORM_TICKETS.'.team_member_id', 'left');
+
+            $this->db->limit($params['length'], $params['start']);
+            $this->db->order_by(TBL_STOREFORM_TICKETS.'.ticket_id', 'DESC');
+
+            $query = $this->db->get(TBL_STOREFORM_TICKETS);
+        $result = $query->result_array();
+
+        $data = [];
+        $counter = 0;
+
+        foreach ($result as $row) {
+            $data[$counter]['ticket_no'] = $row['ticket_no'];
+            $data[$counter]['ticket_date'] = $row['ticket_date'];
+            $data[$counter]['parts_no'] = $row['part_number'];
+            $data[$counter]['team'] = $row['team_name'];
+            $data[$counter]['team_member'] = $row['team_member_name'];
+            $data[$counter]['status'] = $row['status'];
+            $data[$counter]['remarks'] = $row['remarks'];
+
+            $data[$counter]['action'] = '';
+            $data[$counter]['action'] .= 
+        "<a href='".ADMIN_PATH."addInstrumentStoreform/".$row['parts_id']."/".$row['ticket_no']."' 
+        style='cursor: pointer;' target='_blank'>
+            <i style='font-size: x-large; cursor: pointer;' class='fa fa-plus-square-o' aria-hidden='true'></i>
+        </a> &nbsp;";
+
+            $data[$counter]['action'] .= "<a href='".ADMIN_PATH."edit_storeform_ticket/".$row['ticket_id_label']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp";
+            // $data[$counter]['action'] .= "<a href='".ADMIN_PATH."edit_storeform_ticket_attachement/".$row['ticket_id_label']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-paperclip' aria-hidden='true'></i></a>    &nbsp";
+            // $data[$counter]['action'] .= "<a href='".ADMIN_PATH."printinspectionreportlabel/".$row['ticket_id_label']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>   &nbsp";
+
+            $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$row['ticket_id_label']."' class='fa fa-trash-o deletetdirreport' aria-hidden='true'></i>"; 
+
+            $counter++;
+        }
+
+        return $data;
+    }
+
+
+    public function getTicketData($ticket_id)
+    {
+        $this->db->select('
+            '.TBL_STOREFORM_TICKETS.'.*,
+            '.TBL_STOREFORM_TICKETS.'.ticket_id as ticket_id_label,
+            '.TBL_FINISHED_GOODS.'.part_number as parts_no_label,
+            '.TBL_TEAM_MASTER.'.team_name as team_label,
+            '.TBL_TEAM_MASTER_TRANS.'.team_member_name as team_member_label
+        ');
+
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_STOREFORM_TICKETS.'.parts_id', 'left');
+        $this->db->join(TBL_TEAM_MASTER, TBL_TEAM_MASTER.'.id = '.TBL_STOREFORM_TICKETS.'.team_id', 'left');
+        $this->db->join(TBL_TEAM_MASTER_TRANS, TBL_TEAM_MASTER_TRANS.'.id = '.TBL_STOREFORM_TICKETS.'.team_member_id', 'left');
+
+        $this->db->where(TBL_STOREFORM_TICKETS.'.ticket_id', $ticket_id);
+
+        $query = $this->db->get(TBL_STOREFORM_TICKETS);
+        return $query->result_array();
+    }
+
+    public function deletetstoreform($id){
+
+        $this->db->where('ticket_id', $id);
+        if($this->db->delete(TBL_STOREFORM_TICKETS)){
+                return TRUE;
+        }else{
+            return FALSE;
+        }
+    }
+
+    public function addInstrumentStoreform($id)
+    {
+        $this->db->select('
+            '.TBL_SAMPLING_MASTER.'.*,
+            '.TBL_FINISHED_GOODS.'.part_number,
+            '.TBL_FINISHED_GOODS.'.fin_id
+        ');
+
+        $this->db->from(TBL_SAMPLING_MASTER);
+        $this->db->join(
+            TBL_FINISHED_GOODS,
+            TBL_FINISHED_GOODS.'.fin_id = '.TBL_SAMPLING_MASTER.'.part_number_id'
+        );
+
+        $this->db->where(TBL_FINISHED_GOODS.'.fin_id', $id);
+
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function checkLiveQtyAvaliable($quantity_need,$instrument_name, $measuring_size){
+            $this->db->select('
+                '.TBL_SAMPLING_MASTER.'.*,
+                '.TBL_FINISHED_GOODS.'.part_number,
+                '.TBL_FINISHED_GOODS.'.fin_id,
+                '.TBL_SAMPLING_MASTER_TRANS.'.instrument_name,
+                '.TBL_SAMPLING_MASTER_TRANS.'.measuring_size,
+                '.TBL_INSTRUMENT_MASTER.'.grade,
+                '.TBL_INSTRUMENT_MASTER.'.unit,
+                '.TBL_INSTRUMENT_MASTER.'.class,
+                '.TBL_INSTRUMENT_MASTER.'.type,
+                '.TBL_INSTRUMENT_MASTER.'.qty,
+                '.TBL_SAMPLING_MASTER_TRANS.'.remark
+            ');
+
+            $this->db->from(TBL_SAMPLING_MASTER);
+
+            $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_SAMPLING_MASTER.'.part_number_id', 'left');
+
+            $this->db->join(
+                TBL_SAMPLING_MASTER_TRANS, 
+                TBL_SAMPLING_MASTER_TRANS.'.sampling_master_id = '.TBL_SAMPLING_MASTER.'.id 
+                AND '.TBL_SAMPLING_MASTER_TRANS.'.status = 1',
+                'left'
+            );
+
+            $this->db->join(
+                TBL_INSTRUMENT_MASTER, 
+                TBL_INSTRUMENT_MASTER.'.instrument_name = '.TBL_SAMPLING_MASTER_TRANS.'.instrument_name
+                AND '.TBL_INSTRUMENT_MASTER.'.measuring_size = '.TBL_SAMPLING_MASTER_TRANS.'.measuring_size',
+                'left'
+            );
+
+            $this->db->where(TBL_FINISHED_GOODS.'.fin_id', $id);
+            $this->db->limit($params['length'], $params['start']);
+            $this->db->order_by(TBL_SAMPLING_MASTER.'.id', 'DESC');
+
+            $query = $this->db->get();
+
+
+    }
+
+    public function getLiveQtyforInst($id, $instrument_name, $measuring_size)
+    {
+        $this->db->select('qty');
+        $this->db->from(TBL_INSTRUMENT_MASTER);
+        $this->db->where('instrument_name', $instrument_name);
+        $this->db->where('measuring_size', $measuring_size);
+        $query = $this->db->get()->row_array();
+
+        $quantity_available = !empty($query['qty']) ? (float)$query['qty'] : 0;
+
+        if (empty($instrument_name) || empty($measuring_size)) {
+            return 0;
+        }
+
+        $this->db->select('IFNULL(SUM(qty_assign),0) AS total_assign');
+        $this->db->from('tbl_storeform_qty_assign');
+        $this->db->where('instrument_name', $instrument_name);
+        $this->db->where('measuring_size', $measuring_size);
+        $assignedRow = $this->db->get()->row_array();
+        $total_assign = (float)$assignedRow['total_assign'];
+
+        $this->db->select('IFNULL(SUM(qty_removed),0) AS total_removed');
+        $this->db->from('tbl_storeform_qty_assign');
+        $this->db->where('instrument_name', $instrument_name);
+        $this->db->where('measuring_size', $measuring_size);
+        $removedRow = $this->db->get()->row_array();
+        $total_removed = (float)$removedRow['total_removed'];
+
+        $live_qty = $quantity_available - $total_assign + $total_removed;
+
+        return ($live_qty > 0) ? $live_qty : 0;
+    }
+
+    public function getSamplingInstrumnetDataBypartIddata($params, $id, $ticket_no)
+    {
+        $this->db->select('
+            '.TBL_SAMPLING_MASTER.'.*,
+            '.TBL_FINISHED_GOODS.'.part_number,
+            '.TBL_FINISHED_GOODS.'.fin_id,
+            '.TBL_SAMPLING_MASTER_TRANS.'.instrument_name,
+            '.TBL_SAMPLING_MASTER_TRANS.'.measuring_size,
+            '.TBL_INSTRUMENT_MASTER.'.grade,
+            '.TBL_INSTRUMENT_MASTER.'.unit,
+            '.TBL_INSTRUMENT_MASTER.'.class,
+            '.TBL_INSTRUMENT_MASTER.'.type,
+            '.TBL_INSTRUMENT_MASTER.'.qty,
+            '.TBL_INSTRUMENT_MASTER.'.remark
+        ');
+
+        // Search filter
+        if ($params['search']['value'] != "") 
+        {
+            $search = $params['search']['value'];
+            $this->db->where("("
+                .TBL_SAMPLING_MASTER.".id LIKE '%$search%' 
+                OR ".TBL_FINISHED_GOODS.".part_number LIKE '%$search%'
+                OR ".TBL_SAMPLING_MASTER_TRANS.".instrument_name LIKE '%$search%'
+                OR ".TBL_SAMPLING_MASTER_TRANS.".measuring_size LIKE '%$search%'
+                OR ".TBL_INSTRUMENT_MASTER.".grade LIKE '%$search%'
+                OR ".TBL_INSTRUMENT_MASTER.".unit LIKE '%$search%'
+                OR ".TBL_INSTRUMENT_MASTER.".class LIKE '%$search%'
+                OR ".TBL_INSTRUMENT_MASTER.".type LIKE '%$search%'
+                OR ".TBL_INSTRUMENT_MASTER.".qty LIKE '%$search%'
+                OR ".TBL_SAMPLING_MASTER_TRANS.".remark LIKE '%$search%'
+            )");
+        }
+
+        $this->db->from(TBL_SAMPLING_MASTER);
+
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_SAMPLING_MASTER.'.part_number_id', 'left');
+
+        $this->db->join(
+            TBL_SAMPLING_MASTER_TRANS, 
+            TBL_SAMPLING_MASTER_TRANS.'.sampling_master_id = '.TBL_SAMPLING_MASTER.'.id 
+            AND '.TBL_SAMPLING_MASTER_TRANS.'.status = 1',
+            'left'
+        );
+
+        $this->db->join(
+            TBL_INSTRUMENT_MASTER, 
+            TBL_INSTRUMENT_MASTER.'.instrument_name = '.TBL_SAMPLING_MASTER_TRANS.'.instrument_name
+            AND '.TBL_INSTRUMENT_MASTER.'.measuring_size = '.TBL_SAMPLING_MASTER_TRANS.'.measuring_size',
+            'left'
+        );
+
+        $this->db->where(TBL_FINISHED_GOODS.'.fin_id', $id);
+        $this->db->limit($params['length'], $params['start']);
+        $this->db->order_by(TBL_SAMPLING_MASTER.'.id', 'DESC');
+
+        $query  = $this->db->get();
+        $result = $query->result_array();
+        $data = [];
+        $count = 0;
+
+        foreach ($result as $row) {
+            $live_quantity = $this->getLiveQtyforInst($id,$row['instrument_name'],$row['measuring_size']);
+            $data[$count]['instrument_name']  = $row['instrument_name'];
+            $data[$count]['grade']            = $row['grade'];
+            $data[$count]['unit']             = $row['unit'];
+            $data[$count]['class']            = $row['class'];
+            $data[$count]['measuring_size']   = $row['measuring_size'];
+            $data[$count]['type']             = $row['type'];
+            $data[$count]['remark']           = $row['remark'];
+            $data[$count]['qty']              = $row['qty'];
+            $data[$count]['live_qty']         = $live_quantity; 
+            $data[$count]['action']  = "";
+            $data[$count]['action'] .= "
+            <i  style='font-size:x-large; cursor:pointer; color:#3c8dbc;' 
+                data-toggle='modal' 
+                data-target='#addNewModal'
+                data-part_id='".$id."'
+                data-ticket_no='".$ticket_no."'
+                data-instrument_name='".$row['instrument_name']."'
+                data-measuring_size='".$row['measuring_size']."'
+                data-qty='".$row['qty']."' 
+                data-part_number='".$row['part_number']."'
+                class='fa fa-plus-circle addrejectionitemdata'>
+            </i> &nbsp;";
+
+                    $data[$count]['action'] .= "
+            <a href='".ADMIN_PATH."viewassigninstqtytforticket?ticket_no=".$ticket_no."&instrument_name=".$row['instrument_name']."&measuring_size=".$row['measuring_size']."&part_id=".$id."&part_number=".$row['part_number']."' style='cursor: pointer;' target='_blank'>
+            <i style='font-size: x-large;cursor: pointer;' class='fa fa-eye' aria-hidden='true'></i>
+            </a>";
+
+
+            $data[$count]['action'] .= "
+            <i  style='font-size:x-large; cursor:pointer; color:#3c8dbc;' 
+                data-toggle='modal' 
+                data-target='#removeNewModal'
+                data-part_id='".$id."'
+                data-ticket_no='".$ticket_no."'
+                data-instrument_name='".$row['instrument_name']."'
+                data-measuring_size='".$row['measuring_size']."'
+                data-qty='".$row['qty']."'
+                data-part_number='".$row['part_number']."' 
+                class='fa fa-minus-circle addrejectionitemdata'>
+            </i> &nbsp;";
+
+
+            $data[$count]['action'] .= "
+            <a href='".ADMIN_PATH."viewremovedinstqtytforticket?ticket_no=".$ticket_no."&instrument_name=".$row['instrument_name']."&measuring_size=".$row['measuring_size']."&part_id=".$id."&part_number=".$row['part_number']."' style='cursor: pointer;' target='_blank'>
+            <i style='font-size: x-large;cursor: pointer;' class='fa fa-eye' aria-hidden='true'></i>
+            </a>";
+            $count++;
+        }
+
+        return $data;
+    }
+
+    public function getSamplingInstrumnetDataBypartIdcount($params, $partId, $ticket_no)
+    {
+            $this->db->select('
+            '.TBL_SAMPLING_MASTER.'.*,
+            '.TBL_FINISHED_GOODS.'.part_number,
+            '.TBL_FINISHED_GOODS.'.fin_id,
+            '.TBL_SAMPLING_MASTER_TRANS.'.instrument_name,
+            '.TBL_SAMPLING_MASTER_TRANS.'.measuring_size,
+            '.TBL_INSTRUMENT_MASTER.'.grade,
+            '.TBL_INSTRUMENT_MASTER.'.unit,
+            '.TBL_INSTRUMENT_MASTER.'.class,
+            '.TBL_INSTRUMENT_MASTER.'.type,
+            '.TBL_INSTRUMENT_MASTER.'.qty,
+            '.TBL_INSTRUMENT_MASTER.'.remark
+        ');
+
+        // Search filter
+        if ($params['search']['value'] != "") 
+        {
+            $search = $params['search']['value'];
+            $this->db->where("("
+                .TBL_SAMPLING_MASTER.".id LIKE '%$search%' 
+                OR ".TBL_FINISHED_GOODS.".part_number LIKE '%$search%'
+                OR ".TBL_SAMPLING_MASTER_TRANS.".instrument_name LIKE '%$search%'
+                OR ".TBL_SAMPLING_MASTER_TRANS.".measuring_size LIKE '%$search%'
+                OR ".TBL_INSTRUMENT_MASTER.".grade LIKE '%$search%'
+                OR ".TBL_INSTRUMENT_MASTER.".unit LIKE '%$search%'
+                OR ".TBL_INSTRUMENT_MASTER.".class LIKE '%$search%'
+                OR ".TBL_INSTRUMENT_MASTER.".type LIKE '%$search%'
+                OR ".TBL_INSTRUMENT_MASTER.".qty LIKE '%$search%'
+                OR ".TBL_SAMPLING_MASTER_TRANS.".remark LIKE '%$search%'
+            )");
+        }
+
+        $this->db->from(TBL_SAMPLING_MASTER);
+
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_SAMPLING_MASTER.'.part_number_id', 'left');
+
+        $this->db->join(
+            TBL_SAMPLING_MASTER_TRANS, 
+            TBL_SAMPLING_MASTER_TRANS.'.sampling_master_id = '.TBL_SAMPLING_MASTER.'.id 
+            AND '.TBL_SAMPLING_MASTER_TRANS.'.status = 1',
+            'left'
+        );
+
+        $this->db->join(
+            TBL_INSTRUMENT_MASTER, 
+            TBL_INSTRUMENT_MASTER.'.instrument_name = '.TBL_SAMPLING_MASTER_TRANS.'.instrument_name
+            AND '.TBL_INSTRUMENT_MASTER.'.measuring_size = '.TBL_SAMPLING_MASTER_TRANS.'.measuring_size',
+            'left'
+        );
+
+        $this->db->where(TBL_FINISHED_GOODS.'.fin_id', $id);
+        $this->db->limit($params['length'], $params['start']);
+        $this->db->order_by(TBL_SAMPLING_MASTER.'.id', 'DESC');
+
+        $query = $this->db->get();
+        return $query->num_rows();
+    }
+
+    public function savequantityassignstoreform($id,$data){
+
+        if($id != '') {
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_STOREFORM_QTY_ASSIGN, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_STOREFORM_QTY_ASSIGN, $data)) {
+                return $this->db->insert_id();
+            } else {
+                return FALSE;
+            }
+        }
+
+    }
+
+    public function getTicketLiveQty($ticket_no, $instrument_name, $measuring_size)
+    {
+        $this->db->select("IFNULL(SUM(qty_assign),0) - IFNULL(SUM(qty_removed),0) AS liveQty");
+        $this->db->from("tbl_storeform_qty_assign");
+        $this->db->where("ticket_no", $ticket_no);
+        $this->db->where("instrument_name", $instrument_name);
+        $this->db->where("measuring_size", $measuring_size);
+
+        $row = $this->db->get()->row_array();
+        return isset($row['liveQty']) ? (float)$row['liveQty'] : 0;
+    }
+
+    public function getAssignedQtyListData($params,$ticket_no, $instrument_name, $measuring_size, $part_id)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_storeform_qty_assign');
+        $this->db->where('ticket_no', $ticket_no);
+        $this->db->where('instrument_name', $instrument_name);
+        $this->db->where('measuring_size', $measuring_size);
+        $this->db->where('qty_removed', 0);
+        
+
+        if ($params['search']['value'] != "") 
+        {
+            $search = $params['search']['value'];
+            $this->db->where("(
+                id LIKE '%{$search}%' OR
+                ticket_no LIKE '%{$search}%' OR
+                instrument_name LIKE '%{$search}%' OR
+                measuring_size LIKE '%{$search}%' OR
+                qty_assign LIKE '%{$search}%' OR
+                qty_remark LIKE '%{$search}%'
+            )");
+        }
+        $this->db->order_by('id', 'DESC');
+        $result = $this->db->get()->result_array(); 
+        $data = [];
+        $count = 0;
+
+        foreach ($result as $row) {
+            $data[$count]['instrument_name']  = $row['instrument_name'];
+            $data[$count]['measuring_size']   = $row['measuring_size'];
+            $data[$count]['qty_assign']       = $row['qty_assign'];
+            $data[$count]['qty_remark']       = $row['qty_remark'];
+
+            $data[$count]['action']  = "";
+
+            $data[$count]['action'] .= "
+            <i style='font-size:x-large; cursor:pointer; color:#3c8dbc;' 
+                data-toggle='modal'
+                data-target='#addNewModal'
+                data-id='".$row['id']."'
+                data-instrument_name='".$row['instrument_name']."'
+                data-measuring_size='".$row['measuring_size']."'
+                data-ticket_no='".$row['ticket_no']."'
+                data-qty_live='".$row['qty_live']."'
+                data-part_id='".$part_id."'
+                class='fa fa-pencil-square-o editassignqtyitem'>
+            </i> &nbsp;";
+
+            // Delete action (example)
+            $data[$count]['action'] .= "
+                <i style='font-size:x-large; cursor:pointer;' data-id='".$row['id']."'
+                data-instrument_name='".$row['instrument_name']."'
+                data-measuring_size='".$row['measuring_size']."'
+                data-ticket_no='".$row['ticket_no']."'
+                data-qty_live='".$row['qty_live']."'
+                data-part_id='".$part_id."' class='fa fa-trash deleteassignqty'></i>";
+
+            //  "<i style='font-size: x-large;cursor: pointer;' data-id='".$row['ticket_id_label']."' class='fa fa-trash-o deletetdirreport' aria-hidden='true'></i>"; 
+
+            $count++;
+        }
+
+        return $data;
+    }
+
+    public function getRemovedQtyListData($params,$ticket_no, $instrument_name, $measuring_size, $part_id)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_storeform_qty_assign');
+        $this->db->where('ticket_no', $ticket_no);
+        $this->db->where('instrument_name', $instrument_name);
+        $this->db->where('measuring_size', $measuring_size);
+        $this->db->where('qty_assign', 0);
+        
+
+        if ($params['search']['value'] != "") 
+        {
+            $search = $params['search']['value'];
+            $this->db->where("(
+                id LIKE '%{$search}%' OR
+                ticket_no LIKE '%{$search}%' OR
+                instrument_name LIKE '%{$search}%' OR
+                measuring_size LIKE '%{$search}%' OR
+                qty_assign LIKE '%{$search}%' OR
+                qty_remark LIKE '%{$search}%'
+            )");
+        }
+        $this->db->order_by('id', 'DESC');
+        $result = $this->db->get()->result_array(); 
+        $data = [];
+        $count = 0;
+
+        foreach ($result as $row) {
+            $data[$count]['instrument_name']  = $row['instrument_name'];
+            $data[$count]['measuring_size']   = $row['measuring_size'];
+            $data[$count]['qty_removed']       = $row['qty_removed'];
+            $data[$count]['qty_remark']       = $row['qty_remark'];
+
+            $data[$count]['action']  = "";
+
+            $data[$count]['action'] .= "
+            <i style='font-size:x-large; cursor:pointer; color:#3c8dbc;' 
+                data-toggle='modal'
+                data-target='#addNewModal'
+                data-id='".$row['id']."'
+                data-instrument_name='".$row['instrument_name']."'
+                data-measuring_size='".$row['measuring_size']."'
+                data-ticket_no='".$row['ticket_no']."'
+                data-qty_live='".$row['qty_live']."'
+                data-part_id='".$part_id."'
+                class='fa fa-pencil-square-o editassignqtyitem'>
+            </i> &nbsp;";
+
+            // Delete action (example)
+            $data[$count]['action'] .= "
+                <i style='font-size:x-large; cursor:pointer;' data-id='".$row['id']."'
+                data-instrument_name='".$row['instrument_name']."'
+                data-measuring_size='".$row['measuring_size']."'
+                data-ticket_no='".$row['ticket_no']."'
+                data-qty_live='".$row['qty_live']."'
+                data-part_id='".$part_id."' class='fa fa-trash deleteassignqty'></i>";
+
+            //  "<i style='font-size: x-large;cursor: pointer;' data-id='".$row['ticket_id_label']."' class='fa fa-trash-o deletetdirreport' aria-hidden='true'></i>"; 
+
+            $count++;
+        }
+
+        return $data;
+    }
+
+    public function geteditassignqtyitem( $id)
+    {
+    $this->db->select('*');
+    $this->db->where(TBL_STOREFORM_QTY_ASSIGN.'.id', $id);
+    $this->db->order_by(TBL_STOREFORM_QTY_ASSIGN.'.id','DESC');
+    $query = $this->db->get(TBL_STOREFORM_QTY_ASSIGN);
+    $fetch_result = $query->result_array();
+    return $fetch_result;
+
+    }
+
+    public function deleteassignqty($id){
+        $this->db->where('id', $id);
+        if($this->db->delete(TBL_STOREFORM_QTY_ASSIGN)){
+                return TRUE;
+        }else{
+            return FALSE;
+        }
+    }
+
+    public function getAllInstQtyAvaliablebyPartId($id)
+    {
+        $this->db->select('
+            '.TBL_SAMPLING_MASTER.'.*,
+            '.TBL_FINISHED_GOODS.'.part_number,
+            '.TBL_FINISHED_GOODS.'.fin_id,
+            '.TBL_SAMPLING_MASTER_TRANS.'.instrument_name,
+            '.TBL_SAMPLING_MASTER_TRANS.'.measuring_size,
+            '.TBL_INSTRUMENT_MASTER.'.grade,
+            '.TBL_INSTRUMENT_MASTER.'.unit,
+            '.TBL_INSTRUMENT_MASTER.'.class,
+            '.TBL_INSTRUMENT_MASTER.'.type,
+            '.TBL_INSTRUMENT_MASTER.'.qty,
+            '.TBL_SAMPLING_MASTER_TRANS.'.remark
+        ');
+
+        $this->db->from(TBL_SAMPLING_MASTER);
+
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_SAMPLING_MASTER.'.part_number_id', 'left');
+
+        $this->db->join(
+            TBL_SAMPLING_MASTER_TRANS, 
+            TBL_SAMPLING_MASTER_TRANS.'.sampling_master_id = '.TBL_SAMPLING_MASTER.'.id 
+            AND '.TBL_SAMPLING_MASTER_TRANS.'.status = 1',
+            'left'
+        );
+
+        $this->db->join(
+            TBL_INSTRUMENT_MASTER, 
+            TBL_INSTRUMENT_MASTER.'.instrument_name = '.TBL_SAMPLING_MASTER_TRANS.'.instrument_name
+            AND '.TBL_INSTRUMENT_MASTER.'.measuring_size = '.TBL_SAMPLING_MASTER_TRANS.'.measuring_size',
+            'left'
+        );
+
+        $this->db->where(TBL_FINISHED_GOODS.'.fin_id', $id);
+        $this->db->limit($params['length'], $params['start']);
+        $this->db->order_by(TBL_SAMPLING_MASTER.'.id', 'DESC');
+
+        $query  = $this->db->get();
+        $result = $query->result_array();
+        $count = 0;
+        $live_quantity = true;
+        $data = ['is_liveqty_avaliable'=> $live_quantity];
+        foreach ($result as $row) {
+            $live_quantity = $this->getLiveQtyforInst($id,$row['instrument_name'],$row['measuring_size']);
+            // print_r("----------------");
+            // print_r($live_quantity);
+            if ($live_quantity <= 0)
+            {
+                $live_quantity = false;
+                $data = ['is_liveqty_avaliable'=> $live_quantity, 'instrument_name'=>$row['instrument_name'],'measuring_size'=>$row['measuring_size']];
+                break;
+            }
+            
+            $count++;
+        }
+        // print_r($data);
+        return $data;
+    }
+
+    public function getassignbyId($assignedID){
+        return $this->db->get_where('tbl_storeform_qty_assign', ['id' => $assignedID])->row_array();
+    }
+
+
 }
 
 ?>

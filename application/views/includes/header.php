@@ -342,6 +342,12 @@
                         </ul>
                       </li>
 
+                      <li class="treeview <?php if($pageUrl=="store_form" || $pageUrl=="store_form" || $pageUrl=="addstore_form"){echo 'active';}?>" >
+                        <a href="<?php echo base_url(); ?>storeform">
+                          <i class="fa fa-hdd-o"></i> <span class="menu_label">Store Form</span>
+                        </a>
+                      </li> 
+
                       <li class="treeview <?php if($pageUrl=="cbam"){echo 'active';}?>" >
                         <a href="<?php echo base_url(); ?>cbam">
                           <i class="fa fa-file-excel-o"></i> <span class="menu_label">CBAM</span>

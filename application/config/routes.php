@@ -639,6 +639,25 @@ $route['deletereworkrecordreasondata'] = "admin/deletereworkrecordreasondata";
 
 
 
+//////////////////////////////// STORE FORM///////////////////////////////////
+$route['storeform'] = "admin/store_form";
+$route['addStoreForm'] = "admin/addStoreForm";
+$route['admin/getTeamMembers'] = "admin/getTeamMembers";
+$route['fetchstoreform'] = "admin/fetchstoreform";
+$route['edit_storeform_ticket/(:any)'] = "admin/edit_storeform_ticket/$1";
+$route['deletetstoreform'] = "admin/deletetstoreform";
+$route['addInstrumentStoreform/(:any)/(:any)'] = 'admin/addInstrumentStoreform/$1/$2';
+$route['fetchaddInstrumentStoreform/(:any)/(:any)'] = "admin/fetchaddInstrumentStoreform/$1/$2";
+$route['editstoreformqtyassigndata'] = "admin/editstoreformqtyassigndata";
+$route['viewassigninstqtytforticket'] = "admin/viewassigninstqtytforticket";
+$route['fetchviewassigninstqtytforticket'] = "admin/fetchviewassigninstqtytforticket";
+$route['geteditassignqtyitem'] = "admin/geteditassignqtyitem";
+$route['deleteassignqty'] = "admin/deleteassignqty";
+$route['editstoreformqtyremovedata'] = "admin/editstoreformqtyremovedata";
+$route['viewremovedinstqtytforticket'] = "admin/viewremovedinstqtytforticket";
+$route['fetchviewremovedinstqtytforticket'] = "admin/fetchviewremovedinstqtytforticket";
+//////////////////////////////// STORE FORM///////////////////////////////////
+
 
 
 

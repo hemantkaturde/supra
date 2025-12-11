@@ -27041,4 +27041,544 @@ public function getreworkrecordreporteditdata(){
     }
 }
 
+
+/////////////////////////// STORE FORM ////////////////////////////////////////
+public function store_form(){
+    $process = 'Store Form';
+    $processFunction = 'Admin/store_form';
+    $this->global['pageTitle'] = 'Store Form';
+    $this->loadViews("masters/storeform", $this->global, $data, NULL);  
+}
+
+public function getTeamMembers()
+{
+    $team_id = $this->input->post('team_id');
+
+    $members = $this->admin_model->getTeamMembersByTeamId($team_id);
+
+    echo json_encode($members);
+}
+
+public function getAllInstQtyAvaliablebyPartId($partNo){
+    $getAllInstQtyAvaliablebyPartId = $this->admin_model->getAllInstQtyAvaliablebyPartId($partNo);
+    return $getAllInstQtyAvaliablebyPartId;
+}
+
+public function addStoreForm() {
+    $post_submit = $this->input->post();
+    if ($post_submit) 
+            {
+                $save_ticket_response = array();
+                $this->form_validation->set_rules('ticket_no', 'Ticket No', 'trim|required');
+                $this->form_validation->set_rules('ticket_date', 'Date', 'trim|required');
+                $this->form_validation->set_rules('parts_no', 'Parts No', 'trim|required');
+                $this->form_validation->set_rules('team', 'Team', 'trim|required');
+                $this->form_validation->set_rules('team_member', 'Team Member', 'trim|required');
+                $this->form_validation->set_rules('status', 'Status', 'trim|required');
+                $this->form_validation->set_rules('remarks', 'Remarks', 'trim');
+                if ($this->form_validation->run() == FALSE) {
+                    $save_ticket_response['status'] = 'failure';
+                    $save_ticket_response['error'] = array(
+                        'ticket_no'    => strip_tags(form_error('ticket_no')),
+                        'ticket_date'  => strip_tags(form_error('ticket_date')),
+                        'parts_no'     => strip_tags(form_error('parts_no')),
+                        'team'         => strip_tags(form_error('team')),
+                        'team_member'  => strip_tags(form_error('team_member')),
+                        'status'       => strip_tags(form_error('status')),
+                        'remarks'      => strip_tags(form_error('remarks'))
+                    );
+                } else {
+                    $data = array(
+                        'ticket_no'     => trim($this->input->post('ticket_no', TRUE)),
+                        'ticket_date'   => date('Y-m-d', strtotime($this->input->post('ticket_date', TRUE))),
+                        'parts_id'      => trim($this->input->post('parts_no', TRUE)),
+                        'team_id'          => trim($this->input->post('team', TRUE)),
+                        'team_member_id'   => trim($this->input->post('team_member', TRUE)),
+                        'status'        => trim($this->input->post('status', TRUE)),
+                        'remarks'       => trim($this->input->post('remarks', TRUE))
+                    );
+
+                    // $ifallinstrumentsQtyAvaliable = $this->getAllInstQtyAvaliablebyPartId(trim($this->input->post('parts_no', TRUE)));
+
+                    // // print_r($ifallinstrumentsQtyAvaliable);
+
+                    // if($ifallinstrumentsQtyAvaliable['is_liveqty_avaliable'] == false){
+                    //     $save_ticket_response['status'] = 'failure';
+                    //     $save_ticket_response['error'] = array(
+                    //         'ticket_no'    => 'Failed to save Ticket',
+                    //         'ticket_date'  => '',
+                    //         'parts_no'     => "The count of instrument of ".$ifallinstrumentsQtyAvaliable['instrument_name']." of measuring size ".$ifallinstrumentsQtyAvaliable['measuring_size']." for this part is not avaliable",
+                    //         'team'         => '',
+                    //         'team_member'  => '',
+                    //         'status'       => '',
+                    //         'remarks'      => ''
+                    //     );
+
+                    //     echo json_encode($save_ticket_response);
+                    //     exit;
+
+
+                    // }
+
+                    $ticket_id = $this->input->post('ticket_id') ? trim($this->input->post('ticket_id', TRUE)) : NULL;
+                    $save_ticket = $this->admin_model->save_ticket($ticket_id, $data);
+
+                    if ($save_ticket) {
+                        $save_ticket_response['status'] = 'success';
+                        $save_ticket_response['error'] = array_fill_keys(
+                            ['ticket_no','ticket_date','parts_no','team','team_member','status','remarks'], ''
+                        );
+                    } else {
+                        $save_ticket_response['status'] = 'failure';
+                        $save_ticket_response['error'] = array(
+                            'ticket_no'    => 'Failed to save Ticket',
+                            'ticket_date'  => '',
+                            'parts_no'     => '',
+                            'team'         => '',
+                            'team_member'  => '',
+                            'status'       => '',
+                            'remarks'      => ''
+                        );
+                    }
+                }
+
+                echo json_encode($save_ticket_response);
+            }
+    else {
+            $process = 'Add New Store form';
+            $processFunction = 'Admin/addStoreForm';
+            $this->logrecord($process, $processFunction);
+
+            $this->global['pageTitle'] = 'Add New Store Form';
+            $data['vendorList'] = $this->admin_model->fetchALLvendorList();
+            $data['getPreviousReportnumber'] = $this->admin_model->getPreviousReportnumber();
+
+            $last_ticket = $this->admin_model->getLastTicketNo();
+
+            if($last_ticket){
+                $next_no = (int)$last_ticket['ticket_no'] + 1;
+            } else {
+                $next_no = 1; 
+            }
+
+            $data['ticket_no'] = $next_no;
+            $data['parts_no_list'] = $this->admin_model->part_number();
+            $data['team_list'] = $this->admin_model->getAllteammaster();
+            $this->loadViews("masters/addstoreform", $this->global, $data, NULL);
+        }
+    
+}
+
+public function fetchstoreform(){
+    $params = $_REQUEST;
+    $totalRecords = $this->admin_model->getstoreformticketcount($params); 
+    $queryRecords = $this->admin_model->getstoreformticketcountdata($params); 
+
+    $data = array();
+    foreach ($queryRecords as $key => $value)
+    {
+        $i = 0;
+        foreach($value as $v)
+        {
+            $data[$key][$i] = $v;
+            $i++;
+        }
+    }
+    $json_data = array(
+        "draw"            => intval( $params['draw'] ),   
+        "recordsTotal"    => intval( $totalRecords ),  
+        "recordsFiltered" => intval($totalRecords),
+        "data"            => $data   // total data array
+        );
+    echo json_encode($json_data);
+
+}
+
+public function edit_storeform_ticket($ticket_id){
+
+        $process = 'Edit Storeform';
+        $processFunction = 'Admin/edit_storeform_ticket';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Edit Storeform';
+        // $data['vendorList']= $this->admin_model->fetchALLvendorList();
+        $data['parts_no_list'] = $this->admin_model->part_number();
+        $data['team_list'] = $this->admin_model->getAllteammaster();
+        $data['getTicketData']= $this->admin_model->getTicketData($ticket_id);
+        $data['team_members'] = $this->admin_model->getTeamMembersByTeamId($data['getTicketData'][0]['team_id']);
+        $this->loadViews("masters/edit_storeform_ticket", $this->global, $data, NULL);
+
+}
+
+public function deletetstoreform(){
+
+    $post_submit = $this->input->post();
+    if($post_submit){
+        $result = $this->admin_model->deletetstoreform(trim($this->input->post('id')));
+        if ($result) {
+                    $process = 'Delete Storeform';
+                    $processFunction = 'Admin/deletetstoreform';
+                    $this->logrecord($process,$processFunction);
+                echo(json_encode(array('status'=>'success')));
+            }
+        else { echo(json_encode(array('status'=>'failed'))); }
+    }else{
+        echo(json_encode(array('status'=>'failed'))); 
+    }
+}
+
+public function addInstrumentStoreform($parts_id,$ticket_no){
+        $process = 'Add Instrument Store Form';
+        $processFunction = 'Admin/addInstrumentStoreform';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Add Instrument Store Form';
+        $data['ticket_no'] = $ticket_no;
+        $data['getSamplingInstrumnetData'] = $this->admin_model->addInstrumentStoreform(trim($parts_id));
+
+        $this->loadViews("masters/addInstrumentStoreform", $this->global, $data, NULL);
+    }
+
+public function fetchaddInstrumentStoreform($part_no,$ticket_no){
+        $params = $_REQUEST;
+        $totalRecords = $this->admin_model->getSamplingInstrumnetDataBypartIdcount($params,trim($part_no),trim($ticket_no)); 
+        $queryRecords = $this->admin_model->getSamplingInstrumnetDataBypartIddata($params,trim($part_no),trim($ticket_no)); 
+
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval(count($data) ),  
+            "recordsFiltered" => intval(count($data)),
+            "data"            => $data   // total data array
+            );
+        echo json_encode($json_data);
+    }
+
+public function editstoreformqtyassigndata() {
+        $response = array();
+        $post = $this->input->post();
+        if ($post) {
+            // validation
+            $this->form_validation->set_rules('qty_assign', 'Quantity Assign', 'trim|required');
+            $this->form_validation->set_rules('qty_remark', 'Remark', 'trim');
+
+            if ($this->form_validation->run() == FALSE) {
+                $response['status'] = 'failure';
+                $response['error'] = array(
+                    'qty_assign' => strip_tags(form_error('qty_assign')),
+                    'qty_remark' => strip_tags(form_error('qty_remark'))
+                );
+            } else {
+
+                $assignedID = trim($this->input->post('assigned_id')); 
+                $partsId = trim($this->input->post('partsId')); 
+                $instrument_name_popup = trim($this->input->post('instrument_name_popup'));
+				$measuring_size_popup = trim($this->input->post('measuring_size_popup'));
+                
+
+                $new_qty_assign = (int) $this->input->post('qty_assign');
+
+                $old = $this->admin_model->getassignbyId($assignedID);
+                $old_qty_assign = isset($old['qty_assign']) ? (int)$old['qty_assign'] : 0;
+
+                $remaining_Qty = $this->admin_model->getLiveQtyforInst(
+                    $partsId,
+                    $instrument_name_popup,
+                    $measuring_size_popup
+                );
+
+                $remaining_Qty_adjusted = $remaining_Qty + $old_qty_assign;
+
+                if ($new_qty_assign > $remaining_Qty_adjusted) {
+                    $response['status'] = 'failure';
+                    $response['error'] = [
+                        'qty_assign' => "Quantity not available."
+                    ];
+                    echo json_encode($response);
+                    exit;
+                }
+
+
+               
+                // If update
+                if (!empty($assignedID)) {
+                    $data = array(
+                        'qty_assign'  => trim($this->input->post('qty_assign')),
+                        'qty_remark'  => trim($this->input->post('qty_remark'))
+                    );
+                }
+                // If insert new row
+                else {
+                    $data = array(
+                        'qty_assign'        => trim($this->input->post('qty_assign')),
+                        'qty_remark'        => trim($this->input->post('qty_remark')),
+                        'ticket_no'         => trim($this->input->post('ticket_no_popup')),
+                        'instrument_name'   => trim($this->input->post('instrument_name_popup')),
+                        'measuring_size'    => trim($this->input->post('measuring_size_popup')),
+                        'qty_available'     => trim($this->input->post('qty_popup'))
+                    );
+                }
+
+                $result = $this->admin_model->savequantityassignstoreform($assignedID, $data);
+
+                if ($result) {
+                    $response['status'] = 'success';
+                    $response['message'] = 'Quantity assigned successfully.';
+                } else {
+                    $response['status'] = 'failure';
+                    $response['message'] = 'DB error! Something went wrong.';
+                }
+            }
+            echo json_encode($response);
+        }
+}
+
+public function editstoreformqtyremovedata()
+{
+    $response = [];
+    $post = $this->input->post();
+
+    if (!$post) {
+        echo json_encode(['status' => 'failure', 'message' => 'No input received']);
+        return;
+    }
+
+    // Validation
+    $this->form_validation->set_rules('qty_removed', 'Quantity Removed', 'trim|required');
+    $this->form_validation->set_rules('qty_remark', 'Remark', 'trim');
+
+    if ($this->form_validation->run() == FALSE) {
+        $response['status'] = 'failure';
+        $response['error'] = [
+            'qty_removed' => strip_tags(form_error('qty_removed')),
+            'qty_remark'  => strip_tags(form_error('qty_remark'))
+        ];
+        echo json_encode($response);
+        return;
+    }
+
+    // Inputs
+    $assignedID        = trim($this->input->post('assigned_id'));
+    $ticket_no         = trim($this->input->post('ticket_no_popup'));
+    $partsId           = trim($this->input->post('partsId'));
+    $instrument_name   = trim($this->input->post('instrument_name_popup'));
+    $measuring_size    = trim($this->input->post('measuring_size_popup'));
+    $qty_removed_input = (float) $this->input->post('qty_removed');
+    $qty_remark_input  = trim($this->input->post('qty_remark'));
+
+    // Get old record
+    $old = $this->admin_model->getassignbyId($assignedID);
+    $old_qty_removed = isset($old['qty_removed']) ? (float)$old['qty_removed'] : 0;
+
+    if ($assignedID && $qty_removed_input == $old_qty_removed) {
+        $ok = $this->admin_model->savequantityassignstoreform($assignedID, [
+            'qty_remark' => $qty_remark_input
+        ]);
+
+        echo json_encode($ok
+            ? ['status' => 'success', 'message' => 'Remark updated successfully.']
+            : ['status' => 'failure', 'message' => 'DB error occurred.']
+        );
+        return;
+    }
+
+    // Prevent <= 0 remove
+    if ($qty_removed_input <= 0) {
+        echo json_encode([
+            'status' => 'failure',
+            'error'  => ['qty_removed' => 'Enter positive quantity for removal']
+        ]);
+        return;
+    }
+
+    // Current removable qty for ticket
+    $ticket_live_qty = $this->admin_model->getTicketLiveQty(
+        $ticket_no,
+        $instrument_name,
+        $measuring_size
+    );
+
+    if ($qty_removed_input > $ticket_live_qty) {
+        echo json_encode([
+            'status' => 'failure',
+            'error'  => [
+                'qty_removed' => "Can't remove more than available assigned qty."
+            ]
+        ]);
+        return;
+    }
+
+    $data = [
+        'qty_assign'  => 0,  // On removal assign must be 0
+        'qty_removed' => $qty_removed_input,
+        'qty_remark'  => $qty_remark_input
+    ];
+
+    if (!empty($assignedID)) {
+        $ok = $this->admin_model->savequantityassignstoreform($assignedID, $data);
+    } else {
+        $data = array_merge($data, [
+            'ticket_no'       => $ticket_no,
+            'instrument_name' => $instrument_name,
+            'measuring_size'  => $measuring_size,
+            'qty_available'   => (float) $this->input->post('qty_popup')
+        ]);
+      
+        $ok = $this->admin_model->savequantityassignstoreform(null, $data);
+    }
+
+    echo json_encode($ok
+        ? ['status' => 'success', 'message' => 'Quantity removed successfully.']
+        : ['status' => 'failure', 'message' => 'DB error occurred.']
+    );
+}
+  
+public function viewassigninstqtytforticket() {
+    $ticket_no       = $this->input->get('ticket_no');
+    $instrument_name = $this->input->get('instrument_name');
+    $measuring_size  = $this->input->get('measuring_size');
+    $part_id  = $this->input->get('part_id');
+    $part_number  = $this->input->get('part_number');
+
+    $process = 'Assigned Quantity Details';
+    $processFunction = 'Admin/assigned_instrument_listing';
+    $this->logrecord($process,$processFunction);
+    $this->global['pageTitle'] = 'Assigned Quantity Details';
+
+    // $data['assign_list'] = $this->admin_model->getAssignedQtyList($ticket_no, $instrument_name, $measuring_size);
+    $data['ticket_no'] = $ticket_no;
+    $data['instrument_name'] = $instrument_name;
+    $data['measuring_size'] = $measuring_size;
+    $data['part_id'] = $part_id;
+    $data['part_number'] = $part_number;
+
+    // $this->global['pageTitle'] = 'Assigned Quantity Details';
+    $this->loadViews("masters/assign_qty_list_view", $this->global, $data, NULL);
+
+
+    // $totalRecords = $this->admin_model->getAssignedQtyListCount($params,trim($part_no),trim($ticket_no)); 
+}
+
+public function viewremovedinstqtytforticket() {
+    $ticket_no       = $this->input->get('ticket_no');
+    $instrument_name = $this->input->get('instrument_name');
+    $measuring_size  = $this->input->get('measuring_size');
+    $part_id  = $this->input->get('part_id');
+    $part_number  = $this->input->get('part_number');
+
+    $process = 'Recevied Quantity Details';
+    $processFunction = 'Admin/recevied_instrument_listing';
+    $this->logrecord($process,$processFunction);
+    $this->global['pageTitle'] = 'Recevied Quantity Details';
+
+    // $data['assign_list'] = $this->admin_model->getAssignedQtyList($ticket_no, $instrument_name, $measuring_size);
+    $data['ticket_no'] = $ticket_no;
+    $data['instrument_name'] = $instrument_name;
+    $data['measuring_size'] = $measuring_size;
+    $data['part_id'] = $part_id;
+    $data['part_number'] = $part_number;
+    // $this->global['pageTitle'] = 'Assigned Quantity Details';
+    $this->loadViews("masters/received_qty_list_view", $this->global, $data, NULL);
+
+
+    // $totalRecords = $this->admin_model->getAssignedQtyListCount($params,trim($part_no),trim($ticket_no)); 
+}
+
+public function fetchviewremovedinstqtytforticket(){
+    // $ticket_no,$instrument_name,$measuring_size
+        $ticket_no       = $this->input->post('ticket_no');
+        $instrument_name = $this->input->post('instrument_name');
+        $measuring_size  = $this->input->post('measuring_size');
+        $part_id  = $this->input->post('part_id');
+        $params = $_REQUEST;
+        $queryRecords = $this->admin_model->getRemovedQtyListData($params,$ticket_no, $instrument_name, $measuring_size,$part_id);
+        
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval(count($data) ),  
+            "recordsFiltered" => intval(count($data)),
+            "data"            => $data   // total data array
+            );
+        echo json_encode($json_data);
+}
+
+public function fetchviewassigninstqtytforticket(){
+    // $ticket_no,$instrument_name,$measuring_size
+        $ticket_no       = $this->input->post('ticket_no');
+        $instrument_name = $this->input->post('instrument_name');
+        $measuring_size  = $this->input->post('measuring_size');
+        $part_id  = $this->input->post('part_id');
+        $params = $_REQUEST;
+        $queryRecords = $this->admin_model->getAssignedQtyListData($params,$ticket_no, $instrument_name, $measuring_size,$part_id);
+        
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval(count($data) ),  
+            "recordsFiltered" => intval(count($data)),
+            "data"            => $data   // total data array
+            );
+        echo json_encode($json_data);
+}
+
+public function geteditassignqtyitem(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $geteditassignqtyitem = $this->admin_model->geteditassignqtyitem(trim($this->input->post('id')));
+            if($geteditassignqtyitem){
+                $content = $geteditassignqtyitem[0];
+                echo json_encode($content);
+            }else{
+                echo 'failure';
+            }
+        }
+
+    }
+
+
+public function deleteassignqty(){
+
+    $post_submit = $this->input->post();
+    if($post_submit){
+        $result = $this->admin_model->deleteassignqty(trim($this->input->post('id')));
+        if ($result) {
+                    $process = 'Delete assign quantity';
+                    $processFunction = 'Admin/deleteassignqty';
+                    $this->logrecord($process,$processFunction);
+                echo(json_encode(array('status'=>'success')));
+            }
+        else { echo(json_encode(array('status'=>'failed'))); }
+    }else{
+        echo(json_encode(array('status'=>'failed'))); 
+    }
+}
+
+
+
 }

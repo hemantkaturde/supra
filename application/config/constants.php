@@ -201,6 +201,10 @@ define('TBL_REWORK_RECORD','tbl_rework_record');
 define('TBL_REWORK_RECORD_REASON_DATA','tbl_rework_record_reason_data');
 
 
+define('TBL_STOREFORM_TICKETS','tbl_storeform_tickets');
+define('TBL_INSTRUMENT_MASTER','tbl_instrument_master');
+define('TBL_STOREFORM_QTY_ASSIGN','tbl_storeform_qty_assign');
+
 
 
 define('SMTP_HOST','mail.supraexports.in');
