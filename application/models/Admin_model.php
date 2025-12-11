@@ -4080,7 +4080,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['remarks'] = $value['remarks'];
 
                 $data[$counter]['action'] = '';
-
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."printincomingitemdetails/".$value['incoming_details_item_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .="<i style='font-size: x-large;cursor: pointer' data-id='".$value['incoming_details_item_id']."' class='fa fa-pencil-square-o editIncomingDetailsitem'  aria-hidden='true'></i>  &nbsp";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer' data-id='".$value['incoming_details_item_id']."' class='fa fa-trash-o deleteIncomingDetailsitem' aria-hidden='true'></i>   &nbsp ";
               
