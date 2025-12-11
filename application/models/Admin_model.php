@@ -22724,7 +22724,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
-     public function reworkrecordincomingdetailslistcount($params,$vendor_po,$part_no)
+     public function reworkrecordincomingdetailslistcount($params,$vendor_po,$part_no,$tdir_id)
     {
              $this->db->select('*');
             // $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_REWORK_RECORD.'.vendor_name');
@@ -22744,7 +22744,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             return $result ? (int)$result->total : 0;
     }
 
-    public function reworkrecordincomingdetailslistdata($params,$vendor_po,$part_no)
+    public function reworkrecordincomingdetailslistdata($params,$vendor_po,$part_no,$tdir_id)
     {
         
             $this->db->select('*,'.TBL_INCOMING_DETAILS_ITEM.'.id as incoming_details_item_id');
@@ -22789,7 +22789,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                                 <i style='font-size:x-large;cursor:pointer;' class='fa fa-eye'></i>
                             </a> &nbsp;";
 
-                $actions .= "<a href='".ADMIN_PATH."printreworkrecordlotnumberrecord/".$value['incoming_details_item_id']."' style='cursor:pointer;' target='_blank'>
+                $actions .= "<a href='".ADMIN_PATH."admin/printreworkrecordlotnumberrecord/".$value['incoming_details_item_id']."/".$tdir_id."' style='cursor:pointer;' target='_blank'>
                                 <i style='font-size:x-large;cursor:pointer;' class='fa fa-print'></i>
                             </a> &nbsp;";
 

@@ -26766,11 +26766,11 @@ public function reworkrecordlotnumberrecord($id){
 }
 
 
-public function fetchreworkrecordincomingdetailslist($vendor_po,$part_no){
+public function fetchreworkrecordincomingdetailslist($vendor_po,$part_no,$tdir_id){
 
    $params = $_REQUEST;
-    $totalRecords = $this->admin_model->reworkrecordincomingdetailslistcount($params,$vendor_po,$part_no); 
-    $queryRecords = $this->admin_model->reworkrecordincomingdetailslistdata($params,$vendor_po,$part_no); 
+    $totalRecords = $this->admin_model->reworkrecordincomingdetailslistcount($params,$vendor_po,$part_no,$tdir_id); 
+    $queryRecords = $this->admin_model->reworkrecordincomingdetailslistdata($params,$vendor_po,$part_no,$tdir_id); 
 
     $data = array();
     foreach ($queryRecords as $key => $value)
@@ -27700,8 +27700,8 @@ public function printincomingitemdetails($id)
 }
 
 
-public function printreworkrecordlotnumberrecord($rjection_incoming_item_id){
-
+public function printreworkrecordlotnumberrecord($rjection_incoming_item_id,$tdir_id){
+    
     require_once FCPATH . 'vendor/autoload.php';
 
     $mpdf = new \Mpdf\Mpdf([
@@ -27711,13 +27711,19 @@ public function printreworkrecordlotnumberrecord($rjection_incoming_item_id){
         'margin_bottom' => 10
     ]);
 
+
+    $get_rework_rejection_data = $this->admin_model->getreworkrecorddatabyid($tdir_id);
+
     // SAMPLE DATA – you can make dynamic
-    $rework_no = "RWK-00125";
-    $rework_date = "2025-02-10";
-    $vendor_name = "ABC Industries";
-    $fg_part_no = "FG-5544";
+    $rework_no = $get_rework_rejection_data[0]['rework_record_no'];
+    $rework_date = $get_rework_rejection_data[0]['date'];
+    $vendor_name = $get_rework_rejection_data[0]['actual_vendor_name'];
+    $fg_part_no = $get_rework_rejection_data[0]['part_number'];
     $lot_qty = "500";
-    $team = "Team A";
+    $team = $get_rework_rejection_data[0]['team_name'];
+    $part_description = $get_rework_rejection_data[0]['name'];
+    $vendor_po_number = $get_rework_rejection_data[0]['vendor_po_number'];
+    $inspection_report_no = $get_rework_rejection_data[0]['inspection_report_no'];
 
     // ---------------- QR CODE GENERATE -----------------
     $qrData = base_url()."admin/printreworkrecordlotnumberrecord/".$rjection_incoming_item_id; // your QR text
@@ -27751,24 +27757,31 @@ public function printreworkrecordlotnumberrecord($rjection_incoming_item_id){
 
             <table width="100%">
             <tr>
+                <td style="text-align:center;">
+                    '.$barcodeHtml.'
+                </td>
+            </tr>
+            </table>
+
+            <table width="100%">
+            <tr>
                 <td class="label">1) Rework Record No</td><td>'.$rework_no.'</td>
                 <td class="label">6) F.G Part No</td><td>'.$fg_part_no.'</td>
             </tr>
             <tr>
                 <td class="label">2) Rework Record Date</td><td>'.$rework_date.'</td>
-                <td class="label">7) F.G Part Description</td><td>__________</td>
+                <td class="label">7) F.G Part Description</td><td>'.$part_description.'</td>
             </tr>
             <tr>
                 <td class="label">3) Vendor Name</td><td>'.$vendor_name.'</td>
-                <td class="label">8) Inspection Report No.</td><td>__________</td>
+                <td class="label">8) Inspection Report No.</td><td>'.$inspection_report_no.'</td>
             </tr>
             <tr>
-                <td class="label">4) Vendor P.O No</td><td>__________</td>
+                <td class="label">4) Vendor P.O No</td><td>'.$vendor_po_number.'</td>
                 <td class="label">9) Team</td><td>'.$team.'</td>
             </tr>
             <tr>
                 <td class="label">5) Lot Qty Input</td><td>'.$lot_qty.'</td>
-                <td class="label">10) Rework Done By</td><td>__________</td>
             </tr>
             </table>
 
@@ -27797,17 +27810,7 @@ public function printreworkrecordlotnumberrecord($rjection_incoming_item_id){
 
             $html .= '
             </table>
-
-            <br><br>
-
-            <table width="100%">
-            <tr>
-                <td><b>After Rework, checked by:</b> ______________________</td>
-                <td style="text-align:center;">
-                    '.$barcodeHtml.'
-                </td>
-            </tr>
-            </table>';
+            ';
             
 
     // WRITE PDF
