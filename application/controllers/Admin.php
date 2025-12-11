@@ -36,7 +36,7 @@ class Admin extends BaseController
         $this->datas();
 
         // Functions allowed WITHOUT LOGIN
-        $public_functions = ['printincomingitemdetails'];  // <-- apna function name
+        $public_functions = ['printincomingitemdetails','printreworkrecordlotnumberrecord'];  // <-- apna function name
 
         // Current function name
         $method = $this->router->fetch_method();
