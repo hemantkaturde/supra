@@ -656,6 +656,7 @@ $route['fetchviewremovedinstqtytforticket'] = "admin/fetchviewremovedinstqtytfor
 
 
 $route['printincomingitemdetails/(:any)'] = "admin/printincomingitemdetails/$1";
+$route['printreworkrecordlotnumberrecord/(:any)'] = "admin/printreworkrecordlotnumberrecord/$1";
 
 
 
