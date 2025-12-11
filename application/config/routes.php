@@ -637,9 +637,6 @@ $route['saverejectionreworkitemdataform'] = "admin/saverejectionreworkitemdatafo
 $route['viewreworkrecordreasondata/(:any)'] = "admin/viewreworkrecordreasondata/$1";
 $route['deletereworkrecordreasondata'] = "admin/deletereworkrecordreasondata";
 
-
-
-//////////////////////////////// STORE FORM///////////////////////////////////
 $route['storeform'] = "admin/store_form";
 $route['addStoreForm'] = "admin/addStoreForm";
 $route['admin/getTeamMembers'] = "admin/getTeamMembers";
@@ -656,17 +653,9 @@ $route['deleteassignqty'] = "admin/deleteassignqty";
 $route['editstoreformqtyremovedata'] = "admin/editstoreformqtyremovedata";
 $route['viewremovedinstqtytforticket'] = "admin/viewremovedinstqtytforticket";
 $route['fetchviewremovedinstqtytforticket'] = "admin/fetchviewremovedinstqtytforticket";
-//////////////////////////////// STORE FORM///////////////////////////////////
 
 
-
-
-
-// $route['fetchtdirattachment/(:tdirid)'] = "admin/fetchtdirattachment/$1";
-
-
-
-
+$route['printincomingitemdetails/(:any)'] = "admin/printincomingitemdetails/$1";
 
 
 

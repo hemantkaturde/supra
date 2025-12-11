@@ -9247,6 +9247,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['remarks'] = $value['remarks'];
 
                 $data[$counter]['action'] = '';
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."printincomingitemdetails/".$value['incoming_details_item_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>   &nbsp ";
                 $data[$counter]['action'] .="<i style='font-size: x-large;cursor: pointer' data-id='".$value['incoming_details_item_id']."' class='fa fa-pencil-square-o editIncomingDetailsitem'  aria-hidden='true'></i>  &nbsp";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer' data-id='".$value['incoming_details_item_id']."' class='fa fa-trash-o deleteIncomingDetailsitem' aria-hidden='true'></i>   &nbsp ";
               
@@ -23632,6 +23633,25 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     public function getassignbyId($assignedID){
         return $this->db->get_where('tbl_storeform_qty_assign', ['id' => $assignedID])->row_array();
+    }
+
+
+    
+    public function printincomingitemdetailsdata($id)
+    {
+
+        $this->db->select('*,'.TBL_INCOMING_DETAILS_ITEM.'.id as incoming_details_item_id,'.TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id as mainincoming,'.TBL_INCOMING_DETAILS_ITEM.'.part_number as itempart_number,'.TBL_VENDOR.'.vendor_name as name_of_vendor,'.TBL_VENDOR_PO_MASTER_ITEM.'.vendor_qty as vendor_po_order_qty');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_INCOMING_DETAILS_ITEM.'.pre_vendor_po_number');
+        $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id = '.TBL_VENDOR_PO_MASTER.'.id');
+
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_VENDOR_PO_MASTER.'.vendor_name');
+        $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.id',$id);
+        $query = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
+        $fetch_result = $query->result_array();
+
+        return $fetch_result;
+      
     }
 
 

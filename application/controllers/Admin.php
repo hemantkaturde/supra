@@ -27580,5 +27580,100 @@ public function deleteassignqty(){
 }
 
 
+public function printincomingitemdetails($id)
+{
+    require_once FCPATH . 'vendor/autoload.php'; // adjust path if needed
+
+    //get itemdetails by item id
+    $getdata_itemdetailsdata = $this->admin_model->printincomingitemdetailsdata(trim($id));
+
+    print_r($getdata_itemdetailsdata);
+    exit;
+
+
+    // Create mPDF instance
+    $mpdf = new \Mpdf\Mpdf();
+
+     // HTML for barcode floating at top-right
+    $barcodeHtml = '
+    <div style="position: absolute; top: 10px; right: 10px; width: 200px; text-align: right;">
+          <barcode code="SQPO25261375" type="C128" size="1.2" height="1" class="barcode" />
+    </div>
+    ';
+
+    // Table HTML
+    $tableHtml = '
+    <table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse; width: 100%; margin-top: 50px;">
+        <tr>
+            <td>SUPPLIER PO</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>SUPPLIER NAME</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>VENDOR PO</td>
+            <td>'.$getdata_itemdetailsdata[0]['po_number'].'</td>
+        </tr>
+        <tr>
+            <td>VENDOR NAME</td>
+            <td>'.$getdata_itemdetailsdata[0]['name_of_vendor'].'</td>
+        </tr>
+        <tr>
+            <td>VENDOR PO QTY (in PCS)</td>
+            <td>'.$getdata_itemdetailsdata[0]['vendor_po_order_qty'].'</td>
+        </tr>
+        <tr>
+            <td>FINISHED GOODS PART NO</td>
+            <td>'.$getdata_itemdetailsdata[0]['part_number'].'</td>
+        </tr>
+        <tr>
+            <td>FINISHED GOOD DESCRIPTION</td>
+            <td>'.$getdata_itemdetailsdata[0]['name'].'</td>
+        </tr>
+        <tr>
+            <td>LOT QTY IN PCS NOS</td>
+            <td>'.$getdata_itemdetailsdata[0]['invoice_qty'].'</td>
+        </tr>
+        <tr>
+            <td>LOT NO</td>
+            <td>'.$getdata_itemdetailsdata[0]['lot_no'].'</td>
+        </tr>
+        <tr>
+            <td>INVOICE NO</td>
+            <td>'.$getdata_itemdetailsdata[0]['invoice_no'].'</td>
+        </tr>
+        <tr>
+            <td>INVOICE DATE</td>
+            <td>'.$getdata_itemdetailsdata[0]['invoice_date'].'</td>
+        </tr>
+        <tr>
+            <td>NET WEIGHT in kgs</td>
+           <td>'.$getdata_itemdetailsdata[0]['net_weight'].'</td>
+        </tr>
+        <tr>
+            <td>GROSS WEIGHT in kgs</td>
+            <td>'.$getdata_itemdetailsdata[0]['fg_material_gross_weight'].'</td>
+        </tr>
+        <tr>
+            <td>NO OF BOXES</td>
+         <td>'.$getdata_itemdetailsdata[0]['boxex_goni_bundle'].'</td>
+        </tr>
+    </table>
+    ';
+
+    // Combine HTML
+    $mpdf->WriteHTML($barcodeHtml . $tableHtml);
+
+    // Password protection (same password to open PDF)
+    $password = 'Supra@2025'; // set your password here
+    $mpdf->SetProtection([], $password, $password);
+
+    // Output PDF
+    $mpdf->Output('Incoming Item Details.pdf', 'D'); // 'I' = open in browser
+}
+
+
 
 }
