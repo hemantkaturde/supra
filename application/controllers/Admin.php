@@ -5,6 +5,10 @@ require APPPATH . '/libraries/BaseController.php';
 use PhpOffice\PhpWord\Shared\Html;
 use PhpOffice\PhpWord\Element\TableRow;
 
+// Import Vendor Classes
+use Endroid\QrCode\QrCode;
+use Endroid\QrCode\Writer\PngWriter;
+
 
 /**
  * Class : Admin (AdminController)
@@ -30,20 +34,30 @@ class Admin extends BaseController
 
         // Datas -> libraries ->BaseController / This function used load user sessions
         $this->datas();
-        // isLoggedIn / Login control function /  This function used login control
-        $isLoggedIn = $this->session->userdata('isLoggedIn');
-        if(!isset($isLoggedIn) || $isLoggedIn != TRUE)
-        {
-            redirect('login');
-        }
-        
-        else
-        {
-            // isAdmin / Admin role control function / This function used admin role control
-            // if($this->isAdmin() == TRUE)
-            // {
-            //     $this->accesslogincontrol();
-            // }
+
+        // Functions allowed WITHOUT LOGIN
+        $public_functions = ['printincomingitemdetails'];  // <-- apna function name
+
+        // Current function name
+        $method = $this->router->fetch_method();
+
+        if (!in_array($method, $public_functions)) {
+
+            // isLoggedIn / Login control function /  This function used login control
+            $isLoggedIn = $this->session->userdata('isLoggedIn');
+            if(!isset($isLoggedIn) || $isLoggedIn != TRUE)
+            {
+                redirect('login');
+            }
+            
+            else
+            {
+                // isAdmin / Admin role control function / This function used admin role control
+                // if($this->isAdmin() == TRUE)
+                // {
+                //     $this->accesslogincontrol();
+                // }
+            }
         }
     }
 	
@@ -27587,27 +27601,34 @@ public function printincomingitemdetails($id)
     //get itemdetails by item id
     $getdata_itemdetailsdata = $this->admin_model->printincomingitemdetailsdata(trim($id));
 
+    // ---------------- QR CODE GENERATE -----------------
+    $qrData = base_url()."admin/printincomingitemdetails/".$id; // your QR text
+
+    $qr = QrCode::create($qrData)
+            ->setSize(200)
+            ->setMargin(10);
+
+    $writer = new PngWriter();
+    $qrResult = $writer->write($qr);
+
+    // Convert QR to Base64 for mPDF image
+    $qrBase64 = base64_encode($qrResult->getString());
+
+
+
     // Create mPDF instance
     $mpdf = new \Mpdf\Mpdf();
 
      // HTML for barcode floating at top-right
     $barcodeHtml = '
     <div style="position: absolute; top: 10px; right: 10px; width: 200px; text-align: right;">
-          <barcode code="SQPO25261375" type="C128" size="1.2" height="1" class="barcode" />
+           <img src="data:image/png;base64,' . $qrBase64 . '" width="120">
     </div>
     ';
 
     // Table HTML
     $tableHtml = '
     <table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse; width: 100%; margin-top: 50px;">
-        <tr>
-            <td>SUPPLIER PO</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>SUPPLIER NAME</td>
-            <td></td>
-        </tr>
         <tr>
             <td>VENDOR PO</td>
             <td>'.$getdata_itemdetailsdata[0]['po_number'].'</td>
@@ -27655,6 +27676,14 @@ public function printincomingitemdetails($id)
         <tr>
             <td>NO OF BOXES</td>
          <td>'.$getdata_itemdetailsdata[0]['boxex_goni_bundle'].'</td>
+        </tr>
+        <tr>
+            <td>SUPPLIER PO</td>
+            <td>'.$getdata_itemdetailsdata[0]['supplier_po_number'].'</td>
+        </tr>  
+        <tr>
+            <td>SUPPLIER NAME</td>
+            <td>'.$getdata_itemdetailsdata[0]['actual_supplier_name'].'</td>
         </tr>
     </table>
     ';
