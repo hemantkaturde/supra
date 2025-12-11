@@ -27587,10 +27587,6 @@ public function printincomingitemdetails($id)
     //get itemdetails by item id
     $getdata_itemdetailsdata = $this->admin_model->printincomingitemdetailsdata(trim($id));
 
-    print_r($getdata_itemdetailsdata);
-    exit;
-
-
     // Create mPDF instance
     $mpdf = new \Mpdf\Mpdf();
 
