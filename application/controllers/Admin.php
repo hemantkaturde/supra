@@ -27663,7 +27663,7 @@ public function printincomingitemdetails($id)
         </tr>
         <tr>
             <td>INVOICE DATE</td>
-            <td>'. date("d-m-Y", strtotime($getdata_itemdetailsdata[0]['invoice_date'])).'</td>
+            <td>'.date("d-m-Y", strtotime($getdata_itemdetailsdata[0]['invoice_date'])).'</td>
         </tr>
         <tr>
             <td>NET WEIGHT in kgs</td>
