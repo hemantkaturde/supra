@@ -658,6 +658,11 @@ $route['fetchviewremovedinstqtytforticket'] = "admin/fetchviewremovedinstqtytfor
 $route['printincomingitemdetails/(:any)'] = "admin/printincomingitemdetails/$1";
 $route['printreworkrecordlotnumberrecord/(:any)'] = "admin/printreworkrecordlotnumberrecord/$1";
 
+$route['balancestockform'] = "admin/balancestockform";
+$route['addnewbalancestock'] = "admin/addnewbalancestock";
+
+
+
 
 
 /* End of file routes.php */
