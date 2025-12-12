@@ -27663,7 +27663,7 @@ public function printincomingitemdetails($id)
         </tr>
         <tr>
             <td>INVOICE DATE</td>
-            <td>'.$getdata_itemdetailsdata[0]['invoice_date'].'</td>
+            <td>'. date("d-m-Y", strtotime($getdata_itemdetailsdata[0]['invoice_date'])).'</td>
         </tr>
         <tr>
             <td>NET WEIGHT in kgs</td>
@@ -27863,7 +27863,7 @@ public function printincomingitemdetails_pass_protected($id)
     <table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse; width: 100%; margin-top: 50px;">
         <tr>
             <td>VENDOR PO</td>
-            <td>'.$getdata_itemdetailsdata[0]['po_number'].'</td>
+            <td>'.$getdata_itemdetailsdata[0]['vendor_po_number_actual'].'</td>
         </tr>
         <tr>
             <td>VENDOR NAME</td>
@@ -27895,7 +27895,7 @@ public function printincomingitemdetails_pass_protected($id)
         </tr>
         <tr>
             <td>INVOICE DATE</td>
-            <td>'.$getdata_itemdetailsdata[0]['invoice_date'].'</td>
+            <td>'. date("d-m-Y", strtotime($getdata_itemdetailsdata[0]['invoice_date'])).'</td>
         </tr>
         <tr>
             <td>NET WEIGHT in kgs</td>
@@ -27924,7 +27924,7 @@ public function printincomingitemdetails_pass_protected($id)
     $mpdf->WriteHTML($barcodeHtml . $tableHtml);
 
     // Password protection (same password to open PDF)
-    $password = 'Supra@2025'; // set your password here
+    $password = 'Incoming@2026'; // set your password here
     $mpdf->SetProtection([], $password, $password);
 
     // Output PDF
