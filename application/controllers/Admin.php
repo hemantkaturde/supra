@@ -27621,7 +27621,7 @@ public function printincomingitemdetails($id)
 
      // HTML for barcode floating at top-right
     $barcodeHtml = '
-    <div style="position: absolute; top: 10px; right: 10px; width: 200px; text-align: right;">
+    <div style="position: absolute; top: 25px; right: 25px; width: 200px; text-align: right;">
            <img src="data:image/png;base64,' . $qrBase64 . '" width="120">
     </div>
     ';
@@ -27853,7 +27853,7 @@ public function printincomingitemdetails_pass_protected($id)
 
      // HTML for barcode floating at top-right
     $barcodeHtml = '
-    <div style="position: absolute; top: 10px; right: 10px; width: 200px; text-align: right;">
+    <div style="position: absolute; top: 25px; right: 25px; width: 200px; text-align: right;">
            <img src="data:image/png;base64,' . $qrBase64 . '" width="120">
     </div>
     ';
