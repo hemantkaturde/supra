@@ -36,7 +36,7 @@ class Admin extends BaseController
         $this->datas();
 
         // Functions allowed WITHOUT LOGIN
-        $public_functions = ['printincomingitemdetails','printreworkrecordlotnumberrecord'];  // <-- apna function name
+        $public_functions = ['printincomingitemdetails_pass_protected','printreworkrecordlotnumberrecord_pass_protected'];  // <-- apna function name
 
         // Current function name
         $method = $this->router->fetch_method();
@@ -27602,7 +27602,239 @@ public function printincomingitemdetails($id)
     $getdata_itemdetailsdata = $this->admin_model->printincomingitemdetailsdata(trim($id));
 
     // ---------------- QR CODE GENERATE -----------------
-    $qrData = base_url()."admin/printincomingitemdetails/".$id; // your QR text
+    $qrData = base_url()."admin/printincomingitemdetails_pass_protected/".$id; // your QR text
+
+    $qr = QrCode::create($qrData)
+            ->setSize(200)
+            ->setMargin(10);
+
+    $writer = new PngWriter();
+    $qrResult = $writer->write($qr);
+
+    // Convert QR to Base64 for mPDF image
+    $qrBase64 = base64_encode($qrResult->getString());
+
+
+
+    // Create mPDF instance
+    $mpdf = new \Mpdf\Mpdf();
+
+     // HTML for barcode floating at top-right
+    $barcodeHtml = '
+    <div style="position: absolute; top: 10px; right: 10px; width: 200px; text-align: right;">
+           <img src="data:image/png;base64,' . $qrBase64 . '" width="120">
+    </div>
+    ';
+
+    // Table HTML
+    $tableHtml = '
+    <table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse; width: 100%; margin-top: 50px;">
+        <tr>
+            <td>VENDOR PO</td>
+            <td>'.$getdata_itemdetailsdata[0]['po_number'].'</td>
+        </tr>
+        <tr>
+            <td>VENDOR NAME</td>
+            <td>'.$getdata_itemdetailsdata[0]['name_of_vendor'].'</td>
+        </tr>
+        <tr>
+            <td>VENDOR PO QTY (in PCS)</td>
+            <td>'.$getdata_itemdetailsdata[0]['vendor_po_order_qty'].'</td>
+        </tr>
+        <tr>
+            <td>FINISHED GOODS PART NO</td>
+            <td>'.$getdata_itemdetailsdata[0]['part_number'].'</td>
+        </tr>
+        <tr>
+            <td>FINISHED GOOD DESCRIPTION</td>
+            <td>'.$getdata_itemdetailsdata[0]['name'].'</td>
+        </tr>
+        <tr>
+            <td>LOT QTY IN PCS NOS</td>
+            <td>'.$getdata_itemdetailsdata[0]['invoice_qty'].'</td>
+        </tr>
+        <tr>
+            <td>LOT NO</td>
+            <td>'.$getdata_itemdetailsdata[0]['lot_no'].'</td>
+        </tr>
+        <tr>
+            <td>INVOICE NO</td>
+            <td>'.$getdata_itemdetailsdata[0]['invoice_no'].'</td>
+        </tr>
+        <tr>
+            <td>INVOICE DATE</td>
+            <td>'.$getdata_itemdetailsdata[0]['invoice_date'].'</td>
+        </tr>
+        <tr>
+            <td>NET WEIGHT in kgs</td>
+           <td>'.$getdata_itemdetailsdata[0]['net_weight'].'</td>
+        </tr>
+        <tr>
+            <td>GROSS WEIGHT in kgs</td>
+            <td>'.$getdata_itemdetailsdata[0]['fg_material_gross_weight'].'</td>
+        </tr>
+        <tr>
+            <td>NO OF BOXES</td>
+         <td>'.$getdata_itemdetailsdata[0]['boxex_goni_bundle'].'</td>
+        </tr>
+        <tr>
+            <td>SUPPLIER PO</td>
+            <td>'.$getdata_itemdetailsdata[0]['supplier_po_number'].'</td>
+        </tr>  
+        <tr>
+            <td>SUPPLIER NAME</td>
+            <td>'.$getdata_itemdetailsdata[0]['actual_supplier_name'].'</td>
+        </tr>
+    </table>
+    ';
+
+    // Combine HTML
+    $mpdf->WriteHTML($barcodeHtml . $tableHtml);
+
+    // Password protection (same password to open PDF)
+    // $password = 'Supra@2025'; // set your password here
+    // $mpdf->SetProtection([], $password, $password);
+
+    // Output PDF
+    $mpdf->Output('Incoming Item Details.pdf', 'D'); // 'I' = open in browser
+}
+
+
+public function printreworkrecordlotnumberrecord($rjection_incoming_item_id,$tdir_id){
+    
+    require_once FCPATH . 'vendor/autoload.php';
+
+    $mpdf = new \Mpdf\Mpdf([
+        'margin_left' => 10,
+        'margin_right' => 10,
+        'margin_top' => 10,
+        'margin_bottom' => 10
+    ]);
+
+
+    $get_rework_rejection_data = $this->admin_model->getreworkrecorddatabyid($tdir_id);
+
+    // SAMPLE DATA – you can make dynamic
+    $rework_no = $get_rework_rejection_data[0]['rework_record_no'];
+    $rework_date = $get_rework_rejection_data[0]['date'];
+    $vendor_name = $get_rework_rejection_data[0]['actual_vendor_name'];
+    $fg_part_no = $get_rework_rejection_data[0]['part_number'];
+    $lot_qty = "500";
+    $team = $get_rework_rejection_data[0]['team_name'];
+    $part_description = $get_rework_rejection_data[0]['name'];
+    $vendor_po_number = $get_rework_rejection_data[0]['vendor_po_number'];
+    $inspection_report_no = $get_rework_rejection_data[0]['inspection_report_no'];
+
+    // ---------------- QR CODE GENERATE -----------------
+    $qrData = base_url()."admin/printreworkrecordlotnumberrecord_pass_protected/".$rjection_incoming_item_id; // your QR text
+
+    $qr = QrCode::create($qrData)
+            ->setSize(200)
+            ->setMargin(10);
+
+    $writer = new PngWriter();
+    $qrResult = $writer->write($qr);
+
+    // Convert QR to Base64 for mPDF image
+    $qrBase64 = base64_encode($qrResult->getString());
+
+
+    // BARCODE
+    $barcodeHtml = '
+    <div style="top: 10px; right: 10px; width: 200px; text-align: right;">
+           <img src="data:image/png;base64,' . $qrBase64 . '" width="120">
+    </div>
+    ';
+
+    // PDF HTML START
+    $html = '<style>
+            table, td, th { border:1px solid #000; border-collapse: collapse; padding:5px; }
+            .label { width:180px; font-weight:bold; }
+            .head { font-size:18px; text-align:center; margin-bottom:10px; font-weight:bold; }
+            </style>
+
+            <div class="head">REWORK RECORD</div>
+
+            <table width="100%">
+            <tr>
+                <td style="text-align:center;">
+                    '.$barcodeHtml.'
+                </td>
+            </tr>
+            </table>
+
+            <table width="100%">
+            <tr>
+                <td class="label">1) Rework Record No</td><td>'.$rework_no.'</td>
+                <td class="label">6) F.G Part No</td><td>'.$fg_part_no.'</td>
+            </tr>
+            <tr>
+                <td class="label">2) Rework Record Date</td><td>'.$rework_date.'</td>
+                <td class="label">7) F.G Part Description</td><td>'.$part_description.'</td>
+            </tr>
+            <tr>
+                <td class="label">3) Vendor Name</td><td>'.$vendor_name.'</td>
+                <td class="label">8) Inspection Report No.</td><td>'.$inspection_report_no.'</td>
+            </tr>
+            <tr>
+                <td class="label">4) Vendor P.O No</td><td>'.$vendor_po_number.'</td>
+                <td class="label">9) Team</td><td>'.$team.'</td>
+            </tr>
+            <tr>
+                <td class="label">5) Lot Qty Input</td><td>'.$lot_qty.'</td>
+            </tr>
+            </table>
+
+            <br><br>
+
+            <table width="100%">
+            <tr>
+                <th width="5%">SR NO.</th>
+                <th width="30%">Reason</th>
+                <th width="15%">Qty Input</th>
+                <th width="15%">After RLW OK Qty</th>
+                <th width="15%">After RLW Rejection Qty</th>
+            </tr>';
+
+            for($i=1;$i<=8;$i++){
+                $html .= '
+                <tr>
+                    <td>'.$i.'</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                ';
+            }
+
+            $html .= '
+            </table>
+            ';
+            
+
+    // WRITE PDF
+    $mpdf->WriteHTML($html);
+
+    // Password protection (same password to open PDF)
+    // $password = 'Supra@2025'; // set your password here
+    // $mpdf->SetProtection([], $password, $password);
+
+    // OUTPUT
+    $mpdf->Output("rework-record.pdf","D");
+}
+
+
+
+public function printincomingitemdetails_pass_protected($id)
+{
+    require_once FCPATH . 'vendor/autoload.php'; // adjust path if needed
+
+    //get itemdetails by item id
+    $getdata_itemdetailsdata = $this->admin_model->printincomingitemdetailsdata(trim($id));
+
+    // ---------------- QR CODE GENERATE -----------------
+    $qrData = base_url()."admin/printincomingitemdetails_pass_protected/".$id; // your QR text
 
     $qr = QrCode::create($qrData)
             ->setSize(200)
@@ -27700,7 +27932,7 @@ public function printincomingitemdetails($id)
 }
 
 
-public function printreworkrecordlotnumberrecord($rjection_incoming_item_id,$tdir_id){
+public function printreworkrecordlotnumberrecord_pass_protected($rjection_incoming_item_id,$tdir_id){
     
     require_once FCPATH . 'vendor/autoload.php';
 
@@ -27726,7 +27958,7 @@ public function printreworkrecordlotnumberrecord($rjection_incoming_item_id,$tdi
     $inspection_report_no = $get_rework_rejection_data[0]['inspection_report_no'];
 
     // ---------------- QR CODE GENERATE -----------------
-    $qrData = base_url()."admin/printreworkrecordlotnumberrecord/".$rjection_incoming_item_id; // your QR text
+    $qrData = base_url()."admin/printincomingitemdetails_pass_protected/".$rjection_incoming_item_id; // your QR text
 
     $qr = QrCode::create($qrData)
             ->setSize(200)
@@ -27823,6 +28055,7 @@ public function printreworkrecordlotnumberrecord($rjection_incoming_item_id,$tdi
     // OUTPUT
     $mpdf->Output("rework-record.pdf","D");
 }
+
 
 
 
