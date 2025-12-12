@@ -27631,7 +27631,7 @@ public function printincomingitemdetails($id)
     <table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse; width: 100%; margin-top: 50px;">
         <tr>
             <td>VENDOR PO</td>
-            <td>'.$getdata_itemdetailsdata[0]['vendor_po_number'].'</td>
+            <td>'.$getdata_itemdetailsdata[0]['vendor_po_number_actual'].'</td>
         </tr>
         <tr>
             <td>VENDOR NAME</td>
