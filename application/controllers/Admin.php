@@ -27808,7 +27808,7 @@ public function printreworkrecordlotnumberrecord($rjection_incoming_item_id,$rew
                 <th width="30%">Reason</th>
                 <th width="10%">Qty Input</th>
                 <th width="20%">After OK Qty</th>
-                <th width="20%">After RLW Rejection Qty</th>
+                <th width="20%">After Rejection Qty</th>
             </tr>';
 
 
@@ -28076,7 +28076,7 @@ public function printreworkrecordlotnumberrecord_pass_protected($rjection_incomi
                 <th width="30%">Reason</th>
                 <th width="10%">Qty Input</th>
                 <th width="20%">After OK Qty</th>
-                <th width="20%">After RLW Rejection Qty</th>
+                <th width="20%">After Rejection Qty</th>
             </tr>';
 
 
