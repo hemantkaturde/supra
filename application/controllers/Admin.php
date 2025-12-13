@@ -27679,7 +27679,7 @@ public function printincomingitemdetails($id)
         </tr>
         <tr>
             <td>NET WEIGHT in kgs</td>
-           <td>'.$getdata_itemdetailsdata[0]['net_weight'].'</td>
+           <td>'.$getdata_itemdetailsdata[0]['invoice_qty_in_kgs_qty'].'</td>
         </tr>
         <tr>
             <td>GROSS WEIGHT in kgs</td>
@@ -27725,6 +27725,10 @@ public function printreworkrecordlotnumberrecord($rjection_incoming_item_id,$tdi
 
 
     $get_rework_rejection_data = $this->admin_model->getreworkrecorddatabyid($tdir_id);
+
+    $get_rejection_rework_item_data = $this->admin_model->get_rejection_rework_item_data($rjection_incoming_item_id,$tdir_id);
+
+
 
     // SAMPLE DATA – you can make dynamic
     $rework_no = $get_rework_rejection_data[0]['rework_record_no'];
