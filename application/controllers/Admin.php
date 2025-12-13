@@ -27731,7 +27731,7 @@ public function printreworkrecordlotnumberrecord($rjection_incoming_item_id,$rew
 
     // SAMPLE DATA – you can make dynamic
     $rework_no = $get_rework_rejection_data[0]['rework_record_no'];
-    $rework_date = $get_rework_rejection_data[0]['date'];
+    $rework_date = date("d-m-Y", strtotime($get_rework_rejection_data[0]['reword_record_date']));
     $vendor_name = $get_rework_rejection_data[0]['actual_vendor_name'];
     $fg_part_no = $get_rework_rejection_data[0]['part_number'];
     $lot_qty =  $get_rework_rejection_data[0]['invoice_qty'];
@@ -28001,7 +28001,7 @@ public function printreworkrecordlotnumberrecord_pass_protected($rjection_incomi
 
     // SAMPLE DATA – you can make dynamic
     $rework_no = $get_rework_rejection_data[0]['rework_record_no'];
-    $rework_date = $get_rework_rejection_data[0]['date'];
+    $rework_date = date("d-m-Y", strtotime($get_rework_rejection_data[0]['reword_record_date']));
     $vendor_name = $get_rework_rejection_data[0]['actual_vendor_name'];
     $fg_part_no = $get_rework_rejection_data[0]['part_number'];
     $lot_qty =  $get_rework_rejection_data[0]['invoice_qty'];
