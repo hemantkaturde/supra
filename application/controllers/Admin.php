@@ -27739,6 +27739,7 @@ public function printreworkrecordlotnumberrecord($rjection_incoming_item_id,$rew
     $part_description = $get_rework_rejection_data[0]['name'];
     $vendor_po_number = $get_rework_rejection_data[0]['vendor_po_number'];
     $inspection_report_no = $get_rework_rejection_data[0]['inspection_report_no'];
+    $rework_done_by = $get_rework_rejection_data[0]['rework_done_by'];
 
     // ---------------- QR CODE GENERATE -----------------
     $qrData = base_url()."admin/printreworkrecordlotnumberrecord_pass_protected/".$rjection_incoming_item_id; // your QR text
@@ -27797,6 +27798,7 @@ public function printreworkrecordlotnumberrecord($rjection_incoming_item_id,$rew
             </tr>
             <tr>
                 <td class="label">Lot Qty Input</td><td>'.$lot_qty.'</td>
+                <td class="label">Rework Done BY</td><td>'.$rework_done_by.'</td>
             </tr>
             </table>
 
@@ -27806,7 +27808,7 @@ public function printreworkrecordlotnumberrecord($rjection_incoming_item_id,$rew
             <tr>
                 <th width="6%">SR NO.</th>
                 <th width="30%">Reason</th>
-                <th width="10%">Qty Input</th>
+                <th width="10%">Qty In Pcs</th>
                 <th width="20%">After OK Qty</th>
                 <th width="20%">After Rejection Qty</th>
             </tr>';
