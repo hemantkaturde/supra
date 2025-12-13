@@ -153,7 +153,7 @@
                                    
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>After Rework Checked By</label>
+                                            <label>After Rework, Checked By</label>
                                             <input type="text" class="form-control" name="after_rework_checked_by" id="after_rework_checked_by">
                                              <p class="error after_rework_checked_by_error"></p>
                                         </div>
@@ -172,7 +172,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Checking date</label>
+                                            <label>After Rework, Checked Date</label>
                                             <input type="text" class="form-control datepicker" name="checking_date" id="checking_date">
                                             <p class="error checking_date_error"></p>
                                         </div>
