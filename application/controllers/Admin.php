@@ -27814,7 +27814,7 @@ public function printreworkrecordlotnumberrecord($rjection_incoming_item_id,$rew
             </tr>';
 
 
-            $maxRows = 15;
+            $maxRows = 20;
             $i = 1;
 
             /* Print data rows */
@@ -27853,7 +27853,7 @@ public function printreworkrecordlotnumberrecord($rjection_incoming_item_id,$rew
 
             $html .='<table width="100%">
                         <tr style="border:1px !important">
-                            <td style="width: 50%;"><b>After Rework, Checked By :</b></td>
+                            <td style="width: 60%;"><b>After Rework, Checked By :</b></td>
                             <td>'.$get_rework_rejection_data[0]['after_rework_checked_by'].'</td>
                         </tr>
 
@@ -28125,7 +28125,7 @@ public function printreworkrecordlotnumberrecord_pass_protected($rjection_incomi
 
             $html .='<table width="100%">
                         <tr style="border:1px !important">
-                            <td style="width: 50%;"><b>After Rework, Checked By :</b></td>
+                            <td style="width: 60%;"><b>After Rework, Checked By :</b></td>
                             <td>'.$get_rework_rejection_data[0]['after_rework_checked_by'].'</td>
                         </tr>
 
