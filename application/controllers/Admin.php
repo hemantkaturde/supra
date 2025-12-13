@@ -26630,6 +26630,10 @@ public function addreworkrecord(){
             $this->form_validation->set_rules('part_description', 'Part Description', 'trim');
             $this->form_validation->set_rules('inspection_report_no', 'Inspection Report No', 'trim');
 
+            $this->form_validation->set_rules('after_rework_checked_by', 'After Rework Checked_by', 'trim');
+            $this->form_validation->set_rules('rework_done_by', 'Rework Done By', 'trim');
+            $this->form_validation->set_rules('checking_date', 'Checking Date', 'trim');
+
             if ($this->form_validation->run() == FALSE)
             {
                 $rework_response['status'] = 'failure';
@@ -26643,7 +26647,10 @@ public function addreworkrecord(){
                     'part_no'                => strip_tags(form_error('vendor_part_number')),
                     'remark'                 => strip_tags(form_error('remark')),
                     'part_description'       => strip_tags(form_error('part_description')),
-                    'inspection_report_no'   => strip_tags(form_error('inspection_report_no'))
+                    'inspection_report_no'   => strip_tags(form_error('inspection_report_no')),
+                    'after_rework_checked_by'   => strip_tags(form_error('after_rework_checked_by')),
+                    'rework_done_by'   => strip_tags(form_error('rework_done_by')),
+                    'checking_date'   => strip_tags(form_error('checking_date'))
                 );
 
             } 
@@ -26670,7 +26677,10 @@ public function addreworkrecord(){
                     'part_no'                => trim($this->input->post('vendor_part_number')),
                     'remarks'                 => trim($this->input->post('remark')),
                     'part_description'       => trim($this->input->post('part_description')),
-                    'inspection_report_no'   => trim($this->input->post('inspection_report_no'))
+                    'inspection_report_no'  => trim($this->input->post('inspection_report_no')),
+                    'after_rework_checked_by'   => trim($this->input->post('after_rework_checked_by')),
+                    'rework_done_by'   => trim($this->input->post('rework_done_by')),
+                    'checking_date'   => trim($this->input->post('checking_date'))
                 );
 
                 $saveRework = $this->admin_model->saveReworkRecord($rework_id, $data);
@@ -26688,6 +26698,9 @@ public function addreworkrecord(){
                         'remark'                 => strip_tags(form_error('remark')),
                         'part_description'       => strip_tags(form_error('part_description')),
                         'inspection_report_no'   => strip_tags(form_error('inspection_report_no')),
+                        'after_rework_checked_by'   => strip_tags(form_error('after_rework_checked_by')),
+                        'rework_done_by'   => strip_tags(form_error('rework_done_by')),
+                        'checking_date'   => strip_tags(form_error('checking_date'))
                     );
                 }
             }
@@ -26701,7 +26714,6 @@ public function addreworkrecord(){
         $data['team'] = $this->admin_model->getAllteammaster();
         $data['vendorList']= $this->admin_model->fetchALLvendorList();
         $data['auto_no'] = $this->admin_model->generateReworkRecordNo();
-
         $this->loadViews("masters/addreworkrecord", $this->global, $data, NULL); 
 
     }
@@ -27748,8 +27760,8 @@ public function printreworkrecordlotnumberrecord($rjection_incoming_item_id,$tdi
 
     // PDF HTML START
     $html = '<style>
-            table, td, th { border:1px solid #000; border-collapse: collapse; padding:5px; }
-            .label { width:180px; font-weight:bold; }
+            table, td, th { border:1px solid #000; border-collapse: collapse; padding:5px;font-size:14px; }
+            .label { width:180px; font-weight:bold;font-size:14px; }
             .head { font-size:18px; text-align:center; margin-bottom:10px; font-weight:bold; }
             </style>
 
@@ -27765,23 +27777,23 @@ public function printreworkrecordlotnumberrecord($rjection_incoming_item_id,$tdi
 
             <table width="100%">
             <tr>
-                <td class="label">1) Rework Record No</td><td>'.$rework_no.'</td>
-                <td class="label">6) F.G Part No</td><td>'.$fg_part_no.'</td>
+                <td class="label">Rework Record No</td><td>'.$rework_no.'</td>
+                <td class="label">F.G Part No</td><td>'.$fg_part_no.'</td>
             </tr>
             <tr>
-                <td class="label">2) Rework Record Date</td><td>'.$rework_date.'</td>
-                <td class="label">7) F.G Part Description</td><td>'.$part_description.'</td>
+                <td class="label">Rework Record Date</td><td>'.$rework_date.'</td>
+                <td class="label">F.G Part Description</td><td>'.$part_description.'</td>
             </tr>
             <tr>
-                <td class="label">3) Vendor Name</td><td>'.$vendor_name.'</td>
-                <td class="label">8) Inspection Report No.</td><td>'.$inspection_report_no.'</td>
+                <td class="label">Vendor Name</td><td>'.$vendor_name.'</td>
+                <td class="label">Inspection Report No.</td><td>'.$inspection_report_no.'</td>
             </tr>
             <tr>
-                <td class="label">4) Vendor P.O No</td><td>'.$vendor_po_number.'</td>
-                <td class="label">9) Team</td><td>'.$team.'</td>
+                <td class="label">Vendor P.O No</td><td>'.$vendor_po_number.'</td>
+                <td class="label">Team</td><td>'.$team.'</td>
             </tr>
             <tr>
-                <td class="label">5) Lot Qty Input</td><td>'.$lot_qty.'</td>
+                <td class="label">Lot Qty Input</td><td>'.$lot_qty.'</td>
             </tr>
             </table>
 

@@ -22702,7 +22702,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
         $running = str_pad($newCount, 3, '0', STR_PAD_LEFT);
 
-        return "SQRR" . $fyShort . $running;
+        return "SQRWK" . $fyShort . $running;
     }
 
 

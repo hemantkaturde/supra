@@ -137,16 +137,44 @@
                                              <p class="error part_description_error"></p>
                                         </div>
                                     </div>
-                                </div>
 
-                                <!-- ROW 6 (single column) -->
-                                <div class="row">
-                                    <div class="col-md-6">
+                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Inspection Report No</label>
                                             <input type="text" class="form-control" name="inspection_report_no" id="inspection_report_no">
                                             <p class="error inspection_report_no_error"></p>
+                                        </div>
+                                    </div>
 
+                                </div>
+
+                                <!-- ROW 6 (single column) -->
+                                <div class="row">
+                                   
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>After Rework Checked By</label>
+                                            <input type="text" class="form-control" name="after_rework_checked_by" id="after_rework_checked_by">
+                                             <p class="error after_rework_checked_by_error"></p>
+                                        </div>
+                                    </div>
+
+                                     <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Rework Done By</label>
+                                            <input type="text" class="form-control" name="rework_done_by" id="rework_done_by">
+                                             <p class="error rework_done_by_error"></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Checking date</label>
+                                            <input type="text" class="form-control datepicker" name="checking_date" id="checking_date">
+                                            <p class="error checking_date_error"></p>
                                         </div>
                                     </div>
                                 </div>
