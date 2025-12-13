@@ -27982,7 +27982,7 @@ public function printincomingitemdetails_pass_protected($id)
 }
 
 
-public function printreworkrecordlotnumberrecord_pass_protected($rjection_incoming_item_id,$tdir_id){
+public function printreworkrecordlotnumberrecord_pass_protected($rjection_incoming_item_id,$rework_id){
     
       require_once FCPATH . 'vendor/autoload.php';
 
