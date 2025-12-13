@@ -26778,11 +26778,11 @@ public function reworkrecordlotnumberrecord($id){
 }
 
 
-public function fetchreworkrecordincomingdetailslist($vendor_po,$part_no,$tdir_id){
+public function fetchreworkrecordincomingdetailslist($vendor_po,$part_no,$rework_id){
 
    $params = $_REQUEST;
-    $totalRecords = $this->admin_model->reworkrecordincomingdetailslistcount($params,$vendor_po,$part_no,$tdir_id); 
-    $queryRecords = $this->admin_model->reworkrecordincomingdetailslistdata($params,$vendor_po,$part_no,$tdir_id); 
+    $totalRecords = $this->admin_model->reworkrecordincomingdetailslistcount($params,$vendor_po,$part_no,$rework_id); 
+    $queryRecords = $this->admin_model->reworkrecordincomingdetailslistdata($params,$vendor_po,$part_no,$rework_id); 
 
     $data = array();
     foreach ($queryRecords as $key => $value)
@@ -27712,7 +27712,7 @@ public function printincomingitemdetails($id)
 }
 
 
-public function printreworkrecordlotnumberrecord($rjection_incoming_item_id,$tdir_id){
+public function printreworkrecordlotnumberrecord($rjection_incoming_item_id,$rework_id){
     
     require_once FCPATH . 'vendor/autoload.php';
 
@@ -27724,10 +27724,9 @@ public function printreworkrecordlotnumberrecord($rjection_incoming_item_id,$tdi
     ]);
 
 
-    $get_rework_rejection_data = $this->admin_model->getreworkrecorddatabyid($tdir_id);
+    $get_rework_rejection_data = $this->admin_model->getreworkrecorddatabyid($rework_id);
 
-    $get_rejection_rework_item_data = $this->admin_model->get_rejection_rework_item_data($rjection_incoming_item_id,$tdir_id);
-
+    $get_rejection_rework_item_data = $this->admin_model->get_rejection_rework_item_data($rjection_incoming_item_id,$rework_id);
 
 
     // SAMPLE DATA – you can make dynamic
@@ -27805,22 +27804,43 @@ public function printreworkrecordlotnumberrecord($rjection_incoming_item_id,$tdi
 
             <table width="100%">
             <tr>
-                <th width="5%">SR NO.</th>
+                <th width="6%">SR NO.</th>
                 <th width="30%">Reason</th>
-                <th width="15%">Qty Input</th>
-                <th width="15%">After RLW OK Qty</th>
-                <th width="15%">After RLW Rejection Qty</th>
+                <th width="10%">Qty Input</th>
+                <th width="20%">After OK Qty</th>
+                <th width="20%">After RLW Rejection Qty</th>
             </tr>';
 
-            for($i=1;$i<=8;$i++){
+
+            $maxRows = 15;
+            $i = 1;
+
+            /* Print data rows */
+            foreach ($get_rejection_rework_item_data as $row) {
+                if ($i > $maxRows) break;
+
                 $html .= '
-                <tr>
-                    <td>'.$i.'</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
+                    <tr>
+                        <td>'.$i.'</td>
+                        <td>'.($row['rejected_reason'] ?? '').'</td>
+                        <td>'.($row['qty_in_pcs'] ?? '').'</td>
+                        <td>'.($row['after_rework_ok_in_pcs'] ?? '').'</td>
+                        <td>'.($row['after_rework_rej_qty_in_pcs'] ?? '').'</td>
+                    </tr>
+                ';
+                $i++;
+            }
+
+            /* Fill remaining empty rows till 10 */
+            for (; $i <= $maxRows; $i++) {
+                $html .= '
+                    <tr>
+                        <td>'.$i.'</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
                 ';
             }
 
@@ -27828,6 +27848,18 @@ public function printreworkrecordlotnumberrecord($rjection_incoming_item_id,$tdi
             </table>
             ';
             
+
+            $html .='<table width="100%">
+                        <tr style="border:1px !important">
+                            <td style="width: 50%;"><b>After Rework Checked By :</b></td>
+                            <td>'.$get_rework_rejection_data[0]['after_rework_checked_by'].'</td>
+                        </tr>
+
+                         <tr style="border:1px !important">
+                            <td><b>After Rework Checked Date :</b></td>
+                            <td>'.date("d-m-Y", strtotime($get_rework_rejection_data[0]['checking_date'])).'</td>
+                        </tr>
+                    </table>';
 
     // WRITE PDF
     $mpdf->WriteHTML($html);
@@ -27950,7 +27982,7 @@ public function printincomingitemdetails_pass_protected($id)
 
 public function printreworkrecordlotnumberrecord_pass_protected($rjection_incoming_item_id,$tdir_id){
     
-    require_once FCPATH . 'vendor/autoload.php';
+      require_once FCPATH . 'vendor/autoload.php';
 
     $mpdf = new \Mpdf\Mpdf([
         'margin_left' => 10,
@@ -27960,7 +27992,10 @@ public function printreworkrecordlotnumberrecord_pass_protected($rjection_incomi
     ]);
 
 
-    $get_rework_rejection_data = $this->admin_model->getreworkrecorddatabyid($tdir_id);
+    $get_rework_rejection_data = $this->admin_model->getreworkrecorddatabyid($rework_id);
+
+    $get_rejection_rework_item_data = $this->admin_model->get_rejection_rework_item_data($rjection_incoming_item_id,$rework_id);
+
 
     // SAMPLE DATA – you can make dynamic
     $rework_no = $get_rework_rejection_data[0]['rework_record_no'];
@@ -27974,7 +28009,7 @@ public function printreworkrecordlotnumberrecord_pass_protected($rjection_incomi
     $inspection_report_no = $get_rework_rejection_data[0]['inspection_report_no'];
 
     // ---------------- QR CODE GENERATE -----------------
-    $qrData = base_url()."admin/printincomingitemdetails_pass_protected/".$rjection_incoming_item_id; // your QR text
+    $qrData = base_url()."admin/printreworkrecordlotnumberrecord_pass_protected/".$rjection_incoming_item_id; // your QR text
 
     $qr = QrCode::create($qrData)
             ->setSize(200)
@@ -27996,8 +28031,8 @@ public function printreworkrecordlotnumberrecord_pass_protected($rjection_incomi
 
     // PDF HTML START
     $html = '<style>
-            table, td, th { border:1px solid #000; border-collapse: collapse; padding:5px; }
-            .label { width:180px; font-weight:bold; }
+            table, td, th { border:1px solid #000; border-collapse: collapse; padding:5px;font-size:14px; }
+            .label { width:180px; font-weight:bold;font-size:14px; }
             .head { font-size:18px; text-align:center; margin-bottom:10px; font-weight:bold; }
             </style>
 
@@ -28013,23 +28048,23 @@ public function printreworkrecordlotnumberrecord_pass_protected($rjection_incomi
 
             <table width="100%">
             <tr>
-                <td class="label">1) Rework Record No</td><td>'.$rework_no.'</td>
-                <td class="label">6) F.G Part No</td><td>'.$fg_part_no.'</td>
+                <td class="label">Rework Record No</td><td>'.$rework_no.'</td>
+                <td class="label">F.G Part No</td><td>'.$fg_part_no.'</td>
             </tr>
             <tr>
-                <td class="label">2) Rework Record Date</td><td>'.$rework_date.'</td>
-                <td class="label">7) F.G Part Description</td><td>'.$part_description.'</td>
+                <td class="label">Rework Record Date</td><td>'.$rework_date.'</td>
+                <td class="label">F.G Part Description</td><td>'.$part_description.'</td>
             </tr>
             <tr>
-                <td class="label">3) Vendor Name</td><td>'.$vendor_name.'</td>
-                <td class="label">8) Inspection Report No.</td><td>'.$inspection_report_no.'</td>
+                <td class="label">Vendor Name</td><td>'.$vendor_name.'</td>
+                <td class="label">Inspection Report No.</td><td>'.$inspection_report_no.'</td>
             </tr>
             <tr>
-                <td class="label">4) Vendor P.O No</td><td>'.$vendor_po_number.'</td>
-                <td class="label">9) Team</td><td>'.$team.'</td>
+                <td class="label">Vendor P.O No</td><td>'.$vendor_po_number.'</td>
+                <td class="label">Team</td><td>'.$team.'</td>
             </tr>
             <tr>
-                <td class="label">5) Lot Qty Input</td><td>'.$lot_qty.'</td>
+                <td class="label">Lot Qty Input</td><td>'.$lot_qty.'</td>
             </tr>
             </table>
 
@@ -28037,22 +28072,43 @@ public function printreworkrecordlotnumberrecord_pass_protected($rjection_incomi
 
             <table width="100%">
             <tr>
-                <th width="5%">SR NO.</th>
+                <th width="6%">SR NO.</th>
                 <th width="30%">Reason</th>
-                <th width="15%">Qty Input</th>
-                <th width="15%">After RLW OK Qty</th>
-                <th width="15%">After RLW Rejection Qty</th>
+                <th width="10%">Qty Input</th>
+                <th width="20%">After OK Qty</th>
+                <th width="20%">After RLW Rejection Qty</th>
             </tr>';
 
-            for($i=1;$i<=8;$i++){
+
+            $maxRows = 15;
+            $i = 1;
+
+            /* Print data rows */
+            foreach ($get_rejection_rework_item_data as $row) {
+                if ($i > $maxRows) break;
+
                 $html .= '
-                <tr>
-                    <td>'.$i.'</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
+                    <tr>
+                        <td>'.$i.'</td>
+                        <td>'.($row['rejected_reason'] ?? '').'</td>
+                        <td>'.($row['qty_in_pcs'] ?? '').'</td>
+                        <td>'.($row['after_rework_ok_in_pcs'] ?? '').'</td>
+                        <td>'.($row['after_rework_rej_qty_in_pcs'] ?? '').'</td>
+                    </tr>
+                ';
+                $i++;
+            }
+
+            /* Fill remaining empty rows till 10 */
+            for (; $i <= $maxRows; $i++) {
+                $html .= '
+                    <tr>
+                        <td>'.$i.'</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
                 ';
             }
 
@@ -28061,12 +28117,24 @@ public function printreworkrecordlotnumberrecord_pass_protected($rjection_incomi
             ';
             
 
+            $html .='<table width="100%">
+                        <tr style="border:1px !important">
+                            <td style="width: 50%;"><b>After Rework Checked By :</b></td>
+                            <td>'.$get_rework_rejection_data[0]['after_rework_checked_by'].'</td>
+                        </tr>
+
+                         <tr style="border:1px !important">
+                            <td><b>After Rework Checked Date :</b></td>
+                            <td>'.date("d-m-Y", strtotime($get_rework_rejection_data[0]['checking_date'])).'</td>
+                        </tr>
+                    </table>';
+
     // WRITE PDF
     $mpdf->WriteHTML($html);
 
-     // Password protection (same password to open PDF)
-    $password = 'Supra@2025'; // set your password here
-    $mpdf->SetProtection([], $password, $password);
+    // Password protection (same password to open PDF)
+     $password = 'Rework@2026'; // set your password here
+     $mpdf->SetProtection([], $password, $password);
 
     // OUTPUT
     $mpdf->Output("rework-record.pdf","D");

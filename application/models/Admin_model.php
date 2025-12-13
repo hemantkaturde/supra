@@ -22644,15 +22644,12 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     public function get_rejection_rework_item_data($rjection_incoming_item_id,$tdir_id){
 
-            // $this->db->select('*,'.TBL_VENDOR.'.vendor_name as actual_vendor_name,'.TBL_REWORK_RECORD.'.status as rework_record_status,'.TBL_REWORK_RECORD.'.remarks as remarksas_rework,'.TBL_REWORK_RECORD.'.id as rework_id,'.TBL_REWORK_RECORD.'.date as reword_record_date');
-            // $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_REWORK_RECORD.'.vendor_name');
-            // $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_REWORK_RECORD.'.vendor_po');
-            // $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_REWORK_RECORD.'.part_no');
-            // $this->db->join(TBL_TEAM_MASTER, TBL_TEAM_MASTER.'.id = '.TBL_REWORK_RECORD.'.team','left');
-            // $this->db->where(TBL_REWORK_RECORD.'.id', $id);
-            // $query = $this->db->get(TBL_REWORK_RECORD);
-            // $fetch_result = $query->result_array();
-            // return  $fetch_result;
+            $this->db->select('*');
+            $this->db->where(TBL_REWORK_RECORD_REASON_DATA.'.main_rework_resaon_id', $tdir_id);
+            $this->db->where(TBL_REWORK_RECORD_REASON_DATA.'.incoming_item_id', $rjection_incoming_item_id);
+            $query = $this->db->get(TBL_REWORK_RECORD_REASON_DATA);
+            $fetch_result = $query->result_array();
+            return  $fetch_result;
 
 
     }
@@ -22760,7 +22757,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             return $result ? (int)$result->total : 0;
     }
 
-    public function reworkrecordincomingdetailslistdata($params,$vendor_po,$part_no,$tdir_id)
+    public function reworkrecordincomingdetailslistdata($params,$vendor_po,$part_no,$rework_id)
     {
         
             $this->db->select('*,'.TBL_INCOMING_DETAILS_ITEM.'.id as incoming_details_item_id');
@@ -22805,7 +22802,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                                 <i style='font-size:x-large;cursor:pointer;' class='fa fa-eye'></i>
                             </a> &nbsp;";
 
-                $actions .= "<a href='".ADMIN_PATH."admin/printreworkrecordlotnumberrecord/".$value['incoming_details_item_id']."/".$tdir_id."' style='cursor:pointer;' target='_blank'>
+                $actions .= "<a href='".ADMIN_PATH."admin/printreworkrecordlotnumberrecord/".$value['incoming_details_item_id']."/".$rework_id."' style='cursor:pointer;' target='_blank'>
                                 <i style='font-size:x-large;cursor:pointer;' class='fa fa-print'></i>
                             </a> &nbsp;";
 

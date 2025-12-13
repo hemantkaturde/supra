@@ -27,7 +27,7 @@
                     <div class="box-body">  
                         <div class="panel-body">
                             <h4>
-                                <input type="hidden" class="form-control" value="<?php echo $getreworkrecorddatabyid[0]['rework_id']; ?>" id="tdir_id" name="tdir_id">
+                                <input type="hidden" class="form-control" value="<?php echo $getreworkrecorddatabyid[0]['rework_id']; ?>" id="rework_id" name="rework_id">
                                 <p><b>Rework Record No :</b> <?=$getreworkrecorddatabyid[0]['rework_record_no'] ?></p>
                                 <p><b>Vendor Name :</b> <?=$getreworkrecorddatabyid[0]['actual_vendor_name'] ?></p>
                                 <p><b>Vendor PO Number :</b> <?=$getreworkrecorddatabyid[0]['po_number'] ?></p>
