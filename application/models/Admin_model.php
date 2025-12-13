@@ -22642,6 +22642,27 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
+    public function getreworkrecorddatabyidfor_print($id){
+
+            $this->db->select('*,'.TBL_VENDOR.'.vendor_name as actual_vendor_name,'.TBL_REWORK_RECORD.'.status as rework_record_status,'.TBL_REWORK_RECORD.'.remarks as remarksas_rework,'.TBL_REWORK_RECORD.'.id as rework_id,'.TBL_REWORK_RECORD.'.date as reword_record_date,'.TBL_VENDOR_PO_MASTER.'.po_number as actual_vendor_po');
+            $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_REWORK_RECORD.'.vendor_name');
+            $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_REWORK_RECORD.'.vendor_po');
+            $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id = '.TBL_VENDOR_PO_MASTER.'.id');
+
+            $this->db->join(TBL_INCOMING_DETAILS_ITEM, TBL_INCOMING_DETAILS_ITEM.'.part_number = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
+            $this->db->join(TBL_INCOMING_DETAILS_ITEM.' as a', 'a.pre_vendor_po_number = '.TBL_VENDOR_PO_MASTER.'.id');
+
+            $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_REWORK_RECORD.'.part_no');
+            $this->db->join(TBL_TEAM_MASTER, TBL_TEAM_MASTER.'.id = '.TBL_REWORK_RECORD.'.team','left');
+            $this->db->where(TBL_REWORK_RECORD.'.id', $id);
+            $query = $this->db->get(TBL_REWORK_RECORD);
+            $fetch_result = $query->result_array();
+            return  $fetch_result;
+    }
+
+
+
+
     public function get_rejection_rework_item_data($rjection_incoming_item_id,$tdir_id){
 
             $this->db->select('*');

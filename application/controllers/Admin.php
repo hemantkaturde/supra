@@ -27724,7 +27724,7 @@ public function printreworkrecordlotnumberrecord($rjection_incoming_item_id,$rew
     ]);
 
 
-    $get_rework_rejection_data = $this->admin_model->getreworkrecorddatabyid($rework_id);
+    $get_rework_rejection_data = $this->admin_model->getreworkrecorddatabyidfor_print($rework_id);
 
     $get_rejection_rework_item_data = $this->admin_model->get_rejection_rework_item_data($rjection_incoming_item_id,$rework_id);
 
@@ -27734,10 +27734,10 @@ public function printreworkrecordlotnumberrecord($rjection_incoming_item_id,$rew
     $rework_date = $get_rework_rejection_data[0]['date'];
     $vendor_name = $get_rework_rejection_data[0]['actual_vendor_name'];
     $fg_part_no = $get_rework_rejection_data[0]['part_number'];
-    $lot_qty = "500";
+    $lot_qty =  $get_rework_rejection_data[0]['invoice_qty'];
     $team = $get_rework_rejection_data[0]['team_name'];
     $part_description = $get_rework_rejection_data[0]['name'];
-    $vendor_po_number = $get_rework_rejection_data[0]['vendor_po_number'];
+    $vendor_po_number = $get_rework_rejection_data[0]['actual_vendor_po'];
     $inspection_report_no = $get_rework_rejection_data[0]['inspection_report_no'];
     $rework_done_by = $get_rework_rejection_data[0]['rework_done_by'];
 
@@ -27781,7 +27781,7 @@ public function printreworkrecordlotnumberrecord($rjection_incoming_item_id,$rew
 
             <table width="100%">
             <tr>
-                <td class="label">Rework Record No</td><td>'.$rework_no.'</td>
+                <td class="label">Rework Record No.</td><td>'.$rework_no.'</td>
                 <td class="label">F.G Part No</td><td>'.$fg_part_no.'</td>
             </tr>
             <tr>
@@ -27793,12 +27793,12 @@ public function printreworkrecordlotnumberrecord($rjection_incoming_item_id,$rew
                 <td class="label">Inspection Report No.</td><td>'.$inspection_report_no.'</td>
             </tr>
             <tr>
-                <td class="label">Vendor P.O No</td><td>'.$vendor_po_number.'</td>
+                <td class="label">Vendor P.O No.</td><td>'.$vendor_po_number.'</td>
                 <td class="label">Team</td><td>'.$team.'</td>
             </tr>
             <tr>
                 <td class="label">Lot Qty Input</td><td>'.$lot_qty.'</td>
-                <td class="label">Rework Done BY</td><td>'.$rework_done_by.'</td>
+                <td class="label">Rework Done By</td><td>'.$rework_done_by.'</td>
             </tr>
             </table>
 
@@ -27853,12 +27853,12 @@ public function printreworkrecordlotnumberrecord($rjection_incoming_item_id,$rew
 
             $html .='<table width="100%">
                         <tr style="border:1px !important">
-                            <td style="width: 50%;"><b>After Rework Checked By :</b></td>
+                            <td style="width: 50%;"><b>After Rework, Checked By :</b></td>
                             <td>'.$get_rework_rejection_data[0]['after_rework_checked_by'].'</td>
                         </tr>
 
                          <tr style="border:1px !important">
-                            <td><b>After Rework Checked Date :</b></td>
+                            <td><b>After Rework, Checked Date :</b></td>
                             <td>'.date("d-m-Y", strtotime($get_rework_rejection_data[0]['checking_date'])).'</td>
                         </tr>
                     </table>';
@@ -27994,7 +27994,7 @@ public function printreworkrecordlotnumberrecord_pass_protected($rjection_incomi
     ]);
 
 
-    $get_rework_rejection_data = $this->admin_model->getreworkrecorddatabyid($rework_id);
+    $get_rework_rejection_data = $this->admin_model->getreworkrecorddatabyidfor_print($rework_id);
 
     $get_rejection_rework_item_data = $this->admin_model->get_rejection_rework_item_data($rjection_incoming_item_id,$rework_id);
 
@@ -28004,12 +28004,12 @@ public function printreworkrecordlotnumberrecord_pass_protected($rjection_incomi
     $rework_date = $get_rework_rejection_data[0]['date'];
     $vendor_name = $get_rework_rejection_data[0]['actual_vendor_name'];
     $fg_part_no = $get_rework_rejection_data[0]['part_number'];
-    $lot_qty = "500";
+    $lot_qty =  $get_rework_rejection_data[0]['invoice_qty'];
     $team = $get_rework_rejection_data[0]['team_name'];
     $part_description = $get_rework_rejection_data[0]['name'];
-    $vendor_po_number = $get_rework_rejection_data[0]['vendor_po_number'];
+    $vendor_po_number = $get_rework_rejection_data[0]['actual_vendor_po'];
     $inspection_report_no = $get_rework_rejection_data[0]['inspection_report_no'];
-        $rework_done_by = $get_rework_rejection_data[0]['rework_done_by'];
+    $rework_done_by = $get_rework_rejection_data[0]['rework_done_by'];
 
 
     // ---------------- QR CODE GENERATE -----------------
@@ -28052,7 +28052,7 @@ public function printreworkrecordlotnumberrecord_pass_protected($rjection_incomi
 
             <table width="100%">
             <tr>
-                <td class="label">Rework Record No</td><td>'.$rework_no.'</td>
+                <td class="label">Rework Record No.</td><td>'.$rework_no.'</td>
                 <td class="label">F.G Part No</td><td>'.$fg_part_no.'</td>
             </tr>
             <tr>
@@ -28064,12 +28064,12 @@ public function printreworkrecordlotnumberrecord_pass_protected($rjection_incomi
                 <td class="label">Inspection Report No.</td><td>'.$inspection_report_no.'</td>
             </tr>
             <tr>
-                <td class="label">Vendor P.O No</td><td>'.$vendor_po_number.'</td>
+                <td class="label">Vendor P.O No.</td><td>'.$vendor_po_number.'</td>
                 <td class="label">Team</td><td>'.$team.'</td>
             </tr>
             <tr>
                 <td class="label">Lot Qty Input</td><td>'.$lot_qty.'</td>
-                <td class="label">Rework Done BY</td><td>'.$rework_done_by.'</td>
+                <td class="label">Rework Done By</td><td>'.$rework_done_by.'</td>
 
             </tr>
             </table>
@@ -28125,12 +28125,12 @@ public function printreworkrecordlotnumberrecord_pass_protected($rjection_incomi
 
             $html .='<table width="100%">
                         <tr style="border:1px !important">
-                            <td style="width: 50%;"><b>After Rework Checked By :</b></td>
+                            <td style="width: 50%;"><b>After Rework, Checked By :</b></td>
                             <td>'.$get_rework_rejection_data[0]['after_rework_checked_by'].'</td>
                         </tr>
 
                          <tr style="border:1px !important">
-                            <td><b>After Rework Checked Date :</b></td>
+                            <td><b>After Rework, Checked Date :</b></td>
                             <td>'.date("d-m-Y", strtotime($get_rework_rejection_data[0]['checking_date'])).'</td>
                         </tr>
                     </table>';
