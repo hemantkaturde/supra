@@ -28086,7 +28086,7 @@ public function printreworkrecordlotnumberrecord_pass_protected($rjection_incomi
             </tr>';
 
 
-            $maxRows = 15;
+            $maxRows = 20;
             $i = 1;
 
             /* Print data rows */
