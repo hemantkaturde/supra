@@ -27915,7 +27915,7 @@ public function printincomingitemdetails_pass_protected($id)
         </tr>
         <tr>
             <td>NET WEIGHT in kgs</td>
-           <td>'.$getdata_itemdetailsdata[0]['net_weight'].'</td>
+           <td>'.$getdata_itemdetailsdata[0]['invoice_qty_in_kgs_qty'].'</td>
         </tr>
         <tr>
             <td>GROSS WEIGHT in kgs</td>
