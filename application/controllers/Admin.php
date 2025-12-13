@@ -27742,7 +27742,7 @@ public function printreworkrecordlotnumberrecord($rjection_incoming_item_id,$rew
     $rework_done_by = $get_rework_rejection_data[0]['rework_done_by'];
 
     // ---------------- QR CODE GENERATE -----------------
-    $qrData = base_url()."admin/printreworkrecordlotnumberrecord_pass_protected/".$rjection_incoming_item_id; // your QR text
+    $qrData = base_url()."admin/printreworkrecordlotnumberrecord_pass_protected/".$rjection_incoming_item_id."/".$rework_id; // your QR text
 
     $qr = QrCode::create($qrData)
             ->setSize(200)
@@ -28013,7 +28013,7 @@ public function printreworkrecordlotnumberrecord_pass_protected($rjection_incomi
 
 
     // ---------------- QR CODE GENERATE -----------------
-    $qrData = base_url()."admin/printreworkrecordlotnumberrecord_pass_protected/".$rjection_incoming_item_id; // your QR text
+    $qrData = base_url()."admin/printreworkrecordlotnumberrecord_pass_protected/".$rjection_incoming_item_id."/".$rework_id; // your QR text
 
     $qr = QrCode::create($qrData)
             ->setSize(200)
