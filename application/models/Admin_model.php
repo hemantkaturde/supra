@@ -23550,6 +23550,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         //     'left'
         // );
 
+        
         // $this->db->where(TBL_FINISHED_GOODS.'.fin_id', $id);
         // $this->db->limit($params['length'], $params['start']);
         // $this->db->order_by(TBL_SAMPLING_MASTER.'.id', 'DESC');
