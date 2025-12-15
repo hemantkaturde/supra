@@ -23255,12 +23255,127 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     public function getSamplingInstrumnetDataBypartIddata($params, $id, $ticket_no)
     {
-        $this->db->select('
-            '.TBL_SAMPLING_MASTER.'.*,
+        // $this->db->select('
+        //     '.TBL_SAMPLING_MASTER.'.*,
+        //     '.TBL_FINISHED_GOODS.'.part_number,
+        //     '.TBL_FINISHED_GOODS.'.fin_id,
+        //     '.TBL_SAMPLING_MASTER_TRANS.'.instrument_name,
+        //     '.TBL_SAMPLING_MASTER_TRANS.'.measuring_size,
+        //     '.TBL_INSTRUMENT_MASTER.'.grade,
+        //     '.TBL_INSTRUMENT_MASTER.'.unit,
+        //     '.TBL_INSTRUMENT_MASTER.'.class,
+        //     '.TBL_INSTRUMENT_MASTER.'.type,
+        //     '.TBL_INSTRUMENT_MASTER.'.qty,
+        //     '.TBL_INSTRUMENT_MASTER.'.remark
+        // ');
+
+        // // Search filter
+        // if ($params['search']['value'] != "") 
+        // {
+        //     $search = $params['search']['value'];
+        //     $this->db->where("("
+        //         .TBL_SAMPLING_MASTER.".id LIKE '%$search%' 
+        //         OR ".TBL_FINISHED_GOODS.".part_number LIKE '%$search%'
+        //         OR ".TBL_SAMPLING_MASTER_TRANS.".instrument_name LIKE '%$search%'
+        //         OR ".TBL_SAMPLING_MASTER_TRANS.".measuring_size LIKE '%$search%'
+        //         OR ".TBL_INSTRUMENT_MASTER.".grade LIKE '%$search%'
+        //         OR ".TBL_INSTRUMENT_MASTER.".unit LIKE '%$search%'
+        //         OR ".TBL_INSTRUMENT_MASTER.".class LIKE '%$search%'
+        //         OR ".TBL_INSTRUMENT_MASTER.".type LIKE '%$search%'
+        //         OR ".TBL_INSTRUMENT_MASTER.".qty LIKE '%$search%'
+        //         OR ".TBL_SAMPLING_MASTER_TRANS.".remark LIKE '%$search%'
+        //     )");
+        // }
+
+        // $this->db->from(TBL_SAMPLING_MASTER);
+
+        // $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_SAMPLING_MASTER.'.part_number_id', 'left');
+
+        // $this->db->join(
+        //     TBL_SAMPLING_MASTER_TRANS, 
+        //     TBL_SAMPLING_MASTER_TRANS.'.sampling_master_id = '.TBL_SAMPLING_MASTER.'.id 
+        //     AND '.TBL_SAMPLING_MASTER_TRANS.'.status = 1',
+        //     'left'
+        // );
+
+        // $this->db->join(
+        //     TBL_INSTRUMENT_MASTER, 
+        //     TBL_INSTRUMENT_MASTER.'.instrument_name = '.TBL_SAMPLING_MASTER_TRANS.'.instrument_name
+        //     AND '.TBL_INSTRUMENT_MASTER.'.measuring_size = '.TBL_SAMPLING_MASTER_TRANS.'.measuring_size',
+        //     'left'
+        // );
+
+        // $this->db->where(TBL_FINISHED_GOODS.'.fin_id', $id);
+        // $this->db->limit($params['length'], $params['start']);
+        // $this->db->order_by(TBL_SAMPLING_MASTER.'.id', 'DESC');
+
+        // $query  = $this->db->get();
+        // $result = $query->result_array();
+        // $data = [];
+        // $count = 0;
+
+        // foreach ($result as $row) {
+        //     $live_quantity = $this->getLiveQtyforInst($id,$row['instrument_name'],$row['measuring_size']);
+        //     $data[$count]['instrument_name']  = $row['instrument_name'];
+        //     $data[$count]['grade']            = $row['grade'];
+        //     $data[$count]['unit']             = $row['unit'];
+        //     $data[$count]['class']            = $row['class'];
+        //     $data[$count]['measuring_size']   = $row['measuring_size'];
+        //     $data[$count]['type']             = $row['type'];
+        //     $data[$count]['remark']           = $row['remark'];
+        //     $data[$count]['qty']              = $row['qty'];
+        //     $data[$count]['live_qty']         = $live_quantity; 
+        //     $data[$count]['action']  = "";
+        //     $data[$count]['action'] .= "
+        //     <i  style='font-size:x-large; cursor:pointer; color:#3c8dbc;' 
+        //         data-toggle='modal' 
+        //         data-target='#addNewModal'
+        //         data-part_id='".$id."'
+        //         data-ticket_no='".$ticket_no."'
+        //         data-instrument_name='".$row['instrument_name']."'
+        //         data-measuring_size='".$row['measuring_size']."'
+        //         data-qty='".$row['qty']."' 
+        //         data-part_number='".$row['part_number']."'
+        //         class='fa fa-plus-circle addrejectionitemdata'>
+        //     </i> &nbsp;";
+
+        //             $data[$count]['action'] .= "
+        //     <a href='".ADMIN_PATH."viewassigninstqtytforticket?ticket_no=".$ticket_no."&instrument_name=".$row['instrument_name']."&measuring_size=".$row['measuring_size']."&part_id=".$id."&part_number=".$row['part_number']."' style='cursor: pointer;' target='_blank'>
+        //     <i style='font-size: x-large;cursor: pointer;' class='fa fa-eye' aria-hidden='true'></i>
+        //     </a>";
+
+
+        //     $data[$count]['action'] .= "
+        //     <i  style='font-size:x-large; cursor:pointer; color:#3c8dbc;' 
+        //         data-toggle='modal' 
+        //         data-target='#removeNewModal'
+        //         data-part_id='".$id."'
+        //         data-ticket_no='".$ticket_no."'
+        //         data-instrument_name='".$row['instrument_name']."'
+        //         data-measuring_size='".$row['measuring_size']."'
+        //         data-qty='".$row['qty']."'
+        //         data-part_number='".$row['part_number']."' 
+        //         class='fa fa-minus-circle addrejectionitemdata'>
+        //     </i> &nbsp;";
+
+
+        //     $data[$count]['action'] .= "
+        //     <a href='".ADMIN_PATH."viewremovedinstqtytforticket?ticket_no=".$ticket_no."&instrument_name=".$row['instrument_name']."&measuring_size=".$row['measuring_size']."&part_id=".$id."&part_number=".$row['part_number']."' style='cursor: pointer;' target='_blank'>
+        //     <i style='font-size: x-large;cursor: pointer;' class='fa fa-eye' aria-hidden='true'></i>
+        //     </a>";
+        //     $count++;
+        // }
+
+        // return $data;
+
+            $this->db->select('
+            '.TBL_SAMPLING_MASTER.'.id AS sampling_id,
             '.TBL_FINISHED_GOODS.'.part_number,
             '.TBL_FINISHED_GOODS.'.fin_id,
+
             '.TBL_SAMPLING_MASTER_TRANS.'.instrument_name,
             '.TBL_SAMPLING_MASTER_TRANS.'.measuring_size,
+
             '.TBL_INSTRUMENT_MASTER.'.grade,
             '.TBL_INSTRUMENT_MASTER.'.unit,
             '.TBL_INSTRUMENT_MASTER.'.class,
@@ -23269,49 +23384,59 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             '.TBL_INSTRUMENT_MASTER.'.remark
         ');
 
-        // Search filter
-        if ($params['search']['value'] != "") 
-        {
+        /* 🔍 SEARCH FILTER */
+        if (!empty($params['search']['value'])) {
             $search = $params['search']['value'];
-            $this->db->where("("
-                .TBL_SAMPLING_MASTER.".id LIKE '%$search%' 
-                OR ".TBL_FINISHED_GOODS.".part_number LIKE '%$search%'
-                OR ".TBL_SAMPLING_MASTER_TRANS.".instrument_name LIKE '%$search%'
-                OR ".TBL_SAMPLING_MASTER_TRANS.".measuring_size LIKE '%$search%'
-                OR ".TBL_INSTRUMENT_MASTER.".grade LIKE '%$search%'
-                OR ".TBL_INSTRUMENT_MASTER.".unit LIKE '%$search%'
-                OR ".TBL_INSTRUMENT_MASTER.".class LIKE '%$search%'
-                OR ".TBL_INSTRUMENT_MASTER.".type LIKE '%$search%'
-                OR ".TBL_INSTRUMENT_MASTER.".qty LIKE '%$search%'
-                OR ".TBL_SAMPLING_MASTER_TRANS.".remark LIKE '%$search%'
-            )");
+            $this->db->group_start()
+                ->like(TBL_SAMPLING_MASTER.'.id', $search)
+                ->or_like(TBL_FINISHED_GOODS.'.part_number', $search)
+                ->or_like(TBL_SAMPLING_MASTER_TRANS.'.instrument_name', $search)
+                ->or_like(TBL_SAMPLING_MASTER_TRANS.'.measuring_size', $search)
+                ->or_like(TBL_INSTRUMENT_MASTER.'.grade', $search)
+                ->or_like(TBL_INSTRUMENT_MASTER.'.unit', $search)
+                ->or_like(TBL_INSTRUMENT_MASTER.'.class', $search)
+                ->or_like(TBL_INSTRUMENT_MASTER.'.type', $search)
+                ->or_like(TBL_INSTRUMENT_MASTER.'.qty', $search)
+                ->or_like(TBL_INSTRUMENT_MASTER.'.remark', $search)
+            ->group_end();
         }
 
         $this->db->from(TBL_SAMPLING_MASTER);
 
-        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_SAMPLING_MASTER.'.part_number_id', 'left');
+        $this->db->join(
+            TBL_FINISHED_GOODS,
+            TBL_FINISHED_GOODS.'.fin_id = '.TBL_SAMPLING_MASTER.'.part_number_id',
+            'left'
+        );
 
         $this->db->join(
-            TBL_SAMPLING_MASTER_TRANS, 
-            TBL_SAMPLING_MASTER_TRANS.'.sampling_master_id = '.TBL_SAMPLING_MASTER.'.id 
+            TBL_SAMPLING_MASTER_TRANS,
+            TBL_SAMPLING_MASTER_TRANS.'.sampling_master_id = '.TBL_SAMPLING_MASTER.'.id
             AND '.TBL_SAMPLING_MASTER_TRANS.'.status = 1',
             'left'
         );
 
         $this->db->join(
-            TBL_INSTRUMENT_MASTER, 
+            TBL_INSTRUMENT_MASTER,
             TBL_INSTRUMENT_MASTER.'.instrument_name = '.TBL_SAMPLING_MASTER_TRANS.'.instrument_name
             AND '.TBL_INSTRUMENT_MASTER.'.measuring_size = '.TBL_SAMPLING_MASTER_TRANS.'.measuring_size',
             'left'
         );
 
         $this->db->where(TBL_FINISHED_GOODS.'.fin_id', $id);
-        $this->db->group_by(TBL_SAMPLING_MASTER_TRANS.'.instrument_name',TBL_SAMPLING_MASTER_TRANS.'.measuring_size',TBL_INSTRUMENT_MASTER.'.grade',TBL_INSTRUMENT_MASTER.'.unit',TBL_INSTRUMENT_MASTER.'.class',TBL_INSTRUMENT_MASTER.'.type',TBL_INSTRUMENT_MASTER.'.qty');
-        $this->db->limit($params['length'], $params['start']);
+
+        /* ✅ DUPLICATE REMOVE */
+        $this->db->group_by([
+            TBL_SAMPLING_MASTER_TRANS.'.instrument_name',
+            TBL_SAMPLING_MASTER_TRANS.'.measuring_size'
+        ]);
+
         $this->db->order_by(TBL_SAMPLING_MASTER.'.id', 'DESC');
+        $this->db->limit($params['length'], $params['start']);
 
         $query  = $this->db->get();
         $result = $query->result_array();
+
         $data = [];
         $count = 0;
 
@@ -23368,16 +23493,79 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         }
 
         return $data;
+
+
+
     }
 
     public function getSamplingInstrumnetDataBypartIdcount($params, $partId, $ticket_no)
     {
-            $this->db->select('
-            '.TBL_SAMPLING_MASTER.'.*,
+        //     $this->db->select('
+        //     '.TBL_SAMPLING_MASTER.'.*,
+        //     '.TBL_FINISHED_GOODS.'.part_number,
+        //     '.TBL_FINISHED_GOODS.'.fin_id,
+        //     '.TBL_SAMPLING_MASTER_TRANS.'.instrument_name,
+        //     '.TBL_SAMPLING_MASTER_TRANS.'.measuring_size,
+        //     '.TBL_INSTRUMENT_MASTER.'.grade,
+        //     '.TBL_INSTRUMENT_MASTER.'.unit,
+        //     '.TBL_INSTRUMENT_MASTER.'.class,
+        //     '.TBL_INSTRUMENT_MASTER.'.type,
+        //     '.TBL_INSTRUMENT_MASTER.'.qty,
+        //     '.TBL_INSTRUMENT_MASTER.'.remark
+        // ');
+
+        // // Search filter
+        // if ($params['search']['value'] != "") 
+        // {
+        //     $search = $params['search']['value'];
+        //     $this->db->where("("
+        //         .TBL_SAMPLING_MASTER.".id LIKE '%$search%' 
+        //         OR ".TBL_FINISHED_GOODS.".part_number LIKE '%$search%'
+        //         OR ".TBL_SAMPLING_MASTER_TRANS.".instrument_name LIKE '%$search%'
+        //         OR ".TBL_SAMPLING_MASTER_TRANS.".measuring_size LIKE '%$search%'
+        //         OR ".TBL_INSTRUMENT_MASTER.".grade LIKE '%$search%'
+        //         OR ".TBL_INSTRUMENT_MASTER.".unit LIKE '%$search%'
+        //         OR ".TBL_INSTRUMENT_MASTER.".class LIKE '%$search%'
+        //         OR ".TBL_INSTRUMENT_MASTER.".type LIKE '%$search%'
+        //         OR ".TBL_INSTRUMENT_MASTER.".qty LIKE '%$search%'
+        //         OR ".TBL_SAMPLING_MASTER_TRANS.".remark LIKE '%$search%'
+        //     )");
+        // }
+
+        // $this->db->from(TBL_SAMPLING_MASTER);
+
+        // $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_SAMPLING_MASTER.'.part_number_id', 'left');
+
+        // $this->db->join(
+        //     TBL_SAMPLING_MASTER_TRANS, 
+        //     TBL_SAMPLING_MASTER_TRANS.'.sampling_master_id = '.TBL_SAMPLING_MASTER.'.id 
+        //     AND '.TBL_SAMPLING_MASTER_TRANS.'.status = 1',
+        //     'left'
+        // );
+
+        // $this->db->join(
+        //     TBL_INSTRUMENT_MASTER, 
+        //     TBL_INSTRUMENT_MASTER.'.instrument_name = '.TBL_SAMPLING_MASTER_TRANS.'.instrument_name
+        //     AND '.TBL_INSTRUMENT_MASTER.'.measuring_size = '.TBL_SAMPLING_MASTER_TRANS.'.measuring_size',
+        //     'left'
+        // );
+
+        // $this->db->where(TBL_FINISHED_GOODS.'.fin_id', $id);
+        // $this->db->limit($params['length'], $params['start']);
+        // $this->db->order_by(TBL_SAMPLING_MASTER.'.id', 'DESC');
+
+        // $query = $this->db->get();
+        // return $query->num_rows();
+
+
+           $this->db->select('
+            '.TBL_SAMPLING_MASTER.'.id AS sampling_id,
             '.TBL_FINISHED_GOODS.'.part_number,
             '.TBL_FINISHED_GOODS.'.fin_id,
+
             '.TBL_SAMPLING_MASTER_TRANS.'.instrument_name,
             '.TBL_SAMPLING_MASTER_TRANS.'.measuring_size,
+
             '.TBL_INSTRUMENT_MASTER.'.grade,
             '.TBL_INSTRUMENT_MASTER.'.unit,
             '.TBL_INSTRUMENT_MASTER.'.class,
@@ -23386,50 +23574,59 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             '.TBL_INSTRUMENT_MASTER.'.remark
         ');
 
-        // Search filter
-        if ($params['search']['value'] != "") 
-        {
+        /* 🔍 SEARCH FILTER */
+        if (!empty($params['search']['value'])) {
             $search = $params['search']['value'];
-            $this->db->where("("
-                .TBL_SAMPLING_MASTER.".id LIKE '%$search%' 
-                OR ".TBL_FINISHED_GOODS.".part_number LIKE '%$search%'
-                OR ".TBL_SAMPLING_MASTER_TRANS.".instrument_name LIKE '%$search%'
-                OR ".TBL_SAMPLING_MASTER_TRANS.".measuring_size LIKE '%$search%'
-                OR ".TBL_INSTRUMENT_MASTER.".grade LIKE '%$search%'
-                OR ".TBL_INSTRUMENT_MASTER.".unit LIKE '%$search%'
-                OR ".TBL_INSTRUMENT_MASTER.".class LIKE '%$search%'
-                OR ".TBL_INSTRUMENT_MASTER.".type LIKE '%$search%'
-                OR ".TBL_INSTRUMENT_MASTER.".qty LIKE '%$search%'
-                OR ".TBL_SAMPLING_MASTER_TRANS.".remark LIKE '%$search%'
-            )");
+            $this->db->group_start()
+                ->like(TBL_SAMPLING_MASTER.'.id', $search)
+                ->or_like(TBL_FINISHED_GOODS.'.part_number', $search)
+                ->or_like(TBL_SAMPLING_MASTER_TRANS.'.instrument_name', $search)
+                ->or_like(TBL_SAMPLING_MASTER_TRANS.'.measuring_size', $search)
+                ->or_like(TBL_INSTRUMENT_MASTER.'.grade', $search)
+                ->or_like(TBL_INSTRUMENT_MASTER.'.unit', $search)
+                ->or_like(TBL_INSTRUMENT_MASTER.'.class', $search)
+                ->or_like(TBL_INSTRUMENT_MASTER.'.type', $search)
+                ->or_like(TBL_INSTRUMENT_MASTER.'.qty', $search)
+                ->or_like(TBL_INSTRUMENT_MASTER.'.remark', $search)
+            ->group_end();
         }
 
         $this->db->from(TBL_SAMPLING_MASTER);
 
-        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_SAMPLING_MASTER.'.part_number_id', 'left');
+        $this->db->join(
+            TBL_FINISHED_GOODS,
+            TBL_FINISHED_GOODS.'.fin_id = '.TBL_SAMPLING_MASTER.'.part_number_id',
+            'left'
+        );
 
         $this->db->join(
-            TBL_SAMPLING_MASTER_TRANS, 
-            TBL_SAMPLING_MASTER_TRANS.'.sampling_master_id = '.TBL_SAMPLING_MASTER.'.id 
+            TBL_SAMPLING_MASTER_TRANS,
+            TBL_SAMPLING_MASTER_TRANS.'.sampling_master_id = '.TBL_SAMPLING_MASTER.'.id
             AND '.TBL_SAMPLING_MASTER_TRANS.'.status = 1',
             'left'
         );
 
         $this->db->join(
-            TBL_INSTRUMENT_MASTER, 
+            TBL_INSTRUMENT_MASTER,
             TBL_INSTRUMENT_MASTER.'.instrument_name = '.TBL_SAMPLING_MASTER_TRANS.'.instrument_name
             AND '.TBL_INSTRUMENT_MASTER.'.measuring_size = '.TBL_SAMPLING_MASTER_TRANS.'.measuring_size',
             'left'
         );
 
         $this->db->where(TBL_FINISHED_GOODS.'.fin_id', $id);
-        $this->db->group_by(TBL_SAMPLING_MASTER_TRANS.'.instrument_name',TBL_SAMPLING_MASTER_TRANS.'.measuring_size');
 
-        $this->db->limit($params['length'], $params['start']);
+        /* ✅ DUPLICATE REMOVE */
+        $this->db->group_by([
+            TBL_SAMPLING_MASTER_TRANS.'.instrument_name',
+            TBL_SAMPLING_MASTER_TRANS.'.measuring_size'
+        ]);
+
         $this->db->order_by(TBL_SAMPLING_MASTER.'.id', 'DESC');
+        $this->db->limit($params['length'], $params['start']);
 
-        $query = $this->db->get();
+        $query  = $this->db->get();
         return $query->num_rows();
+
     }
 
     public function savequantityassignstoreform($id,$data){
