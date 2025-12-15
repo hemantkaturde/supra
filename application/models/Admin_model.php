@@ -23428,7 +23428,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         /* ✅ DUPLICATE REMOVE */
         $this->db->group_by([
             TBL_SAMPLING_MASTER_TRANS.'.instrument_name',
-            TBL_SAMPLING_MASTER_TRANS.'.measuring_size'
+            TBL_SAMPLING_MASTER_TRANS.'.measuring_size',
+            TBL_SAMPLING_MASTER_TRANS.'.type'
         ]);
 
         $this->db->order_by(TBL_SAMPLING_MASTER.'.id', 'DESC');
