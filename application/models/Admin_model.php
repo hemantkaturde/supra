@@ -22722,7 +22722,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
         $fyShort = substr($fyStart, -2) . substr($fyEnd, -2);
 
-        $this->db->like('rework_record_no', 'SQRR' . $fyShort);
+        $this->db->like('rework_record_no', 'SQRW' . $fyShort);
         $this->db->order_by('id', 'DESC');
         $query = $this->db->get('tbl_rework_record');
 
@@ -22736,7 +22736,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
         $running = str_pad($newCount, 3, '0', STR_PAD_LEFT);
 
-        return "SQRWK" . $fyShort . $running;
+        return "SQRW" . $fyShort . $running;
     }
 
 
