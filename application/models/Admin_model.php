@@ -21995,6 +21995,25 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
+    public function getvendorpartdetials_balance_stock_report($part_no,$vendor_po_number){
+
+        // $this->db->select('*');
+        // $this->db->where(TBL_FINISHED_GOODS.'.fin_id', $part_no);
+        // $this->db->where(TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id', $vendor_po_number);
+        // $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
+        // $query_result = $this->db->get(TBL_FINISHED_GOODS)->result_array();
+        // return $query_result;
+
+         $this->db->select(TBL_FINISHED_GOODS.'.name as part_description,'.TBL_STOCKS_ITEM.'.balence_qty_in_pcs as balance_qty_in_pcs_for_bal_qty');
+         $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id = '.TBL_STOCKS_ITEM.'.part_number');
+         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_STOCKS_ITEM.'.part_number');
+         $this->db->where(TBL_STOCKS_ITEM.'.part_number', $part_no);
+         $this->db->where(TBL_STOCKS_ITEM.'.pre_vendor_po_number', $vendor_po_number);
+         $query_result = $this->db->get(TBL_STOCKS_ITEM)->result_array();
+          return $query_result;
+    }
+
+
     public function getbuyerdetialsbyvendorponumberfortdir($vendor_po_number){
 
         $this->db->select(TBL_BUYER_PO_MASTER.'.sales_order_number,'.TBL_BUYER_MASTER.'.buyer_name,'.TBL_BUYER_PO_MASTER.'.buyer_po_date');
@@ -23900,6 +23919,121 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         return $fetch_result;
       
     }
+
+
+     public function getVendorPoforbalancestock($vendor_name){
+        $this->db->select('*');
+        $this->db->where(TBL_VENDOR_PO_MASTER.'.vendor_name', $vendor_name);
+        // $this->db->where(TBL_VENDOR_PO_MASTER.'.supplier_name !=',"");
+        // $this->db->where(TBL_VENDOR_PO_MASTER.'.supplier_po_number !=',"");
+        $query = $this->db->get(TBL_VENDOR_PO_MASTER);
+        $data = $query->result_array();
+        return $data;
+    }
+
+
+    public function savebalancestock($id,$data){
+           
+        if($id){
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_BALANCE_STOCK_DATA, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        }else{
+            if($this->db->insert(TBL_BALANCE_STOCK_DATA, $data)) {
+                return $this->db->insert_id();;
+            } else {
+                return FALSE;
+            }
+
+        }
+          
+    }
+
+
+
+    
+    public function fetchbalancestockcount($params){
+
+         $this->db->select('*'); 
+           if($params['search']['value'] != "") 
+            {
+                $this->db->where("(".TBL_TDIR.".report_number LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where(TBL_FINISHED_GOODS.".name LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where(TBL_TDIR.".buyer_name LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where(TBL_TDIR.".remarks LIKE '%".$params['search']['value']."%')");
+            }
+
+         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id  = '.TBL_TDIR.'.vendor_po');
+         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id  = '.TBL_TDIR.'.part_number');
+         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_TDIR.'.vendor_name');
+
+         $this->db->order_by(TBL_TDIR.'.id','DESC');
+         $query = $this->db->get(TBL_TDIR);
+         $rowcount = $query->num_rows();
+         return $rowcount;
+
+    }
+
+
+    public function fetchbalancestockdata($params){
+
+        $this->db->select(TBL_VENDOR.'.vendor_name as vendor_name_actual,'.TBL_VENDOR_PO_MASTER.'.po_number as po_number_actual,'.TBL_FINISHED_GOODS.'.part_number as part_number_actual,'.TBL_FINISHED_GOODS.'.name as part_description,'.TBL_BALANCE_STOCK_DATA.'.balance_stock,'.TBL_BALANCE_STOCK_DATA.'.createdDtm as date_actual');
+       
+        if($params['search']['value'] != "") 
+        {
+            $this->db->where("(".TBL_BALANCE_STOCK_DATA.".report_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_FINISHED_GOODS.".name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BALANCE_STOCK_DATA.".buyer_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BALANCE_STOCK_DATA.".remark LIKE '%".$params['search']['value']."%')");
+        }
+
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id  = '.TBL_BALANCE_STOCK_DATA.'.vendor_po_id');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id  = '.TBL_BALANCE_STOCK_DATA.'.fg_part_number_id');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_BALANCE_STOCK_DATA.'.vendor_name_id');
+
+        $this->db->where(TBL_BALANCE_STOCK_DATA.'.status', 1);
+        $this->db->limit($params['length'],$params['start']);
+        $this->db->order_by(TBL_BALANCE_STOCK_DATA.'.id','DESC');
+        $query = $this->db->get(TBL_BALANCE_STOCK_DATA);
+        $fetch_result = $query->result_array();
+        $data = array();
+        $counter = 0;
+        if(count($fetch_result) > 0)
+        {
+            foreach ($fetch_result as $key => $value)
+            {
+                $data[$counter]['vendor_name_actual'] = $value['vendor_name_actual'];
+                $data[$counter]['po_number_actual'] =  $value['po_number_actual'];
+                $data[$counter]['part_number_actual'] =  $value['part_number_actual'];
+                $data[$counter]['part_description'] =  $value['part_description'];
+                $data[$counter]['balance_stock'] =  $value['balance_stock'];
+                $data[$counter]['date_actual'] =  $value['date_actual'];
+                $data[$counter]['remark'] =  $value['remarks'];
+
+                $data[$counter]['action'] = '';
+                // $data[$counter]['action'] .= "<a href='".ADMIN_PATH."incoming_lots/".$value['tdir_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-square-o' aria-hidden='true'></i></a>    &nbsp";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."edit_tdir/".$value['tdir_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp";
+                //$data[$counter]['action'] .= "<a href='".ADMIN_PATH."tdir_attachment/".$value['tdir_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-paperclip' aria-hidden='true'></i></a>    &nbsp";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."printinspectionreportlabel/".$value['tdir_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>   &nbsp";
+
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['tdir_id']."' class='fa fa-trash-o deletetdirreport' aria-hidden='true'></i>"; 
+                $counter++; 
+            }
+        }
+
+        return $data;
+
+    }
+
 
 
 }

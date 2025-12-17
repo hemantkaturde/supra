@@ -199,6 +199,8 @@ define('TBL_TDIR_INCOMING_LOT_DATA','tbl_tdir_incoming_lot_data');
 define('TBL_TDIR_ATTACHMENT','tbl_tdir_attachment');
 define('TBL_REWORK_RECORD','tbl_rework_record');
 define('TBL_REWORK_RECORD_REASON_DATA','tbl_rework_record_reason_data');
+define('TBL_BALANCE_STOCK_DATA','tbl_balance_stock');
+
 
 
 define('TBL_STOREFORM_TICKETS','tbl_storeform_tickets');

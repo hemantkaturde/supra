@@ -28171,91 +28171,139 @@ public function balancestockform(){
     $this->loadViews("masters/balancestockform", $this->global, $data, NULL);
 }
 
+
+public function fetchbalancestock(){
+
+
+        $params = $_REQUEST;
+        $totalRecords = $this->admin_model->fetchbalancestockcount($params); 
+        $queryRecords = $this->admin_model->fetchbalancestockdata($params); 
+
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval(count($data) ),  
+            "recordsFiltered" => intval(count($data)),
+            "data"            => $data   // total data array
+            );
+        echo json_encode($json_data);
+
+
+}
+
+
+
+
 public function addnewbalancestock(){
+    $post_submit = $this->input->post();
+    if($post_submit){
+        $save_new_balance_stock_response = array();
+
+        $this->form_validation->set_rules('vendor_name','Vendor Name','trim|required');
+        $this->form_validation->set_rules('vendor_po_number','Vendor PO Number','trim|required');
+        $this->form_validation->set_rules('vendor_part_number','Vendor Part Number','trim|required');
+        $this->form_validation->set_rules('fg_part_description','FG Part Description','trim');
+        $this->form_validation->set_rules('balance_qty','Balance Qty','trim|required');
+        $this->form_validation->set_rules('remarks','Remarks','trim');
+
+        if($this->form_validation->run() == FALSE)
+        {
+            $save_new_balance_stock_response['status'] = 'failure';
+            $save_new_balance_stock_response['error'] = array('vendor_name'=>strip_tags(form_error('vendor_name')), 'vendor_po_number'=>strip_tags(form_error('vendor_po_number')), 'vendor_part_number'=>strip_tags(form_error('vendor_part_number')), 'fg_part_description'=>strip_tags(form_error('fg_part_description')),'balance_qty'=>strip_tags(form_error('balance_qty')),'remarks'=>strip_tags(form_error('remarks')));
+        }else{
 
 
-    // $post_submit = $this->input->post();
-    // if($post_submit){
-    //     $save_TDIR_response = array();
+            $data = array(
+                'vendor_name_id'        => trim($this->input->post('vendor_name')),
+                'vendor_po_id'          => trim($this->input->post('vendor_po_number')),
+                'fg_part_number_id'          => trim($this->input->post('vendor_part_number')),
+                'fg_part_description'       => trim($this->input->post('fg_part_description')),
+                'balance_stock'   => trim($this->input->post('balance_qty')),
+                'remark'            => trim($this->input->post('remarks')),
+            );
 
-    //     $this->form_validation->set_rules('report_number','Report Number','trim|required');
-    //     $this->form_validation->set_rules('vendor_name','Vendor Name','trim|required');
-    //     $this->form_validation->set_rules('vendor_po_number','Vendor PO Number','trim|required');
-    //     $this->form_validation->set_rules('vendor_po_date','Vendor PO Date','trim');
-    //     $this->form_validation->set_rules('vendor_part_number','Vendor Part Number','trim|required');
-    //     $this->form_validation->set_rules('part_name','Part Name','trim');
-    //     $this->form_validation->set_rules('vendor_order_qty','Vendor Order Qty','trim');
-    //     $this->form_validation->set_rules('buyer_name','Buyer Name','trim');
-    //     $this->form_validation->set_rules('buyer_po_date','Buyer PO Date','trim');
-    //     $this->form_validation->set_rules('order_qty','Order Qty','trim');
-
-    //     $this->form_validation->set_rules('material_type','Material Type','trim');
-    //     $this->form_validation->set_rules('additional_process','Additional Process','trim');
-    //     $this->form_validation->set_rules('remarks','Remarks','trim');
-    //     $this->form_validation->set_rules('qty_in_pcs_for_export_purposr','qty_in_pcs_for_export_purposr','trim');
-
-
-    //     if($this->form_validation->run() == FALSE)
-    //     {
-    //         $save_TDIR_response['status'] = 'failure';
-    //         $save_TDIR_response['error'] = array('report_number'=>strip_tags(form_error('report_number')), 'vendor_name'=>strip_tags(form_error('vendor_name')), 'vendor_po_date'=>strip_tags(form_error('vendor_po_date')), 'vendor_part_number'=>strip_tags(form_error('vendor_part_number')),'part_name'=>strip_tags(form_error('part_name')),'vendor_order_qty'=>strip_tags(form_error('vendor_order_qty')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'order_qty'=>strip_tags(form_error('order_qty')),'material_type'=>strip_tags(form_error('material_type')),'additional_process'=>strip_tags(form_error('additional_process')));
-    //     }else{
-
-
-    //         $data = array(
-    //             'report_number'        => trim($this->input->post('report_number')),
-    //             'vendor_name'          => trim($this->input->post('vendor_name')),
-    //             'vendor_po'          => trim($this->input->post('vendor_po_number')),
-    //             'vendor_po_date'       => trim($this->input->post('vendor_po_date')),
-    //             'part_number'   => trim($this->input->post('vendor_part_number')),
-    //             'part_name'            => trim($this->input->post('part_name')),
-    //             'vendor_order_qty'     => trim($this->input->post('vendor_order_qty')),
-    //             'buyer_name'           => trim($this->input->post('buyer_name')),
-    //             'buyer_po_date'        => trim($this->input->post('buyer_po_date')),
-    //             'order_qty'            => trim($this->input->post('order_qty')),
-    //             'material_type'        => trim($this->input->post('material_type')),
-    //             'additional_process'   => trim($this->input->post('additional_process')),
-    //             'remarks'              => trim($this->input->post('remarks')),
-    //             'qty_in_pcs_for_export_purposr' => trim($this->input->post('qty_in_pcs_for_export_purposr')),
-    //         );
-
-    //         if($this->input->post('tdir_id')){
-    //             $tdir_id = trim($this->input->post('tdir_id'));
-    //         }else{
-    //             $tdir_id = '';
-    //         }
+            // if($this->input->post('tdir_id')){
+            //     $tdir_id = trim($this->input->post('tdir_id'));
+            // }else{
+            //     $tdir_id = '';
+            // }
             
-    //      $savetdir= $this->admin_model->savetdir($tdir_id,$data);
+           $savetdir= $this->admin_model->savebalancestock('',$data);
 
-    //      if($savetdir){
+           if($savetdir){
+                    $save_new_balance_stock_response['status'] = 'success';
+                    $save_new_balance_stock_response['error'] = array('vendor_name'=>strip_tags(form_error('vendor_name')), 'vendor_po_number'=>strip_tags(form_error('vendor_po_number')), 'vendor_part_number'=>strip_tags(form_error('vendor_part_number')), 'fg_part_description'=>strip_tags(form_error('fg_part_description')),'balance_qty'=>strip_tags(form_error('balance_qty')),'remarks'=>strip_tags(form_error('remarks')));
+           }else{
+                    $save_new_balance_stock_response['status'] = 'failure';
+                    $save_new_balance_stock_response['error'] = array('vendor_name'=>strip_tags(form_error('vendor_name')), 'vendor_po_number'=>strip_tags(form_error('vendor_po_number')), 'vendor_part_number'=>strip_tags(form_error('vendor_part_number')), 'fg_part_description'=>strip_tags(form_error('fg_part_description')),'balance_qty'=>strip_tags(form_error('balance_qty')),'remarks'=>strip_tags(form_error('remarks')));
+           }
+          }
 
-    //             // $update_last_inserted_id_in_uspincoming = $this->admin_model->update_last_inserted_id_in_uspincoming($savenewuspincoming);
-    //             // if($update_last_inserted_id_in_uspincoming){
-                   
-    //                 $save_TDIR_response['status'] = 'success';
-    //                 $save_TDIR_response['error'] = array('report_number'=>strip_tags(form_error('report_number')), 'vendor_name'=>strip_tags(form_error('vendor_name')), 'vendor_po_date'=>strip_tags(form_error('vendor_po_date')), 'vendor_part_number'=>strip_tags(form_error('vendor_part_number')),'part_name'=>strip_tags(form_error('part_name')),'vendor_order_qty'=>strip_tags(form_error('vendor_order_qty')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'order_qty'=>strip_tags(form_error('order_qty')),'material_type'=>strip_tags(form_error('material_type')),'additional_process'=>strip_tags(form_error('additional_process')));
-    //             // }
+        echo json_encode($save_new_balance_stock_response);
 
-    //        }else{
-    //             $save_TDIR_response['status'] = 'failure';
-    //             $save_TDIR_response['error'] = array('report_number'=>strip_tags(form_error('report_number')), 'vendor_name'=>strip_tags(form_error('vendor_name')), 'vendor_po_date'=>strip_tags(form_error('vendor_po_date')), 'vendor_part_number'=>strip_tags(form_error('vendor_part_number')),'part_name'=>strip_tags(form_error('part_name')),'vendor_order_qty'=>strip_tags(form_error('vendor_order_qty')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'order_qty'=>strip_tags(form_error('order_qty')),'material_type'=>strip_tags(form_error('material_type')),'additional_process'=>strip_tags(form_error('additional_process')));
-    //        }
-
-    //       }
-
-    //     echo json_encode($save_TDIR_response);
-
-    // }else{
+    }else{
             $process = 'Add New Balance Stock';
             $processFunction = 'Admin/addTDIR';
             $this->logrecord($process,$processFunction);
             $this->global['pageTitle'] = 'Add New Balance Stock';
             $data['vendorList']= $this->admin_model->fetchALLvendorList();
             $this->loadViews("masters/addnewbalancestock", $this->global, $data, NULL);
-
-    // }
+       }
 
 }
+
+
+    public function getVendorPoforbalancestock(){
+        $vendor_name=$this->input->post('vendor_name');
+        if($vendor_name) {
+			$getVendordetails = $this->admin_model->getVendorPoforbalancestock($vendor_name);
+			if(count($getVendordetails) >= 1) {
+                $content = $content.'<option value="">Select Vendor PO Number</option>';
+				foreach($getVendordetails as $value) {
+
+                     if($this->input->post('vendor_po_id')==$value["id"]){
+                        $selected = 'selected';
+                     }else{ 
+                        $selected ='';
+                     }
+
+                     $content = $content.'<option value="'.$value["id"].'" '.$selected.'>'.$value["po_number"].'</option>';
+					
+				}
+				echo $content;
+			} else {
+				echo 'failure';
+			}
+		} else {
+			echo 'failure';
+		}
+    }
+
+
+    public function getvendorpartdetials_balance_stock_report(){
+
+        $part_no=$this->input->post('part_number');
+        $vendor_po_number=$this->input->post('vendor_po_number');
+        if($part_no) {
+            $part_no_data = $this->admin_model->getvendorpartdetials_balance_stock_report($part_no,$vendor_po_number);
+            if(count($part_no_data) >= 1) {
+                echo json_encode($part_no_data[0]);
+            } else {
+                echo 'failure';
+            }
+        } else {
+            echo 'failure';
+        }
+    }
 
 
 }

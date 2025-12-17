@@ -29010,3 +29010,183 @@ $('#export_excel').on('click', function() {
 
 	</script>
 <?php } ?>
+
+<?php if ( $pageTitle =='Balance Stock Form' || $pageTitle == 'Add New Balance Stock') { ?>
+	<script type="text/javascript">
+
+		     $(document).ready(function() {
+			    var dt = $('#view_balance_stock').DataTable({
+					"columnDefs": [ 
+						{ className: "details-control", "targets": [ 0 ] },
+						{ "width": "15%", "targets": 0 },
+						{ "width": "10%", "targets": 1 },	
+						{ "width": "10%", "targets": 2 },
+						{ "width": "10%", "targets": 3 },
+						{ "width": "10%", "targets": 4 },
+						{ "width": "15%", "targets": 5 },
+						{ "width": "5%", "targets": 6 },
+					
+					],
+					responsive: true,
+					"oLanguage": {
+						"sEmptyTable": "<i>Balance Stock List Not Found.</i>",
+					}, 
+					"bSort" : false,
+					"bFilter":true,
+					"bLengthChange": true,
+					"iDisplayLength": 10,   
+					"bProcessing": true,
+					"serverSide": true,
+					"ajax":{
+						url :"<?php echo base_url();?>admin/fetchbalancestock",
+						type: "post",
+					},
+				});
+         	 });
+
+			 $(document).on('change','#vendor_name',function(e){  
+				       e.preventDefault();
+						var vendor_name = $('#vendor_name').val();
+						$.ajax({
+							url : "<?php echo ADMIN_PATH;?>admin/getVendorPoforbalancestock",
+							type: "POST",
+							data : {'vendor_name' : vendor_name},
+							success: function(data, textStatus, jqXHR)
+							{
+								$(".loader_ajax").hide();
+								if(data == "failure")
+								{
+									$('#vendor_po_number').html('<option value="">Select Vendor PO Number</option>');
+								}
+								else
+								{
+									// $('#supplier_po_number').html('<option value="">Select supplier PO Number</option>');
+									$('#vendor_po_number').html(data);
+									$('#vendor_part_number').html('<option value="">Select Part Number</option>');
+								}
+							},
+							error: function (jqXHR, textStatus, errorThrown)
+							{
+								$('#vendor_po_number').html();
+								//$(".loader_ajax").hide();
+								$('#vendor_part_number').html('<option value="">Select Part Number</option>');
+							}
+						});
+						return false;
+			 });
+
+			 $(document).on('change','#vendor_po_number',function(e){  
+				       e.preventDefault();
+					   var vendor_po_number = $('#vendor_po_number').val();
+
+						$.ajax({
+							url : "<?php echo ADMIN_PATH;?>admin/getVendoritemonlyforTDIR",
+							type: "POST",
+							data : {'vendor_po_number' : vendor_po_number},
+							success: function(data, textStatus, jqXHR)
+								{
+											$(".loader_ajax").hide();
+											if(data == "failure")
+											{
+												$('#vendor_part_number').html('<option value="">Select Part Number</option>');
+												
+											}
+											else
+											{
+												$('#vendor_part_number').html(data);
+
+											}
+								},
+								error: function (jqXHR, textStatus, errorThrown)
+									{
+										$('#vendor_part_number').html();
+									}
+						});
+						return false;
+
+		     });
+
+			 $(document).on('change','.vendor_part_number_get_data',function(e){  
+					e.preventDefault();
+					var part_number = $('#vendor_part_number').val();
+					var vendor_po_number = $('#vendor_po_number').val();
+					$.ajax({
+						url : "<?php echo ADMIN_PATH;?>admin/getvendorpartdetials_balance_stock_report",
+						type: "POST",
+						data : {'part_number' : part_number,'vendor_po_number' : vendor_po_number},
+							success: function(data, textStatus, jqXHR)
+							{
+								var get_vendoritem_data = jQuery.parseJSON( data );
+
+								$(".loader_ajax").hide();
+									if(data == "failure")
+										{
+											$('#fg_part_description').val('');
+											// $('#order_qty').val('');
+											$('#balance_qty').val('');
+											
+										}
+									else
+										{
+											$('#fg_part_description').val(get_vendoritem_data.part_description);
+											// $('#order_qty').val(get_vendoritem_data.order_oty);
+											$('#balance_qty').val(get_vendoritem_data.balance_qty_in_pcs_for_bal_qty);
+										}
+							},
+							error: function (jqXHR, textStatus, errorThrown)
+							{
+									$('#fg_part_description').val('');
+									// $('#order_qty').val('');
+									$('#balance_qty').val('');
+							}
+						});
+					return false;
+			 });
+
+
+			    $(document).on('click','#savenewBalance',function(e){
+					e.preventDefault();
+					$(".loader_ajax").show();
+					var formData = new FormData($("#savenewBalanceform")[0]);
+							$.ajax({
+								url : "<?php echo base_url();?>addnewbalancestock",
+								type: "POST",
+								data : formData,
+								cache: false,
+								contentType: false,
+								processData: false,
+								success: function(data, textStatus, jqXHR)
+								{
+									var fetchResponse = $.parseJSON(data);
+									if(fetchResponse.status == "failure")
+									{
+										$.each(fetchResponse.error, function (i, v)
+										{
+											$('.'+i+'_error').html(v);
+										});
+										$(".loader_ajax").hide();
+									}
+									else if(fetchResponse.status == 'success')
+									{
+										swal({
+											title: "Success",
+											text: "Balance Stock Added Successfully!",
+											icon: "success",
+											button: "Ok",
+											},function(){ 
+												window.location.href = "<?php echo base_url().'balancestockform'?>";
+										});		
+									}
+									
+								},
+								error: function (jqXHR, textStatus, errorThrown)
+								{
+									$(".loader_ajax").hide();
+								}
+						});
+					return false;
+			    });
+
+
+    </script>
+<?php } ?>

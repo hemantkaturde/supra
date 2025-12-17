@@ -37,6 +37,7 @@
                                         <th>F.G Part Description</th>
                                         <th>Balance Qty</th>
                                         <th>Created Date</th>
+                                        <th>Remark</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>

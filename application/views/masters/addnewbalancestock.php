@@ -19,14 +19,14 @@
                         <h3 class="box-title">Balance Stock Form</h3>
                     </div>
                     
-                    <form role="form" id="addTicketForm" method="post" action="#">
+                    <form role="form" id="savenewBalanceform" action="#">
                         <div class="box-body">
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="vendor_name">Vendor Name <span class="required">*</span></label>
                                         <select class="form-control" id="vendor_name" name="vendor_name">
-                                            <option value="">Select Part No</option>
+                                            <option value="">Select Vendor Name</option>
                                             <?php foreach($vendorList as $p): ?>
                                                 <option value="<?= $p['ven_id']; ?>">
                                                     <?= $p['vendor_name']; ?>
@@ -48,16 +48,11 @@
                             <div class="row">
                                   <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="vendor_po_name">Vendor PO Number <span class="required">*</span></label>
-                                        <select class="form-control" id="vendor_po_name" name="vendor_po_name">
-                                            <option value="">Select Vendor PO No</option>
-                                            <?php foreach($vendorList as $p): ?>
-                                                <option value="<?= $p['ven_id']; ?>">
-                                                    <?= $p['vendor_name']; ?>
-                                                </option>
-                                            <?php endforeach; ?>
+                                        <label for="vendor_po_number">Vendor PO Number <span class="required">*</span></label>
+                                        <select class="form-control" id="vendor_po_number" name="vendor_po_number">
+                                            <option value="">Select Vendor PO Number</option>
                                         </select>
-                                      <p class="error vendor_po_name_error"></p>
+                                      <p class="error vendor_po_number_error"></p>
                                     </div>
                                 </div>
                             </div>
@@ -65,16 +60,11 @@
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="parts_no">FG.Part No<span class="required">*</span></label>
-                                        <select class="form-control" id="parts_no" name="parts_no">
-                                            <option value="">Select Part No</option>
-                                            <?php foreach($parts_no_list as $p): ?>
-                                                <option value="<?= $p['fin_id']; ?>">
-                                                    <?= $p['part_number']; ?>
-                                                </option>
-                                            <?php endforeach; ?>
+                                        <label for="vendor_part_number">FG.Part No<span class="required">*</span></label>
+                                        <select class="form-control vendor_part_number_get_data" id="vendor_part_number" name="vendor_part_number">
+                                             <option value="">Select FG.Part No</option>
                                         </select>
-                                        <p class="error parts_no_error"></p>
+                                        <p class="error vendor_part_number_error"></p>
                                     </div>
                                 </div>
                             </div>
@@ -114,8 +104,8 @@
                         </div>
 
                          <div class="box-footer">
-                                <input type="submit" id="savenewTicket" class="btn btn-primary" value="Save" />
-                                <input type="button" onclick="location.href = '<?php echo base_url() ?>storeform'" class="btn btn-default" value="Back" />
+                                <input type="submit" id="savenewBalance" class="btn btn-primary" value="Save" />
+                                <input type="button" onclick="location.href = '<?php echo base_url() ?>balancestockform'" class="btn btn-default" value="Back" />
                             </div>
                     </form>
                 </div>
