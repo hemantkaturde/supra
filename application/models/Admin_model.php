@@ -22642,9 +22642,9 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
-    public function getreworkrecorddatabyidfor_print($id,$rjection_incoming_item_id){
+    public function getreworkrecorddatabyidfor_print($rjection_incoming_item_id,$id){
 
-            $this->db->select('*,'.TBL_VENDOR.'.vendor_name as actual_vendor_name,'.TBL_REWORK_RECORD.'.status as rework_record_status,'.TBL_REWORK_RECORD.'.remarks as remarksas_rework,'.TBL_REWORK_RECORD.'.id as rework_id,'.TBL_REWORK_RECORD.'.date as reword_record_date,'.TBL_VENDOR_PO_MASTER.'.po_number as actual_vendor_po');
+            $this->db->select('*,'.TBL_VENDOR.'.vendor_name as actual_vendor_name,'.TBL_REWORK_RECORD.'.status as rework_record_status,'.TBL_REWORK_RECORD.'.remarks as remarksas_rework,'.TBL_REWORK_RECORD.'.id as rework_id,'.TBL_REWORK_RECORD.'.date as reword_record_date,'.TBL_VENDOR_PO_MASTER.'.po_number as actual_vendor_po,'.TBL_INCOMING_DETAILS_ITEM.'.invoice_qty as invoice_qty_lot');
             $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_REWORK_RECORD.'.vendor_name');
             $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_REWORK_RECORD.'.vendor_po');
             $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id = '.TBL_VENDOR_PO_MASTER.'.id');
@@ -22655,7 +22655,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_REWORK_RECORD.'.part_no');
             $this->db->join(TBL_TEAM_MASTER, TBL_TEAM_MASTER.'.id = '.TBL_REWORK_RECORD.'.team','left');
             //   $this->db->where(TBL_REWORK_RECORD.'.part_no', $rjection_incoming_item_id);
-            $this->db->where(TBL_REWORK_RECORD.'.id', $id);
+            $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.id', $rjection_incoming_item_id);
+            // $this->db->where(TBL_REWORK_RECORD.'.id', $id);
             $query = $this->db->get(TBL_REWORK_RECORD);
             $fetch_result = $query->result_array();
             return  $fetch_result;

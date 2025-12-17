@@ -27724,7 +27724,7 @@ public function printreworkrecordlotnumberrecord($rjection_incoming_item_id,$rew
     ]);
 
 
-    $get_rework_rejection_data = $this->admin_model->getreworkrecorddatabyidfor_print($rework_id,$rjection_incoming_item_id);
+    $get_rework_rejection_data = $this->admin_model->getreworkrecorddatabyidfor_print($rjection_incoming_item_id,$rework_id);
 
     $get_rejection_rework_item_data = $this->admin_model->get_rejection_rework_item_data($rjection_incoming_item_id,$rework_id);
 
@@ -27734,7 +27734,7 @@ public function printreworkrecordlotnumberrecord($rjection_incoming_item_id,$rew
     $rework_date = date("d-m-Y", strtotime($get_rework_rejection_data[0]['reword_record_date']));
     $vendor_name = $get_rework_rejection_data[0]['actual_vendor_name'];
     $fg_part_no = $get_rework_rejection_data[0]['part_number'];
-    $lot_qty =  $get_rework_rejection_data[0]['invoice_qty'];
+    $lot_qty =  $get_rework_rejection_data[0]['invoice_qty_lot'];
     $team = $get_rework_rejection_data[0]['team_name'];
     $part_description = $get_rework_rejection_data[0]['name'];
     $vendor_po_number = $get_rework_rejection_data[0]['actual_vendor_po'];
