@@ -27851,6 +27851,14 @@ public function printreworkrecordlotnumberrecord($rjection_incoming_item_id,$rew
             ';
             
 
+            if($get_rework_rejection_data[0]['checking_date']){
+
+                $checking_date = date("d-m-Y", strtotime($get_rework_rejection_data[0]['checking_date']));
+
+            }else{
+                $checking_date = '';
+            }
+
             $html .='<table width="100%">
                         <tr style="border:1px !important">
                             <td style="width: 60%;"><b>After Rework, Checked By :</b></td>
@@ -27859,7 +27867,7 @@ public function printreworkrecordlotnumberrecord($rjection_incoming_item_id,$rew
 
                          <tr style="border:1px !important">
                             <td><b>After Rework, Checked Date :</b></td>
-                            <td>'.date("d-m-Y", strtotime($get_rework_rejection_data[0]['checking_date'])).'</td>
+                            <td>'.$checking_date.'</td>
                         </tr>
                     </table>';
 
@@ -28122,6 +28130,14 @@ public function printreworkrecordlotnumberrecord_pass_protected($rjection_incomi
             </table>
             ';
             
+            
+            if($get_rework_rejection_data[0]['checking_date']){
+
+                $checking_date = date("d-m-Y", strtotime($get_rework_rejection_data[0]['checking_date']));
+
+            }else{
+                $checking_date = '';
+            }
 
             $html .='<table width="100%">
                         <tr style="border:1px !important">
@@ -28131,7 +28147,7 @@ public function printreworkrecordlotnumberrecord_pass_protected($rjection_incomi
 
                          <tr style="border:1px !important">
                             <td><b>After Rework, Checked Date :</b></td>
-                            <td>'.date("d-m-Y", strtotime($get_rework_rejection_data[0]['checking_date'])).'</td>
+                            <td>'.$checking_date.'</td>
                         </tr>
                     </table>';
 
