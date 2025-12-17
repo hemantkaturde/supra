@@ -27851,7 +27851,7 @@ public function printreworkrecordlotnumberrecord($rjection_incoming_item_id,$rew
             ';
             
 
-            if($get_rework_rejection_data[0]['checking_date']){
+             if($get_rework_rejection_data[0]['checking_date']!=='0000-00-00'){
 
                 $checking_date = date("d-m-Y", strtotime($get_rework_rejection_data[0]['checking_date']));
 
@@ -28131,7 +28131,7 @@ public function printreworkrecordlotnumberrecord_pass_protected($rjection_incomi
             ';
             
             
-            if($get_rework_rejection_data[0]['checking_date']){
+            if($get_rework_rejection_data[0]['checking_date']!=='0000-00-00'){
 
                 $checking_date = date("d-m-Y", strtotime($get_rework_rejection_data[0]['checking_date']));
 
