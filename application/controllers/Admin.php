@@ -27724,7 +27724,7 @@ public function printreworkrecordlotnumberrecord($rjection_incoming_item_id,$rew
     ]);
 
 
-    $get_rework_rejection_data = $this->admin_model->getreworkrecorddatabyidfor_print($rework_id);
+    $get_rework_rejection_data = $this->admin_model->getreworkrecorddatabyidfor_print($rework_id,$rjection_incoming_item_id);
 
     $get_rejection_rework_item_data = $this->admin_model->get_rejection_rework_item_data($rjection_incoming_item_id,$rework_id);
 
@@ -27994,7 +27994,7 @@ public function printreworkrecordlotnumberrecord_pass_protected($rjection_incomi
     ]);
 
 
-    $get_rework_rejection_data = $this->admin_model->getreworkrecorddatabyidfor_print($rework_id);
+    $get_rework_rejection_data = $this->admin_model->getreworkrecorddatabyidfor_print($rework_id,$rjection_incoming_item_id);
 
     $get_rejection_rework_item_data = $this->admin_model->get_rejection_rework_item_data($rjection_incoming_item_id,$rework_id);
 
