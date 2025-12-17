@@ -22649,7 +22649,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_REWORK_RECORD.'.vendor_po');
             $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id = '.TBL_VENDOR_PO_MASTER.'.id');
 
-            $this->db->join(TBL_INCOMING_DETAILS_ITEM, TBL_INCOMING_DETAILS_ITEM.'.part_number = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
+            $this->db->join(TBL_INCOMING_DETAILS_ITEM, TBL_INCOMING_DETAILS_ITEM.'.part_number = '.TBL_REWORK_RECORD.'.part_no');
             $this->db->join(TBL_INCOMING_DETAILS_ITEM.' as a', 'a.pre_vendor_po_number = '.TBL_VENDOR_PO_MASTER.'.id');
 
             $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_REWORK_RECORD.'.part_no');
