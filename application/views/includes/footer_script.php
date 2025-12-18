@@ -29020,11 +29020,12 @@ $('#export_excel').on('click', function() {
 						{ className: "details-control", "targets": [ 0 ] },
 						{ "width": "15%", "targets": 0 },
 						{ "width": "10%", "targets": 1 },	
-						{ "width": "10%", "targets": 2 },
+						{ "width": "15%", "targets": 2 },
 						{ "width": "10%", "targets": 3 },
 						{ "width": "10%", "targets": 4 },
-						{ "width": "15%", "targets": 5 },
-						{ "width": "5%", "targets": 6 },
+						{ "width": "10%", "targets": 5 },
+						{ "width": "10%", "targets": 6 },
+						{ "width": "10%", "targets": 7 },
 					
 					],
 					responsive: true,
@@ -29143,8 +29144,7 @@ $('#export_excel').on('click', function() {
 					return false;
 			 });
 
-
-			    $(document).on('click','#savenewBalance',function(e){
+			 $(document).on('click','#savenewBalance',function(e){
 					e.preventDefault();
 					$(".loader_ajax").show();
 					var formData = new FormData($("#savenewBalanceform")[0]);
@@ -29185,7 +29185,58 @@ $('#export_excel').on('click', function() {
 								}
 						});
 					return false;
-			    });
+			 });
+
+
+			 $(document).on('click','.deletebalancestock',function(e){
+					var elemF = $(this);
+					e.preventDefault();
+
+					swal({
+						title: "Are you sure?",
+						text: "Delete Balance Stock",
+						type: "warning",
+						showCancelButton: true,
+						closeOnClickOutside: false,
+						confirmButtonClass: "btn-sm btn-danger",
+						confirmButtonText: "Yes, delete it!",
+						cancelButtonText: "No, cancel plz!",
+						closeOnConfirm: false,
+						closeOnCancel: false
+					}, function(isConfirm) {
+						if (isConfirm) {
+									$.ajax({
+										url : "<?php echo base_url();?>deletebalancestock",
+										type: "POST",
+										data : 'id='+elemF.attr('data-id'),
+										success: function(data, textStatus, jqXHR)
+										{
+											const obj = JSON.parse(data);
+										
+											if(obj.status=='success'){
+												swal({
+													title: "Deleted!",
+													text: "Balance Stock Succesfully Deleted",
+													icon: "success",
+													button: "Ok",
+													},function(){ 
+														window.location.href = "<?php echo base_url()?>balancestockform";
+													});	
+											}
+
+										},
+										error: function (jqXHR, textStatus, errorThrown)
+										{
+											$(".loader_ajax").hide();
+										}
+									})
+								}
+								else {
+						swal("Cancelled", "Balance Stock deletion cancelled ", "error");
+						}
+					});
+	            });
+
 
 
     </script>

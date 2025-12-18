@@ -28306,4 +28306,23 @@ public function addnewbalancestock(){
     }
 
 
+public function deletebalancestock(){
+
+    $post_submit = $this->input->post();
+    if($post_submit){
+        $result = $this->admin_model->deletebalancestock(trim($this->input->post('id')));
+        if ($result) {
+                    $process = 'Delete Balance Stock';
+                    $processFunction = 'Admin/deletebalancestock';
+                    $this->logrecord($process,$processFunction);
+                echo(json_encode(array('status'=>'success')));
+            }
+        else { echo(json_encode(array('status'=>'failed'))); }
+    }else{
+        echo(json_encode(array('status'=>'failed'))); 
+    }
+}
+
+
+
 }

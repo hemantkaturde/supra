@@ -23952,29 +23952,27 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
           
     }
 
-
-
     
     public function fetchbalancestockcount($params){
 
-         $this->db->select('*'); 
+        $this->db->select(TBL_VENDOR.'.vendor_name as vendor_name_actual,'.TBL_VENDOR_PO_MASTER.'.po_number as po_number_actual,'.TBL_FINISHED_GOODS.'.part_number as part_number_actual,'.TBL_FINISHED_GOODS.'.name as part_description,'.TBL_BALANCE_STOCK_DATA.'.balance_stock,'.TBL_BALANCE_STOCK_DATA.'.createdDtm as date_actual,'.TBL_BALANCE_STOCK_DATA.'.remark as stock_remark');
            if($params['search']['value'] != "") 
             {
-                $this->db->where("(".TBL_TDIR.".report_number LIKE '%".$params['search']['value']."%'");
+                $this->db->where("(".TBL_BALANCE_STOCK_DATA.".report_number LIKE '%".$params['search']['value']."%'");
                 $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
                 $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
                 $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
                 $this->db->or_where(TBL_FINISHED_GOODS.".name LIKE '%".$params['search']['value']."%'");
-                $this->db->or_where(TBL_TDIR.".buyer_name LIKE '%".$params['search']['value']."%'");
-                $this->db->or_where(TBL_TDIR.".remarks LIKE '%".$params['search']['value']."%')");
+                $this->db->or_where(TBL_BALANCE_STOCK_DATA.".balance_stock LIKE '%".$params['search']['value']."%'");
+                $this->db->or_where(TBL_BALANCE_STOCK_DATA.".remark LIKE '%".$params['search']['value']."%')");
             }
 
-         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id  = '.TBL_TDIR.'.vendor_po');
-         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id  = '.TBL_TDIR.'.part_number');
-         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_TDIR.'.vendor_name');
-
-         $this->db->order_by(TBL_TDIR.'.id','DESC');
-         $query = $this->db->get(TBL_TDIR);
+         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id  = '.TBL_BALANCE_STOCK_DATA.'.vendor_po_id');
+         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id  = '.TBL_BALANCE_STOCK_DATA.'.fg_part_number_id');
+         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_BALANCE_STOCK_DATA.'.vendor_name_id');
+         $this->db->where(TBL_BALANCE_STOCK_DATA.'.status', 1);
+         $this->db->order_by(TBL_BALANCE_STOCK_DATA.'.id','DESC');
+         $query = $this->db->get(TBL_BALANCE_STOCK_DATA);
          $rowcount = $query->num_rows();
          return $rowcount;
 
@@ -23983,7 +23981,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     public function fetchbalancestockdata($params){
 
-        $this->db->select(TBL_VENDOR.'.vendor_name as vendor_name_actual,'.TBL_VENDOR_PO_MASTER.'.po_number as po_number_actual,'.TBL_FINISHED_GOODS.'.part_number as part_number_actual,'.TBL_FINISHED_GOODS.'.name as part_description,'.TBL_BALANCE_STOCK_DATA.'.balance_stock,'.TBL_BALANCE_STOCK_DATA.'.createdDtm as date_actual');
+        $this->db->select(TBL_VENDOR.'.vendor_name as vendor_name_actual,'.TBL_VENDOR_PO_MASTER.'.po_number as po_number_actual,'.TBL_FINISHED_GOODS.'.part_number as part_number_actual,'.TBL_FINISHED_GOODS.'.name as part_description,'.TBL_BALANCE_STOCK_DATA.'.balance_stock,'.TBL_BALANCE_STOCK_DATA.'.createdDtm as date_actual,'.TBL_BALANCE_STOCK_DATA.'.remark as stock_remark,'.TBL_BALANCE_STOCK_DATA.'.id as balance_stock_id');
        
         if($params['search']['value'] != "") 
         {
@@ -23992,7 +23990,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_FINISHED_GOODS.".name LIKE '%".$params['search']['value']."%'");
-            $this->db->or_where(TBL_BALANCE_STOCK_DATA.".buyer_name LIKE '%".$params['search']['value']."%'");
+            $this->db->or_where(TBL_BALANCE_STOCK_DATA.".balance_stock LIKE '%".$params['search']['value']."%'");
             $this->db->or_where(TBL_BALANCE_STOCK_DATA.".remark LIKE '%".$params['search']['value']."%')");
         }
 
@@ -24017,15 +24015,15 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['part_description'] =  $value['part_description'];
                 $data[$counter]['balance_stock'] =  $value['balance_stock'];
                 $data[$counter]['date_actual'] =  $value['date_actual'];
-                $data[$counter]['remark'] =  $value['remarks'];
+                $data[$counter]['remark'] =  $value['stock_remark'];
 
                 $data[$counter]['action'] = '';
-                // $data[$counter]['action'] .= "<a href='".ADMIN_PATH."incoming_lots/".$value['tdir_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-square-o' aria-hidden='true'></i></a>    &nbsp";
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."edit_tdir/".$value['tdir_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."incoming_lots/".$value['balance_stock_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-square-o' aria-hidden='true'></i></a>    &nbsp";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."edit_tdir/".$value['balance_stock_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp";
                 //$data[$counter]['action'] .= "<a href='".ADMIN_PATH."tdir_attachment/".$value['tdir_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-paperclip' aria-hidden='true'></i></a>    &nbsp";
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."printinspectionreportlabel/".$value['tdir_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>   &nbsp";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."printinspectionreportlabel/".$value['balance_stock_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>   &nbsp";
 
-                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['tdir_id']."' class='fa fa-trash-o deletetdirreport' aria-hidden='true'></i>"; 
+                $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['balance_stock_id']."' class='fa fa-trash-o deletebalancestock' aria-hidden='true'></i>"; 
                 $counter++; 
             }
         }
@@ -24034,7 +24032,15 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     }
 
-
+    
+    public function deletebalancestock($id){
+        $this->db->where('id', $id);
+        if($this->db->delete(TBL_BALANCE_STOCK_DATA)){
+                return TRUE;
+        }else{
+            return FALSE;
+        }
+    }
 
 }
 

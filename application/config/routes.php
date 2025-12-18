@@ -660,6 +660,7 @@ $route['printreworkrecordlotnumberrecord/(:any)'] = "admin/printreworkrecordlotn
 
 $route['balancestockform'] = "admin/balancestockform";
 $route['addnewbalancestock'] = "admin/addnewbalancestock";
+$route['deletebalancestock'] = "admin/deletebalancestock";
 
 
 
