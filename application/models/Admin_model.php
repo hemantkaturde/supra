@@ -24014,7 +24014,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['part_number_actual'] =  $value['part_number_actual'];
                 $data[$counter]['part_description'] =  $value['part_description'];
                 $data[$counter]['balance_stock'] =  $value['balance_stock'];
-                $data[$counter]['date_actual'] =  $value['date_actual'];
+                $data[$counter]['date_actual'] =   date("d-m-Y", strtotime($value['date_actual']));
                 $data[$counter]['remark'] =  $value['stock_remark'];
 
                 $data[$counter]['action'] = '';
