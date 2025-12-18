@@ -29011,7 +29011,7 @@ $('#export_excel').on('click', function() {
 	</script>
 <?php } ?>
 
-<?php if ( $pageTitle =='Balance Stock Form' || $pageTitle == 'Add New Balance Stock') { ?>
+<?php if ( $pageTitle =='Balance Stock Form' || $pageTitle == 'Add New Balance Stock' || $pageTitle == 'Edit Balance Stock') { ?>
 	<script type="text/javascript">
 
 		     $(document).ready(function() {
@@ -29235,9 +29235,7 @@ $('#export_excel').on('click', function() {
 						swal("Cancelled", "Balance Stock deletion cancelled ", "error");
 						}
 					});
-	            });
-
-
+	          });
 
     </script>
 <?php } ?>

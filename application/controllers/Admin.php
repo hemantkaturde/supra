@@ -28231,13 +28231,13 @@ public function addnewbalancestock(){
                 'remark'            => trim($this->input->post('remarks')),
             );
 
-            // if($this->input->post('tdir_id')){
-            //     $tdir_id = trim($this->input->post('tdir_id'));
-            // }else{
-            //     $tdir_id = '';
-            // }
+            if($this->input->post('balance_stock_id')){
+                $balance_stock_id = trim($this->input->post('balance_stock_id'));
+            }else{
+                $balance_stock_id = '';
+            }
             
-           $savetdir= $this->admin_model->savebalancestock('',$data);
+           $savetdir= $this->admin_model->savebalancestock($balance_stock_id,$data);
 
            if($savetdir){
                     $save_new_balance_stock_response['status'] = 'success';
@@ -28252,7 +28252,7 @@ public function addnewbalancestock(){
 
     }else{
             $process = 'Add New Balance Stock';
-            $processFunction = 'Admin/addTDIR';
+            $processFunction = 'Admin/addnewbalancestock';
             $this->logrecord($process,$processFunction);
             $this->global['pageTitle'] = 'Add New Balance Stock';
             $data['vendorList']= $this->admin_model->fetchALLvendorList();
@@ -28306,22 +28306,34 @@ public function addnewbalancestock(){
     }
 
 
-public function deletebalancestock(){
+    public function deletebalancestock(){
 
-    $post_submit = $this->input->post();
-    if($post_submit){
-        $result = $this->admin_model->deletebalancestock(trim($this->input->post('id')));
-        if ($result) {
-                    $process = 'Delete Balance Stock';
-                    $processFunction = 'Admin/deletebalancestock';
-                    $this->logrecord($process,$processFunction);
-                echo(json_encode(array('status'=>'success')));
-            }
-        else { echo(json_encode(array('status'=>'failed'))); }
-    }else{
-        echo(json_encode(array('status'=>'failed'))); 
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->deletebalancestock(trim($this->input->post('id')));
+            if ($result) {
+                        $process = 'Delete Balance Stock';
+                        $processFunction = 'Admin/deletebalancestock';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
     }
-}
+
+    public function editbalancestock($balance_stock_id){
+
+            $process = 'Edit Balance Stock'; 
+            $processFunction = 'Admin/editbalancestock';
+            $this->logrecord($process,$processFunction);
+            $this->global['pageTitle'] = 'Edit Balance Stock';
+            $data['vendorList']= $this->admin_model->fetchALLvendorList();
+            $data['getpreviousbalancestock']= $this->admin_model->getpreviousbalancestock($balance_stock_id);
+            $this->loadViews("masters/editbalancestock", $this->global, $data, NULL);
+
+    }
 
 
 
