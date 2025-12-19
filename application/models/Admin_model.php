@@ -24035,7 +24035,13 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     public function deletebalancestock($id){
         $this->db->where('id', $id);
         if($this->db->delete(TBL_BALANCE_STOCK_DATA)){
-                return TRUE;
+               // return TRUE;
+                    $this->db->where('id', $id);
+                    if($this->db->delete(TBL_BALANCE_STOCK_DETAILS)){
+                            return TRUE;
+                    }else{
+                        return FALSE;
+                    }
         }else{
             return FALSE;
         }

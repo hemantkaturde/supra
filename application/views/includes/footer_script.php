@@ -29361,8 +29361,6 @@ $('#export_excel').on('click', function() {
 					});
 	        });
 
-
-
 			$(document).on("click",".editBalancedetails",function(e){
 				e.preventDefault();
 				var id = $(this).attr("data-id");
