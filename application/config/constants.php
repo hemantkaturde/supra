@@ -200,6 +200,8 @@ define('TBL_TDIR_ATTACHMENT','tbl_tdir_attachment');
 define('TBL_REWORK_RECORD','tbl_rework_record');
 define('TBL_REWORK_RECORD_REASON_DATA','tbl_rework_record_reason_data');
 define('TBL_BALANCE_STOCK_DATA','tbl_balance_stock');
+define('TBL_BALANCE_STOCK_DETAILS','tbl_balance_stock_details');
+
 
 
 

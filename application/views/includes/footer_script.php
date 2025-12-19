@@ -29011,7 +29011,7 @@ $('#export_excel').on('click', function() {
 	</script>
 <?php } ?>
 
-<?php if ( $pageTitle =='Balance Stock Form' || $pageTitle == 'Add New Balance Stock' || $pageTitle == 'Edit Balance Stock') { ?>
+<?php if ( $pageTitle =='Balance Stock Form' || $pageTitle == 'Add New Balance Stock' || $pageTitle == 'Edit Balance Stock' || $pageTitle == 'Add Balance Stock Details') { ?>
 	<script type="text/javascript">
 
 		     $(document).ready(function() {
@@ -29235,7 +29235,160 @@ $('#export_excel').on('click', function() {
 						swal("Cancelled", "Balance Stock deletion cancelled ", "error");
 						}
 					});
-	          });
+	         });
+
+
+			$(document).ready(function() {
+
+				var balance_stock_id = $('#balance_stock_id').val();
+
+			    var dt = $('#view_balance_stock_details').DataTable({
+					"columnDefs": [ 
+						{ className: "details-control", "targets": [ 0 ] },
+						{ "width": "15%", "targets": 0 },
+						{ "width": "10%", "targets": 1 },	
+						{ "width": "15%", "targets": 2 },
+						{ "width": "10%", "targets": 3 },
+						{ "width": "10%", "targets": 4 },
+				
+					
+					],
+					responsive: true,
+					"oLanguage": {
+						"sEmptyTable": "<i>Balance Stock List Not Found.</i>",
+					}, 
+					"bSort" : false,
+					"bFilter":true,
+					"bLengthChange": true,
+					"iDisplayLength": 10,   
+					"bProcessing": true,
+					"serverSide": true,
+					"ajax":{
+						url :"<?php echo base_url();?>admin/fetchbalancestockdetails/"+balance_stock_id,
+						type: "post",
+					},
+				});
+         	});
+
+
+			$(document).on("click", "#addBalanceBtn", function () {
+				$("#balanceForm")[0].reset();
+				$("#id").val("");
+				$("#main_balance_stock_id2").val("<?= $getpreviousbalancestock[0]['balance_stock_id'] ?>");
+				$("#balanceModal").modal("show");
+			});
+
+
+			$(document).on("click", "#saveBalanceBtn", function (e) {
+				e.preventDefault();
+				$(".loader_ajax").show();
+
+				var formData = new FormData($("#balanceForm")[0]);
+
+				$.ajax({
+					url: "<?php echo base_url();?>admin/savebalancestockdetails",
+					type: "POST",
+					data: formData,
+					cache: false,
+					contentType: false,
+					processData: false,
+					success: function (data) {
+						let res = JSON.parse(data);
+
+						if (res.status == "failure") {
+							$.each(res.error, function (i, v) {
+								$("." + i + "_error").html(v);
+							});
+						} 
+						else if (res.status == "success") {
+							swal("Success", "Record Saved!", "success");
+							$("#balanceModal").modal("hide");
+							$('#view_balance_stock_details').DataTable().ajax.reload();
+						}
+						
+						$(".loader_ajax").hide();
+					}
+				});
+			});
+
+			$(document).on('click','.deleteBalancedetails',function(e){
+					var elemF = $(this);
+					e.preventDefault();
+				var balance_stock_id = $('#balance_stock_id').val();
+
+					swal({
+						title: "Are you sure?",
+						text: "Balance Stock Details Stock",
+						type: "warning",
+						showCancelButton: true,
+						closeOnClickOutside: false,
+						confirmButtonClass: "btn-sm btn-danger",
+						confirmButtonText: "Yes, delete it!",
+						cancelButtonText: "No, cancel plz!",
+						closeOnConfirm: false,
+						closeOnCancel: false
+					}, function(isConfirm) {
+						if (isConfirm) {
+									$.ajax({
+										url : "<?php echo base_url();?>deleteBalancedetails",
+										type: "POST",
+										data : 'id='+elemF.attr('data-id'),
+										success: function(data, textStatus, jqXHR)
+										{
+											const obj = JSON.parse(data);
+										
+											if(obj.status=='success'){
+												swal({
+													title: "Deleted!",
+													text: "Balance Stock Details Succesfully Deleted",
+													icon: "success",
+													button: "Ok",
+													},function(){ 
+														window.location.href = "<?php echo base_url()?>addbalancestockdetails/"+balance_stock_id;
+													});	
+											}
+
+										},
+										error: function (jqXHR, textStatus, errorThrown)
+										{
+											$(".loader_ajax").hide();
+										}
+									})
+								}
+								else {
+						swal("Cancelled", "Balance Stock Details deletion cancelled ", "error");
+						}
+					});
+	        });
+
+
+
+			$(document).on("click",".editBalancedetails",function(e){
+				e.preventDefault();
+				var id = $(this).attr("data-id");
+
+				$.ajax({
+					url:"<?php echo base_url();?>admin/editbalancestockdetails",
+					type:"POST",
+					data:{id:id},
+					success:function(data){
+						var res = JSON.parse(data);
+
+						if(res.status == "success"){
+							$("#id").val(res.data.id);
+							$("#main_balance_stock_id2").val(res.data.main_balance_stock_id);
+							$("#no_of_boxes_in_pcs").val(res.data.no_of_boxes_in_pcs);
+							$("#qty_per_box_in_pcs").val(res.data.qty_per_box_in_pcs);
+							$("#gross_weight_per_box_in_kgs").val(res.data.gross_weight_per_box_in_kgs);
+							$("#remark").val(res.data.remark);
+
+							$("#balanceModal").modal("show");
+						} else {
+							swal("Error", res.message, "error");
+						}
+					}
+				});
+			});
 
     </script>
 <?php } ?>

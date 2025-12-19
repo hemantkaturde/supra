@@ -28335,6 +28335,147 @@ public function addnewbalancestock(){
 
     }
 
+    public function addbalancestockdetails($balance_stock_id){
+         $process = 'Add Balance Stock Details';
+         $processFunction = 'Admin/addbalancestockdetails';
+         $this->logrecord($process,$processFunction);
+         $this->global['pageTitle'] = 'Add Balance Stock Details';
+         $data['getpreviousbalancestock']= $this->admin_model->getpreviousbalancestock($balance_stock_id);
+         $this->loadViews("masters/addbalancestockdetails", $this->global, $data, NULL);
+    }
+
+
+    public function fetchbalancestockdetails($main_balance_stock_id2){
+
+        $params = $_REQUEST;
+        $totalRecords = $this->admin_model->fetch_balance_stock_details_count($params,$main_balance_stock_id2); 
+        $queryRecords = $this->admin_model->fetch_balance_stock_details_data($params,$main_balance_stock_id2); 
+
+        $data = array();
+        foreach ($queryRecords as $key => $value)
+        {
+            $i = 0;
+            foreach($value as $v)
+            {
+                $data[$key][$i] = $v;
+                $i++;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval( $params['draw'] ),   
+            "recordsTotal"    => intval(count($data) ),  
+            "recordsFiltered" => intval(count($data)),
+            "data"            => $data   // total data array
+            );
+        echo json_encode($json_data);
+    }
+
+
+    public function savebalancestockdetails()
+    {
+        
+        $save_balance_response = array();
+
+        $this->form_validation->set_rules('main_balance_stock_id','Main Balance Stock ID','trim|required');
+        $this->form_validation->set_rules('no_of_boxes_in_pcs','No of Boxes','trim|required|numeric');
+        $this->form_validation->set_rules('qty_per_box_in_pcs','Qty Per Box','trim|required|numeric');
+        $this->form_validation->set_rules('gross_weight_per_box_in_kgs','Gross Weight Per Box','trim|required');
+        $this->form_validation->set_rules('remark','Remark','trim');
+
+        if($this->form_validation->run() == FALSE)
+        {
+            $save_balance_response['status'] = 'failure';
+            $save_balance_response['error'] = array(
+                'main_balance_stock_id'       => strip_tags(form_error('main_balance_stock_id')),
+                'no_of_boxes_in_pcs'          => strip_tags(form_error('no_of_boxes_in_pcs')),
+                'qty_per_box_in_pcs'          => strip_tags(form_error('qty_per_box_in_pcs')),
+                'gross_weight_per_box_in_kgs' => strip_tags(form_error('gross_weight_per_box_in_kgs')),
+                'remark'                      => strip_tags(form_error('remark'))
+            );
+        }
+        else
+        {
+            $data = array(
+                'main_balance_stock_id'        => trim($this->input->post('main_balance_stock_id')),
+                'no_of_boxes_in_pcs'           => trim($this->input->post('no_of_boxes_in_pcs')),
+                'qty_per_box_in_pcs'           => trim($this->input->post('qty_per_box_in_pcs')),
+                'gross_weight_per_box_in_kgs'  => trim($this->input->post('gross_weight_per_box_in_kgs')),
+                'remark'                       => trim($this->input->post('remark')),
+            );
+
+            if($this->input->post('id')){
+                $id = trim($this->input->post('id'));
+            }else{
+                $id = '';
+            }
+
+            $save_status = $this->admin_model->save_balance_details($id,$data);
+
+            if($save_status)
+            {
+                $save_balance_response['status'] = 'success';
+                $save_balance_response['error'] = array(
+                    'main_balance_stock_id'       => strip_tags(form_error('main_balance_stock_id')),
+                    'no_of_boxes_in_pcs'          => strip_tags(form_error('no_of_boxes_in_pcs')),
+                    'qty_per_box_in_pcs'          => strip_tags(form_error('qty_per_box_in_pcs')),
+                    'gross_weight_per_box_in_kgs' => strip_tags(form_error('gross_weight_per_box_in_kgs')),
+                    'remark'                      => strip_tags(form_error('remark'))
+                );
+            }
+            else
+            {
+                $save_balance_response['status'] = 'failure';
+                $save_balance_response['error'] = array(
+                    'main_balance_stock_id'       => strip_tags(form_error('main_balance_stock_id')),
+                    'no_of_boxes_in_pcs'          => strip_tags(form_error('no_of_boxes_in_pcs')),
+                    'qty_per_box_in_pcs'          => strip_tags(form_error('qty_per_box_in_pcs')),
+                    'gross_weight_per_box_in_kgs' => strip_tags(form_error('gross_weight_per_box_in_kgs')),
+                    'remark'                      => strip_tags(form_error('remark'))
+                );
+            }
+        }
+
+        echo json_encode($save_balance_response);
+
+    }
+
+
+
+     public function deleteBalancedetails(){
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->deleteBalancedetails(trim($this->input->post('id')));
+            if ($result) {
+                        $process = 'Delete Balance Stock Details';
+                        $processFunction = 'Admin/deleteBalancedetails';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
+    }
+
+
+
+    public function editbalancestockdetails()
+    {
+        $id = trim($this->input->post('id'));
+
+        if($id == ""){
+            echo json_encode(["status" => "failure","message" => "Invalid Request"]);exit;
+        }
+        $data = $this->admin_model->getsinglebalancedetails($id);
+        if(!empty($data)){
+            echo json_encode(["status" => "success","data" => $data]);
+        } else {
+            echo json_encode(["status" => "failure","message" => "No record found"]);
+        }
+    }
+
+
 
 
 }

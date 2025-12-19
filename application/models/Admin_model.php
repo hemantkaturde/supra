@@ -24056,6 +24056,123 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         return $fetch_result;
     }
 
+
+    public function fetch_balance_stock_details_count($params,$main_balance_stock_id2){
+
+        $this->db->select(
+            TBL_BALANCE_STOCK_DETAILS.'.id'
+        );
+
+        if($params['search']['value'] != "") 
+        {
+            $this->db->group_start();
+            $this->db->like(TBL_BALANCE_STOCK_DETAILS.".no_of_boxes_in_pcs",$params['search']['value']);
+            $this->db->or_like(TBL_BALANCE_STOCK_DETAILS.".qty_per_box_in_pcs",$params['search']['value']);
+            $this->db->or_like(TBL_BALANCE_STOCK_DETAILS.".gross_weight_per_box_in_kgs",$params['search']['value']);
+            $this->db->or_like(TBL_BALANCE_STOCK_DETAILS.".remark",$params['search']['value']);
+            $this->db->group_end();
+        }
+
+        $this->db->where(TBL_BALANCE_STOCK_DETAILS.'.status',1);
+        $this->db->where(TBL_BALANCE_STOCK_DETAILS.'.main_balance_stock_id',$main_balance_stock_id2);
+
+        $query = $this->db->get(TBL_BALANCE_STOCK_DETAILS);
+        return $query->num_rows();
+    }
+
+
+    public function fetch_balance_stock_details_data($params,$main_balance_stock_id2){
+
+        $this->db->select(
+            TBL_BALANCE_STOCK_DETAILS.'.id as balance_detail_id,'.
+            TBL_BALANCE_STOCK_DETAILS.'.no_of_boxes_in_pcs,'.
+            TBL_BALANCE_STOCK_DETAILS.'.qty_per_box_in_pcs,'.
+            TBL_BALANCE_STOCK_DETAILS.'.gross_weight_per_box_in_kgs,'.
+            TBL_BALANCE_STOCK_DETAILS.'.remark'
+        );
+
+        if($params['search']['value'] != "") 
+        {
+            $this->db->group_start();
+            $this->db->like(TBL_BALANCE_STOCK_DETAILS.".no_of_boxes_in_pcs",$params['search']['value']);
+            $this->db->or_like(TBL_BALANCE_STOCK_DETAILS.".qty_per_box_in_pcs",$params['search']['value']);
+            $this->db->or_like(TBL_BALANCE_STOCK_DETAILS.".gross_weight_per_box_in_kgs",$params['search']['value']);
+            $this->db->or_like(TBL_BALANCE_STOCK_DETAILS.".remark",$params['search']['value']);
+            $this->db->group_end();
+        }
+
+        $this->db->where(TBL_BALANCE_STOCK_DETAILS.'.status',1);
+        $this->db->where(TBL_BALANCE_STOCK_DETAILS.'.main_balance_stock_id',$main_balance_stock_id2);
+        $this->db->limit($params['length'],$params['start']);
+        $this->db->order_by(TBL_BALANCE_STOCK_DETAILS.'.id','DESC');
+
+        $query = $this->db->get(TBL_BALANCE_STOCK_DETAILS);
+        $fetch_result = $query->result_array();
+
+        $data = [];
+        $counter = 0;
+
+        if(count($fetch_result) > 0)
+        {
+            foreach($fetch_result as $value)
+            {
+                $data[$counter]['no_of_boxes_in_pcs'] = $value['no_of_boxes_in_pcs'];
+                $data[$counter]['qty_per_box_in_pcs'] = $value['qty_per_box_in_pcs'];
+                $data[$counter]['gross_weight'] = $value['gross_weight_per_box_in_kgs'];
+                $data[$counter]['remark'] = $value['remark'];
+
+                $data[$counter]['action'] = '';
+                $data[$counter]['action'] .= "<i class='fa fa-pencil editBalancedetails' style='cursor:pointer;font-size:18px' data-id='".$value['balance_detail_id']."'></i> &nbsp;";
+                $data[$counter]['action'] .= "<i class='fa fa-trash deleteBalancedetails' style='cursor:pointer;font-size:18px;color:red' data-id='".$value['balance_detail_id']."'></i>";
+                $counter++;
+            }
+        }
+        return $data;
+    }
+
+
+
+    public function save_balance_details($id,$data){
+
+        if($id){
+                $this->db->where('id', $id);
+                if($this->db->update(TBL_BALANCE_STOCK_DETAILS, $data)){
+                    return TRUE;
+                } else {
+                    return FALSE;
+                }
+            }else{
+                if($this->db->insert(TBL_BALANCE_STOCK_DETAILS, $data)) {
+                    return $this->db->insert_id();;
+                } else {
+                    return FALSE;
+                }
+
+            }
+
+    }
+
+
+    public function deleteBalancedetails($id){
+
+       $this->db->where('id', $id);
+        if($this->db->delete(TBL_BALANCE_STOCK_DETAILS)){
+                return TRUE;
+        }else{
+            return FALSE;
+        }
+
+    }
+
+
+    public function getsinglebalancedetails($id)
+    {
+        return $this->db->get_where(TBL_BALANCE_STOCK_DETAILS, ['id' => $id, 'status' => 1])->row_array();
+    }
+
+
+
+
 }
 
 ?>
