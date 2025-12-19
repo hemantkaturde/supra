@@ -665,6 +665,7 @@ $route['editbalancestock/(:any)'] = "admin/editbalancestock/$1";
 $route['addbalancestockdetails/(:any)'] = "admin/addbalancestockdetails/$1";
 $route['deleteBalancedetails'] = "admin/deleteBalancedetails";
 
+$route['printbalancestockdetailslabel/(:any)'] = "admin/printbalancestockdetailslabel/$1";
 
 
 

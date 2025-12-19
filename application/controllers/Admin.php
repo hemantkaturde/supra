@@ -28476,6 +28476,35 @@ public function addnewbalancestock(){
     }
 
 
+    public function printbalancestockdetailslabel($balance_stock_id){
+
+
+
+        //get itemdetails by item id
+        $getdata_itemdetailsdata = $this->admin_model->getpreviousbalancestock(trim($balance_stock_id));
+
+        // ---------------- QR CODE GENERATE -----------------
+        $qrData = base_url()."admin/printbalancestockdetailslabel_pass_protected/".$balance_stock_id; // your QR text
+
+        $qr = QrCode::create($qrData)
+                ->setSize(200)
+                ->setMargin(10);
+
+        $writer = new PngWriter();
+        $qrResult = $writer->write($qr);
+
+        // Convert QR to Base64 for mPDF image
+        $qrBase64 = base64_encode($qrResult->getString());
+
+
+
+
+
+
+
+
+    }
+
 
 
 }
