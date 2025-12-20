@@ -22795,34 +22795,13 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
-     public function reworkrecordincomingdetailslistcount($params,$vendor_po,$part_no,$tdir_id)
+     public function reworkrecordincomingdetailslistcount($params,$vendor_po,$part_no,$rework_id)
     {
-             $this->db->select('*');
+             $this->db->select('*,'.TBL_INCOMING_DETAILS_ITEM.'.id as incoming_details_item_id');
             // $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_REWORK_RECORD.'.vendor_name');
             $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_INCOMING_DETAILS_ITEM.'.pre_vendor_po_number');
             $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
-
-            if (!empty($params['search']['value'])) {
-                $this->db->group_start();
-                $this->db->like(TBL_INCOMING_DETAILS_ITEM.'.lot_no',  $params['search']['value']);
-                $this->db->or_like(TBL_INCOMING_DETAILS_ITEM.'.invoice_qty',  $params['search']['value']);
-                $this->db->or_like(TBL_INCOMING_DETAILS_ITEM.'.invoice_date',  $params['search']['value']);
-                $this->db->group_end();
-            }
-
-            $query = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
-            $result = $query->row();
-            return $result ? (int)$result->total : 0;
-    }
-
-    public function reworkrecordincomingdetailslistdata($params,$vendor_po,$part_no,$rework_id)
-    {
-        
-            $this->db->select('*,'.TBL_INCOMING_DETAILS_ITEM.'.id as incoming_details_item_id');
-            // $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_REWORK_RECORD.'.vendor_name');
-            $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_INCOMING_DETAILS_ITEM.'.pre_vendor_po_number');
-            $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
-            // $this->db->join(TBL_TEAM_MASTER, TBL_TEAM_MASTER.'.id = '.TBL_REWORK_RECORD.'.team','left');
+            $this->db->join(TBL_REWORK_RECORD_REASON_DATA, TBL_REWORK_RECORD_REASON_DATA.'.incoming_item_id = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
 
             // Text search filter
             if (!empty($params['search']['value'])) {
@@ -22834,6 +22813,35 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             }
             $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.pre_vendor_po_number', $vendor_po);
             $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.part_number', $part_no);
+            $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.main_rework_resaon_id', $rework_id);
+
+            $this->db->order_by(TBL_INCOMING_DETAILS_ITEM.'.id', 'DESC');
+            $query = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
+
+            $result = $query->row();
+            return $result ? (int)$result->total : 0;
+    }
+
+    public function reworkrecordincomingdetailslistdata($params,$vendor_po,$part_no,$rework_id)
+    {
+        
+            $this->db->select('*,'.TBL_INCOMING_DETAILS_ITEM.'.id as incoming_details_item_id');
+            // $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_REWORK_RECORD.'.vendor_name');
+            $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_INCOMING_DETAILS_ITEM.'.pre_vendor_po_number');
+            $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
+            $this->db->join(TBL_REWORK_RECORD_REASON_DATA, TBL_REWORK_RECORD_REASON_DATA.'.incoming_item_id = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
+
+            // Text search filter
+            if (!empty($params['search']['value'])) {
+                $this->db->group_start();
+                $this->db->like(TBL_INCOMING_DETAILS_ITEM.'.lot_no',  $params['search']['value']);
+                $this->db->or_like(TBL_INCOMING_DETAILS_ITEM.'.invoice_qty',  $params['search']['value']);
+                $this->db->or_like(TBL_INCOMING_DETAILS_ITEM.'.invoice_date',  $params['search']['value']);
+                $this->db->group_end();
+            }
+            $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.pre_vendor_po_number', $vendor_po);
+            $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.part_number', $part_no);
+            $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.main_rework_resaon_id', $rework_id);
 
             $this->db->order_by(TBL_INCOMING_DETAILS_ITEM.'.id', 'DESC');
             $this->db->limit($params['length'], $params['start']);
