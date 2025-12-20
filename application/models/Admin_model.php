@@ -22813,7 +22813,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             }
             $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.pre_vendor_po_number', $vendor_po);
             $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.part_number', $part_no);
-            $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.main_rework_resaon_id', $rework_id);
+            $this->db->where(TBL_REWORK_RECORD_REASON_DATA.'.main_rework_resaon_id', $rework_id);
 
             $this->db->order_by(TBL_INCOMING_DETAILS_ITEM.'.id', 'DESC');
             $query = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
@@ -22841,7 +22841,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             }
             $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.pre_vendor_po_number', $vendor_po);
             $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.part_number', $part_no);
-            $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.main_rework_resaon_id', $rework_id);
+            $this->db->where(TBL_REWORK_RECORD_REASON_DATA.'.main_rework_resaon_id', $rework_id);
 
             $this->db->order_by(TBL_INCOMING_DETAILS_ITEM.'.id', 'DESC');
             $this->db->limit($params['length'], $params['start']);
