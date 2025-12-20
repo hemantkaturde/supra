@@ -27680,7 +27680,7 @@ public function printincomingitemdetails($id)
         </tr>
         <tr>
             <td>VENDOR PO QTY (in PCS)</td>
-            <td>'.$getdata_itemdetailsdata[0]['vendor_po_order_qty'].'</td>
+            <td>'.$getdata_itemdetailsdata[0]['item_vendor_qty'].'</td>
         </tr>
         <tr>
             <td>FINISHED GOODS PART NO</td>
@@ -27958,7 +27958,7 @@ public function printincomingitemdetails_pass_protected($id)
         </tr>
         <tr>
             <td>VENDOR PO QTY (in PCS)</td>
-            <td>'.$getdata_itemdetailsdata[0]['vendor_po_order_qty'].'</td>
+            <td>'.$getdata_itemdetailsdata[0]['item_vendor_qty'].'</td>
         </tr>
         <tr>
             <td>FINISHED GOODS PART NO</td>
