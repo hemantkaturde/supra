@@ -24122,9 +24122,11 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         {
             foreach($fetch_result as $value)
             {
+                $data[$counter]['gross_weight'] = $value['gross_weight_per_box_in_kgs'];
                 $data[$counter]['no_of_boxes_in_pcs'] = $value['no_of_boxes_in_pcs'];
                 $data[$counter]['qty_per_box_in_pcs'] = $value['qty_per_box_in_pcs'];
-                $data[$counter]['gross_weight'] = $value['gross_weight_per_box_in_kgs'];
+              
+                $data[$counter]['total_qty'] = $value['no_of_boxes_in_pcs'] * $value['qty_per_box_in_pcs'];
                 $data[$counter]['remark'] = $value['remark'];
 
                 $data[$counter]['action'] = '';

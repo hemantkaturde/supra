@@ -49,10 +49,11 @@
                             <table width="100%" class="table table-striped table-bordered table-hover" id="view_balance_stock_details">
                                 <thead>
                                     <tr style="background-color:#3c8dbc !important;color:#fff">
-                                        <th>No of Boxes (in pcs)</th>
-                                        <th>Qty Per Box (in pcs)</th>
                                         <th>Gross Weight Per Box (in kgs)</th>
+                                        <th>No of Boxes / Cartons (in pcs)</th>
+                                        <th>Qty Per Box (in pcs)</th>
                                         <th>Total Qty</th>
+                                        <th>Remark</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -94,7 +95,7 @@
             
             <div class="col-md-6">
               <div class="form-group">
-                <label>No. of Boxes (pcs)</label>
+                <label>No. of Boxes / Cartons (pcs)</label>
                 <input type="number" min="1" class="form-control" name="no_of_boxes_in_pcs" id="no_of_boxes_in_pcs" placeholder="Enter number of boxes">
                 <small class="text-danger no_of_boxes_in_pcs_error"></small>
               </div>
