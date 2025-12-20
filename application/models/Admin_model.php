@@ -18179,7 +18179,23 @@ public function updatestockaftercalculation($balence_qty_in_pcs,$finishgood_id,$
         return FALSE;
     }
 
+}
 
+
+public function forbalanceupdatestockform($balence_qty_in_pcs,$finishgood_id,$stock_id){
+
+    $data = array(
+        'for_balance_stock_balance_qty_pcs' =>$balence_qty_in_pcs
+    );
+
+    $this->db->where(TBL_STOCKS_ITEM.'.part_number',$finishgood_id);
+    $this->db->where(TBL_STOCKS_ITEM.'.stock_form_id',$stock_id);
+
+    if($this->db->update(TBL_STOCKS_ITEM,$data)){
+       return TRUE;
+    }else{
+        return FALSE;
+    }
 }
 
 
@@ -22004,7 +22020,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         // $query_result = $this->db->get(TBL_FINISHED_GOODS)->result_array();
         // return $query_result;
 
-         $this->db->select(TBL_FINISHED_GOODS.'.name as part_description,'.TBL_STOCKS_ITEM.'.balence_qty_in_pcs as balance_qty_in_pcs_for_bal_qty');
+         $this->db->select(TBL_FINISHED_GOODS.'.name as part_description,'.TBL_STOCKS_ITEM.'.for_balance_stock_balance_qty_pcs as balance_qty_in_pcs_for_bal_qty');
          $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id = '.TBL_STOCKS_ITEM.'.part_number');
          $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_STOCKS_ITEM.'.part_number');
          $this->db->where(TBL_STOCKS_ITEM.'.part_number', $part_no);

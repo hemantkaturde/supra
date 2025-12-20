@@ -10215,6 +10215,35 @@ class Admin extends BaseController
         echo json_encode($json_data);
     }
 
+
+    public function forbalanceupdatestockform(){
+           $post_submit = $this->input->post();
+
+        if(!empty($post_submit)){
+            $forbalanceupdatestockform_response = array();
+
+            $this->form_validation->set_rules('balence_qty_in_pcs','Balence Qty In PCS','trim|required');
+            $this->form_validation->set_rules('finishgood_id','Finishgood Id','trim|required');
+            $this->form_validation->set_rules('stock_id','Stock Id','trim|required');
+    
+            if($this->form_validation->run() == FALSE)
+            {
+                $forbalanceupdatestockform_response['status'] = 'failure';
+                $forbalanceupdatestockform_response['error'] = array('balence_qty_in_pcs'=>strip_tags(form_error('balence_qty_in_pcs')), 'finishgood_id'=>strip_tags(form_error('finishgood_id')),'stock_id'=>strip_tags(form_error('stock_id')));
+            }else{
+
+                $forbalanceupdatestockform = $this->admin_model->forbalanceupdatestockform(trim($this->input->post('balence_qty_in_pcs')),trim($this->input->post('finishgood_id')),trim($this->input->post('stock_id')));
+            
+                if($forbalanceupdatestockform){
+                    $forbalanceupdatestockform_response['status'] = 'success';
+                    $forbalanceupdatestockform_response['error'] = array('balence_qty_in_pcs'=>strip_tags(form_error('balence_qty_in_pcs')), 'finishgood_id'=>strip_tags(form_error('finishgood_id')),'stock_id'=>strip_tags(form_error('stock_id')));
+                }
+
+            }
+            echo json_encode($forbalanceupdatestockform_response);
+        }
+    }
+
     public function omschallan(){
         $process = 'OMS challan';
         $processFunction = 'Admin/omschallan';

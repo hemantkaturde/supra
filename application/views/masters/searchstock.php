@@ -264,7 +264,7 @@
                             <div class ="total_values" style="border-top: 1px solid black">
                                 <div class="col-md-6" style="margin-top: 20px;">
                                 <div class="form-group">
-                                    <label for="balence_qty_in_pcs">Balance Qty Pcs</label>
+                                    <label for="balence_qty_in_pcs">Balance Qty Pcs</label><button type="button" id="forbalanceupdatestockform"  class="forbalanceupdatestockform btn btn-primary">For Balance Stock Form</button>
                                     <input type="text" class="form-control" id="balence_qty_in_pcs" name="balence_qty_in_pcs" readonly>
                                     </div>
                                 </div>  
@@ -279,7 +279,7 @@
                             </div>  
 
                  
-                            <div class="col-md-6" style="margin-top: 20px;">
+                            <div class="col-md-6" style="margin-top: 30px;">
                                 <div class="form-group">
                                     <button type="button" id="update_stock"  class="btn btn-primary update_stock">Update Stock</button>
                                 </div>
