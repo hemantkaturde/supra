@@ -22689,7 +22689,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
             $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_REWORK_RECORD.'.part_no');
             $this->db->join(TBL_TEAM_MASTER, TBL_TEAM_MASTER.'.id = '.TBL_REWORK_RECORD.'.team','left');
-            //   $this->db->where(TBL_REWORK_RECORD.'.part_no', $rjection_incoming_item_id);
+            $this->db->where(TBL_REWORK_RECORD.'.id', $id);
             $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.id', $rjection_incoming_item_id);
             // $this->db->where(TBL_REWORK_RECORD.'.id', $id);
             $query = $this->db->get(TBL_REWORK_RECORD);
@@ -22700,10 +22700,10 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
 
 
-    public function get_rejection_rework_item_data($rjection_incoming_item_id,$tdir_id){
+    public function get_rejection_rework_item_data($rjection_incoming_item_id,$rework_id){
 
             $this->db->select('*');
-            $this->db->where(TBL_REWORK_RECORD_REASON_DATA.'.main_rework_resaon_id', $tdir_id);
+            $this->db->where(TBL_REWORK_RECORD_REASON_DATA.'.main_rework_resaon_id', $rework_id);
             $this->db->where(TBL_REWORK_RECORD_REASON_DATA.'.incoming_item_id', $rjection_incoming_item_id);
             $query = $this->db->get(TBL_REWORK_RECORD_REASON_DATA);
             $fetch_result = $query->result_array();
