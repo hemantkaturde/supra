@@ -23932,7 +23932,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     public function printincomingitemdetailsdata($id)
     {
 
-        $this->db->select('*,'.TBL_INCOMING_DETAILS_ITEM.'.id as incoming_details_item_id,'.TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id as mainincoming,'.TBL_INCOMING_DETAILS_ITEM.'.part_number as itempart_number,'.TBL_VENDOR.'.vendor_name as name_of_vendor,'.TBL_VENDOR_PO_MASTER_ITEM.'.order_oty as vendor_po_order_qty,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_po_number,'.TBL_SUPPLIER.'.supplier_name as actual_supplier_name,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_number_actual,'.TBL_INCOMING_DETAILS_ITEM.'.invoice_qty_in_kgs as invoice_qty_in_kgs_qty');
+        $this->db->select('*,'.TBL_INCOMING_DETAILS_ITEM.'.id as incoming_details_item_id,'.TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id as mainincoming,'.TBL_INCOMING_DETAILS_ITEM.'.part_number as itempart_number,'.TBL_VENDOR.'.vendor_name as name_of_vendor,'.TBL_INCOMING_DETAILS_ITEM.'.p_o_qty as vendor_po_order_qty,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_po_number,'.TBL_SUPPLIER.'.supplier_name as actual_supplier_name,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_number_actual,'.TBL_INCOMING_DETAILS_ITEM.'.invoice_qty_in_kgs as invoice_qty_in_kgs_qty');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_INCOMING_DETAILS_ITEM.'.pre_vendor_po_number');
         $this->db->join(TBL_VENDOR_PO_MASTER_ITEM, TBL_VENDOR_PO_MASTER_ITEM.'.vendor_po_id = '.TBL_VENDOR_PO_MASTER.'.id');
@@ -23947,6 +23947,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $fetch_result = $query->result_array();
 
         return $fetch_result;
+        
       
     }
 
