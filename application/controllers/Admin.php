@@ -28227,7 +28227,7 @@ public function printincomingitemdetailslabelbarcode($id)
             style="border-collapse: collapse; width: 100%; text-align:center;">';
 
     $col = 0;
-    $totalLabels = 18; // or your dynamic count
+    $totalLabels =  $getdata_itemdetailsdata[0]['boxex_goni_bundle'];
 
     for ($i = 1; $i <= $totalLabels; $i++) {
 
