@@ -22592,6 +22592,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $this->db->group_end();
             }
 
+            
+
             $this->db->order_by(TBL_REWORK_RECORD.'.id', 'DESC');
             $query = $this->db->get(TBL_REWORK_RECORD);
             $result = $query->row();
