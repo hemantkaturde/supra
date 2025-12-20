@@ -22707,7 +22707,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
             $this->db->select('*');
             $this->db->where(TBL_REWORK_RECORD_REASON_DATA.'.main_rework_resaon_id', $rework_id);
-            //$this->db->where(TBL_REWORK_RECORD_REASON_DATA.'.incoming_item_id', $rjection_incoming_item_id);
+            $this->db->where(TBL_REWORK_RECORD_REASON_DATA.'.incoming_item_id', $rjection_incoming_item_id);
             $query = $this->db->get(TBL_REWORK_RECORD_REASON_DATA);
             $fetch_result = $query->result_array();
             return  $fetch_result;
