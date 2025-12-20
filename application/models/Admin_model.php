@@ -22571,7 +22571,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     public function fetchreworkrecordlistcount($params)
     {
-            $this->db->select('*');
+           $this->db->select('*,'.TBL_VENDOR.'.vendor_name as actual_vendor_name,'.TBL_REWORK_RECORD.'.status as rework_record_status,'.TBL_REWORK_RECORD.'.remarks as remarksas_rework,'.TBL_REWORK_RECORD.'.id as rework_id,'.TBL_REWORK_RECORD.'.date as rework_record_date');
             $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_REWORK_RECORD.'.vendor_name');
             $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_REWORK_RECORD.'.vendor_po');
             $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_REWORK_RECORD.'.part_no');
@@ -22592,6 +22592,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $this->db->group_end();
             }
 
+            $this->db->order_by(TBL_REWORK_RECORD.'.id', 'DESC');
             $query = $this->db->get(TBL_REWORK_RECORD);
             $result = $query->row();
             return $result ? (int)$result->total : 0;
