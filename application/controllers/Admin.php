@@ -28797,8 +28797,7 @@ public function addnewbalancestock(){
             </tr>
         </table>
 
-        </body></html>
-        ';
+        </body></html>';
 
         $mpdf = new \Mpdf\Mpdf(['format'=>'A4']);
         $mpdf->WriteHTML($html);
@@ -28806,8 +28805,6 @@ public function addnewbalancestock(){
         // Password protection (same password to open PDF)
         $password = 'Stock@2026'; // set your password here
         $mpdf->SetProtection([], $password, $password);
-
-
         $mpdf->Output('Balance Stock Form.pdf','D');
     }
 
