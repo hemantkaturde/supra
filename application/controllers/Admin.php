@@ -28815,9 +28815,10 @@ public function addnewbalancestock(){
         //get itemdetails by item id
         $getdata_itemdetailsdata = $this->admin_model->getdata_getbalance_stock_details_data_print_barcode(trim($balance_stock_item_id));
         $no_of_boxes_in_pcs = $getdata_itemdetailsdata[0]['no_of_boxes_in_pcs'];
+        $main_bal_id = $getdata_itemdetailsdata[0]['main_balance_stock_id'];
 
         // ---------------- QR CODE GENERATE -----------------
-        $qrData = base_url()."admin/printincomingitemdetails_pass_protected/".$id; // your QR text
+        $qrData = base_url()."admin/printincomingitemdetails_pass_protected/".$main_bal_id; // your QR text
 
         $qr = QrCode::create($qrData)
                 ->setSize(200)

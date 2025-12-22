@@ -24123,7 +24123,9 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             TBL_BALANCE_STOCK_DETAILS.'.no_of_boxes_in_pcs,'.
             TBL_BALANCE_STOCK_DETAILS.'.qty_per_box_in_pcs,'.
             TBL_BALANCE_STOCK_DETAILS.'.gross_weight_per_box_in_kgs,'.
-            TBL_BALANCE_STOCK_DETAILS.'.remark'
+            TBL_BALANCE_STOCK_DETAILS.'.remark',
+            TBL_BALANCE_STOCK_DETAILS.'.main_balance_stock_id'
+            
         );
 
         $this->db->where(TBL_BALANCE_STOCK_DETAILS.'.status',1);
