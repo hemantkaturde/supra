@@ -28771,9 +28771,9 @@ public function addnewbalancestock(){
         <h3>Balance Stock Details</h3>
 
         <div class="left-info">
-            <div><span class="title">Part Number:</span>'.$part_number.'</div>
-            <div><span class="title">Part Description:</span>'.$part_description.'</div>
-            <div><span class="title">Vendor P.O. No:</span>'.$vendor_po.'</div>
+            <div><span class="title">Part Number:</span> '.$part_number.'</div>
+            <div><span class="title">Part Description:</span> '.$part_description.'</div>
+            <div><span class="title">Vendor P.O. No:</span> '.$vendor_po.'</div>
         </div>
 
         <div class="qr-box">
