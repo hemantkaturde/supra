@@ -28745,7 +28745,7 @@ public function addnewbalancestock(){
         $html = '
         <html><head>
         <style>
-            body{ font-family: sans-serif; font-size: 13px; }
+            body{ font-family: sans-serif; font-size: 16px; }
             .left-info { width:70%; float:left; }
             .qr-box {
                 width:25%;
@@ -28754,11 +28754,11 @@ public function addnewbalancestock(){
                 height:110px;
                 text-align:center;
                 padding-top:25px;
-                font-size:12px;
+                font-size:16px;
             }
             .title{ font-weight:bold; width:180px; display:inline-block; }
-            table{ width:100%; border-collapse:collapse; font-size:12px; margin-top:15px; }
-            table th, table td { border:1px solid #000; padding:6px; text-align:center; }
+             table{ width:100%; border-collapse:collapse; font-size:16px; margin-top:15px; }
+             table tr,th, table td { border:1px solid #000; padding:0px; text-align:center;font-size:18px; }
             .clearfix{ clear:both; }
             .small-title{ font-weight:bold; }
         </style>
@@ -28784,11 +28784,11 @@ public function addnewbalancestock(){
 
         <table>
             <tr>
-                <th>#</th>
-                <th>Gross Wt / Box</th>
-                <th>No. of Boxes</th>
-                <th>Qty / Box</th>
-                <th>Total Qty</th>
+                <th style="font-size:18px;">#</th>
+                <th style="font-size:18px;">Gross Weight Per Box (in kgs)</th>
+                <th style="font-size:18px;">No of Boxes / Cartons (in pcs)</th>
+                <th style="font-size:18px;">Qty Per Box (in pcs)</th>
+                <th style="font-size:18px;">Total Qty</th>
             </tr>
             '.$rows_html.'
             <tr>
