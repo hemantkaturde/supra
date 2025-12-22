@@ -36,7 +36,7 @@ class Admin extends BaseController
         $this->datas();
 
         // Functions allowed WITHOUT LOGIN
-        $public_functions = ['printincomingitemdetails_pass_protected','printreworkrecordlotnumberrecord_pass_protected'];  // <-- apna function name
+        $public_functions = ['printincomingitemdetails_pass_protected','printreworkrecordlotnumberrecord_pass_protected','printbalancestockdetailslabel_pass_protected'];  // <-- apna function name
 
         // Current function name
         $method = $this->router->fetch_method();
@@ -28543,9 +28543,7 @@ public function addnewbalancestock(){
 
     }
 
-
-
-     public function deleteBalancedetails(){
+    public function deleteBalancedetails(){
 
         $post_submit = $this->input->post();
         if($post_submit){
@@ -28562,8 +28560,6 @@ public function addnewbalancestock(){
         }
     }
 
-
-
     public function editbalancestockdetails()
     {
         $id = trim($this->input->post('id'));
@@ -28578,7 +28574,6 @@ public function addnewbalancestock(){
             echo json_encode(["status" => "failure","message" => "No record found"]);
         }
     }
-
 
     public function printbalancestockdetailslabel($balance_stock_id){
 
@@ -28697,7 +28692,6 @@ public function addnewbalancestock(){
         $mpdf->Output('Balance Stock Form.pdf','D');
     }
 
-
     public function printbalancestockdetailslabel_pass_protected($balance_stock_id){
 
         require_once FCPATH . 'vendor/autoload.php'; // adjust path if needed
@@ -28810,12 +28804,17 @@ public function addnewbalancestock(){
         $mpdf->WriteHTML($html);
 
         // Password protection (same password to open PDF)
-        $password = 'Balancestock@2026'; // set your password here
+        $password = 'Stock@2026'; // set your password here
         $mpdf->SetProtection([], $password, $password);
 
 
         $mpdf->Output('Balance Stock Form.pdf','D');
     }
+
+
+
+
+
 
 
 
