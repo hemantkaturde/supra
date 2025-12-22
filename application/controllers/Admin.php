@@ -28582,17 +28582,15 @@ public function addnewbalancestock(){
 
     public function printbalancestockdetailslabel($balance_stock_id){
 
-
+        require_once FCPATH . 'vendor/autoload.php'; // adjust path if needed
 
         //get itemdetails by item id
         $getdata_itemdetailsdata = $this->admin_model->getpreviousbalancestock(trim($balance_stock_id));
 
         // ---------------- QR CODE GENERATE -----------------
-        $qrData = base_url()."admin/printbalancestockdetailslabel_pass_protected/".$balance_stock_id; // your QR text
+        $qrData = base_url()."admin/printbalancestockdetailslabel_pass_protected/".$id; // your QR text
 
-        $qr = QrCode::create($qrData)
-                ->setSize(200)
-                ->setMargin(10);
+        $qr = QrCode::create($qrData)->setSize(200)->setMargin(10);
 
         $writer = new PngWriter();
         $qrResult = $writer->write($qr);
@@ -28600,13 +28598,220 @@ public function addnewbalancestock(){
         // Convert QR to Base64 for mPDF image
         $qrBase64 = base64_encode($qrResult->getString());
 
+        // ==== HEADER STATIC OR DB VALUES ====
+        $part_number      = $getdata_itemdetailsdata[0]['part_number_actual'];
+        $part_description = $getdata_itemdetailsdata[0]['part_description'];
+        $vendor_po        = $getdata_itemdetailsdata[0]['po_number_actual'];
+
+        // ==== DYNAMIC LIST (DB RESULT) ====
+        // Example from DB -> each record
+
+        $getdata_getbalance_stock_details_data = $this->admin_model->getdata_getbalance_stock_details_data(trim($balance_stock_id));
+        $list = $getdata_getbalance_stock_details_data;
+
+        $grand_total = 0;
+        $rows_html = "";
+
+        $i = 1;
+        foreach($list as $row){
+            $total = $row["no_of_boxes_in_pcs"] * $row["qty_per_box_in_pcs"];
+            $grand_total += $total;
+
+            $rows_html .= "
+                <tr>
+                    <td>$i</td>
+                    <td>{$row['gross_weight_per_box_in_kgs']}</td>
+                    <td>{$row['no_of_boxes_in_pcs']}</td>
+                    <td>{$row['qty_per_box_in_pcs']}</td>
+                    <td>$total</td>
+                </tr>
+            ";
+            $i++;
+        }
+
+        // ==== HTML ====
+        $html = '
+        <html><head>
+        <style>
+            body{ font-family: sans-serif; font-size: 13px; }
+            .left-info { width:70%; float:left; }
+            .qr-box {
+                width:25%;
+                float:right;
+                border:1px solid #000;
+                height:110px;
+                text-align:center;
+                padding-top:25px;
+                font-size:12px;
+            }
+            .title{ font-weight:bold; width:180px; display:inline-block; }
+            table{ width:100%; border-collapse:collapse; font-size:12px; margin-top:15px; }
+            table th, table td { border:1px solid #000; padding:6px; text-align:center; }
+            .clearfix{ clear:both; }
+            .small-title{ font-weight:bold; }
+        </style>
+        </head><body>
+
+        <h3>Balance Stock Details</h3>
+
+        <div class="left-info">
+            <div><span class="title">Part Number:</span>'.$part_number.'</div>
+            <div><span class="title">Part Description:</span>'.$part_description.'</div>
+            <div><span class="title">Vendor P.O. No:</span>'.$vendor_po.'</div>
+        </div>
+
+        <div class="qr-box">
+            <b> 
+               <div style="position: absolute; top: 25px;bottom: 25px;  right: 25px; width: 200px; text-align: center;">
+                <img src="data:image/png;base64,' . $qrBase64 . '" width="120">
+              </div></b><br><br>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <table>
+            <tr>
+                <th>#</th>
+                <th>Gross Wt / Box</th>
+                <th>No. of Boxes</th>
+                <th>Qty / Box</th>
+                <th>Total Qty</th>
+            </tr>
+            '.$rows_html.'
+            <tr>
+                <td colspan="4" class="small-title">Grand Total</td>
+                <td><b>'.$grand_total.'</b></td>
+            </tr>
+        </table>
+
+        </body></html>
+        ';
+
+        $mpdf = new \Mpdf\Mpdf(['format'=>'A4']);
+        $mpdf->WriteHTML($html);
+
+    
+
+        $mpdf->Output('Balance Stock Form.pdf','D');
+    }
 
 
+    public function printbalancestockdetailslabel_pass_protected($balance_stock_id){
+
+        require_once FCPATH . 'vendor/autoload.php'; // adjust path if needed
+
+        //get itemdetails by item id
+        $getdata_itemdetailsdata = $this->admin_model->getpreviousbalancestock(trim($balance_stock_id));
+
+        // ---------------- QR CODE GENERATE -----------------
+        $qrData = base_url()."admin/printbalancestockdetailslabel_pass_protected/".$id; // your QR text
+
+        $qr = QrCode::create($qrData)->setSize(200)->setMargin(10);
+
+        $writer = new PngWriter();
+        $qrResult = $writer->write($qr);
+
+        // Convert QR to Base64 for mPDF image
+        $qrBase64 = base64_encode($qrResult->getString());
+
+        // ==== HEADER STATIC OR DB VALUES ====
+        $part_number      = $getdata_itemdetailsdata[0]['part_number_actual'];
+        $part_description = $getdata_itemdetailsdata[0]['part_description'];
+        $vendor_po        = $getdata_itemdetailsdata[0]['po_number_actual'];
+
+        // ==== DYNAMIC LIST (DB RESULT) ====
+        // Example from DB -> each record
+
+        $getdata_getbalance_stock_details_data = $this->admin_model->getdata_getbalance_stock_details_data(trim($balance_stock_id));
+        $list = $getdata_getbalance_stock_details_data;
+
+        $grand_total = 0;
+        $rows_html = "";
+
+        $i = 1;
+        foreach($list as $row){
+            $total = $row["no_of_boxes_in_pcs"] * $row["qty_per_box_in_pcs"];
+            $grand_total += $total;
+
+            $rows_html .= "
+                <tr>
+                    <td>$i</td>
+                    <td>{$row['gross_weight_per_box_in_kgs']}</td>
+                    <td>{$row['no_of_boxes_in_pcs']}</td>
+                    <td>{$row['qty_per_box_in_pcs']}</td>
+                    <td>$total</td>
+                </tr>
+            ";
+            $i++;
+        }
+
+        // ==== HTML ====
+        $html = '
+        <html><head>
+        <style>
+            body{ font-family: sans-serif; font-size: 13px; }
+            .left-info { width:70%; float:left; }
+            .qr-box {
+                width:25%;
+                float:right;
+                border:1px solid #000;
+                height:110px;
+                text-align:center;
+                padding-top:25px;
+                font-size:12px;
+            }
+            .title{ font-weight:bold; width:180px; display:inline-block; }
+            table{ width:100%; border-collapse:collapse; font-size:12px; margin-top:15px; }
+            table th, table td { border:1px solid #000; padding:6px; text-align:center; }
+            .clearfix{ clear:both; }
+            .small-title{ font-weight:bold; }
+        </style>
+        </head><body>
+
+        <h3>Balance Stock Details</h3>
+
+        <div class="left-info">
+            <div><span class="title">Part Number:</span>'.$part_number.'</div>
+            <div><span class="title">Part Description:</span>'.$part_description.'</div>
+            <div><span class="title">Vendor P.O. No:</span>'.$vendor_po.'</div>
+        </div>
+
+        <div class="qr-box">
+            <b> 
+               <div style="position: absolute; top: 25px;bottom: 25px;  right: 25px; width: 200px; text-align: center;">
+                <img src="data:image/png;base64,' . $qrBase64 . '" width="120">
+              </div></b><br><br>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <table>
+            <tr>
+                <th>#</th>
+                <th>Gross Wt / Box</th>
+                <th>No. of Boxes</th>
+                <th>Qty / Box</th>
+                <th>Total Qty</th>
+            </tr>
+            '.$rows_html.'
+            <tr>
+                <td colspan="4" class="small-title">Grand Total</td>
+                <td><b>'.$grand_total.'</b></td>
+            </tr>
+        </table>
+
+        </body></html>
+        ';
+
+        $mpdf = new \Mpdf\Mpdf(['format'=>'A4']);
+        $mpdf->WriteHTML($html);
+
+        // Password protection (same password to open PDF)
+        $password = 'Balancestock@2026'; // set your password here
+        $mpdf->SetProtection([], $password, $password);
 
 
-
-
-
+        $mpdf->Output('Balance Stock Form.pdf','D');
     }
 
 

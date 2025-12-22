@@ -24094,6 +24094,27 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
+    public function getdata_getbalance_stock_details_data($balance_stock_id){
+
+        $this->db->select(
+            TBL_BALANCE_STOCK_DETAILS.'.id as balance_detail_id,'.
+            TBL_BALANCE_STOCK_DETAILS.'.no_of_boxes_in_pcs,'.
+            TBL_BALANCE_STOCK_DETAILS.'.qty_per_box_in_pcs,'.
+            TBL_BALANCE_STOCK_DETAILS.'.gross_weight_per_box_in_kgs,'.
+            TBL_BALANCE_STOCK_DETAILS.'.remark'
+        );
+
+        $this->db->where(TBL_BALANCE_STOCK_DETAILS.'.status',1);
+        $this->db->where(TBL_BALANCE_STOCK_DETAILS.'.main_balance_stock_id',$balance_stock_id);
+        $this->db->order_by(TBL_BALANCE_STOCK_DETAILS.'.id','DESC');
+
+        $query = $this->db->get(TBL_BALANCE_STOCK_DETAILS);
+        $fetch_result = $query->result_array();
+        return $fetch_result;
+
+    }
+
+
     public function fetch_balance_stock_details_count($params,$main_balance_stock_id2){
 
         $this->db->select(
