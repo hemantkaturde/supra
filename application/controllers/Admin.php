@@ -28814,8 +28814,11 @@ public function addnewbalancestock(){
 
         //get itemdetails by item id
         $getdata_itemdetailsdata = $this->admin_model->getdata_getbalance_stock_details_data_print_barcode(trim($balance_stock_item_id));
+
         $no_of_boxes_in_pcs = $getdata_itemdetailsdata[0]['no_of_boxes_in_pcs'];
         $main_bal_id = $getdata_itemdetailsdata[0]['main_balance_stock_id'];
+        $po_number = $getdata_itemdetailsdata[0]['po_number_actual'];
+        $part_number_actual = $getdata_itemdetailsdata[0]['part_number_actual'];
 
         // ---------------- QR CODE GENERATE -----------------
         $qrData = base_url()."admin/printincomingitemdetails_pass_protected/".$main_bal_id; // your QR text
@@ -28856,7 +28859,7 @@ public function addnewbalancestock(){
                     <div style='text-align:center;'>
                         <img src='data:image/png;base64,".$qrBase64."' width='120'><br>
                         <span style='font-size:16px; font-weight:bold;'>P.O.No: {$po_number}</span><br>
-                        <span style='font-size:16px;'>Part No: {$part_number}</span><br>
+                        <span style='font-size:16px;'>Part No: {$part_number_actual}</span><br>
                         <span style='font-size:16px;'>Carton: {$i}/{$totalLabels}</span>
                     </div>
                 </td>

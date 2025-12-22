@@ -24118,15 +24118,17 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     
     public function getdata_getbalance_stock_details_data_print_barcode($balance_stock_item_id){
 
+        //$this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id  = '.TBL_BALANCE_STOCK_DATA.'.fg_part_number_id');
+        //$this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_BALANCE_STOCK_DATA.'.vendor_name_id');
+
         $this->db->select(
-            TBL_BALANCE_STOCK_DETAILS.'.id as balance_detail_id,'.
-            TBL_BALANCE_STOCK_DETAILS.'.no_of_boxes_in_pcs,'.
-            TBL_BALANCE_STOCK_DETAILS.'.qty_per_box_in_pcs,'.
-            TBL_BALANCE_STOCK_DETAILS.'.gross_weight_per_box_in_kgs,'.
-            TBL_BALANCE_STOCK_DETAILS.'.remark',
-            TBL_BALANCE_STOCK_DETAILS.'.main_balance_stock_id'
-            
+            TBL_BALANCE_STOCK_DETAILS.'.id as balance_detail_id,'.TBL_BALANCE_STOCK_DETAILS.'.no_of_boxes_in_pcs,'.TBL_BALANCE_STOCK_DETAILS.'.qty_per_box_in_pcs,'.TBL_BALANCE_STOCK_DETAILS.'.gross_weight_per_box_in_kgs,'.TBL_BALANCE_STOCK_DETAILS.'.remark,'.TBL_BALANCE_STOCK_DETAILS.'.main_balance_stock_id,'.TBL_VENDOR_PO_MASTER.'.po_number as po_number_actual,'.TBL_FINISHED_GOODS.'.part_number as part_number_actual'
         );
+
+        $this->db->join(TBL_BALANCE_STOCK_DATA, TBL_BALANCE_STOCK_DATA.'.id  = '.TBL_BALANCE_STOCK_DETAILS.'.main_balance_stock_id');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id  = '.TBL_BALANCE_STOCK_DATA.'.vendor_po_id');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id  = '.TBL_BALANCE_STOCK_DATA.'.fg_part_number_id');
+
 
         $this->db->where(TBL_BALANCE_STOCK_DETAILS.'.status',1);
         $this->db->where(TBL_BALANCE_STOCK_DETAILS.'.id',$balance_stock_item_id);
