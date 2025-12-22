@@ -28602,6 +28602,7 @@ public function addnewbalancestock(){
         $part_number      = $getdata_itemdetailsdata[0]['part_number_actual'];
         $part_description = $getdata_itemdetailsdata[0]['part_description'];
         $vendor_po        = $getdata_itemdetailsdata[0]['po_number_actual'];
+        $remark        = $getdata_itemdetailsdata[0]['balance_stock_remark'];
 
         // ==== DYNAMIC LIST (DB RESULT) ====
         // Example from DB -> each record
@@ -28655,9 +28656,10 @@ public function addnewbalancestock(){
         <h3>Balance Stock Details</h3>
 
         <div class="left-info">
-            <div><span class="title">Part Number:</span>'.$part_number.'</div>
-            <div><span class="title">Part Description:</span>'.$part_description.'</div>
-            <div><span class="title">Vendor P.O. No:</span>'.$vendor_po.'</div>
+            <div><span class="title">Part Number:</span> '.$part_number.'</div>
+            <div><span class="title">Part Description:</span> '.$part_description.'</div>
+            <div><span class="title">Vendor P.O. No:</span> '.$vendor_po.'</div>
+            <div><span class="title">Remark:</span> '.$remark.'</div>
         </div>
 
         <div class="qr-box">
@@ -28718,7 +28720,7 @@ public function addnewbalancestock(){
         $part_number      = $getdata_itemdetailsdata[0]['part_number_actual'];
         $part_description = $getdata_itemdetailsdata[0]['part_description'];
         $vendor_po        = $getdata_itemdetailsdata[0]['po_number_actual'];
-
+        $remark           = $getdata_itemdetailsdata[0]['balance_stock_remark'];
         // ==== DYNAMIC LIST (DB RESULT) ====
         // Example from DB -> each record
 
@@ -28774,6 +28776,7 @@ public function addnewbalancestock(){
             <div><span class="title">Part Number:</span> '.$part_number.'</div>
             <div><span class="title">Part Description:</span> '.$part_description.'</div>
             <div><span class="title">Vendor P.O. No:</span> '.$vendor_po.'</div>
+            <div><span class="title">Remark:</span> '.$remark.'</div>
         </div>
 
         <div class="qr-box">
