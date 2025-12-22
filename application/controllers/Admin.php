@@ -28808,6 +28808,78 @@ public function addnewbalancestock(){
         $mpdf->Output('Balance Stock Form.pdf','D');
     }
 
+    public function printbalancestockitemlabelbarcode($balance_stock_item_id)
+    {
+        require_once FCPATH . 'vendor/autoload.php'; // adjust path if needed
+
+        //get itemdetails by item id
+        $getdata_itemdetailsdata = $this->admin_model->getdata_getbalance_stock_details_data_print_barcode(trim($balance_stock_item_id));
+        $no_of_boxes_in_pcs = $getdata_itemdetailsdata[0]['no_of_boxes_in_pcs'];
+
+        // ---------------- QR CODE GENERATE -----------------
+        $qrData = base_url()."admin/printincomingitemdetails_pass_protected/".$id; // your QR text
+
+        $qr = QrCode::create($qrData)
+                ->setSize(200)
+                ->setMargin(10);
+
+        $writer = new PngWriter();
+        $qrResult = $writer->write($qr);
+
+        // Convert QR to Base64 for mPDF image
+        $qrBase64 = base64_encode($qrResult->getString());
+
+
+        $mpdf = new \Mpdf\Mpdf([
+            'format' => 'A4',
+            'margin_left' => 5,
+            'margin_right' => 5,
+            'margin_top' => 5,
+            'margin_bottom' => 5,
+        ]);
+
+        $html = '<table border="1" cellpadding="5" cellspacing="0" 
+                style="border-collapse: collapse; width: 100%; text-align:center;">';
+
+        $col = 0;
+        $totalLabels =  $no_of_boxes_in_pcs;
+
+        for ($i = 1; $i <= $totalLabels; $i++) {
+
+            if ($col == 0) {
+                $html .= "<tr>";
+            }
+
+            $html .= "
+                <td style='width:33%; height:220px; vertical-align:top;'>
+                    <div style='text-align:center;'>
+                        <img src='data:image/png;base64,".$qrBase64."' width='120'><br>
+                        <span style='font-size:16px; font-weight:bold;'>P.O.No: {$po_number}</span><br>
+                        <span style='font-size:16px;'>Part No: {$part_number}</span><br>
+                        <span style='font-size:16px;'>Carton: {$i}/{$totalLabels}</span>
+                    </div>
+                </td>
+            ";
+
+            $col++;
+            if ($col == 3) {
+                $html .= "</tr>";
+                $col = 0;
+            }
+        }
+
+        $html .= "</table>";
+
+        // Combine HTML
+        $mpdf->WriteHTML($barcodeHtml . $html);
+
+        // Password protection (same password to open PDF)
+        // $password = 'Supra@2025'; // set your password here
+        // $mpdf->SetProtection([], $password, $password);
+
+        // Output PDF
+        $mpdf->Output('Balance Stock Details Barcode lebal.pdf', 'D'); // 'I' = open in browser
+    }
 
 
 

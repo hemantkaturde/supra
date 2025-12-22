@@ -24115,6 +24115,27 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
+    
+    public function getdata_getbalance_stock_details_data_print_barcode($balance_stock_item_id){
+
+        $this->db->select(
+            TBL_BALANCE_STOCK_DETAILS.'.id as balance_detail_id,'.
+            TBL_BALANCE_STOCK_DETAILS.'.no_of_boxes_in_pcs,'.
+            TBL_BALANCE_STOCK_DETAILS.'.qty_per_box_in_pcs,'.
+            TBL_BALANCE_STOCK_DETAILS.'.gross_weight_per_box_in_kgs,'.
+            TBL_BALANCE_STOCK_DETAILS.'.remark'
+        );
+
+        $this->db->where(TBL_BALANCE_STOCK_DETAILS.'.status',1);
+        $this->db->where(TBL_BALANCE_STOCK_DETAILS.'.id',$balance_stock_item_id);
+
+        $query = $this->db->get(TBL_BALANCE_STOCK_DETAILS);
+        $fetch_result = $query->result_array();
+        return $fetch_result;
+
+    }
+
+
     public function fetch_balance_stock_details_count($params,$main_balance_stock_id2){
 
         $this->db->select(
@@ -24182,8 +24203,9 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['remark'] = $value['remark'];
 
                 $data[$counter]['action'] = '';
-                $data[$counter]['action'] .= "<i class='fa fa-pencil editBalancedetails' style='cursor:pointer;font-size:18px' data-id='".$value['balance_detail_id']."'></i> &nbsp;";
-                $data[$counter]['action'] .= "<i class='fa fa-trash deleteBalancedetails' style='cursor:pointer;font-size:18px;color:red' data-id='".$value['balance_detail_id']."'></i>";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."admin/printbalancestockitemlabelbarcode/".$value['balance_detail_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-tag' aria-hidden='true'></i></a>   &nbsp";
+                $data[$counter]['action'] .= "<i class='fa fa-pencil editBalancedetails' style='cursor:pointer;font-size:x-large' data-id='".$value['balance_detail_id']."'></i> &nbsp;";
+                $data[$counter]['action'] .= "<i class='fa fa-trash deleteBalancedetails' style='cursor:pointer;font-size:x-large;color:red' data-id='".$value['balance_detail_id']."'></i>";
                 $counter++;
             }
         }
