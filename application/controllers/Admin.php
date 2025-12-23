@@ -28583,7 +28583,7 @@ public function addnewbalancestock(){
         $getdata_itemdetailsdata = $this->admin_model->getpreviousbalancestock(trim($balance_stock_id));
 
         // ---------------- QR CODE GENERATE -----------------
-        $qrData = base_url()."admin/printbalancestockdetailslabel_pass_protected/".$id; // your QR text
+        $qrData = base_url()."admin/printbalancestockdetailslabel_pass_protected/".$balance_stock_id; // your QR text
 
         $qr = QrCode::create($qrData)->setSize(200)->setMargin(10);
 
@@ -28703,7 +28703,7 @@ public function addnewbalancestock(){
         $getdata_itemdetailsdata = $this->admin_model->getpreviousbalancestock(trim($balance_stock_id));
 
         // ---------------- QR CODE GENERATE -----------------
-        $qrData = base_url()."admin/printbalancestockdetailslabel_pass_protected/".$id; // your QR text
+        $qrData = base_url()."admin/printbalancestockdetailslabel_pass_protected/".$balance_stock_id; // your QR text
 
         $qr = QrCode::create($qrData)->setSize(200)->setMargin(10);
 
@@ -28830,7 +28830,7 @@ public function addnewbalancestock(){
         $part_number_actual = $getdata_itemdetailsdata[0]['part_number_actual'];
 
         // ---------------- QR CODE GENERATE -----------------
-        $qrData = base_url()."admin/printincomingitemdetails_pass_protected/".$main_bal_id; // your QR text
+        $qrData = base_url()."admin/printbalancestockdetailslabel_pass_protected/".$main_bal_id; // your QR text
 
         $qr = QrCode::create($qrData)
                 ->setSize(200)
