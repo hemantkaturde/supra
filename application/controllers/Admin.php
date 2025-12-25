@@ -26846,50 +26846,101 @@ public function downloadpreexportlabel($preexport_id,$total_no_of_carttons){
             'margin_bottom' => 0
         ]);
 
-        $total = $total_no_of_carttons;  // dynamic total cartons
+        // $total = $total_no_of_carttons;  // dynamic total cartons
 
-        $labels = [];
+        // $labels = [];
 
-        for ($i = 1; $i <= $total; $i++) {
-            $labels[] = ["SUPRA",$getpreexportbuyerdata[0]['buyer_short_name'],$getpreexportbuyerdata[0]['buyer_country_short_name'], $i . "/" . $total];
-        }
+        // for ($i = 1; $i <= $total; $i++) {
+        //     $labels[] = ["SUPRA",$getpreexportbuyerdata[0]['buyer_short_name'],$getpreexportbuyerdata[0]['buyer_country_short_name'], $i . "/" . $total];
+        // }
 
 
-        $html = '
-            <style>
-            table {
-                width: 100%;
-                border-collapse: collapse;
-            }
+        // $html = '
+        //     <style>
+        //     table {
+        //         width: 100%;
+        //         border-collapse: collapse;
+        //     }
 
-            td {
-                width: 50%;           /* 2 columns */
-                height: 33%;          /* 3 rows */
+        //     td {
+        //         width: 50%;           /* 2 columns */
+        //         height: 33%;          /* 3 rows */
 
-                text-align: center;
-                vertical-align: middle;
-                font-family: Arial, sans-serif;
-                font-weight: bold;
-                font-size: 27pt;
-                margin-top: 11px;
-                padding-top: 5%; 
-            }
+        //         text-align: center;
+        //         vertical-align: middle;
+        //         font-family: Arial, sans-serif;
+        //         font-weight: bold;
+        //         font-size: 27pt;
+        //         margin-top: 11px;
+        //         padding-top: 5%; 
+        //     }
 
-            .crtn {
-                margin-top: 3px;
-                font-size: 27pt;
-            }
-            </style>
+        //     .crtn {
+        //         margin-top: 3px;
+        //         font-size: 27pt;
+        //     }
+        //     </style>
 
-            <table>
-        ';
+        //     <table>
+        // ';
 
-        $i = $total_no_of_carttons;
+        // $i = $total_no_of_carttons;
+        // // foreach ($labels as $l) {
+
+        // //     if ($i % 2 == 0) {
+        // //         $html .= "<tr>";
+        // //     }
+
+        // //     $html .= '
+        // //         <td>
+        // //             '.$l[0].'<br>
+        // //             '.$l[1].'<br>
+        // //             '.$l[2].'<br><br>
+        // //             <span class="crtn">CRTN NO: '.$l[3].'</span>
+        // //         </td>
+        // //     ';
+
+        // //     if ($i % 2 == 1) {
+        // //         $html .= "</tr>";
+        // //     }
+
+        // //     $i++;
+        // // }
+
+
+        // // foreach ($labels as $l) {
+
+        // //         // Start a new row on every 2 labels
+        // //         if ($i % 2 == 0) {
+        // //             $html .= "<tr>";
+        // //         }
+        // //         $html .= '
+        // //             <td>
+        // //                 '.$l[0].'<br>
+        // //                 '.$l[1].'<br>
+        // //                 '.$l[2].'<br><br>
+        // //                 <span class="crtn">CRTN NO: '.$l[3].'</span>
+        // //             </td>
+        // //         ';
+
+        // //         // Close row after 2 labels
+        // //         if ($i % 2 == 1) {
+        // //             $html .= "</tr>";
+        // //         }
+
+        // //         $i++;
+        // // } 
+
+
+        // $i = 0;   // MUST start from 0 (NOT total cartons)
+
         // foreach ($labels as $l) {
 
+        //     // Start row every 2 labels
         //     if ($i % 2 == 0) {
         //         $html .= "<tr>";
         //     }
+
 
         //     $html .= '
         //         <td>
@@ -26900,47 +26951,76 @@ public function downloadpreexportlabel($preexport_id,$total_no_of_carttons){
         //         </td>
         //     ';
 
-        //     if ($i % 2 == 1) {
+        //     // Close row after 2 columns OR if it's the last label
+        //     if ($i % 2 == 1 || $i == count($labels) - 1) {
         //         $html .= "</tr>";
         //     }
 
         //     $i++;
         // }
 
-
-        // foreach ($labels as $l) {
-
-        //         // Start a new row on every 2 labels
-        //         if ($i % 2 == 0) {
-        //             $html .= "<tr>";
-        //         }
-        //         $html .= '
-        //             <td>
-        //                 '.$l[0].'<br>
-        //                 '.$l[1].'<br>
-        //                 '.$l[2].'<br><br>
-        //                 <span class="crtn">CRTN NO: '.$l[3].'</span>
-        //             </td>
-        //         ';
-
-        //         // Close row after 2 labels
-        //         if ($i % 2 == 1) {
-        //             $html .= "</tr>";
-        //         }
-
-        //         $i++;
-        // } 
+        // $html .= '</table>';
+        // $mpdf->WriteHTML($html);
+        // $mpdf->Output("Caton label ".$getpreexportbuyerdata[0]['buyer_name'].".pdf","D");
 
 
-        $i = 0;   // MUST start from 0 (NOT total cartons)
+        $total = $total_no_of_carttons;  // dynamic total cartons
+        $labels = [];
 
-        foreach ($labels as $l) {
+        for ($i = 1; $i <= $total; $i++) {
+            $labels[] = [
+                "SUPRA",
+                $getpreexportbuyerdata[0]['buyer_short_name'],
+                $getpreexportbuyerdata[0]['buyer_country_short_name'],
+                $i . "/" . $total
+            ];
+        }
+
+        $style = '
+        <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        td {
+            width: 50%;
+            height: 25%;
+            text-align: center;
+            vertical-align: middle;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            font-size: 27pt;
+            padding-top: 5%;
+        }
+        .crtn {
+            margin-top: 3px;
+            font-size: 27pt;
+        }
+        </style>
+        ';
+
+        $mpdf->WriteHTML($style);
+
+        $i = 0;
+        $totalLabels = count($labels);
+
+        foreach ($labels as $index => $l) {
+
+            // Start new page & table every 8 labels
+            if ($i % 8 == 0) {
+                if ($i != 0) {
+                    $html .= '</table>';
+                    $mpdf->WriteHTML($html);
+                    $mpdf->AddPage();
+                }
+
+                $html = '<table>';
+            }
 
             // Start row every 2 labels
             if ($i % 2 == 0) {
-                $html .= "<tr>";
+                $html .= '<tr>';
             }
-
 
             $html .= '
                 <td>
@@ -26951,17 +27031,22 @@ public function downloadpreexportlabel($preexport_id,$total_no_of_carttons){
                 </td>
             ';
 
-            // Close row after 2 columns OR if it's the last label
-            if ($i % 2 == 1 || $i == count($labels) - 1) {
-                $html .= "</tr>";
+            // Close row after 2 labels
+            if ($i % 2 == 1) {
+                $html .= '</tr>';
             }
 
             $i++;
         }
 
+        // Close remaining open tags
+        if ($i % 2 != 0) {
+            $html .= '</tr>';
+        }
         $html .= '</table>';
+
         $mpdf->WriteHTML($html);
-        $mpdf->Output("Caton label ".$getpreexportbuyerdata[0]['buyer_name'].".pdf","D");
+        $mpdf->Output("Carton label ".$getpreexportbuyerdata[0]['buyer_name'].".pdf", "D");
 }
 
 
