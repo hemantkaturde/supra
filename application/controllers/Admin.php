@@ -26872,11 +26872,11 @@ public function downloadpreexportlabel($preexport_id,$total_no_of_carttons){
                 font-weight: bold;
                 font-size: 27pt;
                 margin-top: 11px;
-                padding-top: 2%; 
+                padding-top: 5%; 
             }
 
             .crtn {
-                margin-top: 2px;
+                margin-top: 3px;
                 font-size: 27pt;
             }
             </style>
