@@ -26941,6 +26941,7 @@ public function downloadpreexportlabel($preexport_id,$total_no_of_carttons){
                 $html .= "<tr>";
             }
 
+            
             $html .= '
                 <td>
                     '.$l[0].'<br>
