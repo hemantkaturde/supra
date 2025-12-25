@@ -28311,7 +28311,7 @@ public function printincomingitemdetailslabelbarcode($id)
     ]);
 
     $html = '<table cellpadding="5" cellspacing="0" 
-            style="width: 100%;margin-top:15px; text-align:center;">';
+            style="width: 100%;margin-top:15% !important ; text-align:center;">';
 
     $col = 0;
     $totalLabels =  $getdata_itemdetailsdata[0]['boxex_goni_bundle'];
