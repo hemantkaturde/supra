@@ -28471,7 +28471,7 @@ public function printincomingitemdetailslabelbarcode($id)
                 vertical-align:middle;
                 text-align:center;
                 padding:6mm;
-                padding-top:6%;
+                padding-top:5%;
             ">
                 <div style="
                     height:100%;
