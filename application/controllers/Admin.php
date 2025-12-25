@@ -28306,7 +28306,7 @@ public function printincomingitemdetailslabelbarcode($id)
         'format' => 'A4',
         'margin_left' => 5,
         'margin_right' => 5,
-        'margin_top' => 5,
+        'margin_top' => 8,
         'margin_bottom' => 5,
     ]);
 
@@ -28334,7 +28334,7 @@ public function printincomingitemdetailslabelbarcode($id)
         ";
 
         $col++;
-        if ($col == 3) {
+        if ($col == 2) {
             $html .= "</tr>";
             $col = 0;
         }
