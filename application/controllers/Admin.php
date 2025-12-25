@@ -26994,7 +26994,7 @@ public function downloadpreexportlabel($preexport_id,$total_no_of_carttons){
             padding-top: 5%;
         }
         .crtn {
-            margin-top: 3px;
+            margin-top: 1px;
             font-size: 27pt;
         }
         </style>
