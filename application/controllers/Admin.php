@@ -28357,81 +28357,122 @@ $count = 0;
 
 $totalLabels = $getdata_itemdetailsdata[0]['boxex_goni_bundle'];
 
-for ($i = 1; $i <= $totalLabels; $i++) {
+/* ===============================
+   CASE 1: ONLY ONE LABEL
+   =============================== */
+if ($totalLabels == 1) {
 
-    /* ---- New page every 8 labels ---- */
-    if ($count % 8 == 0) {
-        if ($count != 0) {
-            $html .= '</table>';
-            $mpdf->WriteHTML($barcodeHtml . $html);
-            $mpdf->AddPage();
+    $html = '
+    <table width="100%" height="100%" cellpadding="0" cellspacing="0">
+        <tr>
+            <td style="
+                width:95mm;
+                height:65mm;
+                margin:auto;
+
+                text-align:center;
+                vertical-align:middle;
+                padding:8mm;
+            ">
+                <div style="
+                    height:100%;
+                    display:flex;
+                    flex-direction:column;
+                    justify-content:center;
+                    align-items:center;
+                ">
+                    <img src="data:image/png;base64,' . $qrBase64 . '" width="140"><br>
+                    <span style="font-size:18px; font-weight:bold;">
+                        P.O.No: ' . $po_number . '
+                    </span>
+                    <span style="font-size:18px;">
+                        Part No: ' . $part_number . '
+                    </span>
+                    <span style="font-size:18px;">
+                        Carton: 1/1
+                    </span>
+                </div>
+            </td>
+        </tr>
+    </table>';
+
+    $mpdf->WriteHTML($barcodeHtml . $html);
+}
+
+/* ===============================
+   CASE 2: MULTIPLE LABELS (8 / PAGE)
+   =============================== */
+else {
+
+    for ($i = 1; $i <= $totalLabels; $i++) {
+
+        // New page every 8 labels
+        if ($count % 8 == 0) {
+            if ($count != 0) {
+                $html .= '</table>';
+                $mpdf->WriteHTML($barcodeHtml . $html);
+                $mpdf->AddPage();
+            }
+
+            $html = '
+            <table cellspacing="0" cellpadding="0"
+                   style="width:100%; border-collapse:separate; border-spacing:4mm 6mm;">
+            ';
+            $col = 0;
         }
 
-        $html = '
-        <table cellspacing="0" cellpadding="0"
-               style="width:100%; border-collapse:separate; border-spacing:4mm 6mm;">
-        ';
-        $col = 0;
-    }
+        if ($col == 0) {
+            $html .= '<tr>';
+        }
 
-    // Start row
-    if ($col == 0) {
-        $html .= '<tr>';
-    }
-
-    $html .= '
-        <td style="
-            width:95mm;
-            height:65mm;
-
-            /* CENTER ALIGN CONTENT */
-            vertical-align:middle;
-            text-align:center;
-
-            border-radius:6mm;
-            padding:6mm;
-        ">
-            <div style="
-                height:100%;
-                display:flex;
-                flex-direction:column;
-                justify-content:center;
-                align-items:center;
+        $html .= '
+            <td style="
+                width:100mm;
+                height:72mm;
+                text-align:center;
+                vertical-align:middle;
+                padding:6mm;
             ">
-                <img src="data:image/png;base64,' . $qrBase64 . '" width="120"><br><br>
-                <span style="font-size:16px; font-weight:bold;">
-                    P.O.No: ' . $po_number . '
-                </span><br>
-                <span style="font-size:16px;">
-                    Part No: ' . $part_number . '
-                </span><br>
-                <span style="font-size:16px;">
-                    Carton: ' . $i . '/' . $totalLabels . '
-                </span>
-            </div>
-        </td>
-    ';
+                <div style="
+                    height:100%;
+                    display:flex;
+                    flex-direction:column;
+                    justify-content:center;
+                    align-items:center;
+                ">
+                    <img src="data:image/png;base64,' . $qrBase64 . '" width="120"><br>
+                    <span style="font-size:16px; font-weight:bold;">
+                        P.O.No: ' . $po_number . '
+                    </span><br>
+                    <span style="font-size:16px;">
+                        Part No: ' . $part_number . '
+                    </span><br>
+                    <span style="font-size:16px;">
+                        Carton: ' . $i . '/' . $totalLabels . '
+                    </span><br>
+                </div>
+            </td>
+        ';
 
-    $col++;
-    $count++;
+        $col++;
+        $count++;
 
-    // Close row after 2 columns
-    if ($col == 2) {
-        $html .= '</tr>';
-        $col = 0;
+        if ($col == 2) {
+            $html .= '</tr>';
+            $col = 0;
+        }
     }
+
+    if ($col != 0) {
+        $html .= '</tr>';
+    }
+
+    $html .= '</table>';
+
+    $mpdf->WriteHTML($barcodeHtml . $html);
 }
 
-/* Close last table */
-if ($col != 0) {
-    $html .= '</tr>';
-}
-$html .= '</table>';
-
-/* Render PDF */
-$mpdf->WriteHTML($barcodeHtml . $html);
-
-/* Output */
+/* ---------- OUTPUT ---------- */
 $mpdf->Output('Incoming_Item_Barcode_Label.pdf', 'D');
 
 
