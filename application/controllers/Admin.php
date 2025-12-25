@@ -26876,7 +26876,7 @@ public function downloadpreexportlabel($preexport_id,$total_no_of_carttons){
             }
 
             .crtn {
-                margin-top: 1px;
+                margin-top: 2px;
                 font-size: 27pt;
             }
             </style>
@@ -26941,7 +26941,7 @@ public function downloadpreexportlabel($preexport_id,$total_no_of_carttons){
                 $html .= "<tr>";
             }
 
-            
+
             $html .= '
                 <td>
                     '.$l[0].'<br>
