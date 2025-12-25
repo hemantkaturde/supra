@@ -28306,12 +28306,12 @@ public function printincomingitemdetailslabelbarcode($id)
         'format' => 'A4',
         'margin_left' => 5,
         'margin_right' => 5,
-        'margin_top' => 8,
+        'margin_top' => 5,
         'margin_bottom' => 5,
     ]);
 
     $html = '<table cellpadding="5" cellspacing="0" 
-            style="width: 100%; text-align:center;">';
+            style="width: 100%;margin-top:15px; text-align:center;">';
 
     $col = 0;
     $totalLabels =  $getdata_itemdetailsdata[0]['boxex_goni_bundle'];
