@@ -28454,7 +28454,7 @@ public function printincomingitemdetailslabelbarcode($id)
 
             $html = '
             <table cellspacing="0" cellpadding="0"
-                style="width:100%;margin-top:20px; border-collapse:separate; border-spacing:4mm 6mm;">
+                style="width:100%; border-collapse:separate; border-spacing:4mm 6mm;">
             ';
             $col = 0;
         }
