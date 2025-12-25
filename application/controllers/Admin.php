@@ -26870,14 +26870,14 @@ public function downloadpreexportlabel($preexport_id,$total_no_of_carttons){
                 vertical-align: middle;
                 font-family: Arial, sans-serif;
                 font-weight: bold;
-                font-size: 34pt;
-                margin-top: 8px;
+                font-size: 28pt;
+                margin-top: 10px;
                 padding-top: 5%; 
             }
 
             .crtn {
-                margin-top: 8px;
-                font-size: 30pt;
+                margin-top: 2px;
+                font-size: 28pt;
             }
             </style>
 
