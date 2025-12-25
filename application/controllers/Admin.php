@@ -26865,7 +26865,7 @@ public function downloadpreexportlabel($preexport_id,$total_no_of_carttons){
             td {
                 width: 50%;           /* 2 columns */
                 height: 33%;          /* 3 rows */
-                border: 1px solid #000;
+
                 text-align: center;
                 vertical-align: middle;
                 font-family: Arial, sans-serif;
