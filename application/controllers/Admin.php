@@ -28305,51 +28305,138 @@ public function printincomingitemdetailslabelbarcode($id)
         'format' => 'A4',
         'margin_left' => 5,
         'margin_right' => 5,
-        'margin_top' => 12,
+        'margin_top' => 5,
         'margin_bottom' => 5,
     ]);
 
-    $html = '<table cellpadding="5" cellspacing="0" 
-            style="width: 100%; text-align:center;">';
+    // $html = '<table cellpadding="5" cellspacing="0" 
+    //         style="width: 100%; text-align:center;">';
 
-    $col = 0;
-    $totalLabels =  $getdata_itemdetailsdata[0]['boxex_goni_bundle'];
+    // $col = 0;
+    // $totalLabels =  $getdata_itemdetailsdata[0]['boxex_goni_bundle'];
 
-    for ($i = 1; $i <= $totalLabels; $i++) {
+    // for ($i = 1; $i <= $totalLabels; $i++) {
 
-        if ($col == 0) {
-            $html .= "<tr>";
+    //     if ($col == 0) {
+    //         $html .= "<tr>";
+    //     }
+
+    //     $html .= "
+    //         <td style='width:33%; height:220px; vertical-align:top;'>
+    //             <div style='text-align:center;padding-top:30px'>
+    //                 <img src='data:image/png;base64,".$qrBase64."' width='120'><br>
+    //                 <span style='font-size:16px; font-weight:bold;'>P.O.No: {$po_number}</span><br>
+    //                 <span style='font-size:16px;'>Part No: {$part_number}</span><br>
+    //                 <span style='font-size:16px;'>Carton: {$i}/{$totalLabels}</span>
+    //             </div>
+    //         </td>
+    //     ";
+
+    //     $col++;
+    //     if ($col == 2) {
+    //         $html .= "</tr>";
+    //         $col = 0;
+    //     }
+    // }
+
+    // $html .= "</table>";
+
+    // // Combine HTML
+    // $mpdf->WriteHTML($barcodeHtml . $html);
+
+    // // Password protection (same password to open PDF)
+    // // $password = 'Supra@2025'; // set your password here
+    // // $mpdf->SetProtection([], $password, $password);
+
+    // // Output PDF
+    // $mpdf->Output('Incoming Item Barcode lebal.pdf', 'D'); // 'I' = open in browser
+
+$html = '';
+$col = 0;
+$count = 0;
+
+$totalLabels = $getdata_itemdetailsdata[0]['boxex_goni_bundle'];
+
+for ($i = 1; $i <= $totalLabels; $i++) {
+
+    /* ---- New page every 8 labels ---- */
+    if ($count % 8 == 0) {
+        if ($count != 0) {
+            $html .= '</table>';
+            $mpdf->WriteHTML($barcodeHtml . $html);
+            $mpdf->AddPage();
         }
 
-        $html .= "
-            <td style='width:33%; height:220px; vertical-align:top;'>
-                <div style='text-align:center;padding-top:30px'>
-                    <img src='data:image/png;base64,".$qrBase64."' width='120'><br>
-                    <span style='font-size:16px; font-weight:bold;'>P.O.No: {$po_number}</span><br>
-                    <span style='font-size:16px;'>Part No: {$part_number}</span><br>
-                    <span style='font-size:16px;'>Carton: {$i}/{$totalLabels}</span>
-                </div>
-            </td>
-        ";
-
-        $col++;
-        if ($col == 2) {
-            $html .= "</tr>";
-            $col = 0;
-        }
+        $html = '
+        <table cellspacing="0" cellpadding="0"
+               style="width:100%; border-collapse:separate; border-spacing:4mm 6mm;">
+        ';
+        $col = 0;
     }
 
-    $html .= "</table>";
+    // Start row
+    if ($col == 0) {
+        $html .= '<tr>';
+    }
 
-    // Combine HTML
-    $mpdf->WriteHTML($barcodeHtml . $html);
+    $html .= '
+        <td style="
+            width:95mm;
+            height:65mm;
 
-    // Password protection (same password to open PDF)
-    // $password = 'Supra@2025'; // set your password here
-    // $mpdf->SetProtection([], $password, $password);
+            /* CENTER ALIGN CONTENT */
+            vertical-align:middle;
+            text-align:center;
 
-    // Output PDF
-    $mpdf->Output('Incoming Item Barcode lebal.pdf', 'D'); // 'I' = open in browser
+            border-radius:6mm;
+            padding:6mm;
+        ">
+            <div style="
+                height:100%;
+                display:flex;
+                flex-direction:column;
+                justify-content:center;
+                align-items:center;
+            ">
+                <img src="data:image/png;base64,' . $qrBase64 . '" width="120"><br><br>
+                <span style="font-size:16px; font-weight:bold;">
+                    P.O.No: ' . $po_number . '
+                </span><br>
+                <span style="font-size:16px;">
+                    Part No: ' . $part_number . '
+                </span><br>
+                <span style="font-size:16px;">
+                    Carton: ' . $i . '/' . $totalLabels . '
+                </span>
+            </div>
+        </td>
+    ';
+
+    $col++;
+    $count++;
+
+    // Close row after 2 columns
+    if ($col == 2) {
+        $html .= '</tr>';
+        $col = 0;
+    }
+}
+
+/* Close last table */
+if ($col != 0) {
+    $html .= '</tr>';
+}
+$html .= '</table>';
+
+/* Render PDF */
+$mpdf->WriteHTML($barcodeHtml . $html);
+
+/* Output */
+$mpdf->Output('Incoming_Item_Barcode_Label.pdf', 'D');
+
+
+
+   
 }
 
 
