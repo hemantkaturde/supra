@@ -26990,6 +26990,7 @@ public function downloadpreexportlabel($preexport_id,$total_no_of_carttons){
             font-family: Arial, sans-serif;
             font-weight: bold;
             font-size: 27pt;
+             margin-top: 12px;
             padding-top: 5%;
         }
         .crtn {
