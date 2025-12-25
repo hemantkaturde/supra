@@ -26989,12 +26989,11 @@ public function downloadpreexportlabel($preexport_id,$total_no_of_carttons){
             vertical-align: middle;
             font-family: Arial, sans-serif;
             font-weight: bold;
-            font-size: 27pt;
-             margin-top: 12px;
-            padding-top: 5%;
+            font-size: 26pt;
+            padding-top: 7%;
         }
         .crtn {
-            margin-top: 1px;
+            margin-top: 0px;
             font-size: 27pt;
         }
         </style>
@@ -28306,12 +28305,12 @@ public function printincomingitemdetailslabelbarcode($id)
         'format' => 'A4',
         'margin_left' => 5,
         'margin_right' => 5,
-        'margin_top' => 5,
+        'margin_top' => 12,
         'margin_bottom' => 5,
     ]);
 
     $html = '<table cellpadding="5" cellspacing="0" 
-            style="width: 100%;margin-top:15% !important ; text-align:center;">';
+            style="width: 100%; text-align:center;">';
 
     $col = 0;
     $totalLabels =  $getdata_itemdetailsdata[0]['boxex_goni_bundle'];
@@ -28324,7 +28323,7 @@ public function printincomingitemdetailslabelbarcode($id)
 
         $html .= "
             <td style='width:33%; height:220px; vertical-align:top;'>
-                <div style='text-align:center;'>
+                <div style='text-align:center;padding-top:30px'>
                     <img src='data:image/png;base64,".$qrBase64."' width='120'><br>
                     <span style='font-size:16px; font-weight:bold;'>P.O.No: {$po_number}</span><br>
                     <span style='font-size:16px;'>Part No: {$part_number}</span><br>
