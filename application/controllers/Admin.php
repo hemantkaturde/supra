@@ -27075,7 +27075,7 @@ public function saverejectionreworkitemdataform(){
        
             
             $data = array(
-                'main_rework_resaon_id' =>  trim($this->input->post('rework_id')),
+                'main_rework_resaon_id' =>  trim($this->input->post('rework_reson_id_main')),
                 'incoming_item_id' =>  trim($this->input->post('incoming_item_data_id')),
                 'rejected_reason' =>  trim($this->input->post('rejected_reason')),
                 'qty_in_pcs' =>  trim($this->input->post('rework_qty_in_pcs')),
@@ -27085,10 +27085,10 @@ public function saverejectionreworkitemdataform(){
                 'rework_checked_by' =>  trim($this->input->post('rework_checked_by'))
             );
 
-            if(trim($this->input->post('rework_reson_id_main'))){
-                $rework_reson_id_main = trim($this->input->post('rework_reson_id_main'));
+            if($this->input->post('rework_id')){
+                $rework_reson_id_main = trim($this->input->post('rework_id'));
             }else{
-                $rework_reson_id_main = NULL;
+                $rework_reson_id_main = '';
             }
             
             $saverejectionreworkitemdataform= $this->admin_model->saverejectionreworkitemdataform($rework_reson_id_main,$data);

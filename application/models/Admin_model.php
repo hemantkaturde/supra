@@ -22903,10 +22903,13 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         return $fetch_result;
     }
 
-    public function saverejectionreworkitemdataform($id,$data){
+    public function saverejectionreworkitemdataform($rework_reson_id_main,$data){
+      
+        if($rework_reson_id_main != '') {
 
-        if($id != '') {
-            $this->db->where('rework_resaon_id', $id);
+    
+
+            $this->db->where('rework_resaon_id',$rework_reson_id_main);
             if($this->db->update(TBL_REWORK_RECORD_REASON_DATA, $data)){
                 return TRUE;
             } else {
@@ -22914,7 +22917,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             }
         } else {
             if($this->db->insert(TBL_REWORK_RECORD_REASON_DATA, $data)) {
-                return $this->db->insert_id();;
+                return $this->db->insert_id();
             } else {
                 return FALSE;
             }
