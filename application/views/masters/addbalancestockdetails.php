@@ -19,7 +19,7 @@
             </div>
             <div class="col-xs-6 text-right">
                 <div class="form-group">
-                    <?php if($this->session->userdata('roleText')=='Superadmin' || $this->session->userdata('roleText')=='Purchase' || $this->session->userdata('roleText')=='Sales' ){ ?>
+                    <?php if($this->session->userdata('roleText')=='Superadmin' || $this->session->userdata('roleText')=='Purchase' || $this->session->userdata('roleText')=='Stock' ){ ?>
                        <button class="btn btn-primary" id="addBalanceBtn">
                             <i class="fa fa-plus"></i> Add Balance Stock Details
                        </button>
