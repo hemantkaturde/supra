@@ -27075,7 +27075,7 @@ public function saverejectionreworkitemdataform(){
        
             
             $data = array(
-                'main_rework_resaon_id' =>  trim($this->input->post('rework_reson_id_main')),
+                'main_rework_resaon_id' =>  trim($this->input->post('main_rework_resaon_id')),
                 'incoming_item_id' =>  trim($this->input->post('incoming_item_data_id')),
                 'rejected_reason' =>  trim($this->input->post('rejected_reason')),
                 'qty_in_pcs' =>  trim($this->input->post('rework_qty_in_pcs')),
@@ -27085,13 +27085,13 @@ public function saverejectionreworkitemdataform(){
                 'rework_checked_by' =>  trim($this->input->post('rework_checked_by'))
             );
 
-            if($this->input->post('rework_id')){
-                $rework_reson_id_main = trim($this->input->post('rework_id'));
+            if($this->input->post('tbl_rework_record_reason_data_id')){
+                $tbl_rework_record_reason_data_id = trim($this->input->post('tbl_rework_record_reason_data_id'));
             }else{
-                $rework_reson_id_main = '';
+                $tbl_rework_record_reason_data_id = '';
             }
             
-            $saverejectionreworkitemdataform= $this->admin_model->saverejectionreworkitemdataform($rework_reson_id_main,$data);
+            $saverejectionreworkitemdataform= $this->admin_model->saverejectionreworkitemdataform($tbl_rework_record_reason_data_id,$data);
             if($saverejectionreworkitemdataform){
                 $saverejectionreworkitemdataform_response['status'] = 'success';
                 $saverejectionreworkitemdataform_response['error'] = array('rejected_reason'=>strip_tags(form_error('rejected_reason')),'rework_qty_in_pcs'=>strip_tags(form_error('rework_qty_in_pcs')),'after_rework_ok_in_pcs'=>strip_tags(form_error('after_rework_ok_in_pcs')),'after_rework_rej_qty_in_pcs'=>strip_tags(form_error('after_rework_rej_qty_in_pcs')),'rework_done_by'=>strip_tags(form_error('rework_done_by')),'rework_checked_by'=>strip_tags(form_error('rework_checked_by')));

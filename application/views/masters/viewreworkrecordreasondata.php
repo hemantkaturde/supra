@@ -87,7 +87,10 @@
 
                <input type="hidden" class="form-control"  id="incoming_item_data_id" name="incoming_item_data_id">
                <input type="hidden" class="form-control"  id="rework_id" name="rework_id">
-               <input type="hidden" class="form-control"  id="rework_reson_id_main" name="rework_reson_id_main">
+               <input type="hidden" class="form-control"  id="main_rework_resaon_id" name="main_rework_resaon_id">
+
+                <input type="hidden" class="form-control"  id="tbl_rework_record_reason_data_id" name="tbl_rework_record_reason_data_id">
+
 
                <div class="form-group row">
                   <label class="col-sm-4 col-form-label">Reason <span class="required">*</span></label>

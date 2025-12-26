@@ -81,7 +81,7 @@
                </div>
 
                <input type="hidden" class="form-control"  id="incoming_item_data_id" name="incoming_item_data_id">
-               <input type="hidden" class="form-control"  id="rework_id" name="rework_id" value=<?php echo $getreworkrecorddatabyid[0]['rework_id']?>>
+               <input type="hidden" class="form-control"  id="main_rework_resaon_id" name="main_rework_resaon_id" value=<?php echo $getreworkrecorddatabyid[0]['rework_id']?>>
 
                <div class="form-group row">
                   <label class="col-sm-4 col-form-label">Reason <span class="required">*</span></label>

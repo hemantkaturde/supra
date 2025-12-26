@@ -28197,9 +28197,10 @@ $('#export_excel').on('click', function() {
 						{
 								var fetchResponse = $.parseJSON(data);
 								$('#addNewModal').modal('show'); 
-								$('#rework_reson_id_main').val(fetchResponse.main_rework_resaon_id); 
+								$('#main_rework_resaon_id').val(fetchResponse.main_rework_resaon_id); 
 								$('#incoming_item_data_id').val(fetchResponse.incoming_item_id); 
-								$('#rework_id').val(fetchResponse.rework_resaon_id);  
+								// $('#rework_id').val(fetchResponse.rework_resaon_id);  
+								$('#tbl_rework_record_reason_data_id').val(fetchResponse.rework_resaon_id);  
 								$('#rejected_reason').val(fetchResponse.rejected_reason);  
 								$('#rework_qty_in_pcs').val(fetchResponse.qty_in_pcs);  
 								$('#after_rework_ok_in_pcs').val(fetchResponse.after_rework_ok_in_pcs);  
