@@ -23121,7 +23121,7 @@
 									$('#invoice_no').val(data_row_material.invoice_no);
 									$('#invoice_date').val(data_row_material.invoice_date);
 									$('#received_qty').val(data_row_material.invoice_qty);
-									$('#order_qty').val(data_row_material.invoice_qty_in_kgs);
+									$('#order_qty').val(data_row_material.p_o_qty);
 									
 								}
 							},
