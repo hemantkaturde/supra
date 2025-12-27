@@ -2806,6 +2806,22 @@ class Admin_model extends CI_Model
     }
 
 
+
+    public function vendorpartnumberforincoimglotnumber($vendor_po_number,$vendor_part_number){
+
+        $this->db->select('*,'.TBL_INCOMING_DETAILS_ITEM.'.id as incoming_item_id');
+        $this->db->join(TBL_INCOMING_DETAILS, TBL_INCOMING_DETAILS.'.id = '.TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
+        // $this->db->where(TBL_FINISHED_GOODS.'.status',1);
+        $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.part_number',$vendor_part_number);
+        $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.pre_vendor_po_number',$vendor_po_number);
+        $query = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
+        $data = $query->result_array();
+        return $data;
+
+    }
+
+
      public function chekc_if_supplie_name_exits($vendor_po_number){
 
         $this->db->select('supplier_po_number,supplier_name');
@@ -17032,8 +17048,8 @@ public function getsuppliervendorrportdata($params){
         {
             $data[$counter]['report_number'] = $value['report_number'];
             $data[$counter]['stage'] = $value['stage'];
-            $data[$counter]['challan_number'] = $value['challan_number'];
-            $data[$counter]['challan_date'] = $value['challan_date'];
+            // $data[$counter]['invoice_number'] = $value['invoice_number'];
+            // $data[$counter]['invoice_date'] = $value['invoice_date'];
             $data[$counter]['invoice_number'] = $value['invoice_number'];
             $data[$counter]['invoice_date'] = $value['invoice_date'];
             $data[$counter]['action'] = '';
@@ -17165,6 +17181,25 @@ public function getPartnumberdetailsforsupplierposuppliervendorpovendor($vendor_
     $data = $query->result_array();
     return $data;
 }
+
+
+public function getincominglotnumberdeatailsvendorsupplierform($incoming_lot_number,$vendor_part_number,$vendor_po_number){
+
+        $this->db->select('*,'.TBL_INCOMING_DETAILS_ITEM.'.id as incoming_item_id');
+        $this->db->join(TBL_INCOMING_DETAILS, TBL_INCOMING_DETAILS.'.id = '.TBL_INCOMING_DETAILS_ITEM.'.incoming_details_id');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_INCOMING_DETAILS_ITEM.'.part_number');
+        // $this->db->where(TBL_FINISHED_GOODS.'.status',1);
+        $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.part_number',$vendor_part_number);
+        $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.pre_vendor_po_number',$vendor_po_number);
+        $this->db->where(TBL_INCOMING_DETAILS_ITEM.'.id',$incoming_lot_number);
+        $query = $this->db->get(TBL_INCOMING_DETAILS_ITEM);
+        $data = $query->result_array();
+        return $data;
+}
+
+
+
+
 
 
 public function getsuppliervendorcomplaintdata($id){

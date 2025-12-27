@@ -20552,7 +20552,9 @@ public function addnewsuppliervendorcomplaint(){
                 'date_5'=>trim($this->input->post('date_5')),
                 'accept_with_deviation'=>trim($this->input->post('accept_with_deviation')),
                 'do_not_accept_with_deviation'=>trim($this->input->post('do_not_accept_with_deviation')),
-                'remark'=>trim($this->input->post('remark'))
+                'remark'=>trim($this->input->post('remark')),
+                'incoming_lot_number'=>trim($this->input->post('incoming_lot_number'))
+
 
             );
 
@@ -21237,6 +21239,36 @@ public function getVendoritemonlyforsyppliervendorcompaint(){
 }
 
 
+public function vendorpartnumberforincoimglotnumber(){
+
+    $vendor_po_number=$this->input->post('vendor_po_number');
+    $vendor_part_number=$this->input->post('vendor_part_number');
+    if($vendor_po_number) {
+        $getVendoritemsonly = $this->admin_model->vendorpartnumberforincoimglotnumber($vendor_po_number,$vendor_part_number);
+        if(count($getVendoritemsonly) >= 1) {
+            $content = $content.'<option value="">Select Lot Number</option>';
+            foreach($getVendoritemsonly as $value) {
+
+                if($this->input->post('vendor_po_number')){
+                    $selected ='selected';
+                }else{
+                    $selected ='';
+                }
+
+                $content = $content.'<option value="'.$value["incoming_item_id"].'" data_id="'.$value["incoming_item_id"].'" '.$selected.'>'.$value["lot_no"].'</option>';
+            }
+            echo $content;
+        } else {
+            echo 'failure';
+        }
+    } else {
+        echo 'failure';
+    }
+
+}
+
+
+
 public function getSuppliritemonlyforsuppliervendorcompalint(){
 
     $supplier_po_number=$this->input->post('supplier_po_number');
@@ -21290,6 +21322,25 @@ public function getPartnumberdetailsforsupplierposuppliervendorpovendor(){
 
     if($this->input->post('vendor_part_number')) {
         $getPartNameBypartid = $this->admin_model->getPartnumberdetailsforsupplierposuppliervendorpovendor($this->input->post('vendor_part_number'),$this->input->post('vendor_po_number'));
+
+        if($getPartNameBypartid){
+            $content = $getPartNameBypartid[0];
+            echo json_encode($content);
+
+        }else{
+            echo 'failure';
+        }
+       
+    } else {
+        echo 'failure';
+    }
+}
+
+
+public function getincominglotnumberdeatailsvendorsupplierform(){
+
+    if($this->input->post('incoming_lot_number')) {
+        $getPartNameBypartid = $this->admin_model->getincominglotnumberdeatailsvendorsupplierform($this->input->post('incoming_lot_number'),$this->input->post('vendor_part_number'),$this->input->post('vendor_po_number'));
 
         if($getPartNameBypartid){
             $content = $getPartNameBypartid[0];

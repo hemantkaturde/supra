@@ -22535,8 +22535,8 @@
 						{ "width": "10%", "targets": 2 },
 						{ "width": "10%", "targets": 3 },
 						{ "width": "10%", "targets": 4 },
-						{ "width": "10%", "targets": 5 },
-						{ "width": "8%", "targets": 6 }
+						// { "width": "10%", "targets": 5 },
+						// { "width": "8%", "targets": 6 }
 					],
 					responsive: true,
 					"oLanguage": {
@@ -23056,7 +23056,86 @@
 						return false;
 			
 		    });
+
+			$(document).on('change','.vendor_part_number_for_incoimg_lot_number',function(e){  
+			    e.preventDefault();
 			
+				//$(".loader_ajax").show();
+				var vendor_part_number = $('#vendor_part_number').val();
+				var vendor_po_number = $('#vendor_po_number').val();
+						
+				$('#incoming_lot_number_div').css('display','block');
+
+				$.ajax({
+						url : "<?php echo ADMIN_PATH;?>admin/vendorpartnumberforincoimglotnumber",
+						type: "POST",
+						data : {'vendor_po_number' : vendor_po_number,'vendor_part_number':vendor_part_number},
+						success: function(data, textStatus, jqXHR)
+						{
+								$(".loader_ajax").hide();
+								if(data == "failure")
+								{
+									$('#incoming_lot_number').html('<option value="">Select Lot Number</option>');
+								}
+								else
+								{
+									$('#incoming_lot_number').html(data);
+
+								}
+						},
+							error: function (jqXHR, textStatus, errorThrown)
+							{
+								$('#incoming_lot_number').html();
+							}
+					    });
+					return false;
+		    });
+
+
+			$(document).on('change','#incoming_lot_number',function(e){  
+			         e.preventDefault();
+			
+						//$(".loader_ajax").show();
+						var vendor_part_number = $('#vendor_part_number').val();
+			        	var vendor_po_number = $('#vendor_po_number').val();
+						var incoming_lot_number = $('#incoming_lot_number').val();
+						
+						$.ajax({
+							url : "<?php echo ADMIN_PATH;?>admin/getincominglotnumberdeatailsvendorsupplierform",
+							type: "POST",
+							data : {'incoming_lot_number' : incoming_lot_number,'vendor_part_number':vendor_part_number,'vendor_po_number':vendor_po_number},
+							success: function(data, textStatus, jqXHR)
+							{
+								$(".loader_ajax").hide();
+								if(data == "failure")
+								{
+									$('#invoice_no').val('');
+									$('#invoice_date').val('');
+									$('#received_qty').val('');
+                                    $('#order_qty').val('');
+									
+								}
+								else
+								{
+									var data_row_material = jQuery.parseJSON( data );
+									$('#invoice_no').val(data_row_material.invoice_no);
+									$('#invoice_date').val(data_row_material.invoice_date);
+									$('#received_qty').val(data_row_material.invoice_qty);
+									$('#order_qty').val(data_row_material.invoice_qty_in_kgs);
+									
+								}
+							},
+							error: function (jqXHR, textStatus, errorThrown)
+							{
+									$('#invoice_no').val('');
+									$('#invoice_date').val('');
+									$('#received_qty').val('');
+									$('#order_qty').val('');
+							}
+						});
+						return false;
+			
+		    });
 
 		</script>
 <?php } ?>

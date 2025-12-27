@@ -154,24 +154,6 @@
                                             <p class="error challan_date_error"></p>
                                         </div>
                                     </div> -->
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label for="invoice_no">Invoice No / Challan No</label>
-                                            <input type="text" class="form-control" id="invoice_no" name="invoice_no">
-                                            <p class="error invoice_no_error"></p>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label for="invoice_date">Invoice Date / Challan Date</label>
-                                            <input type="text" class="form-control datepicker" id="invoice_date" name="invoice_date">
-                                            <p class="error invoice_date_error"></p>
-                                        </div>
-                                    </div>
 
                                     <div class="col-md-3">
                                         <div class="form-group">
@@ -185,6 +167,7 @@
                                         </div>
                                     </div>
 
+                                    
                                     <div class="col-md-3" id="supplier_div" style="display:none"> 
                                         <div class="form-group">
                                             <label for="supplier_name">Supplier Name</label>
@@ -210,6 +193,12 @@
                                             <p class="error vendor_name_error"></p>
                                         </div>
                                     </div>
+
+                                </div>
+
+                                <div class="row">
+                                    
+
                                 </div>
 
                                 <div class="row">
@@ -246,7 +235,7 @@
                                     <div class="col-md-3" id="vendor_part_number_div"  style="display:none">
                                         <div class="form-group">
                                             <label for="vendor_part_number">Part Number / Drawing No / Rev No</label>
-                                            <select class="form-control" name="vendor_part_number" id="vendor_part_number">
+                                            <select class="form-control vendor_part_number_for_incoimg_lot_number" name="vendor_part_number" id="vendor_part_number">
                                             </select> 
                                             <p class="error vendor_part_number_error"></p>
                                         </div>
@@ -267,9 +256,35 @@
                                             <p class="error problem_occurs_error"></p>
                                         </div>
                                     </div> -->
+
+                                    <div class="col-md-3" id="incoming_lot_number_div"  style="display:none">
+                                        <div class="form-group">
+                                            <label for="incoming_lot_number">Lot Number</label>
+                                            <select class="form-control" name="incoming_lot_number" id="incoming_lot_number">
+                                            </select> 
+                                            <p class="error incoming_lot_number_error"></p>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="row">
+                                     <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="invoice_no">Invoice No / Challan No</label>
+                                            <input type="text" class="form-control" id="invoice_no" name="invoice_no">
+                                            <p class="error invoice_no_error"></p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="invoice_date">Invoice Date / Challan Date</label>
+                                            <input type="text" class="form-control datepicker" id="invoice_date" name="invoice_date">
+                                            <p class="error invoice_date_error"></p>
+                                        </div>
+                                    </div>
+
+
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="received_qty">Received Qty</label>
@@ -438,6 +453,14 @@
                                             <p class="error date_5_error"></p>
                                         </div>
                                     </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="remark">Remark</label>
+                                            <input type="text" class="form-control" id="remark" name="remark">
+                                            <p class="error remark_error"></p>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="row">
@@ -456,14 +479,6 @@
                                             <p class="error do_not_accept_with_deviation_error"></p>
                                         </div>
                                     </div> -->
-
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label for="remark">Remark</label>
-                                            <input type="text" class="form-control" id="remark" name="remark">
-                                            <p class="error remark_error"></p>
-                                        </div>
-                                    </div>
                                 </div>
 
                             </div>
