@@ -21220,7 +21220,7 @@ public function getVendoritemonlyforsyppliervendorcompaint(){
             $content = $content.'<option value="">Select Part Number</option>';
             foreach($getVendoritemsonly as $value) {
 
-                if($this->input->post('vendor_part_number_id_edit')==$value["vendor_po_item_id"]){
+                if($this->input->post('vendor_part_number_id_edit')==$value["fin_id"]){
                     $selected ='selected';
                 }else{
                     $selected ='';
