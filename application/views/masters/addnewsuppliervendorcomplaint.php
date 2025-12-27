@@ -139,27 +139,27 @@
                                         </div>
                                     </div>
                         
-                                    <div class="col-md-3">
+                                    <!-- <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="challan_no">Challan No</label>
                                                <input type="text" class="form-control" id="challan_no" name="challan_no">
                                             <p class="error challan_no_error"></p>
                                         </div>
-                                    </div>
+                                    </div> -->
 
-                                    <div class="col-md-3">
+                                    <!-- <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="challan_date">Challan Date</label>
                                                 <input type="text" class="form-control datepicker" id="challan_date" name="challan_date">                                   </select>
                                             <p class="error challan_date_error"></p>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="invoice_no">Invoice No</label>
+                                            <label for="invoice_no">Invoice No / Challan No</label>
                                             <input type="text" class="form-control" id="invoice_no" name="invoice_no">
                                             <p class="error invoice_no_error"></p>
                                         </div>
@@ -167,7 +167,7 @@
                                     
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="invoice_date">Invoice Date</label>
+                                            <label for="invoice_date">Invoice Date / Challan Date</label>
                                             <input type="text" class="form-control datepicker" id="invoice_date" name="invoice_date">
                                             <p class="error invoice_date_error"></p>
                                         </div>
@@ -316,7 +316,7 @@
 
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="root_case">Root Cause</label>
+                                            <label for="root_case">Immediate corrective action</label>
                                             <input type="text" class="form-control" id="root_case" name="root_case">
                                             <p class="error root_case_error"></p>
                                         </div>
@@ -325,7 +325,7 @@
 
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="correction">Correction</label>
+                                            <label for="correction">root_case</label>
                                             <input type="text" class="form-control" id="correction" name="correction">
                                             <p class="error correction_error"></p>
                                         </div>
