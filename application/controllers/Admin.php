@@ -26028,14 +26028,14 @@ public function printinspectionreportlabel($id)
 
 $getTdirdata= $this->admin_model->getTdirdata($id);
 
-// mPDF settings
-  $mpdf = new \Mpdf\Mpdf([
+   // mPDF settings
+    $mpdf = new \Mpdf\Mpdf([
         'mode' => 'utf-8',
         'format' => 'A4',
-        'margin_left' => 8,
-        'margin_right' => 8,
-        'margin_top' => 10,
-        'margin_bottom' => 10
+        'margin_left' => 5,
+        'margin_right' => 5,
+        'margin_top' => 5,
+        'margin_bottom' => 5
     ]);
 
     $totalLabels = 12;
@@ -26102,6 +26102,8 @@ $getTdirdata= $this->admin_model->getTdirdata($id);
 
     $mpdf->WriteHTML($html);
     $mpdf->Output("Export Label.pdf", "D");
+
+
 }
 
 
