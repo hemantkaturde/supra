@@ -17199,9 +17199,6 @@ public function getincominglotnumberdeatailsvendorsupplierform($incoming_lot_num
 
 
 
-
-
-
 public function getsuppliervendorcomplaintdata($id){
 
     $this->db->select('*,'.TBL_SUPPLIER_VENDOR_COMPALINT.'.id as suppliervendor_compalint_id');

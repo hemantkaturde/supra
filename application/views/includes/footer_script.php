@@ -22686,12 +22686,13 @@
 
 								var vendor_part_number_id =  $('#vendor_part_number_id').val();
 
+								var vendor_part_number_id_edit =  $('#vendor_part_number_id_edit').val();
 
 
 								$.ajax({
 									url : "<?php echo ADMIN_PATH;?>admin/getVendoritemonlyforsyppliervendorcompaint",
 									type: "POST",
-									data : {'vendor_po_number' : vendor_po_number,'vendor_part_number_id':vendor_part_number_id},
+									data : {'vendor_po_number' : vendor_po_number,'vendor_part_number_id':vendor_part_number_id,'vendor_part_number_id_edit':vendor_part_number_id_edit},
 									success: function(data, textStatus, jqXHR)
 									{
 										$(".loader_ajax").hide();
