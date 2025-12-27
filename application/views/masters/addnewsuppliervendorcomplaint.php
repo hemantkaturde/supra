@@ -316,7 +316,7 @@
 
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="root_case">Root Case</label>
+                                            <label for="root_case">Root Cause</label>
                                             <input type="text" class="form-control" id="root_case" name="root_case">
                                             <p class="error root_case_error"></p>
                                         </div>
@@ -365,7 +365,7 @@
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="corrective_action_taken">Corrective Action Taken</label>
+                                            <label for="corrective_action_taken">Future Corrective Action</label>
                                             <input type="text" class="form-control" id="corrective_action_taken" name="corrective_action_taken">
                                             <p class="error corrective_action_taken_error"></p>
                                         </div>
@@ -423,17 +423,17 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-3">
+                                    <!-- <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="report_close_by">Report Close By</label>
                                             <input type="text" class="form-control" id="report_close_by" name="report_close_by">
                                             <p class="error report_close_by_error"></p>
                                         </div>
-                                    </div>
+                                    </div> -->
 
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="date_5">Date</label>
+                                            <label for="date_5">Report Close By Date</label>
                                             <input type="text" class="form-control datepicker" id="date_5" name="date_5">
                                             <p class="error date_5_error"></p>
                                         </div>
@@ -441,7 +441,7 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-3">
+                                    <!-- <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="accept_with_deviation">Accept With Deviation</label>
                                             <input type="text" class="form-control" id="accept_with_deviation" name="accept_with_deviation">
@@ -455,7 +455,7 @@
                                             <input type="text" class="form-control" id="do_not_accept_with_deviation" name="do_not_accept_with_deviation">
                                             <p class="error do_not_accept_with_deviation_error"></p>
                                         </div>
-                                    </div>
+                                    </div> -->
 
                                     <div class="col-md-3">
                                         <div class="form-group">
