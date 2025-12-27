@@ -154,7 +154,7 @@
                                     <div class="col-md-3" id="supplier_part_number_div"  style="display:none">
                                         <div class="form-group">
                                             <label for="supplier_part_number">Part Number / Drawing No / Rev No</label>
-                                            <select class="form-control" name="supplier_part_number" id="supplier_part_number">
+                                            <select class="form-control vendor_part_number_for_incoimg_lot_number" name="supplier_part_number" id="supplier_part_number">
                                             </select> 
                                             <p class="error supplier_part_number_error"></p>
                                         </div>
