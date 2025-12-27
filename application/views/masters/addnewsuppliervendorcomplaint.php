@@ -316,7 +316,7 @@
 
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="root_case">Immediate corrective action</label>
+                                            <label for="root_case">Root Case</label>
                                             <input type="text" class="form-control" id="root_case" name="root_case">
                                             <p class="error root_case_error"></p>
                                         </div>
@@ -325,7 +325,7 @@
 
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="correction">root_case</label>
+                                            <label for="correction">Immediate Corrective Action</label>
                                             <input type="text" class="form-control" id="correction" name="correction">
                                             <p class="error correction_error"></p>
                                         </div>
