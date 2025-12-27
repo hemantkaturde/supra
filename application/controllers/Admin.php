@@ -21971,11 +21971,7 @@ public function downlaodsuppliervendorcomplaint($id){
         <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
             <tr style="border: 1px solid black;" valign="top">
                 <td width="" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
-                    <p>REPORT CLOSED BY DATE: </p>
-                </td> 
-
-                <td width="" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
-                     <p>'.$date_5.'</p>
+                    <p>REPORT CLOSED BY DATE: '.$date_5.'</p>
                 </td> 
             </tr>
          </table>
