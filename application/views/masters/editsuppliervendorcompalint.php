@@ -41,6 +41,9 @@
                                     <input type="hidden" class="form-control" id="vendor_part_number_id" name="vendor_part_number_id" value="<?=$getsuppliervendorcomplaintdata['vendor_part_number_id']?>" readonly>
                                     <input type="hidden" class="form-control" id="incoming_lot_number_id_edit" name="incoming_lot_number_id_edit" value="<?=$getsuppliervendorcomplaintdata['incoming_lot_number']?>" readonly>
 
+                                    <input type="hidden" class="form-control" id="vendor_part_number_id_edit" name="vendor_part_number_id_edit" value="<?=$getsuppliervendorcomplaintdata['vendor_part_number_id']?>" readonly>
+
+
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="report_number">Report No <span class="required">*</span></label>
@@ -269,7 +272,7 @@
 
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="correction">Correction</label>
+                                            <label for="correction">Immediate Corrective Action</label>
                                             <input type="text" class="form-control" id="correction"  value="<?=$getsuppliervendorcomplaintdata['correction']?>" name="correction">
                                             <p class="error correction_error"></p>
                                         </div>
