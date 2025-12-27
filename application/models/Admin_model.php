@@ -18173,7 +18173,7 @@ public function fetchseachbypartnumberreportdata($params,$finish_good_part_numbe
 }
 
 public function getsuppliervendorcomplaintdownalod($id){
-    $this->db->select(TBL_SUPPLIER_VENDOR_COMPALINT.'.*,'.TBL_SUPPLIER_VENDOR_COMPALINT.'.id as suppliervendor_compalint_id,'.TBL_SUPPLIER_VENDOR_COMPALINT.'.report_number,'.TBL_SUPPLIER.'.supplier_name,'.TBL_VENDOR.'.vendor_name,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_po,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po,'.TBL_FINISHED_GOODS.'.part_number as vendor_po_part,'.TBL_RAWMATERIAL.'.part_number as supplier_po_part,'.TBL_INCOMING_DETAILS_ITEM.'.lot_no as lot_numbaer_actual');
+    $this->db->select(TBL_SUPPLIER_VENDOR_COMPALINT.'.*,'.TBL_SUPPLIER_VENDOR_COMPALINT.'.id as suppliervendor_compalint_id,'.TBL_SUPPLIER_VENDOR_COMPALINT.'.report_number,'.TBL_SUPPLIER.'.supplier_name,'.TBL_VENDOR.'.vendor_name,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_po,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po,'.TBL_FINISHED_GOODS.'.part_number as vendor_po_part,'.TBL_RAWMATERIAL.'.part_number as supplier_po_part,'.TBL_INCOMING_DETAILS_ITEM.'.lot_no as lot_numbaer_actual,'.TBL_SUPPLIER_VENDOR_COMPALINT.'.invoice_number as actual_invoice_no,'.TBL_SUPPLIER_VENDOR_COMPALINT.'.invoice_date as actual_invoice_date');
     $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_SUPPLIER_VENDOR_COMPALINT.'.supplier_id','left');
     $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_SUPPLIER_VENDOR_COMPALINT.'.vendor_id','left');
     $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_SUPPLIER_VENDOR_COMPALINT.'.supplier_po_id','left');

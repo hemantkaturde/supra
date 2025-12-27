@@ -21593,6 +21593,39 @@ public function downlaodsuppliervendorcomplaint($id){
 
     $getsuppliervendorcomplaintdownalod = $this->admin_model->getsuppliervendorcomplaintdownalod($id);
 
+
+
+    if($getsuppliervendorcomplaintdownalod[0]['date_1']=="0000-00-00"){
+        $date_1 = '';
+    }else{
+        $date_1 = date('d-m-Y',strtotime($getsuppliervendorcomplaintdownalod[0]['date_1']));
+    }
+
+
+    if($getsuppliervendorcomplaintdownalod[0]['date_2']=="0000-00-00"){
+        $date_2 = '';
+    }else{
+        $date_2 = date('d-m-Y',strtotime($getsuppliervendorcomplaintdownalod[0]['date_2']));
+    }
+
+    if($getsuppliervendorcomplaintdownalod[0]['date_3']=="0000-00-00"){
+        $date_3 = '';
+    }else{
+        $date_3 = date('d-m-Y',strtotime($getsuppliervendorcomplaintdownalod[0]['date_3']));
+    }
+
+    if($getsuppliervendorcomplaintdownalod[0]['date_4']=="0000-00-00"){
+        $date_4 = '';
+    }else{
+        $date_4 = date('d-m-Y',strtotime($getsuppliervendorcomplaintdownalod[0]['date_4']));
+    }
+
+    if($getsuppliervendorcomplaintdownalod[0]['date_5']=="0000-00-00"){
+        $date_5 = '';
+    }else{
+        $date_5 = date('d-m-Y',strtotime($getsuppliervendorcomplaintdownalod[0]['date_5']));
+    }
+
     $mpdf = new \Mpdf\Mpdf();
     $html = '<table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:13px">
                 <tr>
@@ -21655,7 +21688,7 @@ public function downlaodsuppliervendorcomplaint($id){
                 </td>
 
                 <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
-                    <p>'.$getsuppliervendorcomplaintdownalod[0]['invoice_no'].' </p>
+                    <p>'.$getsuppliervendorcomplaintdownalod[0]['actual_invoice_no'].' </p>
                 </td>
             </tr>
         </table>
@@ -21676,7 +21709,7 @@ public function downlaodsuppliervendorcomplaint($id){
                 </td>
 
                 <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
-                    <p>'.date('d-m-Y',strtotime($getsuppliervendorcomplaintdownalod[0]['invoice_date'])).' </p>
+                    <p>'.date('d-m-Y',strtotime($getsuppliervendorcomplaintdownalod[0]['actual_invoice_date'])).' </p>
                 </td>
             </tr>
         </table>
@@ -21765,7 +21798,7 @@ public function downlaodsuppliervendorcomplaint($id){
            <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
             <tr style="border: 1px solid black;" valign="top">
                 <td width="100%" style="padding: 5px;text-align: left;">
-                    <p>3.Immediate Corrective Action: </p>
+                    <p>2.IMMEDIATE CORRECTIVE ACTION: </p>
                 </td> 
             </tr>
 
@@ -21783,7 +21816,7 @@ public function downlaodsuppliervendorcomplaint($id){
             <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
             <tr style="border: 1px solid black;" valign="top">
                 <td width="100%" style="padding: 5px;text-align: left;">
-                    <p>2.ROOT CAUSE: </p>
+                    <p>3.ROOT CAUSE: </p>
                 </td> 
             </tr>
 
@@ -21801,7 +21834,7 @@ public function downlaodsuppliervendorcomplaint($id){
           <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
             <tr style="border: 1px solid black;" valign="top">
                 <td width="60%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
-                    <p>5.FUTUREt CORRECTION ACTION: </p>
+                    <p>4.FUTURE CORRECTION ACTION: </p>
                 </td> 
 
                 <td width="20%" style="padding: 5px;text-align: center;border-right: #000000 1px solid">
@@ -21835,7 +21868,7 @@ public function downlaodsuppliervendorcomplaint($id){
 
                 <td width="20%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
                        <p>'. str_repeat('&nbsp;', 5).'</p>
-                       <p>'. $getsuppliervendorcomplaintdownalod[0]['date_2'].'</p>
+                       <p>'. $date_2.'</p>
                        <p>'. str_repeat('&nbsp;', 5).'</p>
                        <p>'. str_repeat('&nbsp;', 5).'</p>
                        <p>'. str_repeat('&nbsp;', 5).'</p>
@@ -21846,7 +21879,7 @@ public function downlaodsuppliervendorcomplaint($id){
          <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
             <tr style="border: 1px solid black;" valign="top">
                 <td width="60%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
-                    <p>6.EFFECTIVE ACTION: </p>
+                    <p>5.EFFECTIVE ACTION: </p>
                 </td> 
 
                 <td width="20%" style="padding: 5px;text-align: center;border-right: #000000 1px solid">
@@ -21880,7 +21913,7 @@ public function downlaodsuppliervendorcomplaint($id){
 
                 <td width="20%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
                        <p>'. str_repeat('&nbsp;', 5).'</p>
-                       <p>'. $getsuppliervendorcomplaintdownalod[0]['date_1'].'</p>
+                       <p>'. $date_1.'</p>
                        <p>'. str_repeat('&nbsp;', 5).'</p>
                        <p>'. str_repeat('&nbsp;', 5).'</p>
                        <p>'. str_repeat('&nbsp;', 5).'</p>
@@ -21917,7 +21950,7 @@ public function downlaodsuppliervendorcomplaint($id){
                 </td> 
 
                 <td width="25%" style="padding: 5px;text-align: center;border-right: #000000 1px solid">
-                       <p>'. $getsuppliervendorcomplaintdownalod[0]['date_3'].'</p>
+                       <p>'.  $date_3.'</p>
                        <p>'. str_repeat('&nbsp;', 5).'</p>
                 </td> 
 
@@ -21927,7 +21960,7 @@ public function downlaodsuppliervendorcomplaint($id){
                 </td> 
 
                 <td width="25%" style="padding: 5px;text-align: center;border-right: #000000 1px solid">
-                       <p>'. $getsuppliervendorcomplaintdownalod[0]['date_4'].'</p>
+                       <p>'. $date_4.'</p>
                        <p>'. str_repeat('&nbsp;', 5).'</p>
                 </td> 
             </tr>
@@ -21937,20 +21970,12 @@ public function downlaodsuppliervendorcomplaint($id){
          
         <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
             <tr style="border: 1px solid black;" valign="top">
-                <td width="25%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
-                    <p>REPORT CLOSED BY: </p>
+                <td width="" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
+                    <p>REPORT CLOSED BY DATE: </p>
                 </td> 
 
-                <td width="50%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
-                   <p>'. $getsuppliervendorcomplaintdownalod[0]['report_close_by'].'</p>
-                </td> 
-
-                <td width="12.5%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
-                    <p>DATE: </p>
-                </td> 
-
-                <td width="12.5%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
-                     <p>'. $getsuppliervendorcomplaintdownalod[0]['date_5'].'</p>
+                <td width="" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
+                     <p>'.$date_5.'</p>
                 </td> 
             </tr>
          </table>
