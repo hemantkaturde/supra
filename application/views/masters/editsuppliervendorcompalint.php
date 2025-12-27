@@ -39,6 +39,8 @@
                                     <input type="hidden" class="form-control" id="vendor_po_id" name="vendor_po_id" value="<?=$getsuppliervendorcomplaintdata['vendor_po_id']?>" readonly>
                                     <input type="hidden" class="form-control" id="supplier_part_number_id" name="supplier_part_number_id" value="<?=$getsuppliervendorcomplaintdata['supplier_part_number_id']?>" readonly>
                                     <input type="hidden" class="form-control" id="vendor_part_number_id" name="vendor_part_number_id" value="<?=$getsuppliervendorcomplaintdata['vendor_part_number_id']?>" readonly>
+                                    <input type="hidden" class="form-control" id="incoming_lot_number_id_edit" name="incoming_lot_number_id_edit" value="<?=$getsuppliervendorcomplaintdata['incoming_lot_number']?>" readonly>
+
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="report_number">Report No <span class="required">*</span></label>
@@ -61,7 +63,7 @@
                                         </div>
                                     </div>
                         
-                                    <div class="col-md-3">
+                                    <!-- <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="challan_no">Challan No</label>
                                                <input type="text" class="form-control" id="challan_no" value="<?=$getsuppliervendorcomplaintdata['challan_number']?>" name="challan_no">
@@ -75,25 +77,7 @@
                                                 <input type="text" class="form-control datepicker" id="challan_date" value="<?=$getsuppliervendorcomplaintdata['challan_date']?>" name="challan_date">                                  
                                             <p class="error challan_date_error"></p>
                                         </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label for="invoice_no">Invoice No</label>
-                                            <input type="text" class="form-control" id="invoice_no" value="<?=$getsuppliervendorcomplaintdata['invoice_number']?>"  name="invoice_no">
-                                            <p class="error invoice_no_error"></p>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label for="invoice_date">Invoice Date</label>
-                                            <input type="text" class="form-control datepicker" id="invoice_date"  value="<?=$getsuppliervendorcomplaintdata['invoice_date']?>" name="invoice_date">
-                                            <p class="error invoice_date_error"></p>
-                                        </div>
-                                    </div>
+                                    </div> -->
 
                                     <div class="col-md-3">
                                         <div class="form-group">
@@ -107,6 +91,8 @@
                                         </div>
                                     </div>
 
+
+                                    
                                     <div class="col-md-3" id="supplier_div" style="display:none"> 
                                         <div class="form-group">
                                             <label for="supplier_name">Supplier Name</label>
@@ -132,6 +118,12 @@
                                             <p class="error vendor_name_error"></p>
                                         </div>
                                     </div>
+                                </div>
+
+                                <div class="row">
+                                  
+                                    
+
                                 </div>
 
                               
@@ -190,9 +182,38 @@
                                             <p class="error problem_occurs_error"></p>
                                         </div>
                                     </div> -->
+
+
+                                    <div class="col-md-3" id="incoming_lot_number_div"  style="display:none">
+                                        <div class="form-group">
+                                            <label for="incoming_lot_number">Lot Number</label>
+                                            <select class="form-control" name="incoming_lot_number" id="incoming_lot_number">
+                                            </select> 
+                                            <p class="error incoming_lot_number_error"></p>
+                                        </div>
+                                    </div>
+
                                 </div>
 
                                 <div class="row">
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="invoice_no">Invoice No</label>
+                                            <input type="text" class="form-control" id="invoice_no" value="<?=$getsuppliervendorcomplaintdata['invoice_number']?>"  name="invoice_no">
+                                            <p class="error invoice_no_error"></p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="invoice_date">Invoice Date</label>
+                                            <input type="text" class="form-control datepicker" id="invoice_date"  value="<?=$getsuppliervendorcomplaintdata['invoice_date']?>" name="invoice_date">
+                                            <p class="error invoice_date_error"></p>
+                                        </div>
+                                    </div>
+
+                                
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="received_qty">Received Qty</label>
@@ -288,7 +309,7 @@
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="corrective_action_taken">Corrective Action Taken</label>
+                                            <label for="corrective_action_taken">Future Corrective Action</label>
                                             <input type="text" class="form-control" id="corrective_action_taken"  value="<?=$getsuppliervendorcomplaintdata['corrective_action_taken']?>" name="corrective_action_taken">
                                             <p class="error corrective_action_taken_error"></p>
                                         </div>
@@ -346,25 +367,33 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-3">
+                                    <!-- <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="report_close_by">Report Close By</label>
                                             <input type="text" class="form-control" id="report_close_by" value="<?=$getsuppliervendorcomplaintdata['report_close_by']?>" name="report_close_by">
                                             <p class="error report_close_by_error"></p>
                                         </div>
+                                    </div> -->
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="date_5">Report Close By Date</label>
+                                            <input type="text" class="form-control datepicker" id="date_5" name="date_5" value="<?=$getsuppliervendorcomplaintdata['date_5']?>">
+                                            <p class="error date_5_error"></p>
+                                        </div>
                                     </div>
 
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="date_5">Date</label>
-                                            <input type="text" class="form-control datepicker" id="date_5" name="date_5" value="<?=$getsuppliervendorcomplaintdata['date_5']?>">
-                                            <p class="error date_5_error"></p>
+                                            <label for="remark">Remark</label>
+                                            <input type="text" class="form-control" id="remark" name="remark" value="<?=$getsuppliervendorcomplaintdata['remark']?>">
+                                            <p class="error remark_error"></p>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-3">
+                                    <!-- <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="accept_with_deviation">Accept With Deviation</label>
                                             <input type="text" class="form-control" id="accept_with_deviation" name="accept_with_deviation" value="<?=$getsuppliervendorcomplaintdata['accept_with_deviation']?>">
@@ -378,15 +407,9 @@
                                             <input type="text" class="form-control" id="do_not_accept_with_deviation" name="do_not_accept_with_deviation" value="<?=$getsuppliervendorcomplaintdata['do_not_accept_with_deviation']?>">
                                             <p class="error do_not_accept_with_deviation_error"></p>
                                         </div>
-                                    </div>
+                                    </div> -->
 
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label for="remark">Remark</label>
-                                            <input type="text" class="form-control" id="remark" name="remark" value="<?=$getsuppliervendorcomplaintdata['remark']?>">
-                                            <p class="error remark_error"></p>
-                                        </div>
-                                    </div>
+                                  
                                 </div>
 
                             </div>

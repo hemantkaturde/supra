@@ -22702,28 +22702,60 @@
 										else
 										{
 											$('#vendor_part_number').html(data);
+				
+													//$(".loader_ajax").show();
+													var vendor_part_number = $('#vendor_part_number').val();
+													var vendor_po_number = $('#vendor_po_number').val();
+
+													var incoming_lot_number_id_edit = $('#incoming_lot_number_id_edit').val();
+													 
+															
+													$('#incoming_lot_number_div').css('display','block');
+
+													$.ajax({
+															url : "<?php echo ADMIN_PATH;?>admin/vendorpartnumberforincoimglotnumber",
+															type: "POST",
+															data : {'vendor_po_number' : vendor_po_number,'vendor_part_number':vendor_part_number,'incoming_lot_number_id_edit':incoming_lot_number_id_edit},
+															success: function(data, textStatus, jqXHR)
+															{
+																	$(".loader_ajax").hide();
+																	if(data == "failure")
+																	{
+																		$('#incoming_lot_number').html('<option value="">Select Lot Number</option>');
+																	}
+																	else
+																	{
+																		$('#incoming_lot_number').html(data);
+
+																	}
+															},
+																error: function (jqXHR, textStatus, errorThrown)
+																{
+																	$('#incoming_lot_number').html();
+																}
+													});
+											
+													}
+												},
+												error: function (jqXHR, textStatus, errorThrown)
+												{
+													$('#vendor_part_number').html();
+												}
+											});
+											return false;
+
+											
 
 										}
 									},
 									error: function (jqXHR, textStatus, errorThrown)
 									{
-										$('#vendor_part_number').html();
+										$('#vendor_po_number').html();
+										//$(".loader_ajax").hide();
 									}
 								});
 								return false;
-
-								
-
 							}
-						},
-						error: function (jqXHR, textStatus, errorThrown)
-						{
-							$('#vendor_po_number').html();
-							//$(".loader_ajax").hide();
-						}
-					});
-					return false;
-			    }
 			});
 					
 
@@ -23087,8 +23119,8 @@
 							{
 								$('#incoming_lot_number').html();
 							}
-					    });
-					return false;
+				 });
+				return false;
 		    });
 
 

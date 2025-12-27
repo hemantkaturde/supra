@@ -21249,7 +21249,7 @@ public function vendorpartnumberforincoimglotnumber(){
             $content = $content.'<option value="">Select Lot Number</option>';
             foreach($getVendoritemsonly as $value) {
 
-                if($this->input->post('vendor_po_number')){
+                if($this->input->post('incoming_lot_number_id_edit') ==$value["incoming_item_id"] ){
                     $selected ='selected';
                 }else{
                     $selected ='';
