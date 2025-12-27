@@ -202,7 +202,7 @@
 
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="invoice_no">Invoice No</label>
+                                            <label for="invoice_no">Invoice No / Challan No </label>
                                             <input type="text" class="form-control" id="invoice_no" value="<?=$getsuppliervendorcomplaintdata['invoice_number']?>"  name="invoice_no">
                                             <p class="error invoice_no_error"></p>
                                         </div>
@@ -210,7 +210,7 @@
                                     
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="invoice_date">Invoice Date</label>
+                                            <label for="invoice_date">Invoice Date / Challan Date</label>
                                             <input type="text" class="form-control datepicker" id="invoice_date"  value="<?=$getsuppliervendorcomplaintdata['invoice_date']?>" name="invoice_date">
                                             <p class="error invoice_date_error"></p>
                                         </div>
