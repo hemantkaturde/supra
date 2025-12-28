@@ -20621,8 +20621,9 @@ public function viewsuppliervendorcompalint($id){
 public function getpartdescriptionusingpartnumber(){
 
     $part_no=$this->input->post('part_no');
+    $customer_po=$this->input->post('customer_po');
     if($part_no) {
-        $part_no_data = $this->admin_model->getpartdescriptionusingpartnumber($part_no);
+        $part_no_data = $this->admin_model->getpartdescriptionusingpartnumber($part_no,$customer_po);
         if(count($part_no_data) >= 1) {
             echo json_encode($part_no_data[0]);
         } else {

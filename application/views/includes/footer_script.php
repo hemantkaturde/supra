@@ -22353,10 +22353,11 @@
 			
 			e.preventDefault();
 			var part_no = $('#part_no').val();
+			var customer_po = $('#customer_po').val();
             $.ajax({
 				url : "<?php echo ADMIN_PATH;?>getpartdescriptionusingpartnumber",
 				type: "POST",
-				data : {'part_no' : part_no},
+				data : {'part_no' : part_no,'customer_po':customer_po},
 					success: function(data, textStatus, jqXHR)
 					{
 					    var get_buyerdata = jQuery.parseJSON( data );

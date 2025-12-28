@@ -2,11 +2,11 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            <i class="fa fa-users"></i> Edit Customer Complaint
+            <i class="fa fa-users"></i> Edit Customer Compliant
             <small>
                 <ul class="breadcrumb" style="background-color:#ecf0f5 !important">
                     <li class="completed"><a href="javascript:void(0);">Masters</a></li>
-                    <li class="active"><a href="javascript:void(0);">Customer Complaint</a></li>
+                    <li class="active"><a href="javascript:void(0);">Customer Compliant</a></li>
                 </ul>
             </small>
         </h1>
@@ -18,7 +18,7 @@
                 <div class="box">
                     <div class="box box-primary">
                         <div class="box-header">
-                            <h3 class="box-title">Edit Customer Complaint</h3>
+                            <h3 class="box-title">Edit Customer Compliant</h3>
                         </div>
                         <?php $this->load->helper("form"); ?>
                         <form role="form" id="addnewcustomercomplaintform" action="<?php echo base_url() ?>addnewcustomercomplaint" method="post" role="form">
@@ -139,7 +139,7 @@
                                    
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="invoice_no">Invoice No.</label>
+                                            <label for="invoice_no">Export Invoice No.</label>
                                             <input type="text" class="form-control" id="invoice_no" value="<?=$getcustomercompalindetailsdata[0]['invoice_no']?>" name="invoice_no">
                                             <p class="error invoice_no_error"></p>
                                         </div>
@@ -147,7 +147,7 @@
 
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="invoice_date">Invoice Date</label>
+                                            <label for="invoice_date">Export Invoice Date</label>
                                             <input type="text" class="form-control datepicker" id="invoice_date" value="<?=$getcustomercompalindetailsdata[0]['invoice_date']?>" name="invoice_date">
                                             <p class="error invoice_date_error"></p>
                                         </div>
@@ -156,7 +156,7 @@
 
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="doc_complaint_no">Doc / Complaint No.</label>
+                                            <label for="doc_complaint_no">Doc / Compliant No.</label>
                                             <input type="text" class="form-control" id="doc_complaint_no"  value="<?=$getcustomercompalindetailsdata[0]['doc_complaint_no']?>" name="doc_complaint_no">
                                             <p class="error doc_complaint_no_error"></p>
                                         </div>
@@ -165,7 +165,7 @@
                                   
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="doc_complaint_date">Doc / Complaint Date</label>
+                                            <label for="doc_complaint_date">Doc / Compliant Date</label>
                                             <input type="text" class="form-control datepicker" id="doc_complaint_date" value="<?=$getcustomercompalindetailsdata[0]['doc_complaint_date']?>" name="doc_complaint_date">
                                             <p class="error doc_complaint_date_error"></p>
                                         </div>
@@ -183,7 +183,7 @@
                                     
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="root_case">Root Case</label>
+                                            <label for="root_case">Root Cause</label>
                                             <input type="text" class="form-control" id="root_case" value="<?=$getcustomercompalindetailsdata[0]['root_case']?>" name="root_case">
                                             <p class="error root_case_error"></p>
                                         </div>
@@ -192,7 +192,7 @@
 
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="correction">Immeditate Action Taken</label>
+                                            <label for="correction">Immediate Corrective Action</label>
                                             <input type="text" class="form-control" id="correction"  value="<?=$getcustomercompalindetailsdata[0]['correction']?>" name="correction">
                                             <p class="error correction_error"></p>
                                         </div>
@@ -204,7 +204,7 @@
                                 <div class="row">
                                      <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="corrective_action_taken">Corrective Action Taken</label>
+                                            <label for="corrective_action_taken">Future Corrective Action</label>
                                             <input type="text" class="form-control" id="corrective_action_taken" value="<?=$getcustomercompalindetailsdata[0]['corrective_action_taken']?>" name="corrective_action_taken">
                                             <p class="error corrective_action_taken_error"></p>
                                         </div>
@@ -290,17 +290,17 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-3">
+                                    <!-- <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="report_closed_by">Report CLose By</label>
                                             <input type="text" class="form-control" id="report_closed_by" value="<?=$getcustomercompalindetailsdata[0]['report_closed_by']?>" name="report_closed_by">
                                             <p class="error report_closed_by_error"></p>
                                         </div>
-                                    </div>
+                                    </div> -->
 
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="report_closed_by_date">Date</label>
+                                            <label for="report_closed_by_date">Report CLose By Date</label>
                                             <input type="text" class="form-control datepicker" id="report_closed_by_date" value="<?=$getcustomercompalindetailsdata[0]['report_closed_by_date']?>" name="report_closed_by_date">
                                             <p class="error report_closed_by_date_error"></p>
                                         </div>

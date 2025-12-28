@@ -2,11 +2,11 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            <i class="fa fa-users"></i> Add New Customer Complaint
+            <i class="fa fa-users"></i> Add New Customer Compliant
             <small>
                 <ul class="breadcrumb" style="background-color:#ecf0f5 !important">
                     <li class="completed"><a href="javascript:void(0);">Masters</a></li>
-                    <li class="active"><a href="javascript:void(0);">Customer Complaint</a></li>
+                    <li class="active"><a href="javascript:void(0);">Customer Compliant</a></li>
                 </ul>
             </small>
         </h1>
@@ -18,7 +18,7 @@
                 <div class="box">
                     <div class="box box-primary">
                         <div class="box-header">
-                            <h3 class="box-title">Add Customer Complaint</h3>
+                            <h3 class="box-title">Add Customer Compliant</h3>
                         </div>
                         <?php $this->load->helper("form"); ?>
                         <form role="form" id="addnewcustomercomplaintform" action="<?php echo base_url() ?>addnewcustomercomplaint" method="post" role="form">
@@ -189,7 +189,7 @@
                                    
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="invoice_no">Invoice No.</label>
+                                            <label for="invoice_no">Export Invoice No.</label>
                                             <input type="text" class="form-control" id="invoice_no" name="invoice_no">
                                             <p class="error invoice_no_error"></p>
                                         </div>
@@ -197,7 +197,7 @@
 
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="invoice_date">Invoice Date</label>
+                                            <label for="invoice_date">Export Invoice Date</label>
                                             <input type="text" class="form-control datepicker" id="invoice_date" name="invoice_date">
                                             <p class="error invoice_date_error"></p>
                                         </div>
@@ -206,7 +206,7 @@
 
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="doc_complaint_no">Doc / Complaint No.</label>
+                                            <label for="doc_complaint_no">Doc / Compliant No.</label>
                                             <input type="text" class="form-control" id="doc_complaint_no" name="doc_complaint_no">
                                             <p class="error doc_complaint_no_error"></p>
                                         </div>
@@ -215,7 +215,7 @@
                                   
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="doc_complaint_date">Doc / Complaint Date</label>
+                                            <label for="doc_complaint_date">Doc / Compliant Date</label>
                                             <input type="text" class="form-control datepicker" id="doc_complaint_date" name="doc_complaint_date">
                                             <p class="error doc_complaint_date_error"></p>
                                         </div>
@@ -256,7 +256,7 @@
                                     
                                    <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="corrective_action_taken">Corrective Action Taken</label>
+                                            <label for="corrective_action_taken">Future Corrective Action</label>
                                             <input type="text" class="form-control" id="corrective_action_taken" name="corrective_action_taken">
                                             <p class="error corrective_action_taken_error"></p>
                                         </div>

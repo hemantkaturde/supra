@@ -16547,10 +16547,11 @@ public function getpartsusingbuyerpo($buyer_po){
 }
 
 
-public function getpartdescriptionusingpartnumber($part_no){
+public function getpartdescriptionusingpartnumber($part_no,$customer_p){
 
-    $this->db->select('*');
+    $this->db->select('*,'.TBL_BUYER_PO_MASTER_ITEM.'.order_oty as buyer_order_qty');
     $this->db->where(TBL_FINISHED_GOODS.'.fin_id', $part_no);
+    $this->db->where(TBL_BUYER_PO_MASTER_ITEM.'.buyer_po_id', $customer_p);
     $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
     $query_result = $this->db->get(TBL_FINISHED_GOODS)->result_array();
 
