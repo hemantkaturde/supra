@@ -16663,7 +16663,7 @@ public function fetchcustomercompalintreportdata($params){
         {
             $data[$counter]['report_number'] = $value['report_number'];
             $data[$counter]['buyer_name'] = $value['buyer_name'];
-            $data[$counter]['sales_order_number'] = $value['sales_order_number'];
+            $data[$counter]['sales_order_number'] = $value['sales_order_number'].' - '.$value['buyer_po_number'];
             $data[$counter]['part_number'] = $value['part_number'];
             $data[$counter]['paer_dec'] = $value['name'];
             $data[$counter]['order_qty'] = $value['order_qty'];

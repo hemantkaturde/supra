@@ -38,8 +38,8 @@
                                         <th>Component Part Dec.</th>
                                         <th>Order Qty</th>
                                         <th>Failure Qty</th>
-                                        <th>Invoice No</th>
-                                        <th>Date</th>
+                                        <th>Export Invoice No</th>
+                                        <th>Export Invoice Date</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
