@@ -22304,7 +22304,7 @@
 					$(".loader_ajax").hide();
 					if(data == "failure")
 					{
-						$('#customer_po').html('<option value="">Select Buyer PO Number</option>');
+						$('#customer_po').html('<option value="">Select Customer PO</option>');
 					}
 					else
 					{
@@ -22382,6 +22382,49 @@
 				});
 			return false;
 		});
+
+
+		$(document).on('change','.part_no_get_preexport_detils',function(e){  
+			
+			e.preventDefault();
+			var part_no = $('#part_no').val();
+			var customer_po = $('#customer_po').val();
+            $.ajax({
+				url : "<?php echo ADMIN_PATH;?>admin/partnogetpreexportdetils",
+				type: "POST",
+				data : {'part_no' : part_no,'customer_po':customer_po},
+					success: function(data, textStatus, jqXHR)
+					{
+					    var get_buyerdata = jQuery.parseJSON( data );
+
+						$(".loader_ajax").hide();
+							if(data == "failure")
+								{
+									$('#dispatch_qty').val('');
+									$('#invoice_no').val('');
+									$('#invoice_date').val('');
+								
+								}
+							else
+								{
+									$('#dispatch_qty').val(get_buyerdata.buyer_invoice_qty);
+									$('#invoice_no').val(get_buyerdata.buyer_invoice_number);
+									$('#invoice_date').val(get_buyerdata.buyer_invoice_date);
+								}
+					},
+					error: function (jqXHR, textStatus, errorThrown)
+					   {
+							$('#dispatch_qty').val('');
+							$('#invoice_no').val('');
+							$('#invoice_date').val('');
+					   }
+				});
+			return false;
+		});
+
+
+
+
 
 		$(document).on('click','#addnewcustomercomplaint',function(e){
 				e.preventDefault();

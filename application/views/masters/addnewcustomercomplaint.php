@@ -143,7 +143,8 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="part_no">Part No</label>
-                                            <select class="form-control" name="part_no" id="part_no">
+                                            <select class="form-control part_no_get_preexport_detils" name="part_no" id="part_no">
+                                                 <option value="NA">Select Part No</option>
                                             </select>
                                             <p class="error part_no_error"></p>
                                         </div>
@@ -232,7 +233,7 @@
                                     
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="root_case">Root Case</label>
+                                            <label for="root_case">Root Cause</label>
                                             <input type="text" class="form-control" id="root_case" name="root_case">
                                             <p class="error root_case_error"></p>
                                         </div>
@@ -241,7 +242,7 @@
 
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="correction">Immeditate Action Taken</label>
+                                            <label for="correction">Immediate Corrective Action</label>
                                             <input type="text" class="form-control" id="correction" name="correction">
                                             <p class="error correction_error"></p>
                                         </div>
@@ -340,17 +341,17 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-3">
+                                    <!-- <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="report_closed_by">Report CLose By</label>
                                             <input type="text" class="form-control" id="report_closed_by" name="report_closed_by">
                                             <p class="error report_closed_by_error"></p>
                                         </div>
-                                    </div>
+                                    </div> -->
 
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="report_closed_by_date">Date</label>
+                                            <label for="report_closed_by_date">Report Close By Date Date</label>
                                             <input type="text" class="form-control datepicker" id="report_closed_by_date" name="report_closed_by_date">
                                             <p class="error report_closed_by_date_error"></p>
                                         </div>

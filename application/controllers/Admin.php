@@ -20443,7 +20443,7 @@ public function getpartsusingbuyerpo(){
     if($this->input->post('buyer_po')) {
         $getAllitemdetailsponumber = $this->admin_model->getpartsusingbuyerpo($this->input->post('buyer_po'));
         if(count($getAllitemdetailsponumber) >= 1) {
-            $content = $content.'<option value="">Select Buyer Number</option>';
+            $content = $content.'<option value="">Select Part Number</option>';
             foreach($getAllitemdetailsponumber as $value) {
                     $content = $content.'<option value="'.$value["part_number_id"].'">'.$value["fgpart"].'</option>';
             }
@@ -20632,6 +20632,24 @@ public function getpartdescriptionusingpartnumber(){
         echo 'failure';
     }
 }
+
+
+public function partnogetpreexportdetils(){
+
+    $part_no=$this->input->post('part_no');
+    $customer_po=$this->input->post('customer_po');
+    if($part_no) {
+        $part_no_data = $this->admin_model->partnogetpreexportdetils($part_no,$customer_po);
+        if(count($part_no_data) >= 1) {
+            echo json_encode($part_no_data[0]);
+        } else {
+            echo 'failure';
+        }
+    } else {
+        echo 'failure';
+    }
+}
+
 
 public function fetchcustomercompalintreport(){
 

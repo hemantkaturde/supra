@@ -16558,6 +16558,26 @@ public function getpartdescriptionusingpartnumber($part_no){
 
 }
 
+
+public function partnogetpreexportdetils($part_no,$customer_po){
+
+    // $this->db->select('*');
+    // $this->db->where(TBL_FINISHED_GOODS.'.fin_id', $part_no);
+    // $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.part_number_id = '.TBL_FINISHED_GOODS.'.fin_id');
+    // $query_result = $this->db->get(TBL_FINISHED_GOODS)->result_array();
+
+    // return $query_result;
+
+
+     $this->db->select('*,buyer_invoice_number,buyer_invoice_date,buyer_invoice_qty');
+     $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.part_number', $part_no);
+     $this->db->where(TBL_PACKING_INSTRACTION.'.buyer_po_number', $customer_po);
+     $this->db->join(TBL_PACKING_INSTRACTION, TBL_PACKING_INSTRACTION.'.id = '.TBL_PACKING_INSTRACTION_DETAILS.'.packing_instract_id');
+     $query_result = $this->db->get(TBL_PACKING_INSTRACTION_DETAILS)->result_array();
+
+     return $query_result;
+}
+
 public function savecoustomercomplaintdata($id,$data){
     if($id != '') {
         $this->db->where('id', $id);
