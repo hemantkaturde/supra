@@ -49,11 +49,13 @@
                                     <?php 
                                          if($getcustomercompalindetailsdata[0]['customer_po']){
                                             $selected = 'selected';
-                                            $sales_order_number = '<option value='.$getcustomercompalindetailsdata[0]['customer_po'].'   '.$selected.'>'.$getcustomercompalindetailsdata[0]['sales_order_number'].'</option>';
+                                            $sales_order_number = '<option value='.$getcustomercompalindetailsdata[0]['customer_po'].'   '.$selected.'>'.$getcustomercompalindetailsdata[0]['sales_order_number'] .'-'. $getcustomercompalindetailsdata[0]['buyer_po_number'].'</option>';
                                          }else{
                                             $selected = '';
                                             $sales_order_number = '';
-                                         }                                         
+                                         }       
+                                         
+
                                     ?>
                         
                                     <div class="col-md-3">
