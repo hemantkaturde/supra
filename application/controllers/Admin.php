@@ -20724,19 +20724,56 @@ public function downlaodcustomercomplaint($id){
     $getcustomercomplaintdetailsfordownalod = $this->admin_model->getcustomercomplaintdetailsfordownalod($id);
 
 
-    if($getcustomercomplaintdetailsfordownalod[0]['invoice_date']!=='0000-00-00'){
 
-    }
+        if($getcustomercomplaintdetailsfordownalod[0]['invoice_date']=='000-00-00'){
+            $invoice_date = '';
+        }else{
+            $invoice_date =  date("d-m-Y", strtotime($getcustomercomplaintdetailsfordownalod[0]['invoice_date']));
+        }
 
-     $invoice_date =  date("d-m-Y", strtotime($getcustomercomplaintdetailsfordownalod[0]['invoice_date']));
-     $doc_complaint_date =  date("d-m-Y", strtotime($getcustomercomplaintdetailsfordownalod[0]['doc_complaint_date']));
-     $corrective_action_taken_responsibility_date =  date("d-m-Y", strtotime($getcustomercomplaintdetailsfordownalod[0]['corrective_action_taken_responsibility_date']));
-     $effective_date =  date("d-m-Y", strtotime($getcustomercomplaintdetailsfordownalod[0]['effective_date']));
-     $prepared_by_date =  date("d-m-Y", strtotime($getcustomercomplaintdetailsfordownalod[0]['prepared_by_date']));
-     $approved_by_date =  date("d-m-Y", strtotime($getcustomercomplaintdetailsfordownalod[0]['approved_by_date']));
-     $report_closed_by_date =  date("d-m-Y", strtotime($getcustomercomplaintdetailsfordownalod[0]['report_closed_by_date']));  
 
-  
+        if($getcustomercomplaintdetailsfordownalod[0]['doc_complaint_date']=='000-00-00'){
+            $doc_complaint_date = '';
+        }else{
+            $doc_complaint_date =  date("d-m-Y", strtotime($getcustomercomplaintdetailsfordownalod[0]['doc_complaint_date']));
+        }
+
+
+        if($getcustomercomplaintdetailsfordownalod[0]['corrective_action_taken_responsibility_date']=='000-00-00'){
+            $corrective_action_taken_responsibility_date = '';
+        }else{
+            $corrective_action_taken_responsibility_date =  date("d-m-Y", strtotime($getcustomercomplaintdetailsfordownalod[0]['corrective_action_taken_responsibility_date']));
+        }
+
+
+
+        if($getcustomercomplaintdetailsfordownalod[0]['effective_date']=='000-00-00'){
+            $effective_date = '';
+        }else{
+            $effective_date =  date("d-m-Y", strtotime($getcustomercomplaintdetailsfordownalod[0]['effective_date']));
+        }
+
+        if($getcustomercomplaintdetailsfordownalod[0]['prepared_by_date']=='000-00-00'){
+            $prepared_by_date = '';
+        }else{
+            $prepared_by_date =  date("d-m-Y", strtotime($getcustomercomplaintdetailsfordownalod[0]['prepared_by_date']));
+        }
+
+
+        if($getcustomercomplaintdetailsfordownalod[0]['approved_by_date']=='000-00-00'){
+            $approved_by_date = '';
+        }else{
+            $approved_by_date =  date("d-m-Y", strtotime($getcustomercomplaintdetailsfordownalod[0]['approved_by_date']));
+        }
+
+
+        if($getcustomercomplaintdetailsfordownalod[0]['report_closed_by_date']=='000-00-00'){
+           $report_closed_by_date = '';
+        }else{
+            $report_closed_by_date =  date("d-m-Y", strtotime($getcustomercomplaintdetailsfordownalod[0]['report_closed_by_date']));  
+        }
+
+
 
     $mpdf = new \Mpdf\Mpdf();
     $html = '<table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:13px">
@@ -20842,7 +20879,7 @@ public function downlaodcustomercomplaint($id){
                 </td>
 
                 <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
-                    <p>'.$getcustomercomplaintdetailsfordownalod[0]['invoice_date'].' </p>
+                    <p>'.$invoice_date.' </p>
                 </td>
             </tr>
         </table>
@@ -20854,7 +20891,7 @@ public function downlaodcustomercomplaint($id){
                 </td> 
 
                 <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
-                    <p>'.$getcustomercomplaintdetailsfordownalod[0]['doc_complaint_date'].'</p>
+                    <p>'.$doc_complaint_date.'</p>
                 </td>
 
                 <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
@@ -20889,7 +20926,7 @@ public function downlaodcustomercomplaint($id){
              <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
             <tr style="border: 1px solid black;" valign="top">
                 <td width="100%" style="padding: 5px;text-align: left;">
-                    <p>2.IMMEDIATE CORRECTIVE TAKEN : </p>
+                    <p>2.IMMEDIATE CORRECTIVE ACTION : </p>
                 </td> 
             </tr>
 
@@ -20963,7 +21000,7 @@ public function downlaodcustomercomplaint($id){
 
                 <td width="20%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
                        <p>'. str_repeat('&nbsp;', 5).'</p>
-                       <p>'. $getcustomercomplaintdetailsfordownalod[0]['corrective_action_taken_responsibility_date'].'</p>
+                       <p>'. $corrective_action_taken_responsibility_date.'</p>
                        <p>'. str_repeat('&nbsp;', 5).'</p>
                        <p>'. str_repeat('&nbsp;', 5).'</p>
                        <p>'. str_repeat('&nbsp;', 5).'</p>
@@ -21008,7 +21045,7 @@ public function downlaodcustomercomplaint($id){
 
                 <td width="20%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
                        <p>'. str_repeat('&nbsp;', 5).'</p>
-                       <p>'. $getcustomercomplaintdetailsfordownalod[0]['effective_date'].'</p>
+                       <p>'. $effective_date.'</p>
                        <p>'. str_repeat('&nbsp;', 5).'</p>
                        <p>'. str_repeat('&nbsp;', 5).'</p>
                        <p>'. str_repeat('&nbsp;', 5).'</p>
@@ -21045,7 +21082,7 @@ public function downlaodcustomercomplaint($id){
                 </td> 
 
                 <td width="25%" style="padding: 5px;text-align: center;border-right: #000000 1px solid">
-                       <p>'. $getcustomercomplaintdetailsfordownalod[0]['prepared_by_date'].'</p>
+                       <p>'. $prepared_by_date.'</p>
                        <p>'. str_repeat('&nbsp;', 5).'</p>
                 </td> 
 
@@ -21055,7 +21092,7 @@ public function downlaodcustomercomplaint($id){
                 </td> 
 
                 <td width="25%" style="padding: 5px;text-align: center;border-right: #000000 1px solid">
-                       <p>'. $getcustomercomplaintdetailsfordownalod[0]['approved_by_date'].'</p>
+                       <p>'. $approved_by_date.'</p>
                        <p>'. str_repeat('&nbsp;', 5).'</p>
                 </td> 
             </tr>
@@ -21070,7 +21107,7 @@ public function downlaodcustomercomplaint($id){
                 </td> 
 
                 <td width="50%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
-                   <p>'. $getcustomercomplaintdetailsfordownalod[0]['report_closed_by_date'].'</p>
+                   <p>'. $report_closed_by_date.'</p>
                 </td> 
             </tr>
          </table>';
