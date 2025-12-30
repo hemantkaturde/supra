@@ -21619,6 +21619,11 @@ public function downlaodsuppliervendorcomplaint($id){
 
     $getsuppliervendorcomplaintdownalod = $this->admin_model->getsuppliervendorcomplaintdownalod($id);
 
+    if($getsuppliervendorcomplaintdownalod[0]['actual_invoice_date']){
+        $actual_invoice_date = '';
+    }else{
+        $actual_invoice_date = date('d-m-Y',strtotime($getsuppliervendorcomplaintdownalod[0]['actual_invoice_date']));
+    }
 
 
     if($getsuppliervendorcomplaintdownalod[0]['date_1']=="0000-00-00"){
@@ -21735,7 +21740,7 @@ public function downlaodsuppliervendorcomplaint($id){
                 </td>
 
                 <td style="border-left: 1px solid black;padding: 5px;" width="25%" valign="top";text-align: left;>
-                    <p>'.date('d-m-Y',strtotime($getsuppliervendorcomplaintdownalod[0]['actual_invoice_date'])).' </p>
+                    <p>'.$actual_invoice_date.' </p>
                 </td>
             </tr>
         </table>
