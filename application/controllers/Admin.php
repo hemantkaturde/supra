@@ -21824,7 +21824,7 @@ public function downlaodsuppliervendorcomplaint($id){
            <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
             <tr style="border: 1px solid black;" valign="top">
                 <td width="100%" style="padding: 5px;text-align: left;">
-                    <p>2.IMMEDIATE CORRECTIVE ACTION: </p>
+                    <p>2.IMMEDIATE CORRECTIVE ACTION: (TO BE FILLED BY VENDOR/SUPPLIER) </p>
                 </td> 
             </tr>
 
@@ -21842,7 +21842,7 @@ public function downlaodsuppliervendorcomplaint($id){
             <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
             <tr style="border: 1px solid black;" valign="top">
                 <td width="100%" style="padding: 5px;text-align: left;">
-                    <p>3.ROOT CAUSE: </p>
+                    <p>3.ROOT CAUSE: (TO BE FILLED BY VENDOR/SUPPLIER)</p>
                 </td> 
             </tr>
 
@@ -21860,7 +21860,7 @@ public function downlaodsuppliervendorcomplaint($id){
           <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
             <tr style="border: 1px solid black;" valign="top">
                 <td width="60%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
-                    <p>4.FUTURE CORRECTIVE ACTION: </p>
+                    <p>4.FUTURE CORRECTIVE ACTION: (TO BE FILLED BY VENDOR/SUPPLIER)</p>
                 </td> 
 
                 <td width="20%" style="padding: 5px;text-align: center;border-right: #000000 1px solid">
