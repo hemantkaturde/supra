@@ -17092,7 +17092,15 @@ public function getsuppliervendorrportdata($params){
             $data[$counter]['po_number'] = $vendor_supplier_po;
 
             $data[$counter]['invoice_number'] = $value['invoice_number'];
-            $data[$counter]['invoice_date'] = $value['invoice_date'];
+
+            if($value['invoice_date']=='0000-00-00'){
+
+                 $invoice_date = '';
+
+            }else{ 
+                $invoice_date =$value['invoice_date'];
+            }
+            $data[$counter]['invoice_date'] = $invoice_date;
             $data[$counter]['action'] = '';
 
             if($this->session->userdata('roleText')=='Superadmin'){
