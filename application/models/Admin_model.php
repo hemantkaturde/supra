@@ -16995,19 +16995,24 @@ public function getsuppliervendorrportcount($params){
     // $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_CUSTMOR_COMPALINT.'.customer_po');
     // $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.part_number_id = '.TBL_CUSTMOR_COMPALINT.'.part_no');
     // $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_BUYER_PO_MASTER_ITEM.'.part_number_id');
+     $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_SUPPLIER_VENDOR_COMPALINT.'.vendor_id','left');
+     $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_SUPPLIER_VENDOR_COMPALINT.'.supplier_id','left');
+     $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_SUPPLIER_VENDOR_COMPALINT.'.supplier_po_id','left');
+     $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_SUPPLIER_VENDOR_COMPALINT.'.vendor_po_id','left');
 
-    // if($params['search']['value'] != "") 
-    // {
-    //     $this->db->where("(".TBL_BUYER_PO_MASTER.".sales_order_number LIKE '%".$params['search']['value']."%'");
-    //     $this->db->or_where(TBL_BUYER_MASTER.".buyer_name LIKE '%".$params['search']['value']."%'");
-    //     $this->db->or_where(TBL_CUSTMOR_COMPALINT.".report_number LIKE '%".$params['search']['value']."%'");
-    //     $this->db->or_where(TBL_FINISHED_GOODS.".name LIKE '%".$params['search']['value']."%'");
-    //     $this->db->or_where(TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
-    //     $this->db->or_where(TBL_CUSTMOR_COMPALINT.".order_qty LIKE '%".$params['search']['value']."%'");
-    //     $this->db->or_where(TBL_CUSTMOR_COMPALINT.".toatal_failure_qty LIKE '%".$params['search']['value']."%'");
-    //     $this->db->or_where(TBL_CUSTMOR_COMPALINT.".invoice_no LIKE '%".$params['search']['value']."%'");
-    //     $this->db->or_where(TBL_CUSTMOR_COMPALINT.".invoice_date LIKE '%".$params['search']['value']."%')");
-    // }
+
+     if($params['search']['value'] != "") 
+    {
+        $this->db->where("(".TBL_SUPPLIER_VENDOR_COMPALINT.".report_number LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_SUPPLIER_VENDOR_COMPALINT.".stage LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_SUPPLIER_VENDOR_COMPALINT.".vendor_supplier LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_SUPPLIER_VENDOR_COMPALINT.".invoice_number LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_SUPPLIER_VENDOR_COMPALINT.".invoice_date LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_SUPPLIER_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_SUPPLIER.".supplier_name LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%')");
+    }
 
     $query = $this->db->get(TBL_SUPPLIER_VENDOR_COMPALINT);
     $rowcount = $query->num_rows();
@@ -17019,24 +17024,28 @@ public function getsuppliervendorrportcount($params){
 
 public function getsuppliervendorrportdata($params){
 
-    $this->db->select('*,'.TBL_SUPPLIER_VENDOR_COMPALINT.'.id as suppliervendor_compalint_id');
-    // $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_PAYMENT_DETAILS.'.vendor_id','left');
-    // $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_PAYMENT_DETAILS.'.supplier_id','left');
+    $this->db->select('*,'.TBL_SUPPLIER_VENDOR_COMPALINT.'.id as suppliervendor_compalint_id,'.TBL_SUPPLIER_PO_MASTER.'.po_number as supplier_po_number,'.TBL_VENDOR_PO_MASTER.'.po_number as vendor_po_number,'.TBL_VENDOR.'.vendor_name as vendor_name_actual,'.TBL_SUPPLIER.'.supplier_name as actual_supplier_name');
+    $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_SUPPLIER_VENDOR_COMPALINT.'.vendor_id','left');
+    $this->db->join(TBL_SUPPLIER, TBL_SUPPLIER.'.sup_id = '.TBL_SUPPLIER_VENDOR_COMPALINT.'.supplier_id','left');
     // $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_PAYMENT_DETAILS.'.vendor_po','left');
     // $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_PAYMENT_DETAILS.'.supplier_po','left');
 
-    // if($params['search']['value'] != "") 
-    // {
-    //     $this->db->where("(".TBL_PAYMENT_DETAILS.".payment_details_number LIKE '%".$params['search']['value']."%'");
-    //     $this->db->or_where(TBL_PAYMENT_DETAILS.".payment_details_date LIKE '%".$params['search']['value']."%'");
-    //     $this->db->or_where(TBL_PAYMENT_DETAILS.".bill_number LIKE '%".$params['search']['value']."%'");
-    //     $this->db->or_where(TBL_PAYMENT_DETAILS.".payment_status LIKE '%".$params['search']['value']."%'");
+    $this->db->or_where(TBL_SUPPLIER_VENDOR_COMPALINT.".invoice_number LIKE '%".$params['search']['value']."%'");
+    $this->db->or_where(TBL_SUPPLIER_VENDOR_COMPALINT.".invoice_date LIKE '%".$params['search']['value']."%'");
 
-    //     $this->db->or_where(TBL_SUPPLIER_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
-    //     $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
-    //     $this->db->or_where(TBL_SUPPLIER.".supplier_name LIKE '%".$params['search']['value']."%'");
-    //     $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%')");
-    // }
+    $this->db->join(TBL_SUPPLIER_PO_MASTER, TBL_SUPPLIER_PO_MASTER.'.id = '.TBL_SUPPLIER_VENDOR_COMPALINT.'.supplier_po_id','left');
+    $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id = '.TBL_SUPPLIER_VENDOR_COMPALINT.'.vendor_po_id','left');
+
+    if($params['search']['value'] != "") 
+    {
+        $this->db->where("(".TBL_SUPPLIER_VENDOR_COMPALINT.".report_number LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_SUPPLIER_VENDOR_COMPALINT.".stage LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_SUPPLIER_VENDOR_COMPALINT.".vendor_supplier LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_SUPPLIER_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_VENDOR.".vendor_name LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_SUPPLIER.".supplier_name LIKE '%".$params['search']['value']."%'");
+        $this->db->or_where(TBL_VENDOR_PO_MASTER.".po_number LIKE '%".$params['search']['value']."%')");
+    }
 
     // if($vendor_name!='NA'){
     //     $this->db->where(TBL_PAYMENT_DETAILS.'.vendor_id', $vendor_name); 
@@ -17069,8 +17078,19 @@ public function getsuppliervendorrportdata($params){
         {
             $data[$counter]['report_number'] = $value['report_number'];
             $data[$counter]['stage'] = $value['stage'];
-            // $data[$counter]['invoice_number'] = $value['invoice_number'];
-            // $data[$counter]['invoice_date'] = $value['invoice_date'];
+            $data[$counter]['vendor_supplier'] = $value['vendor_supplier'];
+
+            if($value['vendor_supplier']=='Supplier'){
+                $vendor_supplier_name = $value['actual_supplier_name'];
+                $vendor_supplier_po = $value['supplier_po_number'];
+            }else{
+                $vendor_supplier_name = $value['vendor_name_actual'];
+                $vendor_supplier_po = $value['vendor_po_number'];
+            }
+
+            $data[$counter]['actual_supplier_name'] = $vendor_supplier_name;
+            $data[$counter]['po_number'] = $vendor_supplier_po;
+
             $data[$counter]['invoice_number'] = $value['invoice_number'];
             $data[$counter]['invoice_date'] = $value['invoice_date'];
             $data[$counter]['action'] = '';

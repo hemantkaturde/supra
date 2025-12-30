@@ -79,7 +79,7 @@
                                                     $lastNCharacters = substr($explod[1], -$n);
                                                     //$inrno= "SQBO2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
     
-                                                    $inrno= 'SV/'.($lastNCharacters+1)."/".$financialYear;
+                                                    $inrno= 'SVC/'.($lastNCharacters+1)."/".$financialYear;
                                                     $report_no = $inrno;
                                                 }else{
 
@@ -87,7 +87,7 @@
                                                     $lastNCharacters = 0;
                                                     //$inrno= "SQBO2324".str_pad((int)$lastNCharacters+1, 4, 0, STR_PAD_LEFT);
     
-                                                    $inrno= 'SV/'.($lastNCharacters+1)."/".$financialYear;
+                                                    $inrno= 'SVC/'.($lastNCharacters+1)."/".$financialYear;
                                                     $report_no = $inrno;
                                                 }
 
@@ -113,7 +113,7 @@
                                             // Display the financial year
                                             $financialYear = $startYear . '-' . $endYear;
 
-                                            $report_no = 'SV/'.'1/'.$financialYear;
+                                            $report_no = 'SVC/'.'1/'.$financialYear;
                                         }
                                     ?>
 

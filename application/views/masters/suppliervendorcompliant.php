@@ -34,8 +34,11 @@
                                     <tr style="background-color:#3c8dbc !important;color:#fff">
                                         <th>Report No.</th>
                                         <th>Stage</th>
-                                        <th>Invoice No / Challan No</th>
+                                        <th>Vendor/Supplier</th>
+                                        <th>Vendor/Supplier Name</th>
+                                        <th>PO No</th>
                                         <th>Invoice Date / Challan Date</th>
+                                        <th>Invoice No / Challan No</th>
                                         <!-- <th>Invoice No.</th>
                                         <th>Invoice Date</th> -->
                                         <th>Action</th>
