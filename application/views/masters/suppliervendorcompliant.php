@@ -37,8 +37,8 @@
                                         <th>Vendor/Supplier</th>
                                         <th>Vendor/Supplier Name</th>
                                         <th>PO No</th>
-                                        <th>Invoice Date / Challan Date</th>
                                         <th>Invoice No / Challan No</th>
+                                        <th>Invoice Date / Challan Date</th>
                                         <!-- <th>Invoice No.</th>
                                         <th>Invoice Date</th> -->
                                         <th>Action</th>
