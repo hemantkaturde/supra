@@ -5675,9 +5675,11 @@ class Admin_model extends CI_Model
                 $data[$counter]['vendor_order_qty'] = $value['vendor_order_qty_co'];
                 $data[$counter]['vendor_received_qty'] = $value['vendor_received_qty_co'];
                 $data[$counter]['buyer_name'] = $value['buyer'];
-               
+              
+                // $data[$counter]['buyer_po'] = '';
+                // $data[$counter]['buyer_order_qty'] = '';
+                // $data[$counter]['buyer_delivery_Date'] = '';
                 $data[$counter]['status'] = $value['item_bom_status'];
-
                   if($value['flag']==1){
                     $flag = 'Vendor Bill of Material';
                    }else{
