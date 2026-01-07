@@ -28627,6 +28627,7 @@ public function printincomingitemdetailslabelbarcode($id)
     $getdata_itemdetailsdata = $this->admin_model->printincomingitemdetailsdata(trim($id));
     $po_number = $getdata_itemdetailsdata[0]['vendor_po_number_actual'];
     $part_number = $getdata_itemdetailsdata[0]['part_number'];
+    $lot_number = $getdata_itemdetailsdata[0]['lot_no'];
 
     // ---------------- QR CODE GENERATE -----------------
     $qrData = base_url()."admin/printincomingitemdetails_pass_protected/".$id; // your QR text
@@ -28830,6 +28831,9 @@ public function printincomingitemdetailslabelbarcode($id)
                     </span><br>
                     <span style="font-size:16px;">
                         Carton: ' . $i . '/' . $totalLabels . '
+                    </span><br>
+                    <span style="font-size:16px;">
+                        Lot No: ' . $lot_number. '
                     </span>
                 </div>
             </td>
