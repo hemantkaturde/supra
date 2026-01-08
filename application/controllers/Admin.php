@@ -26376,7 +26376,7 @@ for ($i = 1; $i <= $totalLabels; $i++) {
 $html .= '</table>';
 
 $mpdf->WriteHTML($html);
-$mpdf->Output('Export Label Per Bag.pdf', 'D');
+$mpdf->Output('Export Label Bag.pdf', 'D');
 
 
 
@@ -26667,7 +26667,7 @@ for ($i = 1; $i <= $totalLabels; $i++) {
 $html .= '</table>';
 
 $mpdf->WriteHTML($html);
-$mpdf->Output('Export Label Per Box.pdf', 'D');
+$mpdf->Output('Export Label Box.pdf', 'D');
 
 
 
