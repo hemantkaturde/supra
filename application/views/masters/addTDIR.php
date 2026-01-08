@@ -227,12 +227,37 @@
                                         </div>
                                     </div> -->
 
-                                      <div class="col-md-3">
+                                    <!-- <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="qty_in_pcs_for_export_purposr">Qty in PCS (For Export Purpose)</label>
+                                            <label for="qty_in_pcs_for_export_purposr">Qty In PCS for Export Purpose (in PCS)</label>
                                             <input type="text" class="form-control" id="qty_in_pcs_for_export_purposr" name="qty_in_pcs_for_export_purposr">
                                             <p style="color:red">(Note: filed not to be entered by QC)</p>
                                             <p class="error qty_in_pcs_for_export_purposr_error"></p>
+                                        </div>
+                                    </div> -->
+
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="qty_per_bag">Qty Per Bag (in PCS)</label>
+                                            <input type="text" class="form-control" id="qty_per_bag" name="qty_per_bag">
+                                            <p class="error qty_per_bag_error"></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="no_of_bags">No. of Bags</label>
+                                            <input type="text" class="form-control" id="no_of_bags" name="no_of_bags">
+                                            <p class="error no_of_bags_error"></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="qty_per_box">Qty per Box (in PCS)</label>
+                                            <input type="text" class="form-control" id="qty_per_box" name="qty_per_box">
+                                            <p class="error qty_per_box_error"></p>
                                         </div>
                                     </div>
                                 </div>
@@ -245,6 +270,23 @@
                                             <p class="error remarks_error"></p>
                                         </div>
                                     </div> 
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="print_qty_per_bag">Print Qty Per Bag</label>
+                                            <input type="text" class="form-control" value="8" id="print_qty_per_bag" name="print_qty_per_bag">
+                                            <p class="error print_qty_per_bag_error"></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="print_qty_per_box">Print Qty Per Box</label>
+                                            <input type="text" class="form-control" value="8" id="print_qty_per_box" name="print_qty_per_box">
+                                            <p class="error print_qty_per_box_error"></p>
+                                        </div>
+                                    </div>
+
                                 </div>
 
                                 <!-- <div class="row">

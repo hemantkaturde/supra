@@ -25959,6 +25959,11 @@ public function addTDIR(){
                 'additional_process'   => trim($this->input->post('additional_process')),
                 'remarks'              => trim($this->input->post('remarks')),
                 'qty_in_pcs_for_export_purposr' => trim($this->input->post('qty_in_pcs_for_export_purposr')),
+                'qty_per_bag' => trim($this->input->post('qty_per_bag')),
+                'no_of_bags' => trim($this->input->post('no_of_bags')),
+                'qty_per_box' => trim($this->input->post('qty_per_box')),
+                'print_qty_per_bag' => trim($this->input->post('print_qty_per_bag')),
+                'print_qty_per_box' => trim($this->input->post('print_qty_per_box')),
             );
 
             if($this->input->post('tdir_id')){

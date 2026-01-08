@@ -27605,6 +27605,17 @@
 					});
 	            });
 
+
+				$('#qty_per_bag, #no_of_bags').on('keyup change', function () {
+					
+					let qtyPerBag = parseInt($('#qty_per_bag').val()) || 0;
+					let noOfBags  = parseInt($('#no_of_bags').val()) || 0;
+					let qtyPerBox = qtyPerBag * noOfBags;	
+					$('#qty_per_box').val(qtyPerBox);
+				});
+
+				
+
     </script>
 <?php } ?>
 
