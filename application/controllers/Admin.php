@@ -26341,7 +26341,7 @@ for ($i = 1; $i <= $totalLabels; $i++) {
                 font-size:15px;
                 margin-bottom:6px;
             ">
-                QTY : '.$getTdirdata[0]['qty_per_bag'].' (PCS)
+                QTY PER BAG: '.$getTdirdata[0]['qty_per_bag'].' (PCS)
             </div>
 
             <!-- DIVIDER -->
@@ -26376,7 +26376,7 @@ for ($i = 1; $i <= $totalLabels; $i++) {
 $html .= '</table>';
 
 $mpdf->WriteHTML($html);
-$mpdf->Output('Export Label.pdf', 'D');
+$mpdf->Output('Export Label Per Bag.pdf', 'D');
 
 
 
@@ -26632,7 +26632,7 @@ for ($i = 1; $i <= $totalLabels; $i++) {
                 font-size:15px;
                 margin-bottom:6px;
             ">
-                QTY : '.$getTdirdata[0]['qty_per_box'].' (PCS)
+                QTY PER BOX: '.$getTdirdata[0]['qty_per_box'].' (PCS)
             </div>
 
             <!-- DIVIDER -->
@@ -26667,7 +26667,7 @@ for ($i = 1; $i <= $totalLabels; $i++) {
 $html .= '</table>';
 
 $mpdf->WriteHTML($html);
-$mpdf->Output('Export Label.pdf', 'D');
+$mpdf->Output('Export Label Per Box.pdf', 'D');
 
 
 
