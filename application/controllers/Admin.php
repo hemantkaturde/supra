@@ -26287,7 +26287,7 @@ $mpdf = new \Mpdf\Mpdf([
     'margin_bottom' => 5
 ]);
 
-$totalLabels = 8;
+$totalLabels = $getTdirdata[0]['print_qty_per_bag'];
 $col = 0;
 
 $html = '<table width="100%" cellspacing="0" cellpadding="0">';
@@ -26341,7 +26341,298 @@ for ($i = 1; $i <= $totalLabels; $i++) {
                 font-size:15px;
                 margin-bottom:6px;
             ">
-                QTY : '.$getTdirdata[0]['qty_in_pcs_for_export_purposr'].' (PCS)
+                QTY : '.$getTdirdata[0]['qty_per_bag'].' (PCS)
+            </div>
+
+            <!-- DIVIDER -->
+            <div style="
+                border-top:1px solid #000;
+                width:85%;
+                margin:6px auto;
+            "></div>
+
+            <!-- REPORT NO -->
+            <div style="
+                font-size:14px;
+                font-weight:bold;
+                letter-spacing:0.4px;
+                margin-top:10px;
+            ">
+                Report No : '.$getTdirdata[0]['report_number'].'
+            </div>
+
+        </div>
+
+    </td>';
+
+    $col++;
+
+    if ($col == 2) {
+        $html .= '</tr>';
+        $col = 0;
+    }
+}
+
+$html .= '</table>';
+
+$mpdf->WriteHTML($html);
+$mpdf->Output('Export Label.pdf', 'D');
+
+
+
+
+}
+
+
+
+
+public function printinspectionreportlabelperbox($id)
+{
+
+
+    // $getTdirdata= $this->admin_model->getTdirdata($id);
+
+    // // mPDF settings
+    // $mpdf = new \Mpdf\Mpdf([
+    //     'mode' => 'utf-8',
+    //     'format' => 'A4',
+    //     'margin_left' => 5,
+    //     'margin_right' => 5,
+    //     'margin_top' => 5,
+    //     'margin_bottom' => 5
+    // ]);
+
+    // $totalLabels = 12;
+
+    // $html = '';
+
+    // for ($i = 1; $i <= $totalLabels; $i++) {
+
+    //     // Every label box (50% width)
+    //     $html .= '
+    //     <div style="
+    //         width:48%; 
+    //         float:left; 
+    //         margin-bottom:20px;
+    //         margin-right:1%;
+    //         margin-left:1%;
+    //     ">
+
+    //         <!-- TOP BOX -->
+    //         <div style="
+    //             border:1px solid #000; 
+    //             padding:10px; 
+    //             text-align:center;
+    //             margin-right:3%;
+    //             margin-left:3%;
+    //         ">
+
+    //             <div align="center" style="font-weight:bold; font-size:15px; margin-bottom:8px;">
+    //                '.$getTdirdata[0]['name'].'
+    //             </div>
+
+    //             <div align="center" style="font-size:13px; margin-bottom:5px;">
+    //                 PART NO - '.$getTdirdata[0]['part_number'].'
+    //             </div>
+
+    //             <div align="center" style="font-size:13px;">
+    //                 QTY-'.$getTdirdata[0]['qty_in_pcs_for_export_purposr'].' (In Pcs)
+    //             </div>
+
+    //         </div>
+
+    //         <!-- BOTTOM BOX -->
+    //         <div style="
+    //             border:1px solid #000; 
+    //             border-top:none; 
+    //             padding:12px; 
+    //             text-align:center;
+    //             margin-right:3%;
+    //             margin-left:3%;
+    //         ">
+    //             <div align="center" style="font-size:15px;">
+    //                  <b> Report No : '.$getTdirdata[0]['report_number'].'</b>
+    //             </div>
+    //         </div>
+
+    //     </div>
+    //     ';
+
+    //     // After every 2 labels → clear float
+    //     if ($i % 2 == 0) {
+    //         $html .= '<div style="clear:both;"></div>';
+    //     }
+    // }
+
+    // $mpdf->WriteHTML($html);
+    // $mpdf->Output("Export Label.pdf", "D");
+
+
+
+//     $getTdirdata = $this->admin_model->getTdirdata($id);
+
+// // mPDF Settings
+// $mpdf = new \Mpdf\Mpdf([
+//     'mode' => 'utf-8',
+//     'format' => 'A4',
+//     'margin_left' => 5,
+//     'margin_right' => 5,
+//     'margin_top' => 5,
+//     'margin_bottom' => 5
+// ]);
+
+// $totalLabels = 8;
+// $col = 0;
+
+// $html = '
+// <table width="100%" cellspacing="0" cellpadding="0">
+// ';
+
+// for ($i = 1; $i <= $totalLabels; $i++) {
+
+//     if ($col == 0) {
+//         $html .= '<tr>';
+//     }
+
+//     $html .= '
+//     <td style="
+//         width:100mm;
+//         height:70mm;
+//         border:1px solid #000;
+//         padding:6mm;
+//         text-align:center;
+//         vertical-align:top;
+//         font-family: Arial, Helvetica, sans-serif;
+//         box-sizing:border-box;
+//     ">
+
+//         <!-- PRODUCT NAME -->
+//         <div style="
+//             font-size:15px;
+//             font-weight:bold;
+//             letter-spacing:0.3px;
+//             margin-bottom:6px;
+//         ">
+//             '.$getTdirdata[0]['name'].'
+//         </div>
+
+//         <!-- PART NUMBER -->
+//         <div style="
+//             font-size:12px;
+//             margin-bottom:3px;
+//         ">
+//             PART NO : '.$getTdirdata[0]['part_number'].'
+//         </div>
+
+//         <!-- QTY -->
+//         <div style="
+//             font-size:12px;
+//             margin-bottom:8px;
+//         ">
+//             QTY : '.$getTdirdata[0]['qty_in_pcs_for_export_purposr'].' (PCS)
+//         </div>
+
+//         <!-- CENTER DIVIDER LINE -->
+//         <div style="
+//             border-top:1px solid #000;
+//             width:85%;
+//             margin:6px auto;
+//         "></div>
+
+//         <!-- REPORT NUMBER -->
+//         <div style="
+//             font-size:13px;
+//             font-weight:bold;
+//             letter-spacing:0.4px;
+//             margin-top:4px;
+//         ">
+//             Report No : '.$getTdirdata[0]['report_number'].'
+//         </div>
+
+//     </td>
+//     ';
+
+//     $col++;
+
+//     if ($col == 2) {
+//         $html .= '</tr>';
+//         $col = 0;
+//     }
+// }
+
+// $html .= '</table>';
+
+// $mpdf->WriteHTML($html);
+// $mpdf->Output('Export Label.pdf', 'D');
+    
+
+$getTdirdata = $this->admin_model->getTdirdata($id);
+
+// mPDF Settings
+$mpdf = new \Mpdf\Mpdf([
+    'mode' => 'utf-8',
+    'format' => 'A4',
+    'margin_left' => 5,
+    'margin_right' => 5,
+    'margin_top' => 5,
+    'margin_bottom' => 5
+]);
+
+$totalLabels = $getTdirdata[0]['print_qty_per_box'];
+$col = 0;
+
+$html = '<table width="100%" cellspacing="0" cellpadding="0">';
+
+for ($i = 1; $i <= $totalLabels; $i++) {
+
+    if ($col == 0) {
+        $html .= '<tr>';
+    }
+
+    $html .= '
+    <td style="
+        width:100mm;
+        height:70mm;
+      
+        padding:5mm;
+        text-align:center;
+        vertical-align:middle;
+        font-family: Arial, Helvetica, sans-serif;
+    ">
+
+        <!-- CENTER INNER BOX -->
+        <div style="
+            width:90%;
+            margin:0 auto;
+          
+            padding:6mm;
+        ">
+
+            <!-- PRODUCT NAME -->
+            <div style="
+                font-size:16px;
+                font-weight:bold;
+                letter-spacing:0.3px;
+                margin-bottom:6px;
+            ">
+                '.$getTdirdata[0]['name'].'
+            </div>
+
+            <!-- PART NUMBER -->
+            <div style="
+                font-size:15px;
+                margin-bottom:10px;
+                margin-tp:10px;
+            ">
+                PART NO : '.$getTdirdata[0]['part_number'].'
+            </div>
+
+            <!-- QTY -->
+            <div style="
+                font-size:15px;
+                margin-bottom:6px;
+            ">
+                QTY : '.$getTdirdata[0]['qty_per_box'].' (PCS)
             </div>
 
             <!-- DIVIDER -->
