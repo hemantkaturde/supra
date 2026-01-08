@@ -24087,11 +24087,11 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $this->db->or_where(TBL_BALANCE_STOCK_DATA.".remark LIKE '%".$params['search']['value']."%')");
             }
 
-         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id  = '.TBL_BALANCE_STOCK_DATA.'.vendor_po_id');
-         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id  = '.TBL_BALANCE_STOCK_DATA.'.fg_part_number_id');
-         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_BALANCE_STOCK_DATA.'.vendor_name_id');
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id  = '.TBL_BALANCE_STOCK_DATA.'.vendor_po_id');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id  = '.TBL_BALANCE_STOCK_DATA.'.fg_part_number_id');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_BALANCE_STOCK_DATA.'.vendor_name_id');
+
          $this->db->where(TBL_BALANCE_STOCK_DATA.'.status', 1);
-         $this->db->order_by(TBL_BALANCE_STOCK_DATA.'.id','DESC');
          $query = $this->db->get(TBL_BALANCE_STOCK_DATA);
          $rowcount = $query->num_rows();
          return $rowcount;
