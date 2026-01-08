@@ -24133,6 +24133,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['po_number_actual'] =  $value['po_number_actual'];
                 $data[$counter]['part_number_actual'] =  $value['part_number_actual'];
                 $data[$counter]['part_description'] =  $value['part_description'];
+                $data[$counter]['no_of_boxes_cartons_in_pcs'] =  $this->total_number_of_boxes_forbalence_stock_count($value['balance_stock_id']);
                 $data[$counter]['balance_stock'] =  $value['balance_stock'];
                 $data[$counter]['date_actual'] =   date("d-m-Y", strtotime($value['date_actual']));
                 $data[$counter]['remark'] =  $value['stock_remark'];
@@ -24141,6 +24142,10 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addbalancestockdetails/".$value['balance_stock_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-plus-square-o' aria-hidden='true'></i></a>    &nbsp";
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editbalancestock/".$value['balance_stock_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp";
                 //$data[$counter]['action'] .= "<a href='".ADMIN_PATH."tdir_attachment/".$value['tdir_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-paperclip' aria-hidden='true'></i></a>    &nbsp";
+                
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."admin/printbalancestockitemlabelbarcode/".$value['balance_stock_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-tag' aria-hidden='true'></i></a>   &nbsp";
+
+                
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."printbalancestockdetailslabel/".$value['balance_stock_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>   &nbsp";
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['balance_stock_id']."' class='fa fa-trash-o deletebalancestock' aria-hidden='true'></i>"; 
                 $counter++; 
@@ -24148,6 +24153,23 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         }
 
         return $data;
+
+    }
+
+
+
+    public function total_number_of_boxes_forbalence_stock_count($balance_stock_id){
+
+        $this->db->select('COALESCE(SUM('.TBL_BALANCE_STOCK_DETAILS.'.no_of_boxes_in_pcs), 0) AS total_boxes_pcs');
+        $this->db->where(TBL_BALANCE_STOCK_DETAILS.'.status', 1);
+        $this->db->where(TBL_BALANCE_STOCK_DETAILS.'.main_balance_stock_id', $balance_stock_id);
+        $query = $this->db->get(TBL_BALANCE_STOCK_DETAILS);
+
+        $result = $query->row_array();
+        $total_boxes_pcs = !empty($result['total_boxes_pcs']) ? $result['total_boxes_pcs'] : 0;
+      
+        return  $total_boxes_pcs;
+
 
     }
 
@@ -24296,7 +24318,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['remark'] = $value['remark'];
 
                 $data[$counter]['action'] = '';
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."admin/printbalancestockitemlabelbarcode/".$value['balance_detail_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-tag' aria-hidden='true'></i></a>   &nbsp";
+                // $data[$counter]['action'] .= "<a href='".ADMIN_PATH."admin/printbalancestockitemlabelbarcode/".$value['balance_detail_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-tag' aria-hidden='true'></i></a>   &nbsp";
                 $data[$counter]['action'] .= "<i class='fa fa-pencil editBalancedetails' style='cursor:pointer;font-size:x-large' data-id='".$value['balance_detail_id']."'></i> &nbsp;";
                 $data[$counter]['action'] .= "<i class='fa fa-trash deleteBalancedetails' style='cursor:pointer;font-size:x-large;color:red' data-id='".$value['balance_detail_id']."'></i>";
                 $counter++;

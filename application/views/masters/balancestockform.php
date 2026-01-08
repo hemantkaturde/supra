@@ -35,6 +35,7 @@
                                         <th>Vendor PO Number</th>
                                         <th>F.G Part Number</th>
                                         <th>F.G Part Description</th>
+                                        <th>No of Boxes / Cartons (in pcs)</th>
                                         <th>Balance Qty</th>
                                         <th>Created Date</th>
                                         <th>Remark</th>
