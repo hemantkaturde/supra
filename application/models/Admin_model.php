@@ -24075,7 +24075,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     
     public function fetchbalancestockcount($params){
 
-         $this->db->select(TBL_VENDOR.'.vendor_name as vendor_name_actual,'.TBL_VENDOR_PO_MASTER.'.po_number as po_number_actual,'.TBL_FINISHED_GOODS.'.part_number as part_number_actual,'.TBL_FINISHED_GOODS.'.name as part_description,'.TBL_BALANCE_STOCK_DATA.'.balance_stock,'.TBL_BALANCE_STOCK_DATA.'.createdDtm as date_actual,'.TBL_BALANCE_STOCK_DATA.'.remark as stock_remark,'.TBL_BALANCE_STOCK_DATA.'.id as balance_stock_id');
+        $this->db->select(TBL_VENDOR.'.vendor_name as vendor_name_actual,'.TBL_VENDOR_PO_MASTER.'.po_number as po_number_actual,'.TBL_FINISHED_GOODS.'.part_number as part_number_actual,'.TBL_FINISHED_GOODS.'.name as part_description,'.TBL_BALANCE_STOCK_DATA.'.balance_stock,'.TBL_BALANCE_STOCK_DATA.'.createdDtm as date_actual,'.TBL_BALANCE_STOCK_DATA.'.remark as stock_remark,'.TBL_BALANCE_STOCK_DATA.'.id as balance_stock_id');
        
         if($params['search']['value'] != "") 
         {
@@ -24091,12 +24091,10 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id  = '.TBL_BALANCE_STOCK_DATA.'.vendor_po_id');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id  = '.TBL_BALANCE_STOCK_DATA.'.fg_part_number_id');
         $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_BALANCE_STOCK_DATA.'.vendor_name_id');
-        
 
-        $this->db->where(TBL_BALANCE_STOCK_DATA.'.status', 1);
         $this->db->order_by(TBL_BALANCE_STOCK_DATA.'.id','DESC');
         $query = $this->db->get(TBL_BALANCE_STOCK_DATA);
-        $rowcount = 100;
+        $rowcount = $query->num_rows();
         return $rowcount;
 
     }

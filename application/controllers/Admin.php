@@ -29196,8 +29196,8 @@ public function fetchbalancestock(){
         }
         $json_data = array(
             "draw"            => intval( $params['draw'] ),   
-            "recordsTotal"    => intval(count($data) ),  
-            "recordsFiltered" => intval(count($data)),
+            "recordsTotal"    => intval($totalRecords ),  
+            "recordsFiltered" => intval($totalRecords),
             "data"            => $data   // total data array
             );
         echo json_encode($json_data);
