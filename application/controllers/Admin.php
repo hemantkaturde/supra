@@ -26292,6 +26292,90 @@ $col = 0;
 
 $html = '<table width="100%" cellspacing="0" cellpadding="0">';
 
+// for ($i = 1; $i <= $totalLabels; $i++) {
+
+//     if ($col == 0) {
+//         $html .= '<tr>';
+//     }
+
+//     $html .= '
+//     <td style="
+//         width:100mm;
+//         height:70mm;
+      
+//         padding:5mm;
+//         text-align:center;
+//         vertical-align:middle;
+//         font-family: Arial, Helvetica, sans-serif;
+//     ">
+
+//         <!-- CENTER INNER BOX -->
+//         <div style="
+//             width:90%;
+//             margin:0 auto;
+          
+//             padding:6mm;
+//         ">
+
+//             <!-- PRODUCT NAME -->
+//             <div style="
+//                 font-size:16px;
+//                 font-weight:bold;
+//                 letter-spacing:0.3px;
+//                 margin-bottom:6px;
+//             ">
+//                 '.$getTdirdata[0]['name'].'
+//             </div>
+
+//             <!-- PART NUMBER -->
+//             <div style="
+//                 font-size:15px;
+//                 margin-bottom:10px;
+//                 margin-tp:10px;
+//             ">
+//                 PART NO : '.$getTdirdata[0]['part_number'].'
+//             </div>
+
+//             <!-- QTY -->
+//             <div style="
+//                 font-size:15px;
+//                 margin-bottom:6px;
+//             ">
+//                 QTY PER BAG: '.$getTdirdata[0]['qty_per_bag'].' (PCS)
+//             </div>
+
+//             <!-- DIVIDER -->
+//             <div style="
+//                 border-top:1px solid #000;
+//                 width:85%;
+//                 margin:6px auto;
+//             "></div>
+
+//             <!-- REPORT NO -->
+//             <div style="
+//                 font-size:14px;
+//                 font-weight:bold;
+//                 letter-spacing:0.4px;
+//                 margin-top:10px;
+//             ">
+//                 Report No : '.$getTdirdata[0]['report_number'].'
+//             </div>
+
+//         </div>
+
+//     </td>';
+
+//     $col++;
+
+//     if ($col == 2) {
+//         $html .= '</tr>';
+//         $col = 0;
+//     }
+// }
+
+// $html .= '</table>';
+
+
 for ($i = 1; $i <= $totalLabels; $i++) {
 
     if ($col == 0) {
@@ -26302,67 +26386,32 @@ for ($i = 1; $i <= $totalLabels; $i++) {
     <td style="
         width:100mm;
         height:70mm;
-      
         padding:5mm;
         text-align:center;
         vertical-align:middle;
         font-family: Arial, Helvetica, sans-serif;
     ">
+        <div style="width:90%; margin:0 auto; padding:6mm;">
 
-        <!-- CENTER INNER BOX -->
-        <div style="
-            width:90%;
-            margin:0 auto;
-          
-            padding:6mm;
-        ">
-
-            <!-- PRODUCT NAME -->
-            <div style="
-                font-size:16px;
-                font-weight:bold;
-                letter-spacing:0.3px;
-                margin-bottom:6px;
-            ">
+            <div style="font-size:16px; font-weight:bold; margin-bottom:6px;">
                 '.$getTdirdata[0]['name'].'
             </div>
 
-            <!-- PART NUMBER -->
-            <div style="
-                font-size:15px;
-                margin-bottom:10px;
-                margin-tp:10px;
-            ">
+            <div style="font-size:15px; margin-bottom:10px;">
                 PART NO : '.$getTdirdata[0]['part_number'].'
             </div>
 
-            <!-- QTY -->
-            <div style="
-                font-size:15px;
-                margin-bottom:6px;
-            ">
+            <div style="font-size:15px; margin-bottom:6px;">
                 QTY PER BAG: '.$getTdirdata[0]['qty_per_bag'].' (PCS)
             </div>
 
-            <!-- DIVIDER -->
-            <div style="
-                border-top:1px solid #000;
-                width:85%;
-                margin:6px auto;
-            "></div>
+            <div style="border-top:1px solid #000; width:85%; margin:6px auto;"></div>
 
-            <!-- REPORT NO -->
-            <div style="
-                font-size:14px;
-                font-weight:bold;
-                letter-spacing:0.4px;
-                margin-top:10px;
-            ">
+            <div style="font-size:14px; font-weight:bold; margin-top:10px;">
                 Report No : '.$getTdirdata[0]['report_number'].'
             </div>
 
         </div>
-
     </td>';
 
     $col++;
@@ -26371,6 +26420,11 @@ for ($i = 1; $i <= $totalLabels; $i++) {
         $html .= '</tr>';
         $col = 0;
     }
+}
+
+/* IMPORTANT FIX: agar last row single ho */
+if ($col == 1) {
+    $html .= '<td style="width:100mm;"></td></tr>';
 }
 
 $html .= '</table>';
@@ -26583,6 +26637,90 @@ $col = 0;
 
 $html = '<table width="100%" cellspacing="0" cellpadding="0">';
 
+// for ($i = 1; $i <= $totalLabels; $i++) {
+
+//     if ($col == 0) {
+//         $html .= '<tr>';
+//     }
+
+//     $html .= '
+//     <td style="
+//         width:100mm;
+//         height:70mm;
+      
+//         padding:5mm;
+//         text-align:center;
+//         vertical-align:middle;
+//         font-family: Arial, Helvetica, sans-serif;
+//     ">
+
+//         <!-- CENTER INNER BOX -->
+//         <div style="
+//             width:90%;
+//             margin:0 auto;
+          
+//             padding:6mm;
+//         ">
+
+//             <!-- PRODUCT NAME -->
+//             <div style="
+//                 font-size:16px;
+//                 font-weight:bold;
+//                 letter-spacing:0.3px;
+//                 margin-bottom:6px;
+//             ">
+//                 '.$getTdirdata[0]['name'].'
+//             </div>
+
+//             <!-- PART NUMBER -->
+//             <div style="
+//                 font-size:15px;
+//                 margin-bottom:10px;
+//                 margin-tp:10px;
+//             ">
+//                 PART NO : '.$getTdirdata[0]['part_number'].'
+//             </div>
+
+//             <!-- QTY -->
+//             <div style="
+//                 font-size:15px;
+//                 margin-bottom:6px;
+//             ">
+//                 QTY PER BOX: '.$getTdirdata[0]['qty_per_box'].' (PCS)
+//             </div>
+
+//             <!-- DIVIDER -->
+//             <div style="
+//                 border-top:1px solid #000;
+//                 width:85%;
+//                 margin:6px auto;
+//             "></div>
+
+//             <!-- REPORT NO -->
+//             <div style="
+//                 font-size:14px;
+//                 font-weight:bold;
+//                 letter-spacing:0.4px;
+//                 margin-top:10px;
+//             ">
+//                 Report No : '.$getTdirdata[0]['report_number'].'
+//             </div>
+
+//         </div>
+
+//     </td>';
+
+//     $col++;
+
+//     if ($col == 2) {
+//         $html .= '</tr>';
+//         $col = 0;
+//     }
+// }
+
+// $html .= '</table>';
+
+
 for ($i = 1; $i <= $totalLabels; $i++) {
 
     if ($col == 0) {
@@ -26593,67 +26731,32 @@ for ($i = 1; $i <= $totalLabels; $i++) {
     <td style="
         width:100mm;
         height:70mm;
-      
         padding:5mm;
         text-align:center;
         vertical-align:middle;
         font-family: Arial, Helvetica, sans-serif;
     ">
+        <div style="width:90%; margin:0 auto; padding:6mm;">
 
-        <!-- CENTER INNER BOX -->
-        <div style="
-            width:90%;
-            margin:0 auto;
-          
-            padding:6mm;
-        ">
-
-            <!-- PRODUCT NAME -->
-            <div style="
-                font-size:16px;
-                font-weight:bold;
-                letter-spacing:0.3px;
-                margin-bottom:6px;
-            ">
+            <div style="font-size:16px; font-weight:bold; margin-bottom:6px;">
                 '.$getTdirdata[0]['name'].'
             </div>
 
-            <!-- PART NUMBER -->
-            <div style="
-                font-size:15px;
-                margin-bottom:10px;
-                margin-tp:10px;
-            ">
+            <div style="font-size:15px; margin-bottom:10px;">
                 PART NO : '.$getTdirdata[0]['part_number'].'
             </div>
 
-            <!-- QTY -->
-            <div style="
-                font-size:15px;
-                margin-bottom:6px;
-            ">
+            <div style="font-size:15px; margin-bottom:6px;">
                 QTY PER BOX: '.$getTdirdata[0]['qty_per_box'].' (PCS)
             </div>
 
-            <!-- DIVIDER -->
-            <div style="
-                border-top:1px solid #000;
-                width:85%;
-                margin:6px auto;
-            "></div>
+            <div style="border-top:1px solid #000; width:85%; margin:6px auto;"></div>
 
-            <!-- REPORT NO -->
-            <div style="
-                font-size:14px;
-                font-weight:bold;
-                letter-spacing:0.4px;
-                margin-top:10px;
-            ">
+            <div style="font-size:14px; font-weight:bold; margin-top:10px;">
                 Report No : '.$getTdirdata[0]['report_number'].'
             </div>
 
         </div>
-
     </td>';
 
     $col++;
@@ -26664,7 +26767,13 @@ for ($i = 1; $i <= $totalLabels; $i++) {
     }
 }
 
+/* ✅ IMPORTANT: agar last row single hai */
+if ($col == 1) {
+    $html .= '<td style="width:100mm;"></td></tr>';
+}
+
 $html .= '</table>';
+
 
 $mpdf->WriteHTML($html);
 $mpdf->Output('Export Label Box.pdf', 'D');
