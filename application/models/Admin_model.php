@@ -9607,6 +9607,7 @@ class Admin_model extends CI_Model
                 $data[$counter]['rejected_reason'] =$value['rejected_reason'];
                 $data[$counter]['qty_In_pcs'] =$value['qty_In_pcs'];
                 $data[$counter]['qty_In_kgs'] =round($value['qty_In_kgs'],3);
+                $data[$counter]['no_of_boxes'] =round($value['no_of_boxes'],3);
                 $data[$counter]['remark'] =$value['remark'];
                 $data[$counter]['action'] = '';
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['rejection_item_id']."' class='fa fa-pencil-square-o editrejectionformitem' aria-hidden='true'></i>  &nbsp ";
@@ -10422,7 +10423,7 @@ class Admin_model extends CI_Model
 
   public function geteditrejectionformitem( $id){
 
-   $this->db->select('id,rejected_reason,qty_In_pcs,qty_in_kgs,remark');
+   $this->db->select('id,rejected_reason,qty_In_pcs,qty_in_kgs,no_of_boxes,remark');
    $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.id', $id);
    $this->db->order_by(TBL_REJECTION_FORM_REJECTED_ITEM.'.id','DESC');
    $query = $this->db->get(TBL_REJECTION_FORM_REJECTED_ITEM);

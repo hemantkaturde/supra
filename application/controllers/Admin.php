@@ -11161,7 +11161,8 @@ class Admin extends BaseController
             $saverejectedform_response = array();
             $this->form_validation->set_rules('rejected_reason','Rejected Reason','trim|required'); 
             $this->form_validation->set_rules('qty_in_pcs','Qty In Pcs','trim|required');   
-            $this->form_validation->set_rules('qty_in_kgs','Qty In Kgs','trim|required');      
+            $this->form_validation->set_rules('qty_in_kgs','Qty In Kgs','trim|required'); 
+            $this->form_validation->set_rules('no_of_boxes','No Of Boxes','trim');      
             $this->form_validation->set_rules('remark','Remark','trim');                   
             if($this->form_validation->run() == FALSE)
             {
@@ -11177,6 +11178,7 @@ class Admin extends BaseController
                     'rejected_reason' => trim($this->input->post('rejected_reason')),
                     'qty_in_pcs' => trim($this->input->post('qty_in_pcs')),
                     'qty_in_kgs' => trim($this->input->post('qty_in_kgs')),
+                    'no_of_boxes' => trim($this->input->post('no_of_boxes')),
                     'remark' => trim($this->input->post('remark')),
                 );
 
@@ -11612,7 +11614,8 @@ class Admin extends BaseController
             $saveenquiryform_response = array();
             $this->form_validation->set_rules('rejected_reason','Rejected Reason','trim|required');    
             $this->form_validation->set_rules('qty_in_pcs','Qty In PCS','trim|required');     
-            $this->form_validation->set_rules('qty_in_kgs','Qty In KGS','trim|required');    
+            $this->form_validation->set_rules('qty_in_kgs','Qty In KGS','trim|required'); 
+            $this->form_validation->set_rules('no_of_boxes','Qty In KGS','trim|required');   
             $this->form_validation->set_rules('remark','Remark','trim');    
 
            if($this->form_validation->run() == FALSE)
@@ -11625,6 +11628,7 @@ class Admin extends BaseController
                     'rejected_reason'  =>  trim($this->input->post('rejected_reason')),
                     'qty_in_pcs'  =>  trim($this->input->post('qty_in_pcs')),
                     'qty_in_kgs'  =>  trim($this->input->post('qty_in_kgs')),
+                    'no_of_boxes'  =>  trim($this->input->post('no_of_boxes')),
                     'remark'  =>  trim($this->input->post('remark'))
                 );
 

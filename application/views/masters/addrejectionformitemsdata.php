@@ -93,6 +93,15 @@
                      <p class="error qty_in_kgs_error"></p>
                   </div>
                </div>
+
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label">No.of Boxes</label>
+                  <div class="col-sm-8">
+                     <input type="number" class="form-control"  id="no_of_boxes" name="no_of_boxes">
+                     <p class="error no_of_boxes_error"></p>
+                  </div>
+               </div>
+
                <div class="form-group row">
                   <label class="col-sm-4 col-form-label">Remark</label>
                   <div class="col-sm-8">

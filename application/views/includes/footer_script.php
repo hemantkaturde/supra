@@ -18446,7 +18446,8 @@
 	                 { "width": "20%", "targets": 1 },
 					 { "width": "20%", "targets": 2 },
 	                 { "width": "15%", "targets": 3 },
-					 { "width": "15%", "targets": 4 }
+					 { "width": "15%", "targets": 4 },
+					 { "width": "15%", "targets": 5 }
 	            ],
 	            responsive: true,
 	            "oLanguage": {
@@ -18537,6 +18538,7 @@
 						$('#rejected_reason').val(fetchResponse.rejected_reason);  
 						$('#qty_in_pcs').val(fetchResponse.qty_In_pcs);  
 						$('#qty_in_kgs').val(fetchResponse.qty_in_kgs);  
+						$('#no_of_boxes').val(fetchResponse.no_of_boxes);  
 						$('#remark').val(fetchResponse.remark); 
 				},
 				error: function (jqXHR, textStatus, errorThrown)
