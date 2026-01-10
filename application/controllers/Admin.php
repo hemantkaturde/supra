@@ -29240,7 +29240,7 @@ public function printincomingitemdetailslabelbarcode($id)
                     </span><br>
                     <span style="font-size:16px;">
                         Carton: ' . $i . '/' . $totalLabels . '
-                    </span><br>
+                    </span>,
                     <span style="font-size:16px;">
                         Lot No: ' . $lot_number. '
                     </span>
