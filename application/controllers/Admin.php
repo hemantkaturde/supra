@@ -29829,171 +29829,341 @@ public function addnewbalancestock(){
 
     public function printbalancestockitemlabelbarcode($balance_stock_item_id)
     {
-        require_once FCPATH . 'vendor/autoload.php'; // adjust path if needed
+            require_once FCPATH . 'vendor/autoload.php'; // adjust path if needed
 
-        //get itemdetails by item id
-        $getdata_itemdetailsdata = $this->admin_model->getdata_getbalance_stock_details_data_print_barcode(trim($balance_stock_item_id));
+            //get itemdetails by item id
+            $getdata_itemdetailsdata = $this->admin_model->getdata_getbalance_stock_details_data_print_barcode(trim($balance_stock_item_id));
 
-        $no_of_boxes_in_pcs = $getdata_itemdetailsdata[0]['no_of_boxes_in_pcs'];
-        $main_bal_id = $getdata_itemdetailsdata[0]['main_balance_stock_id'];
-        $po_number = $getdata_itemdetailsdata[0]['po_number_actual'];
-        $part_number_actual = $getdata_itemdetailsdata[0]['part_number_actual'];
+            $no_of_boxes_in_pcs = $getdata_itemdetailsdata[0]['no_of_boxes_in_pcs'];
+            $main_bal_id = $getdata_itemdetailsdata[0]['main_balance_stock_id'];
+            $po_number = $getdata_itemdetailsdata[0]['po_number_actual'];
+            $part_number_actual = $getdata_itemdetailsdata[0]['part_number_actual'];
 
-        // ---------------- QR CODE GENERATE -----------------
-        $qrData = base_url()."admin/printbalancestockdetailslabel_pass_protected/".$main_bal_id; // your QR text
+            // ---------------- QR CODE GENERATE -----------------
+            $qrData = base_url()."admin/printbalancestockdetailslabel_pass_protected/".$main_bal_id; // your QR text
 
-        $qr = QrCode::create($qrData)
-                ->setSize(200)
-                ->setMargin(10);
+            $qr = QrCode::create($qrData)
+                    ->setSize(200)
+                    ->setMargin(10);
 
-        $writer = new PngWriter();
-        $qrResult = $writer->write($qr);
+            $writer = new PngWriter();
+            $qrResult = $writer->write($qr);
 
-        // Convert QR to Base64 for mPDF image
-        $qrBase64 = base64_encode($qrResult->getString());
-
-
-        $mpdf = new \Mpdf\Mpdf([
-            'format' => 'A4',
-            'margin_left' => 5,
-            'margin_right' => 5,
-            'margin_top' => 5,
-            'margin_bottom' => 5,
-        ]);
-
-        // $html = '<table border="1" cellpadding="5" cellspacing="0" 
-        //         style="border-collapse: collapse; width: 100%; text-align:center;">';
-
-        // $col = 0;
-        // $totalLabels =  $no_of_boxes_in_pcs;
-
-        // for ($i = 1; $i <= $totalLabels; $i++) {
-
-        //     if ($col == 0) {
-        //         $html .= "<tr>";
-        //     }
-
-        //     $html .= "
-        //         <td style='width:33%; height:220px; vertical-align:top;'>
-        //             <div style='text-align:center;'>
-        //                 <img src='data:image/png;base64,".$qrBase64."' width='120'><br>
-        //                 <span style='font-size:16px; font-weight:bold;'>P.O.No: {$po_number}</span><br>
-        //                 <span style='font-size:16px;'>Part No: {$part_number_actual}</span><br>
-        //                 <span style='font-size:16px;'>Carton: {$i}/{$totalLabels}</span>
-        //             </div>
-        //         </td>
-        //     ";
-
-        //     $col++;
-        //     if ($col == 3) {
-        //         $html .= "</tr>";
-        //         $col = 0;
-        //     }
-        // }
-
-        // $html .= "</table>";
-
-        // // Combine HTML
-        // $mpdf->WriteHTML($barcodeHtml . $html);
-
-        // // Password protection (same password to open PDF)
-        // // $password = 'Supra@2025'; // set your password here
-        // // $mpdf->SetProtection([], $password, $password);
-
-        // // Output PDF
-        // $mpdf->Output('Balance Stock Details Barcode lebal.pdf', 'D'); // 'I' = open in browser
+            // Convert QR to Base64 for mPDF image
+            $qrBase64 = base64_encode($qrResult->getString());
 
 
-    $html = '';
-    $col = 0;
-    $count = 0;
+            $mpdf = new \Mpdf\Mpdf([
+                'format' => 'A4',
+                'margin_left' => 5,
+                'margin_right' => 5,
+                'margin_top' => 5,
+                'margin_bottom' => 5,
+            ]);
 
-    $totalLabels = $no_of_boxes_in_pcs;
+            // $html = '<table border="1" cellpadding="5" cellspacing="0" 
+            //         style="border-collapse: collapse; width: 100%; text-align:center;">';
 
-    for ($i = 1; $i <= $totalLabels; $i++) {
+            // $col = 0;
+            // $totalLabels =  $no_of_boxes_in_pcs;
 
-        /* ---- New page every 8 labels ---- */
-        if ($count % 8 == 0) {
-            if ($count != 0) {
-                $html .= '</table>';
-                $mpdf->WriteHTML($barcodeHtml . $html);
-                $mpdf->AddPage();
+            // for ($i = 1; $i <= $totalLabels; $i++) {
+
+            //     if ($col == 0) {
+            //         $html .= "<tr>";
+            //     }
+
+            //     $html .= "
+            //         <td style='width:33%; height:220px; vertical-align:top;'>
+            //             <div style='text-align:center;'>
+            //                 <img src='data:image/png;base64,".$qrBase64."' width='120'><br>
+            //                 <span style='font-size:16px; font-weight:bold;'>P.O.No: {$po_number}</span><br>
+            //                 <span style='font-size:16px;'>Part No: {$part_number_actual}</span><br>
+            //                 <span style='font-size:16px;'>Carton: {$i}/{$totalLabels}</span>
+            //             </div>
+            //         </td>
+            //     ";
+
+            //     $col++;
+            //     if ($col == 3) {
+            //         $html .= "</tr>";
+            //         $col = 0;
+            //     }
+            // }
+
+            // $html .= "</table>";
+
+            // // Combine HTML
+            // $mpdf->WriteHTML($barcodeHtml . $html);
+
+            // // Password protection (same password to open PDF)
+            // // $password = 'Supra@2025'; // set your password here
+            // // $mpdf->SetProtection([], $password, $password);
+
+            // // Output PDF
+            // $mpdf->Output('Balance Stock Details Barcode lebal.pdf', 'D'); // 'I' = open in browser
+
+
+        $html = '';
+        $col = 0;
+        $count = 0;
+
+        $totalLabels = $no_of_boxes_in_pcs;
+
+        for ($i = 1; $i <= $totalLabels; $i++) {
+
+            /* ---- New page every 8 labels ---- */
+            if ($count % 8 == 0) {
+                if ($count != 0) {
+                    $html .= '</table>';
+                    $mpdf->WriteHTML($barcodeHtml . $html);
+                    $mpdf->AddPage();
+                }
+
+                $html = '
+                <table cellpadding="0" cellspacing="0"
+                    style="width:100%; border-collapse:separate; border-spacing:4mm 6mm; text-align:center;">
+                ';
+                $col = 0;
             }
 
-            $html = '
-            <table cellpadding="0" cellspacing="0"
-                style="width:100%; border-collapse:separate; border-spacing:4mm 6mm; text-align:center;">
+            // Start row
+            if ($col == 0) {
+                $html .= '<tr>';
+            }
+
+            $html .= '
+                <td style="
+                    width:95mm;
+                    height:65mm;
+                    vertical-align:top;
+
+                    /* INNER PADDING (mPDF SAFE) */
+                    padding-top:8mm;
+                    padding-bottom:6mm;
+                    padding-left:6mm;
+                    padding-right:6mm;
+                ">
+                    <div style="text-align:center;">
+                        <img src="data:image/png;base64,' . $qrBase64 . '" width="120"><br>
+                        <span style="font-size:16px; font-weight:bold;">
+                            P.O.No: ' . $po_number . '
+                        </span><br>
+                        <span style="font-size:16px;">
+                            Part No: ' . $part_number_actual . '
+                        </span><br>
+                        <span style="font-size:16px;">
+                            Carton: ' . $i . '/' . $totalLabels . '
+                        </span>
+                    </div>
+                </td>
             ';
-            $col = 0;
+
+            $col++;
+            $count++;
+
+            /* 🔥 SINGLE LABEL FIX (LEFT ONLY) */
+            if ($totalLabels == 1) {
+                $html .= '<td style="width:100mm; height:72mm;"></td>';
+                $html .= '</tr>';
+                break;
+            }
+
+            // Close row after 2 columns
+            if ($col == 2) {
+                $html .= '</tr>';
+                $col = 0;
+            }
         }
 
-        // Start row
-        if ($col == 0) {
-            $html .= '<tr>';
-        }
-
-        $html .= '
-            <td style="
-                width:95mm;
-                height:65mm;
-                vertical-align:top;
-
-                /* INNER PADDING (mPDF SAFE) */
-                padding-top:8mm;
-                padding-bottom:6mm;
-                padding-left:6mm;
-                padding-right:6mm;
-            ">
-                <div style="text-align:center;">
-                    <img src="data:image/png;base64,' . $qrBase64 . '" width="120"><br>
-                    <span style="font-size:16px; font-weight:bold;">
-                        P.O.No: ' . $po_number . '
-                    </span><br>
-                    <span style="font-size:16px;">
-                        Part No: ' . $part_number_actual . '
-                    </span><br>
-                    <span style="font-size:16px;">
-                        Carton: ' . $i . '/' . $totalLabels . '
-                    </span>
-                </div>
-            </td>
-        ';
-
-        $col++;
-        $count++;
-
-        /* 🔥 SINGLE LABEL FIX (LEFT ONLY) */
-        if ($totalLabels == 1) {
+        /* Close last incomplete row */
+        if ($col != 0 && $totalLabels > 1) {
             $html .= '<td style="width:100mm; height:72mm;"></td>';
             $html .= '</tr>';
-            break;
         }
 
-        // Close row after 2 columns
-        if ($col == 2) {
+        $html .= '</table>';
+
+        /* Render PDF */
+        $mpdf->WriteHTML($barcodeHtml . $html);
+
+        /* Output */
+        $mpdf->Output('Balance_Stock_Details_Barcode_Label.pdf', 'D');
+
+    }
+
+
+    
+    public function printbalancestockitemlabelbarcodemain($balance_stock_id)
+    {
+            require_once FCPATH . 'vendor/autoload.php'; // adjust path if needed
+
+            //get itemdetails by item id
+            $getdata_itemdetailsdata = $this->admin_model->getdata_getbalance_stock_details_data_print_barcode_main(trim($balance_stock_id));
+
+            $no_of_boxes_in_pcs = $this->admin_model->total_number_of_boxes_forbalence_stock_count($getdata_itemdetailsdata[0]['main_balance_stock_id']);
+
+
+            $main_bal_id = $getdata_itemdetailsdata[0]['main_balance_stock_id'];
+            $po_number = $getdata_itemdetailsdata[0]['po_number_actual'];
+            $part_number_actual = $getdata_itemdetailsdata[0]['part_number_actual'];
+
+
+            // $no_of_boxes_in_pcs = $getdata_itemdetailsdata[0]['no_of_boxes_in_pcs'];
+
+            // ---------------- QR CODE GENERATE -----------------
+            $qrData = base_url()."admin/printbalancestockdetailslabel_pass_protected/".$main_bal_id; // your QR text
+
+            $qr = QrCode::create($qrData)
+                    ->setSize(200)
+                    ->setMargin(10);
+
+            $writer = new PngWriter();
+            $qrResult = $writer->write($qr);
+
+            // Convert QR to Base64 for mPDF image
+            $qrBase64 = base64_encode($qrResult->getString());
+
+
+            $mpdf = new \Mpdf\Mpdf([
+                'format' => 'A4',
+                'margin_left' => 5,
+                'margin_right' => 5,
+                'margin_top' => 5,
+                'margin_bottom' => 5,
+            ]);
+
+            // $html = '<table border="1" cellpadding="5" cellspacing="0" 
+            //         style="border-collapse: collapse; width: 100%; text-align:center;">';
+
+            // $col = 0;
+            // $totalLabels =  $no_of_boxes_in_pcs;
+
+            // for ($i = 1; $i <= $totalLabels; $i++) {
+
+            //     if ($col == 0) {
+            //         $html .= "<tr>";
+            //     }
+
+            //     $html .= "
+            //         <td style='width:33%; height:220px; vertical-align:top;'>
+            //             <div style='text-align:center;'>
+            //                 <img src='data:image/png;base64,".$qrBase64."' width='120'><br>
+            //                 <span style='font-size:16px; font-weight:bold;'>P.O.No: {$po_number}</span><br>
+            //                 <span style='font-size:16px;'>Part No: {$part_number_actual}</span><br>
+            //                 <span style='font-size:16px;'>Carton: {$i}/{$totalLabels}</span>
+            //             </div>
+            //         </td>
+            //     ";
+
+            //     $col++;
+            //     if ($col == 3) {
+            //         $html .= "</tr>";
+            //         $col = 0;
+            //     }
+            // }
+
+            // $html .= "</table>";
+
+            // // Combine HTML
+            // $mpdf->WriteHTML($barcodeHtml . $html);
+
+            // // Password protection (same password to open PDF)
+            // // $password = 'Supra@2025'; // set your password here
+            // // $mpdf->SetProtection([], $password, $password);
+
+            // // Output PDF
+            // $mpdf->Output('Balance Stock Details Barcode lebal.pdf', 'D'); // 'I' = open in browser
+
+
+        $html = '';
+        $col = 0;
+        $count = 0;
+
+        $totalLabels = $no_of_boxes_in_pcs;
+
+        for ($i = 1; $i <= $totalLabels; $i++) {
+
+            /* ---- New page every 8 labels ---- */
+            if ($count % 8 == 0) {
+                if ($count != 0) {
+                    $html .= '</table>';
+                    $mpdf->WriteHTML($barcodeHtml . $html);
+                    $mpdf->AddPage();
+                }
+
+                $html = '
+                <table cellpadding="0" cellspacing="0"
+                    style="width:100%; border-collapse:separate; border-spacing:4mm 6mm; text-align:center;">
+                ';
+                $col = 0;
+            }
+
+            // Start row
+            if ($col == 0) {
+                $html .= '<tr>';
+            }
+
+            $html .= '
+                <td style="
+                    width:95mm;
+                    height:65mm;
+                    vertical-align:top;
+
+                    /* INNER PADDING (mPDF SAFE) */
+                    padding-top:8mm;
+                    padding-bottom:6mm;
+                    padding-left:6mm;
+                    padding-right:6mm;
+                ">
+                    <div style="text-align:center;">
+                        <img src="data:image/png;base64,' . $qrBase64 . '" width="120"><br>
+                        <span style="font-size:16px; font-weight:bold;">
+                            P.O.No: ' . $po_number . '
+                        </span><br>
+                        <span style="font-size:16px;">
+                            Part No: ' . $part_number_actual . '
+                        </span><br>
+                        <span style="font-size:16px;">
+                            Carton: ' . $i . '/' . $totalLabels . '
+                        </span>
+                    </div>
+                </td>
+            ';
+
+            $col++;
+            $count++;
+
+            /* 🔥 SINGLE LABEL FIX (LEFT ONLY) */
+            if ($totalLabels == 1) {
+                $html .= '<td style="width:100mm; height:72mm;"></td>';
+                $html .= '</tr>';
+                break;
+            }
+
+            // Close row after 2 columns
+            if ($col == 2) {
+                $html .= '</tr>';
+                $col = 0;
+            }
+        }
+
+        /* Close last incomplete row */
+        if ($col != 0 && $totalLabels > 1) {
+            $html .= '<td style="width:100mm; height:72mm;"></td>';
             $html .= '</tr>';
-            $col = 0;
         }
-    }
 
-    /* Close last incomplete row */
-    if ($col != 0 && $totalLabels > 1) {
-        $html .= '<td style="width:100mm; height:72mm;"></td>';
-        $html .= '</tr>';
-    }
+        $html .= '</table>';
 
-    $html .= '</table>';
+        /* Render PDF */
+        $mpdf->WriteHTML($barcodeHtml . $html);
 
-    /* Render PDF */
-    $mpdf->WriteHTML($barcodeHtml . $html);
-
-    /* Output */
-    $mpdf->Output('Balance_Stock_Details_Barcode_Label.pdf', 'D');
-
-
-
+        /* Output */
+        $mpdf->Output('Balance_Stock_Details_Barcode_Label.pdf', 'D');
 
     }
+
 
 
 }

@@ -24144,10 +24144,10 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."editbalancestock/".$value['balance_stock_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true'></i></a>   &nbsp";
                 //$data[$counter]['action'] .= "<a href='".ADMIN_PATH."tdir_attachment/".$value['tdir_id']."' style='cursor: pointer;' target='_blank' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-paperclip' aria-hidden='true'></i></a>    &nbsp";
                 
-                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."admin/printbalancestockitemlabelbarcode/".$value['balance_stock_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-tag' aria-hidden='true'></i></a>   &nbsp";
-
-                
+                // $data[$counter]['action'] .= "<a href='".ADMIN_PATH."admin/printbalancestockitemlabelbarcode/".$value['balance_stock_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-tag' aria-hidden='true'></i></a>   &nbsp";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."admin/printbalancestockitemlabelbarcodemain/".$value['balance_stock_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-tag' aria-hidden='true'></i></a>   &nbsp";
                 $data[$counter]['action'] .= "<a href='".ADMIN_PATH."printbalancestockdetailslabel/".$value['balance_stock_id']."' style='cursor: pointer;' target='_blank'><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>   &nbsp";
+
                 $data[$counter]['action'] .= "<i style='font-size: x-large;cursor: pointer;' data-id='".$value['balance_stock_id']."' class='fa fa-trash-o deletebalancestock' aria-hidden='true'></i>"; 
                 $counter++; 
             }
@@ -24246,6 +24246,25 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->where(TBL_BALANCE_STOCK_DETAILS.'.id',$balance_stock_item_id);
 
         $query = $this->db->get(TBL_BALANCE_STOCK_DETAILS);
+        $fetch_result = $query->result_array();
+        return $fetch_result;
+
+    }
+
+
+    public function getdata_getbalance_stock_details_data_print_barcode_main($balance_stock_id){
+
+        //$this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id  = '.TBL_BALANCE_STOCK_DATA.'.fg_part_number_id');
+        //$this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id  = '.TBL_BALANCE_STOCK_DATA.'.vendor_name_id');
+
+        $this->db->select(TBL_BALANCE_STOCK_DATA.'.id as main_balance_stock_id,'.TBL_VENDOR_PO_MASTER.'.po_number as po_number_actual,'.TBL_FINISHED_GOODS.'.part_number as part_number_actual');
+
+        $this->db->join(TBL_VENDOR_PO_MASTER, TBL_VENDOR_PO_MASTER.'.id  = '.TBL_BALANCE_STOCK_DATA.'.vendor_po_id');
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id  = '.TBL_BALANCE_STOCK_DATA.'.fg_part_number_id');
+
+        $this->db->where(TBL_BALANCE_STOCK_DATA.'.id',$balance_stock_id);
+
+        $query = $this->db->get(TBL_BALANCE_STOCK_DATA);
         $fetch_result = $query->result_array();
         return $fetch_result;
 
