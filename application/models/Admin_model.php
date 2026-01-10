@@ -13587,7 +13587,7 @@ public function getpreexportitemdetailscount($params,$id){
 
 
 public function getpreexportitemdetailsdata($params,$id){
-    $this->db->select('*,'.TBL_PREEXPORT_ITEM_DETAILS.'.id as preexportitemid,'.TBL_PREEXPORT_ITEM_DETAILS.'.remark as itemdetailsremark');
+    $this->db->select('*,'.TBL_PREEXPORT_ITEM_DETAILS.'.id as preexportitemid,'.TBL_PREEXPORT_ITEM_DETAILS.'.remark as itemdetailsremark,'.TBL_BUYER_PO_MASTER.'.buyer_po_number as original_po_master');
     if($params['search']['value'] != "") 
     {
         $this->db->where("(".TBL_FINISHED_GOODS.".part_number LIKE '%".$params['search']['value']."%'");
@@ -13615,7 +13615,7 @@ public function getpreexportitemdetailsdata($params,$id){
             $data[$counter]['part_number'] =$value['part_number'];
             $data[$counter]['part_description'] =$value['name'];
             // $data[$counter]['total_item_net_weight'] =$value['total_item_net_weight'];
-            $data[$counter]['sales_order_number'] =$value['sales_order_number'];
+            $data[$counter]['sales_order_number'] =$value['sales_order_number'].' - '.$value['original_po_master'];
 
               $preexportitemid =  $this->getSumetionofpreexportattributes($value['preexportitemid']);
 
