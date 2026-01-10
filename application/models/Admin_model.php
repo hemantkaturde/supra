@@ -9515,6 +9515,7 @@ class Admin_model extends CI_Model
             {
                 $data[$counter]['part_number'] =$value['part_number'];
                 $data[$counter]['name'] =$value['name'];
+                $data[$counter]['total_number_of_boxes'] = $this->calculatetotalnumberboxrejection($vendor_po_id,$id);
                 $data[$counter]['remark'] =$value['item_remark'];
                 $data[$counter]['action'] = '';
 
@@ -9527,6 +9528,21 @@ class Admin_model extends CI_Model
         }
         return $data;
     }
+
+
+    public function calculatetotalnumberboxrejection($vendor_po_id,$id){
+
+            $this->db->select('SUM(no_of_boxes) as total');
+            $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.rejection_form_id', $id);
+            $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.vendor_po_id', $vendor_po_id);
+
+            $query  = $this->db->get(TBL_REJECTION_FORM_REJECTED_ITEM);
+            $result = $query->row();
+
+            return ($result && $result->total !== null) ? (int)$result->total : 0;
+    }
+
+
 
     public function getstockrejectionformitemdataitemdetailsforedit($vendor_po_id){
 

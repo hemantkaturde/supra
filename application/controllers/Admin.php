@@ -11123,7 +11123,6 @@ class Admin extends BaseController
                         <th style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 5px;border-bottom:1px solid black" valign="top">'.round($qty_In_pcs,3).' Pcs</th> 
                         <th style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 5px;border-bottom:1px solid black" valign="top">'.round($qty_In_kgs,3).' kgs</th> 
                         <th style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 5px;border-bottom:1px solid black" valign="top">'.$total_qty_boxes.'</th> 
-
                         <th style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 5px;border-bottom:1px solid black" valign="top"></th> 
                     </tr>
                 </table>

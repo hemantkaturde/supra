@@ -33,6 +33,7 @@
                                     <tr style="background-color:#3c8dbc !important;color:#fff">
                                         <th>Part Number</th>
                                         <th>Description</th>
+                                        <th>Total No. of Boxes</th>
                                         <th>Remark</th>
                                         <th>Action</th>
                                     </tr>
