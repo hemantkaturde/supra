@@ -18198,11 +18198,11 @@
 			var dt = $('#view_stockrejection_form_item_data').DataTable({
 	            "columnDefs": [ 
 	                 { className: "details-control", "targets": [ 0 ] },
-	                 { "width": "20%", "targets": 0 },
+	                 { "width": "10%", "targets": 0 },
 	                 { "width": "20%", "targets": 1 },
 					 { "width": "20%", "targets": 2 },
 	                 { "width": "20%", "targets": 3 },
-					 { "width": "10%", "targets": 4 }
+					 { "width": "12%", "targets": 4 }
 	            ],
 	            responsive: true,
 	            "oLanguage": {

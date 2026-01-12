@@ -11159,6 +11159,144 @@ class Admin extends BaseController
     
     }
 
+
+    public function printrejectionitemlabel($rejection_form_id,$vendor_po_item_id,$vendor_po_id,$part_number_id){
+
+
+            require_once FCPATH . 'vendor/autoload.php'; // adjust path if needed
+
+            //get itemdetails by item id
+            $getrejectionformdata= $this->admin_model->getalldataofeditrejectionform($rejection_form_id);
+
+       
+
+            $rejection_form_id = $getrejectionformdata['rejection_form_id'];
+            $id = $getrejectionformdata['id'];
+            $vpn = $getrejectionformdata['vpn'];
+            $po_number = $getrejectionformdata['po_number'];
+
+            $getstockrejectionformitemsingledata =  $this->admin_model->getstockrejectionformitemsingledata($vendor_po_id,$part_number_id);
+
+            $part_number_actual = $getstockrejectionformitemsingledata[0]['part_number'];
+
+            $getcalculatetotalnumberboxrejection =  $this->admin_model->calculatetotalnumberboxrejection($vendor_po_id,$rejection_form_id);
+            $no_of_boxes_in_pcs = $getcalculatetotalnumberboxrejection;
+
+            // ---------------- QR CODE GENERATE -----------------
+            $qrData = base_url()."admin/printrejectiondetails/".$rejection_form_id.'/'.$vendor_po_item_id.'/'.$vendor_po_id.'/'.$part_number_id; // your QR text
+
+            $qr = QrCode::create($qrData)
+                    ->setSize(200)
+                    ->setMargin(10);
+
+            $writer = new PngWriter();
+            $qrResult = $writer->write($qr);
+
+            // Convert QR to Base64 for mPDF image
+            $qrBase64 = base64_encode($qrResult->getString());
+
+
+            $mpdf = new \Mpdf\Mpdf([
+                'format' => 'A4',
+                'margin_left' => 5,
+                'margin_right' => 5,
+                'margin_top' => 5,
+                'margin_bottom' => 5,
+            ]);
+
+
+
+            $html = '';
+            $col = 0;
+            $count = 0;
+
+            $totalLabels = $no_of_boxes_in_pcs;
+
+            for ($i = 1; $i <= $totalLabels; $i++) {
+
+                /* ---- New page every 8 labels ---- */
+                if ($count % 8 == 0) {
+                    if ($count != 0) {
+                        $html .= '</table>';
+                        $mpdf->WriteHTML($barcodeHtml . $html);
+                        $mpdf->AddPage();
+                    }
+
+                    $html = '
+                    <table cellpadding="0" cellspacing="0"
+                        style="width:100%; border-collapse:separate; border-spacing:4mm 6mm; text-align:center;">
+                    ';
+                    $col = 0;
+                }
+
+                // Start row
+                if ($col == 0) {
+                    $html .= '<tr>';
+                }
+
+                $html .= '
+                    <td style="
+                        width:95mm;
+                        height:65mm;
+                        vertical-align:top;
+
+                        /* INNER PADDING (mPDF SAFE) */
+                        padding-top:8mm;
+                        padding-bottom:6mm;
+                        padding-left:6mm;
+                        padding-right:6mm;
+                    ">
+                        <div style="text-align:center;">
+                            <img src="data:image/png;base64,' . $qrBase64 . '" width="120"><br>
+                            <span style="font-size:16px; font-weight:bold;">
+                                P.O.No: ' . $po_number . '
+                            </span><br>
+                            <span style="font-size:16px;">
+                                Part No: ' . $part_number_actual . '
+                            </span><br>
+                            <span style="font-size:16px;">
+                                Carton: ' . $i . '/' . $totalLabels . '
+                            </span>
+                        </div>
+                    </td>
+                ';
+
+                $col++;
+                $count++;
+
+                /* 🔥 SINGLE LABEL FIX (LEFT ONLY) */
+                if ($totalLabels == 1) {
+                    $html .= '<td style="width:100mm; height:72mm;"></td>';
+                    $html .= '</tr>';
+                    break;
+                }
+
+                // Close row after 2 columns
+                if ($col == 2) {
+                    $html .= '</tr>';
+                    $col = 0;
+                }
+            }
+
+            /* Close last incomplete row */
+            if ($col != 0 && $totalLabels > 1) {
+                $html .= '<td style="width:100mm; height:72mm;"></td>';
+                $html .= '</tr>';
+            }
+
+            $html .= '</table>';
+
+            /* Render PDF */
+            $mpdf->WriteHTML($barcodeHtml . $html);
+
+            /* Output */
+            $mpdf->Output('Stock Rejection Form Items Label.pdf', 'D');
+
+
+    }
+
+
+
     public function saverejectedformitemdata(){
         $post_submit = $this->input->post();
         if($post_submit){
