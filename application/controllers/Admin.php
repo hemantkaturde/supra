@@ -29915,11 +29915,18 @@ public function addnewbalancestock(){
 
         $grand_total = 0;
         $rows_html = "";
+        $grand_total_number_box = 0;
+        $qty_per_box_in_pcs = 0;
 
         $i = 1;
         foreach($list as $row){
             $total = $row["no_of_boxes_in_pcs"] * $row["qty_per_box_in_pcs"];
             $grand_total += $total;
+            $grand_total_number_box += isset($row['no_of_boxes_in_pcs'])     ? (int) $row['no_of_boxes_in_pcs'] : 0;
+
+            $qty_per_box_in_pcs += isset($row['qty_per_box_in_pcs'])     ? (int) $row['qty_per_box_in_pcs'] : 0;
+
+
 
             $rows_html .= "
                 <tr>
@@ -29990,7 +29997,9 @@ public function addnewbalancestock(){
             </tr>
             '.$rows_html.'
             <tr>
-                <td colspan="4" class="small-title">Grand Total</td>
+                <td colspan="2" class="small-title">Grand Total</td>
+                <td><b>'.$grand_total_number_box.'</b></td>
+                <td><b>'.$qty_per_box_in_pcs.'</b></td>
                 <td><b>'.$grand_total.'</b></td>
             </tr>
         </table>
