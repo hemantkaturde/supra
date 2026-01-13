@@ -17016,9 +17016,11 @@
 																				    // console.log(balence_qty_in_pcs);
 																					// console.log('Hemant');
 
-																					$('#balence_qty_in_pcs').val(parseFloat(balenceitems_data.balence_qty_in_pcs).toFixed(2));
-																					$('#balence_qty_in_kgs').val(parseFloat(balenceitems_data.balence_qty_in_kgs).toFixed(3));
+                                                                                   $('#balence_qty_in_pcs').val((Math.round(Number(balenceitems_data.balence_qty_in_pcs) * 100) / 100).toFixed(2)); 
+                                                                                   $('#balence_qty_in_kgs').val((Math.round(Number(balenceitems_data.balence_qty_in_kgs) * 1000) / 1000).toFixed(3));
 
+																					//$('#balence_qty_in_pcs').val(parseFloat(balenceitems_data.balence_qty_in_pcs).toFixed(2));
+																					//$('#balence_qty_in_kgs').val(parseFloat(balenceitems_data.balence_qty_in_kgs).toFixed(3))
 
 																					$('#ready_for_exp_pcs').val('');
 
