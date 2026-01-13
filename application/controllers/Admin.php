@@ -11072,7 +11072,7 @@ class Admin extends BaseController
                     </tr>';
                     $qty_In_pcs+=$value['qty_In_pcs'];
                     $qty_In_kgs+=$value['qty_In_kgs'];
-                    $total_qty_boxes+=$value['no_of_boxes'];
+                    $total_qty_boxes += (int) $value['no_of_boxes'];
                 $j++;       
         }
 
@@ -11225,7 +11225,7 @@ class Admin extends BaseController
                     </tr>';
                     $qty_In_pcs+=$value['qty_In_pcs'];
                     $qty_In_kgs+=$value['qty_In_kgs'];
-                    $total_qty_boxes+=$value['no_of_boxes'];
+                    $total_qty_boxes += (int) $value['no_of_boxes'];
                 $j++;       
         }
 
