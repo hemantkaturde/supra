@@ -16911,7 +16911,7 @@ public function downlaoddebitnote($id){
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['less_quantity'].' '.$value['supplier_po_unit'].'</td> 
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rejected_quantity'].' '.$value['supplier_po_unit'].'</td>    
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['debit_note_rate'].'</td>    
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.round($value['debit_amount'],2).'</td>    
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.number_format(round($value['debit_amount'],2),2).'</td>    
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top"></td>
                 </tr>';
           
@@ -17083,7 +17083,7 @@ public function downlaoddebitnote($id){
 
                  <tr style="border: 1px solid black;">               
                     <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;;padding: 5px;;font-family:cambria;font-size:14px;"><b>Total </b></td>    
-                    <td style="border: 1px solid black;padding: 5px;">'.round($sub_total_amount,2).'</td>
+                    <td style="border: 1px solid black;padding: 5px;">'.number_format(round($sub_total_amount,2),2).'</td>
                 </tr>
 
 
@@ -17092,7 +17092,7 @@ public function downlaoddebitnote($id){
 
              <tr style="border: 1px solid black;">
                     <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;"><b>Total Debit amount</b></td>    
-                    <td style="border: 1px solid black;padding: 5px;">'.round($total_debit_amount,2).'</td>
+                    <td style="border: 1px solid black;padding: 5px;">'.number_format(round($total_debit_amount,2),2).'</td>
               </tr>
 
               <tr style="border: 1px solid black;">
@@ -17103,18 +17103,18 @@ public function downlaoddebitnote($id){
             
               <tr style="border: 1px solid black;">
                 <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;">Final Debit Amount</td>    
-                <td style="border: 1px solid black;padding: 5px;">'.round($tds_amount+$total_debit_amount,2).'</td>
+                <td style="border: 1px solid black;padding: 5px;">'.number_format(round($tds_amount+$total_debit_amount,2),2).'</td>
               </tr>
 
                 <tr style="border: 1px solid black;">
                 <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;">Vendor Invoice Value</td>    
-                <td style="border: 1px solid black;padding: 5px;">'.round($getDebitnotedetailsforInvoice['vendor_inv_value'],2).'</td>
+                <td style="border: 1px solid black;padding: 5px;">'.number_format(round($getDebitnotedetailsforInvoice['vendor_inv_value'],2),2).'</td>
               </tr>
            
 
                 <tr style="border: 1px solid black;">
                 <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;"><b>Payable Amount To Vendor</b> <br>(Inv Value - Total Debit Amt)</br></td>    
-                <td style="border: 1px solid black;padding: 5px"><b>'.round($getDebitnotedetailsforInvoice['vendor_inv_value']-($tds_amount+$total_debit_amount),2).'</b></td>
+                <td style="border: 1px solid black;padding: 5px"><b>'.number_format(round($getDebitnotedetailsforInvoice['vendor_inv_value']-($tds_amount+$total_debit_amount),2),2).'</b></td>
                 </tr>
           
             </table>
