@@ -25044,12 +25044,12 @@ public function downloadscrapinvoic($id){
                 '.$CartItem.$space.'
                     <tr style="border: 1px solid black;">
                         <td colspan="5"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>Net Amount</b></td>    
-                        <td style="border: 1px solid black;padding-left: 10px;">'.$net_amount.'</td>
+                        <td style="border: 1px solid black;padding-left: 10px;">'.number_format(round($net_amount, 3), 3).'</td>
                     </tr>
                 '.$tax_value.'
                     <tr style="border: 1px solid black;">
                         <td colspan="5"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>Round Off</b></td>    
-                        <td style="border: 1px solid black;padding-left: 10px;">'.number_format(round(round($total_amount) - $total_amount,2),2).'</td>
+                        <td style="border: 1px solid black;padding-left: 10px;">'.round(round($total_amount) - $total_amount,2).'</td>
                     </tr>  
                     <tr style="border: 1px solid black;">
                         <td colspan="5"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>Total Amount</b></td>    
