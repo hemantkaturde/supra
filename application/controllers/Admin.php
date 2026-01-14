@@ -18651,9 +18651,9 @@ public function downloadpreexportform($id){
                         <td style="padding:5px;border:1px solid black;"><b>'.$no_of_cartoons.' ctns</b></td>
                         <td style="padding:5px;border:1px solid black;"></td>
                         <td style="padding:5px;border:1px solid black;"><b>'.$total_qty.' pcs</b></td>
-                        <td style="padding:5px;border:1px solid black;"><b>'.number_format($total_gross_weight,3).' kgs</b></td>
+                        <td style="padding:5px;border:1px solid black;"><b>'.number_format(round($total_gross_weight, 3), 3).' kgs</b></td>
                         <td style="padding:5px;border:1px solid black;"></td>
-                        <td style="padding:5px;border:1px solid black;"><b>'.number_format($total_net_weight,3).' kgs</b></td>
+                        <td style="padding:5px;border:1px solid black;"><b>'.number_format(round($total_net_weight, 3), 3).' kgs</b></td>
                     </tr>
                 </table>
 
@@ -18674,8 +18674,8 @@ public function downloadpreexportform($id){
                 
             <div>
                     <p><b>Total ctns : </b> '.$getpreexportallcountdataforinvoice[0]['total_no_of_carttons'].'</p>
-                    <p><b>Total Nt.Weight : </b>'.number_format($getpreexportallcountdataforinvoice[0]['total_net_weight_of_shipment'],3).' kgs</p>
-                    <p><b>Total Gr.Weight : </b>'.number_format($getpreexportallcountdataforinvoice[0]['total_gross_only'],3).' kgs</p>
+                    <p><b>Total Nt.Weight : </b>'.number_format(round($getpreexportallcountdataforinvoice[0]['total_net_weight_of_shipment'],3),3).' kgs</p>
+                    <p><b>Total Gr.Weight : </b>'.number_format(round($getpreexportallcountdataforinvoice[0]['total_gross_only'],3),3).' kgs</p>
                     <p><b>Total No of Pallets : </b>'.$getpreexportallcountdataforinvoice[0]['tnp'].'</p>
                     <p><b>Total Weight of Pallets : </b>'.$getpreexportallcountdataforinvoice[0]['twp'].' kgs</p>
                     <p><b>Final Gross Weight : </b>'.$getpreexportallcountdataforinvoice[0]['total_gross_shipment_weight'].' kgs</p>
