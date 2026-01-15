@@ -6836,6 +6836,24 @@ class Admin extends BaseController
 
     }
 
+      public function deletepackinginstractionsubitem_clone(){
+
+        $post_submit = $this->input->post();
+        if($post_submit){
+            $result = $this->admin_model->deletepackinginstractionsubitem_clone(trim($this->input->post('id')));
+            if ($result) {
+                        $process = 'Delete Packing Instraction Item';
+                        $processFunction = 'Admin/deletepackinginstractionsubitem_clone';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
+
+    }
+
 
     public function addpackinginstractiondetailsaction(){
 

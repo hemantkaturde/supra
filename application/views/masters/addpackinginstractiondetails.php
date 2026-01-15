@@ -162,11 +162,9 @@
                                                     <td style="border:1px solid red;"><?= $value_details['box_qty']; ?></td>
                                                     <td style="border:1px solid red;"><?= $value_details['remark']; ?></td>
                                                     <td style="border:1px solid red;text-align:center;">
-                                                        <i style="font-size:x-large;cursor:pointer;color:red;"
-                                                        class="fa fa-pencil-square-o editpackinginstractionsubitem"></i>
-                                                        &nbsp;
-                                                        <i style="font-size:x-large;cursor:pointer;color:red;"
-                                                        class="fa fa-trash-o deletepackinginstractionsubitem"></i>
+                                                      <!-- <i style='font-size: x-large;cursor: pointer'  main-id='<?=$main_id; ?>'   data-id='<?=$value_details['packing_instaction_details'];?>' class='fa fa-pencil-square-o editpackinginstractionsubitem_clone'  aria-hidden='true'></i> -->
+                                                      <i style='font-size: x-large;cursor: pointer;' main-id='<?=$main_id; ?>' fin_id='<?=$value_details['fin_id'];?>'  data-id='<?=$value_details['packing_instaction_details'];?>' class='fa fa-trash-o deletepackinginstractionsubitem_clone' aria-hidden='true'></i>
+                                
                                                     </td>
                                                 </tr>
                                             <?php } ?>

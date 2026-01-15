@@ -4583,6 +4583,18 @@ class Admin_model extends CI_Model
     }
 
 
+    public function deletepackinginstractionsubitem_clone($id){
+       
+        $this->db->where('id', $id);
+        //$this->db->delete(TBL_SUPPLIER);
+        if($this->db->delete(TBL_PACKING_INSTRACTION_DETAILS_CLONE)){
+           return TRUE;
+        }else{
+           return FALSE;
+        }
+    }
+
+
     public function fetchAllincomingdetailsList(){
 
         $this->db->select('*');
