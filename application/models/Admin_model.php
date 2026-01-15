@@ -4551,6 +4551,26 @@ class Admin_model extends CI_Model
 
 
     
+    public function getpackingdetails_itemdetails_by_packing_id($packing_id){
+
+        $this->db->select('*,'.TBL_PACKING_INSTRACTION_DETAILS.'.id as packing_instaction_details'); 
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_PACKING_INSTRACTION_DETAILS.'.part_number');
+
+        /*New item Details*/
+        // $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.part_number_id = '.TBL_PACKING_INSTRACTION_DETAILS.'.part_number');
+
+        $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.id', $packing_id);
+        $this->db->where(TBL_PACKING_INSTRACTION_DETAILS.'.status', 1);
+        
+        $query = $this->db->get(TBL_PACKING_INSTRACTION_DETAILS);
+        $fetch_result = $query->result_array();
+
+        return $fetch_result;
+
+    }
+
+
+    
     public function getpackingdetails_itemdetails_clone($main_id){
 
         $this->db->select('*,'.TBL_PACKING_INSTRACTION_DETAILS_CLONE.'.id as packing_instaction_details'); 

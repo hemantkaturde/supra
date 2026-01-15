@@ -9406,7 +9406,7 @@
 <?php } ?>
 
 
-<?php if($pageTitle=='Add New Packing Instaruction' || $pageTitle=='Packing Instaruction'  || $pageTitle=='Add Packing Instraction Details' || $pageTitle=='Edit Packing Instraction Details' ){ ?>
+<?php if($pageTitle=='Add New Packing Instaruction' || $pageTitle=='Packing Instaruction'  || $pageTitle=='Add Packing Instraction Details' || $pageTitle=='Edit Packing Instraction Details' || $pageTitle=='Clone Packing Instraction Item Details' ){ ?>
 	<script type="text/javascript">
         $(document).ready(function() {
             var dt = $('#view_Packing_Instarction').DataTable({
@@ -10065,7 +10065,7 @@
 											icon: "success",
 											button: "Ok",
 											},function(){ 
-												window.location.href = "<?php echo base_url().'addpackinginstractiondetails/'?>"+elemF.attr('main-id');
+												window.location.href = "<?php echo base_url().'clonerecordspackinginstraction/'?>"+elemF.attr('data-id');
 										});	
 									}
 

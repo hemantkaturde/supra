@@ -6673,6 +6673,24 @@ class Admin extends BaseController
     }
 
 
+    public function clonerecordspackinginstraction($packing_id){
+
+
+        $process = 'Clone Packing Instraction Item Details';
+        $processFunction = 'Admin/clonerecordspackinginstraction';
+        $this->logrecord($process,$processFunction);
+        $this->global['pageTitle'] = 'Clone Packing Instraction Item Details';
+
+        $data['getpackingdetails_itemdetails_by_packing_id'] =  $this->admin_model->getpackingdetails_itemdetails_by_packing_id(trim($packing_id));
+        $main_paacking_id = $data['getpackingdetails_itemdetails_by_packing_id'][0]['packing_instract_id'];
+
+        $data['getpackingdetails_itemdetails_clone'] =  $this->admin_model->getpackingdetails_itemdetails_clone(trim($main_paacking_id));
+
+        $this->loadViews("masters/clonerecordspackinginstraction", $this->global, $data, NULL);  
+
+    }
+
+
     public function clonepackgingitemdetails(){
         $post_submit = $this->input->post();
         if($post_submit){
@@ -6836,7 +6854,7 @@ class Admin extends BaseController
 
     }
 
-      public function deletepackinginstractionsubitem_clone(){
+    public function deletepackinginstractionsubitem_clone(){
 
         $post_submit = $this->input->post();
         if($post_submit){

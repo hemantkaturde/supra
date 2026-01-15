@@ -128,8 +128,8 @@
                                       </div>
 
 
-                                    <div class="col-md-12">
-                                        <h2 style="color:red;font-weight:bold;">Clone Records</h2>
+                                    <!-- <div class="col-md-12">
+                                        <h2 style="color:red;font-weight:bold;">Print Records</h2>
                                         <table style="width:100%;border-collapse:collapse;border:2px solid red;" class="table">
                                             <thead>
                                                 <tr style="background-color:red;color:white;text-align:center;">
@@ -162,7 +162,7 @@
                                                     <td style="border:1px solid red;"><?= $value_details['box_qty']; ?></td>
                                                     <td style="border:1px solid red;"><?= $value_details['remark']; ?></td>
                                                     <td style="border:1px solid red;text-align:center;">
-                                                      <!-- <i style='font-size: x-large;cursor: pointer'  main-id='<?=$main_id; ?>'   data-id='<?=$value_details['packing_instaction_details'];?>' class='fa fa-pencil-square-o editpackinginstractionsubitem_clone'  aria-hidden='true'></i> -->
+                                                      <i style='font-size: x-large;cursor: pointer'  main-id='<?=$main_id; ?>'   data-id='<?=$value_details['packing_instaction_details'];?>' class='fa fa-pencil-square-o editpackinginstractionsubitem_clone'  aria-hidden='true'></i>
                                                       <i style='font-size: x-large;cursor: pointer;' main-id='<?=$main_id; ?>' fin_id='<?=$value_details['fin_id'];?>'  data-id='<?=$value_details['packing_instaction_details'];?>' class='fa fa-trash-o deletepackinginstractionsubitem_clone' aria-hidden='true'></i>
                                 
                                                     </td>
@@ -170,7 +170,7 @@
                                             <?php } ?>
                                             </tbody>
                                         </table>
-                                    </div>
+                                    </div> -->
 
 
 
@@ -229,7 +229,8 @@
                                                             <a href='<?=ADMIN_PATH.'downloadpackinginstraction/'.$value_details['packing_instaction_details'];?>' ><i style='font-size: x-large;cursor: pointer;' class='fa fa-print' aria-hidden='true'></i></a>
                                                             <i style='font-size: x-large;cursor: pointer'  main-id='<?=$main_id; ?>'   data-id='<?=$value_details['packing_instaction_details'];?>' class='fa fa-pencil-square-o editpackinginstractionsubitem'  aria-hidden='true'></i>
                                                             <i style='font-size: x-large;cursor: pointer;' main-id='<?=$main_id; ?>' fin_id='<?=$value_details['fin_id'];?>'  data-id='<?=$value_details['packing_instaction_details'];?>' class='fa fa-trash-o deletepackinginstractionsubitem' aria-hidden='true'></i>
-                                                            <i style='font-size: x-large;cursor: pointer;' main-id='<?=$main_id; ?>' fin_id='<?=$value_details['fin_id'];?>'  data-id='<?=$value_details['packing_instaction_details'];?>' class='fa fa-files-o clonepackgingitemdetails' aria-hidden='true'></i>
+                                                            <!-- <i style='font-size: x-large;cursor: pointer;' main-id='<?=$main_id; ?>' fin_id='<?=$value_details['fin_id'];?>'  data-id='<?=$value_details['packing_instaction_details'];?>' class='fa fa-files-o clonepackgingitemdetails' aria-hidden='true'></i> -->
+                                                            <a href='<?=ADMIN_PATH.'clonerecordspackinginstraction/'.$value_details['packing_instaction_details'];?>' ><i style='font-size: x-large;cursor: pointer;' class='fa fa-files-o' aria-hidden='true'></i></a>
 
                                                         </td>
                                                     </tr>
