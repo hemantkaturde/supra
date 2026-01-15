@@ -191,12 +191,12 @@
 
             <div class="col-md-6 mt-2">
               <label>Invoice Qty</label>
-              <input type="number" class="form-control" id="invoice_qty" name="invoice_qty">
+              <input type="text" class="form-control" id="invoice_qty" name="invoice_qty">
             </div>
 
             <div class="col-md-6 mt-2">
               <label>Box Qty</label>
-              <input type="number" class="form-control" id="box_qty" name="box_qty">
+              <input type="text" class="form-control" id="box_qty" name="box_qty">
             </div>
 
             <div class="col-md-12 mt-2">

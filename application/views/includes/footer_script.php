@@ -10098,7 +10098,7 @@
 				$('#invoice_qty').val($(this).data('invoice_qty'));
 				$('#box_qty').val($(this).data('box_qty'));
 				$('#remark').val($(this).data('remark'));
-
+				$('#description').val($(this).data('description'));
 				$('#editPackingModal').modal('show');
 		});
 
