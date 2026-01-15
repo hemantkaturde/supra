@@ -9793,7 +9793,7 @@
 											icon: "success",
 											button: "Ok",
 											},function(){ 
-												window.location.href = "<?php echo base_url().'clonerecordspackinginstraction/'?>"+elemF.attr('id');
+												window.location.href = "<?php echo base_url().'clonerecordspackinginstraction/'?>"+elemF.attr('data-id');
 										});	
 									}
 
