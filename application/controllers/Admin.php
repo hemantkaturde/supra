@@ -16423,8 +16423,8 @@ public function downlaodjobworkchllan($id){
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$i.'</td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top"> Material Description : '.$value['type_of_raw_material'].'<br/>For Part No : '.$value['part_number'].'-'.$value['fg_description'].'<br/>Vendor Qty : '.$value['vendor_qty'].' pcs <br/>HSN Code :' .$value['HSN_code'].'<br/></td>   
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['part_number'].'</td>
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.number_format(round($value['rm_qty'].' '.$value['unit'],2),2).'</td>
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.number_format(round($value['rm_qty'] * $value['ram_rate'],2),2).'</td> 
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rm_qty'].' '.$value['unit'].'</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rm_qty'] * $value['ram_rate'].'</td> 
                 </tr>';
 
 
@@ -16471,19 +16471,19 @@ public function downlaodjobworkchllan($id){
     if($gst_rate=='CGST_SGST' || $gst_rate=='CGST_SGST_6'){
         $tax_value = '<tr style="border: 1px solid black;">               
             <td colspan="4"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>(+) '.$cgst_tax_rate.' % CGST </b></td>    
-                <td style="border: 1px solid black;padding-left: 10px;">'.number_format(round($cgst_tax_value,2),2).'</td>
+                <td style="border: 1px solid black;padding-left: 10px;">'.$cgst_tax_value.'</td>
             </tr>
 
             <tr style="border: 1px solid black;">
 
                 <td colspan="4"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>(+) '.$sgst_tax_rate.' % SGST </b></td>    
-                <td style="border: 1px solid black;padding-left: 10px;">'.number_format(round($sgst_tax_value,2),2).'</td>
+                <td style="border: 1px solid black;padding-left: 10px;">'.$sgst_tax_value.'</td>
             </tr>';
      }else{
         $tax_value = '
             <tr style="border: 1px solid black;">
                 <td colspan="4"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>(+) '.$igst_tax_rate.' % IGST </b></td>    
-                <td style="border: 1px solid black;padding-left: 10px;">'.number_format(round($igst_tax_value,2),2).'</td>
+                <td style="border: 1px solid black;padding-left: 10px;">'.$igst_tax_value.'</td>
             </tr>';
      }
 
@@ -16573,7 +16573,7 @@ public function downlaodjobworkchllan($id){
 
                 <tr style="border: 1px solid black;">               
                     <td colspan="4"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>Packing & Forwarding </b></td>    
-                    <td style="border: 1px solid black;padding-left: 10px;">'. number_format(round($packing_forwarding,2),2).'</td>
+                    <td style="border: 1px solid black;padding-left: 10px;">'. $packing_forwarding.'</td>
                 </tr>
                 '. $tax_value.'
             
