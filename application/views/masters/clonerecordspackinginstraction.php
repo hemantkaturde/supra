@@ -113,6 +113,23 @@
                                                       <i style='font-size: x-large;cursor: pointer'  main-id='<?=$main_id; ?>'   data-id='<?=$value_details['packing_instaction_details'];?>' class='fa fa-pencil-square-o editpackinginstractionsubitem_clone'  aria-hidden='true'></i>
                                                       <i style='font-size: x-large;cursor: pointer;' main-id='<?=$main_id; ?>' fin_id='<?=$value_details['fin_id'];?>'  data-id='<?=$value_details['packing_instaction_details'];?>' class='fa fa-trash-o deletepackinginstractionsubitem_clone' aria-hidden='true'></i>
                                 
+
+                                                      <i 
+                                                        class="fa fa-edit editPackingcopyItem"
+                                                        style="font-size:x-large; cursor:pointer;"
+                                                        data-packing_clone_id="<?=$value_details['id'];?>"
+                                                        data-fin_id="<?=$value_details['fin_id'];?>"
+                                                        data-part_number="<?=$value_details['part_number'];?>"
+                                                        data-delivery_date="<?=$value_details['buyer_item_delivery_date'];?>"
+                                                        data-description="<?=$value_details['name'];?>"
+                                                        data-invoice_no="<?=$value_details['buyer_invoice_number'];?>"
+                                                        data-invoice_date="<?=$value_details['buyer_invoice_date'];?>"
+                                                        data-invoice_qty="<?=$value_details['buyer_invoice_qty'];?>"
+                                                        data-box_qty="<?=$value_details['box_qty'];?>"
+                                                        data-remark="<?=$value_details['remark'];?>"
+                                                        ></i>
+
+
                                                     </td>
                                                 </tr>
                                             <?php } ?>
@@ -127,6 +144,76 @@
     </section>
 </div>
 
+
+
+
+<div class="modal fade" id="editPackingModal" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <form id="editPackingForm">
+        <div class="modal-header">
+          <h5 class="modal-title">Edit Packing Item</h5>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <div class="modal-body">
+          <input type="hidden" name="fin_id" id="fin_id">
+
+            <div class="row">
+            <div class="col-md-6">
+              <label>Part Number</label>
+              <input type="text" class="form-control" id="part_number" name="part_number" readonly>
+            </div>
+
+
+            <div class="col-md-6">
+              <label>Description</label>
+              <input type="text" class="form-control" id="description" name="description">
+            </div>
+            
+            
+
+            <div class="col-md-6">
+              <label>Delivery Date</label>
+              <input type="date" class="form-control" id="delivery_date" name="delivery_date">
+            </div>
+
+            <div class="col-md-6 mt-2">
+              <label>Buyer Invoice No</label>
+              <input type="text" class="form-control" id="invoice_no" name="invoice_no">
+            </div>
+
+            <div class="col-md-6 mt-2">
+              <label>Invoice Date</label>
+              <input type="date" class="form-control" id="invoice_date" name="invoice_date">
+            </div>
+
+            <div class="col-md-6 mt-2">
+              <label>Invoice Qty</label>
+              <input type="number" class="form-control" id="invoice_qty" name="invoice_qty">
+            </div>
+
+            <div class="col-md-6 mt-2">
+              <label>Box Qty</label>
+              <input type="number" class="form-control" id="box_qty" name="box_qty">
+            </div>
+
+            <div class="col-md-12 mt-2">
+              <label>Remark</label>
+              <textarea class="form-control" id="remark" name="remark"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success">Update</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
 
                                    
 

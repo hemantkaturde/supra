@@ -10088,6 +10088,21 @@
 
 
 
+		$(document).on('click', '.editPackingcopyItem', function () {
+
+				$('#fin_id').val($(this).data('fin_id'));
+				$('#part_number').val($(this).data('part_number'));
+				$('#delivery_date').val($(this).data('delivery_date'));
+				$('#invoice_no').val($(this).data('invoice_no'));
+				$('#invoice_date').val($(this).data('invoice_date'));
+				$('#invoice_qty').val($(this).data('invoice_qty'));
+				$('#box_qty').val($(this).data('box_qty'));
+				$('#remark').val($(this).data('remark'));
+
+				$('#editPackingModal').modal('show');
+		});
+
+
 
 
 
