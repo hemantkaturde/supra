@@ -6663,10 +6663,49 @@ class Admin extends BaseController
         $this->logrecord($process,$processFunction);
         $this->global['pageTitle'] = 'Add Packing Instraction Details';
         $data['main_id'] =$main_id;
+
         $data['buyer_po_number_id'] =$buyer_po_number;
         $data['getbuyeritemdetails'] =  $this->admin_model->getbuyeritemdetails(trim($buyer_po_number));
         $data['getpackingdetails_itemdetails'] =  $this->admin_model->getpackingdetails_itemdetails(trim($main_id));
+        $data['getpackingdetails_itemdetails_clone'] =  $this->admin_model->getpackingdetails_itemdetails_clone(trim($main_id));
+
         $this->loadViews("masters/addpackinginstractiondetails", $this->global, $data, NULL);  
+    }
+
+
+    public function clonepackgingitemdetails(){
+        $post_submit = $this->input->post();
+        if($post_submit){
+            // $result = $this->admin_model->deletepackinginstractionsubitem(trim($this->input->post('id')));
+            // if ($result) {
+            //             $process = 'Delete Packing Instraction Item';
+            //             $processFunction = 'Admin/deletepackinginstractionsubitem';
+            //             $this->logrecord($process,$processFunction);
+            //         echo(json_encode(array('status'=>'success')));
+            //     }
+            // else { echo(json_encode(array('status'=>'failed'))); }
+
+
+            $id = $this->input->post('id');
+
+            if (!$id) {
+                echo json_encode(['status' => false, 'message' => 'Invalid ID']);
+                return;
+            }
+
+             $result = $this->admin_model->clone_row_to_clone_table($id);
+
+             if ($result) {
+                        $process = 'clone Packging Item Details';
+                        $processFunction = 'Admin/clonepackgingitemdetails';
+                        $this->logrecord($process,$processFunction);
+                    echo(json_encode(array('status'=>'success')));
+                }
+            else { echo(json_encode(array('status'=>'failed'))); }
+
+        }else{
+            echo(json_encode(array('status'=>'failed'))); 
+        }
     }
 
 

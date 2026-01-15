@@ -4548,6 +4548,26 @@ class Admin_model extends CI_Model
         return $fetch_result;
 
     }
+
+
+    
+    public function getpackingdetails_itemdetails_clone($main_id){
+
+        $this->db->select('*,'.TBL_PACKING_INSTRACTION_DETAILS_CLONE.'.id as packing_instaction_details'); 
+        $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_PACKING_INSTRACTION_DETAILS_CLONE.'.part_number');
+
+        /*New item Details*/
+        // $this->db->join(TBL_BUYER_PO_MASTER_ITEM, TBL_BUYER_PO_MASTER_ITEM.'.part_number_id = '.TBL_PACKING_INSTRACTION_DETAILS.'.part_number');
+
+        $this->db->where(TBL_PACKING_INSTRACTION_DETAILS_CLONE.'.packing_instract_id', $main_id);
+        $this->db->where(TBL_PACKING_INSTRACTION_DETAILS_CLONE.'.status', 1);
+        
+        $query = $this->db->get(TBL_PACKING_INSTRACTION_DETAILS_CLONE);
+        $fetch_result = $query->result_array();
+
+        return $fetch_result;
+
+    }
     
 
 
@@ -24434,6 +24454,24 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     public function getsinglebalancedetails($id)
     {
         return $this->db->get_where(TBL_BALANCE_STOCK_DETAILS, ['id' => $id, 'status' => 1])->row_array();
+    }
+
+
+    public function clone_row_to_clone_table($id)
+    {
+        // original row fetch
+        $row = $this->db
+            ->get_where(TBL_PACKING_INSTRACTION_DETAILS, ['id' => $id])
+            ->row_array();
+
+        if (!$row) return false;
+
+        // primary key hatao
+        unset($row['id']);
+
+        // direct insert into clone table
+        return $this->db
+            ->insert(TBL_PACKING_INSTRACTION_DETAILS_CLONE, $row);
     }
 
 

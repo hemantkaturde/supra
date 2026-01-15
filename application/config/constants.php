@@ -142,6 +142,7 @@ define('TBL_INCOMING_DETAILS','tbl_incoming_details');
 define('TBL_INCOMING_DETAILS_ITEM','tbl_incomingdetails_item');
 define('TBL_PACKING_INSTRACTION','tbl_packing_instrauction');
 define('TBL_PACKING_INSTRACTION_DETAILS','tbl_packing_instrauction_details');
+define('TBL_PACKING_INSTRACTION_DETAILS_CLONE','tbl_packing_instrauction_details_clone');
 define('TBL_EXPORT_DETAILS','tbl_export_details');
 define('TBL_SCRAP_RETURN','tbl_scrapreturn');
 define('TBL_SCRAP_RETURN_ITEM','tbl_scrapreturn_item');
