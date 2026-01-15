@@ -16972,12 +16972,12 @@ public function downlaoddebitnote($id){
        
            $tax_value = '<tr style="border: 1px solid black;">               
             <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;">CGST @ '.$cgst_tax_rate.'% </td>    
-                <td style="border: 1px solid black;padding: 5px;">'.round($subtotalpluspandrcharges_TaX_cgst,2).'</td>
+                <td style="border: 1px solid black;padding: 5px;">'.number_format(round($subtotalpluspandrcharges_TaX_cgst,2),2).'</td>
             </tr>
 
             <tr style="border: 1px solid black;">
                 <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;">SGST @ '.$sgst_tax_rate.'% </td>    
-                <td style="border: 1px solid black;padding: 5px;">'.round($subtotalpluspandrcharges_TaX_sgst,2).'</td>
+                <td style="border: 1px solid black;padding: 5px;">'.number_format(round($subtotalpluspandrcharges_TaX_sgst,2),2).'</td>
             </tr>';
            
              $total_tax_rate = 'CGST @ '.$cgst_tax_rate.'% = '.round($subtotalpluspandrcharges_TaX_cgst,2).'<br/> SGST @ '.$sgst_tax_rate.'% = '.round($subtotalpluspandrcharges_TaX_sgst,2);
@@ -16990,13 +16990,13 @@ public function downlaoddebitnote($id){
 
         /*03-10-2024 As Per new Logic*/
         $subtotalpluspandrcharges_TaX = $sub_total_amount * $igst_tax_rate / 100;
-        $total_tax_rate = 'IGST @ '.$igst_tax_rate.'%'.round($subtotalpluspandrcharges_TaX,2);
+        $total_tax_rate = 'IGST @ '.$igst_tax_rate.'%'.number_format(round($subtotalpluspandrcharges_TaX,2),2);
         $loop_tax_rate = $igst_tax_rate;
 
         $tax_value = '
             <tr style="border: 1px solid black;">
                 <td colspan="8"  style="text-align: right;border: 1px solid black;padding: 5px;font-family:cambria;font-size:14px;">IGST @ '.$igst_tax_rate.'%</td>    
-                <td style="border: 1px solid black;padding: 5px;">'.round($subtotalpluspandrcharges_TaX,2).'</td>
+                <td style="border: 1px solid black;padding: 5px;">'.number_format(round($subtotalpluspandrcharges_TaX,2),2).'</td>
             </tr>';
 
         $total_debit_amount = $subtotalpluspandrcharges_TaX + $sub_total_amount;
