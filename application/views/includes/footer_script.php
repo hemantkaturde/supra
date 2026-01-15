@@ -9894,7 +9894,6 @@
 		});
 
 		
-		
 		$(document).on('change','.get_buyer_delivery_date',function(e){  
 				e.preventDefault();
 				//$(".loader_ajax").show();
@@ -10089,8 +10088,8 @@
 
 
 		$(document).on('click', '.editPackingcopyItem', function () {
-
 				$('#fin_id').val($(this).data('fin_id'));
+				$('#packing_clone_id').val($(this).data('packing_clone_id'));
 				$('#part_number').val($(this).data('part_number'));
 				$('#delivery_date').val($(this).data('delivery_date'));
 				$('#invoice_no').val($(this).data('invoice_no'));
@@ -10101,6 +10100,55 @@
 				$('#description').val($(this).data('description'));
 				$('#editPackingModal').modal('show');
 		});
+
+
+
+		$(document).on('click','#update_packing_instruction_clone_ids',function(e){
+			e.preventDefault();
+			$(".loader_ajax").show();
+			var packing_instract_main_item_id = $('#packing_instract_main_item_id').val();
+			
+
+			$.ajax({
+				url : "<?php echo base_url();?>admin/update_packing_instruction_clone_ids",
+				type: "POST",
+				data: $('#editPackingForm').serialize(),
+				cache: false,
+		        contentType: false,
+		        processData: false,
+				success: function(data, textStatus, jqXHR)
+				{
+					var fetchResponse = $.parseJSON(data);
+					if(fetchResponse.status == "failure")
+				    {
+				    	$.each(fetchResponse.error, function (i, v)
+		                {
+		                    $('.'+i+'_error').html(v);
+		                });
+						$(".loader_ajax").hide();
+				    }
+					else if(fetchResponse.status == 'success')
+				    {
+						swal({
+							title: "Success",
+							text: "Packing Instructions Clone Details Successfully Added!",
+							icon: "success",
+							button: "Ok",
+							},function(){ 
+								window.location.href = "<?php echo base_url().'clonerecordspackinginstraction/'?>"+packing_instract_main_item_id;
+						});		
+				    }
+					
+				},
+				error: function (jqXHR, textStatus, errorThrown)
+			    {
+			   	   $(".loader_ajax").hide();
+			    }
+			});
+			return false;
+
+	    });
+
 
 
 

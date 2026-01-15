@@ -117,7 +117,7 @@
                                                       <i 
                                                         class="fa fa-edit editPackingcopyItem"
                                                         style="font-size:x-large; cursor:pointer;"
-                                                        data-packing_clone_id="<?=$value_details['id'];?>"
+                                                        data-packing_clone_id="<?=$value_details['packing_instaction_details'];?>"
                                                         data-fin_id="<?=$value_details['fin_id'];?>"
                                                         data-part_number="<?=$value_details['part_number'];?>"
                                                         data-delivery_date="<?=$value_details['buyer_item_delivery_date'];?>"
@@ -146,35 +146,37 @@
 
 
 
+<div class="modal fade"
+     id="editPackingModal"
+     tabindex="-1"
+     data-backdrop="static"
+     data-keyboard="false">
 
-<div class="modal fade" id="editPackingModal" tabindex="-1">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
 
-      <form id="editPackingForm">
+      <form id="editPackingForm" method="post" role="form">
         <div class="modal-header">
           <h5 class="modal-title">Edit Packing Item</h5>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
 
         <div class="modal-body">
-          <input type="hidden" name="fin_id" id="fin_id">
+          <input type="text" name="fin_id" id="fin_id">
+          <input type="text" name="packing_clone_id" id="packing_clone_id">
 
-            <div class="row">
+          <div class="row">
             <div class="col-md-6">
               <label>Part Number</label>
               <input type="text" class="form-control" id="part_number" name="part_number" readonly>
             </div>
 
-
             <div class="col-md-6">
               <label>Description</label>
               <input type="text" class="form-control" id="description" name="description">
             </div>
-            
-            
 
-            <div class="col-md-6">
+            <div class="col-md-6 mt-2">
               <label>Delivery Date</label>
               <input type="date" class="form-control" id="delivery_date" name="delivery_date">
             </div>
@@ -207,13 +209,19 @@
         </div>
 
         <div class="modal-footer">
-          <button type="submit" class="btn btn-success">Update</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Cancel
+          </button>
+          <button type="submit" id="update_packing_instruction_clone_ids" class="btn btn-success update_packing_instruction_clone_ids">
+            Update
+          </button>
         </div>
       </form>
 
     </div>
   </div>
 </div>
+
 
                                    
 

@@ -6691,6 +6691,25 @@ class Admin extends BaseController
     }
 
 
+    public function update_packing_instruction_clone_ids(){
+
+        $post_submit = $this->input->post();
+
+        
+             print_r($post_submit);
+             exit;
+
+
+        if($post_submit){
+            $save_incoming_details_items = array();
+
+             print_r($save_incoming_details_items);
+             exit;
+
+        }
+    }
+
+
     public function clonepackgingitemdetails(){
         $post_submit = $this->input->post();
         if($post_submit){
