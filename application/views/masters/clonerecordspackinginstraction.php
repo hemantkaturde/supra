@@ -10,6 +10,7 @@
             </small>
         </h1>
     </section>
+    <input type="text" class="form-control" id="packing_instract_main_item_id" value="<?=$getpackingdetails_itemdetails_by_packing_id[0]['id']; ?>" name="packing_instract_main_item_id" class="packing_instract_main_item_id">
 
 
     <section class="content">

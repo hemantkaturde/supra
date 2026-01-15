@@ -9765,6 +9765,10 @@
 		$(document).on('click','.deletepackinginstractionsubitem_clone',function(e){
 			var elemF = $(this);
 			e.preventDefault();
+
+			var packing_instract_main_item_id = $('#packing_instract_main_item_id').val();
+
+			
 			swal({
 				title: "Are you sure?",
 				text: "Packing Instraction Item Succesfully Deleted",
@@ -9793,7 +9797,7 @@
 											icon: "success",
 											button: "Ok",
 											},function(){ 
-												window.location.href = "<?php echo base_url().'clonerecordspackinginstraction/'?>"+elemF.attr('data-id');
+												window.location.href = "<?php echo base_url().'clonerecordspackinginstraction/'?>"+packing_instract_main_item_id;
 										});	
 									}
 
