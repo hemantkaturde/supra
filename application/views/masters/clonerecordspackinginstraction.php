@@ -77,7 +77,7 @@
 
 
                    <div class="col-md-12">
-                                        <h2 style="color:red;font-weight:bold;">Print Records</h2>
+                                        <h2 style="color:red;font-weight:bold;">Print Records <i class="fa fa-print" aria-hidden="true"></i></h2>
                                         <table style="width:100%;border-collapse:collapse;border:2px solid red;" class="table">
                                             <thead>
                                                 <tr style="background-color:red;color:white;text-align:center;">

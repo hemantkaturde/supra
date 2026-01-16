@@ -6683,8 +6683,9 @@ class Admin extends BaseController
 
         $data['getpackingdetails_itemdetails_by_packing_id'] =  $this->admin_model->getpackingdetails_itemdetails_by_packing_id(trim($packing_id));
         $main_paacking_id = $data['getpackingdetails_itemdetails_by_packing_id'][0]['packing_instract_id'];
+        $part_number = $data['getpackingdetails_itemdetails_by_packing_id'][0]['main_part_number'];
 
-        $data['getpackingdetails_itemdetails_clone'] =  $this->admin_model->getpackingdetails_itemdetails_clone(trim($main_paacking_id));
+        $data['getpackingdetails_itemdetails_clone'] =  $this->admin_model->getpackingdetails_itemdetails_clone(trim($main_paacking_id),$part_number);
 
         $this->loadViews("masters/clonerecordspackinginstraction", $this->global, $data, NULL);  
 
