@@ -230,7 +230,7 @@
                                                             <i style='font-size: x-large;cursor: pointer'  main-id='<?=$main_id; ?>'   data-id='<?=$value_details['packing_instaction_details'];?>' class='fa fa-pencil-square-o editpackinginstractionsubitem'  aria-hidden='true'></i>
                                                             <i style='font-size: x-large;cursor: pointer;' main-id='<?=$main_id; ?>' fin_id='<?=$value_details['fin_id'];?>'  data-id='<?=$value_details['packing_instaction_details'];?>' class='fa fa-trash-o deletepackinginstractionsubitem' aria-hidden='true'></i>
                                                             <!-- <i style='font-size: x-large;cursor: pointer;' main-id='<?=$main_id; ?>' fin_id='<?=$value_details['fin_id'];?>'  data-id='<?=$value_details['packing_instaction_details'];?>' class='fa fa-files-o clonepackgingitemdetails' aria-hidden='true'></i> -->
-                                                            <a href='<?=ADMIN_PATH.'clonerecordspackinginstraction/'.$value_details['packing_instaction_details'];?>' ><i style='font-size: x-large;cursor: pointer;' class='fa fa-files-o' aria-hidden='true'></i></a>
+                                                            <a  target='_blank' href='<?=ADMIN_PATH.'clonerecordspackinginstraction/'.$value_details['packing_instaction_details'];?>' ><i style='font-size: x-large;cursor: pointer;' class='fa fa-files-o' aria-hidden='true'></i></a>
 
                                                         </td>
                                                     </tr>

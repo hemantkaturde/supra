@@ -77,8 +77,13 @@
 
 
                    <div class="col-md-12">
-                                        <h2 style="color:red;font-weight:bold;">Print Records <i class="fa fa-print" aria-hidden="true"></i></h2>
-                                        <table style="width:100%;border-collapse:collapse;border:2px solid red;" class="table">
+                  <h2 style="color:red;font-weight:bold;">Print Records <a href="<?= base_url('admin/downloadpackinginstraction_clone_print/'.$getpackingdetails_itemdetails_by_packing_id[0]['main_part_number'].'/'.$getpackingdetails_itemdetails_by_packing_id[0]['packing_instract_id']) ?>" 
+                  target="_blank" 
+                  title="Print Packing Instruction">
+                    <i class="fa fa-print" aria-hidden="true"></i>
+                </a>
+                </i></h2>
+                                                <table style="width:100%;border-collapse:collapse;border:2px solid red;" class="table">
                                             <thead>
                                                 <tr style="background-color:red;color:white;text-align:center;">
                                                     <th style="border:1px solid red;">#</th>

@@ -15579,6 +15579,76 @@ public function downloadpackinginstraction($packing_details_item_id){
     
 }
 
+
+
+public function downloadpackinginstraction_clone_print($packing_details_item_id,$main_packing_id){
+        require_once FCPATH . 'vendor/autoload.php'; 
+
+        $getPackingInstructionData = $this->admin_model->downloadpackinginstraction_clone_print($packing_details_item_id,$main_packing_id);
+
+
+        // 🔹 HTML start
+        $html = '';
+
+        foreach ($getPackingInstructionData as $row) {
+
+            $html .= '
+            <table width="100%" style="font-family: cambria; font-size:16px;" border="1" cellpadding="8">
+                <tr>
+                    <th colspan="3" align="center">PACKAGING INSTRUCTION</th>
+                </tr>
+                <tr>
+                    <td width="30%"><b>PO No & Date</b></td>
+                    <td width="5%">:</td>
+                    <td width="65%">'.$row['buyer_po_number'].' &nbsp; '.date('d-m-Y', strtotime($row['buyer_po_date'])).'</td>
+                </tr>
+                <tr>
+                    <td><b>Invoice No</b></td>
+                    <td>:</td>
+                    <td>'.$row['buyer_invoice_number'].'</td>
+                </tr>
+                <tr>
+                    <td><b>Invoice Date</b></td>
+                    <td>:</td>
+                    <td>'.date('d-m-Y', strtotime($row['buyer_invoice_date'])).'</td>
+                </tr>
+                <tr>
+                    <td><b>Description</b></td>
+                    <td>:</td>
+                    <td>'.$row['name'].'</td>
+                </tr>
+                <tr>
+                    <td><b>Part No</b></td>
+                    <td>:</td>
+                    <td>'.$row['part_number'].'</td>
+                </tr>
+                <tr>
+                    <td><b>Quantity (PCS)</b></td>
+                    <td>:</td>
+                    <td>'.$row['box_qty'].'</td>
+                </tr>
+            </table>
+            <br><br>';
+        }
+        
+        $mpdf = new \Mpdf\Mpdf([
+                'format' => 'A4',
+                'margin_left' => 5,
+                'margin_right' => 5,
+                'margin_top' => 5,
+                'margin_bottom' => 5,
+            ]);
+
+        $mpdf->WriteHTML($html);
+
+        // 🔹 Download PDF
+        $filename = 'Packing Instructions Print.pdf';
+        $mpdf->Output($filename, 'D'); // D = download
+    
+}
+
+
+
 public function downloadchallanform($id){
 
     $getChallanformdetailsforInvoice = $this->admin_model->getChallanformdetailsforInvoice($id);

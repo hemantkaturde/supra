@@ -14438,6 +14438,33 @@ public function getPackingInstructionData($packing_details_item_id){
 
 }
 
+
+public function downloadpackinginstraction_clone_print($packing_details_item_id,$main_packing_id){
+
+    // $this->db->select('*,'.TBL_RAWMATERIAL.'.net_weight as raw_material_neight_weight');
+    // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.raw_id = '.TBL_REWORK_REJECTION_ITEM.'.part_number');
+    // $this->db->where(TBL_REWORK_REJECTION_ITEM.'.rework_rejection_id', $packing_details_item_id);
+    // $query = $this->db->get(TBL_REWORK_REJECTION_ITEM);
+    // $fetch_result = $query->result_array();
+    // return $fetch_result;
+
+    $this->db->select('*'); 
+    $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_PACKING_INSTRACTION_DETAILS_CLONE.'.part_number');
+    $this->db->join(TBL_PACKING_INSTRACTION, TBL_PACKING_INSTRACTION.'.id = '.TBL_PACKING_INSTRACTION_DETAILS_CLONE.'.packing_instract_id');
+    $this->db->join(TBL_BUYER_PO_MASTER, TBL_BUYER_PO_MASTER.'.id = '.TBL_PACKING_INSTRACTION.'.buyer_po_number');
+    $this->db->join(TBL_BUYER_MASTER, TBL_BUYER_MASTER.'.buyer_id = '.TBL_PACKING_INSTRACTION.'.buyer_name');
+    $this->db->where(TBL_PACKING_INSTRACTION_DETAILS_CLONE.'.packing_instract_id', $main_packing_id);
+    $this->db->where(TBL_PACKING_INSTRACTION_DETAILS_CLONE.'.part_number', $packing_details_item_id);
+
+    $this->db->where(TBL_PACKING_INSTRACTION_DETAILS_CLONE.'.status', 1);
+    $query = $this->db->get(TBL_PACKING_INSTRACTION_DETAILS_CLONE);
+    $fetch_result = $query->result_array();
+
+    return $fetch_result;
+
+}
+
+
 public function getChallanformdetailsforInvoice($id){
     $this->db->select(TBL_CHALLAN_FORM.'.*,'.
                      TBL_SUPPLIER.'.supplier_name,'
