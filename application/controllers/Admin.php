@@ -6667,7 +6667,8 @@ class Admin extends BaseController
         $data['buyer_po_number_id'] =$buyer_po_number;
         $data['getbuyeritemdetails'] =  $this->admin_model->getbuyeritemdetails(trim($buyer_po_number));
         $data['getpackingdetails_itemdetails'] =  $this->admin_model->getpackingdetails_itemdetails(trim($main_id));
-        $data['getpackingdetails_itemdetails_clone'] =  $this->admin_model->getpackingdetails_itemdetails_clone(trim($main_id));
+
+        $data['getpackingdetails_itemdetails_clone'] =  $this->admin_model->getpackingdetails_itemdetails_clone(trim($main_id),$data['getpackingdetails_itemdetails'][0]['main_part_number']);
 
         $this->loadViews("masters/addpackinginstractiondetails", $this->global, $data, NULL);  
     }
