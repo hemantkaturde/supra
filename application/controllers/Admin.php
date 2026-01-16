@@ -6695,16 +6695,33 @@ class Admin extends BaseController
 
         $post_submit = $this->input->post();
 
-        
-             print_r($post_submit);
-             exit;
-
-
         if($post_submit){
-            $save_incoming_details_items = array();
+            $save_update_packing_instruction_clone_ids = array();
 
-             print_r($save_incoming_details_items);
-             exit;
+
+            $data = array(
+                'buyer_item_delivery_date'   => trim($this->input->post('delivery_date')),
+                'buyer_invoice_number'=> trim($this->input->post('invoice_no')),
+                'buyer_invoice_date' =>    trim($this->input->post('invoice_date')),
+                'buyer_invoice_qty' =>    trim($this->input->post('invoice_qty')),
+                'box_qty' =>    trim($this->input->post('box_qty')),
+                'clone_desc' => trim($this->input->post('description')),
+                'remark' =>    trim($this->input->post('remark')));
+
+            $update_packing_instruction_clone_ids = $this->admin_model->update_packing_instruction_clone_ids(trim($this->input->post('packing_clone_id')),$data);
+
+            if($update_packing_instruction_clone_ids){
+
+                $save_update_packing_instruction_clone_ids['status'] = 'success';
+                $save_update_packing_instruction_clone_ids['error'] = array( 'packing_id_number'=>strip_tags(form_error('packing_id_number')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'remark'=>strip_tags(form_error('remark')));
+            }else{
+
+                $save_update_packing_instruction_clone_ids['status'] = 'failure';
+                $save_update_packing_instruction_clone_ids['error'] = array( 'packing_id_number'=>strip_tags(form_error('packing_id_number')),'buyer_name'=>strip_tags(form_error('buyer_name')),'buyer_po_number'=>strip_tags(form_error('buyer_po_number')),'buyer_po_date'=>strip_tags(form_error('buyer_po_date')),'remark'=>strip_tags(form_error('remark')));
+            }
+
+
+            echo json_encode($save_update_packing_instruction_clone_ids);
 
         }
     }

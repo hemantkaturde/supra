@@ -10097,7 +10097,8 @@
 				$('#invoice_qty').val($(this).data('invoice_qty'));
 				$('#box_qty').val($(this).data('box_qty'));
 				$('#remark').val($(this).data('remark'));
-				$('#description').val($(this).data('description'));
+				$('#old_description').val($(this).data('description'));
+				$('#description').val($(this).data('clone_desc'));
 				$('#editPackingModal').modal('show');
 		});
 
@@ -10107,12 +10108,12 @@
 			e.preventDefault();
 			$(".loader_ajax").show();
 			var packing_instract_main_item_id = $('#packing_instract_main_item_id').val();
-			
+			var formData = new FormData($("#editPackingForm")[0]);
 
 			$.ajax({
 				url : "<?php echo base_url();?>admin/update_packing_instruction_clone_ids",
 				type: "POST",
-				data: $('#editPackingForm').serialize(),
+				data: formData,
 				cache: false,
 		        contentType: false,
 		        processData: false,

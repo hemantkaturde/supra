@@ -85,6 +85,7 @@
                                                     <th style="border:1px solid red;">Part Number</th>
                                                     <th style="border:1px solid red;">Buyer Delivery Date</th>
                                                     <th style="border:1px solid red;">Description</th>
+                                                    <th style="border:1px solid red;">Updated Description</th>
                                                     <th style="border:1px solid red;">Buyer Invoice Number</th>
                                                     <th style="border:1px solid red;">Buyer Invoice Date</th>
                                                     <th style="border:1px solid red;">Buyer Invoice Qty</th>
@@ -104,6 +105,7 @@
                                                     <td style="border:1px solid red;"><?= $value_details['part_number']; ?></td>
                                                     <td style="border:1px solid red;"><?= $value_details['buyer_item_delivery_date']; ?></td>
                                                     <td style="border:1px solid red;"><?= $value_details['name']; ?></td>
+                                                    <td style="border:1px solid red;"><?= $value_details['clone_desc']; ?></td>
                                                     <td style="border:1px solid red;"><?= $value_details['buyer_invoice_number']; ?></td>
                                                     <td style="border:1px solid red;"><?= $value_details['buyer_invoice_date']; ?></td>
                                                     <td style="border:1px solid red;"><?= $value_details['buyer_invoice_qty']; ?></td>
@@ -127,6 +129,7 @@
                                                         data-invoice_qty="<?=$value_details['buyer_invoice_qty'];?>"
                                                         data-box_qty="<?=$value_details['box_qty'];?>"
                                                         data-remark="<?=$value_details['remark'];?>"
+                                                        data-clone_desc="<?=$value_details['clone_desc'];?>"
                                                         ></i>
 
 
@@ -162,13 +165,18 @@
         </div>
 
         <div class="modal-body">
-          <input type="text" name="fin_id" id="fin_id">
-          <input type="text" name="packing_clone_id" id="packing_clone_id">
+          <input type="hidden" name="fin_id" id="fin_id">
+          <input type="hidden" name="packing_clone_id" id="packing_clone_id">
 
           <div class="row">
             <div class="col-md-6">
               <label>Part Number</label>
               <input type="text" class="form-control" id="part_number" name="part_number" readonly>
+            </div>
+
+            <div class="col-md-6">
+              <label>Old Description</label>
+              <input type="text" class="form-control" id="old_description" name="old_description" readonly>
             </div>
 
             <div class="col-md-6">
