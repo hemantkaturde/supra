@@ -9815,7 +9815,6 @@
 		});
 		
 
-
 		$(document).on('change','#part_number',function(e){  
 			e.preventDefault();
 			        var part_number = $('#part_number').val();	
@@ -10042,12 +10041,12 @@
 			e.preventDefault();
 			swal({
 				title: "Are you sure?",
-				text: "This will clone the record",
+				text: "This will Print the record",
 				type: "warning",
 				showCancelButton: true,
 				closeOnClickOutside: false,
 				confirmButtonClass: "btn-sm btn-danger",
-				confirmButtonText: "Yes, clone it!",
+				confirmButtonText: "Yes, Print it!",
 				cancelButtonText: "No, cancel plz!",
 				closeOnConfirm: false,
 				closeOnCancel: false
@@ -10063,7 +10062,7 @@
 								
 									if(obj.status=='success'){
 										swal({
-											title: "Cloned!",
+											title: "Print!",
 											text: 'Record cloned successfully',
 											icon: "success",
 											button: "Ok",
@@ -10080,7 +10079,7 @@
 							})
 						}
 						else {
-				swal("Cancelled", "Record clone cancelled ", "error");
+				swal("Cancelled", "Record Print cancelled ", "error");
 				}
 			});
 		});
@@ -10132,7 +10131,7 @@
 				    {
 						swal({
 							title: "Success",
-							text: "Packing Instructions Clone Details Successfully Added!",
+							text: "Packing Instructions Print Details Successfully Added!",
 							icon: "success",
 							button: "Ok",
 							},function(){ 
@@ -10149,11 +10148,6 @@
 			return false;
 
 	    });
-
-
-
-
-
 
 		</script>
 <?php } ?>
