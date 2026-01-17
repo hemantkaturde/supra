@@ -15587,63 +15587,194 @@ public function downloadpackinginstraction_clone_print($packing_details_item_id,
         $getPackingInstructionData = $this->admin_model->downloadpackinginstraction_clone_print($packing_details_item_id,$main_packing_id);
 
 
-        // 🔹 HTML start
-        $html = '';
+        // // 🔹 HTML start
+        // $html = '';
+
+        // foreach ($getPackingInstructionData as $row) {
+
+        //     $html .= '
+        //     <table width="100%" style="font-family: cambria; font-size:16px;" border="1" cellpadding="8">
+        //         <tr>
+        //             <th colspan="3" align="center">PACKAGING INSTRUCTION</th>
+        //         </tr>
+        //         <tr>
+        //             <td width="30%"><b>PO No & Date</b></td>
+        //             <td width="5%">:</td>
+        //             <td width="65%">'.$row['buyer_po_number'].' &nbsp; '.date('d-m-Y', strtotime($row['buyer_po_date'])).'</td>
+        //         </tr>
+        //         <tr>
+        //             <td><b>Invoice No</b></td>
+        //             <td>:</td>
+        //             <td>'.$row['buyer_invoice_number'].'</td>
+        //         </tr>
+        //         <tr>
+        //             <td><b>Invoice Date</b></td>
+        //             <td>:</td>
+        //             <td>'.date('d-m-Y', strtotime($row['buyer_invoice_date'])).'</td>
+        //         </tr>
+        //         <tr>
+        //             <td><b>Description</b></td>
+        //             <td>:</td>
+        //             <td>'.$row['name'].'</td>
+        //         </tr>
+        //         <tr>
+        //             <td><b>Part No</b></td>
+        //             <td>:</td>
+        //             <td>'.$row['part_number'].'</td>
+        //         </tr>
+        //         <tr>
+        //             <td><b>Quantity (PCS)</b></td>
+        //             <td>:</td>
+        //             <td>'.$row['box_qty'].'</td>
+        //         </tr>
+        //     </table>
+        //     <br><br>';
+        // }
+        
+        // $mpdf = new \Mpdf\Mpdf([
+        //         'format' => 'A4',
+        //         'margin_left' => 5,
+        //         'margin_right' => 5,
+        //         'margin_top' => 5,
+        //         'margin_bottom' => 5,
+        //     ]);
+
+        // $mpdf->WriteHTML($html);
+
+        // // 🔹 Download PDF
+        // $filename = 'Packing Instructions Print.pdf';
+        // $mpdf->Output($filename, 'D'); // D = download
+
+        $html = '
+        <style>
+
+        @page {
+            margin: 0;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* PAGE CENTER FIX */
+        .page-wrapper {
+            width: 200mm;
+            margin-left: 5mm;
+            margin-right: 5mm;
+        }
+
+        .label {
+            width: 100mm;
+            height: 145mm;
+            box-sizing: border-box;
+            padding: 6mm;
+            font-family: Cambria;
+            font-size: 14px;
+        }
+
+        .inner-table td {
+            font-size: 13px;
+        }
+
+        .inner-table th {
+            font-size: 15px;
+        }
+
+        </style>
+
+        <div class="page-wrapper">
+
+        <table width="200mm" height="290mm" cellpadding="0" cellspacing="0">
+            <tr>
+                <td class="label" valign="top">
+        ';
+
+        $count = 0;
 
         foreach ($getPackingInstructionData as $row) {
 
             $html .= '
-            <table width="100%" style="font-family: cambria; font-size:16px;" border="1" cellpadding="8">
-                <tr>
-                    <th colspan="3" align="center">PACKAGING INSTRUCTION</th>
-                </tr>
-                <tr>
-                    <td width="30%"><b>PO No & Date</b></td>
-                    <td width="5%">:</td>
-                    <td width="65%">'.$row['buyer_po_number'].' &nbsp; '.date('d-m-Y', strtotime($row['buyer_po_date'])).'</td>
-                </tr>
-                <tr>
-                    <td><b>Invoice No</b></td>
-                    <td>:</td>
-                    <td>'.$row['buyer_invoice_number'].'</td>
-                </tr>
-                <tr>
-                    <td><b>Invoice Date</b></td>
-                    <td>:</td>
-                    <td>'.date('d-m-Y', strtotime($row['buyer_invoice_date'])).'</td>
-                </tr>
-                <tr>
-                    <td><b>Description</b></td>
-                    <td>:</td>
-                    <td>'.$row['name'].'</td>
-                </tr>
-                <tr>
-                    <td><b>Part No</b></td>
-                    <td>:</td>
-                    <td>'.$row['part_number'].'</td>
-                </tr>
-                <tr>
-                    <td><b>Quantity (PCS)</b></td>
-                    <td>:</td>
-                    <td>'.$row['box_qty'].'</td>
-                </tr>
-            </table>
-            <br><br>';
+                <table class="inner-table" width="100%" border="1" cellpadding="4">
+                    <tr>
+                        <th colspan="3" align="center">PACKAGING INSTRUCTION</th>
+                    </tr>
+
+                    <tr>
+                        <td width="35%"><b>PO No</b></td>
+                        <td width="5%">:</td>
+                        <td>'.$row['buyer_po_number'].'</td>
+                    </tr>
+
+                    <tr>
+                        <td><b>Invoice No</b></td>
+                        <td>:</td>
+                        <td>'.$row['buyer_invoice_number'].'</td>
+                    </tr>
+
+                    <tr>
+                        <td><b>Invoice Date</b></td>
+                        <td>:</td>
+                        <td>'.date('d-m-Y', strtotime($row['buyer_invoice_date'])).'</td>
+                    </tr>
+
+                    <tr>
+                        <td><b>Description</b></td>
+                        <td>:</td>
+                        <td>'.$row['name'].'</td>
+                    </tr>
+
+                    <tr>
+                        <td><b>Part No</b></td>
+                        <td>:</td>
+                        <td>'.$row['part_number'].'</td>
+                    </tr>
+
+                    <tr>
+                        <td><b>Qty (PCS)</b></td>
+                        <td>:</td>
+                        <td>'.$row['box_qty'].'</td>
+                    </tr>
+                </table>
+            ';
+
+            $count++;
+
+            if ($count == 1) {
+                $html .= '</td><td class="label" valign="top">';
+            } elseif ($count == 2) {
+                $html .= '</td></tr><tr><td class="label" valign="top">';
+            } elseif ($count == 3) {
+                $html .= '</td><td class="label" valign="top">';
+            }
+
+            if ($count == 4) break;
         }
-        
+
+        $html .= '
+                </td>
+            </tr>
+        </table>
+
+        </div>
+        ';
+
+
+        // =====================
+        // mPDF CONFIG
+        // =====================
+
         $mpdf = new \Mpdf\Mpdf([
-                'format' => 'A4',
-                'margin_left' => 5,
-                'margin_right' => 5,
-                'margin_top' => 5,
-                'margin_bottom' => 5,
-            ]);
+            'format' => 'A4',
+            'margin_left'   => 0,
+            'margin_right'  => 0,
+            'margin_top'    => 0,
+            'margin_bottom' => 0,
+        ]);
 
         $mpdf->WriteHTML($html);
+        $mpdf->Output("Packing_Sticker_Centered.pdf", "I");
 
-        // 🔹 Download PDF
-        $filename = 'Packing Instructions Print.pdf';
-        $mpdf->Output($filename, 'D'); // D = download
     
 }
 
