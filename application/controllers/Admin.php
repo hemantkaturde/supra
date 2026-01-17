@@ -18834,7 +18834,7 @@ public function downloadpreexportform($id){
                         <td style="padding:5px;border:1px solid black;"><b>'.$no_of_cartoons.' ctns</b></td>
                         <td style="padding:5px;border:1px solid black;"></td>
                         <td style="padding:5px;border:1px solid black;"><b>'.$total_qty.' pcs</b></td>
-                        <td style="padding:5px;border:1px solid black;"><b>'.bcmul($total_gross_weight, 3).' kgs</b></td>
+                        <td style="padding:5px;border:1px solid black;"><b>'.round($total_gross_weight, 3).' kgs</b></td>
                         <td style="padding:5px;border:1px solid black;"></td>
                         <td style="padding:5px;border:1px solid black;"><b>'.number_format(round($total_net_weight, 3), 3).' kgs</b></td>
                     </tr>
