@@ -25927,7 +25927,7 @@
 
 				 var total_amount = parseFloat(qty) *  parseFloat(rate);
 
-				 $("#amount").val(total_amount);
+				 $("#amount").val( Math.floor(Number(total_amount) + 0.5));
 			
 		    });
 
@@ -25946,11 +25946,11 @@
                     var tax_division_1 = calculate_total_gst / 2;
 					var tax_division_2 = calculate_total_gst / 2;
 
-					$("#CGST_value").val(tax_division_1);
-					$("#SGST_value").val(tax_division_2);
+					$("#CGST_value").val(Math.floor(Number(tax_division_1)+ 0.5));
+					$("#SGST_value").val(Math.floor(Number(tax_division_2)+ 0.5));
 
 					var grand_total = parseFloat(amount) + parseFloat(calculate_total_gst);
-					$("#grand_total").val(grand_total);
+					$("#grand_total").val(Math.floor(Number(grand_total)+ 0.5));
 				}
 
 				if(gst_rate=='cgst_sgst_12'){
@@ -25963,11 +25963,11 @@
 					var tax_division_1 = calculate_total_gst / 2;
 					var tax_division_2 = calculate_total_gst / 2;
 
-					$("#CGST_value").val(tax_division_1);
-					$("#SGST_value").val(tax_division_2);
+					$("#CGST_value").val(Math.floor(Number(tax_division_1)+ 0.5));
+					$("#SGST_value").val(Math.floor(Number(tax_division_2)+ 0.5));
 
 					var grand_total = parseFloat(amount) + parseFloat(calculate_total_gst);
-					$("#grand_total").val(grand_total);
+					$("#grand_total").val((Math.floor(Number(grand_total)+ 0.5)));
 				}
 									
 				if(gst_rate=='igst_18'){
@@ -25978,10 +25978,10 @@
 					var calculate_total_gst = amount * 18/100;
 
 
-					$("#IGST_value").val(calculate_total_gst);
+					$("#IGST_value").val(Math.floor(Number(calculate_total_gst)+ 0.5));
 
 					var grand_total = parseFloat(amount) + parseFloat(calculate_total_gst);
-					$("#grand_total").val(grand_total);
+					$("#grand_total").val(Math.floor(Number(grand_total)+ 0.5));
 				}
 						
 				if(gst_rate=='igst_12'){
@@ -25991,10 +25991,10 @@
 
 					var calculate_total_gst = amount * 12/100;
 
-					$("#IGST_value").val(calculate_total_gst);
+					$("#IGST_value").val(Math.floor(Number(calculate_total_gst)+ 0.5));
 
 					var grand_total = parseFloat(amount) + parseFloat(calculate_total_gst);
-					$("#grand_total").val(grand_total);
+					$("#grand_total").val(Math.floor(Number(grand_total)+ 0.5));
 				}
 			
 		    });
