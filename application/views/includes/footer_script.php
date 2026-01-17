@@ -5924,8 +5924,10 @@
 				 }
 				 
 				 var total_value = parseFloat(rm_actual_aty) * parseFloat(rm_rate);
-				 $("#value").val( Math.round(total_value));
-				 $("#total").val( Math.round(total_value));
+				 $("#value").val( Math.round(Number(total_value)+ 1e-9));
+				 //$("#total").val( Number(Math.round(total_value)+ 1e-9));
+				 $("#total").val( Math.round(Number(total_value) + 1e-9) );
+
 		});
 
 
