@@ -28191,7 +28191,92 @@ public function downloadpreexportlabel($preexport_id,$total_no_of_carttons){
         // $mpdf->Output("Caton label ".$getpreexportbuyerdata[0]['buyer_name'].".pdf","D");
 
 
-        $total = $total_no_of_carttons;  // dynamic total cartons
+        // $total = $total_no_of_carttons;  // dynamic total cartons
+        // $labels = [];
+
+        // for ($i = 1; $i <= $total; $i++) {
+        //     $labels[] = [
+        //         "SUPRA",
+        //         $getpreexportbuyerdata[0]['buyer_short_name'],
+        //         $getpreexportbuyerdata[0]['buyer_country_short_name'],
+        //         $i . "/" . $total
+        //     ];
+        // }
+
+        // $style = '
+        // <style>
+        // table {
+        //     width: 100%;
+        //     border-collapse: collapse;
+        // }
+        // td {
+        //     width: 50%;
+        //     height: 25%;
+        //     text-align: center;
+        //     vertical-align: middle;
+        //     font-family: Arial, sans-serif;
+        //     font-weight: bold;
+        //     font-size: 26pt;
+        //     padding-top: 7%;
+        // }
+        // .crtn {
+        //     margin-top: 0px;
+        //     font-size: 27pt;
+        // }
+        // </style>
+        // ';
+
+        // $mpdf->WriteHTML($style);
+
+        // $i = 0;
+        // $totalLabels = count($labels);
+
+        // foreach ($labels as $index => $l) {
+
+        //     // Start new page & table every 8 labels
+        //     if ($i % 8 == 0) {
+        //         if ($i != 0) {
+        //             $html .= '</table>';
+        //             $mpdf->WriteHTML($html);
+        //             $mpdf->AddPage();
+        //         }
+
+        //         $html = '<table>';
+        //     }
+
+        //     // Start row every 2 labels
+        //     if ($i % 2 == 0) {
+        //         $html .= '<tr>';
+        //     }
+
+        //     $html .= '
+        //         <td>
+        //             '.$l[0].'<br>
+        //             '.$l[1].'<br>
+        //             '.$l[2].'<br><br>
+        //             <span class="crtn">CRTN NO: '.$l[3].'</span>
+        //         </td>
+        //     ';
+
+        //     // Close row after 2 labels
+        //     if ($i % 2 == 1) {
+        //         $html .= '</tr>';
+        //     }
+
+        //     $i++;
+        // }
+
+        // // Close remaining open tags
+        // if ($i % 2 != 0) {
+        //     $html .= '</tr>';
+        // }
+        // $html .= '</table>';
+
+        // $mpdf->WriteHTML($html);
+        // $mpdf->Output("Carton label ".$getpreexportbuyerdata[0]['buyer_name'].".pdf", "D");
+
+        
+        $total = $total_no_of_carttons; // dynamic total cartons
         $labels = [];
 
         for ($i = 1; $i <= $total; $i++) {
@@ -28230,11 +28315,13 @@ public function downloadpreexportlabel($preexport_id,$total_no_of_carttons){
 
         $i = 0;
         $totalLabels = count($labels);
+        $html = '';
 
         foreach ($labels as $index => $l) {
 
-            // Start new page & table every 8 labels
+            // new page after every 8 labels
             if ($i % 8 == 0) {
+
                 if ($i != 0) {
                     $html .= '</table>';
                     $mpdf->WriteHTML($html);
@@ -28244,11 +28331,12 @@ public function downloadpreexportlabel($preexport_id,$total_no_of_carttons){
                 $html = '<table>';
             }
 
-            // Start row every 2 labels
+            // new row every 2 labels
             if ($i % 2 == 0) {
                 $html .= '<tr>';
             }
 
+            // label td
             $html .= '
                 <td>
                     '.$l[0].'<br>
@@ -28258,7 +28346,7 @@ public function downloadpreexportlabel($preexport_id,$total_no_of_carttons){
                 </td>
             ';
 
-            // Close row after 2 labels
+            // row close
             if ($i % 2 == 1) {
                 $html .= '</tr>';
             }
@@ -28266,14 +28354,26 @@ public function downloadpreexportlabel($preexport_id,$total_no_of_carttons){
             $i++;
         }
 
-        // Close remaining open tags
-        if ($i % 2 != 0) {
-            $html .= '</tr>';
+        /*
+        |--------------------------------------------------------------------------
+        | IMPORTANT FIX
+        | Single label ko left me lane ke liye
+        |--------------------------------------------------------------------------
+        */
+        if ($totalLabels == 1) {
+            $html .= '<td></td></tr>';
+        } elseif ($i % 2 != 0) {
+            $html .= '<td></td></tr>';
         }
+
         $html .= '</table>';
 
         $mpdf->WriteHTML($html);
-        $mpdf->Output("Carton label ".$getpreexportbuyerdata[0]['buyer_name'].".pdf", "D");
+
+        $mpdf->Output(
+            "Carton label ".$getpreexportbuyerdata[0]['buyer_name'].".pdf",
+            "D"
+        );
 }
 
 
