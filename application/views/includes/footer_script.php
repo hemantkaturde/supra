@@ -17243,7 +17243,7 @@
 																					if(isNaN(precalculation_ready_for_export_kgs)){
 																						$('#balence_qty_in_kgs').val(0);
 																					}else{
-																						$('#balence_qty_in_kgs').val(precalculation_ready_for_export_kgs);
+																						$('#balence_qty_in_kgs').val(precalculation_ready_for_export_kgs.toFixed(3));
 																					}
 
 																					var total_exp_qty_in_pcs = $('#total_exp_qty_in_pcs').val();
