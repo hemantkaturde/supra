@@ -25097,7 +25097,7 @@ public function downloadscrapinvoic($id){
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['hsn_code'].'</td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['qty'].'</td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rate'].'/-'.'</td> 
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.number_format(round($value['amount'], 3), 3).'/-'.'</td>    
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.round($value['amount']).'/-'.'</td>    
                 </tr>';
 
                 $gst_rate = $value['GST_rate'];
@@ -25133,18 +25133,18 @@ public function downloadscrapinvoic($id){
     if($gst_rate=='cgst_sgst_18' || $gst_rate=='cgst_sgst_12'){
         $tax_value = '<tr style="border: 1px solid black;">               
             <td colspan="5"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>(+) '.$cgst_tax_rate.' % CGST </b></td>    
-                <td style="border: 1px solid black;padding-left: 10px;">'.number_format(round($cgst_tax_value,2),2).'</td>
+                <td style="border: 1px solid black;padding-left: 10px;">'.round($cgst_tax_value).'</td>
             </tr>
 
             <tr style="border: 1px solid black;">
                 <td colspan="5"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>(+) '.$sgst_tax_rate.' % SGST </b></td>    
-                <td style="border: 1px solid black;padding-left: 10px;">'.number_format(round($sgst_tax_value,2),2).'</td>
+                <td style="border: 1px solid black;padding-left: 10px;">'.round($sgst_tax_value).'</td>
             </tr>';
      }else{
         $tax_value = '
             <tr style="border: 1px solid black;">
                 <td colspan="5"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>(+) '.$igst_tax_rate.' % IGST </b></td>    
-                <td style="border: 1px solid black;padding-left: 10px;">'.number_format(round($igst_tax_value,2),2).'</td>
+                <td style="border: 1px solid black;padding-left: 10px;">'.round($igst_tax_value).'</td>
             </tr>';
      }
 
@@ -25227,12 +25227,12 @@ public function downloadscrapinvoic($id){
                 '.$CartItem.$space.'
                     <tr style="border: 1px solid black;">
                         <td colspan="5"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>Net Amount</b></td>    
-                        <td style="border: 1px solid black;padding-left: 10px;">'.number_format(round($net_amount, 3), 3).'</td>
+                        <td style="border: 1px solid black;padding-left: 10px;">'.round($net_amount).'</td>
                     </tr>
                 '.$tax_value.'
                     <tr style="border: 1px solid black;">
                         <td colspan="5"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>Round Off</b></td>    
-                        <td style="border: 1px solid black;padding-left: 10px;">'.round(round($total_amount) - $total_amount,2).'</td>
+                        <td style="border: 1px solid black;padding-left: 10px;">'.round(round($total_amount) - $total_amount).'</td>
                     </tr>  
                     <tr style="border: 1px solid black;">
                         <td colspan="5"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>Total Amount</b></td>    
