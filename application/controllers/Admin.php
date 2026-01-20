@@ -25264,18 +25264,18 @@ public function downloadscrapinvoic($id){
     if($gst_rate=='cgst_sgst_18' || $gst_rate=='cgst_sgst_12'){
         $tax_value = '<tr style="border: 1px solid black;">               
             <td colspan="5"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>(+) '.$cgst_tax_rate.' % CGST </b></td>    
-                <td style="border: 1px solid black;padding-left: 10px;">'.round($cgst_tax_value).'</td>
+                <td style="border: 1px solid black;padding-left: 10px;">'.round($cgst_tax_value,2).'</td>
             </tr>
 
             <tr style="border: 1px solid black;">
                 <td colspan="5"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>(+) '.$sgst_tax_rate.' % SGST </b></td>    
-                <td style="border: 1px solid black;padding-left: 10px;">'.round($sgst_tax_value).'</td>
+                <td style="border: 1px solid black;padding-left: 10px;">'.round($sgst_tax_value,2).'</td>
             </tr>';
      }else{
         $tax_value = '
             <tr style="border: 1px solid black;">
                 <td colspan="5"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>(+) '.$igst_tax_rate.' % IGST </b></td>    
-                <td style="border: 1px solid black;padding-left: 10px;">'.round($igst_tax_value).'</td>
+                <td style="border: 1px solid black;padding-left: 10px;">'.round($igst_tax_value,2).'</td>
             </tr>';
      }
 
