@@ -15839,47 +15839,42 @@ public function downloadpackinginstraction_clone_print($packing_details_item_id,
         foreach ($getPackingInstructionData as $row) {
 
             $html .= '
-                <table class="inner-table">
-                    <tr>
-                        <th colspan="3">PACKAGING INSTRUCTION</th>
-                    </tr>
+               <table class="inner-table">
+                <tr>
+                    <th colspan="2">PACKAGING INSTRUCTION</th>
+                </tr>
 
-                    <tr>
-                        <td width="35%"><b>PO No</b></td>
-                        <td width="5%">:</td>
-                        <td>'.$row['buyer_po_number'].'</td>
-                    </tr>
+                <tr>
+                    <td width="40%"><b>PO No</b></td>
+                    <td> '.$row['buyer_po_number'].'</td>
+                </tr>
 
-                    <tr>
-                        <td><b>Invoice No</b></td>
-                        <td>:</td>
-                        <td>'.$row['buyer_invoice_number'].'</td>
-                    </tr>
+                <tr>
+                    <td><b>Invoice No</b></td>
+                    <td> '.$row['buyer_invoice_number'].'</td>
+                </tr>
 
-                    <tr>
-                        <td><b>Invoice Date</b></td>
-                        <td>:</td>
-                        <td>'.date('d-m-Y', strtotime($row['buyer_invoice_date'])).'</td>
-                    </tr>
+                <tr>
+                    <td><b>Invoice Date</b></td>
+                    <td> '.date('d-m-Y', strtotime($row['buyer_invoice_date'])).'</td>
+                </tr>
 
-                    <tr>
-                        <td><b>Description</b></td>
-                        <td>:</td>
-                        <td>'.$row['name'].'</td>
-                    </tr>
+                <tr>
+                    <td><b>Description</b></td>
+                    <td> '.$row['name'].'</td>
+                </tr>
 
-                    <tr>
-                        <td><b>Part No</b></td>
-                        <td>:</td>
-                        <td>'.$row['part_number'].'</td>
-                    </tr>
+                <tr>
+                    <td><b>Part No</b></td>
+                    <td> '.$row['part_number'].'</td>
+                </tr>
 
-                    <tr>
-                        <td><b>Qty (PCS)</b></td>
-                        <td>:</td>
-                        <td>'.$row['box_qty'].' PCS</td>
-                    </tr>
-                </table>
+                <tr>
+                    <td><b>Qty (PCS)</b></td>
+                    <td> '.$row['box_qty'].' PCS</td>
+                </tr>
+            </table>
+
             ';
 
             $count++;
