@@ -15825,6 +15825,10 @@ public function downloadpackinginstraction_clone_print($packing_details_item_id,
             text-align: center;
         }
 
+        .page-wrapper{
+        margin-top: 20mm;   /* yaha value kam–zyada kar sakte ho */
+    }
+
         </style>
 
         <div class="page-wrapper">
@@ -15838,6 +15842,13 @@ public function downloadpackinginstraction_clone_print($packing_details_item_id,
 
         foreach ($getPackingInstructionData as $row) {
 
+             if($row['clone_desc']){
+
+                  $description_clone = $row['clone_desc'];
+             }else{
+                  $description_clone = $row['name'];
+             }
+
             $html .= '
                <table class="inner-table">
                 <tr>
@@ -15846,32 +15857,32 @@ public function downloadpackinginstraction_clone_print($packing_details_item_id,
 
                 <tr>
                     <td width="40%"><b>PO No</b></td>
-                    <td> '.$row['buyer_po_number'].'</td>
+                    <td> <b>'.$row['buyer_po_number'].' '.date('d-m-Y',strtotime($row['buyer_po_date'])).'</b></td>
                 </tr>
 
                 <tr>
                     <td><b>Invoice No</b></td>
-                    <td> '.$row['buyer_invoice_number'].'</td>
+                    <td> <b>'.$row['buyer_invoice_number'].'</b></td>
                 </tr>
 
                 <tr>
                     <td><b>Invoice Date</b></td>
-                    <td> '.date('d-m-Y', strtotime($row['buyer_invoice_date'])).'</td>
+                    <td> <b>'.date('d-m-Y', strtotime($row['buyer_invoice_date'])).'</b></td>
                 </tr>
 
                 <tr>
                     <td><b>Description</b></td>
-                    <td> '.$row['name'].'</td>
+                    <td> <b>'.$description_clone.'</b></td>
                 </tr>
 
                 <tr>
                     <td><b>Part No</b></td>
-                    <td> '.$row['part_number'].'</td>
+                    <td> <b>'.$row['part_number'].'</b></td>
                 </tr>
 
                 <tr>
                     <td><b>Qty (PCS)</b></td>
-                    <td> '.$row['box_qty'].' PCS</td>
+                    <td> <b>'.$row['box_qty'].' PCS</b></td>
                 </tr>
             </table>
 
