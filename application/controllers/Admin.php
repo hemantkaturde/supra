@@ -15852,26 +15852,31 @@ public function downloadpackinginstraction_clone_print($packing_details_item_id,
 
                     <tr>
                         <td><b>Invoice No</b></td>
+                        <td>:</td>
                         <td>'.$row['buyer_invoice_number'].'</td>
                     </tr>
 
                     <tr>
                         <td><b>Invoice Date</b></td>
+                        <td>:</td>
                         <td>'.date('d-m-Y', strtotime($row['buyer_invoice_date'])).'</td>
                     </tr>
 
                     <tr>
                         <td><b>Description</b></td>
+                        <td>:</td>
                         <td>'.$row['name'].'</td>
                     </tr>
 
                     <tr>
                         <td><b>Part No</b></td>
+                        <td>:</td>
                         <td>'.$row['part_number'].'</td>
                     </tr>
 
                     <tr>
                         <td><b>Qty (PCS)</b></td>
+                        <td>:</td>
                         <td>'.$row['box_qty'].' PCS</td>
                     </tr>
                 </table>
