@@ -15856,7 +15856,7 @@ public function downloadpackinginstraction_clone_print($packing_details_item_id,
                 </tr>
 
                 <tr>
-                    <td width="40%"><b>PO No</b></td>
+                    <td width="40%"><b>PO No & PO Date</b></td>
                     <td> <b>'.$row['buyer_po_number'].' '.date('d-m-Y',strtotime($row['buyer_po_date'])).'</b></td>
                 </tr>
 
