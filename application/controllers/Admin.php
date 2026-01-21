@@ -15826,8 +15826,8 @@ public function downloadpackinginstraction_clone_print($packing_details_item_id,
         }
 
         .page-wrapper{
-        margin-top: 20mm;   /* yaha value kam–zyada kar sakte ho */
-    }
+            margin-top: 20mm;   /* yaha value kam–zyada kar sakte ho */
+        }
 
         </style>
 
@@ -25379,7 +25379,7 @@ public function downloadscrapinvoic($id){
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['hsn_code'].'</td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['qty'].'</td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rate'].'/-'.'</td> 
-                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.round($value['amount']).'/-'.'</td>    
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.number_format($value['amount'],2).'/-'.'</td>    
                 </tr>';
 
                 $gst_rate = $value['GST_rate'];
@@ -25415,18 +25415,18 @@ public function downloadscrapinvoic($id){
     if($gst_rate=='cgst_sgst_18' || $gst_rate=='cgst_sgst_12'){
         $tax_value = '<tr style="border: 1px solid black;">               
             <td colspan="5"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>(+) '.$cgst_tax_rate.' % CGST </b></td>    
-                <td style="border: 1px solid black;padding-left: 10px;">'.round($cgst_tax_value,2).'</td>
+                <td style="border: 1px solid black;padding-left: 10px;">'.number_format($cgst_tax_value,2).'</td>
             </tr>
 
             <tr style="border: 1px solid black;">
                 <td colspan="5"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>(+) '.$sgst_tax_rate.' % SGST </b></td>    
-                <td style="border: 1px solid black;padding-left: 10px;">'.round($sgst_tax_value,2).'</td>
+                <td style="border: 1px solid black;padding-left: 10px;">'.number_format($sgst_tax_value,2).'</td>
             </tr>';
      }else{
         $tax_value = '
             <tr style="border: 1px solid black;">
                 <td colspan="5"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>(+) '.$igst_tax_rate.' % IGST </b></td>    
-                <td style="border: 1px solid black;padding-left: 10px;">'.round($igst_tax_value,2).'</td>
+                <td style="border: 1px solid black;padding-left: 10px;">'.number_format($igst_tax_value,2).'</td>
             </tr>';
      }
 
@@ -25509,7 +25509,7 @@ public function downloadscrapinvoic($id){
                 '.$CartItem.$space.'
                     <tr style="border: 1px solid black;">
                         <td colspan="5"  style="text-align: right;border: 1px solid black;padding-left: 10px;padding-right: 5px;font-family:cambria;font-size:14px;"><b>Net Amount</b></td>    
-                        <td style="border: 1px solid black;padding-left: 10px;">'.round($net_amount).'</td>
+                        <td style="border: 1px solid black;padding-left: 10px;">'.number_format($net_amount,2).'</td>
                     </tr>
                 '.$tax_value.'
                     <tr style="border: 1px solid black;">
