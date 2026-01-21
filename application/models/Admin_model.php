@@ -24366,7 +24366,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
         $this->db->where(TBL_BALANCE_STOCK_DETAILS.'.status',1);
         $this->db->where(TBL_BALANCE_STOCK_DETAILS.'.main_balance_stock_id',$balance_stock_id);
-        $this->db->order_by(TBL_BALANCE_STOCK_DETAILS.'.id','DESC');
+        $this->db->order_by(TBL_BALANCE_STOCK_DETAILS.'.id','ASC');
 
         $query = $this->db->get(TBL_BALANCE_STOCK_DETAILS);
         $fetch_result = $query->result_array();
