@@ -25925,9 +25925,11 @@
 					 var rate = 0;
 				 }
 
-				 var total_amount = qty *  rate;
+				 //var total_amount = parseFloat(qty) *  parseFloat(rate);
 
 				// $("#amount").val( Math.floor(Number(total_amount) + 0.5));
+
+				 var total_amount = qty * rate;
 				 $("#amount").val(total_amount);
 			
 		    });
