@@ -21538,7 +21538,7 @@ public function downlaodcustomercomplaint($id){
 
 
     $mpdf = new \Mpdf\Mpdf();
-    $html = '<table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:13px">
+    $html = '<table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:14px">
                 <tr>
                     <td width="100%" style="padding: 10px;text-align: center;">
                         <H3> CUSTOMER COMPLAINT </H3>
@@ -21547,7 +21547,7 @@ public function downlaodcustomercomplaint($id){
             </table>
             
             
-        <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:13px">
+        <table style=" width: 100%;border-collapse: collapse;border: #cccccc 0px solid;font-family:Times New Roman;font-size:14px">
             <tr style="border: 1px solid black;" valign="top">
                 <td width="25%" style="padding: 10px;text-align: center;">
                      <h4>SUPRA QUALITY EXPORTS (I) PVT LTD</h4> 
@@ -21564,7 +21564,7 @@ public function downlaodcustomercomplaint($id){
         </table>
         
         
-         <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
+         <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:12px">
             <tr style="border: 1px solid black;" valign="top">
                 <td width="25%" style="padding: 5px;text-align: left;">
                     <p>CUSTOMER NAME: </p>
@@ -21585,7 +21585,7 @@ public function downlaodcustomercomplaint($id){
         </table>
 
 
-        <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
+        <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:12px">
             <tr style="border: 1px solid black;" valign="top">
                 <td width="25%" style="padding: 5px;text-align: left;">
                     <p>PART NO: </p>
@@ -21605,7 +21605,7 @@ public function downlaodcustomercomplaint($id){
             </tr>
         </table>
         
-         <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
+         <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:12px">
             <tr style="border: 1px solid black;" valign="top">
                 <td width="25%" style="padding: 5px;text-align: left;">
                     <p>ORDER QTY: </p>
@@ -21626,7 +21626,7 @@ public function downlaodcustomercomplaint($id){
         </table>
 
 
-         <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
+         <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:12px">
             <tr style="border: 1px solid black;" valign="top">
                 <td width="25%" style="padding: 5px;text-align: left;">
                     <p>EXPORT INVOICE NO: </p>
@@ -21646,7 +21646,7 @@ public function downlaodcustomercomplaint($id){
             </tr>
         </table>
 
-         <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
+         <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:12px">
             <tr style="border: 1px solid black;" valign="top">
                 <td width="25%" style="padding: 5px;text-align: left;">
                     <p>DOCUMENT DATE: </p>
@@ -21666,7 +21666,7 @@ public function downlaodcustomercomplaint($id){
             </tr>
         </table>
 
-         <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
+         <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:12px">
             <tr style="border: 1px solid black;" valign="top">
                 <td width="100%" style="padding: 5px;text-align: left;">
                     <p>1.PROBLEM DESCRIPTION: </p>
@@ -21685,7 +21685,7 @@ public function downlaodcustomercomplaint($id){
          </table>
 
 
-             <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
+             <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:12px">
             <tr style="border: 1px solid black;" valign="top">
                 <td width="100%" style="padding: 5px;text-align: left;">
                     <p>2.IMMEDIATE CORRECTIVE ACTION : </p>
@@ -21704,7 +21704,7 @@ public function downlaodcustomercomplaint($id){
          </table>
 
          
-         <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
+         <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:12px">
             <tr style="border: 1px solid black;" valign="top">
                 <td width="100%" style="padding: 5px;text-align: left;">
                     <p>3.ROOT CAUSE: </p>
@@ -21725,7 +21725,7 @@ public function downlaodcustomercomplaint($id){
 
        
 
-          <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
+          <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:12px">
             <tr style="border: 1px solid black;" valign="top">
                 <td width="60%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
                     <p>4.FUTURE CORRECTIVE ACTION: </p>
@@ -21742,7 +21742,7 @@ public function downlaodcustomercomplaint($id){
          </table>
          
          
-           <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
+           <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:12px">
             <tr style="border: 1px solid black;" valign="top">
                 <td width="60%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
                        <p>'. str_repeat('&nbsp;', 5).'</p>
@@ -21770,7 +21770,7 @@ public function downlaodcustomercomplaint($id){
             </tr>
          </table>
 
-         <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
+         <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:12px">
             <tr style="border: 1px solid black;" valign="top">
                 <td width="60%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
                     <p>5.EFFECTIVE ACTION: </p>
@@ -21787,7 +21787,7 @@ public function downlaodcustomercomplaint($id){
          </table>
          
          
-           <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
+           <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:12px">
             <tr style="border: 1px solid black;" valign="top">
                 <td width="60%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
                        <p>'. str_repeat('&nbsp;', 5).'</p>
@@ -21815,7 +21815,7 @@ public function downlaodcustomercomplaint($id){
             </tr>
          </table>
 
-        <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
+        <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:12px">
             <tr style="border: 1px solid black;" valign="top">
                 <td width="25%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
                     <p>PREPARED BY: </p>
@@ -21836,7 +21836,7 @@ public function downlaodcustomercomplaint($id){
          </table>
 
 
-           <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
+           <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:12px">
             <tr style="border: 1px solid black;" valign="top">
                 <td width="25%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
                        <p>'. $getcustomercomplaintdetailsfordownalod[0]['prepared_by'].'</p>
@@ -21862,7 +21862,7 @@ public function downlaodcustomercomplaint($id){
 
 
          
-        <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:10px">
+        <table style=" width: 100%;border-collapse: collapse;border-bottom: #cccccc 0px solid;font-family:Times New Roman;font-size:12px">
             <tr style="border: 1px solid black;" valign="top">
                 <td width="25%" style="padding: 5px;text-align: left;border-right: #000000 1px solid">
                     <p>REPORT CLOSED BY DATE: </p>
