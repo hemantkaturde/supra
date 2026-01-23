@@ -21484,25 +21484,24 @@ public function viewcustomercomplaint($id){
 
 public function downlaodcustomercomplaint($id){
 
-    $getcustomercomplaintdetailsfordownalod = $this->admin_model->getcustomercomplaintdetailsfordownalod($id);
+        $getcustomercomplaintdetailsfordownalod = $this->admin_model->getcustomercomplaintdetailsfordownalod($id);
 
 
-
-        if($getcustomercomplaintdetailsfordownalod[0]['invoice_date']=='000-00-00'){
+        if($getcustomercomplaintdetailsfordownalod[0]['invoice_date']=='0000-00-00'){
             $invoice_date = '';
         }else{
             $invoice_date =  date("d-m-Y", strtotime($getcustomercomplaintdetailsfordownalod[0]['invoice_date']));
         }
 
 
-        if($getcustomercomplaintdetailsfordownalod[0]['doc_complaint_date']=='000-00-00'){
+        if($getcustomercomplaintdetailsfordownalod[0]['doc_complaint_date']=='0000-00-00'){
             $doc_complaint_date = '';
         }else{
             $doc_complaint_date =  date("d-m-Y", strtotime($getcustomercomplaintdetailsfordownalod[0]['doc_complaint_date']));
         }
 
 
-        if($getcustomercomplaintdetailsfordownalod[0]['corrective_action_taken_responsibility_date']=='000-00-00'){
+        if($getcustomercomplaintdetailsfordownalod[0]['corrective_action_taken_responsibility_date']=='0000-00-00'){
             $corrective_action_taken_responsibility_date = '';
         }else{
             $corrective_action_taken_responsibility_date =  date("d-m-Y", strtotime($getcustomercomplaintdetailsfordownalod[0]['corrective_action_taken_responsibility_date']));
@@ -21510,27 +21509,27 @@ public function downlaodcustomercomplaint($id){
 
 
 
-        if($getcustomercomplaintdetailsfordownalod[0]['effective_date']=='000-00-00'){
+        if($getcustomercomplaintdetailsfordownalod[0]['effective_date']=='0000-00-00'){
             $effective_date = '';
         }else{
             $effective_date =  date("d-m-Y", strtotime($getcustomercomplaintdetailsfordownalod[0]['effective_date']));
         }
 
-        if($getcustomercomplaintdetailsfordownalod[0]['prepared_by_date']=='000-00-00'){
+        if($getcustomercomplaintdetailsfordownalod[0]['prepared_by_date']=='0000-00-00'){
             $prepared_by_date = '';
         }else{
             $prepared_by_date =  date("d-m-Y", strtotime($getcustomercomplaintdetailsfordownalod[0]['prepared_by_date']));
         }
 
 
-        if($getcustomercomplaintdetailsfordownalod[0]['approved_by_date']=='000-00-00'){
+        if($getcustomercomplaintdetailsfordownalod[0]['approved_by_date']=='0000-00-00'){
             $approved_by_date = '';
         }else{
             $approved_by_date =  date("d-m-Y", strtotime($getcustomercomplaintdetailsfordownalod[0]['approved_by_date']));
         }
 
 
-        if($getcustomercomplaintdetailsfordownalod[0]['report_closed_by_date']=='000-00-00'){
+        if($getcustomercomplaintdetailsfordownalod[0]['report_closed_by_date']=='0000-00-00'){
            $report_closed_by_date = '';
         }else{
             $report_closed_by_date =  date("d-m-Y", strtotime($getcustomercomplaintdetailsfordownalod[0]['report_closed_by_date']));  
