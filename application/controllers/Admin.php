@@ -16043,21 +16043,21 @@ public function downloadpackinginstraction_clone_print($packing_details_item_id,
             }
 
             /* ===== PAGE BREAK AFTER 8 LABEL ===== */
-            if ($count % 8 == 0) {
+            if ($count % 8 == 0 && $count < count($getPackingInstructionData)) {
 
-                $html .= '
-                    </td></tr>
-                    </table>
-                    </div>
+                    $html .= '
+                        </td></tr>
+                        </table>
+                        </div>
 
-                    <div style="page-break-after: always;"></div>
+                        <div style="page-break-after: always;"></div>
 
-                    <div class="page-wrapper">
-                    <table width="200mm" height="290mm" cellpadding="0" cellspacing="0">
-                    <tr>
-                    <td class="label" valign="top">
-                ';
-            }
+                        <div class="page-wrapper">
+                        <table width="200mm" height="290mm" cellpadding="0" cellspacing="0">
+                        <tr>
+                        <td class="label" valign="top">
+                    ';
+                }
         }
 
         $html .= '
