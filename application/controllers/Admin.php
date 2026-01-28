@@ -15776,7 +15776,158 @@ public function downloadpackinginstraction_clone_print($packing_details_item_id,
         // $mpdf->Output("Packing_Sticker_Centered.pdf", "I");
 
 
-      $html = '
+    //   $html = '
+    //     <style>
+
+    //     @page {
+    //         margin: 0;
+    //     }
+
+    //     body {
+    //         margin: 0;
+    //         padding: 0;
+    //     }
+
+    //     /* PAGE WRAPPER */
+    //     .page-wrapper {
+    //         width: 200mm;
+    //         margin-left: 5mm;
+    //         margin-right: 5mm;
+    //     }
+
+    //     /* EACH LABEL */
+    //     .label {
+    //         width: 100mm;
+    //         height: 72mm;
+    //         box-sizing: border-box;
+    //         padding: 5mm;
+    //         padding-top: 10mm;   /* 🔥 top se neeche */
+    //         font-family: Cambria;
+    //         font-size: 14px;
+    //     }
+
+    //     /* TABLE STYLE */
+    //     .inner-table {
+    //         width: 100%;
+    //         border-collapse: collapse;   /* 🔥 double line remove */
+    //         border: 1px solid #000;      /* single border */
+    //     }
+
+    //     .inner-table td,
+    //     .inner-table th {
+    //         border: 1px solid #000;
+    //         padding: 4px;
+    //     }
+
+    //     .inner-table th {
+    //         font-size: 15px;
+    //         font-weight: bold;
+    //         text-align: center;
+    //     }
+
+    //     .page-wrapper{
+    //         margin-top: 20mm;   /* yaha value kam–zyada kar sakte ho */
+    //     }
+
+    //     </style>
+
+    //     <div class="page-wrapper">
+
+    //     <table width="200mm" height="290mm" cellpadding="0" cellspacing="0">
+    //     <tr>
+    //     <td class="label" valign="top">
+    //     ';
+
+    //     $count = 0;
+
+    //     foreach ($getPackingInstructionData as $row) {
+
+    //          if($row['clone_desc']){
+
+    //               $description_clone = $row['clone_desc'];
+    //          }else{
+    //               $description_clone = $row['name'];
+    //          }
+
+    //         $html .= '
+    //            <table class="inner-table">
+    //             <tr>
+    //                 <th colspan="2">PACKAGING INSTRUCTION</th>
+    //             </tr>
+
+    //             <tr>
+    //                 <td width="40%"><b>PO No & Date</b></td>
+    //                 <td> <b>'.$row['buyer_po_number'].'  ('.date('d-m-Y',strtotime($row['buyer_po_date'])).')</b></td>
+    //             </tr>
+
+    //             <tr>
+    //                 <td><b>Invoice No</b></td>
+    //                 <td> <b>'.$row['buyer_invoice_number'].'</b></td>
+    //             </tr>
+
+    //             <tr>
+    //                 <td><b>Invoice Date</b></td>
+    //                 <td> <b>'.date('d-m-Y', strtotime($row['buyer_invoice_date'])).'</b></td>
+    //             </tr>
+
+    //             <tr>
+    //                 <td><b>Description</b></td>
+    //                 <td> <b>'.$description_clone.'</b></td>
+    //             </tr>
+
+    //             <tr>
+    //                 <td><b>Part No</b></td>
+    //                 <td> <b>'.$row['part_number'].'</b></td>
+    //             </tr>
+
+    //             <tr>
+    //                 <td><b>Qty (PCS)</b></td>
+    //                 <td> <b>'.$row['box_qty'].' PCS</b></td>
+    //             </tr>
+    //         </table>
+
+    //         ';
+
+    //         $count++;
+
+    //         /* ===== 2 COLUMN × 4 ROW (8 LABEL) ===== */
+
+    //         if ($count % 2 == 0 && $count < 8) {
+    //             $html .= '</td></tr><tr><td class="label" valign="top">';
+    //         } elseif ($count < 8) {
+    //             $html .= '</td><td class="label" valign="top">';
+    //         }
+
+    //         if ($count == 8) {
+    //             break;
+    //         }
+    //     }
+
+    //     $html .= '
+    //     </td>
+    //     </tr>
+    //     </table>
+
+    //     </div>
+    //     ';
+
+    //     /* =====================
+    //     mPDF CONFIG
+    //     ===================== */
+
+    //     $mpdf = new \Mpdf\Mpdf([
+    //         'format' => 'A4',
+    //         'margin_left'   => 0,
+    //         'margin_right'  => 0,
+    //         'margin_top'    => 0,
+    //         'margin_bottom' => 0,
+    //     ]);
+
+    //     $mpdf->WriteHTML($html);
+    //     $mpdf->Output("Packing_Instruction_8_Label.pdf", "I");
+
+
+    $html = '
         <style>
 
         @page {
@@ -15793,6 +15944,7 @@ public function downloadpackinginstraction_clone_print($packing_details_item_id,
             width: 200mm;
             margin-left: 5mm;
             margin-right: 5mm;
+            margin-top: 20mm;
         }
 
         /* EACH LABEL */
@@ -15801,7 +15953,7 @@ public function downloadpackinginstraction_clone_print($packing_details_item_id,
             height: 72mm;
             box-sizing: border-box;
             padding: 5mm;
-            padding-top: 10mm;   /* 🔥 top se neeche */
+            padding-top: 10mm;
             font-family: Cambria;
             font-size: 14px;
         }
@@ -15809,8 +15961,8 @@ public function downloadpackinginstraction_clone_print($packing_details_item_id,
         /* TABLE STYLE */
         .inner-table {
             width: 100%;
-            border-collapse: collapse;   /* 🔥 double line remove */
-            border: 1px solid #000;      /* single border */
+            border-collapse: collapse;
+            border: 1px solid #000;
         }
 
         .inner-table td,
@@ -15825,14 +15977,9 @@ public function downloadpackinginstraction_clone_print($packing_details_item_id,
             text-align: center;
         }
 
-        .page-wrapper{
-            margin-top: 20mm;   /* yaha value kam–zyada kar sakte ho */
-        }
-
         </style>
 
         <div class="page-wrapper">
-
         <table width="200mm" height="290mm" cellpadding="0" cellspacing="0">
         <tr>
         <td class="label" valign="top">
@@ -15842,64 +15989,74 @@ public function downloadpackinginstraction_clone_print($packing_details_item_id,
 
         foreach ($getPackingInstructionData as $row) {
 
-             if($row['clone_desc']){
-
-                  $description_clone = $row['clone_desc'];
-             }else{
-                  $description_clone = $row['name'];
-             }
+            if ($row['clone_desc']) {
+                $description_clone = $row['clone_desc'];
+            } else {
+                $description_clone = $row['name'];
+            }
 
             $html .= '
-               <table class="inner-table">
-                <tr>
-                    <th colspan="2">PACKAGING INSTRUCTION</th>
-                </tr>
+                <table class="inner-table">
+                    <tr>
+                        <th colspan="2">PACKAGING INSTRUCTION</th>
+                    </tr>
 
-                <tr>
-                    <td width="40%"><b>PO No & Date</b></td>
-                    <td> <b>'.$row['buyer_po_number'].'  ('.date('d-m-Y',strtotime($row['buyer_po_date'])).')</b></td>
-                </tr>
+                    <tr>
+                        <td width="40%"><b>PO No & Date</b></td>
+                        <td><b>'.$row['buyer_po_number'].' ('.date('d-m-Y', strtotime($row['buyer_po_date'])).')</b></td>
+                    </tr>
 
-                <tr>
-                    <td><b>Invoice No</b></td>
-                    <td> <b>'.$row['buyer_invoice_number'].'</b></td>
-                </tr>
+                    <tr>
+                        <td><b>Invoice No</b></td>
+                        <td><b>'.$row['buyer_invoice_number'].'</b></td>
+                    </tr>
 
-                <tr>
-                    <td><b>Invoice Date</b></td>
-                    <td> <b>'.date('d-m-Y', strtotime($row['buyer_invoice_date'])).'</b></td>
-                </tr>
+                    <tr>
+                        <td><b>Invoice Date</b></td>
+                        <td><b>'.date('d-m-Y', strtotime($row['buyer_invoice_date'])).'</b></td>
+                    </tr>
 
-                <tr>
-                    <td><b>Description</b></td>
-                    <td> <b>'.$description_clone.'</b></td>
-                </tr>
+                    <tr>
+                        <td><b>Description</b></td>
+                        <td><b>'.$description_clone.'</b></td>
+                    </tr>
 
-                <tr>
-                    <td><b>Part No</b></td>
-                    <td> <b>'.$row['part_number'].'</b></td>
-                </tr>
+                    <tr>
+                        <td><b>Part No</b></td>
+                        <td><b>'.$row['part_number'].'</b></td>
+                    </tr>
 
-                <tr>
-                    <td><b>Qty (PCS)</b></td>
-                    <td> <b>'.$row['box_qty'].' PCS</b></td>
-                </tr>
-            </table>
-
+                    <tr>
+                        <td><b>Qty (PCS)</b></td>
+                        <td><b>'.$row['box_qty'].' PCS</b></td>
+                    </tr>
+                </table>
             ';
 
             $count++;
 
-            /* ===== 2 COLUMN × 4 ROW (8 LABEL) ===== */
-
-            if ($count % 2 == 0 && $count < 8) {
+            /* ===== COLUMN LOGIC ===== */
+            if ($count % 2 == 0) {
                 $html .= '</td></tr><tr><td class="label" valign="top">';
-            } elseif ($count < 8) {
+            } else {
                 $html .= '</td><td class="label" valign="top">';
             }
 
-            if ($count == 8) {
-                break;
+            /* ===== PAGE BREAK AFTER 8 LABEL ===== */
+            if ($count % 8 == 0) {
+
+                $html .= '
+                    </td></tr>
+                    </table>
+                    </div>
+
+                    <div style="page-break-after: always;"></div>
+
+                    <div class="page-wrapper">
+                    <table width="200mm" height="290mm" cellpadding="0" cellspacing="0">
+                    <tr>
+                    <td class="label" valign="top">
+                ';
             }
         }
 
@@ -15907,7 +16064,6 @@ public function downloadpackinginstraction_clone_print($packing_details_item_id,
         </td>
         </tr>
         </table>
-
         </div>
         ';
 
@@ -15925,6 +16081,7 @@ public function downloadpackinginstraction_clone_print($packing_details_item_id,
 
         $mpdf->WriteHTML($html);
         $mpdf->Output("Packing_Instruction_8_Label.pdf", "I");
+
 
     
 }
