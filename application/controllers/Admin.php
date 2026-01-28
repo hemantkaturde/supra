@@ -15776,291 +15776,155 @@ public function downloadpackinginstraction_clone_print($packing_details_item_id,
         // $mpdf->Output("Packing_Sticker_Centered.pdf", "I");
 
 
-    //   $html = '
-    //     <style>
+      $html = '
+        <style>
 
-    //     @page {
-    //         margin: 0;
-    //     }
+        @page {
+            margin: 0;
+        }
 
-    //     body {
-    //         margin: 0;
-    //         padding: 0;
-    //     }
+        body {
+            margin: 0;
+            padding: 0;
+        }
 
-    //     /* PAGE WRAPPER */
-    //     .page-wrapper {
-    //         width: 200mm;
-    //         margin-left: 5mm;
-    //         margin-right: 5mm;
-    //     }
+        /* PAGE WRAPPER */
+        .page-wrapper {
+            width: 200mm;
+            margin-left: 5mm;
+            margin-right: 5mm;
+        }
 
-    //     /* EACH LABEL */
-    //     .label {
-    //         width: 100mm;
-    //         height: 72mm;
-    //         box-sizing: border-box;
-    //         padding: 5mm;
-    //         padding-top: 10mm;   /* 🔥 top se neeche */
-    //         font-family: Cambria;
-    //         font-size: 14px;
-    //     }
+        /* EACH LABEL */
+        .label {
+            width: 100mm;
+            height: 72mm;
+            box-sizing: border-box;
+            padding: 5mm;
+            padding-top: 10mm;   /* 🔥 top se neeche */
+            font-family: Cambria;
+            font-size: 14px;
+        }
 
-    //     /* TABLE STYLE */
-    //     .inner-table {
-    //         width: 100%;
-    //         border-collapse: collapse;   /* 🔥 double line remove */
-    //         border: 1px solid #000;      /* single border */
-    //     }
+        /* TABLE STYLE */
+        .inner-table {
+            width: 100%;
+            border-collapse: collapse;   /* 🔥 double line remove */
+            border: 1px solid #000;      /* single border */
+        }
 
-    //     .inner-table td,
-    //     .inner-table th {
-    //         border: 1px solid #000;
-    //         padding: 4px;
-    //     }
+        .inner-table td,
+        .inner-table th {
+            border: 1px solid #000;
+            padding: 4px;
+        }
 
-    //     .inner-table th {
-    //         font-size: 15px;
-    //         font-weight: bold;
-    //         text-align: center;
-    //     }
+        .inner-table th {
+            font-size: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
 
-    //     .page-wrapper{
-    //         margin-top: 20mm;   /* yaha value kam–zyada kar sakte ho */
-    //     }
+        .page-wrapper{
+            margin-top: 20mm;   /* yaha value kam–zyada kar sakte ho */
+        }
 
-    //     </style>
+        </style>
 
-    //     <div class="page-wrapper">
+        <div class="page-wrapper">
 
-    //     <table width="200mm" height="290mm" cellpadding="0" cellspacing="0">
-    //     <tr>
-    //     <td class="label" valign="top">
-    //     ';
-
-    //     $count = 0;
-
-    //     foreach ($getPackingInstructionData as $row) {
-
-    //          if($row['clone_desc']){
-
-    //               $description_clone = $row['clone_desc'];
-    //          }else{
-    //               $description_clone = $row['name'];
-    //          }
-
-    //         $html .= '
-    //            <table class="inner-table">
-    //             <tr>
-    //                 <th colspan="2">PACKAGING INSTRUCTION</th>
-    //             </tr>
-
-    //             <tr>
-    //                 <td width="40%"><b>PO No & Date</b></td>
-    //                 <td> <b>'.$row['buyer_po_number'].'  ('.date('d-m-Y',strtotime($row['buyer_po_date'])).')</b></td>
-    //             </tr>
-
-    //             <tr>
-    //                 <td><b>Invoice No</b></td>
-    //                 <td> <b>'.$row['buyer_invoice_number'].'</b></td>
-    //             </tr>
-
-    //             <tr>
-    //                 <td><b>Invoice Date</b></td>
-    //                 <td> <b>'.date('d-m-Y', strtotime($row['buyer_invoice_date'])).'</b></td>
-    //             </tr>
-
-    //             <tr>
-    //                 <td><b>Description</b></td>
-    //                 <td> <b>'.$description_clone.'</b></td>
-    //             </tr>
-
-    //             <tr>
-    //                 <td><b>Part No</b></td>
-    //                 <td> <b>'.$row['part_number'].'</b></td>
-    //             </tr>
-
-    //             <tr>
-    //                 <td><b>Qty (PCS)</b></td>
-    //                 <td> <b>'.$row['box_qty'].' PCS</b></td>
-    //             </tr>
-    //         </table>
-
-    //         ';
-
-    //         $count++;
-
-    //         /* ===== 2 COLUMN × 4 ROW (8 LABEL) ===== */
-
-    //         if ($count % 2 == 0 && $count < 8) {
-    //             $html .= '</td></tr><tr><td class="label" valign="top">';
-    //         } elseif ($count < 8) {
-    //             $html .= '</td><td class="label" valign="top">';
-    //         }
-
-    //         if ($count == 8) {
-    //             break;
-    //         }
-    //     }
-
-    //     $html .= '
-    //     </td>
-    //     </tr>
-    //     </table>
-
-    //     </div>
-    //     ';
-
-    //     /* =====================
-    //     mPDF CONFIG
-    //     ===================== */
-
-    //     $mpdf = new \Mpdf\Mpdf([
-    //         'format' => 'A4',
-    //         'margin_left'   => 0,
-    //         'margin_right'  => 0,
-    //         'margin_top'    => 0,
-    //         'margin_bottom' => 0,
-    //     ]);
-
-    //     $mpdf->WriteHTML($html);
-    //     $mpdf->Output("Packing_Instruction_8_Label.pdf", "I");
-
-   
-
-    $html = '
-<style>
-
-@page { margin: 0; }
-
-body {
-    margin: 0;
-    padding: 0;
-}
-
-/* label box */
-.label {
-    width: 100mm;
-    height: 72mm;
-    box-sizing: border-box;
-    padding: 5mm;
-    padding-top: 10mm;
-    font-family: Cambria;
-    font-size: 14px;
-}
-
-/* inner table */
-.inner-table {
-    width: 100%;
-    border-collapse: collapse;
-    border: 1px solid #000;
-}
-
-.inner-table td,
-.inner-table th {
-    border: 1px solid #000;
-    padding: 4px;
-}
-
-.inner-table th {
-    font-size: 15px;
-    font-weight: bold;
-    text-align: center;
-}
-
-</style>
-';
-
-$chunks = array_chunk($getPackingInstructionData, 8);
-
-foreach ($chunks as $pageIndex => $pageData) {
-
-    $html .= '
-    <table width="100%" cellpadding="0" cellspacing="0">
+        <table width="200mm" height="290mm" cellpadding="0" cellspacing="0">
         <tr>
-            <!-- LEFT SIDE -->
-            <td width="50%" valign="top" style="padding-left:5mm; padding-top:20mm;">
-                <table cellpadding="0" cellspacing="0">
-                    <tr>
-    ';
+        <td class="label" valign="top">
+        ';
 
-    $col = 0;
+        $count = 0;
 
-    foreach ($pageData as $row) {
+        foreach ($getPackingInstructionData as $row) {
 
-        $description_clone = $row['clone_desc'] ? $row['clone_desc'] : $row['name'];
+             if($row['clone_desc']){
 
-        $html .= '<td class="label" valign="top">';
+                  $description_clone = $row['clone_desc'];
+             }else{
+                  $description_clone = $row['name'];
+             }
 
-        $html .= '
-            <table class="inner-table">
+            $html .= '
+               <table class="inner-table">
                 <tr>
                     <th colspan="2">PACKAGING INSTRUCTION</th>
                 </tr>
+
                 <tr>
                     <td width="40%"><b>PO No & Date</b></td>
-                    <td><b>'.$row['buyer_po_number'].' ('.date('d-m-Y', strtotime($row['buyer_po_date'])).')</b></td>
+                    <td> <b>'.$row['buyer_po_number'].'  ('.date('d-m-Y',strtotime($row['buyer_po_date'])).')</b></td>
                 </tr>
+
                 <tr>
                     <td><b>Invoice No</b></td>
-                    <td><b>'.$row['buyer_invoice_number'].'</b></td>
+                    <td> <b>'.$row['buyer_invoice_number'].'</b></td>
                 </tr>
+
                 <tr>
                     <td><b>Invoice Date</b></td>
-                    <td><b>'.date('d-m-Y', strtotime($row['buyer_invoice_date'])).'</b></td>
+                    <td> <b>'.date('d-m-Y', strtotime($row['buyer_invoice_date'])).'</b></td>
                 </tr>
+
                 <tr>
                     <td><b>Description</b></td>
-                    <td><b>'.$description_clone.'</b></td>
+                    <td> <b>'.$description_clone.'</b></td>
                 </tr>
+
                 <tr>
                     <td><b>Part No</b></td>
-                    <td><b>'.$row['part_number'].'</b></td>
+                    <td> <b>'.$row['part_number'].'</b></td>
                 </tr>
+
                 <tr>
                     <td><b>Qty (PCS)</b></td>
-                    <td><b>'.$row['box_qty'].' PCS</b></td>
+                    <td> <b>'.$row['box_qty'].' PCS</b></td>
                 </tr>
             </table>
+
+            ';
+
+            $count++;
+
+            /* ===== 2 COLUMN × 4 ROW (8 LABEL) ===== */
+
+            if ($count % 2 == 0 && $count < 8) {
+                $html .= '</td></tr><tr><td class="label" valign="top">';
+            } elseif ($count < 8) {
+                $html .= '</td><td class="label" valign="top">';
+            }
+
+            if ($count == 8) {
+                break;
+            }
+        }
+
+        $html .= '
+        </td>
+        </tr>
+        </table>
+
+        </div>
         ';
 
-        $html .= '</td>';
+        /* =====================
+        mPDF CONFIG
+        ===================== */
 
-        $col++;
+        $mpdf = new \Mpdf\Mpdf([
+            'format' => 'A4',
+            'margin_left'   => 0,
+            'margin_right'  => 0,
+            'margin_top'    => 0,
+            'margin_bottom' => 0,
+        ]);
 
-        if ($col % 2 == 0) {
-            $html .= '</tr><tr>';
-        }
-    }
-
-    $html .= '
-                    </tr>
-                </table>
-            </td>
-
-            <!-- RIGHT EMPTY SPACE -->
-            <td width="50%"></td>
-        </tr>
-    </table>
-    ';
-
-    if ($pageIndex < count($chunks) - 1) {
-        $html .= '<pagebreak />';
-    }
-}
-
-$mpdf = new \Mpdf\Mpdf([
-    'format' => 'A4',
-    'margin_left'   => 0,
-    'margin_right'  => 0,
-    'margin_top'    => 0,
-    'margin_bottom' => 0,
-]);
-
-$mpdf->WriteHTML($html);
-$mpdf->Output("Packing_Instruction_8_Label.pdf", "I");
-
-
+        $mpdf->WriteHTML($html);
+        $mpdf->Output("Packing_Instruction_8_Label.pdf", "I");
 
     
 }
