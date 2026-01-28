@@ -19143,7 +19143,7 @@ public function downloadpreexportform($id){
                     <p><b>Total Gr.Weight : </b>'.number_format(round($getpreexportallcountdataforinvoice[0]['total_gross_only'],3),3).' kgs</p>
                     <p><b>Total No of Pallets : </b>'.$getpreexportallcountdataforinvoice[0]['tnp'].'</p>
                     <p><b>Total Weight of Pallets : </b>'.$getpreexportallcountdataforinvoice[0]['twp'].' kgs</p>
-                    <p><b>Final Gross Weight : </b>'.$getpreexportallcountdataforinvoice[0]['total_gross_shipment_weight'].' kgs</p>
+                    <p><b>Final Gross Weight : </b>'.number_format(round($getpreexportallcountdataforinvoice[0]['total_gross_shipment_weight'],3),3).' kgs</p>
             </div>';
 
             // <p>FOR SUPRA QUALITY EXPORTS (I) PVT. LTD.</p>
