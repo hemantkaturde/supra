@@ -15926,24 +15926,26 @@ public function downloadpackinginstraction_clone_print($packing_details_item_id,
     //     $mpdf->WriteHTML($html);
     //     $mpdf->Output("Packing_Instruction_8_Label.pdf", "I");
 
-
     $html = '
 <style>
 
-@page { margin: 0; }
+@page {
+    margin: 0;
+}
 
 body {
     margin: 0;
     padding: 0;
 }
 
+/* PAGE WRAPPER — LEFT ALIGNED */
 .page-wrapper {
-    width: 200mm;
+    width: 100%;
     margin-left: 5mm;
-    margin-right: 5mm;
     margin-top: 20mm;
 }
 
+/* EACH LABEL */
 .label {
     width: 100mm;
     height: 72mm;
@@ -15954,6 +15956,7 @@ body {
     font-size: 14px;
 }
 
+/* INNER TABLE */
 .inner-table {
     width: 100%;
     border-collapse: collapse;
@@ -15975,14 +15978,13 @@ body {
 </style>
 ';
 
-$total = count($getPackingInstructionData);
 $chunks = array_chunk($getPackingInstructionData, 8);
 
 foreach ($chunks as $pageIndex => $pageData) {
 
     $html .= '
     <div class="page-wrapper">
-    <table width="200mm" height="290mm" cellpadding="0" cellspacing="0">
+    <table width="190mm" cellpadding="0" cellspacing="0">
     <tr>
     ';
 
@@ -15990,11 +15992,7 @@ foreach ($chunks as $pageIndex => $pageData) {
 
     foreach ($pageData as $row) {
 
-        if ($row['clone_desc']) {
-            $description_clone = $row['clone_desc'];
-        } else {
-            $description_clone = $row['name'];
-        }
+        $description_clone = $row['clone_desc'] ? $row['clone_desc'] : $row['name'];
 
         $html .= '<td class="label" valign="top">';
 
@@ -16045,7 +16043,7 @@ foreach ($chunks as $pageIndex => $pageData) {
     </div>
     ';
 
-    // ✅ PAGE BREAK ONLY BETWEEN PAGES
+    // ✅ SAFE PAGE BREAK
     if ($pageIndex < count($chunks) - 1) {
         $html .= '<pagebreak />';
     }
