@@ -15926,26 +15926,19 @@ public function downloadpackinginstraction_clone_print($packing_details_item_id,
     //     $mpdf->WriteHTML($html);
     //     $mpdf->Output("Packing_Instruction_8_Label.pdf", "I");
 
+   
+
     $html = '
 <style>
 
-@page {
-    margin: 0;
-}
+@page { margin: 0; }
 
 body {
     margin: 0;
     padding: 0;
 }
 
-/* PAGE WRAPPER — LEFT ALIGNED */
-.page-wrapper {
-    width: 100%;
-    margin-left: 5mm;
-    margin-top: 20mm;
-}
-
-/* EACH LABEL */
+/* label box */
 .label {
     width: 100mm;
     height: 72mm;
@@ -15956,7 +15949,7 @@ body {
     font-size: 14px;
 }
 
-/* INNER TABLE */
+/* inner table */
 .inner-table {
     width: 100%;
     border-collapse: collapse;
@@ -15983,9 +15976,12 @@ $chunks = array_chunk($getPackingInstructionData, 8);
 foreach ($chunks as $pageIndex => $pageData) {
 
     $html .= '
-    <div class="page-wrapper">
-    <table width="190mm" cellpadding="0" cellspacing="0">
-    <tr>
+    <table width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+            <!-- LEFT SIDE -->
+            <td width="50%" valign="top" style="padding-left:5mm; padding-top:20mm;">
+                <table cellpadding="0" cellspacing="0">
+                    <tr>
     ';
 
     $col = 0;
@@ -16038,18 +16034,20 @@ foreach ($chunks as $pageIndex => $pageData) {
     }
 
     $html .= '
-    </tr>
+                    </tr>
+                </table>
+            </td>
+
+            <!-- RIGHT EMPTY SPACE -->
+            <td width="50%"></td>
+        </tr>
     </table>
-    </div>
     ';
 
-    // ✅ SAFE PAGE BREAK
     if ($pageIndex < count($chunks) - 1) {
         $html .= '<pagebreak />';
     }
 }
-
-/* ===== mPDF ===== */
 
 $mpdf = new \Mpdf\Mpdf([
     'format' => 'A4',
@@ -16061,6 +16059,7 @@ $mpdf = new \Mpdf\Mpdf([
 
 $mpdf->WriteHTML($html);
 $mpdf->Output("Packing_Instruction_8_Label.pdf", "I");
+
 
 
     
