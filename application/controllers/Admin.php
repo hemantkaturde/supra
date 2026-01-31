@@ -12025,24 +12025,26 @@ class Admin extends BaseController
         $post_submit = $this->input->post();
         if($post_submit){
             $saveenquiryform_response = array();
-            $this->form_validation->set_rules('rejected_reason','Rejected Reason','trim|required');    
+            $this->form_validation->set_rules('rejected_reason','Rejected Reason','trim');    
             $this->form_validation->set_rules('qty_in_pcs','Qty In PCS','trim|required');     
             $this->form_validation->set_rules('qty_in_kgs','Qty In KGS','trim|required'); 
             $this->form_validation->set_rules('no_of_boxes','Qty In KGS','trim|required');   
             $this->form_validation->set_rules('remark','Remark','trim');    
+            $this->form_validation->set_rules('rejected_ddl','rejected_ddl','trim|required');    
 
            if($this->form_validation->run() == FALSE)
            {
                $saveenquiryform_response['status'] = 'failure';
-               $saveenquiryform_response['error'] =  array('rejected_reason'=>strip_tags(form_error('rejected_reason')),'qty_in_pcs'=>strip_tags(form_error('qty_in_pcs')),'qty_in_kgs'=>strip_tags(form_error('qty_in_kgs')));
-          
+               $saveenquiryform_response['error'] =  array('rejected_reason'=>strip_tags(form_error('rejected_reason')),'qty_in_pcs'=>strip_tags(form_error('qty_in_pcs')),'qty_in_kgs'=>strip_tags(form_error('qty_in_kgs')),'rejected_ddl'=>strip_tags(form_error('qty_in_kgs')));
+         
            }else{
                 $data = array(
                     'rejected_reason'  =>  trim($this->input->post('rejected_reason')),
                     'qty_in_pcs'  =>  trim($this->input->post('qty_in_pcs')),
                     'qty_in_kgs'  =>  trim($this->input->post('qty_in_kgs')),
                     'no_of_boxes'  =>  trim($this->input->post('no_of_boxes')),
-                    'remark'  =>  trim($this->input->post('remark'))
+                    'remark'  =>  trim($this->input->post('remark')),
+                    'rejected_ddl'=>  trim($this->input->post('rejected_ddl'))
                 );
 
                 $saveenquiryformitem = $this->admin_model->saveenquiryformitemedit(trim($this->input->post('rejection_form_id_popup')),$data);
