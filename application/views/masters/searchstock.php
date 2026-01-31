@@ -301,6 +301,7 @@
                                     <tr style="background-color:#3c8dbc !important;color:#fff">
                                         <th>Rejection Number</th>
                                         <th>Rejection Reason</th>
+                                        <th>Rejection Reason Notes</th>
                                         <th>Rejection Qty in Pcs</th>
                                         <th>Rejection Qty in Kgs</th>
                                         <th>Remarks</th>

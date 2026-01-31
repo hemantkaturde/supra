@@ -8091,6 +8091,8 @@ class Admin extends BaseController
             $data['supplierList']= $this->admin_model->fetchALLsupplierList();
             $data['getPreviousReworkreturnnumber']= $this->admin_model->getPreviousReworkreturnnumber();
             $data['getReworkRejectionitemslist']= $this->admin_model->getReworkRejectionitemslist();
+            $data['rejection_ddl_data']= $this->admin_model->rejection_ddl_data();
+
             $this->loadViews("masters/addneworkrejection", $this->global, $data, NULL);
 
         }
