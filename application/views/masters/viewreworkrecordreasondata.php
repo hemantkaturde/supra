@@ -33,7 +33,8 @@
                             <table width="100%" class="table table-striped table-bordered table-hover rework_record_reason_details" id="rework_record_reason_details">
                                 <thead>
                                     <tr style="background-color:#3c8dbc !important;color:#fff">
-                                        <th>Reason</th>
+                                        <th>Rejected Reason</th>
+                                        <th>Rejected Reason Notes</th>
                                         <th>Rework Qty (in pcs)</th>
                                         <th>After Rework OK Qty (in pcs)</th>
                                         <th>After Rework Rej Qty (in pcs)</th>
@@ -92,8 +93,21 @@
                 <input type="hidden" class="form-control"  id="tbl_rework_record_reason_data_id" name="tbl_rework_record_reason_data_id">
 
 
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label">Rejected Reason <span class="required">*</span></label>
+                  <div class="col-sm-8">
+                     <select class="form-control" name="rejected_ddl" id="rejected_ddl" required>
+                           <option st-id="" value="">Select Rejected Reason</option>
+                           <?php foreach ($rejection_ddl_data as $key => $value) {?>
+                              <option value="<?php echo $value['rejec_id']; ?>"><?php echo $value['rejection_reason']; ?></option>
+                           <?php } ?>
+                     </select>
+                  </div>
+               </div>
+
+
                <div class="form-group row">
-                  <label class="col-sm-4 col-form-label">Reason <span class="required">*</span></label>
+                  <label class="col-sm-4 col-form-label">Rejected Reason Notes <span class="required">*</span></label>
                   <div class="col-sm-8">
                      <input type="type" class="form-control"  id="rejected_reason" name="rejected_reason" required>
                      <p class="error rejected_reason_error"></p>

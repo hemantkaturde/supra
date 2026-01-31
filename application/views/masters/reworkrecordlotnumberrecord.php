@@ -83,13 +83,28 @@
                <input type="hidden" class="form-control"  id="incoming_item_data_id" name="incoming_item_data_id">
                <input type="hidden" class="form-control"  id="main_rework_resaon_id" name="main_rework_resaon_id" value=<?php echo $getreworkrecorddatabyid[0]['rework_id']?>>
 
+
                <div class="form-group row">
-                  <label class="col-sm-4 col-form-label">Reason <span class="required">*</span></label>
+                  <label class="col-sm-4 col-form-label">Rejected Reason <span class="required">*</span></label>
+                  <div class="col-sm-8">
+                     <select class="form-control" name="rejected_ddl" id="rejected_ddl" required>
+                           <option st-id="" value="">Select Rejected Reason</option>
+                           <?php foreach ($rejection_ddl_data as $key => $value) {?>
+                              <option value="<?php echo $value['rejec_id']; ?>"><?php echo $value['rejection_reason']; ?></option>
+                           <?php } ?>
+                     </select>
+                  </div>
+               </div>
+
+
+               <div class="form-group row">
+                  <label class="col-sm-4 col-form-label">Rejected Reason Notes</label>
                   <div class="col-sm-8">
                      <input type="type" class="form-control"  id="rejected_reason" name="rejected_reason" required>
                      <p class="error rejected_reason_error"></p>
                   </div>
                </div>
+
                <div class="form-group row">
                   <label class="col-sm-4 col-form-label">Rework Qty (in pcs) <span class="required">*</span></label>
                   <div class="col-sm-8">

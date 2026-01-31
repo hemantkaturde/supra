@@ -23195,6 +23195,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     {
             $this->db->select('*');
             $this->db->where(TBL_REWORK_RECORD_REASON_DATA.'.incoming_item_id', $incoming_details_item_id);
+            $this->db->join(TBL_REJECTION_MASTER, TBL_REJECTION_MASTER.'.rejec_id = '.TBL_REWORK_RECORD_REASON_DATA.'.rejected_ddl','left');
 
 
             // 🔍 Text search filter
@@ -23202,6 +23203,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $this->db->group_start();
                 $this->db->like(TBL_REWORK_RECORD_REASON_DATA.'.rejected_reason', $params['search']['value']);
                 $this->db->or_like(TBL_REWORK_RECORD_REASON_DATA.'.qty_in_pcs', $params['search']['value']);
+                $this->db->or_like(TBL_REJECTION_MASTER.'.rejection_reason', $params['search']['value']);
                 $this->db->or_like(TBL_REWORK_RECORD_REASON_DATA.'.after_rework_ok_in_pcs',$params['search']['value']);
                 $this->db->or_like(TBL_REWORK_RECORD_REASON_DATA.'.after_rework_rej_qty_in_pcs', $params['search']['value']);
                 $this->db->or_like(TBL_REWORK_RECORD_REASON_DATA.'.rework_done_by',$params['search']['value']);
@@ -23226,7 +23228,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $actions .= "<i style='font-size:x-large;cursor:pointer;' data-id='".$value['rework_resaon_id']."' class='fa fa-trash-o deletereworkrecordreasondata'></i>";
 
                 $data[] = array(
-                    'rejected_reason' => $value['rejected_reason'],
+                    'rejection_reason' => $value['rejection_reason'],
+                    'rejected_reason_notes' => $value['rejected_reason'],
                     'qty_in_pcs' => $value['qty_in_pcs'],
                     'after_rework_ok_in_pcs' => $value['after_rework_ok_in_pcs'],
                     'after_rework_rej_qty_in_pcs' => $value['after_rework_rej_qty_in_pcs'],

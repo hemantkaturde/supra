@@ -28326,6 +28326,7 @@ public function reworkrecordlotnumberrecord($id){
         $processFunction = 'Admin/editreworkrecord';
         $this->global['pageTitle'] = 'Rework Rejection Lot Number Details';  
         $data['getreworkrecorddatabyid']= $this->admin_model->getreworkrecorddatabyid($id);
+        $data['rejection_ddl_data']= $this->admin_model->rejection_ddl_data();
         $this->loadViews("masters/reworkrecordlotnumberrecord", $this->global, $data, NULL); 
 }
 
@@ -28686,12 +28687,13 @@ public function saverejectionreworkitemdataform(){
         $this->form_validation->set_rules('after_rework_rej_qty_in_pcs','After Rework Rej Qty In pcs','trim');
         $this->form_validation->set_rules('rework_done_by','Rework Done By','trim');
         $this->form_validation->set_rules('rework_checked_by','Rework Checked By','trim');
+        $this->form_validation->set_rules('rejected_ddl','Rejected DDL','trim');
 
 
         if($this->form_validation->run() == FALSE)
         {
             $saverejectionreworkitemdataform_response['status'] = 'failure';
-            $saverejectionreworkitemdataform_response['error'] = array('rejected_reason'=>strip_tags(form_error('rejected_reason')),'rework_qty_in_pcs'=>strip_tags(form_error('rework_qty_in_pcs')),'after_rework_ok_in_pcs'=>strip_tags(form_error('after_rework_ok_in_pcs')),'after_rework_rej_qty_in_pcs'=>strip_tags(form_error('after_rework_rej_qty_in_pcs')),'rework_done_by'=>strip_tags(form_error('rework_done_by')),'rework_checked_by'=>strip_tags(form_error('rework_checked_by')));
+            $saverejectionreworkitemdataform_response['error'] = array('rejected_reason'=>strip_tags(form_error('rejected_reason')),'rework_qty_in_pcs'=>strip_tags(form_error('rework_qty_in_pcs')),'after_rework_ok_in_pcs'=>strip_tags(form_error('after_rework_ok_in_pcs')),'after_rework_rej_qty_in_pcs'=>strip_tags(form_error('after_rework_rej_qty_in_pcs')),'rework_done_by'=>strip_tags(form_error('rework_done_by')),'rework_checked_by'=>strip_tags(form_error('rework_checked_by')),'rejected_ddl'=>strip_tags(form_error('rejected_ddl')));
        
         }else{
 
@@ -28705,7 +28707,8 @@ public function saverejectionreworkitemdataform(){
                 'after_rework_ok_in_pcs' =>  trim($this->input->post('after_rework_ok_in_pcs')),
                 'after_rework_rej_qty_in_pcs' =>  trim($this->input->post('after_rework_rej_qty_in_pcs')),
                 'rework_done_by' =>  trim($this->input->post('rework_done_by')),
-                'rework_checked_by' =>  trim($this->input->post('rework_checked_by'))
+                'rework_checked_by' =>  trim($this->input->post('rework_checked_by')),
+                'rejected_ddl'  =>  trim($this->input->post('rejected_ddl')),
             );
 
             if($this->input->post('tbl_rework_record_reason_data_id')){
@@ -28717,7 +28720,7 @@ public function saverejectionreworkitemdataform(){
             $saverejectionreworkitemdataform= $this->admin_model->saverejectionreworkitemdataform($tbl_rework_record_reason_data_id,$data);
             if($saverejectionreworkitemdataform){
                 $saverejectionreworkitemdataform_response['status'] = 'success';
-                $saverejectionreworkitemdataform_response['error'] = array('rejected_reason'=>strip_tags(form_error('rejected_reason')),'rework_qty_in_pcs'=>strip_tags(form_error('rework_qty_in_pcs')),'after_rework_ok_in_pcs'=>strip_tags(form_error('after_rework_ok_in_pcs')),'after_rework_rej_qty_in_pcs'=>strip_tags(form_error('after_rework_rej_qty_in_pcs')),'rework_done_by'=>strip_tags(form_error('rework_done_by')),'rework_checked_by'=>strip_tags(form_error('rework_checked_by')));
+                $saverejectionreworkitemdataform_response['error'] = array('rejected_reason'=>strip_tags(form_error('rejected_reason')),'rework_qty_in_pcs'=>strip_tags(form_error('rework_qty_in_pcs')),'after_rework_ok_in_pcs'=>strip_tags(form_error('after_rework_ok_in_pcs')),'after_rework_rej_qty_in_pcs'=>strip_tags(form_error('after_rework_rej_qty_in_pcs')),'rework_done_by'=>strip_tags(form_error('rework_done_by')),'rework_checked_by'=>strip_tags(form_error('rework_checked_by')),'rejected_ddl'=>strip_tags(form_error('rejected_ddl')));
             }
 
             echo json_encode($saverejectionreworkitemdataform_response);

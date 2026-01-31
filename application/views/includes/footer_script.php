@@ -28470,6 +28470,7 @@ $('#export_excel').on('click', function() {
 							{ "width": "10%", "targets": 4 },
 							{ "width": "10%", "targets": 5 },
 							{ "width": "10%", "targets": 6 },
+							{ "width": "10%", "targets": 7 },
 						],
 						responsive: true,
 						"oLanguage": {
