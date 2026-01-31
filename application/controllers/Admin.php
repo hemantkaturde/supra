@@ -29548,7 +29548,7 @@ public function printreworkrecordlotnumberrecord($rjection_incoming_item_id,$rew
 
             <table width="100%" style"font-size:14px!important">
             <tr>
-                <th width="6%">SR NO.</th>
+                <th width="6%">NO.</th>
                 <th width="30%">Rejected Reason</th>
                 <th width="30%">Rejected Reason Notes</th>
                 <th width="10%">Qty In Pcs</th>
