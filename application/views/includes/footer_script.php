@@ -18618,7 +18618,8 @@
 					 { "width": "20%", "targets": 2 },
 	                 { "width": "15%", "targets": 3 },
 					 { "width": "15%", "targets": 4 },
-					 { "width": "15%", "targets": 5 }
+					 { "width": "15%", "targets": 5 },
+					 { "width": "15%", "targets": 6 }
 	            ],
 	            responsive: true,
 	            "oLanguage": {
@@ -18706,6 +18707,17 @@
 					    var fetchResponse = $.parseJSON(data);
 						$('#addNewModal').modal('show'); 
 						$('#rejection_form_id_popup').val(fetchResponse.id); 
+						// $('#rejected_ddl').val(fetchResponse.rejected_ddl);  
+
+						  var rejectId = fetchResponse.rejected_ddl;
+
+							// force match
+							$("#rejected_ddl option").each(function () {
+								if ($(this).val() == rejectId) {
+									$(this).prop("selected", true);
+								}
+							});
+
 						$('#rejected_reason').val(fetchResponse.rejected_reason);  
 						$('#qty_in_pcs').val(fetchResponse.qty_In_pcs);  
 						$('#qty_in_kgs').val(fetchResponse.qty_in_kgs);  

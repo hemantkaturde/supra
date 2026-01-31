@@ -73,10 +73,22 @@
                <input type="hidden" class="form-control"  id="vendor_po_item_id" name="vendor_po_item_id">
                <input type="hidden" class="form-control"  id="net_weight" name="net_weight">
 
-               <div class="form-group row">
+                <div class="form-group row">
                   <label class="col-sm-4 col-form-label">Rejected Reason <span class="required">*</span></label>
                   <div class="col-sm-8">
-                     <input type="type" class="form-control"  id="rejected_reason" name="rejected_reason" required>
+                     <select class="form-control" name="rejected_ddl" id="rejected_ddl" required>
+                           <option st-id="" value="">Select Rejected Reason</option>
+                           <?php foreach ($rejection_ddl_data as $key => $value) {?>
+                              <option value="<?php echo $value['rejec_id']; ?>"><?php echo $value['rejection_reason']; ?></option>
+                           <?php } ?>
+                     </select>
+                  </div>
+               </div>
+
+               <div class="form-group row">
+                  <label class="col-sm-4 col-form-label">Rejected Notes</label>
+                  <div class="col-sm-8">
+                     <input type="type" class="form-control"  id="rejected_reason" name="rejected_reason">
                      <p class="error rejected_reason_error"></p>
                   </div>
                </div>

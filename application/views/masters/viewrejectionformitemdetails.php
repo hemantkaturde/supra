@@ -37,6 +37,7 @@
                                 <thead>
                                     <tr style="background-color:#3c8dbc !important;color:#fff">
                                         <th>Rejection Reason</th>
+                                        <th>Rejection Notes</th>
                                         <th>Qty (In Pcs)</th>
                                         <th>Qty (In Kgs)</th>
                                         <th>No.of Boxes</th>
@@ -77,6 +78,18 @@
 
                <div class="form-group row">
                   <label class="col-sm-4 col-form-label">Rejected Reason <span class="required">*</span></label>
+                  <div class="col-sm-8">
+                     <select class="form-control" name="rejected_ddl" id="rejected_ddl" required>
+                           <option st-id="" value="">Select Rejected Reason</option>
+                           <?php foreach ($rejection_ddl_data as $key => $value) {?>
+                              <option value="<?php echo $value['rejec_id']; ?>"><?php echo $value['rejection_reason']; ?></option>
+                           <?php } ?>
+                     </select>
+                  </div>
+               </div>
+
+               <div class="form-group row">
+                  <label class="col-sm-4 col-form-label">Rejected Notes</label>
                   <div class="col-sm-8">
                      <input type="type" class="form-control"  id="rejected_reason" name="rejected_reason" required>
                      <p class="error rejected_reason_error"></p>

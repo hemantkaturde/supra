@@ -11075,6 +11075,8 @@ class Admin extends BaseController
         $processFunction = 'Admin/editrejetionform';
         $this->logrecord($process,$processFunction);
         $this->global['pageTitle'] = 'Add Rejection Form Data';
+        $data['rejection_ddl_data']= $this->admin_model->rejection_ddl_data();
+
         $data['getalldataofeditrejectionform']= $this->admin_model->getalldataofeditrejectionform($id);
         $this->loadViews("masters/addrejectionformitemsdata", $this->global, $data, NULL);
     }
@@ -11120,6 +11122,7 @@ class Admin extends BaseController
         $processFunction = 'Admin/editrejetionform';
         $this->logrecord($process,$processFunction);
         $this->global['pageTitle'] = 'View Rejection Form Data';
+        $data['rejection_ddl_data']= $this->admin_model->rejection_ddl_data();
 
         $this->loadViews("masters/viewrejectionformitemdetails", $this->global, $data, NULL);
 
@@ -11566,15 +11569,17 @@ class Admin extends BaseController
         $post_submit = $this->input->post();
         if($post_submit){
             $saverejectedform_response = array();
-            $this->form_validation->set_rules('rejected_reason','Rejected Reason','trim|required'); 
+            $this->form_validation->set_rules('rejected_reason','Rejected Reason','trim'); 
             $this->form_validation->set_rules('qty_in_pcs','Qty In Pcs','trim|required');   
             $this->form_validation->set_rules('qty_in_kgs','Qty In Kgs','trim|required'); 
             $this->form_validation->set_rules('no_of_boxes','No Of Boxes','trim');      
-            $this->form_validation->set_rules('remark','Remark','trim');                   
+            $this->form_validation->set_rules('remark','Remark','trim');         
+            $this->form_validation->set_rules('rejected_ddl','rejected_ddl','trim|required');
+
             if($this->form_validation->run() == FALSE)
             {
                 $saverejectedform_response['status'] = 'failure';
-                $saverejectedform_response['error'] =  array('rejected_reason'=>strip_tags(form_error('rejected_reason')),'qty_in_pcs'=>strip_tags(form_error('qty_in_pcs')),'qty_in_kgs'=>strip_tags(form_error('qty_in_kgs')),'remark'=>strip_tags(form_error('remark')));
+                $saverejectedform_response['error'] =  array('rejected_reason'=>strip_tags(form_error('rejected_reason')),'qty_in_pcs'=>strip_tags(form_error('qty_in_pcs')),'qty_in_kgs'=>strip_tags(form_error('qty_in_kgs')),'remark'=>strip_tags(form_error('remark')),'rejected_ddl'=>strip_tags(form_error('rejected_ddl')));
             
             }else{
 
@@ -11587,15 +11592,16 @@ class Admin extends BaseController
                     'qty_in_kgs' => trim($this->input->post('qty_in_kgs')),
                     'no_of_boxes' => trim($this->input->post('no_of_boxes')),
                     'remark' => trim($this->input->post('remark')),
+                    'rejected_ddl' => trim($this->input->post('rejected_ddl')),
                 );
 
                 $savenewrejectionform= $this->admin_model->saverejectedformitemdata('',$data);
                 if($savenewrejectionform){
                     $saverejectedform_response['status'] = 'success';
-                    $saverejectedform_response['error'] =  array('rejected_reason'=>strip_tags(form_error('rejected_reason')),'qty_in_pcs'=>strip_tags(form_error('qty_in_pcs')),'qty_in_kgs'=>strip_tags(form_error('qty_in_kgs')),'remark'=>strip_tags(form_error('remark')));
+                    $saverejectedform_response['error'] =  array('rejected_reason'=>strip_tags(form_error('rejected_reason')),'qty_in_pcs'=>strip_tags(form_error('qty_in_pcs')),'qty_in_kgs'=>strip_tags(form_error('qty_in_kgs')),'remark'=>strip_tags(form_error('remark')),'rejected_ddl'=>strip_tags(form_error('rejected_ddl')));
                 }else{
                     $saverejectedform_response['status'] = 'failure';
-                    $saverejectedform_response['error'] =  array('rejected_reason'=>strip_tags(form_error('rejected_reason')),'qty_in_pcs'=>strip_tags(form_error('qty_in_pcs')),'qty_in_kgs'=>strip_tags(form_error('qty_in_kgs')),'remark'=>strip_tags(form_error('remark')));
+                    $saverejectedform_response['error'] =  array('rejected_reason'=>strip_tags(form_error('rejected_reason')),'qty_in_pcs'=>strip_tags(form_error('qty_in_pcs')),'qty_in_kgs'=>strip_tags(form_error('qty_in_kgs')),'remark'=>strip_tags(form_error('remark')),'rejected_ddl'=>strip_tags(form_error('rejected_ddl')));
                  }
 
             }

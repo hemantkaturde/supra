@@ -9686,6 +9686,8 @@ class Admin_model extends CI_Model
 
     public function getfetch_stock_rejection_form_ttem_detailscount($params,$rejection_form_id,$vendor_po_item_id,$vendor_po_id){
         $this->db->select('*');
+        $this->db->join(TBL_REJECTION_MASTER, TBL_REJECTION_MASTER.'.rejec_id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.rejected_ddl','left');
+
        // $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
 
         // if($params['search']['value'] != "") 
@@ -9705,7 +9707,7 @@ class Admin_model extends CI_Model
 
     public function getfetch_stock_rejection_form_ttem_detailsdata($params,$rejection_form_id,$vendor_po_item_id,$vendor_po_id){
         $this->db->select('*,'.TBL_REJECTION_FORM_REJECTED_ITEM.'.id as rejection_item_id');
-        // $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_VENDOR_PO_MASTER_ITEM.'.part_number_id');
+        $this->db->join(TBL_REJECTION_MASTER, TBL_REJECTION_MASTER.'.rejec_id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.rejected_ddl','left');
         // if($params['search']['value'] != "") 
         // {
         //     $this->db->where("(".TBL_REJECTION_FORM_REJECTED_ITEM.".rejection_number LIKE '%".$params['search']['value']."%'");
@@ -9724,7 +9726,8 @@ class Admin_model extends CI_Model
         {
             foreach ($fetch_result as $key => $value)
             {
-                $data[$counter]['rejected_reason'] =$value['rejected_reason'];
+                $data[$counter]['rejection_reason'] =$value['rejection_reason'];
+                $data[$counter]['rejected_notes'] =$value['rejected_reason'];
                 $data[$counter]['qty_In_pcs'] =$value['qty_In_pcs'];
                 $data[$counter]['qty_In_kgs'] =round($value['qty_In_kgs'],3);
                 $data[$counter]['no_of_boxes'] =$value['no_of_boxes'];
@@ -10543,7 +10546,8 @@ class Admin_model extends CI_Model
 
   public function geteditrejectionformitem( $id){
 
-   $this->db->select('id,rejected_reason,qty_In_pcs,qty_in_kgs,no_of_boxes,remark');
+   $this->db->select('id,rejected_reason,qty_In_pcs,qty_in_kgs,no_of_boxes,remark,rejection_reason,rejected_ddl');
+   $this->db->join(TBL_REJECTION_MASTER, TBL_REJECTION_MASTER.'.rejec_id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.rejected_ddl','left');
    $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.id', $id);
    $this->db->order_by(TBL_REJECTION_FORM_REJECTED_ITEM.'.id','DESC');
    $query = $this->db->get(TBL_REJECTION_FORM_REJECTED_ITEM);
@@ -24554,6 +24558,15 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
+    public function rejection_ddl_data(){
+
+        $this->db->select('*');
+        $this->db->where(TBL_REJECTION_MASTER.'.status', 1);
+        $query = $this->db->get(TBL_REJECTION_MASTER);
+        $data = $query->result_array();
+        return $data;
+    
+    }
 
 
 }
