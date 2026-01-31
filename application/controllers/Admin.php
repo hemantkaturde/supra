@@ -11334,6 +11334,8 @@ class Admin extends BaseController
                     <tr>
                         <td style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$j.'</td>
                         <td style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rejection_reason'].'</br></td>   
+                        <td style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rejected_reason'].'</br></td>   
+
                         <td style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['qty_In_pcs'].'</td>
                         <td style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.number_format($value['qty_In_kgs'],3).'</td>
                         <td style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['no_of_boxes'].'</td>
@@ -11380,6 +11382,7 @@ class Admin extends BaseController
                     <tr style=border: 1px solid black;border-right: 1px solid black;>
                         <th style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 5px;border-bottom:1px solid black" valign="top">Scrap Rejection No</th> 
                         <th style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 5px;border-bottom:1px solid black" valign="top">Rejection Reason</th> 
+                        <th style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 5px;border-bottom:1px solid black" valign="top">Rejection Notes</th> 
                         <th style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 5px;border-bottom:1px solid black" valign="top">Qty (In Pcs)</th> 
                         <th style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 5px;border-bottom:1px solid black" valign="top">Qty (In Kgs)</th> 
                         <th style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 5px;border-bottom:1px solid black" valign="top">No of Boxes</th> 
@@ -11387,6 +11390,7 @@ class Admin extends BaseController
                     </tr>
                     '.$CartItem1.'
                        <tr style=border: 1px solid black;border-right: 1px solid black;>
+                        <th style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 5px;border-bottom:1px solid black" valign="top"></th> 
                         <th style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 5px;border-bottom:1px solid black" valign="top"></th> 
                         <th style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 5px;border-bottom:1px solid black" valign="top"></th> 
                         <th style="border: 1px solid black;border-right: 1px solid black;text-align:left;padding: 5px;border-bottom:1px solid black" valign="top">'.round($qty_In_pcs,3).' Pcs</th> 
