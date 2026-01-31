@@ -29549,7 +29549,8 @@ public function printreworkrecordlotnumberrecord($rjection_incoming_item_id,$rew
             <table width="100%" style"font-size:14px!important">
             <tr>
                 <th width="6%">SR NO.</th>
-                <th width="30%">Reason</th>
+                <th width="30%">Rejected Reason</th>
+                <th width="30%">Rejected Reason Notes</th>
                 <th width="10%">Qty In Pcs</th>
                 <th width="20%">After Rework OK Qty</th>
                 <th width="20%">After Rework Rejection Qty</th>
@@ -29566,6 +29567,7 @@ public function printreworkrecordlotnumberrecord($rjection_incoming_item_id,$rew
                 $html .= '
                     <tr>
                         <td>'.$i.'</td>
+                        <td>'.($row['rejection_reason'] ?? '').'</td>
                         <td>'.($row['rejected_reason'] ?? '').'</td>
                         <td>'.($row['qty_in_pcs'] ?? '').'</td>
                         <td>'.($row['after_rework_ok_in_pcs'] ?? '').'</td>
@@ -29580,6 +29582,7 @@ public function printreworkrecordlotnumberrecord($rjection_incoming_item_id,$rew
                 $html .= '
                     <tr>
                         <td>'.$i.'</td>
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -29603,7 +29606,7 @@ public function printreworkrecordlotnumberrecord($rjection_incoming_item_id,$rew
 
             $html .='<table width="100%">
                         <tr style="border:1px !important">
-                            <td style="width: 60%;"><b>After Rework, Checked By :</b></td>
+                            <td style="width: 64.5%;"><b>After Rework, Checked By :</b></td>
                             <td>'.$get_rework_rejection_data[0]['after_rework_checked_by'].'</td>
                         </tr>
 

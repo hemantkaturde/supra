@@ -22946,6 +22946,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     public function get_rejection_rework_item_data($rjection_incoming_item_id,$rework_id){
 
             $this->db->select('*');
+            $this->db->join(TBL_REJECTION_MASTER, TBL_REJECTION_MASTER.'.rejec_id = '.TBL_REWORK_RECORD_REASON_DATA.'.rejected_ddl','left');
             $this->db->where(TBL_REWORK_RECORD_REASON_DATA.'.main_rework_resaon_id', $rework_id);
             $this->db->where(TBL_REWORK_RECORD_REASON_DATA.'.incoming_item_id', $rjection_incoming_item_id);
             $query = $this->db->get(TBL_REWORK_RECORD_REASON_DATA);
