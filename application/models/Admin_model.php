@@ -20036,6 +20036,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     public function getRejectionitemsrejecteddetails($rejection_form_id,$vendor_po_item_id,$vendor_po_id){
 
         $this->db->select('*,'.TBL_REJECTION_FORM_REJECTED_ITEM.'.id as rejection_item_id');
+        $this->db->join(TBL_REJECTION_MASTER, TBL_REJECTION_MASTER.'.rejec_id = '.TBL_REJECTION_FORM_REJECTED_ITEM.'.rejected_ddl','left');
         $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.item_id', $vendor_po_item_id);
         $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.rejection_form_id', $rejection_form_id);
         $this->db->where(TBL_REJECTION_FORM_REJECTED_ITEM.'.vendor_po_id', $vendor_po_id);
