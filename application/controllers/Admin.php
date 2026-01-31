@@ -22276,6 +22276,7 @@ public function printstock($stock_id,$balence_qty_in_pcs,$ready_for_exp_pcs,$tot
         $CartItemRejection .= '
                 <tr style="style=border-left: 1px solid black;border-right: 1px solid black;">
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$j.'</td>
+                    <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rejection_reason'].'</td> 
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['rejected_reason'].'</td> 
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.$value['qty_In_pcs'].'</td>
                     <td style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;padding: 10px;" valign="top">'.number_format($value['qty_In_kgs'],3).'</td>
@@ -22376,6 +22377,7 @@ public function printstock($stock_id,$balence_qty_in_pcs,$ready_for_exp_pcs,$tot
                 <tr style="border: 1px solid black;">
                     <th align="left" style="border: 1px solid black;text-align:center;padding: 10px;" margin-bottom: 10%;>Sr No</th>
                     <th align="left" style="border: 1px solid black;text-align:center;padding: 10px;" margin-bottom: 10%;>Rejection Reason</th>
+                    <th align="left" style="border: 1px solid black;text-align:center;padding: 10px;" margin-bottom: 10%;>Rejection Reason Notes</th>
                     <th align="left" style="border: 1px solid black;text-align:center;padding: 10px;" margin-bottom: 10%;>Rejection Qty in Pcs</th>
                     <th align="left" style="border: 1px solid black;text-align:center;padding: 10px;" margin-bottom: 10%;>Rejection Qty in Kgs</th>
                     <th align="left" style="border: 1px solid black;text-align:center;padding: 10px;" margin-bottom: 10%;>Remarks</th>  
