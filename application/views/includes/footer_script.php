@@ -28556,6 +28556,16 @@ $('#export_excel').on('click', function() {
 								$('#main_rework_resaon_id').val(fetchResponse.main_rework_resaon_id); 
 								$('#incoming_item_data_id').val(fetchResponse.incoming_item_id); 
 								// $('#rework_id').val(fetchResponse.rework_resaon_id);  
+
+
+								var rejectId = fetchResponse.rejected_ddl;
+								// force match
+								$("#rejected_ddl option").each(function () {
+										if ($(this).val() == rejectId) {
+											$(this).prop("selected", true);
+										}
+								});
+
 								$('#tbl_rework_record_reason_data_id').val(fetchResponse.rework_resaon_id);  
 								$('#rejected_reason').val(fetchResponse.rejected_reason);  
 								$('#rework_qty_in_pcs').val(fetchResponse.qty_in_pcs);  

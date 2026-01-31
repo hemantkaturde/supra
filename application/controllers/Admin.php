@@ -28739,6 +28739,7 @@ public function viewreworkrecordreasondata($incoming_details_item_id){
 
         $queryRecords = $this->admin_model->fetchreworkrecordreasondetailsdataforidonly($incoming_details_item_id); 
         $data['main_rework_data']= $queryRecords[0]['main_rework_resaon_id'];
+        $data['rejection_ddl_data']= $this->admin_model->rejection_ddl_data();
 
         $this->loadViews("masters/viewreworkrecordreasondata", $this->global, $data, NULL); 
 }
