@@ -8622,7 +8622,7 @@ class Admin_model extends CI_Model
             foreach ($fetch_result as $key => $value)
             {
                 $data[$counter]['rejection_number'] =$i++;
-                $data[$counter]['rejection_reason'] =$value['rejection_reason'];
+                $data[$counter]['rejection_reason'] =$value['rejet_reson'];
                 $data[$counter]['rejected_reason'] =$value['rejected_reason'];
                 $data[$counter]['qty_In_pcs'] =$value['qty_In_pcs'];
                 $data[$counter]['qty_In_kgs'] =round($value['qty_In_kgs'],3);
