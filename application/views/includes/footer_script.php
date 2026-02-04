@@ -27970,7 +27970,7 @@
 		function openModalinstrumentdetails() {
 			$('#instrumentForm')[0].reset();
 			$('#id').val('');
-			$('.modal-title').text('Add Instrument');
+			$('.modal-title').text('Add Instrument Master Details');
 			$('#instrumentdetailsModal').modal('show');  // ✅ Bootstrap 3 style
 		}
 
@@ -27996,22 +27996,19 @@
 			});
 		});
 
-		function editData(id) {
-			$.get('<?php echo base_url();?>admin/editintrument/' + id, function (res) {
+		function editinstrumentmasterData(id) {
+			$.get('<?php echo base_url();?>admin/editinstrumentmasterData/' + id, function (res) {
 				let d = JSON.parse(res);
 
-				$('#id').val(d.id);
-
-				$('#instrument_name').val($.trim(d.instrument_name));
-				$('#grade').val($.trim(d.grade));
-				$('#measuring_size').val($.trim(d.measuring_size));
-				$('#unit').val($.trim(d.unit));
-				$('#class').val($.trim(d.class));
-				$('#type').val($.trim(d.type));
-				$('#qty').val($.trim(d.qty));
+				$('#instrument_master_details_id').val($.trim(d.id));
+				$('#instrument_id').val($.trim(d.instrument_id));
+				$('#calibration_date').val($.trim(d.calibration_date));
+				$('#due_date').val($.trim(d.due_date));
+				$('#certificate_no').val($.trim(d.certificate_no));
+				$('#status').val($.trim(d.status));
 				$('#remark').val($.trim(d.remark));
 
-				$('.modal-title').text('Edit Instrument');
+				$('.modal-title').text('Edit Instrument Master Details');
 
 				// wait to ensure modal animation completes, then open
 				// setTimeout(() => {

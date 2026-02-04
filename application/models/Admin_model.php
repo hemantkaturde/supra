@@ -22688,7 +22688,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['certificate_no'] = $row['certificate_no'];
                 $data[$counter]['status'] = $row['status'];
                 $data[$counter]['remark'] = $row['remark'];
-                $data[$counter]['action'] = "<i title='Edit' style='font-size: x-large; color:#337ab7; cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true' onclick='editData(".$row['id'].")'></i> &nbsp;&nbsp;";
+                $data[$counter]['action'] = "<i title='Edit' style='font-size: x-large; color:#337ab7; cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true' onclick='editinstrumentmasterData(".$row['id'].")'></i> &nbsp;&nbsp;";
                 $data[$counter]['action'] .= "<i title='Delete' style='font-size: x-large; color:#d9534f; cursor: pointer;' class='fa fa-trash-o' aria-hidden='true' onclick='deleteinstrumentmasterData(".$row['id'].")'></i>";
                 $counter++;
             }
@@ -22739,6 +22739,11 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     public function get_instrument_by_id($id)
     {
         return $this->db->get_where('tbl_instrument_master', ['id' => $id])->row();
+    }
+
+     public function editinstrumentmasterData($id)
+    {
+        return $this->db->get_where('tbl_instrument_master_details', ['id' => $id])->row();
     }
 
     public function save_instrument($data)

@@ -14,7 +14,7 @@
                 </ul>
 
                 <ul class="breadcrumb" style="background-color:#ecf0f5 !important">
-                   <b>Instrument Name</b> : <?php echo $getinstrumentdetailsdata[0]['instrument_name']; ?>
+                   <b>Instrument Name</b> : <?php echo $getinstrumentdetailsdata[0]['instrument_name']; ?> ||  <b>Measuring Size</b> : <?php echo $getinstrumentdetailsdata[0]['measuring_size']; ?>
                 </ul>
             </div>
             <div class="col-xs-6 text-right">
@@ -64,7 +64,9 @@
         </div>
 
         <div class="modal-body">
-          <input type="text" name="instrument_details_id" id="instrument_details_id" value="<?php echo $getinstrumentdetailsdata[0]['id']; ?>">
+          <input type="hidden" name="instrument_details_id" id="instrument_details_id" value="<?php echo $getinstrumentdetailsdata[0]['id']; ?>">
+          <input type="hidden" name="instrument_master_details_id" id="instrument_master_details_id">
+
           <!-- Row 1 -->
           <div class="row">
             <div class="col-md-6">

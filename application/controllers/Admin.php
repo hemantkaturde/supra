@@ -28046,6 +28046,13 @@ public function editintrument($id)
     echo json_encode($data);
 }
 
+
+public function editinstrumentmasterData($id)
+{
+    $data = $this->admin_model->editinstrumentmasterData($id);
+    echo json_encode($data);
+}
+
 public function saveintrument()
 {
     $id = $this->input->post('id');
@@ -28088,7 +28095,7 @@ public function addinstrumentdetailsdata($id){
 
 public function saveinstrumentdetailsdata(){
 
-    $id = $this->input->post('id');
+    $id = $this->input->post('instrument_master_details_id');
     $data = [
         'instrument_master_id' => $this->input->post('instrument_details_id'),
         'instrument_id' => $this->input->post('instrument_id'),
@@ -28103,7 +28110,7 @@ public function saveinstrumentdetailsdata(){
         $this->admin_model->save_saveinstrumentdetailsdata('',$data);
         echo json_encode(['status'=>true,'message'=>'Instrument Instrument Data Added Successfully']);
     } else {
-        $this->admin_model->update_instrumentdetailsdata($id, $data);
+        $this->admin_model->save_saveinstrumentdetailsdata($id, $data);
         echo json_encode(['status'=>true,'message'=>'Instrument Data Updated Successfully']);
     }
 
