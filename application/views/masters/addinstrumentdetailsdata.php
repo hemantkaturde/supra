@@ -89,7 +89,7 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label>Due Date <span class="text-danger">*</span></label>
-                <input type="text"  name="due_date" id="due_date" class="form-control datepicker">
+                <input type="text"  name="due_date" id="due_date" class="form-control datepicker_due_date">
               </div>
             </div>
 
@@ -142,6 +142,15 @@
 $(function() {
     $(".datepicker").datepicker({
         // minDate: 0,
+        todayHighlight: true,
+        dateFormat: 'yy-mm-dd',
+        startDate: new Date()
+    });
+});
+
+$(function() {
+    $(".datepicker_due_date").datepicker({
+        minDate: 0,
         todayHighlight: true,
         dateFormat: 'yy-mm-dd',
         startDate: new Date()
