@@ -28004,6 +28004,42 @@ public function fetchtintrument()
 
 }
 
+
+
+public function fetchtintrumentdetailsmaster($instrument_details_id)
+{
+    $params = $_REQUEST;
+    $totalRecords = $this->admin_model->fetchtintrumentdetailscount($instrument_details_id,$params); 
+    $queryRecords = $this->admin_model->fetchtintrumentdetailsdata($instrument_details_id,$params); 
+
+    $data = array();
+    foreach ($queryRecords as $key => $value)
+    {
+        $i = 0;
+        foreach($value as $v)
+        {
+            $data[$key][$i] = $v;
+            $i++;
+        }
+    }
+    $json_data = array(
+        "draw"            => intval( $params['draw'] ),   
+        "recordsTotal"    => intval( $totalRecords ),  
+        "recordsFiltered" => intval($totalRecords),
+        "data"            => $data   // total data array
+        );
+    echo json_encode($json_data);
+
+}
+
+
+public function deleteinstrumentmasterData($id)
+{
+    $this->admin_model->delete_instrument_master_details($id);
+    echo json_encode(['status'=>true,'message'=>'Instrument Master Details Deleted Successfully']);
+}
+
+
 public function editintrument($id)
 {
     $data = $this->admin_model->get_instrument_by_id($id);
@@ -28038,6 +28074,45 @@ public function deleteintrument($id)
     $this->admin_model->delete_instrument($id);
     echo json_encode(['status'=>true,'message'=>'Instrument Deleted Successfully']);
 }
+
+
+public function addinstrumentdetailsdata($id){
+
+    $process = 'Instrument Master Detail Data';
+    $processFunction = 'Admin/addinstrumentdetailsdata';
+    $this->global['pageTitle'] = 'Instrument Master Detail Data';  
+    $data['getinstrumentdetailsdata']= $this->admin_model->getinstrumentdetailsdata($id);
+    $this->loadViews("masters/addinstrumentdetailsdata", $this->global,$data, NULL);
+}
+
+
+public function saveinstrumentdetailsdata(){
+
+    $id = $this->input->post('id');
+    $data = [
+        'instrument_master_id' => $this->input->post('instrument_details_id'),
+        'instrument_id' => $this->input->post('instrument_id'),
+        'calibration_date' => $this->input->post('calibration_date'),
+        'due_date' => $this->input->post('due_date'),
+        'certificate_no' => $this->input->post('certificate_no'),
+        'status' => $this->input->post('status'),
+        'remark' => $this->input->post('remark')
+    ];
+
+    if ($id == '') {
+        $this->admin_model->save_saveinstrumentdetailsdata('',$data);
+        echo json_encode(['status'=>true,'message'=>'Instrument Instrument Data Added Successfully']);
+    } else {
+        $this->admin_model->update_instrumentdetailsdata($id, $data);
+        echo json_encode(['status'=>true,'message'=>'Instrument Data Updated Successfully']);
+    }
+
+}
+
+
+
+
+
 
 public function angadia_report(){
     $process = 'Angadia Report';

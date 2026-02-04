@@ -204,6 +204,9 @@ define('TBL_BALANCE_STOCK_DATA','tbl_balance_stock');
 define('TBL_BALANCE_STOCK_DETAILS','tbl_balance_stock_details');
 
 
+define('TBL_INSTRUMENT_MASTER_DETAILS','tbl_instrument_master_details');
+
+
 
 
 define('TBL_STOREFORM_TICKETS','tbl_storeform_tickets');

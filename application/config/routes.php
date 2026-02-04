@@ -126,7 +126,6 @@ $route['getBuyerPonumberbyBuyeridvendorpo'] = "admin/getBuyerPonumberbyBuyeridve
 $route['getBuyerPonumberbyBuyeridforsupplierandvendorpo'] = "admin/getBuyerPonumberbyBuyeridforsupplierandvendorpo";
 $route['getSuppliritemonlyforgetbuyeritemonly'] = "admin/getSuppliritemonlyforgetbuyeritemonly";
 $route['getSuppliritemonlyforgetbuyeritemonlyfrompo'] = "admin/getSuppliritemonlyforgetbuyeritemonlyfrompo";
-
 $route['getBuyerItemsforDisplay'] = "admin/getBuyerItemsforDisplay";
 $route['getBuyerItemsforDisplayBybuyerid'] = "admin/getBuyerItemsforDisplayBybuyerid";
 $route['vendorpo'] = "admin/vendorpo";
@@ -636,7 +635,6 @@ $route['downloadpreexportlabel/(:any)'] = "admin/downloadpreexportlabel/$1";
 $route['saverejectionreworkitemdataform'] = "admin/saverejectionreworkitemdataform";
 $route['viewreworkrecordreasondata/(:any)'] = "admin/viewreworkrecordreasondata/$1";
 $route['deletereworkrecordreasondata'] = "admin/deletereworkrecordreasondata";
-
 $route['storeform'] = "admin/store_form";
 $route['addStoreForm'] = "admin/addStoreForm";
 $route['admin/getTeamMembers'] = "admin/getTeamMembers";
@@ -653,21 +651,21 @@ $route['deleteassignqty'] = "admin/deleteassignqty";
 $route['editstoreformqtyremovedata'] = "admin/editstoreformqtyremovedata";
 $route['viewremovedinstqtytforticket'] = "admin/viewremovedinstqtytforticket";
 $route['fetchviewremovedinstqtytforticket'] = "admin/fetchviewremovedinstqtytforticket";
-
-
 $route['printincomingitemdetails/(:any)'] = "admin/printincomingitemdetails/$1";
 $route['printreworkrecordlotnumberrecord/(:any)'] = "admin/printreworkrecordlotnumberrecord/$1";
-
 $route['balancestockform'] = "admin/balancestockform";
 $route['addnewbalancestock'] = "admin/addnewbalancestock";
 $route['deletebalancestock'] = "admin/deletebalancestock";
 $route['editbalancestock/(:any)'] = "admin/editbalancestock/$1";
 $route['addbalancestockdetails/(:any)'] = "admin/addbalancestockdetails/$1";
 $route['deleteBalancedetails'] = "admin/deleteBalancedetails";
-
 $route['printbalancestockdetailslabel/(:any)'] = "admin/printbalancestockdetailslabel/$1";
-
 $route['clonerecordspackinginstraction/(:any)'] = "admin/clonerecordspackinginstraction/$1";
+
+
+
+
+$route['addinstrumentdetailsdata/(:any)'] = "admin/addinstrumentdetailsdata/$1";
 
 
 

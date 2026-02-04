@@ -22455,7 +22455,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     }
 
 
-      public function savetdirincomingdata($id,$data){
+    public function savetdirincomingdata($id,$data){
         if($id != '') {
             $this->db->where('id', $id);
             if($this->db->update(TBL_TDIR_INCOMING_LOT_DATA, $data)){
@@ -22616,6 +22616,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['qty']             = $row['qty'];
                 $data[$counter]['remark']          = $row['remark'];
                 $data[$counter]['action']  = "<i title='Edit' style='font-size: x-large; color:#337ab7; cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true' onclick='editData(".$row['id'].")'></i> &nbsp;&nbsp;";
+                // $data[$counter]['action'] .= "<i title='Delete' style='font-size: x-large; color:#337ab7; cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true' onclick='deleteData(".$row['id'].")'></i> &nbsp;&nbsp;";
+                $data[$counter]['action'] .= "<a href='".ADMIN_PATH."addinstrumentdetailsdata/".$row['id']."' style='cursor:pointer;' target='_blank'><i style='font-size:x-large;cursor:pointer;' class='fa fa-plus-circle'></i></a> &nbsp;&nbsp;";
                 $data[$counter]['action'] .= "<i title='Delete' style='font-size: x-large; color:#d9534f; cursor: pointer;' class='fa fa-trash-o' aria-hidden='true' onclick='deleteData(".$row['id'].")'></i>";
 
 
@@ -22624,6 +22626,107 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         }
 
         return $data;
+    }
+
+
+
+    public function fetchtintrumentdetailscount($instrument_details_id,$params)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_instrument_master_details');
+
+        // ✅ Search filter (like DataTables)
+        if (!empty($params['search']['value'])) {
+            $search = $params['search']['value'];
+            $this->db->group_start();
+            $this->db->like('instrument_id', $search);
+            $this->db->or_like('calibration_date', $search);
+            $this->db->or_like('due_date', $search);
+            $this->db->or_like('certificate_no', $search);
+            $this->db->or_like('status', $search);
+            $this->db->or_like('remark', $search);
+            $this->db->group_end();
+        }
+        $this->db->where('tbl_instrument_master_details.instrument_master_id', $instrument_details_id);
+
+        return $this->db->count_all_results();
+    }
+
+
+    public function fetchtintrumentdetailsdata($instrument_details_id,$params)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_instrument_master_details');
+
+        // ✅ Search filter (like DataTables)
+        if (!empty($params['search']['value'])) {
+            $search = $params['search']['value'];
+            $this->db->group_start();
+            $this->db->like('instrument_id', $search);
+            $this->db->or_like('calibration_date', $search);
+            $this->db->or_like('due_date', $search);
+            $this->db->or_like('certificate_no', $search);
+            $this->db->or_like('status', $search);
+            $this->db->or_like('remark', $search);
+            $this->db->group_end();
+        }
+
+        $this->db->where('tbl_instrument_master_details.instrument_master_id', $instrument_details_id);
+        $this->db->order_by('id', 'DESC');
+        $this->db->limit($params['length'], $params['start']);
+
+        $query = $this->db->get();
+        $result = $query->result_array();
+
+        $data = [];
+        $counter = 0;
+        if (!empty($result)) {
+            foreach ($result as $row) {
+                $data[$counter]['instrument_id'] = $row['instrument_id'];
+                $data[$counter]['calibration_date'] =  date("d-m-Y", strtotime($row['calibration_date']));
+                $data[$counter]['due_date']  =  date("d-m-Y", strtotime($row['due_date']));
+                $data[$counter]['certificate_no'] = $row['certificate_no'];
+                $data[$counter]['status'] = $row['status'];
+                $data[$counter]['remark'] = $row['remark'];
+                $data[$counter]['action'] = "<i title='Edit' style='font-size: x-large; color:#337ab7; cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true' onclick='editData(".$row['id'].")'></i> &nbsp;&nbsp;";
+                $data[$counter]['action'] .= "<i title='Delete' style='font-size: x-large; color:#d9534f; cursor: pointer;' class='fa fa-trash-o' aria-hidden='true' onclick='deleteinstrumentmasterData(".$row['id'].")'></i>";
+                $counter++;
+            }
+        }
+
+        return $data;
+    }
+
+
+
+    public function getinstrumentdetailsdata($id){
+        $this->db->select('*');
+        $this->db->from('tbl_instrument_master');
+        $this->db->where('id', $id); // optional
+        $query = $this->db->get();
+        $result = $query->result_array();
+        return $result;
+    }
+
+
+    public function save_saveinstrumentdetailsdata($id,$data){
+
+        if($id != '') {
+            $this->db->where('id', $id);
+            if($this->db->update(TBL_INSTRUMENT_MASTER_DETAILS, $data)){
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            if($this->db->insert(TBL_INSTRUMENT_MASTER_DETAILS, $data)) {
+                // return TRUE;
+                return $this->db->insert_id();
+            } else {
+                return FALSE;
+            }
+         }
+    
     }
 
 
@@ -22654,6 +22757,13 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     {
         $this->db->where('id', $id);
         return $this->db->delete('tbl_instrument_master');
+    }
+
+
+    public function delete_instrument_master_details($id)
+    {
+        $this->db->where('id', $id);
+        return $this->db->delete('tbl_instrument_master_details');
     }
 
 
