@@ -27959,6 +27959,34 @@
 						"iDisplayLength": 10,   
 						"bProcessing": true,
 						"serverSide": true,
+
+					
+						"createdRow": function (row, data, dataIndex) {
+								    var dueDateText = data[2]; // Due Date column (dd-mm-yyyy format)
+
+									var parts = dueDateText.split("-");
+									var dueDate = new Date(parts[2], parts[1] - 1, parts[0]);
+
+									var today = new Date();
+
+									today.setHours(0,0,0,0);
+									dueDate.setHours(0,0,0,0);
+
+									// 15 din pehle ki date nikalo
+									var alertDate = new Date(dueDate);
+									alertDate.setDate(alertDate.getDate() - 15);
+
+									// Condition
+									if (today >= alertDate && today <= dueDate) {
+										$(row).addClass("due-warning");   // Yellow highlight
+									}
+
+									// Agar date cross ho gayi
+									if (today > dueDate) {
+										$(row).addClass("due-expired");   // Red highlight
+									}
+						},
+
 						"ajax":{
 							url :"<?php echo base_url();?>admin/fetchtintrumentdetailsmaster/"+instrument_details_id,
 							type: "post",

@@ -72,14 +72,14 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label>Instrument Id <span class="text-danger">*</span></label>
-                  <input type="text" name="instrument_id" id="instrument_id" class="form-control">
+                  <input type="text" name="instrument_id" id="instrument_id" class="form-control" Required>
               </div>
             </div>
 
             <div class="col-md-6">
               <div class="form-group">
                 <label>Calibration Date <span class="text-danger">*</span></label>
-                 <input type="text" name="calibration_date" id="calibration_date" class="form-control datepicker">
+                 <input type="text" name="calibration_date" id="calibration_date" class="form-control datepicker" Required>
               </div>
             </div>
           </div>
@@ -89,7 +89,7 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label>Due Date <span class="text-danger">*</span></label>
-                <input type="text"  name="due_date" id="due_date" class="form-control datepicker_due_date">
+                <input type="text"  name="due_date" id="due_date" class="form-control datepicker_due_date" Required>
               </div>
             </div>
 
@@ -157,3 +157,14 @@ $(function() {
     });
 });
 </script>
+<style>
+.due-warning {
+        /* background-color: red !important; */  /* Yellow */
+        background-color: #fff3cd !important;  /* Yellow */
+
+}
+
+.due-expired {
+    background-color: red !important;  /* Red */
+}
+</style>

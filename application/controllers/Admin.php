@@ -28095,24 +28095,51 @@ public function addinstrumentdetailsdata($id){
 
 public function saveinstrumentdetailsdata(){
 
-    $id = $this->input->post('instrument_master_details_id');
-    $data = [
-        'instrument_master_id' => $this->input->post('instrument_details_id'),
-        'instrument_id' => $this->input->post('instrument_id'),
-        'calibration_date' => $this->input->post('calibration_date'),
-        'due_date' => $this->input->post('due_date'),
-        'certificate_no' => $this->input->post('certificate_no'),
-        'status' => $this->input->post('status'),
-        'remark' => $this->input->post('remark')
-    ];
+            $this->form_validation->set_rules('instrument_id','Instrument Id','trim|required');
+            $this->form_validation->set_rules('calibration_date','Calibration Date','trim|required');
+            $this->form_validation->set_rules('due_date','Material Match To Drawing','trim');
+            $this->form_validation->set_rules('material_grade','Material Grade','trim');
+            $this->form_validation->set_rules('next_process','Next Process','trim');
+            $this->form_validation->set_rules('qc_person_name','QC Person Name','trim');
+            $this->form_validation->set_rules('additional_process','Additional process','trim');
 
-    if ($id == '') {
-        $this->admin_model->save_saveinstrumentdetailsdata('',$data);
-        echo json_encode(['status'=>true,'message'=>'Instrument Instrument Data Added Successfully']);
-    } else {
-        $this->admin_model->save_saveinstrumentdetailsdata($id, $data);
-        echo json_encode(['status'=>true,'message'=>'Instrument Data Updated Successfully']);
-    }
+
+            $this->form_validation->set_rules('remarks','Remarks','trim');
+
+            if($this->form_validation->run() == FALSE)
+            {
+                //$save_incoming_details_items['status'] = 'failure';
+                //$save_incoming_details_items['error'] = array('instrument_id'=>strip_tags(form_error('instrument_id')),'calibration_date'=>strip_tags(form_error('calibration_date')),'due_date'=>strip_tags(form_error('due_date')));
+                echo json_encode(['status'=>'failure','instrument_id'=>strip_tags(form_error('instrument_id')),'calibration_date'=>strip_tags(form_error('calibration_date')),'due_date'=>strip_tags(form_error('due_date'))]);
+
+            }else{
+
+
+                $id = $this->input->post('instrument_master_details_id');
+                    $data = [
+                        'instrument_master_id' => $this->input->post('instrument_details_id'),
+                        'instrument_id' => $this->input->post('instrument_id'),
+                        'calibration_date' => $this->input->post('calibration_date'),
+                        'due_date' => $this->input->post('due_date'),
+                        'certificate_no' => $this->input->post('certificate_no'),
+                        'status' => $this->input->post('status'),
+                        'remark' => $this->input->post('remark')
+                    ];
+
+
+                if ($id == '') {
+                    $this->admin_model->save_saveinstrumentdetailsdata('',$data);
+                    echo json_encode(['status'=>true,'message'=>'Instrument Instrument Data Added Successfully']);
+                } else {
+                    $this->admin_model->save_saveinstrumentdetailsdata($id, $data);
+                    echo json_encode(['status'=>true,'message'=>'Instrument Data Updated Successfully']);
+                }
+
+            }
+
+
+
+  
 
 }
 

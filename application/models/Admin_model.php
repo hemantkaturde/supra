@@ -22682,6 +22682,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $counter = 0;
         if (!empty($result)) {
             foreach ($result as $row) {
+            
                 $data[$counter]['instrument_id'] = $row['instrument_id'];
                 $data[$counter]['calibration_date'] =  date("d-m-Y", strtotime($row['calibration_date']));
                 $data[$counter]['due_date']  =  date("d-m-Y", strtotime($row['due_date']));
