@@ -23931,6 +23931,12 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             'left'
         );
 
+
+        $this->db->join(
+            TBL_INSTRUMENT_MASTER,
+            TBL_INSTRUMENT_MASTER.'.type = '.TBL_SAMPLING_MASTER_TRANS.'.type'
+        );
+
         $this->db->where(TBL_FINISHED_GOODS.'.fin_id', $id);
 
         /* ✅ DUPLICATE REMOVE */
