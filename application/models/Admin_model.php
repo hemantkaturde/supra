@@ -23887,7 +23887,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             '.TBL_INSTRUMENT_MASTER.'.grade,
             '.TBL_INSTRUMENT_MASTER.'.unit,
             '.TBL_INSTRUMENT_MASTER.'.class,
-            '.TBL_SAMPLING_MASTER_TRANS.'.type,
+            '.TBL_INSTRUMENT_MASTER.'.type,
             '.TBL_INSTRUMENT_MASTER.'.qty,
             '.TBL_INSTRUMENT_MASTER.'.remark
         ');
@@ -23931,11 +23931,6 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             'left'
         );
 
-
-        $this->db->join(
-            TBL_INSTRUMENT_MASTER,
-            TBL_INSTRUMENT_MASTER.'.type = '.TBL_SAMPLING_MASTER_TRANS.'.type'
-        );
 
         $this->db->where(TBL_FINISHED_GOODS.'.fin_id', $id);
 
