@@ -22647,7 +22647,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['class']           = $row['class'];
                 $data[$counter]['type']            = $row['type'];
                 $data[$counter]['qty']             = $row['qty'];
-                 $data[$counter]['certificate_expiry_count']   = $this->certificate_expiry_count($row['id']);
+                $data[$counter]['certificate_expiry_count']   = $this->certificate_expiry_count($row['id']);
+                 $data[$counter]['due_datea']   = $this->certificate_expiry_due_dates($row['id']);
                 $data[$counter]['remark']          = $row['remark'];
                 $data[$counter]['action']  = "<i title='Edit' style='font-size: x-large; color:#337ab7; cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true' onclick='editData(".$row['id'].")'></i> &nbsp;&nbsp;";
                 // $data[$counter]['action'] .= "<i title='Delete' style='font-size: x-large; color:#337ab7; cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true' onclick='deleteData(".$row['id'].")'></i> &nbsp;&nbsp;";
@@ -22676,6 +22677,42 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         } else {
              return '0';
         }
+    } 
+
+
+    public function certificate_expiry_due_dates($id){
+    $this->db->select('due_date');
+$this->db->from('tbl_instrument_master_details');
+$this->db->where('instrument_master_id', $id);
+
+$query = $this->db->get();
+$result = $query->result_array();
+
+$today = date('Y-m-d');
+
+if (!empty($result)) {
+
+    $dates = [];
+
+    foreach ($result as $row) {
+
+        $formatted_date = date('d-m-Y', strtotime($row['due_date']));
+
+        if ($row['due_date'] < $today) {
+            // Expired → Red
+            $dates[] = '<span style="color:red; font-weight:bold;">'.$formatted_date.'</span>';
+        } else {
+            // Active → Normal
+            $dates[] = $formatted_date;
+        }
+    }
+
+    return implode(', ', $dates);
+
+} else {
+    return '0';
+}
+
     } 
 
 

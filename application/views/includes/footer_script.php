@@ -27817,14 +27817,15 @@
 				var dt = $('#view_instrument').DataTable({
 						"columnDefs": [ 
 							{ className: "details-control", "targets": [ 0 ] },
-							{ "width": "15%", "targets": 0 },
-							{ "width": "10%", "targets": 1 },
-							{ "width": "10%", "targets": 2 },
-							{ "width": "10%", "targets": 3 },
-							{ "width": "10%", "targets": 4 },
+							{ "width": "10%", "targets": 0 },
+							{ "width": "8%", "targets": 1 },
+							{ "width": "8%", "targets": 2 },
+							{ "width": "8%", "targets": 3 },
+							{ "width": "8%", "targets": 4 },
 							{ "width": "10%", "targets": 5 },
 							{ "width": "10%", "targets": 6 },
-							{ "width": "8%", "targets": 7 },
+							{ "width": "10%", "targets": 7 },
+							{ "width": "8%", "targets": 8 },
 							
 						],
 						responsive: true,

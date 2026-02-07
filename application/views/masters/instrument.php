@@ -39,6 +39,7 @@
                                         <th>Type</th>
                                         <th>Qty</th>
                                         <th>Certificate Expiry Count</th>
+                                        <th>Due Date</th>
                                         <th>Remark</th>
                                         <th>Action</th>
                                     </tr>
