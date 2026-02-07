@@ -8715,35 +8715,35 @@ class Admin_model extends CI_Model
     //     return $data;
 
 
-    $this->db->select('*, 
-    tbl_stock_form_item.id as stock_item_id,
-    a.lot_no as lot_number,
-    tbl_finished_goods.part_number as part_name_fg,
-    tbl_stock_form_item.invoice_date as stock_item_invoice_date
-');
+        $this->db->select('*, 
+            tbl_stock_form_item.id as stock_item_id,
+            a.lot_no as lot_number,
+            tbl_finished_goods.part_number as part_name_fg,
+            tbl_stock_form_item.invoice_date as stock_item_invoice_date
+        ');
 
-$this->db->from('tbl_stock_form_item');
+        $this->db->from('tbl_stock_form_item');
 
-$this->db->join(
-    'tbl_finished_goods', 
-    'tbl_finished_goods.fin_id = tbl_stock_form_item.part_number'
-);
+        $this->db->join(
+            'tbl_finished_goods', 
+            'tbl_finished_goods.fin_id = tbl_stock_form_item.part_number'
+        );
 
-$this->db->join(
-    'tbl_incomingdetails_item as a', 
-    'a.id = tbl_stock_form_item.lot_number'
-);
+        $this->db->join(
+            'tbl_incomingdetails_item as a', 
+            'a.id = tbl_stock_form_item.lot_number'
+        );
 
-$this->db->where('tbl_stock_form_item.status', 1);
-$this->db->where('tbl_stock_form_item.stock_form_id', $stock_id);
+        $this->db->where('tbl_stock_form_item.status', 1);
+        $this->db->where('tbl_stock_form_item.stock_form_id', $stock_id);
 
-$this->db->group_by('tbl_stock_form_item.id'); // extra safety
+        $this->db->group_by('tbl_stock_form_item.id'); // extra safety
 
-$query = $this->db->get();
+        $query = $this->db->get();
 
-$data = $query->result_array();
+        $data = $query->result_array();
 
-return $data;
+        return $data;
 
 
     }
@@ -22647,6 +22647,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 $data[$counter]['class']           = $row['class'];
                 $data[$counter]['type']            = $row['type'];
                 $data[$counter]['qty']             = $row['qty'];
+                 $data[$counter]['certificate_expiry_count']   = $this->certificate_expiry_count($row['id']);
                 $data[$counter]['remark']          = $row['remark'];
                 $data[$counter]['action']  = "<i title='Edit' style='font-size: x-large; color:#337ab7; cursor: pointer;' class='fa fa-pencil-square-o' aria-hidden='true' onclick='editData(".$row['id'].")'></i> &nbsp;&nbsp;";
                 // $data[$counter]['action'] .= "<i title='Delete' style='font-size: x-large; color:#337ab7; cursor: pointer;' class='fa fa-plus-circle' aria-hidden='true' onclick='deleteData(".$row['id'].")'></i> &nbsp;&nbsp;";
@@ -22661,6 +22662,21 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         return $data;
     }
 
+
+    public function certificate_expiry_count($id){
+        $this->db->from('tbl_instrument_master_details');
+        $this->db->where('instrument_master_id', $id);
+        //$this->db->where('due_date <', date('Y-m-d'));
+        $this->db->where('DATE(due_date) <', date('Y-m-d'));
+
+        $count = $this->db->count_all_results();
+
+        if ($count > 0) {
+            return '<span style="color:red; font-weight:bold;">'.$count.'</span>';
+        } else {
+             return '<span style="color:red; font-weight:bold;">0</span>';
+        }
+    } 
 
 
     public function fetchtintrumentdetailscount($instrument_details_id,$params)

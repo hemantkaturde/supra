@@ -38,6 +38,7 @@
                                         <th>Class</th>
                                         <th>Type</th>
                                         <th>Qty</th>
+                                        <th>Certificate Expiry Count</th>
                                         <th>Remark</th>
                                         <th>Action</th>
                                     </tr>
