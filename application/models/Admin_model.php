@@ -22674,7 +22674,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         if ($count > 0) {
             return '<span style="color:red; font-weight:bold;">'.$count.'</span>';
         } else {
-             return '<span style="color:red; font-weight:bold;">0</span>';
+             return '0';
         }
     } 
 
