@@ -8704,15 +8704,14 @@ class Admin_model extends CI_Model
         $this->db->select('*,'.TBL_STOCKS_ITEM.'.id as stock_item_id,'.TBL_INCOMING_DETAILS_ITEM.'.lot_no as lot_number,'.TBL_FINISHED_GOODS.'.part_number as part_name_fg,'.TBL_STOCKS_ITEM.'.invoice_date as stock_item_invoice_date');
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_STOCKS_ITEM.'.part_number');
         $this->db->join(TBL_INCOMING_DETAILS_ITEM, TBL_INCOMING_DETAILS_ITEM.'.part_number = '.TBL_STOCKS_ITEM.'.part_number');
-        $this->db->join(TBL_INCOMING_DETAILS_ITEM.' as a', 'a.id = '.TBL_STOCKS_ITEM.'.lot_number');
         //$this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
         $this->db->where(TBL_STOCKS_ITEM.'.status', 1);
         $this->db->where(TBL_STOCKS_ITEM.'.stock_form_id',$stock_id);
-        //$this->db->group_by(TBL_STOCKS_ITEM.'.id');
-        //$this->db->group_by(TBL_STOCKS_ITEM.'.id');
+       // $this->db->group_by(TBL_STOCKS_ITEM.'.id');
         $this->db->group_by(TBL_STOCKS_ITEM.'.id');
         $query = $this->db->get(TBL_STOCKS_ITEM);
         $data = $query->result_array();
+
         return $data;
     }
 
