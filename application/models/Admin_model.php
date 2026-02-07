@@ -8741,7 +8741,7 @@ $this->db->join(
 );
 
 $this->db->where('tbl_stock_form_item.status', 1);
-$this->db->where('tbl_stock_form_item.stock_form_id', 1482);
+$this->db->where('tbl_stock_form_item.stock_form_id', $stock_id);
 
 $this->db->group_by('tbl_stock_form_item.id'); // extra safety
 
