@@ -22681,37 +22681,38 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
 
     public function certificate_expiry_due_dates($id){
-    $this->db->select('due_date');
-$this->db->from('tbl_instrument_master_details');
-$this->db->where('instrument_master_id', $id);
+        $this->db->select('due_date');
+        $this->db->from('tbl_instrument_master_details');
+        $this->db->where('instrument_master_id', $id);
+        $this->db->where('status', 'Ok');
 
-$query = $this->db->get();
-$result = $query->result_array();
+        $query = $this->db->get();
+        $result = $query->result_array();
 
-$today = date('Y-m-d');
+        $today = date('Y-m-d');
 
-if (!empty($result)) {
+        if (!empty($result)) {
 
-    $dates = [];
+            $dates = [];
 
-    foreach ($result as $row) {
+            foreach ($result as $row) {
 
-        $formatted_date = date('d-m-Y', strtotime($row['due_date']));
+                $formatted_date = date('d-m-Y', strtotime($row['due_date']));
 
-        if ($row['due_date'] < $today) {
-            // Expired → Red
-            $dates[] = '<span style="color:red; font-weight:bold;">'.$formatted_date.'</span>';
+                if ($row['due_date'] < $today) {
+                    // Expired → Red
+                    $dates[] = '<span style="color:red; font-weight:bold;">'.$formatted_date.'</span>';
+                } else {
+                    // Active → Normal
+                    $dates[] = $formatted_date;
+                }
+            }
+
+            return implode(', ', $dates);
+
         } else {
-            // Active → Normal
-            $dates[] = $formatted_date;
+            return '0';
         }
-    }
-
-    return implode(', ', $dates);
-
-} else {
-    return '0';
-}
 
     } 
 
