@@ -22669,6 +22669,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->where('instrument_master_id', $id);
         //$this->db->where('due_date <', date('Y-m-d'));
         $this->db->where('DATE(due_date) <', date('Y-m-d'));
+        $this->db->where('status', 'Ok');
 
         $count = $this->db->count_all_results();
 
