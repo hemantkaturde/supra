@@ -3000,6 +3000,8 @@ class Admin extends BaseController
             $this->form_validation->set_rules('buyer_po_delivery_date','Buyer PO Delivery Date','trim');
             $this->form_validation->set_rules('packaging_instraction','Packaging Instraction','trim');
             $this->form_validation->set_rules('item_po_status','Item PO Status','trim|required');
+            $this->form_validation->set_rules('item_remark_box','Item Remark Box','trim');
+
         
             if($this->form_validation->run() == FALSE)
             {
@@ -3017,6 +3019,7 @@ class Admin extends BaseController
                             'rate'  => trim($this->input->post('rate')),
                             'value' =>   trim($this->input->post('value')),
                             'unit' =>  trim($this->input->post('unit')),
+                            'item_remark_box' =>  trim($this->input->post('item_remark_box')),
                             'buyer_po_part_delivery_date' => trim($this->input->post('buyer_po_part_delivery_date')),
                             'item_po_status' => trim($this->input->post('item_po_status')),
                             'inco_terms' => trim($this->input->post('inco_terms')),
@@ -3040,6 +3043,7 @@ class Admin extends BaseController
                                 'rate'  => trim($this->input->post('rate')),
                                 'value' =>   trim($this->input->post('value')),
                                 'unit' =>  trim($this->input->post('unit')),
+                                'item_remark_box' =>  trim($this->input->post('item_remark_box')),
                                 'buyer_po_part_delivery_date' => trim($this->input->post('buyer_po_part_delivery_date')),
                                 'item_po_status' => trim($this->input->post('item_po_status')),
                                 'inco_terms' => trim($this->input->post('inco_terms')),
