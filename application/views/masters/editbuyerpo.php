@@ -294,6 +294,14 @@
                                                             <p class="error inco_terms_error"></p>
                                                         </div>
                                                     </div>
+
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-3 col-form-label">Remarks</label>
+                                                        <div class="col-sm-9">
+                                                            <textarea type="text" class="form-control"  id="item_remark_box"  name="item_remark_box" required></textarea>
+                                                            <p class="error item_remark_box_error"></p>
+                                                        </div>
+                                                    </div>
                                     
                                                 </div>
 
