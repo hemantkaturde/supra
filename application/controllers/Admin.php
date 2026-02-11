@@ -14497,6 +14497,13 @@ public function addsalestrackingreport(){
 // }
 
 public function downloadvendorpo($id){
+
+//    <td width="40%">
+//                             <p><b>Email:</b></p> 
+//                             <p style="color:#206a9b">purchase@supraexports.in</p>
+//                             <p style="color:#206a9b">purchase1@supraexports.in</p>
+//                             <p style="color:#206a9b">purchase2@supraexports.in</p>
+//                         </td>  
     // $getsupplierdeatilsForInvoice = $this->admin_model->getsupplierdeatilsForInvoice($id);
     // $getsupplierItemdeatilsForInvoice = $this->admin_model->getsupplierItemdeatilsForInvoice($id);
 
@@ -14595,14 +14602,14 @@ public function downloadvendorpo($id){
                           <p><b>Office:</b> '.$getCompanyAddressdetails['company_address'].'</p>
                           <p>Tel: '.$getCompanyAddressdetails['phone_1'].' </p>
                           <p>'.$getCompanyAddressdetails['phone_2'].'</p>
+                          <p>Email: purchase@supraexports.in</p>
                           <p style="color:#206a9b"><b>GSTIN : '.$getCompanyAddressdetails['GSTIN'].'</b></p>
                         </td>
-                        <td width="40%">
-                            <p><b>Email:</b></p> 
-                            <p style="color:#206a9b">purchase@supraexports.in</p>
-                            <p style="color:#206a9b">purchase1@supraexports.in</p>
-                            <p style="color:#206a9b">purchase2@supraexports.in</p>
-                        </td>  
+
+                        <td width="40%" style="vertical-align: top;">
+                          <img src="'.base_url().'assets/images/supra_logo_combine.png" width="250" height="100">
+                        </td> 
+                     
                     </tr>
             </table>
 
@@ -14723,6 +14730,15 @@ public function downloadvendorpo($id){
 }
 
 public function downloadvendorpowithoutsupplier($id){
+
+
+//  <td width="40%">
+//                             <p><b>Email:</b></p> 
+//                             <p style="color:#206a9b">purchase@supraexports.in</p>
+//                             <p style="color:#206a9b">purchase1@supraexports.in</p>
+//                             <p style="color:#206a9b">purchase2@supraexports.in</p>
+//                         </td>  
+
     // $getsupplierdeatilsForInvoice = $this->admin_model->getsupplierdeatilsForInvoice($id);
     // $getsupplierItemdeatilsForInvoice = $this->admin_model->getsupplierItemdeatilsForInvoice($id);
 
@@ -14778,6 +14794,8 @@ public function downloadvendorpowithoutsupplier($id){
         <td style="padding-bottom: '.$padding_bottom.';border-left: 1px solid black;border-right: 1px solid black;border-bottom: 1px solid black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
     </tr>';
 
+    
+
     $mpdf = new \Mpdf\Mpdf();
     // $html = $this->load->view('html_to_pdf',[],true);
     $html = '<table style=" width: 100%;text-align: center;border-collapse: collapse;border: #cccccc 0px solid;font-family:cambria;">
@@ -14801,13 +14819,12 @@ public function downloadvendorpowithoutsupplier($id){
                           <p><b>Office:</b> '.$getCompanyAddressdetails['company_address'].'</p>
                           <p>Tel: '.$getCompanyAddressdetails['phone_1'].' </p>
                           <p>'.$getCompanyAddressdetails['phone_2'].'</p>
+                          <p>Email: purchase1@supraexports.in</p>
                           <p style="color:#206a9b"><b>GSTIN : '.$getCompanyAddressdetails['GSTIN'].'</b></p>
                         </td>
-                        <td width="40%">
-                            <p><b>Email:</b></p> 
-                            <p style="color:#206a9b">purchase@supraexports.in</p>
-                            <p style="color:#206a9b">purchase1@supraexports.in</p>
-                            <p style="color:#206a9b">purchase2@supraexports.in</p>
+                       
+                        <td width="40%" style="vertical-align: top;">
+                          <img src="'.base_url().'assets/images/supra_logo_combine.png" width="250" height="100">
                         </td>  
                     </tr>
             </table>
