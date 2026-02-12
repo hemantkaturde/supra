@@ -14601,8 +14601,9 @@ public function downloadvendorpo($id){
                         <td width="60%">
                           <p><b>Office:</b> '.$getCompanyAddressdetails['company_address'].'</p>
                           <p>Tel: '.$getCompanyAddressdetails['phone_1'].' </p>
-                          <p>'.$getCompanyAddressdetails['phone_2'].'</p>
                           <p>Email: purchase@supraexports.in</p>
+                          <p>'.$getCompanyAddressdetails['phone_2'].'</p>
+                       
                           <p style="color:#206a9b"><b>GSTIN : '.$getCompanyAddressdetails['GSTIN'].'</b></p>
                         </td>
 
@@ -14818,8 +14819,8 @@ public function downloadvendorpowithoutsupplier($id){
                         <td width="60%">
                           <p><b>Office:</b> '.$getCompanyAddressdetails['company_address'].'</p>
                           <p>Tel: '.$getCompanyAddressdetails['phone_1'].' </p>
+                          <p>Email: purchase@supraexports.in</p>
                           <p>'.$getCompanyAddressdetails['phone_2'].'</p>
-                          <p>Email: purchase1@supraexports.in</p>
                           <p style="color:#206a9b"><b>GSTIN : '.$getCompanyAddressdetails['GSTIN'].'</b></p>
                         </td>
                        
