@@ -23876,7 +23876,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
         // return $data;
 
-            $this->db->select('
+        $this->db->select('
             '.TBL_SAMPLING_MASTER.'.id AS sampling_id,
             '.TBL_FINISHED_GOODS.'.part_number,
             '.TBL_FINISHED_GOODS.'.fin_id,
@@ -23887,7 +23887,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             '.TBL_INSTRUMENT_MASTER.'.grade,
             '.TBL_INSTRUMENT_MASTER.'.unit,
             '.TBL_INSTRUMENT_MASTER.'.class,
-            '.TBL_INSTRUMENT_MASTER.'.type,
+            '.TBL_SAMPLING_MASTER_TRANS.'.type as instrument_type,
             '.TBL_INSTRUMENT_MASTER.'.qty,
             '.TBL_INSTRUMENT_MASTER.'.remark
         ');
@@ -23957,7 +23957,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             $data[$count]['unit']             = $row['unit'];
             $data[$count]['class']            = $row['class'];
             $data[$count]['measuring_size']   = $row['measuring_size'];
-            $data[$count]['type']             = $row['type'];
+            $data[$count]['type']             = $row['instrument_type'];
             $data[$count]['remark']           = $row['remark'];
             $data[$count]['qty']              = $row['qty'];
             $data[$count]['live_qty']         = $live_quantity; 
