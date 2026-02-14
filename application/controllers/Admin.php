@@ -17852,6 +17852,7 @@ public function downlaoddebitnotevendor($id){
                     <td style="font-size:13px;" width="50%" valign="top">
                         <div>
                              <img src="'.base_url().'assets/images/supra_logo_combine.png" width="250" height="100">
+
                         </div>
                     </td>
                 </tr>
@@ -17862,7 +17863,7 @@ public function downlaoddebitnotevendor($id){
                     <td width="50%">
                         <div>
                             <p>Dear Sir,</p>
-                            <p><b>Sub: Debit Note No : <span style="color:red">'.$getDebitnotedetailsforInvoice['debit_note_number'].'</span>  Date : '.date('d-m-Y',strtotime($getDebitnotedetailsforInvoice['debit_note_date'])).'</b></p>
+                            <p><b>Sub: Debit Note No : <span style="color:red">'.$getDebitnotedetailsforInvoice['debit_note_number'].'</span> '.str_repeat('&nbsp;', 64).' Date : '.date('d-m-Y',strtotime($getDebitnotedetailsforInvoice['debit_note_date'])).'</b></p>
                             <p>With reference to the above subject we have debited your account vide your Inv No.'.$getDebitnoteitemdeatilsForInvoice[0]['invoice_no'].' Dated '.date('d-m-Y',strtotime($getDebitnoteitemdeatilsForInvoice[0]['invoice_date'])).'
                                The details are as follows: </p>
                         <div>    
