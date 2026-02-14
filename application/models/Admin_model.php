@@ -23888,6 +23888,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             '.TBL_INSTRUMENT_MASTER.'.unit,
             '.TBL_INSTRUMENT_MASTER.'.class,
             '.TBL_SAMPLING_MASTER_TRANS.'.type as instrument_type,
+            '.TBL_SAMPLING_MASTER_TRANS.'.id as sampling_trans_id ,
             '.TBL_INSTRUMENT_MASTER.'.qty,
             '.TBL_INSTRUMENT_MASTER.'.remark
         ');
@@ -23972,10 +23973,12 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 data-measuring_size='".$row['measuring_size']."'
                 data-qty='".$row['qty']."' 
                 data-part_number='".$row['part_number']."'
+                data-sampling_id ='".$row['sampling_id']."'
+                data-sampling_trans_id ='".$row['sampling_trans_id']."'
                 class='fa fa-plus-circle addrejectionitemdata'>
             </i> &nbsp;";
 
-                    $data[$count]['action'] .= "
+            $data[$count]['action'] .= "
             <a href='".ADMIN_PATH."viewassigninstqtytforticket?ticket_no=".$ticket_no."&instrument_name=".$row['instrument_name']."&measuring_size=".$row['measuring_size']."&part_id=".$id."&part_number=".$row['part_number']."' style='cursor: pointer;' target='_blank'>
             <i style='font-size: x-large;cursor: pointer;' class='fa fa-eye' aria-hidden='true'></i>
             </a>";

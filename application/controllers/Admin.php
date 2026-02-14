@@ -17027,16 +17027,14 @@ public function downlaodjobworkchllan($id){
                         <td width="60%">
                           <p><b>Office:</b> '.$getCompanyAddressdetails['company_address'].'</p>
                           <p>Tel: '.$getCompanyAddressdetails['phone_1'].' </p>
+                          <p>Email: purchase@supraexports.in</p>
                           <p>'.$getCompanyAddressdetails['phone_2'].'</p>
                           <p style="color:#206a9b"><b>GSTIN : '.$getCompanyAddressdetails['GSTIN'].'</b></p>
 
                         </td>
-                        <td width="40%">
-                            <p><b>Email:</b></p> 
-                            <p style="color:#206a9b">purchase@supraexports.in</p>
-                            <p style="color:#206a9b">purchase1@supraexports.in</p>
-                            <p style="color:#206a9b">purchase2@supraexports.in</p>
-                        </td>  
+                        <td width="40%" style="vertical-align: top;">
+                          <img src="'.base_url().'assets/images/supra_logo_combine.png" width="250" height="100">
+                        </td> 
                     </tr>
             </table>
 
@@ -29235,6 +29233,8 @@ public function editstoreformqtyassigndata() {
                         'qty_assign'        => trim($this->input->post('qty_assign')),
                         'qty_remark'        => trim($this->input->post('qty_remark')),
                         'ticket_no'         => trim($this->input->post('ticket_no_popup')),
+                        'sampling_id'       => trim($this->input->post('sampling_id')),
+                        'sampling_trans_id' => trim($this->input->post('sampling_trans_id')),
                         'instrument_name'   => trim($this->input->post('instrument_name_popup')),
                         'measuring_size'    => trim($this->input->post('measuring_size_popup')),
                         'qty_available'     => trim($this->input->post('qty_popup'))

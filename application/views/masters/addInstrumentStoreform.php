@@ -87,9 +87,11 @@
                
                <input type="hidden" class="form-control"  id="partId_popup" name="partId_popup">
                <input type="hidden" class="form-control"  id="ticket_no_popup" name="ticket_no_popup">
-                <input type="hidden" class="form-control" id="instrument_name_popup" name="instrument_name_popup">
-                <input type="hidden" class="form-control" id="measuring_size_popup" name="measuring_size_popup">
-                <input type="hidden" class="form-control" id="qty_popup" name="qty_popup">
+               <input type="hidden" class="form-control" id="instrument_name_popup" name="instrument_name_popup">
+               <input type="hidden" class="form-control" id="measuring_size_popup" name="measuring_size_popup">
+               <input type="hidden" class="form-control" id="sampling_trans_id" name="sampling_trans_id">
+               <input type="hidden" class="form-control" id="sampling_id" name="sampling_id">
+               <input type="hidden" class="form-control" id="qty_popup" name="qty_popup">
 
                
 
@@ -131,13 +133,16 @@
                </div>
 
                
-              <input type="hidden" class="form-control"  id="assigned_id" name="assigned_id">
+                <input type="hidden" class="form-control"  id="assigned_id" name="assigned_id">
                 <input type="hidden" class="form-control"  id="partsId_popup" name="partsId_popup">
                 <input type="hidden" class="form-control"  id="partId_popup" name="partId_popup">
-               <input type="hidden" class="form-control"  id="ticket_no_popup" name="ticket_no_popup">
+                <input type="hidden" class="form-control"  id="ticket_no_popup" name="ticket_no_popup">
                 <input type="hidden" class="form-control" id="instrument_name_popup" name="instrument_name_popup">
                 <input type="hidden" class="form-control" id="measuring_size_popup" name="measuring_size_popup">
                 <input type="hidden" class="form-control" id="qty_popup" name="qty_popup">
+
+                <input type="hidden" class="form-control" id="measuring_size_popup" name="measuring_size_popup">
+                <input type="hidden" class="form-control" id="sampling_trans_id" name="sampling_trans_id">
 
                <div class="form-group row">
                   <label class="col-sm-4 col-form-label">Quantity Received <span class="required">*</span></label>

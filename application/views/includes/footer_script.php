@@ -29038,6 +29038,8 @@ $('#export_excel').on('click', function() {
 			$("#ticket_no_popup").val($(this).data("ticket_no"));
 			$("#instrument_name_popup").val($(this).data("instrument_name"));
 			$("#measuring_size_popup").val($(this).data("measuring_size"));
+			$("#sampling_id").val($(this).data("sampling_id"));
+			$("#sampling_trans_id").val($(this).data("sampling_trans_id"));
 			$("#qty_popup").val($(this).data("qty"));
 		});
 
@@ -29054,11 +29056,14 @@ $('#export_excel').on('click', function() {
 			var qty_assign = $('#qty_assign').val();
 			var qty_remark = $('#qty_remark').val();
 			var qty_removed = $('#qty_removed').val();
+
+			var sampling_id = $('#sampling_id').val();
+			var sampling_trans_id = $('#sampling_trans_id').val();
 			
 			$.ajax({
 				url: "<?php echo base_url('editstoreformqtyassigndata'); ?>",
 				type: "POST",
-				data: {"ticket_no_popup": ticket_no_popup,"instrument_name_popup":instrument_name_popup, "measuring_size_popup":measuring_size_popup,"qty_popup":qty_popup, "qty_assign":qty_assign, "qty_remark":qty_remark, "qty_removed": qty_removed},
+				data: {"ticket_no_popup": ticket_no_popup,"instrument_name_popup":instrument_name_popup, "measuring_size_popup":measuring_size_popup,"qty_popup":qty_popup, "qty_assign":qty_assign, "qty_remark":qty_remark, "qty_removed": qty_removed,'sampling_id':sampling_id,'sampling_trans_id':sampling_trans_id},
 				dataType: "json",
                 cache:false,
 				success: function(fetchResponse, textStatus, jqXHR)
@@ -29108,11 +29113,14 @@ $('#export_excel').on('click', function() {
 			var qty_remark = $('#qty_rec_remark').val();
 			var qty_removed = $('#qty_removed').val();
 
+			var sampling_id = $('#sampling_id').val();
+			var sampling_trans_id = $('#sampling_trans_id').val();
+
 			
 			$.ajax({
 				url: "<?php echo base_url('editstoreformqtyremovedata'); ?>",
 				type: "POST",
-				data: {"ticket_no_popup": ticket_no_popup,"instrument_name_popup":instrument_name_popup, "measuring_size_popup":measuring_size_popup,"qty_popup":qty_popup, "qty_assign":qty_assign, "qty_remark":qty_remark, "qty_removed": qty_removed},
+				data: {"ticket_no_popup": ticket_no_popup,"instrument_name_popup":instrument_name_popup, "measuring_size_popup":measuring_size_popup,"qty_popup":qty_popup, "qty_assign":qty_assign, "qty_remark":qty_remark, "qty_removed": qty_removed,'sampling_id':sampling_id,'sampling_trans_id':sampling_trans_id},
 				dataType: "json",
                 cache:false,
 				success: function(fetchResponse, textStatus, jqXHR)
