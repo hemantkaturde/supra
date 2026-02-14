@@ -25931,15 +25931,13 @@ public function downlaodpackingchallandata($id){
                         <td width="60%">
                           <p><b>Office:</b> '.$getCompanyAddressdetails['company_address'].'</p>
                           <p>Tel: '.$getCompanyAddressdetails['phone_1'].' </p>
+                          <p>purchase@supraexports.in</p>
                           <p>'.$getCompanyAddressdetails['phone_2'].'</p>
                           <p style="color:#206a9b"><b>GSTIN : '.$getCompanyAddressdetails['GSTIN'].'</b></p>
                         </td>
-                        <td width="40%">
-                            <p><b>Email:</b></p> 
-                            <p style="color:#206a9b">purchase@supraexports.in</p>
-                            <p style="color:#206a9b">purchase1@supraexports.in</p>
-                            <p style="color:#206a9b">purchase2@supraexports.in</p>
-                        </td>  
+                        <td width="40%" style="vertical-align: top;">
+                          <img src="'.base_url().'assets/images/supra_logo_combine.png" width="250" height="100">
+                        </td> 
                     </tr>
             </table>
 
