@@ -17865,7 +17865,7 @@ public function downlaoddebitnotevendor($id){
                             <p>Dear Sir,</p>
                             <p><b>Sub: Debit Note No : <span style="color:red">'.$getDebitnotedetailsforInvoice['debit_note_number'].'</span> '.str_repeat('&nbsp;', 64).' Date : '.date('d-m-Y',strtotime($getDebitnotedetailsforInvoice['debit_note_date'])).'</b></p>
                             <p>With reference to the above subject we have debited your account vide your Inv No.'.$getDebitnoteitemdeatilsForInvoice[0]['invoice_no'].' Dated '.date('d-m-Y',strtotime($getDebitnoteitemdeatilsForInvoice[0]['invoice_date'])).'
-                               The details are as follows: </p>
+                               The details are as follows: </p> 
                         <div>    
                     </td>  
                 </tr>
