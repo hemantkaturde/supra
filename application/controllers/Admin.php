@@ -25503,14 +25503,14 @@ public function downloadscrapinvoic($id){
                         <td width="60%">
                           <p><b>Office:</b> '.$getCompanyAddressdetails['company_address'].'</p>
                           <p>Tel: 9152095894 / 02245176493 </p>
+                          <p>Email1: purchase@supraexports.in</p>
+                          <p>Email2: accounts@supraexports.in</p>
                           <p>CIN: U51900MH2006PTC160688 </p>
                           <p style="color:#206a9b"><b>GSTIN : '.$getCompanyAddressdetails['GSTIN'].'</b></p>
                         </td>
-                        <td width="40%">
-                            <p><b>Email:</b></p> 
-                            <p style="color:#206a9b">purchase@supraexports.in</p>
-                            <p style="color:#206a9b">accounts@supraexports.in</p>
-                        </td>  
+                        <td width="40%" style="vertical-align: top;">
+                          <img src="'.base_url().'assets/images/supra_logo_combine.png" width="250" height="100">
+                        </td> 
                     </tr>
             </table>
             <table style=" width: 100%;text-align: center;margin-top:10px;margin-bottom:10px;font-family:cambria;">
