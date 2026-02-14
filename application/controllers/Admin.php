@@ -16815,7 +16815,7 @@ public function downloadgetepassvendor($id){
                         <td width="60%">
                           <p><b>Office:</b> '.$getCompanyAddressdetails['company_address'].'</p>
                           <p>Tel: '.$getCompanyAddressdetails['phone_1'].' </p>
-                          <p>purchase@supraexports.in</p>
+                          <p>Email: purchase@supraexports.in</p>
                           <p>'.$getCompanyAddressdetails['phone_2'].'</p>
                           <p style="color:#206a9b"><b>GSTIN : '.$getCompanyAddressdetails['GSTIN'].'</b></p>
                         </td>
