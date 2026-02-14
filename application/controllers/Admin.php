@@ -17560,9 +17560,8 @@ public function downlaoddebitnote($id){
                         <div>
                             <p><b></b>'. str_repeat('&nbsp;', 5).'<span style="color:red"></span></p>
                             <p><b>DEBIT NOTE NO :</b> '.'<span style="color:red">'.$getDebitnotedetailsforInvoice['debit_note_number'].'</span></p>
-                            <p>&nbsp;</p>
                             <p><b>Date :</b> '.date('d-m-Y',strtotime($getDebitnotedetailsforInvoice['debit_note_date'])).'</p>
-                            <p>&nbsp;</p>
+                            <p<img src="'.base_url().'assets/images/supra_logo_combine.png" width="250" height="100"></p>
                         </div>
                     </td>
                 </tr>
