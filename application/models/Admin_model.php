@@ -23928,7 +23928,9 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->join(
             TBL_INSTRUMENT_MASTER,
             TBL_INSTRUMENT_MASTER.'.instrument_name = '.TBL_SAMPLING_MASTER_TRANS.'.instrument_name
-            AND '.TBL_INSTRUMENT_MASTER.'.measuring_size = '.TBL_SAMPLING_MASTER_TRANS.'.measuring_size',
+            AND '.TBL_INSTRUMENT_MASTER.'.measuring_size = '.TBL_SAMPLING_MASTER_TRANS.'.measuring_size
+            AND '.TBL_INSTRUMENT_MASTER.'.class = '.TBL_SAMPLING_MASTER_TRANS.'.class
+            AND '.TBL_INSTRUMENT_MASTER.'.type = '.TBL_SAMPLING_MASTER_TRANS.'type',
             'left'
         );
 
@@ -23947,10 +23949,6 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
         $query  = $this->db->get();
         $result = $query->result_array();
-
-       
-print_r($this->db->last_query());
-exit;
 
 
         $data = [];
