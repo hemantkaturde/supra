@@ -23890,7 +23890,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             '.TBL_SAMPLING_MASTER_TRANS.'.type as instrument_type,
             '.TBL_SAMPLING_MASTER_TRANS.'.id as sampling_trans_id ,
             '.TBL_INSTRUMENT_MASTER.'.qty as instru_qty,
-            '.TBL_INSTRUMENT_MASTER.'.remark
+            '.TBL_INSTRUMENT_MASTER.'.remark,
+            '.TBL_INSTRUMENT_MASTER.'.id as instrument_id
         ');
 
         /* 🔍 SEARCH FILTER */
@@ -23978,7 +23979,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 data-part_number='".$row['part_number']."'
                 data-sampling_id ='".$row['sampling_id']."'
                 data-sampling_trans_id ='".$row['sampling_trans_id']."'
-                class='fa fa-plus-circle addrejectionitemdata'>
+                data-instrument_id ='".$row['instrument_id']."'
+                class='fa fa-plus-circle addrejectionitemdata getinstrumentcertificate'>
             </i> &nbsp;";
 
             $data[$count]['action'] .= "

@@ -29156,6 +29156,23 @@ $('#export_excel').on('click', function() {
 			return false;
 	    });
 
+
+
+		$(document).on("click", ".getinstrumentcertificate", function () {
+
+			var instrument_id  = $(this).data("instrument_id");
+			
+			alert(instrument_id);
+			
+
+			$("#instrument_type_dropdown").val(type).trigger("change");
+			$("#grade_dropdown").val(grade).trigger("change");
+
+		});
+
+
+
+
 	</script>
 <?php } ?>
 
