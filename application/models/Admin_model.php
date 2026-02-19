@@ -23889,7 +23889,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             '.TBL_SAMPLING_MASTER_TRANS.'.class,
             '.TBL_SAMPLING_MASTER_TRANS.'.type as instrument_type,
             '.TBL_SAMPLING_MASTER_TRANS.'.id as sampling_trans_id ,
-            '.TBL_INSTRUMENT_MASTER.'.qty,
+            '.TBL_INSTRUMENT_MASTER.'.qty as instru_qty,
             '.TBL_INSTRUMENT_MASTER.'.remark
         ');
 
@@ -23960,7 +23960,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             $data[$count]['measuring_size']   = $row['measuring_size'];
             $data[$count]['type']             = $row['instrument_type'];
             $data[$count]['remark']           = $row['remark'];
-            $data[$count]['qty']              = $row['qty'];
+            $data[$count]['qty']              = $row['instru_qty'];
             $data[$count]['live_qty']         = $live_quantity; 
             $data[$count]['action']  = "";
             $data[$count]['action'] .= "
