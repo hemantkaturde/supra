@@ -24205,7 +24205,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 instrument_id LIKE '%{$search}%'
             )");
         }
-        $this->db->order_by('id', 'DESC');
+        $this->db->order_by('tbl_storeform_qty_assign.id', 'DESC');
         $result = $this->db->get()->result_array(); 
         $data = [];
         $count = 0;
