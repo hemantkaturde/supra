@@ -105,10 +105,12 @@
 
                <div class="form-group row">
                   <label class="col-sm-4 col-form-label">Certificate ID<span class="required">*</span></label>
+                   <div class="col-sm-8">
                      <select class="form-control certificate" name="certificate" id="certificate">
-                      <option st-id="" value="">Select Certificate</option>              
+                       <option st-id="" value="">Select Certificate</option>              
                      </select>
-                  <p class="error certificate_error"></p>
+                    <p class="error certificate_error"></p>
+                   </div>
                </div>
 
 
