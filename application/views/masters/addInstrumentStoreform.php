@@ -104,10 +104,10 @@
                </div>
 
                <div class="form-group row">
-                  <label class="col-sm-4 col-form-label">Certificate ID</label>
+                  <label class="col-sm-4 col-form-label">Instrument ID</label>
                    <div class="col-sm-8">
                      <select class="form-control" name="certificate" id="certificate">
-                       <option st-id="" value="">Select Certificate ID</option>              
+                       <option st-id="" value="">Select Instrument ID</option>              
                      </select>
                     <p class="error certificate_error"></p>
                    </div>
