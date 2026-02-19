@@ -29172,7 +29172,7 @@ public function editstoreformqtyassigndata() {
             // validation
             $this->form_validation->set_rules('qty_assign', 'Quantity Assign', 'trim|required');
             $this->form_validation->set_rules('qty_remark', 'Remark', 'trim');
-            $this->form_validation->set_rules('certificate', 'Certificate', 'trim|required');
+            $this->form_validation->set_rules('certificate', 'Certificate', 'trim');
 
             if ($this->form_validation->run() == FALSE) {
                 $response['status'] = 'failure';
