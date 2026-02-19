@@ -29156,18 +29156,34 @@ $('#export_excel').on('click', function() {
 			return false;
 	    });
 
-
-
 		$(document).on("click", ".getinstrumentcertificate", function () {
 
 			var instrument_id  = $(this).data("instrument_id");
-			
-			alert(instrument_id);
-			
-
-			$("#instrument_type_dropdown").val(type).trigger("change");
-			$("#grade_dropdown").val(grade).trigger("change");
-
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>admin/getinstrumentcertificates",
+				type: "POST",
+				data : {'instrument_id' : instrument_id},
+				success: function(data, textStatus, jqXHR)
+					{
+					    $(".loader_ajax").hide();
+							if(data == "failure")
+								{
+									$('#certificate').html('<option value="">Select Part Number</option>');
+												
+								}
+							else
+								{
+									$('#certificate').html(data);
+						    	}
+					},
+				        error: function (jqXHR, textStatus, errorThrown)
+									{
+										$('#certificate').html();
+									}
+						});
+						return false;
+			// $("#instrument_type_dropdown").val(type).trigger("change");
+			// $("#grade_dropdown").val(grade).trigger("change");
 		});
 
 

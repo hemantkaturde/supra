@@ -31199,5 +31199,34 @@ public function addnewbalancestock(){
     }
 
 
+    public function getinstrumentcertificates(){
+
+    $instrument_id=$this->input->post('instrument_id');
+    if($instrument_id) {
+        $getVendoritemsonly = $this->admin_model->getinstrumentcertificates($instrument_id);
+        if(count($getVendoritemsonly) >= 1) {
+            $content = $content.'<option value="">Select Part Number</option>';
+            foreach($getVendoritemsonly as $value) {
+
+                    if($this->input->post('instrument_id')==$value["fin_id"]){
+                        $selected = 'selected';
+                     }else{ 
+                        $selected ='';
+                     }
+
+                $content = $content.'<option value="'.$value["certificate_id"].'" data_id="'.$value["instrument_id"].'" '.$selected.'>'.$value["instrument_id"].'</option>';
+            }
+            echo $content;
+        } else {
+            echo 'failure';
+        }
+    } else {
+        echo 'failure';
+    }
+
+}
+
+
+
 
 }
