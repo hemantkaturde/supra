@@ -29172,12 +29172,14 @@ public function editstoreformqtyassigndata() {
             // validation
             $this->form_validation->set_rules('qty_assign', 'Quantity Assign', 'trim|required');
             $this->form_validation->set_rules('qty_remark', 'Remark', 'trim');
+            $this->form_validation->set_rules('certificate', 'Certificate', 'trim|required');
 
             if ($this->form_validation->run() == FALSE) {
                 $response['status'] = 'failure';
                 $response['error'] = array(
                     'qty_assign' => strip_tags(form_error('qty_assign')),
-                    'qty_remark' => strip_tags(form_error('qty_remark'))
+                    'qty_remark' => strip_tags(form_error('qty_remark')),
+                    'certificate' => strip_tags(form_error('certificate')),
                 );
             } else {
 
@@ -29215,7 +29217,8 @@ public function editstoreformqtyassigndata() {
                 if (!empty($assignedID)) {
                     $data = array(
                         'qty_assign'  => trim($this->input->post('qty_assign')),
-                        'qty_remark'  => trim($this->input->post('qty_remark'))
+                        'qty_remark'  => trim($this->input->post('qty_remark')),
+                        'certificate' => trim($this->input->post('certificate')),
                     );
                 }
                 // If insert new row
@@ -29228,7 +29231,8 @@ public function editstoreformqtyassigndata() {
                         'sampling_trans_id' => trim($this->input->post('sampling_trans_id')),
                         'instrument_name'   => trim($this->input->post('instrument_name_popup')),
                         'measuring_size'    => trim($this->input->post('measuring_size_popup')),
-                        'qty_available'     => trim($this->input->post('qty_popup'))
+                        'qty_available'     => trim($this->input->post('qty_popup')),
+                        'certificate'       => trim($this->input->post('certificate')),
                     );
                 }
 

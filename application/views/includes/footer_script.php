@@ -29296,11 +29296,13 @@ $('#export_excel').on('click', function() {
 				var qty_popup = $('#qty_popup').val();
 				var qty_assign = $('#qty_assign').val();
 				var qty_remark = $('#qty_remark').val();
+
+				var certificate = $('#certificate').val();
 				
 				$.ajax({
 					url: "<?php echo base_url('editstoreformqtyassigndata'); ?>",
 					type: "POST",
-					data: {"ticket_no_popup": ticket_no_popup,"instrument_name_popup":instrument_name_popup, "measuring_size_popup":measuring_size_popup,"qty_popup":qty_popup, "qty_assign":qty_assign, "qty_remark":qty_remark,"assigned_id":partId},
+					data: {"ticket_no_popup": ticket_no_popup,"instrument_name_popup":instrument_name_popup, "measuring_size_popup":measuring_size_popup,"qty_popup":qty_popup, "qty_assign":qty_assign, "qty_remark":qty_remark,"assigned_id":partId,"certificate":certificate},
 					dataType: "json",
 					cache:false,
 					success: function(fetchResponse, textStatus, jqXHR)
