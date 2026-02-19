@@ -29229,7 +29229,7 @@ $('#export_excel').on('click', function() {
 						},
 						{
 							"width": "10%",
-							"targets": 4
+							"targets": 5
 						},
 					],
 					responsive: true,
