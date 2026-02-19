@@ -24183,6 +24183,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     {
         $this->db->select('*');
         $this->db->from('tbl_storeform_qty_assign');
+        $this->db->join('tbl_instrument_master_details','tbl_instrument_master_details.id = tbl_storeform_qty_assign.certificate','left');
         $this->db->where('ticket_no', $ticket_no);
         $this->db->where('instrument_name', $instrument_name);
         $this->db->where('measuring_size', $measuring_size);
@@ -24210,6 +24211,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
         foreach ($result as $row) {
             $data[$count]['instrument_name']  = $row['instrument_name'];
+            $data[$count]['certificate_id']   = $row['instrument_id'];
             $data[$count]['measuring_size']   = $row['measuring_size'];
             $data[$count]['qty_assign']       = $row['qty_assign'];
             $data[$count]['qty_remark']       = $row['qty_remark'];

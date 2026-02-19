@@ -43,6 +43,7 @@
                             <thead>
                                 <tr style="background-color:#3c8dbc;color:#fff">
                                     <th>Instruments Name</th>
+                                    <th>Certificate Id</th>
                                     <th>Measuring Size</th>
                                     <th>Qty Assigned</th>
                                     <th>Remark</th>
