@@ -24202,6 +24202,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 measuring_size LIKE '%{$search}%' OR
                 qty_assign LIKE '%{$search}%' OR
                 qty_remark LIKE '%{$search}%'
+                instrument_id LIKE '%{$search}%'
             )");
         }
         $this->db->order_by('id', 'DESC');
