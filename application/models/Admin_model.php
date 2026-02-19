@@ -23886,7 +23886,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
             '.TBL_INSTRUMENT_MASTER.'.grade,
             '.TBL_INSTRUMENT_MASTER.'.unit,
-            '.TBL_INSTRUMENT_MASTER.'.class,
+            '.TBL_SAMPLING_MASTER_TRANS.'.class,
             '.TBL_SAMPLING_MASTER_TRANS.'.type as instrument_type,
             '.TBL_SAMPLING_MASTER_TRANS.'.id as sampling_trans_id ,
             '.TBL_INSTRUMENT_MASTER.'.qty,
