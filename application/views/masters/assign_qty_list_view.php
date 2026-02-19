@@ -20,6 +20,9 @@
                     <input type="hidden" id="measuring_size" value="<?= $measuring_size ?>">
                     <input type="hidden" id="part_id" value="<?= $part_id ?>">
                     <input type="hidden" id="part_number" value="<?= $part_number ?>">
+
+                    <input type="hidden" id="sampling_id" value="<?= $sampling_id ?>">
+                    <input type="hidden" id="sampling_trans_id" value="<?= $sampling_trans_id ?>">
                     <!-- <input type="button" onclick="window.close();" class="btn btn-primary" value="Back" /> -->
                    <a class="btn btn-primary" href="<?php echo base_url('addInstrumentStoreform/'.$part_id.'/'.$ticket_no); ?>">
                        <i class="fa fa-arrow-left"></i> Back</a>

@@ -29357,6 +29357,9 @@ public function viewassigninstqtytforticket() {
     $part_id  = $this->input->get('part_id');
     $part_number  = $this->input->get('part_number');
 
+    $sampling_id  = $this->input->get('sampling_id');
+    $sampling_trans_id  = $this->input->get('sampling_trans_id');
+
     $process = 'Assigned Quantity Details';
     $processFunction = 'Admin/assigned_instrument_listing';
     $this->logrecord($process,$processFunction);
@@ -29368,6 +29371,9 @@ public function viewassigninstqtytforticket() {
     $data['measuring_size'] = $measuring_size;
     $data['part_id'] = $part_id;
     $data['part_number'] = $part_number;
+
+    $data['sampling_id'] = $sampling_id;
+    $data['sampling_trans_id'] = $sampling_trans_id;
 
     // $this->global['pageTitle'] = 'Assigned Quantity Details';
     $this->loadViews("masters/assign_qty_list_view", $this->global, $data, NULL);
@@ -29435,8 +29441,10 @@ public function fetchviewassigninstqtytforticket(){
         $instrument_name = $this->input->post('instrument_name');
         $measuring_size  = $this->input->post('measuring_size');
         $part_id  = $this->input->post('part_id');
+        $sampling_id  = $this->input->post('sampling_id');
+        $sampling_trans_id  = $this->input->post('sampling_trans_id');
         $params = $_REQUEST;
-        $queryRecords = $this->admin_model->getAssignedQtyListData($params,$ticket_no, $instrument_name, $measuring_size,$part_id);
+        $queryRecords = $this->admin_model->getAssignedQtyListData($params,$ticket_no, $instrument_name, $measuring_size,$part_id,$sampling_id,$sampling_trans_id);
         
         $data = array();
         foreach ($queryRecords as $key => $value)

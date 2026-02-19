@@ -29246,6 +29246,8 @@ $('#export_excel').on('click', function() {
 							d.instrument_name = $("#instrument_name").val();
 							d.measuring_size  = $("#measuring_size").val();
 							d.part_id = $("#part_id").val();
+							d.sampling_id = $("#sampling_id").val();
+							d.sampling_trans_id = $("#sampling_trans_id").val();
 						}
 					}
 				});

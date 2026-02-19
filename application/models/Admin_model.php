@@ -23984,7 +23984,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             </i> &nbsp;";
 
             $data[$count]['action'] .= "
-            <a href='".ADMIN_PATH."viewassigninstqtytforticket?ticket_no=".$ticket_no."&instrument_name=".$row['instrument_name']."&measuring_size=".$row['measuring_size']."&part_id=".$id."&part_number=".$row['part_number']."' style='cursor: pointer;' target='_blank'>
+            <a href='".ADMIN_PATH."viewassigninstqtytforticket?ticket_no=".$ticket_no."&instrument_name=".$row['instrument_name']."&measuring_size=".$row['measuring_size']."&part_id=".$id."&part_number=".$row['part_number']."&sampling_id=".$row['sampling_id']."&sampling_trans_id=".$row['sampling_trans_id']."' style='cursor: pointer;' target='_blank'>
             <i style='font-size: x-large;cursor: pointer;' class='fa fa-eye' aria-hidden='true'></i>
             </a>";
 
@@ -24179,13 +24179,15 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         return isset($row['liveQty']) ? (float)$row['liveQty'] : 0;
     }
 
-    public function getAssignedQtyListData($params,$ticket_no, $instrument_name, $measuring_size, $part_id)
+    public function getAssignedQtyListData($params,$ticket_no, $instrument_name, $measuring_size, $part_id,$sampling_id,$sampling_trans_id)
     {
         $this->db->select('*');
         $this->db->from('tbl_storeform_qty_assign');
         $this->db->where('ticket_no', $ticket_no);
         $this->db->where('instrument_name', $instrument_name);
         $this->db->where('measuring_size', $measuring_size);
+        $this->db->where('sampling_id', $sampling_id);
+        $this->db->where('sampling_trans_id', $sampling_trans_id);
         $this->db->where('qty_removed', 0);
         
 
