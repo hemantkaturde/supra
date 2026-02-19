@@ -24799,7 +24799,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
         $this->db->select(TBL_INSTRUMENT_MASTER_DETAILS.'.instrument_id,'.TBL_INSTRUMENT_MASTER_DETAILS.'.id as certificate_id');
         // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
-        $this->db->join(TBL_INSTRUMENT_MASTER, TBL_INSTRUMENT_MASTER.'.id = '.TBL_VENDOR_PO_MASTER_ITEM.'.instrument_master_id');
+        $this->db->join(TBL_INSTRUMENT_MASTER, TBL_INSTRUMENT_MASTER.'.id = '.TBL_INSTRUMENT_MASTER_DETAILS.'.instrument_master_id');
         $this->db->where(TBL_INSTRUMENT_MASTER_DETAILS.'.status','Ok');
         //$this->db->where(TBL_FINISHED_GOODS.'.fin_id',$part_number);
         $this->db->where(TBL_INSTRUMENT_MASTER_DETAILS.'.instrument_master_id',$instrument_id);
