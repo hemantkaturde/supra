@@ -23942,7 +23942,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             TBL_SAMPLING_MASTER_TRANS.'.type'
         ]);
 
-        $this->db->order_by(TBL_SAMPLING_MASTER.'.id', 'DESC');
+        $this->db->order_by(TBL_SAMPLING_MASTER_TRANS.'.id', 'DESC');
         $this->db->limit($params['length'], $params['start']);
 
         $query  = $this->db->get();
