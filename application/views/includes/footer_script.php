@@ -29228,7 +29228,7 @@ $('#export_excel').on('click', function() {
 							"targets": 4
 						},
 						{
-							"width": "10%",
+							"width": "5%",
 							"targets": 5
 						},
 					],
