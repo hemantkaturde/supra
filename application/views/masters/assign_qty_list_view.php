@@ -65,7 +65,7 @@
    <div class="modal-dialog" role="document">
       <div class="modal-content">
          <div class="modal-header">
-            <h3 class="modal-title" id="additem">Add Item Quantity</h3>
+            <h3 class="modal-title" id="additem">Edit Item Quantity</h3>
             </button>
          </div>
          <form role="form" id="editstoreformqtylistassigndataform" role="form">
@@ -78,10 +78,13 @@
               <input type="hidden" class="form-control"  id="assigned_id" name="assigned_id">
                 <input type="hidden" class="form-control"  id="partsId_popup" name="partsId_popup">
                 <input type="hidden" class="form-control"  id="partId_popup" name="partId_popup">
-               <input type="hidden" class="form-control"  id="ticket_no_popup" name="ticket_no_popup">
+                <input type="hidden" class="form-control"  id="ticket_no_popup" name="ticket_no_popup">
                 <input type="hidden" class="form-control" id="instrument_name_popup" name="instrument_name_popup">
                 <input type="hidden" class="form-control" id="measuring_size_popup" name="measuring_size_popup">
                 <input type="hidden" class="form-control" id="qty_popup" name="qty_popup">
+
+                <input type="hidden" class="form-control" id="sampling_id" name="sampling_id">
+                <input type="hidden" class="form-control" id="sampling_trans_id" name="sampling_trans_id">
 
                <div class="form-group row">
                   <label class="col-sm-4 col-form-label">Quantity Assign <span class="required">*</span></label>
@@ -90,6 +93,17 @@
                      <p class="error qty_assign_error"></p>
                   </div>
                </div>
+
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label">Instrument ID</label>
+                   <div class="col-sm-8">
+                     <select class="form-control" name="certificate" id="certificate">
+                       <option st-id="" value="">Select Instrument ID</option>              
+                     </select>
+                    <p class="error certificate_error"></p>
+                   </div>
+               </div>
+
                <div class="form-group row">
                   <label class="col-sm-4 col-form-label"> Remark </label>
                   <div class="col-sm-8">

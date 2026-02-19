@@ -24227,6 +24227,9 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 data-instrument_name='".$row['instrument_name']."'
                 data-measuring_size='".$row['measuring_size']."'
                 data-ticket_no='".$row['ticket_no']."'
+                data-sampling_id='".$row['sampling_id']."'
+                data-sampling_trans_id='".$row['sampling_trans_id']."'
+
                 data-qty_live='".$row['qty_live']."'
                 data-part_id='".$part_id."'
                 class='fa fa-pencil-square-o editassignqtyitem'>
