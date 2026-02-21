@@ -29176,6 +29176,7 @@ public function editstoreformqtyassigndata() {
             $this->form_validation->set_rules('qty_assign', 'Quantity Assign', 'trim|required');
             $this->form_validation->set_rules('qty_remark', 'Remark', 'trim');
             $this->form_validation->set_rules('certificate', 'Certificate', 'trim');
+            $this->form_validation->set_rules('status', 'Status', 'trim');
 
             if ($this->form_validation->run() == FALSE) {
                 $response['status'] = 'failure';
@@ -29183,6 +29184,7 @@ public function editstoreformqtyassigndata() {
                     'qty_assign' => strip_tags(form_error('qty_assign')),
                     'qty_remark' => strip_tags(form_error('qty_remark')),
                     'certificate' => strip_tags(form_error('certificate')),
+                    'status' => strip_tags(form_error('status')),
                 );
             } else {
 
@@ -29222,6 +29224,7 @@ public function editstoreformqtyassigndata() {
                         'qty_assign'  => trim($this->input->post('qty_assign')),
                         'qty_remark'  => trim($this->input->post('qty_remark')),
                         'certificate' => trim($this->input->post('certificate')),
+                        'status' => trim($this->input->post('certificate')),
                     );
                 }
                 // If insert new row
@@ -29236,6 +29239,7 @@ public function editstoreformqtyassigndata() {
                         'measuring_size'    => trim($this->input->post('measuring_size_popup')),
                         'qty_available'     => trim($this->input->post('qty_popup')),
                         'certificate'       => trim($this->input->post('certificate')),
+                        'status' => trim($this->input->post('certificate')),
                     );
                 }
 
