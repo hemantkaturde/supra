@@ -104,7 +104,7 @@
                </div>
 
                <div class="form-group row">
-                  <label class="col-sm-4 col-form-label">Instrument ID</label>
+                  <label class="col-sm-4 col-form-label">Instrument ID - Due Date</label>
                    <div class="col-sm-8">
                      <select class="form-control" name="certificate" id="certificate">
                        <option st-id="" value="">Select Instrument ID</option>              

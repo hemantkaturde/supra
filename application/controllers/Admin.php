@@ -31229,7 +31229,7 @@ public function addnewbalancestock(){
                         $selected ='';
                      }
 
-                $content = $content.'<option value="'.$value["certificate_id"].'" data_id="'.$value["instrument_id"].'" '.$selected.'>'.$value["instrument_id"].'</option>';
+                $content = $content.'<option value="'.$value["certificate_id"].'" data_id="'.$value["instrument_id"].'" '.$selected.'>'.$value["instrument_id"].' - '.$value["instrument_id"].'</option>';
             }
             echo $content;
         } else {
