@@ -28834,6 +28834,11 @@ $('#export_excel').on('click', function() {
 						"width": "10%",
 						"targets": 6
 					},
+					{
+						"width": "10%",
+						"targets": 7
+					},
+
 
 				],
 				responsive: true,

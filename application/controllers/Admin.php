@@ -28976,10 +28976,11 @@ public function addStoreForm() {
                 $this->form_validation->set_rules('ticket_no', 'Ticket No', 'trim|required');
                 $this->form_validation->set_rules('ticket_date', 'Date', 'trim|required');
                 $this->form_validation->set_rules('parts_no', 'Parts No', 'trim|required');
-                $this->form_validation->set_rules('team', 'Team', 'trim|required');
-                $this->form_validation->set_rules('team_member', 'Team Member', 'trim|required');
+                $this->form_validation->set_rules('team', 'Team', 'trim');
+                $this->form_validation->set_rules('team_member', 'Team Member', 'trim');
                 $this->form_validation->set_rules('status', 'Status', 'trim|required');
                 $this->form_validation->set_rules('remarks', 'Remarks', 'trim');
+                $this->form_validation->set_rules('vendor_name', 'Vendor Name', 'trim');
                 if ($this->form_validation->run() == FALSE) {
                     $save_ticket_response['status'] = 'failure';
                     $save_ticket_response['error'] = array(
@@ -28989,7 +28990,8 @@ public function addStoreForm() {
                         'team'         => strip_tags(form_error('team')),
                         'team_member'  => strip_tags(form_error('team_member')),
                         'status'       => strip_tags(form_error('status')),
-                        'remarks'      => strip_tags(form_error('remarks'))
+                        'remarks'      => strip_tags(form_error('remarks')),
+                        'vendor_name'  => strip_tags(form_error('remarks')),
                     );
                 } else {
                     $data = array(
@@ -28999,7 +29001,8 @@ public function addStoreForm() {
                         'team_id'          => trim($this->input->post('team', TRUE)),
                         'team_member_id'   => trim($this->input->post('team_member', TRUE)),
                         'status'        => trim($this->input->post('status', TRUE)),
-                        'remarks'       => trim($this->input->post('remarks', TRUE))
+                        'remarks'       => trim($this->input->post('remarks', TRUE)),
+                        'vendor_name'   => trim($this->input->post('vendor_name', TRUE)),
                     );
 
                     // $ifallinstrumentsQtyAvaliable = $this->getAllInstQtyAvaliablebyPartId(trim($this->input->post('parts_no', TRUE)));
@@ -29104,7 +29107,7 @@ public function edit_storeform_ticket($ticket_id){
         $processFunction = 'Admin/edit_storeform_ticket';
         $this->logrecord($process,$processFunction);
         $this->global['pageTitle'] = 'Edit Storeform';
-        // $data['vendorList']= $this->admin_model->fetchALLvendorList();
+        $data['vendorList']= $this->admin_model->fetchALLvendorList();
         $data['parts_no_list'] = $this->admin_model->part_number();
         $data['team_list'] = $this->admin_model->getAllteammaster();
         $data['getTicketData']= $this->admin_model->getTicketData($ticket_id);

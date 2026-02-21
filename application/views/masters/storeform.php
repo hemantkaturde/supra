@@ -48,6 +48,7 @@
                                         <th>Part No</th>
                                         <th>Team</th>
                                         <th>Team Members</th>
+                                        <th>Vendor Name</th>
                                         <th>Status</th>
                                         <th>Remarks</th>
                                         <th>Action</th>

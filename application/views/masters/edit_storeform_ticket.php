@@ -82,7 +82,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="team_member">Team Member<span class="required">*</span></label>
                                             <select class="form-control" id="team_member" name="team_member">
@@ -100,6 +100,24 @@
                                 </div>
 
                                 <div class="row">
+
+                                 <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="status">Vendor Name</label>
+                                        <select class="form-control vendor_name" id="vendor_name" name="vendor_name">
+                                                <option st-id="" value="">Select Vendor Name</option>
+                                                <?php foreach ($vendorList as $key => $value) {?>
+
+                                                <option value="<?php echo $value['ven_id']; ?>"
+                                                <?php if ($value['ven_id'] == $getTicketData[0]['vendor_name']) echo "selected"; ?>>
+                                                    <?php echo $value['vendor_name']; ?></option>
+                                                <?php } ?>
+                                        </select>
+                                         <p class="error vendor_name_error"></p>
+                                    </div>
+                                </div>
+
+
 
                                     <div class="col-md-3">
                                         <div class="form-group">

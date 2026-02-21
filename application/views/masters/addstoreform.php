@@ -58,7 +58,7 @@
 
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="team">Team:<span class="required">*</span></label>
+                                        <label for="team">Team</label>
                                         <select class="form-control" id="teamTicket" name="team">
                                             <option value="">Select Team</option>
                                             <?php foreach($team_list as $t): ?>
@@ -70,9 +70,9 @@
                                 </div>
 
 
-                               <div class="col-md-6">
+                               <div class="col-md-3">
                                     <div class="form-group">
-                                            <label for="team_member">Team Members:<span class="required">*</span></label>
+                                            <label for="team_member">Team Members</label>
                                             <select id="team_member" name="team_member"  class="form-control">
                                                 <option value="">Select Team Member</option>
                                             </select>
@@ -82,6 +82,20 @@
                             </div>
 
                             <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="status">Vendor Name</label>
+                                        <select class="form-control vendor_name" id="vendor_name" name="vendor_name">
+                                                <option st-id="" value="">Select Vendor Name</option>
+                                                <?php foreach ($vendorList as $key => $value) {?>
+                                                <option value="<?php echo $value['ven_id']; ?>">
+                                                    <?php echo $value['vendor_name']; ?></option>
+                                                <?php } ?>
+                                        </select>
+                                         <p class="error vendor_name_error"></p>
+                                    </div>
+                                </div>
+
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="status">Status:<span class="required">*</span></label>

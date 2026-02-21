@@ -23556,6 +23556,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 OR ".TBL_TEAM_MASTER.".team_name LIKE '%$search%'
                 OR ".TBL_TEAM_MASTER_TRANS.".team_member_name LIKE '%$search%'
                 OR ".TBL_STOREFORM_TICKETS.".status LIKE '%$search%'
+                OR ".TBL_VENDOR.".vendor_name LIKE '%$search%'
                 OR ".TBL_STOREFORM_TICKETS.".remarks LIKE '%$search%'
             )");
         }
@@ -23563,6 +23564,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_STOREFORM_TICKETS.'.parts_id', 'left');
         $this->db->join(TBL_TEAM_MASTER, TBL_TEAM_MASTER.'.id = '.TBL_STOREFORM_TICKETS.'.team_id', 'left');
         $this->db->join(TBL_TEAM_MASTER_TRANS, TBL_TEAM_MASTER_TRANS.'.id = '.TBL_STOREFORM_TICKETS.'.team_member_id', 'left');
+        $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_STOREFORM_TICKETS.'.vendor_name', 'left');
 
         $this->db->order_by(TBL_STOREFORM_TICKETS.'.ticket_id', 'DESC');
 
@@ -23577,7 +23579,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 '.TBL_STOREFORM_TICKETS.'.ticket_id as ticket_id_label,
                 '.TBL_FINISHED_GOODS.'.part_number,
                 '.TBL_TEAM_MASTER.'.team_name,
-                '.TBL_TEAM_MASTER_TRANS.'.team_member_name
+                '.TBL_TEAM_MASTER_TRANS.'.team_member_name,
+                '.TBL_VENDOR.'.vendor_name as vendor_name_label
             ');
 
             if ($params['search']['value'] != "") 
@@ -23590,6 +23593,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                     OR ".TBL_TEAM_MASTER.".team_name LIKE '%$search%'
                     OR ".TBL_TEAM_MASTER_TRANS.".team_member_name LIKE '%$search%'
                     OR ".TBL_STOREFORM_TICKETS.".status LIKE '%$search%'
+                    OR ".TBL_VENDOR.".vendor_name LIKE '%$search%'
                     OR ".TBL_STOREFORM_TICKETS.".remarks LIKE '%$search%'
                 )");
             }
@@ -23597,6 +23601,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_STOREFORM_TICKETS.'.parts_id', 'left');
             $this->db->join(TBL_TEAM_MASTER, TBL_TEAM_MASTER.'.id = '.TBL_STOREFORM_TICKETS.'.team_id', 'left');
             $this->db->join(TBL_TEAM_MASTER_TRANS, TBL_TEAM_MASTER_TRANS.'.id = '.TBL_STOREFORM_TICKETS.'.team_member_id', 'left');
+            $this->db->join(TBL_VENDOR, TBL_VENDOR.'.ven_id = '.TBL_STOREFORM_TICKETS.'.vendor_name', 'left');
+
 
             $this->db->limit($params['length'], $params['start']);
             $this->db->order_by(TBL_STOREFORM_TICKETS.'.ticket_id', 'DESC');
@@ -23613,6 +23619,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             $data[$counter]['parts_no'] = $row['part_number'];
             $data[$counter]['team'] = $row['team_name'];
             $data[$counter]['team_member'] = $row['team_member_name'];
+            $data[$counter]['vendor_name'] = $row['vendor_name_label'];
             $data[$counter]['status'] = $row['status'];
             $data[$counter]['remarks'] = $row['remarks'];
 
