@@ -46,6 +46,7 @@
                                     <th>Instrument Id</th>
                                     <th>Measuring Size</th>
                                     <th>Qty Assigned</th>
+                                    <th>Status</th>
                                     <th>Remark</th>
                                     <th>Action</th>
                                 </tr>
