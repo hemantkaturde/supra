@@ -24812,7 +24812,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     
     public function getinstrumentcertificates($instrument_id){
 
-        $this->db->select(TBL_INSTRUMENT_MASTER_DETAILS.'.instrument_id,'.TBL_INSTRUMENT_MASTER_DETAILS.'.id as certificate_id');
+        $this->db->select(TBL_INSTRUMENT_MASTER_DETAILS.'.instrument_id,'.TBL_INSTRUMENT_MASTER_DETAILS.'.id as certificate_id,'.TBL_INSTRUMENT_MASTER_DETAILS.'.due_date');
         // $this->db->join(TBL_RAWMATERIAL, TBL_RAWMATERIAL.'.part_number = '.TBL_FINISHED_GOODS.'.part_number');
         $this->db->join(TBL_INSTRUMENT_MASTER, TBL_INSTRUMENT_MASTER.'.id = '.TBL_INSTRUMENT_MASTER_DETAILS.'.instrument_master_id');
         $this->db->where(TBL_INSTRUMENT_MASTER_DETAILS.'.status','Ok');
