@@ -29314,6 +29314,9 @@ $('#export_excel').on('click', function() {
 				var qty_assign = $('#qty_assign').val();
 				var qty_remark = $('#qty_remark').val();
 
+				var sampling_id  = $('#sampling_id').val();
+				var sampling_trans_id = $('#sampling_trans_id').val();
+
 				var certificate = $('#certificate').val();
 				var status = $('#status').val();
 
@@ -29347,10 +29350,11 @@ $('#export_excel').on('click', function() {
 										+ ticket_no_popup 
 										+ "&instrument_name=" + instrument_name_popup 
 										+ "&measuring_size=" + measuring_size_popup
-										+ "&part_id=" + partsId;
-								});
-
-		
+										+ "&part_id=" + partsId
+										+ "&part_number=" + part_number
+										+ "&sampling_id=" + sampling_id
+										+ "&sampling_trans_id=" + sampling_trans_id;
+								});		
 						}
 						
 					},

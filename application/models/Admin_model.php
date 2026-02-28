@@ -24188,7 +24188,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     public function getAssignedQtyListData($params,$ticket_no, $instrument_name, $measuring_size, $part_id,$sampling_id,$sampling_trans_id)
     {
-        $this->db->select('*');
+        $this->db->select('*,tbl_storeform_qty_assign.id as tbl_storeform_qty_assign_id');
         $this->db->from('tbl_storeform_qty_assign');
         $this->db->join('tbl_instrument_master_details','tbl_instrument_master_details.id = tbl_storeform_qty_assign.certificate','left');
         $this->db->where('ticket_no', $ticket_no);
@@ -24232,21 +24232,21 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             <i style='font-size:x-large; cursor:pointer; color:#3c8dbc;' 
                 data-toggle='modal'
                 data-target='#addNewModal'
-                data-id='".$row['id']."'
+                data-id='".$row['tbl_storeform_qty_assign_id']."'
                 data-instrument_name='".$row['instrument_name']."'
                 data-measuring_size='".$row['measuring_size']."'
                 data-ticket_no='".$row['ticket_no']."'
                 data-sampling_id='".$row['sampling_id']."'
                 data-sampling_trans_id='".$row['sampling_trans_id']."'
-
                 data-qty_live='".$row['qty_live']."'
                 data-part_id='".$part_id."'
+                data-part_number='".$row['instrument_name']."'
                 class='fa fa-pencil-square-o editassignqtyitem'>
             </i> &nbsp;";
 
             // Delete action (example)
             $data[$count]['action'] .= "
-                <i style='font-size:x-large; cursor:pointer;' data-id='".$row['id']."'
+                <i style='font-size:x-large; cursor:pointer;' data-id='".$row['tbl_storeform_qty_assign_id']."'
                 data-instrument_name='".$row['instrument_name']."'
                 data-measuring_size='".$row['measuring_size']."'
                 data-ticket_no='".$row['ticket_no']."'

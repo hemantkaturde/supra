@@ -76,7 +76,7 @@
                </div>
 
                
-              <input type="hidden" class="form-control"  id="assigned_id" name="assigned_id">
+                <input type="hidden" class="form-control"  id="assigned_id" name="assigned_id">
                 <input type="hidden" class="form-control"  id="partsId_popup" name="partsId_popup">
                 <input type="hidden" class="form-control"  id="partId_popup" name="partId_popup">
                 <input type="hidden" class="form-control"  id="ticket_no_popup" name="ticket_no_popup">
@@ -95,13 +95,24 @@
                   </div>
                </div>
 
-                <div class="form-group row">
-                  <label class="col-sm-4 col-form-label">Instrument ID</label>
+               <div class="form-group row">
+                  <label class="col-sm-4 col-form-label">Instrument ID - Due Date</label>
                    <div class="col-sm-8">
                      <select class="form-control" name="certificate" id="certificate">
                        <option st-id="" value="">Select Instrument ID</option>              
                      </select>
                     <p class="error certificate_error"></p>
+                   </div>
+               </div>
+
+               <div class="form-group row">
+                  <label class="col-sm-4 col-form-label">Status</label>
+                   <div class="col-sm-8">
+                     <select class="form-control" name="status" id="status">
+                        <option value="Open" selected>Open</option>
+                        <option value="Close">Close</option>
+                     </select>
+                    <p class="error status_error"></p>
                    </div>
                </div>
 
