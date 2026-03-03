@@ -23743,6 +23743,14 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->from(TBL_INSTRUMENT_MASTER);
         $this->db->where('instrument_name', $instrument_name);
         $this->db->where('measuring_size', $measuring_size);
+        $this->db->where('class', $class);
+        $this->db->where('type', $instrument_type);
+        $this->db->where('unit', $unit);
+        $this->db->where('grade', $grade);
+
+
+
+
         $query = $this->db->get()->row_array();
 
         $quantity_available = !empty($query['qty']) ? (float)$query['qty'] : 0;
@@ -23760,7 +23768,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->where('grade', $grade);
         $this->db->where('unit', $unit);
         $this->db->where('class', $class);
-        $this->db->where('sampling_trans_id', $id);
+        //$this->db->where('sampling_trans_id', $id);
 
         $assignedRow = $this->db->get()->row_array();
         $total_assign = (float)$assignedRow['total_assign'];
@@ -23775,7 +23783,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->where('grade', $grade);
         $this->db->where('unit', $unit);
         $this->db->where('class', $class);
-        $this->db->where('sampling_trans_id', $id);
+        // $this->db->where('sampling_trans_id', $id);
 
         $removedRow = $this->db->get()->row_array();
         $total_removed = (float)$removedRow['total_removed'];
