@@ -23758,16 +23758,20 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
         $this->db->select('IFNULL(SUM(qty_assign),0) AS total_assign');
         $this->db->from('tbl_storeform_qty_assign');
-        $this->db->where('instrument_name', $instrument_name);
-        $this->db->where('measuring_size', $measuring_size);
+        // $this->db->where('instrument_name', $instrument_name);
+        // $this->db->where('measuring_size', $measuring_size);
+        $this->db->where('sampling_trans_id', $id);
+
 
         $assignedRow = $this->db->get()->row_array();
         $total_assign = (float)$assignedRow['total_assign'];
 
         $this->db->select('IFNULL(SUM(qty_removed),0) AS total_removed');
         $this->db->from('tbl_storeform_qty_assign');
-        $this->db->where('instrument_name', $instrument_name);
-        $this->db->where('measuring_size', $measuring_size);
+        $this->db->where('sampling_trans_id', $id);
+
+        // $this->db->where('instrument_name', $instrument_name);
+        // $this->db->where('measuring_size', $measuring_size);
 
         $removedRow = $this->db->get()->row_array();
         $total_removed = (float)$removedRow['total_removed'];
@@ -24006,7 +24010,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $count = 0;
 
         foreach ($result as $row) {
-            $live_quantity = $this->getLiveQtyforInst_uniq_list($id,$row['instrument_name'],$row['measuring_size'],$row['grade'],$row['unit'],$row['class'],$row['instrument_type']);
+            $live_quantity = $this->getLiveQtyforInst_uniq_list($raw['sampling_id'],$row['instrument_name'],$row['measuring_size'],$row['grade'],$row['unit'],$row['class'],$row['instrument_type']);
             $data[$count]['instrument_name']  = $row['instrument_name'];
             $data[$count]['grade']            = $row['grade'];
             $data[$count]['unit']             = $row['unit'];
