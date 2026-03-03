@@ -29305,6 +29305,8 @@ $('#export_excel').on('click', function() {
 						$('#ticket_no').val(fetchResponse.ticket_no);
 						$('#instrument_name').val(fetchResponse.instrument_name);
 						$('#measuring_size').val(fetchResponse.measuring_size);
+						$('#certificate').val(fetchResponse.certificate);
+						
 					},
 					error: function(jqXHR, textStatus, errorThrown) {
 						$(".loader_ajax").hide();

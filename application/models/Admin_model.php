@@ -23748,9 +23748,6 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->where('unit', $unit);
         $this->db->where('grade', $grade);
 
-
-
-
         $query = $this->db->get()->row_array();
 
         $quantity_available = !empty($query['qty']) ? (float)$query['qty'] : 0;
@@ -24320,7 +24317,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 data-qty_live='".$row['qty_live']."'
                 data-part_id='".$part_id."' class='fa fa-trash deleteassignqty'></i>";
 
-            //  "<i style='font-size: x-large;cursor: pointer;' data-id='".$row['ticket_id_label']."' class='fa fa-trash-o deletetdirreport' aria-hidden='true'></i>"; 
+
+                //  "<i style='font-size: x-large;cursor: pointer;' data-id='".$row['ticket_id_label']."' class='fa fa-trash-o deletetdirreport' aria-hidden='true'></i>"; 
 
             $count++;
         }
@@ -24395,12 +24393,14 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     public function geteditassignqtyitem( $id)
     {
-    $this->db->select('*');
-    $this->db->where(TBL_STOREFORM_QTY_ASSIGN.'.id', $id);
-    $this->db->order_by(TBL_STOREFORM_QTY_ASSIGN.'.id','DESC');
-    $query = $this->db->get(TBL_STOREFORM_QTY_ASSIGN);
-    $fetch_result = $query->result_array();
-    return $fetch_result;
+        /*Certificate id == Instrument Id*/
+        $this->db->select('*');
+        $this->db->join('tbl_instrument_master','id.id = tbl_storeform_qty_assign.certificate');
+        $this->db->where(TBL_STOREFORM_QTY_ASSIGN.'.id', $id);
+        $this->db->order_by(TBL_STOREFORM_QTY_ASSIGN.'.id','DESC');
+        $query = $this->db->get(TBL_STOREFORM_QTY_ASSIGN);
+        $fetch_result = $query->result_array();
+        return $fetch_result;
 
     }
 
