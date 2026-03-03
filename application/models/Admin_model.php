@@ -24391,7 +24391,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         return $data;
     }
 
-    public function geteditassignqtyitem( $id)
+    public function geteditassignqtyitem($id)
     {
         /*Certificate id == Instrument Id*/
         $this->db->select('*');

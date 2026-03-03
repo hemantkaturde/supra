@@ -29286,6 +29286,8 @@ $('#export_excel').on('click', function() {
 				var elemF = $(this);
 				var item_id = elemF.attr('data-id');
 
+				alert(item_id);
+
 				$("#partsId_popup").val($(this).data("part_id"));
 				$("#partId_popup").val($(this).data("id"));
 				$("#ticket_no_popup").val($(this).data("ticket_no"));
