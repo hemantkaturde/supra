@@ -29046,6 +29046,11 @@ $('#export_excel').on('click', function() {
 			$("#sampling_id").val($(this).data("sampling_id"));
 			$("#sampling_trans_id").val($(this).data("sampling_trans_id"));
 			$("#qty_popup").val($(this).data("qty"));
+
+			$("#type").val($(this).data("type"));
+			$("#grade").val($(this).data("grade"));
+			$("#unit").val($(this).data("unit"));
+			$("#class").val($(this).data("class"));
 		});
 
 
@@ -29066,11 +29071,17 @@ $('#export_excel').on('click', function() {
 			var sampling_trans_id = $('#sampling_trans_id').val();
 
 			var certificate = $('#certificate').val();
+
+
+			var type = $('#type').val();
+			var grade = $('#grade').val();
+			var unit = $('#unit').val();
+			var class = $('#class').val();
 			
 			$.ajax({
 				url: "<?php echo base_url('editstoreformqtyassigndata'); ?>",
 				type: "POST",
-				data: {"ticket_no_popup": ticket_no_popup,"instrument_name_popup":instrument_name_popup, "measuring_size_popup":measuring_size_popup,"qty_popup":qty_popup, "qty_assign":qty_assign, "qty_remark":qty_remark, "qty_removed": qty_removed,'sampling_id':sampling_id,'sampling_trans_id':sampling_trans_id,'certificate':certificate},
+				data: {"ticket_no_popup": ticket_no_popup,"instrument_name_popup":instrument_name_popup, "measuring_size_popup":measuring_size_popup,"qty_popup":qty_popup, "qty_assign":qty_assign, "qty_remark":qty_remark, "qty_removed": qty_removed,'sampling_id':sampling_id,'sampling_trans_id':sampling_trans_id,'certificate':certificate,'type':type,'grade':grade,'unit':unit,'class':class},
 				dataType: "json",
                 cache:false,
 				success: function(fetchResponse, textStatus, jqXHR)
@@ -29320,11 +29331,18 @@ $('#export_excel').on('click', function() {
 				var certificate = $('#certificate').val();
 				var status = $('#status').val();
 
+
+				var type = $('#type').val();
+				var grade = $('#grade').val();
+				var unit = $('#unit').val();
+				var class_1 = $('#class').val();
+				
+			
 				
 				$.ajax({
 					url: "<?php echo base_url('editstoreformqtyassigndata'); ?>",
 					type: "POST",
-					data: {"ticket_no_popup": ticket_no_popup,"instrument_name_popup":instrument_name_popup, "measuring_size_popup":measuring_size_popup,"qty_popup":qty_popup, "qty_assign":qty_assign, "qty_remark":qty_remark,"assigned_id":partId,"certificate":certificate,'status':status},
+					data: {"ticket_no_popup": ticket_no_popup,"instrument_name_popup":instrument_name_popup, "measuring_size_popup":measuring_size_popup,"qty_popup":qty_popup, "qty_assign":qty_assign, "qty_remark":qty_remark,"assigned_id":partId,"certificate":certificate,'status':status,'type':type,'grade':grade,'unit':unit,'class':class_1},
 					dataType: "json",
 					cache:false,
 					success: function(fetchResponse, textStatus, jqXHR)

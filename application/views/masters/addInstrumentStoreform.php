@@ -93,6 +93,12 @@
                <input type="hidden" class="form-control" id="sampling_id" name="sampling_id">
                <input type="hidden" class="form-control" id="qty_popup" name="qty_popup">
 
+               <input type="hidden" class="form-control" id="type" name="type">
+               <input type="hidden" class="form-control" id="grade" name="grade">
+               <input type="hidden" class="form-control" id="unit" name="unit">
+               <input type="hidden" class="form-control" id="class" name="class">
+
+
                
 
                <div class="form-group row">

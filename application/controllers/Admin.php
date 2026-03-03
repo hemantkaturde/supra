@@ -29178,6 +29178,13 @@ public function editstoreformqtyassigndata() {
             $this->form_validation->set_rules('certificate', 'Certificate', 'trim');
             $this->form_validation->set_rules('status', 'Status', 'trim');
 
+            $this->form_validation->set_rules('type', 'Type', 'trim');
+            $this->form_validation->set_rules('grade', 'Grade', 'trim');
+            $this->form_validation->set_rules('unit', 'Unit', 'trim');
+            $this->form_validation->set_rules('class', 'Class', 'trim');
+
+
+
             if ($this->form_validation->run() == FALSE) {
                 $response['status'] = 'failure';
                 $response['error'] = array(
@@ -29240,6 +29247,12 @@ public function editstoreformqtyassigndata() {
                         'qty_available'     => trim($this->input->post('qty_popup')),
                         'certificate'       => trim($this->input->post('certificate')),
                         'status' => trim($this->input->post('certificate')),
+
+                        'type' => trim($this->input->post('type')),
+                        'grade' => trim($this->input->post('grade')),
+                        'unit' => trim($this->input->post('unit')),
+                        'class' => trim($this->input->post('class'))
+
                     );
                 }
 

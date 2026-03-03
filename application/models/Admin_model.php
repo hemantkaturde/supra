@@ -24027,8 +24027,14 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 data-target='#addNewModal'
                 data-part_id='".$id."'
                 data-ticket_no='".$ticket_no."'
-                data-instrument_name='".$row['instrument_name']."'
-                data-measuring_size='".$row['measuring_size']."'
+              
+                 data-instrument_name='".$row['instrument_name']."'
+                 data-measuring_size='".$row['measuring_size']."'
+                 data-type='".$row['instrument_name']."'
+                 data-grade='".$row['measuring_size']."'
+                 data-unit='".$row['measuring_size']."'
+                 data-class='".$row['measuring_size']."'
+
                 data-qty='".$row['instru_qty']."' 
                 data-part_number='".$row['part_number']."'
                 data-sampling_id ='".$row['sampling_id']."'
