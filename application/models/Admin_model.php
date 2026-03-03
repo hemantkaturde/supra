@@ -24030,10 +24030,10 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
               
                  data-instrument_name='".$row['instrument_name']."'
                  data-measuring_size='".$row['measuring_size']."'
-                 data-type='".$row['instrument_name']."'
-                 data-grade='".$row['measuring_size']."'
-                 data-unit='".$row['measuring_size']."'
-                 data-class='".$row['measuring_size']."'
+                 data-type='".$row['instrument_type']."'
+                 data-grade='".$row['grade']."'
+                 data-unit='".$row['unit']."'
+                 data-class='".$row['class']."'
 
                 data-qty='".$row['instru_qty']."' 
                 data-part_number='".$row['part_number']."'
