@@ -24395,7 +24395,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     {
         /*Certificate id == Instrument Id*/
         $this->db->select('*');
-        $this->db->join('tbl_instrument_master','id.id = tbl_storeform_qty_assign.certificate');
+        $this->db->join('tbl_instrument_master','tbl_instrument_master.id = tbl_storeform_qty_assign.certificate');
         $this->db->where(TBL_STOREFORM_QTY_ASSIGN.'.id', $id);
         $this->db->order_by(TBL_STOREFORM_QTY_ASSIGN.'.id','DESC');
         $query = $this->db->get(TBL_STOREFORM_QTY_ASSIGN);
