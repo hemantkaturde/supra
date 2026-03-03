@@ -24010,7 +24010,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $count = 0;
 
         foreach ($result as $row) {
-            $live_quantity = $this->getLiveQtyforInst_uniq_list($raw['sampling_id'],$row['instrument_name'],$row['measuring_size'],$row['grade'],$row['unit'],$row['class'],$row['instrument_type']);
+            $live_quantity = $this->getLiveQtyforInst_uniq_list($raw['sampling_trans_id'],$row['instrument_name'],$row['measuring_size'],$row['grade'],$row['unit'],$row['class'],$row['instrument_type']);
             $data[$count]['instrument_name']  = $row['instrument_name'];
             $data[$count]['grade']            = $row['grade'];
             $data[$count]['unit']             = $row['unit'];
