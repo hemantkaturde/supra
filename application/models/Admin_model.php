@@ -23756,10 +23756,10 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->where('instrument_name', $instrument_name);
         $this->db->where('measuring_size', $measuring_size);
 
-        $this->db->where('type', $measuring_size);
-        $this->db->where('grade', $measuring_size);
-        $this->db->where('unit', $measuring_size);
-        $this->db->where('class', $measuring_size);
+        $this->db->where('type', $instrument_type);
+        $this->db->where('grade', $grade);
+        $this->db->where('unit', $unit);
+        $this->db->where('class', $class);
         $this->db->where('sampling_trans_id', $id);
 
         $assignedRow = $this->db->get()->row_array();
@@ -23771,10 +23771,10 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->where('measuring_size', $measuring_size);
 
         
-        $this->db->where('type', $measuring_size);
-        $this->db->where('grade', $measuring_size);
-        $this->db->where('unit', $measuring_size);
-        $this->db->where('class', $measuring_size);
+        $this->db->where('type', $instrument_type);
+        $this->db->where('grade', $grade);
+        $this->db->where('unit', $unit);
+        $this->db->where('class', $class);
         $this->db->where('sampling_trans_id', $id);
 
         $removedRow = $this->db->get()->row_array();
