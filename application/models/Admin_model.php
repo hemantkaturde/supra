@@ -24252,7 +24252,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     public function getAssignedQtyListData($params,$ticket_no, $instrument_name, $measuring_size, $part_id,$sampling_id,$sampling_trans_id)
     {
-        $this->db->select('*,tbl_storeform_qty_assign.id as tbl_storeform_qty_assign_id,tbl_instrument_master_details.instrument_id as main_instrument_id');
+        $this->db->select('*,tbl_storeform_qty_assign.id as tbl_storeform_qty_assign_id,tbl_instrument_master_details.id as main_instrument_details_id');
         $this->db->from('tbl_storeform_qty_assign');
         $this->db->join('tbl_instrument_master_details','tbl_instrument_master_details.id = tbl_storeform_qty_assign.certificate','left');
         $this->db->where('ticket_no', $ticket_no);
@@ -24305,7 +24305,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 data-qty_live='".$row['qty_live']."'
                 data-part_id='".$part_id."'
                 data-part_number='".$row['instrument_name']."'
-                 data-instrument_id='".$row['main_instrument_id']."'
+                 data-instrument_id='".$row['main_instrument_details_id']."'
                 class='fa fa-pencil-square-o editassignqtyitem getinstrumentcertificate'>
             </i> &nbsp;";
 
