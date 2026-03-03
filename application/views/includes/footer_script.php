@@ -29307,9 +29307,20 @@ $('#export_excel').on('click', function() {
 						$('#measuring_size').val(fetchResponse.measuring_size);
 						//$('#certificate').val(fetchResponse.certificate);
 
-						 $('#certificate')
-            .val(fetchResponse.certificate)
-            .trigger('change');
+								// dropdown build karo
+						var html = '<option value="">Select Instrument ID</option>';
+
+						$.each(data.certificates, function(index, value){
+
+							var selected = (value.id == fetchResponse.certificate) 
+											? 'selected' : '';
+
+							html += '<option value="'+value.id+'" '+selected+'>'
+									+ value.instrument_id + ' - ' + value.due_date +
+									'</option>';
+						});
+
+						$('#certificate').html(html);
 
 						
 					},
