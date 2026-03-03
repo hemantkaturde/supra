@@ -29050,7 +29050,7 @@ $('#export_excel').on('click', function() {
 			$("#type").val($(this).data("type"));
 			$("#grade").val($(this).data("grade"));
 			$("#unit").val($(this).data("unit"));
-			$("#class_1").val($(this).data("class"));
+			$("#class_1").val($(this).data("class_1"));
 			$("#part_number").val($(this).data("part_id"));
 		});
 
