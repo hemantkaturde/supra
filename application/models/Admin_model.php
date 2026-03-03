@@ -23758,8 +23758,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
         $this->db->select('IFNULL(SUM(qty_assign),0) AS total_assign');
         $this->db->from('tbl_storeform_qty_assign');
-        // $this->db->where('instrument_name', $instrument_name);
-        // $this->db->where('measuring_size', $measuring_size);
+        $this->db->where('instrument_name', $instrument_name);
+        $this->db->where('measuring_size', $measuring_size);
         $this->db->where('sampling_trans_id', $id);
 
 
@@ -23770,8 +23770,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $this->db->from('tbl_storeform_qty_assign');
         $this->db->where('sampling_trans_id', $id);
 
-        // $this->db->where('instrument_name', $instrument_name);
-        // $this->db->where('measuring_size', $measuring_size);
+        $this->db->where('instrument_name', $instrument_name);
+        $this->db->where('measuring_size', $measuring_size);
 
         $removedRow = $this->db->get()->row_array();
         $total_removed = (float)$removedRow['total_removed'];
