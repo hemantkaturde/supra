@@ -29252,7 +29252,7 @@ public function editstoreformqtyassigndata() {
                         'grade' => trim($this->input->post('grade')),
                         'unit' => trim($this->input->post('unit')),
                         'class' => trim($this->input->post('class')),
-                        'part_id' => trim($this->input->post('class')),
+                        'part_number' => trim($this->input->post('part_number')),
 
                     );
                 }

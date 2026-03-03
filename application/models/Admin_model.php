@@ -23987,6 +23987,12 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 data-sampling_id ='".$row['sampling_id']."'
                 data-sampling_trans_id ='".$row['sampling_trans_id']."'
                 data-instrument_id ='".$row['instrument_id']."'
+                
+                 data-type='".$row['instrument_type']."'
+                 data-grade='".$row['grade']."'
+                 data-unit='".$row['unit']."'
+                 data-class='".$row['class']."'
+
                 class='fa fa-plus-circle addrejectionitemdata getinstrumentcertificate'>
             </i> &nbsp;";
 

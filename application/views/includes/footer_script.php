@@ -29051,6 +29051,7 @@ $('#export_excel').on('click', function() {
 			$("#grade").val($(this).data("grade"));
 			$("#unit").val($(this).data("unit"));
 			$("#class").val($(this).data("class"));
+			$("#class").val($(this).data("class"));
 		});
 
 
