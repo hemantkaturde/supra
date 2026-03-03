@@ -23735,6 +23735,58 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     }
 
+
+
+    public function getLiveQtyforInst_check_count($id, $instrument_name, $measuring_size ,$instrument_type,$grade,$unit,$class)
+    {
+        $this->db->select('qty');
+        $this->db->from(TBL_INSTRUMENT_MASTER);
+        $this->db->where('instrument_name', $instrument_name);
+        $this->db->where('measuring_size', $measuring_size);
+        $query = $this->db->get()->row_array();
+
+        $quantity_available = !empty($query['qty']) ? (float)$query['qty'] : 0;
+
+        if (empty($instrument_name) || empty($measuring_size)) {
+            return 0;
+        }
+
+        $this->db->select('IFNULL(SUM(qty_assign),0) AS total_assign');
+        $this->db->from('tbl_storeform_qty_assign');
+        $this->db->where('instrument_name', $instrument_name);
+        $this->db->where('measuring_size', $measuring_size);
+
+        $this->db->where('type', $measuring_size);
+        $this->db->where('grade', $measuring_size);
+        $this->db->where('unit', $measuring_size);
+        $this->db->where('class', $measuring_size);
+        $this->db->where('sampling_trans_id', $id);
+
+        $assignedRow = $this->db->get()->row_array();
+        $total_assign = (float)$assignedRow['total_assign'];
+
+        $this->db->select('IFNULL(SUM(qty_removed),0) AS total_removed');
+        $this->db->from('tbl_storeform_qty_assign');
+        $this->db->where('instrument_name', $instrument_name);
+        $this->db->where('measuring_size', $measuring_size);
+
+        
+        $this->db->where('type', $measuring_size);
+        $this->db->where('grade', $measuring_size);
+        $this->db->where('unit', $measuring_size);
+        $this->db->where('class', $measuring_size);
+        $this->db->where('sampling_trans_id', $id);
+
+        $removedRow = $this->db->get()->row_array();
+        $total_removed = (float)$removedRow['total_removed'];
+
+        $live_qty = $quantity_available - $total_assign + $total_removed;
+
+        return ($live_qty > 0) ? $live_qty : 0;
+    }
+
+
+
     public function getLiveQtyforInst($id, $instrument_name, $measuring_size)
     {
         $this->db->select('qty');
@@ -23963,7 +24015,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         $count = 0;
 
         foreach ($result as $row) {
-            $live_quantity = $this->getLiveQtyforInst($id,$row['instrument_name'],$row['measuring_size']);
+            
+            $live_quantity = $this->getLiveQtyforInst_check_count($rqw['sampling_trans_id'],$row['instrument_name'],$row['measuring_size'],$row['instrument_type'],$row['grade'],$row['unit'],$row['class']);
             $data[$count]['instrument_name']  = $row['instrument_name'];
             $data[$count]['grade']            = $row['grade'];
             $data[$count]['unit']             = $row['unit'];
