@@ -24305,7 +24305,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 data-qty_live='".$row['qty_live']."'
                 data-part_id='".$part_id."'
                 data-part_number='".$row['instrument_name']."'
-                class='fa fa-pencil-square-o editassignqtyitem'>
+                data-instrument_id='".$row['instrument_id']."'
+                class='fa fa-pencil-square-o editassignqtyitem getinstrumentcertificate'>
             </i> &nbsp;";
 
             // Delete action (example)
