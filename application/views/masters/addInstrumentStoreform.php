@@ -97,6 +97,7 @@
                <input type="hidden" class="form-control" id="grade" name="grade">
                <input type="hidden" class="form-control" id="unit" name="unit">
                <input type="hidden" class="form-control" id="class" name="class">
+                <input type="hidden" class="form-control" id="part_number" name="class">
 
 
                

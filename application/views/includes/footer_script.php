@@ -29336,13 +29336,14 @@ $('#export_excel').on('click', function() {
 				var grade = $('#grade').val();
 				var unit = $('#unit').val();
 				var class_1 = $('#class').val();
+				var part_id =  $('#part_id').val();
 				
 			
 				
 				$.ajax({
 					url: "<?php echo base_url('editstoreformqtyassigndata'); ?>",
 					type: "POST",
-					data: {"ticket_no_popup": ticket_no_popup,"instrument_name_popup":instrument_name_popup, "measuring_size_popup":measuring_size_popup,"qty_popup":qty_popup, "qty_assign":qty_assign, "qty_remark":qty_remark,"assigned_id":partId,"certificate":certificate,'status':status,'type':type,'grade':grade,'unit':unit,'class':class_1},
+					data: {"ticket_no_popup": ticket_no_popup,"instrument_name_popup":instrument_name_popup, "measuring_size_popup":measuring_size_popup,"qty_popup":qty_popup, "qty_assign":qty_assign, "qty_remark":qty_remark,"assigned_id":partId,"certificate":certificate,'status':status,'type':type,'grade':grade,'unit':unit,'class':class_1,'part_id':part_id},
 					dataType: "json",
 					cache:false,
 					success: function(fetchResponse, textStatus, jqXHR)
