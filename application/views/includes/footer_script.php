@@ -29395,6 +29395,9 @@ $('#export_excel').on('click', function() {
 				var ticket_no = $(this).data("ticket_no") ;
 				var measuring_size = $(this).data("measuring_size");
 				var part_id = $(this).data("part_id");
+
+				var sampling_id  = $('#sampling_id').val();
+				var sampling_trans_id = $('#sampling_trans_id').val();
 				// alert(part_id)
 
 				$("#partsId_popup").val(part_id);
@@ -29431,10 +29434,13 @@ $('#export_excel').on('click', function() {
 										button: "Ok",
 									}, function() {
 										window.location.href = "<?php echo base_url('viewassigninstqtytforticket'); ?>?ticket_no=" 
-											+ ticket_no
-											+ "&instrument_name=" + instrument_name_popup 
-											+ "&measuring_size=" + measuring_size
-											+ "&part_id="+part_id;
+										+ ticket_no_popup 
+										+ "&instrument_name=" + instrument_name_popup 
+										+ "&measuring_size=" + measuring_size
+										+ "&part_id=" + part_id
+										+ "&part_number=" + part_number
+										+ "&sampling_id=" + sampling_id
+										+ "&sampling_trans_id=" + sampling_trans_id;
 									});
 								}
 
