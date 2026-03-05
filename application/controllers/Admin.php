@@ -29231,7 +29231,7 @@ public function editstoreformqtyassigndata() {
                         'qty_assign'  => trim($this->input->post('qty_assign')),
                         'qty_remark'  => trim($this->input->post('qty_remark')),
                         'certificate' => trim($this->input->post('certificate')),
-                        'status' => trim($this->input->post('certificate')),
+                        'status' => trim($this->input->post('status')),
                     );
                 }
                 // If insert new row
@@ -29246,7 +29246,7 @@ public function editstoreformqtyassigndata() {
                         'measuring_size'    => trim($this->input->post('measuring_size_popup')),
                         'qty_available'     => trim($this->input->post('qty_popup')),
                         'certificate'       => trim($this->input->post('certificate')),
-                        'status' => trim($this->input->post('certificate')),
+                        'status' => trim($this->input->post('status')),
 
                         'type' => trim($this->input->post('type')),
                         'grade' => trim($this->input->post('grade')),
