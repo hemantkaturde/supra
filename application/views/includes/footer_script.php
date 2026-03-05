@@ -29394,7 +29394,7 @@ $('#export_excel').on('click', function() {
 				var elemF = $(this);
 				e.preventDefault();
 				var instrument_name_popup = $(this).data("instrument_name");
-				var ticket_no = $(this).data("ticket_no") ;
+				var ticket_no =  $('#ticket_no').val();
 				var measuring_size = $(this).data("measuring_size");
 				var part_id = $(this).data("part_id");
 				var part_number = $('#part_number').val();
