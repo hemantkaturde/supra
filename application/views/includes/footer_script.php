@@ -29438,7 +29438,7 @@ $('#export_excel').on('click', function() {
 										button: "Ok",
 									}, function() {
 										window.location.href = "<?php echo base_url('viewassigninstqtytforticket'); ?>?ticket_no=" 
-										+ ticket_no_popup 
+										+ ticket_no 
 										+ "&instrument_name=" + instrument_name_popup 
 										+ "&measuring_size=" + measuring_size
 										+ "&part_id=" + part_id
