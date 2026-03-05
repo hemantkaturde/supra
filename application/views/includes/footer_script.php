@@ -29299,8 +29299,7 @@ $('#export_excel').on('click', function() {
 					success: function(data, textStatus, jqXHR) {
 						var fetchResponse = $.parseJSON(data);
 
-						alert(fetchResponse.certificate);
-						$('#addNewModal').modal('show');
+						
 						$('#assigned_id').val(fetchResponse.id);
 						$('#qty_assign').val(fetchResponse.qty_assign);
 						$('#qty_remark').val(fetchResponse.qty_remark);
@@ -29309,7 +29308,7 @@ $('#export_excel').on('click', function() {
 						$('#measuring_size').val(fetchResponse.measuring_size);
 						$('#certificate').val(fetchResponse.certificate).trigger('change');
 
-						
+						$('#addNewModal').modal('show');
 						
 					},
 					error: function(jqXHR, textStatus, errorThrown) {
