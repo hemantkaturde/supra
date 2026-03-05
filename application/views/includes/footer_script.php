@@ -29298,6 +29298,8 @@ $('#export_excel').on('click', function() {
 					data: 'id=' + item_id,
 					success: function(data, textStatus, jqXHR) {
 						var fetchResponse = $.parseJSON(data);
+
+						alert(fetchResponse.certificate);
 						$('#addNewModal').modal('show');
 						$('#assigned_id').val(fetchResponse.id);
 						$('#qty_assign').val(fetchResponse.qty_assign);
@@ -29305,23 +29307,9 @@ $('#export_excel').on('click', function() {
 						$('#ticket_no').val(fetchResponse.ticket_no);
 						$('#instrument_name').val(fetchResponse.instrument_name);
 						$('#measuring_size').val(fetchResponse.measuring_size);
-						//$('#certificate').val(fetchResponse.certificate);
+						$('#certificate').val(fetchResponse.certificate);
 
-								// dropdown build karo
-						var html = '<option value="">Select Instrument ID</option>';
-
-						$.each(data.certificates, function(index, value){
-
-							var selected = (value.id == fetchResponse.certificate) 
-											? 'selected' : '';
-
-							html += '<option value="'+value.id+'" '+selected+'>'
-									+ value.instrument_id + ' - ' + value.due_date +
-									'</option>';
-						});
-
-						$('#certificate').html(html);
-
+						
 						
 					},
 					error: function(jqXHR, textStatus, errorThrown) {
