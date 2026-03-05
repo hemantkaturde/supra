@@ -29396,6 +29396,8 @@ $('#export_excel').on('click', function() {
 				var measuring_size = $(this).data("measuring_size");
 				var part_id = $(this).data("part_id");
 
+
+				var ticket_no_popup = $('#ticket_no_popup').val();
 				var sampling_id  = $('#sampling_id').val();
 				var sampling_trans_id = $('#sampling_trans_id').val();
 				// alert(part_id)
