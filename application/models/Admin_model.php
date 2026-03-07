@@ -24180,19 +24180,7 @@ $this->db->join(
     TBL_INSTRUMENT_MASTER,
     TBL_INSTRUMENT_MASTER.'.instrument_name = '.TBL_SAMPLING_MASTER_TRANS.'.instrument_name
     AND '.TBL_INSTRUMENT_MASTER.'.measuring_size = '.TBL_SAMPLING_MASTER_TRANS.'.measuring_size
-    AND '.TBL_INSTRUMENT_MASTER.'.type = '.TBL_SAMPLING_MASTER_TRANS.'.type
-    AND (
-        '.TBL_INSTRUMENT_MASTER.'.class = '.TBL_SAMPLING_MASTER_TRANS.'.class
-        OR '.TBL_INSTRUMENT_MASTER.'.class IS NULL
-    )
-    AND (
-        '.TBL_INSTRUMENT_MASTER.'.grade = '.TBL_SAMPLING_MASTER_TRANS.'.grade
-        OR '.TBL_INSTRUMENT_MASTER.'.grade IS NULL
-    )
-    AND (
-        '.TBL_INSTRUMENT_MASTER.'.unit = '.TBL_SAMPLING_MASTER_TRANS.'.unit
-        OR '.TBL_INSTRUMENT_MASTER.'.unit IS NULL
-    )',
+    AND '.TBL_INSTRUMENT_MASTER.'.type = '.TBL_SAMPLING_MASTER_TRANS.'.type',
     'left'
 );
 
