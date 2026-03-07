@@ -23825,502 +23825,325 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         return ($live_qty > 0) ? $live_qty : 0;
     }
 
-    // public function getSamplingInstrumnetDataBypartIddata($params, $id, $ticket_no)
-    // {
-    //     // $this->db->select('
-    //     //     '.TBL_SAMPLING_MASTER.'.*,
-    //     //     '.TBL_FINISHED_GOODS.'.part_number,
-    //     //     '.TBL_FINISHED_GOODS.'.fin_id,
-    //     //     '.TBL_SAMPLING_MASTER_TRANS.'.instrument_name,
-    //     //     '.TBL_SAMPLING_MASTER_TRANS.'.measuring_size,
-    //     //     '.TBL_INSTRUMENT_MASTER.'.grade,
-    //     //     '.TBL_INSTRUMENT_MASTER.'.unit,
-    //     //     '.TBL_INSTRUMENT_MASTER.'.class,
-    //     //     '.TBL_INSTRUMENT_MASTER.'.type,
-    //     //     '.TBL_INSTRUMENT_MASTER.'.qty,
-    //     //     '.TBL_INSTRUMENT_MASTER.'.remark
-    //     // ');
+    public function getSamplingInstrumnetDataBypartIddata($params, $id, $ticket_no)
+    {
+        // $this->db->select('
+        //     '.TBL_SAMPLING_MASTER.'.*,
+        //     '.TBL_FINISHED_GOODS.'.part_number,
+        //     '.TBL_FINISHED_GOODS.'.fin_id,
+        //     '.TBL_SAMPLING_MASTER_TRANS.'.instrument_name,
+        //     '.TBL_SAMPLING_MASTER_TRANS.'.measuring_size,
+        //     '.TBL_INSTRUMENT_MASTER.'.grade,
+        //     '.TBL_INSTRUMENT_MASTER.'.unit,
+        //     '.TBL_INSTRUMENT_MASTER.'.class,
+        //     '.TBL_INSTRUMENT_MASTER.'.type,
+        //     '.TBL_INSTRUMENT_MASTER.'.qty,
+        //     '.TBL_INSTRUMENT_MASTER.'.remark
+        // ');
 
-    //     // // Search filter
-    //     // if ($params['search']['value'] != "") 
-    //     // {
-    //     //     $search = $params['search']['value'];
-    //     //     $this->db->where("("
-    //     //         .TBL_SAMPLING_MASTER.".id LIKE '%$search%' 
-    //     //         OR ".TBL_FINISHED_GOODS.".part_number LIKE '%$search%'
-    //     //         OR ".TBL_SAMPLING_MASTER_TRANS.".instrument_name LIKE '%$search%'
-    //     //         OR ".TBL_SAMPLING_MASTER_TRANS.".measuring_size LIKE '%$search%'
-    //     //         OR ".TBL_INSTRUMENT_MASTER.".grade LIKE '%$search%'
-    //     //         OR ".TBL_INSTRUMENT_MASTER.".unit LIKE '%$search%'
-    //     //         OR ".TBL_INSTRUMENT_MASTER.".class LIKE '%$search%'
-    //     //         OR ".TBL_INSTRUMENT_MASTER.".type LIKE '%$search%'
-    //     //         OR ".TBL_INSTRUMENT_MASTER.".qty LIKE '%$search%'
-    //     //         OR ".TBL_SAMPLING_MASTER_TRANS.".remark LIKE '%$search%'
-    //     //     )");
-    //     // }
+        // // Search filter
+        // if ($params['search']['value'] != "") 
+        // {
+        //     $search = $params['search']['value'];
+        //     $this->db->where("("
+        //         .TBL_SAMPLING_MASTER.".id LIKE '%$search%' 
+        //         OR ".TBL_FINISHED_GOODS.".part_number LIKE '%$search%'
+        //         OR ".TBL_SAMPLING_MASTER_TRANS.".instrument_name LIKE '%$search%'
+        //         OR ".TBL_SAMPLING_MASTER_TRANS.".measuring_size LIKE '%$search%'
+        //         OR ".TBL_INSTRUMENT_MASTER.".grade LIKE '%$search%'
+        //         OR ".TBL_INSTRUMENT_MASTER.".unit LIKE '%$search%'
+        //         OR ".TBL_INSTRUMENT_MASTER.".class LIKE '%$search%'
+        //         OR ".TBL_INSTRUMENT_MASTER.".type LIKE '%$search%'
+        //         OR ".TBL_INSTRUMENT_MASTER.".qty LIKE '%$search%'
+        //         OR ".TBL_SAMPLING_MASTER_TRANS.".remark LIKE '%$search%'
+        //     )");
+        // }
 
-    //     // $this->db->from(TBL_SAMPLING_MASTER);
+        // $this->db->from(TBL_SAMPLING_MASTER);
 
-    //     // $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_SAMPLING_MASTER.'.part_number_id', 'left');
+        // $this->db->join(TBL_FINISHED_GOODS, TBL_FINISHED_GOODS.'.fin_id = '.TBL_SAMPLING_MASTER.'.part_number_id', 'left');
 
-    //     // $this->db->join(
-    //     //     TBL_SAMPLING_MASTER_TRANS, 
-    //     //     TBL_SAMPLING_MASTER_TRANS.'.sampling_master_id = '.TBL_SAMPLING_MASTER.'.id 
-    //     //     AND '.TBL_SAMPLING_MASTER_TRANS.'.status = 1',
-    //     //     'left'
-    //     // );
+        // $this->db->join(
+        //     TBL_SAMPLING_MASTER_TRANS, 
+        //     TBL_SAMPLING_MASTER_TRANS.'.sampling_master_id = '.TBL_SAMPLING_MASTER.'.id 
+        //     AND '.TBL_SAMPLING_MASTER_TRANS.'.status = 1',
+        //     'left'
+        // );
 
-    //     // $this->db->join(
-    //     //     TBL_INSTRUMENT_MASTER, 
-    //     //     TBL_INSTRUMENT_MASTER.'.instrument_name = '.TBL_SAMPLING_MASTER_TRANS.'.instrument_name
-    //     //     AND '.TBL_INSTRUMENT_MASTER.'.measuring_size = '.TBL_SAMPLING_MASTER_TRANS.'.measuring_size',
-    //     //     'left'
-    //     // );
+        // $this->db->join(
+        //     TBL_INSTRUMENT_MASTER, 
+        //     TBL_INSTRUMENT_MASTER.'.instrument_name = '.TBL_SAMPLING_MASTER_TRANS.'.instrument_name
+        //     AND '.TBL_INSTRUMENT_MASTER.'.measuring_size = '.TBL_SAMPLING_MASTER_TRANS.'.measuring_size',
+        //     'left'
+        // );
 
-    //     // $this->db->where(TBL_FINISHED_GOODS.'.fin_id', $id);
-    //     // $this->db->limit($params['length'], $params['start']);
-    //     // $this->db->order_by(TBL_SAMPLING_MASTER.'.id', 'DESC');
+        // $this->db->where(TBL_FINISHED_GOODS.'.fin_id', $id);
+        // $this->db->limit($params['length'], $params['start']);
+        // $this->db->order_by(TBL_SAMPLING_MASTER.'.id', 'DESC');
 
-    //     // $query  = $this->db->get();
-    //     // $result = $query->result_array();
-    //     // $data = [];
-    //     // $count = 0;
+        // $query  = $this->db->get();
+        // $result = $query->result_array();
+        // $data = [];
+        // $count = 0;
 
-    //     // foreach ($result as $row) {
-    //     //     $live_quantity = $this->getLiveQtyforInst($id,$row['instrument_name'],$row['measuring_size']);
-    //     //     $data[$count]['instrument_name']  = $row['instrument_name'];
-    //     //     $data[$count]['grade']            = $row['grade'];
-    //     //     $data[$count]['unit']             = $row['unit'];
-    //     //     $data[$count]['class']            = $row['class'];
-    //     //     $data[$count]['measuring_size']   = $row['measuring_size'];
-    //     //     $data[$count]['type']             = $row['type'];
-    //     //     $data[$count]['remark']           = $row['remark'];
-    //     //     $data[$count]['qty']              = $row['qty'];
-    //     //     $data[$count]['live_qty']         = $live_quantity; 
-    //     //     $data[$count]['action']  = "";
-    //     //     $data[$count]['action'] .= "
-    //     //     <i  style='font-size:x-large; cursor:pointer; color:#3c8dbc;' 
-    //     //         data-toggle='modal' 
-    //     //         data-target='#addNewModal'
-    //     //         data-part_id='".$id."'
-    //     //         data-ticket_no='".$ticket_no."'
-    //     //         data-instrument_name='".$row['instrument_name']."'
-    //     //         data-measuring_size='".$row['measuring_size']."'
-    //     //         data-qty='".$row['qty']."' 
-    //     //         data-part_number='".$row['part_number']."'
-    //     //         class='fa fa-plus-circle addrejectionitemdata'>
-    //     //     </i> &nbsp;";
+        // foreach ($result as $row) {
+        //     $live_quantity = $this->getLiveQtyforInst($id,$row['instrument_name'],$row['measuring_size']);
+        //     $data[$count]['instrument_name']  = $row['instrument_name'];
+        //     $data[$count]['grade']            = $row['grade'];
+        //     $data[$count]['unit']             = $row['unit'];
+        //     $data[$count]['class']            = $row['class'];
+        //     $data[$count]['measuring_size']   = $row['measuring_size'];
+        //     $data[$count]['type']             = $row['type'];
+        //     $data[$count]['remark']           = $row['remark'];
+        //     $data[$count]['qty']              = $row['qty'];
+        //     $data[$count]['live_qty']         = $live_quantity; 
+        //     $data[$count]['action']  = "";
+        //     $data[$count]['action'] .= "
+        //     <i  style='font-size:x-large; cursor:pointer; color:#3c8dbc;' 
+        //         data-toggle='modal' 
+        //         data-target='#addNewModal'
+        //         data-part_id='".$id."'
+        //         data-ticket_no='".$ticket_no."'
+        //         data-instrument_name='".$row['instrument_name']."'
+        //         data-measuring_size='".$row['measuring_size']."'
+        //         data-qty='".$row['qty']."' 
+        //         data-part_number='".$row['part_number']."'
+        //         class='fa fa-plus-circle addrejectionitemdata'>
+        //     </i> &nbsp;";
 
-    //     //             $data[$count]['action'] .= "
-    //     //     <a href='".ADMIN_PATH."viewassigninstqtytforticket?ticket_no=".$ticket_no."&instrument_name=".$row['instrument_name']."&measuring_size=".$row['measuring_size']."&part_id=".$id."&part_number=".$row['part_number']."' style='cursor: pointer;' target='_blank'>
-    //     //     <i style='font-size: x-large;cursor: pointer;' class='fa fa-eye' aria-hidden='true'></i>
-    //     //     </a>";
-
-
-    //     //     $data[$count]['action'] .= "
-    //     //     <i  style='font-size:x-large; cursor:pointer; color:#3c8dbc;' 
-    //     //         data-toggle='modal' 
-    //     //         data-target='#removeNewModal'
-    //     //         data-part_id='".$id."'
-    //     //         data-ticket_no='".$ticket_no."'
-    //     //         data-instrument_name='".$row['instrument_name']."'
-    //     //         data-measuring_size='".$row['measuring_size']."'
-    //     //         data-qty='".$row['qty']."'
-    //     //         data-part_number='".$row['part_number']."' 
-    //     //         class='fa fa-minus-circle addrejectionitemdata'>
-    //     //     </i> &nbsp;";
+        //             $data[$count]['action'] .= "
+        //     <a href='".ADMIN_PATH."viewassigninstqtytforticket?ticket_no=".$ticket_no."&instrument_name=".$row['instrument_name']."&measuring_size=".$row['measuring_size']."&part_id=".$id."&part_number=".$row['part_number']."' style='cursor: pointer;' target='_blank'>
+        //     <i style='font-size: x-large;cursor: pointer;' class='fa fa-eye' aria-hidden='true'></i>
+        //     </a>";
 
 
-    //     //     $data[$count]['action'] .= "
-    //     //     <a href='".ADMIN_PATH."viewremovedinstqtytforticket?ticket_no=".$ticket_no."&instrument_name=".$row['instrument_name']."&measuring_size=".$row['measuring_size']."&part_id=".$id."&part_number=".$row['part_number']."' style='cursor: pointer;' target='_blank'>
-    //     //     <i style='font-size: x-large;cursor: pointer;' class='fa fa-eye' aria-hidden='true'></i>
-    //     //     </a>";
-    //     //     $count++;
-    //     // }
+        //     $data[$count]['action'] .= "
+        //     <i  style='font-size:x-large; cursor:pointer; color:#3c8dbc;' 
+        //         data-toggle='modal' 
+        //         data-target='#removeNewModal'
+        //         data-part_id='".$id."'
+        //         data-ticket_no='".$ticket_no."'
+        //         data-instrument_name='".$row['instrument_name']."'
+        //         data-measuring_size='".$row['measuring_size']."'
+        //         data-qty='".$row['qty']."'
+        //         data-part_number='".$row['part_number']."' 
+        //         class='fa fa-minus-circle addrejectionitemdata'>
+        //     </i> &nbsp;";
 
-    //     // return $data;
 
-    //     $this->db->select('
-    //         '.TBL_SAMPLING_MASTER.'.id AS sampling_id,
-    //         '.TBL_FINISHED_GOODS.'.part_number,
-    //         '.TBL_FINISHED_GOODS.'.fin_id,
+        //     $data[$count]['action'] .= "
+        //     <a href='".ADMIN_PATH."viewremovedinstqtytforticket?ticket_no=".$ticket_no."&instrument_name=".$row['instrument_name']."&measuring_size=".$row['measuring_size']."&part_id=".$id."&part_number=".$row['part_number']."' style='cursor: pointer;' target='_blank'>
+        //     <i style='font-size: x-large;cursor: pointer;' class='fa fa-eye' aria-hidden='true'></i>
+        //     </a>";
+        //     $count++;
+        // }
 
-    //         '.TBL_SAMPLING_MASTER_TRANS.'.instrument_name,
-    //         '.TBL_SAMPLING_MASTER_TRANS.'.measuring_size,
+        // return $data;
 
-    //         '.TBL_INSTRUMENT_MASTER.'.grade as instru_grade,
-    //         '.TBL_INSTRUMENT_MASTER.'.unit,
-    //         '.TBL_SAMPLING_MASTER_TRANS.'.class,
-    //         '.TBL_SAMPLING_MASTER_TRANS.'.type as instrument_type,
-    //         '.TBL_SAMPLING_MASTER_TRANS.'.id as sampling_trans_id ,
-    //         '.TBL_INSTRUMENT_MASTER.'.qty as instru_qty,
-    //         '.TBL_INSTRUMENT_MASTER.'.remark,
-    //         '.TBL_INSTRUMENT_MASTER.'.id as instrument_id
-    //     ');
+        $this->db->select('
+            '.TBL_SAMPLING_MASTER.'.id AS sampling_id,
+            '.TBL_FINISHED_GOODS.'.part_number,
+            '.TBL_FINISHED_GOODS.'.fin_id,
 
-    //     /* 🔍 SEARCH FILTER */
-    //     if (!empty($params['search']['value'])) {
-    //         $search = $params['search']['value'];
-    //         $this->db->group_start()
-    //             ->like(TBL_SAMPLING_MASTER.'.id', $search)
-    //             ->or_like(TBL_FINISHED_GOODS.'.part_number', $search)
-    //             ->or_like(TBL_SAMPLING_MASTER_TRANS.'.instrument_name', $search)
-    //             ->or_like(TBL_SAMPLING_MASTER_TRANS.'.measuring_size', $search)
-    //             ->or_like(TBL_INSTRUMENT_MASTER.'.grade', $search)
-    //             ->or_like(TBL_INSTRUMENT_MASTER.'.unit', $search)
-    //             ->or_like(TBL_INSTRUMENT_MASTER.'.class', $search)
-    //             ->or_like(TBL_INSTRUMENT_MASTER.'.type', $search)
-    //             ->or_like(TBL_INSTRUMENT_MASTER.'.qty', $search)
-    //             ->or_like(TBL_INSTRUMENT_MASTER.'.remark', $search)
-    //         ->group_end();
-    //     }
+            '.TBL_SAMPLING_MASTER_TRANS.'.instrument_name,
+            '.TBL_SAMPLING_MASTER_TRANS.'.measuring_size,
 
-    //     $this->db->from(TBL_SAMPLING_MASTER);
+            '.TBL_INSTRUMENT_MASTER.'.grade as instru_grade,
+            '.TBL_INSTRUMENT_MASTER.'.unit,
+            '.TBL_SAMPLING_MASTER_TRANS.'.class,
+            '.TBL_SAMPLING_MASTER_TRANS.'.type as instrument_type,
+            '.TBL_SAMPLING_MASTER_TRANS.'.id as sampling_trans_id ,
+            '.TBL_INSTRUMENT_MASTER.'.qty as instru_qty,
+            '.TBL_INSTRUMENT_MASTER.'.remark,
+            '.TBL_INSTRUMENT_MASTER.'.id as instrument_id
+        ');
 
-    //     $this->db->join(
-    //         TBL_FINISHED_GOODS,
-    //         TBL_FINISHED_GOODS.'.fin_id = '.TBL_SAMPLING_MASTER.'.part_number_id',
-    //         'left'
-    //     );
+        /* 🔍 SEARCH FILTER */
+        if (!empty($params['search']['value'])) {
+            $search = $params['search']['value'];
+            $this->db->group_start()
+                ->like(TBL_SAMPLING_MASTER.'.id', $search)
+                ->or_like(TBL_FINISHED_GOODS.'.part_number', $search)
+                ->or_like(TBL_SAMPLING_MASTER_TRANS.'.instrument_name', $search)
+                ->or_like(TBL_SAMPLING_MASTER_TRANS.'.measuring_size', $search)
+                ->or_like(TBL_INSTRUMENT_MASTER.'.grade', $search)
+                ->or_like(TBL_INSTRUMENT_MASTER.'.unit', $search)
+                ->or_like(TBL_INSTRUMENT_MASTER.'.class', $search)
+                ->or_like(TBL_INSTRUMENT_MASTER.'.type', $search)
+                ->or_like(TBL_INSTRUMENT_MASTER.'.qty', $search)
+                ->or_like(TBL_INSTRUMENT_MASTER.'.remark', $search)
+            ->group_end();
+        }
 
-    //     $this->db->join(
-    //         TBL_SAMPLING_MASTER_TRANS,
-    //         TBL_SAMPLING_MASTER_TRANS.'.sampling_master_id = '.TBL_SAMPLING_MASTER.'.id
-    //         AND '.TBL_SAMPLING_MASTER_TRANS.'.status = 1',
-    //         'left'
-    //     );
+        $this->db->from(TBL_SAMPLING_MASTER);
 
-    //     // $this->db->join(
-    //     //     TBL_INSTRUMENT_MASTER,
-    //     //     TBL_INSTRUMENT_MASTER.'.instrument_name = '.TBL_SAMPLING_MASTER_TRANS.'.instrument_name
-    //     //     AND '.TBL_INSTRUMENT_MASTER.'.measuring_size = '.TBL_SAMPLING_MASTER_TRANS.'.measuring_size
-    //     //     AND '.TBL_INSTRUMENT_MASTER.'.type = '.TBL_SAMPLING_MASTER_TRANS.'.type
-    //     //     AND '.TBL_INSTRUMENT_MASTER.'.class = '.TBL_SAMPLING_MASTER_TRANS.'.class
-    //     //     AND '.TBL_INSTRUMENT_MASTER.'.grade = '.TBL_SAMPLING_MASTER_TRANS.'.grade
-    //     //     AND '.TBL_INSTRUMENT_MASTER.'.unit = '.TBL_SAMPLING_MASTER_TRANS.'.unit',
-    //     //     'left'
-    //     // );
+        $this->db->join(
+            TBL_FINISHED_GOODS,
+            TBL_FINISHED_GOODS.'.fin_id = '.TBL_SAMPLING_MASTER.'.part_number_id',
+            'left'
+        );
 
-    //      $this->db->join(
-    //         TBL_INSTRUMENT_MASTER,
-    //         TBL_INSTRUMENT_MASTER.'.instrument_name = '.TBL_SAMPLING_MASTER_TRANS.'.instrument_name
+        $this->db->join(
+            TBL_SAMPLING_MASTER_TRANS,
+            TBL_SAMPLING_MASTER_TRANS.'.sampling_master_id = '.TBL_SAMPLING_MASTER.'.id
+            AND '.TBL_SAMPLING_MASTER_TRANS.'.status = 1',
+            'left'
+        );
 
-    //         AND (
-    //             '.TBL_SAMPLING_MASTER_TRANS.'.measuring_size IS NULL 
-    //             OR '.TBL_INSTRUMENT_MASTER.'.measuring_size = '.TBL_SAMPLING_MASTER_TRANS.'.measuring_size
-    //         )
+        // $this->db->join(
+        //     TBL_INSTRUMENT_MASTER,
+        //     TBL_INSTRUMENT_MASTER.'.instrument_name = '.TBL_SAMPLING_MASTER_TRANS.'.instrument_name
+        //     AND '.TBL_INSTRUMENT_MASTER.'.measuring_size = '.TBL_SAMPLING_MASTER_TRANS.'.measuring_size
+        //     AND '.TBL_INSTRUMENT_MASTER.'.type = '.TBL_SAMPLING_MASTER_TRANS.'.type
+        //     AND '.TBL_INSTRUMENT_MASTER.'.class = '.TBL_SAMPLING_MASTER_TRANS.'.class
+        //     AND '.TBL_INSTRUMENT_MASTER.'.grade = '.TBL_SAMPLING_MASTER_TRANS.'.grade
+        //     AND '.TBL_INSTRUMENT_MASTER.'.unit = '.TBL_SAMPLING_MASTER_TRANS.'.unit',
+        //     'left'
+        // );
 
-    //         AND (
-    //             '.TBL_SAMPLING_MASTER_TRANS.'.type IS NULL 
-    //             OR '.TBL_INSTRUMENT_MASTER.'.type = '.TBL_SAMPLING_MASTER_TRANS.'.type
-    //         )
+         $this->db->join(
+            TBL_INSTRUMENT_MASTER,
+            TBL_INSTRUMENT_MASTER.'.instrument_name = '.TBL_SAMPLING_MASTER_TRANS.'.instrument_name
 
-    //         AND (
-    //             '.TBL_SAMPLING_MASTER_TRANS.'.class IS NULL 
-    //             OR '.TBL_INSTRUMENT_MASTER.'.class = '.TBL_SAMPLING_MASTER_TRANS.'.class
-    //         )
+            AND (
+                '.TBL_SAMPLING_MASTER_TRANS.'.measuring_size IS NULL 
+                OR '.TBL_INSTRUMENT_MASTER.'.measuring_size = '.TBL_SAMPLING_MASTER_TRANS.'.measuring_size
+            )
 
-    //         AND (
-    //             '.TBL_SAMPLING_MASTER_TRANS.'.grade IS NULL 
-    //             OR '.TBL_INSTRUMENT_MASTER.'.grade = '.TBL_SAMPLING_MASTER_TRANS.'.grade
-    //         )
+            AND (
+                '.TBL_SAMPLING_MASTER_TRANS.'.type IS NULL 
+                OR '.TBL_INSTRUMENT_MASTER.'.type = '.TBL_SAMPLING_MASTER_TRANS.'.type
+            )
 
-    //         AND (
-    //             '.TBL_SAMPLING_MASTER_TRANS.'.unit IS NULL 
-    //             OR '.TBL_INSTRUMENT_MASTER.'.unit = '.TBL_SAMPLING_MASTER_TRANS.'.unit
-    //         )
-    //     ',
-    //     'left'
-    //     );
+            AND (
+                '.TBL_SAMPLING_MASTER_TRANS.'.class IS NULL 
+                OR '.TBL_INSTRUMENT_MASTER.'.class = '.TBL_SAMPLING_MASTER_TRANS.'.class
+            )
+
+            AND (
+                '.TBL_SAMPLING_MASTER_TRANS.'.grade IS NULL 
+                OR '.TBL_INSTRUMENT_MASTER.'.grade = '.TBL_SAMPLING_MASTER_TRANS.'.grade
+            )
+
+            AND (
+                '.TBL_SAMPLING_MASTER_TRANS.'.unit IS NULL 
+                OR '.TBL_INSTRUMENT_MASTER.'.unit = '.TBL_SAMPLING_MASTER_TRANS.'.unit
+            )
+        ',
+        'left'
+        );
 
         
-    //     // $this->db->join(
-    //     //     TBL_INSTRUMENT_MASTER,
-    //     //     TBL_INSTRUMENT_MASTER.'.instrument_name = '.TBL_SAMPLING_MASTER_TRANS.'.instrument_name
-    //     //     OR '.TBL_INSTRUMENT_MASTER.'.measuring_size = '.TBL_SAMPLING_MASTER_TRANS.'.measuring_size
-    //     //     OR '.TBL_INSTRUMENT_MASTER.'.class = '.TBL_SAMPLING_MASTER_TRANS.'.class'
-    //     // );
+        // $this->db->join(
+        //     TBL_INSTRUMENT_MASTER,
+        //     TBL_INSTRUMENT_MASTER.'.instrument_name = '.TBL_SAMPLING_MASTER_TRANS.'.instrument_name
+        //     OR '.TBL_INSTRUMENT_MASTER.'.measuring_size = '.TBL_SAMPLING_MASTER_TRANS.'.measuring_size
+        //     OR '.TBL_INSTRUMENT_MASTER.'.class = '.TBL_SAMPLING_MASTER_TRANS.'.class'
+        // );
 
 
-    //     $this->db->where(TBL_FINISHED_GOODS.'.fin_id', $id);
+        $this->db->where(TBL_FINISHED_GOODS.'.fin_id', $id);
 
-    //     /* ✅ DUPLICATE REMOVE */
-    //     $this->db->group_by([
-    //         TBL_SAMPLING_MASTER_TRANS.'.instrument_name',
-    //         TBL_SAMPLING_MASTER_TRANS.'.measuring_size',
-    //         TBL_SAMPLING_MASTER_TRANS.'.type',
-    //         TBL_SAMPLING_MASTER_TRANS.'.class',
-    //         TBL_SAMPLING_MASTER_TRANS.'.grade',
-    //         TBL_SAMPLING_MASTER_TRANS.'.unit',
+        /* ✅ DUPLICATE REMOVE */
+        $this->db->group_by([
+            TBL_SAMPLING_MASTER_TRANS.'.instrument_name',
+            TBL_SAMPLING_MASTER_TRANS.'.measuring_size',
+            TBL_SAMPLING_MASTER_TRANS.'.type',
+            TBL_SAMPLING_MASTER_TRANS.'.class',
+            TBL_SAMPLING_MASTER_TRANS.'.grade',
+            TBL_SAMPLING_MASTER_TRANS.'.unit',
             
-    //     ]);
+        ]);
 
-    //     $this->db->order_by(TBL_SAMPLING_MASTER_TRANS.'.id', 'DESC');
-    //     $this->db->limit($params['length'], $params['start']);
+        $this->db->order_by(TBL_SAMPLING_MASTER_TRANS.'.id', 'DESC');
+        $this->db->limit($params['length'], $params['start']);
 
-    //     $query  = $this->db->get();
-    //     $result = $query->result_array();
+        $query  = $this->db->get();
+        $result = $query->result_array();
 
 
-    //     $data = [];
-    //     $count = 0;
+        $data = [];
+        $count = 0;
 
-    //     foreach ($result as $row) {
+        foreach ($result as $row) {
             
-    //         $live_quantity = $this->getLiveQtyforInst_check_count($rqw['sampling_trans_id'],$row['instrument_name'],$row['measuring_size'],$row['instrument_type'],$row['grade'],$row['unit'],$row['class']);
+            $live_quantity = $this->getLiveQtyforInst_check_count($rqw['sampling_trans_id'],$row['instrument_name'],$row['measuring_size'],$row['instrument_type'],$row['grade'],$row['unit'],$row['class']);
           
           
-    //         $data[$count]['instrument_name']  = $row['instrument_name'];
-    //         $data[$count]['grade']            = $row['instru_grade'];
-    //         $data[$count]['unit']             = $row['unit'];
-    //         $data[$count]['class']            = $row['class'];
-    //         $data[$count]['measuring_size']   = $row['measuring_size'];
-    //         $data[$count]['type']             = $row['instrument_type'];
-    //         $data[$count]['remark']           = $row['remark'];
-    //         $data[$count]['qty']              = $row['instru_qty'];
-    //         $data[$count]['live_qty']         = $live_quantity; 
-    //         $data[$count]['action']  = "";
-    //         $data[$count]['action'] .= "
-    //         <i  style='font-size:x-large; cursor:pointer; color:#3c8dbc;' 
-    //             data-toggle='modal' 
-    //             data-target='#addNewModal'
-    //             data-part_id='".$id."'
-    //             data-ticket_no='".$ticket_no."'
-    //             data-instrument_name='".$row['instrument_name']."'
-    //             data-measuring_size='".$row['measuring_size']."'
-    //             data-qty='".$row['instru_qty']."' 
-    //             data-part_number='".$row['part_number']."'
-    //             data-sampling_id ='".$row['sampling_id']."'
-    //             data-sampling_trans_id ='".$row['sampling_trans_id']."'
-    //             data-instrument_id ='".$row['instrument_id']."'
+            $data[$count]['instrument_name']  = $row['instrument_name'];
+            $data[$count]['grade']            = $row['instru_grade'];
+            $data[$count]['unit']             = $row['unit'];
+            $data[$count]['class']            = $row['class'];
+            $data[$count]['measuring_size']   = $row['measuring_size'];
+            $data[$count]['type']             = $row['instrument_type'];
+            $data[$count]['remark']           = $row['remark'];
+            $data[$count]['qty']              = $row['instru_qty'];
+            $data[$count]['live_qty']         = $live_quantity; 
+            $data[$count]['action']  = "";
+            $data[$count]['action'] .= "
+            <i  style='font-size:x-large; cursor:pointer; color:#3c8dbc;' 
+                data-toggle='modal' 
+                data-target='#addNewModal'
+                data-part_id='".$id."'
+                data-ticket_no='".$ticket_no."'
+                data-instrument_name='".$row['instrument_name']."'
+                data-measuring_size='".$row['measuring_size']."'
+                data-qty='".$row['instru_qty']."' 
+                data-part_number='".$row['part_number']."'
+                data-sampling_id ='".$row['sampling_id']."'
+                data-sampling_trans_id ='".$row['sampling_trans_id']."'
+                data-instrument_id ='".$row['instrument_id']."'
 
-    //              data-type='".$row['instrument_type']."'
-    //              data-grade='".$row['grade']."'
-    //              data-unit='".$row['unit']."'
-    //              data-class_1='".$row['class']."'
+                 data-type='".$row['instrument_type']."'
+                 data-grade='".$row['grade']."'
+                 data-unit='".$row['unit']."'
+                 data-class_1='".$row['class']."'
 
-    //             class='fa fa-plus-circle addrejectionitemdata getinstrumentcertificate'>
-    //         </i> &nbsp;";
+                class='fa fa-plus-circle addrejectionitemdata getinstrumentcertificate'>
+            </i> &nbsp;";
 
-    //         $data[$count]['action'] .= "
-    //         <a href='".ADMIN_PATH."viewassigninstqtytforticket?ticket_no=".$ticket_no."&instrument_name=".$row['instrument_name']."&measuring_size=".$row['measuring_size']."&part_id=".$id."&part_number=".$row['part_number']."&sampling_id=".$row['sampling_id']."&sampling_trans_id=".$row['sampling_trans_id']."' style='cursor: pointer;' target='_blank'>
-    //         <i style='font-size: x-large;cursor: pointer;' class='fa fa-eye' aria-hidden='true'></i>
-    //         </a>";
-
-
-    //         $data[$count]['action'] .= "
-    //         <i  style='font-size:x-large; cursor:pointer; color:#3c8dbc;' 
-    //             data-toggle='modal' 
-    //             data-target='#removeNewModal'
-    //             data-part_id='".$id."'
-    //             data-ticket_no='".$ticket_no."'
-    //             data-instrument_name='".$row['instrument_name']."'
-    //             data-measuring_size='".$row['measuring_size']."'
-    //             data-qty='".$row['instru_qty']."'
-    //             data-part_number='".$row['part_number']."'
-    //             data-sampling_id ='".$row['sampling_id']."'
-    //             data-sampling_trans_id ='".$row['sampling_trans_id']."'
-    //             data-instrument_id ='".$row['instrument_id']."'
-
-    //             data-type='".$row['instrument_type']."'
-    //             data-grade='".$row['grade']."'
-    //             data-unit='".$row['unit']."'
-    //             data-class_1='".$row['class']."'
-
-    //             class='fa fa-minus-circle removeaddrejectionitemdata getinstrumentcertificate1111'>
-    //         </i> &nbsp;";
+            $data[$count]['action'] .= "
+            <a href='".ADMIN_PATH."viewassigninstqtytforticket?ticket_no=".$ticket_no."&instrument_name=".$row['instrument_name']."&measuring_size=".$row['measuring_size']."&part_id=".$id."&part_number=".$row['part_number']."&sampling_id=".$row['sampling_id']."&sampling_trans_id=".$row['sampling_trans_id']."' style='cursor: pointer;' target='_blank'>
+            <i style='font-size: x-large;cursor: pointer;' class='fa fa-eye' aria-hidden='true'></i>
+            </a>";
 
 
-    //         $data[$count]['action'] .= "
-    //         <a href='".ADMIN_PATH."viewremovedinstqtytforticket?ticket_no=".$ticket_no."&instrument_name=".$row['instrument_name']."&measuring_size=".$row['measuring_size']."&part_id=".$id."&part_number=".$row['part_number']."' style='cursor: pointer;' target='_blank'>
-    //         <i style='font-size: x-large;cursor: pointer;' class='fa fa-eye' aria-hidden='true'></i>
-    //         </a>";
-    //         $count++;
-    //     }
+            $data[$count]['action'] .= "
+            <i  style='font-size:x-large; cursor:pointer; color:#3c8dbc;' 
+                data-toggle='modal' 
+                data-target='#removeNewModal'
+                data-part_id='".$id."'
+                data-ticket_no='".$ticket_no."'
+                data-instrument_name='".$row['instrument_name']."'
+                data-measuring_size='".$row['measuring_size']."'
+                data-qty='".$row['instru_qty']."'
+                data-part_number='".$row['part_number']."'
+                data-sampling_id ='".$row['sampling_id']."'
+                data-sampling_trans_id ='".$row['sampling_trans_id']."'
+                data-instrument_id ='".$row['instrument_id']."'
 
-    //     return $data;
+                data-type='".$row['instrument_type']."'
+                data-grade='".$row['grade']."'
+                data-unit='".$row['unit']."'
+                data-class_1='".$row['class']."'
+
+                class='fa fa-minus-circle removeaddrejectionitemdata getinstrumentcertificate1111'>
+            </i> &nbsp;";
+
+
+            $data[$count]['action'] .= "
+            <a href='".ADMIN_PATH."viewremovedinstqtytforticket?ticket_no=".$ticket_no."&instrument_name=".$row['instrument_name']."&measuring_size=".$row['measuring_size']."&part_id=".$id."&part_number=".$row['part_number']."' style='cursor: pointer;' target='_blank'>
+            <i style='font-size: x-large;cursor: pointer;' class='fa fa-eye' aria-hidden='true'></i>
+            </a>";
+            $count++;
+        }
+
+        return $data;
 
 
 
-    // }
-public function getSamplingInstrumnetDataBypartIddata($params, $id, $ticket_no)
-{
-
-$this->db->select('
-    '.TBL_SAMPLING_MASTER.'.id AS sampling_id,
-    '.TBL_FINISHED_GOODS.'.part_number,
-    '.TBL_FINISHED_GOODS.'.fin_id,
-
-    '.TBL_SAMPLING_MASTER_TRANS.'.instrument_name,
-    '.TBL_SAMPLING_MASTER_TRANS.'.measuring_size,
-
-    '.TBL_INSTRUMENT_MASTER.'.grade AS instru_grade,
-    '.TBL_INSTRUMENT_MASTER.'.unit,
-    '.TBL_SAMPLING_MASTER_TRANS.'.class,
-    '.TBL_SAMPLING_MASTER_TRANS.'.type AS instrument_type,
-    '.TBL_SAMPLING_MASTER_TRANS.'.id AS sampling_trans_id,
-
-    SUM('.TBL_INSTRUMENT_MASTER.'.qty) AS instru_qty,
-
-    '.TBL_INSTRUMENT_MASTER.'.remark,
-    '.TBL_INSTRUMENT_MASTER.'.id AS instrument_id
-');
-
-if (!empty($params['search']['value'])) {
-
-    $search = $params['search']['value'];
-
-    $this->db->group_start()
-        ->like(TBL_SAMPLING_MASTER.'.id', $search)
-        ->or_like(TBL_FINISHED_GOODS.'.part_number', $search)
-        ->or_like(TBL_SAMPLING_MASTER_TRANS.'.instrument_name', $search)
-        ->or_like(TBL_SAMPLING_MASTER_TRANS.'.measuring_size', $search)
-        ->or_like(TBL_INSTRUMENT_MASTER.'.grade', $search)
-        ->or_like(TBL_INSTRUMENT_MASTER.'.unit', $search)
-        ->or_like(TBL_INSTRUMENT_MASTER.'.class', $search)
-        ->or_like(TBL_INSTRUMENT_MASTER.'.type', $search)
-        ->or_like(TBL_INSTRUMENT_MASTER.'.qty', $search)
-        ->or_like(TBL_INSTRUMENT_MASTER.'.remark', $search)
-    ->group_end();
-}
-
-$this->db->from(TBL_SAMPLING_MASTER);
-
-$this->db->join(
-    TBL_FINISHED_GOODS,
-    TBL_FINISHED_GOODS.'.fin_id = '.TBL_SAMPLING_MASTER.'.part_number_id',
-    'left'
-);
-
-$this->db->join(
-    TBL_SAMPLING_MASTER_TRANS,
-    TBL_SAMPLING_MASTER_TRANS.'.sampling_master_id = '.TBL_SAMPLING_MASTER.'.id
-    AND '.TBL_SAMPLING_MASTER_TRANS.'.status = 1',
-    'left'
-);
-
-$this->db->join(
-    TBL_INSTRUMENT_MASTER,
-    TBL_INSTRUMENT_MASTER.'.instrument_name = '.TBL_SAMPLING_MASTER_TRANS.'.instrument_name
-
-    AND (
-        '.TBL_SAMPLING_MASTER_TRANS.'.measuring_size IS NULL
-        OR '.TBL_INSTRUMENT_MASTER.'.measuring_size = '.TBL_SAMPLING_MASTER_TRANS.'.measuring_size
-    )
-
-    AND (
-        '.TBL_SAMPLING_MASTER_TRANS.'.type IS NULL
-        OR '.TBL_INSTRUMENT_MASTER.'.type = '.TBL_SAMPLING_MASTER_TRANS.'.type
-    )
-
-    AND (
-        '.TBL_SAMPLING_MASTER_TRANS.'.class IS NULL
-        OR '.TBL_INSTRUMENT_MASTER.'.class = '.TBL_SAMPLING_MASTER_TRANS.'.class
-    )
-
-    AND (
-        '.TBL_SAMPLING_MASTER_TRANS.'.grade IS NULL
-        OR '.TBL_INSTRUMENT_MASTER.'.grade = '.TBL_SAMPLING_MASTER_TRANS.'.grade
-    )
-
-    AND (
-        '.TBL_SAMPLING_MASTER_TRANS.'.unit IS NULL
-        OR '.TBL_INSTRUMENT_MASTER.'.unit = '.TBL_SAMPLING_MASTER_TRANS.'.unit
-    )
-',
-'left'
-);
-
-$this->db->where(TBL_FINISHED_GOODS.'.fin_id', $id);
-
-$this->db->group_by([
-    TBL_SAMPLING_MASTER_TRANS.'.id'
-]);
-
-$this->db->order_by(TBL_SAMPLING_MASTER_TRANS.'.id', 'DESC');
-$this->db->limit($params['length'], $params['start']);
-
-$query  = $this->db->get();
-$result = $query->result_array();
-
-$data = [];
-$count = 0;
-
-foreach ($result as $row) {
-
-    $live_quantity = $this->getLiveQtyforInst_check_count(
-        $row['sampling_trans_id'],
-        $row['instrument_name'],
-        $row['measuring_size'],
-        $row['instrument_type'],
-        $row['instru_grade'],
-        $row['unit'],
-        $row['class']
-    );
-
-    $data[$count]['instrument_name']  = $row['instrument_name'];
-    $data[$count]['grade']            = $row['instru_grade'];
-    $data[$count]['unit']             = $row['unit'];
-    $data[$count]['class']            = $row['class'];
-    $data[$count]['measuring_size']   = $row['measuring_size'];
-    $data[$count]['type']             = $row['instrument_type'];
-    $data[$count]['remark']           = $row['remark'];
-    $data[$count]['qty']              = $row['instru_qty'];
-    $data[$count]['live_qty']         = $live_quantity;
-
-    $data[$count]['action']  = "";
-
-    $data[$count]['action'] .= "
-    <i style='font-size:x-large; cursor:pointer; color:#3c8dbc;' 
-        data-toggle='modal' 
-        data-target='#addNewModal'
-        data-part_id='".$id."'
-        data-ticket_no='".$ticket_no."'
-        data-instrument_name='".$row['instrument_name']."'
-        data-measuring_size='".$row['measuring_size']."'
-        data-qty='".$row['instru_qty']."' 
-        data-part_number='".$row['part_number']."'
-        data-sampling_id='".$row['sampling_id']."'
-        data-sampling_trans_id='".$row['sampling_trans_id']."'
-        data-instrument_id='".$row['instrument_id']."'
-        data-type='".$row['instrument_type']."'
-        data-grade='".$row['instru_grade']."'
-        data-unit='".$row['unit']."'
-        data-class_1='".$row['class']."'
-        class='fa fa-plus-circle addrejectionitemdata getinstrumentcertificate'>
-    </i> &nbsp;";
-
-    $data[$count]['action'] .= "
-    <a href='".ADMIN_PATH."viewassigninstqtytforticket?ticket_no=".$ticket_no."&instrument_name=".$row['instrument_name']."&measuring_size=".$row['measuring_size']."&part_id=".$id."&part_number=".$row['part_number']."&sampling_id=".$row['sampling_id']."&sampling_trans_id=".$row['sampling_trans_id']."' target='_blank'>
-    <i style='font-size: x-large;' class='fa fa-eye'></i>
-    </a>";
-
-    $data[$count]['action'] .= "
-    <i style='font-size:x-large; cursor:pointer; color:#3c8dbc;' 
-        data-toggle='modal' 
-        data-target='#removeNewModal'
-        data-part_id='".$id."'
-        data-ticket_no='".$ticket_no."'
-        data-instrument_name='".$row['instrument_name']."'
-        data-measuring_size='".$row['measuring_size']."'
-        data-qty='".$row['instru_qty']."'
-        data-part_number='".$row['part_number']."'
-        data-sampling_id='".$row['sampling_id']."'
-        data-sampling_trans_id='".$row['sampling_trans_id']."'
-        data-instrument_id='".$row['instrument_id']."'
-        data-type='".$row['instrument_type']."'
-        data-grade='".$row['instru_grade']."'
-        data-unit='".$row['unit']."'
-        data-class_1='".$row['class']."'
-        class='fa fa-minus-circle removeaddrejectionitemdata getinstrumentcertificate1111'>
-    </i> &nbsp;";
-
-    $count++;
-}
-
-return $data;
-
-}
+    }
+    
 
     public function getSamplingInstrumnetDataBypartIdcount($params, $partId, $ticket_no)
     {
