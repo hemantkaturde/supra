@@ -24030,7 +24030,96 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         // $result = $query->result_array();
 
 
-        $this->db->select('
+//         $this->db->select('
+//     '.TBL_SAMPLING_MASTER.'.id AS sampling_id,
+//     '.TBL_FINISHED_GOODS.'.part_number,
+//     '.TBL_FINISHED_GOODS.'.fin_id,
+
+//     '.TBL_SAMPLING_MASTER_TRANS.'.instrument_name,
+//     '.TBL_SAMPLING_MASTER_TRANS.'.measuring_size,
+
+//     '.TBL_INSTRUMENT_MASTER.'.grade as instru_grade,
+//     '.TBL_INSTRUMENT_MASTER.'.unit as instru_unit,
+//     '.TBL_SAMPLING_MASTER_TRANS.'.class,
+//     '.TBL_SAMPLING_MASTER_TRANS.'.type as instrument_type,
+//     '.TBL_SAMPLING_MASTER_TRANS.'.id as sampling_trans_id,
+//     '.TBL_INSTRUMENT_MASTER.'.qty as instru_qty,
+//     '.TBL_INSTRUMENT_MASTER.'.remark,
+//     '.TBL_INSTRUMENT_MASTER.'.id as instrument_id
+// ');
+
+// /* 🔍 SEARCH FILTER */
+// if (!empty($params['search']['value'])) {
+
+//     $search = $params['search']['value'];
+
+//     $this->db->group_start()
+//         ->like(TBL_SAMPLING_MASTER.'.id', $search)
+//         ->or_like(TBL_FINISHED_GOODS.'.part_number', $search)
+//         ->or_like(TBL_SAMPLING_MASTER_TRANS.'.instrument_name', $search)
+//         ->or_like(TBL_SAMPLING_MASTER_TRANS.'.measuring_size', $search)
+//         ->or_like(TBL_INSTRUMENT_MASTER.'.grade', $search)
+//         ->or_like(TBL_INSTRUMENT_MASTER.'.unit', $search)
+//         ->or_like(TBL_INSTRUMENT_MASTER.'.class', $search)
+//         ->or_like(TBL_INSTRUMENT_MASTER.'.type', $search)
+//         ->or_like(TBL_INSTRUMENT_MASTER.'.qty', $search)
+//         ->or_like(TBL_INSTRUMENT_MASTER.'.remark', $search)
+//     ->group_end();
+// }
+
+// $this->db->from(TBL_SAMPLING_MASTER);
+
+// /* FINISHED GOODS JOIN */
+// $this->db->join(
+//     TBL_FINISHED_GOODS,
+//     TBL_FINISHED_GOODS.'.fin_id = '.TBL_SAMPLING_MASTER.'.part_number_id',
+//     'left'
+// );
+
+// /* SAMPLING TRANS JOIN */
+// $this->db->join(
+//     TBL_SAMPLING_MASTER_TRANS,
+//     TBL_SAMPLING_MASTER_TRANS.'.sampling_master_id = '.TBL_SAMPLING_MASTER.'.id
+//     AND '.TBL_SAMPLING_MASTER_TRANS.'.status = 1',
+//     'left'
+// );
+
+// /* INSTRUMENT MASTER JOIN */
+// $this->db->join(
+//     TBL_INSTRUMENT_MASTER,
+//     TBL_INSTRUMENT_MASTER.'.instrument_name = '.TBL_SAMPLING_MASTER_TRANS.'.instrument_name
+//     AND '.TBL_INSTRUMENT_MASTER.'.measuring_size = '.TBL_SAMPLING_MASTER_TRANS.'.measuring_size
+//     AND '.TBL_INSTRUMENT_MASTER.'.type = '.TBL_SAMPLING_MASTER_TRANS.'.type
+//     AND ('.TBL_INSTRUMENT_MASTER.'.class = '.TBL_SAMPLING_MASTER_TRANS.'.class OR '.TBL_INSTRUMENT_MASTER.'.class IS NULL)
+//     AND ('.TBL_INSTRUMENT_MASTER.'.grade = '.TBL_SAMPLING_MASTER_TRANS.'.grade OR '.TBL_INSTRUMENT_MASTER.'.grade IS NULL)
+//     AND ('.TBL_INSTRUMENT_MASTER.'.unit = '.TBL_SAMPLING_MASTER_TRANS.'.unit OR '.TBL_INSTRUMENT_MASTER.'.unit IS NULL)',
+//     'left'
+// );
+
+// /* FILTER */
+// $this->db->where(TBL_FINISHED_GOODS.'.fin_id', $id);
+
+// /* DUPLICATE REMOVE */
+// $this->db->group_by([
+//     TBL_SAMPLING_MASTER_TRANS.'.instrument_name',
+//     TBL_SAMPLING_MASTER_TRANS.'.measuring_size',
+//     TBL_SAMPLING_MASTER_TRANS.'.type',
+//     TBL_SAMPLING_MASTER_TRANS.'.class',
+//     TBL_SAMPLING_MASTER_TRANS.'.grade',
+//     TBL_SAMPLING_MASTER_TRANS.'.unit'
+// ]);
+
+// /* ORDER */
+// $this->db->order_by(TBL_SAMPLING_MASTER_TRANS.'.id', 'DESC');
+
+// /* LIMIT */
+// $this->db->limit($params['length'], $params['start']);
+
+// $query  = $this->db->get();
+// $result = $query->result_array();
+
+
+$this->db->select('
     '.TBL_SAMPLING_MASTER.'.id AS sampling_id,
     '.TBL_FINISHED_GOODS.'.part_number,
     '.TBL_FINISHED_GOODS.'.fin_id,
@@ -24038,11 +24127,13 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     '.TBL_SAMPLING_MASTER_TRANS.'.instrument_name,
     '.TBL_SAMPLING_MASTER_TRANS.'.measuring_size,
 
-    '.TBL_INSTRUMENT_MASTER.'.grade as instru_grade,
-    '.TBL_INSTRUMENT_MASTER.'.unit as instru_unit,
+    IFNULL('.TBL_INSTRUMENT_MASTER.'.grade,'.TBL_SAMPLING_MASTER_TRANS.'.grade) as instru_grade,
+    IFNULL('.TBL_INSTRUMENT_MASTER.'.unit,'.TBL_SAMPLING_MASTER_TRANS.'.unit) as instru_unit,
+
     '.TBL_SAMPLING_MASTER_TRANS.'.class,
     '.TBL_SAMPLING_MASTER_TRANS.'.type as instrument_type,
     '.TBL_SAMPLING_MASTER_TRANS.'.id as sampling_trans_id,
+
     '.TBL_INSTRUMENT_MASTER.'.qty as instru_qty,
     '.TBL_INSTRUMENT_MASTER.'.remark,
     '.TBL_INSTRUMENT_MASTER.'.id as instrument_id
@@ -24076,7 +24167,7 @@ $this->db->join(
     'left'
 );
 
-/* SAMPLING TRANS JOIN */
+/* SAMPLING MASTER TRANS JOIN */
 $this->db->join(
     TBL_SAMPLING_MASTER_TRANS,
     TBL_SAMPLING_MASTER_TRANS.'.sampling_master_id = '.TBL_SAMPLING_MASTER.'.id
@@ -24090,9 +24181,18 @@ $this->db->join(
     TBL_INSTRUMENT_MASTER.'.instrument_name = '.TBL_SAMPLING_MASTER_TRANS.'.instrument_name
     AND '.TBL_INSTRUMENT_MASTER.'.measuring_size = '.TBL_SAMPLING_MASTER_TRANS.'.measuring_size
     AND '.TBL_INSTRUMENT_MASTER.'.type = '.TBL_SAMPLING_MASTER_TRANS.'.type
-    AND ('.TBL_INSTRUMENT_MASTER.'.class = '.TBL_SAMPLING_MASTER_TRANS.'.class OR '.TBL_INSTRUMENT_MASTER.'.class IS NULL)
-    AND ('.TBL_INSTRUMENT_MASTER.'.grade = '.TBL_SAMPLING_MASTER_TRANS.'.grade OR '.TBL_INSTRUMENT_MASTER.'.grade IS NULL)
-    AND ('.TBL_INSTRUMENT_MASTER.'.unit = '.TBL_SAMPLING_MASTER_TRANS.'.unit OR '.TBL_INSTRUMENT_MASTER.'.unit IS NULL)',
+    AND (
+        '.TBL_INSTRUMENT_MASTER.'.class = '.TBL_SAMPLING_MASTER_TRANS.'.class
+        OR '.TBL_INSTRUMENT_MASTER.'.class IS NULL
+    )
+    AND (
+        '.TBL_INSTRUMENT_MASTER.'.grade = '.TBL_SAMPLING_MASTER_TRANS.'.grade
+        OR '.TBL_INSTRUMENT_MASTER.'.grade IS NULL
+    )
+    AND (
+        '.TBL_INSTRUMENT_MASTER.'.unit = '.TBL_SAMPLING_MASTER_TRANS.'.unit
+        OR '.TBL_INSTRUMENT_MASTER.'.unit IS NULL
+    )',
     'left'
 );
 
@@ -24117,7 +24217,6 @@ $this->db->limit($params['length'], $params['start']);
 
 $query  = $this->db->get();
 $result = $query->result_array();
-
 
 
 
