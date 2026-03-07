@@ -24036,6 +24036,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
         foreach ($result as $row) {
             
             $live_quantity = $this->getLiveQtyforInst_check_count($rqw['sampling_trans_id'],$row['instrument_name'],$row['measuring_size'],$row['instrument_type'],$row['grade'],$row['unit'],$row['class']);
+          
+          
             $data[$count]['instrument_name']  = $row['instrument_name'];
             $data[$count]['grade']            = $row['grade'];
             $data[$count]['unit']             = $row['unit'];
@@ -24093,7 +24095,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 data-unit='".$row['unit']."'
                 data-class_1='".$row['class']."'
 
-                class='fa fa-minus-circle addrejectionitemdata getinstrumentcertificate'>
+                class='fa fa-minus-circle removeaddrejectionitemdata getinstrumentcertificate1111'>
             </i> &nbsp;";
 
 
@@ -24307,7 +24309,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
         foreach ($result as $row) {
             $data[$count]['instrument_name']  = $row['instrument_name'];
-            $data[$count]['certificate_id']   = $row['instrument_id'];
+            $data[$count]['certificate_id']   = $row['instrument_id'].' - '. date("d-m-Y", strtotime($row['due_date']));
             $data[$count]['measuring_size']   = $row['measuring_size'];
             $data[$count]['qty_assign']       = $row['qty_assign'];
             $data[$count]['status']       =     $row['a_status'];
@@ -24353,12 +24355,16 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
 
     public function getRemovedQtyListData($params,$ticket_no, $instrument_name, $measuring_size, $part_id)
     {
-        $this->db->select('*');
+        $this->db->select('*,tbl_storeform_qty_assign.status as a_status');
         $this->db->from('tbl_storeform_qty_assign');
+        $this->db->join('tbl_instrument_master_details','tbl_instrument_master_details.id = tbl_storeform_qty_assign.certificate','left');
         $this->db->where('ticket_no', $ticket_no);
         $this->db->where('instrument_name', $instrument_name);
         $this->db->where('measuring_size', $measuring_size);
         $this->db->where('qty_assign', 0);
+
+        // $this->db->where('sampling_id', $sampling_id);
+        // $this->db->where('sampling_trans_id', $sampling_trans_id);
         
 
         if ($params['search']['value'] != "") 
@@ -24373,15 +24379,17 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
                 qty_remark LIKE '%{$search}%'
             )");
         }
-        $this->db->order_by('id', 'DESC');
+        $this->db->order_by('tbl_storeform_qty_assign.id', 'DESC');
         $result = $this->db->get()->result_array(); 
         $data = [];
         $count = 0;
 
         foreach ($result as $row) {
             $data[$count]['instrument_name']  = $row['instrument_name'];
+            $data[$count]['certificate_id']   = $row['instrument_id'].' - '. date("d-m-Y", strtotime($row['due_date']));
             $data[$count]['measuring_size']   = $row['measuring_size'];
             $data[$count]['qty_removed']       = $row['qty_removed'];
+            $data[$count]['status']       =     $row['a_status'];
             $data[$count]['qty_remark']       = $row['qty_remark'];
 
             $data[$count]['action']  = "";
@@ -24419,7 +24427,7 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     public function geteditassignqtyitem($id)
     {
         /*Certificate id == Instrument Id*/
-        $this->db->select('*');
+        $this->db->select('*,'.TBL_STOREFORM_QTY_ASSIGN.'.status as assign_open_close');
         $this->db->join(TBL_INSTRUMENT_MASTER_DETAILS,TBL_INSTRUMENT_MASTER_DETAILS.'.id = '.TBL_STOREFORM_QTY_ASSIGN.'.certificate');
         $this->db->where(TBL_STOREFORM_QTY_ASSIGN.'.id', $id);
         $this->db->order_by(TBL_STOREFORM_QTY_ASSIGN.'.id','DESC');

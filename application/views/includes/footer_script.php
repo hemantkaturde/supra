@@ -18603,6 +18603,71 @@
 			});
 			return false;
 	     });	 
+		 
+		 $(document).on("click", ".getinstrumentcertificate", function () {
+
+
+			var instrument_id  = $(this).data("instrument_id");
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>admin/getinstrumentcertificates",
+				type: "POST",
+				data : {'instrument_id' : instrument_id},
+				success: function(data, textStatus, jqXHR)
+					{
+					    $(".loader_ajax").hide();
+							if(data == "failure")
+								{
+									$('#certificate').html('<option value="">Select Instrument ID</option>');
+												
+								}
+							else
+								{
+									$('#certificate').html(data);
+						    	}
+					},
+				        error: function (jqXHR, textStatus, errorThrown)
+									{
+										$('#certificate').html();
+									}
+						});
+						return false;
+			// $("#instrument_type_dropdown").val(type).trigger("change");
+			// $("#grade_dropdown").val(grade).trigger("change");
+		 });
+
+
+		 $(document).on("click", ".getinstrumentcertificate1111", function () {
+
+
+			var instrument_id  = $(this).data("instrument_id");
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>admin/getinstrumentcertificates",
+				type: "POST",
+				data : {'instrument_id' : instrument_id},
+				success: function(data, textStatus, jqXHR)
+					{
+					    $(".loader_ajax").hide();
+							if(data == "failure")
+								{
+									$('#certificateremove').html('<option value="">Select Instrument ID</option>');
+												
+								}
+							else
+								{
+									$('#certificateremove').html(data);
+						    	}
+					},
+				        error: function (jqXHR, textStatus, errorThrown)
+									{
+										$('#certificateremove').html();
+									}
+						});
+						return false;
+			// $("#instrument_type_dropdown").val(type).trigger("change");
+			// $("#grade_dropdown").val(grade).trigger("change");
+		 });
+
+
 	</script>
 <?php } ?>
 
@@ -29055,6 +29120,26 @@ $('#export_excel').on('click', function() {
 		});
 
 
+		
+		$(document).on("click", ".removeaddrejectionitemdata", function() {
+
+
+			$("#partId_popup").val($(this).data("part_id"));
+			$("#ticket_no_popup").val($(this).data("ticket_no"));
+			$("#instrument_name_popup").val($(this).data("instrument_name"));
+			$("#measuring_size_popup").val($(this).data("measuring_size"));
+			$("#sampling_id").val($(this).data("sampling_id"));
+			$("#sampling_trans_id").val($(this).data("sampling_trans_id"));
+			$("#qty_popup").val($(this).data("qty"));
+			$("#instrument_id").val($(this).data("instrument_id"));
+			$("#type").val($(this).data("type"));
+			$("#grade").val($(this).data("grade"));
+			$("#unit").val($(this).data("unit"));
+			$("#class_1").val($(this).data("class_1"));
+			$("#part_number").val($(this).data("part_id"));
+		});
+
+
 		$(document).on('click','#editstoreformqtyassigndata',function(e){
 			e.preventDefault();
 			$(".loader_ajax").show();
@@ -29198,7 +29283,7 @@ $('#export_excel').on('click', function() {
 					    $(".loader_ajax").hide();
 							if(data == "failure")
 								{
-									$('#certificate').html('<option value="">Select Part Number</option>');
+									$('#certificate').html('<option value="">Select Instrument ID</option>');
 												
 								}
 							else
@@ -29217,6 +29302,36 @@ $('#export_excel').on('click', function() {
 		});
 
 
+			 $(document).on("click", ".getinstrumentcertificate1111", function () {
+
+
+			var instrument_id  = $(this).data("instrument_id");
+			$.ajax({
+				url : "<?php echo ADMIN_PATH;?>admin/getinstrumentcertificates",
+				type: "POST",
+				data : {'instrument_id' : instrument_id},
+				success: function(data, textStatus, jqXHR)
+					{
+					    $(".loader_ajax").hide();
+							if(data == "failure")
+								{
+									$('#certificateremove').html('<option value="">Select Instrument ID</option>');
+												
+								}
+							else
+								{
+									$('#certificateremove').html(data);
+						    	}
+					},
+				        error: function (jqXHR, textStatus, errorThrown)
+									{
+										$('#certificateremove').html();
+									}
+						});
+						return false;
+			// $("#instrument_type_dropdown").val(type).trigger("change");
+			// $("#grade_dropdown").val(grade).trigger("change");
+		 });
 
 
 	</script>
@@ -29317,7 +29432,7 @@ $('#export_excel').on('click', function() {
 						$('#ticket_no').val(fetchResponse.ticket_no);
 						$('#instrument_name').val(fetchResponse.instrument_name);
 						$('#measuring_size').val(fetchResponse.measuring_size);
-						//$('#certificate').val(fetchResponse.certificate);
+						$('#status').val(fetchResponse.assign_open_close);
 
 						setTimeout(function(){
 							$('#certificate').val(fetchResponse.certificate).trigger('change');
@@ -29481,7 +29596,7 @@ $('#export_excel').on('click', function() {
 					    $(".loader_ajax").hide();
 							if(data == "failure")
 								{
-									$('#certificate').html('<option value="">Select Part Number</option>');
+									$('#certificate').html('<option value="">Select Instrument ID</option>');
 												
 								}
 							else
@@ -29538,6 +29653,14 @@ $('#export_excel').on('click', function() {
 							"width": "10%",
 							"targets": 4
 						},
+						{
+							"width": "10%",
+							"targets": 5
+						},
+						{
+							"width": "10%",
+							"targets": 6
+						},
 					],
 					responsive: true,
 					"oLanguage": {
@@ -29563,6 +29686,8 @@ $('#export_excel').on('click', function() {
 			});
 
 			$(document).on('click', '.editassignqtyitem', function(e) {
+
+			
 				e.preventDefault();
 
 				var elemF = $(this);
@@ -29608,11 +29733,14 @@ $('#export_excel').on('click', function() {
 				var qty_removed = $('#qty_removed').val();
 				var qty_remark= $('#qty_rec_remark').val();
 
+				var certificateremove = $('#certificateremove').val();
+				var statuscertificateremove= $('#statuscertificateremove').val();
+
 				
 				$.ajax({
 					url: "<?php echo base_url('editstoreformqtyremovedata'); ?>",
 					type: "POST",
-					data: {"ticket_no_popup": ticket_no_popup,"instrument_name_popup":instrument_name_popup, "measuring_size_popup":measuring_size_popup,"qty_popup":qty_popup, "qty_removed":qty_removed, "qty_remark":qty_remark,"assigned_id":partId},
+					data: {"ticket_no_popup": ticket_no_popup,"instrument_name_popup":instrument_name_popup, "measuring_size_popup":measuring_size_popup,"qty_popup":qty_popup, "qty_removed":qty_removed, "qty_remark":qty_remark,"assigned_id":partId,"certificateremove":certificateremove,"statuscertificateremove":statuscertificateremove},
 					dataType: "json",
 					cache:false,
 					success: function(fetchResponse, textStatus, jqXHR)

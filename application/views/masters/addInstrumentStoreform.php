@@ -147,6 +147,14 @@
    </div>
 </div>
 
+
+
+
+
+
+
+ <!-- Remove code  -->
+
 <div class="modal fade" id="removeNewModal" role="dialog" aria-labelledby="removeitem" aria-hidden="true" data-backdrop="static" data-keyboard="false">
    <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -188,7 +196,7 @@
                <div class="form-group row">
                   <label class="col-sm-4 col-form-label">Instrument ID - Due Date</label>
                    <div class="col-sm-8">
-                     <select class="form-control" name="certificate" id="certificate">
+                     <select class="form-control" name="certificateremove" id="certificateremove">
                        <option st-id="" value="">Select Instrument ID</option>              
                      </select>
                     <p class="error certificate_error"></p>
@@ -198,7 +206,7 @@
                <div class="form-group row">
                   <label class="col-sm-4 col-form-label">Status</label>
                    <div class="col-sm-8">
-                     <select class="form-control" name="status" id="status">
+                     <select class="form-control" name="statuscertificateremove" id="statuscertificateremove">
                         <option value="Open" selected>Open</option>
                         <option value="Close">Close</option>
                      </select>

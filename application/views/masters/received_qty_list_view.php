@@ -40,8 +40,10 @@
                             <thead>
                                 <tr style="background-color:#3c8dbc;color:#fff">
                                     <th>Instruments Name</th>
+                                    <th>Instrument Id</th>
                                     <th>Measuring Size</th>
                                     <th>Qty Received</th>
+                                    <th>Status</th>
                                     <th>Remark</th>
                                     <th>Action</th>
                                 </tr>
@@ -86,6 +88,29 @@
                      <p class="error qty_removed_error"></p>
                   </div>
                </div>
+
+                      <div class="form-group row">
+                  <label class="col-sm-4 col-form-label">Instrument ID - Due Date</label>
+                   <div class="col-sm-8">
+                     <select class="form-control" name="certificate" id="certificate">
+                       <option st-id="" value="">Select Instrument ID</option>              
+                     </select>
+                    <p class="error certificate_error"></p>
+                   </div>
+               </div>
+
+               <div class="form-group row">
+                  <label class="col-sm-4 col-form-label">Status</label>
+                   <div class="col-sm-8">
+                     <select class="form-control" name="status" id="status">
+                        <option value="Open" selected>Open</option>
+                        <option value="Close">Close</option>
+                     </select>
+                    <p class="error status_error"></p>
+                   </div>
+               </div>
+
+
                <div class="form-group row">
                   <label class="col-sm-4 col-form-label"> Remark </label>
                   <div class="col-sm-8">

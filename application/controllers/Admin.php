@@ -23960,14 +23960,15 @@ public function addnewSamplingmethod($id){
         }else{
 
                 $data = array(
-                    'sampling_master_id'=> trim($this->input->post('sampling_master_id')),
-                    'instrument_name'=> trim($this->input->post('instrument_name')),
-                    'measuring_size'=>trim($this->input->post('measuring_size')),
-                    'type'=>trim($this->input->post('type')),
-                    'grade'=>trim($this->input->post('grade')),
-                    'unit'=>trim($this->input->post('unit')),
-                    'class'=>trim($this->input->post('class')),
-                    'remark'=>trim($this->input->post('remark')),
+                    'sampling_master_id' => trim($this->input->post('sampling_master_id')) !== '' ? trim($this->input->post('sampling_master_id')) : NULL,
+                    'instrument_name'    => trim($this->input->post('instrument_name')) !== '' ? trim($this->input->post('instrument_name')) : NULL,
+                    'measuring_size'     => trim($this->input->post('measuring_size')) !== '' ? trim($this->input->post('measuring_size')) : NULL,
+                    'type'               => trim($this->input->post('type')) !== '' ? trim($this->input->post('type')) : NULL,
+                    'grade'              => trim($this->input->post('grade')) !== '' ? trim($this->input->post('grade')) : NULL,
+                    'unit'               => trim($this->input->post('unit')) !== '' ? trim($this->input->post('unit')) : NULL,
+                    'class'              => trim($this->input->post('class')) !== '' ? trim($this->input->post('class')) : NULL,
+                    'remark'             => trim($this->input->post('remark')) !== '' ? trim($this->input->post('remark')) : NULL
+
                 );
 
                 // $checksamplingmethodalredayexists = $this->admin_model->checksamplingmethodalredayexists(trim($this->input->post('sampling_master_id')),trim($this->input->post('instrument_name')));
@@ -24033,14 +24034,15 @@ public function updatesamplingmethodtrans($id){
         }else{
 
                 $data = array(
-                    'sampling_master_id'=> trim($this->input->post('sampling_master_id')),
-                    'instrument_name'=> trim($this->input->post('instrument_name')),
-                    'measuring_size'=>trim($this->input->post('measuring_size')),
-                    'type'=>trim($this->input->post('type')),
-                    'grade'=>trim($this->input->post('grade')),
-                    'unit'=>trim($this->input->post('unit')),
-                    'class'=>trim($this->input->post('class')),
-                    'remark'=>trim($this->input->post('remark')),
+                       'sampling_master_id' => trim($this->input->post('sampling_master_id')) !== '' ? trim($this->input->post('sampling_master_id')) : NULL,
+                        'instrument_name'    => trim($this->input->post('instrument_name')) !== '' ? trim($this->input->post('instrument_name')) : NULL,
+                        'measuring_size'     => trim($this->input->post('measuring_size')) !== '' ? trim($this->input->post('measuring_size')) : NULL,
+                        'type'               => trim($this->input->post('type')) !== '' ? trim($this->input->post('type')) : NULL,
+                        'grade'              => trim($this->input->post('grade')) !== '' ? trim($this->input->post('grade')) : NULL,
+                        'unit'               => trim($this->input->post('unit')) !== '' ? trim($this->input->post('unit')) : NULL,
+                        'class'              => trim($this->input->post('class')) !== '' ? trim($this->input->post('class')) : NULL,
+                        'remark'             => trim($this->input->post('remark')) !== '' ? trim($this->input->post('remark')) : NULL
+
                 );
 
                 $sampling_method_id = trim($this->input->post('sampling_method_id'));
@@ -29246,22 +29248,41 @@ public function editstoreformqtyassigndata() {
                 // If insert new row
                 else {
                     $data = array(
-                        'qty_assign'        => trim($this->input->post('qty_assign')),
-                        'qty_remark'        => trim($this->input->post('qty_remark')),
-                        'ticket_no'         => trim($this->input->post('ticket_no_popup')),
-                        'sampling_id'       => trim($this->input->post('sampling_id')),
-                        'sampling_trans_id' => trim($this->input->post('sampling_trans_id')),
-                        'instrument_name'   => trim($this->input->post('instrument_name_popup')),
-                        'measuring_size'    => trim($this->input->post('measuring_size_popup')),
-                        'qty_available'     => trim($this->input->post('qty_popup')),
-                        'certificate'       => trim($this->input->post('certificate')),
-                        'status' => trim($this->input->post('status')),
+                        // 'qty_assign'        => trim($this->input->post('qty_assign')),
+                        // 'qty_remark'        => trim($this->input->post('qty_remark')),
+                        // 'ticket_no'         => trim($this->input->post('ticket_no_popup')),
+                        // 'sampling_id'       => trim($this->input->post('sampling_id')),
+                        // 'sampling_trans_id' => trim($this->input->post('sampling_trans_id')),
+                        // 'instrument_name'   => trim($this->input->post('instrument_name_popup')),
+                        // 'measuring_size'    => trim($this->input->post('measuring_size_popup')),
+                        // 'qty_available'     => trim($this->input->post('qty_popup')),
+                        // 'certificate'       => trim($this->input->post('certificate')),
+                        // 'status' => trim($this->input->post('status')),
 
-                        'type' => trim($this->input->post('type')),
-                        'grade' => trim($this->input->post('grade')),
-                        'unit' => trim($this->input->post('unit')),
-                        'class' => trim($this->input->post('class_1')),
-                        'part_number' => trim($this->input->post('part_number')),
+                        // 'type' => trim($this->input->post('type')),
+                        // 'grade' => trim($this->input->post('grade')),
+                        // 'unit' => trim($this->input->post('unit')),
+                        // 'class' => trim($this->input->post('class_1')),
+                        // 'part_number' => trim($this->input->post('part_number')),
+
+
+                        'qty_assign'        => trim($this->input->post('qty_assign')) !== '' ? trim($this->input->post('qty_assign')) : NULL,
+                        'qty_remark'        => trim($this->input->post('qty_remark')) !== '' ? trim($this->input->post('qty_remark')) : NULL,
+                        'ticket_no'         => trim($this->input->post('ticket_no_popup')) !== '' ? trim($this->input->post('ticket_no_popup')) : NULL,
+                        'sampling_id'       => trim($this->input->post('sampling_id')) !== '' ? trim($this->input->post('sampling_id')) : NULL,
+                        'sampling_trans_id' => trim($this->input->post('sampling_trans_id')) !== '' ? trim($this->input->post('sampling_trans_id')) : NULL,
+                        'instrument_name'   => trim($this->input->post('instrument_name_popup')) !== '' ? trim($this->input->post('instrument_name_popup')) : NULL,
+                        'measuring_size'    => trim($this->input->post('measuring_size_popup')) !== '' ? trim($this->input->post('measuring_size_popup')) : NULL,
+                        'qty_available'     => trim($this->input->post('qty_popup')) !== '' ? trim($this->input->post('qty_popup')) : NULL,
+                        'certificate'       => trim($this->input->post('certificate')) !== '' ? trim($this->input->post('certificate')) : NULL,
+                        'status'            => trim($this->input->post('status')) !== '' ? trim($this->input->post('status')) : NULL,
+                        'type'              => trim($this->input->post('type')) !== '' ? trim($this->input->post('type')) : NULL,
+                        'grade'             => trim($this->input->post('grade')) !== '' ? trim($this->input->post('grade')) : NULL,
+                        'unit'              => trim($this->input->post('unit')) !== '' ? trim($this->input->post('unit')) : NULL,
+                        'class'             => trim($this->input->post('class_1')) !== '' ? trim($this->input->post('class_1')) : NULL,
+                        'part_number'       => trim($this->input->post('part_number')) !== '' ? trim($this->input->post('part_number')) : NULL
+
+
 
                     );
                 }
@@ -29365,21 +29386,24 @@ public function editstoreformqtyremovedata()
         $ok = $this->admin_model->savequantityassignstoreform($assignedID, $data);
     } else {
         $data = array_merge($data, [
-            'ticket_no'       => $ticket_no,
-            'instrument_name' => $instrument_name,
-            'measuring_size'  => $measuring_size,
-            'qty_available'   => (float) $this->input->post('qty_popup'),
-            'sampling_id'       => trim($this->input->post('sampling_id')),
-            'sampling_trans_id' => trim($this->input->post('sampling_trans_id')),
+             'ticket_no'        => $ticket_no !== '' ? $ticket_no : NULL,
+             'instrument_name'  => $instrument_name !== '' ? $instrument_name : NULL,
+             'measuring_size'   => $measuring_size !== '' ? $measuring_size : NULL,
 
-            'certificate'       => trim($this->input->post('certificate')),
-            'status' => trim($this->input->post('status')),
+             'qty_available'    => trim($this->input->post('qty_popup')) !== '' ? (float)$this->input->post('qty_popup') : NULL,
 
-            'type' => trim($this->input->post('type')),
-            'grade' => trim($this->input->post('grade')),
-            'unit' => trim($this->input->post('unit')),
-            'class' => trim($this->input->post('class_1')),
-            'part_number' => trim($this->input->post('part_number')),
+             'sampling_id'       => trim($this->input->post('sampling_id')) !== '' ? trim($this->input->post('sampling_id')) : NULL,
+             'sampling_trans_id' => trim($this->input->post('sampling_trans_id')) !== '' ? trim($this->input->post('sampling_trans_id')) : NULL,
+
+             'certificate'       => trim($this->input->post('certificateremove')) !== '' ? trim($this->input->post('certificateremove')) : NULL,
+             'status'            => trim($this->input->post('statuscertificateremove')) !== '' ? trim($this->input->post('statuscertificateremove')) : NULL,
+
+             'type'              => trim($this->input->post('type')) !== '' ? trim($this->input->post('type')) : NULL,
+             'grade'             => trim($this->input->post('grade')) !== '' ? trim($this->input->post('grade')) : NULL,
+             'unit'              => trim($this->input->post('unit')) !== '' ? trim($this->input->post('unit')) : NULL,
+             'class'             => trim($this->input->post('class_1')) !== '' ? trim($this->input->post('class_1')) : NULL,
+             'part_number'       => trim($this->input->post('part_number')) !== '' ? trim($this->input->post('part_number')) : NULL
+
         ]);
       
         $ok = $this->admin_model->savequantityassignstoreform(null, $data);
@@ -29454,6 +29478,7 @@ public function fetchviewremovedinstqtytforticket(){
         $instrument_name = $this->input->post('instrument_name');
         $measuring_size  = $this->input->post('measuring_size');
         $part_id  = $this->input->post('part_id');
+        
         $params = $_REQUEST;
         $queryRecords = $this->admin_model->getRemovedQtyListData($params,$ticket_no, $instrument_name, $measuring_size,$part_id);
         
@@ -31258,7 +31283,7 @@ public function addnewbalancestock(){
     if($instrument_id) {
         $getVendoritemsonly = $this->admin_model->getinstrumentcertificates($instrument_id);
         if(count($getVendoritemsonly) >= 1) {
-            $content = $content.'<option value="">Select Part Number</option>';
+            $content = $content.'<option value="">Select Instrument ID</option>';
             foreach($getVendoritemsonly as $value) {
 
                     if($this->input->post('instrument_id')==$value["fin_id"]){
