@@ -23948,8 +23948,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
             '.TBL_SAMPLING_MASTER_TRANS.'.instrument_name,
             '.TBL_SAMPLING_MASTER_TRANS.'.measuring_size,
 
-            '.TBL_INSTRUMENT_MASTER.'.grade,
-            '.TBL_INSTRUMENT_MASTER.'.unit,
+            '.TBL_INSTRUMENT_MASTER.'.grade as instru_grade,
+            '.TBL_INSTRUMENT_MASTER.'.unit as instru_unit,
             '.TBL_SAMPLING_MASTER_TRANS.'.class,
             '.TBL_SAMPLING_MASTER_TRANS.'.type as instrument_type,
             '.TBL_SAMPLING_MASTER_TRANS.'.id as sampling_trans_id ,
@@ -24039,8 +24039,8 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
           
           
             $data[$count]['instrument_name']  = $row['instrument_name'];
-            $data[$count]['grade']            = $row['grade'];
-            $data[$count]['unit']             = $row['unit'];
+            $data[$count]['grade']            = $row['instru_grade'];
+            $data[$count]['unit']             = $row['instru_unit'];
             $data[$count]['class']            = $row['class'];
             $data[$count]['measuring_size']   = $row['measuring_size'];
             $data[$count]['type']             = $row['instrument_type'];
