@@ -23806,24 +23806,33 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     $this->db->where('instrument_name', $instrument_name);
     $this->db->where('measuring_size', $measuring_size);
 
-    if(!empty($instrument_type)){
+    if ($instrument_type === NULL) {
+        $this->db->where('type IS NULL', NULL, FALSE);
+    } else {
         $this->db->where('type', $instrument_type);
     }
 
-    if(!empty($grade)){
+    if ($grade === NULL) {
+        $this->db->where('grade IS NULL', NULL, FALSE);
+    } else {
         $this->db->where('grade', $grade);
     }
 
-    if(!empty($unit)){
+    if ($unit === NULL) {
+        $this->db->where('unit IS NULL', NULL, FALSE);
+    } else {
         $this->db->where('unit', $unit);
     }
 
-    if(!empty($class)){
+    if ($class === NULL) {
+        $this->db->where('class IS NULL', NULL, FALSE);
+    } else {
         $this->db->where('class', $class);
     }
 
     $query = $this->db->get()->row_array();
     $quantity_available = (float)$query['qty'];
+
 
 
     /* TOTAL ASSIGNED */
@@ -23834,24 +23843,33 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     $this->db->where('instrument_name', $instrument_name);
     $this->db->where('measuring_size', $measuring_size);
 
-    if(!empty($instrument_type)){
+    if ($instrument_type === NULL) {
+        $this->db->where('type IS NULL', NULL, FALSE);
+    } else {
         $this->db->where('type', $instrument_type);
     }
 
-    if(!empty($grade)){
+    if ($grade === NULL) {
+        $this->db->where('grade IS NULL', NULL, FALSE);
+    } else {
         $this->db->where('grade', $grade);
     }
 
-    if(!empty($unit)){
+    if ($unit === NULL) {
+        $this->db->where('unit IS NULL', NULL, FALSE);
+    } else {
         $this->db->where('unit', $unit);
     }
 
-    if(!empty($class)){
+    if ($class === NULL) {
+        $this->db->where('class IS NULL', NULL, FALSE);
+    } else {
         $this->db->where('class', $class);
     }
 
     $assignedRow = $this->db->get()->row_array();
     $total_assign = (float)$assignedRow['total_assign'];
+
 
 
     /* TOTAL REMOVED */
@@ -23862,19 +23880,27 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     $this->db->where('instrument_name', $instrument_name);
     $this->db->where('measuring_size', $measuring_size);
 
-    if(!empty($instrument_type)){
+    if ($instrument_type === NULL) {
+        $this->db->where('type IS NULL', NULL, FALSE);
+    } else {
         $this->db->where('type', $instrument_type);
     }
 
-    if(!empty($grade)){
+    if ($grade === NULL) {
+        $this->db->where('grade IS NULL', NULL, FALSE);
+    } else {
         $this->db->where('grade', $grade);
     }
 
-    if(!empty($unit)){
+    if ($unit === NULL) {
+        $this->db->where('unit IS NULL', NULL, FALSE);
+    } else {
         $this->db->where('unit', $unit);
     }
 
-    if(!empty($class)){
+    if ($class === NULL) {
+        $this->db->where('class IS NULL', NULL, FALSE);
+    } else {
         $this->db->where('class', $class);
     }
 
@@ -23882,12 +23908,9 @@ public function checklotnumberisexitsornotadd($usp_incoming_item_id,$lot_no,$pre
     $total_removed = (float)$removedRow['total_removed'];
 
 
-    /* LIVE QTY CALCULATION */
-
     $live_qty = $quantity_available - $total_assign + $total_removed;
 
     return ($live_qty > 0) ? $live_qty : 0;
-
 }
     
 
